@@ -1,0 +1,62 @@
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
+if (name.endsWith(".tests")) {
+	sourceSets {
+		main {
+			java.srcDirs = []
+			resources.srcDirs = []
+		}
+		test {
+			java.srcDirs = ['src', 'src-gen']
+			resources.srcDirs = ['src', 'src-gen']
+			xtendOutputDir = 'xtend-gen'
+		}
+	}
+} else {
+	sourceSets {
+		main {
+			java.srcDirs = ['src', 'src-gen']
+			resources.srcDirs = ['src', 'src-gen']
+			xtendOutputDir = 'xtend-gen'
+		}
+		test {
+			java.srcDirs = []
+			resources.srcDirs = []
+		}
+	}
+}
+
+sourceSets.all {
+	resources.exclude '**/*.g', '**/*.mwe2', '**/*.xtend', '**/*._trace'
+}
+
+jar {
+	from(sourceSets.main.allSource) {
+		include '**/*.xtext'
+	}
+	manifest {
+		attributes 'Bundle-SymbolicName': project.name
+	}
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives sourcesJar
+}
+
+javadoc.failOnError = false
+javadoc.options.tags = [ "generated", "ordered", "model" ]
+javadoc.options.addStringOption('Xdoclint:none', '-quiet')
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives javadocJar
+}

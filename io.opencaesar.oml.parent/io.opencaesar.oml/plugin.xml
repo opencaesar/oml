@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated oml -->
+      <package
+            uri="http://opencaesar.io/oml"
+            class="io.opencaesar.oml.OmlPackage"
+            genModel="src/io/opencaesar/oml/oml.xcore"/>
+   </extension>
+
+	<extension point="org.eclipse.emf.ecore.extension_parser">
+		<parser
+			type="omlxmi"
+			class="io.opencaesar.oml.util.OmlXMIResourceFactory"/>
+	</extension>
+
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<file-association
+			content-type="org.eclipse.emf.ecore.xmi"
+			file-extensions="omlxmi"
+			file-names="*"/>
+	</extension>
+
+</plugin>

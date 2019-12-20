@@ -1,0 +1,102 @@
+<pre class='metadata'>
+Title: Ontological Modeling Language 0.5.0
+Shortname: oml
+Level: 1
+Status: ld
+URL: https://github.com/opencaesar/oml-spec
+Editor: Maged Elaasar (JPL)
+Editor: Nicolas Rouquette (JPL)
+Markup Shorthands: markdown yes
+Abstract: This document specifies the Ontological Modeling Language (OML).
+</pre>
+
+<style>
+body {
+  padding: 0;
+  margin: 0;
+  max-width: unset;
+}
+
+table {
+  border-collapse: collapse;
+  border: 3px solid black;
+}
+
+th, td {
+  border: 3px solid black;
+  padding: 20px;
+}
+
+thead th:nth-child(1) {
+  text-align: center;
+}
+
+thead th:nth-child(2) {
+  text-align: center;
+}
+
+thead th:nth-child(3) {
+  text-align: center;
+}
+
+thead th:nth-child(4) {
+  text-align: center;
+}
+
+thead th:nth-child(5) {
+  text-align: center;
+}
+
+tbody td:nth-child(1) {
+  text-align: center;
+}
+
+tbody td:nth-child(2) {
+  text-align: center;
+}
+
+tbody td:nth-child(3) {
+  text-align: center;
+}
+
+tbody td:nth-child(4) {
+  text-align: center;
+}
+
+tbody td:nth-child(5) {
+  text-align: left;
+}
+</style>
+
+<!-- Instruct bikeshed to export all 'dfn', even if they are not referenced, without warnings. -->
+<div export=true>
+
+<pre class=include>
+path: src/getting-started.md
+</pre>
+
+<pre class=include>
+path: src/documentation.md
+</pre>
+
+<pre class=include>
+path: src/concrete-syntax.md
+</pre>
+		
+<pre class=include>
+path: src-gen/oml.md
+</pre>
+
+<pre class=include>
+path: src/public-api.md
+</pre>
+
+<pre class=include>
+path: src/mapping-to-owl.md
+</pre>
+
+<pre class=include>
+path: src/mapping-to-legacy-oml.md
+</pre>
+
+</div>

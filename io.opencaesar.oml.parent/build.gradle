@@ -1,0 +1,56 @@
+buildscript {
+	repositories {
+		mavenLocal()
+		maven { url 'https://dl.bintray.com/opencaesar/ecore-bikeshed' }
+  		mavenCentral()
+		jcenter()
+	}
+	dependencies {
+		classpath 'org.xtext:xtext-gradle-plugin:2.0.8'
+		classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.+'
+		classpath 'io.opencaesar.bikeshed:ecore2bikeshed:+'
+	}
+}
+
+subprojects {
+	group = 'io.opencaesar.oml'
+	version = rootProject.file('version.txt').text.trim()
+
+	ext.versions = [
+	    xtext: '2.19.0',
+	    xcore: '1.12.0',
+	    xcoreLib: '1.4.0',
+	    ecoreXtext: '1.4.0',
+	    codegen: '2.19.0',
+	    codegenEcore: '2.20.0',
+	    emfEcore: '2.20.0',
+	    mwe2: '2.11.0',
+	    lsp4j: '0.7.0',
+	    elk: '0.5.0',
+	    sprotty: '0.6.0',
+	    junitJupiter: '5.1.0',
+	    gson: '2.8.2',
+	    guava: '21.0',
+	    antlr: '2.1.1'
+	]
+
+	repositories {
+		mavenLocal()
+  		mavenCentral()
+		jcenter()
+	}
+	
+	apply plugin: 'org.xtext.xtend'
+	apply plugin: 'eclipse'
+	apply plugin: 'idea'
+
+	dependencies {
+		compile platform("org.eclipse.xtext:xtext-dev-bom:${versions.xtext}")
+	}
+
+	apply from: "${rootDir}/gradle/source-layout.gradle"
+
+	configurations.all {
+		exclude group: 'asm'
+	}
+}

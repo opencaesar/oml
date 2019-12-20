@@ -1,0 +1,44 @@
+ext.title = 'Oml Language'
+description = 'Language infrastructure for Oml based on Xtext'
+
+apply from: "${rootDir}/gradle/maven-deployment.gradle"
+
+configurations {
+	mwe2 {
+		extendsFrom compile
+	}
+}
+
+dependencies {
+	compile project(':io.opencaesar.oml')
+	compile "org.eclipse.xtext:org.eclipse.xtext:${versions.xtext}"
+	compile "org.eclipse.xtext:org.eclipse.xtext.xbase:${versions.xtext}"
+	compile "com.google.code.gson:gson:${versions.gson}"
+
+	mwe2 "org.eclipse.emf:org.eclipse.emf.mwe2.launch:${versions.mwe2}"
+	mwe2 "org.eclipse.xtext:org.eclipse.xtext.common.types:${versions.xtext}"
+	mwe2 "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:${versions.xtext}"
+	mwe2 "org.eclipse.xtext:xtext-antlr-generator:${versions.antlr}"
+	// added for Xcore support
+    mwe2 ("org.eclipse.emf:org.eclipse.emf.ecore.xcore:${versions.xcore}"){
+		exclude group: 'org.antlr', module: 'antlr-runtime'
+	}
+}
+
+task generateXtextLanguage(type: JavaExec) {
+	main = 'org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher'
+	classpath = configurations.mwe2
+	inputs.file "src/io/opencaesar/oml/dsl/GenerateOml.mwe2"
+	inputs.file "src/io/opencaesar/oml/dsl/Oml.xtext"
+	outputs.dir "src-gen"
+	args += "src/io/opencaesar/oml/dsl/GenerateOml.mwe2"
+	args += "-p"
+	args += "rootPath=/${projectDir}/.."
+}
+
+generateXtext.dependsOn(generateXtextLanguage)
+clean.dependsOn(cleanGenerateXtextLanguage)
+eclipse.classpath.plusConfigurations += [configurations.mwe2]
+//this is an eclipse plugin project
+eclipseClasspath.enabled=false
+cleanEclipseClasspath.enabled=false

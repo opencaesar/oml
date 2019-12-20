@@ -1,0 +1,590 @@
+/**
+ * 
+ * Copyright 2019 California Institute of Technology ("Caltech").
+ * U.S. Government sponsorship acknowledged.
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * 
+ */
+grammar io.opencaesar.oml.dsl.Oml hidden(WS, ML_COMMENT, SL_COMMENT)
+
+import "http://opencaesar.io/oml" 
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+
+Ontology:
+	Terminology |
+	Description;
+
+Element:
+	Annotation |
+	AnnotatedElement |
+	Reference |
+	Statement |
+	Literal;
+
+Annotation:
+	'@' property=[AnnotationProperty|Ref] (value=Literal)?;
+	
+AnnotatedElement:
+	->IdentifiedElement |
+	->Instance |
+	->Import |
+	->Axiom |
+	->Assertion |
+	->Predicate;
+
+IdentifiedElement:
+	Ontology |
+	Member;
+
+Terminology:
+	Vocabulary |
+	Bundle;
+
+Vocabulary:
+	ownedAnnotations+=Annotation*
+	'vocabulary' iri=IRI ('with' separator=SEPARATOR)? 'as' prefix=ID  '{'
+		ownedImports+=VocabularyImport*
+		ownedStatements+=VocabularyStatement*
+	'}';
+
+Bundle:
+	ownedAnnotations+=Annotation*
+	'bundle' iri=IRI ('with' separator=SEPARATOR)? 'as' prefix=ID '{'
+		ownedImports+=BundleImport*
+	'}';
+	
+Description:
+	ownedAnnotations+=Annotation*
+	'description' iri=IRI ('with' separator=SEPARATOR)? 'as' prefix=ID '{'
+		ownedImports+=DescriptionImport*
+		ownedStatements+=DescriptionStatement*
+	'}';
+
+Member:
+	Term |
+	Rule |
+	NamedInstance;
+
+Term:
+	SpecializableTerm |
+	Relation;
+
+SpecializableTerm:
+	Type |
+	Property;
+	
+Type:
+	Classifier |
+	Scalar;	
+
+Classifier:
+	Entity |
+	Structure;
+	
+Entity:
+	Aspect |
+	Concept |
+	RelationEntity;
+
+Aspect:
+	ownedAnnotations+=Annotation*
+	'aspect' name=ID (':>' ownedSpecializations+=SpecializationAxiom (',' ownedSpecializations+=SpecializationAxiom)*)? ('['
+		(ownedKey=KeyAxiom)? 
+		ownedPropertyRestrictions+=PropertyRestrictionAxiom*
+		ownedRelationRestrictions+=RelationRestrictionAxiom*
+	']')?;
+
+Concept:
+	ownedAnnotations+=Annotation*
+	'concept' name=ID (':>' ownedSpecializations+=SpecializationAxiom (',' ownedSpecializations+=SpecializationAxiom)*)? ('['
+		(ownedKey=KeyAxiom)? 
+		ownedPropertyRestrictions+=PropertyRestrictionAxiom*
+		ownedRelationRestrictions+=RelationRestrictionAxiom*
+	']')?;
+	
+RelationEntity:
+	ownedAnnotations+=Annotation*
+	'relation' 'entity' name=ID (':>' ownedSpecializations+=SpecializationAxiom (',' ownedSpecializations+=SpecializationAxiom)*)? ('['
+		'from' source=[Entity|Ref]
+		'to' target=[Entity|Ref]
+		forward=ForwardRelation
+		(inverse=InverseRelation)?
+		((functional?='functional')? &
+		 (inverseFunctional?='inverse' 'functional')? &
+		 (symmetric?='symmetric')? &
+		 (asymmetric?='asymmetric')? &
+		 (reflexive?='reflexive')? &
+		 (irreflexive?='irreflexive')? &
+		 (transitive?='transitive')?)
+		(ownedKey=KeyAxiom)? 
+		ownedPropertyRestrictions+=PropertyRestrictionAxiom*
+		ownedRelationRestrictions+=RelationRestrictionAxiom*
+	']')?;
+	
+Structure:
+	ownedAnnotations+=Annotation*
+	'structure' name=ID (':>' ownedSpecializations+=SpecializationAxiom (',' ownedSpecializations+=SpecializationAxiom)*)? ('['
+		ownedPropertyRestrictions+=PropertyRestrictionAxiom*
+	']')?;
+
+Property:
+	AnnotationProperty |
+	FeatureProperty;
+
+AnnotationProperty:
+	ownedAnnotations+=Annotation*
+	'annotation' 'property' name=ID (':>' ownedSpecializations+=SpecializationAxiom (',' ownedSpecializations+=SpecializationAxiom)*)?;
+
+FeatureProperty:
+	ScalarProperty |
+	StructuredProperty;
+
+ScalarProperty:
+	ownedAnnotations+=Annotation*
+	'scalar' 'property' name=ID (':>' ownedSpecializations+=SpecializationAxiom (',' ownedSpecializations+=SpecializationAxiom)*)? ('['
+		'domain' domain=[Classifier|Ref]
+		'range' range=[Scalar|Ref]
+		(functional?='functional')?
+	']')?;
+
+StructuredProperty:
+	ownedAnnotations+=Annotation*
+	'structured' 'property' name=ID (':>' ownedSpecializations+=SpecializationAxiom (',' ownedSpecializations+=SpecializationAxiom)*)? ('['
+		'domain' domain=[Classifier|Ref]
+		'range' range=[Structure|Ref]
+		(functional?='functional')?
+	']')?;
+
+Scalar:
+	FacetedScalar |
+	EnumeratedScalar;
+
+FacetedScalar:
+	ownedAnnotations+=Annotation*
+	'scalar' name=ID (':>' ownedSpecializations+=SpecializationAxiom (',' ownedSpecializations+=SpecializationAxiom)*)? ('['
+		 (('length' length=UnsignedInteger)? &
+		 ('minLength' minLength=UnsignedInteger)? &
+		 ('maxLength' maxLength=UnsignedInteger)? &
+		 ('pattern' pattern=STRING)? &
+		 ('language' language=ID)? &
+		 ('minInclusive' minInclusive=Literal)? &
+		 ('minExclusive' minExclusive=Literal)? &
+		 ('maxInclusive' maxInclusive=Literal)? &
+		 ('maxExclusive' maxExclusive=Literal)?)
+	']')?;
+
+EnumeratedScalar:
+	ownedAnnotations+=Annotation*
+	'enumerated' 'scalar' name=ID (':>' ownedSpecializations+=SpecializationAxiom (',' ownedSpecializations+=SpecializationAxiom)*)? ('['
+		literals+=Literal (',' literals+=Literal)*
+	']')?;
+
+Relation:
+	ForwardRelation |
+	InverseRelation;
+
+ForwardRelation:
+	ownedAnnotations+=Annotation*
+	'forward' name=ID;
+
+InverseRelation:
+	ownedAnnotations+=Annotation*
+	'inverse' name=ID;
+
+Rule:
+	ownedAnnotations+=Annotation*
+	'rule' name=ID '['
+		antecedent+=Predicate ('&' antecedent+=Predicate)* '=>' consequent=RelationPredicate
+	']';
+
+Instance:
+	NamedInstance |
+	StructureInstance;
+	
+StructureInstance:
+	ownedAnnotations+=Annotation*
+	type=[Structure|Ref] '['
+		ownedPropertyValues+=PropertyValueAssertion*
+	']';
+	
+NamedInstance:
+	ConceptInstance |
+	RelationInstance;
+
+ConceptInstance:
+	ownedAnnotations+=Annotation*
+	'ci' name=ID (':' ownedTypes+=ConceptTypeAssertion (',' ownedTypes+=ConceptTypeAssertion)*)? ('['
+		ownedPropertyValues+=PropertyValueAssertion*
+		ownedLinks+=LinkAssertion*
+	']')?;
+	
+RelationInstance:
+	ownedAnnotations+=Annotation*
+	'ri' name=ID (':' ownedTypes+=RelationTypeAssertion (',' ownedTypes+=RelationTypeAssertion)*)?  ('['
+		'from' source=[NamedInstance|Ref] 
+		'to' target=[NamedInstance|Ref]
+		ownedPropertyValues+=PropertyValueAssertion*
+		ownedLinks+=LinkAssertion*
+	']')?;
+	
+Reference:
+	VocabularyMemberReference |
+	DescriptionMemberReference;
+
+VocabularyMemberReference:
+	SpecializableTermReference |
+	RelationReference |
+	RuleReference;
+
+SpecializableTermReference:
+	EntityReference |
+	StructureReference |
+	AnnotationPropertyReference |
+	ScalarPropertyReference |
+	StructuredPropertyReference |
+	FacetedScalarReference |
+	EnumeratedScalarReference;
+
+EntityReference:
+	AspectReference |
+	ConceptReference |
+	RelationEntityReference;
+	
+AspectReference:
+	ownedAnnotations+=Annotation*
+	'ref' 'aspect' aspect=[Aspect|Ref] (':>' ownedSpecializations+=SpecializationAxiom (',' ownedSpecializations+=SpecializationAxiom)*)? ('['
+		(ownedKey=KeyAxiom)? 
+		ownedPropertyRestrictions+=PropertyRestrictionAxiom*
+		ownedRelationRestrictions+=RelationRestrictionAxiom*
+	']')?;
+
+ConceptReference:
+	ownedAnnotations+=Annotation*
+	'ref' 'concept' concept=[Concept|Ref] (':>' ownedSpecializations+=SpecializationAxiom (',' ownedSpecializations+=SpecializationAxiom)*)? ('['
+		(ownedKey=KeyAxiom)? 
+		ownedPropertyRestrictions+=PropertyRestrictionAxiom*
+		ownedRelationRestrictions+=RelationRestrictionAxiom*
+	']')?;
+
+RelationEntityReference:
+	ownedAnnotations+=Annotation*
+	'ref' 'relation' 'entity' entity=[RelationEntity|Ref] (':>' ownedSpecializations+=SpecializationAxiom (',' ownedSpecializations+=SpecializationAxiom)*)? ('['
+		(ownedKey=KeyAxiom)? 
+		ownedPropertyRestrictions+=PropertyRestrictionAxiom*
+		ownedRelationRestrictions+=RelationRestrictionAxiom*
+	']')?;
+
+StructureReference:
+	ownedAnnotations+=Annotation*
+	'ref' 'structure' structure=[Structure|Ref] (':>' ownedSpecializations+=SpecializationAxiom (',' ownedSpecializations+=SpecializationAxiom)*)? ('['
+		ownedPropertyRestrictions+=PropertyRestrictionAxiom*
+	']')?;
+
+AnnotationPropertyReference:
+	ownedAnnotations+=Annotation*
+	'ref' 'annotation' 'property' property=[AnnotationProperty|Ref] (':>' ownedSpecializations+=SpecializationAxiom (',' ownedSpecializations+=SpecializationAxiom)*)?;
+
+ScalarPropertyReference:
+	ownedAnnotations+=Annotation*
+	'ref' 'scalar' 'property' property=[ScalarProperty|Ref] (':>' ownedSpecializations+=SpecializationAxiom (',' ownedSpecializations+=SpecializationAxiom)*)?;
+
+StructuredPropertyReference:
+	ownedAnnotations+=Annotation*
+	'ref' 'structured' 'property' property=[StructuredProperty|Ref] (':>' ownedSpecializations+=SpecializationAxiom (',' ownedSpecializations+=SpecializationAxiom)*)?;
+
+FacetedScalarReference:
+	ownedAnnotations+=Annotation*
+	'ref' 'scalar' scalar=[FacetedScalar|Ref] (':>' ownedSpecializations+=SpecializationAxiom (',' ownedSpecializations+=SpecializationAxiom)*)?;
+
+EnumeratedScalarReference:
+	ownedAnnotations+=Annotation*
+	'ref' 'enumerated' 'scalar' scalar=[EnumeratedScalar|Ref] (':>' ownedSpecializations+=SpecializationAxiom (',' ownedSpecializations+=SpecializationAxiom)*)?;
+
+RelationReference:
+	ownedAnnotations+=Annotation*
+	'ref' 'relation' relation=[Relation|Ref];
+	
+RuleReference:
+	ownedAnnotations+=Annotation*
+	'ref' 'rule' rule=[Rule|Ref];
+
+DescriptionMemberReference:
+	NamedInstanceReference;
+
+NamedInstanceReference:
+	ConceptInstanceReference |
+	RelationInstanceReference;
+
+ConceptInstanceReference:
+	ownedAnnotations+=Annotation*
+	'ref' 'ci' instance=[ConceptInstance|Ref] (':' ownedTypes+=ConceptTypeAssertion (',' ownedTypes+=ConceptTypeAssertion)*)? ('['
+		ownedPropertyValues+=PropertyValueAssertion*
+		ownedLinks+=LinkAssertion*
+	']')?;
+
+RelationInstanceReference:
+	ownedAnnotations+=Annotation*
+	'ref' 'ri' instance=[RelationInstance|Ref] (':' ownedTypes+=RelationTypeAssertion (',' ownedTypes+=RelationTypeAssertion)*)? ('['
+		ownedPropertyValues+=PropertyValueAssertion*
+		ownedLinks+=LinkAssertion*
+	']')?;
+
+Statement:
+	VocabularyStatement |
+	DescriptionStatement;
+	
+VocabularyStatement:
+	SpecializableTerm |
+	Rule |
+	SpecializableTermReference |
+	RuleReference |
+	RelationReference;
+
+DescriptionStatement:
+	NamedInstance |
+	NamedInstanceReference;
+	
+Import:
+	->VocabularyImport |
+	->BundleImport |
+	->DescriptionImport;
+
+VocabularyImport:
+	VocabularyExtension;
+
+VocabularyExtension:
+	ownedAnnotations+=Annotation*
+	'extends' uri=IRI ('as' prefix=ID)?;
+    	
+BundleImport:
+	BundleInclusion |
+	BundleExtension;
+
+BundleInclusion:
+	ownedAnnotations+=Annotation*
+	'includes' uri=IRI ('as' prefix=ID)?;
+
+BundleExtension:
+	ownedAnnotations+=Annotation*
+	'extends' uri=IRI ('as' prefix=ID)?;
+
+DescriptionImport:
+	DescriptionUsage |
+	DescriptionExtension;
+
+DescriptionUsage:
+	ownedAnnotations+=Annotation*
+	'uses' uri=IRI ('as' prefix=ID)?;
+
+DescriptionExtension:
+	ownedAnnotations+=Annotation*
+	'extends' uri=IRI ('as' prefix=ID)?;
+
+Axiom:
+	SpecializationAxiom |
+	RestrictionAxiom |
+	KeyAxiom;
+
+SpecializationAxiom:
+	ownedAnnotations+=Annotation*
+	specializedTerm=[SpecializableTerm|Ref];
+	
+RestrictionAxiom:
+	PropertyRestrictionAxiom |
+	RelationRestrictionAxiom;
+
+PropertyRestrictionAxiom:
+	ScalarPropertyRestrictionAxiom |
+	StructuredPropertyRestrictionAxiom;
+
+ScalarPropertyRestrictionAxiom:
+	ScalarPropertyRangeRestrictionAxiom |
+	ScalarPropertyValueRestrictionAxiom;
+
+ScalarPropertyRangeRestrictionAxiom:
+	ownedAnnotations+=Annotation*
+	'restricts' kind=RangeRestrictionKind 'scalar' 'property' property=[ScalarProperty|Ref] 'to' range=[Scalar|Ref];
+
+ScalarPropertyValueRestrictionAxiom:
+	ownedAnnotations+=Annotation*
+	'restricts' 'scalar' 'property' property=[ScalarProperty|Ref] 'to' value=Literal;
+
+StructuredPropertyRestrictionAxiom:
+	StructuredPropertyRangeRestrictionAxiom |
+	StructuredPropertyValueRestrictionAxiom;
+
+StructuredPropertyRangeRestrictionAxiom:
+	ownedAnnotations+=Annotation*
+	'restricts' kind=RangeRestrictionKind 'structured' 'property' property=[StructuredProperty|Ref] 'to' range=[Structure|Ref];
+
+StructuredPropertyValueRestrictionAxiom:
+	ownedAnnotations+=Annotation*
+	'restricts' 'structured' 'property' property=[StructuredProperty|Ref] 'to' value=StructureInstance;
+
+RelationRestrictionAxiom:
+	RelationRangeRestrictionAxiom |
+	RelationCardinalityRestrictionAxiom;
+	
+RelationRangeRestrictionAxiom:
+	ownedAnnotations+=Annotation*
+	'restricts' kind=RangeRestrictionKind 'relation' relation=[Relation|Ref] 'to' range=[Entity|Ref];
+
+RelationCardinalityRestrictionAxiom:
+	ownedAnnotations+=Annotation*
+	'restricts' 'relation' relation=[Relation|Ref] 'to' kind=CardinalityRestrictionKind cardinality=UnsignedInteger;
+
+KeyAxiom:
+	'key' properties+=[ScalarProperty|Ref] (',' properties+=[ScalarProperty|Ref])*;
+
+Assertion:
+	TypeAssertion |
+	PropertyValueAssertion |
+	LinkAssertion;
+	
+TypeAssertion:
+	->ConceptTypeAssertion |
+	->RelationTypeAssertion;
+
+ConceptTypeAssertion:
+	ownedAnnotations+=Annotation*
+	type=[Concept|Ref];
+
+RelationTypeAssertion:
+	ownedAnnotations+=Annotation*
+	type=[RelationEntity|Ref];
+
+PropertyValueAssertion:
+	ScalarPropertyValueAssertion |
+	StructuredPropertyValueAssertion;
+
+ScalarPropertyValueAssertion:
+	ownedAnnotations+=Annotation*
+	property=[ScalarProperty|Ref] value=Literal;
+
+StructuredPropertyValueAssertion:
+	ownedAnnotations+=Annotation*
+	property=[StructuredProperty|Ref] value=StructureInstance;
+
+LinkAssertion:
+	ownedAnnotations+=Annotation*
+	relation=[Relation|Ref] target=[NamedInstance|Ref];
+
+Predicate:
+	UnaryPredicate |
+	BinaryPredicate;
+
+UnaryPredicate:
+	EntityPredicate;
+	
+EntityPredicate:
+	ownedAnnotations+=Annotation*
+	entity=[Entity|Ref]'(' variable=ID ')';
+	
+BinaryPredicate:
+	RelationEntityPredicate |
+	RelationPredicate;
+
+RelationEntityPredicate:
+	ownedAnnotations+=Annotation*
+	entity=[RelationEntity|Ref] '(' variable1=ID kind=RelationEntityPredicateKind variable2=ID ')';
+
+RelationPredicate:
+	ownedAnnotations+=Annotation*
+	relation=[Relation|Ref] '(' variable1=ID (inverse?='<-'|'->') variable2=ID ')';
+
+Literal:
+	IntegerLiteral |
+	DecimalLiteral |
+	DoubleLiteral |
+	BooleanLiteral |
+	QuotedLiteral;
+
+
+IntegerLiteral:
+	value=Integer ('^^' type=[Scalar|Ref])?;
+
+DecimalLiteral:
+	value=Decimal ('^^' type=[Scalar|Ref])?;
+
+DoubleLiteral:
+	value=Double ('^^' type=[Scalar|Ref])?;
+
+BooleanLiteral:
+	value=Boolean ('^^' type=[Scalar|Ref])?;
+
+QuotedLiteral:
+	value=STRING (('^^' type=[Scalar|Ref]) | ('$' langTag=ID))?;
+
+enum RangeRestrictionKind:
+	all |
+	some;
+
+enum CardinalityRestrictionKind:
+	exactly |
+	min |
+	max;
+
+enum RelationEntityPredicateKind:
+	relationToSource = '<-:' |
+	sourceToRelation = '->:' |
+	relationToTarget = ':->' |
+	targetToRelation = ':<-' ;
+
+//--------------
+
+Ref: ID | ABBREV_IRI | IRI;
+
+Boolean returns ecore::EBoolean:						BOOLEAN_STR;
+
+UnsignedInteger returns UnsignedInt: 					UNSIGNED_INTEGER_STR;
+
+Integer returns ecore::EInt: 							UNSIGNED_INTEGER_STR | INTEGER_STR;
+
+Decimal returns Decimal:								DECIMAL_STR;
+
+Double returns ecore::EDouble:							DOUBLE_STR;
+
+//----------------------------
+
+terminal BOOLEAN_STR:									'false'|'true';
+
+terminal UNSIGNED_INTEGER_STR:							DIGIT+;
+
+terminal INTEGER_STR:									('+'|'-')? DIGIT+;
+
+terminal DECIMAL_STR:									('+'|'-')? (DIGIT+('.'DIGIT*)? | ('.'DIGIT+));
+
+terminal DOUBLE_STR:									('+'|'-')? (DIGIT+('.'DIGIT*)? | ('.'DIGIT+)) (('e'|'E') ('+'|'-')? DIGIT+)?;
+
+terminal SEPARATOR:										'#'|'/';
+
+terminal STRING:										('"' (!('"'|'\\') | '\\'.)* '"') | ("'" (!("'"|'\\') | '\\'.)* "'") | ("'''" -> "'''") | '"""' -> '"""';
+
+terminal IRI:											'<' (!('>'|' '))* '>';
+
+terminal ABBREV_IRI:									ID ':' ID;
+
+terminal ID:											'^'? (ALPHA|DIGIT|'_') (ALPHA|DIGIT|'_'|'-'|'.')*;
+	    
+terminal ML_COMMENT: 									'/*' -> '*/';
+ 
+terminal SL_COMMENT:									'//' !('\n'|'\r')* ('\r'? '\n')?;
+ 
+terminal WS: 											(' '|'\t'|'\r'|'\n')+;
+
+//----------------------------
+
+terminal fragment ALPHA:								'a'..'z'| 'A'..'Z';
+
+terminal fragment DIGIT: 								'0'..'9';

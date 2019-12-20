@@ -1,0 +1,53 @@
+ext.title = 'Oml API'
+description = 'Java API for Oml'
+
+apply from: "${rootDir}/gradle/maven-deployment.gradle"
+
+dependencies {
+	compile "org.eclipse.xtext:org.eclipse.xtext.xbase:${versions.xtext}"
+	compile "org.eclipse.emf:org.eclipse.emf.ecore.xcore.lib:${versions.xcoreLib}"
+
+	xtextLanguages "org.eclipse.xtext:org.eclipse.xtext.ecore:${versions.xtext}"
+	xtextLanguages "org.eclipse.emf:org.eclipse.emf.mwe2.runtime:${versions.mwe2}"
+	xtextLanguages ("org.eclipse.emf:org.eclipse.emf.ecore.xcore:${versions.xcore}"){
+		exclude group: 'org.antlr', module: 'antlr-runtime'
+	}
+	xtextLanguages "org.eclipse.emf:org.eclipse.emf.ecore.xcore.lib:${versions.xcoreLib}"
+	xtextLanguages "org.eclipse.emf:org.eclipse.emf.codegen:${versions.codegen}"
+	xtextLanguages "org.eclipse.emf:org.eclipse.emf.codegen.ecore:${versions.codegenEcore}"
+	xtextLanguages "org.eclipse.emf:org.eclipse.emf.codegen.ecore.xtext:${versions.ecoreXtext}"
+}
+
+configurations.all {
+     resolutionStrategy {
+         force "org.eclipse.emf:org.eclipse.emf.ecore:${versions.emfEcore}"
+     }
+ }
+
+xtext {
+	version = "${versions.xtext}"
+	languages {
+		ecore {
+			setup = 'org.eclipse.xtext.ecore.EcoreSupport'
+		}
+		codegen {
+			setup = 'org.eclipse.emf.codegen.ecore.xtext.GenModelSupport'
+		}
+		xcore {
+			setup = 'org.eclipse.emf.ecore.xcore.XcoreStandaloneSetup'
+			generator.outlet.producesJava = true
+		}
+	}
+}
+
+sourceSets {
+	main {
+		java.srcDirs = ['src', 'build/xcore/main']
+		resources.srcDirs = ['src', 'build/xcore/main']
+		xtendOutputDir = 'xtend-gen'
+	}
+}
+
+clean {
+	delete 'xtend-gen'
+}

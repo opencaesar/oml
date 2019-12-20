@@ -1,0 +1,86 @@
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'maven'
+apply plugin: 'maven-publish'
+
+ext.gh = [
+	dep: 'https://github.com',
+	org: 'opencaesar',
+	rep: 'oml'
+]
+
+uploadArchives {
+	repositories {
+		mavenDeployer {
+			repository(url: "file://${buildDir}/localRepo")
+			snapshotRepository(url: "file://${buildDir}/localRepo")
+		}
+	}
+}
+
+def pomConfig = {
+    licenses {
+        license {
+            name "The Apache Software License, Version 2.0"
+            url "http://www.apache.org/licenses/LICENSE-2.0.txt"
+            distribution "repo"
+        }
+    }
+    developers {
+        developer {
+            id "melaasar"
+            name "Maged Elaasar"
+            email "melaasar@gmail.com"
+        }
+    }
+
+    scm {
+        url gh.dep+'/'+gh.org+'/'+gh.rep
+    }
+}
+
+publishing {
+    publications {
+        mavenPublication(MavenPublication) {
+            from components.java
+            artifact sourcesJar {
+                classifier "sources"
+            }
+            artifact javadocJar {
+                classifier "javadoc"
+            }
+            groupId project.group
+            artifactId project.name
+            version project.version
+            pom.withXml {
+                def root = asNode()
+                root.appendNode('description', project.description)
+                root.appendNode('name', project.ext.title)
+                root.appendNode('url', gh.dep+'/'+gh.org+'/'+gh.rep)
+                root.children().last() + pomConfig
+            }
+        }
+    }
+}
+
+bintray {
+	user = System.getenv('BINTRAY_USER')
+	key = System.getenv('BINTRAY_API_KEY')
+	publications = ['mavenPublication']
+
+	pkg {
+		name = project.name
+		repo = gh.rep
+		userOrg = gh.org
+		desc = project.description
+		licenses = ['Apache-2.0']
+		websiteUrl = gh.dep+'/'+gh.org+'/'+gh.rep
+        issueTrackerUrl = gh.dep+'/'+gh.org+'/'+gh.rep+'/issues'
+		vcsUrl = gh.dep+'/'+gh.org+'/'+gh.rep+'.git'
+		version {
+			name = project.version
+			desc = project.version
+			released  = new Date()
+		}
+	}
+
+}

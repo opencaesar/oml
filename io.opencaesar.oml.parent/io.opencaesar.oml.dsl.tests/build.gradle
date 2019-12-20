@@ -1,0 +1,13 @@
+dependencies {
+	compile project(':io.opencaesar.oml.dsl')
+	testCompile "org.junit.jupiter:junit-jupiter-api:${versions.junitJupiter}"
+	testRuntime "org.junit.jupiter:junit-jupiter-engine:${versions.junitJupiter}"
+	testCompile "org.eclipse.xtext:org.eclipse.xtext.testing:${versions.xtext}"
+	testCompile "org.eclipse.xtext:org.eclipse.xtext.xbase.testing:${versions.xtext}"
+}
+test {
+	useJUnitPlatform()
+}
+//this is an eclipse plugin project
+eclipseClasspath.enabled=false
+cleanEclipseClasspath.enabled=false
