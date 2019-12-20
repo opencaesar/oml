@@ -1,0 +1,15 @@
+src-gen
+!*/io.opencaesar.oml.dsl.ide.server/src-gen
+!*/io.opencaesar.oml.edit/src-gen
+xtend-gen
+image-gen
+bin
+target
+build
+.html
+.DS_Store
+.idea
+.gradle
+.launch
+.antlr-generator-*.jar
+index.html
