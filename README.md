@@ -2,10 +2,10 @@
 
 # Ontological Modeling Language
 
-[![Gitpod - Code Now](https://img.shields.io/badge/Gitpod-code%20now-black.svg?longCache=true)](https://gitpod.io#https://github.com/opencaesar/oml)
 [![Build Status](https://travis-ci.org/opencaesar/oml.svg?branch=master)](https://travis-ci.org/opencaesar/oml)
-[ ![Download](https://api.bintray.com/packages/opencaesar/oml/io.opencaesar.oml/images/download.svg) ](https://bintray.com/opencaesar/oml/io.opencaesar.oml/_latestVersion)
-[![OML Specification](https://img.shields.io/badge/OML-specification-purple.svg?longCache=true)](https://opencaesar.github.io/oml-spec/)
+[![Maven](https://api.bintray.com/packages/opencaesar/oml/io.opencaesar.oml/images/download.svg) ](https://bintray.com/opencaesar/oml/io.opencaesar.oml/_latestVersion)
+[![Updatesite](https://img.shields.io/badge/p2-updatesite-yellow.svg?longCache=true)](https://bintray.com/opencaesar/p2/oml/_latestVersion)
+[![OML Specification](https://img.shields.io/badge/OML-specification-purple.svg?longCache=true)](https://opencaesar.github.io/oml/)
 
 
 This repository defines the OML abstract syntax, textual syntax, graphical syntax, and API. It is released as a Maven library, an Eclipse p2 updatesite, and an LSP server. It also contains the OML specification.
