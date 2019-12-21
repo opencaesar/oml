@@ -8,7 +8,14 @@
 [![OML Specification](https://img.shields.io/badge/OML-specification-purple.svg?longCache=true)](https://opencaesar.github.io/oml/)
 
 
-This repository defines the OML abstract syntax, textual syntax, graphical syntax, and API. It is released as a Maven library, an Eclipse p2 updatesite, and an LSP server. It also contains the OML specification.
+This repository defines the OML abstract syntax, textual syntax, graphical syntax, API and specification.
+
+It also publishes the following artifacts (see the OML specification for using instructions):
+
+  - Maven [libraries](https://bintray.com/opencaesar/oml) that give access to OML APIs from JVM languages.
+  - A p2 [updatesite](https://bintray.com/opencaesar/p2/oml) that gives native OML support in the Eclipse IDE.
+  - An LSP [server](https://github.com/opencaesar/oml/releases) that gives support for OML in editors that support LSP.
+  - The OML [specification](https://opencaesar.github.io/oml/) that documents how OML can be used.
 
 ## Clone
 ```
@@ -24,6 +31,17 @@ Dependencies: Gradle 4.9, Java 8
   ./gradlew build
   mvn verify
 ```
+Note: the gradle build updates the OML specification's generated Bikeshed source files
+
+
+## Render Specification
+
+If you have updated the OML specification's Bikeshed source files, you can render them to HTML using:
+```
+  cd io.opencaesar.oml.specification
+  bikeshed spec
+```
+Note: to install the Bikeshed tool, follow these [instructions](https://tabatkins.github.io/bikeshed/#installing).
 
 ## Release
 
