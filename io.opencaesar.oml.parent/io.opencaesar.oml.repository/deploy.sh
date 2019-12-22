@@ -1,12 +1,12 @@
 #!/bin/bash
 #Sample Usage: pushUpdateSiteToBintray.sh version
 API=https://api.bintray.com
+CURRENT_PATH=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
 BINTRAY_OWNER=opencaesar
 BINTRAY_REPO=p2
 PCK_NAME=oml
-PCK_VERSION=$(cat version.txt)
+PCK_VERSION=$(cat ${CURRENT_PATH}/../version.txt)
 TARGET_PATH=oml/releases
-CURRENT_PATH=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
 PATH_TO_REPOSITORY=${CURRENT_PATH}/target/repository
 
 function main() {
