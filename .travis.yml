@@ -40,7 +40,6 @@ deploy:
     draft: true
     on:
       tags: true
-      repo: opencaesar/oml
       branch: master
   - provider: script
     script: ./gradlew bintrayUpload
@@ -48,7 +47,6 @@ deploy:
     dry-run: false
     on:
       tags: true
-      repo: opencaesar/oml
       branch: master
   - provider: script
     script: io.opencaesar.oml.repository/deploy.sh
@@ -56,13 +54,10 @@ deploy:
     dry-run: false
     on:
       tags: true
-      repo: opencaesar/oml
       branch: master
   - provider: script
     script: io.opencaesar.oml.specification/deploy.sh
     skip_cleanup: true
     dry-run: false
     on:
-      tags: true
-      repo: opencaesar/oml
       branch: master

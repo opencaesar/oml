@@ -6,7 +6,7 @@ image-gen
 bin
 target
 build
-.html
+*.html
 .DS_Store
 .idea
 .gradle

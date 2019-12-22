@@ -91,12 +91,4 @@ path: src-gen/oml.md
 path: src/public-api.md
 </pre>
 
-<pre class=include>
-path: src/mapping-to-owl.md
-</pre>
-
-<pre class=include>
-path: src/mapping-to-legacy-oml.md
-</pre>
-
 </div>

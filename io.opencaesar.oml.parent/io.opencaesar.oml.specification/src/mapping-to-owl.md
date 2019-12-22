@@ -1,2 +1,0 @@
-# Annex: Mapping to OWL
-
