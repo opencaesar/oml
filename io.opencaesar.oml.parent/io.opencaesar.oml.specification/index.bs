@@ -3,7 +3,7 @@ Title: Ontological Modeling Language 0.5.0
 Shortname: oml
 Level: 1
 Status: ld
-URL: https://github.com/opencaesar/oml-spec
+URL: https://github.com/opencaesar/oml
 Editor: Maged Elaasar (JPL)
 Editor: Nicolas Rouquette (JPL)
 Markup Shorthands: markdown yes
