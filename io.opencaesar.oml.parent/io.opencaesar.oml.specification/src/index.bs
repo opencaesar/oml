@@ -72,23 +72,23 @@ tbody td:nth-child(5) {
 <div export=true>
 
 <pre class=include>
-path: src/getting-started.md
+path: getting-started.md
 </pre>
 
 <pre class=include>
-path: src/documentation.md
+path: documentation.md
 </pre>
 
 <pre class=include>
-path: src/concrete-syntax.md
+path: concrete-syntax.md
 </pre>
 		
 <pre class=include>
-path: src-gen/oml.md
+path: oml.md
 </pre>
 
 <pre class=include>
-path: src/public-api.md
+path: public-api.md
 </pre>
 
 </div>

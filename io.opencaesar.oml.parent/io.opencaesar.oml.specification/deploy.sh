@@ -25,9 +25,9 @@ cd ..
 # Clean out existing contents
 rm -rf publish/**/* || exit 0
 
-cp ${CURRENT_PATH}/index.html ./publish/
-mkdir -p ./publish/image
-cp ${CURRENT_PATH}/image/* ./publish/image
+cp ${CURRENT_PATH}/src-gen/index.html ./publish/
+mkdir -p ./publish/images
+cp ${CURRENT_PATH}/src-gen/images/oml.svg ./publish/images
 
 # Now let's go have some fun with the cloned repo
 cd publish

@@ -2,10 +2,16 @@ apply plugin: 'io.opencaesar.ecore2bikeshed'
 
 ecore2bikeshed {
 	inputPath = 'io.opencaesar.oml/src/io/opencaesar/oml'
-	outputPath = 'io.opencaesar.oml.specification'
+	outputPath = 'io.opencaesar.oml.specification/src-gen'
 }
+
+task copySrc(type: Copy) {
+    from 'src'
+    into 'src-gen'
+} 
+
+generateBikeshed.dependsOn 'copySrc'
 
 clean {
 	delete 'src-gen'
-	delete 'image-gen'
 }
