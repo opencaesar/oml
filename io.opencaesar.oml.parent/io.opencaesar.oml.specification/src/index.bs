@@ -76,13 +76,9 @@ path: getting-started.md
 </pre>
 
 <pre class=include>
-path: documentation.md
+path: textual-syntax.md
 </pre>
 
-<pre class=include>
-path: concrete-syntax.md
-</pre>
-		
 <pre class=include>
 path: oml.md
 </pre>
