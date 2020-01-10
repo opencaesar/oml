@@ -1223,7 +1223,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version 6a4c097ae8b731ee02752a258e8ac5ffbb752299" name="generator">
   <link href="https://github.com/opencaesar/oml" rel="canonical">
-  <meta content="d7299ccf7a4d1846bac5aee04a9853cca4752dd3" name="document-revision">
+  <meta content="8490a96d593be8931a4eadc6e1f46813b56cc736" name="document-revision">
 <style>
 body {
   padding: 0;
@@ -2005,9 +2005,8 @@ ref enumerated scalar <a href="#EnumeratedScalar-Syntax">EnumeratedScalar_IRI</a
     <p>Declaration</p>
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
 rule ID [
-  (<a href="#EntityPredicate-Syntax">EntityPredicate</a> | <a href="#RelationEntityPredicate-Syntax">RelationEntityPredicate</a>  | <a href="#RelationPredicate-Syntax">RelationPredicate</a> )
-      (&amp; (<a href="#EntityPredicate-Syntax">EntityPredicate</a> | <a href="#RelationEntityPredicate-Syntax">RelationEntityPredicate</a>  | <a href="#RelationPredicate-Syntax">RelationPredicate</a> ))* 
-      => <a href="#RelationPredicate-Syntax">RelationPredicate</a>
+  (<a href="#EntityPredicate-Syntax">EntityPredicate</a> | <a href="#RelationEntityPredicate-Syntax">RelationEntityPredicate</a>  | <a href="#RelationPredicate-Syntax">RelationPredicate</a> ) (&amp; (<a href="#EntityPredicate-Syntax">EntityPredicate</a> | <a href="#RelationEntityPredicate-Syntax">RelationEntityPredicate</a>  | <a href="#RelationPredicate-Syntax">RelationPredicate</a> ))* 
+  => <a href="#RelationPredicate-Syntax">RelationPredicate</a>
 ]
 </pre>
     <p>Reference</p>
