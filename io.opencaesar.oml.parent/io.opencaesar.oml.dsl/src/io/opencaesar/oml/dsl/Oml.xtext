@@ -205,7 +205,7 @@ InverseRelation:
 Rule:
 	ownedAnnotations+=Annotation*
 	'rule' name=ID '['
-		antecedent+=Predicate ('&' antecedent+=Predicate)* '=>' consequent=RelationPredicate
+		antecedent+=Predicate ('&' antecedent+=Predicate)* '=>' consequent=SWRLPredicate
 	']';
 
 Instance:
@@ -492,12 +492,24 @@ EntityPredicate:
 	entity=[Entity|Ref]'(' variable=ID ')';
 	
 BinaryPredicate:
-	RelationEntityPredicate |
-	RelationPredicate;
+	SWRLPredicate |
+	RelationEntityPredicate;
 
 RelationEntityPredicate:
 	ownedAnnotations+=Annotation*
 	entity=[RelationEntity|Ref] '(' variable1=ID kind=RelationEntityPredicateKind variable2=ID ')';
+
+SWRLPredicate:
+	SWRLSameAsPredicate |
+	SWRLDifferentFromPredicate;
+	
+SWRLSameAsPredicate:
+	ownedAnnotations+=Annotation*
+	variable1=ID RULE_SAME_AS variable2=ID;
+
+SWRLDifferentFromPredicate:
+	ownedAnnotations+=Annotation*
+	variable1=ID RULE_DIFFERENT_FROM variable2=ID;
 
 RelationPredicate:
 	ownedAnnotations+=Annotation*
@@ -556,6 +568,10 @@ Decimal returns Decimal:								DECIMAL_STR;
 Double returns ecore::EDouble:							DOUBLE_STR;
 
 //----------------------------
+
+terminal RULE_SAME_AS:									'==';
+
+terminal RULE_DIFFERENT_FROM:							'<>';
 
 terminal BOOLEAN_STR:									'false'|'true';
 

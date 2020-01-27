@@ -97,6 +97,8 @@ import io.opencaesar.oml.StructuredPropertyRangeRestrictionAxiom
 import io.opencaesar.oml.StructuredPropertyReference
 import io.opencaesar.oml.StructuredPropertyValueAssertion
 import io.opencaesar.oml.StructuredPropertyValueRestrictionAxiom
+import io.opencaesar.oml.SWRLDifferentFromPredicate
+import io.opencaesar.oml.SWRLSameAsPredicate
 import io.opencaesar.oml.Vocabulary
 import io.opencaesar.oml.VocabularyExtension
 import io.opencaesar.oml.VocabularyStatement
@@ -114,6 +116,7 @@ import org.eclipse.emf.ecore.util.EContentAdapter
 import org.eclipse.emf.ecore.util.EcoreUtil
 
 import static extension io.opencaesar.oml.util.OmlRead.*
+import io.opencaesar.oml.SWRLPredicate
 
 class OmlWriter {
 	
@@ -394,7 +397,7 @@ class OmlWriter {
 	
 	// Rule
 
-	def addRule(Vocabulary vocabulary, String name, RelationPredicate consequent, Predicate...antecedent) {
+	def addRule(Vocabulary vocabulary, String name, SWRLPredicate consequent, Predicate...antecedent) {
 		val rule = create(Rule)
 		rule.name = name
 		rule.consequent = consequent
@@ -848,6 +851,20 @@ class OmlWriter {
 		val predicate = create(RelationPredicate)
 		defer.add [predicate.relation = resolve(Relation, relationIri)]
 		predicate.inverse = inverse
+		predicate.variable1 = variable1
+		predicate.variable2 = variable2
+		return predicate
+	}
+	
+	def createSWRLDifferentFromPredicate(String variable1, String variable2) {
+		val predicate = create(SWRLDifferentFromPredicate)
+		predicate.variable1 = variable1
+		predicate.variable2 = variable2
+		return predicate
+	}
+	
+	def createSWRLSameAsPredicate(String variable1, String variable2) {
+		val predicate = create(SWRLSameAsPredicate)
 		predicate.variable1 = variable1
 		predicate.variable2 = variable2
 		return predicate

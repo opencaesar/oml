@@ -85,6 +85,8 @@ import org.eclipse.xtext.formatting2.FormatterPreferenceKeys
 import org.eclipse.xtext.formatting2.FormatterRequest
 import org.eclipse.xtext.formatting2.IFormattableDocument
 import org.eclipse.xtext.preferences.MapBasedPreferenceValues
+import io.opencaesar.oml.SWRLSameAsPredicate
+import io.opencaesar.oml.SWRLDifferentFromPredicate
 
 class OmlFormatter extends AbstractFormatter2 {
 	
@@ -523,6 +525,14 @@ class OmlFormatter extends AbstractFormatter2 {
 		predicate.regionFor.keyword(relationPredicateAccess.rightParenthesisKeyword_6).prepend[noSpace]
 	}
 
+	def dispatch void format(SWRLSameAsPredicate predicate, extension IFormattableDocument document) {
+		predicate.regionFor.ruleCall(getSWRLSameAsPredicateAccess.getRULE_SAME_ASTerminalRuleCall_2).surround[oneSpace]
+	}
+	
+	def dispatch void format(SWRLDifferentFromPredicate predicate, extension IFormattableDocument document) {
+		predicate.regionFor.ruleCall(getSWRLDifferentFromPredicateAccess.getRULE_DIFFERENT_FROMTerminalRuleCall_2).surround[oneSpace]
+	}
+	
 	def dispatch void format(QuotedLiteral literal, extension IFormattableDocument document) {
 		literal.regionFor.keyword(quotedLiteralAccess.circumflexAccentCircumflexAccentKeyword_1_0_0).surround[noSpace]
 		literal.regionFor.keyword(quotedLiteralAccess.dollarSignKeyword_1_1_0).surround[noSpace]

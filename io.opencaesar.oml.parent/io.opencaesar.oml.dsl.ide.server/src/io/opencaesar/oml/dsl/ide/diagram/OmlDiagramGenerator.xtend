@@ -65,6 +65,8 @@ import org.eclipse.sprotty.xtext.SIssueMarkerDecorator
 import org.eclipse.sprotty.xtext.tracing.ITraceProvider
 
 import static extension io.opencaesar.oml.util.OmlRead.*
+import io.opencaesar.oml.SWRLSameAsPredicate
+import io.opencaesar.oml.SWRLDifferentFromPredicate
 
 class OmlDiagramGenerator implements IDiagramGenerator {
 	
@@ -445,7 +447,7 @@ class OmlDiagramGenerator implements IDiagramGenerator {
 		consequentCompartment.children += new SLabel[
 			type = 'label:text'
 			it.id = rule.name + '-consequent-label'
-			text = consequent.relation.name + '(' + consequent.variable1 + ', ' + consequent.variable2 + ')'
+			text = consequent.renderPredicate
 		]
 		node.children += consequentCompartment
 		
@@ -486,13 +488,15 @@ class OmlDiagramGenerator implements IDiagramGenerator {
 
 	protected def String renderPredicate(Predicate predicate) {
 		switch predicate {
+			SWRLSameAsPredicate: predicate.variable1 + ' == ' + predicate.variable2
+			SWRLDifferentFromPredicate: predicate.variable1 + ' <> ' + predicate.variable2
 			RelationPredicate: predicate.relation.name + '(' + predicate.variable1 + ', ' + predicate.variable2 + ')'
 			RelationEntityPredicate: predicate.entity.name + '(' + predicate.kind.toString + ', ' + predicate.variable1 + ', ' + predicate.variable2 + ')'
 			EntityPredicate: predicate.entity.name + '(' + predicate.variable + ')'
 			default: ''
 		}
 	}
-
+	
 	protected def OmlHeaderNode newHeading(String id, EObject object) {
 		newSElement(OmlHeaderNode, id + '-header', 'classHeader') => [
 			layout = 'hbox'

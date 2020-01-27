@@ -77,6 +77,8 @@ import io.opencaesar.oml.StructuredPropertyValueAssertion
 import io.opencaesar.oml.StructuredPropertyValueRestrictionAxiom
 import io.opencaesar.oml.Vocabulary
 import io.opencaesar.oml.VocabularyExtension
+import io.opencaesar.oml.SWRLDifferentFromPredicate
+import io.opencaesar.oml.SWRLSameAsPredicate
 
 class OmlWrite {
 	
@@ -141,6 +143,8 @@ class OmlWrite {
 			case EntityPredicate: factory.createEntityPredicate
 			case RelationEntityPredicate: factory.createRelationEntityPredicate
 			case RelationPredicate: factory.createRelationPredicate
+			case SWRLDifferentFromPredicate: factory.createSWRLDifferentFromPredicate
+			case SWRLSameAsPredicate: factory.createSWRLSameAsPredicate
 			case QuotedLiteral: factory.createQuotedLiteral
 			case IntegerLiteral: factory.createIntegerLiteral
 			case DecimalLiteral: factory.createDecimalLiteral

@@ -175,7 +175,27 @@ public class RuleItemProvider extends MemberItemProvider {
 		newChildDescriptors.add
 			(createChildParameter
 				(OmlPackage.Literals.RULE__ANTECEDENT,
+				 OmlFactory.eINSTANCE.createSWRLSameAsPredicate()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(OmlPackage.Literals.RULE__ANTECEDENT,
+				 OmlFactory.eINSTANCE.createSWRLDifferentFromPredicate()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(OmlPackage.Literals.RULE__ANTECEDENT,
 				 OmlFactory.eINSTANCE.createRelationPredicate()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(OmlPackage.Literals.RULE__CONSEQUENT,
+				 OmlFactory.eINSTANCE.createSWRLSameAsPredicate()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(OmlPackage.Literals.RULE__CONSEQUENT,
+				 OmlFactory.eINSTANCE.createSWRLDifferentFromPredicate()));
 
 		newChildDescriptors.add
 			(createChildParameter

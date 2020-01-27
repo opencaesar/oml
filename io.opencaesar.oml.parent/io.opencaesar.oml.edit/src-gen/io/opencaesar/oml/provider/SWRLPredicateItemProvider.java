@@ -1,10 +1,26 @@
 /**
+ * 
+ * Copyright 2019 California Institute of Technology ("Caltech").
+ * U.S. Government sponsorship acknowledged.
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * 
  */
 package io.opencaesar.oml.provider;
 
 
 import io.opencaesar.oml.OmlPackage;
-import io.opencaesar.oml.RelationPredicate;
+import io.opencaesar.oml.SWRLPredicate;
 
 import java.util.Collection;
 import java.util.List;
@@ -14,23 +30,21 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
-import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
-import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
- * This is the item provider adapter for a {@link io.opencaesar.oml.RelationPredicate} object.
+ * This is the item provider adapter for a {@link io.opencaesar.oml.SWRLPredicate} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class RelationPredicateItemProvider extends SWRLPredicateItemProvider {
+public class SWRLPredicateItemProvider extends BinaryPredicateItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public RelationPredicateItemProvider(AdapterFactory adapterFactory) {
+	public SWRLPredicateItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -45,65 +59,31 @@ public class RelationPredicateItemProvider extends SWRLPredicateItemProvider {
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addRelationPropertyDescriptor(object);
-			addInversePropertyDescriptor(object);
+			addConsequentRulePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Relation feature.
+	 * This adds a property descriptor for the Consequent Rule feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addRelationPropertyDescriptor(Object object) {
+	protected void addConsequentRulePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_RelationPredicate_relation_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_RelationPredicate_relation_feature", "_UI_RelationPredicate_type"),
-				 OmlPackage.Literals.RELATION_PREDICATE__RELATION,
+				 getString("_UI_SWRLPredicate_consequentRule_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_SWRLPredicate_consequentRule_feature", "_UI_SWRLPredicate_type"),
+				 OmlPackage.Literals.SWRL_PREDICATE__CONSEQUENT_RULE,
 				 true,
 				 false,
 				 true,
 				 null,
 				 null,
 				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Inverse feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addInversePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_RelationPredicate_inverse_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_RelationPredicate_inverse_feature", "_UI_RelationPredicate_type"),
-				 OmlPackage.Literals.RELATION_PREDICATE__INVERSE,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This returns RelationPredicate.gif.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/RelationPredicate"));
 	}
 
 	/**
@@ -114,10 +94,10 @@ public class RelationPredicateItemProvider extends SWRLPredicateItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((RelationPredicate)object).getVariable1();
+		String label = ((SWRLPredicate)object).getVariable1();
 		return label == null || label.length() == 0 ?
-			getString("_UI_RelationPredicate_type") :
-			getString("_UI_RelationPredicate_type") + " " + label;
+			getString("_UI_SWRLPredicate_type") :
+			getString("_UI_SWRLPredicate_type") + " " + label;
 	}
 
 
@@ -131,12 +111,6 @@ public class RelationPredicateItemProvider extends SWRLPredicateItemProvider {
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
-
-		switch (notification.getFeatureID(RelationPredicate.class)) {
-			case OmlPackage.RELATION_PREDICATE__INVERSE:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-				return;
-		}
 		super.notifyChanged(notification);
 	}
 

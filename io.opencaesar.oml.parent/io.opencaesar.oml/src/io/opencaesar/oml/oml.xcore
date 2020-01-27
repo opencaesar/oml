@@ -590,7 +590,7 @@ class Rule extends Member, VocabularyStatement {
 	/*
 	 * The relation predicate that is the consequent of this rule
 	 */
-	contains RelationPredicate[1] consequent opposite consequentRule
+	contains SWRLPredicate[1] consequent opposite consequentRule
 }
 
 /*
@@ -1406,13 +1406,32 @@ class RelationEntityPredicate extends BinaryPredicate {
 	RelationEntityPredicateKind kind
 }
 
+abstract class SWRLPredicate extends BinaryPredicate {
+	/*
+	 * The rule that specifies this predicate as a consequent
+	 */
+	container Rule consequentRule opposite consequent
+}
+
+/*
+ * SWRLSameAsPredicate is a binary predicate corresponding to SWRL's sameAs(variable1, variable2)
+ */
+@Bikeshed(heading="Rules")
+class SWRLSameAsPredicate extends SWRLPredicate {}
+
+/*
+ * SWRLDifferentFromPredicate is a binary predicate corresponding to SWRL's differentFrom(variable1, variable2)
+ */
+@Bikeshed(heading="Rules")
+class SWRLDifferentFromPredicate extends SWRLPredicate {}
+
 /*
  * RelationPredicate is a binary predicate that binds its variables to two named instances that are linked by a specific relation.
  * The source of the link is bound to variable1, while the target is bound to variable2. The predicate is typically used as a 
  * consequent of a rule, although it may also be used as a rule's antecedent.
  */
 @Bikeshed(heading="Rules")
-class RelationPredicate extends BinaryPredicate {
+class RelationPredicate extends SWRLPredicate {
 	/*
 	 * The relation that links the two named instances
 	 */
@@ -1421,10 +1440,7 @@ class RelationPredicate extends BinaryPredicate {
 	 * Whether the inverse of this predicate's relation (when true) or the relation itself (when false) is specified
 	 */
 	 boolean inverse
-	/*
-	 * The rule that specifies this predicate as a consequent
-	 */
-	container Rule consequentRule opposite consequent
+
 }
 
 /*
