@@ -2,7 +2,7 @@
 <feature
       id="io.opencaesar.oml.feature"
       label="Oml Feature "
-      version="0.5.0">
+      version="0.5.1">
 
    <plugin
          id="io.opencaesar.oml"

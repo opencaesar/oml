@@ -23,7 +23,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * <!-- end-user-doc -->
  * @generated
  */
-public class RelationPredicateItemProvider extends SWRLPredicateItemProvider {
+public class RelationPredicateItemProvider extends BinaryPredicateItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
@@ -47,6 +47,7 @@ public class RelationPredicateItemProvider extends SWRLPredicateItemProvider {
 
 			addRelationPropertyDescriptor(object);
 			addInversePropertyDescriptor(object);
+			addConsequentRulePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -91,6 +92,28 @@ public class RelationPredicateItemProvider extends SWRLPredicateItemProvider {
 				 false,
 				 false,
 				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Consequent Rule feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addConsequentRulePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_RelationPredicate_consequentRule_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_RelationPredicate_consequentRule_feature", "_UI_RelationPredicate_type"),
+				 OmlPackage.Literals.RELATION_PREDICATE__CONSEQUENT_RULE,
+				 true,
+				 false,
+				 true,
+				 null,
 				 null,
 				 null));
 	}

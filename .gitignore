@@ -12,3 +12,4 @@ build
 .gradle
 .launch
 .antlr-generator-*.jar
+*/*/.settings/*.prefs

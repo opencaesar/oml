@@ -3,7 +3,7 @@ Automatic-Module-Name: io.opencaesar.oml.dsl.tests
 Bundle-ManifestVersion: 2
 Bundle-Name: io.opencaesar.oml.dsl.tests
 Bundle-Vendor: JPL
-Bundle-Version: 0.5.0
+Bundle-Version: 0.5.1
 Bundle-SymbolicName: io.opencaesar.oml.dsl.tests; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: io.opencaesar.oml,

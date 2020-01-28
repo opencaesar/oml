@@ -501,7 +501,8 @@ RelationEntityPredicate:
 
 SWRLPredicate:
 	SWRLSameAsPredicate |
-	SWRLDifferentFromPredicate;
+	SWRLDifferentFromPredicate |
+	RelationPredicate;
 	
 SWRLSameAsPredicate:
 	ownedAnnotations+=Annotation*

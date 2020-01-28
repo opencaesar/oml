@@ -1337,52 +1337,6 @@ public class OmlItemProviderAdapterFactory extends OmlAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.SWRLSameAsPredicate} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected SWRLSameAsPredicateItemProvider swrlSameAsPredicateItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.SWRLSameAsPredicate}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createSWRLSameAsPredicateAdapter() {
-		if (swrlSameAsPredicateItemProvider == null) {
-			swrlSameAsPredicateItemProvider = new SWRLSameAsPredicateItemProvider(this);
-		}
-
-		return swrlSameAsPredicateItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.SWRLDifferentFromPredicate} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected SWRLDifferentFromPredicateItemProvider swrlDifferentFromPredicateItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.SWRLDifferentFromPredicate}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createSWRLDifferentFromPredicateAdapter() {
-		if (swrlDifferentFromPredicateItemProvider == null) {
-			swrlDifferentFromPredicateItemProvider = new SWRLDifferentFromPredicateItemProvider(this);
-		}
-
-		return swrlDifferentFromPredicateItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.RelationPredicate} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1680,8 +1634,6 @@ public class OmlItemProviderAdapterFactory extends OmlAdapterFactory implements 
 		if (linkAssertionItemProvider != null) linkAssertionItemProvider.dispose();
 		if (entityPredicateItemProvider != null) entityPredicateItemProvider.dispose();
 		if (relationEntityPredicateItemProvider != null) relationEntityPredicateItemProvider.dispose();
-		if (swrlSameAsPredicateItemProvider != null) swrlSameAsPredicateItemProvider.dispose();
-		if (swrlDifferentFromPredicateItemProvider != null) swrlDifferentFromPredicateItemProvider.dispose();
 		if (relationPredicateItemProvider != null) relationPredicateItemProvider.dispose();
 		if (quotedLiteralItemProvider != null) quotedLiteralItemProvider.dispose();
 		if (integerLiteralItemProvider != null) integerLiteralItemProvider.dispose();

@@ -2,7 +2,7 @@
 <feature
       id="io.opencaesar.oml.dsl.feature"
       label="Oml Dsl Feature "
-      version="0.5.0">
+      version="0.5.1">
 
    <requires>
       <import feature="io.opencaesar.oml.feature" version="0.0.0"/>
