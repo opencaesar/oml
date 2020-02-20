@@ -19,6 +19,7 @@
 package io.opencaesar.oml.dsl.ide.diagram
 
 import org.eclipse.sprotty.Layouting
+import org.eclipse.sprotty.SButton
 import org.eclipse.sprotty.SCompartment
 import org.eclipse.sprotty.SEdge
 import org.eclipse.sprotty.SGraph
@@ -42,7 +43,11 @@ class OmlEdge extends SEdge {
 }
 
 @Accessors
-class OmlHeaderNode extends SCompartment {
+class OmlCompartment extends SCompartment {
+}
+
+@Accessors
+class OmlHeader extends SCompartment {
 	String cssClass
 }
 
@@ -53,9 +58,8 @@ class OmlLabel extends SLabel {
 @Accessors 
 class OmlTag extends SShapeElement implements Layouting {
 	String layout
-	
-	new() {}
-	new((OmlTag)=>void initializer) {
-		initializer.apply(this)
-	}
+}
+
+@Accessors
+class OmlButton extends SButton {
 }
