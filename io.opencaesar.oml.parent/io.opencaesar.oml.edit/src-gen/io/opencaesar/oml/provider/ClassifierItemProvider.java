@@ -133,12 +133,22 @@ public class ClassifierItemProvider extends TypeItemProvider {
 		newChildDescriptors.add
 			(createChildParameter
 				(OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS,
+				 OmlFactory.eINSTANCE.createScalarPropertyCardinalityRestrictionAxiom()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS,
 				 OmlFactory.eINSTANCE.createScalarPropertyValueRestrictionAxiom()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS,
 				 OmlFactory.eINSTANCE.createStructuredPropertyRangeRestrictionAxiom()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS,
+				 OmlFactory.eINSTANCE.createStructuredPropertyCardinalityRestrictionAxiom()));
 
 		newChildDescriptors.add
 			(createChildParameter

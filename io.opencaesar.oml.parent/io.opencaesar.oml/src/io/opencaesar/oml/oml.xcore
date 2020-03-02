@@ -117,7 +117,7 @@ abstract class Ontology extends IdentifiedElement {
 	/*
 	 * The separator character that follows this ontology's IRI in the namespace
 	 */
-	String[1] separator
+	SeparatorKind[1] separator
  	/*
 	 * The prefix of this ontology's namespace
 	 */
@@ -188,7 +188,7 @@ abstract class Member extends IdentifiedElement {
 	/*
 	 * The name of this member, which is unique within its ontology's namespace
 	 */
-	 String[1] name
+	 id String[1] name
 }
 
 /*
@@ -230,9 +230,8 @@ abstract class Classifier extends Type {
 }
 
 /*
- * Entity is a characterizable type whose instances can be interrelated by relations (that has the entity
- * as their domain). It also inherits relations in the domain of its specialized entities.It can also specify 
- * constraints on (direct or inherited) relations in its domain.
+ * Entity is a characterizable type whose instances can be interrelated by relations (that have the entity
+ * or one of its specialized entities as their domain). It can also specify constraints on relations in its domain.
  */
 @Bikeshed(heading="Types")
 abstract class Entity extends Classifier {
@@ -241,9 +240,9 @@ abstract class Entity extends Classifier {
 	 */
 	contains RelationRestrictionAxiom[] ownedRelationRestrictions opposite owningEntity
 	/*
-	 * The key of this entity
+	 * The unique keys of this entity
 	 */
-	contains KeyAxiom ownedKey opposite owningEntity 
+	contains KeyAxiom[] ownedKeys opposite owningEntity 
 }
 
 /*
@@ -718,9 +717,9 @@ abstract class EntityReference extends ClassifierReference {
 	 */
 	contains RelationRestrictionAxiom[] ownedRelationRestrictions opposite owningReference
 	/*
-	 * The key of the referenced entity specified by this reference
+	 * The keys of the referenced entity specified by this reference
 	 */
-	contains KeyAxiom ownedKey opposite owningReference 
+	contains KeyAxiom[] ownedKeys opposite owningReference 
 }
 
 /*
@@ -955,10 +954,17 @@ abstract class VocabularyImport extends Import {
 }
 
 /*
- * VocabularyExtension is a vocabulary import that represents a vocabulary extending another. 
+ * VocabularyExtension is a vocabulary import that allows a vocabulary to extend another. 
  */
 @Bikeshed(heading="Ontologies")
 class VocabularyExtension extends VocabularyImport {
+}
+
+/*
+ * VocabularyUsage is a vocabulary import that allows a vocabulary to use a description. 
+ */
+@Bikeshed(heading="Ontologies")
+class VocabularyUsage extends VocabularyImport {
 }
 
 /*
@@ -973,14 +979,14 @@ abstract class BundleImport extends Import {
 }
 
 /*
- * BundleInclusion is a bundle import that represents a bundle including a vocabulary. 
+ * BundleInclusion is a bundle import that allows a bundle to include a vocabulary. 
  */
 @Bikeshed(heading="Ontologies")
 class BundleInclusion extends BundleImport {
 }
 
 /*
- * BundleExtension is a bundle import that represents a bundle extending another. 
+ * BundleExtension is a bundle import that allows a bundle to extend another. 
  */
 @Bikeshed(heading="Ontologies")
 class BundleExtension extends BundleImport {
@@ -998,14 +1004,14 @@ abstract class DescriptionImport extends Import {
 }
 
 /*
- * DescriptionUsage is a description import that represents a description using a terminology. 
+ * DescriptionUsage is a description import that allows a description to use a terminology. 
  */
 @Bikeshed(heading="Ontologies")
 class DescriptionUsage extends DescriptionImport {
 }
 
 /*
- * DescriptionImport is a description import that represents a description extending another. 
+ * DescriptionImport is a description import that allows a description to extend another. 
  */
 @Bikeshed(heading="Ontologies")
 class DescriptionExtension extends DescriptionImport {
@@ -1090,6 +1096,23 @@ class ScalarPropertyRangeRestrictionAxiom extends ScalarPropertyRestrictionAxiom
 }
 
 /*
+ * ScalarPropertyCardinalityRestrictionAxiom is a scalar property restriction axiom that restricts the cardinality of a scalar
+ * property to an exact number, a minimum number or a maximum number. This restrictions may apply for all or for some values
+ * of the property that has the restricting entity as a domain.
+ */
+@Bikeshed(heading="Axioms")
+class ScalarPropertyCardinalityRestrictionAxiom extends ScalarPropertyRestrictionAxiom {
+	/*
+	 * The value of the cardinality specified by this axiom (default is 1)
+	 */
+	UnsignedInt cardinality = "1"
+	/*
+	 * The kind of cardinality restriction specified by this axiom (default is exactly)
+	 */
+	CardinalityRestrictionKind kind
+}
+
+/*
  * ScalarPropertyValueRestrictionAxiom is a scalar property restriction axiom that restricts the value of the property 
  * to a specific literal.
  */
@@ -1127,6 +1150,23 @@ class StructuredPropertyRangeRestrictionAxiom extends StructuredPropertyRestrict
 	 * The range restriction kind specified by this axiom (default is all)
 	 */
 	RangeRestrictionKind kind
+}
+
+/*
+ * StructuredPropertyCardinalityRestrictionAxiom is a structured property restriction axiom that restricts the cardinality of 
+ * a structured property to an exact number, a minimum number or a maximum number. This restrictions may apply for all or for 
+ * some values of the property that has the restricting entity as a domain.
+ */
+@Bikeshed(heading="Axioms")
+class StructuredPropertyCardinalityRestrictionAxiom extends StructuredPropertyRestrictionAxiom {
+	/*
+	 * The value of the cardinality specified by this axiom (default is 1)
+	 */
+	UnsignedInt cardinality = "1"
+	/*
+	 * The kind of cardinality restriction specified by this axiom (default is exactly)
+	 */
+	CardinalityRestrictionKind kind
 }
 
 /*
@@ -1196,6 +1236,18 @@ class RelationCardinalityRestrictionAxiom extends RelationRestrictionAxiom {
 }
 
 /*
+ * RelationTargetRestrictionAxiom is a relation restriction axiom that restricts the target of the relation
+ * to a specific named instance.
+ */
+@Bikeshed(heading="Axioms")
+class RelationTargetRestrictionAxiom extends RelationRestrictionAxiom {
+	/*
+	 * The named instance specified as a restricted relation target by this axiom 
+	 */
+	refers NamedInstance[1] target
+}
+
+/*
  * KeyAxiom is an axiom that states that a set of scalar properties form a unique key for an entity. This means that all 
  * instances of that entity must have unique values for those keys. Scalar properties do not need to be specified as
  * functional to be used as keys. 
@@ -1209,11 +1261,11 @@ class KeyAxiom extends Axiom {
 	/*
 	 * The entity that owns this axiom
 	 */
-	container Entity owningEntity opposite ownedKey 
+	container Entity owningEntity opposite ownedKeys 
 	/*
 	 * The reference to an entity that owns this axiom
 	 */
-	container EntityReference owningReference opposite ownedKey 
+	container EntityReference owningReference opposite ownedKeys 
 }
 
 /*
@@ -1493,6 +1545,16 @@ class BooleanLiteral extends Literal {
 	 * The boolean value of this literal
 	 */
 	boolean value
+}
+
+/*
+ * SeparatorKind is an anumeration that specifies the separator character of an ontology's namespace. It can either
+ * be only of two values: a hash '#' or a slash '/'.
+ */
+@Bikeshed(heading="Ontologies")
+enum SeparatorKind {
+	hash as '#' = 0
+	slash as '/' = 1
 }
 
 /*

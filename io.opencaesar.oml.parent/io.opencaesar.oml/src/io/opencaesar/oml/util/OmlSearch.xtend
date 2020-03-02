@@ -69,6 +69,7 @@ import io.opencaesar.oml.Terminology
 import io.opencaesar.oml.TypeAssertion
 import io.opencaesar.oml.Vocabulary
 import io.opencaesar.oml.VocabularyExtension
+import io.opencaesar.oml.VocabularyUsage
 import java.util.ArrayList
 import java.util.Collections
 
@@ -126,7 +127,7 @@ class OmlSearch extends OmlIndex {
 		vocabulary.findImportsWithTarget.filter(VocabularyExtension)
 	}
 
-	static def Iterable<Vocabulary> findExtendingBundles(Vocabulary vocabulary) {
+	static def Iterable<Vocabulary> findExtendingVocabularies(Vocabulary vocabulary) {
 		vocabulary.findVocabularytExtensionsWithExtendedVocabulary.map[extendingVocabulary]
 	}
 
@@ -134,7 +135,7 @@ class OmlSearch extends OmlIndex {
 		vocabulary.findImportsWithTarget.filter(BundleInclusion)
 	}
 
-	static def Iterable<Bundle> findInclusingBundles(Vocabulary vocabulary) {
+	static def Iterable<Bundle> findIncludingBundles(Vocabulary vocabulary) {
 		vocabulary.findBundleInclusionsWithIncludedVocabulary.map[includingBundle]
 	}
 
@@ -156,6 +157,14 @@ class OmlSearch extends OmlIndex {
 
 	static def Iterable<Description> findExtendingDescription(Description description) {
 		description.findDescriptionExtensionsWithExtendedDescription.map[extendingDescription]
+	}
+
+	static def Iterable<VocabularyUsage> findVocabularyUsagesWithUsedDescription(Description description) {
+		description.findImportsWithTarget.filter(VocabularyUsage)
+	}
+
+	static def Iterable<Vocabulary> findUsingVocabulary(Description description) {
+		description.findVocabularyUsagesWithUsedDescription.map[usingVocabulary]
 	}
 
 	// Member
@@ -230,8 +239,8 @@ class OmlSearch extends OmlIndex {
 
 	static def Iterable<KeyAxiom> findKeys(Entity entity) {
 		val keys = new ArrayList<KeyAxiom>
-		keys += entity.ownedKey
-		keys += entity.findReferences.filter(EntityReference).map[ownedKey]
+		keys += entity.ownedKeys
+		keys += entity.findReferences.filter(EntityReference).flatMap[ownedKeys]
 		keys
 	}
 
@@ -441,6 +450,8 @@ class OmlSearch extends OmlIndex {
 	
 	// VocabularyExtension
 	
+	// VocabularyUsage
+
 	// DescriptionStatement
 
 	// BundleImport

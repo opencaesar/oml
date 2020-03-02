@@ -58,10 +58,12 @@ import io.opencaesar.oml.RelationInstanceReference
 import io.opencaesar.oml.RelationPredicate
 import io.opencaesar.oml.RelationRangeRestrictionAxiom
 import io.opencaesar.oml.RelationReference
+import io.opencaesar.oml.RelationTargetRestrictionAxiom
 import io.opencaesar.oml.RelationTypeAssertion
 import io.opencaesar.oml.Rule
 import io.opencaesar.oml.RuleReference
 import io.opencaesar.oml.ScalarProperty
+import io.opencaesar.oml.ScalarPropertyCardinalityRestrictionAxiom
 import io.opencaesar.oml.ScalarPropertyRangeRestrictionAxiom
 import io.opencaesar.oml.ScalarPropertyReference
 import io.opencaesar.oml.ScalarPropertyValueAssertion
@@ -71,12 +73,14 @@ import io.opencaesar.oml.Structure
 import io.opencaesar.oml.StructureInstance
 import io.opencaesar.oml.StructureReference
 import io.opencaesar.oml.StructuredProperty
+import io.opencaesar.oml.StructuredPropertyCardinalityRestrictionAxiom
 import io.opencaesar.oml.StructuredPropertyRangeRestrictionAxiom
 import io.opencaesar.oml.StructuredPropertyReference
 import io.opencaesar.oml.StructuredPropertyValueAssertion
 import io.opencaesar.oml.StructuredPropertyValueRestrictionAxiom
 import io.opencaesar.oml.Vocabulary
 import io.opencaesar.oml.VocabularyExtension
+import io.opencaesar.oml.VocabularyUsage
 
 class OmlWrite {
 	
@@ -121,17 +125,21 @@ class OmlWrite {
 			case ConceptInstanceReference: factory.createConceptInstanceReference
 			case RelationInstanceReference: factory.createRelationInstanceReference
 			case VocabularyExtension: factory.createVocabularyExtension
+			case VocabularyUsage: factory.createVocabularyUsage
 			case BundleInclusion: factory.createBundleInclusion
 			case BundleExtension: factory.createBundleExtension
 			case DescriptionUsage: factory.createDescriptionUsage
 			case DescriptionExtension: factory.createDescriptionExtension
 			case SpecializationAxiom: factory.createSpecializationAxiom
 			case ScalarPropertyRangeRestrictionAxiom: factory.createScalarPropertyRangeRestrictionAxiom
+			case ScalarPropertyCardinalityRestrictionAxiom: factory.createScalarPropertyCardinalityRestrictionAxiom
 			case ScalarPropertyValueRestrictionAxiom: factory.createScalarPropertyValueRestrictionAxiom
 			case StructuredPropertyRangeRestrictionAxiom: factory.createStructuredPropertyRangeRestrictionAxiom
+			case StructuredPropertyCardinalityRestrictionAxiom: factory.createStructuredPropertyCardinalityRestrictionAxiom
 			case StructuredPropertyValueRestrictionAxiom: factory.createStructuredPropertyValueRestrictionAxiom
 			case RelationRangeRestrictionAxiom: factory.createRelationRangeRestrictionAxiom
 			case RelationCardinalityRestrictionAxiom: factory.createRelationCardinalityRestrictionAxiom
+			case RelationTargetRestrictionAxiom: factory.createRelationTargetRestrictionAxiom
 			case KeyAxiom: factory.createKeyAxiom
 			case ConceptTypeAssertion: factory.createConceptTypeAssertion
 			case RelationTypeAssertion: factory.createRelationTypeAssertion

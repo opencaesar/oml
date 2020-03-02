@@ -42,14 +42,6 @@ class OmlXMIResource extends XMIResourceImpl {
 		getDefaultSaveOptions().put(XMIResource.OPTION_SAVE_TYPE_INFORMATION, Boolean.TRUE);
 	}
 
-	override protected useUUIDs() {
-		true
-	}
-
-	override protected useIDAttributes() {
-		false
-	}
-
 	override attached(EObject eObject) {
 		if (eObject instanceof Import) {
 			eAdapters += new AdapterImpl {

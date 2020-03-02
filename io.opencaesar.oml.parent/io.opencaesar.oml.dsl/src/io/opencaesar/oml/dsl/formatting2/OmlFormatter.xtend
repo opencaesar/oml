@@ -59,10 +59,12 @@ import io.opencaesar.oml.RelationInstanceReference
 import io.opencaesar.oml.RelationPredicate
 import io.opencaesar.oml.RelationRangeRestrictionAxiom
 import io.opencaesar.oml.RelationReference
+import io.opencaesar.oml.RelationTargetRestrictionAxiom
 import io.opencaesar.oml.RelationTypeAssertion
 import io.opencaesar.oml.Rule
 import io.opencaesar.oml.RuleReference
 import io.opencaesar.oml.ScalarProperty
+import io.opencaesar.oml.ScalarPropertyCardinalityRestrictionAxiom
 import io.opencaesar.oml.ScalarPropertyRangeRestrictionAxiom
 import io.opencaesar.oml.ScalarPropertyReference
 import io.opencaesar.oml.ScalarPropertyValueAssertion
@@ -71,12 +73,14 @@ import io.opencaesar.oml.Structure
 import io.opencaesar.oml.StructureInstance
 import io.opencaesar.oml.StructureReference
 import io.opencaesar.oml.StructuredProperty
+import io.opencaesar.oml.StructuredPropertyCardinalityRestrictionAxiom
 import io.opencaesar.oml.StructuredPropertyRangeRestrictionAxiom
 import io.opencaesar.oml.StructuredPropertyReference
 import io.opencaesar.oml.StructuredPropertyValueAssertion
 import io.opencaesar.oml.StructuredPropertyValueRestrictionAxiom
 import io.opencaesar.oml.Vocabulary
 import io.opencaesar.oml.VocabularyExtension
+import io.opencaesar.oml.VocabularyUsage
 import io.opencaesar.oml.dsl.services.OmlGrammarAccess
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.formatting.IIndentationInformation
@@ -143,6 +147,7 @@ class OmlFormatter extends AbstractFormatter2 {
 		aspect.regionFor.keyword(aspectAccess.colonGreaterThanSignKeyword_3_0).surround[oneSpace]
 		aspect.formatCommas(document)
 		aspect.formatBrackets(document)
+		aspect.ownedKeys.forEach[format.prepend[newLine]]
 		aspect.ownedPropertyRestrictions.forEach[format.prepend[newLine]]
 		aspect.ownedRelationRestrictions.forEach[format.prepend[newLine]]
 	}
@@ -153,6 +158,7 @@ class OmlFormatter extends AbstractFormatter2 {
 		concept.regionFor.keyword(conceptAccess.colonGreaterThanSignKeyword_3_0).surround[oneSpace]
 		concept.formatCommas(document)
 		concept.formatBrackets(document)
+		concept.ownedKeys.forEach[format.prepend[newLine]]
 		concept.ownedPropertyRestrictions.forEach[format.prepend[newLine]]
 		concept.ownedRelationRestrictions.forEach[format.prepend[newLine]]
 	}
@@ -174,6 +180,7 @@ class OmlFormatter extends AbstractFormatter2 {
 		entity.regionFor.keyword(relationEntityAccess.reflexiveReflexiveKeyword_5_7_4_0).prepend[newLine]
 		entity.regionFor.keyword(relationEntityAccess.irreflexiveIrreflexiveKeyword_5_7_5_0).prepend[newLine]
 		entity.regionFor.keyword(relationEntityAccess.transitiveTransitiveKeyword_5_7_6_0).prepend[newLine]
+		entity.ownedKeys.forEach[format.prepend[newLine]]
 		entity.ownedPropertyRestrictions.forEach[format.prepend[newLine]]
 		entity.ownedRelationRestrictions.forEach[format.prepend[newLine]]
 	}
@@ -299,6 +306,7 @@ class OmlFormatter extends AbstractFormatter2 {
 		reference.regionFor.keyword(aspectReferenceAccess.aspectKeyword_2).surround[oneSpace]
 		reference.formatCommas(document)
 		reference.formatBrackets(document)
+		reference.ownedKeys.forEach[format.prepend[newLine]]
 		reference.ownedPropertyRestrictions.forEach[format.prepend[newLine]]
 		reference.ownedRelationRestrictions.forEach[format.prepend[newLine]]
 	}
@@ -309,6 +317,7 @@ class OmlFormatter extends AbstractFormatter2 {
 		reference.regionFor.keyword(conceptReferenceAccess.conceptKeyword_2).surround[oneSpace]
 		reference.formatCommas(document)
 		reference.formatBrackets(document)
+		reference.ownedKeys.forEach[format.prepend[newLine]]
 		reference.ownedPropertyRestrictions.forEach[format.prepend[newLine]]
 		reference.ownedRelationRestrictions.forEach[format.prepend[newLine]]
 	}
@@ -320,6 +329,7 @@ class OmlFormatter extends AbstractFormatter2 {
 		reference.regionFor.keyword(relationEntityReferenceAccess.entityKeyword_3).surround[oneSpace]
 		reference.formatCommas(document)
 		reference.formatBrackets(document)
+		reference.ownedKeys.forEach[format.prepend[newLine]]
 		reference.ownedPropertyRestrictions.forEach[format.prepend[newLine]]
 		reference.ownedRelationRestrictions.forEach[format.prepend[newLine]]
 	}
@@ -409,6 +419,11 @@ class OmlFormatter extends AbstractFormatter2 {
 		_extension.regionFor.keyword(vocabularyExtensionAccess.extendsKeyword_1).append[oneSpace]
 	}
 
+	def dispatch void format(VocabularyUsage usage, extension IFormattableDocument document) {
+		usage.ownedAnnotations.forEach[format.append[newLine]]
+		usage.regionFor.keyword(vocabularyUsageAccess.usesKeyword_1).append[oneSpace]
+	}
+
 	def dispatch void format(BundleInclusion inclusion, extension IFormattableDocument document) {
 		inclusion.ownedAnnotations.forEach[format.append[newLine]]
 		inclusion.regionFor.keyword(bundleInclusionAccess.includesKeyword_1).append[oneSpace]
@@ -434,6 +449,16 @@ class OmlFormatter extends AbstractFormatter2 {
 		axiom.regionFor.keyword(scalarPropertyRangeRestrictionAxiomAccess.restrictsKeyword_1).append[oneSpace]
 		axiom.regionFor.keyword(scalarPropertyRangeRestrictionAxiomAccess.scalarKeyword_3).surround[oneSpace]
 		axiom.regionFor.keyword(scalarPropertyRangeRestrictionAxiomAccess.propertyKeyword_4).surround[oneSpace]
+		axiom.regionFor.keyword(scalarPropertyRangeRestrictionAxiomAccess.toKeyword_6).surround[oneSpace]
+	}
+
+	def dispatch void format(ScalarPropertyCardinalityRestrictionAxiom axiom, extension IFormattableDocument document) {
+		axiom.ownedAnnotations.forEach[format.append[newLine]]
+		axiom.regionFor.keyword(scalarPropertyCardinalityRestrictionAxiomAccess.restrictsKeyword_1).append[oneSpace]
+		axiom.regionFor.keyword(scalarPropertyCardinalityRestrictionAxiomAccess.scalarKeyword_2).surround[oneSpace]
+		axiom.regionFor.keyword(scalarPropertyCardinalityRestrictionAxiomAccess.propertyKeyword_3).surround[oneSpace]
+		axiom.regionFor.keyword(scalarPropertyCardinalityRestrictionAxiomAccess.toKeyword_5).surround[oneSpace]
+		axiom.regionFor.feature(OmlPackage.Literals.SCALAR_PROPERTY_CARDINALITY_RESTRICTION_AXIOM__KIND).surround[oneSpace]
 	}
 
 	def dispatch void format(ScalarPropertyValueRestrictionAxiom axiom, extension IFormattableDocument document) {
@@ -442,7 +467,6 @@ class OmlFormatter extends AbstractFormatter2 {
 		axiom.regionFor.keyword(scalarPropertyValueRestrictionAxiomAccess.scalarKeyword_2).surround[oneSpace]
 		axiom.regionFor.keyword(scalarPropertyValueRestrictionAxiomAccess.propertyKeyword_3).surround[oneSpace]
 		axiom.regionFor.keyword(scalarPropertyValueRestrictionAxiomAccess.toKeyword_5).surround[oneSpace]
-		axiom.value?.format.prepend[oneSpace]
 	}
 
 	def dispatch void format(StructuredPropertyRangeRestrictionAxiom axiom, extension IFormattableDocument document) {
@@ -450,6 +474,16 @@ class OmlFormatter extends AbstractFormatter2 {
 		axiom.regionFor.keyword(structuredPropertyRangeRestrictionAxiomAccess.restrictsKeyword_1).append[oneSpace]
 		axiom.regionFor.keyword(structuredPropertyRangeRestrictionAxiomAccess.structuredKeyword_3).surround[oneSpace]
 		axiom.regionFor.keyword(structuredPropertyRangeRestrictionAxiomAccess.propertyKeyword_4).surround[oneSpace]
+		axiom.regionFor.keyword(structuredPropertyRangeRestrictionAxiomAccess.toKeyword_6).surround[oneSpace]
+	}
+
+	def dispatch void format(StructuredPropertyCardinalityRestrictionAxiom axiom, extension IFormattableDocument document) {
+		axiom.ownedAnnotations.forEach[format.append[newLine]]
+		axiom.regionFor.keyword(structuredPropertyCardinalityRestrictionAxiomAccess.restrictsKeyword_1).append[oneSpace]
+		axiom.regionFor.keyword(structuredPropertyCardinalityRestrictionAxiomAccess.structuredKeyword_2).surround[oneSpace]
+		axiom.regionFor.keyword(structuredPropertyCardinalityRestrictionAxiomAccess.propertyKeyword_3).surround[oneSpace]
+		axiom.regionFor.keyword(structuredPropertyCardinalityRestrictionAxiomAccess.toKeyword_5).surround[oneSpace]
+		axiom.regionFor.feature(OmlPackage.Literals.STRUCTURED_PROPERTY_CARDINALITY_RESTRICTION_AXIOM__KIND).surround[oneSpace]
 	}
 
 	def dispatch void format(StructuredPropertyValueRestrictionAxiom axiom, extension IFormattableDocument document) {
@@ -473,6 +507,14 @@ class OmlFormatter extends AbstractFormatter2 {
 		axiom.regionFor.keyword(relationCardinalityRestrictionAxiomAccess.relationKeyword_2).surround[oneSpace]
 		axiom.regionFor.keyword(relationCardinalityRestrictionAxiomAccess.toKeyword_4).surround[oneSpace]
 		axiom.regionFor.feature(OmlPackage.Literals.RELATION_CARDINALITY_RESTRICTION_AXIOM__KIND).surround[oneSpace]
+	}
+
+	def dispatch void format(RelationTargetRestrictionAxiom axiom, extension IFormattableDocument document) {
+		axiom.ownedAnnotations.forEach[format.append[newLine]]
+		axiom.regionFor.keyword(relationTargetRestrictionAxiomAccess.restrictsKeyword_1).append[oneSpace]
+		axiom.regionFor.keyword(relationTargetRestrictionAxiomAccess.relationKeyword_2).surround[oneSpace]
+		axiom.regionFor.keyword(relationTargetRestrictionAxiomAccess.toKeyword_4).surround[oneSpace]
+		axiom.regionFor.feature(OmlPackage.Literals.RELATION_TARGET_RESTRICTION_AXIOM__TARGET).surround[oneSpace]
 	}
 
 	def dispatch void format(KeyAxiom axiom, extension IFormattableDocument document) {

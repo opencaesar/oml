@@ -145,6 +145,11 @@ public class VocabularyItemProvider extends TerminologyItemProvider {
 
 		newChildDescriptors.add
 			(createChildParameter
+				(OmlPackage.Literals.VOCABULARY__OWNED_IMPORTS,
+				 OmlFactory.eINSTANCE.createVocabularyUsage()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(OmlPackage.Literals.VOCABULARY__OWNED_STATEMENTS,
 				 OmlFactory.eINSTANCE.createAspect()));
 

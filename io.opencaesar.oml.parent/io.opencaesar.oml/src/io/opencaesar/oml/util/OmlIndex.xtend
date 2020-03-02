@@ -76,6 +76,7 @@ import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.EReference
 import org.eclipse.emf.ecore.util.ECrossReferenceAdapter
 import org.eclipse.core.runtime.Assert
+import io.opencaesar.oml.RelationTargetRestrictionAxiom
 
 /*
  * This API assumes the resource set has a CrossReferenceAdapter installed on all EObjects
@@ -327,6 +328,10 @@ class OmlIndex {
 		instance.findInverseReferencers(LinkAssertion, OmlPackage.Literals.LINK_ASSERTION__TARGET)
 	}
 
+	static def Iterable<RelationTargetRestrictionAxiom> findRelationTargetRestrictionAxiomsWithTarget(NamedInstance instance) {
+		instance.findInverseReferencers(RelationTargetRestrictionAxiom, OmlPackage.Literals.RELATION_TARGET_RESTRICTION_AXIOM__TARGET)
+	}
+
 	// ConceptInstance
 
 	static  def Iterable<ConceptInstanceReference> findConceptInstanceReferencesWithInstance(ConceptInstance instance) {
@@ -349,6 +354,8 @@ class OmlIndex {
 	
 	// VocabularyExtension
 	
+	// VocabularyUsage
+
 	// DescriptionStatement
 
 	// BundleImport
@@ -375,11 +382,15 @@ class OmlIndex {
 
 	// ScalarPropertyRangeRestrictionAxiom
 
+	// ScalarPropertyCardinalityRestrictionAxiom
+
 	// ScalarPropertyValueRestrictionAxiom
 
 	// StructuredPropertyRestrictionAxiom
 
 	// StructuredPropertyRangeRestrictionAxiom
+
+	// StructuredPropertyCardinalityRestrictionAxiom
 
 	// StructuredPropertyValueRestrictionAxiom
 	
@@ -388,6 +399,8 @@ class OmlIndex {
 	// RelationRangeRestrictionAxiom
 	
 	// RelationCardinalityRestrictionAxiom
+
+	// RelationTargetRestrictionAxiom
 
 	// Assertion
 	

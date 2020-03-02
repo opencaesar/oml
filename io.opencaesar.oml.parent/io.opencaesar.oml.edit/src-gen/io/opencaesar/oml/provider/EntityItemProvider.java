@@ -63,7 +63,7 @@ public class EntityItemProvider extends ClassifierItemProvider {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(OmlPackage.Literals.ENTITY__OWNED_RELATION_RESTRICTIONS);
-			childrenFeatures.add(OmlPackage.Literals.ENTITY__OWNED_KEY);
+			childrenFeatures.add(OmlPackage.Literals.ENTITY__OWNED_KEYS);
 		}
 		return childrenFeatures;
 	}
@@ -109,7 +109,7 @@ public class EntityItemProvider extends ClassifierItemProvider {
 
 		switch (notification.getFeatureID(Entity.class)) {
 			case OmlPackage.ENTITY__OWNED_RELATION_RESTRICTIONS:
-			case OmlPackage.ENTITY__OWNED_KEY:
+			case OmlPackage.ENTITY__OWNED_KEYS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -144,7 +144,12 @@ public class EntityItemProvider extends ClassifierItemProvider {
 
 		newChildDescriptors.add
 			(createChildParameter
-				(OmlPackage.Literals.ENTITY__OWNED_KEY,
+				(OmlPackage.Literals.ENTITY__OWNED_RELATION_RESTRICTIONS,
+				 OmlFactory.eINSTANCE.createRelationTargetRestrictionAxiom()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(OmlPackage.Literals.ENTITY__OWNED_KEYS,
 				 OmlFactory.eINSTANCE.createKeyAxiom()));
 	}
 

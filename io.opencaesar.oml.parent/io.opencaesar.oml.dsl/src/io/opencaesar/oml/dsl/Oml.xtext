@@ -53,20 +53,20 @@ Terminology:
 
 Vocabulary:
 	ownedAnnotations+=Annotation*
-	'vocabulary' iri=IRI ('with' separator=SEPARATOR)? 'as' prefix=ID  '{'
+	'vocabulary' iri=IRI ('with' separator=SeparatorKind)? 'as' prefix=ID  '{'
 		ownedImports+=VocabularyImport*
 		ownedStatements+=VocabularyStatement*
 	'}';
 
 Bundle:
 	ownedAnnotations+=Annotation*
-	'bundle' iri=IRI ('with' separator=SEPARATOR)? 'as' prefix=ID '{'
+	'bundle' iri=IRI ('with' separator=SeparatorKind)? 'as' prefix=ID '{'
 		ownedImports+=BundleImport*
 	'}';
 	
 Description:
 	ownedAnnotations+=Annotation*
-	'description' iri=IRI ('with' separator=SEPARATOR)? 'as' prefix=ID '{'
+	'description' iri=IRI ('with' separator=SeparatorKind)? 'as' prefix=ID '{'
 		ownedImports+=DescriptionImport*
 		ownedStatements+=DescriptionStatement*
 	'}';
@@ -100,7 +100,7 @@ Entity:
 Aspect:
 	ownedAnnotations+=Annotation*
 	'aspect' name=ID (':>' ownedSpecializations+=SpecializationAxiom (',' ownedSpecializations+=SpecializationAxiom)*)? ('['
-		(ownedKey=KeyAxiom)? 
+		(ownedKeys+=KeyAxiom)* 
 		ownedPropertyRestrictions+=PropertyRestrictionAxiom*
 		ownedRelationRestrictions+=RelationRestrictionAxiom*
 	']')?;
@@ -108,7 +108,7 @@ Aspect:
 Concept:
 	ownedAnnotations+=Annotation*
 	'concept' name=ID (':>' ownedSpecializations+=SpecializationAxiom (',' ownedSpecializations+=SpecializationAxiom)*)? ('['
-		(ownedKey=KeyAxiom)? 
+		(ownedKeys+=KeyAxiom)* 
 		ownedPropertyRestrictions+=PropertyRestrictionAxiom*
 		ownedRelationRestrictions+=RelationRestrictionAxiom*
 	']')?;
@@ -127,7 +127,7 @@ RelationEntity:
 		 (reflexive?='reflexive')? &
 		 (irreflexive?='irreflexive')? &
 		 (transitive?='transitive')?)
-		(ownedKey=KeyAxiom)? 
+		(ownedKeys+=KeyAxiom)*
 		ownedPropertyRestrictions+=PropertyRestrictionAxiom*
 		ownedRelationRestrictions+=RelationRestrictionAxiom*
 	']')?;
@@ -264,7 +264,7 @@ EntityReference:
 AspectReference:
 	ownedAnnotations+=Annotation*
 	'ref' 'aspect' aspect=[Aspect|Ref] (':>' ownedSpecializations+=SpecializationAxiom (',' ownedSpecializations+=SpecializationAxiom)*)? ('['
-		(ownedKey=KeyAxiom)? 
+		(ownedKeys+=KeyAxiom)* 
 		ownedPropertyRestrictions+=PropertyRestrictionAxiom*
 		ownedRelationRestrictions+=RelationRestrictionAxiom*
 	']')?;
@@ -272,7 +272,7 @@ AspectReference:
 ConceptReference:
 	ownedAnnotations+=Annotation*
 	'ref' 'concept' concept=[Concept|Ref] (':>' ownedSpecializations+=SpecializationAxiom (',' ownedSpecializations+=SpecializationAxiom)*)? ('['
-		(ownedKey=KeyAxiom)? 
+		(ownedKeys+=KeyAxiom)* 
 		ownedPropertyRestrictions+=PropertyRestrictionAxiom*
 		ownedRelationRestrictions+=RelationRestrictionAxiom*
 	']')?;
@@ -280,7 +280,7 @@ ConceptReference:
 RelationEntityReference:
 	ownedAnnotations+=Annotation*
 	'ref' 'relation' 'entity' entity=[RelationEntity|Ref] (':>' ownedSpecializations+=SpecializationAxiom (',' ownedSpecializations+=SpecializationAxiom)*)? ('['
-		(ownedKey=KeyAxiom)? 
+		(ownedKeys+=KeyAxiom)* 
 		ownedPropertyRestrictions+=PropertyRestrictionAxiom*
 		ownedRelationRestrictions+=RelationRestrictionAxiom*
 	']')?;
@@ -361,11 +361,16 @@ Import:
 	->DescriptionImport;
 
 VocabularyImport:
-	VocabularyExtension;
+	VocabularyExtension |
+	VocabularyUsage;
 
 VocabularyExtension:
 	ownedAnnotations+=Annotation*
 	'extends' uri=IRI ('as' prefix=ID)?;
+    	
+VocabularyUsage:
+	ownedAnnotations+=Annotation*
+	'uses' uri=IRI ('as' prefix=ID)?;
     	
 BundleImport:
 	BundleInclusion |
@@ -410,11 +415,16 @@ PropertyRestrictionAxiom:
 
 ScalarPropertyRestrictionAxiom:
 	ScalarPropertyRangeRestrictionAxiom |
+	ScalarPropertyCardinalityRestrictionAxiom |
 	ScalarPropertyValueRestrictionAxiom;
 
 ScalarPropertyRangeRestrictionAxiom:
 	ownedAnnotations+=Annotation*
 	'restricts' kind=RangeRestrictionKind 'scalar' 'property' property=[ScalarProperty|Ref] 'to' range=[Scalar|Ref];
+
+ScalarPropertyCardinalityRestrictionAxiom:
+	ownedAnnotations+=Annotation*
+	'restricts' 'scalar' 'property' property=[ScalarProperty|Ref] 'to' kind=CardinalityRestrictionKind cardinality=UnsignedInteger;
 
 ScalarPropertyValueRestrictionAxiom:
 	ownedAnnotations+=Annotation*
@@ -422,11 +432,16 @@ ScalarPropertyValueRestrictionAxiom:
 
 StructuredPropertyRestrictionAxiom:
 	StructuredPropertyRangeRestrictionAxiom |
+	StructuredPropertyCardinalityRestrictionAxiom |
 	StructuredPropertyValueRestrictionAxiom;
 
 StructuredPropertyRangeRestrictionAxiom:
 	ownedAnnotations+=Annotation*
 	'restricts' kind=RangeRestrictionKind 'structured' 'property' property=[StructuredProperty|Ref] 'to' range=[Structure|Ref];
+
+StructuredPropertyCardinalityRestrictionAxiom:
+	ownedAnnotations+=Annotation*
+	'restricts' 'structured' 'property' property=[StructuredProperty|Ref] 'to' kind=CardinalityRestrictionKind cardinality=UnsignedInteger;
 
 StructuredPropertyValueRestrictionAxiom:
 	ownedAnnotations+=Annotation*
@@ -434,7 +449,8 @@ StructuredPropertyValueRestrictionAxiom:
 
 RelationRestrictionAxiom:
 	RelationRangeRestrictionAxiom |
-	RelationCardinalityRestrictionAxiom;
+	RelationCardinalityRestrictionAxiom |
+	RelationTargetRestrictionAxiom;
 	
 RelationRangeRestrictionAxiom:
 	ownedAnnotations+=Annotation*
@@ -443,6 +459,10 @@ RelationRangeRestrictionAxiom:
 RelationCardinalityRestrictionAxiom:
 	ownedAnnotations+=Annotation*
 	'restricts' 'relation' relation=[Relation|Ref] 'to' kind=CardinalityRestrictionKind cardinality=UnsignedInteger;
+
+RelationTargetRestrictionAxiom:
+	ownedAnnotations+=Annotation*
+	'restricts' 'relation' relation=[Relation|Ref] 'to' target=[NamedInstance|Ref];
 
 KeyAxiom:
 	'key' properties+=[ScalarProperty|Ref] (',' properties+=[ScalarProperty|Ref])*;
@@ -526,6 +546,10 @@ BooleanLiteral:
 QuotedLiteral:
 	value=STRING (('^^' type=[Scalar|Ref]) | ('$' langTag=ID))?;
 
+enum SeparatorKind:
+	hash |
+	slash;
+
 enum RangeRestrictionKind:
 	all |
 	some;
@@ -566,8 +590,6 @@ terminal INTEGER_STR:									('+'|'-')? DIGIT+;
 terminal DECIMAL_STR:									('+'|'-')? (DIGIT+('.'DIGIT*)? | ('.'DIGIT+));
 
 terminal DOUBLE_STR:									('+'|'-')? (DIGIT+('.'DIGIT*)? | ('.'DIGIT+)) (('e'|'E') ('+'|'-')? DIGIT+)?;
-
-terminal SEPARATOR:										'#'|'/';
 
 terminal STRING:										('"' (!('"'|'\\') | '\\'.)* '"') | ("'" (!("'"|'\\') | '\\'.)* "'") | ("'''" -> "'''") | '"""' -> '"""';
 

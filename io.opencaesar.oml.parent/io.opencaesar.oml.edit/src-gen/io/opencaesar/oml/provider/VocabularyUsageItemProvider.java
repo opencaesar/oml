@@ -1,36 +1,48 @@
 /**
+ * 
+ * Copyright 2019 California Institute of Technology ("Caltech").
+ * U.S. Government sponsorship acknowledged.
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * 
  */
 package io.opencaesar.oml.provider;
 
 
-import io.opencaesar.oml.DecimalLiteral;
-import io.opencaesar.oml.OmlPackage;
-import java.math.BigDecimal;
+import io.opencaesar.oml.VocabularyUsage;
+
 import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 
-import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
-import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
-import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
- * This is the item provider adapter for a {@link io.opencaesar.oml.DecimalLiteral} object.
+ * This is the item provider adapter for a {@link io.opencaesar.oml.VocabularyUsage} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class DecimalLiteralItemProvider extends LiteralItemProvider {
+public class VocabularyUsageItemProvider extends VocabularyImportItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public DecimalLiteralItemProvider(AdapterFactory adapterFactory) {
+	public VocabularyUsageItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -45,42 +57,19 @@ public class DecimalLiteralItemProvider extends LiteralItemProvider {
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addValuePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Value feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addValuePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_DecimalLiteral_value_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_DecimalLiteral_value_feature", "_UI_DecimalLiteral_type"),
-				 OmlPackage.Literals.DECIMAL_LITERAL__VALUE,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This returns DecimalLiteral.gif.
+	 * This returns VocabularyUsage.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/DecimalLiteral"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/VocabularyUsage"));
 	}
 
 	/**
@@ -91,11 +80,10 @@ public class DecimalLiteralItemProvider extends LiteralItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		BigDecimal labelValue = ((DecimalLiteral)object).getValue();
-		String label = labelValue == null ? null : labelValue.toString();
+		String label = ((VocabularyUsage)object).getUri();
 		return label == null || label.length() == 0 ?
-			getString("_UI_DecimalLiteral_type") :
-			getString("_UI_DecimalLiteral_type") + " " + label;
+			getString("_UI_VocabularyUsage_type") :
+			getString("_UI_VocabularyUsage_type") + " " + label;
 	}
 
 
@@ -109,12 +97,6 @@ public class DecimalLiteralItemProvider extends LiteralItemProvider {
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
-
-		switch (notification.getFeatureID(DecimalLiteral.class)) {
-			case OmlPackage.DECIMAL_LITERAL__VALUE:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-				return;
-		}
 		super.notifyChanged(notification);
 	}
 
