@@ -23,16 +23,17 @@ import io.opencaesar.oml.BundleExtension
 import io.opencaesar.oml.BundleInclusion
 import io.opencaesar.oml.Description
 import io.opencaesar.oml.DescriptionExtension
+import io.opencaesar.oml.DescriptionUsage
 import io.opencaesar.oml.Member
 import io.opencaesar.oml.OmlPackage
+import io.opencaesar.oml.Terminology
 import io.opencaesar.oml.Vocabulary
 import io.opencaesar.oml.VocabularyExtension
+import io.opencaesar.oml.VocabularyUsage
 import org.eclipse.xtext.validation.Check
 import org.eclipse.xtext.validation.ValidationMessageAcceptor
 
 import static extension io.opencaesar.oml.util.OmlRead.*
-import io.opencaesar.oml.DescriptionUsage
-import io.opencaesar.oml.Terminology
 
 /**
  * This class contains custom validation rules. 
@@ -45,6 +46,13 @@ class OmlValidator extends AbstractOmlValidator {
 		if (!(_extension.importedOntology instanceof Vocabulary)) {
 			error("Couldn't resolve this URL to a vocabulary", OmlPackage.Literals::IMPORT__URI,
 				ValidationMessageAcceptor::INSIGNIFICANT_INDEX, "INVALID_VOCABULARY_EXTENSION_URL", _extension.uri)
+		}
+	}
+
+	@Check def void checkVocabularyUsage_URL(VocabularyUsage usage) {
+		if (!(usage.importedOntology instanceof Description)) {
+			error("Couldn't resolve this URL to a description", OmlPackage.Literals::IMPORT__URI,
+				ValidationMessageAcceptor::INSIGNIFICANT_INDEX, "INVALID_VOCABULARY_USAGE_URL", usage.uri)
 		}
 	}
 

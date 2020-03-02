@@ -28,7 +28,7 @@
             id="io.opencaesar.oml.presentation.OmlEditorID"
             name="%_UI_OmlEditor_label"
             icon="icons/full/obj16/OmlModelFile.gif"
-            extensions="oml"
+            extensions="omlxmi"
             class="io.opencaesar.oml.presentation.OmlEditor"
             contributorClass="io.opencaesar.oml.presentation.OmlActionBarContributor">
       </editor>

@@ -43,6 +43,7 @@ import io.opencaesar.oml.Literal
 import io.opencaesar.oml.NamedInstance
 import io.opencaesar.oml.OmlPackage
 import io.opencaesar.oml.Relation
+import io.opencaesar.oml.RelationCardinalityRestrictionAxiom
 import io.opencaesar.oml.RelationEntity
 import io.opencaesar.oml.RelationEntityPredicate
 import io.opencaesar.oml.RelationEntityReference
@@ -52,11 +53,13 @@ import io.opencaesar.oml.RelationPredicate
 import io.opencaesar.oml.RelationRangeRestrictionAxiom
 import io.opencaesar.oml.RelationReference
 import io.opencaesar.oml.RelationRestrictionAxiom
+import io.opencaesar.oml.RelationTargetRestrictionAxiom
 import io.opencaesar.oml.RelationTypeAssertion
 import io.opencaesar.oml.Rule
 import io.opencaesar.oml.RuleReference
 import io.opencaesar.oml.Scalar
 import io.opencaesar.oml.ScalarProperty
+import io.opencaesar.oml.ScalarPropertyCardinalityRestrictionAxiom
 import io.opencaesar.oml.ScalarPropertyRangeRestrictionAxiom
 import io.opencaesar.oml.ScalarPropertyReference
 import io.opencaesar.oml.ScalarPropertyRestrictionAxiom
@@ -67,15 +70,16 @@ import io.opencaesar.oml.Structure
 import io.opencaesar.oml.StructureInstance
 import io.opencaesar.oml.StructureReference
 import io.opencaesar.oml.StructuredProperty
+import io.opencaesar.oml.StructuredPropertyCardinalityRestrictionAxiom
 import io.opencaesar.oml.StructuredPropertyRangeRestrictionAxiom
 import io.opencaesar.oml.StructuredPropertyReference
 import io.opencaesar.oml.StructuredPropertyRestrictionAxiom
 import io.opencaesar.oml.StructuredPropertyValueAssertion
 import java.util.HashSet
+import org.eclipse.core.runtime.Assert
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.EReference
 import org.eclipse.emf.ecore.util.ECrossReferenceAdapter
-import org.eclipse.core.runtime.Assert
 
 /*
  * This API assumes the resource set has a CrossReferenceAdapter installed on all EObjects
@@ -157,6 +161,10 @@ class OmlIndex {
 		entity.findInverseReferencers(RelationRangeRestrictionAxiom, OmlPackage.Literals.RELATION_RANGE_RESTRICTION_AXIOM__RANGE)
 	}
 
+	static def Iterable<RelationCardinalityRestrictionAxiom> findRelationCardinalityRestrictionAxiomsWithRange(Entity entity) {
+		entity.findInverseReferencers(RelationCardinalityRestrictionAxiom, OmlPackage.Literals.RELATION_CARDINALITY_RESTRICTION_AXIOM__RANGE)
+	}
+
 	static def Iterable<EntityPredicate> findEntityPredicatesWithEntity(Entity entity) {
 		entity.findInverseReferencers(EntityPredicate, OmlPackage.Literals.ENTITY_PREDICATE__ENTITY)
 	}
@@ -207,6 +215,10 @@ class OmlIndex {
 
 	static  def Iterable<StructuredPropertyRangeRestrictionAxiom> findStructuredPropertyRangeRestrictionAxiomsWithRange(Structure structure) {
 		structure.findInverseReferencers(StructuredPropertyRangeRestrictionAxiom, OmlPackage.Literals.STRUCTURED_PROPERTY_RANGE_RESTRICTION_AXIOM__RANGE)
+	}
+
+	static  def Iterable<StructuredPropertyCardinalityRestrictionAxiom> findStructuredPropertyCardinalityRestrictionAxiomsWithRange(Structure structure) {
+		structure.findInverseReferencers(StructuredPropertyCardinalityRestrictionAxiom, OmlPackage.Literals.STRUCTURED_PROPERTY_CARDINALITY_RESTRICTION_AXIOM__RANGE)
 	}
 
 	// Property
@@ -263,6 +275,10 @@ class OmlIndex {
 
 	static def Iterable<ScalarPropertyRangeRestrictionAxiom> findScalarPropertyRangeRestrictionAxiomsWithRange(Scalar scalar) {
 		scalar.findInverseReferencers(ScalarPropertyRangeRestrictionAxiom, OmlPackage.Literals.SCALAR_PROPERTY_RANGE_RESTRICTION_AXIOM__RANGE)
+	}
+
+	static def Iterable<ScalarPropertyCardinalityRestrictionAxiom> findScalarPropertyCardinalityRestrictionAxiomsWithRange(Scalar scalar) {
+		scalar.findInverseReferencers(ScalarPropertyCardinalityRestrictionAxiom, OmlPackage.Literals.SCALAR_PROPERTY_CARDINALITY_RESTRICTION_AXIOM__RANGE)
 	}
 
 	static def Iterable<Literal> findLiteralsWithType(Scalar scalar) {
@@ -327,6 +343,10 @@ class OmlIndex {
 		instance.findInverseReferencers(LinkAssertion, OmlPackage.Literals.LINK_ASSERTION__TARGET)
 	}
 
+	static def Iterable<RelationTargetRestrictionAxiom> findRelationTargetRestrictionAxiomsWithTarget(NamedInstance instance) {
+		instance.findInverseReferencers(RelationTargetRestrictionAxiom, OmlPackage.Literals.RELATION_TARGET_RESTRICTION_AXIOM__TARGET)
+	}
+
 	// ConceptInstance
 
 	static  def Iterable<ConceptInstanceReference> findConceptInstanceReferencesWithInstance(ConceptInstance instance) {
@@ -349,6 +369,8 @@ class OmlIndex {
 	
 	// VocabularyExtension
 	
+	// VocabularyUsage
+
 	// DescriptionStatement
 
 	// BundleImport
@@ -375,11 +397,15 @@ class OmlIndex {
 
 	// ScalarPropertyRangeRestrictionAxiom
 
+	// ScalarPropertyCardinalityRestrictionAxiom
+
 	// ScalarPropertyValueRestrictionAxiom
 
 	// StructuredPropertyRestrictionAxiom
 
 	// StructuredPropertyRangeRestrictionAxiom
+
+	// StructuredPropertyCardinalityRestrictionAxiom
 
 	// StructuredPropertyValueRestrictionAxiom
 	
@@ -388,6 +414,8 @@ class OmlIndex {
 	// RelationRangeRestrictionAxiom
 	
 	// RelationCardinalityRestrictionAxiom
+
+	// RelationTargetRestrictionAxiom
 
 	// Assertion
 	

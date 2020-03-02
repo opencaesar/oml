@@ -52,13 +52,13 @@ import io.opencaesar.oml.EnumeratedScalarReference
 import io.opencaesar.oml.FacetedScalar
 import io.opencaesar.oml.FacetedScalarReference
 import io.opencaesar.oml.ForwardRelation
+import io.opencaesar.oml.IdentifiedElement
 import io.opencaesar.oml.IntegerLiteral
 import io.opencaesar.oml.InverseRelation
 import io.opencaesar.oml.KeyAxiom
 import io.opencaesar.oml.LinkAssertion
 import io.opencaesar.oml.Literal
 import io.opencaesar.oml.Member
-import io.opencaesar.oml.IdentifiedElement
 import io.opencaesar.oml.NamedInstance
 import io.opencaesar.oml.NamedInstanceReference
 import io.opencaesar.oml.Ontology
@@ -77,15 +77,18 @@ import io.opencaesar.oml.RelationInstanceReference
 import io.opencaesar.oml.RelationPredicate
 import io.opencaesar.oml.RelationRangeRestrictionAxiom
 import io.opencaesar.oml.RelationReference
+import io.opencaesar.oml.RelationTargetRestrictionAxiom
 import io.opencaesar.oml.RelationTypeAssertion
 import io.opencaesar.oml.Rule
 import io.opencaesar.oml.RuleReference
 import io.opencaesar.oml.Scalar
 import io.opencaesar.oml.ScalarProperty
+import io.opencaesar.oml.ScalarPropertyCardinalityRestrictionAxiom
 import io.opencaesar.oml.ScalarPropertyRangeRestrictionAxiom
 import io.opencaesar.oml.ScalarPropertyReference
 import io.opencaesar.oml.ScalarPropertyValueAssertion
 import io.opencaesar.oml.ScalarPropertyValueRestrictionAxiom
+import io.opencaesar.oml.SeparatorKind
 import io.opencaesar.oml.SpecializableTerm
 import io.opencaesar.oml.SpecializableTermReference
 import io.opencaesar.oml.SpecializationAxiom
@@ -93,6 +96,7 @@ import io.opencaesar.oml.Structure
 import io.opencaesar.oml.StructureInstance
 import io.opencaesar.oml.StructureReference
 import io.opencaesar.oml.StructuredProperty
+import io.opencaesar.oml.StructuredPropertyCardinalityRestrictionAxiom
 import io.opencaesar.oml.StructuredPropertyRangeRestrictionAxiom
 import io.opencaesar.oml.StructuredPropertyReference
 import io.opencaesar.oml.StructuredPropertyValueAssertion
@@ -100,6 +104,7 @@ import io.opencaesar.oml.StructuredPropertyValueRestrictionAxiom
 import io.opencaesar.oml.Vocabulary
 import io.opencaesar.oml.VocabularyExtension
 import io.opencaesar.oml.VocabularyStatement
+import io.opencaesar.oml.VocabularyUsage
 import java.math.BigDecimal
 import java.util.ArrayList
 import java.util.HashMap
@@ -236,7 +241,7 @@ class OmlWriter {
 
 	// Ontology
 	
-	def <T extends Ontology> createOntology(Class<T> type, String iri, String separator, String prefix, URI resourceURI) {
+	def <T extends Ontology> createOntology(Class<T> type, String iri, SeparatorKind separator, String prefix, URI resourceURI) {
 		val ontology = create(type)
 		ontology.iri = iri
 		ontology.separator = separator
@@ -247,19 +252,19 @@ class OmlWriter {
 
 	// Vocabulary
 
-	def createVocabulary(String iri, String separator, String name, URI resourceURI) {
+	def createVocabulary(String iri, SeparatorKind separator, String name, URI resourceURI) {
 		return createOntology(Vocabulary, iri, separator, name, resourceURI)
 	}
 
 	// Bundle
 	
-	def createBundle(String iri, String separator, String name, URI resourceURI) {
+	def createBundle(String iri, SeparatorKind separator, String name, URI resourceURI) {
 		return createOntology(Bundle, iri, separator, name, resourceURI)
 	}
 
 	// Description
 	
-	def createDescription(String iri, String separator, String name, URI resourceURI) {
+	def createDescription(String iri, SeparatorKind separator, String name, URI resourceURI) {
 		return createOntology(Description, iri, separator, name, resourceURI)
 	}
 
@@ -545,6 +550,16 @@ class OmlWriter {
 		return _extension
 	}
 
+	// VocabularyUsage
+	
+	def addVocabularyUsage(Vocabulary vocabulary, String usingVocabularyURI, String usedDescriptionPrefix) {
+		val _extension = create(VocabularyUsage)
+		_extension.uri = usingVocabularyURI
+		_extension.prefix = usedDescriptionPrefix
+		vocabulary.ownedImports += _extension
+		return _extension
+	}
+
 	// BundleInclusion
 	
 	def addBundleInclusion(Bundle bundle, String includedVocabularyURI, String includedVocabularyPrefix) {
@@ -619,6 +634,25 @@ class OmlWriter {
 		return axiom
 	}
 
+	// ScalarPropertyCardinalityRestrictionAxiom
+
+	def addScalarPropertyCardinalityRestrictionAxiom(Vocabulary vocabulary, String entityIri, String propertyIri, CardinalityRestrictionKind kind, long cardinality, String rangeIri) {
+		val axiom = create(ScalarPropertyCardinalityRestrictionAxiom)
+		defer.add [axiom.property = resolve(ScalarProperty, propertyIri)]
+		axiom.kind = kind
+		axiom.cardinality = cardinality
+		defer.add [axiom.range = resolve(Scalar, rangeIri)]
+		defer.add [
+			val entity = resolve(Entity, entityIri)
+			if (entity.vocabulary == vocabulary) {
+				entity.ownedPropertyRestrictions += axiom
+			} else {
+				vocabulary.getOrAddReference(entity, EntityReference).ownedPropertyRestrictions += axiom 
+			}
+		]
+		return axiom
+	}
+
 	// ScalarPropertyValueRestrictionAxiom
 
 	def addScalarPropertyValueRestrictionAxiom(Vocabulary vocabulary, String typeIri, String propertyIri, Literal value) {
@@ -649,6 +683,25 @@ class OmlWriter {
 				type.ownedPropertyRestrictions += axiom
 			} else {
 				vocabulary.getOrAddReference(type, ClassifierReference).ownedPropertyRestrictions += axiom 
+			}
+		]
+		return axiom
+	}
+
+	// StructuredPropertyCardinalityRestrictionAxiom
+
+	def addStructuredPropertyCardinalityRestrictionAxiom(Vocabulary vocabulary, String entityIri, String propertyIri, CardinalityRestrictionKind kind, long cardinality, String rangeIri) {
+		val axiom = create(StructuredPropertyCardinalityRestrictionAxiom)
+		defer.add [axiom.property = resolve(StructuredProperty, propertyIri)]
+		axiom.kind = kind
+		axiom.cardinality = cardinality
+		defer.add [axiom.range = resolve(Structure, rangeIri)]
+		defer.add [
+			val entity = resolve(Entity, entityIri)
+			if (entity.vocabulary == vocabulary) {
+				entity.ownedPropertyRestrictions += axiom
+			} else {
+				vocabulary.getOrAddReference(entity, EntityReference).ownedPropertyRestrictions += axiom 
 			}
 		]
 		return axiom
@@ -691,11 +744,29 @@ class OmlWriter {
 	
 	// RelationCardinalityRestrictionAxiom
 
-	def addRelationCardinalityRestrictionAxiom(Vocabulary vocabulary, String entityIri, String relationIri, CardinalityRestrictionKind kind, long cardinality) {
+	def addRelationCardinalityRestrictionAxiom(Vocabulary vocabulary, String entityIri, String relationIri, CardinalityRestrictionKind kind, long cardinality, String rangeIri) {
 		val axiom = create(RelationCardinalityRestrictionAxiom)
 		defer.add [axiom.relation = resolve(Relation, relationIri)]
 		axiom.kind = kind
 		axiom.cardinality = cardinality
+		defer.add [axiom.range = resolve(Entity, rangeIri)]
+		defer.add [
+			val entity = resolve(Entity, entityIri)
+			if (entity.vocabulary == vocabulary) {
+				entity.ownedRelationRestrictions += axiom
+			} else {
+				vocabulary.getOrAddReference(entity, EntityReference).ownedRelationRestrictions += axiom 
+			}
+		]
+		return axiom
+	}
+
+	// RelationTargetRestrictionAxiom
+	
+	def addRelationTargetRestrictionAxiom(Vocabulary vocabulary, String entityIri, String relationIri, NamedInstance target) {
+		val axiom = create(RelationTargetRestrictionAxiom)
+		defer.add [axiom.relation = resolve(Relation, relationIri)]
+		axiom.target = target
 		defer.add [
 			val entity = resolve(Entity, entityIri)
 			if (entity.vocabulary == vocabulary) {
@@ -715,9 +786,9 @@ class OmlWriter {
 		defer.add [
 			val entity = resolve(Entity, entityIri)
 			if (entity.vocabulary == vocabulary) {
-				entity.ownedKey = axiom
+				entity.ownedKeys += axiom
 			} else {
-				vocabulary.getOrAddReference(entity, EntityReference).ownedKey = axiom 
+				vocabulary.getOrAddReference(entity, EntityReference).ownedKeys += axiom 
 			}
 		]
 		return axiom

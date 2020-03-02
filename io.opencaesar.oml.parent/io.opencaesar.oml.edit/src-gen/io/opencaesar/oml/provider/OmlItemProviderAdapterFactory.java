@@ -877,6 +877,29 @@ public class OmlItemProviderAdapterFactory extends OmlAdapterFactory implements 
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.VocabularyUsage} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected VocabularyUsageItemProvider vocabularyUsageItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link io.opencaesar.oml.VocabularyUsage}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createVocabularyUsageAdapter() {
+		if (vocabularyUsageItemProvider == null) {
+			vocabularyUsageItemProvider = new VocabularyUsageItemProvider(this);
+		}
+
+		return vocabularyUsageItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.BundleInclusion} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1015,6 +1038,29 @@ public class OmlItemProviderAdapterFactory extends OmlAdapterFactory implements 
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.ScalarPropertyCardinalityRestrictionAxiom} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ScalarPropertyCardinalityRestrictionAxiomItemProvider scalarPropertyCardinalityRestrictionAxiomItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link io.opencaesar.oml.ScalarPropertyCardinalityRestrictionAxiom}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createScalarPropertyCardinalityRestrictionAxiomAdapter() {
+		if (scalarPropertyCardinalityRestrictionAxiomItemProvider == null) {
+			scalarPropertyCardinalityRestrictionAxiomItemProvider = new ScalarPropertyCardinalityRestrictionAxiomItemProvider(this);
+		}
+
+		return scalarPropertyCardinalityRestrictionAxiomItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.ScalarPropertyValueRestrictionAxiom} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1058,6 +1104,29 @@ public class OmlItemProviderAdapterFactory extends OmlAdapterFactory implements 
 		}
 
 		return structuredPropertyRangeRestrictionAxiomItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.StructuredPropertyCardinalityRestrictionAxiom} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected StructuredPropertyCardinalityRestrictionAxiomItemProvider structuredPropertyCardinalityRestrictionAxiomItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link io.opencaesar.oml.StructuredPropertyCardinalityRestrictionAxiom}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createStructuredPropertyCardinalityRestrictionAxiomAdapter() {
+		if (structuredPropertyCardinalityRestrictionAxiomItemProvider == null) {
+			structuredPropertyCardinalityRestrictionAxiomItemProvider = new StructuredPropertyCardinalityRestrictionAxiomItemProvider(this);
+		}
+
+		return structuredPropertyCardinalityRestrictionAxiomItemProvider;
 	}
 
 	/**
@@ -1150,6 +1219,29 @@ public class OmlItemProviderAdapterFactory extends OmlAdapterFactory implements 
 		}
 
 		return relationCardinalityRestrictionAxiomItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.RelationTargetRestrictionAxiom} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected RelationTargetRestrictionAxiomItemProvider relationTargetRestrictionAxiomItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link io.opencaesar.oml.RelationTargetRestrictionAxiom}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createRelationTargetRestrictionAxiomAdapter() {
+		if (relationTargetRestrictionAxiomItemProvider == null) {
+			relationTargetRestrictionAxiomItemProvider = new RelationTargetRestrictionAxiomItemProvider(this);
+		}
+
+		return relationTargetRestrictionAxiomItemProvider;
 	}
 
 	/**
@@ -1614,18 +1706,22 @@ public class OmlItemProviderAdapterFactory extends OmlAdapterFactory implements 
 		if (conceptInstanceReferenceItemProvider != null) conceptInstanceReferenceItemProvider.dispose();
 		if (relationInstanceReferenceItemProvider != null) relationInstanceReferenceItemProvider.dispose();
 		if (vocabularyExtensionItemProvider != null) vocabularyExtensionItemProvider.dispose();
+		if (vocabularyUsageItemProvider != null) vocabularyUsageItemProvider.dispose();
 		if (bundleInclusionItemProvider != null) bundleInclusionItemProvider.dispose();
 		if (bundleExtensionItemProvider != null) bundleExtensionItemProvider.dispose();
 		if (descriptionUsageItemProvider != null) descriptionUsageItemProvider.dispose();
 		if (descriptionExtensionItemProvider != null) descriptionExtensionItemProvider.dispose();
 		if (specializationAxiomItemProvider != null) specializationAxiomItemProvider.dispose();
 		if (scalarPropertyRangeRestrictionAxiomItemProvider != null) scalarPropertyRangeRestrictionAxiomItemProvider.dispose();
+		if (scalarPropertyCardinalityRestrictionAxiomItemProvider != null) scalarPropertyCardinalityRestrictionAxiomItemProvider.dispose();
 		if (scalarPropertyValueRestrictionAxiomItemProvider != null) scalarPropertyValueRestrictionAxiomItemProvider.dispose();
 		if (structuredPropertyRangeRestrictionAxiomItemProvider != null) structuredPropertyRangeRestrictionAxiomItemProvider.dispose();
+		if (structuredPropertyCardinalityRestrictionAxiomItemProvider != null) structuredPropertyCardinalityRestrictionAxiomItemProvider.dispose();
 		if (structuredPropertyValueRestrictionAxiomItemProvider != null) structuredPropertyValueRestrictionAxiomItemProvider.dispose();
 		if (relationRestrictionAxiomItemProvider != null) relationRestrictionAxiomItemProvider.dispose();
 		if (relationRangeRestrictionAxiomItemProvider != null) relationRangeRestrictionAxiomItemProvider.dispose();
 		if (relationCardinalityRestrictionAxiomItemProvider != null) relationCardinalityRestrictionAxiomItemProvider.dispose();
+		if (relationTargetRestrictionAxiomItemProvider != null) relationTargetRestrictionAxiomItemProvider.dispose();
 		if (keyAxiomItemProvider != null) keyAxiomItemProvider.dispose();
 		if (conceptTypeAssertionItemProvider != null) conceptTypeAssertionItemProvider.dispose();
 		if (relationTypeAssertionItemProvider != null) relationTypeAssertionItemProvider.dispose();

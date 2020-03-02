@@ -102,6 +102,7 @@ import io.opencaesar.oml.Vocabulary
 import io.opencaesar.oml.VocabularyExtension
 import io.opencaesar.oml.VocabularyImport
 import io.opencaesar.oml.VocabularyStatement
+import io.opencaesar.oml.VocabularyUsage
 import java.util.ArrayList
 import java.util.Collections
 import java.util.LinkedHashMap
@@ -302,8 +303,16 @@ class OmlRead {
 		vocabulary.ownedImports.filter(VocabularyExtension)
 	}
 
+	static def Iterable<VocabularyUsage> getUsagesWithSource(Vocabulary vocabulary) {
+		vocabulary.ownedImports.filter(VocabularyUsage)
+	}
+
 	static def Iterable<Vocabulary> getExtendedVocabularies(Vocabulary vocabulary) {
 		vocabulary.extensionsWithSource.map[extendedVocabulary]
+	}
+
+	static def Iterable<Description> getUsedDescriptions(Vocabulary vocabulary) {
+		vocabulary.usagesWithSource.map[usedDescription]
 	}
 
 	static dispatch def Iterable<VocabularyStatement> getStatements(Vocabulary ontology) {
@@ -675,6 +684,16 @@ class OmlRead {
 		^extension.importedOntology as Vocabulary
 	}
 
+	// VocabularyUsage
+	
+	static def Vocabulary getUsingVocabulary(VocabularyUsage usage) {
+		usage.owningVocabulary
+	}
+
+	static def Description getUsedDescription(VocabularyUsage usage) {
+		usage.importedOntology as Description
+	}
+
 	// BundleImport
 	
 	static dispatch def Ontology getImportingOntology(BundleImport ^import) {
@@ -747,7 +766,7 @@ class OmlRead {
 	static dispatch def Term getRestrictedTerm(RestrictionAxiom axiom) {
 	}
 
-	//PropertyRestrictionAxiom
+	// PropertyRestrictionAxiom
 
 	static dispatch def Classifier getRestrictingTypeُ(PropertyRestrictionAxiom axiom) {
 		if (axiom.owningReference !== null) {
@@ -765,6 +784,8 @@ class OmlRead {
 
 	// ScalarPropertyRangeRestrictionAxiom
 		
+	// ScalarPropertyCardinalityRestrictionAxiom
+
 	// ScalarPropertyValueRestrictionAxiom
 	
 	// StructuredPropertyRestrictionAxiom
@@ -775,6 +796,8 @@ class OmlRead {
 
 	// StructuredPropertyRangeRestrictionAxiom
 	
+	// StructuredPropertyCardinalityRestrictionAxiom
+
 	// StructuredPropertyValueRestrictionAxiom
 	
 	// RelationRestrictionAxiom
@@ -799,6 +822,8 @@ class OmlRead {
 	
 	// RelationCardinalityRestrictionAxiom
 	
+	// RelationTargetRestrictionAxiom
+
 	// KeyAxiom
 
 	static def Entity getKeyedEntity(KeyAxiom axiom) {

@@ -388,6 +388,11 @@ public class OmlVisitor<T> extends OmlSwitch<T> {
 	}
 
 	@Override
+	public T caseScalarPropertyCardinalityRestrictionAxiom(ScalarPropertyCardinalityRestrictionAxiom object) {
+		return null;
+	}
+
+	@Override
 	public T caseScalarPropertyValueRestrictionAxiom(ScalarPropertyValueRestrictionAxiom object) {
 		return null;
 	}
@@ -399,6 +404,11 @@ public class OmlVisitor<T> extends OmlSwitch<T> {
 
 	@Override
 	public T caseStructuredPropertyRangeRestrictionAxiom(StructuredPropertyRangeRestrictionAxiom object) {
+		return null;
+	}
+
+	@Override
+	public T caseStructuredPropertyCardinalityRestrictionAxiom(StructuredPropertyCardinalityRestrictionAxiom object) {
 		return null;
 	}
 
@@ -419,6 +429,11 @@ public class OmlVisitor<T> extends OmlSwitch<T> {
 
 	@Override
 	public T caseRelationCardinalityRestrictionAxiom(RelationCardinalityRestrictionAxiom object) {
+		return null;
+	}
+
+	@Override
+	public T caseRelationTargetRestrictionAxiom(RelationTargetRestrictionAxiom object) {
 		return null;
 	}
 
