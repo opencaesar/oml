@@ -5,9 +5,7 @@ package io.opencaesar.oml.provider;
 
 import io.opencaesar.oml.DecimalLiteral;
 import io.opencaesar.oml.OmlPackage;
-
 import java.math.BigDecimal;
-
 import java.util.Collection;
 import java.util.List;
 

@@ -18,7 +18,8 @@
  */
 package io.opencaesar.oml.util
 
-import io.opencaesar.oml.Import
+import io.opencaesar.oml.Member
+import io.opencaesar.oml.OmlPackage
 import java.io.IOException
 import java.io.OutputStream
 import java.util.HashMap
@@ -30,38 +31,43 @@ import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.xmi.XMIResource
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl
 
-import static extension io.opencaesar.oml.util.OmlRead.*
-import io.opencaesar.oml.OmlPackage
-
 class OmlXMIResource extends XMIResourceImpl {
 
 	public static val EXTENSION = "omlxmi"
 
+	val idToEObjectMap = new HashMap<String, EObject>
+	val idToEObjectMapAdapter = new AdapterImpl {
+		override notifyChanged(Notification notification) {
+			if (notification.feature === OmlPackage.Literals.MEMBER__NAME) {
+				if (notification.oldValue !== null) {
+					if (idToEObjectMap.remove(notification.oldValue) !== null) {
+						if (notification.newValue !== null) {
+							idToEObjectMap.put(notification.newValue as String, notification.notifier as EObject)
+						}
+					}
+				}
+			}
+		}
+	} 
+
 	new(URI uri) {
 		super(uri)
 		getDefaultSaveOptions().put(XMIResource.OPTION_SAVE_TYPE_INFORMATION, Boolean.TRUE);
+		intrinsicIDToEObjectMap = idToEObjectMap
 	}
-
-	override protected useUUIDs() {
-		true
-	}
-
-	override protected useIDAttributes() {
-		false
-	}
-
+	
 	override attached(EObject eObject) {
-		if (eObject instanceof Import) {
-			eAdapters += new AdapterImpl {
-	  			override notifyChanged(Notification notification) {
-	  				super.notifyChanged(notification)
-	  				if (notification.feature === OmlPackage.Literals.IMPORT__URI) {
-						eObject.importedOntology
-					}
-	  			}
-			}
-			eObject.importedOntology
+		super.attached(eObject)
+		if (eObject instanceof Member) {
+			eObject.eAdapters.add(idToEObjectMapAdapter)
 		}
+	}
+
+	override detached(EObject eObject) {
+		if (eObject instanceof Member) {
+			eObject.eAdapters.remove(idToEObjectMapAdapter)
+		}
+		super.detached(eObject)
 	}
 
 	override doSave(OutputStream outputStream, Map<?, ?> options) throws IOException {
