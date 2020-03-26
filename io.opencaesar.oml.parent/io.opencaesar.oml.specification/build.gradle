@@ -1,8 +1,8 @@
 apply plugin: 'io.opencaesar.ecore2bikeshed'
 
 ecore2bikeshed {
-	inputPath = 'io.opencaesar.oml/src/io/opencaesar/oml'
-	outputPath = 'io.opencaesar.oml.specification/src-gen'
+	inputPath = '../io.opencaesar.oml/src/io/opencaesar/oml'
+	outputPath = 'src-gen'
 }
 
 task copySrc(type: Copy) {
