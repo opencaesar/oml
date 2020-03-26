@@ -1221,9 +1221,9 @@ Possible extra rowspan handling
 		}
 	}
 </style>
-  <meta content="Bikeshed version 5721fde7f6b8111f662b83b678f9e181a9838206" name="generator">
+  <meta content="Bikeshed version 61a6136a, updated Wed Mar 25 07:38:53 2020 -0700" name="generator">
   <link href="https://github.com/opencaesar/oml" rel="canonical">
-  <meta content="cb2af7676be0af9ba06d663d42a0bc8d1c3d6b0d" name="document-revision">
+  <meta content="e81a6f51bafd7229b9bc2716796fff9ac3127b4d" name="document-revision">
 <style>
 body {
   padding: 0;
@@ -1281,91 +1281,6 @@ tbody td:nth-child(5) {
   text-align: left;
 }
 </style>
-<style>/* style-md-lists */
-
-/* This is a weird hack for me not yet following the commonmark spec
-   regarding paragraph and lists. */
-[data-md] > :first-child {
-    margin-top: 0;
-}
-[data-md] > :last-child {
-    margin-bottom: 0;
-}</style>
-<style>/* style-selflinks */
-
-.heading, .issue, .note, .example, li, dt {
-    position: relative;
-}
-a.self-link {
-    position: absolute;
-    top: 0;
-    left: calc(-1 * (3.5rem - 26px));
-    width: calc(3.5rem - 26px);
-    height: 2em;
-    text-align: center;
-    border: none;
-    transition: opacity .2s;
-    opacity: .5;
-}
-a.self-link:hover {
-    opacity: 1;
-}
-.heading > a.self-link {
-    font-size: 83%;
-}
-li > a.self-link {
-    left: calc(-1 * (3.5rem - 26px) - 2em);
-}
-dfn > a.self-link {
-    top: auto;
-    left: auto;
-    opacity: 0;
-    width: 1.5em;
-    height: 1.5em;
-    background: gray;
-    color: white;
-    font-style: normal;
-    transition: opacity .2s, background-color .2s, color .2s;
-}
-dfn:hover > a.self-link {
-    opacity: 1;
-}
-dfn > a.self-link:hover {
-    color: black;
-}
-
-a.self-link::before            { content: "¶"; }
-.heading > a.self-link::before { content: "§"; }
-dfn > a.self-link::before      { content: "#"; }</style>
-<style>/* style-counters */
-
-body {
-    counter-reset: example figure issue;
-}
-.issue {
-    counter-increment: issue;
-}
-.issue:not(.no-marker)::before {
-    content: "Issue " counter(issue);
-}
-
-.example {
-    counter-increment: example;
-}
-.example:not(.no-marker)::before {
-    content: "Example " counter(example);
-}
-.invalid.example:not(.no-marker)::before,
-.illegal.example:not(.no-marker)::before {
-    content: "Invalid Example" counter(example);
-}
-
-figcaption {
-    counter-increment: figure;
-}
-figcaption:not(.no-marker)::before {
-    content: "Figure " counter(figure) " ";
-}</style>
 <style>/* style-autolinks */
 
 .css.css, .property.property, .descriptor.descriptor {
@@ -1428,6 +1343,35 @@ pre .property::before, pre .property::after {
 [data-link-type=biblio] {
     white-space: pre;
 }</style>
+<style>/* style-counters */
+
+body {
+    counter-reset: example figure issue;
+}
+.issue {
+    counter-increment: issue;
+}
+.issue:not(.no-marker)::before {
+    content: "Issue " counter(issue);
+}
+
+.example {
+    counter-increment: example;
+}
+.example:not(.no-marker)::before {
+    content: "Example " counter(example);
+}
+.invalid.example:not(.no-marker)::before,
+.illegal.example:not(.no-marker)::before {
+    content: "Invalid Example" counter(example);
+}
+
+figcaption {
+    counter-increment: figure;
+}
+figcaption:not(.no-marker)::before {
+    content: "Figure " counter(figure) " ";
+}</style>
 <style>/* style-dfn-panel */
 
 .dfn-panel {
@@ -1465,6 +1409,62 @@ pre .property::before, pre .property::after {
 
 .dfn-paneled { cursor: pointer; }
 </style>
+<style>/* style-md-lists */
+
+/* This is a weird hack for me not yet following the commonmark spec
+   regarding paragraph and lists. */
+[data-md] > :first-child {
+    margin-top: 0;
+}
+[data-md] > :last-child {
+    margin-bottom: 0;
+}</style>
+<style>/* style-selflinks */
+
+.heading, .issue, .note, .example, li, dt {
+    position: relative;
+}
+a.self-link {
+    position: absolute;
+    top: 0;
+    left: calc(-1 * (3.5rem - 26px));
+    width: calc(3.5rem - 26px);
+    height: 2em;
+    text-align: center;
+    border: none;
+    transition: opacity .2s;
+    opacity: .5;
+}
+a.self-link:hover {
+    opacity: 1;
+}
+.heading > a.self-link {
+    font-size: 83%;
+}
+li > a.self-link {
+    left: calc(-1 * (3.5rem - 26px) - 2em);
+}
+dfn > a.self-link {
+    top: auto;
+    left: auto;
+    opacity: 0;
+    width: 1.5em;
+    height: 1.5em;
+    background: gray;
+    color: white;
+    font-style: normal;
+    transition: opacity .2s, background-color .2s, color .2s;
+}
+dfn:hover > a.self-link {
+    opacity: 1;
+}
+dfn > a.self-link:hover {
+    color: black;
+}
+
+a.self-link::before            { content: "¶"; }
+.heading > a.self-link::before { content: "§"; }
+dfn > a.self-link::before      { content: "#"; }</style>
 <style>/* style-syntax-highlighting */
 
 .highlight:not(.idl) { background: hsl(24, 20%, 95%); }
@@ -1527,7 +1527,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://opencaesar.github.io/oml/"> <img alt="Ontological Modeling Language" height="60" src="images/oml.svg"> </a></p>
    <h1 class="p-name no-ref" id="title">Ontological Modeling Language 0.5.0</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Document, <time class="dt-updated" datetime="2020-03-02">2 March 2020</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Document, <time class="dt-updated" datetime="2020-03-26">26 March 2020</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -2048,7 +2048,7 @@ restricts (all | some) scalar property <a href="#ScalarProperty-Syntax">ScalarPr
 </pre>
     <h4 class="heading settled" data-level="2.2.22" id="ScalarPropertyCardinalityRestrictionAxiom-Syntax"><span class="secno">2.2.22. </span><span class="content"><a data-link-type="dfn" href="#scalarpropertycardinalityrestrictionaxiom" id="ref-for-scalarpropertycardinalityrestrictionaxiom">ScalarPropertyCardinalityRestrictionAxiom</a></span><a class="self-link" href="#ScalarPropertyCardinalityRestrictionAxiom-Syntax"></a></h4>
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
-restricts scalar property <a href="#ScalarProperty-Syntax">ScalarProperty_IRI</a> to (exactly | min | max) INTEGER
+restricts scalar property <a href="#ScalarProperty-Syntax">ScalarProperty_IRI</a> to (exactly | min | max) INTEGER (<a href="#FacetedScalar-Syntax">FacetedScalar_IRI</a> | <a href="#EnumeratedScalar-Syntax">EnumeratedScalar_IRI</a>)?
 </pre>
     <h4 class="heading settled" data-level="2.2.23" id="ScalarPropertyValueRestrictionAxiom-Syntax"><span class="secno">2.2.23. </span><span class="content"><a data-link-type="dfn" href="#scalarpropertyvaluerestrictionaxiom" id="ref-for-scalarpropertyvaluerestrictionaxiom">ScalarPropertyValueRestrictionAxiom</a></span><a class="self-link" href="#ScalarPropertyValueRestrictionAxiom-Syntax"></a></h4>
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
@@ -2060,7 +2060,7 @@ restricts (all | some) structured property <a href="#StructuredProperty-Syntax">
 </pre>
     <h4 class="heading settled" data-level="2.2.25" id="StructuredPropertyCardinalityRestrictionAxiom-Syntax"><span class="secno">2.2.25. </span><span class="content"><a data-link-type="dfn" href="#structuredpropertycardinalityrestrictionaxiom" id="ref-for-structuredpropertycardinalityrestrictionaxiom">StructuredPropertyCardinalityRestrictionAxiom</a></span><a class="self-link" href="#StructuredPropertyCardinalityRestrictionAxiom-Syntax"></a></h4>
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
-restricts structured property <a href="#StructuredProperty-Syntax">StructuredProperty_IRI</a> to (exactly | min | max) INTEGER
+restricts structured property <a href="#StructuredProperty-Syntax">StructuredProperty_IRI</a> to (exactly | min | max) INTEGER (<a href="#Structure-Syntax">Structure_IRI</a>)?
 </pre>
     <h4 class="heading settled" data-level="2.2.26" id="StructuredPropertyValueRestrictionAxiom-Syntax"><span class="secno">2.2.26. </span><span class="content"><a data-link-type="dfn" href="#structuredpropertyvaluerestrictionaxiom" id="ref-for-structuredpropertyvaluerestrictionaxiom">StructuredPropertyValueRestrictionAxiom</a></span><a class="self-link" href="#StructuredPropertyValueRestrictionAxiom-Syntax"></a></h4>
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
@@ -2072,7 +2072,7 @@ restricts (all | some) relation (<a href="#ForwardRelation-Syntax">ForwardRelati
 </pre>
     <h4 class="heading settled" data-level="2.2.28" id="RelationCardinalityRestrictionAxiom-Syntax"><span class="secno">2.2.28. </span><span class="content"><a data-link-type="dfn" href="#relationcardinalityrestrictionaxiom" id="ref-for-relationcardinalityrestrictionaxiom">RelationCardinalityRestrictionAxiom</a></span><a class="self-link" href="#RelationCardinalityRestrictionAxiom-Syntax"></a></h4>
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
-restricts relation (<a href="#ForwardRelation-Syntax">ForwardRelation_IRI</a> | <a href="#InverseRelation-Syntax">InverseRelation_IRI</a>) to (exactly | min | max) INTEGER
+restricts relation (<a href="#ForwardRelation-Syntax">ForwardRelation_IRI</a> | <a href="#InverseRelation-Syntax">InverseRelation_IRI</a>) to (exactly | min | max) INTEGER (<a href="#Aspect-Syntax">Aspect_IRI</a> | <a href="#Concept-Syntax">Concept_IRI</a> | <a href="#RelationEntity-Syntax">RelationEntity_IRI</a>)?
 </pre>
     <h4 class="heading settled" data-level="2.2.29" id="RelationTargetRestrictionAxiom-Syntax"><span class="secno">2.2.29. </span><span class="content"><a data-link-type="dfn" href="#relationtargetrestrictionaxiom" id="ref-for-relationtargetrestrictionaxiom">RelationTargetRestrictionAxiom</a></span><a class="self-link" href="#RelationTargetRestrictionAxiom-Syntax"></a></h4>
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
@@ -3629,9 +3629,9 @@ this metamodel and can be manipulated using its API.
     <p><em>Sub classes:</em> <a data-link-type="dfn" href="#classifier" id="ref-for-classifier③">Classifier</a>, <a data-link-type="dfn" href="#scalar" id="ref-for-scalar④">Scalar</a></p>
     <h3 class="heading settled" data-level="3.6" id="Axioms"><span class="secno">3.6. </span><span class="content">Axioms</span><a class="self-link" href="#Axioms"></a></h3>
     <p>
-     <svg contentScriptType="application/ecmascript" contentStyleType="text/css" height="839px" preserveAspectRatio="none" style="width:2293px;height:839px;" version="1.1" viewBox="0 0 2293 839" width="2293px" zoomAndPan="magnify" xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+     <svg contentScriptType="application/ecmascript" contentStyleType="text/css" height="863px" preserveAspectRatio="none" style="width:2293px;height:863px;" version="1.1" viewBox="0 0 2293 863" width="2293px" zoomAndPan="magnify" xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
       <defs>
-       <filter height="300%" id="fsnph5g042hfe" width="300%" x="-1" y="-1">
+       <filter height="300%" id="f1j2b0zfla34ts" width="300%" x="-1" y="-1">
         <feGaussianBlur result="blurOut" stdDeviation="2.0"></feGaussianBlur>
         <feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"></feColorMatrix>
         <feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"></feOffset>
@@ -3640,7 +3640,7 @@ this metamodel and can be manipulated using its API.
       </defs>
       <g>
        <a target="_top" actuate="onRequest" href="#Axiom" show="new" title="#Axiom" type="simple">
-        <rect fill="#FFFFFF" filter="url(#fsnph5g042hfe)" height="40" style="stroke: #000000; stroke-width: 1.5;" width="68" x="1658" y="147"></rect>
+        <rect fill="#FFFFFF" filter="url(#f1j2b0zfla34ts)" height="40" style="stroke: #000000; stroke-width: 1.5;" width="68" x="1658" y="147"></rect>
         <rect fill="#FFFFFF" height="32" style="stroke: #000000; stroke-width: 1.5;" width="68" x="1658" y="147"></rect>
         <ellipse cx="1673" cy="163" fill="#A9DCDF" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"></ellipse>
         <path d="M1673.1094,158.3438 L1671.9531,163.4219 L1674.2813,163.4219 L1673.1094,158.3438 Z M1671.625,156.1094 L1674.6094,156.1094 L1677.9688,168.5 L1675.5156,168.5 L1674.75,165.4375 L1671.4688,165.4375 L1670.7188,168.5 L1668.2813,168.5 L1671.625,156.1094 Z "></path>
@@ -3648,13 +3648,13 @@ this metamodel and can be manipulated using its API.
         <line style="stroke: #000000; stroke-width: 1.5;" x1="1659" x2="1725" y1="179" y2="179"></line>
        </a>
        <a target="_top" actuate="onRequest" href="#AnnotatedElement" show="new" title="#AnnotatedElement" type="simple">
-        <rect fill="#D3D3D3" filter="url(#fsnph5g042hfe)" height="32" style="stroke: #000000; stroke-width: 1.5;" width="149" x="1617.5" y="31"></rect>
+        <rect fill="#D3D3D3" filter="url(#f1j2b0zfla34ts)" height="32" style="stroke: #000000; stroke-width: 1.5;" width="149" x="1617.5" y="31"></rect>
         <ellipse cx="1632.5" cy="47" fill="#ADD1B2" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"></ellipse>
         <path d="M1635.4688,52.6406 Q1634.8906,52.9375 1634.25,53.0781 Q1633.6094,53.2344 1632.9063,53.2344 Q1630.4063,53.2344 1629.0781,51.5938 Q1627.7656,49.9375 1627.7656,46.8125 Q1627.7656,43.6875 1629.0781,42.0313 Q1630.4063,40.375 1632.9063,40.375 Q1633.6094,40.375 1634.25,40.5313 Q1634.9063,40.6875 1635.4688,40.9844 L1635.4688,43.7031 Q1634.8438,43.125 1634.25,42.8594 Q1633.6563,42.5781 1633.0313,42.5781 Q1631.6875,42.5781 1631,43.6563 Q1630.3125,44.7188 1630.3125,46.8125 Q1630.3125,48.9063 1631,49.9844 Q1631.6875,51.0469 1633.0313,51.0469 Q1633.6563,51.0469 1634.25,50.7813 Q1634.8438,50.5 1635.4688,49.9219 L1635.4688,52.6406 Z "></path>
         <text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="117" x="1646.5" y="51.1543">AnnotatedElement</text>
        </a>
        <a target="_top" actuate="onRequest" href="#CardinalityRestrictionKind" show="new" title="#CardinalityRestrictionKind" type="simple">
-        <rect fill="#FFFFFF" filter="url(#fsnph5g042hfe)" height="78.4141" style="stroke: #000000; stroke-width: 1.5;" width="235" x="1801.5" y="8"></rect>
+        <rect fill="#FFFFFF" filter="url(#f1j2b0zfla34ts)" height="78.4141" style="stroke: #000000; stroke-width: 1.5;" width="235" x="1801.5" y="8"></rect>
         <rect fill="#FFFFFF" height="32" style="stroke: #000000; stroke-width: 1.5;" width="235" x="1801.5" y="8"></rect>
         <ellipse cx="1816.5" cy="24" fill="#EB937F" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"></ellipse>
         <path d="M1820.6094,30 L1812.8906,30 L1812.8906,17.6094 L1820.6094,17.6094 L1820.6094,19.7656 L1815.3438,19.7656 L1815.3438,22.4375 L1820.1094,22.4375 L1820.1094,24.5938 L1815.3438,24.5938 L1815.3438,27.8438 L1820.6094,27.8438 L1820.6094,30 Z "></path>
@@ -3665,7 +3665,7 @@ this metamodel and can be manipulated using its API.
         <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="24" x="1807.5" y="79.8198">max</text>
        </a>
        <a target="_top" actuate="onRequest" href="#KeyAxiom" show="new" title="#KeyAxiom" type="simple">
-        <rect fill="#FFFFFF" filter="url(#fsnph5g042hfe)" height="78.4141" style="stroke: #000000; stroke-width: 1.5;" width="243" x="1570.5" y="248"></rect>
+        <rect fill="#FFFFFF" filter="url(#f1j2b0zfla34ts)" height="78.4141" style="stroke: #000000; stroke-width: 1.5;" width="243" x="1570.5" y="248"></rect>
         <rect fill="#FFFFFF" height="32" style="stroke: #000000; stroke-width: 1.5;" width="243" x="1570.5" y="248"></rect>
         <ellipse cx="1659.25" cy="264" fill="#ADD1B2" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"></ellipse>
         <path d="M1662.2188,269.6406 Q1661.6406,269.9375 1661,270.0781 Q1660.3594,270.2344 1659.6563,270.2344 Q1657.1563,270.2344 1655.8281,268.5938 Q1654.5156,266.9375 1654.5156,263.8125 Q1654.5156,260.6875 1655.8281,259.0313 Q1657.1563,257.375 1659.6563,257.375 Q1660.3594,257.375 1661,257.5313 Q1661.6563,257.6875 1662.2188,257.9844 L1662.2188,260.7031 Q1661.5938,260.125 1661,259.8594 Q1660.4063,259.5781 1659.7813,259.5781 Q1658.4375,259.5781 1657.75,260.6563 Q1657.0625,261.7188 1657.0625,263.8125 Q1657.0625,265.9063 1657.75,266.9844 Q1658.4375,268.0469 1659.7813,268.0469 Q1660.4063,268.0469 1661,267.7813 Q1661.5938,267.5 1662.2188,266.9219 L1662.2188,269.6406 Z "></path>
@@ -3676,7 +3676,7 @@ this metamodel and can be manipulated using its API.
         <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="231" x="1576.5" y="319.8198">owningReference : EntityReference [0..1]</text>
        </a>
        <a target="_top" actuate="onRequest" href="#PropertyRestrictionAxiom" show="new" title="#PropertyRestrictionAxiom" type="simple">
-        <rect fill="#FFFFFF" filter="url(#fsnph5g042hfe)" height="65.6094" style="stroke: #000000; stroke-width: 1.5;" width="266" x="1188" y="393"></rect>
+        <rect fill="#FFFFFF" filter="url(#f1j2b0zfla34ts)" height="65.6094" style="stroke: #000000; stroke-width: 1.5;" width="266" x="1188" y="393"></rect>
         <rect fill="#FFFFFF" height="32" style="stroke: #000000; stroke-width: 1.5;" width="266" x="1188" y="393"></rect>
         <ellipse cx="1238.75" cy="409" fill="#A9DCDF" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"></ellipse>
         <path d="M1238.8594,404.3438 L1237.7031,409.4219 L1240.0313,409.4219 L1238.8594,404.3438 Z M1237.375,402.1094 L1240.3594,402.1094 L1243.7188,414.5 L1241.2656,414.5 L1240.5,411.4375 L1237.2188,411.4375 L1236.4688,414.5 L1234.0313,414.5 L1237.375,402.1094 Z "></path>
@@ -3686,7 +3686,7 @@ this metamodel and can be manipulated using its API.
         <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="254" x="1194" y="452.0151">owningReference : ClassifierReference [0..1]</text>
        </a>
        <a target="_top" actuate="onRequest" href="#RestrictionAxiom" show="new" title="#RestrictionAxiom" type="simple">
-        <rect fill="#FFFFFF" filter="url(#fsnph5g042hfe)" height="40" style="stroke: #000000; stroke-width: 1.5;" width="135" x="1400.5" y="267"></rect>
+        <rect fill="#FFFFFF" filter="url(#f1j2b0zfla34ts)" height="40" style="stroke: #000000; stroke-width: 1.5;" width="135" x="1400.5" y="267"></rect>
         <rect fill="#FFFFFF" height="32" style="stroke: #000000; stroke-width: 1.5;" width="135" x="1400.5" y="267"></rect>
         <ellipse cx="1415.5" cy="283" fill="#A9DCDF" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"></ellipse>
         <path d="M1415.6094,278.3438 L1414.4531,283.4219 L1416.7813,283.4219 L1415.6094,278.3438 Z M1414.125,276.1094 L1417.1094,276.1094 L1420.4688,288.5 L1418.0156,288.5 L1417.25,285.4375 L1413.9688,285.4375 L1413.2188,288.5 L1410.7813,288.5 L1414.125,276.1094 Z "></path>
@@ -3694,7 +3694,7 @@ this metamodel and can be manipulated using its API.
         <line style="stroke: #000000; stroke-width: 1.5;" x1="1401.5" x2="1534.5" y1="299" y2="299"></line>
        </a>
        <a target="_top" actuate="onRequest" href="#RangeRestrictionKind" show="new" title="#RangeRestrictionKind" type="simple">
-        <rect fill="#FFFFFF" filter="url(#fsnph5g042hfe)" height="65.6094" style="stroke: #000000; stroke-width: 1.5;" width="210" x="2072" y="14"></rect>
+        <rect fill="#FFFFFF" filter="url(#f1j2b0zfla34ts)" height="65.6094" style="stroke: #000000; stroke-width: 1.5;" width="210" x="2072" y="14"></rect>
         <rect fill="#FFFFFF" height="32" style="stroke: #000000; stroke-width: 1.5;" width="210" x="2072" y="14"></rect>
         <ellipse cx="2087" cy="30" fill="#EB937F" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"></ellipse>
         <path d="M2091.1094,36 L2083.3906,36 L2083.3906,23.6094 L2091.1094,23.6094 L2091.1094,25.7656 L2085.8438,25.7656 L2085.8438,28.4375 L2090.6094,28.4375 L2090.6094,30.5938 L2085.8438,30.5938 L2085.8438,33.8438 L2091.1094,33.8438 L2091.1094,36 Z "></path>
@@ -3704,7 +3704,7 @@ this metamodel and can be manipulated using its API.
         <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="32" x="2078" y="73.0151">some</text>
        </a>
        <a target="_top" actuate="onRequest" href="#RelationCardinalityRestrictionAxiom" show="new" title="#RelationCardinalityRestrictionAxiom" type="simple">
-        <rect fill="#FFFFFF" filter="url(#fsnph5g042hfe)" height="65.6094" style="stroke: #000000; stroke-width: 1.5;" width="251" x="1469.5" y="526"></rect>
+        <rect fill="#FFFFFF" filter="url(#f1j2b0zfla34ts)" height="78.4141" style="stroke: #000000; stroke-width: 1.5;" width="251" x="1469.5" y="526"></rect>
         <rect fill="#FFFFFF" height="32" style="stroke: #000000; stroke-width: 1.5;" width="251" x="1469.5" y="526"></rect>
         <ellipse cx="1484.5" cy="542" fill="#ADD1B2" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"></ellipse>
         <path d="M1487.4688,547.6406 Q1486.8906,547.9375 1486.25,548.0781 Q1485.6094,548.2344 1484.9063,548.2344 Q1482.4063,548.2344 1481.0781,546.5938 Q1479.7656,544.9375 1479.7656,541.8125 Q1479.7656,538.6875 1481.0781,537.0313 Q1482.4063,535.375 1484.9063,535.375 Q1485.6094,535.375 1486.25,535.5313 Q1486.9063,535.6875 1487.4688,535.9844 L1487.4688,538.7031 Q1486.8438,538.125 1486.25,537.8594 Q1485.6563,537.5781 1485.0313,537.5781 Q1483.6875,537.5781 1483,538.6563 Q1482.3125,539.7188 1482.3125,541.8125 Q1482.3125,543.9063 1483,544.9844 Q1483.6875,546.0469 1485.0313,546.0469 Q1485.6563,546.0469 1486.25,545.7813 Q1486.8438,545.5 1487.4688,544.9219 L1487.4688,547.6406 Z "></path>
@@ -3712,9 +3712,10 @@ this metamodel and can be manipulated using its API.
         <line style="stroke: #000000; stroke-width: 1.5;" x1="1470.5" x2="1719.5" y1="558" y2="558"></line>
         <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="137" x="1475.5" y="572.2104">cardinality : UnsignedInt</text>
         <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="179" x="1475.5" y="585.0151">kind : CardinalityRestrictionKind</text>
+        <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="110" x="1475.5" y="597.8198">range : Entity [0..1]</text>
        </a>
        <a target="_top" actuate="onRequest" href="#RelationRestrictionAxiom" show="new" title="#RelationRestrictionAxiom" type="simple">
-        <rect fill="#FFFFFF" filter="url(#fsnph5g042hfe)" height="78.4141" style="stroke: #000000; stroke-width: 1.5;" width="243" x="1684.5" y="387"></rect>
+        <rect fill="#FFFFFF" filter="url(#f1j2b0zfla34ts)" height="78.4141" style="stroke: #000000; stroke-width: 1.5;" width="243" x="1684.5" y="387"></rect>
         <rect fill="#FFFFFF" height="32" style="stroke: #000000; stroke-width: 1.5;" width="243" x="1684.5" y="387"></rect>
         <ellipse cx="1725.15" cy="403" fill="#ADD1B2" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"></ellipse>
         <path d="M1728.1188,408.6406 Q1727.5406,408.9375 1726.9,409.0781 Q1726.2594,409.2344 1725.5563,409.2344 Q1723.0563,409.2344 1721.7281,407.5938 Q1720.4156,405.9375 1720.4156,402.8125 Q1720.4156,399.6875 1721.7281,398.0313 Q1723.0563,396.375 1725.5563,396.375 Q1726.2594,396.375 1726.9,396.5313 Q1727.5563,396.6875 1728.1188,396.9844 L1728.1188,399.7031 Q1727.4938,399.125 1726.9,398.8594 Q1726.3063,398.5781 1725.6813,398.5781 Q1724.3375,398.5781 1723.65,399.6563 Q1722.9625,400.7188 1722.9625,402.8125 Q1722.9625,404.9063 1723.65,405.9844 Q1724.3375,407.0469 1725.6813,407.0469 Q1726.3063,407.0469 1726.9,406.7813 Q1727.4938,406.5 1728.1188,405.9219 L1728.1188,408.6406 Z "></path>
@@ -3725,69 +3726,70 @@ this metamodel and can be manipulated using its API.
         <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="231" x="1690.5" y="458.8198">owningReference : EntityReference [0..1]</text>
        </a>
        <a target="_top" actuate="onRequest" href="#RelationRangeRestrictionAxiom" show="new" title="#RelationRangeRestrictionAxiom" type="simple">
-        <rect fill="#FFFFFF" filter="url(#fsnph5g042hfe)" height="65.6094" style="stroke: #000000; stroke-width: 1.5;" width="226" x="1756" y="526"></rect>
-        <rect fill="#FFFFFF" height="32" style="stroke: #000000; stroke-width: 1.5;" width="226" x="1756" y="526"></rect>
-        <ellipse cx="1771" cy="542" fill="#ADD1B2" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"></ellipse>
-        <path d="M1773.9688,547.6406 Q1773.3906,547.9375 1772.75,548.0781 Q1772.1094,548.2344 1771.4063,548.2344 Q1768.9063,548.2344 1767.5781,546.5938 Q1766.2656,544.9375 1766.2656,541.8125 Q1766.2656,538.6875 1767.5781,537.0313 Q1768.9063,535.375 1771.4063,535.375 Q1772.1094,535.375 1772.75,535.5313 Q1773.4063,535.6875 1773.9688,535.9844 L1773.9688,538.7031 Q1773.3438,538.125 1772.75,537.8594 Q1772.1563,537.5781 1771.5313,537.5781 Q1770.1875,537.5781 1769.5,538.6563 Q1768.8125,539.7188 1768.8125,541.8125 Q1768.8125,543.9063 1769.5,544.9844 Q1770.1875,546.0469 1771.5313,546.0469 Q1772.1563,546.0469 1772.75,545.7813 Q1773.3438,545.5 1773.9688,544.9219 L1773.9688,547.6406 Z "></path>
-        <text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="194" x="1785" y="546.1543">RelationRangeRestrictionAxiom</text>
-        <line style="stroke: #000000; stroke-width: 1.5;" x1="1757" x2="1981" y1="558" y2="558"></line>
-        <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="154" x="1762" y="572.2104">kind : RangeRestrictionKind</text>
-        <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="95" x="1762" y="585.0151">range : Entity [1]</text>
+        <rect fill="#FFFFFF" filter="url(#f1j2b0zfla34ts)" height="65.6094" style="stroke: #000000; stroke-width: 1.5;" width="226" x="1756" y="532"></rect>
+        <rect fill="#FFFFFF" height="32" style="stroke: #000000; stroke-width: 1.5;" width="226" x="1756" y="532"></rect>
+        <ellipse cx="1771" cy="548" fill="#ADD1B2" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"></ellipse>
+        <path d="M1773.9688,553.6406 Q1773.3906,553.9375 1772.75,554.0781 Q1772.1094,554.2344 1771.4063,554.2344 Q1768.9063,554.2344 1767.5781,552.5938 Q1766.2656,550.9375 1766.2656,547.8125 Q1766.2656,544.6875 1767.5781,543.0313 Q1768.9063,541.375 1771.4063,541.375 Q1772.1094,541.375 1772.75,541.5313 Q1773.4063,541.6875 1773.9688,541.9844 L1773.9688,544.7031 Q1773.3438,544.125 1772.75,543.8594 Q1772.1563,543.5781 1771.5313,543.5781 Q1770.1875,543.5781 1769.5,544.6563 Q1768.8125,545.7188 1768.8125,547.8125 Q1768.8125,549.9063 1769.5,550.9844 Q1770.1875,552.0469 1771.5313,552.0469 Q1772.1563,552.0469 1772.75,551.7813 Q1773.3438,551.5 1773.9688,550.9219 L1773.9688,553.6406 Z "></path>
+        <text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="194" x="1785" y="552.1543">RelationRangeRestrictionAxiom</text>
+        <line style="stroke: #000000; stroke-width: 1.5;" x1="1757" x2="1981" y1="564" y2="564"></line>
+        <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="154" x="1762" y="578.2104">kind : RangeRestrictionKind</text>
+        <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="95" x="1762" y="591.0151">range : Entity [1]</text>
        </a>
        <a target="_top" actuate="onRequest" href="#RelationTargetRestrictionAxiom" show="new" title="#RelationTargetRestrictionAxiom" type="simple">
-        <rect fill="#FFFFFF" filter="url(#fsnph5g042hfe)" height="52.8047" style="stroke: #000000; stroke-width: 1.5;" width="227" x="2017.5" y="532.5"></rect>
-        <rect fill="#FFFFFF" height="32" style="stroke: #000000; stroke-width: 1.5;" width="227" x="2017.5" y="532.5"></rect>
-        <ellipse cx="2032.5" cy="548.5" fill="#ADD1B2" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"></ellipse>
-        <path d="M2035.4688,554.1406 Q2034.8906,554.4375 2034.25,554.5781 Q2033.6094,554.7344 2032.9063,554.7344 Q2030.4063,554.7344 2029.0781,553.0938 Q2027.7656,551.4375 2027.7656,548.3125 Q2027.7656,545.1875 2029.0781,543.5313 Q2030.4063,541.875 2032.9063,541.875 Q2033.6094,541.875 2034.25,542.0313 Q2034.9063,542.1875 2035.4688,542.4844 L2035.4688,545.2031 Q2034.8438,544.625 2034.25,544.3594 Q2033.6563,544.0781 2033.0313,544.0781 Q2031.6875,544.0781 2031,545.1563 Q2030.3125,546.2188 2030.3125,548.3125 Q2030.3125,550.4063 2031,551.4844 Q2031.6875,552.5469 2033.0313,552.5469 Q2033.6563,552.5469 2034.25,552.2813 Q2034.8438,552 2035.4688,551.4219 L2035.4688,554.1406 Z "></path>
-        <text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="195" x="2046.5" y="552.6543">RelationTargetRestrictionAxiom</text>
-        <line style="stroke: #000000; stroke-width: 1.5;" x1="2018.5" x2="2243.5" y1="564.5" y2="564.5"></line>
-        <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="153" x="2023.5" y="578.7104">target : NamedInstance [1]</text>
+        <rect fill="#FFFFFF" filter="url(#f1j2b0zfla34ts)" height="52.8047" style="stroke: #000000; stroke-width: 1.5;" width="227" x="2017.5" y="538.5"></rect>
+        <rect fill="#FFFFFF" height="32" style="stroke: #000000; stroke-width: 1.5;" width="227" x="2017.5" y="538.5"></rect>
+        <ellipse cx="2032.5" cy="554.5" fill="#ADD1B2" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"></ellipse>
+        <path d="M2035.4688,560.1406 Q2034.8906,560.4375 2034.25,560.5781 Q2033.6094,560.7344 2032.9063,560.7344 Q2030.4063,560.7344 2029.0781,559.0938 Q2027.7656,557.4375 2027.7656,554.3125 Q2027.7656,551.1875 2029.0781,549.5313 Q2030.4063,547.875 2032.9063,547.875 Q2033.6094,547.875 2034.25,548.0313 Q2034.9063,548.1875 2035.4688,548.4844 L2035.4688,551.2031 Q2034.8438,550.625 2034.25,550.3594 Q2033.6563,550.0781 2033.0313,550.0781 Q2031.6875,550.0781 2031,551.1563 Q2030.3125,552.2188 2030.3125,554.3125 Q2030.3125,556.4063 2031,557.4844 Q2031.6875,558.5469 2033.0313,558.5469 Q2033.6563,558.5469 2034.25,558.2813 Q2034.8438,558 2035.4688,557.4219 L2035.4688,560.1406 Z "></path>
+        <text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="195" x="2046.5" y="558.6543">RelationTargetRestrictionAxiom</text>
+        <line style="stroke: #000000; stroke-width: 1.5;" x1="2018.5" x2="2243.5" y1="570.5" y2="570.5"></line>
+        <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="153" x="2023.5" y="584.7104">target : NamedInstance [1]</text>
        </a>
        <a target="_top" actuate="onRequest" href="#ScalarPropertyCardinalityRestrictionAxiom" show="new" title="#ScalarPropertyCardinalityRestrictionAxiom" type="simple">
-        <rect fill="#FFFFFF" filter="url(#fsnph5g042hfe)" height="65.6094" style="stroke: #000000; stroke-width: 1.5;" width="292" x="1017" y="653"></rect>
-        <rect fill="#FFFFFF" height="32" style="stroke: #000000; stroke-width: 1.5;" width="292" x="1017" y="653"></rect>
-        <ellipse cx="1032" cy="669" fill="#ADD1B2" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"></ellipse>
-        <path d="M1034.9688,674.6406 Q1034.3906,674.9375 1033.75,675.0781 Q1033.1094,675.2344 1032.4063,675.2344 Q1029.9063,675.2344 1028.5781,673.5938 Q1027.2656,671.9375 1027.2656,668.8125 Q1027.2656,665.6875 1028.5781,664.0313 Q1029.9063,662.375 1032.4063,662.375 Q1033.1094,662.375 1033.75,662.5313 Q1034.4063,662.6875 1034.9688,662.9844 L1034.9688,665.7031 Q1034.3438,665.125 1033.75,664.8594 Q1033.1563,664.5781 1032.5313,664.5781 Q1031.1875,664.5781 1030.5,665.6563 Q1029.8125,666.7188 1029.8125,668.8125 Q1029.8125,670.9063 1030.5,671.9844 Q1031.1875,673.0469 1032.5313,673.0469 Q1033.1563,673.0469 1033.75,672.7813 Q1034.3438,672.5 1034.9688,671.9219 L1034.9688,674.6406 Z "></path>
-        <text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="260" x="1046" y="673.1543">ScalarPropertyCardinalityRestrictionAxiom</text>
-        <line style="stroke: #000000; stroke-width: 1.5;" x1="1018" x2="1308" y1="685" y2="685"></line>
-        <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="137" x="1023" y="699.2104">cardinality : UnsignedInt</text>
-        <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="179" x="1023" y="712.0151">kind : CardinalityRestrictionKind</text>
+        <rect fill="#FFFFFF" filter="url(#f1j2b0zfla34ts)" height="78.4141" style="stroke: #000000; stroke-width: 1.5;" width="292" x="1017" y="665"></rect>
+        <rect fill="#FFFFFF" height="32" style="stroke: #000000; stroke-width: 1.5;" width="292" x="1017" y="665"></rect>
+        <ellipse cx="1032" cy="681" fill="#ADD1B2" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"></ellipse>
+        <path d="M1034.9688,686.6406 Q1034.3906,686.9375 1033.75,687.0781 Q1033.1094,687.2344 1032.4063,687.2344 Q1029.9063,687.2344 1028.5781,685.5938 Q1027.2656,683.9375 1027.2656,680.8125 Q1027.2656,677.6875 1028.5781,676.0313 Q1029.9063,674.375 1032.4063,674.375 Q1033.1094,674.375 1033.75,674.5313 Q1034.4063,674.6875 1034.9688,674.9844 L1034.9688,677.7031 Q1034.3438,677.125 1033.75,676.8594 Q1033.1563,676.5781 1032.5313,676.5781 Q1031.1875,676.5781 1030.5,677.6563 Q1029.8125,678.7188 1029.8125,680.8125 Q1029.8125,682.9063 1030.5,683.9844 Q1031.1875,685.0469 1032.5313,685.0469 Q1033.1563,685.0469 1033.75,684.7813 Q1034.3438,684.5 1034.9688,683.9219 L1034.9688,686.6406 Z "></path>
+        <text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="260" x="1046" y="685.1543">ScalarPropertyCardinalityRestrictionAxiom</text>
+        <line style="stroke: #000000; stroke-width: 1.5;" x1="1018" x2="1308" y1="697" y2="697"></line>
+        <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="137" x="1023" y="711.2104">cardinality : UnsignedInt</text>
+        <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="179" x="1023" y="724.0151">kind : CardinalityRestrictionKind</text>
+        <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="115" x="1023" y="736.8198">range : Scalar [0..1]</text>
        </a>
        <a target="_top" actuate="onRequest" href="#ScalarPropertyRestrictionAxiom" show="new" title="#ScalarPropertyRestrictionAxiom" type="simple">
-        <rect fill="#FFFFFF" filter="url(#fsnph5g042hfe)" height="52.8047" style="stroke: #000000; stroke-width: 1.5;" width="227" x="1207.5" y="532.5"></rect>
-        <rect fill="#FFFFFF" height="32" style="stroke: #000000; stroke-width: 1.5;" width="227" x="1207.5" y="532.5"></rect>
-        <ellipse cx="1222.5" cy="548.5" fill="#A9DCDF" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"></ellipse>
-        <path d="M1222.6094,543.8438 L1221.4531,548.9219 L1223.7813,548.9219 L1222.6094,543.8438 Z M1221.125,541.6094 L1224.1094,541.6094 L1227.4688,554 L1225.0156,554 L1224.25,550.9375 L1220.9688,550.9375 L1220.2188,554 L1217.7813,554 L1221.125,541.6094 Z "></path>
-        <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="195" x="1236.5" y="552.6543">ScalarPropertyRestrictionAxiom</text>
-        <line style="stroke: #000000; stroke-width: 1.5;" x1="1208.5" x2="1433.5" y1="564.5" y2="564.5"></line>
-        <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="163" x="1213.5" y="578.7104">property : ScalarProperty [1]</text>
+        <rect fill="#FFFFFF" filter="url(#f1j2b0zfla34ts)" height="52.8047" style="stroke: #000000; stroke-width: 1.5;" width="227" x="1207.5" y="538.5"></rect>
+        <rect fill="#FFFFFF" height="32" style="stroke: #000000; stroke-width: 1.5;" width="227" x="1207.5" y="538.5"></rect>
+        <ellipse cx="1222.5" cy="554.5" fill="#A9DCDF" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"></ellipse>
+        <path d="M1222.6094,549.8438 L1221.4531,554.9219 L1223.7813,554.9219 L1222.6094,549.8438 Z M1221.125,547.6094 L1224.1094,547.6094 L1227.4688,560 L1225.0156,560 L1224.25,556.9375 L1220.9688,556.9375 L1220.2188,560 L1217.7813,560 L1221.125,547.6094 Z "></path>
+        <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="195" x="1236.5" y="558.6543">ScalarPropertyRestrictionAxiom</text>
+        <line style="stroke: #000000; stroke-width: 1.5;" x1="1208.5" x2="1433.5" y1="570.5" y2="570.5"></line>
+        <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="163" x="1213.5" y="584.7104">property : ScalarProperty [1]</text>
        </a>
        <a target="_top" actuate="onRequest" href="#ScalarPropertyRangeRestrictionAxiom" show="new" title="#ScalarPropertyRangeRestrictionAxiom" type="simple">
-        <rect fill="#FFFFFF" filter="url(#fsnph5g042hfe)" height="65.6094" style="stroke: #000000; stroke-width: 1.5;" width="267" x="1344.5" y="653"></rect>
-        <rect fill="#FFFFFF" height="32" style="stroke: #000000; stroke-width: 1.5;" width="267" x="1344.5" y="653"></rect>
-        <ellipse cx="1359.5" cy="669" fill="#ADD1B2" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"></ellipse>
-        <path d="M1362.4688,674.6406 Q1361.8906,674.9375 1361.25,675.0781 Q1360.6094,675.2344 1359.9063,675.2344 Q1357.4063,675.2344 1356.0781,673.5938 Q1354.7656,671.9375 1354.7656,668.8125 Q1354.7656,665.6875 1356.0781,664.0313 Q1357.4063,662.375 1359.9063,662.375 Q1360.6094,662.375 1361.25,662.5313 Q1361.9063,662.6875 1362.4688,662.9844 L1362.4688,665.7031 Q1361.8438,665.125 1361.25,664.8594 Q1360.6563,664.5781 1360.0313,664.5781 Q1358.6875,664.5781 1358,665.6563 Q1357.3125,666.7188 1357.3125,668.8125 Q1357.3125,670.9063 1358,671.9844 Q1358.6875,673.0469 1360.0313,673.0469 Q1360.6563,673.0469 1361.25,672.7813 Q1361.8438,672.5 1362.4688,671.9219 L1362.4688,674.6406 Z "></path>
-        <text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="235" x="1373.5" y="673.1543">ScalarPropertyRangeRestrictionAxiom</text>
-        <line style="stroke: #000000; stroke-width: 1.5;" x1="1345.5" x2="1610.5" y1="685" y2="685"></line>
-        <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="154" x="1350.5" y="699.2104">kind : RangeRestrictionKind</text>
-        <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="100" x="1350.5" y="712.0151">range : Scalar [1]</text>
+        <rect fill="#FFFFFF" filter="url(#f1j2b0zfla34ts)" height="65.6094" style="stroke: #000000; stroke-width: 1.5;" width="267" x="1344.5" y="671"></rect>
+        <rect fill="#FFFFFF" height="32" style="stroke: #000000; stroke-width: 1.5;" width="267" x="1344.5" y="671"></rect>
+        <ellipse cx="1359.5" cy="687" fill="#ADD1B2" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"></ellipse>
+        <path d="M1362.4688,692.6406 Q1361.8906,692.9375 1361.25,693.0781 Q1360.6094,693.2344 1359.9063,693.2344 Q1357.4063,693.2344 1356.0781,691.5938 Q1354.7656,689.9375 1354.7656,686.8125 Q1354.7656,683.6875 1356.0781,682.0313 Q1357.4063,680.375 1359.9063,680.375 Q1360.6094,680.375 1361.25,680.5313 Q1361.9063,680.6875 1362.4688,680.9844 L1362.4688,683.7031 Q1361.8438,683.125 1361.25,682.8594 Q1360.6563,682.5781 1360.0313,682.5781 Q1358.6875,682.5781 1358,683.6563 Q1357.3125,684.7188 1357.3125,686.8125 Q1357.3125,688.9063 1358,689.9844 Q1358.6875,691.0469 1360.0313,691.0469 Q1360.6563,691.0469 1361.25,690.7813 Q1361.8438,690.5 1362.4688,689.9219 L1362.4688,692.6406 Z "></path>
+        <text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="235" x="1373.5" y="691.1543">ScalarPropertyRangeRestrictionAxiom</text>
+        <line style="stroke: #000000; stroke-width: 1.5;" x1="1345.5" x2="1610.5" y1="703" y2="703"></line>
+        <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="154" x="1350.5" y="717.2104">kind : RangeRestrictionKind</text>
+        <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="100" x="1350.5" y="730.0151">range : Scalar [1]</text>
        </a>
        <a target="_top" actuate="onRequest" href="#ScalarPropertyValueRestrictionAxiom" show="new" title="#ScalarPropertyValueRestrictionAxiom" type="simple">
-        <rect fill="#FFFFFF" filter="url(#fsnph5g042hfe)" height="40" style="stroke: #000000; stroke-width: 1.5;" width="262" x="1647" y="666"></rect>
-        <rect fill="#FFFFFF" height="32" style="stroke: #000000; stroke-width: 1.5;" width="262" x="1647" y="666"></rect>
-        <ellipse cx="1662" cy="682" fill="#ADD1B2" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"></ellipse>
-        <path d="M1664.9688,687.6406 Q1664.3906,687.9375 1663.75,688.0781 Q1663.1094,688.2344 1662.4063,688.2344 Q1659.9063,688.2344 1658.5781,686.5938 Q1657.2656,684.9375 1657.2656,681.8125 Q1657.2656,678.6875 1658.5781,677.0313 Q1659.9063,675.375 1662.4063,675.375 Q1663.1094,675.375 1663.75,675.5313 Q1664.4063,675.6875 1664.9688,675.9844 L1664.9688,678.7031 Q1664.3438,678.125 1663.75,677.8594 Q1663.1563,677.5781 1662.5313,677.5781 Q1661.1875,677.5781 1660.5,678.6563 Q1659.8125,679.7188 1659.8125,681.8125 Q1659.8125,683.9063 1660.5,684.9844 Q1661.1875,686.0469 1662.5313,686.0469 Q1663.1563,686.0469 1663.75,685.7813 Q1664.3438,685.5 1664.9688,684.9219 L1664.9688,687.6406 Z "></path>
-        <text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="230" x="1676" y="686.1543">ScalarPropertyValueRestrictionAxiom</text>
-        <line style="stroke: #000000; stroke-width: 1.5;" x1="1648" x2="1908" y1="698" y2="698"></line>
+        <rect fill="#FFFFFF" filter="url(#f1j2b0zfla34ts)" height="40" style="stroke: #000000; stroke-width: 1.5;" width="262" x="1647" y="684"></rect>
+        <rect fill="#FFFFFF" height="32" style="stroke: #000000; stroke-width: 1.5;" width="262" x="1647" y="684"></rect>
+        <ellipse cx="1662" cy="700" fill="#ADD1B2" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"></ellipse>
+        <path d="M1664.9688,705.6406 Q1664.3906,705.9375 1663.75,706.0781 Q1663.1094,706.2344 1662.4063,706.2344 Q1659.9063,706.2344 1658.5781,704.5938 Q1657.2656,702.9375 1657.2656,699.8125 Q1657.2656,696.6875 1658.5781,695.0313 Q1659.9063,693.375 1662.4063,693.375 Q1663.1094,693.375 1663.75,693.5313 Q1664.4063,693.6875 1664.9688,693.9844 L1664.9688,696.7031 Q1664.3438,696.125 1663.75,695.8594 Q1663.1563,695.5781 1662.5313,695.5781 Q1661.1875,695.5781 1660.5,696.6563 Q1659.8125,697.7188 1659.8125,699.8125 Q1659.8125,701.9063 1660.5,702.9844 Q1661.1875,704.0469 1662.5313,704.0469 Q1663.1563,704.0469 1663.75,703.7813 Q1664.3438,703.5 1664.9688,702.9219 L1664.9688,705.6406 Z "></path>
+        <text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="230" x="1676" y="704.1543">ScalarPropertyValueRestrictionAxiom</text>
+        <line style="stroke: #000000; stroke-width: 1.5;" x1="1648" x2="1908" y1="716" y2="716"></line>
        </a>
        <a target="_top" actuate="onRequest" href="#Literal" show="new" title="#Literal" type="simple">
-        <rect fill="#D3D3D3" filter="url(#fsnph5g042hfe)" height="32" style="stroke: #000000; stroke-width: 1.5;" width="70" x="1743" y="796"></rect>
-        <ellipse cx="1758" cy="812" fill="#A9DCDF" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"></ellipse>
-        <path d="M1758.1094,807.3438 L1756.9531,812.4219 L1759.2813,812.4219 L1758.1094,807.3438 Z M1756.625,805.1094 L1759.6094,805.1094 L1762.9688,817.5 L1760.5156,817.5 L1759.75,814.4375 L1756.4688,814.4375 L1755.7188,817.5 L1753.2813,817.5 L1756.625,805.1094 Z "></path>
-        <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="38" x="1772" y="816.1543">Literal</text>
+        <rect fill="#D3D3D3" filter="url(#f1j2b0zfla34ts)" height="32" style="stroke: #000000; stroke-width: 1.5;" width="70" x="1743" y="820"></rect>
+        <ellipse cx="1758" cy="836" fill="#A9DCDF" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"></ellipse>
+        <path d="M1758.1094,831.3438 L1756.9531,836.4219 L1759.2813,836.4219 L1758.1094,831.3438 Z M1756.625,829.1094 L1759.6094,829.1094 L1762.9688,841.5 L1760.5156,841.5 L1759.75,838.4375 L1756.4688,838.4375 L1755.7188,841.5 L1753.2813,841.5 L1756.625,829.1094 Z "></path>
+        <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="38" x="1772" y="840.1543">Literal</text>
        </a>
        <a target="_top" actuate="onRequest" href="#SpecializationAxiom" show="new" title="#SpecializationAxiom" type="simple">
-        <rect fill="#FFFFFF" filter="url(#fsnph5g042hfe)" height="78.4141" style="stroke: #000000; stroke-width: 1.5;" width="315" x="1848.5" y="248"></rect>
+        <rect fill="#FFFFFF" filter="url(#f1j2b0zfla34ts)" height="78.4141" style="stroke: #000000; stroke-width: 1.5;" width="315" x="1848.5" y="248"></rect>
         <rect fill="#FFFFFF" height="32" style="stroke: #000000; stroke-width: 1.5;" width="315" x="1848.5" y="248"></rect>
         <ellipse cx="1941.25" cy="264" fill="#ADD1B2" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"></ellipse>
         <path d="M1944.2188,269.6406 Q1943.6406,269.9375 1943,270.0781 Q1942.3594,270.2344 1941.6563,270.2344 Q1939.1563,270.2344 1937.8281,268.5938 Q1936.5156,266.9375 1936.5156,263.8125 Q1936.5156,260.6875 1937.8281,259.0313 Q1939.1563,257.375 1941.6563,257.375 Q1942.3594,257.375 1943,257.5313 Q1943.6563,257.6875 1944.2188,257.9844 L1944.2188,260.7031 Q1943.5938,260.125 1943,259.8594 Q1942.4063,259.5781 1941.7813,259.5781 Q1940.4375,259.5781 1939.75,260.6563 Q1939.0625,261.7188 1939.0625,263.8125 Q1939.0625,265.9063 1939.75,266.9844 Q1940.4375,268.0469 1941.7813,268.0469 Q1942.4063,268.0469 1943,267.7813 Q1943.5938,267.5 1944.2188,266.9219 L1944.2188,269.6406 Z "></path>
@@ -3798,47 +3800,48 @@ this metamodel and can be manipulated using its API.
         <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="303" x="1854.5" y="319.8198">owningReference : SpecializableTermReference [0..1]</text>
        </a>
        <a target="_top" actuate="onRequest" href="#StructuredPropertyCardinalityRestrictionAxiom" show="new" title="#StructuredPropertyCardinalityRestrictionAxiom" type="simple">
-        <rect fill="#FFFFFF" filter="url(#fsnph5g042hfe)" height="65.6094" style="stroke: #000000; stroke-width: 1.5;" width="320" x="6" y="653"></rect>
-        <rect fill="#FFFFFF" height="32" style="stroke: #000000; stroke-width: 1.5;" width="320" x="6" y="653"></rect>
-        <ellipse cx="21" cy="669" fill="#ADD1B2" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"></ellipse>
-        <path d="M23.9688,674.6406 Q23.3906,674.9375 22.75,675.0781 Q22.1094,675.2344 21.4063,675.2344 Q18.9063,675.2344 17.5781,673.5938 Q16.2656,671.9375 16.2656,668.8125 Q16.2656,665.6875 17.5781,664.0313 Q18.9063,662.375 21.4063,662.375 Q22.1094,662.375 22.75,662.5313 Q23.4063,662.6875 23.9688,662.9844 L23.9688,665.7031 Q23.3438,665.125 22.75,664.8594 Q22.1563,664.5781 21.5313,664.5781 Q20.1875,664.5781 19.5,665.6563 Q18.8125,666.7188 18.8125,668.8125 Q18.8125,670.9063 19.5,671.9844 Q20.1875,673.0469 21.5313,673.0469 Q22.1563,673.0469 22.75,672.7813 Q23.3438,672.5 23.9688,671.9219 L23.9688,674.6406 Z "></path>
-        <text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="288" x="35" y="673.1543">StructuredPropertyCardinalityRestrictionAxiom</text>
-        <line style="stroke: #000000; stroke-width: 1.5;" x1="7" x2="325" y1="685" y2="685"></line>
-        <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="137" x="12" y="699.2104">cardinality : UnsignedInt</text>
-        <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="179" x="12" y="712.0151">kind : CardinalityRestrictionKind</text>
+        <rect fill="#FFFFFF" filter="url(#f1j2b0zfla34ts)" height="78.4141" style="stroke: #000000; stroke-width: 1.5;" width="320" x="6" y="665"></rect>
+        <rect fill="#FFFFFF" height="32" style="stroke: #000000; stroke-width: 1.5;" width="320" x="6" y="665"></rect>
+        <ellipse cx="21" cy="681" fill="#ADD1B2" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"></ellipse>
+        <path d="M23.9688,686.6406 Q23.3906,686.9375 22.75,687.0781 Q22.1094,687.2344 21.4063,687.2344 Q18.9063,687.2344 17.5781,685.5938 Q16.2656,683.9375 16.2656,680.8125 Q16.2656,677.6875 17.5781,676.0313 Q18.9063,674.375 21.4063,674.375 Q22.1094,674.375 22.75,674.5313 Q23.4063,674.6875 23.9688,674.9844 L23.9688,677.7031 Q23.3438,677.125 22.75,676.8594 Q22.1563,676.5781 21.5313,676.5781 Q20.1875,676.5781 19.5,677.6563 Q18.8125,678.7188 18.8125,680.8125 Q18.8125,682.9063 19.5,683.9844 Q20.1875,685.0469 21.5313,685.0469 Q22.1563,685.0469 22.75,684.7813 Q23.3438,684.5 23.9688,683.9219 L23.9688,686.6406 Z "></path>
+        <text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="288" x="35" y="685.1543">StructuredPropertyCardinalityRestrictionAxiom</text>
+        <line style="stroke: #000000; stroke-width: 1.5;" x1="7" x2="325" y1="697" y2="697"></line>
+        <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="137" x="12" y="711.2104">cardinality : UnsignedInt</text>
+        <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="179" x="12" y="724.0151">kind : CardinalityRestrictionKind</text>
+        <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="132" x="12" y="736.8198">range : Structure [0..1]</text>
        </a>
        <a target="_top" actuate="onRequest" href="#StructuredPropertyRestrictionAxiom" show="new" title="#StructuredPropertyRestrictionAxiom" type="simple">
-        <rect fill="#FFFFFF" filter="url(#fsnph5g042hfe)" height="52.8047" style="stroke: #000000; stroke-width: 1.5;" width="255" x="473.5" y="532.5"></rect>
-        <rect fill="#FFFFFF" height="32" style="stroke: #000000; stroke-width: 1.5;" width="255" x="473.5" y="532.5"></rect>
-        <ellipse cx="488.5" cy="548.5" fill="#A9DCDF" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"></ellipse>
-        <path d="M488.6094,543.8438 L487.4531,548.9219 L489.7813,548.9219 L488.6094,543.8438 Z M487.125,541.6094 L490.1094,541.6094 L493.4688,554 L491.0156,554 L490.25,550.9375 L486.9688,550.9375 L486.2188,554 L483.7813,554 L487.125,541.6094 Z "></path>
-        <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="223" x="502.5" y="552.6543">StructuredPropertyRestrictionAxiom</text>
-        <line style="stroke: #000000; stroke-width: 1.5;" x1="474.5" x2="727.5" y1="564.5" y2="564.5"></line>
-        <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="187" x="479.5" y="578.7104">property : StructuredProperty [1]</text>
+        <rect fill="#FFFFFF" filter="url(#f1j2b0zfla34ts)" height="52.8047" style="stroke: #000000; stroke-width: 1.5;" width="255" x="473.5" y="538.5"></rect>
+        <rect fill="#FFFFFF" height="32" style="stroke: #000000; stroke-width: 1.5;" width="255" x="473.5" y="538.5"></rect>
+        <ellipse cx="488.5" cy="554.5" fill="#A9DCDF" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"></ellipse>
+        <path d="M488.6094,549.8438 L487.4531,554.9219 L489.7813,554.9219 L488.6094,549.8438 Z M487.125,547.6094 L490.1094,547.6094 L493.4688,560 L491.0156,560 L490.25,556.9375 L486.9688,556.9375 L486.2188,560 L483.7813,560 L487.125,547.6094 Z "></path>
+        <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="223" x="502.5" y="558.6543">StructuredPropertyRestrictionAxiom</text>
+        <line style="stroke: #000000; stroke-width: 1.5;" x1="474.5" x2="727.5" y1="570.5" y2="570.5"></line>
+        <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="187" x="479.5" y="584.7104">property : StructuredProperty [1]</text>
        </a>
        <a target="_top" actuate="onRequest" href="#StructuredPropertyRangeRestrictionAxiom" show="new" title="#StructuredPropertyRangeRestrictionAxiom" type="simple">
-        <rect fill="#FFFFFF" filter="url(#fsnph5g042hfe)" height="65.6094" style="stroke: #000000; stroke-width: 1.5;" width="295" x="361.5" y="653"></rect>
-        <rect fill="#FFFFFF" height="32" style="stroke: #000000; stroke-width: 1.5;" width="295" x="361.5" y="653"></rect>
-        <ellipse cx="376.5" cy="669" fill="#ADD1B2" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"></ellipse>
-        <path d="M379.4688,674.6406 Q378.8906,674.9375 378.25,675.0781 Q377.6094,675.2344 376.9063,675.2344 Q374.4063,675.2344 373.0781,673.5938 Q371.7656,671.9375 371.7656,668.8125 Q371.7656,665.6875 373.0781,664.0313 Q374.4063,662.375 376.9063,662.375 Q377.6094,662.375 378.25,662.5313 Q378.9063,662.6875 379.4688,662.9844 L379.4688,665.7031 Q378.8438,665.125 378.25,664.8594 Q377.6563,664.5781 377.0313,664.5781 Q375.6875,664.5781 375,665.6563 Q374.3125,666.7188 374.3125,668.8125 Q374.3125,670.9063 375,671.9844 Q375.6875,673.0469 377.0313,673.0469 Q377.6563,673.0469 378.25,672.7813 Q378.8438,672.5 379.4688,671.9219 L379.4688,674.6406 Z "></path>
-        <text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="263" x="390.5" y="673.1543">StructuredPropertyRangeRestrictionAxiom</text>
-        <line style="stroke: #000000; stroke-width: 1.5;" x1="362.5" x2="655.5" y1="685" y2="685"></line>
-        <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="154" x="367.5" y="699.2104">kind : RangeRestrictionKind</text>
-        <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="117" x="367.5" y="712.0151">range : Structure [1]</text>
+        <rect fill="#FFFFFF" filter="url(#f1j2b0zfla34ts)" height="65.6094" style="stroke: #000000; stroke-width: 1.5;" width="295" x="361.5" y="671"></rect>
+        <rect fill="#FFFFFF" height="32" style="stroke: #000000; stroke-width: 1.5;" width="295" x="361.5" y="671"></rect>
+        <ellipse cx="376.5" cy="687" fill="#ADD1B2" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"></ellipse>
+        <path d="M379.4688,692.6406 Q378.8906,692.9375 378.25,693.0781 Q377.6094,693.2344 376.9063,693.2344 Q374.4063,693.2344 373.0781,691.5938 Q371.7656,689.9375 371.7656,686.8125 Q371.7656,683.6875 373.0781,682.0313 Q374.4063,680.375 376.9063,680.375 Q377.6094,680.375 378.25,680.5313 Q378.9063,680.6875 379.4688,680.9844 L379.4688,683.7031 Q378.8438,683.125 378.25,682.8594 Q377.6563,682.5781 377.0313,682.5781 Q375.6875,682.5781 375,683.6563 Q374.3125,684.7188 374.3125,686.8125 Q374.3125,688.9063 375,689.9844 Q375.6875,691.0469 377.0313,691.0469 Q377.6563,691.0469 378.25,690.7813 Q378.8438,690.5 379.4688,689.9219 L379.4688,692.6406 Z "></path>
+        <text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="263" x="390.5" y="691.1543">StructuredPropertyRangeRestrictionAxiom</text>
+        <line style="stroke: #000000; stroke-width: 1.5;" x1="362.5" x2="655.5" y1="703" y2="703"></line>
+        <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="154" x="367.5" y="717.2104">kind : RangeRestrictionKind</text>
+        <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="117" x="367.5" y="730.0151">range : Structure [1]</text>
        </a>
        <a target="_top" actuate="onRequest" href="#StructuredPropertyValueRestrictionAxiom" show="new" title="#StructuredPropertyValueRestrictionAxiom" type="simple">
-        <rect fill="#FFFFFF" filter="url(#fsnph5g042hfe)" height="40" style="stroke: #000000; stroke-width: 1.5;" width="290" x="692" y="666"></rect>
-        <rect fill="#FFFFFF" height="32" style="stroke: #000000; stroke-width: 1.5;" width="290" x="692" y="666"></rect>
-        <ellipse cx="707" cy="682" fill="#ADD1B2" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"></ellipse>
-        <path d="M709.9688,687.6406 Q709.3906,687.9375 708.75,688.0781 Q708.1094,688.2344 707.4063,688.2344 Q704.9063,688.2344 703.5781,686.5938 Q702.2656,684.9375 702.2656,681.8125 Q702.2656,678.6875 703.5781,677.0313 Q704.9063,675.375 707.4063,675.375 Q708.1094,675.375 708.75,675.5313 Q709.4063,675.6875 709.9688,675.9844 L709.9688,678.7031 Q709.3438,678.125 708.75,677.8594 Q708.1563,677.5781 707.5313,677.5781 Q706.1875,677.5781 705.5,678.6563 Q704.8125,679.7188 704.8125,681.8125 Q704.8125,683.9063 705.5,684.9844 Q706.1875,686.0469 707.5313,686.0469 Q708.1563,686.0469 708.75,685.7813 Q709.3438,685.5 709.9688,684.9219 L709.9688,687.6406 Z "></path>
-        <text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="258" x="721" y="686.1543">StructuredPropertyValueRestrictionAxiom</text>
-        <line style="stroke: #000000; stroke-width: 1.5;" x1="693" x2="981" y1="698" y2="698"></line>
+        <rect fill="#FFFFFF" filter="url(#f1j2b0zfla34ts)" height="40" style="stroke: #000000; stroke-width: 1.5;" width="290" x="692" y="684"></rect>
+        <rect fill="#FFFFFF" height="32" style="stroke: #000000; stroke-width: 1.5;" width="290" x="692" y="684"></rect>
+        <ellipse cx="707" cy="700" fill="#ADD1B2" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"></ellipse>
+        <path d="M709.9688,705.6406 Q709.3906,705.9375 708.75,706.0781 Q708.1094,706.2344 707.4063,706.2344 Q704.9063,706.2344 703.5781,704.5938 Q702.2656,702.9375 702.2656,699.8125 Q702.2656,696.6875 703.5781,695.0313 Q704.9063,693.375 707.4063,693.375 Q708.1094,693.375 708.75,693.5313 Q709.4063,693.6875 709.9688,693.9844 L709.9688,696.7031 Q709.3438,696.125 708.75,695.8594 Q708.1563,695.5781 707.5313,695.5781 Q706.1875,695.5781 705.5,696.6563 Q704.8125,697.7188 704.8125,699.8125 Q704.8125,701.9063 705.5,702.9844 Q706.1875,704.0469 707.5313,704.0469 Q708.1563,704.0469 708.75,703.7813 Q709.3438,703.5 709.9688,702.9219 L709.9688,705.6406 Z "></path>
+        <text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="258" x="721" y="704.1543">StructuredPropertyValueRestrictionAxiom</text>
+        <line style="stroke: #000000; stroke-width: 1.5;" x1="693" x2="981" y1="716" y2="716"></line>
        </a>
        <a target="_top" actuate="onRequest" href="#StructureInstance" show="new" title="#StructureInstance" type="simple">
-        <rect fill="#D3D3D3" filter="url(#fsnph5g042hfe)" height="32" style="stroke: #000000; stroke-width: 1.5;" width="145" x="764.5" y="796"></rect>
-        <ellipse cx="779.5" cy="812" fill="#ADD1B2" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"></ellipse>
-        <path d="M782.4688,817.6406 Q781.8906,817.9375 781.25,818.0781 Q780.6094,818.2344 779.9063,818.2344 Q777.4063,818.2344 776.0781,816.5938 Q774.7656,814.9375 774.7656,811.8125 Q774.7656,808.6875 776.0781,807.0313 Q777.4063,805.375 779.9063,805.375 Q780.6094,805.375 781.25,805.5313 Q781.9063,805.6875 782.4688,805.9844 L782.4688,808.7031 Q781.8438,808.125 781.25,807.8594 Q780.6563,807.5781 780.0313,807.5781 Q778.6875,807.5781 778,808.6563 Q777.3125,809.7188 777.3125,811.8125 Q777.3125,813.9063 778,814.9844 Q778.6875,816.0469 780.0313,816.0469 Q780.6563,816.0469 781.25,815.7813 Q781.8438,815.5 782.4688,814.9219 L782.4688,817.6406 Z "></path>
-        <text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="113" x="793.5" y="816.1543">StructureInstance</text>
+        <rect fill="#D3D3D3" filter="url(#f1j2b0zfla34ts)" height="32" style="stroke: #000000; stroke-width: 1.5;" width="145" x="764.5" y="820"></rect>
+        <ellipse cx="779.5" cy="836" fill="#ADD1B2" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"></ellipse>
+        <path d="M782.4688,841.6406 Q781.8906,841.9375 781.25,842.0781 Q780.6094,842.2344 779.9063,842.2344 Q777.4063,842.2344 776.0781,840.5938 Q774.7656,838.9375 774.7656,835.8125 Q774.7656,832.6875 776.0781,831.0313 Q777.4063,829.375 779.9063,829.375 Q780.6094,829.375 781.25,829.5313 Q781.9063,829.6875 782.4688,829.9844 L782.4688,832.7031 Q781.8438,832.125 781.25,831.8594 Q780.6563,831.5781 780.0313,831.5781 Q778.6875,831.5781 778,832.6563 Q777.3125,833.7188 777.3125,835.8125 Q777.3125,837.9063 778,838.9844 Q778.6875,840.0469 780.0313,840.0469 Q780.6563,840.0469 781.25,839.7813 Q781.8438,839.5 782.4688,838.9219 L782.4688,841.6406 Z "></path>
+        <text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="113" x="793.5" y="840.1543">StructureInstance</text>
        </a>
        <a target="_top" actuate="onRequest" href="#AnnotatedElement" show="new" title="#AnnotatedElement" type="simple">
         <path d="M1692,83.488 C1692,104.211 1692,129.562 1692,146.651 " fill="none" style="stroke: #000000; stroke-width: 1.0;"></path>
@@ -3853,73 +3856,73 @@ this metamodel and can be manipulated using its API.
         <polygon fill="none" points="1428.16,315.564,1447.56,307.049,1437.7,325.806,1428.16,315.564" style="stroke: #000000; stroke-width: 1.0;"></polygon>
        </a>
        <a target="_top" actuate="onRequest" href="#RelationRestrictionAxiom" show="new" title="#RelationRestrictionAxiom" type="simple">
-        <path d="M1727.44,475.775 C1700.52,492.488 1671.09,510.757 1646.83,525.822 " fill="none" style="stroke: #000000; stroke-width: 1.0;"></path>
-        <polygon fill="none" points="1724,469.669,1744.69,465.067,1731.39,481.563,1724,469.669" style="stroke: #000000; stroke-width: 1.0;"></polygon>
+        <path d="M1730.28,476.163 C1705.13,492.496 1677.51,510.427 1653.83,525.805 " fill="none" style="stroke: #000000; stroke-width: 1.0;"></path>
+        <polygon fill="none" points="1726.64,470.183,1747.22,465.162,1734.26,481.925,1726.64,470.183" style="stroke: #000000; stroke-width: 1.0;"></polygon>
        </a>
        <a target="_top" actuate="onRequest" href="#RelationRestrictionAxiom" show="new" title="#RelationRestrictionAxiom" type="simple">
-        <path d="M1833.22,483.594 C1840.14,497.992 1847.35,512.975 1853.46,525.69 " fill="none" style="stroke: #000000; stroke-width: 1.0;"></path>
-        <polygon fill="none" points="1826.75,486.301,1824.39,465.243,1839.37,480.233,1826.75,486.301" style="stroke: #000000; stroke-width: 1.0;"></polygon>
+        <path d="M1831.95,483.421 C1839.5,499.839 1847.49,517.214 1854.1,531.609 " fill="none" style="stroke: #000000; stroke-width: 1.0;"></path>
+        <polygon fill="none" points="1825.55,486.258,1823.55,465.162,1838.26,480.408,1825.55,486.258" style="stroke: #000000; stroke-width: 1.0;"></polygon>
        </a>
        <a target="_top" actuate="onRequest" href="#RestrictionAxiom" show="new" title="#RestrictionAxiom" type="simple">
         <path d="M1528.13,315.305 C1536.46,318.963 1544.92,322.616 1553,326 C1602.92,346.912 1658.92,368.968 1705.52,386.941 " fill="none" style="stroke: #000000; stroke-width: 1.0;"></path>
         <polygon fill="none" points="1525.2,321.663,1509.77,307.145,1530.88,308.87,1525.2,321.663" style="stroke: #000000; stroke-width: 1.0;"></polygon>
        </a>
        <a target="_top" actuate="onRequest" href="#RelationRestrictionAxiom" show="new" title="#RelationRestrictionAxiom" type="simple">
-        <path d="M1919.14,472.605 C1968.93,492.673 2025.55,515.495 2067.72,532.493 " fill="none" style="stroke: #000000; stroke-width: 1.0;"></path>
-        <polygon fill="none" points="1916.37,479.036,1900.44,465.067,1921.61,466.051,1916.37,479.036" style="stroke: #000000; stroke-width: 1.0;"></polygon>
+        <path d="M1915.17,473.019 C1966.87,494.814 2026.68,520.025 2070.21,538.373 " fill="none" style="stroke: #000000; stroke-width: 1.0;"></path>
+        <polygon fill="none" points="1912.24,479.381,1896.53,465.162,1917.68,466.481,1912.24,479.381" style="stroke: #000000; stroke-width: 1.0;"></polygon>
        </a>
        <a target="_top" actuate="onRequest" href="#Axiom" show="new" title="#Axiom" type="simple">
         <path d="M1640.08,195.351 C1598.42,217.295 1541.02,247.535 1504.2,266.93 " fill="none" style="stroke: #000000; stroke-width: 1.0;"></path>
         <polygon fill="none" points="1637.02,189.05,1657.98,185.922,1643.55,201.436,1637.02,189.05" style="stroke: #000000; stroke-width: 1.0;"></polygon>
        </a>
        <a target="_top" actuate="onRequest" href="#ScalarPropertyRestrictionAxiom" show="new" title="#ScalarPropertyRestrictionAxiom" type="simple">
-        <path d="M1272.93,598.033 C1250.72,615.601 1224.64,636.231 1203.46,652.989 " fill="none" style="stroke: #000000; stroke-width: 1.0;"></path>
-        <polygon fill="none" points="1268.62,592.517,1288.65,585.597,1277.3,603.496,1268.62,592.517" style="stroke: #000000; stroke-width: 1.0;"></polygon>
+        <path d="M1276.02,605 C1254.35,623.794 1228.45,646.249 1206.92,664.92 " fill="none" style="stroke: #000000; stroke-width: 1.0;"></path>
+        <polygon fill="none" points="1271.58,599.582,1291.28,591.769,1280.76,610.16,1271.58,599.582" style="stroke: #000000; stroke-width: 1.0;"></polygon>
        </a>
        <a target="_top" actuate="onRequest" href="#ScalarPropertyRestrictionAxiom" show="new" title="#ScalarPropertyRestrictionAxiom" type="simple">
-        <path d="M1369.09,598.291 C1391.09,615.802 1416.85,636.313 1437.79,652.989 " fill="none" style="stroke: #000000; stroke-width: 1.0;"></path>
-        <polygon fill="none" points="1364.44,603.531,1353.15,585.597,1373.16,592.578,1364.44,603.531" style="stroke: #000000; stroke-width: 1.0;"></polygon>
+        <path d="M1365.71,605.018 C1389.57,625.837 1418.58,651.147 1441.13,670.827 " fill="none" style="stroke: #000000; stroke-width: 1.0;"></path>
+        <polygon fill="none" points="1361,610.193,1350.53,591.769,1370.2,599.644,1361,610.193" style="stroke: #000000; stroke-width: 1.0;"></polygon>
        </a>
        <a target="_top" actuate="onRequest" href="#PropertyRestrictionAxiom" show="new" title="#PropertyRestrictionAxiom" type="simple">
-        <path d="M1321,479.156 C1321,497.479 1321,517.257 1321,532.42 " fill="none" style="stroke: #000000; stroke-width: 1.0;"></path>
-        <polygon fill="none" points="1314,479.046,1321,459.046,1328,479.046,1314,479.046" style="stroke: #000000; stroke-width: 1.0;"></polygon>
+        <path d="M1321,479.217 C1321,499.515 1321,521.838 1321,538.481 " fill="none" style="stroke: #000000; stroke-width: 1.0;"></path>
+        <polygon fill="none" points="1314,479.12,1321,459.12,1328,479.12,1314,479.12" style="stroke: #000000; stroke-width: 1.0;"></polygon>
        </a>
        <a target="_top" actuate="onRequest" href="#ScalarPropertyRestrictionAxiom" show="new" title="#ScalarPropertyRestrictionAxiom" type="simple">
-        <path d="M1433.82,590.859 C1519.77,614.368 1635.38,645.991 1708.31,665.937 " fill="none" style="stroke: #000000; stroke-width: 1.0;"></path>
-        <polygon fill="none" points="1431.75,597.55,1414.31,585.522,1435.45,584.046,1431.75,597.55" style="stroke: #000000; stroke-width: 1.0;"></polygon>
+        <path d="M1425.44,597.309 C1514.58,624.032 1639.87,661.593 1714.61,683.996 " fill="none" style="stroke: #000000; stroke-width: 1.0;"></path>
+        <polygon fill="none" points="1423.3,603.976,1406.15,591.528,1427.32,590.566,1423.3,603.976" style="stroke: #000000; stroke-width: 1.0;"></polygon>
        </a>
-       <path d="M1778,719.203 C1778,738.9302 1778,763.9377 1778,782.868 " fill="none" style="stroke: #000000; stroke-width: 1.0;"></path>
-       <polygon fill="#000000" points="1778,795.9713,1782,786.9713,1778,790.9713,1774,786.9713,1778,795.9713" style="stroke: #000000; stroke-width: 1.0;"></polygon>
-       <line style="stroke: #000000; stroke-width: 1.0;" x1="1778" x2="1778" y1="790.9713" y2="782.9713"></line>
-       <polygon fill="#000000" points="1778,706.103,1774,712.103,1778,718.103,1782,712.103,1778,706.103" style="stroke: #000000; stroke-width: 1.0;"></polygon>
-       <text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="34" x="1779" y="762.0669">value</text>
-       <text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="1768.625" y="784.973">1</text>
+       <path d="M1778,737.297 C1778,758.5961 1778,786.2309 1778,806.6728 " fill="none" style="stroke: #000000; stroke-width: 1.0;"></path>
+       <polygon fill="#000000" points="1778,819.801,1782,810.801,1778,814.801,1774,810.801,1778,819.801" style="stroke: #000000; stroke-width: 1.0;"></polygon>
+       <line style="stroke: #000000; stroke-width: 1.0;" x1="1778" x2="1778" y1="814.801" y2="806.801"></line>
+       <polygon fill="#000000" points="1778,724.182,1774,730.182,1778,736.182,1782,730.182,1778,724.182" style="stroke: #000000; stroke-width: 1.0;"></polygon>
+       <text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="34" x="1779" y="786.0669">value</text>
+       <text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="1768.675" y="809.0396">1</text>
        <a target="_top" actuate="onRequest" href="#Axiom" show="new" title="#Axiom" type="simple">
         <path d="M1745.02,187.925 C1788.55,204.285 1851.46,227.926 1904.61,247.898 " fill="none" style="stroke: #000000; stroke-width: 1.0;"></path>
         <polygon fill="none" points="1742.46,194.441,1726.2,180.853,1747.39,181.336,1742.46,194.441" style="stroke: #000000; stroke-width: 1.0;"></polygon>
        </a>
        <a target="_top" actuate="onRequest" href="#StructuredPropertyRestrictionAxiom" show="new" title="#StructuredPropertyRestrictionAxiom" type="simple">
-        <path d="M492.88,591.069 C427.281,609.919 343.738,633.926 277.531,652.951 " fill="none" style="stroke: #000000; stroke-width: 1.0;"></path>
-        <polygon fill="none" points="491.029,584.318,512.184,585.522,494.896,597.773,491.029,584.318" style="stroke: #000000; stroke-width: 1.0;"></polygon>
+        <path d="M500.829,597.548 C437.128,617.61 354.263,643.708 286.908,664.921 " fill="none" style="stroke: #000000; stroke-width: 1.0;"></path>
+        <polygon fill="none" points="498.766,590.859,519.945,591.528,502.971,604.212,498.766,590.859" style="stroke: #000000; stroke-width: 1.0;"></polygon>
        </a>
        <a target="_top" actuate="onRequest" href="#StructuredPropertyRestrictionAxiom" show="new" title="#StructuredPropertyRestrictionAxiom" type="simple">
-        <path d="M570.182,601.873 C557.967,618.469 544.143,637.252 532.73,652.759 " fill="none" style="stroke: #000000; stroke-width: 1.0;"></path>
-        <polygon fill="none" points="564.668,597.556,582.16,585.597,575.943,605.854,564.668,597.556" style="stroke: #000000; stroke-width: 1.0;"></polygon>
+        <path d="M572.403,608.584 C558.972,628.586 543.218,652.046 530.774,670.576 " fill="none" style="stroke: #000000; stroke-width: 1.0;"></path>
+        <polygon fill="none" points="566.734,604.47,583.696,591.769,578.357,612.275,566.734,604.47" style="stroke: #000000; stroke-width: 1.0;"></polygon>
        </a>
        <a target="_top" actuate="onRequest" href="#PropertyRestrictionAxiom" show="new" title="#PropertyRestrictionAxiom" type="simple">
-        <path d="M1167.61,454.909 C1036.96,478.679 851.44,512.434 728.736,534.759 " fill="none" style="stroke: #000000; stroke-width: 1.0;"></path>
-        <polygon fill="none" points="1166.75,447.95,1187.68,451.257,1169.26,461.724,1166.75,447.95" style="stroke: #000000; stroke-width: 1.0;"></polygon>
+        <path d="M1168.01,456.111 C1037.34,480.973 851.566,516.323 728.736,539.695 " fill="none" style="stroke: #000000; stroke-width: 1.0;"></path>
+        <polygon fill="none" points="1166.73,449.229,1187.68,452.368,1169.34,462.983,1166.73,449.229" style="stroke: #000000; stroke-width: 1.0;"></polygon>
        </a>
        <a target="_top" actuate="onRequest" href="#StructuredPropertyRestrictionAxiom" show="new" title="#StructuredPropertyRestrictionAxiom" type="simple">
-        <path d="M667.116,595.019 C710.504,618 765.578,647.17 801.054,665.961 " fill="none" style="stroke: #000000; stroke-width: 1.0;"></path>
-        <polygon fill="none" points="663.725,601.144,649.328,585.597,670.278,588.773,663.725,601.144" style="stroke: #000000; stroke-width: 1.0;"></polygon>
+        <path d="M662.593,601.755 C707.862,628.034 767.614,662.721 804.124,683.915 " fill="none" style="stroke: #000000; stroke-width: 1.0;"></path>
+        <polygon fill="none" points="658.895,607.703,645.113,591.608,665.924,595.595,658.895,607.703" style="stroke: #000000; stroke-width: 1.0;"></polygon>
        </a>
-       <path d="M837,719.203 C837,738.9302 837,763.9377 837,782.868 " fill="none" style="stroke: #000000; stroke-width: 1.0;"></path>
-       <polygon fill="#000000" points="837,795.9713,841,786.9713,837,790.9713,833,786.9713,837,795.9713" style="stroke: #000000; stroke-width: 1.0;"></polygon>
-       <line style="stroke: #000000; stroke-width: 1.0;" x1="837" x2="837" y1="790.9713" y2="782.9713"></line>
-       <polygon fill="#000000" points="837,706.103,833,712.103,837,718.103,841,712.103,837,706.103" style="stroke: #000000; stroke-width: 1.0;"></polygon>
-       <text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="34" x="838" y="762.0669">value</text>
-       <text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="827.625" y="784.973">1</text>
+       <path d="M837,737.297 C837,758.5961 837,786.2309 837,806.6728 " fill="none" style="stroke: #000000; stroke-width: 1.0;"></path>
+       <polygon fill="#000000" points="837,819.801,841,810.801,837,814.801,833,810.801,837,819.801" style="stroke: #000000; stroke-width: 1.0;"></polygon>
+       <line style="stroke: #000000; stroke-width: 1.0;" x1="837" x2="837" y1="814.801" y2="806.801"></line>
+       <polygon fill="#000000" points="837,724.182,833,730.182,837,736.182,841,730.182,837,724.182" style="stroke: #000000; stroke-width: 1.0;"></polygon>
+       <text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="34" x="838" y="786.0669">value</text>
+       <text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="827.675" y="809.0396">1</text>
       </g>
      </svg>
     </p>
@@ -3959,8 +3962,8 @@ this metamodel and can be manipulated using its API.
       <p>The reference to an entity that owns this axiom</p>
     </ul>
     <h4 class="heading settled" data-level="3.6.4" id="PropertyRestrictionAxiom"><span class="secno">3.6.4. </span><span class="content"><dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="propertyrestrictionaxiom"><em>PropertyRestrictionAxiom</em></dfn></span><a class="self-link" href="#PropertyRestrictionAxiom"></a></h4>
-     PropertyRestrictionAxiom is an axiom that states that a classifier restricts a property that has the classifier as its
-	domain. It can be specified directly on a classifier or indirectly on a reference to one. 
+     PropertyRestrictionAxiom is an axiom that places some restriction on the value of a property in the context of
+	the restricting classifier domain. It can be specified directly on the classifier or indirectly on a reference to it. 
     <p><em>Super classes:</em> <a data-link-type="dfn" href="#restrictionaxiom" id="ref-for-restrictionaxiom①">RestrictionAxiom</a></p>
     <p><em>Sub classes:</em> <a data-link-type="dfn" href="#scalarpropertyrestrictionaxiom" id="ref-for-scalarpropertyrestrictionaxiom">ScalarPropertyRestrictionAxiom</a>, <a data-link-type="dfn" href="#structuredpropertyrestrictionaxiom" id="ref-for-structuredpropertyrestrictionaxiom">StructuredPropertyRestrictionAxiom</a></p>
     <p><em>Properties:</em></p>
@@ -3984,9 +3987,9 @@ this metamodel and can be manipulated using its API.
       <p>Some values are restricted to the range</p>
     </ul>
     <h4 class="heading settled" data-level="3.6.6" id="RelationCardinalityRestrictionAxiom"><span class="secno">3.6.6. </span><span class="content"><dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="relationcardinalityrestrictionaxiom">RelationCardinalityRestrictionAxiom</dfn></span><a class="self-link" href="#RelationCardinalityRestrictionAxiom"></a></h4>
-     RelationCardinalityRestrictionAxiom is a relation restriction axiom that restricts the cardinality of a relation to an exact
-	number, a minimum number or a maximum number. This restrictions may apply for all or for some instances of the relation that
-	has the restricting entity as a domain. 
+     RelationCardinalityRestrictionAxiom is a relation restriction axiom that restricts the cardinality of a relation’s range
+	to an exact number, a minimum number or a maximum number. This restrictions may either apply generally to all targets of
+	of the relation that have instances of the restricting entity as sources, or to those classified by a specific range subtype. 
     <p><em>Super classes:</em> <a data-link-type="dfn" href="#relationrestrictionaxiom" id="ref-for-relationrestrictionaxiom①">RelationRestrictionAxiom</a></p>
     <p><em>Properties:</em></p>
     <ul>
@@ -3996,11 +3999,14 @@ this metamodel and can be manipulated using its API.
      <li data-md>
       <p><strong>kind</strong> : <a data-link-type="dfn" href="#cardinalityrestrictionkind" id="ref-for-cardinalityrestrictionkind">CardinalityRestrictionKind</a> [0..1]</p>
       <p>The kind of cardinality restriction specified by this axiom (default is exactly)</p>
+     <li data-md>
+      <p><strong>range</strong> : <a data-link-type="dfn" href="#entity" id="ref-for-entity⑨">Entity</a> [0..1]</p>
+      <p>The restricted range specified by this axiom</p>
     </ul>
     <h4 class="heading settled" data-level="3.6.7" id="RelationRangeRestrictionAxiom"><span class="secno">3.6.7. </span><span class="content"><dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="relationrangerestrictionaxiom">RelationRangeRestrictionAxiom</dfn></span><a class="self-link" href="#RelationRangeRestrictionAxiom"></a></h4>
-     RelationRangeRestrictionAxiom is a relation restriction axiom that restricts the range of a relation to an entity that
-	specializes the original range. This restrictions may apply for all or for some values of the property
-	on an instance of the classifier. 
+     RelationRangeRestrictionAxiom is a relation restriction axiom that restricts the range of a relation to specific subtype.
+	This restrictions may apply to all or to some instances of the relation that have an instance of the restricting entity as
+	a source. 
     <p><em>Super classes:</em> <a data-link-type="dfn" href="#relationrestrictionaxiom" id="ref-for-relationrestrictionaxiom②">RelationRestrictionAxiom</a></p>
     <p><em>Properties:</em></p>
     <ul>
@@ -4008,12 +4014,12 @@ this metamodel and can be manipulated using its API.
       <p><strong>kind</strong> : <a data-link-type="dfn" href="#rangerestrictionkind" id="ref-for-rangerestrictionkind">RangeRestrictionKind</a> [0..1]</p>
       <p>The range restriction kind specified by this axiom (default is all)</p>
      <li data-md>
-      <p><strong>range</strong> : <a data-link-type="dfn" href="#entity" id="ref-for-entity⑨">Entity</a> [1]</p>
+      <p><strong>range</strong> : <a data-link-type="dfn" href="#entity" id="ref-for-entity①⓪">Entity</a> [1]</p>
       <p>The restricted range specified by this axiom</p>
     </ul>
     <h4 class="heading settled" data-level="3.6.8" id="RelationRestrictionAxiom"><span class="secno">3.6.8. </span><span class="content"><dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="relationrestrictionaxiom">RelationRestrictionAxiom</dfn></span><a class="self-link" href="#RelationRestrictionAxiom"></a></h4>
-     RelationRestrictionAxiom is an axiom that states that an entity restricts a relation that has the classifier as its
-	domain. It can be specified directly on an entity or indirectly on a reference to one. 
+     RelationRestrictionAxiom is an axiom that places some restriction on the target of a relation in the context of
+	the restricting classifier domain. It can be specified directly on the classifier or indirectly on a reference to it. 
     <p><em>Super classes:</em> <a data-link-type="dfn" href="#restrictionaxiom" id="ref-for-restrictionaxiom②">RestrictionAxiom</a></p>
     <p><em>Sub classes:</em> <a data-link-type="dfn" href="#relationrangerestrictionaxiom" id="ref-for-relationrangerestrictionaxiom①">RelationRangeRestrictionAxiom</a>, <a data-link-type="dfn" href="#relationcardinalityrestrictionaxiom" id="ref-for-relationcardinalityrestrictionaxiom①">RelationCardinalityRestrictionAxiom</a>, <a data-link-type="dfn" href="#relationtargetrestrictionaxiom" id="ref-for-relationtargetrestrictionaxiom①">RelationTargetRestrictionAxiom</a></p>
     <p><em>Properties:</em></p>
@@ -4022,7 +4028,7 @@ this metamodel and can be manipulated using its API.
       <p><strong>relation</strong> : <a data-link-type="dfn" href="#relation" id="ref-for-relation④">Relation</a> [1]</p>
       <p>The restricted relation specified by this axiom</p>
      <li data-md>
-      <p><strong>owningEntity</strong> : <a data-link-type="dfn" href="#entity" id="ref-for-entity①⓪">Entity</a> [0..1]</p>
+      <p><strong>owningEntity</strong> : <a data-link-type="dfn" href="#entity" id="ref-for-entity①①">Entity</a> [0..1]</p>
       <p>The restricting entity specified by this axiom</p>
      <li data-md>
       <p><strong>owningReference</strong> : <a data-link-type="dfn" href="#entityreference" id="ref-for-entityreference①">EntityReference</a> [0..1]</p>
@@ -4044,8 +4050,8 @@ this metamodel and can be manipulated using its API.
     <p><em>Sub classes:</em> <a data-link-type="dfn" href="#propertyrestrictionaxiom" id="ref-for-propertyrestrictionaxiom①">PropertyRestrictionAxiom</a>, <a data-link-type="dfn" href="#relationrestrictionaxiom" id="ref-for-relationrestrictionaxiom④">RelationRestrictionAxiom</a></p>
     <h4 class="heading settled" data-level="3.6.11" id="ScalarPropertyCardinalityRestrictionAxiom"><span class="secno">3.6.11. </span><span class="content"><dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="scalarpropertycardinalityrestrictionaxiom">ScalarPropertyCardinalityRestrictionAxiom</dfn></span><a class="self-link" href="#ScalarPropertyCardinalityRestrictionAxiom"></a></h4>
      ScalarPropertyCardinalityRestrictionAxiom is a scalar property restriction axiom that restricts the cardinality of a scalar
-	property to an exact number, a minimum number or a maximum number. This restrictions may apply for all or for some values
-	of the property that has the restricting entity as a domain. 
+	property to an exact number, a minimum number or a maximum number. This restrictions can apply to all values of the property
+	that have the restricting classifier as a domain, or to those values classified by a specific range subtype. 
     <p><em>Super classes:</em> <a data-link-type="dfn" href="#scalarpropertyrestrictionaxiom" id="ref-for-scalarpropertyrestrictionaxiom①">ScalarPropertyRestrictionAxiom</a></p>
     <p><em>Properties:</em></p>
     <ul>
@@ -4055,11 +4061,14 @@ this metamodel and can be manipulated using its API.
      <li data-md>
       <p><strong>kind</strong> : <a data-link-type="dfn" href="#cardinalityrestrictionkind" id="ref-for-cardinalityrestrictionkind①">CardinalityRestrictionKind</a> [0..1]</p>
       <p>The kind of cardinality restriction specified by this axiom (default is exactly)</p>
+     <li data-md>
+      <p><strong>range</strong> : <a data-link-type="dfn" href="#scalar" id="ref-for-scalar⑤">Scalar</a> [0..1]</p>
+      <p>The restricted range specified by this axiom</p>
     </ul>
     <h4 class="heading settled" data-level="3.6.12" id="ScalarPropertyRangeRestrictionAxiom"><span class="secno">3.6.12. </span><span class="content"><dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="scalarpropertyrangerestrictionaxiom">ScalarPropertyRangeRestrictionAxiom</dfn></span><a class="self-link" href="#ScalarPropertyRangeRestrictionAxiom"></a></h4>
      ScalarPropertyRangeRestrictionAxiom is a scalar property restriction axiom that restricts the range of a property to
-	a scalar that specializes the original range. This restrictions may apply for all or for some values of the property
-	on an instance of the classifier. 
+	a scalar that specializes the original range. This restrictions may apply to all or to some values of the property
+	that have the restricting classifier as a domain. 
     <p><em>Super classes:</em> <a data-link-type="dfn" href="#scalarpropertyrestrictionaxiom" id="ref-for-scalarpropertyrestrictionaxiom②">ScalarPropertyRestrictionAxiom</a></p>
     <p><em>Properties:</em></p>
     <ul>
@@ -4067,7 +4076,7 @@ this metamodel and can be manipulated using its API.
       <p><strong>kind</strong> : <a data-link-type="dfn" href="#rangerestrictionkind" id="ref-for-rangerestrictionkind①">RangeRestrictionKind</a> [0..1]</p>
       <p>The range restriction kind specified by this axiom (default is all)</p>
      <li data-md>
-      <p><strong>range</strong> : <a data-link-type="dfn" href="#scalar" id="ref-for-scalar⑤">Scalar</a> [1]</p>
+      <p><strong>range</strong> : <a data-link-type="dfn" href="#scalar" id="ref-for-scalar⑥">Scalar</a> [1]</p>
       <p>The restricted range specified by this axiom</p>
     </ul>
     <h4 class="heading settled" data-level="3.6.13" id="ScalarPropertyRestrictionAxiom"><span class="secno">3.6.13. </span><span class="content"><dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="scalarpropertyrestrictionaxiom"><em>ScalarPropertyRestrictionAxiom</em></dfn></span><a class="self-link" href="#ScalarPropertyRestrictionAxiom"></a></h4>
@@ -4082,7 +4091,7 @@ this metamodel and can be manipulated using its API.
     </ul>
     <h4 class="heading settled" data-level="3.6.14" id="ScalarPropertyValueRestrictionAxiom"><span class="secno">3.6.14. </span><span class="content"><dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="scalarpropertyvaluerestrictionaxiom">ScalarPropertyValueRestrictionAxiom</dfn></span><a class="self-link" href="#ScalarPropertyValueRestrictionAxiom"></a></h4>
      ScalarPropertyValueRestrictionAxiom is a scalar property restriction axiom that restricts the value of the property
-	to a specific literal. 
+	that has the restricting classifier as a domain to a specific literal. 
     <p><em>Super classes:</em> <a data-link-type="dfn" href="#scalarpropertyrestrictionaxiom" id="ref-for-scalarpropertyrestrictionaxiom③">ScalarPropertyRestrictionAxiom</a></p>
     <p><em>Properties:</em></p>
     <ul>
@@ -4108,8 +4117,8 @@ this metamodel and can be manipulated using its API.
     </ul>
     <h4 class="heading settled" data-level="3.6.16" id="StructuredPropertyCardinalityRestrictionAxiom"><span class="secno">3.6.16. </span><span class="content"><dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="structuredpropertycardinalityrestrictionaxiom">StructuredPropertyCardinalityRestrictionAxiom</dfn></span><a class="self-link" href="#StructuredPropertyCardinalityRestrictionAxiom"></a></h4>
      StructuredPropertyCardinalityRestrictionAxiom is a structured property restriction axiom that restricts the cardinality of
-	a structured property to an exact number, a minimum number or a maximum number. This restrictions may apply for all or for
-	some values of the property that has the restricting entity as a domain. 
+	a structured property to an exact number, a minimum number or a maximum number. This restrictions can apply to all values
+	of the property that have the restricting classifier as a domain, or to those values classified by a specific range subtype. 
     <p><em>Super classes:</em> <a data-link-type="dfn" href="#structuredpropertyrestrictionaxiom" id="ref-for-structuredpropertyrestrictionaxiom①">StructuredPropertyRestrictionAxiom</a></p>
     <p><em>Properties:</em></p>
     <ul>
@@ -4119,11 +4128,14 @@ this metamodel and can be manipulated using its API.
      <li data-md>
       <p><strong>kind</strong> : <a data-link-type="dfn" href="#cardinalityrestrictionkind" id="ref-for-cardinalityrestrictionkind②">CardinalityRestrictionKind</a> [0..1]</p>
       <p>The kind of cardinality restriction specified by this axiom (default is exactly)</p>
+     <li data-md>
+      <p><strong>range</strong> : <a data-link-type="dfn" href="#structure" id="ref-for-structure③">Structure</a> [0..1]</p>
+      <p>The restricted range specified by this axiom</p>
     </ul>
     <h4 class="heading settled" data-level="3.6.17" id="StructuredPropertyRangeRestrictionAxiom"><span class="secno">3.6.17. </span><span class="content"><dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="structuredpropertyrangerestrictionaxiom">StructuredPropertyRangeRestrictionAxiom</dfn></span><a class="self-link" href="#StructuredPropertyRangeRestrictionAxiom"></a></h4>
      StructuredPropertyRangeRestrictionAxiom is a structured property restriction axiom that restricts the range of a property
-	to a structure that specializes the original range. This restrictions may apply for all or for some values of the
-	property on an instance of the classifier. 
+	to a structure that specializes the original range. This restrictions may apply to all or to some values of the
+	property that have the restricting classifier as a domain. 
     <p><em>Super classes:</em> <a data-link-type="dfn" href="#structuredpropertyrestrictionaxiom" id="ref-for-structuredpropertyrestrictionaxiom②">StructuredPropertyRestrictionAxiom</a></p>
     <p><em>Properties:</em></p>
     <ul>
@@ -4131,7 +4143,7 @@ this metamodel and can be manipulated using its API.
       <p><strong>kind</strong> : <a data-link-type="dfn" href="#rangerestrictionkind" id="ref-for-rangerestrictionkind②">RangeRestrictionKind</a> [0..1]</p>
       <p>The range restriction kind specified by this axiom (default is all)</p>
      <li data-md>
-      <p><strong>range</strong> : <a data-link-type="dfn" href="#structure" id="ref-for-structure③">Structure</a> [1]</p>
+      <p><strong>range</strong> : <a data-link-type="dfn" href="#structure" id="ref-for-structure④">Structure</a> [1]</p>
       <p>The restricted range specified by this axiom</p>
     </ul>
     <h4 class="heading settled" data-level="3.6.18" id="StructuredPropertyRestrictionAxiom"><span class="secno">3.6.18. </span><span class="content"><dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="structuredpropertyrestrictionaxiom"><em>StructuredPropertyRestrictionAxiom</em></dfn></span><a class="self-link" href="#StructuredPropertyRestrictionAxiom"></a></h4>
@@ -4146,7 +4158,7 @@ this metamodel and can be manipulated using its API.
     </ul>
     <h4 class="heading settled" data-level="3.6.19" id="StructuredPropertyValueRestrictionAxiom"><span class="secno">3.6.19. </span><span class="content"><dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="structuredpropertyvaluerestrictionaxiom">StructuredPropertyValueRestrictionAxiom</dfn></span><a class="self-link" href="#StructuredPropertyValueRestrictionAxiom"></a></h4>
      StructuredPropertyValueRestrictionAxiom is a structured property restriction axiom that restricts the value of the property
-	to a specific structure instance. 
+	that has the restricting classifier as a domain to a specific structure instance. 
     <p><em>Super classes:</em> <a data-link-type="dfn" href="#structuredpropertyrestrictionaxiom" id="ref-for-structuredpropertyrestrictionaxiom③">StructuredPropertyRestrictionAxiom</a></p>
     <p><em>Properties:</em></p>
     <ul>
@@ -4326,7 +4338,7 @@ this metamodel and can be manipulated using its API.
     <p><em>Properties:</em></p>
     <ul>
      <li data-md>
-      <p><strong>entity</strong> : <a data-link-type="dfn" href="#entity" id="ref-for-entity①①">Entity</a> [1]</p>
+      <p><strong>entity</strong> : <a data-link-type="dfn" href="#entity" id="ref-for-entity①②">Entity</a> [1]</p>
       <p>The entity that this predicates requires as a type of a named instance</p>
     </ul>
     <h4 class="heading settled" data-level="3.7.3" id="Predicate"><span class="secno">3.7.3. </span><span class="content"><dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="predicate"><em>Predicate</em></dfn></span><a class="self-link" href="#Predicate"></a></h4>
@@ -4625,7 +4637,7 @@ this metamodel and can be manipulated using its API.
     <p><em>Properties:</em></p>
     <ul>
      <li data-md>
-      <p><strong>type</strong> : <a data-link-type="dfn" href="#structure" id="ref-for-structure④">Structure</a> [1]</p>
+      <p><strong>type</strong> : <a data-link-type="dfn" href="#structure" id="ref-for-structure⑤">Structure</a> [1]</p>
       <p>The structure that is the type of this instance</p>
      <li data-md>
       <p><strong>owningAxiom</strong> : <a data-link-type="dfn" href="#structuredpropertyvaluerestrictionaxiom" id="ref-for-structuredpropertyvaluerestrictionaxiom②">StructuredPropertyValueRestrictionAxiom</a> [0..1]</p>
@@ -5464,7 +5476,7 @@ this metamodel and can be manipulated using its API.
     <p><em>Properties:</em></p>
     <ul>
      <li data-md>
-      <p><strong>structure</strong> : <a data-link-type="dfn" href="#structure" id="ref-for-structure⑤">Structure</a> [1]</p>
+      <p><strong>structure</strong> : <a data-link-type="dfn" href="#structure" id="ref-for-structure⑥">Structure</a> [1]</p>
       <p>The structure referenced by this reference</p>
     </ul>
     <h4 class="heading settled" data-level="3.10.19" id="StructuredPropertyReference"><span class="secno">3.10.19. </span><span class="content"><dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="structuredpropertyreference">StructuredPropertyReference</dfn></span><a class="self-link" href="#StructuredPropertyReference"></a></h4>
@@ -6130,9 +6142,10 @@ this metamodel and can be manipulated using its API.
     <li><a href="#ref-for-entity④">3.5.3. Concept</a>
     <li><a href="#ref-for-entity⑤">3.5.7. RelationEntity</a> <a href="#ref-for-entity⑥">(2)</a> <a href="#ref-for-entity⑦">(3)</a>
     <li><a href="#ref-for-entity⑧">3.6.3. KeyAxiom</a>
-    <li><a href="#ref-for-entity⑨">3.6.7. RelationRangeRestrictionAxiom</a>
-    <li><a href="#ref-for-entity①⓪">3.6.8. RelationRestrictionAxiom</a>
-    <li><a href="#ref-for-entity①①">3.7.2. EntityPredicate</a>
+    <li><a href="#ref-for-entity⑨">3.6.6. RelationCardinalityRestrictionAxiom</a>
+    <li><a href="#ref-for-entity①⓪">3.6.7. RelationRangeRestrictionAxiom</a>
+    <li><a href="#ref-for-entity①①">3.6.8. RelationRestrictionAxiom</a>
+    <li><a href="#ref-for-entity①②">3.7.2. EntityPredicate</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="enumeratedscalar">
@@ -6171,7 +6184,8 @@ this metamodel and can be manipulated using its API.
     <li><a href="#ref-for-scalar②">3.5.5. EnumeratedScalar</a>
     <li><a href="#ref-for-scalar③">3.5.6. FacetedScalar</a>
     <li><a href="#ref-for-scalar④">3.5.10. Type</a>
-    <li><a href="#ref-for-scalar⑤">3.6.12. ScalarPropertyRangeRestrictionAxiom</a>
+    <li><a href="#ref-for-scalar⑤">3.6.11. ScalarPropertyCardinalityRestrictionAxiom</a>
+    <li><a href="#ref-for-scalar⑥">3.6.12. ScalarPropertyRangeRestrictionAxiom</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="structure">
@@ -6180,9 +6194,10 @@ this metamodel and can be manipulated using its API.
     <li><a href="#ref-for-structure">2.2.10. Structure</a>
     <li><a href="#ref-for-structure①">3.4.9. StructuredProperty</a>
     <li><a href="#ref-for-structure②">3.5.2. Classifier</a>
-    <li><a href="#ref-for-structure③">3.6.17. StructuredPropertyRangeRestrictionAxiom</a>
-    <li><a href="#ref-for-structure④">3.8.5. StructureInstance</a>
-    <li><a href="#ref-for-structure⑤">3.10.18. StructureReference</a>
+    <li><a href="#ref-for-structure③">3.6.16. StructuredPropertyCardinalityRestrictionAxiom</a>
+    <li><a href="#ref-for-structure④">3.6.17. StructuredPropertyRangeRestrictionAxiom</a>
+    <li><a href="#ref-for-structure⑤">3.8.5. StructureInstance</a>
+    <li><a href="#ref-for-structure⑥">3.10.18. StructureReference</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="type">
