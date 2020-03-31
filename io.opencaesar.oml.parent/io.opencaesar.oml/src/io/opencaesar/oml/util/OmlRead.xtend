@@ -638,7 +638,7 @@ class OmlRead {
 
 	static def Resource getImportedResource(Import ^import) {
 		val uri = ^import.resolvedImportUri
-		if (uri === null) {
+		if (uri === null || 'http' == uri.scheme) {
 			return null
 		}			
 		val resourceSet = ^import.eResource.resourceSet
@@ -651,8 +651,7 @@ class OmlRead {
 		 }
 		try {
 			val uriConverter = resourceSet.getURIConverter();
-			val normalizedUri = uriConverter.normalize(uri);
-			if (normalizedUri !== null && uriConverter.exists(normalizedUri, resourceSet.loadOptions)) {
+			if (uriConverter !== null && uriConverter.exists(uri, resourceSet.loadOptions)) {
 				resource = resourceSet.getResource(uri, true)
 			}
 			return resource
@@ -760,7 +759,7 @@ class OmlRead {
 	
 	// RestrictionAxiom
 
-	static dispatch def Classifier getRestrictingTypeُ(RestrictionAxiom axiom) {
+	static dispatch def Classifier getRestrictingType(RestrictionAxiom axiom) {
 	}
 			
 	static dispatch def Term getRestrictedTerm(RestrictionAxiom axiom) {
@@ -768,7 +767,7 @@ class OmlRead {
 
 	// PropertyRestrictionAxiom
 
-	static dispatch def Classifier getRestrictingTypeُ(PropertyRestrictionAxiom axiom) {
+	static dispatch def Classifier getRestrictingType(PropertyRestrictionAxiom axiom) {
 		if (axiom.owningReference !== null) {
 			axiom.owningReference.resolve as Classifier
 		} else {
@@ -806,7 +805,7 @@ class OmlRead {
 		axiom.relation
 	}
 	
-	static dispatch def Classifier getRestrictingTypeُ(RelationRestrictionAxiom axiom) {
+	static dispatch def Classifier getRestrictingType(RelationRestrictionAxiom axiom) {
 		axiom.restrictingEntity
 	}
 
@@ -834,7 +833,7 @@ class OmlRead {
 		}
 	}
 
-	static dispatch def Classifier getRestrictingTypeُ(KeyAxiom axiom) {
+	static dispatch def Classifier getRestrictingType(KeyAxiom axiom) {
 		axiom.getRestrictingEntity
 	}
 

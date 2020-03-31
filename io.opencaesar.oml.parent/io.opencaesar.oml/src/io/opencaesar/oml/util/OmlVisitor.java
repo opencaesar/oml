@@ -328,6 +328,11 @@ public class OmlVisitor<T> extends OmlSwitch<T> {
 	}
 
 	@Override
+	public T caseVocabularyUsage(VocabularyUsage object) {
+		return null;
+	}
+
+	@Override
 	public T caseBundleImport(BundleImport object) {
 		return null;
 	}
