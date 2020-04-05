@@ -47,7 +47,10 @@ package io.opencaesar.oml
  * 
  */
  
- import java.math.BigDecimal
+import java.math.BigDecimal
+import org.eclipse.emf.ecore.EDiagnosticChain
+import org.eclipse.emf.ecore.EMap
+import io.opencaesar.oml.util.OmlValidator2
 
 annotation "http://org/eclipse/emf/ecore/util/ExtendedMetaData" as ExtendedMetaData
 annotation "https://tabatkins.github.io/bikeshed" as Bikeshed
@@ -58,6 +61,10 @@ annotation "https://tabatkins.github.io/bikeshed/headings" as BikeshedHeadings
  */ 
 @Bikeshed(heading="Elements")
 abstract class Element {
+
+	op boolean extraValidate(EDiagnosticChain diagnostics, EMap<Object, Object> context) {
+		return OmlValidator2.INSTANCE.validate(this, diagnostics, context)
+	}
 }
 
 /*

@@ -76,10 +76,11 @@ import io.opencaesar.oml.StructuredPropertyReference
 import io.opencaesar.oml.StructuredPropertyRestrictionAxiom
 import io.opencaesar.oml.StructuredPropertyValueAssertion
 import java.util.HashSet
-import org.eclipse.core.runtime.Assert
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.EReference
 import org.eclipse.emf.ecore.util.ECrossReferenceAdapter
+import org.eclipse.emf.ecore.util.EcoreUtil
+import org.eclipse.emf.ecore.util.EcoreUtil.UsageCrossReferencer
 
 /*
  * This API assumes the resource set has a CrossReferenceAdapter installed on all EObjects
@@ -88,11 +89,17 @@ class OmlIndex {
 
 	// Core Index API
 	
-	static def Iterable<EObject> findInverseReferencers(Element element, String eReferenceName) {
+	private static def Iterable<EObject> findInverseReferencers(Element element, String eReferenceName) {
         val referencers = new HashSet<EObject>
         val adapter = ECrossReferenceAdapter.getCrossReferenceAdapter(element)
-        Assert.isTrue(adapter !== null, "No ECrossReferenceAdapter has been configured in the resource set")
-        for (setting : adapter.getInverseReferences(element, true)) {
+		val settings =  if (adapter !== null) {
+			// the fast method
+			adapter.getInverseReferences(element, true)
+		} else {
+			// the slow method
+			searchForReferences(element)
+		}
+        for (setting : settings) {
             if (setting.EStructuralFeature.name == eReferenceName) {
                 referencers.add(setting.EObject)
             }
@@ -100,7 +107,22 @@ class OmlIndex {
         referencers
     }
 
-	static def <T extends EObject> Iterable<T> findInverseReferencers(Element element, Class<T> type, EReference eReference) {
+	private static def searchForReferences(EObject element) {
+		val resource = element.eResource
+	    if (resource === null) {
+			val rootEObject = EcoreUtil.getRootContainer(element);
+	    	UsageCrossReferencer.find(element, rootEObject);
+	    } else {
+			val resourceSet = resource.getResourceSet();
+			if (resourceSet === null) {
+	        	UsageCrossReferencer.find(element, resource);
+	      	} else {
+	        	UsageCrossReferencer.find(element, resourceSet);
+	      	}
+	    }
+	}
+
+	private static def <T extends EObject> Iterable<T> findInverseReferencers(Element element, Class<T> type, EReference eReference) {
         val referencers = new HashSet<T>
 		findInverseReferencers(element, eReference.name).forEach[referencer|
 			if (type.isInstance(referencer)) {
