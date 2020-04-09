@@ -31,7 +31,8 @@ subprojects {
 	    junitJupiter: '5.1.0',
 	    gson: '2.8.2',
 	    guava: '21.0',
-	    antlr: '2.1.1'
+	    antlr: '2.1.1',
+	    xmlResolver: '1.2'
 	]
 
 	repositories {
