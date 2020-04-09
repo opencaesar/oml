@@ -103,19 +103,27 @@ import io.opencaesar.oml.VocabularyExtension
 import io.opencaesar.oml.VocabularyImport
 import io.opencaesar.oml.VocabularyStatement
 import io.opencaesar.oml.VocabularyUsage
+import java.io.File
+import java.net.URL
 import java.util.ArrayList
 import java.util.Collections
+import java.util.HashMap
 import java.util.LinkedHashMap
 import java.util.LinkedHashSet
 import java.util.Map
 import java.util.Set
+import org.apache.xml.resolver.Catalog
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.emf.ecore.util.EcoreUtil
+import org.eclipse.core.runtime.FileLocator
+import org.apache.xml.resolver.CatalogManager
 
 class OmlRead {
+	
+	static val CATALOGS = 'Catalogs'
 	
 	// closure operators
 	
@@ -624,21 +632,65 @@ class OmlRead {
 		^import.getImportedOntology?.namespace
 	}
 
-	static def URI getResolvedImportUri(Import ^import) {
-		val contextURI = ^import.eResource?.getURI();
-		if (contextURI !== null && ^import.uri !== null) {
-			val uri = URI.createURI(^import.uri )
-			if (contextURI.isHierarchical() && !contextURI.isRelative() && (uri.isRelative() && !uri.isEmpty())) {
-				uri.resolve(contextURI);
+	synchronized static def URI getResolvedImportUri(Import ^import) {
+		if (^import.uri !== null) {
+			var uri = URI.createURI(^import.uri)
+			if (uri.isRelative() && !uri.isEmpty()) {
+				val contextURI = ^import.eResource?.getURI()
+				uri = if (contextURI !== null) uri.resolve(contextURI) else null
 			} else {
-				uri
+				val contextURI = ^import.eResource?.getURI()
+				val rs = ^import.eResource?.resourceSet
+				if (rs !== null && contextURI !== null) {
+					var catalogMap = rs.loadOptions.get(CATALOGS) as Map<File, Catalog>
+					if (catalogMap === null) {
+						rs.loadOptions.put(CATALOGS, catalogMap = new HashMap<File, Catalog>)
+					}
+        			val url = FileLocator.toFileURL(new URL(contextURI.trimSegments(1).toString()))
+        			val folder = new File(url.file);
+					if (!catalogMap.containsKey(folder)) {
+						catalogMap.findCatalogs(folder)
+					}
+					var catalog = catalogMap.get(folder)
+					if (catalog !== null) {
+						val resolved = catalog.resolveURI(uri.toString)
+						if (resolved !== null) {
+							uri = URI.createURI(resolved)
+							if (uri.fileExtension === null) {
+								uri = uri.appendFileExtension('oml')
+							}					
+						}
+					}
+				}
+			}
+			return uri
+		}
+	}
+	
+	private static def Catalog findCatalogs(Map<File, Catalog> catalogMap, File folder) {
+		var current = folder
+		var Catalog catalog = null
+		while (catalog === null && current !== null) {
+			val file = new File(current.path+'/catalog.xml')
+			if (file.exists) {
+				val manager = new CatalogManager
+				manager.useStaticCatalog = false
+				manager.ignoreMissingProperties = true
+				catalog = manager.catalog
+				catalog.parseCatalog(file.toURI.toURL)
+				catalogMap.put(folder, catalog)
+			} else  {
+				catalogMap.put(folder, null)
+				current = current.parentFile
+				catalog = catalogMap.get(current)
 			}
 		}
+		return catalog
 	}
 
 	static def Resource getImportedResource(Import ^import) {
 		val uri = ^import.resolvedImportUri
-		if (uri === null || 'http' == uri.scheme) {
+		if (uri === null) {
 			return null
 		}			
 		val resourceSet = ^import.eResource.resourceSet

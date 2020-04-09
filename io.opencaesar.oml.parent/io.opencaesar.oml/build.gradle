@@ -6,6 +6,7 @@ apply from: "${rootDir}/gradle/maven-deployment.gradle"
 dependencies {
 	compile "org.eclipse.xtext:org.eclipse.xtext.xbase:${versions.xtext}"
 	compile "org.eclipse.emf:org.eclipse.emf.ecore.xcore.lib:${versions.xcoreLib}"
+	compile "xml-resolver:xml-resolver:${versions.xmlResolver}"
 
 	xtextLanguages "org.eclipse.xtext:org.eclipse.xtext.ecore:${versions.xtext}"
 	xtextLanguages "org.eclipse.emf:org.eclipse.emf.mwe2.runtime:${versions.mwe2}"
