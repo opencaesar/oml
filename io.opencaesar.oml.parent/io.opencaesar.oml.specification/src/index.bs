@@ -1,5 +1,5 @@
 <pre class='metadata'>
-Title: Ontological Modeling Language 0.5.0
+Title: Ontological Modeling Language 0.6.0
 Shortname: oml
 Level: 1
 Status: ld
