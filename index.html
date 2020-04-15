@@ -1221,9 +1221,9 @@ Possible extra rowspan handling
 		}
 	}
 </style>
-  <meta content="Bikeshed version 3d0743c8, updated Mon Apr 6 16:15:57 2020 +0200" name="generator">
+  <meta content="Bikeshed version b76f9052, updated Mon Apr 13 16:17:21 2020 -0700" name="generator">
   <link href="https://github.com/opencaesar/oml" rel="canonical">
-  <meta content="96bad2a8d635bd7d0d9767a567ac97dae191b5b2" name="document-revision">
+  <meta content="6d174014306da303b57945565b7ab3ea61f2db5c" name="document-revision">
 <style>
 body {
   padding: 0;
@@ -1527,7 +1527,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://opencaesar.github.io/oml/"> <img alt="Ontological Modeling Language" height="60" src="images/oml.svg"> </a></p>
    <h1 class="p-name no-ref" id="title">Ontological Modeling Language 0.5.0</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Document, <time class="dt-updated" datetime="2020-04-09">9 April 2020</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Document, <time class="dt-updated" datetime="2020-04-15">15 April 2020</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1588,19 +1588,21 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
         <li><a href="#EnumeratedScalar-Syntax"><span class="secno">2.2.15</span> <span class="content"><span>EnumeratedScalar</span></span></a>
         <li><a href="#Rule-Syntax"><span class="secno">2.2.16</span> <span class="content"><span>Rule</span></span></a>
         <li><a href="#EntityPredicate-Syntax"><span class="secno">2.2.17</span> <span class="content"><span>EntityPredicate</span></span></a>
-        <li><a href="#RelationEntityPredicate-Syntax"><span class="secno">2.2.18</span> <span class="content"><span>RelationEntityPredicate</span></span></a>
-        <li><a href="#RelationPredicate-Syntax"><span class="secno">2.2.19</span> <span class="content"><span>RelationPredicate</span></span></a>
-        <li><a href="#SpecializationAxiom-Syntax"><span class="secno">2.2.20</span> <span class="content"><span>SpecializationAxiom</span></span></a>
-        <li><a href="#ScalarPropertyRangeRestrictionAxiom-Syntax"><span class="secno">2.2.21</span> <span class="content"><span>ScalarPropertyRangeRestrictionAxiom</span></span></a>
-        <li><a href="#ScalarPropertyCardinalityRestrictionAxiom-Syntax"><span class="secno">2.2.22</span> <span class="content"><span>ScalarPropertyCardinalityRestrictionAxiom</span></span></a>
-        <li><a href="#ScalarPropertyValueRestrictionAxiom-Syntax"><span class="secno">2.2.23</span> <span class="content"><span>ScalarPropertyValueRestrictionAxiom</span></span></a>
-        <li><a href="#StructuredPropertyRangeRestrictionAxiom-Syntax"><span class="secno">2.2.24</span> <span class="content"><span>StructuredPropertyRangeRestrictionAxiom</span></span></a>
-        <li><a href="#StructuredPropertyCardinalityRestrictionAxiom-Syntax"><span class="secno">2.2.25</span> <span class="content"><span>StructuredPropertyCardinalityRestrictionAxiom</span></span></a>
-        <li><a href="#StructuredPropertyValueRestrictionAxiom-Syntax"><span class="secno">2.2.26</span> <span class="content"><span>StructuredPropertyValueRestrictionAxiom</span></span></a>
-        <li><a href="#RelationRangeRestrictionAxiom-Syntax"><span class="secno">2.2.27</span> <span class="content"><span>RelationRangeRestrictionAxiom</span></span></a>
-        <li><a href="#RelationCardinalityRestrictionAxiom-Syntax"><span class="secno">2.2.28</span> <span class="content"><span>RelationCardinalityRestrictionAxiom</span></span></a>
-        <li><a href="#RelationTargetRestrictionAxiom-Syntax"><span class="secno">2.2.29</span> <span class="content"><span>RelationTargetRestrictionAxiom</span></span></a>
-        <li><a href="#KeyAxiom-Syntax"><span class="secno">2.2.30</span> <span class="content"><span>KeyAxiom</span></span></a>
+        <li><a href="#RelationPredicate-Syntax"><span class="secno">2.2.18</span> <span class="content"><span>RelationPredicate</span></span></a>
+        <li><a href="#RelationEntityPredicate-Syntax"><span class="secno">2.2.19</span> <span class="content"><span>RelationEntityPredicate</span></span></a>
+        <li><a href="#SameAsPredicate-Syntax"><span class="secno">2.2.20</span> <span class="content"><span>SameAsPredicate</span></span></a>
+        <li><a href="#DifferentFromPredicate-Syntax"><span class="secno">2.2.21</span> <span class="content"><span>DifferentFromPredicate</span></span></a>
+        <li><a href="#SpecializationAxiom-Syntax"><span class="secno">2.2.22</span> <span class="content"><span>SpecializationAxiom</span></span></a>
+        <li><a href="#ScalarPropertyRangeRestrictionAxiom-Syntax"><span class="secno">2.2.23</span> <span class="content"><span>ScalarPropertyRangeRestrictionAxiom</span></span></a>
+        <li><a href="#ScalarPropertyCardinalityRestrictionAxiom-Syntax"><span class="secno">2.2.24</span> <span class="content"><span>ScalarPropertyCardinalityRestrictionAxiom</span></span></a>
+        <li><a href="#ScalarPropertyValueRestrictionAxiom-Syntax"><span class="secno">2.2.25</span> <span class="content"><span>ScalarPropertyValueRestrictionAxiom</span></span></a>
+        <li><a href="#StructuredPropertyRangeRestrictionAxiom-Syntax"><span class="secno">2.2.26</span> <span class="content"><span>StructuredPropertyRangeRestrictionAxiom</span></span></a>
+        <li><a href="#StructuredPropertyCardinalityRestrictionAxiom-Syntax"><span class="secno">2.2.27</span> <span class="content"><span>StructuredPropertyCardinalityRestrictionAxiom</span></span></a>
+        <li><a href="#StructuredPropertyValueRestrictionAxiom-Syntax"><span class="secno">2.2.28</span> <span class="content"><span>StructuredPropertyValueRestrictionAxiom</span></span></a>
+        <li><a href="#RelationRangeRestrictionAxiom-Syntax"><span class="secno">2.2.29</span> <span class="content"><span>RelationRangeRestrictionAxiom</span></span></a>
+        <li><a href="#RelationCardinalityRestrictionAxiom-Syntax"><span class="secno">2.2.30</span> <span class="content"><span>RelationCardinalityRestrictionAxiom</span></span></a>
+        <li><a href="#RelationTargetRestrictionAxiom-Syntax"><span class="secno">2.2.31</span> <span class="content"><span>RelationTargetRestrictionAxiom</span></span></a>
+        <li><a href="#KeyAxiom-Syntax"><span class="secno">2.2.32</span> <span class="content"><span>KeyAxiom</span></span></a>
        </ol>
       <li>
        <a href="#Bundles-Syntax"><span class="secno">2.3</span> <span class="content">Bundles</span></a>
@@ -1725,13 +1727,14 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
        <a href="#Rules"><span class="secno">3.7</span> <span class="content">Rules</span></a>
        <ol class="toc">
         <li><a href="#BinaryPredicate"><span class="secno">3.7.1</span> <span class="content"><span><em>BinaryPredicate</em></span></span></a>
-        <li><a href="#EntityPredicate"><span class="secno">3.7.2</span> <span class="content"><span>EntityPredicate</span></span></a>
-        <li><a href="#Predicate"><span class="secno">3.7.3</span> <span class="content"><span><em>Predicate</em></span></span></a>
-        <li><a href="#RelationEntityPredicate"><span class="secno">3.7.4</span> <span class="content"><span>RelationEntityPredicate</span></span></a>
-        <li><a href="#RelationEntityPredicateKind"><span class="secno">3.7.5</span> <span class="content"><span>RelationEntityPredicateKind</span></span></a>
+        <li><a href="#DifferentFromPredicate"><span class="secno">3.7.2</span> <span class="content"><span>DifferentFromPredicate</span></span></a>
+        <li><a href="#EntityPredicate"><span class="secno">3.7.3</span> <span class="content"><span>EntityPredicate</span></span></a>
+        <li><a href="#Predicate"><span class="secno">3.7.4</span> <span class="content"><span><em>Predicate</em></span></span></a>
+        <li><a href="#RelationEntityPredicate"><span class="secno">3.7.5</span> <span class="content"><span>RelationEntityPredicate</span></span></a>
         <li><a href="#RelationPredicate"><span class="secno">3.7.6</span> <span class="content"><span>RelationPredicate</span></span></a>
         <li><a href="#Rule"><span class="secno">3.7.7</span> <span class="content"><span>Rule</span></span></a>
-        <li><a href="#UnaryPredicate"><span class="secno">3.7.8</span> <span class="content"><span><em>UnaryPredicate</em></span></span></a>
+        <li><a href="#SameAsPredicate"><span class="secno">3.7.8</span> <span class="content"><span>SameAsPredicate</span></span></a>
+        <li><a href="#UnaryPredicate"><span class="secno">3.7.9</span> <span class="content"><span><em>UnaryPredicate</em></span></span></a>
        </ol>
       <li>
        <a href="#Instances"><span class="secno">3.8</span> <span class="content">Instances</span></a>
@@ -1804,8 +1807,8 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
     <p>An ontology is declared with of the ontology keywords, an <code>IRI</code>, a separator character (# or /), and a <code>PREFIX</code>. The <code>IRI</code> represents a globally unique namespace that identifies the ontology. The separator character is used to separate the ontology’s <code>IRI</code> from the ontology member’s <code>ID</code> in the member’s <code>IRI</code> (e.g., <code>IRI#ID</code>). The <code>PREFIX</code> is a default short name for the ontology that can substitute for its <code>IRI</code> when used in an ontology member’s abbreviated <code>IRI</code> notation (e.g., <code>PREFIX:ID</code>). An ontology can have statements added to its body between <code>{</code> and <code>}</code>. The statements can be <a href="#Import-Syntax">Import</a> statements or <a href="#Member-Syntax">Member</a> statements (placed after all <a href="#Import-Syntax">Import</a> statements).</p>
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
 ontology_keyword IRI with (# | /) as PREFIX {
-   (<a href="#Import-Syntax">Import</a>)*
-   (<a href="#Member-Syntax">Member</a>)*
+  (<a href="#Import-Syntax">Import</a>)*
+  (<a href="#Member-Syntax">Member</a>)*
 }
 </pre>
     <h4 class="heading settled" data-level="2.1.3" id="Import-Syntax"><span class="secno">2.1.3. </span><span class="content"><a data-link-type="dfn" href="#import" id="ref-for-import">Import</a></span><a class="self-link" href="#Import-Syntax"></a></h4>
@@ -1816,7 +1819,7 @@ import_keyword IRI (as PREFIX)?
     <h4 class="heading settled" data-level="2.1.4" id="Member-Syntax"><span class="secno">2.1.4. </span><span class="content"><a data-link-type="dfn" href="#member" id="ref-for-member">Member</a></span><a class="self-link" href="#Member-Syntax"></a></h4>
     <p>An ontology may declare members by adding them with member statements after all import statements. A new member is declared by one of the member keywords supported by the ontology kind, followed by the member’s <code>ID</code>. Other details supported by the member’s syntax may also be added.</p>
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
-member_keyword ID  ... ([
+member_keyword ID ... ([
   ...
 ])?
 </pre>
@@ -1824,7 +1827,7 @@ member_keyword ID  ... ([
     <p>In addition to declaring a new <a href="#Member-Syntax">Member</a> , an ontology may also add statements about already declared members (within the ontology or by one of its imported ontologies). Those statements where the onology member is the subject are called <a href="#Reference-Syntax">Reference</a> statements. Such statement has a syntx that (more or less) resembles that of a member declaration, except that it is preceeded with the keyword <code>ref</code>, and a <code>MEMBER_IRI</code> is used instead of the ```ID``. Notice that it is more common to add such statement when the subject member is imported rather than local to the ontology, since in the latter case, it can be part of the member’s declaration.</p>
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
 ref member_keyword MEMBER_IRI ... ([
-      ...
+  ...
 ])?
 </pre>
     <h4 class="heading settled" data-level="2.1.6" id="IRI-Syntax"><span class="secno">2.1.6. </span><span class="content">IRI</span><a class="self-link" href="#IRI-Syntax"></a></h4>
@@ -1834,8 +1837,8 @@ ref member_keyword MEMBER_IRI ... ([
 <pre class="language-javascript highlight"><c- c1>// single-line-comment</c->
 
 <c- d>/* possibly</c->
-<c- d>    multi-line </c->
-<c- d>    comment  */</c->
+<c- d>  multi-line </c->
+<c- d>  comment */</c->
 </pre>
     <h4 class="heading settled" data-level="2.1.8" id="Annotation-Syntax"><span class="secno">2.1.8. </span><span class="content"><a data-link-type="dfn" href="#annotation" id="ref-for-annotation">Annotation</a></span><a class="self-link" href="#Annotation-Syntax"></a></h4>
 <pre class="highlight highlight-html">@<a href="#AnnotationProperty-Syntax">AnnotationProperty_IRI</a> (<a href="#Literal-Syntax">Literal</a>)?
@@ -1846,7 +1849,7 @@ ref member_keyword MEMBER_IRI ... ([
     <h3 class="heading settled" data-level="2.2" id="Vocabularies-Syntax"><span class="secno">2.2. </span><span class="content">Vocabularies</span><a class="self-link" href="#Vocabularies-Syntax"></a></h3>
     <h4 class="heading settled" data-level="2.2.1" id="Vocabulary-Syntax"><span class="secno">2.2.1. </span><span class="content"><a data-link-type="dfn" href="#vocabulary" id="ref-for-vocabulary">Vocabulary</a></span><a class="self-link" href="#Vocabulary-Syntax"></a></h4>
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
-vocabulary IRI with (# | /) as PREFIX  {
+vocabulary IRI with (# | /) as PREFIX {
   (<a href="#VocabularyExtension-Syntax">VocabularyExtension</a> | <a href="#VocabularyUsage-Syntax">VocabularyUsage</a>)*
   (<a href="#Aspect-Syntax">Aspect</a> | <a href="#Concept-Syntax">Concept</a> | <a href="#RelationEntity-Syntax">RelationEntity</a> | <a href="#RelationReference-Syntax">RelationReference</a> | <a href="#Structure-Syntax">Structure</a> | <a href="#FacetedScalar-Syntax">FacetedScalar</a> | <a href="#EnumeratedScalar-Syntax">EnumeratedScalar</a> | <a href="#ScalarProperty-Syntax">ScalarProperty</a> | <a href="#StructuredProperty-Syntax">StructuredProperty</a> | <a href="#AnnotationProperty-Syntax">AnnotationProperty</a> | <a href="#Rule-Syntax">Rule</a>)*
 }
@@ -1915,7 +1918,7 @@ relation entity ID (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxio
 </pre>
     <p>Reference</p>
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
-ref relation entity <a href="#RelationEntity-Syntax">RelationEntity_IRI</a> (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>  (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)? ([
+ref relation entity <a href="#RelationEntity-Syntax">RelationEntity_IRI</a> (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)? ([
   (<a href="#KeyAxiom-Syntax">KeyAxiom</a>)*
   (<a href="#ScalarPropertyRangeRestrictionAxiom-Syntax">ScalarPropertyRangeRestrictionAxiom</a> | <a href="#ScalarPropertyCardinalityRestrictionAxiom-Syntax">ScalarPropertyCardinalityRestrictionAxiom</a> | <a href="#ScalarPropertyValueRestrictionAxiom-Syntax">ScalarPropertyValueRestrictionAxiom</a> | <a href="#StructuredPropertyRangeRestrictionAxiom-Syntax">StructuredPropertyRangeRestrictionAxiom</a> | <a href="#StructuredPropertyCardinalityRestrictionAxiom-Syntax">StructuredPropertyCardinalityRestrictionAxiom</a> | <a href="#StructuredPropertyValueRestrictionAxiom-Syntax">StructuredPropertyValueRestrictionAxiom</a>)*
   (<a href="#RelationRangeRestrictionAxiom-Syntax">RelationRangeRestrictionAxiom</a> | <a href="#RelationCardinalityRestrictionAxiom-Syntax">RelationCardinalityRestrictionAxiom</a> | <a href="#RelationTargetRestrictionAxiom-Syntax">RelationTargetRestrictionAxiom</a>)*
@@ -1939,7 +1942,7 @@ ref relation (<a href="#InverseRelation-Syntax">InverseRelation_IRI</a> | <a hre
     <h4 class="heading settled" data-level="2.2.10" id="Structure-Syntax"><span class="secno">2.2.10. </span><span class="content"><a data-link-type="dfn" href="#structure" id="ref-for-structure">Structure</a></span><a class="self-link" href="#Structure-Syntax"></a></h4>
     <p>Declaration</p>
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
-structure ID (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>  (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)? ([
+structure ID (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)? ([
   (<a href="#ScalarPropertyRangeRestrictionAxiom-Syntax">ScalarPropertyRangeRestrictionAxiom</a> | <a href="#ScalarPropertyCardinalityRestrictionAxiom-Syntax">ScalarPropertyCardinalityRestrictionAxiom</a> | <a href="#ScalarPropertyValueRestrictionAxiom-Syntax">ScalarPropertyValueRestrictionAxiom</a> | <a href="#StructuredPropertyRangeRestrictionAxiom-Syntax">StructuredPropertyRangeRestrictionAxiom</a> | <a href="#StructuredPropertyCardinalityRestrictionAxiom-Syntax">StructuredPropertyCardinalityRestrictionAxiom</a> | <a href="#StructuredPropertyValueRestrictionAxiom-Syntax">StructuredPropertyValueRestrictionAxiom</a>)*
 ])?
 </pre>
@@ -1988,15 +1991,15 @@ ref structured property <a href="#StructuredProperty-Syntax">StructuredProperty_
     <p>Declaration</p>
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
 scalar ID (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)? ([
-   (length INTEGER)?
-   (minLength INTEGER)?
-   (maxLength INTEGER)?
-   (pattern STRING)?
-   (language LANGUAGE)?
-   (minInclusive <a href="#Literal-Syntax">Literal</a>)?
-   (minExclusive <a href="#Literal-Syntax">Literal</a>)?
-   (maxInclusive <a href="#Literal-Syntax">Literal</a>)?
-   (maxExclusive <a href="#Literal-Syntax">Literal</a>)?
+  (length INTEGER)?
+  (minLength INTEGER)?
+  (maxLength INTEGER)?
+  (pattern STRING)?
+  (language LANGUAGE)?
+  (minInclusive <a href="#Literal-Syntax">Literal</a>)?
+  (minExclusive <a href="#Literal-Syntax">Literal</a>)?
+  (maxInclusive <a href="#Literal-Syntax">Literal</a>)?
+  (maxExclusive <a href="#Literal-Syntax">Literal</a>)?
 ])?
 </pre>
     <p>Reference</p>
@@ -2018,8 +2021,11 @@ ref enumerated scalar <a href="#EnumeratedScalar-Syntax">EnumeratedScalar_IRI</a
     <p>Declaration</p>
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
 rule ID [
-  (<a href="#EntityPredicate-Syntax">EntityPredicate</a> | <a href="#RelationEntityPredicate-Syntax">RelationEntityPredicate</a>  | <a href="#RelationPredicate-Syntax">RelationPredicate</a> ) (&amp; (<a href="#EntityPredicate-Syntax">EntityPredicate</a> | <a href="#RelationEntityPredicate-Syntax">RelationEntityPredicate</a>  | <a href="#RelationPredicate-Syntax">RelationPredicate</a> ))* 
-  => <a href="#RelationPredicate-Syntax">RelationPredicate</a>
+  (<a href="#EntityPredicate-Syntax">EntityPredicate</a> | <a href="#RelationPredicate-Syntax">RelationPredicate</a> | <a href="#RelationEntityPredicate-Syntax">RelationEntityPredicate</a> | <a href="#SameAsPredicate-Syntax">SameAsPredicate</a> | <a href="#DifferentFromPredicate-Syntax">DifferentFromPredicate</a>)
+  (^ (<a href="#EntityPredicate-Syntax">EntityPredicate</a> | <a href="#RelationPredicate-Syntax">RelationPredicate</a> | <a href="#RelationEntityPredicate-Syntax">RelationEntityPredicate</a> | <a href="#SameAsPredicate-Syntax">SameAsPredicate</a> | <a href="#DifferentFromPredicate-Syntax">DifferentFromPredicate</a>))* 
+  -> 
+  (<a href="#EntityPredicate-Syntax">EntityPredicate</a> | <a href="#RelationPredicate-Syntax">RelationPredicate</a> | <a href="#RelationEntityPredicate-Syntax">RelationEntityPredicate</a> | <a href="#SameAsPredicate-Syntax">SameAsPredicate</a> | <a href="#DifferentFromPredicate-Syntax">DifferentFromPredicate</a>)
+  (^ (<a href="#EntityPredicate-Syntax">EntityPredicate</a> | <a href="#RelationPredicate-Syntax">RelationPredicate</a> | <a href="#RelationEntityPredicate-Syntax">RelationEntityPredicate</a> | <a href="#SameAsPredicate-Syntax">SameAsPredicate</a> | <a href="#DifferentFromPredicate-Syntax">DifferentFromPredicate</a>))* 
 ]
 </pre>
     <p>Reference</p>
@@ -2028,57 +2034,65 @@ ref rule <a href="#Rule-Syntax">Rule_IRI</a>
 </pre>
     <h4 class="heading settled" data-level="2.2.17" id="EntityPredicate-Syntax"><span class="secno">2.2.17. </span><span class="content"><a data-link-type="dfn" href="#entitypredicate" id="ref-for-entitypredicate">EntityPredicate</a></span><a class="self-link" href="#EntityPredicate-Syntax"></a></h4>
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
-(<a href="#Aspect-Syntax">Aspect_IRI</a> | <a href="#Concept-Syntax">Concept_IRI</a> | <a href="#RelationEntity-Syntax">RelationEntity_IRI</a>) ( VARIABLE )
+(<a href="#Aspect-Syntax">Aspect_IRI</a> | <a href="#Concept-Syntax">Concept_IRI</a> | <a href="#RelationEntity-Syntax">RelationEntity_IRI</a>) (VAR)
 </pre>
-    <h4 class="heading settled" data-level="2.2.18" id="RelationEntityPredicate-Syntax"><span class="secno">2.2.18. </span><span class="content"><a data-link-type="dfn" href="#relationentitypredicate" id="ref-for-relationentitypredicate">RelationEntityPredicate</a></span><a class="self-link" href="#RelationEntityPredicate-Syntax"></a></h4>
+    <h4 class="heading settled" data-level="2.2.18" id="RelationPredicate-Syntax"><span class="secno">2.2.18. </span><span class="content"><a data-link-type="dfn" href="#relationpredicate" id="ref-for-relationpredicate">RelationPredicate</a></span><a class="self-link" href="#RelationPredicate-Syntax"></a></h4>
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
-<a href="#RelationEntity-Syntax">RelationEntity_IRI</a> (VARIABLE1 (&lt;-: | ->: | :->| :&lt;-) VARIABLE2)
+(<a href="#ForwardRelation-Syntax">ForwardRelation_IRI</a> | <a href="#InverseRelation-Syntax">InverseRelation_IRI</a>) (VAR1 , VAR2)
 </pre>
-    <h4 class="heading settled" data-level="2.2.19" id="RelationPredicate-Syntax"><span class="secno">2.2.19. </span><span class="content"><a data-link-type="dfn" href="#relationpredicate" id="ref-for-relationpredicate">RelationPredicate</a></span><a class="self-link" href="#RelationPredicate-Syntax"></a></h4>
+    <h4 class="heading settled" data-level="2.2.19" id="RelationEntityPredicate-Syntax"><span class="secno">2.2.19. </span><span class="content"><a data-link-type="dfn" href="#relationentitypredicate" id="ref-for-relationentitypredicate">RelationEntityPredicate</a></span><a class="self-link" href="#RelationEntityPredicate-Syntax"></a></h4>
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
-(<a href="#ForwardRelation-Syntax">ForwardRelation_IRI</a> | <a href="#InverseRelation-Syntax">InverseRelation_IRI</a>) (VARIABLE1 (&lt;- | ->) VARIABLE2)
+<a href="#RelationEntity-Syntax">RelationEntity_IRI</a> (VAR1 , ENTITY_VAR , VAR2)
 </pre>
-    <h4 class="heading settled" data-level="2.2.20" id="SpecializationAxiom-Syntax"><span class="secno">2.2.20. </span><span class="content"><a data-link-type="dfn" href="#specializationaxiom" id="ref-for-specializationaxiom">SpecializationAxiom</a></span><a class="self-link" href="#SpecializationAxiom-Syntax"></a></h4>
+    <h4 class="heading settled" data-level="2.2.20" id="SameAsPredicate-Syntax"><span class="secno">2.2.20. </span><span class="content"><a data-link-type="dfn" href="#sameaspredicate" id="ref-for-sameaspredicate">SameAsPredicate</a></span><a class="self-link" href="#SameAsPredicate-Syntax"></a></h4>
+<pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
+sameAs (VAR1 , VAR2)
+</pre>
+    <h4 class="heading settled" data-level="2.2.21" id="DifferentFromPredicate-Syntax"><span class="secno">2.2.21. </span><span class="content"><a data-link-type="dfn" href="#differentfrompredicate" id="ref-for-differentfrompredicate">DifferentFromPredicate</a></span><a class="self-link" href="#DifferentFromPredicate-Syntax"></a></h4>
+<pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
+differentFrom (VAR1 , VAR2)
+</pre>
+    <h4 class="heading settled" data-level="2.2.22" id="SpecializationAxiom-Syntax"><span class="secno">2.2.22. </span><span class="content"><a data-link-type="dfn" href="#specializationaxiom" id="ref-for-specializationaxiom">SpecializationAxiom</a></span><a class="self-link" href="#SpecializationAxiom-Syntax"></a></h4>
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
 (<a href="#Aspect-Syntax">Aspect_IRI</a> | <a href="#Concept-Syntax">Concept_IRI</a> | <a href="#RelationEntity-Syntax">RelationEntity_IRI</a> | <a href="#Structure-Syntax">Structure_IRI</a> | <a href="#FacetedScalar-Syntax">FacetedScalar_IRI</a> | <a href="#EnumeratedScalar-Syntax">EnumeratedScalar_IRI</a> | <a href="#AnnotationProperty-Syntax">AnnotationProperty_IRI</a> | <a href="#ScalarProperty-Syntax">ScalarProperty_IRI</a> | <a href="#StructuredProperty-Syntax">StructuredProperty_IRI</a>)
 </pre>
-    <h4 class="heading settled" data-level="2.2.21" id="ScalarPropertyRangeRestrictionAxiom-Syntax"><span class="secno">2.2.21. </span><span class="content"><a data-link-type="dfn" href="#scalarpropertyrangerestrictionaxiom" id="ref-for-scalarpropertyrangerestrictionaxiom">ScalarPropertyRangeRestrictionAxiom</a></span><a class="self-link" href="#ScalarPropertyRangeRestrictionAxiom-Syntax"></a></h4>
+    <h4 class="heading settled" data-level="2.2.23" id="ScalarPropertyRangeRestrictionAxiom-Syntax"><span class="secno">2.2.23. </span><span class="content"><a data-link-type="dfn" href="#scalarpropertyrangerestrictionaxiom" id="ref-for-scalarpropertyrangerestrictionaxiom">ScalarPropertyRangeRestrictionAxiom</a></span><a class="self-link" href="#ScalarPropertyRangeRestrictionAxiom-Syntax"></a></h4>
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
 restricts (all | some) scalar property <a href="#ScalarProperty-Syntax">ScalarProperty_IRI</a> to (<a href="#FacetedScalar-Syntax">FacetedScalar_IRI</a> | <a href="#EnumeratedScalar-Syntax">EnumeratedScalar_IRI</a>)
 </pre>
-    <h4 class="heading settled" data-level="2.2.22" id="ScalarPropertyCardinalityRestrictionAxiom-Syntax"><span class="secno">2.2.22. </span><span class="content"><a data-link-type="dfn" href="#scalarpropertycardinalityrestrictionaxiom" id="ref-for-scalarpropertycardinalityrestrictionaxiom">ScalarPropertyCardinalityRestrictionAxiom</a></span><a class="self-link" href="#ScalarPropertyCardinalityRestrictionAxiom-Syntax"></a></h4>
+    <h4 class="heading settled" data-level="2.2.24" id="ScalarPropertyCardinalityRestrictionAxiom-Syntax"><span class="secno">2.2.24. </span><span class="content"><a data-link-type="dfn" href="#scalarpropertycardinalityrestrictionaxiom" id="ref-for-scalarpropertycardinalityrestrictionaxiom">ScalarPropertyCardinalityRestrictionAxiom</a></span><a class="self-link" href="#ScalarPropertyCardinalityRestrictionAxiom-Syntax"></a></h4>
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
 restricts scalar property <a href="#ScalarProperty-Syntax">ScalarProperty_IRI</a> to (exactly | min | max) INTEGER (<a href="#FacetedScalar-Syntax">FacetedScalar_IRI</a> | <a href="#EnumeratedScalar-Syntax">EnumeratedScalar_IRI</a>)?
 </pre>
-    <h4 class="heading settled" data-level="2.2.23" id="ScalarPropertyValueRestrictionAxiom-Syntax"><span class="secno">2.2.23. </span><span class="content"><a data-link-type="dfn" href="#scalarpropertyvaluerestrictionaxiom" id="ref-for-scalarpropertyvaluerestrictionaxiom">ScalarPropertyValueRestrictionAxiom</a></span><a class="self-link" href="#ScalarPropertyValueRestrictionAxiom-Syntax"></a></h4>
+    <h4 class="heading settled" data-level="2.2.25" id="ScalarPropertyValueRestrictionAxiom-Syntax"><span class="secno">2.2.25. </span><span class="content"><a data-link-type="dfn" href="#scalarpropertyvaluerestrictionaxiom" id="ref-for-scalarpropertyvaluerestrictionaxiom">ScalarPropertyValueRestrictionAxiom</a></span><a class="self-link" href="#ScalarPropertyValueRestrictionAxiom-Syntax"></a></h4>
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
 restricts scalar property <a href="#ScalarProperty-Syntax">ScalarProperty_IRI</a> to <a href="#Literal-Syntax">Literal</a>
 </pre>
-    <h4 class="heading settled" data-level="2.2.24" id="StructuredPropertyRangeRestrictionAxiom-Syntax"><span class="secno">2.2.24. </span><span class="content"><a data-link-type="dfn" href="#structuredpropertyrangerestrictionaxiom" id="ref-for-structuredpropertyrangerestrictionaxiom">StructuredPropertyRangeRestrictionAxiom</a></span><a class="self-link" href="#StructuredPropertyRangeRestrictionAxiom-Syntax"></a></h4>
+    <h4 class="heading settled" data-level="2.2.26" id="StructuredPropertyRangeRestrictionAxiom-Syntax"><span class="secno">2.2.26. </span><span class="content"><a data-link-type="dfn" href="#structuredpropertyrangerestrictionaxiom" id="ref-for-structuredpropertyrangerestrictionaxiom">StructuredPropertyRangeRestrictionAxiom</a></span><a class="self-link" href="#StructuredPropertyRangeRestrictionAxiom-Syntax"></a></h4>
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
 restricts (all | some) structured property <a href="#StructuredProperty-Syntax">StructuredProperty_IRI</a> to <a href="#Structure">Structure</a>
 </pre>
-    <h4 class="heading settled" data-level="2.2.25" id="StructuredPropertyCardinalityRestrictionAxiom-Syntax"><span class="secno">2.2.25. </span><span class="content"><a data-link-type="dfn" href="#structuredpropertycardinalityrestrictionaxiom" id="ref-for-structuredpropertycardinalityrestrictionaxiom">StructuredPropertyCardinalityRestrictionAxiom</a></span><a class="self-link" href="#StructuredPropertyCardinalityRestrictionAxiom-Syntax"></a></h4>
+    <h4 class="heading settled" data-level="2.2.27" id="StructuredPropertyCardinalityRestrictionAxiom-Syntax"><span class="secno">2.2.27. </span><span class="content"><a data-link-type="dfn" href="#structuredpropertycardinalityrestrictionaxiom" id="ref-for-structuredpropertycardinalityrestrictionaxiom">StructuredPropertyCardinalityRestrictionAxiom</a></span><a class="self-link" href="#StructuredPropertyCardinalityRestrictionAxiom-Syntax"></a></h4>
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
 restricts structured property <a href="#StructuredProperty-Syntax">StructuredProperty_IRI</a> to (exactly | min | max) INTEGER (<a href="#Structure-Syntax">Structure_IRI</a>)?
 </pre>
-    <h4 class="heading settled" data-level="2.2.26" id="StructuredPropertyValueRestrictionAxiom-Syntax"><span class="secno">2.2.26. </span><span class="content"><a data-link-type="dfn" href="#structuredpropertyvaluerestrictionaxiom" id="ref-for-structuredpropertyvaluerestrictionaxiom">StructuredPropertyValueRestrictionAxiom</a></span><a class="self-link" href="#StructuredPropertyValueRestrictionAxiom-Syntax"></a></h4>
+    <h4 class="heading settled" data-level="2.2.28" id="StructuredPropertyValueRestrictionAxiom-Syntax"><span class="secno">2.2.28. </span><span class="content"><a data-link-type="dfn" href="#structuredpropertyvaluerestrictionaxiom" id="ref-for-structuredpropertyvaluerestrictionaxiom">StructuredPropertyValueRestrictionAxiom</a></span><a class="self-link" href="#StructuredPropertyValueRestrictionAxiom-Syntax"></a></h4>
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
 restricts structured property <a href="#StructuredProperty-Syntax">StructuredProperty_IRI</a> to <a href="StructureInstance-Syntax">StructureInstance</a>
 </pre>
-    <h4 class="heading settled" data-level="2.2.27" id="RelationRangeRestrictionAxiom-Syntax"><span class="secno">2.2.27. </span><span class="content"><a data-link-type="dfn" href="#relationrangerestrictionaxiom" id="ref-for-relationrangerestrictionaxiom">RelationRangeRestrictionAxiom</a></span><a class="self-link" href="#RelationRangeRestrictionAxiom-Syntax"></a></h4>
+    <h4 class="heading settled" data-level="2.2.29" id="RelationRangeRestrictionAxiom-Syntax"><span class="secno">2.2.29. </span><span class="content"><a data-link-type="dfn" href="#relationrangerestrictionaxiom" id="ref-for-relationrangerestrictionaxiom">RelationRangeRestrictionAxiom</a></span><a class="self-link" href="#RelationRangeRestrictionAxiom-Syntax"></a></h4>
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
 restricts (all | some) relation (<a href="#ForwardRelation-Syntax">ForwardRelation_IRI</a> | <a href="#InverseRelation-Syntax">InverseRelation_IRI</a>) to (<a href="#Aspect-Syntax">Aspect_IRI</a> | <a href="#Concept-Syntax">Concept_IRI</a> | <a href="#RelationEntity-Syntax">RelationEntity_IRI</a>)
 </pre>
-    <h4 class="heading settled" data-level="2.2.28" id="RelationCardinalityRestrictionAxiom-Syntax"><span class="secno">2.2.28. </span><span class="content"><a data-link-type="dfn" href="#relationcardinalityrestrictionaxiom" id="ref-for-relationcardinalityrestrictionaxiom">RelationCardinalityRestrictionAxiom</a></span><a class="self-link" href="#RelationCardinalityRestrictionAxiom-Syntax"></a></h4>
+    <h4 class="heading settled" data-level="2.2.30" id="RelationCardinalityRestrictionAxiom-Syntax"><span class="secno">2.2.30. </span><span class="content"><a data-link-type="dfn" href="#relationcardinalityrestrictionaxiom" id="ref-for-relationcardinalityrestrictionaxiom">RelationCardinalityRestrictionAxiom</a></span><a class="self-link" href="#RelationCardinalityRestrictionAxiom-Syntax"></a></h4>
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
 restricts relation (<a href="#ForwardRelation-Syntax">ForwardRelation_IRI</a> | <a href="#InverseRelation-Syntax">InverseRelation_IRI</a>) to (exactly | min | max) INTEGER (<a href="#Aspect-Syntax">Aspect_IRI</a> | <a href="#Concept-Syntax">Concept_IRI</a> | <a href="#RelationEntity-Syntax">RelationEntity_IRI</a>)?
 </pre>
-    <h4 class="heading settled" data-level="2.2.29" id="RelationTargetRestrictionAxiom-Syntax"><span class="secno">2.2.29. </span><span class="content"><a data-link-type="dfn" href="#relationtargetrestrictionaxiom" id="ref-for-relationtargetrestrictionaxiom">RelationTargetRestrictionAxiom</a></span><a class="self-link" href="#RelationTargetRestrictionAxiom-Syntax"></a></h4>
+    <h4 class="heading settled" data-level="2.2.31" id="RelationTargetRestrictionAxiom-Syntax"><span class="secno">2.2.31. </span><span class="content"><a data-link-type="dfn" href="#relationtargetrestrictionaxiom" id="ref-for-relationtargetrestrictionaxiom">RelationTargetRestrictionAxiom</a></span><a class="self-link" href="#RelationTargetRestrictionAxiom-Syntax"></a></h4>
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
 restricts relation (<a href="#ForwardRelation-Syntax">ForwardRelation_IRI</a> | <a href="#InverseRelation-Syntax">InverseRelation_IRI</a>) to (<a href="#ConceptInstance-Syntax">ConceptInstance_IRI</a> | <a href="#RelationInstance-Syntax">RelationInstance_IRI</a>)
 </pre>
-    <h4 class="heading settled" data-level="2.2.30" id="KeyAxiom-Syntax"><span class="secno">2.2.30. </span><span class="content"><a data-link-type="dfn" href="#keyaxiom" id="ref-for-keyaxiom">KeyAxiom</a></span><a class="self-link" href="#KeyAxiom-Syntax"></a></h4>
+    <h4 class="heading settled" data-level="2.2.32" id="KeyAxiom-Syntax"><span class="secno">2.2.32. </span><span class="content"><a data-link-type="dfn" href="#keyaxiom" id="ref-for-keyaxiom">KeyAxiom</a></span><a class="self-link" href="#KeyAxiom-Syntax"></a></h4>
 <pre class="highlight highlight-html">key <a href="#ScalarProperty-Syntax">ScalarProperty_IRI</a> (, <a href="#ScalarProperty-Syntax">ScalarProperty_IRI</a>)*
 </pre>
     <h3 class="heading settled" data-level="2.3" id="Bundles-Syntax"><span class="secno">2.3. </span><span class="content">Bundles</span><a class="self-link" href="#Bundles-Syntax"></a></h3>
@@ -2130,7 +2144,7 @@ ref ci <a href="#ConceptInstance-Syntax">ConceptInstance_IRI</a> (: ownedTypes+=
     <h4 class="heading settled" data-level="2.4.5" id="RelationInstance-Syntax"><span class="secno">2.4.5. </span><span class="content"><a data-link-type="dfn" href="#relationinstance" id="ref-for-relationinstance">RelationInstance</a></span><a class="self-link" href="#RelationInstance-Syntax"></a></h4>
     <p>Declaration</p>
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
-ri ID (: <a href="#RelationTypeAssertion-Syntax">RelationTypeAssertion</a> (, <a href="#RelationTypeAssertion-Syntax">RelationTypeAssertion</a>)*)?  ([
+ri ID (: <a href="#RelationTypeAssertion-Syntax">RelationTypeAssertion</a> (, <a href="#RelationTypeAssertion-Syntax">RelationTypeAssertion</a>)*)? ([
   from (<a href="#ConceptInstance-Syntax">ConceptInstance_IRI</a> | <a href="#RelationInstance-Syntax">RelationInstance_IRI</a>)
   to (<a href="#ConceptInstance-Syntax">ConceptInstance_IRI</a> | <a href="#RelationInstance-Syntax">RelationInstance_IRI</a>)
   (<a href="#ScalarPropertyValueAssertion-Syntax">ScalarPropertyValueAssertion</a> | <a href="#StructuredPropertyValueAssertion-Syntax">StructuredPropertyValueAssertion</a> )*
@@ -4168,9 +4182,9 @@ this metamodel and can be manipulated using its API.
     </ul>
     <h3 class="heading settled" data-level="3.7" id="Rules"><span class="secno">3.7. </span><span class="content">Rules</span><a class="self-link" href="#Rules"></a></h3>
     <p>
-     <svg contentScriptType="application/ecmascript" contentStyleType="text/css" height="623px" preserveAspectRatio="none" style="width:840px;height:623px;" version="1.1" viewBox="0 0 840 623" width="840px" zoomAndPan="magnify" xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+     <svg contentScriptType="application/ecmascript" contentStyleType="text/css" height="548px" preserveAspectRatio="none" style="width:925px;height:548px;" version="1.1" viewBox="0 0 925 548" width="925px" zoomAndPan="magnify" xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
       <defs>
-       <filter height="300%" id="f68lqcrj764c6" width="300%" x="-1" y="-1">
+       <filter height="300%" id="f2dzwqb9ubvfr" width="300%" x="-1" y="-1">
         <feGaussianBlur result="blurOut" stdDeviation="2.0"></feGaussianBlur>
         <feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"></feColorMatrix>
         <feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"></feOffset>
@@ -4179,160 +4193,176 @@ this metamodel and can be manipulated using its API.
       </defs>
       <g>
        <a target="_top" actuate="onRequest" href="#BinaryPredicate" show="new" title="#BinaryPredicate" type="simple">
-        <rect fill="#FFFFFF" filter="url(#f68lqcrj764c6)" height="65.6094" style="stroke: #000000; stroke-width: 1.5;" width="142" x="205.5" y="407"></rect>
-        <rect fill="#FFFFFF" height="32" style="stroke: #000000; stroke-width: 1.5;" width="142" x="205.5" y="407"></rect>
-        <ellipse cx="225.9" cy="423" fill="#A9DCDF" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"></ellipse>
-        <path d="M226.0094,418.3438 L224.8531,423.4219 L227.1813,423.4219 L226.0094,418.3438 Z M224.525,416.1094 L227.5094,416.1094 L230.8688,428.5 L228.4156,428.5 L227.65,425.4375 L224.3688,425.4375 L223.6188,428.5 L221.1813,428.5 L224.525,416.1094 Z "></path>
-        <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="98" x="241.1" y="427.1543">BinaryPredicate</text>
-        <line style="stroke: #000000; stroke-width: 1.5;" x1="206.5" x2="346.5" y1="439" y2="439"></line>
-        <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="130" x="211.5" y="453.2104">variable1 : EJavaObject</text>
-        <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="130" x="211.5" y="466.0151">variable2 : EJavaObject</text>
+        <rect fill="#FFFFFF" filter="url(#f2dzwqb9ubvfr)" height="65.6094" style="stroke: #000000; stroke-width: 1.5;" width="142" x="431.5" y="345"></rect>
+        <rect fill="#FFFFFF" height="32" style="stroke: #000000; stroke-width: 1.5;" width="142" x="431.5" y="345"></rect>
+        <ellipse cx="451.9" cy="361" fill="#A9DCDF" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"></ellipse>
+        <path d="M452.0094,356.3438 L450.8531,361.4219 L453.1813,361.4219 L452.0094,356.3438 Z M450.525,354.1094 L453.5094,354.1094 L456.8688,366.5 L454.4156,366.5 L453.65,363.4375 L450.3688,363.4375 L449.6188,366.5 L447.1813,366.5 L450.525,354.1094 Z "></path>
+        <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="98" x="467.1" y="365.1543">BinaryPredicate</text>
+        <line style="stroke: #000000; stroke-width: 1.5;" x1="432.5" x2="572.5" y1="377" y2="377"></line>
+        <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="130" x="437.5" y="391.2104">variable1 : EJavaObject</text>
+        <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="130" x="437.5" y="404.0151">variable2 : EJavaObject</text>
        </a>
        <a target="_top" actuate="onRequest" href="#Predicate" show="new" title="#Predicate" type="simple">
-        <rect fill="#FFFFFF" filter="url(#f68lqcrj764c6)" height="52.8047" style="stroke: #000000; stroke-width: 1.5;" width="169" x="192" y="277"></rect>
-        <rect fill="#FFFFFF" height="32" style="stroke: #000000; stroke-width: 1.5;" width="169" x="192" y="277"></rect>
-        <ellipse cx="242.25" cy="293" fill="#A9DCDF" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"></ellipse>
-        <path d="M242.3594,288.3438 L241.2031,293.4219 L243.5313,293.4219 L242.3594,288.3438 Z M240.875,286.1094 L243.8594,286.1094 L247.2188,298.5 L244.7656,298.5 L244,295.4375 L240.7188,295.4375 L239.9688,298.5 L237.5313,298.5 L240.875,286.1094 Z "></path>
-        <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="60" x="262.75" y="297.1543">Predicate</text>
-        <line style="stroke: #000000; stroke-width: 1.5;" x1="193" x2="360" y1="309" y2="309"></line>
-        <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="157" x="198" y="323.2104">antecedentRule : Rule [0..1]</text>
+        <rect fill="#FFFFFF" filter="url(#f2dzwqb9ubvfr)" height="65.6094" style="stroke: #000000; stroke-width: 1.5;" width="172" x="513.5" y="218"></rect>
+        <rect fill="#FFFFFF" height="32" style="stroke: #000000; stroke-width: 1.5;" width="172" x="513.5" y="218"></rect>
+        <ellipse cx="565.25" cy="234" fill="#A9DCDF" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"></ellipse>
+        <path d="M565.3594,229.3438 L564.2031,234.4219 L566.5313,234.4219 L565.3594,229.3438 Z M563.875,227.1094 L566.8594,227.1094 L570.2188,239.5 L567.7656,239.5 L567,236.4375 L563.7188,236.4375 L562.9688,239.5 L560.5313,239.5 L563.875,227.1094 Z "></path>
+        <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="60" x="585.75" y="238.1543">Predicate</text>
+        <line style="stroke: #000000; stroke-width: 1.5;" x1="514.5" x2="684.5" y1="250" y2="250"></line>
+        <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="157" x="519.5" y="264.2104">antecedentRule : Rule [0..1]</text>
+        <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="160" x="519.5" y="277.0151">consequentRule : Rule [0..1]</text>
+       </a>
+       <a target="_top" actuate="onRequest" href="#DifferentFromPredicate" show="new" title="#DifferentFromPredicate" type="simple">
+        <rect fill="#FFFFFF" filter="url(#f2dzwqb9ubvfr)" height="40" style="stroke: #000000; stroke-width: 1.5;" width="177" x="6" y="485"></rect>
+        <rect fill="#FFFFFF" height="32" style="stroke: #000000; stroke-width: 1.5;" width="177" x="6" y="485"></rect>
+        <ellipse cx="21" cy="501" fill="#ADD1B2" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"></ellipse>
+        <path d="M23.9688,506.6406 Q23.3906,506.9375 22.75,507.0781 Q22.1094,507.2344 21.4063,507.2344 Q18.9063,507.2344 17.5781,505.5938 Q16.2656,503.9375 16.2656,500.8125 Q16.2656,497.6875 17.5781,496.0313 Q18.9063,494.375 21.4063,494.375 Q22.1094,494.375 22.75,494.5313 Q23.4063,494.6875 23.9688,494.9844 L23.9688,497.7031 Q23.3438,497.125 22.75,496.8594 Q22.1563,496.5781 21.5313,496.5781 Q20.1875,496.5781 19.5,497.6563 Q18.8125,498.7188 18.8125,500.8125 Q18.8125,502.9063 19.5,503.9844 Q20.1875,505.0469 21.5313,505.0469 Q22.1563,505.0469 22.75,504.7813 Q23.3438,504.5 23.9688,503.9219 L23.9688,506.6406 Z "></path>
+        <text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="145" x="35" y="505.1543">DifferentFromPredicate</text>
+        <line style="stroke: #000000; stroke-width: 1.5;" x1="7" x2="182" y1="517" y2="517"></line>
        </a>
        <a target="_top" actuate="onRequest" href="#EntityPredicate" show="new" title="#EntityPredicate" type="simple">
-        <rect fill="#FFFFFF" filter="url(#f68lqcrj764c6)" height="52.8047" style="stroke: #000000; stroke-width: 1.5;" width="127" x="6" y="546.5"></rect>
-        <rect fill="#FFFFFF" height="32" style="stroke: #000000; stroke-width: 1.5;" width="127" x="6" y="546.5"></rect>
-        <ellipse cx="21" cy="562.5" fill="#ADD1B2" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"></ellipse>
-        <path d="M23.9688,568.1406 Q23.3906,568.4375 22.75,568.5781 Q22.1094,568.7344 21.4063,568.7344 Q18.9063,568.7344 17.5781,567.0938 Q16.2656,565.4375 16.2656,562.3125 Q16.2656,559.1875 17.5781,557.5313 Q18.9063,555.875 21.4063,555.875 Q22.1094,555.875 22.75,556.0313 Q23.4063,556.1875 23.9688,556.4844 L23.9688,559.2031 Q23.3438,558.625 22.75,558.3594 Q22.1563,558.0781 21.5313,558.0781 Q20.1875,558.0781 19.5,559.1563 Q18.8125,560.2188 18.8125,562.3125 Q18.8125,564.4063 19.5,565.4844 Q20.1875,566.5469 21.5313,566.5469 Q22.1563,566.5469 22.75,566.2813 Q23.3438,566 23.9688,565.4219 L23.9688,568.1406 Z "></path>
-        <text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="95" x="35" y="566.6543">EntityPredicate</text>
-        <line style="stroke: #000000; stroke-width: 1.5;" x1="7" x2="132" y1="578.5" y2="578.5"></line>
-        <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="93" x="12" y="592.7104">entity : Entity [1]</text>
+        <rect fill="#FFFFFF" filter="url(#f2dzwqb9ubvfr)" height="52.8047" style="stroke: #000000; stroke-width: 1.5;" width="127" x="787" y="478.5"></rect>
+        <rect fill="#FFFFFF" height="32" style="stroke: #000000; stroke-width: 1.5;" width="127" x="787" y="478.5"></rect>
+        <ellipse cx="802" cy="494.5" fill="#ADD1B2" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"></ellipse>
+        <path d="M804.9688,500.1406 Q804.3906,500.4375 803.75,500.5781 Q803.1094,500.7344 802.4063,500.7344 Q799.9063,500.7344 798.5781,499.0938 Q797.2656,497.4375 797.2656,494.3125 Q797.2656,491.1875 798.5781,489.5313 Q799.9063,487.875 802.4063,487.875 Q803.1094,487.875 803.75,488.0313 Q804.4063,488.1875 804.9688,488.4844 L804.9688,491.2031 Q804.3438,490.625 803.75,490.3594 Q803.1563,490.0781 802.5313,490.0781 Q801.1875,490.0781 800.5,491.1563 Q799.8125,492.2188 799.8125,494.3125 Q799.8125,496.4063 800.5,497.4844 Q801.1875,498.5469 802.5313,498.5469 Q803.1563,498.5469 803.75,498.2813 Q804.3438,498 804.9688,497.4219 L804.9688,500.1406 Z "></path>
+        <text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="95" x="816" y="498.6543">EntityPredicate</text>
+        <line style="stroke: #000000; stroke-width: 1.5;" x1="788" x2="913" y1="510.5" y2="510.5"></line>
+        <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="93" x="793" y="524.7104">entity : Entity [1]</text>
        </a>
        <a target="_top" actuate="onRequest" href="#UnaryPredicate" show="new" title="#UnaryPredicate" type="simple">
-        <rect fill="#FFFFFF" filter="url(#f68lqcrj764c6)" height="52.8047" style="stroke: #000000; stroke-width: 1.5;" width="135" x="14" y="413.5"></rect>
-        <rect fill="#FFFFFF" height="32" style="stroke: #000000; stroke-width: 1.5;" width="135" x="14" y="413.5"></rect>
-        <ellipse cx="32.15" cy="429.5" fill="#A9DCDF" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"></ellipse>
-        <path d="M32.2594,424.8438 L31.1031,429.9219 L33.4313,429.9219 L32.2594,424.8438 Z M30.775,422.6094 L33.7594,422.6094 L37.1188,435 L34.6656,435 L33.9,431.9375 L30.6188,431.9375 L29.8688,435 L27.4313,435 L30.775,422.6094 Z "></path>
-        <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="96" x="46.85" y="433.6543">UnaryPredicate</text>
-        <line style="stroke: #000000; stroke-width: 1.5;" x1="15" x2="148" y1="445.5" y2="445.5"></line>
-        <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="123" x="20" y="459.7104">variable : EJavaObject</text>
+        <rect fill="#FFFFFF" filter="url(#f2dzwqb9ubvfr)" height="52.8047" style="stroke: #000000; stroke-width: 1.5;" width="135" x="745" y="351.5"></rect>
+        <rect fill="#FFFFFF" height="32" style="stroke: #000000; stroke-width: 1.5;" width="135" x="745" y="351.5"></rect>
+        <ellipse cx="763.15" cy="367.5" fill="#A9DCDF" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"></ellipse>
+        <path d="M763.2594,362.8438 L762.1031,367.9219 L764.4313,367.9219 L763.2594,362.8438 Z M761.775,360.6094 L764.7594,360.6094 L768.1188,373 L765.6656,373 L764.9,369.9375 L761.6188,369.9375 L760.8688,373 L758.4313,373 L761.775,360.6094 Z "></path>
+        <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="96" x="777.85" y="371.6543">UnaryPredicate</text>
+        <line style="stroke: #000000; stroke-width: 1.5;" x1="746" x2="879" y1="383.5" y2="383.5"></line>
+        <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="123" x="751" y="397.7104">variable : EJavaObject</text>
        </a>
        <a target="_top" actuate="onRequest" href="#AnnotatedElement" show="new" title="#AnnotatedElement" type="simple">
-        <rect fill="#D3D3D3" filter="url(#f68lqcrj764c6)" height="32" style="stroke: #000000; stroke-width: 1.5;" width="149" x="202" y="164"></rect>
-        <ellipse cx="217" cy="180" fill="#ADD1B2" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"></ellipse>
-        <path d="M219.9688,185.6406 Q219.3906,185.9375 218.75,186.0781 Q218.1094,186.2344 217.4063,186.2344 Q214.9063,186.2344 213.5781,184.5938 Q212.2656,182.9375 212.2656,179.8125 Q212.2656,176.6875 213.5781,175.0313 Q214.9063,173.375 217.4063,173.375 Q218.1094,173.375 218.75,173.5313 Q219.4063,173.6875 219.9688,173.9844 L219.9688,176.7031 Q219.3438,176.125 218.75,175.8594 Q218.1563,175.5781 217.5313,175.5781 Q216.1875,175.5781 215.5,176.6563 Q214.8125,177.7188 214.8125,179.8125 Q214.8125,181.9063 215.5,182.9844 Q216.1875,184.0469 217.5313,184.0469 Q218.1563,184.0469 218.75,183.7813 Q219.3438,183.5 219.9688,182.9219 L219.9688,185.6406 Z "></path>
-        <text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="117" x="231" y="184.1543">AnnotatedElement</text>
+        <rect fill="#D3D3D3" filter="url(#f2dzwqb9ubvfr)" height="32" style="stroke: #000000; stroke-width: 1.5;" width="149" x="467" y="105"></rect>
+        <ellipse cx="482" cy="121" fill="#ADD1B2" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"></ellipse>
+        <path d="M484.9688,126.6406 Q484.3906,126.9375 483.75,127.0781 Q483.1094,127.2344 482.4063,127.2344 Q479.9063,127.2344 478.5781,125.5938 Q477.2656,123.9375 477.2656,120.8125 Q477.2656,117.6875 478.5781,116.0313 Q479.9063,114.375 482.4063,114.375 Q483.1094,114.375 483.75,114.5313 Q484.4063,114.6875 484.9688,114.9844 L484.9688,117.7031 Q484.3438,117.125 483.75,116.8594 Q483.1563,116.5781 482.5313,116.5781 Q481.1875,116.5781 480.5,117.6563 Q479.8125,118.7188 479.8125,120.8125 Q479.8125,122.9063 480.5,123.9844 Q481.1875,125.0469 482.5313,125.0469 Q483.1563,125.0469 483.75,124.7813 Q484.3438,124.5 484.9688,123.9219 L484.9688,126.6406 Z "></path>
+        <text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="117" x="496" y="125.1543">AnnotatedElement</text>
        </a>
        <a target="_top" actuate="onRequest" href="#RelationEntityPredicate" show="new" title="#RelationEntityPredicate" type="simple">
-        <rect fill="#FFFFFF" filter="url(#f68lqcrj764c6)" height="65.6094" style="stroke: #000000; stroke-width: 1.5;" width="200" x="168.5" y="540"></rect>
-        <rect fill="#FFFFFF" height="32" style="stroke: #000000; stroke-width: 1.5;" width="200" x="168.5" y="540"></rect>
-        <ellipse cx="193.4" cy="556" fill="#ADD1B2" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"></ellipse>
-        <path d="M196.3688,561.6406 Q195.7906,561.9375 195.15,562.0781 Q194.5094,562.2344 193.8063,562.2344 Q191.3063,562.2344 189.9781,560.5938 Q188.6656,558.9375 188.6656,555.8125 Q188.6656,552.6875 189.9781,551.0313 Q191.3063,549.375 193.8063,549.375 Q194.5094,549.375 195.15,549.5313 Q195.8063,549.6875 196.3688,549.9844 L196.3688,552.7031 Q195.7438,552.125 195.15,551.8594 Q194.5563,551.5781 193.9313,551.5781 Q192.5875,551.5781 191.9,552.6563 Q191.2125,553.7188 191.2125,555.8125 Q191.2125,557.9063 191.9,558.9844 Q192.5875,560.0469 193.9313,560.0469 Q194.5563,560.0469 195.15,559.7813 Q195.7438,559.5 196.3688,558.9219 L196.3688,561.6406 Z "></path>
-        <text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="146" x="209.6" y="560.1543">RelationEntityPredicate</text>
-        <line style="stroke: #000000; stroke-width: 1.5;" x1="169.5" x2="367.5" y1="572" y2="572"></line>
-        <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="188" x="174.5" y="586.2104">kind : RelationEntityPredicateKind</text>
-        <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="138" x="174.5" y="599.0151">entity : RelationEntity [1]</text>
-       </a>
-       <a target="_top" actuate="onRequest" href="#RelationEntityPredicateKind" show="new" title="#RelationEntityPredicateKind" type="simple">
-        <rect fill="#FFFFFF" filter="url(#f68lqcrj764c6)" height="91.2188" style="stroke: #000000; stroke-width: 1.5;" width="249" x="580" y="8"></rect>
-        <rect fill="#FFFFFF" height="32" style="stroke: #000000; stroke-width: 1.5;" width="249" x="580" y="8"></rect>
-        <ellipse cx="595" cy="24" fill="#EB937F" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"></ellipse>
-        <path d="M599.1094,30 L591.3906,30 L591.3906,17.6094 L599.1094,17.6094 L599.1094,19.7656 L593.8438,19.7656 L593.8438,22.4375 L598.6094,22.4375 L598.6094,24.5938 L593.8438,24.5938 L593.8438,27.8438 L599.1094,27.8438 L599.1094,30 Z "></path>
-        <text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="217" x="609" y="28.1543">shape_RelationEntityPredicateKind</text>
-        <line style="stroke: #000000; stroke-width: 1.5;" x1="581" x2="828" y1="40" y2="40"></line>
-        <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="97" x="586" y="54.2104">relationToSource</text>
-        <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="98" x="586" y="67.0151">sourceToRelation</text>
-        <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="94" x="586" y="79.8198">relationToTarget</text>
-        <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="93" x="586" y="92.6245">targetToRelation</text>
+        <rect fill="#FFFFFF" filter="url(#f2dzwqb9ubvfr)" height="65.6094" style="stroke: #000000; stroke-width: 1.5;" width="178" x="217.5" y="472"></rect>
+        <rect fill="#FFFFFF" height="32" style="stroke: #000000; stroke-width: 1.5;" width="178" x="217.5" y="472"></rect>
+        <ellipse cx="232.5" cy="488" fill="#ADD1B2" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"></ellipse>
+        <path d="M235.4688,493.6406 Q234.8906,493.9375 234.25,494.0781 Q233.6094,494.2344 232.9063,494.2344 Q230.4063,494.2344 229.0781,492.5938 Q227.7656,490.9375 227.7656,487.8125 Q227.7656,484.6875 229.0781,483.0313 Q230.4063,481.375 232.9063,481.375 Q233.6094,481.375 234.25,481.5313 Q234.9063,481.6875 235.4688,481.9844 L235.4688,484.7031 Q234.8438,484.125 234.25,483.8594 Q233.6563,483.5781 233.0313,483.5781 Q231.6875,483.5781 231,484.6563 Q230.3125,485.7188 230.3125,487.8125 Q230.3125,489.9063 231,490.9844 Q231.6875,492.0469 233.0313,492.0469 Q233.6563,492.0469 234.25,491.7813 Q234.8438,491.5 235.4688,490.9219 L235.4688,493.6406 Z "></path>
+        <text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="146" x="246.5" y="492.1543">RelationEntityPredicate</text>
+        <line style="stroke: #000000; stroke-width: 1.5;" x1="218.5" x2="394.5" y1="504" y2="504"></line>
+        <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="155" x="223.5" y="518.2104">entityVariable : EJavaObject</text>
+        <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="138" x="223.5" y="531.0151">entity : RelationEntity [1]</text>
        </a>
        <a target="_top" actuate="onRequest" href="#RelationPredicate" show="new" title="#RelationPredicate" type="simple">
-        <rect fill="#FFFFFF" filter="url(#f68lqcrj764c6)" height="78.4141" style="stroke: #000000; stroke-width: 1.5;" width="172" x="403.5" y="534"></rect>
-        <rect fill="#FFFFFF" height="32" style="stroke: #000000; stroke-width: 1.5;" width="172" x="403.5" y="534"></rect>
-        <ellipse cx="431.55" cy="550" fill="#ADD1B2" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"></ellipse>
-        <path d="M434.5188,555.6406 Q433.9406,555.9375 433.3,556.0781 Q432.6594,556.2344 431.9563,556.2344 Q429.4563,556.2344 428.1281,554.5938 Q426.8156,552.9375 426.8156,549.8125 Q426.8156,546.6875 428.1281,545.0313 Q429.4563,543.375 431.9563,543.375 Q432.6594,543.375 433.3,543.5313 Q433.9563,543.6875 434.5188,543.9844 L434.5188,546.7031 Q433.8938,546.125 433.3,545.8594 Q432.7063,545.5781 432.0813,545.5781 Q430.7375,545.5781 430.05,546.6563 Q429.3625,547.7188 429.3625,549.8125 Q429.3625,551.9063 430.05,552.9844 Q430.7375,554.0469 432.0813,554.0469 Q432.7063,554.0469 433.3,553.7813 Q433.8938,553.5 434.5188,552.9219 L434.5188,555.6406 Z "></path>
-        <text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="111" x="448.45" y="554.1543">RelationPredicate</text>
-        <line style="stroke: #000000; stroke-width: 1.5;" x1="404.5" x2="574.5" y1="566" y2="566"></line>
-        <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="120" x="409.5" y="580.2104">inverse : EJavaObject</text>
-        <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="119" x="409.5" y="593.0151">relation : Relation [1]</text>
-        <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="160" x="409.5" y="605.8198">consequentRule : Rule [0..1]</text>
+        <rect fill="#FFFFFF" filter="url(#f2dzwqb9ubvfr)" height="52.8047" style="stroke: #000000; stroke-width: 1.5;" width="143" x="431" y="478.5"></rect>
+        <rect fill="#FFFFFF" height="32" style="stroke: #000000; stroke-width: 1.5;" width="143" x="431" y="478.5"></rect>
+        <ellipse cx="446" cy="494.5" fill="#ADD1B2" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"></ellipse>
+        <path d="M448.9688,500.1406 Q448.3906,500.4375 447.75,500.5781 Q447.1094,500.7344 446.4063,500.7344 Q443.9063,500.7344 442.5781,499.0938 Q441.2656,497.4375 441.2656,494.3125 Q441.2656,491.1875 442.5781,489.5313 Q443.9063,487.875 446.4063,487.875 Q447.1094,487.875 447.75,488.0313 Q448.4063,488.1875 448.9688,488.4844 L448.9688,491.2031 Q448.3438,490.625 447.75,490.3594 Q447.1563,490.0781 446.5313,490.0781 Q445.1875,490.0781 444.5,491.1563 Q443.8125,492.2188 443.8125,494.3125 Q443.8125,496.4063 444.5,497.4844 Q445.1875,498.5469 446.5313,498.5469 Q447.1563,498.5469 447.75,498.2813 Q448.3438,498 448.9688,497.4219 L448.9688,500.1406 Z "></path>
+        <text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="111" x="460" y="498.6543">RelationPredicate</text>
+        <line style="stroke: #000000; stroke-width: 1.5;" x1="432" x2="573" y1="510.5" y2="510.5"></line>
+        <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="119" x="437" y="524.7104">relation : Relation [1]</text>
        </a>
        <a target="_top" actuate="onRequest" href="#Rule" show="new" title="#Rule" type="simple">
-        <rect fill="#FFFFFF" filter="url(#f68lqcrj764c6)" height="40" style="stroke: #000000; stroke-width: 1.5;" width="59" x="394" y="160"></rect>
-        <rect fill="#FFFFFF" height="32" style="stroke: #000000; stroke-width: 1.5;" width="59" x="394" y="160"></rect>
-        <ellipse cx="409" cy="176" fill="#ADD1B2" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"></ellipse>
-        <path d="M411.9688,181.6406 Q411.3906,181.9375 410.75,182.0781 Q410.1094,182.2344 409.4063,182.2344 Q406.9063,182.2344 405.5781,180.5938 Q404.2656,178.9375 404.2656,175.8125 Q404.2656,172.6875 405.5781,171.0313 Q406.9063,169.375 409.4063,169.375 Q410.1094,169.375 410.75,169.5313 Q411.4063,169.6875 411.9688,169.9844 L411.9688,172.7031 Q411.3438,172.125 410.75,171.8594 Q410.1563,171.5781 409.5313,171.5781 Q408.1875,171.5781 407.5,172.6563 Q406.8125,173.7188 406.8125,175.8125 Q406.8125,177.9063 407.5,178.9844 Q408.1875,180.0469 409.5313,180.0469 Q410.1563,180.0469 410.75,179.7813 Q411.3438,179.5 411.9688,178.9219 L411.9688,181.6406 Z "></path>
-        <text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="27" x="423" y="180.1543">Rule</text>
-        <line style="stroke: #000000; stroke-width: 1.5;" x1="395" x2="452" y1="192" y2="192"></line>
+        <rect fill="#FFFFFF" filter="url(#f2dzwqb9ubvfr)" height="40" style="stroke: #000000; stroke-width: 1.5;" width="59" x="668" y="101"></rect>
+        <rect fill="#FFFFFF" height="32" style="stroke: #000000; stroke-width: 1.5;" width="59" x="668" y="101"></rect>
+        <ellipse cx="683" cy="117" fill="#ADD1B2" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"></ellipse>
+        <path d="M685.9688,122.6406 Q685.3906,122.9375 684.75,123.0781 Q684.1094,123.2344 683.4063,123.2344 Q680.9063,123.2344 679.5781,121.5938 Q678.2656,119.9375 678.2656,116.8125 Q678.2656,113.6875 679.5781,112.0313 Q680.9063,110.375 683.4063,110.375 Q684.1094,110.375 684.75,110.5313 Q685.4063,110.6875 685.9688,110.9844 L685.9688,113.7031 Q685.3438,113.125 684.75,112.8594 Q684.1563,112.5781 683.5313,112.5781 Q682.1875,112.5781 681.5,113.6563 Q680.8125,114.7188 680.8125,116.8125 Q680.8125,118.9063 681.5,119.9844 Q682.1875,121.0469 683.5313,121.0469 Q684.1563,121.0469 684.75,120.7813 Q685.3438,120.5 685.9688,119.9219 L685.9688,122.6406 Z "></path>
+        <text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="27" x="697" y="121.1543">Rule</text>
+        <line style="stroke: #000000; stroke-width: 1.5;" x1="669" x2="726" y1="133" y2="133"></line>
        </a>
        <a target="_top" actuate="onRequest" href="#Member" show="new" title="#Member" type="simple">
-        <rect fill="#D3D3D3" filter="url(#f68lqcrj764c6)" height="32" style="stroke: #000000; stroke-width: 1.5;" width="82" x="462.5" y="37.5"></rect>
-        <ellipse cx="477.5" cy="53.5" fill="#A9DCDF" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"></ellipse>
-        <path d="M477.6094,48.8438 L476.4531,53.9219 L478.7813,53.9219 L477.6094,48.8438 Z M476.125,46.6094 L479.1094,46.6094 L482.4688,59 L480.0156,59 L479.25,55.9375 L475.9688,55.9375 L475.2188,59 L472.7813,59 L476.125,46.6094 Z "></path>
-        <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="50" x="491.5" y="57.6543">Member</text>
+        <rect fill="#D3D3D3" filter="url(#f2dzwqb9ubvfr)" height="32" style="stroke: #000000; stroke-width: 1.5;" width="82" x="736.5" y="8"></rect>
+        <ellipse cx="751.5" cy="24" fill="#A9DCDF" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"></ellipse>
+        <path d="M751.6094,19.3438 L750.4531,24.4219 L752.7813,24.4219 L751.6094,19.3438 Z M750.125,17.1094 L753.1094,17.1094 L756.4688,29.5 L754.0156,29.5 L753.25,26.4375 L749.9688,26.4375 L749.2188,29.5 L746.7813,29.5 L750.125,17.1094 Z "></path>
+        <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="50" x="765.5" y="28.1543">Member</text>
        </a>
        <a target="_top" actuate="onRequest" href="#VocabularyStatement" show="new" title="#VocabularyStatement" type="simple">
-        <rect fill="#D3D3D3" filter="url(#f68lqcrj764c6)" height="32" style="stroke: #000000; stroke-width: 1.5;" width="167" x="260" y="37.5"></rect>
-        <ellipse cx="275" cy="53.5" fill="#A9DCDF" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"></ellipse>
-        <path d="M275.1094,48.8438 L273.9531,53.9219 L276.2813,53.9219 L275.1094,48.8438 Z M273.625,46.6094 L276.6094,46.6094 L279.9688,59 L277.5156,59 L276.75,55.9375 L273.4688,55.9375 L272.7188,59 L270.2813,59 L273.625,46.6094 Z "></path>
-        <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="135" x="289" y="57.6543">VocabularyStatement</text>
+        <rect fill="#D3D3D3" filter="url(#f2dzwqb9ubvfr)" height="32" style="stroke: #000000; stroke-width: 1.5;" width="167" x="534" y="8"></rect>
+        <ellipse cx="549" cy="24" fill="#A9DCDF" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"></ellipse>
+        <path d="M549.1094,19.3438 L547.9531,24.4219 L550.2813,24.4219 L549.1094,19.3438 Z M547.625,17.1094 L550.6094,17.1094 L553.9688,29.5 L551.5156,29.5 L550.75,26.4375 L547.4688,26.4375 L546.7188,29.5 L544.2813,29.5 L547.625,17.1094 Z "></path>
+        <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="135" x="563" y="28.1543">VocabularyStatement</text>
+       </a>
+       <a target="_top" actuate="onRequest" href="#SameAsPredicate" show="new" title="#SameAsPredicate" type="simple">
+        <rect fill="#FFFFFF" filter="url(#f2dzwqb9ubvfr)" height="40" style="stroke: #000000; stroke-width: 1.5;" width="142" x="609.5" y="485"></rect>
+        <rect fill="#FFFFFF" height="32" style="stroke: #000000; stroke-width: 1.5;" width="142" x="609.5" y="485"></rect>
+        <ellipse cx="624.5" cy="501" fill="#ADD1B2" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"></ellipse>
+        <path d="M627.4688,506.6406 Q626.8906,506.9375 626.25,507.0781 Q625.6094,507.2344 624.9063,507.2344 Q622.4063,507.2344 621.0781,505.5938 Q619.7656,503.9375 619.7656,500.8125 Q619.7656,497.6875 621.0781,496.0313 Q622.4063,494.375 624.9063,494.375 Q625.6094,494.375 626.25,494.5313 Q626.9063,494.6875 627.4688,494.9844 L627.4688,497.7031 Q626.8438,497.125 626.25,496.8594 Q625.6563,496.5781 625.0313,496.5781 Q623.6875,496.5781 623,497.6563 Q622.3125,498.7188 622.3125,500.8125 Q622.3125,502.9063 623,503.9844 Q623.6875,505.0469 625.0313,505.0469 Q625.6563,505.0469 626.25,504.7813 Q626.8438,504.5 627.4688,503.9219 L627.4688,506.6406 Z "></path>
+        <text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="110" x="638.5" y="505.1543">SameAsPredicate</text>
+        <line style="stroke: #000000; stroke-width: 1.5;" x1="610.5" x2="750.5" y1="517" y2="517"></line>
        </a>
        <a target="_top" actuate="onRequest" href="#Predicate" show="new" title="#Predicate" type="simple">
-        <path d="M276.5,350.4 C276.5,368.96 276.5,389.941 276.5,406.825 " fill="none" style="stroke: #000000; stroke-width: 1.0;"></path>
-        <polygon fill="none" points="269.5,350.115,276.5,330.115,283.5,350.115,269.5,350.115" style="stroke: #000000; stroke-width: 1.0;"></polygon>
+        <path d="M561.963,300.372 C550.376,315.305 537.907,331.372 527.395,344.918 " fill="none" style="stroke: #000000; stroke-width: 1.0;"></path>
+        <polygon fill="none" points="556.729,295.7,574.52,284.191,567.789,304.283,556.729,295.7" style="stroke: #000000; stroke-width: 1.0;"></polygon>
+       </a>
+       <a target="_top" actuate="onRequest" href="#BinaryPredicate" show="new" title="#BinaryPredicate" type="simple">
+        <path d="M411.957,406.74 C334.405,430.5 224.775,464.0872 156.744,484.9302 " fill="none" style="stroke: #000000; stroke-width: 1.0;"></path>
+        <polygon fill="none" points="410.259,399.939,431.432,400.773,414.36,413.325,410.259,399.939" style="stroke: #000000; stroke-width: 1.0;"></polygon>
        </a>
        <a target="_top" actuate="onRequest" href="#UnaryPredicate" show="new" title="#UnaryPredicate" type="simple">
-        <path d="M77.3314,486.507 C75.4909,506.6 73.396,529.4687 71.8363,546.4954 " fill="none" style="stroke: #000000; stroke-width: 1.0;"></path>
-        <polygon fill="none" points="70.3625,485.847,79.1578,466.569,84.3041,487.124,70.3625,485.847" style="stroke: #000000; stroke-width: 1.0;"></polygon>
+        <path d="M826.17,423.968 C831.736,442.2775 837.967,462.7715 842.729,478.437 " fill="none" style="stroke: #000000; stroke-width: 1.0;"></path>
+        <polygon fill="none" points="819.401,425.769,820.282,404.597,832.796,421.697,819.401,425.769" style="stroke: #000000; stroke-width: 1.0;"></polygon>
        </a>
        <a target="_top" actuate="onRequest" href="#AnnotatedElement" show="new" title="#AnnotatedElement" type="simple">
-        <path d="M276.5,216.498 C276.5,235.747 276.5,259.111 276.5,276.626 " fill="none" style="stroke: #000000; stroke-width: 1.0;"></path>
-        <polygon fill="none" points="269.5,216.388,276.5,196.388,283.5,216.388,269.5,216.388" style="stroke: #000000; stroke-width: 1.0;"></polygon>
+        <path d="M551.454,156.276 C554.853,166.638 558.957,177.934 563.5,188 C568.005,197.984 573.667,208.43 579.158,217.841 " fill="none" style="stroke: #000000; stroke-width: 1.0;"></path>
+        <polygon fill="none" points="544.717,158.182,545.551,137.009,558.102,154.081,544.717,158.182" style="stroke: #000000; stroke-width: 1.0;"></polygon>
        </a>
        <a target="_top" actuate="onRequest" href="#BinaryPredicate" show="new" title="#BinaryPredicate" type="simple">
-        <path d="M273.314,493.17 C272.351,508.936 271.323,525.7786 270.465,539.8306 " fill="none" style="stroke: #000000; stroke-width: 1.0;"></path>
-        <polygon fill="none" points="266.337,492.582,274.543,473.046,280.311,493.436,266.337,492.582" style="stroke: #000000; stroke-width: 1.0;"></polygon>
+        <path d="M435.125,421.969 C409.485,438.3211 380.735,456.6561 356.93,471.8379 " fill="none" style="stroke: #000000; stroke-width: 1.0;"></path>
+        <polygon fill="none" points="431.653,415.881,452.28,411.028,439.181,427.684,431.653,415.881" style="stroke: #000000; stroke-width: 1.0;"></polygon>
        </a>
        <a target="_top" actuate="onRequest" href="#BinaryPredicate" show="new" title="#BinaryPredicate" type="simple">
-        <path d="M345.721,483.572 C371.997,499.733 401.739,518.0249 427.326,533.7614 " fill="none" style="stroke: #000000; stroke-width: 1.0;"></path>
-        <polygon fill="none" points="341.974,489.486,328.606,473.046,349.309,477.561,341.974,489.486" style="stroke: #000000; stroke-width: 1.0;"></polygon>
+        <path d="M502.5,431.237 C502.5,447.4589 502.5,464.6288 502.5,478.2136 " fill="none" style="stroke: #000000; stroke-width: 1.0;"></path>
+        <polygon fill="none" points="495.5,431.191,502.5,411.191,509.5,431.191,495.5,431.191" style="stroke: #000000; stroke-width: 1.0;"></polygon>
        </a>
        <a target="_top" actuate="onRequest" href="#Member" show="new" title="#Member" type="simple">
-        <path d="M482.743,86.804 C467.83,110.011 448.233,140.509 435.748,159.939 " fill="none" style="stroke: #000000; stroke-width: 1.0;"></path>
-        <polygon fill="none" points="476.99,82.808,493.69,69.766,488.768,90.376,476.99,82.808" style="stroke: #000000; stroke-width: 1.0;"></polygon>
+        <path d="M751.734,55.597 C739.215,70.464 724.556,87.871 713.637,100.838 " fill="none" style="stroke: #000000; stroke-width: 1.0;"></path>
+        <polygon fill="none" points="746.409,51.053,764.647,40.263,757.118,60.071,746.409,51.053" style="stroke: #000000; stroke-width: 1.0;"></polygon>
        </a>
        <a target="_top" actuate="onRequest" href="#VocabularyStatement" show="new" title="#VocabularyStatement" type="simple">
-        <path d="M364.257,86.804 C379.17,110.011 398.767,140.509 411.252,159.939 " fill="none" style="stroke: #000000; stroke-width: 1.0;"></path>
-        <polygon fill="none" points="358.232,90.376,353.31,69.766,370.01,82.808,358.232,90.376" style="stroke: #000000; stroke-width: 1.0;"></polygon>
+        <path d="M643.266,55.597 C655.785,70.464 670.444,87.871 681.363,100.838 " fill="none" style="stroke: #000000; stroke-width: 1.0;"></path>
+        <polygon fill="none" points="637.882,60.071,630.353,40.263,648.591,51.053,637.882,60.071" style="stroke: #000000; stroke-width: 1.0;"></polygon>
        </a>
-       <path d="M390.148,208.566 C368.591,226.384 340.387,249.696 317.469,268.638 " fill="none" style="stroke: #000000; stroke-width: 1.0;"></path>
-       <polygon fill="#000000" points="307.354,276.998,316.8393,274.3468,311.2078,273.8123,311.7423,268.1808,307.354,276.998" style="stroke: #000000; stroke-width: 1.0;"></polygon>
-       <line style="stroke: #000000; stroke-width: 1.0;" x1="311.2078" x2="317.374" y1="273.8123" y2="268.716"></line>
-       <polygon fill="#000000" points="400.207,200.252,393.0339,200.9918,390.9579,207.8976,398.131,207.1578,400.207,200.252" style="stroke: #000000; stroke-width: 1.0;"></polygon>
-       <text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="73" x="364.5" y="243.0669">antecedent</text>
-       <text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="7" x="307.0215" y="265.8169">*</text>
-       <path d="M439.861,212.089 C442.416,217.918 444.777,224.051 446.5,230 C475.552,330.29 484.977,452.74 488.034,520.556 " fill="none" style="stroke: #000000; stroke-width: 1.0;"></path>
-       <polygon fill="#000000" points="488.579,533.7693,492.2043,524.6119,488.3727,528.7736,484.2111,524.942,488.579,533.7693" style="stroke: #000000; stroke-width: 1.0;"></polygon>
-       <line style="stroke: #000000; stroke-width: 1.0;" x1="488.3727" x2="488.043" y1="528.7736" y2="520.7803"></line>
-       <polygon fill="#000000" points="434.128,200.005,433.0864,207.1405,439.2724,210.8464,440.314,203.7109,434.128,200.005" style="stroke: #000000; stroke-width: 1.0;"></polygon>
-       <text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="75" x="476.5" y="373.0669">consequent</text>
-       <text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="8" x="479.764" y="523.0731">1</text>
+       <path d="M655.337,137.212 C630.828,147.004 603.437,159.924 596.5,171 C590.254,180.973 588.528,193.126 588.995,204.881 " fill="none" style="stroke: #000000; stroke-width: 1.0;"></path>
+       <polygon fill="#000000" points="590.33,217.846,593.3862,208.4833,589.8174,212.8723,585.4283,209.3035,590.33,217.846" style="stroke: #000000; stroke-width: 1.0;"></polygon>
+       <line style="stroke: #000000; stroke-width: 1.0;" x1="589.8174" x2="588.998" y1="212.8723" y2="204.9145"></line>
+       <polygon fill="#000000" points="667.767,132.403,660.7278,130.8378,656.5756,136.7334,663.6148,138.2987,667.767,132.403" style="stroke: #000000; stroke-width: 1.0;"></polygon>
+       <text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="73" x="597.5" y="184.0669">antecedent</text>
+       <text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="7" x="580.8356" y="206.9607">*</text>
+       <path d="M690.798,153.888 C687.418,165.308 682.502,177.855 675.5,188 C670.366,195.438 664.094,202.458 657.376,208.912 " fill="none" style="stroke: #000000; stroke-width: 1.0;"></path>
+       <polygon fill="#000000" points="647.296,217.946,656.668,214.9186,651.0196,214.6092,651.3291,208.9608,647.296,217.946" style="stroke: #000000; stroke-width: 1.0;"></polygon>
+       <line style="stroke: #000000; stroke-width: 1.0;" x1="651.0196" x2="656.9765" y1="214.6092" y2="209.2695"></line>
+       <polygon fill="#000000" points="694.093,141.21,688.7125,146.011,691.0747,152.8242,696.4553,148.0232,694.093,141.21" style="stroke: #000000; stroke-width: 1.0;"></polygon>
+       <text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="75" x="686.5" y="184.0669">consequent</text>
+       <text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="7" x="649.4321" y="206.7026">*</text>
+       <a target="_top" actuate="onRequest" href="#BinaryPredicate" show="new" title="#BinaryPredicate" type="simple">
+        <path d="M565.033,422.914 C595.259,444.1395 629.964,468.5115 653.37,484.9483 " fill="none" style="stroke: #000000; stroke-width: 1.0;"></path>
+        <polygon fill="none" points="560.684,428.413,548.339,411.191,568.73,416.956,560.684,428.413" style="stroke: #000000; stroke-width: 1.0;"></polygon>
+       </a>
        <a target="_top" actuate="onRequest" href="#Predicate" show="new" title="#Predicate" type="simple">
-        <path d="M222.453,341.778 C189.361,364.604 147.873,393.22 118.499,413.48 " fill="none" style="stroke: #000000; stroke-width: 1.0;"></path>
-        <polygon fill="none" points="218.925,335.708,239.363,330.115,226.874,347.233,218.925,335.708" style="stroke: #000000; stroke-width: 1.0;"></polygon>
+        <path d="M671.438,294.217 C703.727,313.166 740.771,334.905 768.792,351.35 " fill="none" style="stroke: #000000; stroke-width: 1.0;"></path>
+        <polygon fill="none" points="667.782,300.188,654.076,284.028,674.868,288.114,667.782,300.188" style="stroke: #000000; stroke-width: 1.0;"></polygon>
        </a>
       </g>
      </svg>
     </p>
     <h4 class="heading settled" data-level="3.7.1" id="BinaryPredicate"><span class="secno">3.7.1. </span><span class="content"><dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="binarypredicate"><em>BinaryPredicate</em></dfn></span><a class="self-link" href="#BinaryPredicate"></a></h4>
-     BinaryPredicate is a predicate that specifies two variables 
+     BinaryPredicate is a predicate that binds two variables: variable1 and variable2 
     <p><em>Super classes:</em> <a data-link-type="dfn" href="#predicate" id="ref-for-predicate①">Predicate</a></p>
-    <p><em>Sub classes:</em> <a data-link-type="dfn" href="#relationentitypredicate" id="ref-for-relationentitypredicate①">RelationEntityPredicate</a>, <a data-link-type="dfn" href="#relationpredicate" id="ref-for-relationpredicate①">RelationPredicate</a></p>
+    <p><em>Sub classes:</em> <a data-link-type="dfn" href="#relationentitypredicate" id="ref-for-relationentitypredicate①">RelationEntityPredicate</a>, <a data-link-type="dfn" href="#relationpredicate" id="ref-for-relationpredicate①">RelationPredicate</a>, <a data-link-type="dfn" href="#sameaspredicate" id="ref-for-sameaspredicate①">SameAsPredicate</a>, <a data-link-type="dfn" href="#differentfrompredicate" id="ref-for-differentfrompredicate①">DifferentFromPredicate</a></p>
     <p><em>Properties:</em></p>
     <ul>
      <li data-md>
       <p><strong>variable1</strong> : EJavaObject [1]</p>
+      <p>The variable1 name specified by the predicate</p>
      <li data-md>
       <p><strong>variable2</strong> : EJavaObject [1]</p>
+      <p>The variable2 name specified by the predicate</p>
     </ul>
-    <h4 class="heading settled" data-level="3.7.2" id="EntityPredicate"><span class="secno">3.7.2. </span><span class="content"><dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="entitypredicate">EntityPredicate</dfn></span><a class="self-link" href="#EntityPredicate"></a></h4>
+    <h4 class="heading settled" data-level="3.7.2" id="DifferentFromPredicate"><span class="secno">3.7.2. </span><span class="content"><dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="differentfrompredicate">DifferentFromPredicate</dfn></span><a class="self-link" href="#DifferentFromPredicate"></a></h4>
+     DifferentFromPredicate is a binary that binds its two variables to two different named instances 
+    <p><em>Super classes:</em> <a data-link-type="dfn" href="#binarypredicate" id="ref-for-binarypredicate">BinaryPredicate</a></p>
+    <h4 class="heading settled" data-level="3.7.3" id="EntityPredicate"><span class="secno">3.7.3. </span><span class="content"><dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="entitypredicate">EntityPredicate</dfn></span><a class="self-link" href="#EntityPredicate"></a></h4>
      EntityPredicate is a unary predicate that binds its variable to a named instance that is typed by a specific entity. 
     <p><em>Super classes:</em> <a data-link-type="dfn" href="#unarypredicate" id="ref-for-unarypredicate">UnaryPredicate</a></p>
     <p><em>Properties:</em></p>
@@ -4341,69 +4371,43 @@ this metamodel and can be manipulated using its API.
       <p><strong>entity</strong> : <a data-link-type="dfn" href="#entity" id="ref-for-entity①②">Entity</a> [1]</p>
       <p>The entity that this predicates requires as a type of a named instance</p>
     </ul>
-    <h4 class="heading settled" data-level="3.7.3" id="Predicate"><span class="secno">3.7.3. </span><span class="content"><dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="predicate"><em>Predicate</em></dfn></span><a class="self-link" href="#Predicate"></a></h4>
+    <h4 class="heading settled" data-level="3.7.4" id="Predicate"><span class="secno">3.7.4. </span><span class="content"><dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="predicate"><em>Predicate</em></dfn></span><a class="self-link" href="#Predicate"></a></h4>
      Predicate is an annotated element that represents an ontology statement to match when used in a rule’s antecedent, or to
 	infer when used as a consequent a rule. 
     <p><em>Super classes:</em> <a data-link-type="dfn" href="#annotatedelement" id="ref-for-annotatedelement⑤">AnnotatedElement</a></p>
-    <p><em>Sub classes:</em> <a data-link-type="dfn" href="#unarypredicate" id="ref-for-unarypredicate①">UnaryPredicate</a>, <a data-link-type="dfn" href="#binarypredicate" id="ref-for-binarypredicate">BinaryPredicate</a></p>
+    <p><em>Sub classes:</em> <a data-link-type="dfn" href="#unarypredicate" id="ref-for-unarypredicate①">UnaryPredicate</a>, <a data-link-type="dfn" href="#binarypredicate" id="ref-for-binarypredicate①">BinaryPredicate</a></p>
     <p><em>Properties:</em></p>
     <ul>
      <li data-md>
       <p><strong>antecedentRule</strong> : <a data-link-type="dfn" href="#rule" id="ref-for-rule③">Rule</a> [0..1]</p>
       <p>The rule that specifies this predicate as an antecedent</p>
+     <li data-md>
+      <p><strong>consequentRule</strong> : <a data-link-type="dfn" href="#rule" id="ref-for-rule④">Rule</a> [0..1]</p>
+      <p>The rule that specifies this predicate as a consequent</p>
     </ul>
-    <h4 class="heading settled" data-level="3.7.4" id="RelationEntityPredicate"><span class="secno">3.7.4. </span><span class="content"><dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="relationentitypredicate">RelationEntityPredicate</dfn></span><a class="self-link" href="#RelationEntityPredicate"></a></h4>
-     RelationEntityPredicate is a binary predicate that binds its variables to two named instances, one of which represents a
-	relation instance that is typed by a specific relation entity, and the other represents either the instances’s source or
-	target. What determines which  variable is bound to which instance is the predicate’s kind:
-	"fromSource" : variable1 is bound to the source instance and variable2 is bound to the relation instance
-	"toSource"   : variable1 is bound to the relation instance and variable2 is bound to the source instance
-	"fromTarget" : variable1 is bound to the target instance and variable2 is bound to the relation instance
-	"toTarget"   : variable1 is bound to the relation instance and variable2 is bound to the target instance 
-    <p><em>Super classes:</em> <a data-link-type="dfn" href="#binarypredicate" id="ref-for-binarypredicate①">BinaryPredicate</a></p>
-    <p><em>Properties:</em></p>
-    <ul>
-     <li data-md>
-      <p><strong>kind</strong> : <a data-link-type="dfn" href="#relationentitypredicatekind" id="ref-for-relationentitypredicatekind">RelationEntityPredicateKind</a> [0..1]</p>
-      <p>The predicate’s kind that determines which instance (relation/source/target) is bound to which variable</p>
-     <li data-md>
-      <p><strong>entity</strong> : <a data-link-type="dfn" href="#relationentity" id="ref-for-relationentity④">RelationEntity</a> [1]</p>
-      <p>The relation entity that is the type of the relation instance</p>
-    </ul>
-    <h4 class="heading settled" data-level="3.7.5" id="RelationEntityPredicateKind"><span class="secno">3.7.5. </span><span class="content"><dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="relationentitypredicatekind">RelationEntityPredicateKind</dfn></span><a class="self-link" href="#RelationEntityPredicateKind"></a></h4>
-     RelationEntityPredicateKind is an enumeration that specifies how the variables of a relation entity predicates are bound
-	to a relation instance and either its source or target instances. 
-    <p><em>Literals:</em></p>
-    <ul>
-     <li data-md>
-      <p><strong>relationToSource</strong></p>
-      <p>From relation instance (variable1) to source instance (variable2)</p>
-     <li data-md>
-      <p><strong>sourceToRelation</strong></p>
-      <p>From source instance (variable1) to relation instance (variable2)</p>
-     <li data-md>
-      <p><strong>relationToTarget</strong></p>
-      <p>From relation instance (variable1) to target instance (variable2)</p>
-     <li data-md>
-      <p><strong>targetToRelation</strong></p>
-      <p>From target instance (variable1) to relation instance (variable2)</p>
-    </ul>
-    <h4 class="heading settled" data-level="3.7.6" id="RelationPredicate"><span class="secno">3.7.6. </span><span class="content"><dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="relationpredicate">RelationPredicate</dfn></span><a class="self-link" href="#RelationPredicate"></a></h4>
-     RelationPredicate is a binary predicate that binds its variables to two named instances that are linked by a specific relation.
-	The source of the link is bound to variable1, while the target is bound to variable2. The predicate is typically used as a
-	consequent of a rule, although it may also be used as a rule’s antecedent. 
+    <h4 class="heading settled" data-level="3.7.5" id="RelationEntityPredicate"><span class="secno">3.7.5. </span><span class="content"><dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="relationentitypredicate">RelationEntityPredicate</dfn></span><a class="self-link" href="#RelationEntityPredicate"></a></h4>
+     RelationEntityPredicate is a binary predicate that binds its variable1 and variable2 to two named instances that are the
+	source and the target, respectively, of a relation instance that is typed by a specific relation entity, and bound to
+	a third variable named entityVariable. 
     <p><em>Super classes:</em> <a data-link-type="dfn" href="#binarypredicate" id="ref-for-binarypredicate②">BinaryPredicate</a></p>
     <p><em>Properties:</em></p>
     <ul>
      <li data-md>
-      <p><strong>inverse</strong> : EJavaObject [0..1]</p>
-      <p>Whether the inverse of this predicate’s relation (when true) or the relation itself (when false) is specified</p>
+      <p><strong>entityVariable</strong> : EJavaObject [1]</p>
+      <p>The relation entity variable name specified by the predicate</p>
+     <li data-md>
+      <p><strong>entity</strong> : <a data-link-type="dfn" href="#relationentity" id="ref-for-relationentity④">RelationEntity</a> [1]</p>
+      <p>The relation entity that is the type of the relation instance</p>
+    </ul>
+    <h4 class="heading settled" data-level="3.7.6" id="RelationPredicate"><span class="secno">3.7.6. </span><span class="content"><dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="relationpredicate">RelationPredicate</dfn></span><a class="self-link" href="#RelationPredicate"></a></h4>
+     RelationPredicate is a binary predicate that binds its variable1 and variable2 to two named instances that are related as
+	source and target, respectively, by a specific relation. 
+    <p><em>Super classes:</em> <a data-link-type="dfn" href="#binarypredicate" id="ref-for-binarypredicate③">BinaryPredicate</a></p>
+    <p><em>Properties:</em></p>
+    <ul>
      <li data-md>
       <p><strong>relation</strong> : <a data-link-type="dfn" href="#relation" id="ref-for-relation⑤">Relation</a> [1]</p>
       <p>The relation that links the two named instances</p>
-     <li data-md>
-      <p><strong>consequentRule</strong> : <a data-link-type="dfn" href="#rule" id="ref-for-rule④">Rule</a> [0..1]</p>
-      <p>The rule that specifies this predicate as a consequent</p>
     </ul>
     <h4 class="heading settled" data-level="3.7.7" id="Rule"><span class="secno">3.7.7. </span><span class="content"><dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="rule">Rule</dfn></span><a class="self-link" href="#Rule"></a></h4>
      Rule is a member of a vocabulary that adds a new inference rule to the set supported natively by DL. A rule specifies a set
@@ -4417,18 +4421,21 @@ this metamodel and can be manipulated using its API.
       <p><strong>antecedent</strong> : <a data-link-type="dfn" href="#predicate" id="ref-for-predicate②">Predicate</a> [*]</p>
       <p>The set of predicates that form the antecedent of this rule</p>
      <li data-md>
-      <p><strong>consequent</strong> : <a data-link-type="dfn" href="#relationpredicate" id="ref-for-relationpredicate②">RelationPredicate</a> [1]</p>
+      <p><strong>consequent</strong> : <a data-link-type="dfn" href="#predicate" id="ref-for-predicate③">Predicate</a> [*]</p>
       <p>The relation predicate that is the consequent of this rule</p>
     </ul>
-    <h4 class="heading settled" data-level="3.7.8" id="UnaryPredicate"><span class="secno">3.7.8. </span><span class="content"><dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="unarypredicate"><em>UnaryPredicate</em></dfn></span><a class="self-link" href="#UnaryPredicate"></a></h4>
-     UnaryPredicate is a predicate that specifies one variable 
-    <p><em>Super classes:</em> <a data-link-type="dfn" href="#predicate" id="ref-for-predicate③">Predicate</a></p>
+    <h4 class="heading settled" data-level="3.7.8" id="SameAsPredicate"><span class="secno">3.7.8. </span><span class="content"><dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="sameaspredicate">SameAsPredicate</dfn></span><a class="self-link" href="#SameAsPredicate"></a></h4>
+     SameAsPredicate is a binary predicate that binds its two variables to the same named instance 
+    <p><em>Super classes:</em> <a data-link-type="dfn" href="#binarypredicate" id="ref-for-binarypredicate④">BinaryPredicate</a></p>
+    <h4 class="heading settled" data-level="3.7.9" id="UnaryPredicate"><span class="secno">3.7.9. </span><span class="content"><dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="unarypredicate"><em>UnaryPredicate</em></dfn></span><a class="self-link" href="#UnaryPredicate"></a></h4>
+     UnaryPredicate is a predicate that binds one variable 
+    <p><em>Super classes:</em> <a data-link-type="dfn" href="#predicate" id="ref-for-predicate④">Predicate</a></p>
     <p><em>Sub classes:</em> <a data-link-type="dfn" href="#entitypredicate" id="ref-for-entitypredicate①">EntityPredicate</a></p>
     <p><em>Properties:</em></p>
     <ul>
      <li data-md>
       <p><strong>variable</strong> : EJavaObject [1]</p>
-      <p>The variable name specified by the predicate (e.g., X, y)</p>
+      <p>The variable name specified by the predicate</p>
     </ul>
     <h3 class="heading settled" data-level="3.8" id="Instances"><span class="secno">3.8. </span><span class="content">Instances</span><a class="self-link" href="#Instances"></a></h3>
     <p>
@@ -5673,10 +5680,11 @@ this metamodel and can be manipulated using its API.
    <li><a href="#descriptionmemberreference">DescriptionMemberReference</a><span>, in §3.10.6</span>
    <li><a href="#descriptionstatement">DescriptionStatement</a><span>, in §3.3.8</span>
    <li><a href="#descriptionusage">DescriptionUsage</a><span>, in §3.3.9</span>
+   <li><a href="#differentfrompredicate">DifferentFromPredicate</a><span>, in §3.7.2</span>
    <li><a href="#doubleliteral">DoubleLiteral</a><span>, in §3.2.3</span>
    <li><a href="#element">Element</a><span>, in §3.1.3</span>
    <li><a href="#entity">Entity</a><span>, in §3.5.4</span>
-   <li><a href="#entitypredicate">EntityPredicate</a><span>, in §3.7.2</span>
+   <li><a href="#entitypredicate">EntityPredicate</a><span>, in §3.7.3</span>
    <li><a href="#entityreference">EntityReference</a><span>, in §3.10.7</span>
    <li><a href="#enumeratedscalar">EnumeratedScalar</a><span>, in §3.5.5</span>
    <li><a href="#enumeratedscalarreference">EnumeratedScalarReference</a><span>, in §3.10.8</span>
@@ -5696,7 +5704,7 @@ this metamodel and can be manipulated using its API.
    <li><a href="#namedinstance">NamedInstance</a><span>, in §3.8.3</span>
    <li><a href="#namedinstancereference">NamedInstanceReference</a><span>, in §3.10.10</span>
    <li><a href="#ontology">Ontology</a><span>, in §3.3.12</span>
-   <li><a href="#predicate">Predicate</a><span>, in §3.7.3</span>
+   <li><a href="#predicate">Predicate</a><span>, in §3.7.4</span>
    <li><a href="#property">Property</a><span>, in §3.4.5</span>
    <li><a href="#propertyrestrictionaxiom">PropertyRestrictionAxiom</a><span>, in §3.6.4</span>
    <li><a href="#propertyvalueassertion">PropertyValueAssertion</a><span>, in §3.9.4</span>
@@ -5706,8 +5714,7 @@ this metamodel and can be manipulated using its API.
    <li><a href="#relation">Relation</a><span>, in §3.4.6</span>
    <li><a href="#relationcardinalityrestrictionaxiom">RelationCardinalityRestrictionAxiom</a><span>, in §3.6.6</span>
    <li><a href="#relationentity">RelationEntity</a><span>, in §3.5.7</span>
-   <li><a href="#relationentitypredicate">RelationEntityPredicate</a><span>, in §3.7.4</span>
-   <li><a href="#relationentitypredicatekind">RelationEntityPredicateKind</a><span>, in §3.7.5</span>
+   <li><a href="#relationentitypredicate">RelationEntityPredicate</a><span>, in §3.7.5</span>
    <li><a href="#relationentityreference">RelationEntityReference</a><span>, in §3.10.12</span>
    <li><a href="#relationinstance">RelationInstance</a><span>, in §3.8.4</span>
    <li><a href="#relationinstancereference">RelationInstanceReference</a><span>, in §3.10.13</span>
@@ -5720,6 +5727,7 @@ this metamodel and can be manipulated using its API.
    <li><a href="#restrictionaxiom">RestrictionAxiom</a><span>, in §3.6.10</span>
    <li><a href="#rule">Rule</a><span>, in §3.7.7</span>
    <li><a href="#rulereference">RuleReference</a><span>, in §3.10.15</span>
+   <li><a href="#sameaspredicate">SameAsPredicate</a><span>, in §3.7.8</span>
    <li><a href="#scalar">Scalar</a><span>, in §3.5.8</span>
    <li><a href="#scalarproperty">ScalarProperty</a><span>, in §3.4.7</span>
    <li><a href="#scalarpropertycardinalityrestrictionaxiom">ScalarPropertyCardinalityRestrictionAxiom</a><span>, in §3.6.11</span>
@@ -5747,7 +5755,7 @@ this metamodel and can be manipulated using its API.
    <li><a href="#terminology">Terminology</a><span>, in §3.3.15</span>
    <li><a href="#type">Type</a><span>, in §3.5.10</span>
    <li><a href="#typeassertion">TypeAssertion</a><span>, in §3.9.8</span>
-   <li><a href="#unarypredicate">UnaryPredicate</a><span>, in §3.7.8</span>
+   <li><a href="#unarypredicate">UnaryPredicate</a><span>, in §3.7.9</span>
    <li><a href="#vocabulary">Vocabulary</a><span>, in §3.3.16</span>
    <li><a href="#vocabularyextension">VocabularyExtension</a><span>, in §3.3.17</span>
    <li><a href="#vocabularyimport">VocabularyImport</a><span>, in §3.3.18</span>
@@ -5769,7 +5777,7 @@ this metamodel and can be manipulated using its API.
     <li><a href="#ref-for-annotatedelement②">3.1.4. IdentifiedElement</a>
     <li><a href="#ref-for-annotatedelement③">3.3.10. Import</a>
     <li><a href="#ref-for-annotatedelement④">3.6.1. Axiom</a>
-    <li><a href="#ref-for-annotatedelement⑤">3.7.3. Predicate</a>
+    <li><a href="#ref-for-annotatedelement⑤">3.7.4. Predicate</a>
     <li><a href="#ref-for-annotatedelement⑥">3.8.2. Instance</a>
     <li><a href="#ref-for-annotatedelement⑦">3.9.1. Assertion</a>
    </ul>
@@ -6145,7 +6153,7 @@ this metamodel and can be manipulated using its API.
     <li><a href="#ref-for-entity⑨">3.6.6. RelationCardinalityRestrictionAxiom</a>
     <li><a href="#ref-for-entity①⓪">3.6.7. RelationRangeRestrictionAxiom</a>
     <li><a href="#ref-for-entity①①">3.6.8. RelationRestrictionAxiom</a>
-    <li><a href="#ref-for-entity①②">3.7.2. EntityPredicate</a>
+    <li><a href="#ref-for-entity①②">3.7.3. EntityPredicate</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="enumeratedscalar">
@@ -6171,7 +6179,7 @@ this metamodel and can be manipulated using its API.
     <li><a href="#ref-for-relationentity①">3.4.3. ForwardRelation</a>
     <li><a href="#ref-for-relationentity②">3.4.4. InverseRelation</a>
     <li><a href="#ref-for-relationentity③">3.5.4. Entity</a>
-    <li><a href="#ref-for-relationentity④">3.7.4. RelationEntityPredicate</a>
+    <li><a href="#ref-for-relationentity④">3.7.5. RelationEntityPredicate</a>
     <li><a href="#ref-for-relationentity⑤">3.9.5. RelationTypeAssertion</a>
     <li><a href="#ref-for-relationentity⑥">3.10.12. RelationEntityReference</a>
    </ul>
@@ -6228,7 +6236,7 @@ this metamodel and can be manipulated using its API.
   <aside class="dfn-panel" data-for="keyaxiom">
    <b><a href="#keyaxiom">#keyaxiom</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-keyaxiom">2.2.30. KeyAxiom</a>
+    <li><a href="#ref-for-keyaxiom">2.2.32. KeyAxiom</a>
     <li><a href="#ref-for-keyaxiom①">3.5.4. Entity</a>
     <li><a href="#ref-for-keyaxiom②">3.6.1. Axiom</a>
     <li><a href="#ref-for-keyaxiom③">3.10.7. EntityReference</a>
@@ -6255,14 +6263,14 @@ this metamodel and can be manipulated using its API.
   <aside class="dfn-panel" data-for="relationcardinalityrestrictionaxiom">
    <b><a href="#relationcardinalityrestrictionaxiom">#relationcardinalityrestrictionaxiom</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-relationcardinalityrestrictionaxiom">2.2.28. RelationCardinalityRestrictionAxiom</a>
+    <li><a href="#ref-for-relationcardinalityrestrictionaxiom">2.2.30. RelationCardinalityRestrictionAxiom</a>
     <li><a href="#ref-for-relationcardinalityrestrictionaxiom①">3.6.8. RelationRestrictionAxiom</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="relationrangerestrictionaxiom">
    <b><a href="#relationrangerestrictionaxiom">#relationrangerestrictionaxiom</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-relationrangerestrictionaxiom">2.2.27. RelationRangeRestrictionAxiom</a>
+    <li><a href="#ref-for-relationrangerestrictionaxiom">2.2.29. RelationRangeRestrictionAxiom</a>
     <li><a href="#ref-for-relationrangerestrictionaxiom①">3.6.8. RelationRestrictionAxiom</a>
    </ul>
   </aside>
@@ -6280,7 +6288,7 @@ this metamodel and can be manipulated using its API.
   <aside class="dfn-panel" data-for="relationtargetrestrictionaxiom">
    <b><a href="#relationtargetrestrictionaxiom">#relationtargetrestrictionaxiom</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-relationtargetrestrictionaxiom">2.2.29. RelationTargetRestrictionAxiom</a>
+    <li><a href="#ref-for-relationtargetrestrictionaxiom">2.2.31. RelationTargetRestrictionAxiom</a>
     <li><a href="#ref-for-relationtargetrestrictionaxiom①">3.6.8. RelationRestrictionAxiom</a>
    </ul>
   </aside>
@@ -6295,14 +6303,14 @@ this metamodel and can be manipulated using its API.
   <aside class="dfn-panel" data-for="scalarpropertycardinalityrestrictionaxiom">
    <b><a href="#scalarpropertycardinalityrestrictionaxiom">#scalarpropertycardinalityrestrictionaxiom</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-scalarpropertycardinalityrestrictionaxiom">2.2.22. ScalarPropertyCardinalityRestrictionAxiom</a>
+    <li><a href="#ref-for-scalarpropertycardinalityrestrictionaxiom">2.2.24. ScalarPropertyCardinalityRestrictionAxiom</a>
     <li><a href="#ref-for-scalarpropertycardinalityrestrictionaxiom①">3.6.13. ScalarPropertyRestrictionAxiom</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="scalarpropertyrangerestrictionaxiom">
    <b><a href="#scalarpropertyrangerestrictionaxiom">#scalarpropertyrangerestrictionaxiom</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-scalarpropertyrangerestrictionaxiom">2.2.21. ScalarPropertyRangeRestrictionAxiom</a>
+    <li><a href="#ref-for-scalarpropertyrangerestrictionaxiom">2.2.23. ScalarPropertyRangeRestrictionAxiom</a>
     <li><a href="#ref-for-scalarpropertyrangerestrictionaxiom①">3.6.13. ScalarPropertyRestrictionAxiom</a>
    </ul>
   </aside>
@@ -6318,14 +6326,14 @@ this metamodel and can be manipulated using its API.
   <aside class="dfn-panel" data-for="scalarpropertyvaluerestrictionaxiom">
    <b><a href="#scalarpropertyvaluerestrictionaxiom">#scalarpropertyvaluerestrictionaxiom</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-scalarpropertyvaluerestrictionaxiom">2.2.23. ScalarPropertyValueRestrictionAxiom</a>
+    <li><a href="#ref-for-scalarpropertyvaluerestrictionaxiom">2.2.25. ScalarPropertyValueRestrictionAxiom</a>
     <li><a href="#ref-for-scalarpropertyvaluerestrictionaxiom①">3.6.13. ScalarPropertyRestrictionAxiom</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="specializationaxiom">
    <b><a href="#specializationaxiom">#specializationaxiom</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-specializationaxiom">2.2.20. SpecializationAxiom</a>
+    <li><a href="#ref-for-specializationaxiom">2.2.22. SpecializationAxiom</a>
     <li><a href="#ref-for-specializationaxiom①">3.4.8. SpecializableTerm</a>
     <li><a href="#ref-for-specializationaxiom②">3.6.1. Axiom</a>
     <li><a href="#ref-for-specializationaxiom③">3.10.17. SpecializableTermReference</a>
@@ -6334,14 +6342,14 @@ this metamodel and can be manipulated using its API.
   <aside class="dfn-panel" data-for="structuredpropertycardinalityrestrictionaxiom">
    <b><a href="#structuredpropertycardinalityrestrictionaxiom">#structuredpropertycardinalityrestrictionaxiom</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-structuredpropertycardinalityrestrictionaxiom">2.2.25. StructuredPropertyCardinalityRestrictionAxiom</a>
+    <li><a href="#ref-for-structuredpropertycardinalityrestrictionaxiom">2.2.27. StructuredPropertyCardinalityRestrictionAxiom</a>
     <li><a href="#ref-for-structuredpropertycardinalityrestrictionaxiom①">3.6.18. StructuredPropertyRestrictionAxiom</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="structuredpropertyrangerestrictionaxiom">
    <b><a href="#structuredpropertyrangerestrictionaxiom">#structuredpropertyrangerestrictionaxiom</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-structuredpropertyrangerestrictionaxiom">2.2.24. StructuredPropertyRangeRestrictionAxiom</a>
+    <li><a href="#ref-for-structuredpropertyrangerestrictionaxiom">2.2.26. StructuredPropertyRangeRestrictionAxiom</a>
     <li><a href="#ref-for-structuredpropertyrangerestrictionaxiom①">3.6.18. StructuredPropertyRestrictionAxiom</a>
    </ul>
   </aside>
@@ -6357,7 +6365,7 @@ this metamodel and can be manipulated using its API.
   <aside class="dfn-panel" data-for="structuredpropertyvaluerestrictionaxiom">
    <b><a href="#structuredpropertyvaluerestrictionaxiom">#structuredpropertyvaluerestrictionaxiom</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-structuredpropertyvaluerestrictionaxiom">2.2.26. StructuredPropertyValueRestrictionAxiom</a>
+    <li><a href="#ref-for-structuredpropertyvaluerestrictionaxiom">2.2.28. StructuredPropertyValueRestrictionAxiom</a>
     <li><a href="#ref-for-structuredpropertyvaluerestrictionaxiom①">3.6.18. StructuredPropertyRestrictionAxiom</a>
     <li><a href="#ref-for-structuredpropertyvaluerestrictionaxiom②">3.8.5. StructureInstance</a>
    </ul>
@@ -6365,16 +6373,25 @@ this metamodel and can be manipulated using its API.
   <aside class="dfn-panel" data-for="binarypredicate">
    <b><a href="#binarypredicate">#binarypredicate</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-binarypredicate">3.7.3. Predicate</a>
-    <li><a href="#ref-for-binarypredicate①">3.7.4. RelationEntityPredicate</a>
-    <li><a href="#ref-for-binarypredicate②">3.7.6. RelationPredicate</a>
+    <li><a href="#ref-for-binarypredicate">3.7.2. DifferentFromPredicate</a>
+    <li><a href="#ref-for-binarypredicate①">3.7.4. Predicate</a>
+    <li><a href="#ref-for-binarypredicate②">3.7.5. RelationEntityPredicate</a>
+    <li><a href="#ref-for-binarypredicate③">3.7.6. RelationPredicate</a>
+    <li><a href="#ref-for-binarypredicate④">3.7.8. SameAsPredicate</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="differentfrompredicate">
+   <b><a href="#differentfrompredicate">#differentfrompredicate</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-differentfrompredicate">2.2.21. DifferentFromPredicate</a>
+    <li><a href="#ref-for-differentfrompredicate①">3.7.1. BinaryPredicate</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="entitypredicate">
    <b><a href="#entitypredicate">#entitypredicate</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-entitypredicate">2.2.17. EntityPredicate</a>
-    <li><a href="#ref-for-entitypredicate①">3.7.8. UnaryPredicate</a>
+    <li><a href="#ref-for-entitypredicate①">3.7.9. UnaryPredicate</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="predicate">
@@ -6382,29 +6399,22 @@ this metamodel and can be manipulated using its API.
    <ul>
     <li><a href="#ref-for-predicate">3.1.1. AnnotatedElement</a>
     <li><a href="#ref-for-predicate①">3.7.1. BinaryPredicate</a>
-    <li><a href="#ref-for-predicate②">3.7.7. Rule</a>
-    <li><a href="#ref-for-predicate③">3.7.8. UnaryPredicate</a>
+    <li><a href="#ref-for-predicate②">3.7.7. Rule</a> <a href="#ref-for-predicate③">(2)</a>
+    <li><a href="#ref-for-predicate④">3.7.9. UnaryPredicate</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="relationentitypredicate">
    <b><a href="#relationentitypredicate">#relationentitypredicate</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-relationentitypredicate">2.2.18. RelationEntityPredicate</a>
+    <li><a href="#ref-for-relationentitypredicate">2.2.19. RelationEntityPredicate</a>
     <li><a href="#ref-for-relationentitypredicate①">3.7.1. BinaryPredicate</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="relationentitypredicatekind">
-   <b><a href="#relationentitypredicatekind">#relationentitypredicatekind</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-relationentitypredicatekind">3.7.4. RelationEntityPredicate</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="relationpredicate">
    <b><a href="#relationpredicate">#relationpredicate</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-relationpredicate">2.2.19. RelationPredicate</a>
+    <li><a href="#ref-for-relationpredicate">2.2.18. RelationPredicate</a>
     <li><a href="#ref-for-relationpredicate①">3.7.1. BinaryPredicate</a>
-    <li><a href="#ref-for-relationpredicate②">3.7.7. Rule</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="rule">
@@ -6413,16 +6423,22 @@ this metamodel and can be manipulated using its API.
     <li><a href="#ref-for-rule">2.2.16. Rule</a>
     <li><a href="#ref-for-rule①">3.3.11. Member</a>
     <li><a href="#ref-for-rule②">3.3.19. VocabularyStatement</a>
-    <li><a href="#ref-for-rule③">3.7.3. Predicate</a>
-    <li><a href="#ref-for-rule④">3.7.6. RelationPredicate</a>
+    <li><a href="#ref-for-rule③">3.7.4. Predicate</a> <a href="#ref-for-rule④">(2)</a>
     <li><a href="#ref-for-rule⑤">3.10.15. RuleReference</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="sameaspredicate">
+   <b><a href="#sameaspredicate">#sameaspredicate</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-sameaspredicate">2.2.20. SameAsPredicate</a>
+    <li><a href="#ref-for-sameaspredicate①">3.7.1. BinaryPredicate</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="unarypredicate">
    <b><a href="#unarypredicate">#unarypredicate</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-unarypredicate">3.7.2. EntityPredicate</a>
-    <li><a href="#ref-for-unarypredicate①">3.7.3. Predicate</a>
+    <li><a href="#ref-for-unarypredicate">3.7.3. EntityPredicate</a>
+    <li><a href="#ref-for-unarypredicate①">3.7.4. Predicate</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="conceptinstance">
