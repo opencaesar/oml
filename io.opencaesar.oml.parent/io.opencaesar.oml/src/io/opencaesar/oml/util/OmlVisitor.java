@@ -508,12 +508,22 @@ public class OmlVisitor<T> extends OmlSwitch<T> {
 	}
 
 	@Override
-	public T caseRelationEntityPredicate(RelationEntityPredicate object) {
+	public T caseSameAsPredicate(SameAsPredicate object) {
+		return null;
+	}
+
+	@Override
+	public T caseDifferentFromPredicate(DifferentFromPredicate object) {
 		return null;
 	}
 
 	@Override
 	public T caseRelationPredicate(RelationPredicate object) {
+		return null;
+	}
+
+	@Override
+	public T caseRelationEntityPredicate(RelationEntityPredicate object) {
 		return null;
 	}
 

@@ -1,4 +1,20 @@
 /**
+ * 
+ * Copyright 2019 California Institute of Technology ("Caltech").
+ * U.S. Government sponsorship acknowledged.
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * 
  */
 package io.opencaesar.oml.provider;
 
@@ -14,8 +30,6 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
-import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
-import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
  * This is the item provider adapter for a {@link io.opencaesar.oml.RelationPredicate} object.
@@ -46,8 +60,6 @@ public class RelationPredicateItemProvider extends BinaryPredicateItemProvider {
 			super.getPropertyDescriptors(object);
 
 			addRelationPropertyDescriptor(object);
-			addInversePropertyDescriptor(object);
-			addConsequentRulePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -66,50 +78,6 @@ public class RelationPredicateItemProvider extends BinaryPredicateItemProvider {
 				 getString("_UI_RelationPredicate_relation_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_RelationPredicate_relation_feature", "_UI_RelationPredicate_type"),
 				 OmlPackage.Literals.RELATION_PREDICATE__RELATION,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Inverse feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addInversePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_RelationPredicate_inverse_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_RelationPredicate_inverse_feature", "_UI_RelationPredicate_type"),
-				 OmlPackage.Literals.RELATION_PREDICATE__INVERSE,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Consequent Rule feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addConsequentRulePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_RelationPredicate_consequentRule_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_RelationPredicate_consequentRule_feature", "_UI_RelationPredicate_type"),
-				 OmlPackage.Literals.RELATION_PREDICATE__CONSEQUENT_RULE,
 				 true,
 				 false,
 				 true,
@@ -154,12 +122,6 @@ public class RelationPredicateItemProvider extends BinaryPredicateItemProvider {
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
-
-		switch (notification.getFeatureID(RelationPredicate.class)) {
-			case OmlPackage.RELATION_PREDICATE__INVERSE:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-				return;
-		}
 		super.notifyChanged(notification);
 	}
 

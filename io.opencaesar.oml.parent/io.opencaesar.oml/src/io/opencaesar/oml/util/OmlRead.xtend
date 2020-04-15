@@ -69,6 +69,7 @@ import io.opencaesar.oml.QuotedLiteral
 import io.opencaesar.oml.Reference
 import io.opencaesar.oml.Relation
 import io.opencaesar.oml.RelationEntity
+import io.opencaesar.oml.RelationEntityPredicate
 import io.opencaesar.oml.RelationEntityReference
 import io.opencaesar.oml.RelationInstance
 import io.opencaesar.oml.RelationInstanceReference
@@ -113,13 +114,13 @@ import java.util.LinkedHashSet
 import java.util.Map
 import java.util.Set
 import org.apache.xml.resolver.Catalog
+import org.apache.xml.resolver.CatalogManager
+import org.eclipse.core.runtime.FileLocator
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.emf.ecore.util.EcoreUtil
-import org.eclipse.core.runtime.FileLocator
-import org.apache.xml.resolver.CatalogManager
 
 class OmlRead {
 	
@@ -1017,9 +1018,17 @@ class OmlRead {
 		predicate.ontology.iri+predicate.variable2
 	}
 		
+	// RelationPredicate
+
+	// SameAsPredicate
+
+	// DifferentFromPredicate
+
 	// RelationEntityPredicate
 
-	// RelationPredicate
+	static def String entityVariableIri(RelationEntityPredicate predicate) {
+		predicate.ontology.iri+predicate.entityVariable
+	}
 
 	// Literal
 	

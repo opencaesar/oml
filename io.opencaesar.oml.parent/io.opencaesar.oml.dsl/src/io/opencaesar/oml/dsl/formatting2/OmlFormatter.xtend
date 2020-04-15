@@ -37,6 +37,7 @@ import io.opencaesar.oml.DecimalLiteral
 import io.opencaesar.oml.Description
 import io.opencaesar.oml.DescriptionExtension
 import io.opencaesar.oml.DescriptionUsage
+import io.opencaesar.oml.DifferentFromPredicate
 import io.opencaesar.oml.DoubleLiteral
 import io.opencaesar.oml.EntityPredicate
 import io.opencaesar.oml.EnumeratedScalar
@@ -63,6 +64,7 @@ import io.opencaesar.oml.RelationTargetRestrictionAxiom
 import io.opencaesar.oml.RelationTypeAssertion
 import io.opencaesar.oml.Rule
 import io.opencaesar.oml.RuleReference
+import io.opencaesar.oml.SameAsPredicate
 import io.opencaesar.oml.ScalarProperty
 import io.opencaesar.oml.ScalarPropertyCardinalityRestrictionAxiom
 import io.opencaesar.oml.ScalarPropertyRangeRestrictionAxiom
@@ -113,8 +115,8 @@ class OmlFormatter extends AbstractFormatter2 {
 		vocabulary.prepend[setNewLines(0, 0, 0); noSpace]
 		vocabulary.ownedAnnotations.forEach[format.append[newLine]]
         vocabulary.regionFor.keyword(vocabularyAccess.vocabularyKeyword_1).append[oneSpace]
-        vocabulary.regionFor.keyword(vocabularyAccess.withKeyword_3_0).surround[oneSpace]
-        vocabulary.regionFor.keyword(vocabularyAccess.asKeyword_4).surround[oneSpace]
+        vocabulary.regionFor.keyword(vocabularyAccess.withKeyword_3).surround[oneSpace]
+        vocabulary.regionFor.keyword(vocabularyAccess.asKeyword_5).surround[oneSpace]
 		vocabulary.formatBraces(document)
 		vocabulary.ownedImports.forEach[format.prepend[newLines = 2]]
 		vocabulary.ownedStatements.forEach[format.prepend[newLines = 2]]
@@ -124,8 +126,8 @@ class OmlFormatter extends AbstractFormatter2 {
 		bundle.prepend[setNewLines(0, 0, 0); noSpace]
 		bundle.ownedAnnotations.forEach[format.append[newLine]]
         bundle.regionFor.keyword(bundleAccess.bundleKeyword_1).append[oneSpace]
-        bundle.regionFor.keyword(bundleAccess.withKeyword_3_0).surround[oneSpace]
-        bundle.regionFor.keyword(bundleAccess.asKeyword_4).surround[oneSpace]
+        bundle.regionFor.keyword(bundleAccess.withKeyword_3).surround[oneSpace]
+        bundle.regionFor.keyword(bundleAccess.asKeyword_5).surround[oneSpace]
 		bundle.formatBraces(document)
 		bundle.ownedImports.forEach[format.prepend[newLines = 2]]
 	}
@@ -134,8 +136,8 @@ class OmlFormatter extends AbstractFormatter2 {
 		description.prepend[setNewLines(0, 0, 0); noSpace]
 		description.ownedAnnotations.forEach[format.append[newLine]]
         description.regionFor.keyword(descriptionAccess.descriptionKeyword_1).append[oneSpace]
-        description.regionFor.keyword(descriptionAccess.withKeyword_3_0).surround[oneSpace]
-        description.regionFor.keyword(descriptionAccess.asKeyword_4).surround[oneSpace]
+        description.regionFor.keyword(descriptionAccess.withKeyword_3).surround[oneSpace]
+        description.regionFor.keyword(descriptionAccess.asKeyword_5).surround[oneSpace]
 		description.formatBraces(document)
 		description.ownedImports.forEach[format.prepend[newLines = 2]]
 		description.ownedStatements.forEach[format.prepend[newLines = 2]]
@@ -266,10 +268,10 @@ class OmlFormatter extends AbstractFormatter2 {
 		rule.regionFor.keyword(ruleAccess.ruleKeyword_1).append[oneSpace]
 		rule.formatBrackets(document)
 		rule.antecedent.head?.format.prepend[newLine]
+		rule.regionFor.keywords('^').forEach[surround[oneSpace]]
 		rule.antecedent.forEach[format]
-		rule.regionFor.keywords(ruleAccess.ampersandKeyword_5_0).forEach[surround[oneSpace]]
-		rule.regionFor.keyword(ruleAccess.equalsSignGreaterThanSignKeyword_6).surround[oneSpace]
-		rule.consequent?.format
+		rule.regionFor.keyword(ruleAccess.hyphenMinusGreaterThanSignKeyword_6).surround[oneSpace]
+		rule.consequent.forEach[format]
 	}
 
 	def dispatch void format(ConceptInstance instance, extension IFormattableDocument document) {
@@ -561,17 +563,28 @@ class OmlFormatter extends AbstractFormatter2 {
 		predicate.regionFor.keyword(entityPredicateAccess.rightParenthesisKeyword_4).prepend[noSpace]
 	}
 
-	def dispatch void format(RelationEntityPredicate predicate, extension IFormattableDocument document) {
-		predicate.regionFor.keyword(relationEntityPredicateAccess.leftParenthesisKeyword_2).surround[noSpace]
-		predicate.regionFor.feature(OmlPackage.Literals.RELATION_ENTITY_PREDICATE__KIND).surround[oneSpace]
-		predicate.regionFor.keyword(relationEntityPredicateAccess.rightParenthesisKeyword_6).prepend[noSpace]
-	}
-
 	def dispatch void format(RelationPredicate predicate, extension IFormattableDocument document) {
 		predicate.regionFor.keyword(relationPredicateAccess.leftParenthesisKeyword_2).surround[noSpace]
-		predicate.regionFor.keyword(relationPredicateAccess.inverseLessThanSignHyphenMinusKeyword_4_0_0).surround[oneSpace]
-		predicate.regionFor.keyword(relationPredicateAccess.hyphenMinusGreaterThanSignKeyword_4_1).surround[oneSpace]
+		predicate.formatCommas(document)
 		predicate.regionFor.keyword(relationPredicateAccess.rightParenthesisKeyword_6).prepend[noSpace]
+	}
+
+	def dispatch void format(SameAsPredicate predicate, extension IFormattableDocument document) {
+		predicate.regionFor.keyword(sameAsPredicateAccess.leftParenthesisKeyword_2).surround[noSpace]
+		predicate.formatCommas(document)
+		predicate.regionFor.keyword(sameAsPredicateAccess.rightParenthesisKeyword_6).prepend[noSpace]
+	}
+
+	def dispatch void format(DifferentFromPredicate predicate, extension IFormattableDocument document) {
+		predicate.regionFor.keyword(differentFromPredicateAccess.leftParenthesisKeyword_2).surround[noSpace]
+		predicate.formatCommas(document)
+		predicate.regionFor.keyword(differentFromPredicateAccess.rightParenthesisKeyword_6).prepend[noSpace]
+	}
+
+	def dispatch void format(RelationEntityPredicate predicate, extension IFormattableDocument document) {
+		predicate.regionFor.keyword(relationEntityPredicateAccess.leftParenthesisKeyword_2).surround[noSpace]
+		predicate.formatCommas(document)
+		predicate.regionFor.keyword(relationEntityPredicateAccess.rightParenthesisKeyword_8).prepend[noSpace]
 	}
 
 	def dispatch void format(QuotedLiteral literal, extension IFormattableDocument document) {

@@ -217,7 +217,7 @@ class OmlIndex {
 		entity.findInverseReferencers(RelationTypeAssertion, OmlPackage.Literals.RELATION_TYPE_ASSERTION__TYPE)
 	}
 
-	static def Iterable<RelationEntityPredicate> findRelationEntityPredicatesWithRelation(RelationEntity entity) {
+	static def Iterable<RelationEntityPredicate> findRelationEntityPredicatesWithEntity(RelationEntity entity) {
 		entity.findInverseReferencers(RelationEntityPredicate, OmlPackage.Literals.RELATION_ENTITY_PREDICATE__ENTITY)
 	}
 
@@ -463,8 +463,12 @@ class OmlIndex {
 
 	// BinaryPredicate
 
-	// RelationEntityPredicate
-
 	// RelationPredicate
+
+	// SameAsPredicate
+
+	// DifferentFromPredicate
+
+	// RelationEntityPredicate
 			
 }

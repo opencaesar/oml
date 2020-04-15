@@ -21,6 +21,7 @@ package io.opencaesar.oml.dsl.ide.diagram
 import io.opencaesar.oml.Aspect
 import io.opencaesar.oml.Classifier
 import io.opencaesar.oml.Concept
+import io.opencaesar.oml.DifferentFromPredicate
 import io.opencaesar.oml.Element
 import io.opencaesar.oml.EntityPredicate
 import io.opencaesar.oml.IdentifiedElement
@@ -34,6 +35,7 @@ import io.opencaesar.oml.RelationEntityPredicate
 import io.opencaesar.oml.RelationPredicate
 import io.opencaesar.oml.RelationRangeRestrictionAxiom
 import io.opencaesar.oml.Rule
+import io.opencaesar.oml.SameAsPredicate
 import io.opencaesar.oml.Scalar
 import io.opencaesar.oml.ScalarProperty
 import io.opencaesar.oml.SpecializationAxiom
@@ -235,9 +237,11 @@ class OmlDiagramView {
 
 	private def String toText(Predicate predicate) {
 		switch predicate {
-			RelationPredicate: predicate.relation.name + '(' + predicate.variable1 + ', ' + predicate.variable2 + ')'
-			RelationEntityPredicate: predicate.entity.name + '(' + predicate.kind.toString + ', ' + predicate.variable1 + ', ' + predicate.variable2 + ')'
 			EntityPredicate: predicate.entity.name + '(' + predicate.variable + ')'
+			SameAsPredicate: 'SameAs' + '(' + predicate.variable1 + ', ' + predicate.variable2 + ')'
+			DifferentFromPredicate: 'DifferentFrom' + '(' + predicate.variable1 + ', ' + predicate.variable2 + ')'
+			RelationPredicate: predicate.relation.name + '(' + predicate.variable1 + ',' + predicate.variable2 + ')'
+			RelationEntityPredicate: predicate.entity.name + '(' + predicate.variable1 + ', ' + predicate.entityVariable + ', ' + predicate.variable2 + ')'
 			default: ''
 		}
 	}

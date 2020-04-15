@@ -1,4 +1,20 @@
 /**
+ * 
+ * Copyright 2019 California Institute of Technology ("Caltech").
+ * U.S. Government sponsorship acknowledged.
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * 
  */
 package io.opencaesar.oml.provider;
 
@@ -1452,6 +1468,52 @@ public class OmlItemProviderAdapterFactory extends OmlAdapterFactory implements 
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.SameAsPredicate} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected SameAsPredicateItemProvider sameAsPredicateItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link io.opencaesar.oml.SameAsPredicate}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createSameAsPredicateAdapter() {
+		if (sameAsPredicateItemProvider == null) {
+			sameAsPredicateItemProvider = new SameAsPredicateItemProvider(this);
+		}
+
+		return sameAsPredicateItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.DifferentFromPredicate} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected DifferentFromPredicateItemProvider differentFromPredicateItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link io.opencaesar.oml.DifferentFromPredicate}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createDifferentFromPredicateAdapter() {
+		if (differentFromPredicateItemProvider == null) {
+			differentFromPredicateItemProvider = new DifferentFromPredicateItemProvider(this);
+		}
+
+		return differentFromPredicateItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.QuotedLiteral} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1731,6 +1793,8 @@ public class OmlItemProviderAdapterFactory extends OmlAdapterFactory implements 
 		if (entityPredicateItemProvider != null) entityPredicateItemProvider.dispose();
 		if (relationEntityPredicateItemProvider != null) relationEntityPredicateItemProvider.dispose();
 		if (relationPredicateItemProvider != null) relationPredicateItemProvider.dispose();
+		if (sameAsPredicateItemProvider != null) sameAsPredicateItemProvider.dispose();
+		if (differentFromPredicateItemProvider != null) differentFromPredicateItemProvider.dispose();
 		if (quotedLiteralItemProvider != null) quotedLiteralItemProvider.dispose();
 		if (integerLiteralItemProvider != null) integerLiteralItemProvider.dispose();
 		if (decimalLiteralItemProvider != null) decimalLiteralItemProvider.dispose();

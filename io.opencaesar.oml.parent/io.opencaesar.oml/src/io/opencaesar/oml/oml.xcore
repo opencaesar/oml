@@ -596,7 +596,7 @@ class Rule extends Member, VocabularyStatement {
 	/*
 	 * The relation predicate that is the consequent of this rule
 	 */
-	contains RelationPredicate[1] consequent opposite consequentRule
+	contains Predicate[+] consequent opposite consequentRule
 }
 
 /*
@@ -1423,15 +1423,19 @@ abstract class Predicate extends AnnotatedElement {
 	 * The rule that specifies this predicate as an antecedent
 	 */
 	container Rule antecedentRule opposite antecedent 
+	/*
+	 * The rule that specifies this predicate as a consequent
+	 */
+	container Rule consequentRule opposite consequent
 }
 
 /*
- * UnaryPredicate is a predicate that specifies one variable
+ * UnaryPredicate is a predicate that binds one variable
  */
 @Bikeshed(heading="Rules")
 abstract class UnaryPredicate extends Predicate {
 	/*
-	 * The variable name specified by the predicate (e.g., X, y)
+	 * The variable name specified by the predicate
 	 */
 	String[1] variable
 }
@@ -1448,39 +1452,40 @@ class EntityPredicate extends UnaryPredicate {
 }
 
 /*
- * BinaryPredicate is a predicate that specifies two variables
+ * BinaryPredicate is a predicate that binds two variables: variable1 and variable2
  */
 @Bikeshed(heading="Rules")
 abstract class BinaryPredicate extends Predicate {
+	/*
+	 * The variable1 name specified by the predicate
+	 */
 	String[1] variable1
+	/*
+	 * The variable2 name specified by the predicate
+	 */
 	String[1] variable2
 }
 
 /*
- * RelationEntityPredicate is a binary predicate that binds its variables to two named instances, one of which represents a
- * relation instance that is typed by a specific relation entity, and the other represents either the instances's source or 
- * target. What determines which  variable is bound to which instance is the predicate's kind: 
- * "fromSource" : variable1 is bound to the source instance and variable2 is bound to the relation instance
- * "toSource"   : variable1 is bound to the relation instance and variable2 is bound to the source instance
- * "fromTarget" : variable1 is bound to the target instance and variable2 is bound to the relation instance
- * "toTarget"   : variable1 is bound to the relation instance and variable2 is bound to the target instance
+ * RelationEntityPredicate is a binary predicate that binds its variable1 and variable2 to two named instances that are the
+ * source and the target, respectively, of a relation instance that is typed by a specific relation entity, and bound to
+ * a third variable named entityVariable. 
  */
 @Bikeshed(heading="Rules")
 class RelationEntityPredicate extends BinaryPredicate {
 	/*
+	 * The relation entity variable name specified by the predicate
+	 */
+	String[1] entityVariable
+	/*
 	 * The relation entity that is the type of the relation instance
 	 */
 	refers RelationEntity[1] entity
-	/*
-	 * The predicate's kind that determines which instance (relation/source/target) is bound to which variable
-	 */
-	RelationEntityPredicateKind kind
 }
 
 /*
- * RelationPredicate is a binary predicate that binds its variables to two named instances that are linked by a specific relation.
- * The source of the link is bound to variable1, while the target is bound to variable2. The predicate is typically used as a 
- * consequent of a rule, although it may also be used as a rule's antecedent.
+ * RelationPredicate is a binary predicate that binds its variable1 and variable2 to two named instances that are related as
+ * source and target, respectively, by a specific relation.
  */
 @Bikeshed(heading="Rules")
 class RelationPredicate extends BinaryPredicate {
@@ -1488,14 +1493,20 @@ class RelationPredicate extends BinaryPredicate {
 	 * The relation that links the two named instances
 	 */
 	refers Relation[1] relation
-	/*
-	 * Whether the inverse of this predicate's relation (when true) or the relation itself (when false) is specified
-	 */
-	 boolean inverse
-	/*
-	 * The rule that specifies this predicate as a consequent
-	 */
-	container Rule consequentRule opposite consequent
+}
+
+/*
+ * SameAsPredicate is a binary predicate that binds its two variables to the same named instance
+ */
+@Bikeshed(heading="Rules")
+class SameAsPredicate extends BinaryPredicate {
+}
+
+/*
+ * DifferentFromPredicate is a binary that binds its two variables to two different named instances
+ */
+@Bikeshed(heading="Rules")
+class DifferentFromPredicate extends BinaryPredicate {
 }
 
 /*
@@ -1608,30 +1619,6 @@ enum CardinalityRestrictionKind {
 	 * The cardinality is at most this
 	 */
 	max = 2
-}
-
-/*
- * RelationEntityPredicateKind is an enumeration that specifies how the variables of a relation entity predicates are bound
- * to a relation instance and either its source or target instances.
- */
-@Bikeshed(heading="Rules")
-enum RelationEntityPredicateKind {
-	/*
-	 * From relation instance (variable1) to source instance (variable2)
-	 */
-	relationToSource = 0
-	/*
-	 * From source instance (variable1) to relation instance (variable2)
-	 */
-	sourceToRelation = 1
-	/*
-	 * From relation instance (variable1) to target instance (variable2)
-	 */
-	relationToTarget = 2
-	/*
-	 * From target instance (variable1) to relation instance (variable2)
-	 */
-	targetToRelation = 3
 }
 
 @ExtendedMetaData(minInclusive="0")

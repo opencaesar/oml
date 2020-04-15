@@ -522,8 +522,12 @@ class OmlSearch extends OmlIndex {
 
 	// BinaryPredicate
 
-	// RelationEntityPredicate
-
 	// RelationPredicate
+
+	// SameAsPredicate
+
+	// DifferentFromPredicate
+
+	// RelationEntityPredicate
 			
 }

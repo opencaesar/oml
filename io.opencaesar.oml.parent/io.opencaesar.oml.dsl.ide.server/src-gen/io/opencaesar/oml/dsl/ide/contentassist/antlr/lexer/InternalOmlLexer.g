@@ -24,6 +24,8 @@ package io.opencaesar.oml.dsl.ide.contentassist.antlr.lexer;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer;
 }
 
+DifferentFrom : 'differentFrom';
+
 MaxExclusive : 'maxExclusive';
 
 MaxInclusive : 'maxInclusive';
@@ -92,6 +94,8 @@ Entity : 'entity';
 
 Length : 'length';
 
+SameAs : 'sameAs';
+
 Scalar : 'scalar';
 
 Range : 'range';
@@ -105,14 +109,6 @@ Some : 'some';
 Uses : 'uses';
 
 With : 'with';
-
-HyphenMinusGreaterThanSignColon : '->:';
-
-ColonHyphenMinusGreaterThanSign : ':->';
-
-ColonLessThanSignHyphenMinus : ':<-';
-
-LessThanSignHyphenMinusColon : '<-:';
 
 All : 'all';
 
@@ -128,10 +124,6 @@ HyphenMinusGreaterThanSign : '->';
 
 ColonGreaterThanSign : ':>';
 
-LessThanSignHyphenMinus : '<-';
-
-EqualsSignGreaterThanSign : '=>';
-
 CircumflexAccentCircumflexAccent : '^^';
 
 As : 'as';
@@ -145,8 +137,6 @@ To : 'to';
 NumberSign : '#';
 
 DollarSign : '$';
-
-Ampersand : '&';
 
 LeftParenthesis : '(';
 
@@ -163,6 +153,8 @@ CommercialAt : '@';
 LeftSquareBracket : '[';
 
 RightSquareBracket : ']';
+
+CircumflexAccent : '^';
 
 LeftCurlyBracket : '{';
 

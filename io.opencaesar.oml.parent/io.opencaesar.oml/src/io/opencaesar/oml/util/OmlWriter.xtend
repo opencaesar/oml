@@ -42,6 +42,7 @@ import io.opencaesar.oml.Description
 import io.opencaesar.oml.DescriptionExtension
 import io.opencaesar.oml.DescriptionStatement
 import io.opencaesar.oml.DescriptionUsage
+import io.opencaesar.oml.DifferentFromPredicate
 import io.opencaesar.oml.DoubleLiteral
 import io.opencaesar.oml.Element
 import io.opencaesar.oml.Entity
@@ -70,7 +71,6 @@ import io.opencaesar.oml.Relation
 import io.opencaesar.oml.RelationCardinalityRestrictionAxiom
 import io.opencaesar.oml.RelationEntity
 import io.opencaesar.oml.RelationEntityPredicate
-import io.opencaesar.oml.RelationEntityPredicateKind
 import io.opencaesar.oml.RelationEntityReference
 import io.opencaesar.oml.RelationInstance
 import io.opencaesar.oml.RelationInstanceReference
@@ -81,6 +81,7 @@ import io.opencaesar.oml.RelationTargetRestrictionAxiom
 import io.opencaesar.oml.RelationTypeAssertion
 import io.opencaesar.oml.Rule
 import io.opencaesar.oml.RuleReference
+import io.opencaesar.oml.SameAsPredicate
 import io.opencaesar.oml.Scalar
 import io.opencaesar.oml.ScalarProperty
 import io.opencaesar.oml.ScalarPropertyCardinalityRestrictionAxiom
@@ -399,10 +400,10 @@ class OmlWriter {
 	
 	// Rule
 
-	def addRule(Vocabulary vocabulary, String name, RelationPredicate consequent, Predicate...antecedent) {
+	def addRule(Vocabulary vocabulary, String name, Predicate[] consequent, Predicate[] antecedent) {
 		val rule = create(Rule)
 		rule.name = name
-		rule.consequent = consequent
+		rule.consequent += consequent
 		rule.antecedent += antecedent
 		vocabulary.ownedStatements += rule
 		return rule
@@ -902,28 +903,45 @@ class OmlWriter {
 		return predicate
 	}
 	
-	// RelationEntityPredicate
-
-	def createRelationEntityPredicate(String entityIri, RelationEntityPredicateKind kind, String variable1, String variable2) {
-		val predicate = create(RelationEntityPredicate)
-		defer.add [predicate.entity = resolve(RelationEntity, entityIri)]
-		predicate.kind = kind
-		predicate.variable1 = variable1
-		predicate.variable2 = variable2
-		return predicate
-	}
-
 	// RelationPredicate
 
-	def createRelationPredicate(String relationIri, boolean inverse, String variable1, String variable2) {
+	def createRelationPredicate(String relationIri, String variable1, String variable2) {
 		val predicate = create(RelationPredicate)
 		defer.add [predicate.relation = resolve(Relation, relationIri)]
-		predicate.inverse = inverse
 		predicate.variable1 = variable1
 		predicate.variable2 = variable2
 		return predicate
 	}
 		
+	// SameAsPredicate
+
+	def createSameAsPredicate(String variable1, String variable2) {
+		val predicate = create(SameAsPredicate)
+		predicate.variable1 = variable1
+		predicate.variable2 = variable2
+		return predicate
+	}
+
+	// DifferentFromPredicate
+
+	def createDifferentFromPredicate(String variable1, String variable2) {
+		val predicate = create(DifferentFromPredicate)
+		predicate.variable1 = variable1
+		predicate.variable2 = variable2
+		return predicate
+	}
+
+	// RelationEntityPredicate
+
+	def createRelationEntityPredicate(String entityIri, String variable1, String entityVariable, String variable2) {
+		val predicate = create(RelationEntityPredicate)
+		defer.add [predicate.entity = resolve(RelationEntity, entityIri)]
+		predicate.variable1 = variable1
+		predicate.entityVariable = entityVariable
+		predicate.variable2 = variable2
+		return predicate
+	}
+
 	// QuotedLiteral
 
 	def createQuotedLiteral(String value, String typeIri, String langTag) {

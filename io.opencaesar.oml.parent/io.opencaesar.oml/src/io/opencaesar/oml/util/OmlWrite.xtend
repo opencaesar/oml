@@ -36,6 +36,7 @@ import io.opencaesar.oml.DecimalLiteral
 import io.opencaesar.oml.Description
 import io.opencaesar.oml.DescriptionExtension
 import io.opencaesar.oml.DescriptionUsage
+import io.opencaesar.oml.DifferentFromPredicate
 import io.opencaesar.oml.DoubleLiteral
 import io.opencaesar.oml.EntityPredicate
 import io.opencaesar.oml.EnumeratedScalar
@@ -62,6 +63,7 @@ import io.opencaesar.oml.RelationTargetRestrictionAxiom
 import io.opencaesar.oml.RelationTypeAssertion
 import io.opencaesar.oml.Rule
 import io.opencaesar.oml.RuleReference
+import io.opencaesar.oml.SameAsPredicate
 import io.opencaesar.oml.ScalarProperty
 import io.opencaesar.oml.ScalarPropertyCardinalityRestrictionAxiom
 import io.opencaesar.oml.ScalarPropertyRangeRestrictionAxiom
@@ -147,8 +149,10 @@ class OmlWrite {
 			case StructuredPropertyValueAssertion: factory.createStructuredPropertyValueAssertion
 			case LinkAssertion: factory.createLinkAssertion
 			case EntityPredicate: factory.createEntityPredicate
-			case RelationEntityPredicate: factory.createRelationEntityPredicate
 			case RelationPredicate: factory.createRelationPredicate
+			case SameAsPredicate: factory.createSameAsPredicate
+			case DifferentFromPredicate: factory.createDifferentFromPredicate
+			case RelationEntityPredicate: factory.createRelationEntityPredicate
 			case QuotedLiteral: factory.createQuotedLiteral
 			case IntegerLiteral: factory.createIntegerLiteral
 			case DecimalLiteral: factory.createDecimalLiteral

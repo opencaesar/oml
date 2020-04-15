@@ -53,20 +53,20 @@ Terminology:
 
 Vocabulary:
 	ownedAnnotations+=Annotation*
-	'vocabulary' iri=IRI ('with' separator=SeparatorKind)? 'as' prefix=ID  '{'
+	'vocabulary' iri=IRI 'with' separator=SeparatorKind 'as' prefix=ID  '{'
 		ownedImports+=VocabularyImport*
 		ownedStatements+=VocabularyStatement*
 	'}';
 
 Bundle:
 	ownedAnnotations+=Annotation*
-	'bundle' iri=IRI ('with' separator=SeparatorKind)? 'as' prefix=ID '{'
+	'bundle' iri=IRI 'with' separator=SeparatorKind 'as' prefix=ID '{'
 		ownedImports+=BundleImport*
 	'}';
 	
 Description:
 	ownedAnnotations+=Annotation*
-	'description' iri=IRI ('with' separator=SeparatorKind)? 'as' prefix=ID '{'
+	'description' iri=IRI 'with' separator=SeparatorKind 'as' prefix=ID '{'
 		ownedImports+=DescriptionImport*
 		ownedStatements+=DescriptionStatement*
 	'}';
@@ -205,7 +205,7 @@ InverseRelation:
 Rule:
 	ownedAnnotations+=Annotation*
 	'rule' name=ID '['
-		antecedent+=Predicate ('&' antecedent+=Predicate)* '=>' consequent=RelationPredicate
+		antecedent+=Predicate ('^' antecedent+=Predicate)* '->' consequent+=Predicate ('^' consequent+=Predicate)*
 	']';
 
 Instance:
@@ -512,16 +512,26 @@ EntityPredicate:
 	entity=[Entity|Ref]'(' variable=ID ')';
 	
 BinaryPredicate:
-	RelationEntityPredicate |
-	RelationPredicate;
-
-RelationEntityPredicate:
-	ownedAnnotations+=Annotation*
-	entity=[RelationEntity|Ref] '(' variable1=ID kind=RelationEntityPredicateKind variable2=ID ')';
+	SameAsPredicate |
+	DifferentFromPredicate |
+	RelationPredicate |
+	RelationEntityPredicate;
 
 RelationPredicate:
 	ownedAnnotations+=Annotation*
-	relation=[Relation|Ref] '(' variable1=ID (inverse?='<-'|'->') variable2=ID ')';
+	relation=[Relation|Ref] '(' variable1=ID ',' variable2=ID ')';
+
+SameAsPredicate:
+	ownedAnnotations+=Annotation*
+	'sameAs' '(' variable1=ID ',' variable2=ID ')';
+
+DifferentFromPredicate:
+	ownedAnnotations+=Annotation*
+	'differentFrom' '(' variable1=ID ',' variable2=ID ')';
+
+RelationEntityPredicate:
+	ownedAnnotations+=Annotation*
+	entity=[RelationEntity|Ref] '(' variable1=ID ',' entityVariable=ID ',' variable2=ID ')';
 
 Literal:
 	IntegerLiteral |
@@ -558,12 +568,6 @@ enum CardinalityRestrictionKind:
 	exactly |
 	min |
 	max;
-
-enum RelationEntityPredicateKind:
-	relationToSource = '<-:' |
-	sourceToRelation = '->:' |
-	relationToTarget = ':->' |
-	targetToRelation = ':<-' ;
 
 //--------------
 
