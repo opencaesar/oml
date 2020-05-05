@@ -34,3 +34,14 @@ shadowJar {
 
 shadowDistZip.classifier = 'shadow'
 shadowDistTar.classifier = 'shadow'
+
+task copySrcGen(type: Copy) {
+    from '../io.opencaesar.oml.dsl.ide/src-gen'
+	into 'src-gen'
+} 
+
+generateXtext.dependsOn 'copySrcGen'
+
+clean {
+	delete 'src-gen'
+}

@@ -113,6 +113,7 @@ import java.util.LinkedHashMap
 import java.util.LinkedHashSet
 import java.util.Map
 import java.util.Set
+import java.util.regex.Pattern
 import org.apache.xml.resolver.Catalog
 import org.apache.xml.resolver.CatalogManager
 import org.eclipse.core.runtime.FileLocator
@@ -256,12 +257,7 @@ class OmlRead {
 	}
 
 	static def String getNamespace(Ontology ontology) {
-		if (ontology.iri !== null && ontology.prefix !== null) {
-			ontology.iri+ontology.separator
-		} else {
-			null
-		}
-			
+		ontology.iri+ontology.separator
 	}
 
 	static dispatch def Iterable<Statement> getStatements(Ontology ontology) {
@@ -633,6 +629,8 @@ class OmlRead {
 		^import.getImportedOntology?.namespace
 	}
 
+	static val NUMBER = Pattern.compile("\\d+");
+
 	synchronized static def URI getResolvedImportUri(Import ^import) {
 		if (^import.uri !== null) {
 			var uri = URI.createURI(^import.uri)
@@ -659,6 +657,9 @@ class OmlRead {
 							uri = URI.createURI(resolved)
 							if (uri.fileExtension === null) {
 								uri = uri.appendFileExtension('oml')
+							} else if (NUMBER.matcher(uri.fileExtension).matches) { 
+								// special case for the dc vocabulary ending its IRI with a version number
+								uri = uri.appendFileExtension('oml')
 							}					
 						}
 					}
@@ -668,10 +669,12 @@ class OmlRead {
 		}
 	}
 	
-	private static def Catalog findCatalogs(Map<File, Catalog> catalogMap, File folder) {
+	private static def findCatalogs(Map<File, Catalog> catalogMap, File folder) {
+		var path = new ArrayList<File>
 		var current = folder
 		var Catalog catalog = null
-		while (catalog === null && current !== null) {
+		while (current !== null && catalog === null) {
+			path.add(current)
 			val file = new File(current.path+'/catalog.xml')
 			if (file.exists) {
 				val manager = new CatalogManager
@@ -679,14 +682,13 @@ class OmlRead {
 				manager.ignoreMissingProperties = true
 				catalog = manager.catalog
 				catalog.parseCatalog(file.toURI.toURL)
-				catalogMap.put(folder, catalog)
 			} else  {
-				catalogMap.put(folder, null)
 				current = current.parentFile
 				catalog = catalogMap.get(current)
 			}
 		}
-		return catalog
+		val foundCatalog = catalog
+		path.forEach[ catalogMap.put(it, foundCatalog) ]
 	}
 
 	static def Resource getImportedResource(Import ^import) {
@@ -1003,7 +1005,7 @@ class OmlRead {
 	// UnaryPredicate
 
 	static def String variableIri(UnaryPredicate predicate) {
-		predicate.ontology.iri+predicate.variable
+		predicate.ontology.namespace+predicate.variable
 	}
 
 	// EntityPredicate
@@ -1011,11 +1013,11 @@ class OmlRead {
 	// BinaryPredicate
 	
 	static def String variable1Iri(BinaryPredicate predicate) {
-		predicate.ontology.iri+predicate.variable1
+		predicate.ontology.namespace+predicate.variable1
 	}
 	
 	static def String variable2Iri(BinaryPredicate predicate) {
-		predicate.ontology.iri+predicate.variable2
+		predicate.ontology.namespace+predicate.variable2
 	}
 		
 	// RelationPredicate
@@ -1027,7 +1029,7 @@ class OmlRead {
 	// RelationEntityPredicate
 
 	static def String entityVariableIri(RelationEntityPredicate predicate) {
-		predicate.ontology.iri+predicate.entityVariable
+		predicate.ontology.namespace+predicate.entityVariable
 	}
 
 	// Literal
