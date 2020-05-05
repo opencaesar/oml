@@ -1,5 +1,4 @@
 src-gen
-!*/io.opencaesar.oml.dsl.ide.server/src-gen
 !*/io.opencaesar.oml.edit/src-gen
 xtend-gen
 image-gen
