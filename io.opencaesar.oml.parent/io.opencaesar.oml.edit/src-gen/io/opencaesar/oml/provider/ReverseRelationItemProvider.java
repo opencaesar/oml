@@ -19,8 +19,8 @@
 package io.opencaesar.oml.provider;
 
 
-import io.opencaesar.oml.InverseRelation;
 import io.opencaesar.oml.OmlPackage;
+import io.opencaesar.oml.ReverseRelation;
 
 import java.util.Collection;
 import java.util.List;
@@ -32,19 +32,19 @@ import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 
 /**
- * This is the item provider adapter for a {@link io.opencaesar.oml.InverseRelation} object.
+ * This is the item provider adapter for a {@link io.opencaesar.oml.ReverseRelation} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class InverseRelationItemProvider extends RelationItemProvider {
+public class ReverseRelationItemProvider extends RelationItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public InverseRelationItemProvider(AdapterFactory adapterFactory) {
+	public ReverseRelationItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -75,9 +75,9 @@ public class InverseRelationItemProvider extends RelationItemProvider {
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_InverseRelation_entity_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_InverseRelation_entity_feature", "_UI_InverseRelation_type"),
-				 OmlPackage.Literals.INVERSE_RELATION__ENTITY,
+				 getString("_UI_ReverseRelation_entity_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ReverseRelation_entity_feature", "_UI_ReverseRelation_type"),
+				 OmlPackage.Literals.REVERSE_RELATION__ENTITY,
 				 true,
 				 false,
 				 true,
@@ -87,14 +87,14 @@ public class InverseRelationItemProvider extends RelationItemProvider {
 	}
 
 	/**
-	 * This returns InverseRelation.gif.
+	 * This returns ReverseRelation.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/InverseRelation"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/ReverseRelation"));
 	}
 
 	/**
@@ -105,10 +105,10 @@ public class InverseRelationItemProvider extends RelationItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((InverseRelation)object).getName();
+		String label = ((ReverseRelation)object).getName();
 		return label == null || label.length() == 0 ?
-			getString("_UI_InverseRelation_type") :
-			getString("_UI_InverseRelation_type") + " " + label;
+			getString("_UI_ReverseRelation_type") :
+			getString("_UI_ReverseRelation_type") + " " + label;
 	}
 
 

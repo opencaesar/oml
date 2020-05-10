@@ -119,7 +119,7 @@ RelationEntity:
 		'from' source=[Entity|Ref]
 		'to' target=[Entity|Ref]
 		forward=ForwardRelation
-		(inverse=InverseRelation)?
+		(reverse=ReverseRelation)?
 		((functional?='functional')? &
 		 (inverseFunctional?='inverse' 'functional')? &
 		 (symmetric?='symmetric')? &
@@ -192,15 +192,15 @@ EnumeratedScalar:
 
 Relation:
 	ForwardRelation |
-	InverseRelation;
+	ReverseRelation;
 
 ForwardRelation:
 	ownedAnnotations+=Annotation*
 	'forward' name=ID;
 
-InverseRelation:
+ReverseRelation:
 	ownedAnnotations+=Annotation*
-	'inverse' name=ID;
+	'reverse' name=ID;
 
 Rule:
 	ownedAnnotations+=Annotation*

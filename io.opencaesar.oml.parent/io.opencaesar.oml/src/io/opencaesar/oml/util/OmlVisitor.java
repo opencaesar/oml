@@ -163,7 +163,7 @@ public class OmlVisitor<T> extends OmlSwitch<T> {
 	}
 
 	@Override
-	public T caseInverseRelation(InverseRelation object) {
+	public T caseReverseRelation(ReverseRelation object) {
 		return null;
 	}
 

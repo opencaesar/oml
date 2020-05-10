@@ -339,7 +339,7 @@ class OmlIndex {
 
 	// ForwardRelation
 
-	// InverseRelation
+	// ReverseRelation
 
 	// Rule
 

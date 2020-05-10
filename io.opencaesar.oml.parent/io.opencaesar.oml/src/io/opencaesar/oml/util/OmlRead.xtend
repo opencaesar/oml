@@ -25,7 +25,6 @@ import io.opencaesar.oml.AnnotationPropertyReference
 import io.opencaesar.oml.Aspect
 import io.opencaesar.oml.AspectReference
 import io.opencaesar.oml.Assertion
-import io.opencaesar.oml.BinaryPredicate
 import io.opencaesar.oml.BooleanLiteral
 import io.opencaesar.oml.Bundle
 import io.opencaesar.oml.BundleExtension
@@ -55,7 +54,6 @@ import io.opencaesar.oml.IdentifiedElement
 import io.opencaesar.oml.Import
 import io.opencaesar.oml.Instance
 import io.opencaesar.oml.IntegerLiteral
-import io.opencaesar.oml.InverseRelation
 import io.opencaesar.oml.KeyAxiom
 import io.opencaesar.oml.LinkAssertion
 import io.opencaesar.oml.Literal
@@ -69,7 +67,6 @@ import io.opencaesar.oml.QuotedLiteral
 import io.opencaesar.oml.Reference
 import io.opencaesar.oml.Relation
 import io.opencaesar.oml.RelationEntity
-import io.opencaesar.oml.RelationEntityPredicate
 import io.opencaesar.oml.RelationEntityReference
 import io.opencaesar.oml.RelationInstance
 import io.opencaesar.oml.RelationInstanceReference
@@ -77,6 +74,7 @@ import io.opencaesar.oml.RelationReference
 import io.opencaesar.oml.RelationRestrictionAxiom
 import io.opencaesar.oml.RelationTypeAssertion
 import io.opencaesar.oml.RestrictionAxiom
+import io.opencaesar.oml.ReverseRelation
 import io.opencaesar.oml.Rule
 import io.opencaesar.oml.RuleReference
 import io.opencaesar.oml.Scalar
@@ -98,7 +96,6 @@ import io.opencaesar.oml.StructuredPropertyValueAssertion
 import io.opencaesar.oml.Term
 import io.opencaesar.oml.Terminology
 import io.opencaesar.oml.TypeAssertion
-import io.opencaesar.oml.UnaryPredicate
 import io.opencaesar.oml.Vocabulary
 import io.opencaesar.oml.VocabularyExtension
 import io.opencaesar.oml.VocabularyImport
@@ -423,8 +420,8 @@ class OmlRead {
 		if (entity.forward !== null) {
 			relations += entity.forward
 		}
-		if (entity.inverse !== null) {
-			relations += entity.inverse
+		if (entity.reverse !== null) {
+			relations += entity.reverse
 		}
 		relations
 	}
@@ -472,9 +469,9 @@ class OmlRead {
 		relation.entity
 	}
 
-	// InverseRelation
+	// ReverseRelation
 		
-	static dispatch def RelationEntity getEntity(InverseRelation relation) {
+	static dispatch def RelationEntity getEntity(ReverseRelation relation) {
 		relation.entity
 	}
 

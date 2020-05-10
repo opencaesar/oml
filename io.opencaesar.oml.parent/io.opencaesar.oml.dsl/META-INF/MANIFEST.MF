@@ -3,7 +3,7 @@ Automatic-Module-Name: io.opencaesar.oml.dsl
 Bundle-ManifestVersion: 2
 Bundle-Name: io.opencaesar.oml.dsl
 Bundle-Vendor: My Company
-Bundle-Version: 0.6.1
+Bundle-Version: 0.6.2
 Bundle-SymbolicName: io.opencaesar.oml.dsl; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext,

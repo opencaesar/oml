@@ -219,14 +219,14 @@ class OmlSearch extends OmlIndex {
 	static def Iterable<Relation> findRelationsWithSource(Entity entity) {
 		val relations = new ArrayList<Relation>
 		relations += entity.findRelationEntitiesWithSource.map[forward]
-		relations += entity.findRelationEntitiesWithTarget.map[inverse].reject[null]
+		relations += entity.findRelationEntitiesWithTarget.map[reverse].reject[null]
 		relations
 	}
 
 	static def Iterable<Relation> findRelationsWithTarget(Entity entity) {
 		val relations = new ArrayList<Relation>
 		relations += entity.findRelationEntitiesWithTarget.map[forward]
-		relations += entity.findRelationEntitiesWithSource.map[inverse].reject[null]
+		relations += entity.findRelationEntitiesWithSource.map[reverse].reject[null]
 		relations
 	}
 
@@ -348,7 +348,7 @@ class OmlSearch extends OmlIndex {
 
 	// ForwardRelation
 
-	// InverseRelation
+	// ReverseRelation
 
 	// Rule
 
