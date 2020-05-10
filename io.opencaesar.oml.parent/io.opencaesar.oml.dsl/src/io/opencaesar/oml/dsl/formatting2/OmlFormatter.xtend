@@ -46,7 +46,6 @@ import io.opencaesar.oml.FacetedScalar
 import io.opencaesar.oml.FacetedScalarReference
 import io.opencaesar.oml.ForwardRelation
 import io.opencaesar.oml.IntegerLiteral
-import io.opencaesar.oml.InverseRelation
 import io.opencaesar.oml.KeyAxiom
 import io.opencaesar.oml.LinkAssertion
 import io.opencaesar.oml.OmlPackage
@@ -62,6 +61,7 @@ import io.opencaesar.oml.RelationRangeRestrictionAxiom
 import io.opencaesar.oml.RelationReference
 import io.opencaesar.oml.RelationTargetRestrictionAxiom
 import io.opencaesar.oml.RelationTypeAssertion
+import io.opencaesar.oml.ReverseRelation
 import io.opencaesar.oml.Rule
 import io.opencaesar.oml.RuleReference
 import io.opencaesar.oml.SameAsPredicate
@@ -174,7 +174,7 @@ class OmlFormatter extends AbstractFormatter2 {
 		entity.regionFor.keyword(relationEntityAccess.fromKeyword_5_1).prepend[newLine].append[oneSpace]
 		entity.regionFor.keyword(relationEntityAccess.toKeyword_5_3).prepend[newLine].append[oneSpace]
 		entity.forward?.format.prepend[newLine]
-		entity.inverse?.format.prepend[newLine]
+		entity.reverse?.format.prepend[newLine]
 		entity.regionFor.keyword(relationEntityAccess.functionalFunctionalKeyword_5_7_0_0).prepend[newLine]
 		entity.regionFor.keyword(relationEntityAccess.inverseFunctionalInverseKeyword_5_7_1_0_0).prepend[newLine]
 		entity.regionFor.keyword(relationEntityAccess.symmetricSymmetricKeyword_5_7_2_0).prepend[newLine]
@@ -258,9 +258,9 @@ class OmlFormatter extends AbstractFormatter2 {
 		relation.regionFor.keyword(forwardRelationAccess.forwardKeyword_1).append[oneSpace]
 	}
 
-	def dispatch void format(InverseRelation relation, extension IFormattableDocument document) {
+	def dispatch void format(ReverseRelation relation, extension IFormattableDocument document) {
 		relation.ownedAnnotations.forEach[format.append[newLine]]
-		relation.regionFor.keyword(inverseRelationAccess.inverseKeyword_1).append[oneSpace]
+		relation.regionFor.keyword(reverseRelationAccess.reverseKeyword_1).append[oneSpace]
 	}
 
 	def dispatch void format(Rule rule, extension IFormattableDocument document) {

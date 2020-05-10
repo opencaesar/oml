@@ -272,10 +272,10 @@ class Concept extends Entity {
 /*
  * RelationEntity is a concrete entity that can classify a set of relation instances in a description. It can also specialize 
  * other relation entities and/or aspects. A relation entity relates two entities, a source and a target, by either a forward 
- * relation (from the source to the target) only, or also with an inverse relation (from the target to the source). For example, 
+ * relation (from the source to the target) only, or also with an reverse relation (from the target to the source). For example, 
  * a relation entity "Performs" between a source concept "Component" and a target concept "Function" defines a forward relation 
- * "performs" and an inverse relation "isPerformedBy". A relation entity can also be characterized with several boolean flags, 
- * representing DL semantics, that apply directly to the forward relation, and conversely to the inverse relation. 
+ * "performs" and an reverse relation "isPerformedBy". A relation entity can also be characterized with several boolean flags, 
+ * representing DL semantics, that apply directly to the forward relation, and conversely to the reverse relation. 
  */
 @Bikeshed(heading="Types")
 class RelationEntity extends Entity {
@@ -292,9 +292,9 @@ class RelationEntity extends Entity {
 	 */
 	contains ForwardRelation[1] forward opposite entity
 	/*
-	 * The optional inverse relation of this relation entity
+	 * The optional reverse relation of this relation entity
 	 */
-	contains InverseRelation inverse opposite entity
+	contains ReverseRelation reverse opposite entity
 	/*
 	 * Whether this relation entity is functional (i.e., A->B and A->C => B=C)
 	 */
@@ -503,7 +503,7 @@ class EnumeratedScalar extends Scalar {
 
 /*
  * Relation is a term that represents a relation from its domain entity to its range entity. It is the super type of
- * two concrete relations: [=ForwardRelation=] and [=InverseRelation] that are specified by a relation entity. When a relation
+ * two concrete relations: [=ForwardRelation=] and [=ReverseRelation] that are specified by a relation entity. When a relation
  * entity specifies both kinds of relations, they become inverse of each other.
  */
 @Bikeshed(heading="Terms")
@@ -532,9 +532,9 @@ abstract class Relation extends Term {
 }
 
 /*
- * ForwardRelation is a relation that is specified as a forward by a relation entity. Its domain is the source of the relation
- * entity, and its range is the target of the relation entity. A forward relation has the semantics of the DL flags specified 
- * on its relation entity.
+ * ForwardRelation is a relation that is defined along side a relation entity, whose domain is the source of the relation
+ * entity, and whose range is the target of the relation entity. A forward relation has DL semantics that are specified 
+ * by the boolean flags of its relation entity.
  */
 @Bikeshed(heading="Terms")
 class ForwardRelation extends Relation {
@@ -552,21 +552,21 @@ class ForwardRelation extends Relation {
 	}
 	op Relation deriveInverse() {
 		if (entity !== null)
-			entity.inverse
+			entity.reverse
 	}
 }
 
 /*
- * InverseRelation is a relation that is specified as an inverse by a relation entity. Its domain is the target of the relation
- * entity, and its range is the source of the relation entity. An inverse relation has the inverse semantics of the DL flags 
- * specified on its relation entity.
+ * ReverseRelation is an optional relation that is defined along side a relation entity, whose domain is the target of 
+ * the relation entity, and whose range is the source of the relation entity. A reverse relation has DL semantics that 
+ * are the inverse of its entity's forward relation.
  */
 @Bikeshed(heading="Terms")
-class InverseRelation extends Relation {
+class ReverseRelation extends Relation {
 	/*
-	 * The relation entity that owns this relation as inverse
+	 * The relation entity that owns this relation as reverse
 	 */
-	container RelationEntity entity opposite inverse
+	container RelationEntity entity opposite reverse
 	op Entity deriveDomain() {
 		if (entity !== null)
 			entity.target

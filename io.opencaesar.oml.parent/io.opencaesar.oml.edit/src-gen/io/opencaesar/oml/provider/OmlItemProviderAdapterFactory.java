@@ -456,26 +456,26 @@ public class OmlItemProviderAdapterFactory extends OmlAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.InverseRelation} instances.
+	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.ReverseRelation} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected InverseRelationItemProvider inverseRelationItemProvider;
+	protected ReverseRelationItemProvider reverseRelationItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.InverseRelation}.
+	 * This creates an adapter for a {@link io.opencaesar.oml.ReverseRelation}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createInverseRelationAdapter() {
-		if (inverseRelationItemProvider == null) {
-			inverseRelationItemProvider = new InverseRelationItemProvider(this);
+	public Adapter createReverseRelationAdapter() {
+		if (reverseRelationItemProvider == null) {
+			reverseRelationItemProvider = new ReverseRelationItemProvider(this);
 		}
 
-		return inverseRelationItemProvider;
+		return reverseRelationItemProvider;
 	}
 
 	/**
@@ -1749,7 +1749,7 @@ public class OmlItemProviderAdapterFactory extends OmlAdapterFactory implements 
 		if (facetedScalarItemProvider != null) facetedScalarItemProvider.dispose();
 		if (enumeratedScalarItemProvider != null) enumeratedScalarItemProvider.dispose();
 		if (forwardRelationItemProvider != null) forwardRelationItemProvider.dispose();
-		if (inverseRelationItemProvider != null) inverseRelationItemProvider.dispose();
+		if (reverseRelationItemProvider != null) reverseRelationItemProvider.dispose();
 		if (ruleItemProvider != null) ruleItemProvider.dispose();
 		if (structureInstanceItemProvider != null) structureInstanceItemProvider.dispose();
 		if (conceptInstanceItemProvider != null) conceptInstanceItemProvider.dispose();

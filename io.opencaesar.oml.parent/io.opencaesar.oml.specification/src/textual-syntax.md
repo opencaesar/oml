@@ -156,7 +156,7 @@ relation entity ID (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxio
 	from (<a href="#Aspect-Syntax">Aspect_IRI</a>|<a href="#Concept-Syntax">Concept_IRI</a>|<a href="#RelationEntity-Syntax">RelationEntity_IRI</a>)
 	to (<a href="#Aspect-Syntax">Aspect_IRI</a>|<a href="#Concept-Syntax">Concept_IRI</a>|<a href="#RelationEntity-Syntax">RelationEntity_IRI</a>)
 	<a href="#ForwardRelation-Syntax">ForwardRelation</a>
-	(<a href="#InverseRelation-Syntax">InverseRelation</a>)?
+	(<a href="#ReverseRelation-Syntax">ReverseRelation</a>)?
 	(functional)?
 	(inverseFunctional)?
 	(symmetric)?
@@ -188,12 +188,12 @@ Declaration
 forward ID
 </pre>
 
-### [=InverseRelation=] ### {#InverseRelation-Syntax}
+### [=ReverseRelation=] ### {#ReverseRelation-Syntax}
 
 Declaration
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
-inverse ID
+reverse ID
 </pre>
 
 ### [=RelationReference=] ### {#RelationReference-Syntax}
@@ -201,7 +201,7 @@ inverse ID
 Reference
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
-ref relation (<a href="#InverseRelation-Syntax">InverseRelation_IRI</a> | <a href="#ForwardRelation-Syntax">ForwardRelation_IRI</a>)
+ref relation (<a href="#ReverseRelation-Syntax">ReverseRelation_IRI</a> | <a href="#ForwardRelation-Syntax">ForwardRelation_IRI</a>)
 </pre>
 		
 ### [=Structure=] ### {#Structure-Syntax}
@@ -343,7 +343,7 @@ ref rule <a href="#Rule-Syntax">Rule_IRI</a>
 
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
-(<a href="#ForwardRelation-Syntax">ForwardRelation_IRI</a> | <a href="#InverseRelation-Syntax">InverseRelation_IRI</a>) (VAR1 , VAR2)
+(<a href="#ForwardRelation-Syntax">ForwardRelation_IRI</a> | <a href="#ReverseRelation-Syntax">ReverseRelation_IRI</a>) (VAR1 , VAR2)
 </pre>
 
 ### [=RelationEntityPredicate=] ### {#RelationEntityPredicate-Syntax}
@@ -420,21 +420,21 @@ restricts structured property <a href="#StructuredProperty-Syntax">StructuredPro
 
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
-restricts (all | some) relation (<a href="#ForwardRelation-Syntax">ForwardRelation_IRI</a> | <a href="#InverseRelation-Syntax">InverseRelation_IRI</a>) to (<a href="#Aspect-Syntax">Aspect_IRI</a> | <a href="#Concept-Syntax">Concept_IRI</a> | <a href="#RelationEntity-Syntax">RelationEntity_IRI</a>)
+restricts (all | some) relation (<a href="#ForwardRelation-Syntax">ForwardRelation_IRI</a> | <a href="#ReverseRelation-Syntax">ReverseRelation_IRI</a>) to (<a href="#Aspect-Syntax">Aspect_IRI</a> | <a href="#Concept-Syntax">Concept_IRI</a> | <a href="#RelationEntity-Syntax">RelationEntity_IRI</a>)
 </pre>
 
 ### [=RelationCardinalityRestrictionAxiom=] ### {#RelationCardinalityRestrictionAxiom-Syntax}
 
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
-restricts relation (<a href="#ForwardRelation-Syntax">ForwardRelation_IRI</a> | <a href="#InverseRelation-Syntax">InverseRelation_IRI</a>) to (exactly | min | max) INTEGER (<a href="#Aspect-Syntax">Aspect_IRI</a> | <a href="#Concept-Syntax">Concept_IRI</a> | <a href="#RelationEntity-Syntax">RelationEntity_IRI</a>)?
+restricts relation (<a href="#ForwardRelation-Syntax">ForwardRelation_IRI</a> | <a href="#ReverseRelation-Syntax">ReverseRelation_IRI</a>) to (exactly | min | max) INTEGER (<a href="#Aspect-Syntax">Aspect_IRI</a> | <a href="#Concept-Syntax">Concept_IRI</a> | <a href="#RelationEntity-Syntax">RelationEntity_IRI</a>)?
 </pre>
 
 ### [=RelationTargetRestrictionAxiom=] ### {#RelationTargetRestrictionAxiom-Syntax}
 
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
-restricts relation (<a href="#ForwardRelation-Syntax">ForwardRelation_IRI</a> | <a href="#InverseRelation-Syntax">InverseRelation_IRI</a>) to (<a href="#ConceptInstance-Syntax">ConceptInstance_IRI</a> | <a href="#RelationInstance-Syntax">RelationInstance_IRI</a>)
+restricts relation (<a href="#ForwardRelation-Syntax">ForwardRelation_IRI</a> | <a href="#ReverseRelation-Syntax">ReverseRelation_IRI</a>) to (<a href="#ConceptInstance-Syntax">ConceptInstance_IRI</a> | <a href="#RelationInstance-Syntax">RelationInstance_IRI</a>)
 </pre>
 
 ### [=KeyAxiom=] ### {#KeyAxiom-Syntax}
@@ -577,5 +577,5 @@ ref ri <a href="#RelationInstance-Syntax">RelationInstance_IRI</a> (: <a href="#
 
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
-(<a href="#ForwardRelation-Syntax">ForwardRelation_IRI</a> | <a href="#InverseRelation-Syntax">InverseRelation_IRI</a>) (<a href="#ConceptInstance-Syntax">ConceptInstance_IRI</a> | <a href="#RelationInstance-Syntax">RelationInstance_IRI</a>)
+(<a href="#ForwardRelation-Syntax">ForwardRelation_IRI</a> | <a href="#ReverseRelation-Syntax">ReverseRelation_IRI</a>) (<a href="#ConceptInstance-Syntax">ConceptInstance_IRI</a> | <a href="#RelationInstance-Syntax">RelationInstance_IRI</a>)
 </pre>

@@ -2,10 +2,10 @@
 <feature
       id="io.opencaesar.oml.dsl.feature"
       label="Oml Dsl Feature "
-      version="0.6.1">
+      version="0.6.2">
 
    <requires>
-      <import feature="io.opencaesar.oml.feature" version="0.6.1" match="compatible"/>
+      <import feature="io.opencaesar.oml.feature" version="0.0.0" match="compatible"/>
    </requires>
 
    <plugin

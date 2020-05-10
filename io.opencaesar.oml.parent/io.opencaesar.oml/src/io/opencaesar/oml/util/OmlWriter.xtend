@@ -55,7 +55,6 @@ import io.opencaesar.oml.FacetedScalarReference
 import io.opencaesar.oml.ForwardRelation
 import io.opencaesar.oml.IdentifiedElement
 import io.opencaesar.oml.IntegerLiteral
-import io.opencaesar.oml.InverseRelation
 import io.opencaesar.oml.KeyAxiom
 import io.opencaesar.oml.LinkAssertion
 import io.opencaesar.oml.Literal
@@ -79,6 +78,7 @@ import io.opencaesar.oml.RelationRangeRestrictionAxiom
 import io.opencaesar.oml.RelationReference
 import io.opencaesar.oml.RelationTargetRestrictionAxiom
 import io.opencaesar.oml.RelationTypeAssertion
+import io.opencaesar.oml.ReverseRelation
 import io.opencaesar.oml.Rule
 import io.opencaesar.oml.RuleReference
 import io.opencaesar.oml.SameAsPredicate
@@ -389,13 +389,13 @@ class OmlWriter {
 		return forward
 	}
 
-	// InverseRelation
+	// ReverseRelation
 
-	def addInverseRelation(RelationEntity entity, String name) {
-		val inverse = create(InverseRelation)
-		inverse.name = name
-		entity.inverse = inverse
-		return inverse
+	def addReverseRelation(RelationEntity entity, String name) {
+		val reverse = create(ReverseRelation)
+		reverse.name = name
+		entity.reverse = reverse
+		return reverse
 	}
 	
 	// Rule

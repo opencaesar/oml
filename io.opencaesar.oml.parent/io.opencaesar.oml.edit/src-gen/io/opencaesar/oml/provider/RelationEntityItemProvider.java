@@ -288,7 +288,7 @@ public class RelationEntityItemProvider extends EntityItemProvider {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(OmlPackage.Literals.RELATION_ENTITY__FORWARD);
-			childrenFeatures.add(OmlPackage.Literals.RELATION_ENTITY__INVERSE);
+			childrenFeatures.add(OmlPackage.Literals.RELATION_ENTITY__REVERSE);
 		}
 		return childrenFeatures;
 	}
@@ -354,7 +354,7 @@ public class RelationEntityItemProvider extends EntityItemProvider {
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case OmlPackage.RELATION_ENTITY__FORWARD:
-			case OmlPackage.RELATION_ENTITY__INVERSE:
+			case OmlPackage.RELATION_ENTITY__REVERSE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -379,8 +379,8 @@ public class RelationEntityItemProvider extends EntityItemProvider {
 
 		newChildDescriptors.add
 			(createChildParameter
-				(OmlPackage.Literals.RELATION_ENTITY__INVERSE,
-				 OmlFactory.eINSTANCE.createInverseRelation()));
+				(OmlPackage.Literals.RELATION_ENTITY__REVERSE,
+				 OmlFactory.eINSTANCE.createReverseRelation()));
 	}
 
 }

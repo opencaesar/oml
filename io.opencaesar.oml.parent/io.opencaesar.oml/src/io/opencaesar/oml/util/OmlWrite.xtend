@@ -45,7 +45,6 @@ import io.opencaesar.oml.FacetedScalar
 import io.opencaesar.oml.FacetedScalarReference
 import io.opencaesar.oml.ForwardRelation
 import io.opencaesar.oml.IntegerLiteral
-import io.opencaesar.oml.InverseRelation
 import io.opencaesar.oml.KeyAxiom
 import io.opencaesar.oml.LinkAssertion
 import io.opencaesar.oml.OmlFactory
@@ -61,6 +60,7 @@ import io.opencaesar.oml.RelationRangeRestrictionAxiom
 import io.opencaesar.oml.RelationReference
 import io.opencaesar.oml.RelationTargetRestrictionAxiom
 import io.opencaesar.oml.RelationTypeAssertion
+import io.opencaesar.oml.ReverseRelation
 import io.opencaesar.oml.Rule
 import io.opencaesar.oml.RuleReference
 import io.opencaesar.oml.SameAsPredicate
@@ -108,7 +108,7 @@ class OmlWrite {
 			case ScalarProperty: factory.createScalarProperty
 			case StructuredProperty: factory.createStructuredProperty
 			case ForwardRelation: factory.createForwardRelation
-			case InverseRelation: factory.createInverseRelation
+			case ReverseRelation: factory.createReverseRelation
 			case Rule: factory.createRule
 			case StructureInstance: factory.createStructureInstance
 			case ConceptInstance: factory.createConceptInstance
