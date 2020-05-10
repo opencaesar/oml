@@ -1004,22 +1004,10 @@ class OmlRead {
 
 	// UnaryPredicate
 
-	static def String variableIri(UnaryPredicate predicate) {
-		predicate.ontology.namespace+predicate.variable
-	}
-
 	// EntityPredicate
 
 	// BinaryPredicate
 	
-	static def String variable1Iri(BinaryPredicate predicate) {
-		predicate.ontology.namespace+predicate.variable1
-	}
-	
-	static def String variable2Iri(BinaryPredicate predicate) {
-		predicate.ontology.namespace+predicate.variable2
-	}
-		
 	// RelationPredicate
 
 	// SameAsPredicate
@@ -1027,10 +1015,6 @@ class OmlRead {
 	// DifferentFromPredicate
 
 	// RelationEntityPredicate
-
-	static def String entityVariableIri(RelationEntityPredicate predicate) {
-		predicate.ontology.namespace+predicate.entityVariable
-	}
 
 	// Literal
 	
