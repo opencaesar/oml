@@ -6,6 +6,6 @@
 		<artifactId>io.opencaesar.oml.parent</artifactId>
 		<version>0.6.2</version>
 	</parent>
-	<artifactId>io.opencaesar.oml.dsl.feature</artifactId>
+	<artifactId>io.opencaesar.oml.dsl.ui.feature</artifactId>
 	<packaging>eclipse-feature</packaging>
 </project>

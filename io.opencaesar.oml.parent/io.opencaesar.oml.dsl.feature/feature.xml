@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="io.opencaesar.oml.dsl.feature"
-      label="Oml Dsl Feature "
-      version="0.6.2">
+      label="%featureName"
+      version="0.6.2"
+      provider-name="%providerName">
+
+   <description>
+      %featureDesciption
+   </description>
 
    <requires>
-      <import feature="io.opencaesar.oml.feature" version="0.0.0" match="compatible"/>
+      <import feature="io.opencaesar.oml.feature"/>
+      <import plugin="org.eclipse.equinox.common"/>
+      <import plugin="org.eclipse.emf.common"/>
+      <import plugin="org.eclipse.xtext"/>
+      <import plugin="org.eclipse.xtext.xbase"/>
+      <import plugin="org.eclipse.xtext.util"/>
+      <import plugin="org.eclipse.xtend.lib"/>
+      <import plugin="org.antlr.runtime"/>
+      <import plugin="com.google.gson"/>
+      <import plugin="org.apache.log4j"/>
    </requires>
 
    <plugin
          id="io.opencaesar.oml.dsl"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="io.opencaesar.oml.dsl.ide"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="io.opencaesar.oml.dsl.ui"
          download-size="0"
          install-size="0"
          version="0.0.0"

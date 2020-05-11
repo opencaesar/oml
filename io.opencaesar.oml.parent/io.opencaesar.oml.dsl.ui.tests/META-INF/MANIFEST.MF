@@ -1,19 +1,20 @@
 Manifest-Version: 1.0
 Automatic-Module-Name: io.opencaesar.oml.dsl.ui.tests
 Bundle-ManifestVersion: 2
-Bundle-Name: io.opencaesar.oml.dsl.ui.tests
-Bundle-Vendor: My Company
+Bundle-Name: %pluginName
+Bundle-Vendor: %providerName
 Bundle-Version: 0.6.2
 Bundle-SymbolicName: io.opencaesar.oml.dsl.ui.tests; singleton:=true
 Bundle-ActivationPolicy: lazy
+Bundle-Localization: plugin
 Require-Bundle: io.opencaesar.oml.dsl.ui,
- org.junit.jupiter.api;bundle-version="[5.0.0,6.0.0)",
+ org.junit.jupiter.api,
  org.eclipse.xtext.testing,
  org.eclipse.xtext.xbase.testing,
  org.eclipse.xtext.xbase.junit,
  org.eclipse.core.runtime,
  org.eclipse.xtext.ui.testing,
  org.eclipse.ui.workbench;resolution:=optional,
- org.junit;bundle-version="4.12.0"
+ org.junit
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: io.opencaesar.oml.dsl.ui.tests;x-internal=true

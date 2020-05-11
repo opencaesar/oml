@@ -8,8 +8,4 @@
 	</parent>
 	<artifactId>io.opencaesar.oml.feature</artifactId>
 	<packaging>eclipse-feature</packaging>
-
-
-	<dependencies>
-	</dependencies>
 </project>

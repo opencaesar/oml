@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="io.opencaesar.oml.feature"
-      label="Oml Feature "
-      version="0.6.2">
+      label="%featureName"
+      version="0.6.2"
+      provider-name="%providerName">
+
+   <description>
+      %featureDesciption
+   </description>
+
+   <requires>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.emf.ecore"/>
+      <import plugin="org.eclipse.emf.ecore.xmi"/>
+      <import plugin="org.eclipse.emf.ecore.xcore.lib"/>
+      <import plugin="org.eclipse.xtext.xbase.lib"/>
+      <import plugin="org.apache.xml.resolver"/>
+   </requires>
 
    <plugin
          id="io.opencaesar.oml"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="io.opencaesar.oml.edit"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="io.opencaesar.oml.editor"
          download-size="0"
          install-size="0"
          version="0.0.0"
