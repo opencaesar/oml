@@ -343,6 +343,7 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 			getLiteralLabel(label, (Literal)value);
 		}
 		if (value instanceof StructureInstance) {
+			label.append(" ");
 			StructureInstance instance = (StructureInstance)value;
 			if (instance.getType() != null) {
 				label.append(getLabel(instance.getType(), instance));
