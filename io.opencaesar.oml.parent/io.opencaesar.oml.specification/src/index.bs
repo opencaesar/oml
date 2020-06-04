@@ -80,7 +80,7 @@ path: textual-syntax.md
 </pre>
 
 <pre class=include>
-path: oml.md
+path: Oml.md
 </pre>
 
 <pre class=include>
