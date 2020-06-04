@@ -172,6 +172,7 @@ import org.eclipse.emf.edit.ui.util.EditUIUtil;
 import org.eclipse.emf.edit.ui.view.ExtendedPropertySheetPage;
 
 import io.opencaesar.oml.provider.OmlItemProviderAdapterFactory;
+import io.opencaesar.oml.provider.OmlItemProviderAdapterFactoryEx;
 
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 
@@ -726,7 +727,7 @@ public class OmlEditor
 		adapterFactory = new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
 
 		adapterFactory.addAdapterFactory(new ResourceItemProviderAdapterFactory());
-		adapterFactory.addAdapterFactory(new OmlItemProviderAdapterFactory());
+		adapterFactory.addAdapterFactory(new OmlItemProviderAdapterFactoryEx());
 		adapterFactory.addAdapterFactory(new ReflectiveItemProviderAdapterFactory());
 
 		// Create the command stack that will notify this editor as commands are executed.
