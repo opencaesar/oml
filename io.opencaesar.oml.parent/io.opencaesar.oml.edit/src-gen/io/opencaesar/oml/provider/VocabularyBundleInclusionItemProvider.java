@@ -19,7 +19,7 @@
 package io.opencaesar.oml.provider;
 
 
-import io.opencaesar.oml.BundleInclusion;
+import io.opencaesar.oml.VocabularyBundleInclusion;
 
 import java.util.Collection;
 import java.util.List;
@@ -30,19 +30,19 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 
 /**
- * This is the item provider adapter for a {@link io.opencaesar.oml.BundleInclusion} object.
+ * This is the item provider adapter for a {@link io.opencaesar.oml.VocabularyBundleInclusion} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class BundleInclusionItemProvider extends BundleImportItemProvider {
+public class VocabularyBundleInclusionItemProvider extends VocabularyBundleImportItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public BundleInclusionItemProvider(AdapterFactory adapterFactory) {
+	public VocabularyBundleInclusionItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -62,14 +62,14 @@ public class BundleInclusionItemProvider extends BundleImportItemProvider {
 	}
 
 	/**
-	 * This returns BundleInclusion.gif.
+	 * This returns VocabularyBundleInclusion.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/BundleInclusion"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/VocabularyBundleInclusion"));
 	}
 
 	/**
@@ -80,10 +80,10 @@ public class BundleInclusionItemProvider extends BundleImportItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((BundleInclusion)object).getUri();
+		String label = ((VocabularyBundleInclusion)object).getUri();
 		return label == null || label.length() == 0 ?
-			getString("_UI_BundleInclusion_type") :
-			getString("_UI_BundleInclusion_type") + " " + label;
+			getString("_UI_VocabularyBundleInclusion_type") :
+			getString("_UI_VocabularyBundleInclusion_type") + " " + label;
 	}
 
 

@@ -23,19 +23,19 @@ import io.opencaesar.oml.AnnotationProperty
 import io.opencaesar.oml.AnnotationPropertyReference
 import io.opencaesar.oml.Aspect
 import io.opencaesar.oml.AspectReference
+import io.opencaesar.oml.DescriptionBundle
+import io.opencaesar.oml.DescriptionBundleExtension
+import io.opencaesar.oml.DescriptionBundleInclusion
+import io.opencaesar.oml.Description
+import io.opencaesar.oml.DescriptionExtension
+import io.opencaesar.oml.DescriptionUsage
 import io.opencaesar.oml.BooleanLiteral
-import io.opencaesar.oml.Bundle
-import io.opencaesar.oml.BundleExtension
-import io.opencaesar.oml.BundleInclusion
 import io.opencaesar.oml.Concept
 import io.opencaesar.oml.ConceptInstance
 import io.opencaesar.oml.ConceptInstanceReference
 import io.opencaesar.oml.ConceptReference
 import io.opencaesar.oml.ConceptTypeAssertion
 import io.opencaesar.oml.DecimalLiteral
-import io.opencaesar.oml.Description
-import io.opencaesar.oml.DescriptionExtension
-import io.opencaesar.oml.DescriptionUsage
 import io.opencaesar.oml.DifferentFromPredicate
 import io.opencaesar.oml.DoubleLiteral
 import io.opencaesar.oml.EntityPredicate
@@ -80,6 +80,9 @@ import io.opencaesar.oml.StructuredPropertyRangeRestrictionAxiom
 import io.opencaesar.oml.StructuredPropertyReference
 import io.opencaesar.oml.StructuredPropertyValueAssertion
 import io.opencaesar.oml.StructuredPropertyValueRestrictionAxiom
+import io.opencaesar.oml.VocabularyBundle
+import io.opencaesar.oml.VocabularyBundleExtension
+import io.opencaesar.oml.VocabularyBundleInclusion
 import io.opencaesar.oml.Vocabulary
 import io.opencaesar.oml.VocabularyExtension
 import io.opencaesar.oml.VocabularyUsage
@@ -96,8 +99,9 @@ class OmlWrite {
 		switch(type) {
 			case Annotation: factory.createAnnotation
 			case Vocabulary: factory.createVocabulary
-			case Bundle: factory.createBundle
+			case VocabularyBundle: factory.createVocabularyBundle
 			case Description: factory.createDescription
+			case DescriptionBundle: factory.createDescriptionBundle
 			case Aspect: factory.createAspect
 			case Concept: factory.createConcept
 			case RelationEntity: factory.createRelationEntity
@@ -128,10 +132,12 @@ class OmlWrite {
 			case RelationInstanceReference: factory.createRelationInstanceReference
 			case VocabularyExtension: factory.createVocabularyExtension
 			case VocabularyUsage: factory.createVocabularyUsage
-			case BundleInclusion: factory.createBundleInclusion
-			case BundleExtension: factory.createBundleExtension
-			case DescriptionUsage: factory.createDescriptionUsage
+			case VocabularyBundleExtension: factory.createVocabularyBundleExtension
+			case VocabularyBundleInclusion: factory.createVocabularyBundleInclusion
 			case DescriptionExtension: factory.createDescriptionExtension
+			case DescriptionUsage: factory.createDescriptionUsage
+			case DescriptionBundleExtension: factory.createDescriptionBundleExtension
+			case DescriptionBundleInclusion: factory.createDescriptionBundleInclusion
 			case SpecializationAxiom: factory.createSpecializationAxiom
 			case ScalarPropertyRangeRestrictionAxiom: factory.createScalarPropertyRangeRestrictionAxiom
 			case ScalarPropertyCardinalityRestrictionAxiom: factory.createScalarPropertyCardinalityRestrictionAxiom

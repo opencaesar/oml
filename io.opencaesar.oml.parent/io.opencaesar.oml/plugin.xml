@@ -11,7 +11,7 @@
       <package
             uri="http://opencaesar.io/oml"
             class="io.opencaesar.oml.OmlPackage"
-            genModel="src/io/opencaesar/oml/oml.xcore"/>
+            genModel="src/io/opencaesar/oml/Oml.xcore"/>
    </extension>
 
 	<extension point="org.eclipse.emf.ecore.extension_parser">

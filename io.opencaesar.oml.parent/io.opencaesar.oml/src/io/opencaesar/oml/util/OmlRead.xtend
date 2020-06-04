@@ -20,24 +20,22 @@ package io.opencaesar.oml.util
 
 import io.opencaesar.oml.AnnotatedElement
 import io.opencaesar.oml.Annotation
-import io.opencaesar.oml.AnnotationProperty
 import io.opencaesar.oml.AnnotationPropertyReference
-import io.opencaesar.oml.Aspect
 import io.opencaesar.oml.AspectReference
 import io.opencaesar.oml.Assertion
 import io.opencaesar.oml.BooleanLiteral
-import io.opencaesar.oml.Bundle
-import io.opencaesar.oml.BundleExtension
-import io.opencaesar.oml.BundleImport
-import io.opencaesar.oml.BundleInclusion
 import io.opencaesar.oml.Classifier
-import io.opencaesar.oml.Concept
 import io.opencaesar.oml.ConceptInstance
 import io.opencaesar.oml.ConceptInstanceReference
 import io.opencaesar.oml.ConceptReference
 import io.opencaesar.oml.ConceptTypeAssertion
 import io.opencaesar.oml.DecimalLiteral
 import io.opencaesar.oml.Description
+import io.opencaesar.oml.DescriptionBox
+import io.opencaesar.oml.DescriptionBundle
+import io.opencaesar.oml.DescriptionBundleExtension
+import io.opencaesar.oml.DescriptionBundleImport
+import io.opencaesar.oml.DescriptionBundleInclusion
 import io.opencaesar.oml.DescriptionExtension
 import io.opencaesar.oml.DescriptionImport
 import io.opencaesar.oml.DescriptionStatement
@@ -45,9 +43,7 @@ import io.opencaesar.oml.DescriptionUsage
 import io.opencaesar.oml.DoubleLiteral
 import io.opencaesar.oml.Element
 import io.opencaesar.oml.Entity
-import io.opencaesar.oml.EnumeratedScalar
 import io.opencaesar.oml.EnumeratedScalarReference
-import io.opencaesar.oml.FacetedScalar
 import io.opencaesar.oml.FacetedScalarReference
 import io.opencaesar.oml.ForwardRelation
 import io.opencaesar.oml.IdentifiedElement
@@ -56,7 +52,6 @@ import io.opencaesar.oml.Instance
 import io.opencaesar.oml.IntegerLiteral
 import io.opencaesar.oml.KeyAxiom
 import io.opencaesar.oml.LinkAssertion
-import io.opencaesar.oml.Literal
 import io.opencaesar.oml.Member
 import io.opencaesar.oml.NamedInstance
 import io.opencaesar.oml.Ontology
@@ -75,7 +70,6 @@ import io.opencaesar.oml.RelationRestrictionAxiom
 import io.opencaesar.oml.RelationTypeAssertion
 import io.opencaesar.oml.RestrictionAxiom
 import io.opencaesar.oml.ReverseRelation
-import io.opencaesar.oml.Rule
 import io.opencaesar.oml.RuleReference
 import io.opencaesar.oml.Scalar
 import io.opencaesar.oml.ScalarProperty
@@ -87,16 +81,19 @@ import io.opencaesar.oml.SpecializableTermReference
 import io.opencaesar.oml.SpecializationAxiom
 import io.opencaesar.oml.Statement
 import io.opencaesar.oml.Structure
-import io.opencaesar.oml.StructureInstance
 import io.opencaesar.oml.StructureReference
 import io.opencaesar.oml.StructuredProperty
 import io.opencaesar.oml.StructuredPropertyReference
 import io.opencaesar.oml.StructuredPropertyRestrictionAxiom
 import io.opencaesar.oml.StructuredPropertyValueAssertion
 import io.opencaesar.oml.Term
-import io.opencaesar.oml.Terminology
 import io.opencaesar.oml.TypeAssertion
 import io.opencaesar.oml.Vocabulary
+import io.opencaesar.oml.VocabularyBox
+import io.opencaesar.oml.VocabularyBundle
+import io.opencaesar.oml.VocabularyBundleExtension
+import io.opencaesar.oml.VocabularyBundleImport
+import io.opencaesar.oml.VocabularyBundleInclusion
 import io.opencaesar.oml.VocabularyExtension
 import io.opencaesar.oml.VocabularyImport
 import io.opencaesar.oml.VocabularyStatement
@@ -111,8 +108,6 @@ import java.util.LinkedHashSet
 import java.util.Map
 import java.util.Set
 import java.util.regex.Pattern
-import org.apache.xml.resolver.Catalog
-import org.apache.xml.resolver.CatalogManager
 import org.eclipse.core.runtime.FileLocator
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EObject
@@ -123,6 +118,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil
 class OmlRead {
 	
 	static val CATALOGS = 'Catalogs'
+	static val OML_EXTENSION = "oml"
 	
 	// closure operators
 	
@@ -279,6 +275,15 @@ class OmlRead {
 		allImports
 	}
 
+	static def Ontology getImportedOntologyByIri(Ontology importingOntology, String importedIri) {
+		for (^import : importingOntology.allImportsWithSource) {
+			if (^import.importedOntology?.iri == importedIri) {
+				return ^import.importedOntology
+			}
+		}
+		return null
+	}
+	
 	static def Iterable<Ontology> getImportedOntologies(Ontology ontology) {
 		ontology.importsWithSource.map[importedOntology]
 	}
@@ -293,14 +298,14 @@ class OmlRead {
 		namespaces
 	}
 
-	// Terminology
+	// VocabularyBox
 
 	// Vocabulary
-
+	
 	static dispatch def Iterable<Import> getImportsWithSource(Vocabulary ontology) {
 		ontology.ownedImports.filter(Import)
 	}
-	
+
 	static def Iterable<VocabularyExtension> getExtensionsWithSource(Vocabulary vocabulary) {
 		vocabulary.ownedImports.filter(VocabularyExtension)
 	}
@@ -309,16 +314,16 @@ class OmlRead {
 		vocabulary.ownedImports.filter(VocabularyUsage)
 	}
 
-	static def Iterable<Vocabulary> getExtendedVocabularies(Vocabulary vocabulary) {
+	static def Iterable<Vocabulary> getExtendedVocabularyes(Vocabulary vocabulary) {
 		vocabulary.extensionsWithSource.map[extendedVocabulary]
 	}
 
-	static def Iterable<Description> getUsedDescriptions(Vocabulary vocabulary) {
-		vocabulary.usagesWithSource.map[usedDescription]
+	static def Iterable<DescriptionBox> getUsedDescriptionBoxes(Vocabulary vocabulary) {
+		vocabulary.usagesWithSource.map[usedDescriptionBox]
 	}
 
-	static dispatch def Iterable<VocabularyStatement> getStatements(Vocabulary ontology) {
-		ontology.ownedStatements
+	static dispatch def Iterable<Statement> getStatements(Vocabulary ontology) {
+		ontology.ownedStatements.filter(Statement)
 	}
 
 	static dispatch def Iterable<Member> getMembers(Vocabulary ontology) {
@@ -328,27 +333,29 @@ class OmlRead {
 		members
 	}
 
-	// Bundle
+	// VocabularyBundle
 
-	static dispatch def Iterable<Import> getImportsWithSource(Bundle ontology) {
+	static dispatch def Iterable<Import> getImportsWithSource(VocabularyBundle ontology) {
 		ontology.ownedImports.filter(Import)
 	}
 
-	static def Iterable<BundleInclusion> getInclusionsWithSource(Bundle bundle) {
-		bundle.ownedImports.filter(BundleInclusion)
+	static def Iterable<VocabularyBundleExtension> getExtensionsWithSource(VocabularyBundle bundle) {
+		bundle.ownedImports.filter(VocabularyBundleExtension)
 	}
 
-	static def Iterable<Vocabulary> getIncludedVocabularies(Bundle bundle) {
+	static def Iterable<VocabularyBundleInclusion> getInclusionsWithSource(VocabularyBundle bundle) {
+		bundle.ownedImports.filter(VocabularyBundleInclusion)
+	}
+
+	static def Iterable<VocabularyBundle> getExtendedVocabularyBundles(VocabularyBundle bundle) {
+		bundle.extensionsWithSource.map[extendedVocabularyBundle]
+	}
+
+	static def Iterable<Vocabulary> getIncludedVocabularys(VocabularyBundle bundle) {
 		bundle.inclusionsWithSource.map[includedVocabulary]
 	}
 
-	static def Iterable<BundleExtension> getExtensionsWithSource(Bundle bundle) {
-		bundle.ownedImports.filter(BundleExtension)
-	}
-
-	static def Iterable<Bundle> getExtendedBundles(Bundle bundle) {
-		bundle.extensionsWithSource.map[extendedBundle]
-	}
+	// DescriptionBox
 
 	// Description
 
@@ -360,10 +367,6 @@ class OmlRead {
 		description.ownedImports.filter(DescriptionUsage)
 	}
 
-	static def Iterable<Terminology> getUsedTerminologies(Description description) {
-		description.usagesWithSource.map[usedTerminology]
-	}
-
 	static def Iterable<DescriptionExtension> getExtensionsWithSource(Description description) {
 		description.ownedImports.filter(DescriptionExtension)
 	}
@@ -372,8 +375,34 @@ class OmlRead {
 		description.extensionsWithSource.map[extendedDescription]
 	}
 
-	static dispatch def Iterable<DescriptionStatement> getStatements(Description ontology) {
-		ontology.ownedStatements
+	static def Iterable<VocabularyBox> getUsedVocabularyBoxes(Description description) {
+		description.usagesWithSource.map[usedVocabularyBox]
+	}
+
+	static dispatch def Iterable<Statement> getStatements(Description ontology) {
+		ontology.ownedStatements.filter(Statement)
+	}
+
+	// DescriptionBundle
+
+	static dispatch def Iterable<Import> getImportsWithSource(DescriptionBundle ontology) {
+		ontology.ownedImports.filter(Import)
+	}
+
+	static def Iterable<DescriptionBundleExtension> getExtensionsWithSource(DescriptionBundle bundle) {
+		bundle.ownedImports.filter(DescriptionBundleExtension)
+	}
+
+	static def Iterable<DescriptionBundleInclusion> getInclusionsWithSource(DescriptionBundle bundle) {
+		bundle.ownedImports.filter(DescriptionBundleInclusion)
+	}
+
+	static def Iterable<DescriptionBundle> getExtendedDescriptionBundles(DescriptionBundle bundle) {
+		bundle.extensionsWithSource.map[extendedDescriptionBundle]
+	}
+
+	static def Iterable<Description> getIncludedDescriptions(DescriptionBundle bundle) {
+		bundle.inclusionsWithSource.map[includedDescription]
 	}
 
 	// Member
@@ -518,43 +547,43 @@ class OmlRead {
 	
 	// AspectReference
 	
-	static dispatch def Aspect resolve(AspectReference reference) {
+	static dispatch def Member resolve(AspectReference reference) {
 		reference.aspect
 	}
 	
 	// ConceptReference
 
-	static dispatch def Concept resolve(ConceptReference reference) {
+	static dispatch def Member resolve(ConceptReference reference) {
 		reference.concept
 	}
 
 	// RelationEntityReference
 
-	static dispatch def RelationEntity resolve(RelationEntityReference reference) {
+	static dispatch def Member resolve(RelationEntityReference reference) {
 		reference.entity
 	}
 	
 	// StructureReference
 	
-	static dispatch def Structure resolve(StructureReference reference) {
+	static dispatch def Member resolve(StructureReference reference) {
 		reference.structure
 	}
 
 	// AnnotationPropertyReference
 
-	static dispatch def AnnotationProperty resolve(AnnotationPropertyReference reference) {
+	static dispatch def Member resolve(AnnotationPropertyReference reference) {
 		reference.property
 	}
 
 	// ScalarPropertyReference
 	
-	static dispatch def ScalarProperty resolve(ScalarPropertyReference reference) {
+	static dispatch def Member resolve(ScalarPropertyReference reference) {
 		reference.property
 	}
 	
 	// StructuredPropertyReference
 	
-	static dispatch def StructuredProperty resolve(StructuredPropertyReference reference) {
+	static dispatch def Member resolve(StructuredPropertyReference reference) {
 		reference.property
 	}
 
@@ -562,25 +591,25 @@ class OmlRead {
 
 	// FacetedScalarReference
 	
-	static dispatch def FacetedScalar resolve(FacetedScalarReference reference) {
+	static dispatch def Member resolve(FacetedScalarReference reference) {
 		reference.scalar
 	}
 
 	// EnumeratedScalarReference
 	
-	static dispatch def EnumeratedScalar resolve(EnumeratedScalarReference reference) {
+	static dispatch def Member resolve(EnumeratedScalarReference reference) {
 		reference.scalar
 	}
 
 	// RelationReference
 	
-	static dispatch def Relation resolve(RelationReference reference) {
+	static dispatch def Member resolve(RelationReference reference) {
 		reference.relation
 	}
 	
 	// RuleReference
 
-	static dispatch def Rule resolve(RuleReference reference) {
+	static dispatch def Member resolve(RuleReference reference) {
 		reference.rule
 	}
 		
@@ -588,13 +617,13 @@ class OmlRead {
 
 	// ConceptInstanceReference
 	
-	static dispatch def ConceptInstance resolve(ConceptInstanceReference reference) {
+	static dispatch def Member resolve(ConceptInstanceReference reference) {
 		reference.instance
 	}
 
 	// RelationInstanceReference
 	
-	static dispatch def RelationInstance resolve(RelationInstanceReference reference) {
+	static dispatch def Member resolve(RelationInstanceReference reference) {
 		reference.instance
 	}
 
@@ -638,9 +667,9 @@ class OmlRead {
 				val contextURI = ^import.eResource?.getURI()
 				val rs = ^import.eResource?.resourceSet
 				if (rs !== null && contextURI !== null) {
-					var catalogMap = rs.loadOptions.get(CATALOGS) as Map<File, Catalog>
+					var catalogMap = rs.loadOptions.get(CATALOGS) as Map<File, OmlCatalog>
 					if (catalogMap === null) {
-						rs.loadOptions.put(CATALOGS, catalogMap = new HashMap<File, Catalog>)
+						rs.loadOptions.put(CATALOGS, catalogMap = new HashMap<File, OmlCatalog>)
 					}
         			val url = FileLocator.toFileURL(new URL(contextURI.trimSegments(1).toString()))
         			val folder = new File(url.file);
@@ -653,10 +682,11 @@ class OmlRead {
 						if (resolved !== null) {
 							uri = URI.createURI(resolved)
 							if (uri.fileExtension === null) {
-								uri = uri.appendFileExtension('oml')
+								// if the imported URI does not end with an extension, assume it's .oml
+								uri = uri.appendFileExtension(OML_EXTENSION)
 							} else if (NUMBER.matcher(uri.fileExtension).matches) { 
 								// special case for the dc vocabulary ending its IRI with a version number
-								uri = uri.appendFileExtension('oml')
+								uri = uri.appendFileExtension(OML_EXTENSION)
 							}					
 						}
 					}
@@ -666,19 +696,15 @@ class OmlRead {
 		}
 	}
 	
-	private static def findCatalogs(Map<File, Catalog> catalogMap, File folder) {
+	private static def findCatalogs(Map<File, OmlCatalog> catalogMap, File folder) {
 		var path = new ArrayList<File>
 		var current = folder
-		var Catalog catalog = null
+		var OmlCatalog catalog = null
 		while (current !== null && catalog === null) {
 			path.add(current)
 			val file = new File(current.path+'/catalog.xml')
 			if (file.exists) {
-				val manager = new CatalogManager
-				manager.useStaticCatalog = false
-				manager.ignoreMissingProperties = true
-				catalog = manager.catalog
-				catalog.parseCatalog(file.toURI.toURL)
+				catalog = OmlCatalog.create(file.toURI.toURL)
 			} else  {
 				current = current.parentFile
 				catalog = catalogMap.get(current)
@@ -722,6 +748,10 @@ class OmlRead {
 	// VocabularyImport
 	
 	static dispatch def Ontology getImportingOntology(VocabularyImport ^import) {
+		^import.importingVocabulary
+	}
+
+	static def Vocabulary getImportingVocabulary(VocabularyImport ^import) {
 		^import.owningVocabulary
 	}
 
@@ -741,60 +771,98 @@ class OmlRead {
 		usage.owningVocabulary
 	}
 
-	static def Description getUsedDescription(VocabularyUsage usage) {
-		usage.importedOntology as Description
+	static def DescriptionBox getUsedDescriptionBox(VocabularyUsage usage) {
+		usage.importedOntology as DescriptionBox
 	}
 
-	// BundleImport
+	// VocabularyBundleImport
 	
-	static dispatch def Ontology getImportingOntology(BundleImport ^import) {
-		^import.owningBundle
+	static dispatch def Ontology getImportingOntology(VocabularyBundleImport ^import) {
+		^import.importingVocabularyBundle
 	}
 
-	// BundleInclusion
+	static def VocabularyBundle getImportingVocabularyBundle(VocabularyBundleImport ^import) {
+		^import.owningVocabularyBundle
+	}
+
+	// VocabularyBundleExtension
 	
-	static def Vocabulary getIncludedVocabulary(BundleInclusion inclusion) {
+	static def VocabularyBundle getExtendingVocabularyBundle(VocabularyBundleExtension ^extension) {
+		^extension.owningVocabularyBundle
+	}
+
+	static def VocabularyBundle getExtendedVocabularyBundle(VocabularyBundleExtension ^extension) {
+		^extension.importedOntology as VocabularyBundle
+	}
+
+	// VocabularyBundleInclusion
+	
+	static def VocabularyBundle getIncludingVocabularyBundle(VocabularyBundleInclusion inclusion) {
+		inclusion.owningVocabularyBundle
+	}
+
+	static def Vocabulary getIncludedVocabulary(VocabularyBundleInclusion inclusion) {
 		inclusion.importedOntology as Vocabulary
-	}
-
-	static def Bundle getIncludingBundle(BundleInclusion inclusion) {
-		inclusion.owningBundle
-	}
-
-	// BundleExtension
-	
-	static def Bundle getExtendedBundle(BundleExtension ^extension) {
-		^extension.importedOntology as Bundle
-	}
-
-	static def Bundle getExtendingBundle(BundleExtension ^extension) {
-		^extension.owningBundle
 	}
 
 	// DescriptionImport
 	
 	static dispatch def Ontology getImportingOntology(DescriptionImport ^import) {
+		^import.importingDescription
+	}
+
+	static def Description getImportingDescription(DescriptionImport ^import) {
 		^import.owningDescription
 	}
 
-	// DescriptionUsage
-	
-	static def Terminology getUsedTerminology(DescriptionUsage usage) {
-		usage.importedOntology as Terminology
-	}
-
-	static def Description getUsingDescription(DescriptionUsage usage) {
-		usage.owningDescription
-	}
-
 	// DescriptionExtension
+
+	static def Description getExtendingDescription(DescriptionExtension ^extension) {
+		^extension.owningDescription
+	}
 
 	static def Description getExtendedDescription(DescriptionExtension ^extension) {
 		^extension.importedOntology as Description
 	}
 
-	static def Description getExtendingDescription(DescriptionExtension ^extension) {
-		^extension.owningDescription
+	// DescriptionUsage
+	
+	static def Description getUsingDescription(DescriptionUsage usage) {
+		usage.owningDescription
+	}
+
+	static def VocabularyBox getUsedVocabularyBox(DescriptionUsage usage) {
+		usage.importedOntology as VocabularyBox
+	}
+
+	// DescriptionBundleImport
+	
+	static dispatch def Ontology getImportingOntology(DescriptionBundleImport ^import) {
+		^import.importingDescriptionBundle
+	}
+
+	static def DescriptionBundle getImportingDescriptionBundle(DescriptionBundleImport ^import) {
+		^import.owningDescriptionBundle
+	}
+
+	// DescriptionBundleExtension
+	
+	static def DescriptionBundle getExtendingDescriptionBundle(DescriptionBundleExtension ^extension) {
+		^extension.owningDescriptionBundle
+	}
+
+	static def DescriptionBundle getExtendedDescriptionBundle(DescriptionBundleExtension ^extension) {
+		^extension.importedOntology as DescriptionBundle
+	}
+
+	// DescriptionBundleInclusion
+	
+	static def DescriptionBundle getIncludingDescriptionBundle(DescriptionBundleInclusion inclusion) {
+		inclusion.owningDescriptionBundle
+	}
+
+	static def Description getIncludedDescription(DescriptionBundleInclusion inclusion) {
+		inclusion.importedOntology as Description
 	}
 
 	// Axiom
@@ -829,7 +897,7 @@ class OmlRead {
 
 	// ScalarPropertyRestrictionAxiom
 
-	static dispatch def ScalarProperty getRestrictedTerm(ScalarPropertyRestrictionAxiom axiom) {
+	static dispatch def Term getRestrictedTerm(ScalarPropertyRestrictionAxiom axiom) {
 		axiom.property
 	}
 
@@ -841,7 +909,7 @@ class OmlRead {
 	
 	// StructuredPropertyRestrictionAxiom
 		
-	static dispatch def StructuredProperty getRestrictedTerm(StructuredPropertyRestrictionAxiom axiom) {
+	static dispatch def Term getRestrictedTerm(StructuredPropertyRestrictionAxiom axiom) {
 		axiom.property
 	}
 
@@ -853,7 +921,7 @@ class OmlRead {
 	
 	// RelationRestrictionAxiom
 
-	static dispatch def Relation getRestrictedTerm(RelationRestrictionAxiom axiom) {
+	static dispatch def Term getRestrictedTerm(RelationRestrictionAxiom axiom) {
 		axiom.relation
 	}
 	
@@ -965,7 +1033,7 @@ class OmlRead {
 		assertion.property
 	}
 
-	static dispatch def Literal getValue(ScalarPropertyValueAssertion assertion) {
+	static dispatch def Element getValue(ScalarPropertyValueAssertion assertion) {
 		assertion.value
 	}
 
@@ -975,7 +1043,7 @@ class OmlRead {
 		assertion.property
 	}
 
-	static dispatch def StructureInstance getValue(StructuredPropertyValueAssertion assertion) {
+	static dispatch def Element getValue(StructuredPropertyValueAssertion assertion) {
 		assertion.value
 	}
 

@@ -19,9 +19,8 @@
 package io.opencaesar.oml.provider;
 
 
-import io.opencaesar.oml.EntityReference;
-import io.opencaesar.oml.OmlFactory;
 import io.opencaesar.oml.OmlPackage;
+import io.opencaesar.oml.VocabularyBundleImport;
 
 import java.util.Collection;
 import java.util.List;
@@ -29,25 +28,23 @@ import java.util.List;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 
-import org.eclipse.emf.ecore.EStructuralFeature;
-
+import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
-import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
- * This is the item provider adapter for a {@link io.opencaesar.oml.EntityReference} object.
+ * This is the item provider adapter for a {@link io.opencaesar.oml.VocabularyBundleImport} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class EntityReferenceItemProvider extends ClassifierReferenceItemProvider {
+public class VocabularyBundleImportItemProvider extends ImportItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EntityReferenceItemProvider(AdapterFactory adapterFactory) {
+	public VocabularyBundleImportItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -62,39 +59,31 @@ public class EntityReferenceItemProvider extends ClassifierReferenceItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addOwningVocabularyBundlePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
-	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
-	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
+	 * This adds a property descriptor for the Owning Vocabulary Bundle feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
-			super.getChildrenFeatures(object);
-			childrenFeatures.add(OmlPackage.Literals.ENTITY_REFERENCE__OWNED_RELATION_RESTRICTIONS);
-			childrenFeatures.add(OmlPackage.Literals.ENTITY_REFERENCE__OWNED_KEYS);
-		}
-		return childrenFeatures;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	protected EStructuralFeature getChildFeature(Object object, Object child) {
-		// Check the type of the specified child object and return the proper feature to use for
-		// adding (see {@link AddCommand}) it as a child.
-
-		return super.getChildFeature(object, child);
+	protected void addOwningVocabularyBundlePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_VocabularyBundleImport_owningVocabularyBundle_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_VocabularyBundleImport_owningVocabularyBundle_feature", "_UI_VocabularyBundleImport_type"),
+				 OmlPackage.Literals.VOCABULARY_BUNDLE_IMPORT__OWNING_VOCABULARY_BUNDLE,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
 	}
 
 	/**
@@ -105,7 +94,10 @@ public class EntityReferenceItemProvider extends ClassifierReferenceItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_EntityReference_type");
+		String label = ((VocabularyBundleImport)object).getUri();
+		return label == null || label.length() == 0 ?
+			getString("_UI_VocabularyBundleImport_type") :
+			getString("_UI_VocabularyBundleImport_type") + " " + label;
 	}
 
 
@@ -119,13 +111,6 @@ public class EntityReferenceItemProvider extends ClassifierReferenceItemProvider
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
-
-		switch (notification.getFeatureID(EntityReference.class)) {
-			case OmlPackage.ENTITY_REFERENCE__OWNED_RELATION_RESTRICTIONS:
-			case OmlPackage.ENTITY_REFERENCE__OWNED_KEYS:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
-				return;
-		}
 		super.notifyChanged(notification);
 	}
 
@@ -139,26 +124,6 @@ public class EntityReferenceItemProvider extends ClassifierReferenceItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OmlPackage.Literals.ENTITY_REFERENCE__OWNED_RELATION_RESTRICTIONS,
-				 OmlFactory.eINSTANCE.createRelationRangeRestrictionAxiom()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OmlPackage.Literals.ENTITY_REFERENCE__OWNED_RELATION_RESTRICTIONS,
-				 OmlFactory.eINSTANCE.createRelationCardinalityRestrictionAxiom()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OmlPackage.Literals.ENTITY_REFERENCE__OWNED_RELATION_RESTRICTIONS,
-				 OmlFactory.eINSTANCE.createRelationTargetRestrictionAxiom()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OmlPackage.Literals.ENTITY_REFERENCE__OWNED_KEYS,
-				 OmlFactory.eINSTANCE.createKeyAxiom()));
 	}
 
 }

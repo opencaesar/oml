@@ -111,52 +111,6 @@ public class OmlItemProviderAdapterFactory extends OmlAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.AnnotatedElement} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected AnnotatedElementItemProvider annotatedElementItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.AnnotatedElement}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createAnnotatedElementAdapter() {
-		if (annotatedElementItemProvider == null) {
-			annotatedElementItemProvider = new AnnotatedElementItemProvider(this);
-		}
-
-		return annotatedElementItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.IdentifiedElement} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected IdentifiedElementItemProvider identifiedElementItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.IdentifiedElement}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createIdentifiedElementAdapter() {
-		if (identifiedElementItemProvider == null) {
-			identifiedElementItemProvider = new IdentifiedElementItemProvider(this);
-		}
-
-		return identifiedElementItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.Vocabulary} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -180,26 +134,26 @@ public class OmlItemProviderAdapterFactory extends OmlAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.Bundle} instances.
+	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.VocabularyBundle} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected BundleItemProvider bundleItemProvider;
+	protected VocabularyBundleItemProvider vocabularyBundleItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.Bundle}.
+	 * This creates an adapter for a {@link io.opencaesar.oml.VocabularyBundle}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createBundleAdapter() {
-		if (bundleItemProvider == null) {
-			bundleItemProvider = new BundleItemProvider(this);
+	public Adapter createVocabularyBundleAdapter() {
+		if (vocabularyBundleItemProvider == null) {
+			vocabularyBundleItemProvider = new VocabularyBundleItemProvider(this);
 		}
 
-		return bundleItemProvider;
+		return vocabularyBundleItemProvider;
 	}
 
 	/**
@@ -223,6 +177,29 @@ public class OmlItemProviderAdapterFactory extends OmlAdapterFactory implements 
 		}
 
 		return descriptionItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.DescriptionBundle} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected DescriptionBundleItemProvider descriptionBundleItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link io.opencaesar.oml.DescriptionBundle}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createDescriptionBundleAdapter() {
+		if (descriptionBundleItemProvider == null) {
+			descriptionBundleItemProvider = new DescriptionBundleItemProvider(this);
+		}
+
+		return descriptionBundleItemProvider;
 	}
 
 	/**
@@ -916,49 +893,72 @@ public class OmlItemProviderAdapterFactory extends OmlAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.BundleInclusion} instances.
+	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.VocabularyBundleExtension} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected BundleInclusionItemProvider bundleInclusionItemProvider;
+	protected VocabularyBundleExtensionItemProvider vocabularyBundleExtensionItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.BundleInclusion}.
+	 * This creates an adapter for a {@link io.opencaesar.oml.VocabularyBundleExtension}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createBundleInclusionAdapter() {
-		if (bundleInclusionItemProvider == null) {
-			bundleInclusionItemProvider = new BundleInclusionItemProvider(this);
+	public Adapter createVocabularyBundleExtensionAdapter() {
+		if (vocabularyBundleExtensionItemProvider == null) {
+			vocabularyBundleExtensionItemProvider = new VocabularyBundleExtensionItemProvider(this);
 		}
 
-		return bundleInclusionItemProvider;
+		return vocabularyBundleExtensionItemProvider;
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.BundleExtension} instances.
+	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.VocabularyBundleInclusion} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected BundleExtensionItemProvider bundleExtensionItemProvider;
+	protected VocabularyBundleInclusionItemProvider vocabularyBundleInclusionItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.BundleExtension}.
+	 * This creates an adapter for a {@link io.opencaesar.oml.VocabularyBundleInclusion}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createBundleExtensionAdapter() {
-		if (bundleExtensionItemProvider == null) {
-			bundleExtensionItemProvider = new BundleExtensionItemProvider(this);
+	public Adapter createVocabularyBundleInclusionAdapter() {
+		if (vocabularyBundleInclusionItemProvider == null) {
+			vocabularyBundleInclusionItemProvider = new VocabularyBundleInclusionItemProvider(this);
 		}
 
-		return bundleExtensionItemProvider;
+		return vocabularyBundleInclusionItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.DescriptionExtension} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected DescriptionExtensionItemProvider descriptionExtensionItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link io.opencaesar.oml.DescriptionExtension}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createDescriptionExtensionAdapter() {
+		if (descriptionExtensionItemProvider == null) {
+			descriptionExtensionItemProvider = new DescriptionExtensionItemProvider(this);
+		}
+
+		return descriptionExtensionItemProvider;
 	}
 
 	/**
@@ -985,26 +985,49 @@ public class OmlItemProviderAdapterFactory extends OmlAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.DescriptionExtension} instances.
+	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.DescriptionBundleExtension} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected DescriptionExtensionItemProvider descriptionExtensionItemProvider;
+	protected DescriptionBundleExtensionItemProvider descriptionBundleExtensionItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.DescriptionExtension}.
+	 * This creates an adapter for a {@link io.opencaesar.oml.DescriptionBundleExtension}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createDescriptionExtensionAdapter() {
-		if (descriptionExtensionItemProvider == null) {
-			descriptionExtensionItemProvider = new DescriptionExtensionItemProvider(this);
+	public Adapter createDescriptionBundleExtensionAdapter() {
+		if (descriptionBundleExtensionItemProvider == null) {
+			descriptionBundleExtensionItemProvider = new DescriptionBundleExtensionItemProvider(this);
 		}
 
-		return descriptionExtensionItemProvider;
+		return descriptionBundleExtensionItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.DescriptionBundleInclusion} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected DescriptionBundleInclusionItemProvider descriptionBundleInclusionItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link io.opencaesar.oml.DescriptionBundleInclusion}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createDescriptionBundleInclusionAdapter() {
+		if (descriptionBundleInclusionItemProvider == null) {
+			descriptionBundleInclusionItemProvider = new DescriptionBundleInclusionItemProvider(this);
+		}
+
+		return descriptionBundleInclusionItemProvider;
 	}
 
 	/**
@@ -1166,29 +1189,6 @@ public class OmlItemProviderAdapterFactory extends OmlAdapterFactory implements 
 		}
 
 		return structuredPropertyValueRestrictionAxiomItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.RelationRestrictionAxiom} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected RelationRestrictionAxiomItemProvider relationRestrictionAxiomItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.RelationRestrictionAxiom}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createRelationRestrictionAxiomAdapter() {
-		if (relationRestrictionAxiomItemProvider == null) {
-			relationRestrictionAxiomItemProvider = new RelationRestrictionAxiomItemProvider(this);
-		}
-
-		return relationRestrictionAxiomItemProvider;
 	}
 
 	/**
@@ -1734,11 +1734,10 @@ public class OmlItemProviderAdapterFactory extends OmlAdapterFactory implements 
 	@Override
 	public void dispose() {
 		if (annotationItemProvider != null) annotationItemProvider.dispose();
-		if (annotatedElementItemProvider != null) annotatedElementItemProvider.dispose();
-		if (identifiedElementItemProvider != null) identifiedElementItemProvider.dispose();
 		if (vocabularyItemProvider != null) vocabularyItemProvider.dispose();
-		if (bundleItemProvider != null) bundleItemProvider.dispose();
+		if (vocabularyBundleItemProvider != null) vocabularyBundleItemProvider.dispose();
 		if (descriptionItemProvider != null) descriptionItemProvider.dispose();
+		if (descriptionBundleItemProvider != null) descriptionBundleItemProvider.dispose();
 		if (aspectItemProvider != null) aspectItemProvider.dispose();
 		if (conceptItemProvider != null) conceptItemProvider.dispose();
 		if (relationEntityItemProvider != null) relationEntityItemProvider.dispose();
@@ -1769,10 +1768,12 @@ public class OmlItemProviderAdapterFactory extends OmlAdapterFactory implements 
 		if (relationInstanceReferenceItemProvider != null) relationInstanceReferenceItemProvider.dispose();
 		if (vocabularyExtensionItemProvider != null) vocabularyExtensionItemProvider.dispose();
 		if (vocabularyUsageItemProvider != null) vocabularyUsageItemProvider.dispose();
-		if (bundleInclusionItemProvider != null) bundleInclusionItemProvider.dispose();
-		if (bundleExtensionItemProvider != null) bundleExtensionItemProvider.dispose();
-		if (descriptionUsageItemProvider != null) descriptionUsageItemProvider.dispose();
+		if (vocabularyBundleExtensionItemProvider != null) vocabularyBundleExtensionItemProvider.dispose();
+		if (vocabularyBundleInclusionItemProvider != null) vocabularyBundleInclusionItemProvider.dispose();
 		if (descriptionExtensionItemProvider != null) descriptionExtensionItemProvider.dispose();
+		if (descriptionUsageItemProvider != null) descriptionUsageItemProvider.dispose();
+		if (descriptionBundleExtensionItemProvider != null) descriptionBundleExtensionItemProvider.dispose();
+		if (descriptionBundleInclusionItemProvider != null) descriptionBundleInclusionItemProvider.dispose();
 		if (specializationAxiomItemProvider != null) specializationAxiomItemProvider.dispose();
 		if (scalarPropertyRangeRestrictionAxiomItemProvider != null) scalarPropertyRangeRestrictionAxiomItemProvider.dispose();
 		if (scalarPropertyCardinalityRestrictionAxiomItemProvider != null) scalarPropertyCardinalityRestrictionAxiomItemProvider.dispose();
@@ -1780,7 +1781,6 @@ public class OmlItemProviderAdapterFactory extends OmlAdapterFactory implements 
 		if (structuredPropertyRangeRestrictionAxiomItemProvider != null) structuredPropertyRangeRestrictionAxiomItemProvider.dispose();
 		if (structuredPropertyCardinalityRestrictionAxiomItemProvider != null) structuredPropertyCardinalityRestrictionAxiomItemProvider.dispose();
 		if (structuredPropertyValueRestrictionAxiomItemProvider != null) structuredPropertyValueRestrictionAxiomItemProvider.dispose();
-		if (relationRestrictionAxiomItemProvider != null) relationRestrictionAxiomItemProvider.dispose();
 		if (relationRangeRestrictionAxiomItemProvider != null) relationRangeRestrictionAxiomItemProvider.dispose();
 		if (relationCardinalityRestrictionAxiomItemProvider != null) relationCardinalityRestrictionAxiomItemProvider.dispose();
 		if (relationTargetRestrictionAxiomItemProvider != null) relationTargetRestrictionAxiomItemProvider.dispose();

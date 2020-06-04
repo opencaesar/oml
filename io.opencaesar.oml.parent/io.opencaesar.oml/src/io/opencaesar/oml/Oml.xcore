@@ -16,11 +16,13 @@
 	Elements="",
 	Literals="",
 	Ontologies="",
+	Vocabularies="",
 	Terms="",
 	Types="",
 	Properties="",
 	Axioms="",
 	Rules="",
+	Descriptions="",
 	Instances="",
 	Assertions="",
 	References=""
@@ -96,7 +98,7 @@ class Annotation extends Element {
  * AnnotatedElement is an element that can own a set of Annotations.
  */
 @Bikeshed(heading="Elements")
-class AnnotatedElement extends Element {
+abstract class AnnotatedElement extends Element {
 	/*
 	 * The set of annotations owned directly by this element
 	 */
@@ -107,7 +109,7 @@ class AnnotatedElement extends Element {
  * IdentifiedElement is an annotated element that is identified by an IRI.
  */
 @Bikeshed(heading="Elements")
-class IdentifiedElement extends AnnotatedElement {
+abstract class IdentifiedElement extends AnnotatedElement {
 }
 
 /*
@@ -132,58 +134,73 @@ abstract class Ontology extends IdentifiedElement {
 }
 
 /*
- * Terminology is an ontology whose members are a set of ontological terms. It is the super type of
- * two concrete kinds of terminology: [=Vocabulary=] and [=Bundle=].
+ * VocabularyBox is an ontology whose members are terms and rules.
  */
-@Bikeshed(heading="Ontologies")
-abstract class Terminology extends Ontology {
+@Bikeshed(heading="Vocabularies")
+abstract class VocabularyBox extends Ontology {
 }
 
 /*
- * Vocabulary is a terminology that has open-world semantics. It can make a number of statements, defining
- * its own terms and constraining them. A vocabulary can also import other vocabularies  to extend them.
+ * Vocabulary is a vocabulary box that allows making statements about its own terms and rules
+ * or about others that are imported.
  */
-@Bikeshed(heading="Ontologies")
-class Vocabulary extends Terminology {
+@Bikeshed(heading="Vocabularies")
+class Vocabulary extends VocabularyBox {
 	/*
 	 * The set of imports this vocabulary has to other ontologies
 	 */
 	contains VocabularyImport[] ownedImports opposite owningVocabulary
 	/*
-	 * The set of statements this vocabulary makes on its own terms or imported ones
+	 * The set of statements contained by this vocabulary
 	 */
 	contains VocabularyStatement[] ownedStatements opposite owningVocabulary
 }
 
 /*
- * Bundle is a terminology that has closed-world semantics. It includes a number of imported vocabularies, 
- * which have open-world-semantics, and closes the world on them (i.e., make their taxonomically unrelated 
- * entities disjoint). A bundle can also import other bundles to extend them or other vocabularies to
- * include them.
+ * VocabularyBundle is a vocabulary box that allows importing other vocabulary boxes and flagging them
+ * as disjoint from one another.
  */
-@Bikeshed(heading="Ontologies")
-class Bundle extends Terminology {
+@Bikeshed(heading="Vocabularies")
+class VocabularyBundle extends VocabularyBox {
 	/*
-	 * The set of imports this bundle has to other ontologies
+	 * The set of imports this vocabulary bundle has of other vocabularies
 	 */
-	contains BundleImport[] ownedImports opposite owningBundle
+	contains VocabularyBundleImport[] ownedImports opposite owningVocabularyBundle
 }
 
 /*
- * Description is an ontology whose members consists of a set of instances of some type defined in a vocabulary. 
- * It can make statements that characterize its instances and assert their property values and interrelations. 
- * A description can also import other descriptions to extend them or other terminologies to use their terms.   
+ * DescriptionBox is an ontology whose members are instances (of terms defined in vocabulary boxes)
  */
-@Bikeshed(heading="Ontologies")
-class Description extends Ontology {
+@Bikeshed(heading="Descriptions")
+abstract class DescriptionBox extends Ontology {
+}
+
+/*
+ * Description is an description box that allows making statements about its own instances or about
+ * others that are imported.
+ */
+@Bikeshed(heading="Descriptions")
+class Description extends DescriptionBox {
 	/*
 	 * The set of imports this description has to other ontologies 
 	 */
 	contains DescriptionImport[] ownedImports opposite owningDescription
 	/*
-	 * The set of statements this description makes on its own instances or imported ones
+	 * The set of statements contained by this description
 	 */
 	contains DescriptionStatement[] ownedStatements opposite owningDescription
+}
+
+/*
+ * DescriptionBundle is an description box that allows importing other description boxes and flagging them
+ * as a set that is analyzed together for consistency and satisfiabilty.
+ */
+@Bikeshed(heading="Descriptions")
+class DescriptionBundle extends DescriptionBox {
+	/*
+	 * The set of imports this description bundle has of other descriptions
+	 */
+	contains DescriptionBundleImport[] ownedImports opposite owningDescriptionBundle
 }
 
 /*
@@ -199,7 +216,7 @@ abstract class Member extends IdentifiedElement {
 }
 
 /*
- * Term is a member of a vocabulary that provides a particular semantic meaning when used in a description.
+ * Term is a member of a vocabulary that provides a particular semantic meaning when used in an assertion.
  */
 @Bikeshed(heading="Terms")
 abstract class Term extends Member {
@@ -262,7 +279,7 @@ class Aspect extends Entity {
 }
 
 /*
- * Concept is a concrete entity that can classifies a set of concept instances in a description. It can also specialize 
+ * Concept is a concrete entity that can classify a set of concept instances in a description. It can also specialize 
  * other concepts and/or aspects.
  */
 @Bikeshed(heading="Types")
@@ -296,31 +313,31 @@ class RelationEntity extends Entity {
 	 */
 	contains ReverseRelation reverse opposite entity
 	/*
-	 * Whether this relation entity is functional (i.e., A->B and A->C => B=C)
+	 * Whether this relation entity is functional (i.e., {@code A -> B and A->C => B=C})
 	 */
 	boolean functional
 	/*
-	 * Whether this relation entity is inverse functional (i.e., B->A and C->A => B=C)
+	 * Whether this relation entity is inverse functional (i.e., {@code B->A and C->A => B=C})
 	 */
 	boolean inverseFunctional
 	/*
-	 * Whether this relation entity is symmetric (i.e., A->B => B->A)
+	 * Whether this relation entity is symmetric (i.e., {@code A->B => B->A})
 	 */
 	boolean symmetric
 	/*
-	 * Whether this relation entity is asymmetric (i.e., A->B => !(B->A))
+	 * Whether this relation entity is asymmetric (i.e., {@code A->B => !(B->A)})
 	 */
 	boolean asymmetric
 	/*
-	 * Whether this relation entity is reflexive (i.e., A => A->A)
+	 * Whether this relation entity is reflexive (i.e., {@code A => A->A})
 	 */
 	boolean reflexive
 	/*
-	 * Whether this relation entity is irreflexive (i.e., A => !(A->A))
+	 * Whether this relation entity is irreflexive (i.e., {@code A => !(A->A)})
 	 */
 	boolean irreflexive
 	/*
-	 * Whether this relation entity is irreflexive (i.e., A->B and B->C => A->C)
+	 * Whether this relation entity is irreflexive (i.e., {@code A->B and B->C => A->C})
 	 */
 	boolean transitive
 }
@@ -851,7 +868,7 @@ class RuleReference extends VocabularyMemberReference {
 }
 
 /*
- * DescriptionMemberReference is a reference to a description member specified as a statement.
+ * DescriptionMemberReference is a reference to an description member specified as a statement.
  */
 @Bikeshed(heading="References")
 abstract class DescriptionMemberReference extends Reference , DescriptionStatement {	
@@ -911,31 +928,30 @@ abstract class Statement extends Element {
 }
 
 /*
- * VocabularyStatement is a statement made in a vocabylary.
+ * VocabularyStatement is a statement owned by a vocabulary.
  */
-@Bikeshed(heading="Ontologies")
+@Bikeshed(heading="Vocabularies")
 abstract class VocabularyStatement extends Statement {
 	/*
-	 * The vocabulary that makes this statement
+	 * The vocabulary that owns this statement
 	 */
 	container Vocabulary[1] owningVocabulary opposite ownedStatements
 }
 
 /*
- * DescriptionStatement is a statement made in a description
+ * DescriptionStatement is a statement owned by an description.
  */
-@Bikeshed(heading="Ontologies")
+@Bikeshed(heading="Descriptions")
 abstract class DescriptionStatement extends Statement {
 	/*
-	 * The description that makes this statement
+	 * The description that owns this statement
 	 */
 	container Description[1] owningDescription opposite ownedStatements
 }
 
 /*
- * Import is an element that can be specified by an ontology to indicate that it imports another ontology. The imported
- * ontology is specified by its URI The import may optionally specify a different namespace prefix for the imported 
- * ontology in the importing ontology's context.
+ * Import is an element owned by an ontology to specify that another ontology is imported in its context.
+ * The imported ontology is specified by a URI and an optional prefix that overrides that of the imported ontology.
  */
 @Bikeshed(heading="Ontologies")
 abstract class Import extends AnnotatedElement {
@@ -950,78 +966,103 @@ abstract class Import extends AnnotatedElement {
 }
 
 /*
- * VocabularyImport is an import by a vocabulary of another ontology.
+ * VocabularyImport is an import owned by a vocabulary.
  */
-@Bikeshed(heading="Ontologies")
+@Bikeshed(heading="Vocabularies")
 abstract class VocabularyImport extends Import {
 	/*
-	 * The vocabulary that is the source of this vocabulary import
+	 * The vocabulary that owns this import
 	 */
 	container Vocabulary[1] owningVocabulary opposite ownedImports
 }
 
 /*
- * VocabularyExtension is a vocabulary import that allows a vocabulary to extend another. 
+ * VocabularyExtension is an import that allows a vocabulary to extend another. 
  */
-@Bikeshed(heading="Ontologies")
+@Bikeshed(heading="Vocabularies")
 class VocabularyExtension extends VocabularyImport {
 }
 
 /*
- * VocabularyUsage is a vocabulary import that allows a vocabulary to use a description. 
+ * VocabularyUsage is an import that allows a vocabulary to use a description box.
  */
-@Bikeshed(heading="Ontologies")
+@Bikeshed(heading="Vocabularies")
 class VocabularyUsage extends VocabularyImport {
 }
 
 /*
- * BundleImport is an import by a bundle of another ontology.
+ * VocabularyBundleImport is an import owned by a vocabulary bundle.
  */
-@Bikeshed(heading="Ontologies")
-abstract class BundleImport extends Import {
+@Bikeshed(heading="Vocabularies")
+abstract class VocabularyBundleImport extends Import {
 	/*
-	 * The bundle that is the source of this bundle import
+	 * The vocabulary bundle that contains this import
 	 */
-	container Bundle[1] owningBundle opposite ownedImports
+	container VocabularyBundle[1] owningVocabularyBundle opposite ownedImports
 }
 
 /*
- * BundleInclusion is a bundle import that allows a bundle to include a vocabulary. 
+ * VocabularyBundleExtension is an import that allows a vocabulary bundle to extend another 
  */
-@Bikeshed(heading="Ontologies")
-class BundleInclusion extends BundleImport {
+@Bikeshed(heading="Vocabularies")
+class VocabularyBundleExtension extends VocabularyBundleImport {
 }
 
 /*
- * BundleExtension is a bundle import that allows a bundle to extend another. 
+ * VocabularyBundleInclusion is an import that allows a vocabulary bundle to include a vocabulary. 
  */
-@Bikeshed(heading="Ontologies")
-class BundleExtension extends BundleImport {
+@Bikeshed(heading="Vocabularies")
+class VocabularyBundleInclusion extends VocabularyBundleImport {
 }
 
 /*
- * DescriptionImport is an import by a description of another ontology.
+ * DescriptionImport is an import owned by an description.
  */
-@Bikeshed(heading="Ontologies")
+@Bikeshed(heading="Descriptions")
 abstract class DescriptionImport extends Import {
 	/*
-	 * The description that is the source of this description import
+	 * The description that owns this import
 	 */
 	container Description[1] owningDescription opposite ownedImports
 }
 
 /*
- * DescriptionUsage is a description import that allows a description to use a terminology. 
+ * DescriptionExtension is an import that allows an description to extend another. 
  */
-@Bikeshed(heading="Ontologies")
+@Bikeshed(heading="Descriptions")
+class DescriptionExtension extends DescriptionImport {
+}
+
+/*
+ * DescriptionUsage is an import that allows an description to use a vocabulary box.
+ */
+@Bikeshed(heading="Descriptions")
 class DescriptionUsage extends DescriptionImport {
 }
 
 /*
- * DescriptionImport is a description import that allows a description to extend another. 
+ * DescriptionBundleImport is an import owned by an description bundle.
  */
-@Bikeshed(heading="Ontologies")
-class DescriptionExtension extends DescriptionImport {
+@Bikeshed(heading="Descriptions")
+abstract class DescriptionBundleImport extends Import {
+	/*
+	 * The description bundle that owns this import
+	 */
+	container DescriptionBundle[1] owningDescriptionBundle opposite ownedImports
+}
+
+/*
+ * DescriptionBundleExtension is an import that allows an description bundle to extend another. 
+ */
+@Bikeshed(heading="Descriptions")
+class DescriptionBundleExtension extends DescriptionBundleImport {
+}
+
+/*
+ * DescriptionBundleInclusion is an import that allows an description bundle to include an description. 
+ */
+@Bikeshed(heading="Descriptions")
+class DescriptionBundleInclusion extends DescriptionBundleImport {
 }
 
 /*
@@ -1201,7 +1242,7 @@ class StructuredPropertyValueRestrictionAxiom extends StructuredPropertyRestrict
  * the restricting classifier domain. It can be specified directly on the classifier or indirectly on a reference to it.
  */
 @Bikeshed(heading="Axioms")
-class RelationRestrictionAxiom extends RestrictionAxiom {
+abstract class RelationRestrictionAxiom extends RestrictionAxiom {
 	/*
 	 * The restricted relation specified by this axiom
 	 */

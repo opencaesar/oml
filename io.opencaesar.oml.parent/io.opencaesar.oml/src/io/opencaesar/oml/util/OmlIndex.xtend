@@ -143,14 +143,18 @@ class OmlIndex {
 	
 	// Ontology
 
-	// Terminology
+	// VocabularyBox
 
 	// Vocabulary
 
-	// Bundle
+	// VocabularyBundle
 	
+	// DescriptionBox
+
 	// Description
 	
+	// DescriptionBundle
+
 	// Member
 	
 	// Term
@@ -385,27 +389,33 @@ class OmlIndex {
 
 	// VocabularyStatement
 	
+	// DescriptionStatement
+
 	// Import
 		
 	// VocabularyImport
-	
+
 	// VocabularyExtension
 	
 	// VocabularyUsage
 
-	// DescriptionStatement
+	// VocabularyBundleImport
 
-	// BundleImport
-
-	// BundleInclusion
+	// VocabularyBundleInclusion
 	
-	// BundleExtension
+	// VocabularyBundleExtension
 	
 	// DescriptionImport
 
 	// DescriptionUsage
 
 	// DescriptionExtension	
+
+	// DescriptionBundleImport
+
+	// DescriptionBundleInclusion
+	
+	// DescriptionBundleExtension
 
 	// Axiom
 

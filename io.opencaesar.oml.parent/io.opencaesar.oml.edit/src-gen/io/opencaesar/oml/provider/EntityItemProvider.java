@@ -146,11 +146,6 @@ public class EntityItemProvider extends ClassifierItemProvider {
 		newChildDescriptors.add
 			(createChildParameter
 				(OmlPackage.Literals.ENTITY__OWNED_RELATION_RESTRICTIONS,
-				 OmlFactory.eINSTANCE.createRelationRestrictionAxiom()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OmlPackage.Literals.ENTITY__OWNED_RELATION_RESTRICTIONS,
 				 OmlFactory.eINSTANCE.createRelationRangeRestrictionAxiom()));
 
 		newChildDescriptors.add

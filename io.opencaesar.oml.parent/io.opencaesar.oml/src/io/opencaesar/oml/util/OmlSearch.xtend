@@ -22,18 +22,19 @@ import io.opencaesar.oml.AnnotatedElement
 import io.opencaesar.oml.Annotation
 import io.opencaesar.oml.AnnotationProperty
 import io.opencaesar.oml.Aspect
-import io.opencaesar.oml.Bundle
-import io.opencaesar.oml.BundleExtension
-import io.opencaesar.oml.BundleInclusion
+import io.opencaesar.oml.DescriptionBox
+import io.opencaesar.oml.DescriptionBundle
+import io.opencaesar.oml.DescriptionBundleExtension
+import io.opencaesar.oml.DescriptionBundleInclusion
+import io.opencaesar.oml.Description
+import io.opencaesar.oml.DescriptionExtension
+import io.opencaesar.oml.DescriptionUsage
 import io.opencaesar.oml.Classifier
 import io.opencaesar.oml.ClassifierReference
 import io.opencaesar.oml.Concept
 import io.opencaesar.oml.ConceptInstance
 import io.opencaesar.oml.ConceptInstanceReference
 import io.opencaesar.oml.ConceptTypeAssertion
-import io.opencaesar.oml.Description
-import io.opencaesar.oml.DescriptionExtension
-import io.opencaesar.oml.DescriptionUsage
 import io.opencaesar.oml.Element
 import io.opencaesar.oml.Entity
 import io.opencaesar.oml.EntityReference
@@ -65,11 +66,14 @@ import io.opencaesar.oml.SpecializationAxiom
 import io.opencaesar.oml.Structure
 import io.opencaesar.oml.StructureInstance
 import io.opencaesar.oml.StructuredProperty
-import io.opencaesar.oml.Terminology
-import io.opencaesar.oml.TypeAssertion
+import io.opencaesar.oml.VocabularyBox
+import io.opencaesar.oml.VocabularyBundle
+import io.opencaesar.oml.VocabularyBundleExtension
+import io.opencaesar.oml.VocabularyBundleInclusion
 import io.opencaesar.oml.Vocabulary
 import io.opencaesar.oml.VocabularyExtension
 import io.opencaesar.oml.VocabularyUsage
+import io.opencaesar.oml.TypeAssertion
 import java.util.ArrayList
 import java.util.Collections
 
@@ -111,42 +115,52 @@ class OmlSearch extends OmlIndex {
 		ontology.findImportsWithTarget.map[importingOntology]
 	}
 
-	// Terminology
+	// VocabularyBox
 
-	static def Iterable<DescriptionUsage> findDescriptionUsagesWithUsedTerminology(Terminology terminology) {
-		terminology.findImportsWithTarget.filter(DescriptionUsage)
+	static def Iterable<DescriptionUsage> findDescriptionUsagesWithUsedVocabularyBox(VocabularyBox box) {
+		box.findImportsWithTarget.filter(DescriptionUsage)
 	}
 
-	static def Iterable<Description> findUsingDescriptions(Terminology terminology) {
-		terminology.findDescriptionUsagesWithUsedTerminology.map[usingDescription]
+	static def Iterable<Description> findUsingDescriptions(VocabularyBox box) {
+		box.findDescriptionUsagesWithUsedVocabularyBox.map[usingDescription]
 	}
 
 	// Vocabulary
 
-	static def Iterable<VocabularyExtension> findVocabularytExtensionsWithExtendedVocabulary(Vocabulary vocabulary) {
+	static def Iterable<VocabularyExtension> findVocabularyExtensionsWithExtendedVocabulary(Vocabulary vocabulary) {
 		vocabulary.findImportsWithTarget.filter(VocabularyExtension)
 	}
 
-	static def Iterable<Vocabulary> findExtendingVocabularies(Vocabulary vocabulary) {
-		vocabulary.findVocabularytExtensionsWithExtendedVocabulary.map[extendingVocabulary]
+	static def Iterable<Vocabulary> findExtendingVocabularys(Vocabulary vocabulary) {
+		vocabulary.findVocabularyExtensionsWithExtendedVocabulary.map[extendingVocabulary]
 	}
 
-	static def Iterable<BundleInclusion> findBundleInclusionsWithIncludedVocabulary(Vocabulary vocabulary) {
-		vocabulary.findImportsWithTarget.filter(BundleInclusion)
+	static def Iterable<VocabularyBundleInclusion> findVocabularyBundleInclusionsWithIncludedVocabulary(Vocabulary vocabulary) {
+		vocabulary.findImportsWithTarget.filter(VocabularyBundleInclusion)
 	}
 
-	static def Iterable<Bundle> findIncludingBundles(Vocabulary vocabulary) {
-		vocabulary.findBundleInclusionsWithIncludedVocabulary.map[includingBundle]
+	static def Iterable<VocabularyBundle> findIncludingVocabularyBundles(Vocabulary vocabulary) {
+		vocabulary.findVocabularyBundleInclusionsWithIncludedVocabulary.map[includingVocabularyBundle]
 	}
 
-	// Bundle
+	// VocabularyBundle
 	
-	static def Iterable<BundleExtension> findBundleExtensionsWithExtendedBundle(Bundle bundle) {
-		bundle.findImportsWithTarget.filter(BundleExtension)
+	static def Iterable<VocabularyBundleExtension> findVocabularyBundleExtensionsWithExtendedVocabularyBundle(VocabularyBundle bundle) {
+		bundle.findImportsWithTarget.filter(VocabularyBundleExtension)
 	}
 
-	static def Iterable<Bundle> findExtendingBundles(Bundle bundle) {
-		bundle.findBundleExtensionsWithExtendedBundle.map[extendingBundle]
+	static def Iterable<VocabularyBundle> findExtendingVocabularyBundles(VocabularyBundle bundle) {
+		bundle.findVocabularyBundleExtensionsWithExtendedVocabularyBundle.map[extendingVocabularyBundle]
+	}
+
+	// DescriptionBox
+
+	static def Iterable<VocabularyUsage> findVocabularyUsagesWithUsedDescriptionBox(DescriptionBox box) {
+		box.findImportsWithTarget.filter(VocabularyUsage)
+	}
+
+	static def Iterable<Vocabulary> findUsingVocabularys(DescriptionBox box) {
+		box.findVocabularyUsagesWithUsedDescriptionBox.map[usingVocabulary]
 	}
 
 	// Description
@@ -155,16 +169,26 @@ class OmlSearch extends OmlIndex {
 		description.findImportsWithTarget.filter(DescriptionExtension)
 	}
 
-	static def Iterable<Description> findExtendingDescription(Description description) {
+	static def Iterable<Description> findExtendingDescriptions(Description description) {
 		description.findDescriptionExtensionsWithExtendedDescription.map[extendingDescription]
 	}
 
-	static def Iterable<VocabularyUsage> findVocabularyUsagesWithUsedDescription(Description description) {
-		description.findImportsWithTarget.filter(VocabularyUsage)
+	static def Iterable<DescriptionBundleInclusion> findDescriptionBundleInclusionsWithIncludedDescription(Description description) {
+		description.findImportsWithTarget.filter(DescriptionBundleInclusion)
 	}
 
-	static def Iterable<Vocabulary> findUsingVocabulary(Description description) {
-		description.findVocabularyUsagesWithUsedDescription.map[usingVocabulary]
+	static def Iterable<DescriptionBundle> findIncludingDescriptionBundles(Description description) {
+		description.findDescriptionBundleInclusionsWithIncludedDescription.map[includingDescriptionBundle]
+	}
+
+	// DescriptionBundle
+	
+	static def Iterable<DescriptionBundleExtension> findDescriptionBundleExtensionsWithExtendedDescriptionBundle(DescriptionBundle bundle) {
+		bundle.findImportsWithTarget.filter(DescriptionBundleExtension)
+	}
+
+	static def Iterable<DescriptionBundle> findExtendingDescriptionBundles(DescriptionBundle bundle) {
+		bundle.findDescriptionBundleExtensionsWithExtendedDescriptionBundle.map[extendingDescriptionBundle]
 	}
 
 	// Member
@@ -444,6 +468,8 @@ class OmlSearch extends OmlIndex {
 
 	// VocabularyStatement
 	
+	// DescriptionStatement
+
 	// Import
 		
 	// VocabularyImport
@@ -452,19 +478,23 @@ class OmlSearch extends OmlIndex {
 	
 	// VocabularyUsage
 
-	// DescriptionStatement
+	// VocabularyBundleImport
 
-	// BundleImport
-
-	// BundleInclusion
+	// VocabularyBundleInclusion
 	
-	// BundleExtension
+	// VocabularyBundleExtension
 	
 	// DescriptionImport
 
 	// DescriptionUsage
 
 	// DescriptionExtension	
+
+	// DescriptionBundleImport
+
+	// DescriptionBundleInclusion
+	
+	// DescriptionBundleExtension
 
 	// Axiom
 

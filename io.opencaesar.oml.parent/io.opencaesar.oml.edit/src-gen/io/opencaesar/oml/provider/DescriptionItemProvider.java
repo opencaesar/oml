@@ -40,7 +40,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * <!-- end-user-doc -->
  * @generated
  */
-public class DescriptionItemProvider extends OntologyItemProvider {
+public class DescriptionItemProvider extends DescriptionBoxItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
@@ -157,12 +157,12 @@ public class DescriptionItemProvider extends OntologyItemProvider {
 		newChildDescriptors.add
 			(createChildParameter
 				(OmlPackage.Literals.DESCRIPTION__OWNED_IMPORTS,
-				 OmlFactory.eINSTANCE.createDescriptionUsage()));
+				 OmlFactory.eINSTANCE.createDescriptionExtension()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(OmlPackage.Literals.DESCRIPTION__OWNED_IMPORTS,
-				 OmlFactory.eINSTANCE.createDescriptionExtension()));
+				 OmlFactory.eINSTANCE.createDescriptionUsage()));
 
 		newChildDescriptors.add
 			(createChildParameter

@@ -43,7 +43,7 @@ public class OmlVisitor<T> extends OmlSwitch<T> {
 	}
 
 	@Override
-	public T caseTerminology(Terminology object) {
+	public T caseVocabularyBox(VocabularyBox object) {
 		return null;
 	}
 
@@ -53,12 +53,22 @@ public class OmlVisitor<T> extends OmlSwitch<T> {
 	}
 
 	@Override
-	public T caseBundle(Bundle object) {
+	public T caseVocabularyBundle(VocabularyBundle object) {
+		return null;
+	}
+
+	@Override
+	public T caseDescriptionBox(DescriptionBox object) {
 		return null;
 	}
 
 	@Override
 	public T caseDescription(Description object) {
+		return null;
+	}
+
+	@Override
+	public T caseDescriptionBundle(DescriptionBundle object) {
 		return null;
 	}
 
@@ -333,17 +343,17 @@ public class OmlVisitor<T> extends OmlSwitch<T> {
 	}
 
 	@Override
-	public T caseBundleImport(BundleImport object) {
+	public T caseVocabularyBundleImport(VocabularyBundleImport object) {
 		return null;
 	}
 
 	@Override
-	public T caseBundleInclusion(BundleInclusion object) {
+	public T caseVocabularyBundleInclusion(VocabularyBundleInclusion object) {
 		return null;
 	}
 
 	@Override
-	public T caseBundleExtension(BundleExtension object) {
+	public T caseVocabularyBundleExtension(VocabularyBundleExtension object) {
 		return null;
 	}
 
@@ -359,6 +369,21 @@ public class OmlVisitor<T> extends OmlSwitch<T> {
 
 	@Override
 	public T caseDescriptionExtension(DescriptionExtension object) {
+		return null;
+	}
+
+	@Override
+	public T caseDescriptionBundleImport(DescriptionBundleImport object) {
+		return null;
+	}
+
+	@Override
+	public T caseDescriptionBundleInclusion(DescriptionBundleInclusion object) {
+		return null;
+	}
+
+	@Override
+	public T caseDescriptionBundleExtension(DescriptionBundleExtension object) {
 		return null;
 	}
 

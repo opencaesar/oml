@@ -18,17 +18,22 @@
  */
 package io.opencaesar.oml.util
 
+import com.google.common.collect.HashBasedTable
 import io.opencaesar.oml.Annotation
 import io.opencaesar.oml.AnnotationProperty
 import io.opencaesar.oml.AnnotationPropertyReference
 import io.opencaesar.oml.Aspect
 import io.opencaesar.oml.AspectReference
 import io.opencaesar.oml.Assertion
+import io.opencaesar.oml.DescriptionBundle
+import io.opencaesar.oml.DescriptionBundleExtension
+import io.opencaesar.oml.DescriptionBundleInclusion
+import io.opencaesar.oml.Description
+import io.opencaesar.oml.DescriptionExtension
+import io.opencaesar.oml.DescriptionStatement
+import io.opencaesar.oml.DescriptionUsage
 import io.opencaesar.oml.Axiom
 import io.opencaesar.oml.BooleanLiteral
-import io.opencaesar.oml.Bundle
-import io.opencaesar.oml.BundleExtension
-import io.opencaesar.oml.BundleInclusion
 import io.opencaesar.oml.CardinalityRestrictionKind
 import io.opencaesar.oml.Classifier
 import io.opencaesar.oml.ClassifierReference
@@ -38,10 +43,6 @@ import io.opencaesar.oml.ConceptInstanceReference
 import io.opencaesar.oml.ConceptReference
 import io.opencaesar.oml.ConceptTypeAssertion
 import io.opencaesar.oml.DecimalLiteral
-import io.opencaesar.oml.Description
-import io.opencaesar.oml.DescriptionExtension
-import io.opencaesar.oml.DescriptionStatement
-import io.opencaesar.oml.DescriptionUsage
 import io.opencaesar.oml.DifferentFromPredicate
 import io.opencaesar.oml.DoubleLiteral
 import io.opencaesar.oml.Element
@@ -102,21 +103,20 @@ import io.opencaesar.oml.StructuredPropertyRangeRestrictionAxiom
 import io.opencaesar.oml.StructuredPropertyReference
 import io.opencaesar.oml.StructuredPropertyValueAssertion
 import io.opencaesar.oml.StructuredPropertyValueRestrictionAxiom
+import io.opencaesar.oml.VocabularyBundle
+import io.opencaesar.oml.VocabularyBundleExtension
+import io.opencaesar.oml.VocabularyBundleInclusion
 import io.opencaesar.oml.Vocabulary
 import io.opencaesar.oml.VocabularyExtension
 import io.opencaesar.oml.VocabularyStatement
 import io.opencaesar.oml.VocabularyUsage
 import java.math.BigDecimal
 import java.util.ArrayList
-import java.util.HashMap
 import java.util.HashSet
 import java.util.Map
-import org.eclipse.emf.common.notify.Notification
 import org.eclipse.emf.common.util.URI
-import org.eclipse.emf.ecore.EReference
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.resource.ResourceSet
-import org.eclipse.emf.ecore.util.EContentAdapter
 import org.eclipse.emf.ecore.util.EcoreUtil
 
 import static extension io.opencaesar.oml.util.OmlRead.*
@@ -125,45 +125,48 @@ class OmlWriter {
 	
 	val ResourceSet resourceSet
 	val newResources = new HashSet<Resource>
-	val cache = new HashMap<String, IdentifiedElement>
 	val defer = new ArrayList<Runnable>
 	
 	new(ResourceSet resourceSet) {
 		this.resourceSet = resourceSet
-		resourceSet.eAdapters += new EContentAdapter {
-  			override notifyChanged(Notification n) {
-  				super.notifyChanged(n)
-  				if (n.eventType == Notification.SET || n.eventType == Notification.ADD) {
-	  				if (n.newValue instanceof IdentifiedElement) { 
-						val element = n.newValue as IdentifiedElement
-	  					if (n.feature === null) {
-	  						if (element instanceof Ontology) {
-				  				cache.put(element.iri, element)
-		  						element.members.forEach[member|
-			  						cache.put(member.iri, member)
-			  					]
-	  						}
-	  					} else if ((n.feature as EReference).containment) {
-							cache.put(element.iri, element)
-						}
-	  				} 
-	  			}
-  			}
-		}
 	}
-
+	
+	static val table  = HashBasedTable.create
+	
+	protected def <T extends IdentifiedElement> resolve(Class<T> type, Ontology context, String iri) {
+		var element = table.get(context, iri)
+		if (element === null) {
+			var i = iri.lastIndexOf('#')
+			val baseIri = if (i > 0) {
+				iri.substring(0, i)			
+			} else {
+				i = iri.lastIndexOf('/')
+				iri.substring(0, i)			
+			}
+			val fragment = if (i > 0) {
+				iri.substring(i+1)			
+			} else {
+				i = iri.lastIndexOf('/')
+				iri.substring(i+1)			
+			}
+			val resource = if (context.iri == baseIri) {
+				context.eResource
+			} else {
+				context.getImportedOntologyByIri(baseIri)?.eResource
+			}
+			element = resource.getEObject(fragment)
+			if (element === null) {
+				throw new RuntimeException("could not resolve "+iri+" in context of "+context.iri)
+			}
+			table.put(context, iri, element)
+		}
+		return element as T
+	}
+	
 	protected def <T extends Element> create(Class<T> type) {
 		return OmlWrite.INSTANCE.create(type)
 	}
 
-	protected def <T extends IdentifiedElement> resolve(Class<T> type, String iri) {
-		val element = cache.get(iri)
-		if (element === null) {
-			throw new RuntimeException("could not resolve iri "+iri)
-		} 
-		return element as T
-	}
-	
 	protected def <T extends Reference> T getOrAddReference(Ontology ontology, Member member, Class<T> type) {
 		var reference = ontology.references.findFirst[resolve == member] as T
 		if (reference === null) {
@@ -203,7 +206,7 @@ class OmlWriter {
 
 	def addAnnotation(Ontology ontology, String propertyIri, Literal value) {
 		val annotation = create(Annotation)
-		defer.add [annotation.property = resolve(AnnotationProperty, propertyIri)]
+		defer.add [annotation.property = resolve(AnnotationProperty, ontology, propertyIri)]
 		annotation.value = value
 		ontology.ownedAnnotations += annotation
 		return annotation
@@ -211,10 +214,10 @@ class OmlWriter {
 
 	def addAnnotation(Ontology ontology, String memberIri, String propertyIri, Literal value) {
 		val annotation = create(Annotation)
-		defer.add [annotation.property = resolve(AnnotationProperty, propertyIri)]
+		defer.add [annotation.property = resolve(AnnotationProperty, ontology, propertyIri)]
 		annotation.value = value
 		defer.add [
-			val member = resolve(Member, memberIri)
+			val member = resolve(Member, ontology, memberIri)
 			if (member.ontology == ontology) {
 				member.ownedAnnotations += annotation
 			} else {
@@ -226,7 +229,7 @@ class OmlWriter {
 
 	def addAnnotation(Axiom axiom, String propertyIri, Literal value) {
 		val annotation = create(Annotation)
-		defer.add [annotation.property = resolve(AnnotationProperty, propertyIri)]
+		defer.add [annotation.property = resolve(AnnotationProperty, axiom.ontology, propertyIri)]
 		annotation.value = value
 		axiom.ownedAnnotations += annotation
 		return annotation
@@ -234,7 +237,7 @@ class OmlWriter {
 
 	def addAnnotation(Assertion assertion, String propertyIri, Literal value) {
 		val annotation = create(Annotation)
-		defer.add [annotation.property = resolve(AnnotationProperty, propertyIri)]
+		defer.add [annotation.property = resolve(AnnotationProperty, assertion.ontology, propertyIri)]
 		annotation.value = value
 		assertion.ownedAnnotations += annotation
 		return annotation
@@ -257,16 +260,22 @@ class OmlWriter {
 		return createOntology(Vocabulary, iri, separator, name, resourceURI)
 	}
 
-	// Bundle
+	// VocabularyBundle
 	
-	def createBundle(String iri, SeparatorKind separator, String name, URI resourceURI) {
-		return createOntology(Bundle, iri, separator, name, resourceURI)
+	def createVocabularyBundle(String iri, SeparatorKind separator, String name, URI resourceURI) {
+		return createOntology(VocabularyBundle, iri, separator, name, resourceURI)
 	}
 
 	// Description
 	
 	def createDescription(String iri, SeparatorKind separator, String name, URI resourceURI) {
 		return createOntology(Description, iri, separator, name, resourceURI)
+	}
+
+	// DescriptionBundle
+	
+	def createDescriptionBundle(String iri, SeparatorKind separator, String name, URI resourceURI) {
+		return createOntology(DescriptionBundle, iri, separator, name, resourceURI)
 	}
 
 	// Aspect
@@ -294,8 +303,8 @@ class OmlWriter {
 		boolean asymmetric, boolean reflexive, boolean irreflexive, boolean transitive) {
 		val relation = create(RelationEntity)
 		relation.name = name
-		defer.add [relation.source = resolve(Entity, sourceIri)]
-		defer.add [relation.target = resolve(Entity, targetIri)]
+		defer.add [relation.source = resolve(Entity, vocabulary, sourceIri)]
+		defer.add [relation.target = resolve(Entity, vocabulary, targetIri)]
 		relation.functional = functional
 		relation.inverseFunctional = inverseFunctional
 		relation.symmetric = symmetric
@@ -331,8 +340,8 @@ class OmlWriter {
 		String domainIri, String rangeIri, boolean functional) {
 		val property = create(ScalarProperty)
 		property.name = name
-		defer.add [property.domain = resolve(Classifier, domainIri)]
-		defer.add [property.range = resolve(Scalar, rangeIri)]
+		defer.add [property.domain = resolve(Classifier, vocabulary, domainIri)]
+		defer.add [property.range = resolve(Scalar, vocabulary, rangeIri)]
 		property.functional = functional
 		vocabulary.ownedStatements += property
 		return property
@@ -344,8 +353,8 @@ class OmlWriter {
 		String domainIri, String rangeIri, boolean functional) {
 		val property = create(StructuredProperty)
 		property.name = name
-		defer.add [property.domain = resolve(Classifier, domainIri)]
-		defer.add [property.range = resolve(Structure, rangeIri)]
+		defer.add [property.domain = resolve(Classifier, vocabulary, domainIri)]
+		defer.add [property.range = resolve(Structure, vocabulary, rangeIri)]
 		property.functional = functional
 		vocabulary.ownedStatements += property
 		return property
@@ -411,9 +420,9 @@ class OmlWriter {
 	
 	// StructureInstance
 
-	def createStructureInstance(String structureIri) {
+	def createStructureInstance(Ontology ontology, String structureIri) {
 		val instance = create(StructureInstance)
-		defer.add [instance.type = resolve(Structure, structureIri)]
+		defer.add [instance.type = resolve(Structure, ontology, structureIri)]
 		return instance
 	}
 	
@@ -431,8 +440,8 @@ class OmlWriter {
 	def addRelationInstance(Description description, String name, String sourceIri, String targetIri) {
 		val instance = create(RelationInstance)
 		instance.name = name
-		defer.add [instance.source = resolve(NamedInstance, sourceIri)]
-		defer.add [instance.target = resolve(NamedInstance, targetIri)]
+		defer.add [instance.source = resolve(NamedInstance, description, sourceIri)]
+		defer.add [instance.target = resolve(NamedInstance, description, targetIri)]
 		description.ownedStatements += instance
 		return instance
 	}
@@ -553,61 +562,81 @@ class OmlWriter {
 
 	// VocabularyUsage
 	
-	def addVocabularyUsage(Vocabulary vocabulary, String usingVocabularyURI, String usedDescriptionPrefix) {
-		val _extension = create(VocabularyUsage)
-		_extension.uri = usingVocabularyURI
-		_extension.prefix = usedDescriptionPrefix
-		vocabulary.ownedImports += _extension
+	def addVocabularyUsage(Vocabulary vocabulary, String usedDescriptionBoxURI, String usedDescriptionBoxPrefix) {
+		val usage = create(VocabularyUsage)
+		usage.uri = usedDescriptionBoxURI
+		usage.prefix = usedDescriptionBoxPrefix
+		vocabulary.ownedImports += usage
+		return usage
+	}
+
+	// VocabularyBundleExtension
+	
+	def addVocabularyBundleExtension(VocabularyBundle bundle, String extenedVocabularyBundleURI, String extenedVocabularyBundlePrefix) {
+		val _extension = create(VocabularyBundleExtension)
+		_extension.uri = extenedVocabularyBundleURI
+		_extension.prefix = extenedVocabularyBundlePrefix
+		bundle.ownedImports += _extension
 		return _extension
 	}
 
-	// BundleInclusion
+	// VocabularyBundleInclusion
 	
-	def addBundleInclusion(Bundle bundle, String includedVocabularyURI, String includedVocabularyPrefix) {
-		val inclusion = create(BundleInclusion)
+	def addVocabularyBundleInclusion(VocabularyBundle bundle, String includedVocabularyURI, String includedVocabularyPrefix) {
+		val inclusion = create(VocabularyBundleInclusion)
 		inclusion.uri = includedVocabularyURI
 		inclusion.prefix = includedVocabularyPrefix
 		bundle.ownedImports += inclusion
 		return inclusion
 	}
 
-	// BundleExtension
-	
-	def addBundleExtension(Bundle bundle, String extenedBundleURI, String extenedBundlePrefix) {
-		val _extension = create(BundleExtension)
-		_extension.uri = extenedBundleURI
-		_extension.prefix = extenedBundlePrefix
-		bundle.ownedImports += _extension
-		return _extension
-	}
+	// DescriptionExtension
 
-	// DescriptionUsage
-
-	def addDescriptionUsage(Description description, String extenedTerminologyURI, String extenedTerminologyPrefix) {
-		val usage = create(DescriptionUsage)
-		usage.uri = extenedTerminologyURI
-		usage.prefix = extenedTerminologyPrefix
-		description.ownedImports += usage
-		return usage
-	}
-	
-	// DescriptionExtension	
-
-	def addDescriptionExtension(Description description, String extenedDescriptionURI, String extenedDescriptionPrefix) {
+	def addDescriptionExtension(Description description, String extenedAssertionURI, String extenedAssertionPrefix) {
 		val _extension = create(DescriptionExtension)
-		_extension.uri = extenedDescriptionURI
-		_extension.prefix = extenedDescriptionPrefix
+		_extension.uri = extenedAssertionURI
+		_extension.prefix = extenedAssertionPrefix
 		description.ownedImports += _extension
 		return _extension
 	}
 	
+	// DescriptionUsage
+
+	def addDescriptionUsage(Description description, String usedVocabularyBoxURI, String usedVocabularyBoxPrefix) {
+		val usage = create(DescriptionUsage)
+		usage.uri = usedVocabularyBoxURI
+		usage.prefix = usedVocabularyBoxPrefix
+		description.ownedImports += usage
+		return usage
+	}
+	
+	// DescriptionBundleExtension
+	
+	def addDescriptionBundleExtension(DescriptionBundle bundle, String extenedDescriptionBundleURI, String extenedDescriptionBundlePrefix) {
+		val _extension = create(DescriptionBundleExtension)
+		_extension.uri = extenedDescriptionBundleURI
+		_extension.prefix = extenedDescriptionBundlePrefix
+		bundle.ownedImports += _extension
+		return _extension
+	}
+
+	// DescriptionBundleInclusion
+	
+	def addDescriptionBundleInclusion(DescriptionBundle bundle, String includedAssertionURI, String includedAssertionPrefix) {
+		val inclusion = create(DescriptionBundleInclusion)
+		inclusion.uri = includedAssertionURI
+		inclusion.prefix = includedAssertionPrefix
+		bundle.ownedImports += inclusion
+		return inclusion
+	}
+
 	// SpecializationAxiom
 
 	def addSpecializationAxiom(Vocabulary vocabulary, String specializingIri, String specializedIri) {
 		val axiom = create(SpecializationAxiom)
-		defer.add [axiom.specializedTerm = resolve(SpecializableTerm, specializedIri)]
+		defer.add [axiom.specializedTerm = resolve(SpecializableTerm, vocabulary, specializedIri)]
 		defer.add [
-			val specializing = resolve(SpecializableTerm, specializingIri)
+			val specializing = resolve(SpecializableTerm, vocabulary, specializingIri)
 			if (specializing.vocabulary == vocabulary) {
 				specializing.ownedSpecializations += axiom
 			} else {
@@ -622,10 +651,10 @@ class OmlWriter {
 	def addScalarPropertyRangeRestrictionAxiom(Vocabulary vocabulary, String typeIri, String propertyIri, String rangeIri, RangeRestrictionKind kind) {
 		val axiom = create(ScalarPropertyRangeRestrictionAxiom)
 		axiom.kind = kind
-		defer.add [axiom.property = resolve(ScalarProperty, propertyIri)]
-		defer.add [axiom.range = resolve(Scalar, rangeIri)]
+		defer.add [axiom.property = resolve(ScalarProperty, vocabulary, propertyIri)]
+		defer.add [axiom.range = resolve(Scalar, vocabulary, rangeIri)]
 		defer.add [
-			val type = resolve(Classifier, typeIri)
+			val type = resolve(Classifier, vocabulary, typeIri)
 			if (type.vocabulary == vocabulary) {
 				type.ownedPropertyRestrictions += axiom
 			} else {
@@ -639,12 +668,12 @@ class OmlWriter {
 
 	def addScalarPropertyCardinalityRestrictionAxiom(Vocabulary vocabulary, String entityIri, String propertyIri, CardinalityRestrictionKind kind, long cardinality, String rangeIri) {
 		val axiom = create(ScalarPropertyCardinalityRestrictionAxiom)
-		defer.add [axiom.property = resolve(ScalarProperty, propertyIri)]
+		defer.add [axiom.property = resolve(ScalarProperty, vocabulary, propertyIri)]
 		axiom.kind = kind
 		axiom.cardinality = cardinality
-		defer.add [axiom.range = resolve(Scalar, rangeIri)]
+		defer.add [axiom.range = resolve(Scalar, vocabulary, rangeIri)]
 		defer.add [
-			val entity = resolve(Entity, entityIri)
+			val entity = resolve(Entity, vocabulary, entityIri)
 			if (entity.vocabulary == vocabulary) {
 				entity.ownedPropertyRestrictions += axiom
 			} else {
@@ -658,10 +687,10 @@ class OmlWriter {
 
 	def addScalarPropertyValueRestrictionAxiom(Vocabulary vocabulary, String typeIri, String propertyIri, Literal value) {
 		val axiom = create(ScalarPropertyValueRestrictionAxiom)
-		defer.add [axiom.property = resolve(ScalarProperty, propertyIri)]
+		defer.add [axiom.property = resolve(ScalarProperty, vocabulary, propertyIri)]
 		axiom.value = value
 		defer.add [
-			val type = resolve(Classifier, typeIri)
+			val type = resolve(Classifier, vocabulary, typeIri)
 			if (type.vocabulary == vocabulary) {
 				type.ownedPropertyRestrictions += axiom
 			} else {
@@ -676,10 +705,10 @@ class OmlWriter {
 	def addStructuredPropertyRangeRestrictionAxiom(Vocabulary vocabulary, String typeIri, String propertyIri, String rangeIri, RangeRestrictionKind kind) {
 		val axiom = create(StructuredPropertyRangeRestrictionAxiom)
 		axiom.kind = kind
-		defer.add [axiom.property = resolve(StructuredProperty, propertyIri)]
-		defer.add [axiom.range = resolve(Structure, rangeIri)]
+		defer.add [axiom.property = resolve(StructuredProperty, vocabulary, propertyIri)]
+		defer.add [axiom.range = resolve(Structure, vocabulary, rangeIri)]
 		defer.add [
-			val type = resolve(Classifier, typeIri)
+			val type = resolve(Classifier, vocabulary, typeIri)
 			if (type.vocabulary == vocabulary) {
 				type.ownedPropertyRestrictions += axiom
 			} else {
@@ -693,12 +722,12 @@ class OmlWriter {
 
 	def addStructuredPropertyCardinalityRestrictionAxiom(Vocabulary vocabulary, String entityIri, String propertyIri, CardinalityRestrictionKind kind, long cardinality, String rangeIri) {
 		val axiom = create(StructuredPropertyCardinalityRestrictionAxiom)
-		defer.add [axiom.property = resolve(StructuredProperty, propertyIri)]
+		defer.add [axiom.property = resolve(StructuredProperty, vocabulary, propertyIri)]
 		axiom.kind = kind
 		axiom.cardinality = cardinality
-		defer.add [axiom.range = resolve(Structure, rangeIri)]
+		defer.add [axiom.range = resolve(Structure, vocabulary, rangeIri)]
 		defer.add [
-			val entity = resolve(Entity, entityIri)
+			val entity = resolve(Entity, vocabulary, entityIri)
 			if (entity.vocabulary == vocabulary) {
 				entity.ownedPropertyRestrictions += axiom
 			} else {
@@ -712,10 +741,10 @@ class OmlWriter {
 	
 	def addStructuredPropertyValueRestrictionAxiom(Vocabulary vocabulary, String typeIri, String propertyIri, StructureInstance value) {
 		val axiom = create(StructuredPropertyValueRestrictionAxiom)
-		defer.add [axiom.property = resolve(StructuredProperty, propertyIri)]
+		defer.add [axiom.property = resolve(StructuredProperty, vocabulary, propertyIri)]
 		axiom.value = value
 		defer.add [
-			val type = resolve(Classifier, typeIri)
+			val type = resolve(Classifier, vocabulary, typeIri)
 			if (type.vocabulary == vocabulary) {
 				type.ownedPropertyRestrictions += axiom
 			} else {
@@ -730,10 +759,10 @@ class OmlWriter {
 	def addRelationRangeRestrictionAxiom(Vocabulary vocabulary, String entityIri, String relationIri, String rangeIri, RangeRestrictionKind kind) {
 		val axiom = create(RelationRangeRestrictionAxiom)
 		axiom.kind = kind
-		defer.add [axiom.relation = resolve(Relation, relationIri)]
-		defer.add [axiom.range = resolve(Entity, rangeIri)]
+		defer.add [axiom.relation = resolve(Relation, vocabulary, relationIri)]
+		defer.add [axiom.range = resolve(Entity, vocabulary, rangeIri)]
 		defer.add [
-			val entity = resolve(Entity, entityIri)
+			val entity = resolve(Entity, vocabulary, entityIri)
 			if (entity.vocabulary == vocabulary) {
 				entity.ownedRelationRestrictions += axiom
 			} else {
@@ -747,12 +776,12 @@ class OmlWriter {
 
 	def addRelationCardinalityRestrictionAxiom(Vocabulary vocabulary, String entityIri, String relationIri, CardinalityRestrictionKind kind, long cardinality, String rangeIri) {
 		val axiom = create(RelationCardinalityRestrictionAxiom)
-		defer.add [axiom.relation = resolve(Relation, relationIri)]
+		defer.add [axiom.relation = resolve(Relation, vocabulary, relationIri)]
 		axiom.kind = kind
 		axiom.cardinality = cardinality
-		defer.add [axiom.range = resolve(Entity, rangeIri)]
+		defer.add [axiom.range = resolve(Entity, vocabulary, rangeIri)]
 		defer.add [
-			val entity = resolve(Entity, entityIri)
+			val entity = resolve(Entity, vocabulary, entityIri)
 			if (entity.vocabulary == vocabulary) {
 				entity.ownedRelationRestrictions += axiom
 			} else {
@@ -766,10 +795,10 @@ class OmlWriter {
 	
 	def addRelationTargetRestrictionAxiom(Vocabulary vocabulary, String entityIri, String relationIri, NamedInstance target) {
 		val axiom = create(RelationTargetRestrictionAxiom)
-		defer.add [axiom.relation = resolve(Relation, relationIri)]
+		defer.add [axiom.relation = resolve(Relation, vocabulary, relationIri)]
 		axiom.target = target
 		defer.add [
-			val entity = resolve(Entity, entityIri)
+			val entity = resolve(Entity, vocabulary, entityIri)
 			if (entity.vocabulary == vocabulary) {
 				entity.ownedRelationRestrictions += axiom
 			} else {
@@ -783,9 +812,9 @@ class OmlWriter {
 
 	def addKeyAxiom(Vocabulary vocabulary, String entityIri, Iterable<String> keyPropertyIris) {
 		val axiom = create(KeyAxiom)
-		defer.add [ axiom.properties += keyPropertyIris.map[iri|resolve(ScalarProperty, iri)]]
+		defer.add [ axiom.properties += keyPropertyIris.map[iri|resolve(ScalarProperty, vocabulary, iri)]]
 		defer.add [
-			val entity = resolve(Entity, entityIri)
+			val entity = resolve(Entity, vocabulary, entityIri)
 			if (entity.vocabulary == vocabulary) {
 				entity.ownedKeys += axiom
 			} else {
@@ -799,9 +828,9 @@ class OmlWriter {
 	
 	def addConceptTypeAssertion(Description description, String instanceIri, String typeIri) {
 		val axiom = create(ConceptTypeAssertion)
-		defer.add [axiom.type = resolve(Concept, typeIri)]
+		defer.add [axiom.type = resolve(Concept, description, typeIri)]
 		defer.add [
-			val instance = resolve(ConceptInstance, instanceIri)
+			val instance = resolve(ConceptInstance, description, instanceIri)
 			if (instance.description == description) {
 				instance.ownedTypes += axiom
 			} else {
@@ -815,9 +844,9 @@ class OmlWriter {
 
 	def addRelationTypeAssertion(Description description, String instanceIri, String typeIri) {
 		val axiom = create(RelationTypeAssertion)
-		defer.add [axiom.type = resolve(RelationEntity, typeIri)]
+		defer.add [axiom.type = resolve(RelationEntity, description, typeIri)]
 		defer.add [
-			val instance = resolve(RelationInstance, instanceIri)
+			val instance = resolve(RelationInstance, description, instanceIri)
 			if (instance.description == description) {
 				instance.ownedTypes += axiom
 			} else {
@@ -831,10 +860,10 @@ class OmlWriter {
 
 	def addScalarPropertyValueAssertion(Description description, String instanceIri, String propertyIri, Literal value) {
 		val assertion = create(ScalarPropertyValueAssertion)
-		defer.add [assertion.property = resolve(ScalarProperty, propertyIri)]
+		defer.add [assertion.property = resolve(ScalarProperty, description, propertyIri)]
 		assertion.value = value
 		defer.add [		
-			val instance = resolve(NamedInstance, instanceIri)
+			val instance = resolve(NamedInstance, description, instanceIri)
 			if (instance.description == description) {
 				instance.ownedPropertyValues += assertion
 			} else {
@@ -846,7 +875,7 @@ class OmlWriter {
 
 	def addScalarPropertyValueAssertion(Description description, StructureInstance instance, String propertyIri, Literal value) {
 		val assertion = create(ScalarPropertyValueAssertion)
-		defer.add [assertion.property = resolve(ScalarProperty, propertyIri)]
+		defer.add [assertion.property = resolve(ScalarProperty, description, propertyIri)]
 		assertion.value = value
 		instance.ownedPropertyValues += assertion
 		return assertion
@@ -857,9 +886,9 @@ class OmlWriter {
 	def addStructuredPropertyValueAssertion(Description description, String instanceIri, String propertyIri, StructureInstance value) {
 		val assertion = create(StructuredPropertyValueAssertion)
 		assertion.value = value
-		defer.add [assertion.property = resolve(StructuredProperty, propertyIri)]
+		defer.add [assertion.property = resolve(StructuredProperty, description, propertyIri)]
 		defer.add [
-			val instance = resolve(NamedInstance, instanceIri)
+			val instance = resolve(NamedInstance, description, instanceIri)
 			if (instance.description == description) {
 				instance.ownedPropertyValues += assertion
 			} else {
@@ -871,7 +900,7 @@ class OmlWriter {
 
 	def addStructuredPropertyValueAssertion(StructureInstance instance, String propertyIri, StructureInstance value) {
 		val assertion = create(StructuredPropertyValueAssertion)
-		defer.add [assertion.property = resolve(StructuredProperty, propertyIri)]
+		defer.add [assertion.property = resolve(StructuredProperty, instance.ontology, propertyIri)]
 		assertion.value = value
 		instance.ownedPropertyValues += assertion
 		return assertion
@@ -881,10 +910,10 @@ class OmlWriter {
 		
 	def addLinkAssertion(Description description, String instanceIri, String relationIri, String targetIri) {
 		val assertion = create(LinkAssertion)
-		defer.add [assertion.relation = resolve(Relation, relationIri)]
-		defer.add [assertion.target = resolve(NamedInstance, targetIri)]
+		defer.add [assertion.relation = resolve(Relation, description, relationIri)]
+		defer.add [assertion.target = resolve(NamedInstance, description, targetIri)]
 		defer.add [
-			val instance = resolve(NamedInstance, instanceIri)
+			val instance = resolve(NamedInstance, description, instanceIri)
 			if (instance.description == description) {
 				instance.ownedLinks += assertion
 			} else {
@@ -896,18 +925,18 @@ class OmlWriter {
 
 	// EntityPredicate
 
-	def createEntityPredicate(String entityIri, String variable) {
+	def createEntityPredicate(Vocabulary vocabulary, String entityIri, String variable) {
 		val predicate = create(EntityPredicate)
-		defer.add [predicate.entity = resolve(Entity, entityIri)]
+		defer.add [predicate.entity = resolve(Entity, vocabulary, entityIri)]
 		predicate.variable = variable
 		return predicate
 	}
 	
 	// RelationPredicate
 
-	def createRelationPredicate(String relationIri, String variable1, String variable2) {
+	def createRelationPredicate(Vocabulary vocabulary, String relationIri, String variable1, String variable2) {
 		val predicate = create(RelationPredicate)
-		defer.add [predicate.relation = resolve(Relation, relationIri)]
+		defer.add [predicate.relation = resolve(Relation, vocabulary, relationIri)]
 		predicate.variable1 = variable1
 		predicate.variable2 = variable2
 		return predicate
@@ -915,7 +944,7 @@ class OmlWriter {
 		
 	// SameAsPredicate
 
-	def createSameAsPredicate(String variable1, String variable2) {
+	def createSameAsPredicate(Vocabulary vocabulary, String variable1, String variable2) {
 		val predicate = create(SameAsPredicate)
 		predicate.variable1 = variable1
 		predicate.variable2 = variable2
@@ -924,7 +953,7 @@ class OmlWriter {
 
 	// DifferentFromPredicate
 
-	def createDifferentFromPredicate(String variable1, String variable2) {
+	def createDifferentFromPredicate(Vocabulary vocabulary, String variable1, String variable2) {
 		val predicate = create(DifferentFromPredicate)
 		predicate.variable1 = variable1
 		predicate.variable2 = variable2
@@ -933,9 +962,9 @@ class OmlWriter {
 
 	// RelationEntityPredicate
 
-	def createRelationEntityPredicate(String entityIri, String variable1, String entityVariable, String variable2) {
+	def createRelationEntityPredicate(Vocabulary vocabulary, String entityIri, String variable1, String entityVariable, String variable2) {
 		val predicate = create(RelationEntityPredicate)
-		defer.add [predicate.entity = resolve(RelationEntity, entityIri)]
+		defer.add [predicate.entity = resolve(RelationEntity, vocabulary, entityIri)]
 		predicate.variable1 = variable1
 		predicate.entityVariable = entityVariable
 		predicate.variable2 = variable2
@@ -944,11 +973,11 @@ class OmlWriter {
 
 	// QuotedLiteral
 
-	def createQuotedLiteral(String value, String typeIri, String langTag) {
+	def createQuotedLiteral(Ontology ontology, String value, String typeIri, String langTag) {
 		val literal = create(QuotedLiteral)
 		literal.value = value
 		if (typeIri !== null) {
-			defer.add [literal.type = resolve(Scalar, typeIri)]
+			defer.add [literal.type = resolve(Scalar, ontology, typeIri)]
 		} else if (langTag !== null) {
 			literal.langTag = langTag
 		}
@@ -957,44 +986,44 @@ class OmlWriter {
 		
 	// IntegerLiteral
 
-	def createIntegerLiteral(int value, String typeIri) {
+	def createIntegerLiteral(Ontology ontology, int value, String typeIri) {
 		val literal = create(IntegerLiteral)
 		literal.value = value
 		if (typeIri !== null) {
-			defer.add [literal.type = resolve(Scalar, typeIri)]
+			defer.add [literal.type = resolve(Scalar, ontology, typeIri)]
 		}
 		return literal
 	}
 		
 	// DecimalLiteral
 
-	def createDecimalLiteral(BigDecimal value, String typeIri) {
+	def createDecimalLiteral(Ontology ontology, BigDecimal value, String typeIri) {
 		val literal = create(DecimalLiteral)
 		literal.value = value
 		if (typeIri !== null) {
-			defer.add [literal.type = resolve(Scalar, typeIri)]
+			defer.add [literal.type = resolve(Scalar, ontology, typeIri)]
 		}
 		return literal
 	}
 
 	// DoubleLiteral
 
-	def createDoubleLiteral(double value, String typeIri) {
+	def createDoubleLiteral(Ontology ontology, double value, String typeIri) {
 		val literal = create(DoubleLiteral)
 		literal.value = value
 		if (typeIri !== null) {
-			defer.add [literal.type = resolve(Scalar, typeIri)]
+			defer.add [literal.type = resolve(Scalar, ontology, typeIri)]
 		}
 		return literal
 	}
 
 	// BooleanLiteral
 	
-	def createBooleanLiteral(boolean value, String typeIri) {
+	def createBooleanLiteral(Ontology ontology, boolean value, String typeIri) {
 		val literal = create(BooleanLiteral)
 		literal.value = value
 		if (typeIri !== null) {
-			defer.add [literal.type = resolve(Scalar, typeIri)]
+			defer.add [literal.type = resolve(Scalar, ontology, typeIri)]
 		}
 		return literal
 	}

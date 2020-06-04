@@ -100,7 +100,7 @@ extends <a href="#Vocabulary-Syntax">Vocabulary_IRI</a> (as PREFIX)?
 
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
-uses <a href="#Description-Syntax">Description_IRI</a> (as PREFIX)?
+uses (<a href="#Description-Syntax">Description_IRI</a> | <a href="#DescriptionBundle-Syntax">DescriptionBundle_IRI</a>) (as PREFIX)?
  </pre> 	
 
 ### [=Aspect=] ### {#Aspect-Syntax}
@@ -443,29 +443,29 @@ restricts relation (<a href="#ForwardRelation-Syntax">ForwardRelation_IRI</a> | 
 key <a href="#ScalarProperty-Syntax">ScalarProperty_IRI</a> (, <a href="#ScalarProperty-Syntax">ScalarProperty_IRI</a>)*
 </pre>
 
-## Bundles ## {#Bundles-Syntax}
+## Vocabulary Bundles ## {#VocabularyBundles-Syntax}
 
-### [=Bundle=] ### {#Bundle-Syntax}
+### [=VocabularyBundle=] ### {#VocabularyBundle-Syntax}
 
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
-bundle IRI with (# | /) as PREFIX {
-	(<a href="BundleExtension-Syntax">BundleExtension</a> | <a href="#BundleInclusion-Syntax">BundleInclusion</a>)*
+vocabulary bundle IRI with (# | /) as PREFIX {
+	(<a href="VocabularyBundleExtension-Syntax">VocabularyBundleExtension</a> | <a href="#VocabularyBundleInclusion-Syntax">VocabularyBundleInclusion</a>)*
 }
 </pre>
 
-### [=BundleInclusion=] ### {#BundleInclusion-Syntax}
+### [=VocabularyBundleExtension=] ### {#VocabularyBundleExtension-Syntax}
+
+<pre class="highlight highlight-html">
+(<a href="#Annotation-Syntax">Annotation</a>)*
+extends <a href="#VocabularyBundle-Syntax">VocabularyBundle_IRI</a> (as PREFIX)?
+</pre>
+
+### [=VocabularyBundleInclusion=] ### {#VocabularyBundleInclusion-Syntax}
 
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
 includes <a href="#Vocabulary-Syntax">Vocabulary_IRI</a> (as PREFIX)?
-</pre>
-
-### [=BundleExtension=] ### {#BundleExtension-Syntax}
-
-<pre class="highlight highlight-html">
-(<a href="#Annotation-Syntax">Annotation</a>)*
-extends <a href="#Bundle-Syntax">Bundle_IRI</a> (as PREFIX)?
 </pre>
 
 ## Descriptions ## {#Descriptions-Syntax-Syntax}
@@ -480,18 +480,18 @@ description IRI with (# | /) as PREFIX {
 }
 </pre>
 
-### [=DescriptionUsage=] ### {#DescriptionUsage-Syntax}
-
-<pre class="highlight highlight-html">
-(<a href="#Annotation-Syntax">Annotation</a>)*
-uses (<a href="#Vocabulary-Syntax">Vocabulary_IRI</a> | <a href="#Bundle-Syntax">Bundle_IRI</a>) (as PREFIX)?
-</pre>
-
 ### [=DescriptionExtension=] ### {#DescriptionExtension-Syntax}
 
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
 extends <a href="#Description-Syntax">Description_IRI</a> (as PREFIX)?
+</pre>
+
+### [=DescriptionUsage=] ### {#DescriptionUsage-Syntax}
+
+<pre class="highlight highlight-html">
+(<a href="#Annotation-Syntax">Annotation</a>)*
+uses (<a href="#Vocabulary-Syntax">Vocabulary_IRI</a> | <a href="#VocabularyBundle-Syntax">VocabularyBundle_IRI</a>) (as PREFIX)?
 </pre>
 
 ### [=ConceptInstance=] ### {#ConceptInstance-Syntax}
@@ -578,4 +578,29 @@ ref ri <a href="#RelationInstance-Syntax">RelationInstance_IRI</a> (: <a href="#
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
 (<a href="#ForwardRelation-Syntax">ForwardRelation_IRI</a> | <a href="#ReverseRelation-Syntax">ReverseRelation_IRI</a>) (<a href="#ConceptInstance-Syntax">ConceptInstance_IRI</a> | <a href="#RelationInstance-Syntax">RelationInstance_IRI</a>)
+</pre>
+
+## Description Bundles ## {#DescriptionBundles-Syntax}
+
+### [=DescriptionBundle=] ### {#DescriptionBundle-Syntax}
+
+<pre class="highlight highlight-html">
+(<a href="#Annotation-Syntax">Annotation</a>)*
+description bundle IRI with (# | /) as PREFIX {
+	(<a href="#DescriptionBundleExtension-Syntax">DescriptionBundleExtension</a> | <a href="#DescriptionBundleInclusion-Syntax">DescriptionBundleInclusion</a>)*
+}
+</pre>
+
+### [=DescriptionBundleExtension=] ### {#DescriptionBundleExtension-Syntax}
+
+<pre class="highlight highlight-html">
+(<a href="#Annotation-Syntax">Annotation</a>)*
+extends <a href="#DescriptionBundle-Syntax">DescriptionBundle_IRI</a> (as PREFIX)?
+</pre>
+
+### [=DescriptionBundleInclusion=] ### {#DescriptionBundleInclusion-Syntax}
+
+<pre class="highlight highlight-html">
+(<a href="#Annotation-Syntax">Annotation</a>)*
+includes <a href="#Description-Syntax">Description_IRI</a> (as PREFIX)?
 </pre>
