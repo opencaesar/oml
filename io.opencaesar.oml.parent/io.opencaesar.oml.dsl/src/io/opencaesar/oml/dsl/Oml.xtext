@@ -22,8 +22,8 @@ import "http://opencaesar.io/oml"
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 
 Ontology:
-	Terminology |
-	Description;
+	VocabularyBox |
+	DescriptionBox;
 
 Element:
 	Annotation |
@@ -47,9 +47,9 @@ IdentifiedElement:
 	Ontology |
 	Member;
 
-Terminology:
+VocabularyBox:
 	Vocabulary |
-	Bundle;
+	VocabularyBundle;
 
 Vocabulary:
 	ownedAnnotations+=Annotation*
@@ -58,17 +58,27 @@ Vocabulary:
 		ownedStatements+=VocabularyStatement*
 	'}';
 
-Bundle:
+VocabularyBundle:
 	ownedAnnotations+=Annotation*
-	'bundle' iri=IRI 'with' separator=SeparatorKind 'as' prefix=ID '{'
-		ownedImports+=BundleImport*
+	'vocabulary' 'bundle' iri=IRI 'with' separator=SeparatorKind 'as' prefix=ID '{'
+		ownedImports+=VocabularyBundleImport*
 	'}';
+
+DescriptionBox:
+	Description |
+	DescriptionBundle;
 	
 Description:
 	ownedAnnotations+=Annotation*
 	'description' iri=IRI 'with' separator=SeparatorKind 'as' prefix=ID '{'
 		ownedImports+=DescriptionImport*
 		ownedStatements+=DescriptionStatement*
+	'}';
+
+DescriptionBundle:
+	ownedAnnotations+=Annotation*
+	'description' 'bundle' iri=IRI 'with' separator=SeparatorKind 'as' prefix=ID '{'
+		ownedImports+=DescriptionBundleImport*
 	'}';
 
 Member:
@@ -357,8 +367,9 @@ DescriptionStatement:
 	
 Import:
 	->VocabularyImport |
-	->BundleImport |
-	->DescriptionImport;
+	->VocabularyBundleImport |
+	->DescriptionImport |
+	->DescriptionBundleImport;
 
 VocabularyImport:
 	VocabularyExtension |
@@ -372,15 +383,15 @@ VocabularyUsage:
 	ownedAnnotations+=Annotation*
 	'uses' uri=IRI ('as' prefix=ID)?;
     	
-BundleImport:
-	BundleInclusion |
-	BundleExtension;
+VocabularyBundleImport:
+	VocabularyBundleInclusion |
+	VocabularyBundleExtension;
 
-BundleInclusion:
+VocabularyBundleInclusion:
 	ownedAnnotations+=Annotation*
 	'includes' uri=IRI ('as' prefix=ID)?;
 
-BundleExtension:
+VocabularyBundleExtension:
 	ownedAnnotations+=Annotation*
 	'extends' uri=IRI ('as' prefix=ID)?;
 
@@ -393,6 +404,18 @@ DescriptionUsage:
 	'uses' uri=IRI ('as' prefix=ID)?;
 
 DescriptionExtension:
+	ownedAnnotations+=Annotation*
+	'extends' uri=IRI ('as' prefix=ID)?;
+
+DescriptionBundleImport:
+	DescriptionBundleInclusion |
+	DescriptionBundleExtension;
+
+DescriptionBundleInclusion:
+	ownedAnnotations+=Annotation*
+	'includes' uri=IRI ('as' prefix=ID)?;
+
+DescriptionBundleExtension:
 	ownedAnnotations+=Annotation*
 	'extends' uri=IRI ('as' prefix=ID)?;
 

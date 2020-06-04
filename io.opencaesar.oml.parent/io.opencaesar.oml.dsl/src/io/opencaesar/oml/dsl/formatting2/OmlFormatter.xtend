@@ -25,9 +25,6 @@ import io.opencaesar.oml.AnnotationPropertyReference
 import io.opencaesar.oml.Aspect
 import io.opencaesar.oml.AspectReference
 import io.opencaesar.oml.BooleanLiteral
-import io.opencaesar.oml.Bundle
-import io.opencaesar.oml.BundleExtension
-import io.opencaesar.oml.BundleInclusion
 import io.opencaesar.oml.Concept
 import io.opencaesar.oml.ConceptInstance
 import io.opencaesar.oml.ConceptInstanceReference
@@ -35,6 +32,9 @@ import io.opencaesar.oml.ConceptReference
 import io.opencaesar.oml.ConceptTypeAssertion
 import io.opencaesar.oml.DecimalLiteral
 import io.opencaesar.oml.Description
+import io.opencaesar.oml.DescriptionBundle
+import io.opencaesar.oml.DescriptionBundleExtension
+import io.opencaesar.oml.DescriptionBundleInclusion
 import io.opencaesar.oml.DescriptionExtension
 import io.opencaesar.oml.DescriptionUsage
 import io.opencaesar.oml.DifferentFromPredicate
@@ -81,6 +81,9 @@ import io.opencaesar.oml.StructuredPropertyReference
 import io.opencaesar.oml.StructuredPropertyValueAssertion
 import io.opencaesar.oml.StructuredPropertyValueRestrictionAxiom
 import io.opencaesar.oml.Vocabulary
+import io.opencaesar.oml.VocabularyBundle
+import io.opencaesar.oml.VocabularyBundleExtension
+import io.opencaesar.oml.VocabularyBundleInclusion
 import io.opencaesar.oml.VocabularyExtension
 import io.opencaesar.oml.VocabularyUsage
 import io.opencaesar.oml.dsl.services.OmlGrammarAccess
@@ -122,12 +125,13 @@ class OmlFormatter extends AbstractFormatter2 {
 		vocabulary.ownedStatements.forEach[format.prepend[newLines = 2]]
 	}
 	
-	def dispatch void format(Bundle bundle, extension IFormattableDocument document) {
+	def dispatch void format(VocabularyBundle bundle, extension IFormattableDocument document) {
 		bundle.prepend[setNewLines(0, 0, 0); noSpace]
 		bundle.ownedAnnotations.forEach[format.append[newLine]]
-        bundle.regionFor.keyword(bundleAccess.bundleKeyword_1).append[oneSpace]
-        bundle.regionFor.keyword(bundleAccess.withKeyword_3).surround[oneSpace]
-        bundle.regionFor.keyword(bundleAccess.asKeyword_5).surround[oneSpace]
+        bundle.regionFor.keyword(vocabularyBundleAccess.vocabularyKeyword_1).append[oneSpace]
+        bundle.regionFor.keyword(vocabularyBundleAccess.bundleKeyword_2).surround[oneSpace]
+        bundle.regionFor.keyword(vocabularyBundleAccess.withKeyword_4).surround[oneSpace]
+        bundle.regionFor.keyword(vocabularyBundleAccess.asKeyword_6).surround[oneSpace]
 		bundle.formatBraces(document)
 		bundle.ownedImports.forEach[format.prepend[newLines = 2]]
 	}
@@ -143,6 +147,17 @@ class OmlFormatter extends AbstractFormatter2 {
 		description.ownedStatements.forEach[format.prepend[newLines = 2]]
 	}
 
+	def dispatch void format(DescriptionBundle bundle, extension IFormattableDocument document) {
+		bundle.prepend[setNewLines(0, 0, 0); noSpace]
+		bundle.ownedAnnotations.forEach[format.append[newLine]]
+        bundle.regionFor.keyword(descriptionBundleAccess.descriptionKeyword_1).append[oneSpace]
+        bundle.regionFor.keyword(descriptionBundleAccess.bundleKeyword_2).append[oneSpace]
+        bundle.regionFor.keyword(descriptionBundleAccess.withKeyword_4).surround[oneSpace]
+        bundle.regionFor.keyword(descriptionBundleAccess.asKeyword_6).surround[oneSpace]
+		bundle.formatBraces(document)
+		bundle.ownedImports.forEach[format.prepend[newLines = 2]]
+	}
+	
 	def dispatch void format(Aspect aspect, extension IFormattableDocument document) {
 		aspect.ownedAnnotations.forEach[format.append[newLine]]
 		aspect.regionFor.keyword(aspectAccess.aspectKeyword_1).append[oneSpace]
@@ -426,14 +441,19 @@ class OmlFormatter extends AbstractFormatter2 {
 		usage.regionFor.keyword(vocabularyUsageAccess.usesKeyword_1).append[oneSpace]
 	}
 
-	def dispatch void format(BundleInclusion inclusion, extension IFormattableDocument document) {
-		inclusion.ownedAnnotations.forEach[format.append[newLine]]
-		inclusion.regionFor.keyword(bundleInclusionAccess.includesKeyword_1).append[oneSpace]
+	def dispatch void format(VocabularyBundleExtension _extension, extension IFormattableDocument document) {
+		_extension.ownedAnnotations.forEach[format.append[newLine]]
+		_extension.regionFor.keyword(vocabularyBundleExtensionAccess.extendsKeyword_1).append[oneSpace]
 	}
 
-	def dispatch void format(BundleExtension _extension, extension IFormattableDocument document) {
+	def dispatch void format(VocabularyBundleInclusion inclusion, extension IFormattableDocument document) {
+		inclusion.ownedAnnotations.forEach[format.append[newLine]]
+		inclusion.regionFor.keyword(vocabularyBundleInclusionAccess.includesKeyword_1).append[oneSpace]
+	}
+
+	def dispatch void format(DescriptionExtension _extension, extension IFormattableDocument document) {
 		_extension.ownedAnnotations.forEach[format.append[newLine]]
-		_extension.regionFor.keyword(bundleExtensionAccess.extendsKeyword_1).append[oneSpace]
+		_extension.regionFor.keyword(descriptionExtensionAccess.extendsKeyword_1).append[oneSpace]
 	}
 
 	def dispatch void format(DescriptionUsage usage, extension IFormattableDocument document) {
@@ -441,9 +461,14 @@ class OmlFormatter extends AbstractFormatter2 {
 		usage.regionFor.keyword(descriptionUsageAccess.usesKeyword_1).append[oneSpace]
 	}
 
-	def dispatch void format(DescriptionExtension _extension, extension IFormattableDocument document) {
+	def dispatch void format(DescriptionBundleExtension _extension, extension IFormattableDocument document) {
 		_extension.ownedAnnotations.forEach[format.append[newLine]]
-		_extension.regionFor.keyword(descriptionExtensionAccess.extendsKeyword_1).append[oneSpace]
+		_extension.regionFor.keyword(descriptionBundleExtensionAccess.extendsKeyword_1).append[oneSpace]
+	}
+
+	def dispatch void format(DescriptionBundleInclusion inclusion, extension IFormattableDocument document) {
+		inclusion.ownedAnnotations.forEach[format.append[newLine]]
+		inclusion.regionFor.keyword(descriptionBundleInclusionAccess.includesKeyword_1).append[oneSpace]
 	}
 
 	def dispatch void format(ScalarPropertyRangeRestrictionAxiom axiom, extension IFormattableDocument document) {

@@ -13,9 +13,10 @@
  */
 package io.opencaesar.oml.util
 
-import io.opencaesar.oml.Bundle
-import io.opencaesar.oml.BundleExtension
-import io.opencaesar.oml.BundleInclusion
+import io.opencaesar.oml.DescriptionBox
+import io.opencaesar.oml.DescriptionBundle
+import io.opencaesar.oml.DescriptionBundleExtension
+import io.opencaesar.oml.DescriptionBundleInclusion
 import io.opencaesar.oml.Description
 import io.opencaesar.oml.DescriptionExtension
 import io.opencaesar.oml.DescriptionUsage
@@ -24,7 +25,10 @@ import io.opencaesar.oml.RelationRestrictionAxiom
 import io.opencaesar.oml.ScalarPropertyRestrictionAxiom
 import io.opencaesar.oml.SpecializationAxiom
 import io.opencaesar.oml.StructuredPropertyRestrictionAxiom
-import io.opencaesar.oml.Terminology
+import io.opencaesar.oml.VocabularyBox
+import io.opencaesar.oml.VocabularyBundle
+import io.opencaesar.oml.VocabularyBundleExtension
+import io.opencaesar.oml.VocabularyBundleInclusion
 import io.opencaesar.oml.Vocabulary
 import io.opencaesar.oml.VocabularyExtension
 import io.opencaesar.oml.VocabularyUsage
@@ -98,20 +102,42 @@ class OmlValidator2 {
 	
 	//--------------------------------
 
-	// BundleExtension
+	// VocabularyExtension
 
-	protected def checkBundleExtensionURI(BundleExtension object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!(object.importedOntology instanceof Bundle)) {
+	protected def checkVocabularyExtensionURI(VocabularyExtension object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		if (!(object.importedOntology instanceof Vocabulary)) {
 			return report(Diagnostic.ERROR, diagnostics, object,
-				'URL could not be resolved to a bundle', 
+				'URI could not be resolved to a vocabulary', 
 				OmlPackage.Literals.IMPORT__URI)
 		}
 		return true
 	}
 
-	// BundleInclusion
+	// VocabularyUsage
+		
+	protected def checkVocabularyUsageURI(VocabularyUsage object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		if (!(object.importedOntology instanceof DescriptionBox)) {
+			return report(Diagnostic.ERROR, diagnostics, object,
+				'URL could not be resolved to an description nor an description bundle', 
+				OmlPackage.Literals.IMPORT__URI)
+		}
+		return true
+	}
 
-	protected def checkBundleInclusionURI(BundleInclusion object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+	// VocabularyBundleExtension
+
+	protected def checkVocabularyBundleExtensionURI(VocabularyBundleExtension object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		if (!(object.importedOntology instanceof VocabularyBundle)) {
+			return report(Diagnostic.ERROR, diagnostics, object,
+				'URL could not be resolved to a vocabulary bundle', 
+				OmlPackage.Literals.IMPORT__URI)
+		}
+		return true
+	}
+
+	// VocabularyBundleInclusion
+
+	protected def checkVocabularyBundleInclusionURI(VocabularyBundleInclusion object, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		if (!(object.importedOntology instanceof Vocabulary)) {
 			return report(Diagnostic.ERROR, diagnostics, object,
 				'URL could not be resolved to a vocabulary', 
@@ -122,10 +148,10 @@ class OmlValidator2 {
 
 	// DescriptionExtension
 
-	protected def checkDescriptionExtensionURI(DescriptionExtension object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+	protected def checkAssertionExtensionURI(DescriptionExtension object, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		if (!(object.importedOntology instanceof Description)) {
 			return report(Diagnostic.ERROR, diagnostics, object,
-				'URL could not be resolved to a description', 
+				'URL could not be resolved to an description', 
 				OmlPackage.Literals.IMPORT__URI)
 		}
 		return true
@@ -133,15 +159,37 @@ class OmlValidator2 {
 
 	// DescriptionUsage
 
-	protected def checkDescriptionUsageURI(DescriptionUsage object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!(object.importedOntology instanceof Terminology)) {
+	protected def checkAssertionUsageURI(DescriptionUsage object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		if (!(object.importedOntology instanceof VocabularyBox)) {
 			return report(Diagnostic.ERROR, diagnostics, object,
-				'URL could not be resolved to a vocabulary nor a bundle', 
+				'URL could not be resolved to a vocabulary nor a vocabulary bundle', 
 				OmlPackage.Literals.IMPORT__URI)
 		}
 		return true
 	}
 	
+	// DescriptionBundleExtension
+
+	protected def checkDescriptionBundleExtensionURI(DescriptionBundleExtension object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		if (!(object.importedOntology instanceof DescriptionBundle)) {
+			return report(Diagnostic.ERROR, diagnostics, object,
+				'URL could not be resolved to an description bundle', 
+				OmlPackage.Literals.IMPORT__URI)
+		}
+		return true
+	}
+
+	// DescriptionBundleInclusion
+
+	protected def checkDescriptionBundleInclusionURI(DescriptionBundleInclusion object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		if (!(object.importedOntology instanceof Description)) {
+			return report(Diagnostic.ERROR, diagnostics, object,
+				'URL could not be resolved to an description', 
+				OmlPackage.Literals.IMPORT__URI)
+		}
+		return true
+	}
+
 	// RelationRestrictionAxiom
 	
 	protected def checkRelationRestrictionAxiomRelation(RelationRestrictionAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
@@ -203,28 +251,6 @@ class OmlValidator2 {
 			return report(Diagnostic.ERROR, diagnostics, object,
 				'Property cannot be restricted in this context', 
 				OmlPackage.Literals.STRUCTURED_PROPERTY_RESTRICTION_AXIOM__PROPERTY)
-		}
-		return true
-	}
-
-	// VocabularyExtension
-
-	protected def checkVocabularyExtensionURI(VocabularyExtension object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!(object.importedOntology instanceof Vocabulary)) {
-			return report(Diagnostic.ERROR, diagnostics, object,
-				'URI could not be resolved to a vocabulary', 
-				OmlPackage.Literals.IMPORT__URI)
-		}
-		return true
-	}
-
-	// VocabularyUsage
-		
-	protected def checkVocabularyUsageURI(VocabularyUsage object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!(object.importedOntology instanceof Description)) {
-			return report(Diagnostic.ERROR, diagnostics, object,
-				'URL could not be resolved to a description', 
-				OmlPackage.Literals.IMPORT__URI)
 		}
 		return true
 	}

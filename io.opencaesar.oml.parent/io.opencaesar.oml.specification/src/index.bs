@@ -1,5 +1,5 @@
 <pre class='metadata'>
-Title: Ontological Modeling Language 0.6
+Title: Ontological Modeling Language 0.7
 Shortname: oml
 Level: 1
 Status: ld
@@ -80,7 +80,7 @@ path: textual-syntax.md
 </pre>
 
 <pre class=include>
-path: oml.md
+path: Oml.md
 </pre>
 
 <pre class=include>
