@@ -66,7 +66,8 @@ bintray {
 	user = System.getenv('BINTRAY_USER')
 	key = System.getenv('BINTRAY_API_KEY')
 	publications = ['mavenPublication']
-
+	publish = true
+	override = true
 	pkg {
 		name = project.name
 		repo = gh.rep

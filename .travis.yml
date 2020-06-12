@@ -41,27 +41,23 @@ deploy:
     file_glob: true
     file: "${JAR_FILE}"
     skip_cleanup: true
-    draft: true
     on:
       tags: true
       branch: master
   - provider: script
     script: ./gradlew bintrayUpload
     skip_cleanup: true
-    dry-run: false
     on:
       tags: true
       branch: master
   - provider: script
     script: io.opencaesar.oml.repository/deploy.sh
     skip_cleanup: true
-    dry-run: false
     on:
       tags: true
       branch: master
   - provider: script
     script: io.opencaesar.oml.specification/deploy.sh
     skip_cleanup: true
-    dry-run: false
     on:
       branch: master

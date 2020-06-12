@@ -40,7 +40,7 @@ function deploy_updatesite() {
 	if [ ! -d $f ]; then
 	  echo "Processing $f file..."
 	  echo "Uploading p2 metadata file directly to the repository"
-	  curl -X PUT -T $f -u ${BINTRAY_USER}:${BINTRAY_API_KEY} https://api.bintray.com/content/${BINTRAY_OWNER}/${BINTRAY_REPO}/${TARGET_PATH}/${PCK_VERSION}/$f;publish=0
+	  curl -X PUT -T $f -u ${BINTRAY_USER}:${BINTRAY_API_KEY} https://api.bintray.com/content/${BINTRAY_OWNER}/${BINTRAY_REPO}/${TARGET_PATH}/${PCK_VERSION}/$f;publish=1
 	  echo ""
 	fi
 	done
@@ -49,7 +49,7 @@ function deploy_updatesite() {
 	for f in $FEATUREDIR;
 	do
 	  echo "Processing feature: $f file..."
-	  curl -X PUT -T $f -u ${BINTRAY_USER}:${BINTRAY_API_KEY} https://api.bintray.com/content/${BINTRAY_OWNER}/${BINTRAY_REPO}/${PCK_NAME}/${PCK_VERSION}/${TARGET_PATH}/${PCK_VERSION}/$f;publish=0
+	  curl -X PUT -T $f -u ${BINTRAY_USER}:${BINTRAY_API_KEY} https://api.bintray.com/content/${BINTRAY_OWNER}/${BINTRAY_REPO}/${PCK_NAME}/${PCK_VERSION}/${TARGET_PATH}/${PCK_VERSION}/$f;publish=1
 	  echo ""
 	done
 	
@@ -59,7 +59,7 @@ function deploy_updatesite() {
 	do
 	   # take action on each file. $f store current file name
 	  echo "Processing plugin: $f file..."
-	  curl -X PUT -T $f -u ${BINTRAY_USER}:${BINTRAY_API_KEY} https://api.bintray.com/content/${BINTRAY_OWNER}/${BINTRAY_REPO}/${PCK_NAME}/${PCK_VERSION}/${TARGET_PATH}/${PCK_VERSION}/$f;publish=0
+	  curl -X PUT -T $f -u ${BINTRAY_USER}:${BINTRAY_API_KEY} https://api.bintray.com/content/${BINTRAY_OWNER}/${BINTRAY_REPO}/${PCK_NAME}/${PCK_VERSION}/${TARGET_PATH}/${PCK_VERSION}/$f;publish=1
 	  echo ""
 	done
 	
