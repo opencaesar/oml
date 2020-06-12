@@ -388,6 +388,11 @@ public class OmlVisitor<T> extends OmlSwitch<T> {
 	}
 
 	@Override
+	public T caseDescriptionBundleUsage(DescriptionBundleUsage object) {
+		return null;
+	}
+
+	@Override
 	public T caseAxiom(Axiom object) {
 		return null;
 	}

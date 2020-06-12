@@ -35,6 +35,7 @@ import io.opencaesar.oml.Description
 import io.opencaesar.oml.DescriptionBundle
 import io.opencaesar.oml.DescriptionBundleExtension
 import io.opencaesar.oml.DescriptionBundleInclusion
+import io.opencaesar.oml.DescriptionBundleUsage
 import io.opencaesar.oml.DescriptionExtension
 import io.opencaesar.oml.DescriptionUsage
 import io.opencaesar.oml.DifferentFromPredicate
@@ -469,6 +470,11 @@ class OmlFormatter extends AbstractFormatter2 {
 	def dispatch void format(DescriptionBundleInclusion inclusion, extension IFormattableDocument document) {
 		inclusion.ownedAnnotations.forEach[format.append[newLine]]
 		inclusion.regionFor.keyword(descriptionBundleInclusionAccess.includesKeyword_1).append[oneSpace]
+	}
+
+	def dispatch void format(DescriptionBundleUsage usage, extension IFormattableDocument document) {
+		usage.ownedAnnotations.forEach[format.append[newLine]]
+		usage.regionFor.keyword(descriptionBundleUsageAccess.usesKeyword_1).append[oneSpace]
 	}
 
 	def dispatch void format(ScalarPropertyRangeRestrictionAxiom axiom, extension IFormattableDocument document) {

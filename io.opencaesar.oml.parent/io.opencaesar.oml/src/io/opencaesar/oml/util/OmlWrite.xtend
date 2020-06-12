@@ -26,6 +26,7 @@ import io.opencaesar.oml.AspectReference
 import io.opencaesar.oml.DescriptionBundle
 import io.opencaesar.oml.DescriptionBundleExtension
 import io.opencaesar.oml.DescriptionBundleInclusion
+import io.opencaesar.oml.DescriptionBundleUsage
 import io.opencaesar.oml.Description
 import io.opencaesar.oml.DescriptionExtension
 import io.opencaesar.oml.DescriptionUsage
@@ -138,6 +139,7 @@ class OmlWrite {
 			case DescriptionUsage: factory.createDescriptionUsage
 			case DescriptionBundleExtension: factory.createDescriptionBundleExtension
 			case DescriptionBundleInclusion: factory.createDescriptionBundleInclusion
+			case DescriptionBundleUsage: factory.createDescriptionBundleUsage
 			case SpecializationAxiom: factory.createSpecializationAxiom
 			case ScalarPropertyRangeRestrictionAxiom: factory.createScalarPropertyRangeRestrictionAxiom
 			case ScalarPropertyCardinalityRestrictionAxiom: factory.createScalarPropertyCardinalityRestrictionAxiom

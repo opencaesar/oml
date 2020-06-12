@@ -36,6 +36,7 @@ import io.opencaesar.oml.DescriptionBundle
 import io.opencaesar.oml.DescriptionBundleExtension
 import io.opencaesar.oml.DescriptionBundleImport
 import io.opencaesar.oml.DescriptionBundleInclusion
+import io.opencaesar.oml.DescriptionBundleUsage
 import io.opencaesar.oml.DescriptionExtension
 import io.opencaesar.oml.DescriptionImport
 import io.opencaesar.oml.DescriptionStatement
@@ -351,7 +352,7 @@ class OmlRead {
 		bundle.extensionsWithSource.map[extendedVocabularyBundle]
 	}
 
-	static def Iterable<Vocabulary> getIncludedVocabularys(VocabularyBundle bundle) {
+	static def Iterable<Vocabulary> getIncludedVocabularies(VocabularyBundle bundle) {
 		bundle.inclusionsWithSource.map[includedVocabulary]
 	}
 
@@ -397,12 +398,20 @@ class OmlRead {
 		bundle.ownedImports.filter(DescriptionBundleInclusion)
 	}
 
+	static def Iterable<DescriptionBundleUsage> getUsagesWithSource(DescriptionBundle bundle) {
+		bundle.ownedImports.filter(DescriptionBundleUsage)
+	}
+
 	static def Iterable<DescriptionBundle> getExtendedDescriptionBundles(DescriptionBundle bundle) {
 		bundle.extensionsWithSource.map[extendedDescriptionBundle]
 	}
 
 	static def Iterable<Description> getIncludedDescriptions(DescriptionBundle bundle) {
 		bundle.inclusionsWithSource.map[includedDescription]
+	}
+
+	static def Iterable<VocabularyBundle> getUsedVocabularyBundles(DescriptionBundle bundle) {
+		bundle.usagesWithSource.map[usedVocabularyBundle]
 	}
 
 	// Member
@@ -863,6 +872,16 @@ class OmlRead {
 
 	static def Description getIncludedDescription(DescriptionBundleInclusion inclusion) {
 		inclusion.importedOntology as Description
+	}
+
+	// DescriptionBundleUsage
+	
+	static def DescriptionBundle getUsingDescriptionBundle(DescriptionBundleUsage usage) {
+		usage.owningDescriptionBundle
+	}
+
+	static def VocabularyBundle getUsedVocabularyBundle(DescriptionBundleUsage usage) {
+		usage.importedOntology as VocabularyBundle
 	}
 
 	// Axiom

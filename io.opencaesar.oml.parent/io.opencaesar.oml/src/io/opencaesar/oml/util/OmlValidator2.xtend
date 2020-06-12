@@ -17,6 +17,7 @@ import io.opencaesar.oml.DescriptionBox
 import io.opencaesar.oml.DescriptionBundle
 import io.opencaesar.oml.DescriptionBundleExtension
 import io.opencaesar.oml.DescriptionBundleInclusion
+import io.opencaesar.oml.DescriptionBundleUsage
 import io.opencaesar.oml.Description
 import io.opencaesar.oml.DescriptionExtension
 import io.opencaesar.oml.DescriptionUsage
@@ -107,7 +108,7 @@ class OmlValidator2 {
 	protected def checkVocabularyExtensionURI(VocabularyExtension object, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		if (!(object.importedOntology instanceof Vocabulary)) {
 			return report(Diagnostic.ERROR, diagnostics, object,
-				'URI could not be resolved to a vocabulary', 
+				'''URI <«object.uri»> could not be resolved to a vocabulary''', 
 				OmlPackage.Literals.IMPORT__URI)
 		}
 		return true
@@ -118,7 +119,7 @@ class OmlValidator2 {
 	protected def checkVocabularyUsageURI(VocabularyUsage object, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		if (!(object.importedOntology instanceof DescriptionBox)) {
 			return report(Diagnostic.ERROR, diagnostics, object,
-				'URL could not be resolved to an description nor an description bundle', 
+				'''URI <«object.uri»> could not be resolved to an description nor an description bundle''', 
 				OmlPackage.Literals.IMPORT__URI)
 		}
 		return true
@@ -129,7 +130,7 @@ class OmlValidator2 {
 	protected def checkVocabularyBundleExtensionURI(VocabularyBundleExtension object, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		if (!(object.importedOntology instanceof VocabularyBundle)) {
 			return report(Diagnostic.ERROR, diagnostics, object,
-				'URL could not be resolved to a vocabulary bundle', 
+				'''URI <«object.uri»> could not be resolved to a vocabulary bundle''', 
 				OmlPackage.Literals.IMPORT__URI)
 		}
 		return true
@@ -140,7 +141,7 @@ class OmlValidator2 {
 	protected def checkVocabularyBundleInclusionURI(VocabularyBundleInclusion object, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		if (!(object.importedOntology instanceof Vocabulary)) {
 			return report(Diagnostic.ERROR, diagnostics, object,
-				'URL could not be resolved to a vocabulary', 
+				'''URI <«object.uri»> could not be resolved to a vocabulary''', 
 				OmlPackage.Literals.IMPORT__URI)
 		}
 		return true
@@ -148,10 +149,10 @@ class OmlValidator2 {
 
 	// DescriptionExtension
 
-	protected def checkAssertionExtensionURI(DescriptionExtension object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+	protected def checkDescriptionExtensionURI(DescriptionExtension object, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		if (!(object.importedOntology instanceof Description)) {
 			return report(Diagnostic.ERROR, diagnostics, object,
-				'URL could not be resolved to an description', 
+				'''URI <«object.uri»> could not be resolved to an description''', 
 				OmlPackage.Literals.IMPORT__URI)
 		}
 		return true
@@ -159,10 +160,10 @@ class OmlValidator2 {
 
 	// DescriptionUsage
 
-	protected def checkAssertionUsageURI(DescriptionUsage object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+	protected def checkDescriptionUsageURI(DescriptionUsage object, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		if (!(object.importedOntology instanceof VocabularyBox)) {
 			return report(Diagnostic.ERROR, diagnostics, object,
-				'URL could not be resolved to a vocabulary nor a vocabulary bundle', 
+				'''URI <«object.uri»> could not be resolved to a vocabulary nor a vocabulary bundle''', 
 				OmlPackage.Literals.IMPORT__URI)
 		}
 		return true
@@ -173,7 +174,7 @@ class OmlValidator2 {
 	protected def checkDescriptionBundleExtensionURI(DescriptionBundleExtension object, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		if (!(object.importedOntology instanceof DescriptionBundle)) {
 			return report(Diagnostic.ERROR, diagnostics, object,
-				'URL could not be resolved to an description bundle', 
+				'''URI <«object.uri»> could not be resolved to an description bundle''', 
 				OmlPackage.Literals.IMPORT__URI)
 		}
 		return true
@@ -184,7 +185,18 @@ class OmlValidator2 {
 	protected def checkDescriptionBundleInclusionURI(DescriptionBundleInclusion object, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		if (!(object.importedOntology instanceof Description)) {
 			return report(Diagnostic.ERROR, diagnostics, object,
-				'URL could not be resolved to an description', 
+				'''URI <«object.uri»> could not be resolved to an description''', 
+				OmlPackage.Literals.IMPORT__URI)
+		}
+		return true
+	}
+
+	// DescriptionBundleUsage
+
+	protected def checkDescriptionBundleUsageURI(DescriptionBundleUsage object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		if (!(object.importedOntology instanceof VocabularyBundle)) {
+			return report(Diagnostic.ERROR, diagnostics, object,
+				'''URI <«object.uri»> could not be resolved to a vocabulary bundle''', 
 				OmlPackage.Literals.IMPORT__URI)
 		}
 		return true
@@ -197,7 +209,7 @@ class OmlValidator2 {
 		val domainType = object.relation.domain
 		if (!restrictingType.reflexiveClosure[findSpecializedTerms].exists[t | t == domainType]) {
 			return report(Diagnostic.ERROR, diagnostics, object,
-				'Relation cannot be restricted in this context', 
+				'''Relation «object.relation.abbreviatedIri» cannot be restricted in the context of «object.restrictingType.abbreviatedIri»''', 
 				OmlPackage.Literals.RELATION_RESTRICTION_AXIOM__RELATION)
 		}
 		return true
@@ -210,7 +222,7 @@ class OmlValidator2 {
 		val domainType = object.property.domain
 		if (!restrictingType.reflexiveClosure[findSpecializedTerms].exists[t | t == domainType]) {
 			return report(Diagnostic.ERROR, diagnostics, object,
-				'Property cannot be restricted in this context', 
+				'''Property «object.property.abbreviatedIri» cannot be restricted in the context of «object.restrictingType.abbreviatedIri»''', 
 				OmlPackage.Literals.SCALAR_PROPERTY_RESTRICTION_AXIOM__PROPERTY)
 		}
 		return true
@@ -223,7 +235,7 @@ class OmlValidator2 {
 		val specializingTerm = object.specializingTerm
 		if (specializedTerm.reflexiveClosure[findSpecializedTerms].exists[t | t == specializingTerm]) {
 			return report(Diagnostic.ERROR, diagnostics, object,
-				'Term causes a specialization cycle', 
+				'''Term «object.specializedTerm.abbreviatedIri» causes a specialization cycle for «object.specializingTerm.abbreviatedIri»''', 
 				OmlPackage.Literals.SPECIALIZATION_AXIOM__SPECIALIZED_TERM)
 		}
 		return true
@@ -236,7 +248,7 @@ class OmlValidator2 {
 			(OmlPackage.Literals.FACETED_SCALAR == specializedEClass && OmlPackage.Literals.ENUMERATED_SCALAR == specializingEClass) ||
 			(specializedEClass === specializingEClass))) {
 			return report(Diagnostic.ERROR, diagnostics, object,
-				'Term cannot be specialized in this context', 
+				'''Term «object.specializedTerm.abbreviatedIri» cannot be specialized by «object.specializingTerm.abbreviatedIri»''', 
 				OmlPackage.Literals.SPECIALIZATION_AXIOM__SPECIALIZED_TERM)
 		}
 		return true
@@ -249,7 +261,7 @@ class OmlValidator2 {
 		val domainType = object.property.domain
 		if (!restrictingType.reflexiveClosure[findSpecializedTerms].exists[t | t == domainType]) {
 			return report(Diagnostic.ERROR, diagnostics, object,
-				'Property cannot be restricted in this context', 
+				'''Property «object.property.abbreviatedIri» cannot be restricted in the context of «object.restrictingType.abbreviatedIri»''', 
 				OmlPackage.Literals.STRUCTURED_PROPERTY_RESTRICTION_AXIOM__PROPERTY)
 		}
 		return true

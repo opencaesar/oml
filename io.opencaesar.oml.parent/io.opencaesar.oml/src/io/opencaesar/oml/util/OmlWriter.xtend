@@ -28,6 +28,7 @@ import io.opencaesar.oml.Assertion
 import io.opencaesar.oml.DescriptionBundle
 import io.opencaesar.oml.DescriptionBundleExtension
 import io.opencaesar.oml.DescriptionBundleInclusion
+import io.opencaesar.oml.DescriptionBundleUsage
 import io.opencaesar.oml.Description
 import io.opencaesar.oml.DescriptionExtension
 import io.opencaesar.oml.DescriptionStatement
@@ -630,6 +631,16 @@ class OmlWriter {
 		return inclusion
 	}
 
+	// DescriptionBundleUsage
+
+	def addDescriptionBundleUsage(DescriptionBundle bundle, String usedVocabularyBundleURI, String usedVocabularyBundlePrefix) {
+		val usage = create(DescriptionBundleUsage)
+		usage.uri = usedVocabularyBundleURI
+		usage.prefix = usedVocabularyBundlePrefix
+		bundle.ownedImports += usage
+		return usage
+	}
+	
 	// SpecializationAxiom
 
 	def addSpecializationAxiom(Vocabulary vocabulary, String specializingIri, String specializedIri) {

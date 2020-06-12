@@ -176,7 +176,7 @@ abstract class DescriptionBox extends Ontology {
 }
 
 /*
- * Description is an description box that allows making statements about its own instances or about
+ * Description is a description box that allows making statements about its own instances or about
  * others that are imported.
  */
 @Bikeshed(heading="Descriptions")
@@ -192,7 +192,7 @@ class Description extends DescriptionBox {
 }
 
 /*
- * DescriptionBundle is an description box that allows importing other description boxes and flagging them
+ * DescriptionBundle is a description box that allows importing other description boxes and flagging them
  * as a set that is analyzed together for consistency and satisfiabilty.
  */
 @Bikeshed(heading="Descriptions")
@@ -868,7 +868,7 @@ class RuleReference extends VocabularyMemberReference {
 }
 
 /*
- * DescriptionMemberReference is a reference to an description member specified as a statement.
+ * DescriptionMemberReference is a reference to a description member specified as a statement.
  */
 @Bikeshed(heading="References")
 abstract class DescriptionMemberReference extends Reference , DescriptionStatement {	
@@ -939,7 +939,7 @@ abstract class VocabularyStatement extends Statement {
 }
 
 /*
- * DescriptionStatement is a statement owned by an description.
+ * DescriptionStatement is a statement owned by a description.
  */
 @Bikeshed(heading="Descriptions")
 abstract class DescriptionStatement extends Statement {
@@ -1016,7 +1016,7 @@ class VocabularyBundleInclusion extends VocabularyBundleImport {
 }
 
 /*
- * DescriptionImport is an import owned by an description.
+ * DescriptionImport is an import owned by a description.
  */
 @Bikeshed(heading="Descriptions")
 abstract class DescriptionImport extends Import {
@@ -1027,21 +1027,21 @@ abstract class DescriptionImport extends Import {
 }
 
 /*
- * DescriptionExtension is an import that allows an description to extend another. 
+ * DescriptionExtension is an import that allows a description to extend another. 
  */
 @Bikeshed(heading="Descriptions")
 class DescriptionExtension extends DescriptionImport {
 }
 
 /*
- * DescriptionUsage is an import that allows an description to use a vocabulary box.
+ * DescriptionUsage is an import that allows a description to use a vocabulary box.
  */
 @Bikeshed(heading="Descriptions")
 class DescriptionUsage extends DescriptionImport {
 }
 
 /*
- * DescriptionBundleImport is an import owned by an description bundle.
+ * DescriptionBundleImport is an import owned by  description bundle.
  */
 @Bikeshed(heading="Descriptions")
 abstract class DescriptionBundleImport extends Import {
@@ -1052,17 +1052,24 @@ abstract class DescriptionBundleImport extends Import {
 }
 
 /*
- * DescriptionBundleExtension is an import that allows an description bundle to extend another. 
+ * DescriptionBundleExtension is an import that allows a description bundle to extend another. 
  */
 @Bikeshed(heading="Descriptions")
 class DescriptionBundleExtension extends DescriptionBundleImport {
 }
 
 /*
- * DescriptionBundleInclusion is an import that allows an description bundle to include an description. 
+ * DescriptionBundleInclusion is an import that allows a description bundle to include a description. 
  */
 @Bikeshed(heading="Descriptions")
 class DescriptionBundleInclusion extends DescriptionBundleImport {
+}
+
+/*
+ * DescriptionBundleUsage is an import that allows a description bundle to use a vocabulary bundle.
+ */
+@Bikeshed(heading="Descriptions")
+class DescriptionBundleUsage extends DescriptionBundleImport {
 }
 
 /*

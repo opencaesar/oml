@@ -587,7 +587,7 @@ ref ri <a href="#RelationInstance-Syntax">RelationInstance_IRI</a> (: <a href="#
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
 description bundle IRI with (# | /) as PREFIX {
-	(<a href="#DescriptionBundleExtension-Syntax">DescriptionBundleExtension</a> | <a href="#DescriptionBundleInclusion-Syntax">DescriptionBundleInclusion</a>)*
+	(<a href="#DescriptionBundleExtension-Syntax">DescriptionBundleExtension</a> | <a href="#DescriptionBundleInclusion-Syntax">DescriptionBundleInclusion</a> | <a href="#DescriptionBundleUsage-Syntax">DescriptionBundleUsage</a>)*
 }
 </pre>
 
@@ -603,4 +603,11 @@ extends <a href="#DescriptionBundle-Syntax">DescriptionBundle_IRI</a> (as PREFIX
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
 includes <a href="#Description-Syntax">Description_IRI</a> (as PREFIX)?
+</pre>
+
+### [=DescriptionBundleUsage=] ### {#DescriptionBundleUsage-Syntax}
+
+<pre class="highlight highlight-html">
+(<a href="#Annotation-Syntax">Annotation</a>)*
+uses <a href="#VocabularyBundle-Syntax">VocabularyBundle_IRI</a> (as PREFIX)?
 </pre>

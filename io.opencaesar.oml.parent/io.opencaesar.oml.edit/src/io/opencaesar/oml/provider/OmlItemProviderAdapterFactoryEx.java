@@ -24,6 +24,7 @@ import io.opencaesar.oml.Description;
 import io.opencaesar.oml.DescriptionBundle;
 import io.opencaesar.oml.DescriptionBundleExtension;
 import io.opencaesar.oml.DescriptionBundleInclusion;
+import io.opencaesar.oml.DescriptionBundleUsage;
 import io.opencaesar.oml.DescriptionExtension;
 import io.opencaesar.oml.DescriptionUsage;
 import io.opencaesar.oml.DifferentFromPredicate;
@@ -329,6 +330,26 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 			}
 		};
 		return descriptionBundleInclusionItemProvider;
+	}
+
+	@Override
+	public Adapter createDescriptionBundleUsageAdapter() {
+		if (descriptionBundleUsageItemProvider == null) descriptionBundleUsageItemProvider = new DescriptionBundleUsageItemProvider(this) {
+			@Override
+			public String getText(Object object) {
+				DescriptionBundleUsage usage = (DescriptionBundleUsage)object;
+				StringBuilder label = new StringBuilder("uses <");
+				if (usage.getUri() != null) {
+					label.append(usage.getUri());
+				}
+				label.append(">");
+				if (usage.getPrefix() != null) {
+					label.append(" as ").append(usage.getPrefix());
+				}
+				return label.toString();
+			}
+		};
+		return descriptionBundleUsageItemProvider;
 	}
 
 	// Types (aspect, concept, relation entity, structure)

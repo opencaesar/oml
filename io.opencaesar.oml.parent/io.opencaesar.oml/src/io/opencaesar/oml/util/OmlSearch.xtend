@@ -22,19 +22,20 @@ import io.opencaesar.oml.AnnotatedElement
 import io.opencaesar.oml.Annotation
 import io.opencaesar.oml.AnnotationProperty
 import io.opencaesar.oml.Aspect
-import io.opencaesar.oml.DescriptionBox
-import io.opencaesar.oml.DescriptionBundle
-import io.opencaesar.oml.DescriptionBundleExtension
-import io.opencaesar.oml.DescriptionBundleInclusion
-import io.opencaesar.oml.Description
-import io.opencaesar.oml.DescriptionExtension
-import io.opencaesar.oml.DescriptionUsage
 import io.opencaesar.oml.Classifier
 import io.opencaesar.oml.ClassifierReference
 import io.opencaesar.oml.Concept
 import io.opencaesar.oml.ConceptInstance
 import io.opencaesar.oml.ConceptInstanceReference
 import io.opencaesar.oml.ConceptTypeAssertion
+import io.opencaesar.oml.Description
+import io.opencaesar.oml.DescriptionBox
+import io.opencaesar.oml.DescriptionBundle
+import io.opencaesar.oml.DescriptionBundleExtension
+import io.opencaesar.oml.DescriptionBundleInclusion
+import io.opencaesar.oml.DescriptionBundleUsage
+import io.opencaesar.oml.DescriptionExtension
+import io.opencaesar.oml.DescriptionUsage
 import io.opencaesar.oml.Element
 import io.opencaesar.oml.Entity
 import io.opencaesar.oml.EntityReference
@@ -66,14 +67,14 @@ import io.opencaesar.oml.SpecializationAxiom
 import io.opencaesar.oml.Structure
 import io.opencaesar.oml.StructureInstance
 import io.opencaesar.oml.StructuredProperty
+import io.opencaesar.oml.TypeAssertion
+import io.opencaesar.oml.Vocabulary
 import io.opencaesar.oml.VocabularyBox
 import io.opencaesar.oml.VocabularyBundle
 import io.opencaesar.oml.VocabularyBundleExtension
 import io.opencaesar.oml.VocabularyBundleInclusion
-import io.opencaesar.oml.Vocabulary
 import io.opencaesar.oml.VocabularyExtension
 import io.opencaesar.oml.VocabularyUsage
-import io.opencaesar.oml.TypeAssertion
 import java.util.ArrayList
 import java.util.Collections
 
@@ -131,7 +132,7 @@ class OmlSearch extends OmlIndex {
 		vocabulary.findImportsWithTarget.filter(VocabularyExtension)
 	}
 
-	static def Iterable<Vocabulary> findExtendingVocabularys(Vocabulary vocabulary) {
+	static def Iterable<Vocabulary> findExtendingVocabularies(Vocabulary vocabulary) {
 		vocabulary.findVocabularyExtensionsWithExtendedVocabulary.map[extendingVocabulary]
 	}
 
@@ -153,13 +154,21 @@ class OmlSearch extends OmlIndex {
 		bundle.findVocabularyBundleExtensionsWithExtendedVocabularyBundle.map[extendingVocabularyBundle]
 	}
 
+	static def Iterable<DescriptionBundleUsage> findDescriptionBundleUsagesWithUsedVocabularyBundle(VocabularyBundle bundle) {
+		bundle.findImportsWithTarget.filter(DescriptionBundleUsage)
+	}
+
+	static def Iterable<DescriptionBundle> findUsingDescriptionBundles(VocabularyBundle bundle) {
+		bundle.findDescriptionBundleUsagesWithUsedVocabularyBundle.map[usingDescriptionBundle]
+	}
+
 	// DescriptionBox
 
 	static def Iterable<VocabularyUsage> findVocabularyUsagesWithUsedDescriptionBox(DescriptionBox box) {
 		box.findImportsWithTarget.filter(VocabularyUsage)
 	}
 
-	static def Iterable<Vocabulary> findUsingVocabularys(DescriptionBox box) {
+	static def Iterable<Vocabulary> findUsingVocabularies(DescriptionBox box) {
 		box.findVocabularyUsagesWithUsedDescriptionBox.map[usingVocabulary]
 	}
 
@@ -495,6 +504,8 @@ class OmlSearch extends OmlIndex {
 	// DescriptionBundleInclusion
 	
 	// DescriptionBundleExtension
+
+	// DescriptionBundleUsage
 
 	// Axiom
 

@@ -1031,6 +1031,29 @@ public class OmlItemProviderAdapterFactory extends OmlAdapterFactory implements 
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.DescriptionBundleUsage} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected DescriptionBundleUsageItemProvider descriptionBundleUsageItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link io.opencaesar.oml.DescriptionBundleUsage}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createDescriptionBundleUsageAdapter() {
+		if (descriptionBundleUsageItemProvider == null) {
+			descriptionBundleUsageItemProvider = new DescriptionBundleUsageItemProvider(this);
+		}
+
+		return descriptionBundleUsageItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.SpecializationAxiom} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1774,6 +1797,7 @@ public class OmlItemProviderAdapterFactory extends OmlAdapterFactory implements 
 		if (descriptionUsageItemProvider != null) descriptionUsageItemProvider.dispose();
 		if (descriptionBundleExtensionItemProvider != null) descriptionBundleExtensionItemProvider.dispose();
 		if (descriptionBundleInclusionItemProvider != null) descriptionBundleInclusionItemProvider.dispose();
+		if (descriptionBundleUsageItemProvider != null) descriptionBundleUsageItemProvider.dispose();
 		if (specializationAxiomItemProvider != null) specializationAxiomItemProvider.dispose();
 		if (scalarPropertyRangeRestrictionAxiomItemProvider != null) scalarPropertyRangeRestrictionAxiomItemProvider.dispose();
 		if (scalarPropertyCardinalityRestrictionAxiomItemProvider != null) scalarPropertyCardinalityRestrictionAxiomItemProvider.dispose();

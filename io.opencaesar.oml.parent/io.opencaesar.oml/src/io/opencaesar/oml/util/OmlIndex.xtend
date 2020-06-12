@@ -417,6 +417,8 @@ class OmlIndex {
 	
 	// DescriptionBundleExtension
 
+	// DescriptionBundleUsage
+
 	// Axiom
 
 	// SpecializationAxiom

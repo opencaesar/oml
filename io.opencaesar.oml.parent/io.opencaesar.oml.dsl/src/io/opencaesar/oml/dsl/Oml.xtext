@@ -384,8 +384,8 @@ VocabularyUsage:
 	'uses' uri=IRI ('as' prefix=ID)?;
     	
 VocabularyBundleImport:
-	VocabularyBundleInclusion |
-	VocabularyBundleExtension;
+	VocabularyBundleExtension |
+	VocabularyBundleInclusion;
 
 VocabularyBundleInclusion:
 	ownedAnnotations+=Annotation*
@@ -396,8 +396,8 @@ VocabularyBundleExtension:
 	'extends' uri=IRI ('as' prefix=ID)?;
 
 DescriptionImport:
-	DescriptionUsage |
-	DescriptionExtension;
+	DescriptionExtension |
+	DescriptionUsage;
 
 DescriptionUsage:
 	ownedAnnotations+=Annotation*
@@ -408,8 +408,9 @@ DescriptionExtension:
 	'extends' uri=IRI ('as' prefix=ID)?;
 
 DescriptionBundleImport:
+	DescriptionBundleExtension |
 	DescriptionBundleInclusion |
-	DescriptionBundleExtension;
+	DescriptionBundleUsage;
 
 DescriptionBundleInclusion:
 	ownedAnnotations+=Annotation*
@@ -418,6 +419,10 @@ DescriptionBundleInclusion:
 DescriptionBundleExtension:
 	ownedAnnotations+=Annotation*
 	'extends' uri=IRI ('as' prefix=ID)?;
+
+DescriptionBundleUsage:
+	ownedAnnotations+=Annotation*
+	'uses' uri=IRI ('as' prefix=ID)?;
 
 Axiom:
 	SpecializationAxiom |
