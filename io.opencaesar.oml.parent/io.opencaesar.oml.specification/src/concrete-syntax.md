@@ -1,4 +1,4 @@
-# Textual Syntax # {#TextualSyntax}
+# Concrete Syntax # {#ConcreteSyntax}
 
 ## Common ## {#Common-Syntax}
 
@@ -8,7 +8,7 @@ The OML textual language is free-form, meaning that whitespace characters can be
 
 ### [=Ontology=] ### {#Ontology-Syntax}
 
-An ontology is declared with of the ontology keywords, an ```IRI```, a separator character (# or /), and a ```PREFIX```. The ```IRI``` represents a globally unique namespace that identifies the ontology. The separator character is used to separate the ontology's ```IRI``` from the ontology member's ```ID``` in the member's ```IRI``` (e.g., ```IRI#ID```). The ```PREFIX``` is a default short name for the ontology that can substitute for its ```IRI``` when used in an ontology member's abbreviated ```IRI``` notation (e.g., ```PREFIX:ID```). An ontology can have statements added to its body between ```{``` and ```}```. The statements can be <a href="#Import-Syntax">Import</a> statements or <a href="#Member-Syntax">Member</a> statements (placed after all <a href="#Import-Syntax">Import</a> statements).
+An ontology is declared with of the ontology keywords, an `IRI`, a separator character (# or /), and a `PREFIX`. The `IRI` represents a globally unique namespace that identifies the ontology. The separator character is used to separate the ontology's `IRI` from the ontology member's `ID` in the member's `IRI` (e.g., `IRI#ID`). The `PREFIX` is a default short name for the ontology that can substitute for its `IRI` when used in an ontology member's abbreviated `IRI` notation (e.g., `PREFIX:ID`). An ontology can have statements added to its body between `{` and `}`. The statements can be <a href="#Import-Syntax">Import</a> statements or <a href="#Member-Syntax">Member</a> statements (placed after all <a href="#Import-Syntax">Import</a> statements).
 
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
@@ -20,16 +20,16 @@ ontology_keyword IRI with (# | /) as PREFIX {
 
 ### [=Import=] ### {#Import-Syntax}
 
-An ontology may import other ontologies using one of the import statements allowed for the ontology kind. An import statement is placed within the body of the ontology before any member statement. The syntax of an import statement starts with an import keyword that is supported by the ontology kind, followed by the imported ontology's ```IRI```. However, notice that a temporary limitation exists in OML that requires an ontology to be imported using a relative physical IRI) (e.g., ```../path/to/ontology.oml```). The import statement can optionally specify a different prefix for the imported ontology, using the syntax ```as PREFIX```, that overrides the default prefix specified by the ontology. The new ```PREFIX``` masks the one specified by the imported ontology within the importing ontology.
+An ontology may import other ontologies using one of the import statements allowed for the ontology kind. An import statement is placed within the body of the ontology before any member statement. The syntax of an import statement starts with an import keyword that is supported by the ontology kind, followed by the imported ontology's `IRI`. However, notice that a temporary limitation exists in OML that requires an ontology to be imported using a relative physical IRI) (e.g., `../path/to/ontology.oml`). The import statement can optionally specify a different prefix for the imported ontology, using the syntax `as PREFIX`, that overrides the default prefix specified by the ontology. The new `PREFIX` masks the one specified by the imported ontology within the importing ontology.
 
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
 import_keyword IRI (as PREFIX)?
- </pre> 
+ </pre>
 
 ### [=Member=] ### {#Member-Syntax}
 
-An ontology may declare members by adding them with member statements after all import statements. A new member is declared by one of the member keywords supported by the ontology kind, followed by the member's ```ID```. Other details supported by the member's syntax may also be added.
+An ontology may declare members by adding them with member statements after all import statements. A new member is declared by one of the member keywords supported by the ontology kind, followed by the member's `ID`. Other details supported by the member's syntax may also be added.
 
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
@@ -40,7 +40,7 @@ member_keyword ID ... ([
 
 ### [=Reference=] ### {#Reference-Syntax}
 
-In addition to declaring a new <a href="#Member-Syntax">Member</a> , an ontology may also add statements about already declared members (within the ontology or by one of its imported ontologies). Those statements where the onology member is the subject are called <a href="#Reference-Syntax">Reference</a> statements. Such statement has a syntx that (more or less) resembles that of a member declaration, except that it is preceeded with the keyword ```ref```, and a ```MEMBER_IRI``` is used instead of the ```ID``. Notice that it is more common to add such statement when the subject member is imported rather than local to the ontology, since in the latter case, it can be part of the member's declaration.
+In addition to declaring a new <a href="#Member-Syntax">Member</a> , an ontology may also add statements about already declared members (within the ontology or by one of its imported ontologies). Those statements where the onology member is the subject are called <a href="#Reference-Syntax">Reference</a> statements. Such statement has a syntax that (more or less) resembles that of a member declaration, except that it is preceeded with the keyword `ref`, and a `MEMBER_IRI` is used instead of the ``ID`. Notice that it is more common to add such statement when the subject member is imported rather than local to the ontology, since in the latter case, it can be part of the member's declaration.
 
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
@@ -52,7 +52,7 @@ ref member_keyword MEMBER_IRI ... ([
 ### IRI ### {#IRI-Syntax}
 
 An IRI is a globally unique identifier for an element (ontology or member). When an ontology is declared, its IRI typically has the syntax of a URL (e.g., http://ontology) but this is not a requirement. When members are declared within an ontology, their IRI is derived from that of their defining ontology as follow: Ontology_IRI + separator character (# | /) + MEMBER_ID (e.g., http://ontology#member). The member's IRI can also be abbreviated by replacing the defining ontology's IRI by its PREFIX (e.g., prefix:member). Notice that an importing ontology may override an imported ontology's prefix in the <a href="#Import-Syntax">Import</a> statement.
- 
+
 ### Comment ### {#Comment-Syntax}
 
 An ontology may have comments (descriptive text placed by ontology developers) that appear any where in the text using one of two syntaxes below. However, unlike an <a href="#Annotation-Syntax">Annotation</a>, which is part of the abstract syntax of an ontology, a <a href="#Comment-Syntax">Comment</a> is a purely notational element and hence may not be interchangeable with OML's other notations.
@@ -61,7 +61,7 @@ An ontology may have comments (descriptive text placed by ontology developers) t
 // single-line-comment
 
 /* possibly
-  multi-line 
+  multi-line
   comment */
 ```
 
@@ -78,7 +78,7 @@ An ontology may have comments (descriptive text placed by ontology developers) t
 </pre>
 
 ## Vocabularies ## {#Vocabularies-Syntax}
-	
+
 ### [=Vocabulary=] ### {#Vocabulary-Syntax}
 
 <pre class="highlight highlight-html">
@@ -94,40 +94,71 @@ vocabulary IRI with (# | /) as PREFIX {
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
 extends <a href="#Vocabulary-Syntax">Vocabulary_IRI</a> (as PREFIX)?
- </pre> 	
+ </pre>
 
 ### [=VocabularyUsage=] ### {#VocabularyUsage-Syntax}
 
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
 uses (<a href="#Description-Syntax">Description_IRI</a> | <a href="#DescriptionBundle-Syntax">DescriptionBundle_IRI</a>) (as PREFIX)?
- </pre> 	
+ </pre>
 
 ### [=Aspect=] ### {#Aspect-Syntax}
 
 Declaration
-<pre class="highlight highlight-html">
-(<a href="#Annotation-Syntax">Annotation</a>)*
-aspect ID (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)? ([
-	(<a href="#KeyAxiom-Syntax">KeyAxiom</a>)* 
-	(<a href="#ScalarPropertyRangeRestrictionAxiom-Syntax">ScalarPropertyRangeRestrictionAxiom</a> | <a href="#ScalarPropertyCardinalityRestrictionAxiom-Syntax">ScalarPropertyCardinalityRestrictionAxiom</a> | <a href="#ScalarPropertyValueRestrictionAxiom-Syntax">ScalarPropertyValueRestrictionAxiom</a> | <a href="#StructuredPropertyRangeRestrictionAxiom-Syntax">StructuredPropertyRangeRestrictionAxiom</a> | <a href="#StructuredPropertyCardinalityRestrictionAxiom-Syntax">StructuredPropertyCardinalityRestrictionAxiom</a> | <a href="#StructuredPropertyValueRestrictionAxiom-Syntax">StructuredPropertyValueRestrictionAxiom</a>)*
-	(<a href="#RelationRangeRestrictionAxiom-Syntax">RelationRangeRestrictionAxiom</a> | <a href="#RelationCardinalityRestrictionAxiom-Syntax">RelationCardinalityRestrictionAxiom</a> | <a href="#RelationTargetRestrictionAxiom-Syntax">RelationTargetRestrictionAxiom</a>)*
-])?
-</pre>
+
+<div class="tab-container">
+	<div class="bar">
+		<button class="bar-btn active" onclick="onBarClick(event)" value="text">Text</button>
+		<button class="bar-btn" onclick="onBarClick(event)" value="diagram">Diagram</button>
+	</div>
+	<div class="tab-content text">
+    	<pre class="highlight highlight-html">
+    	(<a href="#Annotation-Syntax">Annotation</a>)*
+    	aspect ID (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)? ([
+    		(<a href="#KeyAxiom-Syntax">KeyAxiom</a>)*
+    		(<a href="#ScalarPropertyRangeRestrictionAxiom-Syntax">ScalarPropertyRangeRestrictionAxiom</a> | <a href="#ScalarPropertyCardinalityRestrictionAxiom-Syntax">ScalarPropertyCardinalityRestrictionAxiom</a> | <a href="#ScalarPropertyValueRestrictionAxiom-Syntax">ScalarPropertyValueRestrictionAxiom</a> | <a href="#StructuredPropertyRangeRestrictionAxiom-Syntax">StructuredPropertyRangeRestrictionAxiom</a> | <a href="#StructuredPropertyCardinalityRestrictionAxiom-Syntax">StructuredPropertyCardinalityRestrictionAxiom</a> | <a href="#StructuredPropertyValueRestrictionAxiom-Syntax">StructuredPropertyValueRestrictionAxiom</a>)*
+    		(<a href="#RelationRangeRestrictionAxiom-Syntax">RelationRangeRestrictionAxiom</a> | <a href="#RelationCardinalityRestrictionAxiom-Syntax">RelationCardinalityRestrictionAxiom</a> | <a href="#RelationTargetRestrictionAxiom-Syntax">RelationTargetRestrictionAxiom</a>)*
+    	])?
+    	</pre>
+    </div>
+    <div class="tab-content diagram hidden">
+
+    	<pre class=include>path: images/aspect.svg</pre>
+
+    </div>
+
+</div>
 
 Reference
-<pre class="highlight highlight-html">
-(<a href="#Annotation-Syntax">Annotation</a>)*
-ref aspect <a href="#Aspect-Syntax">Aspect_IRI</a> (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)? ([
-	(<a href="#KeyAxiom-Syntax">KeyAxiom</a>)*
-	(<a href="#ScalarPropertyRangeRestrictionAxiom-Syntax">ScalarPropertyRangeRestrictionAxiom</a> | <a href="#ScalarPropertyCardinalityRestrictionAxiom-Syntax">ScalarPropertyCardinalityRestrictionAxiom</a> | <a href="#ScalarPropertyValueRestrictionAxiom-Syntax">ScalarPropertyValueRestrictionAxiom</a> | <a href="#StructuredPropertyRangeRestrictionAxiom-Syntax">StructuredPropertyRangeRestrictionAxiom</a> | <a href="#StructuredPropertyCardinalityRestrictionAxiom-Syntax">StructuredPropertyCardinalityRestrictionAxiom</a> | <a href="#StructuredPropertyValueRestrictionAxiom-Syntax">StructuredPropertyValueRestrictionAxiom</a>)*
-	(<a href="#RelationRangeRestrictionAxiom-Syntax">RelationRangeRestrictionAxiom</a> | <a href="#RelationCardinalityRestrictionAxiom-Syntax">RelationCardinalityRestrictionAxiom</a> | <a href="#RelationTargetRestrictionAxiom-Syntax">RelationTargetRestrictionAxiom</a>)*
-])?
-</pre>
+
+<div class="tab-container">
+	<div class="bar">
+		<button class="bar-btn active" onclick="onBarClick(event)" value="text">Text</button>
+		<button class="bar-btn" onclick="onBarClick(event)" value="diagram">Diagram</button>
+	</div>
+	<div class="tab-content text">
+    	<pre class="highlight highlight-html">
+    	(<a href="#Annotation-Syntax">Annotation</a>)*
+    	ref aspect <a href="#Aspect-Syntax">Aspect_IRI</a> (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)? ([
+    		(<a href="#KeyAxiom-Syntax">KeyAxiom</a>)*
+    		(<a href="#ScalarPropertyRangeRestrictionAxiom-Syntax">ScalarPropertyRangeRestrictionAxiom</a> | <a href="#ScalarPropertyCardinalityRestrictionAxiom-Syntax">ScalarPropertyCardinalityRestrictionAxiom</a> | <a href="#ScalarPropertyValueRestrictionAxiom-Syntax">ScalarPropertyValueRestrictionAxiom</a> | <a href="#StructuredPropertyRangeRestrictionAxiom-Syntax">StructuredPropertyRangeRestrictionAxiom</a> | <a href="#StructuredPropertyCardinalityRestrictionAxiom-Syntax">StructuredPropertyCardinalityRestrictionAxiom</a> | <a href="#StructuredPropertyValueRestrictionAxiom-Syntax">StructuredPropertyValueRestrictionAxiom</a>)*
+    		(<a href="#RelationRangeRestrictionAxiom-Syntax">RelationRangeRestrictionAxiom</a> | <a href="#RelationCardinalityRestrictionAxiom-Syntax">RelationCardinalityRestrictionAxiom</a> | <a href="#RelationTargetRestrictionAxiom-Syntax">RelationTargetRestrictionAxiom</a>)*
+    	])?
+    	</pre>
+    </div>
+    <div class="tab-content diagram hidden">
+
+    	<pre class=include>path: images/aspect_ref.svg</pre>
+
+    </div>
+
+</div>
 
 ### [=Concept=] ### {#Concept-Syntax}
 
 Declaration
+
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
 concept ID (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)? ([
@@ -138,6 +169,7 @@ concept ID (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (
 </pre>
 
 Reference
+
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
 ref concept <a href="#Concept-Syntax">Concept_IRI</a> (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)? ([
@@ -146,10 +178,11 @@ ref concept <a href="#Concept-Syntax">Concept_IRI</a> (:> <a href="#Specializati
 	(<a href="#RelationRangeRestrictionAxiom-Syntax">RelationRangeRestrictionAxiom</a> | <a href="#RelationCardinalityRestrictionAxiom-Syntax">RelationCardinalityRestrictionAxiom</a> | <a href="#RelationTargetRestrictionAxiom-Syntax">RelationTargetRestrictionAxiom</a>)*
 ])?
 </pre>
-	
+
 ### [=RelationEntity=] ### {#RelationEntity-Syntax}
 
 Declaration
+
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
 relation entity ID (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)? ([
@@ -171,6 +204,7 @@ relation entity ID (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxio
 </pre>
 
 Reference
+
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
 ref relation entity <a href="#RelationEntity-Syntax">RelationEntity_IRI</a> (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)? ([
@@ -183,6 +217,7 @@ ref relation entity <a href="#RelationEntity-Syntax">RelationEntity_IRI</a> (:> 
 ### [=ForwardRelation=] ### {#ForwardRelation-Syntax}
 
 Declaration
+
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
 forward ID
@@ -191,6 +226,7 @@ forward ID
 ### [=ReverseRelation=] ### {#ReverseRelation-Syntax}
 
 Declaration
+
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
 reverse ID
@@ -199,14 +235,16 @@ reverse ID
 ### [=RelationReference=] ### {#RelationReference-Syntax}
 
 Reference
+
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
 ref relation (<a href="#ReverseRelation-Syntax">ReverseRelation_IRI</a> | <a href="#ForwardRelation-Syntax">ForwardRelation_IRI</a>)
 </pre>
-		
+
 ### [=Structure=] ### {#Structure-Syntax}
 
 Declaration
+
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
 structure ID (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)? ([
@@ -215,6 +253,7 @@ structure ID (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>
 </pre>
 
 Reference
+
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
 ref structure <a href="#Structure-Syntax">Structure_IRI</a> (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)? ([
@@ -225,12 +264,14 @@ ref structure <a href="#Structure-Syntax">Structure_IRI</a> (:> <a href="#Specia
 ### [=AnnotationProperty=] ### {#AnnotationProperty-Syntax}
 
 Declaration
+
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
 annotation property ID (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)?
 </pre>
 
 Reference
+
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
 ref annotation property <a href="#AnnotationProperty-Syntax">AnnotationProperty_IRI</a> (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)?
@@ -239,6 +280,7 @@ ref annotation property <a href="#AnnotationProperty-Syntax">AnnotationProperty_
 ### [=ScalarProperty=] ### {#ScalarProperty-Syntax}
 
 Declaration
+
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
 scalar property ID (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)? ([
@@ -249,6 +291,7 @@ scalar property ID (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxio
 </pre>
 
 Reference
+
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
 ref scalar property <a href="#ScalarProperty-Syntax">ScalarProperty_IRI</a>( :> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)?
@@ -257,6 +300,7 @@ ref scalar property <a href="#ScalarProperty-Syntax">ScalarProperty_IRI</a>( :> 
 ### [=StructuredProperty=] ### {#StructuredProperty-Syntax}
 
 Declaration
+
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
 structured property ID (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)? ([
@@ -267,6 +311,7 @@ structured property ID (:> <a href="#SpecializationAxiom-Syntax">[Specialization
 </pre>
 
 Reference
+
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
 ref structured property <a href="#StructuredProperty-Syntax">StructuredProperty_IRI</a> (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)?
@@ -275,6 +320,7 @@ ref structured property <a href="#StructuredProperty-Syntax">StructuredProperty_
 ### [=FacetedScalar=] ### {#FacetedScalar-Syntax}
 
 Declaration
+
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
 scalar ID (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)? ([
@@ -291,6 +337,7 @@ scalar ID (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (,
 </pre>
 
 Reference
+
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
 ref scalar <a href="#FacetedScalar-Syntax">FacetedScalar_IRI</a> (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)?
@@ -299,6 +346,7 @@ ref scalar <a href="#FacetedScalar-Syntax">FacetedScalar_IRI</a> (:> <a href="#S
 ### [=EnumeratedScalar=] ### {#EnumeratedScalar-Syntax}
 
 Declaration
+
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
 enumerated scalar ID (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)? ([
@@ -307,6 +355,7 @@ enumerated scalar ID (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAx
 </pre>
 
 Reference
+
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
 ref enumerated scalar <a href="#EnumeratedScalar-Syntax">EnumeratedScalar_IRI</a> (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)?
@@ -315,18 +364,20 @@ ref enumerated scalar <a href="#EnumeratedScalar-Syntax">EnumeratedScalar_IRI</a
 ### [=Rule=] ### {#Rule-Syntax}
 
 Declaration
+
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
 rule ID [
 	(<a href="#EntityPredicate-Syntax">EntityPredicate</a> | <a href="#RelationPredicate-Syntax">RelationPredicate</a> | <a href="#RelationEntityPredicate-Syntax">RelationEntityPredicate</a> | <a href="#SameAsPredicate-Syntax">SameAsPredicate</a> | <a href="#DifferentFromPredicate-Syntax">DifferentFromPredicate</a>)
-	(^ (<a href="#EntityPredicate-Syntax">EntityPredicate</a> | <a href="#RelationPredicate-Syntax">RelationPredicate</a> | <a href="#RelationEntityPredicate-Syntax">RelationEntityPredicate</a> | <a href="#SameAsPredicate-Syntax">SameAsPredicate</a> | <a href="#DifferentFromPredicate-Syntax">DifferentFromPredicate</a>))* 
-	-> 
+	(^ (<a href="#EntityPredicate-Syntax">EntityPredicate</a> | <a href="#RelationPredicate-Syntax">RelationPredicate</a> | <a href="#RelationEntityPredicate-Syntax">RelationEntityPredicate</a> | <a href="#SameAsPredicate-Syntax">SameAsPredicate</a> | <a href="#DifferentFromPredicate-Syntax">DifferentFromPredicate</a>))*
+	->
 	(<a href="#EntityPredicate-Syntax">EntityPredicate</a> | <a href="#RelationPredicate-Syntax">RelationPredicate</a> | <a href="#RelationEntityPredicate-Syntax">RelationEntityPredicate</a> | <a href="#SameAsPredicate-Syntax">SameAsPredicate</a> | <a href="#DifferentFromPredicate-Syntax">DifferentFromPredicate</a>)
-	(^ (<a href="#EntityPredicate-Syntax">EntityPredicate</a> | <a href="#RelationPredicate-Syntax">RelationPredicate</a> | <a href="#RelationEntityPredicate-Syntax">RelationEntityPredicate</a> | <a href="#SameAsPredicate-Syntax">SameAsPredicate</a> | <a href="#DifferentFromPredicate-Syntax">DifferentFromPredicate</a>))* 
+	(^ (<a href="#EntityPredicate-Syntax">EntityPredicate</a> | <a href="#RelationPredicate-Syntax">RelationPredicate</a> | <a href="#RelationEntityPredicate-Syntax">RelationEntityPredicate</a> | <a href="#SameAsPredicate-Syntax">SameAsPredicate</a> | <a href="#DifferentFromPredicate-Syntax">DifferentFromPredicate</a>))*
 ]
 </pre>
 
 Reference
+
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
 ref rule <a href="#Rule-Syntax">Rule_IRI</a>
@@ -338,7 +389,7 @@ ref rule <a href="#Rule-Syntax">Rule_IRI</a>
 (<a href="#Annotation-Syntax">Annotation</a>)*
 (<a href="#Aspect-Syntax">Aspect_IRI</a> | <a href="#Concept-Syntax">Concept_IRI</a> | <a href="#RelationEntity-Syntax">RelationEntity_IRI</a>) (VAR)
 </pre>
-	
+
 ### [=RelationPredicate=] ### {#RelationPredicate-Syntax}
 
 <pre class="highlight highlight-html">
@@ -469,7 +520,7 @@ includes <a href="#Vocabulary-Syntax">Vocabulary_IRI</a> (as PREFIX)?
 </pre>
 
 ## Descriptions ## {#Descriptions-Syntax-Syntax}
-	
+
 ### [=Description=] ### {#Description-Syntax}
 
 <pre class="highlight highlight-html">
@@ -497,6 +548,7 @@ uses (<a href="#Vocabulary-Syntax">Vocabulary_IRI</a> | <a href="#VocabularyBund
 ### [=ConceptInstance=] ### {#ConceptInstance-Syntax}
 
 Declaration
+
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
 ci ID (: <a href="#ConceptTypeAssertion-Syntax">ConceptTypeAssertion</a> (, <a href="#ConceptTypeAssertion-Syntax">ConceptTypeAssertion</a>)*)? ([
@@ -506,6 +558,7 @@ ci ID (: <a href="#ConceptTypeAssertion-Syntax">ConceptTypeAssertion</a> (, <a h
 </pre>
 
 Reference
+
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
 ref ci <a href="#ConceptInstance-Syntax">ConceptInstance_IRI</a> (: ownedTypes+=ConceptTypeAssertion (, ownedTypes+=ConceptTypeAssertion)*)? ([
@@ -513,10 +566,11 @@ ref ci <a href="#ConceptInstance-Syntax">ConceptInstance_IRI</a> (: ownedTypes+=
 	(<a href="#LinkAssertion-Syntax">LinkAssertion</a>)*
 ])?
 </pre>
-	
+
 ### [=RelationInstance=] ### {#RelationInstance-Syntax}
 
 Declaration
+
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
 ri ID (: <a href="#RelationTypeAssertion-Syntax">RelationTypeAssertion</a> (, <a href="#RelationTypeAssertion-Syntax">RelationTypeAssertion</a>)*)? ([
@@ -526,8 +580,9 @@ ri ID (: <a href="#RelationTypeAssertion-Syntax">RelationTypeAssertion</a> (, <a
 	(<a href="#LinkAssertion-Syntax">LinkAssertion</a>)*
 ])?
 </pre>
-		
+
 Reference
+
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
 ref ri <a href="#RelationInstance-Syntax">RelationInstance_IRI</a> (: <a href="#RelationTypeAssertion-Syntax">RelationTypeAssertion</a> (, <a href="#RelationTypeAssertion-Syntax">RelationTypeAssertion</a>)*)? ([
