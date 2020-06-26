@@ -107,53 +107,21 @@ uses (<a href="#Description-Syntax">Description_IRI</a> | <a href="#DescriptionB
 
 Declaration
 
-<div class="tab-container">
-	<div class="bar">
-		<button class="bar-btn active" onclick="onBarClick(event)" value="text">Text</button>
-		<button class="bar-btn" onclick="onBarClick(event)" value="diagram">Diagram</button>
-	</div>
-	<div class="tab-content text">
-    	<pre class="highlight highlight-html">
-    	(<a href="#Annotation-Syntax">Annotation</a>)*
-    	aspect ID (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)? ([
-    		(<a href="#KeyAxiom-Syntax">KeyAxiom</a>)*
-    		(<a href="#ScalarPropertyRangeRestrictionAxiom-Syntax">ScalarPropertyRangeRestrictionAxiom</a> | <a href="#ScalarPropertyCardinalityRestrictionAxiom-Syntax">ScalarPropertyCardinalityRestrictionAxiom</a> | <a href="#ScalarPropertyValueRestrictionAxiom-Syntax">ScalarPropertyValueRestrictionAxiom</a> | <a href="#StructuredPropertyRangeRestrictionAxiom-Syntax">StructuredPropertyRangeRestrictionAxiom</a> | <a href="#StructuredPropertyCardinalityRestrictionAxiom-Syntax">StructuredPropertyCardinalityRestrictionAxiom</a> | <a href="#StructuredPropertyValueRestrictionAxiom-Syntax">StructuredPropertyValueRestrictionAxiom</a>)*
-    		(<a href="#RelationRangeRestrictionAxiom-Syntax">RelationRangeRestrictionAxiom</a> | <a href="#RelationCardinalityRestrictionAxiom-Syntax">RelationCardinalityRestrictionAxiom</a> | <a href="#RelationTargetRestrictionAxiom-Syntax">RelationTargetRestrictionAxiom</a>)*
-    	])?
-    	</pre>
-    </div>
-    <div class="tab-content diagram hidden">
-
-    	<pre class=include>path: images/aspect.svg</pre>
-
-    </div>
-
-</div>
+<pre class="include">
+path: tabs.md
+macros:
+	textpath: concrete_syntax/aspect.md
+    svgpath: images/aspect.svg
+</pre>
 
 Reference
 
-<div class="tab-container">
-	<div class="bar">
-		<button class="bar-btn active" onclick="onBarClick(event)" value="text">Text</button>
-		<button class="bar-btn" onclick="onBarClick(event)" value="diagram">Diagram</button>
-	</div>
-	<div class="tab-content text">
-    	<pre class="highlight highlight-html">
-    	(<a href="#Annotation-Syntax">Annotation</a>)*
-    	ref aspect <a href="#Aspect-Syntax">Aspect_IRI</a> (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)? ([
-    		(<a href="#KeyAxiom-Syntax">KeyAxiom</a>)*
-    		(<a href="#ScalarPropertyRangeRestrictionAxiom-Syntax">ScalarPropertyRangeRestrictionAxiom</a> | <a href="#ScalarPropertyCardinalityRestrictionAxiom-Syntax">ScalarPropertyCardinalityRestrictionAxiom</a> | <a href="#ScalarPropertyValueRestrictionAxiom-Syntax">ScalarPropertyValueRestrictionAxiom</a> | <a href="#StructuredPropertyRangeRestrictionAxiom-Syntax">StructuredPropertyRangeRestrictionAxiom</a> | <a href="#StructuredPropertyCardinalityRestrictionAxiom-Syntax">StructuredPropertyCardinalityRestrictionAxiom</a> | <a href="#StructuredPropertyValueRestrictionAxiom-Syntax">StructuredPropertyValueRestrictionAxiom</a>)*
-    		(<a href="#RelationRangeRestrictionAxiom-Syntax">RelationRangeRestrictionAxiom</a> | <a href="#RelationCardinalityRestrictionAxiom-Syntax">RelationCardinalityRestrictionAxiom</a> | <a href="#RelationTargetRestrictionAxiom-Syntax">RelationTargetRestrictionAxiom</a>)*
-    	])?
-    	</pre>
-    </div>
-    <div class="tab-content diagram hidden">
-
-    	<pre class=include>path: images/aspect_ref.svg</pre>
-
-    </div>
-
-</div>
+<pre class="include">
+path: tabs.md
+macros:
+	textpath: concrete_syntax/aspect_ref.md
+	svgpath: images/aspect_ref.svg
+</pre>
 
 ### [=Concept=] ### {#Concept-Syntax}
 
