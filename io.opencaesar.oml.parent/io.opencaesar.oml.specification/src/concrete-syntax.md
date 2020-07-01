@@ -81,12 +81,11 @@ An ontology may have comments (descriptive text placed by ontology developers) t
 
 ### [=Vocabulary=] ### {#Vocabulary-Syntax}
 
-<pre class="highlight highlight-html">
-(<a href="#Annotation-Syntax">Annotation</a>)*
-vocabulary IRI with (# | /) as PREFIX {
-	(<a href="#VocabularyExtension-Syntax">VocabularyExtension</a> | <a href="#VocabularyUsage-Syntax">VocabularyUsage</a>)*
-	(<a href="#Aspect-Syntax">Aspect</a> | <a href="#Concept-Syntax">Concept</a> | <a href="#RelationEntity-Syntax">RelationEntity</a> | <a href="#RelationReference-Syntax">RelationReference</a> | <a href="#Structure-Syntax">Structure</a> | <a href="#FacetedScalar-Syntax">FacetedScalar</a> | <a href="#EnumeratedScalar-Syntax">EnumeratedScalar</a> | <a href="#ScalarProperty-Syntax">ScalarProperty</a> | <a href="#StructuredProperty-Syntax">StructuredProperty</a> | <a href="#AnnotationProperty-Syntax">AnnotationProperty</a> | <a href="#Rule-Syntax">Rule</a>)*
-}
+<pre class="include">
+path: tabs.md
+macros:
+	textpath: concrete_syntax/vocabulary.md
+    svgpath: images/vocabulary.svg
 </pre>
 
 ### [=VocabularyExtension=] ### {#VocabularyExtension-Syntax}
@@ -336,37 +335,47 @@ macros:
 
 ### [=EntityPredicate=] ### {#EntityPredicate-Syntax}
 
-<pre class="highlight highlight-html">
-(<a href="#Annotation-Syntax">Annotation</a>)*
-(<a href="#Aspect-Syntax">Aspect_IRI</a> | <a href="#Concept-Syntax">Concept_IRI</a> | <a href="#RelationEntity-Syntax">RelationEntity_IRI</a>) (VAR)
+<pre class="include">
+path: tabs.md
+macros:
+	textpath: concrete_syntax/entity_predicate.md
+    svgpath: images/entity_predicate.svg
 </pre>
 
 ### [=RelationPredicate=] ### {#RelationPredicate-Syntax}
 
-<pre class="highlight highlight-html">
-(<a href="#Annotation-Syntax">Annotation</a>)*
-(<a href="#ForwardRelation-Syntax">ForwardRelation_IRI</a> | <a href="#ReverseRelation-Syntax">ReverseRelation_IRI</a>) (VAR1 , VAR2)
+<pre class="include">
+path: tabs.md
+macros:
+	textpath: concrete_syntax/relation_predicate.md
+    svgpath: images/relation_predicate.svg
 </pre>
 
 ### [=RelationEntityPredicate=] ### {#RelationEntityPredicate-Syntax}
 
-<pre class="highlight highlight-html">
-(<a href="#Annotation-Syntax">Annotation</a>)*
-<a href="#RelationEntity-Syntax">RelationEntity_IRI</a> (VAR1 , ENTITY_VAR , VAR2)
+<pre class="include">
+path: tabs.md
+macros:
+	textpath: concrete_syntax/relation_entity_predicate.md
+    svgpath: images/relation_entity_predicate.svg
 </pre>
 
 ### [=SameAsPredicate=] ### {#SameAsPredicate-Syntax}
 
-<pre class="highlight highlight-html">
-(<a href="#Annotation-Syntax">Annotation</a>)*
-sameAs (VAR1 , VAR2)
+<pre class="include">
+path: tabs.md
+macros:
+	textpath: concrete_syntax/same_as_predicate.md
+    svgpath: images/same_as_predicate.svg
 </pre>
 
 ### [=DifferentFromPredicate=] ### {#DifferentFromPredicate-Syntax}
 
-<pre class="highlight highlight-html">
-(<a href="#Annotation-Syntax">Annotation</a>)*
-differentFrom (VAR1 , VAR2)
+<pre class="include">
+path: tabs.md
+macros:
+	textpath: concrete_syntax/different_from_predicate.md
+    svgpath: images/different_from_predicate.svg
 </pre>
 
 ### [=SpecializationAxiom=] ### {#SpecializationAxiom-Syntax}
