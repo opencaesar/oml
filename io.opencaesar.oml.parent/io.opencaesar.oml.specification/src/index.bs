@@ -81,7 +81,7 @@ tbody td:nth-child(5) {
   // justify-content: center;
   align-items: center;
   // background-color: #D5D5D5;
-  min-height: 150px;
+  min-height: 50px;
 }
 
 .tab-content.diagram.hidden {

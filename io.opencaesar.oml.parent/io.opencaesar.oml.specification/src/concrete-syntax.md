@@ -147,53 +147,42 @@ macros:
 
 Declaration
 
-<pre class="highlight highlight-html">
-(<a href="#Annotation-Syntax">Annotation</a>)*
-relation entity ID (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)? ([
-	from (<a href="#Aspect-Syntax">Aspect_IRI</a>|<a href="#Concept-Syntax">Concept_IRI</a>|<a href="#RelationEntity-Syntax">RelationEntity_IRI</a>)
-	to (<a href="#Aspect-Syntax">Aspect_IRI</a>|<a href="#Concept-Syntax">Concept_IRI</a>|<a href="#RelationEntity-Syntax">RelationEntity_IRI</a>)
-	<a href="#ForwardRelation-Syntax">ForwardRelation</a>
-	(<a href="#ReverseRelation-Syntax">ReverseRelation</a>)?
-	(functional)?
-	(inverseFunctional)?
-	(symmetric)?
-	(asymmetric)?
-	(reflexive)?
-	(irreflexive)?
-	(transitive)?
-	(<a href="#KeyAxiom-Syntax">KeyAxiom</a>)*
-	(<a href="#ScalarPropertyRangeRestrictionAxiom-Syntax">ScalarPropertyRangeRestrictionAxiom</a> | <a href="#ScalarPropertyCardinalityRestrictionAxiom-Syntax">ScalarPropertyCardinalityRestrictionAxiom</a> | <a href="#ScalarPropertyValueRestrictionAxiom-Syntax">ScalarPropertyValueRestrictionAxiom</a> | <a href="#StructuredPropertyRangeRestrictionAxiom-Syntax">StructuredPropertyRangeRestrictionAxiom</a> | <a href="#StructuredPropertyCardinalityRestrictionAxiom-Syntax">StructuredPropertyCardinalityRestrictionAxiom</a> | <a href="#StructuredPropertyValueRestrictionAxiom-Syntax">StructuredPropertyValueRestrictionAxiom</a>)*
-	(<a href="#RelationRangeRestrictionAxiom-Syntax">RelationRangeRestrictionAxiom</a> | <a href="#RelationCardinalityRestrictionAxiom-Syntax">RelationCardinalityRestrictionAxiom</a> | <a href="#RelationTargetRestrictionAxiom-Syntax">RelationTargetRestrictionAxiom</a>)*
-])?
+<pre class="include">
+path: tabs.md
+macros:
+	textpath: concrete_syntax/relation_entity.md
+    svgpath: images/relation_entity.svg
 </pre>
 
 Reference
 
-<pre class="highlight highlight-html">
-(<a href="#Annotation-Syntax">Annotation</a>)*
-ref relation entity <a href="#RelationEntity-Syntax">RelationEntity_IRI</a> (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)? ([
-	(<a href="#KeyAxiom-Syntax">KeyAxiom</a>)*
-	(<a href="#ScalarPropertyRangeRestrictionAxiom-Syntax">ScalarPropertyRangeRestrictionAxiom</a> | <a href="#ScalarPropertyCardinalityRestrictionAxiom-Syntax">ScalarPropertyCardinalityRestrictionAxiom</a> | <a href="#ScalarPropertyValueRestrictionAxiom-Syntax">ScalarPropertyValueRestrictionAxiom</a> | <a href="#StructuredPropertyRangeRestrictionAxiom-Syntax">StructuredPropertyRangeRestrictionAxiom</a> | <a href="#StructuredPropertyCardinalityRestrictionAxiom-Syntax">StructuredPropertyCardinalityRestrictionAxiom</a> | <a href="#StructuredPropertyValueRestrictionAxiom-Syntax">StructuredPropertyValueRestrictionAxiom</a>)*
-	(<a href="#RelationRangeRestrictionAxiom-Syntax">RelationRangeRestrictionAxiom</a> | <a href="#RelationCardinalityRestrictionAxiom-Syntax">RelationCardinalityRestrictionAxiom</a> | <a href="#RelationTargetRestrictionAxiom-Syntax">RelationTargetRestrictionAxiom</a>)*
-])?
+<pre class="include">
+path: tabs.md
+macros:
+	textpath: concrete_syntax/relation_entity_ref.md
+    svgpath: images/relation_entity_ref.svg
 </pre>
 
 ### [=ForwardRelation=] ### {#ForwardRelation-Syntax}
 
 Declaration
 
-<pre class="highlight highlight-html">
-(<a href="#Annotation-Syntax">Annotation</a>)*
-forward ID
+<pre class="include">
+path: tabs.md
+macros:
+	textpath: concrete_syntax/forward_relation.md
+    svgpath: images/forward_relation.svg
 </pre>
 
 ### [=ReverseRelation=] ### {#ReverseRelation-Syntax}
 
 Declaration
 
-<pre class="highlight highlight-html">
-(<a href="#Annotation-Syntax">Annotation</a>)*
-reverse ID
+<pre class="include">
+path: tabs.md
+macros:
+	textpath: concrete_syntax/reverse_relation.md
+    svgpath: images/reverse_relation.svg
 </pre>
 
 ### [=RelationReference=] ### {#RelationReference-Syntax}
@@ -249,40 +238,40 @@ macros:
 
 Declaration
 
-<pre class="highlight highlight-html">
-(<a href="#Annotation-Syntax">Annotation</a>)*
-scalar property ID (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)? ([
-	domain (<a href="#Aspect-Syntax">Aspect_IRI</a> | <a href="#Concept-Syntax">Concept_IRI</a>|<a href="#RelationEntity-Syntax">RelationEntity_IRI</a> | <a href="#Structure-Syntax">Structure_IRI</a>)
-	range (<a href="#FacetedScalar-Syntax">FacetedScalar_IRI</a> | <a href="#EnumeratedScalar-Syntax">EnumeratedScalar_IRI</a>)
-	(functional)?
-])?
+<pre class="include">
+path: tabs.md
+macros:
+	textpath: concrete_syntax/scalar_property.md
+    svgpath: images/id_range_label.svg
 </pre>
 
 Reference
 
-<pre class="highlight highlight-html">
-(<a href="#Annotation-Syntax">Annotation</a>)*
-ref scalar property <a href="#ScalarProperty-Syntax">ScalarProperty_IRI</a>( :> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)?
+<pre class="include">
+path: tabs.md
+macros:
+	textpath: concrete_syntax/scalar_property_ref.md
+    svgpath: images/scalar_property_ref.svg
 </pre>
 
 ### [=StructuredProperty=] ### {#StructuredProperty-Syntax}
 
 Declaration
 
-<pre class="highlight highlight-html">
-(<a href="#Annotation-Syntax">Annotation</a>)*
-structured property ID (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)? ([
-	domain (<a href="#Aspect-Syntax">Aspect_IRI</a> | <a href="#Concept-Syntax">Concept_IRI</a> | <a href="#RelationEntity-Syntax">RelationEntity_IRI</a> | <a href="#Structure-Syntax">Structure_IRI</a>)
-	range <a href="#Structure-Syntax">Structure_IRI</a>
-	(functional)?
-])?
+<pre class="include">
+path: tabs.md
+macros:
+	textpath: concrete_syntax/structured_property.md
+    svgpath: images/id_range_label.svg
 </pre>
 
 Reference
 
-<pre class="highlight highlight-html">
-(<a href="#Annotation-Syntax">Annotation</a>)*
-ref structured property <a href="#StructuredProperty-Syntax">StructuredProperty_IRI</a> (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)?
+<pre class="include">
+path: tabs.md
+macros:
+	textpath: concrete_syntax/structured_property_ref.md
+    svgpath: images/structured_property_ref.svg
 </pre>
 
 ### [=FacetedScalar=] ### {#FacetedScalar-Syntax}
@@ -329,22 +318,20 @@ macros:
 
 Declaration
 
-<pre class="highlight highlight-html">
-(<a href="#Annotation-Syntax">Annotation</a>)*
-rule ID [
-	(<a href="#EntityPredicate-Syntax">EntityPredicate</a> | <a href="#RelationPredicate-Syntax">RelationPredicate</a> | <a href="#RelationEntityPredicate-Syntax">RelationEntityPredicate</a> | <a href="#SameAsPredicate-Syntax">SameAsPredicate</a> | <a href="#DifferentFromPredicate-Syntax">DifferentFromPredicate</a>)
-	(^ (<a href="#EntityPredicate-Syntax">EntityPredicate</a> | <a href="#RelationPredicate-Syntax">RelationPredicate</a> | <a href="#RelationEntityPredicate-Syntax">RelationEntityPredicate</a> | <a href="#SameAsPredicate-Syntax">SameAsPredicate</a> | <a href="#DifferentFromPredicate-Syntax">DifferentFromPredicate</a>))*
-	->
-	(<a href="#EntityPredicate-Syntax">EntityPredicate</a> | <a href="#RelationPredicate-Syntax">RelationPredicate</a> | <a href="#RelationEntityPredicate-Syntax">RelationEntityPredicate</a> | <a href="#SameAsPredicate-Syntax">SameAsPredicate</a> | <a href="#DifferentFromPredicate-Syntax">DifferentFromPredicate</a>)
-	(^ (<a href="#EntityPredicate-Syntax">EntityPredicate</a> | <a href="#RelationPredicate-Syntax">RelationPredicate</a> | <a href="#RelationEntityPredicate-Syntax">RelationEntityPredicate</a> | <a href="#SameAsPredicate-Syntax">SameAsPredicate</a> | <a href="#DifferentFromPredicate-Syntax">DifferentFromPredicate</a>))*
-]
+<pre class="include">
+path: tabs.md
+macros:
+	textpath: concrete_syntax/rule.md
+    svgpath: images/rule.svg
 </pre>
 
 Reference
 
-<pre class="highlight highlight-html">
-(<a href="#Annotation-Syntax">Annotation</a>)*
-ref rule <a href="#Rule-Syntax">Rule_IRI</a>
+<pre class="include">
+path: tabs.md
+macros:
+	textpath: concrete_syntax/rule_ref.md
+    svgpath: images/rule_ref.svg
 </pre>
 
 ### [=EntityPredicate=] ### {#EntityPredicate-Syntax}
