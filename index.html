@@ -1221,9 +1221,9 @@ Possible extra rowspan handling
 		}
 	}
 </style>
-  <meta content="Bikeshed version e5a8310e, updated Thu Jun 11 17:47:44 2020 -0700" name="generator">
+  <meta content="Bikeshed version 04c91f0f, updated Mon Jun 29 08:51:04 2020 +0200" name="generator">
   <link href="https://github.com/opencaesar/oml" rel="canonical">
-  <meta content="db54cf06c1df8ba77225468ee9c9042d5d1fc9e2" name="document-revision">
+  <meta content="a46067adf36421de05ee95cba0be235b939b20ca" name="document-revision">
 <style>
 body {
   padding: 0;
@@ -1280,6 +1280,60 @@ tbody td:nth-child(4) {
 tbody td:nth-child(5) {
   text-align: left;
 }
+
+.tab-container {
+  margin-bottom: 35px;
+}
+
+.tab-content {
+  // padding-top: 1em;
+}
+
+.tab-content.diagram {
+  padding-top: 1em;
+  display: flex;
+  // justify-content: center;
+  align-items: center;
+  // background-color: #D5D5D5;
+  min-height: 50px;
+}
+
+.tab-content.diagram.hidden {
+  display: none;
+}
+
+.hidden {
+  display: none;
+}
+
+.bar {
+  width: 100%;
+  overflow: hidden;
+  background-color: #668ba8;
+  display: flex;
+}
+
+.bar-btn {
+  border: none;
+  padding: 8px 16px;
+  user-select: none;
+  background-color: inherit;
+  color: white;
+  cursor: pointer;
+  width: auto;
+  display: block;
+}
+
+.bar button.active {
+  color: black;
+  background-color: #67cbf8;
+}
+
+.bar button:hover {
+  color: black;
+  background-color: #cdb066;
+}
+
 </style>
 <style>/* style-autolinks */
 
@@ -1527,7 +1581,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://opencaesar.github.io/oml/"> <img alt="Ontological Modeling Language" height="60" src="images/oml.svg"> </a></p>
    <h1 class="p-name no-ref" id="title">Ontological Modeling Language 0.7</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Document, <time class="dt-updated" datetime="2020-06-12">12 June 2020</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Document, <time class="dt-updated" datetime="2020-07-08">8 July 2020</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1553,7 +1607,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
    <ol class="toc" role="directory">
     <li><a href="#GettingStarted"><span class="secno">1</span> <span class="content">Getting Started</span></a>
     <li>
-     <a href="#TextualSyntax"><span class="secno">2</span> <span class="content">Textual Syntax</span></a>
+     <a href="#ConcreteSyntax"><span class="secno">2</span> <span class="content">Concrete Syntax</span></a>
      <ol class="toc">
       <li>
        <a href="#Common-Syntax"><span class="secno">2.1</span> <span class="content">Common</span></a>
@@ -1567,6 +1621,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
         <li><a href="#Comment-Syntax"><span class="secno">2.1.7</span> <span class="content">Comment</span></a>
         <li><a href="#Annotation-Syntax"><span class="secno">2.1.8</span> <span class="content"><span>Annotation</span></span></a>
         <li><a href="#Literal-Syntax"><span class="secno">2.1.9</span> <span class="content"><span>Literal</span></span></a>
+        <li><a href="#Diagram-Syntax"><span class="secno">2.1.10</span> <span class="content">[Diagram]</span></a>
        </ol>
       <li>
        <a href="#Vocabularies-Syntax"><span class="secno">2.2</span> <span class="content">Vocabularies</span></a>
@@ -1821,7 +1876,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <main>
    <div>
     <h2 class="heading settled" data-level="1" id="GettingStarted"><span class="secno">1. </span><span class="content">Getting Started</span><a class="self-link" href="#GettingStarted"></a></h2>
-    <h2 class="heading settled" data-level="2" id="TextualSyntax"><span class="secno">2. </span><span class="content">Textual Syntax</span><a class="self-link" href="#TextualSyntax"></a></h2>
+    <h2 class="heading settled" data-level="2" id="ConcreteSyntax"><span class="secno">2. </span><span class="content">Concrete Syntax</span><a class="self-link" href="#ConcreteSyntax"></a></h2>
     <h3 class="heading settled" data-level="2.1" id="Common-Syntax"><span class="secno">2.1. </span><span class="content">Common</span><a class="self-link" href="#Common-Syntax"></a></h3>
     <h4 class="heading settled" data-level="2.1.1" id="Whitespace-Grammar"><span class="secno">2.1.1. </span><span class="content">Whitespace</span><a class="self-link" href="#Whitespace-Grammar"></a></h4>
     <p>The OML textual language is free-form, meaning that whitespace characters can be freely placed to delimit tokens, but have no other significance.</p>
@@ -1846,7 +1901,7 @@ member_keyword ID ... ([
 ])?
 </pre>
     <h4 class="heading settled" data-level="2.1.5" id="Reference-Syntax"><span class="secno">2.1.5. </span><span class="content"><a data-link-type="dfn" href="#reference" id="ref-for-reference">Reference</a></span><a class="self-link" href="#Reference-Syntax"></a></h4>
-    <p>In addition to declaring a new <a href="#Member-Syntax">Member</a> , an ontology may also add statements about already declared members (within the ontology or by one of its imported ontologies). Those statements where the onology member is the subject are called <a href="#Reference-Syntax">Reference</a> statements. Such statement has a syntx that (more or less) resembles that of a member declaration, except that it is preceeded with the keyword <code>ref</code>, and a <code>MEMBER_IRI</code> is used instead of the ```ID``. Notice that it is more common to add such statement when the subject member is imported rather than local to the ontology, since in the latter case, it can be part of the member’s declaration.</p>
+    <p>In addition to declaring a new <a href="#Member-Syntax">Member</a> , an ontology may also add statements about already declared members (within the ontology or by one of its imported ontologies). Those statements where the onology member is the subject are called <a href="#Reference-Syntax">Reference</a> statements. Such statement has a syntax that (more or less) resembles that of a member declaration, except that it is preceeded with the keyword <code>ref</code>, and a <code>MEMBER_IRI</code> is used instead of the ``ID`. Notice that it is more common to add such statement when the subject member is imported rather than local to the ontology, since in the latter case, it can be part of the member’s declaration.</p>
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
 ref member_keyword MEMBER_IRI ... ([
   ...
@@ -1859,7 +1914,7 @@ ref member_keyword MEMBER_IRI ... ([
 <pre class="language-javascript highlight"><c- c1>// single-line-comment</c->
 
 <c- d>/* possibly</c->
-<c- d>  multi-line </c->
+<c- d>  multi-line</c->
 <c- d>  comment */</c->
 </pre>
     <h4 class="heading settled" data-level="2.1.8" id="Annotation-Syntax"><span class="secno">2.1.8. </span><span class="content"><a data-link-type="dfn" href="#annotation" id="ref-for-annotation">Annotation</a></span><a class="self-link" href="#Annotation-Syntax"></a></h4>
@@ -1868,14 +1923,207 @@ ref member_keyword MEMBER_IRI ... ([
     <h4 class="heading settled" data-level="2.1.9" id="Literal-Syntax"><span class="secno">2.1.9. </span><span class="content"><a data-link-type="dfn" href="#literal" id="ref-for-literal">Literal</a></span><a class="self-link" href="#Literal-Syntax"></a></h4>
 <pre class="highlight highlight-html">(INTEGER | DECIMAL | DOUBLE | BOOLEAN | STRING) (^^(<a href="#FacetedScalar-Syntax">[FacetedScalar_IRI]</a> | <a href="#EnumeratedScalar-Syntax">[EnumeratedScalar_IRI]</a>))?
 </pre>
+    <h4 class="heading settled" data-level="2.1.10" id="Diagram-Syntax"><span class="secno">2.1.10. </span><span class="content">[Diagram]</span><a class="self-link" href="#Diagram-Syntax"></a></h4>
+    <p>The concrete syntax for each OML element is organized into tabs. The "Text" tab is showcased by default, displaying the textual syntax of the OML element. To see the graphical syntax of the element, click on the "Diagram" tab.</p>
+    <p>The symbols colored in orange, and the symbols boxed in gray, are there solely to communicate more information about the elements they are attached to. They will not show up in actual implementations of OML diagrams.</p>
+    <p>Elements with a blue hyperlink can be clicked on to redirect to a detailed description of their concrete syntax.</p>
+    <p>Diagram compartments are laid out in free form, and list compartments are laid out vertically.</p>
     <h3 class="heading settled" data-level="2.2" id="Vocabularies-Syntax"><span class="secno">2.2. </span><span class="content">Vocabularies</span><a class="self-link" href="#Vocabularies-Syntax"></a></h3>
     <h4 class="heading settled" data-level="2.2.1" id="Vocabulary-Syntax"><span class="secno">2.2.1. </span><span class="content"><a data-link-type="dfn" href="#vocabulary" id="ref-for-vocabulary">Vocabulary</a></span><a class="self-link" href="#Vocabulary-Syntax"></a></h4>
+    <div class="tab-container">
+     <div class="bar">
+      <button class="bar-btn active" onclick="onBarClick(event)" value="text">Text</button>
+      <button class="bar-btn" onclick="onBarClick(event)" value="diagram">Diagram</button>
+     </div>
+     <div class="tab-content text">
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
 vocabulary IRI with (# | /) as PREFIX {
   (<a href="#VocabularyExtension-Syntax">VocabularyExtension</a> | <a href="#VocabularyUsage-Syntax">VocabularyUsage</a>)*
   (<a href="#Aspect-Syntax">Aspect</a> | <a href="#Concept-Syntax">Concept</a> | <a href="#RelationEntity-Syntax">RelationEntity</a> | <a href="#RelationReference-Syntax">RelationReference</a> | <a href="#Structure-Syntax">Structure</a> | <a href="#FacetedScalar-Syntax">FacetedScalar</a> | <a href="#EnumeratedScalar-Syntax">EnumeratedScalar</a> | <a href="#ScalarProperty-Syntax">ScalarProperty</a> | <a href="#StructuredProperty-Syntax">StructuredProperty</a> | <a href="#AnnotationProperty-Syntax">AnnotationProperty</a> | <a href="#Rule-Syntax">Rule</a>)*
 }
 </pre>
+     </div>
+     <div class="tab-content diagram hidden">
+      <p></p>
+      <svg height="291px" style="background-color: rgb(255, 255, 255);" version="1.1" viewBox="-0.5 -0.5 506 291" width="506px" xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+       <defs></defs>
+       <g>
+        <rect fill="#ffffff" height="290" pointer-events="all" stroke="#000000" width="505" x="0" y="0"></rect>
+        <rect fill="#ffffff" height="20" pointer-events="all" stroke="#000000" width="150" x="0" y="0"></rect>
+        <g transform="translate(-0.5 -0.5)">
+         <switch>
+          <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+           <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 148px; height: 1px; padding-top: 10px; margin-left: 1px;" xmlns="http://www.w3.org/1999/xhtml">
+            <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+             <div style="display: inline-block; font-size: 17px; font-family: Helvetica; color: #007FFF; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; "><span style="color: rgb(0 , 0 , 0) ; font-size: 15px">«vocabulary» IRI</span></div>
+            </div>
+           </div>
+          </foreignObject>
+          <text fill="#007FFF" font-family="Helvetica" font-size="17px" text-anchor="middle" x="75" y="15">«vocabulary» IRI</text>
+         </switch>
+        </g>
+        <a href="#AnnotationProperty-Syntax">
+         <rect fill="#ffffff" height="40" pointer-events="all" stroke="#000000" width="225.5" x="230" y="160"></rect>
+         <g transform="translate(-0.5 -0.5)">
+          <switch>
+           <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+            <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 224px; height: 1px; padding-top: 180px; margin-left: 231px;" xmlns="http://www.w3.org/1999/xhtml">
+             <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+              <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; "><b><font color="#007fff" style="font-size: 17px"><u>AnnotationProperty</u></font></b></div>
+             </div>
+            </div>
+           </foreignObject>
+           <text fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle" x="343" y="184">AnnotationProperty</text>
+          </switch>
+         </g>
+        </a>
+        <rect fill="#ffffff" height="20" pointer-events="all" stroke="#b0b0b0" width="20" x="435.5" y="180"></rect>
+        <g fill="#FF8000" font-family="Helvetica" font-size="12px" text-anchor="middle">
+         <text x="445" y="194.5">*</text>
+        </g>
+        <a href="#EnumeratedScalar-Syntax">
+         <rect fill="#ffffff" height="40" pointer-events="all" stroke="#000000" width="225.5" x="230" y="110"></rect>
+         <g transform="translate(-0.5 -0.5)">
+          <switch>
+           <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+            <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 224px; height: 1px; padding-top: 130px; margin-left: 231px;" xmlns="http://www.w3.org/1999/xhtml">
+             <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+              <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; "><b><font color="#007fff" style="font-size: 17px"><u>EnumeratedScalar</u></font></b></div>
+             </div>
+            </div>
+           </foreignObject>
+           <text fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle" x="343" y="134">EnumeratedScalar</text>
+          </switch>
+         </g>
+        </a>
+        <rect fill="#ffffff" height="20" pointer-events="all" stroke="#b0b0b0" width="20" x="435.5" y="130"></rect>
+        <g fill="#FF8000" font-family="Helvetica" font-size="12px" text-anchor="middle">
+         <text x="445" y="144.5">*</text>
+        </g>
+        <a href="#FacetedScalar-Syntax">
+         <rect fill="#ffffff" height="40" pointer-events="all" stroke="#000000" width="225.5" x="230" y="60"></rect>
+         <g transform="translate(-0.5 -0.5)">
+          <switch>
+           <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+            <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 224px; height: 1px; padding-top: 80px; margin-left: 231px;" xmlns="http://www.w3.org/1999/xhtml">
+             <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+              <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; "><b><font color="#007fff" style="font-size: 17px"><u>FacetedScalar</u></font></b></div>
+             </div>
+            </div>
+           </foreignObject>
+           <text fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle" x="343" y="84">FacetedScalar</text>
+          </switch>
+         </g>
+        </a>
+        <rect fill="#ffffff" height="20" pointer-events="all" stroke="#b0b0b0" width="20" x="435.5" y="80"></rect>
+        <g fill="#FF8000" font-family="Helvetica" font-size="12px" text-anchor="middle">
+         <text x="445" y="94.5">*</text>
+        </g>
+        <a href="#Aspect-Syntax">
+         <rect fill="#ffffff" height="40" pointer-events="all" stroke="#000000" width="130" x="53" y="60"></rect>
+         <g transform="translate(-0.5 -0.5)">
+          <switch>
+           <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+            <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 80px; margin-left: 118px;" xmlns="http://www.w3.org/1999/xhtml">
+             <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+              <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; white-space: nowrap; "><b><font color="#007fff" style="font-size: 17px"><u>Aspect</u></font></b></div>
+             </div>
+            </div>
+           </foreignObject>
+           <text fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle" x="118" y="84">Aspect</text>
+          </switch>
+         </g>
+        </a>
+        <rect fill="#ffffff" height="20" pointer-events="all" stroke="#b0b0b0" width="20" x="165" y="80"></rect>
+        <g fill="#FF8000" font-family="Helvetica" font-size="12px" text-anchor="middle">
+         <text x="174.5" y="94.5">*</text>
+        </g>
+        <a href="#Concept-Syntax">
+         <rect fill="#ffffff" height="40" pointer-events="all" stroke="#000000" width="130" x="53" y="110"></rect>
+         <g transform="translate(-0.5 -0.5)">
+          <switch>
+           <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+            <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 128px; height: 1px; padding-top: 130px; margin-left: 54px;" xmlns="http://www.w3.org/1999/xhtml">
+             <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+              <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; "><b><font color="#007fff" style="font-size: 17px"><u>Concept</u></font></b></div>
+             </div>
+            </div>
+           </foreignObject>
+           <text fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle" x="118" y="134">Concept</text>
+          </switch>
+         </g>
+        </a>
+        <rect fill="#ffffff" height="20" pointer-events="all" stroke="#b0b0b0" width="20" x="163" y="130"></rect>
+        <g fill="#FF8000" font-family="Helvetica" font-size="12px" text-anchor="middle">
+         <text x="172.5" y="144.5">*</text>
+        </g>
+        <a href="#Structure-Syntax">
+         <rect fill="#ffffff" height="40" pointer-events="all" stroke="#000000" width="130" x="53" y="160"></rect>
+         <g transform="translate(-0.5 -0.5)">
+          <switch>
+           <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+            <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 128px; height: 1px; padding-top: 180px; margin-left: 54px;" xmlns="http://www.w3.org/1999/xhtml">
+             <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+              <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; "><b><font color="#007fff" style="font-size: 17px"><u>Structure</u></font></b></div>
+             </div>
+            </div>
+           </foreignObject>
+           <text fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle" x="118" y="184">Structure</text>
+          </switch>
+         </g>
+        </a>
+        <rect fill="#ffffff" height="20" pointer-events="all" stroke="#b0b0b0" width="20" x="163" y="180"></rect>
+        <g fill="#FF8000" font-family="Helvetica" font-size="12px" text-anchor="middle">
+         <text x="172.5" y="194.5">*</text>
+        </g>
+        <a href="#Rule-Syntax">
+         <rect fill="#ffffff" height="40" pointer-events="all" stroke="#000000" width="130" x="53" y="210"></rect>
+         <g transform="translate(-0.5 -0.5)">
+          <switch>
+           <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+            <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 128px; height: 1px; padding-top: 230px; margin-left: 54px;" xmlns="http://www.w3.org/1999/xhtml">
+             <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+              <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; "><b><font color="#007fff" style="font-size: 17px"><u>Rule</u></font></b></div>
+             </div>
+            </div>
+           </foreignObject>
+           <text fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle" x="118" y="234">Rule</text>
+          </switch>
+         </g>
+        </a>
+        <rect fill="#ffffff" height="20" pointer-events="all" stroke="#b0b0b0" width="20" x="163" y="230"></rect>
+        <g fill="#FF8000" font-family="Helvetica" font-size="12px" text-anchor="middle">
+         <text x="172.5" y="244.5">*</text>
+        </g>
+        <a href="#RelationEntity-Syntax">
+         <rect fill="#ffffff" height="40" pointer-events="all" stroke="#000000" width="193" x="246.25" y="210"></rect>
+         <g transform="translate(-0.5 -0.5)">
+          <switch>
+           <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+            <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 191px; height: 1px; padding-top: 230px; margin-left: 247px;" xmlns="http://www.w3.org/1999/xhtml">
+             <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+              <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; "><b><font color="#007fff" style="font-size: 17px"><u>RelationEntity</u></font></b></div>
+             </div>
+            </div>
+           </foreignObject>
+           <text fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle" x="343" y="234">RelationEntity</text>
+          </switch>
+         </g>
+        </a>
+        <rect fill="#ffffff" height="20" pointer-events="all" stroke="#b0b0b0" width="20" x="419.25" y="230"></rect>
+        <g fill="#FF8000" font-family="Helvetica" font-size="12px" text-anchor="middle">
+         <text x="428.75" y="244.5">*</text>
+        </g>
+       </g>
+       <switch>
+        <g requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"></g>
+        <a target="_blank" transform="translate(0,-5)" href="https://desk.draw.io/support/solutions/articles/16000042487">
+         <text font-size="10px" text-anchor="middle" x="50%" y="100%">Viewer does not support full SVG 1.1</text>
+        </a>
+       </switch>
+      </svg>
+     </div>
+    </div>
     <h4 class="heading settled" data-level="2.2.2" id="VocabularyExtension-Syntax"><span class="secno">2.2.2. </span><span class="content"><a data-link-type="dfn" href="#vocabularyextension" id="ref-for-vocabularyextension">VocabularyExtension</a></span><a class="self-link" href="#VocabularyExtension-Syntax"></a></h4>
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
 extends <a href="#Vocabulary-Syntax">Vocabulary_IRI</a> (as PREFIX)?
@@ -1886,14 +2134,148 @@ uses (<a href="#Description-Syntax">Description_IRI</a> | <a href="#DescriptionB
 </pre>
     <h4 class="heading settled" data-level="2.2.4" id="Aspect-Syntax"><span class="secno">2.2.4. </span><span class="content"><a data-link-type="dfn" href="#aspect" id="ref-for-aspect">Aspect</a></span><a class="self-link" href="#Aspect-Syntax"></a></h4>
     <p>Declaration</p>
+    <div class="tab-container">
+     <div class="bar">
+      <button class="bar-btn active" onclick="onBarClick(event)" value="text">Text</button>
+      <button class="bar-btn" onclick="onBarClick(event)" value="diagram">Diagram</button>
+     </div>
+     <div class="tab-content text">
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
 aspect ID (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)? ([
-  (<a href="#KeyAxiom-Syntax">KeyAxiom</a>)* 
+  (<a href="#KeyAxiom-Syntax">KeyAxiom</a>)*
   (<a href="#ScalarPropertyRangeRestrictionAxiom-Syntax">ScalarPropertyRangeRestrictionAxiom</a> | <a href="#ScalarPropertyCardinalityRestrictionAxiom-Syntax">ScalarPropertyCardinalityRestrictionAxiom</a> | <a href="#ScalarPropertyValueRestrictionAxiom-Syntax">ScalarPropertyValueRestrictionAxiom</a> | <a href="#StructuredPropertyRangeRestrictionAxiom-Syntax">StructuredPropertyRangeRestrictionAxiom</a> | <a href="#StructuredPropertyCardinalityRestrictionAxiom-Syntax">StructuredPropertyCardinalityRestrictionAxiom</a> | <a href="#StructuredPropertyValueRestrictionAxiom-Syntax">StructuredPropertyValueRestrictionAxiom</a>)*
   (<a href="#RelationRangeRestrictionAxiom-Syntax">RelationRangeRestrictionAxiom</a> | <a href="#RelationCardinalityRestrictionAxiom-Syntax">RelationCardinalityRestrictionAxiom</a> | <a href="#RelationTargetRestrictionAxiom-Syntax">RelationTargetRestrictionAxiom</a>)*
 ])?
 </pre>
+     </div>
+     <div class="tab-content diagram hidden">
+      <p></p>
+      <svg height="211px" style="background-color: rgb(255, 255, 255);" version="1.1" viewBox="-0.5 -0.5 231 211" width="231px" xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+       <defs></defs>
+       <g>
+        <rect fill="#ffffff" height="80" pointer-events="all" stroke="#000000" width="230" x="0" y="130"></rect>
+        <a href="#StructuredProperty-Syntax">
+         <rect fill="none" height="20" pointer-events="all" stroke="none" width="140" x="11.5" y="172.44"></rect>
+         <g fill="#007FFF" font-family="Helvetica" font-size="15px" text-decoration="underline">
+          <text x="13" y="188.44">StructuredProperty</text>
+         </g>
+        </a>
+        <rect fill="none" height="20" pointer-events="all" stroke="none" width="20" x="180" y="142"></rect>
+        <g transform="translate(-0.5 -0.5)">
+         <switch>
+          <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+           <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 18px; height: 1px; padding-top: 152px; margin-left: 181px;" xmlns="http://www.w3.org/1999/xhtml">
+            <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+             <div style="display: inline-block; font-size: 15px; font-family: Helvetica; color: #FF8000; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">
+              <font style="font-size: 12px">?</font>
+             </div>
+            </div>
+           </div>
+          </foreignObject>
+          <text fill="#FF8000" font-family="Helvetica" font-size="15px" text-anchor="middle" x="190" y="157">?</text>
+         </switch>
+        </g>
+        <rect fill="none" height="30" pointer-events="all" stroke="none" width="20" x="141" y="169.44"></rect>
+        <g transform="translate(-0.5 -0.5)">
+         <switch>
+          <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+           <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 18px; height: 1px; padding-top: 184px; margin-left: 142px;" xmlns="http://www.w3.org/1999/xhtml">
+            <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+             <div style="display: inline-block; font-size: 15px; font-family: Helvetica; color: #FFB366; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">
+              <font color="#ff8000" face="Courier New" style="font-size: 15px">*</font>
+             </div>
+            </div>
+           </div>
+          </foreignObject>
+          <text fill="#FFB366" font-family="Helvetica" font-size="15px" text-anchor="middle" x="151" y="189">*</text>
+         </switch>
+        </g>
+        <rect fill="#ffffff" height="20" pointer-events="all" stroke="#b0b0b0" width="20" x="210" y="190"></rect>
+        <g fill="#FF8000" font-family="Helvetica" font-size="12px" text-anchor="middle">
+         <text x="219.5" y="204.5">?</text>
+        </g>
+        <rect fill="none" height="20" pointer-events="all" stroke="none" width="150" x="40" y="141"></rect>
+        <g fill="#000000" font-family="Helvetica" font-size="15px" text-anchor="middle">
+         <text x="114.5" y="157">structured properties</text>
+        </g>
+        <rect fill="#ffffff" height="130" pointer-events="all" stroke="#000000" width="230" x="0" y="0"></rect>
+        <path d="M 0 60 L 230 60" fill="none" pointer-events="all" stroke="#000000" stroke-miterlimit="10"></path>
+        <rect fill="none" height="60" stroke="none" width="230" x="0" y="0"></rect>
+        <rect fill="none" height="60" stroke="none" width="230" x="0" y="0"></rect>
+        <path d="M 0 0 M 230 0 M 230 60 M 0 60" fill="none" stroke="#000000" stroke-miterlimit="10"></path>
+        <rect fill="none" height="60" stroke="none" width="230" x="0" y="0"></rect>
+        <rect fill="none" height="60" stroke="none" width="230" x="0" y="0"></rect>
+        <path d="M 0 0 M 230 0 M 230 60 M 0 60" fill="none" stroke="#000000" stroke-miterlimit="10"></path>
+        <rect fill="none" height="70" stroke="none" width="230" x="0" y="60"></rect>
+        <rect fill="none" height="70" stroke="none" width="230" x="0" y="60"></rect>
+        <path d="M 0 60 M 230 60 M 230 130 M 0 130" fill="none" stroke="#000000" stroke-miterlimit="10"></path>
+        <rect fill="#ffffff" height="20" stroke="#b0b0b0" width="20" x="210" y="110"></rect>
+        <g fill="#FF8000" font-family="Helvetica" font-size="12px" text-anchor="middle">
+         <text x="219.5" y="124.5">?</text>
+        </g>
+        <rect fill="none" height="20" stroke="none" width="130" x="50" y="67"></rect>
+        <g fill="#000000" font-family="Helvetica" font-size="15px" text-anchor="middle">
+         <text x="114.5" y="83">scalar properties</text>
+        </g>
+        <rect fill="none" height="20" stroke="none" width="20" x="168" y="68"></rect>
+        <g transform="translate(-0.5 -0.5)">
+         <switch>
+          <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+           <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 18px; height: 1px; padding-top: 78px; margin-left: 169px;" xmlns="http://www.w3.org/1999/xhtml">
+            <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+             <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #FF8000; line-height: 1.2; pointer-events: none; white-space: normal; word-wrap: normal; ">?</div>
+            </div>
+           </div>
+          </foreignObject>
+          <text fill="#FF8000" font-family="Helvetica" font-size="12px" text-anchor="middle" x="178" y="82">?</text>
+         </switch>
+        </g>
+        <rect fill="none" height="30" stroke="none" width="20" x="113" y="93"></rect>
+        <g transform="translate(-0.5 -0.5)">
+         <switch>
+          <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+           <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 18px; height: 1px; padding-top: 108px; margin-left: 114px;" xmlns="http://www.w3.org/1999/xhtml">
+            <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+             <div style="display: inline-block; font-size: 15px; font-family: Helvetica; color: #B0B0B0; line-height: 1.2; pointer-events: none; white-space: normal; word-wrap: normal; ">
+              <font color="#ff8000" face="Courier New" style="font-size: 15px">*</font>
+             </div>
+            </div>
+           </div>
+          </foreignObject>
+          <text fill="#B0B0B0" font-family="Helvetica" font-size="15px" text-anchor="middle" x="123" y="113">*</text>
+         </switch>
+        </g>
+        <a href="#ScalarProperty-Syntax">
+         <rect fill="none" height="20" stroke="none" width="110" x="11.5" y="96"></rect>
+         <g fill="#007FFF" font-family="Helvetica" font-size="15px" text-decoration="underline">
+          <text x="13" y="112">ScalarProperty</text>
+         </g>
+        </a>
+        <rect fill="none" height="20" stroke="none" width="80" x="75" y="4"></rect>
+        <g fill="#000000" font-family="Helvetica" font-size="15px" text-anchor="middle">
+         <text x="114.5" y="20">«aspect»</text>
+        </g>
+        <rect fill="none" height="30" stroke="none" width="40" x="95" y="27"></rect>
+        <g fill="#000000" font-family="Helvetica" font-size="22px" font-weight="bold" text-anchor="middle">
+         <text x="114.5" y="51.5">ID</text>
+        </g>
+       </g>
+       <switch>
+        <g requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"></g>
+        <a target="_blank" transform="translate(0,-5)" href="https://desk.draw.io/support/solutions/articles/16000042487">
+         <text font-size="10px" text-anchor="middle" x="50%" y="100%">Viewer does not support full SVG 1.1</text>
+        </a>
+       </switch>
+      </svg>
+     </div>
+    </div>
     <p>Reference</p>
+    <div class="tab-container">
+     <div class="bar">
+      <button class="bar-btn active" onclick="onBarClick(event)" value="text">Text</button>
+      <button class="bar-btn" onclick="onBarClick(event)" value="diagram">Diagram</button>
+     </div>
+     <div class="tab-content text">
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
 ref aspect <a href="#Aspect-Syntax">Aspect_IRI</a> (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)? ([
   (<a href="#KeyAxiom-Syntax">KeyAxiom</a>)*
@@ -1901,8 +2283,136 @@ ref aspect <a href="#Aspect-Syntax">Aspect_IRI</a> (:> <a href="#SpecializationA
   (<a href="#RelationRangeRestrictionAxiom-Syntax">RelationRangeRestrictionAxiom</a> | <a href="#RelationCardinalityRestrictionAxiom-Syntax">RelationCardinalityRestrictionAxiom</a> | <a href="#RelationTargetRestrictionAxiom-Syntax">RelationTargetRestrictionAxiom</a>)*
 ])?
 </pre>
+     </div>
+     <div class="tab-content diagram hidden">
+      <p></p>
+      <svg height="211px" style="background-color: rgb(255, 255, 255);" version="1.1" viewBox="-0.5 -0.5 231 211" width="231px" xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+       <defs></defs>
+       <g>
+        <rect fill="#ffffff" height="80" pointer-events="all" stroke="#000000" width="230" x="0" y="130"></rect>
+        <a href="#StructuredProperty-Syntax">
+         <rect fill="none" height="20" pointer-events="all" stroke="none" width="140" x="11.5" y="172.44"></rect>
+         <g fill="#007FFF" font-family="Helvetica" font-size="15px" text-decoration="underline">
+          <text x="13" y="188.44">StructuredProperty</text>
+         </g>
+        </a>
+        <rect fill="none" height="20" pointer-events="all" stroke="none" width="20" x="180" y="142"></rect>
+        <g transform="translate(-0.5 -0.5)">
+         <switch>
+          <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+           <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 18px; height: 1px; padding-top: 152px; margin-left: 181px;" xmlns="http://www.w3.org/1999/xhtml">
+            <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+             <div style="display: inline-block; font-size: 15px; font-family: Helvetica; color: #FF8000; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">
+              <font style="font-size: 12px">?</font>
+             </div>
+            </div>
+           </div>
+          </foreignObject>
+          <text fill="#FF8000" font-family="Helvetica" font-size="15px" text-anchor="middle" x="190" y="157">?</text>
+         </switch>
+        </g>
+        <rect fill="none" height="30" pointer-events="all" stroke="none" width="20" x="141" y="169.44"></rect>
+        <g transform="translate(-0.5 -0.5)">
+         <switch>
+          <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+           <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 18px; height: 1px; padding-top: 184px; margin-left: 142px;" xmlns="http://www.w3.org/1999/xhtml">
+            <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+             <div style="display: inline-block; font-size: 15px; font-family: Helvetica; color: #FFB366; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">
+              <font color="#ff8000" face="Courier New" style="font-size: 15px">*</font>
+             </div>
+            </div>
+           </div>
+          </foreignObject>
+          <text fill="#FFB366" font-family="Helvetica" font-size="15px" text-anchor="middle" x="151" y="189">*</text>
+         </switch>
+        </g>
+        <rect fill="#ffffff" height="20" pointer-events="all" stroke="#b0b0b0" width="20" x="210" y="190"></rect>
+        <g fill="#FF8000" font-family="Helvetica" font-size="12px" text-anchor="middle">
+         <text x="219.5" y="204.5">?</text>
+        </g>
+        <rect fill="none" height="20" pointer-events="all" stroke="none" width="150" x="40" y="141"></rect>
+        <g fill="#000000" font-family="Helvetica" font-size="15px" text-anchor="middle">
+         <text x="114.5" y="157">structured properties</text>
+        </g>
+        <rect fill="#ffffff" height="130" pointer-events="all" stroke="#000000" width="230" x="0" y="0"></rect>
+        <path d="M 0 60 L 230 60" fill="none" pointer-events="all" stroke="#000000" stroke-miterlimit="10"></path>
+        <rect fill="none" height="60" stroke="none" width="230" x="0" y="0"></rect>
+        <rect fill="none" height="60" stroke="none" width="230" x="0" y="0"></rect>
+        <path d="M 0 0 M 230 0 M 230 60 M 0 60" fill="none" stroke="#000000" stroke-miterlimit="10"></path>
+        <rect fill="none" height="60" stroke="none" width="230" x="0" y="0"></rect>
+        <rect fill="none" height="60" stroke="none" width="230" x="0" y="0"></rect>
+        <path d="M 0 0 M 230 0 M 230 60 M 0 60" fill="none" stroke="#000000" stroke-miterlimit="10"></path>
+        <rect fill="none" height="70" stroke="none" width="230" x="0" y="60"></rect>
+        <rect fill="none" height="70" stroke="none" width="230" x="0" y="60"></rect>
+        <path d="M 0 60 M 230 60 M 230 130 M 0 130" fill="none" stroke="#000000" stroke-miterlimit="10"></path>
+        <rect fill="#ffffff" height="20" stroke="#b0b0b0" width="20" x="210" y="110"></rect>
+        <g fill="#FF8000" font-family="Helvetica" font-size="12px" text-anchor="middle">
+         <text x="219.5" y="124.5">?</text>
+        </g>
+        <rect fill="none" height="20" stroke="none" width="130" x="50" y="67"></rect>
+        <g fill="#000000" font-family="Helvetica" font-size="15px" text-anchor="middle">
+         <text x="114.5" y="83">scalar properties</text>
+        </g>
+        <rect fill="none" height="20" stroke="none" width="20" x="168" y="68"></rect>
+        <g transform="translate(-0.5 -0.5)">
+         <switch>
+          <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+           <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 18px; height: 1px; padding-top: 78px; margin-left: 169px;" xmlns="http://www.w3.org/1999/xhtml">
+            <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+             <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #FF8000; line-height: 1.2; pointer-events: none; white-space: normal; word-wrap: normal; ">?</div>
+            </div>
+           </div>
+          </foreignObject>
+          <text fill="#FF8000" font-family="Helvetica" font-size="12px" text-anchor="middle" x="178" y="82">?</text>
+         </switch>
+        </g>
+        <rect fill="none" height="30" stroke="none" width="20" x="113" y="93"></rect>
+        <g transform="translate(-0.5 -0.5)">
+         <switch>
+          <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+           <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 18px; height: 1px; padding-top: 108px; margin-left: 114px;" xmlns="http://www.w3.org/1999/xhtml">
+            <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+             <div style="display: inline-block; font-size: 15px; font-family: Helvetica; color: #B0B0B0; line-height: 1.2; pointer-events: none; white-space: normal; word-wrap: normal; ">
+              <font color="#ff8000" face="Courier New" style="font-size: 15px">*</font>
+             </div>
+            </div>
+           </div>
+          </foreignObject>
+          <text fill="#B0B0B0" font-family="Helvetica" font-size="15px" text-anchor="middle" x="123" y="113">*</text>
+         </switch>
+        </g>
+        <a href="#ScalarProperty-Syntax">
+         <rect fill="none" height="20" stroke="none" width="110" x="11.5" y="96"></rect>
+         <g fill="#007FFF" font-family="Helvetica" font-size="15px" text-decoration="underline">
+          <text x="13" y="112">ScalarProperty</text>
+         </g>
+        </a>
+        <rect fill="none" height="20" stroke="none" width="80" x="75" y="4"></rect>
+        <g fill="#000000" font-family="Helvetica" font-size="15px" text-anchor="middle">
+         <text x="114.5" y="20">«aspect»</text>
+        </g>
+        <rect fill="none" height="30" stroke="none" width="130" x="50" y="27"></rect>
+        <g fill="#000000" font-family="Helvetica" font-size="22px" font-weight="bold" text-anchor="middle">
+         <text x="114.5" y="51.5">Aspect_IRI</text>
+        </g>
+       </g>
+       <switch>
+        <g requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"></g>
+        <a target="_blank" transform="translate(0,-5)" href="https://desk.draw.io/support/solutions/articles/16000042487">
+         <text font-size="10px" text-anchor="middle" x="50%" y="100%">Viewer does not support full SVG 1.1</text>
+        </a>
+       </switch>
+      </svg>
+     </div>
+    </div>
     <h4 class="heading settled" data-level="2.2.5" id="Concept-Syntax"><span class="secno">2.2.5. </span><span class="content"><a data-link-type="dfn" href="#concept" id="ref-for-concept">Concept</a></span><a class="self-link" href="#Concept-Syntax"></a></h4>
     <p>Declaration</p>
+    <div class="tab-container">
+     <div class="bar">
+      <button class="bar-btn active" onclick="onBarClick(event)" value="text">Text</button>
+      <button class="bar-btn" onclick="onBarClick(event)" value="diagram">Diagram</button>
+     </div>
+     <div class="tab-content text">
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
 concept ID (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)? ([
   (<a href="#KeyAxiom-Syntax">KeyAxiom</a>)*
@@ -1910,7 +2420,135 @@ concept ID (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (
   (<a href="#RelationRangeRestrictionAxiom-Syntax">RelationRangeRestrictionAxiom</a> | <a href="#RelationCardinalityRestrictionAxiom-Syntax">RelationCardinalityRestrictionAxiom</a> | <a href="#RelationTargetRestrictionAxiom-Syntax">RelationTargetRestrictionAxiom</a>)*
 ])?
 </pre>
+     </div>
+     <div class="tab-content diagram hidden">
+      <p></p>
+      <svg height="211px" style="background-color: rgb(255, 255, 255);" version="1.1" viewBox="-0.5 -0.5 231 211" width="231px" xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+       <defs></defs>
+       <g>
+        <rect fill="#ffffff" height="80" pointer-events="all" stroke="#000000" width="230" x="0" y="130"></rect>
+        <a href="#StructuredProperty-Syntax">
+         <rect fill="none" height="20" pointer-events="all" stroke="none" width="140" x="11.5" y="172.44"></rect>
+         <g fill="#007FFF" font-family="Helvetica" font-size="15px" text-decoration="underline">
+          <text x="13" y="188.44">StructuredProperty</text>
+         </g>
+        </a>
+        <rect fill="none" height="20" pointer-events="all" stroke="none" width="20" x="180" y="142"></rect>
+        <g transform="translate(-0.5 -0.5)">
+         <switch>
+          <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+           <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 18px; height: 1px; padding-top: 152px; margin-left: 181px;" xmlns="http://www.w3.org/1999/xhtml">
+            <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+             <div style="display: inline-block; font-size: 15px; font-family: Helvetica; color: #FF8000; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">
+              <font style="font-size: 12px">?</font>
+             </div>
+            </div>
+           </div>
+          </foreignObject>
+          <text fill="#FF8000" font-family="Helvetica" font-size="15px" text-anchor="middle" x="190" y="157">?</text>
+         </switch>
+        </g>
+        <rect fill="none" height="30" pointer-events="all" stroke="none" width="20" x="141" y="169.44"></rect>
+        <g transform="translate(-0.5 -0.5)">
+         <switch>
+          <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+           <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 18px; height: 1px; padding-top: 184px; margin-left: 142px;" xmlns="http://www.w3.org/1999/xhtml">
+            <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+             <div style="display: inline-block; font-size: 15px; font-family: Helvetica; color: #FFB366; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">
+              <font color="#ff8000" face="Courier New" style="font-size: 15px">*</font>
+             </div>
+            </div>
+           </div>
+          </foreignObject>
+          <text fill="#FFB366" font-family="Helvetica" font-size="15px" text-anchor="middle" x="151" y="189">*</text>
+         </switch>
+        </g>
+        <rect fill="#ffffff" height="20" pointer-events="all" stroke="#b0b0b0" width="20" x="210" y="190"></rect>
+        <g fill="#FF8000" font-family="Helvetica" font-size="12px" text-anchor="middle">
+         <text x="219.5" y="204.5">?</text>
+        </g>
+        <rect fill="none" height="20" pointer-events="all" stroke="none" width="150" x="40" y="141"></rect>
+        <g fill="#000000" font-family="Helvetica" font-size="15px" text-anchor="middle">
+         <text x="114.5" y="157">structured properties</text>
+        </g>
+        <rect fill="#ffffff" height="130" pointer-events="all" stroke="#000000" width="230" x="0" y="0"></rect>
+        <path d="M 0 60 L 230 60" fill="none" pointer-events="all" stroke="#000000" stroke-miterlimit="10"></path>
+        <rect fill="none" height="60" stroke="none" width="230" x="0" y="0"></rect>
+        <rect fill="none" height="60" stroke="none" width="230" x="0" y="0"></rect>
+        <path d="M 0 0 M 230 0 M 230 60 M 0 60" fill="none" stroke="#000000" stroke-miterlimit="10"></path>
+        <rect fill="none" height="60" stroke="none" width="230" x="0" y="0"></rect>
+        <rect fill="none" height="60" stroke="none" width="230" x="0" y="0"></rect>
+        <path d="M 0 0 M 230 0 M 230 60 M 0 60" fill="none" stroke="#000000" stroke-miterlimit="10"></path>
+        <rect fill="none" height="70" stroke="none" width="230" x="0" y="60"></rect>
+        <rect fill="none" height="70" stroke="none" width="230" x="0" y="60"></rect>
+        <path d="M 0 60 M 230 60 M 230 130 M 0 130" fill="none" stroke="#000000" stroke-miterlimit="10"></path>
+        <rect fill="#ffffff" height="20" stroke="#b0b0b0" width="20" x="210" y="110"></rect>
+        <g fill="#FF8000" font-family="Helvetica" font-size="12px" text-anchor="middle">
+         <text x="219.5" y="124.5">?</text>
+        </g>
+        <rect fill="none" height="20" stroke="none" width="130" x="50" y="67"></rect>
+        <g fill="#000000" font-family="Helvetica" font-size="15px" text-anchor="middle">
+         <text x="114.5" y="83">scalar properties</text>
+        </g>
+        <rect fill="none" height="20" stroke="none" width="20" x="168" y="68"></rect>
+        <g transform="translate(-0.5 -0.5)">
+         <switch>
+          <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+           <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 18px; height: 1px; padding-top: 78px; margin-left: 169px;" xmlns="http://www.w3.org/1999/xhtml">
+            <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+             <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #FF8000; line-height: 1.2; pointer-events: none; white-space: normal; word-wrap: normal; ">?</div>
+            </div>
+           </div>
+          </foreignObject>
+          <text fill="#FF8000" font-family="Helvetica" font-size="12px" text-anchor="middle" x="178" y="82">?</text>
+         </switch>
+        </g>
+        <rect fill="none" height="30" stroke="none" width="20" x="113" y="93"></rect>
+        <g transform="translate(-0.5 -0.5)">
+         <switch>
+          <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+           <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 18px; height: 1px; padding-top: 108px; margin-left: 114px;" xmlns="http://www.w3.org/1999/xhtml">
+            <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+             <div style="display: inline-block; font-size: 15px; font-family: Helvetica; color: #B0B0B0; line-height: 1.2; pointer-events: none; white-space: normal; word-wrap: normal; ">
+              <font color="#ff8000" face="Courier New" style="font-size: 15px">*</font>
+             </div>
+            </div>
+           </div>
+          </foreignObject>
+          <text fill="#B0B0B0" font-family="Helvetica" font-size="15px" text-anchor="middle" x="123" y="113">*</text>
+         </switch>
+        </g>
+        <a href="#ScalarProperty-Syntax">
+         <rect fill="none" height="20" stroke="none" width="110" x="11.5" y="96"></rect>
+         <g fill="#007FFF" font-family="Helvetica" font-size="15px" text-decoration="underline">
+          <text x="13" y="112">ScalarProperty</text>
+         </g>
+        </a>
+        <rect fill="none" height="20" stroke="none" width="80" x="75" y="4"></rect>
+        <g fill="#000000" font-family="Helvetica" font-size="15px" text-anchor="middle">
+         <text x="114.5" y="20">«concept»</text>
+        </g>
+        <rect fill="none" height="30" stroke="none" width="40" x="95" y="27"></rect>
+        <g fill="#000000" font-family="Helvetica" font-size="22px" font-weight="bold" text-anchor="middle">
+         <text x="114.5" y="51.5">ID</text>
+        </g>
+       </g>
+       <switch>
+        <g requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"></g>
+        <a target="_blank" transform="translate(0,-5)" href="https://desk.draw.io/support/solutions/articles/16000042487">
+         <text font-size="10px" text-anchor="middle" x="50%" y="100%">Viewer does not support full SVG 1.1</text>
+        </a>
+       </switch>
+      </svg>
+     </div>
+    </div>
     <p>Reference</p>
+    <div class="tab-container">
+     <div class="bar">
+      <button class="bar-btn active" onclick="onBarClick(event)" value="text">Text</button>
+      <button class="bar-btn" onclick="onBarClick(event)" value="diagram">Diagram</button>
+     </div>
+     <div class="tab-content text">
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
 ref concept <a href="#Concept-Syntax">Concept_IRI</a> (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)? ([
   (<a href="#KeyAxiom-Syntax">KeyAxiom</a>)*
@@ -1918,8 +2556,136 @@ ref concept <a href="#Concept-Syntax">Concept_IRI</a> (:> <a href="#Specializati
   (<a href="#RelationRangeRestrictionAxiom-Syntax">RelationRangeRestrictionAxiom</a> | <a href="#RelationCardinalityRestrictionAxiom-Syntax">RelationCardinalityRestrictionAxiom</a> | <a href="#RelationTargetRestrictionAxiom-Syntax">RelationTargetRestrictionAxiom</a>)*
 ])?
 </pre>
+     </div>
+     <div class="tab-content diagram hidden">
+      <p></p>
+      <svg height="211px" style="background-color: rgb(255, 255, 255);" version="1.1" viewBox="-0.5 -0.5 231 211" width="231px" xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+       <defs></defs>
+       <g>
+        <rect fill="#ffffff" height="80" pointer-events="all" stroke="#000000" width="230" x="0" y="130"></rect>
+        <a href="#StructuredProperty-Syntax">
+         <rect fill="none" height="20" pointer-events="all" stroke="none" width="140" x="11.5" y="172.44"></rect>
+         <g fill="#007FFF" font-family="Helvetica" font-size="15px" text-decoration="underline">
+          <text x="13" y="188.44">StructuredProperty</text>
+         </g>
+        </a>
+        <rect fill="none" height="20" pointer-events="all" stroke="none" width="20" x="180" y="142"></rect>
+        <g transform="translate(-0.5 -0.5)">
+         <switch>
+          <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+           <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 18px; height: 1px; padding-top: 152px; margin-left: 181px;" xmlns="http://www.w3.org/1999/xhtml">
+            <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+             <div style="display: inline-block; font-size: 15px; font-family: Helvetica; color: #FF8000; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">
+              <font style="font-size: 12px">?</font>
+             </div>
+            </div>
+           </div>
+          </foreignObject>
+          <text fill="#FF8000" font-family="Helvetica" font-size="15px" text-anchor="middle" x="190" y="157">?</text>
+         </switch>
+        </g>
+        <rect fill="none" height="30" pointer-events="all" stroke="none" width="20" x="141" y="169.44"></rect>
+        <g transform="translate(-0.5 -0.5)">
+         <switch>
+          <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+           <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 18px; height: 1px; padding-top: 184px; margin-left: 142px;" xmlns="http://www.w3.org/1999/xhtml">
+            <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+             <div style="display: inline-block; font-size: 15px; font-family: Helvetica; color: #FFB366; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">
+              <font color="#ff8000" face="Courier New" style="font-size: 15px">*</font>
+             </div>
+            </div>
+           </div>
+          </foreignObject>
+          <text fill="#FFB366" font-family="Helvetica" font-size="15px" text-anchor="middle" x="151" y="189">*</text>
+         </switch>
+        </g>
+        <rect fill="#ffffff" height="20" pointer-events="all" stroke="#b0b0b0" width="20" x="210" y="190"></rect>
+        <g fill="#FF8000" font-family="Helvetica" font-size="12px" text-anchor="middle">
+         <text x="219.5" y="204.5">?</text>
+        </g>
+        <rect fill="none" height="20" pointer-events="all" stroke="none" width="150" x="40" y="141"></rect>
+        <g fill="#000000" font-family="Helvetica" font-size="15px" text-anchor="middle">
+         <text x="114.5" y="157">structured properties</text>
+        </g>
+        <rect fill="#ffffff" height="130" pointer-events="all" stroke="#000000" width="230" x="0" y="0"></rect>
+        <path d="M 0 60 L 230 60" fill="none" pointer-events="all" stroke="#000000" stroke-miterlimit="10"></path>
+        <rect fill="none" height="60" stroke="none" width="230" x="0" y="0"></rect>
+        <rect fill="none" height="60" stroke="none" width="230" x="0" y="0"></rect>
+        <path d="M 0 0 M 230 0 M 230 60 M 0 60" fill="none" stroke="#000000" stroke-miterlimit="10"></path>
+        <rect fill="none" height="60" stroke="none" width="230" x="0" y="0"></rect>
+        <rect fill="none" height="60" stroke="none" width="230" x="0" y="0"></rect>
+        <path d="M 0 0 M 230 0 M 230 60 M 0 60" fill="none" stroke="#000000" stroke-miterlimit="10"></path>
+        <rect fill="none" height="70" stroke="none" width="230" x="0" y="60"></rect>
+        <rect fill="none" height="70" stroke="none" width="230" x="0" y="60"></rect>
+        <path d="M 0 60 M 230 60 M 230 130 M 0 130" fill="none" stroke="#000000" stroke-miterlimit="10"></path>
+        <rect fill="#ffffff" height="20" stroke="#b0b0b0" width="20" x="210" y="110"></rect>
+        <g fill="#FF8000" font-family="Helvetica" font-size="12px" text-anchor="middle">
+         <text x="219.5" y="124.5">?</text>
+        </g>
+        <rect fill="none" height="20" stroke="none" width="130" x="50" y="67"></rect>
+        <g fill="#000000" font-family="Helvetica" font-size="15px" text-anchor="middle">
+         <text x="114.5" y="83">scalar properties</text>
+        </g>
+        <rect fill="none" height="20" stroke="none" width="20" x="168" y="68"></rect>
+        <g transform="translate(-0.5 -0.5)">
+         <switch>
+          <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+           <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 18px; height: 1px; padding-top: 78px; margin-left: 169px;" xmlns="http://www.w3.org/1999/xhtml">
+            <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+             <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #FF8000; line-height: 1.2; pointer-events: none; white-space: normal; word-wrap: normal; ">?</div>
+            </div>
+           </div>
+          </foreignObject>
+          <text fill="#FF8000" font-family="Helvetica" font-size="12px" text-anchor="middle" x="178" y="82">?</text>
+         </switch>
+        </g>
+        <rect fill="none" height="30" stroke="none" width="20" x="113" y="93"></rect>
+        <g transform="translate(-0.5 -0.5)">
+         <switch>
+          <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+           <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 18px; height: 1px; padding-top: 108px; margin-left: 114px;" xmlns="http://www.w3.org/1999/xhtml">
+            <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+             <div style="display: inline-block; font-size: 15px; font-family: Helvetica; color: #B0B0B0; line-height: 1.2; pointer-events: none; white-space: normal; word-wrap: normal; ">
+              <font color="#ff8000" face="Courier New" style="font-size: 15px">*</font>
+             </div>
+            </div>
+           </div>
+          </foreignObject>
+          <text fill="#B0B0B0" font-family="Helvetica" font-size="15px" text-anchor="middle" x="123" y="113">*</text>
+         </switch>
+        </g>
+        <a href="#ScalarProperty-Syntax">
+         <rect fill="none" height="20" stroke="none" width="110" x="11.5" y="96"></rect>
+         <g fill="#007FFF" font-family="Helvetica" font-size="15px" text-decoration="underline">
+          <text x="13" y="112">ScalarProperty</text>
+         </g>
+        </a>
+        <rect fill="none" height="20" stroke="none" width="80" x="75" y="4"></rect>
+        <g fill="#000000" font-family="Helvetica" font-size="15px" text-anchor="middle">
+         <text x="114.5" y="20">«concept»</text>
+        </g>
+        <rect fill="none" height="30" stroke="none" width="140" x="45" y="27"></rect>
+        <g fill="#000000" font-family="Helvetica" font-size="22px" font-weight="bold" text-anchor="middle">
+         <text x="114.5" y="51.5">Concept_IRI</text>
+        </g>
+       </g>
+       <switch>
+        <g requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"></g>
+        <a target="_blank" transform="translate(0,-5)" href="https://desk.draw.io/support/solutions/articles/16000042487">
+         <text font-size="10px" text-anchor="middle" x="50%" y="100%">Viewer does not support full SVG 1.1</text>
+        </a>
+       </switch>
+      </svg>
+     </div>
+    </div>
     <h4 class="heading settled" data-level="2.2.6" id="RelationEntity-Syntax"><span class="secno">2.2.6. </span><span class="content"><a data-link-type="dfn" href="#relationentity" id="ref-for-relationentity">RelationEntity</a></span><a class="self-link" href="#RelationEntity-Syntax"></a></h4>
     <p>Declaration</p>
+    <div class="tab-container">
+     <div class="bar">
+      <button class="bar-btn active" onclick="onBarClick(event)" value="text">Text</button>
+      <button class="bar-btn" onclick="onBarClick(event)" value="diagram">Diagram</button>
+     </div>
+     <div class="tab-content text">
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
 relation entity ID (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)? ([
   from (<a href="#Aspect-Syntax">Aspect_IRI</a>|<a href="#Concept-Syntax">Concept_IRI</a>|<a href="#RelationEntity-Syntax">RelationEntity_IRI</a>)
@@ -1938,7 +2704,187 @@ relation entity ID (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxio
   (<a href="#RelationRangeRestrictionAxiom-Syntax">RelationRangeRestrictionAxiom</a> | <a href="#RelationCardinalityRestrictionAxiom-Syntax">RelationCardinalityRestrictionAxiom</a> | <a href="#RelationTargetRestrictionAxiom-Syntax">RelationTargetRestrictionAxiom</a>)*
 ])?
 </pre>
+     </div>
+     <div class="tab-content diagram hidden">
+      <p></p>
+      <svg height="321px" style="background-color: rgb(255, 255, 255);" version="1.1" viewBox="-0.5 -0.5 585 321" width="585px" xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+       <defs></defs>
+       <g>
+        <rect fill="#ffffff" height="80" pointer-events="all" stroke="#000000" width="230" x="160" y="240"></rect>
+        <a href="#StructuredProperty-Syntax">
+         <rect fill="none" height="20" pointer-events="all" stroke="none" width="140" x="171.5" y="282.44"></rect>
+         <g fill="#007FFF" font-family="Helvetica" font-size="15px" text-decoration="underline">
+          <text x="173" y="298.44">StructuredProperty</text>
+         </g>
+        </a>
+        <rect fill="none" height="20" pointer-events="all" stroke="none" width="20" x="340" y="252"></rect>
+        <g transform="translate(-0.5 -0.5)">
+         <switch>
+          <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+           <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 18px; height: 1px; padding-top: 262px; margin-left: 341px;" xmlns="http://www.w3.org/1999/xhtml">
+            <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+             <div style="display: inline-block; font-size: 15px; font-family: Helvetica; color: #FF8000; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">
+              <font style="font-size: 12px">?</font>
+             </div>
+            </div>
+           </div>
+          </foreignObject>
+          <text fill="#FF8000" font-family="Helvetica" font-size="15px" text-anchor="middle" x="350" y="267">?</text>
+         </switch>
+        </g>
+        <rect fill="none" height="30" pointer-events="all" stroke="none" width="20" x="301" y="279.44"></rect>
+        <g transform="translate(-0.5 -0.5)">
+         <switch>
+          <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+           <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 18px; height: 1px; padding-top: 294px; margin-left: 302px;" xmlns="http://www.w3.org/1999/xhtml">
+            <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+             <div style="display: inline-block; font-size: 15px; font-family: Helvetica; color: #FFB366; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">
+              <font color="#ff8000" face="Courier New" style="font-size: 15px">*</font>
+             </div>
+            </div>
+           </div>
+          </foreignObject>
+          <text fill="#FFB366" font-family="Helvetica" font-size="15px" text-anchor="middle" x="311" y="299">*</text>
+         </switch>
+        </g>
+        <rect fill="#ffffff" height="20" pointer-events="all" stroke="#b0b0b0" width="20" x="370" y="300"></rect>
+        <g fill="#FF8000" font-family="Helvetica" font-size="12px" text-anchor="middle">
+         <text x="379.5" y="314.5">?</text>
+        </g>
+        <rect fill="none" height="20" pointer-events="all" stroke="none" width="150" x="200" y="251"></rect>
+        <g fill="#000000" font-family="Helvetica" font-size="15px" text-anchor="middle">
+         <text x="274.5" y="267">structured properties</text>
+        </g>
+        <path d="M 390 160 L 567.76 160" fill="none" pointer-events="stroke" stroke="#000000" stroke-miterlimit="10"></path>
+        <path d="M 555.88 166.5 L 568.88 160 L 555.88 153.5" fill="none" pointer-events="all" stroke="#000000" stroke-miterlimit="10"></path>
+        <path d="M 160 160 L 0 160" fill="none" pointer-events="stroke" stroke="#000000" stroke-miterlimit="10"></path>
+        <rect fill="#ffffff" height="160" pointer-events="all" stroke="#000000" width="230" x="160" y="0"></rect>
+        <path d="M 160 60 L 390 60" fill="none" pointer-events="all" stroke="#000000" stroke-miterlimit="10"></path>
+        <rect fill="none" height="60" stroke="none" width="230" x="160" y="0"></rect>
+        <rect fill="none" height="60" stroke="none" width="230" x="160" y="0"></rect>
+        <path d="M 160 0 M 390 0 M 390 60 M 160 60" fill="none" stroke="#000000" stroke-miterlimit="10"></path>
+        <rect fill="none" height="60" stroke="none" width="230" x="160" y="0"></rect>
+        <rect fill="none" height="60" stroke="none" width="230" x="160" y="0"></rect>
+        <path d="M 160 0 M 390 0 M 390 60 M 160 60" fill="none" stroke="#000000" stroke-miterlimit="10"></path>
+        <rect fill="none" height="100" stroke="none" width="230" x="160" y="60"></rect>
+        <rect fill="none" height="100" stroke="none" width="230" x="160" y="60"></rect>
+        <path d="M 160 60 M 390 60 M 390 160 M 160 160" fill="none" stroke="#000000" stroke-miterlimit="10"></path>
+        <rect fill="none" height="20" stroke="none" width="64.4" x="242.95" y="67"></rect>
+        <g fill="#000000" font-family="Helvetica" font-size="15px" text-anchor="middle">
+         <text x="274.65" y="83">relations</text>
+        </g>
+        <rect fill="none" height="24.62" stroke="none" width="20" x="297.84" y="66"></rect>
+        <g transform="translate(-0.5 -0.5)">
+         <switch>
+          <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+           <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 18px; height: 1px; padding-top: 78px; margin-left: 299px;" xmlns="http://www.w3.org/1999/xhtml">
+            <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+             <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #FF8000; line-height: 1.2; pointer-events: none; white-space: normal; word-wrap: normal; ">?</div>
+            </div>
+           </div>
+          </foreignObject>
+          <text fill="#FF8000" font-family="Helvetica" font-size="12px" text-anchor="middle" x="308" y="82">?</text>
+         </switch>
+        </g>
+        <a href="#ReverseRelation-Syntax">
+         <rect fill="none" height="20" stroke="none" width="119.6" x="169.2" y="120"></rect>
+         <g fill="#007FFF" font-family="Helvetica" font-size="15px" text-decoration="underline">
+          <text x="170.7" y="136">ReverseRelation</text>
+         </g>
+        </a>
+        <rect fill="none" height="24.62" stroke="none" width="20" x="277.84" y="117.69"></rect>
+        <g transform="translate(-0.5 -0.5)">
+         <switch>
+          <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+           <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 18px; height: 1px; padding-top: 130px; margin-left: 279px;" xmlns="http://www.w3.org/1999/xhtml">
+            <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+             <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #FF8000; line-height: 1.2; pointer-events: none; white-space: normal; word-wrap: normal; ">?</div>
+            </div>
+           </div>
+          </foreignObject>
+          <text fill="#FF8000" font-family="Helvetica" font-size="12px" text-anchor="middle" x="288" y="134">?</text>
+         </switch>
+        </g>
+        <rect fill="none" height="24.62" stroke="none" width="110.4" x="220.16" y="4"></rect>
+        <g fill="#000000" font-family="Helvetica" font-size="15px" text-anchor="middle">
+         <text x="274.86" y="22.31">«relation entity»</text>
+        </g>
+        <rect fill="none" height="36.92" stroke="none" width="36.8" x="256.84" y="27"></rect>
+        <g fill="#000000" font-family="Helvetica" font-size="20px" font-weight="bold" text-anchor="middle">
+         <text x="274.74" y="53.96">ID</text>
+        </g>
+        <a href="#ForwardRelation-Syntax">
+         <rect fill="none" height="20" stroke="none" width="119.6" x="169.2" y="95"></rect>
+         <g fill="#007FFF" font-family="Helvetica" font-size="15px" text-decoration="underline">
+          <text x="170.7" y="111">ForwardRelation</text>
+         </g>
+        </a>
+        <rect fill="#ffffff" height="80" stroke="#000000" width="230" x="160" y="160"></rect>
+        <rect fill="none" height="20" stroke="none" width="20" x="325.6" y="172"></rect>
+        <g transform="translate(-0.5 -0.5)">
+         <switch>
+          <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+           <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 18px; height: 1px; padding-top: 182px; margin-left: 327px;" xmlns="http://www.w3.org/1999/xhtml">
+            <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+             <div style="display: inline-block; font-size: 15px; font-family: Helvetica; color: #FF8000; line-height: 1.2; pointer-events: none; white-space: normal; word-wrap: normal; ">
+              <font style="font-size: 12px">?</font>
+             </div>
+            </div>
+           </div>
+          </foreignObject>
+          <text fill="#FF8000" font-family="Helvetica" font-size="15px" text-anchor="middle" x="336" y="187">?</text>
+         </switch>
+        </g>
+        <rect fill="none" height="30" stroke="none" width="20" x="270.36" y="199.44"></rect>
+        <g transform="translate(-0.5 -0.5)">
+         <switch>
+          <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+           <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 18px; height: 1px; padding-top: 214px; margin-left: 271px;" xmlns="http://www.w3.org/1999/xhtml">
+            <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+             <div style="display: inline-block; font-size: 15px; font-family: Helvetica; color: #FFB366; line-height: 1.2; pointer-events: none; white-space: normal; word-wrap: normal; ">
+              <font color="#ff8000" face="Courier New" style="font-size: 15px">*</font>
+             </div>
+            </div>
+           </div>
+          </foreignObject>
+          <text fill="#FFB366" font-family="Helvetica" font-size="15px" text-anchor="middle" x="280" y="219">*</text>
+         </switch>
+        </g>
+        <a href="#ScalarProperty-Syntax">
+         <rect fill="none" height="20" stroke="none" width="101.2" x="171.5" y="204.44"></rect>
+         <g fill="#007FFF" font-family="Helvetica" font-size="15px" text-decoration="underline">
+          <text x="173" y="220.44">ScalarProperty</text>
+         </g>
+        </a>
+        <rect fill="#ffffff" height="20" stroke="#b0b0b0" width="20" x="369.84" y="220"></rect>
+        <g fill="#FF8000" font-family="Helvetica" font-size="12px" text-anchor="middle">
+         <text x="379.34" y="234.5">?</text>
+        </g>
+        <rect fill="none" height="20" stroke="none" width="119.6" x="214.58" y="171"></rect>
+        <g fill="#000000" font-family="Helvetica" font-size="15px" text-anchor="middle">
+         <text x="273.88" y="187">scalar properties</text>
+        </g>
+        <rect fill="#ffffff" height="20" stroke="#b0b0b0" width="20" x="369.84" y="140"></rect>
+        <g fill="#FF8000" font-family="Helvetica" font-size="12px" text-anchor="middle">
+         <text x="379.34" y="154.5">?</text>
+        </g>
+       </g>
+       <switch>
+        <g requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"></g>
+        <a target="_blank" transform="translate(0,-5)" href="https://desk.draw.io/support/solutions/articles/16000042487">
+         <text font-size="10px" text-anchor="middle" x="50%" y="100%">Viewer does not support full SVG 1.1</text>
+        </a>
+       </switch>
+      </svg>
+     </div>
+    </div>
     <p>Reference</p>
+    <div class="tab-container">
+     <div class="bar">
+      <button class="bar-btn active" onclick="onBarClick(event)" value="text">Text</button>
+      <button class="bar-btn" onclick="onBarClick(event)" value="diagram">Diagram</button>
+     </div>
+     <div class="tab-content text">
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
 ref relation entity <a href="#RelationEntity-Syntax">RelationEntity_IRI</a> (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)? ([
   (<a href="#KeyAxiom-Syntax">KeyAxiom</a>)*
@@ -1946,16 +2892,230 @@ ref relation entity <a href="#RelationEntity-Syntax">RelationEntity_IRI</a> (:> 
   (<a href="#RelationRangeRestrictionAxiom-Syntax">RelationRangeRestrictionAxiom</a> | <a href="#RelationCardinalityRestrictionAxiom-Syntax">RelationCardinalityRestrictionAxiom</a> | <a href="#RelationTargetRestrictionAxiom-Syntax">RelationTargetRestrictionAxiom</a>)*
 ])?
 </pre>
+     </div>
+     <div class="tab-content diagram hidden">
+      <p></p>
+      <svg height="321px" style="background-color: rgb(255, 255, 255);" version="1.1" viewBox="-0.5 -0.5 585 321" width="585px" xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+       <defs></defs>
+       <g>
+        <rect fill="#ffffff" height="80" pointer-events="all" stroke="#000000" width="230" x="160" y="240"></rect>
+        <a href="#StructuredProperty-Syntax">
+         <rect fill="none" height="20" pointer-events="all" stroke="none" width="140" x="171.5" y="282.44"></rect>
+         <g fill="#007FFF" font-family="Helvetica" font-size="15px" text-decoration="underline">
+          <text x="173" y="298.44">StructuredProperty</text>
+         </g>
+        </a>
+        <rect fill="none" height="20" pointer-events="all" stroke="none" width="20" x="340" y="252"></rect>
+        <g transform="translate(-0.5 -0.5)">
+         <switch>
+          <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+           <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 18px; height: 1px; padding-top: 262px; margin-left: 341px;" xmlns="http://www.w3.org/1999/xhtml">
+            <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+             <div style="display: inline-block; font-size: 15px; font-family: Helvetica; color: #FF8000; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">
+              <font style="font-size: 12px">?</font>
+             </div>
+            </div>
+           </div>
+          </foreignObject>
+          <text fill="#FF8000" font-family="Helvetica" font-size="15px" text-anchor="middle" x="350" y="267">?</text>
+         </switch>
+        </g>
+        <rect fill="none" height="30" pointer-events="all" stroke="none" width="20" x="301" y="279.44"></rect>
+        <g transform="translate(-0.5 -0.5)">
+         <switch>
+          <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+           <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 18px; height: 1px; padding-top: 294px; margin-left: 302px;" xmlns="http://www.w3.org/1999/xhtml">
+            <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+             <div style="display: inline-block; font-size: 15px; font-family: Helvetica; color: #FFB366; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">
+              <font color="#ff8000" face="Courier New" style="font-size: 15px">*</font>
+             </div>
+            </div>
+           </div>
+          </foreignObject>
+          <text fill="#FFB366" font-family="Helvetica" font-size="15px" text-anchor="middle" x="311" y="299">*</text>
+         </switch>
+        </g>
+        <rect fill="#ffffff" height="20" pointer-events="all" stroke="#b0b0b0" width="20" x="370" y="300"></rect>
+        <g fill="#FF8000" font-family="Helvetica" font-size="12px" text-anchor="middle">
+         <text x="379.5" y="314.5">?</text>
+        </g>
+        <rect fill="none" height="20" pointer-events="all" stroke="none" width="150" x="200" y="251"></rect>
+        <g fill="#000000" font-family="Helvetica" font-size="15px" text-anchor="middle">
+         <text x="274.5" y="267">structured properties</text>
+        </g>
+        <path d="M 390 160 L 567.76 160" fill="none" pointer-events="stroke" stroke="#000000" stroke-miterlimit="10"></path>
+        <path d="M 555.88 166.5 L 568.88 160 L 555.88 153.5" fill="none" pointer-events="all" stroke="#000000" stroke-miterlimit="10"></path>
+        <path d="M 160 160 L 0 160" fill="none" pointer-events="stroke" stroke="#000000" stroke-miterlimit="10"></path>
+        <rect fill="#ffffff" height="160" pointer-events="all" stroke="#000000" width="230" x="160" y="0"></rect>
+        <path d="M 160 60 L 390 60" fill="none" pointer-events="all" stroke="#000000" stroke-miterlimit="10"></path>
+        <rect fill="none" height="60" stroke="none" width="230" x="160" y="0"></rect>
+        <rect fill="none" height="60" stroke="none" width="230" x="160" y="0"></rect>
+        <path d="M 160 0 M 390 0 M 390 60 M 160 60" fill="none" stroke="#000000" stroke-miterlimit="10"></path>
+        <rect fill="none" height="60" stroke="none" width="230" x="160" y="0"></rect>
+        <rect fill="none" height="60" stroke="none" width="230" x="160" y="0"></rect>
+        <path d="M 160 0 M 390 0 M 390 60 M 160 60" fill="none" stroke="#000000" stroke-miterlimit="10"></path>
+        <rect fill="none" height="100" stroke="none" width="230" x="160" y="60"></rect>
+        <rect fill="none" height="100" stroke="none" width="230" x="160" y="60"></rect>
+        <path d="M 160 60 M 390 60 M 390 160 M 160 160" fill="none" stroke="#000000" stroke-miterlimit="10"></path>
+        <rect fill="none" height="20" stroke="none" width="64.4" x="242.95" y="67"></rect>
+        <g fill="#000000" font-family="Helvetica" font-size="15px" text-anchor="middle">
+         <text x="274.65" y="83">relations</text>
+        </g>
+        <rect fill="none" height="24.62" stroke="none" width="20" x="297.84" y="66"></rect>
+        <g transform="translate(-0.5 -0.5)">
+         <switch>
+          <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+           <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 18px; height: 1px; padding-top: 78px; margin-left: 299px;" xmlns="http://www.w3.org/1999/xhtml">
+            <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+             <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #FF8000; line-height: 1.2; pointer-events: none; white-space: normal; word-wrap: normal; ">?</div>
+            </div>
+           </div>
+          </foreignObject>
+          <text fill="#FF8000" font-family="Helvetica" font-size="12px" text-anchor="middle" x="308" y="82">?</text>
+         </switch>
+        </g>
+        <a href="#ReverseRelation-Syntax">
+         <rect fill="none" height="20" stroke="none" width="119.6" x="169.2" y="120"></rect>
+         <g fill="#007FFF" font-family="Helvetica" font-size="15px" text-decoration="underline">
+          <text x="170.7" y="136">ReverseRelation</text>
+         </g>
+        </a>
+        <rect fill="none" height="24.62" stroke="none" width="20" x="278.35" y="118.38"></rect>
+        <g transform="translate(-0.5 -0.5)">
+         <switch>
+          <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+           <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 18px; height: 1px; padding-top: 131px; margin-left: 279px;" xmlns="http://www.w3.org/1999/xhtml">
+            <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+             <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #FF8000; line-height: 1.2; pointer-events: none; white-space: normal; word-wrap: normal; ">?</div>
+            </div>
+           </div>
+          </foreignObject>
+          <text fill="#FF8000" font-family="Helvetica" font-size="12px" text-anchor="middle" x="288" y="134">?</text>
+         </switch>
+        </g>
+        <rect fill="none" height="24.62" stroke="none" width="110.4" x="220.16" y="4"></rect>
+        <g fill="#000000" font-family="Helvetica" font-size="15px" text-anchor="middle">
+         <text x="274.86" y="22.31">«relation entity»</text>
+        </g>
+        <rect fill="none" height="30" stroke="none" width="170" x="189.84" y="30"></rect>
+        <g fill="#000000" font-family="Helvetica" font-size="18px" font-weight="bold" text-anchor="middle">
+         <text x="274.34" y="52.5">RelationEntity_IRI</text>
+        </g>
+        <a href="#ForwardRelation-Syntax">
+         <rect fill="none" height="20" stroke="none" width="119.6" x="169.2" y="95"></rect>
+         <g fill="#007FFF" font-family="Helvetica" font-size="15px" text-decoration="underline">
+          <text x="170.7" y="111">ForwardRelation</text>
+         </g>
+        </a>
+        <rect fill="#ffffff" height="80" stroke="#000000" width="230" x="160" y="160"></rect>
+        <rect fill="none" height="20" stroke="none" width="20" x="325.6" y="172"></rect>
+        <g transform="translate(-0.5 -0.5)">
+         <switch>
+          <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+           <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 18px; height: 1px; padding-top: 182px; margin-left: 327px;" xmlns="http://www.w3.org/1999/xhtml">
+            <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+             <div style="display: inline-block; font-size: 15px; font-family: Helvetica; color: #FF8000; line-height: 1.2; pointer-events: none; white-space: normal; word-wrap: normal; ">
+              <font style="font-size: 12px">?</font>
+             </div>
+            </div>
+           </div>
+          </foreignObject>
+          <text fill="#FF8000" font-family="Helvetica" font-size="15px" text-anchor="middle" x="336" y="187">?</text>
+         </switch>
+        </g>
+        <rect fill="none" height="30" stroke="none" width="20" x="270.36" y="199.44"></rect>
+        <g transform="translate(-0.5 -0.5)">
+         <switch>
+          <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+           <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 18px; height: 1px; padding-top: 214px; margin-left: 271px;" xmlns="http://www.w3.org/1999/xhtml">
+            <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+             <div style="display: inline-block; font-size: 15px; font-family: Helvetica; color: #FFB366; line-height: 1.2; pointer-events: none; white-space: normal; word-wrap: normal; ">
+              <font color="#ff8000" face="Courier New" style="font-size: 15px">*</font>
+             </div>
+            </div>
+           </div>
+          </foreignObject>
+          <text fill="#FFB366" font-family="Helvetica" font-size="15px" text-anchor="middle" x="280" y="219">*</text>
+         </switch>
+        </g>
+        <a href="#ScalarProperty-Syntax">
+         <rect fill="none" height="20" stroke="none" width="101.2" x="171.5" y="204.44"></rect>
+         <g fill="#007FFF" font-family="Helvetica" font-size="15px" text-decoration="underline">
+          <text x="173" y="220.44">ScalarProperty</text>
+         </g>
+        </a>
+        <rect fill="#ffffff" height="20" stroke="#b0b0b0" width="20" x="369.84" y="220"></rect>
+        <g fill="#FF8000" font-family="Helvetica" font-size="12px" text-anchor="middle">
+         <text x="379.34" y="234.5">?</text>
+        </g>
+        <rect fill="none" height="20" stroke="none" width="119.6" x="214.58" y="171"></rect>
+        <g fill="#000000" font-family="Helvetica" font-size="15px" text-anchor="middle">
+         <text x="273.88" y="187">scalar properties</text>
+        </g>
+        <rect fill="#ffffff" height="20" stroke="#b0b0b0" width="20" x="370" y="140"></rect>
+        <g fill="#FF8000" font-family="Helvetica" font-size="12px" text-anchor="middle">
+         <text x="379.5" y="154.5">?</text>
+        </g>
+       </g>
+       <switch>
+        <g requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"></g>
+        <a target="_blank" transform="translate(0,-5)" href="https://desk.draw.io/support/solutions/articles/16000042487">
+         <text font-size="10px" text-anchor="middle" x="50%" y="100%">Viewer does not support full SVG 1.1</text>
+        </a>
+       </switch>
+      </svg>
+     </div>
+    </div>
     <h4 class="heading settled" data-level="2.2.7" id="ForwardRelation-Syntax"><span class="secno">2.2.7. </span><span class="content"><a data-link-type="dfn" href="#forwardrelation" id="ref-for-forwardrelation">ForwardRelation</a></span><a class="self-link" href="#ForwardRelation-Syntax"></a></h4>
     <p>Declaration</p>
+    <div class="tab-container">
+     <div class="bar">
+      <button class="bar-btn active" onclick="onBarClick(event)" value="text">Text</button>
+      <button class="bar-btn" onclick="onBarClick(event)" value="diagram">Diagram</button>
+     </div>
+     <div class="tab-content text">
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
 forward ID
 </pre>
+     </div>
+     <div class="tab-content diagram hidden">
+      <p></p>
+      <svg height="31px" style="background-color: rgb(255, 255, 255);" version="1.1" viewBox="-0.5 -0.5 121 31" width="121px" xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+       <defs></defs>
+       <g>
+        <rect fill="none" height="30" pointer-events="all" stroke="#b0b0b0" stroke-dasharray="3 3" width="120" x="0" y="0"></rect>
+        <g fill="#000000" font-family="Helvetica" font-size="18px" text-anchor="middle">
+         <text x="59.5" y="22.5">«forward» ID</text>
+        </g>
+       </g>
+      </svg>
+     </div>
+    </div>
     <h4 class="heading settled" data-level="2.2.8" id="ReverseRelation-Syntax"><span class="secno">2.2.8. </span><span class="content"><a data-link-type="dfn" href="#reverserelation" id="ref-for-reverserelation">ReverseRelation</a></span><a class="self-link" href="#ReverseRelation-Syntax"></a></h4>
     <p>Declaration</p>
+    <div class="tab-container">
+     <div class="bar">
+      <button class="bar-btn active" onclick="onBarClick(event)" value="text">Text</button>
+      <button class="bar-btn" onclick="onBarClick(event)" value="diagram">Diagram</button>
+     </div>
+     <div class="tab-content text">
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
 reverse ID
 </pre>
+     </div>
+     <div class="tab-content diagram hidden">
+      <p></p>
+      <svg height="31px" style="background-color: rgb(255, 255, 255);" version="1.1" viewBox="-0.5 -0.5 121 31" width="121px" xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+       <defs></defs>
+       <g>
+        <rect fill="none" height="30" pointer-events="all" stroke="#b0b0b0" stroke-dasharray="3 3" width="120" x="0" y="0"></rect>
+        <g fill="#000000" font-family="Helvetica" font-size="18px" text-anchor="middle">
+         <text x="59.5" y="22.5">«reverse» ID</text>
+        </g>
+       </g>
+      </svg>
+     </div>
+    </div>
     <h4 class="heading settled" data-level="2.2.9" id="RelationReference-Syntax"><span class="secno">2.2.9. </span><span class="content"><a data-link-type="dfn" href="#relationreference" id="ref-for-relationreference">RelationReference</a></span><a class="self-link" href="#RelationReference-Syntax"></a></h4>
     <p>Reference</p>
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
@@ -1963,28 +3123,340 @@ ref relation (<a href="#ReverseRelation-Syntax">ReverseRelation_IRI</a> | <a hre
 </pre>
     <h4 class="heading settled" data-level="2.2.10" id="Structure-Syntax"><span class="secno">2.2.10. </span><span class="content"><a data-link-type="dfn" href="#structure" id="ref-for-structure">Structure</a></span><a class="self-link" href="#Structure-Syntax"></a></h4>
     <p>Declaration</p>
+    <div class="tab-container">
+     <div class="bar">
+      <button class="bar-btn active" onclick="onBarClick(event)" value="text">Text</button>
+      <button class="bar-btn" onclick="onBarClick(event)" value="diagram">Diagram</button>
+     </div>
+     <div class="tab-content text">
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
 structure ID (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)? ([
   (<a href="#ScalarPropertyRangeRestrictionAxiom-Syntax">ScalarPropertyRangeRestrictionAxiom</a> | <a href="#ScalarPropertyCardinalityRestrictionAxiom-Syntax">ScalarPropertyCardinalityRestrictionAxiom</a> | <a href="#ScalarPropertyValueRestrictionAxiom-Syntax">ScalarPropertyValueRestrictionAxiom</a> | <a href="#StructuredPropertyRangeRestrictionAxiom-Syntax">StructuredPropertyRangeRestrictionAxiom</a> | <a href="#StructuredPropertyCardinalityRestrictionAxiom-Syntax">StructuredPropertyCardinalityRestrictionAxiom</a> | <a href="#StructuredPropertyValueRestrictionAxiom-Syntax">StructuredPropertyValueRestrictionAxiom</a>)*
 ])?
 </pre>
+     </div>
+     <div class="tab-content diagram hidden">
+      <p></p>
+      <svg height="211px" style="background-color: rgb(255, 255, 255);" version="1.1" viewBox="-0.5 -0.5 231 211" width="231px" xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+       <defs></defs>
+       <g>
+        <rect fill="#ffffff" height="80" pointer-events="all" stroke="#000000" width="230" x="0" y="130"></rect>
+        <a href="#StructuredProperty-Syntax">
+         <rect fill="none" height="20" pointer-events="all" stroke="none" width="140" x="11.5" y="172.44"></rect>
+         <g fill="#007FFF" font-family="Helvetica" font-size="15px" text-decoration="underline">
+          <text x="13" y="188.44">StructuredProperty</text>
+         </g>
+        </a>
+        <rect fill="none" height="20" pointer-events="all" stroke="none" width="20" x="180" y="142"></rect>
+        <g transform="translate(-0.5 -0.5)">
+         <switch>
+          <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+           <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 18px; height: 1px; padding-top: 152px; margin-left: 181px;" xmlns="http://www.w3.org/1999/xhtml">
+            <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+             <div style="display: inline-block; font-size: 15px; font-family: Helvetica; color: #FF8000; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">
+              <font style="font-size: 12px">?</font>
+             </div>
+            </div>
+           </div>
+          </foreignObject>
+          <text fill="#FF8000" font-family="Helvetica" font-size="15px" text-anchor="middle" x="190" y="157">?</text>
+         </switch>
+        </g>
+        <rect fill="none" height="30" pointer-events="all" stroke="none" width="20" x="141" y="169.44"></rect>
+        <g transform="translate(-0.5 -0.5)">
+         <switch>
+          <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+           <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 18px; height: 1px; padding-top: 184px; margin-left: 142px;" xmlns="http://www.w3.org/1999/xhtml">
+            <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+             <div style="display: inline-block; font-size: 15px; font-family: Helvetica; color: #FFB366; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">
+              <font color="#ff8000" face="Courier New" style="font-size: 15px">*</font>
+             </div>
+            </div>
+           </div>
+          </foreignObject>
+          <text fill="#FFB366" font-family="Helvetica" font-size="15px" text-anchor="middle" x="151" y="189">*</text>
+         </switch>
+        </g>
+        <rect fill="#ffffff" height="20" pointer-events="all" stroke="#b0b0b0" width="20" x="210" y="190"></rect>
+        <g fill="#FF8000" font-family="Helvetica" font-size="12px" text-anchor="middle">
+         <text x="219.5" y="204.5">?</text>
+        </g>
+        <rect fill="none" height="20" pointer-events="all" stroke="none" width="150" x="40" y="141"></rect>
+        <g fill="#000000" font-family="Helvetica" font-size="15px" text-anchor="middle">
+         <text x="114.5" y="157">structured properties</text>
+        </g>
+        <rect fill="#ffffff" height="130" pointer-events="all" stroke="#000000" width="230" x="0" y="0"></rect>
+        <path d="M 0 60 L 230 60" fill="none" pointer-events="all" stroke="#000000" stroke-miterlimit="10"></path>
+        <rect fill="none" height="60" stroke="none" width="230" x="0" y="0"></rect>
+        <rect fill="none" height="60" stroke="none" width="230" x="0" y="0"></rect>
+        <path d="M 0 0 M 230 0 M 230 60 M 0 60" fill="none" stroke="#000000" stroke-miterlimit="10"></path>
+        <rect fill="none" height="60" stroke="none" width="230" x="0" y="0"></rect>
+        <rect fill="none" height="60" stroke="none" width="230" x="0" y="0"></rect>
+        <path d="M 0 0 M 230 0 M 230 60 M 0 60" fill="none" stroke="#000000" stroke-miterlimit="10"></path>
+        <rect fill="none" height="70" stroke="none" width="230" x="0" y="60"></rect>
+        <rect fill="none" height="70" stroke="none" width="230" x="0" y="60"></rect>
+        <path d="M 0 60 M 230 60 M 230 130 M 0 130" fill="none" stroke="#000000" stroke-miterlimit="10"></path>
+        <rect fill="#ffffff" height="20" stroke="#b0b0b0" width="20" x="210" y="110"></rect>
+        <g fill="#FF8000" font-family="Helvetica" font-size="12px" text-anchor="middle">
+         <text x="219.5" y="124.5">?</text>
+        </g>
+        <rect fill="none" height="20" stroke="none" width="130" x="50" y="67"></rect>
+        <g fill="#000000" font-family="Helvetica" font-size="15px" text-anchor="middle">
+         <text x="114.5" y="83">scalar properties</text>
+        </g>
+        <rect fill="none" height="20" stroke="none" width="20" x="168" y="68"></rect>
+        <g transform="translate(-0.5 -0.5)">
+         <switch>
+          <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+           <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 18px; height: 1px; padding-top: 78px; margin-left: 169px;" xmlns="http://www.w3.org/1999/xhtml">
+            <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+             <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #FF8000; line-height: 1.2; pointer-events: none; white-space: normal; word-wrap: normal; ">?</div>
+            </div>
+           </div>
+          </foreignObject>
+          <text fill="#FF8000" font-family="Helvetica" font-size="12px" text-anchor="middle" x="178" y="82">?</text>
+         </switch>
+        </g>
+        <rect fill="none" height="30" stroke="none" width="20" x="113" y="93"></rect>
+        <g transform="translate(-0.5 -0.5)">
+         <switch>
+          <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+           <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 18px; height: 1px; padding-top: 108px; margin-left: 114px;" xmlns="http://www.w3.org/1999/xhtml">
+            <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+             <div style="display: inline-block; font-size: 15px; font-family: Helvetica; color: #B0B0B0; line-height: 1.2; pointer-events: none; white-space: normal; word-wrap: normal; ">
+              <font color="#ff8000" face="Courier New" style="font-size: 15px">*</font>
+             </div>
+            </div>
+           </div>
+          </foreignObject>
+          <text fill="#B0B0B0" font-family="Helvetica" font-size="15px" text-anchor="middle" x="123" y="113">*</text>
+         </switch>
+        </g>
+        <a href="#ScalarProperty-Syntax">
+         <rect fill="none" height="20" stroke="none" width="110" x="11.5" y="96"></rect>
+         <g fill="#007FFF" font-family="Helvetica" font-size="15px" text-decoration="underline">
+          <text x="13" y="112">ScalarProperty</text>
+         </g>
+        </a>
+        <rect fill="none" height="20" stroke="none" width="90" x="70" y="4"></rect>
+        <g fill="#000000" font-family="Helvetica" font-size="15px" text-anchor="middle">
+         <text x="114.5" y="20">«structure»</text>
+        </g>
+        <rect fill="none" height="30" stroke="none" width="40" x="95" y="27"></rect>
+        <g fill="#000000" font-family="Helvetica" font-size="22px" font-weight="bold" text-anchor="middle">
+         <text x="114.5" y="51.5">ID</text>
+        </g>
+       </g>
+       <switch>
+        <g requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"></g>
+        <a target="_blank" transform="translate(0,-5)" href="https://desk.draw.io/support/solutions/articles/16000042487">
+         <text font-size="10px" text-anchor="middle" x="50%" y="100%">Viewer does not support full SVG 1.1</text>
+        </a>
+       </switch>
+      </svg>
+     </div>
+    </div>
     <p>Reference</p>
+    <div class="tab-container">
+     <div class="bar">
+      <button class="bar-btn active" onclick="onBarClick(event)" value="text">Text</button>
+      <button class="bar-btn" onclick="onBarClick(event)" value="diagram">Diagram</button>
+     </div>
+     <div class="tab-content text">
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
 ref structure <a href="#Structure-Syntax">Structure_IRI</a> (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)? ([
   (<a href="#ScalarPropertyRangeRestrictionAxiom-Syntax">ScalarPropertyRangeRestrictionAxiom</a> | <a href="#ScalarPropertyCardinalityRestrictionAxiom-Syntax">ScalarPropertyCardinalityRestrictionAxiom</a> | <a href="#ScalarPropertyValueRestrictionAxiom-Syntax">ScalarPropertyValueRestrictionAxiom</a> | <a href="#StructuredPropertyRangeRestrictionAxiom-Syntax">StructuredPropertyRangeRestrictionAxiom</a> | <a href="#StructuredPropertyCardinalityRestrictionAxiom-Syntax">StructuredPropertyCardinalityRestrictionAxiom</a> | <a href="#StructuredPropertyValueRestrictionAxiom-Syntax">StructuredPropertyValueRestrictionAxiom</a>)*
 ])?
 </pre>
+     </div>
+     <div class="tab-content diagram hidden">
+      <p></p>
+      <svg height="211px" style="background-color: rgb(255, 255, 255);" version="1.1" viewBox="-0.5 -0.5 231 211" width="231px" xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+       <defs></defs>
+       <g>
+        <rect fill="#ffffff" height="80" pointer-events="all" stroke="#000000" width="230" x="0" y="130"></rect>
+        <a href="#StructuredProperty-Syntax">
+         <rect fill="none" height="20" pointer-events="all" stroke="none" width="140" x="11.5" y="172.44"></rect>
+         <g fill="#007FFF" font-family="Helvetica" font-size="15px" text-decoration="underline">
+          <text x="13" y="188.44">StructuredProperty</text>
+         </g>
+        </a>
+        <rect fill="none" height="20" pointer-events="all" stroke="none" width="20" x="180" y="142"></rect>
+        <g transform="translate(-0.5 -0.5)">
+         <switch>
+          <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+           <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 18px; height: 1px; padding-top: 152px; margin-left: 181px;" xmlns="http://www.w3.org/1999/xhtml">
+            <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+             <div style="display: inline-block; font-size: 15px; font-family: Helvetica; color: #FF8000; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">
+              <font style="font-size: 12px">?</font>
+             </div>
+            </div>
+           </div>
+          </foreignObject>
+          <text fill="#FF8000" font-family="Helvetica" font-size="15px" text-anchor="middle" x="190" y="157">?</text>
+         </switch>
+        </g>
+        <rect fill="none" height="30" pointer-events="all" stroke="none" width="20" x="141" y="169.44"></rect>
+        <g transform="translate(-0.5 -0.5)">
+         <switch>
+          <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+           <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 18px; height: 1px; padding-top: 184px; margin-left: 142px;" xmlns="http://www.w3.org/1999/xhtml">
+            <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+             <div style="display: inline-block; font-size: 15px; font-family: Helvetica; color: #FFB366; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">
+              <font color="#ff8000" face="Courier New" style="font-size: 15px">*</font>
+             </div>
+            </div>
+           </div>
+          </foreignObject>
+          <text fill="#FFB366" font-family="Helvetica" font-size="15px" text-anchor="middle" x="151" y="189">*</text>
+         </switch>
+        </g>
+        <rect fill="#ffffff" height="20" pointer-events="all" stroke="#b0b0b0" width="20" x="210" y="190"></rect>
+        <g fill="#FF8000" font-family="Helvetica" font-size="12px" text-anchor="middle">
+         <text x="219.5" y="204.5">?</text>
+        </g>
+        <rect fill="none" height="20" pointer-events="all" stroke="none" width="150" x="40" y="141"></rect>
+        <g fill="#000000" font-family="Helvetica" font-size="15px" text-anchor="middle">
+         <text x="114.5" y="157">structured properties</text>
+        </g>
+        <rect fill="#ffffff" height="130" pointer-events="all" stroke="#000000" width="230" x="0" y="0"></rect>
+        <path d="M 0 60 L 230 60" fill="none" pointer-events="all" stroke="#000000" stroke-miterlimit="10"></path>
+        <rect fill="none" height="60" stroke="none" width="230" x="0" y="0"></rect>
+        <rect fill="none" height="60" stroke="none" width="230" x="0" y="0"></rect>
+        <path d="M 0 0 M 230 0 M 230 60 M 0 60" fill="none" stroke="#000000" stroke-miterlimit="10"></path>
+        <rect fill="none" height="60" stroke="none" width="230" x="0" y="0"></rect>
+        <rect fill="none" height="60" stroke="none" width="230" x="0" y="0"></rect>
+        <path d="M 0 0 M 230 0 M 230 60 M 0 60" fill="none" stroke="#000000" stroke-miterlimit="10"></path>
+        <rect fill="none" height="70" stroke="none" width="230" x="0" y="60"></rect>
+        <rect fill="none" height="70" stroke="none" width="230" x="0" y="60"></rect>
+        <path d="M 0 60 M 230 60 M 230 130 M 0 130" fill="none" stroke="#000000" stroke-miterlimit="10"></path>
+        <rect fill="#ffffff" height="20" stroke="#b0b0b0" width="20" x="210" y="110"></rect>
+        <g fill="#FF8000" font-family="Helvetica" font-size="12px" text-anchor="middle">
+         <text x="219.5" y="124.5">?</text>
+        </g>
+        <rect fill="none" height="20" stroke="none" width="130" x="50" y="67"></rect>
+        <g fill="#000000" font-family="Helvetica" font-size="15px" text-anchor="middle">
+         <text x="114.5" y="83">scalar properties</text>
+        </g>
+        <rect fill="none" height="20" stroke="none" width="20" x="168" y="68"></rect>
+        <g transform="translate(-0.5 -0.5)">
+         <switch>
+          <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+           <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 18px; height: 1px; padding-top: 78px; margin-left: 169px;" xmlns="http://www.w3.org/1999/xhtml">
+            <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+             <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #FF8000; line-height: 1.2; pointer-events: none; white-space: normal; word-wrap: normal; ">?</div>
+            </div>
+           </div>
+          </foreignObject>
+          <text fill="#FF8000" font-family="Helvetica" font-size="12px" text-anchor="middle" x="178" y="82">?</text>
+         </switch>
+        </g>
+        <rect fill="none" height="30" stroke="none" width="20" x="113" y="93"></rect>
+        <g transform="translate(-0.5 -0.5)">
+         <switch>
+          <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+           <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 18px; height: 1px; padding-top: 108px; margin-left: 114px;" xmlns="http://www.w3.org/1999/xhtml">
+            <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+             <div style="display: inline-block; font-size: 15px; font-family: Helvetica; color: #B0B0B0; line-height: 1.2; pointer-events: none; white-space: normal; word-wrap: normal; ">
+              <font color="#ff8000" face="Courier New" style="font-size: 15px">*</font>
+             </div>
+            </div>
+           </div>
+          </foreignObject>
+          <text fill="#B0B0B0" font-family="Helvetica" font-size="15px" text-anchor="middle" x="123" y="113">*</text>
+         </switch>
+        </g>
+        <a href="#ScalarProperty-Syntax">
+         <rect fill="none" height="20" stroke="none" width="110" x="11.5" y="96"></rect>
+         <g fill="#007FFF" font-family="Helvetica" font-size="15px" text-decoration="underline">
+          <text x="13" y="112">ScalarProperty</text>
+         </g>
+        </a>
+        <rect fill="none" height="20" stroke="none" width="90" x="70" y="4"></rect>
+        <g fill="#000000" font-family="Helvetica" font-size="15px" text-anchor="middle">
+         <text x="114.5" y="20">«structure»</text>
+        </g>
+        <rect fill="none" height="30" stroke="none" width="150" x="40" y="27"></rect>
+        <g fill="#000000" font-family="Helvetica" font-size="22px" font-weight="bold" text-anchor="middle">
+         <text x="114.5" y="51.5">Structure_IRI</text>
+        </g>
+       </g>
+       <switch>
+        <g requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"></g>
+        <a target="_blank" transform="translate(0,-5)" href="https://desk.draw.io/support/solutions/articles/16000042487">
+         <text font-size="10px" text-anchor="middle" x="50%" y="100%">Viewer does not support full SVG 1.1</text>
+        </a>
+       </switch>
+      </svg>
+     </div>
+    </div>
     <h4 class="heading settled" data-level="2.2.11" id="AnnotationProperty-Syntax"><span class="secno">2.2.11. </span><span class="content"><a data-link-type="dfn" href="#annotationproperty" id="ref-for-annotationproperty">AnnotationProperty</a></span><a class="self-link" href="#AnnotationProperty-Syntax"></a></h4>
     <p>Declaration</p>
+    <div class="tab-container">
+     <div class="bar">
+      <button class="bar-btn active" onclick="onBarClick(event)" value="text">Text</button>
+      <button class="bar-btn" onclick="onBarClick(event)" value="diagram">Diagram</button>
+     </div>
+     <div class="tab-content text">
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
 annotation property ID (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)?
 </pre>
+     </div>
+     <div class="tab-content diagram hidden">
+      <p></p>
+      <svg height="61px" style="background-color: rgb(255, 255, 255);" version="1.1" viewBox="-0.5 -0.5 231 61" width="231px" xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+       <defs></defs>
+       <g>
+        <rect fill="#ffffff" height="60" pointer-events="all" stroke="#000000" width="230" x="0" y="0"></rect>
+        <rect fill="none" height="20" pointer-events="all" stroke="none" width="100" x="65" y="4"></rect>
+        <g fill="#000000" font-family="Helvetica" font-size="15px" text-anchor="middle">
+         <text x="114.5" y="20">«annotation»</text>
+        </g>
+        <rect fill="none" height="30" pointer-events="all" stroke="none" width="40" x="95" y="27"></rect>
+        <g fill="#000000" font-family="Helvetica" font-size="22px" font-weight="bold" text-anchor="middle">
+         <text x="114.5" y="51.5">ID</text>
+        </g>
+       </g>
+      </svg>
+     </div>
+    </div>
     <p>Reference</p>
+    <div class="tab-container">
+     <div class="bar">
+      <button class="bar-btn active" onclick="onBarClick(event)" value="text">Text</button>
+      <button class="bar-btn" onclick="onBarClick(event)" value="diagram">Diagram</button>
+     </div>
+     <div class="tab-content text">
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
 ref annotation property <a href="#AnnotationProperty-Syntax">AnnotationProperty_IRI</a> (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)?
 </pre>
+     </div>
+     <div class="tab-content diagram hidden">
+      <p></p>
+      <svg height="61px" style="background-color: rgb(255, 255, 255);" version="1.1" viewBox="-0.5 -0.5 306 61" width="306px" xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+       <defs></defs>
+       <g>
+        <rect fill="#ffffff" height="60" pointer-events="all" stroke="#000000" width="305" x="0" y="0"></rect>
+        <rect fill="none" height="20" pointer-events="all" stroke="none" width="132.61" x="86.2" y="4"></rect>
+        <g fill="#000000" font-family="Helvetica" font-size="15px" text-anchor="middle">
+         <text x="152" y="20">«annotation»</text>
+        </g>
+        <rect fill="none" height="30" pointer-events="all" stroke="none" width="260" x="22.98" y="27"></rect>
+        <g fill="#000000" font-family="Helvetica" font-size="22px" font-weight="bold" text-anchor="middle">
+         <text x="152.48" y="51.5">AnnotationProperty_IRI</text>
+        </g>
+       </g>
+      </svg>
+     </div>
+    </div>
     <h4 class="heading settled" data-level="2.2.12" id="ScalarProperty-Syntax"><span class="secno">2.2.12. </span><span class="content"><a data-link-type="dfn" href="#scalarproperty" id="ref-for-scalarproperty">ScalarProperty</a></span><a class="self-link" href="#ScalarProperty-Syntax"></a></h4>
     <p>Declaration</p>
+    <div class="tab-container">
+     <div class="bar">
+      <button class="bar-btn active" onclick="onBarClick(event)" value="text">Text</button>
+      <button class="bar-btn" onclick="onBarClick(event)" value="diagram">Diagram</button>
+     </div>
+     <div class="tab-content text">
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
 scalar property ID (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)? ([
   domain (<a href="#Aspect-Syntax">Aspect_IRI</a> | <a href="#Concept-Syntax">Concept_IRI</a>|<a href="#RelationEntity-Syntax">RelationEntity_IRI</a> | <a href="#Structure-Syntax">Structure_IRI</a>)
@@ -1992,12 +3464,52 @@ scalar property ID (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxio
   (functional)?
 ])?
 </pre>
+     </div>
+     <div class="tab-content diagram hidden">
+      <p></p>
+      <svg height="31px" style="background-color: rgb(255, 255, 255);" version="1.1" viewBox="-0.5 -0.5 91 31" width="91px" xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+       <defs></defs>
+       <g>
+        <rect fill="none" height="30" pointer-events="all" stroke="#b0b0b0" stroke-dasharray="3 3" width="90" x="0" y="0"></rect>
+        <g fill="#000000" font-family="Helvetica" font-size="18px" text-anchor="middle">
+         <text x="44.5" y="22.5">ID : range</text>
+        </g>
+       </g>
+      </svg>
+     </div>
+    </div>
     <p>Reference</p>
+    <div class="tab-container">
+     <div class="bar">
+      <button class="bar-btn active" onclick="onBarClick(event)" value="text">Text</button>
+      <button class="bar-btn" onclick="onBarClick(event)" value="diagram">Diagram</button>
+     </div>
+     <div class="tab-content text">
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
 ref scalar property <a href="#ScalarProperty-Syntax">ScalarProperty_IRI</a>( :> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)?
 </pre>
+     </div>
+     <div class="tab-content diagram hidden">
+      <p></p>
+      <svg height="31px" style="background-color: rgb(255, 255, 255);" version="1.1" viewBox="-0.5 -0.5 231 31" width="231px" xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+       <defs></defs>
+       <g>
+        <rect fill="none" height="30" pointer-events="all" stroke="#b0b0b0" stroke-dasharray="3 3" width="230" x="0" y="0"></rect>
+        <g fill="#000000" font-family="Helvetica" font-size="18px" text-anchor="middle">
+         <text x="114.5" y="22.5">ScalarProperty_IRI : range</text>
+        </g>
+       </g>
+      </svg>
+     </div>
+    </div>
     <h4 class="heading settled" data-level="2.2.13" id="StructuredProperty-Syntax"><span class="secno">2.2.13. </span><span class="content"><a data-link-type="dfn" href="#structuredproperty" id="ref-for-structuredproperty">StructuredProperty</a></span><a class="self-link" href="#StructuredProperty-Syntax"></a></h4>
     <p>Declaration</p>
+    <div class="tab-container">
+     <div class="bar">
+      <button class="bar-btn active" onclick="onBarClick(event)" value="text">Text</button>
+      <button class="bar-btn" onclick="onBarClick(event)" value="diagram">Diagram</button>
+     </div>
+     <div class="tab-content text">
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
 structured property ID (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)? ([
   domain (<a href="#Aspect-Syntax">Aspect_IRI</a> | <a href="#Concept-Syntax">Concept_IRI</a> | <a href="#RelationEntity-Syntax">RelationEntity_IRI</a> | <a href="#Structure-Syntax">Structure_IRI</a>)
@@ -2005,12 +3517,52 @@ structured property ID (:> <a href="#SpecializationAxiom-Syntax">[Specialization
   (functional)?
 ])?
 </pre>
+     </div>
+     <div class="tab-content diagram hidden">
+      <p></p>
+      <svg height="31px" style="background-color: rgb(255, 255, 255);" version="1.1" viewBox="-0.5 -0.5 91 31" width="91px" xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+       <defs></defs>
+       <g>
+        <rect fill="none" height="30" pointer-events="all" stroke="#b0b0b0" stroke-dasharray="3 3" width="90" x="0" y="0"></rect>
+        <g fill="#000000" font-family="Helvetica" font-size="18px" text-anchor="middle">
+         <text x="44.5" y="22.5">ID : range</text>
+        </g>
+       </g>
+      </svg>
+     </div>
+    </div>
     <p>Reference</p>
+    <div class="tab-container">
+     <div class="bar">
+      <button class="bar-btn active" onclick="onBarClick(event)" value="text">Text</button>
+      <button class="bar-btn" onclick="onBarClick(event)" value="diagram">Diagram</button>
+     </div>
+     <div class="tab-content text">
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
 ref structured property <a href="#StructuredProperty-Syntax">StructuredProperty_IRI</a> (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)?
 </pre>
+     </div>
+     <div class="tab-content diagram hidden">
+      <p></p>
+      <svg height="31px" style="background-color: rgb(255, 255, 255);" version="1.1" viewBox="-0.5 -0.5 261 31" width="261px" xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+       <defs></defs>
+       <g>
+        <rect fill="none" height="30" pointer-events="all" stroke="#b0b0b0" stroke-dasharray="3 3" width="260" x="0" y="0"></rect>
+        <g fill="#000000" font-family="Helvetica" font-size="18px" text-anchor="middle">
+         <text x="129.5" y="22.5">StructuredProperty_IRI : range</text>
+        </g>
+       </g>
+      </svg>
+     </div>
+    </div>
     <h4 class="heading settled" data-level="2.2.14" id="FacetedScalar-Syntax"><span class="secno">2.2.14. </span><span class="content"><a data-link-type="dfn" href="#facetedscalar" id="ref-for-facetedscalar">FacetedScalar</a></span><a class="self-link" href="#FacetedScalar-Syntax"></a></h4>
     <p>Declaration</p>
+    <div class="tab-container">
+     <div class="bar">
+      <button class="bar-btn active" onclick="onBarClick(event)" value="text">Text</button>
+      <button class="bar-btn" onclick="onBarClick(event)" value="diagram">Diagram</button>
+     </div>
+     <div class="tab-content text">
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
 scalar ID (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)? ([
   (length INTEGER)?
@@ -2024,56 +3576,928 @@ scalar ID (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (,
   (maxExclusive <a href="#Literal-Syntax">Literal</a>)?
 ])?
 </pre>
+     </div>
+     <div class="tab-content diagram hidden">
+      <p></p>
+      <svg height="61px" style="background-color: rgb(255, 255, 255);" version="1.1" viewBox="-0.5 -0.5 231 61" width="231px" xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+       <defs></defs>
+       <g>
+        <rect fill="#ffffff" height="60" pointer-events="all" stroke="#000000" width="230" x="0" y="0"></rect>
+        <rect fill="none" height="20" pointer-events="all" stroke="none" width="70" x="80" y="4"></rect>
+        <g fill="#000000" font-family="Helvetica" font-size="15px" text-anchor="middle">
+         <text x="114.5" y="20">«scalar»</text>
+        </g>
+        <rect fill="none" height="30" pointer-events="all" stroke="none" width="40" x="95" y="27"></rect>
+        <g fill="#000000" font-family="Helvetica" font-size="22px" font-weight="bold" text-anchor="middle">
+         <text x="114.5" y="51.5">ID</text>
+        </g>
+       </g>
+      </svg>
+     </div>
+    </div>
     <p>Reference</p>
+    <div class="tab-container">
+     <div class="bar">
+      <button class="bar-btn active" onclick="onBarClick(event)" value="text">Text</button>
+      <button class="bar-btn" onclick="onBarClick(event)" value="diagram">Diagram</button>
+     </div>
+     <div class="tab-content text">
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
 ref scalar <a href="#FacetedScalar-Syntax">FacetedScalar_IRI</a> (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)?
 </pre>
+     </div>
+     <div class="tab-content diagram hidden">
+      <p></p>
+      <svg height="61px" style="background-color: rgb(255, 255, 255);" version="1.1" viewBox="-0.5 -0.5 231 61" width="231px" xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+       <defs></defs>
+       <g>
+        <rect fill="#ffffff" height="60" pointer-events="all" stroke="#000000" width="230" x="0" y="0"></rect>
+        <rect fill="none" height="20" pointer-events="all" stroke="none" width="70" x="80" y="4"></rect>
+        <g fill="#000000" font-family="Helvetica" font-size="15px" text-anchor="middle">
+         <text x="114.5" y="20">«scalar»</text>
+        </g>
+        <rect fill="none" height="30" pointer-events="all" stroke="none" width="210" x="10" y="27"></rect>
+        <g fill="#000000" font-family="Helvetica" font-size="22px" font-weight="bold" text-anchor="middle">
+         <text x="114.5" y="51.5">FacetedScalar_IRI</text>
+        </g>
+       </g>
+      </svg>
+     </div>
+    </div>
     <h4 class="heading settled" data-level="2.2.15" id="EnumeratedScalar-Syntax"><span class="secno">2.2.15. </span><span class="content"><a data-link-type="dfn" href="#enumeratedscalar" id="ref-for-enumeratedscalar">EnumeratedScalar</a></span><a class="self-link" href="#EnumeratedScalar-Syntax"></a></h4>
     <p>Declaration</p>
+    <div class="tab-container">
+     <div class="bar">
+      <button class="bar-btn active" onclick="onBarClick(event)" value="text">Text</button>
+      <button class="bar-btn" onclick="onBarClick(event)" value="diagram">Diagram</button>
+     </div>
+     <div class="tab-content text">
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
 enumerated scalar ID (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)? ([
   <a href="#Literal-Syntax">Literal</a> (, <a href="#Literal-Syntax">Literal</a>)*
 ])?
 </pre>
+     </div>
+     <div class="tab-content diagram hidden">
+      <p></p>
+      <svg height="131px" style="background-color: rgb(255, 255, 255);" version="1.1" viewBox="-0.5 -0.5 231 131" width="231px" xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+       <defs></defs>
+       <g>
+        <rect fill="#ffffff" height="130" pointer-events="all" stroke="#000000" width="230" x="0" y="0"></rect>
+        <path d="M 0 60 L 230 60" fill="none" pointer-events="all" stroke="#000000" stroke-miterlimit="10"></path>
+        <path d="M 0 0 M 230 0 M 230 60 M 0 60" fill="none" pointer-events="none" stroke="#000000" stroke-miterlimit="10"></path>
+        <path d="M 0 0 M 230 0 M 230 60 M 0 60" fill="none" pointer-events="none" stroke="#000000" stroke-miterlimit="10"></path>
+        <path d="M 0 60 M 230 60 M 230 130 M 0 130" fill="none" pointer-events="none" stroke="#000000" stroke-miterlimit="10"></path>
+        <rect fill="#ffffff" height="20" pointer-events="none" stroke="#b0b0b0" width="20" x="210" y="110"></rect>
+        <g fill="#FF8000" font-family="Helvetica" font-size="12px" text-anchor="middle">
+         <text x="219.5" y="124.5">?</text>
+        </g>
+        <g fill="#000000" font-family="Helvetica" font-size="15px" text-anchor="middle">
+         <text x="114.5" y="83">literals</text>
+        </g>
+        <g transform="translate(-0.5 -0.5)">
+         <switch>
+          <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+           <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 18px; height: 1px; padding-top: 78px; margin-left: 134px;" xmlns="http://www.w3.org/1999/xhtml">
+            <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+             <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #FF8000; line-height: 1.2; pointer-events: none; white-space: normal; word-wrap: normal; ">?</div>
+            </div>
+           </div>
+          </foreignObject>
+          <text fill="#FF8000" font-family="Helvetica" font-size="12px" text-anchor="middle" x="143" y="82">?</text>
+         </switch>
+        </g>
+        <g transform="translate(-0.5 -0.5)">
+         <switch>
+          <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+           <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 18px; height: 1px; padding-top: 108px; margin-left: 53px;" xmlns="http://www.w3.org/1999/xhtml">
+            <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+             <div style="display: inline-block; font-size: 15px; font-family: Helvetica; color: #B0B0B0; line-height: 1.2; pointer-events: none; white-space: normal; word-wrap: normal; ">
+              <font color="#ff8000" face="Courier New" style="font-size: 15px">*</font>
+             </div>
+            </div>
+           </div>
+          </foreignObject>
+          <text fill="#B0B0B0" font-family="Helvetica" font-size="15px" text-anchor="middle" x="62" y="113">*</text>
+         </switch>
+        </g>
+        <a href="#Literal-Syntax">
+         <rect fill="none" height="20" stroke="none" width="60" x="11.5" y="96"></rect>
+         <g fill="#007FFF" font-family="Helvetica" font-size="15px" text-decoration="underline">
+          <text x="13" y="112">Literal</text>
+         </g>
+        </a>
+        <rect fill="none" height="20" stroke="none" width="160" x="35" y="4"></rect>
+        <g fill="#000000" font-family="Helvetica" font-size="15px" text-anchor="middle">
+         <text x="114.5" y="20">«enumerated scalar»</text>
+        </g>
+        <rect fill="none" height="30" stroke="none" width="40" x="95" y="27"></rect>
+        <g fill="#000000" font-family="Helvetica" font-size="20px" font-weight="bold" text-anchor="middle">
+         <text x="114.5" y="50.5">ID</text>
+        </g>
+       </g>
+       <switch>
+        <g requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"></g>
+        <a target="_blank" transform="translate(0,-5)" href="https://desk.draw.io/support/solutions/articles/16000042487">
+         <text font-size="10px" text-anchor="middle" x="50%" y="100%">Viewer does not support full SVG 1.1</text>
+        </a>
+       </switch>
+      </svg>
+     </div>
+    </div>
     <p>Reference</p>
+    <div class="tab-container">
+     <div class="bar">
+      <button class="bar-btn active" onclick="onBarClick(event)" value="text">Text</button>
+      <button class="bar-btn" onclick="onBarClick(event)" value="diagram">Diagram</button>
+     </div>
+     <div class="tab-content text">
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
 ref enumerated scalar <a href="#EnumeratedScalar-Syntax">EnumeratedScalar_IRI</a> (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)?
 </pre>
+     </div>
+     <div class="tab-content diagram hidden">
+      <p></p>
+      <svg height="131px" style="background-color: rgb(255, 255, 255);" version="1.1" viewBox="-0.5 -0.5 266 131" width="266px" xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+       <defs></defs>
+       <g>
+        <rect fill="#ffffff" height="130" pointer-events="all" stroke="#000000" width="265" x="0" y="0"></rect>
+        <path d="M 0 60 L 265 60" fill="none" pointer-events="all" stroke="#000000" stroke-miterlimit="10"></path>
+        <path d="M 0 0 M 265 0 M 265 60 M 0 60" fill="none" pointer-events="none" stroke="#000000" stroke-miterlimit="10"></path>
+        <path d="M 0 0 M 265 0 M 265 60 M 0 60" fill="none" pointer-events="none" stroke="#000000" stroke-miterlimit="10"></path>
+        <path d="M 0 60 M 265 60 M 265 130 M 0 130" fill="none" pointer-events="none" stroke="#000000" stroke-miterlimit="10"></path>
+        <rect fill="#ffffff" height="20" pointer-events="none" stroke="#b0b0b0" width="20" x="244.96" y="110"></rect>
+        <g fill="#FF8000" font-family="Helvetica" font-size="12px" text-anchor="middle">
+         <text x="254.46" y="124.5">?</text>
+        </g>
+        <g fill="#000000" font-family="Helvetica" font-size="15px" text-anchor="middle">
+         <text x="131.99" y="84">literals</text>
+        </g>
+        <g transform="translate(-0.5 -0.5)">
+         <switch>
+          <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+           <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 21px; height: 1px; padding-top: 78px; margin-left: 152px;" xmlns="http://www.w3.org/1999/xhtml">
+            <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+             <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #FF8000; line-height: 1.2; pointer-events: none; white-space: normal; word-wrap: normal; ">?</div>
+            </div>
+           </div>
+          </foreignObject>
+          <text fill="#FF8000" font-family="Helvetica" font-size="12px" text-anchor="middle" x="162" y="82">?</text>
+         </switch>
+        </g>
+        <g transform="translate(-0.5 -0.5)">
+         <switch>
+          <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+           <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 21px; height: 1px; padding-top: 108px; margin-left: 55px;" xmlns="http://www.w3.org/1999/xhtml">
+            <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+             <div style="display: inline-block; font-size: 15px; font-family: Helvetica; color: #B0B0B0; line-height: 1.2; pointer-events: none; white-space: normal; word-wrap: normal; ">
+              <font color="#ff8000" face="Courier New" style="font-size: 15px">*</font>
+             </div>
+            </div>
+           </div>
+          </foreignObject>
+          <text fill="#B0B0B0" font-family="Helvetica" font-size="15px" text-anchor="middle" x="65" y="113">*</text>
+         </switch>
+        </g>
+        <a href="#Literal-Syntax">
+         <rect fill="none" height="20" stroke="none" width="46.75" x="13.25" y="96"></rect>
+         <g fill="#007FFF" font-family="Helvetica" font-size="15px" text-decoration="underline">
+          <text x="14.75" y="112">Literal</text>
+         </g>
+        </a>
+        <rect fill="none" height="20" stroke="none" width="184.35" x="40.33" y="4"></rect>
+        <g fill="#000000" font-family="Helvetica" font-size="15px" text-anchor="middle">
+         <text x="132" y="20">«enumerated scalar»</text>
+        </g>
+        <rect fill="none" height="30" stroke="none" width="265" x="0" y="27"></rect>
+        <g fill="#000000" font-family="Helvetica" font-size="20px" font-weight="bold" text-anchor="middle">
+         <text x="132" y="50.5">EnumeratedScalar_IRI</text>
+        </g>
+       </g>
+       <switch>
+        <g requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"></g>
+        <a target="_blank" transform="translate(0,-5)" href="https://desk.draw.io/support/solutions/articles/16000042487">
+         <text font-size="10px" text-anchor="middle" x="50%" y="100%">Viewer does not support full SVG 1.1</text>
+        </a>
+       </switch>
+      </svg>
+     </div>
+    </div>
     <h4 class="heading settled" data-level="2.2.16" id="Rule-Syntax"><span class="secno">2.2.16. </span><span class="content"><a data-link-type="dfn" href="#rule" id="ref-for-rule">Rule</a></span><a class="self-link" href="#Rule-Syntax"></a></h4>
     <p>Declaration</p>
+    <div class="tab-container">
+     <div class="bar">
+      <button class="bar-btn active" onclick="onBarClick(event)" value="text">Text</button>
+      <button class="bar-btn" onclick="onBarClick(event)" value="diagram">Diagram</button>
+     </div>
+     <div class="tab-content text">
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
 rule ID [
   (<a href="#EntityPredicate-Syntax">EntityPredicate</a> | <a href="#RelationPredicate-Syntax">RelationPredicate</a> | <a href="#RelationEntityPredicate-Syntax">RelationEntityPredicate</a> | <a href="#SameAsPredicate-Syntax">SameAsPredicate</a> | <a href="#DifferentFromPredicate-Syntax">DifferentFromPredicate</a>)
-  (^ (<a href="#EntityPredicate-Syntax">EntityPredicate</a> | <a href="#RelationPredicate-Syntax">RelationPredicate</a> | <a href="#RelationEntityPredicate-Syntax">RelationEntityPredicate</a> | <a href="#SameAsPredicate-Syntax">SameAsPredicate</a> | <a href="#DifferentFromPredicate-Syntax">DifferentFromPredicate</a>))* 
-  -> 
+  (^ (<a href="#EntityPredicate-Syntax">EntityPredicate</a> | <a href="#RelationPredicate-Syntax">RelationPredicate</a> | <a href="#RelationEntityPredicate-Syntax">RelationEntityPredicate</a> | <a href="#SameAsPredicate-Syntax">SameAsPredicate</a> | <a href="#DifferentFromPredicate-Syntax">DifferentFromPredicate</a>))*
+  ->
   (<a href="#EntityPredicate-Syntax">EntityPredicate</a> | <a href="#RelationPredicate-Syntax">RelationPredicate</a> | <a href="#RelationEntityPredicate-Syntax">RelationEntityPredicate</a> | <a href="#SameAsPredicate-Syntax">SameAsPredicate</a> | <a href="#DifferentFromPredicate-Syntax">DifferentFromPredicate</a>)
-  (^ (<a href="#EntityPredicate-Syntax">EntityPredicate</a> | <a href="#RelationPredicate-Syntax">RelationPredicate</a> | <a href="#RelationEntityPredicate-Syntax">RelationEntityPredicate</a> | <a href="#SameAsPredicate-Syntax">SameAsPredicate</a> | <a href="#DifferentFromPredicate-Syntax">DifferentFromPredicate</a>))* 
+  (^ (<a href="#EntityPredicate-Syntax">EntityPredicate</a> | <a href="#RelationPredicate-Syntax">RelationPredicate</a> | <a href="#RelationEntityPredicate-Syntax">RelationEntityPredicate</a> | <a href="#SameAsPredicate-Syntax">SameAsPredicate</a> | <a href="#DifferentFromPredicate-Syntax">DifferentFromPredicate</a>))*
 ]
 </pre>
+     </div>
+     <div class="tab-content diagram hidden">
+      <p></p>
+      <svg height="401px" style="background-color: rgb(255, 255, 255);" version="1.1" viewBox="-0.5 -0.5 252 401" width="252px" xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+       <defs></defs>
+       <g>
+        <rect fill="#ffffff" height="170" pointer-events="all" stroke="#000000" width="250" x="0" y="230"></rect>
+        <rect fill="none" height="20" pointer-events="all" stroke="none" width="100" x="74.32" y="241"></rect>
+        <g fill="#000000" font-family="Helvetica" font-size="15px" text-anchor="middle">
+         <text x="123.82" y="257">consequents</text>
+        </g>
+        <rect fill="#ffffff" height="20" pointer-events="all" stroke="#b0b0b0" width="20" x="230" y="380"></rect>
+        <g fill="#FF8000" font-family="Helvetica" font-size="12px" text-anchor="middle">
+         <text x="239.5" y="394.5">?</text>
+        </g>
+        <rect fill="none" height="20" pointer-events="all" stroke="none" width="21.74" x="162.65" y="242"></rect>
+        <g transform="translate(-0.5 -0.5)">
+         <switch>
+          <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+           <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 20px; height: 1px; padding-top: 252px; margin-left: 164px;" xmlns="http://www.w3.org/1999/xhtml">
+            <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+             <div style="display: inline-block; font-size: 15px; font-family: Helvetica; color: #FF8000; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">
+              <font style="font-size: 12px">?</font>
+             </div>
+            </div>
+           </div>
+          </foreignObject>
+          <text fill="#FF8000" font-family="Helvetica" font-size="15px" text-anchor="middle" x="174" y="257">?</text>
+         </switch>
+        </g>
+        <a href="#EntityPredicate-Syntax">
+         <rect fill="none" height="20" pointer-events="all" stroke="none" width="120" x="10" y="277"></rect>
+         <g fill="#007FFF" font-family="Helvetica" font-size="15px" text-decoration="underline">
+          <text x="11.5" y="293">EntityPredicate</text>
+         </g>
+        </a>
+        <rect fill="none" height="30" pointer-events="all" stroke="none" width="21.74" x="109.26" y="272"></rect>
+        <g transform="translate(-0.5 -0.5)">
+         <switch>
+          <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+           <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 20px; height: 1px; padding-top: 287px; margin-left: 110px;" xmlns="http://www.w3.org/1999/xhtml">
+            <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+             <div style="display: inline-block; font-size: 15px; font-family: Helvetica; color: #FFB366; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">
+              <font color="#ff8000" face="Courier New" style="font-size: 15px">*</font>
+             </div>
+            </div>
+           </div>
+          </foreignObject>
+          <text fill="#FFB366" font-family="Helvetica" font-size="15px" text-anchor="middle" x="120" y="292">*</text>
+         </switch>
+        </g>
+        <a href="#RelationPredicate-Syntax">
+         <rect fill="none" height="20" pointer-events="all" stroke="none" width="130" x="10" y="300"></rect>
+         <g fill="#007FFF" font-family="Helvetica" font-size="15px" text-decoration="underline">
+          <text x="11.5" y="316">RelationPredicate</text>
+         </g>
+        </a>
+        <a href="#RelationEntityPredicate-Syntax">
+         <rect fill="none" height="20" pointer-events="all" stroke="none" width="170" x="10" y="321"></rect>
+         <g fill="#007FFF" font-family="Helvetica" font-size="15px" text-decoration="underline">
+          <text x="11.5" y="337">RelationEntityPredicate</text>
+         </g>
+        </a>
+        <a href="#SameAsPredicate-Syntax">
+         <rect fill="none" height="20" pointer-events="all" stroke="none" width="127.5" x="10" y="344"></rect>
+         <g fill="#007FFF" font-family="Helvetica" font-size="15px" text-decoration="underline">
+          <text x="11.5" y="360">SameAsPredicate</text>
+         </g>
+        </a>
+        <a href="#DifferentFromPredicate-Syntax">
+         <rect fill="none" height="20" pointer-events="all" stroke="none" width="170" x="10" y="367"></rect>
+         <g fill="#007FFF" font-family="Helvetica" font-size="15px" text-decoration="underline">
+          <text x="11.5" y="383">DifferentFromPredicate</text>
+         </g>
+        </a>
+        <rect fill="none" height="30" pointer-events="all" stroke="none" width="21.74" x="127" y="295"></rect>
+        <g transform="translate(-0.5 -0.5)">
+         <switch>
+          <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+           <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 20px; height: 1px; padding-top: 310px; margin-left: 128px;" xmlns="http://www.w3.org/1999/xhtml">
+            <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+             <div style="display: inline-block; font-size: 15px; font-family: Helvetica; color: #FFB366; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">
+              <font color="#ff8000" face="Courier New" style="font-size: 15px">*</font>
+             </div>
+            </div>
+           </div>
+          </foreignObject>
+          <text fill="#FFB366" font-family="Helvetica" font-size="15px" text-anchor="middle" x="138" y="315">*</text>
+         </switch>
+        </g>
+        <rect fill="none" height="30" pointer-events="all" stroke="none" width="21.74" x="165" y="316"></rect>
+        <g transform="translate(-0.5 -0.5)">
+         <switch>
+          <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+           <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 20px; height: 1px; padding-top: 331px; margin-left: 166px;" xmlns="http://www.w3.org/1999/xhtml">
+            <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+             <div style="display: inline-block; font-size: 15px; font-family: Helvetica; color: #FFB366; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">
+              <font color="#ff8000" face="Courier New" style="font-size: 15px">*</font>
+             </div>
+            </div>
+           </div>
+          </foreignObject>
+          <text fill="#FFB366" font-family="Helvetica" font-size="15px" text-anchor="middle" x="176" y="336">*</text>
+         </switch>
+        </g>
+        <rect fill="none" height="30" pointer-events="all" stroke="none" width="21.74" x="128" y="341"></rect>
+        <g transform="translate(-0.5 -0.5)">
+         <switch>
+          <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+           <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 20px; height: 1px; padding-top: 356px; margin-left: 129px;" xmlns="http://www.w3.org/1999/xhtml">
+            <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+             <div style="display: inline-block; font-size: 15px; font-family: Helvetica; color: #FFB366; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">
+              <font color="#ff8000" face="Courier New" style="font-size: 15px">*</font>
+             </div>
+            </div>
+           </div>
+          </foreignObject>
+          <text fill="#FFB366" font-family="Helvetica" font-size="15px" text-anchor="middle" x="139" y="361">*</text>
+         </switch>
+        </g>
+        <rect fill="none" height="30" pointer-events="all" stroke="none" width="21.74" x="163" y="364"></rect>
+        <g transform="translate(-0.5 -0.5)">
+         <switch>
+          <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+           <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 20px; height: 1px; padding-top: 379px; margin-left: 164px;" xmlns="http://www.w3.org/1999/xhtml">
+            <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+             <div style="display: inline-block; font-size: 15px; font-family: Helvetica; color: #FFB366; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">
+              <font color="#ff8000" face="Courier New" style="font-size: 15px">*</font>
+             </div>
+            </div>
+           </div>
+          </foreignObject>
+          <text fill="#FFB366" font-family="Helvetica" font-size="15px" text-anchor="middle" x="174" y="384">*</text>
+         </switch>
+        </g>
+        <rect fill="#ffffff" height="170" pointer-events="all" stroke="#000000" width="250" x="0" y="60"></rect>
+        <rect fill="none" height="20" pointer-events="all" stroke="none" width="100" x="74.32" y="71"></rect>
+        <g fill="#000000" font-family="Helvetica" font-size="15px" text-anchor="middle">
+         <text x="123.82" y="87">antecedents</text>
+        </g>
+        <rect fill="#ffffff" height="20" pointer-events="all" stroke="#b0b0b0" width="20" x="230" y="210"></rect>
+        <g fill="#FF8000" font-family="Helvetica" font-size="12px" text-anchor="middle">
+         <text x="239.5" y="224.5">?</text>
+        </g>
+        <rect fill="none" height="20" pointer-events="all" stroke="none" width="21.74" x="162.65" y="72"></rect>
+        <g transform="translate(-0.5 -0.5)">
+         <switch>
+          <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+           <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 20px; height: 1px; padding-top: 82px; margin-left: 164px;" xmlns="http://www.w3.org/1999/xhtml">
+            <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+             <div style="display: inline-block; font-size: 15px; font-family: Helvetica; color: #FF8000; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">
+              <font style="font-size: 12px">?</font>
+             </div>
+            </div>
+           </div>
+          </foreignObject>
+          <text fill="#FF8000" font-family="Helvetica" font-size="15px" text-anchor="middle" x="174" y="87">?</text>
+         </switch>
+        </g>
+        <a href="#EntityPredicate-Syntax">
+         <rect fill="none" height="20" pointer-events="all" stroke="none" width="120" x="10" y="107"></rect>
+         <g fill="#007FFF" font-family="Helvetica" font-size="15px" text-decoration="underline">
+          <text x="11.5" y="123">EntityPredicate</text>
+         </g>
+        </a>
+        <rect fill="none" height="30" pointer-events="all" stroke="none" width="21.74" x="109.26" y="102"></rect>
+        <g transform="translate(-0.5 -0.5)">
+         <switch>
+          <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+           <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 20px; height: 1px; padding-top: 117px; margin-left: 110px;" xmlns="http://www.w3.org/1999/xhtml">
+            <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+             <div style="display: inline-block; font-size: 15px; font-family: Helvetica; color: #FFB366; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">
+              <font color="#ff8000" face="Courier New" style="font-size: 15px">*</font>
+             </div>
+            </div>
+           </div>
+          </foreignObject>
+          <text fill="#FFB366" font-family="Helvetica" font-size="15px" text-anchor="middle" x="120" y="122">*</text>
+         </switch>
+        </g>
+        <a href="#RelationPredicate-Syntax">
+         <rect fill="none" height="20" pointer-events="all" stroke="none" width="130" x="10" y="130"></rect>
+         <g fill="#007FFF" font-family="Helvetica" font-size="15px" text-decoration="underline">
+          <text x="11.5" y="146">RelationPredicate</text>
+         </g>
+        </a>
+        <a href="#RelationEntityPredicate-Syntax">
+         <rect fill="none" height="20" pointer-events="all" stroke="none" width="170" x="10" y="151"></rect>
+         <g fill="#007FFF" font-family="Helvetica" font-size="15px" text-decoration="underline">
+          <text x="11.5" y="167">RelationEntityPredicate</text>
+         </g>
+        </a>
+        <a href="#SameAsPredicate-Syntax">
+         <rect fill="none" height="20" pointer-events="all" stroke="none" width="127.5" x="10" y="174"></rect>
+         <g fill="#007FFF" font-family="Helvetica" font-size="15px" text-decoration="underline">
+          <text x="11.5" y="190">SameAsPredicate</text>
+         </g>
+        </a>
+        <a href="#DifferentFromPredicate-Syntax">
+         <rect fill="none" height="20" pointer-events="all" stroke="none" width="170" x="10" y="197"></rect>
+         <g fill="#007FFF" font-family="Helvetica" font-size="15px" text-decoration="underline">
+          <text x="11.5" y="213">DifferentFromPredicate</text>
+         </g>
+        </a>
+        <rect fill="none" height="30" pointer-events="all" stroke="none" width="21.74" x="127" y="125"></rect>
+        <g transform="translate(-0.5 -0.5)">
+         <switch>
+          <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+           <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 20px; height: 1px; padding-top: 140px; margin-left: 128px;" xmlns="http://www.w3.org/1999/xhtml">
+            <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+             <div style="display: inline-block; font-size: 15px; font-family: Helvetica; color: #FFB366; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">
+              <font color="#ff8000" face="Courier New" style="font-size: 15px">*</font>
+             </div>
+            </div>
+           </div>
+          </foreignObject>
+          <text fill="#FFB366" font-family="Helvetica" font-size="15px" text-anchor="middle" x="138" y="145">*</text>
+         </switch>
+        </g>
+        <rect fill="none" height="30" pointer-events="all" stroke="none" width="21.74" x="165" y="146"></rect>
+        <g transform="translate(-0.5 -0.5)">
+         <switch>
+          <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+           <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 20px; height: 1px; padding-top: 161px; margin-left: 166px;" xmlns="http://www.w3.org/1999/xhtml">
+            <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+             <div style="display: inline-block; font-size: 15px; font-family: Helvetica; color: #FFB366; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">
+              <font color="#ff8000" face="Courier New" style="font-size: 15px">*</font>
+             </div>
+            </div>
+           </div>
+          </foreignObject>
+          <text fill="#FFB366" font-family="Helvetica" font-size="15px" text-anchor="middle" x="176" y="166">*</text>
+         </switch>
+        </g>
+        <rect fill="none" height="30" pointer-events="all" stroke="none" width="21.74" x="128" y="171"></rect>
+        <g transform="translate(-0.5 -0.5)">
+         <switch>
+          <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+           <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 20px; height: 1px; padding-top: 186px; margin-left: 129px;" xmlns="http://www.w3.org/1999/xhtml">
+            <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+             <div style="display: inline-block; font-size: 15px; font-family: Helvetica; color: #FFB366; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">
+              <font color="#ff8000" face="Courier New" style="font-size: 15px">*</font>
+             </div>
+            </div>
+           </div>
+          </foreignObject>
+          <text fill="#FFB366" font-family="Helvetica" font-size="15px" text-anchor="middle" x="139" y="191">*</text>
+         </switch>
+        </g>
+        <rect fill="none" height="30" pointer-events="all" stroke="none" width="21.74" x="163" y="194"></rect>
+        <g transform="translate(-0.5 -0.5)">
+         <switch>
+          <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+           <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 20px; height: 1px; padding-top: 209px; margin-left: 164px;" xmlns="http://www.w3.org/1999/xhtml">
+            <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+             <div style="display: inline-block; font-size: 15px; font-family: Helvetica; color: #FFB366; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">
+              <font color="#ff8000" face="Courier New" style="font-size: 15px">*</font>
+             </div>
+            </div>
+           </div>
+          </foreignObject>
+          <text fill="#FFB366" font-family="Helvetica" font-size="15px" text-anchor="middle" x="174" y="214">*</text>
+         </switch>
+        </g>
+        <rect fill="none" height="60" stroke="#000000" width="250" x="0" y="0"></rect>
+        <rect fill="#ffffff" height="60" stroke="#000000" width="250" x="0" y="0"></rect>
+        <rect fill="none" height="20" stroke="none" width="60" x="94.96" y="4"></rect>
+        <g fill="#000000" font-family="Helvetica" font-size="15px" text-anchor="middle">
+         <text x="124.46" y="20">«rule»</text>
+        </g>
+        <rect fill="none" height="30" stroke="none" width="43.48" x="103.26" y="27"></rect>
+        <g fill="#000000" font-family="Helvetica" font-size="22px" font-weight="bold" text-anchor="middle">
+         <text x="124.5" y="51.5">ID</text>
+        </g>
+       </g>
+       <switch>
+        <g requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"></g>
+        <a target="_blank" transform="translate(0,-5)" href="https://desk.draw.io/support/solutions/articles/16000042487">
+         <text font-size="10px" text-anchor="middle" x="50%" y="100%">Viewer does not support full SVG 1.1</text>
+        </a>
+       </switch>
+      </svg>
+     </div>
+    </div>
     <p>Reference</p>
+    <div class="tab-container">
+     <div class="bar">
+      <button class="bar-btn active" onclick="onBarClick(event)" value="text">Text</button>
+      <button class="bar-btn" onclick="onBarClick(event)" value="diagram">Diagram</button>
+     </div>
+     <div class="tab-content text">
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
 ref rule <a href="#Rule-Syntax">Rule_IRI</a>
 </pre>
+     </div>
+     <div class="tab-content diagram hidden">
+      <p></p>
+      <svg height="401px" style="background-color: rgb(255, 255, 255);" version="1.1" viewBox="-0.5 -0.5 252 401" width="252px" xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+       <defs></defs>
+       <g>
+        <rect fill="#ffffff" height="170" pointer-events="all" stroke="#000000" width="250" x="0" y="230"></rect>
+        <rect fill="none" height="20" pointer-events="all" stroke="none" width="100" x="74.32" y="241"></rect>
+        <g fill="#000000" font-family="Helvetica" font-size="15px" text-anchor="middle">
+         <text x="123.82" y="257">consequents</text>
+        </g>
+        <rect fill="#ffffff" height="20" pointer-events="all" stroke="#b0b0b0" width="20" x="230" y="380"></rect>
+        <g fill="#FF8000" font-family="Helvetica" font-size="12px" text-anchor="middle">
+         <text x="239.5" y="394.5">?</text>
+        </g>
+        <rect fill="none" height="20" pointer-events="all" stroke="none" width="21.74" x="162.65" y="242"></rect>
+        <g transform="translate(-0.5 -0.5)">
+         <switch>
+          <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+           <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 20px; height: 1px; padding-top: 252px; margin-left: 164px;" xmlns="http://www.w3.org/1999/xhtml">
+            <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+             <div style="display: inline-block; font-size: 15px; font-family: Helvetica; color: #FF8000; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">
+              <font style="font-size: 12px">?</font>
+             </div>
+            </div>
+           </div>
+          </foreignObject>
+          <text fill="#FF8000" font-family="Helvetica" font-size="15px" text-anchor="middle" x="174" y="257">?</text>
+         </switch>
+        </g>
+        <a href="#EntityPredicate-Syntax">
+         <rect fill="none" height="20" pointer-events="all" stroke="none" width="120" x="10" y="277"></rect>
+         <g fill="#007FFF" font-family="Helvetica" font-size="15px" text-decoration="underline">
+          <text x="11.5" y="293">EntityPredicate</text>
+         </g>
+        </a>
+        <rect fill="none" height="30" pointer-events="all" stroke="none" width="21.74" x="109.26" y="272"></rect>
+        <g transform="translate(-0.5 -0.5)">
+         <switch>
+          <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+           <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 20px; height: 1px; padding-top: 287px; margin-left: 110px;" xmlns="http://www.w3.org/1999/xhtml">
+            <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+             <div style="display: inline-block; font-size: 15px; font-family: Helvetica; color: #FFB366; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">
+              <font color="#ff8000" face="Courier New" style="font-size: 15px">*</font>
+             </div>
+            </div>
+           </div>
+          </foreignObject>
+          <text fill="#FFB366" font-family="Helvetica" font-size="15px" text-anchor="middle" x="120" y="292">*</text>
+         </switch>
+        </g>
+        <a href="#RelationPredicate-Syntax">
+         <rect fill="none" height="20" pointer-events="all" stroke="none" width="130" x="10" y="300"></rect>
+         <g fill="#007FFF" font-family="Helvetica" font-size="15px" text-decoration="underline">
+          <text x="11.5" y="316">RelationPredicate</text>
+         </g>
+        </a>
+        <a href="#RelationEntityPredicate-Syntax">
+         <rect fill="none" height="20" pointer-events="all" stroke="none" width="170" x="10" y="321"></rect>
+         <g fill="#007FFF" font-family="Helvetica" font-size="15px" text-decoration="underline">
+          <text x="11.5" y="337">RelationEntityPredicate</text>
+         </g>
+        </a>
+        <a href="#SameAsPredicate-Syntax">
+         <rect fill="none" height="20" pointer-events="all" stroke="none" width="127.5" x="10" y="344"></rect>
+         <g fill="#007FFF" font-family="Helvetica" font-size="15px" text-decoration="underline">
+          <text x="11.5" y="360">SameAsPredicate</text>
+         </g>
+        </a>
+        <a href="#DifferentFromPredicate-Syntax">
+         <rect fill="none" height="20" pointer-events="all" stroke="none" width="170" x="10" y="367"></rect>
+         <g fill="#007FFF" font-family="Helvetica" font-size="15px" text-decoration="underline">
+          <text x="11.5" y="383">DifferentFromPredicate</text>
+         </g>
+        </a>
+        <rect fill="none" height="30" pointer-events="all" stroke="none" width="21.74" x="127" y="295"></rect>
+        <g transform="translate(-0.5 -0.5)">
+         <switch>
+          <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+           <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 20px; height: 1px; padding-top: 310px; margin-left: 128px;" xmlns="http://www.w3.org/1999/xhtml">
+            <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+             <div style="display: inline-block; font-size: 15px; font-family: Helvetica; color: #FFB366; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">
+              <font color="#ff8000" face="Courier New" style="font-size: 15px">*</font>
+             </div>
+            </div>
+           </div>
+          </foreignObject>
+          <text fill="#FFB366" font-family="Helvetica" font-size="15px" text-anchor="middle" x="138" y="315">*</text>
+         </switch>
+        </g>
+        <rect fill="none" height="30" pointer-events="all" stroke="none" width="21.74" x="165" y="316"></rect>
+        <g transform="translate(-0.5 -0.5)">
+         <switch>
+          <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+           <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 20px; height: 1px; padding-top: 331px; margin-left: 166px;" xmlns="http://www.w3.org/1999/xhtml">
+            <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+             <div style="display: inline-block; font-size: 15px; font-family: Helvetica; color: #FFB366; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">
+              <font color="#ff8000" face="Courier New" style="font-size: 15px">*</font>
+             </div>
+            </div>
+           </div>
+          </foreignObject>
+          <text fill="#FFB366" font-family="Helvetica" font-size="15px" text-anchor="middle" x="176" y="336">*</text>
+         </switch>
+        </g>
+        <rect fill="none" height="30" pointer-events="all" stroke="none" width="21.74" x="128" y="341"></rect>
+        <g transform="translate(-0.5 -0.5)">
+         <switch>
+          <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+           <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 20px; height: 1px; padding-top: 356px; margin-left: 129px;" xmlns="http://www.w3.org/1999/xhtml">
+            <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+             <div style="display: inline-block; font-size: 15px; font-family: Helvetica; color: #FFB366; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">
+              <font color="#ff8000" face="Courier New" style="font-size: 15px">*</font>
+             </div>
+            </div>
+           </div>
+          </foreignObject>
+          <text fill="#FFB366" font-family="Helvetica" font-size="15px" text-anchor="middle" x="139" y="361">*</text>
+         </switch>
+        </g>
+        <rect fill="none" height="30" pointer-events="all" stroke="none" width="21.74" x="163" y="364"></rect>
+        <g transform="translate(-0.5 -0.5)">
+         <switch>
+          <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+           <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 20px; height: 1px; padding-top: 379px; margin-left: 164px;" xmlns="http://www.w3.org/1999/xhtml">
+            <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+             <div style="display: inline-block; font-size: 15px; font-family: Helvetica; color: #FFB366; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">
+              <font color="#ff8000" face="Courier New" style="font-size: 15px">*</font>
+             </div>
+            </div>
+           </div>
+          </foreignObject>
+          <text fill="#FFB366" font-family="Helvetica" font-size="15px" text-anchor="middle" x="174" y="384">*</text>
+         </switch>
+        </g>
+        <rect fill="#ffffff" height="170" pointer-events="all" stroke="#000000" width="250" x="0" y="60"></rect>
+        <rect fill="none" height="20" pointer-events="all" stroke="none" width="100" x="74.32" y="71"></rect>
+        <g fill="#000000" font-family="Helvetica" font-size="15px" text-anchor="middle">
+         <text x="123.82" y="87">antecedents</text>
+        </g>
+        <rect fill="#ffffff" height="20" pointer-events="all" stroke="#b0b0b0" width="20" x="230" y="210"></rect>
+        <g fill="#FF8000" font-family="Helvetica" font-size="12px" text-anchor="middle">
+         <text x="239.5" y="224.5">?</text>
+        </g>
+        <rect fill="none" height="20" pointer-events="all" stroke="none" width="21.74" x="162.65" y="72"></rect>
+        <g transform="translate(-0.5 -0.5)">
+         <switch>
+          <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+           <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 20px; height: 1px; padding-top: 82px; margin-left: 164px;" xmlns="http://www.w3.org/1999/xhtml">
+            <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+             <div style="display: inline-block; font-size: 15px; font-family: Helvetica; color: #FF8000; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">
+              <font style="font-size: 12px">?</font>
+             </div>
+            </div>
+           </div>
+          </foreignObject>
+          <text fill="#FF8000" font-family="Helvetica" font-size="15px" text-anchor="middle" x="174" y="87">?</text>
+         </switch>
+        </g>
+        <a href="#EntityPredicate-Syntax">
+         <rect fill="none" height="20" pointer-events="all" stroke="none" width="120" x="10" y="107"></rect>
+         <g fill="#007FFF" font-family="Helvetica" font-size="15px" text-decoration="underline">
+          <text x="11.5" y="123">EntityPredicate</text>
+         </g>
+        </a>
+        <rect fill="none" height="30" pointer-events="all" stroke="none" width="21.74" x="109.26" y="102"></rect>
+        <g transform="translate(-0.5 -0.5)">
+         <switch>
+          <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+           <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 20px; height: 1px; padding-top: 117px; margin-left: 110px;" xmlns="http://www.w3.org/1999/xhtml">
+            <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+             <div style="display: inline-block; font-size: 15px; font-family: Helvetica; color: #FFB366; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">
+              <font color="#ff8000" face="Courier New" style="font-size: 15px">*</font>
+             </div>
+            </div>
+           </div>
+          </foreignObject>
+          <text fill="#FFB366" font-family="Helvetica" font-size="15px" text-anchor="middle" x="120" y="122">*</text>
+         </switch>
+        </g>
+        <a href="#RelationPredicate-Syntax">
+         <rect fill="none" height="20" pointer-events="all" stroke="none" width="130" x="10" y="130"></rect>
+         <g fill="#007FFF" font-family="Helvetica" font-size="15px" text-decoration="underline">
+          <text x="11.5" y="146">RelationPredicate</text>
+         </g>
+        </a>
+        <a href="#RelationEntityPredicate-Syntax">
+         <rect fill="none" height="20" pointer-events="all" stroke="none" width="170" x="10" y="151"></rect>
+         <g fill="#007FFF" font-family="Helvetica" font-size="15px" text-decoration="underline">
+          <text x="11.5" y="167">RelationEntityPredicate</text>
+         </g>
+        </a>
+        <a href="#SameAsPredicate-Syntax">
+         <rect fill="none" height="20" pointer-events="all" stroke="none" width="127.5" x="10" y="174"></rect>
+         <g fill="#007FFF" font-family="Helvetica" font-size="15px" text-decoration="underline">
+          <text x="11.5" y="190">SameAsPredicate</text>
+         </g>
+        </a>
+        <a href="#DifferentFromPredicate-Syntax">
+         <rect fill="none" height="20" pointer-events="all" stroke="none" width="170" x="10" y="197"></rect>
+         <g fill="#007FFF" font-family="Helvetica" font-size="15px" text-decoration="underline">
+          <text x="11.5" y="213">DifferentFromPredicate</text>
+         </g>
+        </a>
+        <rect fill="none" height="30" pointer-events="all" stroke="none" width="21.74" x="127" y="125"></rect>
+        <g transform="translate(-0.5 -0.5)">
+         <switch>
+          <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+           <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 20px; height: 1px; padding-top: 140px; margin-left: 128px;" xmlns="http://www.w3.org/1999/xhtml">
+            <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+             <div style="display: inline-block; font-size: 15px; font-family: Helvetica; color: #FFB366; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">
+              <font color="#ff8000" face="Courier New" style="font-size: 15px">*</font>
+             </div>
+            </div>
+           </div>
+          </foreignObject>
+          <text fill="#FFB366" font-family="Helvetica" font-size="15px" text-anchor="middle" x="138" y="145">*</text>
+         </switch>
+        </g>
+        <rect fill="none" height="30" pointer-events="all" stroke="none" width="21.74" x="165" y="146"></rect>
+        <g transform="translate(-0.5 -0.5)">
+         <switch>
+          <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+           <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 20px; height: 1px; padding-top: 161px; margin-left: 166px;" xmlns="http://www.w3.org/1999/xhtml">
+            <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+             <div style="display: inline-block; font-size: 15px; font-family: Helvetica; color: #FFB366; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">
+              <font color="#ff8000" face="Courier New" style="font-size: 15px">*</font>
+             </div>
+            </div>
+           </div>
+          </foreignObject>
+          <text fill="#FFB366" font-family="Helvetica" font-size="15px" text-anchor="middle" x="176" y="166">*</text>
+         </switch>
+        </g>
+        <rect fill="none" height="30" pointer-events="all" stroke="none" width="21.74" x="128" y="171"></rect>
+        <g transform="translate(-0.5 -0.5)">
+         <switch>
+          <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+           <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 20px; height: 1px; padding-top: 186px; margin-left: 129px;" xmlns="http://www.w3.org/1999/xhtml">
+            <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+             <div style="display: inline-block; font-size: 15px; font-family: Helvetica; color: #FFB366; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">
+              <font color="#ff8000" face="Courier New" style="font-size: 15px">*</font>
+             </div>
+            </div>
+           </div>
+          </foreignObject>
+          <text fill="#FFB366" font-family="Helvetica" font-size="15px" text-anchor="middle" x="139" y="191">*</text>
+         </switch>
+        </g>
+        <rect fill="none" height="30" pointer-events="all" stroke="none" width="21.74" x="163" y="194"></rect>
+        <g transform="translate(-0.5 -0.5)">
+         <switch>
+          <foreignObject height="100%" pointer-events="none" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;" width="100%">
+           <div style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 20px; height: 1px; padding-top: 209px; margin-left: 164px;" xmlns="http://www.w3.org/1999/xhtml">
+            <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+             <div style="display: inline-block; font-size: 15px; font-family: Helvetica; color: #FFB366; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">
+              <font color="#ff8000" face="Courier New" style="font-size: 15px">*</font>
+             </div>
+            </div>
+           </div>
+          </foreignObject>
+          <text fill="#FFB366" font-family="Helvetica" font-size="15px" text-anchor="middle" x="174" y="214">*</text>
+         </switch>
+        </g>
+        <rect fill="none" height="60" stroke="#000000" width="250" x="0" y="0"></rect>
+        <rect fill="#ffffff" height="60" stroke="#000000" width="250" x="0" y="0"></rect>
+        <rect fill="none" height="20" stroke="none" width="60" x="94.96" y="4"></rect>
+        <g fill="#000000" font-family="Helvetica" font-size="15px" text-anchor="middle">
+         <text x="124.46" y="20">«rule»</text>
+        </g>
+        <rect fill="none" height="30" stroke="none" width="100" x="75.26" y="27"></rect>
+        <g fill="#000000" font-family="Helvetica" font-size="22px" font-weight="bold" text-anchor="middle">
+         <text x="124.76" y="51.5">Rule_IRI</text>
+        </g>
+       </g>
+       <switch>
+        <g requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"></g>
+        <a target="_blank" transform="translate(0,-5)" href="https://desk.draw.io/support/solutions/articles/16000042487">
+         <text font-size="10px" text-anchor="middle" x="50%" y="100%">Viewer does not support full SVG 1.1</text>
+        </a>
+       </switch>
+      </svg>
+     </div>
+    </div>
     <h4 class="heading settled" data-level="2.2.17" id="EntityPredicate-Syntax"><span class="secno">2.2.17. </span><span class="content"><a data-link-type="dfn" href="#entitypredicate" id="ref-for-entitypredicate">EntityPredicate</a></span><a class="self-link" href="#EntityPredicate-Syntax"></a></h4>
+    <div class="tab-container">
+     <div class="bar">
+      <button class="bar-btn active" onclick="onBarClick(event)" value="text">Text</button>
+      <button class="bar-btn" onclick="onBarClick(event)" value="diagram">Diagram</button>
+     </div>
+     <div class="tab-content text">
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
 (<a href="#Aspect-Syntax">Aspect_IRI</a> | <a href="#Concept-Syntax">Concept_IRI</a> | <a href="#RelationEntity-Syntax">RelationEntity_IRI</a>) (VAR)
 </pre>
+     </div>
+     <div class="tab-content diagram hidden">
+      <p></p>
+      <svg height="21px" style="background-color: rgb(255, 255, 255);" version="1.1" viewBox="-0.5 -0.5 371 21" width="371px" xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+       <defs></defs>
+       <g>
+        <rect fill="none" height="20" pointer-events="all" stroke="#b0b0b0" stroke-dasharray="3 3" width="370" x="0" y="0"></rect>
+        <g fill="#000000" font-family="Helvetica" font-size="15px">
+         <text x="1.5" y="16">(Aspect_IRI | Concept_IRI | RelationEntity_IRI) (VAR)</text>
+        </g>
+       </g>
+      </svg>
+     </div>
+    </div>
     <h4 class="heading settled" data-level="2.2.18" id="RelationPredicate-Syntax"><span class="secno">2.2.18. </span><span class="content"><a data-link-type="dfn" href="#relationpredicate" id="ref-for-relationpredicate">RelationPredicate</a></span><a class="self-link" href="#RelationPredicate-Syntax"></a></h4>
+    <div class="tab-container">
+     <div class="bar">
+      <button class="bar-btn active" onclick="onBarClick(event)" value="text">Text</button>
+      <button class="bar-btn" onclick="onBarClick(event)" value="diagram">Diagram</button>
+     </div>
+     <div class="tab-content text">
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
 (<a href="#ForwardRelation-Syntax">ForwardRelation_IRI</a> | <a href="#ReverseRelation-Syntax">ReverseRelation_IRI</a>) (VAR1 , VAR2)
 </pre>
+     </div>
+     <div class="tab-content diagram hidden">
+      <p></p>
+      <svg height="21px" style="background-color: rgb(255, 255, 255);" version="1.1" viewBox="-0.5 -0.5 421 21" width="421px" xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+       <defs></defs>
+       <g>
+        <rect fill="none" height="20" pointer-events="all" stroke="#b0b0b0" stroke-dasharray="3 3" width="420" x="0" y="0"></rect>
+        <g fill="#000000" font-family="Helvetica" font-size="15px">
+         <text x="1.5" y="16">(ForwardRelation_IRI | ReverseRelation_IRI) (VAR1 , VAR2)</text>
+        </g>
+       </g>
+      </svg>
+     </div>
+    </div>
     <h4 class="heading settled" data-level="2.2.19" id="RelationEntityPredicate-Syntax"><span class="secno">2.2.19. </span><span class="content"><a data-link-type="dfn" href="#relationentitypredicate" id="ref-for-relationentitypredicate">RelationEntityPredicate</a></span><a class="self-link" href="#RelationEntityPredicate-Syntax"></a></h4>
+    <div class="tab-container">
+     <div class="bar">
+      <button class="bar-btn active" onclick="onBarClick(event)" value="text">Text</button>
+      <button class="bar-btn" onclick="onBarClick(event)" value="diagram">Diagram</button>
+     </div>
+     <div class="tab-content text">
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
 <a href="#RelationEntity-Syntax">RelationEntity_IRI</a> (VAR1 , ENTITY_VAR , VAR2)
 </pre>
+     </div>
+     <div class="tab-content diagram hidden">
+      <p></p>
+      <svg height="21px" style="background-color: rgb(255, 255, 255);" version="1.1" viewBox="-0.5 -0.5 341 21" width="341px" xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+       <defs></defs>
+       <g>
+        <rect fill="none" height="20" pointer-events="all" stroke="#b0b0b0" stroke-dasharray="3 3" width="340" x="0" y="0"></rect>
+        <g fill="#000000" font-family="Helvetica" font-size="15px">
+         <text x="1.5" y="16">RelationEntity_IRI (VAR1 , ENTITY_VAR , VAR2)</text>
+        </g>
+       </g>
+      </svg>
+     </div>
+    </div>
     <h4 class="heading settled" data-level="2.2.20" id="SameAsPredicate-Syntax"><span class="secno">2.2.20. </span><span class="content"><a data-link-type="dfn" href="#sameaspredicate" id="ref-for-sameaspredicate">SameAsPredicate</a></span><a class="self-link" href="#SameAsPredicate-Syntax"></a></h4>
+    <div class="tab-container">
+     <div class="bar">
+      <button class="bar-btn active" onclick="onBarClick(event)" value="text">Text</button>
+      <button class="bar-btn" onclick="onBarClick(event)" value="diagram">Diagram</button>
+     </div>
+     <div class="tab-content text">
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
 sameAs (VAR1 , VAR2)
 </pre>
+     </div>
+     <div class="tab-content diagram hidden">
+      <p></p>
+      <svg height="21px" style="background-color: rgb(255, 255, 255);" version="1.1" viewBox="-0.5 -0.5 171 21" width="171px" xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+       <defs></defs>
+       <g>
+        <rect fill="none" height="20" pointer-events="all" stroke="#b0b0b0" stroke-dasharray="3 3" width="170" x="0" y="0"></rect>
+        <g fill="#000000" font-family="Helvetica" font-size="15px">
+         <text x="1.5" y="16">sameAs (VAR1 , VAR2)</text>
+        </g>
+       </g>
+      </svg>
+     </div>
+    </div>
     <h4 class="heading settled" data-level="2.2.21" id="DifferentFromPredicate-Syntax"><span class="secno">2.2.21. </span><span class="content"><a data-link-type="dfn" href="#differentfrompredicate" id="ref-for-differentfrompredicate">DifferentFromPredicate</a></span><a class="self-link" href="#DifferentFromPredicate-Syntax"></a></h4>
+    <div class="tab-container">
+     <div class="bar">
+      <button class="bar-btn active" onclick="onBarClick(event)" value="text">Text</button>
+      <button class="bar-btn" onclick="onBarClick(event)" value="diagram">Diagram</button>
+     </div>
+     <div class="tab-content text">
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
 differentFrom (VAR1 , VAR2)
 </pre>
+     </div>
+     <div class="tab-content diagram hidden">
+      <p></p>
+      <svg height="21px" style="background-color: rgb(255, 255, 255);" version="1.1" viewBox="-0.5 -0.5 211 21" width="211px" xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+       <defs></defs>
+       <g>
+        <rect fill="none" height="20" pointer-events="all" stroke="#b0b0b0" stroke-dasharray="3 3" width="210" x="0" y="0"></rect>
+        <g fill="#000000" font-family="Helvetica" font-size="15px">
+         <text x="1.5" y="16">differentFrom (VAR1 , VAR2)</text>
+        </g>
+       </g>
+      </svg>
+     </div>
+    </div>
     <h4 class="heading settled" data-level="2.2.22" id="SpecializationAxiom-Syntax"><span class="secno">2.2.22. </span><span class="content"><a data-link-type="dfn" href="#specializationaxiom" id="ref-for-specializationaxiom">SpecializationAxiom</a></span><a class="self-link" href="#SpecializationAxiom-Syntax"></a></h4>
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
 (<a href="#Aspect-Syntax">Aspect_IRI</a> | <a href="#Concept-Syntax">Concept_IRI</a> | <a href="#RelationEntity-Syntax">RelationEntity_IRI</a> | <a href="#Structure-Syntax">Structure_IRI</a> | <a href="#FacetedScalar-Syntax">FacetedScalar_IRI</a> | <a href="#EnumeratedScalar-Syntax">EnumeratedScalar_IRI</a> | <a href="#AnnotationProperty-Syntax">AnnotationProperty_IRI</a> | <a href="#ScalarProperty-Syntax">ScalarProperty_IRI</a> | <a href="#StructuredProperty-Syntax">StructuredProperty_IRI</a>)
@@ -5715,6 +8139,39 @@ this metamodel and can be manipulated using its API.
     <p><em>Sub classes:</em> <a data-link-type="dfn" href="#specializabletermreference" id="ref-for-specializabletermreference⑦">SpecializableTermReference</a>, <a data-link-type="dfn" href="#relationreference" id="ref-for-relationreference①">RelationReference</a>, <a data-link-type="dfn" href="#rulereference" id="ref-for-rulereference">RuleReference</a></p>
     <h2 class="heading settled" data-level="4" id="PublicAPI"><span class="secno">4. </span><span class="content">Public API</span><a class="self-link" href="#PublicAPI"></a></h2>
    </div>
+<script>
+function onBarClick(e) {
+  const selectedTab = e.currentTarget.value;
+  const container = e.currentTarget.closest(".tab-container");
+  const tabs = Array.prototype.slice.call(container.children, 1);
+  console.log(tabs);
+  for(const tab of tabs) {
+    console.log(tab.classList);
+    if (Array.prototype.includes.call(tab.classList, selectedTab)) {
+      if (Array.prototype.includes.call(tab.classList, "hidden")) {
+        tab.classList.toggle("hidden");
+      }
+    } else {
+      if (!Array.prototype.includes.call(tab.classList, "hidden")) {
+        tab.classList.toggle("hidden");
+      }
+    }
+  }
+
+  const bar = container.children[0];
+  for (const tab of bar.children) {
+    if (tab.value === selectedTab) {
+      if (!Array.prototype.includes.call(tab.classList, "active")) {
+        tab.classList.toggle("active");
+      }
+    } else {
+      if (Array.prototype.includes.call(tab.classList, "active")) {
+        tab.classList.toggle("active");
+      }
+    }
+  }
+}
+</script>
   </main>
   <div data-fill-with="conformance">
    <h2 class="no-ref no-num heading settled" id="conformance"><span class="content"> Conformance</span><a class="self-link" href="#conformance"></a></h2>
