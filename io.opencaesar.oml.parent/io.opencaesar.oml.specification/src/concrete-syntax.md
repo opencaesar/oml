@@ -77,7 +77,7 @@ An ontology may have comments (descriptive text placed by ontology developers) t
 (INTEGER | DECIMAL | DOUBLE | BOOLEAN | STRING) (^^(<a href="#FacetedScalar-Syntax">[FacetedScalar_IRI]</a> | <a href="#EnumeratedScalar-Syntax">[EnumeratedScalar_IRI]</a>))?
 </pre>
 
-### [=Diagram=] ### {#Diagram-Syntax}
+### [Diagram] ### {#Diagram-Syntax}
 
 The concrete syntax for each OML element is organized into tabs. The "Text" tab is showcased by default, displaying the textual syntax of the OML element. To see the graphical syntax of the element, click on the "Diagram" tab.
 
