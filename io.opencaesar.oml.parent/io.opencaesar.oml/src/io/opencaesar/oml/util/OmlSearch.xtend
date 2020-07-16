@@ -88,6 +88,12 @@ class OmlSearch extends OmlIndex {
 	// Element
 
 	// Annotation
+	
+	// Reference
+	
+    static dispatch def Iterable<Annotation> findAnnotations(Reference element) {
+        element.ownedAnnotations
+    }
 
 	// AnnotatedElement
 

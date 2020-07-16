@@ -55,10 +55,15 @@ import org.eclipse.sprotty.xtext.SIssueMarkerDecorator
 import org.eclipse.sprotty.xtext.tracing.ITraceProvider
 
 import static extension io.opencaesar.oml.util.OmlRead.*
+import io.opencaesar.oml.AnnotatedElement
+import io.opencaesar.oml.Annotation
+import io.opencaesar.oml.util.OmlSearch
 
 class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramGenerator {
 	
 	static val LOG = Logger.getLogger(OmlDiagramGenerator)
+	val String diagramIRI = "http://imce.jpl.nasa.gov/foundation/diagram"
+	
 
 	@Inject extension ITraceProvider traceProvider
 	@Inject extension SIssueMarkerDecorator
@@ -68,6 +73,7 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
 	var OmlGraph graph
 	var OmlNode frame
 	var Map<Element, SModelElement> semantic2diagram
+	var isDiagramSpecifier = false
 	
 	override SModelRoot generate(Context context) {
 		try {			
@@ -75,6 +81,7 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
 			this.semantic2diagram = new HashMap
 			
 			val ontology = context.resource.ontology
+			this.isDiagramSpecifier = ontology.importedOntologies.exists[isDiagramIRI]
 			this.view =  new OmlDiagramView(ontology, context.idCache)
 			this.graph = view.createGraph
 
@@ -106,6 +113,12 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
 	}
 
 	override doSwitch(EObject eObject) {
+	    if (!(eObject instanceof Ontology) && this.isDiagramSpecifier) {
+	        if (!eObject.isSpecified || eObject.isDiagramImport) {
+               return null
+           }
+	    }
+
 		val element = semantic2diagram.get(eObject)
 		if (element !== null) {
 			element
@@ -285,6 +298,34 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
 	}
 
 //------------------- HELPERS
+
+    private def boolean isDiagramIRI(Ontology ontology) {
+        return ontology.iri == this.diagramIRI
+    }
+    
+    private def boolean isDiagramImport(EObject eObject) {
+        if (eObject instanceof IdentifiedElement) {
+            return eObject.iri == this.diagramIRI
+        }
+        return false
+    }
+    
+    private def boolean isSpecified(EObject eObject) {
+        var Iterable<Annotation> aValues
+        
+        if (eObject instanceof AnnotatedElement) {
+            aValues = OmlSearch.findAnnotations(eObject)
+        } else if (eObject instanceof Reference) {
+            aValues = OmlSearch.findAnnotations(eObject)
+        }
+        
+        if (aValues !== null) {
+            return aValues.exists[a|
+                return this.isDiagramImport(a.property.eContainer)
+            ]
+        }
+        return false
+    }
 
 	private def <T extends SModelElement> T traceAndMark(T sElement, Element element, Context context) {
 		semantic2diagram.put(element, sElement)
