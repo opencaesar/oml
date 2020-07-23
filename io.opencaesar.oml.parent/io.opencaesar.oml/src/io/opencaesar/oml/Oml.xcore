@@ -193,7 +193,7 @@ class Description extends DescriptionBox {
 
 /*
  * DescriptionBundle is a description box that allows importing other description boxes and flagging them
- * as a set that is analyzed together for consistency and satisfiabilty.
+ * as a set that is analyzed together for consistency and satisfiability.
  */
 @Bikeshed(heading="Descriptions")
 class DescriptionBundle extends DescriptionBox {
