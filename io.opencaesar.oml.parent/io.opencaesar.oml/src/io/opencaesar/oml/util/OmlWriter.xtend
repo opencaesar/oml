@@ -19,21 +19,12 @@
 package io.opencaesar.oml.util
 
 import com.google.common.collect.HashBasedTable
+import io.opencaesar.oml.AnnotatedElement
 import io.opencaesar.oml.Annotation
 import io.opencaesar.oml.AnnotationProperty
 import io.opencaesar.oml.AnnotationPropertyReference
 import io.opencaesar.oml.Aspect
 import io.opencaesar.oml.AspectReference
-import io.opencaesar.oml.Assertion
-import io.opencaesar.oml.DescriptionBundle
-import io.opencaesar.oml.DescriptionBundleExtension
-import io.opencaesar.oml.DescriptionBundleInclusion
-import io.opencaesar.oml.DescriptionBundleUsage
-import io.opencaesar.oml.Description
-import io.opencaesar.oml.DescriptionExtension
-import io.opencaesar.oml.DescriptionStatement
-import io.opencaesar.oml.DescriptionUsage
-import io.opencaesar.oml.Axiom
 import io.opencaesar.oml.BooleanLiteral
 import io.opencaesar.oml.CardinalityRestrictionKind
 import io.opencaesar.oml.Classifier
@@ -44,6 +35,14 @@ import io.opencaesar.oml.ConceptInstanceReference
 import io.opencaesar.oml.ConceptReference
 import io.opencaesar.oml.ConceptTypeAssertion
 import io.opencaesar.oml.DecimalLiteral
+import io.opencaesar.oml.Description
+import io.opencaesar.oml.DescriptionBundle
+import io.opencaesar.oml.DescriptionBundleExtension
+import io.opencaesar.oml.DescriptionBundleInclusion
+import io.opencaesar.oml.DescriptionBundleUsage
+import io.opencaesar.oml.DescriptionExtension
+import io.opencaesar.oml.DescriptionStatement
+import io.opencaesar.oml.DescriptionUsage
 import io.opencaesar.oml.DifferentFromPredicate
 import io.opencaesar.oml.DoubleLiteral
 import io.opencaesar.oml.Element
@@ -104,17 +103,17 @@ import io.opencaesar.oml.StructuredPropertyRangeRestrictionAxiom
 import io.opencaesar.oml.StructuredPropertyReference
 import io.opencaesar.oml.StructuredPropertyValueAssertion
 import io.opencaesar.oml.StructuredPropertyValueRestrictionAxiom
+import io.opencaesar.oml.Vocabulary
 import io.opencaesar.oml.VocabularyBundle
 import io.opencaesar.oml.VocabularyBundleExtension
 import io.opencaesar.oml.VocabularyBundleInclusion
-import io.opencaesar.oml.Vocabulary
 import io.opencaesar.oml.VocabularyExtension
 import io.opencaesar.oml.VocabularyStatement
 import io.opencaesar.oml.VocabularyUsage
 import java.math.BigDecimal
 import java.util.ArrayList
-import java.util.HashSet
-import java.util.Map
+import java.util.Collection
+import java.util.LinkedHashSet
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.resource.ResourceSet
@@ -124,15 +123,15 @@ import static extension io.opencaesar.oml.util.OmlRead.*
 
 class OmlWriter {
 	
+	static val table  = HashBasedTable.create
+
 	val ResourceSet resourceSet
-	val newResources = new HashSet<Resource>
+	val newResources = new LinkedHashSet<Resource>
 	val defer = new ArrayList<Runnable>
-	
+
 	new(ResourceSet resourceSet) {
 		this.resourceSet = resourceSet
 	}
-	
-	static val table  = HashBasedTable.create
 	
 	protected def <T extends IdentifiedElement> resolve(Class<T> type, Ontology context, String iri) {
 		var element = table.get(context, iri)
@@ -155,7 +154,7 @@ class OmlWriter {
 			} else {
 				context.getImportedOntologyByIri(baseIri)?.eResource
 			}
-			element = resource.getEObject(fragment)
+			element = resource?.getEObject(fragment)
 			if (element === null) {
 				throw new RuntimeException("could not resolve "+iri+" in context of "+context.iri)
 			}
@@ -197,21 +196,14 @@ class OmlWriter {
 	
 	def finish() {
 		defer.forEach[run]
+		defer.clear
 	}
 	
-	def save(Map<String, String> saveOptions) {
-		newResources.forEach[resource| resource.save(saveOptions)]
+	def Collection<Resource> getNewResources() {
+		newResources
 	}	
 
 	// Annotation
-
-	def addAnnotation(Ontology ontology, String propertyIri, Literal value) {
-		val annotation = create(Annotation)
-		defer.add [annotation.property = resolve(AnnotationProperty, ontology, propertyIri)]
-		annotation.value = value
-		ontology.ownedAnnotations += annotation
-		return annotation
-	}
 
 	def addAnnotation(Ontology ontology, String memberIri, String propertyIri, Literal value) {
 		val annotation = create(Annotation)
@@ -228,25 +220,17 @@ class OmlWriter {
 		return annotation
 	}
 
-	def addAnnotation(Axiom axiom, String propertyIri, Literal value) {
+	def addAnnotation(AnnotatedElement element, String propertyIri, Literal value) {
 		val annotation = create(Annotation)
-		defer.add [annotation.property = resolve(AnnotationProperty, axiom.ontology, propertyIri)]
+		defer.add [annotation.property = resolve(AnnotationProperty, element.ontology, propertyIri)]
 		annotation.value = value
-		axiom.ownedAnnotations += annotation
-		return annotation
-	}
-
-	def addAnnotation(Assertion assertion, String propertyIri, Literal value) {
-		val annotation = create(Annotation)
-		defer.add [annotation.property = resolve(AnnotationProperty, assertion.ontology, propertyIri)]
-		annotation.value = value
-		assertion.ownedAnnotations += annotation
+		element.ownedAnnotations += annotation
 		return annotation
 	}
 
 	// Ontology
 	
-	def <T extends Ontology> createOntology(Class<T> type, String iri, SeparatorKind separator, String prefix, URI resourceURI) {
+	def <T extends Ontology> createOntology(Class<T> type, URI resourceURI, String iri, SeparatorKind separator, String prefix) {
 		val ontology = create(type)
 		ontology.iri = iri
 		ontology.separator = separator
@@ -257,26 +241,26 @@ class OmlWriter {
 
 	// Vocabulary
 
-	def createVocabulary(String iri, SeparatorKind separator, String name, URI resourceURI) {
-		return createOntology(Vocabulary, iri, separator, name, resourceURI)
+	def createVocabulary(URI resourceURI, String iri, SeparatorKind separator, String name) {
+		return createOntology(Vocabulary, resourceURI, iri, separator, name)
 	}
 
 	// VocabularyBundle
 	
-	def createVocabularyBundle(String iri, SeparatorKind separator, String name, URI resourceURI) {
-		return createOntology(VocabularyBundle, iri, separator, name, resourceURI)
+	def createVocabularyBundle(URI resourceURI, String iri, SeparatorKind separator, String name) {
+		return createOntology(VocabularyBundle, resourceURI, iri, separator, name)
 	}
 
 	// Description
 	
-	def createDescription(String iri, SeparatorKind separator, String name, URI resourceURI) {
-		return createOntology(Description, iri, separator, name, resourceURI)
+	def createDescription(URI resourceURI, String iri, SeparatorKind separator, String name) {
+		return createOntology(Description, resourceURI, iri, separator, name)
 	}
 
 	// DescriptionBundle
 	
-	def createDescriptionBundle(String iri, SeparatorKind separator, String name, URI resourceURI) {
-		return createOntology(DescriptionBundle, iri, separator, name, resourceURI)
+	def createDescriptionBundle(URI resourceURI, String iri, SeparatorKind separator, String name) {
+		return createOntology(DescriptionBundle, resourceURI, iri, separator, name)
 	}
 
 	// Aspect
@@ -677,14 +661,14 @@ class OmlWriter {
 
 	// ScalarPropertyCardinalityRestrictionAxiom
 
-	def addScalarPropertyCardinalityRestrictionAxiom(Vocabulary vocabulary, String entityIri, String propertyIri, CardinalityRestrictionKind kind, long cardinality, String rangeIri) {
+	def addScalarPropertyCardinalityRestrictionAxiom(Vocabulary vocabulary, String typeIri, String propertyIri, CardinalityRestrictionKind kind, long cardinality, String rangeIri) {
 		val axiom = create(ScalarPropertyCardinalityRestrictionAxiom)
 		defer.add [axiom.property = resolve(ScalarProperty, vocabulary, propertyIri)]
 		axiom.kind = kind
 		axiom.cardinality = cardinality
 		defer.add [axiom.range = resolve(Scalar, vocabulary, rangeIri)]
 		defer.add [
-			val entity = resolve(Entity, vocabulary, entityIri)
+			val entity = resolve(Entity, vocabulary, typeIri)
 			if (entity.vocabulary == vocabulary) {
 				entity.ownedPropertyRestrictions += axiom
 			} else {
@@ -731,14 +715,14 @@ class OmlWriter {
 
 	// StructuredPropertyCardinalityRestrictionAxiom
 
-	def addStructuredPropertyCardinalityRestrictionAxiom(Vocabulary vocabulary, String entityIri, String propertyIri, CardinalityRestrictionKind kind, long cardinality, String rangeIri) {
+	def addStructuredPropertyCardinalityRestrictionAxiom(Vocabulary vocabulary, String typeIri, String propertyIri, CardinalityRestrictionKind kind, long cardinality, String rangeIri) {
 		val axiom = create(StructuredPropertyCardinalityRestrictionAxiom)
 		defer.add [axiom.property = resolve(StructuredProperty, vocabulary, propertyIri)]
 		axiom.kind = kind
 		axiom.cardinality = cardinality
 		defer.add [axiom.range = resolve(Structure, vocabulary, rangeIri)]
 		defer.add [
-			val entity = resolve(Entity, vocabulary, entityIri)
+			val entity = resolve(Entity, vocabulary, typeIri)
 			if (entity.vocabulary == vocabulary) {
 				entity.ownedPropertyRestrictions += axiom
 			} else {
@@ -804,10 +788,10 @@ class OmlWriter {
 
 	// RelationTargetRestrictionAxiom
 	
-	def addRelationTargetRestrictionAxiom(Vocabulary vocabulary, String entityIri, String relationIri, NamedInstance target) {
+	def addRelationTargetRestrictionAxiom(Vocabulary vocabulary, String entityIri, String relationIri, String targetIri) {
 		val axiom = create(RelationTargetRestrictionAxiom)
 		defer.add [axiom.relation = resolve(Relation, vocabulary, relationIri)]
-		axiom.target = target
+		defer.add [axiom.target = resolve(NamedInstance, vocabulary, targetIri)]
 		defer.add [
 			val entity = resolve(Entity, vocabulary, entityIri)
 			if (entity.vocabulary == vocabulary) {
@@ -884,9 +868,9 @@ class OmlWriter {
 		return assertion
 	}
 
-	def addScalarPropertyValueAssertion(Description description, StructureInstance instance, String propertyIri, Literal value) {
+	def addScalarPropertyValueAssertion(StructureInstance instance, String propertyIri, Literal value) {
 		val assertion = create(ScalarPropertyValueAssertion)
-		defer.add [assertion.property = resolve(ScalarProperty, description, propertyIri)]
+		defer.add [assertion.property = resolve(ScalarProperty, instance.ontology, propertyIri)]
 		assertion.value = value
 		instance.ownedPropertyValues += assertion
 		return assertion

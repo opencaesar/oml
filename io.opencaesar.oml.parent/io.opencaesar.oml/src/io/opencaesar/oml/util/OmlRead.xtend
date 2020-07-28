@@ -315,7 +315,7 @@ class OmlRead {
 		vocabulary.ownedImports.filter(VocabularyUsage)
 	}
 
-	static def Iterable<Vocabulary> getExtendedVocabularyes(Vocabulary vocabulary) {
+	static def Iterable<Vocabulary> getExtendedVocabularies(Vocabulary vocabulary) {
 		vocabulary.extensionsWithSource.map[extendedVocabulary]
 	}
 
@@ -948,7 +948,7 @@ class OmlRead {
 		axiom.restrictingEntity
 	}
 
-	static def Classifier getRestrictingEntity(RelationRestrictionAxiom axiom) {
+	static def Entity getRestrictingEntity(RelationRestrictionAxiom axiom) {
 		if (axiom.owningReference !== null) {
 			axiom.owningReference.resolve as Entity
 		} else {
