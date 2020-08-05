@@ -18,20 +18,24 @@
  */
 package io.opencaesar.oml.dsl.ide.diagram
 
+import com.google.common.collect.Table
 import com.google.inject.Inject
 import io.opencaesar.oml.Aspect
 import io.opencaesar.oml.AspectReference
+import io.opencaesar.oml.Classifier
 import io.opencaesar.oml.Concept
 import io.opencaesar.oml.ConceptReference
 import io.opencaesar.oml.Element
 import io.opencaesar.oml.EnumeratedScalarReference
 import io.opencaesar.oml.FacetedScalarReference
+import io.opencaesar.oml.FeatureProperty
 import io.opencaesar.oml.IdentifiedElement
 import io.opencaesar.oml.Import
 import io.opencaesar.oml.Ontology
 import io.opencaesar.oml.Predicate
 import io.opencaesar.oml.Reference
 import io.opencaesar.oml.RelationEntity
+import io.opencaesar.oml.RelationEntityReference
 import io.opencaesar.oml.RelationPredicate
 import io.opencaesar.oml.RelationRangeRestrictionAxiom
 import io.opencaesar.oml.Rule
@@ -54,16 +58,13 @@ import org.eclipse.sprotty.xtext.IDiagramGenerator
 import org.eclipse.sprotty.xtext.SIssueMarkerDecorator
 import org.eclipse.sprotty.xtext.tracing.ITraceProvider
 
+import static extension io.opencaesar.oml.dsl.ide.diagram.OmlDiagramSpecifier.*
 import static extension io.opencaesar.oml.util.OmlRead.*
-import io.opencaesar.oml.AnnotatedElement
-import io.opencaesar.oml.Annotation
-import io.opencaesar.oml.util.OmlSearch
+import static extension io.opencaesar.oml.util.OmlSearch.*
 
 class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramGenerator {
 	
 	static val LOG = Logger.getLogger(OmlDiagramGenerator)
-	val String diagramIRI = "http://imce.jpl.nasa.gov/foundation/diagram"
-	
 
 	@Inject extension ITraceProvider traceProvider
 	@Inject extension SIssueMarkerDecorator
@@ -73,15 +74,16 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
 	var OmlGraph graph
 	var OmlNode frame
 	var Map<Element, SModelElement> semantic2diagram
-	var isDiagramSpecifier = false
+//	var Table<Element, String, SModelElement> semantic3diagram
 	
 	override SModelRoot generate(Context context) {
-		try {			
+		try {
 			this.context = context
 			this.semantic2diagram = new HashMap
+			semantic2diagramAnnotations = new HashMap
 			
 			val ontology = context.resource.ontology
-			this.isDiagramSpecifier = ontology.importedOntologies.exists[isDiagramIRI]
+			ontology.isSpecifier
 			this.view =  new OmlDiagramView(ontology, context.idCache)
 			this.graph = view.createGraph
 
@@ -113,8 +115,8 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
 	}
 
 	override doSwitch(EObject eObject) {
-	    if (!(eObject instanceof Ontology) && this.isDiagramSpecifier) {
-	        if (!eObject.isSpecified || eObject.isDiagramImport) {
+	    if (!(eObject instanceof Ontology) && isDiagramSpecifier) {
+	        if (!eObject.specify || eObject.diagramImport) {
                return null
            }
 	    }
@@ -122,9 +124,24 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
 		val element = semantic2diagram.get(eObject)
 		if (element !== null) {
 			element
-   		} else {
+   		} else if (!semantic2diagram.containsKey(eObject)) {
 	   		super.doSwitch(eObject)
+   		} else {
+   		    return null
    		}
+  	}
+  	
+  	def SModelElement forceSwitch(EObject eObject) {
+  	    if (eObject.excluded) return null
+  	    
+        val element = semantic2diagram.get(eObject)
+        if (element !== null) {
+            element
+        } else if (!semantic2diagram.containsKey(eObject)) {
+            super.doSwitch(eObject)
+        } else {
+            return null
+        }
   	}
 	
 	override caseOntology(Ontology ontology) {
@@ -141,17 +158,24 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
 	}
 
 	override caseAspect(Aspect aspect) {
-		if  (frame.expanded) {
-			val node = aspect.createNode
+		if  (frame.expanded && includeAspects) {
+			val node = aspect.createNode(null)
 			frame.children += node
 			node.traceAndMark(aspect, context)
+			if (includeCompartments && aspect.includesProperties && aspect.includesCompartment)
+		        aspect.properties.forEach[forceSwitch]
 			return node
 		}
 	}
 
 	override caseAspectReference(AspectReference reference) {
-		if (reference.aspect !== null) {
-			return reference.aspect.doSwitch
+		if (reference.aspect !== null && frame.expanded) {
+			reference.aspect.doSwitch
+//			val node = reference.aspect.createNode(reference)
+//			frame.children += node
+//			node.traceAndMark(reference, context)
+//			reference.aspect.properties.forEach[doSwitch]
+//			return node
 		}
 	}
 	
@@ -160,6 +184,8 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
 			val node = concept.createNode
 			frame.children += node
 			node.traceAndMark(concept, context)
+			if (concept.includesProperties)
+			    concept.properties.forEach[forceSwitch]
 			return node
 		}
 	}
@@ -284,6 +310,12 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
 			return node
 		}
 	}
+	
+	override caseRelationEntityReference(RelationEntityReference reference) {
+	    if (reference.entity !== null) {
+	        reference.entity.doSwitch
+	    }
+	}
 
 	override caseRelationRangeRestrictionAxiom(RelationRangeRestrictionAxiom axiom) {
 		var source = axiom.restrictingEntity?.doSwitch
@@ -299,32 +331,10 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
 
 //------------------- HELPERS
 
-    private def boolean isDiagramIRI(Ontology ontology) {
-        return ontology.iri == this.diagramIRI
-    }
-    
-    private def boolean isDiagramImport(EObject eObject) {
-        if (eObject instanceof IdentifiedElement) {
-            return eObject.iri == this.diagramIRI
+    private def Iterable<FeatureProperty> getProperties(EObject element) {
+        if (element instanceof Classifier) {
+            return element.findFeaturePropertiesWithDomain
         }
-        return false
-    }
-    
-    private def boolean isSpecified(EObject eObject) {
-        var Iterable<Annotation> aValues
-        
-        if (eObject instanceof AnnotatedElement) {
-            aValues = OmlSearch.findAnnotations(eObject)
-        } else if (eObject instanceof Reference) {
-            aValues = OmlSearch.findAnnotations(eObject)
-        }
-        
-        if (aValues !== null) {
-            return aValues.exists[a|
-                return this.isDiagramImport(a.property.eContainer)
-            ]
-        }
-        return false
     }
 
 	private def <T extends SModelElement> T traceAndMark(T sElement, Element element, Context context) {

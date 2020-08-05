@@ -48,6 +48,7 @@ import org.eclipse.sprotty.SModelElement
 import org.eclipse.sprotty.util.IdCache
 
 import static extension io.opencaesar.oml.util.OmlRead.*
+import io.opencaesar.oml.AspectReference
 
 class OmlDiagramView {
 	
@@ -93,8 +94,9 @@ class OmlDiagramView {
 		]
 	}
 
-	def OmlNode createNode(Aspect aspect) {
-		val id = idCache.uniqueId(aspect, aspect.localName)
+	def OmlNode createNode(Aspect aspect, AspectReference ref) {
+		val el = ref ?: aspect
+		val id = idCache.uniqueId(el, el.localName)
 		newSElement(OmlNode, id, 'node:class') => [
 			cssClass = 'moduleNode'
 			layout = 'vbox'
@@ -104,7 +106,7 @@ class OmlDiagramView {
 				paddingTop = 0.0
 				paddingBottom = 0.0
 			]
-			children += newTaggedHeader(id, 'A')
+			children += newTaggedHeader(id, 'aspect')
 		]
 	}
 
@@ -119,7 +121,7 @@ class OmlDiagramView {
 				paddingTop = 0.0
 				paddingBottom = 0.0
 			]
-			children += newTaggedHeader(id, 'C')
+			children += newTaggedHeader(id, 'concept')
 		]
 	}
 
@@ -134,7 +136,7 @@ class OmlDiagramView {
 				paddingTop = 0.0
 				paddingBottom = 0.0
 			]
-			children += newTaggedHeader(id, 'S')
+			children += newTaggedHeader(id, 'structure')
 		]
 	}
 
@@ -149,7 +151,7 @@ class OmlDiagramView {
 				paddingTop = 0.0
 				paddingBottom = 0.0
 			]
-			children += newTaggedHeader(id, 'C')
+			children += newTaggedHeader(id, 'scalar')
 		]
 	}
 	
@@ -282,7 +284,7 @@ class OmlDiagramView {
 				paddingTop = 0.0
 				paddingBottom = 0.0
 			]
-			children += newTaggedHeader(id, 'R')
+			children += newTaggedHeader(id, 'relation entity')
 		]
 		val edge1 = newEdge(from, node, id+'.start', "edge:straight")
 		node.children += edge1
@@ -319,7 +321,7 @@ class OmlDiagramView {
 
 	private def OmlHeader newTaggedHeader(String id, String tag) {
 		newSElement(OmlHeader, id + '.header', 'comp:classHeader') => [
-			layout = 'hbox'
+			layout = 'vbox'
 			layoutOptions = new LayoutOptions [
 				paddingLeft = 8.0
 				paddingRight = 8.0
@@ -327,27 +329,38 @@ class OmlDiagramView {
 				paddingBottom = 8.0
 			]
 			children = #[
-				new OmlTag => [
-					it.id = id + '.header.tag'
-					type = 'tag'
-					layout = 'stack'
-					layoutOptions = new LayoutOptions [
-						resizeContainer = false
-						HAlign = 'center'
-						VAlign = 'center'
-					] 
-					children = #[	
-						new OmlLabel => [
-							type = "label:tag"
-							it.id = id + '.tag.text'
-							text = tag
-						]
-					]
-				],
+//				new OmlTag => [
+//					it.id = id + '.header.tag'
+//					type = 'tag'
+//					layout = 'stack'
+//					layoutOptions = new LayoutOptions [
+//						resizeContainer = false
+//						HAlign = 'center'
+//						VAlign = 'center'
+//					] 
+//					children = #[	
+//						new OmlLabel => [
+//							type = "label:tag"
+//							it.id = id + '.tag.text'
+//							text = tag
+//						]
+//					]
+//				],
+                new OmlLabel => [
+                    type = "label:editable"
+                    it.id = id + '.type.label'
+                    text = "«" + tag + "»"
+                    layoutOptions = new LayoutOptions [
+                        HAlign = 'center'
+                    ]
+                ],
 				new OmlLabel => [
-					type = "label:editable"
+					type = "label:classHeader"
 					it.id = id + '.header.label'
 					text = id
+					layoutOptions = new LayoutOptions [
+					    HAlign = 'center'
+					]
 				]
 			]
 		]
