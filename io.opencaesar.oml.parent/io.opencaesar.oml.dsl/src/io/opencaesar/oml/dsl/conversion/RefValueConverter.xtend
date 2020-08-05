@@ -30,7 +30,7 @@ class RefValueConverter extends IRIValueConverter {
 	}
 	
 	override elseToValue(String string, INode node) {
-		return abbrev_iriValueConverter.toValue(string, null) as String
+		return abbrev_iriValueConverter.toValue(string, null)
 	}
 	
 }
