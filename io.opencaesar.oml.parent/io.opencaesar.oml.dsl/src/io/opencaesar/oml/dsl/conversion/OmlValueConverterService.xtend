@@ -25,18 +25,11 @@ import org.eclipse.xtext.conversion.ValueConverter
 
 class OmlValueConverterService extends DefaultTerminalConverters {
 
-	@Inject ABBREV_IRIValueConverter abbrev_iriValueConverter
-
 	@Inject IRIValueConverter iriValueConverter
 
 	@Inject RefValueConverter refValueConverter
 
 	@Inject STRINGValueConverter stringValueConverter2
-
-	@ValueConverter(rule="ABBREV_IRI")
-	def IValueConverter<String> TerminalsABBREV_IRI() {
-		abbrev_iriValueConverter
-	}
 
 	@ValueConverter(rule="IRI")
 	def IValueConverter<String> TerminalsIRI() {

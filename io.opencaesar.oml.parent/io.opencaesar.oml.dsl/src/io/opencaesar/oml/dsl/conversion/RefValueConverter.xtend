@@ -19,20 +19,18 @@
 package io.opencaesar.oml.dsl.conversion
 
 import com.google.inject.Inject
-import org.eclipse.xtext.conversion.IValueConverterService
 import org.eclipse.xtext.nodemodel.INode
 
 class RefValueConverter extends IRIValueConverter {
 
-	@Inject
-	protected IValueConverterService valueConverterService;
+	@Inject ABBREV_IRIValueConverter abbrev_iriValueConverter
 
 	override elseToString(String value) {
-		return valueConverterService.toString(value, "ABBREV_IRI")
+		return abbrev_iriValueConverter.toString(value)
 	}
 	
 	override elseToValue(String string, INode node) {
-		return valueConverterService.toValue(string, "ABBREV_IRI", null) as String
+		return abbrev_iriValueConverter.toValue(string, null) as String
 	}
 	
 }

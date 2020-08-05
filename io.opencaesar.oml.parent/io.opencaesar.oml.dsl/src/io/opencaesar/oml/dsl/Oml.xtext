@@ -599,7 +599,7 @@ enum CardinalityRestrictionKind:
 
 //--------------
 
-Ref: ID | ABBREV_IRI | IRI;
+Ref: 													ID (':' ID)? | IRI;
 
 Boolean returns ecore::EBoolean:						BOOLEAN_STR;
 
@@ -626,8 +626,6 @@ terminal DOUBLE_STR:									('+'|'-')? (DIGIT+('.'DIGIT*)? | ('.'DIGIT+)) (('e'
 terminal STRING:										('"' (!('"'|'\\') | '\\'.)* '"') | ("'" (!("'"|'\\') | '\\'.)* "'") | ("'''" -> "'''") | '"""' -> '"""';
 
 terminal IRI:											'<' (!('>'|' '))* '>';
-
-terminal ABBREV_IRI:									ID ':' ID;
 
 terminal ID:											'^'? (ALPHA|DIGIT|'_') (ALPHA|DIGIT|'_'|'-'|'.')*;
 	    
