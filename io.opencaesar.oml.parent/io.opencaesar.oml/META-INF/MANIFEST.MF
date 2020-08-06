@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: io.opencaesar.oml;singleton:=true
 Automatic-Module-Name: io.opencaesar.oml
-Bundle-Version: 0.7.1
+Bundle-Version: 0.7.3
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
