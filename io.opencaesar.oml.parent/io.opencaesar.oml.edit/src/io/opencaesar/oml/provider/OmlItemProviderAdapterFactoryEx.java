@@ -688,14 +688,14 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 
 	@Override
 	public Adapter createKeyAxiomAdapter() {
-		if (specializationAxiomItemProvider == null) specializationAxiomItemProvider = new SpecializationAxiomItemProvider(this) {
+		if (keyAxiomItemProvider == null) keyAxiomItemProvider = new KeyAxiomItemProvider(this) {
 			@Override
 			public String getText(Object object) {
 				KeyAxiom axiom = (KeyAxiom)object;
 				return "key " + axiom.getProperties().stream().map(p -> getLabel(p, axiom)).collect(Collectors.joining(", "));
 			}
 		};
-		return specializationAxiomItemProvider;
+		return keyAxiomItemProvider;
 	}
 	
 	@Override
