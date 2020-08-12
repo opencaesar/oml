@@ -49,6 +49,7 @@ import org.eclipse.sprotty.util.IdCache
 
 import static extension io.opencaesar.oml.util.OmlRead.*
 import io.opencaesar.oml.AspectReference
+import io.opencaesar.oml.ConceptReference
 
 class OmlDiagramView {
 	
@@ -94,9 +95,11 @@ class OmlDiagramView {
 		]
 	}
 
-	def OmlNode createNode(Aspect aspect, AspectReference ref) {
+	def OmlNode createNode(Aspect aspect, AspectReference ref, String diagramID) {
 		val el = ref ?: aspect
-		val id = idCache.uniqueId(el, el.localName)
+		val idMod = diagramID === null ? '' : '-' + diagramID
+		val name = el.localName
+		val id = idCache.uniqueId(el, name + idMod)
 		newSElement(OmlNode, id, 'node:class') => [
 			cssClass = 'moduleNode'
 			layout = 'vbox'
@@ -106,12 +109,15 @@ class OmlDiagramView {
 				paddingTop = 0.0
 				paddingBottom = 0.0
 			]
-			children += newTaggedHeader(id, 'aspect')
+			children += newTaggedHeader(id, 'aspect', name)
 		]
 	}
 
-	def OmlNode createNode(Concept concept) {
-		val id = idCache.uniqueId(concept, concept.localName)
+	def OmlNode createNode(Concept concept, ConceptReference ref, String diagramID) {
+        val el = ref ?: concept
+        val idMod = diagramID === null ? '' : '-' + diagramID
+        val name = el.localName
+        val id = idCache.uniqueId(el, name + idMod)
 		newSElement(OmlNode, id, 'node:class') => [
 			cssClass = 'moduleNode'
 			layout = 'vbox'
@@ -121,7 +127,7 @@ class OmlDiagramView {
 				paddingTop = 0.0
 				paddingBottom = 0.0
 			]
-			children += newTaggedHeader(id, 'concept')
+			children += newTaggedHeader(id, 'concept', name)
 		]
 	}
 
@@ -177,7 +183,12 @@ class OmlDiagramView {
 			filter[id.endsWith('.property.compartment')].
 			head as OmlCompartment
 	}
-
+	
+    def OmlCompartment createPropertyCompartment(Element ref) {
+        val id = idCache.getId(ref)
+        newCompartment(id + '.property.compartment', 'comp:comp')
+    }
+    
 	def OmlCompartment createPropertyCompartment(Classifier classifier) {
 		val id = idCache.getId(classifier)
 		newCompartment(id + '.property.compartment', 'comp:comp')
@@ -318,8 +329,39 @@ class OmlDiagramView {
 			type = typeStr
 		]
 	}
+	
+	// TODO
+    private def OmlHeader newTaggedHeader(String id, String tag) {
+        newSElement(OmlHeader, id + '.header', 'comp:classHeader') => [
+            layout = 'vbox'
+            layoutOptions = new LayoutOptions [
+                paddingLeft = 8.0
+                paddingRight = 8.0
+                paddingTop = 8.0
+                paddingBottom = 8.0
+            ]
+            children = #[
+                new OmlLabel => [
+                    type = "label:editable"
+                    it.id = id + '.type.label'
+                    text = "«" + tag + "»"
+                    layoutOptions = new LayoutOptions [
+                        HAlign = 'center'
+                    ]
+                ],
+                new OmlLabel => [
+                    type = "label:classHeader"
+                    it.id = id + '.header.label'
+                    text = id
+                    layoutOptions = new LayoutOptions [
+                        HAlign = 'center'
+                    ]
+                ]
+            ]
+        ]
+    }
 
-	private def OmlHeader newTaggedHeader(String id, String tag) {
+	private def OmlHeader newTaggedHeader(String id, String tag, String name) {
 		newSElement(OmlHeader, id + '.header', 'comp:classHeader') => [
 			layout = 'vbox'
 			layoutOptions = new LayoutOptions [
@@ -329,23 +371,6 @@ class OmlDiagramView {
 				paddingBottom = 8.0
 			]
 			children = #[
-//				new OmlTag => [
-//					it.id = id + '.header.tag'
-//					type = 'tag'
-//					layout = 'stack'
-//					layoutOptions = new LayoutOptions [
-//						resizeContainer = false
-//						HAlign = 'center'
-//						VAlign = 'center'
-//					] 
-//					children = #[	
-//						new OmlLabel => [
-//							type = "label:tag"
-//							it.id = id + '.tag.text'
-//							text = tag
-//						]
-//					]
-//				],
                 new OmlLabel => [
                     type = "label:editable"
                     it.id = id + '.type.label'
@@ -357,7 +382,7 @@ class OmlDiagramView {
 				new OmlLabel => [
 					type = "label:classHeader"
 					it.id = id + '.header.label'
-					text = id
+					text = name
 					layoutOptions = new LayoutOptions [
 					    HAlign = 'center'
 					]

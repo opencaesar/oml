@@ -7,6 +7,7 @@ import io.opencaesar.oml.Concept
 import io.opencaesar.oml.IdentifiedElement
 import io.opencaesar.oml.Ontology
 import io.opencaesar.oml.Reference
+import java.util.HashMap
 import java.util.Map
 import org.eclipse.emf.ecore.EObject
 
@@ -16,48 +17,50 @@ import io.opencaesar.oml.QuotedLiteral
 
 class OmlDiagramSpecifier {
     
-    static val String diagramIRI = "http://imce.jpl.nasa.gov/foundation/diagram"
+    val String diagramIRI = "http://imce.jpl.nasa.gov/foundation/diagram"
     
-    public static var isDiagramSpecifier = false
-    public static var Map<EObject, Iterable<Annotation>> semantic2diagramAnnotations
+    public var isDiagramSpecifier = false
+    public var Map<EObject, Iterable<Annotation>> semantic2diagramAnnotations
+    public var Map<String, EObject> id2semantic
     
-    public static var includeAspects = true
-    public static var includeCompartments = false
+    public val boolean includeAspects
+    public val boolean includeCompartments
     
-    static def isSpecifier(Ontology ontology) {
-        isDiagramSpecifier = ontology.diagramAnnotations.exists[a|
+    new(Ontology ontology) {
+        this.semantic2diagramAnnotations = new HashMap
+        this.isDiagramSpecifier = ontology.diagramAnnotations.exists[a|
             a.property.name == "specifier"
         ]
-        if (isDiagramSpecifier) {
-            includeCompartments = ontology.includesCompartment
-            includeAspects = ontology.includesAspects
-        }
+        this.includeCompartments = ontology.includesCompartment
+        this.includeAspects = ontology.includesAspects
     }
     
-    static def boolean hasDiagramIRI(Ontology ontology) {
+    def boolean hasDiagramIRI(Ontology ontology) {
         return ontology.iri == diagramIRI
     }
 
-    static def boolean specify(EObject eObject) {
+    def boolean specify(EObject eObject) {
         if (!isDiagramSpecifier) return true
 
         return eObject.included
     }
     
-    static def boolean isIncluded(EObject eObject) {
+    def boolean isIncluded(EObject eObject) {
         if (eObject.excluded) return false
         
         val diagramAnnotations = eObject.diagramAnnotations
         if (diagramAnnotations !== null) {
             return diagramAnnotations.exists[a|
-                a.property.name == 'include'
-                && a.value === null
+                if (a.owningReference == eObject || a.owningElement == eObject) {
+                    return a.property.name == 'include' && a.value === null
+                }
+                return false
             ]
         }
         return false
     }
     
-    static def boolean isExcluded(EObject eObject) {
+    def boolean isExcluded(EObject eObject) {
         val diagramAnnotations = eObject.diagramAnnotations
         var excluded = false
         if (diagramAnnotations !== null) {
@@ -69,33 +72,27 @@ class OmlDiagramSpecifier {
         return excluded
     }
     
-    static def boolean includesProperties(EObject eObject) {
+    def boolean includesProperties(EObject eObject) {
         val diagramAnnotations = eObject.diagramAnnotations
         var included = false
         if (diagramAnnotations !== null) {
             included = diagramAnnotations.exists[a|
                 if (a.property.name == 'include') {
-                    val lit = a.value
-                    if (lit instanceof QuotedLiteral) {
-                        return lit.value == 'properties'
-                    }
+                    return a.quotedValue == 'properties'
                 }
                 return false
             ]
         }
         return included
     }
-    
-    static def boolean includesCompartment(EObject eObject) {
+
+    def boolean includesCompartment(EObject eObject) {
         val diagramAnnotations = eObject.diagramAnnotations
         var excluded = false
         if (diagramAnnotations !== null) {
             excluded = diagramAnnotations.exists[a|
                 if (a.property.name == 'exclude') {
-                    val lit = a.value
-                    if (lit instanceof QuotedLiteral) {
-                        return lit.value == 'compartment'
-                    }
+                    return a.quotedValue == 'compartment'
                 }
                 return false
             ]
@@ -103,14 +100,14 @@ class OmlDiagramSpecifier {
         return !excluded
     }
     
-    static def boolean isDiagramImport(EObject eObject) {
+    def boolean isDiagramImport(EObject eObject) {
         if (eObject instanceof IdentifiedElement) {
             return eObject.iri == diagramIRI
         }
         return false
     }
     
-    static def Iterable<Annotation> getDiagramAnnotations(EObject eObject) {
+    def Iterable<Annotation> getDiagramAnnotations(EObject eObject) {
         var annotations = semantic2diagramAnnotations.get(eObject)
         if (annotations === null) {
             if (eObject instanceof AnnotatedElement) {
@@ -127,21 +124,44 @@ class OmlDiagramSpecifier {
         return annotations
     }
     
-    static def includesAspects(Ontology ontology) {
+    def String getDiagramProperty(EObject eObject, String property) {
+        if (property === null) return null
+        
+        val diagramAnnotations = eObject.diagramAnnotations
+        var String value = null
+        if (diagramAnnotations !== null) {
+            value = diagramAnnotations.map[a|
+                if (a.property.name == property &&
+                        (a.owningReference == eObject || a.owningElement == eObject)
+                ) {
+                    return a.quotedValue
+                }
+            ].findFirst[v|v !== null]
+        }
+        return value
+    }
+    
+//------------------- HELPERS
+    
+    private def includesAspects(Ontology ontology) {
         val diagramAnnotations = ontology.diagramAnnotations
         var excluded = false
         if (diagramAnnotations !== null) {
             excluded = diagramAnnotations.exists[a|
                 if (a.property.name == 'exclude') {
-                    val lit = a.value
-                    if (lit instanceof QuotedLiteral) {
-                        return lit.value == 'aspects'
-                    }
+                    return a.quotedValue == 'aspects'
                 }
                 return false
             ]
         }
         return !excluded
+    }
+    
+    private def getQuotedValue(Annotation annotation) {
+        val lit = annotation.value
+        if (lit instanceof QuotedLiteral) {
+            return lit.value
+        }
     }
     
 }
