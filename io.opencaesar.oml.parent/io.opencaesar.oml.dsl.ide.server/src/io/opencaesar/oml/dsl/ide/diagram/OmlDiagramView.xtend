@@ -50,6 +50,8 @@ import org.eclipse.sprotty.util.IdCache
 import static extension io.opencaesar.oml.util.OmlRead.*
 import io.opencaesar.oml.AspectReference
 import io.opencaesar.oml.ConceptReference
+import io.opencaesar.oml.Member
+import io.opencaesar.oml.RelationEntityReference
 
 class OmlDiagramView {
 	
@@ -97,9 +99,8 @@ class OmlDiagramView {
 
 	def OmlNode createNode(Aspect aspect, AspectReference ref, String diagramID) {
 		val el = ref ?: aspect
-		val idMod = diagramID === null ? '' : '-' + diagramID
 		val name = el.localName
-		val id = idCache.uniqueId(el, name + idMod)
+        val id = idCache.uniqueId(el, diagramID ?: name)
 		newSElement(OmlNode, id, 'node:class') => [
 			cssClass = 'moduleNode'
 			layout = 'vbox'
@@ -115,20 +116,20 @@ class OmlDiagramView {
 
 	def OmlNode createNode(Concept concept, ConceptReference ref, String diagramID) {
         val el = ref ?: concept
-        val idMod = diagramID === null ? '' : '-' + diagramID
         val name = el.localName
+        val idMod = diagramID ?: ''
         val id = idCache.uniqueId(el, name + idMod)
-		newSElement(OmlNode, id, 'node:class') => [
-			cssClass = 'moduleNode'
-			layout = 'vbox'
-			layoutOptions = new LayoutOptions [
-				paddingLeft = 0.0
-				paddingRight = 0.0
-				paddingTop = 0.0
-				paddingBottom = 0.0
-			]
-			children += newTaggedHeader(id, 'concept', name)
-		]
+        newSElement(OmlNode, id, 'node:class') => [
+            cssClass = 'moduleNode'
+            layout = 'vbox'
+            layoutOptions = new LayoutOptions [
+                paddingLeft = 0.0
+                paddingRight = 0.0
+                paddingTop = 0.0
+                paddingBottom = 0.0
+            ]
+            children += newTaggedHeader(id, 'concept', name)
+        ]
 	}
 
 	def OmlNode createNode(Structure structure) {
@@ -180,17 +181,22 @@ class OmlDiagramView {
 
 	def OmlCompartment getPropertyCompartment(SModelElement element) {
 		element.children.
-			filter[id.endsWith('.property.compartment')].
-			head as OmlCompartment
+			filter[id.endsWith('.property.compartment')]
+                .head as OmlCompartment
 	}
 	
-    def OmlCompartment createPropertyCompartment(Element ref) {
+    def OmlCompartment createPropertyCompartment(Reference ref) {
+        if (ref === null) return null
+        
         val id = idCache.getId(ref)
-        newCompartment(id + '.property.compartment', 'comp:comp')
+        if (id !== null)
+            newCompartment(id + '.property.compartment', 'comp:comp')
+        else
+            createPropertyCompartment(ref.resolve)
     }
     
-	def OmlCompartment createPropertyCompartment(Classifier classifier) {
-		val id = idCache.getId(classifier)
+	def OmlCompartment createPropertyCompartment(Member member) {
+		val id = idCache.getId(member)
 		newCompartment(id + '.property.compartment', 'comp:comp')
 	}
 
@@ -297,13 +303,31 @@ class OmlDiagramView {
 			]
 			children += newTaggedHeader(id, 'relation entity')
 		]
-		val edge1 = newEdge(from, node, id+'.start', "edge:straight")
-		node.children += edge1
-		val edge2 = newEdge(node, to, id+'.end', "edge:augments")
-		node.children += edge2
-		
 		return node
 	}
+	
+    def OmlNode createNode(RelationEntity entity, RelationEntityReference ref) {
+        val id = idCache.uniqueId(entity, entity.localName)
+        val node = newSElement(OmlNode, id, 'node:class') => [
+            cssClass = 'moduleNode'
+            layout = 'vbox'
+            layoutOptions = new LayoutOptions [
+                paddingLeft = 0.0
+                paddingRight = 0.0
+                paddingTop = 0.0
+                paddingBottom = 0.0
+            ]
+            children += newTaggedHeader(id, 'relation entity')
+        ]
+        return node
+    }
+	
+    def OmlEdge newEdge(SModelElement fromElement, SModelElement toElement, String edgeId, String edgeType) {
+        newSElement(OmlEdge, edgeId, edgeType) => [
+            sourceId = fromElement.id
+            targetId = toElement.id
+        ]
+     }
 
 	def OmlEdge createEdge(RelationRangeRestrictionAxiom axiom, SModelElement from, SModelElement to) {
 		val id = idCache.uniqueId(axiom, from.id+'.restricts.'+axiom.relation.localName)
@@ -314,6 +338,14 @@ class OmlDiagramView {
 			]
 		]
 	}
+	
+    def String getLocalName(Element element) {
+        if (element instanceof IdentifiedElement) {
+            element.getNameIn(ontology)
+        } else if (element instanceof Reference) {
+            element.resolvedName
+        }
+    }
 	
 //------------------- HELPERS
 
@@ -330,7 +362,6 @@ class OmlDiagramView {
 		]
 	}
 	
-	// TODO
     private def OmlHeader newTaggedHeader(String id, String tag) {
         newSElement(OmlHeader, id + '.header', 'comp:classHeader') => [
             layout = 'vbox'
@@ -409,13 +440,6 @@ class OmlDiagramView {
 			]
 		]
 	}
-
-	private def OmlEdge newEdge(SModelElement fromElement, SModelElement toElement, String edgeId, String edgeType) {
-		newSElement(OmlEdge, edgeId, edgeType) => [
-			sourceId = fromElement.id
-			targetId = toElement.id
-		]
-	}
 	
 	private def OmlCompartment newCompartment(String id, String type) {
 		newSElement(OmlCompartment, id, type) => [
@@ -429,13 +453,5 @@ class OmlDiagramView {
 			])
 			children = new ArrayList<SModelElement>
 		]
-	}
-
-	private def String getLocalName(Element element) {
-		if (element instanceof IdentifiedElement) {
-			element.getNameIn(ontology)
-		} else if (element instanceof Reference) {
-			element.resolvedName
-		}
 	}
 }

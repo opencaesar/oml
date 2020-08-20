@@ -18,7 +18,7 @@
  */
 package io.opencaesar.oml.dsl.ide.diagram
 
-import com.google.common.collect.Table
+import com.google.common.collect.HashBiMap
 import com.google.inject.Inject
 import io.opencaesar.oml.Aspect
 import io.opencaesar.oml.AspectReference
@@ -76,7 +76,6 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
 	var OmlGraph graph
 	var OmlNode frame
 	var Map<Element, SModelElement> semantic2diagram
-	var Table<Element, String, SModelElement> semantic3diagram
 	
 	override SModelRoot generate(Context context) {
 		try {
@@ -85,13 +84,11 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
             this.specifier = new OmlDiagramSpecifier(ontology)
 
 			this.semantic2diagram = new HashMap
-			id2semantic = new HashMap
-			this.semantic3diagram = HashBasedTable.create()
+			semantic2ID = HashBiMap.create()
 			this.view =  new OmlDiagramView(ontology, context.idCache)
 			this.graph = view.createGraph
 
-			this.frame = ontology.doSwitch  as OmlNode
-			ontology.contentsToVisualize.forEach[doSwitch]
+			ontology.doSwitch as OmlNode
 
 			return graph
 		} catch (Exception e) {
@@ -109,21 +106,7 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
 		}	
 	}
 
-	private def String getLocalName(Element element, Ontology ontology) {
-		if (element instanceof IdentifiedElement) {
-			element.getNameIn(ontology)
-		} else if (element instanceof Reference) {
-			element.resolvedName
-		}
-	}
-
 	override doSwitch(EObject eObject) {
-	    if (!(eObject instanceof Ontology) && isDiagramSpecifier) {
-	        if (!eObject.specify || eObject.diagramImport) {
-               return null
-           }
-	    }
-
 		val element = semantic2diagram.get(eObject)
 		if (element !== null) {
 			element
@@ -137,155 +120,126 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
   	def SModelElement forceSwitch(EObject eObject) {
   	    if (eObject.excluded) return null
   	    
-        val element = semantic2diagram.get(eObject)
-        if (element !== null) {
-            element
-        } else if (!semantic2diagram.containsKey(eObject)) {
-            super.doSwitch(eObject)
-        } else {
-            return null
-        }
+        super.doSwitch(eObject)
   	}
 	
 	override caseOntology(Ontology ontology) {
 		val node = ontology.createNode
+		frame = node
 		graph.children += node
-		node.traceAndMark(ontology, context)
+		node.traceAndMark(ontology)
+		semantic2diagram.put(ontology, node)
 		
 		if (context.state.currentModel.type == 'NONE') {
 			context.state.expandedElements.add(node.id)
 		}
 		node.expanded = context.state.expandedElements.contains(node.id)
 		
+		if (node.expanded) {
+            ontology.contentsToVisualize.forEach[el|
+                if (el.specify) {
+                    if (isDiagramSpecifier)
+                        el.setDiagramID
+                    val childNode = el.doSwitch
+                    if (childNode !== null && childNode instanceof OmlNode) {
+                        semantic2diagram.put(el, childNode)
+                        if (semantic2ID.get(childNode) === null)
+                            semantic2ID.put(el, childNode.id)
+                        el.renderChildren(childNode)
+                        node.children += childNode
+                    }
+                }
+            ]
+		}
+		
 		return node
 	}
 
 	override caseAspect(Aspect aspect) {
-		if  (frame.expanded && includeAspects) {
-			val node = aspect.createNode(null, null)
-			frame.children += node
-			node.traceAndMark(aspect, context)
-			if (includeCompartments && aspect.includesProperties && aspect.includesCompartment)
-		        aspect.properties.forEach[forceSwitch]
-			return node
-		}
-	}
-
-	override caseAspectReference(AspectReference reference) {
-		if (reference.aspect !== null && frame.expanded) {
-		    if (isDiagramSpecifier) {
-		        val id = reference.getDiagramProperty('id')
-		        if (id !== null)
-                    id2semantic.put(id,reference)
-                else {
-                    val aspect = reference.aspect
-                    val node = aspect.forceSwitch
-                    if (includeCompartments && aspect.includesProperties && aspect.includesCompartment)
-                        aspect.properties
-                            .forEach[p|caseScalarProperty(p as ScalarProperty)]
-//                          .forEach[p|caseScalarPropertyOnRef(p as ScalarProperty,id)]
-                        return node
-                }
-		        val node = reference.aspect.createNode(reference, id)
-		        frame.children += node
-		        node.traceAndMark(reference, context)
-		        if (includeCompartments && reference.includesProperties && reference.includesCompartment)
-		          reference.aspect.properties
-		              .forEach[p|caseScalarPropertyOnRef(p as ScalarProperty,id)]
-		        return node
-		    }
-		    else {
-    			reference.aspect.doSwitch
-		    }
-		}
-	}
-	
-	override caseConcept(Concept concept) {
-		if  (frame.expanded) {
-			val node = concept.createNode(null, null)
-			frame.children += node
-			node.traceAndMark(concept, context)
-			if (concept.includesProperties)
-			    concept.properties.forEach[forceSwitch]
-			return node
-		}
-	}
-
-	override caseConceptReference(ConceptReference reference) {
-//		if (reference.concept !== null) {
-//			return reference.concept.doSwitch
-//		}
-        if (reference.concept !== null && frame.expanded) {
-            if (isDiagramSpecifier) {
-                val id = reference.getDiagramProperty('id')
-                if (id !== null)
-                    id2semantic.put(id,reference)
-                else {
-                    val node = reference.concept.forceSwitch
-                    if (includeCompartments && reference.includesProperties && reference.includesCompartment)
-                      reference.concept.properties
-                          .forEach[p|caseScalarPropertyOnRef(p as ScalarProperty,id)]
-                    return node
-                }
-                val node = reference.concept.createNode(reference, id)
-                frame.children += node
-                node.traceAndMark(reference, context)
-                if (includeCompartments && reference.includesProperties && reference.includesCompartment)
-                  reference.concept.properties
-                      .forEach[p|caseScalarPropertyOnRef(p as ScalarProperty,id)]
-                return node
-            }
-            else {
-                reference.concept.doSwitch
-            }
+        if (semantic2diagram.get(aspect) === null) {
+            val node = aspect.createNode(null,null)
+            node.traceAndMark(aspect)
+            semantic2diagram.put(aspect, node)
+            return node
         }
 	}
 
-	override caseStructure(Structure structure) {
-		if  (frame.expanded) {
-			val node = structure.createNode
-			frame.children += node
-			node.traceAndMark(structure, context)
-			return node
-		}
+	override caseAspectReference(AspectReference reference) {
+        val diagramID = semantic2ID.get(reference)
+	    if (isDiagramSpecifier && diagramID !== null) {
+	        val node = reference.aspect.createNode(reference, diagramID)
+	        node.traceAndMark(reference.aspect) 
+	        semantic2diagram.put(reference, node)
+            return node
+	    } else {
+	        return reference.aspect.doSwitch
+	    }
+	}
+	
+	override caseConcept(Concept concept) {
+        if (semantic2diagram.get(concept) === null) {
+            val node = concept.createNode(null,null)
+            node.traceAndMark(concept)
+            semantic2diagram.put(concept, node)
+            return node
+        }
 	}
 
+	override caseConceptReference(ConceptReference reference) {
+        val diagramID = semantic2ID.get(reference)
+        if (isDiagramSpecifier && diagramID !== null) {
+            val node = reference.concept.createNode(reference, diagramID)
+            node.traceAndMark(reference.concept) 
+            semantic2diagram.put(reference, node)
+            return node
+        } else {
+            return reference.concept.doSwitch
+        }
+	}
+
+    // TODO: Specify multiple
+	override caseStructure(Structure structure) {
+		val node = structure.createNode
+		node.traceAndMark(structure)
+		return node
+	}
+
+    // TODO: Specify multiple
 	override caseStructureReference(StructureReference reference) {
 		if (reference.structure !== null) {
 			return reference.structure.doSwitch
 		}
 	}
 
+    // TODO: Specify multiple
 	override caseScalar(Scalar scalar) {
-		if  (frame.expanded) {
-			val node = scalar.createNode
-			frame.children += node
-			node.traceAndMark(scalar, context)
-			return node
-		}
+		val node = scalar.createNode
+		node.traceAndMark(scalar)
+		return node
 	}
 
+    // TODO: Specify multiple
 	override caseFacetedScalarReference(FacetedScalarReference reference) {
 		if (reference.scalar !== null) {
 			return reference.scalar.doSwitch
 		}
 	}
-	
+
+    // TODO: Specify multiple	
 	override caseEnumeratedScalarReference(EnumeratedScalarReference reference) {
 		if (reference.scalar !== null) {
 			return reference.scalar.doSwitch
 		}
 	}
 
+    // TODO: Specify multiple
 	override caseRule(Rule rule) {
-		if  (frame.expanded) {
-			val node = rule.createNode
-			frame.children += node
-			node.traceAndMark(rule, context)
-			return node
-		}
+		val node = rule.createNode
+		node.traceAndMark(rule)
+		return node
 	}
 
+    // TODO: Specify multiple
 	override caseRuleReference(RuleReference reference) {
 		if (reference.rule !== null) {
 			return reference.rule.doSwitch
@@ -299,70 +253,25 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
 	def caseConsequentPredicate(RelationPredicate predicate) {}
 
 	override caseScalarProperty(ScalarProperty property) {
-		val domain = property.domain
-		var domainNode = domain?.doSwitch
-		if (domainNode === null) {
-			return null
-		}
-		
-		var compartment = domainNode.propertyCompartment
-		if (compartment === null) {
-			compartment = domain.createPropertyCompartment
-			domainNode.children += compartment
-		}
-
-		var propertyLabel = property.createLabel
-		compartment.children += propertyLabel
-		propertyLabel.traceAndMark(property, context)
-
-		return propertyLabel
+	    return property.createLabel.traceAndMark(property)
 	}
 	
-	def caseScalarPropertyOnRef(ScalarProperty property, String domainId) {
-	    if (property.excluded) return null
-	    
-	    var Element domain = id2semantic.get(domainId) as Reference
-	    if (domain === null) {
-	        if (domain instanceof AspectReference) {
-	            domain = domain.aspect
-	        } else if (domain instanceof ConceptReference) {
-	            domain = domain.concept
-	        } else if (domain instanceof RelationEntityReference) {
-	            domain = domain.entity
-	        }
-	    }
-	    var domainNode = domain?.doSwitch
-	    if (domainNode === null) {
-	        return null
-	    }
-	    
-        var compartment = domainNode.propertyCompartment
-        if (compartment === null) {
-            compartment = domain.createPropertyCompartment
-            domainNode.children += compartment
-        }
-
-        var propertyLabel = property.createLabel
-        compartment.children += propertyLabel
-        propertyLabel.traceAndMark(property, context)
-
-        return propertyLabel
-	}
-
 	override caseStructuredProperty(StructuredProperty property) {}
 
-	override caseImport(Import _import) {
-		val importingNode = _import.importingOntology?.doSwitch as OmlNode
-		val importedNode = _import.importedOntology?.doSwitch as OmlNode
-		
-		if (importingNode !== null && importedNode !== null) {			
-			val edge = _import.createEdge(importingNode, importedNode)
-			graph.children += edge
-			edge.traceAndMark(_import, context)
-			return edge
-		}
-	}
+    // TODO: This method recursively renders all imports now. Need to look into this
+//	override caseImport(Import _import) {
+//		val importingNode = _import.importingOntology?.doSwitch as OmlNode
+//		val importedNode = _import.importedOntology?.doSwitch as OmlNode
+//		
+//		if (importingNode !== null && importedNode !== null) {			
+//			val edge = _import.createEdge(importingNode, importedNode)
+//			graph.children += edge
+//			edge.traceAndMark(_import)
+//			return edge
+//		}
+//	}
 
+    // TODO: Specify multiple
 	override caseSpecializationAxiom(SpecializationAxiom axiom) {
 		val specializingNode = axiom.specializingTerm?.doSwitch as OmlNode
 		val specializedNode = axiom.specializedTerm?.doSwitch as OmlNode
@@ -370,7 +279,7 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
 		if (specializedNode !== null && specializingNode !== null) {
 			val edge = axiom.createEdge(specializingNode, specializedNode)
 			frame.children += edge
-			edge.traceAndMark(axiom, context)
+			edge.traceAndMark(axiom)
 			return edge
 		}
 	}
@@ -381,36 +290,20 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
 
 		if (source !== null && target !== null) {
 			val node = entity.createNode(source, target)
-			frame.children += node
-			node.traceAndMark(entity, context)
+			node.children += newEdge(source, node, node.id+'.start', "edge:straight")
+			node.children += newEdge(node, target, node.id+'.end', "edge:augments")
+			node.traceAndMark(entity)
 			return node
 		}
 	}
-	
-    def caseRelationEntity(RelationEntity entity, EObject source, EObject target) {
-        var sourceNode = semantic2diagram.get(source) ?: entity.source?.doSwitch
-        var targetNode = semantic2diagram.get(target) ?: entity.target?.doSwitch
 
-        if (sourceNode !== null && targetNode !== null) {
-            val node = entity.createNode(sourceNode, targetNode)
-            frame.children += node
-            node.traceAndMark(entity, context)
-            return node
-        }
-    }
-	
 	override caseRelationEntityReference(RelationEntityReference reference) {
         if (reference.entity !== null) {
             if (isDiagramSpecifier) {
-                val sourceID = reference.getDiagramProperty('source')
-                val targetID = reference.getDiagramProperty('target')
-                if (sourceID !== null && targetID !== null) {
-                    val source = id2semantic.get(sourceID)
-                    val target = id2semantic.get(targetID)
-                    caseRelationEntity(reference.entity, source, target)
-                }    	            
+                    return reference.entity.createNode(reference)
+            } else {
+                reference.entity.doSwitch
             }
-	        reference.entity.doSwitch
 	    }
 	}
 
@@ -421,29 +314,92 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
 		if (source !== null && target !== null && axiom.relation !== null) {
 			val edge = axiom.createEdge(source, target)
 			frame.children += edge
-			edge.traceAndMark(axiom, context)
+			edge.traceAndMark(axiom)
 			return edge
 		}
 	}
 
 //------------------- HELPERS
 
-    private def SModelElement getDiagramElement(EObject element, String id) {
-        if (isDiagramSpecifier) {
-            return semantic3diagram.get(element, id)
-        } else {
-            return semantic2diagram.get(element)
+    private def renderChildren(EObject eObject, SModelElement node) {
+        if (node.children !== null) {
+            if (includeCompartments) {
+                if (eObject instanceof Classifier)
+                    renderProperties(eObject, null, node)
+                else if (eObject instanceof Reference) {
+                    val obj = eObject.resolve
+                    if (obj instanceof Classifier) {
+                        renderProperties(obj, eObject, node)                        
+                    }
+                }
+            }
+            if (eObject instanceof RelationEntityReference) {
+                if (isDiagramSpecifier)
+                    eObject.renderRelationEdges(node)
+            }
         }
     }
+    
+    private def renderProperties(Classifier el, Reference ref, SModelElement parent) {
+        val obj = ref ?: el
+        val diagramID = semantic2ID.get(obj) ?: idCache.getId(obj)
+        val properties = el.properties
+        if (!properties.empty) {
+            if (!isDiagramSpecifier || obj.includesProperties && obj.includesCompartment) {
+                val compartment = el.getCompartment(ref, parent)
+                el.properties.forEach[renderProperty(compartment, diagramID)]
+            }
+        }
+    }
+    
+    private def renderProperty(FeatureProperty prop, SModelElement compartment, String diagramID) {
+        val label = prop.forceSwitch
+        if (label !== null) {
+            if (diagramID !== null)
+                label.id = label.id + '-' + diagramID
+            compartment.children += label
+            label.traceAndMark(prop)
+        }
+    }
+    
+    private def renderRelationEdges(RelationEntityReference ref, SModelElement parent) {
+        val source = ref.entity.source.resolveSpecifierID(ref.getDiagramProperty('source'))
+        val target = ref.entity.target.resolveSpecifierID(ref.getDiagramProperty('target'))
+        
+        var sourceNode = semantic2diagram.get(source)
+        var targetNode = semantic2diagram.get(target)
+        
+        if (sourceNode === null) {
+            sourceNode = ref.entity.source?.doSwitch
+            frame.children += sourceNode
+        }
+        if (targetNode === null){
+            targetNode = ref.entity.target?.doSwitch
+            if (targetNode !== sourceNode)
+                frame.children += targetNode
+        }
+        
+        if (targetNode !== null && sourceNode !== null) {
+            parent.children += newEdge(sourceNode, parent, parent.id+'.start', "edge:straight")
+            parent.children += newEdge(parent, targetNode, parent.id+'.end', "edge:augments")
+        }
+    }
+    
+    private def getCompartment(Classifier el, Reference ref, SModelElement node) {
+        var compartment = node?.propertyCompartment
+        if (compartment === null) {
+            compartment = ref.createPropertyCompartment ?: el.createPropertyCompartment
+                
+            node.children += compartment
+        }
+        return compartment
+    }
 
-    private def Iterable<FeatureProperty> getProperties(EObject element) {
-        if (element instanceof Classifier) {
+    private def Iterable<FeatureProperty> getProperties(Classifier element) {
             return element.findFeaturePropertiesWithDomain
-        }
     }
 
-	private def <T extends SModelElement> T traceAndMark(T sElement, Element element, Context context) {
-		semantic2diagram.put(element, sElement)
+	private def <T extends SModelElement> T traceAndMark(T sElement, Element element) {
 		sElement.trace(element).addIssueMarkers(element, context)
 	}
 
