@@ -52,6 +52,12 @@ import io.opencaesar.oml.AspectReference
 import io.opencaesar.oml.ConceptReference
 import io.opencaesar.oml.Member
 import io.opencaesar.oml.RelationEntityReference
+import io.opencaesar.oml.ConceptInstance
+import io.opencaesar.oml.ConceptInstanceReference
+import io.opencaesar.oml.RelationInstance
+import io.opencaesar.oml.LinkAssertion
+import io.opencaesar.oml.ScalarPropertyValueAssertion
+import io.opencaesar.oml.QuotedLiteral
 
 class OmlDiagramView {
 	
@@ -176,6 +182,22 @@ class OmlDiagramView {
 			children += newTaglessHeader(id)
 		]
 	}
+	
+    
+    def OmlNode createNode(ConceptInstance ci, ConceptInstanceReference ref, String diagramID) {
+        val id = idCache.uniqueId(ci, ci.localName)
+        newSElement(OmlNode, id, 'node:class') => [
+            cssClass = 'moduleNode'
+            layout = 'vbox'
+            layoutOptions = new LayoutOptions [
+                paddingLeft = 0.0
+                paddingRight = 0.0
+                paddingTop = 0.0
+                paddingBottom = 0.0
+            ]
+            children += newTaggedHeader(id, "concept instance")
+        ]
+    }
 
 	// COMPARTMENTS
 
@@ -229,6 +251,20 @@ class OmlDiagramView {
 		newLeafSElement(OmlLabel, id, 'label:text') => [
 			text = property.name + ': ' + property.range.name
 		]
+	}
+	
+	def OmlLabel createLabel(ScalarPropertyValueAssertion prop) {
+	    val id = idCache.uniqueId(prop, prop.property.localName + '-' + getLocalName(prop.eContainer as Element))
+	    newLeafSElement(OmlLabel, id, 'label:text') => [
+	        text = prop.property.name + ' = ' + prop.resolveValue
+	    ]
+	}
+	
+	private def resolveValue(ScalarPropertyValueAssertion prop) {
+	    val value = prop.value
+	    if (value instanceof QuotedLiteral) {
+	        return value.value
+	    }
 	}
 	
 	def OmlLabel createLabel(StructuredProperty property) {
@@ -290,6 +326,15 @@ class OmlDiagramView {
 		]
 	}
 
+    def OmlEdge createEdge(RelationInstance instance, SModelElement from, SModelElement to) {
+        val id = idCache.uniqueId(instance, instance.localName)
+        newEdge(from, to, id, "edge:augments") => [
+            children += newLeafSElement(OmlLabel, id + '.forward.label', 'label:relationship') => [
+                text = instance.localName
+            ]
+        ]
+    }
+
 	def OmlNode createNode(RelationEntity entity, SModelElement from, SModelElement to) {
 		val id = idCache.uniqueId(entity, entity.localName)
 		val node = newSElement(OmlNode, id, 'node:class') => [
@@ -321,6 +366,22 @@ class OmlDiagramView {
         ]
         return node
     }
+    
+    def OmlNode createNode(RelationInstance instance, SModelElement from, SModelElement to) {
+        val id = idCache.uniqueId(instance, instance.localName)
+        val node = newSElement(OmlNode, id, 'node:class') => [
+            cssClass = 'moduleNode'
+            layout = 'vbox'
+            layoutOptions = new LayoutOptions [
+                paddingLeft = 0.0
+                paddingRight = 0.0
+                paddingTop = 0.0
+                paddingBottom = 0.0
+            ]
+            children += newTaggedHeader(id, instance.ownedTypes.findFirst[t|t!==null].type.localName)
+        ]
+        return node
+    }
 	
     def OmlEdge newEdge(SModelElement fromElement, SModelElement toElement, String edgeId, String edgeType) {
         newSElement(OmlEdge, edgeId, edgeType) => [
@@ -338,6 +399,16 @@ class OmlDiagramView {
 			]
 		]
 	}
+	
+    def OmlEdge createEdge(LinkAssertion link, SModelElement from, SModelElement to) {
+        val idProposal = from.id + '_' + link.relation.name + '_' + to.id
+        val id = idCache.uniqueId(link, idProposal)
+        newEdge(from, to, id, "edge:augments") => [
+            children += newLeafSElement(OmlLabel, id + '.forward.label', 'label:relationship') => [
+                text = link.relation.localName
+            ]
+        ]
+    }
 	
     def String getLocalName(Element element) {
         if (element instanceof IdentifiedElement) {

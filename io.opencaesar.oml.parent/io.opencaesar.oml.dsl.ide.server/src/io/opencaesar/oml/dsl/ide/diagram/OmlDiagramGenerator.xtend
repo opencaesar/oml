@@ -24,8 +24,11 @@ import io.opencaesar.oml.Aspect
 import io.opencaesar.oml.AspectReference
 import io.opencaesar.oml.Classifier
 import io.opencaesar.oml.Concept
+import io.opencaesar.oml.ConceptInstance
+import io.opencaesar.oml.ConceptInstanceReference
 import io.opencaesar.oml.ConceptReference
 import io.opencaesar.oml.Element
+import io.opencaesar.oml.Entity
 import io.opencaesar.oml.EnumeratedScalarReference
 import io.opencaesar.oml.FacetedScalarReference
 import io.opencaesar.oml.FeatureProperty
@@ -36,6 +39,7 @@ import io.opencaesar.oml.Predicate
 import io.opencaesar.oml.Reference
 import io.opencaesar.oml.RelationEntity
 import io.opencaesar.oml.RelationEntityReference
+import io.opencaesar.oml.RelationInstance
 import io.opencaesar.oml.RelationPredicate
 import io.opencaesar.oml.RelationRangeRestrictionAxiom
 import io.opencaesar.oml.Rule
@@ -60,8 +64,9 @@ import org.eclipse.sprotty.xtext.tracing.ITraceProvider
 
 import static extension io.opencaesar.oml.util.OmlRead.*
 import static extension io.opencaesar.oml.util.OmlSearch.*
-import com.google.common.collect.HashBasedTable
-import io.opencaesar.oml.Entity
+import io.opencaesar.oml.LinkAssertion
+import io.opencaesar.oml.ScalarPropertyValueAssertion
+import io.opencaesar.oml.Member
 
 class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramGenerator {
 	
@@ -111,7 +116,17 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
 		if (element !== null) {
 			element
    		} else if (!semantic2diagram.containsKey(eObject)) {
-	   		super.doSwitch(eObject)
+	   		val node = super.doSwitch(eObject)
+	   		semantic2diagram.put(eObject as Element, node)
+	   		if (node !== null) {
+    	   		if (eObject instanceof Reference) {
+    	   		    if (semantic2diagram.get(eObject.resolve) === null)
+                        frame.children += node
+    	   		} else if (!(eObject instanceof Ontology)) {
+    	   		    frame.children += node
+    	   		}
+	   		}
+	   		return node
    		} else {
    		    return null
    		}
@@ -120,7 +135,10 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
   	def SModelElement forceSwitch(EObject eObject) {
   	    if (eObject.excluded) return null
   	    
-        super.doSwitch(eObject)
+        val node = super.doSwitch(eObject)
+        if (node !== null)
+            semantic2diagram.put(eObject as Element, node)
+        return node
   	}
 	
 	override caseOntology(Ontology ontology) {
@@ -142,11 +160,9 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
                         el.setDiagramID
                     val childNode = el.doSwitch
                     if (childNode !== null && childNode instanceof OmlNode) {
-                        semantic2diagram.put(el, childNode)
-                        if (semantic2ID.get(childNode) === null)
-                            semantic2ID.put(el, childNode.id)
                         el.renderChildren(childNode)
-                        node.children += childNode
+//                        node.children += childNode
+                        el.track(childNode)
                     }
                 }
             ]
@@ -159,7 +175,6 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
         if (semantic2diagram.get(aspect) === null) {
             val node = aspect.createNode(null,null)
             node.traceAndMark(aspect)
-            semantic2diagram.put(aspect, node)
             return node
         }
 	}
@@ -168,8 +183,7 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
         val diagramID = semantic2ID.get(reference)
 	    if (isDiagramSpecifier && diagramID !== null) {
 	        val node = reference.aspect.createNode(reference, diagramID)
-	        node.traceAndMark(reference.aspect) 
-	        semantic2diagram.put(reference, node)
+	        node.traceAndMark(reference.aspect)
             return node
 	    } else {
 	        return reference.aspect.doSwitch
@@ -180,7 +194,6 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
         if (semantic2diagram.get(concept) === null) {
             val node = concept.createNode(null,null)
             node.traceAndMark(concept)
-            semantic2diagram.put(concept, node)
             return node
         }
 	}
@@ -190,12 +203,27 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
         if (isDiagramSpecifier && diagramID !== null) {
             val node = reference.concept.createNode(reference, diagramID)
             node.traceAndMark(reference.concept) 
-            semantic2diagram.put(reference, node)
             return node
         } else {
             return reference.concept.doSwitch
         }
 	}
+	
+	override caseConceptInstance(ConceptInstance ci) {
+        return ci.createNode(null, null).traceAndMark(ci)
+	}
+	
+    override caseConceptInstanceReference(ConceptInstanceReference reference) {
+        val diagramID = semantic2ID.get(reference)
+        if (isDiagramSpecifier && diagramID !== null) {
+            val node = reference.instance.createNode(reference, diagramID)
+            node.traceAndMark(reference.instance) 
+            return node
+        } else {
+            val node = reference.instance.doSwitch
+            return node
+        }
+    }
 
     // TODO: Specify multiple
 	override caseStructure(Structure structure) {
@@ -256,6 +284,19 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
 	    return property.createLabel.traceAndMark(property)
 	}
 	
+	override caseScalarPropertyValueAssertion(ScalarPropertyValueAssertion prop) {
+	    val parent = prop.eContainer
+	    val parentNode = parent.doSwitch
+	    if (parentNode !== null) {
+	        val compartment = getCompartment(parent as Member, null, parentNode)
+	        val label = prop.createLabel.traceAndMark(prop)
+	        if (label !== null)
+	           compartment.children += label
+	    }
+	    
+	    return null
+	}
+	
 	override caseStructuredProperty(StructuredProperty property) {}
 
     // TODO: This method recursively renders all imports now. Need to look into this
@@ -278,7 +319,7 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
 		
 		if (specializedNode !== null && specializingNode !== null) {
 			val edge = axiom.createEdge(specializingNode, specializedNode)
-			frame.children += edge
+//			frame.children += edge
 			edge.traceAndMark(axiom)
 			return edge
 		}
@@ -306,17 +347,69 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
             }
 	    }
 	}
+	
+	// TODO: Specify multiple
+	override caseRelationInstance(RelationInstance instance) {
+	    val shouldAddSource = semantic2diagram.get(instance.source) === null
+        var source = instance.source?.doSwitch
+//	    if (shouldAddSource && source !== null){
+//            frame.children += source
+//	    }
+	    
+	    val shouldAddTarget = semantic2diagram.get(instance.target) === null
+	    var target = instance.target?.doSwitch
+//        if (shouldAddTarget && target !== null) {
+//            frame.children += target
+//	    }
+	    
+	    if (source !== null && target !== null) {
+	        val node = instance.createNode(source, target)
+	        node.children += newEdge(source, node, node.id+'start', "edge:straight")
+	        node.children += newEdge(node, target, node.id+'.end', "edge:augments")
+	        node.traceAndMark(instance)
+	        return node
+	    }
+	}
 
+    // TODO: Specify multiple
 	override caseRelationRangeRestrictionAxiom(RelationRangeRestrictionAxiom axiom) {
 		var source = axiom.restrictingEntity?.doSwitch
 		var target = axiom.range?.doSwitch
 		
 		if (source !== null && target !== null && axiom.relation !== null) {
 			val edge = axiom.createEdge(source, target)
-			frame.children += edge
+//			frame.children += edge
 			edge.traceAndMark(axiom)
 			return edge
 		}
+		return null
+	}
+	
+	// TODO: Specify multiple
+	override caseLinkAssertion(LinkAssertion link) {
+	    var Element source = link.owningReference
+	    if (source === null)
+            source = link.owningInstance
+        val shouldAddSource = semantic2diagram.get(source) === null
+        var sourceNode = source?.doSwitch
+//        if (shouldAddSource && sourceNode !== null) {
+//            frame.children += sourceNode
+//        }
+        
+        val shouldAddTarget = semantic2diagram.get(link.target) === null
+        var targetNode = link.target?.doSwitch
+//        if (shouldAddTarget && targetNode !== null) {
+//            frame.children += targetNode
+//        }
+        
+        if (sourceNode !== null && targetNode !== null && link.relation !== null) {
+            val edge = link.createEdge(sourceNode, targetNode)
+//            frame.children += edge
+            edge.traceAndMark(link)
+            return edge
+        }
+        
+        return null
 	}
 
 //------------------- HELPERS
@@ -371,12 +464,12 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
         
         if (sourceNode === null) {
             sourceNode = ref.entity.source?.doSwitch
-            frame.children += sourceNode
+//            frame.children += sourceNode
         }
         if (targetNode === null){
             targetNode = ref.entity.target?.doSwitch
-            if (targetNode !== sourceNode)
-                frame.children += targetNode
+//            if (targetNode !== sourceNode)
+//                frame.children += targetNode
         }
         
         if (targetNode !== null && sourceNode !== null) {
@@ -385,7 +478,7 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
         }
     }
     
-    private def getCompartment(Classifier el, Reference ref, SModelElement node) {
+    private def getCompartment(Member el, Reference ref, SModelElement node) {
         var compartment = node?.propertyCompartment
         if (compartment === null) {
             compartment = ref.createPropertyCompartment ?: el.createPropertyCompartment
@@ -397,6 +490,15 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
 
     private def Iterable<FeatureProperty> getProperties(Classifier element) {
             return element.findFeaturePropertiesWithDomain
+    }
+    
+    private def track(Element element, SModelElement sElement) {
+        if (semantic2diagram.get(element) === null) {
+            semantic2diagram.put(element, sElement)
+        }
+        if (semantic2ID.get(element) === null) {
+            semantic2ID.put(element, sElement.id)
+        }
     }
 
 	private def <T extends SModelElement> T traceAndMark(T sElement, Element element) {
