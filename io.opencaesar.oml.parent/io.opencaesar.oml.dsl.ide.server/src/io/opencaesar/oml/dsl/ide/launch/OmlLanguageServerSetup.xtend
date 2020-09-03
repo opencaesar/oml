@@ -22,6 +22,7 @@ import com.google.gson.GsonBuilder
 import org.eclipse.sprotty.xtext.launch.DiagramLanguageServerSetup
 import org.eclipse.sprotty.layout.ElkLayoutEngine
 import org.eclipse.elk.alg.layered.options.LayeredMetaDataProvider
+import org.eclipse.elk.alg.graphviz.layouter.GraphvizMetaDataProvider
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.elk.core.util.persistence.ElkGraphResourceFactory
 import org.eclipse.sprotty.server.json.ActionTypeAdapter
@@ -34,6 +35,7 @@ import io.opencaesar.oml.dsl.ide.diagram.FilterAction
 class OmlLanguageServerSetup extends DiagramLanguageServerSetup {
 	override setupLanguages() {
 		ElkLayoutEngine.initialize(new LayeredMetaDataProvider)
+		ElkLayoutEngine.initialize(new GraphvizMetaDataProvider)
 		Resource.Factory.Registry.INSTANCE.extensionToFactoryMap.put('elkg', new ElkGraphResourceFactory)
 	}
 	

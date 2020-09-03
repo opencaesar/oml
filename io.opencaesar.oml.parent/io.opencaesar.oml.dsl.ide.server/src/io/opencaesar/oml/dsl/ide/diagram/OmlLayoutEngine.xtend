@@ -24,6 +24,8 @@ import org.eclipse.sprotty.layout.ElkLayoutEngine
 import org.eclipse.sprotty.layout.SprottyLayoutConfigurator
 import java.io.ByteArrayOutputStream
 import org.apache.log4j.Logger
+import org.eclipse.elk.alg.graphviz.layouter.GraphvizLayoutProvider
+//import org.eclipse.elk.alg.layered.LayeredLayoutProvider
 import org.eclipse.elk.alg.layered.options.LayeredOptions
 import org.eclipse.elk.core.math.ElkPadding
 import org.eclipse.elk.core.options.CoreOptions
@@ -31,6 +33,8 @@ import org.eclipse.elk.core.options.Direction
 import org.eclipse.elk.graph.ElkNode
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
+import org.eclipse.elk.alg.graphviz.dot.transform.Command
+import org.eclipse.elk.core.options.HierarchyHandling
 
 class OmlLayoutEngine extends ElkLayoutEngine {
 	
@@ -40,21 +44,27 @@ class OmlLayoutEngine extends ElkLayoutEngine {
 		if (root instanceof SGraph) {
 			val configurator = new SprottyLayoutConfigurator
 			configurator.configureByType('graph')
+//                .setProperty(CoreOptions.ALGORITHM, "org.eclipse.elk.alg.graphviz.dot")
 				.setProperty(CoreOptions.DIRECTION, Direction.UP)
-				.setProperty(CoreOptions.SPACING_NODE_NODE, 30.0)
-				.setProperty(LayeredOptions.SPACING_EDGE_NODE_BETWEEN_LAYERS, 30.0)
-				// TODO: enable when ELK is fixed:
-				// https://github.com/eclipse/elk/issues/226
 //				.setProperty(CoreOptions.HIERARCHY_HANDLING, HierarchyHandling.INCLUDE_CHILDREN)
-//				.setProperty(LayeredOptions.CROSSING_MINIMIZATION_GREEDY_SWITCH_TYPE, GreedySwitchType.OFF)
+//				.setProperty(CoreOptions.SPACING_NODE_NODE, 30.0)
+//				.setProperty(LayeredOptions.SPACING_EDGE_NODE_BETWEEN_LAYERS, 30.0)
+////				 TODO: enable when ELK is fixed:
+////				 https://github.com/eclipse/elk/issues/226
+////				.setProperty(CoreOptions.HIERARCHY_HANDLING, HierarchyHandling.INCLUDE_CHILDREN)
+////				.setProperty(LayeredOptions.CROSSING_MINIMIZATION_GREEDY_SWITCH_TYPE, GreedySwitchType.OFF)
 			configurator.configureByType('node:module')
+//                .setProperty(CoreOptions.ALGORITHM, "org.eclipse.elk.alg.graphviz.dot")
 				.setProperty(CoreOptions.DIRECTION, Direction.UP)
-				.setProperty(CoreOptions.SPACING_NODE_NODE, 100.0)
-				.setProperty(CoreOptions.SPACING_EDGE_NODE, 30.0)
-				.setProperty(CoreOptions.SPACING_EDGE_EDGE, 15.0)
-				.setProperty(LayeredOptions.SPACING_EDGE_NODE_BETWEEN_LAYERS, 30.0)
-				.setProperty(LayeredOptions.SPACING_NODE_NODE_BETWEEN_LAYERS, 100.0)
+//				.setProperty(CoreOptions.HIERARCHY_HANDLING, HierarchyHandling.INCLUDE_CHILDREN)
+//				.setProperty(CoreOptions.SPACING_NODE_NODE, 100.0)
+//				.setProperty(CoreOptions.SPACING_EDGE_NODE, 30.0)
+//				.setProperty(CoreOptions.SPACING_EDGE_EDGE, 15.0)
+//				.setProperty(LayeredOptions.SPACING_EDGE_NODE_BETWEEN_LAYERS, 30.0)
+//				.setProperty(LayeredOptions.SPACING_NODE_NODE_BETWEEN_LAYERS, 100.0)
 				.setProperty(CoreOptions.PADDING, new ElkPadding(50))
+			engine = new GraphvizLayoutProvider()
+			(engine as GraphvizLayoutProvider).initialize("DOT")
 			layout(root, configurator)
 		}
 	}
