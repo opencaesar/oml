@@ -67,6 +67,10 @@ import static extension io.opencaesar.oml.util.OmlSearch.*
 import io.opencaesar.oml.LinkAssertion
 import io.opencaesar.oml.ScalarPropertyValueAssertion
 import io.opencaesar.oml.Member
+import java.util.Queue
+import java.util.LinkedList
+import io.opencaesar.oml.SpecializableTerm
+import java.util.HashSet
 
 class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramGenerator {
 	
@@ -413,6 +417,39 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
 	}
 
 //------------------- HELPERS
+
+	private def renderRelated(EObject eObject, Void elementList) {
+		val relatedElement = eObject.getDiagramProperty('relateTo')
+		if (relatedElement === null) return;
+		val explored = new HashSet()
+		val elQueue = new LinkedList()
+		val renderQueue = new LinkedList()
+		renderRelated(eObject, elQueue, renderQueue, explored)
+		
+//		renderRelated(eObject, new LinkedList<EObject>(), new LinkedList<EObject>())
+		
+		
+	}
+
+	private def renderRelated(EObject eObject, Queue<EObject> elQueue, Queue<EObject> renderQueue, HashSet<EObject> explored) {
+		val relatedElement = eObject.getDiagramProperty('relateTo')
+		
+		val nextEl = elQueue.remove
+		
+		if (eObject instanceof SpecializableTerm)
+			elQueue += eObject.specializedTerms
+		
+		
+		if (relatedElement === null || elQueue.isEmpty) return;
+	}
+	
+	private def getLinks(EObject eObject) {
+		var links = new LinkedList<EObject>()
+		if (eObject instanceof SpecializableTerm)
+			links += eObject.specializedTerms
+		if (eObject instanceof Entity)
+			links += eObject.findRelationsWithSource
+	}
 
     private def renderChildren(EObject eObject, SModelElement node) {
         if (node.children !== null) {

@@ -16,6 +16,7 @@ import static extension io.opencaesar.oml.util.OmlRead.*
 import static extension io.opencaesar.oml.util.OmlSearch.*
 import io.opencaesar.oml.QuotedLiteral
 import io.opencaesar.oml.Element
+import io.opencaesar.oml.Member
 
 class OmlDiagramSpecifier {
     
@@ -168,6 +169,14 @@ class OmlDiagramSpecifier {
         if (id !== null) {
             semantic2ID.put(eObject, getLocalName(eObject as Element) + '-' + id)
         }
+    }
+    
+    def matchesURI(String URI, EObject eObject) {
+    	if (URI == (eObject as Element).localName) return true
+    	if (URI == (eObject as Member).name) return true
+    	if (URI == (eObject as Member).iri) return true
+    	if (URI == (eObject as Member).abbreviatedIri) return true
+    	return false
     }
     
 //------------------- HELPERS
