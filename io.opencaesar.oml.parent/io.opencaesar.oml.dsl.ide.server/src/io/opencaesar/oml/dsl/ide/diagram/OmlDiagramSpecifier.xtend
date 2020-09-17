@@ -17,11 +17,18 @@ import static extension io.opencaesar.oml.util.OmlSearch.*
 import io.opencaesar.oml.QuotedLiteral
 import io.opencaesar.oml.Element
 import io.opencaesar.oml.Member
+import io.opencaesar.oml.IntegerLiteral
 
 class OmlDiagramSpecifier {
     
     val Ontology ontology
-    val String diagramIRI = "http://imce.jpl.nasa.gov/foundation/diagram"
+    public static val String diagramIRI = "http://imce.jpl.nasa.gov/foundation/diagram"
+    public static val String SHORTEST_PATH = 'shortestPath'
+    public static val String SHORTEST_PATH_HOPS = 'shortestPathHops'
+    public static val String RELATE_TO = 'relateTo'
+    public static val String RELATE_TO_HOPS = 'relateToHops'
+    public static val String HIERARCHY = 'hierarchy'
+    public static val String HIERARCHY_HOPS = 'hierarchyHops'
     
     public var isDiagramSpecifier = false
     public var Map<EObject, Iterable<Annotation>> semantic2diagramAnnotations
@@ -85,7 +92,7 @@ class OmlDiagramSpecifier {
         if (diagramAnnotations !== null) {
             included = diagramAnnotations.exists[a|
                 if (a.property.name == 'include') {
-                    return a.quotedValue == 'properties'
+                    return a.findQuotedValue == 'properties'
                 }
                 return false
             ]
@@ -99,7 +106,7 @@ class OmlDiagramSpecifier {
         if (diagramAnnotations !== null) {
             excluded = diagramAnnotations.exists[a|
                 if (a.property.name == 'exclude') {
-                    return a.quotedValue == 'compartment'
+                    return a.findQuotedValue == 'compartment'
                 }
                 return false
             ]
@@ -131,7 +138,13 @@ class OmlDiagramSpecifier {
         return annotations
     }
     
-    def String getDiagramProperty(EObject eObject, String property) {
+    def containsDiagramAnnotation(EObject eObject, String annotation) {
+    	eObject.diagramAnnotations?.exists[a|
+    		a.property.name == annotation
+    	]
+    }
+    
+    def String getDiagramStringProperty(EObject eObject, String property) {
         if (property === null) return null
         
         val diagramAnnotations = eObject.diagramAnnotations
@@ -141,8 +154,25 @@ class OmlDiagramSpecifier {
                 if (a.property.name == property &&
                         (a.owningReference == eObject || a.owningElement == eObject)
                 ) {
-                    return a.quotedValue
+                    return a.findQuotedValue
                 }
+            ].findFirst[v|v !== null]
+        }
+        return value
+    }
+    
+    def Integer getDiagramIntProperty(EObject eObject, String property) {
+        if (property === null) return null;
+        
+        val diagramAnnotations = eObject.diagramAnnotations
+        var Integer value = null
+        if (diagramAnnotations !== null) {
+            value = diagramAnnotations.map[a|
+                if (a.property.name == property &&
+                        (a.owningReference == eObject || a.owningElement == eObject)
+                ) {
+                    return a.findIntValue
+                } else return null;
             ].findFirst[v|v !== null]
         }
         return value
@@ -157,7 +187,7 @@ class OmlDiagramSpecifier {
     }
     
     def getDiagramID(EObject eObject) {
-        val specifierID = eObject.getDiagramProperty('id')
+        val specifierID = eObject.getDiagramStringProperty('id')
         if (specifierID !== null) {
             val name = getLocalName(eObject as Element)
             return name + '-' + specifierID
@@ -165,7 +195,7 @@ class OmlDiagramSpecifier {
     }
     
     def setDiagramID(EObject eObject) {
-        val id = eObject.getDiagramProperty('id')
+        val id = eObject.getDiagramStringProperty('id')
         if (id !== null) {
             semantic2ID.put(eObject, getLocalName(eObject as Element) + '-' + id)
         }
@@ -195,7 +225,7 @@ class OmlDiagramSpecifier {
         if (diagramAnnotations !== null) {
             excluded = diagramAnnotations.exists[a|
                 if (a.property.name == 'exclude') {
-                    return a.quotedValue == 'aspects'
+                    return a.findQuotedValue == 'aspects'
                 }
                 return false
             ]
@@ -209,7 +239,7 @@ class OmlDiagramSpecifier {
         if (diagramAnnotations !== null) {
             excluded = diagramAnnotations.exists[a|
                 if (a.property.name == 'exclude') {
-                    return a.quotedValue == 'concepts'
+                    return a.findQuotedValue == 'concepts'
                 }
                 return false
             ]
@@ -217,11 +247,18 @@ class OmlDiagramSpecifier {
         return !excluded
     }
     
-    private def getQuotedValue(Annotation annotation) {
+    private def findQuotedValue(Annotation annotation) {
         val lit = annotation.value
         if (lit instanceof QuotedLiteral) {
             return lit.value
         }
+    }
+    
+    private def findIntValue(Annotation annotation) {
+    	val lit = annotation.value
+    	if (lit instanceof IntegerLiteral) {
+    		return lit.value
+    	}
     }
     
 }

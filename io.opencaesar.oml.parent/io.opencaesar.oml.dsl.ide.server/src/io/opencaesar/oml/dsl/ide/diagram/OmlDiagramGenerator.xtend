@@ -68,9 +68,10 @@ import io.opencaesar.oml.LinkAssertion
 import io.opencaesar.oml.ScalarPropertyValueAssertion
 import io.opencaesar.oml.Member
 import java.util.Queue
-import java.util.LinkedList
 import io.opencaesar.oml.SpecializableTerm
 import java.util.HashSet
+import java.util.Deque
+import java.util.ArrayDeque
 
 class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramGenerator {
 	
@@ -108,7 +109,7 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
 
 	private def getContentsToVisualize(Ontology ontology) {
 		val fQuery = context.state.options.get("filterAction")
-		if (fQuery !== null) {
+		if (fQuery !== null && fQuery.length > 0) {
 			ontology.statements.filter[getLocalName(ontology) == fQuery].iterator
 		} else {
 			ontology.eAllContents.filter(Element)
@@ -130,6 +131,9 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
     	   		    frame.children += node
     	   		}
 	   		}
+	   		eObject.renderShortestPath
+	   		eObject.renderHierarchy
+	   		eObject.renderRelated
 	   		return node
    		} else {
    		    return null
@@ -165,7 +169,6 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
                     val childNode = el.doSwitch
                     if (childNode !== null && childNode instanceof OmlNode) {
                         el.renderChildren(childNode)
-//                        node.children += childNode
                         el.track(childNode)
                     }
                 }
@@ -292,7 +295,7 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
 	    val parent = prop.eContainer
 	    val parentNode = parent.doSwitch
 	    if (parentNode !== null) {
-	        val compartment = getCompartment(parent as Member, null, parentNode)
+	        val compartment = findCompartment(parent as Member, null, parentNode)
 	        val label = prop.createLabel.traceAndMark(prop)
 	        if (label !== null)
 	           compartment.children += label
@@ -394,7 +397,6 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
 	    var Element source = link.owningReference
 	    if (source === null)
             source = link.owningInstance
-        val shouldAddSource = semantic2diagram.get(source) === null
         var sourceNode = source?.doSwitch
 //        if (shouldAddSource && sourceNode !== null) {
 //            frame.children += sourceNode
@@ -418,37 +420,168 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
 
 //------------------- HELPERS
 
-	private def renderRelated(EObject eObject, Void elementList) {
-		val relatedElement = eObject.getDiagramProperty('relateTo')
+	private def renderShortestPath(EObject eObject) {
+		val relatedElement = eObject.getDiagramStringProperty(OmlDiagramSpecifier.SHORTEST_PATH)
 		if (relatedElement === null) return;
+		
+		val Integer hops = eObject.getDiagramIntProperty(OmlDiagramSpecifier.SHORTEST_PATH_HOPS)
+		val Queue<Deque<EObject>> paths = new ArrayDeque()
+		val firstPath = new ArrayDeque
+		val start = eObject instanceof Reference ? eObject.resolve : eObject
+		firstPath.add(start)
+		paths.add(firstPath)
 		val explored = new HashSet()
-		val elQueue = new LinkedList()
-		val renderQueue = new LinkedList()
-		renderRelated(eObject, elQueue, renderQueue, explored)
 		
-//		renderRelated(eObject, new LinkedList<EObject>(), new LinkedList<EObject>())
-		
-		
-	}
-
-	private def renderRelated(EObject eObject, Queue<EObject> elQueue, Queue<EObject> renderQueue, HashSet<EObject> explored) {
-		val relatedElement = eObject.getDiagramProperty('relateTo')
-		
-		val nextEl = elQueue.remove
-		
-		if (eObject instanceof SpecializableTerm)
-			elQueue += eObject.specializedTerms
-		
-		
-		if (relatedElement === null || elQueue.isEmpty) return;
+		while (!paths.empty) {
+			val next = paths.remove
+			
+			if (hops === null || next.size / 2 <= hops) {
+				val iterator = next.descendingIterator
+				var node = iterator.next
+				if (node instanceof SpecializationAxiom) {
+					next.add(node.specializedTerm)
+					node = next.last
+				} else if (node instanceof RelationEntity) {
+					val prevNode = iterator.next
+					if (node.source == prevNode) {
+						next.add(node.target)
+						node = node.target
+					} else if ((node as RelationEntity).target == prevNode) {
+						next.add ((node as RelationEntity).source)
+						node = (node as RelationEntity).source
+					}
+				}
+				
+				if (!explored.contains(node)) {
+					if (relatedElement.matchesURI(node)) {
+						paths.clear
+						renderPath(next)
+					} else {
+						explored.add(node)
+						node.findLinks.forEach[l|
+							val newPath = new ArrayDeque<EObject>(next)
+							newPath.addLast(l)
+							paths.add(newPath)
+						]
+					}
+				}
+			}
+		}
 	}
 	
-	private def getLinks(EObject eObject) {
-		var links = new LinkedList<EObject>()
-		if (eObject instanceof SpecializableTerm)
-			links += eObject.specializedTerms
-		if (eObject instanceof Entity)
-			links += eObject.findRelationsWithSource
+	private def renderRelated(EObject eObject) {
+		val relatedElement = eObject.getDiagramStringProperty(OmlDiagramSpecifier.RELATE_TO)
+		if (relatedElement === null) return;
+		
+		val Integer hops = eObject.getDiagramIntProperty(OmlDiagramSpecifier.RELATE_TO_HOPS)
+		val Queue<Deque<EObject>> paths = new ArrayDeque
+		val firstPath = new ArrayDeque
+		val start = eObject instanceof Reference ? eObject.resolve : eObject
+		firstPath.add(start)
+		paths.add(firstPath)
+		val explored = new HashSet
+		val pathsToRender = new ArrayDeque
+		
+		while (!paths.empty) {
+			val next = paths.remove
+			val currentHops = next.size / 2
+			if (hops === null || currentHops <= hops) {
+				val iterator = next.descendingIterator
+				var node = iterator.next
+				if (next.length > 1) {
+					if (node instanceof SpecializationAxiom) {
+						val prevNode = iterator.next
+						if (node.specializedTerm == prevNode) {
+							next.add(node.specializingTerm)
+							node = node.specializingTerm
+						} else {
+							val specializedTerm = (node as SpecializationAxiom).specializedTerm
+							next.add(specializedTerm)
+							node = specializedTerm
+						}
+					} else if (node instanceof RelationEntity) {
+						val prevNode = iterator.next
+						if (node.source == prevNode) {
+							next.add(node.target)
+							node = node.target
+						} else if ((node as RelationEntity).target == prevNode) {
+							next.add ((node as RelationEntity).source)
+							node = (node as RelationEntity).source
+						}
+					}
+				}
+				
+				if (!explored.contains(node)) {
+					if (relatedElement.matchesURI(node)) {
+						pathsToRender.add(next)
+					} else {
+						explored.add(node)
+						node.findLinks.forEach[l|
+							val newPath = new ArrayDeque<EObject>(next)
+							newPath.addLast(l)
+							paths.add(newPath)
+						]
+					}
+				}
+			}
+		}
+		
+		val renderList = new HashSet
+		pathsToRender.forEach[p|
+			p.forEach[el|
+				renderList.add(el)
+			]
+		]
+		renderPath(renderList)
+	}
+	
+	private def renderHierarchy(EObject eObject) {
+		if (!eObject.containsDiagramAnnotation(OmlDiagramSpecifier.HIERARCHY)) return;
+		
+		val Integer hops = eObject.getDiagramIntProperty(OmlDiagramSpecifier.HIERARCHY_HOPS)
+		val Queue<Deque<EObject>> paths = new ArrayDeque
+		val firstPath = new ArrayDeque<EObject>
+		val start = eObject instanceof Reference ? eObject.resolve : eObject
+		firstPath.add(start)
+		paths.add(firstPath)
+		val elementsToRender = new HashSet
+		
+		do {
+			val next = paths.remove
+			val iterator = next.descendingIterator
+			var node = iterator.next
+			val currentHops = next.size / 2
+			val branches = (node as Classifier).findSpecializationsWithSource
+			if (!branches.empty && (hops === null || currentHops <= hops)) {
+				branches.forEach[b|
+					val newPath = new ArrayDeque<EObject>(next)
+					newPath.addLast(b)
+					newPath.addLast(b.specializedTerm)
+					paths.add(newPath)
+				]
+			} else {
+				next.forEach[el| elementsToRender.add(el)]
+			}
+		} while (!paths.empty)
+		
+		renderPath(elementsToRender)
+	}
+	
+	private def renderPath(Iterable<EObject> path) {
+		path.forEach[doSwitch]
+	}
+	
+	private def Iterable<EObject> findLinks(EObject eObject) {
+		var links = new HashSet<EObject>
+		if (eObject instanceof Classifier) {
+			links += eObject.findSpecializationsWithSource
+			links += eObject.findSpecializationsWithTarget
+		}
+		if (eObject instanceof Entity) {
+			links += eObject.findRelationEntitiesWithSource
+			links += eObject.findRelationEntitiesWithTarget
+		}
+		return links
 	}
 
     private def renderChildren(EObject eObject, SModelElement node) {
@@ -476,7 +609,7 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
         val properties = el.properties
         if (!properties.empty) {
             if (!isDiagramSpecifier || obj.includesProperties && obj.includesCompartment) {
-                val compartment = el.getCompartment(ref, parent)
+                val compartment = el.findCompartment(ref, parent)
                 el.properties.forEach[renderProperty(compartment, diagramID)]
             }
         }
@@ -493,8 +626,8 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
     }
     
     private def renderRelationEdges(RelationEntityReference ref, SModelElement parent) {
-        val source = ref.entity.source.resolveSpecifierID(ref.getDiagramProperty('source'))
-        val target = ref.entity.target.resolveSpecifierID(ref.getDiagramProperty('target'))
+        val source = ref.entity.source.resolveSpecifierID(ref.getDiagramStringProperty('source'))
+        val target = ref.entity.target.resolveSpecifierID(ref.getDiagramStringProperty('target'))
         
         var sourceNode = semantic2diagram.get(source)
         var targetNode = semantic2diagram.get(target)
@@ -515,7 +648,7 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
         }
     }
     
-    private def getCompartment(Member el, Reference ref, SModelElement node) {
+    private def findCompartment(Member el, Reference ref, SModelElement node) {
         var compartment = node?.propertyCompartment
         if (compartment === null) {
             compartment = ref.createPropertyCompartment ?: el.createPropertyCompartment

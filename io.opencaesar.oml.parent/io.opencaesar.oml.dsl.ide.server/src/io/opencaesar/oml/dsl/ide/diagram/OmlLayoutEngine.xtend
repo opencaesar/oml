@@ -47,8 +47,8 @@ class OmlLayoutEngine extends ElkLayoutEngine {
 //                .setProperty(CoreOptions.ALGORITHM, "org.eclipse.elk.alg.graphviz.dot")
 				.setProperty(CoreOptions.DIRECTION, Direction.UP)
 				.setProperty(CoreOptions.HIERARCHY_HANDLING, HierarchyHandling.INCLUDE_CHILDREN)
-//				.setProperty(CoreOptions.SPACING_NODE_NODE, 30.0)
-//				.setProperty(LayeredOptions.SPACING_EDGE_NODE_BETWEEN_LAYERS, 30.0)
+				.setProperty(CoreOptions.SPACING_NODE_NODE, 30.0)
+				.setProperty(LayeredOptions.SPACING_EDGE_NODE_BETWEEN_LAYERS, 30.0)
 ////				 TODO: enable when ELK is fixed:
 ////				 https://github.com/eclipse/elk/issues/226
 ////				.setProperty(CoreOptions.HIERARCHY_HANDLING, HierarchyHandling.INCLUDE_CHILDREN)
@@ -57,19 +57,19 @@ class OmlLayoutEngine extends ElkLayoutEngine {
 //                .setProperty(CoreOptions.ALGORITHM, "org.eclipse.elk.alg.graphviz.dot")
 				.setProperty(CoreOptions.DIRECTION, Direction.UP)
 				.setProperty(CoreOptions.HIERARCHY_HANDLING, HierarchyHandling.INCLUDE_CHILDREN)
-//				.setProperty(CoreOptions.SPACING_NODE_NODE, 100.0)
-//				.setProperty(CoreOptions.SPACING_EDGE_NODE, 30.0)
-//				.setProperty(CoreOptions.SPACING_EDGE_EDGE, 15.0)
-//				.setProperty(LayeredOptions.SPACING_EDGE_NODE_BETWEEN_LAYERS, 30.0)
-//				.setProperty(LayeredOptions.SPACING_NODE_NODE_BETWEEN_LAYERS, 100.0)
+				.setProperty(CoreOptions.SPACING_NODE_NODE, 100.0)
+				.setProperty(CoreOptions.SPACING_EDGE_NODE, 30.0)
+				.setProperty(CoreOptions.SPACING_EDGE_EDGE, 15.0)
+				.setProperty(LayeredOptions.SPACING_EDGE_NODE_BETWEEN_LAYERS, 30.0)
+				.setProperty(LayeredOptions.SPACING_NODE_NODE_BETWEEN_LAYERS, 100.0)
 				.setProperty(CoreOptions.PADDING, new ElkPadding(50))
-			configurator.configureByType('label:restricts')
-                .setProperty(CoreOptions.FONT_SIZE, 12)
-            configurator.configureByType('label:relationship')
-                .setProperty(CoreOptions.FONT_SIZE, 12)
-			
-			engine = new GraphvizLayoutProvider()
-			(engine as GraphvizLayoutProvider).initialize("DOT")
+//			configurator.configureByType('label:restricts')
+//                .setProperty(CoreOptions.FONT_SIZE, 12)
+//            configurator.configureByType('label:relationship')
+//                .setProperty(CoreOptions.FONT_SIZE, 12)
+//			
+//			engine = new GraphvizLayoutProvider()
+//			(engine as GraphvizLayoutProvider).initialize("DOT")
 			layout(root, configurator)
 		}
 	}
