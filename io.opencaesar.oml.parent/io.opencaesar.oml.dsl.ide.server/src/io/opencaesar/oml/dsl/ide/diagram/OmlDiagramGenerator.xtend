@@ -473,6 +473,7 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
 		val relatedElement = eObject.getDiagramStringProperty(OmlDiagramSpecifier.RELATE_TO)
 		if (relatedElement === null) return;
 		
+		val MAX_HOPS = 1000
 		val Integer hops = eObject.getDiagramIntProperty(OmlDiagramSpecifier.RELATE_TO_HOPS)
 		val Queue<Deque<EObject>> paths = new ArrayDeque
 		val firstPath = new ArrayDeque
@@ -485,7 +486,7 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
 		while (!paths.empty) {
 			val next = paths.remove
 			val currentHops = next.size / 2
-			if (hops === null || currentHops <= hops) {
+			if (hops === null || currentHops <= hops && currentHops <= MAX_HOPS) {
 				val iterator = next.descendingIterator
 				var node = iterator.next
 				if (next.length > 1) {
@@ -511,17 +512,17 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
 					}
 				}
 				
-				if (!explored.contains(node)) {
-					if (relatedElement.matchesURI(node)) {
-						pathsToRender.add(next)
-					} else {
-						explored.add(node)
-						node.findLinks.forEach[l|
+				if (relatedElement.matchesURI(node)) {
+					pathsToRender.add(next)
+				} else {
+					explored.add(node)
+					node.findLinks.forEach[l|
+						if (!next.contains(l)) {
 							val newPath = new ArrayDeque<EObject>(next)
 							newPath.addLast(l)
 							paths.add(newPath)
-						]
-					}
+						}
+					]
 				}
 			}
 		}
