@@ -18,6 +18,7 @@ import io.opencaesar.oml.QuotedLiteral
 import io.opencaesar.oml.Element
 import io.opencaesar.oml.Member
 import io.opencaesar.oml.IntegerLiteral
+import java.util.ArrayList
 
 class OmlDiagramSpecifier {
     
@@ -138,8 +139,28 @@ class OmlDiagramSpecifier {
         return annotations
     }
     
+    def Iterable<Annotation> getDirectDiagramAnnotations(EObject eObject) {
+    	var Iterable<Annotation> annotations = new ArrayList
+    	if (eObject instanceof AnnotatedElement) {
+    		annotations = eObject.ownedAnnotations.filter[a|
+    			a.property.eContainer.diagramImport
+    		]
+    	} else if (eObject instanceof Reference) {
+    		annotations = eObject.ownedAnnotations.filter[a|
+    			a.property.eContainer.diagramImport
+    		]
+    	}
+    	return annotations
+    }
+    
     def containsDiagramAnnotation(EObject eObject, String annotation) {
     	eObject.diagramAnnotations?.exists[a|
+    		a.property.name == annotation
+    	]
+    }
+    
+    def containsDirectDiagramAnnotation(EObject eObject, String annotation) {
+    	eObject.directDiagramAnnotations?.exists[a|
     		a.property.name == annotation
     	]
     }
@@ -148,6 +169,23 @@ class OmlDiagramSpecifier {
         if (property === null) return null
         
         val diagramAnnotations = eObject.diagramAnnotations
+        var String value = null
+        if (diagramAnnotations !== null) {
+            value = diagramAnnotations.map[a|
+                if (a.property.name == property &&
+                        (a.owningReference == eObject || a.owningElement == eObject)
+                ) {
+                    return a.findQuotedValue
+                }
+            ].findFirst[v|v !== null]
+        }
+        return value
+    }
+    
+    def String getDirectDiagramStringProperty(EObject eObject, String property) {
+        if (property === null) return null
+        
+        val diagramAnnotations = eObject.directDiagramAnnotations
         var String value = null
         if (diagramAnnotations !== null) {
             value = diagramAnnotations.map[a|

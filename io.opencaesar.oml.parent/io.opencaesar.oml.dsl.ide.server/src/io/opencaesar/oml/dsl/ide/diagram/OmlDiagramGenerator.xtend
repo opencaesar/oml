@@ -537,9 +537,10 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
 	}
 	
 	private def renderHierarchy(EObject eObject) {
-		if (!eObject.containsDiagramAnnotation(OmlDiagramSpecifier.HIERARCHY)) return;
+		if (!eObject.containsDirectDiagramAnnotation(OmlDiagramSpecifier.HIERARCHY)) return;
 		
 		val Integer hops = eObject.getDiagramIntProperty(OmlDiagramSpecifier.HIERARCHY_HOPS)
+		val direction = eObject.getDirectDiagramStringProperty(OmlDiagramSpecifier.HIERARCHY) ?: 'generalization'
 		val Queue<Deque<EObject>> paths = new ArrayDeque
 		val firstPath = new ArrayDeque<EObject>
 		val start = eObject instanceof Reference ? eObject.resolve : eObject
@@ -552,12 +553,21 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
 			val iterator = next.descendingIterator
 			var node = iterator.next
 			val currentHops = next.size / 2
-			val branches = (node as Classifier).findSpecializationsWithSource
-			if (!branches.empty && (hops === null || currentHops <= hops)) {
+			var Iterable<SpecializationAxiom> branches
+			if (direction == 'generalization') {
+				branches = (node as Classifier).findSpecializationsWithSource
+			} else if (direction == 'specialization') {
+				branches = (node as Classifier).findSpecializationsWithTarget
+			}
+			if (branches !== null && !branches.empty && (hops === null || currentHops <= hops)) {
 				branches.forEach[b|
 					val newPath = new ArrayDeque<EObject>(next)
 					newPath.addLast(b)
-					newPath.addLast(b.specializedTerm)
+					if (direction == 'generalization') {
+						newPath.addLast(b.specializedTerm)
+					} else if (direction == 'specialization') {
+						newPath.addLast(b.specializingTerm)
+					}
 					paths.add(newPath)
 				]
 			} else {
