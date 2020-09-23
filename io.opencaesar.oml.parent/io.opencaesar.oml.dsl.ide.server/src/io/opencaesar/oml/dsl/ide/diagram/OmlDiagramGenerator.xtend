@@ -326,7 +326,6 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
 		
 		if (specializedNode !== null && specializingNode !== null) {
 			val edge = axiom.createEdge(specializingNode, specializedNode)
-//			frame.children += edge
 			edge.traceAndMark(axiom)
 			return edge
 		}
@@ -359,15 +358,9 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
 	override caseRelationInstance(RelationInstance instance) {
 	    val shouldAddSource = semantic2diagram.get(instance.source) === null
         var source = instance.source?.doSwitch
-//	    if (shouldAddSource && source !== null){
-//            frame.children += source
-//	    }
 	    
 	    val shouldAddTarget = semantic2diagram.get(instance.target) === null
 	    var target = instance.target?.doSwitch
-//        if (shouldAddTarget && target !== null) {
-//            frame.children += target
-//	    }
 	    
 	    if (source !== null && target !== null) {
 	        val node = instance.createNode(source, target)
@@ -385,7 +378,6 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
 		
 		if (source !== null && target !== null && axiom.relation !== null) {
 			val edge = axiom.createEdge(source, target)
-//			frame.children += edge
 			edge.traceAndMark(axiom)
 			return edge
 		}
@@ -398,19 +390,12 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
 	    if (source === null)
             source = link.owningInstance
         var sourceNode = source?.doSwitch
-//        if (shouldAddSource && sourceNode !== null) {
-//            frame.children += sourceNode
-//        }
         
         val shouldAddTarget = semantic2diagram.get(link.target) === null
         var targetNode = link.target?.doSwitch
-//        if (shouldAddTarget && targetNode !== null) {
-//            frame.children += targetNode
-//        }
         
         if (sourceNode !== null && targetNode !== null && link.relation !== null) {
             val edge = link.createEdge(sourceNode, targetNode)
-//            frame.children += edge
             edge.traceAndMark(link)
             return edge
         }
@@ -420,6 +405,7 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
 
 //------------------- HELPERS
 
+	// TODO: There should be a way to refactor the following three functions to move them into the OmlDiagramSpecifier class
 	private def renderShortestPath(EObject eObject) {
 		val relatedElement = eObject.getDiagramStringProperty(OmlDiagramSpecifier.SHORTEST_PATH)
 		if (relatedElement === null) return;
@@ -645,12 +631,9 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
         
         if (sourceNode === null) {
             sourceNode = ref.entity.source?.doSwitch
-//            frame.children += sourceNode
         }
-        if (targetNode === null){
+        if (targetNode === null) {
             targetNode = ref.entity.target?.doSwitch
-//            if (targetNode !== sourceNode)
-//                frame.children += targetNode
         }
         
         if (targetNode !== null && sourceNode !== null) {
