@@ -23,3 +23,5 @@ Clone the oml-theia repository and `cd` into the inner `oml-theia` folder. Build
 To run the electron application, you need to rebuild it with `yarn rebuild:electron` first.
 
 Now you can run `yarn start:electron-socket-server` to run the ide.
+
+View the `package.json` file to view all the scripts that are available to run.
