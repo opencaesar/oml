@@ -73,6 +73,9 @@ import java.util.HashSet
 import java.util.Deque
 import java.util.ArrayDeque
 
+/**
+ * Creates Sproty diagram elements.
+ */
 class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramGenerator {
 	
 	static val LOG = Logger.getLogger(OmlDiagramGenerator)
@@ -405,6 +408,9 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
 
 //------------------- HELPERS
 
+	/**
+	 * Handles diagram:shortestPath, diagram:shortestPathHops
+	 */
 	// TODO: There should be a way to refactor the following three functions to move them into the OmlDiagramSpecifier class
 	private def renderShortestPath(EObject eObject) {
 		val relatedElement = eObject.getDiagramStringProperty(OmlDiagramSpecifier.SHORTEST_PATH)
@@ -455,6 +461,9 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
 		}
 	}
 	
+	/**
+	 * Handles diagram:relateTo, diagram:relateToHops
+	 */
 	private def renderRelated(EObject eObject) {
 		val relatedElement = eObject.getDiagramStringProperty(OmlDiagramSpecifier.RELATE_TO)
 		if (relatedElement === null) return;
@@ -522,6 +531,9 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
 		renderPath(renderList)
 	}
 	
+	/**
+	 * Handles diagram:hierarchy and diagram:hierarchyHops
+	 */
 	private def renderHierarchy(EObject eObject) {
 		if (!eObject.containsDirectDiagramAnnotation(OmlDiagramSpecifier.HIERARCHY)) return;
 		
