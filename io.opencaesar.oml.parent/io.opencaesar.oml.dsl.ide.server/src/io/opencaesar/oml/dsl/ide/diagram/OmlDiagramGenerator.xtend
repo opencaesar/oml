@@ -562,11 +562,18 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
 					val newPath = new ArrayDeque<EObject>(next)
 					newPath.addLast(b)
 					if (direction == 'generalization') {
-						newPath.addLast(b.specializedTerm)
+						var target = b.specializedTerm
+						if (!target.excluded) {
+							newPath.addLast(target)
+							paths.add(newPath)
+						}
 					} else if (direction == 'specialization') {
-						newPath.addLast(b.specializingTerm)
+						var target = b.specializingTerm
+						if (!target.excluded) {
+							newPath.addLast(target)
+							paths.add(newPath)
+						}
 					}
-					paths.add(newPath)
 				]
 			} else {
 				next.forEach[el| elementsToRender.add(el)]
