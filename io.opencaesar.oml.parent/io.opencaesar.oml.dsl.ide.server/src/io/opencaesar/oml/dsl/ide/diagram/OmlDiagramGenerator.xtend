@@ -444,7 +444,7 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
 					}
 				}
 				
-				if (!explored.contains(node)) {
+				if (!node.excluded && !explored.contains(node)) {
 					if (relatedElement.matchesURI(node)) {
 						paths.clear
 						renderPath(next)
@@ -506,18 +506,19 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
 						}
 					}
 				}
-				
-				if (relatedElement.matchesURI(node)) {
-					pathsToRender.add(next)
-				} else {
-					explored.add(node)
-					node.findLinks.forEach[l|
-						if (!next.contains(l)) {
-							val newPath = new ArrayDeque<EObject>(next)
-							newPath.addLast(l)
-							paths.add(newPath)
-						}
-					]
+				if (!node.excluded) {
+					if (relatedElement.matchesURI(node)) {
+						pathsToRender.add(next)
+					} else {
+						explored.add(node)
+						node.findLinks.forEach[l|
+							if (!next.contains(l)) {
+								val newPath = new ArrayDeque<EObject>(next)
+								newPath.addLast(l)
+								paths.add(newPath)
+							}
+						]
+					}
 				}
 			}
 		}
