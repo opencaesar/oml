@@ -11,3 +11,5 @@ Click on `Browse...` next to the Project input field and select `io.opencaesar.o
 Click on `Search...` next to the Main class input field and search for `OmlRunSocketServer`, select it and click OK.
 
 Click on `Apply`, and now you can click on `Debug` to debug the server application.
+
+After starting the server application, you can now run the IDE application and it will connect to the server on startup.
