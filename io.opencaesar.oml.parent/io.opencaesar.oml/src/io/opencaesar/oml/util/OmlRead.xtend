@@ -115,6 +115,9 @@ import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.emf.ecore.util.EcoreUtil
+import java.net.MalformedURLException
+import java.nio.file.Paths
+import java.io.IOException
 
 class OmlRead {
 	
@@ -676,16 +679,15 @@ class OmlRead {
 				val contextURI = ^import.eResource?.getURI()
 				val rs = ^import.eResource?.resourceSet
 				if (rs !== null && contextURI !== null) {
-					var catalogMap = rs.loadOptions.get(CATALOGS) as Map<File, OmlCatalog>
+					var catalogMap = rs.loadOptions.get(CATALOGS) as Map<URI, OmlCatalog>
 					if (catalogMap === null) {
-						rs.loadOptions.put(CATALOGS, catalogMap = new HashMap<File, OmlCatalog>)
+						rs.loadOptions.put(CATALOGS, catalogMap = new HashMap<URI, OmlCatalog>)
 					}
-        			val url = FileLocator.toFileURL(new URL(contextURI.trimSegments(1).toString()))
-        			val folder = new File(url.file);
-					if (!catalogMap.containsKey(folder)) {
-						catalogMap.findCatalogs(folder)
+					val directoryURI = contextURI.trimSegments(1)
+					if (!catalogMap.containsKey(directoryURI)) {
+						catalogMap.findCatalogs(directoryURI)
 					}
-					var catalog = catalogMap.get(folder)
+					var catalog = catalogMap.get(directoryURI)
 					if (catalog !== null) {
 						val resolved = catalog.resolveURI(uri.toString)
 						if (resolved !== null) {
@@ -705,17 +707,26 @@ class OmlRead {
 		}
 	}
 	
-	private static def findCatalogs(Map<File, OmlCatalog> catalogMap, File folder) {
-		var path = new ArrayList<File>
+	private static def findCatalogs(Map<URI, OmlCatalog> catalogMap, URI folder) {
+		val path = new ArrayList<URI>
 		var current = folder
 		var OmlCatalog catalog = null
-		while (current !== null && catalog === null) {
+		while (current !== null && catalog === null && current.segmentCount > 0) {
 			path.add(current)
-			val file = new File(current.path+'/catalog.xml')
-			if (file.exists) {
-				catalog = OmlCatalog.create(file.toURI.toURL)
-			} else  {
-				current = current.parentFile
+			val catalogUrl = try {
+					new URL(current.appendSegment('catalog.xml').toString)
+				} catch (MalformedURLException e) {
+					null
+				}
+			val catalogFileUrl = try {
+					FileLocator.toFileURL(catalogUrl)
+				} catch (IOException e) {
+					null
+				}
+			if (catalogFileUrl?.protocol == 'file' && Paths.get(catalogFileUrl.toURI).toFile.exists) {
+				catalog = OmlCatalog.create(catalogUrl)
+			} else {
+				current = current.trimSegments(1)
 				catalog = catalogMap.get(current)
 			}
 		}
