@@ -100,6 +100,7 @@ import io.opencaesar.oml.VocabularyImport
 import io.opencaesar.oml.VocabularyStatement
 import io.opencaesar.oml.VocabularyUsage
 import java.io.File
+import java.net.MalformedURLException
 import java.net.URL
 import java.util.ArrayList
 import java.util.Collections
@@ -683,23 +684,27 @@ class OmlRead {
 					if (catalogMap === null) {
 						rs.loadOptions.put(CATALOGS, catalogMap = new HashMap<URI, OmlCatalog>)
 					}
-					val directoryURI = contextURI.trimSegments(1)
-					if (!catalogMap.containsKey(directoryURI)) {
-						catalogMap.findCatalogs(directoryURI)
-					}
-					var catalog = catalogMap.get(directoryURI)
-					if (catalog !== null) {
-						val resolved = catalog.resolveURI(uri.toString)
-						if (resolved !== null) {
-							uri = URI.createURI(resolved)
-							if (uri.fileExtension === null) {
-								// if the imported URI does not end with an extension, assume it's .oml
-								uri = uri.appendFileExtension(OML_EXTENSION)
-							} else if (NUMBER.matcher(uri.fileExtension).matches) { 
-								// special case for the dc vocabulary ending its IRI with a version number
-								uri = uri.appendFileExtension(OML_EXTENSION)
-							}					
+					try {
+						val directoryURI = contextURI.trimSegments(1)
+						if (!catalogMap.containsKey(directoryURI)) {
+							catalogMap.findCatalogs(directoryURI)
 						}
+						var catalog = catalogMap.get(directoryURI)
+						if (catalog !== null) {
+							val resolved = catalog.resolveURI(uri.toString)
+							if (resolved !== null) {
+								uri = URI.createURI(resolved)
+								if (uri.fileExtension === null) {
+									// if the imported URI does not end with an extension, assume it's .oml
+									uri = uri.appendFileExtension(OML_EXTENSION)
+								} else if (NUMBER.matcher(uri.fileExtension).matches) { 
+									// special case for the dc vocabulary ending its IRI with a version number
+									uri = uri.appendFileExtension(OML_EXTENSION)
+								}
+              }
+						}
+					} catch (MalformedURLException e) {
+						// the contextURI scheme is not recognized
 					}
 				}
 			}
