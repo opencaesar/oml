@@ -16,25 +16,26 @@
  * limitations under the License.
  * 
  */
-package io.opencaesar.oml.util
+package io.opencaesar.oml.util;
 
-import org.eclipse.emf.common.util.URI
-import org.eclipse.emf.ecore.resource.Resource
-import org.eclipse.emf.ecore.resource.impl.ResourceFactoryImpl
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.impl.ResourceFactoryImpl;
 
-class OmlXMIResourceFactory extends ResourceFactoryImpl {
+public class OmlXMIResourceFactory extends ResourceFactoryImpl {
 
-	new() {
-		super()
+	public OmlXMIResourceFactory() {
+		super();
 	}
 
-	override Resource createResource(URI uri) {
-		new OmlXMIResource(uri)
+	@Override
+	public Resource createResource(URI uri) {
+		return new OmlXMIResource(uri);
 	}
 	
-	static def register() {
+	public static void register() {
 		if (!Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().containsKey(OmlXMIResource.EXTENSION)) {
-			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(OmlXMIResource.EXTENSION, new OmlXMIResourceFactory)
+			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(OmlXMIResource.EXTENSION, new OmlXMIResourceFactory());
 		}
 	}
 }
