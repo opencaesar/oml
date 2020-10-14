@@ -1,0 +1,14 @@
+#Mon Jan 27 08:26:13 PST 2020
+generateGeneratedAnnotation=false
+includeDateInGenerated=false
+outlet.DEFAULT_OUTPUT.userOutputPerSourceFolder=true
+outlet.DEFAULT_OUTPUT.installDslAsPrimarySource=false
+eclipse.preferences.version=1
+generateSuppressWarnings=true
+BuilderConfiguration.is_project_specific=true
+useJavaCompilerCompliance=false
+outlet.DEFAULT_OUTPUT.hideLocalSyntheticVariables=true
+outlet.DEFAULT_OUTPUT.sourceFolder.src-gen.directory=xtend-gen
+outlet.DEFAULT_OUTPUT.sourceFolder.src.directory=xtend-gen
+ValidatorConfiguration.is_project_specific=true
+targetJavaVersion=Java8

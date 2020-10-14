@@ -23,7 +23,7 @@ import java.util.ArrayList
 class OmlDiagramSpecifier {
     
     val Ontology ontology
-    public static val String diagramIRI = "http://imce.jpl.nasa.gov/foundation/diagram"
+    public static val String diagramIRI = "http://opencaesar.io/diagram"
     public static val String SHORTEST_PATH = 'shortestPath'
     public static val String SHORTEST_PATH_HOPS = 'shortestPathHops'
     public static val String RELATE_TO = 'relateTo'
