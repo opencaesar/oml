@@ -79,6 +79,9 @@ class OmlMetrologyTest {
 			scope.structuredProperties.get(x).forEach [ y |
 				println(" - struct: " + y.abbreviatedIri)
 			]
+			scope.classifierAxioms.get(x).forEach [ y |
+				println("axiom: " + y)
+			]
 		]
 		scope.concepts.keySet.forEach [ x |
 			println("concept: " + x.abbreviatedIri)
@@ -87,6 +90,9 @@ class OmlMetrologyTest {
 			]
 			scope.structuredProperties.get(x).forEach [ y |
 				println(" - struct: " + y.abbreviatedIri)
+			]
+			scope.classifierAxioms.get(x).forEach [ y |
+				println("axiom: " + y)
 			]
 		]
 		scope.relationEntities.keySet.forEach [ x |
@@ -97,11 +103,10 @@ class OmlMetrologyTest {
 			scope.structuredProperties.get(x).forEach [ y |
 				println(" - struct: " + y.abbreviatedIri)
 			]
+			scope.classifierAxioms.get(x).forEach [ y |
+				println("axiom: " + y)
+			]
 		]
-		scope.specializationAxioms.forEach [ x |
-			println("specialization: " + x.specializingTerm.abbreviatedIri + " -> " + x.specializedTerm.abbreviatedIri)
-		]
-
 	}
 
 	def extractZipResource(Path dir, String resourcePath) {

@@ -273,12 +273,12 @@ class OmlDiagramView {
  		newEdge(from, to, id, "edge:uses")
 	}
 
-	def void createChildEdges(OmlNode frame, RelationEntity entity, SModelElement source, SModelElement relation, SModelElement target) {
-		val idSource = idCache.uniqueId(entity, relation.id+'.source')
-		val idTarget = idCache.uniqueId(entity, relation.id+'.target')
-		frame.children += newEdge(source, relation, idSource, "edge:straight")
-		frame.children += newEdge(relation, target, idTarget, "edge:augments")
-	}
+//	def void createChildEdges(OmlNode frame, RelationEntity entity, SModelElement source, SModelElement relation, SModelElement target) {
+//		val idSource = idCache.uniqueId(entity, relation.id+'.source')
+//		val idTarget = idCache.uniqueId(entity, relation.id+'.target')
+//		frame.children += newEdge(source, relation, idSource, "edge:straight")
+//		frame.children += newEdge(relation, target, idTarget, "edge:augments")
+//	}
 	
 	def OmlEdge createEdge(RelationEntity entity, SModelElement from, SModelElement to) {
 		val id = idCache.uniqueId(entity, entity.forward.localName)

@@ -62,7 +62,7 @@ class OmlOntologyScopeCalculator extends OmlVisitor<OmlOntologyScopeCalculator> 
 
 	public val Map<Classifier, Set<ScalarProperty>> scalarProperties
 	public val Map<Classifier, Set<StructuredProperty>> structuredProperties
-	public val Set<SpecializationAxiom> specializationAxioms
+	public val Map<Classifier, Set<Axiom>> classifierAxioms
 
 	public val Set<Element> secondPhase
 
@@ -81,7 +81,7 @@ class OmlOntologyScopeCalculator extends OmlVisitor<OmlOntologyScopeCalculator> 
 		this.structureInstances = new HashMap
 		this.scalarProperties = new HashMap
 		this.structuredProperties = new HashMap
-		this.specializationAxioms = new HashSet
+		this.classifierAxioms = new HashMap
 		this.secondPhase = new HashSet
 	}
 
@@ -108,6 +108,12 @@ class OmlOntologyScopeCalculator extends OmlVisitor<OmlOntologyScopeCalculator> 
 			default:
 				false
 		}
+	}
+	
+	def boolean classifierHasFeaturesOrEdges(Classifier cls) {
+		!scalarProperties.get(cls).isEmpty ||
+		!structuredProperties.get(cls).isEmpty ||
+		!classifierAxioms.get(cls).isEmpty
 	}
 
 	def OmlOntologyScopeCalculator analyze() {
@@ -143,10 +149,17 @@ class OmlOntologyScopeCalculator extends OmlVisitor<OmlOntologyScopeCalculator> 
 		s.addAll(conceptInstances.keySet)
 		s.addAll(relationInstances.keySet)
 		s.addAll(structureInstances.keySet)
-		s.addAll(specializationAxioms)
 		s
 	}
 
+	def initializeClassifier(Classifier cls) {
+		initializeClassifierScalarProperties(cls)
+		initializeClassifierStructuredProperties(cls)
+		if (!classifierAxioms.containsKey(cls)) {
+			classifierAxioms.put(cls, new HashSet)
+		}
+	}
+	
 	def initializeClassifierScalarProperties(Classifier cls) {
 		if (!scalarProperties.containsKey(cls)) {
 			scalarProperties.put(cls, new HashSet)
@@ -206,12 +219,13 @@ class OmlOntologyScopeCalculator extends OmlVisitor<OmlOntologyScopeCalculator> 
 		]
 	}
 
-	def recordSpecializationAxioms(Set<Element> others) {
+	def recordSpecializationAxioms(Classifier cls, Set<Element> others) {
+		val ax = classifierAxioms.get(cls)
 		others.forEach [ o |
 			switch o {
 				SpecializationAxiom: {
 					if (includes(o)) {
-						specializationAxioms.add(o)
+						ax.add(o)
 					}
 				}
 			}
@@ -221,8 +235,7 @@ class OmlOntologyScopeCalculator extends OmlVisitor<OmlOntologyScopeCalculator> 
 	override caseAspect(Aspect a) {
 		switch (mode) {
 			case Mode.Phase1: {
-				initializeClassifierScalarProperties(a)
-				initializeClassifierStructuredProperties(a)
+				initializeClassifier(a)
 				if (!aspects.containsKey(a)) {
 					aspects.put(a, new HashSet)
 				}
@@ -233,7 +246,7 @@ class OmlOntologyScopeCalculator extends OmlVisitor<OmlOntologyScopeCalculator> 
 			}
 			case Mode.Phase2: {
 				scanAllClassifierProperties(a)
-				recordSpecializationAxioms(aspects.get(a))
+				recordSpecializationAxioms(a, aspects.get(a))
 				this
 			}
 		}
@@ -242,8 +255,7 @@ class OmlOntologyScopeCalculator extends OmlVisitor<OmlOntologyScopeCalculator> 
 	override caseConcept(Concept c) {
 		switch (mode) {
 			case Mode.Phase1: {
-				initializeClassifierScalarProperties(c)
-				initializeClassifierStructuredProperties(c)
+				initializeClassifier(c)
 				if (!concepts.containsKey(c)) {
 					concepts.put(c, new HashSet)
 				}
@@ -254,7 +266,7 @@ class OmlOntologyScopeCalculator extends OmlVisitor<OmlOntologyScopeCalculator> 
 			}
 			case Mode.Phase2: {
 				scanAllClassifierProperties(c)
-				recordSpecializationAxioms(concepts.get(c))
+				recordSpecializationAxioms(c, concepts.get(c))
 				this
 			}
 		}
@@ -263,8 +275,7 @@ class OmlOntologyScopeCalculator extends OmlVisitor<OmlOntologyScopeCalculator> 
 	override caseRelationEntity(RelationEntity e) {
 		switch (mode) {
 			case Mode.Phase1: {
-				initializeClassifierScalarProperties(e)
-				initializeClassifierStructuredProperties(e)
+				initializeClassifier(e)
 				if (!relationEntities.containsKey(e)) {
 					relationEntities.put(e, new HashSet)
 				}
@@ -277,7 +288,7 @@ class OmlOntologyScopeCalculator extends OmlVisitor<OmlOntologyScopeCalculator> 
 			}
 			case Mode.Phase2: {
 				scanAllClassifierProperties(e)
-				recordSpecializationAxioms(relationEntities.get(e))
+				recordSpecializationAxioms(e, relationEntities.get(e))
 				this
 			}
 		}
