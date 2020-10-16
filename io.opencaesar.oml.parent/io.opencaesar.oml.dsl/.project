@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
 	<name>io.opencaesar.oml.dsl</name>
-	<comment></comment>
+	<comment>Language infrastructure for Oml based on Xtext</comment>
 	<projects>
 	</projects>
 	<buildSpec>

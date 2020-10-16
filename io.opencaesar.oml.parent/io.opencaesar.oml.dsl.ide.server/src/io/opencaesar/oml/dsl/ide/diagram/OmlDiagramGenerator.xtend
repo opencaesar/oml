@@ -55,6 +55,8 @@ import org.eclipse.sprotty.xtext.SIssueMarkerDecorator
 import org.eclipse.sprotty.xtext.tracing.ITraceProvider
 
 import static extension io.opencaesar.oml.util.OmlRead.*
+import static extension io.opencaesar.oml.util.OmlSearch.*
+import io.opencaesar.oml.RelationEntityReference
 
 class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramGenerator {
 	
@@ -137,8 +139,12 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
 	}
 
 	override caseAspectReference(AspectReference reference) {
-		if (reference.aspect !== null) {
-			return reference.aspect.doSwitch
+		val a = reference.aspect
+		if (a !== null) {
+			val node = a.doSwitch
+			val properties = a.findFeaturePropertiesWithDomain
+			properties.forEach[doSwitch]
+			return node
 		}
 	}
 	
@@ -152,8 +158,12 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
 	}
 
 	override caseConceptReference(ConceptReference reference) {
-		if (reference.concept !== null) {
-			return reference.concept.doSwitch
+		val c = reference.concept
+		if (c !== null) {
+			val node = c.doSwitch
+			val properties = c.findFeaturePropertiesWithDomain
+			properties.forEach[doSwitch]
+			return node
 		}
 	}
 
@@ -236,15 +246,18 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
 
 	override caseStructuredProperty(StructuredProperty property) {}
 
+	// Show OML imports except if the imported ontology is the diagram vocabulary.
 	override caseImport(Import _import) {
 		val importingNode = _import.importingOntology?.doSwitch as OmlNode
-		val importedNode = _import.importedOntology?.doSwitch as OmlNode
-		
-		if (importingNode !== null && importedNode !== null) {			
-			val edge = _import.createEdge(importingNode, importedNode)
-			graph.children += edge
-			edge.traceAndMark(_import, context)
-			return edge
+		val importedOntology = _import.importedOntology
+		if (importedOntology !== null && !importedOntology.diagramVocabulary) {
+			val importedNode = importedOntology.doSwitch as OmlNode
+			if (importingNode !== null && importedNode !== null) {			
+				val edge = _import.createEdge(importingNode, importedNode)
+				graph.children += edge
+				edge.traceAndMark(_import, context)
+				return edge
+			}
 		}
 	}
 
@@ -266,12 +279,22 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
 
 		if (source !== null && target !== null) {
 			val node = entity.createNode(source, target)
-			frame.children += node
+			frame.createChildEdges(entity, source, node, target)
 			node.traceAndMark(entity, context)
 			return node
 		}
 	}
 
+	override caseRelationEntityReference(RelationEntityReference reference) {
+		val e = reference.entity
+		if (e !== null) {
+			val node = e.doSwitch	
+			val properties = e.findFeaturePropertiesWithDomain
+			properties.forEach[doSwitch]
+			return node
+		}	
+	}
+	
 	override caseRelationRangeRestrictionAxiom(RelationRangeRestrictionAxiom axiom) {
 		var source = axiom.restrictingEntity?.doSwitch
 		var target = axiom.range?.doSwitch

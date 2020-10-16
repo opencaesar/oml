@@ -1,0 +1,33 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  SIGSEGV (0xb) at pc=0x00007fa8c5b27041, pid=853864, tid=853882
+#
+# JRE version: OpenJDK Runtime Environment (11.0.7+10) (build 11.0.7+10)
+# Java VM: OpenJDK 64-Bit Server VM (11.0.7+10, mixed mode, tiered, compressed oops, g1 gc, linux-amd64)
+# Problematic frame:
+# C  [libjimage.so+0x4041]  ImageStrings::find(Endian*, char const*, int*, unsigned int)+0x71
+#
+# Core dump will be written. Default location: Core dumps may be processed with "/usr/share/apport/apport %p %s %c %d %P %E" (or dumping to /opt/local/github.opencaesar/oml/io.opencaesar.oml.parent/io.opencaesar.oml.dsl.tests/core.853864)
+#
+# If you would like to submit a bug report, please visit:
+#   https://github.com/AdoptOpenJDK/openjdk-support/issues
+#
+
+---------------  S U M M A R Y ------------
+
+Command Line: -agentlib:jdwp=transport=dt_socket,suspend=y,address=localhost:43621 -ea -Declipse.pde.launch=true -Declipse.p2.data.area=@config.dir/p2 --add-modules=ALL-SYSTEM -Dfile.encoding=UTF-8 org.eclipse.equinox.launcher.Main -os linux -ws gtk -arch x86_64 -nl en_US -consoleLog -version 3 -port 39751 -testLoaderClass org.eclipse.jdt.internal.junit5.runner.JUnit5TestLoader -loaderpluginname org.eclipse.jdt.junit5.runtime -test io.opencaesar.oml.dsl.tests.OmlMetrologyTest:loadModel -application org.eclipse.pde.junit.runtime.uitestapplication -product org.eclipse.platform.ide -data /home/rouquette/dsltools-workspace/../junit-workspace -configuration file:/home/rouquette/dsltools-workspace/.metadata/.plugins/org.eclipse.pde.core/pde-junit/ -dev file:/home/rouquette/dsltools-workspace/.metadata/.plugins/org.eclipse.pde.core/pde-junit/dev.properties -os linux -ws gtk -arch x86_64 -nl en_US -consoleLog -testpluginname io.opencaesar.oml.dsl.tests
+
+Host: Intel(R) Xeon(R) E-2186M  CPU @ 2.90GHz, 12 cores, 62G, Ubuntu 20.04.1 LTS
+Time: Thu Oct 15 16:41:54 2020 PDT elapsed time: 177 seconds (0d 0h 2m 57s)
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x00007fa8c0296000):  JavaThread "Signal Dispatcher" daemon [_thread_in_vm, id=853882, stack(0x00007fa8a8228000,0x00007fa8a8329000)]
+
+Stack: [0x00007fa8a8228000,0x00007fa8a8329000],  sp=0x00007fa8a8326120,  free space=1016k
+Native frames: (J=compiled Java code, A=aot compiled Java code, j=interpreted, Vv=VM code, C=native code)
+C  [libjimage.so+0x4041]  ImageStrings::find(Endian*, char const*, int*, unsigned int)+0x71
+C  [libjimage.so+0x4d2a]  ImageFileReader::find_location_index(char const*, unsigned long long*) const+0x3a
+C  [libjimage.so+0x522a]  JIMAGE_FindResource+0xfa
+V  [libjvm.so+0x5cd9ee]

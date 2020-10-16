@@ -18,6 +18,8 @@
  */
 package io.opencaesar.oml.dsl.ide.diagram
 
+import io.opencaesar.oml.Annotation
+import io.opencaesar.oml.AnnotatedElement
 import io.opencaesar.oml.Aspect
 import io.opencaesar.oml.Classifier
 import io.opencaesar.oml.Concept
@@ -42,6 +44,8 @@ import io.opencaesar.oml.SpecializationAxiom
 import io.opencaesar.oml.Structure
 import io.opencaesar.oml.StructuredProperty
 import java.util.ArrayList
+import java.util.HashMap
+import java.util.Map
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.sprotty.LayoutOptions
 import org.eclipse.sprotty.SModelElement
@@ -51,12 +55,17 @@ import static extension io.opencaesar.oml.util.OmlRead.*
 
 class OmlDiagramView {
 	
+    public static val String diagramIRI = "http://opencaesar.io/diagram"
+    
 	val Ontology ontology
 	val IdCache<EObject> idCache
+	var Map<EObject, Iterable<Annotation>> semantic2diagramAnnotations
 	
 	new(Ontology ontology, IdCache<EObject> idCache) {
 		this.ontology = ontology
 		this.idCache = idCache
+		this.semantic2diagramAnnotations = new HashMap
+		
 	}
 	
 	// GRAPHS
@@ -262,6 +271,13 @@ class OmlDiagramView {
  		newEdge(from, to, id, "edge:uses")
 	}
 
+	def void createChildEdges(OmlNode frame, RelationEntity entity, SModelElement source, SModelElement relation, SModelElement target) {
+		val idSource = idCache.uniqueId(entity, relation.id+'.source')
+		val idTarget = idCache.uniqueId(entity, relation.id+'.target')
+		frame.children += newEdge(source, relation, idSource, "edge:straight")
+		frame.children += newEdge(relation, target, idTarget, "edge:augments")
+	}
+	
 	def OmlEdge createEdge(RelationEntity entity, SModelElement from, SModelElement to) {
 		val id = idCache.uniqueId(entity, entity.forward.localName)
 		newEdge(from, to, id, "edge:augments") => [
@@ -304,6 +320,35 @@ class OmlDiagramView {
 	
 //------------------- HELPERS
 
+	def boolean isDiagramVocabulary(Ontology o) {
+		return o.iri == diagramIRI
+	}
+	
+    def boolean isDiagramAnnotation(Annotation a) {
+    	val c = a.property.eContainer
+        if (c instanceof IdentifiedElement) {
+            return c.iri == diagramIRI
+        }
+        return false
+    }
+    
+    def Iterable<Annotation> getDiagramAnnotations(EObject eObject) {
+        var annotations = semantic2diagramAnnotations.get(eObject)
+        if (annotations === null) {
+            if (eObject instanceof AnnotatedElement) {
+                annotations = eObject.ownedAnnotations.filter[a|
+                    a.diagramAnnotation
+                ]
+            } else if (eObject instanceof Reference) {
+                annotations = eObject.ownedAnnotations.filter[a|
+                    a.diagramAnnotation
+                ]
+            }
+            semantic2diagramAnnotations.put(eObject, annotations)
+        }
+        return annotations
+    }
+    
 	private def <E extends SModelElement> E newSElement(Class<E> diagramElementClass, String idStr, String typeStr) {
 		newLeafSElement(diagramElementClass, idStr, typeStr) => [
 			children = new ArrayList<SModelElement>
@@ -372,7 +417,7 @@ class OmlDiagramView {
 		]
 	}
 
-	private def OmlEdge newEdge(SModelElement fromElement, SModelElement toElement, String edgeId, String edgeType) {
+	def OmlEdge newEdge(SModelElement fromElement, SModelElement toElement, String edgeId, String edgeType) {
 		newSElement(OmlEdge, edgeId, edgeType) => [
 			sourceId = fromElement.id
 			targetId = toElement.id

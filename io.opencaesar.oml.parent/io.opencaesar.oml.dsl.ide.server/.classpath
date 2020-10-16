@@ -20,5 +20,7 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8/"/>
 	<classpathentry kind="con" path="org.eclipse.buildship.core.gradleclasspathcontainer"/>
+	<classpathentry kind="src" path="/io.opencaesar.oml.dsl"/>
+	<classpathentry kind="src" path="/io.opencaesar.oml"/>
 	<classpathentry kind="output" path="bin/default"/>
 </classpath>
