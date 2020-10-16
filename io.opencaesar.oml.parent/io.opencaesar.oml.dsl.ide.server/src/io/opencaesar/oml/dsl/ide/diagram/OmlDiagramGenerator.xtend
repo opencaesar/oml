@@ -80,8 +80,9 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
 			this.view =  new OmlDiagramView(ontology, context.idCache)
 			this.graph = view.createGraph
 
-			this.frame = ontology.doSwitch  as OmlNode
-			ontology.contentsToVisualize.forEach[doSwitch]
+			this.frame = ontology.doSwitch as OmlNode
+			//ontology.contentsToVisualize.forEach[doSwitch]
+			this.view.scope.scope.forEach[doSwitch]
 	
 			return graph
 		} catch (Exception e) {
@@ -90,22 +91,22 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
 		}
 	}
 
-	private def getContentsToVisualize(Ontology ontology) {
-		val fQuery = context.state.options.get("filterAction")
-		if (fQuery !== null) {
-			ontology.statements.filter[getLocalName(ontology) == fQuery].iterator
-		} else {
-			ontology.eAllContents.filter(Element)
-		}	
-	}
+//	private def getContentsToVisualize(Ontology ontology) {
+//		val fQuery = context.state.options.get("filterAction")
+//		if (fQuery !== null) {
+//			ontology.statements.filter[getLocalName(ontology) == fQuery].iterator
+//		} else {
+//			ontology.eAllContents.filter(Element)
+//		}	
+//	}
 
-	private def String getLocalName(Element element, Ontology ontology) {
-		if (element instanceof IdentifiedElement) {
-			element.getNameIn(ontology)
-		} else if (element instanceof Reference) {
-			element.resolvedName
-		}
-	}
+//	private def String getLocalName(Element element, Ontology ontology) {
+//		if (element instanceof IdentifiedElement) {
+//			element.getNameIn(ontology)
+//		} else if (element instanceof Reference) {
+//			element.resolvedName
+//		}
+//	}
 
 	override doSwitch(EObject eObject) {
 		val element = semantic2diagram.get(eObject)
@@ -138,15 +139,15 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
 		}
 	}
 
-	override caseAspectReference(AspectReference reference) {
-		val a = reference.aspect
-		if (a !== null) {
-			val node = a.doSwitch
-			val properties = a.findFeaturePropertiesWithDomain
-			properties.forEach[doSwitch]
-			return node
-		}
-	}
+//	override caseAspectReference(AspectReference reference) {
+//		val a = reference.aspect
+//		if (a !== null) {
+//			val node = a.doSwitch
+//			val properties = a.findFeaturePropertiesWithDomain
+//			properties.forEach[doSwitch]
+//			return node
+//		}
+//	}
 	
 	override caseConcept(Concept concept) {
 		if  (frame.expanded) {
@@ -157,15 +158,15 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
 		}
 	}
 
-	override caseConceptReference(ConceptReference reference) {
-		val c = reference.concept
-		if (c !== null) {
-			val node = c.doSwitch
-			val properties = c.findFeaturePropertiesWithDomain
-			properties.forEach[doSwitch]
-			return node
-		}
-	}
+//	override caseConceptReference(ConceptReference reference) {
+//		val c = reference.concept
+//		if (c !== null) {
+//			val node = c.doSwitch
+//			val properties = c.findFeaturePropertiesWithDomain
+//			properties.forEach[doSwitch]
+//			return node
+//		}
+//	}
 
 	override caseStructure(Structure structure) {
 		if  (frame.expanded) {
@@ -176,11 +177,11 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
 		}
 	}
 
-	override caseStructureReference(StructureReference reference) {
-		if (reference.structure !== null) {
-			return reference.structure.doSwitch
-		}
-	}
+//	override caseStructureReference(StructureReference reference) {
+//		if (reference.structure !== null) {
+//			return reference.structure.doSwitch
+//		}
+//	}
 
 	override caseScalar(Scalar scalar) {
 		if  (frame.expanded) {
@@ -285,15 +286,15 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
 		}
 	}
 
-	override caseRelationEntityReference(RelationEntityReference reference) {
-		val e = reference.entity
-		if (e !== null) {
-			val node = e.doSwitch	
-			val properties = e.findFeaturePropertiesWithDomain
-			properties.forEach[doSwitch]
-			return node
-		}	
-	}
+//	override caseRelationEntityReference(RelationEntityReference reference) {
+//		val e = reference.entity
+//		if (e !== null) {
+//			val node = e.doSwitch	
+//			val properties = e.findFeaturePropertiesWithDomain
+//			properties.forEach[doSwitch]
+//			return node
+//		}	
+//	}
 	
 	override caseRelationRangeRestrictionAxiom(RelationRangeRestrictionAxiom axiom) {
 		var source = axiom.restrictingEntity?.doSwitch

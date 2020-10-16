@@ -38,7 +38,7 @@ class OmlOntologyScopeCalculator extends OmlVisitor<OmlOntologyScopeCalculator> 
 	enum Mode {
 		// Find all classifiers
 		Phase1,
-		// Find which features (incl. inherited) must be shown
+		// Find which features (incl. inherited) must be included
 		Phase2
 	}
 
@@ -47,9 +47,9 @@ class OmlOntologyScopeCalculator extends OmlVisitor<OmlOntologyScopeCalculator> 
 	val Set<Ontology> allImportedOntologies
 	val Set<Element> allImportedElements
 
-	// An ontology induces a scope of elements to display and for each element,
-	// there is a candidate set of related elements that could be displayed as well.
-	// These candidates come from the transitive closure of imports.
+	// An ontology induces a scope of elements either directly via assertions or indirectly via references.
+	// Each kind of element has a set of candidate elements for inclusion in the scope; the candidates come
+	// from the transitive closure of the ontology imports.
 	// A candidate will be included iff and only if all of its OML element references are included in the scope.
 	public val Map<Aspect, Set<Element>> aspects
 	public val Map<Concept, Set<Element>> concepts
@@ -110,7 +110,7 @@ class OmlOntologyScopeCalculator extends OmlVisitor<OmlOntologyScopeCalculator> 
 		}
 	}
 
-	def analyze() {
+	def OmlOntologyScopeCalculator analyze() {
 		ontology.allImportsWithSource.forEach [ i |
 			val o = i.importedOntology
 			if (null !== o) {
@@ -127,9 +127,24 @@ class OmlOntologyScopeCalculator extends OmlVisitor<OmlOntologyScopeCalculator> 
 			}
 		]
 		val elements = ontology.eAllContents.filter(Element)
-		elements.forEach[doSwitch]
+		elements.forEach[Element e|doSwitch(e)]
 		mode = Mode.Phase2
-		secondPhase.forEach[doSwitch]
+		secondPhase.forEach[Element e|doSwitch(e)]
+		this
+	}
+
+	def Set<Element> scope() {
+		val s = new HashSet<Element>
+		s.addAll(aspects.keySet)
+		s.addAll(concepts.keySet)
+		s.addAll(relationEntities.keySet)
+		s.addAll(scalars.keySet)
+		s.addAll(structures.keySet)
+		s.addAll(conceptInstances.keySet)
+		s.addAll(relationInstances.keySet)
+		s.addAll(structureInstances.keySet)
+		s.addAll(specializationAxioms)
+		s
 	}
 
 	def initializeClassifierScalarProperties(Classifier cls) {

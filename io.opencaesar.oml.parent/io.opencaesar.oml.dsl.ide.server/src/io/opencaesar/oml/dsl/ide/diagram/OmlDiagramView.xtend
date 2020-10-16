@@ -52,6 +52,7 @@ import org.eclipse.sprotty.SModelElement
 import org.eclipse.sprotty.util.IdCache
 
 import static extension io.opencaesar.oml.util.OmlRead.*
+import io.opencaesar.oml.util.OmlOntologyScopeCalculator
 
 class OmlDiagramView {
 	
@@ -60,12 +61,13 @@ class OmlDiagramView {
 	val Ontology ontology
 	val IdCache<EObject> idCache
 	var Map<EObject, Iterable<Annotation>> semantic2diagramAnnotations
+	public val OmlOntologyScopeCalculator scope
 	
 	new(Ontology ontology, IdCache<EObject> idCache) {
 		this.ontology = ontology
 		this.idCache = idCache
 		this.semantic2diagramAnnotations = new HashMap
-		
+		this.scope = new OmlOntologyScopeCalculator(ontology).analyze()
 	}
 	
 	// GRAPHS
