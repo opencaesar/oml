@@ -1,4 +1,4 @@
-package io.opencaesar.oml.util
+package io.opencaesar.oml.dsl.ide.diagram
 
 import io.opencaesar.oml.Ontology
 import java.util.Set
@@ -32,7 +32,23 @@ import io.opencaesar.oml.SpecializationAxiom
 import io.opencaesar.oml.FeatureProperty
 import io.opencaesar.oml.Axiom
 import io.opencaesar.oml.Type
+import io.opencaesar.oml.util.OmlVisitor
+import io.opencaesar.oml.Entity
+import io.opencaesar.oml.ScalarPropertyRestrictionAxiom
+import io.opencaesar.oml.StructuredPropertyRestrictionAxiom
+import io.opencaesar.oml.RelationCardinalityRestrictionAxiom
+import io.opencaesar.oml.RelationRangeRestrictionAxiom
+import io.opencaesar.oml.RelationTargetRestrictionAxiom
+import io.opencaesar.oml.KeyAxiom
+import io.opencaesar.oml.Assertion
+import io.opencaesar.oml.NamedInstance
 
+/**
+ * An ontology induces a scope of elements either directly via assertions or indirectly via references.
+ * Each kind of element has a set of candidate elements for inclusion in the scope; the candidates come
+ * from the transitive closure of the ontology imports.
+ * A candidate will be included iff and only if all of its OML element references are included in the scope.
+ */
 class OmlOntologyScopeCalculator extends OmlVisitor<OmlOntologyScopeCalculator> {
 
 	enum Mode {
@@ -47,10 +63,6 @@ class OmlOntologyScopeCalculator extends OmlVisitor<OmlOntologyScopeCalculator> 
 	val Set<Ontology> allImportedOntologies
 	val Set<Element> allImportedElements
 
-	// An ontology induces a scope of elements either directly via assertions or indirectly via references.
-	// Each kind of element has a set of candidate elements for inclusion in the scope; the candidates come
-	// from the transitive closure of the ontology imports.
-	// A candidate will be included iff and only if all of its OML element references are included in the scope.
 	public val Map<Aspect, Set<Element>> aspects
 	public val Map<Concept, Set<Element>> concepts
 	public val Map<RelationEntity, Set<Element>> relationEntities
@@ -62,8 +74,10 @@ class OmlOntologyScopeCalculator extends OmlVisitor<OmlOntologyScopeCalculator> 
 
 	public val Map<Classifier, Set<ScalarProperty>> scalarProperties
 	public val Map<Classifier, Set<StructuredProperty>> structuredProperties
-	public val Map<Classifier, Set<Axiom>> classifierAxioms
+	public val Map<Entity, Set<Axiom>> entityAxioms
+	public val Map<NamedInstance, Set<Assertion>> instanceAssertions
 
+	// The elements to scan for phase2.
 	public val Set<Element> secondPhase
 
 	new(Ontology ontology) {
@@ -81,7 +95,8 @@ class OmlOntologyScopeCalculator extends OmlVisitor<OmlOntologyScopeCalculator> 
 		this.structureInstances = new HashMap
 		this.scalarProperties = new HashMap
 		this.structuredProperties = new HashMap
-		this.classifierAxioms = new HashMap
+		this.entityAxioms = new HashMap
+		this.instanceAssertions = new HashMap
 		this.secondPhase = new HashSet
 	}
 
@@ -109,11 +124,9 @@ class OmlOntologyScopeCalculator extends OmlVisitor<OmlOntologyScopeCalculator> 
 				false
 		}
 	}
-	
+
 	def boolean classifierHasFeaturesOrEdges(Classifier cls) {
-		!scalarProperties.get(cls).isEmpty ||
-		!structuredProperties.get(cls).isEmpty ||
-		!classifierAxioms.get(cls).isEmpty
+		!scalarProperties.get(cls).isEmpty || !structuredProperties.get(cls).isEmpty || !entityAxioms.get(cls).isEmpty
 	}
 
 	def OmlOntologyScopeCalculator analyze() {
@@ -144,60 +157,58 @@ class OmlOntologyScopeCalculator extends OmlVisitor<OmlOntologyScopeCalculator> 
 		s.addAll(aspects.keySet)
 		s.addAll(concepts.keySet)
 		s.addAll(relationEntities.keySet)
-		s.addAll(scalars.keySet)
-		s.addAll(structures.keySet)
 		s.addAll(conceptInstances.keySet)
 		s.addAll(relationInstances.keySet)
 		s.addAll(structureInstances.keySet)
 		s
 	}
 
-	def initializeClassifier(Classifier cls) {
-		initializeClassifierScalarProperties(cls)
-		initializeClassifierStructuredProperties(cls)
-		if (!classifierAxioms.containsKey(cls)) {
-			classifierAxioms.put(cls, new HashSet)
+	def phase1InitializeEntity(Entity e) {
+		phase1InitializeClassifierScalarProperties(e)
+		phase1InitializeClassifierStructuredProperties(e)
+		if (!entityAxioms.containsKey(e)) {
+			entityAxioms.put(e, new HashSet)
 		}
 	}
-	
-	def initializeClassifierScalarProperties(Classifier cls) {
+
+	def phase1InitializeClassifierScalarProperties(Classifier cls) {
 		if (!scalarProperties.containsKey(cls)) {
 			scalarProperties.put(cls, new HashSet)
 		}
 	}
 
-	def addClassifierScalarProperty(Classifier cls, ScalarProperty p) {
-		initializeClassifierScalarProperties(cls)
+	def phase2AddClassifierScalarProperty(Classifier cls, ScalarProperty p) {
+		phase1InitializeClassifierScalarProperties(cls)
 		scalarProperties.get(cls).add(p)
 	}
 
-	def initializeClassifierStructuredProperties(Classifier cls) {
+	def phase1InitializeClassifierStructuredProperties(Classifier cls) {
 		if (!structuredProperties.containsKey(cls)) {
 			structuredProperties.put(cls, new HashSet)
 		}
 	}
 
-	def addClassifierStructuredProperty(Classifier cls, StructuredProperty p) {
-		initializeClassifierStructuredProperties(cls)
+	def phase2AdClassifierStructuredProperty(Classifier cls, StructuredProperty p) {
+		phase1InitializeClassifierStructuredProperties(cls)
 		structuredProperties.get(cls).add(p)
 	}
 
-	def scanAllClassifierProperties(Classifier cls) {
+	def phase2ScanAllClassifierProperties(Classifier cls) {
 		cls.findAllSpecializedClassifiers.forEach [ parent |
 			parent.findFeaturePropertiesWithDomain.forEach [ p |
 				if (allImportedElements.contains(p)) {
 					switch p {
 						ScalarProperty:
 							if (includes(parent)) {
-								addClassifierScalarProperty(parent, p)
+								phase2AddClassifierScalarProperty(parent, p)
 							} else {
-								addClassifierScalarProperty(cls, p)
+								phase2AddClassifierScalarProperty(cls, p)
 							}
 						StructuredProperty:
 							if (includes(parent)) {
-								addClassifierStructuredProperty(parent, p)
+								phase2AdClassifierStructuredProperty(parent, p)
 							} else {
-								addClassifierStructuredProperty(cls, p)
+								phase2AdClassifierStructuredProperty(cls, p)
 							}
 					}
 					return
@@ -206,25 +217,65 @@ class OmlOntologyScopeCalculator extends OmlVisitor<OmlOntologyScopeCalculator> 
 		]
 	}
 
-	def scanClassifierSpecializations(Classifier cls, Set<Element> others) {
-		cls.findSpecializationsWithSource.forEach [ ax |
+	def phase1ScanEntityAxioms(Entity e, Set<Element> others) {
+		e.findKeys.forEach [ ax |
 			if (allImportedElements.contains(ax)) {
 				others.add(ax)
 			}
 		]
-		cls.findSpecializationsWithTarget.forEach [ ax |
+		e.findSpecializationsWithSource.forEach [ ax |
+			if (allImportedElements.contains(ax)) {
+				others.add(ax)
+			}
+		]
+		e.findPropertyRestrictions.forEach [ ax |
+			if (allImportedElements.contains(ax)) {
+				others.add(ax)
+			}
+		]
+		e.findRelationRestrictions.forEach [ ax |
 			if (allImportedElements.contains(ax)) {
 				others.add(ax)
 			}
 		]
 	}
 
-	def recordSpecializationAxioms(Classifier cls, Set<Element> others) {
-		val ax = classifierAxioms.get(cls)
+	def phase2FilterEntityAxioms(Entity e, Set<Element> others) {
+		val ax = entityAxioms.get(e)
 		others.forEach [ o |
 			switch o {
+				KeyAxiom: {
+					if (o.properties.forall[p|includes(p)]) {
+						ax.add(o)
+					}
+				}
 				SpecializationAxiom: {
-					if (includes(o)) {
+					if (includes(o.specializedTerm)) {
+						ax.add(o)
+					}
+				}
+				ScalarPropertyRestrictionAxiom: {
+					if (includes(o.property)) {
+						ax.add(o)
+					}
+				}
+				StructuredPropertyRestrictionAxiom: {
+					if (includes(o.property)) {
+						ax.add(o)
+					}
+				}
+				RelationCardinalityRestrictionAxiom: {
+					if (includes(o.relation.entity)) {
+						ax.add(o)
+					}
+				}
+				RelationRangeRestrictionAxiom: {
+					if (includes(o.relation.entity) && includes(o.range)) {
+						ax.add(o)
+					}
+				}
+				RelationTargetRestrictionAxiom: {
+					if (includes(o.relation.entity) && includes(o.target)) {
 						ax.add(o)
 					}
 				}
@@ -235,18 +286,18 @@ class OmlOntologyScopeCalculator extends OmlVisitor<OmlOntologyScopeCalculator> 
 	override caseAspect(Aspect a) {
 		switch (mode) {
 			case Mode.Phase1: {
-				initializeClassifier(a)
+				phase1InitializeEntity(a)
 				if (!aspects.containsKey(a)) {
 					aspects.put(a, new HashSet)
 				}
 				val others = aspects.get(a)
-				scanClassifierSpecializations(a, others)
+				phase1ScanEntityAxioms(a, others)
 				secondPhase.add(a)
 				this
 			}
 			case Mode.Phase2: {
-				scanAllClassifierProperties(a)
-				recordSpecializationAxioms(a, aspects.get(a))
+				phase2ScanAllClassifierProperties(a)
+				phase2FilterEntityAxioms(a, aspects.get(a))
 				this
 			}
 		}
@@ -255,18 +306,18 @@ class OmlOntologyScopeCalculator extends OmlVisitor<OmlOntologyScopeCalculator> 
 	override caseConcept(Concept c) {
 		switch (mode) {
 			case Mode.Phase1: {
-				initializeClassifier(c)
+				phase1InitializeEntity(c)
 				if (!concepts.containsKey(c)) {
 					concepts.put(c, new HashSet)
 				}
 				val others = concepts.get(c)
-				scanClassifierSpecializations(c, others)
+				phase1ScanEntityAxioms(c, others)
 				secondPhase.add(c)
 				this
 			}
 			case Mode.Phase2: {
-				scanAllClassifierProperties(c)
-				recordSpecializationAxioms(c, concepts.get(c))
+				phase2ScanAllClassifierProperties(c)
+				phase2FilterEntityAxioms(c, concepts.get(c))
 				this
 			}
 		}
@@ -275,20 +326,20 @@ class OmlOntologyScopeCalculator extends OmlVisitor<OmlOntologyScopeCalculator> 
 	override caseRelationEntity(RelationEntity e) {
 		switch (mode) {
 			case Mode.Phase1: {
-				initializeClassifier(e)
+				phase1InitializeEntity(e)
 				if (!relationEntities.containsKey(e)) {
 					relationEntities.put(e, new HashSet)
 				}
 				val others = relationEntities.get(e)
-				scanClassifierSpecializations(e, others)
+				phase1ScanEntityAxioms(e, others)
 				e.source.doSwitch
 				e.target.doSwitch
 				secondPhase.add(e)
 				this
 			}
 			case Mode.Phase2: {
-				scanAllClassifierProperties(e)
-				recordSpecializationAxioms(e, relationEntities.get(e))
+				phase2ScanAllClassifierProperties(e)
+				phase2FilterEntityAxioms(e, relationEntities.get(e))
 				this
 			}
 		}
@@ -310,15 +361,15 @@ class OmlOntologyScopeCalculator extends OmlVisitor<OmlOntologyScopeCalculator> 
 	override caseStructure(Structure s) {
 		switch (mode) {
 			case Mode.Phase1: {
-				initializeClassifierScalarProperties(s)
-				initializeClassifierStructuredProperties(s)
+				phase1InitializeClassifierScalarProperties(s)
+				phase1InitializeClassifierStructuredProperties(s)
 				if (!structures.containsKey(s)) {
 					structures.put(s, new HashSet)
 				}
 				this
 			}
 			case Mode.Phase2: {
-				scanAllClassifierProperties(s)
+				phase2ScanAllClassifierProperties(s)
 				this
 			}
 		}

@@ -51,6 +51,16 @@ import org.eclipse.sprotty.xtext.tracing.ITraceProvider
 
 import static extension io.opencaesar.oml.util.OmlRead.*
 import io.opencaesar.oml.Classifier
+import io.opencaesar.oml.Axiom
+import io.opencaesar.oml.KeyAxiom
+import io.opencaesar.oml.Entity
+import io.opencaesar.oml.RelationTargetRestrictionAxiom
+import io.opencaesar.oml.RelationCardinalityRestrictionAxiom
+import io.opencaesar.oml.ScalarPropertyCardinalityRestrictionAxiom
+import io.opencaesar.oml.ScalarPropertyRangeRestrictionAxiom
+import io.opencaesar.oml.ScalarPropertyValueRestrictionAxiom
+import io.opencaesar.oml.ConceptInstance
+import io.opencaesar.oml.RelationInstance
 
 class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramGenerator {
 
@@ -75,8 +85,13 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
 			this.graph = view.createGraph
 
 			this.frame = ontology.doSwitch as OmlNode
-			// ontology.contentsToVisualize.forEach[doSwitch]
+			
 			this.view.scope.scope.forEach[doSwitch]
+			this.view.scope.entityAxioms.forEach[e, axs|
+				axs.forEach[ax|
+					e.showAxiom(ax)
+				]
+			]
 
 			return graph
 		} catch (Exception e) {
@@ -85,21 +100,6 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
 		}
 	}
 
-//	private def getContentsToVisualize(Ontology ontology) {
-//		val fQuery = context.state.options.get("filterAction")
-//		if (fQuery !== null) {
-//			ontology.statements.filter[getLocalName(ontology) == fQuery].iterator
-//		} else {
-//			ontology.eAllContents.filter(Element)
-//		}	
-//	}
-//	private def String getLocalName(Element element, Ontology ontology) {
-//		if (element instanceof IdentifiedElement) {
-//			element.getNameIn(ontology)
-//		} else if (element instanceof Reference) {
-//			element.resolvedName
-//		}
-//	}
 	override doSwitch(EObject eObject) {
 		val element = semantic2diagram.get(eObject)
 		if (element !== null) {
@@ -109,72 +109,74 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
 		}
 	}
 
-	override caseOntology(Ontology ontology) {
-		val node = ontology.createNode
+	override caseOntology(Ontology o) {
+		val node = o.createNode
 		graph.children += node
-		node.traceAndMark(ontology, context)
+		node.traceAndMark(o, context)
 
 		if (context.state.currentModel.type == 'NONE') {
 			context.state.expandedElements.add(node.id)
 		}
 		node.expanded = context.state.expandedElements.contains(node.id)
-
+		
+		// This will transitively show all imports since caseImport() below visits the imported ontology.
+		o.importsWithSource.forEach[doSwitch]
 		return node
 	}
 
 	override caseAspect(Aspect aspect) {
 		if (frame.expanded) {
-			val node = aspect.createNode
+			val node = aspect.createNode(view.scope.entityAxioms.get(aspect).filter(KeyAxiom))
 			frame.children += node
 			node.traceAndMark(aspect, context)
-			addClassifierFeatures(aspect)
+			addClassifierFeatures(aspect, node)
 			return node
 		}
 	}
 
-//	override caseAspectReference(AspectReference reference) {
-//		val a = reference.aspect
-//		if (a !== null) {
-//			val node = a.doSwitch
-//			val properties = a.findFeaturePropertiesWithDomain
-//			properties.forEach[doSwitch]
-//			return node
-//		}
-//	}
 	override caseConcept(Concept concept) {
 		if (frame.expanded) {
-			val node = concept.createNode
+			val node = concept.createNode(view.scope.entityAxioms.get(concept).filter(KeyAxiom))
 			frame.children += node
 			node.traceAndMark(concept, context)
-			addClassifierFeatures(concept)
+			addClassifierFeatures(concept, node)
 			return node
 		}
 	}
 
-//	override caseConceptReference(ConceptReference reference) {
-//		val c = reference.concept
-//		if (c !== null) {
-//			val node = c.doSwitch
-//			val properties = c.findFeaturePropertiesWithDomain
-//			properties.forEach[doSwitch]
-//			return node
-//		}
-//	}
+	override caseRelationEntity(RelationEntity entity) {
+		if (frame.expanded) {
+			val source = entity.source?.doSwitch
+			val target = entity.target?.doSwitch
+			val keys = view.scope.entityAxioms.get(entity).filter(KeyAxiom)
+			
+			if (source !== null && target !== null) {
+				if (view.scope.classifierHasFeaturesOrEdges(entity) || !keys.isEmpty) {
+					val node = entity.createNode(source, target, keys)
+					frame.children += node
+					node.traceAndMark(entity, context)
+					addClassifierFeatures(entity, node)
+					return node
+				} else {
+					val node = entity.createEdge(source, target)
+					frame.children += node
+					node.traceAndMark(entity, context)
+					return node
+				}
+			}
+		}
+	}
+
 	override caseStructure(Structure structure) {
 		if (frame.expanded) {
 			val node = structure.createNode
 			frame.children += node
 			node.traceAndMark(structure, context)
-			addClassifierFeatures(structure)
+			addClassifierFeatures(structure, node)
 			return node
 		}
 	}
 
-//	override caseStructureReference(StructureReference reference) {
-//		if (reference.structure !== null) {
-//			return reference.structure.doSwitch
-//		}
-//	}
 	override caseScalar(Scalar scalar) {
 		if (frame.expanded) {
 			val node = scalar.createNode
@@ -217,28 +219,14 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
 
 	def caseConsequentPredicate(RelationPredicate predicate) {}
 
-	override caseScalarProperty(ScalarProperty property) {
-		val domain = property.domain
-		var domainNode = domain?.doSwitch
-		if (domainNode === null) {
-			return null
-		}
-
-		var compartment = domainNode.propertyCompartment
-		if (compartment === null) {
-			compartment = domain.createPropertyCompartment
-			domainNode.children += compartment
-		}
-
-		var propertyLabel = property.createLabel
-		compartment.children += propertyLabel
-		propertyLabel.traceAndMark(property, context)
-
-		return propertyLabel
+	override caseConceptInstance(ConceptInstance ci) {
+		
 	}
-
-	override caseStructuredProperty(StructuredProperty property) {}
-
+	
+	override caseRelationInstance(RelationInstance ri) {
+		
+	}
+	
 	// Show OML imports except if the imported ontology is the diagram vocabulary.
 	override caseImport(Import _import) {
 		val importingNode = _import.importingOntology?.doSwitch as OmlNode
@@ -254,65 +242,135 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
 		}
 	}
 
-	override caseSpecializationAxiom(SpecializationAxiom axiom) {
-		val specializingNode = axiom.specializingTerm?.doSwitch as OmlNode
-		val specializedNode = axiom.specializedTerm?.doSwitch as OmlNode
-
-		if (specializedNode !== null && specializingNode !== null) {
-			val edge = axiom.createEdge(specializingNode, specializedNode)
-			frame.children += edge
-			edge.traceAndMark(axiom, context)
-			return edge
-		}
-	}
-
-	override caseRelationEntity(RelationEntity entity) {
+	def dispatch showAxiom(Entity e, Axiom ax) {}
+	
+	def dispatch showAxiom(Entity e, SpecializationAxiom ax) {
 		if (frame.expanded) {
-			var source = entity.source?.doSwitch
-			var target = entity.target?.doSwitch
-
-			if (source !== null && target !== null) {
-				if (view.scope.classifierHasFeaturesOrEdges(entity)) {
-					val node = entity.createNode(source, target)
-					frame.children += node
-					node.traceAndMark(entity, context)
-					return node
-				} else {
-					val node = entity.createEdge(source, target)
-					frame.children += node
-//					frame.createChildEdges(entity, source, node, target)
-					node.traceAndMark(entity, context)
-					return node
-				}
-			}
-		}
-	}
-
-//	override caseRelationEntityReference(RelationEntityReference reference) {
-//		val e = reference.entity
-//		if (e !== null) {
-//			val node = e.doSwitch	
-//			val properties = e.findFeaturePropertiesWithDomain
-//			properties.forEach[doSwitch]
-//			return node
-//		}	
-//	}
-	override caseRelationRangeRestrictionAxiom(RelationRangeRestrictionAxiom axiom) {
-		var source = axiom.restrictingEntity?.doSwitch
-		var target = axiom.range?.doSwitch
-
-		if (source !== null && target !== null && axiom.relation !== null) {
-			val edge = axiom.createEdge(source, target)
+			val specializingNode = semantic2diagram.get(e)
+			if (specializingNode === null)
+				throw new IllegalArgumentException("no entity node for showAxiom(SpecializationAxiom) " + e.abbreviatedIri)
+			val specializedNode = semantic2diagram.get(ax.specializedTerm)
+			if (specializedNode === null)
+				throw new IllegalArgumentException("no sup node for showAxiom: " + e.abbreviatedIri + " sup=" + ax.specializedTerm.abbreviatedIri)
+			val edge = ax.createEdge(specializingNode, specializedNode)
 			frame.children += edge
-			edge.traceAndMark(axiom, context)
-			return edge
+			edge.traceAndMark(ax, context)
 		}
 	}
-
+	
+	def dispatch showAxiom(Entity e, ScalarPropertyCardinalityRestrictionAxiom ax) {
+		if (frame.expanded) {
+			val source = semantic2diagram.get(e)
+			if (source === null)
+				throw new IllegalArgumentException("no entity node for showAxiom(ScalarPropertyCardinalityRestrictionAxiom): " + e.abbreviatedIri)
+			var compartment = source.propertyCompartment
+			if (compartment === null) {
+				compartment = e.createPropertyCompartment
+				source.children += compartment
+			}
+			val label = e.createLabel(ax)
+			compartment.children += label
+			label.traceAndMark(ax, context)
+		}
+	}
+	
+	def dispatch showAxiom(Entity e, ScalarPropertyRangeRestrictionAxiom ax) {
+		if (frame.expanded) {
+			val source = semantic2diagram.get(e)
+			if (source === null)
+				throw new IllegalArgumentException("no entity node for showAxiom(ScalarPropertyRangeRestrictionAxiom): " + e.abbreviatedIri)
+			var compartment = source.propertyCompartment
+			if (compartment === null) {
+				compartment = e.createPropertyCompartment
+				source.children += compartment
+			}
+			val label = e.createLabel(ax)
+			compartment.children += label
+			label.traceAndMark(ax, context)
+		}
+	}
+	
+	def dispatch showAxiom(Entity e, ScalarPropertyValueRestrictionAxiom ax) {
+		if (frame.expanded) {
+			val source = semantic2diagram.get(e)
+			if (source === null)
+				throw new IllegalArgumentException("no entity node for showAxiom(ScalarPropertyValueRestrictionAxiom): " + e.abbreviatedIri)
+			var compartment = source.propertyCompartment
+			if (compartment === null) {
+				compartment = e.createPropertyCompartment
+				source.children += compartment
+			}
+			val label = e.createLabel(ax)
+			compartment.children += label
+			label.traceAndMark(ax, context)
+		}
+	}
+	
+	def dispatch showAxiom(Entity e, RelationCardinalityRestrictionAxiom ax) {
+		if (frame.expanded) {
+			val source = semantic2diagram.get(e)
+			if (source === null)
+				throw new IllegalArgumentException("no entity node for showAxiom(RelationCardinalityRestrictionAxiom): " + e.abbreviatedIri)
+			val target = semantic2diagram.get(ax.range)
+			if (target === null)
+				throw new IllegalArgumentException("no range node for showAxiom(RelationCardinalityRestrictionAxiom): " + e.abbreviatedIri + " range=" + ax.range.abbreviatedIri)
+			val edge = ax.createEdge(source, target)
+			frame.children += edge
+			edge.traceAndMark(ax, context)
+		}
+	}
+	
+	def dispatch showAxiom(Entity e, RelationRangeRestrictionAxiom ax) {
+		if (frame.expanded) {
+			val source = semantic2diagram.get(e)
+			if (source === null)
+				throw new IllegalArgumentException("no entity node for showAxiom(RelationRangeRestrictionAxiom): " + e.abbreviatedIri)
+			val target = semantic2diagram.get(ax.range)
+			if (target === null)
+				throw new IllegalArgumentException("no range node for showAxiom(RelationRangeRestrictionAxiom): " + e.abbreviatedIri + " range=" + ax.range.abbreviatedIri)
+			val edge = ax.createEdge(source, target)
+			frame.children += edge
+			edge.traceAndMark(ax, context)
+		}
+	}
+	
+	def dispatch showAxiom(Entity e, RelationTargetRestrictionAxiom ax) {
+		if (frame.expanded) {
+			val source = semantic2diagram.get(e)
+			if (source === null)
+				throw new IllegalArgumentException("no entity node for showAxiom(RelationTargetRestrictionAxiom): " + e.abbreviatedIri)
+			val target = semantic2diagram.get(ax.target)
+			if (target === null)
+				throw new IllegalArgumentException("no range node for showAxiom(RelationTargetRestrictionAxiom): " + e.abbreviatedIri + " target=" + ax.target.abbreviatedIri)
+			val edge = ax.createEdge(source, target)
+			frame.children += edge
+			edge.traceAndMark(ax, context)
+		}
+	}
+	
 //------------------- HELPERS
-	def addClassifierFeatures(Classifier cls) {
-		view.scope.scalarProperties.get(cls).forEach[doSwitch]
-		view.scope.structuredProperties.get(cls).forEach[doSwitch]
+
+	def addClassifierFeatures(Classifier cls, OmlNode node) {
+		view.scope.scalarProperties.get(cls).forEach[f|
+			var compartment = node.propertyCompartment
+			if (compartment === null) {
+				compartment = cls.createPropertyCompartment
+				node.children += compartment
+			}
+			val label = cls.createLabel(f)
+			compartment.children += label
+			label.traceAndMark(f, context)
+		]
+		view.scope.structuredProperties.get(cls).forEach[f|
+			var compartment = node.propertyCompartment
+			if (compartment === null) {
+				compartment = cls.createPropertyCompartment
+				node.children += compartment
+			}
+			val label = cls.createLabel(f)
+			compartment.children += label
+			label.traceAndMark(f, context)
+		]
 	}
 
 	private def <T extends SModelElement> T traceAndMark(T sElement, Element element, Context context) {

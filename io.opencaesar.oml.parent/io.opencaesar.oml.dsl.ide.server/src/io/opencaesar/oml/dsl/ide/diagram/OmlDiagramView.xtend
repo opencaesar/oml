@@ -52,24 +52,32 @@ import org.eclipse.sprotty.SModelElement
 import org.eclipse.sprotty.util.IdCache
 
 import static extension io.opencaesar.oml.util.OmlRead.*
-import io.opencaesar.oml.util.OmlOntologyScopeCalculator
+import io.opencaesar.oml.KeyAxiom
+import io.opencaesar.oml.Entity
+import io.opencaesar.oml.RelationTargetRestrictionAxiom
+import io.opencaesar.oml.RelationCardinalityRestrictionAxiom
+import io.opencaesar.oml.CardinalityRestrictionKind
+import io.opencaesar.oml.ScalarPropertyCardinalityRestrictionAxiom
+import io.opencaesar.oml.ScalarPropertyValueRestrictionAxiom
+import io.opencaesar.oml.ScalarPropertyRangeRestrictionAxiom
+import io.opencaesar.oml.ConceptInstance
 
 class OmlDiagramView {
-	
-    public static val String diagramIRI = "http://opencaesar.io/diagram"
-    
+
+	public static val String diagramIRI = "http://opencaesar.io/diagram"
+
 	val Ontology ontology
 	val IdCache<EObject> idCache
 	var Map<EObject, Iterable<Annotation>> semantic2diagramAnnotations
 	public val OmlOntologyScopeCalculator scope
-	
+
 	new(Ontology ontology, IdCache<EObject> idCache) {
 		this.ontology = ontology
 		this.idCache = idCache
 		this.semantic2diagramAnnotations = new HashMap
 		this.scope = new OmlOntologyScopeCalculator(ontology).analyze()
 	}
-	
+
 	// GRAPHS
 	
 	def OmlGraph createGraph() {
@@ -81,7 +89,7 @@ class OmlDiagramView {
 			]
 		]
 	}
-	
+
 	// NODES
 	
 	def OmlNode createNode(Ontology ontology) {
@@ -94,17 +102,17 @@ class OmlDiagramView {
 				paddingLeft = 5.0
 				paddingRight = 5.0
 			]
-			children += newSElement(OmlCompartment, id+'.heading', 'comp:comp') => [
+			children += newSElement(OmlCompartment, id + '.heading', 'comp:comp') => [
 				layout = 'hbox'
-				children += newSElement(OmlLabel, id+'.label', 'label:heading') => [
+				children += newSElement(OmlLabel, id + '.label', 'label:heading') => [
 					text = id
 				]
-				children += newSElement(OmlButton, id+'.expand', 'button:expand')
+				children += newSElement(OmlButton, id + '.expand', 'button:expand')
 			]
 		]
 	}
 
-	def OmlNode createNode(Aspect aspect) {
+	def OmlNode createNode(Aspect aspect, Iterable<KeyAxiom> keys) {
 		val id = idCache.uniqueId(aspect, aspect.localName)
 		newSElement(OmlNode, id, 'node:class') => [
 			cssClass = 'moduleNode'
@@ -116,10 +124,13 @@ class OmlDiagramView {
 				paddingBottom = 0.0
 			]
 			children += newTaggedHeader(id, 'A')
+			keys.forEach [ k |
+				children += aspect.createLabel(k)
+			]
 		]
 	}
 
-	def OmlNode createNode(Concept concept) {
+	def OmlNode createNode(Concept concept, Iterable<KeyAxiom> keys) {
 		val id = idCache.uniqueId(concept, concept.localName)
 		newSElement(OmlNode, id, 'node:class') => [
 			cssClass = 'moduleNode'
@@ -131,7 +142,34 @@ class OmlDiagramView {
 				paddingBottom = 0.0
 			]
 			children += newTaggedHeader(id, 'C')
+			keys.forEach [ k |
+				children += concept.createLabel(k)
+			]
 		]
+	}
+
+	def OmlNode createNode(RelationEntity entity, SModelElement from, SModelElement to, Iterable<KeyAxiom> keys) {
+		val id = idCache.uniqueId(entity, entity.localName)
+		val node = newSElement(OmlNode, id, 'node:class') => [
+			cssClass = 'moduleNode'
+			layout = 'vbox'
+			layoutOptions = new LayoutOptions [
+				paddingLeft = 0.0
+				paddingRight = 0.0
+				paddingTop = 0.0
+				paddingBottom = 0.0
+			]
+			children += newTaggedHeader(id, 'R')
+			keys.forEach [ k |
+				children += entity.createLabel(k)
+			]
+		]
+		val edge1 = newEdge(from, node, id + '.start', "edge:straight")
+		node.children += edge1
+		val edge2 = newEdge(node, to, id + '.end', "edge:augments")
+		node.children += edge2
+
+		return node
 	}
 
 	def OmlNode createNode(Structure structure) {
@@ -163,7 +201,7 @@ class OmlDiagramView {
 			children += newTaggedHeader(id, 'C')
 		]
 	}
-	
+
 	def OmlNode createNode(Rule rule) {
 		val id = idCache.uniqueId(rule, rule.localName)
 		newSElement(OmlNode, id, 'node:class') => [
@@ -179,23 +217,34 @@ class OmlDiagramView {
 		]
 	}
 
+	def OmlNode createNode(ConceptInstance ci) {
+		val id = idCache.uniqueId(ci, ci.localName)
+		newSElement(OmlNode, id, 'node:class') => [
+			cssClass = 'moduleNode'
+			layout = 'vbox'
+			layoutOptions = new LayoutOptions [
+				paddingLeft = 0.0
+				paddingRight = 0.0
+				paddingTop = 0.0
+				paddingBottom = 0.0
+			]
+			children += newTaggedHeader(id, 'CI')
+		]
+	}
+	
 	// COMPARTMENTS
-
+	
 	def OmlCompartment getPropertyCompartment(SModelElement element) {
-		element.children.
-			filter[id.endsWith('.property.compartment')].
-			head as OmlCompartment
+		element.children.filter[id.endsWith('.property.compartment')].head as OmlCompartment
 	}
 
 	def OmlCompartment createPropertyCompartment(Classifier classifier) {
-		val id = idCache.getId(classifier)
-		newCompartment(id + '.property.compartment', 'comp:comp')
+		val id = idCache.uniqueId(classifier, classifier.localName + '.property.compartment')
+		newCompartment(id, 'comp:comp')
 	}
 
 	def OmlCompartment getAntecedentCompartment(SModelElement element) {
-		element.children.
-			filter[id.endsWith('.antecedent.compartment')].
-			head as OmlCompartment
+		element.children.filter[id.endsWith('.antecedent.compartment')].head as OmlCompartment
 	}
 
 	def OmlCompartment createAntecedentCompartment(Rule rule) {
@@ -204,9 +253,7 @@ class OmlDiagramView {
 	}
 
 	def OmlCompartment getConsequentCompartment(SModelElement element) {
-		element.children.
-			filter[id.endsWith('.consequent.compartment')].
-			head as OmlCompartment
+		element.children.filter[id.endsWith('.consequent.compartment')].head as OmlCompartment
 	}
 
 	def OmlCompartment createConsequentCompartment(Rule rule) {
@@ -215,24 +262,59 @@ class OmlDiagramView {
 	}
 
 	// LABELS
-
-	def OmlLabel createLabel(ScalarProperty property) {
-		val id = idCache.uniqueId(property, property.localName)
+	def OmlLabel createLabel(Classifier cls, ScalarProperty property) {
+		val id = idCache.uniqueId(property, cls.localName + '.' + property.localName)
 		newLeafSElement(OmlLabel, id, 'label:text') => [
 			text = property.name + ': ' + property.range.name
 		]
 	}
-	
-	def OmlLabel createLabel(StructuredProperty property) {
-		val id = idCache.uniqueId(property, property.localName)
+
+	def OmlLabel createLabel(Classifier cls, StructuredProperty property) {
+		val id = idCache.uniqueId(property, cls.localName + '.' + property.localName)
 		newLeafSElement(OmlLabel, id, 'label:text') => [
 			text = '(R) ' + property.name + ': ' + property.range.name
 		]
 	}
 
+	def OmlLabel createLabel(Entity e, KeyAxiom ax) {
+		val id = idCache.uniqueId(ax, e.localName + '.key')
+		newLeafSElement(OmlLabel, id, 'label:text') => [
+			text = 'key: ' + ax.properties.map[abbreviatedIri].join(', ')
+		]
+	}
+
+	def OmlLabel createLabel(Entity e, ScalarPropertyCardinalityRestrictionAxiom ax) {
+		val id = idCache.uniqueId(ax, e.localName + '.cardinalityRestriction.' + ax.property.localName)
+		val notation = switch ax.kind {
+			case CardinalityRestrictionKind.EXACTLY:
+				' = '
+			case CardinalityRestrictionKind.MIN:
+				' \u2265 '
+			case CardinalityRestrictionKind.MAX:
+				' \u2264 '
+		}
+		newLeafSElement(OmlLabel, id, 'label:text') => [
+			text = ax.property.localName + notation + ax.cardinality
+		]
+	}
+
+	def OmlLabel createLabel(Entity e, ScalarPropertyRangeRestrictionAxiom ax) {
+		val id = idCache.uniqueId(ax, e.localName + '.rangeRestriction.' + ax.property.localName)
+		newLeafSElement(OmlLabel, id, 'label:text') => [
+			text = ax.property.localName + ' \u2282 ' + ax.range.localName
+		]
+	}
+
+	def OmlLabel createLabel(Entity e, ScalarPropertyValueRestrictionAxiom ax) {
+		val id = idCache.uniqueId(ax, e.localName + '.valueRestriction.' + ax.property.localName)
+		newLeafSElement(OmlLabel, id, 'label:text') => [
+			text = ax.property.localName + ' = ' + ax.value.lexicalValue
+		]
+	}
+
 	def OmlLabel createAntecedentLabel(Predicate predicate) {
 		val rule = predicate.antecedentRule
-		val id = idCache.uniqueId(predicate, rule.localName+'.antecedent.'+rule.antecedent.indexOf(predicate))
+		val id = idCache.uniqueId(predicate, rule.localName + '.antecedent.' + rule.antecedent.indexOf(predicate))
 		newLeafSElement(OmlLabel, id, 'label:text') => [
 			text = predicate.toText
 		]
@@ -240,7 +322,7 @@ class OmlDiagramView {
 
 	def OmlLabel createConsequentLabel(RelationPredicate predicate) {
 		val rule = predicate.consequentRule
-		val id = idCache.uniqueId(predicate, rule.localName+'.consequent')
+		val id = idCache.uniqueId(predicate, rule.localName + '.consequent')
 		newLeafSElement(OmlLabel, id, 'label:text') => [
 			text = predicate.toText
 		]
@@ -252,13 +334,13 @@ class OmlDiagramView {
 			SameAsPredicate: 'SameAs' + '(' + predicate.variable1 + ', ' + predicate.variable2 + ')'
 			DifferentFromPredicate: 'DifferentFrom' + '(' + predicate.variable1 + ', ' + predicate.variable2 + ')'
 			RelationPredicate: predicate.relation.name + '(' + predicate.variable1 + ',' + predicate.variable2 + ')'
-			RelationEntityPredicate: predicate.entity.name + '(' + predicate.variable1 + ', ' + predicate.entityVariable + ', ' + predicate.variable2 + ')'
+			RelationEntityPredicate: predicate.entity.name + '(' + predicate.variable1 + ', ' +
+				predicate.entityVariable + ', ' + predicate.variable2 + ')'
 			default: ''
 		}
 	}
 
 	// EDGES
-
 	def OmlEdge createEdge(Import _import, SModelElement from, SModelElement to) {
 		val id = idCache.uniqueId('imports')
 		newEdge(from, to, id, 'edge:import') => [
@@ -269,17 +351,10 @@ class OmlDiagramView {
 	}
 
 	def OmlEdge createEdge(SpecializationAxiom axiom, SModelElement from, SModelElement to) {
-		val id = idCache.uniqueId(axiom, from.id+'.specializes.'+to.id)
- 		newEdge(from, to, id, "edge:uses")
+		val id = idCache.uniqueId(axiom, from.id + '.specializes.' + to.id)
+		newEdge(from, to, id, "edge:uses")
 	}
 
-//	def void createChildEdges(OmlNode frame, RelationEntity entity, SModelElement source, SModelElement relation, SModelElement target) {
-//		val idSource = idCache.uniqueId(entity, relation.id+'.source')
-//		val idTarget = idCache.uniqueId(entity, relation.id+'.target')
-//		frame.children += newEdge(source, relation, idSource, "edge:straight")
-//		frame.children += newEdge(relation, target, idTarget, "edge:augments")
-//	}
-	
 	def OmlEdge createEdge(RelationEntity entity, SModelElement from, SModelElement to) {
 		val id = idCache.uniqueId(entity, entity.forward.localName)
 		newEdge(from, to, id, "edge:augments") => [
@@ -289,75 +364,80 @@ class OmlDiagramView {
 		]
 	}
 
-	def OmlNode createNode(RelationEntity entity, SModelElement from, SModelElement to) {
-		val id = idCache.uniqueId(entity, entity.localName)
-		val node = newSElement(OmlNode, id, 'node:class') => [
-			cssClass = 'moduleNode'
-			layout = 'vbox'
-			layoutOptions = new LayoutOptions [
-				paddingLeft = 0.0
-				paddingRight = 0.0
-				paddingTop = 0.0
-				paddingBottom = 0.0
+	def OmlEdge createEdge(RelationCardinalityRestrictionAxiom axiom, SModelElement from, SModelElement to) {
+		val id = idCache.uniqueId(axiom, from.id + '.restrictsCardinality.' + axiom.relation.localName)
+		newEdge(from, to, id, 'edge:restricts') => [
+			children += newLeafSElement(OmlLabel, id + '.label', 'label:restricts') => [
+				val notation = switch axiom.kind {
+					case CardinalityRestrictionKind.EXACTLY:
+						' = '
+					case CardinalityRestrictionKind.MIN:
+						' \u2265 '
+					case CardinalityRestrictionKind.MAX:
+						' \u2264 '
+				}
+				text = axiom.relation.localName + notation + axiom.cardinality
 			]
-			children += newTaggedHeader(id, 'R')
 		]
-		val edge1 = newEdge(from, node, id+'.start', "edge:straight")
-		node.children += edge1
-		val edge2 = newEdge(node, to, id+'.end', "edge:augments")
-		node.children += edge2
-		
-		return node
 	}
 
 	def OmlEdge createEdge(RelationRangeRestrictionAxiom axiom, SModelElement from, SModelElement to) {
-		val id = idCache.uniqueId(axiom, from.id+'.restricts.'+axiom.relation.localName)
+		val id = idCache.uniqueId(axiom, from.id + '.restrictsRange.' + axiom.relation.localName)
 		newEdge(from, to, id, 'edge:restricts') => [
 			children += newLeafSElement(OmlLabel, id + '.label', 'label:restricts') => [
-				val notation = if (axiom.kind == RangeRestrictionKind.ALL) '\u2200' else '\u2203'
+				val notation = if(axiom.kind == RangeRestrictionKind.ALL) '\u2200' else '\u2203'
 				text = notation + axiom.relation.localName
 			]
 		]
 	}
-	
-//------------------- HELPERS
 
+	def OmlEdge createEdge(RelationTargetRestrictionAxiom axiom, SModelElement from, SModelElement to) {
+		val id = idCache.uniqueId(axiom, from.id + '.restrictsTarget.' + axiom.relation.localName)
+		newEdge(from, to, id, 'edge:restricts') => [
+			children += newLeafSElement(OmlLabel, id + '.label', 'label:restricts') => [
+				text = axiom.relation.localName + ' \u2282 '
+			]
+		]
+	}
+
+//------------------- HELPERS
 	def boolean isDiagramVocabulary(Ontology o) {
 		return o.iri == diagramIRI
 	}
-	
-    def boolean isDiagramAnnotation(Annotation a) {
-    	val c = a.property.eContainer
-        if (c instanceof IdentifiedElement) {
-            return c.iri == diagramIRI
-        }
-        return false
-    }
-    
-    def Iterable<Annotation> getDiagramAnnotations(EObject eObject) {
-        var annotations = semantic2diagramAnnotations.get(eObject)
-        if (annotations === null) {
-            if (eObject instanceof AnnotatedElement) {
-                annotations = eObject.ownedAnnotations.filter[a|
-                    a.diagramAnnotation
-                ]
-            } else if (eObject instanceof Reference) {
-                annotations = eObject.ownedAnnotations.filter[a|
-                    a.diagramAnnotation
-                ]
-            }
-            semantic2diagramAnnotations.put(eObject, annotations)
-        }
-        return annotations
-    }
-    
+
+	def boolean isDiagramAnnotation(Annotation a) {
+		val c = a.property.eContainer
+		if (c instanceof IdentifiedElement) {
+			return c.iri == diagramIRI
+		}
+		return false
+	}
+
+	def Iterable<Annotation> getDiagramAnnotations(EObject eObject) {
+		var annotations = semantic2diagramAnnotations.get(eObject)
+		if (annotations === null) {
+			if (eObject instanceof AnnotatedElement) {
+				annotations = eObject.ownedAnnotations.filter [ a |
+					a.diagramAnnotation
+				]
+			} else if (eObject instanceof Reference) {
+				annotations = eObject.ownedAnnotations.filter [ a |
+					a.diagramAnnotation
+				]
+			}
+			semantic2diagramAnnotations.put(eObject, annotations)
+		}
+		return annotations
+	}
+
 	private def <E extends SModelElement> E newSElement(Class<E> diagramElementClass, String idStr, String typeStr) {
 		newLeafSElement(diagramElementClass, idStr, typeStr) => [
 			children = new ArrayList<SModelElement>
 		]
 	}
 
-	private def <E extends SModelElement> E newLeafSElement(Class<E> diagramElementClass, String idStr, String typeStr) {
+	private def <E extends SModelElement> E newLeafSElement(Class<E> diagramElementClass, String idStr,
+		String typeStr) {
 		diagramElementClass.constructor.newInstance => [
 			id = idStr
 			type = typeStr
@@ -382,8 +462,8 @@ class OmlDiagramView {
 						resizeContainer = false
 						HAlign = 'center'
 						VAlign = 'center'
-					] 
-					children = #[	
+					]
+					children = #[
 						new OmlLabel => [
 							type = "label:tag"
 							it.id = id + '.tag.text'
@@ -425,7 +505,7 @@ class OmlDiagramView {
 			targetId = toElement.id
 		]
 	}
-	
+
 	private def OmlCompartment newCompartment(String id, String type) {
 		newSElement(OmlCompartment, id, type) => [
 			layout = 'vbox'
