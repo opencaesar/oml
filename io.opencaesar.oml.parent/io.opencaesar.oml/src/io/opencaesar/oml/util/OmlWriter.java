@@ -32,6 +32,7 @@ import java.util.Set;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -46,8 +47,6 @@ import io.opencaesar.oml.Aspect;
 import io.opencaesar.oml.AspectReference;
 import io.opencaesar.oml.BooleanLiteral;
 import io.opencaesar.oml.CardinalityRestrictionKind;
-import io.opencaesar.oml.Classifier;
-import io.opencaesar.oml.ClassifierReference;
 import io.opencaesar.oml.Concept;
 import io.opencaesar.oml.ConceptInstance;
 import io.opencaesar.oml.ConceptInstanceReference;
@@ -65,9 +64,7 @@ import io.opencaesar.oml.DescriptionUsage;
 import io.opencaesar.oml.DifferentFromPredicate;
 import io.opencaesar.oml.DoubleLiteral;
 import io.opencaesar.oml.Element;
-import io.opencaesar.oml.Entity;
 import io.opencaesar.oml.EntityPredicate;
-import io.opencaesar.oml.EntityReference;
 import io.opencaesar.oml.EnumeratedScalar;
 import io.opencaesar.oml.EnumeratedScalarReference;
 import io.opencaesar.oml.FacetedScalar;
@@ -79,8 +76,7 @@ import io.opencaesar.oml.KeyAxiom;
 import io.opencaesar.oml.LinkAssertion;
 import io.opencaesar.oml.Literal;
 import io.opencaesar.oml.Member;
-import io.opencaesar.oml.NamedInstance;
-import io.opencaesar.oml.NamedInstanceReference;
+import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.Ontology;
 import io.opencaesar.oml.Predicate;
 import io.opencaesar.oml.QuotedLiteral;
@@ -102,7 +98,6 @@ import io.opencaesar.oml.ReverseRelation;
 import io.opencaesar.oml.Rule;
 import io.opencaesar.oml.RuleReference;
 import io.opencaesar.oml.SameAsPredicate;
-import io.opencaesar.oml.Scalar;
 import io.opencaesar.oml.ScalarProperty;
 import io.opencaesar.oml.ScalarPropertyCardinalityRestrictionAxiom;
 import io.opencaesar.oml.ScalarPropertyRangeRestrictionAxiom;
@@ -110,8 +105,6 @@ import io.opencaesar.oml.ScalarPropertyReference;
 import io.opencaesar.oml.ScalarPropertyValueAssertion;
 import io.opencaesar.oml.ScalarPropertyValueRestrictionAxiom;
 import io.opencaesar.oml.SeparatorKind;
-import io.opencaesar.oml.SpecializableTerm;
-import io.opencaesar.oml.SpecializableTermReference;
 import io.opencaesar.oml.SpecializationAxiom;
 import io.opencaesar.oml.Structure;
 import io.opencaesar.oml.StructureInstance;
@@ -142,6 +135,57 @@ public class OmlWriter {
 		this.resourceSet = resourceSet;
 	}
 	
+	public void loadDependentResource(URI resourceURI) {
+		resourceSet.getResource(resourceURI, true);
+	}
+	
+	public Collection<Resource> getNewResources() {
+		return newResources;
+	}	
+
+	public void start() {
+		EcoreUtil.resolveAll(resourceSet);
+	}
+	
+	public void finish() {
+		defer.forEach(p -> p.run());
+		defer.clear();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void setReference(Ontology ontology, Element subject, EReference ref, String objectIri) {
+		final Class<? extends IdentifiedElement> objectClass = (Class<? extends IdentifiedElement>) ref.getEType().getInstanceClass();
+		assert (!ref.isContainment() && objectClass.isAssignableFrom(IdentifiedElement.class)) && !ref.isMany() : "Illegal arguments for this API";
+		if (objectIri != null) {
+			defer.add(() -> subject.eSet(ref, resolve(objectClass, ontology, objectIri)));
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void setReference(Ontology ontology, Element subject, EReference ref, Iterable<String> objectIris) {
+		final Class<? extends IdentifiedElement> objectClass = (Class<? extends IdentifiedElement>) ref.getEType().getInstanceClass();
+		assert (!ref.isContainment() && objectClass.isAssignableFrom(IdentifiedElement.class)) && ref.isMany(): "Illegal arguments for this API";
+		if (objectIris.iterator().hasNext()) {
+			defer.add(() -> subject.eSet(ref, toList(map(objectIris, objectIri -> resolve(objectClass, ontology, objectIri)))));
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	protected void addContained(Ontology ontology, String memberIri, EReference memberRef, EReference refRef, Element object) {
+		final Class<? extends Element> objectClass = (Class<? extends Element>) memberRef.getEType().getInstanceClass();
+		assert (memberRef.isContainment() && refRef.isContainment() && objectClass.isInstance(object) && memberRef.getEType() == refRef.getEType()): "Illegal arguments for this API";
+		if (memberIri != null) {
+			defer.add(() -> {
+				final Member member = resolve(Member.class, ontology, memberIri);
+				if (OmlRead.getOntology(member) == ontology) {
+					((List<Element>)member.eGet(memberRef)).add(object);
+				} else {
+					((List<Element>)getOrAddReference(ontology, member).eGet(refRef)).add(object);
+				}
+			});
+		}
+	}
+
 	protected <T extends IdentifiedElement> T resolve(Class<T> type, Ontology context, String iri) {
 		Element element = table.get(context, iri);
 		if (element == null) {
@@ -182,20 +226,20 @@ public class OmlWriter {
 	}
 	
 	protected <T extends Element> T create(Class<T> type) {
-		return OmlWrite.INSTANCE.create(type);
+		return OmlFactory2.INSTANCE.create(type);
 	}
 
-	protected <T extends Reference> T getOrAddReference(Ontology ontology, Member member, Class<T> type) {
-		Reference reference = type.cast(findFirst(OmlRead.getReferences(ontology), i -> OmlRead.resolve(i) == member));
+	protected Reference getOrAddReference(Ontology ontology, Member member) {
+		Reference reference = findFirst(OmlRead.getReferences(ontology), i -> OmlRead.resolve(i) == member);
 		if (reference == null) {
-			reference = type.cast(createReference(member));
+			reference = createReference(member);
 			if (ontology instanceof Vocabulary) {
 				((Vocabulary) ontology).getOwnedStatements().add((VocabularyStatement) reference);
 			} else if (ontology instanceof Description) {
 				((Description) ontology).getOwnedStatements().add((DescriptionStatement) reference); 
 			}
 		}
-		return type.cast(reference);
+		return reference;
 	}
 
 	protected void addToNewResource(Ontology ontology, URI resourceURI) {
@@ -204,46 +248,22 @@ public class OmlWriter {
 		newResources.add(resource);
 	}
 	
-	public void loadDependentResource(URI resourceURI) {
-		resourceSet.getResource(resourceURI, true);
-	}
-	
-	public void start() {
-		EcoreUtil.resolveAll(resourceSet);
-	}
-	
-	public void finish() {
-		defer.forEach(p -> p.run());
-		defer.clear();
-	}
-	
-	public Collection<Resource> getNewResources() {
-		return newResources;
-	}	
-
 	// ------------------------------------------------------------------------------------
 	
 	// Annotation
 
 	public Annotation addAnnotation(Ontology ontology, String memberIri, String propertyIri, Literal value) {
 		final Annotation annotation = create(Annotation.class);
-		defer.add(() -> annotation.setProperty(resolve(AnnotationProperty.class, ontology, propertyIri)));
 		annotation.setValue(value);
-		defer.add(() -> {
-			final Member member = resolve(Member.class, ontology, memberIri);
-			if (OmlRead.getOntology(member) == ontology) {
-				member.getOwnedAnnotations().add(annotation);
-			} else {
-				getOrAddReference(ontology, member, Reference.class).getOwnedAnnotations().add(annotation); 
-			}
-		});
+		setReference(ontology, annotation, OmlPackage.Literals.ANNOTATION__PROPERTY, propertyIri);
+		addContained(ontology, memberIri, OmlPackage.Literals.ANNOTATED_ELEMENT__OWNED_ANNOTATIONS, OmlPackage.Literals.REFERENCE__OWNED_ANNOTATIONS, annotation);
 		return annotation;
 	}
 
 	public Annotation addAnnotation(AnnotatedElement element, String propertyIri, Literal value) {
 		final Annotation annotation = create(Annotation.class);
-		defer.add(() -> annotation.setProperty(resolve(AnnotationProperty.class, OmlRead.getOntology(element), propertyIri)));
 		annotation.setValue(value);
+		setReference(OmlRead.getOntology(element), annotation, OmlPackage.Literals.ANNOTATION__PROPERTY, propertyIri);
 		element.getOwnedAnnotations().add(annotation);
 		return annotation;
 	}
@@ -308,8 +328,8 @@ public class OmlWriter {
 		boolean asymmetric, boolean reflexive, boolean irreflexive, boolean transitive) {
 		final RelationEntity relation = create(RelationEntity.class);
 		relation.setName(name);
-		defer.add(() -> relation.setSource(resolve(Entity.class, vocabulary, sourceIri)));
-		defer.add(() -> relation.setTarget(resolve(Entity.class, vocabulary, targetIri)));
+		setReference(vocabulary, relation, OmlPackage.Literals.RELATION_ENTITY__SOURCE, sourceIri);
+		setReference(vocabulary, relation, OmlPackage.Literals.RELATION_ENTITY__TARGET, targetIri);
 		relation.setFunctional(functional);
 		relation.setInverseFunctional(inverseFunctional);
 		relation.setSymmetric(symmetric);
@@ -345,8 +365,8 @@ public class OmlWriter {
 		String domainIri, String rangeIri, boolean functional) {
 		final ScalarProperty property = create(ScalarProperty.class);
 		property.setName(name);
-		defer.add(() -> property.setDomain(resolve(Classifier.class, vocabulary, domainIri)));
-		defer.add(() -> property.setRange(resolve(Scalar.class, vocabulary, rangeIri)));
+		setReference(vocabulary, property, OmlPackage.Literals.FEATURE_PROPERTY__DOMAIN, domainIri);
+		setReference(vocabulary, property, OmlPackage.Literals.SCALAR_PROPERTY__RANGE, rangeIri);
 		property.setFunctional(functional);
 		vocabulary.getOwnedStatements().add(property);
 		return property;
@@ -358,8 +378,8 @@ public class OmlWriter {
 		String domainIri, String rangeIri, boolean functional) {
 		final StructuredProperty property = create(StructuredProperty.class);
 		property.setName(name);
-		defer.add(() -> property.setDomain(resolve(Classifier.class, vocabulary, domainIri)));
-		defer.add(() -> property.setRange(resolve(Structure.class, vocabulary, rangeIri)));
+		setReference(vocabulary, property, OmlPackage.Literals.FEATURE_PROPERTY__DOMAIN, domainIri);
+		setReference(vocabulary, property, OmlPackage.Literals.STRUCTURED_PROPERTY__RANGE, rangeIri);
 		property.setFunctional(functional);
 		vocabulary.getOwnedStatements().add(property);
 		return property;
@@ -427,7 +447,7 @@ public class OmlWriter {
 
 	public StructureInstance createStructureInstance(Ontology ontology, String structureIri) {
 		final StructureInstance instance = create(StructureInstance.class);
-		defer.add(() -> instance.setType(resolve(Structure.class, ontology, structureIri)));
+		setReference(ontology, instance, OmlPackage.Literals.STRUCTURE_INSTANCE__TYPE, structureIri);
 		return instance;
 	}
 	
@@ -445,8 +465,8 @@ public class OmlWriter {
 	public RelationInstance addRelationInstance(Description description, String name, String sourceIri, String targetIri) {
 		final RelationInstance instance = create(RelationInstance.class);
 		instance.setName(name);
-		defer.add(() -> instance.setSource(resolve(NamedInstance.class, description, sourceIri)));
-		defer.add(() -> instance.setTarget(resolve(NamedInstance.class, description, targetIri)));
+		setReference(description, instance, OmlPackage.Literals.RELATION_INSTANCE__SOURCE, sourceIri);
+		setReference(description, instance, OmlPackage.Literals.RELATION_INSTANCE__TARGET, targetIri);
 		description.getOwnedStatements().add(instance);
 		return instance;
 	}
@@ -680,15 +700,8 @@ public class OmlWriter {
 
 	public SpecializationAxiom addSpecializationAxiom(Vocabulary vocabulary, String specializingIri, String specializedIri) {
 		final SpecializationAxiom axiom = create(SpecializationAxiom.class);
-		defer.add(() -> axiom.setSpecializedTerm(resolve(SpecializableTerm.class, vocabulary, specializedIri)));
-		defer.add(() -> {
-			final SpecializableTerm specializing = resolve(SpecializableTerm.class, vocabulary, specializingIri);
-			if (OmlRead.getVocabulary(specializing) == vocabulary) {
-				specializing.getOwnedSpecializations().add(axiom);
-			} else {
-				getOrAddReference(vocabulary, specializing, SpecializableTermReference.class).getOwnedSpecializations().add(axiom); 
-			}
-		});
+		setReference(vocabulary, axiom, OmlPackage.Literals.SPECIALIZATION_AXIOM__SPECIALIZED_TERM, specializedIri);
+		addContained(vocabulary, specializingIri, OmlPackage.Literals.SPECIALIZABLE_TERM__OWNED_SPECIALIZATIONS, OmlPackage.Literals.SPECIALIZABLE_TERM_REFERENCE__OWNED_SPECIALIZATIONS, axiom);
 		return axiom;
 	}
 	
@@ -697,16 +710,9 @@ public class OmlWriter {
 	public ScalarPropertyRangeRestrictionAxiom addScalarPropertyRangeRestrictionAxiom(Vocabulary vocabulary, String typeIri, String propertyIri, String rangeIri, RangeRestrictionKind kind) {
 		final ScalarPropertyRangeRestrictionAxiom axiom = create(ScalarPropertyRangeRestrictionAxiom.class);
 		axiom.setKind(kind);
-		defer.add(() -> axiom.setProperty(resolve(ScalarProperty.class, vocabulary, propertyIri)));
-		defer.add(() -> axiom.setRange(resolve(Scalar.class, vocabulary, rangeIri)));
-		defer.add(() -> {
-			final Classifier type = resolve(Classifier.class, vocabulary, typeIri);
-			if (OmlRead.getVocabulary(type) == vocabulary) {
-				type.getOwnedPropertyRestrictions().add(axiom);
-			} else {
-				getOrAddReference(vocabulary, type, ClassifierReference.class).getOwnedPropertyRestrictions().add(axiom); 
-			}
-		});
+		setReference(vocabulary, axiom, OmlPackage.Literals.SCALAR_PROPERTY_RESTRICTION_AXIOM__PROPERTY, propertyIri);
+		setReference(vocabulary, axiom, OmlPackage.Literals.SCALAR_PROPERTY_RANGE_RESTRICTION_AXIOM__RANGE, rangeIri);
+		addContained(vocabulary, typeIri, OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS, OmlPackage.Literals.CLASSIFIER_REFERENCE__OWNED_PROPERTY_RESTRICTIONS, axiom);
 		return axiom;
 	}
 
@@ -714,18 +720,11 @@ public class OmlWriter {
 
 	public ScalarPropertyCardinalityRestrictionAxiom addScalarPropertyCardinalityRestrictionAxiom(Vocabulary vocabulary, String typeIri, String propertyIri, CardinalityRestrictionKind kind, long cardinality, String rangeIri) {
 		final ScalarPropertyCardinalityRestrictionAxiom axiom = create(ScalarPropertyCardinalityRestrictionAxiom.class);
-		defer.add(() -> axiom.setProperty(resolve(ScalarProperty.class, vocabulary, propertyIri)));
 		axiom.setKind(kind);
 		axiom.setCardinality(cardinality);
-		defer.add(() -> axiom.setRange(resolve(Scalar.class, vocabulary, rangeIri)));
-		defer.add(() -> {
-			final Entity entity = resolve(Entity.class, vocabulary, typeIri);
-			if (OmlRead.getVocabulary(entity) == vocabulary) {
-				entity.getOwnedPropertyRestrictions().add(axiom);
-			} else {
-				getOrAddReference(vocabulary, entity, EntityReference.class).getOwnedPropertyRestrictions().add(axiom); 
-			}
-		});
+		setReference(vocabulary, axiom, OmlPackage.Literals.SCALAR_PROPERTY_RESTRICTION_AXIOM__PROPERTY, propertyIri);
+		setReference(vocabulary, axiom, OmlPackage.Literals.SCALAR_PROPERTY_CARDINALITY_RESTRICTION_AXIOM__RANGE, rangeIri);
+		addContained(vocabulary, typeIri, OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS, OmlPackage.Literals.CLASSIFIER_REFERENCE__OWNED_PROPERTY_RESTRICTIONS, axiom);
 		return axiom;
 	}
 
@@ -733,16 +732,9 @@ public class OmlWriter {
 
 	public ScalarPropertyValueRestrictionAxiom addScalarPropertyValueRestrictionAxiom(Vocabulary vocabulary, String typeIri, String propertyIri, Literal value) {
 		final ScalarPropertyValueRestrictionAxiom axiom = create(ScalarPropertyValueRestrictionAxiom.class);
-		defer.add(() -> axiom.setProperty(resolve(ScalarProperty.class, vocabulary, propertyIri)));
 		axiom.setValue(value);
-		defer.add(() -> {
-			final Classifier type = resolve(Classifier.class, vocabulary, typeIri);
-			if (OmlRead.getVocabulary(type) == vocabulary) {
-				type.getOwnedPropertyRestrictions().add(axiom);
-			} else {
-				getOrAddReference(vocabulary, type, ClassifierReference.class).getOwnedPropertyRestrictions().add(axiom); 
-			}
-		});
+		setReference(vocabulary, axiom, OmlPackage.Literals.SCALAR_PROPERTY_RESTRICTION_AXIOM__PROPERTY, propertyIri);
+		addContained(vocabulary, typeIri, OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS, OmlPackage.Literals.CLASSIFIER_REFERENCE__OWNED_PROPERTY_RESTRICTIONS, axiom);
 		return axiom;
 	}
 
@@ -751,16 +743,9 @@ public class OmlWriter {
 	public StructuredPropertyRangeRestrictionAxiom addStructuredPropertyRangeRestrictionAxiom(Vocabulary vocabulary, String typeIri, String propertyIri, String rangeIri, RangeRestrictionKind kind) {
 		final StructuredPropertyRangeRestrictionAxiom axiom = create(StructuredPropertyRangeRestrictionAxiom.class);
 		axiom.setKind(kind);
-		defer.add(() -> axiom.setProperty(resolve(StructuredProperty.class, vocabulary, propertyIri)));
-		defer.add(() -> axiom.setRange(resolve(Structure.class, vocabulary, rangeIri)));
-		defer.add(() -> {
-			final Classifier type = resolve(Classifier.class, vocabulary, typeIri);
-			if (OmlRead.getVocabulary(type) == vocabulary) {
-				type.getOwnedPropertyRestrictions().add(axiom);
-			} else {
-				getOrAddReference(vocabulary, type, ClassifierReference.class).getOwnedPropertyRestrictions().add(axiom); 
-			}
-		});
+		setReference(vocabulary, axiom, OmlPackage.Literals.STRUCTURED_PROPERTY_RESTRICTION_AXIOM__PROPERTY, propertyIri);
+		setReference(vocabulary, axiom, OmlPackage.Literals.STRUCTURED_PROPERTY_RANGE_RESTRICTION_AXIOM__RANGE, rangeIri);
+		addContained(vocabulary, typeIri, OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS, OmlPackage.Literals.CLASSIFIER_REFERENCE__OWNED_PROPERTY_RESTRICTIONS, axiom);
 		return axiom;
 	}
 
@@ -768,18 +753,11 @@ public class OmlWriter {
 
 	public StructuredPropertyCardinalityRestrictionAxiom addStructuredPropertyCardinalityRestrictionAxiom(Vocabulary vocabulary, String typeIri, String propertyIri, CardinalityRestrictionKind kind, long cardinality, String rangeIri) {
 		final StructuredPropertyCardinalityRestrictionAxiom axiom = create(StructuredPropertyCardinalityRestrictionAxiom.class);
-		defer.add(() -> axiom.setProperty(resolve(StructuredProperty.class, vocabulary, propertyIri)));
 		axiom.setKind(kind);
 		axiom.setCardinality(cardinality);
-		defer.add(() -> axiom.setRange(resolve(Structure.class, vocabulary, rangeIri)));
-		defer.add(() -> {
-			final Entity entity = resolve(Entity.class, vocabulary, typeIri);
-			if (OmlRead.getVocabulary(entity) == vocabulary) {
-				entity.getOwnedPropertyRestrictions().add(axiom);
-			} else {
-				getOrAddReference(vocabulary, entity, EntityReference.class).getOwnedPropertyRestrictions().add(axiom); 
-			}
-		});
+		setReference(vocabulary, axiom, OmlPackage.Literals.STRUCTURED_PROPERTY_RESTRICTION_AXIOM__PROPERTY, propertyIri);
+		setReference(vocabulary, axiom, OmlPackage.Literals.STRUCTURED_PROPERTY_CARDINALITY_RESTRICTION_AXIOM__RANGE, rangeIri);
+		addContained(vocabulary, typeIri, OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS, OmlPackage.Literals.CLASSIFIER_REFERENCE__OWNED_PROPERTY_RESTRICTIONS, axiom);
 		return axiom;
 	}
 
@@ -787,16 +765,9 @@ public class OmlWriter {
 	
 	public StructuredPropertyValueRestrictionAxiom addStructuredPropertyValueRestrictionAxiom(Vocabulary vocabulary, String typeIri, String propertyIri, StructureInstance value) {
 		final StructuredPropertyValueRestrictionAxiom axiom = create(StructuredPropertyValueRestrictionAxiom.class);
-		defer.add(() -> axiom.setProperty(resolve(StructuredProperty.class, vocabulary, propertyIri)));
 		axiom.setValue(value);
-		defer.add(() -> {
-			final Classifier type = resolve(Classifier.class, vocabulary, typeIri);
-			if (OmlRead.getVocabulary(type) == vocabulary) {
-				type.getOwnedPropertyRestrictions().add(axiom);
-			} else {
-				getOrAddReference(vocabulary, type, ClassifierReference.class).getOwnedPropertyRestrictions().add(axiom); 
-			}
-		});
+		setReference(vocabulary, axiom, OmlPackage.Literals.STRUCTURED_PROPERTY_VALUE_ASSERTION__PROPERTY, propertyIri);
+		addContained(vocabulary, typeIri, OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS, OmlPackage.Literals.CLASSIFIER_REFERENCE__OWNED_PROPERTY_RESTRICTIONS, axiom);
 		return axiom;
 	}
 
@@ -805,16 +776,9 @@ public class OmlWriter {
 	public RelationRangeRestrictionAxiom addRelationRangeRestrictionAxiom(Vocabulary vocabulary, String entityIri, String relationIri, String rangeIri, RangeRestrictionKind kind) {
 		final RelationRangeRestrictionAxiom axiom = create(RelationRangeRestrictionAxiom.class);
 		axiom.setKind(kind);
-		defer.add(() -> axiom.setRelation(resolve(Relation.class, vocabulary, relationIri)));
-		defer.add(() -> axiom.setRange(resolve(Entity.class, vocabulary, rangeIri)));
-		defer.add(() -> {
-			final Entity entity = resolve(Entity.class, vocabulary, entityIri);
-			if (OmlRead.getVocabulary(entity) == vocabulary) {
-				entity.getOwnedRelationRestrictions().add(axiom);
-			} else {
-				getOrAddReference(vocabulary, entity, EntityReference.class).getOwnedRelationRestrictions().add(axiom); 
-			}
-		});
+		setReference(vocabulary, axiom, OmlPackage.Literals.RELATION_RESTRICTION_AXIOM__RELATION, relationIri);
+		setReference(vocabulary, axiom, OmlPackage.Literals.RELATION_RANGE_RESTRICTION_AXIOM__RANGE, rangeIri);
+		addContained(vocabulary, entityIri, OmlPackage.Literals.ENTITY__OWNED_RELATION_RESTRICTIONS, OmlPackage.Literals.ENTITY_REFERENCE__OWNED_RELATION_RESTRICTIONS, axiom);
 		return axiom;
 	}
 	
@@ -822,18 +786,11 @@ public class OmlWriter {
 
 	public RelationCardinalityRestrictionAxiom addRelationCardinalityRestrictionAxiom(Vocabulary vocabulary, String entityIri, String relationIri, CardinalityRestrictionKind kind, long cardinality, String rangeIri) {
 		final RelationCardinalityRestrictionAxiom axiom = create(RelationCardinalityRestrictionAxiom.class);
-		defer.add(() -> axiom.setRelation(resolve(Relation.class, vocabulary, relationIri)));
 		axiom.setKind(kind);
 		axiom.setCardinality(cardinality);
-		defer.add(() -> axiom.setRange(resolve(Entity.class, vocabulary, rangeIri)));
-		defer.add(() -> {
-			final Entity entity = resolve(Entity.class, vocabulary, entityIri);
-			if (OmlRead.getVocabulary(entity) == vocabulary) {
-				entity.getOwnedRelationRestrictions().add(axiom);
-			} else {
-				getOrAddReference(vocabulary, entity, EntityReference.class).getOwnedRelationRestrictions().add(axiom); 
-			}
-		});
+		setReference(vocabulary, axiom, OmlPackage.Literals.RELATION_RESTRICTION_AXIOM__RELATION, relationIri);
+		setReference(vocabulary, axiom, OmlPackage.Literals.RELATION_CARDINALITY_RESTRICTION_AXIOM__RANGE, rangeIri);
+		addContained(vocabulary, entityIri, OmlPackage.Literals.ENTITY__OWNED_RELATION_RESTRICTIONS, OmlPackage.Literals.ENTITY_REFERENCE__OWNED_RELATION_RESTRICTIONS, axiom);
 		return axiom;
 	}
 
@@ -841,16 +798,9 @@ public class OmlWriter {
 	
 	public RelationTargetRestrictionAxiom addRelationTargetRestrictionAxiom(Vocabulary vocabulary, String entityIri, String relationIri, String targetIri) {
 		final RelationTargetRestrictionAxiom axiom = create(RelationTargetRestrictionAxiom.class);
-		defer.add(() -> axiom.setRelation(resolve(Relation.class, vocabulary, relationIri)));
-		defer.add(() -> axiom.setTarget(resolve(NamedInstance.class, vocabulary, targetIri)));
-		defer.add(() -> {
-			final Entity entity = resolve(Entity.class, vocabulary, entityIri);
-			if (OmlRead.getVocabulary(entity) == vocabulary) {
-				entity.getOwnedRelationRestrictions().add(axiom);
-			} else {
-				getOrAddReference(vocabulary, entity, EntityReference.class).getOwnedRelationRestrictions().add(axiom); 
-			}
-		});
+		setReference(vocabulary, axiom, OmlPackage.Literals.RELATION_RESTRICTION_AXIOM__RELATION, relationIri);
+		setReference(vocabulary, axiom, OmlPackage.Literals.RELATION_TARGET_RESTRICTION_AXIOM__TARGET, targetIri);
+		addContained(vocabulary, entityIri, OmlPackage.Literals.ENTITY__OWNED_RELATION_RESTRICTIONS, OmlPackage.Literals.ENTITY_REFERENCE__OWNED_RELATION_RESTRICTIONS, axiom);
 		return axiom;
 	}
 
@@ -858,70 +808,42 @@ public class OmlWriter {
 
 	public KeyAxiom addKeyAxiom(Vocabulary vocabulary, String entityIri, Iterable<String> keyPropertyIris) {
 		final KeyAxiom axiom = create(KeyAxiom.class);
-		defer.add(() -> axiom.getProperties().addAll(toList(map(keyPropertyIris, iri -> resolve(ScalarProperty.class, vocabulary, iri)))));
-		defer.add(() -> {
-			final Entity entity = resolve(Entity.class, vocabulary, entityIri);
-			if (OmlRead.getVocabulary(entity) == vocabulary) {
-				entity.getOwnedKeys().add(axiom);
-			} else {
-				getOrAddReference(vocabulary, entity, EntityReference.class).getOwnedKeys().add(axiom);
-			}
-		});
+		setReference(vocabulary, axiom, OmlPackage.Literals.KEY_AXIOM__PROPERTIES, keyPropertyIris);
+		addContained(vocabulary, entityIri, OmlPackage.Literals.ENTITY__OWNED_KEYS, OmlPackage.Literals.ENTITY_REFERENCE__OWNED_KEYS, axiom);
 		return axiom;
 	}
 
 	// ConceptTypeAssertion
 	
 	public ConceptTypeAssertion addConceptTypeAssertion(Description description, String instanceIri, String typeIri) {
-		final ConceptTypeAssertion axiom = create(ConceptTypeAssertion.class);
-		defer.add(()  -> axiom.setType(resolve(Concept.class, description, typeIri)));
-		defer.add(() -> {
-			final ConceptInstance instance = resolve(ConceptInstance.class, description, instanceIri);
-			if (OmlRead.getDescription(instance) == description) {
-				instance.getOwnedTypes().add(axiom);
-			} else {
-				getOrAddReference(description, instance, ConceptInstanceReference.class).getOwnedTypes().add(axiom); 
-			}
-		});
-		return axiom;
+		final ConceptTypeAssertion assertion = create(ConceptTypeAssertion.class);
+		setReference(description, assertion, OmlPackage.Literals.CONCEPT_TYPE_ASSERTION__TYPE, typeIri);
+		addContained(description, instanceIri, OmlPackage.Literals.CONCEPT_INSTANCE__OWNED_TYPES, OmlPackage.Literals.CONCEPT_INSTANCE_REFERENCE__OWNED_TYPES, assertion);
+		return assertion;
 	}
 
 	// RelationTypeAssertion
 
 	public RelationTypeAssertion addRelationTypeAssertion(Description description, String instanceIri, String typeIri) {
-		final RelationTypeAssertion axiom = create(RelationTypeAssertion.class);
-		defer.add(() -> axiom.setType(resolve(RelationEntity.class, description, typeIri)));
-		defer.add(() -> {
-			final RelationInstance instance = resolve(RelationInstance.class, description, instanceIri);
-			if (OmlRead.getDescription(instance) == description) {
-				instance.getOwnedTypes().add(axiom);
-			} else {
-				getOrAddReference(description, instance, RelationInstanceReference.class).getOwnedTypes().add(axiom);
-			}
-		});
-		return axiom;
+		final RelationTypeAssertion assertion = create(RelationTypeAssertion.class);
+		setReference(description, assertion, OmlPackage.Literals.RELATION_TYPE_ASSERTION__TYPE, typeIri);
+		addContained(description, instanceIri, OmlPackage.Literals.RELATION_INSTANCE__OWNED_TYPES, OmlPackage.Literals.RELATION_INSTANCE_REFERENCE__OWNED_TYPES, assertion);
+		return assertion;
 	}
 
 	// ScalarPropertyValueAssertion
 
 	public ScalarPropertyValueAssertion addScalarPropertyValueAssertion(Description description, String instanceIri, String propertyIri, Literal value) {
 		final ScalarPropertyValueAssertion assertion = create(ScalarPropertyValueAssertion.class);
-		defer.add(() -> assertion.setProperty(resolve(ScalarProperty.class, description, propertyIri)));
 		assertion.setValue(value);
-		defer.add(() -> {		
-			final NamedInstance instance = resolve(NamedInstance.class, description, instanceIri);
-			if (OmlRead.getDescription(instance) == description) {
-				instance.getOwnedPropertyValues().add(assertion);
-			} else {
-				getOrAddReference(description, instance, NamedInstanceReference.class).getOwnedPropertyValues().add(assertion); 
-			}
-		});
+		setReference(description, assertion, OmlPackage.Literals.SCALAR_PROPERTY_VALUE_ASSERTION__PROPERTY, propertyIri);
+		addContained(description, instanceIri, OmlPackage.Literals.INSTANCE__OWNED_PROPERTY_VALUES, OmlPackage.Literals.NAMED_INSTANCE_REFERENCE__OWNED_PROPERTY_VALUES, assertion);
 		return assertion;
 	}
 
 	public ScalarPropertyValueAssertion addScalarPropertyValueAssertion(StructureInstance instance, String propertyIri, Literal value) {
 		final ScalarPropertyValueAssertion assertion = create(ScalarPropertyValueAssertion.class);
-		defer.add(() -> assertion.setProperty(resolve(ScalarProperty.class, OmlRead.getOntology(instance), propertyIri)));
+		setReference(OmlRead.getOntology(instance), assertion, OmlPackage.Literals.SCALAR_PROPERTY_VALUE_ASSERTION__PROPERTY, propertyIri);
 		assertion.setValue(value);
 		instance.getOwnedPropertyValues().add(assertion);
 		return assertion;
@@ -932,21 +854,14 @@ public class OmlWriter {
 	public StructuredPropertyValueAssertion addStructuredPropertyValueAssertion(Description description, String instanceIri, String propertyIri, StructureInstance value) {
 		final StructuredPropertyValueAssertion assertion = create(StructuredPropertyValueAssertion.class);
 		assertion.setValue(value);
-		defer.add(() -> assertion.setProperty(resolve(StructuredProperty.class, description, propertyIri)));
-		defer.add(() -> {
-			final NamedInstance instance = resolve(NamedInstance.class, description, instanceIri);
-			if (OmlRead.getDescription(instance) == description) {
-				instance.getOwnedPropertyValues().add(assertion);
-			} else {
-				getOrAddReference(description, instance, NamedInstanceReference.class).getOwnedPropertyValues().add(assertion); 
-			}
-		});
+		setReference(description, assertion, OmlPackage.Literals.STRUCTURED_PROPERTY_VALUE_ASSERTION__PROPERTY, propertyIri);
+		addContained(description, instanceIri, OmlPackage.Literals.INSTANCE__OWNED_PROPERTY_VALUES, OmlPackage.Literals.NAMED_INSTANCE_REFERENCE__OWNED_PROPERTY_VALUES, assertion);
 		return assertion;
 	}
 
 	public StructuredPropertyValueAssertion addStructuredPropertyValueAssertion(StructureInstance instance, String propertyIri, StructureInstance value) {
 		final StructuredPropertyValueAssertion assertion = create(StructuredPropertyValueAssertion.class);
-		defer.add(() -> assertion.setProperty(resolve(StructuredProperty.class, OmlRead.getOntology(instance), propertyIri)));
+		setReference(OmlRead.getOntology(instance), assertion, OmlPackage.Literals.STRUCTURED_PROPERTY_VALUE_ASSERTION__PROPERTY, propertyIri);
 		assertion.setValue(value);
 		instance.getOwnedPropertyValues().add(assertion);
 		return assertion;
@@ -956,16 +871,9 @@ public class OmlWriter {
 		
 	public LinkAssertion addLinkAssertion(Description description, String instanceIri, String relationIri, String targetIri) {
 		final LinkAssertion assertion = create(LinkAssertion.class);
-		defer.add(() -> assertion.setRelation(resolve(Relation.class, description, relationIri)));
-		defer.add(() -> assertion.setTarget(resolve(NamedInstance.class, description, targetIri)));
-		defer.add(() -> {
-			final NamedInstance instance = resolve(NamedInstance.class, description, instanceIri);
-			if (OmlRead.getDescription(instance) == description) {
-				instance.getOwnedLinks().add(assertion);
-			} else {
-				getOrAddReference(description, instance, NamedInstanceReference.class).getOwnedLinks().add(assertion); 
-			}
-		});
+		setReference(description, assertion, OmlPackage.Literals.LINK_ASSERTION__RELATION, relationIri);
+		setReference(description, assertion, OmlPackage.Literals.LINK_ASSERTION__TARGET, targetIri);
+		addContained(description, instanceIri, OmlPackage.Literals.NAMED_INSTANCE__OWNED_LINKS, OmlPackage.Literals.NAMED_INSTANCE_REFERENCE__OWNED_LINKS, assertion);
 		return assertion;
 	}
 
@@ -973,7 +881,7 @@ public class OmlWriter {
 
 	public EntityPredicate createEntityPredicate(Vocabulary vocabulary, String entityIri, String variable) {
 		final EntityPredicate predicate = create(EntityPredicate.class);
-		defer.add(() -> predicate.setEntity(resolve(Entity.class, vocabulary, entityIri)));
+		setReference(vocabulary, predicate, OmlPackage.Literals.ENTITY_PREDICATE__ENTITY, entityIri);
 		predicate.setVariable(variable);
 		return predicate;
 	}
@@ -982,7 +890,7 @@ public class OmlWriter {
 
 	public RelationPredicate createRelationPredicate(Vocabulary vocabulary, String relationIri, String variable1, String variable2) {
 		final RelationPredicate predicate = create(RelationPredicate.class);
-		defer.add(() -> predicate.setRelation(resolve(Relation.class, vocabulary, relationIri)));
+		setReference(vocabulary, predicate, OmlPackage.Literals.RELATION_PREDICATE__RELATION, relationIri);
 		predicate.setVariable1(variable1);
 		predicate.setVariable2(variable2);
 		return predicate;
@@ -1010,7 +918,7 @@ public class OmlWriter {
 
 	public RelationEntityPredicate createRelationEntityPredicate(Vocabulary vocabulary, String entityIri, String variable1, String entityVariable, String variable2) {
 		final RelationEntityPredicate predicate = create(RelationEntityPredicate.class);
-		defer.add(() -> predicate.setEntity(resolve(RelationEntity.class, vocabulary, entityIri)));
+		setReference(vocabulary, predicate, OmlPackage.Literals.RELATION_ENTITY_PREDICATE__ENTITY, entityIri);
 		predicate.setVariable1(variable1);
 		predicate.setEntityVariable(entityVariable);
 		predicate.setVariable2(variable2);
@@ -1023,7 +931,7 @@ public class OmlWriter {
 		final QuotedLiteral literal = create(QuotedLiteral.class);
 		literal.setValue(value);
 		if (typeIri != null) {
-			defer.add(() -> literal.setType(resolve(Scalar.class, ontology, typeIri)));
+			setReference(ontology, literal, OmlPackage.Literals.LITERAL__TYPE, typeIri);
 		} else if (langTag != null) {
 			literal.setLangTag(langTag);
 		}
@@ -1036,7 +944,7 @@ public class OmlWriter {
 		final IntegerLiteral literal = create(IntegerLiteral.class);
 		literal.setValue(value);
 		if (typeIri != null) {
-			defer.add(() -> literal.setType(resolve(Scalar.class, ontology, typeIri)));
+			setReference(ontology, literal, OmlPackage.Literals.LITERAL__TYPE, typeIri);
 		}
 		return literal;
 	}
@@ -1047,7 +955,7 @@ public class OmlWriter {
 		final DecimalLiteral literal = create(DecimalLiteral.class);
 		literal.setValue(value);
 		if (typeIri != null) {
-			defer.add(() -> literal.setType(resolve(Scalar.class, ontology, typeIri)));
+			setReference(ontology, literal, OmlPackage.Literals.LITERAL__TYPE, typeIri);
 		}
 		return literal;
 	}
@@ -1058,7 +966,7 @@ public class OmlWriter {
 		final DoubleLiteral literal = create(DoubleLiteral.class);
 		literal.setValue(value);
 		if (typeIri != null) {
-			defer.add(() -> literal.setType(resolve(Scalar.class, ontology, typeIri)));
+			setReference(ontology, literal, OmlPackage.Literals.LITERAL__TYPE, typeIri);
 		}
 		return literal;
 	}
@@ -1069,9 +977,9 @@ public class OmlWriter {
 		final BooleanLiteral literal = create(BooleanLiteral.class);
 		literal.setValue(value);
 		if (typeIri != null) {
-			defer.add(() -> literal.setType(resolve(Scalar.class, ontology, typeIri)));
+			setReference(ontology, literal, OmlPackage.Literals.LITERAL__TYPE, typeIri);
 		}
 		return literal;
 	}
-	
+		
 }
