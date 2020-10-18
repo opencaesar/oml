@@ -1,17 +1,17 @@
 apply plugin: 'io.opencaesar.ecore2bikeshed'
 
-ecore2bikeshed {
-	inputPath = '../io.opencaesar.oml/src/io/opencaesar/oml'
-	outputPath = 'src-gen'
-}
-
 task copySrc(type: Copy) {
     from 'src'
-    into 'src-gen'
+    into 'build/bikeshed'
 } 
+
+ecore2bikeshed {
+	inputPath = '../io.opencaesar.oml/src/io/opencaesar/oml'
+	outputPath = 'build/bikeshed'
+}
 
 generateBikeshed.dependsOn 'copySrc'
 
 clean {
-	delete 'src-gen'
+	delete 'build'
 }

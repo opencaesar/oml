@@ -45,7 +45,6 @@ sourceSets {
 	main {
 		java.srcDirs = ['src', 'build/xcore/main']
 		resources.srcDirs = ['src']
-		xtendOutputDir = 'xtend-gen'
         resources {
             exclude '**/*.xcore'
         }

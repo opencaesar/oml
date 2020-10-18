@@ -23,7 +23,7 @@ before_script:
 
 script:
   - ./gradlew build
-  - bikeshed spec io.opencaesar.oml.specification/src-gen/index.bs
+  - bikeshed spec io.opencaesar.oml.specification/build/bikeshed/index.bs
   - mvn verify
 
 env:

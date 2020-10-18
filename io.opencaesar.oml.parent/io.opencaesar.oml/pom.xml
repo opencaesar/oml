@@ -4,18 +4,9 @@
 	<parent>
 		<groupId>io.opencaesar.oml</groupId>
 		<artifactId>io.opencaesar.oml.parent</artifactId>
-		<version>0.7.3</version>
+		<version>0.7.4</version>
 	</parent>
 	<artifactId>io.opencaesar.oml</artifactId>
 	<packaging>eclipse-plugin</packaging>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.eclipse.xtend</groupId>
-				<artifactId>xtend-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
 
 </project>
