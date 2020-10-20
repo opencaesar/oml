@@ -81,9 +81,12 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
 			this.semantic2diagram = new HashMap
 
 			val ontology = context.resource.ontology
+			LOG.info("generate: " + ontology.getIri())
+			
 			this.view = new OmlDiagramView(ontology, context.idCache)
 			this.graph = view.createGraph
-
+			
+			
 			this.frame = ontology.doSwitch as OmlNode
 			
 			this.view.scope.scope.forEach[doSwitch]
@@ -95,7 +98,7 @@ class OmlDiagramGenerator extends OmlVisitor<SModelElement> implements IDiagramG
 
 			return graph
 		} catch (Exception e) {
-			LOG.log(Level.ERROR, "exception", e)
+			LOG.log(Level.ERROR, "exception \u23b8 \u23b9 ", e)
 			return null
 		}
 	}

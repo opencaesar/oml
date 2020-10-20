@@ -342,7 +342,7 @@ class OmlDiagramView {
 
 	// EDGES
 	def OmlEdge createEdge(Import _import, SModelElement from, SModelElement to) {
-		val id = idCache.uniqueId('imports')
+		val id = idCache.uniqueId(from.id + '.imports.' + to.id)
 		newEdge(from, to, id, 'edge:import') => [
 			children += newLeafSElement(OmlLabel, id + '.label', 'label:text') => [
 				text = 'imports'
