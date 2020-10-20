@@ -147,7 +147,7 @@ public class OmlOntoloyDiagramScope extends OmlVisitor<OmlOntoloyDiagramScope> {
 		if (!structuredProperties.containsKey(cls)) {
 			structuredProperties.put(cls, new HashSet<>());
 		}
-		OmlSearch.findAllSpecializedClassifiers(cls).forEach(parent -> {
+		OmlSearch.findAllSpecializedTerms(cls, Classifier.class).forEach(parent -> {
 			OmlSearch.findFeaturePropertiesWithDomain(parent).forEach(f -> {
 				if (allImportedElements.contains(f)) {
 					allFeatureProperties.add(f);
@@ -165,7 +165,7 @@ public class OmlOntoloyDiagramScope extends OmlVisitor<OmlOntoloyDiagramScope> {
 	}
 
 	public void phase2ScanAllClassifierProperties(final Classifier cls) {
-		OmlSearch.findAllSpecializedClassifiers(cls).forEach(parent -> {
+		OmlSearch.findAllSpecializedTerms(cls, Classifier.class).forEach(parent -> {
 			OmlIndex.findFeaturePropertiesWithDomain(parent).forEach(p -> {
 				if (allImportedElements.contains(p)) {
 					if (p instanceof ScalarProperty) {

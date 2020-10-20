@@ -47,8 +47,7 @@ public class OmlDiagramModule extends DefaultDiagramModule {
   }
   
   public Class<? extends IDiagramGenerator> bindIDiagramGenerator() {
-    return OmlDiagramViewGenerator.class; // Java version
-   	//return OmlDiagramGenerator.class; // Xtend version
+    return OmlDiagramViewGenerator.class;
   }
   
   public Class<? extends IDiagramExpansionListener> bindIDiagramExpansionListener() {
