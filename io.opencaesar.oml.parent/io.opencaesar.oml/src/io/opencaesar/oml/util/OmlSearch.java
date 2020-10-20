@@ -27,8 +27,6 @@ import java.util.stream.Collectors;
 
 import org.eclipse.emf.ecore.resource.Resource;
 
-import com.google.common.collect.Iterables;
-
 import io.opencaesar.oml.AnnotatedElement;
 import io.opencaesar.oml.Annotation;
 import io.opencaesar.oml.AnnotationProperty;
@@ -397,8 +395,8 @@ public class OmlSearch extends OmlIndex {
 
 	// Classifier
 	
-	public static <T extends SpecializableTerm> Iterable<T> findAllSpecializedTerms(T term, Class<T> clazz) {
-		return OmlRead.reflexiveClosure(term, t -> Iterables.filter(findSpecializedTerms(t), clazz));
+	public static Iterable<SpecializableTerm> findAllSpecializedTerms(SpecializableTerm term) {
+		return OmlRead.reflexiveClosure(term, t -> findSpecializedTerms(t));
 	}
 
 	public static List<PropertyRestrictionAxiom> findPropertyRestrictions(Classifier classifier) {
