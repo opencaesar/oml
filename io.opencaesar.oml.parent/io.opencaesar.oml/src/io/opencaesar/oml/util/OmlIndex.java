@@ -96,7 +96,7 @@ public class OmlIndex {
 
 	// Core Index API
 	
-	private static Iterable<EObject> findInverseReferencers(Element element, String eReferenceName) {
+	private static Collection<EObject> findInverseReferencers(Element element, String eReferenceName) {
         final Set<EObject> referencers = new HashSet<>();
         final ECrossReferenceAdapter adapter = ECrossReferenceAdapter.getCrossReferenceAdapter(element);
 		Collection<Setting> settings;
@@ -130,7 +130,7 @@ public class OmlIndex {
 	    }
 	}
 
-	private static <T extends EObject> Iterable<T> findInverseReferencers(Element element, Class<T> type, EReference eReference) {
+	private static <T extends EObject> Collection<T> findInverseReferencers(Element element, Class<T> type, EReference eReference) {
         final Set<T> referencers = new HashSet<>(); 
 		findInverseReferencers(element, eReference.getName()).forEach(referencer -> {
 			if (type.isInstance(referencer)) {
@@ -169,7 +169,7 @@ public class OmlIndex {
 
 	// SpecializableTerm
 
-	public static Iterable<SpecializationAxiom> findSpecializationAxiomsWithSpecializedTerm(SpecializableTerm term) {
+	public static Collection<SpecializationAxiom> findSpecializationAxiomsWithSpecializedTerm(SpecializableTerm term) {
 		return findInverseReferencers(term, SpecializationAxiom.class, OmlPackage.Literals.SPECIALIZATION_AXIOM__SPECIALIZED_TERM);
 	}
 
@@ -177,81 +177,81 @@ public class OmlIndex {
 
 	// Classifier
 	
-	public static Iterable<FeatureProperty> findFeaturePropertiesWithDomain(Classifier classifier) {
+	public static Collection<FeatureProperty> findFeaturePropertiesWithDomain(Classifier classifier) {
 		return findInverseReferencers(classifier, FeatureProperty.class, OmlPackage.Literals.FEATURE_PROPERTY__DOMAIN);
 	}
 
 	// Entity
 
-	public static Iterable<RelationEntity> findRelationEntitiesWithSource(Entity entity) {
+	public static Collection<RelationEntity> findRelationEntitiesWithSource(Entity entity) {
 		return findInverseReferencers(entity, RelationEntity.class, OmlPackage.Literals.RELATION_ENTITY__SOURCE);
 	}
 
-	public static Iterable<RelationEntity> findRelationEntitiesWithTarget(Entity entity) {
+	public static Collection<RelationEntity> findRelationEntitiesWithTarget(Entity entity) {
 		return findInverseReferencers(entity, RelationEntity.class, OmlPackage.Literals.RELATION_ENTITY__TARGET);
 	}
 
-	public static Iterable<RelationRangeRestrictionAxiom> findRelationRangeRestrictionAxiomsWithRange(Entity entity) {
+	public static Collection<RelationRangeRestrictionAxiom> findRelationRangeRestrictionAxiomsWithRange(Entity entity) {
 		return findInverseReferencers(entity, RelationRangeRestrictionAxiom.class, OmlPackage.Literals.RELATION_RANGE_RESTRICTION_AXIOM__RANGE);
 	}
 
-	public static Iterable<RelationCardinalityRestrictionAxiom> findRelationCardinalityRestrictionAxiomsWithRange(Entity entity) {
+	public static Collection<RelationCardinalityRestrictionAxiom> findRelationCardinalityRestrictionAxiomsWithRange(Entity entity) {
 		return findInverseReferencers(entity, RelationCardinalityRestrictionAxiom.class, OmlPackage.Literals.RELATION_CARDINALITY_RESTRICTION_AXIOM__RANGE);
 	}
 
-	public static Iterable<EntityPredicate> findEntityPredicatesWithEntity(Entity entity) {
+	public static Collection<EntityPredicate> findEntityPredicatesWithEntity(Entity entity) {
 		return findInverseReferencers(entity, EntityPredicate.class, OmlPackage.Literals.ENTITY_PREDICATE__ENTITY);
 	}
 
 	// Aspect
 
-	public static Iterable<AspectReference> findAspectReferencesWithAspect(Aspect aspect) {
+	public static Collection<AspectReference> findAspectReferencesWithAspect(Aspect aspect) {
 		return findInverseReferencers(aspect, AspectReference.class, OmlPackage.Literals.ASPECT_REFERENCE__ASPECT);
 	}
 
 	// Concept
 
-	public static Iterable<ConceptReference> findConceptReferencesWithConcept(Concept concept) {
+	public static Collection<ConceptReference> findConceptReferencesWithConcept(Concept concept) {
 		return findInverseReferencers(concept, ConceptReference.class, OmlPackage.Literals.CONCEPT_REFERENCE__CONCEPT);
 	}
 
-	public static Iterable<ConceptTypeAssertion> findConceptTypeAssertionsWithType(Concept concept) {
+	public static Collection<ConceptTypeAssertion> findConceptTypeAssertionsWithType(Concept concept) {
 		return findInverseReferencers(concept, ConceptTypeAssertion.class, OmlPackage.Literals.CONCEPT_TYPE_ASSERTION__TYPE);
 	}
 
 	// RelationEntity
 	
-	public static Iterable<RelationEntityReference> findRelationEntityReferencesWithEntity(RelationEntity entity) {
+	public static Collection<RelationEntityReference> findRelationEntityReferencesWithEntity(RelationEntity entity) {
 		return findInverseReferencers(entity, RelationEntityReference.class, OmlPackage.Literals.RELATION_ENTITY_REFERENCE__ENTITY);
 	}
 
-	public static Iterable<RelationTypeAssertion> findRelationTypeAssertionsWithType(RelationEntity entity) {
+	public static Collection<RelationTypeAssertion> findRelationTypeAssertionsWithType(RelationEntity entity) {
 		return findInverseReferencers(entity, RelationTypeAssertion.class, OmlPackage.Literals.RELATION_TYPE_ASSERTION__TYPE);
 	}
 
-	public static Iterable<RelationEntityPredicate> findRelationEntityPredicatesWithEntity(RelationEntity entity) {
+	public static Collection<RelationEntityPredicate> findRelationEntityPredicatesWithEntity(RelationEntity entity) {
 		return findInverseReferencers(entity, RelationEntityPredicate.class, OmlPackage.Literals.RELATION_ENTITY_PREDICATE__ENTITY);
 	}
 
 	// Structure
 
-	public static Iterable<StructuredProperty> findStructuredPropertiesWithRange(Structure structure) {
+	public static Collection<StructuredProperty> findStructuredPropertiesWithRange(Structure structure) {
 		return findInverseReferencers(structure, StructuredProperty.class, OmlPackage.Literals.STRUCTURED_PROPERTY__RANGE);
 	}
 
-	public static Iterable<StructureInstance> findStructureInstancesWithType(Structure structure) {
+	public static Collection<StructureInstance> findStructureInstancesWithType(Structure structure) {
 		return findInverseReferencers(structure, StructureInstance.class, OmlPackage.Literals.STRUCTURE_INSTANCE__TYPE);
 	}
 
-	public static Iterable<StructureReference> findStructureReferencesWithStructure(Structure structure) {
+	public static Collection<StructureReference> findStructureReferencesWithStructure(Structure structure) {
 		return findInverseReferencers(structure, StructureReference.class, OmlPackage.Literals.STRUCTURE_REFERENCE__STRUCTURE);
 	}
 
-	public static Iterable<StructuredPropertyRangeRestrictionAxiom> findStructuredPropertyRangeRestrictionAxiomsWithRange(Structure structure) {
+	public static Collection<StructuredPropertyRangeRestrictionAxiom> findStructuredPropertyRangeRestrictionAxiomsWithRange(Structure structure) {
 		return findInverseReferencers(structure, StructuredPropertyRangeRestrictionAxiom.class, OmlPackage.Literals.STRUCTURED_PROPERTY_RANGE_RESTRICTION_AXIOM__RANGE);
 	}
 
-	public static Iterable<StructuredPropertyCardinalityRestrictionAxiom> findStructuredPropertyCardinalityRestrictionAxiomsWithRange(Structure structure) {
+	public static Collection<StructuredPropertyCardinalityRestrictionAxiom> findStructuredPropertyCardinalityRestrictionAxiomsWithRange(Structure structure) {
 		return findInverseReferencers(structure, StructuredPropertyCardinalityRestrictionAxiom.class, OmlPackage.Literals.STRUCTURED_PROPERTY_CARDINALITY_RESTRICTION_AXIOM__RANGE);
 	}
 
@@ -259,11 +259,11 @@ public class OmlIndex {
 
 	// AnnotationProperty
 
-	public static Iterable<AnnotationPropertyReference> findAnnotationPropertyReferencesWithProperty(AnnotationProperty property) {
+	public static Collection<AnnotationPropertyReference> findAnnotationPropertyReferencesWithProperty(AnnotationProperty property) {
 		return findInverseReferencers(property, AnnotationPropertyReference.class, OmlPackage.Literals.ANNOTATION_PROPERTY_REFERENCE__PROPERTY);
 	}
 
-	public static Iterable<Annotation> findAnnotationsWithProperty(AnnotationProperty property) {
+	public static Collection<Annotation> findAnnotationsWithProperty(AnnotationProperty property) {
 		return findInverseReferencers(property, Annotation.class, OmlPackage.Literals.ANNOTATION__PROPERTY);
 	}
 
@@ -271,81 +271,81 @@ public class OmlIndex {
 
 	// ScalarProperty
 
-	public static Iterable<ScalarPropertyReference> findScalarPropertyReferencesWithProperty(ScalarProperty property) {
+	public static Collection<ScalarPropertyReference> findScalarPropertyReferencesWithProperty(ScalarProperty property) {
 		return findInverseReferencers(property, ScalarPropertyReference.class, OmlPackage.Literals.SCALAR_PROPERTY_REFERENCE__PROPERTY);
 	}
 
-	public static Iterable<ScalarPropertyRestrictionAxiom> findScalarPropertyRestrictionAxiomsWithProperty(ScalarProperty property) {
+	public static Collection<ScalarPropertyRestrictionAxiom> findScalarPropertyRestrictionAxiomsWithProperty(ScalarProperty property) {
 		return findInverseReferencers(property, ScalarPropertyRestrictionAxiom.class, OmlPackage.Literals.SCALAR_PROPERTY_RESTRICTION_AXIOM__PROPERTY);
 	}
 
-	public static Iterable<ScalarPropertyValueAssertion> findScalarPropertyValueAssertionsWithProperty(ScalarProperty property) {
+	public static Collection<ScalarPropertyValueAssertion> findScalarPropertyValueAssertionsWithProperty(ScalarProperty property) {
 		return findInverseReferencers(property, ScalarPropertyValueAssertion.class, OmlPackage.Literals.SCALAR_PROPERTY_VALUE_ASSERTION__PROPERTY);
 	}
 
-	public static Iterable<KeyAxiom> findKeyAxiomWithProperty(ScalarProperty property) {
+	public static Collection<KeyAxiom> findKeyAxiomWithProperty(ScalarProperty property) {
 		return findInverseReferencers(property, KeyAxiom.class, OmlPackage.Literals.KEY_AXIOM__PROPERTIES);
 	}
 
 	// StructuredProperty
 
-	public static Iterable<StructuredPropertyReference> findStructuredPropertyReferencesWithProperty(StructuredProperty property) {
+	public static Collection<StructuredPropertyReference> findStructuredPropertyReferencesWithProperty(StructuredProperty property) {
 		return findInverseReferencers(property, StructuredPropertyReference.class, OmlPackage.Literals.STRUCTURED_PROPERTY_REFERENCE__PROPERTY);
 	}
 
-	public static Iterable<StructuredPropertyRestrictionAxiom> findStructuredPropertyRestrictionAxiomsWithProperty(StructuredProperty property) {
+	public static Collection<StructuredPropertyRestrictionAxiom> findStructuredPropertyRestrictionAxiomsWithProperty(StructuredProperty property) {
 		return findInverseReferencers(property, StructuredPropertyRestrictionAxiom.class, OmlPackage.Literals.STRUCTURED_PROPERTY_RESTRICTION_AXIOM__PROPERTY);
 	}
 
-	public static Iterable<StructuredPropertyValueAssertion> findStructuredPropertyValueAssertionsWithProperty(StructuredProperty property) {
+	public static Collection<StructuredPropertyValueAssertion> findStructuredPropertyValueAssertionsWithProperty(StructuredProperty property) {
 		return findInverseReferencers(property, StructuredPropertyValueAssertion.class, OmlPackage.Literals.STRUCTURED_PROPERTY_VALUE_ASSERTION__PROPERTY);
 	}
 
 	// Scalar
 
-	public static Iterable<ScalarProperty> findScalarPropertiesWithRange(Scalar scalar) {
+	public static Collection<ScalarProperty> findScalarPropertiesWithRange(Scalar scalar) {
 		return findInverseReferencers(scalar, ScalarProperty.class, OmlPackage.Literals.SCALAR_PROPERTY__RANGE);
 	}
 
-	public static Iterable<ScalarPropertyRangeRestrictionAxiom> findScalarPropertyRangeRestrictionAxiomsWithRange(Scalar scalar) {
+	public static Collection<ScalarPropertyRangeRestrictionAxiom> findScalarPropertyRangeRestrictionAxiomsWithRange(Scalar scalar) {
 		return findInverseReferencers(scalar, ScalarPropertyRangeRestrictionAxiom.class, OmlPackage.Literals.SCALAR_PROPERTY_RANGE_RESTRICTION_AXIOM__RANGE);
 	}
 
-	public static Iterable<ScalarPropertyCardinalityRestrictionAxiom> findScalarPropertyCardinalityRestrictionAxiomsWithRange(Scalar scalar) {
+	public static Collection<ScalarPropertyCardinalityRestrictionAxiom> findScalarPropertyCardinalityRestrictionAxiomsWithRange(Scalar scalar) {
 		return findInverseReferencers(scalar, ScalarPropertyCardinalityRestrictionAxiom.class, OmlPackage.Literals.SCALAR_PROPERTY_CARDINALITY_RESTRICTION_AXIOM__RANGE);
 	}
 
-	public static Iterable<Literal> findLiteralsWithType(Scalar scalar) {
+	public static Collection<Literal> findLiteralsWithType(Scalar scalar) {
 		return findInverseReferencers(scalar, Literal.class, OmlPackage.Literals.LITERAL__TYPE);
 	}
 
 	// FacetedScalar
 
-	public static Iterable<FacetedScalarReference> findFacetedScalarReferencesWithScalar(FacetedScalar scalar) {
+	public static Collection<FacetedScalarReference> findFacetedScalarReferencesWithScalar(FacetedScalar scalar) {
 		return findInverseReferencers(scalar, FacetedScalarReference.class, OmlPackage.Literals.FACETED_SCALAR_REFERENCE__SCALAR);
 	}
 
 	// EnumeratedScalar
 
-	public static Iterable<EnumeratedScalarReference> findEnumeratedScalarReferencesWithScalar(EnumeratedScalar scalar) {
+	public static Collection<EnumeratedScalarReference> findEnumeratedScalarReferencesWithScalar(EnumeratedScalar scalar) {
 		return findInverseReferencers(scalar, EnumeratedScalarReference.class, OmlPackage.Literals.ENUMERATED_SCALAR_REFERENCE__SCALAR);
 	}
 
 	// Relation
 
-	public static Iterable<RelationReference> findRelationReferencesWithRelation(Relation relation) {
+	public static Collection<RelationReference> findRelationReferencesWithRelation(Relation relation) {
 		return findInverseReferencers(relation, RelationReference.class, OmlPackage.Literals.RELATION_REFERENCE__RELATION);
 	}
 
-	public static Iterable<RelationRestrictionAxiom> findRelationRestrictionAxiomsWithRelation(Relation relation) {
+	public static Collection<RelationRestrictionAxiom> findRelationRestrictionAxiomsWithRelation(Relation relation) {
 		return findInverseReferencers(relation, RelationRestrictionAxiom.class, OmlPackage.Literals.RELATION_RESTRICTION_AXIOM__RELATION);
 	}
 
-	public static Iterable<LinkAssertion> findLinkAssertionsWithRelation(Relation relation) {
+	public static Collection<LinkAssertion> findLinkAssertionsWithRelation(Relation relation) {
 		return findInverseReferencers(relation, LinkAssertion.class, OmlPackage.Literals.LINK_ASSERTION__RELATION);
 	}
 
-	public static Iterable<RelationPredicate> findRelationPredicatesWithRelation(Relation relation) {
+	public static Collection<RelationPredicate> findRelationPredicatesWithRelation(Relation relation) {
 		return findInverseReferencers(relation, RelationPredicate.class, OmlPackage.Literals.RELATION_PREDICATE__RELATION);
 	}
 
@@ -355,7 +355,7 @@ public class OmlIndex {
 
 	// Rule
 
-	public static Iterable<RuleReference> findRuleReferencesWithRule(Rule rule) {
+	public static Collection<RuleReference> findRuleReferencesWithRule(Rule rule) {
 		return findInverseReferencers(rule, RuleReference.class, OmlPackage.Literals.RULE_REFERENCE__RULE);
 	}
 
@@ -365,31 +365,31 @@ public class OmlIndex {
 
 	// NamedInstance
 
-	public static Iterable<RelationInstance> findRelationInstancesWithSource(NamedInstance instance) {
+	public static Collection<RelationInstance> findRelationInstancesWithSource(NamedInstance instance) {
 		return findInverseReferencers(instance, RelationInstance.class, OmlPackage.Literals.RELATION_INSTANCE__SOURCE);
 	}
 	
-	public static Iterable<RelationInstance> findRelationInstancesWithTarget(NamedInstance instance) {
+	public static Collection<RelationInstance> findRelationInstancesWithTarget(NamedInstance instance) {
 		return findInverseReferencers(instance, RelationInstance.class, OmlPackage.Literals.RELATION_INSTANCE__TARGET);
 	}
 
-	public static Iterable<LinkAssertion> findLinkAssertionsWithTarget(NamedInstance instance) {
+	public static Collection<LinkAssertion> findLinkAssertionsWithTarget(NamedInstance instance) {
 		return findInverseReferencers(instance, LinkAssertion.class, OmlPackage.Literals.LINK_ASSERTION__TARGET);
 	}
 
-	public static Iterable<RelationTargetRestrictionAxiom> findRelationTargetRestrictionAxiomsWithTarget(NamedInstance instance) {
+	public static Collection<RelationTargetRestrictionAxiom> findRelationTargetRestrictionAxiomsWithTarget(NamedInstance instance) {
 		return findInverseReferencers(instance, RelationTargetRestrictionAxiom.class, OmlPackage.Literals.RELATION_TARGET_RESTRICTION_AXIOM__TARGET);
 	}
 
 	// ConceptInstance
 
-	public static Iterable<ConceptInstanceReference> findConceptInstanceReferencesWithInstance(ConceptInstance instance) {
+	public static Collection<ConceptInstanceReference> findConceptInstanceReferencesWithInstance(ConceptInstance instance) {
 		return findInverseReferencers(instance, ConceptInstanceReference.class, OmlPackage.Literals.CONCEPT_INSTANCE_REFERENCE__INSTANCE);
 	}
 
 	// RelationInstance
 
-	public static Iterable<RelationInstanceReference> findRelationInstanceReferencesWithInstance(RelationInstance instance) {
+	public static Collection<RelationInstanceReference> findRelationInstanceReferencesWithInstance(RelationInstance instance) {
 		return findInverseReferencers(instance, RelationInstanceReference.class, OmlPackage.Literals.RELATION_INSTANCE_REFERENCE__INSTANCE); 
 	}
 

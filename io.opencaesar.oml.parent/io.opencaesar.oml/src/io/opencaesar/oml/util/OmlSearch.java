@@ -18,22 +18,13 @@
  */
 package io.opencaesar.oml.util;
 
-import static org.eclipse.xtext.xbase.lib.IterableExtensions.exists;
-import static org.eclipse.xtext.xbase.lib.IterableExtensions.filter;
-import static org.eclipse.xtext.xbase.lib.IterableExtensions.flatMap;
-import static org.eclipse.xtext.xbase.lib.IterableExtensions.flatten;
-import static org.eclipse.xtext.xbase.lib.IterableExtensions.head;
-import static org.eclipse.xtext.xbase.lib.IterableExtensions.isEmpty;
-import static org.eclipse.xtext.xbase.lib.IterableExtensions.map;
-import static org.eclipse.xtext.xbase.lib.IterableExtensions.reject;
-import static org.eclipse.xtext.xbase.lib.IterableExtensions.toList;
-
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 
 import io.opencaesar.oml.AnnotatedElement;
 import io.opencaesar.oml.Annotation;
@@ -102,7 +93,7 @@ public class OmlSearch extends OmlIndex {
 
 	// AnnotatedElement
 
-	public static Iterable<Annotation> findAnnotations(AnnotatedElement element) {
+	public static Collection<Annotation> findAnnotations(AnnotatedElement element) {
 	    if (element instanceof Member) {
 	        return findAnnotations((Member)element);
 	    } else {
@@ -110,152 +101,206 @@ public class OmlSearch extends OmlIndex {
 	    }
 	}
 
-	public static Iterable<Literal> findAnnotationValues(AnnotatedElement element, String annotationPropertyIri) {
-		return map(filter(findAnnotations(element), a -> OmlRead.getIri(a.getProperty()).equals(annotationPropertyIri)), a -> a.getValue());
+	public static Collection<Literal> findAnnotationValues(AnnotatedElement element, String annotationPropertyIri) {
+		return findAnnotations(element).stream().
+			filter(a -> OmlRead.getIri(a.getProperty()).equals(annotationPropertyIri)).
+			map(a -> a.getValue()).
+			collect(Collectors.toList());
 	}
 	
 	public static String findAnnotationLexicalValue(AnnotatedElement element, String annotationPropertyIri) {
-		Iterable<Literal> literals = findAnnotationValues(element, annotationPropertyIri);
-		return (!isEmpty(literals)) ? OmlRead.getLexicalValue(head(literals)) : null;
+		Collection<Literal> literals = findAnnotationValues(element, annotationPropertyIri);
+		return (!literals.isEmpty()) ? OmlRead.getLexicalValue(literals.iterator().next()) : null;
 	}
 	
 	// IdentifiedElement
 	
 	// Ontology
 
-	public static Iterable<Import> findImportsWithTarget(Ontology ontology) {
+	public static Collection<Import> findImportsWithTarget(Ontology ontology) {
 		final Resource resource = ontology.eResource();
-		final ResourceSet resourceSet = (resource != null) ? resource.getResourceSet() : null;
-		final Iterable<Ontology> ontologies = OmlRead.getOntologies(resourceSet);
-		final Iterable<Import> allImports = flatten(map(ontologies, o -> OmlRead.getImportsWithSource(o)));
-		return filter(allImports, i -> OmlRead.getImportingOntology(i) == ontology);
+		return (resource == null) ? Collections.emptyList() :
+			OmlRead.getOntologies(resource.getResourceSet()).stream().
+				flatMap(o -> OmlRead.getImportsWithSource(o).stream()).
+				filter(i -> OmlRead.getImportingOntology(i) == ontology).
+				collect(Collectors.toList());
 	}
 
-	public static Iterable<Ontology> findImportingOntologies(Ontology ontology) {
-		return map(OmlSearch.findImportsWithTarget(ontology), i -> OmlRead.getImportingOntology(i));
+	public static Collection<Ontology> findImportingOntologies(Ontology ontology) {
+		return findImportsWithTarget(ontology).stream().
+			map(i -> OmlRead.getImportingOntology(i)).
+			collect(Collectors.toList());
 	}
 
 	// VocabularyBox
 
-	public static Iterable<DescriptionUsage> findDescriptionUsagesWithUsedVocabularyBox(VocabularyBox box) {
-		return filter(OmlSearch.findImportsWithTarget(box), DescriptionUsage.class);
+	public static Collection<DescriptionUsage> findDescriptionUsagesWithUsedVocabularyBox(VocabularyBox box) {
+		return findImportsWithTarget(box).stream().
+			filter(i -> i instanceof DescriptionUsage).
+			map(i -> (DescriptionUsage)i).
+			collect(Collectors.toList());
 	}
 
-	public static Iterable<Description> findUsingDescriptions(VocabularyBox box) {
-		return map(findDescriptionUsagesWithUsedVocabularyBox(box), u -> OmlRead.getUsingDescription(u));
+	public static Collection<Description> findUsingDescriptions(VocabularyBox box) {
+		return findDescriptionUsagesWithUsedVocabularyBox(box).stream().
+				map(i -> OmlRead.getUsingDescription(i)).
+				collect(Collectors.toList());
 	}
 
 	// Vocabulary
 
-	public static Iterable<VocabularyExtension> findVocabularyExtensionsWithExtendedVocabulary(Vocabulary vocabulary) {
-		return filter(findImportsWithTarget(vocabulary), VocabularyExtension.class);
+	public static Collection<VocabularyExtension> findVocabularyExtensionsWithExtendedVocabulary(Vocabulary vocabulary) {
+		return findImportsWithTarget(vocabulary).stream().
+			filter(i -> i instanceof VocabularyExtension).
+			map(i -> (VocabularyExtension)i).
+			collect(Collectors.toList());
 	}
 
-	public static Iterable<Vocabulary> findExtendingVocabularies(Vocabulary vocabulary) {
-		return map(findVocabularyExtensionsWithExtendedVocabulary(vocabulary), e -> OmlRead.getExtendingVocabulary(e));
+	public static Collection<Vocabulary> findExtendingVocabularies(Vocabulary vocabulary) {
+		return findVocabularyExtensionsWithExtendedVocabulary(vocabulary).stream().
+				map(i -> OmlRead.getExtendingVocabulary(i)).
+				collect(Collectors.toList());
 	}
 
-	public static Iterable<VocabularyBundleInclusion> findVocabularyBundleInclusionsWithIncludedVocabulary(Vocabulary vocabulary) {
-		return filter(findImportsWithTarget(vocabulary), VocabularyBundleInclusion.class);
+	public static Collection<VocabularyBundleInclusion> findVocabularyBundleInclusionsWithIncludedVocabulary(Vocabulary vocabulary) {
+		return findImportsWithTarget(vocabulary).stream().
+				filter(i -> i instanceof VocabularyBundleInclusion).
+				map(i -> (VocabularyBundleInclusion)i).
+				collect(Collectors.toList());
 	}
 
-	public static Iterable<VocabularyBundle> findIncludingVocabularyBundles(Vocabulary vocabulary) {
-		return map(findVocabularyBundleInclusionsWithIncludedVocabulary(vocabulary), i -> OmlRead.getIncludingVocabularyBundle(i));
+	public static Collection<VocabularyBundle> findIncludingVocabularyBundles(Vocabulary vocabulary) {
+		return findVocabularyBundleInclusionsWithIncludedVocabulary(vocabulary).stream().
+				map(i -> OmlRead.getIncludingVocabularyBundle(i)).
+				collect(Collectors.toList());
 	}
 
 	// VocabularyBundle
 	
-	public static Iterable<VocabularyBundleExtension> findVocabularyBundleExtensionsWithExtendedVocabularyBundle(VocabularyBundle bundle) {
-		return filter(findImportsWithTarget(bundle), VocabularyBundleExtension.class);
+	public static Collection<VocabularyBundleExtension> findVocabularyBundleExtensionsWithExtendedVocabularyBundle(VocabularyBundle bundle) {
+		return findImportsWithTarget(bundle).stream().
+				filter(i -> i instanceof VocabularyBundleExtension).
+				map(i -> (VocabularyBundleExtension)i).
+				collect(Collectors.toList());
 	}
 
-	public static Iterable<VocabularyBundle> findExtendingVocabularyBundles(VocabularyBundle bundle) {
-		return map(findVocabularyBundleExtensionsWithExtendedVocabularyBundle(bundle), e -> OmlRead.getExtendingVocabularyBundle(e));
+	public static Collection<VocabularyBundle> findExtendingVocabularyBundles(VocabularyBundle bundle) {
+		return findVocabularyBundleExtensionsWithExtendedVocabularyBundle(bundle).stream().
+				map(i -> OmlRead.getExtendingVocabularyBundle(i)).
+				collect(Collectors.toList());
 	}
 
-	public static Iterable<DescriptionBundleUsage> findDescriptionBundleUsagesWithUsedVocabularyBundle(VocabularyBundle bundle) {
-		return filter(findImportsWithTarget(bundle), DescriptionBundleUsage.class);
+	public static Collection<DescriptionBundleUsage> findDescriptionBundleUsagesWithUsedVocabularyBundle(VocabularyBundle bundle) {
+		return findImportsWithTarget(bundle).stream().
+				filter(i -> i instanceof DescriptionBundleUsage).
+				map(i -> (DescriptionBundleUsage)i).
+				collect(Collectors.toList());
 	}
 
-	public static Iterable<DescriptionBundle> findUsingDescriptionBundles(VocabularyBundle bundle) {
-		return map(findDescriptionBundleUsagesWithUsedVocabularyBundle(bundle), i -> OmlRead.getUsingDescriptionBundle(i));
+	public static Collection<DescriptionBundle> findUsingDescriptionBundles(VocabularyBundle bundle) {
+		return findDescriptionBundleUsagesWithUsedVocabularyBundle(bundle).stream().
+				map(i -> OmlRead.getUsingDescriptionBundle(i)).
+				collect(Collectors.toList());
 	}
 
 	// DescriptionBox
 
-	public static Iterable<VocabularyUsage> findVocabularyUsagesWithUsedDescriptionBox(DescriptionBox box) {
-		return filter(findImportsWithTarget(box), VocabularyUsage.class);
+	public static Collection<VocabularyUsage> findVocabularyUsagesWithUsedDescriptionBox(DescriptionBox box) {
+		return findImportsWithTarget(box).stream().
+				filter(i -> i instanceof VocabularyUsage).
+				map(i -> (VocabularyUsage)i).
+				collect(Collectors.toList());
 	}
 
-	public static Iterable<Vocabulary> findUsingVocabularies(DescriptionBox box) {
-		return map(findVocabularyUsagesWithUsedDescriptionBox(box), u -> OmlRead.getUsingVocabulary(u));
+	public static Collection<Vocabulary> findUsingVocabularies(DescriptionBox box) {
+		return findVocabularyUsagesWithUsedDescriptionBox(box).stream().
+				map(i -> OmlRead.getUsingVocabulary(i)).
+				collect(Collectors.toList());
 	}
 
 	// Description
 	
-	public static Iterable<DescriptionExtension> findDescriptionExtensionsWithExtendedDescription(Description description) {
-		return filter(findImportsWithTarget(description), DescriptionExtension.class);
+	public static Collection<DescriptionExtension> findDescriptionExtensionsWithExtendedDescription(Description description) {
+		return findImportsWithTarget(description).stream().
+				filter(i -> i instanceof DescriptionExtension).
+				map(i -> (DescriptionExtension)i).
+				collect(Collectors.toList());
 	}
 
-	public static Iterable<Description> findExtendingDescriptions(Description description) {
-		return map(findDescriptionExtensionsWithExtendedDescription(description), e -> OmlRead.getExtendingDescription(e));
+	public static Collection<Description> findExtendingDescriptions(Description description) {
+		return findDescriptionExtensionsWithExtendedDescription(description).stream().
+				map(i -> OmlRead.getExtendingDescription(i)).
+				collect(Collectors.toList());
 	}
 
-	public static Iterable<DescriptionBundleInclusion> findDescriptionBundleInclusionsWithIncludedDescription(Description description) {
-		return filter(findImportsWithTarget(description), DescriptionBundleInclusion.class);
+	public static Collection<DescriptionBundleInclusion> findDescriptionBundleInclusionsWithIncludedDescription(Description description) {
+		return findImportsWithTarget(description).stream().
+				filter(i -> i instanceof DescriptionBundleInclusion).
+				map(i -> (DescriptionBundleInclusion)i).
+				collect(Collectors.toList());
 	}
 
-	public static Iterable<DescriptionBundle> findIncludingDescriptionBundles(Description description) {
-		return map(findDescriptionBundleInclusionsWithIncludedDescription(description), i -> OmlRead.getIncludingDescriptionBundle(i));
+	public static Collection<DescriptionBundle> findIncludingDescriptionBundles(Description description) {
+		return findDescriptionBundleInclusionsWithIncludedDescription(description).stream().
+				map(i -> OmlRead.getIncludingDescriptionBundle(i)).
+				collect(Collectors.toList());
 	}
 
 	// DescriptionBundle
 	
-	public static Iterable<DescriptionBundleExtension> findDescriptionBundleExtensionsWithExtendedDescriptionBundle(DescriptionBundle bundle) {
-		return filter(findImportsWithTarget(bundle), DescriptionBundleExtension.class);
+	public static Collection<DescriptionBundleExtension> findDescriptionBundleExtensionsWithExtendedDescriptionBundle(DescriptionBundle bundle) {
+		return findImportsWithTarget(bundle).stream().
+				filter(i -> i instanceof DescriptionBundleExtension).
+				map(i -> (DescriptionBundleExtension)i).
+				collect(Collectors.toList());
 	}
 
-	public static Iterable<DescriptionBundle> findExtendingDescriptionBundles(DescriptionBundle bundle) {
-		return map(findDescriptionBundleExtensionsWithExtendedDescriptionBundle(bundle), e -> OmlRead.getExtendingDescriptionBundle(e));
+	public static Collection<DescriptionBundle> findExtendingDescriptionBundles(DescriptionBundle bundle) {
+		return findDescriptionBundleExtensionsWithExtendedDescriptionBundle(bundle).stream().
+				map(i -> OmlRead.getExtendingDescriptionBundle(i)).
+				collect(Collectors.toList());
 	}
 
 	// Member
 	
-	public static Iterable<Reference> findReferences(Member member) {
+	public static Collection<Reference> findReferences(Member member) {
+		Collection<Reference> references = new ArrayList<>();
 		if (member instanceof AnnotationProperty) {
-			return findReferences((AnnotationProperty) member);
+			references.addAll(findAnnotationPropertyReferencesWithProperty((AnnotationProperty)member));
 		} else if (member instanceof Aspect) {
-			return findReferences((Aspect) member);
+			references.addAll(findAspectReferencesWithAspect((Aspect)member));
 		} else if (member instanceof Concept) {
-			return findReferences((Concept) member);
+			references.addAll(findConceptReferencesWithConcept((Concept)member));
 		} else if (member instanceof ConceptInstance) {
-			return findReferences((ConceptInstance) member);
+			references.addAll(findConceptInstanceReferencesWithInstance((ConceptInstance)member));
 		} else if (member instanceof EnumeratedScalar) {
-			return findReferences((EnumeratedScalar) member);
+			references.addAll(findEnumeratedScalarReferencesWithScalar((EnumeratedScalar)member));
 		} else if (member instanceof FacetedScalar) {
-			return findReferences((FacetedScalar) member);
+			references.addAll(findFacetedScalarReferencesWithScalar((FacetedScalar)member));
 		} else if (member instanceof Relation) {
-			return findReferences((Relation) member);
+			references.addAll(findRelationReferencesWithRelation((Relation)member));
 		} else if (member instanceof RelationEntity) {
-			return findReferences((RelationEntity) member);
+			references.addAll(findRelationEntityReferencesWithEntity((RelationEntity)member));
 		} else if (member instanceof RelationInstance) {
-			return findReferences((RelationInstance) member);
+			references.addAll(findRelationInstanceReferencesWithInstance((RelationInstance)member));
 		} else if (member instanceof Rule) {
-			return findReferences((Rule) member);
+			references.addAll(findRuleReferencesWithRule((Rule)member));
 		} else if (member instanceof ScalarProperty) {
-			return findReferences((ScalarProperty) member);
+			references.addAll(findScalarPropertyReferencesWithProperty((ScalarProperty)member));
 		} else if (member instanceof Structure) {
-			return findReferences((Structure) member);
+			references.addAll(findStructureReferencesWithStructure((Structure)member));
 		} else if (member instanceof StructuredProperty) {
-			return findReferences((StructuredProperty) member);
+			references.addAll(findStructuredPropertyReferencesWithProperty((StructuredProperty)member));
 		}
-		return Collections.emptyList();
+		return references;
 	}
 
-	public static Iterable<Annotation> findAnnotations(Member member) {
+	public static Collection<Annotation> findAnnotations(Member member) {
 		final List<Annotation> terms = new ArrayList<>();
 		terms.addAll(member.getOwnedAnnotations());
-		terms.addAll(toList(flatMap(findReferences(member), r -> r.getOwnedAnnotations())));
+		terms.addAll(findReferences(member).stream().
+				flatMap(r -> r.getOwnedAnnotations().stream()).
+				collect(Collectors.toList()));
 		return terms;
 	}
 
@@ -263,67 +308,97 @@ public class OmlSearch extends OmlIndex {
 
 	// SpecializableTerm
 
-	public static Iterable<SpecializationAxiom> findSpecializationsWithSource(SpecializableTerm term) {
+	public static Collection<SpecializationAxiom> findSpecializationsWithSource(SpecializableTerm term) {
 		final List<SpecializationAxiom> specializations = new ArrayList<>();
 		specializations.addAll(term.getOwnedSpecializations());
-		specializations.addAll(toList(flatMap(filter(findReferences(term), SpecializableTermReference.class), r -> r.getOwnedSpecializations())));
+		specializations.addAll(findReferences(term).stream().
+				filter(i -> i instanceof SpecializableTermReference).
+				map(i -> (SpecializableTermReference)i).
+				flatMap(r -> r.getOwnedSpecializations().stream()).
+				collect(Collectors.toList()));
 		return specializations;
 	}
 
-	public static Iterable<SpecializableTerm> findSpecializedTerms(SpecializableTerm term) {
-		return map(findSpecializationsWithSource(term), s -> s.getSpecializedTerm());
+	public static Collection<SpecializableTerm> findSpecializedTerms(SpecializableTerm term) {
+		return findSpecializationsWithSource(term).stream().
+				map(i -> i.getSpecializedTerm()).
+				collect(Collectors.toList());
 	}
 		
-	public static Iterable<SpecializationAxiom> findSpecializationsWithTarget(SpecializableTerm term) {
+	public static Collection<SpecializationAxiom> findSpecializationsWithTarget(SpecializableTerm term) {
 		return findSpecializationAxiomsWithSpecializedTerm(term);
 	}
 
-	public static Iterable<SpecializableTerm> findSpecializingTerms(SpecializableTerm term) {
-		return map(findSpecializationsWithTarget(term), s -> OmlRead.getSpecializingTerm(s));
+	public static Collection<SpecializableTerm> findSpecializingTerms(SpecializableTerm term) {
+		return findSpecializationsWithTarget(term).stream().
+				map(i -> OmlRead.getSpecializingTerm(i)).
+				collect(Collectors.toList());
 	}
 
 	// Type
 
 	// Classifier
 	
-	public static Iterable<PropertyRestrictionAxiom> findPropertyRestrictions(Classifier classifier) {
+	public static Collection<PropertyRestrictionAxiom> findPropertyRestrictions(Classifier classifier) {
 		final List<PropertyRestrictionAxiom> restrictions = new ArrayList<>();
 		restrictions.addAll(classifier.getOwnedPropertyRestrictions());
-		restrictions.addAll(toList(flatMap(filter(findReferences(classifier), ClassifierReference.class), r -> r.getOwnedPropertyRestrictions())));
+		restrictions.addAll(findReferences(classifier).stream().
+				filter(i -> i instanceof ClassifierReference).
+				map(i -> (ClassifierReference)i).
+				flatMap(r -> r.getOwnedPropertyRestrictions().stream()).
+				collect(Collectors.toList()));
 		return restrictions;
 	}
 
 	// Entity
 
-	public static Iterable<Relation> findRelationsWithSource(Entity entity) {
+	public static Collection<Relation> findRelationsWithSource(Entity entity) {
 		final List<Relation> relations = new ArrayList<>();
-		relations.addAll(toList(map(findRelationEntitiesWithSource(entity), r -> r.getForward())));
-		relations.addAll(toList(reject(map(findRelationEntitiesWithTarget(entity), r -> r.getReverse()), r -> r == null)));
+		relations.addAll(findRelationEntitiesWithSource(entity).stream().
+				map(r -> r.getForward()).
+				collect(Collectors.toList()));
+		relations.addAll(findRelationEntitiesWithTarget(entity).stream().
+				map(r -> r.getReverse()).
+				filter(r -> r != null).
+				collect(Collectors.toList()));
 		return relations;
 	}
 
-	public static Iterable<Relation> findRelationsWithTarget(Entity entity) {
+	public static Collection<Relation> findRelationsWithTarget(Entity entity) {
 		final List<Relation> relations = new ArrayList<>();
-		relations.addAll(toList(map(findRelationEntitiesWithTarget(entity), r -> r.getForward())));
-		relations.addAll(toList(reject(map(findRelationEntitiesWithSource(entity), r -> r.getReverse()), r -> r == null)));
+		relations.addAll(findRelationEntitiesWithTarget(entity).stream().
+				map(r -> r.getForward()).
+				collect(Collectors.toList()));
+		relations.addAll(findRelationEntitiesWithSource(entity).stream().
+				map(r -> r.getReverse()).
+				filter(r -> r != null).
+				collect(Collectors.toList()));
 		return relations;
 	}
 
-	public static Iterable<RelationRestrictionAxiom> findRelationRestrictions(Entity entity) {
+	public static Collection<RelationRestrictionAxiom> findRelationRestrictions(Entity entity) {
 		final List<RelationRestrictionAxiom> restrictions = new ArrayList<>();
 		restrictions.addAll(entity.getOwnedRelationRestrictions());
-		restrictions.addAll(toList(flatMap(filter(findReferences(entity), EntityReference.class), r -> r.getOwnedRelationRestrictions())));
+		restrictions.addAll(findReferences(entity).stream().
+				filter(i -> i instanceof EntityReference).
+				map(i -> (EntityReference)i).
+				flatMap(r -> r.getOwnedRelationRestrictions().stream()).
+				collect(Collectors.toList()));
 		return restrictions;
 	}
 
-	public static Iterable<KeyAxiom> findKeys(Entity entity) {
+	public static Collection<KeyAxiom> findKeys(Entity entity) {
 		final List<KeyAxiom> keys = new ArrayList<>();
 		keys.addAll(entity.getOwnedKeys());
-		keys.addAll(toList(flatMap(filter(findReferences(entity), EntityReference.class), r -> r.getOwnedKeys())));
+		keys.addAll(findReferences(entity).stream().
+				filter(i -> i instanceof EntityReference).
+				map(i -> (EntityReference)i).
+				flatMap(r -> r.getOwnedKeys().stream()).
+				collect(Collectors.toList()));
 		return keys;
 	}
 
-	public static Iterable<TypeAssertion> findTypeAssertionsWithType(Entity entity) {
+	public static Collection<TypeAssertion> findTypeAssertionsWithType(Entity entity) {
 		if (entity instanceof Concept) {
 			return findTypeAssertionsWithType((Concept) entity);
 		} else if (entity instanceof RelationEntity) {
@@ -332,7 +407,7 @@ public class OmlSearch extends OmlIndex {
 		return Collections.emptyList();
 	}
 
-	public static Iterable<NamedInstance> findNamedInstancesWithType(Entity entity) {
+	public static Collection<NamedInstance> findNamedInstancesWithType(Entity entity) {
 		if (entity instanceof Concept) {
 			return findNamedInstancesWithType((Concept) entity);
 		} else if (entity instanceof RelationEntity) {
@@ -343,97 +418,72 @@ public class OmlSearch extends OmlIndex {
 
 	// Aspect
 
-	public static Iterable<Reference> findReferences(Aspect member) {
-		return filter(findAspectReferencesWithAspect(member), Reference.class);
-	}
-
 	// Concept
 
-	public static Iterable<Reference> findReferences(Concept member) {
-		return filter(findConceptReferencesWithConcept(member), Reference.class);
-	}
-
-	public static Iterable<TypeAssertion> findTypeAssertionsWithType(Concept entity) {
-		return filter(findConceptTypeAssertionsWithType(entity), TypeAssertion.class);
+	public static Collection<TypeAssertion> findTypeAssertionsWithType(Concept entity) {
+		return findConceptTypeAssertionsWithType(entity).stream().
+				filter(i -> i instanceof TypeAssertion).
+				map(i -> (TypeAssertion)i).
+				collect(Collectors.toList());
 	}
 	
-	public static Iterable<NamedInstance> findNamedInstancesWithType(Concept entity) {
+	public static Collection<NamedInstance> findNamedInstancesWithType(Concept entity) {
 		return findConceptInstancesWithType(entity);
 	}
 
-	public static Iterable<NamedInstance> findConceptInstancesWithType(Concept entity) {
-		return map(findConceptTypeAssertionsWithType(entity), a -> OmlRead.getConceptInstance(a));
+	public static Collection<NamedInstance> findConceptInstancesWithType(Concept entity) {
+		return findConceptTypeAssertionsWithType(entity).stream().
+				map(i -> OmlRead.getConceptInstance(i)).
+				collect(Collectors.toList());
 	}
 
 	// RelationEntity
 	
-	public static Iterable<Reference> findReferences(RelationEntity member) {
-		return filter(findRelationEntityReferencesWithEntity(member), Reference.class);
-	}
-
-	public static Iterable<TypeAssertion> findTypeAssertionsWithType(RelationEntity entity) {
-		return filter(findRelationTypeAssertionsWithType(entity), TypeAssertion.class);
+	public static Collection<TypeAssertion> findTypeAssertionsWithType(RelationEntity entity) {
+		return findRelationTypeAssertionsWithType(entity).stream().
+				filter(i -> i instanceof TypeAssertion).
+				map(i -> (TypeAssertion)i).
+				collect(Collectors.toList());
 	}
 	
-	public static Iterable<NamedInstance> findNamedInstancesWithType(RelationEntity entity) {
-		return filter(findRelationInstancesWithType(entity), NamedInstance.class);
+	public static Collection<NamedInstance> findNamedInstancesWithType(RelationEntity entity) {
+		return findRelationInstancesWithType(entity).stream().
+				filter(i -> i instanceof NamedInstance).
+				map(i -> (NamedInstance)i).
+				collect(Collectors.toList());
 	}
 
-	public static Iterable<RelationInstance> findRelationInstancesWithType(RelationEntity entity) {
-		return map(findRelationTypeAssertionsWithType(entity), a -> OmlRead.getRelationInstance(a));
+	public static Collection<RelationInstance> findRelationInstancesWithType(RelationEntity entity) {
+		return findRelationTypeAssertionsWithType(entity).stream().
+				map(i -> OmlRead.getRelationInstance(i)).
+				collect(Collectors.toList());
 	}
 
 	// Structure
-
-	public static Iterable<Reference> findReferences(Structure member) {
-		return filter(findStructureReferencesWithStructure(member), Reference.class);
-	}
 
 	// Property
 
 	// AnnotationProperty
 
-	public static Iterable<Reference> findReferences(AnnotationProperty member) {
-		return filter(findAnnotationPropertyReferencesWithProperty(member), Reference.class);
-	}
-
 	// FeatureProperty
 
 	// ScalarProperty
 
-	public static Iterable<Reference> findReferences(ScalarProperty member) {
-		return filter(findScalarPropertyReferencesWithProperty(member), Reference.class);
-	}
-
-	public static Iterable<Entity> findEntitiesWithKeyProperty(ScalarProperty property) {
-		return map(findKeyAxiomWithProperty(property), a -> OmlRead.getKeyedEntity(a));
+	public static Collection<Entity> findEntitiesWithKeyProperty(ScalarProperty property) {
+		return findKeyAxiomWithProperty(property).stream().
+				map(i -> OmlRead.getKeyedEntity(i)).
+				collect(Collectors.toList());
 	}
 
 	// StructuredProperty
-
-	public static Iterable<Reference> findReferences(StructuredProperty member) {
-		return filter(findStructuredPropertyReferencesWithProperty(member), Reference.class);
-	}
 
 	// Scalar
 
 	// FacetedScalar
 
-	public static Iterable<Reference> findReferences(FacetedScalar member) {
-		return filter(findFacetedScalarReferencesWithScalar(member), Reference.class);
-	}
-
 	// EnumeratedScalar
 
-	public static Iterable<Reference> findReferences(EnumeratedScalar member) {
-		return filter(findEnumeratedScalarReferencesWithScalar(member), Reference.class);
-	}
-
 	// Relation
-
-	public static Iterable<Reference> findReferences(Relation member) {
-		return filter(findRelationReferencesWithRelation(member), Reference.class);
-	}
 
 	// ForwardRelation
 
@@ -441,13 +491,9 @@ public class OmlSearch extends OmlIndex {
 
 	// Rule
 
-	public static Iterable<Reference> findReferences(Rule member) {
-		return filter(findRuleReferencesWithRule(member), Reference.class);
-	}
-
 	// Instance
 
-	public static Iterable<PropertyValueAssertion> findPropertyValueAssertions(Instance instance) {
+	public static Collection<PropertyValueAssertion> findPropertyValueAssertions(Instance instance) {
 	    if (instance instanceof NamedInstance) {
 	        return findPropertyValueAssertions((NamedInstance)instance);
 	    } else {
@@ -455,51 +501,80 @@ public class OmlSearch extends OmlIndex {
 	    }
 	}
 
-	public static Iterable<Element> findPropertyValues(Instance instance, String propertyIri) {
-		return map(filter(findPropertyValueAssertions(instance), a -> OmlRead.getIri(OmlRead.getProperty(a)).equals(propertyIri)), a -> OmlRead.getValue(a));
+	public static Collection<Element> findPropertyValues(Instance instance, String propertyIri) {
+		return findPropertyValueAssertions(instance).stream().
+				filter(a -> OmlRead.getIri(OmlRead.getProperty(a)).equals(propertyIri)).
+				map(a -> OmlRead.getValue(a)).
+				collect(Collectors.toList());
 	}
 	
-	public static Iterable<Literal> findScalarPropertyValues(Instance instance, String propertyIri) {
-		return filter(findPropertyValues(instance, propertyIri), Literal.class);
+	public static Collection<Literal> findScalarPropertyValues(Instance instance, String propertyIri) {
+		return findPropertyValues(instance, propertyIri).stream().
+				filter(i -> i instanceof Literal).
+				map(i -> (Literal)i).
+				collect(Collectors.toList());
 	}
 
-	public static Iterable<StructureInstance> findStructuredPropertyValues(Instance instance, String propertyIri) {
-		return filter(findPropertyValues(instance, propertyIri), StructureInstance.class);
+	public static Collection<StructureInstance> findStructuredPropertyValues(Instance instance, String propertyIri) {
+		return findPropertyValues(instance, propertyIri).stream().
+				filter(i -> i instanceof StructureInstance).
+				map(i -> (StructureInstance)i).
+				collect(Collectors.toList());
 	}
 
 	// StructureInstance
 
 	// NamedInstance
 
-	public static Iterable<PropertyValueAssertion> findPropertyValueAssertions(NamedInstance instance) {
+	public static Collection<PropertyValueAssertion> findPropertyValueAssertions(NamedInstance instance) {
 		final List<PropertyValueAssertion> relations = new ArrayList<>();
 		relations.addAll(instance.getOwnedPropertyValues());
-		relations.addAll(toList(flatMap(filter(findReferences(instance), NamedInstanceReference.class), r -> r.getOwnedPropertyValues())));
+		relations.addAll(findReferences(instance).stream().
+				filter(i -> i instanceof NamedInstanceReference).
+				map(i -> (NamedInstanceReference)i).
+				flatMap(r -> r.getOwnedPropertyValues().stream()).
+				collect(Collectors.toList()));
 		return relations;
 	}
 
-	public static Iterable<LinkAssertion> findLinkAssertionsWithSource(NamedInstance instance) {
+	public static Collection<LinkAssertion> findLinkAssertionsWithSource(NamedInstance instance) {
 		final List<LinkAssertion> relations = new ArrayList<>();
 		relations.addAll(instance.getOwnedLinks());
-		relations.addAll(toList(flatMap(filter(findReferences(instance), NamedInstanceReference.class), r -> r.getOwnedLinks())));
+		relations.addAll(findReferences(instance).stream().
+				filter(i -> i instanceof NamedInstanceReference).
+				map(i -> (NamedInstanceReference)i).
+				flatMap(r -> r.getOwnedLinks().stream()).
+				collect(Collectors.toList()));
 		return relations;
 	}
 
-	public static Iterable<NamedInstance> findInstancesRelatedAsTargetOf(NamedInstance instance, String relationIri) {
+	public static Collection<NamedInstance> findInstancesRelatedAsTargetOf(NamedInstance instance, String relationIri) {
 		final List<NamedInstance> instances = new ArrayList<>();
-		instances.addAll(toList(map(filter(findLinkAssertionsWithSource(instance), a -> OmlRead.getIri(a.getRelation()).equals(relationIri)), a -> a.getTarget())));
-		instances.addAll(toList(map(filter(findRelationInstancesWithSource(instance), a -> exists(findTypes(a), t -> OmlRead.getIri(t).equals(relationIri))), a -> a.getTarget())));
+		instances.addAll(findLinkAssertionsWithSource(instance).stream().
+				filter(a -> OmlRead.getIri(a.getRelation()).equals(relationIri)).
+				map(a -> a.getTarget()).
+				collect(Collectors.toList()));
+		instances.addAll(findRelationInstancesWithSource(instance).stream().
+				filter(a -> findTypes(a).stream().filter(t -> OmlRead.getIri(t).equals(relationIri)).findAny().isPresent()).
+				map(a -> a.getTarget()).
+				collect(Collectors.toList()));
 		return instances;
 	}
 	
-	public static Iterable<NamedInstance> findInstancesRelatedAsSourceOf(NamedInstance instance, String relationIri) {
+	public static Collection<NamedInstance> findInstancesRelatedAsSourceOf(NamedInstance instance, String relationIri) {
 		final List<NamedInstance> instances = new ArrayList<>();
-		instances.addAll(toList(map(filter(findLinkAssertionsWithTarget(instance), a -> OmlRead.getIri(a.getRelation()).equals(relationIri)), a -> OmlRead.getSource(a))));
-		instances.addAll(toList(map(filter(findRelationInstancesWithTarget(instance), a -> exists(findTypes(a), t -> OmlRead.getIri(t).equals(relationIri))), a -> a.getSource())));
+		instances.addAll(findLinkAssertionsWithTarget(instance).stream().
+				filter(a -> OmlRead.getIri(a.getRelation()).equals(relationIri)).
+				map(a -> OmlRead.getSource(a)).
+				collect(Collectors.toList()));
+		instances.addAll(findRelationInstancesWithTarget(instance).stream().
+				filter(a -> findTypes(a).stream().filter(t -> OmlRead.getIri(t).equals(relationIri)).findAny().isPresent()).
+				map(a -> a.getSource()).
+				collect(Collectors.toList()));
 		return instances;
 	}
 
-	public static Iterable<TypeAssertion> findTypeAssertions(NamedInstance instance) {
+	public static Collection<TypeAssertion> findTypeAssertions(NamedInstance instance) {
 		if (instance instanceof ConceptInstance) {
 			return findTypeAssertions((ConceptInstance) instance);
 		} else if (instance instanceof RelationInstance) {
@@ -508,33 +583,35 @@ public class OmlSearch extends OmlIndex {
 		return Collections.emptyList();
 	}
 	
-	public static Iterable<Entity> findTypes(NamedInstance instance) {
-		return map(findTypeAssertions(instance), a -> OmlRead.getType(a));
+	public static Collection<Entity> findTypes(NamedInstance instance) {
+		return findTypeAssertions(instance).stream().
+				map(i -> OmlRead.getType(i)).
+				collect(Collectors.toList());
 	}
 
 	// ConceptInstance
 
-	public static Iterable<Reference> findReferences(ConceptInstance member) {
-		return filter(findConceptInstanceReferencesWithInstance(member), Reference.class);
-	}
-
-	public static Iterable<TypeAssertion> findTypeAssertions(ConceptInstance instance) {
+	public static Collection<TypeAssertion> findTypeAssertions(ConceptInstance instance) {
 		final List<TypeAssertion> relations = new ArrayList<>();
 		relations.addAll(instance.getOwnedTypes());
-		relations.addAll(toList(flatMap(filter(findReferences(instance), ConceptInstanceReference.class), r -> r.getOwnedTypes())));
+		relations.addAll(findReferences(instance).stream().
+				filter(i -> i instanceof ConceptInstanceReference).
+				map(i -> (ConceptInstanceReference)i).
+				flatMap(r -> r.getOwnedTypes().stream()).
+				collect(Collectors.toList()));
 		return relations;
 	}
 
 	// RelationInstance
 
-	public static Iterable<Reference> findReferences(RelationInstance member) {
-		return filter(findRelationInstanceReferencesWithInstance(member), Reference.class);
-	}
-
-	public static Iterable<TypeAssertion> findTypeAssertions(RelationInstance instance) {
+	public static Collection<TypeAssertion> findTypeAssertions(RelationInstance instance) {
 		final List<TypeAssertion> relations = new ArrayList<>();
 		relations.addAll(instance.getOwnedTypes());
-		relations.addAll(toList(flatMap(filter(findReferences(instance), RelationInstanceReference.class), r -> r.getOwnedTypes())));
+		relations.addAll(findReferences(instance).stream().
+				filter(i -> i instanceof RelationInstanceReference).
+				map(i -> (RelationInstanceReference)i).
+				flatMap(r -> r.getOwnedTypes().stream()).
+				collect(Collectors.toList()));
 		return relations;
 	}
 
