@@ -27,6 +27,8 @@ import java.util.stream.Collectors;
 
 import org.eclipse.emf.ecore.resource.Resource;
 
+import com.google.common.collect.Iterables;
+
 import io.opencaesar.oml.AnnotatedElement;
 import io.opencaesar.oml.Annotation;
 import io.opencaesar.oml.AnnotationProperty;
@@ -364,11 +366,11 @@ public class OmlSearch extends OmlIndex {
 				map(i -> i.getSpecializedTerm()).
 				collect(Collectors.toList());
 	}
-		
+
 	public static List<SpecializableTerm> findAllSpecializedTerms(SpecializableTerm term) {
 		return OmlRead.closure(term, t -> findSpecializedTerms(t));
 	}
-	
+
 	public static List<SpecializableTerm> findAllSpecializedTermsInclusive(SpecializableTerm term) {
 		return OmlRead.reflexiveClosure(term, t -> findSpecializedTerms(t));
 	}
@@ -386,7 +388,7 @@ public class OmlSearch extends OmlIndex {
 	public static List<SpecializableTerm> findAllSpecializingTerms(SpecializableTerm term) {
 		return OmlRead.closure(term, t -> findSpecializingTerms(t));
 	}
-	
+
 	public static List<SpecializableTerm> findAllSpecializingTermsInclusive(SpecializableTerm term) {
 		return OmlRead.reflexiveClosure(term, t -> findSpecializingTerms(t));
 	}
@@ -395,6 +397,10 @@ public class OmlSearch extends OmlIndex {
 
 	// Classifier
 	
+	public static <T extends SpecializableTerm> Iterable<T> findAllSpecializedTerms(T term, Class<T> clazz) {
+		return OmlRead.reflexiveClosure(term, t -> Iterables.filter(findSpecializedTerms(t), clazz));
+	}
+
 	public static List<PropertyRestrictionAxiom> findPropertyRestrictions(Classifier classifier) {
 		final List<PropertyRestrictionAxiom> restrictions = new ArrayList<>();
 		restrictions.addAll(classifier.getOwnedPropertyRestrictions());
@@ -473,7 +479,7 @@ public class OmlSearch extends OmlIndex {
 	}
 
 	public static List<NamedInstance> findNamedInstancesWithSupertype(Entity entity) {
-		
+
 		if (entity instanceof Concept) {
 			return new ArrayList<>(findConceptInstancesWithType((Concept)entity));
 		} else if (entity instanceof RelationEntity) {
@@ -492,7 +498,7 @@ public class OmlSearch extends OmlIndex {
 				map(i -> (TypeAssertion)i).
 				collect(Collectors.toList());
 	}
-	
+
 	public static List<ConceptInstance> findConceptInstancesWithType(Concept entity) {
 		return findConceptTypeAssertionsWithType(entity).stream().
 				map(i -> OmlRead.getConceptInstance(i)).
@@ -507,7 +513,7 @@ public class OmlSearch extends OmlIndex {
 				map(i -> (TypeAssertion)i).
 				collect(Collectors.toList());
 	}
-	
+
 	public static List<RelationInstance> findRelationInstancesWithType(RelationEntity entity) {
 		return findRelationTypeAssertionsWithType(entity).stream().
 				map(i -> OmlRead.getRelationInstance(i)).
@@ -573,9 +579,9 @@ public class OmlSearch extends OmlIndex {
 	public static boolean hasTypeIri(Instance instance, String typeIri) {
 		Member member = OmlRead.getMemberByIri(instance.eResource().getResourceSet(), typeIri);
 		assert member instanceof SpecializableTerm : typeIri+" is not compatoble with this instance";
-		Set<SpecializableTerm> subtypes = new HashSet<>(findAllSpecializingTermsInclusive((SpecializableTerm)member)); 
+		Set<SpecializableTerm> subtypes = new HashSet<>(findAllSpecializingTermsInclusive((SpecializableTerm)member));
 		if (instance instanceof StructureInstance) {
-			return subtypes.contains(((StructureInstance)instance).getType()); 
+			return subtypes.contains(((StructureInstance)instance).getType());
 		} else if (instance instanceof ConceptInstance) {
 			return findTypeAssertions((ConceptInstance)instance).stream().
 					filter(i -> subtypes.contains(i.getType())).

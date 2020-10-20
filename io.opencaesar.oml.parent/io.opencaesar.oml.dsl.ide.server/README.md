@@ -12,9 +12,9 @@ In `src/io/opencaesar/oml/dsl/ide/diagram/`:
 | Xtend | Java |
 |-------|------|
 | OmlDiagramModule.xtend (deleted) | OmlDiagramModule.java |
-| OmlDiagramGenerator.xtend | OmlDiagramViewGenerator.java |
-| OmlDiagramView.xtend | OmlOntologyDiagramView.java |
-| OmlOntologyScopeCalculator.xtend | OmlOntoloyDiagramScope.java |
+| OmlDiagramGenerator.xtend (deleted) | OmlDiagramViewGenerator.java |
+| OmlDiagramView.xtend (deleted) | OmlOntologyDiagramView.java |
+| OmlOntologyScopeCalculator.xtend (deleted) | OmlOntoloyDiagramScope.java |
 
 ## Running in debug mode.
 
