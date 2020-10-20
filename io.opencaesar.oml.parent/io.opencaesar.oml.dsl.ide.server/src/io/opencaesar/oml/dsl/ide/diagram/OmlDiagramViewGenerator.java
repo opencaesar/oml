@@ -446,7 +446,6 @@ public class OmlDiagramViewGenerator extends OmlVisitor<SModelElement> implement
 				final SModelElement source = doSwitch(cls);
 				final SModelElement target = doSwitch(f.getRange());
 				final OmlEdge edge = view.createEdge(cls, f, source, target);
-				LOG.info("addClassifierFeatures(structuredProperty): " + f.getName() + " => " + edge.getId());
 				frame.getChildren().add(edge);
 				traceAndMark(edge, f, context);
 			}

@@ -95,12 +95,12 @@ public class OmlOntologyDiagramView {
 		c.setLayout("hbox");
 		n.getChildren().add(c);
 
-		final OmlLabel l = newSElement(OmlLabel.class, id + ".label", "label:heading");
+		final OmlLabel l = newSElement(OmlLabel.class, id + ".label", OmlDiagramModule.SLabel_SLabelView_heading);
 		l.setText(id);
 		c.getChildren().add(l);
 
 		if (o == ontology) {
-			final OmlButton b = newSElement(OmlButton.class, id + ".expand", "button:expand");
+			final OmlButton b = newSElement(OmlButton.class, id + ".expand", OmlDiagramModule.SButton_ExpandButtonView);
 			c.getChildren().add(b);
 			n.setExpanded(true);
 		}
@@ -227,7 +227,7 @@ public class OmlOntologyDiagramView {
 
 	public OmlLabel createLabel(final Classifier cls, final ScalarProperty property) {
 		final String id = idCache.uniqueId(property, getLocalName(cls) + ".scalar." + getLocalName(property));
-		final OmlLabel l = newLeafSElement(OmlLabel.class, id, OmlDiagramModule.SLabel_SLabelView);
+		final OmlLabel l = newLeafSElement(OmlLabel.class, id, OmlDiagramModule.SLabel_SLabelView_text);
 		l.setText(property.getName() + ": " + property.getRange().getName());
 		return l;
 	}
@@ -235,7 +235,7 @@ public class OmlOntologyDiagramView {
 	public OmlLabel createLabel(final Entity e, final KeyAxiom ax) {
 		final String id = idCache.uniqueId(ax, getLocalName(e) + ".key." + IterableExtensions
 				.join(ListExtensions.map(ax.getProperties(), p -> OmlRead.getAbbreviatedIri(p)), ","));
-		final OmlLabel l = newLeafSElement(OmlLabel.class, id, OmlDiagramModule.SLabel_SLabelView);
+		final OmlLabel l = newLeafSElement(OmlLabel.class, id, OmlDiagramModule.SLabel_SLabelView_text);
 		l.setText("key: " + IterableExtensions
 				.join(ListExtensions.map(ax.getProperties(), p -> OmlRead.getAbbreviatedIri(p)), ", "));
 		return l;
@@ -259,21 +259,21 @@ public class OmlOntologyDiagramView {
 			throw new IllegalArgumentException(
 					"Unknown ScalarPropertyCardinalityRestrictionAxiom kind: " + ax.getKind());
 		}
-		final OmlLabel l = newLeafSElement(OmlLabel.class, id, OmlDiagramModule.SLabel_SLabelView);
+		final OmlLabel l = newLeafSElement(OmlLabel.class, id, OmlDiagramModule.SLabel_SLabelView_text);
 		l.setText("⎸" + getLocalName(ax.getProperty()) + "⎹" + notation + ax.getCardinality());
 		return l;
 	}
 
 	public OmlLabel createLabel(final Entity e, final ScalarPropertyRangeRestrictionAxiom ax) {
 		final String id = idCache.uniqueId(ax, getLocalName(e) + ".rangeRestriction." + getLocalName(ax.getProperty()));
-		final OmlLabel l = newLeafSElement(OmlLabel.class, id, OmlDiagramModule.SLabel_SLabelView);
+		final OmlLabel l = newLeafSElement(OmlLabel.class, id, OmlDiagramModule.SLabel_SLabelView_text);
 		l.setText(getLocalName(ax.getProperty()) + " ⊂ " + getLocalName(ax.getRange()));
 		return l;
 	}
 
 	public OmlLabel createLabel(final Entity e, final ScalarPropertyValueRestrictionAxiom ax) {
 		final String id = idCache.uniqueId(ax, getLocalName(e) + ".valueRestriction." + getLocalName(ax.getProperty()));
-		final OmlLabel l = newLeafSElement(OmlLabel.class, id, OmlDiagramModule.SLabel_SLabelView);
+		final OmlLabel l = newLeafSElement(OmlLabel.class, id, OmlDiagramModule.SLabel_SLabelView_text);
 		l.setText(getLocalName(ax.getProperty()) + " = " + OmlRead.getLexicalValue(ax.getValue()));
 		return l;
 	}
@@ -281,7 +281,7 @@ public class OmlOntologyDiagramView {
 	public OmlLabel createAntecedentLabel(final Predicate predicate) {
 		final Rule rule = predicate.getAntecedentRule();
 		final String id = idCache.uniqueId(predicate, getLocalName(rule) + ".antecedent");
-		final OmlLabel l = newLeafSElement(OmlLabel.class, id, OmlDiagramModule.SLabel_SLabelView);
+		final OmlLabel l = newLeafSElement(OmlLabel.class, id, OmlDiagramModule.SLabel_SLabelView_text);
 		l.setText(toText(predicate));
 		return l;
 	}
@@ -289,7 +289,7 @@ public class OmlOntologyDiagramView {
 	public OmlLabel createConsequentLabel(final RelationPredicate predicate) {
 		final Rule rule = predicate.getConsequentRule();
 		final String id = idCache.uniqueId(predicate, getLocalName(rule) + ".consequent");
-		final OmlLabel l = newLeafSElement(OmlLabel.class, id, OmlDiagramModule.SLabel_SLabelView);
+		final OmlLabel l = newLeafSElement(OmlLabel.class, id, OmlDiagramModule.SLabel_SLabelView_text);
 		l.setText(toText(predicate));
 		return l;
 	}
@@ -317,7 +317,7 @@ public class OmlOntologyDiagramView {
 
 	public OmlLabel createLabel(final NamedInstance i, final ScalarPropertyValueAssertion ax) {
 		final String id = idCache.uniqueId(ax, getLocalName(i) + ".valueAssertion." + getLocalName(ax.getProperty()));
-		final OmlLabel l = newLeafSElement(OmlLabel.class, id, OmlDiagramModule.SLabel_SLabelView);
+		final OmlLabel l = newLeafSElement(OmlLabel.class, id, OmlDiagramModule.SLabel_SLabelView_text);
 		l.setText(getLocalName(ax.getProperty()) + " = " + OmlRead.getLexicalValue(ax.getValue()));
 		return l;
 	}
@@ -326,16 +326,16 @@ public class OmlOntologyDiagramView {
 
 	public OmlEdge createEdge(final Import _import, final SModelElement from, final SModelElement to) {
 		final String id = idCache.uniqueId(from.getId() + ".imports." + to.getId());
-		final OmlLabel l = newLeafSElement(OmlLabel.class, id + ".label", OmlDiagramModule.SLabel_SLabelView);
+		final OmlLabel l = newLeafSElement(OmlLabel.class, id + ".label", OmlDiagramModule.SLabel_SLabelView_text);
 		l.setText("imports");
-		final OmlEdge e = newEdge(from, to, id, "edge:import");
+		final OmlEdge e = newEdge(from, to, id, OmlDiagramModule.OmlEdge_ImportEdgeView);
 		e.setChildren(CollectionLiterals.newArrayList(l));
 		return e;
 	}
 
 	public OmlEdge createEdge(final SpecializationAxiom axiom, final SModelElement from, final SModelElement to) {
 		final String id = idCache.uniqueId(axiom, from.getId() + ".specializes." + to.getId());
-		return newEdge(from, to, id, "edge:uses");
+		return newEdge(from, to, id, OmlDiagramModule.OmlEdge_SpecializationArrowEdgeView);
 	}
 
 	public OmlEdge createEdge(final RelationEntity entity, final SModelElement from, final SModelElement to) {
@@ -400,7 +400,7 @@ public class OmlOntologyDiagramView {
 			final SModelElement to) {
 		final String id = idCache.uniqueId(property,
 				getLocalName(cls) + ".structured-property." + getLocalName(property));
-		final OmlLabel l = newLeafSElement(OmlLabel.class, id + ".label", OmlDiagramModule.SLabel_SLabelView);
+		final OmlLabel l = newLeafSElement(OmlLabel.class, id + ".label", OmlDiagramModule.SLabel_SLabelView_text);
 		l.setText(property.getName());
 		final OmlEdge e = newEdge(from, to, id, OmlDiagramModule.OmlEdge_RestrictsArrowEdgeView);
 		e.getChildren().add(l);
@@ -485,19 +485,19 @@ public class OmlOntologyDiagramView {
 		lo1.setVAlign("center");
 
 		final OmlLabel l1 = new OmlLabel();
-		l1.setType("label:tag");
+		l1.setType(OmlDiagramModule.SLabel_SLabelView_tag);
 		l1.setId(id + ".tag.text");
 		l1.setText(tag);
 
 		final OmlTag t = new OmlTag();
 		t.setId(id + ".header.tag");
-		t.setType("tag");
+		t.setType(OmlDiagramModule.Tag_TagView);
 		t.setLayout("stack");
 		t.setLayoutOptions(lo1);
 		t.setChildren(CollectionLiterals.newArrayList(l1));
 
 		final OmlLabel l2 = new OmlLabel();
-		l2.setType("label:editable");
+		l2.setType(OmlDiagramModule.OmlEditableLabel_SLabelView);
 		l2.setId(id + ".header.label");
 		l2.setText(label);
 
@@ -510,7 +510,7 @@ public class OmlOntologyDiagramView {
 
 	private OmlTag newTaglessHeader(final String id) {
 		final OmlLabel l = new OmlLabel();
-		l.setType("label:classHeader");
+		l.setType(OmlDiagramModule.SLabel_SLabeliew_classHeader);
 		l.setId(id + ".header.label");
 		l.setText(id);
 

@@ -17,16 +17,16 @@ subprojects {
 	version = rootProject.file('version.txt').text.trim()
 
 	ext.versions = [
-	    xtext: '2.19.0',
+	    xtext: '2.20.0',
 	    xcore: '1.12.0',
 	    xcoreLib: '1.4.0',
 	    ecoreXtext: '1.4.0',
-	    codegen: '2.19.0',
+	    codegen: '2.20.0',
 	    codegenEcore: '2.20.0',
 	    emfEcore: '2.20.0',
 	    mwe2: '2.11.0',
 	    lsp4j: '0.7.0',
-	    elk: '0.5.0',
+	    elk: '0.7.0',
 	    sprotty: '0.6.0',
 	    junitJupiter: '5.1.0',
 	    gson: '2.8.2',

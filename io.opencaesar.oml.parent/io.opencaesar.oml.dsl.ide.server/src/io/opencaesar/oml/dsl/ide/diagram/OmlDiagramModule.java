@@ -43,7 +43,8 @@ public class OmlDiagramModule extends DefaultDiagramModule {
   }
   
   public Class<? extends ILayoutEngine> bindILayoutEngine() {
-    return OmlLayoutEngine.class;
+	return OmlDiagramLayeredLayoutEngine.class;
+    ///return OmlDiagramGraphvizLayoutEngine.class;
   }
   
   public Class<? extends IDiagramGenerator> bindIDiagramGenerator() {
@@ -78,14 +79,29 @@ public class OmlDiagramModule extends DefaultDiagramModule {
   //     configureModelElement(context, 'node:module', ModuleNode, ModuleNodeView)
   public static String ModuleNode_ModuleNodeView = "node:module";
   
+  //     configureModelElement(context, 'label:heading', SLabel, SLabelView)
+  public static String SLabel_SLabelView_heading = "label:heading";
+  
   //     configureModelElement(context, 'label:text', SLabel, SLabelView)
-  public static String SLabel_SLabelView = "label:text";
+  public static String SLabel_SLabelView_text = "label:text";
   
   //     configureModelElement(context, 'label:restricts', SLabel, RestrictsLabelView)
   public static String SLabel_RestrictsLabelView = "label:restricts";
   
   //     configureModelElement(context, 'label:relationship', SLabel, RelationshipLabelView)
   public static String SLabel_RelationshipLabelView = "label:relationship";
+  
+  //     configureModelElement(context, 'label:editable', OmlEditableLabel, SLabelView)
+  public static String OmlEditableLabel_SLabelView = "label:editable";
+  
+  //     configureModelElement(context, 'label:classHeader', SLabel, SLabelView)
+  public static String SLabel_SLabeliew_classHeader = "label:classHeader";
+  
+  //     configureModelElement(context, 'tag', Tag, TagView)
+  public static String Tag_TagView = "tag";
+  
+  //     configureModelElement(context, 'label:tag', SLabel, SLabelView)
+  public static String SLabel_SLabelView_tag = "label:tag";
   
   //     configureModelElement(context, 'comp:comp', SCompartment, SCompartmentView)
   public static String SCompartment_SCompartmentView = "comp:comp";
@@ -96,10 +112,19 @@ public class OmlDiagramModule extends DefaultDiagramModule {
   //     configureModelElement(context, 'edge:straight', OmlEdge, PolylineEdgeView)
   public static String OMlEdge_PolylineEdgeView = "edge:straight";
   
+  //     configureModelElement(context, 'edge:import', OmlEdge, ImportEdgeView)
+  public static String OmlEdge_ImportEdgeView = "edge:import";
+  
+  //     configureModelElement(context, 'edge:uses', OmlEdge, SpecializationArrowEdgeView)
+  public static String OmlEdge_SpecializationArrowEdgeView = "edge:uses";
+  
   //     configureModelElement(context, 'edge:augments', OmlEdge, RelationshipArrowEdgeView)
   public static String OmlEdge_RelationshipArrowEdgeView = "edge:augments";
   
   //    configureModelElement(context, 'edge:restricts', OmlEdge, RestrictsArrowEdgeView)
   public static String OmlEdge_RestrictsArrowEdgeView = "edge:restricts";
+  
+  //     configureModelElement(context, ExpandButtonHandler.TYPE, SButton, ExpandButtonView)
+  public static String SButton_ExpandButtonView = "button:expand";
   
 }
