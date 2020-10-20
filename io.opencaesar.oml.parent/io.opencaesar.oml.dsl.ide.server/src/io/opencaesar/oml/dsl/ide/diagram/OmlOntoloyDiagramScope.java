@@ -8,7 +8,6 @@ import java.util.Set;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
 
 import io.opencaesar.oml.*;
@@ -148,7 +147,7 @@ public class OmlOntoloyDiagramScope extends OmlVisitor<OmlOntoloyDiagramScope> {
 		if (!structuredProperties.containsKey(cls)) {
 			structuredProperties.put(cls, new HashSet<>());
 		}
-		Iterables.filter(OmlSearch.findAllSpecializedTermsInclusive(cls), Classifier.class).forEach(parent -> {
+		OmlSearch.findAllSpecializedClassifiers(cls).forEach(parent -> {
 			OmlSearch.findFeaturePropertiesWithDomain(parent).forEach(f -> {
 				if (allImportedElements.contains(f)) {
 					allFeatureProperties.add(f);
@@ -166,7 +165,7 @@ public class OmlOntoloyDiagramScope extends OmlVisitor<OmlOntoloyDiagramScope> {
 	}
 
 	public void phase2ScanAllClassifierProperties(final Classifier cls) {
-		Iterables.filter(OmlSearch.findAllSpecializedTermsInclusive(cls), Classifier.class).forEach(parent -> {
+		OmlSearch.findAllSpecializedClassifiers(cls).forEach(parent -> {
 			OmlIndex.findFeaturePropertiesWithDomain(parent).forEach(p -> {
 				if (allImportedElements.contains(p)) {
 					if (p instanceof ScalarProperty) {
