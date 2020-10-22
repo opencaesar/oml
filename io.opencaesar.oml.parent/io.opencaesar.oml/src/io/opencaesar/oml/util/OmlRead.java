@@ -18,15 +18,6 @@
  */
 package io.opencaesar.oml.util;
 
-import static org.eclipse.xtext.xbase.lib.IterableExtensions.filter;
-import static org.eclipse.xtext.xbase.lib.IterableExtensions.filterNull;
-import static org.eclipse.xtext.xbase.lib.IterableExtensions.findFirst;
-import static org.eclipse.xtext.xbase.lib.IterableExtensions.flatMap;
-import static org.eclipse.xtext.xbase.lib.IterableExtensions.head;
-import static org.eclipse.xtext.xbase.lib.IterableExtensions.map;
-import static org.eclipse.xtext.xbase.lib.IterableExtensions.toList;
-import static org.eclipse.xtext.xbase.lib.IterableExtensions.toSet;
-
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.MalformedURLException;
@@ -42,6 +33,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.emf.common.util.URI;
@@ -144,65 +136,127 @@ public class OmlRead {
 	
 	// closure operators
 	
-	public static <T, V extends T> Iterable<T> reflexiveClosure(V v, Function<T, Iterable<T>> f) {
+	public static <T, V extends T> List<T> reflexiveClosure(V v, Function<T, List<T>> f) {
 		final Set<T> allResults = new LinkedHashSet<>();
 		allResults.add(v);
 		closure(v, f, allResults);
-		return allResults;
+		return new ArrayList<T>(allResults);
 	}
 
-	public static <T, V extends T> Iterable<T> closure(V v, Function<T, Iterable<T>> f) {
+	public static <T, V extends T> List<T> closure(V v, Function<T, List<T>> f) {
 		final Set<T> allResults = new LinkedHashSet<>();
 		closure(v, f, allResults);
-		return allResults;
+		return new ArrayList<T>(allResults);
 	}
 
-	protected static <T, V extends T> void closure(V v, Function<T, Iterable<T>> f, Set<T> allResults) {
-		Iterable<T> results = f.apply(v);
+	protected static <T, V extends T> void closure(V v, Function<T, List<T>> f, Set<T> allResults) {
+		List<T> results = f.apply(v);
 		if (results == null) {
 			results = Collections.emptyList();
 		} else {
-			results = toList(filter(filterNull(results), r -> !allResults.contains(r)));
+			results = results.stream().
+				filter(r -> r != null).
+				filter(r -> !allResults.contains(r)).
+				collect(Collectors.toList());
 		}
-		allResults.addAll(toSet(results));
+		allResults.addAll(results);
 		results.forEach(r -> closure(r, f, allResults));
+	}
+
+	protected static String[] parseIri(String iri) {
+		int i = iri.lastIndexOf('#');
+		String baseIri;
+		if (i > 0) {
+			baseIri = iri.substring(0, i);			
+		} else {
+			i = iri.lastIndexOf('/');
+			baseIri = iri.substring(0, i);			
+		}
+		String fragment;
+		if (i > 0) {
+			fragment = iri.substring(i+1);			
+		} else {
+			i = iri.lastIndexOf('/');
+			fragment = iri.substring(i+1);		
+		}
+		return new String[] {baseIri, fragment};
+	}
+
+	protected static String[] parseAbbreviatedIri(String iri) {
+		String[] parts = iri.split(":");
+		String prefix = (parts.length> 1) ? parts[0] : "";
+		String fragment = (parts.length> 1) ? parts[1] : parts[0];
+		return new String[] {prefix, fragment};
 	}
 
 	// ResourceSet
 	
-	public static Element getElementWithIri(ResourceSet resourceSet, String iri) {
-		for (Resource resource : resourceSet.getResources()) {
-			final Element found = getElementWithIri(resource, iri);
-			if (found != null) {
-				return found;
-			}
+	public static Member getMemberByIri(ResourceSet resourceSet, String iri) {
+		String[] iriParts = parseIri(iri);
+		String baseIri = iriParts[0];
+		String fragment = iriParts[1];
+		Ontology ontology = getOntologyByIri(resourceSet, baseIri);
+		if (ontology != null) {
+			return (Member) ontology.eResource().getEObject(fragment);
 		}
 		return null;
 	}
 	
-	public static Iterable<Ontology> getOntologies(ResourceSet resourceSet) {
-		return filter(flatMap(resourceSet.getResources(), r -> r.getContents()), Ontology.class);
+	public static Member getMemberByAbbreviatedIri(ResourceSet resourceSet, String abbreviatedIri) {
+		String[] iriParts = parseAbbreviatedIri(abbreviatedIri);
+		String prefix = iriParts[0];
+		String fragment = iriParts[1];
+		Ontology ontology = getOntologyByPrefix(resourceSet, prefix);
+		if (ontology != null) {
+			return (Member) ontology.eResource().getEObject(fragment);
+		}
+		return null;
+	}
+
+	public static Ontology getOntologyByIri(ResourceSet resourceSet, String iri) {
+		return resourceSet.getResources().stream().
+			flatMap(r -> r.getContents().stream()).
+			filter(o -> o instanceof Ontology).
+			map(o -> (Ontology)o).
+			filter(o -> iri.equals(o.getIri())).
+			findFirst().orElse(null);
+	}
+
+	public static Ontology getOntologyByPrefix(ResourceSet resourceSet, String prefix) {
+		return resourceSet.getResources().stream().
+			flatMap(r -> r.getContents().stream()).
+			filter(o -> o instanceof Ontology).
+			map(o -> (Ontology)o).
+			filter(o -> prefix.equals(o.getPrefix())).
+			findFirst().orElse(null);
+	}
+
+	public static List<Ontology> getOntologies(ResourceSet resourceSet) {
+		return resourceSet.getResources().stream().
+			flatMap(r -> r.getContents().stream()).
+			filter(r -> r instanceof Ontology).
+			map(r -> (Ontology)r).
+			collect(Collectors.toList());
 	}
 
 	// Resource
 	
-	public static Element getElementWithIri(Resource resource, String iri) {
+	public static Ontology getOntology(Resource resource) {
+		return resource.getContents().stream().
+			filter(o -> o instanceof Ontology).
+			map(o -> (Ontology)o).
+			findFirst().
+			orElse(null);
+	}
+	
+	public static Member getMemberByIri(Resource resource, String iri) {
 		final Ontology ontology = getOntology(resource);
 		if (ontology != null) {
-			if (iri.equals(ontology.getIri())) {
-				return ontology;
-			} else if (iri.startsWith(ontology.getIri())) {
-				final String name = iri.substring(ontology.getIri().length()+1);
-				return findFirst(getMembers(ontology), i -> i.getName().equals(name));
-			}
+			return getMemberByIri(ontology, iri);
 		}
 		return null;
 	}
 
-	public static Ontology getOntology(Resource resource) {
-		return head(filter(resource.getContents(), Ontology.class));
-	}
-	
 	// Element
 	
 	public static Ontology getOntology(Element element) {
@@ -229,12 +283,15 @@ public class OmlRead {
 	
 	// AnnotatedElement
 	
-	public static Iterable<Literal> getAnnotationValues(AnnotatedElement element, String annotationPropertyIri) {
-		return map(filter(element.getOwnedAnnotations(), a -> getIri(a.getProperty()).equals(annotationPropertyIri)), a -> a.getValue());
+	public static List<Literal> getAnnotationValues(AnnotatedElement element, String annotationPropertyIri) {
+		return element.getOwnedAnnotations().stream().
+			filter(a -> getIri(a.getProperty()).equals(annotationPropertyIri)).
+			map(a -> a.getValue()).
+			collect(Collectors.toList());
 	}
 	
 	public static Literal getAnnotationValue(AnnotatedElement element, String annotationPropertyIri) {
-		return head(getAnnotationValues(element, annotationPropertyIri));
+		return getAnnotationValues(element, annotationPropertyIri).stream().findFirst().orElse(null);
 	}
 
 	public static String getAnnotationLexicalValue(AnnotatedElement element, String annotationPropertyIri) {
@@ -293,7 +350,7 @@ public class OmlRead {
 		return ontology.getIri()+ontology.getSeparator();
 	}
 
-	public static Iterable<Statement> getStatements(Ontology ontology) {
+	public static List<Statement> getStatements(Ontology ontology) {
 		if (ontology instanceof Vocabulary) {
 			return getStatements((Vocabulary)ontology);
 		} else if (ontology instanceof Description) {
@@ -302,19 +359,63 @@ public class OmlRead {
 		return Collections.emptyList();
 	}
 
-	public static Iterable<Member> getMembers(Ontology ontology) {
+	public static List<Member> getMembers(Ontology ontology) {
 		if (ontology instanceof Vocabulary) {
 			return getMembers((Vocabulary)ontology);
 		} else {
-			return filter(getStatements(ontology), Member.class);
+			return getStatements(ontology).stream().
+				filter(s -> s instanceof Member).
+				map(s -> (Member)s).
+				collect(Collectors.toList());
 		}
 	}
 
-	public static Iterable<Reference> getReferences(Ontology ontology) {
-		return filter(getStatements(ontology), Reference.class);
+	public static List<Reference> getReferences(Ontology ontology) {
+		return getStatements(ontology).stream().
+			filter(s -> s instanceof Reference).
+			map(s -> (Reference)s).
+			collect(Collectors.toList());
 	}
 	
-	public static Iterable<Import> getImportsWithSource(Ontology ontology) {
+	public static Member getMemberByName(Ontology context, String memberName) {
+		return (Member) context.eResource().getEObject(memberName);
+	}
+
+	public static Member getMemberByIri(Ontology context, String iri) {
+		String[] iriParts = parseIri(iri);
+		String baseIri = iriParts[0];
+		String fragment = iriParts[1];
+		Resource resource;
+		if (context.getIri().equals(baseIri)) {
+			resource = context.eResource();
+		} else {
+			Ontology ontology = OmlRead.getImportedOntologyByIri(context, baseIri);
+			resource = (ontology != null) ? ontology.eResource() : null;
+		}
+		if (resource != null) {
+			return (Member) resource.getEObject(fragment);
+		}
+		return null;
+	}
+
+	public static Member getMemberByAbbreviatedIri(Ontology context, String abbreviatedIri) {
+		String[] iriParts = parseAbbreviatedIri(abbreviatedIri);
+		String prefix = iriParts[0];
+		String fragment = iriParts[1];
+		Resource resource;
+		if (context.getPrefix().equals(prefix)) {
+			resource = context.eResource();
+		} else {
+			Ontology ontology = OmlRead.getImportedOntologyByPrefix(context, prefix);
+			resource = (ontology != null) ? ontology.eResource() : null;
+		}
+		if (resource != null) {
+			return (Member) resource.getEObject(fragment);
+		}
+		return null;
+	}
+
+	public static List<Import> getImportsWithSource(Ontology ontology) {
 		if (ontology instanceof Vocabulary) {
 			return getImportsWithSource((Vocabulary)ontology);
 		} else if (ontology instanceof VocabularyBundle) {
@@ -327,151 +428,237 @@ public class OmlRead {
 		return Collections.emptyList();
 	}
 
-	public static Iterable<Import> getAllImportsWithSource(Ontology ontology) {
-		final List<Import> allImports = new ArrayList<>();
-		allImports.addAll(toList(flatMap(getImportsWithSource(ontology), i -> reflexiveClosure(i, j -> {
-			Ontology o = getImportedOntology(j);
-			return (o != null)? getImportsWithSource(o) : null;
-		}))));
-		return allImports;
+	public static List<Import> getAllImportsWithSource(Ontology ontology) {
+		return getImportsWithSource(ontology).stream().
+			flatMap(i -> reflexiveClosure(i, j -> getImportsWithSource(getImportedOntology(j))).stream()).
+			collect(Collectors.toList());
 	}
 
-	public static Ontology getImportedOntologyByIri(Ontology importingOntology, String importedIri) {
-		for (Import _import : getAllImportsWithSource(importingOntology)) {
-			if (getIri(getImportedOntology(_import)).equals(importedIri)) {
-				return getImportedOntology(_import);
+	public static List<Ontology> getImportedOntologies(Ontology ontology) {
+		return getImportsWithSource(ontology).stream().
+			map(i -> getImportedOntology(i)).
+			collect(Collectors.toList());
+	}
+
+	public static List<Ontology> getAllImportedOntologies(Ontology ontology) {
+		return closure(ontology, i -> getImportsWithSource(i).stream().
+				map(j -> getImportedOntology(j)).
+				collect(Collectors.toList()));
+	}
+
+	public static List<Ontology> getAllImportedOntologiesInclusive(Ontology ontology) {
+		return reflexiveClosure(ontology, i -> getImportsWithSource(i).stream().
+				map(j -> getImportedOntology(j)).
+				collect(Collectors.toList()));
+	}
+
+	public static Ontology getImportedOntologyByIri(Ontology importingOntology, String iri) {
+		for (Import i : getAllImportsWithSource(importingOntology)) {
+			if (getIri(getImportedOntology(i)).equals(iri)) {
+				return getImportedOntology(i);
 			}
 		}
 		return null;
 	}
 	
-	public static Iterable<Ontology> getImportedOntologies(Ontology ontology) {
-		return map(getImportsWithSource(ontology), i -> getImportedOntology(i));
+	public static Ontology getImportedOntologyByPrefix(Ontology importingOntology, String prefix) {
+		for (Import i : getAllImportsWithSource(importingOntology)) {
+			if (getImportPrefix(i).equals(prefix)) {
+				return getImportedOntology(i);
+			}
+		}
+		return null;
 	}
 
 	public static Map<String, String> getImportPrefixes(Ontology ontology) {
-		final Map<String, String> namespaces = new LinkedHashMap<>();
+		final Map<String, String> map = new LinkedHashMap<>();
 		getAllImportsWithSource(ontology).forEach(i -> {
-			if (!namespaces.containsKey(getImportNamespace(i))) {
-				namespaces.put(getImportNamespace(i), getImportPrefix(i));
+			if (!map.containsKey(getImportNamespace(i))) {
+				map.put(getImportNamespace(i), getImportPrefix(i));
 			}
 		});
-		return namespaces;
+		return map;
 	}
 
 	// VocabularyBox
 
 	// Vocabulary
 	
-	public static Iterable<Import> getImportsWithSource(Vocabulary ontology) {
-		return filter(ontology.getOwnedImports(), Import.class);
+	public static List<Import> getImportsWithSource(Vocabulary ontology) {
+		return new ArrayList<>(ontology.getOwnedImports());
 	}
 
-	public static Iterable<VocabularyExtension> getExtensionsWithSource(Vocabulary vocabulary) {
-		return filter(vocabulary.getOwnedImports(), VocabularyExtension.class);
+	public static List<VocabularyExtension> getExtensionsWithSource(Vocabulary vocabulary) {
+		return vocabulary.getOwnedImports().stream().
+			filter(i -> i instanceof VocabularyExtension).
+			map(i -> (VocabularyExtension)i).
+			collect(Collectors.toList());
 	}
 
-	public static Iterable<VocabularyUsage> getUsagesWithSource(Vocabulary vocabulary) {
-		return filter(vocabulary.getOwnedImports(), VocabularyUsage.class);
+	public static List<VocabularyUsage> getUsagesWithSource(Vocabulary vocabulary) {
+		return vocabulary.getOwnedImports().stream().
+			filter(i -> i instanceof VocabularyUsage).
+			map(i -> (VocabularyUsage)i).
+			collect(Collectors.toList());
 	}
 
-	public static Iterable<Vocabulary> getExtendedVocabularies(Vocabulary vocabulary) {
-		return map(getExtensionsWithSource(vocabulary), e -> getExtendedVocabulary(e));
+	public static List<Vocabulary> getExtendedVocabularies(Vocabulary vocabulary) {
+		return getExtensionsWithSource(vocabulary).stream().
+			map(e -> getExtendedVocabulary(e)).
+			collect(Collectors.toList());
 	}
 
-	public static Iterable<DescriptionBox> getUsedDescriptionBoxes(Vocabulary vocabulary) {
-		return map(getUsagesWithSource(vocabulary), u -> getUsedDescriptionBox(u));
+	public static List<DescriptionBox> getUsedDescriptionBoxes(Vocabulary vocabulary) {
+		return getUsagesWithSource(vocabulary).stream().
+			map(u -> getUsedDescriptionBox(u)).
+			collect(Collectors.toList());
 	}
 
-	public static Iterable<Statement> getStatements(Vocabulary ontology) {
-		return filter(ontology.getOwnedStatements(), Statement.class);
+	public static List<Statement> getStatements(Vocabulary ontology) {
+		return new ArrayList<>(ontology.getOwnedStatements());
 	}
 
-	public static Iterable<Member> getMembers(Vocabulary ontology) {
+	public static List<Member> getMembers(Vocabulary ontology) {
 		final List<Member> members = new ArrayList<>();
-		members.addAll(toList(filter(ontology.getOwnedStatements(), Member.class)));
-		members.addAll(toList(flatMap(filter(ontology.getOwnedStatements(), RelationEntity.class), i -> getRelations(i))));
+		members.addAll(ontology.getOwnedStatements().stream().
+			filter(s -> s instanceof Member)
+			.map(s -> (Member)s).
+			collect(Collectors.toList()));
+		members.addAll(ontology.getOwnedStatements().stream().
+			filter(i -> i instanceof RelationEntity).
+			flatMap(i -> getRelations((RelationEntity)i).stream()).
+			collect(Collectors.toList()));
 		return members;
 	}
 
 	// VocabularyBundle
 
-	public static Iterable<Import> getImportsWithSource(VocabularyBundle ontology) {
-		return filter(ontology.getOwnedImports(), Import.class);
+	public static List<Import> getImportsWithSource(VocabularyBundle ontology) {
+		return new ArrayList<>(ontology.getOwnedImports());
 	}
 
-	public static Iterable<VocabularyBundleExtension> getExtensionsWithSource(VocabularyBundle bundle) {
-		return filter(bundle.getOwnedImports(), VocabularyBundleExtension.class);
+	public static List<VocabularyBundleExtension> getExtensionsWithSource(VocabularyBundle bundle) {
+		return bundle.getOwnedImports().stream().
+			filter(i -> i instanceof VocabularyBundleExtension).
+			map(i -> (VocabularyBundleExtension)i).
+			collect(Collectors.toList());
 	}
 
-	public static Iterable<VocabularyBundleInclusion> getInclusionsWithSource(VocabularyBundle bundle) {
-		return filter(bundle.getOwnedImports(), VocabularyBundleInclusion.class);
+	public static List<VocabularyBundleInclusion> getInclusionsWithSource(VocabularyBundle bundle) {
+		return bundle.getOwnedImports().stream().
+			filter(i -> i instanceof VocabularyBundleInclusion).
+			map(i -> (VocabularyBundleInclusion)i).
+			collect(Collectors.toList());
 	}
 
-	public static Iterable<VocabularyBundle> getExtendedVocabularyBundles(VocabularyBundle bundle) {
-		return map(getExtensionsWithSource(bundle), e -> getExtendedVocabularyBundle(e));
+	public static List<VocabularyBundle> getExtendedVocabularyBundles(VocabularyBundle bundle) {
+		return getExtensionsWithSource(bundle).stream().
+			map(e -> getExtendedVocabularyBundle(e)).
+			collect(Collectors.toList());
 	}
 
-	public static Iterable<Vocabulary> getIncludedVocabularies(VocabularyBundle bundle) {
-		return map(getInclusionsWithSource(bundle), i -> getIncludedVocabulary(i));
+	public static List<Vocabulary> getIncludedVocabularies(VocabularyBundle bundle) {
+		return getInclusionsWithSource(bundle).stream().
+			map(i -> getIncludedVocabulary(i)).
+			collect(Collectors.toList());
 	}
 
 	// DescriptionBox
 
+	public static List<NamedInstance> getAllNamedInstances(DescriptionBox box) {
+		return getAllImportedOntologiesInclusive(box).stream().
+				filter(i -> i instanceof Description).
+				map(i -> (Description)i).
+				flatMap(i -> getNamedInstances(i).stream()).
+				collect(Collectors.toList());
+	}
+	
 	// Description
 
-	public static Iterable<Import> getImportsWithSource(Description ontology) {
-		return filter(ontology.getOwnedImports(), Import.class);
+	public static List<NamedInstance> getNamedInstances(Description description) {
+		return description.getOwnedStatements().stream().
+				filter(s -> s instanceof NamedInstance).
+				map(s -> (NamedInstance)s).
+				collect(Collectors.toList());
+	}
+	
+	public static List<Import> getImportsWithSource(Description ontology) {
+		return new ArrayList<>(ontology.getOwnedImports());
 	}
 
-	public static Iterable<DescriptionUsage> getUsagesWithSource(Description description) {
-		return filter(description.getOwnedImports(), DescriptionUsage.class);
+	public static List<DescriptionUsage> getUsagesWithSource(Description description) {
+		return description.getOwnedImports().stream().
+			filter(i -> i instanceof DescriptionUsage).
+			map(i -> (DescriptionUsage)i).
+			collect(Collectors.toList());
 	}
 
-	public static Iterable<DescriptionExtension> getExtensionsWithSource(Description description) {
-		return filter(description.getOwnedImports(), DescriptionExtension.class);
+	public static List<DescriptionExtension> getExtensionsWithSource(Description description) {
+		return description.getOwnedImports().stream().
+			filter(i -> i instanceof DescriptionExtension).
+			map(i -> (DescriptionExtension)i).
+			collect(Collectors.toList());
 	}
 
-	public static Iterable<Description> getExtendedDescriptions(Description description) {
-		return map(getExtensionsWithSource(description), u -> getExtendedDescription(u));
+	public static List<Description> getExtendedDescriptions(Description description) {
+		return getExtensionsWithSource(description).stream().
+			map(e -> getExtendedDescription(e)).
+			collect(Collectors.toList());
 	}
 
-	public static Iterable<VocabularyBox> getUsedVocabularyBoxes(Description description) {
-		return map(getUsagesWithSource(description), u -> getUsedVocabularyBox(u));
+	public static List<VocabularyBox> getUsedVocabularyBoxes(Description description) {
+		return getUsagesWithSource(description).stream().
+			map(e -> getUsedVocabularyBox(e)).
+			collect(Collectors.toList());
 	}
 
-	public static Iterable<Statement> getStatements(Description ontology) {
-		return filter(ontology.getOwnedStatements(), Statement.class);
+	public static List<Statement> getStatements(Description ontology) {
+		return new ArrayList<>(ontology.getOwnedStatements());
 	}
 
 	// DescriptionBundle
 
-	public static Iterable<Import> getImportsWithSource(DescriptionBundle ontology) {
-		return filter(ontology.getOwnedImports(), Import.class);
+	public static List<Import> getImportsWithSource(DescriptionBundle ontology) {
+		return new ArrayList<>(ontology.getOwnedImports());
 	}
 
-	public static Iterable<DescriptionBundleExtension> getExtensionsWithSource(DescriptionBundle bundle) {
-		return filter(bundle.getOwnedImports(), DescriptionBundleExtension.class);
+	public static List<DescriptionBundleExtension> getExtensionsWithSource(DescriptionBundle bundle) {
+		return bundle.getOwnedImports().stream().
+			filter(i -> i instanceof DescriptionBundleExtension).
+			map(i -> (DescriptionBundleExtension)i).
+			collect(Collectors.toList());
 	}
 
-	public static Iterable<DescriptionBundleInclusion> getInclusionsWithSource(DescriptionBundle bundle) {
-		return filter(bundle.getOwnedImports(), DescriptionBundleInclusion.class);
+	public static List<DescriptionBundleInclusion> getInclusionsWithSource(DescriptionBundle bundle) {
+		return bundle.getOwnedImports().stream().
+			filter(i -> i instanceof DescriptionBundleInclusion).
+			map(i -> (DescriptionBundleInclusion)i).
+			collect(Collectors.toList());
 	}
 
-	public static Iterable<DescriptionBundleUsage> getUsagesWithSource(DescriptionBundle bundle) {
-		return filter(bundle.getOwnedImports(), DescriptionBundleUsage.class);
+	public static List<DescriptionBundleUsage> getUsagesWithSource(DescriptionBundle bundle) {
+		return bundle.getOwnedImports().stream().
+			filter(i -> i instanceof DescriptionBundleUsage).
+			map(i -> (DescriptionBundleUsage)i).
+			collect(Collectors.toList());
 	}
 
-	public static Iterable<DescriptionBundle> getExtendedDescriptionBundles(DescriptionBundle bundle) {
-		return map(getExtensionsWithSource(bundle), e -> getExtendedDescriptionBundle(e));
+	public static List<DescriptionBundle> getExtendedDescriptionBundles(DescriptionBundle bundle) {
+		return getExtensionsWithSource(bundle).stream().
+			map(e -> getExtendedDescriptionBundle(e)).
+			collect(Collectors.toList());
 	}
 
-	public static Iterable<Description> getIncludedDescriptions(DescriptionBundle bundle) {
-		return map(getInclusionsWithSource(bundle), i -> getIncludedDescription(i));
+	public static List<Description> getIncludedDescriptions(DescriptionBundle bundle) {
+		return getInclusionsWithSource(bundle).stream().
+			map(e -> getIncludedDescription(e)).
+			collect(Collectors.toList());
 	}
 
-	public static Iterable<VocabularyBundle> getUsedVocabularyBundles(DescriptionBundle bundle) {
-		return map(getUsagesWithSource(bundle), u -> getUsedVocabularyBundle(u));
+	public static List<VocabularyBundle> getUsedVocabularyBundles(DescriptionBundle bundle) {
+		return getUsagesWithSource(bundle).stream().
+			map(e -> getUsedVocabularyBundle(e)).
+			collect(Collectors.toList());
 	}
 
 	// Member
@@ -484,8 +671,8 @@ public class OmlRead {
 
 	public static String getAbbreviatedIri(Member element) {
 		final Ontology ontology = getOntology(element);
-		String prefix = (ontology != null) ? ontology.getPrefix() : "";
-		return prefix + ':' + element.getName();
+		String prefix = (ontology != null) ? ontology.getPrefix() : null;
+		return ((prefix != null && prefix.length()>0) ? prefix + ':' : "") + element.getName();
 	}
 
 	public static String getNameIn(Member element, Ontology context) {
@@ -503,8 +690,10 @@ public class OmlRead {
 
 	// SpecializableTerm
 
-	public static Iterable<SpecializableTerm> getSpecializedTerms(SpecializableTerm term) {
-		return map(term.getOwnedSpecializations(), i -> i.getSpecializedTerm());
+	public static List<SpecializableTerm> getSpecializedTerms(SpecializableTerm term) {
+		return term.getOwnedSpecializations().stream().
+			map(i -> i.getSpecializedTerm()).
+			collect(Collectors.toList());
 	}
 
 	// Type
@@ -519,7 +708,7 @@ public class OmlRead {
 	
 	// RelationEntity
 	
-	public static Iterable<Relation> getRelations(RelationEntity entity) {
+	public static List<Relation> getRelations(RelationEntity entity) {
 		final List<Relation> relations = new ArrayList<>();
 		if (entity.getForward() != null) {
 			relations.add(entity.getForward());
@@ -563,7 +752,10 @@ public class OmlRead {
 		
 	public static Scalar getSpecializedScalar(Scalar scalar) {
 		// scalars can have a max of one specialized term
-		return (Scalar) head(getSpecializedTerms(scalar));
+		return getSpecializedTerms(scalar).stream().
+			filter(i -> i instanceof Scalar).
+			map(i -> (Scalar)i).
+			findFirst().orElse(null);
 	}
 
 	// FacetedScalar
@@ -646,12 +838,15 @@ public class OmlRead {
 		return getNameIn(resolve(reference), getOntology(reference));
 	}
 	
-	public static Iterable<Literal> getAnnotationValues(Reference reference, String annotationPropertyIri) {
-		return map(filter(reference.getOwnedAnnotations(), a -> getIri(a.getProperty()).equals(annotationPropertyIri)), a -> a.getValue());
+	public static List<Literal> getAnnotationValues(Reference reference, String annotationPropertyIri) {
+		return reference.getOwnedAnnotations().stream().
+			filter(a -> getIri(a.getProperty()).equals(annotationPropertyIri)).
+			map(a -> a.getValue()).
+			collect(Collectors.toList());
 	}
 	
 	public static Literal getAnnotationValue(Reference reference, String annotationPropertyIri) {
-		return head(getAnnotationValues(reference, annotationPropertyIri));
+		return getAnnotationValues(reference, annotationPropertyIri).stream().findFirst().orElse(null);
 	}
 
 	public static String getAnnotationLexicalValue(Reference reference, String annotationPropertyIri) {
@@ -661,8 +856,10 @@ public class OmlRead {
 
 	// SpecializableTermReference
 	
-	public static Iterable<SpecializableTerm> getSpecializedTerms(SpecializableTermReference reference) {
-		return map(reference.getOwnedSpecializations(), s -> s.getSpecializedTerm());
+	public static List<SpecializableTerm> getSpecializedTerms(SpecializableTermReference reference) {
+		return reference.getOwnedSpecializations().stream().
+			map(s -> s.getSpecializedTerm()).
+			collect(Collectors.toList());
 	}
 
 	// EntityReference

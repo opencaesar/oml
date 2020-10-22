@@ -18,10 +18,6 @@
  */
 package io.opencaesar.oml.util;
 
-import static org.eclipse.xtext.xbase.lib.IterableExtensions.findFirst;
-import static org.eclipse.xtext.xbase.lib.IterableExtensions.map;
-import static org.eclipse.xtext.xbase.lib.IterableExtensions.toList;
-
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,6 +25,7 @@ import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -162,11 +159,11 @@ public class OmlWriter {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public void setReference(Ontology ontology, Element subject, EReference ref, Iterable<String> objectIris) {
+	public void setReference(Ontology ontology, Element subject, EReference ref, Collection<String> objectIris) {
 		final Class<? extends IdentifiedElement> objectClass = (Class<? extends IdentifiedElement>) ref.getEType().getInstanceClass();
 		assert (!ref.isContainment() && objectClass.isAssignableFrom(IdentifiedElement.class)) && ref.isMany(): "Illegal arguments for this API";
 		if (objectIris.iterator().hasNext()) {
-			defer.add(() -> subject.eSet(ref, toList(map(objectIris, objectIri -> resolve(objectClass, ontology, objectIri)))));
+			defer.add(() -> subject.eSet(ref, objectIris.stream().map(objectIri -> resolve(objectClass, ontology, objectIri)).collect(Collectors.toList())));
 		}
 	}
 
@@ -230,7 +227,7 @@ public class OmlWriter {
 	}
 
 	protected Reference getOrAddReference(Ontology ontology, Member member) {
-		Reference reference = findFirst(OmlRead.getReferences(ontology), i -> OmlRead.resolve(i) == member);
+		Reference reference = OmlRead.getReferences(ontology).stream().filter(i -> OmlRead.resolve(i) == member).findFirst().orElse(null);
 		if (reference == null) {
 			reference = createReference(member);
 			if (ontology instanceof Vocabulary) {
@@ -806,7 +803,7 @@ public class OmlWriter {
 
 	// KeyAxiom
 
-	public KeyAxiom addKeyAxiom(Vocabulary vocabulary, String entityIri, Iterable<String> keyPropertyIris) {
+	public KeyAxiom addKeyAxiom(Vocabulary vocabulary, String entityIri, Collection<String> keyPropertyIris) {
 		final KeyAxiom axiom = create(KeyAxiom.class);
 		setReference(vocabulary, axiom, OmlPackage.Literals.KEY_AXIOM__PROPERTIES, keyPropertyIris);
 		addContained(vocabulary, entityIri, OmlPackage.Literals.ENTITY__OWNED_KEYS, OmlPackage.Literals.ENTITY_REFERENCE__OWNED_KEYS, axiom);
