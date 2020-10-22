@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
 	<name>io.opencaesar.oml</name>
-	<comment>Project io.opencaesar.oml created by Buildship.</comment>
+	<comment>Java API for Oml</comment>
 	<projects>
 	</projects>
 	<buildSpec>
