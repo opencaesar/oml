@@ -12,3 +12,4 @@ build
 .launch
 .antlr-generator-*.jar
 *.iml
+*.log
