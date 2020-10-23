@@ -7,7 +7,7 @@ Bundle-Version: 0.7.5
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Export-Package: io.opencaesar.oml,
  io.opencaesar.oml.impl,
  io.opencaesar.oml.util
