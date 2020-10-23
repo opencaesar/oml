@@ -16,5 +16,5 @@ Require-Bundle: io.opencaesar.oml.dsl.ui,
  org.eclipse.xtext.ui.testing,
  org.eclipse.ui.workbench;resolution:=optional,
  org.junit
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Export-Package: io.opencaesar.oml.dsl.ui.tests;x-internal=true
