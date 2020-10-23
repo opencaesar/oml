@@ -394,10 +394,6 @@ public class OmlSearch extends OmlIndex {
 	// Type
 
 	// Classifier
-	
-	public static Iterable<SpecializableTerm> findAllSpecializedTerms(SpecializableTerm term) {
-		return OmlRead.reflexiveClosure(term, t -> findSpecializedTerms(t));
-	}
 
 	public static List<PropertyRestrictionAxiom> findPropertyRestrictions(Classifier classifier) {
 		final List<PropertyRestrictionAxiom> restrictions = new ArrayList<>();

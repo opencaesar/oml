@@ -44,7 +44,7 @@ public class OmlDiagramModule extends DefaultDiagramModule {
   
   public Class<? extends ILayoutEngine> bindILayoutEngine() {
 	return OmlDiagramLayeredLayoutEngine.class;
-    ///return OmlDiagramGraphvizLayoutEngine.class;
+    // return OmlDiagramGraphvizLayoutEngine.class;
   }
   
   public Class<? extends IDiagramGenerator> bindIDiagramGenerator() {

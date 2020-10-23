@@ -16,6 +16,14 @@ In `src/io/opencaesar/oml/dsl/ide/diagram/`:
 | OmlDiagramView.xtend (deleted) | OmlOntologyDiagramView.java |
 | OmlOntologyScopeCalculator.xtend (deleted) | OmlOntoloyDiagramScope.java |
 
+## Layout algorithms
+
+By default, Elk uses the `RecursiveGraphLayoutEngine`, which applies a layout algorithm on each level of the hierarchy.
+There are two alternatives: `OmlDiagramGraphvizLayoutEngine` and `OmlDiagramLayeredLayoutEngine` that replace the default
+with ELK's Graphviz Dot and ELK's Layered algorithms respectively. Of the three, the third produces the most reasonable layouts
+for OML ontologies.
+
+
 ## Running in debug mode.
 
 1) Execute: `io.opencaesar.oml.dsl.ide.launch.OmlRunSocketServer` with command-line arguments: `--port 5009`
