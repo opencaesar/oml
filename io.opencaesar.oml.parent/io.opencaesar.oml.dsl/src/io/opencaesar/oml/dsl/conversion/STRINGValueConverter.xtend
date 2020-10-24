@@ -23,18 +23,20 @@ import org.eclipse.xtext.nodemodel.INode
 class STRINGValueConverter extends org.eclipse.xtext.conversion.impl.STRINGValueConverter {
 	
 	override protected String toEscapedString(String value) {
-		if (value.contains('\r') || value.contains('\n')) {
- 			if (!value.contains('"""')) {
-				return '"""' + value + '"""'
-			} else if (!value.contains("'''")) {
-				return "'''" + value + "'''"
-			}
-		} else {
+		if (!value.contains('\r') && !value.contains('\n')) {
  			if (value.contains('"')) {
-				return "'" + value + "'"
-			}
+ 				if (!value.contains("'")) {
+					return "'" + value + "'"
+ 				}
+ 			} else {
+				return '"' + value + '"'
+ 			}
+		}		
+		if (value.contains("'''")) {
+			return '"""' + value + '"""'
+		} else {
+			return "'''" + value + "'''" 
 		}
-		return '"' + value + '"' 
 	}
 	
 	override String toValue(String string, INode node) {
