@@ -1,4 +1,4 @@
-<img src="io.opencaesar.oml.parent/io.opencaesar.oml.specification/src/images/oml.svg" alt="OML" width="30%" height="30%"/>
+<img src="io.opencaesar.oml.specification/src/images/oml.svg" alt="OML" width="30%" height="30%"/>
 
 # Ontological Modeling Language
 
@@ -27,7 +27,6 @@ It also publishes the following artifacts (see the OML specification for using i
 
 Dependencies: Gradle 4.9, Java 8
 ```
-  cd io.opencaesar.oml.parent
   ./gradlew build
   mvn verify
 ```
@@ -38,15 +37,6 @@ Note: the gradle build updates the OML specification's generated Bikeshed source
 
 If you have updated the OML specification's Bikeshed source files, you can render them to HTML using:
 ```
-  cd io.opencaesar.oml.specification
   bikeshed spec
 ```
 Note: to install the Bikeshed tool, follow these [instructions](https://tabatkins.github.io/bikeshed/#installing).
-
-## Release
-
-Replace \<version\> by the version, e.g., 0.5.0
-```
-  git tag -a <version> -m "<version>"
-  git push origin <version>
-```

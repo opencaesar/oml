@@ -18,9 +18,6 @@ install:
   - git clone https://github.com/tabatkins/bikeshed.git
   - pip install --editable bikeshed
 
-before_script:
-  - cd io.opencaesar.oml.parent
-
 script:
   - ./gradlew build
   - bikeshed spec io.opencaesar.oml.specification/build/bikeshed/index.bs
