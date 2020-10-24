@@ -20,7 +20,6 @@ install:
 
 script:
   - ./gradlew build
-  - bikeshed spec io.opencaesar.oml.specification/build/bikeshed/index.bs
   - mvn verify
 
 env:

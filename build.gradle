@@ -8,7 +8,7 @@ buildscript {
 	dependencies {
 		classpath 'org.xtext:xtext-gradle-plugin:2.0.8'
 		classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.+'
-		classpath 'io.opencaesar.bikeshed:ecore2bikeshed:+'
+		classpath 'io.opencaesar.ecore:ecore-bikeshed-gradle:+'
 	}
 }
 
@@ -17,14 +17,14 @@ subprojects {
 	version = rootProject.file('version.txt').text.trim()
 
 	ext.versions = [
-	    xtext: '2.20.0',
-	    xcore: '1.12.0',
-	    xcoreLib: '1.4.0',
-	    ecoreXtext: '1.4.0',
-	    codegen: '2.20.0',
-	    codegenEcore: '2.20.0',
-	    emfEcore: '2.20.0',
-	    mwe2: '2.11.0',
+	    xtext: '2.23.0',
+	    xcore: '1.15.0',
+	    xcoreLib: '1.5.0',
+	    ecoreXtext: '1.5.0',
+	    codegen: '2.21.0',
+	    codegenEcore: '2.23.0',
+	    emfEcore: '2.23.0',
+	    mwe2: '2.11.3',
 	    lsp4j: '0.7.0',
 	    elk: '0.7.0',
 	    sprotty: '0.6.0',

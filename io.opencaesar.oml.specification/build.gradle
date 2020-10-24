@@ -1,16 +1,20 @@
-apply plugin: 'io.opencaesar.ecore2bikeshed'
-
 task copySrc(type: Copy) {
     from 'src'
     into 'build/bikeshed'
 } 
 
-ecore2bikeshed {
-	inputPath = '../io.opencaesar.oml/src/io/opencaesar/oml'
-	outputPath = 'build/bikeshed'
-}
+task ecoreToBikeshed(type:io.opencaesar.ecore.bikeshed.Ecore2BikeshedTask, dependsOn: copySrc) {
+	inputFolderPath = file('../io.opencaesar.oml/src/io/opencaesar/oml')
+	outputFolderPath = file('build/bikeshed')
+}               
 
-generateBikeshed.dependsOn 'copySrc'
+task generateDocs(dependsOn: ecoreToBikeshed) {
+	doLast {
+		exec { commandLine 'bikeshed', 'spec', 'build/bikeshed/index.bs' }
+	}
+}              
+
+build.dependsOn generateDocs
 
 clean {
 	delete 'build'

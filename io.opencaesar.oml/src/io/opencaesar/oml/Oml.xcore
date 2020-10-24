@@ -27,8 +27,6 @@
 	Assertions="",
 	References=""
 )
-@BikeshedHeadings(Elements="", Literals="", Ontologies="", Vocabularies="", Terms="", Types="", Properties="",
-	Axioms="", Rules="", Descriptions="", Instances="", Assertions="", References="")
 @Bikeshed(heading="Abstract Syntax")
 package io.opencaesar.oml
 

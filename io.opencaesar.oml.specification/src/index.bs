@@ -6,6 +6,7 @@ Status: ld
 URL: https://github.com/opencaesar/oml
 Editor: Maged Elaasar (JPL)
 Editor: Nicolas Rouquette (JPL)
+Local Boilerplate: copyright yes, logo yes
 Markup Shorthands: markdown yes
 Abstract: This document specifies the Ontological Modeling Language (OML).
 </pre>
