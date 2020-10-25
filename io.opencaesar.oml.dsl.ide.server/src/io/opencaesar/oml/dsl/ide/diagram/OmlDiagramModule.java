@@ -22,7 +22,6 @@ import io.opencaesar.oml.dsl.ide.diagram.OmlDiagramExpansionListener;
 import io.opencaesar.oml.dsl.ide.diagram.OmlDiagramServer;
 import io.opencaesar.oml.dsl.ide.diagram.OmlDiagramServerFactory;
 import io.opencaesar.oml.dsl.ide.diagram.OmlDiagramViewGenerator;
-import io.opencaesar.oml.dsl.ide.diagram.OmlLayoutEngine;
 import io.opencaesar.oml.dsl.ide.server.codeActions.OmlCodeActionService;
 import org.eclipse.sprotty.IDiagramExpansionListener;
 import org.eclipse.sprotty.IDiagramServer;
@@ -55,9 +54,6 @@ public class OmlDiagramModule extends DefaultDiagramModule {
     return OmlDiagramExpansionListener.class;
   }
   
-  public Class<? extends ICodeActionService2> bindICodeActionService() {
-    return OmlCodeActionService.class;
-  }
   
   // The following summarizes the interface between the OML DiagramServer and the OML Theia viewer.
   // If the interface changes, for example, as a result of adding/removing/changing Oml Theia views,

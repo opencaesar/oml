@@ -18,20 +18,52 @@
  */
 package io.opencaesar.oml.dsl.ide.symbols
 
+import io.opencaesar.oml.AnnotationPropertyReference
+import io.opencaesar.oml.AspectReference
+import io.opencaesar.oml.ConceptReference
+import io.opencaesar.oml.EnumeratedScalarReference
+import io.opencaesar.oml.FacetedScalarReference
 import io.opencaesar.oml.Member
 import io.opencaesar.oml.Ontology
+import io.opencaesar.oml.RelationEntityReference
+import io.opencaesar.oml.RelationReference
+import io.opencaesar.oml.RuleReference
+import io.opencaesar.oml.ScalarPropertyReference
+import io.opencaesar.oml.StructuredPropertyReference
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.ide.server.symbol.DocumentSymbolMapper.DocumentSymbolNameProvider
 
 class OmlDocumentSymbolNameProvider extends DocumentSymbolNameProvider {
 
 	override getName(EObject object) {
-		if (object instanceof Ontology) {
-			return object.iri
-		} else if (object instanceof Member) {
-			return object.name
+		switch object {
+			Ontology:
+				return object.iri
+			Member:
+				return object.name
+			RelationReference:
+				return object.relation.name
+			RuleReference:
+				return object.rule.name
+			AnnotationPropertyReference:
+				return object.property.name
+			AspectReference:
+				return object.aspect.name
+			ConceptReference:
+				return object.concept.name
+			RelationEntityReference:
+				return object.entity.name
+			EnumeratedScalarReference:
+				return object.scalar.name
+			FacetedScalarReference:
+				return object.scalar.name
+			ScalarPropertyReference:
+				return object.property.name
+			StructuredPropertyReference:
+				return object.property.name
+			default:
+				return "<unnamed>"
 		}
-		return "<unnamed>"
 	}
 
 }
