@@ -30,18 +30,31 @@ class OmlDocumentSymbolKindProvider extends DocumentSymbolKindProvider {
 		return switch (clazz) {
 			case ONTOLOGY.isSuperTypeOf(clazz): Package
 			case ASPECT.isSuperTypeOf(clazz): Interface
+			case ASPECT_REFERENCE.isSuperTypeOf(clazz): Interface
 			case CONCEPT.isSuperTypeOf(clazz): Class
+			case CONCEPT_REFERENCE.isSuperTypeOf(clazz): Class
 			case STRUCTURE.isSuperTypeOf(clazz): Struct
+			case STRUCTURE_REFERENCE.isSuperTypeOf(clazz): Struct
 			case FACETED_SCALAR.isSuperTypeOf(clazz): String
+			case FACETED_SCALAR_REFERENCE.isSuperTypeOf(clazz): String
 			case ENUMERATED_SCALAR.isSuperTypeOf(clazz): Enum
+			case ENUMERATED_SCALAR_REFERENCE.isSuperTypeOf(clazz): Enum
 			case RELATION_ENTITY.isSuperTypeOf(clazz): Class
+			case RELATION_ENTITY_REFERENCE.isSuperTypeOf(clazz): Class
 			case FORWARD_RELATION.isSuperTypeOf(clazz): Property
 			case REVERSE_RELATION.isSuperTypeOf(clazz): Property
 			case ANNOTATION_PROPERTY.isSuperTypeOf(clazz): Property
+			case ANNOTATION_PROPERTY_REFERENCE.isSuperTypeOf(clazz): Property
 			case SCALAR_PROPERTY.isSuperTypeOf(clazz): Property
+			case SCALAR_PROPERTY_REFERENCE.isSuperTypeOf(clazz): Property
 			case STRUCTURED_PROPERTY.isSuperTypeOf(clazz): Property
+			case STRUCTURED_PROPERTY_REFERENCE.isSuperTypeOf(clazz): Property
 			case CONCEPT_INSTANCE.isSuperTypeOf(clazz): Object
+			case CONCEPT_INSTANCE_REFERENCE.isSuperTypeOf(clazz): Object
 			case RELATION_INSTANCE.isSuperTypeOf(clazz): Object
+			case RELATION_INSTANCE_REFERENCE.isSuperTypeOf(clazz): Object
+			case RULE.isSuperTypeOf(clazz): Object
+			case RULE_REFERENCE.isSuperTypeOf(clazz): Object
 			default: Property
 		}
 	}

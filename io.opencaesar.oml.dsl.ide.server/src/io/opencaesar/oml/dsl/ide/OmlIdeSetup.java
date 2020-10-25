@@ -16,21 +16,22 @@
  * limitations under the License.
  * 
  */
-package io.opencaesar.oml.dsl.ide
+package io.opencaesar.oml.dsl.ide;
 
-import com.google.inject.Guice
-import io.opencaesar.oml.dsl.OmlRuntimeModule
-import io.opencaesar.oml.dsl.OmlStandaloneSetup
-import org.eclipse.xtext.util.Modules2
-import io.opencaesar.oml.dsl.ide.diagram.OmlDiagramModule
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import io.opencaesar.oml.dsl.OmlRuntimeModule;
+import io.opencaesar.oml.dsl.OmlStandaloneSetup;
+import org.eclipse.xtext.util.Modules2;
+import io.opencaesar.oml.dsl.ide.diagram.OmlDiagramModule;
 
 /**
  * Initialization support for running Xtext languages as language servers.
  */
-class OmlIdeSetup extends OmlStandaloneSetup {
+public class OmlIdeSetup extends OmlStandaloneSetup {
 
-	override createInjector() {
-		Guice.createInjector(Modules2.mixin(new OmlRuntimeModule, new OmlIdeModule, new OmlDiagramModule))
+	public Injector createInjector() {
+		return Guice.createInjector(Modules2.mixin(new OmlRuntimeModule(), new OmlIdeModule(), new OmlDiagramModule()));
 	}
 	
 }

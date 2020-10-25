@@ -18,8 +18,9 @@
  */
 package io.opencaesar.oml.dsl.ide.diagram
 
-import org.eclipse.sprotty.xtext.LanguageAwareDiagramServer
 import org.eclipse.sprotty.Action
+import org.eclipse.sprotty.xtext.LanguageAwareDiagramServer
+import org.eclipse.sprotty.xtext.ReconnectAction
 
 class OmlDiagramServer extends LanguageAwareDiagramServer {
 	
@@ -27,6 +28,11 @@ class OmlDiagramServer extends LanguageAwareDiagramServer {
 		switch(action.getKind()) {
 			case FilterAction.KIND: {
 				handle(action as FilterAction)
+			}
+			case ReconnectAction.KIND: {
+				// TODO: Does this action make sense in OML?
+				// If so, then how to configure it to allow well-formed connections only?
+				super.handleAction(action)
 			}
 		}
 		super.handleAction(action)
