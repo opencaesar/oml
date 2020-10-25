@@ -18,7 +18,8 @@
  */
 package io.opencaesar.oml.dsl.ide.symbols
 
-import io.opencaesar.oml.Element
+import io.opencaesar.oml.IdentifiedElement
+import io.opencaesar.oml.Reference
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.ide.server.symbol.HierarchicalDocumentSymbolService
 
@@ -27,7 +28,7 @@ import static extension com.google.common.collect.Iterators.*
 class OmlHierarchicalDocumentSymbolService extends HierarchicalDocumentSymbolService {
 
 	override protected getAllContents(Resource resource) {
-		return resource.allContents.filter(Element).filter(Object);
+		return resource.allContents.filter(IdentifiedElement).concat(resource.allContents.filter(Reference)).filter(Object);
 	}
 
 }
