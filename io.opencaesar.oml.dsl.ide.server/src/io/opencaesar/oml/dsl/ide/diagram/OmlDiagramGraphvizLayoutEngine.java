@@ -15,6 +15,7 @@ import org.eclipse.elk.graph.ElkNode;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.sprotty.Action;
 import org.eclipse.sprotty.SGraph;
 import org.eclipse.sprotty.SModelRoot;
 import org.eclipse.sprotty.layout.ElkLayoutEngine;
@@ -27,7 +28,7 @@ public class OmlDiagramGraphvizLayoutEngine extends ElkLayoutEngine {
 	private static final Logger LOG = Logger.getLogger(OmlDiagramGraphvizLayoutEngine.class);
 
 	@Override
-	public void layout(final SModelRoot root) {
+	public void layout(SModelRoot root, Action cause) {
 		if ((root instanceof SGraph)) {
 			final SprottyLayoutConfigurator configurator = new SprottyLayoutConfigurator();
 			
@@ -65,7 +66,7 @@ public class OmlDiagramGraphvizLayoutEngine extends ElkLayoutEngine {
 			provider.initialize("DOT");
 			setEngine(provider);
 			
-			layout(((SGraph) root), configurator);
+			layout(((SGraph) root), configurator, cause);
 		}
 	}
 

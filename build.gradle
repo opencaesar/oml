@@ -27,7 +27,9 @@ subprojects {
 	    mwe2: '2.11.3',
 	    lsp4j: '0.7.0',
 	    elk: '0.7.0',
-	    sprotty: '0.6.0',
+	    // https://github.com/eclipse/sprotty-server/releases
+	    // Make sure the version of sprotty-server is compatible with the version of sprotty-vscode, which depends on sprotty-vscode-webview and in turn depends on sprotty
+	    sprotty: '0.9.0',
 	    junitJupiter: '5.1.0',
 	    gson: '2.8.2',
 	    guava: '21.0',
