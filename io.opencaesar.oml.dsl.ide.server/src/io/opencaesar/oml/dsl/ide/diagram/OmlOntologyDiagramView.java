@@ -194,12 +194,12 @@ public class OmlOntologyDiagramView {
 	}
 
 	public OmlCompartment createPropertyCompartment(final Classifier classifier) {
-		final String id = idCache.uniqueId(classifier, getLocalName(classifier) + ".property.compartment");
+		final String id = idCache.getId(classifier) + ".property.compartment";
 		return newCompartment(id, OmlDiagramModule.SCompartment_SCompartmentView);
 	}
 
 	public OmlCompartment createPropertyCompartment(final NamedInstance instance) {
-		final String id = idCache.uniqueId(instance, getLocalName(instance) + ".property.compartment");
+		final String id = idCache.getId(instance) + ".property.compartment";
 		return newCompartment(id, OmlDiagramModule.SCompartment_SCompartmentView);
 	}
 
@@ -209,8 +209,8 @@ public class OmlOntologyDiagramView {
 	}
 
 	public OmlCompartment createAntecedentCompartment(final Rule rule) {
-		final String id = idCache.getId(rule);
-		return newCompartment(id + ".antecedent.compartment", OmlDiagramModule.SCompartment_SCompartmentView);
+		final String id = idCache.getId(rule) + ".antecedent.compartment";
+		return newCompartment(id , OmlDiagramModule.SCompartment_SCompartmentView);
 	}
 
 	public OmlCompartment getConsequentCompartment(final SModelElement element) {
@@ -219,8 +219,8 @@ public class OmlOntologyDiagramView {
 	}
 
 	public OmlCompartment createConsequentCompartment(final Rule rule) {
-		final String id = idCache.getId(rule);
-		return newCompartment(id + ".consequent.compartment", OmlDiagramModule.SCompartment_SCompartmentView);
+		final String id = idCache.getId(rule) + ".consequent.compartment";
+		return newCompartment(id, OmlDiagramModule.SCompartment_SCompartmentView);
 	}
 
 	// LABELS
