@@ -519,16 +519,14 @@ public class OmlRead {
 	}
 
 	public static List<Member> getMembers(Vocabulary ontology) {
-		final List<Member> members = new ArrayList<>();
-		members.addAll(ontology.getOwnedStatements().stream().
-			filter(s -> s instanceof Member)
-			.map(s -> (Member)s).
-			collect(Collectors.toList()));
-		members.addAll(ontology.getOwnedStatements().stream().
-			filter(i -> i instanceof RelationEntity).
-			flatMap(i -> getRelations((RelationEntity)i).stream()).
-			collect(Collectors.toList()));
-		return members;
+		return ontology.getOwnedStatements().stream().flatMap(s -> {
+			final ArrayList<Member> ms = new ArrayList<>();
+			if (s instanceof Member)
+				ms.add((Member) s);
+			else if (s instanceof RelationEntity)
+				ms.addAll(getRelations((RelationEntity) s));
+			return ms.stream();
+		}).collect(Collectors.toList());
 	}
 
 	// VocabularyBundle
