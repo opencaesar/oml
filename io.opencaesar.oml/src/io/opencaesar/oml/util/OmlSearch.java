@@ -567,7 +567,7 @@ public class OmlSearch extends OmlIndex {
 	
 	public static List<Element> findPropertyValuesByAbbreviatedIri(Instance instance, String abbreviatedPropertyIri) {
 		Member property = OmlRead.getMemberByAbbreviatedIri(instance.eResource().getResourceSet(), abbreviatedPropertyIri);
-		return findPropertyValuesByAbbreviatedIri(instance, OmlRead.getIri(property));
+		return findPropertyValuesByIri(instance, OmlRead.getIri(property));
 	}
 
 	public static boolean hasTypeIri(Instance instance, String typeIri) {
