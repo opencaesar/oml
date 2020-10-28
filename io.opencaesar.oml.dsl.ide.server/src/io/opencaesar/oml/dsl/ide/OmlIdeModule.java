@@ -18,20 +18,42 @@
  */
 package io.opencaesar.oml.dsl.ide;
 
+import com.google.inject.Binder;
+import com.google.inject.Provider;
+import com.google.inject.name.Names;
 import io.opencaesar.oml.dsl.ide.symbols.OmlDocumentSymbolKindProvider;
 import io.opencaesar.oml.dsl.ide.symbols.OmlDocumentSymbolNameProvider;
 import io.opencaesar.oml.dsl.ide.symbols.OmlHierarchicalDocumentSymbolService;
 import io.opencaesar.oml.dsl.ide.server.codeActions.OmlCodeActionService;
 
+import io.opencaesar.oml.dsl.resource.OmlXtextResourceSetProvider;
+import org.eclipse.xtext.formatting2.FormatterPreferenceValuesProvider;
+import org.eclipse.xtext.formatting2.FormatterPreferences;
 import org.eclipse.xtext.ide.server.codeActions.ICodeActionService2;
 import org.eclipse.xtext.ide.server.symbol.DocumentSymbolMapper.DocumentSymbolKindProvider;
 import org.eclipse.xtext.ide.server.symbol.DocumentSymbolMapper.DocumentSymbolNameProvider;
 import org.eclipse.xtext.ide.server.symbol.HierarchicalDocumentSymbolService;
+import org.eclipse.xtext.preferences.IPreferenceValuesProvider;
+import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.scoping.impl.ImportUriResolver;
 
 /**
  * Use this class to register ide components.
  */
 public class OmlIdeModule extends AbstractOmlIdeModule {
+
+	@Override
+	public void configure(final Binder binder) {
+		binder.bind(IPreferenceValuesProvider.class).annotatedWith(FormatterPreferences.class).to(FormatterPreferenceValuesProvider.class);
+		binder.bind(String.class).annotatedWith(Names.named(ImportUriResolver.IMPORT_URI_FEATURE)).toInstance("uri");
+		binder.bind(XtextResourceSet.class).toProvider(OmlXtextResourceSetProvider.class);
+		super.configure(binder);
+		return;
+	}
+
+	public Class<? extends Provider<XtextResourceSet>> provideResourceSet() {
+		return OmlXtextResourceSetProvider.class;
+	}
 
 	public Class<? extends HierarchicalDocumentSymbolService> bindHierarchicalDocumentSymbolService() {
 		return OmlHierarchicalDocumentSymbolService.class;
