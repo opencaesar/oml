@@ -16,17 +16,21 @@
  * limitations under the License.
  * 
  */
-package io.opencaesar.oml.dsl.ide.launch
+package io.opencaesar.oml.dsl.ide.launch;
 
-import org.eclipse.sprotty.xtext.launch.DiagramServerSocketLauncher
+import io.opencaesar.oml.dsl.ide.launch.OmlLanguageServerSetup;
+import org.eclipse.sprotty.xtext.launch.DiagramLanguageServerSetup;
+import org.eclipse.sprotty.xtext.launch.DiagramServerSocketLauncher;
 
-class OmlRunSocketServer extends DiagramServerSocketLauncher {
-
-	override createSetup() {
-		new OmlLanguageServerSetup
-	}
-
-	def static void main(String... args) {
-		new OmlRunSocketServer().run(args)
-	}
+@SuppressWarnings("all")
+public class OmlRunSocketServer extends DiagramServerSocketLauncher {
+	
+  @Override
+  public DiagramLanguageServerSetup createSetup() {
+    return new OmlLanguageServerSetup();
+  }
+  
+  public static void main(final String... args) {
+    new OmlRunSocketServer().run(args);
+  }
 }
