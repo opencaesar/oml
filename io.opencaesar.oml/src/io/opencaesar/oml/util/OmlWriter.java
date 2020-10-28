@@ -249,6 +249,14 @@ public class OmlWriter {
 	
 	// Annotation
 
+	public Annotation addAnnotation(Ontology ontology, String propertyIri, Literal value) {
+		final Annotation annotation = create(Annotation.class);
+		annotation.setValue(value);
+		setReference(ontology, annotation, OmlPackage.Literals.ANNOTATION__PROPERTY, propertyIri);
+		ontology.getOwnedAnnotations().add(annotation);
+		return annotation;
+	}
+
 	public Annotation addAnnotation(Ontology ontology, String memberIri, String propertyIri, Literal value) {
 		final Annotation annotation = create(Annotation.class);
 		annotation.setValue(value);
@@ -257,10 +265,10 @@ public class OmlWriter {
 		return annotation;
 	}
 
-	public Annotation addAnnotation(AnnotatedElement element, String propertyIri, Literal value) {
+	public Annotation addAnnotation(Ontology ontology, AnnotatedElement element, String propertyIri, Literal value) {
 		final Annotation annotation = create(Annotation.class);
 		annotation.setValue(value);
-		setReference(OmlRead.getOntology(element), annotation, OmlPackage.Literals.ANNOTATION__PROPERTY, propertyIri);
+		setReference(ontology, annotation, OmlPackage.Literals.ANNOTATION__PROPERTY, propertyIri);
 		element.getOwnedAnnotations().add(annotation);
 		return annotation;
 	}
