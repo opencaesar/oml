@@ -22,10 +22,13 @@ import com.google.inject.Inject;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.google.inject.Provider;
+import io.opencaesar.oml.dsl.resource.OmlXtextResourceSetProvider;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.build.BuildRequest;
 import org.eclipse.xtext.ide.server.ProjectManager;
 import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.xbase.lib.Extension;
 
@@ -35,6 +38,11 @@ public class OmlProjectManager extends ProjectManager {
 	@Inject
 	@Extension
 	private OmlExclusionProvider omlExclusionProvider;
+
+	public OmlProjectManager() {
+		super();
+		resourceSetProvider = new OmlXtextResourceSetProvider();
+	}
 
 	@Override
 	protected BuildRequest newBuildRequest(List<URI> changedFiles, List<URI> deletedFiles,
