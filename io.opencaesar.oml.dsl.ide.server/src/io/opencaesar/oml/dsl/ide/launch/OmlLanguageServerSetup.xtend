@@ -19,6 +19,11 @@
 package io.opencaesar.oml.dsl.ide.launch
 
 import com.google.gson.GsonBuilder
+import io.opencaesar.oml.dsl.OmlRuntimeModule
+import io.opencaesar.oml.dsl.OmlStandaloneSetup
+import io.opencaesar.oml.dsl.ide.OmlIdeModule
+import io.opencaesar.oml.dsl.ide.diagram.FilterAction
+import io.opencaesar.oml.dsl.ide.diagram.OmlDiagramModule
 import org.eclipse.elk.alg.layered.options.LayeredMetaDataProvider
 import org.eclipse.elk.core.util.persistence.ElkGraphResourceFactory
 import org.eclipse.emf.ecore.resource.Resource
@@ -30,12 +35,25 @@ import org.eclipse.sprotty.xtext.launch.DiagramLanguageServerSetup
 import org.eclipse.sprotty.xtext.ls.SyncDiagramServerModule
 import org.eclipse.xtext.ide.server.ServerModule
 import org.eclipse.xtext.util.Modules2
-import io.opencaesar.oml.dsl.ide.diagram.FilterAction
 
 class OmlLanguageServerSetup extends DiagramLanguageServerSetup {
 	override setupLanguages() {
 		ElkLayoutEngine.initialize(new LayeredMetaDataProvider)
 		Resource.Factory.Registry.INSTANCE.extensionToFactoryMap.put('elkg', new ElkGraphResourceFactory)
+		
+		new OmlStandaloneSetup().createInjectorAndDoEMFRegistration()
+		
+		// @see org.eclipse.sprotty.xtext.ls.DiagramServerManager.getDiagramServerFactories()
+		
+		// The following does not work.
+		
+		// 1    [main] ERROR ResourceServiceProviderRegistryImpl  - Erroneous resource service provider registered for 'synth:///file.oml-diagram'. Removing it from the registry.
+		// java.lang.ClassCastException: class io.opencaesar.oml.dsl.ide.diagram.OmlDiagramServerFactory cannot be cast to 
+		// class org.eclipse.xtext.resource.IResourceServiceProvider 
+		// (io.opencaesar.oml.dsl.ide.diagram.OmlDiagramServerFactory and 
+		//  org.eclipse.xtext.resource.IResourceServiceProvider are in unnamed module of loader 'app')
+
+		// IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put('oml-diagram', new OmlDiagramServerFactory)
 	}
 	
 	override configureGson(GsonBuilder gsonBuilder) {
@@ -52,7 +70,10 @@ class OmlLanguageServerSetup extends DiagramLanguageServerSetup {
 	override getLanguageServerModule() {
 		Modules2.mixin(
 			new ServerModule,
-			new SyncDiagramServerModule
+			new SyncDiagramServerModule,
+			new OmlRuntimeModule,
+			new OmlIdeModule,
+			new OmlDiagramModule
 		)
 	}
 }

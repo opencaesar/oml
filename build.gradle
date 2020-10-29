@@ -17,22 +17,30 @@ subprojects {
 	version = rootProject.file('version.txt').text.trim()
 
 	ext.versions = [
-	    xtext: '2.23.0',
-	    xcore: '1.15.0',
+	    sprotty: '0.9.0',
+	    
+	    // from sprotty...
+	    // https://github.com/eclipse/sprotty-server/releases
+	    // https://github.com/eclipse/sprotty-server/blob/v0.9.0/gradle/versions.gradle
+	    xtext: '2.22.0',
+	    elk: '0.7.0',
+	    guava: '21.0', // [14.0,28)',
+	    gson: '2.8.2',
+	    lsp4j: '0.9.0',
+	    
+	    // from xtext...
+	    // See https://www.eclipse.org/Xtext/releasenotes.html#/releasenotes/2020/06/02/version-2-22-0
+	    mwe2: '2.11.3',
+	    
+	    // how do we determine which version of xtext this depends on?
+	    xcore: '1.14.0',
 	    xcoreLib: '1.5.0',
 	    ecoreXtext: '1.5.0',
 	    codegen: '2.21.0',
 	    codegenEcore: '2.23.0',
 	    emfEcore: '2.23.0',
-	    mwe2: '2.11.3',
-	    lsp4j: '0.7.0',
-	    elk: '0.7.0',
-	    // https://github.com/eclipse/sprotty-server/releases
-	    // Make sure the version of sprotty-server is compatible with the version of sprotty-vscode, which depends on sprotty-vscode-webview and in turn depends on sprotty
-	    sprotty: '0.9.0',
+	    
 	    junitJupiter: '5.1.0',
-	    gson: '2.8.2',
-	    guava: '21.0',
 	    antlr: '2.1.1',
 	    xmlResolver: '1.2'
 	]

@@ -18,19 +18,8 @@
  */
 package io.opencaesar.oml.dsl.ide;
 
-import com.google.inject.Binder;
-import com.google.inject.Provider;
-import com.google.inject.name.Names;
-import io.opencaesar.oml.dsl.ide.server.OmlProjectManager;
-import io.opencaesar.oml.dsl.ide.symbols.OmlDocumentSymbolKindProvider;
-import io.opencaesar.oml.dsl.ide.symbols.OmlDocumentSymbolNameProvider;
-import io.opencaesar.oml.dsl.ide.symbols.OmlHierarchicalDocumentSymbolService;
-import io.opencaesar.oml.dsl.ide.server.codeActions.OmlCodeActionService;
-
-import io.opencaesar.oml.dsl.resource.OmlXtextResourceSetProvider;
 import org.eclipse.xtext.formatting2.FormatterPreferenceValuesProvider;
 import org.eclipse.xtext.formatting2.FormatterPreferences;
-import org.eclipse.xtext.ide.server.ProjectManager;
 import org.eclipse.xtext.ide.server.codeActions.ICodeActionService2;
 import org.eclipse.xtext.ide.server.symbol.DocumentSymbolMapper.DocumentSymbolKindProvider;
 import org.eclipse.xtext.ide.server.symbol.DocumentSymbolMapper.DocumentSymbolNameProvider;
@@ -38,6 +27,15 @@ import org.eclipse.xtext.ide.server.symbol.HierarchicalDocumentSymbolService;
 import org.eclipse.xtext.preferences.IPreferenceValuesProvider;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.scoping.impl.ImportUriResolver;
+
+import com.google.inject.Binder;
+import com.google.inject.name.Names;
+
+import io.opencaesar.oml.dsl.ide.server.codeActions.OmlCodeActionService;
+import io.opencaesar.oml.dsl.ide.symbols.OmlDocumentSymbolKindProvider;
+import io.opencaesar.oml.dsl.ide.symbols.OmlDocumentSymbolNameProvider;
+import io.opencaesar.oml.dsl.ide.symbols.OmlHierarchicalDocumentSymbolService;
+import io.opencaesar.oml.dsl.resource.OmlXtextResourceSetProvider;
 
 /**
  * Use this class to register ide components.
@@ -51,13 +49,6 @@ public class OmlIdeModule extends AbstractOmlIdeModule {
 		binder.bind(XtextResourceSet.class).toProvider(OmlXtextResourceSetProvider.class);
 		super.configure(binder);
 		return;
-	}
-
-	public Class<? extends ProjectManager> bindProjectManager() {
-		return OmlProjectManager.class;
-	}
-	public Class<? extends Provider<XtextResourceSet>> provideResourceSet() {
-		return OmlXtextResourceSetProvider.class;
 	}
 
 	public Class<? extends HierarchicalDocumentSymbolService> bindHierarchicalDocumentSymbolService() {
