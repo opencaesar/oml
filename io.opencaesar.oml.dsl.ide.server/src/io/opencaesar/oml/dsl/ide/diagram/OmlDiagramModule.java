@@ -31,8 +31,23 @@ import org.eclipse.sprotty.xtext.IDiagramGenerator;
 import org.eclipse.sprotty.xtext.IDiagramServerFactory;
 import org.eclipse.xtext.ide.server.codeActions.ICodeActionService2;
 
+import com.google.inject.Binder;
+
 @SuppressWarnings("all")
 public class OmlDiagramModule extends DefaultDiagramModule {
+
+	@Override
+	public void configure(final Binder binder) {
+		binder.bind(IDiagramServerFactory.class).to(OmlDiagramServerFactory.class);
+		
+		// This should have populated the following:
+		// https://github.com/eclipse/sprotty-server/blob/v0.9.0/org.eclipse.sprotty.xtext/src/main/java/org/eclipse/sprotty/xtext/LanguageAwareDiagramServer.xtend#L54
+		// However, it did not for some unknown reason.
+		//binder.bind(IDiagramGenerator.class).toProvider(OmlDiagramViewGeneratorProvider.class);
+		super.configure(binder);
+	}
+	
+	// If the IDiagramGenerator provider is bound, then comment the following.
 	public Class<? extends IDiagramGenerator> bindIDiagramGenerator() {
 		return OmlDiagramViewGenerator.class;
 	}
@@ -56,19 +71,19 @@ public class OmlDiagramModule extends DefaultDiagramModule {
 	}
 
 	// The following summarizes the interface between the OML DiagramServer and the
-	// OML Theia viewer.
+	// OML Sprotty viewer.
 	// If the interface changes, for example, as a result of
-	// adding/removing/changing Oml Theia views,
-	// then the OML Diagramserver code must be updated accordingly. If the view
+	// adding/removing/changing Oml Sprotty views,
+	// then the OML DiagramServer code must be updated accordingly. If the view
 	// names were string constants in the code,
 	// it would make this update a tedious and error-prone exercise of text
 	// search/replace.
 	// With the constants below, it is safer to:
 	// - rename the Java symbols using an IDE
-	// - compare the Oml Theia view registrations with the constants below
-	// - determine which Theia views are used in the diagram server
+	// - compare the Oml Sprotty view registrations with the constants below
+	// - determine which Sprotty views are used in the diagram server
 
-	// For the Oml Theia views and their registration by name, see:
+	// For the Oml Sprotty views and their registration by name, see:
 	// oml-sprotty/src/di.config.ts
 
 	// configureModelElement(context, 'graph', OmlDiagram, SGraphView);

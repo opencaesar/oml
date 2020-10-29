@@ -19,11 +19,8 @@
 package io.opencaesar.oml.dsl.ide.launch
 
 import com.google.gson.GsonBuilder
-import io.opencaesar.oml.dsl.OmlRuntimeModule
 import io.opencaesar.oml.dsl.OmlStandaloneSetup
-import io.opencaesar.oml.dsl.ide.OmlIdeModule
 import io.opencaesar.oml.dsl.ide.diagram.FilterAction
-import io.opencaesar.oml.dsl.ide.diagram.OmlDiagramModule
 import org.eclipse.elk.alg.layered.options.LayeredMetaDataProvider
 import org.eclipse.elk.core.util.persistence.ElkGraphResourceFactory
 import org.eclipse.emf.ecore.resource.Resource
@@ -70,10 +67,12 @@ class OmlLanguageServerSetup extends DiagramLanguageServerSetup {
 	override getLanguageServerModule() {
 		Modules2.mixin(
 			new ServerModule,
-			new SyncDiagramServerModule,
-			new OmlRuntimeModule,
-			new OmlIdeModule,
-			new OmlDiagramModule
+			new SyncDiagramServerModule
+			
+//			new OmlSyncDiagramServerModule,
+//			new OmlRuntimeModule,
+//			new OmlIdeModule,
+//			new OmlDiagramModule
 		)
 	}
 }

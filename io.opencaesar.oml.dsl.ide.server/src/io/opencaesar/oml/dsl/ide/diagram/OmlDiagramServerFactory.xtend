@@ -19,18 +19,21 @@
 package io.opencaesar.oml.dsl.ide.diagram
 
 import org.eclipse.sprotty.xtext.DiagramServerFactory
+import org.eclipse.sprotty.xtext.LanguageAwareDiagramServer
 
 class OmlDiagramServerFactory extends DiagramServerFactory {
-	
+
+	public static String OML_DIAGRAM = 'oml-diagram'
+
 	override getDiagramTypes() {
-		#['oml-diagram']
+		#[OML_DIAGRAM]
 	}
-	
-	// Not in the states example.
-//	override createDiagramServer(String diagramType, String clientId) {
-//		val server = super.createDiagramServer(diagramType, clientId)
-//		if (server instanceof LanguageAwareDiagramServer)
-//			server.serverLayoutKind = ServerLayoutKind.AUTOMATIC
-//		server
-//	}
+
+	override createDiagramServer(String diagramType, String clientId) {
+		val server = new OmlDiagramServer // Bypass the injected diagramServerProvider because the injection didn't happen.
+		server.clientId = clientId
+		if (server instanceof LanguageAwareDiagramServer)
+			server.diagramType = diagramType
+		server
+	}
 }
