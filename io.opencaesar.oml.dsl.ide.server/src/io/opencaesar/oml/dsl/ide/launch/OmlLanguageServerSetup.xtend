@@ -29,8 +29,10 @@ import org.eclipse.sprotty.xtext.EditActionTypeAdapterFactory
 import org.eclipse.sprotty.xtext.launch.DiagramLanguageServerSetup
 import org.eclipse.sprotty.xtext.ls.SyncDiagramServerModule
 import org.eclipse.xtext.ide.server.ServerModule
+import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.util.Modules2
 import io.opencaesar.oml.dsl.ide.diagram.FilterAction
+import io.opencaesar.oml.dsl.resource.OmlXtextResourceSetProvider
 
 class OmlLanguageServerSetup extends DiagramLanguageServerSetup {
 	override setupLanguages() {
@@ -52,7 +54,10 @@ class OmlLanguageServerSetup extends DiagramLanguageServerSetup {
 	override getLanguageServerModule() {
 		Modules2.mixin(
 			new ServerModule,
-			new SyncDiagramServerModule
+			new SyncDiagramServerModule,
+			[
+				bind(XtextResourceSet).toProvider(OmlXtextResourceSetProvider)
+			]
 		)
 	}
 }
