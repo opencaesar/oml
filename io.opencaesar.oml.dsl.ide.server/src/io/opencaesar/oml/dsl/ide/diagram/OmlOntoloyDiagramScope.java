@@ -306,6 +306,9 @@ public class OmlOntoloyDiagramScope extends OmlVisitor<OmlOntoloyDiagramScope> {
 			if (!relationEntities.containsKey(e)) {
 				relationEntities.put(e, new HashSet<>());
 			}
+			if (!relationIncidentElements.containsKey(e)) {
+				relationIncidentElements.put(e, new HashSet<>());
+			}
 			Set<Element> others = relationEntities.get(e);
 			Set<Element> incident = relationIncidentElements.get(e);
 			phase1ScanEntityAxioms(e, others);
