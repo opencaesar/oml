@@ -18,11 +18,11 @@
  */
 package io.opencaesar.oml.util;
 
+import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -996,7 +996,7 @@ public class OmlRead {
 				System.out.println(e);
 			}
 			try {
-				if (catalogFileUrl != null && catalogFileUrl.getProtocol().equals("file") && Paths.get(catalogFileUrl.toURI()).toFile().exists()) {
+				if (catalogFileUrl != null && catalogFileUrl.getProtocol().equals("file") && new File(catalogFileUrl.getPath()).exists()) {
 					catalog = OmlCatalog.create(catalogUrl);
 				}
 			} catch (Exception e) {
