@@ -33,6 +33,7 @@ public class OmlOntoloyDiagramScope extends OmlVisitor<OmlOntoloyDiagramScope> {
 	final Map<Aspect, Set<Element>> aspects;
 	final Map<Concept, Set<Element>> concepts;
 	final Map<RelationEntity, Set<Element>> relationEntities;
+	final Map<RelationEntity, Set<Element>> relationIncidentElements;
 	final Map<Scalar, Set<Element>> scalars;
 	final Map<Structure, Set<Element>> structures;
 	final Map<Classifier, Set<ScalarProperty>> scalarProperties;
@@ -54,6 +55,7 @@ public class OmlOntoloyDiagramScope extends OmlVisitor<OmlOntoloyDiagramScope> {
 		this.aspects = new HashMap<>();
 		this.concepts = new HashMap<>();
 		this.relationEntities = new HashMap<>();
+		this.relationIncidentElements = new HashMap<>();
 		this.scalars = new HashMap<>();
 		this.structures = new HashMap<>();
 		this.scalarProperties = new HashMap<>();
@@ -90,8 +92,13 @@ public class OmlOntoloyDiagramScope extends OmlVisitor<OmlOntoloyDiagramScope> {
 	}
 
 	public boolean classifierHasFeaturesOrEdges(Classifier cls) {
-		return !scalarProperties.get(cls).isEmpty() || !structuredProperties.get(cls).isEmpty()
+		final boolean hasFeaturesOrEdges = !scalarProperties.get(cls).isEmpty() || !structuredProperties.get(cls).isEmpty()
 				|| !entityAxioms.get(cls).isEmpty();
+		if (cls instanceof RelationEntity) {
+			final RelationEntity re = (RelationEntity) cls;
+			return hasFeaturesOrEdges || !relationIncidentElements.get(re).isEmpty();
+		} else
+			return hasFeaturesOrEdges;
 	}
 
 	private void analyze1Ontology(Ontology o) {
@@ -299,10 +306,34 @@ public class OmlOntoloyDiagramScope extends OmlVisitor<OmlOntoloyDiagramScope> {
 			if (!relationEntities.containsKey(e)) {
 				relationEntities.put(e, new HashSet<>());
 			}
+			if (!relationIncidentElements.containsKey(e)) {
+				relationIncidentElements.put(e, new HashSet<>());
+			}
 			Set<Element> others = relationEntities.get(e);
+			Set<Element> incident = relationIncidentElements.get(e);
 			phase1ScanEntityAxioms(e, others);
 			doSwitch(e.getSource());
 			doSwitch(e.getTarget());
+			OmlSearch.findSpecializationsWithTarget(e).forEach(ax -> {
+				if (allImportedElements.contains(ax)) {
+					incident.add(ax);
+				}
+			});
+			OmlSearch.findRelationRangeRestrictionAxiomsWithRange(e).forEach(ax -> {
+				if (allImportedElements.contains(ax)) {
+					incident.add(ax);
+				}
+			});
+			OmlSearch.findRelationsWithSource(e).forEach(r -> {
+				if (allImportedElements.contains(r)) {
+					incident.add(r);
+				}
+			});
+			OmlSearch.findRelationsWithTarget(e).forEach(r -> {
+				if (allImportedElements.contains(r)) {
+					incident.add(r);
+				}
+			});
 			secondPhase.add(e);
 			break;
 		case Phase2:

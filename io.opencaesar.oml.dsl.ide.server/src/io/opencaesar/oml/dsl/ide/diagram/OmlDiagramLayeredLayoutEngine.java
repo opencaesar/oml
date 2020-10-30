@@ -15,6 +15,7 @@ import org.eclipse.elk.graph.ElkNode;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.sprotty.Action;
 import org.eclipse.sprotty.SGraph;
 import org.eclipse.sprotty.SModelRoot;
 import org.eclipse.sprotty.layout.ElkLayoutEngine;
@@ -27,7 +28,7 @@ public class OmlDiagramLayeredLayoutEngine extends ElkLayoutEngine {
 	private static final Logger LOG = Logger.getLogger(OmlDiagramLayeredLayoutEngine.class);
 
 	@Override
-	public void layout(final SModelRoot root) {
+	public void layout(SModelRoot root, Action cause) {
 		if ((root instanceof SGraph)) {
 			final SprottyLayoutConfigurator configurator = new SprottyLayoutConfigurator();
 			
@@ -66,7 +67,9 @@ public class OmlDiagramLayeredLayoutEngine extends ElkLayoutEngine {
 			final AbstractLayoutProvider provider = new LayeredLayoutProvider();
 			setEngine(provider);
 			
-			layout(((SGraph) root), configurator);
+			LOG.info("Calculating layout of: "+root.getId());
+			layout(((SGraph) root), configurator, cause);
+			LOG.info("Calculated layout of: "+root.getId());
 		}
 	}
 
@@ -74,10 +77,12 @@ public class OmlDiagramLayeredLayoutEngine extends ElkLayoutEngine {
 	@Override
 	protected void applyEngine(final ElkNode elkGraph) {
 		elkGraph.setProperty(CoreOptions.DEBUG_MODE, true);
+		LOG.info("Apply engine to: "+elkGraph.getIdentifier());
 		if (LOG.isTraceEnabled()) {
 			LOG.info(toXMI(elkGraph));
 		}
 		super.applyEngine(elkGraph);
+		LOG.info("Applied engine to: "+elkGraph.getIdentifier());
 	}
 
 	private String toXMI(final ElkNode elkGraph) {

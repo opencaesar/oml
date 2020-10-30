@@ -16,17 +16,22 @@
  * limitations under the License.
  * 
  */
-package io.opencaesar.oml.dsl.ide.launch
+package io.opencaesar.oml.dsl.ide;
 
-import org.eclipse.sprotty.xtext.launch.DiagramServerSocketLauncher
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import io.opencaesar.oml.dsl.OmlRuntimeModule;
+import io.opencaesar.oml.dsl.OmlStandaloneSetup;
+import org.eclipse.xtext.util.Modules2;
+import io.opencaesar.oml.dsl.ide.diagram.OmlDiagramModule;
 
-class OmlRunSocketServer extends DiagramServerSocketLauncher {
+/**
+ * Initialization support for running Xtext languages as language servers.
+ */
+public class OmlIdeSetup extends OmlStandaloneSetup {
 
-	override createSetup() {
-		new OmlLanguageServerSetup
+	public Injector createInjector() {
+		return Guice.createInjector(Modules2.mixin(new OmlRuntimeModule(), new OmlIdeModule(), new OmlDiagramModule()));
 	}
-
-	def static void main(String... args) {
-		new OmlRunSocketServer().run(args)
-	}
+	
 }

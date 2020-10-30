@@ -19,8 +19,6 @@
 package io.opencaesar.oml.dsl.ide.diagram
 
 import org.eclipse.sprotty.xtext.DiagramServerFactory
-import org.eclipse.sprotty.xtext.LanguageAwareDiagramServer
-import org.eclipse.sprotty.ServerLayoutKind
 
 class OmlDiagramServerFactory extends DiagramServerFactory {
 	
@@ -28,10 +26,11 @@ class OmlDiagramServerFactory extends DiagramServerFactory {
 		#['oml-diagram']
 	}
 	
-	override createDiagramServer(String diagramType, String clientId) {
-		val server = super.createDiagramServer(diagramType, clientId)
-		if (server instanceof LanguageAwareDiagramServer)
-			server.serverLayoutKind = ServerLayoutKind.AUTOMATIC
-		server
-	}
+	// Not in the states example.
+//	override createDiagramServer(String diagramType, String clientId) {
+//		val server = super.createDiagramServer(diagramType, clientId)
+//		if (server instanceof LanguageAwareDiagramServer)
+//			server.serverLayoutKind = ServerLayoutKind.AUTOMATIC
+//		server
+//	}
 }
