@@ -523,7 +523,7 @@ public class OmlRead {
 			final ArrayList<Member> ms = new ArrayList<>();
 			if (s instanceof Member)
 				ms.add((Member) s);
-			else if (s instanceof RelationEntity)
+			if (s instanceof RelationEntity)
 				ms.addAll(getRelations((RelationEntity) s));
 			return ms.stream();
 		}).collect(Collectors.toList());
