@@ -2,7 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>io.opencaesar.oml</groupId>
-	<version>0.7.7</version>
+	<version>0.8.0</version>
 	<artifactId>io.opencaesar.oml.parent</artifactId>
 	<packaging>pom</packaging>
 
@@ -172,15 +172,9 @@
 							<pluginExecutions>
 								<pluginExecution>
 									<pluginExecutionFilter>
-										<groupId>
-											org.apache.maven.plugins
-										</groupId>
-										<artifactId>
-											maven-resources-plugin
-										</artifactId>
-										<versionRange>
-											[2.4.3,)
-										</versionRange>
+										<groupId>org.apache.maven.plugins</groupId>
+										<artifactId>maven-resources-plugin</artifactId>
+										<versionRange>[2.4.3,)</versionRange>
 										<goals>
 											<goal>resources</goal>
 											<goal>testResources</goal>
@@ -192,15 +186,9 @@
 								</pluginExecution>
 								<pluginExecution>
 									<pluginExecutionFilter>
-										<groupId>
-											org.codehaus.mojo
-										</groupId>
-										<artifactId>
-											build-helper-maven-plugin
-										</artifactId>
-										<versionRange>
-											[1.9.1,)
-										</versionRange>
+										<groupId>org.codehaus.mojo</groupId>
+										<artifactId>build-helper-maven-plugin</artifactId>
+										<versionRange>[1.9.1,)</versionRange>
 										<goals>
 											<goal>add-resource</goal>
 											<goal>add-source</goal>
@@ -214,15 +202,9 @@
 								</pluginExecution>
 								<pluginExecution>
 									<pluginExecutionFilter>
-										<groupId>
-											org.eclipse.tycho
-										</groupId>
-										<artifactId>
-											tycho-compiler-plugin
-										</artifactId>
-										<versionRange>
-											[0.23.1,)
-										</versionRange>
+										<groupId>org.eclipse.tycho</groupId>
+										<artifactId>tycho-compiler-plugin</artifactId>
+										<versionRange>[0.23.1,)</versionRange>
 										<goals>
 											<goal>compile</goal>
 										</goals>
@@ -233,15 +215,9 @@
 								</pluginExecution>
 								<pluginExecution>
 									<pluginExecutionFilter>
-										<groupId>
-											org.eclipse.tycho
-										</groupId>
-										<artifactId>
-											tycho-packaging-plugin
-										</artifactId>
-										<versionRange>
-											[0.23.1,)
-										</versionRange>
+										<groupId>org.eclipse.tycho</groupId>
+										<artifactId>tycho-packaging-plugin</artifactId>
+										<versionRange>[0.23.1,)</versionRange>
 										<goals>
 											<goal>build-qualifier</goal>
 											<goal>build-qualifier-aggregator</goal>

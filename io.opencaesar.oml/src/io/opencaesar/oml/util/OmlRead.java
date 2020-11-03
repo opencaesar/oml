@@ -78,6 +78,8 @@ import io.opencaesar.oml.IdentifiedElement;
 import io.opencaesar.oml.Import;
 import io.opencaesar.oml.Instance;
 import io.opencaesar.oml.IntegerLiteral;
+import io.opencaesar.oml.InverseSourceRelation;
+import io.opencaesar.oml.InverseTargetRelation;
 import io.opencaesar.oml.KeyAxiom;
 import io.opencaesar.oml.LinkAssertion;
 import io.opencaesar.oml.Literal;
@@ -105,6 +107,7 @@ import io.opencaesar.oml.ScalarProperty;
 import io.opencaesar.oml.ScalarPropertyReference;
 import io.opencaesar.oml.ScalarPropertyRestrictionAxiom;
 import io.opencaesar.oml.ScalarPropertyValueAssertion;
+import io.opencaesar.oml.SourceRelation;
 import io.opencaesar.oml.SpecializableTerm;
 import io.opencaesar.oml.SpecializableTermReference;
 import io.opencaesar.oml.SpecializationAxiom;
@@ -115,6 +118,7 @@ import io.opencaesar.oml.StructuredProperty;
 import io.opencaesar.oml.StructuredPropertyReference;
 import io.opencaesar.oml.StructuredPropertyRestrictionAxiom;
 import io.opencaesar.oml.StructuredPropertyValueAssertion;
+import io.opencaesar.oml.TargetRelation;
 import io.opencaesar.oml.Term;
 import io.opencaesar.oml.Type;
 import io.opencaesar.oml.TypeAssertion;
@@ -708,11 +712,18 @@ public class OmlRead {
 	
 	public static List<Relation> getRelations(RelationEntity entity) {
 		final List<Relation> relations = new ArrayList<>();
-		if (entity.getForward() != null) {
-			relations.add(entity.getForward());
-		}
-		if (entity.getReverse() != null) {
-			relations.add(entity.getReverse());
+		if (entity.getForwardRelation() != null) {
+			relations.add(entity.getForwardRelation());
+		} else if (entity.getReverseRelation() != null) {
+			relations.add(entity.getReverseRelation());
+		} else if (entity.getSourceRelation() != null) {
+			relations.add(entity.getSourceRelation());
+		} else if (entity.getInverseSourceRelation() != null) {
+			relations.add(entity.getInverseSourceRelation());
+		} else if (entity.getTargetRelation() != null) {
+			relations.add(entity.getTargetRelation());
+		} else if (entity.getInverseTargetRelation() != null) {
+			relations.add(entity.getInverseTargetRelation());
 		}
 		return relations;
 	}
@@ -766,27 +777,27 @@ public class OmlRead {
 		return (Vocabulary) getOntology(relation);
 	}
 
-	public static RelationEntity getEntity(final Relation relation) {
+	public static RelationEntity getRelationEntity(final Relation relation) {
 		if (relation instanceof ForwardRelation) {
-			return getEntity((ForwardRelation) relation);
-		} else if (relation instanceof ReverseRelation) {
-			return getEntity((ReverseRelation) relation);
+			return ((ForwardRelation) relation).getRelationEntity();
+		}  if (relation instanceof ReverseRelation) {
+			return ((ReverseRelation) relation).getRelationEntity();
+		} else if (relation instanceof SourceRelation) {
+			return ((SourceRelation) relation).getRelationEntity();
+		} else if (relation instanceof InverseSourceRelation) {
+			return ((InverseSourceRelation) relation).getRelationEntity();
+		} else if (relation instanceof TargetRelation) {
+			return ((TargetRelation) relation).getRelationEntity();
+		} else if (relation instanceof InverseTargetRelation) {
+			return ((InverseTargetRelation) relation).getRelationEntity();
 		}
 		return null;
 	}
 
 	// ForwardRelation
 	
-	public static RelationEntity getEntity(ForwardRelation relation) {
-		return relation.getEntity();
-	}
-
 	// ReverseRelation
 		
-	public static RelationEntity getEntity(ReverseRelation relation) {
-		return relation.getEntity();
-	}
-
 	// Rule
 
 	// Instance

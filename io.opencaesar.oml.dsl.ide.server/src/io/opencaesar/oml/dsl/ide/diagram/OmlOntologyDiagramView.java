@@ -339,9 +339,9 @@ public class OmlOntologyDiagramView {
 	}
 
 	public OmlEdge createEdge(final RelationEntity entity, final SModelElement from, final SModelElement to) {
-		final String id = idCache.uniqueId(entity, getLocalName(entity.getForward()));
+		final String id = idCache.uniqueId(entity, getLocalName(entity.getForwardRelation()));
 		final OmlLabel l = newLeafSElement(OmlLabel.class, id + ".forward.label", OmlDiagramModule.SLabel_RelationshipLabelView);
-		l.setText(getLocalName(entity.getForward()));
+		l.setText(getLocalName(entity.getForwardRelation()));
 		final OmlEdge e = newEdge(from, to, id, OmlDiagramModule.OmlEdge_RelationshipArrowEdgeView);
 		e.setChildren(CollectionLiterals.newArrayList(l));
 		return e;

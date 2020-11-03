@@ -411,10 +411,11 @@ public class OmlSearch extends OmlIndex {
 	public static List<Relation> findRelationsWithSource(Entity entity) {
 		final List<Relation> relations = new ArrayList<>();
 		relations.addAll(findRelationEntitiesWithSource(entity).stream().
-				map(r -> r.getForward()).
+				map(r -> r.getForwardRelation()).
+				filter(r -> r != null).
 				collect(Collectors.toList()));
 		relations.addAll(findRelationEntitiesWithTarget(entity).stream().
-				map(r -> r.getReverse()).
+				map(r -> r.getReverseRelation()).
 				filter(r -> r != null).
 				collect(Collectors.toList()));
 		return relations;
@@ -423,10 +424,11 @@ public class OmlSearch extends OmlIndex {
 	public static List<Relation> findRelationsWithTarget(Entity entity) {
 		final List<Relation> relations = new ArrayList<>();
 		relations.addAll(findRelationEntitiesWithTarget(entity).stream().
-				map(r -> r.getForward()).
+				map(r -> r.getForwardRelation()).
+				filter(r -> r != null).
 				collect(Collectors.toList()));
 		relations.addAll(findRelationEntitiesWithSource(entity).stream().
-				map(r -> r.getReverse()).
+				map(r -> r.getReverseRelation()).
 				filter(r -> r != null).
 				collect(Collectors.toList()));
 		return relations;
@@ -628,7 +630,7 @@ public class OmlSearch extends OmlIndex {
 				collect(Collectors.toList()));
 		instances.addAll(findRelationInstancesWithTarget(instance).stream().
 				filter(a -> findTypes(a).stream().filter(t -> t == relation).findAny().isPresent()).
-				map(a -> a.getSource()).
+				flatMap(a -> a.getSources().stream()).
 				collect(Collectors.toList()));
 		return instances;
 	}
@@ -647,7 +649,7 @@ public class OmlSearch extends OmlIndex {
 				collect(Collectors.toList()));
 		instances.addAll(findRelationInstancesWithSource(instance).stream().
 				filter(a -> findTypes(a).stream().filter(t -> t == relation).findAny().isPresent()).
-				map(a -> a.getTarget()).
+				flatMap(a -> a.getTargets().stream()).
 				collect(Collectors.toList()));
 		return instances;
 	}

@@ -40,6 +40,7 @@ import io.opencaesar.oml.DescriptionExtension;
 import io.opencaesar.oml.DescriptionUsage;
 import io.opencaesar.oml.Entity;
 import io.opencaesar.oml.OmlPackage;
+import io.opencaesar.oml.RelationEntity;
 import io.opencaesar.oml.RelationRestrictionAxiom;
 import io.opencaesar.oml.ScalarPropertyRestrictionAxiom;
 import io.opencaesar.oml.SpecializableTerm;
@@ -278,6 +279,17 @@ public class OmlValidator2 {
 			return report(Diagnostic.ERROR, diagnostics, object,
 				"Property "+OmlRead.getAbbreviatedIri(object.getProperty())+" cannot be restricted in the context of "+OmlRead.getAbbreviatedIri(OmlRead.getRestrictingType(object))+"", 
 				OmlPackage.Literals.STRUCTURED_PROPERTY_RESTRICTION_AXIOM__PROPERTY);
+		}
+		return true;
+	}
+
+	// VocabularyExtension
+
+	protected boolean checkRelationEntityReverse(RelationEntity object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		if (object.getReverseRelation() != null && object.getForwardRelation() == null) {
+			return report(Diagnostic.ERROR, diagnostics, object,
+				"Reverse relation <"+OmlRead.getAbbreviatedIri(object.getReverseRelation())+"> cannot be specified without a forward relation too", 
+				OmlPackage.Literals.RELATION_ENTITY__REVERSE_RELATION);
 		}
 		return true;
 	}

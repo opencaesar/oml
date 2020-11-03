@@ -178,6 +178,26 @@ public class OmlVisitor<T> extends OmlSwitch<T> {
 	}
 
 	@Override
+	public T caseSourceRelation(SourceRelation object) {
+		return null;
+	}
+
+	@Override
+	public T caseTargetRelation(TargetRelation object) {
+		return null;
+	}
+
+	@Override
+	public T caseInverseSourceRelation(InverseSourceRelation object) {
+		return null;
+	}
+
+	@Override
+	public T caseInverseTargetRelation(InverseTargetRelation object) {
+		return null;
+	}
+
+	@Override
 	public T caseRule(Rule object) {
 		return null;
 	}

@@ -244,17 +244,17 @@ public class OmlOntoloyDiagramScope extends OmlVisitor<OmlOntoloyDiagramScope> {
 				}
 			} else if (o instanceof RelationCardinalityRestrictionAxiom) {
 				RelationCardinalityRestrictionAxiom x = (RelationCardinalityRestrictionAxiom) o;
-				if (includes(OmlRead.getEntity(x.getRelation()))) {
+				if (includes(OmlRead.getRelationEntity(x.getRelation()))) {
 					ax.add(x);
 				}
 			} else if (o instanceof RelationRangeRestrictionAxiom) {
 				RelationRangeRestrictionAxiom x = (RelationRangeRestrictionAxiom) o;
-				if (includes(OmlRead.getEntity(x.getRelation())) && includes(x.getRange())) {
+				if (includes(OmlRead.getRelationEntity(x.getRelation())) && includes(x.getRange())) {
 					ax.add(x);
 				}
 			} else if (o instanceof RelationTargetRestrictionAxiom) {
 				RelationTargetRestrictionAxiom x = (RelationTargetRestrictionAxiom) o;
-				if (includes(OmlRead.getEntity(x.getRelation())) && includes(x.getTarget())) {
+				if (includes(OmlRead.getRelationEntity(x.getRelation())) && includes(x.getTarget())) {
 					ax.add(x);
 				}
 			}
