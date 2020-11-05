@@ -368,11 +368,11 @@ public class OmlIndex {
 	// NamedInstance
 
 	public static List<RelationInstance> findRelationInstancesWithSource(NamedInstance instance) {
-		return findInverseReferencers(instance, RelationInstance.class, OmlPackage.Literals.RELATION_INSTANCE__SOURCE);
+		return findInverseReferencers(instance, RelationInstance.class, OmlPackage.Literals.RELATION_INSTANCE__SOURCES);
 	}
 	
 	public static List<RelationInstance> findRelationInstancesWithTarget(NamedInstance instance) {
-		return findInverseReferencers(instance, RelationInstance.class, OmlPackage.Literals.RELATION_INSTANCE__TARGET);
+		return findInverseReferencers(instance, RelationInstance.class, OmlPackage.Literals.RELATION_INSTANCE__TARGETS);
 	}
 
 	public static List<LinkAssertion> findLinkAssertionsWithTarget(NamedInstance instance) {

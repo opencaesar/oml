@@ -63,26 +63,26 @@ public class RelationInstanceItemProvider extends NamedInstanceItemProvider {
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addSourcePropertyDescriptor(object);
-			addTargetPropertyDescriptor(object);
+			addSourcesPropertyDescriptor(object);
+			addTargetsPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Source feature.
+	 * This adds a property descriptor for the Sources feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addSourcePropertyDescriptor(Object object) {
+	protected void addSourcesPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_RelationInstance_source_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_RelationInstance_source_feature", "_UI_RelationInstance_type"),
-				 OmlPackage.Literals.RELATION_INSTANCE__SOURCE,
+				 getString("_UI_RelationInstance_sources_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_RelationInstance_sources_feature", "_UI_RelationInstance_type"),
+				 OmlPackage.Literals.RELATION_INSTANCE__SOURCES,
 				 true,
 				 false,
 				 true,
@@ -92,19 +92,19 @@ public class RelationInstanceItemProvider extends NamedInstanceItemProvider {
 	}
 
 	/**
-	 * This adds a property descriptor for the Target feature.
+	 * This adds a property descriptor for the Targets feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addTargetPropertyDescriptor(Object object) {
+	protected void addTargetsPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_RelationInstance_target_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_RelationInstance_target_feature", "_UI_RelationInstance_type"),
-				 OmlPackage.Literals.RELATION_INSTANCE__TARGET,
+				 getString("_UI_RelationInstance_targets_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_RelationInstance_targets_feature", "_UI_RelationInstance_type"),
+				 OmlPackage.Literals.RELATION_INSTANCE__TARGETS,
 				 true,
 				 false,
 				 true,

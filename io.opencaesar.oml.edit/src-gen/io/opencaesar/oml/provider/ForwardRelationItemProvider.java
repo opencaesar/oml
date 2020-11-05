@@ -59,25 +59,25 @@ public class ForwardRelationItemProvider extends RelationItemProvider {
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addEntityPropertyDescriptor(object);
+			addRelationEntityPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Entity feature.
+	 * This adds a property descriptor for the Relation Entity feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addEntityPropertyDescriptor(Object object) {
+	protected void addRelationEntityPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_ForwardRelation_entity_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ForwardRelation_entity_feature", "_UI_ForwardRelation_type"),
-				 OmlPackage.Literals.FORWARD_RELATION__ENTITY,
+				 getString("_UI_ForwardRelation_relationEntity_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ForwardRelation_relationEntity_feature", "_UI_ForwardRelation_type"),
+				 OmlPackage.Literals.FORWARD_RELATION__RELATION_ENTITY,
 				 true,
 				 false,
 				 true,

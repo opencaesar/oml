@@ -2,6 +2,7 @@ package io.opencaesar.oml.provider;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import org.eclipse.emf.common.notify.Adapter;
@@ -37,6 +38,8 @@ import io.opencaesar.oml.FacetedScalar;
 import io.opencaesar.oml.FacetedScalarReference;
 import io.opencaesar.oml.ForwardRelation;
 import io.opencaesar.oml.IntegerLiteral;
+import io.opencaesar.oml.InverseSourceRelation;
+import io.opencaesar.oml.InverseTargetRelation;
 import io.opencaesar.oml.KeyAxiom;
 import io.opencaesar.oml.LinkAssertion;
 import io.opencaesar.oml.Literal;
@@ -65,6 +68,7 @@ import io.opencaesar.oml.ScalarPropertyRangeRestrictionAxiom;
 import io.opencaesar.oml.ScalarPropertyReference;
 import io.opencaesar.oml.ScalarPropertyValueAssertion;
 import io.opencaesar.oml.ScalarPropertyValueRestrictionAxiom;
+import io.opencaesar.oml.SourceRelation;
 import io.opencaesar.oml.SpecializationAxiom;
 import io.opencaesar.oml.Structure;
 import io.opencaesar.oml.StructureInstance;
@@ -75,6 +79,7 @@ import io.opencaesar.oml.StructuredPropertyRangeRestrictionAxiom;
 import io.opencaesar.oml.StructuredPropertyReference;
 import io.opencaesar.oml.StructuredPropertyValueAssertion;
 import io.opencaesar.oml.StructuredPropertyValueRestrictionAxiom;
+import io.opencaesar.oml.TargetRelation;
 import io.opencaesar.oml.Vocabulary;
 import io.opencaesar.oml.VocabularyBundle;
 import io.opencaesar.oml.VocabularyBundleExtension;
@@ -545,7 +550,7 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 		return structuredPropertyItemProvider;
 	}
 
-	// Relations (forward, reverse)
+	// Relations (forward, reverse, source, target, inverse source, inverse target)
 
 	@Override
 	public Adapter createForwardRelationAdapter() {
@@ -587,6 +592,90 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 			}
 		};
 		return reverseRelationItemProvider;
+	}
+
+	@Override
+	public Adapter createSourceRelationAdapter() {
+		if (sourceRelationItemProvider == null) sourceRelationItemProvider = new SourceRelationItemProvider(this) {
+			@Override
+			public String getText(Object object) {
+				SourceRelation relation = (SourceRelation)object;
+				if (relation.eIsProxy()) {
+					try {
+						String fragment = URLDecoder.decode(((InternalEObject)relation).eProxyURI().fragment(), "utf-8");
+						return "source <" + fragment + ">";
+					} catch (UnsupportedEncodingException e) {
+						throw new AssertionError(e);
+					}
+				} else {
+					return "source " + getLabel(relation);
+				}
+			}
+		};
+		return sourceRelationItemProvider;
+	}
+
+	@Override
+	public Adapter createTargetRelationAdapter() {
+		if (targetRelationItemProvider == null) targetRelationItemProvider = new TargetRelationItemProvider(this) {
+			@Override
+			public String getText(Object object) {
+				TargetRelation relation = (TargetRelation)object;
+				if (relation.eIsProxy()) {
+					try {
+						String fragment = URLDecoder.decode(((InternalEObject)relation).eProxyURI().fragment(), "utf-8");
+						return "target <" + fragment + ">";
+					} catch (UnsupportedEncodingException e) {
+						throw new AssertionError(e);
+					}
+				} else {
+					return "target " + getLabel(relation);
+				}
+			}
+		};
+		return targetRelationItemProvider;
+	}
+
+	@Override
+	public Adapter createInverseSourceRelationAdapter() {
+		if (inverseSourceRelationItemProvider == null) inverseSourceRelationItemProvider = new InverseSourceRelationItemProvider(this) {
+			@Override
+			public String getText(Object object) {
+				InverseSourceRelation relation = (InverseSourceRelation)object;
+				if (relation.eIsProxy()) {
+					try {
+						String fragment = URLDecoder.decode(((InternalEObject)relation).eProxyURI().fragment(), "utf-8");
+						return "inverse source <" + fragment + ">";
+					} catch (UnsupportedEncodingException e) {
+						throw new AssertionError(e);
+					}
+				} else {
+					return "inverse source " + getLabel(relation);
+				}
+			}
+		};
+		return inverseSourceRelationItemProvider;
+	}
+
+	@Override
+	public Adapter createInverseTargetRelationAdapter() {
+		if (inverseTargetRelationItemProvider == null) inverseTargetRelationItemProvider = new InverseTargetRelationItemProvider(this) {
+			@Override
+			public String getText(Object object) {
+				InverseTargetRelation relation = (InverseTargetRelation)object;
+				if (relation.eIsProxy()) {
+					try {
+						String fragment = URLDecoder.decode(((InternalEObject)relation).eProxyURI().fragment(), "utf-8");
+						return "inverse target <" + fragment + ">";
+					} catch (UnsupportedEncodingException e) {
+						throw new AssertionError(e);
+					}
+				} else {
+					return "inverse target " + getLabel(relation);
+				}
+			}
+		};
+		return inverseTargetRelationItemProvider;
 	}
 
 	// Rules and predicates (entity, relation entity, relation, sameAs, differentFrom)
@@ -901,11 +990,13 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 				} else {
 					label.append(getLabel(instance));
 				}
-				if (instance.getSource() != null) {
-					label.append(" from ").append(getLabel(instance.getSource(), instance));
+				if (!instance.getSources().isEmpty()) {
+					List<String> labels = instance.getSources().stream().map(i -> getLabel(i, instance)).collect(Collectors.toList());
+					label.append(" from ").append(String.join(", ", labels));
 				}
-				if (instance.getTarget() != null) {
-					label.append(" to ").append(getLabel(instance.getTarget(), instance));
+				if (!instance.getTargets().isEmpty()) {
+					List<String> labels = instance.getTargets().stream().map(i -> getLabel(i, instance)).collect(Collectors.toList());
+					label.append(" to ").append(String.join(", ", labels));
 				}
 				return label.toString();
 			}

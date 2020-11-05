@@ -20,7 +20,7 @@ package io.opencaesar.oml.provider;
 
 
 import io.opencaesar.oml.OmlPackage;
-import io.opencaesar.oml.ReverseRelation;
+import io.opencaesar.oml.SourceRelation;
 
 import java.util.Collection;
 import java.util.List;
@@ -32,19 +32,19 @@ import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 
 /**
- * This is the item provider adapter for a {@link io.opencaesar.oml.ReverseRelation} object.
+ * This is the item provider adapter for a {@link io.opencaesar.oml.SourceRelation} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class ReverseRelationItemProvider extends RelationItemProvider {
+public class SourceRelationItemProvider extends RelationItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ReverseRelationItemProvider(AdapterFactory adapterFactory) {
+	public SourceRelationItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -75,9 +75,9 @@ public class ReverseRelationItemProvider extends RelationItemProvider {
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_ReverseRelation_relationEntity_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ReverseRelation_relationEntity_feature", "_UI_ReverseRelation_type"),
-				 OmlPackage.Literals.REVERSE_RELATION__RELATION_ENTITY,
+				 getString("_UI_SourceRelation_relationEntity_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_SourceRelation_relationEntity_feature", "_UI_SourceRelation_type"),
+				 OmlPackage.Literals.SOURCE_RELATION__RELATION_ENTITY,
 				 true,
 				 false,
 				 true,
@@ -87,14 +87,14 @@ public class ReverseRelationItemProvider extends RelationItemProvider {
 	}
 
 	/**
-	 * This returns ReverseRelation.gif.
+	 * This returns SourceRelation.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/ReverseRelation"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/SourceRelation"));
 	}
 
 	/**
@@ -105,10 +105,10 @@ public class ReverseRelationItemProvider extends RelationItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((ReverseRelation)object).getName();
+		String label = ((SourceRelation)object).getName();
 		return label == null || label.length() == 0 ?
-			getString("_UI_ReverseRelation_type") :
-			getString("_UI_ReverseRelation_type") + " " + label;
+			getString("_UI_SourceRelation_type") :
+			getString("_UI_SourceRelation_type") + " " + label;
 	}
 
 

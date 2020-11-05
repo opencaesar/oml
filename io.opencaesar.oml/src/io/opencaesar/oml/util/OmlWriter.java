@@ -69,6 +69,8 @@ import io.opencaesar.oml.FacetedScalarReference;
 import io.opencaesar.oml.ForwardRelation;
 import io.opencaesar.oml.IdentifiedElement;
 import io.opencaesar.oml.IntegerLiteral;
+import io.opencaesar.oml.InverseSourceRelation;
+import io.opencaesar.oml.InverseTargetRelation;
 import io.opencaesar.oml.KeyAxiom;
 import io.opencaesar.oml.LinkAssertion;
 import io.opencaesar.oml.Literal;
@@ -102,6 +104,7 @@ import io.opencaesar.oml.ScalarPropertyReference;
 import io.opencaesar.oml.ScalarPropertyValueAssertion;
 import io.opencaesar.oml.ScalarPropertyValueRestrictionAxiom;
 import io.opencaesar.oml.SeparatorKind;
+import io.opencaesar.oml.SourceRelation;
 import io.opencaesar.oml.SpecializationAxiom;
 import io.opencaesar.oml.Structure;
 import io.opencaesar.oml.StructureInstance;
@@ -112,6 +115,7 @@ import io.opencaesar.oml.StructuredPropertyRangeRestrictionAxiom;
 import io.opencaesar.oml.StructuredPropertyReference;
 import io.opencaesar.oml.StructuredPropertyValueAssertion;
 import io.opencaesar.oml.StructuredPropertyValueRestrictionAxiom;
+import io.opencaesar.oml.TargetRelation;
 import io.opencaesar.oml.Vocabulary;
 import io.opencaesar.oml.VocabularyBundle;
 import io.opencaesar.oml.VocabularyBundleExtension;
@@ -122,7 +126,7 @@ import io.opencaesar.oml.VocabularyUsage;
 
 public class OmlWriter {
 	
-	private static final HashBasedTable<Ontology, String, Element> table  = HashBasedTable.create();
+	private final HashBasedTable<Ontology, String, Element> table  = HashBasedTable.create();
 
 	private final ResourceSet resourceSet;
 	private final Set<Resource> newResources = new LinkedHashSet<>();
@@ -159,7 +163,7 @@ public class OmlWriter {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public void setReference(Ontology ontology, Element subject, EReference ref, Collection<String> objectIris) {
+	public void setReferences(Ontology ontology, Element subject, EReference ref, Collection<String> objectIris) {
 		final Class<? extends IdentifiedElement> objectClass = (Class<? extends IdentifiedElement>) ref.getEType().getInstanceClass();
 		assert (!ref.isContainment() && objectClass.isAssignableFrom(IdentifiedElement.class)) && ref.isMany(): "Illegal arguments for this API";
 		if (objectIris.iterator().hasNext()) {
@@ -201,12 +205,16 @@ public class OmlWriter {
 				i = iri.lastIndexOf('/');
 				fragment = iri.substring(i+1);		
 			}
-			Resource resource;
+			Resource resource = null;
 			if (context.getIri().equals(baseIri)) {
 				resource = context.eResource();
 			} else {
 				Ontology ontology = OmlRead.getImportedOntologyByIri(context, baseIri);
-				resource = (ontology != null) ? ontology.eResource() : null;
+				if (ontology != null) {
+					resource = ontology.eResource();
+				} else {
+					throw new RuntimeException("could not resolve "+baseIri+" in context of "+context.getIri());
+				}
 			}
 			if (resource != null) {
 				EObject obj = resource.getEObject(fragment);
@@ -424,7 +432,7 @@ public class OmlWriter {
 	public ForwardRelation addForwardRelation(RelationEntity entity, String name) {
 		final ForwardRelation forward = create(ForwardRelation.class);
 		forward.setName(name);
-		entity.setForward(forward);
+		entity.setForwardRelation(forward);
 		return forward;
 	}
 
@@ -433,10 +441,46 @@ public class OmlWriter {
 	public ReverseRelation addReverseRelation(RelationEntity entity, String name) {
 		final ReverseRelation reverse = create(ReverseRelation.class);
 		reverse.setName(name);
-		entity.setReverse(reverse);
+		entity.setReverseRelation(reverse);
 		return reverse;
 	}
 	
+	// SourceRelation
+
+	public SourceRelation addSourceRelation(RelationEntity entity, String name) {
+		final SourceRelation source = create(SourceRelation.class);
+		source.setName(name);
+		entity.setSourceRelation(source);
+		return source;
+	}
+
+	// TargetRelation
+
+	public TargetRelation addTargetRelation(RelationEntity entity, String name) {
+		final TargetRelation target = create(TargetRelation.class);
+		target.setName(name);
+		entity.setTargetRelation(target);
+		return target;
+	}
+
+	// InverseSourceRelation
+
+	public InverseSourceRelation addInverseSourceRelation(RelationEntity entity, String name) {
+		final InverseSourceRelation inverseSource = create(InverseSourceRelation.class);
+		inverseSource.setName(name);
+		entity.setInverseSourceRelation(inverseSource);
+		return inverseSource;
+	}
+
+	// InverseTargetRelation
+
+	public InverseTargetRelation addInverseTargetRelation(RelationEntity entity, String name) {
+		final InverseTargetRelation inverseTarget = create(InverseTargetRelation.class);
+		inverseTarget.setName(name);
+		entity.setInverseTargetRelation(inverseTarget);
+		return inverseTarget;
+	}
+
 	// Rule
 
 	public Rule addRule(Vocabulary vocabulary, String name, Predicate[] consequent, Predicate[] antecedent) {
@@ -467,11 +511,11 @@ public class OmlWriter {
 	
 	// RelationInstance
 
-	public RelationInstance addRelationInstance(Description description, String name, String sourceIri, String targetIri) {
+	public RelationInstance addRelationInstance(Description description, String name, List<String> sourceIris, List<String> targetIris) {
 		final RelationInstance instance = create(RelationInstance.class);
 		instance.setName(name);
-		setReference(description, instance, OmlPackage.Literals.RELATION_INSTANCE__SOURCE, sourceIri);
-		setReference(description, instance, OmlPackage.Literals.RELATION_INSTANCE__TARGET, targetIri);
+		setReferences(description, instance, OmlPackage.Literals.RELATION_INSTANCE__SOURCES, sourceIris);
+		setReferences(description, instance, OmlPackage.Literals.RELATION_INSTANCE__TARGETS, targetIris);
 		description.getOwnedStatements().add(instance);
 		return instance;
 	}
@@ -813,7 +857,7 @@ public class OmlWriter {
 
 	public KeyAxiom addKeyAxiom(Vocabulary vocabulary, String entityIri, Collection<String> keyPropertyIris) {
 		final KeyAxiom axiom = create(KeyAxiom.class);
-		setReference(vocabulary, axiom, OmlPackage.Literals.KEY_AXIOM__PROPERTIES, keyPropertyIris);
+		setReferences(vocabulary, axiom, OmlPackage.Literals.KEY_AXIOM__PROPERTIES, keyPropertyIris);
 		addContained(vocabulary, entityIri, OmlPackage.Literals.ENTITY__OWNED_KEYS, OmlPackage.Literals.ENTITY_REFERENCE__OWNED_KEYS, axiom);
 		return axiom;
 	}

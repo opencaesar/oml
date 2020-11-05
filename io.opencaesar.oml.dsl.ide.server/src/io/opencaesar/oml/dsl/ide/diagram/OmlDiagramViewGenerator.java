@@ -261,20 +261,22 @@ public class OmlDiagramViewGenerator extends OmlVisitor<SModelElement> implement
 		if (null != s)
 			return s;
 
-		final SModelElement source = doSwitch(ri.getSource());
-		final SModelElement target = doSwitch(ri.getTarget());
-		if (null != source && null != target) {
-			if (!view.scope.instanceAssertions.get(ri).isEmpty()) {
-				final OmlNode node = view.createNode(ri, source, target);
-				frame.getChildren().add(node);
-				traceAndMark(node, ri, context);
-				addInstanceFeatures(ri, node);
-				return node;
-			} else {
-				final OmlEdge edge = view.createEdge(ri, source, target);
-				frame.getChildren().add(edge);
-				traceAndMark(edge, ri, context);
-				return edge;
+		if (ri.getSources().size()==1 && ri.getTargets().size()==1) {
+			final SModelElement source = doSwitch(ri.getSources().get(0));
+			final SModelElement target = doSwitch(ri.getTargets().get(0));
+			if (null != source && null != target) {
+				if (!view.scope.instanceAssertions.get(ri).isEmpty()) {
+					final OmlNode node = view.createNode(ri, source, target);
+					frame.getChildren().add(node);
+					traceAndMark(node, ri, context);
+					addInstanceFeatures(ri, node);
+					return node;
+				} else {
+					final OmlEdge edge = view.createEdge(ri, source, target);
+					frame.getChildren().add(edge);
+					traceAndMark(edge, ri, context);
+					return edge;
+				}
 			}
 		}
 		return null;
@@ -384,7 +386,7 @@ public class OmlDiagramViewGenerator extends OmlVisitor<SModelElement> implement
 		if (null == source)
 			throw new IllegalArgumentException("no entity node for showAxiom(RelationCardinalityRestrictionAxiom): "
 					+ OmlRead.getAbbreviatedIri(e));
-		final SModelElement target = semantic2diagram.get(OmlRead.getEntity(ax.getRelation()).getTarget());
+		final SModelElement target = semantic2diagram.get(OmlRead.getRelationEntity(ax.getRelation()).getTarget());
 		if (null == target)
 			throw new IllegalArgumentException("no entity node for showAxiom(RelationCardinalityRestrictionAxiom): "
 					+ OmlRead.getAbbreviatedIri(ax.getRelation()));

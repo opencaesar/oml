@@ -289,8 +289,11 @@ class Concept extends Entity {
  * other relation entities and/or aspects. A relation entity relates two entities, a source and a target, by either a forward 
  * relation (from the source to the target) only, or also with an reverse relation (from the target to the source). For example, 
  * a relation entity "Performs" between a source concept "Component" and a target concept "Function" defines a forward relation 
- * "performs" and an reverse relation "isPerformedBy". A relation entity can also be characterized with several boolean flags, 
- * representing DL semantics, that apply directly to the forward relation, and conversely to the reverse relation. 
+ * "performs" and an reverse relation "isPerformedBy". A relation entity can also optionally name some additional relations like
+ * source relation (from the relation entity to a source), inverseSource relation (from a source to the relation entity), target 
+ * relation (from the relation entity to a target), and inverseTarget relation (from a target to the relation entity). A relation
+ * entity can also be characterized with several boolean flags, representing DL semantics, that apply directly to the forward 
+ * relation, and conversely to the reverse relation. 
  */
 @Bikeshed(heading="Types")
 class RelationEntity extends Entity {
@@ -303,13 +306,29 @@ class RelationEntity extends Entity {
 	 */
 	refers Entity[1] target
 	/*
-	 * The forward relation of this relation entity
+	 * The optional forward relation of this relation entity
 	 */
-	contains ForwardRelation[1] forward opposite entity
+	contains ForwardRelation forwardRelation opposite relationEntity
 	/*
 	 * The optional reverse relation of this relation entity
 	 */
-	contains ReverseRelation reverse opposite entity
+	contains ReverseRelation reverseRelation opposite relationEntity
+	/*
+	 * The optional source relation of this relation entity
+	 */
+	contains SourceRelation sourceRelation opposite relationEntity
+	/*
+	 * The optional target relation of this relation entity
+	 */
+	contains TargetRelation targetRelation opposite relationEntity
+	/*
+	 * The optional inverse source relation of this relation entity
+	 */
+	contains InverseSourceRelation inverseSourceRelation opposite relationEntity
+	/*
+	 * The optional inverse target relation of this relation entity
+	 */
+	contains InverseTargetRelation inverseTargetRelation opposite relationEntity
 	/*
 	 * Whether this relation entity is functional (i.e., {@code A -> B and A->C => B=C})
 	 */
@@ -556,18 +575,18 @@ class ForwardRelation extends Relation {
 	/*
 	 * The relation entity that owns this relation as forward
 	 */
-	container RelationEntity entity opposite forward
+	container RelationEntity relationEntity opposite forwardRelation
 	op Entity deriveDomain() {
-		if (entity !== null)
-			entity.source
+		if (relationEntity !== null)
+			relationEntity.source
 	}
 	op Entity deriveRange() {
-		if (entity !== null)
-			entity.target
+		if (relationEntity !== null)
+			relationEntity.target
 	}
 	op Relation deriveInverse() {
-		if (entity !== null)
-			entity.reverse
+		if (relationEntity !== null)
+			relationEntity.reverseRelation
 	}
 }
 
@@ -579,20 +598,114 @@ class ForwardRelation extends Relation {
 @Bikeshed(heading="Terms")
 class ReverseRelation extends Relation {
 	/*
-	 * The relation entity that owns this relation as reverse
+	 * The relation entity that owns this reverse relation
 	 */
-	container RelationEntity entity opposite reverse
+	container RelationEntity relationEntity opposite reverseRelation
 	op Entity deriveDomain() {
-		if (entity !== null)
-			entity.target
+		if (relationEntity !== null)
+			relationEntity.target
 	}
 	op Entity deriveRange() {
-		if (entity !== null)
-			entity.source
+		if (relationEntity !== null)
+			relationEntity.source
 	}
 	op Relation deriveInverse() {
-		if (entity !== null)
-			entity.forward
+		if (relationEntity !== null)
+			relationEntity.forwardRelation
+	}
+}
+
+/*
+ * SourceRelation is a relation that is defined along side a relation entity, whose domain is the relation entity,
+ * and whose range is the source of the relation entity. A source relation is inverse functional when the relation
+ * entity is functional, and it is functional when the relation entity is inverse functional.
+ */
+@Bikeshed(heading="Terms")
+class SourceRelation extends Relation {
+	/*
+	 * The relation entity that owns this source relation
+	 */
+	container RelationEntity relationEntity opposite sourceRelation
+	op Entity deriveDomain() {
+		if (relationEntity !== null)
+			relationEntity
+	}
+	op Entity deriveRange() {
+		if (relationEntity !== null)
+			relationEntity.source
+	}
+	op Relation deriveInverse() {
+		relationEntity.inverseSourceRelation
+	}
+}
+
+/*
+ * TargetRelation is a relation that is defined along side a relation entity, whose domain is the relation entity,
+ * and whose range is the target of the relation entity. A source relation is functional when the relation entity
+ * is inverse functional, and it is inverse functional when the relation entity is functional.
+ */
+@Bikeshed(heading="Terms")
+class TargetRelation extends Relation {
+	/*
+	 * The relation entity that owns this target relation
+	 */
+	container RelationEntity relationEntity opposite targetRelation
+	op Entity deriveDomain() {
+		if (relationEntity !== null)
+			relationEntity
+	}
+	op Entity deriveRange() {
+		if (relationEntity !== null)
+			relationEntity.target
+	}
+	op Relation deriveInverse() {
+		relationEntity.inverseTargetRelation
+	}
+}
+
+/*
+ * InverseSourceRelation is a relation that is defined along side a relation entity, whose domain is the source of the 
+ * relation entity, and whose range is the relation entity. An inverse source relation is the inverse of a source relation.
+ */
+@Bikeshed(heading="Terms")
+class InverseSourceRelation extends Relation {
+	/*
+	 * The relation entity that owns this source relation
+	 */
+	container RelationEntity relationEntity opposite inverseSourceRelation
+	op Entity deriveDomain() {
+		if (relationEntity !== null)
+			relationEntity.source
+	}
+	op Entity deriveRange() {
+		if (relationEntity !== null)
+			relationEntity
+	}
+	op Relation deriveInverse() {
+		relationEntity.sourceRelation
+	}
+}
+
+/*
+ * InverseTargetRelation is a relation that is defined along side a relation entity, whose domain is the target of the 
+ * relation entity, and whose range is the relation entity. An inverse target relation is the inverse of a target relation.
+ */
+@Bikeshed(heading="Terms")
+class InverseTargetRelation extends Relation {
+	/*
+	 * The relation entity that owns this source relation
+	 */
+	container RelationEntity relationEntity opposite inverseTargetRelation
+	op Entity deriveDomain() {
+		if (relationEntity !== null)
+			relationEntity.target
+	}
+	op Entity deriveRange() {
+		if (relationEntity !== null)
+			relationEntity
+	}
+	op Relation deriveInverse() {
+		relationEntity.targetRelation
 	}
 }
 
@@ -669,8 +782,8 @@ class ConceptInstance extends NamedInstance {
 }
 
 /*
- * RelationInstance is a named instance that represents an instance of a relation entity that goes from a source named instance
- * to a target named instance. It can be typed by a number of relation entities.
+ * RelationInstance is a named instance that represents an instance of a relation entity that goes from one or more 
+ * source named instances to one or more target named instances. It can be typed by a number of relation entities.
  */
 @Bikeshed(heading="Instances")
 class RelationInstance extends NamedInstance {
@@ -679,13 +792,13 @@ class RelationInstance extends NamedInstance {
 	 */
 	contains RelationTypeAssertion[] ownedTypes opposite owningInstance
 	/*
-	 * The named instance that is the source of this relation instance
+	 * The named instances that are the sources of this relation instance
 	 */
-	refers NamedInstance[1] source
+	refers NamedInstance[] sources
 	/*
-	 * The named instance that is the target of this relation instance
+	 * The named instances that are the targets of this relation instance
 	 */
-	refers NamedInstance[1] target
+	refers NamedInstance[] targets
 }
 
 /*

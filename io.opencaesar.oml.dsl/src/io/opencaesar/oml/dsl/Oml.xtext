@@ -128,8 +128,12 @@ RelationEntity:
 	'relation' 'entity' name=ID (':>' ownedSpecializations+=SpecializationAxiom (',' ownedSpecializations+=SpecializationAxiom)*)? ('['
 		'from' source=[Entity|Ref]
 		'to' target=[Entity|Ref]
-		forward=ForwardRelation
-		(reverse=ReverseRelation)?
+		((forwardRelation=ForwardRelation)? &
+		 (reverseRelation=ReverseRelation)? &
+		 (sourceRelation=SourceRelation)? &
+		 (inverseSourceRelation=InverseSourceRelation)? &
+		 (targetRelation=TargetRelation)? &
+		 (inverseTargetRelation=InverseTargetRelation)?)
 		((functional?='functional')? &
 		 (inverseFunctional?='inverse' 'functional')? &
 		 (symmetric?='symmetric')? &
@@ -212,6 +216,22 @@ ReverseRelation:
 	ownedAnnotations+=Annotation*
 	'reverse' name=ID;
 
+SourceRelation:
+	ownedAnnotations+=Annotation*
+	'source' name=ID;
+
+InverseSourceRelation:
+	ownedAnnotations+=Annotation*
+	'inverse' 'source' name=ID;
+
+TargetRelation:
+	ownedAnnotations+=Annotation*
+	'target' name=ID;
+
+InverseTargetRelation:
+	ownedAnnotations+=Annotation*
+	'inverse' 'target' name=ID;
+
 Rule:
 	ownedAnnotations+=Annotation*
 	'rule' name=ID '['
@@ -242,8 +262,8 @@ ConceptInstance:
 RelationInstance:
 	ownedAnnotations+=Annotation*
 	'ri' name=ID (':' ownedTypes+=RelationTypeAssertion (',' ownedTypes+=RelationTypeAssertion)*)?  ('['
-		'from' source=[NamedInstance|Ref] 
-		'to' target=[NamedInstance|Ref]
+		('from' sources+=[NamedInstance|Ref])+ 
+		('to' targets+=[NamedInstance|Ref])+
 		ownedPropertyValues+=PropertyValueAssertion*
 		ownedLinks+=LinkAssertion*
 	']')?;

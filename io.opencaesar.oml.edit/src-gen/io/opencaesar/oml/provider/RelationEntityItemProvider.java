@@ -287,8 +287,12 @@ public class RelationEntityItemProvider extends EntityItemProvider {
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(OmlPackage.Literals.RELATION_ENTITY__FORWARD);
-			childrenFeatures.add(OmlPackage.Literals.RELATION_ENTITY__REVERSE);
+			childrenFeatures.add(OmlPackage.Literals.RELATION_ENTITY__FORWARD_RELATION);
+			childrenFeatures.add(OmlPackage.Literals.RELATION_ENTITY__REVERSE_RELATION);
+			childrenFeatures.add(OmlPackage.Literals.RELATION_ENTITY__SOURCE_RELATION);
+			childrenFeatures.add(OmlPackage.Literals.RELATION_ENTITY__TARGET_RELATION);
+			childrenFeatures.add(OmlPackage.Literals.RELATION_ENTITY__INVERSE_SOURCE_RELATION);
+			childrenFeatures.add(OmlPackage.Literals.RELATION_ENTITY__INVERSE_TARGET_RELATION);
 		}
 		return childrenFeatures;
 	}
@@ -353,8 +357,12 @@ public class RelationEntityItemProvider extends EntityItemProvider {
 			case OmlPackage.RELATION_ENTITY__TRANSITIVE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
-			case OmlPackage.RELATION_ENTITY__FORWARD:
-			case OmlPackage.RELATION_ENTITY__REVERSE:
+			case OmlPackage.RELATION_ENTITY__FORWARD_RELATION:
+			case OmlPackage.RELATION_ENTITY__REVERSE_RELATION:
+			case OmlPackage.RELATION_ENTITY__SOURCE_RELATION:
+			case OmlPackage.RELATION_ENTITY__TARGET_RELATION:
+			case OmlPackage.RELATION_ENTITY__INVERSE_SOURCE_RELATION:
+			case OmlPackage.RELATION_ENTITY__INVERSE_TARGET_RELATION:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -374,13 +382,33 @@ public class RelationEntityItemProvider extends EntityItemProvider {
 
 		newChildDescriptors.add
 			(createChildParameter
-				(OmlPackage.Literals.RELATION_ENTITY__FORWARD,
+				(OmlPackage.Literals.RELATION_ENTITY__FORWARD_RELATION,
 				 OmlFactory.eINSTANCE.createForwardRelation()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(OmlPackage.Literals.RELATION_ENTITY__REVERSE,
+				(OmlPackage.Literals.RELATION_ENTITY__REVERSE_RELATION,
 				 OmlFactory.eINSTANCE.createReverseRelation()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(OmlPackage.Literals.RELATION_ENTITY__SOURCE_RELATION,
+				 OmlFactory.eINSTANCE.createSourceRelation()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(OmlPackage.Literals.RELATION_ENTITY__TARGET_RELATION,
+				 OmlFactory.eINSTANCE.createTargetRelation()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(OmlPackage.Literals.RELATION_ENTITY__INVERSE_SOURCE_RELATION,
+				 OmlFactory.eINSTANCE.createInverseSourceRelation()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(OmlPackage.Literals.RELATION_ENTITY__INVERSE_TARGET_RELATION,
+				 OmlFactory.eINSTANCE.createInverseTargetRelation()));
 	}
 
 }
