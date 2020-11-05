@@ -393,7 +393,7 @@ public class OmlRead {
 		if (context.getIri().equals(baseIri)) {
 			resource = context.eResource();
 		} else {
-			Ontology ontology = OmlRead.getImportedOntologyByIri(context, baseIri);
+			Ontology ontology = getImportedOntologyByIri(context, baseIri);
 			resource = (ontology != null) ? ontology.eResource() : null;
 		}
 		if (resource != null) {
@@ -410,7 +410,7 @@ public class OmlRead {
 		if (context.getPrefix().equals(prefix)) {
 			resource = context.eResource();
 		} else {
-			Ontology ontology = OmlRead.getImportedOntologyByPrefix(context, prefix);
+			Ontology ontology = getImportedOntologyByPrefix(context, prefix);
 			resource = (ontology != null) ? ontology.eResource() : null;
 		}
 		if (resource != null) {
@@ -458,8 +458,9 @@ public class OmlRead {
 
 	public static Ontology getImportedOntologyByIri(Ontology importingOntology, String iri) {
 		for (Import i : getAllImportsWithSource(importingOntology)) {
-			if (getIri(getImportedOntology(i)).equals(iri)) {
-				return getImportedOntology(i);
+			Ontology importedOntology = getImportedOntology(i);		
+			if (importedOntology != null && importedOntology.getIri().equals(iri)) {
+				return importedOntology;
 			}
 		}
 		return null;
@@ -714,15 +715,20 @@ public class OmlRead {
 		final List<Relation> relations = new ArrayList<>();
 		if (entity.getForwardRelation() != null) {
 			relations.add(entity.getForwardRelation());
-		} else if (entity.getReverseRelation() != null) {
+		}
+		if (entity.getReverseRelation() != null) {
 			relations.add(entity.getReverseRelation());
-		} else if (entity.getSourceRelation() != null) {
+		}
+		if (entity.getSourceRelation() != null) {
 			relations.add(entity.getSourceRelation());
-		} else if (entity.getInverseSourceRelation() != null) {
+		}
+		if (entity.getInverseSourceRelation() != null) {
 			relations.add(entity.getInverseSourceRelation());
-		} else if (entity.getTargetRelation() != null) {
+		}
+		if (entity.getTargetRelation() != null) {
 			relations.add(entity.getTargetRelation());
-		} else if (entity.getInverseTargetRelation() != null) {
+		}
+		if (entity.getInverseTargetRelation() != null) {
 			relations.add(entity.getInverseTargetRelation());
 		}
 		return relations;

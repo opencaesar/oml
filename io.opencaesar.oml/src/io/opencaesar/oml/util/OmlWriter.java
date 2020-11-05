@@ -126,7 +126,7 @@ import io.opencaesar.oml.VocabularyUsage;
 
 public class OmlWriter {
 	
-	private static final HashBasedTable<Ontology, String, Element> table  = HashBasedTable.create();
+	private final HashBasedTable<Ontology, String, Element> table  = HashBasedTable.create();
 
 	private final ResourceSet resourceSet;
 	private final Set<Resource> newResources = new LinkedHashSet<>();
@@ -205,12 +205,16 @@ public class OmlWriter {
 				i = iri.lastIndexOf('/');
 				fragment = iri.substring(i+1);		
 			}
-			Resource resource;
+			Resource resource = null;
 			if (context.getIri().equals(baseIri)) {
 				resource = context.eResource();
 			} else {
 				Ontology ontology = OmlRead.getImportedOntologyByIri(context, baseIri);
-				resource = (ontology != null) ? ontology.eResource() : null;
+				if (ontology != null) {
+					resource = ontology.eResource();
+				} else {
+					throw new RuntimeException("could not resolve "+baseIri+" in context of "+context.getIri());
+				}
 			}
 			if (resource != null) {
 				EObject obj = resource.getEObject(fragment);
