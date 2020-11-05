@@ -1,7 +1,7 @@
 <!doctype html><html lang="en">
  <head>
   <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-  <title>Ontological Modeling Language 0.7</title>
+  <title>Ontological Modeling Language 0.8</title>
   <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
 <style data-fill-with="stylesheet">/******************************************************************************
  *                   Style sheet for the W3C specifications                   *
@@ -1323,7 +1323,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version adf8655b, updated Thu Oct 29 16:15:09 2020 -0700" name="generator">
   <link href="https://github.com/opencaesar/oml" rel="canonical">
-  <meta content="783f24f96eb85252c1d9d9a1262fe0388f913dd3" name="document-revision">
+  <meta content="087c76c3894c9d6429d76eff9d266c8eea09eeec" name="document-revision">
 <style>
 body {
   padding: 0;
@@ -1976,7 +1976,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
  <body class="h-entry">
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://opencaesar.github.io/oml/"> <img alt="Ontological Modeling Language" height="60" src="images/oml.svg"> </a></p>
-   <h1 class="p-name no-ref" id="title">Ontological Modeling Language 0.7</h1>
+   <h1 class="p-name no-ref" id="title">Ontological Modeling Language 0.8</h1>
    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Document, <time class="dt-updated" datetime="2020-11-05">5 November 2020</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
@@ -2030,30 +2030,34 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
         <li><a href="#RelationEntity-Syntax"><span class="secno">2.2.6</span> <span class="content"><span>RelationEntity</span></span></a>
         <li><a href="#ForwardRelation-Syntax"><span class="secno">2.2.7</span> <span class="content"><span>ForwardRelation</span></span></a>
         <li><a href="#ReverseRelation-Syntax"><span class="secno">2.2.8</span> <span class="content"><span>ReverseRelation</span></span></a>
-        <li><a href="#RelationReference-Syntax"><span class="secno">2.2.9</span> <span class="content"><span>RelationReference</span></span></a>
-        <li><a href="#Structure-Syntax"><span class="secno">2.2.10</span> <span class="content"><span>Structure</span></span></a>
-        <li><a href="#AnnotationProperty-Syntax"><span class="secno">2.2.11</span> <span class="content"><span>AnnotationProperty</span></span></a>
-        <li><a href="#ScalarProperty-Syntax"><span class="secno">2.2.12</span> <span class="content"><span>ScalarProperty</span></span></a>
-        <li><a href="#StructuredProperty-Syntax"><span class="secno">2.2.13</span> <span class="content"><span>StructuredProperty</span></span></a>
-        <li><a href="#FacetedScalar-Syntax"><span class="secno">2.2.14</span> <span class="content"><span>FacetedScalar</span></span></a>
-        <li><a href="#EnumeratedScalar-Syntax"><span class="secno">2.2.15</span> <span class="content"><span>EnumeratedScalar</span></span></a>
-        <li><a href="#Rule-Syntax"><span class="secno">2.2.16</span> <span class="content"><span>Rule</span></span></a>
-        <li><a href="#EntityPredicate-Syntax"><span class="secno">2.2.17</span> <span class="content"><span>EntityPredicate</span></span></a>
-        <li><a href="#RelationPredicate-Syntax"><span class="secno">2.2.18</span> <span class="content"><span>RelationPredicate</span></span></a>
-        <li><a href="#RelationEntityPredicate-Syntax"><span class="secno">2.2.19</span> <span class="content"><span>RelationEntityPredicate</span></span></a>
-        <li><a href="#SameAsPredicate-Syntax"><span class="secno">2.2.20</span> <span class="content"><span>SameAsPredicate</span></span></a>
-        <li><a href="#DifferentFromPredicate-Syntax"><span class="secno">2.2.21</span> <span class="content"><span>DifferentFromPredicate</span></span></a>
-        <li><a href="#SpecializationAxiom-Syntax"><span class="secno">2.2.22</span> <span class="content"><span>SpecializationAxiom</span></span></a>
-        <li><a href="#ScalarPropertyRangeRestrictionAxiom-Syntax"><span class="secno">2.2.23</span> <span class="content"><span>ScalarPropertyRangeRestrictionAxiom</span></span></a>
-        <li><a href="#ScalarPropertyCardinalityRestrictionAxiom-Syntax"><span class="secno">2.2.24</span> <span class="content"><span>ScalarPropertyCardinalityRestrictionAxiom</span></span></a>
-        <li><a href="#ScalarPropertyValueRestrictionAxiom-Syntax"><span class="secno">2.2.25</span> <span class="content"><span>ScalarPropertyValueRestrictionAxiom</span></span></a>
-        <li><a href="#StructuredPropertyRangeRestrictionAxiom-Syntax"><span class="secno">2.2.26</span> <span class="content"><span>StructuredPropertyRangeRestrictionAxiom</span></span></a>
-        <li><a href="#StructuredPropertyCardinalityRestrictionAxiom-Syntax"><span class="secno">2.2.27</span> <span class="content"><span>StructuredPropertyCardinalityRestrictionAxiom</span></span></a>
-        <li><a href="#StructuredPropertyValueRestrictionAxiom-Syntax"><span class="secno">2.2.28</span> <span class="content"><span>StructuredPropertyValueRestrictionAxiom</span></span></a>
-        <li><a href="#RelationRangeRestrictionAxiom-Syntax"><span class="secno">2.2.29</span> <span class="content"><span>RelationRangeRestrictionAxiom</span></span></a>
-        <li><a href="#RelationCardinalityRestrictionAxiom-Syntax"><span class="secno">2.2.30</span> <span class="content"><span>RelationCardinalityRestrictionAxiom</span></span></a>
-        <li><a href="#RelationTargetRestrictionAxiom-Syntax"><span class="secno">2.2.31</span> <span class="content"><span>RelationTargetRestrictionAxiom</span></span></a>
-        <li><a href="#KeyAxiom-Syntax"><span class="secno">2.2.32</span> <span class="content"><span>KeyAxiom</span></span></a>
+        <li><a href="#SourceRelation-Syntax"><span class="secno">2.2.9</span> <span class="content"><span>SourceRelation</span></span></a>
+        <li><a href="#InverseSourceRelation-Syntax"><span class="secno">2.2.10</span> <span class="content"><span>InverseSourceRelation</span></span></a>
+        <li><a href="#TargetRelation-Syntax"><span class="secno">2.2.11</span> <span class="content"><span>TargetRelation</span></span></a>
+        <li><a href="#InverseTargetRelation-Syntax"><span class="secno">2.2.12</span> <span class="content"><span>InverseTargetRelation</span></span></a>
+        <li><a href="#RelationReference-Syntax"><span class="secno">2.2.13</span> <span class="content"><span>RelationReference</span></span></a>
+        <li><a href="#Structure-Syntax"><span class="secno">2.2.14</span> <span class="content"><span>Structure</span></span></a>
+        <li><a href="#AnnotationProperty-Syntax"><span class="secno">2.2.15</span> <span class="content"><span>AnnotationProperty</span></span></a>
+        <li><a href="#ScalarProperty-Syntax"><span class="secno">2.2.16</span> <span class="content"><span>ScalarProperty</span></span></a>
+        <li><a href="#StructuredProperty-Syntax"><span class="secno">2.2.17</span> <span class="content"><span>StructuredProperty</span></span></a>
+        <li><a href="#FacetedScalar-Syntax"><span class="secno">2.2.18</span> <span class="content"><span>FacetedScalar</span></span></a>
+        <li><a href="#EnumeratedScalar-Syntax"><span class="secno">2.2.19</span> <span class="content"><span>EnumeratedScalar</span></span></a>
+        <li><a href="#Rule-Syntax"><span class="secno">2.2.20</span> <span class="content"><span>Rule</span></span></a>
+        <li><a href="#EntityPredicate-Syntax"><span class="secno">2.2.21</span> <span class="content"><span>EntityPredicate</span></span></a>
+        <li><a href="#RelationPredicate-Syntax"><span class="secno">2.2.22</span> <span class="content"><span>RelationPredicate</span></span></a>
+        <li><a href="#RelationEntityPredicate-Syntax"><span class="secno">2.2.23</span> <span class="content"><span>RelationEntityPredicate</span></span></a>
+        <li><a href="#SameAsPredicate-Syntax"><span class="secno">2.2.24</span> <span class="content"><span>SameAsPredicate</span></span></a>
+        <li><a href="#DifferentFromPredicate-Syntax"><span class="secno">2.2.25</span> <span class="content"><span>DifferentFromPredicate</span></span></a>
+        <li><a href="#SpecializationAxiom-Syntax"><span class="secno">2.2.26</span> <span class="content"><span>SpecializationAxiom</span></span></a>
+        <li><a href="#ScalarPropertyRangeRestrictionAxiom-Syntax"><span class="secno">2.2.27</span> <span class="content"><span>ScalarPropertyRangeRestrictionAxiom</span></span></a>
+        <li><a href="#ScalarPropertyCardinalityRestrictionAxiom-Syntax"><span class="secno">2.2.28</span> <span class="content"><span>ScalarPropertyCardinalityRestrictionAxiom</span></span></a>
+        <li><a href="#ScalarPropertyValueRestrictionAxiom-Syntax"><span class="secno">2.2.29</span> <span class="content"><span>ScalarPropertyValueRestrictionAxiom</span></span></a>
+        <li><a href="#StructuredPropertyRangeRestrictionAxiom-Syntax"><span class="secno">2.2.30</span> <span class="content"><span>StructuredPropertyRangeRestrictionAxiom</span></span></a>
+        <li><a href="#StructuredPropertyCardinalityRestrictionAxiom-Syntax"><span class="secno">2.2.31</span> <span class="content"><span>StructuredPropertyCardinalityRestrictionAxiom</span></span></a>
+        <li><a href="#StructuredPropertyValueRestrictionAxiom-Syntax"><span class="secno">2.2.32</span> <span class="content"><span>StructuredPropertyValueRestrictionAxiom</span></span></a>
+        <li><a href="#RelationRangeRestrictionAxiom-Syntax"><span class="secno">2.2.33</span> <span class="content"><span>RelationRangeRestrictionAxiom</span></span></a>
+        <li><a href="#RelationCardinalityRestrictionAxiom-Syntax"><span class="secno">2.2.34</span> <span class="content"><span>RelationCardinalityRestrictionAxiom</span></span></a>
+        <li><a href="#RelationTargetRestrictionAxiom-Syntax"><span class="secno">2.2.35</span> <span class="content"><span>RelationTargetRestrictionAxiom</span></span></a>
+        <li><a href="#KeyAxiom-Syntax"><span class="secno">2.2.36</span> <span class="content"><span>KeyAxiom</span></span></a>
        </ol>
       <li>
        <a href="#VocabularyBundles-Syntax"><span class="secno">2.3</span> <span class="content">Vocabulary Bundles</span></a>
@@ -2283,7 +2287,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
     <h4 class="heading settled" data-level="2.1.2" id="Ontology-Syntax"><span class="secno">2.1.2. </span><span class="content"><a data-link-type="dfn" href="#ontology" id="ref-for-ontology">Ontology</a></span><a class="self-link" href="#Ontology-Syntax"></a></h4>
     <p>An ontology is declared with of the ontology keywords, an <code>IRI</code>, a separator character (# or /), and a <code>PREFIX</code>. The <code>IRI</code> represents a globally unique namespace that identifies the ontology. The separator character is used to separate the ontology’s <code>IRI</code> from the ontology member’s <code>ID</code> in the member’s <code>IRI</code> (e.g., <code>IRI#ID</code>). The <code>PREFIX</code> is a default short name for the ontology that can substitute for its <code>IRI</code> when used in an ontology member’s abbreviated <code>IRI</code> notation (e.g., <code>PREFIX:ID</code>). An ontology can have statements added to its body between <code>{</code> and <code>}</code>. The statements can be <a href="#Import-Syntax">Import</a> statements or <a href="#Member-Syntax">Member</a> statements (placed after all <a href="#Import-Syntax">Import</a> statements).</p>
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
-ontology_keyword IRI with (# | /) as PREFIX {
+&lt;ontology_keyword> IRI <span style="font-weight:bold;color:purple">with</span> (# | /) <span style="font-weight:bold;color:purple">as</span> PREFIX {
   (<a href="#Import-Syntax">Import</a>)*
   (<a href="#Member-Syntax">Member</a>)*
 }
@@ -2291,19 +2295,19 @@ ontology_keyword IRI with (# | /) as PREFIX {
     <h4 class="heading settled" data-level="2.1.3" id="Import-Syntax"><span class="secno">2.1.3. </span><span class="content"><a data-link-type="dfn" href="#import" id="ref-for-import">Import</a></span><a class="self-link" href="#Import-Syntax"></a></h4>
     <p>An ontology may import other ontologies using one of the import statements allowed for the ontology kind. An import statement is placed within the body of the ontology before any member statement. The syntax of an import statement starts with an import keyword that is supported by the ontology kind, followed by the imported ontology’s <code>IRI</code>. However, notice that a temporary limitation exists in OML that requires an ontology to be imported using a relative physical IRI) (e.g., <code>../path/to/ontology.oml</code>). The import statement can optionally specify a different prefix for the imported ontology, using the syntax <code>as PREFIX</code>, that overrides the default prefix specified by the ontology. The new <code>PREFIX</code> masks the one specified by the imported ontology within the importing ontology.</p>
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
-import_keyword IRI (as PREFIX)?
+&lt;import_keyword> IRI (<span style="font-weight:bold;color:purple">as</span> PREFIX)?
 </pre>
     <h4 class="heading settled" data-level="2.1.4" id="Member-Syntax"><span class="secno">2.1.4. </span><span class="content"><a data-link-type="dfn" href="#member" id="ref-for-member">Member</a></span><a class="self-link" href="#Member-Syntax"></a></h4>
     <p>An ontology may declare members by adding them with member statements after all import statements. A new member is declared by one of the member keywords supported by the ontology kind, followed by the member’s <code>ID</code>. Other details supported by the member’s syntax may also be added.</p>
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
-member_keyword ID ... ([
+&lt;member_keyword> ID ... ([
   ...
 ])?
 </pre>
     <h4 class="heading settled" data-level="2.1.5" id="Reference-Syntax"><span class="secno">2.1.5. </span><span class="content"><a data-link-type="dfn" href="#reference" id="ref-for-reference">Reference</a></span><a class="self-link" href="#Reference-Syntax"></a></h4>
     <p>In addition to declaring a new <a href="#Member-Syntax">Member</a> , an ontology may also add statements about already declared members (within the ontology or by one of its imported ontologies). Those statements where the onology member is the subject are called <a href="#Reference-Syntax">Reference</a> statements. Such statement has a syntax that (more or less) resembles that of a member declaration, except that it is preceeded with the keyword <code>ref</code>, and a <code>MEMBER_IRI</code> is used instead of the ``ID`. Notice that it is more common to add such statement when the subject member is imported rather than local to the ontology, since in the latter case, it can be part of the member’s declaration.</p>
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
-ref member_keyword MEMBER_IRI ... ([
+<span style="font-weight:bold;color:purple">ref</span> &lt;member_keyword> MEMBER_IRI ... ([
   ...
 ])?
 </pre>
@@ -2342,7 +2346,7 @@ STRING (^^(<a href="#FacetedScalar-Syntax">[FacetedScalar_IRI]</a> | <a href="#E
      </div>
      <div class="tab-content text">
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
-vocabulary IRI with (# | /) as PREFIX {
+<span style="font-weight:bold;color:purple">vocabulary</span> IRI <span style="font-weight:bold;color:purple">with</span> (# | /) <span style="font-weight:bold;color:purple">as</span> PREFIX {
   (<a href="#VocabularyExtension-Syntax">VocabularyExtension</a> | <a href="#VocabularyUsage-Syntax">VocabularyUsage</a>)*
   (<a href="#Aspect-Syntax">Aspect</a> | <a href="#Concept-Syntax">Concept</a> | <a href="#RelationEntity-Syntax">RelationEntity</a> | <a href="#RelationReference-Syntax">RelationReference</a> | <a href="#Structure-Syntax">Structure</a> | <a href="#FacetedScalar-Syntax">FacetedScalar</a> | <a href="#EnumeratedScalar-Syntax">EnumeratedScalar</a> | <a href="#ScalarProperty-Syntax">ScalarProperty</a> | <a href="#StructuredProperty-Syntax">StructuredProperty</a> | <a href="#AnnotationProperty-Syntax">AnnotationProperty</a> | <a href="#Rule-Syntax">Rule</a>)*
 }
@@ -2531,11 +2535,11 @@ vocabulary IRI with (# | /) as PREFIX {
     </div>
     <h4 class="heading settled" data-level="2.2.2" id="VocabularyExtension-Syntax"><span class="secno">2.2.2. </span><span class="content"><a data-link-type="dfn" href="#vocabularyextension" id="ref-for-vocabularyextension">VocabularyExtension</a></span><a class="self-link" href="#VocabularyExtension-Syntax"></a></h4>
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
-extends <a href="#Vocabulary-Syntax">Vocabulary_IRI</a> (as PREFIX)?
+<span style="font-weight:bold;color:purple">extends</span> <a href="#Vocabulary-Syntax">Vocabulary_IRI</a> (<span style="font-weight:bold;color:purple">as</span> PREFIX)?
 </pre>
     <h4 class="heading settled" data-level="2.2.3" id="VocabularyUsage-Syntax"><span class="secno">2.2.3. </span><span class="content"><a data-link-type="dfn" href="#vocabularyusage" id="ref-for-vocabularyusage">VocabularyUsage</a></span><a class="self-link" href="#VocabularyUsage-Syntax"></a></h4>
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
-uses (<a href="#Description-Syntax">Description_IRI</a> | <a href="#DescriptionBundle-Syntax">DescriptionBundle_IRI</a>) (as PREFIX)?
+<span style="font-weight:bold;color:purple">uses</span> (<a href="#Description-Syntax">Description_IRI</a> | <a href="#DescriptionBundle-Syntax">DescriptionBundle_IRI</a>) (<span style="font-weight:bold;color:purple">as</span> PREFIX)?
 </pre>
     <h4 class="heading settled" data-level="2.2.4" id="Aspect-Syntax"><span class="secno">2.2.4. </span><span class="content"><a data-link-type="dfn" href="#aspect" id="ref-for-aspect">Aspect</a></span><a class="self-link" href="#Aspect-Syntax"></a></h4>
     <p>Declaration</p>
@@ -2546,7 +2550,7 @@ uses (<a href="#Description-Syntax">Description_IRI</a> | <a href="#DescriptionB
      </div>
      <div class="tab-content text">
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
-aspect ID (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)? ([
+<span style="font-weight:bold;color:purple">aspect</span> ID (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)? ([
   (<a href="#KeyAxiom-Syntax">KeyAxiom</a>)*
   (<a href="#ScalarPropertyRangeRestrictionAxiom-Syntax">ScalarPropertyRangeRestrictionAxiom</a> | <a href="#ScalarPropertyCardinalityRestrictionAxiom-Syntax">ScalarPropertyCardinalityRestrictionAxiom</a> | <a href="#ScalarPropertyValueRestrictionAxiom-Syntax">ScalarPropertyValueRestrictionAxiom</a> | <a href="#StructuredPropertyRangeRestrictionAxiom-Syntax">StructuredPropertyRangeRestrictionAxiom</a> | <a href="#StructuredPropertyCardinalityRestrictionAxiom-Syntax">StructuredPropertyCardinalityRestrictionAxiom</a> | <a href="#StructuredPropertyValueRestrictionAxiom-Syntax">StructuredPropertyValueRestrictionAxiom</a>)*
   (<a href="#RelationRangeRestrictionAxiom-Syntax">RelationRangeRestrictionAxiom</a> | <a href="#RelationCardinalityRestrictionAxiom-Syntax">RelationCardinalityRestrictionAxiom</a> | <a href="#RelationTargetRestrictionAxiom-Syntax">RelationTargetRestrictionAxiom</a>)*
@@ -2682,7 +2686,7 @@ aspect ID (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (,
      </div>
      <div class="tab-content text">
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
-ref aspect <a href="#Aspect-Syntax">Aspect_IRI</a> (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)? ([
+<span style="font-weight:bold;color:purple">ref aspect</span> <a href="#Aspect-Syntax">Aspect_IRI</a> (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)? ([
   (<a href="#KeyAxiom-Syntax">KeyAxiom</a>)*
   (<a href="#ScalarPropertyRangeRestrictionAxiom-Syntax">ScalarPropertyRangeRestrictionAxiom</a> | <a href="#ScalarPropertyCardinalityRestrictionAxiom-Syntax">ScalarPropertyCardinalityRestrictionAxiom</a> | <a href="#ScalarPropertyValueRestrictionAxiom-Syntax">ScalarPropertyValueRestrictionAxiom</a> | <a href="#StructuredPropertyRangeRestrictionAxiom-Syntax">StructuredPropertyRangeRestrictionAxiom</a> | <a href="#StructuredPropertyCardinalityRestrictionAxiom-Syntax">StructuredPropertyCardinalityRestrictionAxiom</a> | <a href="#StructuredPropertyValueRestrictionAxiom-Syntax">StructuredPropertyValueRestrictionAxiom</a>)*
   (<a href="#RelationRangeRestrictionAxiom-Syntax">RelationRangeRestrictionAxiom</a> | <a href="#RelationCardinalityRestrictionAxiom-Syntax">RelationCardinalityRestrictionAxiom</a> | <a href="#RelationTargetRestrictionAxiom-Syntax">RelationTargetRestrictionAxiom</a>)*
@@ -2819,7 +2823,7 @@ ref aspect <a href="#Aspect-Syntax">Aspect_IRI</a> (:> <a href="#SpecializationA
      </div>
      <div class="tab-content text">
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
-concept ID (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)? ([
+<span style="font-weight:bold;color:purple">concept</span> ID (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)? ([
   (<a href="#KeyAxiom-Syntax">KeyAxiom</a>)*
   (<a href="#ScalarPropertyRangeRestrictionAxiom-Syntax">ScalarPropertyRangeRestrictionAxiom</a> | <a href="#ScalarPropertyCardinalityRestrictionAxiom-Syntax">ScalarPropertyCardinalityRestrictionAxiom</a> | <a href="#ScalarPropertyValueRestrictionAxiom-Syntax">ScalarPropertyValueRestrictionAxiom</a> | <a href="#StructuredPropertyRangeRestrictionAxiom-Syntax">StructuredPropertyRangeRestrictionAxiom</a> | <a href="#StructuredPropertyCardinalityRestrictionAxiom-Syntax">StructuredPropertyCardinalityRestrictionAxiom</a> | <a href="#StructuredPropertyValueRestrictionAxiom-Syntax">StructuredPropertyValueRestrictionAxiom</a>)*
   (<a href="#RelationRangeRestrictionAxiom-Syntax">RelationRangeRestrictionAxiom</a> | <a href="#RelationCardinalityRestrictionAxiom-Syntax">RelationCardinalityRestrictionAxiom</a> | <a href="#RelationTargetRestrictionAxiom-Syntax">RelationTargetRestrictionAxiom</a>)*
@@ -2955,7 +2959,7 @@ concept ID (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (
      </div>
      <div class="tab-content text">
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
-ref concept <a href="#Concept-Syntax">Concept_IRI</a> (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)? ([
+<span style="font-weight:bold;color:purple">ref concept</span> <a href="#Concept-Syntax">Concept_IRI</a> (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)? ([
   (<a href="#KeyAxiom-Syntax">KeyAxiom</a>)*
   (<a href="#ScalarPropertyRangeRestrictionAxiom-Syntax">ScalarPropertyRangeRestrictionAxiom</a> | <a href="#ScalarPropertyCardinalityRestrictionAxiom-Syntax">ScalarPropertyCardinalityRestrictionAxiom</a> | <a href="#ScalarPropertyValueRestrictionAxiom-Syntax">ScalarPropertyValueRestrictionAxiom</a> | <a href="#StructuredPropertyRangeRestrictionAxiom-Syntax">StructuredPropertyRangeRestrictionAxiom</a> | <a href="#StructuredPropertyCardinalityRestrictionAxiom-Syntax">StructuredPropertyCardinalityRestrictionAxiom</a> | <a href="#StructuredPropertyValueRestrictionAxiom-Syntax">StructuredPropertyValueRestrictionAxiom</a>)*
   (<a href="#RelationRangeRestrictionAxiom-Syntax">RelationRangeRestrictionAxiom</a> | <a href="#RelationCardinalityRestrictionAxiom-Syntax">RelationCardinalityRestrictionAxiom</a> | <a href="#RelationTargetRestrictionAxiom-Syntax">RelationTargetRestrictionAxiom</a>)*
@@ -3092,18 +3096,22 @@ ref concept <a href="#Concept-Syntax">Concept_IRI</a> (:> <a href="#Specializati
      </div>
      <div class="tab-content text">
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
-relation entity ID (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)? ([
-  from (<a href="#Aspect-Syntax">Aspect_IRI</a>|<a href="#Concept-Syntax">Concept_IRI</a>|<a href="#RelationEntity-Syntax">RelationEntity_IRI</a>)
-  to (<a href="#Aspect-Syntax">Aspect_IRI</a>|<a href="#Concept-Syntax">Concept_IRI</a>|<a href="#RelationEntity-Syntax">RelationEntity_IRI</a>)
-  <a href="#ForwardRelation-Syntax">ForwardRelation</a>
+<span style="font-weight:bold;color:purple">relation entity</span> ID (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)? ([
+  <span style="font-weight:bold;color:purple">from</span> (<a href="#Aspect-Syntax">Aspect_IRI</a>|<a href="#Concept-Syntax">Concept_IRI</a>|<a href="#RelationEntity-Syntax">RelationEntity_IRI</a>)
+  <span style="font-weight:bold;color:purple">to</span> (<a href="#Aspect-Syntax">Aspect_IRI</a>|<a href="#Concept-Syntax">Concept_IRI</a>|<a href="#RelationEntity-Syntax">RelationEntity_IRI</a>)
+  (<a href="#ForwardRelation-Syntax">ForwardRelation</a>)?
   (<a href="#ReverseRelation-Syntax">ReverseRelation</a>)?
-  (functional)?
-  (inverseFunctional)?
-  (symmetric)?
-  (asymmetric)?
-  (reflexive)?
-  (irreflexive)?
-  (transitive)?
+  (<a href="#SourceRelation-Syntax">SourceRelation</a>)?
+  (<a href="#InverseSourceRelation-Syntax">InverseSourceRelation</a>)?
+  (<a href="#TargetRelation-Syntax">TargetRelation</a>)?
+  (<a href="#InverseTargetRelation-Syntax">InverseTargetRelation</a>)?
+  (<span style="font-weight:bold;color:purple">functional</span>)?
+  (<span style="font-weight:bold;color:purple">inverseFunctional</span>)?
+  (<span style="font-weight:bold;color:purple">symmetric</span>)?
+  (<span style="font-weight:bold;color:purple">asymmetric</span>)?
+  (<span style="font-weight:bold;color:purple">reflexive</span>)?
+  (<span style="font-weight:bold;color:purple">irreflexive</span>)?
+  (<span style="font-weight:bold;color:purple">transitive</span>)?
   (<a href="#KeyAxiom-Syntax">KeyAxiom</a>)*
   (<a href="#ScalarPropertyRangeRestrictionAxiom-Syntax">ScalarPropertyRangeRestrictionAxiom</a> | <a href="#ScalarPropertyCardinalityRestrictionAxiom-Syntax">ScalarPropertyCardinalityRestrictionAxiom</a> | <a href="#ScalarPropertyValueRestrictionAxiom-Syntax">ScalarPropertyValueRestrictionAxiom</a> | <a href="#StructuredPropertyRangeRestrictionAxiom-Syntax">StructuredPropertyRangeRestrictionAxiom</a> | <a href="#StructuredPropertyCardinalityRestrictionAxiom-Syntax">StructuredPropertyCardinalityRestrictionAxiom</a> | <a href="#StructuredPropertyValueRestrictionAxiom-Syntax">StructuredPropertyValueRestrictionAxiom</a>)*
   (<a href="#RelationRangeRestrictionAxiom-Syntax">RelationRangeRestrictionAxiom</a> | <a href="#RelationCardinalityRestrictionAxiom-Syntax">RelationCardinalityRestrictionAxiom</a> | <a href="#RelationTargetRestrictionAxiom-Syntax">RelationTargetRestrictionAxiom</a>)*
@@ -3291,7 +3299,7 @@ relation entity ID (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxio
      </div>
      <div class="tab-content text">
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
-ref relation entity <a href="#RelationEntity-Syntax">RelationEntity_IRI</a> (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)? ([
+<span style="font-weight:bold;color:purple">ref relation entity</span> <a href="#RelationEntity-Syntax">RelationEntity_IRI</a> (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)? ([
   (<a href="#KeyAxiom-Syntax">KeyAxiom</a>)*
   (<a href="#ScalarPropertyRangeRestrictionAxiom-Syntax">ScalarPropertyRangeRestrictionAxiom</a> | <a href="#ScalarPropertyCardinalityRestrictionAxiom-Syntax">ScalarPropertyCardinalityRestrictionAxiom</a> | <a href="#ScalarPropertyValueRestrictionAxiom-Syntax">ScalarPropertyValueRestrictionAxiom</a> | <a href="#StructuredPropertyRangeRestrictionAxiom-Syntax">StructuredPropertyRangeRestrictionAxiom</a> | <a href="#StructuredPropertyCardinalityRestrictionAxiom-Syntax">StructuredPropertyCardinalityRestrictionAxiom</a> | <a href="#StructuredPropertyValueRestrictionAxiom-Syntax">StructuredPropertyValueRestrictionAxiom</a>)*
   (<a href="#RelationRangeRestrictionAxiom-Syntax">RelationRangeRestrictionAxiom</a> | <a href="#RelationCardinalityRestrictionAxiom-Syntax">RelationCardinalityRestrictionAxiom</a> | <a href="#RelationTargetRestrictionAxiom-Syntax">RelationTargetRestrictionAxiom</a>)*
@@ -3480,7 +3488,7 @@ ref relation entity <a href="#RelationEntity-Syntax">RelationEntity_IRI</a> (:> 
      </div>
      <div class="tab-content text">
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
-forward ID
+<span style="font-weight:bold;color:purple">forward</span> ID
 </pre>
      </div>
      <div class="tab-content diagram hidden">
@@ -3505,7 +3513,7 @@ forward ID
      </div>
      <div class="tab-content text">
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
-reverse ID
+<span style="font-weight:bold;color:purple">reverse</span> ID
 </pre>
      </div>
      <div class="tab-content diagram hidden">
@@ -3521,12 +3529,7 @@ reverse ID
       </svg>
      </div>
     </div>
-    <h4 class="heading settled" data-level="2.2.9" id="RelationReference-Syntax"><span class="secno">2.2.9. </span><span class="content"><a data-link-type="dfn" href="#relationreference" id="ref-for-relationreference">RelationReference</a></span><a class="self-link" href="#RelationReference-Syntax"></a></h4>
-    <p>Reference</p>
-<pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
-ref relation (<a href="#ReverseRelation-Syntax">ReverseRelation_IRI</a> | <a href="#ForwardRelation-Syntax">ForwardRelation_IRI</a>)
-</pre>
-    <h4 class="heading settled" data-level="2.2.10" id="Structure-Syntax"><span class="secno">2.2.10. </span><span class="content"><a data-link-type="dfn" href="#structure" id="ref-for-structure">Structure</a></span><a class="self-link" href="#Structure-Syntax"></a></h4>
+    <h4 class="heading settled" data-level="2.2.9" id="SourceRelation-Syntax"><span class="secno">2.2.9. </span><span class="content"><a data-link-type="dfn" href="#sourcerelation" id="ref-for-sourcerelation">SourceRelation</a></span><a class="self-link" href="#SourceRelation-Syntax"></a></h4>
     <p>Declaration</p>
     <div class="tab-container">
      <div class="bar">
@@ -3535,7 +3538,112 @@ ref relation (<a href="#ReverseRelation-Syntax">ReverseRelation_IRI</a> | <a hre
      </div>
      <div class="tab-content text">
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
-structure ID (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)? ([
+<span style="font-weight:bold;color:purple">source</span> ID
+</pre>
+     </div>
+     <div class="tab-content diagram hidden">
+      <p></p>
+      <svg height="31px" style="background-color: rgb(255, 255, 255);" version="1.1" viewBox="-0.5 -0.5 121 31" width="121px" xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+       <defs></defs>
+       <g>
+        <rect fill="none" height="30" pointer-events="all" stroke="#b0b0b0" stroke-dasharray="3 3" width="120" x="0" y="0"></rect>
+        <g fill="#000000" font-family="Helvetica" font-size="18px" text-anchor="middle">
+         <text x="59.5" y="22.5">«source» ID</text>
+        </g>
+       </g>
+      </svg>
+     </div>
+    </div>
+    <h4 class="heading settled" data-level="2.2.10" id="InverseSourceRelation-Syntax"><span class="secno">2.2.10. </span><span class="content"><a data-link-type="dfn" href="#inversesourcerelation" id="ref-for-inversesourcerelation">InverseSourceRelation</a></span><a class="self-link" href="#InverseSourceRelation-Syntax"></a></h4>
+    <p>Declaration</p>
+    <div class="tab-container">
+     <div class="bar">
+      <button class="bar-btn active" onclick="onBarClick(event)" value="text">Text</button>
+      <button class="bar-btn" onclick="onBarClick(event)" value="diagram">Diagram</button>
+     </div>
+     <div class="tab-content text">
+<pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
+<span style="font-weight:bold;color:purple">inverse source</span> ID
+</pre>
+     </div>
+     <div class="tab-content diagram hidden">
+      <p></p>
+      <svg height="31px" style="background-color: rgb(255, 255, 255);" version="1.1" viewBox="-0.5 -0.5 121 31" width="121px" xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+       <defs></defs>
+       <g>
+        <rect fill="none" height="30" pointer-events="all" stroke="#b0b0b0" stroke-dasharray="3 3" width="120" x="0" y="0"></rect>
+        <g fill="#000000" font-family="Helvetica" font-size="18px" text-anchor="middle">
+         <text x="59.5" y="22.5">«inverse source» ID</text>
+        </g>
+       </g>
+      </svg>
+     </div>
+    </div>
+    <h4 class="heading settled" data-level="2.2.11" id="TargetRelation-Syntax"><span class="secno">2.2.11. </span><span class="content"><a data-link-type="dfn" href="#targetrelation" id="ref-for-targetrelation">TargetRelation</a></span><a class="self-link" href="#TargetRelation-Syntax"></a></h4>
+    <p>Declaration</p>
+    <div class="tab-container">
+     <div class="bar">
+      <button class="bar-btn active" onclick="onBarClick(event)" value="text">Text</button>
+      <button class="bar-btn" onclick="onBarClick(event)" value="diagram">Diagram</button>
+     </div>
+     <div class="tab-content text">
+<pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
+<span style="font-weight:bold;color:purple">target</span> ID
+</pre>
+     </div>
+     <div class="tab-content diagram hidden">
+      <p></p>
+      <svg height="31px" style="background-color: rgb(255, 255, 255);" version="1.1" viewBox="-0.5 -0.5 121 31" width="121px" xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+       <defs></defs>
+       <g>
+        <rect fill="none" height="30" pointer-events="all" stroke="#b0b0b0" stroke-dasharray="3 3" width="120" x="0" y="0"></rect>
+        <g fill="#000000" font-family="Helvetica" font-size="18px" text-anchor="middle">
+         <text x="59.5" y="22.5">«target» ID</text>
+        </g>
+       </g>
+      </svg>
+     </div>
+    </div>
+    <h4 class="heading settled" data-level="2.2.12" id="InverseTargetRelation-Syntax"><span class="secno">2.2.12. </span><span class="content"><a data-link-type="dfn" href="#inversetargetrelation" id="ref-for-inversetargetrelation">InverseTargetRelation</a></span><a class="self-link" href="#InverseTargetRelation-Syntax"></a></h4>
+    <p>Declaration</p>
+    <div class="tab-container">
+     <div class="bar">
+      <button class="bar-btn active" onclick="onBarClick(event)" value="text">Text</button>
+      <button class="bar-btn" onclick="onBarClick(event)" value="diagram">Diagram</button>
+     </div>
+     <div class="tab-content text">
+<pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
+<span style="font-weight:bold;color:purple">inverse target</span> ID
+</pre>
+     </div>
+     <div class="tab-content diagram hidden">
+      <p></p>
+      <svg height="31px" style="background-color: rgb(255, 255, 255);" version="1.1" viewBox="-0.5 -0.5 121 31" width="121px" xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+       <defs></defs>
+       <g>
+        <rect fill="none" height="30" pointer-events="all" stroke="#b0b0b0" stroke-dasharray="3 3" width="120" x="0" y="0"></rect>
+        <g fill="#000000" font-family="Helvetica" font-size="18px" text-anchor="middle">
+         <text x="59.5" y="22.5">«inverse target» ID</text>
+        </g>
+       </g>
+      </svg>
+     </div>
+    </div>
+    <h4 class="heading settled" data-level="2.2.13" id="RelationReference-Syntax"><span class="secno">2.2.13. </span><span class="content"><a data-link-type="dfn" href="#relationreference" id="ref-for-relationreference">RelationReference</a></span><a class="self-link" href="#RelationReference-Syntax"></a></h4>
+    <p>Reference</p>
+<pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
+<span style="font-weight:bold;color:purple">ref relation</span> (<a href="#ForwardRelation-Syntax">ForwardRelation_IRI</a> | <a href="#ReverseRelation-Syntax">ReverseRelation_IRI</a> | <a href="#SourceRelation-Syntax">SourceRelation_IRI</a> | <a href="#InverseSourceRelation-Syntax">InverseSourceRelation_IRI</a> | <a href="#TargetRelation-Syntax">TargetRelation_IRI</a> | <a href="#InverseTargetRelation-Syntax">InverseTargetRelation_IRI</a>)
+</pre>
+    <h4 class="heading settled" data-level="2.2.14" id="Structure-Syntax"><span class="secno">2.2.14. </span><span class="content"><a data-link-type="dfn" href="#structure" id="ref-for-structure">Structure</a></span><a class="self-link" href="#Structure-Syntax"></a></h4>
+    <p>Declaration</p>
+    <div class="tab-container">
+     <div class="bar">
+      <button class="bar-btn active" onclick="onBarClick(event)" value="text">Text</button>
+      <button class="bar-btn" onclick="onBarClick(event)" value="diagram">Diagram</button>
+     </div>
+     <div class="tab-content text">
+<pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
+<span style="font-weight:bold;color:purple">structure</span> ID (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)? ([
   (<a href="#ScalarPropertyRangeRestrictionAxiom-Syntax">ScalarPropertyRangeRestrictionAxiom</a> | <a href="#ScalarPropertyCardinalityRestrictionAxiom-Syntax">ScalarPropertyCardinalityRestrictionAxiom</a> | <a href="#ScalarPropertyValueRestrictionAxiom-Syntax">ScalarPropertyValueRestrictionAxiom</a> | <a href="#StructuredPropertyRangeRestrictionAxiom-Syntax">StructuredPropertyRangeRestrictionAxiom</a> | <a href="#StructuredPropertyCardinalityRestrictionAxiom-Syntax">StructuredPropertyCardinalityRestrictionAxiom</a> | <a href="#StructuredPropertyValueRestrictionAxiom-Syntax">StructuredPropertyValueRestrictionAxiom</a>)*
 ])?
 </pre>
@@ -3669,7 +3777,7 @@ structure ID (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>
      </div>
      <div class="tab-content text">
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
-ref structure <a href="#Structure-Syntax">Structure_IRI</a> (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)? ([
+<span style="font-weight:bold;color:purple">ref structure</span> <a href="#Structure-Syntax">Structure_IRI</a> (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)? ([
   (<a href="#ScalarPropertyRangeRestrictionAxiom-Syntax">ScalarPropertyRangeRestrictionAxiom</a> | <a href="#ScalarPropertyCardinalityRestrictionAxiom-Syntax">ScalarPropertyCardinalityRestrictionAxiom</a> | <a href="#ScalarPropertyValueRestrictionAxiom-Syntax">ScalarPropertyValueRestrictionAxiom</a> | <a href="#StructuredPropertyRangeRestrictionAxiom-Syntax">StructuredPropertyRangeRestrictionAxiom</a> | <a href="#StructuredPropertyCardinalityRestrictionAxiom-Syntax">StructuredPropertyCardinalityRestrictionAxiom</a> | <a href="#StructuredPropertyValueRestrictionAxiom-Syntax">StructuredPropertyValueRestrictionAxiom</a>)*
 ])?
 </pre>
@@ -3795,7 +3903,7 @@ ref structure <a href="#Structure-Syntax">Structure_IRI</a> (:> <a href="#Specia
       </svg>
      </div>
     </div>
-    <h4 class="heading settled" data-level="2.2.11" id="AnnotationProperty-Syntax"><span class="secno">2.2.11. </span><span class="content"><a data-link-type="dfn" href="#annotationproperty" id="ref-for-annotationproperty">AnnotationProperty</a></span><a class="self-link" href="#AnnotationProperty-Syntax"></a></h4>
+    <h4 class="heading settled" data-level="2.2.15" id="AnnotationProperty-Syntax"><span class="secno">2.2.15. </span><span class="content"><a data-link-type="dfn" href="#annotationproperty" id="ref-for-annotationproperty">AnnotationProperty</a></span><a class="self-link" href="#AnnotationProperty-Syntax"></a></h4>
     <p>Declaration</p>
     <div class="tab-container">
      <div class="bar">
@@ -3804,7 +3912,7 @@ ref structure <a href="#Structure-Syntax">Structure_IRI</a> (:> <a href="#Specia
      </div>
      <div class="tab-content text">
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
-annotation property ID (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)?
+<span style="font-weight:bold;color:purple">annotation property</span> ID (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)?
 </pre>
      </div>
      <div class="tab-content diagram hidden">
@@ -3833,7 +3941,7 @@ annotation property ID (:> <a href="#SpecializationAxiom-Syntax">[Specialization
      </div>
      <div class="tab-content text">
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
-ref annotation property <a href="#AnnotationProperty-Syntax">AnnotationProperty_IRI</a> (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)?
+<span style="font-weight:bold;color:purple">ref annotation property</span> <a href="#AnnotationProperty-Syntax">AnnotationProperty_IRI</a> (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)?
 </pre>
      </div>
      <div class="tab-content diagram hidden">
@@ -3854,7 +3962,7 @@ ref annotation property <a href="#AnnotationProperty-Syntax">AnnotationProperty_
       </svg>
      </div>
     </div>
-    <h4 class="heading settled" data-level="2.2.12" id="ScalarProperty-Syntax"><span class="secno">2.2.12. </span><span class="content"><a data-link-type="dfn" href="#scalarproperty" id="ref-for-scalarproperty">ScalarProperty</a></span><a class="self-link" href="#ScalarProperty-Syntax"></a></h4>
+    <h4 class="heading settled" data-level="2.2.16" id="ScalarProperty-Syntax"><span class="secno">2.2.16. </span><span class="content"><a data-link-type="dfn" href="#scalarproperty" id="ref-for-scalarproperty">ScalarProperty</a></span><a class="self-link" href="#ScalarProperty-Syntax"></a></h4>
     <p>Declaration</p>
     <div class="tab-container">
      <div class="bar">
@@ -3863,10 +3971,10 @@ ref annotation property <a href="#AnnotationProperty-Syntax">AnnotationProperty_
      </div>
      <div class="tab-content text">
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
-scalar property ID (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)? ([
-  domain (<a href="#Aspect-Syntax">Aspect_IRI</a> | <a href="#Concept-Syntax">Concept_IRI</a>|<a href="#RelationEntity-Syntax">RelationEntity_IRI</a> | <a href="#Structure-Syntax">Structure_IRI</a>)
-  range (<a href="#FacetedScalar-Syntax">FacetedScalar_IRI</a> | <a href="#EnumeratedScalar-Syntax">EnumeratedScalar_IRI</a>)
-  (functional)?
+<span style="font-weight:bold;color:purple">scalar property</span> ID (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)? ([
+  <span style="font-weight:bold;color:purple">domain</span> (<a href="#Aspect-Syntax">Aspect_IRI</a> | <a href="#Concept-Syntax">Concept_IRI</a>|<a href="#RelationEntity-Syntax">RelationEntity_IRI</a> | <a href="#Structure-Syntax">Structure_IRI</a>)
+  <span style="font-weight:bold;color:purple">range</span> (<a href="#FacetedScalar-Syntax">FacetedScalar_IRI</a> | <a href="#EnumeratedScalar-Syntax">EnumeratedScalar_IRI</a>)
+  (<span style="font-weight:bold;color:purple">functional</span>)?
 ])?
 </pre>
      </div>
@@ -3891,7 +3999,7 @@ scalar property ID (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxio
      </div>
      <div class="tab-content text">
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
-ref scalar property <a href="#ScalarProperty-Syntax">ScalarProperty_IRI</a>( :> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)?
+<span style="font-weight:bold;color:purple">ref scalar property</span> <a href="#ScalarProperty-Syntax">ScalarProperty_IRI</a>( :> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)?
 </pre>
      </div>
      <div class="tab-content diagram hidden">
@@ -3907,7 +4015,7 @@ ref scalar property <a href="#ScalarProperty-Syntax">ScalarProperty_IRI</a>( :> 
       </svg>
      </div>
     </div>
-    <h4 class="heading settled" data-level="2.2.13" id="StructuredProperty-Syntax"><span class="secno">2.2.13. </span><span class="content"><a data-link-type="dfn" href="#structuredproperty" id="ref-for-structuredproperty">StructuredProperty</a></span><a class="self-link" href="#StructuredProperty-Syntax"></a></h4>
+    <h4 class="heading settled" data-level="2.2.17" id="StructuredProperty-Syntax"><span class="secno">2.2.17. </span><span class="content"><a data-link-type="dfn" href="#structuredproperty" id="ref-for-structuredproperty">StructuredProperty</a></span><a class="self-link" href="#StructuredProperty-Syntax"></a></h4>
     <p>Declaration</p>
     <div class="tab-container">
      <div class="bar">
@@ -3916,10 +4024,10 @@ ref scalar property <a href="#ScalarProperty-Syntax">ScalarProperty_IRI</a>( :> 
      </div>
      <div class="tab-content text">
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
-structured property ID (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)? ([
-  domain (<a href="#Aspect-Syntax">Aspect_IRI</a> | <a href="#Concept-Syntax">Concept_IRI</a> | <a href="#RelationEntity-Syntax">RelationEntity_IRI</a> | <a href="#Structure-Syntax">Structure_IRI</a>)
-  range <a href="#Structure-Syntax">Structure_IRI</a>
-  (functional)?
+<span style="font-weight:bold;color:purple">structured property</span> ID (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)? ([
+  <span style="font-weight:bold;color:purple">domain</span> (<a href="#Aspect-Syntax">Aspect_IRI</a> | <a href="#Concept-Syntax">Concept_IRI</a> | <a href="#RelationEntity-Syntax">RelationEntity_IRI</a> | <a href="#Structure-Syntax">Structure_IRI</a>)
+  <span style="font-weight:bold;color:purple">range</span> <a href="#Structure-Syntax">Structure_IRI</a>
+  (<span style="font-weight:bold;color:purple">functional</span>)?
 ])?
 </pre>
      </div>
@@ -3944,7 +4052,7 @@ structured property ID (:> <a href="#SpecializationAxiom-Syntax">[Specialization
      </div>
      <div class="tab-content text">
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
-ref structured property <a href="#StructuredProperty-Syntax">StructuredProperty_IRI</a> (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)?
+<span style="font-weight:bold;color:purple">ref structured property</span> <a href="#StructuredProperty-Syntax">StructuredProperty_IRI</a> (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)?
 </pre>
      </div>
      <div class="tab-content diagram hidden">
@@ -3960,7 +4068,7 @@ ref structured property <a href="#StructuredProperty-Syntax">StructuredProperty_
       </svg>
      </div>
     </div>
-    <h4 class="heading settled" data-level="2.2.14" id="FacetedScalar-Syntax"><span class="secno">2.2.14. </span><span class="content"><a data-link-type="dfn" href="#facetedscalar" id="ref-for-facetedscalar">FacetedScalar</a></span><a class="self-link" href="#FacetedScalar-Syntax"></a></h4>
+    <h4 class="heading settled" data-level="2.2.18" id="FacetedScalar-Syntax"><span class="secno">2.2.18. </span><span class="content"><a data-link-type="dfn" href="#facetedscalar" id="ref-for-facetedscalar">FacetedScalar</a></span><a class="self-link" href="#FacetedScalar-Syntax"></a></h4>
     <p>Declaration</p>
     <div class="tab-container">
      <div class="bar">
@@ -3969,16 +4077,16 @@ ref structured property <a href="#StructuredProperty-Syntax">StructuredProperty_
      </div>
      <div class="tab-content text">
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
-scalar ID (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)? ([
-  (length INTEGER)?
-  (minLength INTEGER)?
-  (maxLength INTEGER)?
-  (pattern STRING)?
-  (language LANGUAGE)?
-  (minInclusive <a href="#Literal-Syntax">Literal</a>)?
-  (minExclusive <a href="#Literal-Syntax">Literal</a>)?
-  (maxInclusive <a href="#Literal-Syntax">Literal</a>)?
-  (maxExclusive <a href="#Literal-Syntax">Literal</a>)?
+<span style="font-weight:bold;color:purple">scalar</span> ID (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)? ([
+  (<span style="font-weight:bold;color:purple">length</span> INTEGER)?
+  (<span style="font-weight:bold;color:purple">minLength</span> INTEGER)?
+  (<span style="font-weight:bold;color:purple">maxLength</span> INTEGER)?
+  (<span style="font-weight:bold;color:purple">pattern</span> STRING)?
+  (<span style="font-weight:bold;color:purple">language</span> LANGUAGE)?
+  (<span style="font-weight:bold;color:purple">minInclusive</span> <a href="#Literal-Syntax">Literal</a>)?
+  (<span style="font-weight:bold;color:purple">minExclusive</span> <a href="#Literal-Syntax">Literal</a>)?
+  (<span style="font-weight:bold;color:purple">maxInclusive</span> <a href="#Literal-Syntax">Literal</a>)?
+  (<span style="font-weight:bold;color:purple">maxExclusive</span> <a href="#Literal-Syntax">Literal</a>)?
 ])?
 </pre>
      </div>
@@ -4008,7 +4116,7 @@ scalar ID (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (,
      </div>
      <div class="tab-content text">
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
-ref scalar <a href="#FacetedScalar-Syntax">FacetedScalar_IRI</a> (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)?
+<span style="font-weight:bold;color:purple">ref scalar</span> <a href="#FacetedScalar-Syntax">FacetedScalar_IRI</a> (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)?
 </pre>
      </div>
      <div class="tab-content diagram hidden">
@@ -4029,7 +4137,7 @@ ref scalar <a href="#FacetedScalar-Syntax">FacetedScalar_IRI</a> (:> <a href="#S
       </svg>
      </div>
     </div>
-    <h4 class="heading settled" data-level="2.2.15" id="EnumeratedScalar-Syntax"><span class="secno">2.2.15. </span><span class="content"><a data-link-type="dfn" href="#enumeratedscalar" id="ref-for-enumeratedscalar">EnumeratedScalar</a></span><a class="self-link" href="#EnumeratedScalar-Syntax"></a></h4>
+    <h4 class="heading settled" data-level="2.2.19" id="EnumeratedScalar-Syntax"><span class="secno">2.2.19. </span><span class="content"><a data-link-type="dfn" href="#enumeratedscalar" id="ref-for-enumeratedscalar">EnumeratedScalar</a></span><a class="self-link" href="#EnumeratedScalar-Syntax"></a></h4>
     <p>Declaration</p>
     <div class="tab-container">
      <div class="bar">
@@ -4038,7 +4146,7 @@ ref scalar <a href="#FacetedScalar-Syntax">FacetedScalar_IRI</a> (:> <a href="#S
      </div>
      <div class="tab-content text">
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
-enumerated scalar ID (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)? ([
+<span style="font-weight:bold;color:purple">enumerated scalar</span> ID (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)? ([
   <a href="#Literal-Syntax">Literal</a> (, <a href="#Literal-Syntax">Literal</a>)*
 ])?
 </pre>
@@ -4118,7 +4226,7 @@ enumerated scalar ID (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAx
      </div>
      <div class="tab-content text">
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
-ref enumerated scalar <a href="#EnumeratedScalar-Syntax">EnumeratedScalar_IRI</a> (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)?
+<span style="font-weight:bold;color:purple">ref enumerated scalar</span> <a href="#EnumeratedScalar-Syntax">EnumeratedScalar_IRI</a> (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)?
 </pre>
      </div>
      <div class="tab-content diagram hidden">
@@ -4188,7 +4296,7 @@ ref enumerated scalar <a href="#EnumeratedScalar-Syntax">EnumeratedScalar_IRI</a
       </svg>
      </div>
     </div>
-    <h4 class="heading settled" data-level="2.2.16" id="Rule-Syntax"><span class="secno">2.2.16. </span><span class="content"><a data-link-type="dfn" href="#rule" id="ref-for-rule">Rule</a></span><a class="self-link" href="#Rule-Syntax"></a></h4>
+    <h4 class="heading settled" data-level="2.2.20" id="Rule-Syntax"><span class="secno">2.2.20. </span><span class="content"><a data-link-type="dfn" href="#rule" id="ref-for-rule">Rule</a></span><a class="self-link" href="#Rule-Syntax"></a></h4>
     <p>Declaration</p>
     <div class="tab-container">
      <div class="bar">
@@ -4197,7 +4305,7 @@ ref enumerated scalar <a href="#EnumeratedScalar-Syntax">EnumeratedScalar_IRI</a
      </div>
      <div class="tab-content text">
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
-rule ID [
+<span style="font-weight:bold;color:purple">rule</span> ID [
   (<a href="#EntityPredicate-Syntax">EntityPredicate</a> | <a href="#RelationPredicate-Syntax">RelationPredicate</a> | <a href="#RelationEntityPredicate-Syntax">RelationEntityPredicate</a> | <a href="#SameAsPredicate-Syntax">SameAsPredicate</a> | <a href="#DifferentFromPredicate-Syntax">DifferentFromPredicate</a>)
   (^ (<a href="#EntityPredicate-Syntax">EntityPredicate</a> | <a href="#RelationPredicate-Syntax">RelationPredicate</a> | <a href="#RelationEntityPredicate-Syntax">RelationEntityPredicate</a> | <a href="#SameAsPredicate-Syntax">SameAsPredicate</a> | <a href="#DifferentFromPredicate-Syntax">DifferentFromPredicate</a>))*
   ->
@@ -4497,7 +4605,7 @@ rule ID [
      </div>
      <div class="tab-content text">
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
-ref rule <a href="#Rule-Syntax">Rule_IRI</a>
+<span style="font-weight:bold;color:purple">ref rule</span> <a href="#Rule-Syntax">Rule_IRI</a>
 </pre>
      </div>
      <div class="tab-content diagram hidden">
@@ -4783,7 +4891,7 @@ ref rule <a href="#Rule-Syntax">Rule_IRI</a>
       </svg>
      </div>
     </div>
-    <h4 class="heading settled" data-level="2.2.17" id="EntityPredicate-Syntax"><span class="secno">2.2.17. </span><span class="content"><a data-link-type="dfn" href="#entitypredicate" id="ref-for-entitypredicate">EntityPredicate</a></span><a class="self-link" href="#EntityPredicate-Syntax"></a></h4>
+    <h4 class="heading settled" data-level="2.2.21" id="EntityPredicate-Syntax"><span class="secno">2.2.21. </span><span class="content"><a data-link-type="dfn" href="#entitypredicate" id="ref-for-entitypredicate">EntityPredicate</a></span><a class="self-link" href="#EntityPredicate-Syntax"></a></h4>
     <div class="tab-container">
      <div class="bar">
       <button class="bar-btn active" onclick="onBarClick(event)" value="text">Text</button>
@@ -4807,7 +4915,7 @@ ref rule <a href="#Rule-Syntax">Rule_IRI</a>
       </svg>
      </div>
     </div>
-    <h4 class="heading settled" data-level="2.2.18" id="RelationPredicate-Syntax"><span class="secno">2.2.18. </span><span class="content"><a data-link-type="dfn" href="#relationpredicate" id="ref-for-relationpredicate">RelationPredicate</a></span><a class="self-link" href="#RelationPredicate-Syntax"></a></h4>
+    <h4 class="heading settled" data-level="2.2.22" id="RelationPredicate-Syntax"><span class="secno">2.2.22. </span><span class="content"><a data-link-type="dfn" href="#relationpredicate" id="ref-for-relationpredicate">RelationPredicate</a></span><a class="self-link" href="#RelationPredicate-Syntax"></a></h4>
     <div class="tab-container">
      <div class="bar">
       <button class="bar-btn active" onclick="onBarClick(event)" value="text">Text</button>
@@ -4831,7 +4939,7 @@ ref rule <a href="#Rule-Syntax">Rule_IRI</a>
       </svg>
      </div>
     </div>
-    <h4 class="heading settled" data-level="2.2.19" id="RelationEntityPredicate-Syntax"><span class="secno">2.2.19. </span><span class="content"><a data-link-type="dfn" href="#relationentitypredicate" id="ref-for-relationentitypredicate">RelationEntityPredicate</a></span><a class="self-link" href="#RelationEntityPredicate-Syntax"></a></h4>
+    <h4 class="heading settled" data-level="2.2.23" id="RelationEntityPredicate-Syntax"><span class="secno">2.2.23. </span><span class="content"><a data-link-type="dfn" href="#relationentitypredicate" id="ref-for-relationentitypredicate">RelationEntityPredicate</a></span><a class="self-link" href="#RelationEntityPredicate-Syntax"></a></h4>
     <div class="tab-container">
      <div class="bar">
       <button class="bar-btn active" onclick="onBarClick(event)" value="text">Text</button>
@@ -4855,7 +4963,7 @@ ref rule <a href="#Rule-Syntax">Rule_IRI</a>
       </svg>
      </div>
     </div>
-    <h4 class="heading settled" data-level="2.2.20" id="SameAsPredicate-Syntax"><span class="secno">2.2.20. </span><span class="content"><a data-link-type="dfn" href="#sameaspredicate" id="ref-for-sameaspredicate">SameAsPredicate</a></span><a class="self-link" href="#SameAsPredicate-Syntax"></a></h4>
+    <h4 class="heading settled" data-level="2.2.24" id="SameAsPredicate-Syntax"><span class="secno">2.2.24. </span><span class="content"><a data-link-type="dfn" href="#sameaspredicate" id="ref-for-sameaspredicate">SameAsPredicate</a></span><a class="self-link" href="#SameAsPredicate-Syntax"></a></h4>
     <div class="tab-container">
      <div class="bar">
       <button class="bar-btn active" onclick="onBarClick(event)" value="text">Text</button>
@@ -4863,7 +4971,7 @@ ref rule <a href="#Rule-Syntax">Rule_IRI</a>
      </div>
      <div class="tab-content text">
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
-sameAs (VAR1 , VAR2)
+<span style="font-weight:bold;color:purple">sameAs</span> (VAR1 , VAR2)
 </pre>
      </div>
      <div class="tab-content diagram hidden">
@@ -4879,7 +4987,7 @@ sameAs (VAR1 , VAR2)
       </svg>
      </div>
     </div>
-    <h4 class="heading settled" data-level="2.2.21" id="DifferentFromPredicate-Syntax"><span class="secno">2.2.21. </span><span class="content"><a data-link-type="dfn" href="#differentfrompredicate" id="ref-for-differentfrompredicate">DifferentFromPredicate</a></span><a class="self-link" href="#DifferentFromPredicate-Syntax"></a></h4>
+    <h4 class="heading settled" data-level="2.2.25" id="DifferentFromPredicate-Syntax"><span class="secno">2.2.25. </span><span class="content"><a data-link-type="dfn" href="#differentfrompredicate" id="ref-for-differentfrompredicate">DifferentFromPredicate</a></span><a class="self-link" href="#DifferentFromPredicate-Syntax"></a></h4>
     <div class="tab-container">
      <div class="bar">
       <button class="bar-btn active" onclick="onBarClick(event)" value="text">Text</button>
@@ -4887,7 +4995,7 @@ sameAs (VAR1 , VAR2)
      </div>
      <div class="tab-content text">
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
-differentFrom (VAR1 , VAR2)
+<span style="font-weight:bold;color:purple">differentFrom</span> (VAR1 , VAR2)
 </pre>
      </div>
      <div class="tab-content diagram hidden">
@@ -4903,91 +5011,91 @@ differentFrom (VAR1 , VAR2)
       </svg>
      </div>
     </div>
-    <h4 class="heading settled" data-level="2.2.22" id="SpecializationAxiom-Syntax"><span class="secno">2.2.22. </span><span class="content"><a data-link-type="dfn" href="#specializationaxiom" id="ref-for-specializationaxiom">SpecializationAxiom</a></span><a class="self-link" href="#SpecializationAxiom-Syntax"></a></h4>
+    <h4 class="heading settled" data-level="2.2.26" id="SpecializationAxiom-Syntax"><span class="secno">2.2.26. </span><span class="content"><a data-link-type="dfn" href="#specializationaxiom" id="ref-for-specializationaxiom">SpecializationAxiom</a></span><a class="self-link" href="#SpecializationAxiom-Syntax"></a></h4>
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
 (<a href="#Aspect-Syntax">Aspect_IRI</a> | <a href="#Concept-Syntax">Concept_IRI</a> | <a href="#RelationEntity-Syntax">RelationEntity_IRI</a> | <a href="#Structure-Syntax">Structure_IRI</a> | <a href="#FacetedScalar-Syntax">FacetedScalar_IRI</a> | <a href="#EnumeratedScalar-Syntax">EnumeratedScalar_IRI</a> | <a href="#AnnotationProperty-Syntax">AnnotationProperty_IRI</a> | <a href="#ScalarProperty-Syntax">ScalarProperty_IRI</a> | <a href="#StructuredProperty-Syntax">StructuredProperty_IRI</a>)
 </pre>
-    <h4 class="heading settled" data-level="2.2.23" id="ScalarPropertyRangeRestrictionAxiom-Syntax"><span class="secno">2.2.23. </span><span class="content"><a data-link-type="dfn" href="#scalarpropertyrangerestrictionaxiom" id="ref-for-scalarpropertyrangerestrictionaxiom">ScalarPropertyRangeRestrictionAxiom</a></span><a class="self-link" href="#ScalarPropertyRangeRestrictionAxiom-Syntax"></a></h4>
+    <h4 class="heading settled" data-level="2.2.27" id="ScalarPropertyRangeRestrictionAxiom-Syntax"><span class="secno">2.2.27. </span><span class="content"><a data-link-type="dfn" href="#scalarpropertyrangerestrictionaxiom" id="ref-for-scalarpropertyrangerestrictionaxiom">ScalarPropertyRangeRestrictionAxiom</a></span><a class="self-link" href="#ScalarPropertyRangeRestrictionAxiom-Syntax"></a></h4>
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
-restricts (all | some) scalar property <a href="#ScalarProperty-Syntax">ScalarProperty_IRI</a> to (<a href="#FacetedScalar-Syntax">FacetedScalar_IRI</a> | <a href="#EnumeratedScalar-Syntax">EnumeratedScalar_IRI</a>)
+<span style="font-weight:bold;color:purple">restricts</span> (<span style="font-weight:bold;color:purple">all</span> | <span style="font-weight:bold;color:purple">some</span>) <span style="font-weight:bold;color:purple">scalar property</span> <a href="#ScalarProperty-Syntax">ScalarProperty_IRI</a> <span style="font-weight:bold;color:purple">to</span> (<a href="#FacetedScalar-Syntax">FacetedScalar_IRI</a> | <a href="#EnumeratedScalar-Syntax">EnumeratedScalar_IRI</a>)
 </pre>
-    <h4 class="heading settled" data-level="2.2.24" id="ScalarPropertyCardinalityRestrictionAxiom-Syntax"><span class="secno">2.2.24. </span><span class="content"><a data-link-type="dfn" href="#scalarpropertycardinalityrestrictionaxiom" id="ref-for-scalarpropertycardinalityrestrictionaxiom">ScalarPropertyCardinalityRestrictionAxiom</a></span><a class="self-link" href="#ScalarPropertyCardinalityRestrictionAxiom-Syntax"></a></h4>
+    <h4 class="heading settled" data-level="2.2.28" id="ScalarPropertyCardinalityRestrictionAxiom-Syntax"><span class="secno">2.2.28. </span><span class="content"><a data-link-type="dfn" href="#scalarpropertycardinalityrestrictionaxiom" id="ref-for-scalarpropertycardinalityrestrictionaxiom">ScalarPropertyCardinalityRestrictionAxiom</a></span><a class="self-link" href="#ScalarPropertyCardinalityRestrictionAxiom-Syntax"></a></h4>
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
-restricts scalar property <a href="#ScalarProperty-Syntax">ScalarProperty_IRI</a> to (exactly | min | max) INTEGER (<a href="#FacetedScalar-Syntax">FacetedScalar_IRI</a> | <a href="#EnumeratedScalar-Syntax">EnumeratedScalar_IRI</a>)?
+<span style="font-weight:bold;color:purple">restricts scalar property</span> <a href="#ScalarProperty-Syntax">ScalarProperty_IRI</a> <span style="font-weight:bold;color:purple">to</span> (<span style="font-weight:bold;color:purple">exactly</span> | <span style="font-weight:bold;color:purple">min</span> | <span style="font-weight:bold;color:purple">max</span>) INTEGER (<a href="#FacetedScalar-Syntax">FacetedScalar_IRI</a> | <a href="#EnumeratedScalar-Syntax">EnumeratedScalar_IRI</a>)?
 </pre>
-    <h4 class="heading settled" data-level="2.2.25" id="ScalarPropertyValueRestrictionAxiom-Syntax"><span class="secno">2.2.25. </span><span class="content"><a data-link-type="dfn" href="#scalarpropertyvaluerestrictionaxiom" id="ref-for-scalarpropertyvaluerestrictionaxiom">ScalarPropertyValueRestrictionAxiom</a></span><a class="self-link" href="#ScalarPropertyValueRestrictionAxiom-Syntax"></a></h4>
+    <h4 class="heading settled" data-level="2.2.29" id="ScalarPropertyValueRestrictionAxiom-Syntax"><span class="secno">2.2.29. </span><span class="content"><a data-link-type="dfn" href="#scalarpropertyvaluerestrictionaxiom" id="ref-for-scalarpropertyvaluerestrictionaxiom">ScalarPropertyValueRestrictionAxiom</a></span><a class="self-link" href="#ScalarPropertyValueRestrictionAxiom-Syntax"></a></h4>
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
-restricts scalar property <a href="#ScalarProperty-Syntax">ScalarProperty_IRI</a> to <a href="#Literal-Syntax">Literal</a>
+<span style="font-weight:bold;color:purple">restricts scalar property</span> <a href="#ScalarProperty-Syntax">ScalarProperty_IRI</a> <span style="font-weight:bold;color:purple">to</span> <a href="#Literal-Syntax">Literal</a>
 </pre>
-    <h4 class="heading settled" data-level="2.2.26" id="StructuredPropertyRangeRestrictionAxiom-Syntax"><span class="secno">2.2.26. </span><span class="content"><a data-link-type="dfn" href="#structuredpropertyrangerestrictionaxiom" id="ref-for-structuredpropertyrangerestrictionaxiom">StructuredPropertyRangeRestrictionAxiom</a></span><a class="self-link" href="#StructuredPropertyRangeRestrictionAxiom-Syntax"></a></h4>
+    <h4 class="heading settled" data-level="2.2.30" id="StructuredPropertyRangeRestrictionAxiom-Syntax"><span class="secno">2.2.30. </span><span class="content"><a data-link-type="dfn" href="#structuredpropertyrangerestrictionaxiom" id="ref-for-structuredpropertyrangerestrictionaxiom">StructuredPropertyRangeRestrictionAxiom</a></span><a class="self-link" href="#StructuredPropertyRangeRestrictionAxiom-Syntax"></a></h4>
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
-restricts (all | some) structured property <a href="#StructuredProperty-Syntax">StructuredProperty_IRI</a> to <a href="#Structure">Structure</a>
+<span style="font-weight:bold;color:purple">restricts</span> (<span style="font-weight:bold;color:purple">all</span> | <span style="font-weight:bold;color:purple">some</span>) <span style="font-weight:bold;color:purple">structured property</span> <a href="#StructuredProperty-Syntax">StructuredProperty_IRI</a> <span style="font-weight:bold;color:purple">to</span> <a href="#Structure">Structure</a>
 </pre>
-    <h4 class="heading settled" data-level="2.2.27" id="StructuredPropertyCardinalityRestrictionAxiom-Syntax"><span class="secno">2.2.27. </span><span class="content"><a data-link-type="dfn" href="#structuredpropertycardinalityrestrictionaxiom" id="ref-for-structuredpropertycardinalityrestrictionaxiom">StructuredPropertyCardinalityRestrictionAxiom</a></span><a class="self-link" href="#StructuredPropertyCardinalityRestrictionAxiom-Syntax"></a></h4>
+    <h4 class="heading settled" data-level="2.2.31" id="StructuredPropertyCardinalityRestrictionAxiom-Syntax"><span class="secno">2.2.31. </span><span class="content"><a data-link-type="dfn" href="#structuredpropertycardinalityrestrictionaxiom" id="ref-for-structuredpropertycardinalityrestrictionaxiom">StructuredPropertyCardinalityRestrictionAxiom</a></span><a class="self-link" href="#StructuredPropertyCardinalityRestrictionAxiom-Syntax"></a></h4>
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
-restricts structured property <a href="#StructuredProperty-Syntax">StructuredProperty_IRI</a> to (exactly | min | max) INTEGER (<a href="#Structure-Syntax">Structure_IRI</a>)?
+<span style="font-weight:bold;color:purple">restricts structured property</span> <a href="#StructuredProperty-Syntax">StructuredProperty_IRI</a> <span style="font-weight:bold;color:purple">to</span> (<span style="font-weight:bold;color:purple">exactly</span> | <span style="font-weight:bold;color:purple">min</span> | <span style="font-weight:bold;color:purple">max</span>) INTEGER (<a href="#Structure-Syntax">Structure_IRI</a>)?
 </pre>
-    <h4 class="heading settled" data-level="2.2.28" id="StructuredPropertyValueRestrictionAxiom-Syntax"><span class="secno">2.2.28. </span><span class="content"><a data-link-type="dfn" href="#structuredpropertyvaluerestrictionaxiom" id="ref-for-structuredpropertyvaluerestrictionaxiom">StructuredPropertyValueRestrictionAxiom</a></span><a class="self-link" href="#StructuredPropertyValueRestrictionAxiom-Syntax"></a></h4>
+    <h4 class="heading settled" data-level="2.2.32" id="StructuredPropertyValueRestrictionAxiom-Syntax"><span class="secno">2.2.32. </span><span class="content"><a data-link-type="dfn" href="#structuredpropertyvaluerestrictionaxiom" id="ref-for-structuredpropertyvaluerestrictionaxiom">StructuredPropertyValueRestrictionAxiom</a></span><a class="self-link" href="#StructuredPropertyValueRestrictionAxiom-Syntax"></a></h4>
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
-restricts structured property <a href="#StructuredProperty-Syntax">StructuredProperty_IRI</a> to <a href="StructureInstance-Syntax">StructureInstance</a>
+<span style="font-weight:bold;color:purple">restricts structured property</span> <a href="#StructuredProperty-Syntax">StructuredProperty_IRI</a> <span style="font-weight:bold;color:purple">to</span> <a href="StructureInstance-Syntax">StructureInstance</a>
 </pre>
-    <h4 class="heading settled" data-level="2.2.29" id="RelationRangeRestrictionAxiom-Syntax"><span class="secno">2.2.29. </span><span class="content"><a data-link-type="dfn" href="#relationrangerestrictionaxiom" id="ref-for-relationrangerestrictionaxiom">RelationRangeRestrictionAxiom</a></span><a class="self-link" href="#RelationRangeRestrictionAxiom-Syntax"></a></h4>
+    <h4 class="heading settled" data-level="2.2.33" id="RelationRangeRestrictionAxiom-Syntax"><span class="secno">2.2.33. </span><span class="content"><a data-link-type="dfn" href="#relationrangerestrictionaxiom" id="ref-for-relationrangerestrictionaxiom">RelationRangeRestrictionAxiom</a></span><a class="self-link" href="#RelationRangeRestrictionAxiom-Syntax"></a></h4>
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
-restricts (all | some) relation (<a href="#ForwardRelation-Syntax">ForwardRelation_IRI</a> | <a href="#ReverseRelation-Syntax">ReverseRelation_IRI</a>) to (<a href="#Aspect-Syntax">Aspect_IRI</a> | <a href="#Concept-Syntax">Concept_IRI</a> | <a href="#RelationEntity-Syntax">RelationEntity_IRI</a>)
+<span style="font-weight:bold;color:purple">restricts</span> (<span style="font-weight:bold;color:purple">all</span> | <span style="font-weight:bold;color:purple">some</span>) <span style="font-weight:bold;color:purple">relation</span> (<a href="#ForwardRelation-Syntax">ForwardRelation_IRI</a> | <a href="#ReverseRelation-Syntax">ReverseRelation_IRI</a> | <a href="#SourceRelation-Syntax">SourceRelation_IRI</a> | <a href="#InverseSourceRelation-Syntax">InverseSourceRelation_IRI</a> | <a href="#TargetRelation-Syntax">TargetRelation_IRI</a> | <a href="#InverseTargetRelation-Syntax">InverseTargetRelation_IRI</a>) <span style="font-weight:bold;color:purple">to</span> (<a href="#Aspect-Syntax">Aspect_IRI</a> | <a href="#Concept-Syntax">Concept_IRI</a> | <a href="#RelationEntity-Syntax">RelationEntity_IRI</a>)
 </pre>
-    <h4 class="heading settled" data-level="2.2.30" id="RelationCardinalityRestrictionAxiom-Syntax"><span class="secno">2.2.30. </span><span class="content"><a data-link-type="dfn" href="#relationcardinalityrestrictionaxiom" id="ref-for-relationcardinalityrestrictionaxiom">RelationCardinalityRestrictionAxiom</a></span><a class="self-link" href="#RelationCardinalityRestrictionAxiom-Syntax"></a></h4>
+    <h4 class="heading settled" data-level="2.2.34" id="RelationCardinalityRestrictionAxiom-Syntax"><span class="secno">2.2.34. </span><span class="content"><a data-link-type="dfn" href="#relationcardinalityrestrictionaxiom" id="ref-for-relationcardinalityrestrictionaxiom">RelationCardinalityRestrictionAxiom</a></span><a class="self-link" href="#RelationCardinalityRestrictionAxiom-Syntax"></a></h4>
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
-restricts relation (<a href="#ForwardRelation-Syntax">ForwardRelation_IRI</a> | <a href="#ReverseRelation-Syntax">ReverseRelation_IRI</a>) to (exactly | min | max) INTEGER (<a href="#Aspect-Syntax">Aspect_IRI</a> | <a href="#Concept-Syntax">Concept_IRI</a> | <a href="#RelationEntity-Syntax">RelationEntity_IRI</a>)?
+<span style="font-weight:bold;color:purple">restricts relation</span> (<a href="#ForwardRelation-Syntax">ForwardRelation_IRI</a> | <a href="#ReverseRelation-Syntax">ReverseRelation_IRI</a> | <a href="#SourceRelation-Syntax">SourceRelation_IRI</a> | <a href="#InverseSourceRelation-Syntax">InverseSourceRelation_IRI</a> | <a href="#TargetRelation-Syntax">TargetRelation_IRI</a> | <a href="#InverseTargetRelation-Syntax">InverseTargetRelation_IRI</a>) <span style="font-weight:bold;color:purple">to</span> (<span style="font-weight:bold;color:purple">exactly</span> | <span style="font-weight:bold;color:purple">min</span> | <span style="font-weight:bold;color:purple">max</span>) INTEGER (<a href="#Aspect-Syntax">Aspect_IRI</a> | <a href="#Concept-Syntax">Concept_IRI</a> | <a href="#RelationEntity-Syntax">RelationEntity_IRI</a>)?
 </pre>
-    <h4 class="heading settled" data-level="2.2.31" id="RelationTargetRestrictionAxiom-Syntax"><span class="secno">2.2.31. </span><span class="content"><a data-link-type="dfn" href="#relationtargetrestrictionaxiom" id="ref-for-relationtargetrestrictionaxiom">RelationTargetRestrictionAxiom</a></span><a class="self-link" href="#RelationTargetRestrictionAxiom-Syntax"></a></h4>
+    <h4 class="heading settled" data-level="2.2.35" id="RelationTargetRestrictionAxiom-Syntax"><span class="secno">2.2.35. </span><span class="content"><a data-link-type="dfn" href="#relationtargetrestrictionaxiom" id="ref-for-relationtargetrestrictionaxiom">RelationTargetRestrictionAxiom</a></span><a class="self-link" href="#RelationTargetRestrictionAxiom-Syntax"></a></h4>
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
-restricts relation (<a href="#ForwardRelation-Syntax">ForwardRelation_IRI</a> | <a href="#ReverseRelation-Syntax">ReverseRelation_IRI</a>) to (<a href="#ConceptInstance-Syntax">ConceptInstance_IRI</a> | <a href="#RelationInstance-Syntax">RelationInstance_IRI</a>)
+<span style="font-weight:bold;color:purple">restricts relation</span> (<a href="#ForwardRelation-Syntax">ForwardRelation_IRI</a> | <a href="#ReverseRelation-Syntax">ReverseRelation_IRI</a> | <a href="#SourceRelation-Syntax">SourceRelation_IRI</a> | <a href="#InverseSourceRelation-Syntax">InverseSourceRelation_IRI</a> | <a href="#TargetRelation-Syntax">TargetRelation_IRI</a> | <a href="#InverseTargetRelation-Syntax">InverseTargetRelation_IRI</a>) <span style="font-weight:bold;color:purple">to</span> (<a href="#ConceptInstance-Syntax">ConceptInstance_IRI</a> | <a href="#RelationInstance-Syntax">RelationInstance_IRI</a>)
 </pre>
-    <h4 class="heading settled" data-level="2.2.32" id="KeyAxiom-Syntax"><span class="secno">2.2.32. </span><span class="content"><a data-link-type="dfn" href="#keyaxiom" id="ref-for-keyaxiom">KeyAxiom</a></span><a class="self-link" href="#KeyAxiom-Syntax"></a></h4>
-<pre class="highlight highlight-html">key <a href="#ScalarProperty-Syntax">ScalarProperty_IRI</a> (, <a href="#ScalarProperty-Syntax">ScalarProperty_IRI</a>)*
+    <h4 class="heading settled" data-level="2.2.36" id="KeyAxiom-Syntax"><span class="secno">2.2.36. </span><span class="content"><a data-link-type="dfn" href="#keyaxiom" id="ref-for-keyaxiom">KeyAxiom</a></span><a class="self-link" href="#KeyAxiom-Syntax"></a></h4>
+<pre class="highlight highlight-html"><span style="font-weight:bold;color:purple">key</span> <a href="#ScalarProperty-Syntax">ScalarProperty_IRI</a> (, <a href="#ScalarProperty-Syntax">ScalarProperty_IRI</a>)*
 </pre>
     <h3 class="heading settled" data-level="2.3" id="VocabularyBundles-Syntax"><span class="secno">2.3. </span><span class="content">Vocabulary Bundles</span><a class="self-link" href="#VocabularyBundles-Syntax"></a></h3>
     <h4 class="heading settled" data-level="2.3.1" id="VocabularyBundle-Syntax"><span class="secno">2.3.1. </span><span class="content"><a data-link-type="dfn" href="#vocabularybundle" id="ref-for-vocabularybundle">VocabularyBundle</a></span><a class="self-link" href="#VocabularyBundle-Syntax"></a></h4>
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
-vocabulary bundle IRI with (# | /) as PREFIX {
+<span style="font-weight:bold;color:purple">vocabulary bundle</span> IRI <span style="font-weight:bold;color:purple">with</span> (# | /) <span style="font-weight:bold;color:purple">as</span> PREFIX {
   (<a href="VocabularyBundleExtension-Syntax">VocabularyBundleExtension</a> | <a href="#VocabularyBundleInclusion-Syntax">VocabularyBundleInclusion</a>)*
 }
 </pre>
     <h4 class="heading settled" data-level="2.3.2" id="VocabularyBundleExtension-Syntax"><span class="secno">2.3.2. </span><span class="content"><a data-link-type="dfn" href="#vocabularybundleextension" id="ref-for-vocabularybundleextension">VocabularyBundleExtension</a></span><a class="self-link" href="#VocabularyBundleExtension-Syntax"></a></h4>
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
-extends <a href="#VocabularyBundle-Syntax">VocabularyBundle_IRI</a> (as PREFIX)?
+<span style="font-weight:bold;color:purple">extends</span> <a href="#VocabularyBundle-Syntax">VocabularyBundle_IRI</a> (<span style="font-weight:bold;color:purple">as</span> PREFIX)?
 </pre>
     <h4 class="heading settled" data-level="2.3.3" id="VocabularyBundleInclusion-Syntax"><span class="secno">2.3.3. </span><span class="content"><a data-link-type="dfn" href="#vocabularybundleinclusion" id="ref-for-vocabularybundleinclusion">VocabularyBundleInclusion</a></span><a class="self-link" href="#VocabularyBundleInclusion-Syntax"></a></h4>
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
-includes <a href="#Vocabulary-Syntax">Vocabulary_IRI</a> (as PREFIX)?
+<span style="font-weight:bold;color:purple">includes</span> <a href="#Vocabulary-Syntax">Vocabulary_IRI</a> (<span style="font-weight:bold;color:purple">as</span> PREFIX)?
 </pre>
     <h3 class="heading settled" data-level="2.4" id="Descriptions-Syntax-Syntax"><span class="secno">2.4. </span><span class="content">Descriptions</span><a class="self-link" href="#Descriptions-Syntax-Syntax"></a></h3>
     <h4 class="heading settled" data-level="2.4.1" id="Description-Syntax"><span class="secno">2.4.1. </span><span class="content"><a data-link-type="dfn" href="#description" id="ref-for-description">Description</a></span><a class="self-link" href="#Description-Syntax"></a></h4>
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
-description IRI with (# | /) as PREFIX {
+<span style="font-weight:bold;color:purple">description</span> IRI <span style="font-weight:bold;color:purple">with</span> (# | /) <span style="font-weight:bold;color:purple">as</span> PREFIX {
   (<a href="#DescriptionExtension-Syntax">DescriptionExtension</a> | <a href="#DescriptionUsage-Syntax">DescriptionUsage</a>)*
   (<a href="#ConceptInstance-Syntax">ConceptInstance</a> | <a href="#RelationInstance-Syntax">RelationInstance</a>)*
 }
 </pre>
     <h4 class="heading settled" data-level="2.4.2" id="DescriptionExtension-Syntax"><span class="secno">2.4.2. </span><span class="content"><a data-link-type="dfn" href="#descriptionextension" id="ref-for-descriptionextension">DescriptionExtension</a></span><a class="self-link" href="#DescriptionExtension-Syntax"></a></h4>
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
-extends <a href="#Description-Syntax">Description_IRI</a> (as PREFIX)?
+<span style="font-weight:bold;color:purple">extends</span> <a href="#Description-Syntax">Description_IRI</a> (<span style="font-weight:bold;color:purple">as</span> PREFIX)?
 </pre>
     <h4 class="heading settled" data-level="2.4.3" id="DescriptionUsage-Syntax"><span class="secno">2.4.3. </span><span class="content"><a data-link-type="dfn" href="#descriptionusage" id="ref-for-descriptionusage">DescriptionUsage</a></span><a class="self-link" href="#DescriptionUsage-Syntax"></a></h4>
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
-uses (<a href="#Vocabulary-Syntax">Vocabulary_IRI</a> | <a href="#VocabularyBundle-Syntax">VocabularyBundle_IRI</a>) (as PREFIX)?
+<span style="font-weight:bold;color:purple">uses</span> (<a href="#Vocabulary-Syntax">Vocabulary_IRI</a> | <a href="#VocabularyBundle-Syntax">VocabularyBundle_IRI</a>) (<span style="font-weight:bold;color:purple">as</span> PREFIX)?
 </pre>
     <h4 class="heading settled" data-level="2.4.4" id="ConceptInstance-Syntax"><span class="secno">2.4.4. </span><span class="content"><a data-link-type="dfn" href="#conceptinstance" id="ref-for-conceptinstance">ConceptInstance</a></span><a class="self-link" href="#ConceptInstance-Syntax"></a></h4>
     <p>Declaration</p>
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
-ci ID (: <a href="#ConceptTypeAssertion-Syntax">ConceptTypeAssertion</a> (, <a href="#ConceptTypeAssertion-Syntax">ConceptTypeAssertion</a>)*)? ([
+<span style="font-weight:bold;color:purple">ci</span> ID (: <a href="#ConceptTypeAssertion-Syntax">ConceptTypeAssertion</a> (, <a href="#ConceptTypeAssertion-Syntax">ConceptTypeAssertion</a>)*)? ([
   (<a href="#ScalarPropertyValueAssertion-Syntax">ScalarPropertyValueAssertion</a> | <a href="#StructuredPropertyValueAssertion-Syntax">StructuredPropertyValueAssertion</a> )*
   (<a href="#LinkAssertion-Syntax">LinkAssertion</a>)*
 ])?
 </pre>
     <p>Reference</p>
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
-ref ci <a href="#ConceptInstance-Syntax">ConceptInstance_IRI</a> (: ownedTypes+=ConceptTypeAssertion (, ownedTypes+=ConceptTypeAssertion)*)? ([
+<span style="font-weight:bold;color:purple">ref ci</span> <a href="#ConceptInstance-Syntax">ConceptInstance_IRI</a> (: ownedTypes+=ConceptTypeAssertion (, ownedTypes+=ConceptTypeAssertion)*)? ([
   (<a href="#ScalarPropertyValueAssertion-Syntax">ScalarPropertyValueAssertion</a> | <a href="#StructuredPropertyValueAssertion-Syntax">StructuredPropertyValueAssertion</a> )*
   (<a href="#LinkAssertion-Syntax">LinkAssertion</a>)*
 ])?
@@ -4995,16 +5103,16 @@ ref ci <a href="#ConceptInstance-Syntax">ConceptInstance_IRI</a> (: ownedTypes+=
     <h4 class="heading settled" data-level="2.4.5" id="RelationInstance-Syntax"><span class="secno">2.4.5. </span><span class="content"><a data-link-type="dfn" href="#relationinstance" id="ref-for-relationinstance">RelationInstance</a></span><a class="self-link" href="#RelationInstance-Syntax"></a></h4>
     <p>Declaration</p>
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
-ri ID (: <a href="#RelationTypeAssertion-Syntax">RelationTypeAssertion</a> (, <a href="#RelationTypeAssertion-Syntax">RelationTypeAssertion</a>)*)? ([
-  from (<a href="#ConceptInstance-Syntax">ConceptInstance_IRI</a> | <a href="#RelationInstance-Syntax">RelationInstance_IRI</a>)
-  to (<a href="#ConceptInstance-Syntax">ConceptInstance_IRI</a> | <a href="#RelationInstance-Syntax">RelationInstance_IRI</a>)
+<span style="font-weight:bold;color:purple">ri</span> ID (: <a href="#RelationTypeAssertion-Syntax">RelationTypeAssertion</a> (, <a href="#RelationTypeAssertion-Syntax">RelationTypeAssertion</a>)*)? ([
+  <span style="font-weight:bold;color:purple">from</span> (<a href="#ConceptInstance-Syntax">ConceptInstance_IRI</a> | <a href="#RelationInstance-Syntax">RelationInstance_IRI</a>)
+  <span style="font-weight:bold;color:purple">to</span> (<a href="#ConceptInstance-Syntax">ConceptInstance_IRI</a> | <a href="#RelationInstance-Syntax">RelationInstance_IRI</a>)
   (<a href="#ScalarPropertyValueAssertion-Syntax">ScalarPropertyValueAssertion</a> | <a href="#StructuredPropertyValueAssertion-Syntax">StructuredPropertyValueAssertion</a> )*
   (<a href="#LinkAssertion-Syntax">LinkAssertion</a>)*
 ])?
 </pre>
     <p>Reference</p>
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
-ref ri <a href="#RelationInstance-Syntax">RelationInstance_IRI</a> (: <a href="#RelationTypeAssertion-Syntax">RelationTypeAssertion</a> (, <a href="#RelationTypeAssertion-Syntax">RelationTypeAssertion</a>)*)? ([
+<span style="font-weight:bold;color:purple">ref ri</span> <a href="#RelationInstance-Syntax">RelationInstance_IRI</a> (: <a href="#RelationTypeAssertion-Syntax">RelationTypeAssertion</a> (, <a href="#RelationTypeAssertion-Syntax">RelationTypeAssertion</a>)*)? ([
   (<a href="#ScalarPropertyValueAssertion-Syntax">ScalarPropertyValueAssertion</a> | <a href="#StructuredPropertyValueAssertion-Syntax">StructuredPropertyValueAssertion</a> )*
   (<a href="#LinkAssertion-Syntax">LinkAssertion</a>)*
 ])?
@@ -5038,21 +5146,21 @@ ref ri <a href="#RelationInstance-Syntax">RelationInstance_IRI</a> (: <a href="#
     <h3 class="heading settled" data-level="2.5" id="DescriptionBundles-Syntax"><span class="secno">2.5. </span><span class="content">Description Bundles</span><a class="self-link" href="#DescriptionBundles-Syntax"></a></h3>
     <h4 class="heading settled" data-level="2.5.1" id="DescriptionBundle-Syntax"><span class="secno">2.5.1. </span><span class="content"><a data-link-type="dfn" href="#descriptionbundle" id="ref-for-descriptionbundle">DescriptionBundle</a></span><a class="self-link" href="#DescriptionBundle-Syntax"></a></h4>
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
-description bundle IRI with (# | /) as PREFIX {
+<span style="font-weight:bold;color:purple">description bundle</span> IRI <span style="font-weight:bold;color:purple">with</span> (# | /) <span style="font-weight:bold;color:purple">as</span> PREFIX {
   (<a href="#DescriptionBundleExtension-Syntax">DescriptionBundleExtension</a> | <a href="#DescriptionBundleInclusion-Syntax">DescriptionBundleInclusion</a> | <a href="#DescriptionBundleUsage-Syntax">DescriptionBundleUsage</a>)*
 }
 </pre>
     <h4 class="heading settled" data-level="2.5.2" id="DescriptionBundleExtension-Syntax"><span class="secno">2.5.2. </span><span class="content"><a data-link-type="dfn" href="#descriptionbundleextension" id="ref-for-descriptionbundleextension">DescriptionBundleExtension</a></span><a class="self-link" href="#DescriptionBundleExtension-Syntax"></a></h4>
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
-extends <a href="#DescriptionBundle-Syntax">DescriptionBundle_IRI</a> (as PREFIX)?
+<span style="font-weight:bold;color:purple">extends</span> <a href="#DescriptionBundle-Syntax">DescriptionBundle_IRI</a> (<span style="font-weight:bold;color:purple">as</span> PREFIX)?
 </pre>
     <h4 class="heading settled" data-level="2.5.3" id="DescriptionBundleInclusion-Syntax"><span class="secno">2.5.3. </span><span class="content"><a data-link-type="dfn" href="#descriptionbundleinclusion" id="ref-for-descriptionbundleinclusion">DescriptionBundleInclusion</a></span><a class="self-link" href="#DescriptionBundleInclusion-Syntax"></a></h4>
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
-includes <a href="#Description-Syntax">Description_IRI</a> (as PREFIX)?
+<span style="font-weight:bold;color:purple">includes</span> <a href="#Description-Syntax">Description_IRI</a> (<span style="font-weight:bold;color:purple">as</span> PREFIX)?
 </pre>
     <h4 class="heading settled" data-level="2.5.4" id="DescriptionBundleUsage-Syntax"><span class="secno">2.5.4. </span><span class="content"><a data-link-type="dfn" href="#descriptionbundleusage" id="ref-for-descriptionbundleusage">DescriptionBundleUsage</a></span><a class="self-link" href="#DescriptionBundleUsage-Syntax"></a></h4>
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
-uses <a href="#VocabularyBundle-Syntax">VocabularyBundle_IRI</a> (as PREFIX)?
+<span style="font-weight:bold;color:purple">uses</span> <a href="#VocabularyBundle-Syntax">VocabularyBundle_IRI</a> (<span style="font-weight:bold;color:purple">as</span> PREFIX)?
 </pre>
     <h2 class="heading settled" data-level="3" id="AbstractSyntax"><span class="secno">3. </span><span class="content">Abstract Syntax</span><a class="self-link" href="#AbstractSyntax"></a></h2>
      This Ecore package specifies the syntax (metamodel) of the Ontological Modeling Language. OML models are instances of
@@ -6010,7 +6118,7 @@ this metamodel and can be manipulated using its API.
 	two concrete relations: <a data-link-type="dfn" href="#forwardrelation" id="ref-for-forwardrelation①">ForwardRelation</a> and [=ReverseRelation] that are specified by a relation entity. When a relation
 	entity specifies both kinds of relations, they become inverse of each other. 
     <p><em>Super classes:</em> <a data-link-type="dfn" href="#term" id="ref-for-term①">Term</a></p>
-    <p><em>Sub classes:</em> <a data-link-type="dfn" href="#forwardrelation" id="ref-for-forwardrelation②">ForwardRelation</a>, <a data-link-type="dfn" href="#reverserelation" id="ref-for-reverserelation①">ReverseRelation</a>, <a data-link-type="dfn" href="#sourcerelation" id="ref-for-sourcerelation">SourceRelation</a>, <a data-link-type="dfn" href="#targetrelation" id="ref-for-targetrelation">TargetRelation</a>, <a data-link-type="dfn" href="#inversesourcerelation" id="ref-for-inversesourcerelation">InverseSourceRelation</a>, <a data-link-type="dfn" href="#inversetargetrelation" id="ref-for-inversetargetrelation">InverseTargetRelation</a></p>
+    <p><em>Sub classes:</em> <a data-link-type="dfn" href="#forwardrelation" id="ref-for-forwardrelation②">ForwardRelation</a>, <a data-link-type="dfn" href="#reverserelation" id="ref-for-reverserelation①">ReverseRelation</a>, <a data-link-type="dfn" href="#sourcerelation" id="ref-for-sourcerelation①">SourceRelation</a>, <a data-link-type="dfn" href="#targetrelation" id="ref-for-targetrelation①">TargetRelation</a>, <a data-link-type="dfn" href="#inversesourcerelation" id="ref-for-inversesourcerelation①">InverseSourceRelation</a>, <a data-link-type="dfn" href="#inversetargetrelation" id="ref-for-inversetargetrelation①">InverseTargetRelation</a></p>
     <p><em>Properties:</em></p>
     <ul>
      <li data-md>
@@ -6559,16 +6667,16 @@ this metamodel and can be manipulated using its API.
       <p><strong>reverseRelation</strong> : <a data-link-type="dfn" href="#reverserelation" id="ref-for-reverserelation②">ReverseRelation</a> [0..1]</p>
       <p>The optional reverse relation of this relation entity</p>
      <li data-md>
-      <p><strong>sourceRelation</strong> : <a data-link-type="dfn" href="#sourcerelation" id="ref-for-sourcerelation①">SourceRelation</a> [0..1]</p>
+      <p><strong>sourceRelation</strong> : <a data-link-type="dfn" href="#sourcerelation" id="ref-for-sourcerelation②">SourceRelation</a> [0..1]</p>
       <p>The optional source relation of this relation entity</p>
      <li data-md>
-      <p><strong>targetRelation</strong> : <a data-link-type="dfn" href="#targetrelation" id="ref-for-targetrelation①">TargetRelation</a> [0..1]</p>
+      <p><strong>targetRelation</strong> : <a data-link-type="dfn" href="#targetrelation" id="ref-for-targetrelation②">TargetRelation</a> [0..1]</p>
       <p>The optional target relation of this relation entity</p>
      <li data-md>
-      <p><strong>inverseSourceRelation</strong> : <a data-link-type="dfn" href="#inversesourcerelation" id="ref-for-inversesourcerelation①">InverseSourceRelation</a> [0..1]</p>
+      <p><strong>inverseSourceRelation</strong> : <a data-link-type="dfn" href="#inversesourcerelation" id="ref-for-inversesourcerelation②">InverseSourceRelation</a> [0..1]</p>
       <p>The optional inverse source relation of this relation entity</p>
      <li data-md>
-      <p><strong>inverseTargetRelation</strong> : <a data-link-type="dfn" href="#inversetargetrelation" id="ref-for-inversetargetrelation①">InverseTargetRelation</a> [0..1]</p>
+      <p><strong>inverseTargetRelation</strong> : <a data-link-type="dfn" href="#inversetargetrelation" id="ref-for-inversetargetrelation②">InverseTargetRelation</a> [0..1]</p>
       <p>The optional inverse target relation of this relation entity</p>
     </ul>
     <h4 class="heading settled" data-level="3.6.8" id="Scalar"><span class="secno">3.6.8. </span><span class="content"><dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="scalar"><em>Scalar</em></dfn></span><a class="self-link" href="#Scalar"></a></h4>
@@ -9227,7 +9335,7 @@ function onBarClick(e) {
   <aside class="dfn-panel" data-for="annotationproperty">
    <b><a href="#annotationproperty">#annotationproperty</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-annotationproperty">2.2.11. AnnotationProperty</a>
+    <li><a href="#ref-for-annotationproperty">2.2.15. AnnotationProperty</a>
     <li><a href="#ref-for-annotationproperty①">3.1.2. Annotation</a>
     <li><a href="#ref-for-annotationproperty②">3.5.6. Property</a>
     <li><a href="#ref-for-annotationproperty③">3.12.1. AnnotationPropertyReference</a>
@@ -9252,15 +9360,17 @@ function onBarClick(e) {
   <aside class="dfn-panel" data-for="inversesourcerelation">
    <b><a href="#inversesourcerelation">#inversesourcerelation</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-inversesourcerelation">3.5.7. Relation</a>
-    <li><a href="#ref-for-inversesourcerelation①">3.6.7. RelationEntity</a>
+    <li><a href="#ref-for-inversesourcerelation">2.2.10. InverseSourceRelation</a>
+    <li><a href="#ref-for-inversesourcerelation①">3.5.7. Relation</a>
+    <li><a href="#ref-for-inversesourcerelation②">3.6.7. RelationEntity</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="inversetargetrelation">
    <b><a href="#inversetargetrelation">#inversetargetrelation</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-inversetargetrelation">3.5.7. Relation</a>
-    <li><a href="#ref-for-inversetargetrelation①">3.6.7. RelationEntity</a>
+    <li><a href="#ref-for-inversetargetrelation">2.2.12. InverseTargetRelation</a>
+    <li><a href="#ref-for-inversetargetrelation①">3.5.7. Relation</a>
+    <li><a href="#ref-for-inversetargetrelation②">3.6.7. RelationEntity</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="property">
@@ -9299,7 +9409,7 @@ function onBarClick(e) {
   <aside class="dfn-panel" data-for="scalarproperty">
    <b><a href="#scalarproperty">#scalarproperty</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-scalarproperty">2.2.12. ScalarProperty</a>
+    <li><a href="#ref-for-scalarproperty">2.2.16. ScalarProperty</a>
     <li><a href="#ref-for-scalarproperty①">3.5.2. FeatureProperty</a>
     <li><a href="#ref-for-scalarproperty②">3.7.3. KeyAxiom</a>
     <li><a href="#ref-for-scalarproperty③">3.7.13. ScalarPropertyRestrictionAxiom</a>
@@ -9310,8 +9420,9 @@ function onBarClick(e) {
   <aside class="dfn-panel" data-for="sourcerelation">
    <b><a href="#sourcerelation">#sourcerelation</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-sourcerelation">3.5.7. Relation</a>
-    <li><a href="#ref-for-sourcerelation①">3.6.7. RelationEntity</a>
+    <li><a href="#ref-for-sourcerelation">2.2.9. SourceRelation</a>
+    <li><a href="#ref-for-sourcerelation①">3.5.7. Relation</a>
+    <li><a href="#ref-for-sourcerelation②">3.6.7. RelationEntity</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="specializableterm">
@@ -9327,7 +9438,7 @@ function onBarClick(e) {
   <aside class="dfn-panel" data-for="structuredproperty">
    <b><a href="#structuredproperty">#structuredproperty</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-structuredproperty">2.2.13. StructuredProperty</a>
+    <li><a href="#ref-for-structuredproperty">2.2.17. StructuredProperty</a>
     <li><a href="#ref-for-structuredproperty①">3.5.2. FeatureProperty</a>
     <li><a href="#ref-for-structuredproperty②">3.7.18. StructuredPropertyRestrictionAxiom</a>
     <li><a href="#ref-for-structuredproperty③">3.11.7. StructuredPropertyValueAssertion</a>
@@ -9337,8 +9448,9 @@ function onBarClick(e) {
   <aside class="dfn-panel" data-for="targetrelation">
    <b><a href="#targetrelation">#targetrelation</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-targetrelation">3.5.7. Relation</a>
-    <li><a href="#ref-for-targetrelation①">3.6.7. RelationEntity</a>
+    <li><a href="#ref-for-targetrelation">2.2.11. TargetRelation</a>
+    <li><a href="#ref-for-targetrelation①">3.5.7. Relation</a>
+    <li><a href="#ref-for-targetrelation②">3.6.7. RelationEntity</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term">
@@ -9394,7 +9506,7 @@ function onBarClick(e) {
   <aside class="dfn-panel" data-for="enumeratedscalar">
    <b><a href="#enumeratedscalar">#enumeratedscalar</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-enumeratedscalar">2.2.15. EnumeratedScalar</a>
+    <li><a href="#ref-for-enumeratedscalar">2.2.19. EnumeratedScalar</a>
     <li><a href="#ref-for-enumeratedscalar①">3.6.8. Scalar</a>
     <li><a href="#ref-for-enumeratedscalar②">3.12.8. EnumeratedScalarReference</a>
    </ul>
@@ -9402,7 +9514,7 @@ function onBarClick(e) {
   <aside class="dfn-panel" data-for="facetedscalar">
    <b><a href="#facetedscalar">#facetedscalar</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-facetedscalar">2.2.14. FacetedScalar</a>
+    <li><a href="#ref-for-facetedscalar">2.2.18. FacetedScalar</a>
     <li><a href="#ref-for-facetedscalar①">3.6.8. Scalar</a>
     <li><a href="#ref-for-facetedscalar②">3.12.9. FacetedScalarReference</a>
    </ul>
@@ -9438,7 +9550,7 @@ function onBarClick(e) {
   <aside class="dfn-panel" data-for="structure">
    <b><a href="#structure">#structure</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-structure">2.2.10. Structure</a>
+    <li><a href="#ref-for-structure">2.2.14. Structure</a>
     <li><a href="#ref-for-structure①">3.5.12. StructuredProperty</a>
     <li><a href="#ref-for-structure②">3.6.2. Classifier</a>
     <li><a href="#ref-for-structure③">3.7.16. StructuredPropertyCardinalityRestrictionAxiom</a>
@@ -9475,7 +9587,7 @@ function onBarClick(e) {
   <aside class="dfn-panel" data-for="keyaxiom">
    <b><a href="#keyaxiom">#keyaxiom</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-keyaxiom">2.2.32. KeyAxiom</a>
+    <li><a href="#ref-for-keyaxiom">2.2.36. KeyAxiom</a>
     <li><a href="#ref-for-keyaxiom①">3.6.4. Entity</a>
     <li><a href="#ref-for-keyaxiom②">3.7.1. Axiom</a>
     <li><a href="#ref-for-keyaxiom③">3.12.7. EntityReference</a>
@@ -9502,14 +9614,14 @@ function onBarClick(e) {
   <aside class="dfn-panel" data-for="relationcardinalityrestrictionaxiom">
    <b><a href="#relationcardinalityrestrictionaxiom">#relationcardinalityrestrictionaxiom</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-relationcardinalityrestrictionaxiom">2.2.30. RelationCardinalityRestrictionAxiom</a>
+    <li><a href="#ref-for-relationcardinalityrestrictionaxiom">2.2.34. RelationCardinalityRestrictionAxiom</a>
     <li><a href="#ref-for-relationcardinalityrestrictionaxiom①">3.7.8. RelationRestrictionAxiom</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="relationrangerestrictionaxiom">
    <b><a href="#relationrangerestrictionaxiom">#relationrangerestrictionaxiom</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-relationrangerestrictionaxiom">2.2.29. RelationRangeRestrictionAxiom</a>
+    <li><a href="#ref-for-relationrangerestrictionaxiom">2.2.33. RelationRangeRestrictionAxiom</a>
     <li><a href="#ref-for-relationrangerestrictionaxiom①">3.7.8. RelationRestrictionAxiom</a>
    </ul>
   </aside>
@@ -9527,7 +9639,7 @@ function onBarClick(e) {
   <aside class="dfn-panel" data-for="relationtargetrestrictionaxiom">
    <b><a href="#relationtargetrestrictionaxiom">#relationtargetrestrictionaxiom</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-relationtargetrestrictionaxiom">2.2.31. RelationTargetRestrictionAxiom</a>
+    <li><a href="#ref-for-relationtargetrestrictionaxiom">2.2.35. RelationTargetRestrictionAxiom</a>
     <li><a href="#ref-for-relationtargetrestrictionaxiom①">3.7.8. RelationRestrictionAxiom</a>
    </ul>
   </aside>
@@ -9542,14 +9654,14 @@ function onBarClick(e) {
   <aside class="dfn-panel" data-for="scalarpropertycardinalityrestrictionaxiom">
    <b><a href="#scalarpropertycardinalityrestrictionaxiom">#scalarpropertycardinalityrestrictionaxiom</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-scalarpropertycardinalityrestrictionaxiom">2.2.24. ScalarPropertyCardinalityRestrictionAxiom</a>
+    <li><a href="#ref-for-scalarpropertycardinalityrestrictionaxiom">2.2.28. ScalarPropertyCardinalityRestrictionAxiom</a>
     <li><a href="#ref-for-scalarpropertycardinalityrestrictionaxiom①">3.7.13. ScalarPropertyRestrictionAxiom</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="scalarpropertyrangerestrictionaxiom">
    <b><a href="#scalarpropertyrangerestrictionaxiom">#scalarpropertyrangerestrictionaxiom</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-scalarpropertyrangerestrictionaxiom">2.2.23. ScalarPropertyRangeRestrictionAxiom</a>
+    <li><a href="#ref-for-scalarpropertyrangerestrictionaxiom">2.2.27. ScalarPropertyRangeRestrictionAxiom</a>
     <li><a href="#ref-for-scalarpropertyrangerestrictionaxiom①">3.7.13. ScalarPropertyRestrictionAxiom</a>
    </ul>
   </aside>
@@ -9565,14 +9677,14 @@ function onBarClick(e) {
   <aside class="dfn-panel" data-for="scalarpropertyvaluerestrictionaxiom">
    <b><a href="#scalarpropertyvaluerestrictionaxiom">#scalarpropertyvaluerestrictionaxiom</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-scalarpropertyvaluerestrictionaxiom">2.2.25. ScalarPropertyValueRestrictionAxiom</a>
+    <li><a href="#ref-for-scalarpropertyvaluerestrictionaxiom">2.2.29. ScalarPropertyValueRestrictionAxiom</a>
     <li><a href="#ref-for-scalarpropertyvaluerestrictionaxiom①">3.7.13. ScalarPropertyRestrictionAxiom</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="specializationaxiom">
    <b><a href="#specializationaxiom">#specializationaxiom</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-specializationaxiom">2.2.22. SpecializationAxiom</a>
+    <li><a href="#ref-for-specializationaxiom">2.2.26. SpecializationAxiom</a>
     <li><a href="#ref-for-specializationaxiom①">3.5.11. SpecializableTerm</a>
     <li><a href="#ref-for-specializationaxiom②">3.7.1. Axiom</a>
     <li><a href="#ref-for-specializationaxiom③">3.12.17. SpecializableTermReference</a>
@@ -9581,14 +9693,14 @@ function onBarClick(e) {
   <aside class="dfn-panel" data-for="structuredpropertycardinalityrestrictionaxiom">
    <b><a href="#structuredpropertycardinalityrestrictionaxiom">#structuredpropertycardinalityrestrictionaxiom</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-structuredpropertycardinalityrestrictionaxiom">2.2.27. StructuredPropertyCardinalityRestrictionAxiom</a>
+    <li><a href="#ref-for-structuredpropertycardinalityrestrictionaxiom">2.2.31. StructuredPropertyCardinalityRestrictionAxiom</a>
     <li><a href="#ref-for-structuredpropertycardinalityrestrictionaxiom①">3.7.18. StructuredPropertyRestrictionAxiom</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="structuredpropertyrangerestrictionaxiom">
    <b><a href="#structuredpropertyrangerestrictionaxiom">#structuredpropertyrangerestrictionaxiom</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-structuredpropertyrangerestrictionaxiom">2.2.26. StructuredPropertyRangeRestrictionAxiom</a>
+    <li><a href="#ref-for-structuredpropertyrangerestrictionaxiom">2.2.30. StructuredPropertyRangeRestrictionAxiom</a>
     <li><a href="#ref-for-structuredpropertyrangerestrictionaxiom①">3.7.18. StructuredPropertyRestrictionAxiom</a>
    </ul>
   </aside>
@@ -9604,7 +9716,7 @@ function onBarClick(e) {
   <aside class="dfn-panel" data-for="structuredpropertyvaluerestrictionaxiom">
    <b><a href="#structuredpropertyvaluerestrictionaxiom">#structuredpropertyvaluerestrictionaxiom</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-structuredpropertyvaluerestrictionaxiom">2.2.28. StructuredPropertyValueRestrictionAxiom</a>
+    <li><a href="#ref-for-structuredpropertyvaluerestrictionaxiom">2.2.32. StructuredPropertyValueRestrictionAxiom</a>
     <li><a href="#ref-for-structuredpropertyvaluerestrictionaxiom①">3.7.18. StructuredPropertyRestrictionAxiom</a>
     <li><a href="#ref-for-structuredpropertyvaluerestrictionaxiom②">3.10.5. StructureInstance</a>
    </ul>
@@ -9622,14 +9734,14 @@ function onBarClick(e) {
   <aside class="dfn-panel" data-for="differentfrompredicate">
    <b><a href="#differentfrompredicate">#differentfrompredicate</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-differentfrompredicate">2.2.21. DifferentFromPredicate</a>
+    <li><a href="#ref-for-differentfrompredicate">2.2.25. DifferentFromPredicate</a>
     <li><a href="#ref-for-differentfrompredicate①">3.8.1. BinaryPredicate</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="entitypredicate">
    <b><a href="#entitypredicate">#entitypredicate</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-entitypredicate">2.2.17. EntityPredicate</a>
+    <li><a href="#ref-for-entitypredicate">2.2.21. EntityPredicate</a>
     <li><a href="#ref-for-entitypredicate①">3.8.9. UnaryPredicate</a>
    </ul>
   </aside>
@@ -9645,21 +9757,21 @@ function onBarClick(e) {
   <aside class="dfn-panel" data-for="relationentitypredicate">
    <b><a href="#relationentitypredicate">#relationentitypredicate</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-relationentitypredicate">2.2.19. RelationEntityPredicate</a>
+    <li><a href="#ref-for-relationentitypredicate">2.2.23. RelationEntityPredicate</a>
     <li><a href="#ref-for-relationentitypredicate①">3.8.1. BinaryPredicate</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="relationpredicate">
    <b><a href="#relationpredicate">#relationpredicate</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-relationpredicate">2.2.18. RelationPredicate</a>
+    <li><a href="#ref-for-relationpredicate">2.2.22. RelationPredicate</a>
     <li><a href="#ref-for-relationpredicate①">3.8.1. BinaryPredicate</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="rule">
    <b><a href="#rule">#rule</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-rule">2.2.16. Rule</a>
+    <li><a href="#ref-for-rule">2.2.20. Rule</a>
     <li><a href="#ref-for-rule①">3.3.2. Member</a>
     <li><a href="#ref-for-rule②">3.4.9. VocabularyStatement</a>
     <li><a href="#ref-for-rule③">3.8.4. Predicate</a> <a href="#ref-for-rule④">(2)</a>
@@ -9669,7 +9781,7 @@ function onBarClick(e) {
   <aside class="dfn-panel" data-for="sameaspredicate">
    <b><a href="#sameaspredicate">#sameaspredicate</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-sameaspredicate">2.2.20. SameAsPredicate</a>
+    <li><a href="#ref-for-sameaspredicate">2.2.24. SameAsPredicate</a>
     <li><a href="#ref-for-sameaspredicate①">3.8.1. BinaryPredicate</a>
    </ul>
   </aside>
@@ -9986,7 +10098,7 @@ function onBarClick(e) {
   <aside class="dfn-panel" data-for="relationreference">
    <b><a href="#relationreference">#relationreference</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-relationreference">2.2.9. RelationReference</a>
+    <li><a href="#ref-for-relationreference">2.2.13. RelationReference</a>
     <li><a href="#ref-for-relationreference①">3.12.20. VocabularyMemberReference</a>
    </ul>
   </aside>
