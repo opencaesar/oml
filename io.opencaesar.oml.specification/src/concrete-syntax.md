@@ -12,7 +12,7 @@ An ontology is declared with of the ontology keywords, an `IRI`, a separator cha
 
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
-ontology_keyword IRI with (# | /) as PREFIX {
+&lt;ontology_keyword&gt; IRI <span style="font-weight:bold;color:purple">with</span> (# | /) <span style="font-weight:bold;color:purple">as</span> PREFIX {
 	(<a href="#Import-Syntax">Import</a>)*
 	(<a href="#Member-Syntax">Member</a>)*
 }
@@ -24,7 +24,7 @@ An ontology may import other ontologies using one of the import statements allow
 
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
-import_keyword IRI (as PREFIX)?
+&lt;import_keyword&gt; IRI (<span style="font-weight:bold;color:purple">as</span> PREFIX)?
  </pre>
 
 ### [=Member=] ### {#Member-Syntax}
@@ -33,7 +33,7 @@ An ontology may declare members by adding them with member statements after all 
 
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
-member_keyword ID ... ([
+&lt;member_keyword&gt; ID ... ([
 	...
 ])?
 </pre>
@@ -44,7 +44,7 @@ In addition to declaring a new <a href="#Member-Syntax">Member</a> , an ontology
 
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
-ref member_keyword MEMBER_IRI ... ([
+<span style="font-weight:bold;color:purple">ref</span> &lt;member_keyword&gt; MEMBER_IRI ... ([
 	...
 ])?
 </pre>
@@ -108,14 +108,14 @@ macros:
 
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
-extends <a href="#Vocabulary-Syntax">Vocabulary_IRI</a> (as PREFIX)?
+<span style="font-weight:bold;color:purple">extends</span> <a href="#Vocabulary-Syntax">Vocabulary_IRI</a> (<span style="font-weight:bold;color:purple">as</span> PREFIX)?
  </pre>
 
 ### [=VocabularyUsage=] ### {#VocabularyUsage-Syntax}
 
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
-uses (<a href="#Description-Syntax">Description_IRI</a> | <a href="#DescriptionBundle-Syntax">DescriptionBundle_IRI</a>) (as PREFIX)?
+<span style="font-weight:bold;color:purple">uses</span> (<a href="#Description-Syntax">Description_IRI</a> | <a href="#DescriptionBundle-Syntax">DescriptionBundle_IRI</a>) (<span style="font-weight:bold;color:purple">as</span> PREFIX)?
  </pre>
 
 ### [=Aspect=] ### {#Aspect-Syntax}
@@ -200,13 +200,57 @@ macros:
     svgpath: images/reverse_relation.svg
 </pre>
 
+### [=SourceRelation=] ### {#SourceRelation-Syntax}
+
+Declaration
+
+<pre class="include">
+path: tabs.md
+macros:
+	textpath: concrete_syntax/source_relation.md
+    svgpath: images/source_relation.svg
+</pre>
+
+### [=InverseSourceRelation=] ### {#InverseSourceRelation-Syntax}
+
+Declaration
+
+<pre class="include">
+path: tabs.md
+macros:
+	textpath: concrete_syntax/inverse_source_relation.md
+    svgpath: images/inverse_source_relation.svg
+</pre>
+
+### [=TargetRelation=] ### {#TargetRelation-Syntax}
+
+Declaration
+
+<pre class="include">
+path: tabs.md
+macros:
+	textpath: concrete_syntax/target_relation.md
+    svgpath: images/target_relation.svg
+</pre>
+
+### [=InverseTargetRelation=] ### {#InverseTargetRelation-Syntax}
+
+Declaration
+
+<pre class="include">
+path: tabs.md
+macros:
+	textpath: concrete_syntax/inverse_target_relation.md
+    svgpath: images/inverse_target_relation.svg
+</pre>
+
 ### [=RelationReference=] ### {#RelationReference-Syntax}
 
 Reference
 
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
-ref relation (<a href="#ReverseRelation-Syntax">ReverseRelation_IRI</a> | <a href="#ForwardRelation-Syntax">ForwardRelation_IRI</a>)
+<span style="font-weight:bold;color:purple">ref relation</span> (<a href="#ForwardRelation-Syntax">ForwardRelation_IRI</a> | <a href="#ReverseRelation-Syntax">ReverseRelation_IRI</a> | <a href="#SourceRelation-Syntax">SourceRelation_IRI</a> | <a href="#InverseSourceRelation-Syntax">InverseSourceRelation_IRI</a> | <a href="#TargetRelation-Syntax">TargetRelation_IRI</a> | <a href="#InverseTargetRelation-Syntax">InverseTargetRelation_IRI</a>)
 </pre>
 
 ### [=Structure=] ### {#Structure-Syntax}
@@ -405,69 +449,69 @@ macros:
 
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
-restricts (all | some) scalar property <a href="#ScalarProperty-Syntax">ScalarProperty_IRI</a> to (<a href="#FacetedScalar-Syntax">FacetedScalar_IRI</a> | <a href="#EnumeratedScalar-Syntax">EnumeratedScalar_IRI</a>)
+<span style="font-weight:bold;color:purple">restricts</span> (<span style="font-weight:bold;color:purple">all</span> | <span style="font-weight:bold;color:purple">some</span>) <span style="font-weight:bold;color:purple">scalar property</span> <a href="#ScalarProperty-Syntax">ScalarProperty_IRI</a> <span style="font-weight:bold;color:purple">to</span> (<a href="#FacetedScalar-Syntax">FacetedScalar_IRI</a> | <a href="#EnumeratedScalar-Syntax">EnumeratedScalar_IRI</a>)
 </pre>
 
 ### [=ScalarPropertyCardinalityRestrictionAxiom=] ### {#ScalarPropertyCardinalityRestrictionAxiom-Syntax}
 
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
-restricts scalar property <a href="#ScalarProperty-Syntax">ScalarProperty_IRI</a> to (exactly | min | max) INTEGER (<a href="#FacetedScalar-Syntax">FacetedScalar_IRI</a> | <a href="#EnumeratedScalar-Syntax">EnumeratedScalar_IRI</a>)?
+<span style="font-weight:bold;color:purple">restricts scalar property</span> <a href="#ScalarProperty-Syntax">ScalarProperty_IRI</a> <span style="font-weight:bold;color:purple">to</span> (<span style="font-weight:bold;color:purple">exactly</span> | <span style="font-weight:bold;color:purple">min</span> | <span style="font-weight:bold;color:purple">max</span>) INTEGER (<a href="#FacetedScalar-Syntax">FacetedScalar_IRI</a> | <a href="#EnumeratedScalar-Syntax">EnumeratedScalar_IRI</a>)?
 </pre>
 
 ### [=ScalarPropertyValueRestrictionAxiom=] ### {#ScalarPropertyValueRestrictionAxiom-Syntax}
 
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
-restricts scalar property <a href="#ScalarProperty-Syntax">ScalarProperty_IRI</a> to <a href="#Literal-Syntax">Literal</a>
+<span style="font-weight:bold;color:purple">restricts scalar property</span> <a href="#ScalarProperty-Syntax">ScalarProperty_IRI</a> <span style="font-weight:bold;color:purple">to</span> <a href="#Literal-Syntax">Literal</a>
 </pre>
 
 ### [=StructuredPropertyRangeRestrictionAxiom=] ### {#StructuredPropertyRangeRestrictionAxiom-Syntax}
 
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
-restricts (all | some) structured property <a href="#StructuredProperty-Syntax">StructuredProperty_IRI</a> to <a href="#Structure">Structure</a>
+<span style="font-weight:bold;color:purple">restricts</span> (<span style="font-weight:bold;color:purple">all</span> | <span style="font-weight:bold;color:purple">some</span>) <span style="font-weight:bold;color:purple">structured property</span> <a href="#StructuredProperty-Syntax">StructuredProperty_IRI</a> <span style="font-weight:bold;color:purple">to</span> <a href="#Structure">Structure</a>
 </pre>
 
 ### [=StructuredPropertyCardinalityRestrictionAxiom=] ### {#StructuredPropertyCardinalityRestrictionAxiom-Syntax}
 
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
-restricts structured property <a href="#StructuredProperty-Syntax">StructuredProperty_IRI</a> to (exactly | min | max) INTEGER (<a href="#Structure-Syntax">Structure_IRI</a>)?
+<span style="font-weight:bold;color:purple">restricts structured property</span> <a href="#StructuredProperty-Syntax">StructuredProperty_IRI</a> <span style="font-weight:bold;color:purple">to</span> (<span style="font-weight:bold;color:purple">exactly</span> | <span style="font-weight:bold;color:purple">min</span> | <span style="font-weight:bold;color:purple">max</span>) INTEGER (<a href="#Structure-Syntax">Structure_IRI</a>)?
 </pre>
 
 ### [=StructuredPropertyValueRestrictionAxiom=] ### {#StructuredPropertyValueRestrictionAxiom-Syntax}
 
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
-restricts structured property <a href="#StructuredProperty-Syntax">StructuredProperty_IRI</a> to <a href="StructureInstance-Syntax">StructureInstance</a>
+<span style="font-weight:bold;color:purple">restricts structured property</span> <a href="#StructuredProperty-Syntax">StructuredProperty_IRI</a> <span style="font-weight:bold;color:purple">to</span> <a href="StructureInstance-Syntax">StructureInstance</a>
 </pre>
 
 ### [=RelationRangeRestrictionAxiom=] ### {#RelationRangeRestrictionAxiom-Syntax}
 
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
-restricts (all | some) relation (<a href="#ForwardRelation-Syntax">ForwardRelation_IRI</a> | <a href="#ReverseRelation-Syntax">ReverseRelation_IRI</a>) to (<a href="#Aspect-Syntax">Aspect_IRI</a> | <a href="#Concept-Syntax">Concept_IRI</a> | <a href="#RelationEntity-Syntax">RelationEntity_IRI</a>)
+<span style="font-weight:bold;color:purple">restricts</span> (<span style="font-weight:bold;color:purple">all</span> | <span style="font-weight:bold;color:purple">some</span>) <span style="font-weight:bold;color:purple">relation</span> (<a href="#ForwardRelation-Syntax">ForwardRelation_IRI</a> | <a href="#ReverseRelation-Syntax">ReverseRelation_IRI</a> | <a href="#SourceRelation-Syntax">SourceRelation_IRI</a> | <a href="#InverseSourceRelation-Syntax">InverseSourceRelation_IRI</a> | <a href="#TargetRelation-Syntax">TargetRelation_IRI</a> | <a href="#InverseTargetRelation-Syntax">InverseTargetRelation_IRI</a>) <span style="font-weight:bold;color:purple">to</span> (<a href="#Aspect-Syntax">Aspect_IRI</a> | <a href="#Concept-Syntax">Concept_IRI</a> | <a href="#RelationEntity-Syntax">RelationEntity_IRI</a>)
 </pre>
 
 ### [=RelationCardinalityRestrictionAxiom=] ### {#RelationCardinalityRestrictionAxiom-Syntax}
 
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
-restricts relation (<a href="#ForwardRelation-Syntax">ForwardRelation_IRI</a> | <a href="#ReverseRelation-Syntax">ReverseRelation_IRI</a>) to (exactly | min | max) INTEGER (<a href="#Aspect-Syntax">Aspect_IRI</a> | <a href="#Concept-Syntax">Concept_IRI</a> | <a href="#RelationEntity-Syntax">RelationEntity_IRI</a>)?
+<span style="font-weight:bold;color:purple">restricts relation</span> (<a href="#ForwardRelation-Syntax">ForwardRelation_IRI</a> | <a href="#ReverseRelation-Syntax">ReverseRelation_IRI</a> | <a href="#SourceRelation-Syntax">SourceRelation_IRI</a> | <a href="#InverseSourceRelation-Syntax">InverseSourceRelation_IRI</a> | <a href="#TargetRelation-Syntax">TargetRelation_IRI</a> | <a href="#InverseTargetRelation-Syntax">InverseTargetRelation_IRI</a>) <span style="font-weight:bold;color:purple">to</span> (<span style="font-weight:bold;color:purple">exactly</span> | <span style="font-weight:bold;color:purple">min</span> | <span style="font-weight:bold;color:purple">max</span>) INTEGER (<a href="#Aspect-Syntax">Aspect_IRI</a> | <a href="#Concept-Syntax">Concept_IRI</a> | <a href="#RelationEntity-Syntax">RelationEntity_IRI</a>)?
 </pre>
 
 ### [=RelationTargetRestrictionAxiom=] ### {#RelationTargetRestrictionAxiom-Syntax}
 
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
-restricts relation (<a href="#ForwardRelation-Syntax">ForwardRelation_IRI</a> | <a href="#ReverseRelation-Syntax">ReverseRelation_IRI</a>) to (<a href="#ConceptInstance-Syntax">ConceptInstance_IRI</a> | <a href="#RelationInstance-Syntax">RelationInstance_IRI</a>)
+<span style="font-weight:bold;color:purple">restricts relation</span> (<a href="#ForwardRelation-Syntax">ForwardRelation_IRI</a> | <a href="#ReverseRelation-Syntax">ReverseRelation_IRI</a> | <a href="#SourceRelation-Syntax">SourceRelation_IRI</a> | <a href="#InverseSourceRelation-Syntax">InverseSourceRelation_IRI</a> | <a href="#TargetRelation-Syntax">TargetRelation_IRI</a> | <a href="#InverseTargetRelation-Syntax">InverseTargetRelation_IRI</a>) <span style="font-weight:bold;color:purple">to</span> (<a href="#ConceptInstance-Syntax">ConceptInstance_IRI</a> | <a href="#RelationInstance-Syntax">RelationInstance_IRI</a>)
 </pre>
 
 ### [=KeyAxiom=] ### {#KeyAxiom-Syntax}
 
 <pre class="highlight highlight-html">
-key <a href="#ScalarProperty-Syntax">ScalarProperty_IRI</a> (, <a href="#ScalarProperty-Syntax">ScalarProperty_IRI</a>)*
+<span style="font-weight:bold;color:purple">key</span> <a href="#ScalarProperty-Syntax">ScalarProperty_IRI</a> (, <a href="#ScalarProperty-Syntax">ScalarProperty_IRI</a>)*
 </pre>
 
 ## Vocabulary Bundles ## {#VocabularyBundles-Syntax}
@@ -476,7 +520,7 @@ key <a href="#ScalarProperty-Syntax">ScalarProperty_IRI</a> (, <a href="#ScalarP
 
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
-vocabulary bundle IRI with (# | /) as PREFIX {
+<span style="font-weight:bold;color:purple">vocabulary bundle</span> IRI <span style="font-weight:bold;color:purple">with</span> (# | /) <span style="font-weight:bold;color:purple">as</span> PREFIX {
 	(<a href="VocabularyBundleExtension-Syntax">VocabularyBundleExtension</a> | <a href="#VocabularyBundleInclusion-Syntax">VocabularyBundleInclusion</a>)*
 }
 </pre>
@@ -485,14 +529,14 @@ vocabulary bundle IRI with (# | /) as PREFIX {
 
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
-extends <a href="#VocabularyBundle-Syntax">VocabularyBundle_IRI</a> (as PREFIX)?
+<span style="font-weight:bold;color:purple">extends</span> <a href="#VocabularyBundle-Syntax">VocabularyBundle_IRI</a> (<span style="font-weight:bold;color:purple">as</span> PREFIX)?
 </pre>
 
 ### [=VocabularyBundleInclusion=] ### {#VocabularyBundleInclusion-Syntax}
 
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
-includes <a href="#Vocabulary-Syntax">Vocabulary_IRI</a> (as PREFIX)?
+<span style="font-weight:bold;color:purple">includes</span> <a href="#Vocabulary-Syntax">Vocabulary_IRI</a> (<span style="font-weight:bold;color:purple">as</span> PREFIX)?
 </pre>
 
 ## Descriptions ## {#Descriptions-Syntax-Syntax}
@@ -501,7 +545,7 @@ includes <a href="#Vocabulary-Syntax">Vocabulary_IRI</a> (as PREFIX)?
 
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
-description IRI with (# | /) as PREFIX {
+<span style="font-weight:bold;color:purple">description</span> IRI <span style="font-weight:bold;color:purple">with</span> (# | /) <span style="font-weight:bold;color:purple">as</span> PREFIX {
 	(<a href="#DescriptionExtension-Syntax">DescriptionExtension</a> | <a href="#DescriptionUsage-Syntax">DescriptionUsage</a>)*
 	(<a href="#ConceptInstance-Syntax">ConceptInstance</a> | <a href="#RelationInstance-Syntax">RelationInstance</a>)*
 }
@@ -511,14 +555,14 @@ description IRI with (# | /) as PREFIX {
 
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
-extends <a href="#Description-Syntax">Description_IRI</a> (as PREFIX)?
+<span style="font-weight:bold;color:purple">extends</span> <a href="#Description-Syntax">Description_IRI</a> (<span style="font-weight:bold;color:purple">as</span> PREFIX)?
 </pre>
 
 ### [=DescriptionUsage=] ### {#DescriptionUsage-Syntax}
 
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
-uses (<a href="#Vocabulary-Syntax">Vocabulary_IRI</a> | <a href="#VocabularyBundle-Syntax">VocabularyBundle_IRI</a>) (as PREFIX)?
+<span style="font-weight:bold;color:purple">uses</span> (<a href="#Vocabulary-Syntax">Vocabulary_IRI</a> | <a href="#VocabularyBundle-Syntax">VocabularyBundle_IRI</a>) (<span style="font-weight:bold;color:purple">as</span> PREFIX)?
 </pre>
 
 ### [=ConceptInstance=] ### {#ConceptInstance-Syntax}
@@ -527,7 +571,7 @@ Declaration
 
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
-ci ID (: <a href="#ConceptTypeAssertion-Syntax">ConceptTypeAssertion</a> (, <a href="#ConceptTypeAssertion-Syntax">ConceptTypeAssertion</a>)*)? ([
+<span style="font-weight:bold;color:purple">ci</span> ID (: <a href="#ConceptTypeAssertion-Syntax">ConceptTypeAssertion</a> (, <a href="#ConceptTypeAssertion-Syntax">ConceptTypeAssertion</a>)*)? ([
 	(<a href="#ScalarPropertyValueAssertion-Syntax">ScalarPropertyValueAssertion</a> | <a href="#StructuredPropertyValueAssertion-Syntax">StructuredPropertyValueAssertion</a> )*
 	(<a href="#LinkAssertion-Syntax">LinkAssertion</a>)*
 ])?
@@ -537,7 +581,7 @@ Reference
 
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
-ref ci <a href="#ConceptInstance-Syntax">ConceptInstance_IRI</a> (: ownedTypes+=ConceptTypeAssertion (, ownedTypes+=ConceptTypeAssertion)*)? ([
+<span style="font-weight:bold;color:purple">ref ci</span> <a href="#ConceptInstance-Syntax">ConceptInstance_IRI</a> (: ownedTypes+=ConceptTypeAssertion (, ownedTypes+=ConceptTypeAssertion)*)? ([
 	(<a href="#ScalarPropertyValueAssertion-Syntax">ScalarPropertyValueAssertion</a> | <a href="#StructuredPropertyValueAssertion-Syntax">StructuredPropertyValueAssertion</a> )*
 	(<a href="#LinkAssertion-Syntax">LinkAssertion</a>)*
 ])?
@@ -549,9 +593,9 @@ Declaration
 
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
-ri ID (: <a href="#RelationTypeAssertion-Syntax">RelationTypeAssertion</a> (, <a href="#RelationTypeAssertion-Syntax">RelationTypeAssertion</a>)*)? ([
-	from (<a href="#ConceptInstance-Syntax">ConceptInstance_IRI</a> | <a href="#RelationInstance-Syntax">RelationInstance_IRI</a>)
-	to (<a href="#ConceptInstance-Syntax">ConceptInstance_IRI</a> | <a href="#RelationInstance-Syntax">RelationInstance_IRI</a>)
+<span style="font-weight:bold;color:purple">ri</span> ID (: <a href="#RelationTypeAssertion-Syntax">RelationTypeAssertion</a> (, <a href="#RelationTypeAssertion-Syntax">RelationTypeAssertion</a>)*)? ([
+	<span style="font-weight:bold;color:purple">from</span> (<a href="#ConceptInstance-Syntax">ConceptInstance_IRI</a> | <a href="#RelationInstance-Syntax">RelationInstance_IRI</a>)
+	<span style="font-weight:bold;color:purple">to</span> (<a href="#ConceptInstance-Syntax">ConceptInstance_IRI</a> | <a href="#RelationInstance-Syntax">RelationInstance_IRI</a>)
 	(<a href="#ScalarPropertyValueAssertion-Syntax">ScalarPropertyValueAssertion</a> | <a href="#StructuredPropertyValueAssertion-Syntax">StructuredPropertyValueAssertion</a> )*
 	(<a href="#LinkAssertion-Syntax">LinkAssertion</a>)*
 ])?
@@ -561,7 +605,7 @@ Reference
 
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
-ref ri <a href="#RelationInstance-Syntax">RelationInstance_IRI</a> (: <a href="#RelationTypeAssertion-Syntax">RelationTypeAssertion</a> (, <a href="#RelationTypeAssertion-Syntax">RelationTypeAssertion</a>)*)? ([
+<span style="font-weight:bold;color:purple">ref ri</span> <a href="#RelationInstance-Syntax">RelationInstance_IRI</a> (: <a href="#RelationTypeAssertion-Syntax">RelationTypeAssertion</a> (, <a href="#RelationTypeAssertion-Syntax">RelationTypeAssertion</a>)*)? ([
 	(<a href="#ScalarPropertyValueAssertion-Syntax">ScalarPropertyValueAssertion</a> | <a href="#StructuredPropertyValueAssertion-Syntax">StructuredPropertyValueAssertion</a> )*
 	(<a href="#LinkAssertion-Syntax">LinkAssertion</a>)*
 ])?
@@ -617,7 +661,7 @@ ref ri <a href="#RelationInstance-Syntax">RelationInstance_IRI</a> (: <a href="#
 
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
-description bundle IRI with (# | /) as PREFIX {
+<span style="font-weight:bold;color:purple">description bundle</span> IRI <span style="font-weight:bold;color:purple">with</span> (# | /) <span style="font-weight:bold;color:purple">as</span> PREFIX {
 	(<a href="#DescriptionBundleExtension-Syntax">DescriptionBundleExtension</a> | <a href="#DescriptionBundleInclusion-Syntax">DescriptionBundleInclusion</a> | <a href="#DescriptionBundleUsage-Syntax">DescriptionBundleUsage</a>)*
 }
 </pre>
@@ -626,19 +670,19 @@ description bundle IRI with (# | /) as PREFIX {
 
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
-extends <a href="#DescriptionBundle-Syntax">DescriptionBundle_IRI</a> (as PREFIX)?
+<span style="font-weight:bold;color:purple">extends</span> <a href="#DescriptionBundle-Syntax">DescriptionBundle_IRI</a> (<span style="font-weight:bold;color:purple">as</span> PREFIX)?
 </pre>
 
 ### [=DescriptionBundleInclusion=] ### {#DescriptionBundleInclusion-Syntax}
 
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
-includes <a href="#Description-Syntax">Description_IRI</a> (as PREFIX)?
+<span style="font-weight:bold;color:purple">includes</span> <a href="#Description-Syntax">Description_IRI</a> (<span style="font-weight:bold;color:purple">as</span> PREFIX)?
 </pre>
 
 ### [=DescriptionBundleUsage=] ### {#DescriptionBundleUsage-Syntax}
 
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
-uses <a href="#VocabularyBundle-Syntax">VocabularyBundle_IRI</a> (as PREFIX)?
+<span style="font-weight:bold;color:purple">uses</span> <a href="#VocabularyBundle-Syntax">VocabularyBundle_IRI</a> (<span style="font-weight:bold;color:purple">as</span> PREFIX)?
 </pre>

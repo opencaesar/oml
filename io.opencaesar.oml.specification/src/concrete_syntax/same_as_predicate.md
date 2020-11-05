@@ -1,4 +1,4 @@
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
-sameAs (VAR1 , VAR2)
+<span style="font-weight:bold;color:purple">sameAs</span> (VAR1 , VAR2)
 </pre>

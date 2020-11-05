@@ -1,4 +1,4 @@
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
-differentFrom (VAR1 , VAR2)
+<span style="font-weight:bold;color:purple">differentFrom</span> (VAR1 , VAR2)
 </pre>
