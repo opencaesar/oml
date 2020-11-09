@@ -140,6 +140,22 @@ public class OmlOntologyDiagramView {
 		return n;
 	}
 
+	public OmlNode createSourceNode(final RelationEntity entity, final SModelElement to,
+							  final Iterable<KeyAxiom> keys) {
+		final OmlNode n = createMemberNode(entity, "R");
+		n.getChildren().add(newEdge(n, to, n.getId() + ".end", OmlDiagramModule.OmlEdge_RelationshipArrowEdgeView));
+		keys.forEach(key -> n.getChildren().add(createLabel(entity, key)));
+		return n;
+	}
+
+	public OmlNode createTargetNode(final RelationEntity entity, final SModelElement from,
+							  final Iterable<KeyAxiom> keys) {
+		final OmlNode n = createMemberNode(entity, "R");
+		n.getChildren().add(newEdge(from, n, n.getId() + ".start", OmlDiagramModule.OMlEdge_PolylineEdgeView));
+		keys.forEach(key -> n.getChildren().add(createLabel(entity, key)));
+		return n;
+	}
+
 	public OmlNode createNode(final Structure structure) {
 		final OmlNode n = createMemberNode(structure, "S");
 		return n;
