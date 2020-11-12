@@ -163,25 +163,49 @@ public class OmlDiagramViewGenerator extends OmlVisitor<SModelElement> implement
 		if (!isFrameExpanded())
 			return null;
 
-		final SModelElement s = semantic2diagram.get(entity);
-		if (null != s)
-			return s;
+		final SModelElement es = semantic2diagram.get(entity);
+		if (null != es)
+			return es;
 
-		final SModelElement source = doSwitch(entity.getSource());
-		final SModelElement target = doSwitch(entity.getTarget());
-		if (null != source && null != target) {
-			final Iterable<KeyAxiom> keys = Iterables.filter(view.scope.entityAxioms.get(entity), KeyAxiom.class);
-			if (view.scope.classifierHasFeaturesOrEdges(entity) || !IterableExtensions.isEmpty(keys)) {
-				final OmlNode node = view.createNode(entity, source, target, keys);
+		final Entity s = entity.getSource();
+		final Entity t = entity.getTarget();
+
+		final Iterable<KeyAxiom> keys = Iterables.filter(view.scope.entityAxioms.get(entity), KeyAxiom.class);
+
+		if (entity == s) {
+			final SModelElement ts = doSwitch(t);
+			if (null != ts) {
+				final OmlNode node = view.createSourceNode(entity, ts, keys);
 				frame.getChildren().add(node);
 				traceAndMark(node, entity, context);
 				addClassifierFeatures(entity, node);
 				return node;
-			} else {
-				final OmlEdge edge = view.createEdge(entity, source, target);
-				frame.getChildren().add(edge);
-				traceAndMark(edge, entity, context);
-				return edge;
+			}
+		} else if (entity == t) {
+			final SModelElement ss = doSwitch(s);
+			if (null != ss) {
+				final OmlNode node = view.createTargetNode(entity, ss, keys);
+				frame.getChildren().add(node);
+				traceAndMark(node, entity, context);
+				addClassifierFeatures(entity, node);
+				return node;
+			}
+		} else {
+			final SModelElement ss = doSwitch(s);
+			final SModelElement ts = doSwitch(t);
+			if (null != ss && null != ts) {
+				if (view.scope.classifierHasFeaturesOrEdges(entity) || !IterableExtensions.isEmpty(keys)) {
+					final OmlNode node = view.createNode(entity, ss, ts, keys);
+					frame.getChildren().add(node);
+					traceAndMark(node, entity, context);
+					addClassifierFeatures(entity, node);
+					return node;
+				} else {
+					final OmlEdge edge = view.createEdge(entity, ss, ts);
+					frame.getChildren().add(edge);
+					traceAndMark(edge, entity, context);
+					return edge;
+				}
 			}
 		}
 

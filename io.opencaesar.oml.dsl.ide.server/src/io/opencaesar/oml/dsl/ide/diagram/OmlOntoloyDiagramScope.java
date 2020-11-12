@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 
@@ -67,7 +68,7 @@ public class OmlOntoloyDiagramScope extends OmlVisitor<OmlOntoloyDiagramScope> {
 		this.secondPhase = new HashSet<>();
 	}
 
-	public boolean includes(final Element e) {
+	public boolean includes(final EObject e) {
 		if (e instanceof Aspect) {
 			return aspects.containsKey((Aspect) e);
 		} else if (e instanceof Concept) {
@@ -155,7 +156,7 @@ public class OmlOntoloyDiagramScope extends OmlVisitor<OmlOntoloyDiagramScope> {
 		if (!structuredProperties.containsKey(cls)) {
 			structuredProperties.put(cls, new HashSet<>());
 		}
-		Iterables.filter(OmlSearch.findAllSpecializedTerms(cls), Classifier.class).forEach(parent -> {
+		Iterables.filter(OmlSearch.findAllSpecializedTermsInclusive(cls), Classifier.class).forEach(parent -> {
 			OmlSearch.findFeaturePropertiesWithDomain(parent).forEach(f -> {
 				if (allImportedElements.contains(f)) {
 					allFeatureProperties.add(f);
@@ -173,7 +174,7 @@ public class OmlOntoloyDiagramScope extends OmlVisitor<OmlOntoloyDiagramScope> {
 	}
 
 	public void phase2ScanAllClassifierProperties(final Classifier cls) {
-		Iterables.filter(OmlSearch.findAllSpecializedTerms(cls), Classifier.class).forEach(parent -> {
+		Iterables.filter(OmlSearch.findAllSpecializedTermsInclusive(cls), Classifier.class).forEach(parent -> {
 			OmlIndex.findFeaturePropertiesWithDomain(parent).forEach(p -> {
 				if (allImportedElements.contains(p)) {
 					if (p instanceof ScalarProperty) {
@@ -259,6 +260,22 @@ public class OmlOntoloyDiagramScope extends OmlVisitor<OmlOntoloyDiagramScope> {
 				}
 			}
 		});
+	}
+
+	@Override
+	public OmlOntoloyDiagramScope doSwitch(EObject eObject) {
+		OmlOntoloyDiagramScope result = this;
+		switch (mode) {
+			case Phase1:
+				if (!includes(eObject)) {
+					result = super.doSwitch(eObject);
+				}
+				break;
+			case Phase2:
+				result = super.doSwitch(eObject);
+				break;
+		}
+		return result;
 	}
 
 	public OmlOntoloyDiagramScope caseAspect(final Aspect a) {
