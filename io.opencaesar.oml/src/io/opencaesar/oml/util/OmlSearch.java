@@ -31,6 +31,8 @@ import io.opencaesar.oml.AnnotatedElement;
 import io.opencaesar.oml.Annotation;
 import io.opencaesar.oml.AnnotationProperty;
 import io.opencaesar.oml.Aspect;
+import io.opencaesar.oml.Assertion;
+import io.opencaesar.oml.Axiom;
 import io.opencaesar.oml.Classifier;
 import io.opencaesar.oml.ClassifierReference;
 import io.opencaesar.oml.Concept;
@@ -77,6 +79,7 @@ import io.opencaesar.oml.SpecializationAxiom;
 import io.opencaesar.oml.Structure;
 import io.opencaesar.oml.StructureInstance;
 import io.opencaesar.oml.StructuredProperty;
+import io.opencaesar.oml.Term;
 import io.opencaesar.oml.TypeAssertion;
 import io.opencaesar.oml.Vocabulary;
 import io.opencaesar.oml.VocabularyBox;
@@ -346,6 +349,21 @@ public class OmlSearch extends OmlIndex {
 
 	// Term
 
+	public static List<Axiom> findAxioms(Term term) {
+		List<Axiom> axioms = new ArrayList<>();
+		if (term instanceof SpecializableTerm){
+			axioms.addAll(findSpecializationsWithSource(((SpecializableTerm)term)));
+		}
+		if (term instanceof Classifier) {
+			axioms.addAll(findPropertyRestrictions(((Classifier)term)));
+		}
+		if (term instanceof Entity) {
+			axioms.addAll(findRelationRestrictions(((Entity)term)));
+			axioms.addAll(findKeys(((Entity)term)));
+		}
+		return axioms;
+	}
+	
 	// SpecializableTerm
 
 	public static List<SpecializationAxiom> findSpecializationsWithSource(SpecializableTerm term) {
@@ -572,6 +590,20 @@ public class OmlSearch extends OmlIndex {
 		return findPropertyValuesByIri(instance, OmlRead.getIri(property));
 	}
 
+	public static List<Literal> findScalarPropertyValuesByAbbreviatedIri(Instance instance, String abbreviatedPropertyIri) {
+		return findPropertyValuesByAbbreviatedIri(instance, abbreviatedPropertyIri).stream().
+				filter(v -> v instanceof Literal).
+				map(v -> (Literal)v).
+				collect(Collectors.toList());
+	}
+
+	public static List<StructureInstance> findStructuredPropertyValuesByAbbreviatedIri(Instance instance, String abbreviatedPropertyIri) {
+		return findPropertyValuesByAbbreviatedIri(instance, abbreviatedPropertyIri).stream().
+				filter(v -> v instanceof StructureInstance).
+				map(v -> (StructureInstance)v).
+				collect(Collectors.toList());
+	}
+
 	public static boolean hasTypeIri(Instance instance, String typeIri) {
 		Member member = OmlRead.getMemberByIri(instance.eResource().getResourceSet(), typeIri);
 		assert member instanceof SpecializableTerm : typeIri+" is not compatoble with this instance";
@@ -593,6 +625,20 @@ public class OmlSearch extends OmlIndex {
 	public static boolean hasAbbreviatedTypeIri(Instance instance, String abbreviatedTypeIri) {
 		Member member = OmlRead.getMemberByAbbreviatedIri(instance.eResource().getResourceSet(), abbreviatedTypeIri);
 		return hasTypeIri(instance, OmlRead.getIri(member));
+	}
+
+	public static List<Assertion> findAssertions(Instance instance) {
+		List<Assertion> assertions = new ArrayList<>();
+		assertions.addAll(findPropertyValueAssertions(instance));
+		if (instance instanceof ConceptInstance) {
+			assertions.addAll(findTypeAssertions((ConceptInstance)instance));
+			assertions.addAll(findLinkAssertionsWithSource((ConceptInstance)instance));
+		}
+		if (instance instanceof RelationInstance) {
+			assertions.addAll(findTypeAssertions((RelationInstance)instance));
+			assertions.addAll(findLinkAssertionsWithSource((RelationInstance)instance));
+		}
+		return assertions;
 	}
 
 	// StructureInstance

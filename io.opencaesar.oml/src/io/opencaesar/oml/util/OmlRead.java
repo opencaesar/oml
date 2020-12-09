@@ -51,6 +51,7 @@ import io.opencaesar.oml.Assertion;
 import io.opencaesar.oml.Axiom;
 import io.opencaesar.oml.BooleanLiteral;
 import io.opencaesar.oml.Classifier;
+import io.opencaesar.oml.ClassifierReference;
 import io.opencaesar.oml.ConceptInstance;
 import io.opencaesar.oml.ConceptInstanceReference;
 import io.opencaesar.oml.ConceptReference;
@@ -70,6 +71,7 @@ import io.opencaesar.oml.DescriptionUsage;
 import io.opencaesar.oml.DoubleLiteral;
 import io.opencaesar.oml.Element;
 import io.opencaesar.oml.Entity;
+import io.opencaesar.oml.EntityReference;
 import io.opencaesar.oml.EnumeratedScalarReference;
 import io.opencaesar.oml.FacetedScalarReference;
 import io.opencaesar.oml.FeatureProperty;
@@ -85,6 +87,7 @@ import io.opencaesar.oml.LinkAssertion;
 import io.opencaesar.oml.Literal;
 import io.opencaesar.oml.Member;
 import io.opencaesar.oml.NamedInstance;
+import io.opencaesar.oml.NamedInstanceReference;
 import io.opencaesar.oml.Ontology;
 import io.opencaesar.oml.Property;
 import io.opencaesar.oml.PropertyRestrictionAxiom;
@@ -690,13 +693,26 @@ public class OmlRead {
 	}
 
 	// Term
-
+	
 	// SpecializableTerm
 
 	public static List<SpecializableTerm> getSpecializedTerms(SpecializableTerm term) {
 		return term.getOwnedSpecializations().stream().
 			map(i -> i.getSpecializedTerm()).
 			collect(Collectors.toList());
+	}
+
+	public static List<Axiom> getAxioms(SpecializableTerm term) {
+		List<Axiom> axioms = new ArrayList<>();
+		axioms.addAll(((SpecializableTerm)term).getOwnedSpecializations());
+		if (term instanceof Classifier) {
+			axioms.addAll(((Classifier)term).getOwnedPropertyRestrictions());
+		}
+		if (term instanceof Entity) {
+			axioms.addAll(((Entity)term).getOwnedRelationRestrictions());			
+			axioms.addAll(((Entity)term).getOwnedKeys());			
+		}
+		return axioms;
 	}
 
 	// Type
@@ -808,6 +824,20 @@ public class OmlRead {
 
 	// Instance
 
+	public static List<Assertion> getAssertions(Instance instance) {
+		List<Assertion> assertions = new ArrayList<>();
+		assertions.addAll(instance.getOwnedPropertyValues());
+		if (instance instanceof ConceptInstance) {
+			assertions.addAll(((ConceptInstance)instance).getOwnedTypes());
+			assertions.addAll(((ConceptInstance)instance).getOwnedLinks());
+		}
+		if (instance instanceof RelationInstance) {
+			assertions.addAll(((RelationInstance)instance).getOwnedTypes());
+			assertions.addAll(((RelationInstance)instance).getOwnedLinks());
+		}
+		return assertions;
+	}
+
 	// StructureInstance
 		
 	// NamedInstance
@@ -877,6 +907,19 @@ public class OmlRead {
 			collect(Collectors.toList());
 	}
 
+	public static List<Axiom> getAxioms(SpecializableTermReference reference) {
+		List<Axiom> axioms = new ArrayList<>();
+		axioms.addAll((reference).getOwnedSpecializations());
+		if (reference instanceof ClassifierReference) {
+			axioms.addAll(((ClassifierReference)reference).getOwnedPropertyRestrictions());
+		}
+		if (reference instanceof EntityReference) {
+			axioms.addAll(((EntityReference)reference).getOwnedRelationRestrictions());			
+			axioms.addAll(((EntityReference)reference).getOwnedKeys());			
+		}
+		return axioms;
+	}
+
 	// EntityReference
 	
 	// AspectReference
@@ -904,6 +947,20 @@ public class OmlRead {
 	// RuleReference
 
 	// NamedInstanceReference
+
+	public static List<Assertion> getAssertions(NamedInstanceReference reference) {
+		List<Assertion> assertions = new ArrayList<>();
+		assertions.addAll(reference.getOwnedPropertyValues());
+		if (reference instanceof ConceptInstanceReference) {
+			assertions.addAll(((ConceptInstanceReference)reference).getOwnedTypes());
+			assertions.addAll(((ConceptInstanceReference)reference).getOwnedLinks());
+		}
+		if (reference instanceof RelationInstanceReference) {
+			assertions.addAll(((RelationInstanceReference)reference).getOwnedTypes());
+			assertions.addAll(((RelationInstanceReference)reference).getOwnedLinks());
+		}
+		return assertions;
+	}
 
 	// ConceptInstanceReference
 	
