@@ -72,6 +72,8 @@ public class OmlDiagramViewGenerator extends OmlVisitor<SModelElement> implement
 
 	private Map<Element, SModelElement> semantic2diagram;
 
+	private OmlOntoloyDiagramScope scope;
+	
 	public SModelRoot generate(final IDiagramGenerator.Context context) {
 		try {
 			this.context = context;
@@ -85,10 +87,12 @@ public class OmlDiagramViewGenerator extends OmlVisitor<SModelElement> implement
 
 			this.frame = (OmlNode) doSwitch(ontology);
 
-			this.view.scope.scope().forEach(e -> doSwitch(e));
-			this.view.scope.entityAxioms.forEach((e, axs) -> {
+			this.scope = new OmlOntoloyDiagramScope(ontology).analyze();
+			this.scope.scope().forEach(e -> doSwitch(e));
+			this.scope.entityAxioms.forEach((e, axs) -> {
 				axs.forEach(ax -> showAxiom(e, ax));
 			});
+			
 			return this.graph;
 		} catch (final Throwable t) {
 			if (t instanceof Exception) {
@@ -116,15 +120,31 @@ public class OmlDiagramViewGenerator extends OmlVisitor<SModelElement> implement
 		final OmlNode node = view.createNode(o);
 		graph.getChildren().add(node);
 		traceAndMark(node, o, context);
-		if (Objects.equal(context.getState().getCurrentModel().getType(), "NONE")) {
+		
+		if ("NONE".equals(context.getState().getCurrentModel().getType())) {
 			context.getState().getExpandedElements().add(node.getId());
 		}
 		node.setExpanded(context.getState().getExpandedElements().contains(node.getId()));
 
-		// This will transitively show all imports since caseImport() below visits the
-		// imported ontology.
-		OmlRead.getImportsWithSource(o).forEach(i -> doSwitch(i));
+		// This will transitively show all imports since caseImport() below visits the imported ontology.
+		//OmlRead.getImportsWithSource(o).forEach(i -> doSwitch(i));
+		
 		return node;
+	}
+
+	public SModelElement caseImport(final Import i) {
+		final Ontology importingOntology = OmlRead.getImportingOntology(i);
+		final Ontology importedOntology = OmlRead.getImportedOntology(i);
+		if (null != importingOntology && null != importedOntology && !view.isDiagramVocabulary(importedOntology)) {
+			final OmlNode importingNode = (OmlNode) doSwitch(importingOntology);
+			final OmlNode importedNode = (OmlNode) doSwitch(importedOntology);
+			if (null != importingNode && null != importedNode) {
+				final OmlEdge edge = view.createEdge(i, importingNode, importedNode);
+				graph.getChildren().add(edge);
+				return edge;
+			}
+		}
+		return null;
 	}
 
 	public SModelElement caseAspect(final Aspect aspect) {
@@ -136,7 +156,7 @@ public class OmlDiagramViewGenerator extends OmlVisitor<SModelElement> implement
 			return s;
 
 		final OmlNode node = view.createNode(aspect,
-				Iterables.filter(view.scope.entityAxioms.get(aspect), KeyAxiom.class));
+				Iterables.filter(scope.entityAxioms.get(aspect), KeyAxiom.class));
 		frame.getChildren().add(node);
 		traceAndMark(node, aspect, context);
 		addClassifierFeatures(aspect, node);
@@ -152,7 +172,7 @@ public class OmlDiagramViewGenerator extends OmlVisitor<SModelElement> implement
 			return s;
 
 		final OmlNode node = view.createNode(concept,
-				Iterables.filter(view.scope.entityAxioms.get(concept), KeyAxiom.class));
+				Iterables.filter(scope.entityAxioms.get(concept), KeyAxiom.class));
 		frame.getChildren().add(node);
 		traceAndMark(node, concept, context);
 		addClassifierFeatures(concept, node);
@@ -170,7 +190,7 @@ public class OmlDiagramViewGenerator extends OmlVisitor<SModelElement> implement
 		final Entity s = entity.getSource();
 		final Entity t = entity.getTarget();
 
-		final Iterable<KeyAxiom> keys = Iterables.filter(view.scope.entityAxioms.get(entity), KeyAxiom.class);
+		final Iterable<KeyAxiom> keys = Iterables.filter(scope.entityAxioms.get(entity), KeyAxiom.class);
 
 		if (entity == s) {
 			final SModelElement ts = doSwitch(t);
@@ -194,7 +214,7 @@ public class OmlDiagramViewGenerator extends OmlVisitor<SModelElement> implement
 			final SModelElement ss = doSwitch(s);
 			final SModelElement ts = doSwitch(t);
 			if (null != ss && null != ts) {
-				if (view.scope.classifierHasFeaturesOrEdges(entity) || !IterableExtensions.isEmpty(keys)) {
+				if (scope.classifierHasFeaturesOrEdges(entity) || !IterableExtensions.isEmpty(keys)) {
 					final OmlNode node = view.createNode(entity, ss, ts, keys);
 					frame.getChildren().add(node);
 					traceAndMark(node, entity, context);
@@ -289,7 +309,7 @@ public class OmlDiagramViewGenerator extends OmlVisitor<SModelElement> implement
 			final SModelElement source = doSwitch(ri.getSources().get(0));
 			final SModelElement target = doSwitch(ri.getTargets().get(0));
 			if (null != source && null != target) {
-				if (!view.scope.instanceAssertions.get(ri).isEmpty()) {
+				if (!scope.instanceAssertions.get(ri).isEmpty()) {
 					final OmlNode node = view.createNode(ri, source, target);
 					frame.getChildren().add(node);
 					traceAndMark(node, ri, context);
@@ -301,21 +321,6 @@ public class OmlDiagramViewGenerator extends OmlVisitor<SModelElement> implement
 					traceAndMark(edge, ri, context);
 					return edge;
 				}
-			}
-		}
-		return null;
-	}
-
-	public SModelElement caseImport(final Import i) {
-		final Ontology importingOntology = OmlRead.getImportingOntology(i);
-		final Ontology importedOntology = OmlRead.getImportedOntology(i);
-		if (null != importingOntology && null != importedOntology && !view.isDiagramVocabulary(importedOntology)) {
-			final OmlNode importingNode = (OmlNode) doSwitch(importingOntology);
-			final OmlNode importedNode = (OmlNode) doSwitch(importedOntology);
-			if (null != importingNode && null != importedNode) {
-				final OmlEdge edge = view.createEdge(i, importingNode, importedNode);
-				graph.getChildren().add(edge);
-				return edge;
 			}
 		}
 		return null;
@@ -455,7 +460,7 @@ public class OmlDiagramViewGenerator extends OmlVisitor<SModelElement> implement
 	}
 
 	public void addClassifierFeatures(final Classifier cls, final OmlNode node) {
-		view.scope.scalarProperties.get(cls).forEach(f -> {
+		scope.scalarProperties.get(cls).forEach(f -> {
 			if (null == semantic2diagram.get(f)) {
 				OmlCompartment compartment = view.getPropertyCompartment(node);
 				if (null == compartment) {
@@ -467,7 +472,7 @@ public class OmlDiagramViewGenerator extends OmlVisitor<SModelElement> implement
 				traceAndMark(label, f, context);
 			}
 		});
-		view.scope.structuredProperties.get(cls).forEach(f -> {
+		scope.structuredProperties.get(cls).forEach(f -> {
 			if (null == semantic2diagram.get(f)) {
 				final SModelElement source = doSwitch(cls);
 				final SModelElement target = doSwitch(f.getRange());
@@ -479,7 +484,7 @@ public class OmlDiagramViewGenerator extends OmlVisitor<SModelElement> implement
 	}
 
 	public void addInstanceFeatures(final NamedInstance i, final OmlNode node) {
-		view.scope.instanceAssertions.get(i).forEach(a -> {
+		scope.instanceAssertions.get(i).forEach(a -> {
 			if (a instanceof ScalarPropertyValueAssertion) {
 				if (null == semantic2diagram.get(a)) {
 					ScalarPropertyValueAssertion ax = (ScalarPropertyValueAssertion) a;

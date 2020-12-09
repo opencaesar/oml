@@ -61,13 +61,11 @@ public class OmlOntologyDiagramView {
 	final Ontology ontology;
 	final IdCache<EObject> idCache;
 	final Map<EObject, Iterable<Annotation>> semantic2diagramAnnotations;
-	final OmlOntoloyDiagramScope scope;
 
 	public OmlOntologyDiagramView(final Ontology ontology, final IdCache<EObject> idCache) {
 		this.ontology = ontology;
 		this.idCache = idCache;
 		this.semantic2diagramAnnotations = new HashMap<>();
-		this.scope = new OmlOntoloyDiagramScope(ontology).analyze();
 	}
 
 	// GRAPHS
