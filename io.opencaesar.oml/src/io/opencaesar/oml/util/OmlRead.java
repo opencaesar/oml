@@ -359,9 +359,9 @@ public class OmlRead {
 
 	public static List<Statement> getStatements(Ontology ontology) {
 		if (ontology instanceof Vocabulary) {
-			return getStatements((Vocabulary)ontology);
+			return new ArrayList<>(((Vocabulary)ontology).getOwnedStatements());
 		} else if (ontology instanceof Description) {
-			return getStatements((Description)ontology);
+			return new ArrayList<>(((Description)ontology).getOwnedStatements());
 		}
 		return Collections.emptyList();
 	}
@@ -522,10 +522,6 @@ public class OmlRead {
 			collect(Collectors.toList());
 	}
 
-	public static List<Statement> getStatements(Vocabulary ontology) {
-		return new ArrayList<>(ontology.getOwnedStatements());
-	}
-
 	public static List<Member> getMembers(Vocabulary ontology) {
 		return ontology.getOwnedStatements().stream().flatMap(s -> {
 			final ArrayList<Member> ms = new ArrayList<>();
@@ -618,10 +614,6 @@ public class OmlRead {
 			collect(Collectors.toList());
 	}
 
-	public static List<Statement> getStatements(Description ontology) {
-		return new ArrayList<>(ontology.getOwnedStatements());
-	}
-
 	// DescriptionBundle
 
 	public static List<Import> getImportsWithSource(DescriptionBundle ontology) {
@@ -696,10 +688,18 @@ public class OmlRead {
 	
 	// SpecializableTerm
 
-	public static List<SpecializableTerm> getSpecializedTerms(SpecializableTerm term) {
+	public static List<SpecializableTerm> getGeneralTerms(SpecializableTerm term) {
 		return term.getOwnedSpecializations().stream().
-			map(i -> i.getSpecializedTerm()).
-			collect(Collectors.toList());
+				map(i -> i.getSpecializedTerm()).
+				collect(Collectors.toList());
+	}
+	
+	/*
+	 * @Deprecated use {@link OmlRead#getGeneralTerms(SpecializableTerm)} instead 
+	 */
+	@Deprecated(since = "0.8.3", forRemoval = true)
+	public static List<SpecializableTerm> getSpecializedTerms(SpecializableTerm term) {
+		return getGeneralTerms(term);
 	}
 
 	public static List<Axiom> getAxioms(SpecializableTerm term) {
@@ -781,14 +781,22 @@ public class OmlRead {
 
 	// Scalar
 		
-	public static Scalar getSpecializedScalar(Scalar scalar) {
+	public static Scalar getGeneralScalar(Scalar scalar) {
 		// scalars can have a max of one specialized term
-		return getSpecializedTerms(scalar).stream().
+		return getGeneralTerms(scalar).stream().
 			filter(i -> i instanceof Scalar).
 			map(i -> (Scalar)i).
 			findFirst().orElse(null);
 	}
 
+	/*
+	 * @Deprecated use {@link OmlRead#getGeneralScalar(Scalar)} instead 
+	 */
+	@Deprecated(since = "0.8.3", forRemoval = true)
+	public static Scalar getSpecializedScalar(Scalar scalar) {
+		return getGeneralScalar(scalar);
+	}
+	
 	// FacetedScalar
 		
 	// EnumeratedScalar
@@ -901,10 +909,18 @@ public class OmlRead {
 
 	// SpecializableTermReference
 	
-	public static List<SpecializableTerm> getSpecializedTerms(SpecializableTermReference reference) {
+	public static List<SpecializableTerm> getGeneralTerms(SpecializableTermReference reference) {
 		return reference.getOwnedSpecializations().stream().
-			map(s -> s.getSpecializedTerm()).
-			collect(Collectors.toList());
+				map(s -> s.getSpecializedTerm()).
+				collect(Collectors.toList());
+	}
+	
+	/*
+	 * @Deprecated use {@link OmlRead#getGeneralTerms(SpecializableTermReference)} instead 
+	 */
+	@Deprecated(since = "0.8.3", forRemoval = true)
+	public static List<SpecializableTerm> getSpecializedTerms(SpecializableTermReference reference) {
+		return getGeneralTerms(reference);
 	}
 
 	public static List<Axiom> getAxioms(SpecializableTermReference reference) {
@@ -1241,22 +1257,13 @@ public class OmlRead {
 
 	// Axiom
 
-	public static Classifier getRestrictingType(final Axiom axiom) {
-		if (axiom instanceof PropertyRestrictionAxiom) {
-			return getRestrictingType((PropertyRestrictionAxiom) axiom);
-		} else if (axiom instanceof RelationRestrictionAxiom) {
-			return getRestrictingType((RelationRestrictionAxiom) axiom);
-		} else if (axiom instanceof KeyAxiom) {
-			return getRestrictingType((KeyAxiom) axiom);
-		} else if (axiom instanceof RestrictionAxiom) {
-			return getRestrictingType((RestrictionAxiom) axiom);
-		}
-		return null;
-	}
-
 	// SpecializationAxiom
 
-	public static SpecializableTerm getSpecializingTerm(SpecializationAxiom axiom) {
+	public static SpecializableTerm getGeneralTerm(SpecializationAxiom axiom) {
+		return axiom.getSpecializedTerm();
+	}
+
+	public static SpecializableTerm getSpecificTerm(SpecializationAxiom axiom) {
 		if (axiom.getOwningReference() != null) {
 			return (SpecializableTerm) resolve(axiom.getOwningReference());
 		} else {
@@ -1264,33 +1271,47 @@ public class OmlRead {
 		}
 	}
 	
+	/*
+	 * @Deprecated use {@link OmlRead#getSpecificTerm(SpecializationAxiom)} instead 
+	 */
+	@Deprecated(since = "0.8.3", forRemoval = true)
+	public static SpecializableTerm getSpecializingTerm(SpecializationAxiom axiom) {
+		return getSpecificTerm(axiom);
+	}
+	
 	// RestrictionAxiom
 
-	public static Classifier getRestrictingType(RestrictionAxiom axiom) {
-		if (axiom instanceof KeyAxiom) {
-			return getRestrictingType((KeyAxiom) axiom);
-		} else if (axiom instanceof PropertyRestrictionAxiom) {
-			return getRestrictingType((PropertyRestrictionAxiom) axiom);
+	public static Classifier getRestrictingClassifier(RestrictionAxiom axiom) {
+		if (axiom instanceof PropertyRestrictionAxiom) {
+			return getRestrictingClassifier((PropertyRestrictionAxiom) axiom);
 		} else if (axiom instanceof RelationRestrictionAxiom) {
-			return getRestrictingType((RelationRestrictionAxiom) axiom);
+			return getRestrictingEntity((RelationRestrictionAxiom) axiom);
 		} 
 		return null;
 	}
-			
+
+	/*
+	 * @Deprecated use {@link OmlReadh#getRestrictingClassifier(RestrictionAxiom)} instead 
+	 */
+	@Deprecated(since = "0.8.3", forRemoval = true)
+	public static Classifier getRestrictingType(RestrictionAxiom axiom) {
+		return getRestrictingClassifier(axiom);
+	}
+	
 	public static Term getRestrictedTerm(RestrictionAxiom axiom) {
 		if (axiom instanceof RelationRestrictionAxiom) {
-			return getRestrictedTerm((RelationRestrictionAxiom) axiom);
+			return getRestrictedRelation((RelationRestrictionAxiom) axiom);
 		} else if (axiom instanceof ScalarPropertyRestrictionAxiom) {
-			return getRestrictedTerm((ScalarPropertyRestrictionAxiom) axiom);
+			return getRestrictedScalarProperty((ScalarPropertyRestrictionAxiom) axiom);
 		} else if (axiom instanceof StructuredPropertyRestrictionAxiom) {
-			return getRestrictedTerm((StructuredPropertyRestrictionAxiom) axiom);
+			return getRestrictedStructuredProperty((StructuredPropertyRestrictionAxiom) axiom);
 		}
 		return null;
 	}
 
 	// PropertyRestrictionAxiom
 
-	public static Classifier getRestrictingType(PropertyRestrictionAxiom axiom) {
+	public static Classifier getRestrictingClassifier(PropertyRestrictionAxiom axiom) {
 		if (axiom.getOwningReference() != null) {
 			return (Classifier) resolve(axiom.getOwningReference());
 		} else {
@@ -1298,9 +1319,17 @@ public class OmlRead {
 		}
 	}
 
+	/*
+	 * @Deprecated use {@link OmlReadh#getRestrictingClassifier(PropertyRestrictionAxiom)} instead 
+	 */
+	@Deprecated(since = "0.8.3", forRemoval = true)
+	public static Classifier getRestrictingType(PropertyRestrictionAxiom axiom) {
+		return getRestrictingClassifier(axiom);
+	}
+
 	// ScalarPropertyRestrictionAxiom
 
-	public static Term getRestrictedTerm(ScalarPropertyRestrictionAxiom axiom) {
+	public static ScalarProperty getRestrictedScalarProperty(ScalarPropertyRestrictionAxiom axiom) {
 		return axiom.getProperty();
 	}
 
@@ -1312,7 +1341,7 @@ public class OmlRead {
 	
 	// StructuredPropertyRestrictionAxiom
 		
-	public static Term getRestrictedTerm(StructuredPropertyRestrictionAxiom axiom) {
+	public static StructuredProperty getRestrictedStructuredProperty(StructuredPropertyRestrictionAxiom axiom) {
 		return axiom.getProperty();
 	}
 
@@ -1324,20 +1353,24 @@ public class OmlRead {
 	
 	// RelationRestrictionAxiom
 
-	public static Term getRestrictedTerm(RelationRestrictionAxiom axiom) {
+	public static Relation getRestrictedRelation(RelationRestrictionAxiom axiom) {
 		return axiom.getRelation();
 	}
 	
-	public static Classifier getRestrictingType(RelationRestrictionAxiom axiom) {
-		return getRestrictingEntity(axiom);
-	}
-
 	public static Entity getRestrictingEntity(RelationRestrictionAxiom axiom) {
 		if (axiom.getOwningReference() != null) {
 			return (Entity) resolve(axiom.getOwningReference());
 		} else {
 			return axiom.getOwningEntity();
 		}
+	}
+
+	/*
+	 * @Deprecated use {@link OmlReadh#getRestrictingEntity(RelationRestrictionAxiom)} instead 
+	 */
+	@Deprecated(since = "0.8.3", forRemoval = true)
+	public static Classifier getRestrictingType(RelationRestrictionAxiom axiom) {
+		return getRestrictingEntity(axiom);
 	}
 
 	// RelationRangeRestrictionAxiom
@@ -1356,29 +1389,33 @@ public class OmlRead {
 		}
 	}
 
-	public static Classifier getRestrictingType(KeyAxiom axiom) {
-		return getRestrictingEntity(axiom);
+	/*
+	 * @Deprecated use {@link OmlRead#getKeyedEntity(KeyAxiom)} instead 
+	 */
+	@Deprecated(since = "0.8.3", forRemoval = true)
+	public static Entity getRestrictingEntity(KeyAxiom axiom) {
+		return getKeyedEntity(axiom);
 	}
 
-	public static Entity getRestrictingEntity(KeyAxiom axiom) {
-		if (axiom.getOwningReference() != null) {
-			return (Entity) resolve(axiom.getOwningReference());
-		} else {
-			return axiom.getOwningEntity();
-		}
+	/*
+	 * @Deprecated use {@link OmlRead#getKeyedEntity(KeyAxiom)} instead 
+	 */
+	@Deprecated(since = "0.8.3", forRemoval = true)
+	public static Classifier getRestrictingType(KeyAxiom axiom) {
+		return getKeyedEntity(axiom);
 	}
 
 	// Assertion
 	
 	public static Instance getInstance(Assertion assertion) {
 		if (assertion instanceof ConceptTypeAssertion) {
-			return getInstance((ConceptTypeAssertion) assertion);
+			return getConceptInstance((ConceptTypeAssertion) assertion);
+		} else if (assertion instanceof RelationTypeAssertion) {
+			return getRelationInstance((RelationTypeAssertion) assertion);
 		} else if (assertion instanceof LinkAssertion) {
-			return getInstance((LinkAssertion) assertion);
+			return getNamedInstance((LinkAssertion) assertion);
 		} else if (assertion instanceof PropertyValueAssertion) {
 			return getInstance((PropertyValueAssertion) assertion);
-		} else if (assertion instanceof RelationTypeAssertion) {
-			return getInstance((RelationTypeAssertion) assertion);
 		}
 		return null;
 	}
@@ -1387,23 +1424,15 @@ public class OmlRead {
 
 	public static Entity getType(TypeAssertion assertion) {
 		if (assertion instanceof ConceptTypeAssertion) {
-			return getType((ConceptTypeAssertion) assertion);
+			return ((ConceptTypeAssertion) assertion).getType();
 		} else if (assertion instanceof RelationTypeAssertion) {
-			return getType((RelationTypeAssertion) assertion);
+			return ((RelationTypeAssertion) assertion).getType();
 		}
 		return null;
 	}
 
 	// ConceptTypeAssertion
 	
-	public static Entity getType(ConceptTypeAssertion assertion) {
-		return assertion.getType();
-	}
-
-	public static Instance getInstance(ConceptTypeAssertion assertion) {
-		return getConceptInstance(assertion);
-	}
-
 	public static ConceptInstance getConceptInstance(ConceptTypeAssertion assertion) {
 		if (assertion.getOwningReference() != null) {
 			return (ConceptInstance) resolve(assertion.getOwningReference());
@@ -1414,14 +1443,6 @@ public class OmlRead {
 
 	// RelationTypeAssertion
 
-	public static Entity getType(RelationTypeAssertion assertion) {
-		return assertion.getType();
-	}
-
-	public static Instance getInstance(RelationTypeAssertion assertion) {
-		return getRelationInstance(assertion);
-	}
-	
 	public static RelationInstance getRelationInstance(RelationTypeAssertion assertion) {
 		if (assertion.getOwningReference() != null) {
 			return (RelationInstance) resolve(assertion.getOwningReference());
@@ -1468,10 +1489,6 @@ public class OmlRead {
 		return (NamedInstance) getInstance(assertion);
 	}
 
-	public static Instance getInstance(LinkAssertion assertion) {
-		return getNamedInstance(assertion);
-	}
-	
 	public static NamedInstance getNamedInstance(LinkAssertion assertion) {
 		if (assertion.getOwningReference() != null) {
 			return (NamedInstance) resolve(assertion.getOwningReference());

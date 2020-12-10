@@ -156,7 +156,9 @@ public class OmlWriter {
 	@SuppressWarnings("unchecked")
 	public void setReference(Ontology ontology, Element subject, EReference ref, String objectIri) {
 		final Class<? extends IdentifiedElement> objectClass = (Class<? extends IdentifiedElement>) ref.getEType().getInstanceClass();
-		assert (!ref.isContainment() && objectClass.isAssignableFrom(IdentifiedElement.class)) && !ref.isMany() : "Illegal arguments for this API";
+		assert !ref.isContainment() : ref.getName()+" is a containment reference";
+		assert !ref.isMany() : ref.getName()+" is a collection reference";
+		assert IdentifiedElement.class.isAssignableFrom(objectClass) : ref.getName()+" is not typed by an identified element";
 		if (objectIri != null) {
 			defer.add(() -> subject.eSet(ref, resolve(objectClass, ontology, objectIri)));
 		}
@@ -165,23 +167,28 @@ public class OmlWriter {
 	@SuppressWarnings("unchecked")
 	public void setReferences(Ontology ontology, Element subject, EReference ref, Collection<String> objectIris) {
 		final Class<? extends IdentifiedElement> objectClass = (Class<? extends IdentifiedElement>) ref.getEType().getInstanceClass();
-		assert (!ref.isContainment() && objectClass.isAssignableFrom(IdentifiedElement.class)) && ref.isMany(): "Illegal arguments for this API";
+		assert !ref.isContainment() : ref.getName()+" is a containment reference";
+		assert ref.isMany() : ref.getName()+" is a singular reference";
+		assert IdentifiedElement.class.isAssignableFrom(objectClass) : ref.getName()+" is not typed by an identified element";
 		if (objectIris.iterator().hasNext()) {
 			defer.add(() -> subject.eSet(ref, objectIris.stream().map(objectIri -> resolve(objectClass, ontology, objectIri)).collect(Collectors.toList())));
 		}
 	}
 
 	@SuppressWarnings("unchecked")
-	protected void addContained(Ontology ontology, String memberIri, EReference memberRef, EReference refRef, Element object) {
+	protected void addContained(Ontology ontology, String subjectIri, EReference memberRef, EReference referenceRef, Element object) {
 		final Class<? extends Element> objectClass = (Class<? extends Element>) memberRef.getEType().getInstanceClass();
-		assert (memberRef.isContainment() && refRef.isContainment() && objectClass.isInstance(object) && memberRef.getEType() == refRef.getEType()): "Illegal arguments for this API";
-		if (memberIri != null) {
+		assert memberRef.isContainment() : memberRef.getName()+" is not a containment reference";
+		assert referenceRef.isContainment() : referenceRef.getName()+" is not a containment reference";
+		assert objectClass.isInstance(object) : object+" is not an instance of "+objectClass.getName();
+		assert memberRef.getEType() == referenceRef.getEType() : memberRef.getName()+" does not have the same type as "+referenceRef.getName();
+		if (subjectIri != null) {
 			defer.add(() -> {
-				final Member member = resolve(Member.class, ontology, memberIri);
+				final Member member = resolve(Member.class, ontology, subjectIri);
 				if (OmlRead.getOntology(member) == ontology) {
 					((List<Element>)member.eGet(memberRef)).add(object);
 				} else {
-					((List<Element>)getOrAddReference(ontology, member).eGet(refRef)).add(object);
+					((List<Element>)getOrAddReference(ontology, member).eGet(referenceRef)).add(object);
 				}
 			});
 		}

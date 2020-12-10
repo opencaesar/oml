@@ -194,7 +194,7 @@ public class OmlOntoloyDiagramScope {
 		if (!structuredProperties.containsKey(cls)) {
 			structuredProperties.put(cls, new HashSet<>());
 		}
-		Iterables.filter(OmlSearch.findAllSpecializedTermsInclusive(cls), Classifier.class).forEach(parent -> {
+		Iterables.filter(OmlSearch.findAllGeneralTermsInclusive(cls), Classifier.class).forEach(parent -> {
 			OmlSearch.findFeaturePropertiesWithDomain(parent).forEach(f -> {
 				if (allImportedElements.contains(f)) {
 					allFeatureProperties.add(f);
@@ -212,7 +212,7 @@ public class OmlOntoloyDiagramScope {
 	}
 
 	private void phase2ScanAllClassifierProperties(final Classifier cls) {
-		Iterables.filter(OmlSearch.findAllSpecializedTermsInclusive(cls), Classifier.class).forEach(parent -> {
+		Iterables.filter(OmlSearch.findAllGeneralTermsInclusive(cls), Classifier.class).forEach(parent -> {
 			OmlIndex.findFeaturePropertiesWithDomain(parent).forEach(p -> {
 				if (allImportedElements.contains(p)) {
 					if (p instanceof ScalarProperty) {
@@ -241,7 +241,7 @@ public class OmlOntoloyDiagramScope {
 				others.add(ax);
 			}
 		});
-		OmlSearch.findSpecializationsWithSource(e).forEach(ax -> {
+		OmlSearch.findSpecializationAxiomsWithSpecificTerm(e).forEach(ax -> {
 			if (allImportedElements.contains(ax)) {
 				others.add(ax);
 			}
@@ -371,7 +371,7 @@ public class OmlOntoloyDiagramScope {
 				phase1ScanEntityAxioms(e, others);
 				doSwitch(e.getSource());
 				doSwitch(e.getTarget());
-				OmlSearch.findSpecializationsWithTarget(e).forEach(ax -> {
+				OmlSearch.findSpecializationAxiomsWithGeneralTerm(e).forEach(ax -> {
 					if (allImportedElements.contains(ax)) {
 						incident.add(ax);
 					}

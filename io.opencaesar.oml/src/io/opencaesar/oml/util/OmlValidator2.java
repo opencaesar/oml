@@ -217,12 +217,12 @@ public class OmlValidator2 {
 	// RelationRestrictionAxiom
 	
 	protected boolean checkRelationRestrictionAxiomRelation(RelationRestrictionAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		final Classifier restrictingType = OmlRead.getRestrictingType(object);
+		final Classifier restrictingClassifier = OmlRead.getRestrictingClassifier(object);
 		final Entity domainType = object.getRelation().getDomain();
-		final Collection<SpecializableTerm> allSpecializedTerms = OmlRead.reflexiveClosure(restrictingType, t -> OmlSearch.findSpecializedTerms(t));
-		if (!allSpecializedTerms.stream().filter(t -> t == domainType).findAny().isPresent()) {
+		final Collection<SpecializableTerm> allGeneralTerms = OmlRead.reflexiveClosure(restrictingClassifier, t -> OmlSearch.findGeneralTerms(t));
+		if (!allGeneralTerms.stream().filter(t -> t == domainType).findAny().isPresent()) {
 			return report(Diagnostic.ERROR, diagnostics, object,
-				"Relation "+OmlRead.getAbbreviatedIri(object.getRelation())+" cannot be restricted in the context of "+OmlRead.getAbbreviatedIri(OmlRead.getRestrictingType(object))+"", 
+				"Relation "+OmlRead.getAbbreviatedIri(object.getRelation())+" cannot be restricted in the context of "+OmlRead.getAbbreviatedIri(OmlRead.getRestrictingClassifier(object))+"", 
 				OmlPackage.Literals.RELATION_RESTRICTION_AXIOM__RELATION);
 		}
 		return true;
@@ -231,12 +231,12 @@ public class OmlValidator2 {
 	// ScalarPropertyRestrictionAxiom
 	
 	protected boolean checkScalarPropertyRestrictionAxiomProperty(ScalarPropertyRestrictionAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		final Classifier restrictingType = OmlRead.getRestrictingType(object);
+		final Classifier restrictingClassifier = OmlRead.getRestrictingClassifier(object);
 		final Classifier domainType = object.getProperty().getDomain();
-		final Collection<SpecializableTerm> allSpecializedTerms = OmlRead.reflexiveClosure(restrictingType, t -> OmlSearch.findSpecializedTerms(t));
-		if (!allSpecializedTerms.stream().filter(t -> t == domainType).findAny().isPresent()) {
+		final Collection<SpecializableTerm> allGeneralTerms = OmlRead.reflexiveClosure(restrictingClassifier, t -> OmlSearch.findGeneralTerms(t));
+		if (!allGeneralTerms.stream().filter(t -> t == domainType).findAny().isPresent()) {
 			return report(Diagnostic.ERROR, diagnostics, object,
-				"Property "+OmlRead.getAbbreviatedIri(object.getProperty())+" cannot be restricted in the context of "+OmlRead.getAbbreviatedIri(OmlRead.getRestrictingType(object))+"", 
+				"Property "+OmlRead.getAbbreviatedIri(object.getProperty())+" cannot be restricted in the context of "+OmlRead.getAbbreviatedIri(OmlRead.getRestrictingClassifier(object))+"", 
 				OmlPackage.Literals.SCALAR_PROPERTY_RESTRICTION_AXIOM__PROPERTY);
 		}
 		return true;
@@ -245,25 +245,25 @@ public class OmlValidator2 {
 	// SpecializationAxiom
 	
 	protected boolean checkSpecializationAxiomSpecializedTermCycle(SpecializationAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		final SpecializableTerm specializedTerm = object.getSpecializedTerm();
-		final SpecializableTerm specializingTerm = OmlRead.getSpecializingTerm(object);
-		final Collection<SpecializableTerm> allSpecializedTerms = OmlRead.reflexiveClosure(specializedTerm, t -> OmlSearch.findSpecializedTerms(t));
-		if (allSpecializedTerms.stream().filter(t -> t == specializingTerm).findAny().isPresent()) {
+		final SpecializableTerm generalTerm = object.getSpecializedTerm();
+		final SpecializableTerm specificTerm = OmlRead.getSpecificTerm(object);
+		final Collection<SpecializableTerm> allGeneralTerms = OmlRead.reflexiveClosure(generalTerm, t -> OmlSearch.findGeneralTerms(t));
+		if (allGeneralTerms.stream().filter(t -> t == specificTerm).findAny().isPresent()) {
 			return report(Diagnostic.ERROR, diagnostics, object,
-				"Term "+OmlRead.getAbbreviatedIri(object.getSpecializedTerm())+" causes a specialization cycle for "+OmlRead.getAbbreviatedIri(OmlRead.getSpecializingTerm(object))+"", 
+				"Term "+OmlRead.getAbbreviatedIri(object.getSpecializedTerm())+" causes a specialization cycle for "+OmlRead.getAbbreviatedIri(OmlRead.getSpecificTerm(object))+"", 
 				OmlPackage.Literals.SPECIALIZATION_AXIOM__SPECIALIZED_TERM);
 		}
 		return true;
 	}
 
 	protected boolean checkSpecializationAxiomSpecializedTermKind(SpecializationAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		final EClass specializingEClass = OmlRead.getSpecializingTerm(object).eClass();
-		final EClass specializedEClass = object.getSpecializedTerm().eClass();
-		if (!((OmlPackage.Literals.ASPECT == specializedEClass && OmlPackage.Literals.ENTITY.isSuperTypeOf(specializingEClass)) ||
-			(OmlPackage.Literals.FACETED_SCALAR == specializedEClass && OmlPackage.Literals.ENUMERATED_SCALAR == specializingEClass) ||
-			(specializedEClass == specializingEClass))) {
+		final EClass specificEClass = OmlRead.getSpecificTerm(object).eClass();
+		final EClass generalEClass = object.getSpecializedTerm().eClass();
+		if (!((OmlPackage.Literals.ASPECT == generalEClass && OmlPackage.Literals.ENTITY.isSuperTypeOf(specificEClass)) ||
+			(OmlPackage.Literals.FACETED_SCALAR == generalEClass && OmlPackage.Literals.ENUMERATED_SCALAR == specificEClass) ||
+			(generalEClass == specificEClass))) {
 			return report(Diagnostic.ERROR, diagnostics, object,
-				"Term "+OmlRead.getAbbreviatedIri(object.getSpecializedTerm())+" cannot be specialized by "+OmlRead.getAbbreviatedIri(OmlRead.getSpecializingTerm(object))+"", 
+				"Term "+OmlRead.getAbbreviatedIri(object.getSpecializedTerm())+" cannot be specialized by "+OmlRead.getAbbreviatedIri(OmlRead.getSpecificTerm(object))+"", 
 				OmlPackage.Literals.SPECIALIZATION_AXIOM__SPECIALIZED_TERM);
 		}
 		return true;
@@ -272,12 +272,12 @@ public class OmlValidator2 {
 	// StructuredPropertyRestrictionAxiom
 	
 	protected boolean checkStructuredPropertyRestrictionAxiomProperty(StructuredPropertyRestrictionAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		final Classifier restrictingType = OmlRead.getRestrictingType(object);
+		final Classifier restrictingClassifier = OmlRead.getRestrictingClassifier(object);
 		final Classifier domainType = object.getProperty().getDomain();
-		final Collection<SpecializableTerm> allSpecializedTerms = OmlRead.reflexiveClosure(restrictingType, t -> OmlSearch.findSpecializedTerms(t));
-		if (!allSpecializedTerms.stream().filter(t -> t == domainType).findAny().isPresent()) {
+		final Collection<SpecializableTerm> allGeneralTerms = OmlRead.reflexiveClosure(restrictingClassifier, t -> OmlSearch.findGeneralTerms(t));
+		if (!allGeneralTerms.stream().filter(t -> t == domainType).findAny().isPresent()) {
 			return report(Diagnostic.ERROR, diagnostics, object,
-				"Property "+OmlRead.getAbbreviatedIri(object.getProperty())+" cannot be restricted in the context of "+OmlRead.getAbbreviatedIri(OmlRead.getRestrictingType(object))+"", 
+				"Property "+OmlRead.getAbbreviatedIri(object.getProperty())+" cannot be restricted in the context of "+OmlRead.getAbbreviatedIri(OmlRead.getRestrictingClassifier(object))+"", 
 				OmlPackage.Literals.STRUCTURED_PROPERTY_RESTRICTION_AXIOM__PROPERTY);
 		}
 		return true;

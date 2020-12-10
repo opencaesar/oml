@@ -366,47 +366,111 @@ public class OmlSearch extends OmlIndex {
 	
 	// SpecializableTerm
 
-	public static List<SpecializationAxiom> findSpecializationsWithSource(SpecializableTerm term) {
-		final List<SpecializationAxiom> specializations = new ArrayList<>();
-		specializations.addAll(term.getOwnedSpecializations());
-		specializations.addAll(findReferences(term).stream().
+	public static List<SpecializationAxiom> findSpecializationAxiomsWithSpecificTerm(SpecializableTerm term) {
+		final List<SpecializationAxiom> axioms = new ArrayList<>();
+		axioms.addAll(term.getOwnedSpecializations());
+		axioms.addAll(findReferences(term).stream().
 				filter(i -> i instanceof SpecializableTermReference).
 				map(i -> (SpecializableTermReference)i).
 				flatMap(r -> r.getOwnedSpecializations().stream()).
 				collect(Collectors.toList()));
-		return specializations;
+		return axioms;
 	}
 
-	public static List<SpecializableTerm> findSpecializedTerms(SpecializableTerm term) {
-		return findSpecializationsWithSource(term).stream().
-				map(i -> i.getSpecializedTerm()).
-				collect(Collectors.toList());
-	}
-		
-	public static List<SpecializableTerm> findAllSpecializedTerms(SpecializableTerm term) {
-		return OmlRead.closure(term, t -> findSpecializedTerms(t));
+	/*
+	 * @Deprecated use {@link OmlSearch#findSpecializationAxiomsWithSpecificTerm(SpecializableTerm)} instead 
+	 */
+	@Deprecated(since = "0.8.3", forRemoval = true)
+	public static List<SpecializationAxiom> findSpecializationsWithSource(SpecializableTerm term) {
+		return findSpecializationAxiomsWithSpecificTerm(term);
 	}
 	
-	public static List<SpecializableTerm> findAllSpecializedTermsInclusive(SpecializableTerm term) {
-		return OmlRead.reflexiveClosure(term, t -> findSpecializedTerms(t));
+	public static List<SpecializableTerm> findGeneralTerms(SpecializableTerm term) {
+		return findSpecializationAxiomsWithSpecificTerm(term).stream().
+				map(i -> OmlRead.getGeneralTerm(i)).
+				collect(Collectors.toList());
 	}
 
-	public static List<SpecializationAxiom> findSpecializationsWithTarget(SpecializableTerm term) {
+	/*
+	 * @Deprecated use {@link OmlSearch#findGeneralTerms(SpecializableTerm)} instead 
+	 */
+	@Deprecated(since = "0.8.3", forRemoval = true)
+	public static List<SpecializableTerm> findSpecializedTerms(SpecializableTerm term) {
+		return findGeneralTerms(term);
+	}
+	
+	public static List<SpecializableTerm> findAllGeneralTerms(SpecializableTerm term) {
+		return OmlRead.closure(term, t -> findGeneralTerms(t));
+	}
+	
+	/*
+	 * @Deprecated use {@link OmlSearch#findAllGeneralTerms(SpecializableTerm)} instead 
+	 */
+	@Deprecated(since = "0.8.3", forRemoval = true)
+	public static List<SpecializableTerm> findAllSpecializedTerms(SpecializableTerm term) {
+		return findAllGeneralTerms(term);
+	}
+
+	public static List<SpecializableTerm> findAllGeneralTermsInclusive(SpecializableTerm term) {
+		return OmlRead.reflexiveClosure(term, t -> findGeneralTerms(t));
+	}
+
+	/*
+	 * @Deprecated use {@link OmlSearch#findAllGeneralTermsInclusive(SpecializableTerm)} instead 
+	 */
+	@Deprecated(since = "0.8.3", forRemoval = true)
+	public static List<SpecializableTerm> findAllSpecializedTermsInclusive(SpecializableTerm term) {
+		return findAllGeneralTermsInclusive(term);
+	}
+
+	public static List<SpecializationAxiom> findSpecializationAxiomsWithGeneralTerm(SpecializableTerm term) {
 		return findSpecializationAxiomsWithSpecializedTerm(term);
 	}
 
-	public static List<SpecializableTerm> findSpecializingTerms(SpecializableTerm term) {
-		return findSpecializationsWithTarget(term).stream().
-				map(i -> OmlRead.getSpecializingTerm(i)).
+	/*
+	 * @Deprecated use {@link OmlSearch#findSpecializationAxiomsWithGeneralTerm(SpecializableTerm)} instead 
+	 */
+	@Deprecated(since = "0.8.3", forRemoval = true)
+	public static List<SpecializationAxiom> findSpecializationsWithTarget(SpecializableTerm term) {
+		return findSpecializationAxiomsWithGeneralTerm(term);
+	}
+
+	public static List<SpecializableTerm> findSpecificTerms(SpecializableTerm term) {
+		return findSpecializationAxiomsWithGeneralTerm(term).stream().
+				map(i -> OmlRead.getSpecificTerm(i)).
 				collect(Collectors.toList());
 	}
 
+	/*
+	 * @Deprecated use {@link OmlSearch#findSpecificTerms(SpecializableTerm)} instead 
+	 */
+	@Deprecated(since = "0.8.3", forRemoval = true)
+	public static List<SpecializableTerm> findSpecializingTerms(SpecializableTerm term) {
+		return findSpecificTerms(term);
+	}
+
+	public static List<SpecializableTerm> findAllSpecificTerms(SpecializableTerm term) {
+		return OmlRead.closure(term, t -> findSpecificTerms(t));
+	}
+
+	/*
+	 * @Deprecated use {@link OmlSearch#findAllSpecificTerms(SpecializableTerm)} instead 
+	 */
+	@Deprecated(since = "0.8.3", forRemoval = true)
 	public static List<SpecializableTerm> findAllSpecializingTerms(SpecializableTerm term) {
-		return OmlRead.closure(term, t -> findSpecializingTerms(t));
+		return findAllSpecificTerms(term);
 	}
 	
+	public static List<SpecializableTerm> findAllSpecificTermsInclusive(SpecializableTerm term) {
+		return OmlRead.reflexiveClosure(term, t -> findSpecificTerms(t));
+	}
+
+	/*
+	 * @Deprecated use {@link OmlSearch#findAllSpecificTermsInclusive(SpecializableTerm)} instead 
+	 */
+	@Deprecated(since = "0.8.3", forRemoval = true)
 	public static List<SpecializableTerm> findAllSpecializingTermsInclusive(SpecializableTerm term) {
-		return OmlRead.reflexiveClosure(term, t -> findSpecializingTerms(t));
+		return findAllSpecificTermsInclusive(term);
 	}
 
 	// Type
@@ -607,7 +671,7 @@ public class OmlSearch extends OmlIndex {
 	public static boolean hasTypeIri(Instance instance, String typeIri) {
 		Member member = OmlRead.getMemberByIri(instance.eResource().getResourceSet(), typeIri);
 		assert member instanceof SpecializableTerm : typeIri+" is not compatoble with this instance";
-		Set<SpecializableTerm> subtypes = new HashSet<>(findAllSpecializingTermsInclusive((SpecializableTerm)member)); 
+		Set<SpecializableTerm> subtypes = new HashSet<>(findAllSpecificTermsInclusive((SpecializableTerm)member)); 
 		if (instance instanceof StructureInstance) {
 			return subtypes.contains(((StructureInstance)instance).getType()); 
 		} else if (instance instanceof ConceptInstance) {
