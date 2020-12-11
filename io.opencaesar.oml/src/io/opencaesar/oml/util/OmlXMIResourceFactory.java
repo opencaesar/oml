@@ -34,8 +34,8 @@ public class OmlXMIResourceFactory extends ResourceFactoryImpl {
 	}
 	
 	public static void register() {
-		if (!Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().containsKey(OmlXMIResource.EXTENSION)) {
-			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(OmlXMIResource.EXTENSION, new OmlXMIResourceFactory());
+		if (!Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().containsKey(OmlConstants.OMLXMI_EXTENSION)) {
+			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(OmlConstants.OMLXMI_EXTENSION, new OmlXMIResourceFactory());
 		}
 	}
 }

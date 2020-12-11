@@ -36,7 +36,11 @@ import io.opencaesar.oml.OmlPackage;
 
 public class OmlXMIResource extends XMIResourceImpl {
 
-	public static final String EXTENSION = "omlxmi";
+	/**
+	 * @deprecated use {@link OmlConstants#OMLXMI_EXTENSION} instead
+	 */
+	@Deprecated(since = "0.8.4", forRemoval = true)
+	public static final String EXTENSION = OmlConstants.OMLXMI_EXTENSION;
 
 	final Map<String, EObject> idToEObjectMap = new HashMap<>();
 	final Adapter idToEObjectMapAdapter = new AdapterImpl() {

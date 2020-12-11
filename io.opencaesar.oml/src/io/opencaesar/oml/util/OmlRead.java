@@ -139,7 +139,6 @@ import io.opencaesar.oml.VocabularyUsage;
 public class OmlRead {
 	
 	private static final String CATALOGS = "Catalogs";
-	private static final String OML_EXTENSION = "oml";
 	
 	// closure operators
 	
@@ -694,7 +693,7 @@ public class OmlRead {
 				collect(Collectors.toList());
 	}
 	
-	/*
+	/**
 	 * @Deprecated use {@link OmlRead#getGeneralTerms(SpecializableTerm)} instead 
 	 */
 	@Deprecated(since = "0.8.3", forRemoval = true)
@@ -788,8 +787,8 @@ public class OmlRead {
 			map(i -> (Scalar)i).
 			findFirst().orElse(null);
 	}
-
-	/*
+	
+	/**
 	 * @Deprecated use {@link OmlRead#getGeneralScalar(Scalar)} instead 
 	 */
 	@Deprecated(since = "0.8.3", forRemoval = true)
@@ -915,7 +914,7 @@ public class OmlRead {
 				collect(Collectors.toList());
 	}
 	
-	/*
+	/**
 	 * @Deprecated use {@link OmlRead#getGeneralTerms(SpecializableTermReference)} instead 
 	 */
 	@Deprecated(since = "0.8.3", forRemoval = true)
@@ -1047,10 +1046,10 @@ public class OmlRead {
 								uri = URI.createURI(resolved);
 								if (uri.fileExtension() == null) {
 									// if the imported URI does not end with an extension, assume it's .oml
-									uri = uri.appendFileExtension(OML_EXTENSION);
+									uri = uri.appendFileExtension(OmlConstants.OML_EXTENSION);
 								} else if (NUMBER.matcher(uri.fileExtension()).matches()) { 
 									// special case for the dc vocabulary ending its IRI with a version number
-									uri = uri.appendFileExtension(OML_EXTENSION);
+									uri = uri.appendFileExtension(OmlConstants.OML_EXTENSION);
 								}
 							}
 						}
@@ -1271,7 +1270,7 @@ public class OmlRead {
 		}
 	}
 	
-	/*
+	/**
 	 * @Deprecated use {@link OmlRead#getSpecificTerm(SpecializationAxiom)} instead 
 	 */
 	@Deprecated(since = "0.8.3", forRemoval = true)
@@ -1290,7 +1289,7 @@ public class OmlRead {
 		return null;
 	}
 
-	/*
+	/**
 	 * @Deprecated use {@link OmlReadh#getRestrictingClassifier(RestrictionAxiom)} instead 
 	 */
 	@Deprecated(since = "0.8.3", forRemoval = true)
@@ -1319,7 +1318,7 @@ public class OmlRead {
 		}
 	}
 
-	/*
+	/**
 	 * @Deprecated use {@link OmlReadh#getRestrictingClassifier(PropertyRestrictionAxiom)} instead 
 	 */
 	@Deprecated(since = "0.8.3", forRemoval = true)
@@ -1365,7 +1364,7 @@ public class OmlRead {
 		}
 	}
 
-	/*
+	/**
 	 * @Deprecated use {@link OmlReadh#getRestrictingEntity(RelationRestrictionAxiom)} instead 
 	 */
 	@Deprecated(since = "0.8.3", forRemoval = true)
@@ -1389,7 +1388,7 @@ public class OmlRead {
 		}
 	}
 
-	/*
+	/**
 	 * @Deprecated use {@link OmlRead#getKeyedEntity(KeyAxiom)} instead 
 	 */
 	@Deprecated(since = "0.8.3", forRemoval = true)
@@ -1397,7 +1396,7 @@ public class OmlRead {
 		return getKeyedEntity(axiom);
 	}
 
-	/*
+	/**
 	 * @Deprecated use {@link OmlRead#getKeyedEntity(KeyAxiom)} instead 
 	 */
 	@Deprecated(since = "0.8.3", forRemoval = true)
@@ -1547,10 +1546,10 @@ public class OmlRead {
 
 	// QuotedLiteral
 	
-	public static String getLiteralValue(QuotedLiteral literal) {
+	public static Object getLiteralValue(QuotedLiteral literal) {
 		return literal.getValue();
 	}
-
+	
 	public static String getLexicalValue(QuotedLiteral literal) {
 		return literal.getValue();
 	}

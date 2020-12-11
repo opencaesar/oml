@@ -18,6 +18,10 @@
  */
 package io.opencaesar.oml.util;
 
+import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -72,6 +76,7 @@ import io.opencaesar.oml.RelationInstanceReference;
 import io.opencaesar.oml.RelationRestrictionAxiom;
 import io.opencaesar.oml.RelationTypeAssertion;
 import io.opencaesar.oml.Rule;
+import io.opencaesar.oml.Scalar;
 import io.opencaesar.oml.ScalarProperty;
 import io.opencaesar.oml.SpecializableTerm;
 import io.opencaesar.oml.SpecializableTermReference;
@@ -377,7 +382,7 @@ public class OmlSearch extends OmlIndex {
 		return axioms;
 	}
 
-	/*
+	/**
 	 * @Deprecated use {@link OmlSearch#findSpecializationAxiomsWithSpecificTerm(SpecializableTerm)} instead 
 	 */
 	@Deprecated(since = "0.8.3", forRemoval = true)
@@ -391,7 +396,7 @@ public class OmlSearch extends OmlIndex {
 				collect(Collectors.toList());
 	}
 
-	/*
+	/**
 	 * @Deprecated use {@link OmlSearch#findGeneralTerms(SpecializableTerm)} instead 
 	 */
 	@Deprecated(since = "0.8.3", forRemoval = true)
@@ -403,7 +408,7 @@ public class OmlSearch extends OmlIndex {
 		return OmlRead.closure(term, t -> findGeneralTerms(t));
 	}
 	
-	/*
+	/**
 	 * @Deprecated use {@link OmlSearch#findAllGeneralTerms(SpecializableTerm)} instead 
 	 */
 	@Deprecated(since = "0.8.3", forRemoval = true)
@@ -415,7 +420,7 @@ public class OmlSearch extends OmlIndex {
 		return OmlRead.reflexiveClosure(term, t -> findGeneralTerms(t));
 	}
 
-	/*
+	/**
 	 * @Deprecated use {@link OmlSearch#findAllGeneralTermsInclusive(SpecializableTerm)} instead 
 	 */
 	@Deprecated(since = "0.8.3", forRemoval = true)
@@ -427,7 +432,7 @@ public class OmlSearch extends OmlIndex {
 		return findSpecializationAxiomsWithSpecializedTerm(term);
 	}
 
-	/*
+	/**
 	 * @Deprecated use {@link OmlSearch#findSpecializationAxiomsWithGeneralTerm(SpecializableTerm)} instead 
 	 */
 	@Deprecated(since = "0.8.3", forRemoval = true)
@@ -441,7 +446,7 @@ public class OmlSearch extends OmlIndex {
 				collect(Collectors.toList());
 	}
 
-	/*
+	/**
 	 * @Deprecated use {@link OmlSearch#findSpecificTerms(SpecializableTerm)} instead 
 	 */
 	@Deprecated(since = "0.8.3", forRemoval = true)
@@ -453,7 +458,7 @@ public class OmlSearch extends OmlIndex {
 		return OmlRead.closure(term, t -> findSpecificTerms(t));
 	}
 
-	/*
+	/**
 	 * @Deprecated use {@link OmlSearch#findAllSpecificTerms(SpecializableTerm)} instead 
 	 */
 	@Deprecated(since = "0.8.3", forRemoval = true)
@@ -465,7 +470,7 @@ public class OmlSearch extends OmlIndex {
 		return OmlRead.reflexiveClosure(term, t -> findSpecificTerms(t));
 	}
 
-	/*
+	/**
 	 * @Deprecated use {@link OmlSearch#findAllSpecificTermsInclusive(SpecializableTerm)} instead 
 	 */
 	@Deprecated(since = "0.8.3", forRemoval = true)
@@ -617,6 +622,37 @@ public class OmlSearch extends OmlIndex {
 	// StructuredProperty
 
 	// Scalar
+
+	public static Scalar findGeneralScalar(Scalar scalar) {
+		// scalars can have a max of one specialized term
+		return findGeneralTerms(scalar).stream().
+			filter(i -> i instanceof Scalar).
+			map(i -> (Scalar)i).
+			findFirst().orElse(null);
+	}
+
+	public static Scalar findRootScalar(Scalar scalar) {
+		while (scalar != null) {
+			scalar = findGeneralScalar(scalar);	
+		}
+		return scalar;
+	}
+	
+	public static Scalar findJavaScalar(Scalar scalar) {
+		while (scalar != null) {
+			String scalarIri = OmlRead.getIri(scalar);
+			if (scalarIri.equals(OmlConstants.XSD_NS+"integer") ||
+			    scalarIri.equals(OmlConstants.XSD_NS+"decimal") ||
+			    scalarIri.equals(OmlConstants.XSD_NS+"double") ||
+			    scalarIri.equals(OmlConstants.XSD_NS+"float") ||
+			    scalarIri.equals(OmlConstants.XSD_NS+"boolean") ||
+			    scalarIri.equals(OmlConstants.XSD_NS+"dateTime")) {
+				return scalar;
+			}
+			scalar = findGeneralScalar(scalar);	
+		}
+		return scalar;
+	}
 
 	// FacetedScalar
 
@@ -899,7 +935,7 @@ public class OmlSearch extends OmlIndex {
 	// EntityPredicate
 
 	// BinaryPredicate
-
+	
 	// RelationPredicate
 
 	// SameAsPredicate
@@ -907,5 +943,46 @@ public class OmlSearch extends OmlIndex {
 	// DifferentFromPredicate
 
 	// RelationEntityPredicate
-			
+
+	// Literal
+
+	public static Object findTypedLiteralValue(Literal literal) {
+		Object value = OmlRead.getLiteralValue(literal);
+		if (value instanceof String) {
+			String strValue =  (String)value;
+			Scalar type = findJavaScalar(literal.getType());
+			if (type != null) {
+				switch(OmlRead.getIri(type)) {
+					case OmlConstants.XSD_NS+"integer":
+						return Integer.valueOf(strValue);
+					case OmlConstants.XSD_NS+"decimal":
+						return new BigDecimal(strValue);
+					case OmlConstants.XSD_NS+"double":
+						return Double.valueOf(strValue);
+					case OmlConstants.XSD_NS+"float":
+						return Float.valueOf(strValue);
+					case OmlConstants.XSD_NS+"boolean":
+						return Boolean.valueOf(strValue);
+					case OmlConstants.XSD_NS+"dateTime":
+						try {
+							return new SimpleDateFormat().parse(strValue);
+						} catch (ParseException e) {
+							throw new DateTimeParseException("Error parsing xsd:dateTime", strValue, 0);
+						}
+				}
+			}
+		}
+		return value;
+	}
+
+	// QuotedLiteral
+
+	// IntegerLiteral
+
+	// DecimalLiteral
+
+	// DoubleLiteral
+
+	// BooleanLiteral
+
 }
