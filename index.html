@@ -1486,7 +1486,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version 3886cea8, updated Wed Dec 2 15:53:33 2020 -0800" name="generator">
   <link href="https://github.com/opencaesar/oml" rel="canonical">
-  <meta content="65dd16a28e5e7d5c539d8023d038d46937f036cf" name="document-revision">
+  <meta content="a232e80e048144f0f1efcf29657bd15d80928417" name="document-revision">
 <style>
 body {
   padding: 0;
@@ -2148,7 +2148,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://opencaesar.github.io/oml/"> <img alt="Ontological Modeling Language" height="60" src="images/oml.svg"> </a></p>
    <h1 class="p-name no-ref" id="title">Ontological Modeling Language 0.8</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Document, <time class="dt-updated" datetime="2020-12-11">11 December 2020</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Document, <time class="dt-updated" datetime="2020-12-13">13 December 2020</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -2496,13 +2496,13 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
 <pre class="highlight highlight-html">@<a href="#AnnotationProperty-Syntax">AnnotationProperty_IRI</a> (<a href="#Literal-Syntax">Literal</a>)?
 </pre>
     <h4 class="heading settled" data-level="2.1.9" id="Literal-Syntax"><span class="secno">2.1.9. </span><span class="content"><a data-link-type="dfn" href="#literal" id="ref-for-literal">Literal</a></span><a class="self-link" href="#Literal-Syntax"></a></h4>
-<pre class="highlight highlight-html">INTEGER (^^(<a href="#FacetedScalar-Syntax">[FacetedScalar_IRI]</a> | <a href="#EnumeratedScalar-Syntax">[EnumeratedScalar_IRI]</a>))? |
-DECIMAL (^^(<a href="#FacetedScalar-Syntax">[FacetedScalar_IRI]</a> | <a href="#EnumeratedScalar-Syntax">[EnumeratedScalar_IRI]</a>))? |
-DOUBLE (^^(<a href="#FacetedScalar-Syntax">[FacetedScalar_IRI]</a> | <a href="#EnumeratedScalar-Syntax">[EnumeratedScalar_IRI]</a>))? |
-BOOLEAN (^^(<a href="#FacetedScalar-Syntax">[FacetedScalar_IRI]</a> | <a href="#EnumeratedScalar-Syntax">[EnumeratedScalar_IRI]</a>))? |
-STRING (^^(<a href="#FacetedScalar-Syntax">[FacetedScalar_IRI]</a> | <a href="#EnumeratedScalar-Syntax">[EnumeratedScalar_IRI]</a>) | $LANG_TAG)?
+<pre class="highlight highlight-html">INTEGER |
+DECIMAL |
+DOUBLE |
+BOOLEAN |
+STRING (^^<a href="#FacetedScalar-Syntax">FacetedScalar_IRI</a> | $<a href="https://tools.ietf.org/html/bcp47#section-2">langTag</a>)?
 </pre>
-    <p>LANG_TAG is string value conforming to <a href="https://tools.ietf.org/html/bcp47">https://tools.ietf.org/html/bcp47</a></p>
+    <p>FacetedScalar_IRI must be an IRI of one of the OWL2 <a href="https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/#built-in-datatypes">built-in datatypes</a> only.</p>
     <h4 class="heading settled" data-level="2.1.10" id="Diagram-Syntax"><span class="secno">2.1.10. </span><span class="content">[Diagram]</span><a class="self-link" href="#Diagram-Syntax"></a></h4>
     <p>The concrete syntax for each OML element is organized into tabs. The "Text" tab is showcased by default, displaying the textual syntax of the OML element. To see the graphical syntax of the element, click on the "Diagram" tab.</p>
     <p>The symbols colored in orange, and the symbols boxed in gray, are there solely to communicate more information about the elements they are attached to. They will not show up in actual implementations of OML diagrams.</p>
@@ -4248,7 +4248,7 @@ STRING (^^(<a href="#FacetedScalar-Syntax">[FacetedScalar_IRI]</a> | <a href="#E
      </div>
      <div class="tab-content text">
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
-<span style="font-weight:bold;color:purple">scalar</span> ID (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)? ([
+<span style="font-weight:bold;color:purple">scalar</span> ID (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)? ([
   (<span style="font-weight:bold;color:purple">length</span> INTEGER)?
   (<span style="font-weight:bold;color:purple">minLength</span> INTEGER)?
   (<span style="font-weight:bold;color:purple">maxLength</span> INTEGER)?
@@ -4287,7 +4287,7 @@ STRING (^^(<a href="#FacetedScalar-Syntax">[FacetedScalar_IRI]</a> | <a href="#E
      </div>
      <div class="tab-content text">
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
-<span style="font-weight:bold;color:purple">ref scalar</span> <a href="#FacetedScalar-Syntax">FacetedScalar_IRI</a> (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)?
+<span style="font-weight:bold;color:purple">ref scalar</span> <a href="#FacetedScalar-Syntax">FacetedScalar_IRI</a> (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)?
 </pre>
      </div>
      <div class="tab-content diagram hidden">
@@ -4317,7 +4317,7 @@ STRING (^^(<a href="#FacetedScalar-Syntax">[FacetedScalar_IRI]</a> | <a href="#E
      </div>
      <div class="tab-content text">
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
-<span style="font-weight:bold;color:purple">enumerated scalar</span> ID (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)? ([
+<span style="font-weight:bold;color:purple">enumerated scalar</span> ID (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)? ([
   <a href="#Literal-Syntax">Literal</a> (, <a href="#Literal-Syntax">Literal</a>)*
 ])?
 </pre>
@@ -4397,7 +4397,7 @@ STRING (^^(<a href="#FacetedScalar-Syntax">[FacetedScalar_IRI]</a> | <a href="#E
      </div>
      <div class="tab-content text">
 <pre class="highlight highlight-html">(<a href="#Annotation-Syntax">Annotation</a>)*
-<span style="font-weight:bold;color:purple">ref enumerated scalar</span> <a href="#EnumeratedScalar-Syntax">EnumeratedScalar_IRI</a> (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a> (, <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)*)?
+<span style="font-weight:bold;color:purple">ref enumerated scalar</span> <a href="#EnumeratedScalar-Syntax">EnumeratedScalar_IRI</a> (:> <a href="#SpecializationAxiom-Syntax">[SpecializationAxiom]</a>)?
 </pre>
      </div>
      <div class="tab-content diagram hidden">
@@ -5457,7 +5457,7 @@ this metamodel and can be manipulated using its API.
     <p>
      <svg contentScriptType="application/ecmascript" contentStyleType="text/css" height="289px" preserveAspectRatio="none" style="width:773px;height:289px;" version="1.1" viewBox="0 0 773 289" width="773px" zoomAndPan="magnify" xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
       <defs>
-       <filter height="300%" id="fulv159oxbxsq" width="300%" x="-1" y="-1">
+       <filter height="300%" id="fw0mwfjmjbyka" width="300%" x="-1" y="-1">
         <feGaussianBlur result="blurOut" stdDeviation="2.0"></feGaussianBlur>
         <feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"></feColorMatrix>
         <feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"></feOffset>
@@ -5466,89 +5466,89 @@ this metamodel and can be manipulated using its API.
       </defs>
       <g>
        <a target="_top" actuate="onRequest" href="#BooleanLiteral" show="new" title="#BooleanLiteral" type="simple">
-        <rect fill="#FFFFFF" filter="url(#fulv159oxbxsq)" height="52.8047" style="stroke: #000000; stroke-width: 1.5;" width="121" x="6" y="219.5"></rect>
-        <rect fill="#FFFFFF" height="32" style="stroke: #000000; stroke-width: 1.5;" width="121" x="6" y="219.5"></rect>
-        <ellipse cx="21" cy="235.5" fill="#ADD1B2" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"></ellipse>
-        <path d="M23.9688,241.1406 Q23.3906,241.4375 22.75,241.5781 Q22.1094,241.7344 21.4063,241.7344 Q18.9063,241.7344 17.5781,240.0938 Q16.2656,238.4375 16.2656,235.3125 Q16.2656,232.1875 17.5781,230.5313 Q18.9063,228.875 21.4063,228.875 Q22.1094,228.875 22.75,229.0313 Q23.4063,229.1875 23.9688,229.4844 L23.9688,232.2031 Q23.3438,231.625 22.75,231.3594 Q22.1563,231.0781 21.5313,231.0781 Q20.1875,231.0781 19.5,232.1563 Q18.8125,233.2188 18.8125,235.3125 Q18.8125,237.4063 19.5,238.4844 Q20.1875,239.5469 21.5313,239.5469 Q22.1563,239.5469 22.75,239.2813 Q23.3438,239 23.9688,238.4219 L23.9688,241.1406 Z "></path>
-        <text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="89" x="35" y="239.6543">BooleanLiteral</text>
-        <line style="stroke: #000000; stroke-width: 1.5;" x1="7" x2="126" y1="251.5" y2="251.5"></line>
-        <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="108" x="12" y="265.7104">value : EJavaObject</text>
+        <rect fill="#FFFFFF" filter="url(#fw0mwfjmjbyka)" height="52.8047" style="stroke: #000000; stroke-width: 1.5;" width="121" x="6" y="212.5"></rect>
+        <rect fill="#FFFFFF" height="32" style="stroke: #000000; stroke-width: 1.5;" width="121" x="6" y="212.5"></rect>
+        <ellipse cx="21" cy="228.5" fill="#ADD1B2" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"></ellipse>
+        <path d="M23.9688,234.1406 Q23.3906,234.4375 22.75,234.5781 Q22.1094,234.7344 21.4063,234.7344 Q18.9063,234.7344 17.5781,233.0938 Q16.2656,231.4375 16.2656,228.3125 Q16.2656,225.1875 17.5781,223.5313 Q18.9063,221.875 21.4063,221.875 Q22.1094,221.875 22.75,222.0313 Q23.4063,222.1875 23.9688,222.4844 L23.9688,225.2031 Q23.3438,224.625 22.75,224.3594 Q22.1563,224.0781 21.5313,224.0781 Q20.1875,224.0781 19.5,225.1563 Q18.8125,226.2188 18.8125,228.3125 Q18.8125,230.4063 19.5,231.4844 Q20.1875,232.5469 21.5313,232.5469 Q22.1563,232.5469 22.75,232.2813 Q23.3438,232 23.9688,231.4219 L23.9688,234.1406 Z "></path>
+        <text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="89" x="35" y="232.6543">BooleanLiteral</text>
+        <line style="stroke: #000000; stroke-width: 1.5;" x1="7" x2="126" y1="244.5" y2="244.5"></line>
+        <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="108" x="12" y="258.7104">value : EJavaObject</text>
        </a>
        <a target="_top" actuate="onRequest" href="#Literal" show="new" title="#Literal" type="simple">
-        <rect fill="#FFFFFF" filter="url(#fulv159oxbxsq)" height="52.8047" style="stroke: #000000; stroke-width: 1.5;" width="118" x="317.5" y="100"></rect>
-        <rect fill="#FFFFFF" height="32" style="stroke: #000000; stroke-width: 1.5;" width="118" x="317.5" y="100"></rect>
-        <ellipse cx="354.1" cy="116" fill="#A9DCDF" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"></ellipse>
-        <path d="M354.2094,111.3438 L353.0531,116.4219 L355.3813,116.4219 L354.2094,111.3438 Z M352.725,109.1094 L355.7094,109.1094 L359.0688,121.5 L356.6156,121.5 L355.85,118.4375 L352.5688,118.4375 L351.8188,121.5 L349.3813,121.5 L352.725,109.1094 Z "></path>
-        <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="38" x="372.9" y="120.1543">Literal</text>
-        <line style="stroke: #000000; stroke-width: 1.5;" x1="318.5" x2="434.5" y1="132" y2="132"></line>
-        <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="106" x="323.5" y="146.2104">type : Scalar [0..1]</text>
+        <rect fill="#FFFFFF" filter="url(#fw0mwfjmjbyka)" height="40" style="stroke: #000000; stroke-width: 1.5;" width="70" x="341.5" y="100"></rect>
+        <rect fill="#FFFFFF" height="32" style="stroke: #000000; stroke-width: 1.5;" width="70" x="341.5" y="100"></rect>
+        <ellipse cx="356.5" cy="116" fill="#A9DCDF" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"></ellipse>
+        <path d="M356.6094,111.3438 L355.4531,116.4219 L357.7813,116.4219 L356.6094,111.3438 Z M355.125,109.1094 L358.1094,109.1094 L361.4688,121.5 L359.0156,121.5 L358.25,118.4375 L354.9688,118.4375 L354.2188,121.5 L351.7813,121.5 L355.125,109.1094 Z "></path>
+        <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="38" x="370.5" y="120.1543">Literal</text>
+        <line style="stroke: #000000; stroke-width: 1.5;" x1="342.5" x2="410.5" y1="132" y2="132"></line>
        </a>
        <a target="_top" actuate="onRequest" href="#DecimalLiteral" show="new" title="#DecimalLiteral" type="simple">
-        <rect fill="#FFFFFF" filter="url(#fulv159oxbxsq)" height="52.8047" style="stroke: #000000; stroke-width: 1.5;" width="119" x="162" y="219.5"></rect>
-        <rect fill="#FFFFFF" height="32" style="stroke: #000000; stroke-width: 1.5;" width="119" x="162" y="219.5"></rect>
-        <ellipse cx="177" cy="235.5" fill="#ADD1B2" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"></ellipse>
-        <path d="M179.9688,241.1406 Q179.3906,241.4375 178.75,241.5781 Q178.1094,241.7344 177.4063,241.7344 Q174.9063,241.7344 173.5781,240.0938 Q172.2656,238.4375 172.2656,235.3125 Q172.2656,232.1875 173.5781,230.5313 Q174.9063,228.875 177.4063,228.875 Q178.1094,228.875 178.75,229.0313 Q179.4063,229.1875 179.9688,229.4844 L179.9688,232.2031 Q179.3438,231.625 178.75,231.3594 Q178.1563,231.0781 177.5313,231.0781 Q176.1875,231.0781 175.5,232.1563 Q174.8125,233.2188 174.8125,235.3125 Q174.8125,237.4063 175.5,238.4844 Q176.1875,239.5469 177.5313,239.5469 Q178.1563,239.5469 178.75,239.2813 Q179.3438,239 179.9688,238.4219 L179.9688,241.1406 Z "></path>
-        <text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="87" x="191" y="239.6543">DecimalLiteral</text>
-        <line style="stroke: #000000; stroke-width: 1.5;" x1="163" x2="280" y1="251.5" y2="251.5"></line>
-        <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="87" x="168" y="265.7104">value : Decimal</text>
+        <rect fill="#FFFFFF" filter="url(#fw0mwfjmjbyka)" height="52.8047" style="stroke: #000000; stroke-width: 1.5;" width="119" x="162" y="212.5"></rect>
+        <rect fill="#FFFFFF" height="32" style="stroke: #000000; stroke-width: 1.5;" width="119" x="162" y="212.5"></rect>
+        <ellipse cx="177" cy="228.5" fill="#ADD1B2" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"></ellipse>
+        <path d="M179.9688,234.1406 Q179.3906,234.4375 178.75,234.5781 Q178.1094,234.7344 177.4063,234.7344 Q174.9063,234.7344 173.5781,233.0938 Q172.2656,231.4375 172.2656,228.3125 Q172.2656,225.1875 173.5781,223.5313 Q174.9063,221.875 177.4063,221.875 Q178.1094,221.875 178.75,222.0313 Q179.4063,222.1875 179.9688,222.4844 L179.9688,225.2031 Q179.3438,224.625 178.75,224.3594 Q178.1563,224.0781 177.5313,224.0781 Q176.1875,224.0781 175.5,225.1563 Q174.8125,226.2188 174.8125,228.3125 Q174.8125,230.4063 175.5,231.4844 Q176.1875,232.5469 177.5313,232.5469 Q178.1563,232.5469 178.75,232.2813 Q179.3438,232 179.9688,231.4219 L179.9688,234.1406 Z "></path>
+        <text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="87" x="191" y="232.6543">DecimalLiteral</text>
+        <line style="stroke: #000000; stroke-width: 1.5;" x1="163" x2="280" y1="244.5" y2="244.5"></line>
+        <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="87" x="168" y="258.7104">value : Decimal</text>
        </a>
        <a target="_top" actuate="onRequest" href="#DoubleLiteral" show="new" title="#DoubleLiteral" type="simple">
-        <rect fill="#FFFFFF" filter="url(#fulv159oxbxsq)" height="52.8047" style="stroke: #000000; stroke-width: 1.5;" width="120" x="316.5" y="219.5"></rect>
-        <rect fill="#FFFFFF" height="32" style="stroke: #000000; stroke-width: 1.5;" width="120" x="316.5" y="219.5"></rect>
-        <ellipse cx="334.2" cy="235.5" fill="#ADD1B2" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"></ellipse>
-        <path d="M337.1688,241.1406 Q336.5906,241.4375 335.95,241.5781 Q335.3094,241.7344 334.6063,241.7344 Q332.1063,241.7344 330.7781,240.0938 Q329.4656,238.4375 329.4656,235.3125 Q329.4656,232.1875 330.7781,230.5313 Q332.1063,228.875 334.6063,228.875 Q335.3094,228.875 335.95,229.0313 Q336.6063,229.1875 337.1688,229.4844 L337.1688,232.2031 Q336.5438,231.625 335.95,231.3594 Q335.3563,231.0781 334.7313,231.0781 Q333.3875,231.0781 332.7,232.1563 Q332.0125,233.2188 332.0125,235.3125 Q332.0125,237.4063 332.7,238.4844 Q333.3875,239.5469 334.7313,239.5469 Q335.3563,239.5469 335.95,239.2813 Q336.5438,239 337.1688,238.4219 L337.1688,241.1406 Z "></path>
-        <text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="82" x="348.8" y="239.6543">DoubleLiteral</text>
-        <line style="stroke: #000000; stroke-width: 1.5;" x1="317.5" x2="435.5" y1="251.5" y2="251.5"></line>
-        <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="108" x="322.5" y="265.7104">value : EJavaObject</text>
+        <rect fill="#FFFFFF" filter="url(#fw0mwfjmjbyka)" height="52.8047" style="stroke: #000000; stroke-width: 1.5;" width="120" x="316.5" y="212.5"></rect>
+        <rect fill="#FFFFFF" height="32" style="stroke: #000000; stroke-width: 1.5;" width="120" x="316.5" y="212.5"></rect>
+        <ellipse cx="334.2" cy="228.5" fill="#ADD1B2" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"></ellipse>
+        <path d="M337.1688,234.1406 Q336.5906,234.4375 335.95,234.5781 Q335.3094,234.7344 334.6063,234.7344 Q332.1063,234.7344 330.7781,233.0938 Q329.4656,231.4375 329.4656,228.3125 Q329.4656,225.1875 330.7781,223.5313 Q332.1063,221.875 334.6063,221.875 Q335.3094,221.875 335.95,222.0313 Q336.6063,222.1875 337.1688,222.4844 L337.1688,225.2031 Q336.5438,224.625 335.95,224.3594 Q335.3563,224.0781 334.7313,224.0781 Q333.3875,224.0781 332.7,225.1563 Q332.0125,226.2188 332.0125,228.3125 Q332.0125,230.4063 332.7,231.4844 Q333.3875,232.5469 334.7313,232.5469 Q335.3563,232.5469 335.95,232.2813 Q336.5438,232 337.1688,231.4219 L337.1688,234.1406 Z "></path>
+        <text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="82" x="348.8" y="232.6543">DoubleLiteral</text>
+        <line style="stroke: #000000; stroke-width: 1.5;" x1="317.5" x2="435.5" y1="244.5" y2="244.5"></line>
+        <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="108" x="322.5" y="258.7104">value : EJavaObject</text>
        </a>
        <a target="_top" actuate="onRequest" href="#IntegerLiteral" show="new" title="#IntegerLiteral" type="simple">
-        <rect fill="#FFFFFF" filter="url(#fulv159oxbxsq)" height="52.8047" style="stroke: #000000; stroke-width: 1.5;" width="120" x="471.5" y="219.5"></rect>
-        <rect fill="#FFFFFF" height="32" style="stroke: #000000; stroke-width: 1.5;" width="120" x="471.5" y="219.5"></rect>
-        <ellipse cx="488.75" cy="235.5" fill="#ADD1B2" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"></ellipse>
-        <path d="M491.7188,241.1406 Q491.1406,241.4375 490.5,241.5781 Q489.8594,241.7344 489.1563,241.7344 Q486.6563,241.7344 485.3281,240.0938 Q484.0156,238.4375 484.0156,235.3125 Q484.0156,232.1875 485.3281,230.5313 Q486.6563,228.875 489.1563,228.875 Q489.8594,228.875 490.5,229.0313 Q491.1563,229.1875 491.7188,229.4844 L491.7188,232.2031 Q491.0938,231.625 490.5,231.3594 Q489.9063,231.0781 489.2813,231.0781 Q487.9375,231.0781 487.25,232.1563 Q486.5625,233.2188 486.5625,235.3125 Q486.5625,237.4063 487.25,238.4844 Q487.9375,239.5469 489.2813,239.5469 Q489.9063,239.5469 490.5,239.2813 Q491.0938,239 491.7188,238.4219 L491.7188,241.1406 Z "></path>
-        <text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="83" x="503.25" y="239.6543">IntegerLiteral</text>
-        <line style="stroke: #000000; stroke-width: 1.5;" x1="472.5" x2="590.5" y1="251.5" y2="251.5"></line>
-        <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="108" x="477.5" y="265.7104">value : EJavaObject</text>
+        <rect fill="#FFFFFF" filter="url(#fw0mwfjmjbyka)" height="52.8047" style="stroke: #000000; stroke-width: 1.5;" width="120" x="471.5" y="212.5"></rect>
+        <rect fill="#FFFFFF" height="32" style="stroke: #000000; stroke-width: 1.5;" width="120" x="471.5" y="212.5"></rect>
+        <ellipse cx="488.75" cy="228.5" fill="#ADD1B2" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"></ellipse>
+        <path d="M491.7188,234.1406 Q491.1406,234.4375 490.5,234.5781 Q489.8594,234.7344 489.1563,234.7344 Q486.6563,234.7344 485.3281,233.0938 Q484.0156,231.4375 484.0156,228.3125 Q484.0156,225.1875 485.3281,223.5313 Q486.6563,221.875 489.1563,221.875 Q489.8594,221.875 490.5,222.0313 Q491.1563,222.1875 491.7188,222.4844 L491.7188,225.2031 Q491.0938,224.625 490.5,224.3594 Q489.9063,224.0781 489.2813,224.0781 Q487.9375,224.0781 487.25,225.1563 Q486.5625,226.2188 486.5625,228.3125 Q486.5625,230.4063 487.25,231.4844 Q487.9375,232.5469 489.2813,232.5469 Q489.9063,232.5469 490.5,232.2813 Q491.0938,232 491.7188,231.4219 L491.7188,234.1406 Z "></path>
+        <text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="83" x="503.25" y="232.6543">IntegerLiteral</text>
+        <line style="stroke: #000000; stroke-width: 1.5;" x1="472.5" x2="590.5" y1="244.5" y2="244.5"></line>
+        <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="108" x="477.5" y="258.7104">value : EJavaObject</text>
        </a>
        <a target="_top" actuate="onRequest" href="#Element" show="new" title="#Element" type="simple">
-        <rect fill="#D3D3D3" filter="url(#fulv159oxbxsq)" height="32" style="stroke: #000000; stroke-width: 1.5;" width="83" x="335" y="8"></rect>
+        <rect fill="#D3D3D3" filter="url(#fw0mwfjmjbyka)" height="32" style="stroke: #000000; stroke-width: 1.5;" width="83" x="335" y="8"></rect>
         <ellipse cx="350" cy="24" fill="#A9DCDF" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"></ellipse>
         <path d="M350.1094,19.3438 L348.9531,24.4219 L351.2813,24.4219 L350.1094,19.3438 Z M348.625,17.1094 L351.6094,17.1094 L354.9688,29.5 L352.5156,29.5 L351.75,26.4375 L348.4688,26.4375 L347.7188,29.5 L345.2813,29.5 L348.625,17.1094 Z "></path>
         <text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="51" x="364" y="28.1543">Element</text>
        </a>
        <a target="_top" actuate="onRequest" href="#QuotedLiteral" show="new" title="#QuotedLiteral" type="simple">
-        <rect fill="#FFFFFF" filter="url(#fulv159oxbxsq)" height="65.6094" style="stroke: #000000; stroke-width: 1.5;" width="135" x="627" y="213"></rect>
-        <rect fill="#FFFFFF" height="32" style="stroke: #000000; stroke-width: 1.5;" width="135" x="627" y="213"></rect>
-        <ellipse cx="650.55" cy="229" fill="#ADD1B2" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"></ellipse>
-        <path d="M653.5188,234.6406 Q652.9406,234.9375 652.3,235.0781 Q651.6594,235.2344 650.9563,235.2344 Q648.4563,235.2344 647.1281,233.5938 Q645.8156,231.9375 645.8156,228.8125 Q645.8156,225.6875 647.1281,224.0313 Q648.4563,222.375 650.9563,222.375 Q651.6594,222.375 652.3,222.5313 Q652.9563,222.6875 653.5188,222.9844 L653.5188,225.7031 Q652.8938,225.125 652.3,224.8594 Q651.7063,224.5781 651.0813,224.5781 Q649.7375,224.5781 649.05,225.6563 Q648.3625,226.7188 648.3625,228.8125 Q648.3625,230.9063 649.05,231.9844 Q649.7375,233.0469 651.0813,233.0469 Q651.7063,233.0469 652.3,232.7813 Q652.8938,232.5 653.5188,231.9219 L653.5188,234.6406 Z "></path>
-        <text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="84" x="666.45" y="233.1543">QuotedLiteral</text>
-        <line style="stroke: #000000; stroke-width: 1.5;" x1="628" x2="761" y1="245" y2="245"></line>
-        <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="108" x="633" y="259.2104">value : EJavaObject</text>
-        <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="123" x="633" y="272.0151">langTag : EJavaObject</text>
+        <rect fill="#FFFFFF" filter="url(#fw0mwfjmjbyka)" height="78.4141" style="stroke: #000000; stroke-width: 1.5;" width="135" x="627" y="200"></rect>
+        <rect fill="#FFFFFF" height="32" style="stroke: #000000; stroke-width: 1.5;" width="135" x="627" y="200"></rect>
+        <ellipse cx="650.55" cy="216" fill="#ADD1B2" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"></ellipse>
+        <path d="M653.5188,221.6406 Q652.9406,221.9375 652.3,222.0781 Q651.6594,222.2344 650.9563,222.2344 Q648.4563,222.2344 647.1281,220.5938 Q645.8156,218.9375 645.8156,215.8125 Q645.8156,212.6875 647.1281,211.0313 Q648.4563,209.375 650.9563,209.375 Q651.6594,209.375 652.3,209.5313 Q652.9563,209.6875 653.5188,209.9844 L653.5188,212.7031 Q652.8938,212.125 652.3,211.8594 Q651.7063,211.5781 651.0813,211.5781 Q649.7375,211.5781 649.05,212.6563 Q648.3625,213.7188 648.3625,215.8125 Q648.3625,217.9063 649.05,218.9844 Q649.7375,220.0469 651.0813,220.0469 Q651.7063,220.0469 652.3,219.7813 Q652.8938,219.5 653.5188,218.9219 L653.5188,221.6406 Z "></path>
+        <text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="84" x="666.45" y="220.1543">QuotedLiteral</text>
+        <line style="stroke: #000000; stroke-width: 1.5;" x1="628" x2="761" y1="232" y2="232"></line>
+        <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="108" x="633" y="246.2104">value : EJavaObject</text>
+        <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="123" x="633" y="259.0151">langTag : EJavaObject</text>
+        <text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="106" x="633" y="271.8198">type : Scalar [0..1]</text>
        </a>
        <a target="_top" actuate="onRequest" href="#Literal" show="new" title="#Literal" type="simple">
-        <path d="M298.335,155.508 C253.218,171.873 195.489,193.1527 144.5,213 C138.908,215.1768 133.106,217.4772 127.305,219.8057 " fill="none" style="stroke: #000000; stroke-width: 1.0;"></path>
-        <polygon fill="none" points="295.968,148.92,317.157,148.7,300.73,162.085,295.968,148.92" style="stroke: #000000; stroke-width: 1.0;"></polygon>
+        <path d="M322.266,137.35 C274.792,152.161 204.264,175.38 144.5,200 C135.447,203.7294 125.963,208.0148 116.85,212.3334 " fill="none" style="stroke: #000000; stroke-width: 1.0;"></path>
+        <polygon fill="none" points="320.235,130.651,341.409,131.444,324.362,144.029,320.235,130.651" style="stroke: #000000; stroke-width: 1.0;"></polygon>
        </a>
        <a target="_top" actuate="onRequest" href="#Literal" show="new" title="#Literal" type="simple">
-        <path d="M326.334,165.529 C303.04,183.1871 275.968,203.7101 255.169,219.4765 " fill="none" style="stroke: #000000; stroke-width: 1.0;"></path>
-        <polygon fill="none" points="322.318,159.79,342.485,153.286,330.775,170.946,322.318,159.79" style="stroke: #000000; stroke-width: 1.0;"></polygon>
+        <path d="M335.201,152.174 C310.274,170.99 278.904,194.6693 255.432,212.3871 " fill="none" style="stroke: #000000; stroke-width: 1.0;"></path>
+        <polygon fill="none" points="331.071,146.521,351.252,140.058,339.506,157.695,331.071,146.521" style="stroke: #000000; stroke-width: 1.0;"></polygon>
        </a>
        <a target="_top" actuate="onRequest" href="#Literal" show="new" title="#Literal" type="simple">
-        <path d="M376.5,173.329 C376.5,188.9326 376.5,205.8157 376.5,219.2743 " fill="none" style="stroke: #000000; stroke-width: 1.0;"></path>
-        <polygon fill="none" points="369.5,173.286,376.5,153.286,383.5,173.286,369.5,173.286" style="stroke: #000000; stroke-width: 1.0;"></polygon>
+        <path d="M376.5,160.299 C376.5,177.477 376.5,197.1396 376.5,212.3871 " fill="none" style="stroke: #000000; stroke-width: 1.0;"></path>
+        <polygon fill="none" points="369.5,160.059,376.5,140.058,383.5,160.058,369.5,160.059" style="stroke: #000000; stroke-width: 1.0;"></polygon>
        </a>
        <a target="_top" actuate="onRequest" href="#Literal" show="new" title="#Literal" type="simple">
-        <path d="M426.666,165.529 C449.96,183.1871 477.032,203.7101 497.831,219.4765 " fill="none" style="stroke: #000000; stroke-width: 1.0;"></path>
-        <polygon fill="none" points="422.225,170.946,410.515,153.286,430.682,159.79,422.225,170.946" style="stroke: #000000; stroke-width: 1.0;"></polygon>
+        <path d="M417.799,152.174 C442.726,170.99 474.096,194.6693 497.568,212.3871 " fill="none" style="stroke: #000000; stroke-width: 1.0;"></path>
+        <polygon fill="none" points="413.494,157.695,401.748,140.058,421.929,146.521,413.494,157.695" style="stroke: #000000; stroke-width: 1.0;"></polygon>
        </a>
        <a target="_top" actuate="onRequest" href="#Element" show="new" title="#Element" type="simple">
-        <path d="M376.5,60.638 C376.5,73.603 376.5,87.989 376.5,99.912 " fill="none" style="stroke: #000000; stroke-width: 1.0;"></path>
-        <polygon fill="none" points="369.5,60.264,376.5,40.264,383.5,60.264,369.5,60.264" style="stroke: #000000; stroke-width: 1.0;"></polygon>
+        <path d="M376.5,60.445 C376.5,73.76 376.5,88.394 376.5,99.701 " fill="none" style="stroke: #000000; stroke-width: 1.0;"></path>
+        <polygon fill="none" points="369.5,60.103,376.5,40.103,383.5,60.103,369.5,60.103" style="stroke: #000000; stroke-width: 1.0;"></polygon>
        </a>
        <a target="_top" actuate="onRequest" href="#Literal" show="new" title="#Literal" type="simple">
-        <path d="M454.796,156.046 C500.039,172.587 558.018,193.864 609.5,213 C615.116,215.0876 620.938,217.2606 626.781,219.4475 " fill="none" style="stroke: #000000; stroke-width: 1.0;"></path>
-        <polygon fill="none" points="452.309,162.59,435.926,149.151,457.113,149.44,452.309,162.59" style="stroke: #000000; stroke-width: 1.0;"></polygon>
+        <path d="M430.776,137.814 C478.331,152.922 549.091,176.316 609.5,200 C615.068,202.1831 620.802,204.5289 626.538,206.9449 " fill="none" style="stroke: #000000; stroke-width: 1.0;"></path>
+        <polygon fill="none" points="428.577,144.461,411.605,131.774,432.784,131.108,428.577,144.461" style="stroke: #000000; stroke-width: 1.0;"></polygon>
        </a>
       </g>
      </svg>
@@ -5589,18 +5589,11 @@ this metamodel and can be manipulated using its API.
       <p>The int value of this literal</p>
     </ul>
     <h4 class="heading settled" data-level="3.2.5" id="Literal"><span class="secno">3.2.5. </span><span class="content"><dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="literal"><em>Literal</em></dfn></span><a class="self-link" href="#Literal"></a></h4>
-     Literal is an element that represents a specific scalar value. It can specify a scalar type that this literal belongs to. 
+     Literal is an element that represents a specific literal value classified by a scalar. 
     <p><em>Super classes:</em> <a data-link-type="dfn" href="#element" id="ref-for-element②">Element</a></p>
     <p><em>Sub classes:</em> <a data-link-type="dfn" href="#quotedliteral" id="ref-for-quotedliteral">QuotedLiteral</a>, <a data-link-type="dfn" href="#integerliteral" id="ref-for-integerliteral">IntegerLiteral</a>, <a data-link-type="dfn" href="#decimalliteral" id="ref-for-decimalliteral">DecimalLiteral</a>, <a data-link-type="dfn" href="#doubleliteral" id="ref-for-doubleliteral">DoubleLiteral</a>, <a data-link-type="dfn" href="#booleanliteral" id="ref-for-booleanliteral">BooleanLiteral</a></p>
-    <p><em>Properties:</em></p>
-    <ul>
-     <li data-md>
-      <p><strong>type</strong> : <a data-link-type="dfn" href="#scalar" id="ref-for-scalar">Scalar</a> [0..1]</p>
-      <p>The scalar that is the type of this literal</p>
-    </ul>
     <h4 class="heading settled" data-level="3.2.6" id="QuotedLiteral"><span class="secno">3.2.6. </span><span class="content"><dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="quotedliteral">QuotedLiteral</dfn></span><a class="self-link" href="#QuotedLiteral"></a></h4>
-     QuotedLiteral is a literal that specifies its lexical value as a quoted string. It can also specify either a type
-	(a scalar), or a langTag (based on http://www.rfc-editor.org/rfc/bcp/bcp47.txt), but not both. 
+     QuotedLiteral is a literal that specifies its lexical value as a quoted string along with a language tag, a scalar type, or neither. 
     <p><em>Super classes:</em> <a data-link-type="dfn" href="#literal" id="ref-for-literal⑦">Literal</a></p>
     <p><em>Properties:</em></p>
     <ul>
@@ -5610,6 +5603,9 @@ this metamodel and can be manipulated using its API.
      <li data-md>
       <p><strong>langTag</strong> : EJavaObject [0..1]</p>
       <p>The langTag of this literal</p>
+     <li data-md>
+      <p><strong>type</strong> : <a data-link-type="dfn" href="#scalar" id="ref-for-scalar">Scalar</a> [0..1]</p>
+      <p>The scalar that is the type of this literal</p>
     </ul>
     <h3 class="heading settled" data-level="3.3" id="Ontologies"><span class="secno">3.3. </span><span class="content">Ontologies</span><a class="self-link" href="#Ontologies"></a></h3>
     <p>
@@ -9709,7 +9705,7 @@ function onBarClick(e) {
   <aside class="dfn-panel" data-for="scalar">
    <b><a href="#scalar">#scalar</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-scalar">3.2.5. Literal</a>
+    <li><a href="#ref-for-scalar">3.2.6. QuotedLiteral</a>
     <li><a href="#ref-for-scalar①">3.5.9. ScalarProperty</a>
     <li><a href="#ref-for-scalar②">3.6.5. EnumeratedScalar</a>
     <li><a href="#ref-for-scalar③">3.6.6. FacetedScalar</a>
