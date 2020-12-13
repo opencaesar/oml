@@ -590,16 +590,16 @@ Literal:
 
 
 IntegerLiteral:
-	value=Integer ('^^' type=[Scalar|Ref])?;
+	value=Integer;
 
 DecimalLiteral:
-	value=Decimal ('^^' type=[Scalar|Ref])?;
+	value=Decimal;
 
 DoubleLiteral:
-	value=Double ('^^' type=[Scalar|Ref])?;
+	value=Double;
 
 BooleanLiteral:
-	value=Boolean ('^^' type=[Scalar|Ref])?;
+	value=Boolean;
 
 QuotedLiteral:
 	value=STRING (('^^' type=[Scalar|Ref]) | ('$' langTag=ID))?;

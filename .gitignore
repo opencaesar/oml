@@ -12,3 +12,4 @@ build
 .antlr-generator-*.jar
 *.iml
 *.log
+*.hprof

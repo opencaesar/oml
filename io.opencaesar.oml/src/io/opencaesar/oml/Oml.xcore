@@ -1669,19 +1669,14 @@ class DifferentFromPredicate extends BinaryPredicate {
 }
 
 /*
- * Literal is an element that represents a specific scalar value. It can specify a scalar type that this literal belongs to.
+ * Literal is an element that represents a specific literal value classified by a scalar.
  */
 @Bikeshed(heading="Literals")
 abstract class Literal extends Element {
-	/*
-	 * The scalar that is the type of this literal
-	 */
-	refers Scalar ^type
 }
 
 /*
- * QuotedLiteral is a literal that specifies its lexical value as a quoted string. It can also specify either a type 
- * (a scalar), or a langTag (based on http://www.rfc-editor.org/rfc/bcp/bcp47.txt), but not both.
+ * QuotedLiteral is a literal that specifies its lexical value as a quoted string along with a language tag, a scalar type, or neither.
  */
 @Bikeshed(heading="Literals")
 class QuotedLiteral extends Literal  {
@@ -1693,6 +1688,10 @@ class QuotedLiteral extends Literal  {
 	 * The langTag of this literal
 	 */
 	String langTag
+	/*
+	 * The scalar that is the type of this literal
+	 */
+	refers Scalar ^type
 }
 
 /*

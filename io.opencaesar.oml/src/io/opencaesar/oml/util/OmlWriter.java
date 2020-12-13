@@ -987,7 +987,7 @@ public class OmlWriter {
 		final QuotedLiteral literal = create(QuotedLiteral.class);
 		literal.setValue(value);
 		if (typeIri != null) {
-			setReference(ontology, literal, OmlPackage.Literals.LITERAL__TYPE, typeIri);
+			setReference(ontology, literal, OmlPackage.Literals.QUOTED_LITERAL__TYPE, typeIri);
 		} else if (langTag != null) {
 			literal.setLangTag(langTag);
 		}
@@ -996,45 +996,33 @@ public class OmlWriter {
 		
 	// IntegerLiteral
 
-	public IntegerLiteral createIntegerLiteral(Ontology ontology, int value, String typeIri) {
+	public IntegerLiteral createIntegerLiteral(Ontology ontology, int value) {
 		final IntegerLiteral literal = create(IntegerLiteral.class);
 		literal.setValue(value);
-		if (typeIri != null) {
-			setReference(ontology, literal, OmlPackage.Literals.LITERAL__TYPE, typeIri);
-		}
 		return literal;
 	}
 		
 	// DecimalLiteral
 
-	public DecimalLiteral createDecimalLiteral(Ontology ontology, BigDecimal value, String typeIri) {
+	public DecimalLiteral createDecimalLiteral(Ontology ontology, BigDecimal value) {
 		final DecimalLiteral literal = create(DecimalLiteral.class);
 		literal.setValue(value);
-		if (typeIri != null) {
-			setReference(ontology, literal, OmlPackage.Literals.LITERAL__TYPE, typeIri);
-		}
 		return literal;
 	}
 
 	// DoubleLiteral
 
-	public DoubleLiteral createDoubleLiteral(Ontology ontology, double value, String typeIri) {
+	public DoubleLiteral createDoubleLiteral(Ontology ontology, double value) {
 		final DoubleLiteral literal = create(DoubleLiteral.class);
 		literal.setValue(value);
-		if (typeIri != null) {
-			setReference(ontology, literal, OmlPackage.Literals.LITERAL__TYPE, typeIri);
-		}
 		return literal;
 	}
 
 	// BooleanLiteral
 	
-	public BooleanLiteral createBooleanLiteral(Ontology ontology, boolean value, String typeIri) {
+	public BooleanLiteral createBooleanLiteral(Ontology ontology, boolean value) {
 		final BooleanLiteral literal = create(BooleanLiteral.class);
 		literal.setValue(value);
-		if (typeIri != null) {
-			setReference(ontology, literal, OmlPackage.Literals.LITERAL__TYPE, typeIri);
-		}
 		return literal;
 	}
 		

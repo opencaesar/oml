@@ -20,7 +20,6 @@ package io.opencaesar.oml.util;
 
 import java.io.File;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -1516,82 +1515,50 @@ public class OmlRead {
 
 	public static Object getLiteralValue(Literal literal) {
 		if (literal instanceof QuotedLiteral) {
-			return getLiteralValue((QuotedLiteral)literal); 
+			return ((QuotedLiteral)literal).getValue(); 
 		} else if (literal instanceof IntegerLiteral) {
-			return getLiteralValue((IntegerLiteral)literal); 
+			return ((IntegerLiteral)literal).getValue(); 
 		} else if (literal instanceof DecimalLiteral) {
-			return getLiteralValue((DecimalLiteral)literal); 
+			return ((DecimalLiteral)literal).getValue(); 
 		} else if (literal instanceof DoubleLiteral) {
-			return getLiteralValue((DoubleLiteral)literal); 
+			return ((DoubleLiteral)literal).getValue(); 
 		} else if (literal instanceof BooleanLiteral) {
-			return getLiteralValue((BooleanLiteral)literal); 
+			return ((BooleanLiteral)literal).isValue(); 
 		}
 		return null;
 	}
 
 	public static String getLexicalValue(Literal literal) {
+		Object value = getLiteralValue(literal);
+		return value != null ? value.toString() : null;
+	}
+
+	public static String getTypeIri(Literal literal) {
 		if (literal instanceof QuotedLiteral) {
-			return getLexicalValue((QuotedLiteral)literal); 
+			QuotedLiteral qLiteral = (QuotedLiteral)literal; 
+			return qLiteral.getType() != null ? 
+				OmlRead.getIri(qLiteral.getType()) : 
+				OmlConstants.XSD_NS+"string"; 
 		} else if (literal instanceof IntegerLiteral) {
-			return getLexicalValue((IntegerLiteral)literal); 
+			return OmlConstants.XSD_NS+"integer"; 
 		} else if (literal instanceof DecimalLiteral) {
-			return getLexicalValue((DecimalLiteral)literal); 
+			return OmlConstants.XSD_NS+"decimal"; 
 		} else if (literal instanceof DoubleLiteral) {
-			return getLexicalValue((DoubleLiteral)literal); 
+			return OmlConstants.XSD_NS+"double"; 
 		} else if (literal instanceof BooleanLiteral) {
-			return getLexicalValue((BooleanLiteral)literal); 
+			return OmlConstants.XSD_NS+"boolean"; 
 		}
 		return null;
 	}
 
 	// QuotedLiteral
 	
-	public static Object getLiteralValue(QuotedLiteral literal) {
-		return literal.getValue();
-	}
-	
-	public static String getLexicalValue(QuotedLiteral literal) {
-		return literal.getValue();
-	}
-
 	// IntegerLiteral
 	
-	public static int getLiteralValue(IntegerLiteral literal) {
-		return literal.getValue();
-	}
-
-	public static String getLexicalValue(IntegerLiteral literal) {
-		return Integer.toString(literal.getValue());
-	}
-
 	// DecimalLiteral
 	
-	public static BigDecimal getLiteralValue(DecimalLiteral literal) {
-		return literal.getValue();
-	}
-
-	public static String getLexicalValue(DecimalLiteral literal) {
-		return (literal.getValue() != null) ? literal.getValue().toString() : "0.0";
-	}
-
 	// DoubleLiteral
 	
-	public static double getLiteralValue(DoubleLiteral literal) {
-		return literal.getValue();
-	}
-
-	public static String getLexicalValue(DoubleLiteral literal) {
-		return Double.toString(literal.getValue());
-	}
-	
 	// BooleanLiteral
-	
-	public static boolean getLiteralValue(BooleanLiteral literal) {
-		return literal.isValue();
-	}
-
-	public static String getLexicalValue(BooleanLiteral literal) {
-		return Boolean.toString(literal.isValue());
-	}
 
 }

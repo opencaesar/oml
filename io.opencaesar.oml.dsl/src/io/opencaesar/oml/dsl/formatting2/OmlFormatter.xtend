@@ -24,13 +24,11 @@ import io.opencaesar.oml.AnnotationProperty
 import io.opencaesar.oml.AnnotationPropertyReference
 import io.opencaesar.oml.Aspect
 import io.opencaesar.oml.AspectReference
-import io.opencaesar.oml.BooleanLiteral
 import io.opencaesar.oml.Concept
 import io.opencaesar.oml.ConceptInstance
 import io.opencaesar.oml.ConceptInstanceReference
 import io.opencaesar.oml.ConceptReference
 import io.opencaesar.oml.ConceptTypeAssertion
-import io.opencaesar.oml.DecimalLiteral
 import io.opencaesar.oml.Description
 import io.opencaesar.oml.DescriptionBundle
 import io.opencaesar.oml.DescriptionBundleExtension
@@ -39,14 +37,12 @@ import io.opencaesar.oml.DescriptionBundleUsage
 import io.opencaesar.oml.DescriptionExtension
 import io.opencaesar.oml.DescriptionUsage
 import io.opencaesar.oml.DifferentFromPredicate
-import io.opencaesar.oml.DoubleLiteral
 import io.opencaesar.oml.EntityPredicate
 import io.opencaesar.oml.EnumeratedScalar
 import io.opencaesar.oml.EnumeratedScalarReference
 import io.opencaesar.oml.FacetedScalar
 import io.opencaesar.oml.FacetedScalarReference
 import io.opencaesar.oml.ForwardRelation
-import io.opencaesar.oml.IntegerLiteral
 import io.opencaesar.oml.InverseSourceRelation
 import io.opencaesar.oml.InverseTargetRelation
 import io.opencaesar.oml.KeyAxiom
@@ -651,22 +647,6 @@ class OmlFormatter extends AbstractFormatter2 {
 	def dispatch void format(QuotedLiteral literal, extension IFormattableDocument document) {
 		literal.regionFor.keyword(quotedLiteralAccess.circumflexAccentCircumflexAccentKeyword_1_0_0).surround[noSpace]
 		literal.regionFor.keyword(quotedLiteralAccess.dollarSignKeyword_1_1_0).surround[noSpace]
-	}
-
-	def dispatch void format(BooleanLiteral literal, extension IFormattableDocument document) {
-		literal.regionFor.keyword(booleanLiteralAccess.circumflexAccentCircumflexAccentKeyword_1_0).surround[noSpace]
-	}
-
-	def dispatch void format(IntegerLiteral literal, extension IFormattableDocument document) {
-		literal.regionFor.keyword(integerLiteralAccess.circumflexAccentCircumflexAccentKeyword_1_0).surround[noSpace]
-	}
-
-	def dispatch void format(DecimalLiteral literal, extension IFormattableDocument document) {
-		literal.regionFor.keyword(decimalLiteralAccess.circumflexAccentCircumflexAccentKeyword_1_0).surround[noSpace]
-	}
-
-	def dispatch void format(DoubleLiteral literal, extension IFormattableDocument document) {
-		literal.regionFor.keyword(doubleLiteralAccess.circumflexAccentCircumflexAccentKeyword_1_0).surround[noSpace]
 	}
 
 	def formatBrackets(EObject e, extension IFormattableDocument document) {

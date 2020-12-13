@@ -54,9 +54,9 @@ import io.opencaesar.oml.FacetedScalarReference;
 import io.opencaesar.oml.FeatureProperty;
 import io.opencaesar.oml.KeyAxiom;
 import io.opencaesar.oml.LinkAssertion;
-import io.opencaesar.oml.Literal;
 import io.opencaesar.oml.NamedInstance;
 import io.opencaesar.oml.OmlPackage;
+import io.opencaesar.oml.QuotedLiteral;
 import io.opencaesar.oml.Relation;
 import io.opencaesar.oml.RelationCardinalityRestrictionAxiom;
 import io.opencaesar.oml.RelationEntity;
@@ -317,8 +317,8 @@ public class OmlIndex {
 		return findInverseReferencers(scalar, ScalarPropertyCardinalityRestrictionAxiom.class, OmlPackage.Literals.SCALAR_PROPERTY_CARDINALITY_RESTRICTION_AXIOM__RANGE);
 	}
 
-	public static List<Literal> findLiteralsWithType(Scalar scalar) {
-		return findInverseReferencers(scalar, Literal.class, OmlPackage.Literals.LITERAL__TYPE);
+	public static List<QuotedLiteral> findQuotedLiteralsWithType(Scalar scalar) {
+		return findInverseReferencers(scalar, QuotedLiteral.class, OmlPackage.Literals.QUOTED_LITERAL__TYPE);
 	}
 
 	// FacetedScalar

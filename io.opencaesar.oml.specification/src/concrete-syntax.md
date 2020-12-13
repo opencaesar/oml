@@ -74,14 +74,14 @@ An ontology may have comments (descriptive text placed by ontology developers) t
 ### [=Literal=] ### {#Literal-Syntax}
 
 <pre class="highlight highlight-html">
-INTEGER (^^(<a href="#FacetedScalar-Syntax">[FacetedScalar_IRI]</a> | <a href="#EnumeratedScalar-Syntax">[EnumeratedScalar_IRI]</a>))? |
-DECIMAL (^^(<a href="#FacetedScalar-Syntax">[FacetedScalar_IRI]</a> | <a href="#EnumeratedScalar-Syntax">[EnumeratedScalar_IRI]</a>))? |
-DOUBLE (^^(<a href="#FacetedScalar-Syntax">[FacetedScalar_IRI]</a> | <a href="#EnumeratedScalar-Syntax">[EnumeratedScalar_IRI]</a>))? |
-BOOLEAN (^^(<a href="#FacetedScalar-Syntax">[FacetedScalar_IRI]</a> | <a href="#EnumeratedScalar-Syntax">[EnumeratedScalar_IRI]</a>))? |
-STRING (^^(<a href="#FacetedScalar-Syntax">[FacetedScalar_IRI]</a> | <a href="#EnumeratedScalar-Syntax">[EnumeratedScalar_IRI]</a>) | $LANG_TAG)?
+INTEGER |
+DECIMAL |
+DOUBLE |
+BOOLEAN |
+STRING (^^<a href="#FacetedScalar-Syntax">FacetedScalar_IRI</a> | $<a href="https://tools.ietf.org/html/bcp47#section-2">langTag</a>)?
 </pre>
 
-LANG_TAG is string value conforming to [https://tools.ietf.org/html/bcp47](https://tools.ietf.org/html/bcp47) 
+FacetedScalar_IRI must be an IRI of one of the OWL2 [built-in datatypes](https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/#built-in-datatypes) only.
 
 ### [Diagram] ### {#Diagram-Syntax}
 

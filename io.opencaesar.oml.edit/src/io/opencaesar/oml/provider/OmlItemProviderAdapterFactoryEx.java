@@ -1324,6 +1324,9 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 			if (quotedLiteral.getLangTag() != null) {
 				label.append("$").append(quotedLiteral.getLangTag());
 			}
+			if (quotedLiteral.getType() != null) {
+				label.append("^^").append(getLabel(quotedLiteral.getType(), literal));
+			}
 		} else if (literal instanceof IntegerLiteral) {
 			label.append(((IntegerLiteral) literal).getValue());
 		} else if (literal instanceof DecimalLiteral) {
@@ -1332,9 +1335,6 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 			label.append(((DoubleLiteral) literal).getValue());
 		} else if (literal instanceof BooleanLiteral) {
 			label.append(((BooleanLiteral) literal).isValue());
-		}
-		if (literal.getType() != null) {
-			label.append("^^").append(getLabel(literal.getType(), literal));
 		}
 		return label;
 	}

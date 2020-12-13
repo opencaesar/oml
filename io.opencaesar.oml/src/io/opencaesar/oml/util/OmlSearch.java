@@ -24,6 +24,7 @@ import java.text.SimpleDateFormat;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -68,6 +69,7 @@ import io.opencaesar.oml.Ontology;
 import io.opencaesar.oml.Property;
 import io.opencaesar.oml.PropertyRestrictionAxiom;
 import io.opencaesar.oml.PropertyValueAssertion;
+import io.opencaesar.oml.QuotedLiteral;
 import io.opencaesar.oml.Reference;
 import io.opencaesar.oml.Relation;
 import io.opencaesar.oml.RelationEntity;
@@ -631,27 +633,27 @@ public class OmlSearch extends OmlIndex {
 			findFirst().orElse(null);
 	}
 
-	public static Scalar findRootScalar(Scalar scalar) {
+	public static Class<?> findJavaType(Scalar scalar) {
 		while (scalar != null) {
-			scalar = findGeneralScalar(scalar);	
-		}
-		return scalar;
-	}
-	
-	public static Scalar findJavaScalar(Scalar scalar) {
-		while (scalar != null) {
-			String scalarIri = OmlRead.getIri(scalar);
-			if (scalarIri.equals(OmlConstants.XSD_NS+"integer") ||
-			    scalarIri.equals(OmlConstants.XSD_NS+"decimal") ||
-			    scalarIri.equals(OmlConstants.XSD_NS+"double") ||
-			    scalarIri.equals(OmlConstants.XSD_NS+"float") ||
-			    scalarIri.equals(OmlConstants.XSD_NS+"boolean") ||
-			    scalarIri.equals(OmlConstants.XSD_NS+"dateTime")) {
-				return scalar;
+			switch (OmlRead.getIri(scalar)) {
+				case OmlConstants.XSD_NS+"integer":
+					return Integer.class;
+				case OmlConstants.XSD_NS+"decimal":
+					return BigDecimal.class;
+				case OmlConstants.XSD_NS+"double":
+					return Double.class;
+				case OmlConstants.XSD_NS+"float":
+					return Float.class;
+				case OmlConstants.XSD_NS+"boolean":
+					return Boolean.class;
+				case OmlConstants.XSD_NS+"dateTime":
+					return Date.class;
+				case OmlConstants.OWL_NS+"real":
+					return Double.class;
 			}
 			scalar = findGeneralScalar(scalar);	
 		}
-		return scalar;
+		return String.class;
 	}
 
 	// FacetedScalar
@@ -946,33 +948,30 @@ public class OmlSearch extends OmlIndex {
 
 	// Literal
 
-	public static Object findTypedLiteralValue(Literal literal) {
-		Object value = OmlRead.getLiteralValue(literal);
-		if (value instanceof String) {
-			String strValue =  (String)value;
-			Scalar type = findJavaScalar(literal.getType());
-			if (type != null) {
-				switch(OmlRead.getIri(type)) {
-					case OmlConstants.XSD_NS+"integer":
-						return Integer.valueOf(strValue);
-					case OmlConstants.XSD_NS+"decimal":
-						return new BigDecimal(strValue);
-					case OmlConstants.XSD_NS+"double":
-						return Double.valueOf(strValue);
-					case OmlConstants.XSD_NS+"float":
-						return Float.valueOf(strValue);
-					case OmlConstants.XSD_NS+"boolean":
-						return Boolean.valueOf(strValue);
-					case OmlConstants.XSD_NS+"dateTime":
-						try {
-							return new SimpleDateFormat().parse(strValue);
-						} catch (ParseException e) {
-							throw new DateTimeParseException("Error parsing xsd:dateTime", strValue, 0);
-						}
+	public static Object findJavaValue(Literal literal) {
+		if (literal instanceof QuotedLiteral) {
+			QuotedLiteral qLiteral = (QuotedLiteral)literal;
+			String value =  qLiteral.getValue();
+			Class<?> type = findJavaType(qLiteral.getType());
+			if (type == Integer.class)
+				return Integer.valueOf(value);
+			else if (type == BigDecimal.class)
+				return new BigDecimal(value);
+			else if (type == Double.class)
+				return Double.valueOf(value);
+			else if (type == Float.class)
+				return Float.valueOf(value);
+			else if (type == Boolean.class)
+				return Boolean.valueOf(value);
+			else if (type == Date.class)
+				try {
+					return new SimpleDateFormat().parse(value);
+				} catch (ParseException e) {
+					throw new DateTimeParseException("Error parsing xsd:dateTime", value, 0);
 				}
-			}
+			return value;
 		}
-		return value;
+		return OmlRead.getLiteralValue(literal);
 	}
 
 	// QuotedLiteral
