@@ -28,6 +28,6 @@ public interface OmlConstants {
 
 	public static final String DC_IRI = "http://purl.org/dc/elements/1.1";
 
-	public static final String DC_NS = OWL_IRI+"/";
+	public static final String DC_NS = DC_IRI+"/";
 
 }
