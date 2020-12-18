@@ -218,7 +218,7 @@ public class OmlValidator2 {
 	
 	protected boolean checkRelationRestrictionAxiomRelation(RelationRestrictionAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		final Classifier restrictingClassifier = OmlRead.getRestrictingClassifier(object);
-		final Entity domainType = object.getRelation().getDomain();
+		final Entity domainType = object.getRelation().getRange();
 		final Collection<SpecializableTerm> allGeneralTerms = OmlRead.reflexiveClosure(restrictingClassifier, t -> OmlSearch.findGeneralTerms(t));
 		if (!allGeneralTerms.stream().filter(t -> t == domainType).findAny().isPresent()) {
 			return report(Diagnostic.ERROR, diagnostics, object,
