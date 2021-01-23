@@ -24,11 +24,10 @@ import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.URIConverter;
 
-class OmlCatalogManager implements Runnable {
+class OmlUriResolver implements Runnable {
 
-	private static OmlCatalogManager instance = new OmlCatalogManager();
+	private static OmlUriResolver instance = new OmlUriResolver();
 
 	private Thread thread;
 	private boolean doStop = false;
@@ -38,7 +37,7 @@ class OmlCatalogManager implements Runnable {
 	private Map<URI, Map<URI, URI>> importCache;
 	private Map<URI, OmlCatalog> catalogCache;
 
-	private OmlCatalogManager() {
+	private OmlUriResolver() {
 		catalogCache = new HashMap<>();
 		importCache = new HashMap<>();
 		activate();
@@ -75,7 +74,7 @@ class OmlCatalogManager implements Runnable {
 		catalogCache.clear();
 	}
 	
-	public static OmlCatalogManager get(ResourceSet resourceSet) {
+	public static OmlUriResolver get(ResourceSet resourceSet) {
 		List<Adapter> adapters = resourceSet.eAdapters();
 		for (int i = 0, size = adapters.size(); i < size; ++i) {
 			Object adapter = adapters.get(i);
@@ -87,13 +86,19 @@ class OmlCatalogManager implements Runnable {
 		return instance;
 	}
 
-	protected File toFile(URI emfURI) {
-		URI uri = CommonPlugin.asLocalURI(emfURI);
-		return uri.isFile() ? new File(uri.toFileString()) : null;
+	protected File toFile(URI uri) {
+		URI localUri = CommonPlugin.asLocalURI(uri);
+		return localUri.isFile() ? new File(localUri.toFileString()) : null;
 	}
 
-	protected URI toURI(File file) {
-		return URI.createFileURI(file.getAbsolutePath());
+	protected boolean isPhysicalUri(URI uri) {
+		URI localUri = CommonPlugin.asLocalURI(uri);
+		return localUri.isFile();
+	}
+
+	protected boolean exists(URI uri) {
+		File file = toFile(uri);
+		return (file != null) ? file.exists() : false;
 	}
 
 	protected List<File> getParents(File file) {
@@ -106,27 +111,51 @@ class OmlCatalogManager implements Runnable {
 		return parents;
 	}
 
-	public URI getResolvedUri(Resource contextResource, URI importUri) {
-		URI contextURI = (contextResource != null) ? contextResource.getURI() : null;
-		if (contextURI == null) {
+	public URI resolve(Resource contextResource, URI importUri) {
+		URI contextUri = (contextResource != null) ? contextResource.getURI() : null;
+		if (contextUri == null) {
 			return null;
 		}
-		contextURI = contextURI.trimSegments(1);
 		
-		Map<URI, URI> importMap = importCache.get(contextURI);
+		URI folderUri = contextUri.trimSegments(1);
+		if (folderUri == null) {
+			return null;
+		}
+				
+		Map<URI, URI> importMap = importCache.get(folderUri);
 		if (importMap == null) {
-			importCache.put(contextURI, importMap = new HashMap<>());
+			importCache.put(folderUri, importMap = new HashMap<>());
 		}
 		
 		if (importMap.containsKey(importUri)) {
 			return importMap.get(importUri);
 		}
 		
-		if (!catalogCache.containsKey(contextURI)) {
-			findCatalogs(catalogCache, contextURI);
+		final URI resolvedUri;
+		
+		if (importUri.isRelative()) {
+			if (!contextUri.isRelative()) {
+				resolvedUri =  importUri.resolve(contextUri, true);
+			} else {
+				resolvedUri = importUri;
+			}
+		} else if (isPhysicalUri(importUri)) {
+			resolvedUri = importUri;
+		} else { //logical
+			resolvedUri = resolveFromCatalog(folderUri, importUri);
 		}
 		
-		OmlCatalog catalog = catalogCache.get(contextURI);
+		importMap.put(importUri, resolvedUri);
+		
+		return resolvedUri;
+	}
+	
+	protected URI resolveFromCatalog(URI folderUri, URI importUri) {
+		if (!catalogCache.containsKey(folderUri)) {
+			findCatalogs(catalogCache, folderUri);
+		}
+		
+		OmlCatalog catalog = catalogCache.get(folderUri);
 		if (catalog == null) {
 			return null;
 		}
@@ -135,36 +164,24 @@ class OmlCatalogManager implements Runnable {
 		try {
 			resolved = catalog.resolveURI(importUri.toString());
 			if (resolved == null) {
-				importMap.put(importUri, null);
 				return null;
 			}
 		} catch (Exception e) {
 			System.err.println(e);
-			importMap.put(importUri, null);
 			return null;
 		}
 
-		ResourceSet rs = contextResource.getResourceSet();
-		if (rs != null) {
-			URIConverter converter = rs.getURIConverter();
-			if (converter != null) {
-				URI resolvedUri = URI.createURI(resolved+'.'+OmlConstants.OML_EXTENSION);
-				if (!converter.exists(resolvedUri, null)) {
-					resolvedUri = URI.createURI(resolved+'.'+OmlConstants.OMLXMI_EXTENSION);
-					if (!converter.exists(resolvedUri, null)) {
-						resolvedUri = URI.createURI(resolved);
-					}
-				}
-				importMap.put(importUri, resolvedUri);
-				return resolvedUri;
+		URI resolvedUri = URI.createURI(resolved+'.'+OmlConstants.OML_EXTENSION);
+		if (!exists(resolvedUri)) {
+			resolvedUri = URI.createURI(resolved+'.'+OmlConstants.OMLXMI_EXTENSION);
+			if (!exists(resolvedUri)) {
+				resolvedUri = URI.createURI(resolved);
 			}
 		}
-			
-		URI resolvedUri = URI.createURI(resolved);
-		importMap.put(importUri, resolvedUri);
+
 		return resolvedUri;
 	}
-	
+		
 	protected void findCatalogs(Map<URI, OmlCatalog> catalogMap, URI folderUri) {
 		final List<URI> uris = new ArrayList<>();
 		OmlCatalog catalog = null;
