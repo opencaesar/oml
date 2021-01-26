@@ -49,6 +49,7 @@ class OmlUriResolver implements Runnable {
 				watcher = FileSystems.getDefault().newWatchService();
 				watched = new HashMap<>();
 				thread = new Thread(this, "CatalogManager");
+				thread.setDaemon(true);
 				thread.start();
 			} catch (IOException e) {
 				System.err.println(e);
