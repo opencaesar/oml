@@ -734,10 +734,10 @@ public class OmlWriter {
 
 	// DescriptionBundleInclusion
 	
-	public DescriptionBundleInclusion addDescriptionBundleInclusion(DescriptionBundle bundle, String includedAssertionURI, String includedAssertionPrefix) {
+	public DescriptionBundleInclusion addDescriptionBundleInclusion(DescriptionBundle bundle, String includedDescriptionURI, String includedDescriptionPrefix) {
 		final DescriptionBundleInclusion inclusion = create(DescriptionBundleInclusion.class);
-		inclusion.setUri(includedAssertionURI);
-		inclusion.setPrefix(includedAssertionPrefix);
+		inclusion.setUri(includedDescriptionURI);
+		inclusion.setPrefix(includedDescriptionPrefix);
 		bundle.getOwnedImports().add(inclusion);
 		return inclusion;
 	}

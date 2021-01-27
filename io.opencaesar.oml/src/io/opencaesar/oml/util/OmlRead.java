@@ -18,13 +18,8 @@
  */
 package io.opencaesar.oml.util;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -34,7 +29,6 @@ import java.util.function.Function;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -136,8 +130,6 @@ import io.opencaesar.oml.VocabularyStatement;
 import io.opencaesar.oml.VocabularyUsage;
 
 public class OmlRead {
-	
-	private static final String CATALOGS = "Catalogs";
 	
 	// closure operators
 	
@@ -1013,90 +1005,30 @@ public class OmlRead {
 	public static final Pattern NUMBER = Pattern.compile("\\d+");
 
 	synchronized public static URI getResolvedImportUri(Import _import) {
-		if (_import.getUri() != null) {
-			URI uri = URI.createURI(_import.getUri());
-			if (uri.isRelative() && !uri.isEmpty()) {
-				final Resource r = _import.eResource();
-				final URI contextURI = (r != null) ? r.getURI() : null;
-				if (contextURI != null) {
-					uri = uri.resolve(contextURI);
-				} else {
-					uri = null;
-				}
-			} else {
-				final Resource r = _import.eResource();
-				final URI contextURI = (r != null) ? r.getURI() : null;
-				final ResourceSet rs = (r != null) ? r.getResourceSet() : null;
-				if (rs != null && contextURI != null) {
-					@SuppressWarnings("unchecked")
-					Map<URI, OmlCatalog> catalogMap = (Map<URI, OmlCatalog>) rs.getLoadOptions().get(CATALOGS);
-					if (catalogMap == null) {
-						rs.getLoadOptions().put(CATALOGS, catalogMap = new HashMap<>());
-					}
-					try {
-						final URI directoryURI = contextURI.trimSegments(1);
-						if (!catalogMap.containsKey(directoryURI)) {
-							findCatalogs(catalogMap, directoryURI);
-						}
-						OmlCatalog catalog = catalogMap.get(directoryURI);
-						if (catalog != null) {
-							final String resolved = catalog.resolveURI(uri.toString());
-							if (resolved != null) {
-								uri = URI.createURI(resolved);
-								if (uri.fileExtension() == null) {
-									// if the imported URI does not end with an extension, assume it's .oml
-									uri = uri.appendFileExtension(OmlConstants.OML_EXTENSION);
-								} else if (NUMBER.matcher(uri.fileExtension()).matches()) { 
-									// special case for the dc vocabulary ending its IRI with a version number
-									uri = uri.appendFileExtension(OmlConstants.OML_EXTENSION);
-								}
-							}
-						}
-					} catch (Exception e) {
-						System.out.println(e);
-						// could not resolve using catalog
-					}
-				}
-			}
-			return uri;
+		if (_import.getUri() == null || _import.getUri().isEmpty()) {
+			return null;
 		}
-		return null;
+
+		URI importUri = URI.createURI(_import.getUri());
+
+		final Resource r = _import.eResource();
+		if (r == null) {
+			return null;
+		}
+
+		final ResourceSet rs = r.getResourceSet();
+		if (rs == null) {
+			return null;
+		}
+		
+		OmlUriResolver resolver = OmlUriResolver.get(rs);
+		if (resolver == null) {
+			return null;
+		}
+		
+		return resolver.resolve(r, importUri);
 	}
 	
-	private static void findCatalogs(Map<URI, OmlCatalog> catalogMap, URI folderUri) {
-		final List<URI> uris = new ArrayList<>();
-		OmlCatalog catalog = null;
-		URI currentUri = folderUri;
-		while (currentUri != null && catalog == null && currentUri.segmentCount() > 0) {
-			uris.add(currentUri);
-			URL catalogUrl = null;
-			try {
-				catalogUrl = new URL(currentUri.appendSegment("catalog.xml").toString());
-			} catch (MalformedURLException e) {
-				System.out.println(e);
-			}
-			URL catalogFileUrl = null;
-			try {
-				catalogFileUrl = FileLocator.toFileURL(catalogUrl);
-			} catch (IOException e) {
-				System.out.println(e);
-			}
-			try {
-				if (catalogFileUrl != null && catalogFileUrl.getProtocol().equals("file") && new File(catalogFileUrl.getPath()).exists()) {
-					catalog = OmlCatalog.create(catalogUrl);
-				}
-			} catch (Exception e) {
-				System.out.println(e);
-			}
-			if (catalog == null) {
-				currentUri = currentUri.trimSegments(1);
-				catalog = catalogMap.get(currentUri);
-			}
-		}
-		final OmlCatalog finalCatalog = catalog;
-		uris.forEach(uri -> catalogMap.put(uri, finalCatalog));
-	}
-
 	public static Resource getImportedResource(Import _import) {
 		final URI uri = getResolvedImportUri(_import);
 		if (uri == null) {
