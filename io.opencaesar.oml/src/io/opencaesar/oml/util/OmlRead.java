@@ -33,7 +33,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import io.opencaesar.oml.AnnotatedElement;
@@ -1038,17 +1037,9 @@ public class OmlRead {
 		if (resourceSet == null) {
 			return null;
 		}
-		 Resource resource = resourceSet.getResource(uri, false);
-		 if (resource != null) {
-		 	return resource;
-		 }
 		try {
-			final URIConverter uriConverter = resourceSet.getURIConverter();
-			if (uriConverter != null && uriConverter.exists(uri, resourceSet.getLoadOptions())) {
-				resource = resourceSet.getResource(uri, true);
-			}
-			return resource;
-		} catch (Throwable t) {
+			return resourceSet.getResource(uri, true);
+		} catch(Throwable t) {
 			return null;
 		}
 	}

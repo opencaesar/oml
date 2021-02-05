@@ -24,6 +24,7 @@ import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.URIConverter;
 
 class OmlUriResolver implements Runnable {
 
@@ -97,9 +98,19 @@ class OmlUriResolver implements Runnable {
 		return localUri.isFile();
 	}
 
-	protected boolean exists(URI uri) {
-		File file = toFile(uri);
-		return (file != null) ? file.exists() : false;
+	protected boolean exists(ResourceSet rs, URI uri) {
+		try {
+			if (rs.getResource(uri, false) != null) {
+				return true;
+			}
+			final URIConverter uriConverter = rs.getURIConverter();
+			if (uriConverter != null && uriConverter.exists(uri, rs.getLoadOptions())) {
+				return rs.getResource(uri, true) != null;
+			}
+			return false;
+		} catch(Throwable t) {
+			return false;
+		}
 	}
 
 	protected List<File> getParents(File file) {
@@ -143,15 +154,17 @@ class OmlUriResolver implements Runnable {
 		} else if (isPhysicalUri(importUri)) {
 			resolvedUri = importUri;
 		} else { //logical
-			resolvedUri = resolveFromCatalog(folderUri, importUri);
+			resolvedUri = resolveFromCatalog(contextResource.getResourceSet(), folderUri, importUri);
 		}
 		
-		importMap.put(importUri, resolvedUri);
+		if (resolvedUri != null) {
+			importMap.put(importUri, resolvedUri);
+		}
 		
 		return resolvedUri;
 	}
 	
-	protected URI resolveFromCatalog(URI folderUri, URI importUri) {
+	protected URI resolveFromCatalog(ResourceSet rs, URI folderUri, URI importUri) {
 		if (!catalogCache.containsKey(folderUri)) {
 			findCatalogs(catalogCache, folderUri);
 		}
@@ -173,10 +186,13 @@ class OmlUriResolver implements Runnable {
 		}
 
 		URI resolvedUri = URI.createURI(resolved+'.'+OmlConstants.OML_EXTENSION);
-		if (!exists(resolvedUri)) {
+		if (!exists(rs, resolvedUri)) {
 			resolvedUri = URI.createURI(resolved+'.'+OmlConstants.OMLXMI_EXTENSION);
-			if (!exists(resolvedUri)) {
+			if (!exists(rs, resolvedUri)) {
 				resolvedUri = URI.createURI(resolved);
+				if (!exists(rs, resolvedUri)) {
+					return null;
+				}
 			}
 		}
 
@@ -235,7 +251,7 @@ class OmlUriResolver implements Runnable {
 							StandardWatchEventKinds.ENTRY_MODIFY);
 					watched.put(key, parent);
 				} catch (IOException e) {
-					System.err.print(e);
+					break;
 				}
 			} else {
 				break;
