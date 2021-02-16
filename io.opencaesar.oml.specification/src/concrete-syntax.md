@@ -74,14 +74,14 @@ An ontology may have comments (descriptive text placed by ontology developers) t
 ### [=Literal=] ### {#Literal-Syntax}
 
 <pre class="highlight highlight-html">
-INTEGER |
-DECIMAL |
-DOUBLE |
-BOOLEAN |
-STRING (^^<a href="#FacetedScalar-Syntax">FacetedScalar_IRI</a> | $<a href="https://tools.ietf.org/html/bcp47#section-2">langTag</a>)?
+INTEGER | // literal is typed by xsd:integer
+DECIMAL | // literal is typed by xsd:decimal
+DOUBLE  | // literal is typed by xsd:double
+BOOLEAN | // literal is typed by xsd:boolean
+QUOTED_LITERAL (^^<a href="#FacetedScalar-Syntax">FacetedScalar_IRI</a> | $<a href="https://tools.ietf.org/html/bcp47#section-2">langTag</a>)?
 </pre>
 
-FacetedScalar_IRI must be an IRI of one of the OWL2 [built-in datatypes](https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/#built-in-datatypes) only.
+> For QUOTED_LITERAL, the [FacetedScalar_IRI](#FacetedScalar-Syntax) must be an IRI of one of the OWL2 [built-in datatypes](https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/#built-in-datatypes) only. If not specified, it defaults to xsd:string. (The OML API OmlRead.getTypeIRI(Literal) can be used to programmatically get the type IRI.)
 
 ### [Diagram] ### {#Diagram-Syntax}
 
