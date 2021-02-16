@@ -1484,9 +1484,9 @@ Possible extra rowspan handling
 		}
 	}
 </style>
-  <meta content="Bikeshed version 6053538f, updated Thu Feb 4 17:20:07 2021 -0800" name="generator">
+  <meta content="Bikeshed version abfe9661, updated Fri Feb 5 17:27:03 2021 -0800" name="generator">
   <link href="https://github.com/opencaesar/oml" rel="canonical">
-  <meta content="3504a3e8e2b6d2139c3165065f06809cf003f2cd" name="document-revision">
+  <meta content="574869cd399f150ca8b237efa01c14c847f054d4" name="document-revision">
 <style>
 body {
   padding: 0;
@@ -2148,7 +2148,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://opencaesar.github.io/oml/"> <img alt="Ontological Modeling Language" height="60" src="images/oml.svg"> </a></p>
    <h1 class="p-name no-ref" id="title">Ontological Modeling Language 0.8</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Document, <time class="dt-updated" datetime="2021-02-05">5 February 2021</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Document, <time class="dt-updated" datetime="2021-02-16">16 February 2021</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -2496,13 +2496,15 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
 <pre class="highlight highlight-html">@<a href="#AnnotationProperty-Syntax">AnnotationProperty_IRI</a> (<a href="#Literal-Syntax">Literal</a>)?
 </pre>
     <h4 class="heading settled" data-level="2.1.9" id="Literal-Syntax"><span class="secno">2.1.9. </span><span class="content"><a data-link-type="dfn" href="#literal" id="ref-for-literal">Literal</a></span><a class="self-link" href="#Literal-Syntax"></a></h4>
-<pre class="highlight highlight-html">INTEGER |
-DECIMAL |
-DOUBLE |
-BOOLEAN |
-STRING (^^<a href="#FacetedScalar-Syntax">FacetedScalar_IRI</a> | $<a href="https://tools.ietf.org/html/bcp47#section-2">langTag</a>)?
+<pre class="highlight highlight-html">INTEGER | // literal is typed by xsd:integer
+DECIMAL | // literal is typed by xsd:decimal
+DOUBLE  | // literal is typed by xsd:double
+BOOLEAN | // literal is typed by xsd:boolean
+QUOTED_LITERAL (^^<a href="#FacetedScalar-Syntax">FacetedScalar_IRI</a> | $<a href="https://tools.ietf.org/html/bcp47#section-2">langTag</a>)?
 </pre>
-    <p>FacetedScalar_IRI must be an IRI of one of the OWL2 <a href="https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/#built-in-datatypes">built-in datatypes</a> only.</p>
+    <blockquote>
+     <p>For QUOTED_LITERAL, the <a href="#FacetedScalar-Syntax">FacetedScalar_IRI</a> must be an IRI of one of the OWL2 <a href="https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/#built-in-datatypes">built-in datatypes</a> only. If not specified, it defaults to xsd:string. (The OML API OmlRead.getTypeIRI(Literal) can be used to programmatically get the type IRI.)</p>
+    </blockquote>
     <h4 class="heading settled" data-level="2.1.10" id="Diagram-Syntax"><span class="secno">2.1.10. </span><span class="content">[Diagram]</span><a class="self-link" href="#Diagram-Syntax"></a></h4>
     <p>The concrete syntax for each OML element is organized into tabs. The "Text" tab is showcased by default, displaying the textual syntax of the OML element. To see the graphical syntax of the element, click on the "Diagram" tab.</p>
     <p>The symbols colored in orange, and the symbols boxed in gray, are there solely to communicate more information about the elements they are attached to. They will not show up in actual implementations of OML diagrams.</p>
