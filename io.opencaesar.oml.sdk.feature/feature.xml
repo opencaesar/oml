@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="io.opencaesar.oml.sdk.feature"
+      label="%featureName"
+      version="0.8.8"
+      provider-name="%providerName">
+
+   <description>
+      %featureDesciption
+   </description>
+
+   <includes
+         id="io.opencaesar.oml.dsl.feature.source"
+         version="0.0.0"/>
+
+   <includes
+         id="io.opencaesar.oml.dsl.ui.feature.source"
+         version="0.0.0"/>
+
+   <includes
+         id="io.opencaesar.oml.feature.source"
+         version="0.0.0"/>
+
+   <includes
+         id="io.opencaesar.oml.ui.feature.source"
+         version="0.0.0"/>
+
+</feature>

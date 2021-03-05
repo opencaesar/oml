@@ -6,6 +6,20 @@
 		<artifactId>io.opencaesar.oml.parent</artifactId>
 		<version>0.8.8</version>
 	</parent>
-	<artifactId>io.opencaesar.oml.dsl.feature</artifactId>
+	<artifactId>io.opencaesar.oml.sdk.feature</artifactId>
 	<packaging>eclipse-feature</packaging>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.tycho.extras</groupId>
+				<artifactId>tycho-source-feature-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+  
 </project>

@@ -2,7 +2,7 @@
 <feature
       id="io.opencaesar.oml.ui.feature"
       label="%featureName"
-      version="0.8.7"
+      version="0.8.8"
       provider-name="%providerName">
 
    <description>
@@ -11,10 +11,6 @@
 
    <requires>
       <import feature="io.opencaesar.oml.feature"/>
-      <import plugin="org.eclipse.core.resources"/>
-      <import plugin="org.eclipse.ui.ide"/>
-      <import plugin="org.eclipse.emf.edit"/>
-      <import plugin="org.eclipse.emf.edit.ui"/>
    </requires>
 
    <plugin

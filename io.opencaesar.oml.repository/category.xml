@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-	<category-def name="main" label="OML"/>
-  	<feature id="io.opencaesar.oml.feature" version="0.0.0"><category name="main"/></feature>
-   	<feature id="io.opencaesar.oml.ui.feature" version="0.0.0"><category name="main"/></feature>
-   	<feature id="io.opencaesar.oml.dsl.feature" version="0.0.0"><category name="main"/></feature>
-   	<feature id="io.opencaesar.oml.dsl.ui.feature" version="0.0.0"><category name="main"/></feature>
-   
-   	<category-def name="main.source" label="OML (Sources)"/>
-  	<feature id="io.opencaesar.oml.feature.source" version="0.0.0"><category name="main.source"/></feature>
-   	<feature id="io.opencaesar.oml.dsl.feature.source" version="0.0.0"><category name="main.source"/></feature>
-   	<feature id="io.opencaesar.oml.ui.feature.source" version="0.0.0"><category name="main.source"/></feature>
-   	<feature id="io.opencaesar.oml.dsl.ui.feature.source" version="0.0.0"><category name="main.source"/></feature>
+   <feature id="io.opencaesar.oml.feature" version="0.0.0">
+      <category name="oml"/>
+   </feature>
+   <feature id="io.opencaesar.oml.ui.feature" version="0.0.0">
+      <category name="oml"/>
+   </feature>
+   <feature id="io.opencaesar.oml.dsl.feature" version="0.0.0">
+      <category name="oml"/>
+   </feature>
+   <feature id="io.opencaesar.oml.dsl.ui.feature" version="0.0.0">
+      <category name="oml"/>
+   </feature>
+   <feature id="io.opencaesar.oml.sdk.feature" version="0.0.0">
+      <category name="oml"/>
+   </feature>
+   <category-def name="oml" label="OML"/>
 </site>

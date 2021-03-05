@@ -123,7 +123,7 @@ class OmlUriResolver implements Runnable {
 		return parents;
 	}
 
-	public URI resolve(Resource contextResource, URI importUri) {
+	public synchronized URI resolve(Resource contextResource, URI importUri) {
 		URI contextUri = (contextResource != null) ? contextResource.getURI() : null;
 		if (contextUri == null) {
 			return null;

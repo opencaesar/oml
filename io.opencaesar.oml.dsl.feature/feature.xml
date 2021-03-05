@@ -2,7 +2,7 @@
 <feature
       id="io.opencaesar.oml.dsl.feature"
       label="%featureName"
-      version="0.8.7"
+      version="0.8.8"
       provider-name="%providerName">
 
    <description>
@@ -11,19 +11,17 @@
 
    <requires>
       <import feature="io.opencaesar.oml.feature"/>
-      <import plugin="org.eclipse.equinox.common"/>
-      <import plugin="org.eclipse.emf.common"/>
-      <import plugin="org.eclipse.xtext"/>
-      <import plugin="org.eclipse.xtext.xbase"/>
-      <import plugin="org.eclipse.xtext.util"/>
-      <import plugin="org.eclipse.xtend.lib"/>
-      <import plugin="org.antlr.runtime"/>
-      <import plugin="com.google.gson"/>
-      <import plugin="org.apache.log4j"/>
    </requires>
 
    <plugin
          id="io.opencaesar.oml.dsl"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.google.gson"
          download-size="0"
          install-size="0"
          version="0.0.0"

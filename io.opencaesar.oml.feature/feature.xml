@@ -2,24 +2,22 @@
 <feature
       id="io.opencaesar.oml.feature"
       label="%featureName"
-      version="0.8.7"
+      version="0.8.8"
       provider-name="%providerName">
 
    <description>
       %featureDesciption
    </description>
 
-   <requires>
-      <import plugin="org.eclipse.core.runtime"/>
-      <import plugin="org.eclipse.emf.ecore"/>
-      <import plugin="org.eclipse.emf.ecore.xmi"/>
-      <import plugin="org.eclipse.emf.ecore.xcore.lib"/>
-      <import plugin="org.eclipse.xtext.xbase.lib"/>
-      <import plugin="org.apache.xml.resolver"/>
-   </requires>
-
    <plugin
          id="io.opencaesar.oml"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.apache.xml.resolver"
          download-size="0"
          install-size="0"
          version="0.0.0"

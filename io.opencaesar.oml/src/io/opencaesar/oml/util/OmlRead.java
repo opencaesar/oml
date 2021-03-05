@@ -1003,15 +1003,8 @@ public class OmlRead {
 
 	public static final Pattern NUMBER = Pattern.compile("\\d+");
 
-	synchronized public static URI getResolvedImportUri(Import _import) {
-		if (_import.getUri() == null || _import.getUri().isEmpty()) {
-			return null;
-		}
-
-		URI importUri = URI.createURI(_import.getUri());
-
-		final Resource r = _import.eResource();
-		if (r == null) {
+	public static URI getResolvedUri(Resource r, URI uri) {
+		if (r == null || uri == null || uri.isEmpty()) {
 			return null;
 		}
 
@@ -1025,7 +1018,22 @@ public class OmlRead {
 			return null;
 		}
 		
-		return resolver.resolve(r, importUri);
+		return resolver.resolve(r, uri);
+	}
+
+	public static URI getResolvedImportUri(Import _import) {
+		if (_import.getUri() == null || _import.getUri().isEmpty()) {
+			return null;
+		}
+
+		URI importUri = URI.createURI(_import.getUri());
+
+		final Resource r = _import.eResource();
+		if (r == null) {
+			return null;
+		}
+
+		return getResolvedUri(r, importUri);
 	}
 	
 	public static Resource getImportedResource(Import _import) {

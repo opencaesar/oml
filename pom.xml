@@ -2,7 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>io.opencaesar.oml</groupId>
-	<version>0.8.7</version>
+	<version>0.8.8</version>
 	<artifactId>io.opencaesar.oml.parent</artifactId>
 	<packaging>pom</packaging>
 
@@ -32,6 +32,7 @@
 		<module>io.opencaesar.oml.dsl.ui</module>
 		<module>io.opencaesar.oml.dsl.ui.tests</module>
 		<module>io.opencaesar.oml.dsl.ui.feature</module>
+		<module>io.opencaesar.oml.sdk.feature</module>
 		<module>io.opencaesar.oml.target</module>
 		<module>io.opencaesar.oml.repository</module>
 	</modules>
@@ -80,6 +81,12 @@
 						</goals>
 					</execution>
 				</executions>
+				<configuration>
+					<excludes>
+						<plugin id="org.apache.xml.resolver" />
+						<plugin id="com.google.gson" />
+					</excludes>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>

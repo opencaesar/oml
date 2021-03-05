@@ -2,7 +2,7 @@
 <feature
       id="io.opencaesar.oml.dsl.ui.feature"
       label="%featureName"
-      version="0.8.7"
+      version="0.8.8"
       provider-name="%providerName">
 
    <description>
@@ -11,16 +11,6 @@
 
    <requires>
       <import feature="io.opencaesar.oml.dsl.feature"/>
-      <import plugin="org.eclipse.xtext.ide"/>
-      <import plugin="org.eclipse.xtext.xbase.ide"/>
-      <import plugin="org.eclipse.xtext.ui"/>
-      <import plugin="org.eclipse.xtext.ui.shared"/>
-      <import plugin="org.eclipse.xtext.ui.codetemplates.ui"/>
-      <import plugin="org.eclipse.ui.editors"/>
-      <import plugin="org.eclipse.ui.ide"/>
-      <import plugin="org.eclipse.ui"/>
-      <import plugin="org.eclipse.compare"/>
-      <import plugin="org.eclipse.xtext.builder"/>
    </requires>
 
    <plugin
