@@ -1,5 +1,4 @@
 sourceCompatibility = '11'
-targetCompatibility = '11'
 
 if (name.endsWith(".tests")) {
 	sourceSets {
@@ -45,10 +44,6 @@ task sourcesJar(type: Jar, dependsOn: classes) {
     from sourceSets.main.allSource
 }
 
-artifacts {
-    archives sourcesJar
-}
-
 javadoc.failOnError = false
 javadoc.options.tags = [ "generated", "ordered", "model" ]
 javadoc.options.addStringOption('Xdoclint:none', '-quiet')
@@ -57,6 +52,7 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
     from javadoc.destinationDir
 }
 
-artifacts {
-    archives javadocJar
+java {
+	withJavadocJar()
+	withSourcesJar()
 }

@@ -3,7 +3,7 @@
 # Ontological Modeling Language
 
 [![Build Status](https://travis-ci.org/opencaesar/oml.svg?branch=master)](https://travis-ci.org/opencaesar/oml)
-[![Maven](https://api.bintray.com/packages/opencaesar/oml/io.opencaesar.oml/images/download.svg) ](https://bintray.com/opencaesar/oml/io.opencaesar.oml/_latestVersion)
+[![Release](https://img.shields.io/github/v/release/opencaesar/oml?label=download)](https://github.com/opencaesar/oml/releases/latest)
 [![Updatesite](https://img.shields.io/badge/p2-updatesite-yellow.svg?longCache=true)](https://bintray.com/opencaesar/p2/oml/_latestVersion)
 [![OML Specification](https://img.shields.io/badge/OML-specification-purple.svg?longCache=true)](https://opencaesar.github.io/oml/)
 
@@ -25,7 +25,7 @@ It also publishes the following artifacts (see the OML specification for using i
 
 ## Build
 
-Dependencies: Gradle 4.9, Java 8
+Dependencies: Gradle 6.x, MAven 3.6.x, Java 11
 ```
   ./gradlew build
   mvn verify

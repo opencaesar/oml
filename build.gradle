@@ -3,11 +3,9 @@ buildscript {
 		mavenLocal()
 		maven { url 'https://dl.bintray.com/opencaesar/ecore-tools' }
   		mavenCentral()
-		jcenter()
 	}
 	dependencies {
 		classpath 'org.xtext:xtext-gradle-plugin:2.0.8'
-		classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.+'
 		classpath 'io.opencaesar.ecore:ecore-bikeshed-gradle:+'
 	}
 }
@@ -40,7 +38,6 @@ subprojects {
 	repositories {
 		mavenLocal()
   		mavenCentral()
-		jcenter()
 	}
 	
 	apply plugin: 'org.xtext.xtend'
