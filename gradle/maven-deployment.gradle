@@ -30,23 +30,23 @@ publishing {
             version project.version
 
             from components.java
-        	afterEvaluate {
-				plugins.withType(ApplicationPlugin) {
-					artifact distZip
-					artifact distTar
-			    }
-        	}
-
-			pom {
-				packaging = 'jar'
-				withXml {
-	                def root = asNode()
-	                root.appendNode('name', project.ext.title)
-	                root.appendNode('description', project.description)
-	                root.appendNode('url', 'https://github.com/opencaesar/'+rootProject.name)
-	                root.children().last() + pomConfig
-	            }
-			}
+	    afterEvaluate {
+		plugins.withType(ApplicationPlugin) {
+		    artifact distZip
+		    artifact distTar
+	        }
+	    }
+	    
+	    pom {
+	        packaging = 'jar'
+		withXml {
+		    def root = asNode()
+	            root.appendNode('name', project.ext.title)
+	            root.appendNode('description', project.description)
+	            root.appendNode('url', 'https://github.com/opencaesar/'+rootProject.name)
+	            root.children().last() + pomConfig
+	        }
+	    }
         }
     }
     repositories {
