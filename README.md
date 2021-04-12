@@ -3,7 +3,7 @@
 # Ontological Modeling Language
 
 [![Build Status](https://travis-ci.org/opencaesar/oml.svg?branch=master)](https://travis-ci.org/opencaesar/oml)
-[![Release](https://img.shields.io/github/v/release/opencaesar/oml?label=download)](https://github.com/opencaesar/oml/releases/latest)
+[![Release](https://img.shields.io/github/v/release/opencaesar/oml?label=release)](https://github.com/opencaesar/oml/releases/latest)
 [![Updatesite](https://img.shields.io/badge/p2-updatesite-yellow.svg?longCache=true)](https://bintray.com/opencaesar/p2/oml/_latestVersion)
 [![OML Specification](https://img.shields.io/badge/OML-specification-purple.svg?longCache=true)](https://opencaesar.github.io/oml/)
 
@@ -12,7 +12,7 @@ This repository defines the OML abstract syntax, textual syntax, graphical synta
 
 It also publishes the following artifacts (see the OML specification for using instructions):
 
-  - Maven [libraries](https://bintray.com/opencaesar/oml) that give access to OML APIs from JVM languages.
+  - Maven [libraries](https://search.maven.org/search?q=a:io.opencaesar.oml) that give access to OML APIs from JVM languages.
   - A p2 [updatesite](https://bintray.com/opencaesar/p2/oml) that gives native OML support in the Eclipse IDE.
   - An LSP [server](https://github.com/opencaesar/oml/releases) that gives support for OML in editors that support LSP.
   - The OML [specification](https://opencaesar.github.io/oml/) that documents how OML can be used.
