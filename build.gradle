@@ -1,7 +1,6 @@
 buildscript {
 	repositories {
 		mavenLocal()
-		maven { url 'https://dl.bintray.com/opencaesar/ecore-tools' }
   		mavenCentral()
 	}
 	dependencies {
