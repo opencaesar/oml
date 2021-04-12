@@ -47,12 +47,6 @@ deploy:
       tags: true
       branch: master
   - provider: script
-    script: io.opencaesar.oml.repository/deploy.sh
-    skip_cleanup: true
-    on:
-      tags: true
-      branch: master
-  - provider: script
     script: io.opencaesar.oml.specification/deploy.sh
     skip_cleanup: true
     on:
