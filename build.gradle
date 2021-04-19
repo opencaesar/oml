@@ -42,14 +42,9 @@ subprojects {
 	apply plugin: 'org.xtext.xtend'
 	apply plugin: 'eclipse'
 	apply plugin: 'idea'
+    apply from: "${rootDir}/gradle/source-layout.gradle"
 
 	dependencies {
 		compile platform("org.eclipse.xtext:xtext-dev-bom:${versions.xtext}")
-	}
-
-	apply from: "${rootDir}/gradle/source-layout.gradle"
-
-	configurations.all {
-		exclude group: 'asm'
 	}
 }

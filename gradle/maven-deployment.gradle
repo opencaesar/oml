@@ -24,29 +24,35 @@ def pomConfig = {
 
 publishing {
     publications {
-        mavenPublication(MavenPublication) {
+        maven(MavenPublication) {
             groupId project.group
             artifactId project.name
             version project.version
 
             from components.java
-	    afterEvaluate {
-		plugins.withType(ApplicationPlugin) {
-		    artifact distZip
-		    artifact distTar
-	        }
-	    }
-	    
-	    pom {
-	        packaging = 'jar'
-		withXml {
-		    def root = asNode()
-	            root.appendNode('name', project.ext.title)
-	            root.appendNode('description', project.description)
-	            root.appendNode('url', 'https://github.com/opencaesar/'+rootProject.name)
-	            root.children().last() + pomConfig
-	        }
-	    }
+            afterEvaluate {
+                plugins.withType(ApplicationPlugin) {
+                    artifact distZip
+                    artifact distTar
+                }
+            }
+
+            pom {
+                packaging = 'jar'
+                withXml {
+                    def root = asNode()
+                    root.appendNode('name', project.ext.title)
+                    root.appendNode('description', project.description)
+                    root.appendNode('url', 'https://github.com/opencaesar/'+rootProject.name)
+                    root.children().last() + pomConfig
+                }
+            }
+            
+            versionMapping {
+                usage('java-runtime') {
+                    fromResolutionResult()
+                }
+            }
         }
     }
     repositories {
@@ -54,16 +60,23 @@ publishing {
             name = "sonatype"
             url = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
             credentials {
-                username = ossrhUsername
-                password = ossrhPassword
+                username = project.findProperty('ossrhUsername')
+                password = project.findProperty('ossrhPassword')
             }
         }
     }
 }
 
 signing {
-    useInMemoryPgpKeys(new String(pgpSigningKey.decodeBase64()), pgpSigningPassword)
-    sign publishing.publications
+    def pgpSigningKey = project.findProperty('pgpSigningKey')
+    if (pgpSigningKey != null) { pgpSigningKey = new String(pgpSigningKey.decodeBase64()) }
+    def pgpSigningPassword = project.findProperty('pgpSigningPassword')
+    useInMemoryPgpKeys(pgpSigningKey, pgpSigningPassword)
+    sign publishing.publications.maven
+}
+
+gradle.taskGraph.whenReady { taskGraph -> 
+    signMavenPublication.onlyIf { taskGraph.hasTask("${project.path}:publishMavenPublicationToSonatypeRepository") }
 }
 
 tasks.withType(GenerateModuleMetadata) {
