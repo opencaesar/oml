@@ -20,7 +20,7 @@ install:
 
 script:
   - ./gradlew build
-  - io.opencaesar.oml.repository/deploy.sh
+  - mvn verify
 
 env:
   global:
@@ -47,12 +47,13 @@ deploy:
       tags: true
       branch: master
   - provider: script
-    script: io.opencaesar.oml.specification/deploy.sh
+    script: io.opencaesar.oml.repository/deploy.sh
     skip_cleanup: true
     on:
+      tags: true
       branch: master
   - provider: script
-    script: io.opencaesar.oml.repository/deploy.sh
+    script: io.opencaesar.oml.specification/deploy.sh
     skip_cleanup: true
     on:
       branch: master
