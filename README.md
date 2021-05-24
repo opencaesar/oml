@@ -31,12 +31,3 @@ Dependencies: Gradle 6.x, MAven 3.6.x, Java 11
   mvn verify
 ```
 Note: the gradle build updates the OML specification's generated Bikeshed source files
-
-
-## Render Specification
-
-If you have updated the OML specification's Bikeshed source files, you can render them to HTML using:
-```
-  bikeshed spec
-```
-Note: to install the Bikeshed tool, follow these [instructions](https://tabatkins.github.io/bikeshed/#installing).
