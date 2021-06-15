@@ -1,6 +1,6 @@
 /**
  * 
- * Copyright 2019 California Institute of Technology ("Caltech").
+ * Copyright 2019-2021 California Institute of Technology ("Caltech").
  * U.S. Government sponsorship acknowledged.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -26,28 +26,42 @@ import io.opencaesar.oml.Element;
 import io.opencaesar.oml.OmlFactory;
 import io.opencaesar.oml.OmlPackage;
 
-public class OmlFactory2 {
+/**
+ * The <b>Factory2</b> for the model. It allows creating OML objects reflectively using their Java type.
+ * 
+ * This is an alternative to {@link OmlFactory} which has individual create methods for each object type
+ * 
+ * @author elaasar
+ */
+public final class OmlFactory2 {
 
-	static final OmlFactory FACTORY = OmlFactory.eINSTANCE;
+    /**
+     * The singleton factory instance
+     */
+    public static OmlFactory2 INSTANCE = new OmlFactory2();
 
-	public static OmlFactory2 INSTANCE = new OmlFactory2();
+    private OmlFactory2() {
+    }
 
-	private OmlFactory2() {
-	}
+    /**
+     * Creates a new Oml object given a Java type
+     * 
+     * @param type The Java type of the Oml object
+     * @return A new object that is an instance of the given type
+     */
+    public <T extends Element> T create(final Class<T> type) {
+        Element element = null;
 
-	public <T extends Element> T create(final Class<T> type) {
-		Element element = null;
-
-		Optional<EClass> eClass = OmlPackage.eINSTANCE.getEClassifiers().stream().
-			filter(c -> c instanceof EClass).
-			map(c -> (EClass)c).
-			filter(c -> c.getInstanceClass() == type).
-			findFirst();
-		
-		if (eClass.isPresent()) {
-			element = (Element) FACTORY.create(eClass.get());
-		}
-		
-		return type.cast(element);
-	}
+        Optional<EClass> eClass = OmlPackage.eINSTANCE.getEClassifiers().stream().
+        filter(c -> c instanceof EClass).
+        map(c -> (EClass)c).
+        filter(c -> c.getInstanceClass() == type).
+            findFirst();
+        
+        if (eClass.isPresent()) {
+            element = (Element) OmlFactory.eINSTANCE.create(eClass.get());
+        }
+        
+        return type.cast(element);
+    }
 }

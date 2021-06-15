@@ -1,15 +1,20 @@
-/** 
- * Copyright 2019 California Institute of Technology ("Caltech").
+/**
+ * 
+ * Copyright 2019-2021 California Institute of Technology ("Caltech").
  * U.S. Government sponsorship acknowledged.
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * 
  */
 package io.opencaesar.oml.util;
 
@@ -38,13 +43,21 @@ import io.opencaesar.oml.DescriptionBundleInclusion;
 import io.opencaesar.oml.DescriptionBundleUsage;
 import io.opencaesar.oml.DescriptionExtension;
 import io.opencaesar.oml.DescriptionUsage;
+import io.opencaesar.oml.Element;
 import io.opencaesar.oml.Entity;
 import io.opencaesar.oml.OmlPackage;
-import io.opencaesar.oml.RelationEntity;
+import io.opencaesar.oml.RelationCardinalityRestrictionAxiom;
+import io.opencaesar.oml.RelationRangeRestrictionAxiom;
 import io.opencaesar.oml.RelationRestrictionAxiom;
+import io.opencaesar.oml.Scalar;
+import io.opencaesar.oml.ScalarPropertyCardinalityRestrictionAxiom;
+import io.opencaesar.oml.ScalarPropertyRangeRestrictionAxiom;
 import io.opencaesar.oml.ScalarPropertyRestrictionAxiom;
 import io.opencaesar.oml.SpecializableTerm;
 import io.opencaesar.oml.SpecializationAxiom;
+import io.opencaesar.oml.Structure;
+import io.opencaesar.oml.StructuredPropertyCardinalityRestrictionAxiom;
+import io.opencaesar.oml.StructuredPropertyRangeRestrictionAxiom;
 import io.opencaesar.oml.StructuredPropertyRestrictionAxiom;
 import io.opencaesar.oml.Vocabulary;
 import io.opencaesar.oml.VocabularyBox;
@@ -54,244 +67,469 @@ import io.opencaesar.oml.VocabularyBundleInclusion;
 import io.opencaesar.oml.VocabularyExtension;
 import io.opencaesar.oml.VocabularyUsage;
 
-public class OmlValidator2 {
-	
-	public static final OmlValidator2 INSTANCE = new OmlValidator2();
-		
-	private Map<EClass, List<Method>> methodMap;
+/**
+ * The <b>Validator2</b> for the model. It adds additional semantic rules that go beyond the EMF syntax rules. 
+ * 
+ * @author elaasar
+ */
+public final class OmlValidator2 {
+    
+    /**
+     * The singleton instance of this class
+     */
+    public static final OmlValidator2 INSTANCE = new OmlValidator2();
+        
+    private Map<EClass, List<Method>> methodMap;
+    
+    private OmlValidator2() {}
+    
+    /**
+     * Validates the given Oml element by this validator's rules 
+     * 
+     * @param element The element to validate
+     * @param diagnostics The diagnostics found during validation
+     * @param context An object to object context map used in producing the error messages
+     * @return True if the element is valid; False otherwise
+     */
+    public boolean run(Element element, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        if (methodMap == null) {
+            collectValidates();
+        }
+        final List<Method> methods = methodMap.get(element.eClass());
+        if (methods != null) {
+            for (Method method : methods) {
+                try {
+                    method.invoke(this, element, diagnostics, context);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    
+    private void collectValidates() {
+        methodMap = new HashMap<>();
+        final List<Method> methods = Arrays.stream(OmlValidator2.class.getDeclaredMethods()).
+            filter(m -> m.getName().startsWith("validate") && m.getParameterTypes().length == 3)
+            .collect(Collectors.toList());
+        OmlPackage.eINSTANCE.getEClassifiers().stream().
+            filter(EClass.class::isInstance).
+            map(EClass.class::cast).
+            filter(c -> !c.isAbstract()).
+            forEach(eClass -> {
+                methods.forEach(method -> {
+                    final Class<?> paramType = method.getParameterTypes()[0];
+                    if (paramType.isAssignableFrom(eClass.getInstanceClass())) {
+                        List<Method> list = methodMap.get(eClass);
+                        if (list == null) {
+                            methodMap.put(eClass, list = new ArrayList<Method>());
+                        }
+                        list.add(method);
+                    }
+                });
+            });
+    }
+    
+    private boolean report(int kind, DiagnosticChain diagnostics, EObject object, String message, EStructuralFeature feature) {
+        diagnostics.add(new BasicDiagnostic(
+             kind,
+             OmlValidator.DIAGNOSTIC_SOURCE,
+             OmlValidator.ELEMENT__EXTRA_VALIDATE, // all checks will have the same code for now!
+             message,
+             new Object[]{object, feature}));
+         return false;
+    }
+    
+    //--------------------------------
+    
+    // VocabularyExtension
+    
+    /**
+     * Checks if a vocabulary extention URI resolves to a vocabulary
+     * 
+     * @param object The vocabulary extension to check
+     * @param diagnostics The validation diagnostics
+     * @param context The object-to-object context map
+     * @return True if the rules is satisfied; False otherwise
+     */
+    protected boolean validateVocabularyExtensionURI(VocabularyExtension object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        if (!(OmlRead.getImportedOntology(object) instanceof Vocabulary)) {
+            return report(Diagnostic.ERROR, diagnostics, object,
+                "URI <"+object.getUri()+"> could not be resolved to a vocabulary", 
+                OmlPackage.Literals.IMPORT__URI);
+        }
+        return true;
+    }
+    
+    // VocabularyUsage
+    
+    /**
+     * Checks if a vocabulary usage URI resolves to a description box
+     * 
+     * @param object The vocabulary usage to check
+     * @param diagnostics The validation diagnostics
+     * @param context The object-to-object context map
+     * @return True if the rules is satisfied; False otherwise
+     */
+    protected boolean validateVocabularyUsageURI(VocabularyUsage object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        if (!(OmlRead.getImportedOntology(object) instanceof DescriptionBox)) {
+            return report(Diagnostic.ERROR, diagnostics, object,
+                "URI <"+object.getUri()+"> could not be resolved to an description nor an description bundle", 
+                OmlPackage.Literals.IMPORT__URI);
+        }
+        return true;
+    }
+    
+    // VocabularyBundleExtension
+    
+    /**
+     * Checks if a vocabulary bundle extention URI resolves to a vocabulary bundle
+     * 
+     * @param object The vocabulary bundle extension to check
+     * @param diagnostics The validation diagnostics
+     * @param context The object-to-object context map
+     * @return True if the rules is satisfied; False otherwise
+     */
+    protected boolean validateVocabularyBundleExtensionURI(VocabularyBundleExtension object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        if (!(OmlRead.getImportedOntology(object) instanceof VocabularyBundle)) {
+            return report(Diagnostic.ERROR, diagnostics, object,
+                "URI <"+object.getUri()+"> could not be resolved to a vocabulary bundle", 
+                OmlPackage.Literals.IMPORT__URI);
+        }
+        return true;
+    }
+    
+    // VocabularyBundleInclusion
+    
+    /**
+     * Checks if a vocabulary bundle inclusion URI resolves to a vocabulary
+     * 
+     * @param object The vocabulary bundle inclusion to check
+     * @param diagnostics The validation diagnostics
+     * @param context The object-to-object context map
+     * @return True if the rules is satisfied; False otherwise
+     */
+    protected boolean validateVocabularyBundleInclusionURI(VocabularyBundleInclusion object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        if (!(OmlRead.getImportedOntology(object) instanceof Vocabulary)) {
+            return report(Diagnostic.ERROR, diagnostics, object,
+                "URI <"+object.getUri()+"> could not be resolved to a vocabulary", 
+                OmlPackage.Literals.IMPORT__URI);
+        }
+        return true;
+    }
+    
+    // DescriptionExtension
+    
+    /**
+     * Checks if a description extension URI resolves to a description
+     * 
+     * @param object The description extension to check
+     * @param diagnostics The validation diagnostics
+     * @param context The object-to-object context map
+     * @return True if the rules is satisfied; False otherwise
+     */
+    protected boolean validateDescriptionExtensionURI(DescriptionExtension object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        if (!(OmlRead.getImportedOntology(object) instanceof Description)) {
+            return report(Diagnostic.ERROR, diagnostics, object,
+                "URI <"+object.getUri()+"> could not be resolved to an description", 
+                OmlPackage.Literals.IMPORT__URI);
+        }
+        return true;
+    }
+    
+    // DescriptionUsage
+    
+    /**
+     * Checks if a description usage URI resolves to a vocabulary box
+     * 
+     * @param object The description usage to check
+     * @param diagnostics The validation diagnostics
+     * @param context The object-to-object context map
+     * @return True if the rules is satisfied; False otherwise
+     */
+    protected boolean validateDescriptionUsageURI(DescriptionUsage object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        if (!(OmlRead.getImportedOntology(object) instanceof VocabularyBox)) {
+            return report(Diagnostic.ERROR, diagnostics, object,
+                "URI <"+object.getUri()+"> could not be resolved to a vocabulary nor a vocabulary bundle", 
+                OmlPackage.Literals.IMPORT__URI);
+        }
+        return true;
+    }
+    
+    // DescriptionBundleExtension
+    
+    /**
+     * Checks if a description bundle extension URI resolves to a description bundle
+     * 
+     * @param object The description bundle extension to check
+     * @param diagnostics The validation diagnostics
+     * @param context The object-to-object context map
+     * @return True if the rules is satisfied; False otherwise
+     */
+    protected boolean validateDescriptionBundleExtensionURI(DescriptionBundleExtension object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        if (!(OmlRead.getImportedOntology(object) instanceof DescriptionBundle)) {
+            return report(Diagnostic.ERROR, diagnostics, object,
+                "URI <"+object.getUri()+"> could not be resolved to an description bundle", 
+                OmlPackage.Literals.IMPORT__URI);
+        }
+        return true;
+    }
+    
+    // DescriptionBundleInclusion
+    
+    /**
+     * Checks if a description bundle inclusion URI resolves to a description
+     * 
+     * @param object The description bundle inclusion to check
+     * @param diagnostics The validation diagnostics
+     * @param context The object-to-object context map
+     * @return True if the rules is satisfied; False otherwise
+     */
+    protected boolean validateDescriptionBundleInclusionURI(DescriptionBundleInclusion object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        if (!(OmlRead.getImportedOntology(object) instanceof Description)) {
+            return report(Diagnostic.ERROR, diagnostics, object,
+                "URI <"+object.getUri()+"> could not be resolved to an description", 
+                OmlPackage.Literals.IMPORT__URI);
+        }
+        return true;
+    }
+    
+    // DescriptionBundleUsage
+    
+    /**
+     * Checks if a description bundle usage URI resolves to a vocabulary bundle
+     * 
+     * @param object The description bundle usage to check
+     * @param diagnostics The validation diagnostics
+     * @param context The object-to-object context map
+     * @return True if the rules is satisfied; False otherwise
+     */
+    protected boolean validateDescriptionBundleUsageURI(DescriptionBundleUsage object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        if (!(OmlRead.getImportedOntology(object) instanceof VocabularyBundle)) {
+            return report(Diagnostic.ERROR, diagnostics, object,
+                "URI <"+object.getUri()+"> could not be resolved to a vocabulary bundle", 
+                OmlPackage.Literals.IMPORT__URI);
+        }
+        return true;
+    }
+    
+    // RelationRestrictionAxiom
+    
+    /**
+     * Checks if the domain of a restricted relation is the same as or a super type of the restricting classifier
+     * 
+     * @param object The relation restriction to check
+     * @param diagnostics The validation diagnostics
+     * @param context The object-to-object context map
+     * @return True if the rules is satisfied; False otherwise
+     */
+    protected boolean validateRelationRestrictionAxiomRelation(RelationRestrictionAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        final Classifier restrictingClassifier = OmlRead.getRestrictingClassifier(object);
+        final Collection<SpecializableTerm> allGeneralTerms = OmlRead.closure(restrictingClassifier, true, t -> OmlSearch.findSuperTerms(t));
+        final Entity domainType = object.getRelation().getDomain();
+        if (!allGeneralTerms.stream().filter(t -> t == domainType).findAny().isPresent()) {
+            return report(Diagnostic.ERROR, diagnostics, object,
+                "Relation "+object.getRelation().getAbbreviatedIri()+" has a domain that is not the same as or a super type of "+restrictingClassifier.getAbbreviatedIri(), 
+                OmlPackage.Literals.RELATION_RESTRICTION_AXIOM__RELATION);
+        }
+        return true;
+    }
+    
+    /**
+     * Checks if the restricted range is the same as or a sub type of the restricted relation's range
+     * 
+     * @param object The relation restriction to check
+     * @param diagnostics The validation diagnostics
+     * @param context The object-to-object context map
+     * @return True if the rules is satisfied; False otherwise
+     */
+    protected boolean validateRelationRangeRestrictionAxiomRange(RelationRangeRestrictionAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        final Entity restrictedRange = object.getRange();
+        final Collection<SpecializableTerm> allGeneralEntities = OmlRead.closure(restrictedRange, true, t -> OmlSearch.findSuperTerms(t));
+        final Entity rangeType = object.getRelation().getRange();
+        if (!allGeneralEntities.stream().filter(t -> t == rangeType).findAny().isPresent()) {
+            return report(Diagnostic.ERROR, diagnostics, object,
+                "Entity "+restrictedRange.getAbbreviatedIri()+" is not the same as or a sub type of "+rangeType.getAbbreviatedIri(), 
+                OmlPackage.Literals.RELATION_RANGE_RESTRICTION_AXIOM__RANGE);
+        }
+        return true;
+    }
 
-	private OmlValidator2() {}
-	
-	public boolean validate(EObject object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (methodMap == null) {
-			collectChecks();
-		}
-		final List<Method> methods = methodMap.get(object.eClass());
-		if (methods != null) {
-			for (Method method : methods) {
-				try {
-					method.invoke(this, object, diagnostics, context);
-				} catch (Exception e) {
-					e.printStackTrace();
-					return false;
-				}
-			}
-		}
-		return true;
-	}
+    /**
+     * Checks if the restricted range is the same as or a sub type of the restricted relation's range
+     * 
+     * @param object The relation restriction to check
+     * @param diagnostics The validation diagnostics
+     * @param context The object-to-object context map
+     * @return True if the rules is satisfied; False otherwise
+     */
+    protected boolean validateRelationCardinalityRestrictionAxiomRange(RelationCardinalityRestrictionAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        final Entity restrictedRange = object.getRange();
+        if (restrictedRange != null) {
+            final Collection<SpecializableTerm> allGeneralEntities = OmlRead.closure(restrictedRange, true, t -> OmlSearch.findSuperTerms(t));
+            final Entity rangeType = object.getRelation().getRange();
+            if (!allGeneralEntities.stream().filter(t -> t == rangeType).findAny().isPresent()) {
+                return report(Diagnostic.ERROR, diagnostics, object,
+                    "Entity "+restrictedRange.getAbbreviatedIri()+" is not the same as or a sub type of "+rangeType.getAbbreviatedIri(), 
+                    OmlPackage.Literals.RELATION_CARDINALITY_RESTRICTION_AXIOM__RANGE);
+            }
+        }
+        return true;
+    }
 
-	private void collectChecks() {
-		methodMap = new HashMap<>();
-		final List<Method> methods = Arrays.stream(OmlValidator2.class.getDeclaredMethods()).
-			filter(m -> m.getName().startsWith("check") && m.getParameterTypes().length == 3)
-			.collect(Collectors.toList());
-		OmlPackage.eINSTANCE.getEClassifiers().stream().
-			filter(EClass.class::isInstance).
-			map(EClass.class::cast).
-			filter(c -> !c.isAbstract()).
-			forEach(eClass -> {
-				methods.forEach(method -> {
-					final Class<?> paramType = method.getParameterTypes()[0];
-					if (paramType.isAssignableFrom(eClass.getInstanceClass())) {
-						List<Method> list = methodMap.get(eClass);
-						if (list == null) {
-							methodMap.put(eClass, list = new ArrayList<Method>());
-						}
-						list.add(method);
-					}
-				});
-			});
-	}
+    // ScalarPropertyRestrictionAxiom
+    
+    /**
+     * Checks if the domain of a restricted scalar property is the same as or a super type of the restricting classifier
+     * 
+     * @param object The scalar property restriction to check
+     * @param diagnostics The validation diagnostics
+     * @param context The object-to-object context map
+     * @return True if the rules is satisfied; False otherwise
+     */
+    protected boolean validateScalarPropertyRestrictionAxiomProperty(ScalarPropertyRestrictionAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        final Classifier restrictingClassifier = OmlRead.getRestrictingClassifier(object);
+        final Collection<SpecializableTerm> allGeneralTerms = OmlRead.closure(restrictingClassifier, true, t -> OmlSearch.findSuperTerms(t));
+        final Classifier domainType = object.getProperty().getDomain();
+        if (!allGeneralTerms.stream().filter(t -> t == domainType).findAny().isPresent()) {
+            return report(Diagnostic.ERROR, diagnostics, object,
+                "Property "+object.getProperty().getAbbreviatedIri()+" has a domain that is not the same as or a super type of "+OmlRead.getRestrictingClassifier(object).getAbbreviatedIri(), 
+                OmlPackage.Literals.SCALAR_PROPERTY_RESTRICTION_AXIOM__PROPERTY);
+        }
+        return true;
+    }
+    
+    /**
+     * Checks if the restricted range is the same as or a sub type of the restricted scalar property's range
+     * 
+     * @param object The scalar property restriction to check
+     * @param diagnostics The validation diagnostics
+     * @param context The object-to-object context map
+     * @return True if the rules is satisfied; False otherwise
+     */
+    protected boolean validateScalarPropertyRangeRestrictionAxiomRange(ScalarPropertyRangeRestrictionAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        final Scalar restrictedRange = object.getRange();
+        final Collection<SpecializableTerm> allGeneralEntities = OmlRead.closure(restrictedRange, true, t -> OmlSearch.findSuperTerms(t));
+        final Scalar rangeType = object.getProperty().getRange();
+        if (!allGeneralEntities.stream().filter(t -> t == rangeType).findAny().isPresent()) {
+            return report(Diagnostic.ERROR, diagnostics, object,
+                "Scalar "+restrictedRange.getAbbreviatedIri()+" is not the same as or a sub type of "+rangeType.getAbbreviatedIri(), 
+                OmlPackage.Literals.SCALAR_PROPERTY_RANGE_RESTRICTION_AXIOM__RANGE);
+        }
+        return true;
+    }
 
-	protected boolean report(int kind, DiagnosticChain diagnostics, EObject object, String message, EStructuralFeature feature) {
-		diagnostics.add(new BasicDiagnostic(
- 			kind,
- 			OmlValidator.DIAGNOSTIC_SOURCE,
- 			OmlValidator.ELEMENT__EXTRA_VALIDATE, // all checks will have the same code for now!
- 			message,
- 			new Object[]{object, feature}));
- 		return false;
-	}
-	
-	//--------------------------------
+    /**
+     * Checks if the restricted range is the same as or a sub type of the restricted scalar property's range
+     * 
+     * @param object The scalar property restriction to check
+     * @param diagnostics The validation diagnostics
+     * @param context The object-to-object context map
+     * @return True if the rules is satisfied; False otherwise
+     */
+    protected boolean validateScalarPropertyCardinalityRestrictionAxiomRange(ScalarPropertyCardinalityRestrictionAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        final Scalar restrictedRange = object.getRange();
+        if (restrictedRange != null) {
+            final Collection<SpecializableTerm> allGeneralEntities = OmlRead.closure(restrictedRange, true, t -> OmlSearch.findSuperTerms(t));
+            final Scalar rangeType = object.getProperty().getRange();
+            if (!allGeneralEntities.stream().filter(t -> t == rangeType).findAny().isPresent()) {
+                return report(Diagnostic.ERROR, diagnostics, object,
+                    "Scalar "+restrictedRange.getAbbreviatedIri()+" is not the same as or a sub type of "+rangeType.getAbbreviatedIri(), 
+                    OmlPackage.Literals.SCALAR_PROPERTY_CARDINALITY_RESTRICTION_AXIOM__RANGE);
+            }
+        }
+        return true;
+    }
 
-	// VocabularyExtension
+    // StructuredPropertyRestrictionAxiom
+    
+    /**
+     * Checks if the domain of a restricted structured property is the same as or a super type of the restricting classifier
+     * 
+     * @param object The structured property restriction to check
+     * @param diagnostics The validation diagnostics
+     * @param context The object-to-object context map
+     * @return True if the rules is satisfied; False otherwise
+     */
+    protected boolean validateStructuredPropertyRestrictionAxiomProperty(StructuredPropertyRestrictionAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        final Classifier restrictingClassifier = OmlRead.getRestrictingClassifier(object);
+        final Collection<SpecializableTerm> allGeneralTerms = OmlRead.closure(restrictingClassifier, true, t -> OmlSearch.findSuperTerms(t));
+        final Classifier domainType = object.getProperty().getDomain();
+        if (!allGeneralTerms.stream().filter(t -> t == domainType).findAny().isPresent()) {
+            return report(Diagnostic.ERROR, diagnostics, object,
+                "Property "+object.getProperty().getAbbreviatedIri()+" has a domain that is not the same as or a super type of "+OmlRead.getRestrictingClassifier(object).getAbbreviatedIri(), 
+                OmlPackage.Literals.STRUCTURED_PROPERTY_RESTRICTION_AXIOM__PROPERTY);
+        }
+        return true;
+    }
+    
+    /**
+     * Checks if the restricted range is the same as or a sub type of the restricted structured property's range
+     * 
+     * @param object The structured property restriction to check
+     * @param diagnostics The validation diagnostics
+     * @param context The object-to-object context map
+     * @return True if the rules is satisfied; False otherwise
+     */
+    protected boolean validateStructuredPropertyRangeRestrictionAxiomRange(StructuredPropertyRangeRestrictionAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        final Structure restrictedRange = object.getRange();
+        final Collection<SpecializableTerm> allGeneralEntities = OmlRead.closure(restrictedRange, true, t -> OmlSearch.findSuperTerms(t));
+        final Structure rangeType = object.getProperty().getRange();
+        if (!allGeneralEntities.stream().filter(t -> t == rangeType).findAny().isPresent()) {
+            return report(Diagnostic.ERROR, diagnostics, object,
+                "Structure "+restrictedRange.getAbbreviatedIri()+" is not the same as or a sub type of "+rangeType.getAbbreviatedIri(), 
+                OmlPackage.Literals.STRUCTURED_PROPERTY_RANGE_RESTRICTION_AXIOM__RANGE);
+        }
+        return true;
+    }
 
-	protected boolean checkVocabularyExtensionURI(VocabularyExtension object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!(OmlRead.getImportedOntology(object) instanceof Vocabulary)) {
-			return report(Diagnostic.ERROR, diagnostics, object,
-				"URI <"+object.getUri()+"> could not be resolved to a vocabulary", 
-				OmlPackage.Literals.IMPORT__URI);
-		}
-		return true;
-	}
+    /**
+     * Checks if the restricted range is the same as or a sub type of the restricted structured property's range
+     * 
+     * @param object The structured property restriction to check
+     * @param diagnostics The validation diagnostics
+     * @param context The object-to-object context map
+     * @return True if the rules is satisfied; False otherwise
+     */
+    protected boolean validateStructuredPropertyCardinalityRestrictionAxiomRange(StructuredPropertyCardinalityRestrictionAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        final Structure restrictedRange = object.getRange();
+        if (restrictedRange != null) {
+            final Collection<SpecializableTerm> allGeneralEntities = OmlRead.closure(restrictedRange, true, t -> OmlSearch.findSuperTerms(t));
+            final Structure rangeType = object.getProperty().getRange();
+            if (!allGeneralEntities.stream().filter(t -> t == rangeType).findAny().isPresent()) {
+                return report(Diagnostic.ERROR, diagnostics, object,
+                    "Structure "+restrictedRange.getAbbreviatedIri()+" is not the same as or a sub type of "+rangeType.getAbbreviatedIri(), 
+                    OmlPackage.Literals.STRUCTURED_PROPERTY_CARDINALITY_RESTRICTION_AXIOM__RANGE);
+            }
+        }
+        return true;
+    }
 
-	// VocabularyUsage
-		
-	protected boolean checkVocabularyUsageURI(VocabularyUsage object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!(OmlRead.getImportedOntology(object) instanceof DescriptionBox)) {
-			return report(Diagnostic.ERROR, diagnostics, object,
-				"URI <"+object.getUri()+"> could not be resolved to an description nor an description bundle", 
-				OmlPackage.Literals.IMPORT__URI);
-		}
-		return true;
-	}
-
-	// VocabularyBundleExtension
-
-	protected boolean checkVocabularyBundleExtensionURI(VocabularyBundleExtension object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!(OmlRead.getImportedOntology(object) instanceof VocabularyBundle)) {
-			return report(Diagnostic.ERROR, diagnostics, object,
-				"URI <"+object.getUri()+"> could not be resolved to a vocabulary bundle", 
-				OmlPackage.Literals.IMPORT__URI);
-		}
-		return true;
-	}
-
-	// VocabularyBundleInclusion
-
-	protected boolean checkVocabularyBundleInclusionURI(VocabularyBundleInclusion object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!(OmlRead.getImportedOntology(object) instanceof Vocabulary)) {
-			return report(Diagnostic.ERROR, diagnostics, object,
-				"URI <"+object.getUri()+"> could not be resolved to a vocabulary", 
-				OmlPackage.Literals.IMPORT__URI);
-		}
-		return true;
-	}
-
-	// DescriptionExtension
-
-	protected boolean checkDescriptionExtensionURI(DescriptionExtension object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!(OmlRead.getImportedOntology(object) instanceof Description)) {
-			return report(Diagnostic.ERROR, diagnostics, object,
-				"URI <"+object.getUri()+"> could not be resolved to an description", 
-				OmlPackage.Literals.IMPORT__URI);
-		}
-		return true;
-	}
-
-	// DescriptionUsage
-
-	protected boolean checkDescriptionUsageURI(DescriptionUsage object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!(OmlRead.getImportedOntology(object) instanceof VocabularyBox)) {
-			return report(Diagnostic.ERROR, diagnostics, object,
-				"URI <"+object.getUri()+"> could not be resolved to a vocabulary nor a vocabulary bundle", 
-				OmlPackage.Literals.IMPORT__URI);
-		}
-		return true;
-	}
-	
-	// DescriptionBundleExtension
-
-	protected boolean checkDescriptionBundleExtensionURI(DescriptionBundleExtension object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!(OmlRead.getImportedOntology(object) instanceof DescriptionBundle)) {
-			return report(Diagnostic.ERROR, diagnostics, object,
-				"URI <"+object.getUri()+"> could not be resolved to an description bundle", 
-				OmlPackage.Literals.IMPORT__URI);
-		}
-		return true;
-	}
-
-	// DescriptionBundleInclusion
-
-	protected boolean checkDescriptionBundleInclusionURI(DescriptionBundleInclusion object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!(OmlRead.getImportedOntology(object) instanceof Description)) {
-			return report(Diagnostic.ERROR, diagnostics, object,
-				"URI <"+object.getUri()+"> could not be resolved to an description", 
-				OmlPackage.Literals.IMPORT__URI);
-		}
-		return true;
-	}
-
-	// DescriptionBundleUsage
-
-	protected boolean checkDescriptionBundleUsageURI(DescriptionBundleUsage object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!(OmlRead.getImportedOntology(object) instanceof VocabularyBundle)) {
-			return report(Diagnostic.ERROR, diagnostics, object,
-				"URI <"+object.getUri()+"> could not be resolved to a vocabulary bundle", 
-				OmlPackage.Literals.IMPORT__URI);
-		}
-		return true;
-	}
-
-	// RelationRestrictionAxiom
-	
-	protected boolean checkRelationRestrictionAxiomRelation(RelationRestrictionAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		final Classifier restrictingClassifier = OmlRead.getRestrictingClassifier(object);
-		final Entity domainType = object.getRelation().getDomain();
-		final Collection<SpecializableTerm> allGeneralTerms = OmlRead.reflexiveClosure(restrictingClassifier, t -> OmlSearch.findGeneralTerms(t));
-		if (!allGeneralTerms.stream().filter(t -> t == domainType).findAny().isPresent()) {
-			return report(Diagnostic.ERROR, diagnostics, object,
-				"Relation "+OmlRead.getAbbreviatedIri(object.getRelation())+" cannot be restricted in the context of "+OmlRead.getAbbreviatedIri(OmlRead.getRestrictingClassifier(object))+"", 
-				OmlPackage.Literals.RELATION_RESTRICTION_AXIOM__RELATION);
-		}
-		return true;
-	}
-	
-	// ScalarPropertyRestrictionAxiom
-	
-	protected boolean checkScalarPropertyRestrictionAxiomProperty(ScalarPropertyRestrictionAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		final Classifier restrictingClassifier = OmlRead.getRestrictingClassifier(object);
-		final Classifier domainType = object.getProperty().getDomain();
-		final Collection<SpecializableTerm> allGeneralTerms = OmlRead.reflexiveClosure(restrictingClassifier, t -> OmlSearch.findGeneralTerms(t));
-		if (!allGeneralTerms.stream().filter(t -> t == domainType).findAny().isPresent()) {
-			return report(Diagnostic.ERROR, diagnostics, object,
-				"Property "+OmlRead.getAbbreviatedIri(object.getProperty())+" cannot be restricted in the context of "+OmlRead.getAbbreviatedIri(OmlRead.getRestrictingClassifier(object))+"", 
-				OmlPackage.Literals.SCALAR_PROPERTY_RESTRICTION_AXIOM__PROPERTY);
-		}
-		return true;
-	}
-
-	// SpecializationAxiom
-	
-	protected boolean checkSpecializationAxiomSpecializedTermCycle(SpecializationAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		final SpecializableTerm generalTerm = object.getSpecializedTerm();
-		final SpecializableTerm specificTerm = OmlRead.getSpecificTerm(object);
-		final Collection<SpecializableTerm> allGeneralTerms = OmlRead.reflexiveClosure(generalTerm, t -> OmlSearch.findGeneralTerms(t));
-		if (allGeneralTerms.stream().filter(t -> t == specificTerm).findAny().isPresent()) {
-			return report(Diagnostic.ERROR, diagnostics, object,
-				"Term "+OmlRead.getAbbreviatedIri(object.getSpecializedTerm())+" causes a specialization cycle for "+OmlRead.getAbbreviatedIri(OmlRead.getSpecificTerm(object))+"", 
-				OmlPackage.Literals.SPECIALIZATION_AXIOM__SPECIALIZED_TERM);
-		}
-		return true;
-	}
-
-	protected boolean checkSpecializationAxiomSpecializedTermKind(SpecializationAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		final EClass specificEClass = OmlRead.getSpecificTerm(object).eClass();
-		final EClass generalEClass = object.getSpecializedTerm().eClass();
-		if (!((OmlPackage.Literals.ASPECT == generalEClass && OmlPackage.Literals.ENTITY.isSuperTypeOf(specificEClass)) ||
-			(OmlPackage.Literals.FACETED_SCALAR == generalEClass && OmlPackage.Literals.ENUMERATED_SCALAR == specificEClass) ||
-			(generalEClass == specificEClass))) {
-			return report(Diagnostic.ERROR, diagnostics, object,
-				"Term "+OmlRead.getAbbreviatedIri(object.getSpecializedTerm())+" cannot be specialized by "+OmlRead.getAbbreviatedIri(OmlRead.getSpecificTerm(object))+"", 
-				OmlPackage.Literals.SPECIALIZATION_AXIOM__SPECIALIZED_TERM);
-		}
-		return true;
-	}
-
-	// StructuredPropertyRestrictionAxiom
-	
-	protected boolean checkStructuredPropertyRestrictionAxiomProperty(StructuredPropertyRestrictionAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		final Classifier restrictingClassifier = OmlRead.getRestrictingClassifier(object);
-		final Classifier domainType = object.getProperty().getDomain();
-		final Collection<SpecializableTerm> allGeneralTerms = OmlRead.reflexiveClosure(restrictingClassifier, t -> OmlSearch.findGeneralTerms(t));
-		if (!allGeneralTerms.stream().filter(t -> t == domainType).findAny().isPresent()) {
-			return report(Diagnostic.ERROR, diagnostics, object,
-				"Property "+OmlRead.getAbbreviatedIri(object.getProperty())+" cannot be restricted in the context of "+OmlRead.getAbbreviatedIri(OmlRead.getRestrictingClassifier(object))+"", 
-				OmlPackage.Literals.STRUCTURED_PROPERTY_RESTRICTION_AXIOM__PROPERTY);
-		}
-		return true;
-	}
-
-	// VocabularyExtension
-
-	protected boolean checkRelationEntityReverse(RelationEntity object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (object.getReverseRelation() != null && object.getForwardRelation() == null) {
-			return report(Diagnostic.ERROR, diagnostics, object,
-				"Reverse relation <"+OmlRead.getAbbreviatedIri(object.getReverseRelation())+"> cannot be specified without a forward relation too", 
-				OmlPackage.Literals.RELATION_ENTITY__REVERSE_RELATION);
-		}
-		return true;
-	}
-
+    // SpecializationAxiom
+    
+    /**
+     * Checks if a specialization axiom is not between compatible term kinds
+     * 
+     * @param object The specialization axiom to check
+     * @param diagnostics The validation diagnostics
+     * @param context The object-to-object context map
+     * @return True if the rules is satisfied; False otherwise
+     */
+    protected boolean validateSpecializationAxiomSpecializedTermKind(SpecializationAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        final SpecializableTerm superTerm = OmlRead.getSuperTerm(object);
+        final SpecializableTerm subTerm = OmlRead.getSubTerm(object);
+        final EClass superEClass = superTerm.eClass();
+        final EClass subEClass = subTerm.eClass();
+        if (!((OmlPackage.Literals.ASPECT == superEClass && OmlPackage.Literals.ENTITY.isSuperTypeOf(subEClass)) ||
+            (OmlPackage.Literals.FACETED_SCALAR == superEClass && OmlPackage.Literals.ENUMERATED_SCALAR == subEClass) ||
+            (superEClass == subEClass))) {
+            return report(Diagnostic.ERROR, diagnostics, object,
+                "Term "+superTerm.getAbbreviatedIri()+" cannot be specialized by "+subTerm.getAbbreviatedIri()+"", 
+                OmlPackage.Literals.SPECIALIZATION_AXIOM__SPECIALIZED_TERM);
+        }
+        return true;
+    }
+        
 }

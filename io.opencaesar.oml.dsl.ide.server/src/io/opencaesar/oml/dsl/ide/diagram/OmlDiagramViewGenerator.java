@@ -45,9 +45,9 @@ import io.opencaesar.oml.ScalarPropertyValueRestrictionAxiom;
 import io.opencaesar.oml.SpecializationAxiom;
 import io.opencaesar.oml.Structure;
 import io.opencaesar.oml.util.OmlRead;
-import io.opencaesar.oml.util.OmlVisitor;
+import io.opencaesar.oml.util.OmlSwitch;
 
-public class OmlDiagramViewGenerator extends OmlVisitor<SModelElement> implements IDiagramGenerator {
+public class OmlDiagramViewGenerator extends OmlSwitch<SModelElement> implements IDiagramGenerator {
 
 	static final Logger LOG = Logger.getLogger(OmlDiagramViewGenerator.class);
 
@@ -353,11 +353,11 @@ public class OmlDiagramViewGenerator extends OmlVisitor<SModelElement> implement
 		final SModelElement specializingNode = semantic2diagram.get(e);
 		if (null == specializingNode)
 			throw new IllegalArgumentException(
-					"no entity node for showAxiom(SpecializationAxiom): " + OmlRead.getAbbreviatedIri(e));
+					"no entity node for showAxiom(SpecializationAxiom): " + e.getAbbreviatedIri());
 		final SModelElement specializedNode = semantic2diagram.get(ax.getSpecializedTerm());
 		if (null == specializedNode)
 			throw new IllegalArgumentException("no entity node for showAxiom(SpecializationAxiom): "
-					+ OmlRead.getAbbreviatedIri(ax.getSpecializedTerm()));
+					+ ax.getSpecializedTerm().getAbbreviatedIri());
 		final OmlEdge edge = view.createEdge(ax, specializingNode, specializedNode);
 		frame.getChildren().add(edge);
 		traceAndMark(edge, ax, context);
@@ -368,7 +368,7 @@ public class OmlDiagramViewGenerator extends OmlVisitor<SModelElement> implement
 		if (null == source)
 			throw new IllegalArgumentException(
 					"no entity node for showAxiom(ScalarPropertyCardinalityRestrictionAxiom) "
-							+ OmlRead.getAbbreviatedIri(e));
+							+ e.getAbbreviatedIri());
 		OmlCompartment compartment = view.getPropertyCompartment(source);
 		if (null == compartment) {
 			compartment = view.createPropertyCompartment(e);
@@ -383,7 +383,7 @@ public class OmlDiagramViewGenerator extends OmlVisitor<SModelElement> implement
 		final SModelElement source = semantic2diagram.get(e);
 		if (null == source)
 			throw new IllegalArgumentException("no entity node for showAxiom(ScalarPropertyRangeRestrictionAxiom) "
-					+ OmlRead.getAbbreviatedIri(e));
+					+ e.getAbbreviatedIri());
 		OmlCompartment compartment = view.getPropertyCompartment(source);
 		if (null == compartment) {
 			compartment = view.createPropertyCompartment(e);
@@ -398,7 +398,7 @@ public class OmlDiagramViewGenerator extends OmlVisitor<SModelElement> implement
 		final SModelElement source = semantic2diagram.get(e);
 		if (null == source)
 			throw new IllegalArgumentException("no entity node for showAxiom(ScalarPropertyValueRestrictionAxiom) "
-					+ OmlRead.getAbbreviatedIri(e));
+					+ e.getAbbreviatedIri());
 		OmlCompartment compartment = view.getPropertyCompartment(source);
 		if (null == compartment) {
 			compartment = view.createPropertyCompartment(e);
@@ -413,11 +413,11 @@ public class OmlDiagramViewGenerator extends OmlVisitor<SModelElement> implement
 		final SModelElement source = semantic2diagram.get(e);
 		if (null == source)
 			throw new IllegalArgumentException("no entity node for showAxiom(RelationCardinalityRestrictionAxiom): "
-					+ OmlRead.getAbbreviatedIri(e));
-		final SModelElement target = semantic2diagram.get(OmlRead.getRelationEntity(ax.getRelation()).getTarget());
+					+ e.getAbbreviatedIri());
+		final SModelElement target = semantic2diagram.get(ax.getRelation().getRelationEntity().getTarget());
 		if (null == target)
 			throw new IllegalArgumentException("no entity node for showAxiom(RelationCardinalityRestrictionAxiom): "
-					+ OmlRead.getAbbreviatedIri(ax.getRelation()));
+					+ ax.getRelation().getAbbreviatedIri());
 		final OmlEdge edge = view.createEdge(ax, source, target);
 		frame.getChildren().add(edge);
 		traceAndMark(edge, ax, context);
@@ -427,11 +427,11 @@ public class OmlDiagramViewGenerator extends OmlVisitor<SModelElement> implement
 		final SModelElement source = semantic2diagram.get(e);
 		if (null == source)
 			throw new IllegalArgumentException(
-					"no entity node for showAxiom(RelationRangeRestrictionAxiom): " + OmlRead.getAbbreviatedIri(e));
+					"no entity node for showAxiom(RelationRangeRestrictionAxiom): " + e.getAbbreviatedIri());
 		final SModelElement target = semantic2diagram.get(ax.getRange());
 		if (null == target)
 			throw new IllegalArgumentException("no entity node for showAxiom(RelationRangeRestrictionAxiom): "
-					+ OmlRead.getAbbreviatedIri(ax.getRange()));
+					+ ax.getRange().getAbbreviatedIri());
 		final OmlEdge edge = view.createEdge(ax, source, target);
 		frame.getChildren().add(edge);
 		traceAndMark(edge, ax, context);
@@ -441,11 +441,11 @@ public class OmlDiagramViewGenerator extends OmlVisitor<SModelElement> implement
 		final SModelElement source = semantic2diagram.get(e);
 		if (null == source)
 			throw new IllegalArgumentException(
-					"no entity node for showAxiom(RelationTargetRestrictionAxiom): " + OmlRead.getAbbreviatedIri(e));
+					"no entity node for showAxiom(RelationTargetRestrictionAxiom): " + e.getAbbreviatedIri());
 		final SModelElement target = semantic2diagram.get(ax.getTarget());
 		if (null == target)
 			throw new IllegalArgumentException("no entity node for showAxiom(RelationTargetRestrictionAxiom): "
-					+ OmlRead.getAbbreviatedIri(ax.getTarget()));
+					+ ax.getTarget().getAbbreviatedIri());
 		final OmlEdge edge = view.createEdge(ax, source, target);
 		frame.getChildren().add(edge);
 		traceAndMark(edge, ax, context);

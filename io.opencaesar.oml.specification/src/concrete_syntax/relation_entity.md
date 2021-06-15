@@ -5,10 +5,6 @@
 	<span style="font-weight:bold;color:purple">to</span> (<a href="#Aspect-Syntax">Aspect_IRI</a>|<a href="#Concept-Syntax">Concept_IRI</a>|<a href="#RelationEntity-Syntax">RelationEntity_IRI</a>)
 	(<a href="#ForwardRelation-Syntax">ForwardRelation</a>)?
 	(<a href="#ReverseRelation-Syntax">ReverseRelation</a>)?
-	(<a href="#SourceRelation-Syntax">SourceRelation</a>)?
-	(<a href="#InverseSourceRelation-Syntax">InverseSourceRelation</a>)?
-	(<a href="#TargetRelation-Syntax">TargetRelation</a>)?
-	(<a href="#InverseTargetRelation-Syntax">InverseTargetRelation</a>)?
 	(<span style="font-weight:bold;color:purple">functional</span>)?
 	(<span style="font-weight:bold;color:purple">inverseFunctional</span>)?
 	(<span style="font-weight:bold;color:purple">symmetric</span>)?

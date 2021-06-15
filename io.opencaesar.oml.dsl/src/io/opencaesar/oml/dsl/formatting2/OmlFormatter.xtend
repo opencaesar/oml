@@ -43,8 +43,6 @@ import io.opencaesar.oml.EnumeratedScalarReference
 import io.opencaesar.oml.FacetedScalar
 import io.opencaesar.oml.FacetedScalarReference
 import io.opencaesar.oml.ForwardRelation
-import io.opencaesar.oml.InverseSourceRelation
-import io.opencaesar.oml.InverseTargetRelation
 import io.opencaesar.oml.KeyAxiom
 import io.opencaesar.oml.LinkAssertion
 import io.opencaesar.oml.OmlPackage
@@ -70,7 +68,6 @@ import io.opencaesar.oml.ScalarPropertyRangeRestrictionAxiom
 import io.opencaesar.oml.ScalarPropertyReference
 import io.opencaesar.oml.ScalarPropertyValueAssertion
 import io.opencaesar.oml.ScalarPropertyValueRestrictionAxiom
-import io.opencaesar.oml.SourceRelation
 import io.opencaesar.oml.Structure
 import io.opencaesar.oml.StructureInstance
 import io.opencaesar.oml.StructureReference
@@ -80,7 +77,6 @@ import io.opencaesar.oml.StructuredPropertyRangeRestrictionAxiom
 import io.opencaesar.oml.StructuredPropertyReference
 import io.opencaesar.oml.StructuredPropertyValueAssertion
 import io.opencaesar.oml.StructuredPropertyValueRestrictionAxiom
-import io.opencaesar.oml.TargetRelation
 import io.opencaesar.oml.Vocabulary
 import io.opencaesar.oml.VocabularyBundle
 import io.opencaesar.oml.VocabularyBundleExtension
@@ -187,21 +183,17 @@ class OmlFormatter extends AbstractFormatter2 {
 		entity.regionFor.keyword(relationEntityAccess.entityKeyword_2).surround[oneSpace]
 		entity.formatCommas(document)
 		entity.formatBrackets(document)
-		entity.regionFor.keyword(relationEntityAccess.fromKeyword_5_1).prepend[newLine].append[oneSpace]
-		entity.regionFor.keyword(relationEntityAccess.toKeyword_5_3).prepend[newLine].append[oneSpace]
+		entity.regionFor.keyword(relationEntityAccess.fromKeyword_6).prepend[newLine].append[oneSpace]
+		entity.regionFor.keyword(relationEntityAccess.toKeyword_8).prepend[newLine].append[oneSpace]
 		entity.forwardRelation?.format.prepend[newLine]
 		entity.reverseRelation?.format.prepend[newLine]
-		entity.sourceRelation?.format.prepend[newLine]
-		entity.targetRelation?.format.prepend[newLine]
-		entity.inverseSourceRelation?.format.prepend[newLine]
-		entity.inverseTargetRelation?.format.prepend[newLine]
-		entity.regionFor.keyword(relationEntityAccess.functionalFunctionalKeyword_5_6_0_0).prepend[newLine]
-		entity.regionFor.keyword(relationEntityAccess.inverseFunctionalInverseKeyword_5_6_1_0_0).prepend[newLine]
-		entity.regionFor.keyword(relationEntityAccess.symmetricSymmetricKeyword_5_6_2_0).prepend[newLine]
-		entity.regionFor.keyword(relationEntityAccess.asymmetricAsymmetricKeyword_5_6_3_0).prepend[newLine]
-		entity.regionFor.keyword(relationEntityAccess.reflexiveReflexiveKeyword_5_6_4_0).prepend[newLine]
-		entity.regionFor.keyword(relationEntityAccess.irreflexiveIrreflexiveKeyword_5_6_5_0).prepend[newLine]
-		entity.regionFor.keyword(relationEntityAccess.transitiveTransitiveKeyword_5_6_6_0).prepend[newLine]
+		entity.regionFor.keyword(relationEntityAccess.functionalFunctionalKeyword_11_0_0).prepend[newLine]
+		entity.regionFor.keyword(relationEntityAccess.inverseFunctionalInverseKeyword_11_1_0_0).prepend[newLine]
+		entity.regionFor.keyword(relationEntityAccess.symmetricSymmetricKeyword_11_2_0).prepend[newLine]
+		entity.regionFor.keyword(relationEntityAccess.asymmetricAsymmetricKeyword_11_3_0).prepend[newLine]
+		entity.regionFor.keyword(relationEntityAccess.reflexiveReflexiveKeyword_11_4_0).prepend[newLine]
+		entity.regionFor.keyword(relationEntityAccess.irreflexiveIrreflexiveKeyword_11_5_0).prepend[newLine]
+		entity.regionFor.keyword(relationEntityAccess.transitiveTransitiveKeyword_11_6_0).prepend[newLine]
 		entity.ownedKeys.forEach[format.prepend[newLine]]
 		entity.ownedPropertyRestrictions.forEach[format.prepend[newLine]]
 		entity.ownedRelationRestrictions.forEach[format.prepend[newLine]]
@@ -283,28 +275,6 @@ class OmlFormatter extends AbstractFormatter2 {
 		relation.regionFor.keyword(reverseRelationAccess.reverseKeyword_1).append[oneSpace]
 	}
 
-	def dispatch void format(SourceRelation relation, extension IFormattableDocument document) {
-		relation.ownedAnnotations.forEach[format.append[newLine]]
-		relation.regionFor.keyword(sourceRelationAccess.sourceKeyword_1).append[oneSpace]
-	}
-
-	def dispatch void format(InverseSourceRelation relation, extension IFormattableDocument document) {
-		relation.ownedAnnotations.forEach[format.append[newLine]]
-		relation.regionFor.keyword(inverseSourceRelationAccess.inverseKeyword_1).append[oneSpace]
-		relation.regionFor.keyword(inverseSourceRelationAccess.sourceKeyword_2).surround[oneSpace]
-	}
-
-	def dispatch void format(TargetRelation relation, extension IFormattableDocument document) {
-		relation.ownedAnnotations.forEach[format.append[newLine]]
-		relation.regionFor.keyword(targetRelationAccess.targetKeyword_1).append[oneSpace]
-	}
-
-	def dispatch void format(InverseTargetRelation relation, extension IFormattableDocument document) {
-		relation.ownedAnnotations.forEach[format.append[newLine]]
-		relation.regionFor.keyword(inverseTargetRelationAccess.inverseKeyword_1).append[oneSpace]
-		relation.regionFor.keyword(inverseTargetRelationAccess.targetKeyword_2).surround[oneSpace]
-	}
-
 	def dispatch void format(Rule rule, extension IFormattableDocument document) {
 		rule.ownedAnnotations.forEach[format.append[newLine]]
 		rule.regionFor.keyword(ruleAccess.ruleKeyword_1).append[oneSpace]
@@ -332,8 +302,10 @@ class OmlFormatter extends AbstractFormatter2 {
 		instance.regionFor.keyword(relationInstanceAccess.colonKeyword_3_0).surround[oneSpace]
 		instance.formatCommas(document)
 		instance.formatBrackets(document)
-		instance.regionFor.keywords(relationInstanceAccess.fromKeyword_4_1_0).forEach[prepend[newLine].append[oneSpace]]
-		instance.regionFor.keywords(relationInstanceAccess.toKeyword_4_2_0).forEach[prepend[newLine].append[oneSpace]]
+		instance.regionFor.keyword(relationInstanceAccess.fromKeyword_5).prepend[newLine].append[oneSpace]
+		instance.sources.forEach[format.prepend[oneSpace]]
+		instance.regionFor.keyword(relationInstanceAccess.toKeyword_8).prepend[newLine].append[oneSpace]
+        instance.targets.forEach[format.prepend[oneSpace]]
 		instance.ownedPropertyValues.forEach[format.prepend[newLine]]
 		instance.ownedLinks.forEach[format.prepend[newLine]]
 	}

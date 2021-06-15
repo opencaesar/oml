@@ -289,10 +289,6 @@ public class RelationEntityItemProvider extends EntityItemProvider {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(OmlPackage.Literals.RELATION_ENTITY__FORWARD_RELATION);
 			childrenFeatures.add(OmlPackage.Literals.RELATION_ENTITY__REVERSE_RELATION);
-			childrenFeatures.add(OmlPackage.Literals.RELATION_ENTITY__SOURCE_RELATION);
-			childrenFeatures.add(OmlPackage.Literals.RELATION_ENTITY__TARGET_RELATION);
-			childrenFeatures.add(OmlPackage.Literals.RELATION_ENTITY__INVERSE_SOURCE_RELATION);
-			childrenFeatures.add(OmlPackage.Literals.RELATION_ENTITY__INVERSE_TARGET_RELATION);
 		}
 		return childrenFeatures;
 	}
@@ -359,10 +355,6 @@ public class RelationEntityItemProvider extends EntityItemProvider {
 				return;
 			case OmlPackage.RELATION_ENTITY__FORWARD_RELATION:
 			case OmlPackage.RELATION_ENTITY__REVERSE_RELATION:
-			case OmlPackage.RELATION_ENTITY__SOURCE_RELATION:
-			case OmlPackage.RELATION_ENTITY__TARGET_RELATION:
-			case OmlPackage.RELATION_ENTITY__INVERSE_SOURCE_RELATION:
-			case OmlPackage.RELATION_ENTITY__INVERSE_TARGET_RELATION:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -389,26 +381,6 @@ public class RelationEntityItemProvider extends EntityItemProvider {
 			(createChildParameter
 				(OmlPackage.Literals.RELATION_ENTITY__REVERSE_RELATION,
 				 OmlFactory.eINSTANCE.createReverseRelation()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OmlPackage.Literals.RELATION_ENTITY__SOURCE_RELATION,
-				 OmlFactory.eINSTANCE.createSourceRelation()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OmlPackage.Literals.RELATION_ENTITY__TARGET_RELATION,
-				 OmlFactory.eINSTANCE.createTargetRelation()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OmlPackage.Literals.RELATION_ENTITY__INVERSE_SOURCE_RELATION,
-				 OmlFactory.eINSTANCE.createInverseSourceRelation()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OmlPackage.Literals.RELATION_ENTITY__INVERSE_TARGET_RELATION,
-				 OmlFactory.eINSTANCE.createInverseTargetRelation()));
 	}
 
 }
