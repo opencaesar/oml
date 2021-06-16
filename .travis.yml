@@ -23,7 +23,7 @@ install:
   - pip install --editable bikeshed
 
 script:
-  - export DISPLAY=:0
+  - unset DISPLAY
   - ./gradlew build
   - mvn verify
 
