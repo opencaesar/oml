@@ -1,6 +1,6 @@
 os: linux
 arch:
-  - arm64
+  - s390x
 
 sudo: false
 language: python
@@ -17,14 +17,13 @@ services:
 
 before_install:
   - sudo apt-get install graphviz
-  - sudo apt-get -yq install maven
 
 install:
   - git clone https://github.com/tabatkins/bikeshed.git
   - pip install --editable bikeshed
 
 script:
-  - ./gradlew build -Djava.awt.headless=true
+  - ./gradlew build
   - mvn verify
 
 env:
