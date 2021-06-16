@@ -2,7 +2,7 @@
 
 # Ontological Modeling Language
 
-[![Build Status](https://travis-ci.org/opencaesar/oml.svg?branch=master)](https://travis-ci.org/opencaesar/oml)
+[![Build Status](https://travis-ci.com/opencaesar/oml.svg?branch=master)](https://travis-ci.org/opencaesar/oml)
 [![Release](https://img.shields.io/github/v/release/opencaesar/oml?label=release)](https://github.com/opencaesar/oml/releases/latest)
 [![Updatesite](https://img.shields.io/badge/p2-updatesite-yellow.svg?longCache=true)](https://github.com/opencaesar/oml-p2)
 [![OML Specification](https://img.shields.io/badge/OML-specification-purple.svg?longCache=true)](https://opencaesar.github.io/oml/)
