@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"io.opencaesar.oml"},{"l":"io.opencaesar.oml.impl"},{"l":"io.opencaesar.oml.util"}]
