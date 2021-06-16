@@ -54,3 +54,5 @@ sourceSets {
 clean {
 	delete 'xtend-gen'
 }
+
+assemble.dependsOn javadoc
