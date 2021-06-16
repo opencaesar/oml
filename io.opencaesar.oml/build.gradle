@@ -21,7 +21,6 @@ dependencies {
 
 configurations.all {
      resolutionStrategy {
-         force "org.eclipse.emf:org.eclipse.emf.ecore:${versions.emfEcore}"
          force "org.eclipse.platform:org.eclipse.core.runtime:$versions.coreRuntime"
      }
  }
