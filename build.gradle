@@ -14,14 +14,15 @@ subprojects {
 	version = rootProject.file('version.txt').text.trim()
 
 	ext.versions = [
-	    xtext: '2.23.0',
-	    xcore: '1.15.0',
-	    xcoreLib: '1.5.0',
-	    ecoreXtext: '1.5.0',
-	    codegen: '2.21.0',
-	    codegenEcore: '2.23.0',
-	    emfEcore: '2.23.0',
-	    mwe2: '2.11.3',
+	    xtext: '2.26.0.M1',
+	    xcore: '1.18.0',
+	    xcoreLib: '1.6.0',
+	    ecoreXtext: '1.6.0',
+	    codegen: '2.22.0',
+	    codegenEcore: '2.26.0',
+	    emfEcore: '2.24.0',
+	    mwe2: '2.12.1',
+	    coreRuntime: '3.22.0',
 	    lsp4j: '0.7.0',
 	    elk: '0.7.0',
 	    // https://github.com/eclipse/sprotty-server/releases
