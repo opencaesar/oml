@@ -176,7 +176,7 @@ public class OmlOntologyDiagramView {
 
 	public OmlNode createNode(final ConceptInstance ci) {
 		final String text = getLocalName(ci) + ": "
-				+ IterableExtensions.join(ListExtensions.map(ci.getOwnedTypes(), cta -> OmlRead.getAbbreviatedIri(cta.getType())), ",");
+				+ IterableExtensions.join(ListExtensions.map(ci.getOwnedTypes(), cta -> cta.getType().getAbbreviatedIri()), ",");
 		final String id = idCache.uniqueId(ci, text);
 		final OmlNode n = newSElement(OmlNode.class, id, OmlDiagramModule.OmlNode_ClassNodeView);
 		n.setCssClass("moduleNode");
@@ -188,7 +188,7 @@ public class OmlOntologyDiagramView {
 
 	public OmlNode createNode(final RelationInstance ri, final SModelElement from, final SModelElement to) {
 		final String text = getLocalName(ri) + ": " + IterableExtensions
-				.join(ListExtensions.map(ri.getOwnedTypes(), rta -> OmlRead.getAbbreviatedIri(rta.getType())), ",");
+				.join(ListExtensions.map(ri.getOwnedTypes(), rta -> rta.getType().getAbbreviatedIri()), ",");
 		final String id = idCache.uniqueId(ri, text);
 		final OmlNode n = newSElement(OmlNode.class, id, OmlDiagramModule.OmlNode_ClassNodeView);
 		n.setCssClass("moduleNode");
@@ -248,10 +248,10 @@ public class OmlOntologyDiagramView {
 
 	public OmlLabel createLabel(final Entity e, final KeyAxiom ax) {
 		final String id = idCache.uniqueId(ax, getLocalName(e) + ".key." + IterableExtensions
-				.join(ListExtensions.map(ax.getProperties(), p -> OmlRead.getAbbreviatedIri(p)), ","));
+				.join(ListExtensions.map(ax.getProperties(), p -> p.getAbbreviatedIri()), ","));
 		final OmlLabel l = newLeafSElement(OmlLabel.class, id, OmlDiagramModule.SLabel_SLabelView_text);
 		l.setText("key: " + IterableExtensions
-				.join(ListExtensions.map(ax.getProperties(), p -> OmlRead.getAbbreviatedIri(p)), ", "));
+				.join(ListExtensions.map(ax.getProperties(), p -> p.getAbbreviatedIri()), ", "));
 		return l;
 	}
 
@@ -449,7 +449,7 @@ public class OmlOntologyDiagramView {
 	public boolean isDiagramAnnotation(final Annotation a) {
 		final EObject c = a.getProperty().eContainer();
 		if (c instanceof IdentifiedElement) {
-			String iri = OmlRead.getIri((IdentifiedElement) c);
+			String iri = ((IdentifiedElement) c).getIri();
 			return Objects.equal(iri, diagramIRI);
 		}
 		return false;
@@ -555,10 +555,12 @@ public class OmlOntologyDiagramView {
 	}
 
 	private String getLocalName(final Element element) {
-		if (element instanceof IdentifiedElement) {
-			return OmlRead.getNameIn(((IdentifiedElement) element), ontology);
+		if (element instanceof Ontology) {
+			return OmlRead.getPrefixIn(((Ontology) element), ontology);
+		} else if (element instanceof Member) {
+			return OmlRead.getAbbreviatedIriIn(((Member) element), ontology);
 		} else if (element instanceof Reference) {
-			return OmlRead.getResolvedName(((Reference) element));
+			return OmlRead.getAbbreviatedIri(((Reference) element));
 		} else
 			throw new IllegalArgumentException("No local name for element of kind: " + element.eClass().getName());
 	}

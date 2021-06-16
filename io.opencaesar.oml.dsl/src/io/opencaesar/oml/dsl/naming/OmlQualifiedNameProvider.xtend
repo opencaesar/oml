@@ -23,8 +23,6 @@ import io.opencaesar.oml.Ontology
 import org.eclipse.xtext.naming.DefaultDeclarativeQualifiedNameProvider
 import org.eclipse.xtext.naming.QualifiedName
 
-import static extension io.opencaesar.oml.util.OmlRead.*
-
 class OmlQualifiedNameProvider extends DefaultDeclarativeQualifiedNameProvider {
 	
 	def QualifiedName qualifiedName(Member element) {

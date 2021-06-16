@@ -1,6 +1,6 @@
 /**
  * 
- * Copyright 2019 California Institute of Technology ("Caltech").
+ * Copyright 2019-2021 California Institute of Technology ("Caltech").
  * U.S. Government sponsorship acknowledged.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -34,58 +34,62 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import io.opencaesar.oml.Member;
 import io.opencaesar.oml.OmlPackage;
 
-public class OmlXMIResource extends XMIResourceImpl {
+/**
+ * The <b>XMI Resource</b> implementation for the model.
+ * 
+ * @author elaasar
+ */
+public final class OmlXMIResource extends XMIResourceImpl {
 
-	/**
-	 * @deprecated use {@link OmlConstants#OMLXMI_EXTENSION} instead
-	 */
-	@Deprecated(since = "0.8.4", forRemoval = true)
-	public static final String EXTENSION = OmlConstants.OMLXMI_EXTENSION;
+    private final Map<String, EObject> idToEObjectMap = new HashMap<>();
+    private final Adapter idToEObjectMapAdapter = new AdapterImpl() {
+        @Override
+        public void notifyChanged(Notification notification) {
+            if (notification.getFeature() == OmlPackage.Literals.MEMBER__NAME) {
+                if (notification.getOldValue() != null) {
+                    if (idToEObjectMap.remove(notification.getOldValue()) != null) {
+                        if (notification.getNewValue() != null) {
+                            idToEObjectMap.put((String)notification.getNewValue(), (EObject)notification.getNotifier());
+                        }
+                    }
+                }
+            }
+        }
+    };
 
-	final Map<String, EObject> idToEObjectMap = new HashMap<>();
-	final Adapter idToEObjectMapAdapter = new AdapterImpl() {
-		@Override
-		public void notifyChanged(Notification notification) {
-			if (notification.getFeature() == OmlPackage.Literals.MEMBER__NAME) {
-				if (notification.getOldValue() != null) {
-					if (idToEObjectMap.remove(notification.getOldValue()) != null) {
-						if (notification.getNewValue() != null) {
-							idToEObjectMap.put((String)notification.getNewValue(), (EObject)notification.getNotifier());
-						}
-					}
-				}
-			}
-		}
-	};
+    /**
+     * Creates a new Oml XMI Resource given a uri of the resource
+     * 
+     * @param uri The uri of the created resource
+     */
+    public OmlXMIResource(URI uri) {
+        super(uri);
+        getDefaultSaveOptions().put(XMIResource.OPTION_SAVE_TYPE_INFORMATION, Boolean.TRUE);
+        intrinsicIDToEObjectMap = idToEObjectMap;
+    }
+    
+    @Override
+    public void attached(EObject eObject) {
+        super.attached(eObject);
+        if (eObject instanceof Member) {
+            eObject.eAdapters().add(idToEObjectMapAdapter);
+        }
+    }
 
-	public OmlXMIResource(URI uri) {
-		super(uri);
-		getDefaultSaveOptions().put(XMIResource.OPTION_SAVE_TYPE_INFORMATION, Boolean.TRUE);
-		intrinsicIDToEObjectMap = idToEObjectMap;
-	}
-	
-	@Override
-	public void attached(EObject eObject) {
-		super.attached(eObject);
-		if (eObject instanceof Member) {
-			eObject.eAdapters().add(idToEObjectMapAdapter);
-		}
-	}
+    @Override
+    public void detached(EObject eObject) {
+        if (eObject instanceof Member) {
+            eObject.eAdapters().remove(idToEObjectMapAdapter);
+        }
+        super.detached(eObject);
+    }
 
-	@Override
-	public void detached(EObject eObject) {
-		if (eObject instanceof Member) {
-			eObject.eAdapters().remove(idToEObjectMapAdapter);
-		}
-		super.detached(eObject);
-	}
-
-	@Override
-	public void doSave(OutputStream outputStream, Map<?, ?> options) throws IOException {
-	    // this option is set by the Sample Reflective Ecore Model Editor; unset it
-	    final Map<Object, Object> mergedOptions = new HashMap<>(options);
-		mergedOptions.remove(XMIResource.OPTION_LINE_WIDTH);
-		super.doSave(outputStream, mergedOptions);
-	}
+    @Override
+    public void doSave(OutputStream outputStream, Map<?, ?> options) throws IOException {
+        // this option is set by the Sample Reflective Ecore Model Editor; unset it
+        final Map<Object, Object> mergedOptions = new HashMap<>(options);
+        mergedOptions.remove(XMIResource.OPTION_LINE_WIDTH);
+        super.doSave(outputStream, mergedOptions);
+    }
 
 }

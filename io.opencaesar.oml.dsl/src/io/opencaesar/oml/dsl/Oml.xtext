@@ -125,15 +125,11 @@ Concept:
 	
 RelationEntity:
 	ownedAnnotations+=Annotation*
-	'relation' 'entity' name=ID (':>' ownedSpecializations+=SpecializationAxiom (',' ownedSpecializations+=SpecializationAxiom)*)? ('['
+	'relation' 'entity' name=ID (':>' ownedSpecializations+=SpecializationAxiom (',' ownedSpecializations+=SpecializationAxiom)*)? '['
 		'from' source=[Entity|Ref]
 		'to' target=[Entity|Ref]
 		((forwardRelation=ForwardRelation)? &
-		 (reverseRelation=ReverseRelation)? &
-		 (sourceRelation=SourceRelation)? &
-		 (inverseSourceRelation=InverseSourceRelation)? &
-		 (targetRelation=TargetRelation)? &
-		 (inverseTargetRelation=InverseTargetRelation)?)
+		 (reverseRelation=ReverseRelation)?)
 		((functional?='functional')? &
 		 (inverseFunctional?='inverse' 'functional')? &
 		 (symmetric?='symmetric')? &
@@ -144,7 +140,7 @@ RelationEntity:
 		(ownedKeys+=KeyAxiom)*
 		ownedPropertyRestrictions+=PropertyRestrictionAxiom*
 		ownedRelationRestrictions+=RelationRestrictionAxiom*
-	']')?;
+	']';
 	
 Structure:
 	ownedAnnotations+=Annotation*
@@ -216,22 +212,6 @@ ReverseRelation:
 	ownedAnnotations+=Annotation*
 	'reverse' name=ID;
 
-SourceRelation:
-	ownedAnnotations+=Annotation*
-	'source' name=ID;
-
-InverseSourceRelation:
-	ownedAnnotations+=Annotation*
-	'inverse' 'source' name=ID;
-
-TargetRelation:
-	ownedAnnotations+=Annotation*
-	'target' name=ID;
-
-InverseTargetRelation:
-	ownedAnnotations+=Annotation*
-	'inverse' 'target' name=ID;
-
 Rule:
 	ownedAnnotations+=Annotation*
 	'rule' name=ID '['
@@ -261,12 +241,12 @@ ConceptInstance:
 	
 RelationInstance:
 	ownedAnnotations+=Annotation*
-	'ri' name=ID (':' ownedTypes+=RelationTypeAssertion (',' ownedTypes+=RelationTypeAssertion)*)?  ('['
-		('from' sources+=[NamedInstance|Ref])+ 
-		('to' targets+=[NamedInstance|Ref])+
+	'ri' name=ID (':' ownedTypes+=RelationTypeAssertion (',' ownedTypes+=RelationTypeAssertion)*)? '['
+		'from' sources+=[NamedInstance|Ref] (',' sources+=[NamedInstance|Ref])* 
+		'to' targets+=[NamedInstance|Ref] (',' targets+=[NamedInstance|Ref])*
 		ownedPropertyValues+=PropertyValueAssertion*
 		ownedLinks+=LinkAssertion*
-	']')?;
+	']';
 	
 Reference:
 	VocabularyMemberReference |

@@ -48,7 +48,7 @@ class OmlResourceDescriptionStrategy extends DefaultResourceDescriptionStrategy 
 
 	def createEObjectDescriptionForOntology(Ontology ontology, IAcceptor<IEObjectDescription> acceptor) {
 		var Map<String, String> userData
-		val uris = ontology.closure[importedOntologies].filter[it !== ontology].map[eResource.URI]
+		val uris = ontology.closure(false)[importedOntologies].filter[it !== ontology].map[eResource.URI]
 		if (!uris.empty) {
 			userData = new HashMap
 			userData.put(IMPORTS, uris.join(","))

@@ -200,57 +200,13 @@ macros:
     svgpath: images/reverse_relation.svg
 </pre>
 
-### [=SourceRelation=] ### {#SourceRelation-Syntax}
-
-Declaration
-
-<pre class="include">
-path: tabs.md
-macros:
-	textpath: concrete_syntax/source_relation.md
-    svgpath: images/source_relation.svg
-</pre>
-
-### [=InverseSourceRelation=] ### {#InverseSourceRelation-Syntax}
-
-Declaration
-
-<pre class="include">
-path: tabs.md
-macros:
-	textpath: concrete_syntax/inverse_source_relation.md
-    svgpath: images/inverse_source_relation.svg
-</pre>
-
-### [=TargetRelation=] ### {#TargetRelation-Syntax}
-
-Declaration
-
-<pre class="include">
-path: tabs.md
-macros:
-	textpath: concrete_syntax/target_relation.md
-    svgpath: images/target_relation.svg
-</pre>
-
-### [=InverseTargetRelation=] ### {#InverseTargetRelation-Syntax}
-
-Declaration
-
-<pre class="include">
-path: tabs.md
-macros:
-	textpath: concrete_syntax/inverse_target_relation.md
-    svgpath: images/inverse_target_relation.svg
-</pre>
-
 ### [=RelationReference=] ### {#RelationReference-Syntax}
 
 Reference
 
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
-<span style="font-weight:bold;color:purple">ref relation</span> (<a href="#ForwardRelation-Syntax">ForwardRelation_IRI</a> | <a href="#ReverseRelation-Syntax">ReverseRelation_IRI</a> | <a href="#SourceRelation-Syntax">SourceRelation_IRI</a> | <a href="#InverseSourceRelation-Syntax">InverseSourceRelation_IRI</a> | <a href="#TargetRelation-Syntax">TargetRelation_IRI</a> | <a href="#InverseTargetRelation-Syntax">InverseTargetRelation_IRI</a>)
+<span style="font-weight:bold;color:purple">ref relation</span> (<a href="#ForwardRelation-Syntax">ForwardRelation_IRI</a> | <a href="#ReverseRelation-Syntax">ReverseRelation_IRI</a>)
 </pre>
 
 ### [=Structure=] ### {#Structure-Syntax}
@@ -491,21 +447,21 @@ macros:
 
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
-<span style="font-weight:bold;color:purple">restricts</span> (<span style="font-weight:bold;color:purple">all</span> | <span style="font-weight:bold;color:purple">some</span>) <span style="font-weight:bold;color:purple">relation</span> (<a href="#ForwardRelation-Syntax">ForwardRelation_IRI</a> | <a href="#ReverseRelation-Syntax">ReverseRelation_IRI</a> | <a href="#SourceRelation-Syntax">SourceRelation_IRI</a> | <a href="#InverseSourceRelation-Syntax">InverseSourceRelation_IRI</a> | <a href="#TargetRelation-Syntax">TargetRelation_IRI</a> | <a href="#InverseTargetRelation-Syntax">InverseTargetRelation_IRI</a>) <span style="font-weight:bold;color:purple">to</span> (<a href="#Aspect-Syntax">Aspect_IRI</a> | <a href="#Concept-Syntax">Concept_IRI</a> | <a href="#RelationEntity-Syntax">RelationEntity_IRI</a>)
+<span style="font-weight:bold;color:purple">restricts</span> (<span style="font-weight:bold;color:purple">all</span> | <span style="font-weight:bold;color:purple">some</span>) <span style="font-weight:bold;color:purple">relation</span> (<a href="#ForwardRelation-Syntax">ForwardRelation_IRI</a> | <a href="#ReverseRelation-Syntax">ReverseRelation_IRI</a>) <span style="font-weight:bold;color:purple">to</span> (<a href="#Aspect-Syntax">Aspect_IRI</a> | <a href="#Concept-Syntax">Concept_IRI</a> | <a href="#RelationEntity-Syntax">RelationEntity_IRI</a>)
 </pre>
 
 ### [=RelationCardinalityRestrictionAxiom=] ### {#RelationCardinalityRestrictionAxiom-Syntax}
 
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
-<span style="font-weight:bold;color:purple">restricts relation</span> (<a href="#ForwardRelation-Syntax">ForwardRelation_IRI</a> | <a href="#ReverseRelation-Syntax">ReverseRelation_IRI</a> | <a href="#SourceRelation-Syntax">SourceRelation_IRI</a> | <a href="#InverseSourceRelation-Syntax">InverseSourceRelation_IRI</a> | <a href="#TargetRelation-Syntax">TargetRelation_IRI</a> | <a href="#InverseTargetRelation-Syntax">InverseTargetRelation_IRI</a>) <span style="font-weight:bold;color:purple">to</span> (<span style="font-weight:bold;color:purple">exactly</span> | <span style="font-weight:bold;color:purple">min</span> | <span style="font-weight:bold;color:purple">max</span>) INTEGER (<a href="#Aspect-Syntax">Aspect_IRI</a> | <a href="#Concept-Syntax">Concept_IRI</a> | <a href="#RelationEntity-Syntax">RelationEntity_IRI</a>)?
+<span style="font-weight:bold;color:purple">restricts relation</span> (<a href="#ForwardRelation-Syntax">ForwardRelation_IRI</a> | <a href="#ReverseRelation-Syntax">ReverseRelation_IRI</a>) <span style="font-weight:bold;color:purple">to</span> (<span style="font-weight:bold;color:purple">exactly</span> | <span style="font-weight:bold;color:purple">min</span> | <span style="font-weight:bold;color:purple">max</span>) INTEGER (<a href="#Aspect-Syntax">Aspect_IRI</a> | <a href="#Concept-Syntax">Concept_IRI</a> | <a href="#RelationEntity-Syntax">RelationEntity_IRI</a>)?
 </pre>
 
 ### [=RelationTargetRestrictionAxiom=] ### {#RelationTargetRestrictionAxiom-Syntax}
 
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
-<span style="font-weight:bold;color:purple">restricts relation</span> (<a href="#ForwardRelation-Syntax">ForwardRelation_IRI</a> | <a href="#ReverseRelation-Syntax">ReverseRelation_IRI</a> | <a href="#SourceRelation-Syntax">SourceRelation_IRI</a> | <a href="#InverseSourceRelation-Syntax">InverseSourceRelation_IRI</a> | <a href="#TargetRelation-Syntax">TargetRelation_IRI</a> | <a href="#InverseTargetRelation-Syntax">InverseTargetRelation_IRI</a>) <span style="font-weight:bold;color:purple">to</span> (<a href="#ConceptInstance-Syntax">ConceptInstance_IRI</a> | <a href="#RelationInstance-Syntax">RelationInstance_IRI</a>)
+<span style="font-weight:bold;color:purple">restricts relation</span> (<a href="#ForwardRelation-Syntax">ForwardRelation_IRI</a> | <a href="#ReverseRelation-Syntax">ReverseRelation_IRI</a>) <span style="font-weight:bold;color:purple">to</span> (<a href="#ConceptInstance-Syntax">ConceptInstance_IRI</a> | <a href="#RelationInstance-Syntax">RelationInstance_IRI</a>)
 </pre>
 
 ### [=KeyAxiom=] ### {#KeyAxiom-Syntax}
@@ -594,8 +550,8 @@ Declaration
 <pre class="highlight highlight-html">
 (<a href="#Annotation-Syntax">Annotation</a>)*
 <span style="font-weight:bold;color:purple">ri</span> ID (: <a href="#RelationTypeAssertion-Syntax">RelationTypeAssertion</a> (, <a href="#RelationTypeAssertion-Syntax">RelationTypeAssertion</a>)*)? ([
-	<span style="font-weight:bold;color:purple">from</span> (<a href="#ConceptInstance-Syntax">ConceptInstance_IRI</a> | <a href="#RelationInstance-Syntax">RelationInstance_IRI</a>)
-	<span style="font-weight:bold;color:purple">to</span> (<a href="#ConceptInstance-Syntax">ConceptInstance_IRI</a> | <a href="#RelationInstance-Syntax">RelationInstance_IRI</a>)
+	<span style="font-weight:bold;color:purple">from</span> (<a href="#ConceptInstance-Syntax">ConceptInstance_IRI</a> | <a href="#RelationInstance-Syntax">RelationInstance_IRI</a>) (, (<a href="#ConceptInstance-Syntax">ConceptInstance_IRI</a> | <a href="#RelationInstance-Syntax">RelationInstance_IRI</a>))*
+	<span style="font-weight:bold;color:purple">to</span> (<a href="#ConceptInstance-Syntax">ConceptInstance_IRI</a> | <a href="#RelationInstance-Syntax">RelationInstance_IRI</a>) (, (<a href="#ConceptInstance-Syntax">ConceptInstance_IRI</a> | <a href="#RelationInstance-Syntax">RelationInstance_IRI</a>))*
 	(<a href="#ScalarPropertyValueAssertion-Syntax">ScalarPropertyValueAssertion</a> | <a href="#StructuredPropertyValueAssertion-Syntax">StructuredPropertyValueAssertion</a> )*
 	(<a href="#LinkAssertion-Syntax">LinkAssertion</a>)*
 ])?

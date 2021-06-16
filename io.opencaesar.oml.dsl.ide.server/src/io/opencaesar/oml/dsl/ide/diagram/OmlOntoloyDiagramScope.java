@@ -48,7 +48,7 @@ import io.opencaesar.oml.Type;
 import io.opencaesar.oml.util.OmlIndex;
 import io.opencaesar.oml.util.OmlRead;
 import io.opencaesar.oml.util.OmlSearch;
-import io.opencaesar.oml.util.OmlVisitor;
+import io.opencaesar.oml.util.OmlSwitch;
 
 public class OmlOntoloyDiagramScope {
 
@@ -157,7 +157,7 @@ public class OmlOntoloyDiagramScope {
 
 	public OmlOntoloyDiagramScope analyze() {
 		analyze1Ontology(ontology);
-		OmlRead.getAllImportsWithSource(ontology).forEach(i -> {
+		OmlRead.getAllImports(ontology).forEach(i -> {
 			Ontology o = OmlRead.getImportedOntology(i);
 			analyze1Ontology(o);
 		});
@@ -194,7 +194,7 @@ public class OmlOntoloyDiagramScope {
 		if (!structuredProperties.containsKey(cls)) {
 			structuredProperties.put(cls, new HashSet<>());
 		}
-		Iterables.filter(OmlSearch.findAllGeneralTermsInclusive(cls), Classifier.class).forEach(parent -> {
+		Iterables.filter(OmlSearch.findAllSuperTerms(cls, true), Classifier.class).forEach(parent -> {
 			OmlSearch.findFeaturePropertiesWithDomain(parent).forEach(f -> {
 				if (allImportedElements.contains(f)) {
 					allFeatureProperties.add(f);
@@ -212,7 +212,7 @@ public class OmlOntoloyDiagramScope {
 	}
 
 	private void phase2ScanAllClassifierProperties(final Classifier cls) {
-		Iterables.filter(OmlSearch.findAllGeneralTermsInclusive(cls), Classifier.class).forEach(parent -> {
+		Iterables.filter(OmlSearch.findAllSuperTerms(cls, true), Classifier.class).forEach(parent -> {
 			OmlIndex.findFeaturePropertiesWithDomain(parent).forEach(p -> {
 				if (allImportedElements.contains(p)) {
 					if (p instanceof ScalarProperty) {
@@ -241,7 +241,7 @@ public class OmlOntoloyDiagramScope {
 				others.add(ax);
 			}
 		});
-		OmlSearch.findSpecializationAxiomsWithSpecificTerm(e).forEach(ax -> {
+		OmlSearch.findSpecializationsWithSubTerm(e).forEach(ax -> {
 			if (allImportedElements.contains(ax)) {
 				others.add(ax);
 			}
@@ -283,24 +283,24 @@ public class OmlOntoloyDiagramScope {
 				}
 			} else if (o instanceof RelationCardinalityRestrictionAxiom) {
 				RelationCardinalityRestrictionAxiom x = (RelationCardinalityRestrictionAxiom) o;
-				if (includes(OmlRead.getRelationEntity(x.getRelation()))) {
+				if (includes(x.getRelation().getRelationEntity())) {
 					ax.add(x);
 				}
 			} else if (o instanceof RelationRangeRestrictionAxiom) {
 				RelationRangeRestrictionAxiom x = (RelationRangeRestrictionAxiom) o;
-				if (includes(OmlRead.getRelationEntity(x.getRelation())) && includes(x.getRange())) {
+				if (includes(x.getRelation().getRelationEntity()) && includes(x.getRange())) {
 					ax.add(x);
 				}
 			} else if (o instanceof RelationTargetRestrictionAxiom) {
 				RelationTargetRestrictionAxiom x = (RelationTargetRestrictionAxiom) o;
-				if (includes(OmlRead.getRelationEntity(x.getRelation())) && includes(x.getTarget())) {
+				if (includes(x.getRelation().getRelationEntity()) && includes(x.getTarget())) {
 					ax.add(x);
 				}
 			}
 		});
 	}
 
-	private class DiagramVisitor extends OmlVisitor<OmlOntoloyDiagramScope> {
+	private class DiagramVisitor extends OmlSwitch<OmlOntoloyDiagramScope> {
 	
 		@Override
 		public OmlOntoloyDiagramScope doSwitch(EObject eObject) {
@@ -371,7 +371,7 @@ public class OmlOntoloyDiagramScope {
 				phase1ScanEntityAxioms(e, others);
 				doSwitch(e.getSource());
 				doSwitch(e.getTarget());
-				OmlSearch.findSpecializationAxiomsWithGeneralTerm(e).forEach(ax -> {
+				OmlSearch.findSpecializationsWithSuperTerm(e).forEach(ax -> {
 					if (allImportedElements.contains(ax)) {
 						incident.add(ax);
 					}
@@ -381,12 +381,12 @@ public class OmlOntoloyDiagramScope {
 						incident.add(ax);
 					}
 				});
-				OmlSearch.findRelationsWithSource(e).forEach(r -> {
+				OmlSearch.findSourceRelations(e).forEach(r -> {
 					if (allImportedElements.contains(r)) {
 						incident.add(r);
 					}
 				});
-				OmlSearch.findRelationsWithTarget(e).forEach(r -> {
+				OmlSearch.findTargetRelations(e).forEach(r -> {
 					if (allImportedElements.contains(r)) {
 						incident.add(r);
 					}
@@ -436,7 +436,7 @@ public class OmlOntoloyDiagramScope {
 					others.add(ax);
 				}
 			});
-			OmlSearch.findLinkAssertionsWithSource(i).forEach(l -> {
+			OmlSearch.findLinkAssertions(i).forEach(l -> {
 				if (allImportedElements.contains(l)) {
 					others.add(l);
 				}

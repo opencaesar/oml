@@ -456,98 +456,6 @@ public class OmlItemProviderAdapterFactory extends OmlAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.SourceRelation} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected SourceRelationItemProvider sourceRelationItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.SourceRelation}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createSourceRelationAdapter() {
-		if (sourceRelationItemProvider == null) {
-			sourceRelationItemProvider = new SourceRelationItemProvider(this);
-		}
-
-		return sourceRelationItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.TargetRelation} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected TargetRelationItemProvider targetRelationItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.TargetRelation}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createTargetRelationAdapter() {
-		if (targetRelationItemProvider == null) {
-			targetRelationItemProvider = new TargetRelationItemProvider(this);
-		}
-
-		return targetRelationItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.InverseSourceRelation} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected InverseSourceRelationItemProvider inverseSourceRelationItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.InverseSourceRelation}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createInverseSourceRelationAdapter() {
-		if (inverseSourceRelationItemProvider == null) {
-			inverseSourceRelationItemProvider = new InverseSourceRelationItemProvider(this);
-		}
-
-		return inverseSourceRelationItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.InverseTargetRelation} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected InverseTargetRelationItemProvider inverseTargetRelationItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.InverseTargetRelation}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createInverseTargetRelationAdapter() {
-		if (inverseTargetRelationItemProvider == null) {
-			inverseTargetRelationItemProvider = new InverseTargetRelationItemProvider(this);
-		}
-
-		return inverseTargetRelationItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.Rule} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1864,10 +1772,6 @@ public class OmlItemProviderAdapterFactory extends OmlAdapterFactory implements 
 		if (enumeratedScalarItemProvider != null) enumeratedScalarItemProvider.dispose();
 		if (forwardRelationItemProvider != null) forwardRelationItemProvider.dispose();
 		if (reverseRelationItemProvider != null) reverseRelationItemProvider.dispose();
-		if (sourceRelationItemProvider != null) sourceRelationItemProvider.dispose();
-		if (targetRelationItemProvider != null) targetRelationItemProvider.dispose();
-		if (inverseSourceRelationItemProvider != null) inverseSourceRelationItemProvider.dispose();
-		if (inverseTargetRelationItemProvider != null) inverseTargetRelationItemProvider.dispose();
 		if (ruleItemProvider != null) ruleItemProvider.dispose();
 		if (structureInstanceItemProvider != null) structureInstanceItemProvider.dispose();
 		if (conceptInstanceItemProvider != null) conceptInstanceItemProvider.dispose();
