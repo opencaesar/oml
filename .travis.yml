@@ -23,7 +23,7 @@ install:
   - pip install --editable bikeshed
 
 script:
-  - ./gradlew build
+  - ./gradlew build -Djava.awt.headless=true
   - mvn verify
 
 env:
