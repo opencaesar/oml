@@ -17,6 +17,7 @@ services:
 
 before_install:
   - sudo apt-get install graphviz
+  - sudo apt-get -yq install maven
 
 install:
   - git clone https://github.com/tabatkins/bikeshed.git
