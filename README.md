@@ -1,6 +1,6 @@
 <img src="io.opencaesar.oml.specification/src/images/oml.svg" alt="OML" width="30%" height="30%"/>
 
-# Ontological Modeling Language (OML)
+# Ontological Modeling Language
 
 [![Build Status](https://travis-ci.com/opencaesar/oml.svg?branch=master)](https://travis-ci.org/opencaesar/oml)
 [![Release](https://img.shields.io/github/v/release/opencaesar/oml?label=release)](https://github.com/opencaesar/oml/releases/latest)
