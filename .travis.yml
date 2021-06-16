@@ -1,5 +1,5 @@
 arch:
-  - s390x
+  - ppc64le
 
 sudo: false
 language: python
