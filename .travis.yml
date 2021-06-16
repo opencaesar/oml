@@ -1,8 +1,6 @@
 os: linux
 arch:
   - arm64
-  - ppc64le
-  - s390x
 sudo: false
 language: python
 python:
