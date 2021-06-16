@@ -28,6 +28,7 @@ rm -rf publish/**/* || exit 0
 cp ${CURRENT_PATH}/build/bikeshed/index.html ./publish
 mkdir -p ./publish/images
 cp ${CURRENT_PATH}/build/bikeshed/images/oml.svg ./publish/images
+mkdir -p ./publish/javadocs
 cp -R ${CURRENT_PATH}/build/bikeshed/javadocs ./publish/javadocs
 
 # Now let's go have some fun with the cloned repo
