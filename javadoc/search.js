@@ -327,3 +327,8 @@ $(function() {
         }
     });
 });
+
+
+getURLPrefix = function(ui) {
+    return '';
+};
