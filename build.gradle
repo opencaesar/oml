@@ -14,7 +14,7 @@ subprojects {
 	version = rootProject.file('version.txt').text.trim()
 
 	ext.versions = [
-	    xtext: '2.26.0.M1',
+	    xtext: '2.25.0',
 	    xcore: '1.18.0',
 	    xcoreLib: '1.6.0',
 	    ecoreXtext: '1.6.0',

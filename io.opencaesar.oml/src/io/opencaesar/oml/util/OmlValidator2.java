@@ -327,12 +327,14 @@ public final class OmlValidator2 {
      */
     protected boolean validateRelationRestrictionAxiomRelation(RelationRestrictionAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
         final Classifier restrictingClassifier = OmlRead.getRestrictingClassifier(object);
-        final Collection<SpecializableTerm> allGeneralTerms = OmlRead.closure(restrictingClassifier, true, t -> OmlSearch.findSuperTerms(t));
         final Entity domainType = object.getRelation().getDomain();
-        if (!allGeneralTerms.stream().filter(t -> t == domainType).findAny().isPresent()) {
-            return report(Diagnostic.ERROR, diagnostics, object,
-                "Relation "+object.getRelation().getAbbreviatedIri()+" has a domain that is not the same as or a super type of "+restrictingClassifier.getAbbreviatedIri(), 
-                OmlPackage.Literals.RELATION_RESTRICTION_AXIOM__RELATION);
+        if (restrictingClassifier != null && domainType != null) {
+	        final Collection<SpecializableTerm> allGeneralTerms = OmlRead.closure(restrictingClassifier, true, t -> OmlSearch.findSuperTerms(t));
+	        if (!allGeneralTerms.stream().filter(t -> t == domainType).findAny().isPresent()) {
+	            return report(Diagnostic.ERROR, diagnostics, object,
+	                "Relation "+object.getRelation().getAbbreviatedIri()+" has a domain that is not the same as or a super type of "+restrictingClassifier.getAbbreviatedIri(), 
+	                OmlPackage.Literals.RELATION_RESTRICTION_AXIOM__RELATION);
+	        }
         }
         return true;
     }
@@ -347,12 +349,14 @@ public final class OmlValidator2 {
      */
     protected boolean validateRelationRangeRestrictionAxiomRange(RelationRangeRestrictionAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
         final Entity restrictedRange = object.getRange();
-        final Collection<SpecializableTerm> allGeneralEntities = OmlRead.closure(restrictedRange, true, t -> OmlSearch.findSuperTerms(t));
         final Entity rangeType = object.getRelation().getRange();
-        if (!allGeneralEntities.stream().filter(t -> t == rangeType).findAny().isPresent()) {
-            return report(Diagnostic.ERROR, diagnostics, object,
-                "Entity "+restrictedRange.getAbbreviatedIri()+" is not the same as or a sub type of "+rangeType.getAbbreviatedIri(), 
-                OmlPackage.Literals.RELATION_RANGE_RESTRICTION_AXIOM__RANGE);
+        if (restrictedRange != null && rangeType != null) {
+	        final Collection<SpecializableTerm> allGeneralEntities = OmlRead.closure(restrictedRange, true, t -> OmlSearch.findSuperTerms(t));
+	        if (!allGeneralEntities.stream().filter(t -> t == rangeType).findAny().isPresent()) {
+	            return report(Diagnostic.ERROR, diagnostics, object,
+	                "Entity "+restrictedRange.getAbbreviatedIri()+" is not the same as or a sub type of "+rangeType.getAbbreviatedIri(), 
+	                OmlPackage.Literals.RELATION_RANGE_RESTRICTION_AXIOM__RANGE);
+	        }
         }
         return true;
     }
@@ -367,9 +371,9 @@ public final class OmlValidator2 {
      */
     protected boolean validateRelationCardinalityRestrictionAxiomRange(RelationCardinalityRestrictionAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
         final Entity restrictedRange = object.getRange();
-        if (restrictedRange != null) {
+        final Entity rangeType = object.getRelation().getRange();
+        if (restrictedRange != null && rangeType != null) {
             final Collection<SpecializableTerm> allGeneralEntities = OmlRead.closure(restrictedRange, true, t -> OmlSearch.findSuperTerms(t));
-            final Entity rangeType = object.getRelation().getRange();
             if (!allGeneralEntities.stream().filter(t -> t == rangeType).findAny().isPresent()) {
                 return report(Diagnostic.ERROR, diagnostics, object,
                     "Entity "+restrictedRange.getAbbreviatedIri()+" is not the same as or a sub type of "+rangeType.getAbbreviatedIri(), 
@@ -391,12 +395,14 @@ public final class OmlValidator2 {
      */
     protected boolean validateScalarPropertyRestrictionAxiomProperty(ScalarPropertyRestrictionAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
         final Classifier restrictingClassifier = OmlRead.getRestrictingClassifier(object);
-        final Collection<SpecializableTerm> allGeneralTerms = OmlRead.closure(restrictingClassifier, true, t -> OmlSearch.findSuperTerms(t));
         final Classifier domainType = object.getProperty().getDomain();
-        if (!allGeneralTerms.stream().filter(t -> t == domainType).findAny().isPresent()) {
-            return report(Diagnostic.ERROR, diagnostics, object,
-                "Property "+object.getProperty().getAbbreviatedIri()+" has a domain that is not the same as or a super type of "+OmlRead.getRestrictingClassifier(object).getAbbreviatedIri(), 
-                OmlPackage.Literals.SCALAR_PROPERTY_RESTRICTION_AXIOM__PROPERTY);
+        if (restrictingClassifier != null && domainType != null) {
+	        final Collection<SpecializableTerm> allGeneralTerms = OmlRead.closure(restrictingClassifier, true, t -> OmlSearch.findSuperTerms(t));
+	        if (!allGeneralTerms.stream().filter(t -> t == domainType).findAny().isPresent()) {
+	            return report(Diagnostic.ERROR, diagnostics, object,
+	                "Property "+object.getProperty().getAbbreviatedIri()+" has a domain that is not the same as or a super type of "+OmlRead.getRestrictingClassifier(object).getAbbreviatedIri(), 
+	                OmlPackage.Literals.SCALAR_PROPERTY_RESTRICTION_AXIOM__PROPERTY);
+	        }
         }
         return true;
     }
@@ -411,12 +417,14 @@ public final class OmlValidator2 {
      */
     protected boolean validateScalarPropertyRangeRestrictionAxiomRange(ScalarPropertyRangeRestrictionAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
         final Scalar restrictedRange = object.getRange();
-        final Collection<SpecializableTerm> allGeneralEntities = OmlRead.closure(restrictedRange, true, t -> OmlSearch.findSuperTerms(t));
         final Scalar rangeType = object.getProperty().getRange();
-        if (!allGeneralEntities.stream().filter(t -> t == rangeType).findAny().isPresent()) {
-            return report(Diagnostic.ERROR, diagnostics, object,
-                "Scalar "+restrictedRange.getAbbreviatedIri()+" is not the same as or a sub type of "+rangeType.getAbbreviatedIri(), 
-                OmlPackage.Literals.SCALAR_PROPERTY_RANGE_RESTRICTION_AXIOM__RANGE);
+        if (restrictedRange != null && rangeType != null) {
+	        final Collection<SpecializableTerm> allGeneralEntities = OmlRead.closure(restrictedRange, true, t -> OmlSearch.findSuperTerms(t));
+	        if (!allGeneralEntities.stream().filter(t -> t == rangeType).findAny().isPresent()) {
+	            return report(Diagnostic.ERROR, diagnostics, object,
+	                "Scalar "+restrictedRange.getAbbreviatedIri()+" is not the same as or a sub type of "+rangeType.getAbbreviatedIri(), 
+	                OmlPackage.Literals.SCALAR_PROPERTY_RANGE_RESTRICTION_AXIOM__RANGE);
+	        }
         }
         return true;
     }
@@ -431,9 +439,9 @@ public final class OmlValidator2 {
      */
     protected boolean validateScalarPropertyCardinalityRestrictionAxiomRange(ScalarPropertyCardinalityRestrictionAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
         final Scalar restrictedRange = object.getRange();
-        if (restrictedRange != null) {
+        final Scalar rangeType = object.getProperty().getRange();
+        if (restrictedRange != null && rangeType != null) {
             final Collection<SpecializableTerm> allGeneralEntities = OmlRead.closure(restrictedRange, true, t -> OmlSearch.findSuperTerms(t));
-            final Scalar rangeType = object.getProperty().getRange();
             if (!allGeneralEntities.stream().filter(t -> t == rangeType).findAny().isPresent()) {
                 return report(Diagnostic.ERROR, diagnostics, object,
                     "Scalar "+restrictedRange.getAbbreviatedIri()+" is not the same as or a sub type of "+rangeType.getAbbreviatedIri(), 
@@ -455,12 +463,14 @@ public final class OmlValidator2 {
      */
     protected boolean validateStructuredPropertyRestrictionAxiomProperty(StructuredPropertyRestrictionAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
         final Classifier restrictingClassifier = OmlRead.getRestrictingClassifier(object);
-        final Collection<SpecializableTerm> allGeneralTerms = OmlRead.closure(restrictingClassifier, true, t -> OmlSearch.findSuperTerms(t));
         final Classifier domainType = object.getProperty().getDomain();
-        if (!allGeneralTerms.stream().filter(t -> t == domainType).findAny().isPresent()) {
-            return report(Diagnostic.ERROR, diagnostics, object,
-                "Property "+object.getProperty().getAbbreviatedIri()+" has a domain that is not the same as or a super type of "+OmlRead.getRestrictingClassifier(object).getAbbreviatedIri(), 
-                OmlPackage.Literals.STRUCTURED_PROPERTY_RESTRICTION_AXIOM__PROPERTY);
+        if (restrictingClassifier != null && domainType != null) {
+	        final Collection<SpecializableTerm> allGeneralTerms = OmlRead.closure(restrictingClassifier, true, t -> OmlSearch.findSuperTerms(t));
+	        if (!allGeneralTerms.stream().filter(t -> t == domainType).findAny().isPresent()) {
+	            return report(Diagnostic.ERROR, diagnostics, object,
+	                "Property "+object.getProperty().getAbbreviatedIri()+" has a domain that is not the same as or a super type of "+OmlRead.getRestrictingClassifier(object).getAbbreviatedIri(), 
+	                OmlPackage.Literals.STRUCTURED_PROPERTY_RESTRICTION_AXIOM__PROPERTY);
+	        }
         }
         return true;
     }
@@ -475,12 +485,14 @@ public final class OmlValidator2 {
      */
     protected boolean validateStructuredPropertyRangeRestrictionAxiomRange(StructuredPropertyRangeRestrictionAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
         final Structure restrictedRange = object.getRange();
-        final Collection<SpecializableTerm> allGeneralEntities = OmlRead.closure(restrictedRange, true, t -> OmlSearch.findSuperTerms(t));
         final Structure rangeType = object.getProperty().getRange();
-        if (!allGeneralEntities.stream().filter(t -> t == rangeType).findAny().isPresent()) {
-            return report(Diagnostic.ERROR, diagnostics, object,
-                "Structure "+restrictedRange.getAbbreviatedIri()+" is not the same as or a sub type of "+rangeType.getAbbreviatedIri(), 
-                OmlPackage.Literals.STRUCTURED_PROPERTY_RANGE_RESTRICTION_AXIOM__RANGE);
+        if (restrictedRange != null && rangeType != null) {
+	        final Collection<SpecializableTerm> allGeneralEntities = OmlRead.closure(restrictedRange, true, t -> OmlSearch.findSuperTerms(t));
+	        if (!allGeneralEntities.stream().filter(t -> t == rangeType).findAny().isPresent()) {
+	            return report(Diagnostic.ERROR, diagnostics, object,
+	                "Structure "+restrictedRange.getAbbreviatedIri()+" is not the same as or a sub type of "+rangeType.getAbbreviatedIri(), 
+	                OmlPackage.Literals.STRUCTURED_PROPERTY_RANGE_RESTRICTION_AXIOM__RANGE);
+	        }
         }
         return true;
     }
@@ -495,9 +507,9 @@ public final class OmlValidator2 {
      */
     protected boolean validateStructuredPropertyCardinalityRestrictionAxiomRange(StructuredPropertyCardinalityRestrictionAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
         final Structure restrictedRange = object.getRange();
-        if (restrictedRange != null) {
+        final Structure rangeType = object.getProperty().getRange();
+        if (restrictedRange != null && rangeType != null) {
             final Collection<SpecializableTerm> allGeneralEntities = OmlRead.closure(restrictedRange, true, t -> OmlSearch.findSuperTerms(t));
-            final Structure rangeType = object.getProperty().getRange();
             if (!allGeneralEntities.stream().filter(t -> t == rangeType).findAny().isPresent()) {
                 return report(Diagnostic.ERROR, diagnostics, object,
                     "Structure "+restrictedRange.getAbbreviatedIri()+" is not the same as or a sub type of "+rangeType.getAbbreviatedIri(), 
@@ -520,14 +532,16 @@ public final class OmlValidator2 {
     protected boolean validateSpecializationAxiomSpecializedTermKind(SpecializationAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
         final SpecializableTerm superTerm = OmlRead.getSuperTerm(object);
         final SpecializableTerm subTerm = OmlRead.getSubTerm(object);
-        final EClass superEClass = superTerm.eClass();
-        final EClass subEClass = subTerm.eClass();
-        if (!((OmlPackage.Literals.ASPECT == superEClass && OmlPackage.Literals.ENTITY.isSuperTypeOf(subEClass)) ||
-            (OmlPackage.Literals.FACETED_SCALAR == superEClass && OmlPackage.Literals.ENUMERATED_SCALAR == subEClass) ||
-            (superEClass == subEClass))) {
-            return report(Diagnostic.ERROR, diagnostics, object,
-                "Term "+superTerm.getAbbreviatedIri()+" cannot be specialized by "+subTerm.getAbbreviatedIri()+"", 
-                OmlPackage.Literals.SPECIALIZATION_AXIOM__SPECIALIZED_TERM);
+        if (superTerm != null && subTerm != null) {
+	        final EClass superEClass = superTerm.eClass();
+	        final EClass subEClass = subTerm.eClass();
+	        if (!((OmlPackage.Literals.ASPECT == superEClass && OmlPackage.Literals.ENTITY.isSuperTypeOf(subEClass)) ||
+	            (OmlPackage.Literals.FACETED_SCALAR == superEClass && OmlPackage.Literals.ENUMERATED_SCALAR == subEClass) ||
+	            (superEClass == subEClass))) {
+	            return report(Diagnostic.ERROR, diagnostics, object,
+	                "Term "+superTerm.getAbbreviatedIri()+" cannot be specialized by "+subTerm.getAbbreviatedIri()+"", 
+	                OmlPackage.Literals.SPECIALIZATION_AXIOM__SPECIALIZED_TERM);
+	        }
         }
         return true;
     }
