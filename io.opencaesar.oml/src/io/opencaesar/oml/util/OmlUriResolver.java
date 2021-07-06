@@ -250,9 +250,9 @@ final class OmlUriResolver implements Runnable {
         URI currentUri = folderUri;
         while (currentUri != null && catalog == null && currentUri.segmentCount() > 0) {
             uris.add(currentUri);
-            URI catalogUri = CommonPlugin.asLocalURI(currentUri.appendSegment("catalog.xml"));
+            URI catalogUri = currentUri.appendSegment("catalog.xml");
             try {
-	        	if  (new File(catalogUri.toFileString()).exists()) {
+	        	if  (new File(CommonPlugin.asLocalURI(catalogUri).toFileString()).exists()) {
 	                catalog = OmlCatalog.create(catalogUri);
 	        	}
 	        } catch (IOException e) {
