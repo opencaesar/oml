@@ -1,6 +1,6 @@
 /**
  * 
- * Copyright 2019 California Institute of Technology ("Caltech").
+ * Copyright 2019-2021 California Institute of Technology ("Caltech").
  * U.S. Government sponsorship acknowledged.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,7 +19,7 @@
 package io.opencaesar.oml.provider;
 
 
-import io.opencaesar.oml.FeatureProperty;
+import io.opencaesar.oml.FeaturePredicate;
 import io.opencaesar.oml.OmlPackage;
 
 import java.util.Collection;
@@ -30,23 +30,21 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
-import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
-import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
- * This is the item provider adapter for a {@link io.opencaesar.oml.FeatureProperty} object.
+ * This is the item provider adapter for a {@link io.opencaesar.oml.FeaturePredicate} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class FeaturePropertyItemProvider extends PropertyItemProvider {
+public class FeaturePredicateItemProvider extends BinaryPredicateItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public FeaturePropertyItemProvider(AdapterFactory adapterFactory) {
+	public FeaturePredicateItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -61,26 +59,25 @@ public class FeaturePropertyItemProvider extends PropertyItemProvider {
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addDomainPropertyDescriptor(object);
-			addFunctionalPropertyDescriptor(object);
+			addFeaturePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Domain feature.
+	 * This adds a property descriptor for the Feature feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addDomainPropertyDescriptor(Object object) {
+	protected void addFeaturePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_FeatureProperty_domain_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_FeatureProperty_domain_feature", "_UI_FeatureProperty_type"),
-				 OmlPackage.Literals.FEATURE_PROPERTY__DOMAIN,
+				 getString("_UI_FeaturePredicate_feature_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_FeaturePredicate_feature_feature", "_UI_FeaturePredicate_type"),
+				 OmlPackage.Literals.FEATURE_PREDICATE__FEATURE,
 				 true,
 				 false,
 				 true,
@@ -90,25 +87,14 @@ public class FeaturePropertyItemProvider extends PropertyItemProvider {
 	}
 
 	/**
-	 * This adds a property descriptor for the Functional feature.
+	 * This returns FeaturePredicate.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addFunctionalPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_FeatureProperty_functional_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_FeatureProperty_functional_feature", "_UI_FeatureProperty_type"),
-				 OmlPackage.Literals.FEATURE_PROPERTY__FUNCTIONAL,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
-				 null,
-				 null));
+	@Override
+	public Object getImage(Object object) {
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/FeaturePredicate"));
 	}
 
 	/**
@@ -119,10 +105,10 @@ public class FeaturePropertyItemProvider extends PropertyItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((FeatureProperty)object).getName();
+		String label = ((FeaturePredicate)object).getVariable1();
 		return label == null || label.length() == 0 ?
-			getString("_UI_FeatureProperty_type") :
-			getString("_UI_FeatureProperty_type") + " " + label;
+			getString("_UI_FeaturePredicate_type") :
+			getString("_UI_FeaturePredicate_type") + " " + label;
 	}
 
 
@@ -136,12 +122,6 @@ public class FeaturePropertyItemProvider extends PropertyItemProvider {
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
-
-		switch (notification.getFeatureID(FeatureProperty.class)) {
-			case OmlPackage.FEATURE_PROPERTY__FUNCTIONAL:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-				return;
-		}
 		super.notifyChanged(notification);
 	}
 

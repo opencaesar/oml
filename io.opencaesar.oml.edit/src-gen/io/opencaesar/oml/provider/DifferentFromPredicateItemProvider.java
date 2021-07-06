@@ -20,7 +20,6 @@ package io.opencaesar.oml.provider;
 
 
 import io.opencaesar.oml.DifferentFromPredicate;
-
 import java.util.Collection;
 import java.util.List;
 

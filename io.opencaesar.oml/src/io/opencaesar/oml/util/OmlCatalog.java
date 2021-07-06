@@ -18,6 +18,7 @@
  */
 package io.opencaesar.oml.util;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -28,6 +29,7 @@ import java.util.Vector;
 import org.apache.xml.resolver.Catalog;
 import org.apache.xml.resolver.CatalogEntry;
 import org.apache.xml.resolver.CatalogManager;
+import org.eclipse.emf.common.util.URI;
 
 /**
  * The <b>Catalog</b> that resolves logical IRIs to physical URIs. It is a wrapper around the the Apache XML Resolver Catalog. 
@@ -49,7 +51,7 @@ public final class OmlCatalog {
      * The wrapped Apache catalog
      */
     private CatalogEx catalog;
-
+    
     /*
      * Creates a new OmlCatalog instance
      */
@@ -60,17 +62,30 @@ public final class OmlCatalog {
     /**
      * Creates a new Oml Catalog given a catalog URI
      * 
-     * @param catalogUrl The URI of a catalog file named 'catalog.xml'
+     * @param catalogUri The URI of a catalog file named 'catalog.xml'
      * @return A new instance of Oml Catalog
      * @throws IOException When there are problems parsing the catalog
      */
-    public static OmlCatalog create(URL catalogUrl) throws IOException {
-        CatalogEx catalog = new CatalogEx();
+    public static OmlCatalog create(URI catalogUri) throws IOException {
+    	CatalogEx catalog = new CatalogEx(catalogUri);
         catalog.setCatalogManager(manager);
         catalog.setupReaders();
         catalog.loadSystemCatalogs();
-        catalog.parseCatalog(catalogUrl);
+        catalog.parseCatalog(new URL(catalogUri.toString()));
         return new OmlCatalog(catalog);
+    }
+
+    /**
+     * Creates a new Oml Catalog given a catalog URL
+     * 
+     * @param catalogUrl The URL of a catalog file named 'catalog.xml'
+     * @return A new instance of Oml Catalog
+     * @throws IOException When there are problems parsing the catalog
+     * @deprecated Use 
+     */
+    @Deprecated(since = "0.9.1", forRemoval = true)
+    public static OmlCatalog create(URL catalogUrl) throws IOException {
+    	return create(URI.createURI(catalogUrl.toString()));
     }
 
     /**
@@ -81,7 +96,7 @@ public final class OmlCatalog {
      * @throws IOException if the URI cannot be turned into a valid path
      */
     public String resolveURI(String uri) throws IOException {
-        return catalog.resolveURI(uri);
+    	return catalog.resolveURI(uri);
     }
 
     /**
@@ -122,11 +137,19 @@ public final class OmlCatalog {
     }
 
     private static class CatalogEx extends Catalog {
+    	private URI baseUri;
+    	public CatalogEx(URI catalogUri) {
+    		this.baseUri = catalogUri.trimSegments(1);
+    	}
         Vector<?> getCatalogEntries() {
             return catalogEntries;
         }
         Vector<?> getCatalogs() {
             return catalogs;
+        }
+        protected String makeAbsolute(String sysid) {
+            sysid = fixSlashes(sysid);
+            return  baseUri.toString()+File.separator+sysid;
         }
     }
 }

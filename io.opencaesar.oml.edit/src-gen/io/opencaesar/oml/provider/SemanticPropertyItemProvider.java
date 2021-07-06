@@ -1,6 +1,6 @@
 /**
  * 
- * Copyright 2019 California Institute of Technology ("Caltech").
+ * Copyright 2019-2021 California Institute of Technology ("Caltech").
  * U.S. Government sponsorship acknowledged.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,29 +19,34 @@
 package io.opencaesar.oml.provider;
 
 
-import io.opencaesar.oml.SameAsPredicate;
+import io.opencaesar.oml.OmlPackage;
+import io.opencaesar.oml.SemanticProperty;
+
 import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
+import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
- * This is the item provider adapter for a {@link io.opencaesar.oml.SameAsPredicate} object.
+ * This is the item provider adapter for a {@link io.opencaesar.oml.SemanticProperty} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class SameAsPredicateItemProvider extends BinaryPredicateItemProvider {
+public class SemanticPropertyItemProvider extends PropertyItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public SameAsPredicateItemProvider(AdapterFactory adapterFactory) {
+	public SemanticPropertyItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -56,19 +61,54 @@ public class SameAsPredicateItemProvider extends BinaryPredicateItemProvider {
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addDomainPropertyDescriptor(object);
+			addFunctionalPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This returns SameAsPredicate.gif.
+	 * This adds a property descriptor for the Domain feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/SameAsPredicate"));
+	protected void addDomainPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_SemanticProperty_domain_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_SemanticProperty_domain_feature", "_UI_SemanticProperty_type"),
+				 OmlPackage.Literals.SEMANTIC_PROPERTY__DOMAIN,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Functional feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addFunctionalPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_SemanticProperty_functional_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_SemanticProperty_functional_feature", "_UI_SemanticProperty_type"),
+				 OmlPackage.Literals.SEMANTIC_PROPERTY__FUNCTIONAL,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
@@ -79,10 +119,10 @@ public class SameAsPredicateItemProvider extends BinaryPredicateItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((SameAsPredicate)object).getVariable1();
+		String label = ((SemanticProperty)object).getName();
 		return label == null || label.length() == 0 ?
-			getString("_UI_SameAsPredicate_type") :
-			getString("_UI_SameAsPredicate_type") + " " + label;
+			getString("_UI_SemanticProperty_type") :
+			getString("_UI_SemanticProperty_type") + " " + label;
 	}
 
 
@@ -96,6 +136,12 @@ public class SameAsPredicateItemProvider extends BinaryPredicateItemProvider {
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
+
+		switch (notification.getFeatureID(SemanticProperty.class)) {
+			case OmlPackage.SEMANTIC_PROPERTY__FUNCTIONAL:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
+		}
 		super.notifyChanged(notification);
 	}
 
