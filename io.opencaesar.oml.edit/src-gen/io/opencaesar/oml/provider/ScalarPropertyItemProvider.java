@@ -37,7 +37,7 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
  * <!-- end-user-doc -->
  * @generated
  */
-public class ScalarPropertyItemProvider extends FeaturePropertyItemProvider {
+public class ScalarPropertyItemProvider extends SemanticPropertyItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->

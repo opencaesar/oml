@@ -31,11 +31,11 @@ import io.opencaesar.oml.DescriptionUsage;
 import io.opencaesar.oml.DifferentFromPredicate;
 import io.opencaesar.oml.DoubleLiteral;
 import io.opencaesar.oml.Element;
-import io.opencaesar.oml.EntityPredicate;
 import io.opencaesar.oml.EnumeratedScalar;
 import io.opencaesar.oml.EnumeratedScalarReference;
 import io.opencaesar.oml.FacetedScalar;
 import io.opencaesar.oml.FacetedScalarReference;
+import io.opencaesar.oml.FeaturePredicate;
 import io.opencaesar.oml.ForwardRelation;
 import io.opencaesar.oml.IntegerLiteral;
 import io.opencaesar.oml.KeyAxiom;
@@ -51,7 +51,6 @@ import io.opencaesar.oml.RelationEntityPredicate;
 import io.opencaesar.oml.RelationEntityReference;
 import io.opencaesar.oml.RelationInstance;
 import io.opencaesar.oml.RelationInstanceReference;
-import io.opencaesar.oml.RelationPredicate;
 import io.opencaesar.oml.RelationRangeRestrictionAxiom;
 import io.opencaesar.oml.RelationReference;
 import io.opencaesar.oml.RelationTargetRestrictionAxiom;
@@ -76,6 +75,7 @@ import io.opencaesar.oml.StructuredPropertyRangeRestrictionAxiom;
 import io.opencaesar.oml.StructuredPropertyReference;
 import io.opencaesar.oml.StructuredPropertyValueAssertion;
 import io.opencaesar.oml.StructuredPropertyValueRestrictionAxiom;
+import io.opencaesar.oml.TypePredicate;
 import io.opencaesar.oml.Vocabulary;
 import io.opencaesar.oml.VocabularyBundle;
 import io.opencaesar.oml.VocabularyBundleExtension;
@@ -614,16 +614,17 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 	}
 
 	@Override
-	public Adapter createEntityPredicateAdapter() {
-		if (entityPredicateItemProvider == null) entityPredicateItemProvider = new EntityPredicateItemProvider(this) {
+	public Adapter createTypePredicateAdapter() {
+		if (typePredicateItemProvider == null) typePredicateItemProvider = new TypePredicateItemProvider(this) {
 			@Override
 			public String getText(Object object) {
-				EntityPredicate predicate = (EntityPredicate)object;
-				return getPredicateDirection(predicate) + getLabel(predicate.getEntity(), predicate) + "("+predicate.getVariable()+")";
+				TypePredicate predicate = (TypePredicate)object;
+				return getPredicateDirection(predicate) + getLabel(predicate.getType(), predicate) + "("+predicate.getVariable()+")";
 			}
 		};
-		return entityPredicateItemProvider;
+		return typePredicateItemProvider;
 	}
+
 
 	@Override
 	public Adapter createRelationEntityPredicateAdapter() {
@@ -638,15 +639,15 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 	}
 
 	@Override
-	public Adapter createRelationPredicateAdapter() {
-		if (relationPredicateItemProvider == null) relationPredicateItemProvider = new RelationPredicateItemProvider(this) {
+	public Adapter createFeaturePredicateAdapter() {
+		if (featurePredicateItemProvider == null) featurePredicateItemProvider = new FeaturePredicateItemProvider(this) {
 			@Override
 			public String getText(Object object) {
-				RelationPredicate predicate = (RelationPredicate)object;
-				return getPredicateDirection(predicate) + getLabel(predicate.getRelation(), predicate) + "("+predicate.getVariable1()+", "+predicate.getVariable2()+")";
+				FeaturePredicate predicate = (FeaturePredicate)object;
+				return getPredicateDirection(predicate) + getLabel(predicate.getFeature(), predicate) + "("+predicate.getVariable1()+", "+predicate.getVariable2()+")";
 			}
 		};
-		return relationPredicateItemProvider;
+		return featurePredicateItemProvider;
 	}
 
 	@Override

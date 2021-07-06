@@ -55,7 +55,6 @@ import io.opencaesar.oml.Entity;
 import io.opencaesar.oml.EntityReference;
 import io.opencaesar.oml.EnumeratedScalar;
 import io.opencaesar.oml.FacetedScalar;
-import io.opencaesar.oml.FeatureProperty;
 import io.opencaesar.oml.Import;
 import io.opencaesar.oml.Instance;
 import io.opencaesar.oml.KeyAxiom;
@@ -78,6 +77,7 @@ import io.opencaesar.oml.RelationTypeAssertion;
 import io.opencaesar.oml.Rule;
 import io.opencaesar.oml.Scalar;
 import io.opencaesar.oml.ScalarProperty;
+import io.opencaesar.oml.SemanticProperty;
 import io.opencaesar.oml.SpecializableTerm;
 import io.opencaesar.oml.SpecializableTermReference;
 import io.opencaesar.oml.SpecializationAxiom;
@@ -439,7 +439,7 @@ public final class OmlSearch extends OmlIndex {
     }
     
     /**
-     * Finds direct super( general) terms of the given term
+     * Finds direct and transitive super( general) terms of the given term
      * 
      * @param term the given term
      * @return a list of direct super (general) terms of the given term 
@@ -452,7 +452,7 @@ public final class OmlSearch extends OmlIndex {
     
 
     /**
-     * Finds direct or transitive super (general) terms of the given term
+     * Finds direct and transitive super (general) terms of the given term
      * 
      * @param term the given term
      * @return a list of direct or transitive super (general) terms of the given term 
@@ -464,7 +464,7 @@ public final class OmlSearch extends OmlIndex {
     }
 
     /**
-     * Finds direct sub (specific) terms of the given term
+     * Finds direct and transitive sub (specific) terms of the given term
      * 
      * @param term the given term
      * @return a list of sub (specific) terms of the given term 
@@ -476,7 +476,7 @@ public final class OmlSearch extends OmlIndex {
     }
 
     /**
-     * Finds direct sub (specific) terms of the given term
+     * Finds direct and transitive sub (specific) terms of the given term
      * 
      * @param term the given term
      * @return a list of sub (specific) terms of the given term 
@@ -535,11 +535,11 @@ public final class OmlSearch extends OmlIndex {
      * @param instance the given instance
      * @param propertyIri the given iri of a abbreviated property 
      * @return a list of literals that are the values of a abbreviated property with the given iri on the given instance 
-     * @deprecated use {@link OmlSearch#findPropertyValues(Instance, FeatureProperty)} and cast first element if any to {@link Literal} instead
+     * @deprecated use {@link OmlSearch#findPropertyValues(Instance, SemanticProperty)} and cast first element if any to {@link Literal} instead
      */
     @Deprecated(since = "0.9.0", forRemoval = true)
     public static List<Literal> findScalarPropertyValuesByAbbreviatedIri(Instance instance, String propertyIri) {
-        FeatureProperty property = (FeatureProperty) OmlRead.getMemberByIri(instance, propertyIri);
+    	SemanticProperty property = (SemanticProperty) OmlRead.getMemberByIri(instance, propertyIri);
         return findPropertyValues(instance, property).stream().
                 filter(v -> v instanceof Literal).
                 map(v -> (Literal)v).
@@ -552,11 +552,11 @@ public final class OmlSearch extends OmlIndex {
      * @param instance the given instance
      * @param propertyIri the given abbreviated iri of a structure property 
      * @return a list of structure instances that are the values of a structure property with the given abbreviated iri on the given instance 
-     * @deprecated use {@link OmlSearch#findPropertyValues(Instance, FeatureProperty)} and cast first element if any to {@link StructureInstance} instead
+     * @deprecated use {@link OmlSearch#findPropertyValues(Instance, SemanticProperty)} and cast first element if any to {@link StructureInstance} instead
      */
     @Deprecated(since = "0.9.0", forRemoval = true)
     public static List<StructureInstance> findStructuredPropertyValuesByAbbreviatedIri(Instance instance, String propertyIri) {
-        FeatureProperty property = (FeatureProperty) OmlRead.getMemberByIri(instance, propertyIri);
+    	SemanticProperty property = (SemanticProperty) OmlRead.getMemberByIri(instance, propertyIri);
         return findPropertyValues(instance, property).stream().
                 filter(v -> v instanceof StructureInstance).
                 map(v -> (StructureInstance)v).
@@ -564,30 +564,30 @@ public final class OmlSearch extends OmlIndex {
     }
 
     /**
-     * Finds elements that are the values of a feature property with the given iri on the given instance
+     * Finds elements that are the values of a semantic property with the given iri on the given instance
      * 
      * @param instance the given instance
-     * @param propertyIri the given iri of a feature property 
-     * @return a list of elements that are the values of a feature property with the given iri on the given instance 
-     * @deprecated use {@link OmlSearch#findPropertyValues(Instance, FeatureProperty)} instead
+     * @param propertyIri the given iri of a semantic property 
+     * @return a list of elements that are the values of a semantic property with the given iri on the given instance 
+     * @deprecated use {@link OmlSearch#findPropertyValues(Instance, SemanticProperty)} instead
      */
     @Deprecated(since = "0.9.0", forRemoval = true)
     public static List<Element> findPropertyValuesByIri(Instance instance, String propertyIri) {
-        FeatureProperty property = (FeatureProperty) OmlRead.getMemberByIri(instance, propertyIri);
+    	SemanticProperty property = (SemanticProperty) OmlRead.getMemberByIri(instance, propertyIri);
         return findPropertyValues(instance, property);
     }
     
     /**
-     * Finds elements that are the values of a feature property with the given abbreviated iri on the given instance
+     * Finds elements that are the values of a semantic property with the given abbreviated iri on the given instance
      * 
      * @param instance the given instance
-     * @param propertyIri the given abbreviatediri of a feature property 
-     * @return a list of elements that are the values of a feature property with the given abbreviated iri on the given instance 
-     * @deprecated use {@link OmlSearch#findPropertyValues(Instance, FeatureProperty)} instead
+     * @param propertyIri the given abbreviatediri of a semantic property 
+     * @return a list of elements that are the values of a semantic property with the given abbreviated iri on the given instance 
+     * @deprecated use {@link OmlSearch#findPropertyValues(Instance, SemanticProperty)} instead
      */
     @Deprecated(since = "0.9.0", forRemoval = true)
     public static List<Element> findPropertyValuesByAbbreviatedIri(Instance instance, String propertyIri) {
-        FeatureProperty property = (FeatureProperty) OmlRead.getMemberByAbbreviatedIri(instance, propertyIri);
+    	SemanticProperty property = (SemanticProperty) OmlRead.getMemberByAbbreviatedIri(instance, propertyIri);
         return findPropertyValues(instance, property);
     }
 
@@ -1302,13 +1302,13 @@ public final class OmlSearch extends OmlIndex {
     }
 
     /**
-     * Finds elements that represent values of given feature property defined on the given instance
+     * Finds elements that represent values of given semantic property defined on the given instance
      * 
      * @param instance the given instance
-     * @param property the given feature property
-     * @return a list of elements that represent values of given feature property defined on the given instance
+     * @param property the given semantic property
+     * @return a list of elements that represent values of given semantic property defined on the given instance
      */
-    public static List<Element> findPropertyValues(Instance instance, FeatureProperty property) {
+    public static List<Element> findPropertyValues(Instance instance, SemanticProperty property) {
         return findPropertyValueAssertions(instance).stream()
             .filter(a -> a.getProperty() == property)
             .map(a -> a.getValue())
@@ -1316,13 +1316,13 @@ public final class OmlSearch extends OmlIndex {
     }
     
     /**
-     * Finds an element that represents a value of given feature property defined on the given instance
+     * Finds an element that represents a value of given semantic property defined on the given instance
      * 
      * @param instance the given instance
-     * @param property the given feature property
-     * @return an element that represents a value of given feature property defined on the given instance
+     * @param property the given semantic property
+     * @return an element that represents a value of given semantic property defined on the given instance
      */
-    public static Element findPropertyValue(Instance instance, FeatureProperty property) {
+    public static Element findPropertyValue(Instance instance, SemanticProperty property) {
         return findPropertyValueAssertions(instance).stream()
             .filter(a -> a.getProperty() == property)
             .map(a -> a.getValue())

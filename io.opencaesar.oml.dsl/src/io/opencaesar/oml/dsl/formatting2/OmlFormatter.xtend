@@ -37,11 +37,11 @@ import io.opencaesar.oml.DescriptionBundleUsage
 import io.opencaesar.oml.DescriptionExtension
 import io.opencaesar.oml.DescriptionUsage
 import io.opencaesar.oml.DifferentFromPredicate
-import io.opencaesar.oml.EntityPredicate
 import io.opencaesar.oml.EnumeratedScalar
 import io.opencaesar.oml.EnumeratedScalarReference
 import io.opencaesar.oml.FacetedScalar
 import io.opencaesar.oml.FacetedScalarReference
+import io.opencaesar.oml.FeaturePredicate
 import io.opencaesar.oml.ForwardRelation
 import io.opencaesar.oml.KeyAxiom
 import io.opencaesar.oml.LinkAssertion
@@ -53,7 +53,6 @@ import io.opencaesar.oml.RelationEntityPredicate
 import io.opencaesar.oml.RelationEntityReference
 import io.opencaesar.oml.RelationInstance
 import io.opencaesar.oml.RelationInstanceReference
-import io.opencaesar.oml.RelationPredicate
 import io.opencaesar.oml.RelationRangeRestrictionAxiom
 import io.opencaesar.oml.RelationReference
 import io.opencaesar.oml.RelationTargetRestrictionAxiom
@@ -77,6 +76,7 @@ import io.opencaesar.oml.StructuredPropertyRangeRestrictionAxiom
 import io.opencaesar.oml.StructuredPropertyReference
 import io.opencaesar.oml.StructuredPropertyValueAssertion
 import io.opencaesar.oml.StructuredPropertyValueRestrictionAxiom
+import io.opencaesar.oml.TypePredicate
 import io.opencaesar.oml.Vocabulary
 import io.opencaesar.oml.VocabularyBundle
 import io.opencaesar.oml.VocabularyBundleExtension
@@ -587,15 +587,21 @@ class OmlFormatter extends AbstractFormatter2 {
 		assertion.regionFor.feature(OmlPackage.Literals.LINK_ASSERTION__RELATION).append[oneSpace]
 	}
 
-	def dispatch void format(EntityPredicate predicate, extension IFormattableDocument document) {
-		predicate.regionFor.keyword(entityPredicateAccess.leftParenthesisKeyword_2).surround[noSpace]
-		predicate.regionFor.keyword(entityPredicateAccess.rightParenthesisKeyword_4).prepend[noSpace]
+	def dispatch void format(TypePredicate predicate, extension IFormattableDocument document) {
+		predicate.regionFor.keyword(typePredicateAccess.leftParenthesisKeyword_2).surround[noSpace]
+		predicate.regionFor.keyword(typePredicateAccess.rightParenthesisKeyword_4).prepend[noSpace]
 	}
 
-	def dispatch void format(RelationPredicate predicate, extension IFormattableDocument document) {
-		predicate.regionFor.keyword(relationPredicateAccess.leftParenthesisKeyword_2).surround[noSpace]
+    def dispatch void format(RelationEntityPredicate predicate, extension IFormattableDocument document) {
+        predicate.regionFor.keyword(relationEntityPredicateAccess.leftParenthesisKeyword_2).surround[noSpace]
+        predicate.formatCommas(document)
+        predicate.regionFor.keyword(relationEntityPredicateAccess.rightParenthesisKeyword_8).prepend[noSpace]
+    }
+
+	def dispatch void format(FeaturePredicate predicate, extension IFormattableDocument document) {
+		predicate.regionFor.keyword(featurePredicateAccess.leftParenthesisKeyword_2).surround[noSpace]
 		predicate.formatCommas(document)
-		predicate.regionFor.keyword(relationPredicateAccess.rightParenthesisKeyword_6).prepend[noSpace]
+		predicate.regionFor.keyword(featurePredicateAccess.rightParenthesisKeyword_6).prepend[noSpace]
 	}
 
 	def dispatch void format(SameAsPredicate predicate, extension IFormattableDocument document) {
@@ -607,13 +613,7 @@ class OmlFormatter extends AbstractFormatter2 {
 	def dispatch void format(DifferentFromPredicate predicate, extension IFormattableDocument document) {
 		predicate.regionFor.keyword(differentFromPredicateAccess.leftParenthesisKeyword_2).surround[noSpace]
 		predicate.formatCommas(document)
-		predicate.regionFor.keyword(differentFromPredicateAccess.rightParenthesisKeyword_6).prepend[noSpace]
-	}
-
-	def dispatch void format(RelationEntityPredicate predicate, extension IFormattableDocument document) {
-		predicate.regionFor.keyword(relationEntityPredicateAccess.leftParenthesisKeyword_2).surround[noSpace]
-		predicate.formatCommas(document)
-		predicate.regionFor.keyword(relationEntityPredicateAccess.rightParenthesisKeyword_8).prepend[noSpace]
+        predicate.regionFor.keyword(differentFromPredicateAccess.rightParenthesisKeyword_6).prepend[noSpace]
 	}
 
 	def dispatch void format(QuotedLiteral literal, extension IFormattableDocument document) {

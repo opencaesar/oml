@@ -181,7 +181,7 @@ public class RuleItemProvider extends MemberItemProvider {
 		newChildDescriptors.add
 			(createChildParameter
 				(OmlPackage.Literals.RULE__ANTECEDENT,
-				 OmlFactory.eINSTANCE.createEntityPredicate()));
+				 OmlFactory.eINSTANCE.createTypePredicate()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -191,7 +191,7 @@ public class RuleItemProvider extends MemberItemProvider {
 		newChildDescriptors.add
 			(createChildParameter
 				(OmlPackage.Literals.RULE__ANTECEDENT,
-				 OmlFactory.eINSTANCE.createRelationPredicate()));
+				 OmlFactory.eINSTANCE.createFeaturePredicate()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -206,7 +206,7 @@ public class RuleItemProvider extends MemberItemProvider {
 		newChildDescriptors.add
 			(createChildParameter
 				(OmlPackage.Literals.RULE__CONSEQUENT,
-				 OmlFactory.eINSTANCE.createEntityPredicate()));
+				 OmlFactory.eINSTANCE.createTypePredicate()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -216,7 +216,7 @@ public class RuleItemProvider extends MemberItemProvider {
 		newChildDescriptors.add
 			(createChildParameter
 				(OmlPackage.Literals.RULE__CONSEQUENT,
-				 OmlFactory.eINSTANCE.createRelationPredicate()));
+				 OmlFactory.eINSTANCE.createFeaturePredicate()));
 
 		newChildDescriptors.add
 			(createChildParameter

@@ -148,15 +148,19 @@ Structure:
 		ownedPropertyRestrictions+=PropertyRestrictionAxiom*
 	']')?;
 
+Feature:
+    Property |
+    Relation;
+
 Property:
 	AnnotationProperty |
-	FeatureProperty;
+	SemanticProperty;
 
 AnnotationProperty:
 	ownedAnnotations+=Annotation*
 	'annotation' 'property' name=ID (':>' ownedSpecializations+=SpecializationAxiom (',' ownedSpecializations+=SpecializationAxiom)*)?;
 
-FeatureProperty:
+SemanticProperty:
 	ScalarProperty |
 	StructuredProperty;
 
@@ -533,33 +537,33 @@ Predicate:
 	BinaryPredicate;
 
 UnaryPredicate:
-	EntityPredicate;
+	TypePredicate;
 	
-EntityPredicate:
+TypePredicate:
 	ownedAnnotations+=Annotation*
-	entity=[Entity|Ref]'(' variable=ID ')';
+	type=[Type|Ref] => '(' variable=ID ')';
 	
 BinaryPredicate:
-	SameAsPredicate |
-	DifferentFromPredicate |
-	RelationPredicate |
-	RelationEntityPredicate;
+	RelationEntityPredicate |
+    FeaturePredicate |
+    SameAsPredicate |
+    DifferentFromPredicate;
 
-RelationPredicate:
+RelationEntityPredicate:
+    ownedAnnotations+=Annotation*
+    entity=[RelationEntity|Ref] '(' variable1=ID ',' entityVariable=ID ',' variable2=ID ')';
+
+FeaturePredicate:
 	ownedAnnotations+=Annotation*
-	relation=[Relation|Ref] '(' variable1=ID ',' variable2=ID ')';
+	feature=[Feature|Ref] '(' variable1=ID ',' variable2=ID ')';
 
 SameAsPredicate:
 	ownedAnnotations+=Annotation*
-	'sameAs' '(' variable1=ID ',' variable2=ID ')';
+    'sameAs' '(' variable1=ID ',' variable2=ID ')';
 
 DifferentFromPredicate:
 	ownedAnnotations+=Annotation*
-	'differentFrom' '(' variable1=ID ',' variable2=ID ')';
-
-RelationEntityPredicate:
-	ownedAnnotations+=Annotation*
-	entity=[RelationEntity|Ref] '(' variable1=ID ',' entityVariable=ID ',' variable2=ID ')';
+    'differentFrom' '(' variable1=ID ',' variable2=ID ')';
 
 Literal:
 	IntegerLiteral |
@@ -627,7 +631,7 @@ terminal STRING:										('"' (!('"'|'\\') | '\\'.)* '"') | ("'" (!("'"|'\\') |
 
 terminal IRI:											'<' (!('>'|' '))* '>';
 
-terminal ID:											'^'? (ALPHA|DIGIT|'_') (ALPHA|DIGIT|'_'|'-'|'.')*;
+terminal ID:											'^'? (ALPHA|DIGIT|'_') (ALPHA|DIGIT|'_'|'-'|'.'|'$')*;
 	    
 terminal ML_COMMENT: 									'/*' -> '*/';
  

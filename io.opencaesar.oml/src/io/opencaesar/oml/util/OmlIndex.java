@@ -46,12 +46,12 @@ import io.opencaesar.oml.ConceptReference;
 import io.opencaesar.oml.ConceptTypeAssertion;
 import io.opencaesar.oml.Element;
 import io.opencaesar.oml.Entity;
-import io.opencaesar.oml.EntityPredicate;
 import io.opencaesar.oml.EnumeratedScalar;
 import io.opencaesar.oml.EnumeratedScalarReference;
 import io.opencaesar.oml.FacetedScalar;
 import io.opencaesar.oml.FacetedScalarReference;
-import io.opencaesar.oml.FeatureProperty;
+import io.opencaesar.oml.Feature;
+import io.opencaesar.oml.FeaturePredicate;
 import io.opencaesar.oml.KeyAxiom;
 import io.opencaesar.oml.LinkAssertion;
 import io.opencaesar.oml.NamedInstance;
@@ -64,7 +64,6 @@ import io.opencaesar.oml.RelationEntityPredicate;
 import io.opencaesar.oml.RelationEntityReference;
 import io.opencaesar.oml.RelationInstance;
 import io.opencaesar.oml.RelationInstanceReference;
-import io.opencaesar.oml.RelationPredicate;
 import io.opencaesar.oml.RelationRangeRestrictionAxiom;
 import io.opencaesar.oml.RelationReference;
 import io.opencaesar.oml.RelationRestrictionAxiom;
@@ -79,6 +78,7 @@ import io.opencaesar.oml.ScalarPropertyRangeRestrictionAxiom;
 import io.opencaesar.oml.ScalarPropertyReference;
 import io.opencaesar.oml.ScalarPropertyRestrictionAxiom;
 import io.opencaesar.oml.ScalarPropertyValueAssertion;
+import io.opencaesar.oml.SemanticProperty;
 import io.opencaesar.oml.SpecializableTerm;
 import io.opencaesar.oml.SpecializationAxiom;
 import io.opencaesar.oml.Structure;
@@ -90,6 +90,8 @@ import io.opencaesar.oml.StructuredPropertyRangeRestrictionAxiom;
 import io.opencaesar.oml.StructuredPropertyReference;
 import io.opencaesar.oml.StructuredPropertyRestrictionAxiom;
 import io.opencaesar.oml.StructuredPropertyValueAssertion;
+import io.opencaesar.oml.Type;
+import io.opencaesar.oml.TypePredicate;
 
 /**
  * The <b>Index</b> API for the model. It allows looking up cross references of OML objects in the resource set by using two lookup mechanisms:
@@ -200,16 +202,16 @@ public class OmlIndex {
         return findInverseReferencers(target, RelationEntity.class, OmlPackage.Literals.RELATION_ENTITY__TARGET);
     }
     
-    // FeatureProperty
+    // SemanticProperty
     
     /**
-     * Finds feature properties referencing the given classifier as domain
+     * Finds semantic properties referencing the given classifier as domain
      * 
      * @param domain The referenced classifier
-     * @return A list of referencing feature properties
+     * @return A list of referencing semantic properties
      */
-    public static List<FeatureProperty> findFeaturePropertiesWithDomain(Classifier domain) {
-        return findInverseReferencers(domain, FeatureProperty.class, OmlPackage.Literals.FEATURE_PROPERTY__DOMAIN);
+    public static List<SemanticProperty> findSemanticPropertiesWithDomain(Classifier domain) {
+        return findInverseReferencers(domain, SemanticProperty.class, OmlPackage.Literals.SEMANTIC_PROPERTY__DOMAIN);
     }
     
     // ScalarProperty
@@ -640,16 +642,16 @@ public class OmlIndex {
         return findInverseReferencers(target, LinkAssertion.class, OmlPackage.Literals.LINK_ASSERTION__TARGET);
     }
     
-    // EntityPredicate
+    // TypePredicate
     
     /**
-     * Finds entity predicates referencing the given entity
+     * Finds type predicates referencing the given type
      * 
-     * @param entity The referenced entity
-     * @return A list of referencing entity predicates
+     * @param type The referenced type
+     * @return A list of referencing type predicates
      */
-    public static List<EntityPredicate> findEntityPredicatesWithEntity(Entity entity) {
-        return findInverseReferencers(entity, EntityPredicate.class, OmlPackage.Literals.ENTITY_PREDICATE__ENTITY);
+    public static List<TypePredicate> findTypePredicatesWithClassifier(Type type) {
+        return findInverseReferencers(type, TypePredicate.class, OmlPackage.Literals.TYPE_PREDICATE__TYPE);
     }
     
     // RelationEntityPredicate
@@ -664,16 +666,16 @@ public class OmlIndex {
         return findInverseReferencers(entity, RelationEntityPredicate.class, OmlPackage.Literals.RELATION_ENTITY_PREDICATE__ENTITY);
     }
     
-    // RelationPredicate
+    // FeaturePredicate
     
     /**
-     * Finds relation predicates referencing the given relation
+     * Finds feature predicates referencing the given feature
      * 
-     * @param relation The referenced relation
-     * @return A list of referencing relation predicates
+     * @param feature The referenced feature
+     * @return A list of referencing feature predicates
      */
-    public static List<RelationPredicate> findRelationPredicatesWithRelation(Relation relation) {
-        return findInverseReferencers(relation, RelationPredicate.class, OmlPackage.Literals.RELATION_PREDICATE__RELATION);
+    public static List<FeaturePredicate> findFeaturePredicatesWithFeature(Feature feature) {
+        return findInverseReferencers(feature, FeaturePredicate.class, OmlPackage.Literals.FEATURE_PREDICATE__FEATURE);
     }
     
     // QuotedLiteral

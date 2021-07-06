@@ -66,7 +66,8 @@ import io.opencaesar.oml.Entity;
 import io.opencaesar.oml.EntityReference;
 import io.opencaesar.oml.EnumeratedScalarReference;
 import io.opencaesar.oml.FacetedScalarReference;
-import io.opencaesar.oml.FeatureProperty;
+import io.opencaesar.oml.Feature;
+import io.opencaesar.oml.FeaturePredicate;
 import io.opencaesar.oml.IdentifiedElement;
 import io.opencaesar.oml.Import;
 import io.opencaesar.oml.Instance;
@@ -78,6 +79,7 @@ import io.opencaesar.oml.Member;
 import io.opencaesar.oml.NamedInstance;
 import io.opencaesar.oml.NamedInstanceReference;
 import io.opencaesar.oml.Ontology;
+import io.opencaesar.oml.Predicate;
 import io.opencaesar.oml.Property;
 import io.opencaesar.oml.PropertyRestrictionAxiom;
 import io.opencaesar.oml.PropertyValueAssertion;
@@ -85,6 +87,7 @@ import io.opencaesar.oml.QuotedLiteral;
 import io.opencaesar.oml.Reference;
 import io.opencaesar.oml.Relation;
 import io.opencaesar.oml.RelationEntity;
+import io.opencaesar.oml.RelationEntityPredicate;
 import io.opencaesar.oml.RelationEntityReference;
 import io.opencaesar.oml.RelationInstance;
 import io.opencaesar.oml.RelationInstanceReference;
@@ -97,6 +100,7 @@ import io.opencaesar.oml.Scalar;
 import io.opencaesar.oml.ScalarProperty;
 import io.opencaesar.oml.ScalarPropertyReference;
 import io.opencaesar.oml.ScalarPropertyRestrictionAxiom;
+import io.opencaesar.oml.SemanticProperty;
 import io.opencaesar.oml.SpecializableTerm;
 import io.opencaesar.oml.SpecializableTermReference;
 import io.opencaesar.oml.SpecializationAxiom;
@@ -109,6 +113,7 @@ import io.opencaesar.oml.StructuredPropertyRestrictionAxiom;
 import io.opencaesar.oml.Term;
 import io.opencaesar.oml.Type;
 import io.opencaesar.oml.TypeAssertion;
+import io.opencaesar.oml.TypePredicate;
 import io.opencaesar.oml.Vocabulary;
 import io.opencaesar.oml.VocabularyBox;
 import io.opencaesar.oml.VocabularyBundle;
@@ -322,7 +327,7 @@ public final class OmlRead {
     }
     
     /**
-     * Gets the transitive imports of the given ontology
+     * Gets the direct and transitive imports of the given ontology
      * 
      * @param ontology the given ontology
      * @return a list of direct imports of the ontology
@@ -334,7 +339,7 @@ public final class OmlRead {
     }
     
     /**
-     * Gets the ontologies directly imported by the given ontology
+     * Gets the ontologies directly or transitively imported by the given ontology
      * 
      * @param ontology the given ontology
      * @return a list of ontologies directly imported by the given ontology
@@ -346,7 +351,7 @@ public final class OmlRead {
     }
     
     /**
-     * Gets the ontologies transitively imported by the given ontology
+     * Gets the ontologies directly or transitively imported by the given ontology
      * 
      * @param ontology the given ontology
      * @return a list of ontologies transitively imported by the given ontology
@@ -643,7 +648,7 @@ public final class OmlRead {
     }
     
     /**
-     * Gets the named instances defined transitively by the given description box
+     * Gets the named instances defined directly or transitively by the given description box
      * 
      * @param box the given description box
      * @return a list of named instances defined transitively by the given description box
@@ -993,14 +998,14 @@ public final class OmlRead {
     }
     
     /**
-     * Gets the range of the given property
+     * Gets the range of the given semantic property
      * 
-     * @param property the given property
+     * @param property the given semantic property
      * @return the range of the given property
-     * @deprecated use {@link FeatureProperty#getRange()} instead
+     * @deprecated use {@link SemanticProperty#getRange()} instead
      */
     @Deprecated(since = "0.9.0", forRemoval = true)
-    public static Type getRange(final FeatureProperty property) {
+    public static Type getRange(final SemanticProperty property) {
         return property.getRange();
     }
     
@@ -1021,11 +1026,11 @@ public final class OmlRead {
      * 
      * @param axiom the given property restriction axiom
      * @return the restricted property of the given property restriction axiom
-     * @deprecated use {@link OmlRead#getRestrictedTerm(RestrictionAxiom)} and cast to {@link FeatureProperty} instead
+     * @deprecated use {@link OmlRead#getRestrictedFeature(RestrictionAxiom)} and cast to {@link SemanticProperty} instead
      */
     @Deprecated(since = "0.9.0", forRemoval = true)
-    public static FeatureProperty getRestrictedProperty(PropertyRestrictionAxiom axiom) {
-        return (FeatureProperty) getRestrictedTerm(axiom);
+    public static SemanticProperty getRestrictedProperty(PropertyRestrictionAxiom axiom) {
+        return (SemanticProperty) getRestrictedFeature(axiom);
     }
     
     /**
@@ -1033,11 +1038,11 @@ public final class OmlRead {
      * 
      * @param axiom the given scalar property restriction axiom
      * @return the restricted scalar property of the given scalar property restriction axiom
-     * @deprecated use {@link OmlRead#getRestrictedTerm(RestrictionAxiom)} and cast to {@link ScalarProperty} instead
+     * @deprecated use {@link OmlRead#getRestrictedFeature(RestrictionAxiom)} and cast to {@link ScalarProperty} instead
      */
     @Deprecated(since = "0.9.0", forRemoval = true)
     public static ScalarProperty getRestrictedScalarProperty(ScalarPropertyRestrictionAxiom axiom) {
-        return (ScalarProperty) getRestrictedTerm(axiom);
+        return (ScalarProperty) getRestrictedFeature(axiom);
     }
         
     /**
@@ -1045,11 +1050,11 @@ public final class OmlRead {
      * 
      * @param axiom the given structured property restriction axiom
      * @return the restricted structured property of the given structured property restriction axiom
-     * @deprecated use {@link OmlRead#getRestrictedTerm(RestrictionAxiom)} and cast to {@link StructuredProperty} instead
+     * @deprecated use {@link OmlRead#getRestrictedFeature(RestrictionAxiom)} and cast to {@link StructuredProperty} instead
      */
     @Deprecated(since = "0.9.0", forRemoval = true)
     public static StructuredProperty getRestrictedStructuredProperty(StructuredPropertyRestrictionAxiom axiom) {
-        return (StructuredProperty) getRestrictedTerm(axiom);
+        return (StructuredProperty) getRestrictedFeature(axiom);
     }
     
     /**
@@ -1057,11 +1062,11 @@ public final class OmlRead {
      * 
      * @param axiom the given relation restriction axiom
      * @return the restricted relation of the given relation restriction axiom
-     * @deprecated use {@link OmlRead#getRestrictedTerm(RestrictionAxiom)} and cast to {@link Relation} instead
+     * @deprecated use {@link OmlRead#getRestrictedFeature(RestrictionAxiom)} and cast to {@link Relation} instead
      */
     @Deprecated(since = "0.9.0", forRemoval = true)
     public static Relation getRestrictedRelation(RelationRestrictionAxiom axiom) {
-        return (Relation) getRestrictedTerm(axiom);
+        return (Relation) getRestrictedFeature(axiom);
     }
     
     /**
@@ -1760,7 +1765,7 @@ public final class OmlRead {
     }
     
     /**
-     * Gets the transitive imports of the given ontology
+     * Gets the direct or transitive imports of the given ontology
      * 
      * @param ontology the given ontology
      * @return a list of direct imports of the ontology
@@ -1874,7 +1879,7 @@ public final class OmlRead {
     }
     
     /**
-     * Gets the ontologies directly imported by the given ontology
+     * Gets the ontologies directly or transitively imported by the given ontology
      * 
      * @param ontology the given ontology
      * @return a list of ontologies directly imported by the given ontology
@@ -2272,13 +2277,13 @@ public final class OmlRead {
     // AnnotatedElement
     
     /**
-     * Get the values of the given feature property in the given instance
+     * Get the values of the given semantic property in the given instance
      * 
      * @param instance The instance that has the annotation
-     * @param property the given feature property
+     * @param property the given semantic property
      * @return a list of elements representing the property values
      */
-    public static List<Element> getPropertyValues(Instance instance, FeatureProperty property) {
+    public static List<Element> getPropertyValues(Instance instance, SemanticProperty property) {
         return instance.getOwnedPropertyValues().stream()
             .filter(a -> a.getProperty() == property)
             .map(a -> a.getValue())
@@ -2286,13 +2291,13 @@ public final class OmlRead {
     }
     
     /**
-     * Get a value of the given feature property in the given instance
+     * Get a value of the given semantic property in the given instance
      * 
      * @param instance The instance that has the annotation
-     * @param property the given feature property
+     * @param property the given semantic property
      * @return an element representing a property value
      */
-    public static Element getPropertyValue(Instance instance, FeatureProperty property) {
+    public static Element getPropertyValue(Instance instance, SemanticProperty property) {
         return instance.getOwnedPropertyValues().stream()
             .filter(a -> a.getProperty() == property)
             .map(a -> a.getValue())
@@ -2409,12 +2414,12 @@ public final class OmlRead {
     }
     
     /**
-     * Gets the restricted term of the given restriction axiom
+     * Gets the restricted feature of the given restriction axiom
      * 
      * @param axiom the given restriction axiom
-     * @return the restricted term of the given restriction axiom
+     * @return the restricted feature of the given restriction axiom
      */
-    public static Term getRestrictedTerm(RestrictionAxiom axiom) {
+    public static Feature getRestrictedFeature(RestrictionAxiom axiom) {
         if (axiom instanceof RelationRestrictionAxiom) {
             return ((RelationRestrictionAxiom) axiom).getRelation();
         } else if (axiom instanceof ScalarPropertyRestrictionAxiom) {
@@ -2528,4 +2533,23 @@ public final class OmlRead {
         return assertion.getTarget();
     }
     
+    // Predicate
+    
+    /**
+     * Gets the term that is bound by the given predicate
+     * 
+     * @param predicate the given predicate
+     * @return the term that is bound by the predicate
+     */
+    public static Term getTerm(Predicate predicate) {
+    	if (predicate instanceof TypePredicate) {
+    		return ((TypePredicate)predicate).getType();
+    	} else if (predicate instanceof RelationEntityPredicate) {
+    		return ((RelationEntityPredicate)predicate).getEntity();
+    	} else if (predicate instanceof FeaturePredicate) {
+    		return ((FeaturePredicate)predicate).getFeature();
+    	}
+    	return null;
+    }
+
 }

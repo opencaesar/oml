@@ -20,8 +20,6 @@ package io.opencaesar.oml.util;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.nio.file.StandardWatchEventKinds;
@@ -34,7 +32,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.emf.common.CommonPlugin;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
@@ -253,26 +250,14 @@ final class OmlUriResolver implements Runnable {
         URI currentUri = folderUri;
         while (currentUri != null && catalog == null && currentUri.segmentCount() > 0) {
             uris.add(currentUri);
-            URL catalogUrl = null;
+            URI catalogUri = CommonPlugin.asLocalURI(currentUri.appendSegment("catalog.xml"));
             try {
-                catalogUrl = new URL(currentUri.appendSegment("catalog.xml").toString());
-            } catch (MalformedURLException e) {
-                System.out.println(e);
-            }
-            URL catalogFileUrl = null;
-            try {
-                catalogFileUrl = FileLocator.toFileURL(catalogUrl);
-            } catch (IOException e) {
-                System.out.println(e);
-            }
-            try {
-                if (catalogFileUrl != null && catalogFileUrl.getProtocol().equals("file")
-                        && new File(catalogFileUrl.getPath()).exists()) {
-                    catalog = OmlCatalog.create(catalogUrl);
-                }
-            } catch (Exception e) {
-                System.out.println(e);
-            }
+	        	if  (new File(catalogUri.toFileString()).exists()) {
+	                catalog = OmlCatalog.create(catalogUri);
+	        	}
+	        } catch (IOException e) {
+	            System.out.println(e);
+	        }
             if (catalog == null) {
                 currentUri = currentUri.trimSegments(1);
                 catalog = catalogMap.get(currentUri);

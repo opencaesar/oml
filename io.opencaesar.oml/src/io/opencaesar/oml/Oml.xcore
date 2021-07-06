@@ -41,7 +41,7 @@ annotation "https://tabatkins.github.io/bikeshed" as Bikeshed
 annotation "https://tabatkins.github.io/bikeshed/headings" as BikeshedHeadings
 
 /*
- * Element is the most type in the OML metamodel. All objects in an OML model are elements.
+ * Element is the most general type in the OML metamodel. All objects in an OML model are elements.
  */
 @Bikeshed(heading="Elements")
 abstract class Element {
@@ -370,10 +370,17 @@ class Structure extends Classifier {
 }
 
 /*
- * Property is a specializable term that relates an element to a value. It is the super type of all property types.
+ * Feature is a a term that can be restricted in a given classifier context
  */
 @Bikeshed(heading="Terms")
-abstract class Property extends SpecializableTerm {
+abstract class Feature extends Term {
+}
+
+/*
+ * Property is a specializable feature that relates an element to a value. It is the super type of all property types.
+ */
+@Bikeshed(heading="Terms")
+abstract class Property extends SpecializableTerm, Feature {
 }
 
 /*
@@ -384,11 +391,11 @@ class AnnotationProperty extends Property {
 }
 
 /*
- * FeatureProperty is a property with DL semantics that relates instances of a classifier acting as its
+ * SemanticProperty is a property with DL semantics that relates instances of a classifier acting as its
  * domain to a value typed by either a scalar or a structure representing its range.
  */
 @Bikeshed(heading="Terms")
-abstract class FeatureProperty extends Property {
+abstract class SemanticProperty extends Property {
     /*
      * The classifier that is the domain of this property
      */
@@ -404,11 +411,11 @@ abstract class FeatureProperty extends Property {
 }
 
 /*
- * ScalarProperty is a feature property whose range is a scalar. It can specialize other scalar properties.
+ * ScalarProperty is a semantic property whose range is a scalar. It can specialize other scalar properties.
  * It can also be flagged as a key property (among possibly several) that specifies the unique id of its domain.
  */
 @Bikeshed(heading="Terms")
-class ScalarProperty extends FeatureProperty {
+class ScalarProperty extends SemanticProperty {
     /*
      * The scalar that is the range of this property
      */
@@ -416,10 +423,10 @@ class ScalarProperty extends FeatureProperty {
 }
 
 /*
- * StructuredProperty is a feature property whose range is a structure. It can specialize other structured properties.
+ * StructuredProperty is a semantic property whose range is a structure. It can specialize other structured properties.
  */
 @Bikeshed(heading="Terms")
-class StructuredProperty extends FeatureProperty {
+class StructuredProperty extends SemanticProperty {
     /*
      * The structure that is the range of this property
      */
@@ -531,7 +538,7 @@ class FacetedScalar extends Scalar {
 
 /*
  * EnumeratedScalar is a scalar that represents a finite set of literals. It can specialize another enumerated scalar, but in
- * this case, it cannot specify its own literals; rather, it will simply be considered an alias to the specialized scalar.
+ * this case, it cannot define its own literals; rather, it will simply be considered an alias to the specialized scalar.
  */
 @Bikeshed(heading="Types")
 class EnumeratedScalar extends Scalar {
@@ -542,12 +549,12 @@ class EnumeratedScalar extends Scalar {
 }
 
 /*
- * Relation is a term that represents a relation from its domain entity to its range entity. It is the super type of
+ * Relation is a feature that represents a relation from its domain entity to its range entity. It is the super type of
  * two concrete relations: [=ForwardRelation=] and [=ReverseRelation] that are specified by a relation entity. When a relation
  * entity specifies both kinds of relations, they become inverse of each other.
  */
 @Bikeshed(heading="Terms")
-abstract class Relation extends Term {
+abstract class Relation extends Feature {
     /*
      * The entity that represents the domain of this relation
      */
@@ -1436,7 +1443,7 @@ abstract class PropertyValueAssertion extends Assertion {
     /*
      * Gets the property referenced by this assertion
      */
-    op FeatureProperty getProperty()
+    op SemanticProperty getProperty()
     /*
      * Gets the value specified by this assertion
      */
@@ -1501,17 +1508,17 @@ class LinkAssertion extends Assertion {
 }
 
 /*
- * Predicate is an annotated element that represents an ontology statement to match when used in a rule's antecedent, or to
- * infer when used as a consequent a rule.
+ * Predicate is an annotated element that represents an ontology statement to match, when used in a rule's antecedent, 
+ * or to infer, when used in a rule's consequent.
  */
 @Bikeshed(heading="Rules")
 abstract class Predicate extends AnnotatedElement {
     /*
-     * The rule that specifies this predicate as an antecedent
+     * The rule that specifies this predicate in its antecedent
      */
     container Rule antecedentRule opposite antecedent
     /*
-     * The rule that specifies this predicate as a consequent
+     * The rule that specifies this predicate in its consequent
      */
     container Rule consequentRule opposite consequent
 }
@@ -1528,14 +1535,14 @@ abstract class UnaryPredicate extends Predicate {
 }
 
 /*
- * EntityPredicate is a unary predicate that binds its variable to a named instance that is typed by a specific entity.
+ * TypePredicate is a unary predicate that binds its variable to an instance with a specific type.
  */
 @Bikeshed(heading="Rules")
-class EntityPredicate extends UnaryPredicate {
+class TypePredicate extends UnaryPredicate {
     /*
-     * The entity that this predicates requires as a type of a named instance
+     * The type of the instance
      */
-    refers Entity[1] entity
+    refers Type[1] ^type
 }
 
 /*
@@ -1546,11 +1553,11 @@ abstract class BinaryPredicate extends Predicate {
     /*
      * The variable1 name specified by the predicate
      */
-    String[1] variable1
+    String[?] variable1
     /*
      * The variable2 name specified by the predicate
      */
-    String[1] variable2
+    String[?] variable2
 }
 
 /*
@@ -1571,26 +1578,26 @@ class RelationEntityPredicate extends BinaryPredicate {
 }
 
 /*
- * RelationPredicate is a binary predicate that binds its variable1 and variable2 to two named instances that are related as
- * source and target, respectively, by a specific relation.
+ * FeaturePredicate is a binary predicate that binds its variable1 to an instance and its variable2 to a value of a feature
+ * of the instance
  */
 @Bikeshed(heading="Rules")
-class RelationPredicate extends BinaryPredicate {
+class FeaturePredicate extends BinaryPredicate {
     /*
-     * The relation that links the two named instances
+     * The feature of the instance
      */
-    refers Relation[1] relation
+    refers Feature[1] feature
 }
 
 /*
- * SameAsPredicate is a binary predicate that binds its two variables to the same named instance
+ * SameAsPredicate is a binary predicate that binds its two variables to the same instance
  */
 @Bikeshed(heading="Rules")
 class SameAsPredicate extends BinaryPredicate {
 }
 
 /*
- * DifferentFromPredicate is a binary that binds its two variables to two different named instances
+ * DifferentFromPredicate is a binary predicate that binds its two variables to different instances
  */
 @Bikeshed(heading="Rules")
 class DifferentFromPredicate extends BinaryPredicate {
@@ -1664,7 +1671,7 @@ class BooleanLiteral extends Literal {
 }
 
 /*
- * SeparatorKind is an anumeration that specifies the separator character of an ontology's namespace. It can either
+ * SeparatorKind is an enumeration that specifies the separator character of an ontology's namespace. It can either
  * be only of two values: a hash '#' or a slash '/'.
  */
 @Bikeshed(heading="Ontologies")

@@ -2,16 +2,12 @@ package io.opencaesar.oml.dsl.ide.diagram;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.IteratorExtensions;
-
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Iterators;
 
 import io.opencaesar.oml.Aspect;
 import io.opencaesar.oml.AspectReference;
@@ -24,7 +20,6 @@ import io.opencaesar.oml.ConceptInstanceReference;
 import io.opencaesar.oml.ConceptReference;
 import io.opencaesar.oml.Element;
 import io.opencaesar.oml.Entity;
-import io.opencaesar.oml.FeatureProperty;
 import io.opencaesar.oml.KeyAxiom;
 import io.opencaesar.oml.NamedInstance;
 import io.opencaesar.oml.Ontology;
@@ -38,6 +33,7 @@ import io.opencaesar.oml.RelationTargetRestrictionAxiom;
 import io.opencaesar.oml.Scalar;
 import io.opencaesar.oml.ScalarProperty;
 import io.opencaesar.oml.ScalarPropertyRestrictionAxiom;
+import io.opencaesar.oml.SemanticProperty;
 import io.opencaesar.oml.SpecializationAxiom;
 import io.opencaesar.oml.Structure;
 import io.opencaesar.oml.StructureInstance;
@@ -50,7 +46,7 @@ import io.opencaesar.oml.util.OmlRead;
 import io.opencaesar.oml.util.OmlSearch;
 import io.opencaesar.oml.util.OmlSwitch;
 
-public class OmlOntoloyDiagramScope {
+class OmlOntoloyDiagramScope {
 
 	private enum Mode {
 		// Find all classifiers
@@ -72,7 +68,7 @@ public class OmlOntoloyDiagramScope {
 	private final Map<RelationEntity, Set<Element>> relationIncidentElements;
 	private final Map<Scalar, Set<Element>> scalars;
 	private final Map<Structure, Set<Element>> structures;
-	private final Set<FeatureProperty> allFeatureProperties;
+	private final Set<SemanticProperty> allSemanticProperties;
 	
 	final Map<Classifier, Set<ScalarProperty>> scalarProperties;
 	final Map<Classifier, Set<StructuredProperty>> structuredProperties;
@@ -98,7 +94,7 @@ public class OmlOntoloyDiagramScope {
 		this.structures = new HashMap<>();
 		this.scalarProperties = new HashMap<>();
 		this.structuredProperties = new HashMap<>();
-		this.allFeatureProperties = new HashSet<>();
+		this.allSemanticProperties = new HashSet<>();
 		this.entityAxioms = new HashMap<>();
 		this.instanceAssertions = new HashMap<>();
 		this.structureAssertions = new HashMap<>();
@@ -116,8 +112,8 @@ public class OmlOntoloyDiagramScope {
 			return scalars.containsKey((Scalar) e);
 		} else if (e instanceof Structure) {
 			return structures.containsKey((Structure) e);
-		} else if (e instanceof FeatureProperty) {
-			return allFeatureProperties.contains((FeatureProperty) e);
+		} else if (e instanceof SemanticProperty) {
+			return allSemanticProperties.contains((SemanticProperty) e);
 		} else if (e instanceof NamedInstance) {
 			return instanceAssertions.containsKey((NamedInstance) e);
 		} else if (e instanceof StructureInstance) {
@@ -147,7 +143,7 @@ public class OmlOntoloyDiagramScope {
 				EObject obj = i.next();
 				if (obj instanceof Axiom ||
 					obj instanceof Type ||
-					obj instanceof FeatureProperty ||
+					obj instanceof SemanticProperty ||
 					obj instanceof NamedInstance ||
 					obj instanceof Assertion)
 					allImportedElements.add((Element)obj);
@@ -162,7 +158,12 @@ public class OmlOntoloyDiagramScope {
 			analyze1Ontology(o);
 		});
 
-		IteratorExtensions.forEach(Iterators.filter(ontology.eAllContents(), Element.class), x -> visitor.doSwitch(x));
+		for (Iterator<EObject> i = ontology.eAllContents(); i.hasNext();) {
+			EObject obj = i.next();
+			if (obj instanceof Element) {
+				visitor.doSwitch((Element)obj);
+			}
+		}
 		mode = Mode.Phase2;
 		secondPhase.forEach(e -> visitor.doSwitch(e));
 		return this;
@@ -194,13 +195,11 @@ public class OmlOntoloyDiagramScope {
 		if (!structuredProperties.containsKey(cls)) {
 			structuredProperties.put(cls, new HashSet<>());
 		}
-		Iterables.filter(OmlSearch.findAllSuperTerms(cls, true), Classifier.class).forEach(parent -> {
-			OmlSearch.findFeaturePropertiesWithDomain(parent).forEach(f -> {
-				if (allImportedElements.contains(f)) {
-					allFeatureProperties.add(f);
-				}
-			});
-		});
+		OmlSearch.findAllSuperTerms(cls, true).stream()
+				.map(t -> (Classifier)t)
+				.flatMap(c -> OmlSearch.findSemanticPropertiesWithDomain(c).stream())
+				.filter(p -> allImportedElements.contains(p))
+				.forEach(p -> allSemanticProperties.add(p));
 	}
 
 	private void phase2AddClassifierScalarProperty(final Classifier cls, final ScalarProperty p) {
@@ -212,27 +211,28 @@ public class OmlOntoloyDiagramScope {
 	}
 
 	private void phase2ScanAllClassifierProperties(final Classifier cls) {
-		Iterables.filter(OmlSearch.findAllSuperTerms(cls, true), Classifier.class).forEach(parent -> {
-			OmlIndex.findFeaturePropertiesWithDomain(parent).forEach(p -> {
-				if (allImportedElements.contains(p)) {
-					if (p instanceof ScalarProperty) {
-						ScalarProperty sp = (ScalarProperty) p;
-						if (includes(parent)) {
-							phase2AddClassifierScalarProperty(parent, sp);
-						} else {
-							phase2AddClassifierScalarProperty(cls, sp);
-						}
-					} else if (p instanceof StructuredProperty) {
-						StructuredProperty sp = (StructuredProperty) p;
-						if (includes(parent)) {
-							phase2AdClassifierStructuredProperty(parent, sp);
-						} else {
-							phase2AdClassifierStructuredProperty(cls, sp);
+		OmlSearch.findAllSuperTerms(cls, true).stream()
+			.map(t -> (Classifier)t).forEach(parent -> {
+				OmlIndex.findSemanticPropertiesWithDomain(parent).forEach(p -> {
+					if (allImportedElements.contains(p)) {
+						if (p instanceof ScalarProperty) {
+							ScalarProperty sp = (ScalarProperty) p;
+							if (includes(parent)) {
+								phase2AddClassifierScalarProperty(parent, sp);
+							} else {
+								phase2AddClassifierScalarProperty(cls, sp);
+							}
+						} else if (p instanceof StructuredProperty) {
+							StructuredProperty sp = (StructuredProperty) p;
+							if (includes(parent)) {
+								phase2AdClassifierStructuredProperty(parent, sp);
+							} else {
+								phase2AdClassifierStructuredProperty(cls, sp);
+							}
 						}
 					}
-				}
+				});
 			});
-		});
 	}
 
 	private void phase1ScanEntityAxioms(final Entity e, final Set<Element> others) {
@@ -263,7 +263,7 @@ public class OmlOntoloyDiagramScope {
 		others.forEach(o -> {
 			if (o instanceof KeyAxiom) {
 				KeyAxiom x = (KeyAxiom) o;
-				if (IterableExtensions.forall(x.getProperties(), p -> includes(p))) {
+				if (x.getProperties().stream().allMatch(p -> includes(p))) {
 					ax.add(x);
 				}
 			} else if (o instanceof SpecializationAxiom) {

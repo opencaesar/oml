@@ -349,22 +349,22 @@ macros:
     svgpath: images/rule_ref.svg
 </pre>
 
-### [=EntityPredicate=] ### {#EntityPredicate-Syntax}
+### [=TypePredicate=] ### {#TypePredicate-Syntax}
 
 <pre class="include">
 path: tabs.md
 macros:
-	textpath: concrete_syntax/entity_predicate.md
-    svgpath: images/entity_predicate.svg
+	textpath: concrete_syntax/type_predicate.md
+    svgpath: images/type_predicate.svg
 </pre>
 
-### [=RelationPredicate=] ### {#RelationPredicate-Syntax}
+### [=FeaturePredicate=] ### {#FeaturePredicate-Syntax}
 
 <pre class="include">
 path: tabs.md
 macros:
-	textpath: concrete_syntax/relation_predicate.md
-    svgpath: images/relation_predicate.svg
+	textpath: concrete_syntax/feature_predicate.md
+    svgpath: images/feature_predicate.svg
 </pre>
 
 ### [=RelationEntityPredicate=] ### {#RelationEntityPredicate-Syntax}

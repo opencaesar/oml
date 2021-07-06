@@ -53,11 +53,12 @@ import io.opencaesar.oml.DifferentFromPredicate;
 import io.opencaesar.oml.DoubleLiteral;
 import io.opencaesar.oml.Element;
 import io.opencaesar.oml.Entity;
-import io.opencaesar.oml.EntityPredicate;
 import io.opencaesar.oml.EnumeratedScalar;
 import io.opencaesar.oml.EnumeratedScalarReference;
 import io.opencaesar.oml.FacetedScalar;
 import io.opencaesar.oml.FacetedScalarReference;
+import io.opencaesar.oml.Feature;
+import io.opencaesar.oml.FeaturePredicate;
 import io.opencaesar.oml.ForwardRelation;
 import io.opencaesar.oml.IdentifiedElement;
 import io.opencaesar.oml.Instance;
@@ -81,7 +82,6 @@ import io.opencaesar.oml.RelationEntityPredicate;
 import io.opencaesar.oml.RelationEntityReference;
 import io.opencaesar.oml.RelationInstance;
 import io.opencaesar.oml.RelationInstanceReference;
-import io.opencaesar.oml.RelationPredicate;
 import io.opencaesar.oml.RelationRangeRestrictionAxiom;
 import io.opencaesar.oml.RelationReference;
 import io.opencaesar.oml.RelationTargetRestrictionAxiom;
@@ -109,6 +109,8 @@ import io.opencaesar.oml.StructuredPropertyRangeRestrictionAxiom;
 import io.opencaesar.oml.StructuredPropertyReference;
 import io.opencaesar.oml.StructuredPropertyValueAssertion;
 import io.opencaesar.oml.StructuredPropertyValueRestrictionAxiom;
+import io.opencaesar.oml.Type;
+import io.opencaesar.oml.TypePredicate;
 import io.opencaesar.oml.Vocabulary;
 import io.opencaesar.oml.VocabularyBundle;
 import io.opencaesar.oml.VocabularyBundleExtension;
@@ -539,7 +541,7 @@ public class OmlWrite {
         final ScalarProperty property = create(ScalarProperty.class);
         property.setName(name);
         property.setFunctional(functional);
-        setCrossReference(vocabulary, property, OmlPackage.Literals.FEATURE_PROPERTY__DOMAIN, domain);
+        setCrossReference(vocabulary, property, OmlPackage.Literals.SEMANTIC_PROPERTY__DOMAIN, domain);
         setCrossReference(vocabulary, property, OmlPackage.Literals.SCALAR_PROPERTY__RANGE, range);
         vocabulary.getOwnedStatements().add(property);
         return property;
@@ -562,7 +564,7 @@ public class OmlWrite {
         final StructuredProperty property = create(StructuredProperty.class);
         property.setName(name);
         property.setFunctional(functional);
-        setCrossReference(vocabulary, property, OmlPackage.Literals.FEATURE_PROPERTY__DOMAIN, domain);
+        setCrossReference(vocabulary, property, OmlPackage.Literals.SEMANTIC_PROPERTY__DOMAIN, domain);
         setCrossReference(vocabulary, property, OmlPackage.Literals.STRUCTURED_PROPERTY__RANGE, range);
         vocabulary.getOwnedStatements().add(property);
         return property;
@@ -1460,20 +1462,20 @@ public class OmlWrite {
         return assertion;
     }
 
-    // EntityPredicate
+    // TypePredicate
 
     /**
-     * Creates an entity predicate
+     * Creates a type predicate
      * 
      * @param vocabulary the context vocabulary
-     * @param entity the given entity
-     * @param variable the name of a variable bound to an instance of the entity
-     * @return an entity predicate
+     * @param type the given type
+     * @param variable the name of a variable bound to an instance of the type
+     * @return a type predicate
      */
-    public static EntityPredicate createEntityPredicate(Vocabulary vocabulary, Entity entity, String variable) {
-        final EntityPredicate predicate = create(EntityPredicate.class);
+    public static TypePredicate createTypePredicate(Vocabulary vocabulary, Type type, String variable) {
+        final TypePredicate predicate = create(TypePredicate.class);
         predicate.setVariable(variable);
-        setCrossReference(vocabulary, predicate, OmlPackage.Literals.ENTITY_PREDICATE__ENTITY, entity);
+        setCrossReference(vocabulary, predicate, OmlPackage.Literals.TYPE_PREDICATE__TYPE, type);
         return predicate;
     }
     
@@ -1498,25 +1500,25 @@ public class OmlWrite {
         return predicate;
     }
 
-    // RelationPredicate
+    // FeaturePredicate
 
     /**
      * Creates an relation predicate
      * 
      * @param vocabulary the context vocabulary
-     * @param relation the given relation
-     * @param variable1 the name of a variable bound to a named instance representing the source of a relation
-     * @param variable2 the name of a variable bound to a named instance representing the target of a relation
+     * @param feature the given feature
+     * @param variable1 the name of a variable bound to an instance
+     * @param variable2 the name of a variable bound to a value of the feature in the instance
      * @return a relation predicate
      */
-    public static RelationPredicate createRelationPredicate(Vocabulary vocabulary, Relation relation, String variable1, String variable2) {
-        final RelationPredicate predicate = create(RelationPredicate.class);
+    public static FeaturePredicate createFeaturePredicate(Vocabulary vocabulary, Feature feature, String variable1, String variable2) {
+        final FeaturePredicate predicate = create(FeaturePredicate.class);
         predicate.setVariable1(variable1);
         predicate.setVariable2(variable2);
-        setCrossReference(vocabulary, predicate, OmlPackage.Literals.RELATION_PREDICATE__RELATION, relation);
+        setCrossReference(vocabulary, predicate, OmlPackage.Literals.FEATURE_PREDICATE__FEATURE, feature);
         return predicate;
     }
-        
+
     // SameAsPredicate
 
     /**

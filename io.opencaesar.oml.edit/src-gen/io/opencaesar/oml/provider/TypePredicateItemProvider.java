@@ -1,6 +1,6 @@
 /**
  * 
- * Copyright 2019 California Institute of Technology ("Caltech").
+ * Copyright 2019-2021 California Institute of Technology ("Caltech").
  * U.S. Government sponsorship acknowledged.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,8 +19,8 @@
 package io.opencaesar.oml.provider;
 
 
-import io.opencaesar.oml.EntityPredicate;
 import io.opencaesar.oml.OmlPackage;
+import io.opencaesar.oml.TypePredicate;
 
 import java.util.Collection;
 import java.util.List;
@@ -32,19 +32,19 @@ import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 
 /**
- * This is the item provider adapter for a {@link io.opencaesar.oml.EntityPredicate} object.
+ * This is the item provider adapter for a {@link io.opencaesar.oml.TypePredicate} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class EntityPredicateItemProvider extends UnaryPredicateItemProvider {
+public class TypePredicateItemProvider extends UnaryPredicateItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EntityPredicateItemProvider(AdapterFactory adapterFactory) {
+	public TypePredicateItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -59,25 +59,25 @@ public class EntityPredicateItemProvider extends UnaryPredicateItemProvider {
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addEntityPropertyDescriptor(object);
+			addTypePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Entity feature.
+	 * This adds a property descriptor for the Type feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addEntityPropertyDescriptor(Object object) {
+	protected void addTypePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_EntityPredicate_entity_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_EntityPredicate_entity_feature", "_UI_EntityPredicate_type"),
-				 OmlPackage.Literals.ENTITY_PREDICATE__ENTITY,
+				 getString("_UI_TypePredicate_type_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_TypePredicate_type_feature", "_UI_TypePredicate_type"),
+				 OmlPackage.Literals.TYPE_PREDICATE__TYPE,
 				 true,
 				 false,
 				 true,
@@ -87,14 +87,14 @@ public class EntityPredicateItemProvider extends UnaryPredicateItemProvider {
 	}
 
 	/**
-	 * This returns EntityPredicate.gif.
+	 * This returns TypePredicate.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/EntityPredicate"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/TypePredicate"));
 	}
 
 	/**
@@ -105,10 +105,10 @@ public class EntityPredicateItemProvider extends UnaryPredicateItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((EntityPredicate)object).getVariable();
+		String label = ((TypePredicate)object).getVariable();
 		return label == null || label.length() == 0 ?
-			getString("_UI_EntityPredicate_type") :
-			getString("_UI_EntityPredicate_type") + " " + label;
+			getString("_UI_TypePredicate_type") :
+			getString("_UI_TypePredicate_type") + " " + label;
 	}
 
 

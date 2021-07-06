@@ -1422,26 +1422,26 @@ public class OmlItemProviderAdapterFactory extends OmlAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.EntityPredicate} instances.
+	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.TypePredicate} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected EntityPredicateItemProvider entityPredicateItemProvider;
+	protected TypePredicateItemProvider typePredicateItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.EntityPredicate}.
+	 * This creates an adapter for a {@link io.opencaesar.oml.TypePredicate}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createEntityPredicateAdapter() {
-		if (entityPredicateItemProvider == null) {
-			entityPredicateItemProvider = new EntityPredicateItemProvider(this);
+	public Adapter createTypePredicateAdapter() {
+		if (typePredicateItemProvider == null) {
+			typePredicateItemProvider = new TypePredicateItemProvider(this);
 		}
 
-		return entityPredicateItemProvider;
+		return typePredicateItemProvider;
 	}
 
 	/**
@@ -1468,26 +1468,26 @@ public class OmlItemProviderAdapterFactory extends OmlAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.RelationPredicate} instances.
+	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.FeaturePredicate} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected RelationPredicateItemProvider relationPredicateItemProvider;
+	protected FeaturePredicateItemProvider featurePredicateItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.RelationPredicate}.
+	 * This creates an adapter for a {@link io.opencaesar.oml.FeaturePredicate}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createRelationPredicateAdapter() {
-		if (relationPredicateItemProvider == null) {
-			relationPredicateItemProvider = new RelationPredicateItemProvider(this);
+	public Adapter createFeaturePredicateAdapter() {
+		if (featurePredicateItemProvider == null) {
+			featurePredicateItemProvider = new FeaturePredicateItemProvider(this);
 		}
 
-		return relationPredicateItemProvider;
+		return featurePredicateItemProvider;
 	}
 
 	/**
@@ -1814,9 +1814,9 @@ public class OmlItemProviderAdapterFactory extends OmlAdapterFactory implements 
 		if (scalarPropertyValueAssertionItemProvider != null) scalarPropertyValueAssertionItemProvider.dispose();
 		if (structuredPropertyValueAssertionItemProvider != null) structuredPropertyValueAssertionItemProvider.dispose();
 		if (linkAssertionItemProvider != null) linkAssertionItemProvider.dispose();
-		if (entityPredicateItemProvider != null) entityPredicateItemProvider.dispose();
+		if (typePredicateItemProvider != null) typePredicateItemProvider.dispose();
 		if (relationEntityPredicateItemProvider != null) relationEntityPredicateItemProvider.dispose();
-		if (relationPredicateItemProvider != null) relationPredicateItemProvider.dispose();
+		if (featurePredicateItemProvider != null) featurePredicateItemProvider.dispose();
 		if (sameAsPredicateItemProvider != null) sameAsPredicateItemProvider.dispose();
 		if (differentFromPredicateItemProvider != null) differentFromPredicateItemProvider.dispose();
 		if (quotedLiteralItemProvider != null) quotedLiteralItemProvider.dispose();

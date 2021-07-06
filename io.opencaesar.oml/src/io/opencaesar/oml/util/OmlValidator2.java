@@ -45,6 +45,11 @@ import io.opencaesar.oml.DescriptionExtension;
 import io.opencaesar.oml.DescriptionUsage;
 import io.opencaesar.oml.Element;
 import io.opencaesar.oml.Entity;
+import io.opencaesar.oml.EnumeratedScalar;
+import io.opencaesar.oml.EnumeratedScalarReference;
+import io.opencaesar.oml.FacetedScalar;
+import io.opencaesar.oml.FacetedScalarReference;
+import io.opencaesar.oml.FeaturePredicate;
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.RelationCardinalityRestrictionAxiom;
 import io.opencaesar.oml.RelationRangeRestrictionAxiom;
@@ -56,9 +61,11 @@ import io.opencaesar.oml.ScalarPropertyRestrictionAxiom;
 import io.opencaesar.oml.SpecializableTerm;
 import io.opencaesar.oml.SpecializationAxiom;
 import io.opencaesar.oml.Structure;
+import io.opencaesar.oml.StructuredProperty;
 import io.opencaesar.oml.StructuredPropertyCardinalityRestrictionAxiom;
 import io.opencaesar.oml.StructuredPropertyRangeRestrictionAxiom;
 import io.opencaesar.oml.StructuredPropertyRestrictionAxiom;
+import io.opencaesar.oml.TypePredicate;
 import io.opencaesar.oml.Vocabulary;
 import io.opencaesar.oml.VocabularyBox;
 import io.opencaesar.oml.VocabularyBundle;
@@ -545,5 +552,146 @@ public final class OmlValidator2 {
         }
         return true;
     }
-        
+    
+    // Faceted Scalar
+    
+    /**
+     * Checks that a non-standard faceted scalar has a single supertype
+     * 
+     * @param object The faceted scalar to check
+     * @param diagnostics The validation diagnostics
+     * @param context The object-to-object context map
+     * @return True if the rules is satisfied; False otherwise
+     */
+    protected boolean validateFacetedScalarSupertype(FacetedScalar object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        final var ontologyIri = object.getOntology().getIri();
+    	// non-standard scalars
+        if (!ontologyIri.equals(OmlConstants.XSD_IRI) && 
+        	!ontologyIri.equals(OmlConstants.RDF_IRI) &&
+        	!ontologyIri.equals(OmlConstants.OWL_IRI)) {
+        	final var specializations = object.getOwnedSpecializations();
+        	if (specializations.isEmpty()) {
+                return report(Diagnostic.ERROR, diagnostics, object,
+                	"Faceted scalar "+object.getAbbreviatedIri()+" must specify a supertype", 
+    	            OmlPackage.Literals.MEMBER__NAME);
+        	} else if (specializations.size() > 1) {
+                return report(Diagnostic.ERROR, diagnostics, object,
+                	"Faceted scalar "+object.getAbbreviatedIri()+" can specify a single supertype only", 
+    	            OmlPackage.Literals.SPECIALIZABLE_TERM__OWNED_SPECIALIZATIONS);
+        	}
+        }
+        return true;
+    }
+
+    /**
+     * Checks that a non-standard faceted scalar reference has no supertype
+     * 
+     * @param object The faceted scalar reference to check
+     * @param diagnostics The validation diagnostics
+     * @param context The object-to-object context map
+     * @return True if the rules is satisfied; False otherwise
+     */
+    protected boolean validateFacetedScalarReferenceSupertype(FacetedScalarReference object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        final var scalar = object.getScalar();
+        if (scalar != null && !scalar.eIsProxy()) {
+        	final var ontologyIri = scalar.getOntology().getIri();
+	    	// non-standard scalars
+	        if (!ontologyIri.equals(OmlConstants.XSD_IRI) && 
+	        	!ontologyIri.equals(OmlConstants.RDF_IRI) &&
+	        	!ontologyIri.equals(OmlConstants.OWL_IRI)) {
+	        	final var specializations = object.getOwnedSpecializations();
+	        	if (!specializations.isEmpty()) {
+	                return report(Diagnostic.ERROR, diagnostics, object,
+	                	"Faceted scalar reference "+OmlRead.getAbbreviatedIri(object)+" cannot specify a supertype", 
+	                	OmlPackage.Literals.SPECIALIZABLE_TERM_REFERENCE__OWNED_SPECIALIZATIONS);
+	        	}
+	        }
+        }
+        return true;
+    }
+
+    // Enumerated Scalar
+
+    /**
+     * Checks an enumerated scalar's literals
+     * 
+     * @param object The enumerated scalar to check
+     * @param diagnostics The validation diagnostics
+     * @param context The object-to-object context map
+     * @return True if the rules is satisfied; False otherwise
+     */
+    protected boolean validateEnumeratedScalarLiterals(EnumeratedScalar object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        if (object.getOwnedSpecializations().isEmpty() && object.getLiterals().isEmpty()) {
+            return report(Diagnostic.ERROR, diagnostics, object,
+                "Enumerated scalar "+object.getAbbreviatedIri()+" must specify either some literals or a supertype", 
+                OmlPackage.Literals.SPECIALIZATION_AXIOM__SPECIALIZED_TERM);
+        } else if (!object.getOwnedSpecializations().isEmpty() && !object.getLiterals().isEmpty()) {
+            return report(Diagnostic.ERROR, diagnostics, object,
+                    "Enumerated scalar "+object.getAbbreviatedIri()+" with a supertype cannot specify literals", 
+                    OmlPackage.Literals.SPECIALIZATION_AXIOM__SPECIALIZED_TERM);
+        }
+        return true;
+    }
+
+    /**
+     * Checks an enumerated scalar reference has no supertype
+     * 
+     * @param object The enumerated scalar reference to check
+     * @param diagnostics The validation diagnostics
+     * @param context The object-to-object context map
+     * @return True if the rules is satisfied; False otherwise
+     */
+    protected boolean validateEnumeratedScalarReferebce(EnumeratedScalarReference object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        if (!object.getOwnedSpecializations().isEmpty()) {
+            return report(Diagnostic.ERROR, diagnostics, object,
+                "Enumerated scalar reference "+OmlRead.getAbbreviatedIri(object)+" cannot specify a supertype", 
+            	OmlPackage.Literals.SPECIALIZABLE_TERM_REFERENCE__OWNED_SPECIALIZATIONS);
+        }
+        return true;
+    }
+
+    // Classifier Predicate
+
+    /**
+     * Checks if a type predicate references an invalid type in a rule's consequent
+     * 
+     * @param object The type predicate to check
+     * @param diagnostics The validation diagnostics
+     * @param context The object-to-object context map
+     * @return True if the rules is satisfied; False otherwise
+     */
+    protected boolean validateTypePredicate(TypePredicate object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        if (object.getConsequentRule() != null) {
+	       if (object.getType() instanceof Structure) {
+	            return report(Diagnostic.ERROR, diagnostics, object,
+	                "Structure "+object.getType().getAbbreviatedIri()+" cannot be used as a consequent predicate", 
+	                OmlPackage.Literals.TYPE_PREDICATE__TYPE);
+	        } else if (object.getType() instanceof Scalar) {
+	            return report(Diagnostic.ERROR, diagnostics, object,
+	                    "Scalar "+object.getType().getAbbreviatedIri()+" cannot be used as a consequent predicate", 
+	                    OmlPackage.Literals.TYPE_PREDICATE__TYPE);
+	        }
+        }
+        return true;
+    }
+
+    // Feature Predicate
+
+    /**
+     * Checks if a feature predicate references invalid features is in a rule's consequent
+     * 
+     * @param object The feature predicate to check
+     * @param diagnostics The validation diagnostics
+     * @param context The object-to-object context map
+     * @return True if the rules is satisfied; False otherwise
+     */
+    protected boolean validateFeaturePredicate(FeaturePredicate object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        if (object.getConsequentRule() != null && object.getFeature() instanceof StructuredProperty) {
+            return report(Diagnostic.ERROR, diagnostics, object,
+                "Structured property "+object.getFeature().getAbbreviatedIri()+" cannot be used as a consequent predicate", 
+                OmlPackage.Literals.FEATURE_PREDICATE__FEATURE);
+        }
+        return true;
+    }
+
 }
