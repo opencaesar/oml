@@ -18,7 +18,6 @@
  */
 package io.opencaesar.oml.util;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -147,9 +146,10 @@ public final class OmlCatalog {
         Vector<?> getCatalogs() {
             return catalogs;
         }
+        @Override
         protected String makeAbsolute(String sysid) {
             sysid = fixSlashes(sysid);
-            return  baseUri.toString()+File.separator+sysid;
+            return  baseUri.toString()+'/'+sysid;
         }
     }
 }

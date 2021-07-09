@@ -2,7 +2,7 @@
 <feature
       id="io.opencaesar.oml.sdk.feature"
       label="%featureName"
-      version="0.9.1"
+      version="0.9.2"
       provider-name="%providerName">
 
    <description>
