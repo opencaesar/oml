@@ -64,6 +64,9 @@ public final class OmlXMIResource extends XMIResourceImpl {
      */
     public OmlXMIResource(URI uri) {
         super(uri);
+        var handler = new OmlXMIURIHandler(this);
+        getDefaultLoadOptions().put(XMIResource.OPTION_URI_HANDLER, handler);
+        getDefaultSaveOptions().put(XMIResource.OPTION_URI_HANDLER, handler);
         getDefaultSaveOptions().put(XMIResource.OPTION_SAVE_TYPE_INFORMATION, Boolean.TRUE);
         intrinsicIDToEObjectMap = idToEObjectMap;
     }
