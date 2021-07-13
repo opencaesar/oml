@@ -338,7 +338,7 @@ public final class OmlValidator2 {
         if (restrictingClassifier != null && domainType != null) {
 	        final Collection<SpecializableTerm> allGeneralTerms = OmlRead.closure(restrictingClassifier, true, t -> OmlSearch.findSuperTerms(t));
 	        if (!allGeneralTerms.stream().filter(t -> t == domainType).findAny().isPresent()) {
-	            return report(Diagnostic.ERROR, diagnostics, object,
+	            return report(Diagnostic.WARNING, diagnostics, object,
 	                "Relation "+object.getRelation().getAbbreviatedIri()+" has a domain that is not the same as or a super type of "+restrictingClassifier.getAbbreviatedIri(), 
 	                OmlPackage.Literals.RELATION_RESTRICTION_AXIOM__RELATION);
 	        }
@@ -360,7 +360,7 @@ public final class OmlValidator2 {
         if (restrictedRange != null && rangeType != null) {
 	        final Collection<SpecializableTerm> allGeneralEntities = OmlRead.closure(restrictedRange, true, t -> OmlSearch.findSuperTerms(t));
 	        if (!allGeneralEntities.stream().filter(t -> t == rangeType).findAny().isPresent()) {
-	            return report(Diagnostic.ERROR, diagnostics, object,
+	            return report(Diagnostic.WARNING, diagnostics, object,
 	                "Entity "+restrictedRange.getAbbreviatedIri()+" is not the same as or a sub type of "+rangeType.getAbbreviatedIri(), 
 	                OmlPackage.Literals.RELATION_RANGE_RESTRICTION_AXIOM__RANGE);
 	        }
@@ -382,7 +382,7 @@ public final class OmlValidator2 {
         if (restrictedRange != null && rangeType != null) {
             final Collection<SpecializableTerm> allGeneralEntities = OmlRead.closure(restrictedRange, true, t -> OmlSearch.findSuperTerms(t));
             if (!allGeneralEntities.stream().filter(t -> t == rangeType).findAny().isPresent()) {
-                return report(Diagnostic.ERROR, diagnostics, object,
+                return report(Diagnostic.WARNING, diagnostics, object,
                     "Entity "+restrictedRange.getAbbreviatedIri()+" is not the same as or a sub type of "+rangeType.getAbbreviatedIri(), 
                     OmlPackage.Literals.RELATION_CARDINALITY_RESTRICTION_AXIOM__RANGE);
             }
@@ -406,7 +406,7 @@ public final class OmlValidator2 {
         if (restrictingClassifier != null && domainType != null) {
 	        final Collection<SpecializableTerm> allGeneralTerms = OmlRead.closure(restrictingClassifier, true, t -> OmlSearch.findSuperTerms(t));
 	        if (!allGeneralTerms.stream().filter(t -> t == domainType).findAny().isPresent()) {
-	            return report(Diagnostic.ERROR, diagnostics, object,
+	            return report(Diagnostic.WARNING, diagnostics, object,
 	                "Property "+object.getProperty().getAbbreviatedIri()+" has a domain that is not the same as or a super type of "+OmlRead.getRestrictingClassifier(object).getAbbreviatedIri(), 
 	                OmlPackage.Literals.SCALAR_PROPERTY_RESTRICTION_AXIOM__PROPERTY);
 	        }
@@ -428,7 +428,7 @@ public final class OmlValidator2 {
         if (restrictedRange != null && rangeType != null) {
 	        final Collection<SpecializableTerm> allGeneralEntities = OmlRead.closure(restrictedRange, true, t -> OmlSearch.findSuperTerms(t));
 	        if (!allGeneralEntities.stream().filter(t -> t == rangeType).findAny().isPresent()) {
-	            return report(Diagnostic.ERROR, diagnostics, object,
+	            return report(Diagnostic.WARNING, diagnostics, object,
 	                "Scalar "+restrictedRange.getAbbreviatedIri()+" is not the same as or a sub type of "+rangeType.getAbbreviatedIri(), 
 	                OmlPackage.Literals.SCALAR_PROPERTY_RANGE_RESTRICTION_AXIOM__RANGE);
 	        }
@@ -450,7 +450,7 @@ public final class OmlValidator2 {
         if (restrictedRange != null && rangeType != null) {
             final Collection<SpecializableTerm> allGeneralEntities = OmlRead.closure(restrictedRange, true, t -> OmlSearch.findSuperTerms(t));
             if (!allGeneralEntities.stream().filter(t -> t == rangeType).findAny().isPresent()) {
-                return report(Diagnostic.ERROR, diagnostics, object,
+                return report(Diagnostic.WARNING, diagnostics, object,
                     "Scalar "+restrictedRange.getAbbreviatedIri()+" is not the same as or a sub type of "+rangeType.getAbbreviatedIri(), 
                     OmlPackage.Literals.SCALAR_PROPERTY_CARDINALITY_RESTRICTION_AXIOM__RANGE);
             }
@@ -474,7 +474,7 @@ public final class OmlValidator2 {
         if (restrictingClassifier != null && domainType != null) {
 	        final Collection<SpecializableTerm> allGeneralTerms = OmlRead.closure(restrictingClassifier, true, t -> OmlSearch.findSuperTerms(t));
 	        if (!allGeneralTerms.stream().filter(t -> t == domainType).findAny().isPresent()) {
-	            return report(Diagnostic.ERROR, diagnostics, object,
+	            return report(Diagnostic.WARNING, diagnostics, object,
 	                "Property "+object.getProperty().getAbbreviatedIri()+" has a domain that is not the same as or a super type of "+OmlRead.getRestrictingClassifier(object).getAbbreviatedIri(), 
 	                OmlPackage.Literals.STRUCTURED_PROPERTY_RESTRICTION_AXIOM__PROPERTY);
 	        }
@@ -496,7 +496,7 @@ public final class OmlValidator2 {
         if (restrictedRange != null && rangeType != null) {
 	        final Collection<SpecializableTerm> allGeneralEntities = OmlRead.closure(restrictedRange, true, t -> OmlSearch.findSuperTerms(t));
 	        if (!allGeneralEntities.stream().filter(t -> t == rangeType).findAny().isPresent()) {
-	            return report(Diagnostic.ERROR, diagnostics, object,
+	            return report(Diagnostic.WARNING, diagnostics, object,
 	                "Structure "+restrictedRange.getAbbreviatedIri()+" is not the same as or a sub type of "+rangeType.getAbbreviatedIri(), 
 	                OmlPackage.Literals.STRUCTURED_PROPERTY_RANGE_RESTRICTION_AXIOM__RANGE);
 	        }
@@ -518,7 +518,7 @@ public final class OmlValidator2 {
         if (restrictedRange != null && rangeType != null) {
             final Collection<SpecializableTerm> allGeneralEntities = OmlRead.closure(restrictedRange, true, t -> OmlSearch.findSuperTerms(t));
             if (!allGeneralEntities.stream().filter(t -> t == rangeType).findAny().isPresent()) {
-                return report(Diagnostic.ERROR, diagnostics, object,
+                return report(Diagnostic.WARNING, diagnostics, object,
                     "Structure "+restrictedRange.getAbbreviatedIri()+" is not the same as or a sub type of "+rangeType.getAbbreviatedIri(), 
                     OmlPackage.Literals.STRUCTURED_PROPERTY_CARDINALITY_RESTRICTION_AXIOM__RANGE);
             }
