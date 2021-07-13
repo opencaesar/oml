@@ -1554,7 +1554,7 @@ public final class OmlRead {
     }
     
     /**
-     * Resolve the given (logical or physical) uri in the context of the given resource.
+     * Resolves the given (logical or physical) uri in the context of the given resource.
      * (The physical uri can be relative or absolute)
      * 
      * @param resource The resource to use as context of uri resolution
@@ -1848,6 +1848,22 @@ public final class OmlRead {
         return map;
     }
     
+    /**
+     * Gets a map from import prefixes to import namespaces in the given ontology
+     * 
+     * @param ontology the given ontology
+     * @return a map from import prefixes to import namespaces 
+     */
+    public static Map<String, String> getImportNamespaces(Ontology ontology) {
+        final Map<String, String> map = new LinkedHashMap<>();
+        getAllImports(ontology).forEach(i -> {
+            if (!map.containsKey(getImportedNamespace(i))) {
+                map.put(getEffectivePrefix(i), getImportedNamespace(i));
+            }
+        });
+        return map;
+    }
+
     /**
      * Gets the prefix of a given ontology imported by a context ontology
      * 

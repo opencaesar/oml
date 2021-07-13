@@ -162,11 +162,11 @@ final class OmlUriResolver implements Runnable {
     }
     
     /**
-     * Resolves the given URI in context of the given resource 
+     * Resolves the given (logical or physical) URI in context of the given resource 
      * 
      * @param contextResource The resource that is the context of resolution
      * @param uri The URI to resolve
-     * @return The URI that is resolved
+     * @return The resolved physical URI
      */
     public synchronized URI resolve(Resource contextResource, URI uri) {
         URI contextUri = (contextResource != null) ? contextResource.getURI() : null;
@@ -175,9 +175,6 @@ final class OmlUriResolver implements Runnable {
         }
         
         URI folderUri = contextUri.trimSegments(1);
-        if (folderUri == null) {
-            return null;
-        }
         
         Map<URI, URI> importMap = importCache.get(folderUri);
         if (importMap == null) {
@@ -192,7 +189,7 @@ final class OmlUriResolver implements Runnable {
         
         if (uri.isRelative()) {
             if (!contextUri.isRelative()) {
-                resolvedUri =  uri.resolve(contextUri, true);
+                resolvedUri =  uri.resolve(contextUri);
             } else {
                 resolvedUri = uri;
             }
@@ -219,6 +216,11 @@ final class OmlUriResolver implements Runnable {
             return null;
         }
         
+        final String fragment = importUri.fragment();
+        importUri = importUri.trimFragment();
+        final String query = importUri.query();
+        importUri = importUri.trimQuery();
+        
         final String resolved;
         try {
             resolved = catalog.resolveURI(importUri.toString());
@@ -239,6 +241,13 @@ final class OmlUriResolver implements Runnable {
                     return null;
                 }
             }
+        }
+        
+        if (fragment != null) {
+        	resolvedUri = resolvedUri.appendFragment(fragment);
+        }
+        if (query != null) {
+        	resolvedUri = resolvedUri.appendQuery(query);
         }
         
         return resolvedUri;
