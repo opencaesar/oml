@@ -25,12 +25,13 @@
    <extension point="org.eclipse.ui.editors">
       <!-- @generated oml -->
       <editor
-            id="io.opencaesar.oml.presentation.OmlEditorID"
-            name="%_UI_OmlEditor_label"
-            icon="icons/full/obj16/oml.png"
-            extensions="omlxmi"
             class="io.opencaesar.oml.presentation.OmlEditor"
-            contributorClass="io.opencaesar.oml.presentation.OmlActionBarContributor">
+            contributorClass="io.opencaesar.oml.presentation.OmlActionBarContributor"
+            default="true"
+            extensions="omlxmi"
+            icon="icons/full/obj16/oml.png"
+            id="io.opencaesar.oml.presentation.OmlEditorID"
+            name="%_UI_OmlEditor_label">
       </editor>
    </extension>
 
