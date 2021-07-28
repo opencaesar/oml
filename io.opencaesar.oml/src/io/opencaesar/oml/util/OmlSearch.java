@@ -1149,7 +1149,7 @@ public final class OmlSearch extends OmlIndex {
      * @return true if the given term is a sub term of the given super term; otherwise false
      */
     public static boolean findIsSubTermOf(SpecializableTerm term, SpecializableTerm superTerm) {
-        return OmlRead.isInClosure(term, superTerm, true, t -> findSuperTerms(t));
+        return OmlRead.isInClosure(superTerm, term, true, t -> findSuperTerms(t));
     }
 
     // Entity
@@ -1413,7 +1413,7 @@ public final class OmlSearch extends OmlIndex {
             return findTypeAssertions((NamedInstance)instance).stream()
                 .map(i -> i.getType())
                 .filter(t -> findIsSubTermOf(t, type))
-                .findFirst().isEmpty();
+                .findFirst().isPresent();
         }
         return false;
     }
