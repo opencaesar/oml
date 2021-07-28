@@ -19,10 +19,22 @@
 package io.opencaesar.oml.dsl.ui
 
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
+import org.eclipse.xtext.ui.editor.contentassist.FQNPrefixMatcher
+import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher
 
 /**
  * Use this class to register components to be used within the Eclipse IDE.
  */
 @FinalFieldsConstructor
 class OmlUiModule extends AbstractOmlUiModule {
+	
+	override Class<? extends PrefixMatcher> bindPrefixMatcher() {
+		return FQNPrefixMatcher2;
+	}
+
+	static class FQNPrefixMatcher2 extends FQNPrefixMatcher {
+		new () {
+			delimiter = ":"
+		}
+	}
 }
