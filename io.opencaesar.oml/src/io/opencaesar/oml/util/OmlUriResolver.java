@@ -58,7 +58,7 @@ final class OmlUriResolver implements Runnable {
     private WatchService watcher;
     private Map<WatchKey, File> watched;
     
-    private Map<URI, Map<URI, URI>> importCache;
+    private Map<URI, Map<String, URI>> importCache;
     private Map<URI, OmlCatalog> catalogCache;
     
     private OmlUriResolver() {
@@ -131,11 +131,6 @@ final class OmlUriResolver implements Runnable {
         return localUri.isFile() ? new File(localUri.toFileString()) : null;
     }
     
-    private boolean isPhysicalUri(URI uri) {
-        URI localUri = CommonPlugin.asLocalURI(uri);
-        return localUri.isFile();
-    }
-    
     private boolean exists(ResourceSet rs, URI uri) {
         try {
             if (rs.getResource(uri, false) != null) {
@@ -162,13 +157,13 @@ final class OmlUriResolver implements Runnable {
     }
     
     /**
-     * Resolves the given (logical or physical) URI in context of the given resource 
+     * Resolves the given logical IRI in context of the given resource 
      * 
      * @param contextResource The resource that is the context of resolution
-     * @param uri The URI to resolve
+     * @param iri The logical IRI to resolve
      * @return The resolved physical URI
      */
-    public synchronized URI resolve(Resource contextResource, URI uri) {
+    public synchronized URI resolve(Resource contextResource, String iri) {
         URI contextUri = (contextResource != null) ? contextResource.getURI() : null;
         if (contextUri == null) {
             return null;
@@ -176,37 +171,25 @@ final class OmlUriResolver implements Runnable {
         
         URI folderUri = contextUri.trimSegments(1);
         
-        Map<URI, URI> importMap = importCache.get(folderUri);
+        Map<String, URI> importMap = importCache.get(folderUri);
         if (importMap == null) {
             importCache.put(folderUri, importMap = new HashMap<>());
         }
         
-        if (importMap.containsKey(uri)) {
-            return importMap.get(uri);
+        if (importMap.containsKey(iri)) {
+            return importMap.get(iri);
         }
         
-        final URI resolvedUri;
-        
-        if (uri.isRelative()) {
-            if (!contextUri.isRelative()) {
-                resolvedUri =  uri.resolve(contextUri);
-            } else {
-                resolvedUri = uri;
-            }
-        } else if (isPhysicalUri(uri)) {
-            resolvedUri = uri;
-        } else { //logical
-            resolvedUri = resolveFromCatalog(contextResource.getResourceSet(), folderUri, uri);
-        }
+        final URI resolvedUri = resolveFromCatalog(contextResource.getResourceSet(), folderUri, iri);
         
         if (resolvedUri != null) {
-            importMap.put(uri, resolvedUri);
+            importMap.put(iri, resolvedUri);
         }
         
         return resolvedUri;
     }
     
-    private URI resolveFromCatalog(ResourceSet rs, URI folderUri, URI importUri) {
+    private URI resolveFromCatalog(ResourceSet rs, URI folderUri, String iri) {
         if (!catalogCache.containsKey(folderUri)) {
             findCatalogs(catalogCache, folderUri);
         }
@@ -215,15 +198,10 @@ final class OmlUriResolver implements Runnable {
         if (catalog == null) {
             return null;
         }
-        
-        final String fragment = importUri.fragment();
-        importUri = importUri.trimFragment();
-        final String query = importUri.query();
-        importUri = importUri.trimQuery();
-        
+                
         final String resolved;
         try {
-            resolved = catalog.resolveURI(importUri.toString());
+            resolved = catalog.resolveURI(iri);
             if (resolved == null) {
                 return null;
             }
@@ -241,13 +219,6 @@ final class OmlUriResolver implements Runnable {
                     return null;
                 }
             }
-        }
-        
-        if (fragment != null) {
-        	resolvedUri = resolvedUri.appendFragment(fragment);
-        }
-        if (query != null) {
-        	resolvedUri = resolvedUri.appendQuery(query);
         }
         
         return resolvedUri;

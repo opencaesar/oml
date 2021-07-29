@@ -115,8 +115,8 @@ class OmlFormatter extends AbstractFormatter2 {
 		vocabulary.prepend[setNewLines(0, 0, 0); noSpace]
 		vocabulary.ownedAnnotations.forEach[format.append[newLine]]
         vocabulary.regionFor.keyword(vocabularyAccess.vocabularyKeyword_1).append[oneSpace]
-        vocabulary.regionFor.keyword(vocabularyAccess.withKeyword_3).surround[oneSpace]
-        vocabulary.regionFor.keyword(vocabularyAccess.asKeyword_5).surround[oneSpace]
+        vocabulary.regionFor.keyword(vocabularyAccess.withKeyword_3_0).surround[oneSpace]
+        vocabulary.regionFor.keyword(vocabularyAccess.asKeyword_4).surround[oneSpace]
 		vocabulary.formatBraces(document)
 		vocabulary.ownedImports.forEach[format.prepend[newLines = 2]]
 		vocabulary.ownedStatements.forEach[format.prepend[newLines = 2]]
@@ -127,8 +127,8 @@ class OmlFormatter extends AbstractFormatter2 {
 		bundle.ownedAnnotations.forEach[format.append[newLine]]
         bundle.regionFor.keyword(vocabularyBundleAccess.vocabularyKeyword_1).append[oneSpace]
         bundle.regionFor.keyword(vocabularyBundleAccess.bundleKeyword_2).surround[oneSpace]
-        bundle.regionFor.keyword(vocabularyBundleAccess.withKeyword_4).surround[oneSpace]
-        bundle.regionFor.keyword(vocabularyBundleAccess.asKeyword_6).surround[oneSpace]
+        bundle.regionFor.keyword(vocabularyBundleAccess.withKeyword_4_0).surround[oneSpace]
+        bundle.regionFor.keyword(vocabularyBundleAccess.asKeyword_5).surround[oneSpace]
 		bundle.formatBraces(document)
 		bundle.ownedImports.forEach[format.prepend[newLines = 2]]
 	}
@@ -137,8 +137,8 @@ class OmlFormatter extends AbstractFormatter2 {
 		description.prepend[setNewLines(0, 0, 0); noSpace]
 		description.ownedAnnotations.forEach[format.append[newLine]]
         description.regionFor.keyword(descriptionAccess.descriptionKeyword_1).append[oneSpace]
-        description.regionFor.keyword(descriptionAccess.withKeyword_3).surround[oneSpace]
-        description.regionFor.keyword(descriptionAccess.asKeyword_5).surround[oneSpace]
+        description.regionFor.keyword(descriptionAccess.withKeyword_3_0).surround[oneSpace]
+        description.regionFor.keyword(descriptionAccess.asKeyword_4).surround[oneSpace]
 		description.formatBraces(document)
 		description.ownedImports.forEach[format.prepend[newLines = 2]]
 		description.ownedStatements.forEach[format.prepend[newLines = 2]]
@@ -149,8 +149,8 @@ class OmlFormatter extends AbstractFormatter2 {
 		bundle.ownedAnnotations.forEach[format.append[newLine]]
         bundle.regionFor.keyword(descriptionBundleAccess.descriptionKeyword_1).append[oneSpace]
         bundle.regionFor.keyword(descriptionBundleAccess.bundleKeyword_2).append[oneSpace]
-        bundle.regionFor.keyword(descriptionBundleAccess.withKeyword_4).surround[oneSpace]
-        bundle.regionFor.keyword(descriptionBundleAccess.asKeyword_6).surround[oneSpace]
+        bundle.regionFor.keyword(descriptionBundleAccess.withKeyword_4_0).surround[oneSpace]
+        bundle.regionFor.keyword(descriptionBundleAccess.asKeyword_5).surround[oneSpace]
 		bundle.formatBraces(document)
 		bundle.ownedImports.forEach[format.prepend[newLines = 2]]
 	}
@@ -433,46 +433,64 @@ class OmlFormatter extends AbstractFormatter2 {
 	def dispatch void format(VocabularyExtension _extension, extension IFormattableDocument document) {
 		_extension.ownedAnnotations.forEach[format.append[newLine]]
 		_extension.regionFor.keyword(vocabularyExtensionAccess.extendsKeyword_1).append[oneSpace]
+		_extension.regionFor.keyword(vocabularyExtensionAccess.withKeyword_3_0).append[oneSpace]
+		_extension.regionFor.keyword(vocabularyExtensionAccess.asKeyword_4).append[oneSpace]
 	}
 
 	def dispatch void format(VocabularyUsage usage, extension IFormattableDocument document) {
 		usage.ownedAnnotations.forEach[format.append[newLine]]
 		usage.regionFor.keyword(vocabularyUsageAccess.usesKeyword_1).append[oneSpace]
+		usage.regionFor.keyword(vocabularyUsageAccess.withKeyword_3_0).append[oneSpace]
+		usage.regionFor.keyword(vocabularyUsageAccess.asKeyword_4).append[oneSpace]
 	}
 
 	def dispatch void format(VocabularyBundleExtension _extension, extension IFormattableDocument document) {
 		_extension.ownedAnnotations.forEach[format.append[newLine]]
 		_extension.regionFor.keyword(vocabularyBundleExtensionAccess.extendsKeyword_1).append[oneSpace]
+		_extension.regionFor.keyword(vocabularyBundleExtensionAccess.withKeyword_3_0).append[oneSpace]
+		_extension.regionFor.keyword(vocabularyBundleExtensionAccess.asKeyword_4).append[oneSpace]
 	}
 
 	def dispatch void format(VocabularyBundleInclusion inclusion, extension IFormattableDocument document) {
 		inclusion.ownedAnnotations.forEach[format.append[newLine]]
 		inclusion.regionFor.keyword(vocabularyBundleInclusionAccess.includesKeyword_1).append[oneSpace]
+		inclusion.regionFor.keyword(vocabularyBundleInclusionAccess.withKeyword_3_0).append[oneSpace]
+		inclusion.regionFor.keyword(vocabularyBundleInclusionAccess.asKeyword_4).append[oneSpace]
 	}
 
 	def dispatch void format(DescriptionExtension _extension, extension IFormattableDocument document) {
 		_extension.ownedAnnotations.forEach[format.append[newLine]]
 		_extension.regionFor.keyword(descriptionExtensionAccess.extendsKeyword_1).append[oneSpace]
+		_extension.regionFor.keyword(descriptionExtensionAccess.withKeyword_3_0).append[oneSpace]
+		_extension.regionFor.keyword(descriptionExtensionAccess.asKeyword_4).append[oneSpace]
 	}
 
 	def dispatch void format(DescriptionUsage usage, extension IFormattableDocument document) {
 		usage.ownedAnnotations.forEach[format.append[newLine]]
 		usage.regionFor.keyword(descriptionUsageAccess.usesKeyword_1).append[oneSpace]
+		usage.regionFor.keyword(descriptionUsageAccess.withKeyword_3_0).append[oneSpace]
+		usage.regionFor.keyword(descriptionUsageAccess.asKeyword_4).append[oneSpace]
 	}
 
 	def dispatch void format(DescriptionBundleExtension _extension, extension IFormattableDocument document) {
 		_extension.ownedAnnotations.forEach[format.append[newLine]]
 		_extension.regionFor.keyword(descriptionBundleExtensionAccess.extendsKeyword_1).append[oneSpace]
+		_extension.regionFor.keyword(descriptionBundleExtensionAccess.withKeyword_3_0).append[oneSpace]
+		_extension.regionFor.keyword(descriptionBundleExtensionAccess.asKeyword_4).append[oneSpace]
 	}
 
 	def dispatch void format(DescriptionBundleInclusion inclusion, extension IFormattableDocument document) {
 		inclusion.ownedAnnotations.forEach[format.append[newLine]]
 		inclusion.regionFor.keyword(descriptionBundleInclusionAccess.includesKeyword_1).append[oneSpace]
+		inclusion.regionFor.keyword(descriptionBundleInclusionAccess.withKeyword_3_0).append[oneSpace]
+		inclusion.regionFor.keyword(descriptionBundleInclusionAccess.asKeyword_4).append[oneSpace]
 	}
 
 	def dispatch void format(DescriptionBundleUsage usage, extension IFormattableDocument document) {
 		usage.ownedAnnotations.forEach[format.append[newLine]]
 		usage.regionFor.keyword(descriptionBundleUsageAccess.usesKeyword_1).append[oneSpace]
+		usage.regionFor.keyword(descriptionBundleUsageAccess.withKeyword_3_0).append[oneSpace]
+		usage.regionFor.keyword(descriptionBundleUsageAccess.asKeyword_4).append[oneSpace]
 	}
 
 	def dispatch void format(ScalarPropertyRangeRestrictionAxiom axiom, extension IFormattableDocument document) {

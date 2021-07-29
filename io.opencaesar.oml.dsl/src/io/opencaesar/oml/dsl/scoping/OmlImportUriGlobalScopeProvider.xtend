@@ -20,33 +20,25 @@ package io.opencaesar.oml.dsl.scoping
 
 import com.google.inject.Inject
 import com.google.inject.Provider
-import io.opencaesar.oml.OmlPackage
-import io.opencaesar.oml.dsl.resource.OmlResourceDescriptionStrategy
+import io.opencaesar.oml.util.OmlRead
 import java.util.LinkedHashSet
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.resource.Resource
-import org.eclipse.xtext.resource.IResourceDescription
 import org.eclipse.xtext.scoping.impl.ImportUriGlobalScopeProvider
 import org.eclipse.xtext.util.IResourceScopeCache
 
 class OmlImportUriGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 	
-	@Inject	IResourceDescription.Manager descriptionManager
-
 	@Inject IResourceScopeCache cache
 
 	override protected LinkedHashSet<URI> getImportedUris(Resource resource) {
 		return cache.get(OmlImportUriGlobalScopeProvider.getSimpleName(), resource, new Provider<LinkedHashSet<URI>>() {
 			override get() {
-				val resourceDescription = descriptionManager.getResourceDescription(resource)
-				val ontologyDescriptions = resourceDescription.getExportedObjectsByType(OmlPackage.Literals.ONTOLOGY)
 				val uniqueImportURIs = new LinkedHashSet<URI>(5)
-				ontologyDescriptions.forEach[
-					val userData = getUserData(OmlResourceDescriptionStrategy.IMPORTS)
-					if(userData !== null) {
-						userData.split(",").forEach[uri|
-							uniqueImportURIs.add(URI.createURI(uri))
-						]
+				OmlRead.getImports(OmlRead.getOntology(resource)).forEach[i |
+					var uri = OmlRead.getResolvedUri(resource, i.getIri())
+					if (uri !== null) {
+						uniqueImportURIs.add(uri)
 					}
 				]
 				return uniqueImportURIs

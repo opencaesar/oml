@@ -795,12 +795,13 @@ public class OmlBuilder {
      * Creates a vocabulary extension and adds it to the given vocabulary
      * 
      * @param vocabulary the context vocabulary
-     * @param extenedVocabularyURI the URI (or IRI) of the extended vocabulary
+     * @param extenedVocabularyIri the IRI of the extended vocabulary
+     * @param extenedVocabularySeparator the separator of the extended vocabulary
      * @param extenedVocabularyPrefix the prefix of the extended vocabulary
      * @return a vocabulary extension that is added to the given vocabulary
      */
-    public VocabularyExtension addVocabularyExtension(Vocabulary vocabulary, String extenedVocabularyURI, String extenedVocabularyPrefix) {
-        final VocabularyExtension extension = OmlWrite.addVocabularyExtension(vocabulary, extenedVocabularyURI, extenedVocabularyPrefix);
+    public VocabularyExtension addVocabularyExtension(Vocabulary vocabulary, String extenedVocabularyIri, SeparatorKind extenedVocabularySeparator, String extenedVocabularyPrefix) {
+        final VocabularyExtension extension = OmlWrite.addVocabularyExtension(vocabulary, extenedVocabularyIri, extenedVocabularySeparator, extenedVocabularyPrefix);
         return extension;
     }
 
@@ -810,12 +811,13 @@ public class OmlBuilder {
      * Creates a vocabulary usage and adds it to the given vocabulary
      * 
      * @param vocabulary the context vocabulary
-     * @param usedDescriptionBoxURI the URI (or IRI) of the used description box
+     * @param usedDescriptionBoxIri the IRI of the used description box
+     * @param usedDescriptionBoxSeparator the separator of the used description box
      * @param usedDescriptionBoxPrefix the prefix of the used description box
      * @return a vocabulary usage that is added to the given vocabulary
      */
-    public VocabularyUsage addVocabularyUsage(Vocabulary vocabulary, String usedDescriptionBoxURI, String usedDescriptionBoxPrefix) {
-        final VocabularyUsage usage = OmlWrite.addVocabularyUsage(vocabulary, usedDescriptionBoxURI, usedDescriptionBoxPrefix);
+    public VocabularyUsage addVocabularyUsage(Vocabulary vocabulary, String usedDescriptionBoxIri, SeparatorKind usedDescriptionBoxSeparator, String usedDescriptionBoxPrefix) {
+        final VocabularyUsage usage = OmlWrite.addVocabularyUsage(vocabulary, usedDescriptionBoxIri, usedDescriptionBoxSeparator, usedDescriptionBoxPrefix);
         return usage;
     }
 
@@ -825,12 +827,13 @@ public class OmlBuilder {
      * Creates a vocabulary bundle extension and adds it to the given vocabulary bundle
      * 
      * @param bundle the context vocabulary bundle
-     * @param extenedVocabularyBundleURI the URI (or IRI) of the extended vocabulary bundle
+     * @param extenedVocabularyBundleIri the IRI of the extended vocabulary bundle
+     * @param extenedVocabularyBundleSeparator the separator of the extended vocabulary bundle
      * @param extenedVocabularyBundlePrefix the prefix of the extended vocabulary bundle
      * @return a vocabulary bundle extension that is added to the given vocabulary bundle
      */
-    public VocabularyBundleExtension addVocabularyBundleExtension(VocabularyBundle bundle, String extenedVocabularyBundleURI, String extenedVocabularyBundlePrefix) {
-        final VocabularyBundleExtension extension = OmlWrite.addVocabularyBundleExtension(bundle, extenedVocabularyBundleURI, extenedVocabularyBundlePrefix);
+    public VocabularyBundleExtension addVocabularyBundleExtension(VocabularyBundle bundle, String extenedVocabularyBundleIri, SeparatorKind extenedVocabularyBundleSeparator, String extenedVocabularyBundlePrefix) {
+        final VocabularyBundleExtension extension = OmlWrite.addVocabularyBundleExtension(bundle, extenedVocabularyBundleIri, extenedVocabularyBundleSeparator, extenedVocabularyBundlePrefix);
         return extension;
     }
 
@@ -840,12 +843,13 @@ public class OmlBuilder {
      * Creates a vocabulary bundle inclusion and adds it to the given vocabulary bundle
      * 
      * @param bundle the context vocabulary bundle
-     * @param includedVocabularyURI the URI (or IRI) of the included vocabulary
+     * @param includedVocabularyIri the IRI of the included vocabulary
+     * @param includedVocabularySeparator the separator of the included vocabulary
      * @param includedVocabularyPrefix the prefix of the included vocabulary
      * @return a vocabulary bundle inclusion that is added to the given vocabulary bundle
      */
-    public VocabularyBundleInclusion addVocabularyBundleInclusion(VocabularyBundle bundle, String includedVocabularyURI, String includedVocabularyPrefix) {
-        final VocabularyBundleInclusion inclusion = OmlWrite.addVocabularyBundleInclusion(bundle, includedVocabularyURI, includedVocabularyPrefix);
+    public VocabularyBundleInclusion addVocabularyBundleInclusion(VocabularyBundle bundle, String includedVocabularyIri, SeparatorKind includedVocabularySeparator, String includedVocabularyPrefix) {
+        final VocabularyBundleInclusion inclusion = OmlWrite.addVocabularyBundleInclusion(bundle, includedVocabularyIri, includedVocabularySeparator, includedVocabularyPrefix);
         return inclusion;
     }
 
@@ -855,12 +859,13 @@ public class OmlBuilder {
      * Creates a description extension and adds it to the given description
      * 
      * @param description the context description
-     * @param extenedDescriptionURI the URI (or IRI) of the extended description
+     * @param extenedDescriptionIri the IRI of the extended description
+     * @param extenedDescriptionSeparator the separator of the extended description
      * @param extenedDescriiptionPrefix the prefix of the extended description
      * @return a description extension that is added to the given description
      */
-    public DescriptionExtension addDescriptionExtension(Description description, String extenedDescriptionURI, String extenedDescriiptionPrefix) {
-        final DescriptionExtension extension = OmlWrite.addDescriptionExtension(description, extenedDescriptionURI, extenedDescriiptionPrefix);
+    public DescriptionExtension addDescriptionExtension(Description description, String extenedDescriptionIri, SeparatorKind extenedDescriptionSeparator, String extenedDescriiptionPrefix) {
+        final DescriptionExtension extension = OmlWrite.addDescriptionExtension(description, extenedDescriptionIri, extenedDescriptionSeparator, extenedDescriiptionPrefix);
         return extension;
     }
     
@@ -870,12 +875,13 @@ public class OmlBuilder {
      * Creates a description usage and adds it to the given description
      * 
      * @param description the context description
-     * @param usedVocabularyBoxURI the URI (or IRI) of the used vocabulary box
+     * @param usedVocabularyBoxIri the IRI of the used vocabulary box
+     * @param usedVocabularyBoxSeparator the separator of the used vocabulary box
      * @param usedVocabularyBoxPrefix the prefix of the used vocabulary box
      * @return a description usage that is added to the given description
      */
-    public DescriptionUsage addDescriptionUsage(Description description, String usedVocabularyBoxURI, String usedVocabularyBoxPrefix) {
-        final DescriptionUsage usage = OmlWrite.addDescriptionUsage(description, usedVocabularyBoxURI, usedVocabularyBoxPrefix);
+    public DescriptionUsage addDescriptionUsage(Description description, String usedVocabularyBoxIri, SeparatorKind usedVocabularyBoxSeparator, String usedVocabularyBoxPrefix) {
+        final DescriptionUsage usage = OmlWrite.addDescriptionUsage(description, usedVocabularyBoxIri, usedVocabularyBoxSeparator, usedVocabularyBoxPrefix);
         return usage;
     }
     
@@ -885,12 +891,13 @@ public class OmlBuilder {
      * Creates a description bundle extension and adds it to the given description bundle
      * 
      * @param bundle the context description bundle
-     * @param extenedDescriptionBundleURI the URI (or IRI) of the extended vocabulary bundle
+     * @param extenedDescriptionBundleIri the IRI of the extended vocabulary bundle
+     * @param extenedDescriptionBundleSeparator the separator of the extended vocabulary bundle
      * @param extenedDescriptionBundlePrefix the prefix of the extended vocabulary bundle
      * @return a description bundle extension that is added to the given description bundle
      */
-    public DescriptionBundleExtension addDescriptionBundleExtension(DescriptionBundle bundle, String extenedDescriptionBundleURI, String extenedDescriptionBundlePrefix) {
-        final DescriptionBundleExtension extension = OmlWrite.addDescriptionBundleExtension(bundle, extenedDescriptionBundleURI, extenedDescriptionBundlePrefix);
+    public DescriptionBundleExtension addDescriptionBundleExtension(DescriptionBundle bundle, String extenedDescriptionBundleIri, SeparatorKind extenedDescriptionBundleSeparator, String extenedDescriptionBundlePrefix) {
+        final DescriptionBundleExtension extension = OmlWrite.addDescriptionBundleExtension(bundle, extenedDescriptionBundleIri, extenedDescriptionBundleSeparator, extenedDescriptionBundlePrefix);
         return extension;
     }
 
@@ -900,12 +907,13 @@ public class OmlBuilder {
      * Creates a description bundle inclusion and adds it to the given description bundle
      * 
      * @param bundle the context description bundle
-     * @param includedDescriptionURI the URI (or IRI) of the extended description
+     * @param includedDescriptionIri the IRI of the extended description
+     * @param includedDescriptionSeparator the separator of the extended description
      * @param includedDescriptionPrefix the prefix of the extended description
      * @return a description bundle inclusion that is added to the given description bundle
      */
-    public DescriptionBundleInclusion addDescriptionBundleInclusion(DescriptionBundle bundle, String includedDescriptionURI, String includedDescriptionPrefix) {
-        final DescriptionBundleInclusion inclusion = OmlWrite.addDescriptionBundleInclusion(bundle, includedDescriptionURI, includedDescriptionPrefix);
+    public DescriptionBundleInclusion addDescriptionBundleInclusion(DescriptionBundle bundle, String includedDescriptionIri, SeparatorKind includedDescriptionSeparator, String includedDescriptionPrefix) {
+        final DescriptionBundleInclusion inclusion = OmlWrite.addDescriptionBundleInclusion(bundle, includedDescriptionIri, includedDescriptionSeparator, includedDescriptionPrefix);
         return inclusion;
     }
 
@@ -915,12 +923,13 @@ public class OmlBuilder {
      * Creates a description bundle usage and adds it to the given description bundle
      * 
      * @param bundle the context description bundle
-     * @param usedVocabularyBundleURI the URI (or IRI) of the used vocabulary
+     * @param usedVocabularyBundleIri the IRI of the used vocabulary
+     * @param usedVocabularyBundleSeparator the separator of the used vocabulary
      * @param usedVocabularyBundlePrefix the prefix of the used vocabulary
      * @return a description bundle usage that is added to the given description bundle
      */
-    public DescriptionBundleUsage addDescriptionBundleUsage(DescriptionBundle bundle, String usedVocabularyBundleURI, String usedVocabularyBundlePrefix) {
-        final DescriptionBundleUsage usage = OmlWrite.addDescriptionBundleUsage(bundle, usedVocabularyBundleURI, usedVocabularyBundlePrefix);
+    public DescriptionBundleUsage addDescriptionBundleUsage(DescriptionBundle bundle, String usedVocabularyBundleIri, SeparatorKind usedVocabularyBundleSeparator, String usedVocabularyBundlePrefix) {
+        final DescriptionBundleUsage usage = OmlWrite.addDescriptionBundleUsage(bundle, usedVocabularyBundleIri, usedVocabularyBundleSeparator, usedVocabularyBundlePrefix);
         return usage;
     }
     

@@ -80,7 +80,7 @@ public class DescriptionBundleUsageItemProvider extends DescriptionBundleImportI
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((DescriptionBundleUsage)object).getUri();
+		String label = ((DescriptionBundleUsage)object).getIri();
 		return label == null || label.length() == 0 ?
 			getString("_UI_DescriptionBundleUsage_type") :
 			getString("_UI_DescriptionBundleUsage_type") + " " + label;

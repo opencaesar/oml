@@ -38,7 +38,7 @@ class OmlImportedNamespaceAwareLocalScopeProvider extends ImportedNamespaceAware
 
 	override String getImportedNamespace(EObject object) {
 		if (object instanceof Import) {
-			object.effectivePrefix
+			object.getPrefix()
 		}
 	}
 

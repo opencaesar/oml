@@ -138,10 +138,11 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 			public String getText(Object object) {
 				VocabularyExtension extension = (VocabularyExtension)object;
 				StringBuilder label = new StringBuilder("extends <");
-				if (extension.getUri() != null) {
-					label.append(extension.getUri());
+				if (extension.getIri() != null) {
+					label.append(extension.getIri());
 				}
 				label.append(">");
+				label.append(" with ").append(extension.getSeparator());
 				if (extension.getPrefix() != null) {
 					label.append(" as ").append(extension.getPrefix());
 				}
@@ -158,10 +159,11 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 			public String getText(Object object) {
 				VocabularyUsage usage = (VocabularyUsage)object;
 				StringBuilder label = new StringBuilder("uses <");
-				if (usage.getUri() != null) {
-					label.append(usage.getUri());
+				if (usage.getIri() != null) {
+					label.append(usage.getIri());
 				}
 				label.append(">");
+				label.append(" with ").append(usage.getSeparator());
 				if (usage.getPrefix() != null) {
 					label.append(" as ").append(usage.getPrefix());
 				}
@@ -178,10 +180,11 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 			public String getText(Object object) {
 				VocabularyBundleExtension extension = (VocabularyBundleExtension)object;
 				StringBuilder label = new StringBuilder("extends <");
-				if (extension.getUri() != null) {
-					label.append(extension.getUri());
+				if (extension.getIri() != null) {
+					label.append(extension.getIri());
 				}
 				label.append(">");
+				label.append(" with ").append(extension.getSeparator());
 				if (extension.getPrefix() != null) {
 					label.append(" as ").append(extension.getPrefix());
 				}
@@ -198,10 +201,11 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 			public String getText(Object object) {
 				VocabularyBundleInclusion inclusion = (VocabularyBundleInclusion)object;
 				StringBuilder label = new StringBuilder("includes <");
-				if (inclusion.getUri() != null) {
-					label.append(inclusion.getUri());
+				if (inclusion.getIri() != null) {
+					label.append(inclusion.getIri());
 				}
 				label.append(">");
+				label.append(" with ").append(inclusion.getSeparator());
 				if (inclusion.getPrefix() != null) {
 					label.append(" as ").append(inclusion.getPrefix());
 				}
@@ -260,10 +264,11 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 			public String getText(Object object) {
 				DescriptionExtension extension = (DescriptionExtension)object;
 				StringBuilder label = new StringBuilder("extends <");
-				if (extension.getUri() != null) {
-					label.append(extension.getUri());
+				if (extension.getIri() != null) {
+					label.append(extension.getIri());
 				}
 				label.append(">");
+				label.append(" with ").append(extension.getSeparator());
 				if (extension.getPrefix() != null) {
 					label.append(" as ").append(extension.getPrefix());
 				}
@@ -280,10 +285,11 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 			public String getText(Object object) {
 				DescriptionUsage usage = (DescriptionUsage)object;
 				StringBuilder label = new StringBuilder("uses <");
-				if (usage.getUri() != null) {
-					label.append(usage.getUri());
+				if (usage.getIri() != null) {
+					label.append(usage.getIri());
 				}
 				label.append(">");
+				label.append(" with ").append(usage.getSeparator());
 				if (usage.getPrefix() != null) {
 					label.append(" as ").append(usage.getPrefix());
 				}
@@ -300,10 +306,11 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 			public String getText(Object object) {
 				DescriptionBundleExtension extension = (DescriptionBundleExtension)object;
 				StringBuilder label = new StringBuilder("extends <");
-				if (extension.getUri() != null) {
-					label.append(extension.getUri());
+				if (extension.getIri() != null) {
+					label.append(extension.getIri());
 				}
 				label.append(">");
+				label.append(" with ").append(extension.getSeparator());
 				if (extension.getPrefix() != null) {
 					label.append(" as ").append(extension.getPrefix());
 				}
@@ -320,10 +327,11 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 			public String getText(Object object) {
 				DescriptionBundleInclusion inclusion = (DescriptionBundleInclusion)object;
 				StringBuilder label = new StringBuilder("includes <");
-				if (inclusion.getUri() != null) {
-					label.append(inclusion.getUri());
+				if (inclusion.getIri() != null) {
+					label.append(inclusion.getIri());
 				}
 				label.append(">");
+				label.append(" with ").append(inclusion.getSeparator());
 				if (inclusion.getPrefix() != null) {
 					label.append(" as ").append(inclusion.getPrefix());
 				}
@@ -340,10 +348,11 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 			public String getText(Object object) {
 				DescriptionBundleUsage usage = (DescriptionBundleUsage)object;
 				StringBuilder label = new StringBuilder("uses <");
-				if (usage.getUri() != null) {
-					label.append(usage.getUri());
+				if (usage.getIri() != null) {
+					label.append(usage.getIri());
 				}
 				label.append(">");
+				label.append(" with ").append(usage.getSeparator());
 				if (usage.getPrefix() != null) {
 					label.append(" as ").append(usage.getPrefix());
 				}

@@ -126,7 +126,7 @@ abstract class Ontology extends IdentifiedElement {
     /*
      * The separator character that follows this ontology's IRI in the namespace
      */
-    SeparatorKind[1] separator
+    SeparatorKind[1] separator = "#"
     /*
      * The prefix of this ontology's namespace
      */
@@ -984,19 +984,23 @@ abstract class DescriptionStatement extends Statement {
 }
 
 /*
- * Import is an element owned by an ontology to specify that another ontology is imported in its context.
- * The imported ontology is specified by a URI and an optional prefix that overrides that of the imported ontology.
+ * Import is an element owned by an ontology to specify that it imports another ontology.
+ * The imported ontology is specified by its IRI, separator charaxter, and local prefix.
  */
 @Bikeshed(heading="Ontologies")
 abstract class Import extends AnnotatedElement {
     /*
-     * The URI of the imported ontology
+     * The IRI of the imported ontology
      */
-    String[1] uri
+    String[1] iri
     /*
-     * The prefix that overrides the imported ontology's default prefix
+     * The separator character of the imported ontology's namespace  
      */
-    String prefix
+    SeparatorKind[1] separator = "#" 
+    /*
+     * The local prefix of the imported ontology's namespace
+     */
+    String[1] prefix
 }
 
 /*

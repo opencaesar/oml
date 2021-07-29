@@ -45,15 +45,16 @@ public class OmlXMIURIHandler extends URIHandlerImpl {
 		String[] qname = uri.toString().split(":");
 		if (!uri.toString().contains("/") && qname.length == 2) {// abbreviated iri
 			var ontology = OmlRead.getOntology(resource);
-			var nsMap = OmlRead.getImportNamespaces(ontology);
-			String namespace = nsMap.get(qname[0]);
-			if (namespace != null) {
-				URI resolvedUri = OmlRead.getResolvedUri(resource, URI.createURI(namespace));
+			var _import = OmlRead.getImports(ontology).stream()
+				.filter(i -> qname[0].equals(i.getPrefix()))
+				.findFirst().orElse(null);
+			if (_import != null) {
+				URI resolvedUri = OmlRead.getResolvedUri(resource, _import.getIri());
 				if (resolvedUri != null) {
-					return resolvedUri.appendFragment(qname[1]);
+					return URI.createURI(resolvedUri.toString() + _import.getSeparator() + qname[1]);
 				}
 			}
-			throw new RuntimeException("Uri '" + uri + "' cannot be resolved");
+			throw new RuntimeException("URI '" + uri + "' cannot be resolved");
 		}
 		return super.resolve(uri);
 	}

@@ -162,8 +162,8 @@ public final class OmlValidator2 {
     protected boolean validateVocabularyExtensionURI(VocabularyExtension object, DiagnosticChain diagnostics, Map<Object, Object> context) {
         if (!(OmlRead.getImportedOntology(object) instanceof Vocabulary)) {
             return report(Diagnostic.ERROR, diagnostics, object,
-                "URI <"+object.getUri()+"> could not be resolved to a vocabulary", 
-                OmlPackage.Literals.IMPORT__URI);
+                "IRI <"+object.getIri()+"> could not be resolved to a vocabulary", 
+                OmlPackage.Literals.IMPORT__IRI);
         }
         return true;
     }
@@ -181,8 +181,8 @@ public final class OmlValidator2 {
     protected boolean validateVocabularyUsageURI(VocabularyUsage object, DiagnosticChain diagnostics, Map<Object, Object> context) {
         if (!(OmlRead.getImportedOntology(object) instanceof DescriptionBox)) {
             return report(Diagnostic.ERROR, diagnostics, object,
-                "URI <"+object.getUri()+"> could not be resolved to an description nor an description bundle", 
-                OmlPackage.Literals.IMPORT__URI);
+                "IRI <"+object.getIri()+"> could not be resolved to an description nor an description bundle", 
+                OmlPackage.Literals.IMPORT__IRI);
         }
         return true;
     }
@@ -200,8 +200,8 @@ public final class OmlValidator2 {
     protected boolean validateVocabularyBundleExtensionURI(VocabularyBundleExtension object, DiagnosticChain diagnostics, Map<Object, Object> context) {
         if (!(OmlRead.getImportedOntology(object) instanceof VocabularyBundle)) {
             return report(Diagnostic.ERROR, diagnostics, object,
-                "URI <"+object.getUri()+"> could not be resolved to a vocabulary bundle", 
-                OmlPackage.Literals.IMPORT__URI);
+                "IRI <"+object.getIri()+"> could not be resolved to a vocabulary bundle", 
+                OmlPackage.Literals.IMPORT__IRI);
         }
         return true;
     }
@@ -219,8 +219,8 @@ public final class OmlValidator2 {
     protected boolean validateVocabularyBundleInclusionURI(VocabularyBundleInclusion object, DiagnosticChain diagnostics, Map<Object, Object> context) {
         if (!(OmlRead.getImportedOntology(object) instanceof Vocabulary)) {
             return report(Diagnostic.ERROR, diagnostics, object,
-                "URI <"+object.getUri()+"> could not be resolved to a vocabulary", 
-                OmlPackage.Literals.IMPORT__URI);
+                "IRI <"+object.getIri()+"> could not be resolved to a vocabulary", 
+                OmlPackage.Literals.IMPORT__IRI);
         }
         return true;
     }
@@ -238,8 +238,8 @@ public final class OmlValidator2 {
     protected boolean validateDescriptionExtensionURI(DescriptionExtension object, DiagnosticChain diagnostics, Map<Object, Object> context) {
         if (!(OmlRead.getImportedOntology(object) instanceof Description)) {
             return report(Diagnostic.ERROR, diagnostics, object,
-                "URI <"+object.getUri()+"> could not be resolved to an description", 
-                OmlPackage.Literals.IMPORT__URI);
+                "IRI <"+object.getIri()+"> could not be resolved to an description", 
+                OmlPackage.Literals.IMPORT__IRI);
         }
         return true;
     }
@@ -257,8 +257,8 @@ public final class OmlValidator2 {
     protected boolean validateDescriptionUsageURI(DescriptionUsage object, DiagnosticChain diagnostics, Map<Object, Object> context) {
         if (!(OmlRead.getImportedOntology(object) instanceof VocabularyBox)) {
             return report(Diagnostic.ERROR, diagnostics, object,
-                "URI <"+object.getUri()+"> could not be resolved to a vocabulary nor a vocabulary bundle", 
-                OmlPackage.Literals.IMPORT__URI);
+                "IRI <"+object.getIri()+"> could not be resolved to a vocabulary nor a vocabulary bundle", 
+                OmlPackage.Literals.IMPORT__IRI);
         }
         return true;
     }
@@ -276,8 +276,8 @@ public final class OmlValidator2 {
     protected boolean validateDescriptionBundleExtensionURI(DescriptionBundleExtension object, DiagnosticChain diagnostics, Map<Object, Object> context) {
         if (!(OmlRead.getImportedOntology(object) instanceof DescriptionBundle)) {
             return report(Diagnostic.ERROR, diagnostics, object,
-                "URI <"+object.getUri()+"> could not be resolved to an description bundle", 
-                OmlPackage.Literals.IMPORT__URI);
+                "IRI <"+object.getIri()+"> could not be resolved to an description bundle", 
+                OmlPackage.Literals.IMPORT__IRI);
         }
         return true;
     }
@@ -295,8 +295,8 @@ public final class OmlValidator2 {
     protected boolean validateDescriptionBundleInclusionURI(DescriptionBundleInclusion object, DiagnosticChain diagnostics, Map<Object, Object> context) {
         if (!(OmlRead.getImportedOntology(object) instanceof Description)) {
             return report(Diagnostic.ERROR, diagnostics, object,
-                "URI <"+object.getUri()+"> could not be resolved to an description", 
-                OmlPackage.Literals.IMPORT__URI);
+                "IRI <"+object.getIri()+"> could not be resolved to an description", 
+                OmlPackage.Literals.IMPORT__IRI);
         }
         return true;
     }
@@ -314,8 +314,8 @@ public final class OmlValidator2 {
     protected boolean validateDescriptionBundleUsageURI(DescriptionBundleUsage object, DiagnosticChain diagnostics, Map<Object, Object> context) {
         if (!(OmlRead.getImportedOntology(object) instanceof VocabularyBundle)) {
             return report(Diagnostic.ERROR, diagnostics, object,
-                "URI <"+object.getUri()+"> could not be resolved to a vocabulary bundle", 
-                OmlPackage.Literals.IMPORT__URI);
+                "IRI <"+object.getIri()+"> could not be resolved to a vocabulary bundle", 
+                OmlPackage.Literals.IMPORT__IRI);
         }
         return true;
     }

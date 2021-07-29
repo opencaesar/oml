@@ -80,7 +80,7 @@ public class DescriptionBundleInclusionItemProvider extends DescriptionBundleImp
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((DescriptionBundleInclusion)object).getUri();
+		String label = ((DescriptionBundleInclusion)object).getIri();
 		return label == null || label.length() == 0 ?
 			getString("_UI_DescriptionBundleInclusion_type") :
 			getString("_UI_DescriptionBundleInclusion_type") + " " + label;

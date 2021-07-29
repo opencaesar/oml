@@ -674,11 +674,26 @@ public final class OmlRead {
      * 
      * @param _import the given import
      * @return the prefix override specified by the given import
-     * @deprecated use {@link OmlRead#getEffectivePrefix(Import)} instead
+     * @deprecated use {@link Import#getPrefix()} instead
      */
     @Deprecated(since = "0.9.0", forRemoval = true)
     public static String getImportPrefix(Import _import) {
-        return getEffectivePrefix(_import);
+    	return _import.getPrefix();
+    }
+    
+    /**
+     * Gets the effective prefix implied by the given import
+     * 
+     * This might be the import's prefix override if specified, 
+     * otherwise it is the imported ontology's prefix
+     * 
+     * @param _import the given import
+     * @return the prefix override specified by the given import
+     * @deprecated use {@link Import#getPrefix()} instead
+     */
+    @Deprecated(since = "1.0.0", forRemoval = true)
+    public static String getEffectivePrefix(Import _import) {
+    	return _import.getPrefix();
     }
     
     /**
@@ -694,7 +709,7 @@ public final class OmlRead {
     }
     
     /**
-     * Gets the URI that results from resolving the given import's uri
+     * Gets the URI that results from resolving the given import's IRI
      * 
      * @param _import the given import
      * @return the resolved URI of the given import
@@ -1457,6 +1472,8 @@ public final class OmlRead {
     
     /**
      * Get an ontology with the given prefix in the given resource set
+     * 
+     * If more than one ontology has the same prefix, one of them is returned randomly
      *  
      * @param resourceSet The resource set to look for an ontology in
      * @param prefix The prefix of the ontology
@@ -1554,15 +1571,14 @@ public final class OmlRead {
     }
     
     /**
-     * Resolves the given (logical or physical) uri in the context of the given resource.
-     * (The physical uri can be relative or absolute)
+     * Resolves the given logical Iri in the context of the given resource.
      * 
      * @param resource The resource to use as context of uri resolution
-     * @param uri The (logical or physical) uri to resolve
+     * @param iri The logical iri to resolve
      * @return The resolved URI
      */
-    public static URI getResolvedUri(Resource resource, URI uri) {
-        if (resource == null || uri == null || uri.isEmpty()) {
+    public static URI getResolvedUri(Resource resource, String iri) {
+        if (resource == null || iri == null || iri.isEmpty()) {
             return null;
         }
         final ResourceSet rs = resource.getResourceSet();
@@ -1573,7 +1589,7 @@ public final class OmlRead {
         if (resolver == null) {
             return null;
         }
-        return resolver.resolve(resource, uri);
+        return resolver.resolve(resource, iri);
     }
     
     //-------------------------------------------------
@@ -1840,30 +1856,10 @@ public final class OmlRead {
      */
     public static Map<String, String> getImportPrefixes(Ontology ontology) {
         final Map<String, String> map = new LinkedHashMap<>();
-        getAllImports(ontology).forEach(i -> {
-            if (!map.containsKey(getImportedNamespace(i))) {
-                map.put(getImportedNamespace(i), getEffectivePrefix(i));
-            }
-        });
+        getImports(ontology).forEach(i -> map.put(getImportedNamespace(i), i.getPrefix()));
         return map;
     }
     
-    /**
-     * Gets a map from import prefixes to import namespaces in the given ontology
-     * 
-     * @param ontology the given ontology
-     * @return a map from import prefixes to import namespaces 
-     */
-    public static Map<String, String> getImportNamespaces(Ontology ontology) {
-        final Map<String, String> map = new LinkedHashMap<>();
-        getAllImports(ontology).forEach(i -> {
-            if (!map.containsKey(getImportedNamespace(i))) {
-                map.put(getEffectivePrefix(i), getImportedNamespace(i));
-            }
-        });
-        return map;
-    }
-
     /**
      * Gets the prefix of a given ontology imported by a context ontology
      * 
@@ -1934,7 +1930,7 @@ public final class OmlRead {
      */
     public static Ontology getImportedOntologyByPrefix(Ontology ontology, String prefix) {
         return getAllImports(ontology).stream()
-            .filter(i -> getEffectivePrefix(i).equals(prefix))
+            .filter(i -> prefix.equals(i.getPrefix()))
             .map(i -> getImportedOntology(i))
             .findFirst()
             .orElse(null);
@@ -2000,39 +1996,21 @@ public final class OmlRead {
     // Import
     
     /**
-     * Gets the effective prefix implied by the given import
-     * 
-     * This might be the import's prefix override if specified, 
-     * otherwise it is the imported ontology's prefix
-     * 
-     * @param _import the given import
-     * @return the prefix override specified by the given import
-     */
-    public static String getEffectivePrefix(Import _import) {
-        if (_import.getPrefix() != null) {
-            return _import.getPrefix();
-        } else {
-            Ontology ontology = getImportedOntology(_import);
-            return (ontology != null) ? ontology.getPrefix() : null;
-        }
-    }
-    
-    /**
-     * Gets the URI that results from resolving the given import's uri
+     * Gets the URI that results from resolving the given import's IRI
      * 
      * @param _import the given import
      * @return the resolved URI of the given import
      */
     public static URI getResolvedUri(Import _import) {
-        if (_import.getUri() == null || _import.getUri().isEmpty()) {
+        if (_import.getIri() == null || _import.getIri().isEmpty()) {
             return null;
         }
-        URI importUri = URI.createURI(_import.getUri());
+        String iri = _import.getIri();
         final Resource r = _import.eResource();
         if (r == null) {
             return null;
         }
-        return getResolvedUri(r, importUri);
+        return getResolvedUri(r, iri);
     }
     
     /**
@@ -2042,8 +2020,7 @@ public final class OmlRead {
      * @return the namespace of the imported ontology
      */
     public static String getImportedNamespace(Import _import) {
-        Ontology ontology = getImportedOntology(_import);
-        return (ontology != null) ? ontology.getNamespace() : null;
+        return _import.getIri()+_import.getSeparator();
     }
     
     /**

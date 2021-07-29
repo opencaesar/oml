@@ -53,14 +53,14 @@ VocabularyBox:
 
 Vocabulary:
 	ownedAnnotations+=Annotation*
-	'vocabulary' iri=IRI 'with' separator=SeparatorKind 'as' prefix=ID  '{'
+	'vocabulary' iri=IRI ('with' separator=SeparatorKind)? 'as' prefix=ID  '{'
 		ownedImports+=VocabularyImport*
 		ownedStatements+=VocabularyStatement*
 	'}';
 
 VocabularyBundle:
 	ownedAnnotations+=Annotation*
-	'vocabulary' 'bundle' iri=IRI 'with' separator=SeparatorKind 'as' prefix=ID '{'
+	'vocabulary' 'bundle' iri=IRI ('with' separator=SeparatorKind)? 'as' prefix=ID '{'
 		ownedImports+=VocabularyBundleImport*
 	'}';
 
@@ -70,14 +70,14 @@ DescriptionBox:
 	
 Description:
 	ownedAnnotations+=Annotation*
-	'description' iri=IRI 'with' separator=SeparatorKind 'as' prefix=ID '{'
+	'description' iri=IRI ('with' separator=SeparatorKind)? 'as' prefix=ID '{'
 		ownedImports+=DescriptionImport*
 		ownedStatements+=DescriptionStatement*
 	'}';
 
 DescriptionBundle:
 	ownedAnnotations+=Annotation*
-	'description' 'bundle' iri=IRI 'with' separator=SeparatorKind 'as' prefix=ID '{'
+	'description' 'bundle' iri=IRI ('with' separator=SeparatorKind)? 'as' prefix=ID '{'
 		ownedImports+=DescriptionBundleImport*
 	'}';
 
@@ -381,11 +381,11 @@ VocabularyImport:
 
 VocabularyExtension:
 	ownedAnnotations+=Annotation*
-	'extends' uri=IRI ('as' prefix=ID)?;
+	'extends' iri=IRI ('with' separator=SeparatorKind)? 'as' prefix=ID;
     	
 VocabularyUsage:
 	ownedAnnotations+=Annotation*
-	'uses' uri=IRI ('as' prefix=ID)?;
+	'uses' iri=IRI ('with' separator=SeparatorKind)? 'as' prefix=ID;
     	
 VocabularyBundleImport:
 	VocabularyBundleExtension |
@@ -393,11 +393,11 @@ VocabularyBundleImport:
 
 VocabularyBundleInclusion:
 	ownedAnnotations+=Annotation*
-	'includes' uri=IRI ('as' prefix=ID)?;
+	'includes' iri=IRI ('with' separator=SeparatorKind)? 'as' prefix=ID;
 
 VocabularyBundleExtension:
 	ownedAnnotations+=Annotation*
-	'extends' uri=IRI ('as' prefix=ID)?;
+	'extends' iri=IRI ('with' separator=SeparatorKind)? 'as' prefix=ID;
 
 DescriptionImport:
 	DescriptionExtension |
@@ -405,11 +405,11 @@ DescriptionImport:
 
 DescriptionUsage:
 	ownedAnnotations+=Annotation*
-	'uses' uri=IRI ('as' prefix=ID)?;
+	'uses' iri=IRI ('with' separator=SeparatorKind)? 'as' prefix=ID;
 
 DescriptionExtension:
 	ownedAnnotations+=Annotation*
-	'extends' uri=IRI ('as' prefix=ID)?;
+	'extends' iri=IRI ('with' separator=SeparatorKind)? 'as' prefix=ID;
 
 DescriptionBundleImport:
 	DescriptionBundleExtension |
@@ -418,15 +418,15 @@ DescriptionBundleImport:
 
 DescriptionBundleInclusion:
 	ownedAnnotations+=Annotation*
-	'includes' uri=IRI ('as' prefix=ID)?;
+	'includes' iri=IRI ('with' separator=SeparatorKind)? 'as' prefix=ID;
 
 DescriptionBundleExtension:
 	ownedAnnotations+=Annotation*
-	'extends' uri=IRI ('as' prefix=ID)?;
+	'extends' iri=IRI ('with' separator=SeparatorKind)? 'as' prefix=ID;
 
 DescriptionBundleUsage:
 	ownedAnnotations+=Annotation*
-	'uses' uri=IRI ('as' prefix=ID)?;
+	'uses' iri=IRI ('with' separator=SeparatorKind)? 'as' prefix=ID;
 
 Axiom:
 	SpecializationAxiom |
