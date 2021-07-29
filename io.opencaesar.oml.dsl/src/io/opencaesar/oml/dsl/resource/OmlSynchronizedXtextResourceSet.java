@@ -5,8 +5,9 @@ import org.eclipse.xtext.resource.SynchronizedXtextResourceSet;
 
 public class OmlSynchronizedXtextResourceSet extends SynchronizedXtextResourceSet {
 
-    public OmlSynchronizedXtextResourceSet() {
-        super();
-        eAdapters().add(new ECrossReferenceAdapter());
-    }
+	public OmlSynchronizedXtextResourceSet() {
+		super();
+		eAdapters().add(new ECrossReferenceAdapter());
+	}
+
 }

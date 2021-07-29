@@ -5,7 +5,7 @@ import org.eclipse.xtext.service.AbstractGenericModule
 import org.eclipse.xtext.ui.resource.IResourceSetInitializer
 
 /*
- * This is used by to contribute to shared xtext UI resources 
+ * This is used to contribute to shared xtext UI resources 
  */
 class OmlSharedUiModule extends AbstractGenericModule {
 	
