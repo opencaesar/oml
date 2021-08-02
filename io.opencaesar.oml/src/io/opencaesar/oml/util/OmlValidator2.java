@@ -46,9 +46,7 @@ import io.opencaesar.oml.DescriptionUsage;
 import io.opencaesar.oml.Element;
 import io.opencaesar.oml.Entity;
 import io.opencaesar.oml.EnumeratedScalar;
-import io.opencaesar.oml.EnumeratedScalarReference;
 import io.opencaesar.oml.FacetedScalar;
-import io.opencaesar.oml.FacetedScalarReference;
 import io.opencaesar.oml.FeaturePredicate;
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.RelationCardinalityRestrictionAxiom;
@@ -539,7 +537,11 @@ public final class OmlValidator2 {
     protected boolean validateSpecializationAxiomSpecializedTermKind(SpecializationAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
         final SpecializableTerm superTerm = OmlRead.getSuperTerm(object);
         final SpecializableTerm subTerm = OmlRead.getSubTerm(object);
-        if (superTerm != null && subTerm != null) {
+        if (superTerm == subTerm) {
+            return report(Diagnostic.WARNING, diagnostics, object,
+	                "Term "+superTerm.getAbbreviatedIri()+" cannot specialize itself", 
+	                OmlPackage.Literals.SPECIALIZATION_AXIOM__SPECIALIZED_TERM);
+        } else if (superTerm != null && subTerm != null) {
 	        final EClass superEClass = superTerm.eClass();
 	        final EClass subEClass = subTerm.eClass();
 	        if (!((OmlPackage.Literals.ASPECT == superEClass && OmlPackage.Literals.ENTITY.isSuperTypeOf(subEClass)) ||
@@ -556,7 +558,7 @@ public final class OmlValidator2 {
     // Faceted Scalar
     
     /**
-     * Checks that a non-standard faceted scalar has a single supertype
+     * Checks the inheritance rules of faceted scalars
      * 
      * @param object The faceted scalar to check
      * @param diagnostics The validation diagnostics
@@ -564,48 +566,39 @@ public final class OmlValidator2 {
      * @return True if the rules is satisfied; False otherwise
      */
     protected boolean validateFacetedScalarSupertype(FacetedScalar object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-        final var ontologyIri = object.getOntology().getIri();
-    	// non-standard scalars
-        if (!ontologyIri.equals(OmlConstants.XSD_IRI) && 
-        	!ontologyIri.equals(OmlConstants.RDF_IRI) &&
-        	!ontologyIri.equals(OmlConstants.OWL_IRI)) {
-        	final var specializations = object.getOwnedSpecializations();
-        	if (specializations.isEmpty()) {
-                return report(Diagnostic.ERROR, diagnostics, object,
-                	"Faceted scalar "+object.getAbbreviatedIri()+" must specify a supertype", 
-    	            OmlPackage.Literals.MEMBER__NAME);
-        	} else if (specializations.size() > 1) {
-                return report(Diagnostic.ERROR, diagnostics, object,
-                	"Faceted scalar "+object.getAbbreviatedIri()+" can specify a single supertype only", 
-    	            OmlPackage.Literals.SPECIALIZABLE_TERM__OWNED_SPECIALIZATIONS);
+        if (object.getLanguage() != null ||
+        	object.getLength() != null ||
+            object.getMaxLength() != null ||
+        	object.getMinLength() != null ||
+        	object.getMaxExclusive() != null ||
+        	object.getMaxInclusive() != null ||
+        	object.getMinExclusive() != null ||
+        	object.getMinInclusive() != null) {
+        	var singleStandardGeneral = false;
+        	var specializations = object.getOwnedSpecializations();
+        	if (specializations.size() == 1) {
+        		var general = specializations.get(0).getSpecializedTerm();
+            	var ontologyIri = general.getOntology().getIri();
+            	singleStandardGeneral = ontologyIri.equals(OmlConstants.XSD_IRI) ||
+                    	ontologyIri.equals(OmlConstants.RDF_IRI) ||
+                    	ontologyIri.equals(OmlConstants.OWL_IRI);
         	}
-        }
-        return true;
-    }
-
-    /**
-     * Checks that a non-standard faceted scalar reference has no supertype
-     * 
-     * @param object The faceted scalar reference to check
-     * @param diagnostics The validation diagnostics
-     * @param context The object-to-object context map
-     * @return True if the rules is satisfied; False otherwise
-     */
-    protected boolean validateFacetedScalarReferenceSupertype(FacetedScalarReference object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-        final var scalar = object.getScalar();
-        if (scalar != null && !scalar.eIsProxy()) {
-        	final var ontologyIri = scalar.getOntology().getIri();
-	    	// non-standard scalars
-	        if (!ontologyIri.equals(OmlConstants.XSD_IRI) && 
-	        	!ontologyIri.equals(OmlConstants.RDF_IRI) &&
-	        	!ontologyIri.equals(OmlConstants.OWL_IRI)) {
-	        	final var specializations = object.getOwnedSpecializations();
-	        	if (!specializations.isEmpty()) {
-	                return report(Diagnostic.ERROR, diagnostics, object,
-	                	"Faceted scalar reference "+OmlRead.getAbbreviatedIri(object)+" cannot specify a supertype", 
-	                	OmlPackage.Literals.SPECIALIZABLE_TERM_REFERENCE__OWNED_SPECIALIZATIONS);
-	        	}
-	        }
+        	if (!singleStandardGeneral) {
+                return report(Diagnostic.ERROR, diagnostics, object,
+                	"Faceted scalar "+object.getAbbreviatedIri()+" with facets must specify a single standard supertype", 
+    	            OmlPackage.Literals.MEMBER__NAME);
+        	}
+        } else {
+        	var specializations = object.getOwnedSpecializations();
+        	var ontologyIri = object.getOntology().getIri();
+        	var standardScalar = ontologyIri.equals(OmlConstants.XSD_IRI) ||
+                	ontologyIri.equals(OmlConstants.RDF_IRI) ||
+                	ontologyIri.equals(OmlConstants.OWL_IRI);
+            if (!standardScalar && specializations.isEmpty()) {
+                return report(Diagnostic.ERROR, diagnostics, object,
+                	"Faceted scalar "+object.getAbbreviatedIri()+" is non-stanard hence must specify a supertype", 
+    	            OmlPackage.Literals.MEMBER__NAME);
+            }
         }
         return true;
     }
@@ -613,7 +606,7 @@ public final class OmlValidator2 {
     // Enumerated Scalar
 
     /**
-     * Checks an enumerated scalar's literals
+     * Checks an enumerated scalar's literals and supertype rules
      * 
      * @param object The enumerated scalar to check
      * @param diagnostics The validation diagnostics
@@ -621,32 +614,11 @@ public final class OmlValidator2 {
      * @return True if the rules is satisfied; False otherwise
      */
     protected boolean validateEnumeratedScalarLiterals(EnumeratedScalar object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-        if (object.getOwnedSpecializations().isEmpty() && object.getLiterals().isEmpty()) {
+    	if (object.getLiterals().isEmpty() && object.getOwnedSpecializations().isEmpty()) {
             return report(Diagnostic.ERROR, diagnostics, object,
-                "Enumerated scalar "+object.getAbbreviatedIri()+" must specify either some literals or a supertype", 
-                OmlPackage.Literals.SPECIALIZATION_AXIOM__SPECIALIZED_TERM);
-        } else if (!object.getOwnedSpecializations().isEmpty() && !object.getLiterals().isEmpty()) {
-            return report(Diagnostic.ERROR, diagnostics, object,
-                    "Enumerated scalar "+object.getAbbreviatedIri()+" with a supertype cannot specify literals", 
-                    OmlPackage.Literals.SPECIALIZATION_AXIOM__SPECIALIZED_TERM);
-        }
-        return true;
-    }
-
-    /**
-     * Checks an enumerated scalar reference has no supertype
-     * 
-     * @param object The enumerated scalar reference to check
-     * @param diagnostics The validation diagnostics
-     * @param context The object-to-object context map
-     * @return True if the rules is satisfied; False otherwise
-     */
-    protected boolean validateEnumeratedScalarReferebce(EnumeratedScalarReference object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-        if (!object.getOwnedSpecializations().isEmpty()) {
-            return report(Diagnostic.ERROR, diagnostics, object,
-                "Enumerated scalar reference "+OmlRead.getAbbreviatedIri(object)+" cannot specify a supertype", 
-            	OmlPackage.Literals.SPECIALIZABLE_TERM_REFERENCE__OWNED_SPECIALIZATIONS);
-        }
+                "Enumerated scalar "+object.getAbbreviatedIri()+" must specify literals or supertypes", 
+                OmlPackage.Literals.MEMBER__NAME);
+    	}
         return true;
     }
 
