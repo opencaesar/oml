@@ -2,7 +2,7 @@
 <feature
       id="io.opencaesar.oml.feature"
       label="%featureName"
-      version="0.9.2"
+      version="0.9.3"
       provider-name="%providerName">
 
    <description>
@@ -11,13 +11,6 @@
 
    <plugin
          id="io.opencaesar.oml"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.apache.xml.resolver"
          download-size="0"
          install-size="0"
          version="0.0.0"
