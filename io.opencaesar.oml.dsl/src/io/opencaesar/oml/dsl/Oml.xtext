@@ -33,14 +33,12 @@ Element:
 	Literal;
 
 Annotation:
-	'@' property=[AnnotationProperty|Ref] (value=Literal)?;
-	
+	'@' {Annotation} property=[AnnotationProperty|Ref]? value=Literal?;
+
 AnnotatedElement:
 	->IdentifiedElement |
-	->Instance |
-	->Import |
+	->NamedInstance |
 	->Axiom |
-	->Assertion |
 	->Predicate;
 
 IdentifiedElement:
@@ -227,7 +225,7 @@ Instance:
 	StructureInstance;
 	
 StructureInstance:
-	ownedAnnotations+=Annotation*
+	
 	type=[Structure|Ref] '['
 		ownedPropertyValues+=PropertyValueAssertion*
 	']';
@@ -380,11 +378,11 @@ VocabularyImport:
 	VocabularyUsage;
 
 VocabularyExtension:
-	ownedAnnotations+=Annotation*
+	
 	'extends' iri=IRI ('with' separator=SeparatorKind)? 'as' prefix=ID;
     	
 VocabularyUsage:
-	ownedAnnotations+=Annotation*
+	
 	'uses' iri=IRI ('with' separator=SeparatorKind)? 'as' prefix=ID;
     	
 VocabularyBundleImport:
@@ -392,11 +390,11 @@ VocabularyBundleImport:
 	VocabularyBundleInclusion;
 
 VocabularyBundleInclusion:
-	ownedAnnotations+=Annotation*
+	
 	'includes' iri=IRI ('with' separator=SeparatorKind)? 'as' prefix=ID;
 
 VocabularyBundleExtension:
-	ownedAnnotations+=Annotation*
+	
 	'extends' iri=IRI ('with' separator=SeparatorKind)? 'as' prefix=ID;
 
 DescriptionImport:
@@ -404,11 +402,11 @@ DescriptionImport:
 	DescriptionUsage;
 
 DescriptionUsage:
-	ownedAnnotations+=Annotation*
+	
 	'uses' iri=IRI ('with' separator=SeparatorKind)? 'as' prefix=ID;
 
 DescriptionExtension:
-	ownedAnnotations+=Annotation*
+	
 	'extends' iri=IRI ('with' separator=SeparatorKind)? 'as' prefix=ID;
 
 DescriptionBundleImport:
@@ -417,15 +415,15 @@ DescriptionBundleImport:
 	DescriptionBundleUsage;
 
 DescriptionBundleInclusion:
-	ownedAnnotations+=Annotation*
+	
 	'includes' iri=IRI ('with' separator=SeparatorKind)? 'as' prefix=ID;
 
 DescriptionBundleExtension:
-	ownedAnnotations+=Annotation*
+	
 	'extends' iri=IRI ('with' separator=SeparatorKind)? 'as' prefix=ID;
 
 DescriptionBundleUsage:
-	ownedAnnotations+=Annotation*
+	
 	'uses' iri=IRI ('with' separator=SeparatorKind)? 'as' prefix=ID;
 
 Axiom:
@@ -434,7 +432,7 @@ Axiom:
 	KeyAxiom;
 
 SpecializationAxiom:
-	ownedAnnotations+=Annotation*
+	
 	specializedTerm=[SpecializableTerm|Ref];
 	
 RestrictionAxiom:
@@ -509,11 +507,11 @@ TypeAssertion:
 	->RelationTypeAssertion;
 
 ConceptTypeAssertion:
-	ownedAnnotations+=Annotation*
+	
 	type=[Concept|Ref];
 
 RelationTypeAssertion:
-	ownedAnnotations+=Annotation*
+	
 	type=[RelationEntity|Ref];
 
 PropertyValueAssertion:
@@ -521,15 +519,15 @@ PropertyValueAssertion:
 	StructuredPropertyValueAssertion;
 
 ScalarPropertyValueAssertion:
-	ownedAnnotations+=Annotation*
+	
 	property=[ScalarProperty|Ref] value=Literal;
 
 StructuredPropertyValueAssertion:
-	ownedAnnotations+=Annotation*
+	
 	property=[StructuredProperty|Ref] value=StructureInstance;
 
 LinkAssertion:
-	ownedAnnotations+=Annotation*
+	
 	relation=[Relation|Ref] target=[NamedInstance|Ref];
 
 Predicate:
@@ -603,7 +601,7 @@ enum CardinalityRestrictionKind:
 
 //--------------
 
-Ref: 													ID (':' ID)? | IRI;
+Ref returns ecore::EString: 							ID | QNAME | IRI;
 
 Boolean returns ecore::EBoolean:						BOOLEAN_STR;
 
@@ -631,8 +629,10 @@ terminal STRING:										('"' (!('"'|'\\') | '\\'.)* '"') | ("'" (!("'"|'\\') |
 
 terminal IRI:											'<' (!('>'|' '))* '>';
 
-terminal ID:											'^'? (ALPHA|DIGIT|'_') (ALPHA|DIGIT|'_'|'-'|'.'|'$')*;
-	    
+terminal ID:											ID1;
+
+terminal QNAME:											ID1 ':' ID1;
+
 terminal ML_COMMENT: 									'/*' -> '*/';
  
 terminal SL_COMMENT:									'//' !('\n'|'\r')* ('\r'? '\n')?;
@@ -640,6 +640,8 @@ terminal SL_COMMENT:									'//' !('\n'|'\r')* ('\r'? '\n')?;
 terminal WS: 											(' '|'\t'|'\r'|'\n')+;
 
 //----------------------------
+
+terminal fragment ID1:									'^'? (ALPHA|DIGIT|'_') (ALPHA|DIGIT|'_'|'-'|'.'|'$')*;
 
 terminal fragment ALPHA:								'a'..'z'| 'A'..'Z';
 

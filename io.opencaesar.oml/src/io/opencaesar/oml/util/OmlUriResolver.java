@@ -28,10 +28,16 @@ import java.nio.file.WatchKey;
 import java.nio.file.WatchService;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
+import org.apache.xml.resolver.Catalog;
+import org.apache.xml.resolver.CatalogEntry;
 import org.eclipse.emf.common.CommonPlugin;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
@@ -41,13 +47,15 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 
+import com.google.common.io.Files;
+
 /**
  * The <B>Resolver</B> for OML ontology URIs
  * 
  * @author elaasar
  */
 final class OmlUriResolver implements Runnable {
-    
+
     /*
      * The singleton instance of the class
      */
@@ -155,7 +163,7 @@ final class OmlUriResolver implements Runnable {
         }
         return parents;
     }
-    
+        
     /**
      * Resolves the given logical IRI in context of the given resource 
      * 
@@ -189,7 +197,70 @@ final class OmlUriResolver implements Runnable {
         return resolvedUri;
     }
     
-    private URI resolveFromCatalog(ResourceSet rs, URI folderUri, String iri) {
+    public synchronized Set<URI> getVisibleResourceUris(Resource contextResource) {
+		final var uris = new LinkedHashSet<URI>();
+		
+        URI contextUri = (contextResource != null) ? contextResource.getURI() : null;
+        if (contextUri == null) {
+            return Collections.emptySet();
+        }
+        
+        URI folderUri = contextUri.trimSegments(1);
+
+        if (!catalogCache.containsKey(folderUri)) {
+            findCatalogs(catalogCache, folderUri);
+        }
+        
+        OmlCatalog catalog = catalogCache.get(folderUri);
+        if (catalog == null) {
+            return Collections.emptySet();
+        }
+		
+		var entryUris = new ArrayList<URI>();
+		for (CatalogEntry e : catalog.getEntries()) {
+			if (e.getEntryType() == Catalog.REWRITE_URI) { // only type of entry supported so far
+				var uri = URI.createURI(e.getEntryArg(1));
+				if (uri.hasTrailingPathSeparator()) {
+					uri = uri.trimSegments(1);
+				}
+				entryUris.add(uri);
+			}
+		}
+		
+		for (final URI entryUri : entryUris) {
+			var path = new File(CommonPlugin.asLocalURI(entryUri).toFileString());
+			if (path.isDirectory()) {
+				for (var file : getFiles(path)) {
+					String relative = path.toURI().relativize(file.toURI()).getPath();
+					uris.add(URI.createURI(entryUri+"/"+relative));
+				}
+			} else { // likely a file name with no extension
+				path = new File(path.toString()+"."+OmlConstants.OML_EXTENSION);
+				if (path.exists()) {
+					String relative = path.toURI().relativize(path.toURI()).getPath();
+					uris.add(URI.createURI(entryUri+"/"+relative));
+				}
+			}
+		}
+		return uris;
+	}
+
+    protected Set<File> getFiles(File folder) {
+		final var files = new HashSet<File>();
+		for (File file : folder.listFiles()) {
+			if (file.isFile()) {
+				var ext = Files.getFileExtension(file.toString());
+				if (OmlConstants.OML_EXTENSION.equals(ext)) {
+					files.add(file);
+				}
+			} else if (file.isDirectory()) {
+				files.addAll(getFiles(file));
+			}
+		}
+		return files;
+	}
+
+	private URI resolveFromCatalog(ResourceSet rs, URI folderUri, String iri) {
         if (!catalogCache.containsKey(folderUri)) {
             findCatalogs(catalogCache, folderUri);
         }

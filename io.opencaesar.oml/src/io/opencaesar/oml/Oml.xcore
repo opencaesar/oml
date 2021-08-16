@@ -651,11 +651,11 @@ class Rule extends Member, VocabularyStatement {
 }
 
 /*
- * Instance is an annotated element that represents an instance of a classifier. It can specify a set of values for the
+ * Instance is an element that represents an instance of a classifier. It can specify a set of values for the
  * classifier's (direct or inherited) properties.
  */
 @Bikeshed(heading="Instances")
-abstract class Instance extends AnnotatedElement {
+abstract class Instance extends Element {
     /*
      * The property value assertions specified by this instance
      */
@@ -988,7 +988,7 @@ abstract class DescriptionStatement extends Statement {
  * The imported ontology is specified by its IRI, separator charaxter, and local prefix.
  */
 @Bikeshed(heading="Ontologies")
-abstract class Import extends AnnotatedElement {
+abstract class Import extends Element {
     /*
      * The IRI of the imported ontology
      */
@@ -1374,10 +1374,10 @@ class KeyAxiom extends Axiom {
 }
 
 /*
- * Assertion is an annotated element that represents a statement about an instance in a description.
+ * Assertion is an element that represents a statement about an instance in a description.
  */
 @Bikeshed(heading="Assertions")
-abstract class Assertion extends AnnotatedElement {
+abstract class Assertion extends Element {
 }
 
 /*

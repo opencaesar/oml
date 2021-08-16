@@ -1592,6 +1592,21 @@ public final class OmlRead {
         return resolver.resolve(resource, iri);
     }
     
+    public static Set<URI> getVisibleResourceUris(Resource resource) {
+        if (resource == null) {
+            return Collections.emptySet();
+        }
+        final ResourceSet rs = resource.getResourceSet();
+        if (rs == null) {
+            return Collections.emptySet();
+        }
+        OmlUriResolver resolver = OmlUriResolver.get(rs);
+        if (resolver == null) {
+            return Collections.emptySet();
+        }
+        return resolver.getVisibleResourceUris(resource);
+    }
+    
     //-------------------------------------------------
     // COMMON
     //-------------------------------------------------

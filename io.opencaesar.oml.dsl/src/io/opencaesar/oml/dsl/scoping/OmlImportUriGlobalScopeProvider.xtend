@@ -34,14 +34,8 @@ class OmlImportUriGlobalScopeProvider extends ImportUriGlobalScopeProvider {
 	override protected LinkedHashSet<URI> getImportedUris(Resource resource) {
 		return cache.get(OmlImportUriGlobalScopeProvider.getSimpleName(), resource, new Provider<LinkedHashSet<URI>>() {
 			override get() {
-				val uniqueImportURIs = new LinkedHashSet<URI>(5)
-				OmlRead.getImports(OmlRead.getOntology(resource)).forEach[i |
-					var uri = OmlRead.getResolvedUri(resource, i.getIri())
-					if (uri !== null) {
-						uniqueImportURIs.add(uri)
-					}
-				]
-				return uniqueImportURIs
+				var uris = OmlRead.getVisibleResourceUris(resource)
+				return new LinkedHashSet<URI>(uris) 
 			}
 		});
 	}

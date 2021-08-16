@@ -49,10 +49,12 @@ import io.opencaesar.oml.EnumeratedScalar;
 import io.opencaesar.oml.FacetedScalar;
 import io.opencaesar.oml.FeaturePredicate;
 import io.opencaesar.oml.OmlPackage;
+import io.opencaesar.oml.Relation;
 import io.opencaesar.oml.RelationCardinalityRestrictionAxiom;
 import io.opencaesar.oml.RelationRangeRestrictionAxiom;
 import io.opencaesar.oml.RelationRestrictionAxiom;
 import io.opencaesar.oml.Scalar;
+import io.opencaesar.oml.ScalarProperty;
 import io.opencaesar.oml.ScalarPropertyCardinalityRestrictionAxiom;
 import io.opencaesar.oml.ScalarPropertyRangeRestrictionAxiom;
 import io.opencaesar.oml.ScalarPropertyRestrictionAxiom;
@@ -332,7 +334,8 @@ public final class OmlValidator2 {
      */
     protected boolean validateRelationRestrictionAxiomRelation(RelationRestrictionAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
         final Classifier restrictingClassifier = OmlRead.getRestrictingClassifier(object);
-        final Entity domainType = object.getRelation().getDomain();
+        final Relation relation = object.getRelation();
+        final Entity domainType = (relation!=null) ? relation.getDomain() : null;
         if (restrictingClassifier != null && domainType != null) {
 	        final Collection<SpecializableTerm> allGeneralTerms = OmlRead.closure(restrictingClassifier, true, t -> OmlSearch.findSuperTerms(t));
 	        if (!allGeneralTerms.stream().filter(t -> t == domainType).findAny().isPresent()) {
@@ -354,7 +357,8 @@ public final class OmlValidator2 {
      */
     protected boolean validateRelationRangeRestrictionAxiomRange(RelationRangeRestrictionAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
         final Entity restrictedRange = object.getRange();
-        final Entity rangeType = object.getRelation().getRange();
+        final Relation relation = object.getRelation();
+        final Entity rangeType = (relation!=null) ? relation.getRange() : null;
         if (restrictedRange != null && rangeType != null) {
 	        final Collection<SpecializableTerm> allGeneralEntities = OmlRead.closure(restrictedRange, true, t -> OmlSearch.findSuperTerms(t));
 	        if (!allGeneralEntities.stream().filter(t -> t == rangeType).findAny().isPresent()) {
@@ -376,7 +380,8 @@ public final class OmlValidator2 {
      */
     protected boolean validateRelationCardinalityRestrictionAxiomRange(RelationCardinalityRestrictionAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
         final Entity restrictedRange = object.getRange();
-        final Entity rangeType = object.getRelation().getRange();
+        final Relation relation = object.getRelation();
+        final Entity rangeType = (relation!=null) ? relation.getRange() : null;
         if (restrictedRange != null && rangeType != null) {
             final Collection<SpecializableTerm> allGeneralEntities = OmlRead.closure(restrictedRange, true, t -> OmlSearch.findSuperTerms(t));
             if (!allGeneralEntities.stream().filter(t -> t == rangeType).findAny().isPresent()) {
@@ -400,7 +405,8 @@ public final class OmlValidator2 {
      */
     protected boolean validateScalarPropertyRestrictionAxiomProperty(ScalarPropertyRestrictionAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
         final Classifier restrictingClassifier = OmlRead.getRestrictingClassifier(object);
-        final Classifier domainType = object.getProperty().getDomain();
+        final ScalarProperty property = object.getProperty();
+        final Classifier domainType = (property!=null) ? property.getDomain() : null;
         if (restrictingClassifier != null && domainType != null) {
 	        final Collection<SpecializableTerm> allGeneralTerms = OmlRead.closure(restrictingClassifier, true, t -> OmlSearch.findSuperTerms(t));
 	        if (!allGeneralTerms.stream().filter(t -> t == domainType).findAny().isPresent()) {
@@ -422,7 +428,8 @@ public final class OmlValidator2 {
      */
     protected boolean validateScalarPropertyRangeRestrictionAxiomRange(ScalarPropertyRangeRestrictionAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
         final Scalar restrictedRange = object.getRange();
-        final Scalar rangeType = object.getProperty().getRange();
+        final ScalarProperty property = object.getProperty();
+        final Scalar rangeType = (property!=null) ? property.getRange() : null;
         if (restrictedRange != null && rangeType != null) {
 	        final Collection<SpecializableTerm> allGeneralEntities = OmlRead.closure(restrictedRange, true, t -> OmlSearch.findSuperTerms(t));
 	        if (!allGeneralEntities.stream().filter(t -> t == rangeType).findAny().isPresent()) {
@@ -444,7 +451,8 @@ public final class OmlValidator2 {
      */
     protected boolean validateScalarPropertyCardinalityRestrictionAxiomRange(ScalarPropertyCardinalityRestrictionAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
         final Scalar restrictedRange = object.getRange();
-        final Scalar rangeType = object.getProperty().getRange();
+        final ScalarProperty property = object.getProperty();
+        final Scalar rangeType = (property!=null) ? property.getRange() : null;
         if (restrictedRange != null && rangeType != null) {
             final Collection<SpecializableTerm> allGeneralEntities = OmlRead.closure(restrictedRange, true, t -> OmlSearch.findSuperTerms(t));
             if (!allGeneralEntities.stream().filter(t -> t == rangeType).findAny().isPresent()) {
@@ -468,7 +476,8 @@ public final class OmlValidator2 {
      */
     protected boolean validateStructuredPropertyRestrictionAxiomProperty(StructuredPropertyRestrictionAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
         final Classifier restrictingClassifier = OmlRead.getRestrictingClassifier(object);
-        final Classifier domainType = object.getProperty().getDomain();
+        final StructuredProperty property = object.getProperty();
+        final Classifier domainType = (property!=null) ? property.getDomain() : null;
         if (restrictingClassifier != null && domainType != null) {
 	        final Collection<SpecializableTerm> allGeneralTerms = OmlRead.closure(restrictingClassifier, true, t -> OmlSearch.findSuperTerms(t));
 	        if (!allGeneralTerms.stream().filter(t -> t == domainType).findAny().isPresent()) {
@@ -490,7 +499,8 @@ public final class OmlValidator2 {
      */
     protected boolean validateStructuredPropertyRangeRestrictionAxiomRange(StructuredPropertyRangeRestrictionAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
         final Structure restrictedRange = object.getRange();
-        final Structure rangeType = object.getProperty().getRange();
+        final StructuredProperty property = object.getProperty();
+        final Structure rangeType = (property!=null) ? property.getRange() : null;
         if (restrictedRange != null && rangeType != null) {
 	        final Collection<SpecializableTerm> allGeneralEntities = OmlRead.closure(restrictedRange, true, t -> OmlSearch.findSuperTerms(t));
 	        if (!allGeneralEntities.stream().filter(t -> t == rangeType).findAny().isPresent()) {
@@ -512,7 +522,8 @@ public final class OmlValidator2 {
      */
     protected boolean validateStructuredPropertyCardinalityRestrictionAxiomRange(StructuredPropertyCardinalityRestrictionAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
         final Structure restrictedRange = object.getRange();
-        final Structure rangeType = object.getProperty().getRange();
+        final StructuredProperty property = object.getProperty();
+        final Structure rangeType = (property!=null) ? property.getRange() : null;
         if (restrictedRange != null && rangeType != null) {
             final Collection<SpecializableTerm> allGeneralEntities = OmlRead.closure(restrictedRange, true, t -> OmlSearch.findSuperTerms(t));
             if (!allGeneralEntities.stream().filter(t -> t == rangeType).findAny().isPresent()) {

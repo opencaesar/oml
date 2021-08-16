@@ -126,6 +126,7 @@ public class NamedInstanceItemProvider extends InstanceItemProvider {
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
+			childrenFeatures.add(OmlPackage.Literals.ANNOTATED_ELEMENT__OWNED_ANNOTATIONS);
 			childrenFeatures.add(OmlPackage.Literals.NAMED_INSTANCE__OWNED_LINKS);
 		}
 		return childrenFeatures;
@@ -174,6 +175,7 @@ public class NamedInstanceItemProvider extends InstanceItemProvider {
 			case OmlPackage.NAMED_INSTANCE__NAME:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
+			case OmlPackage.NAMED_INSTANCE__OWNED_ANNOTATIONS:
 			case OmlPackage.NAMED_INSTANCE__OWNED_LINKS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
@@ -191,6 +193,11 @@ public class NamedInstanceItemProvider extends InstanceItemProvider {
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+
+		newChildDescriptors.add
+			(createChildParameter
+				(OmlPackage.Literals.ANNOTATED_ELEMENT__OWNED_ANNOTATIONS,
+				 OmlFactory.eINSTANCE.createAnnotation()));
 
 		newChildDescriptors.add
 			(createChildParameter

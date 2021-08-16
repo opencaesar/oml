@@ -34,8 +34,8 @@ import org.eclipse.xtext.preferences.IPreferenceValuesProvider
 import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy
 import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.scoping.IGlobalScopeProvider
-import org.eclipse.xtext.scoping.IScopeProvider
 import org.eclipse.xtext.scoping.impl.ImportUriResolver
+import org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider
 
 /**	
  * Use this class to register components to be used at runtime / without the Equinox extension registry.	
@@ -56,7 +56,7 @@ class OmlRuntimeModule extends AbstractOmlRuntimeModule {
 		OmlImportUriGlobalScopeProvider
 	}
 
-	override Class<? extends IScopeProvider> bindIScopeProvider() {
+	def Class<? extends ImportedNamespaceAwareLocalScopeProvider> bindImportedNamespaceAwareLocalScopeProvider() {
 		OmlImportedNamespaceAwareLocalScopeProvider
 	}
 
@@ -75,4 +75,5 @@ class OmlRuntimeModule extends AbstractOmlRuntimeModule {
 	override Class<? extends XtextResourceSet> bindXtextResourceSet() {
 		OmlSynchronizedXtextResourceSet
 	}
+
 }

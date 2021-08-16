@@ -28,7 +28,6 @@ import io.opencaesar.oml.Concept
 import io.opencaesar.oml.ConceptInstance
 import io.opencaesar.oml.ConceptInstanceReference
 import io.opencaesar.oml.ConceptReference
-import io.opencaesar.oml.ConceptTypeAssertion
 import io.opencaesar.oml.Description
 import io.opencaesar.oml.DescriptionBundle
 import io.opencaesar.oml.DescriptionBundleExtension
@@ -56,7 +55,6 @@ import io.opencaesar.oml.RelationInstanceReference
 import io.opencaesar.oml.RelationRangeRestrictionAxiom
 import io.opencaesar.oml.RelationReference
 import io.opencaesar.oml.RelationTargetRestrictionAxiom
-import io.opencaesar.oml.RelationTypeAssertion
 import io.opencaesar.oml.ReverseRelation
 import io.opencaesar.oml.Rule
 import io.opencaesar.oml.RuleReference
@@ -311,7 +309,6 @@ class OmlFormatter extends AbstractFormatter2 {
 	}
 
 	def dispatch void format(StructureInstance instance, extension IFormattableDocument document) {
-		instance.ownedAnnotations.forEach[format.append[newLine]]
 		instance.formatBrackets(document)
 		instance.ownedPropertyValues.forEach[format.prepend[newLine]]
 	}
@@ -431,66 +428,57 @@ class OmlFormatter extends AbstractFormatter2 {
 	}
 
 	def dispatch void format(VocabularyExtension _extension, extension IFormattableDocument document) {
-		_extension.ownedAnnotations.forEach[format.append[newLine]]
-		_extension.regionFor.keyword(vocabularyExtensionAccess.extendsKeyword_1).append[oneSpace]
-		_extension.regionFor.keyword(vocabularyExtensionAccess.withKeyword_3_0).append[oneSpace]
-		_extension.regionFor.keyword(vocabularyExtensionAccess.asKeyword_4).append[oneSpace]
+		_extension.regionFor.keyword(vocabularyExtensionAccess.extendsKeyword_0).append[oneSpace]
+		_extension.regionFor.keyword(vocabularyExtensionAccess.withKeyword_2_0).append[oneSpace]
+		_extension.regionFor.keyword(vocabularyExtensionAccess.asKeyword_3).append[oneSpace]
 	}
 
 	def dispatch void format(VocabularyUsage usage, extension IFormattableDocument document) {
-		usage.ownedAnnotations.forEach[format.append[newLine]]
-		usage.regionFor.keyword(vocabularyUsageAccess.usesKeyword_1).append[oneSpace]
-		usage.regionFor.keyword(vocabularyUsageAccess.withKeyword_3_0).append[oneSpace]
-		usage.regionFor.keyword(vocabularyUsageAccess.asKeyword_4).append[oneSpace]
+		usage.regionFor.keyword(vocabularyUsageAccess.usesKeyword_0).append[oneSpace]
+		usage.regionFor.keyword(vocabularyUsageAccess.withKeyword_2_0).append[oneSpace]
+		usage.regionFor.keyword(vocabularyUsageAccess.asKeyword_3).append[oneSpace]
 	}
 
 	def dispatch void format(VocabularyBundleExtension _extension, extension IFormattableDocument document) {
-		_extension.ownedAnnotations.forEach[format.append[newLine]]
-		_extension.regionFor.keyword(vocabularyBundleExtensionAccess.extendsKeyword_1).append[oneSpace]
-		_extension.regionFor.keyword(vocabularyBundleExtensionAccess.withKeyword_3_0).append[oneSpace]
-		_extension.regionFor.keyword(vocabularyBundleExtensionAccess.asKeyword_4).append[oneSpace]
+		_extension.regionFor.keyword(vocabularyBundleExtensionAccess.extendsKeyword_0).append[oneSpace]
+		_extension.regionFor.keyword(vocabularyBundleExtensionAccess.withKeyword_2_0).append[oneSpace]
+		_extension.regionFor.keyword(vocabularyBundleExtensionAccess.asKeyword_3).append[oneSpace]
 	}
 
 	def dispatch void format(VocabularyBundleInclusion inclusion, extension IFormattableDocument document) {
-		inclusion.ownedAnnotations.forEach[format.append[newLine]]
-		inclusion.regionFor.keyword(vocabularyBundleInclusionAccess.includesKeyword_1).append[oneSpace]
-		inclusion.regionFor.keyword(vocabularyBundleInclusionAccess.withKeyword_3_0).append[oneSpace]
-		inclusion.regionFor.keyword(vocabularyBundleInclusionAccess.asKeyword_4).append[oneSpace]
+		inclusion.regionFor.keyword(vocabularyBundleInclusionAccess.includesKeyword_0).append[oneSpace]
+		inclusion.regionFor.keyword(vocabularyBundleInclusionAccess.withKeyword_2_0).append[oneSpace]
+		inclusion.regionFor.keyword(vocabularyBundleInclusionAccess.asKeyword_3).append[oneSpace]
 	}
 
 	def dispatch void format(DescriptionExtension _extension, extension IFormattableDocument document) {
-		_extension.ownedAnnotations.forEach[format.append[newLine]]
-		_extension.regionFor.keyword(descriptionExtensionAccess.extendsKeyword_1).append[oneSpace]
-		_extension.regionFor.keyword(descriptionExtensionAccess.withKeyword_3_0).append[oneSpace]
-		_extension.regionFor.keyword(descriptionExtensionAccess.asKeyword_4).append[oneSpace]
+		_extension.regionFor.keyword(descriptionExtensionAccess.extendsKeyword_0).append[oneSpace]
+		_extension.regionFor.keyword(descriptionExtensionAccess.withKeyword_2_0).append[oneSpace]
+		_extension.regionFor.keyword(descriptionExtensionAccess.asKeyword_3).append[oneSpace]
 	}
 
 	def dispatch void format(DescriptionUsage usage, extension IFormattableDocument document) {
-		usage.ownedAnnotations.forEach[format.append[newLine]]
-		usage.regionFor.keyword(descriptionUsageAccess.usesKeyword_1).append[oneSpace]
-		usage.regionFor.keyword(descriptionUsageAccess.withKeyword_3_0).append[oneSpace]
-		usage.regionFor.keyword(descriptionUsageAccess.asKeyword_4).append[oneSpace]
+		usage.regionFor.keyword(descriptionUsageAccess.usesKeyword_0).append[oneSpace]
+		usage.regionFor.keyword(descriptionUsageAccess.withKeyword_2_0).append[oneSpace]
+		usage.regionFor.keyword(descriptionUsageAccess.asKeyword_3).append[oneSpace]
 	}
 
 	def dispatch void format(DescriptionBundleExtension _extension, extension IFormattableDocument document) {
-		_extension.ownedAnnotations.forEach[format.append[newLine]]
-		_extension.regionFor.keyword(descriptionBundleExtensionAccess.extendsKeyword_1).append[oneSpace]
-		_extension.regionFor.keyword(descriptionBundleExtensionAccess.withKeyword_3_0).append[oneSpace]
-		_extension.regionFor.keyword(descriptionBundleExtensionAccess.asKeyword_4).append[oneSpace]
+		_extension.regionFor.keyword(descriptionBundleExtensionAccess.extendsKeyword_0).append[oneSpace]
+		_extension.regionFor.keyword(descriptionBundleExtensionAccess.withKeyword_2_0).append[oneSpace]
+		_extension.regionFor.keyword(descriptionBundleExtensionAccess.asKeyword_3).append[oneSpace]
 	}
 
 	def dispatch void format(DescriptionBundleInclusion inclusion, extension IFormattableDocument document) {
-		inclusion.ownedAnnotations.forEach[format.append[newLine]]
-		inclusion.regionFor.keyword(descriptionBundleInclusionAccess.includesKeyword_1).append[oneSpace]
-		inclusion.regionFor.keyword(descriptionBundleInclusionAccess.withKeyword_3_0).append[oneSpace]
-		inclusion.regionFor.keyword(descriptionBundleInclusionAccess.asKeyword_4).append[oneSpace]
+		inclusion.regionFor.keyword(descriptionBundleInclusionAccess.includesKeyword_0).append[oneSpace]
+		inclusion.regionFor.keyword(descriptionBundleInclusionAccess.withKeyword_2_0).append[oneSpace]
+		inclusion.regionFor.keyword(descriptionBundleInclusionAccess.asKeyword_3).append[oneSpace]
 	}
 
 	def dispatch void format(DescriptionBundleUsage usage, extension IFormattableDocument document) {
-		usage.ownedAnnotations.forEach[format.append[newLine]]
-		usage.regionFor.keyword(descriptionBundleUsageAccess.usesKeyword_1).append[oneSpace]
-		usage.regionFor.keyword(descriptionBundleUsageAccess.withKeyword_3_0).append[oneSpace]
-		usage.regionFor.keyword(descriptionBundleUsageAccess.asKeyword_4).append[oneSpace]
+		usage.regionFor.keyword(descriptionBundleUsageAccess.usesKeyword_0).append[oneSpace]
+		usage.regionFor.keyword(descriptionBundleUsageAccess.withKeyword_2_0).append[oneSpace]
+		usage.regionFor.keyword(descriptionBundleUsageAccess.asKeyword_3).append[oneSpace]
 	}
 
 	def dispatch void format(ScalarPropertyRangeRestrictionAxiom axiom, extension IFormattableDocument document) {
@@ -581,27 +569,16 @@ class OmlFormatter extends AbstractFormatter2 {
 		axiom.formatCommas(document)
 	}
 
-	def dispatch void format(ConceptTypeAssertion assertion, extension IFormattableDocument document) {
-		assertion.ownedAnnotations.forEach[format.append[newLine]]
-	}
-
-	def dispatch void format(RelationTypeAssertion assertion, extension IFormattableDocument document) {
-		assertion.ownedAnnotations.forEach[format.append[newLine]]
-	}
-
 	def dispatch void format(ScalarPropertyValueAssertion assertion, extension IFormattableDocument document) {
-		assertion.ownedAnnotations.forEach[format.append[newLine]]
 		assertion.regionFor.feature(OmlPackage.Literals.SCALAR_PROPERTY_VALUE_ASSERTION__PROPERTY).append[oneSpace]
 		assertion.value?.format.prepend[oneSpace]
 	}
 
 	def dispatch void format(StructuredPropertyValueAssertion assertion, extension IFormattableDocument document) {
-		assertion.ownedAnnotations.forEach[format.append[newLine]]
 		assertion.regionFor.feature(OmlPackage.Literals.STRUCTURED_PROPERTY_VALUE_ASSERTION__PROPERTY).append[oneSpace]
 	}
 
 	def dispatch void format(LinkAssertion assertion, extension IFormattableDocument document) {
-		assertion.ownedAnnotations.forEach[format.append[newLine]]
 		assertion.regionFor.feature(OmlPackage.Literals.LINK_ASSERTION__RELATION).append[oneSpace]
 	}
 

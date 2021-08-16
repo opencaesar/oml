@@ -21,7 +21,6 @@ package io.opencaesar.oml.dsl.resource
 import io.opencaesar.oml.Member
 import io.opencaesar.oml.Ontology
 import org.eclipse.emf.ecore.EObject
-import org.eclipse.xtext.naming.QualifiedName
 import org.eclipse.xtext.resource.EObjectDescription
 import org.eclipse.xtext.resource.IEObjectDescription
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionStrategy
@@ -30,12 +29,19 @@ import org.eclipse.xtext.util.IAcceptor
 class OmlResourceDescriptionStrategy extends DefaultResourceDescriptionStrategy {
 	
 	override boolean createEObjectDescriptions(EObject eObject, IAcceptor<IEObjectDescription> acceptor) {
-		if(eObject instanceof Ontology) {
-			acceptor.accept(EObjectDescription.create(QualifiedName.create(eObject.iri), eObject))
+		if (eObject instanceof Ontology) {
+			val qualifiedName = getQualifiedNameProvider().getFullyQualifiedName(eObject);
+			acceptor.accept(EObjectDescription.create(qualifiedName, eObject, newHashMap(
+				"iri" -> eObject.ontology.iri,
+				"separator" -> eObject.ontology.separator.toString,
+				"prefix" -> eObject.ontology.prefix)));
 			return true
-		}
-		else if (eObject instanceof Member) {
-			return super.createEObjectDescriptions(eObject, acceptor)
+		} else if (eObject instanceof Member) {
+			val qualifiedName = getQualifiedNameProvider().getFullyQualifiedName(eObject);
+			if (qualifiedName !== null) {
+				acceptor.accept(EObjectDescription.create(qualifiedName, eObject, newHashMap("defaultPrefix" -> eObject.ontology.prefix)));
+			}
+			return super.createEObjectDescriptions(eObject, acceptor);
 		}
 		return false
 	}
