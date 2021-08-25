@@ -54,7 +54,7 @@ public class OmlXMIURIHandler extends URIHandlerImpl {
 					return URI.createURI(resolvedUri.toString() + _import.getSeparator() + qname[1]);
 				}
 			}
-			throw new RuntimeException("URI '" + uri + "' cannot be resolved");
+			return URI.createGenericURI("iri", qname[0], qname[1]); // proxy URI
 		}
 		return super.resolve(uri);
 	}

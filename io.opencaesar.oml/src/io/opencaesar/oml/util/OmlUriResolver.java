@@ -204,7 +204,7 @@ final class OmlUriResolver implements Runnable {
         if (contextUri == null) {
             return Collections.emptySet();
         }
-        
+
         URI folderUri = contextUri.trimSegments(1);
 
         if (!catalogCache.containsKey(folderUri)) {

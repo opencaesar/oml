@@ -20,6 +20,8 @@ package io.opencaesar.oml.dsl.ide;
 
 import org.eclipse.xtext.formatting2.FormatterPreferenceValuesProvider;
 import org.eclipse.xtext.formatting2.FormatterPreferences;
+import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalProvider;
+import org.eclipse.xtext.ide.editor.contentassist.IdeCrossrefProposalProvider;
 import org.eclipse.xtext.ide.server.codeActions.ICodeActionService2;
 import org.eclipse.xtext.ide.server.symbol.DocumentSymbolMapper.DocumentSymbolKindProvider;
 import org.eclipse.xtext.ide.server.symbol.DocumentSymbolMapper.DocumentSymbolNameProvider;
@@ -31,6 +33,8 @@ import org.eclipse.xtext.scoping.impl.ImportUriResolver;
 import com.google.inject.Binder;
 import com.google.inject.name.Names;
 
+import io.opencaesar.oml.dsl.ide.contentassist.OmlIdeContentProposalProvider;
+import io.opencaesar.oml.dsl.ide.contentassist.OmlIdeCrossRefProposalProvider;
 import io.opencaesar.oml.dsl.ide.server.codeActions.OmlCodeActionService;
 import io.opencaesar.oml.dsl.ide.symbols.OmlDocumentSymbolKindProvider;
 import io.opencaesar.oml.dsl.ide.symbols.OmlDocumentSymbolNameProvider;
@@ -68,6 +72,14 @@ public class OmlIdeModule extends AbstractOmlIdeModule {
 	
 	public Class<? extends ICodeActionService2> bindICodeActionService() {
 		return OmlCodeActionService.class;
+	}
+
+	public Class<? extends IdeContentProposalProvider> bindIdeContentProposalProvider() {
+		return OmlIdeContentProposalProvider.class;
+	}
+
+	public Class<? extends IdeCrossrefProposalProvider> bindIdeCrossrefProposalProvider() {
+		return OmlIdeCrossRefProposalProvider.class;
 	}
 
 }

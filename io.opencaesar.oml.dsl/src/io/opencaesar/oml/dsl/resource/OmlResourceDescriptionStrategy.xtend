@@ -41,7 +41,7 @@ class OmlResourceDescriptionStrategy extends DefaultResourceDescriptionStrategy 
 			if (qualifiedName !== null) {
 				acceptor.accept(EObjectDescription.create(qualifiedName, eObject, newHashMap("defaultPrefix" -> eObject.ontology.prefix)));
 			}
-			return super.createEObjectDescriptions(eObject, acceptor);
+			return true;
 		}
 		return false
 	}

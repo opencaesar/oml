@@ -629,9 +629,9 @@ terminal STRING:										('"' (!('"'|'\\') | '\\'.)* '"') | ("'" (!("'"|'\\') |
 
 terminal IRI:											'<' (!('>'|' '))* '>';
 
-terminal ID:											ID1;
+terminal ID:											IDFRAG;
 
-terminal QNAME:											ID1 ':' ID1;
+terminal QNAME:											IDFRAG ':' IDFRAG;
 
 terminal ML_COMMENT: 									'/*' -> '*/';
  
@@ -641,7 +641,7 @@ terminal WS: 											(' '|'\t'|'\r'|'\n')+;
 
 //----------------------------
 
-terminal fragment ID1:									'^'? (ALPHA|DIGIT|'_') (ALPHA|DIGIT|'_'|'-'|'.'|'$')*;
+terminal fragment IDFRAG:								'^'? (ALPHA|DIGIT|'_') (ALPHA|DIGIT|'_'|'-'|'.'|'$')*;
 
 terminal fragment ALPHA:								'a'..'z'| 'A'..'Z';
 
