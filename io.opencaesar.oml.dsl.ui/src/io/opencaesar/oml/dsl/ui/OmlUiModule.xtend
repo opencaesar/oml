@@ -39,8 +39,21 @@ class OmlUiModule extends AbstractOmlUiModule {
 	}
 
 	static class FQNPrefixMatcher2 extends FQNPrefixMatcher {
-		new () {
-			delimiter = ":"
+
+		override boolean isCandidateMatchingPrefix(String name, String prefix) {
+			delimiter = '#'
+			if (super.isCandidateMatchingPrefix(name, prefix)) {
+				return true
+			}
+			delimiter = '/'
+			if (super.isCandidateMatchingPrefix(name, prefix)) {
+				return true
+			}
+			delimiter = ':'
+			if (super.isCandidateMatchingPrefix(name, prefix)) {
+				return true
+			}
+			return false;
 		}
 	}
 }

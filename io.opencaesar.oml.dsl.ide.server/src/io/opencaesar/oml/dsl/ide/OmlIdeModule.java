@@ -20,6 +20,8 @@ package io.opencaesar.oml.dsl.ide;
 
 import org.eclipse.xtext.formatting2.FormatterPreferenceValuesProvider;
 import org.eclipse.xtext.formatting2.FormatterPreferences;
+import org.eclipse.xtext.ide.editor.contentassist.FQNPrefixMatcher;
+import org.eclipse.xtext.ide.editor.contentassist.IPrefixMatcher;
 import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalProvider;
 import org.eclipse.xtext.ide.editor.contentassist.IdeCrossrefProposalProvider;
 import org.eclipse.xtext.ide.server.codeActions.ICodeActionService2;
@@ -82,4 +84,33 @@ public class OmlIdeModule extends AbstractOmlIdeModule {
 		return OmlIdeCrossRefProposalProvider.class;
 	}
 
+	public Class<? extends IPrefixMatcher> bindIPrefixMatcher() {
+		return FQNPrefixMatcher2.class;
+	}
+
+	static public class FQNPrefixMatcher2 extends FQNPrefixMatcher {
+
+		private String delimiter;
+		
+		@Override
+		public boolean isCandidateMatchingPrefix(String name, String prefix) {
+			delimiter = "#";
+			if (super.isCandidateMatchingPrefix(name, prefix)) {
+				return true;
+			}
+			delimiter = "/";
+			if (super.isCandidateMatchingPrefix(name, prefix)) {
+				return true;
+			}
+			delimiter = ":";
+			if (super.isCandidateMatchingPrefix(name, prefix)) {
+				return true;
+			}
+			return false;
+		}
+
+		public String getDelimiter() {
+			return delimiter;
+		}
+	}
 }

@@ -379,11 +379,11 @@ VocabularyImport:
 
 VocabularyExtension:
 	
-	'extends' iri=IRI ('with' separator=SeparatorKind)? 'as' prefix=ID;
+	'extends' iri=IRI ('with' separator=SeparatorKind)? ('as' prefix=ID)?;
     	
 VocabularyUsage:
 	
-	'uses' iri=IRI ('with' separator=SeparatorKind)? 'as' prefix=ID;
+	'uses' iri=IRI ('with' separator=SeparatorKind)? ('as' prefix=ID)?;
     	
 VocabularyBundleImport:
 	VocabularyBundleExtension |
@@ -391,11 +391,11 @@ VocabularyBundleImport:
 
 VocabularyBundleInclusion:
 	
-	'includes' iri=IRI ('with' separator=SeparatorKind)? 'as' prefix=ID;
+	'includes' iri=IRI ('with' separator=SeparatorKind)? ('as' prefix=ID)?;
 
 VocabularyBundleExtension:
 	
-	'extends' iri=IRI ('with' separator=SeparatorKind)? 'as' prefix=ID;
+	'extends' iri=IRI ('with' separator=SeparatorKind)? ('as' prefix=ID)?;
 
 DescriptionImport:
 	DescriptionExtension |
@@ -403,11 +403,11 @@ DescriptionImport:
 
 DescriptionUsage:
 	
-	'uses' iri=IRI ('with' separator=SeparatorKind)? 'as' prefix=ID;
+	'uses' iri=IRI ('with' separator=SeparatorKind)? ('as' prefix=ID)?;
 
 DescriptionExtension:
 	
-	'extends' iri=IRI ('with' separator=SeparatorKind)? 'as' prefix=ID;
+	'extends' iri=IRI ('with' separator=SeparatorKind)? ('as' prefix=ID)?;
 
 DescriptionBundleImport:
 	DescriptionBundleExtension |
@@ -416,15 +416,15 @@ DescriptionBundleImport:
 
 DescriptionBundleInclusion:
 	
-	'includes' iri=IRI ('with' separator=SeparatorKind)? 'as' prefix=ID;
+	'includes' iri=IRI ('with' separator=SeparatorKind)? ('as' prefix=ID)?;
 
 DescriptionBundleExtension:
 	
-	'extends' iri=IRI ('with' separator=SeparatorKind)? 'as' prefix=ID;
+	'extends' iri=IRI ('with' separator=SeparatorKind)? ('as' prefix=ID)?;
 
 DescriptionBundleUsage:
 	
-	'uses' iri=IRI ('with' separator=SeparatorKind)? 'as' prefix=ID;
+	'uses' iri=IRI ('with' separator=SeparatorKind)? ('as' prefix=ID)?;
 
 Axiom:
 	SpecializationAxiom |

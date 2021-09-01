@@ -26,7 +26,7 @@ import org.eclipse.xtext.util.Strings
 class IRIValueConverter extends AbstractValueConverter<String> {
 
 	override String toString(String value) {
-		if (value.startsWith("http://") || value.contains(".oml")) {
+		if (value.startsWith("http://")) {
 			return '<' + Strings.convertToJavaString(value, false) + '>'
 		} else {
 			return elseToString(value)

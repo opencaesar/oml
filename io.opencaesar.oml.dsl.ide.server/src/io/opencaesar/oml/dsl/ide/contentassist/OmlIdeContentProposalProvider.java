@@ -78,23 +78,13 @@ public class OmlIdeContentProposalProvider extends IdeContentProposalProvider {
 		} else if (keyword == omlGrammarAccess.getDescriptionBundleInclusionAccess().getIncludesKeyword_0()) {
 			predicate = (x -> !x.getEObjectURI().equals(ontologyURI) && OmlPackage.Literals.DESCRIPTION.isSuperTypeOf(x.getEClass()));
 		} else if (keyword == omlGrammarAccess.getDescriptionBundleUsageAccess().getUsesKeyword_0()) {
-			predicate = (x -> !x.getEObjectURI().equals(ontologyURI) && OmlPackage.Literals.VOCABULARY_BUNDLE.isSuperTypeOf(x.getEClass()));
+			predicate = (x -> !x.getEObjectURI().equals(ontologyURI) && OmlPackage.Literals.VOCABULARY_BOX.isSuperTypeOf(x.getEClass()));
 		}
 		if (predicate != null) {
 	 		var eReference = EcoreFactory.eINSTANCE.createEReference();
 			eReference.setEType(OmlPackage.Literals.ONTOLOGY);
 			var scope = omlGlobalScopeProvider.getScope(ontology.eResource(), eReference, predicate);
 			scope.getAllElements().forEach(o ->acceptor.accept(getProposalCreator().createProposal(qualifiedNameValueConverter.toString(o.getUserData("iri")), context), 0));
-		}
-	}
-
-	protected void complete_ID(EObject model, RuleCall ruleCall, ContentAssistContext context, IIdeContentProposalAcceptor acceptor) {
-		if (model instanceof Import) {
-			var _import = (Import) model; 
-	 		var eReference = EcoreFactory.eINSTANCE.createEReference();
-			eReference.setEType(OmlPackage.Literals.ONTOLOGY);
-			var scope = omlGlobalScopeProvider.getScope(_import.eResource(), eReference, x -> x.getUserData("iri").equals(_import.getIri()));
-			scope.getAllElements().forEach(o -> acceptor.accept(getProposalCreator().createProposal(o.getUserData("prefix"), context), 0));
 		}
 	}
 
@@ -105,6 +95,16 @@ public class OmlIdeContentProposalProvider extends IdeContentProposalProvider {
 			eReference.setEType(OmlPackage.Literals.ONTOLOGY);
 			var scope = omlGlobalScopeProvider.getScope(_import.eResource(), eReference, x -> x.getUserData("iri").equals(_import.getIri()));
 			scope.getAllElements().forEach(o -> acceptor.accept(getProposalCreator().createProposal(o.getUserData("separator"), context), 0));
+		}
+	}
+
+	protected void complete_ID(EObject model, RuleCall ruleCall, ContentAssistContext context, IIdeContentProposalAcceptor acceptor) {
+		if (model instanceof Import) {
+			var _import = (Import) model; 
+	 		var eReference = EcoreFactory.eINSTANCE.createEReference();
+			eReference.setEType(OmlPackage.Literals.ONTOLOGY);
+			var scope = omlGlobalScopeProvider.getScope(_import.eResource(), eReference, x -> x.getUserData("iri").equals(_import.getIri()));
+			scope.getAllElements().forEach(o -> acceptor.accept(getProposalCreator().createProposal(o.getUserData("prefix"), context), 0));
 		}
 	}
 

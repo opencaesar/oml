@@ -102,7 +102,7 @@ class OmlProposalProvider extends AbstractOmlProposalProvider {
 		} else if (keyword === descriptionBundleInclusionAccess.includesKeyword_0) {
 			predicate = [x | x.EObjectURI != ontologyURI && OmlPackage.Literals.DESCRIPTION.isSuperTypeOf(x.EClass)]
 		} else if (keyword === descriptionBundleUsageAccess.usesKeyword_0) {
-			predicate = [x | x.EObjectURI != ontologyURI && OmlPackage.Literals.VOCABULARY_BUNDLE.isSuperTypeOf(x.EClass)]
+			predicate = [x | x.EObjectURI != ontologyURI && OmlPackage.Literals.VOCABULARY_BOX.isSuperTypeOf(x.EClass)]
 		}
  		val eReference = EcoreFactory.eINSTANCE.createEReference()
 		eReference.EType = OmlPackage.Literals.ONTOLOGY

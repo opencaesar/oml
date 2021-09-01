@@ -18,6 +18,7 @@
  */
 package io.opencaesar.oml.dsl.ui.contentassist;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
@@ -34,7 +35,6 @@ import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.Ontology;
-import io.opencaesar.oml.Vocabulary;
 import io.opencaesar.oml.util.OmlRead;
 
 public class FQNImporter extends FQNShortener {
@@ -136,7 +136,7 @@ public class FQNImporter extends FQNShortener {
 				offset = node.getOffset() + node.getLength();
 			}
 			if (proposal.getReplacementOffset() < offset) {
-				offset += escapedShortname.length();
+				offset += escapedShortname.length() - proposal.getReplacementLength();
 			}
 			
 			// calculate the text of the import statement
@@ -145,9 +145,7 @@ public class FQNImporter extends FQNShortener {
 			if (lineDelimiter == null && lineOfOffset > 0) {
 				lineDelimiter = document.getLineDelimiter(lineOfOffset - 1);
 			}
-			var isImportedVocabulary = OmlPackage.Literals.TERM.isSuperTypeOf(description.getEClass());
-			var isContextVocabulary = OmlRead.getOntology(context) instanceof Vocabulary;
-			var importKeyword = (isImportedVocabulary == isContextVocabulary) ? "extends" : "uses";
+			var importKeyword = getImportKeyword(ontology.eClass(), description.getEClass());
 			var importNamespace = qualifiedName.getFirstSegment();
 			var importSeparator = importNamespace.charAt(importNamespace.length()-1);
 			var importIri = importNamespace.substring(0, importNamespace.length()-1);
@@ -189,5 +187,19 @@ public class FQNImporter extends FQNShortener {
 			}
 		}
 		return node.getOffset();
+	}
+	
+	private String getImportKeyword(EClass contextOntology, EClass importedFeature) {
+		var importedOntology = OmlPackage.Literals.NAMED_INSTANCE.isSuperTypeOf(importedFeature) ?
+			OmlPackage.Literals.DESCRIPTION : OmlPackage.Literals.VOCABULARY;
+		if (contextOntology == importedOntology) {
+			return "extends";
+		}
+		var contextIsVocabulary = OmlPackage.Literals.VOCABULARY_BOX.isSuperTypeOf(contextOntology);
+		var importedIsVocabulary = OmlPackage.Literals.VOCABULARY_BOX.isSuperTypeOf(importedOntology);
+		if ((contextIsVocabulary && !importedIsVocabulary) || (!contextIsVocabulary && importedIsVocabulary)) {
+			return "uses";
+		}
+		return "includes";
 	}
 }

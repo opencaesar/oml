@@ -1,5 +1,6 @@
 package io.opencaesar.oml.dsl.ui.resource
 
+import io.opencaesar.oml.util.OmlCrossReferenceAdapter
 import org.eclipse.core.resources.IProject
 import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.emf.ecore.util.ECrossReferenceAdapter
@@ -14,7 +15,7 @@ class OmlResourceSetInitializer implements IResourceSetInitializer {
 	override initialize(ResourceSet resourceSet, IProject project) {
 		val adapter = ECrossReferenceAdapter.getCrossReferenceAdapter(resourceSet)	
 		if (adapter === null) {
-			resourceSet.eAdapters().add(new ECrossReferenceAdapter)
+			resourceSet.eAdapters().add(new OmlCrossReferenceAdapter)
 		}
 	}
 		

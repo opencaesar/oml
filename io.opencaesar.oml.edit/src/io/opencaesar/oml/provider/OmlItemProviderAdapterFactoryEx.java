@@ -142,8 +142,8 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 					label.append(extension.getIri());
 				}
 				label.append(">");
-				label.append(" with ").append(extension.getSeparator());
 				if (extension.getPrefix() != null) {
+					label.append(" with ").append(extension.getSeparator());
 					label.append(" as ").append(extension.getPrefix());
 				}
 				return label.toString();
@@ -163,8 +163,8 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 					label.append(usage.getIri());
 				}
 				label.append(">");
-				label.append(" with ").append(usage.getSeparator());
 				if (usage.getPrefix() != null) {
+					label.append(" with ").append(usage.getSeparator());
 					label.append(" as ").append(usage.getPrefix());
 				}
 				return label.toString();
@@ -184,8 +184,8 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 					label.append(extension.getIri());
 				}
 				label.append(">");
-				label.append(" with ").append(extension.getSeparator());
 				if (extension.getPrefix() != null) {
+					label.append(" with ").append(extension.getSeparator());
 					label.append(" as ").append(extension.getPrefix());
 				}
 				return label.toString();
@@ -205,8 +205,8 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 					label.append(inclusion.getIri());
 				}
 				label.append(">");
-				label.append(" with ").append(inclusion.getSeparator());
 				if (inclusion.getPrefix() != null) {
+					label.append(" with ").append(inclusion.getSeparator());
 					label.append(" as ").append(inclusion.getPrefix());
 				}
 				return label.toString();
@@ -268,8 +268,8 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 					label.append(extension.getIri());
 				}
 				label.append(">");
-				label.append(" with ").append(extension.getSeparator());
 				if (extension.getPrefix() != null) {
+					label.append(" with ").append(extension.getSeparator());
 					label.append(" as ").append(extension.getPrefix());
 				}
 				return label.toString();
@@ -289,8 +289,8 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 					label.append(usage.getIri());
 				}
 				label.append(">");
-				label.append(" with ").append(usage.getSeparator());
 				if (usage.getPrefix() != null) {
+					label.append(" with ").append(usage.getSeparator());
 					label.append(" as ").append(usage.getPrefix());
 				}
 				return label.toString();
@@ -310,8 +310,8 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 					label.append(extension.getIri());
 				}
 				label.append(">");
-				label.append(" with ").append(extension.getSeparator());
 				if (extension.getPrefix() != null) {
+					label.append(" with ").append(extension.getSeparator());
 					label.append(" as ").append(extension.getPrefix());
 				}
 				return label.toString();
@@ -331,8 +331,8 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 					label.append(inclusion.getIri());
 				}
 				label.append(">");
-				label.append(" with ").append(inclusion.getSeparator());
 				if (inclusion.getPrefix() != null) {
+					label.append(" with ").append(inclusion.getSeparator());
 					label.append(" as ").append(inclusion.getPrefix());
 				}
 				return label.toString();
@@ -352,8 +352,8 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 					label.append(usage.getIri());
 				}
 				label.append(">");
-				label.append(" with ").append(usage.getSeparator());
 				if (usage.getPrefix() != null) {
+					label.append(" with ").append(usage.getSeparator());
 					label.append(" as ").append(usage.getPrefix());
 				}
 				return label.toString();

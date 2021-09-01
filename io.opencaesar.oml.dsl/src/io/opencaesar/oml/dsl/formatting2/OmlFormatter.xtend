@@ -430,55 +430,55 @@ class OmlFormatter extends AbstractFormatter2 {
 	def dispatch void format(VocabularyExtension _extension, extension IFormattableDocument document) {
 		_extension.regionFor.keyword(vocabularyExtensionAccess.extendsKeyword_0).append[oneSpace]
 		_extension.regionFor.keyword(vocabularyExtensionAccess.withKeyword_2_0).append[oneSpace]
-		_extension.regionFor.keyword(vocabularyExtensionAccess.asKeyword_3).append[oneSpace]
+		_extension.regionFor.keyword(vocabularyExtensionAccess.asKeyword_3_0).append[oneSpace]
 	}
 
 	def dispatch void format(VocabularyUsage usage, extension IFormattableDocument document) {
 		usage.regionFor.keyword(vocabularyUsageAccess.usesKeyword_0).append[oneSpace]
 		usage.regionFor.keyword(vocabularyUsageAccess.withKeyword_2_0).append[oneSpace]
-		usage.regionFor.keyword(vocabularyUsageAccess.asKeyword_3).append[oneSpace]
+		usage.regionFor.keyword(vocabularyUsageAccess.asKeyword_3_0).append[oneSpace]
 	}
 
 	def dispatch void format(VocabularyBundleExtension _extension, extension IFormattableDocument document) {
 		_extension.regionFor.keyword(vocabularyBundleExtensionAccess.extendsKeyword_0).append[oneSpace]
 		_extension.regionFor.keyword(vocabularyBundleExtensionAccess.withKeyword_2_0).append[oneSpace]
-		_extension.regionFor.keyword(vocabularyBundleExtensionAccess.asKeyword_3).append[oneSpace]
+		_extension.regionFor.keyword(vocabularyBundleExtensionAccess.asKeyword_3_0).append[oneSpace]
 	}
 
 	def dispatch void format(VocabularyBundleInclusion inclusion, extension IFormattableDocument document) {
 		inclusion.regionFor.keyword(vocabularyBundleInclusionAccess.includesKeyword_0).append[oneSpace]
 		inclusion.regionFor.keyword(vocabularyBundleInclusionAccess.withKeyword_2_0).append[oneSpace]
-		inclusion.regionFor.keyword(vocabularyBundleInclusionAccess.asKeyword_3).append[oneSpace]
+		inclusion.regionFor.keyword(vocabularyBundleInclusionAccess.asKeyword_3_0).append[oneSpace]
 	}
 
 	def dispatch void format(DescriptionExtension _extension, extension IFormattableDocument document) {
 		_extension.regionFor.keyword(descriptionExtensionAccess.extendsKeyword_0).append[oneSpace]
 		_extension.regionFor.keyword(descriptionExtensionAccess.withKeyword_2_0).append[oneSpace]
-		_extension.regionFor.keyword(descriptionExtensionAccess.asKeyword_3).append[oneSpace]
+		_extension.regionFor.keyword(descriptionExtensionAccess.asKeyword_3_0).append[oneSpace]
 	}
 
 	def dispatch void format(DescriptionUsage usage, extension IFormattableDocument document) {
 		usage.regionFor.keyword(descriptionUsageAccess.usesKeyword_0).append[oneSpace]
 		usage.regionFor.keyword(descriptionUsageAccess.withKeyword_2_0).append[oneSpace]
-		usage.regionFor.keyword(descriptionUsageAccess.asKeyword_3).append[oneSpace]
+		usage.regionFor.keyword(descriptionUsageAccess.asKeyword_3_0).append[oneSpace]
 	}
 
 	def dispatch void format(DescriptionBundleExtension _extension, extension IFormattableDocument document) {
 		_extension.regionFor.keyword(descriptionBundleExtensionAccess.extendsKeyword_0).append[oneSpace]
 		_extension.regionFor.keyword(descriptionBundleExtensionAccess.withKeyword_2_0).append[oneSpace]
-		_extension.regionFor.keyword(descriptionBundleExtensionAccess.asKeyword_3).append[oneSpace]
+		_extension.regionFor.keyword(descriptionBundleExtensionAccess.asKeyword_3_0).append[oneSpace]
 	}
 
 	def dispatch void format(DescriptionBundleInclusion inclusion, extension IFormattableDocument document) {
 		inclusion.regionFor.keyword(descriptionBundleInclusionAccess.includesKeyword_0).append[oneSpace]
 		inclusion.regionFor.keyword(descriptionBundleInclusionAccess.withKeyword_2_0).append[oneSpace]
-		inclusion.regionFor.keyword(descriptionBundleInclusionAccess.asKeyword_3).append[oneSpace]
+		inclusion.regionFor.keyword(descriptionBundleInclusionAccess.asKeyword_3_0).append[oneSpace]
 	}
 
 	def dispatch void format(DescriptionBundleUsage usage, extension IFormattableDocument document) {
 		usage.regionFor.keyword(descriptionBundleUsageAccess.usesKeyword_0).append[oneSpace]
 		usage.regionFor.keyword(descriptionBundleUsageAccess.withKeyword_2_0).append[oneSpace]
-		usage.regionFor.keyword(descriptionBundleUsageAccess.asKeyword_3).append[oneSpace]
+		usage.regionFor.keyword(descriptionBundleUsageAccess.asKeyword_3_0).append[oneSpace]
 	}
 
 	def dispatch void format(ScalarPropertyRangeRestrictionAxiom axiom, extension IFormattableDocument document) {

@@ -27,6 +27,7 @@ import java.nio.file.WatchEvent;
 import java.nio.file.WatchKey;
 import java.nio.file.WatchService;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -61,6 +62,8 @@ final class OmlUriResolver implements Runnable {
      */
     private static OmlUriResolver instance = new OmlUriResolver();
     
+    private static final List<String> OML_EXTENSIONS_LIST = Arrays.asList(OmlConstants.OML_EXTENSIONS);
+
     private Thread thread;
     private boolean doStop = false;
     private WatchService watcher;
@@ -200,22 +203,32 @@ final class OmlUriResolver implements Runnable {
     public synchronized Set<URI> getVisibleResourceUris(Resource contextResource) {
 		final var uris = new LinkedHashSet<URI>();
 		
+		// add the URIs from the current resource set
+		contextResource.getResourceSet().getResources().forEach(r -> uris.add(r.getURI()));
+		uris.removeIf(uri -> !OML_EXTENSIONS_LIST.contains(uri.fileExtension()));
+		
+		// retain only OML files
+
+		// get the context URI
         URI contextUri = (contextResource != null) ? contextResource.getURI() : null;
         if (contextUri == null) {
             return Collections.emptySet();
         }
 
+        // get the folder URI of the context
         URI folderUri = contextUri.trimSegments(1);
 
         if (!catalogCache.containsKey(folderUri)) {
             findCatalogs(catalogCache, folderUri);
         }
         
+        // get the catalog being used with the context
         OmlCatalog catalog = catalogCache.get(folderUri);
         if (catalog == null) {
             return Collections.emptySet();
         }
 		
+        // final all file paths specified in the catalog
 		var entryUris = new ArrayList<URI>();
 		for (CatalogEntry e : catalog.getEntries()) {
 			if (e.getEntryType() == Catalog.REWRITE_URI) { // only type of entry supported so far
@@ -227,6 +240,7 @@ final class OmlUriResolver implements Runnable {
 			}
 		}
 		
+		// collect URIs from the catalog file paths
 		for (final URI entryUri : entryUris) {
 			var path = new File(CommonPlugin.asLocalURI(entryUri).toFileString());
 			if (path.isDirectory()) {
@@ -235,13 +249,19 @@ final class OmlUriResolver implements Runnable {
 					uris.add(URI.createURI(entryUri+"/"+relative));
 				}
 			} else { // likely a file name with no extension
-				path = new File(path.toString()+"."+OmlConstants.OML_EXTENSION);
-				if (path.exists()) {
-					String relative = path.toURI().relativize(path.toURI()).getPath();
-					uris.add(URI.createURI(entryUri+"/"+relative));
+				for (String ext : OML_EXTENSIONS_LIST) {
+					var file = new File(path.toString()+"."+ext);
+					if (file.exists()) {
+						uris.add(URI.createURI(entryUri+"."+ext));
+						break;
+					}
 				}
 			}
 		}
+		
+		// remove the context URI
+		uris.remove(contextUri);
+		
 		return uris;
 	}
 

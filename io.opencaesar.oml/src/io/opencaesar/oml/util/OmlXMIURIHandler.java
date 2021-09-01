@@ -54,7 +54,7 @@ public class OmlXMIURIHandler extends URIHandlerImpl {
 					return URI.createURI(resolvedUri.toString() + _import.getSeparator() + qname[1]);
 				}
 			}
-			return URI.createGenericURI("iri", qname[0], qname[1]); // proxy URI
+			return URI.createHierarchicalURI(new String[]{qname[0]}, null, qname[1]);
 		}
 		return super.resolve(uri);
 	}
@@ -68,7 +68,7 @@ public class OmlXMIURIHandler extends URIHandlerImpl {
 			if (iri != null) {
 				return URI.createURI(iri);
 			}
-			throw new RuntimeException("Uri '" + uri + "' cannot be converted to a logical iri");
+			throw new RuntimeException("References to <" + uri + "> do not have a corresponding import statement");
 		}
 		return super.deresolve(uri);
 	}

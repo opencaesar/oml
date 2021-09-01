@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -49,6 +50,8 @@ import io.opencaesar.oml.EnumeratedScalar;
 import io.opencaesar.oml.FacetedScalar;
 import io.opencaesar.oml.FeaturePredicate;
 import io.opencaesar.oml.OmlPackage;
+import io.opencaesar.oml.Ontology;
+import io.opencaesar.oml.QuotedLiteral;
 import io.opencaesar.oml.Relation;
 import io.opencaesar.oml.RelationCardinalityRestrictionAxiom;
 import io.opencaesar.oml.RelationRangeRestrictionAxiom;
@@ -151,6 +154,96 @@ public final class OmlValidator2 {
     
     //--------------------------------
     
+    // Import
+    
+    /**
+     * Checks if an ontology has unused import statements
+     * 
+     * @param object The ontology to check
+     * @param diagnostics The validation diagnostics
+     * @param context The object-to-object context map
+     * @return True if the rules is satisfied; False otherwise
+     */
+    @SuppressWarnings("unchecked")
+	protected boolean validateOntologyHasUnusedImports(Ontology object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+    	var referencedIris = new HashSet<String>();
+    	for (var i = object.eAllContents(); i.hasNext();) {
+    		var element = i.next();
+    		var eClass = element.eClass();
+    		for (var eReference : eClass.getEAllReferences()) {
+    			if (!eReference.isContainment()) {
+	    			var refs = element.eGet(eReference);
+	    			if (eReference.isMany()) {
+	    				((List<Element>)refs).forEach(ref -> {
+		    				var ontology = ((Element)ref).getOntology();
+		    				if (ontology != null) {
+		    					referencedIris.add(ontology.getIri());
+		    				}
+	    				});
+	    			} else if (refs != null) {
+    					var ontology = ((Element)refs).getOntology();
+	    				if (ontology != null) {
+	    					referencedIris.add(ontology.getIri());
+	    				}
+	    			}
+    			}
+    		}
+    	}
+    	var returnValue = true;
+        for (var import_ : OmlRead.getImports(object)) {
+        	if (import_.getPrefix() != null && !referencedIris.contains(import_.getIri())) {
+	            report(Diagnostic.WARNING, diagnostics, import_,
+	                "Import <"+import_.getIri()+"> is not used", null);
+	            returnValue = false;
+        	}
+        }
+        return returnValue;
+    }
+
+    /**
+     * Checks if an ontology has duplicate import statements
+     * 
+     * @param object The ontology to check
+     * @param diagnostics The validation diagnostics
+     * @param context The object-to-object context map
+     * @return True if the rules is satisfied; False otherwise
+     */
+    @SuppressWarnings("unchecked")
+	protected boolean validateOntologyHasDuplicateImports(Ontology object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        boolean returnValue = true;
+    	var imports = OmlRead.getImports(object);
+    	for (var import_ : imports) {
+        	if (imports.stream().anyMatch(i -> i != import_ && i.getIri() != null && i.getIri().equals(import_.getIri()))) {
+	            report(Diagnostic.WARNING, diagnostics, import_,
+	                "Import <"+import_.getIri()+"> is a duplicate", null);
+	            returnValue = false;
+        	}
+        }
+        return returnValue;
+    }
+
+    /**
+     * Checks if an ontology has self import statements
+     * 
+     * @param object The ontology to check
+     * @param diagnostics The validation diagnostics
+     * @param context The object-to-object context map
+     * @return True if the rules is satisfied; False otherwise
+     */
+    @SuppressWarnings("unchecked")
+	protected boolean validateOntologyHasSelfImports(Ontology object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        boolean returnValue = true;
+    	var imports = OmlRead.getImports(object);
+    	for (var import_ : imports) {
+        	if (imports.stream().anyMatch(i -> i.getIri() != null && i.getIri().equals(object.getIri()))) {
+	            report(Diagnostic.WARNING, diagnostics, import_,
+	                "Import <"+import_.getIri()+"> is to self", null);
+	            returnValue = false;
+        	}
+        }
+        return returnValue;
+    }
+
     // VocabularyExtension
     
     /**
@@ -306,7 +399,7 @@ public final class OmlValidator2 {
     // DescriptionBundleUsage
     
     /**
-     * Checks if a description bundle usage URI resolves to a vocabulary bundle
+     * Checks if a description bundle usage URI resolves to a vocabulary box
      * 
      * @param object The description bundle usage to check
      * @param diagnostics The validation diagnostics
@@ -314,9 +407,9 @@ public final class OmlValidator2 {
      * @return True if the rules is satisfied; False otherwise
      */
     protected boolean validateDescriptionBundleUsageURI(DescriptionBundleUsage object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-        if (!(OmlRead.getImportedOntology(object) instanceof VocabularyBundle)) {
+        if (!(OmlRead.getImportedOntology(object) instanceof VocabularyBox)) {
             return report(Diagnostic.ERROR, diagnostics, object,
-                "IRI <"+object.getIri()+"> could not be resolved to a vocabulary bundle", 
+                "IRI <"+object.getIri()+"> could not be resolved to a vocabulary box", 
                 OmlPackage.Literals.IMPORT__IRI);
         }
         return true;
@@ -550,16 +643,16 @@ public final class OmlValidator2 {
         final SpecializableTerm subTerm = OmlRead.getSubTerm(object);
         if (superTerm == subTerm) {
             return report(Diagnostic.WARNING, diagnostics, object,
-	                "Term "+superTerm.getAbbreviatedIri()+" cannot specialize itself", 
+	                "SpecializableTerm "+superTerm.getAbbreviatedIri()+" specializes itself", 
 	                OmlPackage.Literals.SPECIALIZATION_AXIOM__SPECIALIZED_TERM);
-        } else if (superTerm != null && subTerm != null) {
+        } else if (superTerm != null && !superTerm.eIsProxy()) {
 	        final EClass superEClass = superTerm.eClass();
 	        final EClass subEClass = subTerm.eClass();
 	        if (!((OmlPackage.Literals.ASPECT == superEClass && OmlPackage.Literals.ENTITY.isSuperTypeOf(subEClass)) ||
 	            (OmlPackage.Literals.FACETED_SCALAR == superEClass && OmlPackage.Literals.ENUMERATED_SCALAR == subEClass) ||
 	            (superEClass == subEClass))) {
 	            return report(Diagnostic.ERROR, diagnostics, object,
-	                "Term "+superTerm.getAbbreviatedIri()+" cannot be specialized by "+subTerm.getAbbreviatedIri()+"", 
+	                "SpecializableTerm "+superTerm.getAbbreviatedIri()+" cannot be specialized by "+subTerm.getAbbreviatedIri()+"", 
 	                OmlPackage.Literals.SPECIALIZATION_AXIOM__SPECIALIZED_TERM);
 	        }
         }
@@ -588,11 +681,8 @@ public final class OmlValidator2 {
         	var singleStandardGeneral = false;
         	var specializations = object.getOwnedSpecializations();
         	if (specializations.size() == 1) {
-        		var general = specializations.get(0).getSpecializedTerm();
-            	var ontologyIri = general.getOntology().getIri();
-            	singleStandardGeneral = ontologyIri.equals(OmlConstants.XSD_IRI) ||
-                    	ontologyIri.equals(OmlConstants.RDF_IRI) ||
-                    	ontologyIri.equals(OmlConstants.OWL_IRI);
+        		var general = (Scalar) specializations.get(0).getSpecializedTerm();
+            	singleStandardGeneral = isStandardScalar(general);
         	}
         	if (!singleStandardGeneral) {
                 return report(Diagnostic.ERROR, diagnostics, object,
@@ -601,13 +691,9 @@ public final class OmlValidator2 {
         	}
         } else {
         	var specializations = object.getOwnedSpecializations();
-        	var ontologyIri = object.getOntology().getIri();
-        	var standardScalar = ontologyIri.equals(OmlConstants.XSD_IRI) ||
-                	ontologyIri.equals(OmlConstants.RDF_IRI) ||
-                	ontologyIri.equals(OmlConstants.OWL_IRI);
-            if (!standardScalar && specializations.isEmpty()) {
+            if (specializations.isEmpty() && !isStandardScalar(object)) {
                 return report(Diagnostic.ERROR, diagnostics, object,
-                	"Faceted scalar "+object.getAbbreviatedIri()+" is non-stanard hence must specify a supertype", 
+                	"Faceted scalar "+object.getAbbreviatedIri()+" is non-standard hence must specify a supertype", 
     	            OmlPackage.Literals.MEMBER__NAME);
             }
         }
@@ -675,6 +761,46 @@ public final class OmlValidator2 {
                 OmlPackage.Literals.FEATURE_PREDICATE__FEATURE);
         }
         return true;
+    }
+
+    // Quoted Literal
+
+    /**
+     * Checks if a quoted literal is typed by one of the standard scalar types
+     * 
+     * @param object The quoted literal to check
+     * @param diagnostics The validation diagnostics
+     * @param context The object-to-object context map
+     * @return True if the rules is satisfied; False otherwise
+     */
+    protected boolean validateQuotedLiteral(QuotedLiteral object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+    	var scalar = object.getType();
+    	if (scalar != null) {
+	    	if (!isStandardScalar(scalar)) {
+	            return report(Diagnostic.ERROR, diagnostics, object,
+	                "Quoted Literal \""+object.getValue()+"\" is not typed by a standard scalar", 
+	                OmlPackage.Literals.QUOTED_LITERAL__TYPE);
+	        }
+    	}
+        return true;
+    }
+    
+    /*
+     * Returns if the given scalar iis a standard one
+     *  
+     * @param scalar the given scalar
+     * @return whetehr the scalar is standard
+     */
+    private boolean isStandardScalar(Scalar scalar) {
+    	var ontology = scalar.getOntology();
+    	if (ontology != null) {
+	    	var ontologyIri = ontology.getIri();
+	    	return ontologyIri.equals(OmlConstants.XSD_IRI) ||
+	            	ontologyIri.equals(OmlConstants.RDF_IRI) ||
+	            	ontologyIri.equals(OmlConstants.RDFS_IRI) ||
+	            	ontologyIri.equals(OmlConstants.OWL_IRI);
+    	}
+    	return false;
     }
 
 }

@@ -36,6 +36,11 @@ public interface OmlConstants {
     public static final String OMLXMI_EXTENSION = "omlxmi";
 
     /**
+     * The supported OML file extensions
+     */
+    public static final String[] OML_EXTENSIONS= { OML_EXTENSION, OMLXMI_EXTENSION };
+
+    /**
      * The IRI of the OML vocabulary
      */
     public static final String OML_IRI= "http://opencaesar.io/oml";
@@ -44,6 +49,11 @@ public interface OmlConstants {
      * The namespace of the OML vocabulary
      */
     public static final String OML_NS= OML_IRI+"#";
+
+    /**
+     * The prefix of the OML vocabulary
+     */
+    public static final String OML_PREFIX= "oml";
 
     /**
      * The IRI of the XSD vocabulary
@@ -56,6 +66,11 @@ public interface OmlConstants {
     public static final String XSD_NS = XSD_IRI+"#";
 
     /**
+     * The prefix of the XSD vocabulary
+     */
+    public static final String XSD_PREFIX= "xsd";
+
+    /**
      * The IRI of the RDF vocabulary
      */
     public static final String RDF_IRI = "http://www.w3.org/1999/02/22-rdf-syntax-ns";
@@ -64,6 +79,11 @@ public interface OmlConstants {
      * The namespace of the RDF vocabulary
      */
     public static final String RDF_NS = RDF_IRI+"#";
+
+    /**
+     * The prefix of the RDF vocabulary
+     */
+    public static final String RDF_PREFIX= "rdf";
 
     /**
      * The IRI of the RDFS vocabulary
@@ -76,6 +96,11 @@ public interface OmlConstants {
     public static final String RDFS_NS = RDFS_IRI+"#";
 
     /**
+     * The prefix of the RDFS vocabulary
+     */
+    public static final String RDFS_PREFIX= "rdfs";
+
+   /**
      * The IRI of the OWL vocabulary
      */
     public static final String OWL_IRI = "http://www.w3.org/2002/07/owl";
@@ -86,6 +111,11 @@ public interface OmlConstants {
     public static final String OWL_NS = OWL_IRI+"#";
 
     /**
+     * The prefix of the OWL vocabulary
+     */
+    public static final String OWL_PREFIX= "owl";
+
+    /**
      * The IRI of the DC vocabulary
      */
     public static final String DC_IRI = "http://purl.org/dc/elements/1.1";
@@ -94,5 +124,10 @@ public interface OmlConstants {
      * The namespace of the DC vocabulary
      */
     public static final String DC_NS = DC_IRI+"/";
+
+    /**
+     * The prefix of the DC vocabulary
+     */
+    public static final String DC_PREFIX= "dc";
 
 }
