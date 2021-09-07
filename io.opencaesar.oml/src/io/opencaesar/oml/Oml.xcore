@@ -1022,7 +1022,7 @@ abstract class Import extends Element {
     /*
      * The local prefix of the imported ontology's namespace
      */
-    ID[?] prefix
+    ID[1] prefix
 
     /*
      * Get the import's iri
@@ -1787,5 +1787,5 @@ type Decimal wraps BigDecimal
 @ExtendedMetaData(pattern="[a-zA-Z0-9_]([a-zA-Z0-9_\\-.$])*")
 type ID wraps String
 
-@ExtendedMetaData(pattern="([^\\s])*(#|/)", minLength="2")
+@ExtendedMetaData(pattern="([^\\s#])*(#|/)", minLength="2")
 type Namespace wraps String
