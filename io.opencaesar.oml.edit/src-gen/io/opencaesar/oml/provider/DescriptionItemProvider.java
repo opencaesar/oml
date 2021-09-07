@@ -116,7 +116,7 @@ public class DescriptionItemProvider extends DescriptionBoxItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Description)object).getIri();
+		String label = ((Description)object).getNamespace();
 		return label == null || label.length() == 0 ?
 			getString("_UI_Description_type") :
 			getString("_UI_Description_type") + " " + label;

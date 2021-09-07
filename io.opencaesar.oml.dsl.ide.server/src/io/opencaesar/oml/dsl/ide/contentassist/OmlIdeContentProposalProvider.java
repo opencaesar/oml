@@ -35,7 +35,7 @@ import com.google.inject.Inject;
 import io.opencaesar.oml.Element;
 import io.opencaesar.oml.Import;
 import io.opencaesar.oml.OmlPackage;
-import io.opencaesar.oml.dsl.conversion.IRIValueConverter;
+import io.opencaesar.oml.dsl.conversion.NAMESPACEValueConverter;
 import io.opencaesar.oml.dsl.services.OmlGrammarAccess;
 
 public class OmlIdeContentProposalProvider extends IdeContentProposalProvider {
@@ -44,19 +44,19 @@ public class OmlIdeContentProposalProvider extends IdeContentProposalProvider {
 
 	@Inject private IGlobalScopeProvider omlGlobalScopeProvider;
 
-	@Inject private IRIValueConverter qualifiedNameValueConverter;
+	@Inject private NAMESPACEValueConverter qualifiedNameValueConverter;
 
 	protected void _createProposals(RuleCall ruleCall, ContentAssistContext context, IIdeContentProposalAcceptor acceptor) {
-		if (ruleCall.getRule() == omlGrammarAccess.getIRIRule()) {
-			complete_IRI(context.getCurrentModel(), ruleCall, context, acceptor);
-		} else if (ruleCall.getRule() == omlGrammarAccess.getSeparatorKindRule()) {
-			complete_SeparatorKind(context.getCurrentModel(), ruleCall, context, acceptor);
-		} else if (ruleCall.getRule() == omlGrammarAccess.getIDRule()) {
-			complete_ID(context.getCurrentModel(), ruleCall, context, acceptor);
+		if (context.getCurrentModel() instanceof Import) {
+			if (ruleCall.getRule() == omlGrammarAccess.getNAMESPACERule()) {
+				complete_NAMESPACE(context.getCurrentModel(), ruleCall, context, acceptor);
+			} else if (ruleCall.getRule() == omlGrammarAccess.getIDRule()) {
+				complete_ID(context.getCurrentModel(), ruleCall, context, acceptor);
+			}
 		}
 	}
 
-	protected void complete_IRI(EObject model, RuleCall ruleCall, ContentAssistContext context, IIdeContentProposalAcceptor acceptor) {
+	protected void complete_NAMESPACE(EObject model, RuleCall ruleCall, ContentAssistContext context, IIdeContentProposalAcceptor acceptor) {
 		var ontology = ((Element)model).getOntology();
 		var ontologyURI = EcoreUtil.getURI(ontology);
 		var keyword = (Keyword) context.getLastCompleteNode().getGrammarElement();
@@ -84,17 +84,7 @@ public class OmlIdeContentProposalProvider extends IdeContentProposalProvider {
 	 		var eReference = EcoreFactory.eINSTANCE.createEReference();
 			eReference.setEType(OmlPackage.Literals.ONTOLOGY);
 			var scope = omlGlobalScopeProvider.getScope(ontology.eResource(), eReference, predicate);
-			scope.getAllElements().forEach(o ->acceptor.accept(getProposalCreator().createProposal(qualifiedNameValueConverter.toString(o.getUserData("iri")), context), 0));
-		}
-	}
-
-	protected void complete_SeparatorKind(EObject model, RuleCall ruleCall, ContentAssistContext context, IIdeContentProposalAcceptor acceptor) {
-		if (model instanceof Import) {
-			var _import = (Import) model; 
-	 		var eReference = EcoreFactory.eINSTANCE.createEReference();
-			eReference.setEType(OmlPackage.Literals.ONTOLOGY);
-			var scope = omlGlobalScopeProvider.getScope(_import.eResource(), eReference, x -> x.getUserData("iri").equals(_import.getIri()));
-			scope.getAllElements().forEach(o -> acceptor.accept(getProposalCreator().createProposal(o.getUserData("separator"), context), 0));
+			scope.getAllElements().forEach(o ->acceptor.accept(getProposalCreator().createProposal(qualifiedNameValueConverter.toString(o.getUserData("namespace")), context), 0));
 		}
 	}
 
@@ -103,7 +93,7 @@ public class OmlIdeContentProposalProvider extends IdeContentProposalProvider {
 			var _import = (Import) model; 
 	 		var eReference = EcoreFactory.eINSTANCE.createEReference();
 			eReference.setEType(OmlPackage.Literals.ONTOLOGY);
-			var scope = omlGlobalScopeProvider.getScope(_import.eResource(), eReference, x -> x.getUserData("iri").equals(_import.getIri()));
+			var scope = omlGlobalScopeProvider.getScope(_import.eResource(), eReference, x -> x.getUserData("namespace").equals(_import.getNamespace()));
 			scope.getAllElements().forEach(o -> acceptor.accept(getProposalCreator().createProposal(o.getUserData("prefix"), context), 0));
 		}
 	}

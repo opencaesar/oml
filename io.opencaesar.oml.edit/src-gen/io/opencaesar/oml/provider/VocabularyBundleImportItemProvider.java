@@ -94,7 +94,7 @@ public class VocabularyBundleImportItemProvider extends ImportItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((VocabularyBundleImport)object).getIri();
+		String label = ((VocabularyBundleImport)object).getNamespace();
 		return label == null || label.length() == 0 ?
 			getString("_UI_VocabularyBundleImport_type") :
 			getString("_UI_VocabularyBundleImport_type") + " " + label;

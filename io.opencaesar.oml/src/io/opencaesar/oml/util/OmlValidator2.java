@@ -166,7 +166,7 @@ public final class OmlValidator2 {
      */
     @SuppressWarnings("unchecked")
 	protected boolean validateOntologyHasUnusedImports(Ontology object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-    	var referencedIris = new HashSet<String>();
+    	var referencedNSs = new HashSet<String>();
     	for (var i = object.eAllContents(); i.hasNext();) {
     		var element = i.next();
     		var eClass = element.eClass();
@@ -177,13 +177,13 @@ public final class OmlValidator2 {
 	    				((List<Element>)refs).forEach(ref -> {
 		    				var ontology = ((Element)ref).getOntology();
 		    				if (ontology != null) {
-		    					referencedIris.add(ontology.getIri());
+		    					referencedNSs.add(ontology.getNamespace());
 		    				}
 	    				});
 	    			} else if (refs != null) {
     					var ontology = ((Element)refs).getOntology();
 	    				if (ontology != null) {
-	    					referencedIris.add(ontology.getIri());
+	    					referencedNSs.add(ontology.getNamespace());
 	    				}
 	    			}
     			}
@@ -191,9 +191,9 @@ public final class OmlValidator2 {
     	}
     	var returnValue = true;
         for (var import_ : OmlRead.getImports(object)) {
-        	if (import_.getPrefix() != null && !referencedIris.contains(import_.getIri())) {
+        	if (import_.getPrefix() != null && !referencedNSs.contains(import_.getNamespace())) {
 	            report(Diagnostic.WARNING, diagnostics, import_,
-	                "Import <"+import_.getIri()+"> is not used", null);
+	                "Import <"+import_.getNamespace()+"> with prefix is not used", null);
 	            returnValue = false;
         	}
         }
@@ -213,9 +213,9 @@ public final class OmlValidator2 {
         boolean returnValue = true;
     	var imports = OmlRead.getImports(object);
     	for (var import_ : imports) {
-        	if (imports.stream().anyMatch(i -> i != import_ && i.getIri() != null && i.getIri().equals(import_.getIri()))) {
+        	if (imports.stream().anyMatch(i -> i != import_ && i.getNamespace() != null && i.getNamespace().equals(import_.getNamespace()))) {
 	            report(Diagnostic.WARNING, diagnostics, import_,
-	                "Import <"+import_.getIri()+"> is a duplicate", null);
+	                "Import <"+import_.getNamespace()+"> is a duplicate", null);
 	            returnValue = false;
         	}
         }
@@ -235,9 +235,9 @@ public final class OmlValidator2 {
         boolean returnValue = true;
     	var imports = OmlRead.getImports(object);
     	for (var import_ : imports) {
-        	if (imports.stream().anyMatch(i -> i.getIri() != null && i.getIri().equals(object.getIri()))) {
+        	if (imports.stream().anyMatch(i -> i.getNamespace() != null && i.getNamespace().equals(object.getNamespace()))) {
 	            report(Diagnostic.WARNING, diagnostics, import_,
-	                "Import <"+import_.getIri()+"> is to self", null);
+	                "Import <"+import_.getNamespace()+"> is to self", null);
 	            returnValue = false;
         	}
         }
@@ -257,8 +257,8 @@ public final class OmlValidator2 {
     protected boolean validateVocabularyExtensionURI(VocabularyExtension object, DiagnosticChain diagnostics, Map<Object, Object> context) {
         if (!(OmlRead.getImportedOntology(object) instanceof Vocabulary)) {
             return report(Diagnostic.ERROR, diagnostics, object,
-                "IRI <"+object.getIri()+"> could not be resolved to a vocabulary", 
-                OmlPackage.Literals.IMPORT__IRI);
+                "Namespace <"+object.getNamespace()+"> could not be resolved to a vocabulary", 
+                OmlPackage.Literals.IMPORT__NAMESPACE);
         }
         return true;
     }
@@ -276,8 +276,8 @@ public final class OmlValidator2 {
     protected boolean validateVocabularyUsageURI(VocabularyUsage object, DiagnosticChain diagnostics, Map<Object, Object> context) {
         if (!(OmlRead.getImportedOntology(object) instanceof DescriptionBox)) {
             return report(Diagnostic.ERROR, diagnostics, object,
-                "IRI <"+object.getIri()+"> could not be resolved to an description nor an description bundle", 
-                OmlPackage.Literals.IMPORT__IRI);
+                "Namespace <"+object.getNamespace()+"> could not be resolved to an description nor an description bundle", 
+                OmlPackage.Literals.IMPORT__NAMESPACE);
         }
         return true;
     }
@@ -295,8 +295,8 @@ public final class OmlValidator2 {
     protected boolean validateVocabularyBundleExtensionURI(VocabularyBundleExtension object, DiagnosticChain diagnostics, Map<Object, Object> context) {
         if (!(OmlRead.getImportedOntology(object) instanceof VocabularyBundle)) {
             return report(Diagnostic.ERROR, diagnostics, object,
-                "IRI <"+object.getIri()+"> could not be resolved to a vocabulary bundle", 
-                OmlPackage.Literals.IMPORT__IRI);
+                "Namespace <"+object.getNamespace()+"> could not be resolved to a vocabulary bundle", 
+                OmlPackage.Literals.IMPORT__NAMESPACE);
         }
         return true;
     }
@@ -314,8 +314,8 @@ public final class OmlValidator2 {
     protected boolean validateVocabularyBundleInclusionURI(VocabularyBundleInclusion object, DiagnosticChain diagnostics, Map<Object, Object> context) {
         if (!(OmlRead.getImportedOntology(object) instanceof Vocabulary)) {
             return report(Diagnostic.ERROR, diagnostics, object,
-                "IRI <"+object.getIri()+"> could not be resolved to a vocabulary", 
-                OmlPackage.Literals.IMPORT__IRI);
+                "Namespace <"+object.getNamespace()+"> could not be resolved to a vocabulary", 
+                OmlPackage.Literals.IMPORT__NAMESPACE);
         }
         return true;
     }
@@ -333,8 +333,8 @@ public final class OmlValidator2 {
     protected boolean validateDescriptionExtensionURI(DescriptionExtension object, DiagnosticChain diagnostics, Map<Object, Object> context) {
         if (!(OmlRead.getImportedOntology(object) instanceof Description)) {
             return report(Diagnostic.ERROR, diagnostics, object,
-                "IRI <"+object.getIri()+"> could not be resolved to an description", 
-                OmlPackage.Literals.IMPORT__IRI);
+                "Namespace <"+object.getNamespace()+"> could not be resolved to an description", 
+                OmlPackage.Literals.IMPORT__NAMESPACE);
         }
         return true;
     }
@@ -352,8 +352,8 @@ public final class OmlValidator2 {
     protected boolean validateDescriptionUsageURI(DescriptionUsage object, DiagnosticChain diagnostics, Map<Object, Object> context) {
         if (!(OmlRead.getImportedOntology(object) instanceof VocabularyBox)) {
             return report(Diagnostic.ERROR, diagnostics, object,
-                "IRI <"+object.getIri()+"> could not be resolved to a vocabulary nor a vocabulary bundle", 
-                OmlPackage.Literals.IMPORT__IRI);
+                "Namespace <"+object.getNamespace()+"> could not be resolved to a vocabulary nor a vocabulary bundle", 
+                OmlPackage.Literals.IMPORT__NAMESPACE);
         }
         return true;
     }
@@ -371,8 +371,8 @@ public final class OmlValidator2 {
     protected boolean validateDescriptionBundleExtensionURI(DescriptionBundleExtension object, DiagnosticChain diagnostics, Map<Object, Object> context) {
         if (!(OmlRead.getImportedOntology(object) instanceof DescriptionBundle)) {
             return report(Diagnostic.ERROR, diagnostics, object,
-                "IRI <"+object.getIri()+"> could not be resolved to an description bundle", 
-                OmlPackage.Literals.IMPORT__IRI);
+                "Namespace <"+object.getNamespace()+"> could not be resolved to an description bundle", 
+                OmlPackage.Literals.IMPORT__NAMESPACE);
         }
         return true;
     }
@@ -390,8 +390,8 @@ public final class OmlValidator2 {
     protected boolean validateDescriptionBundleInclusionURI(DescriptionBundleInclusion object, DiagnosticChain diagnostics, Map<Object, Object> context) {
         if (!(OmlRead.getImportedOntology(object) instanceof Description)) {
             return report(Diagnostic.ERROR, diagnostics, object,
-                "IRI <"+object.getIri()+"> could not be resolved to an description", 
-                OmlPackage.Literals.IMPORT__IRI);
+                "Namespace <"+object.getNamespace()+"> could not be resolved to an description", 
+                OmlPackage.Literals.IMPORT__NAMESPACE);
         }
         return true;
     }
@@ -409,8 +409,8 @@ public final class OmlValidator2 {
     protected boolean validateDescriptionBundleUsageURI(DescriptionBundleUsage object, DiagnosticChain diagnostics, Map<Object, Object> context) {
         if (!(OmlRead.getImportedOntology(object) instanceof VocabularyBox)) {
             return report(Diagnostic.ERROR, diagnostics, object,
-                "IRI <"+object.getIri()+"> could not be resolved to a vocabulary box", 
-                OmlPackage.Literals.IMPORT__IRI);
+                "Namespace <"+object.getNamespace()+"> could not be resolved to a vocabulary box", 
+                OmlPackage.Literals.IMPORT__NAMESPACE);
         }
         return true;
     }
@@ -794,11 +794,11 @@ public final class OmlValidator2 {
     private boolean isStandardScalar(Scalar scalar) {
     	var ontology = scalar.getOntology();
     	if (ontology != null) {
-	    	var ontologyIri = ontology.getIri();
-	    	return ontologyIri.equals(OmlConstants.XSD_IRI) ||
-	            	ontologyIri.equals(OmlConstants.RDF_IRI) ||
-	            	ontologyIri.equals(OmlConstants.RDFS_IRI) ||
-	            	ontologyIri.equals(OmlConstants.OWL_IRI);
+	    	var ontologyNs = ontology.getNamespace();
+	    	return ontologyNs.equals(OmlConstants.XSD_NS) ||
+	            	ontologyNs.equals(OmlConstants.RDF_NS) ||
+	            	ontologyNs.equals(OmlConstants.RDFS_NS) ||
+	            	ontologyNs.equals(OmlConstants.OWL_NS);
     	}
     	return false;
     }

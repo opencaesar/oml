@@ -32,8 +32,7 @@ class OmlResourceDescriptionStrategy extends DefaultResourceDescriptionStrategy 
 		if (eObject instanceof Ontology) {
 			val qualifiedName = getQualifiedNameProvider().getFullyQualifiedName(eObject);
 			acceptor.accept(EObjectDescription.create(qualifiedName, eObject, newHashMap(
-				"iri" -> eObject.ontology.iri,
-				"separator" -> eObject.ontology.separator.toString,
+				"namespace" -> eObject.ontology.namespace,
 				"prefix" -> eObject.ontology.prefix)));
 			return true
 		} else if (eObject instanceof Member) {

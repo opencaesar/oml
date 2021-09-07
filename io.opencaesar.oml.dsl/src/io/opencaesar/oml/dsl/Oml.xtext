@@ -51,14 +51,14 @@ VocabularyBox:
 
 Vocabulary:
 	ownedAnnotations+=Annotation*
-	'vocabulary' iri=IRI ('with' separator=SeparatorKind)? 'as' prefix=ID  '{'
+	'vocabulary' namespace=NAMESPACE 'as' prefix=ID  '{'
 		ownedImports+=VocabularyImport*
 		ownedStatements+=VocabularyStatement*
 	'}';
 
 VocabularyBundle:
 	ownedAnnotations+=Annotation*
-	'vocabulary' 'bundle' iri=IRI ('with' separator=SeparatorKind)? 'as' prefix=ID '{'
+	'vocabulary' 'bundle' namespace=NAMESPACE 'as' prefix=ID '{'
 		ownedImports+=VocabularyBundleImport*
 	'}';
 
@@ -68,14 +68,14 @@ DescriptionBox:
 	
 Description:
 	ownedAnnotations+=Annotation*
-	'description' iri=IRI ('with' separator=SeparatorKind)? 'as' prefix=ID '{'
+	'description' namespace=NAMESPACE 'as' prefix=ID '{'
 		ownedImports+=DescriptionImport*
 		ownedStatements+=DescriptionStatement*
 	'}';
 
 DescriptionBundle:
 	ownedAnnotations+=Annotation*
-	'description' 'bundle' iri=IRI ('with' separator=SeparatorKind)? 'as' prefix=ID '{'
+	'description' 'bundle' namespace=NAMESPACE 'as' prefix=ID '{'
 		ownedImports+=DescriptionBundleImport*
 	'}';
 
@@ -379,11 +379,11 @@ VocabularyImport:
 
 VocabularyExtension:
 	
-	'extends' iri=IRI ('with' separator=SeparatorKind)? ('as' prefix=ID)?;
+	'extends' namespace=NAMESPACE ('as' prefix=ID)?;
     	
 VocabularyUsage:
 	
-	'uses' iri=IRI ('with' separator=SeparatorKind)? ('as' prefix=ID)?;
+	'uses' namespace=NAMESPACE ('as' prefix=ID)?;
     	
 VocabularyBundleImport:
 	VocabularyBundleExtension |
@@ -391,11 +391,11 @@ VocabularyBundleImport:
 
 VocabularyBundleInclusion:
 	
-	'includes' iri=IRI ('with' separator=SeparatorKind)? ('as' prefix=ID)?;
+	'includes' namespace=NAMESPACE ('as' prefix=ID)?;
 
 VocabularyBundleExtension:
 	
-	'extends' iri=IRI ('with' separator=SeparatorKind)? ('as' prefix=ID)?;
+	'extends' namespace=NAMESPACE ('as' prefix=ID)?;
 
 DescriptionImport:
 	DescriptionExtension |
@@ -403,11 +403,11 @@ DescriptionImport:
 
 DescriptionUsage:
 	
-	'uses' iri=IRI ('with' separator=SeparatorKind)? ('as' prefix=ID)?;
+	'uses' namespace=NAMESPACE ('as' prefix=ID)?;
 
 DescriptionExtension:
 	
-	'extends' iri=IRI ('with' separator=SeparatorKind)? ('as' prefix=ID)?;
+	'extends' namespace=NAMESPACE ('as' prefix=ID)?;
 
 DescriptionBundleImport:
 	DescriptionBundleExtension |
@@ -416,15 +416,15 @@ DescriptionBundleImport:
 
 DescriptionBundleInclusion:
 	
-	'includes' iri=IRI ('with' separator=SeparatorKind)? ('as' prefix=ID)?;
+	'includes' namespace=NAMESPACE ('as' prefix=ID)?;
 
 DescriptionBundleExtension:
 	
-	'extends' iri=IRI ('with' separator=SeparatorKind)? ('as' prefix=ID)?;
+	'extends' namespace=NAMESPACE ('as' prefix=ID)?;
 
 DescriptionBundleUsage:
 	
-	'uses' iri=IRI ('with' separator=SeparatorKind)? ('as' prefix=ID)?;
+	'uses' namespace=NAMESPACE ('as' prefix=ID)?;
 
 Axiom:
 	SpecializationAxiom |
@@ -626,6 +626,8 @@ terminal DECIMAL_STR:									('+'|'-')? (DIGIT+('.'DIGIT*)? | ('.'DIGIT+));
 terminal DOUBLE_STR:									('+'|'-')? (DIGIT+('.'DIGIT*)? | ('.'DIGIT+)) (('e'|'E') ('+'|'-')? DIGIT+)?;
 
 terminal STRING:										('"' (!('"'|'\\') | '\\'.)* '"') | ("'" (!("'"|'\\') | '\\'.)* "'") | ("'''" -> "'''") | '"""' -> '"""';
+
+terminal NAMESPACE:										'<' (!('>'|' '))* ('#'|'/') '>';
 
 terminal IRI:											'<' (!('>'|' '))* '>';
 

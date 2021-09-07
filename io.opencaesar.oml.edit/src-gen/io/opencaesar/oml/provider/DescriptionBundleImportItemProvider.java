@@ -94,7 +94,7 @@ public class DescriptionBundleImportItemProvider extends ImportItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((DescriptionBundleImport)object).getIri();
+		String label = ((DescriptionBundleImport)object).getNamespace();
 		return label == null || label.length() == 0 ?
 			getString("_UI_DescriptionBundleImport_type") :
 			getString("_UI_DescriptionBundleImport_type") + " " + label;

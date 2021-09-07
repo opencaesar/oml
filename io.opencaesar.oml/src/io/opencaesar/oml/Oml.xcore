@@ -115,28 +115,52 @@ abstract class IdentifiedElement extends AnnotatedElement {
 
 /*
  * Ontology is an identified element that represents a namespace for its members. The namespace is defined
- * by a globally unique IRI followed by a separator character and can be abbreviated with a prefix. An 
- * ontology can import other ontologies, and can make statements about its own as well as imported members.
+ * by a globally unique namespace (an iri and a namespace separator that can be # or /) and can be abbreviated with a prefix. 
+ * An ontology can import other ontologies, and can make statements about its own as well as imported members.
  */
 @Bikeshed(heading="Ontologies")
 abstract class Ontology extends IdentifiedElement {
     /*
-     * The globally unique IRI of this ontology
+     * The globally unique namespace of this ontology
      */
-    IRI[1] iri
-    /*
-     * The separator character that follows this ontology's IRI in the namespace
-     */
-    SeparatorKind[1] separator = "#"
+    Namespace[1] namespace
     /*
      * The prefix of this ontology's namespace
      */
     ID[1] prefix
     /*
-     * Get the namespace (i.e., iri + separator char) of the ontology
+     * Get the namespace's iri
      */
-    op String getNamespace() {
-        return iri+separator
+    op String getIri() {
+    	if (namespace === null) {
+    		return null
+    	}
+     	var i = namespace.indexOf('#')
+    	if (i === -1) {
+    		i = namespace.lastIndexOf('/')
+    	}
+    	if (i === -1) {
+        	return namespace
+       	} else {
+       		return namespace.substring(0, i)
+       	}
+    }
+    /*
+     * Get the namespace's separator char
+     */
+    op SeparatorKind getSeparator() {
+     	if (namespace === null) {
+    		return null
+    	}
+    	var i = namespace.indexOf('#')
+    	if (i === -1) {
+    		i = namespace.lastIndexOf('/')
+    	}
+    	if (i === -1) {
+       		return null
+       	} else {
+        	return SeparatorKind.get(namespace.substring(i, i+1))
+       	}
     }
 }
 
@@ -992,17 +1016,48 @@ abstract class DescriptionStatement extends Statement {
 @Bikeshed(heading="Ontologies")
 abstract class Import extends Element {
     /*
-     * The IRI of the imported ontology
+     * The namespace of the imported ontology
      */
-    IRI[1] iri
-    /*
-     * The separator character of the imported ontology's namespace  
-     */
-    SeparatorKind[?] separator = "#" 
+    Namespace[1] namespace
     /*
      * The local prefix of the imported ontology's namespace
      */
     ID[?] prefix
+
+    /*
+     * Get the import's iri
+     */
+    op String getIri() {
+    	if (namespace === null) {
+    		return null
+    	}
+     	var i = namespace.indexOf('#')
+    	if (i === -1) {
+    		i = namespace.lastIndexOf('/')
+    	}
+    	if (i === -1) {
+        	return namespace
+       	} else {
+       		return namespace.substring(0, i)
+       	}
+    }
+    /*
+     * Get the import's separator char
+     */
+    op SeparatorKind getSeparator() {
+     	if (namespace === null) {
+    		return null
+    	}
+    	var i = namespace.indexOf('#')
+    	if (i === -1) {
+    		i = namespace.lastIndexOf('/')
+    	}
+    	if (i === -1) {
+       		return null
+       	} else {
+        	return SeparatorKind.get(namespace.substring(i, i+1))
+       	}
+    }
 }
 
 /*
@@ -1732,5 +1787,5 @@ type Decimal wraps BigDecimal
 @ExtendedMetaData(pattern="[a-zA-Z0-9_]([a-zA-Z0-9_\\-.$])*")
 type ID wraps String
 
-@ExtendedMetaData(pattern="([^\\s])*", minLength="1")
-type IRI wraps String
+@ExtendedMetaData(pattern="([^\\s])*(#|/)", minLength="2")
+type Namespace wraps String

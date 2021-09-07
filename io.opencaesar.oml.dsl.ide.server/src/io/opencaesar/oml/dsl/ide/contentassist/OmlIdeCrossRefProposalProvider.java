@@ -102,10 +102,8 @@ public class OmlIdeCrossRefProposalProvider extends IdeCrossrefProposalProvider 
 		var lineDelimiter = "\n";
 		var importKeyword = getImportKeyword(ontology.eClass(), candidate.getEClass());
 		var importNamespace = memberName.getFirstSegment();
-		var importSeparator = importNamespace.charAt(importNamespace.length()-1);
-		var importIri = importNamespace.substring(0, importNamespace.length()-1);
 		var importStatement = (startWithLineBreak ? lineDelimiter + lineDelimiter +"\t" : "") + 
-				importKeyword+" " + valueConverter.toString(importIri) + ((importSeparator != '#') ? " with "+ importSeparator : "")+ " as "+ importPrefix +
+				importKeyword+" " + valueConverter.toString(importNamespace) + " as "+ importPrefix +
 				(endWithLineBreak ? lineDelimiter + lineDelimiter+"\t" : "");
 
 		// add the import statement

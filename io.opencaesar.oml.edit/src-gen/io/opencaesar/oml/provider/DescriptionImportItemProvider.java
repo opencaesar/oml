@@ -94,7 +94,7 @@ public class DescriptionImportItemProvider extends ImportItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((DescriptionImport)object).getIri();
+		String label = ((DescriptionImport)object).getNamespace();
 		return label == null || label.length() == 0 ?
 			getString("_UI_DescriptionImport_type") :
 			getString("_UI_DescriptionImport_type") + " " + label;

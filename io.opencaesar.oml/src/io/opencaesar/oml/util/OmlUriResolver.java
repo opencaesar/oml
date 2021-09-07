@@ -200,7 +200,7 @@ final class OmlUriResolver implements Runnable {
         return resolvedUri;
     }
     
-    public synchronized Set<URI> getVisibleResourceUris(Resource contextResource) {
+    public synchronized Set<URI> getResolvableUris(Resource contextResource) {
 		final var uris = new LinkedHashSet<URI>();
 		
 		// add the URIs from the current resource set

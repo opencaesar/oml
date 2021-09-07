@@ -69,7 +69,7 @@ public class VocabularyBoxItemProvider extends OntologyItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((VocabularyBox)object).getIri();
+		String label = ((VocabularyBox)object).getNamespace();
 		return label == null || label.length() == 0 ?
 			getString("_UI_VocabularyBox_type") :
 			getString("_UI_VocabularyBox_type") + " " + label;

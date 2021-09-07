@@ -61,49 +61,26 @@ public class ImportItemProvider extends ElementItemProvider {
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addIriPropertyDescriptor(object);
-			addSeparatorPropertyDescriptor(object);
+			addNamespacePropertyDescriptor(object);
 			addPrefixPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Iri feature.
+	 * This adds a property descriptor for the Namespace feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addIriPropertyDescriptor(Object object) {
+	protected void addNamespacePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Import_iri_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Import_iri_feature", "_UI_Import_type"),
-				 OmlPackage.Literals.IMPORT__IRI,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Separator feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addSeparatorPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Import_separator_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Import_separator_feature", "_UI_Import_type"),
-				 OmlPackage.Literals.IMPORT__SEPARATOR,
+				 getString("_UI_Import_namespace_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Import_namespace_feature", "_UI_Import_type"),
+				 OmlPackage.Literals.IMPORT__NAMESPACE,
 				 true,
 				 false,
 				 false,
@@ -142,7 +119,7 @@ public class ImportItemProvider extends ElementItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Import)object).getIri();
+		String label = ((Import)object).getNamespace();
 		return label == null || label.length() == 0 ?
 			getString("_UI_Import_type") :
 			getString("_UI_Import_type") + " " + label;
@@ -161,8 +138,7 @@ public class ImportItemProvider extends ElementItemProvider {
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Import.class)) {
-			case OmlPackage.IMPORT__IRI:
-			case OmlPackage.IMPORT__SEPARATOR:
+			case OmlPackage.IMPORT__NAMESPACE:
 			case OmlPackage.IMPORT__PREFIX:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;

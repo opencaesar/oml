@@ -18,6 +18,7 @@
  */
 package io.opencaesar.oml.util;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
@@ -250,7 +251,7 @@ public final class OmlRead {
     // ResourceSet
     
     /**
-     * Get all ontologies in the given resource set 
+     * Gets all ontologies loaded in the given resource set 
      * 
      * @param resourceSet The resource set to look for ontologies in 
      * @return The list of ontologies in the given resource set
@@ -262,7 +263,7 @@ public final class OmlRead {
     }
     
     /**
-     * Get an ontology with the given iri in the given resource set
+     * Gets an ontology with the given iri that is loaded in the given resource set
      *  
      * @param resourceSet The resource set to look for an ontology in
      * @param iri The iri of the ontology
@@ -278,7 +279,7 @@ public final class OmlRead {
     }
     
     /**
-     * Get an ontology with the given prefix in the given resource set
+     * Gets an ontology with the given prefix that is loaded in the given resource set
      * 
      * If more than one ontology has the same prefix, one of them is returned randomly
      *  
@@ -296,7 +297,7 @@ public final class OmlRead {
     }
     
     /**
-     * Get a member with the given iri in the given resource set
+     * Gets a member with the given iri in the given resource set
      *  
      * @param resourceSet The resource set to look for an ontology in
      * @param iri The iri of the member
@@ -308,13 +309,13 @@ public final class OmlRead {
         String fragment = iriParts[1];
         Ontology ontology = getOntologyByIri(resourceSet, baseIri);
         if (ontology != null) {
-            return (Member) ontology.eResource().getEObject(fragment);
+            return getMemberByName(ontology, fragment);
         }
         return null;
     }
     
     /**
-     * Get a member with the given abbreviated iri in the given resource set
+     * Gets a member with the given abbreviated iri in the given resource set
      *  
      * @param resourceSet The resource set to look for an ontology in
      * @param iri The abbreviated iri of the member
@@ -326,7 +327,7 @@ public final class OmlRead {
         String fragment = iriParts[1];
         Ontology ontology = getOntologyByPrefix(resourceSet, prefix);
         if (ontology != null) {
-            return (Member) ontology.eResource().getEObject(fragment);
+            return getMemberByName(ontology, fragment);
         }
         return null;
     }
@@ -334,12 +335,19 @@ public final class OmlRead {
     // Resource
     
     /**
-     * Get the ontology of the given resource if one exists
+     * Gets the ontology of the given resource if one exists
      * 
      * @param resource The resource to get the ontology from
      * @return An ontology if one exists in the resource; otherwise null
      */
     public static Ontology getOntology(Resource resource) {
+		if (!resource.isLoaded()) {
+			try {
+				resource.load(null);
+			} catch (IOException e) {
+				return null;
+			}
+		}
         return resource.getContents().stream()
             .filter(o -> o instanceof Ontology)
             .map(o -> (Ontology)o)
@@ -348,43 +356,57 @@ public final class OmlRead {
     }
     
     /**
-     * Get a member by iri in the context of the given resource
+     * Gets a member by iri in the context of the given resource following the import closure
      * 
      * @param resource The resource to look for the member in
      * @param iri The iri of the member
      * @return A member if one exists with the given iri; otherwise null
      */
     public static Member getMemberByIri(Resource resource, String iri) {
-        final Ontology ontology = getOntology(resource);
-        if (ontology != null) {
-            return getMemberByIri(ontology, iri);
-        }
-        return null;
+        String[] iriParts = parseIri(iri);
+        String baseIri = iriParts[0];
+        String fragment = iriParts[1];
+        final Ontology ontology = getOntologyByIri(resource, baseIri);
+        return (ontology != null) ? getMemberByName(ontology, fragment) : null;
     }
     
     /**
-     * Get a member by abbreviated iri in the context of the given resource
+     * Gets the ontology with the given Iri in the context of the given resource
      * 
-     * @param resource The resource to look for the member in
-     * @param iri The abbreviated iri of the member
-     * @return A member if one exists with the given abbreviated iri; otherwise null
+     * The iri is resolved using the resource's OML catalog
+     * 
+     * @param resource The resource to use as context of iri resolution
+     * @param iri The logical iri of the ontology to get
+     * @return The resolved URI
      */
-    public static Member getMemberByAbbreviatedIri(Resource resource, String iri) {
-        final Ontology ontology = getOntology(resource);
-        if (ontology != null) {
-            return getMemberByAbbreviatedIri(ontology, iri);
-        }
-        return null;
+    public static Ontology getOntologyByIri(Resource resource, String iri) {
+    	Resource resolved = getResourceByIri(resource, iri);
+        return (resolved != null) ? getOntology(resolved) : null;
+    }
+
+   /**
+     * Gets a resource that has the given logical Iri in the context of the given resource.
+     * 
+     * The resource may not be loaded when it is returned
+     * 
+     * @param resource The resource to use as context of uri resolution
+     * @param iri The logical iri to resolve
+     * @return The resource that has the given IRI
+     */
+    public static Resource getResourceByIri(Resource resource, String iri) {
+    	URI uri = getUriByIri(resource, iri);
+    	ResourceSet resourceSet = (uri != null) ? resource.getResourceSet() : null;
+    	return (resourceSet != null) ? resourceSet.getResource(uri, false) : null;
     }
     
     /**
-     * Resolves the given logical Iri in the context of the given resource.
+     * Gets a physical URI that corresponds to the given logical Iri in the context of the given resource.
      * 
      * @param resource The resource to use as context of uri resolution
      * @param iri The logical iri to resolve
      * @return The resolved URI
      */
-    public static URI getResolvedUri(Resource resource, String iri) {
+    public static URI getUriByIri(Resource resource, String iri) {
         if (resource == null || iri == null || iri.isEmpty()) {
             return null;
         }
@@ -399,7 +421,15 @@ public final class OmlRead {
         return resolver.resolve(resource, iri);
     }
     
-    public static Set<URI> getVisibleResourceUris(Resource resource) {
+    /**
+     * Gets the resource URIs that are resolvable from the context of the given resource
+     * 
+     * This method looks for resolvable resources in the resource's OML catalog 
+     * 
+     * @param resource the context resource
+     * @return a set of resource URIs that are resolvable from the given resource
+     */
+    public static Set<URI> getResolvableUris(Resource resource) {
         if (resource == null) {
             return Collections.emptySet();
         }
@@ -411,7 +441,7 @@ public final class OmlRead {
         if (resolver == null) {
             return Collections.emptySet();
         }
-        return resolver.getVisibleResourceUris(resource);
+        return resolver.getResolvableUris(resource);
     }
     
     //-------------------------------------------------
@@ -432,32 +462,10 @@ public final class OmlRead {
         return EcoreUtil.getID(element);
     }
     
-    /**
-     * Resolves the given iri in the given context to a member
-     * 
-     * @param context the given context of resolution
-     * @param iri the given iri
-     * @return the member that has the given iri in the given context
-     */
-    public static Member getMemberByIri(Element context, String iri) {
-        return getMemberByIri(context.getOntology(), iri);
-    }
-    
-    /**
-     * Resolves the given abbreviated iri in the given context to a member
-     * 
-     * @param context the given context of resolution
-     * @param iri the given abbreviated iri
-     * @return the member that has the given abbreviated iri in the given context
-     */
-    public static Member getMemberByAbbreviatedIri(Element context, String iri) {
-        return getMemberByAbbreviatedIri(context.getOntology(), iri);
-    }
-
     // Annotation
     
     /**
-     * Get the annotated element of the given annotation
+     * Gets the annotated element of the given annotation
      * 
      * @param annotation the given annotation
      * @return the annotated element of the annotation
@@ -473,7 +481,7 @@ public final class OmlRead {
     // AnnotatedElement
     
     /**
-     * Get the values of the given annotation property in the given element
+     * Gets the values of the given annotation property in the given element
      * 
      * @param element The element that has the annotation
      * @param property the given annotation property
@@ -487,7 +495,7 @@ public final class OmlRead {
     }
     
     /**
-     * Get the first value of the given annotation property in the given element
+     * Gets the first value of the given annotation property in the given element
      * 
      * @param element The element that has the annotation
      * @param property the given annotation property
@@ -504,7 +512,7 @@ public final class OmlRead {
     // Literal
     
     /**
-     * Get the lexical value of the given literal
+     * Gets the lexical value of the given literal
      * 
      * @param literal the given literal
      * @return the lexical value of the given literal
@@ -521,7 +529,7 @@ public final class OmlRead {
     }
 
     /**
-     * Get the string value of the given literal
+     * Gets the string value of the given literal
      * 
      * @param literal the given literal
      * @return the string value of the given literal
@@ -532,7 +540,7 @@ public final class OmlRead {
     }
     
     /**
-     * Get the value of the given literal
+     * Gets the value of the given literal
      * 
      * @param literal the given literal
      * @return the value of the given literal
@@ -553,7 +561,7 @@ public final class OmlRead {
     }
     
     /**
-     * Get the iri of the given literal's type
+     * Gets the iri of the given literal's type
      * 
      * @param literal the given literal
      * @return the iri of the given literal's type
@@ -680,7 +688,7 @@ public final class OmlRead {
         final Map<String, String> map = new LinkedHashMap<>();
         getImports(ontology).stream()
         	.filter(i -> i.getPrefix() != null)
-        	.forEach(i -> map.put(getImportedNamespace(i), i.getPrefix()));
+        	.forEach(i -> map.put(i.getNamespace(), i.getPrefix()));
         return map;
     }
     
@@ -774,7 +782,7 @@ public final class OmlRead {
     }
     
     /**
-     * Gets a member with the given iri defined by the given ontology
+     * Gets a member with the given iri defined by the given ontology or its import closure
      * 
      * @param ontology the given ontology
      * @param iri the iri of the member
@@ -794,7 +802,7 @@ public final class OmlRead {
     }
     
     /**
-     * Gets a member with the given abbreviated iri defined by the given ontology
+     * Gets a member with the given abbreviated iri defined by the given ontology or its import closure
      * 
      * @param ontology the given ontology
      * @param iri the abbreviated iri of the member
@@ -820,12 +828,12 @@ public final class OmlRead {
     // Import
     
     /**
-     * Gets the URI that results from resolving the given import's IRI
+     * Gets the resource URI that is resolved by the given import statement
      * 
      * @param _import the given import
      * @return the resolved URI of the given import
      */
-    public static URI getResolvedUri(Import _import) {
+    public static URI getImportedUri(Import _import) {
         if (_import.getIri() == null || _import.getIri().isEmpty()) {
             return null;
         }
@@ -834,21 +842,11 @@ public final class OmlRead {
         if (r == null) {
             return null;
         }
-        return getResolvedUri(r, iri);
+        return getUriByIri(r, iri);
     }
     
     /**
-     * Gets the namespace of the ontology imported by the given import
-     * 
-     * @param _import the given import
-     * @return the namespace of the imported ontology
-     */
-    public static String getImportedNamespace(Import _import) {
-        return _import.getIri()+_import.getSeparator();
-    }
-    
-    /**
-     * Get the ontology that is imported by the given import
+     * Gets the ontology that is imported by the given import
      * 
      * @param _import the given import
      * @return the ontology that is imported by the given import (can be null of the import failed)
@@ -880,23 +878,15 @@ public final class OmlRead {
     /**
      * Gets the resource imported by the given import
      * 
+     * The resource may not be loaded when it is returned
+     * 
      * @param _import the given import
      * @return a resource that is imported by the given import
      */
     public static Resource getImportedResource(Import _import) {
-        final URI uri = getResolvedUri(_import);
-        if (uri == null) {
-            return null;
-        }            
-        final ResourceSet resourceSet = _import.eResource().getResourceSet();
-        if (resourceSet == null) {
-            return null;
-        }
-        try {
-            return resourceSet.getResource(uri, true);
-        } catch(Throwable t) {
-            return null;
-        }
+        final URI uri = getImportedUri(_import);
+        final ResourceSet resourceSet = (uri != null) ? _import.eResource().getResourceSet() : null;
+        return (resourceSet != null) ? resourceSet.getResource(uri, false) : null;
     }
     
     //-------------------------------------------------
@@ -1094,7 +1084,7 @@ public final class OmlRead {
     // AnnotatedElement
     
     /**
-     * Get the values of the given semantic property in the given instance
+     * Gets the values of the given semantic property in the given instance
      * 
      * @param instance The instance that has the annotation
      * @param property the given semantic property
@@ -1108,7 +1098,7 @@ public final class OmlRead {
     }
     
     /**
-     * Get a value of the given semantic property in the given instance
+     * Gets a value of the given semantic property in the given instance
      * 
      * @param instance The instance that has the annotation
      * @param property the given semantic property
@@ -1254,7 +1244,7 @@ public final class OmlRead {
     // Assertion
     
     /**
-     * Get the instance that is the subject of the given assertion
+     * Gets the instance that is the subject of the given assertion
      * 
      * @param assertion the given assertion
      * @return the instance that is the subject of this assertion

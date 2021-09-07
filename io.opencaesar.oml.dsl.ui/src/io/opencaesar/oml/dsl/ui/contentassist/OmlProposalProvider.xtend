@@ -23,7 +23,7 @@ import com.google.inject.Inject
 import io.opencaesar.oml.Element
 import io.opencaesar.oml.Import
 import io.opencaesar.oml.OmlPackage
-import io.opencaesar.oml.dsl.conversion.IRIValueConverter
+import io.opencaesar.oml.dsl.conversion.NAMESPACEValueConverter
 import io.opencaesar.oml.dsl.services.OmlGrammarAccess
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.EReference
@@ -57,7 +57,7 @@ class OmlProposalProvider extends AbstractOmlProposalProvider {
 	IQualifiedNameConverter qualifiedNameConverter
 	
 	@Inject
-	IRIValueConverter qualifiedNameValueConverter
+	NAMESPACEValueConverter qualifiedNameValueConverter
 
 	protected override lookupCrossReference(CrossReference crossReference, EReference reference,
 			ContentAssistContext contentAssistContext, ICompletionProposalAcceptor acceptor,
@@ -80,7 +80,7 @@ class OmlProposalProvider extends AbstractOmlProposalProvider {
 		return scopeAwareAcceptor
 	}
 
-	override complete_IRI(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+	override complete_NAMESPACE(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		val ontology = (model as Element).ontology
 		val ontologyURI = EcoreUtil.getURI(ontology)
 		val keyword = context.lastCompleteNode.grammarElement as Keyword
@@ -107,7 +107,7 @@ class OmlProposalProvider extends AbstractOmlProposalProvider {
  		val eReference = EcoreFactory.eINSTANCE.createEReference()
 		eReference.EType = OmlPackage.Literals.ONTOLOGY
 		val scope = omlGlobalScopeProvider.getScope(ontology.eResource, eReference, predicate)
-		scope.allElements.forEach[o | acceptor.accept(createCompletionProposal(qualifiedNameValueConverter.toString(o.getUserData("iri")), context))]
+		scope.allElements.forEach[o | acceptor.accept(createCompletionProposal(qualifiedNameValueConverter.toString(o.getUserData("namespace")), context))]
 	}
 
 	override complete_ID(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
@@ -115,19 +115,9 @@ class OmlProposalProvider extends AbstractOmlProposalProvider {
 			val _import = model as Import 
 	 		val eReference = EcoreFactory.eINSTANCE.createEReference()
 			eReference.EType = OmlPackage.Literals.ONTOLOGY
-			val scope = omlGlobalScopeProvider.getScope(_import.eResource, eReference) [x | x.getUserData("iri") == _import.iri]
+			val scope = omlGlobalScopeProvider.getScope(_import.eResource, eReference) [x | x.getUserData("namespace") == _import.namespace]
 			scope.allElements.forEach[o | acceptor.accept(createCompletionProposal(o.getUserData("prefix"), context))]
 		}
 	}
 
-	override complete_SeparatorKind(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		if (model instanceof Import) {
-			val _import = model as Import 
-	 		val eReference = EcoreFactory.eINSTANCE.createEReference()
-			eReference.EType = OmlPackage.Literals.ONTOLOGY
-			val scope = omlGlobalScopeProvider.getScope(_import.eResource, eReference) [x | x.getUserData("iri") == _import.iri]
-			scope.allElements.forEach[o | acceptor.accept(createCompletionProposal(o.getUserData("separator"), context))]
-		}
-	}
-		
 }

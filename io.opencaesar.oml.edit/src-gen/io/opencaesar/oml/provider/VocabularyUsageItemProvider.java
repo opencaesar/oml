@@ -80,7 +80,7 @@ public class VocabularyUsageItemProvider extends VocabularyImportItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((VocabularyUsage)object).getIri();
+		String label = ((VocabularyUsage)object).getNamespace();
 		return label == null || label.length() == 0 ?
 			getString("_UI_VocabularyUsage_type") :
 			getString("_UI_VocabularyUsage_type") + " " + label;

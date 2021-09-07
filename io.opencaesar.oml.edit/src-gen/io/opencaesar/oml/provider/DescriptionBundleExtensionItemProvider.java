@@ -80,7 +80,7 @@ public class DescriptionBundleExtensionItemProvider extends DescriptionBundleImp
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((DescriptionBundleExtension)object).getIri();
+		String label = ((DescriptionBundleExtension)object).getNamespace();
 		return label == null || label.length() == 0 ?
 			getString("_UI_DescriptionBundleExtension_type") :
 			getString("_UI_DescriptionBundleExtension_type") + " " + label;
