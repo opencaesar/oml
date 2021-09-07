@@ -36,7 +36,7 @@ class OmlParsingTest {
 	@Test
 	def void loadModel() {
 		val result = parseHelper.parse('''
-			vocabulary <http://test> with # as test {
+			vocabulary <http://test#> as test {
 				concept c
 				aspect  a
 				relation entity R [

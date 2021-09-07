@@ -97,11 +97,10 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 			@Override
 			public String getText(Object object) {
 				Vocabulary vocabulary = (Vocabulary)object;
-				StringBuilder label = new StringBuilder("vocabulary ");
-				if (vocabulary.getIri() != null) {
-					label.append("<").append(vocabulary.getIri()).append("> ");
+				StringBuilder label = new StringBuilder("vocabulary");
+				if (vocabulary.getNamespace() != null) {
+					label.append(" <").append(vocabulary.getNamespace()).append(">");
 				}
-				label.append("with ").append(vocabulary.getSeparator());
 				if (vocabulary.getPrefix() != null) {
 					label.append(" as ").append(vocabulary.getPrefix());
 				}
@@ -117,11 +116,10 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 			@Override
 			public String getText(Object object) {
 				VocabularyBundle bundle = (VocabularyBundle)object;
-				StringBuilder label = new StringBuilder("vocabulary bundle ");
-				if (bundle.getIri() != null) {
-					label.append("<").append(bundle.getIri()).append("> ");
+				StringBuilder label = new StringBuilder("vocabulary bundle");
+				if (bundle.getNamespace() != null) {
+					label.append(" <").append(bundle.getNamespace()).append(">");
 				}
-				label.append("with ").append(bundle.getSeparator());
 				if (bundle.getPrefix() != null) {
 					label.append(" as ").append(bundle.getPrefix());
 				}
@@ -138,8 +136,8 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 			public String getText(Object object) {
 				VocabularyExtension extension = (VocabularyExtension)object;
 				StringBuilder label = new StringBuilder("extends <");
-				if (extension.getUri() != null) {
-					label.append(extension.getUri());
+				if (extension.getNamespace() != null) {
+					label.append(extension.getNamespace());
 				}
 				label.append(">");
 				if (extension.getPrefix() != null) {
@@ -158,8 +156,8 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 			public String getText(Object object) {
 				VocabularyUsage usage = (VocabularyUsage)object;
 				StringBuilder label = new StringBuilder("uses <");
-				if (usage.getUri() != null) {
-					label.append(usage.getUri());
+				if (usage.getNamespace() != null) {
+					label.append(usage.getNamespace());
 				}
 				label.append(">");
 				if (usage.getPrefix() != null) {
@@ -178,8 +176,8 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 			public String getText(Object object) {
 				VocabularyBundleExtension extension = (VocabularyBundleExtension)object;
 				StringBuilder label = new StringBuilder("extends <");
-				if (extension.getUri() != null) {
-					label.append(extension.getUri());
+				if (extension.getNamespace() != null) {
+					label.append(extension.getNamespace());
 				}
 				label.append(">");
 				if (extension.getPrefix() != null) {
@@ -198,8 +196,8 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 			public String getText(Object object) {
 				VocabularyBundleInclusion inclusion = (VocabularyBundleInclusion)object;
 				StringBuilder label = new StringBuilder("includes <");
-				if (inclusion.getUri() != null) {
-					label.append(inclusion.getUri());
+				if (inclusion.getNamespace() != null) {
+					label.append(inclusion.getNamespace());
 				}
 				label.append(">");
 				if (inclusion.getPrefix() != null) {
@@ -219,11 +217,10 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 			@Override
 			public String getText(Object object) {
 				Description description = (Description)object;
-				StringBuilder label = new StringBuilder("description ");
-				if (description.getIri() != null) {
-					label.append("<").append(description.getIri()).append("> ");
+				StringBuilder label = new StringBuilder("description");
+				if (description.getNamespace() != null) {
+					label.append(" <").append(description.getNamespace()).append(">");
 				}
-				label.append("with ").append(description.getSeparator());
 				if (description.getPrefix() != null) {
 					label.append(" as ").append(description.getPrefix());
 				}
@@ -239,11 +236,10 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 			@Override
 			public String getText(Object object) {
 				DescriptionBundle bundle = (DescriptionBundle)object;
-				StringBuilder label = new StringBuilder("description bundle ");
-				if (bundle.getIri() != null) {
-					label.append("<").append(bundle.getIri()).append("> ");
+				StringBuilder label = new StringBuilder("description bundle");
+				if (bundle.getNamespace() != null) {
+					label.append(" <").append(bundle.getNamespace()).append(">");
 				}
-				label.append("with ").append(bundle.getSeparator());
 				if (bundle.getPrefix() != null) {
 					label.append(" as ").append(bundle.getPrefix());
 				}
@@ -260,8 +256,8 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 			public String getText(Object object) {
 				DescriptionExtension extension = (DescriptionExtension)object;
 				StringBuilder label = new StringBuilder("extends <");
-				if (extension.getUri() != null) {
-					label.append(extension.getUri());
+				if (extension.getNamespace() != null) {
+					label.append(extension.getNamespace());
 				}
 				label.append(">");
 				if (extension.getPrefix() != null) {
@@ -280,8 +276,8 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 			public String getText(Object object) {
 				DescriptionUsage usage = (DescriptionUsage)object;
 				StringBuilder label = new StringBuilder("uses <");
-				if (usage.getUri() != null) {
-					label.append(usage.getUri());
+				if (usage.getNamespace() != null) {
+					label.append(usage.getNamespace());
 				}
 				label.append(">");
 				if (usage.getPrefix() != null) {
@@ -300,8 +296,8 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 			public String getText(Object object) {
 				DescriptionBundleExtension extension = (DescriptionBundleExtension)object;
 				StringBuilder label = new StringBuilder("extends <");
-				if (extension.getUri() != null) {
-					label.append(extension.getUri());
+				if (extension.getNamespace() != null) {
+					label.append(extension.getNamespace());
 				}
 				label.append(">");
 				if (extension.getPrefix() != null) {
@@ -320,8 +316,8 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 			public String getText(Object object) {
 				DescriptionBundleInclusion inclusion = (DescriptionBundleInclusion)object;
 				StringBuilder label = new StringBuilder("includes <");
-				if (inclusion.getUri() != null) {
-					label.append(inclusion.getUri());
+				if (inclusion.getNamespace() != null) {
+					label.append(inclusion.getNamespace());
 				}
 				label.append(">");
 				if (inclusion.getPrefix() != null) {
@@ -340,8 +336,8 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 			public String getText(Object object) {
 				DescriptionBundleUsage usage = (DescriptionBundleUsage)object;
 				StringBuilder label = new StringBuilder("uses <");
-				if (usage.getUri() != null) {
-					label.append(usage.getUri());
+				if (usage.getNamespace() != null) {
+					label.append(usage.getNamespace());
 				}
 				label.append(">");
 				if (usage.getPrefix() != null) {

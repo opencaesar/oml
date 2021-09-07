@@ -80,7 +80,7 @@ public class VocabularyBundleInclusionItemProvider extends VocabularyBundleImpor
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((VocabularyBundleInclusion)object).getUri();
+		String label = ((VocabularyBundleInclusion)object).getNamespace();
 		return label == null || label.length() == 0 ?
 			getString("_UI_VocabularyBundleInclusion_type") :
 			getString("_UI_VocabularyBundleInclusion_type") + " " + label;

@@ -61,49 +61,26 @@ public class OntologyItemProvider extends IdentifiedElementItemProvider {
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addIriPropertyDescriptor(object);
-			addSeparatorPropertyDescriptor(object);
+			addNamespacePropertyDescriptor(object);
 			addPrefixPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Iri feature.
+	 * This adds a property descriptor for the Namespace feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addIriPropertyDescriptor(Object object) {
+	protected void addNamespacePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Ontology_iri_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Ontology_iri_feature", "_UI_Ontology_type"),
-				 OmlPackage.Literals.ONTOLOGY__IRI,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Separator feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addSeparatorPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Ontology_separator_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Ontology_separator_feature", "_UI_Ontology_type"),
-				 OmlPackage.Literals.ONTOLOGY__SEPARATOR,
+				 getString("_UI_Ontology_namespace_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Ontology_namespace_feature", "_UI_Ontology_type"),
+				 OmlPackage.Literals.ONTOLOGY__NAMESPACE,
 				 true,
 				 false,
 				 false,
@@ -142,7 +119,7 @@ public class OntologyItemProvider extends IdentifiedElementItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Ontology)object).getIri();
+		String label = ((Ontology)object).getNamespace();
 		return label == null || label.length() == 0 ?
 			getString("_UI_Ontology_type") :
 			getString("_UI_Ontology_type") + " " + label;
@@ -161,8 +138,7 @@ public class OntologyItemProvider extends IdentifiedElementItemProvider {
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Ontology.class)) {
-			case OmlPackage.ONTOLOGY__IRI:
-			case OmlPackage.ONTOLOGY__SEPARATOR:
+			case OmlPackage.ONTOLOGY__NAMESPACE:
 			case OmlPackage.ONTOLOGY__PREFIX:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;

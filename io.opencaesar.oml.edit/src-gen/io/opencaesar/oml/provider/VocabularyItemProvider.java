@@ -116,7 +116,7 @@ public class VocabularyItemProvider extends VocabularyBoxItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Vocabulary)object).getIri();
+		String label = ((Vocabulary)object).getNamespace();
 		return label == null || label.length() == 0 ?
 			getString("_UI_Vocabulary_type") :
 			getString("_UI_Vocabulary_type") + " " + label;

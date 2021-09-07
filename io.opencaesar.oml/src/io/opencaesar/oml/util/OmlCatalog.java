@@ -75,19 +75,6 @@ public final class OmlCatalog {
     }
 
     /**
-     * Creates a new Oml Catalog given a catalog URL
-     * 
-     * @param catalogUrl The URL of a catalog file named 'catalog.xml'
-     * @return A new instance of Oml Catalog
-     * @throws IOException When there are problems parsing the catalog
-     * @deprecated Use 
-     */
-    @Deprecated(since = "0.9.1", forRemoval = true)
-    public static OmlCatalog create(URL catalogUrl) throws IOException {
-    	return create(URI.createURI(catalogUrl.toString()));
-    }
-
-    /**
      * Resolves the given URI to a file path
      * 
      * @param uri The URI to resolve

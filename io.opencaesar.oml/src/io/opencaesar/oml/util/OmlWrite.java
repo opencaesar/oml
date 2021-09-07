@@ -362,8 +362,7 @@ public class OmlWrite {
      */
     protected static <T extends Ontology> T createOntology(Class<T> type, String iri, SeparatorKind separator, String prefix) {
         final T ontology = create(type);
-        ontology.setIri(iri);
-        ontology.setSeparator(separator);
+        ontology.setNamespace(iri+separator);
         ontology.setPrefix(prefix);
         return ontology;
     }
@@ -953,14 +952,19 @@ public class OmlWrite {
      * Creates a vocabulary extension and adds it to the given vocabulary
      * 
      * @param vocabulary the context vocabulary
-     * @param extenedVocabularyURI the URI (or IRI) of the extended vocabulary
-     * @param extenedVocabularyPrefix the prefix of the extended vocabulary
+     * @param extendedVocabularyIri the IRI of the extended vocabulary
+     * @param extendedVocabularySeparator the separator of the extended vocabulary (optional)
+     * @param extendedVocabularyPrefix the prefix of the extended vocabulary (optional)
      * @return a vocabulary extension that is added to the given vocabulary
      */
-    public static VocabularyExtension addVocabularyExtension(Vocabulary vocabulary, String extenedVocabularyURI, String extenedVocabularyPrefix) {
+    public static VocabularyExtension addVocabularyExtension(Vocabulary vocabulary, String extendedVocabularyIri, SeparatorKind extendedVocabularySeparator, String extendedVocabularyPrefix) {
         final VocabularyExtension extension = create(VocabularyExtension.class);
-        extension.setUri(extenedVocabularyURI);
-        extension.setPrefix(extenedVocabularyPrefix);
+        if (extendedVocabularySeparator != null) {
+        	extension.setNamespace(extendedVocabularyIri+extendedVocabularySeparator);
+        } else {
+            extension.setNamespace(extendedVocabularyIri+SeparatorKind.HASH);
+        }
+        extension.setPrefix(extendedVocabularyPrefix);
         vocabulary.getOwnedImports().add(extension);
         return extension;
     }
@@ -971,13 +975,18 @@ public class OmlWrite {
      * Creates a vocabulary usage and adds it to the given vocabulary
      * 
      * @param vocabulary the context vocabulary
-     * @param usedDescriptionBoxURI the URI (or IRI) of the used description box
-     * @param usedDescriptionBoxPrefix the prefix of the used description box
+     * @param usedDescriptionBoxIri the IRI of the used description box
+     * @param usedDescriptionBoxSeparator the separator of the used description box (optional)
+     * @param usedDescriptionBoxPrefix the prefix of the used description box (optional)
      * @return a vocabulary usage that is added to the given vocabulary
      */
-    public static VocabularyUsage addVocabularyUsage(Vocabulary vocabulary, String usedDescriptionBoxURI, String usedDescriptionBoxPrefix) {
+    public static VocabularyUsage addVocabularyUsage(Vocabulary vocabulary, String usedDescriptionBoxIri, SeparatorKind usedDescriptionBoxSeparator, String usedDescriptionBoxPrefix) {
         final VocabularyUsage usage = create(VocabularyUsage.class);
-        usage.setUri(usedDescriptionBoxURI);
+        if (usedDescriptionBoxSeparator != null) {
+        	usage.setNamespace(usedDescriptionBoxIri+usedDescriptionBoxSeparator);
+        } else {
+            usage.setNamespace(usedDescriptionBoxIri+SeparatorKind.HASH);
+        }
         usage.setPrefix(usedDescriptionBoxPrefix);
         vocabulary.getOwnedImports().add(usage);
         return usage;
@@ -989,14 +998,19 @@ public class OmlWrite {
      * Creates a vocabulary bundle extension and adds it to the given vocabulary bundle
      * 
      * @param bundle the context vocabulary bundle
-     * @param extenedVocabularyBundleURI the URI (or IRI) of the extended vocabulary bundle
-     * @param extenedVocabularyBundlePrefix the prefix of the extended vocabulary bundle
+     * @param extendedVocabularyBundleIri the IRI of the extended vocabulary bundle
+     * @param extendedVocabularyBundleSeparator the separator of the extended vocabulary bundle (optional)
+     * @param extendedVocabularyBundlePrefix the prefix of the extended vocabulary bundle (optional)
      * @return a vocabulary bundle extension that is added to the given vocabulary bundle
      */
-    public static VocabularyBundleExtension addVocabularyBundleExtension(VocabularyBundle bundle, String extenedVocabularyBundleURI, String extenedVocabularyBundlePrefix) {
+    public static VocabularyBundleExtension addVocabularyBundleExtension(VocabularyBundle bundle, String extendedVocabularyBundleIri, SeparatorKind extendedVocabularyBundleSeparator, String extendedVocabularyBundlePrefix) {
         final VocabularyBundleExtension extension = create(VocabularyBundleExtension.class);
-        extension.setUri(extenedVocabularyBundleURI);
-        extension.setPrefix(extenedVocabularyBundlePrefix);
+        if (extendedVocabularyBundleSeparator != null) {
+        	extension.setNamespace(extendedVocabularyBundleIri+extendedVocabularyBundleSeparator);
+        } else {
+            extension.setNamespace(extendedVocabularyBundleIri);
+        }
+        extension.setPrefix(extendedVocabularyBundlePrefix+SeparatorKind.HASH);
         bundle.getOwnedImports().add(extension);
         return extension;
     }
@@ -1007,14 +1021,19 @@ public class OmlWrite {
      * Creates a vocabulary bundle inclusion and adds it to the given vocabulary bundle
      * 
      * @param bundle the context vocabulary bundle
-     * @param includedVocabularyURI the URI (or IRI) of the included vocabulary
-     * @param includedVocabularyPrefix the prefix of the included vocabulary
+     * @param includedVocabularyIri the IRI of the included vocabulary
+     * @param includedVocabularySeparator the separator of the included vocabulary (optional)
+     * @param includedVocabularyPrefix the prefix of the included vocabulary (optional)
      * @return a vocabulary bundle inclusion that is added to the given vocabulary bundle
      */
-    public static VocabularyBundleInclusion addVocabularyBundleInclusion(VocabularyBundle bundle, String includedVocabularyURI, String includedVocabularyPrefix) {
+    public static VocabularyBundleInclusion addVocabularyBundleInclusion(VocabularyBundle bundle, String includedVocabularyIri, SeparatorKind includedVocabularySeparator, String includedVocabularyPrefix) {
         final VocabularyBundleInclusion inclusion = create(VocabularyBundleInclusion.class);
-        inclusion.setUri(includedVocabularyURI);
-        inclusion.setPrefix(includedVocabularyPrefix);
+        if (includedVocabularySeparator != null) {
+        	inclusion.setNamespace(includedVocabularyIri+includedVocabularySeparator);
+        } else {
+            inclusion.setNamespace(includedVocabularyIri+SeparatorKind.HASH);
+        }
+       inclusion.setPrefix(includedVocabularyPrefix);
         bundle.getOwnedImports().add(inclusion);
         return inclusion;
     }
@@ -1025,14 +1044,19 @@ public class OmlWrite {
      * Creates a description extension and adds it to the given description
      * 
      * @param description the context description
-     * @param extenedDescriptionURI the URI (or IRI) of the extended description
-     * @param extenedDescriiptionPrefix the prefix of the extended description
+     * @param extendedDescriptionIri the IRI of the extended description
+     * @param extendedDescriptionSeparator the separator of the extended description (optional)
+     * @param extendedDescriptionPrefix the prefix of the extended description (optional)
      * @return a description extension that is added to the given description
      */
-    public static DescriptionExtension addDescriptionExtension(Description description, String extenedDescriptionURI, String extenedDescriiptionPrefix) {
+    public static DescriptionExtension addDescriptionExtension(Description description, String extendedDescriptionIri, SeparatorKind extendedDescriptionSeparator, String extendedDescriptionPrefix) {
         final DescriptionExtension extension = create(DescriptionExtension.class);
-        extension.setUri(extenedDescriptionURI);
-        extension.setPrefix(extenedDescriiptionPrefix);
+        if (extendedDescriptionSeparator != null) {
+        	extension.setNamespace(extendedDescriptionIri+extendedDescriptionSeparator);
+        } else {
+            extension.setNamespace(extendedDescriptionIri+SeparatorKind.HASH);
+        }
+        extension.setPrefix(extendedDescriptionPrefix);
         description.getOwnedImports().add(extension);
         return extension;
     }
@@ -1043,13 +1067,18 @@ public class OmlWrite {
      * Creates a description usage and adds it to the given description
      * 
      * @param description the context description
-     * @param usedVocabularyBoxURI the URI (or IRI) of the used vocabulary box
-     * @param usedVocabularyBoxPrefix the prefix of the used vocabulary box
+     * @param usedVocabularyBoxIri the IRI of the used vocabulary box
+     * @param usedVocabularyBoxSeparator the separator of the used vocabulary box (optional)
+     * @param usedVocabularyBoxPrefix the prefix of the used vocabulary box (optional)
      * @return a description usage that is added to the given description
      */
-    public static DescriptionUsage addDescriptionUsage(Description description, String usedVocabularyBoxURI, String usedVocabularyBoxPrefix) {
+    public static DescriptionUsage addDescriptionUsage(Description description, String usedVocabularyBoxIri, SeparatorKind usedVocabularyBoxSeparator, String usedVocabularyBoxPrefix) {
         final DescriptionUsage usage = create(DescriptionUsage.class);
-        usage.setUri(usedVocabularyBoxURI);
+        if (usedVocabularyBoxSeparator != null) {
+        	usage.setNamespace(usedVocabularyBoxIri+usedVocabularyBoxSeparator);
+        } else {
+            usage.setNamespace(usedVocabularyBoxIri+SeparatorKind.HASH);
+        }
         usage.setPrefix(usedVocabularyBoxPrefix);
         description.getOwnedImports().add(usage);
         return usage;
@@ -1061,14 +1090,19 @@ public class OmlWrite {
      * Creates a description bundle extension and adds it to the given description bundle
      * 
      * @param bundle the context description bundle
-     * @param extenedDescriptionBundleURI the URI (or IRI) of the extended vocabulary bundle
-     * @param extenedDescriptionBundlePrefix the prefix of the extended vocabulary bundle
+     * @param extendedDescriptionBundleIri the IRI of the extended vocabulary bundle
+     * @param extendedDescriptionBundleSeparator the separator of the extended vocabulary bundle (optional)
+     * @param extendedDescriptionBundlePrefix the prefix of the extended vocabulary bundle (optional)
      * @return a description bundle extension that is added to the given description bundle
      */
-    public static DescriptionBundleExtension addDescriptionBundleExtension(DescriptionBundle bundle, String extenedDescriptionBundleURI, String extenedDescriptionBundlePrefix) {
+    public static DescriptionBundleExtension addDescriptionBundleExtension(DescriptionBundle bundle, String extendedDescriptionBundleIri, SeparatorKind extendedDescriptionBundleSeparator, String extendedDescriptionBundlePrefix) {
         final DescriptionBundleExtension extension = create(DescriptionBundleExtension.class);
-        extension.setUri(extenedDescriptionBundleURI);
-        extension.setPrefix(extenedDescriptionBundlePrefix);
+        if (extendedDescriptionBundleSeparator != null) {
+        	extension.setNamespace(extendedDescriptionBundleIri+extendedDescriptionBundleSeparator);
+        } else {
+            extension.setNamespace(extendedDescriptionBundleIri+SeparatorKind.HASH);
+        }
+        extension.setPrefix(extendedDescriptionBundlePrefix);
         bundle.getOwnedImports().add(extension);
         return extension;
     }
@@ -1079,13 +1113,18 @@ public class OmlWrite {
      * Creates a description bundle inclusion and adds it to the given description bundle
      * 
      * @param bundle the context description bundle
-     * @param includedDescriptionURI the URI (or IRI) of the extended description
-     * @param includedDescriptionPrefix the prefix of the extended description
+     * @param includedDescriptionIri the IRI of the extended description
+     * @param includedDescriptionSeparator the separator of the extended description (optional)
+     * @param includedDescriptionPrefix the prefix of the extended description (optional)
      * @return a description bundle inclusion that is added to the given description bundle
      */
-    public static DescriptionBundleInclusion addDescriptionBundleInclusion(DescriptionBundle bundle, String includedDescriptionURI, String includedDescriptionPrefix) {
+    public static DescriptionBundleInclusion addDescriptionBundleInclusion(DescriptionBundle bundle, String includedDescriptionIri, SeparatorKind includedDescriptionSeparator, String includedDescriptionPrefix) {
         final DescriptionBundleInclusion inclusion = create(DescriptionBundleInclusion.class);
-        inclusion.setUri(includedDescriptionURI);
+        if (includedDescriptionSeparator != null) {
+        	inclusion.setNamespace(includedDescriptionIri+includedDescriptionSeparator);
+        } else {
+            inclusion.setNamespace(includedDescriptionIri+SeparatorKind.HASH);
+        }
         inclusion.setPrefix(includedDescriptionPrefix);
         bundle.getOwnedImports().add(inclusion);
         return inclusion;
@@ -1097,14 +1136,19 @@ public class OmlWrite {
      * Creates a description bundle usage and adds it to the given description bundle
      * 
      * @param bundle the context description bundle
-     * @param usedVocabularyBundleURI the URI (or IRI) of the used vocabulary
-     * @param usedVocabularyBundlePrefix the prefix of the used vocabulary
+     * @param usedVocabularyBoxIri the IRI of the used vocabulary box
+     * @param usedVocabularyBoxSeparator the separator of the used vocabulary box (optional)
+     * @param usedVocabularyBoxPrefix the prefix of the used vocabulary box (optional)
      * @return a description bundle usage that is added to the given description bundle
      */
-    public static DescriptionBundleUsage addDescriptionBundleUsage(DescriptionBundle bundle, String usedVocabularyBundleURI, String usedVocabularyBundlePrefix) {
+    public static DescriptionBundleUsage addDescriptionBundleUsage(DescriptionBundle bundle, String usedVocabularyBoxIri, SeparatorKind usedVocabularyBoxSeparator, String usedVocabularyBoxPrefix) {
         final DescriptionBundleUsage usage = create(DescriptionBundleUsage.class);
-        usage.setUri(usedVocabularyBundleURI);
-        usage.setPrefix(usedVocabularyBundlePrefix);
+        if (usedVocabularyBoxSeparator != null) {
+        	usage.setNamespace(usedVocabularyBoxIri+usedVocabularyBoxSeparator);
+        } else {
+            usage.setNamespace(usedVocabularyBoxIri+SeparatorKind.HASH);
+        }
+        usage.setPrefix(usedVocabularyBoxPrefix);
         bundle.getOwnedImports().add(usage);
         return usage;
     }

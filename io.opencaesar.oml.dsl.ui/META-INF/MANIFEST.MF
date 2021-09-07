@@ -3,14 +3,16 @@ Automatic-Module-Name: io.opencaesar.oml.dsl.ui
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-Vendor: %providerName
-Bundle-Version: 0.9.3
+Bundle-Version: 1.0.0
 Bundle-SymbolicName: io.opencaesar.oml.dsl.ui; singleton:=true
 Bundle-ActivationPolicy: lazy
 Bundle-Localization: plugin
-Require-Bundle: io.opencaesar.oml.dsl,
+Require-Bundle: io.opencaesar.oml,
+ io.opencaesar.oml.dsl,
  io.opencaesar.oml.dsl.ide,
  org.eclipse.xtext.ui,
  org.eclipse.xtext.ui.shared,
+ org.eclipse.xtext.common.types.ui,
  org.eclipse.xtext.ui.codetemplates.ui,
  org.eclipse.ui.editors,
  org.eclipse.ui.ide,

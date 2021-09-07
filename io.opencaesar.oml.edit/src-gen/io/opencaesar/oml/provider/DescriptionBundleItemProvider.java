@@ -115,7 +115,7 @@ public class DescriptionBundleItemProvider extends DescriptionBoxItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((DescriptionBundle)object).getIri();
+		String label = ((DescriptionBundle)object).getNamespace();
 		return label == null || label.length() == 0 ?
 			getString("_UI_DescriptionBundle_type") :
 			getString("_UI_DescriptionBundle_type") + " " + label;

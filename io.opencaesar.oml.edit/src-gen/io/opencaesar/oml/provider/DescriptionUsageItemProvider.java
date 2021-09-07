@@ -80,7 +80,7 @@ public class DescriptionUsageItemProvider extends DescriptionImportItemProvider 
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((DescriptionUsage)object).getUri();
+		String label = ((DescriptionUsage)object).getNamespace();
 		return label == null || label.length() == 0 ?
 			getString("_UI_DescriptionUsage_type") :
 			getString("_UI_DescriptionUsage_type") + " " + label;

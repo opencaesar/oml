@@ -39,7 +39,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * <!-- end-user-doc -->
  * @generated
  */
-public class ImportItemProvider extends AnnotatedElementItemProvider {
+public class ImportItemProvider extends ElementItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
@@ -61,26 +61,26 @@ public class ImportItemProvider extends AnnotatedElementItemProvider {
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addUriPropertyDescriptor(object);
+			addNamespacePropertyDescriptor(object);
 			addPrefixPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Uri feature.
+	 * This adds a property descriptor for the Namespace feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addUriPropertyDescriptor(Object object) {
+	protected void addNamespacePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Import_uri_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Import_uri_feature", "_UI_Import_type"),
-				 OmlPackage.Literals.IMPORT__URI,
+				 getString("_UI_Import_namespace_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Import_namespace_feature", "_UI_Import_type"),
+				 OmlPackage.Literals.IMPORT__NAMESPACE,
 				 true,
 				 false,
 				 false,
@@ -119,7 +119,7 @@ public class ImportItemProvider extends AnnotatedElementItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Import)object).getUri();
+		String label = ((Import)object).getNamespace();
 		return label == null || label.length() == 0 ?
 			getString("_UI_Import_type") :
 			getString("_UI_Import_type") + " " + label;
@@ -138,7 +138,7 @@ public class ImportItemProvider extends AnnotatedElementItemProvider {
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Import.class)) {
-			case OmlPackage.IMPORT__URI:
+			case OmlPackage.IMPORT__NAMESPACE:
 			case OmlPackage.IMPORT__PREFIX:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;

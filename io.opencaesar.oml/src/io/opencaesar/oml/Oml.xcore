@@ -9,8 +9,10 @@
 @GenModel(
     copyrightText="\nCopyright 2019-2021 California Institute of Technology (\"Caltech\").\nU.S. Government sponsorship acknowledged.\n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\n     http://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.\n",
     modelDirectory="/io.opencaesar.oml/build/xcore/main",
-    editDirectory="/io.opencaesar.oml.edit/src-gen"/* ,
-    editorDirectory="/io.opencaesar.oml.editor/src-gen"*/
+    editDirectory="/io.opencaesar.oml.edit/src-gen",
+    importerID="org.eclipse.xsd.ecore.importer"/* ,
+    editorDirectory="/io.opencaesar.oml.editor/src-gen"*/,
+    complianceLevel="11.0"
 )
 @BikeshedHeadings(
     Elements="",
@@ -36,7 +38,6 @@ import org.eclipse.emf.ecore.EDiagnosticChain
 import org.eclipse.emf.ecore.EMap
 import org.eclipse.emf.ecore.EObject
 
-annotation "http://org/eclipse/emf/ecore/util/ExtendedMetaData" as ExtendedMetaData
 annotation "https://tabatkins.github.io/bikeshed" as Bikeshed
 annotation "https://tabatkins.github.io/bikeshed/headings" as BikeshedHeadings
 
@@ -114,28 +115,52 @@ abstract class IdentifiedElement extends AnnotatedElement {
 
 /*
  * Ontology is an identified element that represents a namespace for its members. The namespace is defined
- * by a globally unique IRI followed by a separator character and can be abbreviated with a prefix. An 
- * ontology can import other ontologies, and can make statements about its own as well as imported members.
+ * by a globally unique namespace (an iri and a namespace separator that can be # or /) and can be abbreviated with a prefix. 
+ * An ontology can import other ontologies, and can make statements about its own as well as imported members.
  */
 @Bikeshed(heading="Ontologies")
 abstract class Ontology extends IdentifiedElement {
     /*
-     * The globally unique IRI of this ontology
+     * The globally unique namespace of this ontology
      */
-    String[1] iri
-    /*
-     * The separator character that follows this ontology's IRI in the namespace
-     */
-    SeparatorKind[1] separator
+    Namespace[1] namespace
     /*
      * The prefix of this ontology's namespace
      */
-    String[1] prefix
+    ID[1] prefix
     /*
-     * Get the namespace (i.e., iri + separator char) of the ontology
+     * Get the namespace's iri
      */
-    op String getNamespace() {
-        return iri+separator
+    op String getIri() {
+    	if (namespace === null) {
+    		return null
+    	}
+     	var i = namespace.indexOf('#')
+    	if (i === -1) {
+    		i = namespace.lastIndexOf('/')
+    	}
+    	if (i === -1) {
+        	return namespace
+       	} else {
+       		return namespace.substring(0, i)
+       	}
+    }
+    /*
+     * Get the namespace's separator char
+     */
+    op SeparatorKind getSeparator() {
+     	if (namespace === null) {
+    		return null
+    	}
+    	var i = namespace.indexOf('#')
+    	if (i === -1) {
+    		i = namespace.lastIndexOf('/')
+    	}
+    	if (i === -1) {
+       		return null
+       	} else {
+        	return SeparatorKind.get(namespace.substring(i, i+1))
+       	}
     }
 }
 
@@ -218,7 +243,7 @@ abstract class Member extends IdentifiedElement {
     /*
      * The name of this member, which is unique within its ontology's namespace
      */
-    id String[1] name
+    id ID[1] name
     
     op String getIri() {
         val ontology = getOntology()
@@ -230,8 +255,8 @@ abstract class Member extends IdentifiedElement {
      */
     op String getAbbreviatedIri() {
         val ontology = getOntology();
-        val prefix = if (ontology !== null) ontology.getPrefix() else ""
-        return prefix+':'+ name
+        val prefix = if (ontology !== null) ontology.getPrefix()+':' else ""
+        return prefix + name
     }
 }
 
@@ -651,11 +676,11 @@ class Rule extends Member, VocabularyStatement {
 }
 
 /*
- * Instance is an annotated element that represents an instance of a classifier. It can specify a set of values for the
+ * Instance is an element that represents an instance of a classifier. It can specify a set of values for the
  * classifier's (direct or inherited) properties.
  */
 @Bikeshed(heading="Instances")
-abstract class Instance extends AnnotatedElement {
+abstract class Instance extends Element {
     /*
      * The property value assertions specified by this instance
      */
@@ -984,19 +1009,55 @@ abstract class DescriptionStatement extends Statement {
 }
 
 /*
- * Import is an element owned by an ontology to specify that another ontology is imported in its context.
- * The imported ontology is specified by a URI and an optional prefix that overrides that of the imported ontology.
+ * Import is an element owned by an ontology to specify that it imports another ontology.
+ * The imported ontology is specified by its IRI, and optionally a separator character and local prefix
+ * if members of the imported ontology will also be referenced by the importing ontology
  */
 @Bikeshed(heading="Ontologies")
-abstract class Import extends AnnotatedElement {
+abstract class Import extends Element {
     /*
-     * The URI of the imported ontology
+     * The namespace of the imported ontology
      */
-    String[1] uri
+    Namespace[1] namespace
     /*
-     * The prefix that overrides the imported ontology's default prefix
+     * The local prefix of the imported ontology's namespace
      */
-    String prefix
+    ID[?] prefix
+
+    /*
+     * Get the import's iri
+     */
+    op String getIri() {
+    	if (namespace === null) {
+    		return null
+    	}
+     	var i = namespace.indexOf('#')
+    	if (i === -1) {
+    		i = namespace.lastIndexOf('/')
+    	}
+    	if (i === -1) {
+        	return namespace
+       	} else {
+       		return namespace.substring(0, i)
+       	}
+    }
+    /*
+     * Get the import's separator char
+     */
+    op SeparatorKind getSeparator() {
+     	if (namespace === null) {
+    		return null
+    	}
+    	var i = namespace.indexOf('#')
+    	if (i === -1) {
+    		i = namespace.lastIndexOf('/')
+    	}
+    	if (i === -1) {
+       		return null
+       	} else {
+        	return SeparatorKind.get(namespace.substring(i, i+1))
+       	}
+    }
 }
 
 /*
@@ -1011,7 +1072,7 @@ abstract class VocabularyImport extends Import {
 }
 
 /*
- * VocabularyExtension is an import that allows a vocabulary to extend another. 
+ * VocabularyExtension is an import that allows a vocabulary to extend another vocabulary. 
  */
 @Bikeshed(heading="Vocabularies")
 class VocabularyExtension extends VocabularyImport {
@@ -1036,7 +1097,7 @@ abstract class VocabularyBundleImport extends Import {
 }
 
 /*
- * VocabularyBundleExtension is an import that allows a vocabulary bundle to extend another 
+ * VocabularyBundleExtension is an import that allows a vocabulary bundle to extend another vocabulary bundle.
  */
 @Bikeshed(heading="Vocabularies")
 class VocabularyBundleExtension extends VocabularyBundleImport {
@@ -1061,7 +1122,7 @@ abstract class DescriptionImport extends Import {
 }
 
 /*
- * DescriptionExtension is an import that allows a description to extend another. 
+ * DescriptionExtension is an import that allows a description to extend another description.
  */
 @Bikeshed(heading="Descriptions")
 class DescriptionExtension extends DescriptionImport {
@@ -1086,21 +1147,21 @@ abstract class DescriptionBundleImport extends Import {
 }
 
 /*
- * DescriptionBundleExtension is an import that allows a description bundle to extend another. 
+ * DescriptionBundleExtension is an import that allows a description bundle to extend another description bundle.
  */
 @Bikeshed(heading="Descriptions")
 class DescriptionBundleExtension extends DescriptionBundleImport {
 }
 
 /*
- * DescriptionBundleInclusion is an import that allows a description bundle to include a description. 
+ * DescriptionBundleInclusion is an import that allows a description bundle to include a description.
  */
 @Bikeshed(heading="Descriptions")
 class DescriptionBundleInclusion extends DescriptionBundleImport {
 }
 
 /*
- * DescriptionBundleUsage is an import that allows a description bundle to use a vocabulary bundle.
+ * DescriptionBundleUsage is an import that allows a description bundle to use a vocabulary box.
  */
 @Bikeshed(heading="Descriptions")
 class DescriptionBundleUsage extends DescriptionBundleImport {
@@ -1370,10 +1431,10 @@ class KeyAxiom extends Axiom {
 }
 
 /*
- * Assertion is an annotated element that represents a statement about an instance in a description.
+ * Assertion is an element that represents a statement about an instance in a description.
  */
 @Bikeshed(heading="Assertions")
-abstract class Assertion extends AnnotatedElement {
+abstract class Assertion extends Element {
 }
 
 /*
@@ -1531,7 +1592,7 @@ abstract class UnaryPredicate extends Predicate {
     /*
      * The variable name specified by the predicate
      */
-    String[1] variable
+    ID[1] variable
 }
 
 /*
@@ -1553,11 +1614,11 @@ abstract class BinaryPredicate extends Predicate {
     /*
      * The variable1 name specified by the predicate
      */
-    String[?] variable1
+    ID[?] variable1
     /*
      * The variable2 name specified by the predicate
      */
-    String[?] variable2
+    ID[?] variable2
 }
 
 /*
@@ -1570,7 +1631,7 @@ class RelationEntityPredicate extends BinaryPredicate {
     /*
      * The relation entity variable name specified by the predicate
      */
-    String[1] entityVariable
+    ID[1] entityVariable
     /*
      * The relation entity that is the type of the relation instance
      */
@@ -1714,12 +1775,17 @@ enum CardinalityRestrictionKind {
     max = 2
 }
 
-@ExtendedMetaData(minInclusive="0")
-@ExtendedMetaData(maxInclusive="4294967295")
+@ExtendedMetaData(minInclusive="0", maxInclusive="4294967295")
 type UnsignedInt wraps long
 
-@ExtendedMetaData(minInclusive="0")
-@ExtendedMetaData(maxInclusive="4294967295")
+@ExtendedMetaData(minInclusive="0", maxInclusive="4294967295")
 type UnsignedInteger wraps Long
 
+@ExtendedMetaData(baseType="http://www.w3.org/2001/XMLSchema#decimal")
 type Decimal wraps BigDecimal
+
+@ExtendedMetaData(pattern="[a-zA-Z0-9_]([a-zA-Z0-9_\\-.$])*")
+type ID wraps String
+
+@ExtendedMetaData(pattern="([^\\s])*(#|/)", minLength="2")
+type Namespace wraps String

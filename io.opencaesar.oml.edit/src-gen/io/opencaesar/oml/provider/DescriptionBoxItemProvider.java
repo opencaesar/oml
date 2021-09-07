@@ -69,7 +69,7 @@ public class DescriptionBoxItemProvider extends OntologyItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((DescriptionBox)object).getIri();
+		String label = ((DescriptionBox)object).getNamespace();
 		return label == null || label.length() == 0 ?
 			getString("_UI_DescriptionBox_type") :
 			getString("_UI_DescriptionBox_type") + " " + label;

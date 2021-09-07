@@ -80,7 +80,7 @@ public class VocabularyExtensionItemProvider extends VocabularyImportItemProvide
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((VocabularyExtension)object).getUri();
+		String label = ((VocabularyExtension)object).getNamespace();
 		return label == null || label.length() == 0 ?
 			getString("_UI_VocabularyExtension_type") :
 			getString("_UI_VocabularyExtension_type") + " " + label;

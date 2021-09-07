@@ -23,7 +23,7 @@ import org.eclipse.xtext.conversion.impl.AbstractValueConverter
 import org.eclipse.xtext.nodemodel.INode
 import org.eclipse.xtext.util.Strings
 
-class IRIValueConverter extends AbstractValueConverter<String> {
+class NAMESPACEValueConverter extends AbstractValueConverter<String> {
 
 	override String toString(String value) {
 		if (value.startsWith("http://")) {

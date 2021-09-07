@@ -25,11 +25,18 @@ import org.eclipse.xtext.conversion.ValueConverter
 
 class OmlValueConverterService extends DefaultTerminalConverters {
 
+	@Inject NAMESPACEValueConverter namespaceValueConverter
+
 	@Inject IRIValueConverter iriValueConverter
 
 	@Inject RefValueConverter refValueConverter
 
 	@Inject STRINGValueConverter stringValueConverter2
+
+	@ValueConverter(rule="NAMESPACE")
+	def IValueConverter<String> TerminalsNAMESPACE() {
+		namespaceValueConverter
+	}
 
 	@ValueConverter(rule="IRI")
 	def IValueConverter<String> TerminalsIRI() {

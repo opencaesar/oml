@@ -152,17 +152,6 @@ public class OmlBuilder {
     }
     
     /**
-     * Loads a resource with the given URI in the resource set
-     * 
-     * @param resourceURI the given URI of the resource
-     * @deprecated use {@link OmlBuilder#getResourceSet()}} and call {@link ResourceSet#getResource(URI, boolean) with loadOnDemand=true instead
-     */
-    @Deprecated(since = "0.9.0", forRemoval = true)
-    public void loadDependentResource(URI resourceURI) {
-        resourceSet.getResource(resourceURI, true);
-    }
-    
-    /**
      * Creates a new resource with the given URI and adds the given ontology as its root
      *  
      * The new resource will be created in the resource set and added to the set of new resources
@@ -208,22 +197,6 @@ public class OmlBuilder {
      * @param ontology the given ontology
      * @param subject the given subject
      * @param eRef the given non-containment eReference 
-     * @param objectIri the given iri of the object
-     * @deprecated use {@link OmlBuilder#setCrossReference(Ontology, Element, EReference, String)} instead
-     */
-    @Deprecated(since = "0.9.0", forRemoval = true)
-    protected void setReference(Ontology ontology, Element subject, EReference eRef, String objectIri) {
-        setCrossReference(ontology, subject, eRef, objectIri);
-    }
-    
-    /**
-     * Sets the given eRef on the given subject to an object that is resolved by iri in the context of the given ontology
-     * 
-     * Object iri resolution and  setting of the cross reference is deferred until the building is finished
-     * 
-     * @param ontology the given ontology
-     * @param subject the given subject
-     * @param eRef the given non-containment eReference 
      * @param objectIri an iri of the object
      */
     @SuppressWarnings("unchecked")
@@ -235,22 +208,6 @@ public class OmlBuilder {
         if (objectIri != null) {
             defer.add(() -> subject.eSet(eRef, resolve(objectClass, ontology, objectIri)));
         }
-    }
-    
-    /**
-     * Sets the given eRef on the given subject to a List of objects that are resolved by iri in the context of the given ontology
-     * 
-     * Object iri resolution and  setting of the cross reference is deferred until the building is finished
-     * 
-     * @param ontology the given ontology
-     * @param subject the given subject
-     * @param eRef the given non-containnent eReference 
-     * @param objectIris a list of iris of the objects
-     * @deprecated use {@link OmlBuilder#setCrossReferences(Ontology, Element, EReference, List)} instead
-     */
-    @Deprecated(since = "0.9.0", forRemoval = true)
-    protected void setReferences(Ontology ontology, Element subject, EReference eRef, List<String> objectIris) {
-        setCrossReferences(ontology, subject, eRef, objectIris);
     }
     
     /**
@@ -274,25 +231,6 @@ public class OmlBuilder {
         }
     }
 
-    /**
-     * Sets the given object to be contained by the given subject that is resolved by iri in the context of the given ontology
-     * 
-     * If the subject iri resolves to a member of the given ontology; then the given member eRef will be used as the containment eRef
-     * otherwise a reference to the subject is created (or retrieved) first in the ontology, then the given reference eRef will be used 
-     * as the containment eRef. 
-     * 
-     * @param ontology the given ontology
-     * @param subjectIri the given iri of a member to be resolved as subject
-     * @param elementERef the containment eRef to use on subject if it belongs to the given ontology
-     * @param referenceERef the containment eRef to use on subject if the subject does not belong to the given ontology
-     * @param object the given object 
-     * @deprecated use {@link OmlBuilder#setContainmentReference(Ontology, String, EReference, EReference, Element)} instead
-     */
-    @Deprecated(since = "0.9.0", forRemoval = true)
-    protected void addContained(Ontology ontology, String subjectIri, EReference elementERef, EReference referenceERef, Element object) {
-        setContainmentReference(ontology, subjectIri, elementERef, referenceERef, object);
-    }
-    
     /**
      * Sets the given object to be contained by the given subject that is resolved by iri in the context of the given ontology
      * 
@@ -795,12 +733,13 @@ public class OmlBuilder {
      * Creates a vocabulary extension and adds it to the given vocabulary
      * 
      * @param vocabulary the context vocabulary
-     * @param extenedVocabularyURI the URI (or IRI) of the extended vocabulary
-     * @param extenedVocabularyPrefix the prefix of the extended vocabulary
+     * @param extenedVocabularyIri the IRI of the extended vocabulary
+     * @param extenedVocabularySeparator the separator of the extended vocabulary (optional)
+     * @param extenedVocabularyPrefix the prefix of the extended vocabulary (optional)
      * @return a vocabulary extension that is added to the given vocabulary
      */
-    public VocabularyExtension addVocabularyExtension(Vocabulary vocabulary, String extenedVocabularyURI, String extenedVocabularyPrefix) {
-        final VocabularyExtension extension = OmlWrite.addVocabularyExtension(vocabulary, extenedVocabularyURI, extenedVocabularyPrefix);
+    public VocabularyExtension addVocabularyExtension(Vocabulary vocabulary, String extenedVocabularyIri, SeparatorKind extenedVocabularySeparator, String extenedVocabularyPrefix) {
+        final VocabularyExtension extension = OmlWrite.addVocabularyExtension(vocabulary, extenedVocabularyIri, extenedVocabularySeparator, extenedVocabularyPrefix);
         return extension;
     }
 
@@ -810,12 +749,13 @@ public class OmlBuilder {
      * Creates a vocabulary usage and adds it to the given vocabulary
      * 
      * @param vocabulary the context vocabulary
-     * @param usedDescriptionBoxURI the URI (or IRI) of the used description box
-     * @param usedDescriptionBoxPrefix the prefix of the used description box
+     * @param usedDescriptionBoxIri the IRI of the used description box
+     * @param usedDescriptionBoxSeparator the separator of the used description box (optional)
+     * @param usedDescriptionBoxPrefix the prefix of the used description box (optional)
      * @return a vocabulary usage that is added to the given vocabulary
      */
-    public VocabularyUsage addVocabularyUsage(Vocabulary vocabulary, String usedDescriptionBoxURI, String usedDescriptionBoxPrefix) {
-        final VocabularyUsage usage = OmlWrite.addVocabularyUsage(vocabulary, usedDescriptionBoxURI, usedDescriptionBoxPrefix);
+    public VocabularyUsage addVocabularyUsage(Vocabulary vocabulary, String usedDescriptionBoxIri, SeparatorKind usedDescriptionBoxSeparator, String usedDescriptionBoxPrefix) {
+        final VocabularyUsage usage = OmlWrite.addVocabularyUsage(vocabulary, usedDescriptionBoxIri, usedDescriptionBoxSeparator, usedDescriptionBoxPrefix);
         return usage;
     }
 
@@ -825,12 +765,13 @@ public class OmlBuilder {
      * Creates a vocabulary bundle extension and adds it to the given vocabulary bundle
      * 
      * @param bundle the context vocabulary bundle
-     * @param extenedVocabularyBundleURI the URI (or IRI) of the extended vocabulary bundle
-     * @param extenedVocabularyBundlePrefix the prefix of the extended vocabulary bundle
+     * @param extenedVocabularyBundleIri the IRI of the extended vocabulary bundle
+     * @param extenedVocabularyBundleSeparator the separator of the extended vocabulary bundle (optional)
+     * @param extenedVocabularyBundlePrefix the prefix of the extended vocabulary bundle (optional)
      * @return a vocabulary bundle extension that is added to the given vocabulary bundle
      */
-    public VocabularyBundleExtension addVocabularyBundleExtension(VocabularyBundle bundle, String extenedVocabularyBundleURI, String extenedVocabularyBundlePrefix) {
-        final VocabularyBundleExtension extension = OmlWrite.addVocabularyBundleExtension(bundle, extenedVocabularyBundleURI, extenedVocabularyBundlePrefix);
+    public VocabularyBundleExtension addVocabularyBundleExtension(VocabularyBundle bundle, String extenedVocabularyBundleIri, SeparatorKind extenedVocabularyBundleSeparator, String extenedVocabularyBundlePrefix) {
+        final VocabularyBundleExtension extension = OmlWrite.addVocabularyBundleExtension(bundle, extenedVocabularyBundleIri, extenedVocabularyBundleSeparator, extenedVocabularyBundlePrefix);
         return extension;
     }
 
@@ -840,12 +781,13 @@ public class OmlBuilder {
      * Creates a vocabulary bundle inclusion and adds it to the given vocabulary bundle
      * 
      * @param bundle the context vocabulary bundle
-     * @param includedVocabularyURI the URI (or IRI) of the included vocabulary
-     * @param includedVocabularyPrefix the prefix of the included vocabulary
+     * @param includedVocabularyIri the IRI of the included vocabulary
+     * @param includedVocabularySeparator the separator of the included vocabulary (optional)
+     * @param includedVocabularyPrefix the prefix of the included vocabulary (optional)
      * @return a vocabulary bundle inclusion that is added to the given vocabulary bundle
      */
-    public VocabularyBundleInclusion addVocabularyBundleInclusion(VocabularyBundle bundle, String includedVocabularyURI, String includedVocabularyPrefix) {
-        final VocabularyBundleInclusion inclusion = OmlWrite.addVocabularyBundleInclusion(bundle, includedVocabularyURI, includedVocabularyPrefix);
+    public VocabularyBundleInclusion addVocabularyBundleInclusion(VocabularyBundle bundle, String includedVocabularyIri, SeparatorKind includedVocabularySeparator, String includedVocabularyPrefix) {
+        final VocabularyBundleInclusion inclusion = OmlWrite.addVocabularyBundleInclusion(bundle, includedVocabularyIri, includedVocabularySeparator, includedVocabularyPrefix);
         return inclusion;
     }
 
@@ -855,12 +797,13 @@ public class OmlBuilder {
      * Creates a description extension and adds it to the given description
      * 
      * @param description the context description
-     * @param extenedDescriptionURI the URI (or IRI) of the extended description
-     * @param extenedDescriiptionPrefix the prefix of the extended description
+     * @param extenedDescriptionIri the IRI of the extended description
+     * @param extenedDescriptionSeparator the separator of the extended description (optional)
+     * @param extenedDescriiptionPrefix the prefix of the extended description (optional)
      * @return a description extension that is added to the given description
      */
-    public DescriptionExtension addDescriptionExtension(Description description, String extenedDescriptionURI, String extenedDescriiptionPrefix) {
-        final DescriptionExtension extension = OmlWrite.addDescriptionExtension(description, extenedDescriptionURI, extenedDescriiptionPrefix);
+    public DescriptionExtension addDescriptionExtension(Description description, String extenedDescriptionIri, SeparatorKind extenedDescriptionSeparator, String extenedDescriiptionPrefix) {
+        final DescriptionExtension extension = OmlWrite.addDescriptionExtension(description, extenedDescriptionIri, extenedDescriptionSeparator, extenedDescriiptionPrefix);
         return extension;
     }
     
@@ -870,12 +813,13 @@ public class OmlBuilder {
      * Creates a description usage and adds it to the given description
      * 
      * @param description the context description
-     * @param usedVocabularyBoxURI the URI (or IRI) of the used vocabulary box
-     * @param usedVocabularyBoxPrefix the prefix of the used vocabulary box
+     * @param usedVocabularyBoxIri the IRI of the used vocabulary box
+     * @param usedVocabularyBoxSeparator the separator of the used vocabulary box (optional)
+     * @param usedVocabularyBoxPrefix the prefix of the used vocabulary box (optional)
      * @return a description usage that is added to the given description
      */
-    public DescriptionUsage addDescriptionUsage(Description description, String usedVocabularyBoxURI, String usedVocabularyBoxPrefix) {
-        final DescriptionUsage usage = OmlWrite.addDescriptionUsage(description, usedVocabularyBoxURI, usedVocabularyBoxPrefix);
+    public DescriptionUsage addDescriptionUsage(Description description, String usedVocabularyBoxIri, SeparatorKind usedVocabularyBoxSeparator, String usedVocabularyBoxPrefix) {
+        final DescriptionUsage usage = OmlWrite.addDescriptionUsage(description, usedVocabularyBoxIri, usedVocabularyBoxSeparator, usedVocabularyBoxPrefix);
         return usage;
     }
     
@@ -885,12 +829,13 @@ public class OmlBuilder {
      * Creates a description bundle extension and adds it to the given description bundle
      * 
      * @param bundle the context description bundle
-     * @param extenedDescriptionBundleURI the URI (or IRI) of the extended vocabulary bundle
-     * @param extenedDescriptionBundlePrefix the prefix of the extended vocabulary bundle
+     * @param extenedDescriptionBundleIri the IRI of the extended vocabulary bundle
+     * @param extenedDescriptionBundleSeparator the separator of the extended vocabulary bundle (optional)
+     * @param extenedDescriptionBundlePrefix the prefix of the extended vocabulary bundle (optional)
      * @return a description bundle extension that is added to the given description bundle
      */
-    public DescriptionBundleExtension addDescriptionBundleExtension(DescriptionBundle bundle, String extenedDescriptionBundleURI, String extenedDescriptionBundlePrefix) {
-        final DescriptionBundleExtension extension = OmlWrite.addDescriptionBundleExtension(bundle, extenedDescriptionBundleURI, extenedDescriptionBundlePrefix);
+    public DescriptionBundleExtension addDescriptionBundleExtension(DescriptionBundle bundle, String extenedDescriptionBundleIri, SeparatorKind extenedDescriptionBundleSeparator, String extenedDescriptionBundlePrefix) {
+        final DescriptionBundleExtension extension = OmlWrite.addDescriptionBundleExtension(bundle, extenedDescriptionBundleIri, extenedDescriptionBundleSeparator, extenedDescriptionBundlePrefix);
         return extension;
     }
 
@@ -900,12 +845,13 @@ public class OmlBuilder {
      * Creates a description bundle inclusion and adds it to the given description bundle
      * 
      * @param bundle the context description bundle
-     * @param includedDescriptionURI the URI (or IRI) of the extended description
-     * @param includedDescriptionPrefix the prefix of the extended description
+     * @param includedDescriptionIri the IRI of the extended description
+     * @param includedDescriptionSeparator the separator of the extended description (optional)
+     * @param includedDescriptionPrefix the prefix of the extended description (optional)
      * @return a description bundle inclusion that is added to the given description bundle
      */
-    public DescriptionBundleInclusion addDescriptionBundleInclusion(DescriptionBundle bundle, String includedDescriptionURI, String includedDescriptionPrefix) {
-        final DescriptionBundleInclusion inclusion = OmlWrite.addDescriptionBundleInclusion(bundle, includedDescriptionURI, includedDescriptionPrefix);
+    public DescriptionBundleInclusion addDescriptionBundleInclusion(DescriptionBundle bundle, String includedDescriptionIri, SeparatorKind includedDescriptionSeparator, String includedDescriptionPrefix) {
+        final DescriptionBundleInclusion inclusion = OmlWrite.addDescriptionBundleInclusion(bundle, includedDescriptionIri, includedDescriptionSeparator, includedDescriptionPrefix);
         return inclusion;
     }
 
@@ -915,12 +861,13 @@ public class OmlBuilder {
      * Creates a description bundle usage and adds it to the given description bundle
      * 
      * @param bundle the context description bundle
-     * @param usedVocabularyBundleURI the URI (or IRI) of the used vocabulary
-     * @param usedVocabularyBundlePrefix the prefix of the used vocabulary
+     * @param usedVocabularyBoxIri the IRI of the used vocabulary box
+     * @param usedVocabularyBoxSeparator the separator of the used vocabulary box (optional)
+     * @param usedVocabularyBoxPrefix the prefix of the used vocabulary box (optional)
      * @return a description bundle usage that is added to the given description bundle
      */
-    public DescriptionBundleUsage addDescriptionBundleUsage(DescriptionBundle bundle, String usedVocabularyBundleURI, String usedVocabularyBundlePrefix) {
-        final DescriptionBundleUsage usage = OmlWrite.addDescriptionBundleUsage(bundle, usedVocabularyBundleURI, usedVocabularyBundlePrefix);
+    public DescriptionBundleUsage addDescriptionBundleUsage(DescriptionBundle bundle, String usedVocabularyBoxIri, SeparatorKind usedVocabularyBoxSeparator, String usedVocabularyBoxPrefix) {
+        final DescriptionBundleUsage usage = OmlWrite.addDescriptionBundleUsage(bundle, usedVocabularyBoxIri, usedVocabularyBoxSeparator, usedVocabularyBoxPrefix);
         return usage;
     }
     
@@ -1328,19 +1275,6 @@ public class OmlBuilder {
     // IntegerLiteral
 
     /**
-     * Creates an integer literal in the given ontology
-     * 
-     * @param ontology the ontology context
-     * @param value the integer value of the literal
-     * @return an integer literal
-     * @deprecated use {@link OmlBuilder#createIntegerLiteral(int)}} instead
-     */
-    @Deprecated(since = "0.9.0", forRemoval = true)
-    public IntegerLiteral createIntegerLiteral(Ontology ontology, int value) {
-        return createIntegerLiteral(value);
-    }
-        
-    /**
      * Creates an integer literal
      * 
      * @param value the integer value of the literal
@@ -1352,19 +1286,6 @@ public class OmlBuilder {
     }
 
     // DecimalLiteral
-
-    /**
-     * Creates a decimal literal in the given ontology
-     * 
-     * @param ontology the ontology context
-     * @param value the big decimal value of the literal
-     * @return a decimal literal
-     * @deprecated use {@link OmlBuilder#createDecimalLiteral(BigDecimal)}} instead
-     */
-    @Deprecated(since = "0.9.0", forRemoval = true)
-    public DecimalLiteral createDecimalLiteral(Ontology ontology, BigDecimal value) {
-        return createDecimalLiteral(value);
-    }
 
     /**
      * Creates a decimal literal
@@ -1380,19 +1301,6 @@ public class OmlBuilder {
     // DoubleLiteral
 
     /**
-     * Creates a double literal in the given ontology
-     * 
-     * @param ontology the ontology context
-     * @param value the double value of the literal
-     * @return a double literal
-     * @deprecated use {@link OmlBuilder#createDoubleLiteral(double)}} instead
-     */
-    @Deprecated(since = "0.9.0", forRemoval = true)
-    public DoubleLiteral createDoubleLiteral(Ontology ontology, double value) {
-        return createDoubleLiteral(value);
-    }
-
-    /**
      * Creates a double literal
      * 
      * @param value the double value of the literal
@@ -1404,19 +1312,6 @@ public class OmlBuilder {
     }
 
     // BooleanLiteral
-    
-    /**
-     * Creates an boolean literal in the given ontology
-     * 
-     * @param ontology the ontology context
-     * @param value the boolean value of the literal
-     * @return a boolean literal
-     * @deprecated use {@link OmlBuilder#createBooleanLiteral(boolean)}} instead
-     */
-    @Deprecated(since = "0.9.0", forRemoval = true)
-    public BooleanLiteral createBooleanLiteral(Ontology ontology, boolean value) {
-        return createBooleanLiteral(value);
-    }
     
     /**
      * Creates an boolean literal

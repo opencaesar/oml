@@ -20,39 +20,29 @@ package io.opencaesar.oml.dsl.resource
 
 import io.opencaesar.oml.Member
 import io.opencaesar.oml.Ontology
-import java.util.HashMap
-import java.util.Map
 import org.eclipse.emf.ecore.EObject
-import org.eclipse.xtext.naming.QualifiedName
 import org.eclipse.xtext.resource.EObjectDescription
 import org.eclipse.xtext.resource.IEObjectDescription
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionStrategy
 import org.eclipse.xtext.util.IAcceptor
 
-import static extension io.opencaesar.oml.util.OmlRead.*
-
 class OmlResourceDescriptionStrategy extends DefaultResourceDescriptionStrategy {
 	
-	public static val IMPORTS = "imports"
-	
 	override boolean createEObjectDescriptions(EObject eObject, IAcceptor<IEObjectDescription> acceptor) {
-		if(eObject instanceof Ontology) {
-			this.createEObjectDescriptionForOntology(eObject, acceptor)
+		if (eObject instanceof Ontology) {
+			val qualifiedName = getQualifiedNameProvider().getFullyQualifiedName(eObject);
+			acceptor.accept(EObjectDescription.create(qualifiedName, eObject, newHashMap(
+				"namespace" -> eObject.ontology.namespace,
+				"prefix" -> eObject.ontology.prefix)));
 			return true
-		}
-		else if (eObject instanceof Member) {
-			return super.createEObjectDescriptions(eObject, acceptor)
+		} else if (eObject instanceof Member) {
+			val qualifiedName = getQualifiedNameProvider().getFullyQualifiedName(eObject);
+			if (qualifiedName !== null) {
+				acceptor.accept(EObjectDescription.create(qualifiedName, eObject, newHashMap("defaultPrefix" -> eObject.ontology.prefix)));
+			}
+			return true;
 		}
 		return false
 	}
 
-	def createEObjectDescriptionForOntology(Ontology ontology, IAcceptor<IEObjectDescription> acceptor) {
-		var Map<String, String> userData
-		val uris = ontology.closure(false)[importedOntologies].filter[it !== ontology].map[eResource.URI]
-		if (!uris.empty) {
-			userData = new HashMap
-			userData.put(IMPORTS, uris.join(","))
-		}
-		acceptor.accept(EObjectDescription.create(QualifiedName.create(ontology.iri), ontology, userData))
-	}
 }

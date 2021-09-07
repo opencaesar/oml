@@ -80,7 +80,7 @@ public class DescriptionExtensionItemProvider extends DescriptionImportItemProvi
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((DescriptionExtension)object).getUri();
+		String label = ((DescriptionExtension)object).getNamespace();
 		return label == null || label.length() == 0 ?
 			getString("_UI_DescriptionExtension_type") :
 			getString("_UI_DescriptionExtension_type") + " " + label;

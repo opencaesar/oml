@@ -18,11 +18,42 @@
  */
 package io.opencaesar.oml.dsl.ui
 
+import io.opencaesar.oml.dsl.resource.OmlSynchronizedXtextResourceSet
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
+import org.eclipse.xtext.resource.XtextResourceSet
+import org.eclipse.xtext.ui.editor.contentassist.FQNPrefixMatcher
+import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher
 
 /**
  * Use this class to register components to be used within the Eclipse IDE.
  */
 @FinalFieldsConstructor
 class OmlUiModule extends AbstractOmlUiModule {
+	
+	def Class<? extends XtextResourceSet> bindXtextResourceSet() {
+		OmlSynchronizedXtextResourceSet
+	}
+	
+	override Class<? extends PrefixMatcher> bindPrefixMatcher() {
+		return FQNPrefixMatcher2;
+	}
+
+	static class FQNPrefixMatcher2 extends FQNPrefixMatcher {
+
+		override boolean isCandidateMatchingPrefix(String name, String prefix) {
+			delimiter = '#'
+			if (super.isCandidateMatchingPrefix(name, prefix)) {
+				return true
+			}
+			delimiter = '/'
+			if (super.isCandidateMatchingPrefix(name, prefix)) {
+				return true
+			}
+			delimiter = ':'
+			if (super.isCandidateMatchingPrefix(name, prefix)) {
+				return true
+			}
+			return false;
+		}
+	}
 }
