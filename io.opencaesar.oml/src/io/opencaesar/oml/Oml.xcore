@@ -1022,7 +1022,7 @@ abstract class Import extends Element {
     /*
      * The local prefix of the imported ontology's namespace
      */
-    ID[1] prefix
+    ID[?] prefix
 
     /*
      * Get the import's iri
