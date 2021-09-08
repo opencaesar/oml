@@ -23,14 +23,13 @@ import com.google.inject.Inject
 import io.opencaesar.oml.Import
 import io.opencaesar.oml.Ontology
 import io.opencaesar.oml.dsl.naming.OmlNamespaceImportNormalizer
+import java.util.Collections
 import java.util.List
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.naming.IQualifiedNameConverter
 import org.eclipse.xtext.scoping.impl.ImportNormalizer
 import org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider
-
-import static extension io.opencaesar.oml.util.OmlRead.*
-import java.util.Collections
+import io.opencaesar.oml.util.OmlRead
 
 class OmlImportedNamespaceAwareLocalScopeProvider extends ImportedNamespaceAwareLocalScopeProvider{
 
@@ -44,13 +43,17 @@ class OmlImportedNamespaceAwareLocalScopeProvider extends ImportedNamespaceAware
 
 	override List<ImportNormalizer> internalGetImportedNamespaceResolvers(EObject context, boolean ignoreCase) {
 		if (context instanceof Ontology) {
+			var ontology = context as Ontology
+			
 			val importedNamespaceResolvers = Lists.newArrayList();
 			
 			// add the current ontology
-			importedNamespaceResolvers.add(new OmlNamespaceImportNormalizer(qnc.toQualifiedName(context.namespace), context.prefix, ignoreCase))
+			if (ontology.namespace !== null) {
+				importedNamespaceResolvers.add(new OmlNamespaceImportNormalizer(qnc.toQualifiedName(ontology.namespace), ontology.prefix, ignoreCase))
+			}
 		
 			// collect all local imports first (so they get priority)
-			context.importPrefixes.forEach[namespace, prefix|
+			OmlRead.getImportPrefixes(ontology).forEach[namespace, prefix|
 				if (prefix !== null && namespace !== null) {
 					importedNamespaceResolvers.add(new OmlNamespaceImportNormalizer(qnc.toQualifiedName(namespace), prefix, ignoreCase))
 				}

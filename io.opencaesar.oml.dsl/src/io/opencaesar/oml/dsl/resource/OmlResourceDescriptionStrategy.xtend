@@ -31,14 +31,17 @@ class OmlResourceDescriptionStrategy extends DefaultResourceDescriptionStrategy 
 	override boolean createEObjectDescriptions(EObject eObject, IAcceptor<IEObjectDescription> acceptor) {
 		if (eObject instanceof Ontology) {
 			val qualifiedName = getQualifiedNameProvider().getFullyQualifiedName(eObject);
-			acceptor.accept(EObjectDescription.create(qualifiedName, eObject, newHashMap(
-				"namespace" -> eObject.ontology.namespace,
-				"prefix" -> eObject.ontology.prefix)));
+			if (qualifiedName !== null) {
+				acceptor.accept(EObjectDescription.create(qualifiedName, eObject, newHashMap(
+					"namespace" -> eObject.ontology.namespace,
+					"prefix" -> eObject.ontology.prefix)));
+			}
 			return true
 		} else if (eObject instanceof Member) {
 			val qualifiedName = getQualifiedNameProvider().getFullyQualifiedName(eObject);
 			if (qualifiedName !== null) {
-				acceptor.accept(EObjectDescription.create(qualifiedName, eObject, newHashMap("defaultPrefix" -> eObject.ontology.prefix)));
+				acceptor.accept(EObjectDescription.create(qualifiedName, eObject, newHashMap(
+					"defaultPrefix" -> eObject.ontology.prefix)));
 			}
 			return true;
 		}
