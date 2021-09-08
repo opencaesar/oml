@@ -232,7 +232,7 @@ final class OmlUriResolver implements Runnable {
 		var entryUris = new ArrayList<URI>();
 		for (CatalogEntry e : catalog.getEntries()) {
 			if (e.getEntryType() == Catalog.REWRITE_URI) { // only type of entry supported so far
-				var uri = URI.createURI(e.getEntryArg(1));
+				var uri = URI.createURI(Path.of(e.getEntryArg(1)).normalize().toString());
 				if (uri.hasTrailingPathSeparator()) {
 					uri = uri.trimSegments(1);
 				}
