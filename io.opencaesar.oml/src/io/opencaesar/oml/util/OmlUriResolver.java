@@ -27,7 +27,6 @@ import java.nio.file.WatchEvent;
 import java.nio.file.WatchKey;
 import java.nio.file.WatchService;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -62,8 +61,6 @@ final class OmlUriResolver implements Runnable {
      */
     private static OmlUriResolver instance = new OmlUriResolver();
     
-    private static final List<String> OML_EXTENSIONS_LIST = Arrays.asList(OmlConstants.OML_EXTENSIONS);
-
     private Thread thread;
     private boolean doStop = false;
     private WatchService watcher;
@@ -205,7 +202,7 @@ final class OmlUriResolver implements Runnable {
 		
 		// add the URIs from the current resource set
 		contextResource.getResourceSet().getResources().forEach(r -> uris.add(r.getURI()));
-		uris.removeIf(uri -> !OML_EXTENSIONS_LIST.contains(uri.fileExtension()));
+		uris.removeIf(uri -> !OmlConstants.OML_EXTENSION.equals(uri.fileExtension()));
 		
 		// retain only OML files
 
@@ -249,12 +246,10 @@ final class OmlUriResolver implements Runnable {
 					uris.add(URI.createURI(entryUri+"/"+relative));
 				}
 			} else { // likely a file name with no extension
-				for (String ext : OML_EXTENSIONS_LIST) {
-					var file = new File(path.toString()+"."+ext);
-					if (file.exists()) {
-						uris.add(URI.createURI(entryUri+"."+ext));
-						break;
-					}
+				var file = new File(path.toString()+"."+OmlConstants.OML_EXTENSION);
+				if (file.exists()) {
+					uris.add(URI.createURI(entryUri+"."+OmlConstants.OML_EXTENSION));
+					break;
 				}
 			}
 		}
