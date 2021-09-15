@@ -27,7 +27,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":9,"i1":10,"i2":10,"i3":10,"i4":10};
+var data = {"i0":9,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -176,13 +176,27 @@ extends java.lang.Object</pre>
 </td>
 </tr>
 <tr id="i3" class="rowColor">
+<td class="colFirst"><code>java.util.List&lt;org.eclipse.emf.common.util.URI&gt;</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getFileUris(java.util.List)">getFileUris</a></span>&#8203;(java.util.List&lt;java.lang.String&gt;&nbsp;fileExtensions)</code></th>
+<td class="colLast">
+<div class="block">Gets the URIs of files that are mapped by this catalog</div>
+</td>
+</tr>
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>java.util.List&lt;java.lang.String&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getNestedCatalogs()">getNestedCatalogs</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Gets the nested catalogs of this catalog</div>
 </td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i5" class="rowColor">
+<td class="colFirst"><code>java.util.List&lt;org.eclipse.emf.common.util.URI&gt;</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getRewriteUris()">getRewriteUris</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Gets the URIs that are used for rewrite rules in this catalog</div>
+</td>
+</tr>
+<tr id="i6" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#resolveURI(java.lang.String)">resolveURI</a></span>&#8203;(java.lang.String&nbsp;uri)</code></th>
 <td class="colLast">
@@ -282,7 +296,7 @@ extends java.lang.Object</pre>
 <a id="getNestedCatalogs()">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>getNestedCatalogs</h4>
 <pre class="methodSignature">public&nbsp;java.util.List&lt;java.lang.String&gt;&nbsp;getNestedCatalogs()</pre>
@@ -290,6 +304,34 @@ extends java.lang.Object</pre>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>The nested catalog of this catalog</dd>
+</dl>
+</li>
+</ul>
+<a id="getRewriteUris()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getRewriteUris</h4>
+<pre class="methodSignature">public&nbsp;java.util.List&lt;org.eclipse.emf.common.util.URI&gt;&nbsp;getRewriteUris()</pre>
+<div class="block">Gets the URIs that are used for rewrite rules in this catalog</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a list of rewrite URIs</dd>
+</dl>
+</li>
+</ul>
+<a id="getFileUris(java.util.List)">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>getFileUris</h4>
+<pre class="methodSignature">public&nbsp;java.util.List&lt;org.eclipse.emf.common.util.URI&gt;&nbsp;getFileUris&#8203;(java.util.List&lt;java.lang.String&gt;&nbsp;fileExtensions)</pre>
+<div class="block">Gets the URIs of files that are mapped by this catalog</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a list of file URIs</dd>
 </dl>
 </li>
 </ul>
