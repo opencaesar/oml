@@ -43,17 +43,16 @@ class OmlImportedNamespaceAwareLocalScopeProvider extends ImportedNamespaceAware
 
 	override List<ImportNormalizer> internalGetImportedNamespaceResolvers(EObject context, boolean ignoreCase) {
 		if (context instanceof Ontology) {
-			var ontology = context as Ontology
 			
 			val importedNamespaceResolvers = Lists.newArrayList();
 			
 			// add the current ontology
-			if (ontology.namespace !== null) {
-				importedNamespaceResolvers.add(new OmlNamespaceImportNormalizer(qnc.toQualifiedName(ontology.namespace), ontology.prefix, ignoreCase))
+			if (context.namespace !== null) {
+				importedNamespaceResolvers.add(new OmlNamespaceImportNormalizer(qnc.toQualifiedName(context.namespace), context.prefix, ignoreCase))
 			}
 		
 			// collect all local imports first (so they get priority)
-			OmlRead.getImportPrefixes(ontology).forEach[namespace, prefix|
+			OmlRead.getImportPrefixes(context).forEach[namespace, prefix|
 				if (prefix !== null && namespace !== null) {
 					importedNamespaceResolvers.add(new OmlNamespaceImportNormalizer(qnc.toQualifiedName(namespace), prefix, ignoreCase))
 				}

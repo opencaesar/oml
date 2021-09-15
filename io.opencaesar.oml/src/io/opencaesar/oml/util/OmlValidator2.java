@@ -208,7 +208,6 @@ public final class OmlValidator2 {
      * @param context The object-to-object context map
      * @return True if the rules is satisfied; False otherwise
      */
-    @SuppressWarnings("unchecked")
 	protected boolean validateOntologyHasDuplicateImports(Ontology object, DiagnosticChain diagnostics, Map<Object, Object> context) {
         boolean returnValue = true;
     	var imports = OmlRead.getImports(object);
@@ -230,7 +229,6 @@ public final class OmlValidator2 {
      * @param context The object-to-object context map
      * @return True if the rules is satisfied; False otherwise
      */
-    @SuppressWarnings("unchecked")
 	protected boolean validateOntologyHasSelfImports(Ontology object, DiagnosticChain diagnostics, Map<Object, Object> context) {
         boolean returnValue = true;
     	var imports = OmlRead.getImports(object);

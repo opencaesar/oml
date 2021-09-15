@@ -410,15 +410,7 @@ public final class OmlRead {
         if (resource == null || iri == null || iri.isEmpty()) {
             return null;
         }
-        final ResourceSet rs = resource.getResourceSet();
-        if (rs == null) {
-            return null;
-        }
-        OmlUriResolver resolver = OmlUriResolver.get(rs);
-        if (resolver == null) {
-            return null;
-        }
-        return resolver.resolve(resource, iri);
+        return OmlUriResolver.getInstance().resolve(resource, iri);
     }
     
     /**
@@ -433,17 +425,19 @@ public final class OmlRead {
         if (resource == null) {
             return Collections.emptySet();
         }
-        final ResourceSet rs = resource.getResourceSet();
-        if (rs == null) {
-            return Collections.emptySet();
-        }
-        OmlUriResolver resolver = OmlUriResolver.get(rs);
-        if (resolver == null) {
-            return Collections.emptySet();
-        }
-        return resolver.getResolvableUris(resource);
+        return OmlUriResolver.getInstance().getResolvableUris(resource);
     }
     
+    /**
+     * Determines whether the resource with the given URI is mapped by an OML catalog 
+     * 
+     * @param uri the given resource URI
+     * @return Whether the given resource URI is of an OML resource mapped by a catalog
+     */
+    public static boolean isUriMappedByCatalog(URI uri) {
+        return OmlUriResolver.getInstance().isUriMappedByCatalog(uri);
+    }
+
     //-------------------------------------------------
     // COMMON
     //-------------------------------------------------

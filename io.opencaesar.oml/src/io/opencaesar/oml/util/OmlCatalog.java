@@ -18,17 +18,23 @@
  */
 package io.opencaesar.oml.util;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.Vector;
 
 import org.apache.xml.resolver.Catalog;
 import org.apache.xml.resolver.CatalogEntry;
 import org.apache.xml.resolver.CatalogManager;
+import org.eclipse.emf.common.CommonPlugin;
 import org.eclipse.emf.common.util.URI;
+
+import com.google.common.io.Files;
 
 /**
  * The <b>Catalog</b> that resolves logical IRIs to physical URIs. It is a wrapper around the the Apache XML Resolver Catalog. 
@@ -82,7 +88,8 @@ public final class OmlCatalog {
      * @throws IOException if the URI cannot be turned into a valid path
      */
     public String resolveURI(String uri) throws IOException {
-    	return catalog.resolveURI(uri);
+    	String resolved = catalog.resolveURI(uri);
+    	return normalize(resolved);
     }
 
     /**
@@ -121,6 +128,73 @@ public final class OmlCatalog {
         }
         return entries;
     }
+
+    /**
+     * Gets the URIs that are used for rewrite rules in this catalog
+     * 
+     * @return a list of rewrite URIs
+     */
+    public List<URI> getRewriteUris() {
+		var rewriteUris = new ArrayList<URI>();
+		for (CatalogEntry e : getEntries()) {
+			if (e.getEntryType() == Catalog.REWRITE_URI) { // only type of entry supported so far
+				var uri = URI.createURI(normalize(e.getEntryArg(1)));
+				if (uri.hasTrailingPathSeparator()) {
+					uri = uri.trimSegments(1);
+				}
+				rewriteUris.add(uri);
+			}
+		}
+    	return rewriteUris;
+    }
+    
+    private String normalize(String path) {
+    	java.net.URI uri = java.net.URI.create(path);
+    	java.net.URI normalized = uri.normalize();
+    	return path.replaceFirst(uri.getRawPath(), normalized.getRawPath());
+    }
+    
+    /**
+     * Gets the URIs of files that are mapped by this catalog
+     * 
+     * @return a list of file URIs
+     */
+    public List<URI> getFileUris(List<String> fileExtensions) {
+		var uris = new ArrayList<URI>();
+		for (final URI rewriteUri : getRewriteUris()) {
+			var path = new File(CommonPlugin.asLocalURI(rewriteUri).toFileString());
+			if (path.isDirectory()) {
+				for (var file : getFiles(path, fileExtensions)) {
+					String relative = path.toURI().relativize(file.toURI()).getPath();
+					uris.add(URI.createURI(rewriteUri+"/"+relative));
+				}
+			} else { // likely a file name with no extension
+				for (String ext : fileExtensions) {
+					var file = new File(path.toString()+"."+ext);
+					if (file.exists()) {
+						uris.add(URI.createURI(rewriteUri+"."+ext));
+						break;
+					}
+				}
+			}
+		}
+		return uris;
+    }
+    
+    private Set<File> getFiles(File folder, List<String> fileExtensions) {
+		final var files = new HashSet<File>();
+		for (File file : folder.listFiles()) {
+			if (file.isFile()) {
+				var ext = Files.getFileExtension(file.toString());
+				if (fileExtensions.contains(ext)) {
+					files.add(file);
+				}
+			} else if (file.isDirectory()) {
+				files.addAll(getFiles(file, fileExtensions));
+			}
+		}
+		return files;
+	}
 
     private static class CatalogEx extends Catalog {
     	private URI baseUri;

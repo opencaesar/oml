@@ -22,6 +22,7 @@ import io.opencaesar.oml.dsl.conversion.OmlQualifiedNameConverter
 import io.opencaesar.oml.dsl.conversion.OmlValueConverterService
 import io.opencaesar.oml.dsl.naming.OmlQualifiedNameProvider
 import io.opencaesar.oml.dsl.resource.OmlResourceDescriptionStrategy
+import io.opencaesar.oml.dsl.resource.OmlResourceServiceProvider
 import io.opencaesar.oml.dsl.resource.OmlSynchronizedXtextResourceSet
 import io.opencaesar.oml.dsl.scoping.OmlImportUriGlobalScopeProvider
 import io.opencaesar.oml.dsl.scoping.OmlImportedNamespaceAwareLocalScopeProvider
@@ -32,6 +33,7 @@ import org.eclipse.xtext.naming.IQualifiedNameConverter
 import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.eclipse.xtext.preferences.IPreferenceValuesProvider
 import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy
+import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.scoping.IGlobalScopeProvider
 import org.eclipse.xtext.scoping.impl.ImportUriResolver
@@ -76,4 +78,7 @@ class OmlRuntimeModule extends AbstractOmlRuntimeModule {
 		OmlSynchronizedXtextResourceSet
 	}
 
+ 	def Class<? extends IResourceServiceProvider> bindIResourceServiceProvider() {
+    	OmlResourceServiceProvider
+  	}
 }
