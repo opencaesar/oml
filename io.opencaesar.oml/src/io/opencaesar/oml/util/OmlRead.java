@@ -880,7 +880,7 @@ public final class OmlRead {
     public static Resource getImportedResource(Import _import) {
         final URI uri = getImportedUri(_import);
         final ResourceSet resourceSet = (uri != null) ? _import.eResource().getResourceSet() : null;
-        return (resourceSet != null) ? resourceSet.getResource(uri, false) : null;
+        return (resourceSet != null) ? resourceSet.getResource(uri, true) : null;
     }
     
     //-------------------------------------------------

@@ -20,14 +20,19 @@ package io.opencaesar.oml.util;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.util.BasicExtendedMetaData;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 
@@ -65,9 +70,14 @@ public final class OmlXMIResource extends XMIResourceImpl {
     public OmlXMIResource(URI uri) {
         super(uri);
         var handler = new OmlXMIURIHandler(this);
+        // Load Options
         getDefaultLoadOptions().put(XMIResource.OPTION_URI_HANDLER, handler);
+        getDefaultLoadOptions().put(XMIResource.OPTION_USE_XML_NAME_TO_FEATURE_MAP, new HashMap<String, EStructuralFeature>());
+        // Save Options
         getDefaultSaveOptions().put(XMIResource.OPTION_URI_HANDLER, handler);
         getDefaultSaveOptions().put(XMIResource.OPTION_SAVE_TYPE_INFORMATION, Boolean.TRUE);
+        getDefaultSaveOptions().put(XMIResource.OPTION_EXTENDED_META_DATA, new OmlExtendedMetaData());
+        getDefaultSaveOptions().put(XMIResource.OPTION_USE_CACHED_LOOKUP_TABLE, new ArrayList<Object>());
         intrinsicIDToEObjectMap = idToEObjectMap;
     }
     
@@ -95,4 +105,28 @@ public final class OmlXMIResource extends XMIResourceImpl {
         super.doSave(outputStream, mergedOptions);
     }
 
+	private class OmlExtendedMetaData extends BasicExtendedMetaData {
+	    
+		private String ownedImportsName = OmlPackage.Literals.VOCABULARY__OWNED_IMPORTS.getName();
+		
+		/**
+	     * This work around ensures that ownedImports is the first reference
+	     * to be serialized for an ontology such that it can be used in
+	     * ({@link OmlXMIURIHandler} to resolve namespace prefixes
+	     */
+		@Override
+		public List<EStructuralFeature> getAllElements(EClass eClass) {
+	    	var features = super.getAllElements(eClass);
+	    	if (!eClass.isAbstract() && OmlPackage.Literals.ONTOLOGY.isSuperTypeOf(eClass)) {
+	    		features = new ArrayList<EStructuralFeature>(eClass.getEAllReferences());
+	    		var ownedImports = features.stream().filter(f -> f.getName().equals(ownedImportsName)).findFirst().orElse(null);
+	    		if (ownedImports != null) {
+		    		features.remove(ownedImports);
+		    		features.add(0, ownedImports);
+	    		}
+	    	} 
+	    	return features;
+    	}
+	}
+    
 }
