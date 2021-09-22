@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>io.opencaesar.oml</groupId>
 		<artifactId>io.opencaesar.oml.parent</artifactId>
-		<version>1.0.2</version>
+		<version>1.0.3</version>
 	</parent>
 	<artifactId>io.opencaesar.oml.feature</artifactId>
 	<packaging>eclipse-feature</packaging>

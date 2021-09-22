@@ -33,7 +33,6 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
-import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
@@ -42,7 +41,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * <!-- end-user-doc -->
  * @generated
  */
-public class NamedInstanceItemProvider extends InstanceItemProvider {
+public class NamedInstanceItemProvider extends MemberItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
@@ -64,32 +63,9 @@ public class NamedInstanceItemProvider extends InstanceItemProvider {
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addNamePropertyDescriptor(object);
 			addOwningDescriptionPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the Name feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addNamePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Member_name_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Member_name_feature", "_UI_Member_type"),
-				 OmlPackage.Literals.MEMBER__NAME,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
 	}
 
 	/**
@@ -126,7 +102,7 @@ public class NamedInstanceItemProvider extends InstanceItemProvider {
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(OmlPackage.Literals.ANNOTATED_ELEMENT__OWNED_ANNOTATIONS);
+			childrenFeatures.add(OmlPackage.Literals.INSTANCE__OWNED_PROPERTY_VALUES);
 			childrenFeatures.add(OmlPackage.Literals.NAMED_INSTANCE__OWNED_LINKS);
 		}
 		return childrenFeatures;
@@ -172,10 +148,7 @@ public class NamedInstanceItemProvider extends InstanceItemProvider {
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(NamedInstance.class)) {
-			case OmlPackage.NAMED_INSTANCE__NAME:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-				return;
-			case OmlPackage.NAMED_INSTANCE__OWNED_ANNOTATIONS:
+			case OmlPackage.NAMED_INSTANCE__OWNED_PROPERTY_VALUES:
 			case OmlPackage.NAMED_INSTANCE__OWNED_LINKS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
@@ -196,8 +169,13 @@ public class NamedInstanceItemProvider extends InstanceItemProvider {
 
 		newChildDescriptors.add
 			(createChildParameter
-				(OmlPackage.Literals.ANNOTATED_ELEMENT__OWNED_ANNOTATIONS,
-				 OmlFactory.eINSTANCE.createAnnotation()));
+				(OmlPackage.Literals.INSTANCE__OWNED_PROPERTY_VALUES,
+				 OmlFactory.eINSTANCE.createScalarPropertyValueAssertion()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(OmlPackage.Literals.INSTANCE__OWNED_PROPERTY_VALUES,
+				 OmlFactory.eINSTANCE.createStructuredPropertyValueAssertion()));
 
 		newChildDescriptors.add
 			(createChildParameter

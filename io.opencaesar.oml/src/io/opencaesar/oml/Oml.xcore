@@ -498,7 +498,7 @@ abstract class Scalar extends Type {
  * xsd:dateTimeStamp
  * 
  * Plain scalars (facets: length, minLength, maxLength, pattern, language):
- * rdf:PlainLiteral, 
+ * rdf:PlainLiteral
 
  * String scalars (facets: length, minLength, maxLength, pattern)
  * xsd:string,
@@ -711,7 +711,7 @@ class StructureInstance extends Instance {
  * NamedInstance is an instance that is a member of a description. It can specify links to other named instances.
  */
 @Bikeshed(heading="Instances")
-abstract class NamedInstance extends Instance, Member, DescriptionStatement {
+abstract class NamedInstance extends Member, Instance, DescriptionStatement {
     /*
      * The links specified by this named instance to other named instances
      */
