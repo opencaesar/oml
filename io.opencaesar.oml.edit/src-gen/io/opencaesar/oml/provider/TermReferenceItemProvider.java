@@ -1,6 +1,6 @@
 /**
  * 
- * Copyright 2019 California Institute of Technology ("Caltech").
+ * Copyright 2019-2021 California Institute of Technology ("Caltech").
  * U.S. Government sponsorship acknowledged.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -31,19 +31,19 @@ import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 
 /**
- * This is the item provider adapter for a {@link io.opencaesar.oml.Predicate} object.
+ * This is the item provider adapter for a {@link io.opencaesar.oml.TermReference} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class PredicateItemProvider extends ElementItemProvider {
+public class TermReferenceItemProvider extends ReferenceItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public PredicateItemProvider(AdapterFactory adapterFactory) {
+	public TermReferenceItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -58,48 +58,25 @@ public class PredicateItemProvider extends ElementItemProvider {
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addAntecedentRulePropertyDescriptor(object);
-			addConsequentRulePropertyDescriptor(object);
+			addOwningVocabularyPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Antecedent Rule feature.
+	 * This adds a property descriptor for the Owning Vocabulary feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addAntecedentRulePropertyDescriptor(Object object) {
+	protected void addOwningVocabularyPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Predicate_antecedentRule_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Predicate_antecedentRule_feature", "_UI_Predicate_type"),
-				 OmlPackage.Literals.PREDICATE__ANTECEDENT_RULE,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Consequent Rule feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addConsequentRulePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Predicate_consequentRule_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Predicate_consequentRule_feature", "_UI_Predicate_type"),
-				 OmlPackage.Literals.PREDICATE__CONSEQUENT_RULE,
+				 getString("_UI_VocabularyStatement_owningVocabulary_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_VocabularyStatement_owningVocabulary_feature", "_UI_VocabularyStatement_type"),
+				 OmlPackage.Literals.VOCABULARY_STATEMENT__OWNING_VOCABULARY,
 				 true,
 				 false,
 				 true,
@@ -116,7 +93,7 @@ public class PredicateItemProvider extends ElementItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_Predicate_type");
+		return getString("_UI_TermReference_type");
 	}
 
 

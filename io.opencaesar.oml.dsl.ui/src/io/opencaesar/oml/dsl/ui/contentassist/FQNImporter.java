@@ -136,7 +136,10 @@ public class FQNImporter extends FQNShortener {
 				offset = node.getOffset() + node.getLength();
 			}
 			if (proposal.getReplacementOffset() < offset) {
-				offset += escapedShortname.length() - proposal.getReplacementLength();
+				offset += escapedShortname.length();
+				if (proposal.getReplacementLength() == proposal.getReplaceContextLength()) {
+					offset -= proposal.getReplacementLength();
+				}
 			}
 			
 			// calculate the text of the import statement

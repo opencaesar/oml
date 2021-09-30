@@ -25,25 +25,8 @@ Ontology:
 	VocabularyBox |
 	DescriptionBox;
 
-Element:
-	Annotation |
-	AnnotatedElement |
-	Reference |
-	Statement |
-	Literal;
-
 Annotation:
 	'@' {Annotation} property=[AnnotationProperty|Ref]? value=Literal?;
-
-AnnotatedElement:
-	->IdentifiedElement |
-	->NamedInstance |
-	->Axiom |
-	->Predicate;
-
-IdentifiedElement:
-	Ontology |
-	Member;
 
 VocabularyBox:
 	Vocabulary |
@@ -78,15 +61,6 @@ DescriptionBundle:
 	'description' 'bundle' namespace=NAMESPACE 'as' prefix=ID '{'
 		ownedImports+=DescriptionBundleImport*
 	'}';
-
-Member:
-	Term |
-	Rule |
-	NamedInstance;
-
-Term:
-	SpecializableTerm |
-	Relation;
 
 SpecializableTerm:
 	Type |
@@ -146,10 +120,6 @@ Structure:
 		ownedPropertyRestrictions+=PropertyRestrictionAxiom*
 	']')?;
 
-Feature:
-    Property |
-    Relation;
-
 Property:
 	AnnotationProperty |
 	SemanticProperty;
@@ -202,10 +172,6 @@ EnumeratedScalar:
 		literals+=Literal (',' literals+=Literal)*
 	']')?;
 
-Relation:
-	ForwardRelation |
-	ReverseRelation;
-
 ForwardRelation:
 	ownedAnnotations+=Annotation*
 	'forward' name=ID;
@@ -220,10 +186,6 @@ Rule:
 		antecedent+=Predicate ('^' antecedent+=Predicate)* '->' consequent+=Predicate ('^' consequent+=Predicate)*
 	']';
 
-Instance:
-	NamedInstance |
-	StructureInstance;
-	
 StructureInstance:
 	
 	type=[Structure|Ref] '['
@@ -250,23 +212,17 @@ RelationInstance:
 		ownedLinks+=LinkAssertion*
 	']';
 	
-Reference:
-	VocabularyMemberReference |
-	DescriptionMemberReference;
-
-VocabularyMemberReference:
-	SpecializableTermReference |
-	RelationReference |
-	RuleReference;
-
 SpecializableTermReference:
-	EntityReference |
-	StructureReference |
+	ClassifierReference |
+	FacetedScalarReference |
+	EnumeratedScalarReference |
 	AnnotationPropertyReference |
 	ScalarPropertyReference |
-	StructuredPropertyReference |
-	FacetedScalarReference |
-	EnumeratedScalarReference;
+	StructuredPropertyReference;
+
+ClassifierReference:
+	EntityReference |
+	StructureReference;
 
 EntityReference:
 	AspectReference |
@@ -331,9 +287,6 @@ RuleReference:
 	ownedAnnotations+=Annotation*
 	'ref' 'rule' rule=[Rule|Ref];
 
-DescriptionMemberReference:
-	NamedInstanceReference;
-
 NamedInstanceReference:
 	ConceptInstanceReference |
 	RelationInstanceReference;
@@ -352,37 +305,27 @@ RelationInstanceReference:
 		ownedLinks+=LinkAssertion*
 	']')?;
 
-Statement:
-	VocabularyStatement |
-	DescriptionStatement;
-	
 VocabularyStatement:
 	SpecializableTerm |
-	Rule |
 	SpecializableTermReference |
+	Rule |
 	RuleReference |
 	RelationReference;
-
+	
 DescriptionStatement:
 	NamedInstance |
 	NamedInstanceReference;
 	
-Import:
-	->VocabularyImport |
-	->VocabularyBundleImport |
-	->DescriptionImport |
-	->DescriptionBundleImport;
-
 VocabularyImport:
 	VocabularyExtension |
 	VocabularyUsage;
 
 VocabularyExtension:
-	
+	ownedAnnotations+=Annotation*
 	'extends' namespace=NAMESPACE ('as' prefix=ID)?;
     	
 VocabularyUsage:
-	
+	ownedAnnotations+=Annotation*
 	'uses' namespace=NAMESPACE ('as' prefix=ID)?;
     	
 VocabularyBundleImport:
@@ -390,11 +333,11 @@ VocabularyBundleImport:
 	VocabularyBundleInclusion;
 
 VocabularyBundleInclusion:
-	
+	ownedAnnotations+=Annotation*
 	'includes' namespace=NAMESPACE ('as' prefix=ID)?;
 
 VocabularyBundleExtension:
-	
+	ownedAnnotations+=Annotation*
 	'extends' namespace=NAMESPACE ('as' prefix=ID)?;
 
 DescriptionImport:
@@ -402,11 +345,11 @@ DescriptionImport:
 	DescriptionUsage;
 
 DescriptionUsage:
-	
+	ownedAnnotations+=Annotation*
 	'uses' namespace=NAMESPACE ('as' prefix=ID)?;
 
 DescriptionExtension:
-	
+	ownedAnnotations+=Annotation*
 	'extends' namespace=NAMESPACE ('as' prefix=ID)?;
 
 DescriptionBundleImport:
@@ -415,30 +358,20 @@ DescriptionBundleImport:
 	DescriptionBundleUsage;
 
 DescriptionBundleInclusion:
-	
+	ownedAnnotations+=Annotation*
 	'includes' namespace=NAMESPACE ('as' prefix=ID)?;
 
 DescriptionBundleExtension:
-	
+	ownedAnnotations+=Annotation*
 	'extends' namespace=NAMESPACE ('as' prefix=ID)?;
 
 DescriptionBundleUsage:
-	
+	ownedAnnotations+=Annotation*
 	'uses' namespace=NAMESPACE ('as' prefix=ID)?;
 
-Axiom:
-	SpecializationAxiom |
-	RestrictionAxiom |
-	KeyAxiom;
-
 SpecializationAxiom:
-	
 	specializedTerm=[SpecializableTerm|Ref];
 	
-RestrictionAxiom:
-	PropertyRestrictionAxiom |
-	RelationRestrictionAxiom;
-
 PropertyRestrictionAxiom:
 	ScalarPropertyRestrictionAxiom |
 	StructuredPropertyRestrictionAxiom;
@@ -449,15 +382,12 @@ ScalarPropertyRestrictionAxiom:
 	ScalarPropertyValueRestrictionAxiom;
 
 ScalarPropertyRangeRestrictionAxiom:
-	ownedAnnotations+=Annotation*
 	'restricts' kind=RangeRestrictionKind 'scalar' 'property' property=[ScalarProperty|Ref] 'to' range=[Scalar|Ref];
 
 ScalarPropertyCardinalityRestrictionAxiom:
-	ownedAnnotations+=Annotation*
 	'restricts' 'scalar' 'property' property=[ScalarProperty|Ref] 'to' kind=CardinalityRestrictionKind cardinality=UnsignedInteger (range=[Scalar|Ref])?;
 
 ScalarPropertyValueRestrictionAxiom:
-	ownedAnnotations+=Annotation*
 	'restricts' 'scalar' 'property' property=[ScalarProperty|Ref] 'to' value=Literal;
 
 StructuredPropertyRestrictionAxiom:
@@ -466,15 +396,12 @@ StructuredPropertyRestrictionAxiom:
 	StructuredPropertyValueRestrictionAxiom;
 
 StructuredPropertyRangeRestrictionAxiom:
-	ownedAnnotations+=Annotation*
 	'restricts' kind=RangeRestrictionKind 'structured' 'property' property=[StructuredProperty|Ref] 'to' range=[Structure|Ref];
 
 StructuredPropertyCardinalityRestrictionAxiom:
-	ownedAnnotations+=Annotation*
 	'restricts' 'structured' 'property' property=[StructuredProperty|Ref] 'to' kind=CardinalityRestrictionKind cardinality=UnsignedInteger (range=[Structure|Ref])?;
 
 StructuredPropertyValueRestrictionAxiom:
-	ownedAnnotations+=Annotation*
 	'restricts' 'structured' 'property' property=[StructuredProperty|Ref] 'to' value=StructureInstance;
 
 RelationRestrictionAxiom:
@@ -483,35 +410,21 @@ RelationRestrictionAxiom:
 	RelationTargetRestrictionAxiom;
 	
 RelationRangeRestrictionAxiom:
-	ownedAnnotations+=Annotation*
 	'restricts' kind=RangeRestrictionKind 'relation' relation=[Relation|Ref] 'to' range=[Entity|Ref];
 
 RelationCardinalityRestrictionAxiom:
-	ownedAnnotations+=Annotation*
 	'restricts' 'relation' relation=[Relation|Ref] 'to' kind=CardinalityRestrictionKind cardinality=UnsignedInteger (range=[Entity|Ref])?;
 
 RelationTargetRestrictionAxiom:
-	ownedAnnotations+=Annotation*
 	'restricts' 'relation' relation=[Relation|Ref] 'to' target=[NamedInstance|Ref];
 
 KeyAxiom:
 	'key' properties+=[ScalarProperty|Ref] (',' properties+=[ScalarProperty|Ref])*;
 
-Assertion:
-	TypeAssertion |
-	PropertyValueAssertion |
-	LinkAssertion;
-	
-TypeAssertion:
-	->ConceptTypeAssertion |
-	->RelationTypeAssertion;
-
 ConceptTypeAssertion:
-	
 	type=[Concept|Ref];
 
 RelationTypeAssertion:
-	
 	type=[RelationEntity|Ref];
 
 PropertyValueAssertion:
@@ -519,15 +432,12 @@ PropertyValueAssertion:
 	StructuredPropertyValueAssertion;
 
 ScalarPropertyValueAssertion:
-	
 	property=[ScalarProperty|Ref] value=Literal;
 
 StructuredPropertyValueAssertion:
-	
 	property=[StructuredProperty|Ref] value=StructureInstance;
 
 LinkAssertion:
-	
 	relation=[Relation|Ref] target=[NamedInstance|Ref];
 
 Predicate:
@@ -538,7 +448,6 @@ UnaryPredicate:
 	TypePredicate;
 	
 TypePredicate:
-	ownedAnnotations+=Annotation*
 	type=[Type|Ref] => '(' variable=ID ')';
 	
 BinaryPredicate:
@@ -548,19 +457,15 @@ BinaryPredicate:
     DifferentFromPredicate;
 
 RelationEntityPredicate:
-    ownedAnnotations+=Annotation*
     entity=[RelationEntity|Ref] '(' variable1=ID ',' entityVariable=ID ',' variable2=ID ')';
 
 FeaturePredicate:
-	ownedAnnotations+=Annotation*
 	feature=[Feature|Ref] '(' variable1=ID ',' variable2=ID ')';
 
 SameAsPredicate:
-	ownedAnnotations+=Annotation*
     'sameAs' '(' variable1=ID ',' variable2=ID ')';
 
 DifferentFromPredicate:
-	ownedAnnotations+=Annotation*
     'differentFrom' '(' variable1=ID ',' variable2=ID ')';
 
 Literal:
@@ -569,7 +474,6 @@ Literal:
 	DoubleLiteral |
 	BooleanLiteral |
 	QuotedLiteral;
-
 
 IntegerLiteral:
 	value=Integer;
@@ -585,10 +489,6 @@ BooleanLiteral:
 
 QuotedLiteral:
 	value=STRING (('^^' type=[Scalar|Ref]) | ('$' langTag=ID))?;
-
-enum SeparatorKind:
-	hash |
-	slash;
 
 enum RangeRestrictionKind:
 	all |

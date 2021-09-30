@@ -85,23 +85,23 @@ class OmlProposalProvider extends AbstractOmlProposalProvider {
 		val ontologyURI = EcoreUtil.getURI(ontology)
 		val keyword = context.lastCompleteNode.grammarElement as Keyword
 		var Predicate<IEObjectDescription> predicate;
-		if (keyword === vocabularyExtensionAccess.extendsKeyword_0) {
+		if (keyword === vocabularyExtensionAccess.extendsKeyword_1) {
 			predicate = [x | x.EObjectURI != ontologyURI && OmlPackage.Literals.VOCABULARY.isSuperTypeOf(x.EClass)]
-		} else if (keyword === vocabularyUsageAccess.usesKeyword_0) {
+		} else if (keyword === vocabularyUsageAccess.usesKeyword_1) {
 			predicate = [x | x.EObjectURI != ontologyURI && OmlPackage.Literals.DESCRIPTION_BOX.isSuperTypeOf(x.EClass)]
-		} else if (keyword === vocabularyBundleExtensionAccess.extendsKeyword_0) {
+		} else if (keyword === vocabularyBundleExtensionAccess.extendsKeyword_1) {
 			predicate = [x | x.EObjectURI != ontologyURI && OmlPackage.Literals.VOCABULARY_BUNDLE.isSuperTypeOf(x.EClass)]
-		} else if (keyword === vocabularyBundleInclusionAccess.includesKeyword_0) {
+		} else if (keyword === vocabularyBundleInclusionAccess.includesKeyword_1) {
 			predicate = [x | x.EObjectURI != ontologyURI && OmlPackage.Literals.VOCABULARY.isSuperTypeOf(x.EClass)]
-		} else if (keyword === descriptionExtensionAccess.extendsKeyword_0) {
+		} else if (keyword === descriptionExtensionAccess.extendsKeyword_1) {
 			predicate = [x | x.EObjectURI != ontologyURI && OmlPackage.Literals.DESCRIPTION.isSuperTypeOf(x.EClass)]
-		} else if (keyword === descriptionUsageAccess.usesKeyword_0) {
+		} else if (keyword === descriptionUsageAccess.usesKeyword_1) {
 			predicate = [x | x.EObjectURI != ontologyURI && OmlPackage.Literals.VOCABULARY_BOX.isSuperTypeOf(x.EClass)]
-		} else if (keyword === descriptionBundleExtensionAccess.extendsKeyword_0) {
+		} else if (keyword === descriptionBundleExtensionAccess.extendsKeyword_1) {
 			predicate = [x | x.EObjectURI != ontologyURI && OmlPackage.Literals.DESCRIPTION_BUNDLE.isSuperTypeOf(x.EClass)]
-		} else if (keyword === descriptionBundleInclusionAccess.includesKeyword_0) {
+		} else if (keyword === descriptionBundleInclusionAccess.includesKeyword_1) {
 			predicate = [x | x.EObjectURI != ontologyURI && OmlPackage.Literals.DESCRIPTION.isSuperTypeOf(x.EClass)]
-		} else if (keyword === descriptionBundleUsageAccess.usesKeyword_0) {
+		} else if (keyword === descriptionBundleUsageAccess.usesKeyword_1) {
 			predicate = [x | x.EObjectURI != ontologyURI && OmlPackage.Literals.VOCABULARY_BOX.isSuperTypeOf(x.EClass)]
 		}
  		val eReference = EcoreFactory.eINSTANCE.createEReference()

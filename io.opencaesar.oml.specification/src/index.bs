@@ -1,5 +1,5 @@
 <pre class='metadata'>
-Title: Ontological Modeling Language 0.9
+Title: Ontological Modeling Language 1.0
 Shortname: oml
 Level: 1
 Status: ld
@@ -18,107 +18,26 @@ body {
   max-width: unset;
 }
 
-table {
-  border-collapse: collapse;
-  border: 3px solid black;
+table.def th {
+	white-space: nowrap;
 }
 
-th, td {
-  border: 3px solid black;
-  padding: 20px;
+table.def ul {
+	padding-left: 1em;
 }
 
-thead th:nth-child(1) {
-  text-align: center;
+table.def dfn code {
+	font-family: sans-serif;
+	color: #005A9C;
 }
 
-thead th:nth-child(2) {
-  text-align: center;
+dd > p:first-child, li > p:first-child {
+    margin-top: 16px;
 }
 
-thead th:nth-child(3) {
-  text-align: center;
-}
-
-thead th:nth-child(4) {
-  text-align: center;
-}
-
-thead th:nth-child(5) {
-  text-align: center;
-}
-
-tbody td:nth-child(1) {
-  text-align: center;
-}
-
-tbody td:nth-child(2) {
-  text-align: center;
-}
-
-tbody td:nth-child(3) {
-  text-align: center;
-}
-
-tbody td:nth-child(4) {
-  text-align: center;
-}
-
-tbody td:nth-child(5) {
-  text-align: left;
-}
-
-.tab-container {
-  margin-bottom: 35px;
-}
-
-.tab-content {
-  // padding-top: 1em;
-}
-
-.tab-content.diagram {
-  padding-top: 1em;
-  display: flex;
-  // justify-content: center;
-  align-items: center;
-  // background-color: #D5D5D5;
-  min-height: 50px;
-}
-
-.tab-content.diagram.hidden {
-  display: none;
-}
-
-.hidden {
-  display: none;
-}
-
-.bar {
-  width: 100%;
-  overflow: hidden;
-  background-color: #668ba8;
-  display: flex;
-}
-
-.bar-btn {
-  border: none;
-  padding: 8px 16px;
-  user-select: none;
-  background-color: inherit;
-  color: white;
-  cursor: pointer;
-  width: auto;
-  display: block;
-}
-
-.bar button.active {
-  color: black;
-  background-color: #67cbf8;
-}
-
-.bar button:hover {
-  color: black;
-  background-color: #cdb066;
+code {
+  color:red; 
+  font-weight: bold;
 }
 
 </style>
@@ -131,7 +50,15 @@ path: getting-started.md
 </pre>
 
 <pre class=include>
-path: concrete-syntax.md
+path: language-reference.md
+</pre>
+
+<pre class=include>
+path: textual-syntax.md
+</pre>
+
+<pre class=include>
+path: graphical-syntax.md
 </pre>
 
 <pre class=include>
@@ -143,37 +70,3 @@ path: public-api.md
 </pre>
 
 </div>
-
-<script>
-function onBarClick(e) {
-  const selectedTab = e.currentTarget.value;
-  const container = e.currentTarget.closest(".tab-container");
-  const tabs = Array.prototype.slice.call(container.children, 1);
-  console.log(tabs);
-  for(const tab of tabs) {
-    console.log(tab.classList);
-    if (Array.prototype.includes.call(tab.classList, selectedTab)) {
-      if (Array.prototype.includes.call(tab.classList, "hidden")) {
-        tab.classList.toggle("hidden");
-      }
-    } else {
-      if (!Array.prototype.includes.call(tab.classList, "hidden")) {
-        tab.classList.toggle("hidden");
-      }
-    }
-  }
-
-  const bar = container.children[0];
-  for (const tab of bar.children) {
-    if (tab.value === selectedTab) {
-      if (!Array.prototype.includes.call(tab.classList, "active")) {
-        tab.classList.toggle("active");
-      }
-    } else {
-      if (Array.prototype.includes.call(tab.classList, "active")) {
-        tab.classList.toggle("active");
-      }
-    }
-  }
-}
-</script>

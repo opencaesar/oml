@@ -424,64 +424,71 @@ class OmlFormatter extends AbstractFormatter2 {
 	}
 
 	def dispatch void format(VocabularyExtension _extension, extension IFormattableDocument document) {
-		_extension.regionFor.keyword(vocabularyExtensionAccess.extendsKeyword_0).append[oneSpace]
-		_extension.regionFor.keyword(vocabularyExtensionAccess.asKeyword_2_0).append[oneSpace]
+		_extension.ownedAnnotations.forEach[format.append[newLine]]
+		_extension.regionFor.keyword(vocabularyExtensionAccess.extendsKeyword_1).append[oneSpace]
+		_extension.regionFor.keyword(vocabularyExtensionAccess.asKeyword_3_0).append[oneSpace]
 	}
 
 	def dispatch void format(VocabularyUsage usage, extension IFormattableDocument document) {
-		usage.regionFor.keyword(vocabularyUsageAccess.usesKeyword_0).append[oneSpace]
-		usage.regionFor.keyword(vocabularyUsageAccess.asKeyword_2_0).append[oneSpace]
+		usage.ownedAnnotations.forEach[format.append[newLine]]
+		usage.regionFor.keyword(vocabularyUsageAccess.usesKeyword_1).append[oneSpace]
+		usage.regionFor.keyword(vocabularyUsageAccess.asKeyword_3_0).append[oneSpace]
 	}
 
 	def dispatch void format(VocabularyBundleExtension _extension, extension IFormattableDocument document) {
-		_extension.regionFor.keyword(vocabularyBundleExtensionAccess.extendsKeyword_0).append[oneSpace]
-		_extension.regionFor.keyword(vocabularyBundleExtensionAccess.asKeyword_2_0).append[oneSpace]
+		_extension.ownedAnnotations.forEach[format.append[newLine]]
+		_extension.regionFor.keyword(vocabularyBundleExtensionAccess.extendsKeyword_1).append[oneSpace]
+		_extension.regionFor.keyword(vocabularyBundleExtensionAccess.asKeyword_3_0).append[oneSpace]
 	}
 
 	def dispatch void format(VocabularyBundleInclusion inclusion, extension IFormattableDocument document) {
-		inclusion.regionFor.keyword(vocabularyBundleInclusionAccess.includesKeyword_0).append[oneSpace]
-		inclusion.regionFor.keyword(vocabularyBundleInclusionAccess.asKeyword_2_0).append[oneSpace]
+		inclusion.ownedAnnotations.forEach[format.append[newLine]]
+		inclusion.regionFor.keyword(vocabularyBundleInclusionAccess.includesKeyword_1).append[oneSpace]
+		inclusion.regionFor.keyword(vocabularyBundleInclusionAccess.asKeyword_3_0).append[oneSpace]
 	}
 
 	def dispatch void format(DescriptionExtension _extension, extension IFormattableDocument document) {
-		_extension.regionFor.keyword(descriptionExtensionAccess.extendsKeyword_0).append[oneSpace]
-		_extension.regionFor.keyword(descriptionExtensionAccess.asKeyword_2_0).append[oneSpace]
+		_extension.ownedAnnotations.forEach[format.append[newLine]]
+		_extension.regionFor.keyword(descriptionExtensionAccess.extendsKeyword_1).append[oneSpace]
+		_extension.regionFor.keyword(descriptionExtensionAccess.asKeyword_3_0).append[oneSpace]
 	}
 
 	def dispatch void format(DescriptionUsage usage, extension IFormattableDocument document) {
-		usage.regionFor.keyword(descriptionUsageAccess.usesKeyword_0).append[oneSpace]
-		usage.regionFor.keyword(descriptionUsageAccess.asKeyword_2_0).append[oneSpace]
+		usage.ownedAnnotations.forEach[format.append[newLine]]
+		usage.regionFor.keyword(descriptionUsageAccess.usesKeyword_1).append[oneSpace]
+		usage.regionFor.keyword(descriptionUsageAccess.asKeyword_3_0).append[oneSpace]
 	}
 
 	def dispatch void format(DescriptionBundleExtension _extension, extension IFormattableDocument document) {
-		_extension.regionFor.keyword(descriptionBundleExtensionAccess.extendsKeyword_0).append[oneSpace]
-		_extension.regionFor.keyword(descriptionBundleExtensionAccess.asKeyword_2_0).append[oneSpace]
+		_extension.ownedAnnotations.forEach[format.append[newLine]]
+		_extension.regionFor.keyword(descriptionBundleExtensionAccess.extendsKeyword_1).append[oneSpace]
+		_extension.regionFor.keyword(descriptionBundleExtensionAccess.asKeyword_3_0).append[oneSpace]
 	}
 
 	def dispatch void format(DescriptionBundleInclusion inclusion, extension IFormattableDocument document) {
-		inclusion.regionFor.keyword(descriptionBundleInclusionAccess.includesKeyword_0).append[oneSpace]
-		inclusion.regionFor.keyword(descriptionBundleInclusionAccess.asKeyword_2_0).append[oneSpace]
+		inclusion.ownedAnnotations.forEach[format.append[newLine]]
+		inclusion.regionFor.keyword(descriptionBundleInclusionAccess.includesKeyword_1).append[oneSpace]
+		inclusion.regionFor.keyword(descriptionBundleInclusionAccess.asKeyword_3_0).append[oneSpace]
 	}
 
 	def dispatch void format(DescriptionBundleUsage usage, extension IFormattableDocument document) {
-		usage.regionFor.keyword(descriptionBundleUsageAccess.usesKeyword_0).append[oneSpace]
-		usage.regionFor.keyword(descriptionBundleUsageAccess.asKeyword_2_0).append[oneSpace]
+		usage.ownedAnnotations.forEach[format.append[newLine]]
+		usage.regionFor.keyword(descriptionBundleUsageAccess.usesKeyword_1).append[oneSpace]
+		usage.regionFor.keyword(descriptionBundleUsageAccess.asKeyword_3_0).append[oneSpace]
 	}
 
 	def dispatch void format(ScalarPropertyRangeRestrictionAxiom axiom, extension IFormattableDocument document) {
-		axiom.ownedAnnotations.forEach[format.append[newLine]]
-		axiom.regionFor.keyword(scalarPropertyRangeRestrictionAxiomAccess.restrictsKeyword_1).append[oneSpace]
-		axiom.regionFor.keyword(scalarPropertyRangeRestrictionAxiomAccess.scalarKeyword_3).surround[oneSpace]
-		axiom.regionFor.keyword(scalarPropertyRangeRestrictionAxiomAccess.propertyKeyword_4).surround[oneSpace]
-		axiom.regionFor.keyword(scalarPropertyRangeRestrictionAxiomAccess.toKeyword_6).surround[oneSpace]
+		axiom.regionFor.keyword(scalarPropertyRangeRestrictionAxiomAccess.restrictsKeyword_0).append[oneSpace]
+		axiom.regionFor.keyword(scalarPropertyRangeRestrictionAxiomAccess.scalarKeyword_2).surround[oneSpace]
+		axiom.regionFor.keyword(scalarPropertyRangeRestrictionAxiomAccess.propertyKeyword_3).surround[oneSpace]
+		axiom.regionFor.keyword(scalarPropertyRangeRestrictionAxiomAccess.toKeyword_5).surround[oneSpace]
 	}
 
 	def dispatch void format(ScalarPropertyCardinalityRestrictionAxiom axiom, extension IFormattableDocument document) {
-		axiom.ownedAnnotations.forEach[format.append[newLine]]
-		axiom.regionFor.keyword(scalarPropertyCardinalityRestrictionAxiomAccess.restrictsKeyword_1).append[oneSpace]
-		axiom.regionFor.keyword(scalarPropertyCardinalityRestrictionAxiomAccess.scalarKeyword_2).surround[oneSpace]
-		axiom.regionFor.keyword(scalarPropertyCardinalityRestrictionAxiomAccess.propertyKeyword_3).surround[oneSpace]
-		axiom.regionFor.keyword(scalarPropertyCardinalityRestrictionAxiomAccess.toKeyword_5).surround[oneSpace]
+		axiom.regionFor.keyword(scalarPropertyCardinalityRestrictionAxiomAccess.restrictsKeyword_0).append[oneSpace]
+		axiom.regionFor.keyword(scalarPropertyCardinalityRestrictionAxiomAccess.scalarKeyword_1).surround[oneSpace]
+		axiom.regionFor.keyword(scalarPropertyCardinalityRestrictionAxiomAccess.propertyKeyword_2).surround[oneSpace]
+		axiom.regionFor.keyword(scalarPropertyCardinalityRestrictionAxiomAccess.toKeyword_4).surround[oneSpace]
 		axiom.regionFor.feature(OmlPackage.Literals.SCALAR_PROPERTY_CARDINALITY_RESTRICTION_AXIOM__KIND).surround[oneSpace]
 		if (axiom.range !== null) {
 			axiom.regionFor.feature(OmlPackage.Literals.SCALAR_PROPERTY_CARDINALITY_RESTRICTION_AXIOM__RANGE).prepend[oneSpace]
@@ -489,27 +496,24 @@ class OmlFormatter extends AbstractFormatter2 {
 	}
 
 	def dispatch void format(ScalarPropertyValueRestrictionAxiom axiom, extension IFormattableDocument document) {
-		axiom.ownedAnnotations.forEach[format.append[newLine]]
-		axiom.regionFor.keyword(scalarPropertyValueRestrictionAxiomAccess.restrictsKeyword_1).append[oneSpace]
-		axiom.regionFor.keyword(scalarPropertyValueRestrictionAxiomAccess.scalarKeyword_2).surround[oneSpace]
-		axiom.regionFor.keyword(scalarPropertyValueRestrictionAxiomAccess.propertyKeyword_3).surround[oneSpace]
-		axiom.regionFor.keyword(scalarPropertyValueRestrictionAxiomAccess.toKeyword_5).surround[oneSpace]
+		axiom.regionFor.keyword(scalarPropertyValueRestrictionAxiomAccess.restrictsKeyword_0).append[oneSpace]
+		axiom.regionFor.keyword(scalarPropertyValueRestrictionAxiomAccess.scalarKeyword_1).surround[oneSpace]
+		axiom.regionFor.keyword(scalarPropertyValueRestrictionAxiomAccess.propertyKeyword_2).surround[oneSpace]
+		axiom.regionFor.keyword(scalarPropertyValueRestrictionAxiomAccess.toKeyword_4).surround[oneSpace]
 	}
 
 	def dispatch void format(StructuredPropertyRangeRestrictionAxiom axiom, extension IFormattableDocument document) {
-		axiom.ownedAnnotations.forEach[format.append[newLine]]
-		axiom.regionFor.keyword(structuredPropertyRangeRestrictionAxiomAccess.restrictsKeyword_1).append[oneSpace]
-		axiom.regionFor.keyword(structuredPropertyRangeRestrictionAxiomAccess.structuredKeyword_3).surround[oneSpace]
-		axiom.regionFor.keyword(structuredPropertyRangeRestrictionAxiomAccess.propertyKeyword_4).surround[oneSpace]
-		axiom.regionFor.keyword(structuredPropertyRangeRestrictionAxiomAccess.toKeyword_6).surround[oneSpace]
+		axiom.regionFor.keyword(structuredPropertyRangeRestrictionAxiomAccess.restrictsKeyword_0).append[oneSpace]
+		axiom.regionFor.keyword(structuredPropertyRangeRestrictionAxiomAccess.structuredKeyword_2).surround[oneSpace]
+		axiom.regionFor.keyword(structuredPropertyRangeRestrictionAxiomAccess.propertyKeyword_3).surround[oneSpace]
+		axiom.regionFor.keyword(structuredPropertyRangeRestrictionAxiomAccess.toKeyword_5).surround[oneSpace]
 	}
 
 	def dispatch void format(StructuredPropertyCardinalityRestrictionAxiom axiom, extension IFormattableDocument document) {
-		axiom.ownedAnnotations.forEach[format.append[newLine]]
-		axiom.regionFor.keyword(structuredPropertyCardinalityRestrictionAxiomAccess.restrictsKeyword_1).append[oneSpace]
-		axiom.regionFor.keyword(structuredPropertyCardinalityRestrictionAxiomAccess.structuredKeyword_2).surround[oneSpace]
-		axiom.regionFor.keyword(structuredPropertyCardinalityRestrictionAxiomAccess.propertyKeyword_3).surround[oneSpace]
-		axiom.regionFor.keyword(structuredPropertyCardinalityRestrictionAxiomAccess.toKeyword_5).surround[oneSpace]
+		axiom.regionFor.keyword(structuredPropertyCardinalityRestrictionAxiomAccess.restrictsKeyword_0).append[oneSpace]
+		axiom.regionFor.keyword(structuredPropertyCardinalityRestrictionAxiomAccess.structuredKeyword_1).surround[oneSpace]
+		axiom.regionFor.keyword(structuredPropertyCardinalityRestrictionAxiomAccess.propertyKeyword_2).surround[oneSpace]
+		axiom.regionFor.keyword(structuredPropertyCardinalityRestrictionAxiomAccess.toKeyword_4).surround[oneSpace]
 		axiom.regionFor.feature(OmlPackage.Literals.STRUCTURED_PROPERTY_CARDINALITY_RESTRICTION_AXIOM__KIND).surround[oneSpace]
 		if (axiom.range !== null) {
 			axiom.regionFor.feature(OmlPackage.Literals.STRUCTURED_PROPERTY_CARDINALITY_RESTRICTION_AXIOM__RANGE).prepend[oneSpace]
@@ -517,25 +521,22 @@ class OmlFormatter extends AbstractFormatter2 {
 	}
 
 	def dispatch void format(StructuredPropertyValueRestrictionAxiom axiom, extension IFormattableDocument document) {
-		axiom.ownedAnnotations.forEach[format.append[newLine]]
-		axiom.regionFor.keyword(structuredPropertyValueRestrictionAxiomAccess.restrictsKeyword_1).append[oneSpace]
-		axiom.regionFor.keyword(structuredPropertyValueRestrictionAxiomAccess.structuredKeyword_2).surround[oneSpace]
-		axiom.regionFor.keyword(structuredPropertyValueRestrictionAxiomAccess.propertyKeyword_3).surround[oneSpace]
-		axiom.regionFor.keyword(structuredPropertyValueRestrictionAxiomAccess.toKeyword_5).surround[oneSpace]
+		axiom.regionFor.keyword(structuredPropertyValueRestrictionAxiomAccess.restrictsKeyword_0).append[oneSpace]
+		axiom.regionFor.keyword(structuredPropertyValueRestrictionAxiomAccess.structuredKeyword_1).surround[oneSpace]
+		axiom.regionFor.keyword(structuredPropertyValueRestrictionAxiomAccess.propertyKeyword_2).surround[oneSpace]
+		axiom.regionFor.keyword(structuredPropertyValueRestrictionAxiomAccess.toKeyword_4).surround[oneSpace]
 	}
 
 	def dispatch void format(RelationRangeRestrictionAxiom axiom, extension IFormattableDocument document) {
-		axiom.ownedAnnotations.forEach[format.append[newLine]]
-		axiom.regionFor.keyword(relationRangeRestrictionAxiomAccess.restrictsKeyword_1).append[oneSpace]
-		axiom.regionFor.keyword(relationRangeRestrictionAxiomAccess.relationKeyword_3).surround[oneSpace]
-		axiom.regionFor.keyword(relationRangeRestrictionAxiomAccess.toKeyword_5).surround[oneSpace]
+		axiom.regionFor.keyword(relationRangeRestrictionAxiomAccess.restrictsKeyword_0).append[oneSpace]
+		axiom.regionFor.keyword(relationRangeRestrictionAxiomAccess.relationKeyword_2).surround[oneSpace]
+		axiom.regionFor.keyword(relationRangeRestrictionAxiomAccess.toKeyword_4).surround[oneSpace]
 	}
 
 	def dispatch void format(RelationCardinalityRestrictionAxiom axiom, extension IFormattableDocument document) {
-		axiom.ownedAnnotations.forEach[format.append[newLine]]
-		axiom.regionFor.keyword(relationCardinalityRestrictionAxiomAccess.restrictsKeyword_1).append[oneSpace]
-		axiom.regionFor.keyword(relationCardinalityRestrictionAxiomAccess.relationKeyword_2).surround[oneSpace]
-		axiom.regionFor.keyword(relationCardinalityRestrictionAxiomAccess.toKeyword_4).surround[oneSpace]
+		axiom.regionFor.keyword(relationCardinalityRestrictionAxiomAccess.restrictsKeyword_0).append[oneSpace]
+		axiom.regionFor.keyword(relationCardinalityRestrictionAxiomAccess.relationKeyword_1).surround[oneSpace]
+		axiom.regionFor.keyword(relationCardinalityRestrictionAxiomAccess.toKeyword_3).surround[oneSpace]
 		axiom.regionFor.feature(OmlPackage.Literals.RELATION_CARDINALITY_RESTRICTION_AXIOM__KIND).surround[oneSpace]
 		if (axiom.range !== null) {
 			axiom.regionFor.feature(OmlPackage.Literals.RELATION_CARDINALITY_RESTRICTION_AXIOM__RANGE).prepend[oneSpace]
@@ -543,15 +544,13 @@ class OmlFormatter extends AbstractFormatter2 {
 	}
 
 	def dispatch void format(RelationTargetRestrictionAxiom axiom, extension IFormattableDocument document) {
-		axiom.ownedAnnotations.forEach[format.append[newLine]]
-		axiom.regionFor.keyword(relationTargetRestrictionAxiomAccess.restrictsKeyword_1).append[oneSpace]
-		axiom.regionFor.keyword(relationTargetRestrictionAxiomAccess.relationKeyword_2).surround[oneSpace]
-		axiom.regionFor.keyword(relationTargetRestrictionAxiomAccess.toKeyword_4).surround[oneSpace]
+		axiom.regionFor.keyword(relationTargetRestrictionAxiomAccess.restrictsKeyword_0).append[oneSpace]
+		axiom.regionFor.keyword(relationTargetRestrictionAxiomAccess.relationKeyword_1).surround[oneSpace]
+		axiom.regionFor.keyword(relationTargetRestrictionAxiomAccess.toKeyword_3).surround[oneSpace]
 		axiom.regionFor.feature(OmlPackage.Literals.RELATION_TARGET_RESTRICTION_AXIOM__TARGET).surround[oneSpace]
 	}
 
 	def dispatch void format(KeyAxiom axiom, extension IFormattableDocument document) {
-		axiom.ownedAnnotations.forEach[format.append[newLine]]
 		axiom.regionFor.keyword(keyAxiomAccess.keyKeyword_0).append[oneSpace]
 		axiom.formatCommas(document)
 	}
@@ -570,32 +569,32 @@ class OmlFormatter extends AbstractFormatter2 {
 	}
 
 	def dispatch void format(TypePredicate predicate, extension IFormattableDocument document) {
-		predicate.regionFor.keyword(typePredicateAccess.leftParenthesisKeyword_2).surround[noSpace]
-		predicate.regionFor.keyword(typePredicateAccess.rightParenthesisKeyword_4).prepend[noSpace]
+		predicate.regionFor.keyword(typePredicateAccess.leftParenthesisKeyword_1).surround[noSpace]
+		predicate.regionFor.keyword(typePredicateAccess.rightParenthesisKeyword_3).prepend[noSpace]
 	}
 
     def dispatch void format(RelationEntityPredicate predicate, extension IFormattableDocument document) {
-        predicate.regionFor.keyword(relationEntityPredicateAccess.leftParenthesisKeyword_2).surround[noSpace]
+        predicate.regionFor.keyword(relationEntityPredicateAccess.leftParenthesisKeyword_1).surround[noSpace]
         predicate.formatCommas(document)
-        predicate.regionFor.keyword(relationEntityPredicateAccess.rightParenthesisKeyword_8).prepend[noSpace]
+        predicate.regionFor.keyword(relationEntityPredicateAccess.rightParenthesisKeyword_7).prepend[noSpace]
     }
 
 	def dispatch void format(FeaturePredicate predicate, extension IFormattableDocument document) {
-		predicate.regionFor.keyword(featurePredicateAccess.leftParenthesisKeyword_2).surround[noSpace]
+		predicate.regionFor.keyword(featurePredicateAccess.leftParenthesisKeyword_1).surround[noSpace]
 		predicate.formatCommas(document)
-		predicate.regionFor.keyword(featurePredicateAccess.rightParenthesisKeyword_6).prepend[noSpace]
+		predicate.regionFor.keyword(featurePredicateAccess.rightParenthesisKeyword_5).prepend[noSpace]
 	}
 
 	def dispatch void format(SameAsPredicate predicate, extension IFormattableDocument document) {
-		predicate.regionFor.keyword(sameAsPredicateAccess.leftParenthesisKeyword_2).surround[noSpace]
+		predicate.regionFor.keyword(sameAsPredicateAccess.leftParenthesisKeyword_1).surround[noSpace]
 		predicate.formatCommas(document)
-		predicate.regionFor.keyword(sameAsPredicateAccess.rightParenthesisKeyword_6).prepend[noSpace]
+		predicate.regionFor.keyword(sameAsPredicateAccess.rightParenthesisKeyword_5).prepend[noSpace]
 	}
 
 	def dispatch void format(DifferentFromPredicate predicate, extension IFormattableDocument document) {
-		predicate.regionFor.keyword(differentFromPredicateAccess.leftParenthesisKeyword_2).surround[noSpace]
+		predicate.regionFor.keyword(differentFromPredicateAccess.leftParenthesisKeyword_1).surround[noSpace]
 		predicate.formatCommas(document)
-        predicate.regionFor.keyword(differentFromPredicateAccess.rightParenthesisKeyword_6).prepend[noSpace]
+        predicate.regionFor.keyword(differentFromPredicateAccess.rightParenthesisKeyword_5).prepend[noSpace]
 	}
 
 	def dispatch void format(QuotedLiteral literal, extension IFormattableDocument document) {
