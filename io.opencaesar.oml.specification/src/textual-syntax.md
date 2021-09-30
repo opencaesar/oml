@@ -261,16 +261,16 @@ However, notice that a comment is purely notational and hence will not be interc
     DifferentFromPredicate
 
 <a id="RelationEntityPredicate-Syntax">RelationEntityPredicate</a>:
-    [RelationEntity|REF] `(` ID `,` ID `,` ID `)`
+	[RelationEntity|REF] `(` ID `,` ID `,` ID `)`
 
 <a id="FeaturePredicate-Syntax">FeaturePredicate</a>:
 	[Feature|REF] `(` ID `,` ID `)`
 
 <a id="SameAsPredicate-Syntax">SameAsPredicate</a>:
-    `sameAs` `(` ID `,` ID `)`
+	`sameAs` `(` ID `,` ID `)`
 
 <a id="DifferentFromPredicate-Syntax">DifferentFromPredicate</a>:
-    `differentFrom` `(` ID `,` ID `)`
+	`differentFrom` `(` ID `,` ID `)`
 
 <a id="DescriptionStatement-Syntax">DescriptionStatement</a>:
 	NamedInstance |
