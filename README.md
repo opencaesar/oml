@@ -25,9 +25,19 @@ It also publishes the following artifacts (see the OML specification for using i
 
 ## Build
 
-Dependencies: Gradle 6.x, MAven 3.6.x, Java 11
+Dependencies: Gradle 6.x, Maven 3.6.x, Java 11
 ```
   ./gradlew build
   mvn verify
 ```
-Note: the gradle build updates the OML specification's generated Bikeshed source files
+
+> NOTE: If the gradle build gives errors on a second or subsequent build, try deleting the generated `.gradle` subfolder then try invoking the gradle build again 
+
+
+## Spec
+If you want to generate the OML spec, you first need to have the [bikeshed](https://tabatkins.github.io/bikeshed/#install-final) tool installed in the environment, then invoke:
+```
+  ./gradlew generateDocs
+```
+
+
