@@ -10,11 +10,15 @@ task ecoreToBikeshed(type:io.opencaesar.ecore.bikeshed.Ecore2BikeshedTask, depen
 
 task generateDocs(dependsOn: ecoreToBikeshed) {
 	doLast {
-		exec { commandLine 'bikeshed', 'spec', 'build/bikeshed/index.bs' }
+        if (org.gradle.internal.os.OperatingSystem.current().isWindows()) {
+			exec { commandLine 'cmd', '/c', 'bikeshed', 'spec', 'build/bikeshed/index.bs' }
+		} else {
+			exec { commandLine 'bikeshed', 'spec', 'build/bikeshed/index.bs' }
+		}
 		copy {
             from '../io.opencaesar.oml/build/docs/javadoc'
             into 'build/bikeshed/javadoc'
-         }   
+        }   
 	}
 }              
 
