@@ -35,9 +35,10 @@ Dependencies: Gradle 6.x, Maven 3.6.x, Java 11
 
 
 ## Spec
-If you want to generate the OML spec, you first need to have the [bikeshed](https://tabatkins.github.io/bikeshed/#install-final) tool installed in the environment, then invoke:
+If you want to generate the OML spec, you first need to have both [bikeshed](https://tabatkins.github.io/bikeshed/#install-final) and 
+[graphviz](https://graphviz.org/download/) installed in the environment, then invoke:
 ```
   ./gradlew generateDocs
 ```
-
+The generated spec can then be opened from `io.opencaesar.oml.specification/build/bikeshed/index.html`
 
