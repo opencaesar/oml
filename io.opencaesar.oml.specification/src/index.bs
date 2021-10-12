@@ -8,7 +8,8 @@ Editor: Maged Elaasar (JPL)
 Editor: Nicolas Rouquette (JPL)
 Local Boilerplate: copyright yes, logo yes
 Markup Shorthands: markdown yes
-Abstract: This document specifies the Ontological Modeling Language (OML).
+Abstract: This document describes the Ontological Modeling Language (OML). This language enables defining systems engineering vocabularies and using them to describe systems. OML is inspired by the [Web Ontology Language 2 (OWL2)](https://www.w3.org/TR/owl2-syntax/) and the [Semantic Web Rule Language (SWRL)](https://www.w3.org/Submission/SWRL/) and can be considered a gentler and more disciplined way of using these standards in the context of Systems Engineering. By mapping the OML constructs to a number of patterns expressed in subsets of OWL2 and SWRL, OML inherits its expressivity, modularity, extensibility, and description logic (DL) semantics, but also provides a concise and user-friendly syntax. Moreover, OML is implementd using the [Eclipse Modeling Framework (EMF)](https://www.eclipse.org/modeling/emf/), which gives it a Java API and integration with a large ecosystem of modeling frameworks that has been used to develop useful tools, many of which are provided by the [openCAESAR](http://www.opencaesar.io/) project.
+
 </pre>
 
 <style>
@@ -36,7 +37,7 @@ dd > p:first-child, li > p:first-child {
 }
 
 code {
-  color:red; 
+  color:darkred; 
   font-weight: bold;
 }
 
@@ -44,6 +45,10 @@ code {
 
 <!-- Instruct bikeshed to export all 'dfn', even if they are not referenced, without warnings. -->
 <div export=true>
+
+<pre class=include>
+path: document-organization.md
+</pre>
 
 <pre class=include>
 path: getting-started.md
@@ -67,6 +72,10 @@ path: Oml.md
 
 <pre class=include>
 path: public-api.md
+</pre>
+
+<pre class=include>
+path: mapping-to-owl2-and-swrl.md
 </pre>
 
 </div>

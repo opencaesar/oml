@@ -60,6 +60,10 @@ However, notice that a comment is purely notational and hence will not be interc
 		DescriptionBundleImport*
 	`}`
 
+<a id="Import-Syntax">Import</a>:
+	VocabularyImport |
+	DescriptionImport
+
 <a id="VocabularyImport-Syntax">VocabularyImport</a>:
 	VocabularyExtension |
 	VocabularyUsage
@@ -112,6 +116,17 @@ However, notice that a comment is purely notational and hence will not be interc
 <a id="DescriptionBundleUsage-Syntax">DescriptionBundleUsage</a>:
 	Annotation*
 	`uses` NAMESPACE (`as` ID)?
+
+<a id="Member-Syntax">Member</a>:
+	SpecializableTerm |
+	Property |
+	Relation |
+	Rule |
+	NamedInstance |
+
+<a id="Term-Syntax">Term</a>:
+	SpecializableTerm |
+	Feature
 
 <a id="VocabularyStatement-Syntax">VocabularyStatement</a>:
 	SpecializableTerm |
@@ -171,6 +186,10 @@ However, notice that a comment is purely notational and hence will not be interc
 		PropertyRestrictionAxiom*
 		RelationRestrictionAxiom*
 	`]`
+
+<a id="Relation-Syntax">Relation</a>:
+	ForwardRelation |
+	ReverseRelation
 
 <a id="ForwardRelation-Syntax">ForwardRelation</a>:
 	Annotation*
@@ -300,6 +319,13 @@ However, notice that a comment is purely notational and hence will not be interc
 	type=[Structure|REF] `[`
 		PropertyValueAssertion*
 	`]`
+
+<a id="Reference-Syntax">Reference</a>:
+	SpecializableTermReference |
+	RelationReference |
+	RuleReference |
+	NamedInstanceReference
+
 
 <a id="SpecializableTermReference-Syntax">SpecializableTermReference</a>:
 	ClassifierReference |

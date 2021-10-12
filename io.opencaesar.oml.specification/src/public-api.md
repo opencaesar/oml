@@ -1,4 +1,4 @@
-# Public API # {#PublicAPI}
+# Public API # {#Public-API}
 
 Click this [link](javadoc/index.html) to browse the OML Java API in a separate page.
 

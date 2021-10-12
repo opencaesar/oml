@@ -28,7 +28,7 @@
     Assertions="",
     References=""
 )
-@Bikeshed(heading="Abstract Syntax")
+@Bikeshed(heading="Abstract-Syntax")
 package io.opencaesar.oml
 
 import io.opencaesar.oml.util.OmlValidator2

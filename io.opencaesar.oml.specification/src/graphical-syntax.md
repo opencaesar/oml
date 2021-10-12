@@ -1,4 +1,4 @@
-# Graphical Syntax # {#GraphicalSyntax}
+# Graphical Syntax # {#Graphical-Syntax}
 
 ## Graphical Conventions ## {#Graphical-Conventions}
 
