@@ -46,7 +46,7 @@
         <releases-directory>${github-local-clone}/releases</releases-directory>
         <current-release-directory>${releases-directory}/${qualifiedVersion}</current-release-directory>
         <!-- The label for the Composite sites -->
-        <site.label>OML p2 composite site</site.label>
+        <site.label>OML Repository</site.label>
     </properties>
     
     <dependencyManagement>

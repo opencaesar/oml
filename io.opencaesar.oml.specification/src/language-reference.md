@@ -124,7 +124,7 @@ Note: the `< >` are stripped off when the value is parsed from the OML textual s
 
 **Abbreviated IRI**
 
- The aforementiioned IRI syntax of OML is called the full IRI syntax. OML also supports an \[ABBREVIATED_IRI](#ABBREVIATED_IRI-Syntax) syntax for ontology members only. The syntax consists of the defining ontology's (prefix) ID and the member's (name) ID, delimited by the `:` character. For example, `owl:Thing` is an ABBREVIATED_IRI for a member with the IRI of `http://www.w3.org/2002/07/owl#Thing` when the ontology has a prefix ID of `owl`.
+OML also supports an \[ABBREVIATED_IRI](#ABBREVIATED_IRI-Syntax) syntax for ontology members. The syntax consists of the defining ontology's (prefix) ID and the member's (name) ID, delimited by the `:` character. For example, `owl:Thing` is an ABBREVIATED_IRI for a member with the IRI of `http://www.w3.org/2002/07/owl#Thing` when the ontology has a prefix ID of `owl`.
 
  The ontology's prefix ID that can be used in a member's ABBREVIATED_IRI either comes from the ontology definition (if the member is local to the ontology) or an import statement (if the member is imported). For example:
 

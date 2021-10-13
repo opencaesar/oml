@@ -64,7 +64,7 @@
 
 		<property name="updates.suffix" value=".x"/>
 		<property name="main.site.composite.name"
-			value="${site.label} All Versions" />
+			value="${site.label}" />
 		<property name="child1.site.composite.name"
 			value="${site.label} ${parsedVersion.majorVersion}${updates.suffix}" />
 		<property name="child2.site.composite.name"
