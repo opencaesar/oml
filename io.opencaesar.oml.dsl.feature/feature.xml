@@ -9,8 +9,21 @@
       %featureDesciption
    </description>
 
+   <url>
+      <update url="https://github.com/opencaesar/oml-p2"/>
+   </url>
+
    <requires>
-      <import feature="io.opencaesar.oml.feature"/>
+      <import plugin="org.eclipse.equinox.common"/>
+      <import plugin="org.eclipse.xtext"/>
+      <import plugin="org.eclipse.xtext.xbase"/>
+      <import plugin="io.opencaesar.oml"/>
+      <import plugin="org.apache.log4j"/>
+      <import plugin="org.eclipse.emf.ecore"/>
+      <import plugin="org.eclipse.emf.common"/>
+      <import plugin="org.eclipse.xtext.util"/>
+      <import plugin="org.eclipse.xtext.xbase.lib"/>
+      <import plugin="org.antlr.runtime"/>
    </requires>
 
    <plugin

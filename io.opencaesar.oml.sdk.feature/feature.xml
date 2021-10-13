@@ -9,6 +9,10 @@
       %featureDesciption
    </description>
 
+   <url>
+      <update url="https://github.com/opencaesar/oml-p2"/>
+   </url>
+
    <includes
          id="io.opencaesar.oml.dsl.feature.source"
          version="0.0.0"/>

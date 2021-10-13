@@ -14,7 +14,7 @@ Export-Package: io.opencaesar.oml,
  io.opencaesar.oml.util
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
- org.eclipse.xtext.xbase.lib,
+ org.eclipse.emf.ecore.xmi,
  org.eclipse.emf.ecore.xcore.lib,
- org.eclipse.emf.ecore.xmi
+ org.eclipse.xtext.xbase.lib
 Bundle-ActivationPolicy: lazy

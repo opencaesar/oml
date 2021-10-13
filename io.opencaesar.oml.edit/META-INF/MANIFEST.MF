@@ -10,8 +10,8 @@ Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Export-Package: io.opencaesar.oml.provider
-Require-Bundle: io.opencaesar.oml;visibility:=reexport,
- org.eclipse.core.runtime,
+Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.edit;visibility:=reexport,
- org.eclipse.emf.ecore;visibility:=reexport
+ org.eclipse.emf.ecore;visibility:=reexport,
+ io.opencaesar.oml;visibility:=reexport
 Bundle-ActivationPolicy: lazy

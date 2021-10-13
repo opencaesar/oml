@@ -9,6 +9,18 @@
       %featureDesciption
    </description>
 
+   <url>
+      <update url="https://github.com/opencaesar/oml-p2"/>
+   </url>
+
+   <requires>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.emf.ecore"/>
+      <import plugin="org.eclipse.emf.ecore.xmi"/>
+      <import plugin="org.eclipse.emf.ecore.xcore.lib"/>
+      <import plugin="org.eclipse.xtext.xbase.lib"/>
+   </requires>
+
    <plugin
          id="io.opencaesar.oml"
          download-size="0"
