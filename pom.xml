@@ -8,20 +8,20 @@
 
     <modules>
         <module>io.opencaesar.oml</module>
-        <module>io.opencaesar.oml.feature</module>
-        <module>io.opencaesar.oml.edit</module>
-        <module>io.opencaesar.oml.editor</module>
-        <module>io.opencaesar.oml.ui.feature</module>
         <module>io.opencaesar.oml.dsl</module>
-        <module>io.opencaesar.oml.dsl.tests</module>
         <module>io.opencaesar.oml.dsl.feature</module>
         <module>io.opencaesar.oml.dsl.ide</module>
+        <module>io.opencaesar.oml.dsl.tests</module>
         <module>io.opencaesar.oml.dsl.ui</module>
+        <module>io.opencaesar.oml.ui.feature</module>
         <module>io.opencaesar.oml.dsl.ui.tests</module>
-        <module>io.opencaesar.oml.dsl.ui.feature</module>
+        <module>io.opencaesar.oml.edit</module>
+        <module>io.opencaesar.oml.editor</module>
+        <module>io.opencaesar.oml.feature</module>
+        <module>io.opencaesar.oml.repository</module>
         <module>io.opencaesar.oml.sdk.feature</module>
         <module>io.opencaesar.oml.target</module>
-        <module>io.opencaesar.oml.repository</module>
+        <module>io.opencaesar.oml.dsl.ui.feature</module>
     </modules>
 
     <properties>
