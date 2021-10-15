@@ -4,22 +4,8 @@
 	<parent>
 		<groupId>io.opencaesar.oml</groupId>
 		<artifactId>io.opencaesar.oml.parent</artifactId>
-		<version>1.0.4</version>
+		<version>1.0.5</version>
 	</parent>
 	<artifactId>io.opencaesar.oml.sdk.feature</artifactId>
 	<packaging>eclipse-feature</packaging>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.eclipse.tycho.extras</groupId>
-				<artifactId>tycho-source-feature-plugin</artifactId>
-				<version>${tycho-version}</version>
-				<configuration>
-					<skip>true</skip>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
-  
 </project>

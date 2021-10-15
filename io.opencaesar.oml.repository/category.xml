@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <feature id="io.opencaesar.oml.feature" version="0.0.0">
-      <category name="oml"/>
-   </feature>
-   <feature id="io.opencaesar.oml.ui.feature" version="0.0.0">
+   <feature id="io.opencaesar.oml.api.feature" version="0.0.0">
       <category name="oml"/>
    </feature>
    <feature id="io.opencaesar.oml.dsl.feature" version="0.0.0">
       <category name="oml"/>
    </feature>
-   <feature id="io.opencaesar.oml.dsl.ui.feature" version="0.0.0">
-      <category name="oml"/>
-   </feature>
    <feature id="io.opencaesar.oml.sdk.feature" version="0.0.0">
       <category name="oml"/>
    </feature>
-   <category-def name="oml" label="OML"/>
+   <category-def name="oml" label="OML">
+      <description>
+         All OML features
+      </description>
+   </category-def>
 </site>

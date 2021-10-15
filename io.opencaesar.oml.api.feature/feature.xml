@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="io.opencaesar.oml.feature"
+      id="io.opencaesar.oml.api.feature"
       label="%featureName"
-      version="1.0.4"
+      version="1.0.5"
       provider-name="%providerName">
 
    <description>
@@ -23,6 +23,13 @@
 
    <plugin
          id="io.opencaesar.oml"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="io.opencaesar.oml.source"
          download-size="0"
          install-size="0"
          version="0.0.0"

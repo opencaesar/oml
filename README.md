@@ -7,15 +7,14 @@
 [![Updatesite](https://img.shields.io/badge/p2-updatesite-yellow.svg?longCache=true)](https://github.com/opencaesar/oml-p2)
 [![OML Specification](https://img.shields.io/badge/OML-specification-purple.svg?longCache=true)](https://opencaesar.github.io/oml/)
 
-
-This repository defines the OML abstract syntax, textual syntax, graphical syntax, API and specification.
+This repository is for the OML abstract syntax, textual syntax, graphical syntax, API and specification.
 
 It also publishes the following artifacts (see the OML specification for using instructions):
 
-  - Maven [libraries](https://search.maven.org/search?q=a:io.opencaesar.oml) that give access to OML APIs from JVM languages.
-  - A p2 [updatesite](https://github.com/opencaesar/oml-p2) that gives native OML support in the Eclipse IDE.
-  - An LSP [server](https://github.com/opencaesar/oml/releases) that gives support for OML in editors that support LSP.
-  - The OML [specification](https://opencaesar.github.io/oml/) that documents how OML can be used.
+  - Maven [libraries](https://search.maven.org/search?q=a:io.opencaesar.oml) that provides OML APIs for JVM languages.
+  - P2 [update site](https://github.com/opencaesar/oml-p2) that provides native OML support in the Eclipse IDE.
+  - LSP [server](https://github.com/opencaesar/oml/releases) that provides OML support in editors that support LSP.
+  - OML [specification](https://opencaesar.github.io/oml/) that provides the OML documentation.
 
 ## Clone
 ```
@@ -32,7 +31,6 @@ Dependencies: Gradle 6.x, Maven 3.6.x, Java 11
 ```
 
 > NOTE: If the gradle build gives errors on a second or subsequent build, try deleting the generated `.gradle` subfolder then try invoking the gradle build again 
-
 
 ## Spec
 If you want to generate the OML spec, you first need to have both [bikeshed](https://tabatkins.github.io/bikeshed/#install-final) and 

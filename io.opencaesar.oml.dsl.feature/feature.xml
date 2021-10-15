@@ -2,7 +2,7 @@
 <feature
       id="io.opencaesar.oml.dsl.feature"
       label="%featureName"
-      version="1.0.4"
+      version="1.0.5"
       provider-name="%providerName">
 
    <description>
@@ -13,6 +13,10 @@
       <update url="https://github.com/opencaesar/oml-p2"/>
    </url>
 
+   <includes
+         id="io.opencaesar.oml.api.feature"
+         version="0.0.0"/>
+
    <requires>
       <import plugin="org.eclipse.equinox.common"/>
       <import plugin="org.eclipse.emf.ecore"/>
@@ -20,16 +24,23 @@
       <import plugin="org.eclipse.xtext"/>
       <import plugin="org.eclipse.xtext.util"/>
       <import plugin="org.eclipse.xtext.xbase"/>
-      <import plugin="io.opencaesar.oml"/>
-      <import plugin="org.apache.log4j"/>
       <import plugin="org.eclipse.xtext.xbase.lib"/>
       <import plugin="org.antlr.runtime"/>
       <import plugin="com.google.gson"/>
+      <import plugin="io.opencaesar.oml"/>
       <import plugin="org.eclipse.xtend.lib"/>
+      <import plugin="org.apache.log4j"/>
    </requires>
 
    <plugin
          id="io.opencaesar.oml.dsl"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="io.opencaesar.oml.dsl.source"
          download-size="0"
          install-size="0"
          version="0.0.0"
