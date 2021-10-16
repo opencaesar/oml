@@ -6,22 +6,6 @@
 
 <plugin>
 
-   <extension point="org.eclipse.ui.newWizards">
-      <!-- @generated oml -->
-      <category
-            id="org.eclipse.emf.ecore.Wizard.category.ID"
-            name="%_UI_Wizard_category"/>
-      <wizard
-            id="io.opencaesar.oml.presentation.OmlModelWizardID"
-            name="%_UI_OmlModelWizard_label"
-            class="io.opencaesar.oml.presentation.OmlModelWizard"
-            category="org.eclipse.emf.ecore.Wizard.category.ID"
-            icon="icons/full/obj16/oml.png">
-         <description>%_UI_OmlModelWizard_description</description>
-         <selection class="org.eclipse.core.resources.IResource"/>
-      </wizard>
-   </extension>
-
    <extension point="org.eclipse.ui.editors">
       <!-- @generated oml -->
       <editor
