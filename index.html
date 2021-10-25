@@ -1489,7 +1489,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version 46234c6bb, updated Tue Oct 19 17:12:22 2021 -0700" name="generator">
   <link href="https://github.com/opencaesar/oml" rel="canonical">
-  <meta content="640d609bfdfc6ce6864a073045960f1a6388fdc6" name="document-revision">
+  <meta content="3fd601502cbd02a89a3fc36b4d509c5f960bc92c" name="document-revision">
 <style>
 body {
   padding: 0;
@@ -2132,7 +2132,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
       <li>
        <a href="#Advanced-Features-LR"><span class="secno">3.3</span> <span class="content">Advanced Features</span></a>
        <ol class="toc">
-        <li><a href="#Other-Imports-LR"><span class="secno">3.3.1</span> <span class="content">Other Imports</span></a>
+        <li><a href="#Ontology-Extension-LR"><span class="secno">3.3.1</span> <span class="content">Ontology Extension</span></a>
         <li><a href="#Relation-Instance-LR"><span class="secno">3.3.2</span> <span class="content">Relation Instance</span></a>
         <li><a href="#Multo-Classification"><span class="secno">3.3.3</span> <span class="content">Multi Classification</span></a>
         <li><a href="#Other-Terms-LR"><span class="secno">3.3.4</span> <span class="content">Other Terms</span></a>
@@ -2476,7 +2476,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
     <p>A <a href="#VocabularyExtension">vocabulary extension</a> is a kind of <a href="#Import">import</a> statement that can be added to a vocabulary to specify that it extends another vocabulary. A vocabulary extension is defined with the keyword <code>extends</code> followed by the imported vocabulary’s NAMESPACE. If members of the imported vocabulary are to be referenced using their ABBREVIATED_IRIs, then the NAMESPACE needs to be followed by the keyword <code>as</code> and a namespace prefix ID that is unique within the vocabulary.</p>
 <pre class="highlight highlight-html"><code>extends</code> NAMESPACE (<code>as</code> ID)?
 </pre>
-    <p>For example, the <em>mission</em> vocabulary extends the <em>xsd</em> vocabulary (in order to cross reference types from it):</p>
+    <p>For example, the <em>mission</em> vocabulary <em>extends</em> the <em>xsd</em> vocabulary (in order to cross reference its types):</p>
 <pre class="highlight highlight-html"><code>vocabulary</code> <code>&lt;</code>http://com.xyz/methodology/mission#<code>></code> <code>as</code> missiom <code>{</code>
   <code>extends</code> <code>&lt;</code>http://www.w3.org/2001/XMLSchema#<code>></code> <code>as</code> xsd
 <code>}</code>
@@ -2623,7 +2623,7 @@ http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral
     <p>A <a href="#VocabularyBundleInclusion">vocabulary bundle inclusion</a> is a kind of <a href="#Import">import</a> statement that can be added to a vocabulary bundle to specify that it includes a vocabulary. A vocabulary bundle inclusion is defined with the keyword <code>includes</code> followed by the imported vocabulary’s NAMESPACE. If members of the imported vocabulary are to be referenced using their ABBREVIATED_IRIs, then the NAMESPACE needs to be followed by the keyword <code>as</code> and a unique prefix ID.</p>
 <pre class="highlight highlight-html"><code>includes</code> NAMESPACE (<code>as</code> ID)?
 </pre>
-    <p>The following example vocabulary bundle defines the <em>foundation</em> bundle to includes two vocabularies: <em>mission</em> and <em>project</em>.</p>
+    <p>For example, the <em>foundation</em> vocabulary bundle <em>includes</em> two vocabularies: <em>mission</em> and <em>project</em>.</p>
 <pre class="highlight highlight-html"><code>vocabulary</code> <code>bundle</code> <code>&lt;</code>http://com.xyz/methodology/foundation#<code>></code> <code>as</code> foundation <code>{</code>
   <code>includes</code> <code>&lt;</code>http://com.xyz/methodology/mission#<code>></code> <code>as</code> mission
   <code>includes</code> <code>&lt;</code>http://com.xyz/methodology/project#<code>></code> <code>as</code> project
@@ -2635,7 +2635,7 @@ http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral
 <pre class="highlight highlight-html"><code>description</code> NAMESPACE <code>as</code> ID <code>{</code>
 <code>}</code>
 </pre>
-    <p>For example, the following description is meant to describe some of the components of a system and the functions they perform. It has the namespace <em>http://com.xyz/system/components#</em> and the prefix <em>components</em>.</p>
+    <p>For example, the following description defines the components of a system and the functions they perform. It has the namespace <em>http://com.xyz/system/components#</em> and the prefix <em>components</em>.</p>
 <pre class="highlight highlight-html"><code>description</code> <code>&lt;</code>http://com.xyz/system/components#<code>></code> <code>as</code> components <code>{</code>
 <code>}</code>
 </pre>
@@ -2643,7 +2643,7 @@ http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral
     <p>A <a href="#DescriptionUsage">description usage</a> is a kind of <a href="#Import">import</a> statement that can be added to a description to specify a vocabulary that it uses. A description usage is defined with the keyword <code>uses</code> followed by the imported vocabulary’s NAMESPACE. If members of the imported vocabulary are to be referenced using their ABBREVIATED_IRIs, then the NAMESPACE needs to be followed by the keyword <code>as</code> and a unique prefix ID.</p>
 <pre class="highlight highlight-html"><code>uses</code> NAMESPACE (<code>as</code> ID)?
 </pre>
-    <p>The following example description uses the vocabulary <em>http://com.xyz/methodology/mission#</em> to describe components of a system and the functions they perform.</p>
+    <p>For example, the <em>components</em> description <em>uses</em> the <em>mission</em> vocabulary to describe components of a system and the functions they perform.</p>
 <pre class="highlight highlight-html"><code>description</code> <code>&lt;</code>http://com.xyz/system/components#<code>></code> <code>as</code> components <code>{</code>
   <code>uses</code> <code>&lt;</code>http://com.xyz/methodology/mission#<code>></code> <code>as</code> mission
 <code>}</code>
@@ -2740,7 +2740,7 @@ true        // xsd:boolean
     <p>A <a href="#DescriptionBundleInclusion">description bundle inclusion</a> is a kind of <a href="#Import">import</a> statement that can be added to a description bundle to specify that it includes a description. A description bundle inclusion is defined with the keyword <code>includes</code> followed by the imported description’s NAMESPACE. If members of the imported description are to be referenced using their ABBREVIATED_IRIs, then the NAMESPACE needs to be followed by the keyword <code>as</code> and a unique prefix ID.</p>
 <pre class="highlight highlight-html"><code>includes</code> NAMESPACE (<code>as</code> ID)?
 </pre>
-    <p>The following example description bundle defines the <em>mission1</em> bundle to includes two descriptions: <em>components</em> and <em>masses</em>.</p>
+    <p>For example, the <em>mission1</em> description bundle <em>includes</em> two descriptions: <em>components</em> and <em>masses</em>.</p>
 <pre class="highlight highlight-html"><code>description</code> <code>bundle</code> <code>&lt;</code>http://com.xyz/missions/mission1#<code>></code> <code>as</code> mission1 <code>{</code>
   <code>includes</code> <code>&lt;</code>http://com.xyz/system/components#<code>></code> <code>as</code> components
   <code>includes</code> <code>&lt;</code>http://com.xyz/system/masses#<code>></code> <code>as</code> masses
@@ -2750,7 +2750,7 @@ true        // xsd:boolean
     <p>A <a href="#DescriptionBundleUsage">description bundle usage</a> is a kind of <a href="#Import">import</a> statement that can be added to a description bundle to specify that it uses a vocabulary bundle. A description bundle usage is defined with the keyword <code>uses</code> followed by the imported vocabulary bundle’s NAMESPACE.</p>
 <pre class="highlight highlight-html"><code>uses</code> NAMESPACE
 </pre>
-    <p>The following example <em>mission1</em> description bundle is defined to use the <em>foundatio</em> vocabulary bundle.</p>
+    <p>For example, the <em>mission1</em> description bundle <em>uses</em> the <em>foundation</em> vocabulary bundle.</p>
 <pre class="highlight highlight-html"><code>description</code> <code>bundle</code> <code>&lt;</code>http://com.xyz/missions/mission1#<code>></code> <code>as</code> mission1 <code>{</code>
   <code>includes</code> <code>&lt;</code>http://com.xyz/system/components#<code>></code> <code>as</code> components
   <code>includes</code> <code>&lt;</code>http://com.xyz/system/masses#<code>></code> <code>as</code> masses
@@ -2765,14 +2765,49 @@ true        // xsd:boolean
     <p>The reasoning process relies heavily on the inference semantics of the OML elements. These semantics are described by <a href="#Mapping-to-Owl2-and-Swrl">mapping</a> OML elements to corresponding OWL2-DL elements, which have DL semantics described in the <a href="https://www.w3.org/TR/owl2-syntax/">OWL2 standard</a>. The DL semantics allow generating inferred statements (called entailments) from asserted statements (defined in OML models). Such inference process is run repeatedly until all possible entailments are generated or until a contradiction is detected. In the latter case, a proof of the contradiction (a minimum set of statements exemplifying the contradiction) is emitted for the user to inspect.</p>
     <p>The <a href="https://github.com/opencaesar">openCAESAR</a> project provides tools that enables running DL reasoning on OML models. The first tool, called <a href="https://github.com/opencaesar/owl-adapter">OWL Adapter</a>, maps OML models to correspond OWL2-DL models. The second tool, called <a href="https://github.com/opencaesar/owl-tools">OWL Reason</a>, runs a DL reasoner on the resulting OWL2-DL models and generates a reasoning report that report on reasoning problems if any.</p>
     <h3 class="heading settled" data-level="3.3" id="Advanced-Features-LR"><span class="secno">3.3. </span><span class="content">Advanced Features</span><a class="self-link" href="#Advanced-Features-LR"></a></h3>
-    <h4 class="heading settled" data-level="3.3.1" id="Other-Imports-LR"><span class="secno">3.3.1. </span><span class="content">Other Imports</span><a class="self-link" href="#Other-Imports-LR"></a></h4>
-    <p><strong>Ontology Extension</strong></p>
-    <p>VocabularyExtension</p>
-    <p>VocabularyBundleExtension</p>
-    <p>DescriptionExtension</p>
-    <p>DescriptionBundleExtension</p>
-    <p><strong>Vocabulary Usage</strong></p>
-    <p>VocabularyUsage</p>
+    <h4 class="heading settled" data-level="3.3.1" id="Ontology-Extension-LR"><span class="secno">3.3.1. </span><span class="content">Ontology Extension</span><a class="self-link" href="#Ontology-Extension-LR"></a></h4>
+    <p>The <a href="#Basic-Features-LR">Basic Features</a> section introduced <a href="#VocabularyExtension-Syntax">vocabulary extension</a>, which allows a vocabulary to extend other vocabularies by adding new members or cross referencing imported members. This allows managing the complexity of vocabularies by splitting them into components that extend each other. In this section, other kinds of ontology extension are introduced.</p>
+    <p><strong>Vocabulary Bundle Extension</strong></p>
+    <p>A <a href="#VocabularyBundleExtension">vocabulary bundle extension</a> is a kind of <a href="#Import">import</a> statement that can be added to a vocabulary bundle to specify that it extends another vocabulary bundle. This can be used to organize vocabulary bundles in layers that build on each other. Each bundle inherits the vocabularies contributed by its extended bundles and may optionally add to them other included vocabularies. This can, for example, be used to define a family of related vocabulary bundles that build on each other by tackling different incremental concerns.</p>
+    <p>A vocabulary bundle extension is defined with the keyword <code>extends</code> followed by the imported vocabulary bundle’s NAMESPACE.</p>
+<pre class="highlight highlight-html"><code>extends</code> NAMESPACE
+</pre>
+    <p>For example, the <em>cyberphysical</em> vocabulary bundle <em>extends</em> the <em>foundation</em> vocabulary bundle (which includes the <em>mission</em> vocabulary) to include two other vocabularies: <em>electrical</em> and <em>mechanical</em>, which are two disciplines used when describing cyber-physical systems.</p>
+<pre class="highlight highlight-html"><code>vocabulary</code> <code>bundle</code> <code>&lt;</code>http://com.xyz/methodology/cyberphysical#<code>></code> <code>as</code> cyberphysical <code>{</code>
+  <code>extends</code> <code>&lt;</code>http://com.xyz/methodology/foundation#<code>></code>
+  <code>includes</code> <code>&lt;</code>http://com.xyz/methodology/electrical#<code>></code>
+  <code>includes</code> <code>&lt;</code>http://com.xyz/methodology/mechanical#<code>></code>
+<code>}</code>
+</pre>
+    <p><strong>Description Extension</strong></p>
+    <p>A <a href="#DescriptionExtension">description extension</a> is a kind of <a href="#Import">import</a> statement that can be added to a description to specify that it extends another description. This can be used to split a system descriptions into fragments that focus on different concerns or are contributed by different authorities. In this case, each description <em>extends</em> the other descriptions it depends on (e.g., by cross referencing named instances from them).</p>
+    <p>A description extension is defined with the keyword <code>extends</code> followed by the imported description’s NAMESPACE. If members of the imported description are to be referenced using their ABBREVIATED_IRIs, then the NAMESPACE needs to be followed by the keyword <code>as</code> and a unique prefix ID.</p>
+<pre class="highlight highlight-html"><code>extends</code> NAMESPACE (<code>as</code> ID)?
+</pre>
+    <p>For example, the <em>system1</em> description <em>extends</em> the <em>subsystem1</em> and <em>subsystem2</em> descriptions and defines component <em>System1</em> that aggregates components <em>Subsystem1</em> and <em>Subsystem2</em>, defined in these descriptions respectively.</p>
+<pre class="highlight highlight-html"><code>description</code> <code>&lt;</code>http://com.xyz/system/system1#<code>></code> <code>as</code> system1 <code>{</code>
+  <code>uses</code> <code>&lt;</code>http://com.xyz/methodology/mission#<code>></code> <code>as</code> mission
+  <code>extends</code> <code>&lt;</code>http://com.xyz/methodology/system1/subsystem1#<code>></code> <code>as</code> subsystem1
+  <code>extends</code> <code>&lt;</code>http://com.xyz/methodology/system1/subsystem2#<code>></code> <code>as</code> subsystem2
+
+  <code>ci</code> System1 <code>:</code> mission:Component <code>[</code>
+    mission:aggregates subsystem1:Subsystem1
+    mission:aggregates subsystem2:Subsystem2
+  <code>]</code>
+<code>}</code>
+</pre>
+    <p><strong>Description Bundle Extension</strong></p>
+    <p>A <a href="#DescriptionBundleExtension">description bundle extension</a> is a kind of <a href="#Import">import</a> statement that can be added to a description bundle to specify that it extends another description bundle. This can be used to organize description bundles into layers that build on each other. Each bundle inherits the descriptions contributed by its extended bundles and optionally adds to them other descriptions. This can, for example, be used to define alternative datasets (e.g., representing alternative system designs) that extend a common dataset.</p>
+    <p>A description bundle extension is defined with the keyword <code>extends</code> followed by the imported description’s NAMESPACE.</p>
+<pre class="highlight highlight-html"><code>extends</code> NAMESPACE
+</pre>
+    <p>For example, the <em>design1</em> description bundle <em>extends</em> the <em>mission1</em> description bundle and includes two additional descriptions: <em>electrical1</em> and <em>mechanical1</em>, which specify the details of this design.</p>
+<pre class="highlight highlight-html"><code>description</code> <code>bundle</code> <code>&lt;</code>http://com.xyz/missions/mission1/design1#<code>></code> <code>as</code> design1 <code>{</code>
+  <code>extends</code> <code>&lt;</code>http://com.xyz/missions/mission1#<code>></code>
+  <code>includes</code> <code>&lt;</code>http://com.xyz/missions/mission1/electrical1#<code>></code>
+  <code>includes</code> <code>&lt;</code>http://com.xyz/missions/mission1/mechanical#<code>></code>
+<code>}</code>
+</pre>
     <h4 class="heading settled" data-level="3.3.2" id="Relation-Instance-LR"><span class="secno">3.3.2. </span><span class="content">Relation Instance</span><a class="self-link" href="#Relation-Instance-LR"></a></h4>
     <p>RelationInstance</p>
     <h4 class="heading settled" data-level="3.3.3" id="Multo-Classification"><span class="secno">3.3.3. </span><span class="content">Multi Classification</span><a class="self-link" href="#Multo-Classification"></a></h4>
@@ -2811,6 +2846,7 @@ true        // xsd:boolean
     <p>ScalarPropertyValueRestrictionAxiom</p>
     <p>StructuredPropertyValueRestrictionAxiom</p>
     <p>RelationTargetRestrictionAxiom</p>
+    <p>VocabularyUsage</p>
     <h4 class="heading settled" data-level="3.3.6" id="Rules-LR"><span class="secno">3.3.6. </span><span class="content">Rules</span><a class="self-link" href="#Rules-LR"></a></h4>
     <p><strong>Rules</strong></p>
     <p>Rule</p>
