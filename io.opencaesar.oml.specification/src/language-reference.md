@@ -197,7 +197,7 @@ A [vocabulary extension](#VocabularyExtension) is a kind of [import](#Import) st
 `extends` NAMESPACE (`as` ID)?
 </pre>
 
-For example, the *mission* vocabulary extends the *xsd* vocabulary (in order to cross reference types from it):
+For example, the *mission* vocabulary *extends* the *xsd* vocabulary (in order to cross reference its types):
 
 <pre class="highlight highlight-html">
 `vocabulary` `<`http://com.xyz/methodology/mission#`>` `as` missiom `{`
@@ -391,7 +391,7 @@ A [vocabulary bundle inclusion](#VocabularyBundleInclusion) is a kind of [import
 `includes` NAMESPACE (`as` ID)?
 </pre>
 
-The following example vocabulary bundle defines the *foundation* bundle to includes two vocabularies: *mission* and *project*.
+For example, the *foundation* vocabulary bundle *includes* two vocabularies: *mission* and *project*.
 
 <pre class="highlight highlight-html">
 `vocabulary` `bundle` `<`http://com.xyz/methodology/foundation#`>` `as` foundation `{`
@@ -411,7 +411,7 @@ A [description](#Description-Syntax) is an ontology that uses terms in vocabular
 `}`
 </pre>
 
-For example, the following description is meant to describe some of the components of a system and the functions they perform. It has the namespace *http://com.xyz/system/components#* and the prefix *components*.
+For example, the following description defines the components of a system and the functions they perform. It has the namespace *http://com.xyz/system/components#* and the prefix *components*.
 
 <pre class="highlight highlight-html">
 `description` `<`http://com.xyz/system/components#`>` `as` components `{`
@@ -426,7 +426,7 @@ A [description usage](#DescriptionUsage) is a kind of [import](#Import) statemen
 `uses` NAMESPACE (`as` ID)?
 </pre>
 
-The following example description uses the vocabulary *http://com.xyz/methodology/mission#* to describe components of a system and the functions they perform.
+For example, the *components* description *uses* the *mission* vocabulary to describe components of a system and the functions they perform.
 
 <pre class="highlight highlight-html">
 `description` `<`http://com.xyz/system/components#`>` `as` components `{`
@@ -581,7 +581,7 @@ A [description bundle inclusion](#DescriptionBundleInclusion) is a kind of [impo
 `includes` NAMESPACE (`as` ID)?
 </pre>
 
-The following example description bundle defines the *mission1* bundle to includes two descriptions: *components* and *masses*.
+For example, the *mission1* description bundle *includes* two descriptions: *components* and *masses*.
 
 <pre class="highlight highlight-html">
 `description` `bundle` `<`http://com.xyz/missions/mission1#`>` `as` mission1 `{`
@@ -598,7 +598,7 @@ A [description bundle usage](#DescriptionBundleUsage) is a kind of [import](#Imp
 `uses` NAMESPACE
 </pre>
 
-The following example *mission1* description bundle is defined to use the *foundatio* vocabulary bundle.
+For example, the *mission1* description bundle *uses* the *foundation* vocabulary bundle.
 
 <pre class="highlight highlight-html">
 `description` `bundle` `<`http://com.xyz/missions/mission1#`>` `as` mission1 `{`
@@ -624,21 +624,74 @@ The [openCAESAR](https://github.com/opencaesar) project provides tools that enab
 
 ## Advanced Features ## {#Advanced-Features-LR}
 
-### Other Imports ### {#Other-Imports-LR}
+### Ontology Extension ### {#Ontology-Extension-LR}
 
-**Ontology Extension**
+The [Basic Features](#Basic-Features-LR) section introduced [vocabulary extension](#VocabularyExtension-Syntax), which allows a vocabulary to extend other vocabularies by adding new members or cross referencing imported members. This allows managing the complexity of vocabularies by splitting them into components that extend each other. In this section, other kinds of ontology extension are introduced.
 
-VocabularyExtension
+**Vocabulary Bundle Extension**
 
-VocabularyBundleExtension
+A [vocabulary bundle extension](#VocabularyBundleExtension) is a kind of [import](#Import) statement that can be added to a vocabulary bundle to specify that it extends another vocabulary bundle. This can be used to organize vocabulary bundles in layers that build on each other. Each bundle inherits the vocabularies contributed by its extended bundles and may optionally add to them other included vocabularies. This can, for example, be used to define a family of related vocabulary bundles that build on each other by tackling different incremental concerns.
 
-DescriptionExtension
+A vocabulary bundle extension is defined with the keyword `extends` followed by the imported vocabulary bundle's NAMESPACE.
 
-DescriptionBundleExtension
+<pre class="highlight highlight-html">
+`extends` NAMESPACE
+</pre>
 
-**Vocabulary Usage**
+For example, the *cyberphysical* vocabulary bundle *extends* the *foundation* vocabulary bundle (which includes the *mission* vocabulary) to include two other vocabularies: *electrical* and *mechanical*, which are two disciplines used when describing cyber-physical systems.
 
-VocabularyUsage
+<pre class="highlight highlight-html">
+`vocabulary` `bundle` `<`http://com.xyz/methodology/cyberphysical#`>` `as` cyberphysical `{`
+	`extends` `<`http://com.xyz/methodology/foundation#`>`
+	`includes` `<`http://com.xyz/methodology/electrical#`>`
+	`includes` `<`http://com.xyz/methodology/mechanical#`>`
+`}`
+</pre>
+
+**Description Extension**
+
+A [description extension](#DescriptionExtension) is a kind of [import](#Import) statement that can be added to a description to specify that it extends another description. This can be used to split a system descriptions into fragments that focus on different concerns or are contributed by different authorities. In this case, each description *extends* the other descriptions it depends on (e.g., by cross referencing named instances from them).
+
+A description extension is defined with the keyword `extends` followed by the imported description's NAMESPACE. If members of the imported description are to be referenced using their ABBREVIATED_IRIs, then the NAMESPACE needs to be followed by the keyword `as` and a unique prefix ID.
+
+<pre class="highlight highlight-html">
+`extends` NAMESPACE (`as` ID)?
+</pre>
+
+For example, the *system1* description *extends* the *subsystem1* and *subsystem2* descriptions and defines component *System1* that aggregates components *Subsystem1* and *Subsystem2*, defined in these descriptions respectively.
+
+<pre class="highlight highlight-html">
+`description` `<`http://com.xyz/system/system1#`>` `as` system1 `{`
+	`uses` `<`http://com.xyz/methodology/mission#`>` `as` mission
+	`extends` `<`http://com.xyz/methodology/system1/subsystem1#`>` `as` subsystem1
+	`extends` `<`http://com.xyz/methodology/system1/subsystem2#`>` `as` subsystem2
+
+	`ci` System1 `:` mission:Component `[`
+		mission:aggregates subsystem1:Subsystem1
+		mission:aggregates subsystem2:Subsystem2
+	`]`
+`}`
+</pre>
+
+**Description Bundle Extension**
+
+A [description bundle extension](#DescriptionBundleExtension) is a kind of [import](#Import) statement that can be added to a description bundle to specify that it extends another description bundle. This can be used to organize description bundles into layers that build on each other. Each bundle inherits the descriptions contributed by its extended bundles and optionally adds to them other descriptions. This can, for example, be used to define alternative datasets (e.g., representing alternative system designs) that extend a common dataset.
+
+A description bundle extension is defined with the keyword `extends` followed by the imported description's NAMESPACE.
+
+<pre class="highlight highlight-html">
+`extends` NAMESPACE
+</pre>
+
+For example, the *design1* description bundle *extends* the *mission1* description bundle and includes two additional descriptions: *electrical1* and *mechanical1*, which specify the details of this design.
+
+<pre class="highlight highlight-html">
+`description` `bundle` `<`http://com.xyz/missions/mission1/design1#`>` `as` design1 `{`
+	`extends` `<`http://com.xyz/missions/mission1#`>`
+	`includes` `<`http://com.xyz/missions/mission1/electrical1#`>`
+	`includes` `<`http://com.xyz/missions/mission1/mechanical#`>`
+`}`
+</pre>
 
 ### Relation Instance ### {#Relation-Instance-LR}
 
@@ -715,6 +768,8 @@ ScalarPropertyValueRestrictionAxiom
 StructuredPropertyValueRestrictionAxiom
 
 RelationTargetRestrictionAxiom
+
+VocabularyUsage
 
 ### Rules ### {#Rules-LR}
 
