@@ -1487,9 +1487,9 @@ Possible extra rowspan handling
 		}
 	}
 </style>
-  <meta content="Bikeshed version 5af62bd01, updated Fri Oct 15 11:54:56 2021 -0700" name="generator">
+  <meta content="Bikeshed version 46234c6bb, updated Tue Oct 19 17:12:22 2021 -0700" name="generator">
   <link href="https://github.com/opencaesar/oml" rel="canonical">
-  <meta content="8559a46594658f2279c8fa10f568144218bf16ec" name="document-revision">
+  <meta content="640d609bfdfc6ce6864a073045960f1a6388fdc6" name="document-revision">
 <style>
 body {
   padding: 0;
@@ -2080,7 +2080,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://opencaesar.github.io/oml/"> <img alt="Ontological Modeling Language" height="60" src="images/oml.svg"> </a></p>
    <h1 class="p-name no-ref" id="title">Ontological Modeling Language 1.0</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Living Document, <time class="dt-updated" datetime="2021-10-16">16 October 2021</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Living Document, <time class="dt-updated" datetime="2021-10-25">25 October 2021</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -2411,10 +2411,10 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
 </pre>
     <p>Members can only be defined by their own ontology but can be refrenced by other importing ontologies. Different ontology kinds define different member kinds.The syntax for declaring members vary depending on the member kind, but at least consists of one of the <code>&lt;member></code> keywords (see <a href="#Member-Syntax">members</a> for details) followed by the member’s ID that must be unique within the ontology. The sections <a href="#Basic-Features-LR">Basic Features</a> and <a href="#Advanced-Features-LR">Advanced Features</a> introduce the various kinds of members in OML.</p>
     <h4 class="heading settled" data-level="3.1.6" id="References-LR"><span class="secno">3.1.6. </span><span class="content">References</span><a class="self-link" href="#References-LR"></a></h4>
-    <p>While members are defined only by their own ontology, they can be referenced by any ontology that has access to them (this includes their defining ontology or any ontology that imports it). Members can be referenced by specifying their REFERENCE, which can either be their IDs (only within their defining ontology) or their IRIs or ABBREVIATED_IRIs (within any ontology that has access to them). A member REFERENCE can be used any where in the OML <a href="#Textual-Syntax">textual syntax</a> that a reference to a member is expected.</p>
-    <p>However, OML has a special syntax when the reference is used as an ontology statement about a member. The syntax starts with the keyword <code>ref</code> followed by the one of the <code>&lt;member></code> keywords and then a REFERENCE. Such a statement, declaring a member reference, can be used to add extra information (e.g., annotations) about the member that was not added when it was originally defined. However, the extra information that can be added to a memner reference vs. to a member definition may vary (refer to the <a href="#Reference-Syntax">Reference</a> syntax for details).</p>
+    <p>While members are defined only by their own ontology, they can be referenced by any ontology that has access to them (this includes their defining ontology or any ontology that imports it). Members can be referenced by specifying their REF, which can either be their IDs (only within their defining ontology) or their IRIs or ABBREVIATED_IRIs (within any ontology that has access to them). A member REF can be used any where in the OML <a href="#Textual-Syntax">textual syntax</a> that a reference to a member is expected.</p>
+    <p>However, OML has a special syntax when the reference is used as an ontology statement about a member. The syntax starts with the keyword <code>ref</code> followed by the one of the <code>&lt;member></code> keywords and then a REF. Such a statement, declaring a member reference, can be used to add extra information (e.g., annotations) about the member that was not added when it was originally defined. However, the extra information that can be added to a memner reference vs. to a member definition may vary (refer to the <a href="#Reference-Syntax">Reference</a> syntax for details).</p>
 <pre class="highlight highlight-html"><code>&lt;ontology></code> NAMESPACE <code>as</code> ID <code>{</code>
-  <code>ref</code> <code>&lt;member></code> REFERENCE
+  <code>ref</code> <code>&lt;member></code> REF
 <code>}</code>
 </pre>
     <h4 class="heading settled" data-level="3.1.7" id="IRIs-LR"><span class="secno">3.1.7. </span><span class="content">IRIs</span><a class="self-link" href="#IRIs-LR"></a></h4>
@@ -2468,15 +2468,15 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
 <pre class="highlight highlight-html"><code>vocabulary</code> NAMESPACE <code>as</code> ID <code>{</code>
 <code>}</code>
 </pre>
-    <p>For example, the following vocabulary is meant to define a mission description methodology. It has the namespace <em>http://com.xyz/methodology/mission#</em> and the prefix <em>mission</em>.</p>
+    <p>For example, the following vocabulary enables describing a mission. It has the namespace <em>http://com.xyz/methodology/mission#</em> and the prefix <em>mission</em>.</p>
 <pre class="highlight highlight-html"><code>vocabulary</code> <code>&lt;</code>http://com.xyz/methodology/mission#<code>></code> <code>as</code> missiom <code>{</code>
 <code>}</code>
 </pre>
     <p><strong>Vocabulary Extension</strong></p>
-    <p>A <a href="#VocabularyExtension">vocabulary extension</a> is a kind of <a href="#Import">import</a> statement that can be added to a vocabulary to specify that it extends another vocabulary. A vocabulary extension is defined with the keyword <code>extends</code> followed by the imported vocabulary’s NAMESPACE. If members of the imported vocabulary are to be referenced using their ABBREVIATED_IRIs, then the NAMESPACE needs to be followed by the keyword <code>as</code> and a unique prefix ID.</p>
+    <p>A <a href="#VocabularyExtension">vocabulary extension</a> is a kind of <a href="#Import">import</a> statement that can be added to a vocabulary to specify that it extends another vocabulary. A vocabulary extension is defined with the keyword <code>extends</code> followed by the imported vocabulary’s NAMESPACE. If members of the imported vocabulary are to be referenced using their ABBREVIATED_IRIs, then the NAMESPACE needs to be followed by the keyword <code>as</code> and a namespace prefix ID that is unique within the vocabulary.</p>
 <pre class="highlight highlight-html"><code>extends</code> NAMESPACE (<code>as</code> ID)?
 </pre>
-    <p>The following example vocabulary extends the vocabulary <em>http://www.w3.org/2001/XMLSchema#</em>.</p>
+    <p>For example, the <em>mission</em> vocabulary extends the <em>xsd</em> vocabulary (in order to cross reference types from it):</p>
 <pre class="highlight highlight-html"><code>vocabulary</code> <code>&lt;</code>http://com.xyz/methodology/mission#<code>></code> <code>as</code> missiom <code>{</code>
   <code>extends</code> <code>&lt;</code>http://www.w3.org/2001/XMLSchema#<code>></code> <code>as</code> xsd
 <code>}</code>
@@ -2485,16 +2485,17 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
     <p>A <a href="#Concept-Syntax">concept</a> is a term defined in a vocabulary and repersents a class of things in a modeled domain. A concept is declared with the keyword <code>concept</code> and followed by the concept’s name ID.</p>
 <pre class="highlight highlight-html"><code>concept</code> ID
 </pre>
-    <p>The following example vocabulary defines two concepts: <em>Component</em> and <em>Function</em>. These concepts can be used as types of instances in a description model.</p>
+    <p>The following example vocabulary defines two concepts: <em>Component</em> and <em>Function</em>.</p>
 <pre class="highlight highlight-html"><code>vocabulary</code> <code>&lt;</code>http://com.xyz/methodology/mission#<code>></code> <code>as</code> missiom <code>{</code>
   <code>extends</code> <code>&lt;</code>http://www.w3.org/2001/XMLSchema#<code>></code> <code>as</code> xsd
   <code>concept</code> Component
   <code>concept</code> Function
 <code>}</code>
 </pre>
-    <p>A concept is both a <a href="#Classifier-Syntax">classifier</a>, allowing it to be a domain for a property, and an <a href="#Entity-Syntax">entity</a>, allowing it to be a source and target of a relation entity.</p>
+    <p>A concept is both a <a href="#Classifier-Syntax">classifier</a>, allowing it to be a domain for a property, and an <a href="#Entity-Syntax">entity</a>, allowing it to be a source and target of a relation entity. It can also be a type of a <a href="#ConceptInstance-Syntax">concept instance</a> in a description.</p>
     <p><strong>Scalar</strong></p>
-    <p>A <a href="#Scalar-Syntax">scalar</a> is a term defined in a vocabulary and represents a class of literal values (e.g., <em>1</em>, <em>"abc"</em>, <em>2.00</em>, <em>true</em>, etc.). OML uses some standard datatypes with the following IRIs:</p>
+    <p>A <a href="#Scalar-Syntax">scalar</a> is a term defined in a vocabulary and represents a class of literal values (e.g., <em>1</em>, <em>"abc"</em>, <em>2.00</em>, <em>true</em>, etc.).</p>
+    <p>OML uses some standard datatypes with the following IRIs:</p>
 <pre class="highlight highlight-html">// Number Scalars
 http://www.w3.org/2001/XMLSchema#decimal
 http://www.w3.org/2001/XMLSchema#integer
@@ -2546,13 +2547,13 @@ http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral
 </pre>
     <p class="note" role="note"><span>Note:</span> the definitions for these standard scalars are provided in their respective (<a href="https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/#built-in-datatypes">xsd</a>, and <a href="https://www.w3.org/TR/owl2-syntax/#Datatype_Maps">owl</a>) standards.</p>
     <p><strong>Scalar Property</strong></p>
-    <p>A <a href="#ScalarProperty-Syntax">scalar proeprty</a> is a term defined in a vocabulary and represents a property whose domain is a classifier (e.g., concept) and whose range is a scalar. This means a scalar property can be given values that are instances of its domain and those values can be literals of its scalar range. A scalar property is defined with the keywords <code>scalar</code> <code>property</code> followed by a name ID and a pair of square brackets <code>[</code> <code>]</code> that contain the property’s <code>domain</code> (referencing a classifier) and <code>range</code> (referencing a scalar).</p>
+    <p>A <a href="#ScalarProperty-Syntax">scalar proeprty</a> is a term defined in a vocabulary and represents a property whose domain is a classifier (e.g., concept), i.e. it can be asserted on instances of its classifier domain, and whose range is a scalar, i.e., its values are literals of that scalar. A scalar property is defined with the keywords <code>scalar</code> <code>property</code> followed by a name ID and a pair of square brackets <code>[</code> <code>]</code> that contain the property’s <code>domain</code> (referencing a classifier) and <code>range</code> (referencing a scalar).</p>
 <pre class="highlight highlight-html"><code>scalar</code> <code>property</code> ID <code>[</code>
-  <code>domain</code> [Classifir|REFERENCE]
-  <code>range</code> [Scalar|REFERENCE]
+  <code>domain</code> [Classifir|REF]
+  <code>range</code> [Scalar|REF]
 <code>]</code>
 </pre>
-    <p>The following example vocabulary defines three scalar properties named <em>hasId</em>, <em>hasName</em>, and <em>isAbstract</em>. The <em>hasId</em> property is in the domain of <em>Component</em> and can have literal values that are typed by <em>xsd:string</em>. The <em>hasName</em> property is in the domain of <em>Function</em> and can have literal values that are also typed by <em>xsd:string</em>. The <em>isAbstract</em> property is also in the domain of <em>Function</em> but can have literal values that are typed by <em>xsd:boolean</em>.</p>
+    <p>The following example vocabulary defines three scalar properties named <em>hasId</em>, <em>hasName</em>, and <em>isAbstract</em>. The <em>hasId</em> property is in the domain of <em>Component</em> and can have <em>xsd:string</em> literals. The <em>hasName</em> property is in the domain of <em>Function</em> and can also have <em>xsd:string</em> litrals. The <em>isAbstract</em> property is also in the domain of <em>Function</em> but can have <em>xsd:boolean</em> values.</p>
 <pre class="highlight highlight-html"><code>vocabulary</code> <code>&lt;</code>http://com.xyz/methodology/mission#<code>></code> <code>as</code> missiom <code>{</code>
   <code>extends</code> <code>&lt;</code>http://www.w3.org/2001/XMLSchema#<code>></code> <code>as</code> xsd
   <code>concept</code> Component
@@ -2574,8 +2575,8 @@ http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral
     <p><strong>Relation Entity</strong></p>
     <p>is a term defined in a vocabulary and represents a reified relation between two entities (e.g., concepts), one of them playing the relation’s source, while the other playing the relation’s target. A relation entity is defined with the keywords <code>relation</code> <code>entity</code> followed by a name ID and a pair of square brackets <code>[</code> <code>]</code> that specify, by reference, the relation’s <code>from</code> entity and <code>to</code> entity. A relation entity can optionally specify name IDs of two unreified <a href="#Relation-Syntax">relations</a>, a <code>forward</code> relation and a <code>reverse</code> relation, between the two entities.</p>
 <pre class="highlight highlight-html"><code>relation</code> <code>entity</code> ID <code>[</code>
-  <code>from</code> [Entity|REFERENCE]
-  <code>to</code> [Entity|REFERENCE]
+  <code>from</code> [Entity|REF]
+  <code>to</code> [Entity|REF]
   (<code>forward</code> ID)?
   (<code>reverse</code> ID)?
 <code>]</code>
@@ -2609,13 +2610,12 @@ http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral
 </pre>
     <p>A relation entity is both a <a href="#Classifier-Syntax">classifier</a>, allowing it to be a domain for a property, and an <a href="#Entity-Syntax">entity</a>, allowing it to be a source and target of a relation entity in a vocabulary. Also, by being reified, a relation entity can have instances (called <a href="#RelationInstance-Syntax">relation instances</a>) in a description model that are typed by it. Such instances can specify values to their propeties and be linked bo other related instances. On the other hand, the forward and the reverse relation are unreified, allowing them to only be types of links (vs. relation instances) between related instances in a description model, but cannot express any property values nor be themselves linked to/from related instances.</p>
     <h4 class="heading settled" data-level="3.2.2" id="Vocabulary-Bundles-LR"><span class="secno">3.2.2. </span><span class="content">Vocabulary Bundles</span><a class="self-link" href="#Vocabulary-Bundles-LR"></a></h4>
-    <p>A vocabulary has open-world semantics meaning that its most specialized concept terms are not disjuncted with each other, allowing them to be mixed together as types of instances.</p>
     <p><strong>Vocabulary Bundle</strong></p>
-    <p>A <a href="#VocabularyBundle-Syntax">vocabulary bundle</a> is an ontology that bundles a set of vocabularies and allows description logic reasoning with <a href="#Description-Logic-Reasoning">closed-world semantics</a> using them. A vocabulary bundle is declared with the keywords <code>vocabulary</code> <code>bundle</code> as its ontology kind, followed by its NAMESPACE, the keyword <code>as</code>, and its prefix ID.</p>
+    <p>A <a href="#VocabularyBundle-Syntax">vocabulary bundle</a> is an ontology that bundles a set of vocabularies and allows description logic (DL) reasoning with <a href="#Description-Logic-Reasoning">closed-world semantics</a> using them (in contrast to a vocabulary that has <a href="#Description-Logic-Reasoning">open-world semantics</a>). A vocabulary bundle is declared with the keywords <code>vocabulary</code> <code>bundle</code> as its ontology kind, followed by its NAMESPACE, the keyword <code>as</code>, and its prefix ID.</p>
 <pre class="highlight highlight-html"><code>vocabulary</code> <code>bundle</code> NAMESPACE <code>as</code> ID <code>{</code>
 <code>}</code>
 </pre>
-    <p>For example, the following vocabulary has the namespace <em>http://com.xyz/methodology/foundation#</em> and the prefix <em>foundation</em>.</p>
+    <p>For example, the following vocabulary bundle has the namespace <em>http://com.xyz/methodology/foundation#</em> and the prefix <em>foundation</em>.</p>
 <pre class="highlight highlight-html"><code>vocabulary</code> <code>bundle</code> <code>&lt;</code>http://com.xyz/methodology/foundation#<code>></code> <code>as</code> foundation <code>{</code>
 <code>}</code>
 </pre>
@@ -2623,9 +2623,10 @@ http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral
     <p>A <a href="#VocabularyBundleInclusion">vocabulary bundle inclusion</a> is a kind of <a href="#Import">import</a> statement that can be added to a vocabulary bundle to specify that it includes a vocabulary. A vocabulary bundle inclusion is defined with the keyword <code>includes</code> followed by the imported vocabulary’s NAMESPACE. If members of the imported vocabulary are to be referenced using their ABBREVIATED_IRIs, then the NAMESPACE needs to be followed by the keyword <code>as</code> and a unique prefix ID.</p>
 <pre class="highlight highlight-html"><code>includes</code> NAMESPACE (<code>as</code> ID)?
 </pre>
-    <p>The following example vocabulary bundle is meant to define the foundation bundle. It includes the single vocabulary <em>http://com.xyz/methodology/mission#</em>.</p>
-<pre class="highlight highlight-html"><code>vocabulary</code> <code>&lt;</code>http://com.xyz/methodology/foundation#<code>></code> <code>as</code> foundation <code>{</code>
+    <p>The following example vocabulary bundle defines the <em>foundation</em> bundle to includes two vocabularies: <em>mission</em> and <em>project</em>.</p>
+<pre class="highlight highlight-html"><code>vocabulary</code> <code>bundle</code> <code>&lt;</code>http://com.xyz/methodology/foundation#<code>></code> <code>as</code> foundation <code>{</code>
   <code>includes</code> <code>&lt;</code>http://com.xyz/methodology/mission#<code>></code> <code>as</code> mission
+  <code>includes</code> <code>&lt;</code>http://com.xyz/methodology/project#<code>></code> <code>as</code> project
 <code>}</code>
 </pre>
     <h4 class="heading settled" data-level="3.2.3" id="Descriptions-LR"><span class="secno">3.2.3. </span><span class="content">Descriptions</span><a class="self-link" href="#Descriptions-LR"></a></h4>
@@ -2648,11 +2649,11 @@ http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral
 <code>}</code>
 </pre>
     <p><strong>Concept Instance</strong></p>
-    <p>A <a href="#ConceptInstance-Syntax">concept instance</a> is a kind of named instance in a description model that cab be typed by a concept from a used vocabulary. The concpet instance is declared with the keyword <code>ci</code> and a name ID. It can optionally be followed by a <code>:</code> and a REFERENCE to a concept that is the type if the instance. It can also optioinally be followed by a pair of square brackets <code>[</code> <code>]</code> that holds other assertions about the instance.</p>
-<pre class="highlight highlight-html"><code>ci</code> ID (<code>:</code> [Concept|REFERENCE])? (<code>[</code>
+    <p>A <a href="#ConceptInstance-Syntax">concept instance</a> is a named instance defined in a description and can be typed by a concept (from some imported vocabulary). The concpet instance is declared with the keyword <code>ci</code> and a name ID. It can optionally be followed by a <code>:</code> and a REF to a concept that is the type of the instance. It can also optioinally be followed by a pair of square brackets <code>[</code> <code>]</code> that holds other assertions about the instance.</p>
+<pre class="highlight highlight-html"><code>ci</code> ID (<code>:</code> [Concept|REF])? (<code>[</code>
 <code>]</code>)?
 </pre>
-    <p>The following example description defines two concept instances: one named <em>component1</em> and typed by concept <em>mission:Component</em>, while the other is named <em>function1</em> and typed by concept <em>mission:Function</em>. Notice that the concepts are reference by ABBREVIIATED_IRI since they are defined in the used (imported) vocabulary.</p>
+    <p>The following example description defines two concept instances: one named <em>component1</em> and typed by concept <em>mission:Component</em>, while the other is named <em>function1</em> and typed by concept <em>mission:Function</em>. Notice that the concepts are reference by ABBREVIIATED_IRI since they are imported with their vocabulary’s namesspac prefix..</p>
 <pre class="highlight highlight-html"><code>description</code> <code>&lt;</code>http://com.xyz/system/components#<code>></code> <code>as</code> components <code>{</code>
   <code>uses</code> <code>&lt;</code>http://com.xyz/methodology/mission#<code>></code> <code>as</code> mission
   <code>ci</code> component1 <code>:</code> mission:Component
@@ -2660,17 +2661,109 @@ http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral
 <code>}</code>
 </pre>
     <p><strong>Literals</strong></p>
-    <p>A <a href="#Literal-Syntax">literal</a> represents a value that is typed by a scalar. OML supports several <a href="#Vocabularies-LR">standard scalars</a>. Each one of those scalars defines the syntax for its literal values. However, OML has a general</p>
+    <p>A <a href="#Literal-Syntax">literal</a> represents a value typed by a scalar. OML supports specifying a literal as a quoted literal or as one of several specific literal types.</p>
+    <p><em>Quoted Literal</em></p>
+    <p>A quoted literal is a generic way of specifying a literal. It consists of the lexical form followed by a language tag, a scalar REF, or neither.</p>
+    <p>The lexical form consists of a set of characters surrounded by a pair of delimiters, which can be single quotes (<code>'value'</code>), double quotes, (<code>"value"</code>), three single quotes (<code>'''value'''</code>), or three double quotes (<code>"""value"""</code>).</p>
+    <p class="note" role="note"><span>Note:</span> The last two types of delimiters allow line break characters in the lexical form, while the first two do not.</p>
+    <p class="note" role="note"><span>Note:</span> A delimiter can appear within a lexical form that is delimited by a different delimiter (e.g., "It’s my responsibility")</p>
+    <p>Examples of quoted literals with different delimiters:</p>
+<pre class="highlight highlight-html">"The system should be responsive"
+'''First paragraph
+Second Paragraph'''
+'true'
+"""This is really the engineer’s fault"""
+</pre>
+    <p>The optional language tag is typically used with translatable string. It allows specifying the natural language the lexical form should be interpreted with. It is specified by appending the <code>$</code> character to the lexical form followed by one of the language tags specified in <a href="http://www.rfc-editor.org/rfc/bcp/bcp47.txt">BPB 47 - Tags for Identifying Languages</a>. Examples of quoted literals with language tags:</p>
+<pre class="highlight highlight-html">"This is good"$en
+"Ca va bien"$fr
+</pre>
+    <p>The optional scalar REF is used to specify the scalar that a literal belongs to (<em>xsd:string</em> by default). However, the reference can be to any of OML’s <a href="#Vocabularies-LR">standard scalars</a> only (i.e., not their specializations). It is specified by appending the <code>^^</code> characters to the lexical form followed by a REF to the scalar. Examples of quoted literals with scalar references:</p>
+<pre class="highlight highlight-html">"Component"^^xsd:string
+"2.0"^^xsd:double
+'true'^^xsd:boolean
+</pre>
+    <p><em>Abbreviated Literal</em></p>
+    <p>In addition to the quoted literal syntax, OML supports abbreviated syntaxes for some of the standard scalar types: <em>xsd:integer</em>, <em>xsd:decimal</em>, <em>xsd:double</em>, and <em>xsd:boolean</em>. The abbreviated syntax consists only of an undelimited lexical form that gets interpreted as belonging to one of the supported scalars. Example abbreviated literals:</p>
+<pre class="highlight highlight-html">123         // xsd:integer
+-123.4      // xsd:decimal
+.827        // xsd:decimal
+123E+45     // xsd:double
+true        // xsd:boolean
+</pre>
+    <p class="note" role="note"><span>Note:</span> if an abbreviated literal belongs to multiple scalars, it gets interpreted as belonging to the least precise scalar.</p>
     <p><strong>Scalar Property Value</strong></p>
-    <p>ScalarPropertyValueAssertion</p>
+    <p>A value for a scalar property can be <a href="#ScalarPropertyValueAssertion-Syntax">asserted</a> on a named instance (e.g., concept instance) in a description. Such assertion can be added as one of the assertions between the square  brackets <code>[</code> <code>]</code> of the instance. Its syntax consists of a REF to a <a href="#ScalarProperty-Syntax">scalar property</a> from some vocabulary followed by a literal.</p>
+<pre class="highlight highlight-html">[ScalarProperty|REF] Literal
+</pre>
+    <p>The following example description defines two concept instances that each makes a number of scalar property assertions. Specifically, instance <em>component1</em> asserts that its <em>mission:hasId</em> property has a string value of <em>C1</em>, while instance <em>function1</em> asserts that its <em>mission:hasName</em> property has a string value of <em>F1</em> and its <em>mission:isAbstract</em> property has a boolean value of <em>true</em>.</p>
+<pre class="highlight highlight-html"><code>description</code> <code>&lt;</code>http://com.xyz/system/components#<code>></code> <code>as</code> components <code>{</code>
+  <code>uses</code> <code>&lt;</code>http://com.xyz/methodology/mission#<code>></code> <code>as</code> mission
+  <code>ci</code> component1 <code>:</code> mission:Component <code>[</code>
+    mission:hasId 'C1'        // property value assertion
+  <code>]</code>
+  <code>ci</code> function1 <code>:</code> mission:Function <code>[</code>
+    mission:hasName 'F1'      // property value assertion
+    mission:isAbstract true   // property value assertion
+  <code>]</code>
+<code>}</code>
+</pre>
     <p><strong>Link</strong></p>
-    <p>LinkAssertion</p>
+    <p>A link, which is an unreified reference to a named instance (e.g., concept instance), can be <a href="#ScalarPropertyValueAssertion-Syntax">asserted</a> on a named instance in a description. It represents a relation between the referencing instance (the source) and the referenced instance (the target). Such assertion can be added as one of the assertions between the square  brackets <code>[</code> <code>]</code> of the referencing instance. Its syntax consists of a REF to a <a href="#Relation-Syntax">relation</a> from some vocabulary followed by a REF to a <a href="#NamedInstance-Syntax">named instance</a> from some description.</p>
+<pre class="highlight highlight-html">[Relation|REF] [NamedInstance|REF]
+</pre>
+    <p>The following example description defines two concept instances with a link asserted between them. Specifically, instance <em>component1</em> asserts a link of type <em>mission:performs</em> (the forward unreified relation of relation entity <em>mission:Performs</em>) to instance <em>function1</em>.</p>
+<pre class="highlight highlight-html"><code>description</code> <code>&lt;</code>http://com.xyz/system/components#<code>></code> <code>as</code> components <code>{</code>
+  <code>uses</code> <code>&lt;</code>http://com.xyz/methodology/mission#<code>></code> <code>as</code> mission
+  <code>ci</code> component1 <code>:</code> mission:Component <code>[</code>
+    mission:hasId 'C1'
+    mission:performs function1    // link assertion
+  <code>]</code>
+  <code>ci</code> function1 <code>:</code> mission:Function <code>[</code>
+    mission:hasName 'F1'
+    mission:isAbstract true
+  <code>]</code>
+<code>}</code>
+</pre>
+    <p class="note" role="note"><span>Note:</span> a link is typed by an unreified (forward or reverse) relation, hence (unlike a <a href="#RelationInstance-Syntax">relation instance</a>) cannot have its own assertions.</p>
     <h4 class="heading settled" data-level="3.2.4" id="Description-Bundles-LR"><span class="secno">3.2.4. </span><span class="content">Description Bundles</span><a class="self-link" href="#Description-Bundles-LR"></a></h4>
     <p><strong>Description Bundle</strong></p>
-    <p>DescriptionBundle</p>
-    <p>DescriptionInclusion</p>
-    <p>DescriptionUsage</p>
+    <p>A <a href="#DescriptionBundle-Syntax">description bundle</a> is an ontology that bundles a set of descriptions and allows them to be reasoned on as a dataset using description logic (DL). A description bundle is declared with the keywords <code>description</code> <code>bundle</code> as its ontology kind, followed by its NAMESPACE, the keyword <code>as</code>, and its prefix ID.</p>
+<pre class="highlight highlight-html"><code>description</code> <code>bundle</code> NAMESPACE <code>as</code> ID <code>{</code>
+<code>}</code>
+</pre>
+    <p>For example, the following description bundle has the namespace <em>http://com.xyz/missions/mission1#</em> and the prefix <em>mission1</em>.</p>
+<pre class="highlight highlight-html"><code>description</code> <code>bundle</code> <code>&lt;</code>http://com.xyz/missions/mission1#<code>></code> <code>as</code> mission1 <code>{</code>
+<code>}</code>
+</pre>
+    <p><strong>Description Bundle Inclusion</strong></p>
+    <p>A <a href="#DescriptionBundleInclusion">description bundle inclusion</a> is a kind of <a href="#Import">import</a> statement that can be added to a description bundle to specify that it includes a description. A description bundle inclusion is defined with the keyword <code>includes</code> followed by the imported description’s NAMESPACE. If members of the imported description are to be referenced using their ABBREVIATED_IRIs, then the NAMESPACE needs to be followed by the keyword <code>as</code> and a unique prefix ID.</p>
+<pre class="highlight highlight-html"><code>includes</code> NAMESPACE (<code>as</code> ID)?
+</pre>
+    <p>The following example description bundle defines the <em>mission1</em> bundle to includes two descriptions: <em>components</em> and <em>masses</em>.</p>
+<pre class="highlight highlight-html"><code>description</code> <code>bundle</code> <code>&lt;</code>http://com.xyz/missions/mission1#<code>></code> <code>as</code> mission1 <code>{</code>
+  <code>includes</code> <code>&lt;</code>http://com.xyz/system/components#<code>></code> <code>as</code> components
+  <code>includes</code> <code>&lt;</code>http://com.xyz/system/masses#<code>></code> <code>as</code> masses
+<code>}</code>
+</pre>
+    <p><strong>Description Bundle Usage</strong></p>
+    <p>A <a href="#DescriptionBundleUsage">description bundle usage</a> is a kind of <a href="#Import">import</a> statement that can be added to a description bundle to specify that it uses a vocabulary bundle. A description bundle usage is defined with the keyword <code>uses</code> followed by the imported vocabulary bundle’s NAMESPACE.</p>
+<pre class="highlight highlight-html"><code>uses</code> NAMESPACE
+</pre>
+    <p>The following example <em>mission1</em> description bundle is defined to use the <em>foundatio</em> vocabulary bundle.</p>
+<pre class="highlight highlight-html"><code>description</code> <code>bundle</code> <code>&lt;</code>http://com.xyz/missions/mission1#<code>></code> <code>as</code> mission1 <code>{</code>
+  <code>includes</code> <code>&lt;</code>http://com.xyz/system/components#<code>></code> <code>as</code> components
+  <code>includes</code> <code>&lt;</code>http://com.xyz/system/masses#<code>></code> <code>as</code> masses
+  <code>uses</code> <code>&lt;</code>http://com.xyz/methodology/foundation#<code>></code>
+<code>}</code>
+</pre>
+    <p>By using a vocabulary bundle (or more), a description bundle defines the closed-world DL rules that the represented dataset must be reasoned on with.</p>
     <h4 class="heading settled" data-level="3.2.5" id="Description-Logic-Reasoning"><span class="secno">3.2.5. </span><span class="content">Description Logic Reasoning</span><a class="self-link" href="#Description-Logic-Reasoning"></a></h4>
+    <p>Description Logic (DL) is a class of logic that is sufficiently expressive (between propositional and first-order logic) and decidable (in finite time). Since <a href="#Mapping-to-Owl2-and-Swrl">OML is mappable to OWL2-DL</a>, which is a subset of OWL2 that has DL semantics, OML models can be reasoned on with DL reasoners. Sevral over-the-shelf DL reasoner implementations exist such as <a href="https://github.com/stardog-union/pellet">Pellet</a>. There are two kinds of DL reasoning that can be performed on OML models: <em>satisfiability</em> analysis and <em>consistency</em> analysis.</p>
+    <p>Satisfiability analysis can be run on a vocabuly bundle to check that the types defined by that bundle are instantiable, i.e., valid instances can be created for each of them. The concern checked here is whether any type is over constrained (e.g. specializes two disjoint types) such that valid instances of the type cannot be created.</p>
+    <p>Consistency analysis can be run on a description bundle to check that the instances defined by that bundle are consistent with the rules of the used vocabularies. The concern checked here is whether any instance is involved in a logical contradition (e.g., two unequal instances assert different values to a functional property).</p>
+    <p>The reasoning process relies heavily on the inference semantics of the OML elements. These semantics are described by <a href="#Mapping-to-Owl2-and-Swrl">mapping</a> OML elements to corresponding OWL2-DL elements, which have DL semantics described in the <a href="https://www.w3.org/TR/owl2-syntax/">OWL2 standard</a>. The DL semantics allow generating inferred statements (called entailments) from asserted statements (defined in OML models). Such inference process is run repeatedly until all possible entailments are generated or until a contradiction is detected. In the latter case, a proof of the contradiction (a minimum set of statements exemplifying the contradiction) is emitted for the user to inspect.</p>
+    <p>The <a href="https://github.com/opencaesar">openCAESAR</a> project provides tools that enables running DL reasoning on OML models. The first tool, called <a href="https://github.com/opencaesar/owl-adapter">OWL Adapter</a>, maps OML models to correspond OWL2-DL models. The second tool, called <a href="https://github.com/opencaesar/owl-tools">OWL Reason</a>, runs a DL reasoner on the resulting OWL2-DL models and generates a reasoning report that report on reasoning problems if any.</p>
     <h3 class="heading settled" data-level="3.3" id="Advanced-Features-LR"><span class="secno">3.3. </span><span class="content">Advanced Features</span><a class="self-link" href="#Advanced-Features-LR"></a></h3>
     <h4 class="heading settled" data-level="3.3.1" id="Other-Imports-LR"><span class="secno">3.3.1. </span><span class="content">Other Imports</span><a class="self-link" href="#Other-Imports-LR"></a></h4>
     <p><strong>Ontology Extension</strong></p>
