@@ -1,6 +1,4 @@
-# Graphical Syntax # {#Graphical-Syntax}
-
-## Graphical Conventions ## {#Graphical-Conventions}
+# Graphical BNF # {#Graphical-BNF}
 
 **BNF Notation**
 
@@ -14,7 +12,7 @@ Elements with a blue hyperlink can be clicked on to redirect to a detailed descr
 
 Diagram compartments are laid out in free form, and list compartments are laid out vertically.
 
-## Graphical BNF ## {#Graphical-BNF}
+The following are the graphical BNF rules.
 
 <pre class="highlight highlight-html">
 

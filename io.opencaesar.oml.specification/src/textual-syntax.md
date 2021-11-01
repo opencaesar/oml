@@ -1,24 +1,4 @@
-# Textual Syntax # {#Textual-Syntax}
-
-## Textual Conventions ## {#Textual-Conventions}
-
-**Whitespace**
-
-Whitespace can be freely placed in an OML textual file to delimit tokens, but have no other significance.
-
-**Comments**
-
-Comments with the following syntaxes can be freely placed in an OML textual file:
-```javascript
-// single-line-comment
-
-/* possibly
-  multi-line
-  comment */
-```
-However, notice that a comment is purely notational and hence will not be interchangeable with OML's other notations.
-
-## Textual BNF ## {#Textual-BNF}
+# Textual BNF # {#Textual-BNF}
 
 <pre class="highlight highlight-html">
 
@@ -171,8 +151,8 @@ However, notice that a comment is purely notational and hence will not be interc
 <a id="RelationEntity-Syntax">RelationEntity</a>:
 	Annotation*
 	`relation` `entity` ID (`:>` SpecializationAxiom (`,` SpecializationAxiom)*)? `[`
-		`from` [Entity|REF]
-		`to` [Entity|REF]
+		`from` [Entity|IRI]
+		`to` [Entity|IRI]
 		ForwardRelation?
 		ReverseRelation?
 		`functional`?
@@ -244,16 +224,16 @@ However, notice that a comment is purely notational and hence will not be interc
 <a id="ScalarProperty-Syntax">ScalarProperty</a>:
 	Annotation*
 	`scalar` `property` ID (`:>` SpecializationAxiom (`,` SpecializationAxiom)*)? (`[`
-		`domain` [Classifier|REF]
-		`range` [Scalar|REF]
+		`domain` [Classifier|IRI]
+		`range` [Scalar|IRI]
 		`functional`?
 	`]`)?
 
 <a id="StructuredProperty-Syntax">StructuredProperty</a>:
 	Annotation*
 	`structured` `property` ID (`:>` SpecializationAxiom (`,` SpecializationAxiom)*)? (`[`
-		`domain` [Classifier|REF]
-		`range` [Structure|REF]
+		`domain` [Classifier|IRI]
+		`range` [Structure|IRI]
 		`functional`?
 	`]`)?
 
@@ -271,7 +251,7 @@ However, notice that a comment is purely notational and hence will not be interc
 	TypePredicate
 	
 <a id="TypePredicate-Syntax">TypePredicate</a>:
-	[Type|REF] `(` ID `)`
+	[Type|IRI] `(` ID `)`
 	
 <a id="BinaryPredicate-Syntax">BinaryPredicate</a>:
 	RelationEntityPredicate |
@@ -280,10 +260,10 @@ However, notice that a comment is purely notational and hence will not be interc
     DifferentFromPredicate
 
 <a id="RelationEntityPredicate-Syntax">RelationEntityPredicate</a>:
-	[RelationEntity|REF] `(` ID `,` ID `,` ID `)`
+	[RelationEntity|IRI] `(` ID `,` ID `,` ID `)`
 
 <a id="FeaturePredicate-Syntax">FeaturePredicate</a>:
-	[Feature|REF] `(` ID `,` ID `)`
+	[Feature|IRI] `(` ID `,` ID `)`
 
 <a id="SameAsPredicate-Syntax">SameAsPredicate</a>:
 	`sameAs` `(` ID `,` ID `)`
@@ -309,14 +289,14 @@ However, notice that a comment is purely notational and hence will not be interc
 <a id="RelationInstance-Syntax">RelationInstance</a>:
 	Annotation*
 	`ri` ID (`:` RelationTypeAssertion (`,` RelationTypeAssertion)*)? `[`
-		`from` [NamedInstance|REF] (`,` [NamedInstance|REF])* 
-		`to` [NamedInstance|REF] (`,` [NamedInstance|REF])*
+		`from` [NamedInstance|IRI] (`,` [NamedInstance|IRI])* 
+		`to` [NamedInstance|IRI] (`,` [NamedInstance|IRI])*
 		PropertyValueAssertion*
 		LinkAssertion*
 	`]`
 
 <a id="StructureInstance-Syntax">StructureInstance</a>:
-	type=[Structure|REF] `[`
+	type=[Structure|IRI] `[`
 		PropertyValueAssertion*
 	`]`
 
@@ -346,7 +326,7 @@ However, notice that a comment is purely notational and hence will not be interc
 	
 <a id="AspectReference-Syntax">AspectReference</a>:
 	Annotation*
-	`ref` `aspect` [Aspect|REF] (`:>` SpecializationAxiom (`,` SpecializationAxiom)*)? (`[`
+	`ref` `aspect` [Aspect|IRI] (`:>` SpecializationAxiom (`,` SpecializationAxiom)*)? (`[`
 		KeyAxiom* 
 		PropertyRestrictionAxiom*
 		RelationRestrictionAxiom*
@@ -354,7 +334,7 @@ However, notice that a comment is purely notational and hence will not be interc
 
 <a id="ConceptReference-Syntax">ConceptReference</a>:
 	Annotation*
-	`ref` `concept` [Concept|REF] (`:>` SpecializationAxiom (`,` SpecializationAxiom)*)? (`[`
+	`ref` `concept` [Concept|IRI] (`:>` SpecializationAxiom (`,` SpecializationAxiom)*)? (`[`
 		KeyAxiom* 
 		PropertyRestrictionAxiom*
 		RelationRestrictionAxiom*
@@ -362,7 +342,7 @@ However, notice that a comment is purely notational and hence will not be interc
 
 <a id="RelationEntityReference-Syntax">RelationEntityReference</a>:
 	Annotation*
-	`ref` `relation` `entity` [RelationEntity|REF] (`:>` SpecializationAxiom (`,` SpecializationAxiom)*)? (`[`
+	`ref` `relation` `entity` [RelationEntity|IRI] (`:>` SpecializationAxiom (`,` SpecializationAxiom)*)? (`[`
 		KeyAxiom* 
 		PropertyRestrictionAxiom*
 		RelationRestrictionAxiom*
@@ -370,37 +350,37 @@ However, notice that a comment is purely notational and hence will not be interc
 
 <a id="StructureReference-Syntax">StructureReference</a>:
 	Annotation*
-	`ref` `structure` [Structure|REF] (`:>` SpecializationAxiom (`,` SpecializationAxiom)*)? (`[`
+	`ref` `structure` [Structure|IRI] (`:>` SpecializationAxiom (`,` SpecializationAxiom)*)? (`[`
 		PropertyRestrictionAxiom*
 	`]`)?
 
 <a id="AnnotationPropertyReference-Syntax">AnnotationPropertyReference</a>:
 	Annotation*
-	`ref` `annotation` `property` [AnnotationProperty|REF] (`:>` SpecializationAxiom (`,` SpecializationAxiom)*)?
+	`ref` `annotation` `property` [AnnotationProperty|IRI] (`:>` SpecializationAxiom (`,` SpecializationAxiom)*)?
 
 <a id="ScalarPropertyReference-Syntax">ScalarPropertyReference</a>:
 	Annotation*
-	`ref` `scalar` `property` [ScalarProperty|REF] (`:>` SpecializationAxiom (`,` SpecializationAxiom)*)?
+	`ref` `scalar` `property` [ScalarProperty|IRI] (`:>` SpecializationAxiom (`,` SpecializationAxiom)*)?
 
 <a id="StructuredPropertyReference-Syntax">StructuredPropertyReference</a>:
 	Annotation*
-	`ref` `structured` `property` [StructuredProperty|REF] (`:>` SpecializationAxiom (`,` SpecializationAxiom)*)?
+	`ref` `structured` `property` [StructuredProperty|IRI] (`:>` SpecializationAxiom (`,` SpecializationAxiom)*)?
 
 <a id="FacetedScalarReference-Syntax">FacetedScalarReference</a>:
 	Annotation*
-	`ref` `scalar` [FacetedScalar|REF] (`:>` SpecializationAxiom (`,` SpecializationAxiom)*)?
+	`ref` `scalar` [FacetedScalar|IRI] (`:>` SpecializationAxiom (`,` SpecializationAxiom)*)?
 
 <a id="EnumeratedScalarReference-Syntax">EnumeratedScalarReference</a>:
 	Annotation*
-	`ref` `enumerated` `scalar` [EnumeratedScalar|REF] (`:>` SpecializationAxiom (`,` SpecializationAxiom)*)?
+	`ref` `enumerated` `scalar` [EnumeratedScalar|IRI] (`:>` SpecializationAxiom (`,` SpecializationAxiom)*)?
 
 <a id="RelationReference-Syntax">RelationReference</a>:
 	Annotation*
-	`ref` `relation` [Relation|REF]
+	`ref` `relation` [Relation|IRI]
 	
 <a id="RuleReference-Syntax">RuleReference</a>:
 	Annotation*
-	`ref` `rule` [Rule|REF]
+	`ref` `rule` [Rule|IRI]
 
 <a id="NamedInstanceReference-Syntax">NamedInstanceReference</a>:
 	ConceptInstanceReference |
@@ -408,20 +388,20 @@ However, notice that a comment is purely notational and hence will not be interc
 
 <a id="ConceptInstanceReference-Syntax">ConceptInstanceReference</a>:
 	Annotation*
-	`ref` `ci` [ConceptInstance|REF] (`:` ConceptTypeAssertion (`,` ConceptTypeAssertion)*)? (`[`
+	`ref` `ci` [ConceptInstance|IRI] (`:` ConceptTypeAssertion (`,` ConceptTypeAssertion)*)? (`[`
 		PropertyValueAssertion*
 		LinkAssertion*
 	`]`)?
 
 <a id="RelationInstanceReference-Syntax">RelationInstanceReference</a>:
 	Annotation*
-	`ref` `ri` [RelationInstance|REF] (`:` RelationTypeAssertion (`,` RelationTypeAssertion)*)? (`[`
+	`ref` `ri` [RelationInstance|IRI] (`:` RelationTypeAssertion (`,` RelationTypeAssertion)*)? (`[`
 		PropertyValueAssertion*
 		LinkAssertion*
 	`]`)?
 
 <a id="SpecializationAxiom-Syntax">SpecializationAxiom</a>:
-	[SpecializableTerm|REF]
+	[SpecializableTerm|IRI]
 	
 <a id="PropertyRestrictionAxiom-Syntax">PropertyRestrictionAxiom</a>:
 	ScalarPropertyRestrictionAxiom |
@@ -433,13 +413,13 @@ However, notice that a comment is purely notational and hence will not be interc
 	ScalarPropertyValueRestrictionAxiom
 
 <a id="ScalarPropertyRangeRestrictionAxiom-Syntax">ScalarPropertyRangeRestrictionAxiom</a>:
-	`restricts` RangeRestrictionKind `scalar` `property` [ScalarProperty|REF] `to` [Scalar|REF]
+	`restricts` RangeRestrictionKind `scalar` `property` [ScalarProperty|IRI] `to` [Scalar|IRI]
 
 <a id="ScalarPropertyCardinalityRestrictionAxiom-Syntax">ScalarPropertyCardinalityRestrictionAxiom</a>:
-	`restricts` `scalar` `property` [ScalarProperty|REF] `to` CardinalityRestrictionKind UnsignedInteger ([Scalar|REF])?
+	`restricts` `scalar` `property` [ScalarProperty|IRI] `to` CardinalityRestrictionKind UnsignedInteger ([Scalar|IRI])?
 
 <a id="ScalarPropertyValueRestrictionAxiom-Syntax">ScalarPropertyValueRestrictionAxiom</a>:
-	`restricts` `scalar` `property` [ScalarProperty|REF] `to` Literal
+	`restricts` `scalar` `property` [ScalarProperty|IRI] `to` Literal
 
 <a id="StructuredPropertyRestrictionAxiom-Syntax">StructuredPropertyRestrictionAxiom</a>:
 	StructuredPropertyRangeRestrictionAxiom |
@@ -447,13 +427,13 @@ However, notice that a comment is purely notational and hence will not be interc
 	StructuredPropertyValueRestrictionAxiom
 
 <a id="StructuredPropertyRangeRestrictionAxiom-Syntax">StructuredPropertyRangeRestrictionAxiom</a>:
-	`restricts` RangeRestrictionKind `structured` `property` [StructuredProperty|REF] `to` [Structure|REF]
+	`restricts` RangeRestrictionKind `structured` `property` [StructuredProperty|IRI] `to` [Structure|IRI]
 
 <a id="StructuredPropertyCardinalityRestrictionAxiom-Syntax">StructuredPropertyCardinalityRestrictionAxiom</a>:
-	`restricts` `structured` `property` [StructuredProperty|REF] `to` CardinalityRestrictionKind UnsignedInteger [Structure|REF]?
+	`restricts` `structured` `property` [StructuredProperty|IRI] `to` CardinalityRestrictionKind UnsignedInteger [Structure|IRI]?
 
 <a id="StructuredPropertyValueRestrictionAxiom-Syntax">StructuredPropertyValueRestrictionAxiom</a>:
-	`restricts` `structured` `property` [StructuredProperty|REF] `to` StructureInstance
+	`restricts` `structured` `property` [StructuredProperty|IRI] `to` StructureInstance
 
 <a id="RelationRestrictionAxiom-Syntax">RelationRestrictionAxiom</a>:
 	RelationRangeRestrictionAxiom |
@@ -461,38 +441,38 @@ However, notice that a comment is purely notational and hence will not be interc
 	RelationTargetRestrictionAxiom
 	
 <a id="RelationRangeRestrictionAxiom-Syntax">RelationRangeRestrictionAxiom</a>:
-	`restricts` RangeRestrictionKind `relation` [Relation|REF] `to` [Entity|REF]
+	`restricts` RangeRestrictionKind `relation` [Relation|IRI] `to` [Entity|IRI]
 
 <a id="RelationCardinalityRestrictionAxiom-Syntax">RelationCardinalityRestrictionAxiom</a>:
-	`restricts` `relation` [Relation|REF] `to` CardinalityRestrictionKind UnsignedInteger [Entity|REF]?
+	`restricts` `relation` [Relation|IRI] `to` CardinalityRestrictionKind UnsignedInteger [Entity|IRI]?
 
 <a id="RelationTargetRestrictionAxiom-Syntax">RelationTargetRestrictionAxiom</a>:
-	`restricts` `relation` [Relation|REF] `to` [NamedInstance|REF]
+	`restricts` `relation` [Relation|IRI] `to` [NamedInstance|IRI]
 
 <a id="KeyAxiom-Syntax">KeyAxiom</a>:
-	`key` [ScalarProperty|REF] (`,` [ScalarProperty|REF])*
+	`key` [ScalarProperty|IRI] (`,` [ScalarProperty|IRI])*
 
 <a id="ConceptTypeAssertion-Syntax">ConceptTypeAssertion</a>:
-	[Concept|REF]
+	[Concept|IRI]
 
 <a id="RelationTypeAssertion-Syntax">RelationTypeAssertion</a>:
-	[RelationEntity|REF]
+	[RelationEntity|IRI]
 
 <a id="PropertyValueAssertion-Syntax">PropertyValueAssertion</a>:
 	ScalarPropertyValueAssertion |
 	StructuredPropertyValueAssertion
 
 <a id="ScalarPropertyValueAssertion-Syntax">ScalarPropertyValueAssertion</a>:
-	[ScalarProperty|REF] Literal
+	[ScalarProperty|IRI] Literal
 
 <a id="StructuredPropertyValueAssertion-Syntax">StructuredPropertyValueAssertion</a>:
-	[StructuredProperty|REF] StructureInstance
+	[StructuredProperty|IRI] StructureInstance
 
 <a id="LinkAssertion-Syntax">LinkAssertion</a>:
-	[Relation|REF] [NamedInstance|REF]
+	[Relation|IRI] [NamedInstance|IRI]
 
 <a id="Annotation-Syntax">Annotation</a>:
-	`@` [AnnotationProperty|REF] Literal?
+	`@` [AnnotationProperty|IRI] Literal?
 
 <a id="Literal-Syntax">Literal</a>:
 	IntegerLiteral |
@@ -514,7 +494,7 @@ However, notice that a comment is purely notational and hence will not be interc
 	Boolean
 
 <a id="QuotedLiteral-Syntax">QuotedLiteral</a>:
-	STRING ((`^^` [Scalar|REF]) | (`$` ID))?
+	STRING ((`^^` [Scalar|IRI]) | (`$` ID))?
 
 <a id="RangeRestrictionKind-Syntax">RangeRestrictionKind</a>: 
 	`all` | `some`
@@ -559,17 +539,17 @@ However, notice that a comment is purely notational and hence will not be interc
 <span id="NAMESPACE-Syntax">NAMESPACE</span>: 
 	`<` (!(`>`|\s|`#`))* (`#`|`/`) `>`
 
-<span id="Ref-Syntax">REF</span>: 
-	ID | ABBREVIATED_IRI | IRI
+<span id="Ref-Syntax">IRI</span>: 
+	FULL_IRI | ABBREVIATED_IRI | ID
 
-<span id="ID-Syntax">ID</span>: 
-	`^`? (ALPHA|DIGIT|`_`) (ALPHA|DIGIT|`_`|`-`|`.`|`$`)*
-
-<span id="IRI-Syntax">IRI</span>: 
-	`<` (!(`>`|\s))* `>`
+<span id="IRI-Syntax">FULL_IRI</span>: 
+	`<` (!(`>`|\s|`#`))* `>`
 
 <span id="ABBREVIATED_IRI-Syntax">ABBREVIATED_IRI</span>: 
 	ID `:` ID
+
+<span id="ID-Syntax">ID</span>: 
+	`^`? (ALPHA|DIGIT|`_`) (ALPHA|DIGIT|`_`|`-`|`.`|`$`)*
 
 <span id="ALPHA-Syntax">ALPHA</span>: 
 	`a`..`z` | `A`..`Z`
