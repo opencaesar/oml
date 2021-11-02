@@ -34,6 +34,12 @@ An ontology is the root element of an OML model and the unit of organizing ontol
 
 An ontology's NAMESPACE is made up of an IRI and a separator character (either `#` or `/`). For example, `http://www.w3.org/2002/07/owl#` is a logical NAMESPACE that consists of IRI `http://www.w3.org/2002/07/owl` and separator character `#`. An ontology's IRI can be any opaque string but is usually specified as a URL in the format `http://<organization>/<path>`. An ontology's ID is a short name that is used as a NAMESPACE prefix (e.g., `owl` is a prefix for `http://www.w3.org/2002/07/owl#`) when referencing an ontology member using the ABBREVIATED_IRI syntax (see section [IRIs](#IRI-LR) below). 
 
+OML supports 4 kinds of concrete ontologies that address different use cases:
+- [Vocabulary](#Vocabulary-LR): allows definition of ontological terms and rules for a domain with open-world semantics
+- [Vocabulary Bundle](#VocabularyBundle-LR): allows combining vocabularies into a methodology with closed-world semantics
+- [Description](#Description-LR): allows definition of systems as instances characterized using some vocabulary
+- [Description Bundle](#DescriptionBundle-LR): allows combining descriptions into a dataset that can be reasoned on.
+
 ### Import ### {#Import-LR}
 
 An ontology can import zero or more other ontologies, which allows it to cross-reference the imported ontologies' members. This is accomplished by an ontology adding an import statement in its body (before other kinds of statements). An import statement is declared using one of the `<import>` keywords (see [import syntax](#Import-Syntax) for details) followed by the imported ontology's NAMESPACE and optionally its ID.
@@ -44,11 +50,17 @@ An ontology can import zero or more other ontologies, which allows it to cross-r
 }
 </pre>
  
-Note: An imported ontology's ID is only required in the import syntax when its members are cross-referenced using an ABBREVIATED_IRI syntax.
+Note: An ID is required in the import syntax only when imported members are cross-referenced using the ABBREVIATED_IRI syntax.
 
-Note: An ontology's import closure is defined as all the ontologies that are imported directly or indirectly by an ontology
+Note: An ontology's import closure is defined as all the ontologies that are imported directly or indirectly by the ontology
 
-Note: An ontology whose members are referenced by another ontology needs to be directly imported (it is not enough to be indirectly imported).
+Note: An ontology whose members are referenced by another ontology needs to be directly imported by it (it is not enough to be indirectly imported).
+
+OML supports several kinds of concret imports for each one of its ontology kinds:
+- Vocabulary:[Extension](#VocabularyExtension-LR), [Usage](#VocabularyUsage-LR)
+- Vocabulary Bundle: [Extension](#VocabularyBundleExtension-LR), [Inclusion](#VocabularyBundleInclusion-LR)
+- Description: [Extension](#DescriptionExtension-LR), [Usage](#DescriptionUsage-LR)
+- Description Bundle: [Extension](#DescriptionBundleExtension-LR), [Inclusion](#DescriptionBundleInclusion-LR), [Usage](#DescriptionBundleUsage-LR)
 
 ### Member ### {#Member-LR}
 
@@ -61,6 +73,11 @@ An ontology can define zero or more members, which are named elements whose IRIs
 </pre>
 
 Members can only be defined by their own ontology but can be referenced by other importing ontologies. Different ontology kinds define different member kinds (see the various ontology sections for details). The syntax for declaring members vary depending on the member kind, but at least consists of one of the `<member>` keywords (see [members](#Member-Syntax) for details) followed by the member's ID that must be unique within the ontology.
+
+OML supports several kinds of concrete members for each of its ontology kinds:
+
+- Vocabulary: [Aspect](#Aspect-LR), [Concept](#Concept-LR), [Relation Entity](#RelationEntity-LR), [Structure](#Structure-LR), [Faceted Scalar](#FacetedScalar-LR), [Enumerated Scalar](#EnumeratedScalar-LR), [Scalar Property](#ScalarProperty-LR), [Structured Property](#StructuredProperty-LR), [Annotation Property](#AnnotationProperty-LR), [Rule](#Rule-LR)
+- Description: [Concept Instance](#ConceptInstance-LR), [Relation Instance](#RelationInstance-LR)
 
 ### Reference ### {#Reference-LR}
 
@@ -147,7 +164,7 @@ In the OML textual syntax only, when a reserved keyword is used as an ID, it nee
 
 ### Literal ### {#Literal-LR}
 
-A [literal](#Literal-Syntax) represents a value typed by a [scalar](#Faceted-Scalar-LR) type (defined by a [vocabulary](#Vocabulary-LR)). OML supports specifying a literal as a quoted literal or as an abbreviated literal (for some specific scalars).
+A [literal](#Literal-Syntax) represents a value typed by a [scalar](#FacetedScalar-LR) type (defined by a [vocabulary](#Vocabulary-LR)). OML supports specifying a literal as a quoted literal or as an abbreviated literal (for some specific scalars).
 
 *Quoted Literal*
 
@@ -176,7 +193,7 @@ The optional language tag is typically used with translatable string. It allows 
 "Ca va bien"$fr
 </pre>
 
-The optional scalar IRI is used to specify the scalar that a literal belongs to (*xsd:string* by default). However, the reference can be to any of OML's [standard scalars](#Faceted-Scalar-LR) only (i.e., not their specializations). It is specified by appending the `^^` characters to the lexical form followed by an IRI to the scalar. Examples of quoted literals with scalar references:
+The optional scalar IRI is used to specify the scalar that a literal belongs to (*xsd:string* by default). However, the reference can be to any of OML's [standard scalars](#FacetedScalar-LR) only (i.e., not their specializations). It is specified by appending the `^^` characters to the lexical form followed by an IRI to the scalar. Examples of quoted literals with scalar references:
 
 <pre class="highlight highlight-html">
 "Component"^^xsd:string
@@ -244,11 +261,11 @@ For example, the following vocabulary allows describing a mission. It has the na
 `}`
 </pre>
 
-### Import ### {#Vocabulary-Import-LR}
+### Import ### {#VocabularyImport-LR}
 
 This section outlines the kind of import statements that can be added to a vocabulary.
 
-#### Extension #### {#Vocabulary-Extension-LR}
+#### Extension #### {#VocabularyExtension-LR}
 
 A [vocabulary extension](#VocabularyExtension) is a kind of [import](#Import) statement that can be added to a vocabulary to specify that it extends another vocabulary. This is typically needed when members of the extended vocabulary are cross-reference by the local members of the extending vocabulary.  A vocabulary extension is defined with the keyword `extends` followed by the imported vocabulary's NAMESPACE. If members of the imported vocabulary are to be referenced using their ABBREVIATED_IRIs, then the NAMESPACE needs to be followed by the keyword `as` and a namespace prefix ID that is unique within the vocabulary's imports.
 
@@ -269,7 +286,7 @@ For example, the *mission* vocabulary *extends* the *xsd* vocabulary (in order t
 `}`
 </pre>
 
-#### Usage #### {#Vocabulary-Usage-LR}
+#### Usage #### {#VocabularyUsage-LR}
 
 A [vocabulary usage](#VocabularyUsage) is a kind of [import](#Import) statement that can be added to a vocabulary to specify that it uses a [description](#Description-LR). This is typically needed when the vocabulary uses one or more of the description's instances in its restriction axioms. A vocabulary usage is defined with the keyword `extends` followed by the imported description's NAMESPACE. If members of the imported description are to be referenced using their ABBREVIATED_IRIs, then the NAMESPACE needs to be followed by the keyword `as` and a namespace prefix ID that is unique within the vocabulary's imports.
 
@@ -293,9 +310,9 @@ Note: descriptions that are used by a vocabulary typically define notable instan
 
 ### Types ### {#Types-LR}
 
-Types that can be defined in a vocabulary are either *classifiers* (types of structured instances) or *scalars* (types of primitive values). Some classifiers (like `Aspect`, `Concept` and `Relation Entity`) are *entities*, meaning they can classify named instances, while others (like `Structure`) can only classify anonymous instances. Also, some scalars (like `Faceted Scalar`) can classify unlimited literals, while others (like `Enumerated Scalar`) can classify a limited set of literals.
+Types that can be defined in a vocabulary are either *classifiers* (structured types) or *scalars* (primitive types). Some classifiers ([Aspect](#Aspect-LR), [Concept](#Concept-LR) and [Relation Entity]((#RelationEntity-LR))) are *entities*, meaning they can classify named instances (that are unique by reference). Other classifiers ([Structure](#Structure-LR)) can only classify anonymous instances (that are unique by value). Also, some scalars ([Faceted Scalar](#FacetedScalar-LR)) can classify an unlimited set literals, while other scalars ([Enumerated Scalar](#EnumeratedScalar-LR)) can only classify a limited set of literals.
 
-Classifiers can specialize one or more classifiers, while scalars can only specialize one scalar only. These specializations are constrainted as discussed below for each type.
+Classifiers can specialize one or more classifiers (multiple-inheritance), while scalars can only specialize one scalar only (single-inheritance). These specializations are further constrainted for each type as discussed below.
 
 #### Aspect #### {#Aspect-LR}
 
@@ -309,7 +326,7 @@ An aspect is declared with the keyword `aspect` followed by the aspect's name ID
     `]`)?
 </pre>
 
-The following example vocabulary defines two aspects: *IdentifiedElement* and *NamedElement* where the latter specializes the former.
+The following example vocabulary defines two aspects: *IdentifiedElement* and *NamedElement* where the latter specializes the former (notice how *IdentifiedElement* is referenced by its ID as a supertype, since it is defined locally within the same vocabulary).
 
 <pre class="highlight highlight-html">
 `vocabulary` `<`http://com.xyz/methodology/mission#`>` `as` mission `{`
@@ -318,11 +335,9 @@ The following example vocabulary defines two aspects: *IdentifiedElement* and *N
 `}`
 </pre>
 
-Notice: that *IdentifiedElement* is referenced by its ID as a supertype, since it is defined locally within the same vocabulary.
-
 #### Concept #### {#Concept-LR}
 
-A [concept](#Concept-Syntax) is an entity defined in a vocabulary and represents a concrete type in a modeled domain. A concept can specialize other concepts or aspects, but can be specialized by other concepts only. It can also be asserted as a type of [concept instance](#ConceptInstance-LR) in a description. 
+A [concept](#Concept-Syntax) is an entity defined in a vocabulary and represents a concrete type in a modeled domain. A concept can specialize other concepts or aspects, but can be specialized by other concepts only. It can also be asserted as a type of a [concept instance](#ConceptInstance-LR). 
 
 A concept is declared with the keyword `concept` followed by the concept's name ID. It can optionally specialize other concepts or aspects by following its name ID by the `:>` symbol then a comma-separated list of those supertypes' IRIs. A concept can also optionally specify a list of axioms enclosed within a pair of square brackets `[` `]`.
 
@@ -332,7 +347,7 @@ A concept is declared with the keyword `concept` followed by the concept's name 
     `]`)?
 </pre>
 
-The following example vocabulary defines two concepts: *Component* and *Function*. The former concept specializes aspects *IdentifiedElement* and *ContainedElement* (which add these capabilities to the concept).
+The following example vocabulary defines two concepts: *Component* and *Function*, where the former specializes two aspects *IdentifiedElement* and *ContainedElement*.
 
 <pre class="highlight highlight-html">
 `vocabulary` `<`http://com.xyz/methodology/mission#`>` `as` mission `{`
@@ -343,122 +358,234 @@ The following example vocabulary defines two concepts: *Component* and *Function
 `}`
 </pre>
 
-#### Relation Entity #### {#Relation-Entity-LR}
+#### Relation Entity #### {#RelationEntity-LR}
 
- is a term defined in a vocabulary and represents a reified relation between two entities (e.g., concepts), one of them playing the relation's source, while the other playing the relation's target. A relation entity is defined with the keywords `relation` `entity` followed by a name ID and a pair of square brackets `[` `]` that specify, by reference, the relation's `from` entity and `to` entity. A relation entity can optionally specify name IDs of two unreified [relations](#Relation-Syntax), a `forward` relation and a `reverse` relation, between the two entities.
-
+ A [Relation Entity](#RelationEntity-LR) is an entity defined in a vocabulary and represents a type of reified relation between two other entities, a source entity and a target entity. A relation entity is defined with the keywords `relation` `entity` followed by a name ID and a pair of square brackets `[` `]` that specify by IRI the relation's `from` (source) entity and `to` (target) entity, and optionally the names of unreified relations, semantic flags, and/or axioms.
+ 
 <pre class="highlight highlight-html">
     `relation` `entity` ID `[`
-        `from` [Entity|IRI]
-        `to` [Entity|IRI]
-        (`forward` ID)?
-        (`reverse` ID)?
-    `]`
+        `from` [Entity|IRI]                 // the relation entity's source
+        `to` [Entity|IRI]                   // the relation entity's target
+        (`forward` ID)?                     // an unreified relation from source to target
+        (`reverse` ID)?                     // an unreified relation from targt to source
+        `functional`?                       // each source can be related to a maximum of 1 target
+        (`inverse` `functional`)?             // each target can be related to a maximum of 1 source
+        `symmetric`?                        // if a source is related to a target, then the target must also related to the source
+        `asymmetric`?                       // if a source is related to a target, then the target cannot be related to the source
+        `reflexive`?                        // a source must be related to itself
+        `irreflexive`?                      // a source cannot be related to itself
+        `transitive`?                       // if A is related to B, and B is related to C, then A is related to C
+        Axiom*                            // zero or more axioms of the relation entity
+   `]`
 </pre>
 
-A diagram that visualizes the relation entity pattern is given below.
-
-<pre><img src="images/Relation-Entity-Pattern.svg"/></pre>
-
-The following example vocabulary defines a relation entity named *Performs* from the concept *Component* to the concept *Function with a forward relation named *performs* and a reverse relation called *isPerformedBy*. This forward relation can be used to specify that some concept performs some function, while the reverse relation can be used to specify that the function is performed by the component.
+The following example vocabulary defines a relation entity named *Performs* from the concept *Component* to the concept *Function*.
 
 <pre class="highlight highlight-html">
 `vocabulary` `<`http://com.xyz/methodology/mission#`>` `as` mission `{`
-    `extends` `<`http://www.w3.org/2001/XMLSchema#`>` `as` xsd
     `concept` Component
     `concept` Function
-    `scalar` `property` hasId `[`
-        `domain` Component
-        `range` xsd:string
+    `relation` `entity` Performs `[`
+        `from` Component
+        `to` Function
     `]`
-    `scalar` `property` hasName `[`
-        `domain` Function
-        `range` xsd:string
-    `]`
-    `scalar` `property` isAbstract `[`
-        `domain` Function
-        `range` xsd:boolean
-    `]`
+`}`
+</pre>
+
+ Since a relation entity is a reifed relation, it can be asserted as a type of a [relation instance](#RelationInstance-LR) between one or more source instances, and one or more target instances. Such instance can be annotated and characterized with assertions. However, a relation entity can also optionally specify (in its body) one or two companion unreified relations that can be asserted as simple (uncharacterized) [links](#LinkAssertion-LR) between a source and a target instance. One of those unrefied relations is declared with the keyword `forward`  followed by a name ID, while the other is declared with the keyword `reverse` followed by a name ID. The forward relation has the `from` entity as its domain, and the `to` entity as its range, while the reverse relation has the opposite. When both are declared, the forward and reverse relations become inverse of each other, meaning if one is used to link a source instance to a target instance, the other is inferred as a link from the target to the source. Also, when a relation instance is typed by a relation entity, which has one ore more unreifed relations, such relations are inferred as links between the set of related sources and target instances. The following diagram depicts the design pattern implied by a relation entity.
+
+<pre><img src="images/Relation-Entity-Pattern.svg"/></pre>
+
+The example vocabulary below refines the *Performs* relation entity with two unreifed relations: *performs* (as forward) and *isPerformedBy* (as reverse).
+
+<pre class="highlight highlight-html">
+`vocabulary` `<`http://com.xyz/methodology/mission#`>` `as` mission `{`
+    `concept` Component
+    `concept` Function
     `relation` `entity` Performs `[`
         `from` Component
         `to` Function
         `forward` performs
         `reverse` isPerformedBy
-    `]`
+   `]`
 `}`
 </pre>
 
-A relation entity is both a [classifier](#Classifier-Syntax), allowing it to be a domain for a property, and an [entity](#Entity-Syntax), allowing it to be a source and target of a relation entity in a vocabulary. Also, by being reified, a relation entity can have instances (called [relation instances](#RelationInstance-Syntax)) in a description model that are typed by it. Such instances can specify values to their properties and be linked bo other related instances. On the other hand, the forward and the reverse relation are unreified, allowing them to only be types of links (vs. relation instances) between related instances in a description model, but cannot express any property values nor be themselves linked to/from related instances.
+A relation entity can optionally specify one or more semantic flags (within its body) that define its logical semantics:
+
+- The `functional` flag implies that a source instance can be related to a maximum of 1 target instance.
+- The `inverse functional` flag implies that a target instance can be related to a maximum of 1 source instance.
+- The `symmetric` flag implies that if a source instance is related to a target instance, then the target must also related to the source.
+- The `asymmetric` flag implies that if a source instance is related to a target instance, then the target cannot be related to the source.
+- The `reflexive` flag implies that a source instance must be related to itself.
+- The `irreflexive` flag implies that a source instance cannot be related to itself.
+- The `transitive` flag implies if instance A is related to instance B, and instance B is related to instance C, then A is also related to C.
+
+The example vocabulary below refines the *Performs* relation to add the flag `inverse functional` (to specify that a function can be performed by a maximum of one component), the flag `asymmetric` (to specify that a function cannot peform a component), and the flag `irreflexive` (to specify that a component cannot perform itself).
+
+<pre class="highlight highlight-html">
+`vocabulary` `<`http://com.xyz/methodology/mission#`>` `as` mission `{`
+    `concept` Component
+    `concept` Function
+    `relation` `entity` Performs `[`
+        `from` Component
+        `to` Function
+        `forward` performs
+        `reverse` isPerformedBy
+        `inverse functional`
+        `asymmetric`
+        `irreflexive`
+   `]`
+`}`
+</pre>
 
 #### Structure #### {#Structure-LR}
 
-#### Faceted Scalar #### {#Faceted-Scalar-LR}
+A [structure](#Structure-Syntax) is a classifier defined in a vocabulary and represents a structured datatype with anonymous instances in a modeled domain. A structure can specialize and be specialized by other structures. It can also be asserted as a type of a [structure instance](#StructureInstance-LR), which can be used as a value of a [structured property](#StructuredProperty-LR).
 
-A [scalar](#Scalar-Syntax) is a term defined in a vocabulary and represents a class of literal values (e.g., *1*, *"abc"*, *2.00*, *true*, etc.). 
-
-OML uses some standard datatypes with the following IRIs:
+A structure is declared with the keyword `structure` followed by the structure's name ID. It can optionally specialize other structures by following its name ID by the `:>` symbol then a comma-separated list of those supertypes' IRIs. A structure can also optionally specify a list of axioms enclosed within a pair of square brackets `[` `]`.
 
 <pre class="highlight highlight-html">
-
-    // Number Scalars
-    http://www.w3.org/2001/XMLSchema#decimal
-    http://www.w3.org/2001/XMLSchema#integer
-    http://www.w3.org/2001/XMLSchema#long
-    http://www.w3.org/2001/XMLSchema#int
-    http://www.w3.org/2001/XMLSchema#short
-    http://www.w3.org/2001/XMLSchema#byte
-    http://www.w3.org/2001/XMLSchema#nonNegativeInteger
-    http://www.w3.org/2001/XMLSchema#positiveInteger
-    http://www.w3.org/2001/XMLSchema#unsignedLong
-    http://www.w3.org/2001/XMLSchema#unsignedInt
-    http://www.w3.org/2001/XMLSchema#unsignedShort
-    http://www.w3.org/2001/XMLSchema#unsignedByte
-    http://www.w3.org/2001/XMLSchema#nonPositiveInteger
-    http://www.w3.org/2001/XMLSchema#negativeInteger
-    http://www.w3.org/2001/XMLSchema#double
-    http://www.w3.org/2001/XMLSchema#float
-    http://www.w3.org/2002/07/owl#real
-    http://www.w3.org/2002/07/owl#rational
-
-    // String Scalars
-    http://www.w3.org/2001/XMLSchema#string
-    http://www.w3.org/2001/XMLSchema#normalizedString
-    http://www.w3.org/2001/XMLSchema#token
-    http://www.w3.org/2001/XMLSchema#language
-    http://www.w3.org/2001/XMLSchema#Name
-    http://www.w3.org/2001/XMLSchema#NCName
-    http://www.w3.org/2001/XMLSchema#NMTOKEN
-
-    // Boolean Scalars
-    http://www.w3.org/2001/XMLSchema#boolean
-
-    // Binary Scalars
-    http://www.w3.org/2001/XMLSchema#hexBinary
-    http://www.w3.org/2001/XMLSchema#base64Binary
-        
-    // Time Scalars
-    http://www.w3.org/2001/XMLSchema#dateTime
-    http://www.w3.org/2001/XMLSchema#dateTimeStamp
-
-    // IRI Scalars
-    http://www.w3.org/2001/XMLSchema#anyURI
-
-    // Literal Scalars
-    http://www.w3.org/2000/01/rdf-schema#Literal
-    http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral
-    http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral
-
+    `structure` ID (`:>` [Structure|IRI] (`,` [Structure|IRI])*)? (`[`
+        Axiom*
+    `]`)?
 </pre>
 
-Note: the definitions for these standard scalars are provided in their respective ([xsd](https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/#built-in-datatypes), and [owl](https://www.w3.org/TR/owl2-syntax/#Datatype_Maps)) standards.
+The following example vocabulary defines the structure *Point* whose instances are anonymous points on a grid.
 
-#### Enumerated Scalar #### {#Enumerated-Scalar-LR}
+<pre class="highlight highlight-html">
+`vocabulary` `<`http://com.xyz/methodology/mission#`>` `as` mission `{`
+    `structure` Point
+`}`
+</pre>
 
-**Structured Property**
+#### Faceted Scalar #### {#FacetedScalar-LR}
+
+A [scalar](#Scalar-Syntax) is a type defined in a vocabulary and represents a primitive type that classifies a set of unlimited literals. A faceted scalar is declared with the keyword `scalar` followed by the scalar's name ID. It can optionally specialize another faceted scalar as a supertype by following its name ID by the `:>` symbol then the IRI of the supertype. A scalar can also optionally specify a list of facets enclosed within a pair of square brackets `[` `]`.
+
+<pre class="highlight highlight-html">
+	`scalar` ID (`:>` [Scalar|IRI] (`,` [Scalar|IRI])*)? (`[`
+		 (`length` UnsignedInteger)?
+		 (`minLength` UnsignedInteger)?
+		 (`maxLength` UnsignedInteger)?
+		 (`pattern` STRING)?
+		 (`language` ID)?
+		 (`minInclusive` Literal)?
+		 (`minExclusive` Literal)?
+		 (`maxInclusive` Literal)?
+		 (`maxExclusive` Literal)?
+	`]`)?
+</pre>
+
+OML considers a following set of faceted scalars as *standard*:
+
+<pre class="highlight highlight-html">
+`vocabulary` `<`http://www.w3.org/2000/01/rdf-schema#`>` `as` rdfs `{`
+	// Literals
+	`scalar` Literal
+`}`
+
+`vocabulary` `<`http://www.w3.org/1999/02/22-rdf-syntax-ns#`>` `as` rdf `{`
+	`extends` `<`http://www.w3.org/2000/01/rdf-schema#`>` `as` rdfs
+
+	// Literals
+	`scalar` PlainLiteral `:>` rdfs:Literal
+	`scalar` XMLLiteral `:>` rdfs:Literal
+`}`
+
+`vocabulary` `<`http://www.w3.org/2002/07/owl#`>` `as` owl `{`
+	`extends` `<`http://www.w3.org/2000/01/rdf-schema#`>` `as` rdfs
+
+	// Literals
+	`scalar` real `:>` rdfs:Literal
+	`scalar` rational `:>` real
+`}`
+
+`vocabulary` `<`http://www.w3.org/2001/XMLSchema#`>` `as` xsd `{`
+	`extends` `<`http://www.w3.org/2000/01/rdf-schema#`>` `as` rdfs
+	`extends` `<`http://www.w3.org/2002/07/owl#`>` `as` owl
+
+	// Decimal Numbers and Integers
+	`scalar` decimal `:>` owl:Rational
+	`scalar` integer `:>` decimal
+	`scalar` long `:>` integer
+	`scalar` int `:>` long
+	`scalar` short `:>` int
+	`scalar` byte `:>` short
+	`scalar` nonNegativeInteger `:>` integer
+	`scalar` positiveInteger `:>` nonNegativeInteger
+	`scalar` unsignedLong `:>` nonNegativeInteger
+	`scalar` unsignedInt `:>` unsignedLong
+	`scalar` unsignedShort `:>` unsignedInt
+	`scalar` unsignedByte `:>` unsignedShort
+	`scalar` nonPositiveInteger `:>` integer
+	`scalar` negativeInteger `:>` nonPositiveInteger
+	
+	// Floating-Point Numbers
+	`scalar` double `:>` rdfs:Literal
+	`scalar` float `:>` rdfs:Literal
+	
+	// Strings
+	`scalar` string `:>` rdfs:Literal
+	`scalar` normalizedString `:>` string
+	`scalar` token `:>` normalizedString
+	`scalar` ^language `:>` token
+	`scalar` Name `:>` token
+	`scalar` NCName `:>` Name
+	`scalar` NMTOKEN `:>` token
+
+	// Boolean
+	`scalar` boolean `:>` rdfs:Literal
+
+	// Binary Data
+	`scalar` hexBinary `:>` rdfs:Literal
+	`scalar` base64Binary `:>` rdfs:Literal
+	
+	// IRI
+	`scalar` anyURI `:>` rdfs:Literal
+	
+	// Time Instants
+	`scalar` dateTime `:>` rdfs:Literal
+	`scalar` dateTimeStamp `:>` dateTime
+`}`
+</pre>
+
+Note: the lexical and value spaces for these standard scalars are described in the ([xsd](https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/#built-in-datatypes), and [owl](https://www.w3.org/TR/owl2-syntax/#Datatype_Maps)) standards.
+
+Furthermore, other faceted scalars can be defined only as specializations of standard ones (maximum one supertype) and can optionally be restricted with one or more facets. A facet is a restriction on the lexical or value space of a standard scalar. The following facets are supported:
+
+- Facet `length` specifies the exact length of the lexical representation (of strings and litrals)
+- Facet `minLength` specifies the minimum length of the lexical representation (of strings and litrals)
+- Facet `maxLength` specifies the maximum length of the lexical representation (of strings and litrals)
+- Facet `pattern` specifies a regular expression of the lexical representation (of strings and litrals)
+- Facet `language` specifies a natural language for the lexical representation (of strings and litrals)
+- Facet `minInclusive` specifies the minimum inclusive value (of numbers)
+- Facet `minExclusive` specifies the minimum exclusive value (of numbers)
+- Facet `maxInclusive` specifies the maximum inclusive value (of numbers)
+- Facet `maxExclusive` specifies the maximum exclusive value (of numbers)
+
+The following example vocabulary defines two faceted scalars: *SSN* (representing strings with the social security number pattern) and *TeenAge* (representing a positive integer type with values from 13 and 19 inclusive).
+
+<pre class="highlight highlight-html">
+`vocabulary` `<`http://example.com/primitive-types#`>` `as` primitives `{`
+	`extends` `<`http://www.w3.org/2001/XMLSchema#`>` `as` xsd
+	`scalar` SSN `:>` xsd:string `[`
+		`pattern` "^\d{3}-?\d{2}-?\d{4}$"
+	`]`
+	`scalar` TeenAge `:>` xsd:positiveInteger `[`
+		`minInclusive` 13
+		`maxInclusive` 19
+	`]`
+`}`
+</pre>
+
+#### Enumerated Scalar #### {#EnumeratedScalar-LR}
+
+TBD
 
 ### Properties ### {#Properties-LR}
 
-#### Scalar Property #### {#Scalar-Property-LR}
+#### Scalar Property #### {#ScalarProperty-LR}
 
 A [scalar property](#ScalarProperty-Syntax) is a term defined in a vocabulary and represents a property whose domain is a classifier (e.g., concept), i.e., it can be asserted on instances of its classifier domain, and whose range is a scalar, i.e., its values are literals of that scalar. A scalar property is defined with the keywords `scalar` `property` followed by a name ID and a pair of square brackets `[` `]` that contain the property's `domain` (referencing a classifier) and `range` (referencing a scalar).
 
@@ -493,57 +620,39 @@ The following example vocabulary defines three scalar properties named *hasId*, 
 
 #### Structured Property #### {#StructuredProperty-LR}
 
+TBD
+
 #### Annotation Property #### {#AnnotationProperty-LR}
+
+TBD
 
 ### Axioms ### {#Axioms-LR}
 
-#### Specialization #### {#Specialization-LR}
-
-TermSpecialization
-
 #### Key #### {#Key-LR}
 
-KeyAxiom
+TBD
 
 #### Restriction #### {#Restriction-LR}
 
 **Range Restriction Axioms**
 
-ScalarPropertyRangeRestrictionAxiom
-
-StructuredPropertyRangeRestrictionAxiom
-
-RelationRangeRestrictionAxiom
+TBD
 
 **Cardinality Restriction Axioms**
 
-ScalarPropertyCardinalityRestrictionAxiom
-
-StructuredPropertyCardinalityRestrictionAxiom
-
-RelationCardinalityRestrictionAxiom
+TBD
 
 **Value Restriction Axioms**
 
-ScalarPropertyValueRestrictionAxiom
-
-StructuredPropertyValueRestrictionAxiom
-
-RelationTargetRestrictionAxiom
+TBD
 
 ### Rule ### {#Rule-LR}
 
+TBD
+
 #### Predicates #### {#Predicates-LR}
 
-TypePredicate
-
-FeaturePredicate
-
-RelationEntityPredicate
-
-SameAsPredicate
-
-DifferentFromPredicate
+TBD
 
 ## Description ## {#Description-LR}
 
@@ -561,11 +670,11 @@ For example, the following description defines the components of a system and th
 `}`
 </pre>
 
-### Import ### {#Description-Import-LR}
+### Import ### {#DescriptionImport-LR}
 
 This section outlines the kind of import statements that can be added in a description's body.
 
-#### Usage #### {#Description-Usage-LR}
+#### Usage #### {#DescriptionUsage-LR}
 
 A [description usage](#DescriptionUsage) is a kind of [import](#Import) statement that can be added to a description to specify a vocabulary that it uses. This is typically needed in order to use the terms (types and properties) of the vocabulary in the description's instance definitions. A description usage is defined with the keyword `uses` followed by the imported vocabulary's NAMESPACE. If members of the imported vocabulary are to be referenced using their ABBREVIATED_IRIs, then the NAMESPACE needs to be followed by the keyword `as` and a unique prefix ID within the description's imports.
 
@@ -583,7 +692,7 @@ For example, the *components* description *uses* the *mission* vocabulary to des
 `}`
 </pre>
 
-#### Extension #### {#Description-Extension-LR}
+#### Extension #### {#DescriptionExtension-LR}
 
 A [description extension](#DescriptionExtension) is a kind of [import](#Import) statement that can be added to a description to specify that it extends another description. This can be used to split a system description into fragments that focus on different concerns or are contributed by different authorities. In this case, each description *extends* the other descriptions it depends on (e.g., by cross referencing named instances from them). A description extension is defined with the keyword `extends` followed by the imported description's NAMESPACE. If members of the imported description are to be referenced using their ABBREVIATED_IRIs, then the NAMESPACE needs to be followed by the keyword `as` and a unique prefix ID within the description's imports.
 
@@ -627,13 +736,17 @@ The following example description defines two concept instances: one named *comp
 `}`
 </pre>
 
-#### Relation Instance #### {#Relation-Instance-LR}
+#### Relation Instance #### {#RelationInstance-LR}
 
-#### Structure Instance #### {#Structure-Instance-LR}
+TBD
+
+#### Structure Instance #### {#StructureInstance-LR}
+
+TBD
 
 ### Assertions ### {#Assertions-LR}
 
-#### Scalar Property Value #### {#Scalar-Property-Value-LR}
+#### Scalar Property Value #### {#ScalarPropertyValueAssertion-LR}
 
 A value for a scalar property can be [asserted](#ScalarPropertyValueAssertion-Syntax) on a named instance (e.g., concept instance) in a description. Such assertion can be added as one of the assertions between the square  brackets `[` `]` of the instance. Its syntax consists of an IRI to a [scalar property](#ScalarProperty-Syntax) from some vocabulary followed by a literal.
 
@@ -656,9 +769,11 @@ The following example description defines two concept instances that each makes 
 `}`
 </pre>
 
-#### Structured Property Value #### {#Structured-Property-Value-LR}
+#### Structured Property Value #### {#StructuredPropertyValueAssertion-LR}
 
-#### Relation Link #### {#Link-LR}
+TBD
+
+#### Relation Link #### {#LinkAssertion-LR}
 
 A link, which is an unreified reference to a named instance (e.g., concept instance), can be [asserted](#ScalarPropertyValueAssertion-Syntax) on a named instance in a description. It represents a relation between the referencing instance (the source) and the referenced instance (the target). Such assertion can be added as one of the assertions between the square  brackets `[` `]` of the referencing instance. Its syntax consists of an IRI to a [relation](#Relation-Syntax) from some vocabulary followed by an IRI to a [named instance](#NamedInstance-Syntax) from some description.
 
@@ -684,7 +799,7 @@ The following example description defines two concept instances with a link asse
 
 Note: a link is typed by an unreified (forward or reverse) relation, hence (unlike a [relation instance](#RelationInstance-Syntax)) cannot have its own assertions.
 
-## Vocabulary Bundle ## {#Vocabulary-Bundle-LR}
+## Vocabulary Bundle ## {#VocabularyBundle-LR}
 
 A [vocabulary bundle](#VocabularyBundle-Syntax) is an ontology that bundles a set of vocabularies and allows description logic (DL) reasoning with [closed-world semantics](#Description-Logic-Semantics) using them (in contrast to a vocabulary that has [open-world semantics](#Description-Logic-Semantics)). A vocabulary bundle is declared with the keywords `vocabulary` `bundle` as its ontology kind, followed by its NAMESPACE, the keyword `as`, and its prefix ID.
 
@@ -700,9 +815,9 @@ For example, the following vocabulary bundle has the namespace *http://com.xyz/m
 `}`
 </pre>
 
-### Import ### {#Vocabulary-Bundle-Import-LR}
+### Import ### {#VocabularyBundleImport-LR}
 
-#### Inclusion #### {#Vocabulary-Bundle-Inclusion-LR}
+#### Inclusion #### {#VocabularyBundleInclusion-LR}
 
 An [vocabulary bundle inclusion](#VocabularyBundleInclusion) is a kind of [import](#Import) statement that can be added to a vocabulary bundle to specify that it includes a vocabulary. A vocabulary bundle inclusion is defined with the keyword `includes` followed by the imported vocabulary's NAMESPACE. If members of the imported vocabulary are to be referenced using their ABBREVIATED_IRIs, then the NAMESPACE needs to be followed by the keyword `as` and a unique prefix ID in the bundle's imports.
 
@@ -719,7 +834,7 @@ For example, the *foundation* vocabulary bundle *includes* two vocabularies: *mi
 `}`
 </pre>
 
-#### Extends #### {#Vocabulary-Bundle-Extends-LR}
+#### Extends #### {#VocabularyBundleExtension-LR}
 
 An [vocabulary bundle extends](#VocabularyBundleExtension) is a kind of [import](#Import) statement that can be added to a vocabulary bundle to specify that it extends another vocabulary bundle. This can be used to organize vocabulary bundles in layers that build on each other. Each bundle inherits the vocabularies contributed by its extended bundles and may optionally add to them other included vocabularies. This can, for example, be used to define a family of related vocabulary bundles that build on each other by tackling different incremental concerns. A vocabulary bundle extension is defined with the keyword `extends` followed by the imported vocabulary bundle's NAMESPACE.
 
@@ -737,7 +852,7 @@ For example, the *cyber-physical* vocabulary bundle *extends* the *foundation* v
 `}`
 </pre>
 
-## Description Bundle ## {#Description-Bundle-LR}
+## Description Bundle ## {#DescriptionBundle-LR}
 
 A [description bundle](#DescriptionBundle-Syntax) is an ontology that bundles a set of descriptions and allows them to be reasoned on as a dataset using description logic (DL). A description bundle is declared with the keywords `description` `bundle` as its ontology kind, followed by its NAMESPACE, the keyword `as`, and its prefix ID.
 
@@ -753,9 +868,9 @@ For example, the following description bundle has the namespace *http://com.xyz/
 `}`
 </pre>
 
-### Import ### {#Description-Bundle-Import-LR}
+### Import ### {#DescriptionBundleImport-LR}
 
-#### Inclusion #### {#Description-Bundle-Inclusion-LR}
+#### Inclusion #### {#DescriptionBundleInclusion-LR}
 
 A [description bundle inclusion](#DescriptionBundleInclusion) is a kind of [import](#Import) statement that can be added to a description bundle to specify that it includes a description. A description bundle inclusion is defined with the keyword `includes` followed by the imported description's NAMESPACE. If members of the imported description are to be referenced using their ABBREVIATED_IRIs, then the NAMESPACE needs to be followed by the keyword `as` and a unique prefix ID in the bundle's imports.
 
@@ -772,7 +887,7 @@ For example, the *mission1* description bundle *includes* two descriptions: *com
 `}`
 </pre>
 
-#### Usage #### {#Description-Bundle-Usage-LR}
+#### Usage #### {#DescriptionBundleUsage-LR}
 
 A [description bundle usage](#DescriptionBundleUsage) is a kind of [import](#Import) statement that can be added to a description bundle to specify that it uses a vocabulary bundle. This is typically done to specify the closed-world vocabulary bundle that this description bundle will be reasoned on with. A description bundle usage is defined with the keyword `uses` followed by the imported vocabulary bundle's NAMESPACE.
 
@@ -790,7 +905,7 @@ For example, the *mission1* description bundle *uses* the *foundation* vocabular
 `}`
 </pre>
 
-#### Extension #### {#Description-Bundle-Extension-LR}
+#### Extension #### {#DescriptionBundleExtension-LR}
 
 An [description bundle extension](#DescriptionBundleExtension) is a kind of [import](#Import) statement that can be added to a description bundle to specify that it extends another description bundle. This can be used to organize description bundles into layers that build on each other. Each bundle inherits the descriptions contributed by its extended bundles and optionally adds to them other descriptions. This can, for example, be used to define alternative datasets (e.g., representing alternative system designs) that extend a common dataset. A description bundle extension is defined with the keyword `extends` followed by the imported description bundle's NAMESPACE.
 
