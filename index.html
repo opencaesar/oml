@@ -1489,7 +1489,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version 0db738e8e, updated Fri Oct 29 17:30:15 2021 -0700" name="generator">
   <link href="https://github.com/opencaesar/oml" rel="canonical">
-  <meta content="35016ad51026c23763d2f99f59509e9888ad9d6d" name="document-revision">
+  <meta content="ea30e0c24a53bc0da4b4008630e4ca16e45cb0c7" name="document-revision">
 <style>
 body {
   padding: 0;
@@ -2080,7 +2080,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://opencaesar.github.io/oml/"> <img alt="Ontological Modeling Language" height="60" src="images/oml.svg"> </a></p>
    <h1 class="p-name no-ref" id="title">Ontological Modeling Language 1.0</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Living Document, <time class="dt-updated" datetime="2021-11-01">1 November 2021</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Living Document, <time class="dt-updated" datetime="2021-11-03">3 November 2021</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -2133,34 +2133,33 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
        <a href="#Vocabulary-LR"><span class="secno">3.2</span> <span class="content">Vocabulary</span></a>
        <ol class="toc">
         <li>
-         <a href="#Vocabulary-Import-LR"><span class="secno">3.2.1</span> <span class="content">Import</span></a>
+         <a href="#VocabularyImport-LR"><span class="secno">3.2.1</span> <span class="content">Import</span></a>
          <ol class="toc">
-          <li><a href="#Vocabulary-Extension-LR"><span class="secno">3.2.1.1</span> <span class="content">Extension</span></a>
-          <li><a href="#Vocabulary-Usage-LR"><span class="secno">3.2.1.2</span> <span class="content">Usage</span></a>
+          <li><a href="#VocabularyExtension-LR"><span class="secno">3.2.1.1</span> <span class="content">Extension</span></a>
+          <li><a href="#VocabularyUsage-LR"><span class="secno">3.2.1.2</span> <span class="content">Usage</span></a>
          </ol>
         <li>
          <a href="#Types-LR"><span class="secno">3.2.2</span> <span class="content">Types</span></a>
          <ol class="toc">
           <li><a href="#Aspect-LR"><span class="secno">3.2.2.1</span> <span class="content">Aspect</span></a>
           <li><a href="#Concept-LR"><span class="secno">3.2.2.2</span> <span class="content">Concept</span></a>
-          <li><a href="#Relation-Entity-LR"><span class="secno">3.2.2.3</span> <span class="content">Relation Entity</span></a>
+          <li><a href="#RelationEntity-LR"><span class="secno">3.2.2.3</span> <span class="content">Relation Entity</span></a>
           <li><a href="#Structure-LR"><span class="secno">3.2.2.4</span> <span class="content">Structure</span></a>
-          <li><a href="#Faceted-Scalar-LR"><span class="secno">3.2.2.5</span> <span class="content">Faceted Scalar</span></a>
-          <li><a href="#Enumerated-Scalar-LR"><span class="secno">3.2.2.6</span> <span class="content">Enumerated Scalar</span></a>
+          <li><a href="#FacetedScalar-LR"><span class="secno">3.2.2.5</span> <span class="content">Faceted Scalar</span></a>
+          <li><a href="#EnumeratedScalar-LR"><span class="secno">3.2.2.6</span> <span class="content">Enumerated Scalar</span></a>
          </ol>
         <li>
          <a href="#Properties-LR"><span class="secno">3.2.3</span> <span class="content">Properties</span></a>
          <ol class="toc">
-          <li><a href="#Scalar-Property-LR"><span class="secno">3.2.3.1</span> <span class="content">Scalar Property</span></a>
+          <li><a href="#ScalarProperty-LR"><span class="secno">3.2.3.1</span> <span class="content">Scalar Property</span></a>
           <li><a href="#StructuredProperty-LR"><span class="secno">3.2.3.2</span> <span class="content">Structured Property</span></a>
           <li><a href="#AnnotationProperty-LR"><span class="secno">3.2.3.3</span> <span class="content">Annotation Property</span></a>
          </ol>
         <li>
          <a href="#Axioms-LR"><span class="secno">3.2.4</span> <span class="content">Axioms</span></a>
          <ol class="toc">
-          <li><a href="#Specialization-LR"><span class="secno">3.2.4.1</span> <span class="content">Specialization</span></a>
-          <li><a href="#Key-LR"><span class="secno">3.2.4.2</span> <span class="content">Key</span></a>
-          <li><a href="#Restriction-LR"><span class="secno">3.2.4.3</span> <span class="content">Restriction</span></a>
+          <li><a href="#Key-LR"><span class="secno">3.2.4.1</span> <span class="content">Key</span></a>
+          <li><a href="#Restriction-LR"><span class="secno">3.2.4.2</span> <span class="content">Restriction</span></a>
          </ol>
         <li>
          <a href="#Rule-LR"><span class="secno">3.2.5</span> <span class="content">Rule</span></a>
@@ -2172,45 +2171,45 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
        <a href="#Description-LR"><span class="secno">3.3</span> <span class="content">Description</span></a>
        <ol class="toc">
         <li>
-         <a href="#Description-Import-LR"><span class="secno">3.3.1</span> <span class="content">Import</span></a>
+         <a href="#DescriptionImport-LR"><span class="secno">3.3.1</span> <span class="content">Import</span></a>
          <ol class="toc">
-          <li><a href="#Description-Usage-LR"><span class="secno">3.3.1.1</span> <span class="content">Usage</span></a>
-          <li><a href="#Description-Extension-LR"><span class="secno">3.3.1.2</span> <span class="content">Extension</span></a>
+          <li><a href="#DescriptionUsage-LR"><span class="secno">3.3.1.1</span> <span class="content">Usage</span></a>
+          <li><a href="#DescriptionExtension-LR"><span class="secno">3.3.1.2</span> <span class="content">Extension</span></a>
          </ol>
         <li>
          <a href="#Instances-LR"><span class="secno">3.3.2</span> <span class="content">Instances</span></a>
          <ol class="toc">
           <li><a href="#ConceptInstance-LR"><span class="secno">3.3.2.1</span> <span class="content">Concept Instance</span></a>
-          <li><a href="#Relation-Instance-LR"><span class="secno">3.3.2.2</span> <span class="content">Relation Instance</span></a>
-          <li><a href="#Structure-Instance-LR"><span class="secno">3.3.2.3</span> <span class="content">Structure Instance</span></a>
+          <li><a href="#RelationInstance-LR"><span class="secno">3.3.2.2</span> <span class="content">Relation Instance</span></a>
+          <li><a href="#StructureInstance-LR"><span class="secno">3.3.2.3</span> <span class="content">Structure Instance</span></a>
          </ol>
         <li>
          <a href="#Assertions-LR"><span class="secno">3.3.3</span> <span class="content">Assertions</span></a>
          <ol class="toc">
-          <li><a href="#Scalar-Property-Value-LR"><span class="secno">3.3.3.1</span> <span class="content">Scalar Property Value</span></a>
-          <li><a href="#Structured-Property-Value-LR"><span class="secno">3.3.3.2</span> <span class="content">Structured Property Value</span></a>
-          <li><a href="#Link-LR"><span class="secno">3.3.3.3</span> <span class="content">Relation Link</span></a>
+          <li><a href="#ScalarPropertyValueAssertion-LR"><span class="secno">3.3.3.1</span> <span class="content">Scalar Property Value</span></a>
+          <li><a href="#StructuredPropertyValueAssertion-LR"><span class="secno">3.3.3.2</span> <span class="content">Structured Property Value</span></a>
+          <li><a href="#LinkAssertion-LR"><span class="secno">3.3.3.3</span> <span class="content">Relation Link</span></a>
          </ol>
        </ol>
       <li>
-       <a href="#Vocabulary-Bundle-LR"><span class="secno">3.4</span> <span class="content">Vocabulary Bundle</span></a>
+       <a href="#VocabularyBundle-LR"><span class="secno">3.4</span> <span class="content">Vocabulary Bundle</span></a>
        <ol class="toc">
         <li>
-         <a href="#Vocabulary-Bundle-Import-LR"><span class="secno">3.4.1</span> <span class="content">Import</span></a>
+         <a href="#VocabularyBundleImport-LR"><span class="secno">3.4.1</span> <span class="content">Import</span></a>
          <ol class="toc">
-          <li><a href="#Vocabulary-Bundle-Inclusion-LR"><span class="secno">3.4.1.1</span> <span class="content">Inclusion</span></a>
-          <li><a href="#Vocabulary-Bundle-Extends-LR"><span class="secno">3.4.1.2</span> <span class="content">Extends</span></a>
+          <li><a href="#VocabularyBundleInclusion-LR"><span class="secno">3.4.1.1</span> <span class="content">Inclusion</span></a>
+          <li><a href="#VocabularyBundleExtension-LR"><span class="secno">3.4.1.2</span> <span class="content">Extends</span></a>
          </ol>
        </ol>
       <li>
-       <a href="#Description-Bundle-LR"><span class="secno">3.5</span> <span class="content">Description Bundle</span></a>
+       <a href="#DescriptionBundle-LR"><span class="secno">3.5</span> <span class="content">Description Bundle</span></a>
        <ol class="toc">
         <li>
-         <a href="#Description-Bundle-Import-LR"><span class="secno">3.5.1</span> <span class="content">Import</span></a>
+         <a href="#DescriptionBundleImport-LR"><span class="secno">3.5.1</span> <span class="content">Import</span></a>
          <ol class="toc">
-          <li><a href="#Description-Bundle-Inclusion-LR"><span class="secno">3.5.1.1</span> <span class="content">Inclusion</span></a>
-          <li><a href="#Description-Bundle-Usage-LR"><span class="secno">3.5.1.2</span> <span class="content">Usage</span></a>
-          <li><a href="#Description-Bundle-Extension-LR"><span class="secno">3.5.1.3</span> <span class="content">Extension</span></a>
+          <li><a href="#DescriptionBundleInclusion-LR"><span class="secno">3.5.1.1</span> <span class="content">Inclusion</span></a>
+          <li><a href="#DescriptionBundleUsage-LR"><span class="secno">3.5.1.2</span> <span class="content">Usage</span></a>
+          <li><a href="#DescriptionBundleExtension-LR"><span class="secno">3.5.1.3</span> <span class="content">Extension</span></a>
          </ol>
        </ol>
      </ol>
@@ -2483,15 +2482,37 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
 <code>}</code>
 </pre>
     <p>An ontology’s NAMESPACE is made up of an IRI and a separator character (either <code>#</code> or <code>/</code>). For example, <code>http://www.w3.org/2002/07/owl#</code> is a logical NAMESPACE that consists of IRI <code>http://www.w3.org/2002/07/owl</code> and separator character <code>#</code>. An ontology’s IRI can be any opaque string but is usually specified as a URL in the format <code>http://&lt;organization>/&lt;path></code>. An ontology’s ID is a short name that is used as a NAMESPACE prefix (e.g., <code>owl</code> is a prefix for <code>http://www.w3.org/2002/07/owl#</code>) when referencing an ontology member using the ABBREVIATED_IRI syntax (see section <a href="#IRI-LR">IRIs</a> below).</p>
+    <p>OML supports 4 kinds of concrete ontologies that address different use cases:</p>
+    <ul>
+     <li data-md>
+      <p><a href="#Vocabulary-LR">Vocabulary</a>: allows definition of ontological terms and rules for a domain with open-world semantics</p>
+     <li data-md>
+      <p><a href="#VocabularyBundle-LR">Vocabulary Bundle</a>: allows combining vocabularies into a methodology with closed-world semantics</p>
+     <li data-md>
+      <p><a href="#Description-LR">Description</a>: allows definition of systems as instances characterized using some vocabulary</p>
+     <li data-md>
+      <p><a href="#DescriptionBundle-LR">Description Bundle</a>: allows combining descriptions into a dataset that can be reasoned on.</p>
+    </ul>
     <h4 class="heading settled" data-level="3.1.4" id="Import-LR"><span class="secno">3.1.4. </span><span class="content">Import</span><a class="self-link" href="#Import-LR"></a></h4>
     <p>An ontology can import zero or more other ontologies, which allows it to cross-reference the imported ontologies' members. This is accomplished by an ontology adding an import statement in its body (before other kinds of statements). An import statement is declared using one of the <code>&lt;import></code> keywords (see <a href="#Import-Syntax">import syntax</a> for details) followed by the imported ontology’s NAMESPACE and optionally its ID.</p>
 <pre class="highlight highlight-html"><code>&lt;ontology></code> NAMESPACE <code>as</code> ID <code>{</code>
     <code>&lt;import></code> NAMESPACE (<code>as</code> ID)?
 }
 </pre>
-    <p class="note" role="note"><span>Note:</span> An imported ontology’s ID is only required in the import syntax when its members are cross-referenced using an ABBREVIATED_IRI syntax.</p>
-    <p class="note" role="note"><span>Note:</span> An ontology’s import closure is defined as all the ontologies that are imported directly or indirectly by an ontology</p>
-    <p class="note" role="note"><span>Note:</span> An ontology whose members are referenced by another ontology needs to be directly imported (it is not enough to be indirectly imported).</p>
+    <p class="note" role="note"><span>Note:</span> An ID is required in the import syntax only when imported members are cross-referenced using the ABBREVIATED_IRI syntax.</p>
+    <p class="note" role="note"><span>Note:</span> An ontology’s import closure is defined as all the ontologies that are imported directly or indirectly by the ontology</p>
+    <p class="note" role="note"><span>Note:</span> An ontology whose members are referenced by another ontology needs to be directly imported by it (it is not enough to be indirectly imported).</p>
+    <p>OML supports several kinds of concret imports for each one of its ontology kinds:</p>
+    <ul>
+     <li data-md>
+      <p>Vocabulary:<a href="#VocabularyExtension-LR">Extension</a>, <a href="#VocabularyUsage-LR">Usage</a></p>
+     <li data-md>
+      <p>Vocabulary Bundle: <a href="#VocabularyBundleExtension-LR">Extension</a>, <a href="#VocabularyBundleInclusion-LR">Inclusion</a></p>
+     <li data-md>
+      <p>Description: <a href="#DescriptionExtension-LR">Extension</a>, <a href="#DescriptionUsage-LR">Usage</a></p>
+     <li data-md>
+      <p>Description Bundle: <a href="#DescriptionBundleExtension-LR">Extension</a>, <a href="#DescriptionBundleInclusion-LR">Inclusion</a>, <a href="#DescriptionBundleUsage-LR">Usage</a></p>
+    </ul>
     <h4 class="heading settled" data-level="3.1.5" id="Member-LR"><span class="secno">3.1.5. </span><span class="content">Member</span><a class="self-link" href="#Member-LR"></a></h4>
     <p>An ontology can define zero or more members, which are named elements whose IRIs consist of their ontology’s NAMESPACE concatenated to their own (name) IDs. For example, a member whose name ID is <code>AggregatedElement</code>, and is defined in an ontology with the IRI <code>http://imce.jpl.nasa.gov/foundation/base#</code>, has a member IRI <code>http://imce.jpl.nasa.gov/foundation/base#AggregatedElement</code>.</p>
 <pre class="highlight highlight-html"><code>&lt;ontology></code> NAMESPACE <code>as</code> ID <code>{</code>
@@ -2499,6 +2520,13 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
 <code>}</code>
 </pre>
     <p>Members can only be defined by their own ontology but can be referenced by other importing ontologies. Different ontology kinds define different member kinds (see the various ontology sections for details). The syntax for declaring members vary depending on the member kind, but at least consists of one of the <code>&lt;member></code> keywords (see <a href="#Member-Syntax">members</a> for details) followed by the member’s ID that must be unique within the ontology.</p>
+    <p>OML supports several kinds of concrete members for each of its ontology kinds:</p>
+    <ul>
+     <li data-md>
+      <p>Vocabulary: <a href="#Aspect-LR">Aspect</a>, <a href="#Concept-LR">Concept</a>, <a href="#RelationEntity-LR">Relation Entity</a>, <a href="#Structure-LR">Structure</a>, <a href="#FacetedScalar-LR">Faceted Scalar</a>, <a href="#EnumeratedScalar-LR">Enumerated Scalar</a>, <a href="#ScalarProperty-LR">Scalar Property</a>, <a href="#StructuredProperty-LR">Structured Property</a>, <a href="#AnnotationProperty-LR">Annotation Property</a>, <a href="#Rule-LR">Rule</a></p>
+     <li data-md>
+      <p>Description: <a href="#ConceptInstance-LR">Concept Instance</a>, <a href="#RelationInstance-LR">Relation Instance</a></p>
+    </ul>
     <h4 class="heading settled" data-level="3.1.6" id="Reference-LR"><span class="secno">3.1.6. </span><span class="content">Reference</span><a class="self-link" href="#Reference-LR"></a></h4>
     <p>An ontology can have zero or more references, which are constructs that allow adding extra statements about existing members (as opposed to defining new ones). The referenced members may either be local to the ontology or external (i.e., defined by another ontology in its import closure). A syntax of a reference consists of the keyword <code>ref</code> followed by the one of the <code>&lt;member></code> keywords and then the member’s IRI. The IRI can either be the member ID (when it is local to the ontology only), its FULL_IRI or its ABBREVIATED_IRI.</p>
 <pre class="highlight highlight-html"><code>&lt;ontology></code> NAMESPACE <code>as</code> ID <code>{</code>
@@ -2557,7 +2585,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
 <code>}</code>
 </pre>
     <h4 class="heading settled" data-level="3.1.8" id="Literal-LR"><span class="secno">3.1.8. </span><span class="content">Literal</span><a class="self-link" href="#Literal-LR"></a></h4>
-    <p>A <a href="#Literal-Syntax">literal</a> represents a value typed by a <a href="#Faceted-Scalar-LR">scalar</a> type (defined by a <a href="#Vocabulary-LR">vocabulary</a>). OML supports specifying a literal as a quoted literal or as an abbreviated literal (for some specific scalars).</p>
+    <p>A <a href="#Literal-Syntax">literal</a> represents a value typed by a <a href="#FacetedScalar-LR">scalar</a> type (defined by a <a href="#Vocabulary-LR">vocabulary</a>). OML supports specifying a literal as a quoted literal or as an abbreviated literal (for some specific scalars).</p>
     <p><em>Quoted Literal</em></p>
     <p>A quoted literal is a generic way of specifying a literal. It consists of the lexical form followed by a language tag, a scalar IRI, or neither.</p>
     <p>The lexical form consists of a set of characters surrounded by a pair of delimiters, which can be single quotes (<code>'value'</code>), double quotes, (<code>"value"</code>), three single quotes (<code>'''value'''</code>), or three double quotes (<code>"""value"""</code>).</p>
@@ -2574,7 +2602,7 @@ Second Paragraph'''
 <pre class="highlight highlight-html">"This is good"$en
 "Ca va bien"$fr
 </pre>
-    <p>The optional scalar IRI is used to specify the scalar that a literal belongs to (<em>xsd:string</em> by default). However, the reference can be to any of OML’s <a href="#Faceted-Scalar-LR">standard scalars</a> only (i.e., not their specializations). It is specified by appending the <code>^^</code> characters to the lexical form followed by an IRI to the scalar. Examples of quoted literals with scalar references:</p>
+    <p>The optional scalar IRI is used to specify the scalar that a literal belongs to (<em>xsd:string</em> by default). However, the reference can be to any of OML’s <a href="#FacetedScalar-LR">standard scalars</a> only (i.e., not their specializations). It is specified by appending the <code>^^</code> characters to the lexical form followed by an IRI to the scalar. Examples of quoted literals with scalar references:</p>
 <pre class="highlight highlight-html">"Component"^^xsd:string
 "2.0"^^xsd:double
 'true'^^xsd:boolean
@@ -2619,9 +2647,9 @@ true        // xsd:boolean
 <pre class="highlight highlight-html"><code>vocabulary</code> <code>&lt;</code>http://com.xyz/methodology/mission#<code>></code> <code>as</code> mission <code>{</code>
 <code>}</code>
 </pre>
-    <h4 class="heading settled" data-level="3.2.1" id="Vocabulary-Import-LR"><span class="secno">3.2.1. </span><span class="content">Import</span><a class="self-link" href="#Vocabulary-Import-LR"></a></h4>
+    <h4 class="heading settled" data-level="3.2.1" id="VocabularyImport-LR"><span class="secno">3.2.1. </span><span class="content">Import</span><a class="self-link" href="#VocabularyImport-LR"></a></h4>
     <p>This section outlines the kind of import statements that can be added to a vocabulary.</p>
-    <h5 class="heading settled" data-level="3.2.1.1" id="Vocabulary-Extension-LR"><span class="secno">3.2.1.1. </span><span class="content">Extension</span><a class="self-link" href="#Vocabulary-Extension-LR"></a></h5>
+    <h5 class="heading settled" data-level="3.2.1.1" id="VocabularyExtension-LR"><span class="secno">3.2.1.1. </span><span class="content">Extension</span><a class="self-link" href="#VocabularyExtension-LR"></a></h5>
     <p>A <a href="#VocabularyExtension">vocabulary extension</a> is a kind of <a href="#Import">import</a> statement that can be added to a vocabulary to specify that it extends another vocabulary. This is typically needed when members of the extended vocabulary are cross-reference by the local members of the extending vocabulary.  A vocabulary extension is defined with the keyword <code>extends</code> followed by the imported vocabulary’s NAMESPACE. If members of the imported vocabulary are to be referenced using their ABBREVIATED_IRIs, then the NAMESPACE needs to be followed by the keyword <code>as</code> and a namespace prefix ID that is unique within the vocabulary’s imports.</p>
 <pre class="highlight highlight-html"><code>extends</code> NAMESPACE (<code>as</code> ID)?
 </pre>
@@ -2635,7 +2663,7 @@ true        // xsd:boolean
     ]
 <code>}</code>
 </pre>
-    <h5 class="heading settled" data-level="3.2.1.2" id="Vocabulary-Usage-LR"><span class="secno">3.2.1.2. </span><span class="content">Usage</span><a class="self-link" href="#Vocabulary-Usage-LR"></a></h5>
+    <h5 class="heading settled" data-level="3.2.1.2" id="VocabularyUsage-LR"><span class="secno">3.2.1.2. </span><span class="content">Usage</span><a class="self-link" href="#VocabularyUsage-LR"></a></h5>
     <p>A <a href="#VocabularyUsage">vocabulary usage</a> is a kind of <a href="#Import">import</a> statement that can be added to a vocabulary to specify that it uses a <a href="#Description-LR">description</a>. This is typically needed when the vocabulary uses one or more of the description’s instances in its restriction axioms. A vocabulary usage is defined with the keyword <code>extends</code> followed by the imported description’s NAMESPACE. If members of the imported description are to be referenced using their ABBREVIATED_IRIs, then the NAMESPACE needs to be followed by the keyword <code>as</code> and a namespace prefix ID that is unique within the vocabulary’s imports.</p>
 <pre class="highlight highlight-html"><code>uses</code> NAMESPACE (<code>as</code> ID)?
 </pre>
@@ -2650,8 +2678,8 @@ true        // xsd:boolean
 </pre>
     <p class="note" role="note"><span>Note:</span> descriptions that are used by a vocabulary typically define notable instances that are cross-referenced by other descriptions using this vocabulary.</p>
     <h4 class="heading settled" data-level="3.2.2" id="Types-LR"><span class="secno">3.2.2. </span><span class="content">Types</span><a class="self-link" href="#Types-LR"></a></h4>
-    <p>Types that can be defined in a vocabulary are either <em>classifiers</em> (types of structured instances) or <em>scalars</em> (types of primitive values). Some classifiers (like <code>Aspect</code>, <code>Concept</code> and <code>Relation Entity</code>) are <em>entities</em>, meaning they can classify named instances, while others (like <code>Structure</code>) can only classify anonymous instances. Also, some scalars (like <code>Faceted Scalar</code>) can classify unlimited literals, while others (like <code>Enumerated Scalar</code>) can classify a limited set of literals.</p>
-    <p>Classifiers can specialize one or more classifiers, while scalars can only specialize one scalar only. These specializations are constrainted as discussed below for each type.</p>
+    <p>Types that can be defined in a vocabulary are either <em>classifiers</em> (structured types) or <em>scalars</em> (primitive types). Some classifiers (<a href="#Aspect-LR">Aspect</a>, <a href="#Concept-LR">Concept</a> and <a href="(#RelationEntity-LR">Relation Entity</a>)) are <em>entities</em>, meaning they can classify named instances (that are unique by reference). Other classifiers (<a href="#Structure-LR">Structure</a>) can only classify anonymous instances (that are unique by value). Also, some scalars (<a href="#FacetedScalar-LR">Faceted Scalar</a>) can classify an unlimited set literals, while other scalars (<a href="#EnumeratedScalar-LR">Enumerated Scalar</a>) can only classify a limited set of literals.</p>
+    <p>Classifiers can specialize one or more classifiers (multiple-inheritance), while scalars can only specialize one scalar only (single-inheritance). These specializations are further constrainted for each type as discussed below.</p>
     <h5 class="heading settled" data-level="3.2.2.1" id="Aspect-LR"><span class="secno">3.2.2.1. </span><span class="content">Aspect</span><a class="self-link" href="#Aspect-LR"></a></h5>
     <p>An <a href="#Concept-Syntax">aspect</a> is an entity defined in a vocabulary and represents a mixin type (or a capability) in a modeled domain. An aspect can only specialize other aspects, but can be specialized by any entity. An Aspect cannot be asserted as a type of instances in a description (there is no aspect instance), but can be inferred (by a DL reasoner) as such, if it is one of the supertypes of an asserted type.</p>
     <p>An aspect is declared with the keyword <code>aspect</code> followed by the aspect’s name ID. It can optionally specialize other aspects by following its name ID by the <code>:></code> symbol then a comma-separated list of those supertypes' IRIs. An aspect can also optionally specify a list of axioms enclosed within a pair of square brackets <code>[</code> <code>]</code>.</p>
@@ -2659,21 +2687,20 @@ true        // xsd:boolean
     Axiom*
 <code>]</code>)?
 </pre>
-    <p>The following example vocabulary defines two aspects: <em>IdentifiedElement</em> and <em>NamedElement</em> where the latter specializes the former.</p>
+    <p>The following example vocabulary defines two aspects: <em>IdentifiedElement</em> and <em>NamedElement</em> where the latter specializes the former (notice how <em>IdentifiedElement</em> is referenced by its ID as a supertype, since it is defined locally within the same vocabulary).</p>
 <pre class="highlight highlight-html"><code>vocabulary</code> <code>&lt;</code>http://com.xyz/methodology/mission#<code>></code> <code>as</code> mission <code>{</code>
     <code>aspect</code> IdentifiedElement
     <code>aspect</code> NamedElement :> IdentifiedElement
 <code>}</code>
 </pre>
-    <p>Notice: that <em>IdentifiedElement</em> is referenced by its ID as a supertype, since it is defined locally within the same vocabulary.</p>
     <h5 class="heading settled" data-level="3.2.2.2" id="Concept-LR"><span class="secno">3.2.2.2. </span><span class="content">Concept</span><a class="self-link" href="#Concept-LR"></a></h5>
-    <p>A <a href="#Concept-Syntax">concept</a> is an entity defined in a vocabulary and represents a concrete type in a modeled domain. A concept can specialize other concepts or aspects, but can be specialized by other concepts only. It can also be asserted as a type of <a href="#ConceptInstance-LR">concept instance</a> in a description.</p>
+    <p>A <a href="#Concept-Syntax">concept</a> is an entity defined in a vocabulary and represents a concrete type in a modeled domain. A concept can specialize other concepts or aspects, but can be specialized by other concepts only. It can also be asserted as a type of a <a href="#ConceptInstance-LR">concept instance</a>.</p>
     <p>A concept is declared with the keyword <code>concept</code> followed by the concept’s name ID. It can optionally specialize other concepts or aspects by following its name ID by the <code>:></code> symbol then a comma-separated list of those supertypes' IRIs. A concept can also optionally specify a list of axioms enclosed within a pair of square brackets <code>[</code> <code>]</code>.</p>
 <pre class="highlight highlight-html"><code>concept</code> ID (<code>:></code> [Concept|Aspect|IRI] (<code>,</code> [Concept|Aspect|IRI])*)? (<code>[</code>
     Axiom*
 <code>]</code>)?
 </pre>
-    <p>The following example vocabulary defines two concepts: <em>Component</em> and <em>Function</em>. The former concept specializes aspects <em>IdentifiedElement</em> and <em>ContainedElement</em> (which add these capabilities to the concept).</p>
+    <p>The following example vocabulary defines two concepts: <em>Component</em> and <em>Function</em>, where the former specializes two aspects <em>IdentifiedElement</em> and <em>ContainedElement</em>.</p>
 <pre class="highlight highlight-html"><code>vocabulary</code> <code>&lt;</code>http://com.xyz/methodology/mission#<code>></code> <code>as</code> mission <code>{</code>
     <code>aspect</code> IdentifiedElement
     <code>aspect</code> ContainedElement
@@ -2681,101 +2708,213 @@ true        // xsd:boolean
     <code>concept</code> Function
 <code>}</code>
 </pre>
-    <h5 class="heading settled" data-level="3.2.2.3" id="Relation-Entity-LR"><span class="secno">3.2.2.3. </span><span class="content">Relation Entity</span><a class="self-link" href="#Relation-Entity-LR"></a></h5>
-    <p>is a term defined in a vocabulary and represents a reified relation between two entities (e.g., concepts), one of them playing the relation’s source, while the other playing the relation’s target. A relation entity is defined with the keywords <code>relation</code> <code>entity</code> followed by a name ID and a pair of square brackets <code>[</code> <code>]</code> that specify, by reference, the relation’s <code>from</code> entity and <code>to</code> entity. A relation entity can optionally specify name IDs of two unreified <a href="#Relation-Syntax">relations</a>, a <code>forward</code> relation and a <code>reverse</code> relation, between the two entities.</p>
-<pre class="highlight highlight-html"><code>relation</code> <code>entity</code> ID <code>[</code>
-    <code>from</code> [Entity|IRI]
-    <code>to</code> [Entity|IRI]
-    (<code>forward</code> ID)?
-    (<code>reverse</code> ID)?
+    <h5 class="heading settled" data-level="3.2.2.3" id="RelationEntity-LR"><span class="secno">3.2.2.3. </span><span class="content">Relation Entity</span><a class="self-link" href="#RelationEntity-LR"></a></h5>
+    <p>A <a href="#RelationEntity-LR">Relation Entity</a> is an entity defined in a vocabulary and represents a type of reified relation between two other entities, a source entity and a target entity. A relation entity is defined with the keywords <code>relation</code> <code>entity</code> followed by a name ID and a pair of square brackets <code>[</code> <code>]</code> that specify by IRI the relation’s <code>from</code> (source) entity and <code>to</code> (target) entity, and optionally the names of unreified relations, semantic flags, and/or axioms.</p>
+<pre class="highlight highlight-html"> <code>relation</code> <code>entity</code> ID <code>[</code>
+     <code>from</code> [Entity|IRI]                 // the relation entity’s source
+     <code>to</code> [Entity|IRI]                   // the relation entity’s target
+     (<code>forward</code> ID)?                     // an unreified relation from source to target
+     (<code>reverse</code> ID)?                     // an unreified relation from targt to source
+     <code>functional</code>?                       // each source can be related to a maximum of 1 target
+     (<code>inverse</code> <code>functional</code>)?             // each target can be related to a maximum of 1 source
+     <code>symmetric</code>?                        // if a source is related to a target, then the target must also related to the source
+     <code>asymmetric</code>?                       // if a source is related to a target, then the target cannot be related to the source
+     <code>reflexive</code>?                        // a source must be related to itself
+     <code>irreflexive</code>?                      // a source cannot be related to itself
+     <code>transitive</code>?                       // if A is related to B, and B is related to C, then A is related to C
+     Axiom*                            // zero or more axioms of the relation entity
 <code>]</code>
 </pre>
-    <p>A diagram that visualizes the relation entity pattern is given below.</p>
-<pre>    <img src="images/Relation-Entity-Pattern.svg"></pre>
-    <p>The following example vocabulary defines a relation entity named <em>Performs</em> from the concept <em>Component</em> to the concept <em>Function with a forward relation named </em>performs* and a reverse relation called <em>isPerformedBy</em>. This forward relation can be used to specify that some concept performs some function, while the reverse relation can be used to specify that the function is performed by the component.</p>
+    <p>The following example vocabulary defines a relation entity named <em>Performs</em> from the concept <em>Component</em> to the concept <em>Function</em>.</p>
 <pre class="highlight highlight-html"><code>vocabulary</code> <code>&lt;</code>http://com.xyz/methodology/mission#<code>></code> <code>as</code> mission <code>{</code>
-    <code>extends</code> <code>&lt;</code>http://www.w3.org/2001/XMLSchema#<code>></code> <code>as</code> xsd
     <code>concept</code> Component
     <code>concept</code> Function
-    <code>scalar</code> <code>property</code> hasId <code>[</code>
-        <code>domain</code> Component
-        <code>range</code> xsd:string
+    <code>relation</code> <code>entity</code> Performs <code>[</code>
+        <code>from</code> Component
+        <code>to</code> Function
     <code>]</code>
-    <code>scalar</code> <code>property</code> hasName <code>[</code>
-        <code>domain</code> Function
-        <code>range</code> xsd:string
-    <code>]</code>
-    <code>scalar</code> <code>property</code> isAbstract <code>[</code>
-        <code>domain</code> Function
-        <code>range</code> xsd:boolean
-    <code>]</code>
+<code>}</code>
+</pre>
+    <p>Since a relation entity is a reifed relation, it can be asserted as a type of a <a href="#RelationInstance-LR">relation instance</a> between one or more source instances, and one or more target instances. Such instance can be annotated and characterized with assertions. However, a relation entity can also optionally specify (in its body) one or two companion unreified relations that can be asserted as simple (uncharacterized) <a href="#LinkAssertion-LR">links</a> between a source and a target instance. One of those unrefied relations is declared with the keyword <code>forward</code> followed by a name ID, while the other is declared with the keyword <code>reverse</code> followed by a name ID. The forward relation has the <code>from</code> entity as its domain, and the <code>to</code> entity as its range, while the reverse relation has the opposite. When both are declared, the forward and reverse relations become inverse of each other, meaning if one is used to link a source instance to a target instance, the other is inferred as a link from the target to the source. Also, when a relation instance is typed by a relation entity, which has one ore more unreifed relations, such relations are inferred as links between the set of related sources and target instances. The following diagram depicts the design pattern implied by a relation entity.</p>
+<pre>    <img src="images/Relation-Entity-Pattern.svg"></pre>
+    <p>The example vocabulary below refines the <em>Performs</em> relation entity with two unreifed relations: <em>performs</em> (as forward) and <em>isPerformedBy</em> (as reverse).</p>
+<pre class="highlight highlight-html"><code>vocabulary</code> <code>&lt;</code>http://com.xyz/methodology/mission#<code>></code> <code>as</code> mission <code>{</code>
+    <code>concept</code> Component
+    <code>concept</code> Function
     <code>relation</code> <code>entity</code> Performs <code>[</code>
         <code>from</code> Component
         <code>to</code> Function
         <code>forward</code> performs
         <code>reverse</code> isPerformedBy
-    <code>]</code>
+   <code>]</code>
 <code>}</code>
 </pre>
-    <p>A relation entity is both a <a href="#Classifier-Syntax">classifier</a>, allowing it to be a domain for a property, and an <a href="#Entity-Syntax">entity</a>, allowing it to be a source and target of a relation entity in a vocabulary. Also, by being reified, a relation entity can have instances (called <a href="#RelationInstance-Syntax">relation instances</a>) in a description model that are typed by it. Such instances can specify values to their properties and be linked bo other related instances. On the other hand, the forward and the reverse relation are unreified, allowing them to only be types of links (vs. relation instances) between related instances in a description model, but cannot express any property values nor be themselves linked to/from related instances.</p>
-    <h5 class="heading settled" data-level="3.2.2.4" id="Structure-LR"><span class="secno">3.2.2.4. </span><span class="content">Structure</span><a class="self-link" href="#Structure-LR"></a></h5>
-    <h5 class="heading settled" data-level="3.2.2.5" id="Faceted-Scalar-LR"><span class="secno">3.2.2.5. </span><span class="content">Faceted Scalar</span><a class="self-link" href="#Faceted-Scalar-LR"></a></h5>
-    <p>A <a href="#Scalar-Syntax">scalar</a> is a term defined in a vocabulary and represents a class of literal values (e.g., <em>1</em>, <em>"abc"</em>, <em>2.00</em>, <em>true</em>, etc.).</p>
-    <p>OML uses some standard datatypes with the following IRIs:</p>
-<pre class="highlight highlight-html">// Number Scalars
-http://www.w3.org/2001/XMLSchema#decimal
-http://www.w3.org/2001/XMLSchema#integer
-http://www.w3.org/2001/XMLSchema#long
-http://www.w3.org/2001/XMLSchema#int
-http://www.w3.org/2001/XMLSchema#short
-http://www.w3.org/2001/XMLSchema#byte
-http://www.w3.org/2001/XMLSchema#nonNegativeInteger
-http://www.w3.org/2001/XMLSchema#positiveInteger
-http://www.w3.org/2001/XMLSchema#unsignedLong
-http://www.w3.org/2001/XMLSchema#unsignedInt
-http://www.w3.org/2001/XMLSchema#unsignedShort
-http://www.w3.org/2001/XMLSchema#unsignedByte
-http://www.w3.org/2001/XMLSchema#nonPositiveInteger
-http://www.w3.org/2001/XMLSchema#negativeInteger
-http://www.w3.org/2001/XMLSchema#double
-http://www.w3.org/2001/XMLSchema#float
-http://www.w3.org/2002/07/owl#real
-http://www.w3.org/2002/07/owl#rational
-
-// String Scalars
-http://www.w3.org/2001/XMLSchema#string
-http://www.w3.org/2001/XMLSchema#normalizedString
-http://www.w3.org/2001/XMLSchema#token
-http://www.w3.org/2001/XMLSchema#language
-http://www.w3.org/2001/XMLSchema#Name
-http://www.w3.org/2001/XMLSchema#NCName
-http://www.w3.org/2001/XMLSchema#NMTOKEN
-
-// Boolean Scalars
-http://www.w3.org/2001/XMLSchema#boolean
-
-// Binary Scalars
-http://www.w3.org/2001/XMLSchema#hexBinary
-http://www.w3.org/2001/XMLSchema#base64Binary
-        
-// Time Scalars
-http://www.w3.org/2001/XMLSchema#dateTime
-http://www.w3.org/2001/XMLSchema#dateTimeStamp
-
-// IRI Scalars
-http://www.w3.org/2001/XMLSchema#anyURI
-
-// Literal Scalars
-http://www.w3.org/2000/01/rdf-schema#Literal
-http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral
-http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral
-
+    <p>A relation entity can optionally specify one or more semantic flags (within its body) that define its logical semantics:</p>
+    <ul>
+     <li data-md>
+      <p>The <code>functional</code> flag implies that a source instance can be related to a maximum of 1 target instance.</p>
+     <li data-md>
+      <p>The <code>inverse functional</code> flag implies that a target instance can be related to a maximum of 1 source instance.</p>
+     <li data-md>
+      <p>The <code>symmetric</code> flag implies that if a source instance is related to a target instance, then the target must also related to the source.</p>
+     <li data-md>
+      <p>The <code>asymmetric</code> flag implies that if a source instance is related to a target instance, then the target cannot be related to the source.</p>
+     <li data-md>
+      <p>The <code>reflexive</code> flag implies that a source instance must be related to itself.</p>
+     <li data-md>
+      <p>The <code>irreflexive</code> flag implies that a source instance cannot be related to itself.</p>
+     <li data-md>
+      <p>The <code>transitive</code> flag implies if instance A is related to instance B, and instance B is related to instance C, then A is also related to C.</p>
+    </ul>
+    <p>The example vocabulary below refines the <em>Performs</em> relation to add the flag <code>inverse functional</code> (to specify that a function can be performed by a maximum of one component), the flag <code>asymmetric</code> (to specify that a function cannot peform a component), and the flag <code>irreflexive</code> (to specify that a component cannot perform itself).</p>
+<pre class="highlight highlight-html"><code>vocabulary</code> <code>&lt;</code>http://com.xyz/methodology/mission#<code>></code> <code>as</code> mission <code>{</code>
+    <code>concept</code> Component
+    <code>concept</code> Function
+    <code>relation</code> <code>entity</code> Performs <code>[</code>
+        <code>from</code> Component
+        <code>to</code> Function
+        <code>forward</code> performs
+        <code>reverse</code> isPerformedBy
+        <code>inverse functional</code>
+        <code>asymmetric</code>
+        <code>irreflexive</code>
+   <code>]</code>
+<code>}</code>
 </pre>
-    <p class="note" role="note"><span>Note:</span> the definitions for these standard scalars are provided in their respective (<a href="https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/#built-in-datatypes">xsd</a>, and <a href="https://www.w3.org/TR/owl2-syntax/#Datatype_Maps">owl</a>) standards.</p>
-    <h5 class="heading settled" data-level="3.2.2.6" id="Enumerated-Scalar-LR"><span class="secno">3.2.2.6. </span><span class="content">Enumerated Scalar</span><a class="self-link" href="#Enumerated-Scalar-LR"></a></h5>
-    <p><strong>Structured Property</strong></p>
+    <h5 class="heading settled" data-level="3.2.2.4" id="Structure-LR"><span class="secno">3.2.2.4. </span><span class="content">Structure</span><a class="self-link" href="#Structure-LR"></a></h5>
+    <p>A <a href="#Structure-Syntax">structure</a> is a classifier defined in a vocabulary and represents a structured datatype with anonymous instances in a modeled domain. A structure can specialize and be specialized by other structures. It can also be asserted as a type of a <a href="#StructureInstance-LR">structure instance</a>, which can be used as a value of a <a href="#StructuredProperty-LR">structured property</a>.</p>
+    <p>A structure is declared with the keyword <code>structure</code> followed by the structure’s name ID. It can optionally specialize other structures by following its name ID by the <code>:></code> symbol then a comma-separated list of those supertypes' IRIs. A structure can also optionally specify a list of axioms enclosed within a pair of square brackets <code>[</code> <code>]</code>.</p>
+<pre class="highlight highlight-html"><code>structure</code> ID (<code>:></code> [Structure|IRI] (<code>,</code> [Structure|IRI])*)? (<code>[</code>
+    Axiom*
+<code>]</code>)?
+</pre>
+    <p>The following example vocabulary defines the structure <em>Point</em> whose instances are anonymous points on a grid.</p>
+<pre class="highlight highlight-html"><code>vocabulary</code> <code>&lt;</code>http://com.xyz/methodology/mission#<code>></code> <code>as</code> mission <code>{</code>
+    <code>structure</code> Point
+<code>}</code>
+</pre>
+    <h5 class="heading settled" data-level="3.2.2.5" id="FacetedScalar-LR"><span class="secno">3.2.2.5. </span><span class="content">Faceted Scalar</span><a class="self-link" href="#FacetedScalar-LR"></a></h5>
+    <p>A <a href="#Scalar-Syntax">scalar</a> is a type defined in a vocabulary and represents a primitive type that classifies a set of unlimited literals. A faceted scalar is declared with the keyword <code>scalar</code> followed by the scalar’s name ID. It can optionally specialize another faceted scalar as a supertype by following its name ID by the <code>:></code> symbol then the IRI of the supertype. A scalar can also optionally specify a list of facets enclosed within a pair of square brackets <code>[</code> <code>]</code>.</p>
+<pre class="highlight highlight-html"><code>scalar</code> ID (<code>:></code> [Scalar|IRI] (<code>,</code> [Scalar|IRI])*)? (<code>[</code>
+   (<code>length</code> UnsignedInteger)?
+   (<code>minLength</code> UnsignedInteger)?
+   (<code>maxLength</code> UnsignedInteger)?
+   (<code>pattern</code> STRING)?
+   (<code>language</code> ID)?
+   (<code>minInclusive</code> Literal)?
+   (<code>minExclusive</code> Literal)?
+   (<code>maxInclusive</code> Literal)?
+   (<code>maxExclusive</code> Literal)?
+<code>]</code>)?
+</pre>
+    <p>OML considers a following set of faceted scalars as <em>standard</em>:</p>
+<pre class="highlight highlight-html"><code>vocabulary</code> <code>&lt;</code>http://www.w3.org/2000/01/rdf-schema#<code>></code> <code>as</code> rdfs <code>{</code>
+  // Literals
+  <code>scalar</code> Literal
+<code>}</code>
+
+<code>vocabulary</code> <code>&lt;</code>http://www.w3.org/1999/02/22-rdf-syntax-ns#<code>></code> <code>as</code> rdf <code>{</code>
+  <code>extends</code> <code>&lt;</code>http://www.w3.org/2000/01/rdf-schema#<code>></code> <code>as</code> rdfs
+
+  // Literals
+  <code>scalar</code> PlainLiteral <code>:></code> rdfs:Literal
+  <code>scalar</code> XMLLiteral <code>:></code> rdfs:Literal
+<code>}</code>
+
+<code>vocabulary</code> <code>&lt;</code>http://www.w3.org/2002/07/owl#<code>></code> <code>as</code> owl <code>{</code>
+  <code>extends</code> <code>&lt;</code>http://www.w3.org/2000/01/rdf-schema#<code>></code> <code>as</code> rdfs
+
+  // Literals
+  <code>scalar</code> real <code>:></code> rdfs:Literal
+  <code>scalar</code> rational <code>:></code> real
+<code>}</code>
+
+<code>vocabulary</code> <code>&lt;</code>http://www.w3.org/2001/XMLSchema#<code>></code> <code>as</code> xsd <code>{</code>
+  <code>extends</code> <code>&lt;</code>http://www.w3.org/2000/01/rdf-schema#<code>></code> <code>as</code> rdfs
+  <code>extends</code> <code>&lt;</code>http://www.w3.org/2002/07/owl#<code>></code> <code>as</code> owl
+
+  // Decimal Numbers and Integers
+  <code>scalar</code> decimal <code>:></code> owl:Rational
+  <code>scalar</code> integer <code>:></code> decimal
+  <code>scalar</code> long <code>:></code> integer
+  <code>scalar</code> int <code>:></code> long
+  <code>scalar</code> short <code>:></code> int
+  <code>scalar</code> byte <code>:></code> short
+  <code>scalar</code> nonNegativeInteger <code>:></code> integer
+  <code>scalar</code> positiveInteger <code>:></code> nonNegativeInteger
+  <code>scalar</code> unsignedLong <code>:></code> nonNegativeInteger
+  <code>scalar</code> unsignedInt <code>:></code> unsignedLong
+  <code>scalar</code> unsignedShort <code>:></code> unsignedInt
+  <code>scalar</code> unsignedByte <code>:></code> unsignedShort
+  <code>scalar</code> nonPositiveInteger <code>:></code> integer
+  <code>scalar</code> negativeInteger <code>:></code> nonPositiveInteger
+	
+  // Floating-Point Numbers
+  <code>scalar</code> double <code>:></code> rdfs:Literal
+  <code>scalar</code> float <code>:></code> rdfs:Literal
+	
+  // Strings
+  <code>scalar</code> string <code>:></code> rdfs:Literal
+  <code>scalar</code> normalizedString <code>:></code> string
+  <code>scalar</code> token <code>:></code> normalizedString
+  <code>scalar</code> ^language <code>:></code> token
+  <code>scalar</code> Name <code>:></code> token
+  <code>scalar</code> NCName <code>:></code> Name
+  <code>scalar</code> NMTOKEN <code>:></code> token
+
+  // Boolean
+  <code>scalar</code> boolean <code>:></code> rdfs:Literal
+
+  // Binary Data
+  <code>scalar</code> hexBinary <code>:></code> rdfs:Literal
+  <code>scalar</code> base64Binary <code>:></code> rdfs:Literal
+	
+  // IRI
+  <code>scalar</code> anyURI <code>:></code> rdfs:Literal
+	
+  // Time Instants
+  <code>scalar</code> dateTime <code>:></code> rdfs:Literal
+  <code>scalar</code> dateTimeStamp <code>:></code> dateTime
+<code>}</code>
+</pre>
+    <p class="note" role="note"><span>Note:</span> the lexical and value spaces for these standard scalars are described in the (<a href="https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/#built-in-datatypes">xsd</a>, and <a href="https://www.w3.org/TR/owl2-syntax/#Datatype_Maps">owl</a>) standards.</p>
+    <p>Furthermore, other faceted scalars can be defined only as specializations of standard ones (maximum one supertype) and can optionally be restricted with one or more facets. A facet is a restriction on the lexical or value space of a standard scalar. The following facets are supported:</p>
+    <ul>
+     <li data-md>
+      <p>Facet <code>length</code> specifies the exact length of the lexical representation (of strings and litrals)</p>
+     <li data-md>
+      <p>Facet <code>minLength</code> specifies the minimum length of the lexical representation (of strings and litrals)</p>
+     <li data-md>
+      <p>Facet <code>maxLength</code> specifies the maximum length of the lexical representation (of strings and litrals)</p>
+     <li data-md>
+      <p>Facet <code>pattern</code> specifies a regular expression of the lexical representation (of strings and litrals)</p>
+     <li data-md>
+      <p>Facet <code>language</code> specifies a natural language for the lexical representation (of strings and litrals)</p>
+     <li data-md>
+      <p>Facet <code>minInclusive</code> specifies the minimum inclusive value (of numbers)</p>
+     <li data-md>
+      <p>Facet <code>minExclusive</code> specifies the minimum exclusive value (of numbers)</p>
+     <li data-md>
+      <p>Facet <code>maxInclusive</code> specifies the maximum inclusive value (of numbers)</p>
+     <li data-md>
+      <p>Facet <code>maxExclusive</code> specifies the maximum exclusive value (of numbers)</p>
+    </ul>
+    <p>The following example vocabulary defines two faceted scalars: <em>SSN</em> (representing strings with the social security number pattern) and <em>TeenAge</em> (representing a positive integer type with values from 13 and 19 inclusive).</p>
+<pre class="highlight highlight-html"><code>vocabulary</code> <code>&lt;</code>http://example.com/primitive-types#<code>></code> <code>as</code> primitives <code>{</code>
+  <code>extends</code> <code>&lt;</code>http://www.w3.org/2001/XMLSchema#<code>></code> <code>as</code> xsd
+  <code>scalar</code> SSN <code>:></code> xsd:string <code>[</code>
+    <code>pattern</code> "^\d{3}-?\d{2}-?\d{4}$"
+  <code>]</code>
+  <code>scalar</code> TeenAge <code>:></code> xsd:positiveInteger <code>[</code>
+    <code>minInclusive</code> 13
+    <code>maxInclusive</code> 19
+  <code>]</code>
+<code>}</code>
+</pre>
+    <h5 class="heading settled" data-level="3.2.2.6" id="EnumeratedScalar-LR"><span class="secno">3.2.2.6. </span><span class="content">Enumerated Scalar</span><a class="self-link" href="#EnumeratedScalar-LR"></a></h5>
+    <p>TBD</p>
     <h4 class="heading settled" data-level="3.2.3" id="Properties-LR"><span class="secno">3.2.3. </span><span class="content">Properties</span><a class="self-link" href="#Properties-LR"></a></h4>
-    <h5 class="heading settled" data-level="3.2.3.1" id="Scalar-Property-LR"><span class="secno">3.2.3.1. </span><span class="content">Scalar Property</span><a class="self-link" href="#Scalar-Property-LR"></a></h5>
+    <h5 class="heading settled" data-level="3.2.3.1" id="ScalarProperty-LR"><span class="secno">3.2.3.1. </span><span class="content">Scalar Property</span><a class="self-link" href="#ScalarProperty-LR"></a></h5>
     <p>A <a href="#ScalarProperty-Syntax">scalar property</a> is a term defined in a vocabulary and represents a property whose domain is a classifier (e.g., concept), i.e., it can be asserted on instances of its classifier domain, and whose range is a scalar, i.e., its values are literals of that scalar. A scalar property is defined with the keywords <code>scalar</code> <code>property</code> followed by a name ID and a pair of square brackets <code>[</code> <code>]</code> that contain the property’s <code>domain</code> (referencing a classifier) and <code>range</code> (referencing a scalar).</p>
 <pre class="highlight highlight-html"><code>scalar</code> <code>property</code> ID <code>[</code>
     <code>domain</code> [Classifier|IRI]
@@ -2802,32 +2941,23 @@ http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral
 <code>}</code>
 </pre>
     <h5 class="heading settled" data-level="3.2.3.2" id="StructuredProperty-LR"><span class="secno">3.2.3.2. </span><span class="content">Structured Property</span><a class="self-link" href="#StructuredProperty-LR"></a></h5>
+    <p>TBD</p>
     <h5 class="heading settled" data-level="3.2.3.3" id="AnnotationProperty-LR"><span class="secno">3.2.3.3. </span><span class="content">Annotation Property</span><a class="self-link" href="#AnnotationProperty-LR"></a></h5>
+    <p>TBD</p>
     <h4 class="heading settled" data-level="3.2.4" id="Axioms-LR"><span class="secno">3.2.4. </span><span class="content">Axioms</span><a class="self-link" href="#Axioms-LR"></a></h4>
-    <h5 class="heading settled" data-level="3.2.4.1" id="Specialization-LR"><span class="secno">3.2.4.1. </span><span class="content">Specialization</span><a class="self-link" href="#Specialization-LR"></a></h5>
-    <p>TermSpecialization</p>
-    <h5 class="heading settled" data-level="3.2.4.2" id="Key-LR"><span class="secno">3.2.4.2. </span><span class="content">Key</span><a class="self-link" href="#Key-LR"></a></h5>
-    <p>KeyAxiom</p>
-    <h5 class="heading settled" data-level="3.2.4.3" id="Restriction-LR"><span class="secno">3.2.4.3. </span><span class="content">Restriction</span><a class="self-link" href="#Restriction-LR"></a></h5>
+    <h5 class="heading settled" data-level="3.2.4.1" id="Key-LR"><span class="secno">3.2.4.1. </span><span class="content">Key</span><a class="self-link" href="#Key-LR"></a></h5>
+    <p>TBD</p>
+    <h5 class="heading settled" data-level="3.2.4.2" id="Restriction-LR"><span class="secno">3.2.4.2. </span><span class="content">Restriction</span><a class="self-link" href="#Restriction-LR"></a></h5>
     <p><strong>Range Restriction Axioms</strong></p>
-    <p>ScalarPropertyRangeRestrictionAxiom</p>
-    <p>StructuredPropertyRangeRestrictionAxiom</p>
-    <p>RelationRangeRestrictionAxiom</p>
+    <p>TBD</p>
     <p><strong>Cardinality Restriction Axioms</strong></p>
-    <p>ScalarPropertyCardinalityRestrictionAxiom</p>
-    <p>StructuredPropertyCardinalityRestrictionAxiom</p>
-    <p>RelationCardinalityRestrictionAxiom</p>
+    <p>TBD</p>
     <p><strong>Value Restriction Axioms</strong></p>
-    <p>ScalarPropertyValueRestrictionAxiom</p>
-    <p>StructuredPropertyValueRestrictionAxiom</p>
-    <p>RelationTargetRestrictionAxiom</p>
+    <p>TBD</p>
     <h4 class="heading settled" data-level="3.2.5" id="Rule-LR"><span class="secno">3.2.5. </span><span class="content">Rule</span><a class="self-link" href="#Rule-LR"></a></h4>
+    <p>TBD</p>
     <h5 class="heading settled" data-level="3.2.5.1" id="Predicates-LR"><span class="secno">3.2.5.1. </span><span class="content">Predicates</span><a class="self-link" href="#Predicates-LR"></a></h5>
-    <p>TypePredicate</p>
-    <p>FeaturePredicate</p>
-    <p>RelationEntityPredicate</p>
-    <p>SameAsPredicate</p>
-    <p>DifferentFromPredicate</p>
+    <p>TBD</p>
     <h3 class="heading settled" data-level="3.3" id="Description-LR"><span class="secno">3.3. </span><span class="content">Description</span><a class="self-link" href="#Description-LR"></a></h3>
     <p>A <a href="#Description-Syntax">description</a> is an ontology that uses terms in vocabularies to describe <a href="#NamedInstance-Syntax">named instances</a> in a given domain. A description is declared with the keywords <code>description</code> as its ontology kind, followed by its NAMESPACE, the keyword <code>as</code>, and its prefix ID.</p>
 <pre class="highlight highlight-html"><code>description</code> NAMESPACE <code>as</code> ID <code>{</code>
@@ -2837,9 +2967,9 @@ http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral
 <pre class="highlight highlight-html"><code>description</code> <code>&lt;</code>http://com.xyz/system/components#<code>></code> <code>as</code> components <code>{</code>
 <code>}</code>
 </pre>
-    <h4 class="heading settled" data-level="3.3.1" id="Description-Import-LR"><span class="secno">3.3.1. </span><span class="content">Import</span><a class="self-link" href="#Description-Import-LR"></a></h4>
+    <h4 class="heading settled" data-level="3.3.1" id="DescriptionImport-LR"><span class="secno">3.3.1. </span><span class="content">Import</span><a class="self-link" href="#DescriptionImport-LR"></a></h4>
     <p>This section outlines the kind of import statements that can be added in a description’s body.</p>
-    <h5 class="heading settled" data-level="3.3.1.1" id="Description-Usage-LR"><span class="secno">3.3.1.1. </span><span class="content">Usage</span><a class="self-link" href="#Description-Usage-LR"></a></h5>
+    <h5 class="heading settled" data-level="3.3.1.1" id="DescriptionUsage-LR"><span class="secno">3.3.1.1. </span><span class="content">Usage</span><a class="self-link" href="#DescriptionUsage-LR"></a></h5>
     <p>A <a href="#DescriptionUsage">description usage</a> is a kind of <a href="#Import">import</a> statement that can be added to a description to specify a vocabulary that it uses. This is typically needed in order to use the terms (types and properties) of the vocabulary in the description’s instance definitions. A description usage is defined with the keyword <code>uses</code> followed by the imported vocabulary’s NAMESPACE. If members of the imported vocabulary are to be referenced using their ABBREVIATED_IRIs, then the NAMESPACE needs to be followed by the keyword <code>as</code> and a unique prefix ID within the description’s imports.</p>
 <pre class="highlight highlight-html"><code>uses</code> NAMESPACE (<code>as</code> ID)?
 </pre>
@@ -2850,7 +2980,7 @@ http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral
     <code>ci</code> System1 <code>:</code> mission:Component     // a cross-reference to concept Component
 <code>}</code>
 </pre>
-    <h5 class="heading settled" data-level="3.3.1.2" id="Description-Extension-LR"><span class="secno">3.3.1.2. </span><span class="content">Extension</span><a class="self-link" href="#Description-Extension-LR"></a></h5>
+    <h5 class="heading settled" data-level="3.3.1.2" id="DescriptionExtension-LR"><span class="secno">3.3.1.2. </span><span class="content">Extension</span><a class="self-link" href="#DescriptionExtension-LR"></a></h5>
     <p>A <a href="#DescriptionExtension">description extension</a> is a kind of <a href="#Import">import</a> statement that can be added to a description to specify that it extends another description. This can be used to split a system description into fragments that focus on different concerns or are contributed by different authorities. In this case, each description <em>extends</em> the other descriptions it depends on (e.g., by cross referencing named instances from them). A description extension is defined with the keyword <code>extends</code> followed by the imported description’s NAMESPACE. If members of the imported description are to be referenced using their ABBREVIATED_IRIs, then the NAMESPACE needs to be followed by the keyword <code>as</code> and a unique prefix ID within the description’s imports.</p>
 <pre class="highlight highlight-html"><code>extends</code> NAMESPACE (<code>as</code> ID)?
 </pre>
@@ -2879,10 +3009,12 @@ http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral
     <code>ci</code> function1 <code>:</code> mission:Function
 <code>}</code>
 </pre>
-    <h5 class="heading settled" data-level="3.3.2.2" id="Relation-Instance-LR"><span class="secno">3.3.2.2. </span><span class="content">Relation Instance</span><a class="self-link" href="#Relation-Instance-LR"></a></h5>
-    <h5 class="heading settled" data-level="3.3.2.3" id="Structure-Instance-LR"><span class="secno">3.3.2.3. </span><span class="content">Structure Instance</span><a class="self-link" href="#Structure-Instance-LR"></a></h5>
+    <h5 class="heading settled" data-level="3.3.2.2" id="RelationInstance-LR"><span class="secno">3.3.2.2. </span><span class="content">Relation Instance</span><a class="self-link" href="#RelationInstance-LR"></a></h5>
+    <p>TBD</p>
+    <h5 class="heading settled" data-level="3.3.2.3" id="StructureInstance-LR"><span class="secno">3.3.2.3. </span><span class="content">Structure Instance</span><a class="self-link" href="#StructureInstance-LR"></a></h5>
+    <p>TBD</p>
     <h4 class="heading settled" data-level="3.3.3" id="Assertions-LR"><span class="secno">3.3.3. </span><span class="content">Assertions</span><a class="self-link" href="#Assertions-LR"></a></h4>
-    <h5 class="heading settled" data-level="3.3.3.1" id="Scalar-Property-Value-LR"><span class="secno">3.3.3.1. </span><span class="content">Scalar Property Value</span><a class="self-link" href="#Scalar-Property-Value-LR"></a></h5>
+    <h5 class="heading settled" data-level="3.3.3.1" id="ScalarPropertyValueAssertion-LR"><span class="secno">3.3.3.1. </span><span class="content">Scalar Property Value</span><a class="self-link" href="#ScalarPropertyValueAssertion-LR"></a></h5>
     <p>A value for a scalar property can be <a href="#ScalarPropertyValueAssertion-Syntax">asserted</a> on a named instance (e.g., concept instance) in a description. Such assertion can be added as one of the assertions between the square  brackets <code>[</code> <code>]</code> of the instance. Its syntax consists of an IRI to a <a href="#ScalarProperty-Syntax">scalar property</a> from some vocabulary followed by a literal.</p>
 <pre class="highlight highlight-html">[ScalarProperty|IRI] Literal
 </pre>
@@ -2898,8 +3030,9 @@ http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral
     <code>]</code>
 <code>}</code>
 </pre>
-    <h5 class="heading settled" data-level="3.3.3.2" id="Structured-Property-Value-LR"><span class="secno">3.3.3.2. </span><span class="content">Structured Property Value</span><a class="self-link" href="#Structured-Property-Value-LR"></a></h5>
-    <h5 class="heading settled" data-level="3.3.3.3" id="Link-LR"><span class="secno">3.3.3.3. </span><span class="content">Relation Link</span><a class="self-link" href="#Link-LR"></a></h5>
+    <h5 class="heading settled" data-level="3.3.3.2" id="StructuredPropertyValueAssertion-LR"><span class="secno">3.3.3.2. </span><span class="content">Structured Property Value</span><a class="self-link" href="#StructuredPropertyValueAssertion-LR"></a></h5>
+    <p>TBD</p>
+    <h5 class="heading settled" data-level="3.3.3.3" id="LinkAssertion-LR"><span class="secno">3.3.3.3. </span><span class="content">Relation Link</span><a class="self-link" href="#LinkAssertion-LR"></a></h5>
     <p>A link, which is an unreified reference to a named instance (e.g., concept instance), can be <a href="#ScalarPropertyValueAssertion-Syntax">asserted</a> on a named instance in a description. It represents a relation between the referencing instance (the source) and the referenced instance (the target). Such assertion can be added as one of the assertions between the square  brackets <code>[</code> <code>]</code> of the referencing instance. Its syntax consists of an IRI to a <a href="#Relation-Syntax">relation</a> from some vocabulary followed by an IRI to a <a href="#NamedInstance-Syntax">named instance</a> from some description.</p>
 <pre class="highlight highlight-html">[Relation|IRI] [NamedInstance|IRI]
 </pre>
@@ -2917,7 +3050,7 @@ http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral
 <code>}</code>
 </pre>
     <p class="note" role="note"><span>Note:</span> a link is typed by an unreified (forward or reverse) relation, hence (unlike a <a href="#RelationInstance-Syntax">relation instance</a>) cannot have its own assertions.</p>
-    <h3 class="heading settled" data-level="3.4" id="Vocabulary-Bundle-LR"><span class="secno">3.4. </span><span class="content">Vocabulary Bundle</span><a class="self-link" href="#Vocabulary-Bundle-LR"></a></h3>
+    <h3 class="heading settled" data-level="3.4" id="VocabularyBundle-LR"><span class="secno">3.4. </span><span class="content">Vocabulary Bundle</span><a class="self-link" href="#VocabularyBundle-LR"></a></h3>
     <p>A <a href="#VocabularyBundle-Syntax">vocabulary bundle</a> is an ontology that bundles a set of vocabularies and allows description logic (DL) reasoning with <a href="#Description-Logic-Semantics">closed-world semantics</a> using them (in contrast to a vocabulary that has <a href="#Description-Logic-Semantics">open-world semantics</a>). A vocabulary bundle is declared with the keywords <code>vocabulary</code> <code>bundle</code> as its ontology kind, followed by its NAMESPACE, the keyword <code>as</code>, and its prefix ID.</p>
 <pre class="highlight highlight-html"><code>vocabulary</code> <code>bundle</code> NAMESPACE <code>as</code> ID <code>{</code>
 <code>}</code>
@@ -2926,8 +3059,8 @@ http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral
 <pre class="highlight highlight-html"><code>vocabulary</code> <code>bundle</code> <code>&lt;</code>http://com.xyz/methodology/foundation#<code>></code> <code>as</code> foundation <code>{</code>
 <code>}</code>
 </pre>
-    <h4 class="heading settled" data-level="3.4.1" id="Vocabulary-Bundle-Import-LR"><span class="secno">3.4.1. </span><span class="content">Import</span><a class="self-link" href="#Vocabulary-Bundle-Import-LR"></a></h4>
-    <h5 class="heading settled" data-level="3.4.1.1" id="Vocabulary-Bundle-Inclusion-LR"><span class="secno">3.4.1.1. </span><span class="content">Inclusion</span><a class="self-link" href="#Vocabulary-Bundle-Inclusion-LR"></a></h5>
+    <h4 class="heading settled" data-level="3.4.1" id="VocabularyBundleImport-LR"><span class="secno">3.4.1. </span><span class="content">Import</span><a class="self-link" href="#VocabularyBundleImport-LR"></a></h4>
+    <h5 class="heading settled" data-level="3.4.1.1" id="VocabularyBundleInclusion-LR"><span class="secno">3.4.1.1. </span><span class="content">Inclusion</span><a class="self-link" href="#VocabularyBundleInclusion-LR"></a></h5>
     <p>An <a href="#VocabularyBundleInclusion">vocabulary bundle inclusion</a> is a kind of <a href="#Import">import</a> statement that can be added to a vocabulary bundle to specify that it includes a vocabulary. A vocabulary bundle inclusion is defined with the keyword <code>includes</code> followed by the imported vocabulary’s NAMESPACE. If members of the imported vocabulary are to be referenced using their ABBREVIATED_IRIs, then the NAMESPACE needs to be followed by the keyword <code>as</code> and a unique prefix ID in the bundle’s imports.</p>
 <pre class="highlight highlight-html"><code>includes</code> NAMESPACE (<code>as</code> ID)?
 </pre>
@@ -2937,7 +3070,7 @@ http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral
     <code>includes</code> <code>&lt;</code>http://com.xyz/methodology/project#<code>></code> <code>as</code> project
 <code>}</code>
 </pre>
-    <h5 class="heading settled" data-level="3.4.1.2" id="Vocabulary-Bundle-Extends-LR"><span class="secno">3.4.1.2. </span><span class="content">Extends</span><a class="self-link" href="#Vocabulary-Bundle-Extends-LR"></a></h5>
+    <h5 class="heading settled" data-level="3.4.1.2" id="VocabularyBundleExtension-LR"><span class="secno">3.4.1.2. </span><span class="content">Extends</span><a class="self-link" href="#VocabularyBundleExtension-LR"></a></h5>
     <p>An <a href="#VocabularyBundleExtension">vocabulary bundle extends</a> is a kind of <a href="#Import">import</a> statement that can be added to a vocabulary bundle to specify that it extends another vocabulary bundle. This can be used to organize vocabulary bundles in layers that build on each other. Each bundle inherits the vocabularies contributed by its extended bundles and may optionally add to them other included vocabularies. This can, for example, be used to define a family of related vocabulary bundles that build on each other by tackling different incremental concerns. A vocabulary bundle extension is defined with the keyword <code>extends</code> followed by the imported vocabulary bundle’s NAMESPACE.</p>
 <pre class="highlight highlight-html"><code>extends</code> NAMESPACE
 </pre>
@@ -2948,7 +3081,7 @@ http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral
     <code>includes</code> <code>&lt;</code>http://com.xyz/methodology/mechanical#<code>></code>
 <code>}</code>
 </pre>
-    <h3 class="heading settled" data-level="3.5" id="Description-Bundle-LR"><span class="secno">3.5. </span><span class="content">Description Bundle</span><a class="self-link" href="#Description-Bundle-LR"></a></h3>
+    <h3 class="heading settled" data-level="3.5" id="DescriptionBundle-LR"><span class="secno">3.5. </span><span class="content">Description Bundle</span><a class="self-link" href="#DescriptionBundle-LR"></a></h3>
     <p>A <a href="#DescriptionBundle-Syntax">description bundle</a> is an ontology that bundles a set of descriptions and allows them to be reasoned on as a dataset using description logic (DL). A description bundle is declared with the keywords <code>description</code> <code>bundle</code> as its ontology kind, followed by its NAMESPACE, the keyword <code>as</code>, and its prefix ID.</p>
 <pre class="highlight highlight-html"><code>description</code> <code>bundle</code> NAMESPACE <code>as</code> ID <code>{</code>
 <code>}</code>
@@ -2957,8 +3090,8 @@ http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral
 <pre class="highlight highlight-html"><code>description</code> <code>bundle</code> <code>&lt;</code>http://com.xyz/missions/mission1#<code>></code> <code>as</code> mission1 <code>{</code>
 <code>}</code>
 </pre>
-    <h4 class="heading settled" data-level="3.5.1" id="Description-Bundle-Import-LR"><span class="secno">3.5.1. </span><span class="content">Import</span><a class="self-link" href="#Description-Bundle-Import-LR"></a></h4>
-    <h5 class="heading settled" data-level="3.5.1.1" id="Description-Bundle-Inclusion-LR"><span class="secno">3.5.1.1. </span><span class="content">Inclusion</span><a class="self-link" href="#Description-Bundle-Inclusion-LR"></a></h5>
+    <h4 class="heading settled" data-level="3.5.1" id="DescriptionBundleImport-LR"><span class="secno">3.5.1. </span><span class="content">Import</span><a class="self-link" href="#DescriptionBundleImport-LR"></a></h4>
+    <h5 class="heading settled" data-level="3.5.1.1" id="DescriptionBundleInclusion-LR"><span class="secno">3.5.1.1. </span><span class="content">Inclusion</span><a class="self-link" href="#DescriptionBundleInclusion-LR"></a></h5>
     <p>A <a href="#DescriptionBundleInclusion">description bundle inclusion</a> is a kind of <a href="#Import">import</a> statement that can be added to a description bundle to specify that it includes a description. A description bundle inclusion is defined with the keyword <code>includes</code> followed by the imported description’s NAMESPACE. If members of the imported description are to be referenced using their ABBREVIATED_IRIs, then the NAMESPACE needs to be followed by the keyword <code>as</code> and a unique prefix ID in the bundle’s imports.</p>
 <pre class="highlight highlight-html"><code>includes</code> NAMESPACE (<code>as</code> ID)?
 </pre>
@@ -2968,7 +3101,7 @@ http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral
     <code>includes</code> <code>&lt;</code>http://com.xyz/system/masses#<code>></code> <code>as</code> masses
 <code>}</code>
 </pre>
-    <h5 class="heading settled" data-level="3.5.1.2" id="Description-Bundle-Usage-LR"><span class="secno">3.5.1.2. </span><span class="content">Usage</span><a class="self-link" href="#Description-Bundle-Usage-LR"></a></h5>
+    <h5 class="heading settled" data-level="3.5.1.2" id="DescriptionBundleUsage-LR"><span class="secno">3.5.1.2. </span><span class="content">Usage</span><a class="self-link" href="#DescriptionBundleUsage-LR"></a></h5>
     <p>A <a href="#DescriptionBundleUsage">description bundle usage</a> is a kind of <a href="#Import">import</a> statement that can be added to a description bundle to specify that it uses a vocabulary bundle. This is typically done to specify the closed-world vocabulary bundle that this description bundle will be reasoned on with. A description bundle usage is defined with the keyword <code>uses</code> followed by the imported vocabulary bundle’s NAMESPACE.</p>
 <pre class="highlight highlight-html"><code>uses</code> NAMESPACE
 </pre>
@@ -2979,7 +3112,7 @@ http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral
     <code>uses</code> <code>&lt;</code>http://com.xyz/methodology/foundation#<code>></code>
 <code>}</code>
 </pre>
-    <h5 class="heading settled" data-level="3.5.1.3" id="Description-Bundle-Extension-LR"><span class="secno">3.5.1.3. </span><span class="content">Extension</span><a class="self-link" href="#Description-Bundle-Extension-LR"></a></h5>
+    <h5 class="heading settled" data-level="3.5.1.3" id="DescriptionBundleExtension-LR"><span class="secno">3.5.1.3. </span><span class="content">Extension</span><a class="self-link" href="#DescriptionBundleExtension-LR"></a></h5>
     <p>An <a href="#DescriptionBundleExtension">description bundle extension</a> is a kind of <a href="#Import">import</a> statement that can be added to a description bundle to specify that it extends another description bundle. This can be used to organize description bundles into layers that build on each other. Each bundle inherits the descriptions contributed by its extended bundles and optionally adds to them other descriptions. This can, for example, be used to define alternative datasets (e.g., representing alternative system designs) that extend a common dataset. A description bundle extension is defined with the keyword <code>extends</code> followed by the imported description bundle’s NAMESPACE.</p>
 <pre class="highlight highlight-html"><code>extends</code> NAMESPACE
 </pre>
