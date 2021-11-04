@@ -1489,7 +1489,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version 5acae8bf9, updated Wed Nov 3 17:41:15 2021 -0700" name="generator">
   <link href="https://github.com/opencaesar/oml" rel="canonical">
-  <meta content="01a8e294adc5693862f03cf3f462b933036f2c55" name="document-revision">
+  <meta content="b23fa0eb22bf4e54c79a87c5ba3fb71d9a5cd98d" name="document-revision">
 <style>
 body {
   padding: 0;
@@ -2182,9 +2182,9 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
         <li>
          <a href="#Assertions-LR"><span class="secno">3.3.3</span> <span class="content">Assertions</span></a>
          <ol class="toc">
-          <li><a href="#ScalarPropertyValueAssertion-LR"><span class="secno">3.3.3.1</span> <span class="content">Scalar Property Value</span></a>
-          <li><a href="#StructuredPropertyValueAssertion-LR"><span class="secno">3.3.3.2</span> <span class="content">Structured Property Value</span></a>
-          <li><a href="#LinkAssertion-LR"><span class="secno">3.3.3.3</span> <span class="content">Relation Link</span></a>
+          <li><a href="#ScalarPropertyValueAssertion-LR"><span class="secno">3.3.3.1</span> <span class="content">Scalar Property Value Assertion</span></a>
+          <li><a href="#StructuredPropertyValueAssertion-LR"><span class="secno">3.3.3.2</span> <span class="content">Structured Property Value Assertion</span></a>
+          <li><a href="#LinkAssertion-LR"><span class="secno">3.3.3.3</span> <span class="content">Link Assertion</span></a>
          </ol>
        </ol>
       <li>
@@ -2679,8 +2679,8 @@ true        // xsd:boolean
 </pre>
     <p class="note" role="note"><span>Note:</span> descriptions that are used by a vocabulary typically define notable instances that are cross-referenced by other descriptions using this vocabulary.</p>
     <h4 class="heading settled" data-level="3.2.2" id="Types-LR"><span class="secno">3.2.2. </span><span class="content">Types</span><a class="self-link" href="#Types-LR"></a></h4>
-    <p>Types that can be defined in a vocabulary are either <em>classifiers</em> (structured types) or <em>scalars</em> (primitive types). Some classifiers (<a href="#Aspect-LR">Aspect</a>, <a href="#Concept-LR">Concept</a> and <a href="(#RelationEntity-LR">Relation Entity</a>)) are <em>entities</em>, meaning they can classify named instances (that are unique by reference). Other classifiers (<a href="#Structure-LR">Structure</a>) can only classify anonymous instances (that are unique by value). Also, some scalars (<a href="#FacetedScalar-LR">Faceted Scalar</a>) can classify an unlimited set literals, while other scalars (<a href="#EnumeratedScalar-LR">Enumerated Scalar</a>) can only classify a limited set of literals.</p>
-    <p>Classifiers can specialize one or more classifiers (multiple-inheritance), while scalars can only specialize one scalar only (single-inheritance). These specializations are further constrainted for each type as discussed below.</p>
+    <p>Types that can be defined in a vocabulary are either <em>classifiers</em> (structured types) or <em>scalars</em> (primitive types). Some classifiers (<a href="#Aspect-LR">Aspect</a>, <a href="#Concept-LR">Concept</a> and <a href="(#RelationEntity-LR">Relation Entity</a>)) are <em>entities</em>, meaning they can classify named instances (that are unique by reference). Other classifiers (<a href="#Structure-LR">Structure</a>) can only classify anonymous instances (that are unique by value). Also, some scalars (<a href="#FacetedScalar-LR">Faceted Scalar</a>) can classify an unlimited set of literals, while other scalars (<a href="#EnumeratedScalar-LR">Enumerated Scalar</a>) can only classify a limited set of literals.</p>
+    <p>Classifiers can specialize one or more classifiers (multiple-inheritance), while scalars can only specialize one scalar only (single-inheritance). These specializations are further constrained for each type as discussed below.</p>
     <h5 class="heading settled" data-level="3.2.2.1" id="Aspect-LR"><span class="secno">3.2.2.1. </span><span class="content">Aspect</span><a class="self-link" href="#Aspect-LR"></a></h5>
     <p>An <a href="#Concept-Syntax">aspect</a> is an entity defined in a vocabulary and represents a mixin type (or a capability) in a modeled domain. An aspect can only specialize other aspects, but can be specialized by any entity. An Aspect cannot be asserted as a type of instances in a description (there is no aspect instance), but can be inferred (by a DL reasoner) as such, if it is one of the supertypes of an asserted type.</p>
     <p>An aspect is declared with the keyword <code>aspect</code> followed by the aspect’s name ID. It can optionally specialize other aspects by following its name ID by the <code>:></code> symbol then a comma-separated list of those supertypes' IRIs. An aspect can also optionally specify a list of axioms enclosed within a pair of square brackets <code>[</code> <code>]</code>.</p>
@@ -2695,7 +2695,7 @@ true        // xsd:boolean
     <code>aspect</code> NamedElement :> IdentifiedElement
 <code>}</code>
 </pre>
-    <p>Two special aspects defined by the owl vocabulary are: <em>owl:Thing</em> and <em>owl:Nothing</em>. Aspect <em>owl:Thing</em> represents the top of the specializtion hierarchy and the implicit supertype of all entities. This means if an entity is declared with no supertype, then it has <em>owl:Thing</em> as its implicit supertype. On the other hand, aspect <em>owl:Nothing</em> is the bottom of all specialization hierarhcies and the implict subtype of all entities. It represents the empty set (has no instances).</p>
+    <p>Two special aspects defined by the owl vocabulary are: <em>owl:Thing</em> and <em>owl:Nothing</em>. Aspect <em>owl:Thing</em> represents the top of the specialization hierarchy and the implicit supertype of all entities. This means if an entity is declared with no supertype, then it has <em>owl:Thing</em> as its implicit supertype. On the other hand, aspect <em>owl:Nothing</em> is the bottom of all specialization hierarchies and the implicit subtype of all entities. It represents the empty set (has no instances).</p>
 <pre class="highlight highlight-html"><code>vocabulary</code> <code>&lt;</code>http://www.w3.org/2002/07/owl#<code>></code> <code>as</code> mission <code>{</code>
     <code>aspect</code> Thing
     <code>aspect</code> Nothing
@@ -2726,7 +2726,7 @@ true        // xsd:boolean
      Annotation*
      (<code>forward</code> ID)?                     // an unreified relation from source to target
      Annotation*
-     (<code>reverse</code> ID)?                     // an unreified relation from targt to source
+     (<code>reverse</code> ID)?                     // an unreified relation from target to source
      <code>functional</code>?                       // each source can be related to a maximum of 1 target
      (<code>inverse</code> <code>functional</code>)?             // each target can be related to a maximum of 1 source
      <code>symmetric</code>?                        // if a source is related to a target, then the target must also related to the source
@@ -2747,7 +2747,7 @@ true        // xsd:boolean
     <code>]</code>
 <code>}</code>
 </pre>
-    <p>Since a relation entity is a reifed relation, it can be asserted as a type of a <a href="#RelationInstance-LR">relation instance</a> between one or more source instances, and one or more target instances. Such instance can be annotated and characterized with assertions. However, a relation entity can also optionally specify (in its body) one or two companion unreified relations that can be asserted as simple (uncharacterized) <a href="#LinkAssertion-LR">links</a> between a source and a target instance. One of those unrefied relations is declared with the keyword <code>forward</code> followed by a name ID, while the other is declared with the keyword <code>reverse</code> followed by a name ID. The forward relation has the <code>from</code> entity as its domain, and the <code>to</code> entity as its range, while the reverse relation has the opposite. When both are declared, the forward and reverse relations become inverse of each other, meaning if one is used to link a source instance to a target instance, the other is inferred as a link from the target to the source. Also, when a relation instance is typed by a relation entity, which has one ore more unreifed relations, such relations are inferred as links between the set of related sources and target instances. The following diagram depicts the design pattern implied by a relation entity.</p>
+    <p>Since a relation entity is a reified relation, it can be asserted as a type of a <a href="#RelationInstance-LR">relation instance</a> between one or more source instances, and one or more target instances. Such instance can be annotated and characterized with assertions. However, a relation entity can also optionally specify (in its body) one or two companion unreified relations that can be asserted as simple (uncharacterized) <a href="#LinkAssertion-LR">links</a> between a source and a target instance. One of those unrefied relations is declared with the keyword <code>forward</code> followed by a name ID, while the other is declared with the keyword <code>reverse</code> followed by a name ID. The forward relation has the <code>from</code> entity as its domain, and the <code>to</code> entity as its range, while the reverse relation has the opposite. When both are declared, the forward and reverse relations become inverse of each other, meaning if one is used to link a source instance to a target instance, the other is inferred as a link from the target to the source. Also, when a relation instance is typed by a relation entity, which has one ore more unreifed relations, such relations are inferred as links between the set of related sources and target instances. The following diagram depicts the design pattern implied by a relation entity.</p>
 <pre>    <img src="images/Relation-Entity-Pattern.svg"></pre>
     <p>The example vocabulary below refines the <em>Performs</em> relation entity with two unreifed relations: <em>performs</em> (as forward) and <em>isPerformedBy</em> (as reverse).</p>
 <pre class="highlight highlight-html"><code>vocabulary</code> <code>&lt;</code>http://com.xyz/methodology/mission#<code>></code> <code>as</code> mission <code>{</code>
@@ -2789,7 +2789,7 @@ true        // xsd:boolean
      <li data-md>
       <p>The <code>inverse functional</code> flag implies that a target instance can be related to a maximum of 1 source instance.</p>
      <li data-md>
-      <p>The <code>symmetric</code> flag implies that if a source instance is related to a target instance, then the target must also related to the source.</p>
+      <p>The <code>symmetric</code> flag implies that if a source instance is related to a target instance, then the target must also be related to the source.</p>
      <li data-md>
       <p>The <code>asymmetric</code> flag implies that if a source instance is related to a target instance, then the target cannot be related to the source.</p>
      <li data-md>
@@ -2799,7 +2799,7 @@ true        // xsd:boolean
      <li data-md>
       <p>The <code>transitive</code> flag implies if instance A is related to instance B, and instance B is related to instance C, then A is also related to C.</p>
     </ul>
-    <p>The example vocabulary below refines the <em>Performs</em> relation to add the flag <code>inverse functional</code> (to specify that a function can be performed by a maximum of one component), the flag <code>asymmetric</code> (to specify that a function cannot peform a component), and the flag <code>irreflexive</code> (to specify that a component cannot perform itself).</p>
+    <p>The example vocabulary below refines the <em>Performs</em> relation to add the flag <code>inverse functional</code> (to specify that a function can be performed by a maximum of one component), the flag <code>asymmetric</code> (to specify that a function cannot perform a component), and the flag <code>irreflexive</code> (to specify that a component cannot perform itself).</p>
 <pre class="highlight highlight-html"><code>vocabulary</code> <code>&lt;</code>http://com.xyz/methodology/mission#<code>></code> <code>as</code> mission <code>{</code>
     <code>concept</code> Component
     <code>concept</code> Function
@@ -2916,15 +2916,15 @@ true        // xsd:boolean
     <p>Furthermore, other faceted scalars can be defined only as specializations of the standard ones (maximum one supertype per scalar is allowed). They can also be optionally restricted with one or more facets. A facet is a restriction on the lexical or value space of a standard scalar. The following facets are supported:</p>
     <ul>
      <li data-md>
-      <p>Facet <code>length</code> specifies the exact length of the lexical representation (of strings and litrals)</p>
+      <p>Facet <code>length</code> specifies the exact length of the lexical representation (of strings and literals)</p>
      <li data-md>
-      <p>Facet <code>minLength</code> specifies the minimum length of the lexical representation (of strings and litrals)</p>
+      <p>Facet <code>minLength</code> specifies the minimum length of the lexical representation (of strings and literals)</p>
      <li data-md>
-      <p>Facet <code>maxLength</code> specifies the maximum length of the lexical representation (of strings and litrals)</p>
+      <p>Facet <code>maxLength</code> specifies the maximum length of the lexical representation (of strings and literals)</p>
      <li data-md>
-      <p>Facet <code>pattern</code> specifies a regular expression of the lexical representation (of strings and litrals)</p>
+      <p>Facet <code>pattern</code> specifies a regular expression of the lexical representation (of strings and literals)</p>
      <li data-md>
-      <p>Facet <code>language</code> specifies a natural language for the lexical representation (of strings and litrals)</p>
+      <p>Facet <code>language</code> specifies a natural language for the lexical representation (of strings and literals)</p>
      <li data-md>
       <p>Facet <code>minInclusive</code> specifies the minimum inclusive value (of numbers)</p>
      <li data-md>
@@ -2947,7 +2947,7 @@ true        // xsd:boolean
 <code>}</code>
 </pre>
     <h5 class="heading settled" data-level="3.2.2.6" id="EnumeratedScalar-LR"><span class="secno">3.2.2.6. </span><span class="content">Enumerated Scalar</span><a class="self-link" href="#EnumeratedScalar-LR"></a></h5>
-    <p>An <a href="#EnumeratedScalar-Syntax">enumerated scalar</a> is a type defined in a vocabulary and represents a primitive type that classifies a limited set of literals. An enumerated scalar is declared with the keywords <code>enumerated scalar</code> followed by the scalar’s name ID. It can also optioanlly specialize another enumerated scalar as a supertype by following its name ID by the <code>:></code> symbol then the IRI of the supertype. It can also optionally specify a list of one or more comma-separated literals enclosed within a pair of square brackets <code>[</code> <code>]</code>. Those literals represent the limited set that is classified by the scalar. Although both are optional, an enumerated scalar cannpt specify a set of literals and a supertype at the same time. if a supertype is specified, the subtype is considered simply as an alias of the supertype and inherits its set of literals.</p>
+    <p>An <a href="#EnumeratedScalar-Syntax">enumerated scalar</a> is a type defined in a vocabulary and represents a primitive type that classifies a limited set of literals. An enumerated scalar is declared with the keywords <code>enumerated scalar</code> followed by the scalar’s name ID. It can also optionally specialize another enumerated scalar as a supertype by following its name ID by the <code>:></code> symbol then the IRI of the supertype. It can also optionally specify a list of one or more comma-separated literals enclosed within a pair of square brackets <code>[</code> <code>]</code>. Those literals represent the limited set that is classified by the scalar. Although both are optional, an enumerated scalar cannot specify a set of literals and a supertype at the same time. if a supertype is specified, the subtype is considered simply as an alias of the supertype and inherits its set of literals.</p>
 <pre class="highlight highlight-html">Annotation*
 <code>enumerated</code> <code>scalar</code> ID (<code>:></code> [EnumeratedScalar|IRI] (<code>,</code> [EnumeratedScalar|IRI])*)? (<code>[</code>
     (Literal (<code>,</code> Literal)*)?
@@ -2961,14 +2961,14 @@ true        // xsd:boolean
 <code>]</code>
 </pre>
     <h4 class="heading settled" data-level="3.2.3" id="Properties-LR"><span class="secno">3.2.3. </span><span class="content">Properties</span><a class="self-link" href="#Properties-LR"></a></h4>
-    <p>Properties that can be defined in a vocabulary include <em>semantic properties</em> and <em>annotation properties</em>. A semantic property (<a href="#ScalarProperty-LR">Scalar Property</a> or <a href="#StructuredProperty-LR">Structured Property</a>) has logical semantics and is specified with a domain and a range. The domain repersents a classifier whose instances can be characterized by such property, while the range represents a type that classifies a set of allowed characterization values. An <a href="#AnnotationProperty-LR">Annotation Property</a>, on the other hand, has no logical semantics and enables the annotation of an element (ontology, import, or member) with non-semantic information.</p>
+    <p>Properties that can be defined in a vocabulary include <em>semantic properties</em> and <em>annotation properties</em>. A semantic property (<a href="#ScalarProperty-LR">Scalar Property</a> or <a href="#StructuredProperty-LR">Structured Property</a>) has logical semantics and is specified with a domain and a range. The domain represents a classifier whose instances can be characterized by such property, while the range represents a type that classifies a set of allowed characterization values. An <a href="#AnnotationProperty-LR">Annotation Property</a>, on the other hand, has no logical semantics and enables the annotation of an element (ontology, import, or member) with non-semantic information.</p>
     <h5 class="heading settled" data-level="3.2.3.1" id="ScalarProperty-LR"><span class="secno">3.2.3.1. </span><span class="content">Scalar Property</span><a class="self-link" href="#ScalarProperty-LR"></a></h5>
     <p>A <a href="#ScalarProperty-Syntax">scalar property</a> is a semantic property defined in a vocabulary, whose domain is a classifier (<a href="#Aspect-LR">Aspect</a>, <a href="#Concept-LR">Concept</a>, <a href="#RelationEntity-LR">Relation Entity</a>, or <a href="#Structure-LR">Structure</a>) and whose range is a scalar (<a href="#FacetedScalar-LR">Faceted Scalar</a> or <a href="#EnumeratedScalar-LR">Enumerated Scalar</a>). This means the values of a scalar property are literals of that scalar range. A scalar property is defined with the keywords <code>scalar</code> <code>property</code> followed by a name ID. It can also optionally specialize other scalar properties by following its name ID by the <code>:></code> symbol then a comma-separated list of those super properties' IRIs. It also has a pair of square brackets <code>[</code> <code>]</code> that contain the property’s <code>domain</code> (referencing a classifier), <code>range</code> (referencing a scalar), and optionally a semantic flag (<code>functional</code>) that specifies whether instances of the domain can have a single value maximum for this property.</p>
 <pre class="highlight highlight-html">Annotation*
 <code>scalar</code> <code>property</code> ID (<code>:></code> [ScalarProperty|IRI] (<code>,</code> [ScalarProperty|IRI])*)? (<code>[</code>
   <code>domain</code> [Classifier|IRI]
   <code>range</code> [Scalar|IRI]
-  <code>functional</code>?                // each instsance can have a maximum of 1 value for this property
+  <code>functional</code>?                // each instance can have a maximum of 1 value for this property
 <code>]</code>)?
 </pre>
     <p>The following example vocabulary defines three scalar properties named <em>hasId</em>, <em>hasName</em>, and <em>isAbstract</em>. The <em>hasId</em> property is functional and has a domain of <em>Component</em> and a range of <em>xsd:string</em>. The <em>hasName</em> property has a domain of <em>Function</em> and a range of <em>xsd:string</em>. Finally, the <em>isAbstract</em> property is functional and has the domain of <em>Function</em> and the range of <em>xsd:boolean</em>.</p>
@@ -2998,7 +2998,7 @@ true        // xsd:boolean
 <code>structure</code> <code>property</code> ID (<code>:></code> [StructuredProperty|IRI] (<code>,</code> [StructuredProperty|IRI])*)? (<code>[</code>
   <code>domain</code> [Classifier|IRI]
   <code>range</code> [Structure|IRI]
-  <code>functional</code>?                // each instsance can have a maximum of 1 value for this property
+  <code>functional</code>?                // each instance can have a maximum of 1 value for this property
 <code>]</code>)?
 </pre>
     <p>The following example vocabulary defines a structured property named <em>hasLocation</em> whose domain is concept <em>Shape</em> and whose range is structure <em>Point</em>. The latter is the domain of two scalar properties <em>hasX</em> and <em>hasY</em> that have a range of <em>xsd:int</em>.</p>
@@ -3029,7 +3029,7 @@ true        // xsd:boolean
 <code>annotation</code> <code>property</code> ID (<code>:></code> [AnnotationProperty|IRI] (<code>,</code> [AnnotationProperty|IRI])*)?
 </pre>
     <p>An annotation property is a non-semantic property, meaning that it has no logical semantics and thus is ignored by a logical reasoner. However, it allows specifying annotations on elements like ontologies, their imports, and their members.</p>
-    <p>The following example shows two vocabularies: <em>viewpoint</em> and <em>mission</em>. The former defines an annotaiton property <em>visualizeAs</em>, and the latter defines two concept <em>Component</em> and <em>Function</em>, and annotates them using the <em>visualizeAs</em> annotation.</p>
+    <p>The following example shows two vocabularies: <em>viewpoint</em> and <em>mission</em>. The former defines an annotation property <em>visualizeAs</em>, and the latter defines two concept <em>Component</em> and <em>Function</em>, and annotates them using the <em>visualizeAs</em> annotation.</p>
 <pre class="highlight highlight-html"><code>vocabulary</code> <code>&lt;</code>http://com.xyz/methodology/viewpoint#<code>></code> <code>as</code> viewpoint <code>{</code>
     <code>annotation</code> <code>property</code> visualizeAs
 <code>}</code>
@@ -3042,7 +3042,7 @@ true        // xsd:boolean
     <code>concept</code> Function
 <code>}</code>
 </pre>
-    <p>It is common to define libraries of annotation properties for tooling purposes to enable building generic tools. The following are some of the standard annotation propertis (more information about them can be found in the <a href="https://www.w3.org/TR/rdf-syntax-grammar/">rdf</a>, <a href="https://www.w3.org/TR/rdf-schema/">rdfs</a>, <a href="https://www.w3.org/TR/owl2-syntax/">owl</a>, and <a href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/">dc</a> specifications):</p>
+    <p>It is common to define libraries of annotation properties for tooling purposes to enable building generic tools. The following are some of the standard annotation properties (more information about them can be found in the <a href="https://www.w3.org/TR/rdf-syntax-grammar/">rdf</a>, <a href="https://www.w3.org/TR/rdf-schema/">rdfs</a>, <a href="https://www.w3.org/TR/owl2-syntax/">owl</a>, and <a href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/">dc</a> specifications):</p>
 <pre class="highlight highlight-html"><code>vocabulary</code> <code>&lt;</code>http://www.w3.org/1999/02/22-rdf-syntax-ns#<code>></code> <code>as</code> rdf <code>{</code>
     <code>annotation</code> <code>property</code> about
 <code>}</code>
@@ -3101,7 +3101,7 @@ true        // xsd:boolean
     <code>]</code>
 <code>}</code>
 </pre>
-    <p>An entity can define zero or more keys. When multiple keys are defined, the value of each key (a tuple of values of the key properties) must be unique for an instance of the entity. In the following example, concept <em>Component</em> has two keys, one key consists of the <em>hasUUID</em> property, while the other consists of both the <em>hasName</em> and the <em>hasAcroname</em> properties. This means for each unique component, the value of <em>hasUUID</em> has to be unique, as well as as the value of a tuple made of the values of <em>hasName</em> and <em>hasAcroname</em> together.</p>
+    <p>An entity can define zero or more keys. When multiple keys are defined, the value of each key (a tuple of values of the key properties) must be unique for an instance of the entity. In the following example, concept <em>Component</em> has two keys, one key consists of the <em>hasUUID</em> property, while the other consists of both the <em>hasName</em> and the <em>hasAcroname</em> properties. This means for each unique component, the value of <em>hasUUID</em> has to be unique, as well as the value of a tuple made of the values of <em>hasName</em> and <em>hasAcroname</em> together.</p>
 <pre class="highlight highlight-html"><code>vocabulary</code> <code>&lt;</code>http://www.w3.org/1999/02/22-rdf-syntax-ns#<code>></code> <code>as</code> rdf <code>{</code>
     <code>extends</code> <code>&lt;</code>http://www.w3.org/2001/XMLSchema#<code>></code> <code>as</code> xsd
     <code>concept</code> Component [
@@ -3113,10 +3113,10 @@ true        // xsd:boolean
     <h5 class="heading settled" data-level="3.2.4.2" id="RestrictionAxioms-LR"><span class="secno">3.2.4.2. </span><span class="content">Restriction Axioms</span><a class="self-link" href="#RestrictionAxioms-LR"></a></h5>
     <p>A <a href="#RestrictionAxiom-Syntax">restriction axiom</a> is an axiom defined on a classifier (<a href="#Aspect-LR">Aspect</a>, <a href="#Concept-LR">Concept</a>, <a href="#RelationEntity-LR">Relation Entity</a> and <a href="#Structure-LR">Structure</a>) that restricts a feature (a property or a relation) in some way in the classifier’s context. This feature can be a property (<a href="#ScalarProperty-LR">Scalar Property</a> or <a href="#StructuredProperty-LR">Structured Property</a>) whose domain is the context classifier or one of its supertypes, or a relation (<a href="#RelationEntity-LR">Forward Relation</a> or <a href="#RelationEntity-LR">Reverse Relation</a>) whose source is the context entity or one of its supertypes. The facets that can be restricted about those features vary (like their range, cardinality, or value) resulting in different subtypes of restriction axioms.</p>
     <p><u>Range Restriction Axioms</u></p>
-    <p>A range restriction axiom restrics the range of a feature in the context of some classifier. The axiom specifies a restricted range that is a subtype of the feature’s original range. The syntax of a range restriction axioms starts with the keyword <code>restricts</code> followed by a restriction kind, which can either be <code>all</code> (requiring all values to conform to the restricted range) or <code>some</code> (requiring at least one value to conform to the restricted range). This is followed by the kind of feature (<code>scalar property</code>, <code>structured property</code>, or <code>relation</code>) then a reference to the feature by IRI. Finally, the keyword <code>to</code> is used followed by a reference to the restricted range (a scalar, a structure, or an entity) by IRI. The following shows the three supported syntaxes:</p>
-<pre class="highlight highlight-html"><code>restricts</code> [<code>all</code>|<code>some</code>] <code>scalar</code> <code>property</code> [ScalarProperty|IRI] <code>to</code> [Scalar|IRI]
-<code>restricts</code> [<code>all</code>|<code>some</code>] <code>structured</code> <code>property</code> [StructuredProperty|IRI] <code>to</code> [Structure|IRI]
-<code>restricts</code> [<code>all</code>|<code>some</code>] <code>relation</code> [Relation|IRI] <code>to</code> [Entity|IRI]
+    <p>A range restriction axiom restricts the range of a feature in the context of some classifier. The axiom specifies a restricted range that is a subtype of the feature’s original range. The syntax of a range restriction axioms starts with the keyword <code>restricts</code> followed by a restriction kind, which can either be <code>all</code> (requiring all values to conform to the restricted range) or <code>some</code> (requiring at least one value to conform to the restricted range). This is followed by the kind of feature (<code>scalar property</code>, <code>structured property</code>, or <code>relation</code>) then a reference to the feature by IRI. Finally, the keyword <code>to</code> is used followed by a reference to the restricted range (a scalar, a structure, or an entity) by IRI. The following shows the three supported syntaxes:</p>
+<pre class="highlight highlight-html"><code>restricts</code> [ <code>all</code> | <code>some</code> ] <code>scalar</code> <code>property</code> [ScalarProperty|IRI] <code>to</code> [Scalar|IRI]
+<code>restricts</code> [ <code>all</code> | <code>some</code> ] <code>structured</code> <code>property</code> [StructuredProperty|IRI] <code>to</code> [Structure|IRI]
+<code>restricts</code> [ <code>all</code> | <code>some</code> ] <code>relation</code> [Relation|IRI] <code>to</code> [Entity|IRI]
 </pre>
     <p>The following example shows a vocabulary that defines a concept <em>Assembly</em> with some range restrictions.</p>
 <pre class="highlight highlight-html"><code>vocabulary</code> <code>&lt;</code>http://com.xyz/methodology/mission#<code>></code> <code>as</code> mission <code>{</code>
@@ -3132,8 +3132,8 @@ true        // xsd:boolean
     <code>scalar</code> ten-chars :> xsd:string <code>[</code>
         <code>length</code> 10
     <code>]</code>
-    structure Pin
-    structure InputPin :> Pin
+    <code>structure</code> Pin
+    <code>structure</code> InputPin :> Pin
     <code>relation</code> <code>entity</code> Performs <code>[</code>
         <code>from</code> Component
         <code>to</code> Function
@@ -3153,10 +3153,10 @@ true        // xsd:boolean
 <code>}</code>
 </pre>
     <p><u>Cardinality Restriction Axioms</u></p>
-    <p>A cardinality restriction axiom restrics the cardinality of a feature in the context of some classifier. The axiom specifies a minimum, a maximum, or an exact number of values, conforming to the original range, or to a specified restricted range, that a feature can have in that context. The syntax of a cardinality restriction axioms starts with the keyword <code>restricts</code> followed by the kind of feature (<code>scalar property</code>, <code>structured property</code>, or <code>relation</code>) then a reference to the feature by IRI. Then, the keyword <code>to</code> is used followed by a cadinality kind (<code>min</code>, <code>max</code>, or <code>exactly</code>), a cardinality value (positive integer), and finally an optional reference to a restricted range (a scalar, a structure, or an entity) by IRI. The following shows the three supported syntaxes:</p>
-<pre class="highlight highlight-html"><code>restricts</code> <code>scalar</code> <code>property</code> [ScalarProperty|IRI] <code>to</code> [<code>max</code>|<code>min</code>|<code>exactly</code>] UnsignedInteger [Scalar|IRI]?
-<code>restricts</code> <code>structured</code> <code>property</code> [StructuredProperty|IRI] <code>to</code> [<code>max</code>|<code>min</code>|<code>exactly</code>] UnsignedInteger [Structure|IRI]?
-<code>restricts</code> <code>relation</code> [Relation|IRI] <code>to</code> [<code>max</code>|<code>min</code>|<code>exactly</code>] UnsignedInteger [Entity|IRI]?
+    <p>A cardinality restriction axiom restricts the cardinality of a feature in the context of some classifier. The axiom specifies a minimum, a maximum, or an exact number of values, conforming to the original range, or to a specified restricted range, that a feature can have in that context. The syntax of a cardinality restriction axioms starts with the keyword <code>restricts</code> followed by the kind of feature (<code>scalar property</code>, <code>structured property</code>, or <code>relation</code>) then a reference to the feature by IRI. Then, the keyword <code>to</code> is used followed by a cardinality kind (<code>min</code>, <code>max</code>, or <code>exactly</code>), a cardinality value (positive integer), and finally an optional reference to a restricted range (a scalar, a structure, or an entity) by IRI. The following shows the three supported syntaxes:</p>
+<pre class="highlight highlight-html"><code>restricts</code> <code>scalar</code> <code>property</code> [ScalarProperty|IRI] <code>to</code> [ <code>max</code> | <code>min</code> | <code>exactly</code> ] UnsignedInteger [Scalar|IRI]?
+<code>restricts</code> <code>structured</code> <code>property</code> [StructuredProperty|IRI] <code>to</code> [ <code>max</code> | <code>min</code> | <code>exactly</code> ] UnsignedInteger [Structure|IRI]?
+<code>restricts</code> <code>relation</code> [Relation|IRI] <code>to</code> [ <code>max</code> | <code>min</code> | <code>exactly</code> ] UnsignedInteger [Entity|IRI]?
 </pre>
     <p>The following example shows a vocabulary that defines a concept <em>Assembly</em> with some cardinality restrictions.</p>
 <pre class="highlight highlight-html"><code>vocabulary</code> <code>&lt;</code>http://com.xyz/methodology/mission#<code>></code> <code>as</code> mission <code>{</code>
@@ -3168,8 +3168,8 @@ true        // xsd:boolean
         <code>restricts</code> <code>structured</code> <code>property</code> hasPin <code>to</code> max 2 InputPin    // there must be at most two input pins
         <code>restricts</code> <code>relation</code> performs <code>to</code> min 5                      // a minimum of 5 functions must be performed
     ]
-    structure Pin
-    structure InputPin :> Pin
+    <code>structure</code> Pin
+    <code>structure</code> InputPin :> Pin
     <code>relation</code> <code>entity</code> Performs <code>[</code>
         <code>from</code> Component
         <code>to</code> Function
@@ -3189,7 +3189,7 @@ true        // xsd:boolean
 <code>}</code>
 </pre>
     <p><u>Value Restriction Axioms</u></p>
-    <p>A value restriction axiom restrics the value of a feature in the context of some classifier. In the case of a relation, the restricted value represents the relation’s target instance. The syntax of a value restriction axioms starts with the keyword <code>restricts</code> followed by the kind of feature (<code>scalar property</code>, <code>structured property</code>, or <code>relation</code>) then a reference to the feature by IRI. Then, the keyword <code>to</code> is used followed by a value that is suitable for each case (a <a href="#Literal-Syntax">literal</a> for a scalar property, a <a href="#StructureInstance-Syntax">structure instance</a> for a structured property, or a reference to a <a href="#NamedInstance-Syntax">named instance</a> by IRI for a relation). The following shows the three supported syntaxes:</p>
+    <p>A value restriction axiom restricts the value of a feature in the context of some classifier. In the case of a relation, the restricted value represents the relation’s target instance. The syntax of a value restriction axioms starts with the keyword <code>restricts</code> followed by the kind of feature (<code>scalar property</code>, <code>structured property</code>, or <code>relation</code>) then a reference to the feature by IRI. Then, the keyword <code>to</code> is used followed by a value that is suitable for each case (a <a href="#Literal-Syntax">literal</a> for a scalar property, a <a href="#StructureInstance-Syntax">structure instance</a> for a structured property, or a reference to a <a href="#NamedInstance-Syntax">named instance</a> by IRI for a relation). The following shows the three supported syntaxes:</p>
 <pre class="highlight highlight-html"><code>restricts</code> <code>scalar</code> <code>property</code> [ScalarProperty|IRI] <code>to</code> Literal
 <code>restricts</code> <code>structured</code> <code>property</code> [StructuredProperty|IRI] <code>to</code> StructureInstance
 <code>restricts</code> <code>relation</code> [Relation|IRI] <code>to</code> [NamedInstance|IRI]
@@ -3201,11 +3201,11 @@ true        // xsd:boolean
     <code>concept</code> Component
     <code>concept</code> Function
     <code>concept</code> Assembly :> Component [
-        <code>restricts</code> <code>scalar</code> <code>property</code> hasId <code>to</code> "ABC"                      // hasId must have a value of "ABC"
-        <code>restricts</code> <code>structured</code> <code>property</code> hasPin <code>to</code> Pin [ hasNumber 1 ]   // hasPin must have a Pin with hasNumber of 1
-        <code>restricts</code> <code>relation</code> performs <code>to</code> functions:F1                   // the performed function must be functions:F1
+        <code>restricts</code> <code>scalar</code> <code>property</code> hasId <code>to</code> "ABC"                          // hasId must have a value of "ABC"
+        <code>restricts</code> <code>structured</code> <code>property</code> hasPin <code>to</code> Pin <code>[</code> hasNumber 1 <code>]</code>   // hasPin must have a Pin with hasNumber of 1
+        <code>restricts</code> <code>relation</code> performs <code>to</code> functions:F1                         // the performed function must be functions:F1
     ]
-    structure Pin
+    <code>structure</code> Pin
     <code>relation</code> <code>entity</code> Performs <code>[</code>
         <code>from</code> Component
         <code>to</code> Function
@@ -3235,13 +3235,13 @@ true        // xsd:boolean
 }
 </pre>
     <h4 class="heading settled" data-level="3.2.5" id="Rule-LR"><span class="secno">3.2.5. </span><span class="content">Rule</span><a class="self-link" href="#Rule-LR"></a></h4>
-    <p>A <a href="#Rule-Syntax">rule</a> is a member of a vocabulary and represents an additional inference rule in the domain that can be used by a reasoner to generate entailments. A rule has two sets of predicates (patterns that must hold); the first set is called the rule’s antecedant (predicates to match for the rule to trigger), and the second set is called the rule’s consequent (predicates that are inferred once the antecedant is matched). The syntax of a rule starts with the keyword <code>rule</code> followed by a name ID, then a pair of square brackets <code>[</code> <code>]</code> that wrap the rule’s predicates. The antecedent predicates are specified first separated by the <code>^</code> symbol (which means a logical AND), followed by an implication arrow <code>-></code>, then the consequent predicates separated also by the <code>^</code> symbol.</p>
+    <p>A <a href="#Rule-Syntax">rule</a> is a member of a vocabulary and represents an additional inference rule in the domain that can be used by a reasoner to generate entailments. A rule has two sets of predicates (patterns that must hold); the first set is called the rule’s antecedent (predicates to match for the rule to trigger), and the second set is called the rule’s consequent (predicates that are inferred once the antecedent is matched). The syntax of a rule starts with the keyword <code>rule</code> followed by a name ID, then a pair of square brackets <code>[</code> <code>]</code> that holds the rule’s predicates. The antecedent predicates are specified first separated by the <code>^</code> symbol (which means a logical AND), followed by an implication arrow <code>-></code>, then the consequent predicates separated also by the <code>^</code> symbol.</p>
 <pre class="highlight highlight-html">Annotation*
 <code>rule</code> ID <code>[</code>
   Predicate (<code>^</code> Predicate)* <code>-></code> Predicate (<code>^</code> Predicate)*
 <code>]</code>
 </pre>
-    <p>A predicate represents a pattern in the model that can be matched or inferred, dependening on whether it appears in a rule’s antecdent or consequent, respectively. The set of supported predicates are the following:</p>
+    <p>A predicate represents a pattern in the model that can be matched or inferred, depending on whether it appears in a rule’s antecedent or consequent, respectively. The set of supported predicates are the following:</p>
     <ul>
      <li data-md>
       <p><a href="#TypePredicate-Syntax">Type Predicate</a></p>
@@ -3302,14 +3302,14 @@ true        // xsd:boolean
 <code>}</code>
 </pre>
     <h3 class="heading settled" data-level="3.3" id="Description-LR"><span class="secno">3.3. </span><span class="content">Description</span><a class="self-link" href="#Description-LR"></a></h3>
-    <p>A <a href="#Description-Syntax">description</a> is an ontology that uses terms in vocabularies to describe <a href="#NamedInstance-Syntax">named instances</a> in a given domain. A description is declared with the keywords <code>description</code> as its ontology kind, followed by its NAMESPACE, the keyword <code>as</code>, and its prefix ID. It also has a body consisting of zero or more description imports and statements between two braces <code>{</code> <code>}</code>, as follows:</p>
+    <p>A <a href="#Description-Syntax">description</a> is an ontology that uses vocabularies to describe <a href="#NamedInstance-Syntax">named instances</a> in a given domain. A description is declared with the keywords <code>description</code> as its ontology kind, followed by its NAMESPACE, the keyword <code>as</code>, and its prefix ID. It also has a body consisting of zero or more description imports and statements between two braces <code>{</code> <code>}</code>, as follows:</p>
 <pre class="highlight highlight-html">Annotation*
 <code>description</code> NAMESPACE <code>as</code> ID <code>{</code>
   DescriptionImport*
   DescriptionStatement*
 <code>}</code>
 </pre>
-    <p>For example, the following description defines the components of a system and the functions they perform. It has the namespace <em>http://com.xyz/system/components#</em> and the prefix <em>components</em>.</p>
+    <p>The following example description is meant to describe the components of a system. It has the namespace <em>http://com.xyz/system/components#</em> and the prefix <em>components</em>.</p>
 <pre class="highlight highlight-html"><code>description</code> <code>&lt;</code>http://com.xyz/system/components#<code>></code> <code>as</code> components <code>{</code>
 <code>}</code>
 </pre>
@@ -3320,7 +3320,7 @@ true        // xsd:boolean
 <pre class="highlight highlight-html">Annotation*
 <code>uses</code> NAMESPACE (<code>as</code> ID)?
 </pre>
-    <p>For example, the <em>components</em> description <em>uses</em> the <em>mission</em> vocabulary to describe components of a system and the functions they perform.</p>
+    <p>In the following example description, the <em>mission</em> vocabulary is used to describe components of a system.</p>
 <pre class="highlight highlight-html"><code>description</code> <code>&lt;</code>http://com.xyz/system/components#<code>></code> <code>as</code> components <code>{</code>
     <code>uses</code> <code>&lt;</code>http://com.xyz/methodology/mission#<code>></code> <code>as</code> mission
 
@@ -3328,11 +3328,11 @@ true        // xsd:boolean
 <code>}</code>
 </pre>
     <h5 class="heading settled" data-level="3.3.1.2" id="DescriptionExtension-LR"><span class="secno">3.3.1.2. </span><span class="content">Extension</span><a class="self-link" href="#DescriptionExtension-LR"></a></h5>
-    <p>A <a href="#DescriptionExtension">description extension</a> is a kind of <a href="#Import">import</a> statement that can be added to a description to specify that it extends another description. This can be used to split a system description into fragments that focus on different concerns or are contributed by different authorities. In this case, each description <em>extends</em> the other descriptions it depends on (e.g., by cross referencing named instances from them). A description extension is defined with the keyword <code>extends</code> followed by the imported description’s NAMESPACE. If members of the imported description are to be referenced using their ABBREVIATED_IRIs, then the NAMESPACE needs to be followed by the keyword <code>as</code> and a unique prefix ID within the description’s imports.</p>
+    <p>A <a href="#DescriptionExtension">description extension</a> is a kind of <a href="#Import">import</a> statement that can be added to a description to specify that it extends another description. This can be used to split a system description into fragments that focus on different concerns or are contributed by different authorities. In this case, a description may extend other descriptions that it depends on. A description extension is defined with the keyword <code>extends</code> followed by the imported description’s NAMESPACE. If members of the imported description are to be referenced using their ABBREVIATED_IRIs, then the NAMESPACE needs to be followed by the keyword <code>as</code> and a unique prefix ID within the description’s imports.</p>
 <pre class="highlight highlight-html">Annotation*
 <code>extends</code> NAMESPACE (<code>as</code> ID)?
 </pre>
-    <p>For example, the <em>system1</em> description <em>extends</em> the <em>subsystem1</em> and <em>subsystem2</em> descriptions and defines component <em>System1</em> that aggregates components <em>Subsystem1</em> and <em>Subsystem2</em>, defined in these descriptions respectively.</p>
+    <p>The following example description <em>subsystem1</em> extends two other descriptions, <em>subsystem1</em> and <em>subsystem2</em>, and defines component <em>System1</em> that aggregates components <em>Subsystem1</em> and <em>Subsystem2</em> defined in these descriptions, respectively.</p>
 <pre class="highlight highlight-html"><code>description</code> <code>&lt;</code>http://com.xyz/system/system1#<code>></code> <code>as</code> system1 <code>{</code>
     <code>uses</code> <code>&lt;</code>http://com.xyz/methodology/mission#<code>></code> <code>as</code> mission
     <code>extends</code> <code>&lt;</code>http://com.xyz/methodology/system1/subsystem1#<code>></code> <code>as</code> subsystem1
@@ -3345,13 +3345,15 @@ true        // xsd:boolean
 <code>}</code>
 </pre>
     <h4 class="heading settled" data-level="3.3.2" id="Instances-LR"><span class="secno">3.3.2. </span><span class="content">Instances</span><a class="self-link" href="#Instances-LR"></a></h4>
+    <p>Instances represent objects or data in a given system. They are described using terms (types and properties) from some vocabulary. Specifically, they can be given types and have assertions on features in the domain of those types. Instances can either be named (<a href="#ConceptInstance-LR">Concept Instance</a> and <a href="#RelationInstance-LR">Relation Instance</a>), in which case they are specified as members of some description, or they can be anonymous (<a href="#StructureInstance-LR">Structure Instance</a>), in which case they defined as values of features (e.g., <a href="#StructuredProperty-LR">structured properties</a>) in the context of other (named or anonymous) instances.</p>
     <h5 class="heading settled" data-level="3.3.2.1" id="ConceptInstance-LR"><span class="secno">3.3.2.1. </span><span class="content">Concept Instance</span><a class="self-link" href="#ConceptInstance-LR"></a></h5>
-    <p>A <a href="#ConceptInstance-Syntax">concept instance</a> is a named instance defined in a description and can be typed by a concept (from some imported vocabulary). The concept instance is declared with the keyword <code>ci</code> and a name ID. It can optionally be followed by a <code>:</code> and an IRI to a concept that is the type of the instance. It can also optionally be followed by a pair of square brackets <code>[</code> <code>]</code> that holds other assertions about the instance.</p>
+    <p>A <a href="#ConceptInstance-Syntax">concept instance</a> is a named instance defined as a member of a description and can be typed by concepts (from some imported vocabulary). The concept instance is declared with the keyword <code>ci</code> and a name ID. It can optionally be followed by a <code>:</code> and the IRIs of one or more concepts that are considered types of the instance. It can also optionally be followed by a pair of square brackets <code>[</code> <code>]</code> that holds assertions about the instance.</p>
 <pre class="highlight highlight-html">Annotation*
-<code>ci</code> ID (<code>:</code> [Concept|IRI])? (<code>[</code>
-<code>]</code>)?
+<code>ci</code> ID (<code>:</code> [Concept|IRI] (<code>,</code> [Concept|IRI])*)? (<code>[</code>
+      Assertion*
+  <code>]</code>)?
 </pre>
-    <p>The following example description defines two concept instances: one named <em>component1</em> and typed by concept <em>mission:Component</em>, while the other is named <em>function1</em> and typed by concept <em>mission:Function</em>. Notice that the concepts are reference by ABBREVIIATED_IRI since they are imported with their vocabulary’s namespace prefix.</p>
+    <p>The following example description defines two concept instances: one named <em>component1</em> and typed by concept <em>mission:Component</em>, while the other is named <em>function1</em> and typed by concept <em>mission:Function</em>.</p>
 <pre class="highlight highlight-html"><code>description</code> <code>&lt;</code>http://com.xyz/system/components#<code>></code> <code>as</code> components <code>{</code>
     <code>uses</code> <code>&lt;</code>http://com.xyz/methodology/mission#<code>></code> <code>as</code> mission
     <code>ci</code> component1 <code>:</code> mission:Component
@@ -3359,12 +3361,63 @@ true        // xsd:boolean
 <code>}</code>
 </pre>
     <h5 class="heading settled" data-level="3.3.2.2" id="RelationInstance-LR"><span class="secno">3.3.2.2. </span><span class="content">Relation Instance</span><a class="self-link" href="#RelationInstance-LR"></a></h5>
-    <p>TBD</p>
+    <p>A <a href="#RelationInstance-Syntax">relation instance</a> is a named instance defined as a member of a description and can be typed by relation entities (from some imported vocabulary). The relation instance is declared with the keyword <code>ri</code> and a name ID. It can optionally be followed by a <code>:</code> and the IRIs of one or more relation entities that are considered types of the instance. It is also followed by a pair of square brackets <code>[</code> <code>]</code> that allows specifying the sources and targets of the relation instance and holds assertions about the instance. The sources of the relation instance are specified with the keyword <code>from</code> followed by one or more IRIs of named instances. Similarly, the targets of the relation instance are specified with the keyword <code>to</code> followed by one or more IRIs of named instances.</p>
+<pre class="highlight highlight-html">Annotation*
+<code>ri</code> ID (<code>:</code> [RelationEntity|IRI] (<code>,</code> [RelationEntity|IRI])*)? <code>[</code>
+  <code>from</code> [NamedInstance|IRI] (<code>,</code> [NamedInstance|IRI])* 
+  <code>to</code> [NamedInstance|IRI] (<code>,</code> [NamedInstance|IRI])*
+  Assertion*
+<code>]</code>
+</pre>
+    <p>The following example description defines three concept instances: <em>component1</em> typed by concept <em>mission:Component</em>, and <em>function1</em> and <em>function2</em> typed by concept <em>mission:Function</em>. It also defines a relation instance <em>performs1</em> typed by the <em>mission:Performs</em> relation entity that has <em>component1</em> as a source, and both <em>function1</em> and <em>function2</em> as targets.</p>
+<pre class="highlight highlight-html"><code>description</code> <code>&lt;</code>http://com.xyz/system/components#<code>></code> <code>as</code> components <code>{</code>
+    <code>uses</code> <code>&lt;</code>http://com.xyz/methodology/mission#<code>></code> <code>as</code> mission
+    <code>ci</code> component1 <code>:</code> mission:Component
+    <code>ci</code> function1 <code>:</code> mission:Function
+    <code>ci</code> function2 <code>:</code> mission:Function
+    <code>ri</code> perform1 <code>:</code> mission:Performs <code>[</code>
+        <code>from</code> component1
+        <code>to</code> function1, function2
+    <code>]</code>
+<code>}</code>
+</pre>
     <h5 class="heading settled" data-level="3.3.2.3" id="StructureInstance-LR"><span class="secno">3.3.2.3. </span><span class="content">Structure Instance</span><a class="self-link" href="#StructureInstance-LR"></a></h5>
-    <p>TBD</p>
+    <p>A <a href="#StructureInstance-Syntax">structure instance</a> is an anonymous instance that can be defined as a value of a structured property. Such value can either be specified in a <a href="#StructuredPropertyValueAssertion-LR">structured property value assertion</a>, defined in the context of some instance, or in a <a href="#RestrictionAxioms-LR">value restriction axiom</a> on some structured property in the context of some classifier. A structure instance is declared with the IRI of a structure followed by a pair of square brackets <code>[</code> <code>]</code> that holds assertions about the instance.</p>
+<pre class="highlight highlight-html">[Structure|IRI] <code>[</code>
+  Assertion*
+<code>]</code>
+</pre>
+    <p>The following example shows .</p>
+<pre class="highlight highlight-html"><code>vocabulary</code> <code>&lt;</code>http://com.xyz/system/components#<code>></code> <code>as</code> components <code>{</code>
+    <code>extends</code> <code>&lt;</code>http://www.w3.org/2001/XMLSchema#<code>></code> <code>as</code> xsd
+    <code>uses</code> <code>&lt;</code>http://com.xyz/methodology/functions#<code>></code> <code>as</code> functions
+    <code>concept</code> Component [
+        <code>restricts</code> <code>structured</code> <code>property</code> hasPin <code>to</code> Pin <code>[</code> hasNumber 1 <code>]</code>   // structure instance used as restricted value
+    ]
+    <code>structure</code> Pin
+    <code>structured</code> <code>property</code> hasPin <code>[</code>
+        <code>domain</code> Component
+        <code>range</code> Pin
+        <code>functional</code>
+   <code>]</code>
+    <code>scalar</code> <code>property</code> hasNumber <code>[</code>
+        <code>domain</code> Pin
+        <code>range</code> xsd:int
+        <code>functional</code>
+   <code>]</code>
+<code>}</code>
+
+<code>description</code> <code>&lt;</code>http://com.xyz/methodology/functions#<code>></code> <code>as</code> functions <code>{</code>
+    <code>uses</code> <code>&lt;</code>http://com.xyz/methodology/mission#<code>></code> <code>as</code> mission
+    <code>ci</code> C1 <code>:</code> mission:Component <code>[</code>
+        mission:hasPin Pin <code>[</code> mission:hasNumber 2 <code>]</code>                    // structure instance used in value assertion
+    <code>]</code>
+<code>}</code>
+</pre>
     <h4 class="heading settled" data-level="3.3.3" id="Assertions-LR"><span class="secno">3.3.3. </span><span class="content">Assertions</span><a class="self-link" href="#Assertions-LR"></a></h4>
-    <h5 class="heading settled" data-level="3.3.3.1" id="ScalarPropertyValueAssertion-LR"><span class="secno">3.3.3.1. </span><span class="content">Scalar Property Value</span><a class="self-link" href="#ScalarPropertyValueAssertion-LR"></a></h5>
-    <p>A value for a scalar property can be <a href="#ScalarPropertyValueAssertion-Syntax">asserted</a> on a named instance (e.g., concept instance) in a description. Such assertion can be added as one of the assertions between the square  brackets <code>[</code> <code>]</code> of the instance. Its syntax consists of an IRI to a <a href="#ScalarProperty-Syntax">scalar property</a> from some vocabulary followed by a literal.</p>
+    <p>Assertions are statements about instances that enable characterizing them. They appear in the body of an instance (either named or anonymous) between its two brackets <code>[</code> <code>]</code>. This section describes the supported assertions, which include a <a href="#ScalarPropertyValueAssertion-LR">scalar property value assertion</a> (specified on instances), <a href="#StructuredPropertyValueAssertion-LR">structured property value assertion</a> (specified on instances), and a <a href="#LinkAssertion-LR">link assertion</a> (specified on named instances).</p>
+    <h5 class="heading settled" data-level="3.3.3.1" id="ScalarPropertyValueAssertion-LR"><span class="secno">3.3.3.1. </span><span class="content">Scalar Property Value Assertion</span><a class="self-link" href="#ScalarPropertyValueAssertion-LR"></a></h5>
+    <p>A value for a scalar property can be <a href="#ScalarPropertyValueAssertion-Syntax">asserted</a> on an instance (<a href="#ConceptInstance-LR">Concept Instance</a>, <a href="#RelationInstance-LR">Relation Instance</a>, or <a href="#StructureInstance-LR">Structure Instance</a>). Such assertion can be added as one of the assertions between the square  brackets <code>[</code> <code>]</code> of the instance. Its syntax consists of an IRI to a <a href="#ScalarProperty-Syntax">scalar property</a> from some vocabulary followed by a literal.</p>
 <pre class="highlight highlight-html">[ScalarProperty|IRI] Literal
 </pre>
     <p>The following example description defines two concept instances that each makes a number of scalar property assertions. Specifically, instance <em>component1</em> asserts that its <em>mission:hasId</em> property has a string value of <em>C1</em>, while instance <em>function1</em> asserts that its <em>mission:hasName</em> property has a string value of <em>F1</em> and its <em>mission:isAbstract</em> property has a Boolean value of <em>true</em>.</p>
@@ -3379,13 +3432,23 @@ true        // xsd:boolean
     <code>]</code>
 <code>}</code>
 </pre>
-    <h5 class="heading settled" data-level="3.3.3.2" id="StructuredPropertyValueAssertion-LR"><span class="secno">3.3.3.2. </span><span class="content">Structured Property Value</span><a class="self-link" href="#StructuredPropertyValueAssertion-LR"></a></h5>
-    <p>TBD</p>
-    <h5 class="heading settled" data-level="3.3.3.3" id="LinkAssertion-LR"><span class="secno">3.3.3.3. </span><span class="content">Relation Link</span><a class="self-link" href="#LinkAssertion-LR"></a></h5>
-    <p>A link, which is an unreified reference to a named instance (e.g., concept instance), can be <a href="#ScalarPropertyValueAssertion-Syntax">asserted</a> on a named instance in a description. It represents a relation between the referencing instance (the source) and the referenced instance (the target). Such assertion can be added as one of the assertions between the square  brackets <code>[</code> <code>]</code> of the referencing instance. Its syntax consists of an IRI to a <a href="#Relation-Syntax">relation</a> from some vocabulary followed by an IRI to a <a href="#NamedInstance-Syntax">named instance</a> from some description.</p>
+    <h5 class="heading settled" data-level="3.3.3.2" id="StructuredPropertyValueAssertion-LR"><span class="secno">3.3.3.2. </span><span class="content">Structured Property Value Assertion</span><a class="self-link" href="#StructuredPropertyValueAssertion-LR"></a></h5>
+    <p>A value for a structured property can be <a href="#StructuredPropertyValueAssertion-Syntax">asserted</a> on an instance (<a href="#ConceptInstance-LR">Concept Instance</a>, <a href="#RelationInstance-LR">Relation Instance</a>, or <a href="#StructureInstance-LR">Structure Instance</a>). Such assertion can be added as one of the assertions between the square  brackets <code>[</code> <code>]</code> of the instance. Its syntax consists of an IRI to a <a href="#ScalarProperty-Syntax">structured property</a> from some vocabulary followed by a <a href="#StructureInstance-LR">structure instance</a>.</p>
+<pre class="highlight highlight-html">[StructuredProperty|IRI] StuctureInstance
+</pre>
+    <p>The following example description defines a concept instance <em>C1</em> which asserts a value for structured property <em>mission:hasPin</em> to have a structure instance whose <em>mission:hasNumber</em> property value is asserted to be 2.</p>
+<pre class="highlight highlight-html"><code>description</code> <code>&lt;</code>http://com.xyz/methodology/functions#<code>></code> <code>as</code> functions <code>{</code>
+    <code>uses</code> <code>&lt;</code>http://com.xyz/methodology/mission#<code>></code> <code>as</code> mission
+    <code>ci</code> C1 <code>:</code> mission:Component <code>[</code>
+        mission:hasPin Pin <code>[</code> mission:hasNumber 2 <code>]</code>       // structure instance used in value assertion
+    <code>]</code>
+<code>}</code>
+</pre>
+    <h5 class="heading settled" data-level="3.3.3.3" id="LinkAssertion-LR"><span class="secno">3.3.3.3. </span><span class="content">Link Assertion</span><a class="self-link" href="#LinkAssertion-LR"></a></h5>
+    <p>A named instance can be <a href="#LinkAssertion-Syntax">asserted</a> as a target of a link typed by an unreified relation (<a href="#RelationEntity-LR">Forward Relation</a> or <a href="#RelationEntity-LR">Reverse Relation</a>) on a named instance representing the link’s source.  A link is a light-weight alternative to a <a href="#RelationInstance-LR">relation instance</a> in the sense that it relates two named instances but does not define a new instance for the relation itself. Therefore, unlike a relation instance, a link cannot be characterized by assertions. Also, unlike a relation instance, which can relate one or more sources or one or more targets, a link can only relate a single source to a single target. A link assertion can be added between the square brackets <code>[</code> <code>]</code> of a named instance (the source). Its syntax consists of an IRI to a <a href="#Relation-Syntax">relation</a> followed by an IRI of a <a href="#NamedInstance-Syntax">named instance</a> (the target).</p>
 <pre class="highlight highlight-html">[Relation|IRI] [NamedInstance|IRI]
 </pre>
-    <p>The following example description defines two concept instances with a link asserted between them. Specifically, instance <em>component1</em> asserts a link of type <em>mission:performs</em> (the forward unreified relation of relation entity <em>mission:Performs</em>) to instance <em>function1</em>.</p>
+    <p>The following example description defines two concept instances with a link asserted between them. Specifically, instance <em>component1</em> asserts a link of type <em>mission:performs</em> (the forward relation of relation entity <em>mission:Performs</em>) to instance <em>function1</em>.</p>
 <pre class="highlight highlight-html"><code>description</code> <code>&lt;</code>http://com.xyz/system/components#<code>></code> <code>as</code> components <code>{</code>
     <code>uses</code> <code>&lt;</code>http://com.xyz/methodology/mission#<code>></code> <code>as</code> mission
     <code>ci</code> component1 <code>:</code> mission:Component <code>[</code>
@@ -3398,7 +3461,6 @@ true        // xsd:boolean
     <code>]</code>
 <code>}</code>
 </pre>
-    <p class="note" role="note"><span>Note:</span> a link is typed by an unreified (forward or reverse) relation, hence (unlike a <a href="#RelationInstance-Syntax">relation instance</a>) cannot have its own assertions.</p>
     <h3 class="heading settled" data-level="3.4" id="VocabularyBundle-LR"><span class="secno">3.4. </span><span class="content">Vocabulary Bundle</span><a class="self-link" href="#VocabularyBundle-LR"></a></h3>
     <p>A <a href="#VocabularyBundle-Syntax">vocabulary bundle</a> is an ontology that bundles a set of vocabularies and allows description logic (DL) reasoning with <a href="#Description-Logic-Semantics">closed-world semantics</a> using them (in contrast to a vocabulary that has <a href="#Description-Logic-Semantics">open-world semantics</a>). A vocabulary bundle is declared with the keywords <code>vocabulary</code> <code>bundle</code> as its ontology kind, followed by its NAMESPACE, the keyword <code>as</code>, and its prefix ID. It also has a body consisting of zero or more vocabulary bundle imports between two braces <code>{</code> <code>}</code>, as follows:</p>
 <pre class="highlight highlight-html">Annotation*
@@ -3411,6 +3473,7 @@ true        // xsd:boolean
 <code>}</code>
 </pre>
     <h4 class="heading settled" data-level="3.4.1" id="VocabularyBundleImports-LR"><span class="secno">3.4.1. </span><span class="content">Imports</span><a class="self-link" href="#VocabularyBundleImports-LR"></a></h4>
+    <p>This section outlines the kind of import statements that can be added in a vocabulary bundle’s body.</p>
     <h5 class="heading settled" data-level="3.4.1.1" id="VocabularyBundleInclusion-LR"><span class="secno">3.4.1.1. </span><span class="content">Inclusion</span><a class="self-link" href="#VocabularyBundleInclusion-LR"></a></h5>
     <p>An <a href="#VocabularyBundleInclusion">vocabulary bundle inclusion</a> is a kind of <a href="#Import">import</a> statement that can be added to a vocabulary bundle to specify that it includes a vocabulary. A vocabulary bundle inclusion is defined with the keyword <code>includes</code> followed by the imported vocabulary’s NAMESPACE. If members of the imported vocabulary are to be referenced using their ABBREVIATED_IRIs, then the NAMESPACE needs to be followed by the keyword <code>as</code> and a unique prefix ID in the bundle’s imports.</p>
 <pre class="highlight highlight-html">Annotation*
@@ -3446,6 +3509,7 @@ true        // xsd:boolean
 <code>}</code>
 </pre>
     <h4 class="heading settled" data-level="3.5.1" id="DescriptionBundleImports-LR"><span class="secno">3.5.1. </span><span class="content">Imports</span><a class="self-link" href="#DescriptionBundleImports-LR"></a></h4>
+    <p>This section outlines the kind of import statements that can be added in a description bundle’s body.</p>
     <h5 class="heading settled" data-level="3.5.1.1" id="DescriptionBundleInclusion-LR"><span class="secno">3.5.1.1. </span><span class="content">Inclusion</span><a class="self-link" href="#DescriptionBundleInclusion-LR"></a></h5>
     <p>A <a href="#DescriptionBundleInclusion">description bundle inclusion</a> is a kind of <a href="#Import">import</a> statement that can be added to a description bundle to specify that it includes a description. A description bundle inclusion is defined with the keyword <code>includes</code> followed by the imported description’s NAMESPACE. If members of the imported description are to be referenced using their ABBREVIATED_IRIs, then the NAMESPACE needs to be followed by the keyword <code>as</code> and a unique prefix ID in the bundle’s imports.</p>
 <pre class="highlight highlight-html">Annotation*
@@ -3780,7 +3844,7 @@ true        // xsd:boolean
   <code>]</code>
 
 <a data-link-type="dfn" href="#structureinstance" id="StructureInstance-Syntax">StructureInstance</a>:
-  type=[Structure|IRI] <code>[</code>
+  [Structure|IRI] <code>[</code>
     PropertyValueAssertion*
   <code>]</code>
 
