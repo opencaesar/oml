@@ -300,7 +300,7 @@
 	`]`
 
 <a id="StructureInstance-Syntax">StructureInstance</a>:
-	type=[Structure|IRI] `[`
+	[Structure|IRI] `[`
 		PropertyValueAssertion*
 	`]`
 

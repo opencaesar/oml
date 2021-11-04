@@ -315,9 +315,9 @@ Note: descriptions that are used by a vocabulary typically define notable instan
 
 ### Types ### {#Types-LR}
 
-Types that can be defined in a vocabulary are either *classifiers* (structured types) or *scalars* (primitive types). Some classifiers ([Aspect](#Aspect-LR), [Concept](#Concept-LR) and [Relation Entity]((#RelationEntity-LR))) are *entities*, meaning they can classify named instances (that are unique by reference). Other classifiers ([Structure](#Structure-LR)) can only classify anonymous instances (that are unique by value). Also, some scalars ([Faceted Scalar](#FacetedScalar-LR)) can classify an unlimited set literals, while other scalars ([Enumerated Scalar](#EnumeratedScalar-LR)) can only classify a limited set of literals.
+Types that can be defined in a vocabulary are either *classifiers* (structured types) or *scalars* (primitive types). Some classifiers ([Aspect](#Aspect-LR), [Concept](#Concept-LR) and [Relation Entity]((#RelationEntity-LR))) are *entities*, meaning they can classify named instances (that are unique by reference). Other classifiers ([Structure](#Structure-LR)) can only classify anonymous instances (that are unique by value). Also, some scalars ([Faceted Scalar](#FacetedScalar-LR)) can classify an unlimited set of literals, while other scalars ([Enumerated Scalar](#EnumeratedScalar-LR)) can only classify a limited set of literals.
 
-Classifiers can specialize one or more classifiers (multiple-inheritance), while scalars can only specialize one scalar only (single-inheritance). These specializations are further constrainted for each type as discussed below.
+Classifiers can specialize one or more classifiers (multiple-inheritance), while scalars can only specialize one scalar only (single-inheritance). These specializations are further constrained for each type as discussed below.
 
 #### Aspect #### {#Aspect-LR}
 
@@ -341,7 +341,7 @@ The following example vocabulary defines two aspects: *IdentifiedElement* and *N
 `}`
 </pre>
 
-Two special aspects defined by the owl vocabulary are: *owl:Thing* and *owl:Nothing*. Aspect *owl:Thing* represents the top of the specializtion hierarchy and the implicit supertype of all entities. This means if an entity is declared with no supertype, then it has *owl:Thing* as its implicit supertype. On the other hand, aspect *owl:Nothing* is the bottom of all specialization hierarhcies and the implict subtype of all entities. It represents the empty set (has no instances).
+Two special aspects defined by the owl vocabulary are: *owl:Thing* and *owl:Nothing*. Aspect *owl:Thing* represents the top of the specialization hierarchy and the implicit supertype of all entities. This means if an entity is declared with no supertype, then it has *owl:Thing* as its implicit supertype. On the other hand, aspect *owl:Nothing* is the bottom of all specialization hierarchies and the implicit subtype of all entities. It represents the empty set (has no instances).
 
 <pre class="highlight highlight-html">
 `vocabulary` `<`http://www.w3.org/2002/07/owl#`>` `as` mission `{`
@@ -386,7 +386,7 @@ The following example vocabulary defines two concepts: *Component* and *Function
         Annotation*
         (`forward` ID)?                     // an unreified relation from source to target
         Annotation*
-        (`reverse` ID)?                     // an unreified relation from targt to source
+        (`reverse` ID)?                     // an unreified relation from target to source
         `functional`?                       // each source can be related to a maximum of 1 target
         (`inverse` `functional`)?             // each target can be related to a maximum of 1 source
         `symmetric`?                        // if a source is related to a target, then the target must also related to the source
@@ -411,7 +411,7 @@ The following example vocabulary defines a relation entity named *Performs* from
 `}`
 </pre>
 
- Since a relation entity is a reifed relation, it can be asserted as a type of a [relation instance](#RelationInstance-LR) between one or more source instances, and one or more target instances. Such instance can be annotated and characterized with assertions. However, a relation entity can also optionally specify (in its body) one or two companion unreified relations that can be asserted as simple (uncharacterized) [links](#LinkAssertion-LR) between a source and a target instance. One of those unrefied relations is declared with the keyword `forward`  followed by a name ID, while the other is declared with the keyword `reverse` followed by a name ID. The forward relation has the `from` entity as its domain, and the `to` entity as its range, while the reverse relation has the opposite. When both are declared, the forward and reverse relations become inverse of each other, meaning if one is used to link a source instance to a target instance, the other is inferred as a link from the target to the source. Also, when a relation instance is typed by a relation entity, which has one ore more unreifed relations, such relations are inferred as links between the set of related sources and target instances. The following diagram depicts the design pattern implied by a relation entity.
+ Since a relation entity is a reified relation, it can be asserted as a type of a [relation instance](#RelationInstance-LR) between one or more source instances, and one or more target instances. Such instance can be annotated and characterized with assertions. However, a relation entity can also optionally specify (in its body) one or two companion unreified relations that can be asserted as simple (uncharacterized) [links](#LinkAssertion-LR) between a source and a target instance. One of those unrefied relations is declared with the keyword `forward`  followed by a name ID, while the other is declared with the keyword `reverse` followed by a name ID. The forward relation has the `from` entity as its domain, and the `to` entity as its range, while the reverse relation has the opposite. When both are declared, the forward and reverse relations become inverse of each other, meaning if one is used to link a source instance to a target instance, the other is inferred as a link from the target to the source. Also, when a relation instance is typed by a relation entity, which has one ore more unreifed relations, such relations are inferred as links between the set of related sources and target instances. The following diagram depicts the design pattern implied by a relation entity.
 
 <pre><img src="images/Relation-Entity-Pattern.svg"/></pre>
 
@@ -459,13 +459,13 @@ A relation entity can optionally specify one or more semantic flags (within its 
 
 - The `functional` flag implies that a source instance can be related to a maximum of 1 target instance.
 - The `inverse functional` flag implies that a target instance can be related to a maximum of 1 source instance.
-- The `symmetric` flag implies that if a source instance is related to a target instance, then the target must also related to the source.
+- The `symmetric` flag implies that if a source instance is related to a target instance, then the target must also be related to the source.
 - The `asymmetric` flag implies that if a source instance is related to a target instance, then the target cannot be related to the source.
 - The `reflexive` flag implies that a source instance must be related to itself.
 - The `irreflexive` flag implies that a source instance cannot be related to itself.
 - The `transitive` flag implies if instance A is related to instance B, and instance B is related to instance C, then A is also related to C.
 
-The example vocabulary below refines the *Performs* relation to add the flag `inverse functional` (to specify that a function can be performed by a maximum of one component), the flag `asymmetric` (to specify that a function cannot peform a component), and the flag `irreflexive` (to specify that a component cannot perform itself).
+The example vocabulary below refines the *Performs* relation to add the flag `inverse functional` (to specify that a function can be performed by a maximum of one component), the flag `asymmetric` (to specify that a function cannot perform a component), and the flag `irreflexive` (to specify that a component cannot perform itself).
 
 <pre class="highlight highlight-html">
 `vocabulary` `<`http://com.xyz/methodology/mission#`>` `as` mission `{`
@@ -600,11 +600,11 @@ Note: the lexical and value spaces for these standard scalars are described in t
 
 Furthermore, other faceted scalars can be defined only as specializations of the standard ones (maximum one supertype per scalar is allowed). They can also be optionally restricted with one or more facets. A facet is a restriction on the lexical or value space of a standard scalar. The following facets are supported:
 
-- Facet `length` specifies the exact length of the lexical representation (of strings and litrals)
-- Facet `minLength` specifies the minimum length of the lexical representation (of strings and litrals)
-- Facet `maxLength` specifies the maximum length of the lexical representation (of strings and litrals)
-- Facet `pattern` specifies a regular expression of the lexical representation (of strings and litrals)
-- Facet `language` specifies a natural language for the lexical representation (of strings and litrals)
+- Facet `length` specifies the exact length of the lexical representation (of strings and literals)
+- Facet `minLength` specifies the minimum length of the lexical representation (of strings and literals)
+- Facet `maxLength` specifies the maximum length of the lexical representation (of strings and literals)
+- Facet `pattern` specifies a regular expression of the lexical representation (of strings and literals)
+- Facet `language` specifies a natural language for the lexical representation (of strings and literals)
 - Facet `minInclusive` specifies the minimum inclusive value (of numbers)
 - Facet `minExclusive` specifies the minimum exclusive value (of numbers)
 - Facet `maxInclusive` specifies the maximum inclusive value (of numbers)
@@ -627,7 +627,7 @@ The following example vocabulary defines two faceted scalars: *SSN* (representin
 
 #### Enumerated Scalar #### {#EnumeratedScalar-LR}
 
-An [enumerated scalar](#EnumeratedScalar-Syntax) is a type defined in a vocabulary and represents a primitive type that classifies a limited set of literals. An enumerated scalar is declared with the keywords `enumerated scalar` followed by the scalar's name ID. It can also optioanlly specialize another enumerated scalar as a supertype by following its name ID by the `:>` symbol then the IRI of the supertype. It can also optionally specify a list of one or more comma-separated literals enclosed within a pair of square brackets `[` `]`. Those literals represent the limited set that is classified by the scalar. Although both are optional, an enumerated scalar cannpt specify a set of literals and a supertype at the same time. if a supertype is specified, the subtype is considered simply as an alias of the supertype and inherits its set of literals.
+An [enumerated scalar](#EnumeratedScalar-Syntax) is a type defined in a vocabulary and represents a primitive type that classifies a limited set of literals. An enumerated scalar is declared with the keywords `enumerated scalar` followed by the scalar's name ID. It can also optionally specialize another enumerated scalar as a supertype by following its name ID by the `:>` symbol then the IRI of the supertype. It can also optionally specify a list of one or more comma-separated literals enclosed within a pair of square brackets `[` `]`. Those literals represent the limited set that is classified by the scalar. Although both are optional, an enumerated scalar cannot specify a set of literals and a supertype at the same time. if a supertype is specified, the subtype is considered simply as an alias of the supertype and inherits its set of literals.
 
 <pre class="highlight highlight-html">
     Annotation*
@@ -648,7 +648,7 @@ The following example vocabulary defines an enumerated scalar *RGB* that enumera
 
 ### Properties ### {#Properties-LR}
 
-Properties that can be defined in a vocabulary include *semantic properties* and *annotation properties*. A semantic property ([Scalar Property](#ScalarProperty-LR) or [Structured Property](#StructuredProperty-LR)) has logical semantics and is specified with a domain and a range. The domain repersents a classifier whose instances can be characterized by such property, while the range represents a type that classifies a set of allowed characterization values. An [Annotation Property](#AnnotationProperty-LR), on the other hand, has no logical semantics and enables the annotation of an element (ontology, import, or member) with non-semantic information.
+Properties that can be defined in a vocabulary include *semantic properties* and *annotation properties*. A semantic property ([Scalar Property](#ScalarProperty-LR) or [Structured Property](#StructuredProperty-LR)) has logical semantics and is specified with a domain and a range. The domain represents a classifier whose instances can be characterized by such property, while the range represents a type that classifies a set of allowed characterization values. An [Annotation Property](#AnnotationProperty-LR), on the other hand, has no logical semantics and enables the annotation of an element (ontology, import, or member) with non-semantic information.
 
 #### Scalar Property #### {#ScalarProperty-LR}
 
@@ -659,7 +659,7 @@ A [scalar property](#ScalarProperty-Syntax) is a semantic property defined in a 
 	`scalar` `property` ID (`:>` [ScalarProperty|IRI] (`,` [ScalarProperty|IRI])*)? (`[`
 		`domain` [Classifier|IRI]
 		`range` [Scalar|IRI]
-		`functional`?                // each instsance can have a maximum of 1 value for this property
+		`functional`?                // each instance can have a maximum of 1 value for this property
 	`]`)?
 </pre>
 
@@ -696,7 +696,7 @@ A [structured property](#StructuredProperty-Syntax) is a semantic property defin
 	`structure` `property` ID (`:>` [StructuredProperty|IRI] (`,` [StructuredProperty|IRI])*)? (`[`
 		`domain` [Classifier|IRI]
 		`range` [Structure|IRI]
-		`functional`?                // each instsance can have a maximum of 1 value for this property
+		`functional`?                // each instance can have a maximum of 1 value for this property
 	`]`)?
 </pre>
 
@@ -737,7 +737,7 @@ An [annotation property](#AnnotationProperty-Syntax) is a property defined in a 
 
 An annotation property is a non-semantic property, meaning that it has no logical semantics and thus is ignored by a logical reasoner. However, it allows specifying annotations on elements like ontologies, their imports, and their members.
 
-The following example shows two vocabularies: *viewpoint* and *mission*. The former defines an annotaiton property *visualizeAs*, and the latter defines two concept *Component* and *Function*, and annotates them using the *visualizeAs* annotation.
+The following example shows two vocabularies: *viewpoint* and *mission*. The former defines an annotation property *visualizeAs*, and the latter defines two concept *Component* and *Function*, and annotates them using the *visualizeAs* annotation.
 
 <pre class="highlight highlight-html">
 `vocabulary` `<`http://com.xyz/methodology/viewpoint#`>` `as` viewpoint `{`
@@ -753,7 +753,7 @@ The following example shows two vocabularies: *viewpoint* and *mission*. The for
 `}`
 </pre>
 
-It is common to define libraries of annotation properties for tooling purposes to enable building generic tools. The following are some of the standard annotation propertis (more information about them can be found in the [rdf](https://www.w3.org/TR/rdf-syntax-grammar/), [rdfs](https://www.w3.org/TR/rdf-schema/), [owl](https://www.w3.org/TR/owl2-syntax/), and [dc](https://www.dublincore.org/specifications/dublin-core/dcmi-terms/) specifications):
+It is common to define libraries of annotation properties for tooling purposes to enable building generic tools. The following are some of the standard annotation properties (more information about them can be found in the [rdf](https://www.w3.org/TR/rdf-syntax-grammar/), [rdfs](https://www.w3.org/TR/rdf-schema/), [owl](https://www.w3.org/TR/owl2-syntax/), and [dc](https://www.dublincore.org/specifications/dublin-core/dcmi-terms/) specifications):
 
 <pre class="highlight highlight-html">
 `vocabulary` `<`http://www.w3.org/1999/02/22-rdf-syntax-ns#`>` `as` rdf `{`
@@ -825,7 +825,7 @@ The following example vocabulary defines a key, consisting of scalar property *h
 `}`
 </pre>
 
-An entity can define zero or more keys. When multiple keys are defined, the value of each key (a tuple of values of the key properties) must be unique for an instance of the entity. In the following example, concept *Component* has two keys, one key consists of the *hasUUID* property, while the other consists of both the *hasName* and the *hasAcroname* properties. This means for each unique component, the value of *hasUUID* has to be unique, as well as as the value of a tuple made of the values of *hasName* and *hasAcroname* together.
+An entity can define zero or more keys. When multiple keys are defined, the value of each key (a tuple of values of the key properties) must be unique for an instance of the entity. In the following example, concept *Component* has two keys, one key consists of the *hasUUID* property, while the other consists of both the *hasName* and the *hasAcroname* properties. This means for each unique component, the value of *hasUUID* has to be unique, as well as the value of a tuple made of the values of *hasName* and *hasAcroname* together.
 
 <pre class="highlight highlight-html">
 `vocabulary` `<`http://www.w3.org/1999/02/22-rdf-syntax-ns#`>` `as` rdf `{`
@@ -843,12 +843,12 @@ A [restriction axiom](#RestrictionAxiom-Syntax) is an axiom defined on a classif
 
 <u>Range Restriction Axioms</u>
 
-A range restriction axiom restrics the range of a feature in the context of some classifier. The axiom specifies a restricted range that is a subtype of the feature's original range. The syntax of a range restriction axioms starts with the keyword `restricts` followed by a restriction kind, which can either be `all` (requiring all values to conform to the restricted range) or `some` (requiring at least one value to conform to the restricted range). This is followed by the kind of feature (`scalar property`, `structured property`, or `relation`) then a reference to the feature by IRI. Finally, the keyword `to` is used followed by a reference to the restricted range (a scalar, a structure, or an entity) by IRI. The following shows the three supported syntaxes:
+A range restriction axiom restricts the range of a feature in the context of some classifier. The axiom specifies a restricted range that is a subtype of the feature's original range. The syntax of a range restriction axioms starts with the keyword `restricts` followed by a restriction kind, which can either be `all` (requiring all values to conform to the restricted range) or `some` (requiring at least one value to conform to the restricted range). This is followed by the kind of feature (`scalar property`, `structured property`, or `relation`) then a reference to the feature by IRI. Finally, the keyword `to` is used followed by a reference to the restricted range (a scalar, a structure, or an entity) by IRI. The following shows the three supported syntaxes:
 
 <pre class="highlight highlight-html">
-	`restricts` [`all`|`some`] `scalar` `property` [ScalarProperty|IRI] `to` [Scalar|IRI]
-	`restricts` [`all`|`some`] `structured` `property` [StructuredProperty|IRI] `to` [Structure|IRI]
-	`restricts` [`all`|`some`] `relation` [Relation|IRI] `to` [Entity|IRI]
+	`restricts` [ `all` | `some` ] `scalar` `property` [ScalarProperty|IRI] `to` [Scalar|IRI]
+	`restricts` [ `all` | `some` ] `structured` `property` [StructuredProperty|IRI] `to` [Structure|IRI]
+	`restricts` [ `all` | `some` ] `relation` [Relation|IRI] `to` [Entity|IRI]
 </pre>
 
 The following example shows a vocabulary that defines a concept *Assembly* with some range restrictions.
@@ -867,8 +867,8 @@ The following example shows a vocabulary that defines a concept *Assembly* with 
     `scalar` ten-chars :> xsd:string `[`
         `length` 10
     `]`
-    structure Pin
-    structure InputPin :> Pin
+    `structure` Pin
+    `structure` InputPin :> Pin
     `relation` `entity` Performs `[`
         `from` Component
         `to` Function
@@ -890,12 +890,12 @@ The following example shows a vocabulary that defines a concept *Assembly* with 
 
 <u>Cardinality Restriction Axioms</u>
 
-A cardinality restriction axiom restrics the cardinality of a feature in the context of some classifier. The axiom specifies a minimum, a maximum, or an exact number of values, conforming to the original range, or to a specified restricted range, that a feature can have in that context. The syntax of a cardinality restriction axioms starts with the keyword `restricts` followed by the kind of feature (`scalar property`, `structured property`, or `relation`) then a reference to the feature by IRI. Then, the keyword `to` is used followed by a cadinality kind (`min`, `max`, or `exactly`), a cardinality value (positive integer), and finally an optional reference to a restricted range (a scalar, a structure, or an entity) by IRI. The following shows the three supported syntaxes:
+A cardinality restriction axiom restricts the cardinality of a feature in the context of some classifier. The axiom specifies a minimum, a maximum, or an exact number of values, conforming to the original range, or to a specified restricted range, that a feature can have in that context. The syntax of a cardinality restriction axioms starts with the keyword `restricts` followed by the kind of feature (`scalar property`, `structured property`, or `relation`) then a reference to the feature by IRI. Then, the keyword `to` is used followed by a cardinality kind (`min`, `max`, or `exactly`), a cardinality value (positive integer), and finally an optional reference to a restricted range (a scalar, a structure, or an entity) by IRI. The following shows the three supported syntaxes:
 
 <pre class="highlight highlight-html">
-	`restricts` `scalar` `property` [ScalarProperty|IRI] `to` [`max`|`min`|`exactly`] UnsignedInteger [Scalar|IRI]?
-	`restricts` `structured` `property` [StructuredProperty|IRI] `to` [`max`|`min`|`exactly`] UnsignedInteger [Structure|IRI]?
-	`restricts` `relation` [Relation|IRI] `to` [`max`|`min`|`exactly`] UnsignedInteger [Entity|IRI]?
+	`restricts` `scalar` `property` [ScalarProperty|IRI] `to` [ `max` | `min` | `exactly` ] UnsignedInteger [Scalar|IRI]?
+	`restricts` `structured` `property` [StructuredProperty|IRI] `to` [ `max` | `min` | `exactly` ] UnsignedInteger [Structure|IRI]?
+	`restricts` `relation` [Relation|IRI] `to` [ `max` | `min` | `exactly` ] UnsignedInteger [Entity|IRI]?
 </pre>
 
 The following example shows a vocabulary that defines a concept *Assembly* with some cardinality restrictions.
@@ -910,8 +910,8 @@ The following example shows a vocabulary that defines a concept *Assembly* with 
         `restricts` `structured` `property` hasPin `to` max 2 InputPin    // there must be at most two input pins
         `restricts` `relation` performs `to` min 5                      // a minimum of 5 functions must be performed
     ]
-    structure Pin
-    structure InputPin :> Pin
+    `structure` Pin
+    `structure` InputPin :> Pin
     `relation` `entity` Performs `[`
         `from` Component
         `to` Function
@@ -933,7 +933,7 @@ The following example shows a vocabulary that defines a concept *Assembly* with 
 
 <u>Value Restriction Axioms</u>
 
-A value restriction axiom restrics the value of a feature in the context of some classifier. In the case of a relation, the restricted value represents the relation's target instance. The syntax of a value restriction axioms starts with the keyword `restricts` followed by the kind of feature (`scalar property`, `structured property`, or `relation`) then a reference to the feature by IRI. Then, the keyword `to` is used followed by a value that is suitable for each case (a [literal](#Literal-Syntax) for a scalar property, a [structure instance](#StructureInstance-Syntax) for a structured property, or a reference to a [named instance](#NamedInstance-Syntax) by IRI for a relation). The following shows the three supported syntaxes:
+A value restriction axiom restricts the value of a feature in the context of some classifier. In the case of a relation, the restricted value represents the relation's target instance. The syntax of a value restriction axioms starts with the keyword `restricts` followed by the kind of feature (`scalar property`, `structured property`, or `relation`) then a reference to the feature by IRI. Then, the keyword `to` is used followed by a value that is suitable for each case (a [literal](#Literal-Syntax) for a scalar property, a [structure instance](#StructureInstance-Syntax) for a structured property, or a reference to a [named instance](#NamedInstance-Syntax) by IRI for a relation). The following shows the three supported syntaxes:
 
 <pre class="highlight highlight-html">
 	`restricts` `scalar` `property` [ScalarProperty|IRI] `to` Literal
@@ -950,11 +950,11 @@ The following example shows a vocabulary that defines a concept *Assembly* with 
     `concept` Component
     `concept` Function
     `concept` Assembly :> Component [
-        `restricts` `scalar` `property` hasId `to` "ABC"                      // hasId must have a value of "ABC"
-        `restricts` `structured` `property` hasPin `to` Pin [ hasNumber 1 ]   // hasPin must have a Pin with hasNumber of 1
-        `restricts` `relation` performs `to` functions:F1                   // the performed function must be functions:F1
+        `restricts` `scalar` `property` hasId `to` "ABC"                          // hasId must have a value of "ABC"
+        `restricts` `structured` `property` hasPin `to` Pin `[` hasNumber 1 `]`   // hasPin must have a Pin with hasNumber of 1
+        `restricts` `relation` performs `to` functions:F1                         // the performed function must be functions:F1
     ]
-    structure Pin
+    `structure` Pin
     `relation` `entity` Performs `[`
         `from` Component
         `to` Function
@@ -986,7 +986,7 @@ The following example shows a vocabulary that defines a concept *Assembly* with 
 
 ### Rule ### {#Rule-LR}
 
-A [rule](#Rule-Syntax) is a member of a vocabulary and represents an additional inference rule in the domain that can be used by a reasoner to generate entailments. A rule has two sets of predicates (patterns that must hold); the first set is called the rule's antecedant (predicates to match for the rule to trigger), and the second set is called the rule's consequent (predicates that are inferred once the antecedant is matched). The syntax of a rule starts with the keyword `rule` followed by a name ID, then a pair of square brackets `[` `]` that wrap the rule's predicates. The antecedent predicates are specified first separated by the `^` symbol (which means a logical AND), followed by an implication arrow `->`, then the consequent predicates separated also by the `^` symbol.
+A [rule](#Rule-Syntax) is a member of a vocabulary and represents an additional inference rule in the domain that can be used by a reasoner to generate entailments. A rule has two sets of predicates (patterns that must hold); the first set is called the rule's antecedent (predicates to match for the rule to trigger), and the second set is called the rule's consequent (predicates that are inferred once the antecedent is matched). The syntax of a rule starts with the keyword `rule` followed by a name ID, then a pair of square brackets `[` `]` that holds the rule's predicates. The antecedent predicates are specified first separated by the `^` symbol (which means a logical AND), followed by an implication arrow `->`, then the consequent predicates separated also by the `^` symbol.
 
 <pre class="highlight highlight-html">
 	Annotation*
@@ -995,7 +995,7 @@ A [rule](#Rule-Syntax) is a member of a vocabulary and represents an additional 
 	`]`
 </pre>
 
-A predicate represents a pattern in the model that can be matched or inferred, dependening on whether it appears in a rule's antecdent or consequent, respectively. The set of supported predicates are the following:
+A predicate represents a pattern in the model that can be matched or inferred, depending on whether it appears in a rule's antecedent or consequent, respectively. The set of supported predicates are the following:
 
 - [Type Predicate](#TypePredicate-Syntax)
 
@@ -1069,7 +1069,7 @@ The following example vocabulary shows a couple of rules, *R1* and *R2*:
 
 ## Description ## {#Description-LR}
 
-A [description](#Description-Syntax) is an ontology that uses terms in vocabularies to describe [named instances](#NamedInstance-Syntax) in a given domain. A description is declared with the keywords `description` as its ontology kind, followed by its NAMESPACE, the keyword `as`, and its prefix ID. It also has a body consisting of zero or more description imports and statements between two braces `{` `}`, as follows:
+A [description](#Description-Syntax) is an ontology that uses vocabularies to describe [named instances](#NamedInstance-Syntax) in a given domain. A description is declared with the keywords `description` as its ontology kind, followed by its NAMESPACE, the keyword `as`, and its prefix ID. It also has a body consisting of zero or more description imports and statements between two braces `{` `}`, as follows:
 
 <pre class="highlight highlight-html">
 Annotation*
@@ -1079,7 +1079,7 @@ Annotation*
 `}`
 </pre>
 
-For example, the following description defines the components of a system and the functions they perform. It has the namespace *http://com.xyz/system/components#* and the prefix *components*.
+The following example description is meant to describe the components of a system. It has the namespace *http://com.xyz/system/components#* and the prefix *components*.
 
 <pre class="highlight highlight-html">
 `description` `<`http://com.xyz/system/components#`>` `as` components `{`
@@ -1099,7 +1099,7 @@ Annotation*
 `uses` NAMESPACE (`as` ID)?
 </pre>
 
-For example, the *components* description *uses* the *mission* vocabulary to describe components of a system and the functions they perform.
+In the following example description, the *mission* vocabulary is used to describe components of a system.
 
 <pre class="highlight highlight-html">
 `description` `<`http://com.xyz/system/components#`>` `as` components `{`
@@ -1111,14 +1111,14 @@ For example, the *components* description *uses* the *mission* vocabulary to des
 
 #### Extension #### {#DescriptionExtension-LR}
 
-A [description extension](#DescriptionExtension) is a kind of [import](#Import) statement that can be added to a description to specify that it extends another description. This can be used to split a system description into fragments that focus on different concerns or are contributed by different authorities. In this case, each description *extends* the other descriptions it depends on (e.g., by cross referencing named instances from them). A description extension is defined with the keyword `extends` followed by the imported description's NAMESPACE. If members of the imported description are to be referenced using their ABBREVIATED_IRIs, then the NAMESPACE needs to be followed by the keyword `as` and a unique prefix ID within the description's imports.
+A [description extension](#DescriptionExtension) is a kind of [import](#Import) statement that can be added to a description to specify that it extends another description. This can be used to split a system description into fragments that focus on different concerns or are contributed by different authorities. In this case, a description may extend other descriptions that it depends on. A description extension is defined with the keyword `extends` followed by the imported description's NAMESPACE. If members of the imported description are to be referenced using their ABBREVIATED_IRIs, then the NAMESPACE needs to be followed by the keyword `as` and a unique prefix ID within the description's imports.
 
 <pre class="highlight highlight-html">
 Annotation*
 `extends` NAMESPACE (`as` ID)?
 </pre>
 
-For example, the *system1* description *extends* the *subsystem1* and *subsystem2* descriptions and defines component *System1* that aggregates components *Subsystem1* and *Subsystem2*, defined in these descriptions respectively.
+The following example description *subsystem1* extends two other descriptions, *subsystem1* and *subsystem2*, and defines component *System1* that aggregates components *Subsystem1* and *Subsystem2* defined in these descriptions, respectively.
 
 <pre class="highlight highlight-html">
 `description` `<`http://com.xyz/system/system1#`>` `as` system1 `{`
@@ -1135,17 +1135,20 @@ For example, the *system1* description *extends* the *subsystem1* and *subsystem
 
 ### Instances ### {#Instances-LR}
 
+Instances represent objects or data in a given system. They are described using terms (types and properties) from some vocabulary. Specifically, they can be given types and have assertions on features in the domain of those types. Instances can either be named ([Concept Instance](#ConceptInstance-LR) and [Relation Instance](#RelationInstance-LR)), in which case they are specified as members of some description, or they can be anonymous ([Structure Instance](#StructureInstance-LR)), in which case they defined as values of features (e.g., [structured properties](#StructuredProperty-LR)) in the context of other (named or anonymous) instances.
+
 #### Concept Instance #### {#ConceptInstance-LR}
 
-A [concept instance](#ConceptInstance-Syntax) is a named instance defined in a description and can be typed by a concept (from some imported vocabulary). The concept instance is declared with the keyword `ci` and a name ID. It can optionally be followed by a `:` and an IRI to a concept that is the type of the instance. It can also optionally be followed by a pair of square brackets `[` `]` that holds other assertions about the instance.
+A [concept instance](#ConceptInstance-Syntax) is a named instance defined as a member of a description and can be typed by concepts (from some imported vocabulary). The concept instance is declared with the keyword `ci` and a name ID. It can optionally be followed by a `:` and the IRIs of one or more concepts that are considered types of the instance. It can also optionally be followed by a pair of square brackets `[` `]` that holds assertions about the instance.
 
 <pre class="highlight highlight-html">
-    Annotation*
-    `ci` ID (`:` [Concept|IRI])? (`[`
+	Annotation*
+	`ci` ID (`:` [Concept|IRI] (`,` [Concept|IRI])*)? (`[`
+        Assertion*
     `]`)?
 </pre>
 
-The following example description defines two concept instances: one named *component1* and typed by concept *mission:Component*, while the other is named *function1* and typed by concept *mission:Function*. Notice that the concepts are reference by ABBREVIIATED_IRI since they are imported with their vocabulary's namespace prefix.
+The following example description defines two concept instances: one named *component1* and typed by concept *mission:Component*, while the other is named *function1* and typed by concept *mission:Function*.
 
 <pre class="highlight highlight-html">
 `description` `<`http://com.xyz/system/components#`>` `as` components `{`
@@ -1157,17 +1160,79 @@ The following example description defines two concept instances: one named *comp
 
 #### Relation Instance #### {#RelationInstance-LR}
 
-TBD
+A [relation instance](#RelationInstance-Syntax) is a named instance defined as a member of a description and can be typed by relation entities (from some imported vocabulary). The relation instance is declared with the keyword `ri` and a name ID. It can optionally be followed by a `:` and the IRIs of one or more relation entities that are considered types of the instance. It is also followed by a pair of square brackets `[` `]` that allows specifying the sources and targets of the relation instance and holds assertions about the instance. The sources of the relation instance are specified with the keyword `from` followed by one or more IRIs of named instances. Similarly, the targets of the relation instance are specified with the keyword `to` followed by one or more IRIs of named instances.
+
+<pre class="highlight highlight-html">
+	Annotation*
+	`ri` ID (`:` [RelationEntity|IRI] (`,` [RelationEntity|IRI])*)? `[`
+		`from` [NamedInstance|IRI] (`,` [NamedInstance|IRI])* 
+		`to` [NamedInstance|IRI] (`,` [NamedInstance|IRI])*
+		Assertion*
+	`]`
+</pre>
+
+The following example description defines three concept instances: *component1* typed by concept *mission:Component*, and *function1* and *function2* typed by concept *mission:Function*. It also defines a relation instance *performs1* typed by the *mission:Performs* relation entity that has *component1* as a source, and both *function1* and *function2* as targets.
+
+<pre class="highlight highlight-html">
+`description` `<`http://com.xyz/system/components#`>` `as` components `{`
+    `uses` `<`http://com.xyz/methodology/mission#`>` `as` mission
+    `ci` component1 `:` mission:Component
+    `ci` function1 `:` mission:Function
+    `ci` function2 `:` mission:Function
+    `ri` perform1 `:` mission:Performs `[`
+        `from` component1
+        `to` function1, function2
+    `]`
+`}`
+</pre>
 
 #### Structure Instance #### {#StructureInstance-LR}
 
-TBD
+A [structure instance](#StructureInstance-Syntax) is an anonymous instance that can be defined as a value of a structured property. Such value can either be specified in a [structured property value assertion](#StructuredPropertyValueAssertion-LR), defined in the context of some instance, or in a [value restriction axiom](#RestrictionAxioms-LR) on some structured property in the context of some classifier. A structure instance is declared with the IRI of a structure followed by a pair of square brackets `[` `]` that holds assertions about the instance.
+
+<pre class="highlight highlight-html">
+	[Structure|IRI] `[`
+		Assertion*
+	`]`
+</pre>
+
+The following example shows .
+
+<pre class="highlight highlight-html">
+`vocabulary` `<`http://com.xyz/system/components#`>` `as` components `{`
+    `extends` `<`http://www.w3.org/2001/XMLSchema#`>` `as` xsd
+    `uses` `<`http://com.xyz/methodology/functions#`>` `as` functions
+    `concept` Component [
+        `restricts` `structured` `property` hasPin `to` Pin `[` hasNumber 1 `]`   // structure instance used as restricted value
+    ]
+    `structure` Pin
+    `structured` `property` hasPin `[`
+        `domain` Component
+        `range` Pin
+        `functional`
+   `]`
+    `scalar` `property` hasNumber `[`
+        `domain` Pin
+        `range` xsd:int
+        `functional`
+   `]`
+`}`
+
+`description` `<`http://com.xyz/methodology/functions#`>` `as` functions `{`
+    `uses` `<`http://com.xyz/methodology/mission#`>` `as` mission
+    `ci` C1 `:` mission:Component `[`
+        mission:hasPin Pin `[` mission:hasNumber 2 `]`                    // structure instance used in value assertion
+    `]`
+`}`
+</pre>
 
 ### Assertions ### {#Assertions-LR}
 
-#### Scalar Property Value #### {#ScalarPropertyValueAssertion-LR}
+Assertions are statements about instances that enable characterizing them. They appear in the body of an instance (either named or anonymous) between its two brackets `[` `]`. This section describes the supported assertions, which include a [scalar property value assertion](#ScalarPropertyValueAssertion-LR) (specified on instances), [structured property value assertion](#StructuredPropertyValueAssertion-LR) (specified on instances), and a [link assertion](#LinkAssertion-LR) (specified on named instances).
 
-A value for a scalar property can be [asserted](#ScalarPropertyValueAssertion-Syntax) on a named instance (e.g., concept instance) in a description. Such assertion can be added as one of the assertions between the square  brackets `[` `]` of the instance. Its syntax consists of an IRI to a [scalar property](#ScalarProperty-Syntax) from some vocabulary followed by a literal.
+#### Scalar Property Value Assertion #### {#ScalarPropertyValueAssertion-LR}
+
+A value for a scalar property can be [asserted](#ScalarPropertyValueAssertion-Syntax) on an instance ([Concept Instance](#ConceptInstance-LR), [Relation Instance](#RelationInstance-LR), or [Structure Instance](#StructureInstance-LR)). Such assertion can be added as one of the assertions between the square  brackets `[` `]` of the instance. Its syntax consists of an IRI to a [scalar property](#ScalarProperty-Syntax) from some vocabulary followed by a literal.
 
 <pre class="highlight highlight-html">
 [ScalarProperty|IRI] Literal
@@ -1188,19 +1253,34 @@ The following example description defines two concept instances that each makes 
 `}`
 </pre>
 
-#### Structured Property Value #### {#StructuredPropertyValueAssertion-LR}
+#### Structured Property Value Assertion #### {#StructuredPropertyValueAssertion-LR}
 
-TBD
+A value for a structured property can be [asserted](#StructuredPropertyValueAssertion-Syntax) on an instance ([Concept Instance](#ConceptInstance-LR), [Relation Instance](#RelationInstance-LR), or [Structure Instance](#StructureInstance-LR)). Such assertion can be added as one of the assertions between the square  brackets `[` `]` of the instance. Its syntax consists of an IRI to a [structured property](#ScalarProperty-Syntax) from some vocabulary followed by a [structure instance](#StructureInstance-LR).
 
-#### Relation Link #### {#LinkAssertion-LR}
+<pre class="highlight highlight-html">
+[StructuredProperty|IRI] StuctureInstance
+</pre>
 
-A link, which is an unreified reference to a named instance (e.g., concept instance), can be [asserted](#ScalarPropertyValueAssertion-Syntax) on a named instance in a description. It represents a relation between the referencing instance (the source) and the referenced instance (the target). Such assertion can be added as one of the assertions between the square  brackets `[` `]` of the referencing instance. Its syntax consists of an IRI to a [relation](#Relation-Syntax) from some vocabulary followed by an IRI to a [named instance](#NamedInstance-Syntax) from some description.
+The following example description defines a concept instance *C1* which asserts a value for structured property *mission:hasPin* to have a structure instance whose *mission:hasNumber* property value is asserted to be 2.
+
+<pre class="highlight highlight-html">
+`description` `<`http://com.xyz/methodology/functions#`>` `as` functions `{`
+    `uses` `<`http://com.xyz/methodology/mission#`>` `as` mission
+    `ci` C1 `:` mission:Component `[`
+        mission:hasPin Pin `[` mission:hasNumber 2 `]`       // structure instance used in value assertion
+    `]`
+`}`
+</pre>
+
+#### Link Assertion #### {#LinkAssertion-LR}
+
+A named instance can be [asserted](#LinkAssertion-Syntax) as a target of a link typed by an unreified relation ([Forward Relation](#RelationEntity-LR) or [Reverse Relation](#RelationEntity-LR)) on a named instance representing the link's source.  A link is a light-weight alternative to a [relation instance](#RelationInstance-LR) in the sense that it relates two named instances but does not define a new instance for the relation itself. Therefore, unlike a relation instance, a link cannot be characterized by assertions. Also, unlike a relation instance, which can relate one or more sources or one or more targets, a link can only relate a single source to a single target. A link assertion can be added between the square brackets `[` `]` of a named instance (the source). Its syntax consists of an IRI to a [relation](#Relation-Syntax) followed by an IRI of a [named instance](#NamedInstance-Syntax) (the target).
 
 <pre class="highlight highlight-html">
 [Relation|IRI] [NamedInstance|IRI]
 </pre>
 
-The following example description defines two concept instances with a link asserted between them. Specifically, instance *component1* asserts a link of type *mission:performs* (the forward unreified relation of relation entity *mission:Performs*) to instance *function1*.
+The following example description defines two concept instances with a link asserted between them. Specifically, instance *component1* asserts a link of type *mission:performs* (the forward relation of relation entity *mission:Performs*) to instance *function1*.
 
 <pre class="highlight highlight-html">
 `description` `<`http://com.xyz/system/components#`>` `as` components `{`
@@ -1215,8 +1295,6 @@ The following example description defines two concept instances with a link asse
     `]`
 `}`
 </pre>
-
-Note: a link is typed by an unreified (forward or reverse) relation, hence (unlike a [relation instance](#RelationInstance-Syntax)) cannot have its own assertions.
 
 ## Vocabulary Bundle ## {#VocabularyBundle-LR}
 
@@ -1237,6 +1315,8 @@ For example, the following vocabulary bundle has the namespace *http://com.xyz/m
 </pre>
 
 ### Imports ### {#VocabularyBundleImports-LR}
+
+This section outlines the kind of import statements that can be added in a vocabulary bundle's body.
 
 #### Inclusion #### {#VocabularyBundleInclusion-LR}
 
@@ -1294,6 +1374,8 @@ For example, the following description bundle has the namespace *http://com.xyz/
 </pre>
 
 ### Imports ### {#DescriptionBundleImports-LR}
+
+This section outlines the kind of import statements that can be added in a description bundle's body.
 
 #### Inclusion #### {#DescriptionBundleInclusion-LR}
 
