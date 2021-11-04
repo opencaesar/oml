@@ -247,10 +247,13 @@ The following example shows several annotations. The ontology itself has a *dc:t
 
 ## Vocabulary ## {#Vocabulary-LR}
 
-A [vocabulary](#Vocabulary-Syntax) is an ontology that defines a set of [terms](#Term-Syntax) and [rules](#Rule-Syntax) for a given domain and has [open world semantics](#Description-Logic-Semantics). A vocabulary is declared with the keyword `vocabulary` as its ontology kind, followed by its NAMESPACE, the keyword `as`, and its prefix ID, as follows:
+A [vocabulary](#Vocabulary-Syntax) is an ontology that defines a set of [terms](#Term-Syntax) and [rules](#Rule-Syntax) for a given domain and has [open world semantics](#Description-Logic-Semantics). A vocabulary is declared with the keyword `vocabulary` as its ontology kind, followed by its NAMESPACE, the keyword `as`, and its prefix ID. It also has a body consisting of zero or more vocabulary imports and statements between two braces `{` `}`, as follows:
 
 <pre class="highlight highlight-html">
+Annotation*
 `vocabulary` NAMESPACE `as` ID `{`
+	VocabularyImport*
+	VocabularyStatement*
 `}`
 </pre>
 
@@ -261,7 +264,7 @@ For example, the following vocabulary allows describing a mission. It has the na
 `}`
 </pre>
 
-### Import ### {#VocabularyImport-LR}
+### Imports ### {#VocabularyImports-LR}
 
 This section outlines the kind of import statements that can be added to a vocabulary.
 
@@ -270,6 +273,7 @@ This section outlines the kind of import statements that can be added to a vocab
 A [vocabulary extension](#VocabularyExtension) is a kind of [import](#Import) statement that can be added to a vocabulary to specify that it extends another vocabulary. This is typically needed when members of the extended vocabulary are cross-reference by the local members of the extending vocabulary.  A vocabulary extension is defined with the keyword `extends` followed by the imported vocabulary's NAMESPACE. If members of the imported vocabulary are to be referenced using their ABBREVIATED_IRIs, then the NAMESPACE needs to be followed by the keyword `as` and a namespace prefix ID that is unique within the vocabulary's imports.
 
 <pre class="highlight highlight-html">
+Annotation*
 `extends` NAMESPACE (`as` ID)?
 </pre>
 
@@ -291,6 +295,7 @@ For example, the *mission* vocabulary *extends* the *xsd* vocabulary (in order t
 A [vocabulary usage](#VocabularyUsage) is a kind of [import](#Import) statement that can be added to a vocabulary to specify that it uses a [description](#Description-LR). This is typically needed when the vocabulary uses one or more of the description's instances in its restriction axioms. A vocabulary usage is defined with the keyword `extends` followed by the imported description's NAMESPACE. If members of the imported description are to be referenced using their ABBREVIATED_IRIs, then the NAMESPACE needs to be followed by the keyword `as` and a namespace prefix ID that is unique within the vocabulary's imports.
 
 <pre class="highlight highlight-html">
+Annotation*
 `uses` NAMESPACE (`as` ID)?
 </pre>
 
@@ -321,7 +326,8 @@ An [aspect](#Concept-Syntax) is an entity defined in a vocabulary and represents
 An aspect is declared with the keyword `aspect` followed by the aspect's name ID. It can optionally specialize other aspects by following its name ID by the `:>` symbol then a comma-separated list of those supertypes' IRIs. An aspect can also optionally specify a list of axioms enclosed within a pair of square brackets `[` `]`.
 
 <pre class="highlight highlight-html">
-    `aspect` ID (`:>` [Aspect|IRI] (`,` [Aspect|IRI])*)? (`[`
+    Annotation*
+   `aspect` ID (`:>` [Aspect|IRI] (`,` [Aspect|IRI])*)? (`[`
         Axiom*
     `]`)?
 </pre>
@@ -335,6 +341,15 @@ The following example vocabulary defines two aspects: *IdentifiedElement* and *N
 `}`
 </pre>
 
+Two special aspects defined by the owl vocabulary are: *owl:Thing* and *owl:Nothing*. Aspect *owl:Thing* represents the top of the specializtion hierarchy and the implicit supertype of all entities. This means if an entity is declared with no supertype, then it has *owl:Thing* as its implicit supertype. On the other hand, aspect *owl:Nothing* is the bottom of all specialization hierarhcies and the implict subtype of all entities. It represents the empty set (has no instances).
+
+<pre class="highlight highlight-html">
+`vocabulary` `<`http://www.w3.org/2002/07/owl#`>` `as` mission `{`
+    `aspect` Thing
+    `aspect` Nothing
+`}`
+</pre>
+
 #### Concept #### {#Concept-LR}
 
 A [concept](#Concept-Syntax) is an entity defined in a vocabulary and represents a concrete type in a modeled domain. A concept can specialize other concepts or aspects, but can be specialized by other concepts only. It can also be asserted as a type of a [concept instance](#ConceptInstance-LR). 
@@ -342,6 +357,7 @@ A [concept](#Concept-Syntax) is an entity defined in a vocabulary and represents
 A concept is declared with the keyword `concept` followed by the concept's name ID. It can optionally specialize other concepts or aspects by following its name ID by the `:>` symbol then a comma-separated list of those supertypes' IRIs. A concept can also optionally specify a list of axioms enclosed within a pair of square brackets `[` `]`.
 
 <pre class="highlight highlight-html">
+    Annotation*
     `concept` ID (`:>` [Concept|Aspect|IRI] (`,` [Concept|Aspect|IRI])*)? (`[`
         Axiom*
     `]`)?
@@ -360,13 +376,16 @@ The following example vocabulary defines two concepts: *Component* and *Function
 
 #### Relation Entity #### {#RelationEntity-LR}
 
- A [Relation Entity](#RelationEntity-LR) is an entity defined in a vocabulary and represents a type of reified relation between two other entities, a source entity and a target entity. A relation entity is defined with the keywords `relation` `entity` followed by a name ID and a pair of square brackets `[` `]` that specify by IRI the relation's `from` (source) entity and `to` (target) entity, and optionally the names of unreified relations, semantic flags, and/or axioms.
+ A [Relation Entity](#RelationEntity-LR) is an entity defined in a vocabulary and represents a type of reified relation between two other entities, a source entity and a target entity. A relation entity is defined with the keywords `relation` `entity` followed by a name ID. It can optionally specialize other relation entities or aspects by following its name ID by the `:>` symbol then a comma-separated list of those supertypes' IRIs. A relation entity also has a body, which is a pair of square brackets `[` `]` that specify by IRI the relation's `from` (source) entity and `to` (target) entity, and optionally the names of unreified relations, semantic flags, and/or axioms.
  
 <pre class="highlight highlight-html">
-    `relation` `entity` ID `[`
+    Annotation*
+    `relation` `entity` ID (`:>` [RelationEntity|Aspect|IRI] (`,` [RelationEntity|Aspect|IRI])*)? (`[`
         `from` [Entity|IRI]                 // the relation entity's source
         `to` [Entity|IRI]                   // the relation entity's target
+        Annotation*
         (`forward` ID)?                     // an unreified relation from source to target
+        Annotation*
         (`reverse` ID)?                     // an unreified relation from targt to source
         `functional`?                       // each source can be related to a maximum of 1 target
         (`inverse` `functional`)?             // each target can be related to a maximum of 1 source
@@ -411,6 +430,31 @@ The example vocabulary below refines the *Performs* relation entity with two unr
 `}`
 </pre>
 
+When a relation entity has supertypes, its source entity becomes a subtype of the super relations' source, and its target entity becomes a subtype of the super relation's target. Also, when named, its forward and reverse relations become sub relations of the supertype's forward and reverse relations.
+
+The following example vocabulary defines two relation entities, *Performs* and *Provides*, where the latter specializes the former. In this case, what is infererd is that *Assembly* specializes *Component*, *Power* specializes *Function*, *provides* specializes *performs*, and lastly, *isProvidedBy* specializes *isPerformedBy*. Some of these inferred specializations can also be specified explicitly (e.g., Assembly `:>` Component).
+
+<pre class="highlight highlight-html">
+`vocabulary` `<`http://com.xyz/methodology/mission#`>` `as` mission `{`
+    `concept` Component
+    `concept` Function
+    `concept` Assembly
+    `concept` Power
+    `relation` `entity` Performs `[`
+        `from` Component
+        `to` Function
+        `forward` performs
+        `reverse` isPerformedBy
+   `]`
+    `relation` `entity` Provides :> Performs `[`
+        `from` Assembly
+        `to` Power
+        `forward` provides
+        `reverse` isProvidedBy
+   `]`
+`}`
+</pre>
+
 A relation entity can optionally specify one or more semantic flags (within its body) that define its logical semantics:
 
 - The `functional` flag implies that a source instance can be related to a maximum of 1 target instance.
@@ -446,6 +490,7 @@ A [structure](#Structure-Syntax) is a classifier defined in a vocabulary and rep
 A structure is declared with the keyword `structure` followed by the structure's name ID. It can optionally specialize other structures by following its name ID by the `:>` symbol then a comma-separated list of those supertypes' IRIs. A structure can also optionally specify a list of axioms enclosed within a pair of square brackets `[` `]`.
 
 <pre class="highlight highlight-html">
+    Annotation*
     `structure` ID (`:>` [Structure|IRI] (`,` [Structure|IRI])*)? (`[`
         Axiom*
     `]`)?
@@ -461,9 +506,10 @@ The following example vocabulary defines the structure *Point* whose instances a
 
 #### Faceted Scalar #### {#FacetedScalar-LR}
 
-A [scalar](#Scalar-Syntax) is a type defined in a vocabulary and represents a primitive type that classifies a set of unlimited literals. A faceted scalar is declared with the keyword `scalar` followed by the scalar's name ID. It can optionally specialize another faceted scalar as a supertype by following its name ID by the `:>` symbol then the IRI of the supertype. A scalar can also optionally specify a list of facets enclosed within a pair of square brackets `[` `]`.
+A [scalar](#Scalar-Syntax) is a type defined in a vocabulary and represents a primitive type that classifies an unlimited set of literals. A faceted scalar is declared with the keyword `scalar` followed by the scalar's name ID. It can optionally specialize another faceted scalar as a supertype by following its name ID by the `:>` symbol then the IRI of the supertype. A scalar can also optionally specify a list of facets enclosed within a pair of square brackets `[` `]`.
 
 <pre class="highlight highlight-html">
+    Annotation*
 	`scalar` ID (`:>` [Scalar|IRI] (`,` [Scalar|IRI])*)? (`[`
 		 (`length` UnsignedInteger)?
 		 (`minLength` UnsignedInteger)?
@@ -552,7 +598,7 @@ OML considers a following set of faceted scalars as *standard*:
 
 Note: the lexical and value spaces for these standard scalars are described in the ([xsd](https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/#built-in-datatypes), and [owl](https://www.w3.org/TR/owl2-syntax/#Datatype_Maps)) standards.
 
-Furthermore, other faceted scalars can be defined only as specializations of standard ones (maximum one supertype) and can optionally be restricted with one or more facets. A facet is a restriction on the lexical or value space of a standard scalar. The following facets are supported:
+Furthermore, other faceted scalars can be defined only as specializations of the standard ones (maximum one supertype per scalar is allowed). They can also be optionally restricted with one or more facets. A facet is a restriction on the lexical or value space of a standard scalar. The following facets are supported:
 
 - Facet `length` specifies the exact length of the lexical representation (of strings and litrals)
 - Facet `minLength` specifies the minimum length of the lexical representation (of strings and litrals)
@@ -564,7 +610,7 @@ Furthermore, other faceted scalars can be defined only as specializations of sta
 - Facet `maxInclusive` specifies the maximum inclusive value (of numbers)
 - Facet `maxExclusive` specifies the maximum exclusive value (of numbers)
 
-The following example vocabulary defines two faceted scalars: *SSN* (representing strings with the social security number pattern) and *TeenAge* (representing a positive integer type with values from 13 and 19 inclusive).
+The following example vocabulary defines two faceted scalars: *SSN* (representing strings with the social security number pattern) and *TeenAge* (representing positive integers from 13 and 19 inclusive).
 
 <pre class="highlight highlight-html">
 `vocabulary` `<`http://example.com/primitive-types#`>` `as` primitives `{`
@@ -581,22 +627,43 @@ The following example vocabulary defines two faceted scalars: *SSN* (representin
 
 #### Enumerated Scalar #### {#EnumeratedScalar-LR}
 
-TBD
+An [enumerated scalar](#EnumeratedScalar-Syntax) is a type defined in a vocabulary and represents a primitive type that classifies a limited set of literals. An enumerated scalar is declared with the keywords `enumerated scalar` followed by the scalar's name ID. It can also optioanlly specialize another enumerated scalar as a supertype by following its name ID by the `:>` symbol then the IRI of the supertype. It can also optionally specify a list of one or more comma-separated literals enclosed within a pair of square brackets `[` `]`. Those literals represent the limited set that is classified by the scalar. Although both are optional, an enumerated scalar cannpt specify a set of literals and a supertype at the same time. if a supertype is specified, the subtype is considered simply as an alias of the supertype and inherits its set of literals.
+
+<pre class="highlight highlight-html">
+    Annotation*
+    `enumerated` `scalar` ID (`:>` [EnumeratedScalar|IRI] (`,` [EnumeratedScalar|IRI])*)? (`[`
+        (Literal (`,` Literal)*)?
+    `]`)?
+</pre>
+
+The following example vocabulary defines an enumerated scalar *RGB* that enumerates three string literals for the colors: *Red*, *Green*, and *Blue*.
+
+<pre class="highlight highlight-html">
+	`enumerated` `scalar` RGB `[`
+        "Red",
+        "Green",
+        "Blue"
+	`]`
+</pre>
 
 ### Properties ### {#Properties-LR}
 
+Properties that can be defined in a vocabulary include *semantic properties* and *annotation properties*. A semantic property ([Scalar Property](#ScalarProperty-LR) or [Structured Property](#StructuredProperty-LR)) has logical semantics and is specified with a domain and a range. The domain repersents a classifier whose instances can be characterized by such property, while the range represents a type that classifies a set of allowed characterization values. An [Annotation Property](#AnnotationProperty-LR), on the other hand, has no logical semantics and enables the annotation of an element (ontology, import, or member) with non-semantic information.
+
 #### Scalar Property #### {#ScalarProperty-LR}
 
-A [scalar property](#ScalarProperty-Syntax) is a term defined in a vocabulary and represents a property whose domain is a classifier (e.g., concept), i.e., it can be asserted on instances of its classifier domain, and whose range is a scalar, i.e., its values are literals of that scalar. A scalar property is defined with the keywords `scalar` `property` followed by a name ID and a pair of square brackets `[` `]` that contain the property's `domain` (referencing a classifier) and `range` (referencing a scalar).
+A [scalar property](#ScalarProperty-Syntax) is a semantic property defined in a vocabulary, whose domain is a classifier ([Aspect](#Aspect-LR), [Concept](#Concept-LR), [Relation Entity](#RelationEntity-LR), or [Structure](#Structure-LR)) and whose range is a scalar ([Faceted Scalar](#FacetedScalar-LR) or [Enumerated Scalar](#EnumeratedScalar-LR)). This means the values of a scalar property are literals of that scalar range. A scalar property is defined with the keywords `scalar` `property` followed by a name ID. It can also optionally specialize other scalar properties by following its name ID by the `:>` symbol then a comma-separated list of those super properties' IRIs. It also has a pair of square brackets `[` `]` that contain the property's `domain` (referencing a classifier), `range` (referencing a scalar), and optionally a semantic flag (`functional`) that specifies whether instances of the domain can have a single value maximum for this property.
 
 <pre class="highlight highlight-html">
-    `scalar` `property` ID `[`
-        `domain` [Classifier|IRI]
-        `range` [Scalar|IRI]
-    `]`
+	Annotation*
+	`scalar` `property` ID (`:>` [ScalarProperty|IRI] (`,` [ScalarProperty|IRI])*)? (`[`
+		`domain` [Classifier|IRI]
+		`range` [Scalar|IRI]
+		`functional`?                // each instsance can have a maximum of 1 value for this property
+	`]`)?
 </pre>
 
-The following example vocabulary defines three scalar properties named *hasId*, *hasName*, and *isAbstract*. The *hasId* property is in the domain of *Component* and can have *xsd:string* literals. The *hasName* property is in the domain of *Function* and can also have *xsd:string* literals. The *isAbstract* property is also in the domain of *Function* but can have *xsd:boolean* values.
+The following example vocabulary defines three scalar properties named *hasId*, *hasName*, and *isAbstract*. The *hasId* property is functional and has a domain of *Component* and a range of *xsd:string*. The *hasName* property has a domain of *Function* and a range of *xsd:string*. Finally, the *isAbstract* property is functional and has the domain of *Function* and the range of *xsd:boolean*.
 
 <pre class="highlight highlight-html">
 `vocabulary` `<`http://com.xyz/methodology/mission#`>` `as` mission `{`
@@ -606,6 +673,7 @@ The following example vocabulary defines three scalar properties named *hasId*, 
     `scalar` `property` hasId `[`
         `domain` Component
         `range` xsd:string
+        `functional`
     `]`
     `scalar` `property` hasName `[`
         `domain` Function
@@ -614,52 +682,400 @@ The following example vocabulary defines three scalar properties named *hasId*, 
     `scalar` `property` isAbstract `[`
         `domain` Function
         `range` xsd:boolean
+        `functional`
     `]`
 `}`
 </pre>
 
 #### Structured Property #### {#StructuredProperty-LR}
 
-TBD
+A [structured property](#StructuredProperty-Syntax) is a semantic property defined in a vocabulary, whose domain is a classifier ([Aspect](#Aspect-LR), [Concept](#Concept-LR), [Relation Entity](#RelationEntity-LR), or [Structure](#Structure-LR)) and whose range is a [Structure](#Structure-LR). This means the values of a structured property are anonymous [Structure Instances](#StructureInstance-LR). A structured property is defined with the keywords `structured` `property` followed by a name ID. It can also optionally specialize other structured properties by following its name ID by the `:>` symbol then a comma-separated list of those super properties' IRIs. It also has a pair of square brackets `[` `]` that contain the property's `domain` (referencing a classifier), `range` (referencing a structure), and optionally a semantic flag (`functional`) that specifies whether instances of the domain can have a single value maximum for this property.
+
+<pre class="highlight highlight-html">
+	Annotation*
+	`structure` `property` ID (`:>` [StructuredProperty|IRI] (`,` [StructuredProperty|IRI])*)? (`[`
+		`domain` [Classifier|IRI]
+		`range` [Structure|IRI]
+		`functional`?                // each instsance can have a maximum of 1 value for this property
+	`]`)?
+</pre>
+
+The following example vocabulary defines a structured property named *hasLocation* whose domain is concept *Shape* and whose range is structure *Point*. The latter is the domain of two scalar properties *hasX* and *hasY* that have a range of *xsd:int*.
+
+<pre class="highlight highlight-html">
+`vocabulary` `<`http://com.xyz/methodology/graphics#`>` `as` graphics `{`
+    `extends` `<`http://www.w3.org/2001/XMLSchema#`>` `as` xsd
+    `concept` Shape
+    `structure` Point
+    `structured` `property` hasLocation `[`
+        `domain` Shape
+        `range` Point
+        `functional`
+    `]`
+    `scalar` `property` hasX `[`
+        `domain` Point
+        `range` xsd:int
+        `functional`
+    `]`
+    `scalar` `property` hasY `[`
+        `domain` Point
+        `range` xsd:int
+        `functional`
+    `]`
+`}`
+</pre>
+
 
 #### Annotation Property #### {#AnnotationProperty-LR}
 
-TBD
+An [annotation property](#AnnotationProperty-Syntax) is a property defined in a vocabulary, whose domain is implicitly any annotated element (ontology, import, or member) and whose range is implicitly any literal. An annotation property is defined with the keywords `annotation` `property` followed by a name ID. It can also optionally specialize other annotation properties by following its name ID by the `:>` symbol then a comma-separated list of those super properties' IRIs. 
+
+<pre class="highlight highlight-html">
+	Annotation*
+	`annotation` `property` ID (`:>` [AnnotationProperty|IRI] (`,` [AnnotationProperty|IRI])*)?
+</pre>
+
+An annotation property is a non-semantic property, meaning that it has no logical semantics and thus is ignored by a logical reasoner. However, it allows specifying annotations on elements like ontologies, their imports, and their members.
+
+The following example shows two vocabularies: *viewpoint* and *mission*. The former defines an annotaiton property *visualizeAs*, and the latter defines two concept *Component* and *Function*, and annotates them using the *visualizeAs* annotation.
+
+<pre class="highlight highlight-html">
+`vocabulary` `<`http://com.xyz/methodology/viewpoint#`>` `as` viewpoint `{`
+    `annotation` `property` visualizeAs
+`}`
+
+`vocabulary` `<`http://com.xyz/methodology/mission#`>` `as` mission `{`
+    `extends` `<`http://com.xyz/methodology/viewpoint#`>` `as` viewpoint
+    `@`viewpoint:visualizeAs "Rectangle"
+    `concept` Component
+    `@`viewpoint:visualizeAs "Circle"
+    `concept` Function
+`}`
+</pre>
+
+It is common to define libraries of annotation properties for tooling purposes to enable building generic tools. The following are some of the standard annotation propertis (more information about them can be found in the [rdf](https://www.w3.org/TR/rdf-syntax-grammar/), [rdfs](https://www.w3.org/TR/rdf-schema/), [owl](https://www.w3.org/TR/owl2-syntax/), and [dc](https://www.dublincore.org/specifications/dublin-core/dcmi-terms/) specifications):
+
+<pre class="highlight highlight-html">
+`vocabulary` `<`http://www.w3.org/1999/02/22-rdf-syntax-ns#`>` `as` rdf `{`
+    `annotation` `property` about
+`}`
+
+`vocabulary` `<`http://www.w3.org/2000/01/rdf-schema#`>` `as` rdfs `{`
+    `annotation` `property` comment
+    `annotation` `property` isDefinedBy
+    `annotation` `property` label
+    `annotation` `property` seeAlso
+`}`
+
+`vocabulary` `<`http://www.w3.org/2002/07/owl#`>` `as` owl `{`
+    `annotation` `property` backwardCompatibleWith
+    `annotation` `property` deprecated
+    `annotation` `property` incompatibleWith
+    `annotation` `property` priorVersion
+    `annotation` `property` versionInfo
+`}`
+
+`vocabulary` `<`http://purl.org/dc/elements/1.1/`>` `as` dc `{`
+    `annotation` `property` contributor
+    `annotation` `property` coverage
+    `annotation` `property` creator
+    `annotation` `property` date
+    `annotation` `property` ^description
+    `annotation` `property` format
+    `annotation` `property` identifier
+    `annotation` `property` ^language
+    `annotation` `property` publisher
+    `annotation` `property` ^relation
+    `annotation` `property` rights
+    `annotation` `property` ^source
+    `annotation` `property` subject
+    `annotation` `property` title
+    `annotation` `property` type
+    `annotation` `property` hasVersion
+`}`
+</pre>
 
 ### Axioms ### {#Axioms-LR}
 
-#### Key #### {#Key-LR}
+Axioms are statements about terms in a vocabulary that enrich their logical semantics. They appear in the body of a term between its two brackets `[` `]`. This section describes the supported axioms, which include a [key axiom](#KeyAxiom-LR) (specified on entities) and a [restriction axioms](#RestrictionAxioms-LR) (specified on classifiers). 
 
-TBD
+Note: that a term that has supertypes semantically inherits axioms defined on its supertypes in addition to its own axioms.
 
-#### Restriction #### {#Restriction-LR}
+#### Key Axiom #### {#KeyAxiom-LR}
 
-**Range Restriction Axioms**
+A [key axiom](#KeyAxiom-Syntax) is an axiom defined on an entity ([Aspect](#Aspect-LR), [Concept](#Concept-LR), and [Relation Entity](#RelationEntity-LR)) that specifies a set of scalar properties that together represent a unique key (id) for the entity. This means if two named instances have the same values of those properties, then they can be inferred to be aliases of the same instance. The syntax of a key axiom starts with the keyword `key` followed by one or more comma-separated scalar properties specified by their IRIs.
 
-TBD
+<pre class="highlight highlight-html">
+`key` [ScalarProperty|IRI] (`,` [ScalarProperty|IRI])*
+</pre>
 
-**Cardinality Restriction Axioms**
+The following example vocabulary defines a key, consisting of scalar property *hasId*, for concept *Component*. This means any two differently named components with the same value for *hasId* will be inferred to be the same component.
 
-TBD
+<pre class="highlight highlight-html">
+`vocabulary` `<`http://www.w3.org/1999/02/22-rdf-syntax-ns#`>` `as` rdf `{`
+    `extends` `<`http://www.w3.org/2001/XMLSchema#`>` `as` xsd
+    `concept` Component [
+        `key` hasId
+    ]
+    `scalar` `property` hasId `[`
+        `domain` Component
+        `range` xsd:string
+        `functional`
+    `]`
+`}`
+</pre>
 
-**Value Restriction Axioms**
+An entity can define zero or more keys. When multiple keys are defined, the value of each key (a tuple of values of the key properties) must be unique for an instance of the entity. In the following example, concept *Component* has two keys, one key consists of the *hasUUID* property, while the other consists of both the *hasName* and the *hasAcroname* properties. This means for each unique component, the value of *hasUUID* has to be unique, as well as as the value of a tuple made of the values of *hasName* and *hasAcroname* together.
 
-TBD
+<pre class="highlight highlight-html">
+`vocabulary` `<`http://www.w3.org/1999/02/22-rdf-syntax-ns#`>` `as` rdf `{`
+    `extends` `<`http://www.w3.org/2001/XMLSchema#`>` `as` xsd
+    `concept` Component [
+        `key` hasUUID
+        `key` hasName, hasAcroname
+    ]
+`}`
+</pre>
+
+#### Restriction Axioms #### {#RestrictionAxioms-LR}
+
+A [restriction axiom](#RestrictionAxiom-Syntax) is an axiom defined on a classifier ([Aspect](#Aspect-LR), [Concept](#Concept-LR), [Relation Entity](#RelationEntity-LR) and [Structure](#Structure-LR)) that restricts a feature (a property or a relation) in some way in the classifier's context. This feature can be a property ([Scalar Property](#ScalarProperty-LR) or [Structured Property](#StructuredProperty-LR)) whose domain is the context classifier or one of its supertypes, or a relation ([Forward Relation](#RelationEntity-LR) or [Reverse Relation](#RelationEntity-LR)) whose source is the context entity or one of its supertypes. The facets that can be restricted about those features vary (like their range, cardinality, or value) resulting in different subtypes of restriction axioms.
+
+<u>Range Restriction Axioms</u>
+
+A range restriction axiom restrics the range of a feature in the context of some classifier. The axiom specifies a restricted range that is a subtype of the feature's original range. The syntax of a range restriction axioms starts with the keyword `restricts` followed by a restriction kind, which can either be `all` (requiring all values to conform to the restricted range) or `some` (requiring at least one value to conform to the restricted range). This is followed by the kind of feature (`scalar property`, `structured property`, or `relation`) then a reference to the feature by IRI. Finally, the keyword `to` is used followed by a reference to the restricted range (a scalar, a structure, or an entity) by IRI. The following shows the three supported syntaxes:
+
+<pre class="highlight highlight-html">
+	`restricts` [`all`|`some`] `scalar` `property` [ScalarProperty|IRI] `to` [Scalar|IRI]
+	`restricts` [`all`|`some`] `structured` `property` [StructuredProperty|IRI] `to` [Structure|IRI]
+	`restricts` [`all`|`some`] `relation` [Relation|IRI] `to` [Entity|IRI]
+</pre>
+
+The following example shows a vocabulary that defines a concept *Assembly* with some range restrictions.
+
+<pre class="highlight highlight-html">
+`vocabulary` `<`http://com.xyz/methodology/mission#`>` `as` mission `{`
+    `extends` `<`http://www.w3.org/2001/XMLSchema#`>` `as` xsd
+    `concept` Component
+    `concept` Function
+    `concept` Assembly :> Component [
+        `restricts` `all` `scalar` `property` hasId `to` ten-chars          // the hasId value must be 10-char strings
+        `restricts` `some` `structured` `property` hasPin `to` InputPin     // there must be at least one input pin
+        `restricts` `all` `relation` performs `to` Power                  // power is the only performed function 
+    ]
+    `concept` Power :> Function
+    `scalar` ten-chars :> xsd:string `[`
+        `length` 10
+    `]`
+    structure Pin
+    structure InputPin :> Pin
+    `relation` `entity` Performs `[`
+        `from` Component
+        `to` Function
+        `forward` performs
+        `reverse` isPerformedBy
+   `]`
+    `scalar` `property` hasId `[`
+        `domain` Component
+        `range` xsd:string
+        `functional`
+   `]`
+    `structured` `property` hasPin `[`
+        `domain` Component
+        `range` Pin
+        `functional`
+   `]`
+`}`
+</pre>
+
+<u>Cardinality Restriction Axioms</u>
+
+A cardinality restriction axiom restrics the cardinality of a feature in the context of some classifier. The axiom specifies a minimum, a maximum, or an exact number of values, conforming to the original range, or to a specified restricted range, that a feature can have in that context. The syntax of a cardinality restriction axioms starts with the keyword `restricts` followed by the kind of feature (`scalar property`, `structured property`, or `relation`) then a reference to the feature by IRI. Then, the keyword `to` is used followed by a cadinality kind (`min`, `max`, or `exactly`), a cardinality value (positive integer), and finally an optional reference to a restricted range (a scalar, a structure, or an entity) by IRI. The following shows the three supported syntaxes:
+
+<pre class="highlight highlight-html">
+	`restricts` `scalar` `property` [ScalarProperty|IRI] `to` [`max`|`min`|`exactly`] UnsignedInteger [Scalar|IRI]?
+	`restricts` `structured` `property` [StructuredProperty|IRI] `to` [`max`|`min`|`exactly`] UnsignedInteger [Structure|IRI]?
+	`restricts` `relation` [Relation|IRI] `to` [`max`|`min`|`exactly`] UnsignedInteger [Entity|IRI]?
+</pre>
+
+The following example shows a vocabulary that defines a concept *Assembly* with some cardinality restrictions.
+
+<pre class="highlight highlight-html">
+`vocabulary` `<`http://com.xyz/methodology/mission#`>` `as` mission `{`
+    `extends` `<`http://www.w3.org/2001/XMLSchema#`>` `as` xsd
+    `concept` Component
+    `concept` Function
+    `concept` Assembly :> Component [
+        `restricts` `scalar` `property` hasId `to` exactly 1              // hasId must have a single value only
+        `restricts` `structured` `property` hasPin `to` max 2 InputPin    // there must be at most two input pins
+        `restricts` `relation` performs `to` min 5                      // a minimum of 5 functions must be performed
+    ]
+    structure Pin
+    structure InputPin :> Pin
+    `relation` `entity` Performs `[`
+        `from` Component
+        `to` Function
+        `forward` performs
+        `reverse` isPerformedBy
+   `]`
+    `scalar` `property` hasId `[`
+        `domain` Component
+        `range` xsd:string
+        `functional`
+   `]`
+    `structured` `property` hasPin `[`
+        `domain` Component
+        `range` Pin
+        `functional`
+   `]`
+`}`
+</pre>
+
+<u>Value Restriction Axioms</u>
+
+A value restriction axiom restrics the value of a feature in the context of some classifier. In the case of a relation, the restricted value represents the relation's target instance. The syntax of a value restriction axioms starts with the keyword `restricts` followed by the kind of feature (`scalar property`, `structured property`, or `relation`) then a reference to the feature by IRI. Then, the keyword `to` is used followed by a value that is suitable for each case (a [literal](#Literal-Syntax) for a scalar property, a [structure instance](#StructureInstance-Syntax) for a structured property, or a reference to a [named instance](#NamedInstance-Syntax) by IRI for a relation). The following shows the three supported syntaxes:
+
+<pre class="highlight highlight-html">
+	`restricts` `scalar` `property` [ScalarProperty|IRI] `to` Literal
+	`restricts` `structured` `property` [StructuredProperty|IRI] `to` StructureInstance
+	`restricts` `relation` [Relation|IRI] `to` [NamedInstance|IRI]
+</pre>
+
+The following example shows a vocabulary that defines a concept *Assembly* with some value restrictions.
+
+<pre class="highlight highlight-html">
+`vocabulary` `<`http://com.xyz/methodology/mission#`>` `as` mission `{`
+    `extends` `<`http://www.w3.org/2001/XMLSchema#`>` `as` xsd
+    `uses` `<`http://com.xyz/methodology/functions#`>` `as` functions
+    `concept` Component
+    `concept` Function
+    `concept` Assembly :> Component [
+        `restricts` `scalar` `property` hasId `to` "ABC"                      // hasId must have a value of "ABC"
+        `restricts` `structured` `property` hasPin `to` Pin [ hasNumber 1 ]   // hasPin must have a Pin with hasNumber of 1
+        `restricts` `relation` performs `to` functions:F1                   // the performed function must be functions:F1
+    ]
+    structure Pin
+    `relation` `entity` Performs `[`
+        `from` Component
+        `to` Function
+        `forward` performs
+        `reverse` isPerformedBy
+   `]`
+    `scalar` `property` hasId `[`
+        `domain` Component
+        `range` xsd:string
+        `functional`
+   `]`
+    `structured` `property` hasPin `[`
+        `domain` Component
+        `range` Pin
+        `functional`
+   `]`
+    `scalar` `property` hasNumber `[`
+        `domain` Pin
+        `range` xsd:int
+        `functional`
+   `]`
+`}`
+
+`description` `<`http://com.xyz/methodology/functions#`>` `as` functions `{`
+    `uses` `<`http://com.xyz/methodology/mission#`>` `as` mission
+    `ci` F1 `:` mission:Function
+}
+</pre>
 
 ### Rule ### {#Rule-LR}
 
-TBD
+A [rule](#Rule-Syntax) is a member of a vocabulary and represents an additional inference rule in the domain that can be used by a reasoner to generate entailments. A rule has two sets of predicates (patterns that must hold); the first set is called the rule's antecedant (predicates to match for the rule to trigger), and the second set is called the rule's consequent (predicates that are inferred once the antecedant is matched). The syntax of a rule starts with the keyword `rule` followed by a name ID, then a pair of square brackets `[` `]` that wrap the rule's predicates. The antecedent predicates are specified first separated by the `^` symbol (which means a logical AND), followed by an implication arrow `->`, then the consequent predicates separated also by the `^` symbol.
 
-#### Predicates #### {#Predicates-LR}
+<pre class="highlight highlight-html">
+	Annotation*
+	`rule` ID `[`
+		Predicate (`^` Predicate)* `->` Predicate (`^` Predicate)*
+	`]`
+</pre>
 
-TBD
+A predicate represents a pattern in the model that can be matched or inferred, dependening on whether it appears in a rule's antecdent or consequent, respectively. The set of supported predicates are the following:
+
+- [Type Predicate](#TypePredicate-Syntax)
+
+     Matches an instance of a given type (specified by its IRI) and binds it to variable ID.
+    <pre class="highlight highlight-html">
+    [Type|IRI] `(` ID `)`
+    </pre>
+
+- [Relation Entity Predicate](#RelationEntityPredicate-Syntax)
+
+    Matches a instance of a given relation entity (specified by its IRI) and binds it to variable ID2, its source to variable ID1, its target to variable ID3.
+     <pre class="highlight highlight-html">
+    [RelationEntity|IRI] `(` ID1 `,` ID2 `,` ID3 `)`
+    </pre>
+
+- [Feature Predicate](#FeaturePredicate-Syntax)
+
+    Matches an assertion of a given feature (specified by its IRI) and binds its domain to variable ID1 and its range to variable ID2.
+    <pre class="highlight highlight-html">
+    [Feature|IRI] `(` ID1 `,` ID2 `)`
+    </pre>
+
+- [Same As Predicate](#SameAsPredicate-Syntax)
+
+    Matches when the value bound to variable ID1 is the same as the value bound to variable ID2.
+    <pre class="highlight highlight-html">
+    `sameAs` `(` ID1 `,` ID2 `)`
+    </pre>
+
+- [Different From Predicate](#DifferentFromPredicate-Syntax)
+
+    Matches when the value bound to variable ID1 is different from the value bound to variable ID2.
+    <pre class="highlight highlight-html">
+    `differentFrom` `(` ID1 `,` ID2 `)`
+    </pre>
+
+The following example vocabulary shows a couple of rules, *R1* and *R2*:
+
+<pre class="highlight highlight-html">
+`vocabulary` `<`http://com.xyz/methodology/mission#`>` `as` mission `{`
+    `extends` `<`http://www.w3.org/2001/XMLSchema#`>` `as` xsd
+    `concept` Component
+    `concept` Function
+    `relation` `entity` Performs `[`
+        `from` Component
+        `to` Function
+        `forward` performs
+        `reverse` isPerformedBy
+   `]`
+    `relation` `entity` Invokes `[`
+        `from` Function
+        `to` Function
+        `forward` invokes
+        `reverse` isInvokedBy
+   `]`
+    `scalar` `property` hasId `[`
+        `domain` Component
+        `range` xsd:string
+        `functional`
+   `]`
+    // if a component performs a function that invokes another function, then the component invokes the latter too
+   `rule` R1 `[`
+        Component `(` c `)` `^` performs `(` c, f1 `)` `^` invokes `(` f1, f2 `)` `->` performs `(` c, f2 `)`
+   `]`
+    // if a component has a different id from another component, then they must be different components
+   `rule` R2 `[`
+        hasId `(` c1, i1 `)` `^` hasId `(` c2, i2 `)` `^` `differentFrom` `(` i1, i2 `)` `->` `differentFrom` `(` c1, c2 `)`
+   `]`
+`}`
+</pre>
 
 ## Description ## {#Description-LR}
 
-A [description](#Description-Syntax) is an ontology that uses terms in vocabularies to describe [named instances](#NamedInstance-Syntax) in a given domain. A description is declared with the keywords `description` as its ontology kind, followed by its NAMESPACE, the keyword `as`, and its prefix ID.
+A [description](#Description-Syntax) is an ontology that uses terms in vocabularies to describe [named instances](#NamedInstance-Syntax) in a given domain. A description is declared with the keywords `description` as its ontology kind, followed by its NAMESPACE, the keyword `as`, and its prefix ID. It also has a body consisting of zero or more description imports and statements between two braces `{` `}`, as follows:
 
 <pre class="highlight highlight-html">
+Annotation*
 `description` NAMESPACE `as` ID `{`
+	DescriptionImport*
+	DescriptionStatement*
 `}`
 </pre>
 
@@ -670,7 +1086,7 @@ For example, the following description defines the components of a system and th
 `}`
 </pre>
 
-### Import ### {#DescriptionImport-LR}
+### Imports ### {#DescriptionImports-LR}
 
 This section outlines the kind of import statements that can be added in a description's body.
 
@@ -679,6 +1095,7 @@ This section outlines the kind of import statements that can be added in a descr
 A [description usage](#DescriptionUsage) is a kind of [import](#Import) statement that can be added to a description to specify a vocabulary that it uses. This is typically needed in order to use the terms (types and properties) of the vocabulary in the description's instance definitions. A description usage is defined with the keyword `uses` followed by the imported vocabulary's NAMESPACE. If members of the imported vocabulary are to be referenced using their ABBREVIATED_IRIs, then the NAMESPACE needs to be followed by the keyword `as` and a unique prefix ID within the description's imports.
 
 <pre class="highlight highlight-html">
+Annotation*
 `uses` NAMESPACE (`as` ID)?
 </pre>
 
@@ -697,6 +1114,7 @@ For example, the *components* description *uses* the *mission* vocabulary to des
 A [description extension](#DescriptionExtension) is a kind of [import](#Import) statement that can be added to a description to specify that it extends another description. This can be used to split a system description into fragments that focus on different concerns or are contributed by different authorities. In this case, each description *extends* the other descriptions it depends on (e.g., by cross referencing named instances from them). A description extension is defined with the keyword `extends` followed by the imported description's NAMESPACE. If members of the imported description are to be referenced using their ABBREVIATED_IRIs, then the NAMESPACE needs to be followed by the keyword `as` and a unique prefix ID within the description's imports.
 
 <pre class="highlight highlight-html">
+Annotation*
 `extends` NAMESPACE (`as` ID)?
 </pre>
 
@@ -722,6 +1140,7 @@ For example, the *system1* description *extends* the *subsystem1* and *subsystem
 A [concept instance](#ConceptInstance-Syntax) is a named instance defined in a description and can be typed by a concept (from some imported vocabulary). The concept instance is declared with the keyword `ci` and a name ID. It can optionally be followed by a `:` and an IRI to a concept that is the type of the instance. It can also optionally be followed by a pair of square brackets `[` `]` that holds other assertions about the instance.
 
 <pre class="highlight highlight-html">
+    Annotation*
     `ci` ID (`:` [Concept|IRI])? (`[`
     `]`)?
 </pre>
@@ -801,9 +1220,10 @@ Note: a link is typed by an unreified (forward or reverse) relation, hence (unli
 
 ## Vocabulary Bundle ## {#VocabularyBundle-LR}
 
-A [vocabulary bundle](#VocabularyBundle-Syntax) is an ontology that bundles a set of vocabularies and allows description logic (DL) reasoning with [closed-world semantics](#Description-Logic-Semantics) using them (in contrast to a vocabulary that has [open-world semantics](#Description-Logic-Semantics)). A vocabulary bundle is declared with the keywords `vocabulary` `bundle` as its ontology kind, followed by its NAMESPACE, the keyword `as`, and its prefix ID.
+A [vocabulary bundle](#VocabularyBundle-Syntax) is an ontology that bundles a set of vocabularies and allows description logic (DL) reasoning with [closed-world semantics](#Description-Logic-Semantics) using them (in contrast to a vocabulary that has [open-world semantics](#Description-Logic-Semantics)). A vocabulary bundle is declared with the keywords `vocabulary` `bundle` as its ontology kind, followed by its NAMESPACE, the keyword `as`, and its prefix ID. It also has a body consisting of zero or more vocabulary bundle imports between two braces `{` `}`, as follows:
 
 <pre class="highlight highlight-html">
+Annotation*
 `vocabulary` `bundle` NAMESPACE `as` ID `{`
 `}`
 </pre>
@@ -812,16 +1232,18 @@ For example, the following vocabulary bundle has the namespace *http://com.xyz/m
 
 <pre class="highlight highlight-html">
 `vocabulary` `bundle` `<`http://com.xyz/methodology/foundation#`>` `as` foundation `{`
+	VocabularyBundleImport*
 `}`
 </pre>
 
-### Import ### {#VocabularyBundleImport-LR}
+### Imports ### {#VocabularyBundleImports-LR}
 
 #### Inclusion #### {#VocabularyBundleInclusion-LR}
 
 An [vocabulary bundle inclusion](#VocabularyBundleInclusion) is a kind of [import](#Import) statement that can be added to a vocabulary bundle to specify that it includes a vocabulary. A vocabulary bundle inclusion is defined with the keyword `includes` followed by the imported vocabulary's NAMESPACE. If members of the imported vocabulary are to be referenced using their ABBREVIATED_IRIs, then the NAMESPACE needs to be followed by the keyword `as` and a unique prefix ID in the bundle's imports.
 
 <pre class="highlight highlight-html">
+Annotation*
 `includes` NAMESPACE (`as` ID)?
 </pre>
 
@@ -839,6 +1261,7 @@ For example, the *foundation* vocabulary bundle *includes* two vocabularies: *mi
 An [vocabulary bundle extends](#VocabularyBundleExtension) is a kind of [import](#Import) statement that can be added to a vocabulary bundle to specify that it extends another vocabulary bundle. This can be used to organize vocabulary bundles in layers that build on each other. Each bundle inherits the vocabularies contributed by its extended bundles and may optionally add to them other included vocabularies. This can, for example, be used to define a family of related vocabulary bundles that build on each other by tackling different incremental concerns. A vocabulary bundle extension is defined with the keyword `extends` followed by the imported vocabulary bundle's NAMESPACE.
 
 <pre class="highlight highlight-html">
+Annotation*
 `extends` NAMESPACE
 </pre>
 
@@ -854,10 +1277,12 @@ For example, the *cyber-physical* vocabulary bundle *extends* the *foundation* v
 
 ## Description Bundle ## {#DescriptionBundle-LR}
 
-A [description bundle](#DescriptionBundle-Syntax) is an ontology that bundles a set of descriptions and allows them to be reasoned on as a dataset using description logic (DL). A description bundle is declared with the keywords `description` `bundle` as its ontology kind, followed by its NAMESPACE, the keyword `as`, and its prefix ID.
+A [description bundle](#DescriptionBundle-Syntax) is an ontology that bundles a set of descriptions and allows them to be reasoned on as a dataset using description logic (DL). A description bundle is declared with the keywords `description` `bundle` as its ontology kind, followed by its NAMESPACE, the keyword `as`, and its prefix ID. It also has a body consisting of zero or more description bundle imports between two braces `{` `}`, as follows:
 
 <pre class="highlight highlight-html">
+Annotation*
 `description` `bundle` NAMESPACE `as` ID `{`
+	DescriptionBundleImport*
 `}`
 </pre>
 
@@ -868,13 +1293,14 @@ For example, the following description bundle has the namespace *http://com.xyz/
 `}`
 </pre>
 
-### Import ### {#DescriptionBundleImport-LR}
+### Imports ### {#DescriptionBundleImports-LR}
 
 #### Inclusion #### {#DescriptionBundleInclusion-LR}
 
 A [description bundle inclusion](#DescriptionBundleInclusion) is a kind of [import](#Import) statement that can be added to a description bundle to specify that it includes a description. A description bundle inclusion is defined with the keyword `includes` followed by the imported description's NAMESPACE. If members of the imported description are to be referenced using their ABBREVIATED_IRIs, then the NAMESPACE needs to be followed by the keyword `as` and a unique prefix ID in the bundle's imports.
 
 <pre class="highlight highlight-html">
+Annotation*
 `includes` NAMESPACE (`as` ID)?
 </pre>
 
@@ -892,6 +1318,7 @@ For example, the *mission1* description bundle *includes* two descriptions: *com
 A [description bundle usage](#DescriptionBundleUsage) is a kind of [import](#Import) statement that can be added to a description bundle to specify that it uses a vocabulary bundle. This is typically done to specify the closed-world vocabulary bundle that this description bundle will be reasoned on with. A description bundle usage is defined with the keyword `uses` followed by the imported vocabulary bundle's NAMESPACE.
 
 <pre class="highlight highlight-html">
+Annotation*
 `uses` NAMESPACE
 </pre>
 
@@ -910,6 +1337,7 @@ For example, the *mission1* description bundle *uses* the *foundation* vocabular
 An [description bundle extension](#DescriptionBundleExtension) is a kind of [import](#Import) statement that can be added to a description bundle to specify that it extends another description bundle. This can be used to organize description bundles into layers that build on each other. Each bundle inherits the descriptions contributed by its extended bundles and optionally adds to them other descriptions. This can, for example, be used to define alternative datasets (e.g., representing alternative system designs) that extend a common dataset. A description bundle extension is defined with the keyword `extends` followed by the imported description bundle's NAMESPACE.
 
 <pre class="highlight highlight-html">
+Annotation*
 `extends` NAMESPACE
 </pre>
 

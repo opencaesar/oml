@@ -167,6 +167,10 @@
 		RelationRestrictionAxiom*
 	`]`
 
+<a id="Feature-Syntax">Feature</a>:
+	Relation |
+	Property
+
 <a id="Relation-Syntax">Relation</a>:
 	ForwardRelation |
 	ReverseRelation
@@ -206,7 +210,7 @@
 <a id="EnumeratedScalar-Syntax">EnumeratedScalar</a>:
 	Annotation*
 	`enumerated` `scalar` ID (`:>` SpecializationAxiom (`,` SpecializationAxiom)*)? (`[`
-		Literal (`,` Literal)*
+		(Literal (`,` Literal)*)?
 	`]`)?
 
 <a id="Property-Syntax">Property</a>:
@@ -403,6 +407,10 @@
 <a id="SpecializationAxiom-Syntax">SpecializationAxiom</a>:
 	[SpecializableTerm|IRI]
 	
+<a id="RestrictionAxiom-Syntax">RestrictionAxiom</a>:
+	PropertyRestrictionAxiom |
+	RelationRestrictionAxiom
+
 <a id="PropertyRestrictionAxiom-Syntax">PropertyRestrictionAxiom</a>:
 	ScalarPropertyRestrictionAxiom |
 	StructuredPropertyRestrictionAxiom

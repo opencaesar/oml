@@ -169,7 +169,7 @@ FacetedScalar:
 EnumeratedScalar:
 	ownedAnnotations+=Annotation*
 	'enumerated' 'scalar' name=ID (':>' ownedSpecializations+=SpecializationAxiom (',' ownedSpecializations+=SpecializationAxiom)*)? ('['
-		literals+=Literal (',' literals+=Literal)*
+		(literals+=Literal (',' literals+=Literal)*)?
 	']')?;
 
 ForwardRelation:
