@@ -20,6 +20,7 @@ package io.opencaesar.oml.util;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -435,7 +436,10 @@ public final class OmlRead {
      * @return Whether the given resource URI is of an OML resource mapped by a catalog
      */
     public static boolean isUriMappedByCatalog(URI uri) {
-        return OmlUriResolver.getInstance().isUriMappedByCatalog(uri);
+        if (Arrays.asList(OmlConstants.OML_EXTENSIONS).contains(uri.fileExtension())) {
+        	return OmlUriResolver.getInstance().isUriMappedByCatalog(uri);
+        }
+        return false;
     }
 
     //-------------------------------------------------

@@ -39,6 +39,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
+import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 
 /**
  * The <B>Resolver</B> for OML ontology URIs
@@ -58,8 +59,10 @@ final class OmlUriResolver {
     private Map<WatchKey, File> watched;
     private Map<URI, Map<String, URI>> importCache;
     private Map<URI, OmlCatalog> catalogCache;
+    private URIConverter uriConverter;
     
     private OmlUriResolver() {
+    	uriConverter = new ExtensibleURIConverterImpl();
         activate();
     }
     
@@ -286,7 +289,7 @@ final class OmlUriResolver {
     private OmlCatalog getCatalog(URI folderUri) {
         try {
             URI catalogUri = folderUri.appendSegment("catalog.xml");
-        	if  (new File(CommonPlugin.asLocalURI(catalogUri).toFileString()).exists()) {
+        	if  (uriConverter.exists(catalogUri, null)) {
                 return OmlCatalog.create(catalogUri);
         	}
         } catch (IOException e) {

@@ -646,7 +646,7 @@ public final class OmlSearch extends OmlIndex {
         return false;
     }
 
-    // Entity
+    // Classifier
 
     /**
      * Finds instances that have the given type as their direct type
@@ -683,33 +683,70 @@ public final class OmlSearch extends OmlIndex {
     }
 
     
-    // StructureInstance
+    // NamedInstance
 
     /**
-     * Finds instances that are related to the given instance as sources of relations
+     * Finds target instances that are related by any relation to the given source instance
      * 
-     * @param instance the given instance
-     * @return a list of instances that are related to the given instance as sources of relations
+     * @param source the given source instance
+     * @return a list of target instances that are related by any relation to the given source instance
      */
-    public static List<NamedInstance> findInstancesRelatedFrom(NamedInstance instance) {
-        final List<NamedInstance> instances = new ArrayList<>();
-        instances.addAll(findLinkAssertionsWithTarget(instance).stream()
-                .map(a -> OmlRead.getSource(a))
+    public static List<NamedInstance> findInstancesRelatedFrom(NamedInstance source) {
+        final List<NamedInstance> targets = new ArrayList<>();
+        targets.addAll(findLinkAssertions(source).stream()
+                .map(a -> a.getTarget())
                 .collect(Collectors.toList()));
-        instances.addAll(findRelationInstancesWithTarget(instance).stream()
-                .flatMap(a -> a.getSources().stream())
+        targets.addAll(findRelationInstancesWithSource(source).stream()
+                .flatMap(a -> a.getTargets().stream())
                 .collect(Collectors.toList()));
-        return instances;
+        return targets;
     }
 
     /**
-     * Finds instances that are related to the given instance as sources of a given relation
+     * Finds target instances that are related by a given relation to the given source instance
      * 
-     * @param instance the given instance
+     * @param source the given source instance
      * @param relation the given relation
-     * @return a list of instances that are related to the given instance as sources of a given relation
+     * @return a list of target instances that are related by a given relation to the given source instance
      */
-    public static List<NamedInstance> findInstancesRelatedFrom(NamedInstance instance, Relation relation) {
+    public static List<NamedInstance> findInstancesRelatedFrom(NamedInstance source, Relation relation) {
+        final List<NamedInstance> targets = new ArrayList<>();
+        targets.addAll(findLinkAssertions(source).stream()
+                .filter(a -> a.getRelation() == relation)
+                .map(a -> a.getTarget())
+                .collect(Collectors.toList()));
+        targets.addAll(findRelationInstancesWithSource(source).stream()
+                .filter(i -> findTypes(i).stream().filter(t -> ((RelationEntity)t).getForwardRelation() == relation).findFirst().isPresent())
+                .flatMap(a -> a.getTargets().stream())
+                .collect(Collectors.toList()));
+        return targets;
+    }
+
+    /**
+     * Finds source instances that are related by any relation to the given target instance
+     * 
+     * @param target the given target instance
+     * @return a list of source instances that are related by any relation to the given target instance
+     */
+    public static List<NamedInstance> findInstancesRelatedTo(NamedInstance target) {
+        final List<NamedInstance> sources = new ArrayList<>();
+        sources.addAll(findLinkAssertionsWithTarget(target).stream()
+                .map(a -> OmlRead.getSource(a))
+                .collect(Collectors.toList()));
+        sources.addAll(findRelationInstancesWithTarget(target).stream()
+                .flatMap(a -> a.getSources().stream())
+                .collect(Collectors.toList()));
+        return sources;
+    }
+
+    /**
+     * Finds source instances that are related by a given relation to the given target instance
+     * 
+     * @param target the given target instance
+     * @param relation the given relation
+     * @return a list of source instances that are related by a given relation to the given target instance
+     */
+    public static List<NamedInstance> findInstancesRelatedTo(NamedInstance instance, Relation relation) {
         final List<NamedInstance> instances = new ArrayList<>();
         instances.addAll(findLinkAssertionsWithTarget(instance).stream()
                 .filter(a -> a.getRelation() == relation)
@@ -718,43 +755,6 @@ public final class OmlSearch extends OmlIndex {
         instances.addAll(findRelationInstancesWithTarget(instance).stream()
                 .filter(i -> findTypes(i).stream().filter(t -> ((RelationEntity)t).getReverseRelation() == relation).findFirst().isPresent())
                 .flatMap(i -> i.getSources().stream())
-                .collect(Collectors.toList()));
-        return instances;
-    }
-
-    /**
-     * Finds instances that are related to the given instance as targets of relations
-     * 
-     * @param instance the given instance
-     * @return a list of instances that are related to the given instance as targets of relations
-     */
-    public static List<NamedInstance> findInstancesRelatedTo(NamedInstance instance) {
-        final List<NamedInstance> instances = new ArrayList<>();
-        instances.addAll(findLinkAssertions(instance).stream()
-                .map(a -> a.getTarget())
-                .collect(Collectors.toList()));
-        instances.addAll(findRelationInstancesWithSource(instance).stream()
-                .flatMap(a -> a.getTargets().stream())
-                .collect(Collectors.toList()));
-        return instances;
-    }
-
-    /**
-     * Finds instances that are related to the given instance as targets of a given relation
-     * 
-     * @param instance the given instance
-     * @param relation the given relation
-     * @return a list of instances that are related to the given instance as targets of a given relation
-     */
-    public static List<NamedInstance> findInstancesRelatedTo(NamedInstance instance, Relation relation) {
-        final List<NamedInstance> instances = new ArrayList<>();
-        instances.addAll(findLinkAssertions(instance).stream()
-                .filter(a -> a.getRelation() == relation)
-                .map(a -> a.getTarget())
-                .collect(Collectors.toList()));
-        instances.addAll(findRelationInstancesWithSource(instance).stream()
-                .filter(i -> findTypes(i).stream().filter(t -> ((RelationEntity)t).getForwardRelation() == relation).findFirst().isPresent())
-                .flatMap(a -> a.getTargets().stream())
                 .collect(Collectors.toList()));
         return instances;
     }
