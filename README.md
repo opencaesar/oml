@@ -64,5 +64,5 @@ Build:
 - Wait for the resolution of the target platform to finish (watch the percentage at the bottom-right of the IDE window)
 - Once the target platform is resolved, click in th editor on the link (top-right) saying "Set as Active Target Platform" then close the editor
 - Turn on automatic build from Project -> Build automatically (check)
-- The buld will start, wait for it to finish (watch the percentage at the bottom-right of the IDE window)
-- At this point, you should have all projects built without errors
+- The build will start, wait for it to finish (watch the percentage at the bottom-right of the IDE window)
+- At this point, you should have all projects building without errors
