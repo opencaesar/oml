@@ -60,7 +60,7 @@ Import:
 
 Build:
 
-- In Project Explorer, navigate to the file oml -> io.opencaesar.oml.target/io.opencaesar..oml.target.target and double click to open its editor
+- In Project Explorer, navigate to the file oml -> io.opencaesar.oml.target/io.opencaesar.oml.target.target and double click to open its editor
 - Wait for the resolution of the target platform to finish (watch the percentage at the bottom-right of the IDE window)
 - Once the target platform is resolved, click in th editor on the link (top-right) saying "Set as Active Target Platform" then close the editor
 - Turn on automatic build from Project -> Build automatically (check)
