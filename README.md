@@ -69,7 +69,7 @@ Build:
 
 To change version:
 
-- In Project Explorer, navigate to the fil oml -> version.txt and double click to open its editor (note the current version)
+- In Project Explorer, navigate to the file oml -> version.txt and double click to open its editor (note the current version)
 - Using a terminal window, navigate to the root of the clone folder
 - Execute the script ./setversion `<new-version>` (replace `<new-version>`)
 - Back in Eclipse IDE, right click on the root project in Project Explorer view and select Refresh
