@@ -42,7 +42,7 @@ The generated spec can then be opened from `io.opencaesar.oml.specification/buil
 
 ## Development
 
-To setup a development environment:
+To setup a development environment for oml:
 
 Preparation:
 
