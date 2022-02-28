@@ -40,3 +40,37 @@ If you want to generate the OML spec, you first need to have both [bikeshed](htt
 ```
 The generated spec can then be opened from `io.opencaesar.oml.specification/build/bikeshed/index.html`
 
+## Development
+
+To setup a development environment for oml:
+
+Preparation:
+
+- Install/use a recent version of Eclipse IDE for Java and DSL Developers (e.g., 2021-09)
+- Launch the Eclipse IDE and create a new workspace (recommended)
+- Switch to the Java perspective from Window -> Perspective -> Open Perspective -> Other -> Java
+- Show the Project Explorer view (if hidden) by selecting Window -> Show View -> Project Explorer
+- Turn off automatic build from Project -> Build automatically (uncheck)
+
+Import:
+
+- Import the cloned project using File -> Import -> Maven -> Existing Maven Projects -> Browse (select the root of the clone folder) -> Finish
+- Right click on the root `oml` project in the Project Explorer view and select from the context menu Gradle -> Refresh Gradle Project
+- At this point, you should have all projects loaded in your workspace
+
+Build:
+
+- In Project Explorer, navigate to the file oml/io.opencaesar.oml.target/io.opencaesar.oml.target.target and double click to open its editor
+- Wait for the resolution of the target platform to finish (watch the percentage at the bottom-right of the IDE window)
+- Once the target platform is resolved, click in th editor on the link (top-right) saying "Set as Active Target Platform" then close the editor
+- Turn on automatic build from Project -> Build automatically (check)
+- The build will start, wait for it to finish (watch the percentage at the bottom-right of the IDE window)
+- At this point, you should have all projects building without errors
+
+To change version:
+
+- In Project Explorer, navigate to the file oml/version.txt and double click to open its editor (note the current version)
+- Using a terminal window, navigate to the root of the clone folder
+- Execute the script ./setversion `<new-version>` (replace `<new-version>`)
+- Back in Eclipse IDE, right click on the root project in Project Explorer view and select Refresh
+- Wait for the build to finish
