@@ -242,7 +242,28 @@ public final class OmlValidator2 {
         return returnValue;
     }
 
-    // VocabularyExtension
+    /**
+     * Checks if an ontology's iri does not resolve to its file URI
+     * 
+     * @param object The ontology to check
+     * @param diagnostics The validation diagnostics
+     * @param context The object-to-object context map
+     * @return True if the rules is satisfied; False otherwise
+     */
+	protected boolean validateOntologyIri(Ontology object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        boolean returnValue = true;
+    	var iri = object.getIri();
+    	var uri = object.eResource().getURI();
+    	if (OmlRead.isUriMappedByCatalog(uri) && !uri.equals(OmlRead.getUriByIri(object.eResource(), iri))) {
+            report(Diagnostic.ERROR, diagnostics, object,
+                object.eClass().getName()+" namespace '"+object.getNamespace()+"' does not resolve to its file using the catalog", 
+                OmlPackage.Literals.ONTOLOGY__NAMESPACE);
+            returnValue = false;
+    	}
+        return returnValue;
+    }
+
+	// VocabularyExtension
     
     /**
      * Checks if a vocabulary extention URI resolves to a vocabulary

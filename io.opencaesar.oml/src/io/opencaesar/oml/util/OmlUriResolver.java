@@ -133,8 +133,8 @@ final class OmlUriResolver {
                 return true;
             }
             final URIConverter uriConverter = rs.getURIConverter();
-            if (uriConverter != null && uriConverter.exists(uri, rs.getLoadOptions())) {
-                return rs.getResource(uri, true) != null;
+            if (uriConverter != null) {
+                return uriConverter.exists(uri, rs.getLoadOptions());
             }
             return false;
         } catch(Throwable t) {
