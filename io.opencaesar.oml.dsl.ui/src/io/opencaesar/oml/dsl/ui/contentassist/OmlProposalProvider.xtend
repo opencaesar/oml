@@ -40,6 +40,7 @@ import org.eclipse.xtext.scoping.IScope
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor
+import java.util.ArrayList
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#content-assist
@@ -118,6 +119,15 @@ class OmlProposalProvider extends AbstractOmlProposalProvider {
 			val scope = omlGlobalScopeProvider.getScope(_import.eResource, eReference) [x | x.getUserData("namespace") == _import.namespace]
 			scope.allElements.forEach[o | acceptor.accept(createCompletionProposal(o.getUserData("prefix"), context))]
 		}
+	}
+
+	protected override boolean isValidProposal(String proposal, String prefix, ContentAssistContext context) {
+		var prefix2 = prefix
+		// match an abbreviated iri proposal if the name simply matches 
+		if (prefix.contains(":") && proposal.startsWith("<") && proposal.endsWith(">")) {
+			prefix2 = new ArrayList(prefix.split(":")).last 
+		}
+		return super.isValidProposal(proposal, prefix2, context);
 	}
 
 }
