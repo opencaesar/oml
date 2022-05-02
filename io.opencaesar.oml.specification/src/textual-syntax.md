@@ -264,10 +264,10 @@
     DifferentFromPredicate
 
 <a id="RelationEntityPredicate-Syntax">RelationEntityPredicate</a>:
-	[RelationEntity|IRI] `(` ID `,` ID `,` ID `)`
+	[RelationEntity|IRI] `(` ID `,` ID `,` (ID | [NamedInstance|IRI]) `)`
 
 <a id="FeaturePredicate-Syntax">FeaturePredicate</a>:
-	[Feature|IRI] `(` ID `,` ID `)`
+	[Feature|IRI] `(` ID `,` (ID | Literal | [NamedInstance|IRI]) `)`
 
 <a id="SameAsPredicate-Syntax">SameAsPredicate</a>:
 	`sameAs` `(` ID `,` ID `)`

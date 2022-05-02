@@ -1600,15 +1600,15 @@ abstract class BinaryPredicate extends Predicate {
      */
     ID[1] variable1
     /*
-     * The variable2 name specified by the predicate
+     * The optional variable2 name specified by the predicate
      */
     ID[?] variable2
 }
 
 /*
- * RelationEntityPredicate is a binary predicate that binds its variable1 and variable2 to two named instances that are the
- * source and the target, respectively, of a relation instance that is typed by a specific relation entity, and bound to
- * a third variable named entityVariable. 
+ * RelationEntityPredicate is a binary predicate that binds its entity variable to a instance of given relation entity.
+ * It also binds its variable 1 to the source of that relation instance, and either binds the target of the  relation
+ * instance to variable2, or checks that this target matches a specific named instance.
  */
 @Bikeshed(heading="Rules")
 class RelationEntityPredicate extends BinaryPredicate {
@@ -1620,18 +1620,30 @@ class RelationEntityPredicate extends BinaryPredicate {
      * The relation entity variable name specified by the predicate
      */
     ID[1] entityVariable
+    /*
+     * The optional named instance that is matched as the target of the relation instance
+     */
+    refers NamedInstance[?] target
 }
 
 /*
- * FeaturePredicate is a binary predicate that binds its variable1 to an instance and its variable2 to a value of a feature
- * of the instance
+ * FeaturePredicate is a binary predicate that binds a named instance to variable1, and either binds the value of one of its features
+ * to variable2, or checks that this value matches a specific literal or named instance.
  */
 @Bikeshed(heading="Rules")
 class FeaturePredicate extends BinaryPredicate {
     /*
-     * The feature of the instance
+     * The feature of the named instance whose value is bound or matched
      */
     refers Feature[1] feature
+    /*
+     * The optional literal that is matched as a value of the feature
+     */
+    contains Literal[?] literal
+    /*
+     * The optional named instance that is matched as a value of the feature
+     */
+    refers NamedInstance[?] instance
 }
 
 /*

@@ -457,10 +457,10 @@ BinaryPredicate:
     DifferentFromPredicate;
 
 RelationEntityPredicate:
-    entity=[RelationEntity|Ref] '(' variable1=ID ',' entityVariable=ID ',' variable2=ID ')';
+    entity=[RelationEntity|Ref] '(' variable1=ID ',' entityVariable=ID ',' (variable2=ID | target=[NamedInstance|CrossRef]) ')';
 
 FeaturePredicate:
-	feature=[Feature|Ref] '(' variable1=ID ',' variable2=ID ')';
+	feature=[Feature|Ref] '(' variable1=ID ',' (variable2=ID | literal=Literal | instance=[NamedInstance|CrossRef]) ')';
 
 SameAsPredicate:
     'sameAs' '(' variable1=ID ',' variable2=ID ')';
@@ -502,6 +502,8 @@ enum CardinalityRestrictionKind:
 //--------------
 
 Ref returns ecore::EString: 							ID | QNAME | IRI;
+
+CrossRef returns ecore::EString: 						QNAME | IRI;
 
 Boolean returns ecore::EBoolean:						BOOLEAN_STR;
 

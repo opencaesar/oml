@@ -740,23 +740,23 @@ public final class OmlSearch extends OmlIndex {
     }
 
     /**
-     * Finds source instances that are related by a given relation to the given target instance
+     * Finds source instances that are related by a given relation to a given target instance
      * 
      * @param target the given target instance
      * @param relation the given relation
      * @return a list of source instances that are related by a given relation to the given target instance
      */
-    public static List<NamedInstance> findInstancesRelatedTo(NamedInstance instance, Relation relation) {
-        final List<NamedInstance> instances = new ArrayList<>();
-        instances.addAll(findLinkAssertionsWithTarget(instance).stream()
+    public static List<NamedInstance> findInstancesRelatedTo(NamedInstance target, Relation relation) {
+        final List<NamedInstance> sources = new ArrayList<>();
+        sources.addAll(findLinkAssertionsWithTarget(target).stream()
                 .filter(a -> a.getRelation() == relation)
                 .map(a -> OmlRead.getSource(a))
                 .collect(Collectors.toList()));
-        instances.addAll(findRelationInstancesWithTarget(instance).stream()
+        sources.addAll(findRelationInstancesWithTarget(target).stream()
                 .filter(i -> findTypes(i).stream().filter(t -> ((RelationEntity)t).getReverseRelation() == relation).findFirst().isPresent())
                 .flatMap(i -> i.getSources().stream())
                 .collect(Collectors.toList()));
-        return instances;
+        return sources;
     }
 
     //-------------------------------------------------

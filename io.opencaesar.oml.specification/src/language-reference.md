@@ -1006,16 +1006,18 @@ A predicate represents a pattern in the model that can be matched or inferred, d
 
 - [Relation Entity Predicate](#RelationEntityPredicate-Syntax)
 
-    Matches a instance of a given relation entity (specified by its IRI) and binds it to variable ID2, its source to variable ID1, its target to variable ID3.
+    Matches a instance of a given relation entity (specified by its IRI) and binds it to variable ID2 and its source to variable ID1, and either binds its target 
+    to variable ID3 or checks that the value is a specific target instance.
      <pre class="highlight highlight-html">
-    [RelationEntity|IRI] `(` ID1 `,` ID2 `,` ID3 `)`
+    [RelationEntity|IRI] `(` ID1 `,` ID2 `,` (ID3 | [NamedInstance|IRI]) `)`
     </pre>
 
 - [Feature Predicate](#FeaturePredicate-Syntax)
 
-    Matches an assertion of a given feature (specified by its IRI) and binds its domain to variable ID1 and its range to variable ID2.
+    Matches an assertion of a given feature (specified by its IRI) and binds its instance to variable ID1 and either binds its value to variable ID2 or checks 
+    that the value is a specific literal value or instance value.
     <pre class="highlight highlight-html">
-    [Feature|IRI] `(` ID1 `,` ID2 `)`
+    [Feature|IRI] `(` ID1 `,` (ID2 | Literal | [NamedInstance|IRI]) `)`
     </pre>
 
 - [Same As Predicate](#SameAsPredicate-Syntax)
