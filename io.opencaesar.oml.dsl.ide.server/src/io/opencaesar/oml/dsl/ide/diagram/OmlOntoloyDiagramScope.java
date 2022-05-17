@@ -41,7 +41,6 @@ import io.opencaesar.oml.StructureReference;
 import io.opencaesar.oml.StructuredProperty;
 import io.opencaesar.oml.StructuredPropertyRestrictionAxiom;
 import io.opencaesar.oml.Type;
-import io.opencaesar.oml.util.OmlIndex;
 import io.opencaesar.oml.util.OmlRead;
 import io.opencaesar.oml.util.OmlSearch;
 import io.opencaesar.oml.util.OmlSwitch;
@@ -213,7 +212,7 @@ class OmlOntoloyDiagramScope {
 	private void phase2ScanAllClassifierProperties(final Classifier cls) {
 		OmlSearch.findAllSuperTerms(cls, true).stream()
 			.map(t -> (Classifier)t).forEach(parent -> {
-				OmlIndex.findSemanticPropertiesWithDomain(parent).forEach(p -> {
+				OmlSearch.findSemanticPropertiesWithDomain(parent).forEach(p -> {
 					if (allImportedElements.contains(p)) {
 						if (p instanceof ScalarProperty) {
 							ScalarProperty sp = (ScalarProperty) p;
@@ -441,7 +440,7 @@ class OmlOntoloyDiagramScope {
 					others.add(l);
 				}
 			});
-			OmlIndex.findRelationInstancesWithSource(i).forEach(ri -> {
+			OmlSearch.findRelationInstancesWithSource(i).forEach(ri -> {
 				if (allImportedElements.contains(ri)) {
 					others.add(ri);
 				}

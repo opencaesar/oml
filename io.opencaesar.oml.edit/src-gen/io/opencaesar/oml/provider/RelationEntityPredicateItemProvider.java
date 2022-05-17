@@ -63,7 +63,6 @@ public class RelationEntityPredicateItemProvider extends BinaryPredicateItemProv
 
 			addEntityPropertyDescriptor(object);
 			addEntityVariablePropertyDescriptor(object);
-			addTargetPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -86,28 +85,6 @@ public class RelationEntityPredicateItemProvider extends BinaryPredicateItemProv
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Target feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addTargetPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_RelationEntityPredicate_target_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_RelationEntityPredicate_target_feature", "_UI_RelationEntityPredicate_type"),
-				 OmlPackage.Literals.RELATION_ENTITY_PREDICATE__TARGET,
-				 true,
-				 false,
-				 true,
-				 null,
 				 null,
 				 null));
 	}

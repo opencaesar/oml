@@ -64,7 +64,9 @@ DescriptionBundle:
 
 SpecializableTerm:
 	Type |
-	Property;
+	AnnotationProperty |
+	ScalarProperty |
+	StructuredProperty;
 	
 Type:
 	Classifier |
@@ -120,6 +122,9 @@ Structure:
 		ownedPropertyRestrictions+=PropertyRestrictionAxiom*
 	']')?;
 
+Feature:
+	Property;
+
 Property:
 	AnnotationProperty |
 	SemanticProperty;
@@ -171,6 +176,10 @@ EnumeratedScalar:
 	'enumerated' 'scalar' name=ID (':>' ownedSpecializations+=SpecializationAxiom (',' ownedSpecializations+=SpecializationAxiom)*)? ('['
 		(literals+=Literal (',' literals+=Literal)*)?
 	']')?;
+
+Relation:
+	ForwardRelation |
+	ReverseRelation;
 
 ForwardRelation:
 	ownedAnnotations+=Annotation*
@@ -306,10 +315,10 @@ RelationInstanceReference:
 	']')?;
 
 VocabularyStatement:
-	SpecializableTerm |
-	SpecializableTermReference |
 	Rule |
 	RuleReference |
+	SpecializableTerm |
+	SpecializableTermReference |
 	RelationReference;
 	
 DescriptionStatement:
@@ -419,7 +428,7 @@ RelationTargetRestrictionAxiom:
 	'restricts' 'relation' relation=[Relation|Ref] 'to' target=[NamedInstance|Ref];
 
 KeyAxiom:
-	'key' properties+=[ScalarProperty|Ref] (',' properties+=[ScalarProperty|Ref])*;
+	'key' properties+=[Feature|Ref] (',' properties+=[Feature|Ref])*;
 
 ConceptTypeAssertion:
 	type=[Concept|Ref];
@@ -457,16 +466,16 @@ BinaryPredicate:
     DifferentFromPredicate;
 
 RelationEntityPredicate:
-    entity=[RelationEntity|Ref] '(' variable1=ID ',' entityVariable=ID ',' (variable2=ID | target=[NamedInstance|CrossRef]) ')';
+    entity=[RelationEntity|Ref] '(' variable1=ID ',' entityVariable=ID ',' (variable2=ID | instance2=[NamedInstance|CrossRef]) ')';
 
 FeaturePredicate:
-	feature=[Feature|Ref] '(' variable1=ID ',' (variable2=ID | literal=Literal | instance=[NamedInstance|CrossRef]) ')';
+	feature=[Feature|Ref] '(' variable1=ID ',' (variable2=ID | literal2=Literal | instance2=[NamedInstance|CrossRef]) ')';
 
 SameAsPredicate:
-    'sameAs' '(' variable1=ID ',' variable2=ID ')';
+    'sameAs' '(' variable1=ID ',' (variable2=ID | instance2=[NamedInstance|CrossRef]) ')';
 
 DifferentFromPredicate:
-    'differentFrom' '(' variable1=ID ',' variable2=ID ')';
+    'differentFrom' '(' variable1=ID ',' (variable2=ID | instance2=[NamedInstance|CrossRef]) ')';
 
 Literal:
 	IntegerLiteral |

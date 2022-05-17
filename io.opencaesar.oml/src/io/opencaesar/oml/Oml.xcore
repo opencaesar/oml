@@ -285,14 +285,14 @@ abstract class Type extends SpecializableTerm {
 }
 
 /*
- * Classifier is a type that classifies a set of instances and characterizes them with feature properties
+ * Classifier is a type that classifies a set of instances and characterizes them with properties
  * (i.e., becomes a domain of these properties). It also inherits properties in the domain of its specialized 
- * types. In addition, it can specify constraints on (direct or inherited) feature properties in its domain.
+ * types. In addition, it can specify constraints on (direct or inherited) properties in its domain.
  */
 @Bikeshed(heading="Types")
 abstract class Classifier extends Type {
     /*
-     * The set of restriction axioms on feature properties in this type's domain
+     * The set of restriction axioms on properties of this classifier
      */
     contains PropertyRestrictionAxiom[*] ownedPropertyRestrictions opposite owningClassifier
 }
@@ -404,14 +404,14 @@ abstract class Feature extends Term {
  * Property is a specializable feature that relates an element to a value. It is the super type of all property types.
  */
 @Bikeshed(heading="Features")
-abstract class Property extends SpecializableTerm, Feature {
+abstract class Property extends Feature {
 }
 
 /*
  * AnnotationProperty is a property with no DL semantics that relates an annotated element to a literal value.
  */
 @Bikeshed(heading="Features")
-class AnnotationProperty extends Property {
+class AnnotationProperty extends Property, SpecializableTerm {
 }
 
 /*
@@ -421,13 +421,13 @@ class AnnotationProperty extends Property {
 @Bikeshed(heading="Features")
 abstract class SemanticProperty extends Property {
     /*
-     * The classifier that is the domain of this property
+     * Determines if this property is functional (has a max of one value per instance) 
      */
-    refers Classifier[1] domain
+    op boolean isFunctional()
     /*
-     * Whether this property is functional (has a max of one value per instance) 
+     * Gets the domain of this property
      */
-    boolean functional
+    op Classifier getDomain()
     /*
      * Gets the range of the property
      */
@@ -439,7 +439,15 @@ abstract class SemanticProperty extends Property {
  * It can also be flagged as a key property (among possibly several) that specifies the unique id of its domain.
  */
 @Bikeshed(heading="Features")
-class ScalarProperty extends SemanticProperty {
+class ScalarProperty extends SemanticProperty, SpecializableTerm {
+    /*
+     * Whether this property is functional (has a max of one value per instance) 
+     */
+    boolean functional
+    /*
+     * The classifier that is the domain of this property
+     */
+    refers Classifier[1] domain
     /*
      * The scalar that is the range of this property
      */
@@ -450,7 +458,15 @@ class ScalarProperty extends SemanticProperty {
  * StructuredProperty is a semantic property whose range is a structure. It can specialize other structured properties.
  */
 @Bikeshed(heading="Features")
-class StructuredProperty extends SemanticProperty {
+class StructuredProperty extends SemanticProperty, SpecializableTerm {
+    /*
+     * Whether this property is functional (has a max of one value per instance) 
+     */
+    boolean functional
+    /*
+     * The classifier that is the domain of this property
+     */
+    refers Classifier[1] domain
     /*
      * The structure that is the range of this property
      */
@@ -601,6 +617,7 @@ abstract class Relation extends Feature {
      * Gets the relation entity of this relation 
      */
     op RelationEntity getRelationEntity()
+    
     op Entity deriveDomain()
     op Entity deriveRange()
     op Relation deriveInverse()
@@ -617,6 +634,7 @@ class ForwardRelation extends Relation {
      * The relation entity that owns this relation as forward
      */
     container RelationEntity[1] relationEntity opposite forwardRelation
+    
     op Entity deriveDomain() {
         if (relationEntity !== null)
             relationEntity.source
@@ -642,6 +660,7 @@ class ReverseRelation extends Relation {
      * The relation entity that owns this reverse relation
      */
     container RelationEntity[1] relationEntity opposite reverseRelation
+    
     op Entity deriveDomain() {
         if (relationEntity !== null)
             relationEntity.target
@@ -1394,16 +1413,15 @@ class RelationTargetRestrictionAxiom extends RelationRestrictionAxiom {
 }
 
 /*
- * KeyAxiom is an axiom that states that a set of scalar properties form a unique key for an entity. This means that all 
- * instances of that entity must have unique values for those keys. Scalar properties do not need to be specified as
- * functional to be used as keys. 
+ * KeyAxiom is an axiom that states that a set of features form a unique key for an entity. This means that all 
+ * instances of that entity must have unique values for those keys.
  */
 @Bikeshed(heading="Axioms")
 class KeyAxiom extends Axiom {
     /*
-     * The set of scalar properties specified by this axiom as a key
+     * The set of features specified by this axiom as a key
      */
-    refers ScalarProperty[+] properties
+    refers Feature[+] properties
     /*
      * The entity that owns this axiom
      */
@@ -1591,44 +1609,45 @@ class TypePredicate extends UnaryPredicate {
 }
 
 /*
- * BinaryPredicate is a predicate that binds two variables: variable1 and variable2
+ * BinaryPredicate is a predicate that takes two arguments: the first is a `variable1` to match to some 
+ * instance, and the second is either a `variable2` to match to some instance or a specific `instance2`.
  */
 @Bikeshed(heading="Rules")
 abstract class BinaryPredicate extends Predicate {
     /*
-     * The variable1 name specified by the predicate
+     * The variable1 specified by the predicate
      */
     ID[1] variable1
     /*
-     * The optional variable2 name specified by the predicate
+     * The optional variable2 specified by the predicate
      */
     ID[?] variable2
+    /*
+     * The optional instance2 specified by the predicate
+     */
+    refers NamedInstance[?] instance2
 }
 
 /*
- * RelationEntityPredicate is a binary predicate that binds its entity variable to a instance of given relation entity.
- * It also binds its variable 1 to the source of that relation instance, and either binds the target of the  relation
- * instance to variable2, or checks that this target matches a specific named instance.
+ * RelationEntityPredicate is a binary predicate that binds its `entityVariable` to a relation instance,
+ * its `variable1` to the source of that relation instance, and either its `variable2` or `instance2` as the target of
+ * that relation instance.
  */
 @Bikeshed(heading="Rules")
 class RelationEntityPredicate extends BinaryPredicate {
     /*
-     * The relation entity that is the type of the relation instance
+     * The type of the relation instance
      */
     refers RelationEntity[1] entity
     /*
-     * The relation entity variable name specified by the predicate
+     * The entity variable specified by the predicate
      */
     ID[1] entityVariable
-    /*
-     * The optional named instance that is matched as the target of the relation instance
-     */
-    refers NamedInstance[?] target
 }
 
 /*
- * FeaturePredicate is a binary predicate that binds a named instance to variable1, and either binds the value of one of its features
- * to variable2, or checks that this value matches a specific literal or named instance.
+ * FeaturePredicate is a binary predicate that binds its `variable1` to an instance (subject), and either its 
+ `variable2`, `instance2`, or `literal2` as the value (object) of a specific feature (predicate). 
  */
 @Bikeshed(heading="Rules")
 class FeaturePredicate extends BinaryPredicate {
@@ -1637,24 +1656,20 @@ class FeaturePredicate extends BinaryPredicate {
      */
     refers Feature[1] feature
     /*
-     * The optional literal that is matched as a value of the feature
+     * The optional literal2 that is matched as a value of the feature
      */
-    contains Literal[?] literal
-    /*
-     * The optional named instance that is matched as a value of the feature
-     */
-    refers NamedInstance[?] instance
+    contains Literal[?] literal2
 }
 
 /*
- * SameAsPredicate is a binary predicate that binds its two variables to the same instance
+ * SameAsPredicate is a binary predicate that checks that its two arguments bind to the same instance
  */
 @Bikeshed(heading="Rules")
 class SameAsPredicate extends BinaryPredicate {
 }
 
 /*
- * DifferentFromPredicate is a binary predicate that binds its two variables to different instances
+ * DifferentFromPredicate is a binary predicate that checks that its two arguments bind to different instances
  */
 @Bikeshed(heading="Rules")
 class DifferentFromPredicate extends BinaryPredicate {

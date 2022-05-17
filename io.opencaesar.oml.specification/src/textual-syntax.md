@@ -110,14 +110,16 @@
 
 <a id="VocabularyStatement-Syntax">VocabularyStatement</a>:
 	SpecializableTerm |
-	Rule |
 	SpecializableTermReference |
+	Rule |
 	RuleReference |
 	RelationReference
 
 <a id="SpecializableTerm-Syntax">SpecializableTerm</a>:
 	Type |
-	Property
+	AnnotationProperty |
+	ScalarProperty |
+	StructuredProperty
 	
 <a id="Type-Syntax">Type</a>:
 	Classifier |
@@ -270,10 +272,10 @@
 	[Feature|IRI] `(` ID `,` (ID | Literal | [NamedInstance|IRI]) `)`
 
 <a id="SameAsPredicate-Syntax">SameAsPredicate</a>:
-	`sameAs` `(` ID `,` ID `)`
+	`sameAs` `(` ID `,` (ID | [NamedInstance|IRI] `)`
 
 <a id="DifferentFromPredicate-Syntax">DifferentFromPredicate</a>:
-	`differentFrom` `(` ID `,` ID `)`
+	`differentFrom` `(` ID `,` (ID | [NamedInstance|IRI] `)`
 
 <a id="DescriptionStatement-Syntax">DescriptionStatement</a>:
 	NamedInstance |
@@ -458,7 +460,7 @@
 	`restricts` `relation` [Relation|IRI] `to` [NamedInstance|IRI]
 
 <a id="KeyAxiom-Syntax">KeyAxiom</a>:
-	`key` [ScalarProperty|IRI] (`,` [ScalarProperty|IRI])*
+	`key` [Feature|IRI] (`,` [Feature|IRI])*
 
 <a id="ConceptTypeAssertion-Syntax">ConceptTypeAssertion</a>:
 	[Concept|IRI]

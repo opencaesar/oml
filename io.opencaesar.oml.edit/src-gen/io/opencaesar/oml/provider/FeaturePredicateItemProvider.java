@@ -63,7 +63,6 @@ public class FeaturePredicateItemProvider extends BinaryPredicateItemProvider {
 			super.getPropertyDescriptors(object);
 
 			addFeaturePropertyDescriptor(object);
-			addInstancePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -91,28 +90,6 @@ public class FeaturePredicateItemProvider extends BinaryPredicateItemProvider {
 	}
 
 	/**
-	 * This adds a property descriptor for the Instance feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addInstancePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_FeaturePredicate_instance_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_FeaturePredicate_instance_feature", "_UI_FeaturePredicate_type"),
-				 OmlPackage.Literals.FEATURE_PREDICATE__INSTANCE,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -124,7 +101,7 @@ public class FeaturePredicateItemProvider extends BinaryPredicateItemProvider {
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(OmlPackage.Literals.FEATURE_PREDICATE__LITERAL);
+			childrenFeatures.add(OmlPackage.Literals.FEATURE_PREDICATE__LITERAL2);
 		}
 		return childrenFeatures;
 	}
@@ -180,7 +157,7 @@ public class FeaturePredicateItemProvider extends BinaryPredicateItemProvider {
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(FeaturePredicate.class)) {
-			case OmlPackage.FEATURE_PREDICATE__LITERAL:
+			case OmlPackage.FEATURE_PREDICATE__LITERAL2:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -200,27 +177,27 @@ public class FeaturePredicateItemProvider extends BinaryPredicateItemProvider {
 
 		newChildDescriptors.add
 			(createChildParameter
-				(OmlPackage.Literals.FEATURE_PREDICATE__LITERAL,
+				(OmlPackage.Literals.FEATURE_PREDICATE__LITERAL2,
 				 OmlFactory.eINSTANCE.createQuotedLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(OmlPackage.Literals.FEATURE_PREDICATE__LITERAL,
+				(OmlPackage.Literals.FEATURE_PREDICATE__LITERAL2,
 				 OmlFactory.eINSTANCE.createIntegerLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(OmlPackage.Literals.FEATURE_PREDICATE__LITERAL,
+				(OmlPackage.Literals.FEATURE_PREDICATE__LITERAL2,
 				 OmlFactory.eINSTANCE.createDecimalLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(OmlPackage.Literals.FEATURE_PREDICATE__LITERAL,
+				(OmlPackage.Literals.FEATURE_PREDICATE__LITERAL2,
 				 OmlFactory.eINSTANCE.createDoubleLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(OmlPackage.Literals.FEATURE_PREDICATE__LITERAL,
+				(OmlPackage.Literals.FEATURE_PREDICATE__LITERAL2,
 				 OmlFactory.eINSTANCE.createBooleanLiteral()));
 	}
 

@@ -35,6 +35,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
+import io.opencaesar.oml.BinaryPredicate;
 import io.opencaesar.oml.Classifier;
 import io.opencaesar.oml.Description;
 import io.opencaesar.oml.DescriptionBox;
@@ -748,7 +749,7 @@ public final class OmlValidator2 {
      * @param context The object-to-object context map
      * @return True if the rules is satisfied; False otherwise
      */
-    protected boolean validateTypePredicate(TypePredicate object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+    protected boolean validateTypePredicateAsConsequent(TypePredicate object, DiagnosticChain diagnostics, Map<Object, Object> context) {
         if (object.getConsequentRule() != null) {
 	       if (object.getType() instanceof Structure) {
 	            return report(Diagnostic.ERROR, diagnostics, object,
@@ -773,11 +774,32 @@ public final class OmlValidator2 {
      * @param context The object-to-object context map
      * @return True if the rules is satisfied; False otherwise
      */
-    protected boolean validateFeaturePredicate(FeaturePredicate object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+    protected boolean validateFeaturePredicateAsConsequent(FeaturePredicate object, DiagnosticChain diagnostics, Map<Object, Object> context) {
         if (object.getConsequentRule() != null && object.getFeature() instanceof StructuredProperty) {
             return report(Diagnostic.ERROR, diagnostics, object,
                 "Structured property "+object.getFeature().getAbbreviatedIri()+" cannot be used as a consequent predicate", 
                 OmlPackage.Literals.FEATURE_PREDICATE__FEATURE);
+        }
+        return true;
+    }
+
+    // Binary Predicate
+
+    /**
+     * Checks if a feature predicate has a second argument
+     * 
+     * @param object The feature predicate to check
+     * @param diagnostics The validation diagnostics
+     * @param context The object-to-object context map
+     * @return True if the rules is satisfied; False otherwise
+     */
+    protected boolean validateFeaturePredicateArg2(BinaryPredicate object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        if (object.getVariable2() == null &&
+        	object.getInstance2() == null &&
+        	(!(object instanceof FeaturePredicate) || ((FeaturePredicate)object).getLiteral2() == null)) {
+            return report(Diagnostic.ERROR, diagnostics, object,
+                "Binary predicate must have a second argument", 
+                OmlPackage.Literals.BINARY_PREDICATE__VARIABLE2);
         }
         return true;
     }

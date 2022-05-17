@@ -209,13 +209,25 @@ public class OmlIndex {
      * 
      * @param domain The referenced classifier
      * @return A list of referencing semantic properties
+     * @deprecated use {@link OmlSearch#findSemanticPropertiesWithDomain(Classifier)}
      */
+    @Deprecated(since = "1.1")
     public static List<SemanticProperty> findSemanticPropertiesWithDomain(Classifier domain) {
-        return findInverseReferencers(domain, SemanticProperty.class, OmlPackage.Literals.SEMANTIC_PROPERTY__DOMAIN);
+    	return OmlSearch.findSemanticPropertiesWithDomain(domain);
     }
-    
+
     // ScalarProperty
     
+    /**
+     * Finds scalar properties referencing the given classifier as domain
+     * 
+     * @param domain The referenced classifier
+     * @return A list of referencing scalar properties
+     */
+    public static List<ScalarProperty> findScalarPropertiesWithDomain(Classifier domain) {
+        return findInverseReferencers(domain, ScalarProperty.class, OmlPackage.Literals.SCALAR_PROPERTY__DOMAIN);
+    }
+
     /**
      * Finds scalar properties referencing the given scalar as range
      * 
@@ -228,6 +240,16 @@ public class OmlIndex {
     
     // StructuredProperty
     
+    /**
+     * Finds structured properties referencing the given classifier as domain
+     * 
+     * @param domain The referenced classifier
+     * @return A list of referencing scalar properties
+     */
+    public static List<StructuredProperty> findStructuredPropertiesWithDomain(Classifier domain) {
+        return findInverseReferencers(domain, StructuredProperty.class, OmlPackage.Literals.STRUCTURED_PROPERTY__DOMAIN);
+    }
+
     /**
      * Finds structured properties referencing the given structure as range
      * 
@@ -568,7 +590,7 @@ public class OmlIndex {
      * @param property The referenced property
      * @return A list of referencing key axioms
      */
-    public static List<KeyAxiom> findKeyAxiomWithProperty(ScalarProperty property) {
+    public static List<KeyAxiom> findKeyAxiomWithProperty(Feature property) {
         return findInverseReferencers(property, KeyAxiom.class, OmlPackage.Literals.KEY_AXIOM__PROPERTIES);
     }
     

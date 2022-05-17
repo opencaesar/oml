@@ -63,6 +63,7 @@ public class BinaryPredicateItemProvider extends PredicateItemProvider {
 
 			addVariable1PropertyDescriptor(object);
 			addVariable2PropertyDescriptor(object);
+			addInstance2PropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -107,6 +108,28 @@ public class BinaryPredicateItemProvider extends PredicateItemProvider {
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Instance2 feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addInstance2PropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_BinaryPredicate_instance2_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_BinaryPredicate_instance2_feature", "_UI_BinaryPredicate_type"),
+				 OmlPackage.Literals.BINARY_PREDICATE__INSTANCE2,
+				 true,
+				 false,
+				 true,
+				 null,
 				 null,
 				 null));
 	}

@@ -803,10 +803,10 @@ Note: that a term that has supertypes semantically inherits axioms defined on it
 
 #### Key Axiom #### {#KeyAxiom-LR}
 
-A [key axiom](#KeyAxiom-Syntax) is an axiom defined on an entity ([Aspect](#Aspect-LR), [Concept](#Concept-LR), and [Relation Entity](#RelationEntity-LR)) that specifies a set of scalar properties that together represent a unique key (id) for the entity. This means if two named instances have the same values of those properties, then they can be inferred to be aliases of the same instance. The syntax of a key axiom starts with the keyword `key` followed by one or more comma-separated scalar properties specified by their IRIs.
+A [key axiom](#KeyAxiom-Syntax) is an axiom defined on an entity ([Aspect](#Aspect-LR), [Concept](#Concept-LR), and [Relation Entity](#RelationEntity-LR)) that specifies a set of properties that together represent a unique key (id) for the entity. This means if two named instances have the same values of those properties, then they can be inferred to be aliases of the same instance. The syntax of a key axiom starts with the keyword `key` followed by one or more comma-separated properties specified by their IRIs.
 
 <pre class="highlight highlight-html">
-`key` [ScalarProperty|IRI] (`,` [ScalarProperty|IRI])*
+`key` [Feature|IRI] (`,` [Feature|IRI])*
 </pre>
 
 The following example vocabulary defines a key, consisting of scalar property *hasId*, for concept *Component*. This means any two differently named components with the same value for *hasId* will be inferred to be the same component.
@@ -1006,32 +1006,32 @@ A predicate represents a pattern in the model that can be matched or inferred, d
 
 - [Relation Entity Predicate](#RelationEntityPredicate-Syntax)
 
-    Matches a instance of a given relation entity (specified by its IRI) and binds it to variable ID2 and its source to variable ID1, and either binds its target 
-    to variable ID3 or checks that the value is a specific target instance.
+    Matches a instance of a given relation entity (specified by its IRI) and binds it to variable ID0, its source to variable ID1, and its target 
+    to either variable ID2 or to a specific instance.
      <pre class="highlight highlight-html">
-    [RelationEntity|IRI] `(` ID1 `,` ID2 `,` (ID3 | [NamedInstance|IRI]) `)`
+    [RelationEntity|IRI] `(` ID1 `,` ID0 `,` (ID2 | [NamedInstance|IRI]) `)`
     </pre>
 
 - [Feature Predicate](#FeaturePredicate-Syntax)
 
-    Matches an assertion of a given feature (specified by its IRI) and binds its instance to variable ID1 and either binds its value to variable ID2 or checks 
-    that the value is a specific literal value or instance value.
+    Matches an assertion of a given feature (specified by its IRI) and binds its subject to variable ID1 and its object to variable ID2 or to a specific 
+    instance or literal.
     <pre class="highlight highlight-html">
-    [Feature|IRI] `(` ID1 `,` (ID2 | Literal | [NamedInstance|IRI]) `)`
+    [Feature|IRI] `(` ID1 `,` (ID2 | [NamedInstance|IRI] | Literal) `)`
     </pre>
 
 - [Same As Predicate](#SameAsPredicate-Syntax)
 
-    Matches when the value bound to variable ID1 is the same as the value bound to variable ID2.
+    Matches when the value bound to variable ID1 is the same as the value bound to variable ID2 or a specific instance.
     <pre class="highlight highlight-html">
-    `sameAs` `(` ID1 `,` ID2 `)`
+    `sameAs` `(` ID1 `,` (ID2 | [NamedInstance|IRI]) `)`
     </pre>
 
 - [Different From Predicate](#DifferentFromPredicate-Syntax)
 
-    Matches when the value bound to variable ID1 is different from the value bound to variable ID2.
+    Matches when the value bound to variable ID1 is different from the value bound to variable ID2 or a specific instance.
     <pre class="highlight highlight-html">
-    `differentFrom` `(` ID1 `,` ID2 `)`
+    `differentFrom` `(` ID1 `,` (ID2 | [NamedInstance|IRI]) `)`
     </pre>
 
 The following example vocabulary shows a couple of rules, *R1* and *R2*:

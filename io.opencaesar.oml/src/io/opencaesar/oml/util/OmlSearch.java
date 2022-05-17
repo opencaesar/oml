@@ -420,6 +420,21 @@ public final class OmlSearch extends OmlIndex {
         return relations;
     }
 
+    // SemanticProperty
+    
+    /**
+     * Finds semantic properties referencing the given classifier as domain
+     * 
+     * @param domain The referenced classifier
+     * @return A list of referencing semantic properties
+     */
+    public static List<SemanticProperty> findSemanticPropertiesWithDomain(Classifier domain) {
+    	var properties = new ArrayList<SemanticProperty>();
+    	properties.addAll(findScalarPropertiesWithDomain(domain));
+    	properties.addAll(findStructuredPropertiesWithDomain(domain));
+        return properties;
+    }
+    
     // ScalarProperty
 
     /**
@@ -428,7 +443,7 @@ public final class OmlSearch extends OmlIndex {
      * @param property the given property
      * @return a list of entities that have the following property included in one of their keys
      */
-    public static List<Entity> findEntitiesKeyedWith(ScalarProperty property) {
+    public static List<Entity> findEntitiesKeyedWith(SemanticProperty property) {
         return findKeyAxiomWithProperty(property).stream()
             .map(i -> OmlRead.getKeyedEntity(i))
             .collect(Collectors.toList());
