@@ -61,8 +61,8 @@ public class RelationEntityPredicateItemProvider extends BinaryPredicateItemProv
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addEntityVariablePropertyDescriptor(object);
 			addEntityPropertyDescriptor(object);
+			addEntityVariablePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}

@@ -540,7 +540,7 @@ public class OmlWrite {
         final ScalarProperty property = create(ScalarProperty.class);
         property.setName(name);
         property.setFunctional(functional);
-        setCrossReference(vocabulary, property, OmlPackage.Literals.SEMANTIC_PROPERTY__DOMAIN, domain);
+        setCrossReference(vocabulary, property, OmlPackage.Literals.SCALAR_PROPERTY__DOMAIN, domain);
         setCrossReference(vocabulary, property, OmlPackage.Literals.SCALAR_PROPERTY__RANGE, range);
         vocabulary.getOwnedStatements().add(property);
         return property;
@@ -563,7 +563,7 @@ public class OmlWrite {
         final StructuredProperty property = create(StructuredProperty.class);
         property.setName(name);
         property.setFunctional(functional);
-        setCrossReference(vocabulary, property, OmlPackage.Literals.SEMANTIC_PROPERTY__DOMAIN, domain);
+        setCrossReference(vocabulary, property, OmlPackage.Literals.STRUCTURED_PROPERTY__DOMAIN, domain);
         setCrossReference(vocabulary, property, OmlPackage.Literals.STRUCTURED_PROPERTY__RANGE, range);
         vocabulary.getOwnedStatements().add(property);
         return property;
@@ -1366,10 +1366,10 @@ public class OmlWrite {
      * 
      * @param vocabulary the context vocabulary
      * @param domain the given keyed (entity) domain
-     * @param keyProperties the list of scalar properties that are part of the key
+     * @param keyProperties the list of properties that are part of the key
      * @return a key axiom that is added to the given vocabulary
      */
-    public static KeyAxiom addKeyAxiom(Vocabulary vocabulary, Entity domain, List<ScalarProperty> keyProperties) {
+    public static KeyAxiom addKeyAxiom(Vocabulary vocabulary, Entity domain, List<Feature> keyProperties) {
         final KeyAxiom axiom = create(KeyAxiom.class);
         setCrossReferences(vocabulary, axiom, OmlPackage.Literals.KEY_AXIOM__PROPERTIES, new ArrayList<Element>(keyProperties));
         setContainmentReference(vocabulary, domain, OmlPackage.Literals.ENTITY__OWNED_KEYS, OmlPackage.Literals.ENTITY_REFERENCE__OWNED_KEYS, axiom);

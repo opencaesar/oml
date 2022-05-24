@@ -420,6 +420,21 @@ public final class OmlSearch extends OmlIndex {
         return relations;
     }
 
+    // SemanticProperty
+    
+    /**
+     * Finds semantic properties referencing the given classifier as domain
+     * 
+     * @param domain The referenced classifier
+     * @return A list of referencing semantic properties
+     */
+    public static List<SemanticProperty> findSemanticPropertiesWithDomain(Classifier domain) {
+    	var properties = new ArrayList<SemanticProperty>();
+    	properties.addAll(findScalarPropertiesWithDomain(domain));
+    	properties.addAll(findStructuredPropertiesWithDomain(domain));
+        return properties;
+    }
+    
     // ScalarProperty
 
     /**
@@ -428,7 +443,7 @@ public final class OmlSearch extends OmlIndex {
      * @param property the given property
      * @return a list of entities that have the following property included in one of their keys
      */
-    public static List<Entity> findEntitiesKeyedWith(ScalarProperty property) {
+    public static List<Entity> findEntitiesKeyedWith(SemanticProperty property) {
         return findKeyAxiomWithProperty(property).stream()
             .map(i -> OmlRead.getKeyedEntity(i))
             .collect(Collectors.toList());
@@ -740,23 +755,23 @@ public final class OmlSearch extends OmlIndex {
     }
 
     /**
-     * Finds source instances that are related by a given relation to the given target instance
+     * Finds source instances that are related by a given relation to a given target instance
      * 
      * @param target the given target instance
      * @param relation the given relation
      * @return a list of source instances that are related by a given relation to the given target instance
      */
-    public static List<NamedInstance> findInstancesRelatedTo(NamedInstance instance, Relation relation) {
-        final List<NamedInstance> instances = new ArrayList<>();
-        instances.addAll(findLinkAssertionsWithTarget(instance).stream()
+    public static List<NamedInstance> findInstancesRelatedTo(NamedInstance target, Relation relation) {
+        final List<NamedInstance> sources = new ArrayList<>();
+        sources.addAll(findLinkAssertionsWithTarget(target).stream()
                 .filter(a -> a.getRelation() == relation)
                 .map(a -> OmlRead.getSource(a))
                 .collect(Collectors.toList()));
-        instances.addAll(findRelationInstancesWithTarget(instance).stream()
+        sources.addAll(findRelationInstancesWithTarget(target).stream()
                 .filter(i -> findTypes(i).stream().filter(t -> ((RelationEntity)t).getReverseRelation() == relation).findFirst().isPresent())
                 .flatMap(i -> i.getSources().stream())
                 .collect(Collectors.toList()));
-        return instances;
+        return sources;
     }
 
     //-------------------------------------------------

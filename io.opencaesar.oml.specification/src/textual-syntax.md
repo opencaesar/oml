@@ -110,14 +110,16 @@
 
 <a id="VocabularyStatement-Syntax">VocabularyStatement</a>:
 	SpecializableTerm |
-	Rule |
 	SpecializableTermReference |
+	Rule |
 	RuleReference |
 	RelationReference
 
 <a id="SpecializableTerm-Syntax">SpecializableTerm</a>:
 	Type |
-	Property
+	AnnotationProperty |
+	ScalarProperty |
+	StructuredProperty
 	
 <a id="Type-Syntax">Type</a>:
 	Classifier |
@@ -135,17 +137,13 @@
 <a id="Aspect-Syntax">Aspect</a>:
 	Annotation*
 	`aspect` ID (`:>` SpecializationAxiom (`,` SpecializationAxiom)*)? (`[`
-		KeyAxiom* 
-		PropertyRestrictionAxiom*
-		RelationRestrictionAxiom*
+		(KeyAxiom | PropertyRestrictionAxiom | RelationRestrictionAxiom)*
 	`]`)?
 
 <a id="Concept-Syntax">Concept</a>:
 	Annotation*
 	`concept` ID (`:>` SpecializationAxiom (`,` SpecializationAxiom)*)? (`[`
-		KeyAxiom* 
-		PropertyRestrictionAxiom*
-		RelationRestrictionAxiom*
+		(KeyAxiom | PropertyRestrictionAxiom | RelationRestrictionAxiom)*
 	`]`)?
 	
 <a id="RelationEntity-Syntax">RelationEntity</a>:
@@ -162,9 +160,7 @@
 		`reflexive`?
 		`irreflexive`?
 		`transitive`?
-		KeyAxiom*
-		PropertyRestrictionAxiom*
-		RelationRestrictionAxiom*
+		(KeyAxiom | PropertyRestrictionAxiom | RelationRestrictionAxiom)*
 	`]`
 
 <a id="Feature-Syntax">Feature</a>:
@@ -264,16 +260,16 @@
     DifferentFromPredicate
 
 <a id="RelationEntityPredicate-Syntax">RelationEntityPredicate</a>:
-	[RelationEntity|IRI] `(` ID `,` ID `,` ID `)`
+	[RelationEntity|IRI] `(` ID `,` ID `,` (ID | [NamedInstance|IRI]) `)`
 
 <a id="FeaturePredicate-Syntax">FeaturePredicate</a>:
-	[Feature|IRI] `(` ID `,` ID `)`
+	[Feature|IRI] `(` ID `,` (ID | Literal | [NamedInstance|IRI]) `)`
 
 <a id="SameAsPredicate-Syntax">SameAsPredicate</a>:
-	`sameAs` `(` ID `,` ID `)`
+	`sameAs` `(` ID `,` (ID | [NamedInstance|IRI] `)`
 
 <a id="DifferentFromPredicate-Syntax">DifferentFromPredicate</a>:
-	`differentFrom` `(` ID `,` ID `)`
+	`differentFrom` `(` ID `,` (ID | [NamedInstance|IRI] `)`
 
 <a id="DescriptionStatement-Syntax">DescriptionStatement</a>:
 	NamedInstance |
@@ -286,8 +282,7 @@
 <a id="ConceptInstance-Syntax">ConceptInstance</a>:
 	Annotation*
 	`ci` ID (`:` ConceptTypeAssertion (`,` ConceptTypeAssertion)*)? (`[`
-		PropertyValueAssertion*
-		LinkAssertion*
+		(PropertyValueAssertion | LinkAssertion)*
 	`]`)?
 	
 <a id="RelationInstance-Syntax">RelationInstance</a>:
@@ -295,8 +290,7 @@
 	`ri` ID (`:` RelationTypeAssertion (`,` RelationTypeAssertion)*)? `[`
 		`from` [NamedInstance|IRI] (`,` [NamedInstance|IRI])* 
 		`to` [NamedInstance|IRI] (`,` [NamedInstance|IRI])*
-		PropertyValueAssertion*
-		LinkAssertion*
+		(PropertyValueAssertion | LinkAssertion)*
 	`]`
 
 <a id="StructureInstance-Syntax">StructureInstance</a>:
@@ -331,25 +325,19 @@
 <a id="AspectReference-Syntax">AspectReference</a>:
 	Annotation*
 	`ref` `aspect` [Aspect|IRI] (`:>` SpecializationAxiom (`,` SpecializationAxiom)*)? (`[`
-		KeyAxiom* 
-		PropertyRestrictionAxiom*
-		RelationRestrictionAxiom*
+		(KeyAxiom* | PropertyRestrictionAxiom | RelationRestrictionAxiom)*
 	`]`)?
 
 <a id="ConceptReference-Syntax">ConceptReference</a>:
 	Annotation*
 	`ref` `concept` [Concept|IRI] (`:>` SpecializationAxiom (`,` SpecializationAxiom)*)? (`[`
-		KeyAxiom* 
-		PropertyRestrictionAxiom*
-		RelationRestrictionAxiom*
+		(KeyAxiom | PropertyRestrictionAxiom | RelationRestrictionAxiom)*
 	`]`)?
 
 <a id="RelationEntityReference-Syntax">RelationEntityReference</a>:
 	Annotation*
 	`ref` `relation` `entity` [RelationEntity|IRI] (`:>` SpecializationAxiom (`,` SpecializationAxiom)*)? (`[`
-		KeyAxiom* 
-		PropertyRestrictionAxiom*
-		RelationRestrictionAxiom*
+		(KeyAxiom | PropertyRestrictionAxiom | RelationRestrictionAxiom)*
 	`]`)?
 
 <a id="StructureReference-Syntax">StructureReference</a>:
@@ -458,7 +446,7 @@
 	`restricts` `relation` [Relation|IRI] `to` [NamedInstance|IRI]
 
 <a id="KeyAxiom-Syntax">KeyAxiom</a>:
-	`key` [ScalarProperty|IRI] (`,` [ScalarProperty|IRI])*
+	`key` [Feature|IRI] (`,` [Feature|IRI])*
 
 <a id="ConceptTypeAssertion-Syntax">ConceptTypeAssertion</a>:
 	[Concept|IRI]
@@ -480,7 +468,7 @@
 	[Relation|IRI] [NamedInstance|IRI]
 
 <a id="Annotation-Syntax">Annotation</a>:
-	`@` [AnnotationProperty|IRI] Literal?
+	`@` [AnnotationProperty|IRI] (Literal | [Member|IRI])?
 
 <a id="Literal-Syntax">Literal</a>:
 	IntegerLiteral |

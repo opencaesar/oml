@@ -219,10 +219,10 @@ Note: if an abbreviated literal belongs to multiple scalars, it gets interpreted
 
 An annotation allows describing information about an ontology, or one of its members, that does not have associated description logic (DL) semantics. Such information can be notational (e.g., how an element is to be displayed), tool-specific (e.g., how to export an element), or for any other purpose (e.g., who authored the ontology).
 
-An Annotation describes a value for an [annotation property](#AnnotationProperty-LR) (defined by a [vocabulary](#Vocabulary-LR)) in the context of the annotated element (an [ontology](#Ontology-LR), a [member](#Member-LR), a [reference](#Reference-LR), or an [import](#Import-LR)). The general syntax of an annotation consists of a `@` symbol followed by an IRI to the an annotation property then an optional literal (value). If the value literal is missing, it is interpreted as a Boolean *true* literal.
+An Annotation describes a value for an [annotation property](#AnnotationProperty-LR) (defined by a [vocabulary](#Vocabulary-LR)) in the context of the annotated element (an [ontology](#Ontology-LR), a [member](#Member-LR), a [reference](#Reference-LR), or an [import](#Import-LR)). The general syntax of an annotation consists of a `@` symbol followed by an IRI to the an annotation property then an optional (literal or member reference) value. If the value is missing, it is interpreted as a boolean *true* literal.
 
 <pre class="highlight highlight-html">
-`@`[AnnotationProperty|IRI] Literal?
+`@`[AnnotationProperty|IRI] (Literal | [Member|IRI])?
 </pre>
 
 The following example shows several annotations. The ontology itself has a *dc:title* annotation as well as a *dc:date* annotation (notice how the value is a *xsd:date* literal). The first import statement of the ontology has a *rdfs:comment* annotation. Also, the member Member1 has two annotations, both of them are *rdfs:comment* but one has an English (en) literal while the other has a French (fr) literal. Finally, the imported member example2:Member2 is annotation with *viewpoint:show* (notice that there is no literal value, which will be interpreted similar to a Boolean *true* literal).
@@ -239,6 +239,7 @@ The following example shows several annotations. The ontology itself has a *dc:t
     `<import>` `<`http://company.com/example2#`>` `as` example2
     `@`rdfs:comment "This is member1"$en
     `@`rdfs:comment "C'est member1"$fr
+	`@`rdfs:seeAlso example2:Member2
     `<member>` Member1
     `@`viewpoint:show  // a missing literal is interpreted as Boolean true literal
     `ref` `<member>` example2:Member2
@@ -803,10 +804,10 @@ Note: that a term that has supertypes semantically inherits axioms defined on it
 
 #### Key Axiom #### {#KeyAxiom-LR}
 
-A [key axiom](#KeyAxiom-Syntax) is an axiom defined on an entity ([Aspect](#Aspect-LR), [Concept](#Concept-LR), and [Relation Entity](#RelationEntity-LR)) that specifies a set of scalar properties that together represent a unique key (id) for the entity. This means if two named instances have the same values of those properties, then they can be inferred to be aliases of the same instance. The syntax of a key axiom starts with the keyword `key` followed by one or more comma-separated scalar properties specified by their IRIs.
+A [key axiom](#KeyAxiom-Syntax) is an axiom defined on an entity ([Aspect](#Aspect-LR), [Concept](#Concept-LR), and [Relation Entity](#RelationEntity-LR)) that specifies a set of properties that together represent a unique key (id) for the entity. This means if two named instances have the same values of those properties, then they can be inferred to be aliases of the same instance. The syntax of a key axiom starts with the keyword `key` followed by one or more comma-separated properties specified by their IRIs.
 
 <pre class="highlight highlight-html">
-`key` [ScalarProperty|IRI] (`,` [ScalarProperty|IRI])*
+`key` [Feature|IRI] (`,` [Feature|IRI])*
 </pre>
 
 The following example vocabulary defines a key, consisting of scalar property *hasId*, for concept *Component*. This means any two differently named components with the same value for *hasId* will be inferred to be the same component.
@@ -1006,30 +1007,32 @@ A predicate represents a pattern in the model that can be matched or inferred, d
 
 - [Relation Entity Predicate](#RelationEntityPredicate-Syntax)
 
-    Matches a instance of a given relation entity (specified by its IRI) and binds it to variable ID2, its source to variable ID1, its target to variable ID3.
+    Matches a instance of a given relation entity (specified by its IRI) and binds it to variable ID0, its source to variable ID1, and its target 
+    to either variable ID2 or to a specific instance.
      <pre class="highlight highlight-html">
-    [RelationEntity|IRI] `(` ID1 `,` ID2 `,` ID3 `)`
+    [RelationEntity|IRI] `(` ID1 `,` ID0 `,` (ID2 | [NamedInstance|IRI]) `)`
     </pre>
 
 - [Feature Predicate](#FeaturePredicate-Syntax)
 
-    Matches an assertion of a given feature (specified by its IRI) and binds its domain to variable ID1 and its range to variable ID2.
+    Matches an assertion of a given feature (specified by its IRI) and binds its subject to variable ID1 and its object to variable ID2 or to a specific 
+    instance or literal.
     <pre class="highlight highlight-html">
-    [Feature|IRI] `(` ID1 `,` ID2 `)`
+    [Feature|IRI] `(` ID1 `,` (ID2 | [NamedInstance|IRI] | Literal) `)`
     </pre>
 
 - [Same As Predicate](#SameAsPredicate-Syntax)
 
-    Matches when the value bound to variable ID1 is the same as the value bound to variable ID2.
+    Matches when the value bound to variable ID1 is the same as the value bound to variable ID2 or a specific instance.
     <pre class="highlight highlight-html">
-    `sameAs` `(` ID1 `,` ID2 `)`
+    `sameAs` `(` ID1 `,` (ID2 | [NamedInstance|IRI]) `)`
     </pre>
 
 - [Different From Predicate](#DifferentFromPredicate-Syntax)
 
-    Matches when the value bound to variable ID1 is different from the value bound to variable ID2.
+    Matches when the value bound to variable ID1 is different from the value bound to variable ID2 or a specific instance.
     <pre class="highlight highlight-html">
-    `differentFrom` `(` ID1 `,` ID2 `)`
+    `differentFrom` `(` ID1 `,` (ID2 | [NamedInstance|IRI]) `)`
     </pre>
 
 The following example vocabulary shows a couple of rules, *R1* and *R2*:

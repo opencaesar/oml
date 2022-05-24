@@ -33,28 +33,21 @@ class OmlNamespaceImportNormalizer extends ImportNormalizer{
 	}
 	
 	override QualifiedName resolve(QualifiedName relativeName) {
-		val last = relativeName.getLastSegment();
-		if (last.contains(":")) {
-			val data = last.split(":");
-			if ((data.get(0)) == nsPrefix) {
-				val x = nsURI.append(QualifiedName.create(data.get(1)));
-				return x;
+		if (relativeName instanceof OmlQualifiedName) {
+			if (relativeName.separator == ":") {
+				val prefix = relativeName.firstSegment
+				if (prefix == nsPrefix) {
+					return nsURI.append(relativeName.lastSegment);
+				}
 			}
-			
 		}
 		return null;
 	}
 	
 	override QualifiedName deresolve(QualifiedName fullyQualifiedName) {
-		if (nsURI.getSegmentCount() < fullyQualifiedName.getSegmentCount()) {
-			val name = fullyQualifiedName.skipFirst(nsURI.getSegmentCount());
-			if (name.getSegmentCount() == 1) {
-				val parentQualifiedName = fullyQualifiedName.skipLast(1)
-				if (parentQualifiedName == nsURI) {
-					val x = QualifiedName.create(nsPrefix+":"+name.getLastSegment());
-					return x;
-				}
-			}
+		if (fullyQualifiedName.startsWith(nsURI) && !fullyQualifiedName.equals(nsURI)) {
+			val name = fullyQualifiedName.lastSegment
+			return OmlQualifiedName.create(nsPrefix, ":", name);
 		}
 		return null;
 	}

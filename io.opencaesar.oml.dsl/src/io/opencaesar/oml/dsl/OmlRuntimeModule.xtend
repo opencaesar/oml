@@ -38,6 +38,9 @@ import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.scoping.IGlobalScopeProvider
 import org.eclipse.xtext.scoping.impl.ImportUriResolver
 import org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider
+import org.eclipse.xtext.service.SingletonBinding
+import org.eclipse.emf.ecore.util.Diagnostician
+import io.opencaesar.oml.dsl.validation.OmlDiagnostician
 
 /**	
  * Use this class to register components to be used at runtime / without the Equinox extension registry.	
@@ -81,4 +84,9 @@ class OmlRuntimeModule extends AbstractOmlRuntimeModule {
  	def Class<? extends IResourceServiceProvider> bindIResourceServiceProvider() {
     	OmlResourceServiceProvider
   	}
+
+	@SingletonBinding
+	override Class<? extends Diagnostician> bindDiagnostician() {
+		OmlDiagnostician
+	}
 }

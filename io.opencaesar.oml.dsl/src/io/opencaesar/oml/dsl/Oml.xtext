@@ -26,7 +26,7 @@ Ontology:
 	DescriptionBox;
 
 Annotation:
-	'@' {Annotation} property=[AnnotationProperty|Ref]? value=Literal?;
+	'@' {Annotation} property=[AnnotationProperty|Ref] (value=Literal | referenceValue=[Member|Ref])?;
 
 VocabularyBox:
 	Vocabulary |
@@ -64,7 +64,9 @@ DescriptionBundle:
 
 SpecializableTerm:
 	Type |
-	Property;
+	AnnotationProperty |
+	ScalarProperty |
+	StructuredProperty;
 	
 Type:
 	Classifier |
@@ -82,17 +84,17 @@ Entity:
 Aspect:
 	ownedAnnotations+=Annotation*
 	'aspect' name=ID (':>' ownedSpecializations+=SpecializationAxiom (',' ownedSpecializations+=SpecializationAxiom)*)? ('['
-		(ownedKeys+=KeyAxiom)* 
-		ownedPropertyRestrictions+=PropertyRestrictionAxiom*
-		ownedRelationRestrictions+=RelationRestrictionAxiom*
+		(ownedKeys+=KeyAxiom | 
+		 ownedPropertyRestrictions+=PropertyRestrictionAxiom |
+		 ownedRelationRestrictions+=RelationRestrictionAxiom)*
 	']')?;
 
 Concept:
 	ownedAnnotations+=Annotation*
 	'concept' name=ID (':>' ownedSpecializations+=SpecializationAxiom (',' ownedSpecializations+=SpecializationAxiom)*)? ('['
-		(ownedKeys+=KeyAxiom)* 
-		ownedPropertyRestrictions+=PropertyRestrictionAxiom*
-		ownedRelationRestrictions+=RelationRestrictionAxiom*
+		(ownedKeys+=KeyAxiom | 
+		 ownedPropertyRestrictions+=PropertyRestrictionAxiom |
+		 ownedRelationRestrictions+=RelationRestrictionAxiom)*
 	']')?;
 	
 RelationEntity:
@@ -109,9 +111,9 @@ RelationEntity:
 		 (reflexive?='reflexive')? &
 		 (irreflexive?='irreflexive')? &
 		 (transitive?='transitive')?)
-		(ownedKeys+=KeyAxiom)*
-		ownedPropertyRestrictions+=PropertyRestrictionAxiom*
-		ownedRelationRestrictions+=RelationRestrictionAxiom*
+		(ownedKeys+=KeyAxiom |
+		 ownedPropertyRestrictions+=PropertyRestrictionAxiom |
+		 ownedRelationRestrictions+=RelationRestrictionAxiom)*
 	']';
 	
 Structure:
@@ -119,6 +121,9 @@ Structure:
 	'structure' name=ID (':>' ownedSpecializations+=SpecializationAxiom (',' ownedSpecializations+=SpecializationAxiom)*)? ('['
 		ownedPropertyRestrictions+=PropertyRestrictionAxiom*
 	']')?;
+
+Feature:
+	Property;
 
 Property:
 	AnnotationProperty |
@@ -172,6 +177,10 @@ EnumeratedScalar:
 		(literals+=Literal (',' literals+=Literal)*)?
 	']')?;
 
+Relation:
+	ForwardRelation |
+	ReverseRelation;
+
 ForwardRelation:
 	ownedAnnotations+=Annotation*
 	'forward' name=ID;
@@ -199,8 +208,8 @@ NamedInstance:
 ConceptInstance:
 	ownedAnnotations+=Annotation*
 	'ci' name=ID (':' ownedTypes+=ConceptTypeAssertion (',' ownedTypes+=ConceptTypeAssertion)*)? ('['
-		ownedPropertyValues+=PropertyValueAssertion*
-		ownedLinks+=LinkAssertion*
+		(ownedPropertyValues+=PropertyValueAssertion | 
+		 ownedLinks+=LinkAssertion)*
 	']')?;
 	
 RelationInstance:
@@ -208,8 +217,8 @@ RelationInstance:
 	'ri' name=ID (':' ownedTypes+=RelationTypeAssertion (',' ownedTypes+=RelationTypeAssertion)*)? '['
 		'from' sources+=[NamedInstance|Ref] (',' sources+=[NamedInstance|Ref])* 
 		'to' targets+=[NamedInstance|Ref] (',' targets+=[NamedInstance|Ref])*
-		ownedPropertyValues+=PropertyValueAssertion*
-		ownedLinks+=LinkAssertion*
+		(ownedPropertyValues+=PropertyValueAssertion |
+		 ownedLinks+=LinkAssertion)*
 	']';
 	
 SpecializableTermReference:
@@ -232,25 +241,25 @@ EntityReference:
 AspectReference:
 	ownedAnnotations+=Annotation*
 	'ref' 'aspect' aspect=[Aspect|Ref] (':>' ownedSpecializations+=SpecializationAxiom (',' ownedSpecializations+=SpecializationAxiom)*)? ('['
-		(ownedKeys+=KeyAxiom)* 
-		ownedPropertyRestrictions+=PropertyRestrictionAxiom*
-		ownedRelationRestrictions+=RelationRestrictionAxiom*
+		(ownedKeys+=KeyAxiom | 
+		 ownedPropertyRestrictions+=PropertyRestrictionAxiom |
+		 ownedRelationRestrictions+=RelationRestrictionAxiom)*
 	']')?;
 
 ConceptReference:
 	ownedAnnotations+=Annotation*
 	'ref' 'concept' concept=[Concept|Ref] (':>' ownedSpecializations+=SpecializationAxiom (',' ownedSpecializations+=SpecializationAxiom)*)? ('['
-		(ownedKeys+=KeyAxiom)* 
-		ownedPropertyRestrictions+=PropertyRestrictionAxiom*
-		ownedRelationRestrictions+=RelationRestrictionAxiom*
+		(ownedKeys+=KeyAxiom | 
+		 ownedPropertyRestrictions+=PropertyRestrictionAxiom |
+		 ownedRelationRestrictions+=RelationRestrictionAxiom)*
 	']')?;
 
 RelationEntityReference:
 	ownedAnnotations+=Annotation*
 	'ref' 'relation' 'entity' entity=[RelationEntity|Ref] (':>' ownedSpecializations+=SpecializationAxiom (',' ownedSpecializations+=SpecializationAxiom)*)? ('['
-		(ownedKeys+=KeyAxiom)* 
-		ownedPropertyRestrictions+=PropertyRestrictionAxiom*
-		ownedRelationRestrictions+=RelationRestrictionAxiom*
+		(ownedKeys+=KeyAxiom | 
+		 ownedPropertyRestrictions+=PropertyRestrictionAxiom |
+		 ownedRelationRestrictions+=RelationRestrictionAxiom)*
 	']')?;
 
 StructureReference:
@@ -306,10 +315,10 @@ RelationInstanceReference:
 	']')?;
 
 VocabularyStatement:
-	SpecializableTerm |
-	SpecializableTermReference |
 	Rule |
 	RuleReference |
+	SpecializableTerm |
+	SpecializableTermReference |
 	RelationReference;
 	
 DescriptionStatement:
@@ -419,7 +428,7 @@ RelationTargetRestrictionAxiom:
 	'restricts' 'relation' relation=[Relation|Ref] 'to' target=[NamedInstance|Ref];
 
 KeyAxiom:
-	'key' properties+=[ScalarProperty|Ref] (',' properties+=[ScalarProperty|Ref])*;
+	'key' properties+=[Feature|Ref] (',' properties+=[Feature|Ref])*;
 
 ConceptTypeAssertion:
 	type=[Concept|Ref];
@@ -457,16 +466,16 @@ BinaryPredicate:
     DifferentFromPredicate;
 
 RelationEntityPredicate:
-    entity=[RelationEntity|Ref] '(' variable1=ID ',' entityVariable=ID ',' variable2=ID ')';
+    entity=[RelationEntity|Ref] '(' variable1=ID ',' entityVariable=ID ',' (variable2=ID | instance2=[NamedInstance|CrossRef]) ')';
 
 FeaturePredicate:
-	feature=[Feature|Ref] '(' variable1=ID ',' variable2=ID ')';
+	feature=[Feature|Ref] '(' variable1=ID ',' (variable2=ID | literal2=Literal | instance2=[NamedInstance|CrossRef]) ')';
 
 SameAsPredicate:
-    'sameAs' '(' variable1=ID ',' variable2=ID ')';
+    'sameAs' '(' variable1=ID ',' (variable2=ID | instance2=[NamedInstance|CrossRef]) ')';
 
 DifferentFromPredicate:
-    'differentFrom' '(' variable1=ID ',' variable2=ID ')';
+    'differentFrom' '(' variable1=ID ',' (variable2=ID | instance2=[NamedInstance|CrossRef]) ')';
 
 Literal:
 	IntegerLiteral |
@@ -502,6 +511,8 @@ enum CardinalityRestrictionKind:
 //--------------
 
 Ref returns ecore::EString: 							ID | QNAME | IRI;
+
+CrossRef returns ecore::EString: 						QNAME | IRI;
 
 Boolean returns ecore::EBoolean:						BOOLEAN_STR;
 

@@ -19,10 +19,12 @@
 package io.opencaesar.oml.dsl.ui
 
 import io.opencaesar.oml.dsl.resource.OmlSynchronizedXtextResourceSet
+import io.opencaesar.oml.dsl.ui.hyperlinking.OmlHyperlinkHelper
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.ui.editor.contentassist.FQNPrefixMatcher
 import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher
+import org.eclipse.xtext.ui.editor.hyperlinking.HyperlinkHelper
 
 /**
  * Use this class to register components to be used within the Eclipse IDE.
@@ -36,6 +38,10 @@ class OmlUiModule extends AbstractOmlUiModule {
 	
 	override Class<? extends PrefixMatcher> bindPrefixMatcher() {
 		return FQNPrefixMatcher2;
+	}
+
+	def Class<? extends HyperlinkHelper> bindHyperlinkHelper() {
+		return OmlHyperlinkHelper;
 	}
 
 	static class FQNPrefixMatcher2 extends FQNPrefixMatcher {

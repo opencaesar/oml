@@ -533,7 +533,7 @@ public class OmlBuilder {
     public ScalarProperty addScalarProperty(Vocabulary vocabulary, String name,
         String domainIri, String rangeIri, boolean functional) {
         final ScalarProperty property = OmlWrite.addScalarProperty(vocabulary, name, null, null, functional);
-        setCrossReference(vocabulary, property, OmlPackage.Literals.SEMANTIC_PROPERTY__DOMAIN, domainIri);
+        setCrossReference(vocabulary, property, OmlPackage.Literals.SCALAR_PROPERTY__DOMAIN, domainIri);
         setCrossReference(vocabulary, property, OmlPackage.Literals.SCALAR_PROPERTY__RANGE, rangeIri);
         return property;
     }
@@ -553,7 +553,7 @@ public class OmlBuilder {
     public StructuredProperty addStructuredProperty(Vocabulary vocabulary, String name, 
         String domainIri, String rangeIri, boolean functional) {
         final StructuredProperty property = OmlWrite.addStructuredProperty(vocabulary, name, null, null, functional);
-        setCrossReference(vocabulary, property, OmlPackage.Literals.SEMANTIC_PROPERTY__DOMAIN, domainIri);
+        setCrossReference(vocabulary, property, OmlPackage.Literals.STRUCTURED_PROPERTY__DOMAIN, domainIri);
         setCrossReference(vocabulary, property, OmlPackage.Literals.STRUCTURED_PROPERTY__RANGE, rangeIri);
         return property;
     }
@@ -1073,7 +1073,7 @@ public class OmlBuilder {
      * 
      * @param vocabulary the context vocabulary
      * @param domainIri the iri of the keyed (entity) domain
-     * @param keyPropertyIris the list of iris of the scalar properties that are part of the key
+     * @param keyPropertyIris the list of iris of the properties that are part of the key
      * @return a key axiom that is added to the given vocabulary
      */
     public KeyAxiom addKeyAxiom(Vocabulary vocabulary, String domainIri, List<String> keyPropertyIris) {

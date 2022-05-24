@@ -26,7 +26,7 @@ import org.eclipse.xtext.naming.QualifiedName
 class OmlQualifiedNameProvider extends DefaultDeclarativeQualifiedNameProvider {
 	
 	def QualifiedName qualifiedName(Member member) {
-		qualifiedName(member.ontology).append(member.name)
+		converter.toQualifiedName(member.iri)
 	}
 
 	def QualifiedName qualifiedName(Ontology ontology) {

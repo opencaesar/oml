@@ -64,6 +64,7 @@ public class AnnotationItemProvider extends ElementItemProvider {
 			super.getPropertyDescriptors(object);
 
 			addPropertyPropertyDescriptor(object);
+			addReferenceValuePropertyDescriptor(object);
 			addOwningElementPropertyDescriptor(object);
 			addOwningReferencePropertyDescriptor(object);
 		}
@@ -84,6 +85,28 @@ public class AnnotationItemProvider extends ElementItemProvider {
 				 getString("_UI_Annotation_property_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_Annotation_property_feature", "_UI_Annotation_type"),
 				 OmlPackage.Literals.ANNOTATION__PROPERTY,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Reference Value feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addReferenceValuePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Annotation_referenceValue_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Annotation_referenceValue_feature", "_UI_Annotation_type"),
+				 OmlPackage.Literals.ANNOTATION__REFERENCE_VALUE,
 				 true,
 				 false,
 				 true,
