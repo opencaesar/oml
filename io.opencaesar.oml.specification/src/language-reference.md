@@ -219,10 +219,10 @@ Note: if an abbreviated literal belongs to multiple scalars, it gets interpreted
 
 An annotation allows describing information about an ontology, or one of its members, that does not have associated description logic (DL) semantics. Such information can be notational (e.g., how an element is to be displayed), tool-specific (e.g., how to export an element), or for any other purpose (e.g., who authored the ontology).
 
-An Annotation describes a value for an [annotation property](#AnnotationProperty-LR) (defined by a [vocabulary](#Vocabulary-LR)) in the context of the annotated element (an [ontology](#Ontology-LR), a [member](#Member-LR), a [reference](#Reference-LR), or an [import](#Import-LR)). The general syntax of an annotation consists of a `@` symbol followed by an IRI to the an annotation property then an optional literal (value). If the value literal is missing, it is interpreted as a Boolean *true* literal.
+An Annotation describes a value for an [annotation property](#AnnotationProperty-LR) (defined by a [vocabulary](#Vocabulary-LR)) in the context of the annotated element (an [ontology](#Ontology-LR), a [member](#Member-LR), a [reference](#Reference-LR), or an [import](#Import-LR)). The general syntax of an annotation consists of a `@` symbol followed by an IRI to the an annotation property then an optional (literal or member reference) value. If the value is missing, it is interpreted as a boolean *true* literal.
 
 <pre class="highlight highlight-html">
-`@`[AnnotationProperty|IRI] Literal?
+`@`[AnnotationProperty|IRI] (Literal | [Member|IRI])?
 </pre>
 
 The following example shows several annotations. The ontology itself has a *dc:title* annotation as well as a *dc:date* annotation (notice how the value is a *xsd:date* literal). The first import statement of the ontology has a *rdfs:comment* annotation. Also, the member Member1 has two annotations, both of them are *rdfs:comment* but one has an English (en) literal while the other has a French (fr) literal. Finally, the imported member example2:Member2 is annotation with *viewpoint:show* (notice that there is no literal value, which will be interpreted similar to a Boolean *true* literal).
@@ -239,6 +239,7 @@ The following example shows several annotations. The ontology itself has a *dc:t
     `<import>` `<`http://company.com/example2#`>` `as` example2
     `@`rdfs:comment "This is member1"$en
     `@`rdfs:comment "C'est member1"$fr
+	`@`rdfs:seeAlso example2:Member2
     `<member>` Member1
     `@`viewpoint:show  // a missing literal is interpreted as Boolean true literal
     `ref` `<member>` example2:Member2

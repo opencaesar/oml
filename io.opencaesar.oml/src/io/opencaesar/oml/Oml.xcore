@@ -68,7 +68,8 @@ abstract class Element {
 /*
  * Annotation is an element that specifies additional non-semantic information on an annotated element. It can also be
  * specified on a reference to an ontology member, in which case it is interpreted as if it was specified on the
- * member itself. An annotation is specified with an annotation property and an optional value.
+ * member itself. An annotation is specified with an annotation property and an optional literal or reference value. When
+ * no value is specified, it is interpreted as a boolean `true` literal.
  */
 @Bikeshed(heading="Elements")
 class Annotation extends Element {
@@ -77,9 +78,13 @@ class Annotation extends Element {
      */
     refers AnnotationProperty[1] property
     /*
-     * The literal value specified by this annotation. When not specified, it is interpreted to be the `true` boolean literal.
+     * The literal value specified by this annotation.
      */
     contains Literal[?] value
+    /*
+     * The reference value (to a member) specified by this annotation
+     */
+    refers Member[?] referenceValue 
     /*
      * The annotated element that owns this annotation
      */

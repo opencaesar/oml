@@ -137,17 +137,13 @@
 <a id="Aspect-Syntax">Aspect</a>:
 	Annotation*
 	`aspect` ID (`:>` SpecializationAxiom (`,` SpecializationAxiom)*)? (`[`
-		KeyAxiom* 
-		PropertyRestrictionAxiom*
-		RelationRestrictionAxiom*
+		(KeyAxiom | PropertyRestrictionAxiom | RelationRestrictionAxiom)*
 	`]`)?
 
 <a id="Concept-Syntax">Concept</a>:
 	Annotation*
 	`concept` ID (`:>` SpecializationAxiom (`,` SpecializationAxiom)*)? (`[`
-		KeyAxiom* 
-		PropertyRestrictionAxiom*
-		RelationRestrictionAxiom*
+		(KeyAxiom | PropertyRestrictionAxiom | RelationRestrictionAxiom)*
 	`]`)?
 	
 <a id="RelationEntity-Syntax">RelationEntity</a>:
@@ -164,9 +160,7 @@
 		`reflexive`?
 		`irreflexive`?
 		`transitive`?
-		KeyAxiom*
-		PropertyRestrictionAxiom*
-		RelationRestrictionAxiom*
+		(KeyAxiom | PropertyRestrictionAxiom | RelationRestrictionAxiom)*
 	`]`
 
 <a id="Feature-Syntax">Feature</a>:
@@ -288,8 +282,7 @@
 <a id="ConceptInstance-Syntax">ConceptInstance</a>:
 	Annotation*
 	`ci` ID (`:` ConceptTypeAssertion (`,` ConceptTypeAssertion)*)? (`[`
-		PropertyValueAssertion*
-		LinkAssertion*
+		(PropertyValueAssertion | LinkAssertion)*
 	`]`)?
 	
 <a id="RelationInstance-Syntax">RelationInstance</a>:
@@ -297,8 +290,7 @@
 	`ri` ID (`:` RelationTypeAssertion (`,` RelationTypeAssertion)*)? `[`
 		`from` [NamedInstance|IRI] (`,` [NamedInstance|IRI])* 
 		`to` [NamedInstance|IRI] (`,` [NamedInstance|IRI])*
-		PropertyValueAssertion*
-		LinkAssertion*
+		(PropertyValueAssertion | LinkAssertion)*
 	`]`
 
 <a id="StructureInstance-Syntax">StructureInstance</a>:
@@ -333,25 +325,19 @@
 <a id="AspectReference-Syntax">AspectReference</a>:
 	Annotation*
 	`ref` `aspect` [Aspect|IRI] (`:>` SpecializationAxiom (`,` SpecializationAxiom)*)? (`[`
-		KeyAxiom* 
-		PropertyRestrictionAxiom*
-		RelationRestrictionAxiom*
+		(KeyAxiom* | PropertyRestrictionAxiom | RelationRestrictionAxiom)*
 	`]`)?
 
 <a id="ConceptReference-Syntax">ConceptReference</a>:
 	Annotation*
 	`ref` `concept` [Concept|IRI] (`:>` SpecializationAxiom (`,` SpecializationAxiom)*)? (`[`
-		KeyAxiom* 
-		PropertyRestrictionAxiom*
-		RelationRestrictionAxiom*
+		(KeyAxiom | PropertyRestrictionAxiom | RelationRestrictionAxiom)*
 	`]`)?
 
 <a id="RelationEntityReference-Syntax">RelationEntityReference</a>:
 	Annotation*
 	`ref` `relation` `entity` [RelationEntity|IRI] (`:>` SpecializationAxiom (`,` SpecializationAxiom)*)? (`[`
-		KeyAxiom* 
-		PropertyRestrictionAxiom*
-		RelationRestrictionAxiom*
+		(KeyAxiom | PropertyRestrictionAxiom | RelationRestrictionAxiom)*
 	`]`)?
 
 <a id="StructureReference-Syntax">StructureReference</a>:
@@ -482,7 +468,7 @@
 	[Relation|IRI] [NamedInstance|IRI]
 
 <a id="Annotation-Syntax">Annotation</a>:
-	`@` [AnnotationProperty|IRI] Literal?
+	`@` [AnnotationProperty|IRI] (Literal | [Member|IRI])?
 
 <a id="Literal-Syntax">Literal</a>:
 	IntegerLiteral |

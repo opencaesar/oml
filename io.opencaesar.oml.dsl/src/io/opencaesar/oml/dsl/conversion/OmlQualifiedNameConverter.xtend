@@ -18,31 +18,35 @@
  */
 package io.opencaesar.oml.dsl.conversion
 
-import com.google.common.base.Preconditions
+import io.opencaesar.oml.dsl.naming.OmlQualifiedName
 import org.eclipse.xtext.naming.IQualifiedNameConverter
 import org.eclipse.xtext.naming.QualifiedName
 
 class OmlQualifiedNameConverter implements IQualifiedNameConverter {
 	
 	override String toString(QualifiedName qualifiedName) {
-		if (qualifiedName === null)
-			throw new IllegalArgumentException("Qualified name cannot be null")
-		return qualifiedName.toString("")
+		return qualifiedName.toString()
 	}
 
 	override QualifiedName toQualifiedName(String qualifiedNameAsString) {
-		Preconditions.checkArgument(qualifiedNameAsString !== null, "Qualified name cannot be null")
-		Preconditions.checkArgument(!qualifiedNameAsString.isEmpty(), "Qualified name cannot be empty")
 		var index = qualifiedNameAsString.lastIndexOf('#')
 		if (index === -1) {
 			index = qualifiedNameAsString.lastIndexOf('/')
 		}
-		if (index === -1 || index === qualifiedNameAsString.length-1) {
-			return QualifiedName.create(qualifiedNameAsString)
+		if (index === -1) {
+			index = qualifiedNameAsString.lastIndexOf(':')
 		}
-		val parentName = qualifiedNameAsString.substring(0, index+1)
-		val elementName = qualifiedNameAsString.substring(index+1)
-		return QualifiedName.create(parentName, elementName);
+		if (index === -1) {
+			return OmlQualifiedName.create(qualifiedNameAsString)
+		}
+		val base = qualifiedNameAsString.substring(0, index)
+		val sep = qualifiedNameAsString.substring(index, index+1)
+		val fragment = qualifiedNameAsString.substring(index+1)
+		if (fragment == "") {
+			return OmlQualifiedName.create(base, sep);
+		} else {
+			return OmlQualifiedName.create(base, sep, fragment);
+		}
 	}
 	
 }

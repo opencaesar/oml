@@ -35,6 +35,7 @@ import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.Ontology;
+import io.opencaesar.oml.dsl.naming.OmlQualifiedName;
 import io.opencaesar.oml.util.OmlRead;
 
 public class FQNImporter extends FQNShortener {
@@ -49,10 +50,10 @@ public class FQNImporter extends FQNShortener {
 	@Override
 	public void apply(IDocument document, ConfigurableCompletionProposal proposal) throws BadLocationException {
 		// get the proposal
-		var proposalReplacementString = proposal.getReplacementString();
-		var memberName = proposalReplacementString;
+		final var proposalReplacementString = proposal.getReplacementString();
+		var name = proposalReplacementString;
 		if (valueConverter != null) {
-			memberName = valueConverter.toValue(proposalReplacementString, null);
+			name = valueConverter.toValue(proposalReplacementString, null);
 		}
 		String replacementString = getActualReplacementString(proposal);
 		
@@ -71,7 +72,7 @@ public class FQNImporter extends FQNShortener {
 		}
 
 		// if type is local - no need to hassle with imports
-		var qualifiedName = qualifiedNameConverter.toQualifiedName(memberName);
+		var qualifiedName = (OmlQualifiedName) qualifiedNameConverter.toQualifiedName(name);
 		if (qualifiedName.getSegmentCount() == 1) {
 			proposal.setCursorPosition(proposalReplacementString.length());
 			document.replace(proposal.getReplacementOffset(), proposal.getReplacementLength(),
@@ -80,15 +81,13 @@ public class FQNImporter extends FQNShortener {
 		}
 
 		// if there is an import statement, add proposal only
-		var description = scope.getSingleElement(qualifiedName.skipFirst(qualifiedName.getSegmentCount() - 1));
-		if (description != null) {
+		var description = scope.getSingleElement(qualifiedName);
+		if (description == null) {
 			proposal.setCursorPosition(proposalReplacementString.length());
 			document.replace(proposal.getReplacementOffset(), proposal.getReplacementLength(), proposalReplacementString);
 			return;
 		}
-		
 		// get the import prefix
-		description = scope.getSingleElement(qualifiedName);
 		var importPrefix = description.getUserData("defaultPrefix");
 	
 		// store the pixel coordinates to prevent the ui from flickering
@@ -149,7 +148,7 @@ public class FQNImporter extends FQNShortener {
 				lineDelimiter = document.getLineDelimiter(lineOfOffset - 1);
 			}
 			var importKeyword = getImportKeyword(ontology.eClass(), description.getEClass());
-			var importNamespace = qualifiedName.getFirstSegment();
+			var importNamespace = qualifiedName.getFirstSegment() + qualifiedName.getSeparator();
 			var importStatement = (startWithLineBreak ? lineDelimiter + lineDelimiter +"\t" : "") + 
 					importKeyword+" " + valueConverter.toString(importNamespace) + " as "+ importPrefix +
 					(endWithLineBreak ? lineDelimiter + lineDelimiter+"\t" : "");

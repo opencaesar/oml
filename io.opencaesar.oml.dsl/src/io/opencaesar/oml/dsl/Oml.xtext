@@ -26,7 +26,7 @@ Ontology:
 	DescriptionBox;
 
 Annotation:
-	'@' {Annotation} property=[AnnotationProperty|Ref]? value=Literal?;
+	'@' {Annotation} property=[AnnotationProperty|Ref] (value=Literal | referenceValue=[Member|Ref])?;
 
 VocabularyBox:
 	Vocabulary |
@@ -84,17 +84,17 @@ Entity:
 Aspect:
 	ownedAnnotations+=Annotation*
 	'aspect' name=ID (':>' ownedSpecializations+=SpecializationAxiom (',' ownedSpecializations+=SpecializationAxiom)*)? ('['
-		(ownedKeys+=KeyAxiom)* 
-		ownedPropertyRestrictions+=PropertyRestrictionAxiom*
-		ownedRelationRestrictions+=RelationRestrictionAxiom*
+		(ownedKeys+=KeyAxiom | 
+		 ownedPropertyRestrictions+=PropertyRestrictionAxiom |
+		 ownedRelationRestrictions+=RelationRestrictionAxiom)*
 	']')?;
 
 Concept:
 	ownedAnnotations+=Annotation*
 	'concept' name=ID (':>' ownedSpecializations+=SpecializationAxiom (',' ownedSpecializations+=SpecializationAxiom)*)? ('['
-		(ownedKeys+=KeyAxiom)* 
-		ownedPropertyRestrictions+=PropertyRestrictionAxiom*
-		ownedRelationRestrictions+=RelationRestrictionAxiom*
+		(ownedKeys+=KeyAxiom | 
+		 ownedPropertyRestrictions+=PropertyRestrictionAxiom |
+		 ownedRelationRestrictions+=RelationRestrictionAxiom)*
 	']')?;
 	
 RelationEntity:
@@ -111,9 +111,9 @@ RelationEntity:
 		 (reflexive?='reflexive')? &
 		 (irreflexive?='irreflexive')? &
 		 (transitive?='transitive')?)
-		(ownedKeys+=KeyAxiom)*
-		ownedPropertyRestrictions+=PropertyRestrictionAxiom*
-		ownedRelationRestrictions+=RelationRestrictionAxiom*
+		(ownedKeys+=KeyAxiom |
+		 ownedPropertyRestrictions+=PropertyRestrictionAxiom |
+		 ownedRelationRestrictions+=RelationRestrictionAxiom)*
 	']';
 	
 Structure:
@@ -208,8 +208,8 @@ NamedInstance:
 ConceptInstance:
 	ownedAnnotations+=Annotation*
 	'ci' name=ID (':' ownedTypes+=ConceptTypeAssertion (',' ownedTypes+=ConceptTypeAssertion)*)? ('['
-		ownedPropertyValues+=PropertyValueAssertion*
-		ownedLinks+=LinkAssertion*
+		(ownedPropertyValues+=PropertyValueAssertion | 
+		 ownedLinks+=LinkAssertion)*
 	']')?;
 	
 RelationInstance:
@@ -217,8 +217,8 @@ RelationInstance:
 	'ri' name=ID (':' ownedTypes+=RelationTypeAssertion (',' ownedTypes+=RelationTypeAssertion)*)? '['
 		'from' sources+=[NamedInstance|Ref] (',' sources+=[NamedInstance|Ref])* 
 		'to' targets+=[NamedInstance|Ref] (',' targets+=[NamedInstance|Ref])*
-		ownedPropertyValues+=PropertyValueAssertion*
-		ownedLinks+=LinkAssertion*
+		(ownedPropertyValues+=PropertyValueAssertion |
+		 ownedLinks+=LinkAssertion)*
 	']';
 	
 SpecializableTermReference:
@@ -241,25 +241,25 @@ EntityReference:
 AspectReference:
 	ownedAnnotations+=Annotation*
 	'ref' 'aspect' aspect=[Aspect|Ref] (':>' ownedSpecializations+=SpecializationAxiom (',' ownedSpecializations+=SpecializationAxiom)*)? ('['
-		(ownedKeys+=KeyAxiom)* 
-		ownedPropertyRestrictions+=PropertyRestrictionAxiom*
-		ownedRelationRestrictions+=RelationRestrictionAxiom*
+		(ownedKeys+=KeyAxiom | 
+		 ownedPropertyRestrictions+=PropertyRestrictionAxiom |
+		 ownedRelationRestrictions+=RelationRestrictionAxiom)*
 	']')?;
 
 ConceptReference:
 	ownedAnnotations+=Annotation*
 	'ref' 'concept' concept=[Concept|Ref] (':>' ownedSpecializations+=SpecializationAxiom (',' ownedSpecializations+=SpecializationAxiom)*)? ('['
-		(ownedKeys+=KeyAxiom)* 
-		ownedPropertyRestrictions+=PropertyRestrictionAxiom*
-		ownedRelationRestrictions+=RelationRestrictionAxiom*
+		(ownedKeys+=KeyAxiom | 
+		 ownedPropertyRestrictions+=PropertyRestrictionAxiom |
+		 ownedRelationRestrictions+=RelationRestrictionAxiom)*
 	']')?;
 
 RelationEntityReference:
 	ownedAnnotations+=Annotation*
 	'ref' 'relation' 'entity' entity=[RelationEntity|Ref] (':>' ownedSpecializations+=SpecializationAxiom (',' ownedSpecializations+=SpecializationAxiom)*)? ('['
-		(ownedKeys+=KeyAxiom)* 
-		ownedPropertyRestrictions+=PropertyRestrictionAxiom*
-		ownedRelationRestrictions+=RelationRestrictionAxiom*
+		(ownedKeys+=KeyAxiom | 
+		 ownedPropertyRestrictions+=PropertyRestrictionAxiom |
+		 ownedRelationRestrictions+=RelationRestrictionAxiom)*
 	']')?;
 
 StructureReference:
