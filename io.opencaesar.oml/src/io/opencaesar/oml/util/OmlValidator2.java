@@ -85,6 +85,8 @@ import io.opencaesar.oml.VocabularyUsage;
  */
 public final class OmlValidator2 {
     
+	private static final String OWL_NOTHING = "owl:Nothing";
+	
     /**
      * The singleton instance of this class
      */
@@ -453,7 +455,7 @@ public final class OmlValidator2 {
 	        final Collection<SpecializableTerm> allGeneralTerms = OmlRead.closure(restrictingClassifier, true, t -> OmlSearch.findSuperTerms(t));
 	        if (!allGeneralTerms.stream().filter(t -> t == domainType).findAny().isPresent()) {
 	            return report(Diagnostic.WARNING, diagnostics, object,
-	                "Relation "+object.getRelation().getAbbreviatedIri()+" has a domain that is not the same as or a super type of "+restrictingClassifier.getAbbreviatedIri(), 
+	                "Relation "+object.getRelation().getAbbreviatedIri()+" has a domain "+object.getRelation().getDomain().getAbbreviatedIri()+" that is not the same as or a super type of "+restrictingClassifier.getAbbreviatedIri(), 
 	                OmlPackage.Literals.RELATION_RESTRICTION_AXIOM__RELATION);
 	        }
         }
@@ -472,7 +474,7 @@ public final class OmlValidator2 {
         final Entity restrictedRange = object.getRange();
         final Relation relation = object.getRelation();
         final Entity rangeType = (relation!=null) ? relation.getRange() : null;
-        if (restrictedRange != null && rangeType != null) {
+        if (rangeType != null && restrictedRange != null && !restrictedRange.getAbbreviatedIri().equals(OWL_NOTHING)) {
 	        final Collection<SpecializableTerm> allGeneralEntities = OmlRead.closure(restrictedRange, true, t -> OmlSearch.findSuperTerms(t));
 	        if (!allGeneralEntities.stream().filter(t -> t == rangeType).findAny().isPresent()) {
 	            return report(Diagnostic.WARNING, diagnostics, object,
@@ -495,7 +497,7 @@ public final class OmlValidator2 {
         final Entity restrictedRange = object.getRange();
         final Relation relation = object.getRelation();
         final Entity rangeType = (relation!=null) ? relation.getRange() : null;
-        if (restrictedRange != null && rangeType != null) {
+        if (rangeType != null && restrictedRange != null && !restrictedRange.getAbbreviatedIri().equals(OWL_NOTHING)) {
             final Collection<SpecializableTerm> allGeneralEntities = OmlRead.closure(restrictedRange, true, t -> OmlSearch.findSuperTerms(t));
             if (!allGeneralEntities.stream().filter(t -> t == rangeType).findAny().isPresent()) {
                 return report(Diagnostic.WARNING, diagnostics, object,

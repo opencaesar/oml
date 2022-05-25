@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.EReference
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtext.scoping.IScope
 import org.eclipse.xtext.scoping.impl.FilteringScope
+import io.opencaesar.oml.EnumeratedScalar
 
 /**
  * This class contains custom scoping description.
@@ -49,7 +50,12 @@ class OmlScopeProvider extends AbstractOmlScopeProvider {
 			return new FilteringScope(superScope) [a |
 				!EcoreUtil.getURI(context).equals(a.getEObjectURI()) &&
 				(context.eClass() === a.getEClass() || 
-				OmlPackage.Literals.ASPECT === a.getEClass())]
+				 OmlPackage.Literals.ASPECT === a.getEClass())]
+		} else if (context instanceof EnumeratedScalar){
+			return new FilteringScope(superScope) [a |
+				!EcoreUtil.getURI(context).equals(a.getEObjectURI()) &&
+				(context.eClass() === a.getEClass() || 
+				 OmlPackage.Literals.FACETED_SCALAR === a.getEClass())]
 		} else if (context instanceof SpecializableTerm){
 			return new FilteringScope(superScope) [a |
 				!EcoreUtil.getURI(context).equals(a.getEObjectURI()) &&

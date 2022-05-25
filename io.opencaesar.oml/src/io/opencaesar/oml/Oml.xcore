@@ -590,7 +590,7 @@ class EnumeratedScalar extends Scalar {
     /*
      * The set of enumerated literals that are represented by this scalar
      */
-    contains Literal[+] literals
+    contains Literal[*] literals
 }
 
 /*
