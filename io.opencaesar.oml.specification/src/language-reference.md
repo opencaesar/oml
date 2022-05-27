@@ -355,12 +355,13 @@ Two special aspects defined by the owl vocabulary are: *owl:Thing* and *owl:Noth
 
 A [concept](#Concept-Syntax) is an entity defined in a vocabulary and represents a concrete type in a modeled domain. A concept can specialize other concepts or aspects, but can be specialized by other concepts only. It can also be asserted as a type of a [concept instance](#ConceptInstance-LR). 
 
-A concept is declared with the keyword `concept` followed by the concept's name ID. It can optionally specialize other concepts or aspects by following its name ID by the `:>` symbol then a comma-separated list of those supertypes' IRIs. A concept can also optionally specify a list of axioms enclosed within a pair of square brackets `[` `]`.
+A concept is declared with the keyword `concept` followed by the concept's name ID. It can optionally specialize other concepts or aspects by following its name ID by the `:>` symbol then a comma-separated list of those supertypes' IRIs. A concept can also have a body enclosed by a pair of square brackets `[` `]` and specify a list of axioms, as well as a comma-separated list of enumerated instances' IRIs preceded by the keyword `enumerates`.
 
 <pre class="highlight highlight-html">
     Annotation*
     `concept` ID (`:>` [Concept|Aspect|IRI] (`,` [Concept|Aspect|IRI])*)? (`[`
         Axiom*
+        (`enumerates` [ConceptInstance|IRI] (`,` [ConceptInstance|IRI])*)?
     `]`)?
 </pre>
 

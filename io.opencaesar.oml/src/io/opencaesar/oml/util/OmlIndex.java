@@ -180,6 +180,18 @@ public class OmlIndex {
         return findInverseReferencers(property, Annotation.class, OmlPackage.Literals.ANNOTATION__PROPERTY);
     }
     
+    // Concept
+
+    /**
+     * Finds concepts that enumerate the given instance
+     * 
+     * @param instance The given instance
+     * @return A list of concepts enumerating the given instance
+     */
+    public static List<Concept> findConceptsWithEnumeratedInstance(ConceptInstance instance) {
+        return findInverseReferencers(instance, Concept.class, OmlPackage.Literals.CONCEPT__ENUMERATED_INSTANCES);
+    }
+
     // RelationEntity
     
     /**

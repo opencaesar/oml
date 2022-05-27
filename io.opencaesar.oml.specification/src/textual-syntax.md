@@ -144,6 +144,7 @@
 	Annotation*
 	`concept` ID (`:>` SpecializationAxiom (`,` SpecializationAxiom)*)? (`[`
 		(KeyAxiom | PropertyRestrictionAxiom | RelationRestrictionAxiom)*
+		(`enumerates` ConceptInstance (`,` ConceptInstance)*)?
 	`]`)?
 	
 <a id="RelationEntity-Syntax">RelationEntity</a>:

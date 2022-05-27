@@ -328,11 +328,15 @@ class Aspect extends Entity {
 }
 
 /*
- * Concept is a concrete entity that can classify a set of concept instances in a description. It can also specialize 
- * other concepts and/or aspects.
+ * Concept is a concrete entity that classifies a (possibly enumerated) set of concept instances. 
+ * It can also specialize other concepts and/or aspects.
  */
 @Bikeshed(heading="Types")
 class Concept extends Entity {
+	/*
+	 * The set of enumerated instances of this concept
+	 */
+	refers ConceptInstance[*] enumeratedInstances
 }
 
 /*

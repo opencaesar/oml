@@ -50,8 +50,10 @@ import io.opencaesar.oml.Entity;
 import io.opencaesar.oml.EnumeratedScalar;
 import io.opencaesar.oml.FacetedScalar;
 import io.opencaesar.oml.FeaturePredicate;
+import io.opencaesar.oml.LinkAssertion;
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.Ontology;
+import io.opencaesar.oml.PropertyValueAssertion;
 import io.opencaesar.oml.QuotedLiteral;
 import io.opencaesar.oml.Relation;
 import io.opencaesar.oml.RelationCardinalityRestrictionAxiom;
@@ -62,6 +64,8 @@ import io.opencaesar.oml.ScalarProperty;
 import io.opencaesar.oml.ScalarPropertyCardinalityRestrictionAxiom;
 import io.opencaesar.oml.ScalarPropertyRangeRestrictionAxiom;
 import io.opencaesar.oml.ScalarPropertyRestrictionAxiom;
+import io.opencaesar.oml.ScalarPropertyValueAssertion;
+import io.opencaesar.oml.SemanticProperty;
 import io.opencaesar.oml.SpecializableTerm;
 import io.opencaesar.oml.SpecializationAxiom;
 import io.opencaesar.oml.Structure;
@@ -845,5 +849,86 @@ public final class OmlValidator2 {
     	}
     	return false;
     }
+    
+    // Assertions
 
+    /**
+     * Checks if the property of a property value assertion has a domain that is the same or a super type of the owning instance's type(s)
+     * 
+     * @param object The property value assertion to check
+     * @param diagnostics The validation diagnostics
+     * @param context The object-to-object context map
+     * @return True if the rules is satisfied; False otherwise
+     */
+    protected boolean validatePropertyRestrictionAxiomSubject(PropertyValueAssertion object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        final var instance = OmlRead.getSubject(object);
+        final var directInstanceTypes = OmlSearch.findTypes(instance);
+        final var allinstanceTypes = directInstanceTypes.stream().flatMap(it -> OmlSearch.findAllSuperTerms(it, true).stream()).collect(Collectors.toList());
+        final SemanticProperty property = object.getProperty();
+        final Classifier domainType = property.getDomain();
+        if (!allinstanceTypes.contains(domainType)) {
+            final var eRef = (object instanceof ScalarPropertyValueAssertion) ?
+            	OmlPackage.Literals.SCALAR_PROPERTY_VALUE_ASSERTION__PROPERTY :
+            	OmlPackage.Literals.STRUCTURED_PROPERTY_VALUE_ASSERTION__PROPERTY;
+        	return report(Diagnostic.WARNING, diagnostics, object,
+                "Property "+object.getProperty().getAbbreviatedIri()+" has a domain that is not the same as or a super type of the instance's type(s)" , eRef);
+        }
+        return true;
+    }
+
+    /**
+     * Checks if the relation of a link assertion has a domain that is the same or a super type of the owning instance's type(s)
+     * 
+     * @param object The link assertion to check
+     * @param diagnostics The validation diagnostics
+     * @param context The object-to-object context map
+     * @return True if the rules is satisfied; False otherwise
+     */
+    protected boolean validateLinkRestrictionAxiomSubject(LinkAssertion object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        final var instance = OmlRead.getSubject(object);
+        final var directInstanceTypes = OmlSearch.findTypes(instance);
+        final var allinstanceTypes = directInstanceTypes.stream().flatMap(it -> OmlSearch.findAllSuperTerms(it, true).stream()).collect(Collectors.toList());
+        final Relation relation = object.getRelation();
+        final Classifier domainType = relation.getDomain();
+        if (!allinstanceTypes.contains(domainType)) {
+            final var eRef = OmlPackage.Literals.LINK_ASSERTION__RELATION;
+        	return report(Diagnostic.WARNING, diagnostics, object,
+                "Relation "+object.getRelation().getAbbreviatedIri()+" has a domain that is not the same as or a super type of the instance's type(s)" , eRef);
+        }
+        return true;
+    }
+
+    /**
+     * Checks if the relation of a link assertion has a range that is the same or a super type of the target instance's type(s)
+     * 
+     * @param object The link assertion to check
+     * @param diagnostics The validation diagnostics
+     * @param context The object-to-object context map
+     * @return True if the rules is satisfied; False otherwise
+     */
+    protected boolean validateLinkRestrictionAxiomObject(LinkAssertion object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        final var instance = OmlRead.getTarget(object);
+        final var directInstanceTypes = OmlSearch.findTypes(instance);
+        final var allinstanceTypes = directInstanceTypes.stream().flatMap(it -> OmlSearch.findAllSuperTerms(it, true).stream()).collect(Collectors.toList());
+        final Relation relation = object.getRelation();
+        final Classifier rangeype = relation.getRange();
+        if (!allinstanceTypes.contains(rangeype)) {
+            final var eRef = OmlPackage.Literals.LINK_ASSERTION__TARGET;
+        	return report(Diagnostic.WARNING, diagnostics, object,
+                "Instance "+object.getTarget().getAbbreviatedIri()+" is not typed by the range of property "+object.getRelation().getAbbreviatedIri()+" or its subtypes" , eRef);
+        }
+        return true;
+    }
+
+    /**
+     * Checks if col1 intersect with col2
+     * 
+     * @param col1 The first collection
+     * @param col2 The second collection
+     * @return whether the two collections intersect
+     */
+    protected boolean instersect(Collection<?> col1, Collection<?> col2) {
+    	return col1.stream().anyMatch(i -> col2.contains(i));
+    }
+    
 }
