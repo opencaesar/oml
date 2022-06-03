@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.URIHandlerImpl;
 
 import io.opencaesar.oml.Member;
+import io.opencaesar.oml.SeparatorKind;
 
 /**
  * The <b>XMI URI Handler</b> implementation for the model.
@@ -51,7 +52,7 @@ public class OmlXMIURIHandler extends URIHandlerImpl {
 			if (_import != null) {
 				URI resolvedUri = OmlRead.getUriByIri(resource, _import.getIri());
 				if (resolvedUri != null) {
-					return URI.createURI(resolvedUri.toString() + _import.getSeparator() + qname[1]);
+					return URI.createURI(resolvedUri.toString() + SeparatorKind.HASH.toString() + qname[1]);
 				}
 			}
 			return URI.createHierarchicalURI(new String[]{qname[0]}, null, qname[1]);

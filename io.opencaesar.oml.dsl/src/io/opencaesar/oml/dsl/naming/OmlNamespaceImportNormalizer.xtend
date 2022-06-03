@@ -33,8 +33,8 @@ class OmlNamespaceImportNormalizer extends ImportNormalizer{
 	}
 	
 	override QualifiedName resolve(QualifiedName relativeName) {
-		if (relativeName instanceof OmlQualifiedName) {
-			if (relativeName.separator == ":") {
+		if (relativeName.segmentCount === 3) {
+			if (relativeName.getSegment(1) == ":") {
 				val prefix = relativeName.firstSegment
 				if (prefix == nsPrefix) {
 					return nsURI.append(relativeName.lastSegment);
@@ -47,7 +47,7 @@ class OmlNamespaceImportNormalizer extends ImportNormalizer{
 	override QualifiedName deresolve(QualifiedName fullyQualifiedName) {
 		if (fullyQualifiedName.startsWith(nsURI) && !fullyQualifiedName.equals(nsURI)) {
 			val name = fullyQualifiedName.lastSegment
-			return OmlQualifiedName.create(nsPrefix, ":", name);
+			return QualifiedName.create(nsPrefix, ":", name);
 		}
 		return null;
 	}

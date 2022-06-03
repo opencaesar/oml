@@ -35,7 +35,6 @@ import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.Ontology;
-import io.opencaesar.oml.dsl.naming.OmlQualifiedName;
 import io.opencaesar.oml.util.OmlRead;
 
 public class FQNImporter extends FQNShortener {
@@ -72,7 +71,7 @@ public class FQNImporter extends FQNShortener {
 		}
 
 		// if type is local - no need to hassle with imports
-		var qualifiedName = (OmlQualifiedName) qualifiedNameConverter.toQualifiedName(name);
+		var qualifiedName = qualifiedNameConverter.toQualifiedName(name);
 		if (qualifiedName.getSegmentCount() == 1) {
 			proposal.setCursorPosition(proposalReplacementString.length());
 			document.replace(proposal.getReplacementOffset(), proposal.getReplacementLength(),
@@ -148,7 +147,7 @@ public class FQNImporter extends FQNShortener {
 				lineDelimiter = document.getLineDelimiter(lineOfOffset - 1);
 			}
 			var importKeyword = getImportKeyword(ontology.eClass(), description.getEClass());
-			var importNamespace = qualifiedName.getFirstSegment() + qualifiedName.getSeparator();
+			var importNamespace = qualifiedName.getFirstSegment() + qualifiedName.getSegment(1);
 			var importStatement = (startWithLineBreak ? lineDelimiter + lineDelimiter +"\t" : "") + 
 					importKeyword+" " + valueConverter.toString(importNamespace) + " as "+ importPrefix +
 					(endWithLineBreak ? lineDelimiter + lineDelimiter+"\t" : "");

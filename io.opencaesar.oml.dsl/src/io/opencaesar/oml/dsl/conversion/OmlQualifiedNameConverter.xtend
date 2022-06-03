@@ -18,14 +18,13 @@
  */
 package io.opencaesar.oml.dsl.conversion
 
-import io.opencaesar.oml.dsl.naming.OmlQualifiedName
 import org.eclipse.xtext.naming.IQualifiedNameConverter
 import org.eclipse.xtext.naming.QualifiedName
 
 class OmlQualifiedNameConverter implements IQualifiedNameConverter {
 	
 	override String toString(QualifiedName qualifiedName) {
-		return qualifiedName.toString()
+		return qualifiedName.toString("")
 	}
 
 	override QualifiedName toQualifiedName(String qualifiedNameAsString) {
@@ -37,15 +36,15 @@ class OmlQualifiedNameConverter implements IQualifiedNameConverter {
 			index = qualifiedNameAsString.lastIndexOf(':')
 		}
 		if (index === -1) {
-			return OmlQualifiedName.create(qualifiedNameAsString)
+			return QualifiedName.create(qualifiedNameAsString)
 		}
 		val base = qualifiedNameAsString.substring(0, index)
 		val sep = qualifiedNameAsString.substring(index, index+1)
 		val fragment = qualifiedNameAsString.substring(index+1)
 		if (fragment == "") {
-			return OmlQualifiedName.create(base, sep);
+			return QualifiedName.create(base, sep);
 		} else {
-			return OmlQualifiedName.create(base, sep, fragment);
+			return QualifiedName.create(base, sep, fragment);
 		}
 	}
 	
