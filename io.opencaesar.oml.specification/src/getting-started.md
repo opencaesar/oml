@@ -33,7 +33,7 @@ An OML project is a root folder that typically nests [OML files](#OML-File), a [
 
 ## OML File ## {#OML-File}
 
-An OML file has the extension *oml* (if it uses the OML textual syntax) or *omlxmi* (if it uses the OML XMI syntax). It can be directly at the root of an OML project or nested in sub folders. OML files that are manually authored are typiclally nested under a *src* sub folder, while those that are machine produced are typically nested under a *build* sub folder. Each OML file defines a single OML [ontolopgy](#Ontology-LR) which has a unique hierarchical \[IRI](#IRI-LR). The nesting path of an OML file typically corresponds to the nesting path of its ontology IRI. For example, an ontology with an IRI *http://imce.jpl.nasa.gov/foundation/base#* is persisted in a file with a path *imce.jpl.nasa.gov/foundation/base.oml*. The syntax of an OML file is discussed in the [language reference](#Language-Reference) section.
+An OML file has the extension *oml* (if it uses the OML textual syntax), *omlxmi* (if it uses the OML XMI syntax)or *omljson* (if it uses the OML Json syntax). It can be directly at the root of an OML project or nested in sub folders. OML files that are manually authored are typiclally nested under a *src* sub folder, while those that are machine produced are typically nested under a *build* sub folder. Each OML file defines a single OML [ontolopgy](#Ontology-LR) which has a unique hierarchical \[IRI](#IRI-LR). The nesting path of an OML file typically corresponds to the nesting path of its ontology IRI. For example, an ontology with an IRI *http://imce.jpl.nasa.gov/foundation/base#* is persisted in a file with a path *imce.jpl.nasa.gov/foundation/base.oml*. The syntax of an OML file is discussed in the [language reference](#Language-Reference) section.
 
 ## Catalog File ## {#Catalog-File}
 
@@ -49,7 +49,7 @@ A catalog file provides a mapping from the OML ontology IRIs to their correspond
 
 Note: If an IRI is mappable by more than one catalog rule, the most specific rule is used.
 
-Note: Catalog IRI resolution checks the existence of files with extension *oml* first before checking extension *omlxmi*.
+Note: Catalog IRI resolution checks the existence of files with OML extensions in this order: *oml*, *omlxmi*, then *omljson*.
 
 Note: To be considered a valid OML file, the file needs to be mappable by some rule in a catalog file.
 

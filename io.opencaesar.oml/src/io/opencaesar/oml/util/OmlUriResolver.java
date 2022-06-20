@@ -192,15 +192,19 @@ final class OmlUriResolver {
             return null;
         }
         
-        URI resolvedUri = URI.createURI(resolved+'.'+OmlConstants.OML_EXTENSION);
-        if (!exists(rs, resolvedUri)) {
-            resolvedUri = URI.createURI(resolved+'.'+OmlConstants.OMLXMI_EXTENSION);
-            if (!exists(rs, resolvedUri)) {
-                resolvedUri = URI.createURI(resolved);
-                if (!exists(rs, resolvedUri)) {
-                    return null;
-                }
+        URI resolvedUri = null;
+        for (String extension : OmlConstants.OML_EXTENSIONS) {
+            resolvedUri = URI.createURI(resolved+'.'+extension);
+            if (exists(rs, resolvedUri)) {
+            	break;
             }
+        }
+
+        if (resolvedUri == null) {
+	        resolvedUri = URI.createURI(resolved);
+	        if (!exists(rs, resolvedUri)) {
+	            return null;
+	        }
         }
         
         return resolvedUri;

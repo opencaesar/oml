@@ -16,11 +16,13 @@
  * limitations under the License.
  * 
  */
-package io.opencaesar.oml.util;
+package io.opencaesar.oml.resource;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceFactoryImpl;
+
+import io.opencaesar.oml.util.OmlConstants;
 
 /**
  * The <b>XMI Resource Factory</b> implementation for the model.
@@ -29,17 +31,39 @@ import org.eclipse.emf.ecore.resource.impl.ResourceFactoryImpl;
  */
 public final class OmlXMIResourceFactory extends ResourceFactoryImpl {
 
-    @Override
+	private boolean useCatalog;
+	
+	public OmlXMIResourceFactory() {
+		this(true);
+	}
+
+	/**
+     * @param useCatalog whether to use the catalog to (de)resolve cross references
+	 */
+	public OmlXMIResourceFactory(boolean useCatalog) {
+		this.useCatalog = useCatalog;
+	}
+
+	@Override
     public Resource createResource(URI uri) {
-        return new OmlXMIResource(uri);
+        return new OmlXMIResource(uri, useCatalog);
     }
     
     /**
      * Registers the factory with the OML XMI extension 
      */
     public static void register() {
+    	register(true);
+    }
+
+    /**
+     * Registers the factory with the OML XMI extension 
+     * 
+     * @param useCatalog whether to use the catalog to (de)resolve cross references
+     */
+    public static void register(boolean useCatalog) {
         if (!Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().containsKey(OmlConstants.OMLXMI_EXTENSION)) {
-            Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(OmlConstants.OMLXMI_EXTENSION, new OmlXMIResourceFactory());
+            Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(OmlConstants.OMLXMI_EXTENSION, new OmlXMIResourceFactory(useCatalog));
         }
     }
 }

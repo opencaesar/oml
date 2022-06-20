@@ -12,7 +12,7 @@
             class="io.opencaesar.oml.presentation.OmlEditor"
             contributorClass="io.opencaesar.oml.presentation.OmlActionBarContributor"
             default="true"
-            extensions="omlxmi"
+            extensions="omlxmi, omljson"
             icon="icons/full/obj16/oml.png"
             id="io.opencaesar.oml.presentation.OmlEditorID"
             name="%_UI_OmlEditor_label">

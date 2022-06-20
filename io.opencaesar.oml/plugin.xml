@@ -17,13 +17,16 @@
 	<extension point="org.eclipse.emf.ecore.extension_parser">
 		<parser
 			type="omlxmi"
-			class="io.opencaesar.oml.util.OmlXMIResourceFactory"/>
+			class="io.opencaesar.oml.resource.OmlXMIResourceFactory"/>
+		<parser
+			type="omljson"
+			class="io.opencaesar.oml.resource.OmlJsonResourceFactory"/>
 	</extension>
 
 	<extension point="org.eclipse.core.contenttype.contentTypes">
 		<file-association
 			content-type="org.eclipse.emf.ecore.xmi"
-			file-extensions="omlxmi"
+			file-extensions="omlxmi,omljson"
 			file-names="*"/>
 	</extension>
 

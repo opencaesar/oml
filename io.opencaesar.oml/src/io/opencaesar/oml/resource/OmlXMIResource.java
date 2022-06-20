@@ -16,7 +16,7 @@
  * limitations under the License.
  * 
  */
-package io.opencaesar.oml.util;
+package io.opencaesar.oml.resource;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -68,17 +68,31 @@ public final class OmlXMIResource extends XMIResourceImpl {
      * @param uri The uri of the created resource
      */
     public OmlXMIResource(URI uri) {
+    	this(uri, true);
+    }
+    
+    /**
+     * Creates a new Oml XMI Resource given a uri of the resource
+     * 
+     * @param uri The uri of the created resource
+     * @param useCatalog whether to use the catalog to (de)resolve cross references
+     */
+    public OmlXMIResource(URI uri, boolean useCatalog) {
         super(uri);
-        var handler = new OmlXMIURIHandler(this);
+        intrinsicIDToEObjectMap = idToEObjectMap;
+
         // Load Options
-        getDefaultLoadOptions().put(XMIResource.OPTION_URI_HANDLER, handler);
         getDefaultLoadOptions().put(XMIResource.OPTION_USE_XML_NAME_TO_FEATURE_MAP, new HashMap<String, EStructuralFeature>());
         // Save Options
-        getDefaultSaveOptions().put(XMIResource.OPTION_URI_HANDLER, handler);
         getDefaultSaveOptions().put(XMIResource.OPTION_SAVE_TYPE_INFORMATION, Boolean.TRUE);
         getDefaultSaveOptions().put(XMIResource.OPTION_EXTENDED_META_DATA, new OmlExtendedMetaData());
         getDefaultSaveOptions().put(XMIResource.OPTION_USE_CACHED_LOOKUP_TABLE, new ArrayList<Object>());
-        intrinsicIDToEObjectMap = idToEObjectMap;
+
+        if (useCatalog) {
+        	var handler = new OmlXMIURIHandler(this);
+            getDefaultLoadOptions().put(XMIResource.OPTION_URI_HANDLER, handler);
+            getDefaultSaveOptions().put(XMIResource.OPTION_URI_HANDLER, handler);
+        }
     }
     
     @Override

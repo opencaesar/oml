@@ -7,6 +7,7 @@ dependencies {
 	compile "org.eclipse.xtext:org.eclipse.xtext.xbase:${versions.xtext}"
 	compile "org.eclipse.emf:org.eclipse.emf.ecore.xcore.lib:${versions.xcoreLib}"
 	compile "xml-resolver:xml-resolver:${versions.xmlResolver}"
+	compile "org.eclipse.emfcloud:emfjson-jackson:${versions.emfJson}"
 
 	xtextLanguages "org.eclipse.xtext:org.eclipse.xtext.ecore:${versions.xtext}"
 	xtextLanguages "org.eclipse.emf:org.eclipse.emf.mwe2.runtime:${versions.mwe2}"

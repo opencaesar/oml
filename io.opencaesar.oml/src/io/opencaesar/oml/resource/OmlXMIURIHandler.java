@@ -16,7 +16,7 @@
  * limitations under the License.
  * 
  */
-package io.opencaesar.oml.util;
+package io.opencaesar.oml.resource;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.xmi.impl.URIHandlerImpl;
 
 import io.opencaesar.oml.Member;
 import io.opencaesar.oml.SeparatorKind;
+import io.opencaesar.oml.util.OmlRead;
 
 /**
  * The <b>XMI URI Handler</b> implementation for the model.

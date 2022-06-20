@@ -32,7 +32,8 @@ subprojects {
 	    gson: '2.8.2',
 	    guava: '21.0',
 	    antlr: '2.1.1',
-	    xmlResolver: '1.2'
+	    xmlResolver: '1.2',
+	    emfJson: '2.0.0'
 	]
 
 	repositories {

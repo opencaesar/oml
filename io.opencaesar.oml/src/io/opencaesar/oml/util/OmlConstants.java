@@ -36,9 +36,14 @@ public interface OmlConstants {
     public static final String OMLXMI_EXTENSION = "omlxmi";
 
     /**
+     * The extension of OML JSON files
+     */
+    public static final String OMLJSON_EXTENSION = "omljson";
+
+    /**
      * The supported OML file extensions
      */
-    public static final String[] OML_EXTENSIONS= { OML_EXTENSION, OMLXMI_EXTENSION };
+    public static final String[] OML_EXTENSIONS= { OML_EXTENSION, OMLXMI_EXTENSION, OMLJSON_EXTENSION };
 
     /**
      * The IRI of the OML vocabulary
