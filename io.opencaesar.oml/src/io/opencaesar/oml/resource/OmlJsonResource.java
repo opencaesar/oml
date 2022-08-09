@@ -19,16 +19,24 @@
 package io.opencaesar.oml.resource;
 
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 import java.util.TimeZone;
 
+import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emfcloud.jackson.module.EMFModule;
 import org.eclipse.emfcloud.jackson.resource.JsonResource;
 
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+
+import io.opencaesar.oml.OmlPackage;
 
 /**
  * The <b>Json Resource</b> implementation for the model.
@@ -37,7 +45,9 @@ import com.fasterxml.jackson.databind.SerializationFeature;
  */
 public class OmlJsonResource extends JsonResource {
 
-	/**
+    private final Map<String, EObject> idToEObjectMap = new HashMap<>();
+
+    /**
 	 * @param uri the URI of the resource
 	 */
 	public OmlJsonResource(URI uri) {
@@ -50,9 +60,32 @@ public class OmlJsonResource extends JsonResource {
 	 */
 	public OmlJsonResource(URI uri, boolean useCatalog) {
 		super(uri);
-		if (useCatalog) {
+        
+		// setup the intrinsic id cache
+        setIntrinsicIDToEObjectMap(idToEObjectMap);
+    	setTrackingModification(true);
+
+    	if (useCatalog) {
 			setObjectMapper(setupDefaultMapper(null));
 		}
+	}
+
+    @Override
+	protected Adapter createModificationTrackingAdapter() {
+        return new ResourceImpl.ModificationTrackingAdapter() {
+        	@Override
+        	public void notifyChanged(Notification notification) {
+        		super.notifyChanged(notification);
+        		if (notification.getFeature() == OmlPackage.Literals.MEMBER__NAME) {
+        			if (notification.getOldValue() != null) {
+        				idToEObjectMap.remove(notification.getOldValue());
+        			}
+					if (notification.getNewValue() != null) {
+						idToEObjectMap.put((String)notification.getNewValue(), (EObject)notification.getNotifier());
+                    }
+                }
+            }
+        };
 	}
 
 	private ObjectMapper setupDefaultMapper(final JsonFactory factory) {

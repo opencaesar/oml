@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 California Institute of Technology (\"Caltech\").
+ * Copyright 2019-2022 California Institute of Technology (\"Caltech\").
  * U.S. Government sponsorship acknowledged.
  * 
  * Licensed under the Apache License, Version 2.0 (the \"License\");
@@ -24,8 +24,11 @@ import io.opencaesar.oml.dsl.naming.OmlQualifiedNameProvider
 import io.opencaesar.oml.dsl.resource.OmlResourceDescriptionStrategy
 import io.opencaesar.oml.dsl.resource.OmlResourceServiceProvider
 import io.opencaesar.oml.dsl.resource.OmlSynchronizedXtextResourceSet
+import io.opencaesar.oml.dsl.resource.OmlXtextResourceFactory
 import io.opencaesar.oml.dsl.scoping.OmlImportUriGlobalScopeProvider
 import io.opencaesar.oml.dsl.scoping.OmlImportedNamespaceAwareLocalScopeProvider
+import io.opencaesar.oml.dsl.validation.OmlDiagnostician
+import org.eclipse.emf.ecore.util.Diagnostician
 import org.eclipse.xtext.conversion.IValueConverterService
 import org.eclipse.xtext.formatting2.FormatterPreferenceValuesProvider
 import org.eclipse.xtext.formatting2.FormatterPreferences
@@ -33,14 +36,13 @@ import org.eclipse.xtext.naming.IQualifiedNameConverter
 import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.eclipse.xtext.preferences.IPreferenceValuesProvider
 import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy
+import org.eclipse.xtext.resource.IResourceFactory
 import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.scoping.IGlobalScopeProvider
 import org.eclipse.xtext.scoping.impl.ImportUriResolver
 import org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider
 import org.eclipse.xtext.service.SingletonBinding
-import org.eclipse.emf.ecore.util.Diagnostician
-import io.opencaesar.oml.dsl.validation.OmlDiagnostician
 
 /**	
  * Use this class to register components to be used at runtime / without the Equinox extension registry.	
@@ -81,10 +83,14 @@ class OmlRuntimeModule extends AbstractOmlRuntimeModule {
 		OmlSynchronizedXtextResourceSet
 	}
 
+	override Class<? extends IResourceFactory> bindIResourceFactory() {
+		OmlXtextResourceFactory;
+	}
+
  	def Class<? extends IResourceServiceProvider> bindIResourceServiceProvider() {
     	OmlResourceServiceProvider
   	}
-
+  	
 	@SingletonBinding
 	override Class<? extends Diagnostician> bindDiagnostician() {
 		OmlDiagnostician

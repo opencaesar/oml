@@ -1,6 +1,6 @@
 /**
  * 
- * Copyright 2019-2021 California Institute of Technology ("Caltech").
+ * Copyright 2019-2022 California Institute of Technology ("Caltech").
  * U.S. Government sponsorship acknowledged.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -27,16 +27,15 @@ import java.util.Map;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.ecore.util.BasicExtendedMetaData;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 
-import io.opencaesar.oml.Member;
 import io.opencaesar.oml.OmlPackage;
 
 /**
@@ -47,20 +46,6 @@ import io.opencaesar.oml.OmlPackage;
 public final class OmlXMIResource extends XMIResourceImpl {
 
     private final Map<String, EObject> idToEObjectMap = new HashMap<>();
-    private final Adapter idToEObjectMapAdapter = new AdapterImpl() {
-        @Override
-        public void notifyChanged(Notification notification) {
-            if (notification.getFeature() == OmlPackage.Literals.MEMBER__NAME) {
-                if (notification.getOldValue() != null) {
-                    if (idToEObjectMap.remove(notification.getOldValue()) != null) {
-                        if (notification.getNewValue() != null) {
-                            idToEObjectMap.put((String)notification.getNewValue(), (EObject)notification.getNotifier());
-                        }
-                    }
-                }
-            }
-        }
-    };
 
     /**
      * Creates a new Oml XMI Resource given a uri of the resource
@@ -79,7 +64,10 @@ public final class OmlXMIResource extends XMIResourceImpl {
      */
     public OmlXMIResource(URI uri, boolean useCatalog) {
         super(uri);
-        intrinsicIDToEObjectMap = idToEObjectMap;
+
+        // setup the intrinsic id cache
+        setIntrinsicIDToEObjectMap(idToEObjectMap);
+    	setTrackingModification(true);
 
         // Load Options
         getDefaultLoadOptions().put(XMIResource.OPTION_USE_XML_NAME_TO_FEATURE_MAP, new HashMap<String, EStructuralFeature>());
@@ -96,20 +84,22 @@ public final class OmlXMIResource extends XMIResourceImpl {
     }
     
     @Override
-    public void attached(EObject eObject) {
-        super.attached(eObject);
-        if (eObject instanceof Member) {
-            eObject.eAdapters().add(idToEObjectMapAdapter);
-        }
-    }
-
-    @Override
-    public void detached(EObject eObject) {
-        if (eObject instanceof Member) {
-            eObject.eAdapters().remove(idToEObjectMapAdapter);
-        }
-        super.detached(eObject);
-    }
+	protected Adapter createModificationTrackingAdapter() {
+        return new ResourceImpl.ModificationTrackingAdapter() {
+        	@Override
+        	public void notifyChanged(Notification notification) {
+        		super.notifyChanged(notification);
+        		if (notification.getFeature() == OmlPackage.Literals.MEMBER__NAME) {
+        			if (notification.getOldValue() != null) {
+        				idToEObjectMap.remove(notification.getOldValue());
+        			}
+					if (notification.getNewValue() != null) {
+						idToEObjectMap.put((String)notification.getNewValue(), (EObject)notification.getNotifier());
+                    }
+                }
+            }
+        };
+	}
 
     @Override
     public void doSave(OutputStream outputStream, Map<?, ?> options) throws IOException {
