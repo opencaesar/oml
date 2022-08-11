@@ -21,7 +21,6 @@
       <import plugin="org.eclipse.core.runtime"/>
       <import plugin="org.eclipse.emf.edit"/>
       <import plugin="org.eclipse.emf.ecore"/>
-      <import plugin="io.opencaesar.oml"/>
       <import plugin="org.eclipse.core.resources"/>
       <import plugin="org.eclipse.ui.ide"/>
       <import plugin="org.eclipse.jface.text"/>
@@ -30,7 +29,6 @@
       <import plugin="org.eclipse.xtext.ide"/>
       <import plugin="org.eclipse.xtext.xbase.ide"/>
       <import plugin="org.antlr.runtime"/>
-      <import plugin="io.opencaesar.oml.dsl"/>
       <import plugin="org.eclipse.ui"/>
       <import plugin="org.eclipse.ui.editors"/>
       <import plugin="org.eclipse.compare"/>

@@ -19,6 +19,9 @@
       <import plugin="org.eclipse.emf.ecore.xmi"/>
       <import plugin="org.eclipse.emf.ecore.xcore.lib"/>
       <import plugin="org.eclipse.xtext.xbase.lib"/>
+      <import plugin="org.eclipse.emfcloud.emfjson-jackson"/>
+      <import plugin="com.fasterxml.jackson.core.jackson-databind"/>
+      <import plugin="com.fasterxml.jackson.core.jackson-core"/>
    </requires>
 
    <plugin
