@@ -1,6 +1,6 @@
 /**
  * 
- * Copyright 2019 California Institute of Technology ("Caltech").
+ * Copyright 2019-2022 California Institute of Technology ("Caltech").
  * U.S. Government sponsorship acknowledged.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,6 +20,7 @@ package io.opencaesar.oml.provider;
 
 
 import io.opencaesar.oml.SameAsPredicate;
+
 import java.util.Collection;
 import java.util.List;
 
