@@ -1,0 +1,20 @@
+ext.title = 'Oml Edit'
+description = 'Java API for Oml Edit'
+
+apply from: "${rootDir}/gradle/maven-deployment.gradle"
+
+dependencies {
+	compile project(':io.opencaesar.oml')
+	compile "org.eclipse.platform:org.eclipse.core.runtime:${versions.coreRuntime}"
+	compile "org.eclipse.emf:org.eclipse.emf.ecore:${versions.emfEcore}"
+	compile "org.eclipse.emf:org.eclipse.emf.edit:${versions.emfEdit}"
+}
+
+sourceSets {
+	main {
+		java.srcDirs = ['src', 'src-gen']
+		resources.srcDirs = ['src']
+	}
+}
+
+assemble.dependsOn javadoc

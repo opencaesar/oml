@@ -21,6 +21,7 @@ subprojects {
 	    codegen: '2.22.0',
 	    codegenEcore: '2.26.0',
 	    emfEcore: '2.24.0',
+	    emfEdit: '2.16.0',
 	    mwe2: '2.12.1',
 	    coreRuntime: '3.22.0',
 	    lsp4j: '0.7.0',
