@@ -13,7 +13,12 @@ dependencies {
 sourceSets {
 	main {
 		java.srcDirs = ['src', 'src-gen']
-		resources.srcDirs = ['src']
+		resources { 
+			srcDirs file('.') 
+			include 'plugin.xml' 
+			include 'plugin.properties' 
+			include 'icons/**/*'
+		}
 	}
 }
 

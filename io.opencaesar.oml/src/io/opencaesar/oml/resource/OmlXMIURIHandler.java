@@ -56,6 +56,7 @@ public class OmlXMIURIHandler extends URIHandlerImpl {
 					return URI.createURI(resolvedUri.toString() + SeparatorKind.HASH.toString() + qname[1]);
 				}
 			}
+			//COMPARE-MERGE-CASE
 			return URI.createHierarchicalURI(new String[]{qname[0]}, null, qname[1]);
 		}
 		return super.resolve(uri);
@@ -71,6 +72,9 @@ public class OmlXMIURIHandler extends URIHandlerImpl {
 				return URI.createURI(iri);
 			}
 			throw new RuntimeException("References to <" + uri + "> do not have a corresponding import statement");
+		} else if (uri.fragment() != null) {
+			// Reverse of COMPARE-MERGE-CASE above
+			return URI.createURI(uri.toString().replace('#', ':'));
 		}
 		return super.deresolve(uri);
 	}

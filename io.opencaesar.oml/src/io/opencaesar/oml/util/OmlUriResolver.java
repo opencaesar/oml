@@ -277,15 +277,17 @@ final class OmlUriResolver {
         for (URI uri : folderUris) {
         	catalogCache.put(uri, catalog);
         	File folder = toFile(uri);
-            try {
-                WatchKey key = folder.toPath().register(watcher, 
-                        StandardWatchEventKinds.ENTRY_CREATE,
-                        StandardWatchEventKinds.ENTRY_DELETE, 
-                        StandardWatchEventKinds.ENTRY_MODIFY);
-                watched.put(key, folder);
-            } catch (IOException e) {
-                break;
-            }
+        	if (folder != null) {
+	            try {
+	                WatchKey key = folder.toPath().register(watcher, 
+	                        StandardWatchEventKinds.ENTRY_CREATE,
+	                        StandardWatchEventKinds.ENTRY_DELETE, 
+	                        StandardWatchEventKinds.ENTRY_MODIFY);
+	                watched.put(key, folder);
+	            } catch (IOException e) {
+	                break;
+	            }
+        	}
         };
         return catalog;
     }
