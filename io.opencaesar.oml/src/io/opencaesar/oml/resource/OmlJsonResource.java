@@ -19,9 +19,7 @@
 package io.opencaesar.oml.resource;
 
 import java.text.SimpleDateFormat;
-import java.util.HashMap;
 import java.util.Locale;
-import java.util.Map;
 import java.util.TimeZone;
 
 import org.eclipse.emf.common.notify.Adapter;
@@ -29,10 +27,10 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emfcloud.jackson.module.EMFModule;
 import org.eclipse.emfcloud.jackson.resource.JsonResource;
 
-import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
@@ -44,8 +42,6 @@ import io.opencaesar.oml.OmlPackage;
  * @author elaasar
  */
 public class OmlJsonResource extends JsonResource {
-
-    private final Map<String, EObject> idToEObjectMap = new HashMap<>();
 
     /**
 	 * @param uri the URI of the resource
@@ -61,15 +57,18 @@ public class OmlJsonResource extends JsonResource {
 	public OmlJsonResource(URI uri, boolean useCatalog) {
 		super(uri);
         
-		// setup the intrinsic id cache
-        setIntrinsicIDToEObjectMap(idToEObjectMap);
+		// keep the id cache in sync
     	setTrackingModification(true);
 
-    	if (useCatalog) {
-			setObjectMapper(setupDefaultMapper(null));
-		}
+    	setObjectMapper(setupDefaultMapper(useCatalog));
 	}
 
+	@Override
+	protected void attachedHelper(final EObject eObject) {
+        setID(eObject, EcoreUtil.getID(eObject));
+		super.attachedHelper(eObject);
+	}
+	   
     @Override
 	protected Adapter createModificationTrackingAdapter() {
         return new ResourceImpl.ModificationTrackingAdapter() {
@@ -78,28 +77,30 @@ public class OmlJsonResource extends JsonResource {
         		super.notifyChanged(notification);
         		if (notification.getFeature() == OmlPackage.Literals.MEMBER__NAME) {
         			if (notification.getOldValue() != null) {
-        				idToEObjectMap.remove(notification.getOldValue());
+        				getIDToEObjectMap().remove(notification.getOldValue());
         			}
 					if (notification.getNewValue() != null) {
-						idToEObjectMap.put((String)notification.getNewValue(), (EObject)notification.getNotifier());
+						getIDToEObjectMap().put((String)notification.getNewValue(), (EObject)notification.getNotifier());
                     }
                 }
             }
         };
 	}
 
-	private ObjectMapper setupDefaultMapper(final JsonFactory factory) {
-		final ObjectMapper mapper = new ObjectMapper(factory);
+	private ObjectMapper setupDefaultMapper(boolean useCatalog) {
+		final ObjectMapper mapper = new ObjectMapper(null);
 		// same as emf
 		final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.ENGLISH);
 		dateFormat.setTimeZone(TimeZone.getDefault());
 
-		var module = new EMFModule();
-		module.setUriHandler(new OmlJsonURIHandler(this));
-
 		mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
 		mapper.setDateFormat(dateFormat);
 		mapper.setTimeZone(TimeZone.getDefault());
+
+		var module = new EMFModule();
+		if (useCatalog) {
+			module.setUriHandler(new OmlJsonURIHandler(this));
+		}
 		mapper.registerModule(module);
 
 		return mapper;

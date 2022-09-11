@@ -20,7 +20,7 @@ package io.opencaesar.oml.resource;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emfcloud.jackson.resource.JsonResourceFactory;
+import org.eclipse.emf.ecore.resource.impl.ResourceFactoryImpl;
 
 import io.opencaesar.oml.util.OmlConstants;
 
@@ -29,7 +29,7 @@ import io.opencaesar.oml.util.OmlConstants;
  * 
  * @author elaasar
  */
-public class OmlJsonResourceFactory extends JsonResourceFactory {
+public class OmlJsonResourceFactory extends ResourceFactoryImpl {
 
 	private boolean useCatalog;
 

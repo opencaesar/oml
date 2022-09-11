@@ -192,22 +192,15 @@ final class OmlUriResolver {
             return null;
         }
         
-        URI resolvedUri = null;
         for (String extension : OmlConstants.OML_EXTENSIONS) {
-            resolvedUri = URI.createURI(resolved+'.'+extension);
+        	URI resolvedUri = URI.createURI(resolved+'.'+extension);
             if (exists(rs, resolvedUri)) {
-            	break;
+            	return resolvedUri;
             }
         }
 
-        if (resolvedUri == null) {
-	        resolvedUri = URI.createURI(resolved);
-	        if (!exists(rs, resolvedUri)) {
-	            return null;
-	        }
-        }
-        
-        return resolvedUri;
+        URI resolvedUri = URI.createURI(resolved);
+        return exists(rs, resolvedUri) ? resolvedUri : null;
     }
     
    public synchronized Set<URI> getResolvableUris(Resource contextResource) {
