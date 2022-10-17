@@ -607,10 +607,10 @@ public final class OmlSearch extends OmlIndex {
     // Instance
     
     /**
-     * Finds classifiers that are types of the given instance
+     * Finds classifiers that are direct types of the given instance
      * 
      * @param instance the given instance
-     * @return a list of classifiers that are types of the given instance
+     * @return a list of classifiers that are direcf types of the given instance
      */
     public static List<Classifier> findTypes(Instance instance) {
         List<Classifier> types = new ArrayList<>();
@@ -624,6 +624,22 @@ public final class OmlSearch extends OmlIndex {
         return types;
     }
     
+    /**
+     * Finds classifiers that are direct or indirect types of the given instance
+     * 
+     * @param instance the given instance
+     * @return a list of classifiers that are direct or indirect types of the given instance
+     */
+    public static List<Classifier> findAllTypes(Instance instance) {
+        List<Classifier> types = findTypes(instance).stream()
+        		.flatMap(t -> OmlSearch.findAllSuperTerms(t, true).stream())
+        		.filter(t -> t instanceof Classifier)
+        		.map(t -> (Classifier)t)
+        		.distinct()
+        		.collect(Collectors.toList());
+        return types;
+    }
+
     /**
      * Finds if the given instance is typed directly by the given type
      * 

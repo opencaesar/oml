@@ -18,14 +18,45 @@
  */
 package io.opencaesar.oml.dsl.resource;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.ECrossReferenceAdapter;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.resource.SynchronizedXtextResourceSet;
 
 public class OmlSynchronizedXtextResourceSet extends SynchronizedXtextResourceSet {
 
 	public OmlSynchronizedXtextResourceSet() {
 		super();
-		eAdapters().add(new ECrossReferenceAdapter());
+		eAdapters().add(new OmlCrossReferenceAdapter());
 	}
+	
+	private class OmlCrossReferenceAdapter extends ECrossReferenceAdapter {
+		
+		@Override
+		protected InverseCrossReferencer createInverseCrossReferencer() {
+			return new OmlInverseCrossReferencer();
+		}
 
+		private class OmlInverseCrossReferencer extends InverseCrossReferencer {
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			protected void add(InternalEObject eObject, EReference eReference, EObject crossReferencedEObject) {
+				if (crossReferencedEObject.eIsProxy()) {
+					crossReferencedEObject = EcoreUtil.resolve(crossReferencedEObject, eObject);
+				}
+				super.add(eObject, eReference, crossReferencedEObject);
+			}
+			
+			@Override
+		    public void remove(EObject eObject, EReference eReference, EObject crossReferencedEObject) {
+				if (crossReferencedEObject.eIsProxy()) {
+					crossReferencedEObject = EcoreUtil.resolve(crossReferencedEObject, eObject);
+				}
+				super.remove(eObject, eReference, crossReferencedEObject);
+			}			
+		}
+	}
 }

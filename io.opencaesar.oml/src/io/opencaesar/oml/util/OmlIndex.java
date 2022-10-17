@@ -116,7 +116,7 @@ public class OmlIndex {
         Collection<Setting> settings;
         if (adapter != null) {
             // the fast method
-            settings = adapter.getInverseReferences(element, true);
+            settings = adapter.getInverseReferences(element);
         } else {
             // the slow method
             settings = searchForReferences(element);
