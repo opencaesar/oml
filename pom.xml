@@ -26,10 +26,10 @@
 	    <tycho-version>2.2.0</tycho-version>
 	    <tycho-extras-version>${tycho-version}</tycho-extras-version>
 	    <maven-antrun-plugin.version>1.7</maven-antrun-plugin.version>
-        <eclipse-version>2021-03</eclipse-version>
-        <xtextVersion>2.19.0</xtextVersion>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+        <eclipse-version>2022-09</eclipse-version>
+        <xtextVersion>2.28.0</xtextVersion>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         
         <!-- Define overridable properties for tycho-surefire-plugin -->
