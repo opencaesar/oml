@@ -1,9 +1,12 @@
+ext.title = 'Oml Textual Language Test'
+description = 'Test for Oml textual language'
+
 dependencies {
-	compile project(':io.opencaesar.oml.dsl')
-	testCompile "org.junit.jupiter:junit-jupiter-api:${versions.junitJupiter}"
-	testRuntime "org.junit.jupiter:junit-jupiter-engine:${versions.junitJupiter}"
-	testCompile "org.eclipse.xtext:org.eclipse.xtext.testing:${versions.xtext}"
-	testCompile "org.eclipse.xtext:org.eclipse.xtext.xbase.testing:${versions.xtext}"
+	api project(':io.opencaesar.oml.dsl')
+	testImplementation 'org.junit.jupiter:junit-jupiter-api'
+	testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+	testImplementation "org.eclipse.xtext:org.eclipse.xtext.testing:${xtextVersion}"
+	testImplementation "org.eclipse.xtext:org.eclipse.xtext.xbase.testing:${xtextVersion}"
 }
 test {
 	useJUnitPlatform()
@@ -11,5 +14,3 @@ test {
 //this is an eclipse plugin project
 eclipseClasspath.enabled=false
 cleanEclipseClasspath.enabled=false
-
-sourceSets.test.resources.srcDirs = ['resources']

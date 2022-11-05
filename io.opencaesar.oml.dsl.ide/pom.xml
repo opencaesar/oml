@@ -11,8 +11,8 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
+			<groupId>ch.qos.reload4j</groupId>
+			<artifactId>reload4j</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.lsp4j</groupId>
@@ -22,21 +22,9 @@
 			<groupId>org.ow2.asm</groupId>
 			<artifactId>asm</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.ow2.asm</groupId>
-			<artifactId>asm-commons</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.ow2.asm</groupId>
-			<artifactId>asm-tree</artifactId>
-		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>org.eclipse.xtend</groupId>
-				<artifactId>xtend-maven-plugin</artifactId>
-			</plugin>
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>target-platform-configuration</artifactId>
@@ -47,6 +35,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>
+				<version>3.3.0</version>
 				<executions>
 					<execution>
 						<id>copy-dependencies</id>
@@ -55,6 +44,7 @@
 							<goal>copy-dependencies</goal>
 						</goals>
 						<configuration>
+							<excludeGroupIds>p2.eclipse-feature</excludeGroupIds>
 							<outputDirectory>${project.build.directory}/libs</outputDirectory>
 							<overWriteReleases>false</overWriteReleases>
 							<overWriteSnapshots>false</overWriteSnapshots>
@@ -87,9 +77,27 @@
 								org.eclipse.jdt.debug,
 								org.eclipse.jdt.launching,
 								org.eclipse.text,
-								org.eclipse.xtend.typesystem.emf,
-								org.eclipse.xtend,
 							</excludeArtifactIds>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>com.googlecode.addjars-maven-plugin</groupId>
+				<artifactId>addjars-maven-plugin</artifactId>
+				<version>1.0.5</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>add-jars</goal>
+						</goals>
+						<configuration>
+							<resources>
+								<resource>
+									<directory>${project.build.directory}/libs</directory>
+								</resource>
+							</resources>
 						</configuration>
 					</execution>
 				</executions>
@@ -97,7 +105,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-shade-plugin</artifactId>
-				<version>3.2.1</version>
+				<version>3.3.0</version>
 				<configuration>
 					<transformers>
 						<transformer
@@ -108,15 +116,18 @@
 							implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
 							<resource>plugin.properties</resource>
 						</transformer>
+						<transformer 
+							implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer">
+						</transformer>
 					</transformers>
 					<artifactSet>
 						<excludes><!-- avoid duplicate inclusion due to addjars plugin -->
 							<exclude>*:io.opencaesar.oml.dsl.ide-org.eclipse.lsp4j*</exclude>
 							<exclude>*:io.opencaesar.oml.dsl.ide-org.eclipse.xtext.xbase.lib*</exclude>
-							<exclude>*:io.opencaesar.oml.dsl.ide-org.eclipse.xtend.lib*</exclude>
 							<exclude>*:io.opencaesar.oml.dsl.ide-com.google.guava*</exclude>
 							<exclude>*:io.opencaesar.oml.dsl.ide-asm*</exclude>
 							<exclude>*:io.opencaesar.oml.dsl.ide-log4j*</exclude>
+							<exclude>*:io.opencaesar.oml.dsl.ide-reload4j*</exclude>
 							<exclude>*:io.opencaesar.oml.dsl.ide-org.objectweb.asm*</exclude>
 							<exclude>*:io.opencaesar.oml.dsl.ide-org.apache.log4j*</exclude>
 						</excludes>
@@ -136,7 +147,6 @@
 								<exclude>about.*</exclude>
 								<exclude>about_files/*</exclude>
 								<exclude>plugin.xml</exclude>
-								<exclude>modeling32.png</exclude>
 								<exclude>systembundle.properties</exclude>
 								<exclude>profile.list</exclude>
 								<exclude>**/*._trace</exclude>

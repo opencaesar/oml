@@ -8,8 +8,4 @@
 	</parent>
 	<artifactId>io.opencaesar.oml.target</artifactId>
 	<packaging>eclipse-target-definition</packaging>
-
-
-	<dependencies>
-	</dependencies>
 </project>

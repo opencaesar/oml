@@ -7,27 +7,27 @@ Bundle-Version: 1.3.4
 Bundle-SymbolicName: io.opencaesar.oml.dsl.ui; singleton:=true
 Bundle-ActivationPolicy: lazy
 Bundle-Localization: plugin
-Require-Bundle: org.eclipse.ui,
- org.eclipse.ui.editors,
- org.eclipse.ui.ide,
- org.eclipse.compare,
- org.eclipse.xtext.ui,
+Require-Bundle: org.eclipse.xtext.ui,
  org.eclipse.xtext.ui.shared,
  org.eclipse.xtext.ui.codetemplates.ui,
+ org.eclipse.ui.editors,
+ org.eclipse.ui.ide,
+ org.eclipse.ui,
+ org.eclipse.compare,
  org.eclipse.xtext.common.types.ui,
  org.eclipse.xtext.builder,
- org.eclipse.xtend.lib;bundle-version="2.14.0",
  io.opencaesar.oml,
  io.opencaesar.oml.dsl,
- io.opencaesar.oml.dsl.ide,
- org.eclipse.xtext.xbase.lib;bundle-version="2.14.0"
+ io.opencaesar.oml.dsl.ide 
 Import-Package: org.apache.log4j
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Export-Package: io.opencaesar.oml.dsl.ui,
  io.opencaesar.oml.dsl.ui.contentassist,
+ io.opencaesar.oml.dsl.ui.hyperlinking,
  io.opencaesar.oml.dsl.ui.internal,
  io.opencaesar.oml.dsl.ui.labeling,
  io.opencaesar.oml.dsl.ui.outline,
  io.opencaesar.oml.dsl.ui.quickfix,
+ io.opencaesar.oml.dsl.ui.resource,
  io.opencaesar.oml.dsl.validation
 Bundle-Activator: io.opencaesar.oml.dsl.ui.internal.DslActivator

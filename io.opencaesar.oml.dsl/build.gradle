@@ -1,32 +1,33 @@
-ext.title = 'Oml Language'
+ext.title = 'Oml Textual Language'
 description = 'Language infrastructure for Oml based on Xtext'
 
 apply from: "${rootDir}/gradle/maven-deployment.gradle"
 
+dependencies {
+	api project(':io.opencaesar.oml')
+	api "org.eclipse.xtext:org.eclipse.xtext:${xtextVersion}"
+	api "org.eclipse.xtext:org.eclipse.xtext.xbase:${xtextVersion}"
+	api "com.google.code.gson:gson:${gsonVersion}"
+}
+
 configurations {
 	mwe2 {
-		extendsFrom compile
+		extendsFrom compileClasspath
 	}
 }
 
 dependencies {
-	compile project(':io.opencaesar.oml')
-	compile "org.eclipse.xtext:org.eclipse.xtext:${versions.xtext}"
-	compile "org.eclipse.xtext:org.eclipse.xtext.xbase:${versions.xtext}"
-	compile "com.google.code.gson:gson:${versions.gson}"
-
-	mwe2 "org.eclipse.emf:org.eclipse.emf.mwe2.launch:${versions.mwe2}"
-	mwe2 "org.eclipse.xtext:org.eclipse.xtext.common.types:${versions.xtext}"
-	mwe2 "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:${versions.xtext}"
-	mwe2 "org.eclipse.xtext:xtext-antlr-generator:${versions.antlr}"
-	// added for Xcore support
-    mwe2 ("org.eclipse.emf:org.eclipse.emf.ecore.xcore:${versions.xcore}"){
+	mwe2 "org.eclipse.emf:org.eclipse.emf.mwe2.launch"
+	mwe2 "org.eclipse.xtext:org.eclipse.xtext.common.types:${xtextVersion}"
+	mwe2 "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:${xtextVersion}"
+	mwe2 "org.eclipse.xtext:xtext-antlr-generator"
+    mwe2 ("org.eclipse.emf:org.eclipse.emf.ecore.xcore:${xcoreVersion}"){
 		exclude group: 'org.antlr', module: 'antlr-runtime'
 	}
 }
 
 task generateXtextLanguage(type: JavaExec) {
-	main = 'org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher'
+	mainClass = 'org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher'
 	classpath = configurations.mwe2
 	inputs.file "src/io/opencaesar/oml/dsl/GenerateOml.mwe2"
 	inputs.file "src/io/opencaesar/oml/dsl/Oml.xtext"
@@ -36,7 +37,8 @@ task generateXtextLanguage(type: JavaExec) {
 	args += "rootPath=/${projectDir}/.."
 }
 
-generateXtext.dependsOn(generateXtextLanguage)
+processResources.dependsOn(generateXtextLanguage)
+compileJava.dependsOn(generateXtextLanguage)
 clean.dependsOn(cleanGenerateXtextLanguage)
 eclipse.classpath.plusConfigurations += [configurations.mwe2]
 //this is an eclipse plugin project

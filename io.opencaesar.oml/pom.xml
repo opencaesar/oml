@@ -9,4 +9,18 @@
 	<artifactId>io.opencaesar.oml</artifactId>
 	<packaging>eclipse-plugin</packaging>
 
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-compiler-plugin</artifactId>
+				<configuration>
+					<excludeResources>
+						<excludeResource>**/*.xcore</excludeResource>
+					</excludeResources>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
 </project>

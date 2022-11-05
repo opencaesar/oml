@@ -1,9 +1,9 @@
-#Sat Oct 24 16:27:14 PDT 2020
-generateGeneratedAnnotation=false
-includeDateInGenerated=false
-useJavaCompilerCompliance=false
-eclipse.preferences.version=1
-generateSuppressWarnings=true
+#Tue Nov 01 12:12:56 PDT 2022
 BuilderConfiguration.is_project_specific=true
 ValidatorConfiguration.is_project_specific=true
-targetJavaVersion=Java11
+eclipse.preferences.version=1
+generateGeneratedAnnotation=false
+generateSuppressWarnings=true
+includeDateInGenerated=false
+targetJavaVersion=JAVA11
+useJavaCompilerCompliance=false

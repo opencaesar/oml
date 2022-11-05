@@ -1,0 +1,12 @@
+ext.title = 'Oml IDE Support'
+description = 'IDE support for Oml'
+
+dependencies {
+	api project(':io.opencaesar.oml.dsl')
+	api "org.eclipse.xtext:org.eclipse.xtext.ide:${xtextVersion}"
+	api "org.eclipse.xtext:org.eclipse.xtext.xbase.ide:${xtextVersion}"
+}
+
+//this is an eclipse plugin project
+eclipseClasspath.enabled=false
+cleanEclipseClasspath.enabled=false

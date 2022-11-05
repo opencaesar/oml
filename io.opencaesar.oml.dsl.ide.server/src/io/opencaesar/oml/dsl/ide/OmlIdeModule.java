@@ -38,9 +38,9 @@ import com.google.inject.name.Names;
 import io.opencaesar.oml.dsl.ide.contentassist.OmlIdeContentProposalProvider;
 import io.opencaesar.oml.dsl.ide.contentassist.OmlIdeCrossRefProposalProvider;
 import io.opencaesar.oml.dsl.ide.server.codeActions.OmlCodeActionService;
-import io.opencaesar.oml.dsl.ide.symbols.OmlDocumentSymbolKindProvider;
-import io.opencaesar.oml.dsl.ide.symbols.OmlDocumentSymbolNameProvider;
-import io.opencaesar.oml.dsl.ide.symbols.OmlHierarchicalDocumentSymbolService;
+import io.opencaesar.oml.dsl.ide.server.symbols.OmlDocumentSymbolKindProvider;
+import io.opencaesar.oml.dsl.ide.server.symbols.OmlDocumentSymbolNameProvider;
+import io.opencaesar.oml.dsl.ide.server.symbols.OmlHierarchicalDocumentSymbolService;
 import io.opencaesar.oml.dsl.resource.OmlSynchronizedXtextResourceSet;
 
 /**

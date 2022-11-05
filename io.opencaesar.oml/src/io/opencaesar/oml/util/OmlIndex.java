@@ -78,7 +78,6 @@ import io.opencaesar.oml.ScalarPropertyRangeRestrictionAxiom;
 import io.opencaesar.oml.ScalarPropertyReference;
 import io.opencaesar.oml.ScalarPropertyRestrictionAxiom;
 import io.opencaesar.oml.ScalarPropertyValueAssertion;
-import io.opencaesar.oml.SemanticProperty;
 import io.opencaesar.oml.SpecializableTerm;
 import io.opencaesar.oml.SpecializationAxiom;
 import io.opencaesar.oml.Structure;
@@ -214,20 +213,6 @@ public class OmlIndex {
         return findInverseReferencers(target, RelationEntity.class, OmlPackage.Literals.RELATION_ENTITY__TARGET);
     }
     
-    // SemanticProperty
-    
-    /**
-     * Finds semantic properties referencing the given classifier as domain
-     * 
-     * @param domain The referenced classifier
-     * @return A list of referencing semantic properties
-     * @deprecated use {@link OmlSearch#findSemanticPropertiesWithDomain(Classifier)}
-     */
-    @Deprecated(since = "1.1")
-    public static List<SemanticProperty> findSemanticPropertiesWithDomain(Classifier domain) {
-    	return OmlSearch.findSemanticPropertiesWithDomain(domain);
-    }
-
     // ScalarProperty
     
     /**

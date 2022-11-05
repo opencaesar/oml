@@ -14,5 +14,4 @@ Require-Bundle: org.eclipse.xtext.ide,
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Export-Package: io.opencaesar.oml.dsl.ide,
  io.opencaesar.oml.dsl.ide.contentassist.antlr,
- io.opencaesar.oml.dsl.ide.contentassist.antlr.internal,
- io.opencaesar.oml.dsl.ide.contentassist.antlr.lexer
+ io.opencaesar.oml.dsl.ide.contentassist.antlr.internal
