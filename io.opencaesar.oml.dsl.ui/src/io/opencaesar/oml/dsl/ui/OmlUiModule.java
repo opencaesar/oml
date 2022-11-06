@@ -29,42 +29,40 @@ import org.eclipse.xtext.ui.editor.hyperlinking.HyperlinkHelper;
  */
 @SuppressWarnings("all")
 public class OmlUiModule extends AbstractOmlUiModule {
-  public static class FQNPrefixMatcher2 extends FQNPrefixMatcher {
-    @Override
-    public boolean isCandidateMatchingPrefix(final String name, final String prefix) {
-      this.setDelimiter('#');
-      boolean _isCandidateMatchingPrefix = super.isCandidateMatchingPrefix(name, prefix);
-      if (_isCandidateMatchingPrefix) {
-        return true;
-      }
-      this.setDelimiter('/');
-      boolean _isCandidateMatchingPrefix_1 = super.isCandidateMatchingPrefix(name, prefix);
-      if (_isCandidateMatchingPrefix_1) {
-        return true;
-      }
-      this.setDelimiter(':');
-      boolean _isCandidateMatchingPrefix_2 = super.isCandidateMatchingPrefix(name, prefix);
-      if (_isCandidateMatchingPrefix_2) {
-        return true;
-      }
-      return false;
-    }
-  }
 
-  public Class<? extends XtextResourceSet> bindXtextResourceSet() {
-    return OmlSynchronizedXtextResourceSet.class;
-  }
+	public Class<? extends XtextResourceSet> bindXtextResourceSet() {
+		return OmlSynchronizedXtextResourceSet.class;
+	}
 
-  @Override
-  public Class<? extends PrefixMatcher> bindPrefixMatcher() {
-    return OmlUiModule.FQNPrefixMatcher2.class;
-  }
+	@Override
+	public Class<? extends PrefixMatcher> bindPrefixMatcher() {
+		return OmlUiModule.FQNPrefixMatcher2.class;
+	}
 
-  public Class<? extends HyperlinkHelper> bindHyperlinkHelper() {
-    return OmlHyperlinkHelper.class;
-  }
+	public Class<? extends HyperlinkHelper> bindHyperlinkHelper() {
+		return OmlHyperlinkHelper.class;
+	}
 
-  public OmlUiModule(final AbstractUIPlugin plugin) {
-    super(plugin);
-  }
+	public OmlUiModule(final AbstractUIPlugin plugin) {
+		super(plugin);
+	}
+
+	public static class FQNPrefixMatcher2 extends FQNPrefixMatcher {
+		@Override
+		public boolean isCandidateMatchingPrefix(final String name, final String prefix) {
+			this.setDelimiter('#');
+			if (super.isCandidateMatchingPrefix(name, prefix)) {
+				return true;
+			}
+			this.setDelimiter('/');
+			if (super.isCandidateMatchingPrefix(name, prefix)) {
+				return true;
+			}
+			this.setDelimiter(':');
+			if (super.isCandidateMatchingPrefix(name, prefix)) {
+				return true;
+			}
+			return false;
+		}
+	}
 }

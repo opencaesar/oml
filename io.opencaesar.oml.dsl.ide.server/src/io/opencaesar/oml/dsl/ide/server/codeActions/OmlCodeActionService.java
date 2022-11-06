@@ -16,18 +16,17 @@
  */
 package io.opencaesar.oml.dsl.ide.server.codeActions;
 
-import com.google.common.base.Objects;
-import io.opencaesar.oml.Member;
-import io.opencaesar.oml.Vocabulary;
-import io.opencaesar.oml.VocabularyStatement;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.lsp4j.CodeAction;
-import org.eclipse.lsp4j.CodeActionContext;
 import org.eclipse.lsp4j.CodeActionParams;
 import org.eclipse.lsp4j.Command;
 import org.eclipse.lsp4j.Position;
@@ -35,128 +34,72 @@ import org.eclipse.lsp4j.Range;
 import org.eclipse.lsp4j.TextEdit;
 import org.eclipse.lsp4j.WorkspaceEdit;
 import org.eclipse.lsp4j.jsonrpc.messages.Either;
-import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.ide.server.Document;
 import org.eclipse.xtext.ide.server.codeActions.ICodeActionService2;
-import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
-import org.eclipse.xtext.xbase.lib.Pair;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+
+import io.opencaesar.oml.Vocabulary;
+import io.opencaesar.oml.util.OmlRead;
 
 @SuppressWarnings("all")
 public class OmlCodeActionService implements ICodeActionService2 {
-  private static final String CREATE_CONCEPT_KIND = "sprotty.create.concept";
 
-  @Override
-  public List<Either<Command, CodeAction>> getCodeActions(final ICodeActionService2.Options options) {
-    List<Either<Command, CodeAction>> _xblockexpression = null;
-    {
-      EObject root = IterableExtensions.<EObject>head(options.getResource().getContents());
-      List<Either<Command, CodeAction>> _xifexpression = null;
-      if ((root instanceof Vocabulary)) {
-        _xifexpression = this.createCodeActions(root, options.getCodeActionParams(), options.getDocument());
-      } else {
-        _xifexpression = CollectionLiterals.<Either<Command, CodeAction>>emptyList();
-      }
-      _xblockexpression = _xifexpression;
-    }
-    return _xblockexpression;
-  }
+	private static final String CREATE_CONCEPT_KIND = "sprotty.create.concept";
 
-  private List<Either<Command, CodeAction>> _createCodeActions(final EObject element, final CodeActionParams params, final Document document) {
-    return CollectionLiterals.<Either<Command, CodeAction>>emptyList();
-  }
+	@Override
+	public List<Either<Command, CodeAction>> getCodeActions(ICodeActionService2.Options options) {
+		if (options.getResource() != null) {
+			var root = options.getResource().getContents().iterator().next();
+			if (root instanceof Vocabulary)
+				return createCodeActions(root, options.getCodeActionParams(), options.getDocument());
+		}
+		return Collections.emptyList();
+	}
 
-  private List<Either<Command, CodeAction>> _createCodeActions(final Vocabulary vocabulary, final CodeActionParams params, final Document document) {
-    final ArrayList<Either<Command, CodeAction>> result = CollectionLiterals.<Either<Command, CodeAction>>newArrayList();
-    final Position position = params.getRange().getEnd();
-    position.setCharacter(0);
-    boolean _matchesContext = this.matchesContext(OmlCodeActionService.CREATE_CONCEPT_KIND, params);
-    if (_matchesContext) {
-      CodeAction _codeAction = new CodeAction();
-      final Procedure1<CodeAction> _function = (CodeAction it) -> {
-        it.setKind(OmlCodeActionService.CREATE_CONCEPT_KIND);
-        it.setTitle("new Concept");
-        URI _uRI = vocabulary.eResource().getURI();
-        StringConcatenation _builder = new StringConcatenation();
-        _builder.append("    ");
-        _builder.append("concept ");
-        final Function1<VocabularyStatement, String> _function_1 = (VocabularyStatement el) -> {
-          String _xifexpression = null;
-          if ((el instanceof Member)) {
-            _xifexpression = ((Member)el).getName();
-          } else {
-            _xifexpression = "";
-          }
-          return _xifexpression;
-        };
-        String _newName = this.getNewName("concept", ListExtensions.<VocabularyStatement, String>map(vocabulary.getOwnedStatements(), _function_1));
-        _builder.append(_newName, "    ");
-        _builder.append("\n", "    ");
-        it.setEdit(this.createInsertWorkspaceEdit(_uRI, position, _builder.toString()));
-      };
-      CodeAction _doubleArrow = ObjectExtensions.<CodeAction>operator_doubleArrow(_codeAction, _function);
-      result.add(Either.<Command, CodeAction>forRight(_doubleArrow));
-    }
-    return result;
-  }
+	private List<Either<Command, CodeAction>> createCodeActions(EObject obj, CodeActionParams params, Document document) {
+		if (obj instanceof Vocabulary) {
+			return _createCodeActions((Vocabulary) obj, params, document);
+		}
+		return Collections.emptyList();
+	}
 
-  private boolean matchesContext(final String kind, final CodeActionParams params) {
-    CodeActionContext _context = params.getContext();
-    List<String> _only = null;
-    if (_context!=null) {
-      _only=_context.getOnly();
-    }
-    boolean _tripleEquals = (_only == null);
-    if (_tripleEquals) {
-      return true;
-    } else {
-      final Function1<String, Boolean> _function = (String it) -> {
-        return Boolean.valueOf(kind.startsWith(it));
-      };
-      return IterableExtensions.<String>exists(params.getContext().getOnly(), _function);
-    }
-  }
+	private List<Either<Command, CodeAction>> _createCodeActions(Vocabulary vocabulary, CodeActionParams params, Document document) {
+		final var result = new ArrayList<Either<Command, CodeAction>>();
+		final var position = params.getRange().getEnd();
+		position.setCharacter(0);
+		if (matchesContext(OmlCodeActionService.CREATE_CONCEPT_KIND, params)) {
+			var action = new CodeAction();
+			action.setKind(CREATE_CONCEPT_KIND);
+			action.setTitle("new Concept");
+			String uniqueName = getNewName("concept", OmlRead.getMembers(vocabulary).stream().map(i -> i.getName()).collect(Collectors.toList()));
+			action.setEdit(createInsertWorkspaceEdit(vocabulary.eResource().getURI(), position, "\nconcept "+uniqueName+"\n"));
+			result.add(Either.forRight(action));
+		}
+		return result;
+	}
 
-  private WorkspaceEdit createInsertWorkspaceEdit(final URI uri, final Position position, final String text) {
-    WorkspaceEdit _workspaceEdit = new WorkspaceEdit();
-    final Procedure1<WorkspaceEdit> _function = (WorkspaceEdit it) -> {
-      String _string = uri.toString();
-      Range _range = new Range(position, position);
-      TextEdit _textEdit = new TextEdit(_range, text);
-      Pair<String, List<TextEdit>> _mappedTo = Pair.<String, List<TextEdit>>of(_string, Collections.<TextEdit>unmodifiableList(CollectionLiterals.<TextEdit>newArrayList(_textEdit)));
-      it.setChanges(Collections.<String, List<TextEdit>>unmodifiableMap(CollectionLiterals.<String, List<TextEdit>>newHashMap(_mappedTo)));
-    };
-    return ObjectExtensions.<WorkspaceEdit>operator_doubleArrow(_workspaceEdit, _function);
-  }
+	private boolean matchesContext(String kind, CodeActionParams params) {
+		if (params.getContext() == null || params.getContext().getOnly() == null) {
+			return true;
+		} 
+		return params.getContext().getOnly().stream().anyMatch(it -> kind.startsWith(it));
+	}
 
-  private String getNewName(final String prefix, final List<? extends String> siblings) {
-    for (int i = 0;; i++) {
-      {
-        final String currentName = (prefix + Integer.valueOf(i));
-        final Function1<String, Boolean> _function = (String it) -> {
-          return Boolean.valueOf(Objects.equal(it, currentName));
-        };
-        boolean _exists = IterableExtensions.exists(siblings, _function);
-        boolean _not = (!_exists);
-        if (_not) {
-          return currentName;
-        }
-      }
-    }
-  }
+	private WorkspaceEdit createInsertWorkspaceEdit(URI uri, Position position, String text) {
+		List<TextEdit> edits = Arrays.asList(new TextEdit(new Range(position, position), text));
+		Map<String, List<TextEdit>> changes = new HashMap<>();
+		changes.put(uri.toString(), edits);
+		WorkspaceEdit workspaceEdit = new WorkspaceEdit();
+		workspaceEdit.setChanges(changes);
+		return workspaceEdit;
+	}
 
-  private List<Either<Command, CodeAction>> createCodeActions(final EObject vocabulary, final CodeActionParams params, final Document document) {
-    if (vocabulary instanceof Vocabulary) {
-      return _createCodeActions((Vocabulary)vocabulary, params, document);
-    } else if (vocabulary != null) {
-      return _createCodeActions(vocabulary, params, document);
-    } else {
-      throw new IllegalArgumentException("Unhandled parameter types: " +
-        Arrays.<Object>asList(vocabulary, params, document).toString());
-    }
-  }
+	private String getNewName(String prefix, List<String> siblings) {
+		String name = prefix;
+		int i = 0;
+		while (siblings.contains(name)) {
+			name = prefix + (++i);
+		}
+		return name;
+	}
+
 }

@@ -16,11 +16,6 @@
  */
 package io.opencaesar.oml.dsl.ide.diagram.launch;
 
-import com.google.gson.GsonBuilder;
-import com.google.inject.Binder;
-import io.opencaesar.oml.dsl.ide.diagram.FilterAction;
-import io.opencaesar.oml.dsl.resource.OmlSynchronizedXtextResourceSet;
-import java.util.Map;
 import org.eclipse.elk.alg.layered.options.LayeredMetaDataProvider;
 import org.eclipse.elk.core.util.persistence.ElkGraphResourceFactory;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -34,39 +29,31 @@ import org.eclipse.xtext.ide.server.ServerModule;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.Modules2;
 
+import com.google.gson.GsonBuilder;
+
+import io.opencaesar.oml.dsl.ide.diagram.FilterAction;
+import io.opencaesar.oml.dsl.resource.OmlSynchronizedXtextResourceSet;
+
 @SuppressWarnings("all")
 public class OmlLanguageServerSetup extends DiagramLanguageServerSetup {
-  @Override
-  public void setupLanguages() {
-    LayeredMetaDataProvider _layeredMetaDataProvider = new LayeredMetaDataProvider();
-    ElkLayoutEngine.initialize(_layeredMetaDataProvider);
-    Map<String, Object> _extensionToFactoryMap = Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap();
-    ElkGraphResourceFactory _elkGraphResourceFactory = new ElkGraphResourceFactory();
-    _extensionToFactoryMap.put("elkg", _elkGraphResourceFactory);
-  }
 
-  @Override
-  public GsonBuilder configureGson(final GsonBuilder gsonBuilder) {
-    GsonBuilder _xblockexpression = null;
-    {
-      final ActionTypeAdapter.Factory factory = new ActionTypeAdapter.Factory();
-      factory.addActionKind(FilterAction.KIND, FilterAction.class);
-      GsonBuilder _registerTypeAdapterFactory = gsonBuilder.registerTypeAdapterFactory(factory);
-      EditActionTypeAdapterFactory _editActionTypeAdapterFactory = new EditActionTypeAdapterFactory();
-      GsonBuilder _registerTypeAdapterFactory_1 = _registerTypeAdapterFactory.registerTypeAdapterFactory(_editActionTypeAdapterFactory);
-      EnumTypeAdapter.Factory _factory = new EnumTypeAdapter.Factory();
-      _xblockexpression = _registerTypeAdapterFactory_1.registerTypeAdapterFactory(_factory);
-    }
-    return _xblockexpression;
-  }
+	@Override
+	public void setupLanguages() {
+		ElkLayoutEngine.initialize(new LayeredMetaDataProvider());
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("elkg", new ElkGraphResourceFactory());
+	}
 
-  @Override
-  public com.google.inject.Module getLanguageServerModule() {
-    ServerModule _serverModule = new ServerModule();
-    SyncDiagramServerModule _syncDiagramServerModule = new SyncDiagramServerModule();
-    final com.google.inject.Module _function = (Binder it) -> {
-      it.<XtextResourceSet>bind(XtextResourceSet.class).to(OmlSynchronizedXtextResourceSet.class);
-    };
-    return Modules2.mixin(_serverModule, _syncDiagramServerModule, _function);
-  }
+	@Override
+	public GsonBuilder configureGson(final GsonBuilder gsonBuilder) {
+		final var factory = new ActionTypeAdapter.Factory();
+		factory.addActionKind(FilterAction.KIND, FilterAction.class);
+		return gsonBuilder.registerTypeAdapterFactory(factory).registerTypeAdapterFactory(new EditActionTypeAdapterFactory()).registerTypeAdapterFactory(new EnumTypeAdapter.Factory());
+	}
+
+	@Override
+	public com.google.inject.Module getLanguageServerModule() {
+		return Modules2.mixin(new ServerModule(), new SyncDiagramServerModule(), it -> {
+			it.bind(XtextResourceSet.class).to(OmlSynchronizedXtextResourceSet.class);
+		});
+	}
 }

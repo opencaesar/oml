@@ -24,47 +24,37 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 
 @SuppressWarnings("all")
 public class IRIValueConverter extends AbstractValueConverter<String> {
-  @Override
-  public String toString(final String value) {
-    boolean _startsWith = value.startsWith("http://");
-    if (_startsWith) {
-      String _convertToJavaString = Strings.convertToJavaString(value, false);
-      String _plus = ("<" + _convertToJavaString);
-      return (_plus + ">");
-    } else {
-      return this.elseToString(value);
-    }
-  }
 
-  public String elseToString(final String value) {
-    return Strings.convertToJavaString(value, false);
-  }
+	@Override
+	public String toString(final String value) {
+		if (value.startsWith("http://")) {
+			return '<' + Strings.convertToJavaString(value, false) + '>';
+		} else {
+			return elseToString(value);
+		}
+	}
 
-  @Override
-  public String toValue(final String string, final INode node) {
-    if ((string == null)) {
-      return null;
-    }
-    try {
-      if ((string.startsWith("<") && string.endsWith(">"))) {
-        int _length = string.length();
-        int _minus = (_length - 1);
-        return Strings.convertFromJavaString(string.substring(1, _minus), true);
-      } else {
-        return this.elseToValue(string, node);
-      }
-    } catch (final Throwable _t) {
-      if (_t instanceof IllegalArgumentException) {
-        final IllegalArgumentException e = (IllegalArgumentException)_t;
-        String _message = e.getMessage();
-        throw new ValueConverterException(_message, node, e);
-      } else {
-        throw Exceptions.sneakyThrow(_t);
-      }
-    }
-  }
+	public String elseToString(final String value) {
+		return Strings.convertToJavaString(value, false);
+	}
 
-  public String elseToValue(final String string, final INode node) {
-    return Strings.convertFromJavaString(string, true);
-  }
+	@Override
+	public String toValue(final String string, final INode node) {
+		if (string == null) {
+			return null;
+		}
+		try {
+			if (string.startsWith("<") && string.endsWith(">")) {
+				return Strings.convertFromJavaString(string.substring(1, string.length() - 1), true);
+			} else {
+				return elseToValue(string, node);
+			}
+		} catch (IllegalArgumentException e) {
+			throw new ValueConverterException(e.getMessage(), node, e);
+		}
+	}
+
+	public String elseToValue(final String string, final INode node) {
+		return Strings.convertFromJavaString(string, true);
+	}
 }

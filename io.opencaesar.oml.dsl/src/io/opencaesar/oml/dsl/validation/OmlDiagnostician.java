@@ -38,11 +38,11 @@ public class OmlDiagnostician extends CancelableDiagnostician {
 		if (eObject.eIsProxy()) {
 			return "";
 		} else if (eObject instanceof Member) {
-			name = ((Member)eObject).getAbbreviatedIri();
+			name = ((Member) eObject).getAbbreviatedIri();
 		} else if (eObject instanceof Ontology) {
-	    	name = ((Ontology)eObject).getNamespace();
-	    }
-	    return type + (name.length()>0 ? " "+name : "");
+			name = ((Ontology) eObject).getNamespace();
+		}
+		return type + (name.length() > 0 ? " " + name : "");
 	}
-	
+
 }

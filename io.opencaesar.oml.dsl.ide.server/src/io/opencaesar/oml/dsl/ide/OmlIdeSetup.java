@@ -33,5 +33,5 @@ public class OmlIdeSetup extends OmlStandaloneSetup {
 	public Injector createInjector() {
 		return Guice.createInjector(Modules2.mixin(new OmlRuntimeModule(), new OmlIdeModule(), new OmlDiagramModule()));
 	}
-	
+
 }

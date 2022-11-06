@@ -29,7 +29,7 @@ public class OmlDiagramGraphvizLayoutEngine extends ElkLayoutEngine {
 
 	@Override
 	public void layout(SModelRoot root, Action cause) {
-		if ((root instanceof SGraph)) {
+		if (root instanceof SGraph) {
 			final SprottyLayoutConfigurator configurator = new SprottyLayoutConfigurator();
 			
 			configurator

@@ -14,7 +14,6 @@ import org.eclipse.sprotty.xtext.IDiagramGenerator;
 import org.eclipse.sprotty.xtext.SIssueMarkerDecorator;
 import org.eclipse.sprotty.xtext.tracing.ITraceProvider;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.Extension;
 
 import com.google.inject.Inject;
 
@@ -45,6 +44,11 @@ import io.opencaesar.oml.Structure;
 import io.opencaesar.oml.StructuredPropertyCardinalityRestrictionAxiom;
 import io.opencaesar.oml.StructuredPropertyRangeRestrictionAxiom;
 import io.opencaesar.oml.StructuredPropertyValueRestrictionAxiom;
+import io.opencaesar.oml.dsl.ide.diagram.model.OmlCompartment;
+import io.opencaesar.oml.dsl.ide.diagram.model.OmlEdge;
+import io.opencaesar.oml.dsl.ide.diagram.model.OmlGraph;
+import io.opencaesar.oml.dsl.ide.diagram.model.OmlLabel;
+import io.opencaesar.oml.dsl.ide.diagram.model.OmlNode;
 import io.opencaesar.oml.util.OmlRead;
 import io.opencaesar.oml.util.OmlSwitch;
 
@@ -53,17 +57,13 @@ class OmlDiagramViewGenerator extends OmlSwitch<SModelElement> implements IDiagr
 	private static final Logger LOG = Logger.getLogger(OmlDiagramViewGenerator.class);
 
 	@Inject
-	@Extension
 	private ITraceProvider traceProvider;
 
 	@Inject
-	@Extension
 	private SIssueMarkerDecorator _sIssueMarkerDecorator;
 
-	@Extension
 	private IDiagramGenerator.Context context;
 
-	@Extension
 	private OmlOntologyDiagramView view;
 
 	private OmlGraph graph;
@@ -73,7 +73,7 @@ class OmlDiagramViewGenerator extends OmlSwitch<SModelElement> implements IDiagr
 	private Map<Element, SModelElement> semantic2diagram;
 
 	private OmlOntoloyDiagramScope scope;
-	
+
 	@Override
 	public SModelRoot generate(final IDiagramGenerator.Context context) {
 		try {
@@ -93,7 +93,7 @@ class OmlDiagramViewGenerator extends OmlSwitch<SModelElement> implements IDiagr
 			this.scope.entityAxioms.forEach((e, axs) -> {
 				axs.forEach(ax -> showAxiom(e, ax));
 			});
-			
+
 			return this.graph;
 		} catch (final Throwable t) {
 			if (t instanceof Exception) {
@@ -110,7 +110,7 @@ class OmlDiagramViewGenerator extends OmlSwitch<SModelElement> implements IDiagr
 	public SModelElement doSwitch(final EObject eObject) {
 		if (null == eObject)
 			return null;
-		
+
 		SModelElement s = semantic2diagram.get(eObject);
 		if (null != s)
 			return s;
@@ -123,15 +123,16 @@ class OmlDiagramViewGenerator extends OmlSwitch<SModelElement> implements IDiagr
 		final OmlNode node = view.createNode(o);
 		graph.getChildren().add(node);
 		traceAndMark(node, o, context);
-		
+
 		if ("NONE".equals(context.getState().getCurrentModel().getType())) {
 			context.getState().getExpandedElements().add(node.getId());
 		}
 		node.setExpanded(context.getState().getExpandedElements().contains(node.getId()));
 
-		// This will transitively show all imports since caseImport() below visits the imported ontology.
-		//OmlRead.getImportsWithSource(o).forEach(i -> doSwitch(i));
-		
+		// This will transitively show all imports since caseImport() below visits the
+		// imported ontology.
+		// OmlRead.getImportsWithSource(o).forEach(i -> doSwitch(i));
+
 		return node;
 	}
 
@@ -161,7 +162,7 @@ class OmlDiagramViewGenerator extends OmlSwitch<SModelElement> implements IDiagr
 			return s;
 
 		final OmlNode node = view.createNode(aspect);
-		
+
 		frame.getChildren().add(node);
 		traceAndMark(node, aspect, context);
 		addClassifierFeatures(aspect, node);
@@ -178,7 +179,7 @@ class OmlDiagramViewGenerator extends OmlSwitch<SModelElement> implements IDiagr
 			return s;
 
 		final OmlNode node = view.createNode(concept);
-		
+
 		frame.getChildren().add(node);
 		traceAndMark(node, concept, context);
 		addClassifierFeatures(concept, node);
@@ -197,10 +198,7 @@ class OmlDiagramViewGenerator extends OmlSwitch<SModelElement> implements IDiagr
 		final Entity s = entity.getSource();
 		final Entity t = entity.getTarget();
 
-		final List<KeyAxiom> keys = scope.entityAxioms.get(entity).stream()
-				.filter(a -> a instanceof KeyAxiom)
-				.map(a -> (KeyAxiom)a)
-				.collect(Collectors.toList());
+		final List<KeyAxiom> keys = scope.entityAxioms.get(entity).stream().filter(a -> a instanceof KeyAxiom).map(a -> (KeyAxiom) a).collect(Collectors.toList());
 
 		if (entity == s) {
 			final SModelElement ts = doSwitch(t);
@@ -308,7 +306,7 @@ class OmlDiagramViewGenerator extends OmlSwitch<SModelElement> implements IDiagr
 		if (null != s)
 			return s;
 
-		if (ri.getSources().size()==1 && ri.getTargets().size()==1) {
+		if (ri.getSources().size() == 1 && ri.getTargets().size() == 1) {
 			final SModelElement source = doSwitch(ri.getSources().get(0));
 			final SModelElement target = doSwitch(ri.getTargets().get(0));
 			if (null != source && null != target) {
@@ -356,20 +354,17 @@ class OmlDiagramViewGenerator extends OmlSwitch<SModelElement> implements IDiagr
 		} else if (ax instanceof RelationTargetRestrictionAxiom) {
 			showAxiomInternal(e, (RelationTargetRestrictionAxiom) ax);
 		} else {
-			throw new IllegalArgumentException("showAxiom: unhandled case for entity: " + e.eClass().getName()
-					+ " and axiom: " + ax.eClass().getName());
+			throw new IllegalArgumentException("showAxiom: unhandled case for entity: " + e.eClass().getName() + " and axiom: " + ax.eClass().getName());
 		}
 	}
 
 	private void showAxiomInternal(final Entity e, final SpecializationAxiom ax) {
 		final SModelElement specializingNode = semantic2diagram.get(e);
 		if (null == specializingNode)
-			throw new IllegalArgumentException(
-					"no entity node for showAxiom(SpecializationAxiom): " + e.getAbbreviatedIri());
+			throw new IllegalArgumentException("no entity node for showAxiom(SpecializationAxiom): " + e.getAbbreviatedIri());
 		final SModelElement specializedNode = semantic2diagram.get(ax.getSpecializedTerm());
 		if (null == specializedNode)
-			throw new IllegalArgumentException("no entity node for showAxiom(SpecializationAxiom): "
-					+ ax.getSpecializedTerm().getAbbreviatedIri());
+			throw new IllegalArgumentException("no entity node for showAxiom(SpecializationAxiom): " + ax.getSpecializedTerm().getAbbreviatedIri());
 		final OmlEdge edge = view.createEdge(ax, specializingNode, specializedNode);
 		frame.getChildren().add(edge);
 		traceAndMark(edge, ax, context);
@@ -378,8 +373,7 @@ class OmlDiagramViewGenerator extends OmlSwitch<SModelElement> implements IDiagr
 	private void showAxiomInternal(final Entity e, final KeyAxiom ax) {
 		final SModelElement node = semantic2diagram.get(e);
 		if (null == node)
-			throw new IllegalArgumentException(
-					"no entity node for showAxiom(KeyAxiom): " + e.getAbbreviatedIri());
+			throw new IllegalArgumentException("no entity node for showAxiom(KeyAxiom): " + e.getAbbreviatedIri());
 		OmlCompartment compartment = view.getAxiomCompartment(node);
 		if (null == compartment) {
 			compartment = view.createAxiomCompartment(e);
@@ -393,8 +387,7 @@ class OmlDiagramViewGenerator extends OmlSwitch<SModelElement> implements IDiagr
 	private void showAxiomInternal(final Entity e, final ScalarPropertyRangeRestrictionAxiom ax) {
 		final SModelElement source = semantic2diagram.get(e);
 		if (null == source)
-			throw new IllegalArgumentException("no entity node for showAxiom(ScalarPropertyRangeRestrictionAxiom) "
-					+ e.getAbbreviatedIri());
+			throw new IllegalArgumentException("no entity node for showAxiom(ScalarPropertyRangeRestrictionAxiom) " + e.getAbbreviatedIri());
 		OmlCompartment compartment = view.getAxiomCompartment(source);
 		if (null == compartment) {
 			compartment = view.createAxiomCompartment(e);
@@ -408,9 +401,7 @@ class OmlDiagramViewGenerator extends OmlSwitch<SModelElement> implements IDiagr
 	private void showAxiomInternal(final Entity e, final ScalarPropertyCardinalityRestrictionAxiom ax) {
 		final SModelElement source = semantic2diagram.get(e);
 		if (null == source)
-			throw new IllegalArgumentException(
-					"no entity node for showAxiom(ScalarPropertyCardinalityRestrictionAxiom) "
-							+ e.getAbbreviatedIri());
+			throw new IllegalArgumentException("no entity node for showAxiom(ScalarPropertyCardinalityRestrictionAxiom) " + e.getAbbreviatedIri());
 		OmlCompartment compartment = view.getAxiomCompartment(source);
 		if (null == compartment) {
 			compartment = view.createAxiomCompartment(e);
@@ -424,8 +415,7 @@ class OmlDiagramViewGenerator extends OmlSwitch<SModelElement> implements IDiagr
 	private void showAxiomInternal(final Entity e, final ScalarPropertyValueRestrictionAxiom ax) {
 		final SModelElement source = semantic2diagram.get(e);
 		if (null == source)
-			throw new IllegalArgumentException("no entity node for showAxiom(ScalarPropertyValueRestrictionAxiom) "
-					+ e.getAbbreviatedIri());
+			throw new IllegalArgumentException("no entity node for showAxiom(ScalarPropertyValueRestrictionAxiom) " + e.getAbbreviatedIri());
 		OmlCompartment compartment = view.getAxiomCompartment(source);
 		if (null == compartment) {
 			compartment = view.createAxiomCompartment(e);
@@ -439,8 +429,7 @@ class OmlDiagramViewGenerator extends OmlSwitch<SModelElement> implements IDiagr
 	private void showAxiomInternal(final Entity e, final StructuredPropertyRangeRestrictionAxiom ax) {
 		final SModelElement source = semantic2diagram.get(e);
 		if (null == source)
-			throw new IllegalArgumentException("no entity node for showAxiom(StructuredPropertyRangeRestrictionAxiom) "
-					+ e.getAbbreviatedIri());
+			throw new IllegalArgumentException("no entity node for showAxiom(StructuredPropertyRangeRestrictionAxiom) " + e.getAbbreviatedIri());
 		OmlCompartment compartment = view.getAxiomCompartment(source);
 		if (null == compartment) {
 			compartment = view.createAxiomCompartment(e);
@@ -454,9 +443,7 @@ class OmlDiagramViewGenerator extends OmlSwitch<SModelElement> implements IDiagr
 	private void showAxiomInternal(final Entity e, final StructuredPropertyCardinalityRestrictionAxiom ax) {
 		final SModelElement source = semantic2diagram.get(e);
 		if (null == source)
-			throw new IllegalArgumentException(
-					"no entity node for showAxiom(StructuredPropertyCardinalityRestrictionAxiom) "
-							+ e.getAbbreviatedIri());
+			throw new IllegalArgumentException("no entity node for showAxiom(StructuredPropertyCardinalityRestrictionAxiom) " + e.getAbbreviatedIri());
 		OmlCompartment compartment = view.getAxiomCompartment(source);
 		if (null == compartment) {
 			compartment = view.createAxiomCompartment(e);
@@ -470,8 +457,7 @@ class OmlDiagramViewGenerator extends OmlSwitch<SModelElement> implements IDiagr
 	private void showAxiomInternal(final Entity e, final StructuredPropertyValueRestrictionAxiom ax) {
 		final SModelElement source = semantic2diagram.get(e);
 		if (null == source)
-			throw new IllegalArgumentException("no entity node for showAxiom(StructuredPropertyValueRestrictionAxiom) "
-					+ e.getAbbreviatedIri());
+			throw new IllegalArgumentException("no entity node for showAxiom(StructuredPropertyValueRestrictionAxiom) " + e.getAbbreviatedIri());
 		OmlCompartment compartment = view.getAxiomCompartment(source);
 		if (null == compartment) {
 			compartment = view.createAxiomCompartment(e);
@@ -485,12 +471,10 @@ class OmlDiagramViewGenerator extends OmlSwitch<SModelElement> implements IDiagr
 	private void showAxiomInternal(final Entity e, final RelationRangeRestrictionAxiom ax) {
 		final SModelElement source = semantic2diagram.get(e);
 		if (null == source)
-			throw new IllegalArgumentException(
-					"no entity node for showAxiom(RelationRangeRestrictionAxiom): " + e.getAbbreviatedIri());
+			throw new IllegalArgumentException("no entity node for showAxiom(RelationRangeRestrictionAxiom): " + e.getAbbreviatedIri());
 		final SModelElement target = semantic2diagram.get(ax.getRange());
 		if (null == target)
-			throw new IllegalArgumentException("no entity node for showAxiom(RelationRangeRestrictionAxiom): "
-					+ ax.getRange().getAbbreviatedIri());
+			throw new IllegalArgumentException("no entity node for showAxiom(RelationRangeRestrictionAxiom): " + ax.getRange().getAbbreviatedIri());
 		final OmlEdge edge = view.createEdge(ax, source, target);
 		frame.getChildren().add(edge);
 		traceAndMark(edge, ax, context);
@@ -499,12 +483,10 @@ class OmlDiagramViewGenerator extends OmlSwitch<SModelElement> implements IDiagr
 	private void showAxiomInternal(final Entity e, final RelationCardinalityRestrictionAxiom ax) {
 		final SModelElement source = semantic2diagram.get(e);
 		if (null == source)
-			throw new IllegalArgumentException("no entity node for showAxiom(RelationCardinalityRestrictionAxiom): "
-					+ e.getAbbreviatedIri());
+			throw new IllegalArgumentException("no entity node for showAxiom(RelationCardinalityRestrictionAxiom): " + e.getAbbreviatedIri());
 		final SModelElement target = semantic2diagram.get(ax.getRelation().getRelationEntity().getTarget());
 		if (null == target)
-			throw new IllegalArgumentException("no entity node for showAxiom(RelationCardinalityRestrictionAxiom): "
-					+ ax.getRelation().getAbbreviatedIri());
+			throw new IllegalArgumentException("no entity node for showAxiom(RelationCardinalityRestrictionAxiom): " + ax.getRelation().getAbbreviatedIri());
 		final OmlEdge edge = view.createEdge(ax, source, target);
 		frame.getChildren().add(edge);
 		traceAndMark(edge, ax, context);
@@ -513,12 +495,10 @@ class OmlDiagramViewGenerator extends OmlSwitch<SModelElement> implements IDiagr
 	private void showAxiomInternal(final Entity e, final RelationTargetRestrictionAxiom ax) {
 		final SModelElement source = semantic2diagram.get(e);
 		if (null == source)
-			throw new IllegalArgumentException(
-					"no entity node for showAxiom(RelationTargetRestrictionAxiom): " + e.getAbbreviatedIri());
+			throw new IllegalArgumentException("no entity node for showAxiom(RelationTargetRestrictionAxiom): " + e.getAbbreviatedIri());
 		final SModelElement target = semantic2diagram.get(ax.getTarget());
 		if (null == target)
-			throw new IllegalArgumentException("no entity node for showAxiom(RelationTargetRestrictionAxiom): "
-					+ ax.getTarget().getAbbreviatedIri());
+			throw new IllegalArgumentException("no entity node for showAxiom(RelationTargetRestrictionAxiom): " + ax.getTarget().getAbbreviatedIri());
 		final OmlEdge edge = view.createEdge(ax, source, target);
 		frame.getChildren().add(edge);
 		traceAndMark(edge, ax, context);
@@ -532,29 +512,25 @@ class OmlDiagramViewGenerator extends OmlSwitch<SModelElement> implements IDiagr
 	}
 
 	private void addClassifierFeatures(final Classifier cls, final OmlNode node) {
-		scope.scalarProperties.get(cls).stream()
-			.sorted((p1, p2) -> p1.getName().compareTo(p2.getName()))
-			.forEach(f -> {
-				if (null == semantic2diagram.get(f)) {
-					OmlCompartment compartment = view.getPropertyCompartment(node);
-					if (null == compartment) {
-						compartment = view.createPropertyCompartment(cls);
-						node.getChildren().add(compartment);
-					}
-					final OmlLabel label = view.createLabel(cls, f);
-					compartment.getChildren().add(label);
-					traceAndMark(label, f, context);
+		scope.scalarProperties.get(cls).stream().sorted((p1, p2) -> p1.getName().compareTo(p2.getName())).forEach(f -> {
+			if (null == semantic2diagram.get(f)) {
+				OmlCompartment compartment = view.getPropertyCompartment(node);
+				if (null == compartment) {
+					compartment = view.createPropertyCompartment(cls);
+					node.getChildren().add(compartment);
 				}
-			});
-		scope.structuredProperties.get(cls).stream()
-			.sorted((p1, p2) -> p1.getName().compareTo(p2.getName()))
-			.forEach(f -> {
-				if (null == semantic2diagram.get(f)) {
-					final SModelElement source = doSwitch(cls);
-					final SModelElement target = doSwitch(f.getRange());
-					final OmlEdge edge = view.createEdge(cls, f, source, target);
-					frame.getChildren().add(edge);
-					traceAndMark(edge, f, context);
+				final OmlLabel label = view.createLabel(cls, f);
+				compartment.getChildren().add(label);
+				traceAndMark(label, f, context);
+			}
+		});
+		scope.structuredProperties.get(cls).stream().sorted((p1, p2) -> p1.getName().compareTo(p2.getName())).forEach(f -> {
+			if (null == semantic2diagram.get(f)) {
+				final SModelElement source = doSwitch(cls);
+				final SModelElement target = doSwitch(f.getRange());
+				final OmlEdge edge = view.createEdge(cls, f, source, target);
+				frame.getChildren().add(edge);
+				traceAndMark(edge, f, context);
 			}
 		});
 	}
@@ -577,8 +553,7 @@ class OmlDiagramViewGenerator extends OmlSwitch<SModelElement> implements IDiagr
 		});
 	}
 
-	private <T extends SModelElement> T traceAndMark(final T sElement, final Element element,
-			final IDiagramGenerator.Context context) {
+	private <T extends SModelElement> T traceAndMark(final T sElement, final Element element, final IDiagramGenerator.Context context) {
 		semantic2diagram.put(element, sElement);
 		return _sIssueMarkerDecorator.addIssueMarkers(traceProvider.trace(sElement, element), element, context);
 	}

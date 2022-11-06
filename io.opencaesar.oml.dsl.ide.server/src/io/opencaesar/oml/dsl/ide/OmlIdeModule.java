@@ -59,7 +59,7 @@ public class OmlIdeModule extends AbstractOmlIdeModule {
 	public Class<? extends XtextResourceSet> bindXtextResourceSet() {
 		return OmlSynchronizedXtextResourceSet.class;
 	}
-	
+
 	public Class<? extends HierarchicalDocumentSymbolService> bindHierarchicalDocumentSymbolService() {
 		return OmlHierarchicalDocumentSymbolService.class;
 	}
@@ -71,7 +71,7 @@ public class OmlIdeModule extends AbstractOmlIdeModule {
 	public Class<? extends DocumentSymbolNameProvider> bindDocumentSymbolNameProvider() {
 		return OmlDocumentSymbolNameProvider.class;
 	}
-	
+
 	public Class<? extends ICodeActionService2> bindICodeActionService() {
 		return OmlCodeActionService.class;
 	}
@@ -91,7 +91,7 @@ public class OmlIdeModule extends AbstractOmlIdeModule {
 	static public class FQNPrefixMatcher2 extends FQNPrefixMatcher {
 
 		private String delimiter;
-		
+
 		@Override
 		public boolean isCandidateMatchingPrefix(String name, String prefix) {
 			delimiter = "#";

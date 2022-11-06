@@ -22,27 +22,23 @@ import org.eclipse.sprotty.xtext.ReconnectAction;
 
 @SuppressWarnings("all")
 public class OmlDiagramServer extends LanguageAwareDiagramServer {
-  @Override
-  public void handleAction(final Action action) {
-    String _kind = action.getKind();
-    if (_kind != null) {
-      switch (_kind) {
-        case FilterAction.KIND:
-          this.handle(((FilterAction) action));
-          break;
-        case ReconnectAction.KIND:
-          super.handleAction(action);
-          break;
-      }
-    }
-    super.handleAction(action);
-  }
 
-  protected void handle(final FilterAction action) {
-    String _data = action.getData();
-    String _plus = ("FilterAction.data = " + _data);
-    System.out.println(_plus);
-    this.getOptions().put("filterAction", action.getData());
-    this.getDiagramLanguageServer().getDiagramUpdater().updateDiagram(this);
-  }
+	@Override
+	public void handleAction(final Action action) {
+		switch (action.getKind()) {
+		case FilterAction.KIND:
+			this.handle(((FilterAction) action));
+			break;
+		case ReconnectAction.KIND:
+			super.handleAction(action);
+			break;
+		}
+		super.handleAction(action);
+	}
+
+	protected void handle(final FilterAction action) {
+		System.out.println("FilterAction.data = " + action.getData());
+		this.getOptions().put("filterAction", action.getData());
+		this.getDiagramLanguageServer().getDiagramUpdater().updateDiagram(this);
+	}
 }

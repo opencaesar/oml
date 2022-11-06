@@ -23,36 +23,37 @@ import org.eclipse.xtext.conversion.ValueConverter;
 
 @SuppressWarnings("all")
 public class OmlValueConverterService extends DefaultTerminalConverters {
-  @Inject
-  private NAMESPACEValueConverter namespaceValueConverter;
 
-  @Inject
-  private IRIValueConverter iriValueConverter;
+	@Inject
+	private NAMESPACEValueConverter namespaceValueConverter;
 
-  @Inject
-  private RefValueConverter refValueConverter;
+	@Inject
+	private IRIValueConverter iriValueConverter;
 
-  @Inject
-  private STRINGValueConverter stringValueConverter2;
+	@Inject
+	private RefValueConverter refValueConverter;
 
-  @ValueConverter(rule = "NAMESPACE")
-  public IValueConverter<String> TerminalsNAMESPACE() {
-    return this.namespaceValueConverter;
-  }
+	@Inject
+	private STRINGValueConverter stringValueConverter2;
 
-  @ValueConverter(rule = "IRI")
-  public IValueConverter<String> TerminalsIRI() {
-    return this.iriValueConverter;
-  }
+	@ValueConverter(rule = "NAMESPACE")
+	public IValueConverter<String> TerminalsNAMESPACE() {
+		return namespaceValueConverter;
+	}
 
-  @ValueConverter(rule = "Ref")
-  public IValueConverter<String> TerminalsRef() {
-    return this.refValueConverter;
-  }
+	@ValueConverter(rule = "IRI")
+	public IValueConverter<String> TerminalsIRI() {
+		return iriValueConverter;
+	}
 
-  @ValueConverter(rule = "STRING")
-  @Override
-  public IValueConverter<String> TerminalsSTRING() {
-    return this.stringValueConverter2;
-  }
+	@ValueConverter(rule = "Ref")
+	public IValueConverter<String> TerminalsRef() {
+		return refValueConverter;
+	}
+
+	@ValueConverter(rule = "STRING")
+	@Override
+	public IValueConverter<String> TerminalsSTRING() {
+		return stringValueConverter2;
+	}
 }

@@ -25,13 +25,13 @@ import io.opencaesar.oml.dsl.ide.diagram.launch.OmlLanguageServerSetup;
 
 @SuppressWarnings("all")
 public class OmlRunSocketServer extends DiagramServerSocketLauncher {
-	
-  @Override
-  public DiagramLanguageServerSetup createSetup() {
-    return new OmlLanguageServerSetup();
-  }
-  
-  public static void main(final String... args) {
-    new OmlRunSocketServer().run(args);
-  }
+
+	@Override
+	public DiagramLanguageServerSetup createSetup() {
+		return new OmlLanguageServerSetup();
+	}
+
+	public static void main(final String... args) {
+		new OmlRunSocketServer().run(args);
+	}
 }

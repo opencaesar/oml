@@ -16,6 +16,9 @@
  */
 package io.opencaesar.oml.dsl.ide.server.symbols;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.ide.server.symbol.DocumentSymbolMapper;
+
 import io.opencaesar.oml.AnnotationPropertyReference;
 import io.opencaesar.oml.AspectReference;
 import io.opencaesar.oml.ConceptReference;
@@ -28,84 +31,36 @@ import io.opencaesar.oml.RelationReference;
 import io.opencaesar.oml.RuleReference;
 import io.opencaesar.oml.ScalarPropertyReference;
 import io.opencaesar.oml.StructuredPropertyReference;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.ide.server.symbol.DocumentSymbolMapper;
 
 @SuppressWarnings("all")
 public class OmlDocumentSymbolNameProvider extends DocumentSymbolMapper.DocumentSymbolNameProvider {
-  @Override
-  public String getName(final EObject object) {
-    boolean _matched = false;
-    if (object instanceof Ontology) {
-      _matched=true;
-      return ((Ontology)object).getIri();
-    }
-    if (!_matched) {
-      if (object instanceof Member) {
-        _matched=true;
-        return ((Member)object).getName();
-      }
-    }
-    if (!_matched) {
-      if (object instanceof RelationReference) {
-        _matched=true;
-        return ((RelationReference)object).getRelation().getName();
-      }
-    }
-    if (!_matched) {
-      if (object instanceof RuleReference) {
-        _matched=true;
-        return ((RuleReference)object).getRule().getName();
-      }
-    }
-    if (!_matched) {
-      if (object instanceof AnnotationPropertyReference) {
-        _matched=true;
-        return ((AnnotationPropertyReference)object).getProperty().getName();
-      }
-    }
-    if (!_matched) {
-      if (object instanceof AspectReference) {
-        _matched=true;
-        return ((AspectReference)object).getAspect().getName();
-      }
-    }
-    if (!_matched) {
-      if (object instanceof ConceptReference) {
-        _matched=true;
-        return ((ConceptReference)object).getConcept().getName();
-      }
-    }
-    if (!_matched) {
-      if (object instanceof RelationEntityReference) {
-        _matched=true;
-        return ((RelationEntityReference)object).getEntity().getName();
-      }
-    }
-    if (!_matched) {
-      if (object instanceof EnumeratedScalarReference) {
-        _matched=true;
-        return ((EnumeratedScalarReference)object).getScalar().getName();
-      }
-    }
-    if (!_matched) {
-      if (object instanceof FacetedScalarReference) {
-        _matched=true;
-        return ((FacetedScalarReference)object).getScalar().getName();
-      }
-    }
-    if (!_matched) {
-      if (object instanceof ScalarPropertyReference) {
-        _matched=true;
-        return ((ScalarPropertyReference)object).getProperty().getName();
-      }
-    }
-    if (!_matched) {
-      if (object instanceof StructuredPropertyReference) {
-        _matched=true;
-        return ((StructuredPropertyReference)object).getProperty().getName();
-      }
-    }
-    return "<unnamed>";
-  }
+
+	@Override public String getName(EObject object) {
+		if (object instanceof Ontology)
+			return ((Ontology) object).getIri();
+		if (object instanceof Member)
+			return ((Member) object).getName();
+		if (object instanceof RelationReference)
+			return ((RelationReference) object).getRelation().getName();
+		if (object instanceof RuleReference)
+			return ((RuleReference) object).getRule().getName();
+		if (object instanceof AnnotationPropertyReference)
+			return ((AnnotationPropertyReference) object).getProperty().getName();
+		if (object instanceof AspectReference)
+			return ((AspectReference) object).getAspect().getName();
+		if (object instanceof ConceptReference)
+			return ((ConceptReference) object).getConcept().getName();
+		if (object instanceof RelationEntityReference)
+			return ((RelationEntityReference) object).getEntity().getName();
+		if (object instanceof EnumeratedScalarReference)
+			return ((EnumeratedScalarReference) object).getScalar().getName();
+		if (object instanceof FacetedScalarReference)
+			return ((FacetedScalarReference) object).getScalar().getName();
+		if (object instanceof ScalarPropertyReference)
+			return ((ScalarPropertyReference) object).getProperty().getName();
+		if (object instanceof StructuredPropertyReference)
+			return ((StructuredPropertyReference) object).getProperty().getName();
+		return "<unnamed>";
+	}
+
 }

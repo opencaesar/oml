@@ -57,10 +57,10 @@ class OmlOntoloyDiagramScope {
 	private Mode mode;
 	private final Ontology ontology;
 	private final DiagramVisitor visitor;
-	
+
 	private final Set<Ontology> allImportedOntologies;
 	private final Set<Element> allImportedElements;
-	
+
 	private final Map<Aspect, Set<Element>> aspects;
 	private final Map<Concept, Set<Element>> concepts;
 	private final Map<RelationEntity, Set<Element>> relationEntities;
@@ -68,14 +68,15 @@ class OmlOntoloyDiagramScope {
 	private final Map<Scalar, Set<Element>> scalars;
 	private final Map<Structure, Set<Element>> structures;
 	private final Set<SemanticProperty> allSemanticProperties;
-	
+
 	final Map<Classifier, Set<ScalarProperty>> scalarProperties;
 	final Map<Classifier, Set<StructuredProperty>> structuredProperties;
 	final Map<Entity, Set<Axiom>> entityAxioms;
-	
-	// For a ConceptInstance or RelationInstance, the set of Assertions or RelationInstances.
+
+	// For a ConceptInstance or RelationInstance, the set of Assertions or
+	// RelationInstances.
 	final Map<NamedInstance, Set<Element>> instanceAssertions;
-	
+
 	private final Map<StructureInstance, Set<Assertion>> structureAssertions;
 	private final Set<Element> secondPhase;
 
@@ -125,8 +126,7 @@ class OmlOntoloyDiagramScope {
 	}
 
 	public boolean classifierHasFeaturesOrEdges(Classifier cls) {
-		final boolean hasFeaturesOrEdges = !scalarProperties.get(cls).isEmpty() || !structuredProperties.get(cls).isEmpty()
-				|| !entityAxioms.get(cls).isEmpty();
+		final boolean hasFeaturesOrEdges = !scalarProperties.get(cls).isEmpty() || !structuredProperties.get(cls).isEmpty() || !entityAxioms.get(cls).isEmpty();
 		if (cls instanceof RelationEntity) {
 			final RelationEntity re = (RelationEntity) cls;
 			return hasFeaturesOrEdges || !relationIncidentElements.get(re).isEmpty();
@@ -140,12 +140,8 @@ class OmlOntoloyDiagramScope {
 			TreeIterator<EObject> i = o.eAllContents();
 			while (i.hasNext()) {
 				EObject obj = i.next();
-				if (obj instanceof Axiom ||
-					obj instanceof Type ||
-					obj instanceof SemanticProperty ||
-					obj instanceof NamedInstance ||
-					obj instanceof Assertion)
-					allImportedElements.add((Element)obj);
+				if (obj instanceof Axiom || obj instanceof Type || obj instanceof SemanticProperty || obj instanceof NamedInstance || obj instanceof Assertion)
+					allImportedElements.add((Element) obj);
 			}
 		}
 	}
@@ -160,7 +156,7 @@ class OmlOntoloyDiagramScope {
 		for (Iterator<EObject> i = ontology.eAllContents(); i.hasNext();) {
 			EObject obj = i.next();
 			if (obj instanceof Element) {
-				visitor.doSwitch((Element)obj);
+				visitor.doSwitch((Element) obj);
 			}
 		}
 		mode = Mode.Phase2;
@@ -194,10 +190,7 @@ class OmlOntoloyDiagramScope {
 		if (!structuredProperties.containsKey(cls)) {
 			structuredProperties.put(cls, new HashSet<>());
 		}
-		OmlSearch.findAllSuperTerms(cls, true).stream()
-				.map(t -> (Classifier)t)
-				.flatMap(c -> OmlSearch.findSemanticPropertiesWithDomain(c).stream())
-				.filter(p -> allImportedElements.contains(p))
+		OmlSearch.findAllSuperTerms(cls, true).stream().map(t -> (Classifier) t).flatMap(c -> OmlSearch.findSemanticPropertiesWithDomain(c).stream()).filter(p -> allImportedElements.contains(p))
 				.forEach(p -> allSemanticProperties.add(p));
 	}
 
@@ -210,28 +203,27 @@ class OmlOntoloyDiagramScope {
 	}
 
 	private void phase2ScanAllClassifierProperties(final Classifier cls) {
-		OmlSearch.findAllSuperTerms(cls, true).stream()
-			.map(t -> (Classifier)t).forEach(parent -> {
-				OmlSearch.findSemanticPropertiesWithDomain(parent).forEach(p -> {
-					if (allImportedElements.contains(p)) {
-						if (p instanceof ScalarProperty) {
-							ScalarProperty sp = (ScalarProperty) p;
-							if (includes(parent)) {
-								phase2AddClassifierScalarProperty(parent, sp);
-							} else {
-								phase2AddClassifierScalarProperty(cls, sp);
-							}
-						} else if (p instanceof StructuredProperty) {
-							StructuredProperty sp = (StructuredProperty) p;
-							if (includes(parent)) {
-								phase2AdClassifierStructuredProperty(parent, sp);
-							} else {
-								phase2AdClassifierStructuredProperty(cls, sp);
-							}
+		OmlSearch.findAllSuperTerms(cls, true).stream().map(t -> (Classifier) t).forEach(parent -> {
+			OmlSearch.findSemanticPropertiesWithDomain(parent).forEach(p -> {
+				if (allImportedElements.contains(p)) {
+					if (p instanceof ScalarProperty) {
+						ScalarProperty sp = (ScalarProperty) p;
+						if (includes(parent)) {
+							phase2AddClassifierScalarProperty(parent, sp);
+						} else {
+							phase2AddClassifierScalarProperty(cls, sp);
+						}
+					} else if (p instanceof StructuredProperty) {
+						StructuredProperty sp = (StructuredProperty) p;
+						if (includes(parent)) {
+							phase2AdClassifierStructuredProperty(parent, sp);
+						} else {
+							phase2AdClassifierStructuredProperty(cls, sp);
 						}
 					}
-				});
+				}
 			});
+		});
 	}
 
 	private void phase1ScanEntityAxioms(final Entity e, final Set<Element> others) {
@@ -300,23 +292,23 @@ class OmlOntoloyDiagramScope {
 	}
 
 	private class DiagramVisitor extends OmlSwitch<OmlOntoloyDiagramScope> {
-	
+
 		@Override
 		public OmlOntoloyDiagramScope doSwitch(EObject eObject) {
 			OmlOntoloyDiagramScope result = OmlOntoloyDiagramScope.this;
 			switch (mode) {
-				case Phase1:
-					if (!includes(eObject)) {
-						result = super.doSwitch(eObject);
-					}
-					break;
-				case Phase2:
+			case Phase1:
+				if (!includes(eObject)) {
 					result = super.doSwitch(eObject);
-					break;
+				}
+				break;
+			case Phase2:
+				result = super.doSwitch(eObject);
+				break;
 			}
 			return result;
 		}
-	
+
 		public OmlOntoloyDiagramScope caseAspect(final Aspect a) {
 			switch (mode) {
 			case Phase1:
@@ -335,7 +327,7 @@ class OmlOntoloyDiagramScope {
 			}
 			return OmlOntoloyDiagramScope.this;
 		}
-	
+
 		public OmlOntoloyDiagramScope caseConcept(final Concept c) {
 			switch (mode) {
 			case Phase1:
@@ -354,7 +346,7 @@ class OmlOntoloyDiagramScope {
 			}
 			return OmlOntoloyDiagramScope.this;
 		}
-	
+
 		public OmlOntoloyDiagramScope caseRelationEntity(final RelationEntity e) {
 			switch (mode) {
 			case Phase1:
@@ -399,7 +391,7 @@ class OmlOntoloyDiagramScope {
 			}
 			return OmlOntoloyDiagramScope.this;
 		}
-	
+
 		public OmlOntoloyDiagramScope caseScalar(final Scalar s) {
 			switch (mode) {
 			case Phase1:
@@ -412,7 +404,7 @@ class OmlOntoloyDiagramScope {
 			}
 			return OmlOntoloyDiagramScope.this;
 		}
-	
+
 		public OmlOntoloyDiagramScope caseStructure(final Structure s) {
 			switch (mode) {
 			case Phase1:
@@ -428,7 +420,7 @@ class OmlOntoloyDiagramScope {
 			}
 			return OmlOntoloyDiagramScope.this;
 		}
-	
+
 		public void phase1ScanInstanceAssertions(final NamedInstance i, final Set<Element> others) {
 			OmlSearch.findPropertyValueAssertions(i).forEach(ax -> {
 				if (allImportedElements.contains(ax)) {
@@ -446,7 +438,7 @@ class OmlOntoloyDiagramScope {
 				}
 			});
 		}
-	
+
 		public OmlOntoloyDiagramScope caseConceptInstance(final ConceptInstance ci) {
 			switch (mode) {
 			case Phase1:
@@ -461,7 +453,7 @@ class OmlOntoloyDiagramScope {
 			}
 			return OmlOntoloyDiagramScope.this;
 		}
-	
+
 		public OmlOntoloyDiagramScope caseRelationInstance(final RelationInstance ri) {
 			switch (mode) {
 			case Phase1:
@@ -476,7 +468,7 @@ class OmlOntoloyDiagramScope {
 			}
 			return OmlOntoloyDiagramScope.this;
 		}
-	
+
 		public OmlOntoloyDiagramScope caseStructureInstance(final StructureInstance si) {
 			switch (mode) {
 			case Phase1:
@@ -489,27 +481,27 @@ class OmlOntoloyDiagramScope {
 			}
 			return OmlOntoloyDiagramScope.this;
 		}
-	
+
 		public OmlOntoloyDiagramScope caseAspectReference(final AspectReference a) {
 			return caseAspect(a.getAspect());
 		}
-	
+
 		public OmlOntoloyDiagramScope caseConceptReference(final ConceptReference c) {
 			return caseConcept(c.getConcept());
 		}
-	
+
 		public OmlOntoloyDiagramScope caseRelationEntityReference(final RelationEntityReference e) {
 			return caseRelationEntity(e.getEntity());
 		}
-	
+
 		public OmlOntoloyDiagramScope caseStructureReference(final StructureReference s) {
 			return caseStructure(s.getStructure());
 		}
-	
+
 		public OmlOntoloyDiagramScope caseConceptInstanceReference(final ConceptInstanceReference ci) {
 			return caseConceptInstance(ci.getInstance());
 		}
-	
+
 		public OmlOntoloyDiagramScope caseRelationInstanceReference(final RelationInstanceReference ri) {
 			return caseRelationInstance(ri.getInstance());
 		}

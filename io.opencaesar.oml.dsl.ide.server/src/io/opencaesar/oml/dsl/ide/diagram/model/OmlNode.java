@@ -14,12 +14,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.opencaesar.oml.dsl.ide.diagram;
+package io.opencaesar.oml.dsl.ide.diagram.model;
 
-import org.eclipse.sprotty.SCompartment;
+import org.eclipse.sprotty.SNode;
 import org.eclipse.xtend.lib.annotations.Accessors;
+import org.eclipse.xtext.xbase.lib.Pure;
 
 @Accessors
 @SuppressWarnings("all")
-public class OmlCompartment extends SCompartment {
+public class OmlNode extends SNode {
+
+	private String cssClass;
+
+	private Boolean expanded;
+
+	@Pure
+	public String getCssClass() {
+		return this.cssClass;
+	}
+
+	public void setCssClass(final String cssClass) {
+		this.cssClass = cssClass;
+	}
+
+	@Pure
+	public Boolean getExpanded() {
+		return this.expanded;
+	}
+
+	public void setExpanded(final Boolean expanded) {
+		this.expanded = expanded;
+	}
 }

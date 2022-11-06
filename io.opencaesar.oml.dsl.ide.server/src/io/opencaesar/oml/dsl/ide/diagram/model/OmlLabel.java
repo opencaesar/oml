@@ -14,12 +14,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.opencaesar.oml.dsl.ide.diagram;
+package io.opencaesar.oml.dsl.ide.diagram.model;
 
-import org.eclipse.sprotty.SEdge;
+import org.eclipse.sprotty.SLabel;
 import org.eclipse.xtend.lib.annotations.Accessors;
 
 @Accessors
 @SuppressWarnings("all")
-public class OmlEdge extends SEdge {
+public class OmlLabel extends SLabel {
 }

@@ -14,34 +14,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.opencaesar.oml.dsl.ide.diagram;
+package io.opencaesar.oml.dsl.ide.diagram.model;
 
-import org.eclipse.sprotty.SNode;
+import org.eclipse.sprotty.Layouting;
+import org.eclipse.sprotty.SShapeElement;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 @Accessors
 @SuppressWarnings("all")
-public class OmlNode extends SNode {
-  private String cssClass;
+public class OmlTag extends SShapeElement implements Layouting {
 
-  private Boolean expanded;
+	private String layout;
 
-  @Pure
-  public String getCssClass() {
-    return this.cssClass;
-  }
+	@Pure
+	@Override
+	public String getLayout() {
+		return this.layout;
+	}
 
-  public void setCssClass(final String cssClass) {
-    this.cssClass = cssClass;
-  }
-
-  @Pure
-  public Boolean getExpanded() {
-    return this.expanded;
-  }
-
-  public void setExpanded(final Boolean expanded) {
-    this.expanded = expanded;
-  }
+	public void setLayout(final String layout) {
+		this.layout = layout;
+	}
 }

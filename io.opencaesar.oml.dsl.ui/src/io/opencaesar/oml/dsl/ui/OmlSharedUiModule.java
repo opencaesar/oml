@@ -9,7 +9,8 @@ import org.eclipse.xtext.ui.resource.IResourceSetInitializer;
  */
 @SuppressWarnings("all")
 public class OmlSharedUiModule extends AbstractGenericModule {
-  public Class<? extends IResourceSetInitializer> bindIResourceSetInitializer() {
-    return OmlResourceSetInitializer.class;
-  }
+
+	public Class<? extends IResourceSetInitializer> bindIResourceSetInitializer() {
+		return OmlResourceSetInitializer.class;
+	}
 }

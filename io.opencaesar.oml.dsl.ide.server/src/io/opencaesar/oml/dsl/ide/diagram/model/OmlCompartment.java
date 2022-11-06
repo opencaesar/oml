@@ -14,12 +14,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.opencaesar.oml.dsl.ide.diagram;
+package io.opencaesar.oml.dsl.ide.diagram.model;
 
-import org.eclipse.sprotty.SButton;
+import org.eclipse.sprotty.SCompartment;
 import org.eclipse.xtend.lib.annotations.Accessors;
 
 @Accessors
 @SuppressWarnings("all")
-public class OmlButton extends SButton {
+public class OmlCompartment extends SCompartment {
 }

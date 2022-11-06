@@ -34,40 +34,38 @@ import org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider;
 
 @SuppressWarnings("all")
 public class OmlImportedNamespaceAwareLocalScopeProvider extends ImportedNamespaceAwareLocalScopeProvider {
-  @Inject
-  private IQualifiedNameConverter qnc;
 
-  @Override
-  public String getImportedNamespace(final EObject object) {
-    String _xifexpression = null;
-    if ((object instanceof Import)) {
-      _xifexpression = ((Import)object).getPrefix();
-    }
-    return _xifexpression;
-  }
+	@Inject
+	private IQualifiedNameConverter qnc;
 
-  @Override
-  public List<ImportNormalizer> internalGetImportedNamespaceResolvers(final EObject context, final boolean ignoreCase) {
-    if ((context instanceof Ontology)) {
-      final ArrayList<ImportNormalizer> importedNamespaceResolvers = Lists.<ImportNormalizer>newArrayList();
-      String _namespace = ((Ontology)context).getNamespace();
-      boolean _tripleNotEquals = (_namespace != null);
-      if (_tripleNotEquals) {
-        QualifiedName _qualifiedName = this.qnc.toQualifiedName(((Ontology)context).getNamespace());
-        String _prefix = ((Ontology)context).getPrefix();
-        OmlNamespaceImportNormalizer _omlNamespaceImportNormalizer = new OmlNamespaceImportNormalizer(_qualifiedName, _prefix, ignoreCase);
-        importedNamespaceResolvers.add(_omlNamespaceImportNormalizer);
-      }
-      final BiConsumer<String, String> _function = (String namespace, String prefix) -> {
-        if (((prefix != null) && (namespace != null))) {
-          QualifiedName _qualifiedName_1 = this.qnc.toQualifiedName(namespace);
-          OmlNamespaceImportNormalizer _omlNamespaceImportNormalizer_1 = new OmlNamespaceImportNormalizer(_qualifiedName_1, prefix, ignoreCase);
-          importedNamespaceResolvers.add(_omlNamespaceImportNormalizer_1);
-        }
-      };
-      OmlRead.getImportPrefixes(((Ontology)context)).forEach(_function);
-      return importedNamespaceResolvers;
-    }
-    return Collections.emptyList();
-  }
+	@Override
+	public String getImportedNamespace(EObject object) {
+		if (object instanceof Import) {
+			return ((Import)object).getPrefix();
+		}
+		return null;
+	}
+
+	@Override
+	public List<ImportNormalizer> internalGetImportedNamespaceResolvers(EObject context, boolean ignoreCase) {
+		if (context instanceof Ontology) {
+			final var ontology = (Ontology) context;
+			final var importedNamespaceResolvers = new ArrayList<ImportNormalizer>();
+			
+			// add the current ontology
+			if (ontology.getNamespace() != null) {
+				importedNamespaceResolvers.add(new OmlNamespaceImportNormalizer(qnc.toQualifiedName(ontology.getNamespace()), ontology.getPrefix(), ignoreCase));
+			}
+		
+			// collect all local imports first (so they get priority)
+			OmlRead.getImportPrefixes(ontology).forEach((namespace, prefix) -> {
+				if (prefix != null && namespace != null) {
+					importedNamespaceResolvers.add(new OmlNamespaceImportNormalizer(qnc.toQualifiedName(namespace), prefix, ignoreCase));
+				}
+			});
+			
+			return importedNamespaceResolvers;
+		}
+		return Collections.emptyList();
+	}
 }

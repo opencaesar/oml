@@ -20,28 +20,28 @@ import org.eclipse.xtext.conversion.impl.QualifiedNameValueConverter;
 
 @SuppressWarnings("all")
 public class ABBREV_IRIValueConverter extends QualifiedNameValueConverter {
-  protected String getDelimiter() {
-    return ":";
-  }
 
-  @Override
-  public String getStringNamespaceDelimiter() {
-    return this.getDelimiter();
-  }
+	protected String getDelimiter() {
+		return ":";
+	}
 
-  @Override
-  public String getValueNamespaceDelimiter() {
-    return this.getDelimiter();
-  }
+	@Override
+	public String getStringNamespaceDelimiter() {
+		return getDelimiter();
+	}
 
-  @Override
-  public String toString(final String value) {
-    final String string = super.toString(value);
-    boolean _contains = string.contains(this.getDelimiter());
-    if (_contains) {
-      return string.replaceAll("^", "");
-    } else {
-      return string;
-    }
-  }
+	@Override
+	public String getValueNamespaceDelimiter() {
+		return getDelimiter();
+	}
+
+	@Override
+	public String toString(final String value) {
+		final String string = super.toString(value);
+		if (string.contains(getDelimiter())) {
+			return string.replaceAll("^", "");
+		} else {
+			return string;
+		}
+	}
 }

@@ -21,16 +21,17 @@ import org.eclipse.xtext.nodemodel.INode;
 
 @SuppressWarnings("all")
 public class RefValueConverter extends IRIValueConverter {
-  @Inject
-  private ABBREV_IRIValueConverter abbrev_iriValueConverter;
 
-  @Override
-  public String elseToString(final String value) {
-    return this.abbrev_iriValueConverter.toString(value);
-  }
+	@Inject
+	private ABBREV_IRIValueConverter abbrev_iriValueConverter;
 
-  @Override
-  public String elseToValue(final String string, final INode node) {
-    return this.abbrev_iriValueConverter.toValue(string, null);
-  }
+	@Override
+	public String elseToString(final String value) {
+		return abbrev_iriValueConverter.toString(value);
+	}
+
+	@Override
+	public String elseToValue(final String string, final INode node) {
+		return abbrev_iriValueConverter.toValue(string, null);
+	}
 }

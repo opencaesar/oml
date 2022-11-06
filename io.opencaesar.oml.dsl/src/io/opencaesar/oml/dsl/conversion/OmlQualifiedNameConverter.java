@@ -22,31 +22,31 @@ import org.eclipse.xtext.naming.QualifiedName;
 
 @SuppressWarnings("all")
 public class OmlQualifiedNameConverter implements IQualifiedNameConverter {
-  @Override
-  public String toString(final QualifiedName qualifiedName) {
-    return qualifiedName.toString("");
-  }
 
-  @Override
-  public QualifiedName toQualifiedName(final String qualifiedNameAsString) {
-    int index = qualifiedNameAsString.lastIndexOf("#");
-    if ((index == (-1))) {
-      index = qualifiedNameAsString.lastIndexOf("/");
-    }
-    if ((index == (-1))) {
-      index = qualifiedNameAsString.lastIndexOf(":");
-    }
-    if ((index == (-1))) {
-      return QualifiedName.create(qualifiedNameAsString);
-    }
-    final String base = qualifiedNameAsString.substring(0, index);
-    final String sep = qualifiedNameAsString.substring(index, (index + 1));
-    final String fragment = qualifiedNameAsString.substring((index + 1));
-    boolean _equals = Objects.equal(fragment, "");
-    if (_equals) {
-      return QualifiedName.create(base, sep);
-    } else {
-      return QualifiedName.create(base, sep, fragment);
-    }
-  }
+	@Override
+	public String toString(final QualifiedName qualifiedName) {
+		return qualifiedName.toString("");
+	}
+
+	@Override
+	public QualifiedName toQualifiedName(final String qualifiedNameAsString) {
+		var index = qualifiedNameAsString.lastIndexOf('#');
+		if (index == -1) {
+			index = qualifiedNameAsString.lastIndexOf('/');
+		}
+		if (index == -1) {
+			index = qualifiedNameAsString.lastIndexOf(':');
+		}
+		if (index == -1) {
+			return QualifiedName.create(qualifiedNameAsString);
+		}
+		final var base = qualifiedNameAsString.substring(0, index);
+		final var sep = qualifiedNameAsString.substring(index, index+1);
+		final var fragment = qualifiedNameAsString.substring(index+1);
+		if (fragment.equals("")) {
+			return QualifiedName.create(base, sep);
+		} else {
+			return QualifiedName.create(base, sep, fragment);
+		}
+	}
 }

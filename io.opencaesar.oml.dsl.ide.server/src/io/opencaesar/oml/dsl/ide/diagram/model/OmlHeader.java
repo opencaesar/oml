@@ -14,25 +14,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.opencaesar.oml.dsl.ide.diagram;
+package io.opencaesar.oml.dsl.ide.diagram.model;
 
-import org.eclipse.sprotty.Layouting;
-import org.eclipse.sprotty.SShapeElement;
+import org.eclipse.sprotty.SCompartment;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 @Accessors
 @SuppressWarnings("all")
-public class OmlTag extends SShapeElement implements Layouting {
-  private String layout;
+public class OmlHeader extends SCompartment {
 
-  @Pure
-  @Override
-  public String getLayout() {
-    return this.layout;
-  }
+	private String cssClass;
 
-  public void setLayout(final String layout) {
-    this.layout = layout;
-  }
+	@Pure
+	public String getCssClass() {
+		return this.cssClass;
+	}
+
+	public void setCssClass(final String cssClass) {
+		this.cssClass = cssClass;
+	}
 }

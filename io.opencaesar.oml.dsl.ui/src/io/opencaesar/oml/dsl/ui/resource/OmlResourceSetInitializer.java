@@ -26,18 +26,18 @@ import org.eclipse.emf.ecore.util.ECrossReferenceAdapter;
 import org.eclipse.xtext.ui.resource.IResourceSetInitializer;
 
 /**
- * This is used to install the ECrossReferenceAdapter (if not there) on resource set used by Xtext Builder
- * The builder uses a shared resource set for all xtext resources in a project
+ * This is used to install the ECrossReferenceAdapter (if not there) on resource
+ * set used by Xtext Builder The builder uses a shared resource set for all
+ * xtext resources in a project
  */
 @SuppressWarnings("all")
 public class OmlResourceSetInitializer implements IResourceSetInitializer {
-  @Override
-  public void initialize(final ResourceSet resourceSet, final IProject project) {
-    final ECrossReferenceAdapter adapter = ECrossReferenceAdapter.getCrossReferenceAdapter(resourceSet);
-    if ((adapter == null)) {
-      EList<Adapter> _eAdapters = resourceSet.eAdapters();
-      ECrossReferenceAdapter _eCrossReferenceAdapter = new ECrossReferenceAdapter();
-      _eAdapters.add(_eCrossReferenceAdapter);
-    }
-  }
+
+	@Override
+	public void initialize(final ResourceSet resourceSet, final IProject project) {
+		final var adapter = ECrossReferenceAdapter.getCrossReferenceAdapter(resourceSet);
+		if (adapter == null) {
+			resourceSet.eAdapters().add(new ECrossReferenceAdapter());
+		}
+	}
 }

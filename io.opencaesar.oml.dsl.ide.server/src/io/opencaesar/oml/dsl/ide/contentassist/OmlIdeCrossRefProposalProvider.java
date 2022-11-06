@@ -42,9 +42,11 @@ import io.opencaesar.oml.util.OmlRead;
 
 public class OmlIdeCrossRefProposalProvider extends IdeCrossrefProposalProvider {
 
-	@Inject private IQualifiedNameConverter qualifiedNameConverter;
+	@Inject
+	private IQualifiedNameConverter qualifiedNameConverter;
 
-	@Inject private RefValueConverter valueConverter;
+	@Inject
+	private RefValueConverter valueConverter;
 
 	protected ContentAssistEntry createProposal(IEObjectDescription candidate, CrossReference crossRef, ContentAssistContext context) {
 		// creat the default proposal
@@ -60,12 +62,12 @@ public class OmlIdeCrossRefProposalProvider extends IdeCrossrefProposalProvider 
 		// fix the proposed name
 		if (candidate instanceof AliasedEObjectDescription) {
 			// if there is an name, convert it to a string
-			var proposal = valueConverter.toString(qualifiedNameConverter.toString(memberName)); 
+			var proposal = valueConverter.toString(qualifiedNameConverter.toString(memberName));
 			entry.setProposal(proposal);
 		} else {
 			// otherwise default the name to the abbreviated iri
 			var fragment = memberName.getLastSegment();
-			var proposal = ((importPrefix != null) ? importPrefix+":" : "") +fragment;
+			var proposal = ((importPrefix != null) ? importPrefix + ":" : "") + fragment;
 			entry.setProposal(proposal);
 		}
 
@@ -102,15 +104,14 @@ public class OmlIdeCrossRefProposalProvider extends IdeCrossrefProposalProvider 
 		var lineDelimiter = "\n";
 		var importKeyword = getImportKeyword(ontology.eClass(), candidate.getEClass());
 		var importNamespace = memberName.getFirstSegment();
-		var importStatement = (startWithLineBreak ? lineDelimiter + lineDelimiter +"\t" : "") + 
-				importKeyword+" " + valueConverter.toString(importNamespace) + " as "+ importPrefix +
-				(endWithLineBreak ? lineDelimiter + lineDelimiter+"\t" : "");
+		var importStatement = (startWithLineBreak ? lineDelimiter + lineDelimiter + "\t" : "") + importKeyword + " " + valueConverter.toString(importNamespace) + " as " + importPrefix
+				+ (endWithLineBreak ? lineDelimiter + lineDelimiter + "\t" : "");
 
 		// add the import statement
 		var tr = new TextRegion(offset, 0);
 		var rg = new ReplaceRegion(tr, importStatement);
 		entry.getTextReplacements().add(rg);
-		
+
 		return entry;
 	}
 
@@ -129,8 +130,7 @@ public class OmlIdeCrossRefProposalProvider extends IdeCrossrefProposalProvider 
 	}
 
 	private String getImportKeyword(EClass contextOntology, EClass importedFeature) {
-		var importedOntology = OmlPackage.Literals.NAMED_INSTANCE.isSuperTypeOf(importedFeature) ?
-			OmlPackage.Literals.DESCRIPTION : OmlPackage.Literals.VOCABULARY;
+		var importedOntology = OmlPackage.Literals.NAMED_INSTANCE.isSuperTypeOf(importedFeature) ? OmlPackage.Literals.DESCRIPTION : OmlPackage.Literals.VOCABULARY;
 		if (contextOntology == importedOntology) {
 			return "extends";
 		}

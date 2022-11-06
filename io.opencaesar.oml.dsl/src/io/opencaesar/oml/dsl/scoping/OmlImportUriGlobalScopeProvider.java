@@ -28,18 +28,18 @@ import org.eclipse.xtext.util.IResourceScopeCache;
 
 @SuppressWarnings("all")
 public class OmlImportUriGlobalScopeProvider extends ImportUriGlobalScopeProvider {
-  @Inject
-  private IResourceScopeCache cache;
 
-  @Override
-  protected LinkedHashSet<URI> getImportedUris(final Resource resource) {
-    String _simpleName = OmlImportUriGlobalScopeProvider.class.getSimpleName();
-    return this.cache.<LinkedHashSet<URI>>get(_simpleName, resource, new Provider<LinkedHashSet<URI>>() {
-      @Override
-      public LinkedHashSet<URI> get() {
-        Set<URI> uris = OmlRead.getResolvableUris(resource);
-        return new LinkedHashSet<URI>(uris);
-      }
-    });
-  }
+	@Inject
+	private IResourceScopeCache cache;
+
+	@Override
+	protected LinkedHashSet<URI> getImportedUris(final Resource resource) {
+		return cache.<LinkedHashSet<URI>>get(OmlImportUriGlobalScopeProvider.class.getSimpleName(), resource, new Provider<LinkedHashSet<URI>>() {
+			@Override
+			public LinkedHashSet<URI> get() {
+				Set<URI> uris = OmlRead.getResolvableUris(resource);
+				return new LinkedHashSet<URI>(uris);
+			}
+		});
+	}
 }

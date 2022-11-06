@@ -23,11 +23,12 @@ import org.eclipse.xtext.naming.QualifiedName;
 
 @SuppressWarnings("all")
 public class OmlQualifiedNameProvider extends DefaultDeclarativeQualifiedNameProvider {
-  public QualifiedName qualifiedName(final Member member) {
-    return this.getConverter().toQualifiedName(member.getIri());
-  }
 
-  public QualifiedName qualifiedName(final Ontology ontology) {
-    return this.getConverter().toQualifiedName(ontology.getNamespace());
-  }
+	public QualifiedName qualifiedName(final Member member) {
+		return this.getConverter().toQualifiedName(member.getIri());
+	}
+
+	public QualifiedName qualifiedName(final Ontology ontology) {
+		return this.getConverter().toQualifiedName(ontology.getNamespace());
+	}
 }

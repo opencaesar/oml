@@ -18,6 +18,9 @@ package io.opencaesar.oml.dsl.resource;
 
 import io.opencaesar.oml.Member;
 import io.opencaesar.oml.Ontology;
+
+import java.util.HashMap;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
@@ -29,29 +32,29 @@ import org.eclipse.xtext.xbase.lib.Pair;
 
 @SuppressWarnings("all")
 public class OmlResourceDescriptionStrategy extends DefaultResourceDescriptionStrategy {
-  @Override
-  public boolean createEObjectDescriptions(final EObject eObject, final IAcceptor<IEObjectDescription> acceptor) {
-    if ((eObject instanceof Ontology)) {
-      final QualifiedName qualifiedName = this.getQualifiedNameProvider().getFullyQualifiedName(eObject);
-      if ((qualifiedName != null)) {
-        String _namespace = ((Ontology)eObject).getOntology().getNamespace();
-        Pair<String, String> _mappedTo = Pair.<String, String>of("namespace", _namespace);
-        String _prefix = ((Ontology)eObject).getOntology().getPrefix();
-        Pair<String, String> _mappedTo_1 = Pair.<String, String>of("prefix", _prefix);
-        acceptor.accept(EObjectDescription.create(qualifiedName, eObject, CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1)));
-      }
-      return true;
-    } else {
-      if ((eObject instanceof Member)) {
-        final QualifiedName qualifiedName_1 = this.getQualifiedNameProvider().getFullyQualifiedName(eObject);
-        if ((qualifiedName_1 != null)) {
-          String _prefix_1 = ((Member)eObject).getOntology().getPrefix();
-          Pair<String, String> _mappedTo_2 = Pair.<String, String>of("defaultPrefix", _prefix_1);
-          acceptor.accept(EObjectDescription.create(qualifiedName_1, eObject, CollectionLiterals.<String, String>newHashMap(_mappedTo_2)));
-        }
-        return true;
-      }
-    }
-    return false;
-  }
+
+	@Override
+	public boolean createEObjectDescriptions(final EObject eObject, final IAcceptor<IEObjectDescription> acceptor) {
+		if (eObject instanceof Ontology) {
+			final var ontology = (Ontology) eObject;
+			final var qualifiedName = this.getQualifiedNameProvider().getFullyQualifiedName(eObject);
+			if ((qualifiedName != null)) {
+				final var map = new HashMap<String, String>();
+				map.put("namespace", ontology.getNamespace());
+				map.put("prefix", ontology.getPrefix());
+				acceptor.accept(EObjectDescription.create(qualifiedName, eObject, map));
+			}
+			return true;
+		} else if (eObject instanceof Member) {
+			final var member = (Member) eObject;
+			final QualifiedName qualifiedName = this.getQualifiedNameProvider().getFullyQualifiedName(eObject);
+			if ((qualifiedName != null)) {
+				final var map = new HashMap<String, String>();
+				map.put("defaultPrefix", member.getOntology().getPrefix());
+				acceptor.accept(EObjectDescription.create(qualifiedName, eObject, map));
+			}
+			return true;
+		}
+		return false;
+	}
 }

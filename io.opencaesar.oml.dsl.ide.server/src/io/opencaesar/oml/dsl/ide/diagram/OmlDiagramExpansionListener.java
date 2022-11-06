@@ -23,10 +23,11 @@ import org.eclipse.sprotty.xtext.LanguageAwareDiagramServer;
 
 @SuppressWarnings("all")
 public class OmlDiagramExpansionListener implements IDiagramExpansionListener {
-  @Override
-  public void expansionChanged(final Action action, final IDiagramServer server) {
-    if ((server instanceof LanguageAwareDiagramServer)) {
-      ((LanguageAwareDiagramServer)server).getDiagramLanguageServer().getDiagramUpdater().updateDiagram(((LanguageAwareDiagramServer)server));
-    }
-  }
+
+	@Override
+	public void expansionChanged(final Action action, final IDiagramServer server) {
+		if (server instanceof LanguageAwareDiagramServer) {
+			((LanguageAwareDiagramServer) server).getDiagramLanguageServer().getDiagramUpdater().updateDiagram((LanguageAwareDiagramServer) server);
+		}
+	}
 }

@@ -38,40 +38,33 @@ import org.eclipse.xtext.scoping.impl.FilteringScope;
  */
 @SuppressWarnings("all")
 public class OmlScopeProvider extends AbstractOmlScopeProvider {
-  @Override
-  public IScope getScope(final EObject context, final EReference reference) {
-    boolean _equals = Objects.equal(reference, OmlPackage.Literals.SPECIALIZATION_AXIOM__SPECIALIZED_TERM);
-    if (_equals) {
-      return this.getScopeForSpecializationAxiom_SpecializedTerm(context, reference);
-    }
-    return super.getScope(context, reference);
-  }
 
-  private IScope getScopeForSpecializationAxiom_SpecializedTerm(final EObject context, final EReference reference) {
-    IScope superScope = super.getScope(context, reference);
-    if ((context instanceof Entity)) {
-      final Predicate<IEObjectDescription> _function = (IEObjectDescription a) -> {
-        return ((!EcoreUtil.getURI(context).equals(a.getEObjectURI())) && ((((Entity)context).eClass() == a.getEClass()) || 
-          (OmlPackage.Literals.ASPECT == a.getEClass())));
-      };
-      return new FilteringScope(superScope, _function);
-    } else {
-      if ((context instanceof EnumeratedScalar)) {
-        final Predicate<IEObjectDescription> _function_1 = (IEObjectDescription a) -> {
-          return ((!EcoreUtil.getURI(context).equals(a.getEObjectURI())) && ((((EnumeratedScalar)context).eClass() == a.getEClass()) || 
-            (OmlPackage.Literals.FACETED_SCALAR == a.getEClass())));
-        };
-        return new FilteringScope(superScope, _function_1);
-      } else {
-        if ((context instanceof SpecializableTerm)) {
-          final Predicate<IEObjectDescription> _function_2 = (IEObjectDescription a) -> {
-            return ((!EcoreUtil.getURI(context).equals(a.getEObjectURI())) && 
-              Objects.equal(((SpecializableTerm)context).eClass(), a.getEClass()));
-          };
-          return new FilteringScope(superScope, _function_2);
-        }
-      }
-    }
-    return superScope;
-  }
+	@Override
+	public IScope getScope(final EObject context, final EReference reference) {
+		if (reference == OmlPackage.Literals.SPECIALIZATION_AXIOM__SPECIALIZED_TERM) {
+			return getScopeForSpecializationAxiom_SpecializedTerm(context, reference);
+		}
+		return super.getScope(context, reference);
+	}
+
+	private IScope getScopeForSpecializationAxiom_SpecializedTerm(final EObject context, final EReference reference) {
+		IScope superScope = super.getScope(context, reference);
+		if ((context instanceof Entity)) {
+			return new FilteringScope(superScope, a -> {
+				return ((!EcoreUtil.getURI(context).equals(a.getEObjectURI())) && 
+						((((Entity) context).eClass() == a.getEClass()) || (OmlPackage.Literals.ASPECT == a.getEClass())));
+			});
+		} else if ((context instanceof EnumeratedScalar)) {
+			return new FilteringScope(superScope, a -> {
+				return ((!EcoreUtil.getURI(context).equals(a.getEObjectURI())) && 
+						((((EnumeratedScalar) context).eClass() == a.getEClass()) || (OmlPackage.Literals.FACETED_SCALAR == a.getEClass())));
+			});
+		} else if ((context instanceof SpecializableTerm)) {
+			return new FilteringScope(superScope, a -> {
+				return ((!EcoreUtil.getURI(context).equals(a.getEObjectURI())) && 
+						(((SpecializableTerm) context).eClass() == a.getEClass()));
+			});
+		}
+		return superScope;
+	}
 }

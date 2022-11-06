@@ -17,206 +17,72 @@
 package io.opencaesar.oml.dsl.ide.server.symbols;
 
 import io.opencaesar.oml.OmlPackage;
+import static io.opencaesar.oml.OmlPackage.Literals.*;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.lsp4j.SymbolKind;
+import static org.eclipse.lsp4j.SymbolKind.*;
 import org.eclipse.xtext.ide.server.symbol.DocumentSymbolMapper;
 
 @SuppressWarnings("all")
 public class OmlDocumentSymbolKindProvider extends DocumentSymbolMapper.DocumentSymbolKindProvider {
-  @Override
-  protected SymbolKind getSymbolKind(final EClass clazz) {
-    SymbolKind _switchResult = null;
-    boolean _matched = false;
-    boolean _isSuperTypeOf = OmlPackage.Literals.ONTOLOGY.isSuperTypeOf(clazz);
-    if (_isSuperTypeOf) {
-      _matched=true;
-      _switchResult = SymbolKind.Package;
-    }
-    if (!_matched) {
-      boolean _isSuperTypeOf_1 = OmlPackage.Literals.ASPECT.isSuperTypeOf(clazz);
-      if (_isSuperTypeOf_1) {
-        _matched=true;
-        _switchResult = SymbolKind.Interface;
-      }
-    }
-    if (!_matched) {
-      boolean _isSuperTypeOf_2 = OmlPackage.Literals.ASPECT_REFERENCE.isSuperTypeOf(clazz);
-      if (_isSuperTypeOf_2) {
-        _matched=true;
-        _switchResult = SymbolKind.Interface;
-      }
-    }
-    if (!_matched) {
-      boolean _isSuperTypeOf_3 = OmlPackage.Literals.CONCEPT.isSuperTypeOf(clazz);
-      if (_isSuperTypeOf_3) {
-        _matched=true;
-        _switchResult = SymbolKind.Class;
-      }
-    }
-    if (!_matched) {
-      boolean _isSuperTypeOf_4 = OmlPackage.Literals.CONCEPT_REFERENCE.isSuperTypeOf(clazz);
-      if (_isSuperTypeOf_4) {
-        _matched=true;
-        _switchResult = SymbolKind.Class;
-      }
-    }
-    if (!_matched) {
-      boolean _isSuperTypeOf_5 = OmlPackage.Literals.STRUCTURE.isSuperTypeOf(clazz);
-      if (_isSuperTypeOf_5) {
-        _matched=true;
-        _switchResult = SymbolKind.Struct;
-      }
-    }
-    if (!_matched) {
-      boolean _isSuperTypeOf_6 = OmlPackage.Literals.STRUCTURE_REFERENCE.isSuperTypeOf(clazz);
-      if (_isSuperTypeOf_6) {
-        _matched=true;
-        _switchResult = SymbolKind.Struct;
-      }
-    }
-    if (!_matched) {
-      boolean _isSuperTypeOf_7 = OmlPackage.Literals.FACETED_SCALAR.isSuperTypeOf(clazz);
-      if (_isSuperTypeOf_7) {
-        _matched=true;
-        _switchResult = SymbolKind.String;
-      }
-    }
-    if (!_matched) {
-      boolean _isSuperTypeOf_8 = OmlPackage.Literals.FACETED_SCALAR_REFERENCE.isSuperTypeOf(clazz);
-      if (_isSuperTypeOf_8) {
-        _matched=true;
-        _switchResult = SymbolKind.String;
-      }
-    }
-    if (!_matched) {
-      boolean _isSuperTypeOf_9 = OmlPackage.Literals.ENUMERATED_SCALAR.isSuperTypeOf(clazz);
-      if (_isSuperTypeOf_9) {
-        _matched=true;
-        _switchResult = SymbolKind.Enum;
-      }
-    }
-    if (!_matched) {
-      boolean _isSuperTypeOf_10 = OmlPackage.Literals.ENUMERATED_SCALAR_REFERENCE.isSuperTypeOf(clazz);
-      if (_isSuperTypeOf_10) {
-        _matched=true;
-        _switchResult = SymbolKind.Enum;
-      }
-    }
-    if (!_matched) {
-      boolean _isSuperTypeOf_11 = OmlPackage.Literals.RELATION_ENTITY.isSuperTypeOf(clazz);
-      if (_isSuperTypeOf_11) {
-        _matched=true;
-        _switchResult = SymbolKind.Class;
-      }
-    }
-    if (!_matched) {
-      boolean _isSuperTypeOf_12 = OmlPackage.Literals.RELATION_ENTITY_REFERENCE.isSuperTypeOf(clazz);
-      if (_isSuperTypeOf_12) {
-        _matched=true;
-        _switchResult = SymbolKind.Class;
-      }
-    }
-    if (!_matched) {
-      boolean _isSuperTypeOf_13 = OmlPackage.Literals.FORWARD_RELATION.isSuperTypeOf(clazz);
-      if (_isSuperTypeOf_13) {
-        _matched=true;
-        _switchResult = SymbolKind.Property;
-      }
-    }
-    if (!_matched) {
-      boolean _isSuperTypeOf_14 = OmlPackage.Literals.REVERSE_RELATION.isSuperTypeOf(clazz);
-      if (_isSuperTypeOf_14) {
-        _matched=true;
-        _switchResult = SymbolKind.Property;
-      }
-    }
-    if (!_matched) {
-      boolean _isSuperTypeOf_15 = OmlPackage.Literals.ANNOTATION_PROPERTY.isSuperTypeOf(clazz);
-      if (_isSuperTypeOf_15) {
-        _matched=true;
-        _switchResult = SymbolKind.Property;
-      }
-    }
-    if (!_matched) {
-      boolean _isSuperTypeOf_16 = OmlPackage.Literals.ANNOTATION_PROPERTY_REFERENCE.isSuperTypeOf(clazz);
-      if (_isSuperTypeOf_16) {
-        _matched=true;
-        _switchResult = SymbolKind.Property;
-      }
-    }
-    if (!_matched) {
-      boolean _isSuperTypeOf_17 = OmlPackage.Literals.SCALAR_PROPERTY.isSuperTypeOf(clazz);
-      if (_isSuperTypeOf_17) {
-        _matched=true;
-        _switchResult = SymbolKind.Property;
-      }
-    }
-    if (!_matched) {
-      boolean _isSuperTypeOf_18 = OmlPackage.Literals.SCALAR_PROPERTY_REFERENCE.isSuperTypeOf(clazz);
-      if (_isSuperTypeOf_18) {
-        _matched=true;
-        _switchResult = SymbolKind.Property;
-      }
-    }
-    if (!_matched) {
-      boolean _isSuperTypeOf_19 = OmlPackage.Literals.STRUCTURED_PROPERTY.isSuperTypeOf(clazz);
-      if (_isSuperTypeOf_19) {
-        _matched=true;
-        _switchResult = SymbolKind.Property;
-      }
-    }
-    if (!_matched) {
-      boolean _isSuperTypeOf_20 = OmlPackage.Literals.STRUCTURED_PROPERTY_REFERENCE.isSuperTypeOf(clazz);
-      if (_isSuperTypeOf_20) {
-        _matched=true;
-        _switchResult = SymbolKind.Property;
-      }
-    }
-    if (!_matched) {
-      boolean _isSuperTypeOf_21 = OmlPackage.Literals.CONCEPT_INSTANCE.isSuperTypeOf(clazz);
-      if (_isSuperTypeOf_21) {
-        _matched=true;
-        _switchResult = SymbolKind.Object;
-      }
-    }
-    if (!_matched) {
-      boolean _isSuperTypeOf_22 = OmlPackage.Literals.CONCEPT_INSTANCE_REFERENCE.isSuperTypeOf(clazz);
-      if (_isSuperTypeOf_22) {
-        _matched=true;
-        _switchResult = SymbolKind.Object;
-      }
-    }
-    if (!_matched) {
-      boolean _isSuperTypeOf_23 = OmlPackage.Literals.RELATION_INSTANCE.isSuperTypeOf(clazz);
-      if (_isSuperTypeOf_23) {
-        _matched=true;
-        _switchResult = SymbolKind.Object;
-      }
-    }
-    if (!_matched) {
-      boolean _isSuperTypeOf_24 = OmlPackage.Literals.RELATION_INSTANCE_REFERENCE.isSuperTypeOf(clazz);
-      if (_isSuperTypeOf_24) {
-        _matched=true;
-        _switchResult = SymbolKind.Object;
-      }
-    }
-    if (!_matched) {
-      boolean _isSuperTypeOf_25 = OmlPackage.Literals.RULE.isSuperTypeOf(clazz);
-      if (_isSuperTypeOf_25) {
-        _matched=true;
-        _switchResult = SymbolKind.Object;
-      }
-    }
-    if (!_matched) {
-      boolean _isSuperTypeOf_26 = OmlPackage.Literals.RULE_REFERENCE.isSuperTypeOf(clazz);
-      if (_isSuperTypeOf_26) {
-        _matched=true;
-        _switchResult = SymbolKind.Object;
-      }
-    }
-    if (!_matched) {
-      _switchResult = SymbolKind.Property;
-    }
-    return _switchResult;
-  }
+
+	@Override
+	protected SymbolKind getSymbolKind(EClass clazz) {
+		if (ONTOLOGY.isSuperTypeOf(clazz))
+			return Package;
+		if (ASPECT.isSuperTypeOf(clazz))
+			return Interface;
+		if (ASPECT_REFERENCE.isSuperTypeOf(clazz))
+			return Interface;
+		if (CONCEPT.isSuperTypeOf(clazz))
+			return Class;
+		if (CONCEPT_REFERENCE.isSuperTypeOf(clazz))
+			return Class;
+		if (STRUCTURE.isSuperTypeOf(clazz))
+			return Struct;
+		if (STRUCTURE_REFERENCE.isSuperTypeOf(clazz))
+			return Struct;
+		if (FACETED_SCALAR.isSuperTypeOf(clazz))
+			return String;
+		if (FACETED_SCALAR_REFERENCE.isSuperTypeOf(clazz))
+			return String;
+		if (ENUMERATED_SCALAR.isSuperTypeOf(clazz))
+			return Enum;
+		if (ENUMERATED_SCALAR_REFERENCE.isSuperTypeOf(clazz))
+			return Enum;
+		if (RELATION_ENTITY.isSuperTypeOf(clazz))
+			return Class;
+		if (RELATION_ENTITY_REFERENCE.isSuperTypeOf(clazz))
+			return Class;
+		if (FORWARD_RELATION.isSuperTypeOf(clazz))
+			return Property;
+		if (REVERSE_RELATION.isSuperTypeOf(clazz))
+			return Property;
+		if (ANNOTATION_PROPERTY.isSuperTypeOf(clazz))
+			return Property;
+		if (ANNOTATION_PROPERTY_REFERENCE.isSuperTypeOf(clazz))
+			return Property;
+		if (SCALAR_PROPERTY.isSuperTypeOf(clazz))
+			return Property;
+		if (SCALAR_PROPERTY_REFERENCE.isSuperTypeOf(clazz))
+			return Property;
+		if (STRUCTURED_PROPERTY.isSuperTypeOf(clazz))
+			return Property;
+		if (STRUCTURED_PROPERTY_REFERENCE.isSuperTypeOf(clazz))
+			return Property;
+		if (CONCEPT_INSTANCE.isSuperTypeOf(clazz))
+			return Object;
+		if (CONCEPT_INSTANCE_REFERENCE.isSuperTypeOf(clazz))
+			return Object;
+		if (RELATION_INSTANCE.isSuperTypeOf(clazz))
+			return Object;
+		if (RELATION_INSTANCE_REFERENCE.isSuperTypeOf(clazz))
+			return Object;
+		if (RULE.isSuperTypeOf(clazz))
+			return Object;
+		if (RULE_REFERENCE.isSuperTypeOf(clazz))
+			return Object;
+		return Property;
+	}
+
 }

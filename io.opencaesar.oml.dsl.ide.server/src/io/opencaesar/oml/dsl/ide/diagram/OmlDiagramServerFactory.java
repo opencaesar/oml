@@ -18,13 +18,14 @@ package io.opencaesar.oml.dsl.ide.diagram;
 
 import java.util.Collections;
 import java.util.List;
+
 import org.eclipse.sprotty.xtext.DiagramServerFactory;
-import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 
 @SuppressWarnings("all")
 public class OmlDiagramServerFactory extends DiagramServerFactory {
-  @Override
-  public List<String> getDiagramTypes() {
-    return Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("oml-diagram"));
-  }
+
+	@Override
+	public List<String> getDiagramTypes() {
+		return Collections.singletonList("oml-diagram");
+	}
 }

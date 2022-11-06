@@ -21,12 +21,13 @@ import org.eclipse.sprotty.xtext.launch.DiagramServerLauncher;
 
 @SuppressWarnings("all")
 public class OmlServerLauncher extends DiagramServerLauncher {
-  @Override
-  public DiagramLanguageServerSetup createSetup() {
-    return new OmlLanguageServerSetup();
-  }
 
-  public static void main(final String[] args) {
-    new OmlServerLauncher().run(args);
-  }
+	@Override
+	public DiagramLanguageServerSetup createSetup() {
+		return new OmlLanguageServerSetup();
+	}
+
+	public static void main(final String[] args) {
+		new OmlServerLauncher().run(args);
+	}
 }

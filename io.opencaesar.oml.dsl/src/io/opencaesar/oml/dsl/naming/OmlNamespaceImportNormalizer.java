@@ -22,40 +22,36 @@ import org.eclipse.xtext.scoping.impl.ImportNormalizer;
 
 @SuppressWarnings("all")
 public class OmlNamespaceImportNormalizer extends ImportNormalizer {
-  private final String nsPrefix;
 
-  private final QualifiedName nsURI;
+	private final String nsPrefix;
 
-  public OmlNamespaceImportNormalizer(final QualifiedName nsURI, final String nsPrefix, final boolean ignoreCase) {
-    super(nsURI, false, ignoreCase);
-    this.nsPrefix = nsPrefix;
-    this.nsURI = nsURI;
-  }
+	private final QualifiedName nsURI;
 
-  @Override
-  public QualifiedName resolve(final QualifiedName relativeName) {
-    int _segmentCount = relativeName.getSegmentCount();
-    boolean _tripleEquals = (_segmentCount == 3);
-    if (_tripleEquals) {
-      String _segment = relativeName.getSegment(1);
-      boolean _equals = Objects.equal(_segment, ":");
-      if (_equals) {
-        final String prefix = relativeName.getFirstSegment();
-        boolean _equals_1 = Objects.equal(prefix, this.nsPrefix);
-        if (_equals_1) {
-          return this.nsURI.append(relativeName.getLastSegment());
-        }
-      }
-    }
-    return null;
-  }
+	public OmlNamespaceImportNormalizer(final QualifiedName nsURI, final String nsPrefix, final boolean ignoreCase) {
+		super(nsURI, false, ignoreCase);
+		this.nsPrefix = nsPrefix;
+		this.nsURI = nsURI;
+	}
 
-  @Override
-  public QualifiedName deresolve(final QualifiedName fullyQualifiedName) {
-    if ((fullyQualifiedName.startsWith(this.nsURI) && (!fullyQualifiedName.equals(this.nsURI)))) {
-      final String name = fullyQualifiedName.getLastSegment();
-      return QualifiedName.create(this.nsPrefix, ":", name);
-    }
-    return null;
-  }
+	@Override
+	public QualifiedName resolve(final QualifiedName relativeName) {
+		if (relativeName.getSegmentCount() == 3) {
+			if (relativeName.getSegment(1).equals(":")) {
+				final var prefix = relativeName.getFirstSegment();
+				if (prefix.equals(nsPrefix)) {
+					return nsURI.append(relativeName.getLastSegment());
+				}
+			}
+		}
+		return null;
+	}
+
+	@Override
+	public QualifiedName deresolve(final QualifiedName fullyQualifiedName) {
+		if ((fullyQualifiedName.startsWith(this.nsURI) && (!fullyQualifiedName.equals(this.nsURI)))) {
+			final var name = fullyQualifiedName.getLastSegment();
+			return QualifiedName.create(this.nsPrefix, ":", name);
+		}
+		return null;
+	}
 }

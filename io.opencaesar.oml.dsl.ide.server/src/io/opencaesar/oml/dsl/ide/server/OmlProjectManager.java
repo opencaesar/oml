@@ -37,12 +37,10 @@ public class OmlProjectManager extends ProjectManager {
 	private OmlExclusionProvider omlExclusionProvider;
 
 	@Override
-	protected BuildRequest newBuildRequest(List<URI> changedFiles, List<URI> deletedFiles,
-			List<IResourceDescription.Delta> externalDeltas, CancelIndicator cancelIndicator) {
+	protected BuildRequest newBuildRequest(List<URI> changedFiles, List<URI> deletedFiles, List<IResourceDescription.Delta> externalDeltas, CancelIndicator cancelIndicator) {
 		final BuildRequest request = super.newBuildRequest(changedFiles, deletedFiles, externalDeltas, cancelIndicator);
 		final URI base = this.getBaseDir();
-		final List<URI> dirtyFiles = changedFiles.stream().filter(f -> !omlExclusionProvider.isExcluded(f, base))
-				.collect(Collectors.toList());
+		final List<URI> dirtyFiles = changedFiles.stream().filter(f -> !omlExclusionProvider.isExcluded(f, base)).collect(Collectors.toList());
 		request.setDirtyFiles(dirtyFiles);
 		return request;
 	}

@@ -20,41 +20,32 @@ import org.eclipse.xtext.nodemodel.INode;
 
 @SuppressWarnings("all")
 public class STRINGValueConverter extends org.eclipse.xtext.conversion.impl.STRINGValueConverter {
-  @Override
-  protected String toEscapedString(final String value) {
-    if (((!value.contains("\r")) && (!value.contains("\n")))) {
-      boolean _contains = value.contains("\"");
-      if (_contains) {
-        boolean _contains_1 = value.contains("\'");
-        boolean _not = (!_contains_1);
-        if (_not) {
-          return (("\'" + value) + "\'");
-        }
-      } else {
-        return (("\"" + value) + "\"");
-      }
-    }
-    boolean _contains_2 = value.contains("\'\'\'");
-    if (_contains_2) {
-      return (("\"\"\"" + value) + "\"\"\"");
-    } else {
-      return (("\'\'\'" + value) + "\'\'\'");
-    }
-  }
 
-  @Override
-  public String toValue(final String string, final INode node) {
-    boolean _contains = string.contains("\"\"\"");
-    if (_contains) {
-      return string.replaceAll("\"\"\"", "");
-    } else {
-      boolean _contains_1 = string.contains("\'\'\'");
-      if (_contains_1) {
-        return string.replaceAll("\'\'\'", "");
-      }
-    }
-    int _length = string.length();
-    int _minus = (_length - 1);
-    return string.substring(1, _minus);
-  }
+	@Override
+	protected String toEscapedString(final String value) {
+		if (!value.contains("\r") && !value.contains("\n")) {
+			if (value.contains("\"")) {
+				if (!value.contains("'")) {
+					return "'" + value + "'";
+				}
+			} else {
+				return '"' + value + '"';
+			}
+		}
+		if (value.contains("'''")) {
+			return "\"\"\"" + value + "\"\"\"";
+		} else {
+			return "'''" + value + "'''";
+		}
+	}
+
+	@Override
+	public String toValue(final String string, final INode node) {
+		if (string.contains("\"\"\"")) {
+			return string.replaceAll("\"\"\"", "");
+		} else if (string.contains("'''")) {
+			return string.replaceAll("'''", "");
+		}
+		return string.substring(1, string.length() - 1);
+	}
 }

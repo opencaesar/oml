@@ -14,23 +14,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.opencaesar.oml.dsl.ide.diagram;
+package io.opencaesar.oml.dsl.ide.diagram.model;
 
-import org.eclipse.sprotty.SCompartment;
+import org.eclipse.sprotty.SButton;
 import org.eclipse.xtend.lib.annotations.Accessors;
-import org.eclipse.xtext.xbase.lib.Pure;
 
 @Accessors
 @SuppressWarnings("all")
-public class OmlHeader extends SCompartment {
-  private String cssClass;
-
-  @Pure
-  public String getCssClass() {
-    return this.cssClass;
-  }
-
-  public void setCssClass(final String cssClass) {
-    this.cssClass = cssClass;
-  }
+public class OmlButton extends SButton {
 }

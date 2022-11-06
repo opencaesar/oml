@@ -21,21 +21,21 @@ import io.opencaesar.oml.OmlPackage;
 import org.eclipse.emf.ecore.EPackage;
 
 /**
- * Initialization support for running Xtext languages without Equinox extension registry.
+ * Initialization support for running Xtext languages without Equinox extension
+ * registry.
  */
 @SuppressWarnings("all")
 public class OmlStandaloneSetup extends OmlStandaloneSetupGenerated {
-  public static void doSetup() {
-    new OmlStandaloneSetup().createInjectorAndDoEMFRegistration();
-  }
 
-  @Override
-  public void register(final Injector injector) {
-    boolean _containsKey = EPackage.Registry.INSTANCE.containsKey(OmlPackage.eNS_URI);
-    boolean _not = (!_containsKey);
-    if (_not) {
-      EPackage.Registry.INSTANCE.put(OmlPackage.eNS_URI, OmlPackage.eINSTANCE);
-    }
-    super.register(injector);
-  }
+	public static void doSetup() {
+		new OmlStandaloneSetup().createInjectorAndDoEMFRegistration();
+	}
+
+	@Override
+	public void register(final Injector injector) {
+		if (!EPackage.Registry.INSTANCE.containsKey(OmlPackage.eNS_URI)) {
+			EPackage.Registry.INSTANCE.put(OmlPackage.eNS_URI, OmlPackage.eINSTANCE);
+		}
+		super.register(injector);
+	}
 }

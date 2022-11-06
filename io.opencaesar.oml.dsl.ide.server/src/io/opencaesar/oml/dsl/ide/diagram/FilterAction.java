@@ -23,82 +23,77 @@ import org.eclipse.xtend.lib.annotations.ToString;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
-@Accessors
-@EqualsHashCode
-@ToString(skipNulls = true)
 @SuppressWarnings("all")
 public class FilterAction implements Action {
-  public static final String KIND = "filter";
 
-  private String kind = FilterAction.KIND;
+	public static final String KIND = "filter";
 
-  private String data;
+	private String kind = KIND;
 
-  public FilterAction() {
-  }
+	private String data;
 
-  public FilterAction(final String data) {
-    this.data = data;
-  }
+	public FilterAction(final String data) {
+		this.data = data;
+	}
 
-  @Pure
-  @Override
-  public String getKind() {
-    return this.kind;
-  }
+	@Pure
+	@Override
+	public String getKind() {
+		return this.kind;
+	}
 
-  public void setKind(final String kind) {
-    this.kind = kind;
-  }
+	public void setKind(final String kind) {
+		this.kind = kind;
+	}
 
-  @Pure
-  public String getData() {
-    return this.data;
-  }
+	@Pure
+	public String getData() {
+		return this.data;
+	}
 
-  public void setData(final String data) {
-    this.data = data;
-  }
+	public void setData(final String data) {
+		this.data = data;
+	}
 
-  @Override
-  @Pure
-  public boolean equals(final Object obj) {
-    if (this == obj)
-      return true;
-    if (obj == null)
-      return false;
-    if (getClass() != obj.getClass())
-      return false;
-    FilterAction other = (FilterAction) obj;
-    if (this.kind == null) {
-      if (other.kind != null)
-        return false;
-    } else if (!this.kind.equals(other.kind))
-      return false;
-    if (this.data == null) {
-      if (other.data != null)
-        return false;
-    } else if (!this.data.equals(other.data))
-      return false;
-    return true;
-  }
+	@Override
+	@Pure
+	public boolean equals(final Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		FilterAction other = (FilterAction) obj;
+		if (this.kind == null) {
+			if (other.kind != null)
+				return false;
+		} else if (!this.kind.equals(other.kind))
+			return false;
+		if (this.data == null) {
+			if (other.data != null)
+				return false;
+		} else if (!this.data.equals(other.data))
+			return false;
+		return true;
+	}
 
-  @Override
-  @Pure
-  public int hashCode() {
-    final int prime = 31;
-    int result = 1;
-    result = prime * result + ((this.kind== null) ? 0 : this.kind.hashCode());
-    return prime * result + ((this.data== null) ? 0 : this.data.hashCode());
-  }
+	@Override
+	@Pure
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((this.kind == null) ? 0 : this.kind.hashCode());
+		return prime * result + ((this.data == null) ? 0 : this.data.hashCode());
+	}
 
-  @Override
-  @Pure
-  public String toString() {
-    ToStringBuilder b = new ToStringBuilder(this);
-    b.skipNulls();
-    b.add("kind", this.kind);
-    b.add("data", this.data);
-    return b.toString();
-  }
+	@Override
+	@Pure
+	public String toString() {
+		ToStringBuilder b = new ToStringBuilder(this);
+		b.skipNulls();
+		b.add("kind", this.kind);
+		b.add("data", this.data);
+		return b.toString();
+	}
 }

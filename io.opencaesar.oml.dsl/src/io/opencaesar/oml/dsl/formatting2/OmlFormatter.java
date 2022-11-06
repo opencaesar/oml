@@ -16,10 +16,15 @@
  */
 package io.opencaesar.oml.dsl.formatting2;
 
+import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Consumer;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.formatting.IIndentationInformation;
 import org.eclipse.xtext.formatting2.AbstractJavaFormatter;
 import org.eclipse.xtext.formatting2.FormatterPreferenceKeys;
@@ -27,6 +32,7 @@ import org.eclipse.xtext.formatting2.FormatterRequest;
 import org.eclipse.xtext.formatting2.IFormattableDocument;
 import org.eclipse.xtext.formatting2.IHiddenRegionFormatter;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
+import org.eclipse.xtext.formatting2.regionaccess.ITextRegionExtensions;
 import org.eclipse.xtext.preferences.ITypedPreferenceValues;
 import org.eclipse.xtext.preferences.MapBasedPreferenceValues;
 import org.eclipse.xtext.resource.XtextResource;
@@ -57,6 +63,7 @@ import io.opencaesar.oml.DescriptionImport;
 import io.opencaesar.oml.DescriptionStatement;
 import io.opencaesar.oml.DescriptionUsage;
 import io.opencaesar.oml.DifferentFromPredicate;
+import io.opencaesar.oml.Element;
 import io.opencaesar.oml.Entity;
 import io.opencaesar.oml.EnumeratedScalar;
 import io.opencaesar.oml.EnumeratedScalarReference;
@@ -117,1858 +124,629 @@ import io.opencaesar.oml.dsl.services.OmlGrammarAccess;
 
 @SuppressWarnings("all")
 public class OmlFormatter extends AbstractJavaFormatter {
-  @Inject
-  @Extension
-  private OmlGrammarAccess _omlGrammarAccess;
 
-  @Inject
-  private IIndentationInformation indentationInformation;
+	@Inject
+	protected OmlGrammarAccess oml;
 
-  @Override
-  protected void initialize(final FormatterRequest request) {
-    final ITypedPreferenceValues preferences = request.getPreferences();
-    if ((preferences instanceof MapBasedPreferenceValues)) {
-      ((MapBasedPreferenceValues)preferences).<String>put(FormatterPreferenceKeys.indentation, this.indentationInformation.getIndentString());
+	@Inject
+	protected IIndentationInformation indent;
+
+	@Override
+	protected void initialize(FormatterRequest request) {
+		final var preferences = request.getPreferences();
+		if (preferences instanceof MapBasedPreferenceValues) {
+			((MapBasedPreferenceValues) preferences).put(FormatterPreferenceKeys.indentation, indent.getIndentString());
+		}
+		super.initialize(request);
+	}
+
+	protected void _format(Annotation annotation, IFormattableDocument doc) {
+		doc.append(keyword(annotation, oml.getAnnotationAccess().getCommercialAtKeyword_0()), noSpace());
+		ifNotNull(annotation.getValue(), i -> doc.prepend(doc.format(i), oneSpace()));
+	}
+
+	protected void _format(Vocabulary vocabulary, IFormattableDocument doc) {
+		doc.prepend(vocabulary, compose(setNewLines(0, 0, 0), noSpace()));
+		vocabulary.getOwnedAnnotations().forEach(i -> doc.append(doc.format(i), newLine()));
+		doc.append(keyword(vocabulary, oml.getVocabularyAccess().getVocabularyKeyword_1()), oneSpace());
+		doc.surround(keyword(vocabulary, oml.getVocabularyAccess().getAsKeyword_3()), oneSpace());
+		formatBraces(vocabulary, doc);
+		vocabulary.getOwnedImports().forEach(i -> doc.prepend(doc.format(i), newLines(2)));
+		vocabulary.getOwnedStatements().forEach(i -> doc.prepend(doc.format(i), newLines(2)));
+	}
+
+	protected void _format(VocabularyBundle bundle, IFormattableDocument doc) {
+		doc.prepend(bundle, compose(setNewLines(0, 0, 0), noSpace()));
+		bundle.getOwnedAnnotations().forEach(i -> doc.append(doc.format(i), newLine()));
+		doc.append(keyword(bundle, oml.getVocabularyBundleAccess().getVocabularyKeyword_1()), oneSpace());
+		doc.surround(keyword(bundle, oml.getVocabularyBundleAccess().getBundleKeyword_2()), oneSpace());
+		doc.surround(keyword(bundle, oml.getVocabularyBundleAccess().getAsKeyword_4()), oneSpace());
+		formatBraces(bundle, doc);
+		bundle.getOwnedImports().forEach(i -> doc.prepend(doc.format(i), newLines(2)));
+	}
+
+	protected void _format(Description description, IFormattableDocument doc) {
+		doc.prepend(description, compose(setNewLines(0, 0, 0), noSpace()));
+		description.getOwnedAnnotations().forEach(i -> doc.append(doc.format(i), newLine()));
+		doc.append(keyword(description, oml.getDescriptionAccess().getDescriptionKeyword_1()), oneSpace());
+		doc.surround(keyword(description, oml.getDescriptionAccess().getAsKeyword_3()), oneSpace());
+		formatBraces(description, doc);
+		description.getOwnedImports().forEach(i -> doc.prepend(doc.format(i), newLines(2)));
+		description.getOwnedStatements().forEach(i -> doc.prepend(doc.format(i), newLines(2)));
+	}
+
+	protected void _format(DescriptionBundle bundle, IFormattableDocument doc) {
+		doc.prepend(bundle, compose(setNewLines(0, 0, 0), noSpace()));
+		bundle.getOwnedAnnotations().forEach(i -> doc.append(doc.format(i), newLine()));
+		doc.append(keyword(bundle, oml.getDescriptionBundleAccess().getDescriptionKeyword_1()), oneSpace());
+		doc.surround(keyword(bundle, oml.getDescriptionBundleAccess().getBundleKeyword_2()), oneSpace());
+		doc.surround(keyword(bundle, oml.getDescriptionBundleAccess().getAsKeyword_4()), oneSpace());
+		formatBraces(bundle, doc);
+		bundle.getOwnedImports().forEach(i -> doc.prepend(doc.format(i), newLines(2)));
+	}
+
+	protected void _format(Aspect aspect, IFormattableDocument doc) {
+		aspect.getOwnedAnnotations().forEach(i -> doc.append(doc.format(i), newLine()));
+		doc.append(keyword(aspect, oml.getAspectAccess().getAspectKeyword_1()), oneSpace());
+		doc.surround(keyword(aspect, oml.getAspectAccess().getColonGreaterThanSignKeyword_3_0()), oneSpace());
+		formatCommas(aspect, doc);
+		formatBrackets(aspect, doc);
+		aspect.getOwnedKeys().forEach(i -> doc.prepend(doc.format(i), newLine()));
+		aspect.getOwnedPropertyRestrictions().forEach(i -> doc.prepend(doc.format(i), newLine()));
+		aspect.getOwnedRelationRestrictions().forEach(i -> doc.prepend(doc.format(i), newLine()));
+	}
+
+	protected void _format(Concept concept, IFormattableDocument doc) {
+		concept.getOwnedAnnotations().forEach(i -> doc.append(doc.format(i), newLine()));
+		doc.append(keyword(concept, oml.getConceptAccess().getConceptKeyword_1()), oneSpace());
+		doc.surround(keyword(concept, oml.getConceptAccess().getColonGreaterThanSignKeyword_3_0()), oneSpace());
+		formatCommas(concept, doc);
+		formatBrackets(concept, doc);
+		concept.getOwnedKeys().forEach(i -> doc.prepend(doc.format(i), newLine()));
+		concept.getOwnedPropertyRestrictions().forEach(i -> doc.prepend(doc.format(i), newLine()));
+		concept.getOwnedRelationRestrictions().forEach(i -> doc.prepend(doc.format(i), newLine()));
+		ifNotEmpty(concept.getEnumeratedInstances(), i -> {
+			doc.prepend(keyword(concept, oml.getConceptAccess().getEnumeratesKeyword_4_2_0()), newLine());
+			i.forEach(j -> doc.append(doc.prepend(doc.format(j), oneSpace()), noSpace()));
+		});
+	}
+
+	protected void _format(RelationEntity entity, IFormattableDocument doc) {
+		entity.getOwnedAnnotations().forEach(i -> doc.append(doc.format(i), newLine()));
+		doc.append(keyword(entity, oml.getRelationEntityAccess().getRelationKeyword_1()), oneSpace());
+		doc.surround(keyword(entity, oml.getRelationEntityAccess().getEntityKeyword_2()), oneSpace());
+		formatCommas(entity, doc);
+		formatBrackets(entity, doc);
+		doc.append(doc.prepend(keyword(entity, oml.getRelationEntityAccess().getFromKeyword_6()), newLine()), oneSpace());
+		doc.append(doc.prepend(keyword(entity, oml.getRelationEntityAccess().getToKeyword_8()), newLine()), oneSpace());
+		ifNotNull(entity.getForwardRelation(), i -> doc.prepend(doc.format(i), newLine()));
+		ifNotNull(entity.getReverseRelation(), i -> doc.prepend(doc.format(i), newLine()));
+		doc.prepend(keyword(entity, oml.getRelationEntityAccess().getFunctionalFunctionalKeyword_11_0_0()), newLine());
+		doc.prepend(keyword(entity, oml.getRelationEntityAccess().getInverseFunctionalInverseKeyword_11_1_0_0()), newLine());
+		doc.prepend(keyword(entity, oml.getRelationEntityAccess().getSymmetricSymmetricKeyword_11_2_0()), newLine());
+		doc.prepend(keyword(entity, oml.getRelationEntityAccess().getAsymmetricAsymmetricKeyword_11_3_0()), newLine());
+		doc.prepend(keyword(entity, oml.getRelationEntityAccess().getReflexiveReflexiveKeyword_11_4_0()), newLine());
+		doc.prepend(keyword(entity, oml.getRelationEntityAccess().getIrreflexiveIrreflexiveKeyword_11_5_0()), newLine());
+		doc.prepend(keyword(entity, oml.getRelationEntityAccess().getTransitiveTransitiveKeyword_11_6_0()), newLine());
+		entity.getOwnedKeys().forEach(i -> doc.prepend(doc.format(i), newLine()));
+		entity.getOwnedPropertyRestrictions().forEach(i -> doc.prepend(doc.format(i), newLine()));
+		entity.getOwnedRelationRestrictions().forEach(i -> doc.prepend(doc.format(i), newLine()));
+	}
+
+	protected void _format(Structure structure, IFormattableDocument doc) {
+		structure.getOwnedAnnotations().forEach(i -> doc.append(doc.format(i), newLine()));
+		doc.append(keyword(structure, oml.getStructureAccess().getStructureKeyword_1()), oneSpace());
+		formatCommas(structure, doc);
+		formatBrackets(structure, doc);
+		structure.getOwnedPropertyRestrictions().forEach(i -> doc.prepend(doc.format(i), newLine()));
+	}
+
+	protected void _format(AnnotationProperty property, IFormattableDocument doc) {
+		property.getOwnedAnnotations().forEach(i -> doc.append(doc.format(i), newLine()));
+		doc.append(keyword(property, oml.getAnnotationPropertyAccess().getAnnotationKeyword_1()), oneSpace());
+		doc.surround(keyword(property, oml.getAnnotationPropertyAccess().getPropertyKeyword_2()), oneSpace());
+		formatCommas(property, doc);
+	}
+
+	protected void _format(ScalarProperty property, IFormattableDocument doc) {
+		property.getOwnedAnnotations().forEach(i -> doc.append(doc.format(i), newLine()));
+		doc.append(keyword(property, oml.getScalarPropertyAccess().getScalarKeyword_1()), oneSpace());
+		doc.surround(keyword(property, oml.getScalarPropertyAccess().getPropertyKeyword_2()), oneSpace());
+		formatCommas(property, doc);
+		formatBrackets(property, doc);
+		doc.prepend(keyword(property, oml.getScalarPropertyAccess().getDomainKeyword_5_1()), newLine());
+		doc.prepend(keyword(property, oml.getScalarPropertyAccess().getRangeKeyword_5_3()), newLine());
+		doc.prepend(keyword(property, oml.getScalarPropertyAccess().getFunctionalFunctionalKeyword_5_5_0()), newLine());
+	}
+
+	protected void _format(StructuredProperty property, IFormattableDocument doc) {
+		property.getOwnedAnnotations().forEach(i -> doc.append(doc.format(i), newLine()));
+		doc.append(keyword(property, oml.getStructuredPropertyAccess().getStructuredKeyword_1()), oneSpace());
+		doc.surround(keyword(property, oml.getStructuredPropertyAccess().getPropertyKeyword_2()), oneSpace());
+		formatCommas(property, doc);
+		formatBrackets(property, doc);
+		doc.prepend(keyword(property, oml.getStructuredPropertyAccess().getDomainKeyword_5_1()), newLine());
+		doc.prepend(keyword(property, oml.getStructuredPropertyAccess().getRangeKeyword_5_3()), newLine());
+		doc.prepend(keyword(property, oml.getStructuredPropertyAccess().getFunctionalFunctionalKeyword_5_5_0()), newLine());
+	}
+
+	protected void _format(FacetedScalar scalar, IFormattableDocument doc) {
+		scalar.getOwnedAnnotations().forEach(i -> doc.append(doc.format(i), newLine()));
+		doc.append(keyword(scalar, oml.getFacetedScalarAccess().getScalarKeyword_1()), oneSpace());
+		formatCommas(scalar, doc);
+		formatBrackets(scalar, doc);
+		doc.prepend(keyword(scalar, oml.getFacetedScalarAccess().getLengthKeyword_4_1_0_0()), newLine());
+		doc.prepend(keyword(scalar, oml.getFacetedScalarAccess().getMinLengthKeyword_4_1_1_0()), newLine());
+		doc.prepend(keyword(scalar, oml.getFacetedScalarAccess().getMaxLengthKeyword_4_1_2_0()), newLine());
+		doc.prepend(keyword(scalar, oml.getFacetedScalarAccess().getPatternKeyword_4_1_3_0()), newLine());
+		doc.prepend(keyword(scalar, oml.getFacetedScalarAccess().getLanguageKeyword_4_1_4_0()), newLine());
+		doc.prepend(keyword(scalar, oml.getFacetedScalarAccess().getMinInclusiveKeyword_4_1_5_0()), newLine());
+		ifNotNull(scalar.getMinInclusive(), i -> doc.prepend(doc.format(i), oneSpace()));
+		doc.prepend(keyword(scalar, oml.getFacetedScalarAccess().getMaxInclusiveKeyword_4_1_7_0()), newLine());
+		ifNotNull(scalar.getMaxInclusive(), i -> doc.prepend(doc.format(i), oneSpace()));
+		doc.prepend(keyword(scalar, oml.getFacetedScalarAccess().getMinExclusiveKeyword_4_1_6_0()), newLine());
+		ifNotNull(scalar.getMinExclusive(), i -> doc.prepend(doc.format(i), oneSpace()));
+		doc.prepend(keyword(scalar, oml.getFacetedScalarAccess().getMaxExclusiveKeyword_4_1_8_0()), newLine());
+		ifNotNull(scalar.getMaxExclusive(), i -> doc.prepend(doc.format(i), oneSpace()));
+	}
+
+	protected void _format(EnumeratedScalar scalar, IFormattableDocument doc) {
+		scalar.getOwnedAnnotations().forEach(i -> doc.append(doc.format(i), newLine()));
+		doc.append(keyword(scalar, oml.getEnumeratedScalarAccess().getEnumeratedKeyword_1()), oneSpace());
+		doc.surround(keyword(scalar, oml.getEnumeratedScalarAccess().getScalarKeyword_2()), oneSpace());
+		formatCommas(scalar, doc);
+		formatBrackets(scalar, doc);
+		scalar.getLiterals().forEach(i -> doc.prepend(doc.format(i), newLine()));
+	}
+
+	protected void _format(ForwardRelation relation, IFormattableDocument doc) {
+		relation.getOwnedAnnotations().forEach(i -> doc.append(doc.format(i), newLine()));
+		doc.append(keyword(relation, oml.getForwardRelationAccess().getForwardKeyword_1()), oneSpace());
+	}
+
+	protected void _format(ReverseRelation relation, IFormattableDocument doc) {
+		relation.getOwnedAnnotations().forEach(i -> doc.append(doc.format(i), newLine()));
+		doc.append(keyword(relation, oml.getReverseRelationAccess().getReverseKeyword_1()), oneSpace());
+	}
+
+	protected void _format(Rule rule, IFormattableDocument doc) {
+		rule.getOwnedAnnotations().forEach(i -> doc.append(doc.format(i), newLine()));
+		doc.append(keyword(rule, oml.getRuleAccess().getRuleKeyword_1()), oneSpace());
+		formatBrackets(rule, doc);
+		ifNotEmpty(rule.getAntecedent(), i -> doc.prepend(doc.format(i.get(0)), newLine()));
+		keywords(rule, "^").forEach(i -> doc.surround(i, oneSpace()));
+		rule.getAntecedent().forEach(i -> doc.format(i));
+		doc.surround(keyword(rule, oml.getRuleAccess().getHyphenMinusGreaterThanSignKeyword_6()), oneSpace());
+		rule.getConsequent().forEach(i -> doc.format(i));
+	}
+
+	protected void _format(ConceptInstance instance, IFormattableDocument doc) {
+		instance.getOwnedAnnotations().forEach(i -> doc.append(doc.format(i), newLine()));
+		doc.append(keyword(instance, oml.getConceptInstanceAccess().getCiKeyword_1()), oneSpace());
+		doc.surround(keyword(instance, oml.getConceptInstanceAccess().getColonKeyword_3_0()), oneSpace());
+		formatCommas(instance, doc);
+		formatBrackets(instance, doc);
+		instance.getOwnedPropertyValues().forEach(i -> doc.prepend(doc.format(i), newLine()));
+		instance.getOwnedLinks().forEach(i -> doc.prepend(doc.format(i), newLine()));
+	}
+
+	protected void _format(RelationInstance instance, IFormattableDocument doc) {
+		instance.getOwnedAnnotations().forEach(i -> doc.append(doc.format(i), newLine()));
+		doc.append(keyword(instance, oml.getRelationInstanceAccess().getRiKeyword_1()), oneSpace());
+		doc.surround(keyword(instance, oml.getRelationInstanceAccess().getColonKeyword_3_0()), oneSpace());
+		formatCommas(instance, doc);
+		formatBrackets(instance, doc);
+		doc.append(doc.prepend(keyword(instance, oml.getRelationInstanceAccess().getFromKeyword_5()), newLine()), oneSpace());
+		instance.getSources().forEach(i -> doc.prepend(doc.format(i), oneSpace()));
+		doc.append(doc.prepend(keyword(instance, oml.getRelationInstanceAccess().getToKeyword_8()), newLine()), oneSpace());
+		instance.getTargets().forEach(i -> doc.prepend(doc.format(i), oneSpace()));
+		instance.getOwnedPropertyValues().forEach(i -> doc.prepend(doc.format(i), newLine()));
+		instance.getOwnedLinks().forEach(i -> doc.prepend(doc.format(i), newLine()));
+	}
+
+	protected void _format(StructureInstance instance, IFormattableDocument doc) {
+		formatBrackets(instance, doc);
+		instance.getOwnedPropertyValues().forEach(i -> doc.prepend(doc.format(i), newLine()));
+	}
+
+	protected void _format(AspectReference reference, IFormattableDocument doc) {
+		reference.getOwnedAnnotations().forEach(i -> doc.append(doc.format(i), newLine()));
+		doc.append(keyword(reference, oml.getAspectReferenceAccess().getRefKeyword_1()), oneSpace());
+		doc.surround(keyword(reference, oml.getAspectReferenceAccess().getAspectKeyword_2()), oneSpace());
+		formatCommas(reference, doc);
+		formatBrackets(reference, doc);
+		reference.getOwnedKeys().forEach(i -> doc.prepend(doc.format(i), newLine()));
+		reference.getOwnedPropertyRestrictions().forEach(i -> doc.prepend(doc.format(i), newLine()));
+		reference.getOwnedRelationRestrictions().forEach(i -> doc.prepend(doc.format(i), newLine()));
+	}
+
+	protected void _format(ConceptReference reference, IFormattableDocument doc) {
+		reference.getOwnedAnnotations().forEach(i -> doc.append(doc.format(i), newLine()));
+		doc.append(keyword(reference, oml.getConceptReferenceAccess().getRefKeyword_1()), oneSpace());
+		doc.surround(keyword(reference, oml.getConceptReferenceAccess().getConceptKeyword_2()), oneSpace());
+		formatCommas(reference, doc);
+		formatBrackets(reference, doc);
+		reference.getOwnedKeys().forEach(i -> doc.prepend(doc.format(i), newLine()));
+		reference.getOwnedPropertyRestrictions().forEach(i -> doc.prepend(doc.format(i), newLine()));
+		reference.getOwnedRelationRestrictions().forEach(i -> doc.prepend(doc.format(i), newLine()));
+	}
+
+	protected void _format(RelationEntityReference reference, IFormattableDocument doc) {
+		reference.getOwnedAnnotations().forEach(i -> doc.append(doc.format(i), newLine()));
+		doc.append(keyword(reference, oml.getRelationEntityReferenceAccess().getRefKeyword_1()), oneSpace());
+		doc.surround(keyword(reference, oml.getRelationEntityReferenceAccess().getRelationKeyword_2()), oneSpace());
+		doc.surround(keyword(reference, oml.getRelationEntityReferenceAccess().getEntityKeyword_3()), oneSpace());
+		formatCommas(reference, doc);
+		formatBrackets(reference, doc);
+		reference.getOwnedKeys().forEach(i -> doc.prepend(doc.format(i), newLine()));
+		reference.getOwnedPropertyRestrictions().forEach(i -> doc.prepend(doc.format(i), newLine()));
+		reference.getOwnedRelationRestrictions().forEach(i -> doc.prepend(doc.format(i), newLine()));
+	}
+
+	protected void _format(StructureReference reference, IFormattableDocument doc) {
+		reference.getOwnedAnnotations().forEach(i -> doc.append(doc.format(i), newLine()));
+		doc.append(keyword(reference, oml.getStructureReferenceAccess().getRefKeyword_1()), oneSpace());
+		doc.surround(keyword(reference, oml.getStructureReferenceAccess().getStructureKeyword_2()), oneSpace());
+		formatCommas(reference, doc);
+		formatBrackets(reference, doc);
+		reference.getOwnedPropertyRestrictions().forEach(i -> doc.prepend(doc.format(i), newLine()));
+	}
+
+	protected void _format(AnnotationPropertyReference reference, IFormattableDocument doc) {
+		reference.getOwnedAnnotations().forEach(i -> doc.append(doc.format(i), newLine()));
+		doc.append(keyword(reference, oml.getAnnotationPropertyReferenceAccess().getRefKeyword_1()), oneSpace());
+		doc.surround(keyword(reference, oml.getAnnotationPropertyReferenceAccess().getAnnotationKeyword_2()), oneSpace());
+		doc.surround(keyword(reference, oml.getAnnotationPropertyReferenceAccess().getPropertyKeyword_3()), oneSpace());
+		formatCommas(reference, doc);
+	}
+
+	protected void _format(ScalarPropertyReference reference, IFormattableDocument doc) {
+		reference.getOwnedAnnotations().forEach(i -> doc.append(doc.format(i), newLine()));
+		doc.append(keyword(reference, oml.getScalarPropertyReferenceAccess().getRefKeyword_1()), oneSpace());
+		doc.surround(keyword(reference, oml.getScalarPropertyReferenceAccess().getScalarKeyword_2()), oneSpace());
+		doc.surround(keyword(reference, oml.getScalarPropertyReferenceAccess().getPropertyKeyword_3()), oneSpace());
+		formatCommas(reference, doc);
+	}
+
+	protected void _format(StructuredPropertyReference reference, IFormattableDocument doc) {
+		reference.getOwnedAnnotations().forEach(i -> doc.append(doc.format(i), newLine()));
+		doc.append(keyword(reference, oml.getStructuredPropertyReferenceAccess().getRefKeyword_1()), oneSpace());
+		doc.surround(keyword(reference, oml.getStructuredPropertyReferenceAccess().getStructuredKeyword_2()), oneSpace());
+		doc.surround(keyword(reference, oml.getStructuredPropertyReferenceAccess().getPropertyKeyword_3()), oneSpace());
+		formatCommas(reference, doc);
+	}
+
+	protected void _format(FacetedScalarReference reference, IFormattableDocument doc) {
+		reference.getOwnedAnnotations().forEach(i -> doc.append(doc.format(i), newLine()));
+		doc.append(keyword(reference, oml.getFacetedScalarReferenceAccess().getRefKeyword_1()), oneSpace());
+		doc.surround(keyword(reference, oml.getFacetedScalarReferenceAccess().getScalarKeyword_2()), oneSpace());
+		formatCommas(reference, doc);
+	}
+
+	protected void _format(EnumeratedScalarReference reference, IFormattableDocument doc) {
+		reference.getOwnedAnnotations().forEach(i -> doc.append(doc.format(i), newLine()));
+		doc.append(keyword(reference, oml.getEnumeratedScalarReferenceAccess().getRefKeyword_1()), oneSpace());
+		doc.surround(keyword(reference, oml.getEnumeratedScalarReferenceAccess().getEnumeratedKeyword_2()), oneSpace());
+		doc.surround(keyword(reference, oml.getEnumeratedScalarReferenceAccess().getScalarKeyword_3()), oneSpace());
+		formatCommas(reference, doc);
+	}
+
+	protected void _format(RelationReference reference, IFormattableDocument doc) {
+		reference.getOwnedAnnotations().forEach(i -> doc.append(doc.format(i), newLine()));
+		doc.append(keyword(reference, oml.getRelationReferenceAccess().getRefKeyword_1()), oneSpace());
+		doc.surround(keyword(reference, oml.getRelationReferenceAccess().getRelationKeyword_2()), oneSpace());
+	}
+
+	protected void _format(RuleReference reference, IFormattableDocument doc) {
+		reference.getOwnedAnnotations().forEach(i -> doc.append(doc.format(i), newLine()));
+		doc.append(keyword(reference, oml.getRuleReferenceAccess().getRefKeyword_1()), oneSpace());
+		doc.surround(keyword(reference, oml.getRuleReferenceAccess().getRuleKeyword_2()), oneSpace());
+	}
+
+	protected void _format(ConceptInstanceReference reference, IFormattableDocument doc) {
+		reference.getOwnedAnnotations().forEach(i -> doc.append(doc.format(i), newLine()));
+		doc.append(keyword(reference, oml.getConceptInstanceReferenceAccess().getRefKeyword_1()), oneSpace());
+		doc.surround(keyword(reference, oml.getConceptInstanceReferenceAccess().getCiKeyword_2()), oneSpace());
+		formatCommas(reference, doc);
+		formatBrackets(reference, doc);
+		reference.getOwnedPropertyValues().forEach(i -> doc.prepend(doc.format(i), newLine()));
+		reference.getOwnedLinks().forEach(i -> doc.prepend(doc.format(i), newLine()));
+	}
+
+	protected void _format(RelationInstanceReference reference, IFormattableDocument doc) {
+		reference.getOwnedAnnotations().forEach(i -> doc.append(doc.format(i), newLine()));
+		doc.append(keyword(reference, oml.getRelationInstanceReferenceAccess().getRefKeyword_1()), oneSpace());
+		doc.surround(keyword(reference, oml.getRelationInstanceReferenceAccess().getRiKeyword_2()), oneSpace());
+		formatCommas(reference, doc);
+		formatBrackets(reference, doc);
+		reference.getOwnedPropertyValues().forEach(i -> doc.prepend(doc.format(i), newLine()));
+		reference.getOwnedLinks().forEach(i -> doc.prepend(doc.format(i), newLine()));
+	}
+
+	protected void _format(VocabularyExtension extension, IFormattableDocument doc) {
+		extension.getOwnedAnnotations().forEach(i -> doc.append(doc.format(i), newLine()));
+		doc.append(keyword(extension, oml.getVocabularyExtensionAccess().getExtendsKeyword_1()), oneSpace());
+		doc.surround(keyword(extension, oml.getVocabularyExtensionAccess().getAsKeyword_3_0()), oneSpace());
+	}
+
+	protected void _format(VocabularyUsage usage, IFormattableDocument doc) {
+		usage.getOwnedAnnotations().forEach(i -> doc.append(doc.format(i), newLine()));
+		doc.append(keyword(usage, oml.getVocabularyUsageAccess().getUsesKeyword_1()), oneSpace());
+		doc.surround(keyword(usage, oml.getVocabularyUsageAccess().getAsKeyword_3_0()), oneSpace());
+	}
+
+	protected void _format(VocabularyBundleExtension extension, IFormattableDocument doc) {
+		extension.getOwnedAnnotations().forEach(i -> doc.append(doc.format(i), newLine()));
+		doc.append(keyword(extension, oml.getVocabularyBundleExtensionAccess().getExtendsKeyword_1()), oneSpace());
+		doc.surround(keyword(extension, oml.getVocabularyBundleExtensionAccess().getAsKeyword_3_0()), oneSpace());
+	}
+
+	protected void _format(VocabularyBundleInclusion inclusion, IFormattableDocument doc) {
+		inclusion.getOwnedAnnotations().forEach(i -> doc.append(doc.format(i), newLine()));
+		doc.append(keyword(inclusion, oml.getVocabularyBundleInclusionAccess().getIncludesKeyword_1()), oneSpace());
+		doc.surround(keyword(inclusion, oml.getVocabularyBundleInclusionAccess().getAsKeyword_3_0()), oneSpace());
+	}
+
+	protected void _format(DescriptionExtension extension, IFormattableDocument doc) {
+		extension.getOwnedAnnotations().forEach(i -> doc.append(doc.format(i), newLine()));
+		doc.append(keyword(extension, oml.getDescriptionExtensionAccess().getExtendsKeyword_1()), oneSpace());
+		doc.surround(keyword(extension, oml.getDescriptionExtensionAccess().getAsKeyword_3_0()), oneSpace());
+	}
+
+	protected void _format(DescriptionUsage usage, IFormattableDocument doc) {
+		usage.getOwnedAnnotations().forEach(i -> doc.append(doc.format(i), newLine()));
+		doc.append(keyword(usage, oml.getDescriptionUsageAccess().getUsesKeyword_1()), oneSpace());
+		doc.surround(keyword(usage, oml.getDescriptionUsageAccess().getAsKeyword_3_0()), oneSpace());
+	}
+
+	protected void _format(DescriptionBundleExtension extension, IFormattableDocument doc) {
+		extension.getOwnedAnnotations().forEach(i -> doc.append(doc.format(i), newLine()));
+		doc.append(keyword(extension, oml.getDescriptionBundleExtensionAccess().getExtendsKeyword_1()), oneSpace());
+		doc.surround(keyword(extension, oml.getDescriptionBundleExtensionAccess().getAsKeyword_3_0()), oneSpace());
+	}
+
+	protected void _format(DescriptionBundleInclusion inclusion, IFormattableDocument doc) {
+		inclusion.getOwnedAnnotations().forEach(i -> doc.append(doc.format(i), newLine()));
+		doc.append(keyword(inclusion, oml.getDescriptionBundleInclusionAccess().getIncludesKeyword_1()), oneSpace());
+		doc.surround(keyword(inclusion, oml.getDescriptionBundleInclusionAccess().getAsKeyword_3_0()), oneSpace());
+	}
+
+	protected void _format(DescriptionBundleUsage usage, IFormattableDocument doc) {
+		usage.getOwnedAnnotations().forEach(i -> doc.append(doc.format(i), newLine()));
+		doc.append(keyword(usage, oml.getDescriptionBundleUsageAccess().getUsesKeyword_1()), oneSpace());
+		doc.surround(keyword(usage, oml.getDescriptionBundleUsageAccess().getAsKeyword_3_0()), oneSpace());
+	}
+
+	protected void _format(ScalarPropertyRangeRestrictionAxiom axiom, IFormattableDocument doc) {
+		doc.append(keyword(axiom, oml.getScalarPropertyRangeRestrictionAxiomAccess().getRestrictsKeyword_0()), oneSpace());
+		doc.surround(keyword(axiom, oml.getScalarPropertyRangeRestrictionAxiomAccess().getScalarKeyword_2()), oneSpace());
+		doc.surround(keyword(axiom, oml.getScalarPropertyRangeRestrictionAxiomAccess().getPropertyKeyword_3()), oneSpace());
+		doc.surround(keyword(axiom, oml.getScalarPropertyRangeRestrictionAxiomAccess().getToKeyword_5()), oneSpace());
+	}
+
+	protected void _format(ScalarPropertyCardinalityRestrictionAxiom axiom, IFormattableDocument doc) {
+		doc.append(keyword(axiom, oml.getScalarPropertyCardinalityRestrictionAxiomAccess().getRestrictsKeyword_0()), oneSpace());
+		doc.surround(keyword(axiom, oml.getScalarPropertyCardinalityRestrictionAxiomAccess().getScalarKeyword_1()), oneSpace());
+		doc.surround(keyword(axiom, oml.getScalarPropertyCardinalityRestrictionAxiomAccess().getPropertyKeyword_2()), oneSpace());
+		doc.surround(keyword(axiom, oml.getScalarPropertyCardinalityRestrictionAxiomAccess().getToKeyword_4()), oneSpace());
+		doc.surround(feature(axiom, OmlPackage.Literals.SCALAR_PROPERTY_CARDINALITY_RESTRICTION_AXIOM__KIND), oneSpace());
+		ifNotNull(axiom.getRange(), i -> doc.prepend(feature(i, OmlPackage.Literals.SCALAR_PROPERTY_CARDINALITY_RESTRICTION_AXIOM__RANGE), oneSpace()));
+	}
+
+	protected void _format(ScalarPropertyValueRestrictionAxiom axiom, IFormattableDocument doc) {
+		doc.append(keyword(axiom, oml.getScalarPropertyValueRestrictionAxiomAccess().getRestrictsKeyword_0()), oneSpace());
+		doc.surround(keyword(axiom, oml.getScalarPropertyValueRestrictionAxiomAccess().getScalarKeyword_1()), oneSpace());
+		doc.surround(keyword(axiom, oml.getScalarPropertyValueRestrictionAxiomAccess().getPropertyKeyword_2()), oneSpace());
+		doc.surround(keyword(axiom, oml.getScalarPropertyValueRestrictionAxiomAccess().getToKeyword_4()), oneSpace());
+	}
+
+	protected void _format(StructuredPropertyRangeRestrictionAxiom axiom, IFormattableDocument doc) {
+		doc.append(keyword(axiom, oml.getStructuredPropertyRangeRestrictionAxiomAccess().getRestrictsKeyword_0()), oneSpace());
+		doc.surround(keyword(axiom, oml.getStructuredPropertyRangeRestrictionAxiomAccess().getStructuredKeyword_2()), oneSpace());
+		doc.surround(keyword(axiom, oml.getStructuredPropertyRangeRestrictionAxiomAccess().getPropertyKeyword_3()), oneSpace());
+		doc.surround(keyword(axiom, oml.getStructuredPropertyRangeRestrictionAxiomAccess().getToKeyword_5()), oneSpace());
+	}
+
+	protected void _format(StructuredPropertyCardinalityRestrictionAxiom axiom, IFormattableDocument doc) {
+		doc.append(keyword(axiom, oml.getStructuredPropertyCardinalityRestrictionAxiomAccess().getRestrictsKeyword_0()), oneSpace());
+		doc.surround(keyword(axiom, oml.getStructuredPropertyCardinalityRestrictionAxiomAccess().getStructuredKeyword_1()), oneSpace());
+		doc.surround(keyword(axiom, oml.getStructuredPropertyCardinalityRestrictionAxiomAccess().getPropertyKeyword_2()), oneSpace());
+		doc.surround(keyword(axiom, oml.getStructuredPropertyCardinalityRestrictionAxiomAccess().getToKeyword_4()), oneSpace());
+		doc.surround(feature(axiom, OmlPackage.Literals.STRUCTURED_PROPERTY_CARDINALITY_RESTRICTION_AXIOM__KIND), oneSpace());
+		ifNotNull(axiom.getRange(), i -> doc.prepend(feature(i, OmlPackage.Literals.STRUCTURED_PROPERTY_CARDINALITY_RESTRICTION_AXIOM__RANGE), oneSpace()));
+	}
+
+	protected void _format(StructuredPropertyValueRestrictionAxiom axiom, IFormattableDocument doc) {
+		doc.append(keyword(axiom, oml.getStructuredPropertyValueRestrictionAxiomAccess().getRestrictsKeyword_0()), oneSpace());
+		doc.surround(keyword(axiom, oml.getStructuredPropertyValueRestrictionAxiomAccess().getStructuredKeyword_1()), oneSpace());
+		doc.surround(keyword(axiom, oml.getStructuredPropertyValueRestrictionAxiomAccess().getPropertyKeyword_2()), oneSpace());
+		doc.surround(keyword(axiom, oml.getStructuredPropertyValueRestrictionAxiomAccess().getToKeyword_4()), oneSpace());
+	}
+
+	protected void _format(RelationRangeRestrictionAxiom axiom, IFormattableDocument doc) {
+		doc.append(keyword(axiom, oml.getRelationRangeRestrictionAxiomAccess().getRestrictsKeyword_0()), oneSpace());
+		doc.surround(keyword(axiom, oml.getRelationRangeRestrictionAxiomAccess().getRelationKeyword_2()), oneSpace());
+		doc.surround(keyword(axiom, oml.getRelationRangeRestrictionAxiomAccess().getToKeyword_4()), oneSpace());
+	}
+
+	protected void _format(RelationCardinalityRestrictionAxiom axiom, IFormattableDocument doc) {
+		doc.append(keyword(axiom, oml.getRelationCardinalityRestrictionAxiomAccess().getRestrictsKeyword_0()), oneSpace());
+		doc.surround(keyword(axiom, oml.getRelationCardinalityRestrictionAxiomAccess().getRelationKeyword_1()), oneSpace());
+		doc.surround(keyword(axiom, oml.getRelationCardinalityRestrictionAxiomAccess().getToKeyword_3()), oneSpace());
+		doc.surround(feature(axiom, OmlPackage.Literals.RELATION_CARDINALITY_RESTRICTION_AXIOM__KIND), oneSpace());
+		ifNotNull(axiom.getRange(), i -> doc.prepend(feature(i, OmlPackage.Literals.RELATION_CARDINALITY_RESTRICTION_AXIOM__RANGE), oneSpace()));
+	}
+
+	protected void _format(RelationTargetRestrictionAxiom axiom, IFormattableDocument doc) {
+		doc.append(keyword(axiom, oml.getRelationTargetRestrictionAxiomAccess().getRestrictsKeyword_0()), oneSpace());
+		doc.surround(keyword(axiom, oml.getRelationTargetRestrictionAxiomAccess().getRelationKeyword_1()), oneSpace());
+		doc.surround(keyword(axiom, oml.getRelationTargetRestrictionAxiomAccess().getToKeyword_3()), oneSpace());
+		doc.surround(feature(axiom, OmlPackage.Literals.RELATION_TARGET_RESTRICTION_AXIOM__TARGET), oneSpace());
+	}
+
+	protected void _format(KeyAxiom axiom, IFormattableDocument doc) {
+		doc.append(keyword(axiom, oml.getKeyAxiomAccess().getKeyKeyword_0()), oneSpace());
+		formatCommas(axiom, doc);
+	}
+
+	protected void _format(ScalarPropertyValueAssertion assertion, IFormattableDocument doc) {
+		doc.append(feature(assertion, OmlPackage.Literals.SCALAR_PROPERTY_VALUE_ASSERTION__PROPERTY), oneSpace());
+		ifNotNull(assertion.getValue(), i -> doc.prepend(doc.format(i), oneSpace()));
+	}
+
+	protected void _format(StructuredPropertyValueAssertion assertion, IFormattableDocument doc) {
+		doc.append(feature(assertion, OmlPackage.Literals.STRUCTURED_PROPERTY_VALUE_ASSERTION__PROPERTY), oneSpace());
+	}
+
+	protected void _format(LinkAssertion assertion, IFormattableDocument doc) {
+		doc.append(feature(assertion, OmlPackage.Literals.LINK_ASSERTION__RELATION), oneSpace());
+	}
+
+	protected void _format(TypePredicate predicate, IFormattableDocument doc) {
+		doc.surround(keyword(predicate, oml.getTypePredicateAccess().getLeftParenthesisKeyword_1()), noSpace());
+		doc.prepend(keyword(predicate, oml.getTypePredicateAccess().getRightParenthesisKeyword_3()), noSpace());
+	}
+
+	protected void _format(RelationEntityPredicate predicate, IFormattableDocument doc) {
+		doc.surround(keyword(predicate, oml.getRelationEntityPredicateAccess().getLeftParenthesisKeyword_1()), noSpace());
+		formatCommas(predicate, doc);
+		doc.prepend(keyword(predicate, oml.getRelationEntityPredicateAccess().getRightParenthesisKeyword_7()), noSpace());
     }
-    super.initialize(request);
-  }
 
-  protected void _format(final Annotation _annotation, @Extension final IFormattableDocument document) {
-    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
-      it.noSpace();
-    };
-    document.append(this.textRegionExtensions.regionFor(_annotation).keyword(this._omlGrammarAccess.getAnnotationAccess().getCommercialAtKeyword_0()), _function);
-    Literal _value = _annotation.getValue();
-    Literal _format = null;
-    if (_value!=null) {
-      _format=document.<Literal>format(_value);
-    }
-    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.<Literal>prepend(_format, _function_1);
-  }
-
-  protected void _format(final Vocabulary vocabulary, @Extension final IFormattableDocument document) {
-    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
-      it.setNewLines(0, 0, 0);
-      it.noSpace();
-    };
-    document.<Vocabulary>prepend(vocabulary, _function);
-    final Consumer<Annotation> _function_1 = (Annotation it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
-      };
-      document.<Annotation>append(document.<Annotation>format(it), _function_2);
-    };
-    vocabulary.getOwnedAnnotations().forEach(_function_1);
-    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.append(this.textRegionExtensions.regionFor(vocabulary).keyword(this._omlGrammarAccess.getVocabularyAccess().getVocabularyKeyword_1()), _function_2);
-    final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.surround(this.textRegionExtensions.regionFor(vocabulary).keyword(this._omlGrammarAccess.getVocabularyAccess().getAsKeyword_3()), _function_3);
-    this.formatBraces(vocabulary, document);
-    final Consumer<VocabularyImport> _function_4 = (VocabularyImport it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_5 = (IHiddenRegionFormatter it_1) -> {
-        it_1.setNewLines(2);
-      };
-      document.<VocabularyImport>prepend(document.<VocabularyImport>format(it), _function_5);
-    };
-    vocabulary.getOwnedImports().forEach(_function_4);
-    final Consumer<VocabularyStatement> _function_5 = (VocabularyStatement it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_6 = (IHiddenRegionFormatter it_1) -> {
-        it_1.setNewLines(2);
-      };
-      document.<VocabularyStatement>prepend(document.<VocabularyStatement>format(it), _function_6);
-    };
-    vocabulary.getOwnedStatements().forEach(_function_5);
-  }
-
-  protected void _format(final VocabularyBundle bundle, @Extension final IFormattableDocument document) {
-    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
-      it.setNewLines(0, 0, 0);
-      it.noSpace();
-    };
-    document.<VocabularyBundle>prepend(bundle, _function);
-    final Consumer<Annotation> _function_1 = (Annotation it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
-      };
-      document.<Annotation>append(document.<Annotation>format(it), _function_2);
-    };
-    bundle.getOwnedAnnotations().forEach(_function_1);
-    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.append(this.textRegionExtensions.regionFor(bundle).keyword(this._omlGrammarAccess.getVocabularyBundleAccess().getVocabularyKeyword_1()), _function_2);
-    final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.surround(this.textRegionExtensions.regionFor(bundle).keyword(this._omlGrammarAccess.getVocabularyBundleAccess().getBundleKeyword_2()), _function_3);
-    final Procedure1<IHiddenRegionFormatter> _function_4 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.surround(this.textRegionExtensions.regionFor(bundle).keyword(this._omlGrammarAccess.getVocabularyBundleAccess().getAsKeyword_4()), _function_4);
-    this.formatBraces(bundle, document);
-    final Consumer<VocabularyBundleImport> _function_5 = (VocabularyBundleImport it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_6 = (IHiddenRegionFormatter it_1) -> {
-        it_1.setNewLines(2);
-      };
-      document.<VocabularyBundleImport>prepend(document.<VocabularyBundleImport>format(it), _function_6);
-    };
-    bundle.getOwnedImports().forEach(_function_5);
-  }
-
-  protected void _format(final Description description, @Extension final IFormattableDocument document) {
-    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
-      it.setNewLines(0, 0, 0);
-      it.noSpace();
-    };
-    document.<Description>prepend(description, _function);
-    final Consumer<Annotation> _function_1 = (Annotation it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
-      };
-      document.<Annotation>append(document.<Annotation>format(it), _function_2);
-    };
-    description.getOwnedAnnotations().forEach(_function_1);
-    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.append(this.textRegionExtensions.regionFor(description).keyword(this._omlGrammarAccess.getDescriptionAccess().getDescriptionKeyword_1()), _function_2);
-    final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.surround(this.textRegionExtensions.regionFor(description).keyword(this._omlGrammarAccess.getDescriptionAccess().getAsKeyword_3()), _function_3);
-    this.formatBraces(description, document);
-    final Consumer<DescriptionImport> _function_4 = (DescriptionImport it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_5 = (IHiddenRegionFormatter it_1) -> {
-        it_1.setNewLines(2);
-      };
-      document.<DescriptionImport>prepend(document.<DescriptionImport>format(it), _function_5);
-    };
-    description.getOwnedImports().forEach(_function_4);
-    final Consumer<DescriptionStatement> _function_5 = (DescriptionStatement it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_6 = (IHiddenRegionFormatter it_1) -> {
-        it_1.setNewLines(2);
-      };
-      document.<DescriptionStatement>prepend(document.<DescriptionStatement>format(it), _function_6);
-    };
-    description.getOwnedStatements().forEach(_function_5);
-  }
-
-  protected void _format(final DescriptionBundle bundle, @Extension final IFormattableDocument document) {
-    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
-      it.setNewLines(0, 0, 0);
-      it.noSpace();
-    };
-    document.<DescriptionBundle>prepend(bundle, _function);
-    final Consumer<Annotation> _function_1 = (Annotation it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
-      };
-      document.<Annotation>append(document.<Annotation>format(it), _function_2);
-    };
-    bundle.getOwnedAnnotations().forEach(_function_1);
-    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.append(this.textRegionExtensions.regionFor(bundle).keyword(this._omlGrammarAccess.getDescriptionBundleAccess().getDescriptionKeyword_1()), _function_2);
-    final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.append(this.textRegionExtensions.regionFor(bundle).keyword(this._omlGrammarAccess.getDescriptionBundleAccess().getBundleKeyword_2()), _function_3);
-    final Procedure1<IHiddenRegionFormatter> _function_4 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.surround(this.textRegionExtensions.regionFor(bundle).keyword(this._omlGrammarAccess.getDescriptionBundleAccess().getAsKeyword_4()), _function_4);
-    this.formatBraces(bundle, document);
-    final Consumer<DescriptionBundleImport> _function_5 = (DescriptionBundleImport it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_6 = (IHiddenRegionFormatter it_1) -> {
-        it_1.setNewLines(2);
-      };
-      document.<DescriptionBundleImport>prepend(document.<DescriptionBundleImport>format(it), _function_6);
-    };
-    bundle.getOwnedImports().forEach(_function_5);
-  }
-
-  protected void _format(final Aspect aspect, @Extension final IFormattableDocument document) {
-    final Consumer<Annotation> _function = (Annotation it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
-      };
-      document.<Annotation>append(document.<Annotation>format(it), _function_1);
-    };
-    aspect.getOwnedAnnotations().forEach(_function);
-    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.append(this.textRegionExtensions.regionFor(aspect).keyword(this._omlGrammarAccess.getAspectAccess().getAspectKeyword_1()), _function_1);
-    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.surround(this.textRegionExtensions.regionFor(aspect).keyword(this._omlGrammarAccess.getAspectAccess().getColonGreaterThanSignKeyword_3_0()), _function_2);
-    this.formatCommas(aspect, document);
-    this.formatBrackets(aspect, document);
-    final Consumer<KeyAxiom> _function_3 = (KeyAxiom it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_4 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
-      };
-      document.<KeyAxiom>prepend(document.<KeyAxiom>format(it), _function_4);
-    };
-    aspect.getOwnedKeys().forEach(_function_3);
-    final Consumer<PropertyRestrictionAxiom> _function_4 = (PropertyRestrictionAxiom it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_5 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
-      };
-      document.<PropertyRestrictionAxiom>prepend(document.<PropertyRestrictionAxiom>format(it), _function_5);
-    };
-    aspect.getOwnedPropertyRestrictions().forEach(_function_4);
-    final Consumer<RelationRestrictionAxiom> _function_5 = (RelationRestrictionAxiom it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_6 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
-      };
-      document.<RelationRestrictionAxiom>prepend(document.<RelationRestrictionAxiom>format(it), _function_6);
-    };
-    aspect.getOwnedRelationRestrictions().forEach(_function_5);
-  }
-
-  protected void _format(final Concept concept, @Extension final IFormattableDocument document) {
-    final Consumer<Annotation> _function = (Annotation it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
-      };
-      document.<Annotation>append(document.<Annotation>format(it), _function_1);
-    };
-    concept.getOwnedAnnotations().forEach(_function);
-    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.append(this.textRegionExtensions.regionFor(concept).keyword(this._omlGrammarAccess.getConceptAccess().getConceptKeyword_1()), _function_1);
-    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.surround(this.textRegionExtensions.regionFor(concept).keyword(this._omlGrammarAccess.getConceptAccess().getColonGreaterThanSignKeyword_3_0()), _function_2);
-    this.formatCommas(concept, document);
-    this.formatBrackets(concept, document);
-    final Consumer<KeyAxiom> _function_3 = (KeyAxiom it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_4 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
-      };
-      document.<KeyAxiom>prepend(document.<KeyAxiom>format(it), _function_4);
-    };
-    concept.getOwnedKeys().forEach(_function_3);
-    final Consumer<PropertyRestrictionAxiom> _function_4 = (PropertyRestrictionAxiom it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_5 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
-      };
-      document.<PropertyRestrictionAxiom>prepend(document.<PropertyRestrictionAxiom>format(it), _function_5);
-    };
-    concept.getOwnedPropertyRestrictions().forEach(_function_4);
-    final Consumer<RelationRestrictionAxiom> _function_5 = (RelationRestrictionAxiom it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_6 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
-      };
-      document.<RelationRestrictionAxiom>prepend(document.<RelationRestrictionAxiom>format(it), _function_6);
-    };
-    concept.getOwnedRelationRestrictions().forEach(_function_5);
-  }
-
-  protected void _format(final RelationEntity entity, @Extension final IFormattableDocument document) {
-    final Consumer<Annotation> _function = (Annotation it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
-      };
-      document.<Annotation>append(document.<Annotation>format(it), _function_1);
-    };
-    entity.getOwnedAnnotations().forEach(_function);
-    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.append(this.textRegionExtensions.regionFor(entity).keyword(this._omlGrammarAccess.getRelationEntityAccess().getRelationKeyword_1()), _function_1);
-    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.surround(this.textRegionExtensions.regionFor(entity).keyword(this._omlGrammarAccess.getRelationEntityAccess().getEntityKeyword_2()), _function_2);
-    this.formatCommas(entity, document);
-    this.formatBrackets(entity, document);
-    final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
-      it.newLine();
-    };
-    final Procedure1<IHiddenRegionFormatter> _function_4 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.append(document.prepend(this.textRegionExtensions.regionFor(entity).keyword(this._omlGrammarAccess.getRelationEntityAccess().getFromKeyword_6()), _function_3), _function_4);
-    final Procedure1<IHiddenRegionFormatter> _function_5 = (IHiddenRegionFormatter it) -> {
-      it.newLine();
-    };
-    final Procedure1<IHiddenRegionFormatter> _function_6 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.append(document.prepend(this.textRegionExtensions.regionFor(entity).keyword(this._omlGrammarAccess.getRelationEntityAccess().getToKeyword_8()), _function_5), _function_6);
-    ForwardRelation _forwardRelation = entity.getForwardRelation();
-    ForwardRelation _format = null;
-    if (_forwardRelation!=null) {
-      _format=document.<ForwardRelation>format(_forwardRelation);
-    }
-    final Procedure1<IHiddenRegionFormatter> _function_7 = (IHiddenRegionFormatter it) -> {
-      it.newLine();
-    };
-    document.<ForwardRelation>prepend(_format, _function_7);
-    ReverseRelation _reverseRelation = entity.getReverseRelation();
-    ReverseRelation _format_1 = null;
-    if (_reverseRelation!=null) {
-      _format_1=document.<ReverseRelation>format(_reverseRelation);
-    }
-    final Procedure1<IHiddenRegionFormatter> _function_8 = (IHiddenRegionFormatter it) -> {
-      it.newLine();
-    };
-    document.<ReverseRelation>prepend(_format_1, _function_8);
-    final Procedure1<IHiddenRegionFormatter> _function_9 = (IHiddenRegionFormatter it) -> {
-      it.newLine();
-    };
-    document.prepend(this.textRegionExtensions.regionFor(entity).keyword(this._omlGrammarAccess.getRelationEntityAccess().getFunctionalFunctionalKeyword_11_0_0()), _function_9);
-    final Procedure1<IHiddenRegionFormatter> _function_10 = (IHiddenRegionFormatter it) -> {
-      it.newLine();
-    };
-    document.prepend(this.textRegionExtensions.regionFor(entity).keyword(this._omlGrammarAccess.getRelationEntityAccess().getInverseFunctionalInverseKeyword_11_1_0_0()), _function_10);
-    final Procedure1<IHiddenRegionFormatter> _function_11 = (IHiddenRegionFormatter it) -> {
-      it.newLine();
-    };
-    document.prepend(this.textRegionExtensions.regionFor(entity).keyword(this._omlGrammarAccess.getRelationEntityAccess().getSymmetricSymmetricKeyword_11_2_0()), _function_11);
-    final Procedure1<IHiddenRegionFormatter> _function_12 = (IHiddenRegionFormatter it) -> {
-      it.newLine();
-    };
-    document.prepend(this.textRegionExtensions.regionFor(entity).keyword(this._omlGrammarAccess.getRelationEntityAccess().getAsymmetricAsymmetricKeyword_11_3_0()), _function_12);
-    final Procedure1<IHiddenRegionFormatter> _function_13 = (IHiddenRegionFormatter it) -> {
-      it.newLine();
-    };
-    document.prepend(this.textRegionExtensions.regionFor(entity).keyword(this._omlGrammarAccess.getRelationEntityAccess().getReflexiveReflexiveKeyword_11_4_0()), _function_13);
-    final Procedure1<IHiddenRegionFormatter> _function_14 = (IHiddenRegionFormatter it) -> {
-      it.newLine();
-    };
-    document.prepend(this.textRegionExtensions.regionFor(entity).keyword(this._omlGrammarAccess.getRelationEntityAccess().getIrreflexiveIrreflexiveKeyword_11_5_0()), _function_14);
-    final Procedure1<IHiddenRegionFormatter> _function_15 = (IHiddenRegionFormatter it) -> {
-      it.newLine();
-    };
-    document.prepend(this.textRegionExtensions.regionFor(entity).keyword(this._omlGrammarAccess.getRelationEntityAccess().getTransitiveTransitiveKeyword_11_6_0()), _function_15);
-    final Consumer<KeyAxiom> _function_16 = (KeyAxiom it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_17 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
-      };
-      document.<KeyAxiom>prepend(document.<KeyAxiom>format(it), _function_17);
-    };
-    entity.getOwnedKeys().forEach(_function_16);
-    final Consumer<PropertyRestrictionAxiom> _function_17 = (PropertyRestrictionAxiom it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_18 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
-      };
-      document.<PropertyRestrictionAxiom>prepend(document.<PropertyRestrictionAxiom>format(it), _function_18);
-    };
-    entity.getOwnedPropertyRestrictions().forEach(_function_17);
-    final Consumer<RelationRestrictionAxiom> _function_18 = (RelationRestrictionAxiom it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_19 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
-      };
-      document.<RelationRestrictionAxiom>prepend(document.<RelationRestrictionAxiom>format(it), _function_19);
-    };
-    entity.getOwnedRelationRestrictions().forEach(_function_18);
-  }
-
-  protected void _format(final Structure structure, @Extension final IFormattableDocument document) {
-    final Consumer<Annotation> _function = (Annotation it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
-      };
-      document.<Annotation>append(document.<Annotation>format(it), _function_1);
-    };
-    structure.getOwnedAnnotations().forEach(_function);
-    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.append(this.textRegionExtensions.regionFor(structure).keyword(this._omlGrammarAccess.getStructureAccess().getStructureKeyword_1()), _function_1);
-    this.formatCommas(structure, document);
-    this.formatBrackets(structure, document);
-    final Consumer<PropertyRestrictionAxiom> _function_2 = (PropertyRestrictionAxiom it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
-      };
-      document.<PropertyRestrictionAxiom>prepend(document.<PropertyRestrictionAxiom>format(it), _function_3);
-    };
-    structure.getOwnedPropertyRestrictions().forEach(_function_2);
-  }
-
-  protected void _format(final AnnotationProperty property, @Extension final IFormattableDocument document) {
-    final Consumer<Annotation> _function = (Annotation it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
-      };
-      document.<Annotation>append(document.<Annotation>format(it), _function_1);
-    };
-    property.getOwnedAnnotations().forEach(_function);
-    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.append(this.textRegionExtensions.regionFor(property).keyword(this._omlGrammarAccess.getAnnotationPropertyAccess().getAnnotationKeyword_1()), _function_1);
-    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.surround(this.textRegionExtensions.regionFor(property).keyword(this._omlGrammarAccess.getAnnotationPropertyAccess().getPropertyKeyword_2()), _function_2);
-    this.formatCommas(property, document);
-  }
-
-  protected void _format(final ScalarProperty property, @Extension final IFormattableDocument document) {
-    final Consumer<Annotation> _function = (Annotation it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
-      };
-      document.<Annotation>append(document.<Annotation>format(it), _function_1);
-    };
-    property.getOwnedAnnotations().forEach(_function);
-    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.append(this.textRegionExtensions.regionFor(property).keyword(this._omlGrammarAccess.getScalarPropertyAccess().getScalarKeyword_1()), _function_1);
-    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.surround(this.textRegionExtensions.regionFor(property).keyword(this._omlGrammarAccess.getScalarPropertyAccess().getPropertyKeyword_2()), _function_2);
-    this.formatCommas(property, document);
-    this.formatBrackets(property, document);
-    final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
-      it.newLine();
-    };
-    document.prepend(this.textRegionExtensions.regionFor(property).keyword(this._omlGrammarAccess.getScalarPropertyAccess().getDomainKeyword_5_1()), _function_3);
-    final Procedure1<IHiddenRegionFormatter> _function_4 = (IHiddenRegionFormatter it) -> {
-      it.newLine();
-    };
-    document.prepend(this.textRegionExtensions.regionFor(property).keyword(this._omlGrammarAccess.getScalarPropertyAccess().getRangeKeyword_5_3()), _function_4);
-    final Procedure1<IHiddenRegionFormatter> _function_5 = (IHiddenRegionFormatter it) -> {
-      it.newLine();
-    };
-    document.prepend(this.textRegionExtensions.regionFor(property).keyword(this._omlGrammarAccess.getScalarPropertyAccess().getFunctionalFunctionalKeyword_5_5_0()), _function_5);
-  }
-
-  protected void _format(final StructuredProperty property, @Extension final IFormattableDocument document) {
-    final Consumer<Annotation> _function = (Annotation it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
-      };
-      document.<Annotation>append(document.<Annotation>format(it), _function_1);
-    };
-    property.getOwnedAnnotations().forEach(_function);
-    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.append(this.textRegionExtensions.regionFor(property).keyword(this._omlGrammarAccess.getStructuredPropertyAccess().getStructuredKeyword_1()), _function_1);
-    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.surround(this.textRegionExtensions.regionFor(property).keyword(this._omlGrammarAccess.getStructuredPropertyAccess().getPropertyKeyword_2()), _function_2);
-    this.formatCommas(property, document);
-    this.formatBrackets(property, document);
-    final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
-      it.newLine();
-    };
-    document.prepend(this.textRegionExtensions.regionFor(property).keyword(this._omlGrammarAccess.getStructuredPropertyAccess().getDomainKeyword_5_1()), _function_3);
-    final Procedure1<IHiddenRegionFormatter> _function_4 = (IHiddenRegionFormatter it) -> {
-      it.newLine();
-    };
-    document.prepend(this.textRegionExtensions.regionFor(property).keyword(this._omlGrammarAccess.getStructuredPropertyAccess().getRangeKeyword_5_3()), _function_4);
-    final Procedure1<IHiddenRegionFormatter> _function_5 = (IHiddenRegionFormatter it) -> {
-      it.newLine();
-    };
-    document.prepend(this.textRegionExtensions.regionFor(property).keyword(this._omlGrammarAccess.getStructuredPropertyAccess().getFunctionalFunctionalKeyword_5_5_0()), _function_5);
-  }
-
-  protected void _format(final FacetedScalar scalar, @Extension final IFormattableDocument document) {
-    final Consumer<Annotation> _function = (Annotation it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
-      };
-      document.<Annotation>append(document.<Annotation>format(it), _function_1);
-    };
-    scalar.getOwnedAnnotations().forEach(_function);
-    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.append(this.textRegionExtensions.regionFor(scalar).keyword(this._omlGrammarAccess.getFacetedScalarAccess().getScalarKeyword_1()), _function_1);
-    this.formatCommas(scalar, document);
-    this.formatBrackets(scalar, document);
-    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
-      it.newLine();
-    };
-    document.prepend(this.textRegionExtensions.regionFor(scalar).keyword(this._omlGrammarAccess.getFacetedScalarAccess().getLengthKeyword_4_1_0_0()), _function_2);
-    final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
-      it.newLine();
-    };
-    document.prepend(this.textRegionExtensions.regionFor(scalar).keyword(this._omlGrammarAccess.getFacetedScalarAccess().getMinLengthKeyword_4_1_1_0()), _function_3);
-    final Procedure1<IHiddenRegionFormatter> _function_4 = (IHiddenRegionFormatter it) -> {
-      it.newLine();
-    };
-    document.prepend(this.textRegionExtensions.regionFor(scalar).keyword(this._omlGrammarAccess.getFacetedScalarAccess().getMaxLengthKeyword_4_1_2_0()), _function_4);
-    final Procedure1<IHiddenRegionFormatter> _function_5 = (IHiddenRegionFormatter it) -> {
-      it.newLine();
-    };
-    document.prepend(this.textRegionExtensions.regionFor(scalar).keyword(this._omlGrammarAccess.getFacetedScalarAccess().getPatternKeyword_4_1_3_0()), _function_5);
-    final Procedure1<IHiddenRegionFormatter> _function_6 = (IHiddenRegionFormatter it) -> {
-      it.newLine();
-    };
-    document.prepend(this.textRegionExtensions.regionFor(scalar).keyword(this._omlGrammarAccess.getFacetedScalarAccess().getLanguageKeyword_4_1_4_0()), _function_6);
-    final Procedure1<IHiddenRegionFormatter> _function_7 = (IHiddenRegionFormatter it) -> {
-      it.newLine();
-    };
-    document.prepend(this.textRegionExtensions.regionFor(scalar).keyword(this._omlGrammarAccess.getFacetedScalarAccess().getMinInclusiveKeyword_4_1_5_0()), _function_7);
-    Literal _minInclusive = scalar.getMinInclusive();
-    Literal _format = null;
-    if (_minInclusive!=null) {
-      _format=document.<Literal>format(_minInclusive);
-    }
-    final Procedure1<IHiddenRegionFormatter> _function_8 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.<Literal>prepend(_format, _function_8);
-    final Procedure1<IHiddenRegionFormatter> _function_9 = (IHiddenRegionFormatter it) -> {
-      it.newLine();
-    };
-    document.prepend(this.textRegionExtensions.regionFor(scalar).keyword(this._omlGrammarAccess.getFacetedScalarAccess().getMaxInclusiveKeyword_4_1_7_0()), _function_9);
-    Literal _maxInclusive = scalar.getMaxInclusive();
-    Literal _format_1 = null;
-    if (_maxInclusive!=null) {
-      _format_1=document.<Literal>format(_maxInclusive);
-    }
-    final Procedure1<IHiddenRegionFormatter> _function_10 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.<Literal>prepend(_format_1, _function_10);
-    final Procedure1<IHiddenRegionFormatter> _function_11 = (IHiddenRegionFormatter it) -> {
-      it.newLine();
-    };
-    document.prepend(this.textRegionExtensions.regionFor(scalar).keyword(this._omlGrammarAccess.getFacetedScalarAccess().getMinExclusiveKeyword_4_1_6_0()), _function_11);
-    Literal _minExclusive = scalar.getMinExclusive();
-    Literal _format_2 = null;
-    if (_minExclusive!=null) {
-      _format_2=document.<Literal>format(_minExclusive);
-    }
-    final Procedure1<IHiddenRegionFormatter> _function_12 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.<Literal>prepend(_format_2, _function_12);
-    final Procedure1<IHiddenRegionFormatter> _function_13 = (IHiddenRegionFormatter it) -> {
-      it.newLine();
-    };
-    document.prepend(this.textRegionExtensions.regionFor(scalar).keyword(this._omlGrammarAccess.getFacetedScalarAccess().getMaxExclusiveKeyword_4_1_8_0()), _function_13);
-    Literal _maxExclusive = scalar.getMaxExclusive();
-    Literal _format_3 = null;
-    if (_maxExclusive!=null) {
-      _format_3=document.<Literal>format(_maxExclusive);
-    }
-    final Procedure1<IHiddenRegionFormatter> _function_14 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.<Literal>prepend(_format_3, _function_14);
-  }
-
-  protected void _format(final EnumeratedScalar scalar, @Extension final IFormattableDocument document) {
-    final Consumer<Annotation> _function = (Annotation it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
-      };
-      document.<Annotation>append(document.<Annotation>format(it), _function_1);
-    };
-    scalar.getOwnedAnnotations().forEach(_function);
-    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.append(this.textRegionExtensions.regionFor(scalar).keyword(this._omlGrammarAccess.getEnumeratedScalarAccess().getEnumeratedKeyword_1()), _function_1);
-    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.surround(this.textRegionExtensions.regionFor(scalar).keyword(this._omlGrammarAccess.getEnumeratedScalarAccess().getScalarKeyword_2()), _function_2);
-    this.formatCommas(scalar, document);
-    this.formatBrackets(scalar, document);
-    final Consumer<Literal> _function_3 = (Literal it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_4 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
-      };
-      document.<Literal>prepend(document.<Literal>format(it), _function_4);
-    };
-    scalar.getLiterals().forEach(_function_3);
-  }
-
-  protected void _format(final ForwardRelation relation, @Extension final IFormattableDocument document) {
-    final Consumer<Annotation> _function = (Annotation it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
-      };
-      document.<Annotation>append(document.<Annotation>format(it), _function_1);
-    };
-    relation.getOwnedAnnotations().forEach(_function);
-    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.append(this.textRegionExtensions.regionFor(relation).keyword(this._omlGrammarAccess.getForwardRelationAccess().getForwardKeyword_1()), _function_1);
-  }
-
-  protected void _format(final ReverseRelation relation, @Extension final IFormattableDocument document) {
-    final Consumer<Annotation> _function = (Annotation it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
-      };
-      document.<Annotation>append(document.<Annotation>format(it), _function_1);
-    };
-    relation.getOwnedAnnotations().forEach(_function);
-    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.append(this.textRegionExtensions.regionFor(relation).keyword(this._omlGrammarAccess.getReverseRelationAccess().getReverseKeyword_1()), _function_1);
-  }
-
-  protected void _format(final Rule rule, @Extension final IFormattableDocument document) {
-    final Consumer<Annotation> _function = (Annotation it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
-      };
-      document.<Annotation>append(document.<Annotation>format(it), _function_1);
-    };
-    rule.getOwnedAnnotations().forEach(_function);
-    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.append(this.textRegionExtensions.regionFor(rule).keyword(this._omlGrammarAccess.getRuleAccess().getRuleKeyword_1()), _function_1);
-    this.formatBrackets(rule, document);
-    Predicate _head = IterableExtensions.<Predicate>head(rule.getAntecedent());
-    Predicate _format = null;
-    if (_head!=null) {
-      _format=document.<Predicate>format(_head);
-    }
-    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
-      it.newLine();
-    };
-    document.<Predicate>prepend(_format, _function_2);
-    final Consumer<ISemanticRegion> _function_3 = (ISemanticRegion it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_4 = (IHiddenRegionFormatter it_1) -> {
-        it_1.oneSpace();
-      };
-      document.surround(it, _function_4);
-    };
-    this.textRegionExtensions.regionFor(rule).keywords("^").forEach(_function_3);
-    final Consumer<Predicate> _function_4 = (Predicate it) -> {
-      document.<Predicate>format(it);
-    };
-    rule.getAntecedent().forEach(_function_4);
-    final Procedure1<IHiddenRegionFormatter> _function_5 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.surround(this.textRegionExtensions.regionFor(rule).keyword(this._omlGrammarAccess.getRuleAccess().getHyphenMinusGreaterThanSignKeyword_6()), _function_5);
-    final Consumer<Predicate> _function_6 = (Predicate it) -> {
-      document.<Predicate>format(it);
-    };
-    rule.getConsequent().forEach(_function_6);
-  }
-
-  protected void _format(final ConceptInstance instance, @Extension final IFormattableDocument document) {
-    final Consumer<Annotation> _function = (Annotation it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
-      };
-      document.<Annotation>append(document.<Annotation>format(it), _function_1);
-    };
-    instance.getOwnedAnnotations().forEach(_function);
-    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.append(this.textRegionExtensions.regionFor(instance).keyword(this._omlGrammarAccess.getConceptInstanceAccess().getCiKeyword_1()), _function_1);
-    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.surround(this.textRegionExtensions.regionFor(instance).keyword(this._omlGrammarAccess.getConceptInstanceAccess().getColonKeyword_3_0()), _function_2);
-    this.formatCommas(instance, document);
-    this.formatBrackets(instance, document);
-    final Consumer<PropertyValueAssertion> _function_3 = (PropertyValueAssertion it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_4 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
-      };
-      document.<PropertyValueAssertion>prepend(document.<PropertyValueAssertion>format(it), _function_4);
-    };
-    instance.getOwnedPropertyValues().forEach(_function_3);
-    final Consumer<LinkAssertion> _function_4 = (LinkAssertion it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_5 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
-      };
-      document.<LinkAssertion>prepend(document.<LinkAssertion>format(it), _function_5);
-    };
-    instance.getOwnedLinks().forEach(_function_4);
-  }
-
-  protected void _format(final RelationInstance instance, @Extension final IFormattableDocument document) {
-    final Consumer<Annotation> _function = (Annotation it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
-      };
-      document.<Annotation>append(document.<Annotation>format(it), _function_1);
-    };
-    instance.getOwnedAnnotations().forEach(_function);
-    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.append(this.textRegionExtensions.regionFor(instance).keyword(this._omlGrammarAccess.getRelationInstanceAccess().getRiKeyword_1()), _function_1);
-    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.surround(this.textRegionExtensions.regionFor(instance).keyword(this._omlGrammarAccess.getRelationInstanceAccess().getColonKeyword_3_0()), _function_2);
-    this.formatCommas(instance, document);
-    this.formatBrackets(instance, document);
-    final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
-      it.newLine();
-    };
-    final Procedure1<IHiddenRegionFormatter> _function_4 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.append(document.prepend(this.textRegionExtensions.regionFor(instance).keyword(this._omlGrammarAccess.getRelationInstanceAccess().getFromKeyword_5()), _function_3), _function_4);
-    final Consumer<NamedInstance> _function_5 = (NamedInstance it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_6 = (IHiddenRegionFormatter it_1) -> {
-        it_1.oneSpace();
-      };
-      document.<NamedInstance>prepend(document.<NamedInstance>format(it), _function_6);
-    };
-    instance.getSources().forEach(_function_5);
-    final Procedure1<IHiddenRegionFormatter> _function_6 = (IHiddenRegionFormatter it) -> {
-      it.newLine();
-    };
-    final Procedure1<IHiddenRegionFormatter> _function_7 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.append(document.prepend(this.textRegionExtensions.regionFor(instance).keyword(this._omlGrammarAccess.getRelationInstanceAccess().getToKeyword_8()), _function_6), _function_7);
-    final Consumer<NamedInstance> _function_8 = (NamedInstance it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_9 = (IHiddenRegionFormatter it_1) -> {
-        it_1.oneSpace();
-      };
-      document.<NamedInstance>prepend(document.<NamedInstance>format(it), _function_9);
-    };
-    instance.getTargets().forEach(_function_8);
-    final Consumer<PropertyValueAssertion> _function_9 = (PropertyValueAssertion it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_10 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
-      };
-      document.<PropertyValueAssertion>prepend(document.<PropertyValueAssertion>format(it), _function_10);
-    };
-    instance.getOwnedPropertyValues().forEach(_function_9);
-    final Consumer<LinkAssertion> _function_10 = (LinkAssertion it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_11 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
-      };
-      document.<LinkAssertion>prepend(document.<LinkAssertion>format(it), _function_11);
-    };
-    instance.getOwnedLinks().forEach(_function_10);
-  }
-
-  protected void _format(final StructureInstance instance, @Extension final IFormattableDocument document) {
-    this.formatBrackets(instance, document);
-    final Consumer<PropertyValueAssertion> _function = (PropertyValueAssertion it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
-      };
-      document.<PropertyValueAssertion>prepend(document.<PropertyValueAssertion>format(it), _function_1);
-    };
-    instance.getOwnedPropertyValues().forEach(_function);
-  }
-
-  protected void _format(final AspectReference reference, @Extension final IFormattableDocument document) {
-    final Consumer<Annotation> _function = (Annotation it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
-      };
-      document.<Annotation>append(document.<Annotation>format(it), _function_1);
-    };
-    reference.getOwnedAnnotations().forEach(_function);
-    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.append(this.textRegionExtensions.regionFor(reference).keyword(this._omlGrammarAccess.getAspectReferenceAccess().getRefKeyword_1()), _function_1);
-    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.surround(this.textRegionExtensions.regionFor(reference).keyword(this._omlGrammarAccess.getAspectReferenceAccess().getAspectKeyword_2()), _function_2);
-    this.formatCommas(reference, document);
-    this.formatBrackets(reference, document);
-    final Consumer<KeyAxiom> _function_3 = (KeyAxiom it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_4 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
-      };
-      document.<KeyAxiom>prepend(document.<KeyAxiom>format(it), _function_4);
-    };
-    reference.getOwnedKeys().forEach(_function_3);
-    final Consumer<PropertyRestrictionAxiom> _function_4 = (PropertyRestrictionAxiom it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_5 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
-      };
-      document.<PropertyRestrictionAxiom>prepend(document.<PropertyRestrictionAxiom>format(it), _function_5);
-    };
-    reference.getOwnedPropertyRestrictions().forEach(_function_4);
-    final Consumer<RelationRestrictionAxiom> _function_5 = (RelationRestrictionAxiom it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_6 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
-      };
-      document.<RelationRestrictionAxiom>prepend(document.<RelationRestrictionAxiom>format(it), _function_6);
-    };
-    reference.getOwnedRelationRestrictions().forEach(_function_5);
-  }
-
-  protected void _format(final ConceptReference reference, @Extension final IFormattableDocument document) {
-    final Consumer<Annotation> _function = (Annotation it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
-      };
-      document.<Annotation>append(document.<Annotation>format(it), _function_1);
-    };
-    reference.getOwnedAnnotations().forEach(_function);
-    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.append(this.textRegionExtensions.regionFor(reference).keyword(this._omlGrammarAccess.getConceptReferenceAccess().getRefKeyword_1()), _function_1);
-    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.surround(this.textRegionExtensions.regionFor(reference).keyword(this._omlGrammarAccess.getConceptReferenceAccess().getConceptKeyword_2()), _function_2);
-    this.formatCommas(reference, document);
-    this.formatBrackets(reference, document);
-    final Consumer<KeyAxiom> _function_3 = (KeyAxiom it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_4 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
-      };
-      document.<KeyAxiom>prepend(document.<KeyAxiom>format(it), _function_4);
-    };
-    reference.getOwnedKeys().forEach(_function_3);
-    final Consumer<PropertyRestrictionAxiom> _function_4 = (PropertyRestrictionAxiom it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_5 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
-      };
-      document.<PropertyRestrictionAxiom>prepend(document.<PropertyRestrictionAxiom>format(it), _function_5);
-    };
-    reference.getOwnedPropertyRestrictions().forEach(_function_4);
-    final Consumer<RelationRestrictionAxiom> _function_5 = (RelationRestrictionAxiom it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_6 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
-      };
-      document.<RelationRestrictionAxiom>prepend(document.<RelationRestrictionAxiom>format(it), _function_6);
-    };
-    reference.getOwnedRelationRestrictions().forEach(_function_5);
-  }
-
-  protected void _format(final RelationEntityReference reference, @Extension final IFormattableDocument document) {
-    final Consumer<Annotation> _function = (Annotation it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
-      };
-      document.<Annotation>append(document.<Annotation>format(it), _function_1);
-    };
-    reference.getOwnedAnnotations().forEach(_function);
-    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.append(this.textRegionExtensions.regionFor(reference).keyword(this._omlGrammarAccess.getRelationEntityReferenceAccess().getRefKeyword_1()), _function_1);
-    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.surround(this.textRegionExtensions.regionFor(reference).keyword(this._omlGrammarAccess.getRelationEntityReferenceAccess().getRelationKeyword_2()), _function_2);
-    final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.surround(this.textRegionExtensions.regionFor(reference).keyword(this._omlGrammarAccess.getRelationEntityReferenceAccess().getEntityKeyword_3()), _function_3);
-    this.formatCommas(reference, document);
-    this.formatBrackets(reference, document);
-    final Consumer<KeyAxiom> _function_4 = (KeyAxiom it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_5 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
-      };
-      document.<KeyAxiom>prepend(document.<KeyAxiom>format(it), _function_5);
-    };
-    reference.getOwnedKeys().forEach(_function_4);
-    final Consumer<PropertyRestrictionAxiom> _function_5 = (PropertyRestrictionAxiom it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_6 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
-      };
-      document.<PropertyRestrictionAxiom>prepend(document.<PropertyRestrictionAxiom>format(it), _function_6);
-    };
-    reference.getOwnedPropertyRestrictions().forEach(_function_5);
-    final Consumer<RelationRestrictionAxiom> _function_6 = (RelationRestrictionAxiom it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_7 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
-      };
-      document.<RelationRestrictionAxiom>prepend(document.<RelationRestrictionAxiom>format(it), _function_7);
-    };
-    reference.getOwnedRelationRestrictions().forEach(_function_6);
-  }
-
-  protected void _format(final StructureReference reference, @Extension final IFormattableDocument document) {
-    final Consumer<Annotation> _function = (Annotation it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
-      };
-      document.<Annotation>append(document.<Annotation>format(it), _function_1);
-    };
-    reference.getOwnedAnnotations().forEach(_function);
-    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.append(this.textRegionExtensions.regionFor(reference).keyword(this._omlGrammarAccess.getStructureReferenceAccess().getRefKeyword_1()), _function_1);
-    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.surround(this.textRegionExtensions.regionFor(reference).keyword(this._omlGrammarAccess.getStructureReferenceAccess().getStructureKeyword_2()), _function_2);
-    this.formatCommas(reference, document);
-    this.formatBrackets(reference, document);
-    final Consumer<PropertyRestrictionAxiom> _function_3 = (PropertyRestrictionAxiom it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_4 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
-      };
-      document.<PropertyRestrictionAxiom>prepend(document.<PropertyRestrictionAxiom>format(it), _function_4);
-    };
-    reference.getOwnedPropertyRestrictions().forEach(_function_3);
-  }
-
-  protected void _format(final AnnotationPropertyReference reference, @Extension final IFormattableDocument document) {
-    final Consumer<Annotation> _function = (Annotation it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
-      };
-      document.<Annotation>append(document.<Annotation>format(it), _function_1);
-    };
-    reference.getOwnedAnnotations().forEach(_function);
-    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.append(this.textRegionExtensions.regionFor(reference).keyword(this._omlGrammarAccess.getAnnotationPropertyReferenceAccess().getRefKeyword_1()), _function_1);
-    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.surround(this.textRegionExtensions.regionFor(reference).keyword(this._omlGrammarAccess.getAnnotationPropertyReferenceAccess().getAnnotationKeyword_2()), _function_2);
-    final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.surround(this.textRegionExtensions.regionFor(reference).keyword(this._omlGrammarAccess.getAnnotationPropertyReferenceAccess().getPropertyKeyword_3()), _function_3);
-    this.formatCommas(reference, document);
-  }
-
-  protected void _format(final ScalarPropertyReference reference, @Extension final IFormattableDocument document) {
-    final Consumer<Annotation> _function = (Annotation it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
-      };
-      document.<Annotation>append(document.<Annotation>format(it), _function_1);
-    };
-    reference.getOwnedAnnotations().forEach(_function);
-    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.append(this.textRegionExtensions.regionFor(reference).keyword(this._omlGrammarAccess.getScalarPropertyReferenceAccess().getRefKeyword_1()), _function_1);
-    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.surround(this.textRegionExtensions.regionFor(reference).keyword(this._omlGrammarAccess.getScalarPropertyReferenceAccess().getScalarKeyword_2()), _function_2);
-    final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.surround(this.textRegionExtensions.regionFor(reference).keyword(this._omlGrammarAccess.getScalarPropertyReferenceAccess().getPropertyKeyword_3()), _function_3);
-    this.formatCommas(reference, document);
-  }
-
-  protected void _format(final StructuredPropertyReference reference, @Extension final IFormattableDocument document) {
-    final Consumer<Annotation> _function = (Annotation it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
-      };
-      document.<Annotation>append(document.<Annotation>format(it), _function_1);
-    };
-    reference.getOwnedAnnotations().forEach(_function);
-    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.append(this.textRegionExtensions.regionFor(reference).keyword(this._omlGrammarAccess.getStructuredPropertyReferenceAccess().getRefKeyword_1()), _function_1);
-    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.surround(this.textRegionExtensions.regionFor(reference).keyword(this._omlGrammarAccess.getStructuredPropertyReferenceAccess().getStructuredKeyword_2()), _function_2);
-    final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.surround(this.textRegionExtensions.regionFor(reference).keyword(this._omlGrammarAccess.getStructuredPropertyReferenceAccess().getPropertyKeyword_3()), _function_3);
-    this.formatCommas(reference, document);
-  }
-
-  protected void _format(final FacetedScalarReference reference, @Extension final IFormattableDocument document) {
-    final Consumer<Annotation> _function = (Annotation it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
-      };
-      document.<Annotation>append(document.<Annotation>format(it), _function_1);
-    };
-    reference.getOwnedAnnotations().forEach(_function);
-    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.append(this.textRegionExtensions.regionFor(reference).keyword(this._omlGrammarAccess.getFacetedScalarReferenceAccess().getRefKeyword_1()), _function_1);
-    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.surround(this.textRegionExtensions.regionFor(reference).keyword(this._omlGrammarAccess.getFacetedScalarReferenceAccess().getScalarKeyword_2()), _function_2);
-    this.formatCommas(reference, document);
-  }
-
-  protected void _format(final EnumeratedScalarReference reference, @Extension final IFormattableDocument document) {
-    final Consumer<Annotation> _function = (Annotation it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
-      };
-      document.<Annotation>append(document.<Annotation>format(it), _function_1);
-    };
-    reference.getOwnedAnnotations().forEach(_function);
-    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.append(this.textRegionExtensions.regionFor(reference).keyword(this._omlGrammarAccess.getEnumeratedScalarReferenceAccess().getRefKeyword_1()), _function_1);
-    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.surround(this.textRegionExtensions.regionFor(reference).keyword(this._omlGrammarAccess.getEnumeratedScalarReferenceAccess().getEnumeratedKeyword_2()), _function_2);
-    final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.surround(this.textRegionExtensions.regionFor(reference).keyword(this._omlGrammarAccess.getEnumeratedScalarReferenceAccess().getScalarKeyword_3()), _function_3);
-    this.formatCommas(reference, document);
-  }
-
-  protected void _format(final RelationReference reference, @Extension final IFormattableDocument document) {
-    final Consumer<Annotation> _function = (Annotation it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
-      };
-      document.<Annotation>append(document.<Annotation>format(it), _function_1);
-    };
-    reference.getOwnedAnnotations().forEach(_function);
-    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.append(this.textRegionExtensions.regionFor(reference).keyword(this._omlGrammarAccess.getRelationReferenceAccess().getRefKeyword_1()), _function_1);
-    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.surround(this.textRegionExtensions.regionFor(reference).keyword(this._omlGrammarAccess.getRelationReferenceAccess().getRelationKeyword_2()), _function_2);
-  }
-
-  protected void _format(final RuleReference reference, @Extension final IFormattableDocument document) {
-    final Consumer<Annotation> _function = (Annotation it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
-      };
-      document.<Annotation>append(document.<Annotation>format(it), _function_1);
-    };
-    reference.getOwnedAnnotations().forEach(_function);
-    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.append(this.textRegionExtensions.regionFor(reference).keyword(this._omlGrammarAccess.getRuleReferenceAccess().getRefKeyword_1()), _function_1);
-    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.surround(this.textRegionExtensions.regionFor(reference).keyword(this._omlGrammarAccess.getRuleReferenceAccess().getRuleKeyword_2()), _function_2);
-  }
-
-  protected void _format(final ConceptInstanceReference reference, @Extension final IFormattableDocument document) {
-    final Consumer<Annotation> _function = (Annotation it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
-      };
-      document.<Annotation>append(document.<Annotation>format(it), _function_1);
-    };
-    reference.getOwnedAnnotations().forEach(_function);
-    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.append(this.textRegionExtensions.regionFor(reference).keyword(this._omlGrammarAccess.getConceptInstanceReferenceAccess().getRefKeyword_1()), _function_1);
-    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.surround(this.textRegionExtensions.regionFor(reference).keyword(this._omlGrammarAccess.getConceptInstanceReferenceAccess().getCiKeyword_2()), _function_2);
-    this.formatCommas(reference, document);
-    this.formatBrackets(reference, document);
-    final Consumer<PropertyValueAssertion> _function_3 = (PropertyValueAssertion it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_4 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
-      };
-      document.<PropertyValueAssertion>prepend(document.<PropertyValueAssertion>format(it), _function_4);
-    };
-    reference.getOwnedPropertyValues().forEach(_function_3);
-    final Consumer<LinkAssertion> _function_4 = (LinkAssertion it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_5 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
-      };
-      document.<LinkAssertion>prepend(document.<LinkAssertion>format(it), _function_5);
-    };
-    reference.getOwnedLinks().forEach(_function_4);
-  }
-
-  protected void _format(final RelationInstanceReference reference, @Extension final IFormattableDocument document) {
-    final Consumer<Annotation> _function = (Annotation it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
-      };
-      document.<Annotation>append(document.<Annotation>format(it), _function_1);
-    };
-    reference.getOwnedAnnotations().forEach(_function);
-    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.append(this.textRegionExtensions.regionFor(reference).keyword(this._omlGrammarAccess.getRelationInstanceReferenceAccess().getRefKeyword_1()), _function_1);
-    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.surround(this.textRegionExtensions.regionFor(reference).keyword(this._omlGrammarAccess.getRelationInstanceReferenceAccess().getRiKeyword_2()), _function_2);
-    this.formatCommas(reference, document);
-    this.formatBrackets(reference, document);
-    final Consumer<PropertyValueAssertion> _function_3 = (PropertyValueAssertion it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_4 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
-      };
-      document.<PropertyValueAssertion>prepend(document.<PropertyValueAssertion>format(it), _function_4);
-    };
-    reference.getOwnedPropertyValues().forEach(_function_3);
-    final Consumer<LinkAssertion> _function_4 = (LinkAssertion it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_5 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
-      };
-      document.<LinkAssertion>prepend(document.<LinkAssertion>format(it), _function_5);
-    };
-    reference.getOwnedLinks().forEach(_function_4);
-  }
-
-  protected void _format(final VocabularyExtension _extension, @Extension final IFormattableDocument document) {
-    final Consumer<Annotation> _function = (Annotation it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
-      };
-      document.<Annotation>append(document.<Annotation>format(it), _function_1);
-    };
-    _extension.getOwnedAnnotations().forEach(_function);
-    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.append(this.textRegionExtensions.regionFor(_extension).keyword(this._omlGrammarAccess.getVocabularyExtensionAccess().getExtendsKeyword_1()), _function_1);
-    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.append(this.textRegionExtensions.regionFor(_extension).keyword(this._omlGrammarAccess.getVocabularyExtensionAccess().getAsKeyword_3_0()), _function_2);
-  }
-
-  protected void _format(final VocabularyUsage usage, @Extension final IFormattableDocument document) {
-    final Consumer<Annotation> _function = (Annotation it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
-      };
-      document.<Annotation>append(document.<Annotation>format(it), _function_1);
-    };
-    usage.getOwnedAnnotations().forEach(_function);
-    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.append(this.textRegionExtensions.regionFor(usage).keyword(this._omlGrammarAccess.getVocabularyUsageAccess().getUsesKeyword_1()), _function_1);
-    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.append(this.textRegionExtensions.regionFor(usage).keyword(this._omlGrammarAccess.getVocabularyUsageAccess().getAsKeyword_3_0()), _function_2);
-  }
-
-  protected void _format(final VocabularyBundleExtension _extension, @Extension final IFormattableDocument document) {
-    final Consumer<Annotation> _function = (Annotation it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
-      };
-      document.<Annotation>append(document.<Annotation>format(it), _function_1);
-    };
-    _extension.getOwnedAnnotations().forEach(_function);
-    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.append(this.textRegionExtensions.regionFor(_extension).keyword(this._omlGrammarAccess.getVocabularyBundleExtensionAccess().getExtendsKeyword_1()), _function_1);
-    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.append(this.textRegionExtensions.regionFor(_extension).keyword(this._omlGrammarAccess.getVocabularyBundleExtensionAccess().getAsKeyword_3_0()), _function_2);
-  }
-
-  protected void _format(final VocabularyBundleInclusion inclusion, @Extension final IFormattableDocument document) {
-    final Consumer<Annotation> _function = (Annotation it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
-      };
-      document.<Annotation>append(document.<Annotation>format(it), _function_1);
-    };
-    inclusion.getOwnedAnnotations().forEach(_function);
-    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.append(this.textRegionExtensions.regionFor(inclusion).keyword(this._omlGrammarAccess.getVocabularyBundleInclusionAccess().getIncludesKeyword_1()), _function_1);
-    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.append(this.textRegionExtensions.regionFor(inclusion).keyword(this._omlGrammarAccess.getVocabularyBundleInclusionAccess().getAsKeyword_3_0()), _function_2);
-  }
-
-  protected void _format(final DescriptionExtension _extension, @Extension final IFormattableDocument document) {
-    final Consumer<Annotation> _function = (Annotation it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
-      };
-      document.<Annotation>append(document.<Annotation>format(it), _function_1);
-    };
-    _extension.getOwnedAnnotations().forEach(_function);
-    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.append(this.textRegionExtensions.regionFor(_extension).keyword(this._omlGrammarAccess.getDescriptionExtensionAccess().getExtendsKeyword_1()), _function_1);
-    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.append(this.textRegionExtensions.regionFor(_extension).keyword(this._omlGrammarAccess.getDescriptionExtensionAccess().getAsKeyword_3_0()), _function_2);
-  }
-
-  protected void _format(final DescriptionUsage usage, @Extension final IFormattableDocument document) {
-    final Consumer<Annotation> _function = (Annotation it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
-      };
-      document.<Annotation>append(document.<Annotation>format(it), _function_1);
-    };
-    usage.getOwnedAnnotations().forEach(_function);
-    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.append(this.textRegionExtensions.regionFor(usage).keyword(this._omlGrammarAccess.getDescriptionUsageAccess().getUsesKeyword_1()), _function_1);
-    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.append(this.textRegionExtensions.regionFor(usage).keyword(this._omlGrammarAccess.getDescriptionUsageAccess().getAsKeyword_3_0()), _function_2);
-  }
-
-  protected void _format(final DescriptionBundleExtension _extension, @Extension final IFormattableDocument document) {
-    final Consumer<Annotation> _function = (Annotation it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
-      };
-      document.<Annotation>append(document.<Annotation>format(it), _function_1);
-    };
-    _extension.getOwnedAnnotations().forEach(_function);
-    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.append(this.textRegionExtensions.regionFor(_extension).keyword(this._omlGrammarAccess.getDescriptionBundleExtensionAccess().getExtendsKeyword_1()), _function_1);
-    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.append(this.textRegionExtensions.regionFor(_extension).keyword(this._omlGrammarAccess.getDescriptionBundleExtensionAccess().getAsKeyword_3_0()), _function_2);
-  }
-
-  protected void _format(final DescriptionBundleInclusion inclusion, @Extension final IFormattableDocument document) {
-    final Consumer<Annotation> _function = (Annotation it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
-      };
-      document.<Annotation>append(document.<Annotation>format(it), _function_1);
-    };
-    inclusion.getOwnedAnnotations().forEach(_function);
-    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.append(this.textRegionExtensions.regionFor(inclusion).keyword(this._omlGrammarAccess.getDescriptionBundleInclusionAccess().getIncludesKeyword_1()), _function_1);
-    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.append(this.textRegionExtensions.regionFor(inclusion).keyword(this._omlGrammarAccess.getDescriptionBundleInclusionAccess().getAsKeyword_3_0()), _function_2);
-  }
-
-  protected void _format(final DescriptionBundleUsage usage, @Extension final IFormattableDocument document) {
-    final Consumer<Annotation> _function = (Annotation it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
-      };
-      document.<Annotation>append(document.<Annotation>format(it), _function_1);
-    };
-    usage.getOwnedAnnotations().forEach(_function);
-    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.append(this.textRegionExtensions.regionFor(usage).keyword(this._omlGrammarAccess.getDescriptionBundleUsageAccess().getUsesKeyword_1()), _function_1);
-    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.append(this.textRegionExtensions.regionFor(usage).keyword(this._omlGrammarAccess.getDescriptionBundleUsageAccess().getAsKeyword_3_0()), _function_2);
-  }
-
-  protected void _format(final ScalarPropertyRangeRestrictionAxiom axiom, @Extension final IFormattableDocument document) {
-    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.append(this.textRegionExtensions.regionFor(axiom).keyword(this._omlGrammarAccess.getScalarPropertyRangeRestrictionAxiomAccess().getRestrictsKeyword_0()), _function);
-    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.surround(this.textRegionExtensions.regionFor(axiom).keyword(this._omlGrammarAccess.getScalarPropertyRangeRestrictionAxiomAccess().getScalarKeyword_2()), _function_1);
-    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.surround(this.textRegionExtensions.regionFor(axiom).keyword(this._omlGrammarAccess.getScalarPropertyRangeRestrictionAxiomAccess().getPropertyKeyword_3()), _function_2);
-    final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.surround(this.textRegionExtensions.regionFor(axiom).keyword(this._omlGrammarAccess.getScalarPropertyRangeRestrictionAxiomAccess().getToKeyword_5()), _function_3);
-  }
-
-  protected void _format(final ScalarPropertyCardinalityRestrictionAxiom axiom, @Extension final IFormattableDocument document) {
-    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.append(this.textRegionExtensions.regionFor(axiom).keyword(this._omlGrammarAccess.getScalarPropertyCardinalityRestrictionAxiomAccess().getRestrictsKeyword_0()), _function);
-    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.surround(this.textRegionExtensions.regionFor(axiom).keyword(this._omlGrammarAccess.getScalarPropertyCardinalityRestrictionAxiomAccess().getScalarKeyword_1()), _function_1);
-    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.surround(this.textRegionExtensions.regionFor(axiom).keyword(this._omlGrammarAccess.getScalarPropertyCardinalityRestrictionAxiomAccess().getPropertyKeyword_2()), _function_2);
-    final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.surround(this.textRegionExtensions.regionFor(axiom).keyword(this._omlGrammarAccess.getScalarPropertyCardinalityRestrictionAxiomAccess().getToKeyword_4()), _function_3);
-    final Procedure1<IHiddenRegionFormatter> _function_4 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.surround(this.textRegionExtensions.regionFor(axiom).feature(OmlPackage.Literals.SCALAR_PROPERTY_CARDINALITY_RESTRICTION_AXIOM__KIND), _function_4);
-    Scalar _range = axiom.getRange();
-    boolean _tripleNotEquals = (_range != null);
-    if (_tripleNotEquals) {
-      final Procedure1<IHiddenRegionFormatter> _function_5 = (IHiddenRegionFormatter it) -> {
-        it.oneSpace();
-      };
-      document.prepend(this.textRegionExtensions.regionFor(axiom).feature(OmlPackage.Literals.SCALAR_PROPERTY_CARDINALITY_RESTRICTION_AXIOM__RANGE), _function_5);
-    }
-  }
-
-  protected void _format(final ScalarPropertyValueRestrictionAxiom axiom, @Extension final IFormattableDocument document) {
-    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.append(this.textRegionExtensions.regionFor(axiom).keyword(this._omlGrammarAccess.getScalarPropertyValueRestrictionAxiomAccess().getRestrictsKeyword_0()), _function);
-    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.surround(this.textRegionExtensions.regionFor(axiom).keyword(this._omlGrammarAccess.getScalarPropertyValueRestrictionAxiomAccess().getScalarKeyword_1()), _function_1);
-    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.surround(this.textRegionExtensions.regionFor(axiom).keyword(this._omlGrammarAccess.getScalarPropertyValueRestrictionAxiomAccess().getPropertyKeyword_2()), _function_2);
-    final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.surround(this.textRegionExtensions.regionFor(axiom).keyword(this._omlGrammarAccess.getScalarPropertyValueRestrictionAxiomAccess().getToKeyword_4()), _function_3);
-  }
-
-  protected void _format(final StructuredPropertyRangeRestrictionAxiom axiom, @Extension final IFormattableDocument document) {
-    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.append(this.textRegionExtensions.regionFor(axiom).keyword(this._omlGrammarAccess.getStructuredPropertyRangeRestrictionAxiomAccess().getRestrictsKeyword_0()), _function);
-    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.surround(this.textRegionExtensions.regionFor(axiom).keyword(this._omlGrammarAccess.getStructuredPropertyRangeRestrictionAxiomAccess().getStructuredKeyword_2()), _function_1);
-    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.surround(this.textRegionExtensions.regionFor(axiom).keyword(this._omlGrammarAccess.getStructuredPropertyRangeRestrictionAxiomAccess().getPropertyKeyword_3()), _function_2);
-    final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.surround(this.textRegionExtensions.regionFor(axiom).keyword(this._omlGrammarAccess.getStructuredPropertyRangeRestrictionAxiomAccess().getToKeyword_5()), _function_3);
-  }
-
-  protected void _format(final StructuredPropertyCardinalityRestrictionAxiom axiom, @Extension final IFormattableDocument document) {
-    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.append(this.textRegionExtensions.regionFor(axiom).keyword(this._omlGrammarAccess.getStructuredPropertyCardinalityRestrictionAxiomAccess().getRestrictsKeyword_0()), _function);
-    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.surround(this.textRegionExtensions.regionFor(axiom).keyword(this._omlGrammarAccess.getStructuredPropertyCardinalityRestrictionAxiomAccess().getStructuredKeyword_1()), _function_1);
-    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.surround(this.textRegionExtensions.regionFor(axiom).keyword(this._omlGrammarAccess.getStructuredPropertyCardinalityRestrictionAxiomAccess().getPropertyKeyword_2()), _function_2);
-    final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.surround(this.textRegionExtensions.regionFor(axiom).keyword(this._omlGrammarAccess.getStructuredPropertyCardinalityRestrictionAxiomAccess().getToKeyword_4()), _function_3);
-    final Procedure1<IHiddenRegionFormatter> _function_4 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.surround(this.textRegionExtensions.regionFor(axiom).feature(OmlPackage.Literals.STRUCTURED_PROPERTY_CARDINALITY_RESTRICTION_AXIOM__KIND), _function_4);
-    Structure _range = axiom.getRange();
-    boolean _tripleNotEquals = (_range != null);
-    if (_tripleNotEquals) {
-      final Procedure1<IHiddenRegionFormatter> _function_5 = (IHiddenRegionFormatter it) -> {
-        it.oneSpace();
-      };
-      document.prepend(this.textRegionExtensions.regionFor(axiom).feature(OmlPackage.Literals.STRUCTURED_PROPERTY_CARDINALITY_RESTRICTION_AXIOM__RANGE), _function_5);
-    }
-  }
-
-  protected void _format(final StructuredPropertyValueRestrictionAxiom axiom, @Extension final IFormattableDocument document) {
-    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.append(this.textRegionExtensions.regionFor(axiom).keyword(this._omlGrammarAccess.getStructuredPropertyValueRestrictionAxiomAccess().getRestrictsKeyword_0()), _function);
-    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.surround(this.textRegionExtensions.regionFor(axiom).keyword(this._omlGrammarAccess.getStructuredPropertyValueRestrictionAxiomAccess().getStructuredKeyword_1()), _function_1);
-    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.surround(this.textRegionExtensions.regionFor(axiom).keyword(this._omlGrammarAccess.getStructuredPropertyValueRestrictionAxiomAccess().getPropertyKeyword_2()), _function_2);
-    final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.surround(this.textRegionExtensions.regionFor(axiom).keyword(this._omlGrammarAccess.getStructuredPropertyValueRestrictionAxiomAccess().getToKeyword_4()), _function_3);
-  }
-
-  protected void _format(final RelationRangeRestrictionAxiom axiom, @Extension final IFormattableDocument document) {
-    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.append(this.textRegionExtensions.regionFor(axiom).keyword(this._omlGrammarAccess.getRelationRangeRestrictionAxiomAccess().getRestrictsKeyword_0()), _function);
-    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.surround(this.textRegionExtensions.regionFor(axiom).keyword(this._omlGrammarAccess.getRelationRangeRestrictionAxiomAccess().getRelationKeyword_2()), _function_1);
-    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.surround(this.textRegionExtensions.regionFor(axiom).keyword(this._omlGrammarAccess.getRelationRangeRestrictionAxiomAccess().getToKeyword_4()), _function_2);
-  }
-
-  protected void _format(final RelationCardinalityRestrictionAxiom axiom, @Extension final IFormattableDocument document) {
-    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.append(this.textRegionExtensions.regionFor(axiom).keyword(this._omlGrammarAccess.getRelationCardinalityRestrictionAxiomAccess().getRestrictsKeyword_0()), _function);
-    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.surround(this.textRegionExtensions.regionFor(axiom).keyword(this._omlGrammarAccess.getRelationCardinalityRestrictionAxiomAccess().getRelationKeyword_1()), _function_1);
-    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.surround(this.textRegionExtensions.regionFor(axiom).keyword(this._omlGrammarAccess.getRelationCardinalityRestrictionAxiomAccess().getToKeyword_3()), _function_2);
-    final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.surround(this.textRegionExtensions.regionFor(axiom).feature(OmlPackage.Literals.RELATION_CARDINALITY_RESTRICTION_AXIOM__KIND), _function_3);
-    Entity _range = axiom.getRange();
-    boolean _tripleNotEquals = (_range != null);
-    if (_tripleNotEquals) {
-      final Procedure1<IHiddenRegionFormatter> _function_4 = (IHiddenRegionFormatter it) -> {
-        it.oneSpace();
-      };
-      document.prepend(this.textRegionExtensions.regionFor(axiom).feature(OmlPackage.Literals.RELATION_CARDINALITY_RESTRICTION_AXIOM__RANGE), _function_4);
-    }
-  }
-
-  protected void _format(final RelationTargetRestrictionAxiom axiom, @Extension final IFormattableDocument document) {
-    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.append(this.textRegionExtensions.regionFor(axiom).keyword(this._omlGrammarAccess.getRelationTargetRestrictionAxiomAccess().getRestrictsKeyword_0()), _function);
-    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.surround(this.textRegionExtensions.regionFor(axiom).keyword(this._omlGrammarAccess.getRelationTargetRestrictionAxiomAccess().getRelationKeyword_1()), _function_1);
-    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.surround(this.textRegionExtensions.regionFor(axiom).keyword(this._omlGrammarAccess.getRelationTargetRestrictionAxiomAccess().getToKeyword_3()), _function_2);
-    final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.surround(this.textRegionExtensions.regionFor(axiom).feature(OmlPackage.Literals.RELATION_TARGET_RESTRICTION_AXIOM__TARGET), _function_3);
-  }
-
-  protected void _format(final KeyAxiom axiom, @Extension final IFormattableDocument document) {
-    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.append(this.textRegionExtensions.regionFor(axiom).keyword(this._omlGrammarAccess.getKeyAxiomAccess().getKeyKeyword_0()), _function);
-    this.formatCommas(axiom, document);
-  }
-
-  protected void _format(final ScalarPropertyValueAssertion assertion, @Extension final IFormattableDocument document) {
-    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.append(this.textRegionExtensions.regionFor(assertion).feature(OmlPackage.Literals.SCALAR_PROPERTY_VALUE_ASSERTION__PROPERTY), _function);
-    Literal _value = assertion.getValue();
-    Literal _format = null;
-    if (_value!=null) {
-      _format=document.<Literal>format(_value);
-    }
-    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.<Literal>prepend(_format, _function_1);
-  }
-
-  protected void _format(final StructuredPropertyValueAssertion assertion, @Extension final IFormattableDocument document) {
-    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.append(this.textRegionExtensions.regionFor(assertion).feature(OmlPackage.Literals.STRUCTURED_PROPERTY_VALUE_ASSERTION__PROPERTY), _function);
-  }
-
-  protected void _format(final LinkAssertion assertion, @Extension final IFormattableDocument document) {
-    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.append(this.textRegionExtensions.regionFor(assertion).feature(OmlPackage.Literals.LINK_ASSERTION__RELATION), _function);
-  }
-
-  protected void _format(final TypePredicate predicate, @Extension final IFormattableDocument document) {
-    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
-      it.noSpace();
-    };
-    document.surround(this.textRegionExtensions.regionFor(predicate).keyword(this._omlGrammarAccess.getTypePredicateAccess().getLeftParenthesisKeyword_1()), _function);
-    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
-      it.noSpace();
-    };
-    document.prepend(this.textRegionExtensions.regionFor(predicate).keyword(this._omlGrammarAccess.getTypePredicateAccess().getRightParenthesisKeyword_3()), _function_1);
-  }
-
-  protected void _format(final RelationEntityPredicate predicate, @Extension final IFormattableDocument document) {
-    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
-      it.noSpace();
-    };
-    document.surround(this.textRegionExtensions.regionFor(predicate).keyword(this._omlGrammarAccess.getRelationEntityPredicateAccess().getLeftParenthesisKeyword_1()), _function);
-    this.formatCommas(predicate, document);
-    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
-      it.noSpace();
-    };
-    document.prepend(this.textRegionExtensions.regionFor(predicate).keyword(this._omlGrammarAccess.getRelationEntityPredicateAccess().getRightParenthesisKeyword_7()), _function_1);
-  }
-
-  protected void _format(final FeaturePredicate predicate, @Extension final IFormattableDocument document) {
-    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
-      it.noSpace();
-    };
-    document.surround(this.textRegionExtensions.regionFor(predicate).keyword(this._omlGrammarAccess.getFeaturePredicateAccess().getLeftParenthesisKeyword_1()), _function);
-    this.formatCommas(predicate, document);
-    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
-      it.noSpace();
-    };
-    document.prepend(this.textRegionExtensions.regionFor(predicate).keyword(this._omlGrammarAccess.getFeaturePredicateAccess().getRightParenthesisKeyword_5()), _function_1);
-  }
-
-  protected void _format(final SameAsPredicate predicate, @Extension final IFormattableDocument document) {
-    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
-      it.noSpace();
-    };
-    document.surround(this.textRegionExtensions.regionFor(predicate).keyword(this._omlGrammarAccess.getSameAsPredicateAccess().getLeftParenthesisKeyword_1()), _function);
-    this.formatCommas(predicate, document);
-    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
-      it.noSpace();
-    };
-    document.prepend(this.textRegionExtensions.regionFor(predicate).keyword(this._omlGrammarAccess.getSameAsPredicateAccess().getRightParenthesisKeyword_5()), _function_1);
-  }
-
-  protected void _format(final DifferentFromPredicate predicate, @Extension final IFormattableDocument document) {
-    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
-      it.noSpace();
-    };
-    document.surround(this.textRegionExtensions.regionFor(predicate).keyword(this._omlGrammarAccess.getDifferentFromPredicateAccess().getLeftParenthesisKeyword_1()), _function);
-    this.formatCommas(predicate, document);
-    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
-      it.noSpace();
-    };
-    document.prepend(this.textRegionExtensions.regionFor(predicate).keyword(this._omlGrammarAccess.getDifferentFromPredicateAccess().getRightParenthesisKeyword_5()), _function_1);
-  }
-
-  protected void _format(final QuotedLiteral literal, @Extension final IFormattableDocument document) {
-    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
-      it.noSpace();
-    };
-    document.surround(this.textRegionExtensions.regionFor(literal).keyword(this._omlGrammarAccess.getQuotedLiteralAccess().getCircumflexAccentCircumflexAccentKeyword_1_0_0()), _function);
-    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
-      it.noSpace();
-    };
-    document.surround(this.textRegionExtensions.regionFor(literal).keyword(this._omlGrammarAccess.getQuotedLiteralAccess().getDollarSignKeyword_1_1_0()), _function_1);
-  }
-
-  public Pair<ISemanticRegion, ISemanticRegion> formatBrackets(final EObject e, @Extension final IFormattableDocument document) {
-    Pair<ISemanticRegion, ISemanticRegion> _xblockexpression = null;
-    {
-      final ISemanticRegion open = this.textRegionExtensions.regionFor(e).keyword("[");
-      final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
-        it.oneSpace();
-      };
-      document.prepend(open, _function);
-      final ISemanticRegion close = this.textRegionExtensions.regionFor(e).keyword("]");
-      final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
-        it.newLine();
-      };
-      document.prepend(close, _function_1);
-      final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
-        it.indent();
-      };
-      _xblockexpression = document.<ISemanticRegion, ISemanticRegion>interior(open, close, _function_2);
-    }
-    return _xblockexpression;
-  }
-
-  public Pair<ISemanticRegion, ISemanticRegion> formatBraces(final EObject e, @Extension final IFormattableDocument document) {
-    Pair<ISemanticRegion, ISemanticRegion> _xblockexpression = null;
-    {
-      final ISemanticRegion open = this.textRegionExtensions.regionFor(e).keyword("{");
-      final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
-        it.oneSpace();
-      };
-      document.prepend(open, _function);
-      final ISemanticRegion close = this.textRegionExtensions.regionFor(e).keyword("}");
-      final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
-        it.newLine();
-      };
-      document.prepend(close, _function_1);
-      final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
-        it.indent();
-      };
-      _xblockexpression = document.<ISemanticRegion, ISemanticRegion>interior(open, close, _function_2);
-    }
-    return _xblockexpression;
-  }
-
-  public void formatCommas(final EObject e, @Extension final IFormattableDocument document) {
-    final Consumer<ISemanticRegion> _function = (ISemanticRegion it) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it_1) -> {
-        it_1.noSpace();
-      };
-      final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it_1) -> {
-        it_1.oneSpace();
-      };
-      document.append(document.prepend(it, _function_1), _function_2);
-    };
-    this.textRegionExtensions.regionFor(e).keywords(",").forEach(_function);
-  }
-
-  public void format(final Object aspect, final IFormattableDocument document) {
-    if (aspect instanceof Aspect) {
-      _format((Aspect)aspect, document);
-      return;
-    } else if (aspect instanceof Concept) {
-      _format((Concept)aspect, document);
-      return;
-    } else if (aspect instanceof RelationEntity) {
-      _format((RelationEntity)aspect, document);
-      return;
-    } else if (aspect instanceof EnumeratedScalar) {
-      _format((EnumeratedScalar)aspect, document);
-      return;
-    } else if (aspect instanceof FacetedScalar) {
-      _format((FacetedScalar)aspect, document);
-      return;
-    } else if (aspect instanceof ScalarProperty) {
-      _format((ScalarProperty)aspect, document);
-      return;
-    } else if (aspect instanceof Structure) {
-      _format((Structure)aspect, document);
-      return;
-    } else if (aspect instanceof StructuredProperty) {
-      _format((StructuredProperty)aspect, document);
-      return;
-    } else if (aspect instanceof AnnotationProperty) {
-      _format((AnnotationProperty)aspect, document);
-      return;
-    } else if (aspect instanceof ForwardRelation) {
-      _format((ForwardRelation)aspect, document);
-      return;
-    } else if (aspect instanceof ReverseRelation) {
-      _format((ReverseRelation)aspect, document);
-      return;
-    } else if (aspect instanceof AspectReference) {
-      _format((AspectReference)aspect, document);
-      return;
-    } else if (aspect instanceof ConceptReference) {
-      _format((ConceptReference)aspect, document);
-      return;
-    } else if (aspect instanceof RelationEntityReference) {
-      _format((RelationEntityReference)aspect, document);
-      return;
-    } else if (aspect instanceof ConceptInstance) {
-      _format((ConceptInstance)aspect, document);
-      return;
-    } else if (aspect instanceof Description) {
-      _format((Description)aspect, document);
-      return;
-    } else if (aspect instanceof DescriptionBundle) {
-      _format((DescriptionBundle)aspect, document);
-      return;
-    } else if (aspect instanceof RelationInstance) {
-      _format((RelationInstance)aspect, document);
-      return;
-    } else if (aspect instanceof ScalarPropertyCardinalityRestrictionAxiom) {
-      _format((ScalarPropertyCardinalityRestrictionAxiom)aspect, document);
-      return;
-    } else if (aspect instanceof ScalarPropertyRangeRestrictionAxiom) {
-      _format((ScalarPropertyRangeRestrictionAxiom)aspect, document);
-      return;
-    } else if (aspect instanceof ScalarPropertyValueRestrictionAxiom) {
-      _format((ScalarPropertyValueRestrictionAxiom)aspect, document);
-      return;
-    } else if (aspect instanceof StructureReference) {
-      _format((StructureReference)aspect, document);
-      return;
-    } else if (aspect instanceof StructuredPropertyCardinalityRestrictionAxiom) {
-      _format((StructuredPropertyCardinalityRestrictionAxiom)aspect, document);
-      return;
-    } else if (aspect instanceof StructuredPropertyRangeRestrictionAxiom) {
-      _format((StructuredPropertyRangeRestrictionAxiom)aspect, document);
-      return;
-    } else if (aspect instanceof StructuredPropertyValueRestrictionAxiom) {
-      _format((StructuredPropertyValueRestrictionAxiom)aspect, document);
-      return;
-    } else if (aspect instanceof Vocabulary) {
-      _format((Vocabulary)aspect, document);
-      return;
-    } else if (aspect instanceof VocabularyBundle) {
-      _format((VocabularyBundle)aspect, document);
-      return;
-    } else if (aspect instanceof AnnotationPropertyReference) {
-      _format((AnnotationPropertyReference)aspect, document);
-      return;
-    } else if (aspect instanceof ConceptInstanceReference) {
-      _format((ConceptInstanceReference)aspect, document);
-      return;
-    } else if (aspect instanceof DescriptionBundleExtension) {
-      _format((DescriptionBundleExtension)aspect, document);
-      return;
-    } else if (aspect instanceof DescriptionBundleInclusion) {
-      _format((DescriptionBundleInclusion)aspect, document);
-      return;
-    } else if (aspect instanceof DescriptionBundleUsage) {
-      _format((DescriptionBundleUsage)aspect, document);
-      return;
-    } else if (aspect instanceof DescriptionExtension) {
-      _format((DescriptionExtension)aspect, document);
-      return;
-    } else if (aspect instanceof DescriptionUsage) {
-      _format((DescriptionUsage)aspect, document);
-      return;
-    } else if (aspect instanceof EnumeratedScalarReference) {
-      _format((EnumeratedScalarReference)aspect, document);
-      return;
-    } else if (aspect instanceof FacetedScalarReference) {
-      _format((FacetedScalarReference)aspect, document);
-      return;
-    } else if (aspect instanceof RelationCardinalityRestrictionAxiom) {
-      _format((RelationCardinalityRestrictionAxiom)aspect, document);
-      return;
-    } else if (aspect instanceof RelationInstanceReference) {
-      _format((RelationInstanceReference)aspect, document);
-      return;
-    } else if (aspect instanceof RelationRangeRestrictionAxiom) {
-      _format((RelationRangeRestrictionAxiom)aspect, document);
-      return;
-    } else if (aspect instanceof RelationTargetRestrictionAxiom) {
-      _format((RelationTargetRestrictionAxiom)aspect, document);
-      return;
-    } else if (aspect instanceof Rule) {
-      _format((Rule)aspect, document);
-      return;
-    } else if (aspect instanceof ScalarPropertyReference) {
-      _format((ScalarPropertyReference)aspect, document);
-      return;
-    } else if (aspect instanceof StructuredPropertyReference) {
-      _format((StructuredPropertyReference)aspect, document);
-      return;
-    } else if (aspect instanceof VocabularyBundleExtension) {
-      _format((VocabularyBundleExtension)aspect, document);
-      return;
-    } else if (aspect instanceof VocabularyBundleInclusion) {
-      _format((VocabularyBundleInclusion)aspect, document);
-      return;
-    } else if (aspect instanceof VocabularyExtension) {
-      _format((VocabularyExtension)aspect, document);
-      return;
-    } else if (aspect instanceof VocabularyUsage) {
-      _format((VocabularyUsage)aspect, document);
-      return;
-    } else if (aspect instanceof DifferentFromPredicate) {
-      _format((DifferentFromPredicate)aspect, document);
-      return;
-    } else if (aspect instanceof FeaturePredicate) {
-      _format((FeaturePredicate)aspect, document);
-      return;
-    } else if (aspect instanceof RelationEntityPredicate) {
-      _format((RelationEntityPredicate)aspect, document);
-      return;
-    } else if (aspect instanceof RelationReference) {
-      _format((RelationReference)aspect, document);
-      return;
-    } else if (aspect instanceof RuleReference) {
-      _format((RuleReference)aspect, document);
-      return;
-    } else if (aspect instanceof SameAsPredicate) {
-      _format((SameAsPredicate)aspect, document);
-      return;
-    } else if (aspect instanceof ScalarPropertyValueAssertion) {
-      _format((ScalarPropertyValueAssertion)aspect, document);
-      return;
-    } else if (aspect instanceof StructuredPropertyValueAssertion) {
-      _format((StructuredPropertyValueAssertion)aspect, document);
-      return;
-    } else if (aspect instanceof TypePredicate) {
-      _format((TypePredicate)aspect, document);
-      return;
-    } else if (aspect instanceof KeyAxiom) {
-      _format((KeyAxiom)aspect, document);
-      return;
-    } else if (aspect instanceof LinkAssertion) {
-      _format((LinkAssertion)aspect, document);
-      return;
-    } else if (aspect instanceof QuotedLiteral) {
-      _format((QuotedLiteral)aspect, document);
-      return;
-    } else if (aspect instanceof StructureInstance) {
-      _format((StructureInstance)aspect, document);
-      return;
-    } else if (aspect instanceof XtextResource) {
-      _format((XtextResource)aspect, document);
-      return;
-    } else if (aspect instanceof Annotation) {
-      _format((Annotation)aspect, document);
-      return;
-    } else if (aspect instanceof EObject) {
-      _format((EObject)aspect, document);
-      return;
-    } else if (aspect == null) {
-      _format((Void)null, document);
-      return;
-    } else if (aspect != null) {
-      _format(aspect, document);
-      return;
-    } else {
-      throw new IllegalArgumentException("Unhandled parameter types: " +
-        Arrays.<Object>asList(aspect, document).toString());
-    }
-  }
+	protected void _format(FeaturePredicate predicate, IFormattableDocument doc) {
+		doc.surround(keyword(predicate, oml.getFeaturePredicateAccess().getLeftParenthesisKeyword_1()), noSpace());
+		formatCommas(predicate, doc);
+		doc.prepend(keyword(predicate, oml.getFeaturePredicateAccess().getRightParenthesisKeyword_5()), noSpace());
+	}
+
+	protected void _format(SameAsPredicate predicate, IFormattableDocument doc) {
+		doc.surround(keyword(predicate, oml.getSameAsPredicateAccess().getLeftParenthesisKeyword_1()), noSpace());
+		formatCommas(predicate, doc);
+		doc.prepend(keyword(predicate, oml.getSameAsPredicateAccess().getRightParenthesisKeyword_5()), noSpace());
+	}
+
+	protected void _format(DifferentFromPredicate predicate, IFormattableDocument doc) {
+		doc.surround(keyword(predicate, oml.getDifferentFromPredicateAccess().getLeftParenthesisKeyword_1()), noSpace());
+		formatCommas(predicate, doc);
+		doc.prepend(keyword(predicate, oml.getDifferentFromPredicateAccess().getRightParenthesisKeyword_5()), noSpace());
+	}
+
+	protected void _format(QuotedLiteral literal, IFormattableDocument doc) {
+		doc.surround(keyword(literal, oml.getQuotedLiteralAccess().getCircumflexAccentCircumflexAccentKeyword_1_0_0()), noSpace());
+		doc.surround(keyword(literal, oml.getQuotedLiteralAccess().getDollarSignKeyword_1_1_0()), noSpace());
+	}
+
+	/************** UTILITIES **************/
+
+	private List<Method> formatMethods;
+	
+	@Override public void format(Object object, IFormattableDocument doc) {
+		if (formatMethods == null) {
+			formatMethods = new ArrayList<>();
+	        for (Method method : this.getClass().getDeclaredMethods()) {
+	            try {
+	            	if (method.getName().equals("_format")) {
+	            		formatMethods.add(method);
+	            	}
+	            } catch (Exception e) {
+	                e.printStackTrace();
+	            }
+	        }
+		}
+		if (object instanceof Element) {
+	        for (Method method : formatMethods) {
+	            try {
+	                final Class<?> paramType = method.getParameterTypes()[0];
+	                if (paramType.isAssignableFrom(object.getClass())) {
+	                	method.invoke(this, object, doc);
+	                	return;
+	                }
+	            } catch (Exception e) {
+	                e.printStackTrace();
+	            }
+	        }
+		}
+        super.format(object, doc);
+	}	
+	
+	protected void formatBrackets(EObject e, IFormattableDocument doc) {
+		final var open = keyword(e, "[");
+		doc.prepend(open, oneSpace());
+		final var close = keyword(e, "]");
+		doc.prepend(close, newLine());
+		doc.interior(open, close, indent());
+	}
+
+	protected void formatBraces(EObject e, IFormattableDocument doc) {
+		final var open = keyword(e, "{");
+		doc.prepend(open, oneSpace());
+		final var close = keyword(e, "}");
+		doc.prepend(close, newLine());
+		doc.interior(open, close, indent());
+	}
+
+	protected void formatCommas(EObject e, IFormattableDocument doc) {
+		keywords(e, ",").forEach(i -> doc.append(doc.prepend(i, noSpace()), oneSpace()));
+	}
+
+	protected ISemanticRegion feature(EObject obj, EStructuralFeature feature) {
+		return textRegionExtensions.regionFor(obj).feature(feature);
+	}
+
+	protected ISemanticRegion keyword(EObject obj, Keyword keyword) {
+		return textRegionExtensions.regionFor(obj).keyword(keyword);
+	}
+
+	protected ISemanticRegion keyword(EObject obj, String keyword) {
+		return textRegionExtensions.regionFor(obj).keyword(keyword);
+	}
+
+	protected List<ISemanticRegion> keywords(EObject obj, String keyword) {
+		return textRegionExtensions.regionFor(obj).keywords(keyword);
+	}
+
+	@SafeVarargs
+	private Procedure1<IHiddenRegionFormatter> compose(Procedure1<IHiddenRegionFormatter>... lambdas) {
+		return i -> {
+			for (var lambda : lambdas) {
+				lambda.apply(i);
+			}
+		};
+	}
+
+	protected Procedure1<IHiddenRegionFormatter> newLine() {
+		return i -> i.newLine();
+	}
+
+	protected Procedure1<IHiddenRegionFormatter> newLines(int n) {
+		return i -> i.setNewLines(n);
+	}
+
+	protected Procedure1<IHiddenRegionFormatter> setNewLines(int n1, int n2, int n3) {
+		return i -> i.setNewLines(n1, n2, n3);
+	}
+
+	protected Procedure1<IHiddenRegionFormatter> oneSpace() {
+		return i -> i.oneSpace();
+	}
+
+	protected Procedure1<IHiddenRegionFormatter> indent() {
+		return i -> i.indent();
+	}
+
+	protected Procedure1<IHiddenRegionFormatter> noSpace() {
+		return i -> i.noSpace();
+	}
+
+	protected <T> void ifNotNull(T obj, Procedure1<T> proc) {
+		if (obj != null) {
+			proc.apply(obj);
+		}
+	}
+
+	protected <T> void ifNotEmpty(List<T> list, Procedure1<List<T>> proc) {
+		if (!list.isEmpty()) {
+			proc.apply(list);
+		}
+	}
 }
