@@ -1,10 +1,11 @@
 buildscript {
 	repositories {
 		mavenLocal()
-  		mavenCentral()
+		mavenCentral()
+		gradlePluginPortal()
 	}
 	dependencies {
-		classpath 'org.xtext:xtext-gradle-plugin:2.0.8'
+		classpath 'org.xtext:xtext-gradle-plugin:3.0.2'
 		classpath 'io.opencaesar.ecore:ecore-bikeshed-gradle:+'
 	}
 }
@@ -13,41 +14,35 @@ subprojects {
 	group = 'io.opencaesar.oml'
 	version = rootProject.file('version.txt').text.trim()
 
-	ext.versions = [
-	    xtext: '2.28.0',
-	    xcore: '1.22.0',
-	    xcoreLib: '1.6.0',
-	    ecoreXtext: '1.6.0',
-	    codegen: '2.22.0',
-	    codegenEcore: '2.31.0',
-	    emfEcore: '2.28.0',
-	    emfEdit: '2.17.0',
-	    emfJson: '2.1.0',
-	    mwe2: '2.13.0',
-	    coreRuntime: '3.26.0',
-	    lsp4j: '0.15.0',
-	    elk: '0.8.1',
-	    // https://github.com/eclipse/sprotty-server/releases
-	    // Make sure the version of sprotty-server is compatible with the version of sprotty-vscode, which depends on sprotty-vscode-webview and in turn depends on sprotty
-	    sprotty: '0.12.0',
-	    junitJupiter: '5.9.1',
-	    gson: '2.9.1',
-	    guava: '31.1-jre',
-	    antlr: '2.1.1',
-	    xmlResolver: '1.2'
-	]
+	ext.xtextVersion = '2.28.0'
+	ext.xcoreVersion = '1.22.0'
+	ext.xcoreLibVersion = '1.6.0'
+	ext.xmlResolverVersion = '1.2'
+	ext.emfJsonVersion = '2.1.0'
+	ext.gsonVersion = '2.9.0'
+	ext.guavaVersion = '31.1-jre'
+	ext.lsp4jVersion = '0.17.0'
+	ext.elkVersion = '0.8.1'
+	ext.sprottyVersion = '0.12.0'
 
 	repositories {
 		mavenLocal()
-  		mavenCentral()
+		mavenCentral()
 	}
-	
-	apply plugin: 'org.xtext.xtend'
+
+	apply plugin: 'java-library'
 	apply plugin: 'eclipse'
 	apply plugin: 'idea'
-    apply from: "${rootDir}/gradle/source-layout.gradle"
-
+	apply from: "${rootDir}/gradle/source-layout.gradle"
+	
 	dependencies {
-		compile platform("org.eclipse.xtext:xtext-dev-bom:${versions.xtext}")
+		api platform("org.eclipse.xtext:xtext-dev-bom:${xtextVersion}")
+	}
+
+	sourceCompatibility = '11'
+	targetCompatibility = '11'
+
+	configurations.all {
+		exclude group: 'asm'
 	}
 }

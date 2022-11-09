@@ -2,32 +2,28 @@ ext.title = 'Oml API'
 description = 'Java API for Oml'
 
 apply from: "${rootDir}/gradle/maven-deployment.gradle"
+/*apply plugin: "org.xtext.builder"*/
 
 dependencies {
-	compile "org.eclipse.xtext:org.eclipse.xtext.xbase:${versions.xtext}"
-	compile "org.eclipse.emf:org.eclipse.emf.ecore.xcore.lib:${versions.xcoreLib}"
-	compile "xml-resolver:xml-resolver:${versions.xmlResolver}"
-	compile "org.eclipse.emfcloud:emfjson-jackson:${versions.emfJson}"
-
-	xtextLanguages "org.eclipse.xtext:org.eclipse.xtext.ecore:${versions.xtext}"
-	xtextLanguages "org.eclipse.emf:org.eclipse.emf.mwe2.runtime:${versions.mwe2}"
-	xtextLanguages ("org.eclipse.emf:org.eclipse.emf.ecore.xcore:${versions.xcore}"){
+	api "org.eclipse.xtext:org.eclipse.xtext.xbase:${xtextVersion}"
+	api "org.eclipse.emf:org.eclipse.emf.ecore.xcore.lib:${xcoreLibVersion}"
+	api "xml-resolver:xml-resolver:${xmlResolverVersion}"
+	api "org.eclipse.emfcloud:emfjson-jackson:${emfJsonVersion}"
+	
+	/*xtextLanguages ("org.eclipse.emf:org.eclipse.emf.ecore.xcore:+"){
 		exclude group: 'org.antlr', module: 'antlr-runtime'
 	}
-	xtextLanguages "org.eclipse.emf:org.eclipse.emf.ecore.xcore.lib:${versions.xcoreLib}"
-	xtextLanguages "org.eclipse.emf:org.eclipse.emf.codegen:${versions.codegen}"
-	xtextLanguages "org.eclipse.emf:org.eclipse.emf.codegen.ecore:${versions.codegenEcore}"
-	xtextLanguages "org.eclipse.emf:org.eclipse.emf.codegen.ecore.xtext:${versions.ecoreXtext}"
+    xtextLanguages 'org.eclipse.emf:org.eclipse.emf.ecore.xcore.lib:+'
+    xtextLanguages 'org.eclipse.emf:org.eclipse.emf.codegen.ecore:+'
+    xtextLanguages 'org.eclipse.emf:org.eclipse.emf.codegen.ecore.xtext:+'
+    xtextLanguages "org.eclipse.xtext:org.eclipse.xtext.ecore:${xtextVersion}"*/
 }
 
-configurations.all {
-     resolutionStrategy {
-         force "org.eclipse.platform:org.eclipse.core.runtime:$versions.coreRuntime"
-     }
- }
+sourceSets {
+	main.resources.exclude '**/*.xcore'
+}
 
-xtext {
-	version = "${versions.xtext}"
+/*xtext {
 	languages {
 		ecore {
 			setup = 'org.eclipse.xtext.ecore.EcoreSupport'
@@ -40,20 +36,6 @@ xtext {
 			generator.outlet.producesJava = true
 		}
 	}
+	sourceSets.main.output.dir(xtext.languages.xcore.generator.outlet, 'src-gen')
 }
-
-sourceSets {
-	main {
-		java.srcDirs = ['src', 'build/xcore/main']
-		resources.srcDirs = ['src']
-        resources {
-            exclude '**/*.xcore'
-        }
-	}
-}
-
-clean {
-	delete 'xtend-gen'
-}
-
-assemble.dependsOn javadoc
+processResources.dependsOn(generateXtext)*/

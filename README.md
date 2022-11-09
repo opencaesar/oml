@@ -30,8 +30,6 @@ Dependencies: Gradle 6.x, Maven 3.6.x, Java 11
   mvn verify
 ```
 
-> NOTE: If the gradle build gives errors on a second or subsequent build, try deleting the generated `.gradle` subfolder then try invoking the gradle build again 
-
 ## Spec
 If you want to generate the OML spec, you first need to have both [bikeshed](https://tabatkins.github.io/bikeshed/#install-final) and 
 [graphviz](https://graphviz.org/download/) installed in the environment, then invoke:
@@ -46,7 +44,7 @@ To setup a development environment for oml:
 
 Preparation:
 
-- Install/use a recent version of Eclipse IDE for Java and DSL Developers (e.g., 2021-09)
+- Install/use a recent version of `Eclipse IDE for Java and DSL Developers`
 - Launch the Eclipse IDE and create a new workspace (recommended)
 - Switch to the Java perspective from Window -> Perspective -> Open Perspective -> Other -> Java
 - Show the Project Explorer view (if hidden) by selecting Window -> Show View -> Project Explorer

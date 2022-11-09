@@ -38,9 +38,9 @@ import com.google.inject.name.Names;
 import io.opencaesar.oml.dsl.ide.contentassist.OmlIdeContentProposalProvider;
 import io.opencaesar.oml.dsl.ide.contentassist.OmlIdeCrossRefProposalProvider;
 import io.opencaesar.oml.dsl.ide.server.codeActions.OmlCodeActionService;
-import io.opencaesar.oml.dsl.ide.symbols.OmlDocumentSymbolKindProvider;
-import io.opencaesar.oml.dsl.ide.symbols.OmlDocumentSymbolNameProvider;
-import io.opencaesar.oml.dsl.ide.symbols.OmlHierarchicalDocumentSymbolService;
+import io.opencaesar.oml.dsl.ide.server.symbols.OmlDocumentSymbolKindProvider;
+import io.opencaesar.oml.dsl.ide.server.symbols.OmlDocumentSymbolNameProvider;
+import io.opencaesar.oml.dsl.ide.server.symbols.OmlHierarchicalDocumentSymbolService;
 import io.opencaesar.oml.dsl.resource.OmlSynchronizedXtextResourceSet;
 
 /**
@@ -59,7 +59,7 @@ public class OmlIdeModule extends AbstractOmlIdeModule {
 	public Class<? extends XtextResourceSet> bindXtextResourceSet() {
 		return OmlSynchronizedXtextResourceSet.class;
 	}
-	
+
 	public Class<? extends HierarchicalDocumentSymbolService> bindHierarchicalDocumentSymbolService() {
 		return OmlHierarchicalDocumentSymbolService.class;
 	}
@@ -71,7 +71,7 @@ public class OmlIdeModule extends AbstractOmlIdeModule {
 	public Class<? extends DocumentSymbolNameProvider> bindDocumentSymbolNameProvider() {
 		return OmlDocumentSymbolNameProvider.class;
 	}
-	
+
 	public Class<? extends ICodeActionService2> bindICodeActionService() {
 		return OmlCodeActionService.class;
 	}
@@ -91,7 +91,7 @@ public class OmlIdeModule extends AbstractOmlIdeModule {
 	static public class FQNPrefixMatcher2 extends FQNPrefixMatcher {
 
 		private String delimiter;
-		
+
 		@Override
 		public boolean isCandidateMatchingPrefix(String name, String prefix) {
 			delimiter = "#";

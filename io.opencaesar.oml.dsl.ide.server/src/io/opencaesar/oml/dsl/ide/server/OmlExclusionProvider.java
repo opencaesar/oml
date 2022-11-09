@@ -31,44 +31,41 @@ import java.util.stream.Stream;
 
 @SuppressWarnings("all")
 public class OmlExclusionProvider {
-    private static final PreferenceKey EXCLUSION_PATHS = new PreferenceKey("excludePath", "");
+	private static final PreferenceKey EXCLUSION_PATHS = new PreferenceKey("excludePath", "");
 
-    private Map<URI, IPreferenceValues> preferences = CollectionLiterals.<URI, IPreferenceValues>newHashMap();
+	private Map<URI, IPreferenceValues> preferences = CollectionLiterals.<URI, IPreferenceValues>newHashMap();
 
-    @SuppressWarnings("unchecked")
-    public boolean isExcluded(final URI uri, final URI projectURI) {
-        final String uriAsString = uri.toString();
-        final String excludedSegments = getPreferences(projectURI).getPreference(OmlExclusionProvider.EXCLUSION_PATHS);
+	@SuppressWarnings("unchecked")
+	public boolean isExcluded(final URI uri, final URI projectURI) {
+		final String uriAsString = uri.toString();
+		final String excludedSegments = getPreferences(projectURI).getPreference(OmlExclusionProvider.EXCLUSION_PATHS);
 
-        if ((excludedSegments != null) && (!excludedSegments.isEmpty())) {
-            final URI truncatedProjectURI = projectURI.lastSegment().isEmpty() ? projectURI.trimSegments(1)
-                    : projectURI;
+		if ((excludedSegments != null) && (!excludedSegments.isEmpty())) {
+			final URI truncatedProjectURI = projectURI.lastSegment().isEmpty() ? projectURI.trimSegments(1) : projectURI;
 
-            final List<String> excludedSegmentPaths = (List<String>) Conversions
-                    .doWrapArray(excludedSegments.split(":"));
-            final Stream<String> excludedPaths = excludedSegmentPaths.stream().map(path -> {
-                final String[] nonEmptySegments = (String[]) Arrays.asList(path.split("/")).stream()
-                        .filter(p -> !p.isEmpty()).toArray();
-                return truncatedProjectURI.appendSegments(nonEmptySegments).appendSegment("").toString();
-            });
+			final List<String> excludedSegmentPaths = (List<String>) Conversions.doWrapArray(excludedSegments.split(":"));
+			final Stream<String> excludedPaths = excludedSegmentPaths.stream().map(path -> {
+				final String[] nonEmptySegments = (String[]) Arrays.asList(path.split("/")).stream().filter(p -> !p.isEmpty()).toArray();
+				return truncatedProjectURI.appendSegments(nonEmptySegments).appendSegment("").toString();
+			});
 
-            return excludedPaths.filter(path -> uriAsString.startsWith(path)).findFirst().isPresent();
-        }
+			return excludedPaths.filter(path -> uriAsString.startsWith(path)).findFirst().isPresent();
+		}
 
-        return false;
-    }
+		return false;
+	}
 
-    private IPreferenceValues getPreferences(final URI projectURI) {
-        IPreferenceValues prefs = this.preferences.get(projectURI);
-        if (null == prefs) {
-            final IPreferenceValues newPrefs = PreferenceValuesProvider.createPreferenceValues(projectURI);
-            preferences.put(projectURI, newPrefs);
-            prefs = newPrefs;
-        }
+	private IPreferenceValues getPreferences(final URI projectURI) {
+		IPreferenceValues prefs = this.preferences.get(projectURI);
+		if (null == prefs) {
+			final IPreferenceValues newPrefs = PreferenceValuesProvider.createPreferenceValues(projectURI);
+			preferences.put(projectURI, newPrefs);
+			prefs = newPrefs;
+		}
 
-        if (prefs instanceof JsonFileBasedPreferenceValues) {
-            ((JsonFileBasedPreferenceValues) prefs).checkIsUpToDate();
-        }
-        return prefs;
-    }
+		if (prefs instanceof JsonFileBasedPreferenceValues) {
+			((JsonFileBasedPreferenceValues) prefs).checkIsUpToDate();
+		}
+		return prefs;
+	}
 }

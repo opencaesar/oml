@@ -1,12 +1,14 @@
+ext.title = 'Oml Textual Language Test'
+description = 'Test for Oml textual language'
 task copySrc(type: Copy) {
     from 'src'
     into 'build/bikeshed'
-} 
+}
 
 task ecoreToBikeshed(type:io.opencaesar.ecore.bikeshed.Ecore2BikeshedTask, dependsOn: copySrc) {
 	inputFolderPath = file('../io.opencaesar.oml/src/io/opencaesar/oml')
 	outputFolderPath = file('build/bikeshed')
-}               
+}
 
 task generateDocs(dependsOn: ecoreToBikeshed) {
 	doLast {
@@ -20,9 +22,7 @@ task generateDocs(dependsOn: ecoreToBikeshed) {
             into 'build/bikeshed/javadoc'
         }   
 	}
-}              
-
-//build.dependsOn generateDocs
+}
 
 clean {
 	delete 'build'

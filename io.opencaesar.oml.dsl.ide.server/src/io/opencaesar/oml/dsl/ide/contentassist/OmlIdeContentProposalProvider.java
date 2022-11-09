@@ -40,11 +40,14 @@ import io.opencaesar.oml.dsl.services.OmlGrammarAccess;
 
 public class OmlIdeContentProposalProvider extends IdeContentProposalProvider {
 
-	@Inject private OmlGrammarAccess omlGrammarAccess;
+	@Inject
+	private OmlGrammarAccess omlGrammarAccess;
 
-	@Inject private IGlobalScopeProvider omlGlobalScopeProvider;
+	@Inject
+	private IGlobalScopeProvider omlGlobalScopeProvider;
 
-	@Inject private NAMESPACEValueConverter qualifiedNameValueConverter;
+	@Inject
+	private NAMESPACEValueConverter qualifiedNameValueConverter;
 
 	protected void _createProposals(RuleCall ruleCall, ContentAssistContext context, IIdeContentProposalAcceptor acceptor) {
 		if (context.getCurrentModel() instanceof Import) {
@@ -57,7 +60,7 @@ public class OmlIdeContentProposalProvider extends IdeContentProposalProvider {
 	}
 
 	protected void complete_NAMESPACE(EObject model, RuleCall ruleCall, ContentAssistContext context, IIdeContentProposalAcceptor acceptor) {
-		var ontology = ((Element)model).getOntology();
+		var ontology = ((Element) model).getOntology();
 		var ontologyURI = EcoreUtil.getURI(ontology);
 		var keyword = (Keyword) context.getLastCompleteNode().getGrammarElement();
 		Predicate<IEObjectDescription> predicate = null;
@@ -81,17 +84,17 @@ public class OmlIdeContentProposalProvider extends IdeContentProposalProvider {
 			predicate = (x -> !x.getEObjectURI().equals(ontologyURI) && OmlPackage.Literals.VOCABULARY_BOX.isSuperTypeOf(x.getEClass()));
 		}
 		if (predicate != null) {
-	 		var eReference = EcoreFactory.eINSTANCE.createEReference();
+			var eReference = EcoreFactory.eINSTANCE.createEReference();
 			eReference.setEType(OmlPackage.Literals.ONTOLOGY);
 			var scope = omlGlobalScopeProvider.getScope(ontology.eResource(), eReference, predicate);
-			scope.getAllElements().forEach(o ->acceptor.accept(getProposalCreator().createProposal(qualifiedNameValueConverter.toString(o.getUserData("namespace")), context), 0));
+			scope.getAllElements().forEach(o -> acceptor.accept(getProposalCreator().createProposal(qualifiedNameValueConverter.toString(o.getUserData("namespace")), context), 0));
 		}
 	}
 
 	protected void complete_ID(EObject model, RuleCall ruleCall, ContentAssistContext context, IIdeContentProposalAcceptor acceptor) {
 		if (model instanceof Import) {
-			var _import = (Import) model; 
-	 		var eReference = EcoreFactory.eINSTANCE.createEReference();
+			var _import = (Import) model;
+			var eReference = EcoreFactory.eINSTANCE.createEReference();
 			eReference.setEType(OmlPackage.Literals.ONTOLOGY);
 			var scope = omlGlobalScopeProvider.getScope(_import.eResource(), eReference, x -> x.getUserData("namespace").equals(_import.getNamespace()));
 			scope.getAllElements().forEach(o -> acceptor.accept(getProposalCreator().createProposal(o.getUserData("prefix"), context), 0));
