@@ -1,7 +1,5 @@
 sudo: false
-language: python
-python:
-  - "3.8"
+language: java
 jdk: openjdk17
 
 cache:
@@ -9,15 +7,12 @@ cache:
     - $HOME/.m2
     - $HOME/.gradle
 
-services:
-  - xvfb
-
 before_install:
   - sudo apt-get install graphviz
 
 install:
-  - git clone https://github.com/tabatkins/bikeshed.git
-  - pip install --editable bikeshed
+  - pyenv global 3.7.1
+  - pip3 install bikeshed
 
 script:
   - ./gradlew build generateDocs
