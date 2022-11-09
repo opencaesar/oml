@@ -19,10 +19,6 @@ dependencies {
     xtextLanguages "org.eclipse.xtext:org.eclipse.xtext.ecore:${xtextVersion}"*/
 }
 
-sourceSets {
-	main.resources.exclude '**/*.xcore'
-}
-
 /*xtext {
 	languages {
 		ecore {
@@ -39,3 +35,9 @@ sourceSets {
 	sourceSets.main.output.dir(xtext.languages.xcore.generator.outlet, 'src-gen')
 }
 processResources.dependsOn(generateXtext)*/
+
+sourceSets {
+	main.resources.exclude '**/*.xcore'
+}
+
+assemble.dependsOn javadoc
