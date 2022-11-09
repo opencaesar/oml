@@ -2,6 +2,7 @@ sudo: false
 language: python
 python:
   - "3.8"
+jdk: openjdk17
 
 cache:
   directories:

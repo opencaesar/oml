@@ -12,7 +12,6 @@
         <module>io.opencaesar.oml.dsl</module>
         <module>io.opencaesar.oml.dsl.feature</module>
         <module>io.opencaesar.oml.dsl.ide</module>
-        <module>io.opencaesar.oml.dsl.tests</module>
         <module>io.opencaesar.oml.dsl.ui</module>
         <module>io.opencaesar.oml.dsl.ui.tests</module>
         <module>io.opencaesar.oml.edit</module>
