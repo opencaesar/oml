@@ -49,14 +49,6 @@ public class OmlSynchronizedXtextResourceSet extends SynchronizedXtextResourceSe
 				}
 				super.add(eObject, eReference, crossReferencedEObject);
 			}
-			
-			@Override
-		    public void remove(EObject eObject, EReference eReference, EObject crossReferencedEObject) {
-				if (crossReferencedEObject.eIsProxy()) {
-					crossReferencedEObject = EcoreUtil.resolve(crossReferencedEObject, eObject);
-				}
-				super.remove(eObject, eReference, crossReferencedEObject);
-			}			
 		}
 	}
 }
