@@ -1489,7 +1489,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version 63e66730b, updated Tue Oct 25 12:35:05 2022 -0700" name="generator">
   <link href="https://github.com/opencaesar/oml" rel="canonical">
-  <meta content="d28119e4b345472843daa6fc34bd60b1a65b8e83" name="document-revision">
+  <meta content="9f21835a5c7c92e3264ba723cf6469844f075808" name="document-revision">
 <style>
 body {
   padding: 0;
@@ -2125,7 +2125,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
      <a href="#Language-Reference"><span class="secno">3</span> <span class="content">Language Reference</span></a>
      <ol class="toc">
       <li>
-       <a href="#Common-Idioms-LR"><span class="secno">3.1</span> <span class="content">Common Idioms</span></a>
+       <a href="#Common-Idioms-LR"><span class="secno">3.1</span> <span class="content">OML Idioms</span></a>
        <ol class="toc">
         <li><a href="#White-Space-LR"><span class="secno">3.1.1</span> <span class="content">White Space</span></a>
         <li><a href="#Comment-LR"><span class="secno">3.1.2</span> <span class="content">Comment</span></a>
@@ -2466,7 +2466,8 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
     </ul>
     <h2 class="heading settled" data-level="3" id="Language-Reference"><span class="secno">3. </span><span class="content">Language Reference</span><a class="self-link" href="#Language-Reference"></a></h2>
     <p>This section presents the OML language features using its textual syntax as a notation. All the presented features exist in the other syntaxes except when noted otherwise. It is recommended that a reader starts with the common idioms section to gain an understanding of the language’s basics, before reading the other sections.</p>
-    <h3 class="heading settled" data-level="3.1" id="Common-Idioms-LR"><span class="secno">3.1. </span><span class="content">Common Idioms</span><a class="self-link" href="#Common-Idioms-LR"></a></h3>
+    <p class="note" role="note"><span>Note:</span> This document frequently uses BNF grammar to specify OML’s textual syntax. In such grammar, terminals like <code>IRI</code> and <code>NAMESPACE</code>, representing features of OML elements, may be used. To be more precise, we use the syntax <code>[Type|Terminal]</code> to indicate that a terminal represents a feature of a particular type . For example, <code>[Concept|IRI]</code> means the <code>IRI</code> of a <code>Concept</code>, and <code>[Vocabulary|NAMESPACE]</code> means the <code>NAMESAPCE</code> of a <code>Vocabulary</code>.</p>
+    <h3 class="heading settled" data-level="3.1" id="Common-Idioms-LR"><span class="secno">3.1. </span><span class="content">OML Idioms</span><a class="self-link" href="#Common-Idioms-LR"></a></h3>
     <h4 class="heading settled" data-level="3.1.1" id="White-Space-LR"><span class="secno">3.1.1. </span><span class="content">White Space</span><a class="self-link" href="#White-Space-LR"></a></h4>
     <p>Whitespace can be freely placed in the OML textual syntax (only) to delimit tokens, but otherwise has no other significance.</p>
     <h4 class="heading settled" data-level="3.1.2" id="Comment-LR"><span class="secno">3.1.2. </span><span class="content">Comment</span><a class="self-link" href="#Comment-LR"></a></h4>
