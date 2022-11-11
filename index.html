@@ -1489,7 +1489,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version 63e66730b, updated Tue Oct 25 12:35:05 2022 -0700" name="generator">
   <link href="https://github.com/opencaesar/oml" rel="canonical">
-  <meta content="57dfbac0b2c1684aed9cfc933b66889111977dd8" name="document-revision">
+  <meta content="d28119e4b345472843daa6fc34bd60b1a65b8e83" name="document-revision">
 <style>
 body {
   padding: 0;
@@ -2088,7 +2088,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://opencaesar.github.io/oml/"> <img alt="Ontological Modeling Language" height="60" src="images/oml.svg"> </a></p>
    <h1 class="p-name no-ref" id="title">Ontological Modeling Language 1.4</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Living Document, <time class="dt-updated" datetime="2022-11-10">10 November 2022</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Living Document, <time class="dt-updated" datetime="2022-11-11">11 November 2022</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -2500,7 +2500,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
     <h4 class="heading settled" data-level="3.1.4" id="Import-LR"><span class="secno">3.1.4. </span><span class="content">Import</span><a class="self-link" href="#Import-LR"></a></h4>
     <p>An ontology can import zero or more other ontologies, which allows it to cross-reference the imported ontologies' members. This is accomplished by an ontology adding an import statement in its body (before other kinds of statements). An import statement is declared using one of the <code>&lt;import></code> keywords (see <a href="#Import-Syntax">import syntax</a> for details) followed by the imported ontology’s NAMESPACE and optionally its ID.</p>
 <pre class="highlight highlight-html"><code>&lt;ontology></code> NAMESPACE <code>as</code> ID <code>{</code>
-    <code>&lt;import></code> NAMESPACE (<code>as</code> ID)?
+    <code>&lt;import></code> [Ontology|NAMESPACE] (<code>as</code> ID)?
 }
 </pre>
     <p class="note" role="note"><span>Note:</span> An ID is required in the import syntax only when imported members are cross-referenced using the ABBREVIATED_IRI syntax.</p>
@@ -2658,9 +2658,9 @@ true        // xsd:boolean
     <h4 class="heading settled" data-level="3.2.1" id="VocabularyImports-LR"><span class="secno">3.2.1. </span><span class="content">Imports</span><a class="self-link" href="#VocabularyImports-LR"></a></h4>
     <p>This section outlines the kind of import statements that can be added to a vocabulary.</p>
     <h5 class="heading settled" data-level="3.2.1.1" id="VocabularyExtension-LR"><span class="secno">3.2.1.1. </span><span class="content">Extension</span><a class="self-link" href="#VocabularyExtension-LR"></a></h5>
-    <p>A <a href="#VocabularyExtension">vocabulary extension</a> is a kind of <a href="#Import">import</a> statement that can be added to a vocabulary to specify that it extends another vocabulary. This is typically needed when members of the extended vocabulary are cross-reference by the local members of the extending vocabulary.  A vocabulary extension is defined with the keyword <code>extends</code> followed by the imported vocabulary’s NAMESPACE. If members of the imported vocabulary are to be referenced using their ABBREVIATED_IRIs, then the NAMESPACE needs to be followed by the keyword <code>as</code> and a namespace prefix ID that is unique within the vocabulary’s imports.</p>
+    <p>A <a href="#VocabularyExtension">vocabulary extension</a> is a kind of <a href="#Import">import</a> statement that can be added to a vocabulary to specify that it extends another vocabulary. This is typically needed when members of the extended vocabulary are cross-reference by the local members of the extending vocabulary.  A vocabulary extension is defined with the keyword <code>extends</code> followed by the extended vocabulary’s NAMESPACE, followed by the keyword <code>as</code> and a unique prefix ID.</p>
 <pre class="highlight highlight-html">Annotation*
-<code>extends</code> NAMESPACE (<code>as</code> ID)?
+<code>extends</code> [Vocabulary|NAMESPACE] <code>as</code> ID
 </pre>
     <p>For example, the <em>mission</em> vocabulary <em>extends</em> the <em>xsd</em> vocabulary (in order to cross reference its scalars).</p>
 <pre class="highlight highlight-html"><code>vocabulary</code> <code>&lt;</code>http://com.xyz/methodology/mission#<code>></code> <code>as</code> mission <code>{</code>
@@ -2673,9 +2673,9 @@ true        // xsd:boolean
 <code>}</code>
 </pre>
     <h5 class="heading settled" data-level="3.2.1.2" id="VocabularyUsage-LR"><span class="secno">3.2.1.2. </span><span class="content">Usage</span><a class="self-link" href="#VocabularyUsage-LR"></a></h5>
-    <p>A <a href="#VocabularyUsage">vocabulary usage</a> is a kind of <a href="#Import">import</a> statement that can be added to a vocabulary to specify that it uses a <a href="#Description-LR">description</a>. This is typically needed when the vocabulary uses one or more of the description’s instances in its restriction axioms. A vocabulary usage is defined with the keyword <code>extends</code> followed by the imported description’s NAMESPACE. If members of the imported description are to be referenced using their ABBREVIATED_IRIs, then the NAMESPACE needs to be followed by the keyword <code>as</code> and a namespace prefix ID that is unique within the vocabulary’s imports.</p>
+    <p>A <a href="#VocabularyUsage">vocabulary usage</a> is a kind of <a href="#Import">import</a> statement that can be added to a vocabulary to specify that it uses a <a href="#Description-LR">description</a>. This is typically needed when the vocabulary uses one or more of the description’s instances in its restriction axioms. A vocabulary usage is defined with the keyword <code>uses</code> followed by the used description’s NAMESPACE, followed by the keyword <code>as</code> and a unique prefix ID.</p>
 <pre class="highlight highlight-html">Annotation*
-<code>uses</code> NAMESPACE (<code>as</code> ID)?
+<code>uses</code> [Description|NAMESPACE] <code>as</code> ID
 </pre>
     <p>For example, the <em>mission</em> vocabulary <em>uses</em> the <em>organizations</em> description (in order to cross-reference its instances).</p>
 <pre class="highlight highlight-html"><code>vocabulary</code> <code>&lt;</code>http://com.xyz/methodology/mission1#<code>></code> <code>as</code> mission1 <code>{</code>
@@ -3328,9 +3328,9 @@ instance or literal.</p>
     <h4 class="heading settled" data-level="3.3.1" id="DescriptionImports-LR"><span class="secno">3.3.1. </span><span class="content">Imports</span><a class="self-link" href="#DescriptionImports-LR"></a></h4>
     <p>This section outlines the kind of import statements that can be added in a description’s body.</p>
     <h5 class="heading settled" data-level="3.3.1.1" id="DescriptionUsage-LR"><span class="secno">3.3.1.1. </span><span class="content">Usage</span><a class="self-link" href="#DescriptionUsage-LR"></a></h5>
-    <p>A <a href="#DescriptionUsage">description usage</a> is a kind of <a href="#Import">import</a> statement that can be added to a description to specify a vocabulary that it uses. This is typically needed in order to use the terms (types and properties) of the vocabulary in the description’s instance definitions. A description usage is defined with the keyword <code>uses</code> followed by the imported vocabulary’s NAMESPACE. If members of the imported vocabulary are to be referenced using their ABBREVIATED_IRIs, then the NAMESPACE needs to be followed by the keyword <code>as</code> and a unique prefix ID within the description’s imports.</p>
+    <p>A <a href="#DescriptionUsage">description usage</a> is a kind of <a href="#Import">import</a> statement that can be added to a description to specify a vocabulary that it uses. This is typically needed in order to use the terms (types and properties) of the vocabulary in the description’s instance definitions. A description usage is defined with the keyword <code>uses</code> followed by the used vocabulary’s NAMESPACE, followed by the keyword <code>as</code> and a unique prefix ID.</p>
 <pre class="highlight highlight-html">Annotation*
-<code>uses</code> NAMESPACE (<code>as</code> ID)?
+<code>uses</code> [Vocabulary|NAMESPACE] <code>as</code> ID
 </pre>
     <p>In the following example description, the <em>mission</em> vocabulary is used to describe components of a system.</p>
 <pre class="highlight highlight-html"><code>description</code> <code>&lt;</code>http://com.xyz/system/components#<code>></code> <code>as</code> components <code>{</code>
@@ -3340,9 +3340,9 @@ instance or literal.</p>
 <code>}</code>
 </pre>
     <h5 class="heading settled" data-level="3.3.1.2" id="DescriptionExtension-LR"><span class="secno">3.3.1.2. </span><span class="content">Extension</span><a class="self-link" href="#DescriptionExtension-LR"></a></h5>
-    <p>A <a href="#DescriptionExtension">description extension</a> is a kind of <a href="#Import">import</a> statement that can be added to a description to specify that it extends another description. This can be used to split a system description into fragments that focus on different concerns or are contributed by different authorities. In this case, a description may extend other descriptions that it depends on. A description extension is defined with the keyword <code>extends</code> followed by the imported description’s NAMESPACE. If members of the imported description are to be referenced using their ABBREVIATED_IRIs, then the NAMESPACE needs to be followed by the keyword <code>as</code> and a unique prefix ID within the description’s imports.</p>
+    <p>A <a href="#DescriptionExtension">description extension</a> is a kind of <a href="#Import">import</a> statement that can be added to a description to specify that it extends another description. This can be used to split a system description into fragments that focus on different concerns or are contributed by different authorities. In this case, a description may extend other descriptions that it depends on. A description extension is defined with the keyword <code>extends</code> followed by the extended description’s NAMESPACE, followed by the keyword <code>as</code> and a unique prefix ID.</p>
 <pre class="highlight highlight-html">Annotation*
-<code>extends</code> NAMESPACE (<code>as</code> ID)?
+<code>extends</code> [Description|NAMESPACE] <code>as</code> ID
 </pre>
     <p>The following example description <em>subsystem1</em> extends two other descriptions, <em>subsystem1</em> and <em>subsystem2</em>, and defines component <em>System1</em> that aggregates components <em>Subsystem1</em> and <em>Subsystem2</em> defined in these descriptions, respectively.</p>
 <pre class="highlight highlight-html"><code>description</code> <code>&lt;</code>http://com.xyz/system/system1#<code>></code> <code>as</code> system1 <code>{</code>
@@ -3487,9 +3487,9 @@ instance or literal.</p>
     <h4 class="heading settled" data-level="3.4.1" id="VocabularyBundleImports-LR"><span class="secno">3.4.1. </span><span class="content">Imports</span><a class="self-link" href="#VocabularyBundleImports-LR"></a></h4>
     <p>This section outlines the kind of import statements that can be added in a vocabulary bundle’s body.</p>
     <h5 class="heading settled" data-level="3.4.1.1" id="VocabularyBundleInclusion-LR"><span class="secno">3.4.1.1. </span><span class="content">Inclusion</span><a class="self-link" href="#VocabularyBundleInclusion-LR"></a></h5>
-    <p>An <a href="#VocabularyBundleInclusion">vocabulary bundle inclusion</a> is a kind of <a href="#Import">import</a> statement that can be added to a vocabulary bundle to specify that it includes a vocabulary. A vocabulary bundle inclusion is defined with the keyword <code>includes</code> followed by the imported vocabulary’s NAMESPACE. If members of the imported vocabulary are to be referenced using their ABBREVIATED_IRIs, then the NAMESPACE needs to be followed by the keyword <code>as</code> and a unique prefix ID in the bundle’s imports.</p>
+    <p>An <a href="#VocabularyBundleInclusion">vocabulary bundle inclusion</a> is a kind of <a href="#Import">import</a> statement that can be added to a vocabulary bundle to specify that it includes a vocabulary. A vocabulary bundle inclusion is defined with the keyword <code>includes</code> followed by the included vocabulary’s NAMESPACE.</p>
 <pre class="highlight highlight-html">Annotation*
-<code>includes</code> NAMESPACE (<code>as</code> ID)?
+<code>includes</code> [Vocabulary|NAMESPACE]
 </pre>
     <p>For example, the <em>foundation</em> vocabulary bundle <em>includes</em> two vocabularies: <em>mission</em> and <em>project</em>.</p>
 <pre class="highlight highlight-html"><code>vocabulary</code> <code>bundle</code> <code>&lt;</code>http://com.xyz/methodology/foundation#<code>></code> <code>as</code> foundation <code>{</code>
@@ -3498,9 +3498,9 @@ instance or literal.</p>
 <code>}</code>
 </pre>
     <h5 class="heading settled" data-level="3.4.1.2" id="VocabularyBundleExtension-LR"><span class="secno">3.4.1.2. </span><span class="content">Extends</span><a class="self-link" href="#VocabularyBundleExtension-LR"></a></h5>
-    <p>An <a href="#VocabularyBundleExtension">vocabulary bundle extends</a> is a kind of <a href="#Import">import</a> statement that can be added to a vocabulary bundle to specify that it extends another vocabulary bundle. This can be used to organize vocabulary bundles in layers that build on each other. Each bundle inherits the vocabularies contributed by its extended bundles and may optionally add to them other included vocabularies. This can, for example, be used to define a family of related vocabulary bundles that build on each other by tackling different incremental concerns. A vocabulary bundle extension is defined with the keyword <code>extends</code> followed by the imported vocabulary bundle’s NAMESPACE.</p>
+    <p>An <a href="#VocabularyBundleExtension">vocabulary bundle extends</a> is a kind of <a href="#Import">import</a> statement that can be added to a vocabulary bundle to specify that it extends another vocabulary bundle. This can be used to organize vocabulary bundles in layers that build on each other. Each bundle inherits the vocabularies contributed by its extended bundles and may optionally add to them other included vocabularies. This can, for example, be used to define a family of related vocabulary bundles that build on each other by tackling different incremental concerns. A vocabulary bundle extension is defined with the keyword <code>extends</code> followed by the extended vocabulary bundle’s NAMESPACE.</p>
 <pre class="highlight highlight-html">Annotation*
-<code>extends</code> NAMESPACE
+<code>extends</code> [VocabularyBundle|NAMESPACE]
 </pre>
     <p>For example, the <em>cyber-physical</em> vocabulary bundle <em>extends</em> the <em>foundation</em> vocabulary bundle (which includes the <em>mission</em> vocabulary) to include two other vocabularies: <em>electrical</em> and <em>mechanical</em>, which are two disciplines used when describing cyber-physical systems.</p>
 <pre class="highlight highlight-html"><code>vocabulary</code> <code>bundle</code> <code>&lt;</code>http://com.xyz/methodology/cyber-physical#<code>></code> <code>as</code> cyber-physical <code>{</code>
@@ -3523,32 +3523,34 @@ instance or literal.</p>
     <h4 class="heading settled" data-level="3.5.1" id="DescriptionBundleImports-LR"><span class="secno">3.5.1. </span><span class="content">Imports</span><a class="self-link" href="#DescriptionBundleImports-LR"></a></h4>
     <p>This section outlines the kind of import statements that can be added in a description bundle’s body.</p>
     <h5 class="heading settled" data-level="3.5.1.1" id="DescriptionBundleInclusion-LR"><span class="secno">3.5.1.1. </span><span class="content">Inclusion</span><a class="self-link" href="#DescriptionBundleInclusion-LR"></a></h5>
-    <p>A <a href="#DescriptionBundleInclusion">description bundle inclusion</a> is a kind of <a href="#Import">import</a> statement that can be added to a description bundle to specify that it includes a description. A description bundle inclusion is defined with the keyword <code>includes</code> followed by the imported description’s NAMESPACE. If members of the imported description are to be referenced using their ABBREVIATED_IRIs, then the NAMESPACE needs to be followed by the keyword <code>as</code> and a unique prefix ID in the bundle’s imports.</p>
+    <p>A <a href="#DescriptionBundleInclusion">description bundle inclusion</a> is a kind of <a href="#Import">import</a> statement that can be added to a description bundle to specify that it includes a description. A description bundle inclusion is defined with the keyword <code>includes</code> followed by the imported description’s NAMESPACE.</p>
 <pre class="highlight highlight-html">Annotation*
-<code>includes</code> NAMESPACE (<code>as</code> ID)?
+<code>includes</code> [Description|NAMESPACE]
 </pre>
     <p>For example, the <em>mission1</em> description bundle <em>includes</em> two descriptions: <em>components</em> and <em>masses</em>.</p>
 <pre class="highlight highlight-html"><code>description</code> <code>bundle</code> <code>&lt;</code>http://com.xyz/missions/mission1#<code>></code> <code>as</code> mission1 <code>{</code>
-    <code>includes</code> <code>&lt;</code>http://com.xyz/system/components#<code>></code> <code>as</code> components
-    <code>includes</code> <code>&lt;</code>http://com.xyz/system/masses#<code>></code> <code>as</code> masses
+    <code>includes</code> <code>&lt;</code>http://com.xyz/system/components#<code>></code>
+    <code>includes</code> <code>&lt;</code>http://com.xyz/system/masses#<code>></code>
 <code>}</code>
 </pre>
     <h5 class="heading settled" data-level="3.5.1.2" id="DescriptionBundleUsage-LR"><span class="secno">3.5.1.2. </span><span class="content">Usage</span><a class="self-link" href="#DescriptionBundleUsage-LR"></a></h5>
-    <p>A <a href="#DescriptionBundleUsage">description bundle usage</a> is a kind of <a href="#Import">import</a> statement that can be added to a description bundle to specify that it uses a vocabulary bundle. This is typically done to specify the closed-world vocabulary bundle that this description bundle will be reasoned on with. A description bundle usage is defined with the keyword <code>uses</code> followed by the imported vocabulary bundle’s NAMESPACE.</p>
+    <p>A <a href="#DescriptionBundleUsage">description bundle usage</a> is a kind of <a href="#Import">import</a> statement that can be added to a description bundle to specify that it uses either a vocabulary bundle or a vocabulary. A description bundle should use at least one vocabulary bundle (to import its world-closure statements). In this case, the usage is defined with the keyword <code>uses</code> followed by the imported vocabulary bundle’s NAMESPACE. The same syntax is used when a description bundle uses a vocabulary, except that the vocabulary’s NAMESPACE can optionally be followed by the <code>as</code> keyword and a unique prefix ID,  when a member of the used vocabulary (typically an annotation property) is cross-referenced.</p>
 <pre class="highlight highlight-html">Annotation*
-<code>uses</code> NAMESPACE
+<code>uses</code> ( ([VocabularyBundle|NAMESPACE]) | ([Vocabulary|NAMESPACE] (<code>as</code> ID)?) )
 </pre>
-    <p>For example, the <em>mission1</em> description bundle <em>uses</em> the <em>foundation</em> vocabulary bundle.</p>
-<pre class="highlight highlight-html"><code>description</code> <code>bundle</code> <code>&lt;</code>http://com.xyz/missions/mission1#<code>></code> <code>as</code> mission1 <code>{</code>
+    <p>For example, the <em>mission1</em> description bundle <em>uses</em> the <em>dc</em> vocabulary and the <em>foundation</em> vocabulary bundle.</p>
+<pre class="highlight highlight-html"><code>@</code>dc:title "Mission1 Bundle"
+<code>description</code> <code>bundle</code> <code>&lt;</code>http://com.xyz/missions/mission1#<code>></code> <code>as</code> mission1 <code>{</code>
+    <code>uses</code> <code>&lt;</code>http://purl.org/dc/elements/1.1/<code>></code> <code>as</code> dc // vocabulary
+    <code>uses</code> <code>&lt;</code>http://com.xyz/methodology/foundation#<code>></code> // vocabulary bundle
     <code>includes</code> <code>&lt;</code>http://com.xyz/system/components#<code>></code> <code>as</code> components
     <code>includes</code> <code>&lt;</code>http://com.xyz/system/masses#<code>></code> <code>as</code> masses
-    <code>uses</code> <code>&lt;</code>http://com.xyz/methodology/foundation#<code>></code>
 <code>}</code>
 </pre>
     <h5 class="heading settled" data-level="3.5.1.3" id="DescriptionBundleExtension-LR"><span class="secno">3.5.1.3. </span><span class="content">Extension</span><a class="self-link" href="#DescriptionBundleExtension-LR"></a></h5>
-    <p>An <a href="#DescriptionBundleExtension">description bundle extension</a> is a kind of <a href="#Import">import</a> statement that can be added to a description bundle to specify that it extends another description bundle. This can be used to organize description bundles into layers that build on each other. Each bundle inherits the descriptions contributed by its extended bundles and optionally adds to them other descriptions. This can, for example, be used to define alternative datasets (e.g., representing alternative system designs) that extend a common dataset. A description bundle extension is defined with the keyword <code>extends</code> followed by the imported description bundle’s NAMESPACE.</p>
+    <p>An <a href="#DescriptionBundleExtension">description bundle extension</a> is a kind of <a href="#Import">import</a> statement that can be added to a description bundle to specify that it extends another description bundle. This can be used to organize description bundles into layers that build on each other. Each bundle inherits the descriptions contributed by its extended bundles and optionally adds to them other descriptions. This can, for example, be used to define alternative datasets (e.g., representing alternative system designs) that extend a common dataset. A description bundle extension is defined with the keyword <code>extends</code> followed by the extended description bundle’s NAMESPACE.</p>
 <pre class="highlight highlight-html">Annotation*
-<code>extends</code> NAMESPACE
+<code>extends</code> [DescriptionBundle|NAMESPACE]
 </pre>
     <p>For example, the <em>design1</em> description bundle <em>extends</em> the <em>mission1</em> description bundle and includes two additional descriptions: <em>electrical1</em> and <em>mechanical1</em>, which specify the details of this design variant.</p>
 <pre class="highlight highlight-html"><code>description</code> <code>bundle</code> <code>&lt;</code>http://com.xyz/missions/mission1/design1#<code>></code> <code>as</code> design1 <code>{</code>
