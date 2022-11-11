@@ -2,7 +2,9 @@
 
 This section presents the OML language features using its textual syntax as a notation. All the presented features exist in the other syntaxes except when noted otherwise. It is recommended that a reader starts with the common idioms section to gain an understanding of the language's basics, before reading the other sections.
 
-## Common Idioms ## {#Common-Idioms-LR}
+Note: This document frequently uses BNF grammar to specify OML's textual syntax. In such grammar, terminals like `IRI` and `NAMESPACE`, representing features of OML elements, may be used. To be more precise, we use the syntax `[Type|Terminal]` to indicate that a terminal represents a feature of a particular type . For example, `[Concept|IRI]` means the `IRI` of a `Concept`, and `[Vocabulary|NAMESPACE]` means the `NAMESAPCE` of a `Vocabulary`.
+
+## OML Idioms ## {#Common-Idioms-LR}
 
 ### White Space ### {#White-Space-LR}
 
