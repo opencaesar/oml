@@ -46,7 +46,7 @@ An ontology can import zero or more other ontologies, which allows it to cross-r
 
 <pre class="highlight highlight-html">
 `<ontology>` NAMESPACE `as` ID `{`
-    `<import>` NAMESPACE (`as` ID)?
+    `<import>` [Ontology|NAMESPACE] (`as` ID)?
 }
 </pre>
  
@@ -271,11 +271,11 @@ This section outlines the kind of import statements that can be added to a vocab
 
 #### Extension #### {#VocabularyExtension-LR}
 
-A [vocabulary extension](#VocabularyExtension) is a kind of [import](#Import) statement that can be added to a vocabulary to specify that it extends another vocabulary. This is typically needed when members of the extended vocabulary are cross-reference by the local members of the extending vocabulary.  A vocabulary extension is defined with the keyword `extends` followed by the imported vocabulary's NAMESPACE. If members of the imported vocabulary are to be referenced using their ABBREVIATED_IRIs, then the NAMESPACE needs to be followed by the keyword `as` and a namespace prefix ID that is unique within the vocabulary's imports.
+A [vocabulary extension](#VocabularyExtension) is a kind of [import](#Import) statement that can be added to a vocabulary to specify that it extends another vocabulary. This is typically needed when members of the extended vocabulary are cross-reference by the local members of the extending vocabulary.  A vocabulary extension is defined with the keyword `extends` followed by the extended vocabulary's NAMESPACE, followed by the keyword `as` and a unique prefix ID.
 
 <pre class="highlight highlight-html">
 Annotation*
-`extends` NAMESPACE (`as` ID)?
+`extends` [Vocabulary|NAMESPACE] `as` ID
 </pre>
 
 For example, the *mission* vocabulary *extends* the *xsd* vocabulary (in order to cross reference its scalars).
@@ -293,11 +293,11 @@ For example, the *mission* vocabulary *extends* the *xsd* vocabulary (in order t
 
 #### Usage #### {#VocabularyUsage-LR}
 
-A [vocabulary usage](#VocabularyUsage) is a kind of [import](#Import) statement that can be added to a vocabulary to specify that it uses a [description](#Description-LR). This is typically needed when the vocabulary uses one or more of the description's instances in its restriction axioms. A vocabulary usage is defined with the keyword `extends` followed by the imported description's NAMESPACE. If members of the imported description are to be referenced using their ABBREVIATED_IRIs, then the NAMESPACE needs to be followed by the keyword `as` and a namespace prefix ID that is unique within the vocabulary's imports.
+A [vocabulary usage](#VocabularyUsage) is a kind of [import](#Import) statement that can be added to a vocabulary to specify that it uses a [description](#Description-LR). This is typically needed when the vocabulary uses one or more of the description's instances in its restriction axioms. A vocabulary usage is defined with the keyword `uses` followed by the used description's NAMESPACE, followed by the keyword `as` and a unique prefix ID.
 
 <pre class="highlight highlight-html">
 Annotation*
-`uses` NAMESPACE (`as` ID)?
+`uses` [Description|NAMESPACE] `as` ID
 </pre>
 
 For example, the *mission* vocabulary *uses* the *organizations* description (in order to cross-reference its instances).
@@ -1096,11 +1096,11 @@ This section outlines the kind of import statements that can be added in a descr
 
 #### Usage #### {#DescriptionUsage-LR}
 
-A [description usage](#DescriptionUsage) is a kind of [import](#Import) statement that can be added to a description to specify a vocabulary that it uses. This is typically needed in order to use the terms (types and properties) of the vocabulary in the description's instance definitions. A description usage is defined with the keyword `uses` followed by the imported vocabulary's NAMESPACE. If members of the imported vocabulary are to be referenced using their ABBREVIATED_IRIs, then the NAMESPACE needs to be followed by the keyword `as` and a unique prefix ID within the description's imports.
+A [description usage](#DescriptionUsage) is a kind of [import](#Import) statement that can be added to a description to specify a vocabulary that it uses. This is typically needed in order to use the terms (types and properties) of the vocabulary in the description's instance definitions. A description usage is defined with the keyword `uses` followed by the used vocabulary's NAMESPACE, followed by the keyword `as` and a unique prefix ID.
 
 <pre class="highlight highlight-html">
 Annotation*
-`uses` NAMESPACE (`as` ID)?
+`uses` [Vocabulary|NAMESPACE] `as` ID
 </pre>
 
 In the following example description, the *mission* vocabulary is used to describe components of a system.
@@ -1115,11 +1115,11 @@ In the following example description, the *mission* vocabulary is used to descri
 
 #### Extension #### {#DescriptionExtension-LR}
 
-A [description extension](#DescriptionExtension) is a kind of [import](#Import) statement that can be added to a description to specify that it extends another description. This can be used to split a system description into fragments that focus on different concerns or are contributed by different authorities. In this case, a description may extend other descriptions that it depends on. A description extension is defined with the keyword `extends` followed by the imported description's NAMESPACE. If members of the imported description are to be referenced using their ABBREVIATED_IRIs, then the NAMESPACE needs to be followed by the keyword `as` and a unique prefix ID within the description's imports.
+A [description extension](#DescriptionExtension) is a kind of [import](#Import) statement that can be added to a description to specify that it extends another description. This can be used to split a system description into fragments that focus on different concerns or are contributed by different authorities. In this case, a description may extend other descriptions that it depends on. A description extension is defined with the keyword `extends` followed by the extended description's NAMESPACE, followed by the keyword `as` and a unique prefix ID.
 
 <pre class="highlight highlight-html">
 Annotation*
-`extends` NAMESPACE (`as` ID)?
+`extends` [Description|NAMESPACE] `as` ID
 </pre>
 
 The following example description *subsystem1* extends two other descriptions, *subsystem1* and *subsystem2*, and defines component *System1* that aggregates components *Subsystem1* and *Subsystem2* defined in these descriptions, respectively.
@@ -1324,11 +1324,11 @@ This section outlines the kind of import statements that can be added in a vocab
 
 #### Inclusion #### {#VocabularyBundleInclusion-LR}
 
-An [vocabulary bundle inclusion](#VocabularyBundleInclusion) is a kind of [import](#Import) statement that can be added to a vocabulary bundle to specify that it includes a vocabulary. A vocabulary bundle inclusion is defined with the keyword `includes` followed by the imported vocabulary's NAMESPACE. If members of the imported vocabulary are to be referenced using their ABBREVIATED_IRIs, then the NAMESPACE needs to be followed by the keyword `as` and a unique prefix ID in the bundle's imports.
+An [vocabulary bundle inclusion](#VocabularyBundleInclusion) is a kind of [import](#Import) statement that can be added to a vocabulary bundle to specify that it includes a vocabulary. A vocabulary bundle inclusion is defined with the keyword `includes` followed by the included vocabulary's NAMESPACE.
 
 <pre class="highlight highlight-html">
 Annotation*
-`includes` NAMESPACE (`as` ID)?
+`includes` [Vocabulary|NAMESPACE]
 </pre>
 
 For example, the *foundation* vocabulary bundle *includes* two vocabularies: *mission* and *project*.
@@ -1342,11 +1342,11 @@ For example, the *foundation* vocabulary bundle *includes* two vocabularies: *mi
 
 #### Extends #### {#VocabularyBundleExtension-LR}
 
-An [vocabulary bundle extends](#VocabularyBundleExtension) is a kind of [import](#Import) statement that can be added to a vocabulary bundle to specify that it extends another vocabulary bundle. This can be used to organize vocabulary bundles in layers that build on each other. Each bundle inherits the vocabularies contributed by its extended bundles and may optionally add to them other included vocabularies. This can, for example, be used to define a family of related vocabulary bundles that build on each other by tackling different incremental concerns. A vocabulary bundle extension is defined with the keyword `extends` followed by the imported vocabulary bundle's NAMESPACE.
+An [vocabulary bundle extends](#VocabularyBundleExtension) is a kind of [import](#Import) statement that can be added to a vocabulary bundle to specify that it extends another vocabulary bundle. This can be used to organize vocabulary bundles in layers that build on each other. Each bundle inherits the vocabularies contributed by its extended bundles and may optionally add to them other included vocabularies. This can, for example, be used to define a family of related vocabulary bundles that build on each other by tackling different incremental concerns. A vocabulary bundle extension is defined with the keyword `extends` followed by the extended vocabulary bundle's NAMESPACE.
 
 <pre class="highlight highlight-html">
 Annotation*
-`extends` NAMESPACE
+`extends` [VocabularyBundle|NAMESPACE]
 </pre>
 
 For example, the *cyber-physical* vocabulary bundle *extends* the *foundation* vocabulary bundle (which includes the *mission* vocabulary) to include two other vocabularies: *electrical* and *mechanical*, which are two disciplines used when describing cyber-physical systems.
@@ -1383,48 +1383,50 @@ This section outlines the kind of import statements that can be added in a descr
 
 #### Inclusion #### {#DescriptionBundleInclusion-LR}
 
-A [description bundle inclusion](#DescriptionBundleInclusion) is a kind of [import](#Import) statement that can be added to a description bundle to specify that it includes a description. A description bundle inclusion is defined with the keyword `includes` followed by the imported description's NAMESPACE. If members of the imported description are to be referenced using their ABBREVIATED_IRIs, then the NAMESPACE needs to be followed by the keyword `as` and a unique prefix ID in the bundle's imports.
+A [description bundle inclusion](#DescriptionBundleInclusion) is a kind of [import](#Import) statement that can be added to a description bundle to specify that it includes a description. A description bundle inclusion is defined with the keyword `includes` followed by the imported description's NAMESPACE.
 
 <pre class="highlight highlight-html">
 Annotation*
-`includes` NAMESPACE (`as` ID)?
+`includes` [Description|NAMESPACE]
 </pre>
 
 For example, the *mission1* description bundle *includes* two descriptions: *components* and *masses*.
 
 <pre class="highlight highlight-html">
 `description` `bundle` `<`http://com.xyz/missions/mission1#`>` `as` mission1 `{`
-    `includes` `<`http://com.xyz/system/components#`>` `as` components
-    `includes` `<`http://com.xyz/system/masses#`>` `as` masses
+    `includes` `<`http://com.xyz/system/components#`>`
+    `includes` `<`http://com.xyz/system/masses#`>`
 `}`
 </pre>
 
 #### Usage #### {#DescriptionBundleUsage-LR}
 
-A [description bundle usage](#DescriptionBundleUsage) is a kind of [import](#Import) statement that can be added to a description bundle to specify that it uses a vocabulary bundle. This is typically done to specify the closed-world vocabulary bundle that this description bundle will be reasoned on with. A description bundle usage is defined with the keyword `uses` followed by the imported vocabulary bundle's NAMESPACE.
+A [description bundle usage](#DescriptionBundleUsage) is a kind of [import](#Import) statement that can be added to a description bundle to specify that it uses either a vocabulary bundle or a vocabulary. A description bundle should use at least one vocabulary bundle (to import its world-closure statements). In this case, the usage is defined with the keyword `uses` followed by the imported vocabulary bundle's NAMESPACE. The same syntax is used when a description bundle uses a vocabulary, except that the vocabulary's NAMESPACE can optionally be followed by the `as` keyword and a unique prefix ID,  when a member of the used vocabulary (typically an annotation property) is cross-referenced.
 
 <pre class="highlight highlight-html">
 Annotation*
-`uses` NAMESPACE
+`uses` ( ([VocabularyBundle|NAMESPACE]) | ([Vocabulary|NAMESPACE] (`as` ID)?) )
 </pre>
 
-For example, the *mission1* description bundle *uses* the *foundation* vocabulary bundle.
+For example, the *mission1* description bundle *uses* the *dc* vocabulary and the *foundation* vocabulary bundle.
 
 <pre class="highlight highlight-html">
+`@`dc:title "Mission1 Bundle"
 `description` `bundle` `<`http://com.xyz/missions/mission1#`>` `as` mission1 `{`
+    `uses` `<`http://purl.org/dc/elements/1.1/`>` `as` dc // vocabulary
+    `uses` `<`http://com.xyz/methodology/foundation#`>` // vocabulary bundle
     `includes` `<`http://com.xyz/system/components#`>` `as` components
     `includes` `<`http://com.xyz/system/masses#`>` `as` masses
-    `uses` `<`http://com.xyz/methodology/foundation#`>`
 `}`
 </pre>
 
 #### Extension #### {#DescriptionBundleExtension-LR}
 
-An [description bundle extension](#DescriptionBundleExtension) is a kind of [import](#Import) statement that can be added to a description bundle to specify that it extends another description bundle. This can be used to organize description bundles into layers that build on each other. Each bundle inherits the descriptions contributed by its extended bundles and optionally adds to them other descriptions. This can, for example, be used to define alternative datasets (e.g., representing alternative system designs) that extend a common dataset. A description bundle extension is defined with the keyword `extends` followed by the imported description bundle's NAMESPACE.
+An [description bundle extension](#DescriptionBundleExtension) is a kind of [import](#Import) statement that can be added to a description bundle to specify that it extends another description bundle. This can be used to organize description bundles into layers that build on each other. Each bundle inherits the descriptions contributed by its extended bundles and optionally adds to them other descriptions. This can, for example, be used to define alternative datasets (e.g., representing alternative system designs) that extend a common dataset. A description bundle extension is defined with the keyword `extends` followed by the extended description bundle's NAMESPACE.
 
 <pre class="highlight highlight-html">
 Annotation*
-`extends` NAMESPACE
+`extends` [DescriptionBundle|NAMESPACE]
 </pre>
 
 For example, the *design1* description bundle *extends* the *mission1* description bundle and includes two additional descriptions: *electrical1* and *mechanical1*, which specify the details of this design variant.
