@@ -19,30 +19,29 @@
 package io.opencaesar.oml.provider;
 
 
-import io.opencaesar.oml.VocabularyBundleExtension;
+import io.opencaesar.oml.Usage;
 
 import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 
 /**
- * This is the item provider adapter for a {@link io.opencaesar.oml.VocabularyBundleExtension} object.
+ * This is the item provider adapter for a {@link io.opencaesar.oml.Usage} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class VocabularyBundleExtensionItemProvider extends VocabularyBundleImportItemProvider {
+public class UsageItemProvider extends ImportItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public VocabularyBundleExtensionItemProvider(AdapterFactory adapterFactory) {
+	public UsageItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -62,14 +61,14 @@ public class VocabularyBundleExtensionItemProvider extends VocabularyBundleImpor
 	}
 
 	/**
-	 * This returns VocabularyBundleExtension.gif.
+	 * This returns Usage.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/VocabularyBundleExtension"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/Usage"));
 	}
 
 	/**
@@ -80,10 +79,10 @@ public class VocabularyBundleExtensionItemProvider extends VocabularyBundleImpor
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((VocabularyBundleExtension)object).getNamespace();
+		String label = ((Usage)object).getNamespace();
 		return label == null || label.length() == 0 ?
-			getString("_UI_VocabularyBundleExtension_type") :
-			getString("_UI_VocabularyBundleExtension_type") + " " + label;
+			getString("_UI_Usage_type") :
+			getString("_UI_Usage_type") + " " + label;
 	}
 
 

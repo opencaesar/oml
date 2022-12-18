@@ -19,7 +19,6 @@
 package io.opencaesar.oml.impl;
 
 import io.opencaesar.oml.Description;
-import io.opencaesar.oml.DescriptionImport;
 import io.opencaesar.oml.DescriptionStatement;
 import io.opencaesar.oml.OmlPackage;
 
@@ -43,23 +42,12 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link io.opencaesar.oml.impl.DescriptionImpl#getOwnedImports <em>Owned Imports</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.DescriptionImpl#getOwnedStatements <em>Owned Statements</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class DescriptionImpl extends DescriptionBoxImpl implements Description {
-	/**
-	 * The cached value of the '{@link #getOwnedImports() <em>Owned Imports</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getOwnedImports()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<DescriptionImport> ownedImports;
-
 	/**
 	 * The cached value of the '{@link #getOwnedStatements() <em>Owned Statements</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -95,19 +83,6 @@ public class DescriptionImpl extends DescriptionBoxImpl implements Description {
 	 * @generated
 	 */
 	@Override
-	public EList<DescriptionImport> getOwnedImports() {
-		if (ownedImports == null) {
-			ownedImports = new EObjectContainmentWithInverseEList<DescriptionImport>(DescriptionImport.class, this, OmlPackage.DESCRIPTION__OWNED_IMPORTS, OmlPackage.DESCRIPTION_IMPORT__OWNING_DESCRIPTION);
-		}
-		return ownedImports;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EList<DescriptionStatement> getOwnedStatements() {
 		if (ownedStatements == null) {
 			ownedStatements = new EObjectContainmentWithInverseEList<DescriptionStatement>(DescriptionStatement.class, this, OmlPackage.DESCRIPTION__OWNED_STATEMENTS, OmlPackage.DESCRIPTION_STATEMENT__OWNING_DESCRIPTION);
@@ -124,8 +99,6 @@ public class DescriptionImpl extends DescriptionBoxImpl implements Description {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case OmlPackage.DESCRIPTION__OWNED_IMPORTS:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedImports()).basicAdd(otherEnd, msgs);
 			case OmlPackage.DESCRIPTION__OWNED_STATEMENTS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedStatements()).basicAdd(otherEnd, msgs);
 		}
@@ -140,8 +113,6 @@ public class DescriptionImpl extends DescriptionBoxImpl implements Description {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case OmlPackage.DESCRIPTION__OWNED_IMPORTS:
-				return ((InternalEList<?>)getOwnedImports()).basicRemove(otherEnd, msgs);
 			case OmlPackage.DESCRIPTION__OWNED_STATEMENTS:
 				return ((InternalEList<?>)getOwnedStatements()).basicRemove(otherEnd, msgs);
 		}
@@ -156,8 +127,6 @@ public class DescriptionImpl extends DescriptionBoxImpl implements Description {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case OmlPackage.DESCRIPTION__OWNED_IMPORTS:
-				return getOwnedImports();
 			case OmlPackage.DESCRIPTION__OWNED_STATEMENTS:
 				return getOwnedStatements();
 		}
@@ -173,10 +142,6 @@ public class DescriptionImpl extends DescriptionBoxImpl implements Description {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case OmlPackage.DESCRIPTION__OWNED_IMPORTS:
-				getOwnedImports().clear();
-				getOwnedImports().addAll((Collection<? extends DescriptionImport>)newValue);
-				return;
 			case OmlPackage.DESCRIPTION__OWNED_STATEMENTS:
 				getOwnedStatements().clear();
 				getOwnedStatements().addAll((Collection<? extends DescriptionStatement>)newValue);
@@ -193,9 +158,6 @@ public class DescriptionImpl extends DescriptionBoxImpl implements Description {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case OmlPackage.DESCRIPTION__OWNED_IMPORTS:
-				getOwnedImports().clear();
-				return;
 			case OmlPackage.DESCRIPTION__OWNED_STATEMENTS:
 				getOwnedStatements().clear();
 				return;
@@ -211,8 +173,6 @@ public class DescriptionImpl extends DescriptionBoxImpl implements Description {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case OmlPackage.DESCRIPTION__OWNED_IMPORTS:
-				return ownedImports != null && !ownedImports.isEmpty();
 			case OmlPackage.DESCRIPTION__OWNED_STATEMENTS:
 				return ownedStatements != null && !ownedStatements.isEmpty();
 		}

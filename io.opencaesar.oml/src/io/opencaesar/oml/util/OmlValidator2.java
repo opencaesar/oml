@@ -38,18 +38,14 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import io.opencaesar.oml.BinaryPredicate;
 import io.opencaesar.oml.Classifier;
 import io.opencaesar.oml.Description;
-import io.opencaesar.oml.DescriptionBox;
 import io.opencaesar.oml.DescriptionBundle;
-import io.opencaesar.oml.DescriptionBundleExtension;
-import io.opencaesar.oml.DescriptionBundleInclusion;
-import io.opencaesar.oml.DescriptionBundleUsage;
-import io.opencaesar.oml.DescriptionExtension;
-import io.opencaesar.oml.DescriptionUsage;
 import io.opencaesar.oml.Element;
 import io.opencaesar.oml.Entity;
 import io.opencaesar.oml.EnumeratedScalar;
+import io.opencaesar.oml.Extension;
 import io.opencaesar.oml.FacetedScalar;
 import io.opencaesar.oml.FeaturePredicate;
+import io.opencaesar.oml.Inclusion;
 import io.opencaesar.oml.LinkAssertion;
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.Ontology;
@@ -74,13 +70,10 @@ import io.opencaesar.oml.StructuredPropertyCardinalityRestrictionAxiom;
 import io.opencaesar.oml.StructuredPropertyRangeRestrictionAxiom;
 import io.opencaesar.oml.StructuredPropertyRestrictionAxiom;
 import io.opencaesar.oml.TypePredicate;
+import io.opencaesar.oml.Usage;
 import io.opencaesar.oml.Vocabulary;
 import io.opencaesar.oml.VocabularyBox;
 import io.opencaesar.oml.VocabularyBundle;
-import io.opencaesar.oml.VocabularyBundleExtension;
-import io.opencaesar.oml.VocabularyBundleInclusion;
-import io.opencaesar.oml.VocabularyExtension;
-import io.opencaesar.oml.VocabularyUsage;
 
 /**
  * The <b>Validator2</b> for the model. It adds additional semantic rules that go beyond the EMF syntax rules. 
@@ -270,175 +263,103 @@ public final class OmlValidator2 {
         return returnValue;
     }
 
-	// VocabularyExtension
+	// Extension
     
     /**
-     * Checks if a vocabulary extention URI resolves to a vocabulary
+     * Checks if an extention URI resolves to an ontology of the right kind
      * 
-     * @param object The vocabulary extension to check
+     * @param object The extension to check
      * @param diagnostics The validation diagnostics
      * @param context The object-to-object context map
      * @return True if the rules is satisfied; False otherwise
      */
-    protected boolean validateVocabularyExtensionURI(VocabularyExtension object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-        if (!(OmlRead.getImportedOntology(object) instanceof Vocabulary)) {
-            return report(Diagnostic.ERROR, diagnostics, object,
-                "Namespace <"+object.getNamespace()+"> could not be resolved to a vocabulary", 
-                OmlPackage.Literals.IMPORT__NAMESPACE);
-        }
-        return true;
+    protected boolean validateExtensionURI(Extension object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+    	if (object.eContainer() instanceof Vocabulary) {
+    		if (!(OmlRead.getImportedOntology(object) instanceof Vocabulary)) {
+	            return report(Diagnostic.ERROR, diagnostics, object,
+	                "Namespace <"+object.getNamespace()+"> could not be resolved to a vocabulary", 
+	                OmlPackage.Literals.IMPORT__NAMESPACE);
+        	}
+    	} else if (object.eContainer() instanceof VocabularyBundle) {
+    		if (!(OmlRead.getImportedOntology(object) instanceof VocabularyBundle)) {
+	            return report(Diagnostic.ERROR, diagnostics, object,
+	                "Namespace <"+object.getNamespace()+"> could not be resolved to a vocabulary bundle", 
+	                OmlPackage.Literals.IMPORT__NAMESPACE);
+        	}
+    	} else if (object.eContainer() instanceof Description) {
+    		if (!(OmlRead.getImportedOntology(object) instanceof Description)) {
+	            return report(Diagnostic.ERROR, diagnostics, object,
+	                "Namespace <"+object.getNamespace()+"> could not be resolved to an description", 
+	                OmlPackage.Literals.IMPORT__NAMESPACE);
+    		}
+    	} else if (object.eContainer() instanceof DescriptionBundle) {
+    		if  (!(OmlRead.getImportedOntology(object) instanceof DescriptionBundle)) {
+	            return report(Diagnostic.ERROR, diagnostics, object,
+	                "Namespace <"+object.getNamespace()+"> could not be resolved to an description bundle", 
+	                OmlPackage.Literals.IMPORT__NAMESPACE);
+        	}
+    	}
+    	return true;
     }
     
-    // VocabularyUsage
+    // Usage
     
     /**
-     * Checks if a vocabulary usage URI resolves to a description box
+     * Checks if a usage URI resolves to the ontology of the right kind
      * 
-     * @param object The vocabulary usage to check
+     * @param object The usage to check
      * @param diagnostics The validation diagnostics
      * @param context The object-to-object context map
      * @return True if the rules is satisfied; False otherwise
      */
-    protected boolean validateVocabularyUsageURI(VocabularyUsage object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-        if (!(OmlRead.getImportedOntology(object) instanceof DescriptionBox)) {
-            return report(Diagnostic.ERROR, diagnostics, object,
-                "Namespace <"+object.getNamespace()+"> could not be resolved to an description nor an description bundle", 
-                OmlPackage.Literals.IMPORT__NAMESPACE);
-        }
-        return true;
+    protected boolean validateUsageURI(Usage object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+    	if (object.eContainer() instanceof Vocabulary) {
+        	if (!(OmlRead.getImportedOntology(object) instanceof Description)) {
+	            return report(Diagnostic.ERROR, diagnostics, object,
+	                "Namespace <"+object.getNamespace()+"> could not be resolved to a description", 
+	                OmlPackage.Literals.IMPORT__NAMESPACE);
+        	}
+    	} else if (object.eContainer() instanceof Description) {
+            if (!(OmlRead.getImportedOntology(object) instanceof Vocabulary)) {
+                return report(Diagnostic.ERROR, diagnostics, object,
+                    "Namespace <"+object.getNamespace()+"> could not be resolved to a vocabulary", 
+                    OmlPackage.Literals.IMPORT__NAMESPACE);
+            }
+    	} else if (object.eContainer() instanceof DescriptionBundle) {
+            if (!(OmlRead.getImportedOntology(object) instanceof VocabularyBox)) {
+                return report(Diagnostic.ERROR, diagnostics, object,
+                    "Namespace <"+object.getNamespace()+"> could not be resolved to a vocabulary or a vocabulary bundle", 
+                    OmlPackage.Literals.IMPORT__NAMESPACE);
+            }
+    	} 
+    	return true;
     }
     
-    // VocabularyBundleExtension
+    // Inclusion
     
     /**
-     * Checks if a vocabulary bundle extention URI resolves to a vocabulary bundle
+     * Checks if an inclusion URI resolves to an ontology of the right kind
      * 
-     * @param object The vocabulary bundle extension to check
+     * @param object The inclusion to check
      * @param diagnostics The validation diagnostics
      * @param context The object-to-object context map
      * @return True if the rules is satisfied; False otherwise
      */
-    protected boolean validateVocabularyBundleExtensionURI(VocabularyBundleExtension object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-        if (!(OmlRead.getImportedOntology(object) instanceof VocabularyBundle)) {
-            return report(Diagnostic.ERROR, diagnostics, object,
-                "Namespace <"+object.getNamespace()+"> could not be resolved to a vocabulary bundle", 
-                OmlPackage.Literals.IMPORT__NAMESPACE);
-        }
-        return true;
-    }
-    
-    // VocabularyBundleInclusion
-    
-    /**
-     * Checks if a vocabulary bundle inclusion URI resolves to a vocabulary
-     * 
-     * @param object The vocabulary bundle inclusion to check
-     * @param diagnostics The validation diagnostics
-     * @param context The object-to-object context map
-     * @return True if the rules is satisfied; False otherwise
-     */
-    protected boolean validateVocabularyBundleInclusionURI(VocabularyBundleInclusion object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-        if (!(OmlRead.getImportedOntology(object) instanceof Vocabulary)) {
-            return report(Diagnostic.ERROR, diagnostics, object,
-                "Namespace <"+object.getNamespace()+"> could not be resolved to a vocabulary", 
-                OmlPackage.Literals.IMPORT__NAMESPACE);
-        }
-        return true;
-    }
-    
-    // DescriptionExtension
-    
-    /**
-     * Checks if a description extension URI resolves to a description
-     * 
-     * @param object The description extension to check
-     * @param diagnostics The validation diagnostics
-     * @param context The object-to-object context map
-     * @return True if the rules is satisfied; False otherwise
-     */
-    protected boolean validateDescriptionExtensionURI(DescriptionExtension object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-        if (!(OmlRead.getImportedOntology(object) instanceof Description)) {
-            return report(Diagnostic.ERROR, diagnostics, object,
-                "Namespace <"+object.getNamespace()+"> could not be resolved to an description", 
-                OmlPackage.Literals.IMPORT__NAMESPACE);
-        }
-        return true;
-    }
-    
-    // DescriptionUsage
-    
-    /**
-     * Checks if a description usage URI resolves to a vocabulary box
-     * 
-     * @param object The description usage to check
-     * @param diagnostics The validation diagnostics
-     * @param context The object-to-object context map
-     * @return True if the rules is satisfied; False otherwise
-     */
-    protected boolean validateDescriptionUsageURI(DescriptionUsage object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-        if (!(OmlRead.getImportedOntology(object) instanceof VocabularyBox)) {
-            return report(Diagnostic.ERROR, diagnostics, object,
-                "Namespace <"+object.getNamespace()+"> could not be resolved to a vocabulary nor a vocabulary bundle", 
-                OmlPackage.Literals.IMPORT__NAMESPACE);
-        }
-        return true;
-    }
-    
-    // DescriptionBundleExtension
-    
-    /**
-     * Checks if a description bundle extension URI resolves to a description bundle
-     * 
-     * @param object The description bundle extension to check
-     * @param diagnostics The validation diagnostics
-     * @param context The object-to-object context map
-     * @return True if the rules is satisfied; False otherwise
-     */
-    protected boolean validateDescriptionBundleExtensionURI(DescriptionBundleExtension object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-        if (!(OmlRead.getImportedOntology(object) instanceof DescriptionBundle)) {
-            return report(Diagnostic.ERROR, diagnostics, object,
-                "Namespace <"+object.getNamespace()+"> could not be resolved to an description bundle", 
-                OmlPackage.Literals.IMPORT__NAMESPACE);
-        }
-        return true;
-    }
-    
-    // DescriptionBundleInclusion
-    
-    /**
-     * Checks if a description bundle inclusion URI resolves to a description
-     * 
-     * @param object The description bundle inclusion to check
-     * @param diagnostics The validation diagnostics
-     * @param context The object-to-object context map
-     * @return True if the rules is satisfied; False otherwise
-     */
-    protected boolean validateDescriptionBundleInclusionURI(DescriptionBundleInclusion object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-        if (!(OmlRead.getImportedOntology(object) instanceof Description)) {
-            return report(Diagnostic.ERROR, diagnostics, object,
-                "Namespace <"+object.getNamespace()+"> could not be resolved to an description", 
-                OmlPackage.Literals.IMPORT__NAMESPACE);
-        }
-        return true;
-    }
-    
-    // DescriptionBundleUsage
-    
-    /**
-     * Checks if a description bundle usage URI resolves to a vocabulary box
-     * 
-     * @param object The description bundle usage to check
-     * @param diagnostics The validation diagnostics
-     * @param context The object-to-object context map
-     * @return True if the rules is satisfied; False otherwise
-     */
-    protected boolean validateDescriptionBundleUsageURI(DescriptionBundleUsage object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-        if (!(OmlRead.getImportedOntology(object) instanceof VocabularyBox)) {
-            return report(Diagnostic.ERROR, diagnostics, object,
-                "Namespace <"+object.getNamespace()+"> could not be resolved to a vocabulary box", 
-                OmlPackage.Literals.IMPORT__NAMESPACE);
-        }
-        return true;
+    protected boolean validateInclusionURI(Inclusion object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+    	if (object.eContainer() instanceof VocabularyBundle) {
+    		if (!(OmlRead.getImportedOntology(object) instanceof Vocabulary)) {
+	            return report(Diagnostic.ERROR, diagnostics, object,
+	                "Namespace <"+object.getNamespace()+"> could not be resolved to a vocabulary", 
+	                OmlPackage.Literals.IMPORT__NAMESPACE);
+    		}
+    	} else if (object.eContainer() instanceof DescriptionBundle) {
+    		if (!(OmlRead.getImportedOntology(object) instanceof Description)) {
+	            return report(Diagnostic.ERROR, diagnostics, object,
+	                "Namespace <"+object.getNamespace()+"> could not be resolved to a description", 
+	                OmlPackage.Literals.IMPORT__NAMESPACE);
+    		}
+    	}
+    	return true;
     }
     
     // RelationRestrictionAxiom

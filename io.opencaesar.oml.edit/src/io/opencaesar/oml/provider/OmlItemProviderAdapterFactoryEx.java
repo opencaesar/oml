@@ -23,20 +23,17 @@ import io.opencaesar.oml.ConceptTypeAssertion;
 import io.opencaesar.oml.DecimalLiteral;
 import io.opencaesar.oml.Description;
 import io.opencaesar.oml.DescriptionBundle;
-import io.opencaesar.oml.DescriptionBundleExtension;
-import io.opencaesar.oml.DescriptionBundleInclusion;
-import io.opencaesar.oml.DescriptionBundleUsage;
-import io.opencaesar.oml.DescriptionExtension;
-import io.opencaesar.oml.DescriptionUsage;
 import io.opencaesar.oml.DifferentFromPredicate;
 import io.opencaesar.oml.DoubleLiteral;
 import io.opencaesar.oml.Element;
 import io.opencaesar.oml.EnumeratedScalar;
 import io.opencaesar.oml.EnumeratedScalarReference;
+import io.opencaesar.oml.Extension;
 import io.opencaesar.oml.FacetedScalar;
 import io.opencaesar.oml.FacetedScalarReference;
 import io.opencaesar.oml.FeaturePredicate;
 import io.opencaesar.oml.ForwardRelation;
+import io.opencaesar.oml.Inclusion;
 import io.opencaesar.oml.IntegerLiteral;
 import io.opencaesar.oml.KeyAxiom;
 import io.opencaesar.oml.LinkAssertion;
@@ -76,12 +73,9 @@ import io.opencaesar.oml.StructuredPropertyReference;
 import io.opencaesar.oml.StructuredPropertyValueAssertion;
 import io.opencaesar.oml.StructuredPropertyValueRestrictionAxiom;
 import io.opencaesar.oml.TypePredicate;
+import io.opencaesar.oml.Usage;
 import io.opencaesar.oml.Vocabulary;
 import io.opencaesar.oml.VocabularyBundle;
-import io.opencaesar.oml.VocabularyBundleExtension;
-import io.opencaesar.oml.VocabularyBundleInclusion;
-import io.opencaesar.oml.VocabularyExtension;
-import io.opencaesar.oml.VocabularyUsage;
 import io.opencaesar.oml.util.OmlRead;
 
 /**
@@ -130,11 +124,11 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 	}
 
 	@Override
-	public Adapter createVocabularyExtensionAdapter() {
-		if (vocabularyExtensionItemProvider == null) vocabularyExtensionItemProvider = new VocabularyExtensionItemProvider(this) {
+	public Adapter createExtensionAdapter() {
+		if (extensionItemProvider == null) extensionItemProvider = new ExtensionItemProvider(this) {
 			@Override
 			public String getText(Object object) {
-				VocabularyExtension extension = (VocabularyExtension)object;
+				Extension extension = (Extension)object;
 				StringBuilder label = new StringBuilder("extends <");
 				if (extension.getNamespace() != null) {
 					label.append(extension.getNamespace());
@@ -146,15 +140,15 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 				return label.toString();
 			}
 		};
-		return vocabularyExtensionItemProvider;
+		return extensionItemProvider;
 	}
 	
 	@Override
-	public Adapter createVocabularyUsageAdapter() {
-		if (vocabularyUsageItemProvider == null) vocabularyUsageItemProvider = new VocabularyUsageItemProvider(this) {
+	public Adapter createUsageAdapter() {
+		if (usageItemProvider == null) usageItemProvider = new UsageItemProvider(this) {
 			@Override
 			public String getText(Object object) {
-				VocabularyUsage usage = (VocabularyUsage)object;
+				Usage usage = (Usage)object;
 				StringBuilder label = new StringBuilder("uses <");
 				if (usage.getNamespace() != null) {
 					label.append(usage.getNamespace());
@@ -166,35 +160,15 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 				return label.toString();
 			}
 		};
-		return vocabularyUsageItemProvider;
+		return usageItemProvider;
 	}
 	
 	@Override
-	public Adapter createVocabularyBundleExtensionAdapter() {
-		if (vocabularyBundleExtensionItemProvider == null) vocabularyBundleExtensionItemProvider = new VocabularyBundleExtensionItemProvider(this) {
+	public Adapter createInclusionAdapter() {
+		if (inclusionItemProvider == null) inclusionItemProvider = new InclusionItemProvider(this) {
 			@Override
 			public String getText(Object object) {
-				VocabularyBundleExtension extension = (VocabularyBundleExtension)object;
-				StringBuilder label = new StringBuilder("extends <");
-				if (extension.getNamespace() != null) {
-					label.append(extension.getNamespace());
-				}
-				label.append(">");
-				if (extension.getPrefix() != null) {
-					label.append(" as ").append(extension.getPrefix());
-				}
-				return label.toString();
-			}
-		};
-		return vocabularyBundleExtensionItemProvider;
-	}
-	
-	@Override
-	public Adapter createVocabularyBundleInclusionAdapter() {
-		if (vocabularyBundleInclusionItemProvider == null) vocabularyBundleInclusionItemProvider = new VocabularyBundleInclusionItemProvider(this) {
-			@Override
-			public String getText(Object object) {
-				VocabularyBundleInclusion inclusion = (VocabularyBundleInclusion)object;
+				Inclusion inclusion = (Inclusion)object;
 				StringBuilder label = new StringBuilder("includes <");
 				if (inclusion.getNamespace() != null) {
 					label.append(inclusion.getNamespace());
@@ -206,7 +180,7 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 				return label.toString();
 			}
 		};
-		return vocabularyBundleInclusionItemProvider;
+		return inclusionItemProvider;
 	}
 
 	// Description, its bundle and their imports
@@ -247,106 +221,6 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 			}
 		};
 		return descriptionBundleItemProvider;
-	}
-
-	@Override
-	public Adapter createDescriptionExtensionAdapter() {
-		if (descriptionExtensionItemProvider == null) descriptionExtensionItemProvider = new DescriptionExtensionItemProvider(this) {
-			@Override
-			public String getText(Object object) {
-				DescriptionExtension extension = (DescriptionExtension)object;
-				StringBuilder label = new StringBuilder("extends <");
-				if (extension.getNamespace() != null) {
-					label.append(extension.getNamespace());
-				}
-				label.append(">");
-				if (extension.getPrefix() != null) {
-					label.append(" as ").append(extension.getPrefix());
-				}
-				return label.toString();
-			}
-		};
-		return descriptionExtensionItemProvider;
-	}
-	
-	@Override
-	public Adapter createDescriptionUsageAdapter() {
-		if (descriptionUsageItemProvider == null) descriptionUsageItemProvider = new DescriptionUsageItemProvider(this) {
-			@Override
-			public String getText(Object object) {
-				DescriptionUsage usage = (DescriptionUsage)object;
-				StringBuilder label = new StringBuilder("uses <");
-				if (usage.getNamespace() != null) {
-					label.append(usage.getNamespace());
-				}
-				label.append(">");
-				if (usage.getPrefix() != null) {
-					label.append(" as ").append(usage.getPrefix());
-				}
-				return label.toString();
-			}
-		};
-		return descriptionUsageItemProvider;
-	}
-	
-	@Override
-	public Adapter createDescriptionBundleExtensionAdapter() {
-		if (descriptionBundleExtensionItemProvider == null) descriptionBundleExtensionItemProvider = new DescriptionBundleExtensionItemProvider(this) {
-			@Override
-			public String getText(Object object) {
-				DescriptionBundleExtension extension = (DescriptionBundleExtension)object;
-				StringBuilder label = new StringBuilder("extends <");
-				if (extension.getNamespace() != null) {
-					label.append(extension.getNamespace());
-				}
-				label.append(">");
-				if (extension.getPrefix() != null) {
-					label.append(" as ").append(extension.getPrefix());
-				}
-				return label.toString();
-			}
-		};
-		return descriptionBundleExtensionItemProvider;
-	}
-	
-	@Override
-	public Adapter createDescriptionBundleInclusionAdapter() {
-		if (descriptionBundleInclusionItemProvider == null) descriptionBundleInclusionItemProvider = new DescriptionBundleInclusionItemProvider(this) {
-			@Override
-			public String getText(Object object) {
-				DescriptionBundleInclusion inclusion = (DescriptionBundleInclusion)object;
-				StringBuilder label = new StringBuilder("includes <");
-				if (inclusion.getNamespace() != null) {
-					label.append(inclusion.getNamespace());
-				}
-				label.append(">");
-				if (inclusion.getPrefix() != null) {
-					label.append(" as ").append(inclusion.getPrefix());
-				}
-				return label.toString();
-			}
-		};
-		return descriptionBundleInclusionItemProvider;
-	}
-
-	@Override
-	public Adapter createDescriptionBundleUsageAdapter() {
-		if (descriptionBundleUsageItemProvider == null) descriptionBundleUsageItemProvider = new DescriptionBundleUsageItemProvider(this) {
-			@Override
-			public String getText(Object object) {
-				DescriptionBundleUsage usage = (DescriptionBundleUsage)object;
-				StringBuilder label = new StringBuilder("uses <");
-				if (usage.getNamespace() != null) {
-					label.append(usage.getNamespace());
-				}
-				label.append(">");
-				if (usage.getPrefix() != null) {
-					label.append(" as ").append(usage.getPrefix());
-				}
-				return label.toString();
-			}
-		};
-		return descriptionBundleUsageItemProvider;
 	}
 
 	// Types (aspect, concept, relation entity, structure)

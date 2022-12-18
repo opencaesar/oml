@@ -42,24 +42,21 @@ import io.opencaesar.oml.ConceptTypeAssertion;
 import io.opencaesar.oml.DecimalLiteral;
 import io.opencaesar.oml.Description;
 import io.opencaesar.oml.DescriptionBundle;
-import io.opencaesar.oml.DescriptionBundleExtension;
-import io.opencaesar.oml.DescriptionBundleInclusion;
-import io.opencaesar.oml.DescriptionBundleUsage;
-import io.opencaesar.oml.DescriptionExtension;
 import io.opencaesar.oml.DescriptionStatement;
-import io.opencaesar.oml.DescriptionUsage;
 import io.opencaesar.oml.DifferentFromPredicate;
 import io.opencaesar.oml.DoubleLiteral;
 import io.opencaesar.oml.Element;
 import io.opencaesar.oml.Entity;
 import io.opencaesar.oml.EnumeratedScalar;
 import io.opencaesar.oml.EnumeratedScalarReference;
+import io.opencaesar.oml.Extension;
 import io.opencaesar.oml.FacetedScalar;
 import io.opencaesar.oml.FacetedScalarReference;
 import io.opencaesar.oml.Feature;
 import io.opencaesar.oml.FeaturePredicate;
 import io.opencaesar.oml.ForwardRelation;
 import io.opencaesar.oml.IdentifiedElement;
+import io.opencaesar.oml.Inclusion;
 import io.opencaesar.oml.Instance;
 import io.opencaesar.oml.IntegerLiteral;
 import io.opencaesar.oml.KeyAxiom;
@@ -110,13 +107,10 @@ import io.opencaesar.oml.StructuredPropertyValueAssertion;
 import io.opencaesar.oml.StructuredPropertyValueRestrictionAxiom;
 import io.opencaesar.oml.Type;
 import io.opencaesar.oml.TypePredicate;
+import io.opencaesar.oml.Usage;
 import io.opencaesar.oml.Vocabulary;
 import io.opencaesar.oml.VocabularyBundle;
-import io.opencaesar.oml.VocabularyBundleExtension;
-import io.opencaesar.oml.VocabularyBundleInclusion;
-import io.opencaesar.oml.VocabularyExtension;
 import io.opencaesar.oml.VocabularyStatement;
-import io.opencaesar.oml.VocabularyUsage;
 
 /**
  * The <b>Write</b> API for the model. It complements the OML setter API by additional utilities.
@@ -945,213 +939,75 @@ public class OmlWrite {
         return reference;
     }
     
-    // VocabularyExtension
+    // Extension
     
     /**
-     * Creates a vocabulary extension and adds it to the given vocabulary
+     * Creates an extension and adds it to the given ontology
      * 
-     * @param vocabulary the context vocabulary
-     * @param extendedVocabularyIri the IRI of the extended vocabulary
-     * @param extendedVocabularySeparator the separator of the extended vocabulary (optional)
-     * @param extendedVocabularyPrefix the prefix of the extended vocabulary (optional)
-     * @return a vocabulary extension that is added to the given vocabulary
+     * @param ontology the extending ontology
+     * @param extendedOntologyIri the IRI of the extended ontology
+     * @param extendedOntologySeparator the separator of the extended ontology (optional)
+     * @param extendedOntologyPrefix the prefix of the extended ontology (optional)
+     * @return an extension that is added to the extending ontology
      */
-    public static VocabularyExtension addVocabularyExtension(Vocabulary vocabulary, String extendedVocabularyIri, SeparatorKind extendedVocabularySeparator, String extendedVocabularyPrefix) {
-        final VocabularyExtension extension = create(VocabularyExtension.class);
-        if (extendedVocabularySeparator != null) {
-        	extension.setNamespace(extendedVocabularyIri+extendedVocabularySeparator);
+    public static Extension addExtension(Ontology ontology, String extendedOntologyIri, SeparatorKind extendedOntologySeparator, String extendedOntologyPrefix) {
+        final Extension extension = create(Extension.class);
+        if (extendedOntologySeparator != null) {
+        	extension.setNamespace(extendedOntologyIri+extendedOntologySeparator);
         } else {
-            extension.setNamespace(extendedVocabularyIri+SeparatorKind.HASH);
+            extension.setNamespace(extendedOntologyIri+SeparatorKind.HASH);
         }
-        extension.setPrefix(extendedVocabularyPrefix);
-        vocabulary.getOwnedImports().add(extension);
+        extension.setPrefix(extendedOntologyPrefix);
+        ontology.getOwnedImports().add(extension);
         return extension;
     }
 
-    // VocabularyUsage
+    // Usage
     
     /**
-     * Creates a vocabulary usage and adds it to the given vocabulary
+     * Creates a usage and adds it to the given ontology
      * 
-     * @param vocabulary the context vocabulary
-     * @param usedDescriptionBoxIri the IRI of the used description box
-     * @param usedDescriptionBoxSeparator the separator of the used description box (optional)
-     * @param usedDescriptionBoxPrefix the prefix of the used description box (optional)
-     * @return a vocabulary usage that is added to the given vocabulary
+     * @param ontology the using ontology
+     * @param usedOntologyIri the IRI of the used ontology
+     * @param usedOntologySeparator the separator of the used ontology (optional)
+     * @param usedOntologyPrefix the prefix of the used ontology (optional)
+     * @return a usage that is added to the using ontology
      */
-    public static VocabularyUsage addVocabularyUsage(Vocabulary vocabulary, String usedDescriptionBoxIri, SeparatorKind usedDescriptionBoxSeparator, String usedDescriptionBoxPrefix) {
-        final VocabularyUsage usage = create(VocabularyUsage.class);
-        if (usedDescriptionBoxSeparator != null) {
-        	usage.setNamespace(usedDescriptionBoxIri+usedDescriptionBoxSeparator);
+    public static Usage addUsage(Ontology ontology, String usedOntologyIri, SeparatorKind usedOntologySeparator, String usedOntologyPrefix) {
+        final Usage usage = create(Usage.class);
+        if (usedOntologySeparator != null) {
+        	usage.setNamespace(usedOntologyIri+usedOntologySeparator);
         } else {
-            usage.setNamespace(usedDescriptionBoxIri+SeparatorKind.HASH);
+            usage.setNamespace(usedOntologyIri+SeparatorKind.HASH);
         }
-        usage.setPrefix(usedDescriptionBoxPrefix);
-        vocabulary.getOwnedImports().add(usage);
+        usage.setPrefix(usedOntologyPrefix);
+        ontology.getOwnedImports().add(usage);
         return usage;
     }
 
-    // VocabularyBundleExtension
+    // Inclusion
     
     /**
-     * Creates a vocabulary bundle extension and adds it to the given vocabulary bundle
+     * Creates an inclusion and adds it to the given ontology
      * 
-     * @param bundle the context vocabulary bundle
-     * @param extendedVocabularyBundleIri the IRI of the extended vocabulary bundle
-     * @param extendedVocabularyBundleSeparator the separator of the extended vocabulary bundle (optional)
-     * @param extendedVocabularyBundlePrefix the prefix of the extended vocabulary bundle (optional)
-     * @return a vocabulary bundle extension that is added to the given vocabulary bundle
+     * @param ontology the including ontology
+     * @param includedOntologyIri the IRI of the included ontology
+     * @param includedOntologySeparator the separator of the included ontology (optional)
+     * @param includedOntologyPrefix the prefix of the included ontology (optional)
+     * @return an inclusion that is added to the including ontology
      */
-    public static VocabularyBundleExtension addVocabularyBundleExtension(VocabularyBundle bundle, String extendedVocabularyBundleIri, SeparatorKind extendedVocabularyBundleSeparator, String extendedVocabularyBundlePrefix) {
-        final VocabularyBundleExtension extension = create(VocabularyBundleExtension.class);
-        if (extendedVocabularyBundleSeparator != null) {
-        	extension.setNamespace(extendedVocabularyBundleIri+extendedVocabularyBundleSeparator);
+    public static Inclusion addInclusion(Ontology ontology, String includedOntologyIri, SeparatorKind includedOntologySeparator, String includedOntologyPrefix) {
+        final Inclusion inclusion = create(Inclusion.class);
+        if (includedOntologySeparator != null) {
+        	inclusion.setNamespace(includedOntologyIri+includedOntologySeparator);
         } else {
-            extension.setNamespace(extendedVocabularyBundleIri);
+            inclusion.setNamespace(includedOntologyIri+SeparatorKind.HASH);
         }
-        extension.setPrefix(extendedVocabularyBundlePrefix+SeparatorKind.HASH);
-        bundle.getOwnedImports().add(extension);
-        return extension;
+       inclusion.setPrefix(includedOntologyPrefix);
+       ontology.getOwnedImports().add(inclusion);
+       return inclusion;
     }
 
-    // VocabularyBundleInclusion
-    
-    /**
-     * Creates a vocabulary bundle inclusion and adds it to the given vocabulary bundle
-     * 
-     * @param bundle the context vocabulary bundle
-     * @param includedVocabularyIri the IRI of the included vocabulary
-     * @param includedVocabularySeparator the separator of the included vocabulary (optional)
-     * @param includedVocabularyPrefix the prefix of the included vocabulary (optional)
-     * @return a vocabulary bundle inclusion that is added to the given vocabulary bundle
-     */
-    public static VocabularyBundleInclusion addVocabularyBundleInclusion(VocabularyBundle bundle, String includedVocabularyIri, SeparatorKind includedVocabularySeparator, String includedVocabularyPrefix) {
-        final VocabularyBundleInclusion inclusion = create(VocabularyBundleInclusion.class);
-        if (includedVocabularySeparator != null) {
-        	inclusion.setNamespace(includedVocabularyIri+includedVocabularySeparator);
-        } else {
-            inclusion.setNamespace(includedVocabularyIri+SeparatorKind.HASH);
-        }
-       inclusion.setPrefix(includedVocabularyPrefix);
-        bundle.getOwnedImports().add(inclusion);
-        return inclusion;
-    }
-
-    // DescriptionExtension
-
-    /**
-     * Creates a description extension and adds it to the given description
-     * 
-     * @param description the context description
-     * @param extendedDescriptionIri the IRI of the extended description
-     * @param extendedDescriptionSeparator the separator of the extended description (optional)
-     * @param extendedDescriptionPrefix the prefix of the extended description (optional)
-     * @return a description extension that is added to the given description
-     */
-    public static DescriptionExtension addDescriptionExtension(Description description, String extendedDescriptionIri, SeparatorKind extendedDescriptionSeparator, String extendedDescriptionPrefix) {
-        final DescriptionExtension extension = create(DescriptionExtension.class);
-        if (extendedDescriptionSeparator != null) {
-        	extension.setNamespace(extendedDescriptionIri+extendedDescriptionSeparator);
-        } else {
-            extension.setNamespace(extendedDescriptionIri+SeparatorKind.HASH);
-        }
-        extension.setPrefix(extendedDescriptionPrefix);
-        description.getOwnedImports().add(extension);
-        return extension;
-    }
-    
-    // DescriptionUsage
-
-    /**
-     * Creates a description usage and adds it to the given description
-     * 
-     * @param description the context description
-     * @param usedVocabularyBoxIri the IRI of the used vocabulary box
-     * @param usedVocabularyBoxSeparator the separator of the used vocabulary box (optional)
-     * @param usedVocabularyBoxPrefix the prefix of the used vocabulary box (optional)
-     * @return a description usage that is added to the given description
-     */
-    public static DescriptionUsage addDescriptionUsage(Description description, String usedVocabularyBoxIri, SeparatorKind usedVocabularyBoxSeparator, String usedVocabularyBoxPrefix) {
-        final DescriptionUsage usage = create(DescriptionUsage.class);
-        if (usedVocabularyBoxSeparator != null) {
-        	usage.setNamespace(usedVocabularyBoxIri+usedVocabularyBoxSeparator);
-        } else {
-            usage.setNamespace(usedVocabularyBoxIri+SeparatorKind.HASH);
-        }
-        usage.setPrefix(usedVocabularyBoxPrefix);
-        description.getOwnedImports().add(usage);
-        return usage;
-    }
-    
-    // DescriptionBundleExtension
-    
-    /**
-     * Creates a description bundle extension and adds it to the given description bundle
-     * 
-     * @param bundle the context description bundle
-     * @param extendedDescriptionBundleIri the IRI of the extended vocabulary bundle
-     * @param extendedDescriptionBundleSeparator the separator of the extended vocabulary bundle (optional)
-     * @param extendedDescriptionBundlePrefix the prefix of the extended vocabulary bundle (optional)
-     * @return a description bundle extension that is added to the given description bundle
-     */
-    public static DescriptionBundleExtension addDescriptionBundleExtension(DescriptionBundle bundle, String extendedDescriptionBundleIri, SeparatorKind extendedDescriptionBundleSeparator, String extendedDescriptionBundlePrefix) {
-        final DescriptionBundleExtension extension = create(DescriptionBundleExtension.class);
-        if (extendedDescriptionBundleSeparator != null) {
-        	extension.setNamespace(extendedDescriptionBundleIri+extendedDescriptionBundleSeparator);
-        } else {
-            extension.setNamespace(extendedDescriptionBundleIri+SeparatorKind.HASH);
-        }
-        extension.setPrefix(extendedDescriptionBundlePrefix);
-        bundle.getOwnedImports().add(extension);
-        return extension;
-    }
-
-    // DescriptionBundleInclusion
-    
-    /**
-     * Creates a description bundle inclusion and adds it to the given description bundle
-     * 
-     * @param bundle the context description bundle
-     * @param includedDescriptionIri the IRI of the extended description
-     * @param includedDescriptionSeparator the separator of the extended description (optional)
-     * @param includedDescriptionPrefix the prefix of the extended description (optional)
-     * @return a description bundle inclusion that is added to the given description bundle
-     */
-    public static DescriptionBundleInclusion addDescriptionBundleInclusion(DescriptionBundle bundle, String includedDescriptionIri, SeparatorKind includedDescriptionSeparator, String includedDescriptionPrefix) {
-        final DescriptionBundleInclusion inclusion = create(DescriptionBundleInclusion.class);
-        if (includedDescriptionSeparator != null) {
-        	inclusion.setNamespace(includedDescriptionIri+includedDescriptionSeparator);
-        } else {
-            inclusion.setNamespace(includedDescriptionIri+SeparatorKind.HASH);
-        }
-        inclusion.setPrefix(includedDescriptionPrefix);
-        bundle.getOwnedImports().add(inclusion);
-        return inclusion;
-    }
-
-    // DescriptionBundleUsage
-
-    /**
-     * Creates a description bundle usage and adds it to the given description bundle
-     * 
-     * @param bundle the context description bundle
-     * @param usedVocabularyBoxIri the IRI of the used vocabulary box
-     * @param usedVocabularyBoxSeparator the separator of the used vocabulary box (optional)
-     * @param usedVocabularyBoxPrefix the prefix of the used vocabulary box (optional)
-     * @return a description bundle usage that is added to the given description bundle
-     */
-    public static DescriptionBundleUsage addDescriptionBundleUsage(DescriptionBundle bundle, String usedVocabularyBoxIri, SeparatorKind usedVocabularyBoxSeparator, String usedVocabularyBoxPrefix) {
-        final DescriptionBundleUsage usage = create(DescriptionBundleUsage.class);
-        if (usedVocabularyBoxSeparator != null) {
-        	usage.setNamespace(usedVocabularyBoxIri+usedVocabularyBoxSeparator);
-        } else {
-            usage.setNamespace(usedVocabularyBoxIri+SeparatorKind.HASH);
-        }
-        usage.setPrefix(usedVocabularyBoxPrefix);
-        bundle.getOwnedImports().add(usage);
-        return usage;
-    }
-    
     // SpecializationAxiom
 
     /**

@@ -16,22 +16,38 @@
  * limitations under the License.
  * 
  */
-package io.opencaesar.oml;
+package io.opencaesar.oml.impl;
 
+import io.opencaesar.oml.Inclusion;
+import io.opencaesar.oml.OmlPackage;
+
+import org.eclipse.emf.ecore.EClass;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Description Extension</b></em>'.
+ * An implementation of the model object '<em><b>Inclusion</b></em>'.
  * <!-- end-user-doc -->
  *
- * <!-- begin-model-doc -->
- * DescriptionExtension is an import that allows a description to extend another description.
- * <!-- end-model-doc -->
- *
- *
- * @see io.opencaesar.oml.OmlPackage#getDescriptionExtension()
- * @model annotation="https://tabatkins.github.io/bikeshed heading='Descriptions'"
  * @generated
  */
-public interface DescriptionExtension extends DescriptionImport {
-} // DescriptionExtension
+public class InclusionImpl extends ImportImpl implements Inclusion {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected InclusionImpl() {
+		super();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return OmlPackage.Literals.INCLUSION;
+	}
+
+} //InclusionImpl

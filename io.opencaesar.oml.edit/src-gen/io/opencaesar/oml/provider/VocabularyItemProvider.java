@@ -78,7 +78,6 @@ public class VocabularyItemProvider extends VocabularyBoxItemProvider {
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(OmlPackage.Literals.VOCABULARY__OWNED_IMPORTS);
 			childrenFeatures.add(OmlPackage.Literals.VOCABULARY__OWNED_STATEMENTS);
 		}
 		return childrenFeatures;
@@ -135,7 +134,6 @@ public class VocabularyItemProvider extends VocabularyBoxItemProvider {
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Vocabulary.class)) {
-			case OmlPackage.VOCABULARY__OWNED_IMPORTS:
 			case OmlPackage.VOCABULARY__OWNED_STATEMENTS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
@@ -153,16 +151,6 @@ public class VocabularyItemProvider extends VocabularyBoxItemProvider {
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OmlPackage.Literals.VOCABULARY__OWNED_IMPORTS,
-				 OmlFactory.eINSTANCE.createVocabularyExtension()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OmlPackage.Literals.VOCABULARY__OWNED_IMPORTS,
-				 OmlFactory.eINSTANCE.createVocabularyUsage()));
 
 		newChildDescriptors.add
 			(createChildParameter

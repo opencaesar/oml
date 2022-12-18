@@ -18,9 +18,7 @@ package io.opencaesar.oml.dsl.formatting2;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.function.Consumer;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -32,13 +30,7 @@ import org.eclipse.xtext.formatting2.FormatterRequest;
 import org.eclipse.xtext.formatting2.IFormattableDocument;
 import org.eclipse.xtext.formatting2.IHiddenRegionFormatter;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
-import org.eclipse.xtext.formatting2.regionaccess.ITextRegionExtensions;
-import org.eclipse.xtext.preferences.ITypedPreferenceValues;
 import org.eclipse.xtext.preferences.MapBasedPreferenceValues;
-import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 import com.google.inject.Inject;
@@ -54,31 +46,19 @@ import io.opencaesar.oml.ConceptInstanceReference;
 import io.opencaesar.oml.ConceptReference;
 import io.opencaesar.oml.Description;
 import io.opencaesar.oml.DescriptionBundle;
-import io.opencaesar.oml.DescriptionBundleExtension;
-import io.opencaesar.oml.DescriptionBundleImport;
-import io.opencaesar.oml.DescriptionBundleInclusion;
-import io.opencaesar.oml.DescriptionBundleUsage;
-import io.opencaesar.oml.DescriptionExtension;
-import io.opencaesar.oml.DescriptionImport;
-import io.opencaesar.oml.DescriptionStatement;
-import io.opencaesar.oml.DescriptionUsage;
 import io.opencaesar.oml.DifferentFromPredicate;
 import io.opencaesar.oml.Element;
-import io.opencaesar.oml.Entity;
 import io.opencaesar.oml.EnumeratedScalar;
 import io.opencaesar.oml.EnumeratedScalarReference;
+import io.opencaesar.oml.Extension;
 import io.opencaesar.oml.FacetedScalar;
 import io.opencaesar.oml.FacetedScalarReference;
 import io.opencaesar.oml.FeaturePredicate;
 import io.opencaesar.oml.ForwardRelation;
+import io.opencaesar.oml.Inclusion;
 import io.opencaesar.oml.KeyAxiom;
 import io.opencaesar.oml.LinkAssertion;
-import io.opencaesar.oml.Literal;
-import io.opencaesar.oml.NamedInstance;
 import io.opencaesar.oml.OmlPackage;
-import io.opencaesar.oml.Predicate;
-import io.opencaesar.oml.PropertyRestrictionAxiom;
-import io.opencaesar.oml.PropertyValueAssertion;
 import io.opencaesar.oml.QuotedLiteral;
 import io.opencaesar.oml.RelationCardinalityRestrictionAxiom;
 import io.opencaesar.oml.RelationEntity;
@@ -88,13 +68,11 @@ import io.opencaesar.oml.RelationInstance;
 import io.opencaesar.oml.RelationInstanceReference;
 import io.opencaesar.oml.RelationRangeRestrictionAxiom;
 import io.opencaesar.oml.RelationReference;
-import io.opencaesar.oml.RelationRestrictionAxiom;
 import io.opencaesar.oml.RelationTargetRestrictionAxiom;
 import io.opencaesar.oml.ReverseRelation;
 import io.opencaesar.oml.Rule;
 import io.opencaesar.oml.RuleReference;
 import io.opencaesar.oml.SameAsPredicate;
-import io.opencaesar.oml.Scalar;
 import io.opencaesar.oml.ScalarProperty;
 import io.opencaesar.oml.ScalarPropertyCardinalityRestrictionAxiom;
 import io.opencaesar.oml.ScalarPropertyRangeRestrictionAxiom;
@@ -111,15 +89,9 @@ import io.opencaesar.oml.StructuredPropertyReference;
 import io.opencaesar.oml.StructuredPropertyValueAssertion;
 import io.opencaesar.oml.StructuredPropertyValueRestrictionAxiom;
 import io.opencaesar.oml.TypePredicate;
+import io.opencaesar.oml.Usage;
 import io.opencaesar.oml.Vocabulary;
 import io.opencaesar.oml.VocabularyBundle;
-import io.opencaesar.oml.VocabularyBundleExtension;
-import io.opencaesar.oml.VocabularyBundleImport;
-import io.opencaesar.oml.VocabularyBundleInclusion;
-import io.opencaesar.oml.VocabularyExtension;
-import io.opencaesar.oml.VocabularyImport;
-import io.opencaesar.oml.VocabularyStatement;
-import io.opencaesar.oml.VocabularyUsage;
 import io.opencaesar.oml.dsl.services.OmlGrammarAccess;
 
 @SuppressWarnings("all")
@@ -463,49 +435,19 @@ public class OmlFormatter extends AbstractJavaFormatter {
 		reference.getOwnedLinks().forEach(i -> doc.prepend(doc.format(i), newLine()));
 	}
 
-	protected void _format(VocabularyExtension extension, IFormattableDocument doc) {
-		doc.append(keyword(extension, oml.getVocabularyExtensionAccess().getExtendsKeyword_0()), oneSpace());
-		doc.surround(keyword(extension, oml.getVocabularyExtensionAccess().getAsKeyword_2_0()), oneSpace());
+	protected void _format(Extension extension, IFormattableDocument doc) {
+		doc.append(keyword(extension, oml.getExtensionAccess().getExtendsKeyword_0()), oneSpace());
+		doc.surround(keyword(extension, oml.getExtensionAccess().getAsKeyword_2_0()), oneSpace());
 	}
 
-	protected void _format(VocabularyUsage usage, IFormattableDocument doc) {
-		doc.append(keyword(usage, oml.getVocabularyUsageAccess().getUsesKeyword_0()), oneSpace());
-		doc.surround(keyword(usage, oml.getVocabularyUsageAccess().getAsKeyword_2_0()), oneSpace());
+	protected void _format(Usage usage, IFormattableDocument doc) {
+		doc.append(keyword(usage, oml.getUsageAccess().getUsesKeyword_0()), oneSpace());
+		doc.surround(keyword(usage, oml.getUsageAccess().getAsKeyword_2_0()), oneSpace());
 	}
 
-	protected void _format(VocabularyBundleExtension extension, IFormattableDocument doc) {
-		doc.append(keyword(extension, oml.getVocabularyBundleExtensionAccess().getExtendsKeyword_0()), oneSpace());
-		doc.surround(keyword(extension, oml.getVocabularyBundleExtensionAccess().getAsKeyword_2_0()), oneSpace());
-	}
-
-	protected void _format(VocabularyBundleInclusion inclusion, IFormattableDocument doc) {
-		doc.append(keyword(inclusion, oml.getVocabularyBundleInclusionAccess().getIncludesKeyword_0()), oneSpace());
-		doc.surround(keyword(inclusion, oml.getVocabularyBundleInclusionAccess().getAsKeyword_2_0()), oneSpace());
-	}
-
-	protected void _format(DescriptionExtension extension, IFormattableDocument doc) {
-		doc.append(keyword(extension, oml.getDescriptionExtensionAccess().getExtendsKeyword_0()), oneSpace());
-		doc.surround(keyword(extension, oml.getDescriptionExtensionAccess().getAsKeyword_2_0()), oneSpace());
-	}
-
-	protected void _format(DescriptionUsage usage, IFormattableDocument doc) {
-		doc.append(keyword(usage, oml.getDescriptionUsageAccess().getUsesKeyword_0()), oneSpace());
-		doc.surround(keyword(usage, oml.getDescriptionUsageAccess().getAsKeyword_2_0()), oneSpace());
-	}
-
-	protected void _format(DescriptionBundleExtension extension, IFormattableDocument doc) {
-		doc.append(keyword(extension, oml.getDescriptionBundleExtensionAccess().getExtendsKeyword_0()), oneSpace());
-		doc.surround(keyword(extension, oml.getDescriptionBundleExtensionAccess().getAsKeyword_2_0()), oneSpace());
-	}
-
-	protected void _format(DescriptionBundleInclusion inclusion, IFormattableDocument doc) {
-		doc.append(keyword(inclusion, oml.getDescriptionBundleInclusionAccess().getIncludesKeyword_0()), oneSpace());
-		doc.surround(keyword(inclusion, oml.getDescriptionBundleInclusionAccess().getAsKeyword_2_0()), oneSpace());
-	}
-
-	protected void _format(DescriptionBundleUsage usage, IFormattableDocument doc) {
-		doc.append(keyword(usage, oml.getDescriptionBundleUsageAccess().getUsesKeyword_0()), oneSpace());
-		doc.surround(keyword(usage, oml.getDescriptionBundleUsageAccess().getAsKeyword_2_0()), oneSpace());
+	protected void _format(Inclusion inclusion, IFormattableDocument doc) {
+		doc.append(keyword(inclusion, oml.getInclusionAccess().getIncludesKeyword_0()), oneSpace());
+		doc.surround(keyword(inclusion, oml.getInclusionAccess().getAsKeyword_2_0()), oneSpace());
 	}
 
 	protected void _format(ScalarPropertyRangeRestrictionAxiom axiom, IFormattableDocument doc) {

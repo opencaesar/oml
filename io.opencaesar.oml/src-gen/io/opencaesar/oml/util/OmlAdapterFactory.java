@@ -156,56 +156,16 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 				return createDescriptionBundleAdapter();
 			}
 			@Override
-			public Adapter caseVocabularyImport(VocabularyImport object) {
-				return createVocabularyImportAdapter();
+			public Adapter caseExtension(Extension object) {
+				return createExtensionAdapter();
 			}
 			@Override
-			public Adapter caseVocabularyBundleImport(VocabularyBundleImport object) {
-				return createVocabularyBundleImportAdapter();
+			public Adapter caseUsage(Usage object) {
+				return createUsageAdapter();
 			}
 			@Override
-			public Adapter caseDescriptionImport(DescriptionImport object) {
-				return createDescriptionImportAdapter();
-			}
-			@Override
-			public Adapter caseDescriptionBundleImport(DescriptionBundleImport object) {
-				return createDescriptionBundleImportAdapter();
-			}
-			@Override
-			public Adapter caseVocabularyExtension(VocabularyExtension object) {
-				return createVocabularyExtensionAdapter();
-			}
-			@Override
-			public Adapter caseVocabularyUsage(VocabularyUsage object) {
-				return createVocabularyUsageAdapter();
-			}
-			@Override
-			public Adapter caseVocabularyBundleExtension(VocabularyBundleExtension object) {
-				return createVocabularyBundleExtensionAdapter();
-			}
-			@Override
-			public Adapter caseVocabularyBundleInclusion(VocabularyBundleInclusion object) {
-				return createVocabularyBundleInclusionAdapter();
-			}
-			@Override
-			public Adapter caseDescriptionExtension(DescriptionExtension object) {
-				return createDescriptionExtensionAdapter();
-			}
-			@Override
-			public Adapter caseDescriptionUsage(DescriptionUsage object) {
-				return createDescriptionUsageAdapter();
-			}
-			@Override
-			public Adapter caseDescriptionBundleExtension(DescriptionBundleExtension object) {
-				return createDescriptionBundleExtensionAdapter();
-			}
-			@Override
-			public Adapter caseDescriptionBundleInclusion(DescriptionBundleInclusion object) {
-				return createDescriptionBundleInclusionAdapter();
-			}
-			@Override
-			public Adapter caseDescriptionBundleUsage(DescriptionBundleUsage object) {
-				return createDescriptionBundleUsageAdapter();
+			public Adapter caseInclusion(Inclusion object) {
+				return createInclusionAdapter();
 			}
 			@Override
 			public Adapter caseVocabularyStatement(VocabularyStatement object) {
@@ -812,184 +772,44 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.VocabularyImport <em>Vocabulary Import</em>}'.
+	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.Extension <em>Extension</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see io.opencaesar.oml.VocabularyImport
+	 * @see io.opencaesar.oml.Extension
 	 * @generated
 	 */
-	public Adapter createVocabularyImportAdapter() {
+	public Adapter createExtensionAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.VocabularyBundleImport <em>Vocabulary Bundle Import</em>}'.
+	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.Usage <em>Usage</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see io.opencaesar.oml.VocabularyBundleImport
+	 * @see io.opencaesar.oml.Usage
 	 * @generated
 	 */
-	public Adapter createVocabularyBundleImportAdapter() {
+	public Adapter createUsageAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.DescriptionImport <em>Description Import</em>}'.
+	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.Inclusion <em>Inclusion</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see io.opencaesar.oml.DescriptionImport
+	 * @see io.opencaesar.oml.Inclusion
 	 * @generated
 	 */
-	public Adapter createDescriptionImportAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.DescriptionBundleImport <em>Description Bundle Import</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.DescriptionBundleImport
-	 * @generated
-	 */
-	public Adapter createDescriptionBundleImportAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.VocabularyExtension <em>Vocabulary Extension</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.VocabularyExtension
-	 * @generated
-	 */
-	public Adapter createVocabularyExtensionAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.VocabularyUsage <em>Vocabulary Usage</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.VocabularyUsage
-	 * @generated
-	 */
-	public Adapter createVocabularyUsageAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.VocabularyBundleExtension <em>Vocabulary Bundle Extension</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.VocabularyBundleExtension
-	 * @generated
-	 */
-	public Adapter createVocabularyBundleExtensionAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.VocabularyBundleInclusion <em>Vocabulary Bundle Inclusion</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.VocabularyBundleInclusion
-	 * @generated
-	 */
-	public Adapter createVocabularyBundleInclusionAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.DescriptionExtension <em>Description Extension</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.DescriptionExtension
-	 * @generated
-	 */
-	public Adapter createDescriptionExtensionAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.DescriptionUsage <em>Description Usage</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.DescriptionUsage
-	 * @generated
-	 */
-	public Adapter createDescriptionUsageAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.DescriptionBundleExtension <em>Description Bundle Extension</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.DescriptionBundleExtension
-	 * @generated
-	 */
-	public Adapter createDescriptionBundleExtensionAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.DescriptionBundleInclusion <em>Description Bundle Inclusion</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.DescriptionBundleInclusion
-	 * @generated
-	 */
-	public Adapter createDescriptionBundleInclusionAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.DescriptionBundleUsage <em>Description Bundle Usage</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.DescriptionBundleUsage
-	 * @generated
-	 */
-	public Adapter createDescriptionBundleUsageAdapter() {
+	public Adapter createInclusionAdapter() {
 		return null;
 	}
 

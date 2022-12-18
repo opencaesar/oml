@@ -312,13 +312,22 @@ public interface OmlPackage extends EPackage {
 	int IMPORT__PREFIX = ELEMENT_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Owning Ontology</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPORT__OWNING_ONTOLOGY = ELEMENT_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Import</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IMPORT_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 2;
+	int IMPORT_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The operation id for the '<em>Extra Validate</em>' operation.
@@ -706,13 +715,22 @@ public interface OmlPackage extends EPackage {
 	int ONTOLOGY__PREFIX = IDENTIFIED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Owned Imports</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ONTOLOGY__OWNED_IMPORTS = IDENTIFIED_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Ontology</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ONTOLOGY_FEATURE_COUNT = IDENTIFIED_ELEMENT_FEATURE_COUNT + 2;
+	int ONTOLOGY_FEATURE_COUNT = IDENTIFIED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The operation id for the '<em>Extra Validate</em>' operation.
@@ -879,6 +897,15 @@ public interface OmlPackage extends EPackage {
 	int VOCABULARY_BOX__PREFIX = ONTOLOGY__PREFIX;
 
 	/**
+	 * The feature id for the '<em><b>Owned Imports</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOCABULARY_BOX__OWNED_IMPORTS = ONTOLOGY__OWNED_IMPORTS;
+
+	/**
 	 * The number of structural features of the '<em>Vocabulary Box</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -968,6 +995,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int DESCRIPTION_BOX__PREFIX = ONTOLOGY__PREFIX;
+
+	/**
+	 * The feature id for the '<em><b>Owned Imports</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_BOX__OWNED_IMPORTS = ONTOLOGY__OWNED_IMPORTS;
 
 	/**
 	 * The number of structural features of the '<em>Description Box</em>' class.
@@ -1067,7 +1103,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VOCABULARY__OWNED_IMPORTS = VOCABULARY_BOX_FEATURE_COUNT + 0;
+	int VOCABULARY__OWNED_IMPORTS = VOCABULARY_BOX__OWNED_IMPORTS;
 
 	/**
 	 * The feature id for the '<em><b>Owned Statements</b></em>' containment reference list.
@@ -1076,7 +1112,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VOCABULARY__OWNED_STATEMENTS = VOCABULARY_BOX_FEATURE_COUNT + 1;
+	int VOCABULARY__OWNED_STATEMENTS = VOCABULARY_BOX_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Vocabulary</em>' class.
@@ -1085,7 +1121,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VOCABULARY_FEATURE_COUNT = VOCABULARY_BOX_FEATURE_COUNT + 2;
+	int VOCABULARY_FEATURE_COUNT = VOCABULARY_BOX_FEATURE_COUNT + 1;
 
 	/**
 	 * The operation id for the '<em>Extra Validate</em>' operation.
@@ -1176,7 +1212,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VOCABULARY_BUNDLE__OWNED_IMPORTS = VOCABULARY_BOX_FEATURE_COUNT + 0;
+	int VOCABULARY_BUNDLE__OWNED_IMPORTS = VOCABULARY_BOX__OWNED_IMPORTS;
 
 	/**
 	 * The number of structural features of the '<em>Vocabulary Bundle</em>' class.
@@ -1185,7 +1221,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VOCABULARY_BUNDLE_FEATURE_COUNT = VOCABULARY_BOX_FEATURE_COUNT + 1;
+	int VOCABULARY_BUNDLE_FEATURE_COUNT = VOCABULARY_BOX_FEATURE_COUNT + 0;
 
 	/**
 	 * The operation id for the '<em>Extra Validate</em>' operation.
@@ -1276,7 +1312,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DESCRIPTION__OWNED_IMPORTS = DESCRIPTION_BOX_FEATURE_COUNT + 0;
+	int DESCRIPTION__OWNED_IMPORTS = DESCRIPTION_BOX__OWNED_IMPORTS;
 
 	/**
 	 * The feature id for the '<em><b>Owned Statements</b></em>' containment reference list.
@@ -1285,7 +1321,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DESCRIPTION__OWNED_STATEMENTS = DESCRIPTION_BOX_FEATURE_COUNT + 1;
+	int DESCRIPTION__OWNED_STATEMENTS = DESCRIPTION_BOX_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Description</em>' class.
@@ -1294,7 +1330,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DESCRIPTION_FEATURE_COUNT = DESCRIPTION_BOX_FEATURE_COUNT + 2;
+	int DESCRIPTION_FEATURE_COUNT = DESCRIPTION_BOX_FEATURE_COUNT + 1;
 
 	/**
 	 * The operation id for the '<em>Extra Validate</em>' operation.
@@ -1385,7 +1421,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DESCRIPTION_BUNDLE__OWNED_IMPORTS = DESCRIPTION_BOX_FEATURE_COUNT + 0;
+	int DESCRIPTION_BUNDLE__OWNED_IMPORTS = DESCRIPTION_BOX__OWNED_IMPORTS;
 
 	/**
 	 * The number of structural features of the '<em>Description Bundle</em>' class.
@@ -1394,7 +1430,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DESCRIPTION_BUNDLE_FEATURE_COUNT = DESCRIPTION_BOX_FEATURE_COUNT + 1;
+	int DESCRIPTION_BUNDLE_FEATURE_COUNT = DESCRIPTION_BOX_FEATURE_COUNT + 0;
 
 	/**
 	 * The operation id for the '<em>Extra Validate</em>' operation.
@@ -1442,14 +1478,14 @@ public interface OmlPackage extends EPackage {
 	int DESCRIPTION_BUNDLE_OPERATION_COUNT = DESCRIPTION_BOX_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link io.opencaesar.oml.impl.VocabularyImportImpl <em>Vocabulary Import</em>}' class.
+	 * The meta object id for the '{@link io.opencaesar.oml.impl.ExtensionImpl <em>Extension</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see io.opencaesar.oml.impl.VocabularyImportImpl
-	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getVocabularyImport()
+	 * @see io.opencaesar.oml.impl.ExtensionImpl
+	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getExtension()
 	 * @generated
 	 */
-	int VOCABULARY_IMPORT = 18;
+	int EXTENSION = 18;
 
 	/**
 	 * The feature id for the '<em><b>Namespace</b></em>' attribute.
@@ -1458,7 +1494,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VOCABULARY_IMPORT__NAMESPACE = IMPORT__NAMESPACE;
+	int EXTENSION__NAMESPACE = IMPORT__NAMESPACE;
 
 	/**
 	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
@@ -1467,25 +1503,25 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VOCABULARY_IMPORT__PREFIX = IMPORT__PREFIX;
+	int EXTENSION__PREFIX = IMPORT__PREFIX;
 
 	/**
-	 * The feature id for the '<em><b>Owning Vocabulary</b></em>' container reference.
+	 * The feature id for the '<em><b>Owning Ontology</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VOCABULARY_IMPORT__OWNING_VOCABULARY = IMPORT_FEATURE_COUNT + 0;
+	int EXTENSION__OWNING_ONTOLOGY = IMPORT__OWNING_ONTOLOGY;
 
 	/**
-	 * The number of structural features of the '<em>Vocabulary Import</em>' class.
+	 * The number of structural features of the '<em>Extension</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VOCABULARY_IMPORT_FEATURE_COUNT = IMPORT_FEATURE_COUNT + 1;
+	int EXTENSION_FEATURE_COUNT = IMPORT_FEATURE_COUNT + 0;
 
 	/**
 	 * The operation id for the '<em>Extra Validate</em>' operation.
@@ -1494,7 +1530,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VOCABULARY_IMPORT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = IMPORT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+	int EXTENSION___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = IMPORT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
@@ -1503,7 +1539,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VOCABULARY_IMPORT___GET_ONTOLOGY = IMPORT___GET_ONTOLOGY;
+	int EXTENSION___GET_ONTOLOGY = IMPORT___GET_ONTOLOGY;
 
 	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
@@ -1512,7 +1548,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VOCABULARY_IMPORT___GET_IRI = IMPORT___GET_IRI;
+	int EXTENSION___GET_IRI = IMPORT___GET_IRI;
 
 	/**
 	 * The operation id for the '<em>Get Separator</em>' operation.
@@ -1521,26 +1557,26 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VOCABULARY_IMPORT___GET_SEPARATOR = IMPORT___GET_SEPARATOR;
+	int EXTENSION___GET_SEPARATOR = IMPORT___GET_SEPARATOR;
 
 	/**
-	 * The number of operations of the '<em>Vocabulary Import</em>' class.
+	 * The number of operations of the '<em>Extension</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VOCABULARY_IMPORT_OPERATION_COUNT = IMPORT_OPERATION_COUNT + 0;
+	int EXTENSION_OPERATION_COUNT = IMPORT_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link io.opencaesar.oml.impl.VocabularyBundleImportImpl <em>Vocabulary Bundle Import</em>}' class.
+	 * The meta object id for the '{@link io.opencaesar.oml.impl.UsageImpl <em>Usage</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see io.opencaesar.oml.impl.VocabularyBundleImportImpl
-	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getVocabularyBundleImport()
+	 * @see io.opencaesar.oml.impl.UsageImpl
+	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getUsage()
 	 * @generated
 	 */
-	int VOCABULARY_BUNDLE_IMPORT = 19;
+	int USAGE = 19;
 
 	/**
 	 * The feature id for the '<em><b>Namespace</b></em>' attribute.
@@ -1549,7 +1585,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VOCABULARY_BUNDLE_IMPORT__NAMESPACE = IMPORT__NAMESPACE;
+	int USAGE__NAMESPACE = IMPORT__NAMESPACE;
 
 	/**
 	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
@@ -1558,25 +1594,25 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VOCABULARY_BUNDLE_IMPORT__PREFIX = IMPORT__PREFIX;
+	int USAGE__PREFIX = IMPORT__PREFIX;
 
 	/**
-	 * The feature id for the '<em><b>Owning Vocabulary Bundle</b></em>' container reference.
+	 * The feature id for the '<em><b>Owning Ontology</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VOCABULARY_BUNDLE_IMPORT__OWNING_VOCABULARY_BUNDLE = IMPORT_FEATURE_COUNT + 0;
+	int USAGE__OWNING_ONTOLOGY = IMPORT__OWNING_ONTOLOGY;
 
 	/**
-	 * The number of structural features of the '<em>Vocabulary Bundle Import</em>' class.
+	 * The number of structural features of the '<em>Usage</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VOCABULARY_BUNDLE_IMPORT_FEATURE_COUNT = IMPORT_FEATURE_COUNT + 1;
+	int USAGE_FEATURE_COUNT = IMPORT_FEATURE_COUNT + 0;
 
 	/**
 	 * The operation id for the '<em>Extra Validate</em>' operation.
@@ -1585,7 +1621,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VOCABULARY_BUNDLE_IMPORT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = IMPORT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+	int USAGE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = IMPORT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
@@ -1594,7 +1630,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VOCABULARY_BUNDLE_IMPORT___GET_ONTOLOGY = IMPORT___GET_ONTOLOGY;
+	int USAGE___GET_ONTOLOGY = IMPORT___GET_ONTOLOGY;
 
 	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
@@ -1603,7 +1639,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VOCABULARY_BUNDLE_IMPORT___GET_IRI = IMPORT___GET_IRI;
+	int USAGE___GET_IRI = IMPORT___GET_IRI;
 
 	/**
 	 * The operation id for the '<em>Get Separator</em>' operation.
@@ -1612,26 +1648,26 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VOCABULARY_BUNDLE_IMPORT___GET_SEPARATOR = IMPORT___GET_SEPARATOR;
+	int USAGE___GET_SEPARATOR = IMPORT___GET_SEPARATOR;
 
 	/**
-	 * The number of operations of the '<em>Vocabulary Bundle Import</em>' class.
+	 * The number of operations of the '<em>Usage</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VOCABULARY_BUNDLE_IMPORT_OPERATION_COUNT = IMPORT_OPERATION_COUNT + 0;
+	int USAGE_OPERATION_COUNT = IMPORT_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link io.opencaesar.oml.impl.DescriptionImportImpl <em>Description Import</em>}' class.
+	 * The meta object id for the '{@link io.opencaesar.oml.impl.InclusionImpl <em>Inclusion</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see io.opencaesar.oml.impl.DescriptionImportImpl
-	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDescriptionImport()
+	 * @see io.opencaesar.oml.impl.InclusionImpl
+	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getInclusion()
 	 * @generated
 	 */
-	int DESCRIPTION_IMPORT = 20;
+	int INCLUSION = 20;
 
 	/**
 	 * The feature id for the '<em><b>Namespace</b></em>' attribute.
@@ -1640,7 +1676,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DESCRIPTION_IMPORT__NAMESPACE = IMPORT__NAMESPACE;
+	int INCLUSION__NAMESPACE = IMPORT__NAMESPACE;
 
 	/**
 	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
@@ -1649,116 +1685,25 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DESCRIPTION_IMPORT__PREFIX = IMPORT__PREFIX;
+	int INCLUSION__PREFIX = IMPORT__PREFIX;
 
 	/**
-	 * The feature id for the '<em><b>Owning Description</b></em>' container reference.
+	 * The feature id for the '<em><b>Owning Ontology</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DESCRIPTION_IMPORT__OWNING_DESCRIPTION = IMPORT_FEATURE_COUNT + 0;
+	int INCLUSION__OWNING_ONTOLOGY = IMPORT__OWNING_ONTOLOGY;
 
 	/**
-	 * The number of structural features of the '<em>Description Import</em>' class.
+	 * The number of structural features of the '<em>Inclusion</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DESCRIPTION_IMPORT_FEATURE_COUNT = IMPORT_FEATURE_COUNT + 1;
-
-	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_IMPORT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = IMPORT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
-	 * The operation id for the '<em>Get Ontology</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_IMPORT___GET_ONTOLOGY = IMPORT___GET_ONTOLOGY;
-
-	/**
-	 * The operation id for the '<em>Get Iri</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_IMPORT___GET_IRI = IMPORT___GET_IRI;
-
-	/**
-	 * The operation id for the '<em>Get Separator</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_IMPORT___GET_SEPARATOR = IMPORT___GET_SEPARATOR;
-
-	/**
-	 * The number of operations of the '<em>Description Import</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_IMPORT_OPERATION_COUNT = IMPORT_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link io.opencaesar.oml.impl.DescriptionBundleImportImpl <em>Description Bundle Import</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see io.opencaesar.oml.impl.DescriptionBundleImportImpl
-	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDescriptionBundleImport()
-	 * @generated
-	 */
-	int DESCRIPTION_BUNDLE_IMPORT = 21;
-
-	/**
-	 * The feature id for the '<em><b>Namespace</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE_IMPORT__NAMESPACE = IMPORT__NAMESPACE;
-
-	/**
-	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE_IMPORT__PREFIX = IMPORT__PREFIX;
-
-	/**
-	 * The feature id for the '<em><b>Owning Description Bundle</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE_IMPORT__OWNING_DESCRIPTION_BUNDLE = IMPORT_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Description Bundle Import</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE_IMPORT_FEATURE_COUNT = IMPORT_FEATURE_COUNT + 1;
+	int INCLUSION_FEATURE_COUNT = IMPORT_FEATURE_COUNT + 0;
 
 	/**
 	 * The operation id for the '<em>Extra Validate</em>' operation.
@@ -1767,7 +1712,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DESCRIPTION_BUNDLE_IMPORT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = IMPORT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+	int INCLUSION___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = IMPORT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
@@ -1776,7 +1721,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DESCRIPTION_BUNDLE_IMPORT___GET_ONTOLOGY = IMPORT___GET_ONTOLOGY;
+	int INCLUSION___GET_ONTOLOGY = IMPORT___GET_ONTOLOGY;
 
 	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
@@ -1785,7 +1730,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DESCRIPTION_BUNDLE_IMPORT___GET_IRI = IMPORT___GET_IRI;
+	int INCLUSION___GET_IRI = IMPORT___GET_IRI;
 
 	/**
 	 * The operation id for the '<em>Get Separator</em>' operation.
@@ -1794,835 +1739,16 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DESCRIPTION_BUNDLE_IMPORT___GET_SEPARATOR = IMPORT___GET_SEPARATOR;
+	int INCLUSION___GET_SEPARATOR = IMPORT___GET_SEPARATOR;
 
 	/**
-	 * The number of operations of the '<em>Description Bundle Import</em>' class.
+	 * The number of operations of the '<em>Inclusion</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DESCRIPTION_BUNDLE_IMPORT_OPERATION_COUNT = IMPORT_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link io.opencaesar.oml.impl.VocabularyExtensionImpl <em>Vocabulary Extension</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see io.opencaesar.oml.impl.VocabularyExtensionImpl
-	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getVocabularyExtension()
-	 * @generated
-	 */
-	int VOCABULARY_EXTENSION = 22;
-
-	/**
-	 * The feature id for the '<em><b>Namespace</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_EXTENSION__NAMESPACE = VOCABULARY_IMPORT__NAMESPACE;
-
-	/**
-	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_EXTENSION__PREFIX = VOCABULARY_IMPORT__PREFIX;
-
-	/**
-	 * The feature id for the '<em><b>Owning Vocabulary</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_EXTENSION__OWNING_VOCABULARY = VOCABULARY_IMPORT__OWNING_VOCABULARY;
-
-	/**
-	 * The number of structural features of the '<em>Vocabulary Extension</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_EXTENSION_FEATURE_COUNT = VOCABULARY_IMPORT_FEATURE_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_EXTENSION___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = VOCABULARY_IMPORT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
-	 * The operation id for the '<em>Get Ontology</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_EXTENSION___GET_ONTOLOGY = VOCABULARY_IMPORT___GET_ONTOLOGY;
-
-	/**
-	 * The operation id for the '<em>Get Iri</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_EXTENSION___GET_IRI = VOCABULARY_IMPORT___GET_IRI;
-
-	/**
-	 * The operation id for the '<em>Get Separator</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_EXTENSION___GET_SEPARATOR = VOCABULARY_IMPORT___GET_SEPARATOR;
-
-	/**
-	 * The number of operations of the '<em>Vocabulary Extension</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_EXTENSION_OPERATION_COUNT = VOCABULARY_IMPORT_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link io.opencaesar.oml.impl.VocabularyUsageImpl <em>Vocabulary Usage</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see io.opencaesar.oml.impl.VocabularyUsageImpl
-	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getVocabularyUsage()
-	 * @generated
-	 */
-	int VOCABULARY_USAGE = 23;
-
-	/**
-	 * The feature id for the '<em><b>Namespace</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_USAGE__NAMESPACE = VOCABULARY_IMPORT__NAMESPACE;
-
-	/**
-	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_USAGE__PREFIX = VOCABULARY_IMPORT__PREFIX;
-
-	/**
-	 * The feature id for the '<em><b>Owning Vocabulary</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_USAGE__OWNING_VOCABULARY = VOCABULARY_IMPORT__OWNING_VOCABULARY;
-
-	/**
-	 * The number of structural features of the '<em>Vocabulary Usage</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_USAGE_FEATURE_COUNT = VOCABULARY_IMPORT_FEATURE_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_USAGE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = VOCABULARY_IMPORT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
-	 * The operation id for the '<em>Get Ontology</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_USAGE___GET_ONTOLOGY = VOCABULARY_IMPORT___GET_ONTOLOGY;
-
-	/**
-	 * The operation id for the '<em>Get Iri</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_USAGE___GET_IRI = VOCABULARY_IMPORT___GET_IRI;
-
-	/**
-	 * The operation id for the '<em>Get Separator</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_USAGE___GET_SEPARATOR = VOCABULARY_IMPORT___GET_SEPARATOR;
-
-	/**
-	 * The number of operations of the '<em>Vocabulary Usage</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_USAGE_OPERATION_COUNT = VOCABULARY_IMPORT_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link io.opencaesar.oml.impl.VocabularyBundleExtensionImpl <em>Vocabulary Bundle Extension</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see io.opencaesar.oml.impl.VocabularyBundleExtensionImpl
-	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getVocabularyBundleExtension()
-	 * @generated
-	 */
-	int VOCABULARY_BUNDLE_EXTENSION = 24;
-
-	/**
-	 * The feature id for the '<em><b>Namespace</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_BUNDLE_EXTENSION__NAMESPACE = VOCABULARY_BUNDLE_IMPORT__NAMESPACE;
-
-	/**
-	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_BUNDLE_EXTENSION__PREFIX = VOCABULARY_BUNDLE_IMPORT__PREFIX;
-
-	/**
-	 * The feature id for the '<em><b>Owning Vocabulary Bundle</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_BUNDLE_EXTENSION__OWNING_VOCABULARY_BUNDLE = VOCABULARY_BUNDLE_IMPORT__OWNING_VOCABULARY_BUNDLE;
-
-	/**
-	 * The number of structural features of the '<em>Vocabulary Bundle Extension</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_BUNDLE_EXTENSION_FEATURE_COUNT = VOCABULARY_BUNDLE_IMPORT_FEATURE_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_BUNDLE_EXTENSION___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = VOCABULARY_BUNDLE_IMPORT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
-	 * The operation id for the '<em>Get Ontology</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_BUNDLE_EXTENSION___GET_ONTOLOGY = VOCABULARY_BUNDLE_IMPORT___GET_ONTOLOGY;
-
-	/**
-	 * The operation id for the '<em>Get Iri</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_BUNDLE_EXTENSION___GET_IRI = VOCABULARY_BUNDLE_IMPORT___GET_IRI;
-
-	/**
-	 * The operation id for the '<em>Get Separator</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_BUNDLE_EXTENSION___GET_SEPARATOR = VOCABULARY_BUNDLE_IMPORT___GET_SEPARATOR;
-
-	/**
-	 * The number of operations of the '<em>Vocabulary Bundle Extension</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_BUNDLE_EXTENSION_OPERATION_COUNT = VOCABULARY_BUNDLE_IMPORT_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link io.opencaesar.oml.impl.VocabularyBundleInclusionImpl <em>Vocabulary Bundle Inclusion</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see io.opencaesar.oml.impl.VocabularyBundleInclusionImpl
-	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getVocabularyBundleInclusion()
-	 * @generated
-	 */
-	int VOCABULARY_BUNDLE_INCLUSION = 25;
-
-	/**
-	 * The feature id for the '<em><b>Namespace</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_BUNDLE_INCLUSION__NAMESPACE = VOCABULARY_BUNDLE_IMPORT__NAMESPACE;
-
-	/**
-	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_BUNDLE_INCLUSION__PREFIX = VOCABULARY_BUNDLE_IMPORT__PREFIX;
-
-	/**
-	 * The feature id for the '<em><b>Owning Vocabulary Bundle</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_BUNDLE_INCLUSION__OWNING_VOCABULARY_BUNDLE = VOCABULARY_BUNDLE_IMPORT__OWNING_VOCABULARY_BUNDLE;
-
-	/**
-	 * The number of structural features of the '<em>Vocabulary Bundle Inclusion</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_BUNDLE_INCLUSION_FEATURE_COUNT = VOCABULARY_BUNDLE_IMPORT_FEATURE_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_BUNDLE_INCLUSION___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = VOCABULARY_BUNDLE_IMPORT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
-	 * The operation id for the '<em>Get Ontology</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_BUNDLE_INCLUSION___GET_ONTOLOGY = VOCABULARY_BUNDLE_IMPORT___GET_ONTOLOGY;
-
-	/**
-	 * The operation id for the '<em>Get Iri</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_BUNDLE_INCLUSION___GET_IRI = VOCABULARY_BUNDLE_IMPORT___GET_IRI;
-
-	/**
-	 * The operation id for the '<em>Get Separator</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_BUNDLE_INCLUSION___GET_SEPARATOR = VOCABULARY_BUNDLE_IMPORT___GET_SEPARATOR;
-
-	/**
-	 * The number of operations of the '<em>Vocabulary Bundle Inclusion</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_BUNDLE_INCLUSION_OPERATION_COUNT = VOCABULARY_BUNDLE_IMPORT_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link io.opencaesar.oml.impl.DescriptionExtensionImpl <em>Description Extension</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see io.opencaesar.oml.impl.DescriptionExtensionImpl
-	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDescriptionExtension()
-	 * @generated
-	 */
-	int DESCRIPTION_EXTENSION = 26;
-
-	/**
-	 * The feature id for the '<em><b>Namespace</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_EXTENSION__NAMESPACE = DESCRIPTION_IMPORT__NAMESPACE;
-
-	/**
-	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_EXTENSION__PREFIX = DESCRIPTION_IMPORT__PREFIX;
-
-	/**
-	 * The feature id for the '<em><b>Owning Description</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_EXTENSION__OWNING_DESCRIPTION = DESCRIPTION_IMPORT__OWNING_DESCRIPTION;
-
-	/**
-	 * The number of structural features of the '<em>Description Extension</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_EXTENSION_FEATURE_COUNT = DESCRIPTION_IMPORT_FEATURE_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_EXTENSION___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = DESCRIPTION_IMPORT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
-	 * The operation id for the '<em>Get Ontology</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_EXTENSION___GET_ONTOLOGY = DESCRIPTION_IMPORT___GET_ONTOLOGY;
-
-	/**
-	 * The operation id for the '<em>Get Iri</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_EXTENSION___GET_IRI = DESCRIPTION_IMPORT___GET_IRI;
-
-	/**
-	 * The operation id for the '<em>Get Separator</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_EXTENSION___GET_SEPARATOR = DESCRIPTION_IMPORT___GET_SEPARATOR;
-
-	/**
-	 * The number of operations of the '<em>Description Extension</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_EXTENSION_OPERATION_COUNT = DESCRIPTION_IMPORT_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link io.opencaesar.oml.impl.DescriptionUsageImpl <em>Description Usage</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see io.opencaesar.oml.impl.DescriptionUsageImpl
-	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDescriptionUsage()
-	 * @generated
-	 */
-	int DESCRIPTION_USAGE = 27;
-
-	/**
-	 * The feature id for the '<em><b>Namespace</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_USAGE__NAMESPACE = DESCRIPTION_IMPORT__NAMESPACE;
-
-	/**
-	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_USAGE__PREFIX = DESCRIPTION_IMPORT__PREFIX;
-
-	/**
-	 * The feature id for the '<em><b>Owning Description</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_USAGE__OWNING_DESCRIPTION = DESCRIPTION_IMPORT__OWNING_DESCRIPTION;
-
-	/**
-	 * The number of structural features of the '<em>Description Usage</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_USAGE_FEATURE_COUNT = DESCRIPTION_IMPORT_FEATURE_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_USAGE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = DESCRIPTION_IMPORT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
-	 * The operation id for the '<em>Get Ontology</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_USAGE___GET_ONTOLOGY = DESCRIPTION_IMPORT___GET_ONTOLOGY;
-
-	/**
-	 * The operation id for the '<em>Get Iri</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_USAGE___GET_IRI = DESCRIPTION_IMPORT___GET_IRI;
-
-	/**
-	 * The operation id for the '<em>Get Separator</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_USAGE___GET_SEPARATOR = DESCRIPTION_IMPORT___GET_SEPARATOR;
-
-	/**
-	 * The number of operations of the '<em>Description Usage</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_USAGE_OPERATION_COUNT = DESCRIPTION_IMPORT_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link io.opencaesar.oml.impl.DescriptionBundleExtensionImpl <em>Description Bundle Extension</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see io.opencaesar.oml.impl.DescriptionBundleExtensionImpl
-	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDescriptionBundleExtension()
-	 * @generated
-	 */
-	int DESCRIPTION_BUNDLE_EXTENSION = 28;
-
-	/**
-	 * The feature id for the '<em><b>Namespace</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE_EXTENSION__NAMESPACE = DESCRIPTION_BUNDLE_IMPORT__NAMESPACE;
-
-	/**
-	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE_EXTENSION__PREFIX = DESCRIPTION_BUNDLE_IMPORT__PREFIX;
-
-	/**
-	 * The feature id for the '<em><b>Owning Description Bundle</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE_EXTENSION__OWNING_DESCRIPTION_BUNDLE = DESCRIPTION_BUNDLE_IMPORT__OWNING_DESCRIPTION_BUNDLE;
-
-	/**
-	 * The number of structural features of the '<em>Description Bundle Extension</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE_EXTENSION_FEATURE_COUNT = DESCRIPTION_BUNDLE_IMPORT_FEATURE_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE_EXTENSION___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = DESCRIPTION_BUNDLE_IMPORT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
-	 * The operation id for the '<em>Get Ontology</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE_EXTENSION___GET_ONTOLOGY = DESCRIPTION_BUNDLE_IMPORT___GET_ONTOLOGY;
-
-	/**
-	 * The operation id for the '<em>Get Iri</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE_EXTENSION___GET_IRI = DESCRIPTION_BUNDLE_IMPORT___GET_IRI;
-
-	/**
-	 * The operation id for the '<em>Get Separator</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE_EXTENSION___GET_SEPARATOR = DESCRIPTION_BUNDLE_IMPORT___GET_SEPARATOR;
-
-	/**
-	 * The number of operations of the '<em>Description Bundle Extension</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE_EXTENSION_OPERATION_COUNT = DESCRIPTION_BUNDLE_IMPORT_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link io.opencaesar.oml.impl.DescriptionBundleInclusionImpl <em>Description Bundle Inclusion</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see io.opencaesar.oml.impl.DescriptionBundleInclusionImpl
-	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDescriptionBundleInclusion()
-	 * @generated
-	 */
-	int DESCRIPTION_BUNDLE_INCLUSION = 29;
-
-	/**
-	 * The feature id for the '<em><b>Namespace</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE_INCLUSION__NAMESPACE = DESCRIPTION_BUNDLE_IMPORT__NAMESPACE;
-
-	/**
-	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE_INCLUSION__PREFIX = DESCRIPTION_BUNDLE_IMPORT__PREFIX;
-
-	/**
-	 * The feature id for the '<em><b>Owning Description Bundle</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE_INCLUSION__OWNING_DESCRIPTION_BUNDLE = DESCRIPTION_BUNDLE_IMPORT__OWNING_DESCRIPTION_BUNDLE;
-
-	/**
-	 * The number of structural features of the '<em>Description Bundle Inclusion</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE_INCLUSION_FEATURE_COUNT = DESCRIPTION_BUNDLE_IMPORT_FEATURE_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE_INCLUSION___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = DESCRIPTION_BUNDLE_IMPORT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
-	 * The operation id for the '<em>Get Ontology</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE_INCLUSION___GET_ONTOLOGY = DESCRIPTION_BUNDLE_IMPORT___GET_ONTOLOGY;
-
-	/**
-	 * The operation id for the '<em>Get Iri</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE_INCLUSION___GET_IRI = DESCRIPTION_BUNDLE_IMPORT___GET_IRI;
-
-	/**
-	 * The operation id for the '<em>Get Separator</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE_INCLUSION___GET_SEPARATOR = DESCRIPTION_BUNDLE_IMPORT___GET_SEPARATOR;
-
-	/**
-	 * The number of operations of the '<em>Description Bundle Inclusion</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE_INCLUSION_OPERATION_COUNT = DESCRIPTION_BUNDLE_IMPORT_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link io.opencaesar.oml.impl.DescriptionBundleUsageImpl <em>Description Bundle Usage</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see io.opencaesar.oml.impl.DescriptionBundleUsageImpl
-	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDescriptionBundleUsage()
-	 * @generated
-	 */
-	int DESCRIPTION_BUNDLE_USAGE = 30;
-
-	/**
-	 * The feature id for the '<em><b>Namespace</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE_USAGE__NAMESPACE = DESCRIPTION_BUNDLE_IMPORT__NAMESPACE;
-
-	/**
-	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE_USAGE__PREFIX = DESCRIPTION_BUNDLE_IMPORT__PREFIX;
-
-	/**
-	 * The feature id for the '<em><b>Owning Description Bundle</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE_USAGE__OWNING_DESCRIPTION_BUNDLE = DESCRIPTION_BUNDLE_IMPORT__OWNING_DESCRIPTION_BUNDLE;
-
-	/**
-	 * The number of structural features of the '<em>Description Bundle Usage</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE_USAGE_FEATURE_COUNT = DESCRIPTION_BUNDLE_IMPORT_FEATURE_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE_USAGE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = DESCRIPTION_BUNDLE_IMPORT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
-	 * The operation id for the '<em>Get Ontology</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE_USAGE___GET_ONTOLOGY = DESCRIPTION_BUNDLE_IMPORT___GET_ONTOLOGY;
-
-	/**
-	 * The operation id for the '<em>Get Iri</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE_USAGE___GET_IRI = DESCRIPTION_BUNDLE_IMPORT___GET_IRI;
-
-	/**
-	 * The operation id for the '<em>Get Separator</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE_USAGE___GET_SEPARATOR = DESCRIPTION_BUNDLE_IMPORT___GET_SEPARATOR;
-
-	/**
-	 * The number of operations of the '<em>Description Bundle Usage</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE_USAGE_OPERATION_COUNT = DESCRIPTION_BUNDLE_IMPORT_OPERATION_COUNT + 0;
+	int INCLUSION_OPERATION_COUNT = IMPORT_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.impl.VocabularyStatementImpl <em>Vocabulary Statement</em>}' class.
@@ -2632,7 +1758,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getVocabularyStatement()
 	 * @generated
 	 */
-	int VOCABULARY_STATEMENT = 31;
+	int VOCABULARY_STATEMENT = 21;
 
 	/**
 	 * The feature id for the '<em><b>Owning Vocabulary</b></em>' container reference.
@@ -2687,7 +1813,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDescriptionStatement()
 	 * @generated
 	 */
-	int DESCRIPTION_STATEMENT = 32;
+	int DESCRIPTION_STATEMENT = 22;
 
 	/**
 	 * The feature id for the '<em><b>Owning Description</b></em>' container reference.
@@ -2742,7 +1868,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getVocabularyMember()
 	 * @generated
 	 */
-	int VOCABULARY_MEMBER = 33;
+	int VOCABULARY_MEMBER = 23;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -2824,7 +1950,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDescriptionMember()
 	 * @generated
 	 */
-	int DESCRIPTION_MEMBER = 34;
+	int DESCRIPTION_MEMBER = 24;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -2906,7 +2032,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getTerm()
 	 * @generated
 	 */
-	int TERM = 35;
+	int TERM = 25;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -2988,7 +2114,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRule()
 	 * @generated
 	 */
-	int RULE = 36;
+	int RULE = 26;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -3097,7 +2223,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getSpecializableTerm()
 	 * @generated
 	 */
-	int SPECIALIZABLE_TERM = 37;
+	int SPECIALIZABLE_TERM = 27;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -3197,7 +2323,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getFeature()
 	 * @generated
 	 */
-	int FEATURE = 38;
+	int FEATURE = 28;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -3279,7 +2405,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getProperty()
 	 * @generated
 	 */
-	int PROPERTY = 39;
+	int PROPERTY = 29;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -3361,7 +2487,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getType()
 	 * @generated
 	 */
-	int TYPE = 40;
+	int TYPE = 30;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -3461,7 +2587,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getClassifier()
 	 * @generated
 	 */
-	int CLASSIFIER = 41;
+	int CLASSIFIER = 31;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -3570,7 +2696,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getScalar()
 	 * @generated
 	 */
-	int SCALAR = 42;
+	int SCALAR = 32;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -3670,7 +2796,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getEntity()
 	 * @generated
 	 */
-	int ENTITY = 43;
+	int ENTITY = 33;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -3797,7 +2923,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getStructure()
 	 * @generated
 	 */
-	int STRUCTURE = 44;
+	int STRUCTURE = 34;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -3906,7 +3032,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getAspect()
 	 * @generated
 	 */
-	int ASPECT = 45;
+	int ASPECT = 35;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -4033,7 +3159,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getConcept()
 	 * @generated
 	 */
-	int CONCEPT = 46;
+	int CONCEPT = 36;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -4169,7 +3295,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRelationEntity()
 	 * @generated
 	 */
-	int RELATION_ENTITY = 47;
+	int RELATION_ENTITY = 37;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -4395,7 +3521,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getFacetedScalar()
 	 * @generated
 	 */
-	int FACETED_SCALAR = 48;
+	int FACETED_SCALAR = 38;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -4576,7 +3702,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getEnumeratedScalar()
 	 * @generated
 	 */
-	int ENUMERATED_SCALAR = 49;
+	int ENUMERATED_SCALAR = 39;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -4685,7 +3811,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getAnnotationProperty()
 	 * @generated
 	 */
-	int ANNOTATION_PROPERTY = 50;
+	int ANNOTATION_PROPERTY = 40;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -4785,7 +3911,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getSemanticProperty()
 	 * @generated
 	 */
-	int SEMANTIC_PROPERTY = 51;
+	int SEMANTIC_PROPERTY = 41;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -4894,7 +4020,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getScalarProperty()
 	 * @generated
 	 */
-	int SCALAR_PROPERTY = 52;
+	int SCALAR_PROPERTY = 42;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -5048,7 +4174,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getStructuredProperty()
 	 * @generated
 	 */
-	int STRUCTURED_PROPERTY = 53;
+	int STRUCTURED_PROPERTY = 43;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -5202,7 +4328,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRelation()
 	 * @generated
 	 */
-	int RELATION = 54;
+	int RELATION = 44;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -5347,7 +4473,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getForwardRelation()
 	 * @generated
 	 */
-	int FORWARD_RELATION = 55;
+	int FORWARD_RELATION = 45;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -5501,7 +4627,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getReverseRelation()
 	 * @generated
 	 */
-	int REVERSE_RELATION = 56;
+	int REVERSE_RELATION = 46;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -5655,7 +4781,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getNamedInstance()
 	 * @generated
 	 */
-	int NAMED_INSTANCE = 57;
+	int NAMED_INSTANCE = 47;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -5764,7 +4890,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getConceptInstance()
 	 * @generated
 	 */
-	int CONCEPT_INSTANCE = 58;
+	int CONCEPT_INSTANCE = 48;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -5882,7 +5008,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRelationInstance()
 	 * @generated
 	 */
-	int RELATION_INSTANCE = 59;
+	int RELATION_INSTANCE = 49;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -6018,7 +5144,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getStructureInstance()
 	 * @generated
 	 */
-	int STRUCTURE_INSTANCE = 60;
+	int STRUCTURE_INSTANCE = 50;
 
 	/**
 	 * The feature id for the '<em><b>Owned Property Values</b></em>' containment reference list.
@@ -6100,7 +5226,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getKeyAxiom()
 	 * @generated
 	 */
-	int KEY_AXIOM = 61;
+	int KEY_AXIOM = 51;
 
 	/**
 	 * The feature id for the '<em><b>Properties</b></em>' reference list.
@@ -6173,7 +5299,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getSpecializationAxiom()
 	 * @generated
 	 */
-	int SPECIALIZATION_AXIOM = 62;
+	int SPECIALIZATION_AXIOM = 52;
 
 	/**
 	 * The feature id for the '<em><b>Specialized Term</b></em>' reference.
@@ -6246,7 +5372,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRestrictionAxiom()
 	 * @generated
 	 */
-	int RESTRICTION_AXIOM = 63;
+	int RESTRICTION_AXIOM = 53;
 
 	/**
 	 * The number of structural features of the '<em>Restriction Axiom</em>' class.
@@ -6292,7 +5418,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getPropertyRestrictionAxiom()
 	 * @generated
 	 */
-	int PROPERTY_RESTRICTION_AXIOM = 64;
+	int PROPERTY_RESTRICTION_AXIOM = 54;
 
 	/**
 	 * The feature id for the '<em><b>Owning Classifier</b></em>' container reference.
@@ -6356,7 +5482,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getScalarPropertyRestrictionAxiom()
 	 * @generated
 	 */
-	int SCALAR_PROPERTY_RESTRICTION_AXIOM = 65;
+	int SCALAR_PROPERTY_RESTRICTION_AXIOM = 55;
 
 	/**
 	 * The feature id for the '<em><b>Owning Classifier</b></em>' container reference.
@@ -6429,7 +5555,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getScalarPropertyRangeRestrictionAxiom()
 	 * @generated
 	 */
-	int SCALAR_PROPERTY_RANGE_RESTRICTION_AXIOM = 66;
+	int SCALAR_PROPERTY_RANGE_RESTRICTION_AXIOM = 56;
 
 	/**
 	 * The feature id for the '<em><b>Owning Classifier</b></em>' container reference.
@@ -6520,7 +5646,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getScalarPropertyCardinalityRestrictionAxiom()
 	 * @generated
 	 */
-	int SCALAR_PROPERTY_CARDINALITY_RESTRICTION_AXIOM = 67;
+	int SCALAR_PROPERTY_CARDINALITY_RESTRICTION_AXIOM = 57;
 
 	/**
 	 * The feature id for the '<em><b>Owning Classifier</b></em>' container reference.
@@ -6620,7 +5746,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getScalarPropertyValueRestrictionAxiom()
 	 * @generated
 	 */
-	int SCALAR_PROPERTY_VALUE_RESTRICTION_AXIOM = 68;
+	int SCALAR_PROPERTY_VALUE_RESTRICTION_AXIOM = 58;
 
 	/**
 	 * The feature id for the '<em><b>Owning Classifier</b></em>' container reference.
@@ -6702,7 +5828,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getStructuredPropertyRestrictionAxiom()
 	 * @generated
 	 */
-	int STRUCTURED_PROPERTY_RESTRICTION_AXIOM = 69;
+	int STRUCTURED_PROPERTY_RESTRICTION_AXIOM = 59;
 
 	/**
 	 * The feature id for the '<em><b>Owning Classifier</b></em>' container reference.
@@ -6775,7 +5901,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getStructuredPropertyRangeRestrictionAxiom()
 	 * @generated
 	 */
-	int STRUCTURED_PROPERTY_RANGE_RESTRICTION_AXIOM = 70;
+	int STRUCTURED_PROPERTY_RANGE_RESTRICTION_AXIOM = 60;
 
 	/**
 	 * The feature id for the '<em><b>Owning Classifier</b></em>' container reference.
@@ -6866,7 +5992,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getStructuredPropertyCardinalityRestrictionAxiom()
 	 * @generated
 	 */
-	int STRUCTURED_PROPERTY_CARDINALITY_RESTRICTION_AXIOM = 71;
+	int STRUCTURED_PROPERTY_CARDINALITY_RESTRICTION_AXIOM = 61;
 
 	/**
 	 * The feature id for the '<em><b>Owning Classifier</b></em>' container reference.
@@ -6966,7 +6092,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getStructuredPropertyValueRestrictionAxiom()
 	 * @generated
 	 */
-	int STRUCTURED_PROPERTY_VALUE_RESTRICTION_AXIOM = 72;
+	int STRUCTURED_PROPERTY_VALUE_RESTRICTION_AXIOM = 62;
 
 	/**
 	 * The feature id for the '<em><b>Owning Classifier</b></em>' container reference.
@@ -7048,7 +6174,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRelationRestrictionAxiom()
 	 * @generated
 	 */
-	int RELATION_RESTRICTION_AXIOM = 73;
+	int RELATION_RESTRICTION_AXIOM = 63;
 
 	/**
 	 * The feature id for the '<em><b>Relation</b></em>' reference.
@@ -7121,7 +6247,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRelationRangeRestrictionAxiom()
 	 * @generated
 	 */
-	int RELATION_RANGE_RESTRICTION_AXIOM = 74;
+	int RELATION_RANGE_RESTRICTION_AXIOM = 64;
 
 	/**
 	 * The feature id for the '<em><b>Relation</b></em>' reference.
@@ -7212,7 +6338,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRelationCardinalityRestrictionAxiom()
 	 * @generated
 	 */
-	int RELATION_CARDINALITY_RESTRICTION_AXIOM = 75;
+	int RELATION_CARDINALITY_RESTRICTION_AXIOM = 65;
 
 	/**
 	 * The feature id for the '<em><b>Relation</b></em>' reference.
@@ -7312,7 +6438,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRelationTargetRestrictionAxiom()
 	 * @generated
 	 */
-	int RELATION_TARGET_RESTRICTION_AXIOM = 76;
+	int RELATION_TARGET_RESTRICTION_AXIOM = 66;
 
 	/**
 	 * The feature id for the '<em><b>Relation</b></em>' reference.
@@ -7394,7 +6520,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getTypeAssertion()
 	 * @generated
 	 */
-	int TYPE_ASSERTION = 77;
+	int TYPE_ASSERTION = 67;
 
 	/**
 	 * The number of structural features of the '<em>Type Assertion</em>' class.
@@ -7449,7 +6575,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getConceptTypeAssertion()
 	 * @generated
 	 */
-	int CONCEPT_TYPE_ASSERTION = 78;
+	int CONCEPT_TYPE_ASSERTION = 68;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -7531,7 +6657,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRelationTypeAssertion()
 	 * @generated
 	 */
-	int RELATION_TYPE_ASSERTION = 79;
+	int RELATION_TYPE_ASSERTION = 69;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -7613,7 +6739,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getPropertyValueAssertion()
 	 * @generated
 	 */
-	int PROPERTY_VALUE_ASSERTION = 80;
+	int PROPERTY_VALUE_ASSERTION = 70;
 
 	/**
 	 * The feature id for the '<em><b>Owning Instance</b></em>' container reference.
@@ -7695,7 +6821,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getScalarPropertyValueAssertion()
 	 * @generated
 	 */
-	int SCALAR_PROPERTY_VALUE_ASSERTION = 81;
+	int SCALAR_PROPERTY_VALUE_ASSERTION = 71;
 
 	/**
 	 * The feature id for the '<em><b>Owning Instance</b></em>' container reference.
@@ -7795,7 +6921,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getStructuredPropertyValueAssertion()
 	 * @generated
 	 */
-	int STRUCTURED_PROPERTY_VALUE_ASSERTION = 82;
+	int STRUCTURED_PROPERTY_VALUE_ASSERTION = 72;
 
 	/**
 	 * The feature id for the '<em><b>Owning Instance</b></em>' container reference.
@@ -7895,7 +7021,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getLinkAssertion()
 	 * @generated
 	 */
-	int LINK_ASSERTION = 83;
+	int LINK_ASSERTION = 73;
 
 	/**
 	 * The feature id for the '<em><b>Relation</b></em>' reference.
@@ -7977,7 +7103,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getUnaryPredicate()
 	 * @generated
 	 */
-	int UNARY_PREDICATE = 84;
+	int UNARY_PREDICATE = 74;
 
 	/**
 	 * The feature id for the '<em><b>Antecedent Rule</b></em>' container reference.
@@ -8050,7 +7176,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getBinaryPredicate()
 	 * @generated
 	 */
-	int BINARY_PREDICATE = 85;
+	int BINARY_PREDICATE = 75;
 
 	/**
 	 * The feature id for the '<em><b>Antecedent Rule</b></em>' container reference.
@@ -8141,7 +7267,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getTypePredicate()
 	 * @generated
 	 */
-	int TYPE_PREDICATE = 86;
+	int TYPE_PREDICATE = 76;
 
 	/**
 	 * The feature id for the '<em><b>Antecedent Rule</b></em>' container reference.
@@ -8223,7 +7349,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRelationEntityPredicate()
 	 * @generated
 	 */
-	int RELATION_ENTITY_PREDICATE = 87;
+	int RELATION_ENTITY_PREDICATE = 77;
 
 	/**
 	 * The feature id for the '<em><b>Antecedent Rule</b></em>' container reference.
@@ -8332,7 +7458,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getFeaturePredicate()
 	 * @generated
 	 */
-	int FEATURE_PREDICATE = 88;
+	int FEATURE_PREDICATE = 78;
 
 	/**
 	 * The feature id for the '<em><b>Antecedent Rule</b></em>' container reference.
@@ -8441,7 +7567,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getSameAsPredicate()
 	 * @generated
 	 */
-	int SAME_AS_PREDICATE = 89;
+	int SAME_AS_PREDICATE = 79;
 
 	/**
 	 * The feature id for the '<em><b>Antecedent Rule</b></em>' container reference.
@@ -8532,7 +7658,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDifferentFromPredicate()
 	 * @generated
 	 */
-	int DIFFERENT_FROM_PREDICATE = 90;
+	int DIFFERENT_FROM_PREDICATE = 80;
 
 	/**
 	 * The feature id for the '<em><b>Antecedent Rule</b></em>' container reference.
@@ -8623,7 +7749,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getQuotedLiteral()
 	 * @generated
 	 */
-	int QUOTED_LITERAL = 91;
+	int QUOTED_LITERAL = 81;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -8696,7 +7822,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getIntegerLiteral()
 	 * @generated
 	 */
-	int INTEGER_LITERAL = 92;
+	int INTEGER_LITERAL = 82;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -8751,7 +7877,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDecimalLiteral()
 	 * @generated
 	 */
-	int DECIMAL_LITERAL = 93;
+	int DECIMAL_LITERAL = 83;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -8806,7 +7932,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDoubleLiteral()
 	 * @generated
 	 */
-	int DOUBLE_LITERAL = 94;
+	int DOUBLE_LITERAL = 84;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -8861,7 +7987,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getBooleanLiteral()
 	 * @generated
 	 */
-	int BOOLEAN_LITERAL = 95;
+	int BOOLEAN_LITERAL = 85;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -8916,7 +8042,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getReference()
 	 * @generated
 	 */
-	int REFERENCE = 96;
+	int REFERENCE = 86;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -8971,7 +8097,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getSpecializableTermReference()
 	 * @generated
 	 */
-	int SPECIALIZABLE_TERM_REFERENCE = 97;
+	int SPECIALIZABLE_TERM_REFERENCE = 87;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -9044,7 +8170,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getClassifierReference()
 	 * @generated
 	 */
-	int CLASSIFIER_REFERENCE = 98;
+	int CLASSIFIER_REFERENCE = 88;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -9126,7 +8252,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getEntityReference()
 	 * @generated
 	 */
-	int ENTITY_REFERENCE = 99;
+	int ENTITY_REFERENCE = 89;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -9226,7 +8352,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getAspectReference()
 	 * @generated
 	 */
-	int ASPECT_REFERENCE = 100;
+	int ASPECT_REFERENCE = 90;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -9335,7 +8461,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getConceptReference()
 	 * @generated
 	 */
-	int CONCEPT_REFERENCE = 101;
+	int CONCEPT_REFERENCE = 91;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -9444,7 +8570,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRelationEntityReference()
 	 * @generated
 	 */
-	int RELATION_ENTITY_REFERENCE = 102;
+	int RELATION_ENTITY_REFERENCE = 92;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -9553,7 +8679,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getStructureReference()
 	 * @generated
 	 */
-	int STRUCTURE_REFERENCE = 103;
+	int STRUCTURE_REFERENCE = 93;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -9644,7 +8770,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getAnnotationPropertyReference()
 	 * @generated
 	 */
-	int ANNOTATION_PROPERTY_REFERENCE = 104;
+	int ANNOTATION_PROPERTY_REFERENCE = 94;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -9726,7 +8852,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getScalarPropertyReference()
 	 * @generated
 	 */
-	int SCALAR_PROPERTY_REFERENCE = 105;
+	int SCALAR_PROPERTY_REFERENCE = 95;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -9808,7 +8934,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getStructuredPropertyReference()
 	 * @generated
 	 */
-	int STRUCTURED_PROPERTY_REFERENCE = 106;
+	int STRUCTURED_PROPERTY_REFERENCE = 96;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -9890,7 +9016,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getFacetedScalarReference()
 	 * @generated
 	 */
-	int FACETED_SCALAR_REFERENCE = 107;
+	int FACETED_SCALAR_REFERENCE = 97;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -9972,7 +9098,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getEnumeratedScalarReference()
 	 * @generated
 	 */
-	int ENUMERATED_SCALAR_REFERENCE = 108;
+	int ENUMERATED_SCALAR_REFERENCE = 98;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -10054,7 +9180,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRelationReference()
 	 * @generated
 	 */
-	int RELATION_REFERENCE = 109;
+	int RELATION_REFERENCE = 99;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -10127,7 +9253,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRuleReference()
 	 * @generated
 	 */
-	int RULE_REFERENCE = 110;
+	int RULE_REFERENCE = 100;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -10200,7 +9326,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getNamedInstanceReference()
 	 * @generated
 	 */
-	int NAMED_INSTANCE_REFERENCE = 111;
+	int NAMED_INSTANCE_REFERENCE = 101;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -10282,7 +9408,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getConceptInstanceReference()
 	 * @generated
 	 */
-	int CONCEPT_INSTANCE_REFERENCE = 112;
+	int CONCEPT_INSTANCE_REFERENCE = 102;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -10382,7 +9508,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRelationInstanceReference()
 	 * @generated
 	 */
-	int RELATION_INSTANCE_REFERENCE = 113;
+	int RELATION_INSTANCE_REFERENCE = 103;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -10482,7 +9608,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getSeparatorKind()
 	 * @generated
 	 */
-	int SEPARATOR_KIND = 114;
+	int SEPARATOR_KIND = 104;
 
 	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.RangeRestrictionKind <em>Range Restriction Kind</em>}' enum.
@@ -10492,7 +9618,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRangeRestrictionKind()
 	 * @generated
 	 */
-	int RANGE_RESTRICTION_KIND = 115;
+	int RANGE_RESTRICTION_KIND = 105;
 
 	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.CardinalityRestrictionKind <em>Cardinality Restriction Kind</em>}' enum.
@@ -10502,7 +9628,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getCardinalityRestrictionKind()
 	 * @generated
 	 */
-	int CARDINALITY_RESTRICTION_KIND = 116;
+	int CARDINALITY_RESTRICTION_KIND = 106;
 
 	/**
 	 * The meta object id for the '<em>Unsigned Int</em>' data type.
@@ -10511,7 +9637,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getUnsignedInt()
 	 * @generated
 	 */
-	int UNSIGNED_INT = 117;
+	int UNSIGNED_INT = 107;
 
 	/**
 	 * The meta object id for the '<em>Unsigned Integer</em>' data type.
@@ -10521,7 +9647,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getUnsignedInteger()
 	 * @generated
 	 */
-	int UNSIGNED_INTEGER = 118;
+	int UNSIGNED_INTEGER = 108;
 
 	/**
 	 * The meta object id for the '<em>Decimal</em>' data type.
@@ -10531,7 +9657,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDecimal()
 	 * @generated
 	 */
-	int DECIMAL = 119;
+	int DECIMAL = 109;
 
 	/**
 	 * The meta object id for the '<em>ID</em>' data type.
@@ -10541,7 +9667,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getID()
 	 * @generated
 	 */
-	int ID = 120;
+	int ID = 110;
 
 	/**
 	 * The meta object id for the '<em>Namespace</em>' data type.
@@ -10551,7 +9677,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getNamespace()
 	 * @generated
 	 */
-	int NAMESPACE = 121;
+	int NAMESPACE = 111;
 
 
 	/**
@@ -10713,6 +9839,17 @@ public interface OmlPackage extends EPackage {
 	EAttribute getImport_Prefix();
 
 	/**
+	 * Returns the meta object for the container reference '{@link io.opencaesar.oml.Import#getOwningOntology <em>Owning Ontology</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Owning Ontology</em>'.
+	 * @see io.opencaesar.oml.Import#getOwningOntology()
+	 * @see #getImport()
+	 * @generated
+	 */
+	EReference getImport_OwningOntology();
+
+	/**
 	 * Returns the meta object for the '{@link io.opencaesar.oml.Import#getIri() <em>Get Iri</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -10858,6 +9995,17 @@ public interface OmlPackage extends EPackage {
 	EAttribute getOntology_Prefix();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link io.opencaesar.oml.Ontology#getOwnedImports <em>Owned Imports</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Owned Imports</em>'.
+	 * @see io.opencaesar.oml.Ontology#getOwnedImports()
+	 * @see #getOntology()
+	 * @generated
+	 */
+	EReference getOntology_OwnedImports();
+
+	/**
 	 * Returns the meta object for the '{@link io.opencaesar.oml.Ontology#getIri() <em>Get Iri</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -10949,17 +10097,6 @@ public interface OmlPackage extends EPackage {
 	EClass getVocabulary();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link io.opencaesar.oml.Vocabulary#getOwnedImports <em>Owned Imports</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Owned Imports</em>'.
-	 * @see io.opencaesar.oml.Vocabulary#getOwnedImports()
-	 * @see #getVocabulary()
-	 * @generated
-	 */
-	EReference getVocabulary_OwnedImports();
-
-	/**
 	 * Returns the meta object for the containment reference list '{@link io.opencaesar.oml.Vocabulary#getOwnedStatements <em>Owned Statements</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -10981,17 +10118,6 @@ public interface OmlPackage extends EPackage {
 	EClass getVocabularyBundle();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link io.opencaesar.oml.VocabularyBundle#getOwnedImports <em>Owned Imports</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Owned Imports</em>'.
-	 * @see io.opencaesar.oml.VocabularyBundle#getOwnedImports()
-	 * @see #getVocabularyBundle()
-	 * @generated
-	 */
-	EReference getVocabularyBundle_OwnedImports();
-
-	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.Description <em>Description</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -11000,17 +10126,6 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getDescription();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link io.opencaesar.oml.Description#getOwnedImports <em>Owned Imports</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Owned Imports</em>'.
-	 * @see io.opencaesar.oml.Description#getOwnedImports()
-	 * @see #getDescription()
-	 * @generated
-	 */
-	EReference getDescription_OwnedImports();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link io.opencaesar.oml.Description#getOwnedStatements <em>Owned Statements</em>}'.
@@ -11034,189 +10149,34 @@ public interface OmlPackage extends EPackage {
 	EClass getDescriptionBundle();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link io.opencaesar.oml.DescriptionBundle#getOwnedImports <em>Owned Imports</em>}'.
+	 * Returns the meta object for class '{@link io.opencaesar.oml.Extension <em>Extension</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Owned Imports</em>'.
-	 * @see io.opencaesar.oml.DescriptionBundle#getOwnedImports()
-	 * @see #getDescriptionBundle()
+	 * @return the meta object for class '<em>Extension</em>'.
+	 * @see io.opencaesar.oml.Extension
 	 * @generated
 	 */
-	EReference getDescriptionBundle_OwnedImports();
+	EClass getExtension();
 
 	/**
-	 * Returns the meta object for class '{@link io.opencaesar.oml.VocabularyImport <em>Vocabulary Import</em>}'.
+	 * Returns the meta object for class '{@link io.opencaesar.oml.Usage <em>Usage</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Vocabulary Import</em>'.
-	 * @see io.opencaesar.oml.VocabularyImport
+	 * @return the meta object for class '<em>Usage</em>'.
+	 * @see io.opencaesar.oml.Usage
 	 * @generated
 	 */
-	EClass getVocabularyImport();
+	EClass getUsage();
 
 	/**
-	 * Returns the meta object for the container reference '{@link io.opencaesar.oml.VocabularyImport#getOwningVocabulary <em>Owning Vocabulary</em>}'.
+	 * Returns the meta object for class '{@link io.opencaesar.oml.Inclusion <em>Inclusion</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Owning Vocabulary</em>'.
-	 * @see io.opencaesar.oml.VocabularyImport#getOwningVocabulary()
-	 * @see #getVocabularyImport()
+	 * @return the meta object for class '<em>Inclusion</em>'.
+	 * @see io.opencaesar.oml.Inclusion
 	 * @generated
 	 */
-	EReference getVocabularyImport_OwningVocabulary();
-
-	/**
-	 * Returns the meta object for class '{@link io.opencaesar.oml.VocabularyBundleImport <em>Vocabulary Bundle Import</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Vocabulary Bundle Import</em>'.
-	 * @see io.opencaesar.oml.VocabularyBundleImport
-	 * @generated
-	 */
-	EClass getVocabularyBundleImport();
-
-	/**
-	 * Returns the meta object for the container reference '{@link io.opencaesar.oml.VocabularyBundleImport#getOwningVocabularyBundle <em>Owning Vocabulary Bundle</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Owning Vocabulary Bundle</em>'.
-	 * @see io.opencaesar.oml.VocabularyBundleImport#getOwningVocabularyBundle()
-	 * @see #getVocabularyBundleImport()
-	 * @generated
-	 */
-	EReference getVocabularyBundleImport_OwningVocabularyBundle();
-
-	/**
-	 * Returns the meta object for class '{@link io.opencaesar.oml.DescriptionImport <em>Description Import</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Description Import</em>'.
-	 * @see io.opencaesar.oml.DescriptionImport
-	 * @generated
-	 */
-	EClass getDescriptionImport();
-
-	/**
-	 * Returns the meta object for the container reference '{@link io.opencaesar.oml.DescriptionImport#getOwningDescription <em>Owning Description</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Owning Description</em>'.
-	 * @see io.opencaesar.oml.DescriptionImport#getOwningDescription()
-	 * @see #getDescriptionImport()
-	 * @generated
-	 */
-	EReference getDescriptionImport_OwningDescription();
-
-	/**
-	 * Returns the meta object for class '{@link io.opencaesar.oml.DescriptionBundleImport <em>Description Bundle Import</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Description Bundle Import</em>'.
-	 * @see io.opencaesar.oml.DescriptionBundleImport
-	 * @generated
-	 */
-	EClass getDescriptionBundleImport();
-
-	/**
-	 * Returns the meta object for the container reference '{@link io.opencaesar.oml.DescriptionBundleImport#getOwningDescriptionBundle <em>Owning Description Bundle</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Owning Description Bundle</em>'.
-	 * @see io.opencaesar.oml.DescriptionBundleImport#getOwningDescriptionBundle()
-	 * @see #getDescriptionBundleImport()
-	 * @generated
-	 */
-	EReference getDescriptionBundleImport_OwningDescriptionBundle();
-
-	/**
-	 * Returns the meta object for class '{@link io.opencaesar.oml.VocabularyExtension <em>Vocabulary Extension</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Vocabulary Extension</em>'.
-	 * @see io.opencaesar.oml.VocabularyExtension
-	 * @generated
-	 */
-	EClass getVocabularyExtension();
-
-	/**
-	 * Returns the meta object for class '{@link io.opencaesar.oml.VocabularyUsage <em>Vocabulary Usage</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Vocabulary Usage</em>'.
-	 * @see io.opencaesar.oml.VocabularyUsage
-	 * @generated
-	 */
-	EClass getVocabularyUsage();
-
-	/**
-	 * Returns the meta object for class '{@link io.opencaesar.oml.VocabularyBundleExtension <em>Vocabulary Bundle Extension</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Vocabulary Bundle Extension</em>'.
-	 * @see io.opencaesar.oml.VocabularyBundleExtension
-	 * @generated
-	 */
-	EClass getVocabularyBundleExtension();
-
-	/**
-	 * Returns the meta object for class '{@link io.opencaesar.oml.VocabularyBundleInclusion <em>Vocabulary Bundle Inclusion</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Vocabulary Bundle Inclusion</em>'.
-	 * @see io.opencaesar.oml.VocabularyBundleInclusion
-	 * @generated
-	 */
-	EClass getVocabularyBundleInclusion();
-
-	/**
-	 * Returns the meta object for class '{@link io.opencaesar.oml.DescriptionExtension <em>Description Extension</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Description Extension</em>'.
-	 * @see io.opencaesar.oml.DescriptionExtension
-	 * @generated
-	 */
-	EClass getDescriptionExtension();
-
-	/**
-	 * Returns the meta object for class '{@link io.opencaesar.oml.DescriptionUsage <em>Description Usage</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Description Usage</em>'.
-	 * @see io.opencaesar.oml.DescriptionUsage
-	 * @generated
-	 */
-	EClass getDescriptionUsage();
-
-	/**
-	 * Returns the meta object for class '{@link io.opencaesar.oml.DescriptionBundleExtension <em>Description Bundle Extension</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Description Bundle Extension</em>'.
-	 * @see io.opencaesar.oml.DescriptionBundleExtension
-	 * @generated
-	 */
-	EClass getDescriptionBundleExtension();
-
-	/**
-	 * Returns the meta object for class '{@link io.opencaesar.oml.DescriptionBundleInclusion <em>Description Bundle Inclusion</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Description Bundle Inclusion</em>'.
-	 * @see io.opencaesar.oml.DescriptionBundleInclusion
-	 * @generated
-	 */
-	EClass getDescriptionBundleInclusion();
-
-	/**
-	 * Returns the meta object for class '{@link io.opencaesar.oml.DescriptionBundleUsage <em>Description Bundle Usage</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Description Bundle Usage</em>'.
-	 * @see io.opencaesar.oml.DescriptionBundleUsage
-	 * @generated
-	 */
-	EClass getDescriptionBundleUsage();
+	EClass getInclusion();
 
 	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.VocabularyStatement <em>Vocabulary Statement</em>}'.
@@ -13923,6 +12883,14 @@ public interface OmlPackage extends EPackage {
 		EAttribute IMPORT__PREFIX = eINSTANCE.getImport_Prefix();
 
 		/**
+		 * The meta object literal for the '<em><b>Owning Ontology</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference IMPORT__OWNING_ONTOLOGY = eINSTANCE.getImport_OwningOntology();
+
+		/**
 		 * The meta object literal for the '<em><b>Get Iri</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -14049,6 +13017,14 @@ public interface OmlPackage extends EPackage {
 		EAttribute ONTOLOGY__PREFIX = eINSTANCE.getOntology_Prefix();
 
 		/**
+		 * The meta object literal for the '<em><b>Owned Imports</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ONTOLOGY__OWNED_IMPORTS = eINSTANCE.getOntology_OwnedImports();
+
+		/**
 		 * The meta object literal for the '<em><b>Get Iri</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -14129,14 +13105,6 @@ public interface OmlPackage extends EPackage {
 		EClass VOCABULARY = eINSTANCE.getVocabulary();
 
 		/**
-		 * The meta object literal for the '<em><b>Owned Imports</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference VOCABULARY__OWNED_IMPORTS = eINSTANCE.getVocabulary_OwnedImports();
-
-		/**
 		 * The meta object literal for the '<em><b>Owned Statements</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -14155,14 +13123,6 @@ public interface OmlPackage extends EPackage {
 		EClass VOCABULARY_BUNDLE = eINSTANCE.getVocabularyBundle();
 
 		/**
-		 * The meta object literal for the '<em><b>Owned Imports</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference VOCABULARY_BUNDLE__OWNED_IMPORTS = eINSTANCE.getVocabularyBundle_OwnedImports();
-
-		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.DescriptionImpl <em>Description</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -14171,14 +13131,6 @@ public interface OmlPackage extends EPackage {
 		 * @generated
 		 */
 		EClass DESCRIPTION = eINSTANCE.getDescription();
-
-		/**
-		 * The meta object literal for the '<em><b>Owned Imports</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference DESCRIPTION__OWNED_IMPORTS = eINSTANCE.getDescription_OwnedImports();
 
 		/**
 		 * The meta object literal for the '<em><b>Owned Statements</b></em>' containment reference list feature.
@@ -14199,174 +13151,34 @@ public interface OmlPackage extends EPackage {
 		EClass DESCRIPTION_BUNDLE = eINSTANCE.getDescriptionBundle();
 
 		/**
-		 * The meta object literal for the '<em><b>Owned Imports</b></em>' containment reference list feature.
+		 * The meta object literal for the '{@link io.opencaesar.oml.impl.ExtensionImpl <em>Extension</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
+		 * @see io.opencaesar.oml.impl.ExtensionImpl
+		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getExtension()
 		 * @generated
 		 */
-		EReference DESCRIPTION_BUNDLE__OWNED_IMPORTS = eINSTANCE.getDescriptionBundle_OwnedImports();
+		EClass EXTENSION = eINSTANCE.getExtension();
 
 		/**
-		 * The meta object literal for the '{@link io.opencaesar.oml.impl.VocabularyImportImpl <em>Vocabulary Import</em>}' class.
+		 * The meta object literal for the '{@link io.opencaesar.oml.impl.UsageImpl <em>Usage</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see io.opencaesar.oml.impl.VocabularyImportImpl
-		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getVocabularyImport()
+		 * @see io.opencaesar.oml.impl.UsageImpl
+		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getUsage()
 		 * @generated
 		 */
-		EClass VOCABULARY_IMPORT = eINSTANCE.getVocabularyImport();
+		EClass USAGE = eINSTANCE.getUsage();
 
 		/**
-		 * The meta object literal for the '<em><b>Owning Vocabulary</b></em>' container reference feature.
+		 * The meta object literal for the '{@link io.opencaesar.oml.impl.InclusionImpl <em>Inclusion</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
+		 * @see io.opencaesar.oml.impl.InclusionImpl
+		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getInclusion()
 		 * @generated
 		 */
-		EReference VOCABULARY_IMPORT__OWNING_VOCABULARY = eINSTANCE.getVocabularyImport_OwningVocabulary();
-
-		/**
-		 * The meta object literal for the '{@link io.opencaesar.oml.impl.VocabularyBundleImportImpl <em>Vocabulary Bundle Import</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see io.opencaesar.oml.impl.VocabularyBundleImportImpl
-		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getVocabularyBundleImport()
-		 * @generated
-		 */
-		EClass VOCABULARY_BUNDLE_IMPORT = eINSTANCE.getVocabularyBundleImport();
-
-		/**
-		 * The meta object literal for the '<em><b>Owning Vocabulary Bundle</b></em>' container reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference VOCABULARY_BUNDLE_IMPORT__OWNING_VOCABULARY_BUNDLE = eINSTANCE.getVocabularyBundleImport_OwningVocabularyBundle();
-
-		/**
-		 * The meta object literal for the '{@link io.opencaesar.oml.impl.DescriptionImportImpl <em>Description Import</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see io.opencaesar.oml.impl.DescriptionImportImpl
-		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDescriptionImport()
-		 * @generated
-		 */
-		EClass DESCRIPTION_IMPORT = eINSTANCE.getDescriptionImport();
-
-		/**
-		 * The meta object literal for the '<em><b>Owning Description</b></em>' container reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference DESCRIPTION_IMPORT__OWNING_DESCRIPTION = eINSTANCE.getDescriptionImport_OwningDescription();
-
-		/**
-		 * The meta object literal for the '{@link io.opencaesar.oml.impl.DescriptionBundleImportImpl <em>Description Bundle Import</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see io.opencaesar.oml.impl.DescriptionBundleImportImpl
-		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDescriptionBundleImport()
-		 * @generated
-		 */
-		EClass DESCRIPTION_BUNDLE_IMPORT = eINSTANCE.getDescriptionBundleImport();
-
-		/**
-		 * The meta object literal for the '<em><b>Owning Description Bundle</b></em>' container reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference DESCRIPTION_BUNDLE_IMPORT__OWNING_DESCRIPTION_BUNDLE = eINSTANCE.getDescriptionBundleImport_OwningDescriptionBundle();
-
-		/**
-		 * The meta object literal for the '{@link io.opencaesar.oml.impl.VocabularyExtensionImpl <em>Vocabulary Extension</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see io.opencaesar.oml.impl.VocabularyExtensionImpl
-		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getVocabularyExtension()
-		 * @generated
-		 */
-		EClass VOCABULARY_EXTENSION = eINSTANCE.getVocabularyExtension();
-
-		/**
-		 * The meta object literal for the '{@link io.opencaesar.oml.impl.VocabularyUsageImpl <em>Vocabulary Usage</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see io.opencaesar.oml.impl.VocabularyUsageImpl
-		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getVocabularyUsage()
-		 * @generated
-		 */
-		EClass VOCABULARY_USAGE = eINSTANCE.getVocabularyUsage();
-
-		/**
-		 * The meta object literal for the '{@link io.opencaesar.oml.impl.VocabularyBundleExtensionImpl <em>Vocabulary Bundle Extension</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see io.opencaesar.oml.impl.VocabularyBundleExtensionImpl
-		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getVocabularyBundleExtension()
-		 * @generated
-		 */
-		EClass VOCABULARY_BUNDLE_EXTENSION = eINSTANCE.getVocabularyBundleExtension();
-
-		/**
-		 * The meta object literal for the '{@link io.opencaesar.oml.impl.VocabularyBundleInclusionImpl <em>Vocabulary Bundle Inclusion</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see io.opencaesar.oml.impl.VocabularyBundleInclusionImpl
-		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getVocabularyBundleInclusion()
-		 * @generated
-		 */
-		EClass VOCABULARY_BUNDLE_INCLUSION = eINSTANCE.getVocabularyBundleInclusion();
-
-		/**
-		 * The meta object literal for the '{@link io.opencaesar.oml.impl.DescriptionExtensionImpl <em>Description Extension</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see io.opencaesar.oml.impl.DescriptionExtensionImpl
-		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDescriptionExtension()
-		 * @generated
-		 */
-		EClass DESCRIPTION_EXTENSION = eINSTANCE.getDescriptionExtension();
-
-		/**
-		 * The meta object literal for the '{@link io.opencaesar.oml.impl.DescriptionUsageImpl <em>Description Usage</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see io.opencaesar.oml.impl.DescriptionUsageImpl
-		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDescriptionUsage()
-		 * @generated
-		 */
-		EClass DESCRIPTION_USAGE = eINSTANCE.getDescriptionUsage();
-
-		/**
-		 * The meta object literal for the '{@link io.opencaesar.oml.impl.DescriptionBundleExtensionImpl <em>Description Bundle Extension</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see io.opencaesar.oml.impl.DescriptionBundleExtensionImpl
-		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDescriptionBundleExtension()
-		 * @generated
-		 */
-		EClass DESCRIPTION_BUNDLE_EXTENSION = eINSTANCE.getDescriptionBundleExtension();
-
-		/**
-		 * The meta object literal for the '{@link io.opencaesar.oml.impl.DescriptionBundleInclusionImpl <em>Description Bundle Inclusion</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see io.opencaesar.oml.impl.DescriptionBundleInclusionImpl
-		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDescriptionBundleInclusion()
-		 * @generated
-		 */
-		EClass DESCRIPTION_BUNDLE_INCLUSION = eINSTANCE.getDescriptionBundleInclusion();
-
-		/**
-		 * The meta object literal for the '{@link io.opencaesar.oml.impl.DescriptionBundleUsageImpl <em>Description Bundle Usage</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see io.opencaesar.oml.impl.DescriptionBundleUsageImpl
-		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDescriptionBundleUsage()
-		 * @generated
-		 */
-		EClass DESCRIPTION_BUNDLE_USAGE = eINSTANCE.getDescriptionBundleUsage();
+		EClass INCLUSION = eINSTANCE.getInclusion();
 
 		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.VocabularyStatementImpl <em>Vocabulary Statement</em>}' class.

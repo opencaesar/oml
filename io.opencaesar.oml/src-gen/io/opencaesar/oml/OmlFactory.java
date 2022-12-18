@@ -83,85 +83,31 @@ public interface OmlFactory extends EFactory {
 	DescriptionBundle createDescriptionBundle();
 
 	/**
-	 * Returns a new object of class '<em>Vocabulary Extension</em>'.
+	 * Returns a new object of class '<em>Extension</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Vocabulary Extension</em>'.
+	 * @return a new object of class '<em>Extension</em>'.
 	 * @generated
 	 */
-	VocabularyExtension createVocabularyExtension();
+	Extension createExtension();
 
 	/**
-	 * Returns a new object of class '<em>Vocabulary Usage</em>'.
+	 * Returns a new object of class '<em>Usage</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Vocabulary Usage</em>'.
+	 * @return a new object of class '<em>Usage</em>'.
 	 * @generated
 	 */
-	VocabularyUsage createVocabularyUsage();
+	Usage createUsage();
 
 	/**
-	 * Returns a new object of class '<em>Vocabulary Bundle Extension</em>'.
+	 * Returns a new object of class '<em>Inclusion</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Vocabulary Bundle Extension</em>'.
+	 * @return a new object of class '<em>Inclusion</em>'.
 	 * @generated
 	 */
-	VocabularyBundleExtension createVocabularyBundleExtension();
-
-	/**
-	 * Returns a new object of class '<em>Vocabulary Bundle Inclusion</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Vocabulary Bundle Inclusion</em>'.
-	 * @generated
-	 */
-	VocabularyBundleInclusion createVocabularyBundleInclusion();
-
-	/**
-	 * Returns a new object of class '<em>Description Extension</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Description Extension</em>'.
-	 * @generated
-	 */
-	DescriptionExtension createDescriptionExtension();
-
-	/**
-	 * Returns a new object of class '<em>Description Usage</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Description Usage</em>'.
-	 * @generated
-	 */
-	DescriptionUsage createDescriptionUsage();
-
-	/**
-	 * Returns a new object of class '<em>Description Bundle Extension</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Description Bundle Extension</em>'.
-	 * @generated
-	 */
-	DescriptionBundleExtension createDescriptionBundleExtension();
-
-	/**
-	 * Returns a new object of class '<em>Description Bundle Inclusion</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Description Bundle Inclusion</em>'.
-	 * @generated
-	 */
-	DescriptionBundleInclusion createDescriptionBundleInclusion();
-
-	/**
-	 * Returns a new object of class '<em>Description Bundle Usage</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Description Bundle Usage</em>'.
-	 * @generated
-	 */
-	DescriptionBundleUsage createDescriptionBundleUsage();
+	Inclusion createInclusion();
 
 	/**
 	 * Returns a new object of class '<em>Rule</em>'.

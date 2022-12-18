@@ -47,19 +47,16 @@ import io.opencaesar.oml.ConceptTypeAssertion;
 import io.opencaesar.oml.DecimalLiteral;
 import io.opencaesar.oml.Description;
 import io.opencaesar.oml.DescriptionBundle;
-import io.opencaesar.oml.DescriptionBundleExtension;
-import io.opencaesar.oml.DescriptionBundleInclusion;
-import io.opencaesar.oml.DescriptionBundleUsage;
-import io.opencaesar.oml.DescriptionExtension;
-import io.opencaesar.oml.DescriptionUsage;
 import io.opencaesar.oml.DifferentFromPredicate;
 import io.opencaesar.oml.DoubleLiteral;
 import io.opencaesar.oml.Element;
 import io.opencaesar.oml.EnumeratedScalar;
+import io.opencaesar.oml.Extension;
 import io.opencaesar.oml.FacetedScalar;
 import io.opencaesar.oml.FeaturePredicate;
 import io.opencaesar.oml.ForwardRelation;
 import io.opencaesar.oml.IdentifiedElement;
+import io.opencaesar.oml.Inclusion;
 import io.opencaesar.oml.IntegerLiteral;
 import io.opencaesar.oml.KeyAxiom;
 import io.opencaesar.oml.LinkAssertion;
@@ -97,12 +94,9 @@ import io.opencaesar.oml.StructuredPropertyRangeRestrictionAxiom;
 import io.opencaesar.oml.StructuredPropertyValueAssertion;
 import io.opencaesar.oml.StructuredPropertyValueRestrictionAxiom;
 import io.opencaesar.oml.TypePredicate;
+import io.opencaesar.oml.Usage;
 import io.opencaesar.oml.Vocabulary;
 import io.opencaesar.oml.VocabularyBundle;
-import io.opencaesar.oml.VocabularyBundleExtension;
-import io.opencaesar.oml.VocabularyBundleInclusion;
-import io.opencaesar.oml.VocabularyExtension;
-import io.opencaesar.oml.VocabularyUsage;
 
 /**
  * The <b>Builder</b> for the model. This builder uses the {@link OmlWrite} API and provides additional features.
@@ -726,148 +720,52 @@ public class OmlBuilder {
         return null;
     }
     
-    // VocabularyExtension
+    // Extension
     
     /**
-     * Creates a vocabulary extension and adds it to the given vocabulary
+     * Creates an extension and adds it to the given ontology
      * 
-     * @param vocabulary the context vocabulary
-     * @param extenedVocabularyIri the IRI of the extended vocabulary
-     * @param extenedVocabularySeparator the separator of the extended vocabulary (optional)
-     * @param extenedVocabularyPrefix the prefix of the extended vocabulary (optional)
-     * @return a vocabulary extension that is added to the given vocabulary
+     * @param ontology the extending ontology
+     * @param extendedOntologyIri the IRI of the extended ontology
+     * @param extendedOntologySeparator the separator of the extended ontology (optional)
+     * @param extendedOntologyPrefix the prefix of the extended ontology (optional)
+     * @return an extension that is added to the extending ontology
      */
-    public VocabularyExtension addVocabularyExtension(Vocabulary vocabulary, String extenedVocabularyIri, SeparatorKind extenedVocabularySeparator, String extenedVocabularyPrefix) {
-        final VocabularyExtension extension = OmlWrite.addVocabularyExtension(vocabulary, extenedVocabularyIri, extenedVocabularySeparator, extenedVocabularyPrefix);
+    public Extension addExtension(Ontology ontology, String extendedOntologyIri, SeparatorKind extendedOntologySeparator, String extendedOntologyPrefix) {
+        final Extension extension = OmlWrite.addExtension(ontology, extendedOntologyIri, extendedOntologySeparator, extendedOntologyPrefix);
         return extension;
     }
 
-    // VocabularyUsage
+    // Usage
     
     /**
-     * Creates a vocabulary usage and adds it to the given vocabulary
+     * Creates a usage and adds it to the given ontology
      * 
-     * @param vocabulary the context vocabulary
-     * @param usedDescriptionBoxIri the IRI of the used description box
-     * @param usedDescriptionBoxSeparator the separator of the used description box (optional)
-     * @param usedDescriptionBoxPrefix the prefix of the used description box (optional)
-     * @return a vocabulary usage that is added to the given vocabulary
+     * @param ontology the using ontology
+     * @param usedOntologyIri the IRI of the used ontology
+     * @param usedOntologySeparator the separator of the used ontology (optional)
+     * @param usedOntologyPrefix the prefix of the used ontology (optional)
+     * @return a usage that is added to the using ontology
      */
-    public VocabularyUsage addVocabularyUsage(Vocabulary vocabulary, String usedDescriptionBoxIri, SeparatorKind usedDescriptionBoxSeparator, String usedDescriptionBoxPrefix) {
-        final VocabularyUsage usage = OmlWrite.addVocabularyUsage(vocabulary, usedDescriptionBoxIri, usedDescriptionBoxSeparator, usedDescriptionBoxPrefix);
+    public Usage addUsage(Ontology ontology, String usedOntologyIri, SeparatorKind usedOntologySeparator, String usedOntologyPrefix) {
+        final Usage usage = OmlWrite.addUsage(ontology, usedOntologyIri, usedOntologySeparator, usedOntologyPrefix);
         return usage;
     }
 
-    // VocabularyBundleExtension
+    // Inclusion
     
     /**
-     * Creates a vocabulary bundle extension and adds it to the given vocabulary bundle
+     * Creates an inclusion and adds it to the given ontology
      * 
-     * @param bundle the context vocabulary bundle
-     * @param extenedVocabularyBundleIri the IRI of the extended vocabulary bundle
-     * @param extenedVocabularyBundleSeparator the separator of the extended vocabulary bundle (optional)
-     * @param extenedVocabularyBundlePrefix the prefix of the extended vocabulary bundle (optional)
-     * @return a vocabulary bundle extension that is added to the given vocabulary bundle
+     * @param ontology the including ontology
+     * @param includedOntologyIri the IRI of the included ontology
+     * @param includedOntologySeparator the separator of the included ontology (optional)
+     * @param includedOntologyPrefix the prefix of the included ontology (optional)
+     * @return an inclusion that is added to the including ontology
      */
-    public VocabularyBundleExtension addVocabularyBundleExtension(VocabularyBundle bundle, String extenedVocabularyBundleIri, SeparatorKind extenedVocabularyBundleSeparator, String extenedVocabularyBundlePrefix) {
-        final VocabularyBundleExtension extension = OmlWrite.addVocabularyBundleExtension(bundle, extenedVocabularyBundleIri, extenedVocabularyBundleSeparator, extenedVocabularyBundlePrefix);
-        return extension;
-    }
-
-    // VocabularyBundleInclusion
-    
-    /**
-     * Creates a vocabulary bundle inclusion and adds it to the given vocabulary bundle
-     * 
-     * @param bundle the context vocabulary bundle
-     * @param includedVocabularyIri the IRI of the included vocabulary
-     * @param includedVocabularySeparator the separator of the included vocabulary (optional)
-     * @param includedVocabularyPrefix the prefix of the included vocabulary (optional)
-     * @return a vocabulary bundle inclusion that is added to the given vocabulary bundle
-     */
-    public VocabularyBundleInclusion addVocabularyBundleInclusion(VocabularyBundle bundle, String includedVocabularyIri, SeparatorKind includedVocabularySeparator, String includedVocabularyPrefix) {
-        final VocabularyBundleInclusion inclusion = OmlWrite.addVocabularyBundleInclusion(bundle, includedVocabularyIri, includedVocabularySeparator, includedVocabularyPrefix);
+    public Inclusion addInclusion(Ontology ontology, String includedOntologyIri, SeparatorKind includedOntologySeparator, String includedOntologyPrefix) {
+        final Inclusion inclusion = OmlWrite.addInclusion(ontology, includedOntologyIri, includedOntologySeparator, includedOntologyPrefix);
         return inclusion;
-    }
-
-    // DescriptionExtension
-
-    /**
-     * Creates a description extension and adds it to the given description
-     * 
-     * @param description the context description
-     * @param extenedDescriptionIri the IRI of the extended description
-     * @param extenedDescriptionSeparator the separator of the extended description (optional)
-     * @param extenedDescriiptionPrefix the prefix of the extended description (optional)
-     * @return a description extension that is added to the given description
-     */
-    public DescriptionExtension addDescriptionExtension(Description description, String extenedDescriptionIri, SeparatorKind extenedDescriptionSeparator, String extenedDescriiptionPrefix) {
-        final DescriptionExtension extension = OmlWrite.addDescriptionExtension(description, extenedDescriptionIri, extenedDescriptionSeparator, extenedDescriiptionPrefix);
-        return extension;
-    }
-    
-    // DescriptionUsage
-
-    /**
-     * Creates a description usage and adds it to the given description
-     * 
-     * @param description the context description
-     * @param usedVocabularyBoxIri the IRI of the used vocabulary box
-     * @param usedVocabularyBoxSeparator the separator of the used vocabulary box (optional)
-     * @param usedVocabularyBoxPrefix the prefix of the used vocabulary box (optional)
-     * @return a description usage that is added to the given description
-     */
-    public DescriptionUsage addDescriptionUsage(Description description, String usedVocabularyBoxIri, SeparatorKind usedVocabularyBoxSeparator, String usedVocabularyBoxPrefix) {
-        final DescriptionUsage usage = OmlWrite.addDescriptionUsage(description, usedVocabularyBoxIri, usedVocabularyBoxSeparator, usedVocabularyBoxPrefix);
-        return usage;
-    }
-    
-    // DescriptionBundleExtension
-    
-    /**
-     * Creates a description bundle extension and adds it to the given description bundle
-     * 
-     * @param bundle the context description bundle
-     * @param extenedDescriptionBundleIri the IRI of the extended vocabulary bundle
-     * @param extenedDescriptionBundleSeparator the separator of the extended vocabulary bundle (optional)
-     * @param extenedDescriptionBundlePrefix the prefix of the extended vocabulary bundle (optional)
-     * @return a description bundle extension that is added to the given description bundle
-     */
-    public DescriptionBundleExtension addDescriptionBundleExtension(DescriptionBundle bundle, String extenedDescriptionBundleIri, SeparatorKind extenedDescriptionBundleSeparator, String extenedDescriptionBundlePrefix) {
-        final DescriptionBundleExtension extension = OmlWrite.addDescriptionBundleExtension(bundle, extenedDescriptionBundleIri, extenedDescriptionBundleSeparator, extenedDescriptionBundlePrefix);
-        return extension;
-    }
-
-    // DescriptionBundleInclusion
-    
-    /**
-     * Creates a description bundle inclusion and adds it to the given description bundle
-     * 
-     * @param bundle the context description bundle
-     * @param includedDescriptionIri the IRI of the extended description
-     * @param includedDescriptionSeparator the separator of the extended description (optional)
-     * @param includedDescriptionPrefix the prefix of the extended description (optional)
-     * @return a description bundle inclusion that is added to the given description bundle
-     */
-    public DescriptionBundleInclusion addDescriptionBundleInclusion(DescriptionBundle bundle, String includedDescriptionIri, SeparatorKind includedDescriptionSeparator, String includedDescriptionPrefix) {
-        final DescriptionBundleInclusion inclusion = OmlWrite.addDescriptionBundleInclusion(bundle, includedDescriptionIri, includedDescriptionSeparator, includedDescriptionPrefix);
-        return inclusion;
-    }
-
-    // DescriptionBundleUsage
-
-    /**
-     * Creates a description bundle usage and adds it to the given description bundle
-     * 
-     * @param bundle the context description bundle
-     * @param usedVocabularyBoxIri the IRI of the used vocabulary box
-     * @param usedVocabularyBoxSeparator the separator of the used vocabulary box (optional)
-     * @param usedVocabularyBoxPrefix the prefix of the used vocabulary box (optional)
-     * @return a description bundle usage that is added to the given description bundle
-     */
-    public DescriptionBundleUsage addDescriptionBundleUsage(DescriptionBundle bundle, String usedVocabularyBoxIri, SeparatorKind usedVocabularyBoxSeparator, String usedVocabularyBoxPrefix) {
-        final DescriptionBundleUsage usage = OmlWrite.addDescriptionBundleUsage(bundle, usedVocabularyBoxIri, usedVocabularyBoxSeparator, usedVocabularyBoxPrefix);
-        return usage;
     }
     
     // SpecializationAxiom

@@ -16,38 +16,23 @@
  * limitations under the License.
  * 
  */
-package io.opencaesar.oml.impl;
+package io.opencaesar.oml;
 
-import io.opencaesar.oml.OmlPackage;
-import io.opencaesar.oml.VocabularyBundleInclusion;
-
-import org.eclipse.emf.ecore.EClass;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Vocabulary Bundle Inclusion</b></em>'.
+ * A representation of the model object '<em><b>Usage</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Usage is an import that allows a vocabulary to use a description, a description to use a vocabulary, or
+ * a description bundl to use either a vocabulary or a vocabulary bundle.
+ * <!-- end-model-doc -->
+ *
+ *
+ * @see io.opencaesar.oml.OmlPackage#getUsage()
+ * @model annotation="https://tabatkins.github.io/bikeshed heading='Elements'"
  * @generated
  */
-public class VocabularyBundleInclusionImpl extends VocabularyBundleImportImpl implements VocabularyBundleInclusion {
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected VocabularyBundleInclusionImpl() {
-		super();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	protected EClass eStaticClass() {
-		return OmlPackage.Literals.VOCABULARY_BUNDLE_INCLUSION;
-	}
-
-} //VocabularyBundleInclusionImpl
+public interface Usage extends Import {
+} // Usage

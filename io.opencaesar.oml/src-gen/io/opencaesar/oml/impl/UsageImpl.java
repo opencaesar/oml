@@ -16,22 +16,38 @@
  * limitations under the License.
  * 
  */
-package io.opencaesar.oml;
+package io.opencaesar.oml.impl;
 
+import io.opencaesar.oml.OmlPackage;
+import io.opencaesar.oml.Usage;
+
+import org.eclipse.emf.ecore.EClass;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Vocabulary Usage</b></em>'.
+ * An implementation of the model object '<em><b>Usage</b></em>'.
  * <!-- end-user-doc -->
  *
- * <!-- begin-model-doc -->
- * VocabularyUsage is an import that allows a vocabulary to use a description box.
- * <!-- end-model-doc -->
- *
- *
- * @see io.opencaesar.oml.OmlPackage#getVocabularyUsage()
- * @model annotation="https://tabatkins.github.io/bikeshed heading='Vocabularies'"
  * @generated
  */
-public interface VocabularyUsage extends VocabularyImport {
-} // VocabularyUsage
+public class UsageImpl extends ImportImpl implements Usage {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected UsageImpl() {
+		super();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return OmlPackage.Literals.USAGE;
+	}
+
+} //UsageImpl

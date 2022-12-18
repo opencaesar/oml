@@ -39,15 +39,8 @@ import io.opencaesar.oml.DecimalLiteral;
 import io.opencaesar.oml.Description;
 import io.opencaesar.oml.DescriptionBox;
 import io.opencaesar.oml.DescriptionBundle;
-import io.opencaesar.oml.DescriptionBundleExtension;
-import io.opencaesar.oml.DescriptionBundleImport;
-import io.opencaesar.oml.DescriptionBundleInclusion;
-import io.opencaesar.oml.DescriptionBundleUsage;
-import io.opencaesar.oml.DescriptionExtension;
-import io.opencaesar.oml.DescriptionImport;
 import io.opencaesar.oml.DescriptionMember;
 import io.opencaesar.oml.DescriptionStatement;
-import io.opencaesar.oml.DescriptionUsage;
 import io.opencaesar.oml.DifferentFromPredicate;
 import io.opencaesar.oml.DoubleLiteral;
 import io.opencaesar.oml.Element;
@@ -55,6 +48,7 @@ import io.opencaesar.oml.Entity;
 import io.opencaesar.oml.EntityReference;
 import io.opencaesar.oml.EnumeratedScalar;
 import io.opencaesar.oml.EnumeratedScalarReference;
+import io.opencaesar.oml.Extension;
 import io.opencaesar.oml.FacetedScalar;
 import io.opencaesar.oml.FacetedScalarReference;
 import io.opencaesar.oml.Feature;
@@ -62,6 +56,7 @@ import io.opencaesar.oml.FeaturePredicate;
 import io.opencaesar.oml.ForwardRelation;
 import io.opencaesar.oml.IdentifiedElement;
 import io.opencaesar.oml.Import;
+import io.opencaesar.oml.Inclusion;
 import io.opencaesar.oml.Instance;
 import io.opencaesar.oml.IntegerLiteral;
 import io.opencaesar.oml.KeyAxiom;
@@ -126,17 +121,12 @@ import io.opencaesar.oml.Type;
 import io.opencaesar.oml.TypeAssertion;
 import io.opencaesar.oml.TypePredicate;
 import io.opencaesar.oml.UnaryPredicate;
+import io.opencaesar.oml.Usage;
 import io.opencaesar.oml.Vocabulary;
 import io.opencaesar.oml.VocabularyBox;
 import io.opencaesar.oml.VocabularyBundle;
-import io.opencaesar.oml.VocabularyBundleExtension;
-import io.opencaesar.oml.VocabularyBundleImport;
-import io.opencaesar.oml.VocabularyBundleInclusion;
-import io.opencaesar.oml.VocabularyExtension;
-import io.opencaesar.oml.VocabularyImport;
 import io.opencaesar.oml.VocabularyMember;
 import io.opencaesar.oml.VocabularyStatement;
-import io.opencaesar.oml.VocabularyUsage;
 
 import io.opencaesar.oml.util.OmlValidator;
 
@@ -293,91 +283,21 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass vocabularyImportEClass = null;
+	private EClass extensionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass vocabularyBundleImportEClass = null;
+	private EClass usageEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass descriptionImportEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass descriptionBundleImportEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass vocabularyExtensionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass vocabularyUsageEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass vocabularyBundleExtensionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass vocabularyBundleInclusionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass descriptionExtensionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass descriptionUsageEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass descriptionBundleExtensionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass descriptionBundleInclusionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass descriptionBundleUsageEClass = null;
+	private EClass inclusionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1245,6 +1165,16 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
+	public EReference getImport_OwningOntology() {
+		return (EReference)importEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EOperation getImport__GetIri() {
 		return importEClass.getEOperations().get(0);
 	}
@@ -1385,6 +1315,16 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
+	public EReference getOntology_OwnedImports() {
+		return (EReference)ontologyEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EOperation getOntology__GetIri() {
 		return ontologyEClass.getEOperations().get(0);
 	}
@@ -1475,18 +1415,8 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getVocabulary_OwnedImports() {
-		return (EReference)vocabularyEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EReference getVocabulary_OwnedStatements() {
-		return (EReference)vocabularyEClass.getEStructuralFeatures().get(1);
+		return (EReference)vocabularyEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1505,16 +1435,6 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getVocabularyBundle_OwnedImports() {
-		return (EReference)vocabularyBundleEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EClass getDescription() {
 		return descriptionEClass;
 	}
@@ -1525,18 +1445,8 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getDescription_OwnedImports() {
-		return (EReference)descriptionEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EReference getDescription_OwnedStatements() {
-		return (EReference)descriptionEClass.getEStructuralFeatures().get(1);
+		return (EReference)descriptionEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1555,8 +1465,8 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getDescriptionBundle_OwnedImports() {
-		return (EReference)descriptionBundleEClass.getEStructuralFeatures().get(0);
+	public EClass getExtension() {
+		return extensionEClass;
 	}
 
 	/**
@@ -1565,8 +1475,8 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EClass getVocabularyImport() {
-		return vocabularyImportEClass;
+	public EClass getUsage() {
+		return usageEClass;
 	}
 
 	/**
@@ -1575,158 +1485,8 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getVocabularyImport_OwningVocabulary() {
-		return (EReference)vocabularyImportEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getVocabularyBundleImport() {
-		return vocabularyBundleImportEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getVocabularyBundleImport_OwningVocabularyBundle() {
-		return (EReference)vocabularyBundleImportEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getDescriptionImport() {
-		return descriptionImportEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getDescriptionImport_OwningDescription() {
-		return (EReference)descriptionImportEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getDescriptionBundleImport() {
-		return descriptionBundleImportEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getDescriptionBundleImport_OwningDescriptionBundle() {
-		return (EReference)descriptionBundleImportEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getVocabularyExtension() {
-		return vocabularyExtensionEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getVocabularyUsage() {
-		return vocabularyUsageEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getVocabularyBundleExtension() {
-		return vocabularyBundleExtensionEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getVocabularyBundleInclusion() {
-		return vocabularyBundleInclusionEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getDescriptionExtension() {
-		return descriptionExtensionEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getDescriptionUsage() {
-		return descriptionUsageEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getDescriptionBundleExtension() {
-		return descriptionBundleExtensionEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getDescriptionBundleInclusion() {
-		return descriptionBundleInclusionEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getDescriptionBundleUsage() {
-		return descriptionBundleUsageEClass;
+	public EClass getInclusion() {
+		return inclusionEClass;
 	}
 
 	/**
@@ -4186,6 +3946,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		importEClass = createEClass(IMPORT);
 		createEAttribute(importEClass, IMPORT__NAMESPACE);
 		createEAttribute(importEClass, IMPORT__PREFIX);
+		createEReference(importEClass, IMPORT__OWNING_ONTOLOGY);
 		createEOperation(importEClass, IMPORT___GET_IRI);
 		createEOperation(importEClass, IMPORT___GET_SEPARATOR);
 
@@ -4207,6 +3968,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		ontologyEClass = createEClass(ONTOLOGY);
 		createEAttribute(ontologyEClass, ONTOLOGY__NAMESPACE);
 		createEAttribute(ontologyEClass, ONTOLOGY__PREFIX);
+		createEReference(ontologyEClass, ONTOLOGY__OWNED_IMPORTS);
 		createEOperation(ontologyEClass, ONTOLOGY___GET_IRI);
 		createEOperation(ontologyEClass, ONTOLOGY___GET_SEPARATOR);
 
@@ -4220,48 +3982,20 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		descriptionBoxEClass = createEClass(DESCRIPTION_BOX);
 
 		vocabularyEClass = createEClass(VOCABULARY);
-		createEReference(vocabularyEClass, VOCABULARY__OWNED_IMPORTS);
 		createEReference(vocabularyEClass, VOCABULARY__OWNED_STATEMENTS);
 
 		vocabularyBundleEClass = createEClass(VOCABULARY_BUNDLE);
-		createEReference(vocabularyBundleEClass, VOCABULARY_BUNDLE__OWNED_IMPORTS);
 
 		descriptionEClass = createEClass(DESCRIPTION);
-		createEReference(descriptionEClass, DESCRIPTION__OWNED_IMPORTS);
 		createEReference(descriptionEClass, DESCRIPTION__OWNED_STATEMENTS);
 
 		descriptionBundleEClass = createEClass(DESCRIPTION_BUNDLE);
-		createEReference(descriptionBundleEClass, DESCRIPTION_BUNDLE__OWNED_IMPORTS);
 
-		vocabularyImportEClass = createEClass(VOCABULARY_IMPORT);
-		createEReference(vocabularyImportEClass, VOCABULARY_IMPORT__OWNING_VOCABULARY);
+		extensionEClass = createEClass(EXTENSION);
 
-		vocabularyBundleImportEClass = createEClass(VOCABULARY_BUNDLE_IMPORT);
-		createEReference(vocabularyBundleImportEClass, VOCABULARY_BUNDLE_IMPORT__OWNING_VOCABULARY_BUNDLE);
+		usageEClass = createEClass(USAGE);
 
-		descriptionImportEClass = createEClass(DESCRIPTION_IMPORT);
-		createEReference(descriptionImportEClass, DESCRIPTION_IMPORT__OWNING_DESCRIPTION);
-
-		descriptionBundleImportEClass = createEClass(DESCRIPTION_BUNDLE_IMPORT);
-		createEReference(descriptionBundleImportEClass, DESCRIPTION_BUNDLE_IMPORT__OWNING_DESCRIPTION_BUNDLE);
-
-		vocabularyExtensionEClass = createEClass(VOCABULARY_EXTENSION);
-
-		vocabularyUsageEClass = createEClass(VOCABULARY_USAGE);
-
-		vocabularyBundleExtensionEClass = createEClass(VOCABULARY_BUNDLE_EXTENSION);
-
-		vocabularyBundleInclusionEClass = createEClass(VOCABULARY_BUNDLE_INCLUSION);
-
-		descriptionExtensionEClass = createEClass(DESCRIPTION_EXTENSION);
-
-		descriptionUsageEClass = createEClass(DESCRIPTION_USAGE);
-
-		descriptionBundleExtensionEClass = createEClass(DESCRIPTION_BUNDLE_EXTENSION);
-
-		descriptionBundleInclusionEClass = createEClass(DESCRIPTION_BUNDLE_INCLUSION);
-
-		descriptionBundleUsageEClass = createEClass(DESCRIPTION_BUNDLE_USAGE);
+		inclusionEClass = createEClass(INCLUSION);
 
 		vocabularyStatementEClass = createEClass(VOCABULARY_STATEMENT);
 		createEReference(vocabularyStatementEClass, VOCABULARY_STATEMENT__OWNING_VOCABULARY);
@@ -4640,19 +4374,9 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		vocabularyBundleEClass.getESuperTypes().add(this.getVocabularyBox());
 		descriptionEClass.getESuperTypes().add(this.getDescriptionBox());
 		descriptionBundleEClass.getESuperTypes().add(this.getDescriptionBox());
-		vocabularyImportEClass.getESuperTypes().add(this.getImport());
-		vocabularyBundleImportEClass.getESuperTypes().add(this.getImport());
-		descriptionImportEClass.getESuperTypes().add(this.getImport());
-		descriptionBundleImportEClass.getESuperTypes().add(this.getImport());
-		vocabularyExtensionEClass.getESuperTypes().add(this.getVocabularyImport());
-		vocabularyUsageEClass.getESuperTypes().add(this.getVocabularyImport());
-		vocabularyBundleExtensionEClass.getESuperTypes().add(this.getVocabularyBundleImport());
-		vocabularyBundleInclusionEClass.getESuperTypes().add(this.getVocabularyBundleImport());
-		descriptionExtensionEClass.getESuperTypes().add(this.getDescriptionImport());
-		descriptionUsageEClass.getESuperTypes().add(this.getDescriptionImport());
-		descriptionBundleExtensionEClass.getESuperTypes().add(this.getDescriptionBundleImport());
-		descriptionBundleInclusionEClass.getESuperTypes().add(this.getDescriptionBundleImport());
-		descriptionBundleUsageEClass.getESuperTypes().add(this.getDescriptionBundleImport());
+		extensionEClass.getESuperTypes().add(this.getImport());
+		usageEClass.getESuperTypes().add(this.getImport());
+		inclusionEClass.getESuperTypes().add(this.getImport());
 		vocabularyStatementEClass.getESuperTypes().add(this.getStatement());
 		descriptionStatementEClass.getESuperTypes().add(this.getStatement());
 		vocabularyMemberEClass.getESuperTypes().add(this.getMember());
@@ -4777,6 +4501,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		initEClass(importEClass, Import.class, "Import", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getImport_Namespace(), this.getNamespace(), "namespace", null, 1, 1, Import.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getImport_Prefix(), this.getID(), "prefix", null, 0, 1, Import.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getImport_OwningOntology(), this.getOntology(), this.getOntology_OwnedImports(), "owningOntology", null, 1, 1, Import.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEOperation(getImport__GetIri(), theEcorePackage.getEString(), "getIri", 0, 1, !IS_UNIQUE, IS_ORDERED);
 
@@ -4800,6 +4525,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		initEClass(ontologyEClass, Ontology.class, "Ontology", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getOntology_Namespace(), this.getNamespace(), "namespace", null, 1, 1, Ontology.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getOntology_Prefix(), this.getID(), "prefix", null, 1, 1, Ontology.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getOntology_OwnedImports(), this.getImport(), this.getImport_OwningOntology(), "ownedImports", null, 0, -1, Ontology.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEOperation(getOntology__GetIri(), theEcorePackage.getEString(), "getIri", 0, 1, !IS_UNIQUE, IS_ORDERED);
 
@@ -4817,48 +4543,20 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		initEClass(descriptionBoxEClass, DescriptionBox.class, "DescriptionBox", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(vocabularyEClass, Vocabulary.class, "Vocabulary", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getVocabulary_OwnedImports(), this.getVocabularyImport(), this.getVocabularyImport_OwningVocabulary(), "ownedImports", null, 0, -1, Vocabulary.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getVocabulary_OwnedStatements(), this.getVocabularyStatement(), this.getVocabularyStatement_OwningVocabulary(), "ownedStatements", null, 0, -1, Vocabulary.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(vocabularyBundleEClass, VocabularyBundle.class, "VocabularyBundle", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getVocabularyBundle_OwnedImports(), this.getVocabularyBundleImport(), this.getVocabularyBundleImport_OwningVocabularyBundle(), "ownedImports", null, 0, -1, VocabularyBundle.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(descriptionEClass, Description.class, "Description", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getDescription_OwnedImports(), this.getDescriptionImport(), this.getDescriptionImport_OwningDescription(), "ownedImports", null, 0, -1, Description.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDescription_OwnedStatements(), this.getDescriptionStatement(), this.getDescriptionStatement_OwningDescription(), "ownedStatements", null, 0, -1, Description.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(descriptionBundleEClass, DescriptionBundle.class, "DescriptionBundle", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getDescriptionBundle_OwnedImports(), this.getDescriptionBundleImport(), this.getDescriptionBundleImport_OwningDescriptionBundle(), "ownedImports", null, 0, -1, DescriptionBundle.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(vocabularyImportEClass, VocabularyImport.class, "VocabularyImport", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getVocabularyImport_OwningVocabulary(), this.getVocabulary(), this.getVocabulary_OwnedImports(), "owningVocabulary", null, 1, 1, VocabularyImport.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(extensionEClass, Extension.class, "Extension", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(vocabularyBundleImportEClass, VocabularyBundleImport.class, "VocabularyBundleImport", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getVocabularyBundleImport_OwningVocabularyBundle(), this.getVocabularyBundle(), this.getVocabularyBundle_OwnedImports(), "owningVocabularyBundle", null, 1, 1, VocabularyBundleImport.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(usageEClass, Usage.class, "Usage", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(descriptionImportEClass, DescriptionImport.class, "DescriptionImport", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getDescriptionImport_OwningDescription(), this.getDescription(), this.getDescription_OwnedImports(), "owningDescription", null, 1, 1, DescriptionImport.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(descriptionBundleImportEClass, DescriptionBundleImport.class, "DescriptionBundleImport", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getDescriptionBundleImport_OwningDescriptionBundle(), this.getDescriptionBundle(), this.getDescriptionBundle_OwnedImports(), "owningDescriptionBundle", null, 1, 1, DescriptionBundleImport.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(vocabularyExtensionEClass, VocabularyExtension.class, "VocabularyExtension", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(vocabularyUsageEClass, VocabularyUsage.class, "VocabularyUsage", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(vocabularyBundleExtensionEClass, VocabularyBundleExtension.class, "VocabularyBundleExtension", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(vocabularyBundleInclusionEClass, VocabularyBundleInclusion.class, "VocabularyBundleInclusion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(descriptionExtensionEClass, DescriptionExtension.class, "DescriptionExtension", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(descriptionUsageEClass, DescriptionUsage.class, "DescriptionUsage", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(descriptionBundleExtensionEClass, DescriptionBundleExtension.class, "DescriptionBundleExtension", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(descriptionBundleInclusionEClass, DescriptionBundleInclusion.class, "DescriptionBundleInclusion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(descriptionBundleUsageEClass, DescriptionBundleUsage.class, "DescriptionBundleUsage", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(inclusionEClass, Inclusion.class, "Inclusion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(vocabularyStatementEClass, VocabularyStatement.class, "VocabularyStatement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getVocabularyStatement_OwningVocabulary(), this.getVocabulary(), this.getVocabulary_OwnedStatements(), "owningVocabulary", null, 1, 1, VocabularyStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -5377,82 +5075,22 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 			   "heading", "Descriptions"
 		   });
 		addAnnotation
-		  (vocabularyImportEClass,
+		  (extensionEClass,
 		   source,
 		   new String[] {
-			   "heading", "Vocabularies"
+			   "heading", "Elements"
 		   });
 		addAnnotation
-		  (vocabularyBundleImportEClass,
+		  (usageEClass,
 		   source,
 		   new String[] {
-			   "heading", "Vocabularies"
+			   "heading", "Elements"
 		   });
 		addAnnotation
-		  (descriptionImportEClass,
+		  (inclusionEClass,
 		   source,
 		   new String[] {
-			   "heading", "Descriptions"
-		   });
-		addAnnotation
-		  (descriptionBundleImportEClass,
-		   source,
-		   new String[] {
-			   "heading", "Descriptions"
-		   });
-		addAnnotation
-		  (vocabularyExtensionEClass,
-		   source,
-		   new String[] {
-			   "heading", "Vocabularies"
-		   });
-		addAnnotation
-		  (vocabularyUsageEClass,
-		   source,
-		   new String[] {
-			   "heading", "Vocabularies"
-		   });
-		addAnnotation
-		  (vocabularyBundleExtensionEClass,
-		   source,
-		   new String[] {
-			   "heading", "Vocabularies"
-		   });
-		addAnnotation
-		  (vocabularyBundleInclusionEClass,
-		   source,
-		   new String[] {
-			   "heading", "Vocabularies"
-		   });
-		addAnnotation
-		  (descriptionExtensionEClass,
-		   source,
-		   new String[] {
-			   "heading", "Descriptions"
-		   });
-		addAnnotation
-		  (descriptionUsageEClass,
-		   source,
-		   new String[] {
-			   "heading", "Descriptions"
-		   });
-		addAnnotation
-		  (descriptionBundleExtensionEClass,
-		   source,
-		   new String[] {
-			   "heading", "Descriptions"
-		   });
-		addAnnotation
-		  (descriptionBundleInclusionEClass,
-		   source,
-		   new String[] {
-			   "heading", "Descriptions"
-		   });
-		addAnnotation
-		  (descriptionBundleUsageEClass,
-		   source,
-		   new String[] {
-			   "heading", "Descriptions"
+			   "heading", "Elements"
 		   });
 		addAnnotation
 		  (vocabularyStatementEClass,

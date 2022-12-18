@@ -34,7 +34,6 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link io.opencaesar.oml.Vocabulary#getOwnedImports <em>Owned Imports</em>}</li>
  *   <li>{@link io.opencaesar.oml.Vocabulary#getOwnedStatements <em>Owned Statements</em>}</li>
  * </ul>
  *
@@ -43,23 +42,6 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface Vocabulary extends VocabularyBox {
-	/**
-	 * Returns the value of the '<em><b>Owned Imports</b></em>' containment reference list.
-	 * The list contents are of type {@link io.opencaesar.oml.VocabularyImport}.
-	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.VocabularyImport#getOwningVocabulary <em>Owning Vocabulary</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * The set of imports this vocabulary has to other ontologies
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Owned Imports</em>' containment reference list.
-	 * @see io.opencaesar.oml.OmlPackage#getVocabulary_OwnedImports()
-	 * @see io.opencaesar.oml.VocabularyImport#getOwningVocabulary
-	 * @model opposite="owningVocabulary" containment="true"
-	 * @generated
-	 */
-	EList<VocabularyImport> getOwnedImports();
-
 	/**
 	 * Returns the value of the '<em><b>Owned Statements</b></em>' containment reference list.
 	 * The list contents are of type {@link io.opencaesar.oml.VocabularyStatement}.

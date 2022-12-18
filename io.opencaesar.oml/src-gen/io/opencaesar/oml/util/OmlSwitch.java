@@ -225,116 +225,27 @@ public class OmlSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case OmlPackage.VOCABULARY_IMPORT: {
-				VocabularyImport vocabularyImport = (VocabularyImport)theEObject;
-				T result = caseVocabularyImport(vocabularyImport);
-				if (result == null) result = caseImport(vocabularyImport);
-				if (result == null) result = caseElement(vocabularyImport);
+			case OmlPackage.EXTENSION: {
+				Extension extension = (Extension)theEObject;
+				T result = caseExtension(extension);
+				if (result == null) result = caseImport(extension);
+				if (result == null) result = caseElement(extension);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case OmlPackage.VOCABULARY_BUNDLE_IMPORT: {
-				VocabularyBundleImport vocabularyBundleImport = (VocabularyBundleImport)theEObject;
-				T result = caseVocabularyBundleImport(vocabularyBundleImport);
-				if (result == null) result = caseImport(vocabularyBundleImport);
-				if (result == null) result = caseElement(vocabularyBundleImport);
+			case OmlPackage.USAGE: {
+				Usage usage = (Usage)theEObject;
+				T result = caseUsage(usage);
+				if (result == null) result = caseImport(usage);
+				if (result == null) result = caseElement(usage);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case OmlPackage.DESCRIPTION_IMPORT: {
-				DescriptionImport descriptionImport = (DescriptionImport)theEObject;
-				T result = caseDescriptionImport(descriptionImport);
-				if (result == null) result = caseImport(descriptionImport);
-				if (result == null) result = caseElement(descriptionImport);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.DESCRIPTION_BUNDLE_IMPORT: {
-				DescriptionBundleImport descriptionBundleImport = (DescriptionBundleImport)theEObject;
-				T result = caseDescriptionBundleImport(descriptionBundleImport);
-				if (result == null) result = caseImport(descriptionBundleImport);
-				if (result == null) result = caseElement(descriptionBundleImport);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.VOCABULARY_EXTENSION: {
-				VocabularyExtension vocabularyExtension = (VocabularyExtension)theEObject;
-				T result = caseVocabularyExtension(vocabularyExtension);
-				if (result == null) result = caseVocabularyImport(vocabularyExtension);
-				if (result == null) result = caseImport(vocabularyExtension);
-				if (result == null) result = caseElement(vocabularyExtension);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.VOCABULARY_USAGE: {
-				VocabularyUsage vocabularyUsage = (VocabularyUsage)theEObject;
-				T result = caseVocabularyUsage(vocabularyUsage);
-				if (result == null) result = caseVocabularyImport(vocabularyUsage);
-				if (result == null) result = caseImport(vocabularyUsage);
-				if (result == null) result = caseElement(vocabularyUsage);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.VOCABULARY_BUNDLE_EXTENSION: {
-				VocabularyBundleExtension vocabularyBundleExtension = (VocabularyBundleExtension)theEObject;
-				T result = caseVocabularyBundleExtension(vocabularyBundleExtension);
-				if (result == null) result = caseVocabularyBundleImport(vocabularyBundleExtension);
-				if (result == null) result = caseImport(vocabularyBundleExtension);
-				if (result == null) result = caseElement(vocabularyBundleExtension);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.VOCABULARY_BUNDLE_INCLUSION: {
-				VocabularyBundleInclusion vocabularyBundleInclusion = (VocabularyBundleInclusion)theEObject;
-				T result = caseVocabularyBundleInclusion(vocabularyBundleInclusion);
-				if (result == null) result = caseVocabularyBundleImport(vocabularyBundleInclusion);
-				if (result == null) result = caseImport(vocabularyBundleInclusion);
-				if (result == null) result = caseElement(vocabularyBundleInclusion);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.DESCRIPTION_EXTENSION: {
-				DescriptionExtension descriptionExtension = (DescriptionExtension)theEObject;
-				T result = caseDescriptionExtension(descriptionExtension);
-				if (result == null) result = caseDescriptionImport(descriptionExtension);
-				if (result == null) result = caseImport(descriptionExtension);
-				if (result == null) result = caseElement(descriptionExtension);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.DESCRIPTION_USAGE: {
-				DescriptionUsage descriptionUsage = (DescriptionUsage)theEObject;
-				T result = caseDescriptionUsage(descriptionUsage);
-				if (result == null) result = caseDescriptionImport(descriptionUsage);
-				if (result == null) result = caseImport(descriptionUsage);
-				if (result == null) result = caseElement(descriptionUsage);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.DESCRIPTION_BUNDLE_EXTENSION: {
-				DescriptionBundleExtension descriptionBundleExtension = (DescriptionBundleExtension)theEObject;
-				T result = caseDescriptionBundleExtension(descriptionBundleExtension);
-				if (result == null) result = caseDescriptionBundleImport(descriptionBundleExtension);
-				if (result == null) result = caseImport(descriptionBundleExtension);
-				if (result == null) result = caseElement(descriptionBundleExtension);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.DESCRIPTION_BUNDLE_INCLUSION: {
-				DescriptionBundleInclusion descriptionBundleInclusion = (DescriptionBundleInclusion)theEObject;
-				T result = caseDescriptionBundleInclusion(descriptionBundleInclusion);
-				if (result == null) result = caseDescriptionBundleImport(descriptionBundleInclusion);
-				if (result == null) result = caseImport(descriptionBundleInclusion);
-				if (result == null) result = caseElement(descriptionBundleInclusion);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.DESCRIPTION_BUNDLE_USAGE: {
-				DescriptionBundleUsage descriptionBundleUsage = (DescriptionBundleUsage)theEObject;
-				T result = caseDescriptionBundleUsage(descriptionBundleUsage);
-				if (result == null) result = caseDescriptionBundleImport(descriptionBundleUsage);
-				if (result == null) result = caseImport(descriptionBundleUsage);
-				if (result == null) result = caseElement(descriptionBundleUsage);
+			case OmlPackage.INCLUSION: {
+				Inclusion inclusion = (Inclusion)theEObject;
+				T result = caseInclusion(inclusion);
+				if (result == null) result = caseImport(inclusion);
+				if (result == null) result = caseElement(inclusion);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -1528,197 +1439,47 @@ public class OmlSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Vocabulary Import</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Extension</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Vocabulary Import</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Extension</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseVocabularyImport(VocabularyImport object) {
+	public T caseExtension(Extension object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Vocabulary Bundle Import</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Usage</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Vocabulary Bundle Import</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Usage</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseVocabularyBundleImport(VocabularyBundleImport object) {
+	public T caseUsage(Usage object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Description Import</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Inclusion</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Description Import</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Inclusion</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseDescriptionImport(DescriptionImport object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Description Bundle Import</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Description Bundle Import</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseDescriptionBundleImport(DescriptionBundleImport object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Vocabulary Extension</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Vocabulary Extension</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseVocabularyExtension(VocabularyExtension object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Vocabulary Usage</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Vocabulary Usage</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseVocabularyUsage(VocabularyUsage object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Vocabulary Bundle Extension</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Vocabulary Bundle Extension</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseVocabularyBundleExtension(VocabularyBundleExtension object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Vocabulary Bundle Inclusion</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Vocabulary Bundle Inclusion</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseVocabularyBundleInclusion(VocabularyBundleInclusion object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Description Extension</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Description Extension</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseDescriptionExtension(DescriptionExtension object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Description Usage</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Description Usage</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseDescriptionUsage(DescriptionUsage object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Description Bundle Extension</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Description Bundle Extension</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseDescriptionBundleExtension(DescriptionBundleExtension object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Description Bundle Inclusion</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Description Bundle Inclusion</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseDescriptionBundleInclusion(DescriptionBundleInclusion object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Description Bundle Usage</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Description Bundle Usage</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseDescriptionBundleUsage(DescriptionBundleUsage object) {
+	public T caseInclusion(Inclusion object) {
 		return null;
 	}
 

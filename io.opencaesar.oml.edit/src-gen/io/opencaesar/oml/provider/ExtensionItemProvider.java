@@ -19,30 +19,28 @@
 package io.opencaesar.oml.provider;
 
 
-import io.opencaesar.oml.DescriptionBundleUsage;
-
+import io.opencaesar.oml.Extension;
 import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 
 /**
- * This is the item provider adapter for a {@link io.opencaesar.oml.DescriptionBundleUsage} object.
+ * This is the item provider adapter for a {@link io.opencaesar.oml.Extension} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class DescriptionBundleUsageItemProvider extends DescriptionBundleImportItemProvider {
+public class ExtensionItemProvider extends ImportItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public DescriptionBundleUsageItemProvider(AdapterFactory adapterFactory) {
+	public ExtensionItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -62,14 +60,14 @@ public class DescriptionBundleUsageItemProvider extends DescriptionBundleImportI
 	}
 
 	/**
-	 * This returns DescriptionBundleUsage.gif.
+	 * This returns Extension.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/DescriptionBundleUsage"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/Extension"));
 	}
 
 	/**
@@ -80,10 +78,10 @@ public class DescriptionBundleUsageItemProvider extends DescriptionBundleImportI
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((DescriptionBundleUsage)object).getNamespace();
+		String label = ((Extension)object).getNamespace();
 		return label == null || label.length() == 0 ?
-			getString("_UI_DescriptionBundleUsage_type") :
-			getString("_UI_DescriptionBundleUsage_type") + " " + label;
+			getString("_UI_Extension_type") :
+			getString("_UI_Extension_type") + " " + label;
 	}
 
 

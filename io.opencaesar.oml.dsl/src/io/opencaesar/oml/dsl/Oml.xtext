@@ -33,14 +33,14 @@ VocabularyBox:
 Vocabulary:
 	ownedAnnotations+=Annotation*
 	'vocabulary' namespace=NAMESPACE 'as' prefix=ID  '{'
-		ownedImports+=VocabularyImport*
+		ownedImports+=Import*
 		ownedStatements+=VocabularyStatement*
 	'}';
 
 VocabularyBundle:
 	ownedAnnotations+=Annotation*
 	'vocabulary' 'bundle' namespace=NAMESPACE 'as' prefix=ID '{'
-		ownedImports+=VocabularyBundleImport*
+		ownedImports+=Import*
 	'}';
 
 DescriptionBox:
@@ -50,14 +50,14 @@ DescriptionBox:
 Description:
 	ownedAnnotations+=Annotation*
 	'description' namespace=NAMESPACE 'as' prefix=ID '{'
-		ownedImports+=DescriptionImport*
+		ownedImports+=Import*
 		ownedStatements+=DescriptionStatement*
 	'}';
 
 DescriptionBundle:
 	ownedAnnotations+=Annotation*
 	'description' 'bundle' namespace=NAMESPACE 'as' prefix=ID '{'
-		ownedImports+=DescriptionBundleImport*
+		ownedImports+=Import*
 	'}';
 
 SpecializableTerm:
@@ -324,49 +324,19 @@ DescriptionStatement:
 	NamedInstance |
 	NamedInstanceReference;
 	
-VocabularyImport:
-	VocabularyExtension |
-	VocabularyUsage;
+Import:
+	Extension |
+	Usage |
+	Inclusion;
 
-VocabularyExtension:
+Extension:
 	'extends' namespace=NAMESPACE ('as' prefix=ID)?;
     	
-VocabularyUsage:
+Usage:
 	'uses' namespace=NAMESPACE ('as' prefix=ID)?;
     	
-VocabularyBundleImport:
-	VocabularyBundleExtension |
-	VocabularyBundleInclusion;
-
-VocabularyBundleInclusion:
+Inclusion:
 	'includes' namespace=NAMESPACE ('as' prefix=ID)?;
-
-VocabularyBundleExtension:
-	'extends' namespace=NAMESPACE ('as' prefix=ID)?;
-
-DescriptionImport:
-	DescriptionExtension |
-	DescriptionUsage;
-
-DescriptionUsage:
-	'uses' namespace=NAMESPACE ('as' prefix=ID)?;
-
-DescriptionExtension:
-	'extends' namespace=NAMESPACE ('as' prefix=ID)?;
-
-DescriptionBundleImport:
-	DescriptionBundleExtension |
-	DescriptionBundleInclusion |
-	DescriptionBundleUsage;
-
-DescriptionBundleInclusion:
-	'includes' namespace=NAMESPACE ('as' prefix=ID)?;
-
-DescriptionBundleExtension:
-	'extends' namespace=NAMESPACE ('as' prefix=ID)?;
-
-DescriptionBundleUsage:
-	'uses' namespace=NAMESPACE ('as' prefix=ID)?;
 
 SpecializationAxiom:
 	specializedTerm=[SpecializableTerm|Ref];

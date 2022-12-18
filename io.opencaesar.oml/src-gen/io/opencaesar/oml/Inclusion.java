@@ -16,38 +16,23 @@
  * limitations under the License.
  * 
  */
-package io.opencaesar.oml.impl;
+package io.opencaesar.oml;
 
-import io.opencaesar.oml.DescriptionUsage;
-import io.opencaesar.oml.OmlPackage;
-
-import org.eclipse.emf.ecore.EClass;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Description Usage</b></em>'.
+ * A representation of the model object '<em><b>Inclusion</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * Inclusion is an import that allows a vocabulary bundle to include a vocabulary, or
+ * a description bundle to include a description.
+ * <!-- end-model-doc -->
+ *
+ *
+ * @see io.opencaesar.oml.OmlPackage#getInclusion()
+ * @model annotation="https://tabatkins.github.io/bikeshed heading='Elements'"
  * @generated
  */
-public class DescriptionUsageImpl extends DescriptionImportImpl implements DescriptionUsage {
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected DescriptionUsageImpl() {
-		super();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	protected EClass eStaticClass() {
-		return OmlPackage.Literals.DESCRIPTION_USAGE;
-	}
-
-} //DescriptionUsageImpl
+public interface Inclusion extends Import {
+} // Inclusion

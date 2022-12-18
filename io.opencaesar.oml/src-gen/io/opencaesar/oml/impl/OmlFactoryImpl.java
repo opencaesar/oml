@@ -83,15 +83,9 @@ public class OmlFactoryImpl extends EFactoryImpl implements OmlFactory {
 			case OmlPackage.VOCABULARY_BUNDLE: return createVocabularyBundle();
 			case OmlPackage.DESCRIPTION: return createDescription();
 			case OmlPackage.DESCRIPTION_BUNDLE: return createDescriptionBundle();
-			case OmlPackage.VOCABULARY_EXTENSION: return createVocabularyExtension();
-			case OmlPackage.VOCABULARY_USAGE: return createVocabularyUsage();
-			case OmlPackage.VOCABULARY_BUNDLE_EXTENSION: return createVocabularyBundleExtension();
-			case OmlPackage.VOCABULARY_BUNDLE_INCLUSION: return createVocabularyBundleInclusion();
-			case OmlPackage.DESCRIPTION_EXTENSION: return createDescriptionExtension();
-			case OmlPackage.DESCRIPTION_USAGE: return createDescriptionUsage();
-			case OmlPackage.DESCRIPTION_BUNDLE_EXTENSION: return createDescriptionBundleExtension();
-			case OmlPackage.DESCRIPTION_BUNDLE_INCLUSION: return createDescriptionBundleInclusion();
-			case OmlPackage.DESCRIPTION_BUNDLE_USAGE: return createDescriptionBundleUsage();
+			case OmlPackage.EXTENSION: return createExtension();
+			case OmlPackage.USAGE: return createUsage();
+			case OmlPackage.INCLUSION: return createInclusion();
 			case OmlPackage.RULE: return createRule();
 			case OmlPackage.STRUCTURE: return createStructure();
 			case OmlPackage.ASPECT: return createAspect();
@@ -270,9 +264,9 @@ public class OmlFactoryImpl extends EFactoryImpl implements OmlFactory {
 	 * @generated
 	 */
 	@Override
-	public VocabularyExtension createVocabularyExtension() {
-		VocabularyExtensionImpl vocabularyExtension = new VocabularyExtensionImpl();
-		return vocabularyExtension;
+	public Extension createExtension() {
+		ExtensionImpl extension = new ExtensionImpl();
+		return extension;
 	}
 
 	/**
@@ -281,9 +275,9 @@ public class OmlFactoryImpl extends EFactoryImpl implements OmlFactory {
 	 * @generated
 	 */
 	@Override
-	public VocabularyUsage createVocabularyUsage() {
-		VocabularyUsageImpl vocabularyUsage = new VocabularyUsageImpl();
-		return vocabularyUsage;
+	public Usage createUsage() {
+		UsageImpl usage = new UsageImpl();
+		return usage;
 	}
 
 	/**
@@ -292,75 +286,9 @@ public class OmlFactoryImpl extends EFactoryImpl implements OmlFactory {
 	 * @generated
 	 */
 	@Override
-	public VocabularyBundleExtension createVocabularyBundleExtension() {
-		VocabularyBundleExtensionImpl vocabularyBundleExtension = new VocabularyBundleExtensionImpl();
-		return vocabularyBundleExtension;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public VocabularyBundleInclusion createVocabularyBundleInclusion() {
-		VocabularyBundleInclusionImpl vocabularyBundleInclusion = new VocabularyBundleInclusionImpl();
-		return vocabularyBundleInclusion;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public DescriptionExtension createDescriptionExtension() {
-		DescriptionExtensionImpl descriptionExtension = new DescriptionExtensionImpl();
-		return descriptionExtension;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public DescriptionUsage createDescriptionUsage() {
-		DescriptionUsageImpl descriptionUsage = new DescriptionUsageImpl();
-		return descriptionUsage;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public DescriptionBundleExtension createDescriptionBundleExtension() {
-		DescriptionBundleExtensionImpl descriptionBundleExtension = new DescriptionBundleExtensionImpl();
-		return descriptionBundleExtension;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public DescriptionBundleInclusion createDescriptionBundleInclusion() {
-		DescriptionBundleInclusionImpl descriptionBundleInclusion = new DescriptionBundleInclusionImpl();
-		return descriptionBundleInclusion;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public DescriptionBundleUsage createDescriptionBundleUsage() {
-		DescriptionBundleUsageImpl descriptionBundleUsage = new DescriptionBundleUsageImpl();
-		return descriptionBundleUsage;
+	public Inclusion createInclusion() {
+		InclusionImpl inclusion = new InclusionImpl();
+		return inclusion;
 	}
 
 	/**

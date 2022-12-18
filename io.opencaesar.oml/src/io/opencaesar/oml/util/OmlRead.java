@@ -51,8 +51,6 @@ import io.opencaesar.oml.ConceptTypeAssertion;
 import io.opencaesar.oml.DecimalLiteral;
 import io.opencaesar.oml.Description;
 import io.opencaesar.oml.DescriptionBundle;
-import io.opencaesar.oml.DescriptionBundleImport;
-import io.opencaesar.oml.DescriptionImport;
 import io.opencaesar.oml.DoubleLiteral;
 import io.opencaesar.oml.Element;
 import io.opencaesar.oml.Entity;
@@ -102,8 +100,6 @@ import io.opencaesar.oml.TypeAssertion;
 import io.opencaesar.oml.TypePredicate;
 import io.opencaesar.oml.Vocabulary;
 import io.opencaesar.oml.VocabularyBundle;
-import io.opencaesar.oml.VocabularyBundleImport;
-import io.opencaesar.oml.VocabularyImport;
 
 /**
  * The <b>Read</b> API for the model. It complements the OML getter API by additional utilities.
@@ -861,16 +857,7 @@ public final class OmlRead {
      * @return the ontology that defines the given import
      */
     public static Ontology getImportingOntology(Import _import) {
-        if (_import instanceof VocabularyImport) {
-            return ((VocabularyImport)_import).getOwningVocabulary();
-        } else if (_import instanceof VocabularyBundleImport) {
-            return ((VocabularyBundleImport)_import).getOwningVocabularyBundle();
-        } if (_import instanceof DescriptionImport) {
-            return ((DescriptionImport)_import).getOwningDescription();
-        } else if (_import instanceof DescriptionBundleImport) {
-            return ((DescriptionBundleImport)_import).getOwningDescriptionBundle();
-        }
-        return null;
+        return _import.getOwningOntology();
     }
     
     /**

@@ -134,6 +134,10 @@ abstract class Import extends Element {
      */
     ID[?] prefix
     /*
+     * The ontology that owns this import
+     */
+    container Ontology[1] owningOntology opposite ownedImports
+    /*
      * Get the import's iri
      */
     op String getIri() {
@@ -245,6 +249,10 @@ abstract class Ontology extends IdentifiedElement {
      */
     ID[1] prefix
     /*
+     * The set of imports this ontology has to other ontologies
+     */
+    contains Import[*] ownedImports opposite owningOntology
+    /*
      * Get the namespace's iri
      */
     op String getIri() {
@@ -335,10 +343,6 @@ abstract class DescriptionBox extends Ontology {
 @Bikeshed(heading="Vocabularies")
 class Vocabulary extends VocabularyBox {
     /*
-     * The set of imports this vocabulary has to other ontologies
-     */
-    contains VocabularyImport[*] ownedImports opposite owningVocabulary
-    /*
      * The set of statements contained by this vocabulary
      */
     contains VocabularyStatement[*] ownedStatements opposite owningVocabulary
@@ -350,10 +354,6 @@ class Vocabulary extends VocabularyBox {
  */
 @Bikeshed(heading="Vocabularies")
 class VocabularyBundle extends VocabularyBox {
-    /*
-     * The set of imports this vocabulary bundle has of other vocabularies
-     */
-    contains VocabularyBundleImport[*] ownedImports opposite owningVocabularyBundle
 }
 
 ////////////////////////////////////////
@@ -367,10 +367,6 @@ class VocabularyBundle extends VocabularyBox {
 @Bikeshed(heading="Descriptions")
 class Description extends DescriptionBox {
     /*
-     * The set of imports this description has to other ontologies 
-     */
-    contains DescriptionImport[*] ownedImports opposite owningDescription
-    /*
      * The set of statements contained by this description
      */
     contains DescriptionStatement[*] ownedStatements opposite owningDescription
@@ -382,137 +378,33 @@ class Description extends DescriptionBox {
  */
 @Bikeshed(heading="Descriptions")
 class DescriptionBundle extends DescriptionBox {
-    /*
-     * The set of imports this description bundle has of other descriptions
-     */
-    contains DescriptionBundleImport[*] ownedImports opposite owningDescriptionBundle
 }
 
 ////////////////////////////////////////
-//  Imports 
+// Imports 
 ////////////////////////////////////////
 
 /*
- * VocabularyImport is an import owned by a vocabulary.
+ * Extension is an import that allows an ontology to extend another of the same kind. 
  */
-@Bikeshed(heading="Vocabularies")
-abstract class VocabularyImport extends Import {
-    /*
-     * The vocabulary that owns this import
-     */
-    container Vocabulary[1] owningVocabulary opposite ownedImports
+@Bikeshed(heading="Elements")
+class Extension extends Import {
 }
 
 /*
- * VocabularyBundleImport is an import owned by a vocabulary bundle.
+ * Usage is an import that allows a vocabulary to use a description, a description to use a vocabulary, or
+ * a description bundl to use either a vocabulary or a vocabulary bundle.
  */
-@Bikeshed(heading="Vocabularies")
-abstract class VocabularyBundleImport extends Import {
-    /*
-     * The vocabulary bundle that contains this import
-     */
-    container VocabularyBundle[1] owningVocabularyBundle opposite ownedImports
+@Bikeshed(heading="Elements")
+class Usage extends Import {
 }
 
 /*
- * DescriptionImport is an import owned by a description.
+ * Inclusion is an import that allows a vocabulary bundle to include a vocabulary, or
+ * a description bundle to include a description. 
  */
-@Bikeshed(heading="Descriptions")
-abstract class DescriptionImport extends Import {
-    /*
-     * The description that owns this import
-     */
-    container Description[1] owningDescription opposite ownedImports
-}
-
-/*
- * DescriptionBundleImport is an import owned by  description bundle.
- */
-@Bikeshed(heading="Descriptions")
-abstract class DescriptionBundleImport extends Import {
-    /*
-     * The description bundle that owns this import
-     */
-    container DescriptionBundle[1] owningDescriptionBundle opposite ownedImports
-}
-
-////////////////////////////////////////
-//  Vocabulary Imports 
-////////////////////////////////////////
-
-/*
- * VocabularyExtension is an import that allows a vocabulary to extend another vocabulary. 
- */
-@Bikeshed(heading="Vocabularies")
-class VocabularyExtension extends VocabularyImport {
-}
-
-/*
- * VocabularyUsage is an import that allows a vocabulary to use a description box.
- */
-@Bikeshed(heading="Vocabularies")
-class VocabularyUsage extends VocabularyImport {
-}
-
-////////////////////////////////////////
-//  Vocabulary Bundle Imports 
-////////////////////////////////////////
-
-/*
- * VocabularyBundleExtension is an import that allows a vocabulary bundle to extend another vocabulary bundle.
- */
-@Bikeshed(heading="Vocabularies")
-class VocabularyBundleExtension extends VocabularyBundleImport {
-}
-
-/*
- * VocabularyBundleInclusion is an import that allows a vocabulary bundle to include a vocabulary. 
- */
-@Bikeshed(heading="Vocabularies")
-class VocabularyBundleInclusion extends VocabularyBundleImport {
-}
-
-////////////////////////////////////////
-//  Description Imports 
-////////////////////////////////////////
-
-/*
- * DescriptionExtension is an import that allows a description to extend another description.
- */
-@Bikeshed(heading="Descriptions")
-class DescriptionExtension extends DescriptionImport {
-}
-
-/*
- * DescriptionUsage is an import that allows a description to use a vocabulary box.
- */
-@Bikeshed(heading="Descriptions")
-class DescriptionUsage extends DescriptionImport {
-}
-
-////////////////////////////////////////
-//  Description Bundle Imports 
-////////////////////////////////////////
-
-/*
- * DescriptionBundleExtension is an import that allows a description bundle to extend another description bundle.
- */
-@Bikeshed(heading="Descriptions")
-class DescriptionBundleExtension extends DescriptionBundleImport {
-}
-
-/*
- * DescriptionBundleInclusion is an import that allows a description bundle to include a description.
- */
-@Bikeshed(heading="Descriptions")
-class DescriptionBundleInclusion extends DescriptionBundleImport {
-}
-
-/*
- * DescriptionBundleUsage is an import that allows a description bundle to use a vocabulary box.
- */
-@Bikeshed(heading="Descriptions")
-class DescriptionBundleUsage extends DescriptionBundleImport {
+@Bikeshed(heading="Elements")
+class Inclusion extends Import {
 }
 
 ////////////////////////////////////////

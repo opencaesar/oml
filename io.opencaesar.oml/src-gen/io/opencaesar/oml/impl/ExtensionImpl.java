@@ -18,25 +18,25 @@
  */
 package io.opencaesar.oml.impl;
 
+import io.opencaesar.oml.Extension;
 import io.opencaesar.oml.OmlPackage;
-import io.opencaesar.oml.VocabularyExtension;
 
 import org.eclipse.emf.ecore.EClass;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Vocabulary Extension</b></em>'.
+ * An implementation of the model object '<em><b>Extension</b></em>'.
  * <!-- end-user-doc -->
  *
  * @generated
  */
-public class VocabularyExtensionImpl extends VocabularyImportImpl implements VocabularyExtension {
+public class ExtensionImpl extends ImportImpl implements Extension {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected VocabularyExtensionImpl() {
+	protected ExtensionImpl() {
 		super();
 	}
 
@@ -47,7 +47,7 @@ public class VocabularyExtensionImpl extends VocabularyImportImpl implements Voc
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return OmlPackage.Literals.VOCABULARY_EXTENSION;
+		return OmlPackage.Literals.EXTENSION;
 	}
 
-} //VocabularyExtensionImpl
+} //ExtensionImpl

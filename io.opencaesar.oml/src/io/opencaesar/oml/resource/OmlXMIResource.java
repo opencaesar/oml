@@ -111,7 +111,7 @@ public final class OmlXMIResource extends XMIResourceImpl {
 
 	private class OmlExtendedMetaData extends BasicExtendedMetaData {
 	    
-		private String ownedImportsName = OmlPackage.Literals.VOCABULARY__OWNED_IMPORTS.getName();
+		private String ownedImportsName = OmlPackage.Literals.ONTOLOGY__OWNED_IMPORTS.getName();
 		
 		/**
 	     * This work around ensures that ownedImports is the first reference

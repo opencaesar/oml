@@ -18,6 +18,7 @@
  */
 package io.opencaesar.oml;
 
+import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -36,6 +37,7 @@ package io.opencaesar.oml;
  * <ul>
  *   <li>{@link io.opencaesar.oml.Ontology#getNamespace <em>Namespace</em>}</li>
  *   <li>{@link io.opencaesar.oml.Ontology#getPrefix <em>Prefix</em>}</li>
+ *   <li>{@link io.opencaesar.oml.Ontology#getOwnedImports <em>Owned Imports</em>}</li>
  * </ul>
  *
  * @see io.opencaesar.oml.OmlPackage#getOntology()
@@ -93,6 +95,23 @@ public interface Ontology extends IdentifiedElement {
 	 * @generated
 	 */
 	void setPrefix(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Owned Imports</b></em>' containment reference list.
+	 * The list contents are of type {@link io.opencaesar.oml.Import}.
+	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.Import#getOwningOntology <em>Owning Ontology</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The set of imports this ontology has to other ontologies
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Owned Imports</em>' containment reference list.
+	 * @see io.opencaesar.oml.OmlPackage#getOntology_OwnedImports()
+	 * @see io.opencaesar.oml.Import#getOwningOntology
+	 * @model opposite="owningOntology" containment="true"
+	 * @generated
+	 */
+	EList<Import> getOwnedImports();
 
 	/**
 	 * <!-- begin-user-doc -->

@@ -21,17 +21,17 @@ package io.opencaesar.oml;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Description Bundle Usage</b></em>'.
+ * A representation of the model object '<em><b>Extension</b></em>'.
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * DescriptionBundleUsage is an import that allows a description bundle to use a vocabulary box.
+ * Extension is an import that allows an ontology to extend another of the same kind.
  * <!-- end-model-doc -->
  *
  *
- * @see io.opencaesar.oml.OmlPackage#getDescriptionBundleUsage()
- * @model annotation="https://tabatkins.github.io/bikeshed heading='Descriptions'"
+ * @see io.opencaesar.oml.OmlPackage#getExtension()
+ * @model annotation="https://tabatkins.github.io/bikeshed heading='Elements'"
  * @generated
  */
-public interface DescriptionBundleUsage extends DescriptionBundleImport {
-} // DescriptionBundleUsage
+public interface Extension extends Import {
+} // Extension

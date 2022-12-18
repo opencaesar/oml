@@ -19,32 +19,28 @@
 package io.opencaesar.oml.provider;
 
 
-import io.opencaesar.oml.DescriptionBundleImport;
-import io.opencaesar.oml.OmlPackage;
-
+import io.opencaesar.oml.Inclusion;
 import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
-import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 
 /**
- * This is the item provider adapter for a {@link io.opencaesar.oml.DescriptionBundleImport} object.
+ * This is the item provider adapter for a {@link io.opencaesar.oml.Inclusion} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class DescriptionBundleImportItemProvider extends ImportItemProvider {
+public class InclusionItemProvider extends ImportItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public DescriptionBundleImportItemProvider(AdapterFactory adapterFactory) {
+	public InclusionItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -59,31 +55,19 @@ public class DescriptionBundleImportItemProvider extends ImportItemProvider {
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addOwningDescriptionBundlePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Owning Description Bundle feature.
+	 * This returns Inclusion.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addOwningDescriptionBundlePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_DescriptionBundleImport_owningDescriptionBundle_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_DescriptionBundleImport_owningDescriptionBundle_feature", "_UI_DescriptionBundleImport_type"),
-				 OmlPackage.Literals.DESCRIPTION_BUNDLE_IMPORT__OWNING_DESCRIPTION_BUNDLE,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
+	@Override
+	public Object getImage(Object object) {
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/Inclusion"));
 	}
 
 	/**
@@ -94,10 +78,10 @@ public class DescriptionBundleImportItemProvider extends ImportItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((DescriptionBundleImport)object).getNamespace();
+		String label = ((Inclusion)object).getNamespace();
 		return label == null || label.length() == 0 ?
-			getString("_UI_DescriptionBundleImport_type") :
-			getString("_UI_DescriptionBundleImport_type") + " " + label;
+			getString("_UI_Inclusion_type") :
+			getString("_UI_Inclusion_type") + " " + label;
 	}
 
 

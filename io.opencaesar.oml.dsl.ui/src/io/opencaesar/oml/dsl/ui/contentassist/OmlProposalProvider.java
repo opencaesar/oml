@@ -16,39 +16,36 @@
  */
 package io.opencaesar.oml.dsl.ui.contentassist;
 
-import com.google.common.base.Objects;
-import com.google.common.base.Predicate;
-import com.google.inject.Inject;
-import io.opencaesar.oml.Element;
-import io.opencaesar.oml.Import;
-import io.opencaesar.oml.OmlPackage;
-import io.opencaesar.oml.Ontology;
-import io.opencaesar.oml.dsl.conversion.NAMESPACEValueConverter;
-import io.opencaesar.oml.dsl.services.OmlGrammarAccess;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.function.Consumer;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
-import org.eclipse.xtext.xbase.lib.Conversions;
-import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
+
+import com.google.common.base.Predicate;
+import com.google.inject.Inject;
+
+import io.opencaesar.oml.Description;
+import io.opencaesar.oml.DescriptionBundle;
+import io.opencaesar.oml.Element;
+import io.opencaesar.oml.Import;
+import io.opencaesar.oml.OmlPackage;
+import io.opencaesar.oml.Ontology;
+import io.opencaesar.oml.Vocabulary;
+import io.opencaesar.oml.VocabularyBundle;
+import io.opencaesar.oml.dsl.conversion.NAMESPACEValueConverter;
+import io.opencaesar.oml.dsl.services.OmlGrammarAccess;
 
 /**
  * See
@@ -97,24 +94,32 @@ public class OmlProposalProvider extends AbstractOmlProposalProvider {
 		final URI ontologyURI = EcoreUtil.getURI(ontology);
 		final Keyword keyword = ((Keyword) context.getLastCompleteNode().getGrammarElement());
 		Predicate<IEObjectDescription> predicate = null;
-		if (keyword == oml.getVocabularyExtensionAccess().getExtendsKeyword_0()) {
-			predicate = x -> x.getEObjectURI() != ontologyURI && OmlPackage.Literals.VOCABULARY.isSuperTypeOf(x.getEClass());
-		} else if (keyword == oml.getVocabularyUsageAccess().getUsesKeyword_0()) {
-			predicate = x -> x.getEObjectURI() != ontologyURI && OmlPackage.Literals.DESCRIPTION_BOX.isSuperTypeOf(x.getEClass());
-		} else if (keyword == oml.getVocabularyBundleExtensionAccess().getExtendsKeyword_0()) {
-			predicate = x -> x.getEObjectURI() != ontologyURI && OmlPackage.Literals.VOCABULARY_BUNDLE.isSuperTypeOf(x.getEClass());
-		} else if (keyword == oml.getVocabularyBundleInclusionAccess().getIncludesKeyword_0()) {
-			predicate = x -> x.getEObjectURI() != ontologyURI && OmlPackage.Literals.VOCABULARY.isSuperTypeOf(x.getEClass());
-		} else if (keyword == oml.getDescriptionExtensionAccess().getExtendsKeyword_0()) {
-			predicate = x -> x.getEObjectURI() != ontologyURI && OmlPackage.Literals.DESCRIPTION.isSuperTypeOf(x.getEClass());
-		} else if (keyword == oml.getDescriptionUsageAccess().getUsesKeyword_0()) {
-			predicate = x -> x.getEObjectURI() != ontologyURI && OmlPackage.Literals.VOCABULARY_BOX.isSuperTypeOf(x.getEClass());
-		} else if (keyword == oml.getDescriptionBundleExtensionAccess().getExtendsKeyword_0()) {
-			predicate = x -> x.getEObjectURI() != ontologyURI && OmlPackage.Literals.DESCRIPTION_BUNDLE.isSuperTypeOf(x.getEClass());
-		} else if (keyword == oml.getDescriptionBundleInclusionAccess().getIncludesKeyword_0()) {
-			predicate = x -> x.getEObjectURI() != ontologyURI && OmlPackage.Literals.DESCRIPTION.isSuperTypeOf(x.getEClass());
-		} else if (keyword == oml.getDescriptionBundleUsageAccess().getUsesKeyword_0()) {
-			predicate = x -> x.getEObjectURI() != ontologyURI && OmlPackage.Literals.VOCABULARY_BOX.isSuperTypeOf(x.getEClass());
+		if (ontology instanceof Vocabulary) {
+			if (keyword == oml.getExtensionAccess().getExtendsKeyword_0()) {
+				predicate = x -> x.getEObjectURI() != ontologyURI && OmlPackage.Literals.VOCABULARY.isSuperTypeOf(x.getEClass());
+			} else if (keyword == oml.getUsageAccess().getUsesKeyword_0()) {
+				predicate = x -> x.getEObjectURI() != ontologyURI && OmlPackage.Literals.DESCRIPTION.isSuperTypeOf(x.getEClass());
+			}
+		} else if (ontology instanceof VocabularyBundle) {
+			if (keyword == oml.getExtensionAccess().getExtendsKeyword_0()) {
+				predicate = x -> x.getEObjectURI() != ontologyURI && OmlPackage.Literals.VOCABULARY_BUNDLE.isSuperTypeOf(x.getEClass());
+			} else if (keyword == oml.getInclusionAccess().getIncludesKeyword_0()) {
+				predicate = x -> x.getEObjectURI() != ontologyURI && OmlPackage.Literals.VOCABULARY.isSuperTypeOf(x.getEClass());
+			}
+		} else if (ontology instanceof Description) {
+			if (keyword == oml.getExtensionAccess().getExtendsKeyword_0()) {
+				predicate = x -> x.getEObjectURI() != ontologyURI && OmlPackage.Literals.DESCRIPTION.isSuperTypeOf(x.getEClass());
+			} else if (keyword == oml.getUsageAccess().getUsesKeyword_0()) {
+				predicate = x -> x.getEObjectURI() != ontologyURI && OmlPackage.Literals.VOCABULARY.isSuperTypeOf(x.getEClass());
+			}
+		} else if (ontology instanceof DescriptionBundle) {
+			if (keyword == oml.getExtensionAccess().getExtendsKeyword_0()) {
+				predicate = x -> x.getEObjectURI() != ontologyURI && OmlPackage.Literals.DESCRIPTION_BUNDLE.isSuperTypeOf(x.getEClass());
+			} else if (keyword == oml.getUsageAccess().getUsesKeyword_0()) {
+				predicate = x -> x.getEObjectURI() != ontologyURI && OmlPackage.Literals.VOCABULARY_BOX.isSuperTypeOf(x.getEClass());
+			} else if (keyword == oml.getInclusionAccess().getIncludesKeyword_0()) {
+				predicate = x -> x.getEObjectURI() != ontologyURI && OmlPackage.Literals.DESCRIPTION.isSuperTypeOf(x.getEClass());
+			}
 		}
 		final EReference eReference = EcoreFactory.eINSTANCE.createEReference();
 		eReference.setEType(OmlPackage.Literals.ONTOLOGY);

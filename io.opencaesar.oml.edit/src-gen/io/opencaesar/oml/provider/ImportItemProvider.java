@@ -63,6 +63,7 @@ public class ImportItemProvider extends ElementItemProvider {
 
 			addNamespacePropertyDescriptor(object);
 			addPrefixPropertyDescriptor(object);
+			addOwningOntologyPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -107,6 +108,28 @@ public class ImportItemProvider extends ElementItemProvider {
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Owning Ontology feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addOwningOntologyPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Import_owningOntology_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Import_owningOntology_feature", "_UI_Import_type"),
+				 OmlPackage.Literals.IMPORT__OWNING_ONTOLOGY,
+				 true,
+				 false,
+				 true,
+				 null,
 				 null,
 				 null));
 	}

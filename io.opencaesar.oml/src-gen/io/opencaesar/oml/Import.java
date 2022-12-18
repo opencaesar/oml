@@ -36,6 +36,7 @@ package io.opencaesar.oml;
  * <ul>
  *   <li>{@link io.opencaesar.oml.Import#getNamespace <em>Namespace</em>}</li>
  *   <li>{@link io.opencaesar.oml.Import#getPrefix <em>Prefix</em>}</li>
+ *   <li>{@link io.opencaesar.oml.Import#getOwningOntology <em>Owning Ontology</em>}</li>
  * </ul>
  *
  * @see io.opencaesar.oml.OmlPackage#getImport()
@@ -93,6 +94,33 @@ public interface Import extends Element {
 	 * @generated
 	 */
 	void setPrefix(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Owning Ontology</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.Ontology#getOwnedImports <em>Owned Imports</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The ontology that owns this import
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Owning Ontology</em>' container reference.
+	 * @see #setOwningOntology(Ontology)
+	 * @see io.opencaesar.oml.OmlPackage#getImport_OwningOntology()
+	 * @see io.opencaesar.oml.Ontology#getOwnedImports
+	 * @model opposite="ownedImports" required="true" transient="false"
+	 * @generated
+	 */
+	Ontology getOwningOntology();
+
+	/**
+	 * Sets the value of the '{@link io.opencaesar.oml.Import#getOwningOntology <em>Owning Ontology</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Owning Ontology</em>' container reference.
+	 * @see #getOwningOntology()
+	 * @generated
+	 */
+	void setOwningOntology(Ontology value);
 
 	/**
 	 * <!-- begin-user-doc -->
