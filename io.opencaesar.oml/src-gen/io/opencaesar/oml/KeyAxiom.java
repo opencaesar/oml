@@ -26,7 +26,7 @@ import org.eclipse.emf.common.util.EList;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * KeyAxiom is an axiom that states that a set of features form a unique key for an entity. This means that all
+ * KeyAxiom is an axiom that states that a set of properties form a unique key for an entity. This means that all
  * instances of that entity must have unique values for those keys.
  * <!-- end-model-doc -->
  *
@@ -46,18 +46,18 @@ import org.eclipse.emf.common.util.EList;
 public interface KeyAxiom extends Axiom {
 	/**
 	 * Returns the value of the '<em><b>Properties</b></em>' reference list.
-	 * The list contents are of type {@link io.opencaesar.oml.Feature}.
+	 * The list contents are of type {@link io.opencaesar.oml.Property}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The set of features specified by this axiom as a key
+	 * The set of properties specified by this axiom as a key
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Properties</em>' reference list.
 	 * @see io.opencaesar.oml.OmlPackage#getKeyAxiom_Properties()
 	 * @model required="true"
 	 * @generated
 	 */
-	EList<Feature> getProperties();
+	EList<Property> getProperties();
 
 	/**
 	 * Returns the value of the '<em><b>Owning Entity</b></em>' container reference.

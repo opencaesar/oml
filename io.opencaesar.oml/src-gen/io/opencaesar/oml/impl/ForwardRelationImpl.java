@@ -48,11 +48,22 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  * </p>
  * <ul>
  *   <li>{@link io.opencaesar.oml.impl.ForwardRelationImpl#getRelationEntity <em>Relation Entity</em>}</li>
+ *   <li>{@link io.opencaesar.oml.impl.ForwardRelationImpl#isFunctional <em>Functional</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class ForwardRelationImpl extends RelationImpl implements ForwardRelation {
+	/**
+	 * The default value of the '{@link #isFunctional() <em>Functional</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isFunctional()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean FUNCTIONAL_EDEFAULT = false;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -123,6 +134,25 @@ public class ForwardRelationImpl extends RelationImpl implements ForwardRelation
 		}
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.FORWARD_RELATION__RELATION_ENTITY, newRelationEntity, newRelationEntity));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isFunctional() {
+		boolean _xifexpression = false;
+		RelationEntity _relationEntity = this.getRelationEntity();
+		boolean _tripleNotEquals = (_relationEntity != null);
+		if (_tripleNotEquals) {
+			_xifexpression = this.getRelationEntity().isFunctional();
+		}
+		else {
+			_xifexpression = false;
+		}
+		return _xifexpression;
 	}
 
 	/**
@@ -228,6 +258,8 @@ public class ForwardRelationImpl extends RelationImpl implements ForwardRelation
 			case OmlPackage.FORWARD_RELATION__RELATION_ENTITY:
 				if (resolve) return getRelationEntity();
 				return basicGetRelationEntity();
+			case OmlPackage.FORWARD_RELATION__FUNCTIONAL:
+				return isFunctional();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -272,6 +304,8 @@ public class ForwardRelationImpl extends RelationImpl implements ForwardRelation
 		switch (featureID) {
 			case OmlPackage.FORWARD_RELATION__RELATION_ENTITY:
 				return basicGetRelationEntity() != null;
+			case OmlPackage.FORWARD_RELATION__FUNCTIONAL:
+				return isFunctional() != FUNCTIONAL_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}

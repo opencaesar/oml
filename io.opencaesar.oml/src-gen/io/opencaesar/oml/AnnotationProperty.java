@@ -30,7 +30,7 @@ package io.opencaesar.oml;
  *
  *
  * @see io.opencaesar.oml.OmlPackage#getAnnotationProperty()
- * @model annotation="https://tabatkins.github.io/bikeshed heading='Features'"
+ * @model annotation="https://tabatkins.github.io/bikeshed heading='Properties'"
  * @generated
  */
 public interface AnnotationProperty extends Property, SpecializableTerm {

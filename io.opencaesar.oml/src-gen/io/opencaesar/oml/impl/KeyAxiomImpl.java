@@ -20,9 +20,9 @@ package io.opencaesar.oml.impl;
 
 import io.opencaesar.oml.Entity;
 import io.opencaesar.oml.EntityReference;
-import io.opencaesar.oml.Feature;
 import io.opencaesar.oml.KeyAxiom;
 import io.opencaesar.oml.OmlPackage;
+import io.opencaesar.oml.Property;
 
 import java.util.Collection;
 
@@ -63,7 +63,7 @@ public class KeyAxiomImpl extends AxiomImpl implements KeyAxiom {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Feature> properties;
+	protected EList<Property> properties;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -90,9 +90,9 @@ public class KeyAxiomImpl extends AxiomImpl implements KeyAxiom {
 	 * @generated
 	 */
 	@Override
-	public EList<Feature> getProperties() {
+	public EList<Property> getProperties() {
 		if (properties == null) {
-			properties = new EObjectResolvingEList<Feature>(Feature.class, this, OmlPackage.KEY_AXIOM__PROPERTIES);
+			properties = new EObjectResolvingEList<Property>(Property.class, this, OmlPackage.KEY_AXIOM__PROPERTIES);
 		}
 		return properties;
 	}
@@ -286,7 +286,7 @@ public class KeyAxiomImpl extends AxiomImpl implements KeyAxiom {
 		switch (featureID) {
 			case OmlPackage.KEY_AXIOM__PROPERTIES:
 				getProperties().clear();
-				getProperties().addAll((Collection<? extends Feature>)newValue);
+				getProperties().addAll((Collection<? extends Property>)newValue);
 				return;
 			case OmlPackage.KEY_AXIOM__OWNING_ENTITY:
 				setOwningEntity((Entity)newValue);

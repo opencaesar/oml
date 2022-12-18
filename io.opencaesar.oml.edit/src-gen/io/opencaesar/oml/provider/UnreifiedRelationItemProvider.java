@@ -21,7 +21,7 @@ package io.opencaesar.oml.provider;
 
 import io.opencaesar.oml.OmlFactory;
 import io.opencaesar.oml.OmlPackage;
-import io.opencaesar.oml.RelationEntity;
+import io.opencaesar.oml.UnreifiedRelation;
 
 import java.util.Collection;
 import java.util.List;
@@ -37,19 +37,19 @@ import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
- * This is the item provider adapter for a {@link io.opencaesar.oml.RelationEntity} object.
+ * This is the item provider adapter for a {@link io.opencaesar.oml.UnreifiedRelation} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class RelationEntityItemProvider extends EntityItemProvider {
+public class UnreifiedRelationItemProvider extends RelationItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public RelationEntityItemProvider(AdapterFactory adapterFactory) {
+	public UnreifiedRelationItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -64,6 +64,7 @@ public class RelationEntityItemProvider extends EntityItemProvider {
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addOwningVocabularyPropertyDescriptor(object);
 			addSourcePropertyDescriptor(object);
 			addTargetPropertyDescriptor(object);
 			addFunctionalPropertyDescriptor(object);
@@ -75,6 +76,28 @@ public class RelationEntityItemProvider extends EntityItemProvider {
 			addTransitivePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Owning Vocabulary feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addOwningVocabularyPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_VocabularyStatement_owningVocabulary_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_VocabularyStatement_owningVocabulary_feature", "_UI_VocabularyStatement_type"),
+				 OmlPackage.Literals.VOCABULARY_STATEMENT__OWNING_VOCABULARY,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
 	}
 
 	/**
@@ -287,8 +310,8 @@ public class RelationEntityItemProvider extends EntityItemProvider {
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
+			childrenFeatures.add(OmlPackage.Literals.SPECIALIZABLE_TERM__OWNED_SPECIALIZATIONS);
 			childrenFeatures.add(OmlPackage.Literals.RELATION_BASE__REVERSE_RELATION);
-			childrenFeatures.add(OmlPackage.Literals.RELATION_ENTITY__FORWARD_RELATION);
 		}
 		return childrenFeatures;
 	}
@@ -307,14 +330,14 @@ public class RelationEntityItemProvider extends EntityItemProvider {
 	}
 
 	/**
-	 * This returns RelationEntity.gif.
+	 * This returns UnreifiedRelation.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/RelationEntity"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/UnreifiedRelation"));
 	}
 
 	/**
@@ -325,10 +348,10 @@ public class RelationEntityItemProvider extends EntityItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((RelationEntity)object).getName();
+		String label = ((UnreifiedRelation)object).getName();
 		return label == null || label.length() == 0 ?
-			getString("_UI_RelationEntity_type") :
-			getString("_UI_RelationEntity_type") + " " + label;
+			getString("_UI_UnreifiedRelation_type") :
+			getString("_UI_UnreifiedRelation_type") + " " + label;
 	}
 
 
@@ -343,18 +366,18 @@ public class RelationEntityItemProvider extends EntityItemProvider {
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(RelationEntity.class)) {
-			case OmlPackage.RELATION_ENTITY__FUNCTIONAL:
-			case OmlPackage.RELATION_ENTITY__INVERSE_FUNCTIONAL:
-			case OmlPackage.RELATION_ENTITY__SYMMETRIC:
-			case OmlPackage.RELATION_ENTITY__ASYMMETRIC:
-			case OmlPackage.RELATION_ENTITY__REFLEXIVE:
-			case OmlPackage.RELATION_ENTITY__IRREFLEXIVE:
-			case OmlPackage.RELATION_ENTITY__TRANSITIVE:
+		switch (notification.getFeatureID(UnreifiedRelation.class)) {
+			case OmlPackage.UNREIFIED_RELATION__FUNCTIONAL:
+			case OmlPackage.UNREIFIED_RELATION__INVERSE_FUNCTIONAL:
+			case OmlPackage.UNREIFIED_RELATION__SYMMETRIC:
+			case OmlPackage.UNREIFIED_RELATION__ASYMMETRIC:
+			case OmlPackage.UNREIFIED_RELATION__REFLEXIVE:
+			case OmlPackage.UNREIFIED_RELATION__IRREFLEXIVE:
+			case OmlPackage.UNREIFIED_RELATION__TRANSITIVE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
-			case OmlPackage.RELATION_ENTITY__REVERSE_RELATION:
-			case OmlPackage.RELATION_ENTITY__FORWARD_RELATION:
+			case OmlPackage.UNREIFIED_RELATION__OWNED_SPECIALIZATIONS:
+			case OmlPackage.UNREIFIED_RELATION__REVERSE_RELATION:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -374,13 +397,13 @@ public class RelationEntityItemProvider extends EntityItemProvider {
 
 		newChildDescriptors.add
 			(createChildParameter
-				(OmlPackage.Literals.RELATION_BASE__REVERSE_RELATION,
-				 OmlFactory.eINSTANCE.createReverseRelation()));
+				(OmlPackage.Literals.SPECIALIZABLE_TERM__OWNED_SPECIALIZATIONS,
+				 OmlFactory.eINSTANCE.createSpecializationAxiom()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(OmlPackage.Literals.RELATION_ENTITY__FORWARD_RELATION,
-				 OmlFactory.eINSTANCE.createForwardRelation()));
+				(OmlPackage.Literals.RELATION_BASE__REVERSE_RELATION,
+				 OmlFactory.eINSTANCE.createReverseRelation()));
 	}
 
 }

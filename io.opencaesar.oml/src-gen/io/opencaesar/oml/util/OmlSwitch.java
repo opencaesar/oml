@@ -318,21 +318,9 @@ public class OmlSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case OmlPackage.FEATURE: {
-				Feature feature = (Feature)theEObject;
-				T result = caseFeature(feature);
-				if (result == null) result = caseTerm(feature);
-				if (result == null) result = caseVocabularyMember(feature);
-				if (result == null) result = caseMember(feature);
-				if (result == null) result = caseIdentifiedElement(feature);
-				if (result == null) result = caseElement(feature);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case OmlPackage.PROPERTY: {
 				Property property = (Property)theEObject;
 				T result = caseProperty(property);
-				if (result == null) result = caseFeature(property);
 				if (result == null) result = caseTerm(property);
 				if (result == null) result = caseVocabularyMember(property);
 				if (result == null) result = caseMember(property);
@@ -352,6 +340,20 @@ public class OmlSwitch<T> extends Switch<T> {
 				if (result == null) result = caseMember(type);
 				if (result == null) result = caseIdentifiedElement(type);
 				if (result == null) result = caseElement(type);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case OmlPackage.RELATION_BASE: {
+				RelationBase relationBase = (RelationBase)theEObject;
+				T result = caseRelationBase(relationBase);
+				if (result == null) result = caseSpecializableTerm(relationBase);
+				if (result == null) result = caseTerm(relationBase);
+				if (result == null) result = caseVocabularyStatement(relationBase);
+				if (result == null) result = caseVocabularyMember(relationBase);
+				if (result == null) result = caseStatement(relationBase);
+				if (result == null) result = caseMember(relationBase);
+				if (result == null) result = caseIdentifiedElement(relationBase);
+				if (result == null) result = caseElement(relationBase);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -455,6 +457,7 @@ public class OmlSwitch<T> extends Switch<T> {
 				RelationEntity relationEntity = (RelationEntity)theEObject;
 				T result = caseRelationEntity(relationEntity);
 				if (result == null) result = caseEntity(relationEntity);
+				if (result == null) result = caseRelationBase(relationEntity);
 				if (result == null) result = caseClassifier(relationEntity);
 				if (result == null) result = caseType(relationEntity);
 				if (result == null) result = caseSpecializableTerm(relationEntity);
@@ -505,11 +508,10 @@ public class OmlSwitch<T> extends Switch<T> {
 				T result = caseAnnotationProperty(annotationProperty);
 				if (result == null) result = caseProperty(annotationProperty);
 				if (result == null) result = caseSpecializableTerm(annotationProperty);
-				if (result == null) result = caseFeature(annotationProperty);
-				if (result == null) result = caseVocabularyStatement(annotationProperty);
 				if (result == null) result = caseTerm(annotationProperty);
-				if (result == null) result = caseStatement(annotationProperty);
+				if (result == null) result = caseVocabularyStatement(annotationProperty);
 				if (result == null) result = caseVocabularyMember(annotationProperty);
+				if (result == null) result = caseStatement(annotationProperty);
 				if (result == null) result = caseMember(annotationProperty);
 				if (result == null) result = caseIdentifiedElement(annotationProperty);
 				if (result == null) result = caseElement(annotationProperty);
@@ -520,7 +522,6 @@ public class OmlSwitch<T> extends Switch<T> {
 				SemanticProperty semanticProperty = (SemanticProperty)theEObject;
 				T result = caseSemanticProperty(semanticProperty);
 				if (result == null) result = caseProperty(semanticProperty);
-				if (result == null) result = caseFeature(semanticProperty);
 				if (result == null) result = caseTerm(semanticProperty);
 				if (result == null) result = caseVocabularyMember(semanticProperty);
 				if (result == null) result = caseMember(semanticProperty);
@@ -536,9 +537,8 @@ public class OmlSwitch<T> extends Switch<T> {
 				if (result == null) result = caseSpecializableTerm(scalarProperty);
 				if (result == null) result = caseProperty(scalarProperty);
 				if (result == null) result = caseVocabularyStatement(scalarProperty);
-				if (result == null) result = caseFeature(scalarProperty);
-				if (result == null) result = caseStatement(scalarProperty);
 				if (result == null) result = caseTerm(scalarProperty);
+				if (result == null) result = caseStatement(scalarProperty);
 				if (result == null) result = caseVocabularyMember(scalarProperty);
 				if (result == null) result = caseMember(scalarProperty);
 				if (result == null) result = caseIdentifiedElement(scalarProperty);
@@ -553,9 +553,8 @@ public class OmlSwitch<T> extends Switch<T> {
 				if (result == null) result = caseSpecializableTerm(structuredProperty);
 				if (result == null) result = caseProperty(structuredProperty);
 				if (result == null) result = caseVocabularyStatement(structuredProperty);
-				if (result == null) result = caseFeature(structuredProperty);
-				if (result == null) result = caseStatement(structuredProperty);
 				if (result == null) result = caseTerm(structuredProperty);
+				if (result == null) result = caseStatement(structuredProperty);
 				if (result == null) result = caseVocabularyMember(structuredProperty);
 				if (result == null) result = caseMember(structuredProperty);
 				if (result == null) result = caseIdentifiedElement(structuredProperty);
@@ -566,7 +565,8 @@ public class OmlSwitch<T> extends Switch<T> {
 			case OmlPackage.RELATION: {
 				Relation relation = (Relation)theEObject;
 				T result = caseRelation(relation);
-				if (result == null) result = caseFeature(relation);
+				if (result == null) result = caseSemanticProperty(relation);
+				if (result == null) result = caseProperty(relation);
 				if (result == null) result = caseTerm(relation);
 				if (result == null) result = caseVocabularyMember(relation);
 				if (result == null) result = caseMember(relation);
@@ -579,7 +579,8 @@ public class OmlSwitch<T> extends Switch<T> {
 				ForwardRelation forwardRelation = (ForwardRelation)theEObject;
 				T result = caseForwardRelation(forwardRelation);
 				if (result == null) result = caseRelation(forwardRelation);
-				if (result == null) result = caseFeature(forwardRelation);
+				if (result == null) result = caseSemanticProperty(forwardRelation);
+				if (result == null) result = caseProperty(forwardRelation);
 				if (result == null) result = caseTerm(forwardRelation);
 				if (result == null) result = caseVocabularyMember(forwardRelation);
 				if (result == null) result = caseMember(forwardRelation);
@@ -592,7 +593,8 @@ public class OmlSwitch<T> extends Switch<T> {
 				ReverseRelation reverseRelation = (ReverseRelation)theEObject;
 				T result = caseReverseRelation(reverseRelation);
 				if (result == null) result = caseRelation(reverseRelation);
-				if (result == null) result = caseFeature(reverseRelation);
+				if (result == null) result = caseSemanticProperty(reverseRelation);
+				if (result == null) result = caseProperty(reverseRelation);
 				if (result == null) result = caseTerm(reverseRelation);
 				if (result == null) result = caseVocabularyMember(reverseRelation);
 				if (result == null) result = caseMember(reverseRelation);
@@ -601,14 +603,33 @@ public class OmlSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case OmlPackage.UNREIFIED_RELATION: {
+				UnreifiedRelation unreifiedRelation = (UnreifiedRelation)theEObject;
+				T result = caseUnreifiedRelation(unreifiedRelation);
+				if (result == null) result = caseRelation(unreifiedRelation);
+				if (result == null) result = caseRelationBase(unreifiedRelation);
+				if (result == null) result = caseSemanticProperty(unreifiedRelation);
+				if (result == null) result = caseSpecializableTerm(unreifiedRelation);
+				if (result == null) result = caseProperty(unreifiedRelation);
+				if (result == null) result = caseVocabularyStatement(unreifiedRelation);
+				if (result == null) result = caseTerm(unreifiedRelation);
+				if (result == null) result = caseStatement(unreifiedRelation);
+				if (result == null) result = caseVocabularyMember(unreifiedRelation);
+				if (result == null) result = caseMember(unreifiedRelation);
+				if (result == null) result = caseIdentifiedElement(unreifiedRelation);
+				if (result == null) result = caseElement(unreifiedRelation);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case OmlPackage.NAMED_INSTANCE: {
 				NamedInstance namedInstance = (NamedInstance)theEObject;
 				T result = caseNamedInstance(namedInstance);
-				if (result == null) result = caseMember(namedInstance);
-				if (result == null) result = caseInstance(namedInstance);
+				if (result == null) result = caseDescriptionMember(namedInstance);
 				if (result == null) result = caseDescriptionStatement(namedInstance);
-				if (result == null) result = caseIdentifiedElement(namedInstance);
+				if (result == null) result = caseInstance(namedInstance);
+				if (result == null) result = caseMember(namedInstance);
 				if (result == null) result = caseStatement(namedInstance);
+				if (result == null) result = caseIdentifiedElement(namedInstance);
 				if (result == null) result = caseElement(namedInstance);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -617,11 +638,12 @@ public class OmlSwitch<T> extends Switch<T> {
 				ConceptInstance conceptInstance = (ConceptInstance)theEObject;
 				T result = caseConceptInstance(conceptInstance);
 				if (result == null) result = caseNamedInstance(conceptInstance);
-				if (result == null) result = caseMember(conceptInstance);
-				if (result == null) result = caseInstance(conceptInstance);
+				if (result == null) result = caseDescriptionMember(conceptInstance);
 				if (result == null) result = caseDescriptionStatement(conceptInstance);
-				if (result == null) result = caseIdentifiedElement(conceptInstance);
+				if (result == null) result = caseInstance(conceptInstance);
+				if (result == null) result = caseMember(conceptInstance);
 				if (result == null) result = caseStatement(conceptInstance);
+				if (result == null) result = caseIdentifiedElement(conceptInstance);
 				if (result == null) result = caseElement(conceptInstance);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -630,11 +652,12 @@ public class OmlSwitch<T> extends Switch<T> {
 				RelationInstance relationInstance = (RelationInstance)theEObject;
 				T result = caseRelationInstance(relationInstance);
 				if (result == null) result = caseNamedInstance(relationInstance);
-				if (result == null) result = caseMember(relationInstance);
-				if (result == null) result = caseInstance(relationInstance);
+				if (result == null) result = caseDescriptionMember(relationInstance);
 				if (result == null) result = caseDescriptionStatement(relationInstance);
-				if (result == null) result = caseIdentifiedElement(relationInstance);
+				if (result == null) result = caseInstance(relationInstance);
+				if (result == null) result = caseMember(relationInstance);
 				if (result == null) result = caseStatement(relationInstance);
+				if (result == null) result = caseIdentifiedElement(relationInstance);
 				if (result == null) result = caseElement(relationInstance);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -899,12 +922,12 @@ public class OmlSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case OmlPackage.FEATURE_PREDICATE: {
-				FeaturePredicate featurePredicate = (FeaturePredicate)theEObject;
-				T result = caseFeaturePredicate(featurePredicate);
-				if (result == null) result = caseBinaryPredicate(featurePredicate);
-				if (result == null) result = casePredicate(featurePredicate);
-				if (result == null) result = caseElement(featurePredicate);
+			case OmlPackage.PROPERTY_PREDICATE: {
+				PropertyPredicate propertyPredicate = (PropertyPredicate)theEObject;
+				T result = casePropertyPredicate(propertyPredicate);
+				if (result == null) result = caseBinaryPredicate(propertyPredicate);
+				if (result == null) result = casePredicate(propertyPredicate);
+				if (result == null) result = caseElement(propertyPredicate);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -1589,21 +1612,6 @@ public class OmlSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Feature</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Feature</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseFeature(Feature object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Property</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -1630,6 +1638,21 @@ public class OmlSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseType(Type object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Relation Base</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Relation Base</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseRelationBase(RelationBase object) {
 		return null;
 	}
 
@@ -1870,6 +1893,21 @@ public class OmlSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseReverseRelation(ReverseRelation object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Unreified Relation</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Unreified Relation</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseUnreifiedRelation(UnreifiedRelation object) {
 		return null;
 	}
 
@@ -2339,17 +2377,17 @@ public class OmlSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Feature Predicate</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Property Predicate</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Feature Predicate</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Property Predicate</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseFeaturePredicate(FeaturePredicate object) {
+	public T casePropertyPredicate(PropertyPredicate object) {
 		return null;
 	}
 

@@ -19,9 +19,9 @@
 package io.opencaesar.oml.impl;
 
 import io.opencaesar.oml.Entity;
-import io.opencaesar.oml.ForwardRelation;
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.Relation;
+import io.opencaesar.oml.RelationBase;
 import io.opencaesar.oml.RelationEntity;
 import io.opencaesar.oml.ReverseRelation;
 
@@ -47,12 +47,23 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link io.opencaesar.oml.impl.ReverseRelationImpl#getRelationEntity <em>Relation Entity</em>}</li>
+ *   <li>{@link io.opencaesar.oml.impl.ReverseRelationImpl#getRelationBase <em>Relation Base</em>}</li>
+ *   <li>{@link io.opencaesar.oml.impl.ReverseRelationImpl#isFunctional <em>Functional</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class ReverseRelationImpl extends RelationImpl implements ReverseRelation {
+	/**
+	 * The default value of the '{@link #isFunctional() <em>Functional</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isFunctional()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean FUNCTIONAL_EDEFAULT = false;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -78,9 +89,9 @@ public class ReverseRelationImpl extends RelationImpl implements ReverseRelation
 	 * @generated
 	 */
 	@Override
-	public RelationEntity getRelationEntity() {
-		if (eContainerFeatureID() != OmlPackage.REVERSE_RELATION__RELATION_ENTITY) return null;
-		return (RelationEntity)eContainer();
+	public RelationBase getRelationBase() {
+		if (eContainerFeatureID() != OmlPackage.REVERSE_RELATION__RELATION_BASE) return null;
+		return (RelationBase)eContainer();
 	}
 
 	/**
@@ -88,9 +99,9 @@ public class ReverseRelationImpl extends RelationImpl implements ReverseRelation
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public RelationEntity basicGetRelationEntity() {
-		if (eContainerFeatureID() != OmlPackage.REVERSE_RELATION__RELATION_ENTITY) return null;
-		return (RelationEntity)eInternalContainer();
+	public RelationBase basicGetRelationBase() {
+		if (eContainerFeatureID() != OmlPackage.REVERSE_RELATION__RELATION_BASE) return null;
+		return (RelationBase)eInternalContainer();
 	}
 
 	/**
@@ -98,8 +109,8 @@ public class ReverseRelationImpl extends RelationImpl implements ReverseRelation
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetRelationEntity(RelationEntity newRelationEntity, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newRelationEntity, OmlPackage.REVERSE_RELATION__RELATION_ENTITY, msgs);
+	public NotificationChain basicSetRelationBase(RelationBase newRelationBase, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newRelationBase, OmlPackage.REVERSE_RELATION__RELATION_BASE, msgs);
 		return msgs;
 	}
 
@@ -109,20 +120,39 @@ public class ReverseRelationImpl extends RelationImpl implements ReverseRelation
 	 * @generated
 	 */
 	@Override
-	public void setRelationEntity(RelationEntity newRelationEntity) {
-		if (newRelationEntity != eInternalContainer() || (eContainerFeatureID() != OmlPackage.REVERSE_RELATION__RELATION_ENTITY && newRelationEntity != null)) {
-			if (EcoreUtil.isAncestor(this, newRelationEntity))
+	public void setRelationBase(RelationBase newRelationBase) {
+		if (newRelationBase != eInternalContainer() || (eContainerFeatureID() != OmlPackage.REVERSE_RELATION__RELATION_BASE && newRelationBase != null)) {
+			if (EcoreUtil.isAncestor(this, newRelationBase))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
-			if (newRelationEntity != null)
-				msgs = ((InternalEObject)newRelationEntity).eInverseAdd(this, OmlPackage.RELATION_ENTITY__REVERSE_RELATION, RelationEntity.class, msgs);
-			msgs = basicSetRelationEntity(newRelationEntity, msgs);
+			if (newRelationBase != null)
+				msgs = ((InternalEObject)newRelationBase).eInverseAdd(this, OmlPackage.RELATION_BASE__REVERSE_RELATION, RelationBase.class, msgs);
+			msgs = basicSetRelationBase(newRelationBase, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.REVERSE_RELATION__RELATION_ENTITY, newRelationEntity, newRelationEntity));
+			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.REVERSE_RELATION__RELATION_BASE, newRelationBase, newRelationBase));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isFunctional() {
+		boolean _xifexpression = false;
+		RelationBase _relationBase = this.getRelationBase();
+		boolean _tripleNotEquals = (_relationBase != null);
+		if (_tripleNotEquals) {
+			_xifexpression = this.getRelationBase().isInverseFunctional();
+		}
+		else {
+			_xifexpression = false;
+		}
+		return _xifexpression;
 	}
 
 	/**
@@ -133,10 +163,10 @@ public class ReverseRelationImpl extends RelationImpl implements ReverseRelation
 	@Override
 	public Entity deriveDomain() {
 		Entity _xifexpression = null;
-		RelationEntity _relationEntity = this.getRelationEntity();
-		boolean _tripleNotEquals = (_relationEntity != null);
+		RelationBase _relationBase = this.getRelationBase();
+		boolean _tripleNotEquals = (_relationBase != null);
 		if (_tripleNotEquals) {
-			_xifexpression = this.getRelationEntity().getTarget();
+			_xifexpression = this.getRelationBase().getTarget();
 		}
 		return _xifexpression;
 	}
@@ -149,10 +179,10 @@ public class ReverseRelationImpl extends RelationImpl implements ReverseRelation
 	@Override
 	public Entity deriveRange() {
 		Entity _xifexpression = null;
-		RelationEntity _relationEntity = this.getRelationEntity();
-		boolean _tripleNotEquals = (_relationEntity != null);
+		RelationBase _relationBase = this.getRelationBase();
+		boolean _tripleNotEquals = (_relationBase != null);
 		if (_tripleNotEquals) {
-			_xifexpression = this.getRelationEntity().getSource();
+			_xifexpression = this.getRelationBase().getSource();
 		}
 		return _xifexpression;
 	}
@@ -164,11 +194,20 @@ public class ReverseRelationImpl extends RelationImpl implements ReverseRelation
 	 */
 	@Override
 	public Relation deriveInverse() {
-		ForwardRelation _xifexpression = null;
-		RelationEntity _relationEntity = this.getRelationEntity();
-		boolean _tripleNotEquals = (_relationEntity != null);
-		if (_tripleNotEquals) {
-			_xifexpression = this.getRelationEntity().getForwardRelation();
+		Relation _xifexpression = null;
+		RelationBase _relationBase = this.getRelationBase();
+		if ((_relationBase instanceof RelationEntity)) {
+			RelationBase _relationBase_1 = this.getRelationBase();
+			_xifexpression = ((RelationEntity) _relationBase_1).getForwardRelation();
+		}
+		else {
+			Relation _xifexpression_1 = null;
+			RelationBase _relationBase_2 = this.getRelationBase();
+			if ((_relationBase_2 instanceof Relation)) {
+				RelationBase _relationBase_3 = this.getRelationBase();
+				_xifexpression_1 = ((Relation) _relationBase_3);
+			}
+			_xifexpression = _xifexpression_1;
 		}
 		return _xifexpression;
 	}
@@ -181,10 +220,10 @@ public class ReverseRelationImpl extends RelationImpl implements ReverseRelation
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case OmlPackage.REVERSE_RELATION__RELATION_ENTITY:
+			case OmlPackage.REVERSE_RELATION__RELATION_BASE:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetRelationEntity((RelationEntity)otherEnd, msgs);
+				return basicSetRelationBase((RelationBase)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -197,8 +236,8 @@ public class ReverseRelationImpl extends RelationImpl implements ReverseRelation
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case OmlPackage.REVERSE_RELATION__RELATION_ENTITY:
-				return basicSetRelationEntity(null, msgs);
+			case OmlPackage.REVERSE_RELATION__RELATION_BASE:
+				return basicSetRelationBase(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -211,8 +250,8 @@ public class ReverseRelationImpl extends RelationImpl implements ReverseRelation
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case OmlPackage.REVERSE_RELATION__RELATION_ENTITY:
-				return eInternalContainer().eInverseRemove(this, OmlPackage.RELATION_ENTITY__REVERSE_RELATION, RelationEntity.class, msgs);
+			case OmlPackage.REVERSE_RELATION__RELATION_BASE:
+				return eInternalContainer().eInverseRemove(this, OmlPackage.RELATION_BASE__REVERSE_RELATION, RelationBase.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -225,9 +264,11 @@ public class ReverseRelationImpl extends RelationImpl implements ReverseRelation
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case OmlPackage.REVERSE_RELATION__RELATION_ENTITY:
-				if (resolve) return getRelationEntity();
-				return basicGetRelationEntity();
+			case OmlPackage.REVERSE_RELATION__RELATION_BASE:
+				if (resolve) return getRelationBase();
+				return basicGetRelationBase();
+			case OmlPackage.REVERSE_RELATION__FUNCTIONAL:
+				return isFunctional();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -240,8 +281,8 @@ public class ReverseRelationImpl extends RelationImpl implements ReverseRelation
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case OmlPackage.REVERSE_RELATION__RELATION_ENTITY:
-				setRelationEntity((RelationEntity)newValue);
+			case OmlPackage.REVERSE_RELATION__RELATION_BASE:
+				setRelationBase((RelationBase)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -255,8 +296,8 @@ public class ReverseRelationImpl extends RelationImpl implements ReverseRelation
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case OmlPackage.REVERSE_RELATION__RELATION_ENTITY:
-				setRelationEntity((RelationEntity)null);
+			case OmlPackage.REVERSE_RELATION__RELATION_BASE:
+				setRelationBase((RelationBase)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -270,8 +311,10 @@ public class ReverseRelationImpl extends RelationImpl implements ReverseRelation
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case OmlPackage.REVERSE_RELATION__RELATION_ENTITY:
-				return basicGetRelationEntity() != null;
+			case OmlPackage.REVERSE_RELATION__RELATION_BASE:
+				return basicGetRelationBase() != null;
+			case OmlPackage.REVERSE_RELATION__FUNCTIONAL:
+				return isFunctional() != FUNCTIONAL_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}

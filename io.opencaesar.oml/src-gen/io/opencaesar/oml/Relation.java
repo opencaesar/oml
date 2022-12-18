@@ -25,7 +25,7 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Relation is a feature that represents a relation from its domain entity to its range entity. It is the super type of
+ * Relation is a property that represents a relation from its domain entity to its range entity. It is the super type of
  * two concrete relations: [=ForwardRelation=] and [=ReverseRelation] that are specified by a relation entity. When a relation
  * entity specifies both kinds of relations, they become inverse of each other.
  * <!-- end-model-doc -->
@@ -41,10 +41,10 @@ package io.opencaesar.oml;
  *
  * @see io.opencaesar.oml.OmlPackage#getRelation()
  * @model abstract="true"
- *        annotation="https://tabatkins.github.io/bikeshed heading='Features'"
+ *        annotation="https://tabatkins.github.io/bikeshed heading='Properties'"
  * @generated
  */
-public interface Relation extends Feature {
+public interface Relation extends SemanticProperty {
 	/**
 	 * Returns the value of the '<em><b>Domain</b></em>' reference.
 	 * <!-- begin-user-doc -->
@@ -86,17 +86,6 @@ public interface Relation extends Feature {
 	 * @generated
 	 */
 	Relation getInverse();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * Gets the relation entity of this relation
-	 * <!-- end-model-doc -->
-	 * @model kind="operation" unique="false"
-	 * @generated
-	 */
-	RelationEntity getRelationEntity();
 
 	/**
 	 * <!-- begin-user-doc -->

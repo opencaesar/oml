@@ -98,6 +98,7 @@ public class OmlFactoryImpl extends EFactoryImpl implements OmlFactory {
 			case OmlPackage.STRUCTURED_PROPERTY: return createStructuredProperty();
 			case OmlPackage.FORWARD_RELATION: return createForwardRelation();
 			case OmlPackage.REVERSE_RELATION: return createReverseRelation();
+			case OmlPackage.UNREIFIED_RELATION: return createUnreifiedRelation();
 			case OmlPackage.CONCEPT_INSTANCE: return createConceptInstance();
 			case OmlPackage.RELATION_INSTANCE: return createRelationInstance();
 			case OmlPackage.STRUCTURE_INSTANCE: return createStructureInstance();
@@ -119,7 +120,7 @@ public class OmlFactoryImpl extends EFactoryImpl implements OmlFactory {
 			case OmlPackage.LINK_ASSERTION: return createLinkAssertion();
 			case OmlPackage.TYPE_PREDICATE: return createTypePredicate();
 			case OmlPackage.RELATION_ENTITY_PREDICATE: return createRelationEntityPredicate();
-			case OmlPackage.FEATURE_PREDICATE: return createFeaturePredicate();
+			case OmlPackage.PROPERTY_PREDICATE: return createPropertyPredicate();
 			case OmlPackage.SAME_AS_PREDICATE: return createSameAsPredicate();
 			case OmlPackage.DIFFERENT_FROM_PREDICATE: return createDifferentFromPredicate();
 			case OmlPackage.QUOTED_LITERAL: return createQuotedLiteral();
@@ -429,6 +430,17 @@ public class OmlFactoryImpl extends EFactoryImpl implements OmlFactory {
 	 * @generated
 	 */
 	@Override
+	public UnreifiedRelation createUnreifiedRelation() {
+		UnreifiedRelationImpl unreifiedRelation = new UnreifiedRelationImpl();
+		return unreifiedRelation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public ConceptInstance createConceptInstance() {
 		ConceptInstanceImpl conceptInstance = new ConceptInstanceImpl();
 		return conceptInstance;
@@ -660,9 +672,9 @@ public class OmlFactoryImpl extends EFactoryImpl implements OmlFactory {
 	 * @generated
 	 */
 	@Override
-	public FeaturePredicate createFeaturePredicate() {
-		FeaturePredicateImpl featurePredicate = new FeaturePredicateImpl();
-		return featurePredicate;
+	public PropertyPredicate createPropertyPredicate() {
+		PropertyPredicateImpl propertyPredicate = new PropertyPredicateImpl();
+		return propertyPredicate;
 	}
 
 	/**

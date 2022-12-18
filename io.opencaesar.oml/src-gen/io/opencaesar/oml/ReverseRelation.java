@@ -34,40 +34,55 @@ package io.opencaesar.oml;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link io.opencaesar.oml.ReverseRelation#getRelationEntity <em>Relation Entity</em>}</li>
+ *   <li>{@link io.opencaesar.oml.ReverseRelation#getRelationBase <em>Relation Base</em>}</li>
+ *   <li>{@link io.opencaesar.oml.ReverseRelation#isFunctional <em>Functional</em>}</li>
  * </ul>
  *
  * @see io.opencaesar.oml.OmlPackage#getReverseRelation()
- * @model annotation="https://tabatkins.github.io/bikeshed heading='Features'"
+ * @model annotation="https://tabatkins.github.io/bikeshed heading='Properties'"
  * @generated
  */
 public interface ReverseRelation extends Relation {
 	/**
-	 * Returns the value of the '<em><b>Relation Entity</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.RelationEntity#getReverseRelation <em>Reverse Relation</em>}'.
+	 * Returns the value of the '<em><b>Relation Base</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.RelationBase#getReverseRelation <em>Reverse Relation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The relation entity that owns this reverse relation
+	 * The relation base that owns this reverse relation
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Relation Entity</em>' container reference.
-	 * @see #setRelationEntity(RelationEntity)
-	 * @see io.opencaesar.oml.OmlPackage#getReverseRelation_RelationEntity()
-	 * @see io.opencaesar.oml.RelationEntity#getReverseRelation
+	 * @return the value of the '<em>Relation Base</em>' container reference.
+	 * @see #setRelationBase(RelationBase)
+	 * @see io.opencaesar.oml.OmlPackage#getReverseRelation_RelationBase()
+	 * @see io.opencaesar.oml.RelationBase#getReverseRelation
 	 * @model opposite="reverseRelation" required="true" transient="false"
 	 * @generated
 	 */
-	RelationEntity getRelationEntity();
+	RelationBase getRelationBase();
 
 	/**
-	 * Sets the value of the '{@link io.opencaesar.oml.ReverseRelation#getRelationEntity <em>Relation Entity</em>}' container reference.
+	 * Sets the value of the '{@link io.opencaesar.oml.ReverseRelation#getRelationBase <em>Relation Base</em>}' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Relation Entity</em>' container reference.
-	 * @see #getRelationEntity()
+	 * @param value the new value of the '<em>Relation Base</em>' container reference.
+	 * @see #getRelationBase()
 	 * @generated
 	 */
-	void setRelationEntity(RelationEntity value);
+	void setRelationBase(RelationBase value);
+
+	/**
+	 * Returns the value of the '<em><b>Functional</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Whether this property is functional (has a max of one value per instance)
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Functional</em>' attribute.
+	 * @see io.opencaesar.oml.OmlPackage#getReverseRelation_Functional()
+	 * @model unique="false" transient="true" changeable="false" volatile="true" derived="true"
+	 * @generated
+	 */
+	boolean isFunctional();
 
 	/**
 	 * <!-- begin-user-doc -->

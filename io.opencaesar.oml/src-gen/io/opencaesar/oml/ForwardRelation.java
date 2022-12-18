@@ -35,10 +35,11 @@ package io.opencaesar.oml;
  * </p>
  * <ul>
  *   <li>{@link io.opencaesar.oml.ForwardRelation#getRelationEntity <em>Relation Entity</em>}</li>
+ *   <li>{@link io.opencaesar.oml.ForwardRelation#isFunctional <em>Functional</em>}</li>
  * </ul>
  *
  * @see io.opencaesar.oml.OmlPackage#getForwardRelation()
- * @model annotation="https://tabatkins.github.io/bikeshed heading='Features'"
+ * @model annotation="https://tabatkins.github.io/bikeshed heading='Properties'"
  * @generated
  */
 public interface ForwardRelation extends Relation {
@@ -68,6 +69,20 @@ public interface ForwardRelation extends Relation {
 	 * @generated
 	 */
 	void setRelationEntity(RelationEntity value);
+
+	/**
+	 * Returns the value of the '<em><b>Functional</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Whether this property is functional (has a max of one value per instance)
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Functional</em>' attribute.
+	 * @see io.opencaesar.oml.OmlPackage#getForwardRelation_Functional()
+	 * @model unique="false" transient="true" changeable="false" volatile="true" derived="true"
+	 * @generated
+	 */
+	boolean isFunctional();
 
 	/**
 	 * <!-- begin-user-doc -->

@@ -179,12 +179,12 @@ public class OmlValidator extends EObjectValidator {
 				return validateRule((Rule)value, diagnostics, context);
 			case OmlPackage.SPECIALIZABLE_TERM:
 				return validateSpecializableTerm((SpecializableTerm)value, diagnostics, context);
-			case OmlPackage.FEATURE:
-				return validateFeature((Feature)value, diagnostics, context);
 			case OmlPackage.PROPERTY:
 				return validateProperty((Property)value, diagnostics, context);
 			case OmlPackage.TYPE:
 				return validateType((Type)value, diagnostics, context);
+			case OmlPackage.RELATION_BASE:
+				return validateRelationBase((RelationBase)value, diagnostics, context);
 			case OmlPackage.CLASSIFIER:
 				return validateClassifier((Classifier)value, diagnostics, context);
 			case OmlPackage.SCALAR:
@@ -217,6 +217,8 @@ public class OmlValidator extends EObjectValidator {
 				return validateForwardRelation((ForwardRelation)value, diagnostics, context);
 			case OmlPackage.REVERSE_RELATION:
 				return validateReverseRelation((ReverseRelation)value, diagnostics, context);
+			case OmlPackage.UNREIFIED_RELATION:
+				return validateUnreifiedRelation((UnreifiedRelation)value, diagnostics, context);
 			case OmlPackage.NAMED_INSTANCE:
 				return validateNamedInstance((NamedInstance)value, diagnostics, context);
 			case OmlPackage.CONCEPT_INSTANCE:
@@ -279,8 +281,8 @@ public class OmlValidator extends EObjectValidator {
 				return validateTypePredicate((TypePredicate)value, diagnostics, context);
 			case OmlPackage.RELATION_ENTITY_PREDICATE:
 				return validateRelationEntityPredicate((RelationEntityPredicate)value, diagnostics, context);
-			case OmlPackage.FEATURE_PREDICATE:
-				return validateFeaturePredicate((FeaturePredicate)value, diagnostics, context);
+			case OmlPackage.PROPERTY_PREDICATE:
+				return validatePropertyPredicate((PropertyPredicate)value, diagnostics, context);
 			case OmlPackage.SAME_AS_PREDICATE:
 				return validateSameAsPredicate((SameAsPredicate)value, diagnostics, context);
 			case OmlPackage.DIFFERENT_FROM_PREDICATE:
@@ -899,25 +901,6 @@ public class OmlValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateFeature(Feature feature, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(feature, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms(feature, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(feature, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(feature, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(feature, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(feature, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(feature, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(feature, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(feature, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_extraValidate(feature, diagnostics, context);
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public boolean validateProperty(Property property, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		if (!validate_NoCircularContainment(property, diagnostics, context)) return false;
 		boolean result = validate_EveryMultiplicityConforms(property, diagnostics, context);
@@ -948,6 +931,25 @@ public class OmlValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(type, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(type, diagnostics, context);
 		if (result || diagnostics != null) result &= validateElement_extraValidate(type, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateRelationBase(RelationBase relationBase, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		if (!validate_NoCircularContainment(relationBase, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms(relationBase, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(relationBase, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(relationBase, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(relationBase, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(relationBase, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(relationBase, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(relationBase, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(relationBase, diagnostics, context);
+		if (result || diagnostics != null) result &= validateElement_extraValidate(relationBase, diagnostics, context);
 		return result;
 	}
 
@@ -1252,6 +1254,25 @@ public class OmlValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(reverseRelation, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(reverseRelation, diagnostics, context);
 		if (result || diagnostics != null) result &= validateElement_extraValidate(reverseRelation, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateUnreifiedRelation(UnreifiedRelation unreifiedRelation, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		if (!validate_NoCircularContainment(unreifiedRelation, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms(unreifiedRelation, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(unreifiedRelation, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(unreifiedRelation, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(unreifiedRelation, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(unreifiedRelation, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(unreifiedRelation, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(unreifiedRelation, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(unreifiedRelation, diagnostics, context);
+		if (result || diagnostics != null) result &= validateElement_extraValidate(unreifiedRelation, diagnostics, context);
 		return result;
 	}
 
@@ -1849,17 +1870,17 @@ public class OmlValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateFeaturePredicate(FeaturePredicate featurePredicate, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(featurePredicate, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms(featurePredicate, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(featurePredicate, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(featurePredicate, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(featurePredicate, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(featurePredicate, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(featurePredicate, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(featurePredicate, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(featurePredicate, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_extraValidate(featurePredicate, diagnostics, context);
+	public boolean validatePropertyPredicate(PropertyPredicate propertyPredicate, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		if (!validate_NoCircularContainment(propertyPredicate, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms(propertyPredicate, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(propertyPredicate, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(propertyPredicate, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(propertyPredicate, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(propertyPredicate, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(propertyPredicate, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(propertyPredicate, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(propertyPredicate, diagnostics, context);
+		if (result || diagnostics != null) result &= validateElement_extraValidate(propertyPredicate, diagnostics, context);
 		return result;
 	}
 

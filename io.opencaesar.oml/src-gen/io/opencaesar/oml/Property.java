@@ -25,14 +25,14 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Property is a specializable feature that relates an element to a value. It is the super type of all property types.
+ * Property is a term that relates an element to a value. It is the super type of all property types.
  * <!-- end-model-doc -->
  *
  *
  * @see io.opencaesar.oml.OmlPackage#getProperty()
  * @model abstract="true"
- *        annotation="https://tabatkins.github.io/bikeshed heading='Features'"
+ *        annotation="https://tabatkins.github.io/bikeshed heading='Properties'"
  * @generated
  */
-public interface Property extends Feature {
+public interface Property extends Term {
 } // Property

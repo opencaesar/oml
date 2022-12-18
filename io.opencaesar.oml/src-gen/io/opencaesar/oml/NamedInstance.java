@@ -41,7 +41,7 @@ import org.eclipse.emf.common.util.EList;
  *        annotation="https://tabatkins.github.io/bikeshed heading='Instances'"
  * @generated
  */
-public interface NamedInstance extends Member, Instance, DescriptionStatement {
+public interface NamedInstance extends DescriptionMember, DescriptionStatement, Instance {
 	/**
 	 * Returns the value of the '<em><b>Owned Links</b></em>' containment reference list.
 	 * The list contents are of type {@link io.opencaesar.oml.LinkAssertion}.

@@ -24,9 +24,14 @@ package io.opencaesar.oml;
  * A representation of the model object '<em><b>Vocabulary Member</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * VocabularyMember is a member of a vocabulary.
+ * <!-- end-model-doc -->
+ *
  *
  * @see io.opencaesar.oml.OmlPackage#getVocabularyMember()
  * @model abstract="true"
+ *        annotation="https://tabatkins.github.io/bikeshed heading='Vocabularies'"
  * @generated
  */
 public interface VocabularyMember extends Member {

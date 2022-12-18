@@ -196,16 +196,16 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 				return createSpecializableTermAdapter();
 			}
 			@Override
-			public Adapter caseFeature(Feature object) {
-				return createFeatureAdapter();
-			}
-			@Override
 			public Adapter caseProperty(Property object) {
 				return createPropertyAdapter();
 			}
 			@Override
 			public Adapter caseType(Type object) {
 				return createTypeAdapter();
+			}
+			@Override
+			public Adapter caseRelationBase(RelationBase object) {
+				return createRelationBaseAdapter();
 			}
 			@Override
 			public Adapter caseClassifier(Classifier object) {
@@ -270,6 +270,10 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseReverseRelation(ReverseRelation object) {
 				return createReverseRelationAdapter();
+			}
+			@Override
+			public Adapter caseUnreifiedRelation(UnreifiedRelation object) {
+				return createUnreifiedRelationAdapter();
 			}
 			@Override
 			public Adapter caseNamedInstance(NamedInstance object) {
@@ -396,8 +400,8 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 				return createRelationEntityPredicateAdapter();
 			}
 			@Override
-			public Adapter caseFeaturePredicate(FeaturePredicate object) {
-				return createFeaturePredicateAdapter();
+			public Adapter casePropertyPredicate(PropertyPredicate object) {
+				return createPropertyPredicateAdapter();
 			}
 			@Override
 			public Adapter caseSameAsPredicate(SameAsPredicate object) {
@@ -912,20 +916,6 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.Feature <em>Feature</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.Feature
-	 * @generated
-	 */
-	public Adapter createFeatureAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.Property <em>Property</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -950,6 +940,20 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTypeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.RelationBase <em>Relation Base</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see io.opencaesar.oml.RelationBase
+	 * @generated
+	 */
+	public Adapter createRelationBaseAdapter() {
 		return null;
 	}
 
@@ -1174,6 +1178,20 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createReverseRelationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.UnreifiedRelation <em>Unreified Relation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see io.opencaesar.oml.UnreifiedRelation
+	 * @generated
+	 */
+	public Adapter createUnreifiedRelationAdapter() {
 		return null;
 	}
 
@@ -1612,16 +1630,16 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.FeaturePredicate <em>Feature Predicate</em>}'.
+	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.PropertyPredicate <em>Property Predicate</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see io.opencaesar.oml.FeaturePredicate
+	 * @see io.opencaesar.oml.PropertyPredicate
 	 * @generated
 	 */
-	public Adapter createFeaturePredicateAdapter() {
+	public Adapter createPropertyPredicateAdapter() {
 		return null;
 	}
 

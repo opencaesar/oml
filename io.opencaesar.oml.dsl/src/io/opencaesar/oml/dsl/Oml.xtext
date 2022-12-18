@@ -64,8 +64,9 @@ SpecializableTerm:
 	Type |
 	AnnotationProperty |
 	ScalarProperty |
-	StructuredProperty;
-	
+	StructuredProperty |
+	UnreifiedRelation;
+
 Type:
 	Classifier |
 	Scalar;	
@@ -121,9 +122,6 @@ Structure:
 		ownedPropertyRestrictions+=PropertyRestrictionAxiom*
 	']')?;
 
-Feature:
-	Property;
-
 Property:
 	AnnotationProperty |
 	SemanticProperty;
@@ -178,7 +176,8 @@ EnumeratedScalar:
 
 Relation:
 	ForwardRelation |
-	ReverseRelation;
+	ReverseRelation |
+	UnreifiedRelation;
 
 ForwardRelation:
 	ownedAnnotations+=Annotation*
@@ -187,6 +186,21 @@ ForwardRelation:
 ReverseRelation:
 	ownedAnnotations+=Annotation*
 	'reverse' name=ID;
+
+UnreifiedRelation:
+	ownedAnnotations+=Annotation*
+	'relation' name=ID (':>' ownedSpecializations+=SpecializationAxiom (',' ownedSpecializations+=SpecializationAxiom)*)? '['
+		'from' source=[Entity|Ref]
+		'to' target=[Entity|Ref]
+		(reverseRelation=ReverseRelation)?
+		((functional?='functional')? &
+		 (inverseFunctional?='inverse' 'functional')? &
+		 (symmetric?='symmetric')? &
+		 (asymmetric?='asymmetric')? &
+		 (reflexive?='reflexive')? &
+		 (irreflexive?='irreflexive')? &
+		 (transitive?='transitive')?)
+	']';
 
 Rule:
 	ownedAnnotations+=Annotation*
@@ -388,7 +402,7 @@ RelationTargetRestrictionAxiom:
 	'restricts' 'relation' relation=[Relation|Ref] 'to' target=[NamedInstance|Ref];
 
 KeyAxiom:
-	'key' properties+=[Feature|Ref] (',' properties+=[Feature|Ref])*;
+	'key' properties+=[Property|Ref] (',' properties+=[Property|Ref])*;
 
 ConceptTypeAssertion:
 	type=[Concept|Ref];
@@ -421,15 +435,15 @@ TypePredicate:
 	
 BinaryPredicate:
 	RelationEntityPredicate |
-    FeaturePredicate |
+    PropertyPredicate |
     SameAsPredicate |
     DifferentFromPredicate;
 
 RelationEntityPredicate:
     entity=[RelationEntity|Ref] '(' variable1=ID ',' entityVariable=ID ',' (variable2=ID | instance2=[NamedInstance|CrossRef]) ')';
 
-FeaturePredicate:
-	feature=[Feature|Ref] '(' variable1=ID ',' (variable2=ID | literal2=Literal | instance2=[NamedInstance|CrossRef]) ')';
+PropertyPredicate:
+	property=[Property|Ref] '(' variable1=ID ',' (variable2=ID | literal2=Literal | instance2=[NamedInstance|CrossRef]) ')';
 
 SameAsPredicate:
     'sameAs' '(' variable1=ID ',' (variable2=ID | instance2=[NamedInstance|CrossRef]) ')';

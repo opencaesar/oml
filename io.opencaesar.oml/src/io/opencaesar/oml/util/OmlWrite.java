@@ -52,8 +52,6 @@ import io.opencaesar.oml.EnumeratedScalarReference;
 import io.opencaesar.oml.Extension;
 import io.opencaesar.oml.FacetedScalar;
 import io.opencaesar.oml.FacetedScalarReference;
-import io.opencaesar.oml.Feature;
-import io.opencaesar.oml.FeaturePredicate;
 import io.opencaesar.oml.ForwardRelation;
 import io.opencaesar.oml.IdentifiedElement;
 import io.opencaesar.oml.Inclusion;
@@ -68,10 +66,13 @@ import io.opencaesar.oml.NamedInstanceReference;
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.Ontology;
 import io.opencaesar.oml.Predicate;
+import io.opencaesar.oml.Property;
+import io.opencaesar.oml.PropertyPredicate;
 import io.opencaesar.oml.QuotedLiteral;
 import io.opencaesar.oml.RangeRestrictionKind;
 import io.opencaesar.oml.Reference;
 import io.opencaesar.oml.Relation;
+import io.opencaesar.oml.RelationBase;
 import io.opencaesar.oml.RelationCardinalityRestrictionAxiom;
 import io.opencaesar.oml.RelationEntity;
 import io.opencaesar.oml.RelationEntityPredicate;
@@ -107,6 +108,7 @@ import io.opencaesar.oml.StructuredPropertyValueAssertion;
 import io.opencaesar.oml.StructuredPropertyValueRestrictionAxiom;
 import io.opencaesar.oml.Type;
 import io.opencaesar.oml.TypePredicate;
+import io.opencaesar.oml.UnreifiedRelation;
 import io.opencaesar.oml.Usage;
 import io.opencaesar.oml.Vocabulary;
 import io.opencaesar.oml.VocabularyBundle;
@@ -478,8 +480,8 @@ public class OmlWrite {
         relation.setReflexive(reflexive);
         relation.setIrreflexive(irreflexive);
         relation.setTransitive(transitive);
-        setCrossReference(vocabulary, relation, OmlPackage.Literals.RELATION_ENTITY__SOURCE, source);
-        setCrossReference(vocabulary, relation, OmlPackage.Literals.RELATION_ENTITY__TARGET, target);
+        setCrossReference(vocabulary, relation, OmlPackage.Literals.RELATION_BASE__SOURCE, source);
+        setCrossReference(vocabulary, relation, OmlPackage.Literals.RELATION_BASE__TARGET, target);
         vocabulary.getOwnedStatements().add(relation);
         return relation;
     }
@@ -634,19 +636,55 @@ public class OmlWrite {
     // ReverseRelation
 
     /**
-     * Creates a reverse relation and adds it to the given relation entity
+     * Creates a reverse relation and adds it to the given relation base
      * 
-     * @param entity the context relation entity
+     * @param base the context relation base
      * @param name the name of the new reverse relation
-     * @return a reverse relation that is added to the given relation entity
+     * @return a reverse relation that is added to the given relation base
      */
-    public static ReverseRelation addReverseRelation(RelationEntity entity, String name) {
+    public static ReverseRelation addReverseRelation(RelationBase base, String name) {
         final ReverseRelation reverse = create(ReverseRelation.class);
         reverse.setName(name);
-        entity.setReverseRelation(reverse);
+        base.setReverseRelation(reverse);
         return reverse;
     }
     
+    // UnreifiedRelation
+
+    /**
+     * Creates a new unreified relation and adds it to the given vocabulary
+     * 
+     * @param vocabulary the context vocabulary
+     * @param name the name of the new concept
+     * @param source the given source entity
+     * @param target the given target entity
+     * @param functional whether the relation entity is functional
+     * @param inverseFunctional whether the relation entity is inverse functional
+     * @param symmetric whether the relation entity is symmetric
+     * @param asymmetric whether the relation entity is asymmetric
+     * @param reflexive whether the relation entity is reflexive
+     * @param irreflexive whether the relation entity is irreflexive
+     * @param transitive whether the relation entity is transitive
+     * @return a new unreified relation that is added to the given vocabulary
+     */
+    public static UnreifiedRelation addUnreifiedRelation(Vocabulary vocabulary, String name, Entity source, Entity target, 
+        boolean functional, boolean inverseFunctional, boolean symmetric, 
+        boolean asymmetric, boolean reflexive, boolean irreflexive, boolean transitive) {
+        final UnreifiedRelation relation = create(UnreifiedRelation.class);
+        relation.setName(name);
+        relation.setFunctional(functional);
+        relation.setInverseFunctional(inverseFunctional);
+        relation.setSymmetric(symmetric);
+        relation.setAsymmetric(asymmetric);
+        relation.setReflexive(reflexive);
+        relation.setIrreflexive(irreflexive);
+        relation.setTransitive(transitive);
+        setCrossReference(vocabulary, relation, OmlPackage.Literals.RELATION_BASE__SOURCE, source);
+        setCrossReference(vocabulary, relation, OmlPackage.Literals.RELATION_BASE__TARGET, target);
+        vocabulary.getOwnedStatements().add(relation);
+        return relation;
+    }
+
     // Rule
 
     /**
@@ -1224,7 +1262,7 @@ public class OmlWrite {
      * @param keyProperties the list of properties that are part of the key
      * @return a key axiom that is added to the given vocabulary
      */
-    public static KeyAxiom addKeyAxiom(Vocabulary vocabulary, Entity domain, List<Feature> keyProperties) {
+    public static KeyAxiom addKeyAxiom(Vocabulary vocabulary, Entity domain, List<Property> keyProperties) {
         final KeyAxiom axiom = create(KeyAxiom.class);
         setCrossReferences(vocabulary, axiom, OmlPackage.Literals.KEY_AXIOM__PROPERTIES, new ArrayList<Element>(keyProperties));
         setContainmentReference(vocabulary, domain, OmlPackage.Literals.ENTITY__OWNED_KEYS, OmlPackage.Literals.ENTITY_REFERENCE__OWNED_KEYS, axiom);
@@ -1399,22 +1437,22 @@ public class OmlWrite {
         return predicate;
     }
 
-    // FeaturePredicate
+    // PropertyPredicate
 
     /**
      * Creates an relation predicate
      * 
      * @param vocabulary the context vocabulary
-     * @param feature the given feature
+     * @param property the given property
      * @param variable1 the name of a variable bound to an instance
-     * @param variable2 the name of a variable bound to a value of the feature in the instance
+     * @param variable2 the name of a variable bound to a value of the property in the instance
      * @return a relation predicate
      */
-    public static FeaturePredicate createFeaturePredicate(Vocabulary vocabulary, Feature feature, String variable1, String variable2) {
-        final FeaturePredicate predicate = create(FeaturePredicate.class);
+    public static PropertyPredicate createPropertyPredicate(Vocabulary vocabulary, Property property, String variable1, String variable2) {
+        final PropertyPredicate predicate = create(PropertyPredicate.class);
         predicate.setVariable1(variable1);
         predicate.setVariable2(variable2);
-        setCrossReference(vocabulary, predicate, OmlPackage.Literals.FEATURE_PREDICATE__FEATURE, feature);
+        setCrossReference(vocabulary, predicate, OmlPackage.Literals.PROPERTY_PREDICATE__PROPERTY, property);
         return predicate;
     }
 

@@ -32,7 +32,7 @@ package io.opencaesar.oml;
  *
  * @see io.opencaesar.oml.OmlPackage#getSemanticProperty()
  * @model abstract="true"
- *        annotation="https://tabatkins.github.io/bikeshed heading='Features'"
+ *        annotation="https://tabatkins.github.io/bikeshed heading='Properties'"
  * @generated
  */
 public interface SemanticProperty extends Property {

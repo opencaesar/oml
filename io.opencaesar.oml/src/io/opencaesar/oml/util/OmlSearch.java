@@ -79,6 +79,7 @@ import io.opencaesar.oml.StructureInstance;
 import io.opencaesar.oml.StructuredProperty;
 import io.opencaesar.oml.Term;
 import io.opencaesar.oml.TypeAssertion;
+import io.opencaesar.oml.UnreifiedRelation;
 
 /**
  * The <b>Search</b> API for the model. It complements the {@link OmlIndex} API by additional utilities.
@@ -391,11 +392,17 @@ public final class OmlSearch extends OmlIndex {
      */
     public static List<Relation> findSourceRelations(Entity entity) {
         final List<Relation> relations = new ArrayList<>();
-        relations.addAll(findRelationEntitiesWithSource(entity).stream()
-            .map(r -> r.getForwardRelation())
+        relations.addAll(findRelationBasesWithSource(entity).stream()
+        	.filter(r -> r instanceof UnreifiedRelation)
+            .map(r -> (UnreifiedRelation)r)
             .filter(r -> r != null)
             .collect(Collectors.toList()));
-        relations.addAll(findRelationEntitiesWithTarget(entity).stream()
+        relations.addAll(findRelationBasesWithSource(entity).stream()
+            	.filter(r -> r instanceof RelationEntity)
+                .map(r -> ((RelationEntity)r).getForwardRelation())
+                .filter(r -> r != null)
+                .collect(Collectors.toList()));
+        relations.addAll(findRelationBasesWithTarget(entity).stream()
             .map(r -> r.getReverseRelation())
             .filter(r -> r != null)
             .collect(Collectors.toList()));
@@ -410,11 +417,17 @@ public final class OmlSearch extends OmlIndex {
      */
     public static List<Relation> findTargetRelations(Entity entity) {
         final List<Relation> relations = new ArrayList<>();
-        relations.addAll(findRelationEntitiesWithTarget(entity).stream()
-            .map(r -> r.getForwardRelation())
+        relations.addAll(findRelationBasesWithTarget(entity).stream()
+           	.filter(r -> r instanceof UnreifiedRelation)
+            .map(r -> (UnreifiedRelation)r)
             .filter(r -> r != null)
             .collect(Collectors.toList()));
-        relations.addAll(findRelationEntitiesWithSource(entity).stream()
+        relations.addAll(findRelationBasesWithTarget(entity).stream()
+            	.filter(r -> r instanceof RelationEntity)
+                .map(r -> ((RelationEntity)r).getForwardRelation())
+                .filter(r -> r != null)
+                .collect(Collectors.toList()));
+        relations.addAll(findRelationBasesWithSource(entity).stream()
             .map(r -> r.getReverseRelation())
             .filter(r -> r != null)
             .collect(Collectors.toList()));

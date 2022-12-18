@@ -30,7 +30,7 @@ import org.eclipse.emf.ecore.EClass;
  *
  * @generated
  */
-public abstract class PropertyImpl extends FeatureImpl implements Property {
+public abstract class PropertyImpl extends TermImpl implements Property {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

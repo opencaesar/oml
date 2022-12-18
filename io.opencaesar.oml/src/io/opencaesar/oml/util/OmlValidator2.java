@@ -44,11 +44,11 @@ import io.opencaesar.oml.Entity;
 import io.opencaesar.oml.EnumeratedScalar;
 import io.opencaesar.oml.Extension;
 import io.opencaesar.oml.FacetedScalar;
-import io.opencaesar.oml.FeaturePredicate;
 import io.opencaesar.oml.Inclusion;
 import io.opencaesar.oml.LinkAssertion;
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.Ontology;
+import io.opencaesar.oml.PropertyPredicate;
 import io.opencaesar.oml.PropertyValueAssertion;
 import io.opencaesar.oml.QuotedLiteral;
 import io.opencaesar.oml.Relation;
@@ -691,21 +691,21 @@ public final class OmlValidator2 {
         return true;
     }
 
-    // Feature Predicate
+    // Property Predicate
 
     /**
-     * Checks if a feature predicate references invalid features is in a rule's consequent
+     * Checks if a property predicate references invalid properties is in a rule's consequent
      * 
-     * @param object The feature predicate to check
+     * @param object The property predicate to check
      * @param diagnostics The validation diagnostics
      * @param context The object-to-object context map
      * @return True if the rules is satisfied; False otherwise
      */
-    protected boolean validateFeaturePredicateAsConsequent(FeaturePredicate object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-        if (object.getConsequentRule() != null && object.getFeature() instanceof StructuredProperty) {
+    protected boolean validatePropertyPredicateAsConsequent(PropertyPredicate object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        if (object.getConsequentRule() != null && object.getProperty() instanceof StructuredProperty) {
             return report(Diagnostic.ERROR, diagnostics, object,
-                "Structured property "+object.getFeature().getAbbreviatedIri()+" cannot be used as a consequent predicate", 
-                OmlPackage.Literals.FEATURE_PREDICATE__FEATURE);
+                "Structured property "+object.getProperty().getAbbreviatedIri()+" cannot be used as a consequent predicate", 
+                OmlPackage.Literals.PROPERTY_PREDICATE__PROPERTY);
         }
         return true;
     }
@@ -713,17 +713,17 @@ public final class OmlValidator2 {
     // Binary Predicate
 
     /**
-     * Checks if a feature predicate has a second argument
+     * Checks if a property predicate has a second argument
      * 
-     * @param object The feature predicate to check
+     * @param object The property predicate to check
      * @param diagnostics The validation diagnostics
      * @param context The object-to-object context map
      * @return True if the rules is satisfied; False otherwise
      */
-    protected boolean validateFeaturePredicateArg2(BinaryPredicate object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+    protected boolean validatePropertyPredicateArg2(BinaryPredicate object, DiagnosticChain diagnostics, Map<Object, Object> context) {
         if (object.getVariable2() == null &&
         	object.getInstance2() == null &&
-        	(!(object instanceof FeaturePredicate) || ((FeaturePredicate)object).getLiteral2() == null)) {
+        	(!(object instanceof PropertyPredicate) || ((PropertyPredicate)object).getLiteral2() == null)) {
             return report(Diagnostic.ERROR, diagnostics, object,
                 "Binary predicate must have a second argument", 
                 OmlPackage.Literals.BINARY_PREDICATE__VARIABLE2);

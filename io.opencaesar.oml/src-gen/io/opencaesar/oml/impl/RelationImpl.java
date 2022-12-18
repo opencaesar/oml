@@ -21,7 +21,6 @@ package io.opencaesar.oml.impl;
 import io.opencaesar.oml.Entity;
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.Relation;
-import io.opencaesar.oml.RelationEntity;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -45,7 +44,7 @@ import org.eclipse.emf.ecore.InternalEObject;
  *
  * @generated
  */
-public abstract class RelationImpl extends FeatureImpl implements Relation {
+public abstract class RelationImpl extends SemanticPropertyImpl implements Relation {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -131,18 +130,6 @@ public abstract class RelationImpl extends FeatureImpl implements Relation {
 	 * @generated
 	 */
 	@Override
-	public RelationEntity getRelationEntity() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public Entity deriveDomain() {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
@@ -220,8 +207,6 @@ public abstract class RelationImpl extends FeatureImpl implements Relation {
 	@Override
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
-			case OmlPackage.RELATION___GET_RELATION_ENTITY:
-				return getRelationEntity();
 			case OmlPackage.RELATION___DERIVE_DOMAIN:
 				return deriveDomain();
 			case OmlPackage.RELATION___DERIVE_RANGE:

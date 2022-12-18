@@ -50,14 +50,15 @@ import io.opencaesar.oml.EnumeratedScalar;
 import io.opencaesar.oml.EnumeratedScalarReference;
 import io.opencaesar.oml.FacetedScalar;
 import io.opencaesar.oml.FacetedScalarReference;
-import io.opencaesar.oml.Feature;
-import io.opencaesar.oml.FeaturePredicate;
 import io.opencaesar.oml.KeyAxiom;
 import io.opencaesar.oml.LinkAssertion;
 import io.opencaesar.oml.NamedInstance;
 import io.opencaesar.oml.OmlPackage;
+import io.opencaesar.oml.Property;
+import io.opencaesar.oml.PropertyPredicate;
 import io.opencaesar.oml.QuotedLiteral;
 import io.opencaesar.oml.Relation;
+import io.opencaesar.oml.RelationBase;
 import io.opencaesar.oml.RelationCardinalityRestrictionAxiom;
 import io.opencaesar.oml.RelationEntity;
 import io.opencaesar.oml.RelationEntityPredicate;
@@ -194,23 +195,23 @@ public class OmlIndex {
     // RelationEntity
     
     /**
-     * Finds relation entities referencing the given entity as source
+     * Finds relation bases referencing the given entity as source
      * 
      * @param source The referenced entity
-     * @return A list of referencing relation entities
+     * @return A list of referencing relation bases
      */
-    public static List<RelationEntity> findRelationEntitiesWithSource(Entity source) {
-        return findInverseReferencers(source, RelationEntity.class, OmlPackage.Literals.RELATION_ENTITY__SOURCE);
+    public static List<RelationBase> findRelationBasesWithSource(Entity source) {
+        return findInverseReferencers(source, RelationBase.class, OmlPackage.Literals.RELATION_BASE__SOURCE);
     }
     
     /**
-     * Finds relation entities referencing the given entity as target
+     * Finds relation bases referencing the given entity as target
      * 
      * @param target The referenced entity
-     * @return A list of referencing relation entities
+     * @return A list of referencing relation bases
      */
-    public static List<RelationEntity> findRelationEntitiesWithTarget(Entity target) {
-        return findInverseReferencers(target, RelationEntity.class, OmlPackage.Literals.RELATION_ENTITY__TARGET);
+    public static List<RelationBase> findRelationBasesWithTarget(Entity target) {
+        return findInverseReferencers(target, RelationBase.class, OmlPackage.Literals.RELATION_BASE__TARGET);
     }
     
     // ScalarProperty
@@ -587,7 +588,7 @@ public class OmlIndex {
      * @param property The referenced property
      * @return A list of referencing key axioms
      */
-    public static List<KeyAxiom> findKeyAxiomWithProperty(Feature property) {
+    public static List<KeyAxiom> findKeyAxiomWithProperty(Property property) {
         return findInverseReferencers(property, KeyAxiom.class, OmlPackage.Literals.KEY_AXIOM__PROPERTIES);
     }
     
@@ -685,16 +686,16 @@ public class OmlIndex {
         return findInverseReferencers(entity, RelationEntityPredicate.class, OmlPackage.Literals.RELATION_ENTITY_PREDICATE__ENTITY);
     }
     
-    // FeaturePredicate
+    // PropertyPredicate
     
     /**
-     * Finds feature predicates referencing the given feature
+     * Finds property predicates referencing the given property
      * 
-     * @param feature The referenced feature
-     * @return A list of referencing feature predicates
+     * @param property The referenced property
+     * @return A list of referencing property predicates
      */
-    public static List<FeaturePredicate> findFeaturePredicatesWithFeature(Feature feature) {
-        return findInverseReferencers(feature, FeaturePredicate.class, OmlPackage.Literals.FEATURE_PREDICATE__FEATURE);
+    public static List<PropertyPredicate> findPropertyPredicatesWithProperty(Property property) {
+        return findInverseReferencers(property, PropertyPredicate.class, OmlPackage.Literals.PROPERTY_PREDICATE__PROPERTY);
     }
     
     // QuotedLiteral

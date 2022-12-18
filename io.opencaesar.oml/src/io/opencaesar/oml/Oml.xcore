@@ -20,7 +20,7 @@
     Ontologies="",
     Vocabularies="",
     Types="",
-    Features="",
+    Properties="",
     Rules="",
     Axioms="",
     Descriptions="",
@@ -434,12 +434,20 @@ abstract class DescriptionStatement extends Statement {
 }
 
 ////////////////////////////////////////
-//  Mmbers 
+//  Members 
 ////////////////////////////////////////
 
+/*
+ * VocabularyMember is a member of a vocabulary.
+ */
+@Bikeshed(heading="Vocabularies")
 abstract class VocabularyMember extends Member {
 }
 
+/*
+ * DescriptionMember is a member of a description.
+ */
+@Bikeshed(heading="Descriptions")
 abstract class DescriptionMember extends Member {
 }
 
@@ -480,7 +488,7 @@ class Rule extends VocabularyMember, VocabularyStatement {
  * SpecializableTerm is a term that can specialized in a taxonomy. It can have zero or more specializations.
  */
 @Bikeshed(heading="Vocabularies")
-abstract class SpecializableTerm extends Term , VocabularyStatement {
+abstract class SpecializableTerm extends Term, VocabularyStatement {
     /*
      * The specialization axioms owned by this term
      */
@@ -488,17 +496,10 @@ abstract class SpecializableTerm extends Term , VocabularyStatement {
 }
 
 /*
- * Feature is a a term that can be restricted in a given classifier context
+ * Property is a term that relates an element to a value. It is the super type of all property types.
  */
-@Bikeshed(heading="Features")
-abstract class Feature extends Term {
-}
-
-/*
- * Property is a specializable feature that relates an element to a value. It is the super type of all property types.
- */
-@Bikeshed(heading="Features")
-abstract class Property extends Feature {
+@Bikeshed(heading="Properties")
+abstract class Property extends Term {
 }
 
 ////////////////////////////////////////
@@ -510,6 +511,55 @@ abstract class Property extends Feature {
  */
 @Bikeshed(heading="Types")
 abstract class Type extends SpecializableTerm {
+}
+
+/*
+ * RelationBase is a specializable term that represents the supertype of relation from a source to a target entity.
+ * It can also optionally name a reverse relation from the target to the source entity. A relation base can be characterized 
+ * with several boolean flags that represent its DL semantics. Such flags apply conversely to the reverse relation (if specified). 
+ */
+@Bikeshed(heading="Properties")
+abstract class RelationBase extends SpecializableTerm {
+    /*
+     * The entity that represents the source of this relation entity
+     */
+    refers Entity[1] source
+    /*
+     * The entity that represents the target of this relation entity
+     */
+    refers Entity[1] target
+    /*
+     * The optional reverse relation of this relation entity
+     */
+    contains ReverseRelation[?] reverseRelation opposite relationBase
+    /*
+     * Whether this relation entity is functional (i.e., {@code A -> B and A->C => B=C})
+     */
+    boolean functional
+    /*
+     * Whether this relation entity is inverse functional (i.e., {@code B->A and C->A => B=C})
+     */
+    boolean inverseFunctional
+    /*
+     * Whether this relation entity is symmetric (i.e., {@code A->B => B->A})
+     */
+    boolean symmetric
+    /*
+     * Whether this relation entity is asymmetric (i.e., {@code A->B => !(B->A)})
+     */
+    boolean asymmetric
+    /*
+     * Whether this relation entity is reflexive (i.e., {@code A => A->A})
+     */
+    boolean reflexive
+    /*
+     * Whether this relation entity is irreflexive (i.e., {@code A => !(A->A)})
+     */
+    boolean irreflexive
+    /*
+     * Whether this relation entity is irreflexive (i.e., {@code A->B and B->C => A->C})
+     */
+    boolean transitive
 }
 
 ////////////////////////////////////////
@@ -590,58 +640,16 @@ class Concept extends Entity {
 }
 
 /*
- * RelationEntity is a concrete entity that can classify a set of relation instances in a description. It can also specialize 
- * other relation entities and/or aspects. A relation entity relates two entities, a source and a target by a forward relation
- * (from the source to the target). The forward relation can optionally be named, otherwise the default name '[relationEnity]Forward'
- * is assumed. An optional reverse relation (from the target to the source) can also be named.A relation entity can also be characterized 
- * with several boolean flags, representing DL semantics, that apply to the forward relation, and conversely to the reverse relation (if any). 
+ * RelationEntity is an entity that represents a reified relation from a source to a target entity. It also optionally specifies 
+ * a forward relation between these entities. If specified, such forward relation becomes the opposite of (inherited) reverse relation. 
+ * If not, then a default forward relation with the name '[relationEnity]Forward' is assumed.
  */
 @Bikeshed(heading="Types")
-class RelationEntity extends Entity {
-    /*
-     * The entity that represents the source of this relation entity
-     */
-    refers Entity[1] source
-    /*
-     * The entity that represents the target of this relation entity
-     */
-    refers Entity[1] target
+class RelationEntity extends Entity, RelationBase {
     /*
      * The optional forward relation of this relation entity
      */
     contains ForwardRelation[?] forwardRelation opposite relationEntity
-    /*
-     * The optional reverse relation of this relation entity
-     */
-    contains ReverseRelation[?] reverseRelation opposite relationEntity
-    /*
-     * Whether this relation entity is functional (i.e., {@code A -> B and A->C => B=C})
-     */
-    boolean functional
-    /*
-     * Whether this relation entity is inverse functional (i.e., {@code B->A and C->A => B=C})
-     */
-    boolean inverseFunctional
-    /*
-     * Whether this relation entity is symmetric (i.e., {@code A->B => B->A})
-     */
-    boolean symmetric
-    /*
-     * Whether this relation entity is asymmetric (i.e., {@code A->B => !(B->A)})
-     */
-    boolean asymmetric
-    /*
-     * Whether this relation entity is reflexive (i.e., {@code A => A->A})
-     */
-    boolean reflexive
-    /*
-     * Whether this relation entity is irreflexive (i.e., {@code A => !(A->A)})
-     */
-    boolean irreflexive
-    /*
-     * Whether this relation entity is irreflexive (i.e., {@code A->B and B->C => A->C})
-     */
-    boolean transitive
 }
 
 ////////////////////////////////////////
@@ -763,7 +771,7 @@ class EnumeratedScalar extends Scalar {
 /*
  * AnnotationProperty is a property with no DL semantics that relates an annotated element to a literal value.
  */
-@Bikeshed(heading="Features")
+@Bikeshed(heading="Properties")
 class AnnotationProperty extends Property, SpecializableTerm {
 }
 
@@ -771,7 +779,7 @@ class AnnotationProperty extends Property, SpecializableTerm {
  * SemanticProperty is a property with DL semantics that relates instances of a classifier acting as its
  * domain to a value typed by either a scalar or a structure representing its range.
  */
-@Bikeshed(heading="Features")
+@Bikeshed(heading="Properties")
 abstract class SemanticProperty extends Property {
     /*
      * Determines if this property is functional (has a max of one value per instance) 
@@ -795,7 +803,7 @@ abstract class SemanticProperty extends Property {
  * ScalarProperty is a semantic property whose range is a scalar. It can specialize other scalar properties.
  * It can also be flagged as a key property (among possibly several) that specifies the unique id of its domain.
  */
-@Bikeshed(heading="Features")
+@Bikeshed(heading="Properties")
 class ScalarProperty extends SemanticProperty, SpecializableTerm {
     /*
      * Whether this property is functional (has a max of one value per instance) 
@@ -814,7 +822,7 @@ class ScalarProperty extends SemanticProperty, SpecializableTerm {
 /*
  * StructuredProperty is a semantic property whose range is a structure. It can specialize other structured properties.
  */
-@Bikeshed(heading="Features")
+@Bikeshed(heading="Properties")
 class StructuredProperty extends SemanticProperty, SpecializableTerm {
     /*
      * Whether this property is functional (has a max of one value per instance) 
@@ -831,12 +839,12 @@ class StructuredProperty extends SemanticProperty, SpecializableTerm {
 }
 
 /*
- * Relation is a feature that represents a relation from its domain entity to its range entity. It is the super type of
+ * Relation is a property that represents a relation from its domain entity to its range entity. It is the super type of
  * two concrete relations: [=ForwardRelation=] and [=ReverseRelation] that are specified by a relation entity. When a relation
  * entity specifies both kinds of relations, they become inverse of each other.
  */
-@Bikeshed(heading="Features")
-abstract class Relation extends Feature {
+@Bikeshed(heading="Properties")
+abstract class Relation extends SemanticProperty {
     /*
      * The entity that represents the domain of this relation
      */
@@ -855,18 +863,13 @@ abstract class Relation extends Feature {
     refers Relation[?] inverse get {
         deriveInverse()
     }
-    /* 
-     * Gets the relation entity of this relation 
-     */
-    op RelationEntity getRelationEntity()
-    
     op Entity deriveDomain()
     op Entity deriveRange()
     op Relation deriveInverse()
 }
 
 ////////////////////////////////////////
-//  Relation Properties
+//  Relations
 ////////////////////////////////////////
 
 /*
@@ -874,13 +877,22 @@ abstract class Relation extends Feature {
  * entity, and whose range is the target of the relation entity. A forward relation has DL semantics that are specified 
  * by the boolean flags of its relation entity.
  */
-@Bikeshed(heading="Features")
+@Bikeshed(heading="Properties")
 class ForwardRelation extends Relation {
     /*
      * The relation entity that owns this relation as forward
      */
     container RelationEntity[1] relationEntity opposite forwardRelation
     
+    /*
+     * Whether this property is functional (has a max of one value per instance) 
+     */
+    boolean functional get {
+        if (relationEntity !== null)
+        	relationEntity.functional
+        else
+        	false
+	}
     op Entity deriveDomain() {
         if (relationEntity !== null)
             relationEntity.source
@@ -900,24 +912,51 @@ class ForwardRelation extends Relation {
  * the relation entity, and whose range is the source of the relation entity. A reverse relation has DL semantics that 
  * are the inverse of its entity's forward relation.
  */
-@Bikeshed(heading="Features")
+@Bikeshed(heading="Properties")
 class ReverseRelation extends Relation {
     /*
-     * The relation entity that owns this reverse relation
+     * The relation base that owns this reverse relation
      */
-    container RelationEntity[1] relationEntity opposite reverseRelation
+    container RelationBase[1] relationBase opposite reverseRelation
     
+    /*
+     * Whether this property is functional (has a max of one value per instance) 
+     */
+    boolean functional get {
+        if (relationBase !== null)
+        	relationBase.inverseFunctional
+        else
+        	false
+	}
     op Entity deriveDomain() {
-        if (relationEntity !== null)
-            relationEntity.target
+        if (relationBase !== null)
+            relationBase.target
     }
     op Entity deriveRange() {
-        if (relationEntity !== null)
-            relationEntity.source
+        if (relationBase !== null)
+            relationBase.source
     }
     op Relation deriveInverse() {
-        if (relationEntity !== null)
-            relationEntity.forwardRelation
+        if (relationBase instanceof RelationEntity)
+            (relationBase as RelationEntity).forwardRelation
+        else if (relationBase instanceof Relation)
+        	(relationBase as Relation)
+    }
+}
+
+/*
+ * UnreifiedRelation is a simple relation from a source to a target entity that is not part of a relation entity. 
+ */
+@Bikeshed(heading="Properties")
+class UnreifiedRelation extends Relation, RelationBase {
+    op Entity deriveDomain() {
+        source
+    }
+    op Entity deriveRange() {
+    	target
+    }
+    op Relation deriveInverse() {
+		reverseRelation
     }
 }
 
@@ -929,7 +968,7 @@ class ReverseRelation extends Relation {
  * NamedInstance is an instance that is a member of a description. It can specify links to other named instances.
  */
 @Bikeshed(heading="Instances")
-abstract class NamedInstance extends Member, Instance, DescriptionStatement {
+abstract class NamedInstance extends DescriptionMember, DescriptionStatement, Instance {
     /*
      * The links specified by this named instance to other named instances
      */
@@ -1000,15 +1039,15 @@ class StructureInstance extends Instance {
 ////////////////////////////////////////
 
 /*
- * KeyAxiom is an axiom that states that a set of features form a unique key for an entity. This means that all 
+ * KeyAxiom is an axiom that states that a set of properties form a unique key for an entity. This means that all 
  * instances of that entity must have unique values for those keys.
  */
 @Bikeshed(heading="Axioms")
 class KeyAxiom extends Axiom {
     /*
-     * The set of features specified by this axiom as a key
+     * The set of properties specified by this axiom as a key
      */
-    refers Feature[+] properties
+    refers Property[+] properties
     /*
      * The entity that owns this axiom
      */
@@ -1465,17 +1504,17 @@ class RelationEntityPredicate extends BinaryPredicate {
 ////////////////////////////////////////
 
 /*
- * FeaturePredicate is a binary predicate that binds its `variable1` to an instance (subject), and either its 
- `variable2`, `instance2`, or `literal2` as the value (object) of a specific feature (predicate). 
+ * PropertyPredicate is a binary predicate that binds its `variable1` to an instance (subject), and its 
+ `variable2`, `instance2`, or `literal2` as the value of a specific property. 
  */
 @Bikeshed(heading="Rules")
-class FeaturePredicate extends BinaryPredicate {
+class PropertyPredicate extends BinaryPredicate {
     /*
-     * The feature of the named instance whose value is bound or matched
+     * The property of the named instance whose value is bound or matched
      */
-    refers Feature[1] feature
+    refers Property[1] property
     /*
-     * The optional literal2 that is matched as a value of the feature
+     * The optional literal2 that is matched as a value of the property
      */
     contains Literal[?] literal2
 }

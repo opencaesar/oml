@@ -19,9 +19,9 @@
 package io.opencaesar.oml.provider;
 
 
-import io.opencaesar.oml.FeaturePredicate;
 import io.opencaesar.oml.OmlFactory;
 import io.opencaesar.oml.OmlPackage;
+import io.opencaesar.oml.PropertyPredicate;
 
 import java.util.Collection;
 import java.util.List;
@@ -36,19 +36,19 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
- * This is the item provider adapter for a {@link io.opencaesar.oml.FeaturePredicate} object.
+ * This is the item provider adapter for a {@link io.opencaesar.oml.PropertyPredicate} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class FeaturePredicateItemProvider extends BinaryPredicateItemProvider {
+public class PropertyPredicateItemProvider extends BinaryPredicateItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public FeaturePredicateItemProvider(AdapterFactory adapterFactory) {
+	public PropertyPredicateItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -63,25 +63,25 @@ public class FeaturePredicateItemProvider extends BinaryPredicateItemProvider {
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addFeaturePropertyDescriptor(object);
+			addPropertyPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Feature feature.
+	 * This adds a property descriptor for the Property feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addFeaturePropertyDescriptor(Object object) {
+	protected void addPropertyPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_FeaturePredicate_feature_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_FeaturePredicate_feature_feature", "_UI_FeaturePredicate_type"),
-				 OmlPackage.Literals.FEATURE_PREDICATE__FEATURE,
+				 getString("_UI_PropertyPredicate_property_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_PropertyPredicate_property_feature", "_UI_PropertyPredicate_type"),
+				 OmlPackage.Literals.PROPERTY_PREDICATE__PROPERTY,
 				 true,
 				 false,
 				 true,
@@ -102,7 +102,7 @@ public class FeaturePredicateItemProvider extends BinaryPredicateItemProvider {
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(OmlPackage.Literals.FEATURE_PREDICATE__LITERAL2);
+			childrenFeatures.add(OmlPackage.Literals.PROPERTY_PREDICATE__LITERAL2);
 		}
 		return childrenFeatures;
 	}
@@ -121,14 +121,14 @@ public class FeaturePredicateItemProvider extends BinaryPredicateItemProvider {
 	}
 
 	/**
-	 * This returns FeaturePredicate.gif.
+	 * This returns PropertyPredicate.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/FeaturePredicate"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/PropertyPredicate"));
 	}
 
 	/**
@@ -139,10 +139,10 @@ public class FeaturePredicateItemProvider extends BinaryPredicateItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((FeaturePredicate)object).getVariable1();
+		String label = ((PropertyPredicate)object).getVariable1();
 		return label == null || label.length() == 0 ?
-			getString("_UI_FeaturePredicate_type") :
-			getString("_UI_FeaturePredicate_type") + " " + label;
+			getString("_UI_PropertyPredicate_type") :
+			getString("_UI_PropertyPredicate_type") + " " + label;
 	}
 
 
@@ -157,8 +157,8 @@ public class FeaturePredicateItemProvider extends BinaryPredicateItemProvider {
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(FeaturePredicate.class)) {
-			case OmlPackage.FEATURE_PREDICATE__LITERAL2:
+		switch (notification.getFeatureID(PropertyPredicate.class)) {
+			case OmlPackage.PROPERTY_PREDICATE__LITERAL2:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -178,27 +178,27 @@ public class FeaturePredicateItemProvider extends BinaryPredicateItemProvider {
 
 		newChildDescriptors.add
 			(createChildParameter
-				(OmlPackage.Literals.FEATURE_PREDICATE__LITERAL2,
+				(OmlPackage.Literals.PROPERTY_PREDICATE__LITERAL2,
 				 OmlFactory.eINSTANCE.createQuotedLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(OmlPackage.Literals.FEATURE_PREDICATE__LITERAL2,
+				(OmlPackage.Literals.PROPERTY_PREDICATE__LITERAL2,
 				 OmlFactory.eINSTANCE.createIntegerLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(OmlPackage.Literals.FEATURE_PREDICATE__LITERAL2,
+				(OmlPackage.Literals.PROPERTY_PREDICATE__LITERAL2,
 				 OmlFactory.eINSTANCE.createDecimalLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(OmlPackage.Literals.FEATURE_PREDICATE__LITERAL2,
+				(OmlPackage.Literals.PROPERTY_PREDICATE__LITERAL2,
 				 OmlFactory.eINSTANCE.createDoubleLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(OmlPackage.Literals.FEATURE_PREDICATE__LITERAL2,
+				(OmlPackage.Literals.PROPERTY_PREDICATE__LITERAL2,
 				 OmlFactory.eINSTANCE.createBooleanLiteral()));
 	}
 

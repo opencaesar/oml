@@ -25,85 +25,23 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * RelationEntity is a concrete entity that can classify a set of relation instances in a description. It can also specialize
- * other relation entities and/or aspects. A relation entity relates two entities, a source and a target by a forward relation
- * (from the source to the target). The forward relation can optionally be named, otherwise the default name '[relationEnity]Forward'
- * is assumed. An optional reverse relation (from the target to the source) can also be named.A relation entity can also be characterized
- * with several boolean flags, representing DL semantics, that apply to the forward relation, and conversely to the reverse relation (if any).
+ * RelationEntity is an entity that represents a reified relation from a source to a target entity. It also optionally specifies
+ * a forward relation between these entities. If specified, such forward relation becomes the opposite of (inherited) reverse relation.
+ * If not, then a default forward relation with the name '[relationEnity]Forward' is assumed.
  * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link io.opencaesar.oml.RelationEntity#getSource <em>Source</em>}</li>
- *   <li>{@link io.opencaesar.oml.RelationEntity#getTarget <em>Target</em>}</li>
  *   <li>{@link io.opencaesar.oml.RelationEntity#getForwardRelation <em>Forward Relation</em>}</li>
- *   <li>{@link io.opencaesar.oml.RelationEntity#getReverseRelation <em>Reverse Relation</em>}</li>
- *   <li>{@link io.opencaesar.oml.RelationEntity#isFunctional <em>Functional</em>}</li>
- *   <li>{@link io.opencaesar.oml.RelationEntity#isInverseFunctional <em>Inverse Functional</em>}</li>
- *   <li>{@link io.opencaesar.oml.RelationEntity#isSymmetric <em>Symmetric</em>}</li>
- *   <li>{@link io.opencaesar.oml.RelationEntity#isAsymmetric <em>Asymmetric</em>}</li>
- *   <li>{@link io.opencaesar.oml.RelationEntity#isReflexive <em>Reflexive</em>}</li>
- *   <li>{@link io.opencaesar.oml.RelationEntity#isIrreflexive <em>Irreflexive</em>}</li>
- *   <li>{@link io.opencaesar.oml.RelationEntity#isTransitive <em>Transitive</em>}</li>
  * </ul>
  *
  * @see io.opencaesar.oml.OmlPackage#getRelationEntity()
  * @model annotation="https://tabatkins.github.io/bikeshed heading='Types'"
  * @generated
  */
-public interface RelationEntity extends Entity {
-	/**
-	 * Returns the value of the '<em><b>Source</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * The entity that represents the source of this relation entity
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Source</em>' reference.
-	 * @see #setSource(Entity)
-	 * @see io.opencaesar.oml.OmlPackage#getRelationEntity_Source()
-	 * @model required="true"
-	 * @generated
-	 */
-	Entity getSource();
-
-	/**
-	 * Sets the value of the '{@link io.opencaesar.oml.RelationEntity#getSource <em>Source</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Source</em>' reference.
-	 * @see #getSource()
-	 * @generated
-	 */
-	void setSource(Entity value);
-
-	/**
-	 * Returns the value of the '<em><b>Target</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * The entity that represents the target of this relation entity
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Target</em>' reference.
-	 * @see #setTarget(Entity)
-	 * @see io.opencaesar.oml.OmlPackage#getRelationEntity_Target()
-	 * @model required="true"
-	 * @generated
-	 */
-	Entity getTarget();
-
-	/**
-	 * Sets the value of the '{@link io.opencaesar.oml.RelationEntity#getTarget <em>Target</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Target</em>' reference.
-	 * @see #getTarget()
-	 * @generated
-	 */
-	void setTarget(Entity value);
-
+public interface RelationEntity extends Entity, RelationBase {
 	/**
 	 * Returns the value of the '<em><b>Forward Relation</b></em>' containment reference.
 	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.ForwardRelation#getRelationEntity <em>Relation Entity</em>}'.
@@ -130,207 +68,5 @@ public interface RelationEntity extends Entity {
 	 * @generated
 	 */
 	void setForwardRelation(ForwardRelation value);
-
-	/**
-	 * Returns the value of the '<em><b>Reverse Relation</b></em>' containment reference.
-	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.ReverseRelation#getRelationEntity <em>Relation Entity</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * The optional reverse relation of this relation entity
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Reverse Relation</em>' containment reference.
-	 * @see #setReverseRelation(ReverseRelation)
-	 * @see io.opencaesar.oml.OmlPackage#getRelationEntity_ReverseRelation()
-	 * @see io.opencaesar.oml.ReverseRelation#getRelationEntity
-	 * @model opposite="relationEntity" containment="true"
-	 * @generated
-	 */
-	ReverseRelation getReverseRelation();
-
-	/**
-	 * Sets the value of the '{@link io.opencaesar.oml.RelationEntity#getReverseRelation <em>Reverse Relation</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Reverse Relation</em>' containment reference.
-	 * @see #getReverseRelation()
-	 * @generated
-	 */
-	void setReverseRelation(ReverseRelation value);
-
-	/**
-	 * Returns the value of the '<em><b>Functional</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * Whether this relation entity is functional (i.e., {@code A -> B and A->C => B=C})
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Functional</em>' attribute.
-	 * @see #setFunctional(boolean)
-	 * @see io.opencaesar.oml.OmlPackage#getRelationEntity_Functional()
-	 * @model unique="false"
-	 * @generated
-	 */
-	boolean isFunctional();
-
-	/**
-	 * Sets the value of the '{@link io.opencaesar.oml.RelationEntity#isFunctional <em>Functional</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Functional</em>' attribute.
-	 * @see #isFunctional()
-	 * @generated
-	 */
-	void setFunctional(boolean value);
-
-	/**
-	 * Returns the value of the '<em><b>Inverse Functional</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * Whether this relation entity is inverse functional (i.e., {@code B->A and C->A => B=C})
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Inverse Functional</em>' attribute.
-	 * @see #setInverseFunctional(boolean)
-	 * @see io.opencaesar.oml.OmlPackage#getRelationEntity_InverseFunctional()
-	 * @model unique="false"
-	 * @generated
-	 */
-	boolean isInverseFunctional();
-
-	/**
-	 * Sets the value of the '{@link io.opencaesar.oml.RelationEntity#isInverseFunctional <em>Inverse Functional</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Inverse Functional</em>' attribute.
-	 * @see #isInverseFunctional()
-	 * @generated
-	 */
-	void setInverseFunctional(boolean value);
-
-	/**
-	 * Returns the value of the '<em><b>Symmetric</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * Whether this relation entity is symmetric (i.e., {@code A->B => B->A})
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Symmetric</em>' attribute.
-	 * @see #setSymmetric(boolean)
-	 * @see io.opencaesar.oml.OmlPackage#getRelationEntity_Symmetric()
-	 * @model unique="false"
-	 * @generated
-	 */
-	boolean isSymmetric();
-
-	/**
-	 * Sets the value of the '{@link io.opencaesar.oml.RelationEntity#isSymmetric <em>Symmetric</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Symmetric</em>' attribute.
-	 * @see #isSymmetric()
-	 * @generated
-	 */
-	void setSymmetric(boolean value);
-
-	/**
-	 * Returns the value of the '<em><b>Asymmetric</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * Whether this relation entity is asymmetric (i.e., {@code A->B => !(B->A)})
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Asymmetric</em>' attribute.
-	 * @see #setAsymmetric(boolean)
-	 * @see io.opencaesar.oml.OmlPackage#getRelationEntity_Asymmetric()
-	 * @model unique="false"
-	 * @generated
-	 */
-	boolean isAsymmetric();
-
-	/**
-	 * Sets the value of the '{@link io.opencaesar.oml.RelationEntity#isAsymmetric <em>Asymmetric</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Asymmetric</em>' attribute.
-	 * @see #isAsymmetric()
-	 * @generated
-	 */
-	void setAsymmetric(boolean value);
-
-	/**
-	 * Returns the value of the '<em><b>Reflexive</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * Whether this relation entity is reflexive (i.e., {@code A => A->A})
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Reflexive</em>' attribute.
-	 * @see #setReflexive(boolean)
-	 * @see io.opencaesar.oml.OmlPackage#getRelationEntity_Reflexive()
-	 * @model unique="false"
-	 * @generated
-	 */
-	boolean isReflexive();
-
-	/**
-	 * Sets the value of the '{@link io.opencaesar.oml.RelationEntity#isReflexive <em>Reflexive</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Reflexive</em>' attribute.
-	 * @see #isReflexive()
-	 * @generated
-	 */
-	void setReflexive(boolean value);
-
-	/**
-	 * Returns the value of the '<em><b>Irreflexive</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * Whether this relation entity is irreflexive (i.e., {@code A => !(A->A)})
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Irreflexive</em>' attribute.
-	 * @see #setIrreflexive(boolean)
-	 * @see io.opencaesar.oml.OmlPackage#getRelationEntity_Irreflexive()
-	 * @model unique="false"
-	 * @generated
-	 */
-	boolean isIrreflexive();
-
-	/**
-	 * Sets the value of the '{@link io.opencaesar.oml.RelationEntity#isIrreflexive <em>Irreflexive</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Irreflexive</em>' attribute.
-	 * @see #isIrreflexive()
-	 * @generated
-	 */
-	void setIrreflexive(boolean value);
-
-	/**
-	 * Returns the value of the '<em><b>Transitive</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * Whether this relation entity is irreflexive (i.e., {@code A->B and B->C => A->C})
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Transitive</em>' attribute.
-	 * @see #setTransitive(boolean)
-	 * @see io.opencaesar.oml.OmlPackage#getRelationEntity_Transitive()
-	 * @model unique="false"
-	 * @generated
-	 */
-	boolean isTransitive();
-
-	/**
-	 * Sets the value of the '{@link io.opencaesar.oml.RelationEntity#isTransitive <em>Transitive</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Transitive</em>' attribute.
-	 * @see #isTransitive()
-	 * @generated
-	 */
-	void setTransitive(boolean value);
 
 } // RelationEntity

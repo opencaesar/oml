@@ -51,14 +51,14 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link io.opencaesar.oml.impl.NamedInstanceImpl#getOwnedPropertyValues <em>Owned Property Values</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.NamedInstanceImpl#getOwningDescription <em>Owning Description</em>}</li>
+ *   <li>{@link io.opencaesar.oml.impl.NamedInstanceImpl#getOwnedPropertyValues <em>Owned Property Values</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.NamedInstanceImpl#getOwnedLinks <em>Owned Links</em>}</li>
  * </ul>
  *
  * @generated
  */
-public abstract class NamedInstanceImpl extends MemberImpl implements NamedInstance {
+public abstract class NamedInstanceImpl extends DescriptionMemberImpl implements NamedInstance {
 	/**
 	 * The cached value of the '{@link #getOwnedPropertyValues() <em>Owned Property Values</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -96,19 +96,6 @@ public abstract class NamedInstanceImpl extends MemberImpl implements NamedInsta
 	@Override
 	protected EClass eStaticClass() {
 		return OmlPackage.Literals.NAMED_INSTANCE;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EList<PropertyValueAssertion> getOwnedPropertyValues() {
-		if (ownedPropertyValues == null) {
-			ownedPropertyValues = new EObjectContainmentWithInverseEList<PropertyValueAssertion>(PropertyValueAssertion.class, this, OmlPackage.NAMED_INSTANCE__OWNED_PROPERTY_VALUES, OmlPackage.PROPERTY_VALUE_ASSERTION__OWNING_INSTANCE);
-		}
-		return ownedPropertyValues;
 	}
 
 	/**
@@ -170,6 +157,19 @@ public abstract class NamedInstanceImpl extends MemberImpl implements NamedInsta
 	 * @generated
 	 */
 	@Override
+	public EList<PropertyValueAssertion> getOwnedPropertyValues() {
+		if (ownedPropertyValues == null) {
+			ownedPropertyValues = new EObjectContainmentWithInverseEList<PropertyValueAssertion>(PropertyValueAssertion.class, this, OmlPackage.NAMED_INSTANCE__OWNED_PROPERTY_VALUES, OmlPackage.PROPERTY_VALUE_ASSERTION__OWNING_INSTANCE);
+		}
+		return ownedPropertyValues;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EList<LinkAssertion> getOwnedLinks() {
 		if (ownedLinks == null) {
 			ownedLinks = new EObjectContainmentWithInverseEList<LinkAssertion>(LinkAssertion.class, this, OmlPackage.NAMED_INSTANCE__OWNED_LINKS, OmlPackage.LINK_ASSERTION__OWNING_INSTANCE);
@@ -186,12 +186,12 @@ public abstract class NamedInstanceImpl extends MemberImpl implements NamedInsta
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case OmlPackage.NAMED_INSTANCE__OWNED_PROPERTY_VALUES:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedPropertyValues()).basicAdd(otherEnd, msgs);
 			case OmlPackage.NAMED_INSTANCE__OWNING_DESCRIPTION:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwningDescription((Description)otherEnd, msgs);
+			case OmlPackage.NAMED_INSTANCE__OWNED_PROPERTY_VALUES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedPropertyValues()).basicAdd(otherEnd, msgs);
 			case OmlPackage.NAMED_INSTANCE__OWNED_LINKS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedLinks()).basicAdd(otherEnd, msgs);
 		}
@@ -206,10 +206,10 @@ public abstract class NamedInstanceImpl extends MemberImpl implements NamedInsta
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case OmlPackage.NAMED_INSTANCE__OWNED_PROPERTY_VALUES:
-				return ((InternalEList<?>)getOwnedPropertyValues()).basicRemove(otherEnd, msgs);
 			case OmlPackage.NAMED_INSTANCE__OWNING_DESCRIPTION:
 				return basicSetOwningDescription(null, msgs);
+			case OmlPackage.NAMED_INSTANCE__OWNED_PROPERTY_VALUES:
+				return ((InternalEList<?>)getOwnedPropertyValues()).basicRemove(otherEnd, msgs);
 			case OmlPackage.NAMED_INSTANCE__OWNED_LINKS:
 				return ((InternalEList<?>)getOwnedLinks()).basicRemove(otherEnd, msgs);
 		}
@@ -238,11 +238,11 @@ public abstract class NamedInstanceImpl extends MemberImpl implements NamedInsta
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case OmlPackage.NAMED_INSTANCE__OWNED_PROPERTY_VALUES:
-				return getOwnedPropertyValues();
 			case OmlPackage.NAMED_INSTANCE__OWNING_DESCRIPTION:
 				if (resolve) return getOwningDescription();
 				return basicGetOwningDescription();
+			case OmlPackage.NAMED_INSTANCE__OWNED_PROPERTY_VALUES:
+				return getOwnedPropertyValues();
 			case OmlPackage.NAMED_INSTANCE__OWNED_LINKS:
 				return getOwnedLinks();
 		}
@@ -258,12 +258,12 @@ public abstract class NamedInstanceImpl extends MemberImpl implements NamedInsta
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case OmlPackage.NAMED_INSTANCE__OWNING_DESCRIPTION:
+				setOwningDescription((Description)newValue);
+				return;
 			case OmlPackage.NAMED_INSTANCE__OWNED_PROPERTY_VALUES:
 				getOwnedPropertyValues().clear();
 				getOwnedPropertyValues().addAll((Collection<? extends PropertyValueAssertion>)newValue);
-				return;
-			case OmlPackage.NAMED_INSTANCE__OWNING_DESCRIPTION:
-				setOwningDescription((Description)newValue);
 				return;
 			case OmlPackage.NAMED_INSTANCE__OWNED_LINKS:
 				getOwnedLinks().clear();
@@ -281,11 +281,11 @@ public abstract class NamedInstanceImpl extends MemberImpl implements NamedInsta
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case OmlPackage.NAMED_INSTANCE__OWNED_PROPERTY_VALUES:
-				getOwnedPropertyValues().clear();
-				return;
 			case OmlPackage.NAMED_INSTANCE__OWNING_DESCRIPTION:
 				setOwningDescription((Description)null);
+				return;
+			case OmlPackage.NAMED_INSTANCE__OWNED_PROPERTY_VALUES:
+				getOwnedPropertyValues().clear();
 				return;
 			case OmlPackage.NAMED_INSTANCE__OWNED_LINKS:
 				getOwnedLinks().clear();
@@ -302,10 +302,10 @@ public abstract class NamedInstanceImpl extends MemberImpl implements NamedInsta
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case OmlPackage.NAMED_INSTANCE__OWNED_PROPERTY_VALUES:
-				return ownedPropertyValues != null && !ownedPropertyValues.isEmpty();
 			case OmlPackage.NAMED_INSTANCE__OWNING_DESCRIPTION:
 				return basicGetOwningDescription() != null;
+			case OmlPackage.NAMED_INSTANCE__OWNED_PROPERTY_VALUES:
+				return ownedPropertyValues != null && !ownedPropertyValues.isEmpty();
 			case OmlPackage.NAMED_INSTANCE__OWNED_LINKS:
 				return ownedLinks != null && !ownedLinks.isEmpty();
 		}
@@ -319,12 +319,6 @@ public abstract class NamedInstanceImpl extends MemberImpl implements NamedInsta
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == Instance.class) {
-			switch (derivedFeatureID) {
-				case OmlPackage.NAMED_INSTANCE__OWNED_PROPERTY_VALUES: return OmlPackage.INSTANCE__OWNED_PROPERTY_VALUES;
-				default: return -1;
-			}
-		}
 		if (baseClass == Statement.class) {
 			switch (derivedFeatureID) {
 				default: return -1;
@@ -333,6 +327,12 @@ public abstract class NamedInstanceImpl extends MemberImpl implements NamedInsta
 		if (baseClass == DescriptionStatement.class) {
 			switch (derivedFeatureID) {
 				case OmlPackage.NAMED_INSTANCE__OWNING_DESCRIPTION: return OmlPackage.DESCRIPTION_STATEMENT__OWNING_DESCRIPTION;
+				default: return -1;
+			}
+		}
+		if (baseClass == Instance.class) {
+			switch (derivedFeatureID) {
+				case OmlPackage.NAMED_INSTANCE__OWNED_PROPERTY_VALUES: return OmlPackage.INSTANCE__OWNED_PROPERTY_VALUES;
 				default: return -1;
 			}
 		}
@@ -346,12 +346,6 @@ public abstract class NamedInstanceImpl extends MemberImpl implements NamedInsta
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == Instance.class) {
-			switch (baseFeatureID) {
-				case OmlPackage.INSTANCE__OWNED_PROPERTY_VALUES: return OmlPackage.NAMED_INSTANCE__OWNED_PROPERTY_VALUES;
-				default: return -1;
-			}
-		}
 		if (baseClass == Statement.class) {
 			switch (baseFeatureID) {
 				default: return -1;
@@ -360,6 +354,12 @@ public abstract class NamedInstanceImpl extends MemberImpl implements NamedInsta
 		if (baseClass == DescriptionStatement.class) {
 			switch (baseFeatureID) {
 				case OmlPackage.DESCRIPTION_STATEMENT__OWNING_DESCRIPTION: return OmlPackage.NAMED_INSTANCE__OWNING_DESCRIPTION;
+				default: return -1;
+			}
+		}
+		if (baseClass == Instance.class) {
+			switch (baseFeatureID) {
+				case OmlPackage.INSTANCE__OWNED_PROPERTY_VALUES: return OmlPackage.NAMED_INSTANCE__OWNED_PROPERTY_VALUES;
 				default: return -1;
 			}
 		}

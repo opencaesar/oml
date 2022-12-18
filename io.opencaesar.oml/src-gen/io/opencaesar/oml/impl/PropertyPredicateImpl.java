@@ -18,10 +18,10 @@
  */
 package io.opencaesar.oml.impl;
 
-import io.opencaesar.oml.Feature;
-import io.opencaesar.oml.FeaturePredicate;
 import io.opencaesar.oml.Literal;
 import io.opencaesar.oml.OmlPackage;
+import io.opencaesar.oml.Property;
+import io.opencaesar.oml.PropertyPredicate;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -33,28 +33,28 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Feature Predicate</b></em>'.
+ * An implementation of the model object '<em><b>Property Predicate</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link io.opencaesar.oml.impl.FeaturePredicateImpl#getFeature <em>Feature</em>}</li>
- *   <li>{@link io.opencaesar.oml.impl.FeaturePredicateImpl#getLiteral2 <em>Literal2</em>}</li>
+ *   <li>{@link io.opencaesar.oml.impl.PropertyPredicateImpl#getProperty <em>Property</em>}</li>
+ *   <li>{@link io.opencaesar.oml.impl.PropertyPredicateImpl#getLiteral2 <em>Literal2</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class FeaturePredicateImpl extends BinaryPredicateImpl implements FeaturePredicate {
+public class PropertyPredicateImpl extends BinaryPredicateImpl implements PropertyPredicate {
 	/**
-	 * The cached value of the '{@link #getFeature() <em>Feature</em>}' reference.
+	 * The cached value of the '{@link #getProperty() <em>Property</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getFeature()
+	 * @see #getProperty()
 	 * @generated
 	 * @ordered
 	 */
-	protected Feature feature;
+	protected Property property;
 
 	/**
 	 * The cached value of the '{@link #getLiteral2() <em>Literal2</em>}' containment reference.
@@ -71,7 +71,7 @@ public class FeaturePredicateImpl extends BinaryPredicateImpl implements Feature
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected FeaturePredicateImpl() {
+	protected PropertyPredicateImpl() {
 		super();
 	}
 
@@ -82,7 +82,7 @@ public class FeaturePredicateImpl extends BinaryPredicateImpl implements Feature
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return OmlPackage.Literals.FEATURE_PREDICATE;
+		return OmlPackage.Literals.PROPERTY_PREDICATE;
 	}
 
 	/**
@@ -91,16 +91,16 @@ public class FeaturePredicateImpl extends BinaryPredicateImpl implements Feature
 	 * @generated
 	 */
 	@Override
-	public Feature getFeature() {
-		if (feature != null && feature.eIsProxy()) {
-			InternalEObject oldFeature = (InternalEObject)feature;
-			feature = (Feature)eResolveProxy(oldFeature);
-			if (feature != oldFeature) {
+	public Property getProperty() {
+		if (property != null && property.eIsProxy()) {
+			InternalEObject oldProperty = (InternalEObject)property;
+			property = (Property)eResolveProxy(oldProperty);
+			if (property != oldProperty) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, OmlPackage.FEATURE_PREDICATE__FEATURE, oldFeature, feature));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, OmlPackage.PROPERTY_PREDICATE__PROPERTY, oldProperty, property));
 			}
 		}
-		return feature;
+		return property;
 	}
 
 	/**
@@ -108,8 +108,8 @@ public class FeaturePredicateImpl extends BinaryPredicateImpl implements Feature
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Feature basicGetFeature() {
-		return feature;
+	public Property basicGetProperty() {
+		return property;
 	}
 
 	/**
@@ -118,11 +118,11 @@ public class FeaturePredicateImpl extends BinaryPredicateImpl implements Feature
 	 * @generated
 	 */
 	@Override
-	public void setFeature(Feature newFeature) {
-		Feature oldFeature = feature;
-		feature = newFeature;
+	public void setProperty(Property newProperty) {
+		Property oldProperty = property;
+		property = newProperty;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.FEATURE_PREDICATE__FEATURE, oldFeature, feature));
+			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.PROPERTY_PREDICATE__PROPERTY, oldProperty, property));
 	}
 
 	/**
@@ -144,7 +144,7 @@ public class FeaturePredicateImpl extends BinaryPredicateImpl implements Feature
 		Literal oldLiteral2 = literal2;
 		literal2 = newLiteral2;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OmlPackage.FEATURE_PREDICATE__LITERAL2, oldLiteral2, newLiteral2);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OmlPackage.PROPERTY_PREDICATE__LITERAL2, oldLiteral2, newLiteral2);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -160,14 +160,14 @@ public class FeaturePredicateImpl extends BinaryPredicateImpl implements Feature
 		if (newLiteral2 != literal2) {
 			NotificationChain msgs = null;
 			if (literal2 != null)
-				msgs = ((InternalEObject)literal2).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OmlPackage.FEATURE_PREDICATE__LITERAL2, null, msgs);
+				msgs = ((InternalEObject)literal2).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OmlPackage.PROPERTY_PREDICATE__LITERAL2, null, msgs);
 			if (newLiteral2 != null)
-				msgs = ((InternalEObject)newLiteral2).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - OmlPackage.FEATURE_PREDICATE__LITERAL2, null, msgs);
+				msgs = ((InternalEObject)newLiteral2).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - OmlPackage.PROPERTY_PREDICATE__LITERAL2, null, msgs);
 			msgs = basicSetLiteral2(newLiteral2, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.FEATURE_PREDICATE__LITERAL2, newLiteral2, newLiteral2));
+			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.PROPERTY_PREDICATE__LITERAL2, newLiteral2, newLiteral2));
 	}
 
 	/**
@@ -178,7 +178,7 @@ public class FeaturePredicateImpl extends BinaryPredicateImpl implements Feature
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case OmlPackage.FEATURE_PREDICATE__LITERAL2:
+			case OmlPackage.PROPERTY_PREDICATE__LITERAL2:
 				return basicSetLiteral2(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -192,10 +192,10 @@ public class FeaturePredicateImpl extends BinaryPredicateImpl implements Feature
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case OmlPackage.FEATURE_PREDICATE__FEATURE:
-				if (resolve) return getFeature();
-				return basicGetFeature();
-			case OmlPackage.FEATURE_PREDICATE__LITERAL2:
+			case OmlPackage.PROPERTY_PREDICATE__PROPERTY:
+				if (resolve) return getProperty();
+				return basicGetProperty();
+			case OmlPackage.PROPERTY_PREDICATE__LITERAL2:
 				return getLiteral2();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -209,10 +209,10 @@ public class FeaturePredicateImpl extends BinaryPredicateImpl implements Feature
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case OmlPackage.FEATURE_PREDICATE__FEATURE:
-				setFeature((Feature)newValue);
+			case OmlPackage.PROPERTY_PREDICATE__PROPERTY:
+				setProperty((Property)newValue);
 				return;
-			case OmlPackage.FEATURE_PREDICATE__LITERAL2:
+			case OmlPackage.PROPERTY_PREDICATE__LITERAL2:
 				setLiteral2((Literal)newValue);
 				return;
 		}
@@ -227,10 +227,10 @@ public class FeaturePredicateImpl extends BinaryPredicateImpl implements Feature
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case OmlPackage.FEATURE_PREDICATE__FEATURE:
-				setFeature((Feature)null);
+			case OmlPackage.PROPERTY_PREDICATE__PROPERTY:
+				setProperty((Property)null);
 				return;
-			case OmlPackage.FEATURE_PREDICATE__LITERAL2:
+			case OmlPackage.PROPERTY_PREDICATE__LITERAL2:
 				setLiteral2((Literal)null);
 				return;
 		}
@@ -245,12 +245,12 @@ public class FeaturePredicateImpl extends BinaryPredicateImpl implements Feature
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case OmlPackage.FEATURE_PREDICATE__FEATURE:
-				return feature != null;
-			case OmlPackage.FEATURE_PREDICATE__LITERAL2:
+			case OmlPackage.PROPERTY_PREDICATE__PROPERTY:
+				return property != null;
+			case OmlPackage.PROPERTY_PREDICATE__LITERAL2:
 				return literal2 != null;
 		}
 		return super.eIsSet(featureID);
 	}
 
-} //FeaturePredicateImpl
+} //PropertyPredicateImpl

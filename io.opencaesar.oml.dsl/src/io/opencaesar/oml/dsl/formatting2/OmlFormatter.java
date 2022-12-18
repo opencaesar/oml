@@ -53,12 +53,12 @@ import io.opencaesar.oml.EnumeratedScalarReference;
 import io.opencaesar.oml.Extension;
 import io.opencaesar.oml.FacetedScalar;
 import io.opencaesar.oml.FacetedScalarReference;
-import io.opencaesar.oml.FeaturePredicate;
 import io.opencaesar.oml.ForwardRelation;
 import io.opencaesar.oml.Inclusion;
 import io.opencaesar.oml.KeyAxiom;
 import io.opencaesar.oml.LinkAssertion;
 import io.opencaesar.oml.OmlPackage;
+import io.opencaesar.oml.PropertyPredicate;
 import io.opencaesar.oml.QuotedLiteral;
 import io.opencaesar.oml.RelationCardinalityRestrictionAxiom;
 import io.opencaesar.oml.RelationEntity;
@@ -89,6 +89,7 @@ import io.opencaesar.oml.StructuredPropertyReference;
 import io.opencaesar.oml.StructuredPropertyValueAssertion;
 import io.opencaesar.oml.StructuredPropertyValueRestrictionAxiom;
 import io.opencaesar.oml.TypePredicate;
+import io.opencaesar.oml.UnreifiedRelation;
 import io.opencaesar.oml.Usage;
 import io.opencaesar.oml.Vocabulary;
 import io.opencaesar.oml.VocabularyBundle;
@@ -279,6 +280,23 @@ public class OmlFormatter extends AbstractJavaFormatter {
 	protected void _format(ReverseRelation relation, IFormattableDocument doc) {
 		relation.getOwnedAnnotations().forEach(i -> doc.append(doc.format(i), newLine()));
 		doc.append(keyword(relation, oml.getReverseRelationAccess().getReverseKeyword_1()), oneSpace());
+	}
+
+	protected void _format(UnreifiedRelation relation, IFormattableDocument doc) {
+		relation.getOwnedAnnotations().forEach(i -> doc.append(doc.format(i), newLine()));
+		doc.append(keyword(relation, oml.getUnreifiedRelationAccess().getRelationKeyword_1()), oneSpace());
+		formatCommas(relation, doc);
+		formatBrackets(relation, doc);
+		doc.append(doc.prepend(keyword(relation, oml.getUnreifiedRelationAccess().getFromKeyword_5()), newLine()), oneSpace());
+		doc.append(doc.prepend(keyword(relation, oml.getUnreifiedRelationAccess().getToKeyword_7()), newLine()), oneSpace());
+		ifNotNull(relation.getReverseRelation(), i -> doc.prepend(doc.format(i), newLine()));
+		doc.prepend(keyword(relation, oml.getUnreifiedRelationAccess().getFunctionalFunctionalKeyword_10_0_0()), newLine());
+		doc.prepend(keyword(relation, oml.getUnreifiedRelationAccess().getInverseFunctionalInverseKeyword_10_1_0_0()), newLine());
+		doc.prepend(keyword(relation, oml.getUnreifiedRelationAccess().getSymmetricSymmetricKeyword_10_2_0()), newLine());
+		doc.prepend(keyword(relation, oml.getUnreifiedRelationAccess().getAsymmetricAsymmetricKeyword_10_3_0()), newLine());
+		doc.prepend(keyword(relation, oml.getUnreifiedRelationAccess().getReflexiveReflexiveKeyword_10_4_0()), newLine());
+		doc.prepend(keyword(relation, oml.getUnreifiedRelationAccess().getIrreflexiveIrreflexiveKeyword_10_5_0()), newLine());
+		doc.prepend(keyword(relation, oml.getUnreifiedRelationAccess().getTransitiveTransitiveKeyword_10_6_0()), newLine());
 	}
 
 	protected void _format(Rule rule, IFormattableDocument doc) {
@@ -546,10 +564,10 @@ public class OmlFormatter extends AbstractJavaFormatter {
 		doc.prepend(keyword(predicate, oml.getRelationEntityPredicateAccess().getRightParenthesisKeyword_7()), noSpace());
     }
 
-	protected void _format(FeaturePredicate predicate, IFormattableDocument doc) {
-		doc.surround(keyword(predicate, oml.getFeaturePredicateAccess().getLeftParenthesisKeyword_1()), noSpace());
+	protected void _format(PropertyPredicate predicate, IFormattableDocument doc) {
+		doc.surround(keyword(predicate, oml.getPropertyPredicateAccess().getLeftParenthesisKeyword_1()), noSpace());
 		formatCommas(predicate, doc);
-		doc.prepend(keyword(predicate, oml.getFeaturePredicateAccess().getRightParenthesisKeyword_5()), noSpace());
+		doc.prepend(keyword(predicate, oml.getPropertyPredicateAccess().getRightParenthesisKeyword_5()), noSpace());
 	}
 
 	protected void _format(SameAsPredicate predicate, IFormattableDocument doc) {

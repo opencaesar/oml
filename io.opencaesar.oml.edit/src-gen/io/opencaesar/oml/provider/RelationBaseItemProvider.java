@@ -21,7 +21,7 @@ package io.opencaesar.oml.provider;
 
 import io.opencaesar.oml.OmlFactory;
 import io.opencaesar.oml.OmlPackage;
-import io.opencaesar.oml.RelationEntity;
+import io.opencaesar.oml.RelationBase;
 
 import java.util.Collection;
 import java.util.List;
@@ -37,19 +37,19 @@ import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
- * This is the item provider adapter for a {@link io.opencaesar.oml.RelationEntity} object.
+ * This is the item provider adapter for a {@link io.opencaesar.oml.RelationBase} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class RelationEntityItemProvider extends EntityItemProvider {
+public class RelationBaseItemProvider extends SpecializableTermItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public RelationEntityItemProvider(AdapterFactory adapterFactory) {
+	public RelationBaseItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -288,7 +288,6 @@ public class RelationEntityItemProvider extends EntityItemProvider {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(OmlPackage.Literals.RELATION_BASE__REVERSE_RELATION);
-			childrenFeatures.add(OmlPackage.Literals.RELATION_ENTITY__FORWARD_RELATION);
 		}
 		return childrenFeatures;
 	}
@@ -307,17 +306,6 @@ public class RelationEntityItemProvider extends EntityItemProvider {
 	}
 
 	/**
-	 * This returns RelationEntity.gif.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/RelationEntity"));
-	}
-
-	/**
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -325,10 +313,10 @@ public class RelationEntityItemProvider extends EntityItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((RelationEntity)object).getName();
+		String label = ((RelationBase)object).getName();
 		return label == null || label.length() == 0 ?
-			getString("_UI_RelationEntity_type") :
-			getString("_UI_RelationEntity_type") + " " + label;
+			getString("_UI_RelationBase_type") :
+			getString("_UI_RelationBase_type") + " " + label;
 	}
 
 
@@ -343,18 +331,17 @@ public class RelationEntityItemProvider extends EntityItemProvider {
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(RelationEntity.class)) {
-			case OmlPackage.RELATION_ENTITY__FUNCTIONAL:
-			case OmlPackage.RELATION_ENTITY__INVERSE_FUNCTIONAL:
-			case OmlPackage.RELATION_ENTITY__SYMMETRIC:
-			case OmlPackage.RELATION_ENTITY__ASYMMETRIC:
-			case OmlPackage.RELATION_ENTITY__REFLEXIVE:
-			case OmlPackage.RELATION_ENTITY__IRREFLEXIVE:
-			case OmlPackage.RELATION_ENTITY__TRANSITIVE:
+		switch (notification.getFeatureID(RelationBase.class)) {
+			case OmlPackage.RELATION_BASE__FUNCTIONAL:
+			case OmlPackage.RELATION_BASE__INVERSE_FUNCTIONAL:
+			case OmlPackage.RELATION_BASE__SYMMETRIC:
+			case OmlPackage.RELATION_BASE__ASYMMETRIC:
+			case OmlPackage.RELATION_BASE__REFLEXIVE:
+			case OmlPackage.RELATION_BASE__IRREFLEXIVE:
+			case OmlPackage.RELATION_BASE__TRANSITIVE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
-			case OmlPackage.RELATION_ENTITY__REVERSE_RELATION:
-			case OmlPackage.RELATION_ENTITY__FORWARD_RELATION:
+			case OmlPackage.RELATION_BASE__REVERSE_RELATION:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -376,11 +363,6 @@ public class RelationEntityItemProvider extends EntityItemProvider {
 			(createChildParameter
 				(OmlPackage.Literals.RELATION_BASE__REVERSE_RELATION,
 				 OmlFactory.eINSTANCE.createReverseRelation()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OmlPackage.Literals.RELATION_ENTITY__FORWARD_RELATION,
-				 OmlFactory.eINSTANCE.createForwardRelation()));
 	}
 
 }

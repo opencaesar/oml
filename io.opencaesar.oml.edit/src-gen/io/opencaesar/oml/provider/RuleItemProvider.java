@@ -191,7 +191,7 @@ public class RuleItemProvider extends VocabularyMemberItemProvider {
 		newChildDescriptors.add
 			(createChildParameter
 				(OmlPackage.Literals.RULE__ANTECEDENT,
-				 OmlFactory.eINSTANCE.createFeaturePredicate()));
+				 OmlFactory.eINSTANCE.createPropertyPredicate()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -216,7 +216,7 @@ public class RuleItemProvider extends VocabularyMemberItemProvider {
 		newChildDescriptors.add
 			(createChildParameter
 				(OmlPackage.Literals.RULE__CONSEQUENT,
-				 OmlFactory.eINSTANCE.createFeaturePredicate()));
+				 OmlFactory.eINSTANCE.createPropertyPredicate()));
 
 		newChildDescriptors.add
 			(createChildParameter

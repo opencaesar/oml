@@ -24,9 +24,14 @@ package io.opencaesar.oml;
  * A representation of the model object '<em><b>Description Member</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * DescriptionMember is a member of a description.
+ * <!-- end-model-doc -->
+ *
  *
  * @see io.opencaesar.oml.OmlPackage#getDescriptionMember()
  * @model abstract="true"
+ *        annotation="https://tabatkins.github.io/bikeshed heading='Descriptions'"
  * @generated
  */
 public interface DescriptionMember extends Member {

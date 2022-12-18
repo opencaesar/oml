@@ -19,10 +19,8 @@
 package io.opencaesar.oml.impl;
 
 import io.opencaesar.oml.Entity;
-import io.opencaesar.oml.ForwardRelation;
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.RelationBase;
-import io.opencaesar.oml.RelationEntity;
 import io.opencaesar.oml.ReverseRelation;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -35,28 +33,27 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Relation Entity</b></em>'.
+ * An implementation of the model object '<em><b>Relation Base</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link io.opencaesar.oml.impl.RelationEntityImpl#getSource <em>Source</em>}</li>
- *   <li>{@link io.opencaesar.oml.impl.RelationEntityImpl#getTarget <em>Target</em>}</li>
- *   <li>{@link io.opencaesar.oml.impl.RelationEntityImpl#getReverseRelation <em>Reverse Relation</em>}</li>
- *   <li>{@link io.opencaesar.oml.impl.RelationEntityImpl#isFunctional <em>Functional</em>}</li>
- *   <li>{@link io.opencaesar.oml.impl.RelationEntityImpl#isInverseFunctional <em>Inverse Functional</em>}</li>
- *   <li>{@link io.opencaesar.oml.impl.RelationEntityImpl#isSymmetric <em>Symmetric</em>}</li>
- *   <li>{@link io.opencaesar.oml.impl.RelationEntityImpl#isAsymmetric <em>Asymmetric</em>}</li>
- *   <li>{@link io.opencaesar.oml.impl.RelationEntityImpl#isReflexive <em>Reflexive</em>}</li>
- *   <li>{@link io.opencaesar.oml.impl.RelationEntityImpl#isIrreflexive <em>Irreflexive</em>}</li>
- *   <li>{@link io.opencaesar.oml.impl.RelationEntityImpl#isTransitive <em>Transitive</em>}</li>
- *   <li>{@link io.opencaesar.oml.impl.RelationEntityImpl#getForwardRelation <em>Forward Relation</em>}</li>
+ *   <li>{@link io.opencaesar.oml.impl.RelationBaseImpl#getSource <em>Source</em>}</li>
+ *   <li>{@link io.opencaesar.oml.impl.RelationBaseImpl#getTarget <em>Target</em>}</li>
+ *   <li>{@link io.opencaesar.oml.impl.RelationBaseImpl#getReverseRelation <em>Reverse Relation</em>}</li>
+ *   <li>{@link io.opencaesar.oml.impl.RelationBaseImpl#isFunctional <em>Functional</em>}</li>
+ *   <li>{@link io.opencaesar.oml.impl.RelationBaseImpl#isInverseFunctional <em>Inverse Functional</em>}</li>
+ *   <li>{@link io.opencaesar.oml.impl.RelationBaseImpl#isSymmetric <em>Symmetric</em>}</li>
+ *   <li>{@link io.opencaesar.oml.impl.RelationBaseImpl#isAsymmetric <em>Asymmetric</em>}</li>
+ *   <li>{@link io.opencaesar.oml.impl.RelationBaseImpl#isReflexive <em>Reflexive</em>}</li>
+ *   <li>{@link io.opencaesar.oml.impl.RelationBaseImpl#isIrreflexive <em>Irreflexive</em>}</li>
+ *   <li>{@link io.opencaesar.oml.impl.RelationBaseImpl#isTransitive <em>Transitive</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class RelationEntityImpl extends EntityImpl implements RelationEntity {
+public abstract class RelationBaseImpl extends SpecializableTermImpl implements RelationBase {
 	/**
 	 * The cached value of the '{@link #getSource() <em>Source</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -228,21 +225,11 @@ public class RelationEntityImpl extends EntityImpl implements RelationEntity {
 	protected boolean transitive = TRANSITIVE_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getForwardRelation() <em>Forward Relation</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getForwardRelation()
-	 * @generated
-	 * @ordered
-	 */
-	protected ForwardRelation forwardRelation;
-
-	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected RelationEntityImpl() {
+	protected RelationBaseImpl() {
 		super();
 	}
 
@@ -253,7 +240,7 @@ public class RelationEntityImpl extends EntityImpl implements RelationEntity {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return OmlPackage.Literals.RELATION_ENTITY;
+		return OmlPackage.Literals.RELATION_BASE;
 	}
 
 	/**
@@ -268,7 +255,7 @@ public class RelationEntityImpl extends EntityImpl implements RelationEntity {
 			source = (Entity)eResolveProxy(oldSource);
 			if (source != oldSource) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, OmlPackage.RELATION_ENTITY__SOURCE, oldSource, source));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, OmlPackage.RELATION_BASE__SOURCE, oldSource, source));
 			}
 		}
 		return source;
@@ -293,7 +280,7 @@ public class RelationEntityImpl extends EntityImpl implements RelationEntity {
 		Entity oldSource = source;
 		source = newSource;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.RELATION_ENTITY__SOURCE, oldSource, source));
+			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.RELATION_BASE__SOURCE, oldSource, source));
 	}
 
 	/**
@@ -308,7 +295,7 @@ public class RelationEntityImpl extends EntityImpl implements RelationEntity {
 			target = (Entity)eResolveProxy(oldTarget);
 			if (target != oldTarget) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, OmlPackage.RELATION_ENTITY__TARGET, oldTarget, target));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, OmlPackage.RELATION_BASE__TARGET, oldTarget, target));
 			}
 		}
 		return target;
@@ -333,7 +320,7 @@ public class RelationEntityImpl extends EntityImpl implements RelationEntity {
 		Entity oldTarget = target;
 		target = newTarget;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.RELATION_ENTITY__TARGET, oldTarget, target));
+			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.RELATION_BASE__TARGET, oldTarget, target));
 	}
 
 	/**
@@ -355,7 +342,7 @@ public class RelationEntityImpl extends EntityImpl implements RelationEntity {
 		ReverseRelation oldReverseRelation = reverseRelation;
 		reverseRelation = newReverseRelation;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OmlPackage.RELATION_ENTITY__REVERSE_RELATION, oldReverseRelation, newReverseRelation);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OmlPackage.RELATION_BASE__REVERSE_RELATION, oldReverseRelation, newReverseRelation);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -378,7 +365,7 @@ public class RelationEntityImpl extends EntityImpl implements RelationEntity {
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.RELATION_ENTITY__REVERSE_RELATION, newReverseRelation, newReverseRelation));
+			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.RELATION_BASE__REVERSE_RELATION, newReverseRelation, newReverseRelation));
 	}
 
 	/**
@@ -401,7 +388,7 @@ public class RelationEntityImpl extends EntityImpl implements RelationEntity {
 		boolean oldFunctional = functional;
 		functional = newFunctional;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.RELATION_ENTITY__FUNCTIONAL, oldFunctional, functional));
+			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.RELATION_BASE__FUNCTIONAL, oldFunctional, functional));
 	}
 
 	/**
@@ -424,7 +411,7 @@ public class RelationEntityImpl extends EntityImpl implements RelationEntity {
 		boolean oldInverseFunctional = inverseFunctional;
 		inverseFunctional = newInverseFunctional;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.RELATION_ENTITY__INVERSE_FUNCTIONAL, oldInverseFunctional, inverseFunctional));
+			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.RELATION_BASE__INVERSE_FUNCTIONAL, oldInverseFunctional, inverseFunctional));
 	}
 
 	/**
@@ -447,7 +434,7 @@ public class RelationEntityImpl extends EntityImpl implements RelationEntity {
 		boolean oldSymmetric = symmetric;
 		symmetric = newSymmetric;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.RELATION_ENTITY__SYMMETRIC, oldSymmetric, symmetric));
+			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.RELATION_BASE__SYMMETRIC, oldSymmetric, symmetric));
 	}
 
 	/**
@@ -470,7 +457,7 @@ public class RelationEntityImpl extends EntityImpl implements RelationEntity {
 		boolean oldAsymmetric = asymmetric;
 		asymmetric = newAsymmetric;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.RELATION_ENTITY__ASYMMETRIC, oldAsymmetric, asymmetric));
+			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.RELATION_BASE__ASYMMETRIC, oldAsymmetric, asymmetric));
 	}
 
 	/**
@@ -493,7 +480,7 @@ public class RelationEntityImpl extends EntityImpl implements RelationEntity {
 		boolean oldReflexive = reflexive;
 		reflexive = newReflexive;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.RELATION_ENTITY__REFLEXIVE, oldReflexive, reflexive));
+			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.RELATION_BASE__REFLEXIVE, oldReflexive, reflexive));
 	}
 
 	/**
@@ -516,7 +503,7 @@ public class RelationEntityImpl extends EntityImpl implements RelationEntity {
 		boolean oldIrreflexive = irreflexive;
 		irreflexive = newIrreflexive;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.RELATION_ENTITY__IRREFLEXIVE, oldIrreflexive, irreflexive));
+			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.RELATION_BASE__IRREFLEXIVE, oldIrreflexive, irreflexive));
 	}
 
 	/**
@@ -539,52 +526,7 @@ public class RelationEntityImpl extends EntityImpl implements RelationEntity {
 		boolean oldTransitive = transitive;
 		transitive = newTransitive;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.RELATION_ENTITY__TRANSITIVE, oldTransitive, transitive));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ForwardRelation getForwardRelation() {
-		return forwardRelation;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetForwardRelation(ForwardRelation newForwardRelation, NotificationChain msgs) {
-		ForwardRelation oldForwardRelation = forwardRelation;
-		forwardRelation = newForwardRelation;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OmlPackage.RELATION_ENTITY__FORWARD_RELATION, oldForwardRelation, newForwardRelation);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setForwardRelation(ForwardRelation newForwardRelation) {
-		if (newForwardRelation != forwardRelation) {
-			NotificationChain msgs = null;
-			if (forwardRelation != null)
-				msgs = ((InternalEObject)forwardRelation).eInverseRemove(this, OmlPackage.FORWARD_RELATION__RELATION_ENTITY, ForwardRelation.class, msgs);
-			if (newForwardRelation != null)
-				msgs = ((InternalEObject)newForwardRelation).eInverseAdd(this, OmlPackage.FORWARD_RELATION__RELATION_ENTITY, ForwardRelation.class, msgs);
-			msgs = basicSetForwardRelation(newForwardRelation, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.RELATION_ENTITY__FORWARD_RELATION, newForwardRelation, newForwardRelation));
+			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.RELATION_BASE__TRANSITIVE, oldTransitive, transitive));
 	}
 
 	/**
@@ -595,14 +537,10 @@ public class RelationEntityImpl extends EntityImpl implements RelationEntity {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case OmlPackage.RELATION_ENTITY__REVERSE_RELATION:
+			case OmlPackage.RELATION_BASE__REVERSE_RELATION:
 				if (reverseRelation != null)
-					msgs = ((InternalEObject)reverseRelation).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OmlPackage.RELATION_ENTITY__REVERSE_RELATION, null, msgs);
+					msgs = ((InternalEObject)reverseRelation).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OmlPackage.RELATION_BASE__REVERSE_RELATION, null, msgs);
 				return basicSetReverseRelation((ReverseRelation)otherEnd, msgs);
-			case OmlPackage.RELATION_ENTITY__FORWARD_RELATION:
-				if (forwardRelation != null)
-					msgs = ((InternalEObject)forwardRelation).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OmlPackage.RELATION_ENTITY__FORWARD_RELATION, null, msgs);
-				return basicSetForwardRelation((ForwardRelation)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -615,10 +553,8 @@ public class RelationEntityImpl extends EntityImpl implements RelationEntity {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case OmlPackage.RELATION_ENTITY__REVERSE_RELATION:
+			case OmlPackage.RELATION_BASE__REVERSE_RELATION:
 				return basicSetReverseRelation(null, msgs);
-			case OmlPackage.RELATION_ENTITY__FORWARD_RELATION:
-				return basicSetForwardRelation(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -631,30 +567,28 @@ public class RelationEntityImpl extends EntityImpl implements RelationEntity {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case OmlPackage.RELATION_ENTITY__SOURCE:
+			case OmlPackage.RELATION_BASE__SOURCE:
 				if (resolve) return getSource();
 				return basicGetSource();
-			case OmlPackage.RELATION_ENTITY__TARGET:
+			case OmlPackage.RELATION_BASE__TARGET:
 				if (resolve) return getTarget();
 				return basicGetTarget();
-			case OmlPackage.RELATION_ENTITY__REVERSE_RELATION:
+			case OmlPackage.RELATION_BASE__REVERSE_RELATION:
 				return getReverseRelation();
-			case OmlPackage.RELATION_ENTITY__FUNCTIONAL:
+			case OmlPackage.RELATION_BASE__FUNCTIONAL:
 				return isFunctional();
-			case OmlPackage.RELATION_ENTITY__INVERSE_FUNCTIONAL:
+			case OmlPackage.RELATION_BASE__INVERSE_FUNCTIONAL:
 				return isInverseFunctional();
-			case OmlPackage.RELATION_ENTITY__SYMMETRIC:
+			case OmlPackage.RELATION_BASE__SYMMETRIC:
 				return isSymmetric();
-			case OmlPackage.RELATION_ENTITY__ASYMMETRIC:
+			case OmlPackage.RELATION_BASE__ASYMMETRIC:
 				return isAsymmetric();
-			case OmlPackage.RELATION_ENTITY__REFLEXIVE:
+			case OmlPackage.RELATION_BASE__REFLEXIVE:
 				return isReflexive();
-			case OmlPackage.RELATION_ENTITY__IRREFLEXIVE:
+			case OmlPackage.RELATION_BASE__IRREFLEXIVE:
 				return isIrreflexive();
-			case OmlPackage.RELATION_ENTITY__TRANSITIVE:
+			case OmlPackage.RELATION_BASE__TRANSITIVE:
 				return isTransitive();
-			case OmlPackage.RELATION_ENTITY__FORWARD_RELATION:
-				return getForwardRelation();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -667,38 +601,35 @@ public class RelationEntityImpl extends EntityImpl implements RelationEntity {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case OmlPackage.RELATION_ENTITY__SOURCE:
+			case OmlPackage.RELATION_BASE__SOURCE:
 				setSource((Entity)newValue);
 				return;
-			case OmlPackage.RELATION_ENTITY__TARGET:
+			case OmlPackage.RELATION_BASE__TARGET:
 				setTarget((Entity)newValue);
 				return;
-			case OmlPackage.RELATION_ENTITY__REVERSE_RELATION:
+			case OmlPackage.RELATION_BASE__REVERSE_RELATION:
 				setReverseRelation((ReverseRelation)newValue);
 				return;
-			case OmlPackage.RELATION_ENTITY__FUNCTIONAL:
+			case OmlPackage.RELATION_BASE__FUNCTIONAL:
 				setFunctional((Boolean)newValue);
 				return;
-			case OmlPackage.RELATION_ENTITY__INVERSE_FUNCTIONAL:
+			case OmlPackage.RELATION_BASE__INVERSE_FUNCTIONAL:
 				setInverseFunctional((Boolean)newValue);
 				return;
-			case OmlPackage.RELATION_ENTITY__SYMMETRIC:
+			case OmlPackage.RELATION_BASE__SYMMETRIC:
 				setSymmetric((Boolean)newValue);
 				return;
-			case OmlPackage.RELATION_ENTITY__ASYMMETRIC:
+			case OmlPackage.RELATION_BASE__ASYMMETRIC:
 				setAsymmetric((Boolean)newValue);
 				return;
-			case OmlPackage.RELATION_ENTITY__REFLEXIVE:
+			case OmlPackage.RELATION_BASE__REFLEXIVE:
 				setReflexive((Boolean)newValue);
 				return;
-			case OmlPackage.RELATION_ENTITY__IRREFLEXIVE:
+			case OmlPackage.RELATION_BASE__IRREFLEXIVE:
 				setIrreflexive((Boolean)newValue);
 				return;
-			case OmlPackage.RELATION_ENTITY__TRANSITIVE:
+			case OmlPackage.RELATION_BASE__TRANSITIVE:
 				setTransitive((Boolean)newValue);
-				return;
-			case OmlPackage.RELATION_ENTITY__FORWARD_RELATION:
-				setForwardRelation((ForwardRelation)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -712,38 +643,35 @@ public class RelationEntityImpl extends EntityImpl implements RelationEntity {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case OmlPackage.RELATION_ENTITY__SOURCE:
+			case OmlPackage.RELATION_BASE__SOURCE:
 				setSource((Entity)null);
 				return;
-			case OmlPackage.RELATION_ENTITY__TARGET:
+			case OmlPackage.RELATION_BASE__TARGET:
 				setTarget((Entity)null);
 				return;
-			case OmlPackage.RELATION_ENTITY__REVERSE_RELATION:
+			case OmlPackage.RELATION_BASE__REVERSE_RELATION:
 				setReverseRelation((ReverseRelation)null);
 				return;
-			case OmlPackage.RELATION_ENTITY__FUNCTIONAL:
+			case OmlPackage.RELATION_BASE__FUNCTIONAL:
 				setFunctional(FUNCTIONAL_EDEFAULT);
 				return;
-			case OmlPackage.RELATION_ENTITY__INVERSE_FUNCTIONAL:
+			case OmlPackage.RELATION_BASE__INVERSE_FUNCTIONAL:
 				setInverseFunctional(INVERSE_FUNCTIONAL_EDEFAULT);
 				return;
-			case OmlPackage.RELATION_ENTITY__SYMMETRIC:
+			case OmlPackage.RELATION_BASE__SYMMETRIC:
 				setSymmetric(SYMMETRIC_EDEFAULT);
 				return;
-			case OmlPackage.RELATION_ENTITY__ASYMMETRIC:
+			case OmlPackage.RELATION_BASE__ASYMMETRIC:
 				setAsymmetric(ASYMMETRIC_EDEFAULT);
 				return;
-			case OmlPackage.RELATION_ENTITY__REFLEXIVE:
+			case OmlPackage.RELATION_BASE__REFLEXIVE:
 				setReflexive(REFLEXIVE_EDEFAULT);
 				return;
-			case OmlPackage.RELATION_ENTITY__IRREFLEXIVE:
+			case OmlPackage.RELATION_BASE__IRREFLEXIVE:
 				setIrreflexive(IRREFLEXIVE_EDEFAULT);
 				return;
-			case OmlPackage.RELATION_ENTITY__TRANSITIVE:
+			case OmlPackage.RELATION_BASE__TRANSITIVE:
 				setTransitive(TRANSITIVE_EDEFAULT);
-				return;
-			case OmlPackage.RELATION_ENTITY__FORWARD_RELATION:
-				setForwardRelation((ForwardRelation)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -757,80 +685,28 @@ public class RelationEntityImpl extends EntityImpl implements RelationEntity {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case OmlPackage.RELATION_ENTITY__SOURCE:
+			case OmlPackage.RELATION_BASE__SOURCE:
 				return source != null;
-			case OmlPackage.RELATION_ENTITY__TARGET:
+			case OmlPackage.RELATION_BASE__TARGET:
 				return target != null;
-			case OmlPackage.RELATION_ENTITY__REVERSE_RELATION:
+			case OmlPackage.RELATION_BASE__REVERSE_RELATION:
 				return reverseRelation != null;
-			case OmlPackage.RELATION_ENTITY__FUNCTIONAL:
+			case OmlPackage.RELATION_BASE__FUNCTIONAL:
 				return functional != FUNCTIONAL_EDEFAULT;
-			case OmlPackage.RELATION_ENTITY__INVERSE_FUNCTIONAL:
+			case OmlPackage.RELATION_BASE__INVERSE_FUNCTIONAL:
 				return inverseFunctional != INVERSE_FUNCTIONAL_EDEFAULT;
-			case OmlPackage.RELATION_ENTITY__SYMMETRIC:
+			case OmlPackage.RELATION_BASE__SYMMETRIC:
 				return symmetric != SYMMETRIC_EDEFAULT;
-			case OmlPackage.RELATION_ENTITY__ASYMMETRIC:
+			case OmlPackage.RELATION_BASE__ASYMMETRIC:
 				return asymmetric != ASYMMETRIC_EDEFAULT;
-			case OmlPackage.RELATION_ENTITY__REFLEXIVE:
+			case OmlPackage.RELATION_BASE__REFLEXIVE:
 				return reflexive != REFLEXIVE_EDEFAULT;
-			case OmlPackage.RELATION_ENTITY__IRREFLEXIVE:
+			case OmlPackage.RELATION_BASE__IRREFLEXIVE:
 				return irreflexive != IRREFLEXIVE_EDEFAULT;
-			case OmlPackage.RELATION_ENTITY__TRANSITIVE:
+			case OmlPackage.RELATION_BASE__TRANSITIVE:
 				return transitive != TRANSITIVE_EDEFAULT;
-			case OmlPackage.RELATION_ENTITY__FORWARD_RELATION:
-				return forwardRelation != null;
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == RelationBase.class) {
-			switch (derivedFeatureID) {
-				case OmlPackage.RELATION_ENTITY__SOURCE: return OmlPackage.RELATION_BASE__SOURCE;
-				case OmlPackage.RELATION_ENTITY__TARGET: return OmlPackage.RELATION_BASE__TARGET;
-				case OmlPackage.RELATION_ENTITY__REVERSE_RELATION: return OmlPackage.RELATION_BASE__REVERSE_RELATION;
-				case OmlPackage.RELATION_ENTITY__FUNCTIONAL: return OmlPackage.RELATION_BASE__FUNCTIONAL;
-				case OmlPackage.RELATION_ENTITY__INVERSE_FUNCTIONAL: return OmlPackage.RELATION_BASE__INVERSE_FUNCTIONAL;
-				case OmlPackage.RELATION_ENTITY__SYMMETRIC: return OmlPackage.RELATION_BASE__SYMMETRIC;
-				case OmlPackage.RELATION_ENTITY__ASYMMETRIC: return OmlPackage.RELATION_BASE__ASYMMETRIC;
-				case OmlPackage.RELATION_ENTITY__REFLEXIVE: return OmlPackage.RELATION_BASE__REFLEXIVE;
-				case OmlPackage.RELATION_ENTITY__IRREFLEXIVE: return OmlPackage.RELATION_BASE__IRREFLEXIVE;
-				case OmlPackage.RELATION_ENTITY__TRANSITIVE: return OmlPackage.RELATION_BASE__TRANSITIVE;
-				default: return -1;
-			}
-		}
-		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == RelationBase.class) {
-			switch (baseFeatureID) {
-				case OmlPackage.RELATION_BASE__SOURCE: return OmlPackage.RELATION_ENTITY__SOURCE;
-				case OmlPackage.RELATION_BASE__TARGET: return OmlPackage.RELATION_ENTITY__TARGET;
-				case OmlPackage.RELATION_BASE__REVERSE_RELATION: return OmlPackage.RELATION_ENTITY__REVERSE_RELATION;
-				case OmlPackage.RELATION_BASE__FUNCTIONAL: return OmlPackage.RELATION_ENTITY__FUNCTIONAL;
-				case OmlPackage.RELATION_BASE__INVERSE_FUNCTIONAL: return OmlPackage.RELATION_ENTITY__INVERSE_FUNCTIONAL;
-				case OmlPackage.RELATION_BASE__SYMMETRIC: return OmlPackage.RELATION_ENTITY__SYMMETRIC;
-				case OmlPackage.RELATION_BASE__ASYMMETRIC: return OmlPackage.RELATION_ENTITY__ASYMMETRIC;
-				case OmlPackage.RELATION_BASE__REFLEXIVE: return OmlPackage.RELATION_ENTITY__REFLEXIVE;
-				case OmlPackage.RELATION_BASE__IRREFLEXIVE: return OmlPackage.RELATION_ENTITY__IRREFLEXIVE;
-				case OmlPackage.RELATION_BASE__TRANSITIVE: return OmlPackage.RELATION_ENTITY__TRANSITIVE;
-				default: return -1;
-			}
-		}
-		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
 	/**
@@ -861,4 +737,4 @@ public class RelationEntityImpl extends EntityImpl implements RelationEntity {
 		return result.toString();
 	}
 
-} //RelationEntityImpl
+} //RelationBaseImpl

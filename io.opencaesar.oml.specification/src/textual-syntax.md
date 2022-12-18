@@ -13,14 +13,14 @@
 <a id="Vocabulary-Syntax">Vocabulary</a>:
 	Annotation*
 	`vocabulary` NAMESPACE `as` ID  `{`
-		VocabularyImport*
+		Import*
 		VocabularyStatement*
 	`}`
 
 <a id="VocabularyBundle-Syntax">VocabularyBundle</a>:
 	Annotation*
 	`vocabulary` `bundle` NAMESPACE `as` ID `{`
-		VocabularyBundleImport*
+		Import*
 	`}`
 
 <a id="DescriptionBox-Syntax">DescriptionBox</a>:
@@ -30,83 +30,42 @@
 <a id="Description-Syntax">Description</a>:
 	Annotation*
 	`description` NAMESPACE `as` ID `{`
-		DescriptionImport*
+		Import*
 		DescriptionStatement*
 	`}`
 
 <a id="DescriptionBundle-Syntax">DescriptionBundle</a>:
 	Annotation*
 	`description` `bundle` NAMESPACE `as` ID `{`
-		DescriptionBundleImport*
+		Import*
 	`}`
 
 <a id="Import-Syntax">Import</a>:
-	VocabularyImport |
-	DescriptionImport
+	Extension |
+	Usage |
+	Inclusion
 
-<a id="VocabularyImport-Syntax">VocabularyImport</a>:
-	VocabularyExtension |
-	VocabularyUsage
-
-<a id="VocabularyExtension-Syntax">VocabularyExtension</a>:
+<a id="Extension-Syntax">Extension</a>:
 	Annotation*
 	`extends` NAMESPACE (`as` ID)?
     	
-<a id="VocabularyUsage-Syntax">VocabularyUsage</a>:
+<a id="Usage-Syntax">Usage</a>:
 	Annotation*
 	`uses` NAMESPACE (`as` ID)?
     	
-<a id="VocabularyBundleImport-Syntax">VocabularyBundleImport</a>:
-	VocabularyBundleExtension |
-	VocabularyBundleInclusion
-
-<a id="VocabularyBundleInclusion-Syntax">VocabularyBundleInclusion</a>:
+<a id="Inclusion-Syntax">Inclusion</a>:
 	Annotation*
 	`includes` NAMESPACE (`as` ID)?
-
-<a id="VocabularyBundleExtension-Syntax">VocabularyBundleExtension</a>:
-	Annotation*
-	`extends` NAMESPACE (`as` ID)?
-
-<a id="DescriptionImport-Syntax">DescriptionImport</a>:
-	DescriptionExtension |
-	DescriptionUsage
-
-<a id="DescriptionUsage-Syntax">DescriptionUsage</a>:
-	Annotation*
-	`uses` NAMESPACE (`as` ID)?
-
-<a id="DescriptionExtension-Syntax">DescriptionExtension</a>:
-	Annotation*
-	`extends` NAMESPACE (`as` ID)?
-
-<a id="DescriptionBundleImport-Syntax">DescriptionBundleImport</a>:
-	DescriptionBundleExtension |
-	DescriptionBundleInclusion |
-	DescriptionBundleUsage
-
-<a id="DescriptionBundleInclusion-Syntax">DescriptionBundleInclusion</a>:
-	Annotation*
-	`includes` NAMESPACE (`as` ID)?
-
-<a id="DescriptionBundleExtension-Syntax">DescriptionBundleExtension</a>:
-	Annotation*
-	`extends` NAMESPACE (`as` ID)?
-
-<a id="DescriptionBundleUsage-Syntax">DescriptionBundleUsage</a>:
-	Annotation*
-	`uses` NAMESPACE (`as` ID)?
 
 <a id="Member-Syntax">Member</a>:
 	SpecializableTerm |
 	Property |
-	Relation |
 	Rule |
 	NamedInstance |
 
 <a id="Term-Syntax">Term</a>:
 	SpecializableTerm |
-	Feature
+	Property
 
 <a id="VocabularyStatement-Syntax">VocabularyStatement</a>:
 	SpecializableTerm |
@@ -119,8 +78,9 @@
 	Type |
 	AnnotationProperty |
 	ScalarProperty |
-	StructuredProperty
-	
+	StructuredProperty |
+	UnreifiedRelation |
+		
 <a id="Type-Syntax">Type</a>:
 	Classifier |
 	Scalar	
@@ -164,13 +124,10 @@
 		(KeyAxiom | PropertyRestrictionAxiom | RelationRestrictionAxiom)*
 	`]`
 
-<a id="Feature-Syntax">Feature</a>:
-	Relation |
-	Property
-
 <a id="Relation-Syntax">Relation</a>:
 	ForwardRelation |
-	ReverseRelation
+	ReverseRelation |
+	UnreifiedRelation
 
 <a id="ForwardRelation-Syntax">ForwardRelation</a>:
 	Annotation*
@@ -179,6 +136,21 @@
 <a id="ReverseRelation-Syntax">ReverseRelation</a>:
 	Annotation*
 	`reverse` ID
+
+<a id="UnreifiedRelation-Syntax">UnreifiedRelation</a>:
+	Annotation*
+	`relation` ID (`:>` SpecializationAxiom (`,` SpecializationAxiom)*)? `[`
+		`from` [Entity|IRI]
+		`to` [Entity|IRI]
+		ReverseRelation?
+		`functional`?
+		(`inverse` `functional`)?
+		`symmetric`?
+		`asymmetric`?
+		`reflexive`?
+		`irreflexive`?
+		`transitive`?
+	`]`
 
 <a id="Structure-Syntax">Structure</a>:
 	Annotation*
@@ -220,7 +192,8 @@
 
 <a id="SemanticProperty-Syntax">SemanticProperty</a>:
 	ScalarProperty |
-	StructuredProperty
+	StructuredProperty |
+	Relation
 
 <a id="ScalarProperty-Syntax">ScalarProperty</a>:
 	Annotation*
@@ -256,15 +229,15 @@
 	
 <a id="BinaryPredicate-Syntax">BinaryPredicate</a>:
 	RelationEntityPredicate |
-    FeaturePredicate |
+    PropertyPredicate |
     SameAsPredicate |
     DifferentFromPredicate
 
 <a id="RelationEntityPredicate-Syntax">RelationEntityPredicate</a>:
 	[RelationEntity|IRI] `(` ID `,` ID `,` (ID | [NamedInstance|IRI]) `)`
 
-<a id="FeaturePredicate-Syntax">FeaturePredicate</a>:
-	[Feature|IRI] `(` ID `,` (ID | Literal | [NamedInstance|IRI]) `)`
+<a id="PropertyPredicate-Syntax">PropertyPredicate</a>:
+	[Property|IRI] `(` ID `,` (ID | Literal | [NamedInstance|IRI]) `)`
 
 <a id="SameAsPredicate-Syntax">SameAsPredicate</a>:
 	`sameAs` `(` ID `,` (ID | [NamedInstance|IRI] `)`
@@ -447,7 +420,7 @@
 	`restricts` `relation` [Relation|IRI] `to` [NamedInstance|IRI]
 
 <a id="KeyAxiom-Syntax">KeyAxiom</a>:
-	`key` [Feature|IRI] (`,` [Feature|IRI])*
+	`key` [Property|IRI] (`,` [Property|IRI])*
 
 <a id="ConceptTypeAssertion-Syntax">ConceptTypeAssertion</a>:
 	[Concept|IRI]

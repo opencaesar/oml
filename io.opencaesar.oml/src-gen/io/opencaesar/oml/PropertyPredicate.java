@@ -21,69 +21,69 @@ package io.opencaesar.oml;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Feature Predicate</b></em>'.
+ * A representation of the model object '<em><b>Property Predicate</b></em>'.
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * FeaturePredicate is a binary predicate that binds its `variable1` to an instance (subject), and either its
- *  `variable2`, `instance2`, or `literal2` as the value (object) of a specific feature (predicate).
+ * PropertyPredicate is a binary predicate that binds its `variable1` to an instance (subject), and its
+ *  `variable2`, `instance2`, or `literal2` as the value of a specific property.
  * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link io.opencaesar.oml.FeaturePredicate#getFeature <em>Feature</em>}</li>
- *   <li>{@link io.opencaesar.oml.FeaturePredicate#getLiteral2 <em>Literal2</em>}</li>
+ *   <li>{@link io.opencaesar.oml.PropertyPredicate#getProperty <em>Property</em>}</li>
+ *   <li>{@link io.opencaesar.oml.PropertyPredicate#getLiteral2 <em>Literal2</em>}</li>
  * </ul>
  *
- * @see io.opencaesar.oml.OmlPackage#getFeaturePredicate()
+ * @see io.opencaesar.oml.OmlPackage#getPropertyPredicate()
  * @model annotation="https://tabatkins.github.io/bikeshed heading='Rules'"
  * @generated
  */
-public interface FeaturePredicate extends BinaryPredicate {
+public interface PropertyPredicate extends BinaryPredicate {
 	/**
-	 * Returns the value of the '<em><b>Feature</b></em>' reference.
+	 * Returns the value of the '<em><b>Property</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The feature of the named instance whose value is bound or matched
+	 * The property of the named instance whose value is bound or matched
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Feature</em>' reference.
-	 * @see #setFeature(Feature)
-	 * @see io.opencaesar.oml.OmlPackage#getFeaturePredicate_Feature()
+	 * @return the value of the '<em>Property</em>' reference.
+	 * @see #setProperty(Property)
+	 * @see io.opencaesar.oml.OmlPackage#getPropertyPredicate_Property()
 	 * @model required="true"
 	 * @generated
 	 */
-	Feature getFeature();
+	Property getProperty();
 
 	/**
-	 * Sets the value of the '{@link io.opencaesar.oml.FeaturePredicate#getFeature <em>Feature</em>}' reference.
+	 * Sets the value of the '{@link io.opencaesar.oml.PropertyPredicate#getProperty <em>Property</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Feature</em>' reference.
-	 * @see #getFeature()
+	 * @param value the new value of the '<em>Property</em>' reference.
+	 * @see #getProperty()
 	 * @generated
 	 */
-	void setFeature(Feature value);
+	void setProperty(Property value);
 
 	/**
 	 * Returns the value of the '<em><b>Literal2</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The optional literal2 that is matched as a value of the feature
+	 * The optional literal2 that is matched as a value of the property
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Literal2</em>' containment reference.
 	 * @see #setLiteral2(Literal)
-	 * @see io.opencaesar.oml.OmlPackage#getFeaturePredicate_Literal2()
+	 * @see io.opencaesar.oml.OmlPackage#getPropertyPredicate_Literal2()
 	 * @model containment="true"
 	 * @generated
 	 */
 	Literal getLiteral2();
 
 	/**
-	 * Sets the value of the '{@link io.opencaesar.oml.FeaturePredicate#getLiteral2 <em>Literal2</em>}' containment reference.
+	 * Sets the value of the '{@link io.opencaesar.oml.PropertyPredicate#getLiteral2 <em>Literal2</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Literal2</em>' containment reference.
@@ -92,4 +92,4 @@ public interface FeaturePredicate extends BinaryPredicate {
 	 */
 	void setLiteral2(Literal value);
 
-} // FeaturePredicate
+} // PropertyPredicate

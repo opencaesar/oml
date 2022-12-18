@@ -56,8 +56,6 @@ import io.opencaesar.oml.Element;
 import io.opencaesar.oml.Entity;
 import io.opencaesar.oml.EnumeratedScalarReference;
 import io.opencaesar.oml.FacetedScalarReference;
-import io.opencaesar.oml.Feature;
-import io.opencaesar.oml.FeaturePredicate;
 import io.opencaesar.oml.IdentifiedElement;
 import io.opencaesar.oml.Import;
 import io.opencaesar.oml.Instance;
@@ -70,6 +68,8 @@ import io.opencaesar.oml.NamedInstance;
 import io.opencaesar.oml.NamedInstanceReference;
 import io.opencaesar.oml.Ontology;
 import io.opencaesar.oml.Predicate;
+import io.opencaesar.oml.Property;
+import io.opencaesar.oml.PropertyPredicate;
 import io.opencaesar.oml.PropertyRestrictionAxiom;
 import io.opencaesar.oml.PropertyValueAssertion;
 import io.opencaesar.oml.QuotedLiteral;
@@ -1206,12 +1206,12 @@ public final class OmlRead {
     }
     
     /**
-     * Gets the restricted feature of the given restriction axiom
+     * Gets the restricted property of the given restriction axiom
      * 
      * @param axiom the given restriction axiom
-     * @return the restricted feature of the given restriction axiom
+     * @return the restricted property of the given restriction axiom
      */
-    public static Feature getRestrictedFeature(RestrictionAxiom axiom) {
+    public static Property getRestrictedProprty(RestrictionAxiom axiom) {
         if (axiom instanceof RelationRestrictionAxiom) {
             return ((RelationRestrictionAxiom) axiom).getRelation();
         } else if (axiom instanceof ScalarPropertyRestrictionAxiom) {
@@ -1338,8 +1338,8 @@ public final class OmlRead {
     		return ((TypePredicate)predicate).getType();
     	} else if (predicate instanceof RelationEntityPredicate) {
     		return ((RelationEntityPredicate)predicate).getEntity();
-    	} else if (predicate instanceof FeaturePredicate) {
-    		return ((FeaturePredicate)predicate).getFeature();
+    	} else if (predicate instanceof PropertyPredicate) {
+    		return ((PropertyPredicate)predicate).getProperty();
     	}
     	return null;
     }

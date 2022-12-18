@@ -39,7 +39,7 @@ package io.opencaesar.oml;
  * </ul>
  *
  * @see io.opencaesar.oml.OmlPackage#getScalarProperty()
- * @model annotation="https://tabatkins.github.io/bikeshed heading='Features'"
+ * @model annotation="https://tabatkins.github.io/bikeshed heading='Properties'"
  * @generated
  */
 public interface ScalarProperty extends SemanticProperty, SpecializableTerm {

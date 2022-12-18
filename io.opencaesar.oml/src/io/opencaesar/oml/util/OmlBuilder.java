@@ -53,7 +53,6 @@ import io.opencaesar.oml.Element;
 import io.opencaesar.oml.EnumeratedScalar;
 import io.opencaesar.oml.Extension;
 import io.opencaesar.oml.FacetedScalar;
-import io.opencaesar.oml.FeaturePredicate;
 import io.opencaesar.oml.ForwardRelation;
 import io.opencaesar.oml.IdentifiedElement;
 import io.opencaesar.oml.Inclusion;
@@ -65,10 +64,12 @@ import io.opencaesar.oml.Member;
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.Ontology;
 import io.opencaesar.oml.Predicate;
+import io.opencaesar.oml.PropertyPredicate;
 import io.opencaesar.oml.QuotedLiteral;
 import io.opencaesar.oml.RangeRestrictionKind;
 import io.opencaesar.oml.Reference;
 import io.opencaesar.oml.Relation;
+import io.opencaesar.oml.RelationBase;
 import io.opencaesar.oml.RelationCardinalityRestrictionAxiom;
 import io.opencaesar.oml.RelationEntity;
 import io.opencaesar.oml.RelationEntityPredicate;
@@ -94,6 +95,7 @@ import io.opencaesar.oml.StructuredPropertyRangeRestrictionAxiom;
 import io.opencaesar.oml.StructuredPropertyValueAssertion;
 import io.opencaesar.oml.StructuredPropertyValueRestrictionAxiom;
 import io.opencaesar.oml.TypePredicate;
+import io.opencaesar.oml.UnreifiedRelation;
 import io.opencaesar.oml.Usage;
 import io.opencaesar.oml.Vocabulary;
 import io.opencaesar.oml.VocabularyBundle;
@@ -478,8 +480,8 @@ public class OmlBuilder {
         boolean functional, boolean inverseFunctional, boolean symmetric, 
         boolean asymmetric, boolean reflexive, boolean irreflexive, boolean transitive) {
         final RelationEntity relation = OmlWrite.addRelationEntity(vocabulary, name, null, null, functional, inverseFunctional, symmetric, asymmetric, reflexive, irreflexive, transitive);
-        setCrossReference(vocabulary, relation, OmlPackage.Literals.RELATION_ENTITY__SOURCE, sourceIri);
-        setCrossReference(vocabulary, relation, OmlPackage.Literals.RELATION_ENTITY__TARGET, targetIri);
+        setCrossReference(vocabulary, relation, OmlPackage.Literals.RELATION_BASE__SOURCE, sourceIri);
+        setCrossReference(vocabulary, relation, OmlPackage.Literals.RELATION_BASE__TARGET, targetIri);
         return relation;
     }
 
@@ -607,17 +609,44 @@ public class OmlBuilder {
     // ReverseRelation
 
     /**
-     * Creates a reverse relation and adds it to the given relation entity
+     * Creates a reverse relation and adds it to the given relation base
      * 
-     * @param entity the context relation entity
+     * @param base the context relation base
      * @param name the name of the new reverse relation
-     * @return a reverse relation that is added to the given relation entity
+     * @return a reverse relation that is added to the given relation base
      */
-    public ReverseRelation addReverseRelation(RelationEntity entity, String name) {
-        final ReverseRelation reverse = OmlWrite.addReverseRelation(entity, name);
+    public ReverseRelation addReverseRelation(RelationBase base, String name) {
+        final ReverseRelation reverse = OmlWrite.addReverseRelation(base, name);
         return reverse;
     }
     
+    // UnreifiedRelation
+    
+    /**
+     * Creates a new unreified relation and adds it to the given vocabulary
+     * 
+     * @param vocabulary the context vocabulary
+     * @param name the name of the new concept
+     * @param sourceIri the iri of the source entity
+     * @param targetIri the iri of the target entity
+     * @param functional whether the relation entity is functional
+     * @param inverseFunctional whether the relation entity is inverse functional
+     * @param symmetric whether the relation entity is symmetric
+     * @param asymmetric whether the relation entity is asymmetric
+     * @param reflexive whether the relation entity is reflexive
+     * @param irreflexive whether the relation entity is irreflexive
+     * @param transitive whether the relation entity is transitive
+     * @return a new relation entity that is added to the given vocabulary
+     */
+    public UnreifiedRelation addUnreifiedRelation(Vocabulary vocabulary, String name, String sourceIri, String targetIri, 
+        boolean functional, boolean inverseFunctional, boolean symmetric, 
+        boolean asymmetric, boolean reflexive, boolean irreflexive, boolean transitive) {
+        final UnreifiedRelation relation = OmlWrite.addUnreifiedRelation(vocabulary, name, null, null, functional, inverseFunctional, symmetric, asymmetric, reflexive, irreflexive, transitive);
+        setCrossReference(vocabulary, relation, OmlPackage.Literals.RELATION_BASE__SOURCE, sourceIri);
+        setCrossReference(vocabulary, relation, OmlPackage.Literals.RELATION_BASE__TARGET, targetIri);
+        return relation;
+    }
+
     // Rule
 
     /**
@@ -1106,17 +1135,17 @@ public class OmlBuilder {
     // RelationPredicate
 
     /**
-     * Creates an feature predicate
+     * Creates a property predicate
      * 
      * @param vocabulary the context vocabulary
-     * @param featureIri the iri of the feature
+     * @param propertyIri the iri of the property
      * @param variable1 the name of a variable bound to an instance
-     * @param variable2 the name of a variable bound to a value of the feature in the instance
+     * @param variable2 the name of a variable bound to a value of the property in the instance
      * @return a relation predicate
      */
-    public FeaturePredicate createFeaturePredicate(Vocabulary vocabulary, String featureIri, String variable1, String variable2) {
-        final FeaturePredicate predicate = OmlWrite.createFeaturePredicate(vocabulary, null, variable1, variable2);
-        setCrossReference(vocabulary, predicate, OmlPackage.Literals.FEATURE_PREDICATE__FEATURE, featureIri);
+    public PropertyPredicate createPropertyPredicate(Vocabulary vocabulary, String propertyIri, String variable1, String variable2) {
+        final PropertyPredicate predicate = OmlWrite.createPropertyPredicate(vocabulary, null, variable1, variable2);
+        setCrossReference(vocabulary, predicate, OmlPackage.Literals.PROPERTY_PREDICATE__PROPERTY, propertyIri);
         return predicate;
     }
         

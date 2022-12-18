@@ -50,7 +50,7 @@ class OmlOntoloyDiagramScope {
 	private enum Mode {
 		// Find all classifiers
 		Phase1,
-		// Find which features (incl. inherited) must be included
+		// Find which properties (incl. inherited) must be included
 		Phase2
 	}
 
@@ -125,13 +125,13 @@ class OmlOntoloyDiagramScope {
 			return false;
 	}
 
-	public boolean classifierHasFeaturesOrEdges(Classifier cls) {
-		final boolean hasFeaturesOrEdges = !scalarProperties.get(cls).isEmpty() || !structuredProperties.get(cls).isEmpty() || !entityAxioms.get(cls).isEmpty();
+	public boolean classifierHasPropertiesOrEdges(Classifier cls) {
+		final boolean hasPropertiesOrEdges = !scalarProperties.get(cls).isEmpty() || !structuredProperties.get(cls).isEmpty() || !entityAxioms.get(cls).isEmpty();
 		if (cls instanceof RelationEntity) {
 			final RelationEntity re = (RelationEntity) cls;
-			return hasFeaturesOrEdges || !relationIncidentElements.get(re).isEmpty();
+			return hasPropertiesOrEdges || !relationIncidentElements.get(re).isEmpty();
 		} else
-			return hasFeaturesOrEdges;
+			return hasPropertiesOrEdges;
 	}
 
 	private void analyze1Ontology(Ontology o) {
@@ -274,17 +274,17 @@ class OmlOntoloyDiagramScope {
 				}
 			} else if (o instanceof RelationCardinalityRestrictionAxiom) {
 				RelationCardinalityRestrictionAxiom x = (RelationCardinalityRestrictionAxiom) o;
-				if (includes(x.getRelation().getRelationEntity())) {
+				if (includes(x.getRelation())) {
 					ax.add(x);
 				}
 			} else if (o instanceof RelationRangeRestrictionAxiom) {
 				RelationRangeRestrictionAxiom x = (RelationRangeRestrictionAxiom) o;
-				if (includes(x.getRelation().getRelationEntity()) && includes(x.getRange())) {
+				if (includes(x.getRelation()) && includes(x.getRange())) {
 					ax.add(x);
 				}
 			} else if (o instanceof RelationTargetRestrictionAxiom) {
 				RelationTargetRestrictionAxiom x = (RelationTargetRestrictionAxiom) o;
-				if (includes(x.getRelation().getRelationEntity()) && includes(x.getTarget())) {
+				if (includes(x.getRelation()) && includes(x.getTarget())) {
 					ax.add(x);
 				}
 			}

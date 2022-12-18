@@ -222,7 +222,7 @@ class OmlDiagramViewGenerator extends OmlSwitch<SModelElement> implements IDiagr
 			final SModelElement ss = doSwitch(s);
 			final SModelElement ts = doSwitch(t);
 			if (null != ss && null != ts) {
-				if (scope.classifierHasFeaturesOrEdges(entity) || !keys.isEmpty()) {
+				if (scope.classifierHasPropertiesOrEdges(entity) || !keys.isEmpty()) {
 					final OmlNode node = view.createNode(entity, ss, ts);
 					frame.getChildren().add(node);
 					traceAndMark(node, entity, context);
@@ -484,7 +484,7 @@ class OmlDiagramViewGenerator extends OmlSwitch<SModelElement> implements IDiagr
 		final SModelElement source = semantic2diagram.get(e);
 		if (null == source)
 			throw new IllegalArgumentException("no entity node for showAxiom(RelationCardinalityRestrictionAxiom): " + e.getAbbreviatedIri());
-		final SModelElement target = semantic2diagram.get(ax.getRelation().getRelationEntity().getTarget());
+		final SModelElement target = semantic2diagram.get(ax.getRelation().getRange());
 		if (null == target)
 			throw new IllegalArgumentException("no entity node for showAxiom(RelationCardinalityRestrictionAxiom): " + ax.getRelation().getAbbreviatedIri());
 		final OmlEdge edge = view.createEdge(ax, source, target);

@@ -31,7 +31,6 @@ import io.opencaesar.oml.EnumeratedScalarReference;
 import io.opencaesar.oml.Extension;
 import io.opencaesar.oml.FacetedScalar;
 import io.opencaesar.oml.FacetedScalarReference;
-import io.opencaesar.oml.FeaturePredicate;
 import io.opencaesar.oml.ForwardRelation;
 import io.opencaesar.oml.Inclusion;
 import io.opencaesar.oml.IntegerLiteral;
@@ -41,6 +40,7 @@ import io.opencaesar.oml.Literal;
 import io.opencaesar.oml.Member;
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.Predicate;
+import io.opencaesar.oml.PropertyPredicate;
 import io.opencaesar.oml.QuotedLiteral;
 import io.opencaesar.oml.RelationCardinalityRestrictionAxiom;
 import io.opencaesar.oml.RelationEntity;
@@ -509,15 +509,15 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 	}
 
 	@Override
-	public Adapter createFeaturePredicateAdapter() {
-		if (featurePredicateItemProvider == null) featurePredicateItemProvider = new FeaturePredicateItemProvider(this) {
+	public Adapter createPropertyPredicateAdapter() {
+		if (propertyPredicateItemProvider == null) propertyPredicateItemProvider = new PropertyPredicateItemProvider(this) {
 			@Override
 			public String getText(Object object) {
-				FeaturePredicate predicate = (FeaturePredicate)object;
-				return getPredicateDirection(predicate) + getLabel(predicate.getFeature(), predicate) + "("+predicate.getVariable1()+", "+predicate.getVariable2()+")";
+				PropertyPredicate predicate = (PropertyPredicate)object;
+				return getPredicateDirection(predicate) + getLabel(predicate.getProperty(), predicate) + "("+predicate.getVariable1()+", "+predicate.getVariable2()+")";
 			}
 		};
-		return featurePredicateItemProvider;
+		return propertyPredicateItemProvider;
 	}
 
 	@Override

@@ -218,6 +218,15 @@ public interface OmlFactory extends EFactory {
 	ReverseRelation createReverseRelation();
 
 	/**
+	 * Returns a new object of class '<em>Unreified Relation</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Unreified Relation</em>'.
+	 * @generated
+	 */
+	UnreifiedRelation createUnreifiedRelation();
+
+	/**
 	 * Returns a new object of class '<em>Concept Instance</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -407,13 +416,13 @@ public interface OmlFactory extends EFactory {
 	RelationEntityPredicate createRelationEntityPredicate();
 
 	/**
-	 * Returns a new object of class '<em>Feature Predicate</em>'.
+	 * Returns a new object of class '<em>Property Predicate</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Feature Predicate</em>'.
+	 * @return a new object of class '<em>Property Predicate</em>'.
 	 * @generated
 	 */
-	FeaturePredicate createFeaturePredicate();
+	PropertyPredicate createPropertyPredicate();
 
 	/**
 	 * Returns a new object of class '<em>Same As Predicate</em>'.

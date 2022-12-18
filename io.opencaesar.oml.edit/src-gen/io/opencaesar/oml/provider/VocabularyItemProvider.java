@@ -205,6 +205,11 @@ public class VocabularyItemProvider extends VocabularyBoxItemProvider {
 		newChildDescriptors.add
 			(createChildParameter
 				(OmlPackage.Literals.VOCABULARY__OWNED_STATEMENTS,
+				 OmlFactory.eINSTANCE.createUnreifiedRelation()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(OmlPackage.Literals.VOCABULARY__OWNED_STATEMENTS,
 				 OmlFactory.eINSTANCE.createAspectReference()));
 
 		newChildDescriptors.add

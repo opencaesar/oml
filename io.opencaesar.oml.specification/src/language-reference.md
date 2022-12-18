@@ -221,7 +221,7 @@ Note: if an abbreviated literal belongs to multiple scalars, it gets interpreted
 
 An annotation allows describing information about an ontology, or one of its members, that does not have associated description logic (DL) semantics. Such information can be notational (e.g., how an element is to be displayed), tool-specific (e.g., how to export an element), or for any other purpose (e.g., who authored the ontology).
 
-An Annotation describes a value for an [annotation property](#AnnotationProperty-LR) (defined by a [vocabulary](#Vocabulary-LR)) in the context of the annotated element (an [ontology](#Ontology-LR), a [member](#Member-LR), a [reference](#Reference-LR), or an [import](#Import-LR)). The general syntax of an annotation consists of a `@` symbol followed by an IRI to the an annotation property then an optional (literal or member reference) value. If the value is missing, it is interpreted as a boolean *true* literal.
+An Annotation describes a value for an [annotation property](#AnnotationProperty-LR) (defined by a [vocabulary](#Vocabulary-LR)) in the context of an identified element (an [ontology](#Ontology-LR), a [member](#Member-LR), or a [reference](#Reference-LR)). The general syntax of an annotation consists of a `@` symbol followed by an IRI to the an annotation property then an optional (literal or member reference) value. If the value is missing, it is interpreted as a boolean *true* literal.
 
 <pre class="highlight highlight-html">
 `@`[AnnotationProperty|IRI] (Literal | [Member|IRI])?
@@ -273,7 +273,7 @@ This section outlines the kind of import statements that can be added to a vocab
 
 #### Extension #### {#VocabularyExtension-LR}
 
-A [vocabulary extension](#VocabularyExtension) is a kind of [import](#Import) statement that can be added to a vocabulary to specify that it extends another vocabulary. This is typically needed when members of the extended vocabulary are cross-reference by the local members of the extending vocabulary.  A vocabulary extension is defined with the keyword `extends` followed by the extended vocabulary's NAMESPACE, followed by the keyword `as` and a unique prefix ID.
+A [vocabulary extension](#Extension) is a kind of [import](#Import) statement that can be added to a vocabulary to specify that it extends another vocabulary. This is typically needed when members of the extended vocabulary are cross-reference by the local members of the extending vocabulary.  A vocabulary extension is defined with the keyword `extends` followed by the extended vocabulary's NAMESPACE, followed by the keyword `as` and a unique prefix ID.
 
 <pre class="highlight highlight-html">
 Annotation*
@@ -295,7 +295,7 @@ For example, the *mission* vocabulary *extends* the *xsd* vocabulary (in order t
 
 #### Usage #### {#VocabularyUsage-LR}
 
-A [vocabulary usage](#VocabularyUsage) is a kind of [import](#Import) statement that can be added to a vocabulary to specify that it uses a [description](#Description-LR). This is typically needed when the vocabulary uses one or more of the description's instances in its restriction axioms. A vocabulary usage is defined with the keyword `uses` followed by the used description's NAMESPACE, followed by the keyword `as` and a unique prefix ID.
+A [vocabulary usage](#Usage) is a kind of [import](#Import) statement that can be added to a vocabulary to specify that it uses a [description](#Description-LR). This is typically needed when the vocabulary uses one or more of the description's instances in its restriction axioms. A vocabulary usage is defined with the keyword `uses` followed by the used description's NAMESPACE, followed by the keyword `as` and a unique prefix ID.
 
 <pre class="highlight highlight-html">
 Annotation*
@@ -415,7 +415,7 @@ The following example vocabulary defines a relation entity named *Performs* from
 `}`
 </pre>
 
- Since a relation entity is a reified relation, it can be asserted as a type of a [relation instance](#RelationInstance-LR) between one or more source instances, and one or more target instances. Such instance can be annotated and characterized with assertions. However, a relation entity can also optionally specify (in its body) one or two companion unreified relations that can be asserted as simple (uncharacterized) [links](#LinkAssertion-LR) between a source and a target instance. One of those unrefied relations is declared with the keyword `forward`  followed by a name ID, while the other is declared with the keyword `reverse` followed by a name ID. The forward relation has the `from` entity as its domain, and the `to` entity as its range, while the reverse relation has the opposite. When both are declared, the forward and reverse relations become inverse of each other, meaning if one is used to link a source instance to a target instance, the other is inferred as a link from the target to the source. Also, when a relation instance is typed by a relation entity, which has one ore more unreifed relations, such relations are inferred as links between the set of related sources and target instances. The following diagram depicts the design pattern implied by a relation entity.
+Since a relation entity is a reified relation, it can be asserted as a type of a [relation instance](#RelationInstance-LR) between one or more source instances, and one or more target instances. Such instance can be annotated and characterized with assertions. However, a relation entity can also optionally specify (in its body) one or two companion unreified relations that can be asserted as simple (uncharacterized) [links](#LinkAssertion-LR) between a source and a target instance. One of those unrefied relations is declared with the keyword `forward`  followed by a name ID, while the other is declared with the keyword `reverse` followed by a name ID. The forward relation has the `from` entity as its domain, and the `to` entity as its range, while the reverse relation has the opposite. When both are declared, the forward and reverse relations become inverse of each other, meaning if one is used to link a source instance to a target instance, the other is inferred as a link from the target to the source. Also, when a relation instance is typed by a relation entity, which has one ore more unreifed relations, such relations are inferred as links between the set of related sources and target instances. The following diagram depicts the design pattern implied by a relation entity.
 
 <pre><img src="images/Relation-Entity-Pattern.svg"/></pre>
 
@@ -664,6 +664,75 @@ Properties are characteristics of model elements. Two categories of properties c
 A property can specialize other properties of the same kind only. This is done by following the property's name by the `:>` symbol then a list of comma-separated super-property IRIs.
 
 
+#### Annotation Property #### {#AnnotationProperty-LR}
+
+An [annotation property](#AnnotationProperty-Syntax) is a property defined in a vocabulary, whose domain is implicitly any identified element (ontology or member) and whose range is implicitly any literal. An annotation property is defined with the keywords `annotation` `property` followed by a name ID. It can also optionally specialize other annotation properties by following its name ID by the `:>` symbol then a comma-separated list of those super properties' IRIs. 
+
+<pre class="highlight highlight-html">
+	Annotation*
+	`annotation` `property` ID (`:>` [AnnotationProperty|IRI] (`,` [AnnotationProperty|IRI])*)?
+</pre>
+
+An annotation property is a non-semantic property, meaning that it has no logical semantics and thus is ignored by a logical reasoner. However, it allows specifying annotations on elements like ontologies, their imports, and their members.
+
+The following example shows two vocabularies: *viewpoint* and *mission*. The former defines an annotation property *visualizeAs*, and the latter defines two concept *Component* and *Function*, and annotates them using the *visualizeAs* annotation.
+
+<pre class="highlight highlight-html">
+`vocabulary` `<`http://com.xyz/methodology/viewpoint#`>` `as` viewpoint `{`
+    `annotation` `property` visualizeAs
+`}`
+
+`vocabulary` `<`http://com.xyz/methodology/mission#`>` `as` mission `{`
+    `extends` `<`http://com.xyz/methodology/viewpoint#`>` `as` viewpoint
+    `@`viewpoint:visualizeAs "Rectangle"
+    `concept` Component
+    `@`viewpoint:visualizeAs "Circle"
+    `concept` Function
+`}`
+</pre>
+
+It is common to define libraries of annotation properties for tooling purposes to enable building generic tools. The following are some of the standard annotation properties (more information about them can be found in the [rdf](https://www.w3.org/TR/rdf-syntax-grammar/), [rdfs](https://www.w3.org/TR/rdf-schema/), [owl](https://www.w3.org/TR/owl2-syntax/), and [dc](https://www.dublincore.org/specifications/dublin-core/dcmi-terms/) specifications):
+
+<pre class="highlight highlight-html">
+`vocabulary` `<`http://www.w3.org/1999/02/22-rdf-syntax-ns#`>` `as` rdf `{`
+    `annotation` `property` about
+`}`
+
+`vocabulary` `<`http://www.w3.org/2000/01/rdf-schema#`>` `as` rdfs `{`
+    `annotation` `property` comment
+    `annotation` `property` isDefinedBy
+    `annotation` `property` label
+    `annotation` `property` seeAlso
+`}`
+
+`vocabulary` `<`http://www.w3.org/2002/07/owl#`>` `as` owl `{`
+    `annotation` `property` backwardCompatibleWith
+    `annotation` `property` deprecated
+    `annotation` `property` incompatibleWith
+    `annotation` `property` priorVersion
+    `annotation` `property` versionInfo
+`}`
+
+`vocabulary` `<`http://purl.org/dc/elements/1.1/`>` `as` dc `{`
+    `annotation` `property` contributor
+    `annotation` `property` coverage
+    `annotation` `property` creator
+    `annotation` `property` date
+    `annotation` `property` ^description
+    `annotation` `property` format
+    `annotation` `property` identifier
+    `annotation` `property` ^language
+    `annotation` `property` publisher
+    `annotation` `property` ^relation
+    `annotation` `property` rights
+    `annotation` `property` ^source
+    `annotation` `property` subject
+    `annotation` `property` title
+    `annotation` `property` type
+    `annotation` `property` hasVersion
+`}`
+</pre>
+
 #### Scalar Property #### {#ScalarProperty-LR}
 
 A [scalar property](#ScalarProperty-Syntax) is a semantic property defined in a vocabulary, whose domain is a classifier ([Aspect](#Aspect-LR), [Concept](#Concept-LR), [Relation Entity](#RelationEntity-LR), or [Structure](#Structure-LR)) and whose range is a scalar ([Faceted Scalar](#FacetedScalar-LR) or [Enumerated Scalar](#EnumeratedScalar-LR)). This means the values of a scalar property are literals of that scalar range. A scalar property is defined with the keywords `scalar` `property` followed by a name ID. It can also optionally specialize other scalar properties by following its name ID by the `:>` symbol then a comma-separated list of those super properties' IRIs. It also has a pair of square brackets `[` `]` that contain the property's `domain` (referencing a classifier), `range` (referencing a scalar), and optionally a semantic flag (`functional`) that specifies whether instances of the domain can have a single value maximum for this property.
@@ -739,73 +808,109 @@ The following example vocabulary defines a structured property named *hasLocatio
 `}`
 </pre>
 
+#### Unreified Relation #### {#UnreifiedRelation-LR}
 
-#### Annotation Property #### {#AnnotationProperty-LR}
-
-An [annotation property](#AnnotationProperty-Syntax) is a property defined in a vocabulary, whose domain is implicitly any annotated element (ontology, import, or member) and whose range is implicitly any literal. An annotation property is defined with the keywords `annotation` `property` followed by a name ID. It can also optionally specialize other annotation properties by following its name ID by the `:>` symbol then a comma-separated list of those super properties' IRIs. 
-
+ A [Unreified Relation](#UnreifiedRelation-LR) is a relation defined in a vocabulary between two other entities, a source entity and a target entity. An unreified relation is defined with the keywords `relation` followed by a name ID. It can optionally specialize other relations following its name ID by the `:>` symbol then a comma-separated list of those super relation's IRIs. An unreified relation also has a body, which is a pair of square brackets `[` `]` that specify by IRI the relation's `from` (source) entity and `to` (target) entity, and optionally the name of a reverse relation and semantic flags.
+ 
 <pre class="highlight highlight-html">
-	Annotation*
-	`annotation` `property` ID (`:>` [AnnotationProperty|IRI] (`,` [AnnotationProperty|IRI])*)?
+    Annotation*
+    `relation` ID (`:>` [RelationEntity|Aspect|IRI] (`,` [RelationEntity|Aspect|IRI])*)? (`[`
+        `from` [Entity|IRI]                 // the relation entity's source
+        `to` [Entity|IRI]                   // the relation entity's target
+        Annotation*
+        (`reverse` ID)?                     // an unreified relation from target to source
+        `functional`?                       // each source can be related to a maximum of 1 target
+        (`inverse` `functional`)?             // each target can be related to a maximum of 1 source
+        `symmetric`?                        // if a source is related to a target, then the target must also related to the source
+        `asymmetric`?                       // if a source is related to a target, then the target cannot be related to the source
+        `reflexive`?                        // a source must be related to itself
+        `irreflexive`?                      // a source cannot be related to itself
+        `transitive`?                       // if A is related to B, and B is related to C, then A is related to C
+   `]`
 </pre>
 
-An annotation property is a non-semantic property, meaning that it has no logical semantics and thus is ignored by a logical reasoner. However, it allows specifying annotations on elements like ontologies, their imports, and their members.
-
-The following example shows two vocabularies: *viewpoint* and *mission*. The former defines an annotation property *visualizeAs*, and the latter defines two concept *Component* and *Function*, and annotates them using the *visualizeAs* annotation.
+The following example vocabulary defines a relation entity named *Performs* from the concept *Component* to the concept *Function*.
 
 <pre class="highlight highlight-html">
-`vocabulary` `<`http://com.xyz/methodology/viewpoint#`>` `as` viewpoint `{`
-    `annotation` `property` visualizeAs
-`}`
-
 `vocabulary` `<`http://com.xyz/methodology/mission#`>` `as` mission `{`
-    `extends` `<`http://com.xyz/methodology/viewpoint#`>` `as` viewpoint
-    `@`viewpoint:visualizeAs "Rectangle"
     `concept` Component
-    `@`viewpoint:visualizeAs "Circle"
     `concept` Function
+    `relation` `entity` Performs `[`
+        `from` Component
+        `to` Function
+    `]`
 `}`
 </pre>
 
-It is common to define libraries of annotation properties for tooling purposes to enable building generic tools. The following are some of the standard annotation properties (more information about them can be found in the [rdf](https://www.w3.org/TR/rdf-syntax-grammar/), [rdfs](https://www.w3.org/TR/rdf-schema/), [owl](https://www.w3.org/TR/owl2-syntax/), and [dc](https://www.dublincore.org/specifications/dublin-core/dcmi-terms/) specifications):
+Since a relation entity is a reified relation, it can be asserted as a type of a [relation instance](#RelationInstance-LR) between one or more source instances, and one or more target instances. Such instance can be annotated and characterized with assertions. However, a relation entity can also optionally specify (in its body) one or two companion unreified relations that can be asserted as simple (uncharacterized) [links](#LinkAssertion-LR) between a source and a target instance. One of those unrefied relations is declared with the keyword `forward`  followed by a name ID, while the other is declared with the keyword `reverse` followed by a name ID. The forward relation has the `from` entity as its domain, and the `to` entity as its range, while the reverse relation has the opposite. When both are declared, the forward and reverse relations become inverse of each other, meaning if one is used to link a source instance to a target instance, the other is inferred as a link from the target to the source. Also, when a relation instance is typed by a relation entity, which has one ore more unreifed relations, such relations are inferred as links between the set of related sources and target instances. The following diagram depicts the design pattern implied by a relation entity.
+
+<pre><img src="images/Relation-Entity-Pattern.svg"/></pre>
+
+The example vocabulary below refines the *Performs* relation entity with two unreifed relations: *performs* (as forward) and *isPerformedBy* (as reverse).
 
 <pre class="highlight highlight-html">
-`vocabulary` `<`http://www.w3.org/1999/02/22-rdf-syntax-ns#`>` `as` rdf `{`
-    `annotation` `property` about
+`vocabulary` `<`http://com.xyz/methodology/mission#`>` `as` mission `{`
+    `concept` Component
+    `concept` Function
+    `relation` `entity` Performs `[`
+        `from` Component
+        `to` Function
+        `forward` performs
+        `reverse` isPerformedBy
+   `]`
 `}`
+</pre>
 
-`vocabulary` `<`http://www.w3.org/2000/01/rdf-schema#`>` `as` rdfs `{`
-    `annotation` `property` comment
-    `annotation` `property` isDefinedBy
-    `annotation` `property` label
-    `annotation` `property` seeAlso
+When a relation entity has supertypes, its source entity becomes a subtype of the super relations' source, and its target entity becomes a subtype of the super relation's target. Also, when named, its forward and reverse relations become sub relations of the supertype's forward and reverse relations.
+
+The following example vocabulary defines two relation entities, *Performs* and *Provides*, where the latter specializes the former. In this case, what is infererd is that *Assembly* specializes *Component*, *Power* specializes *Function*, *provides* specializes *performs*, and lastly, *isProvidedBy* specializes *isPerformedBy*. Some of these inferred specializations can also be specified explicitly (e.g., Assembly `:>` Component).
+
+<pre class="highlight highlight-html">
+`vocabulary` `<`http://com.xyz/methodology/mission#`>` `as` mission `{`
+    `concept` Component
+    `concept` Function
+    `concept` Assembly
+    `concept` Power
+    `relation` `entity` Performs `[`
+        `from` Component
+        `to` Function
+        `forward` performs
+        `reverse` isPerformedBy
+   `]`
+    `relation` `entity` Provides :> Performs `[`
+        `from` Assembly
+        `to` Power
+        `forward` provides
+        `reverse` isProvidedBy
+   `]`
 `}`
+</pre>
 
-`vocabulary` `<`http://www.w3.org/2002/07/owl#`>` `as` owl `{`
-    `annotation` `property` backwardCompatibleWith
-    `annotation` `property` deprecated
-    `annotation` `property` incompatibleWith
-    `annotation` `property` priorVersion
-    `annotation` `property` versionInfo
-`}`
+A relation entity can optionally specify one or more semantic flags (within its body) that define its logical semantics:
 
-`vocabulary` `<`http://purl.org/dc/elements/1.1/`>` `as` dc `{`
-    `annotation` `property` contributor
-    `annotation` `property` coverage
-    `annotation` `property` creator
-    `annotation` `property` date
-    `annotation` `property` ^description
-    `annotation` `property` format
-    `annotation` `property` identifier
-    `annotation` `property` ^language
-    `annotation` `property` publisher
-    `annotation` `property` ^relation
-    `annotation` `property` rights
-    `annotation` `property` ^source
-    `annotation` `property` subject
-    `annotation` `property` title
-    `annotation` `property` type
-    `annotation` `property` hasVersion
+- The `functional` flag implies that a source instance can be related to a maximum of 1 target instance.
+- The `inverse functional` flag implies that a target instance can be related to a maximum of 1 source instance.
+- The `symmetric` flag implies that if a source instance is related to a target instance, then the target must also be related to the source.
+- The `asymmetric` flag implies that if a source instance is related to a target instance, then the target cannot be related to the source.
+- The `reflexive` flag implies that a source instance must be related to itself.
+- The `irreflexive` flag implies that a source instance cannot be related to itself.
+- The `transitive` flag implies if instance A is related to instance B, and instance B is related to instance C, then A is also related to C.
+
+The example vocabulary below refines the *Performs* relation to add the flag `inverse functional` (to specify that a function can be performed by a maximum of one component), the flag `asymmetric` (to specify that a function cannot perform a component), and the flag `irreflexive` (to specify that a component cannot perform itself).
+
+<pre class="highlight highlight-html">
+`vocabulary` `<`http://com.xyz/methodology/mission#`>` `as` mission `{`
+    `concept` Component
+    `concept` Function
+    `relation` `entity` Performs `[`
+        `from` Component
+        `to` Function
+        `forward` performs
+        `reverse` isPerformedBy
+        `inverse functional`
+        `asymmetric`
+        `irreflexive`
+   `]`
 `}`
 </pre>
 
@@ -820,7 +925,7 @@ Note: that a term that has supertypes semantically inherits axioms defined on it
 A [key axiom](#KeyAxiom-Syntax) is an axiom defined on an entity ([Aspect](#Aspect-LR), [Concept](#Concept-LR), and [Relation Entity](#RelationEntity-LR)) that specifies a set of properties that together represent a unique key (id) for the entity. This means if two named instances have the same values of those properties, then they can be inferred to be aliases of the same instance. The syntax of a key axiom starts with the keyword `key` followed by one or more comma-separated properties specified by their IRIs.
 
 <pre class="highlight highlight-html">
-`key` [Feature|IRI] (`,` [Feature|IRI])*
+`key` [Property|IRI] (`,` [Property|IRI])*
 </pre>
 
 The following example vocabulary defines a key, consisting of scalar property *hasId*, for concept *Component*. This means any two differently named components with the same value for *hasId* will be inferred to be the same component.
@@ -853,11 +958,11 @@ An entity can define zero or more keys. When multiple keys are defined, the valu
 
 #### Restriction Axioms #### {#RestrictionAxioms-LR}
 
-A [restriction axiom](#RestrictionAxiom-Syntax) is an axiom defined on a classifier ([Aspect](#Aspect-LR), [Concept](#Concept-LR), [Relation Entity](#RelationEntity-LR) and [Structure](#Structure-LR)) that restricts a feature (a property or a relation) in some way in the classifier's context. This feature can be a property ([Scalar Property](#ScalarProperty-LR) or [Structured Property](#StructuredProperty-LR)) whose domain is the context classifier or one of its supertypes, or a relation ([Forward Relation](#RelationEntity-LR) or [Reverse Relation](#RelationEntity-LR)) whose source is the context entity or one of its supertypes. The facets that can be restricted about those features vary (like their range, cardinality, or value) resulting in different subtypes of restriction axioms.
+A [restriction axiom](#RestrictionAxiom-Syntax) is an axiom defined on a classifier ([Aspect](#Aspect-LR), [Concept](#Concept-LR), [Relation Entity](#RelationEntity-LR) and [Structure](#Structure-LR)) that restricts a property in some way in the classifier's context. This property can be ([Scalar Property](#ScalarProperty-LR), [Structured Property](#StructuredProperty-LR), [Forward Relation](#RelationEntity-LR), [Reverse Relation](#RelationEntity-LR), or [Unreified Relation](#UnreifiedRelation-LR)) whose domain is the context type or one of its supertypes. The facets that can be restricted about those properties vary (like their range, cardinality, or value) resulting in different subtypes of restriction axioms.
 
 <u>Range Restriction Axioms</u>
 
-A range restriction axiom restricts the range of a feature in the context of some classifier. The axiom specifies a restricted range that is a subtype of the feature's original range. The syntax of a range restriction axioms starts with the keyword `restricts` followed by a restriction kind, which can either be `all` (requiring all values to conform to the restricted range) or `some` (requiring at least one value to conform to the restricted range). This is followed by the kind of feature (`scalar property`, `structured property`, or `relation`) then a reference to the feature by IRI. Finally, the keyword `to` is used followed by a reference to the restricted range (a scalar, a structure, or an entity) by IRI. The following shows the three supported syntaxes:
+A range restriction axiom restricts the range of a property in the context of some classifier. The axiom specifies a restricted range that is a subtype of the property's original range. The syntax of a range restriction axioms starts with the keyword `restricts` followed by a restriction kind, which can either be `all` (requiring all values to conform to the restricted range) or `some` (requiring at least one value to conform to the restricted range). This is followed by the kind of property (`scalar property`, `structured property`, or `relation`) then a reference to the property by IRI. Finally, the keyword `to` is used followed by a reference to the restricted range (a scalar, a structure, or an entity) by IRI. The following shows the three supported syntaxes:
 
 <pre class="highlight highlight-html">
 	`restricts` [ `all` | `some` ] `scalar` `property` [ScalarProperty|IRI] `to` [Scalar|IRI]
@@ -904,7 +1009,7 @@ The following example shows a vocabulary that defines a concept *Assembly* with 
 
 <u>Cardinality Restriction Axioms</u>
 
-A cardinality restriction axiom restricts the cardinality of a feature in the context of some classifier. The axiom specifies a minimum, a maximum, or an exact number of values, conforming to the original range, or to a specified restricted range, that a feature can have in that context. The syntax of a cardinality restriction axioms starts with the keyword `restricts` followed by the kind of feature (`scalar property`, `structured property`, or `relation`) then a reference to the feature by IRI. Then, the keyword `to` is used followed by a cardinality kind (`min`, `max`, or `exactly`), a cardinality value (positive integer), and finally an optional reference to a restricted range (a scalar, a structure, or an entity) by IRI. The following shows the three supported syntaxes:
+A cardinality restriction axiom restricts the cardinality of a property in the context of some classifier. The axiom specifies a minimum, a maximum, or an exact number of values, conforming to the original range, or to a specified restricted range, that a property can have in that context. The syntax of a cardinality restriction axioms starts with the keyword `restricts` followed by the kind of property (`scalar property`, `structured property`, or `relation`) then a reference to the property by IRI. Then, the keyword `to` is used followed by a cardinality kind (`min`, `max`, or `exactly`), a cardinality value (positive integer), and finally an optional reference to a restricted range (a scalar, a structure, or an entity) by IRI. The following shows the three supported syntaxes:
 
 <pre class="highlight highlight-html">
 	`restricts` `scalar` `property` [ScalarProperty|IRI] `to` [ `max` | `min` | `exactly` ] UnsignedInteger [Scalar|IRI]?
@@ -947,7 +1052,7 @@ The following example shows a vocabulary that defines a concept *Assembly* with 
 
 <u>Value Restriction Axioms</u>
 
-A value restriction axiom restricts the value of a feature in the context of some classifier. In the case of a relation, the restricted value represents the relation's target instance. The syntax of a value restriction axioms starts with the keyword `restricts` followed by the kind of feature (`scalar property`, `structured property`, or `relation`) then a reference to the feature by IRI. Then, the keyword `to` is used followed by a value that is suitable for each case (a [literal](#Literal-Syntax) for a scalar property, a [structure instance](#StructureInstance-Syntax) for a structured property, or a reference to a [named instance](#NamedInstance-Syntax) by IRI for a relation). The following shows the three supported syntaxes:
+A value restriction axiom restricts the value of a property in the context of some classifier. In the case of a relation, the restricted value represents the relation's target instance. The syntax of a value restriction axioms starts with the keyword `restricts` followed by the kind of property (`scalar property`, `structured property`, or `relation`) then a reference to the property by IRI. Then, the keyword `to` is used followed by a value that is suitable for each case (a [literal](#Literal-Syntax) for a scalar property, a [structure instance](#StructureInstance-Syntax) for a structured property, or a reference to a [named instance](#NamedInstance-Syntax) by IRI for a relation). The following shows the three supported syntaxes:
 
 <pre class="highlight highlight-html">
 	`restricts` `scalar` `property` [ScalarProperty|IRI] `to` Literal
@@ -1026,12 +1131,12 @@ A predicate represents a pattern in the model that can be matched or inferred, d
     [RelationEntity|IRI] `(` ID1 `,` ID0 `,` (ID2 | [NamedInstance|IRI]) `)`
     </pre>
 
-- [Feature Predicate](#FeaturePredicate-Syntax)
+- [Property Predicate](#PropertyPredicate-Syntax)
 
-    Matches an assertion of a given feature (specified by its IRI) and binds its subject to variable ID1 and its object to variable ID2 or to a specific 
+    Matches an assertion of a given property (specified by its IRI) and binds its subject to variable ID1 and its object to variable ID2 or to a specific 
     instance or literal.
     <pre class="highlight highlight-html">
-    [Feature|IRI] `(` ID1 `,` (ID2 | [NamedInstance|IRI] | Literal) `)`
+    [Property|IRI] `(` ID1 `,` (ID2 | [NamedInstance|IRI] | Literal) `)`
     </pre>
 
 - [Same As Predicate](#SameAsPredicate-Syntax)
@@ -1106,28 +1211,9 @@ The following example description is meant to describe the components of a syste
 
 This section outlines the kind of import statements that can be added in a description's body.
 
-#### Usage #### {#DescriptionUsage-LR}
-
-A [description usage](#DescriptionUsage) is a kind of [import](#Import) statement that can be added to a description to specify a vocabulary that it uses. This is typically needed in order to use the terms (types and properties) of the vocabulary in the description's instance definitions. A description usage is defined with the keyword `uses` followed by the used vocabulary's NAMESPACE, followed by the keyword `as` and a unique prefix ID.
-
-<pre class="highlight highlight-html">
-Annotation*
-`uses` [Vocabulary|NAMESPACE] `as` ID
-</pre>
-
-In the following example description, the *mission* vocabulary is used to describe components of a system.
-
-<pre class="highlight highlight-html">
-`description` `<`http://com.xyz/system/components#`>` `as` components `{`
-    `uses` `<`http://com.xyz/methodology/mission#`>` `as` mission
-
-    `ci` System1 `:` mission:Component     // a cross-reference to concept Component
-`}`
-</pre>
-
 #### Extension #### {#DescriptionExtension-LR}
 
-A [description extension](#DescriptionExtension) is a kind of [import](#Import) statement that can be added to a description to specify that it extends another description. This can be used to split a system description into fragments that focus on different concerns or are contributed by different authorities. In this case, a description may extend other descriptions that it depends on. A description extension is defined with the keyword `extends` followed by the extended description's NAMESPACE, followed by the keyword `as` and a unique prefix ID.
+A [description extension](#Extension) is a kind of [import](#Import) statement that can be added to a description to specify that it extends another description. This can be used to split a system description into fragments that focus on different concerns or are contributed by different authorities. In this case, a description may extend other descriptions that it depends on. A description extension is defined with the keyword `extends` followed by the extended description's NAMESPACE, followed by the keyword `as` and a unique prefix ID.
 
 <pre class="highlight highlight-html">
 Annotation*
@@ -1149,9 +1235,28 @@ The following example description *subsystem1* extends two other descriptions, *
 `}`
 </pre>
 
+#### Usage #### {#DescriptionUsage-LR}
+
+A [description usage](#Usage) is a kind of [import](#Import) statement that can be added to a description to specify a vocabulary that it uses. This is typically needed in order to use the terms (types and properties) of the vocabulary in the description's instance definitions. A description usage is defined with the keyword `uses` followed by the used vocabulary's NAMESPACE, followed by the keyword `as` and a unique prefix ID.
+
+<pre class="highlight highlight-html">
+Annotation*
+`uses` [Vocabulary|NAMESPACE] `as` ID
+</pre>
+
+In the following example description, the *mission* vocabulary is used to describe components of a system.
+
+<pre class="highlight highlight-html">
+`description` `<`http://com.xyz/system/components#`>` `as` components `{`
+    `uses` `<`http://com.xyz/methodology/mission#`>` `as` mission
+
+    `ci` System1 `:` mission:Component     // a cross-reference to concept Component
+`}`
+</pre>
+
 ### Instances ### {#Instances-LR}
 
-Instances represent objects or data in a given system. They are described using terms (types and properties) from some vocabulary. Specifically, they can be given types and have assertions on features in the domain of those types. Instances can either be named ([Concept Instance](#ConceptInstance-LR) and [Relation Instance](#RelationInstance-LR)), in which case they are specified as members of some description, or they can be anonymous ([Structure Instance](#StructureInstance-LR)), in which case they defined as values of features (e.g., [structured properties](#StructuredProperty-LR)) in the context of other (named or anonymous) instances.
+Instances represent objects or data in a given system. They are described using terms (types and properties) from some vocabulary. Specifically, they can be given types and have assertions on properties in the domain of those types. Instances can either be named ([Concept Instance](#ConceptInstance-LR) and [Relation Instance](#RelationInstance-LR)), in which case they are specified as members of some description, or they can be anonymous ([Structure Instance](#StructureInstance-LR)), in which case they defined as values of properties (e.g., [structured properties](#StructuredProperty-LR)) in the context of other (named or anonymous) instances.
 
 #### Concept Instance #### {#ConceptInstance-LR}
 
@@ -1334,27 +1439,9 @@ For example, the following vocabulary bundle has the namespace *http://com.xyz/m
 
 This section outlines the kind of import statements that can be added in a vocabulary bundle's body.
 
-#### Inclusion #### {#VocabularyBundleInclusion-LR}
-
-An [vocabulary bundle inclusion](#VocabularyBundleInclusion) is a kind of [import](#Import) statement that can be added to a vocabulary bundle to specify that it includes a vocabulary. A vocabulary bundle inclusion is defined with the keyword `includes` followed by the included vocabulary's NAMESPACE.
-
-<pre class="highlight highlight-html">
-Annotation*
-`includes` [Vocabulary|NAMESPACE]
-</pre>
-
-For example, the *foundation* vocabulary bundle *includes* two vocabularies: *mission* and *project*.
-
-<pre class="highlight highlight-html">
-`vocabulary` `bundle` `<`http://com.xyz/methodology/foundation#`>` `as` foundation `{`
-    `includes` `<`http://com.xyz/methodology/mission#`>` `as` mission
-    `includes` `<`http://com.xyz/methodology/project#`>` `as` project
-`}`
-</pre>
-
 #### Extends #### {#VocabularyBundleExtension-LR}
 
-An [vocabulary bundle extends](#VocabularyBundleExtension) is a kind of [import](#Import) statement that can be added to a vocabulary bundle to specify that it extends another vocabulary bundle. This can be used to organize vocabulary bundles in layers that build on each other. Each bundle inherits the vocabularies contributed by its extended bundles and may optionally add to them other included vocabularies. This can, for example, be used to define a family of related vocabulary bundles that build on each other by tackling different incremental concerns. A vocabulary bundle extension is defined with the keyword `extends` followed by the extended vocabulary bundle's NAMESPACE.
+An [vocabulary bundle extends](#Extension) is a kind of [import](#Import) statement that can be added to a vocabulary bundle to specify that it extends another vocabulary bundle. This can be used to organize vocabulary bundles in layers that build on each other. Each bundle inherits the vocabularies contributed by its extended bundles and may optionally add to them other included vocabularies. This can, for example, be used to define a family of related vocabulary bundles that build on each other by tackling different incremental concerns. A vocabulary bundle extension is defined with the keyword `extends` followed by the extended vocabulary bundle's NAMESPACE.
 
 <pre class="highlight highlight-html">
 Annotation*
@@ -1368,6 +1455,24 @@ For example, the *cyber-physical* vocabulary bundle *extends* the *foundation* v
     `extends` `<`http://com.xyz/methodology/foundation#`>`
     `includes` `<`http://com.xyz/methodology/electrical#`>`
     `includes` `<`http://com.xyz/methodology/mechanical#`>`
+`}`
+</pre>
+
+#### Inclusion #### {#VocabularyBundleInclusion-LR}
+
+An [vocabulary bundle inclusion](#Inclusion) is a kind of [import](#Import) statement that can be added to a vocabulary bundle to specify that it includes a vocabulary. A vocabulary bundle inclusion is defined with the keyword `includes` followed by the included vocabulary's NAMESPACE.
+
+<pre class="highlight highlight-html">
+Annotation*
+`includes` [Vocabulary|NAMESPACE]
+</pre>
+
+For example, the *foundation* vocabulary bundle *includes* two vocabularies: *mission* and *project*.
+
+<pre class="highlight highlight-html">
+`vocabulary` `bundle` `<`http://com.xyz/methodology/foundation#`>` `as` foundation `{`
+    `includes` `<`http://com.xyz/methodology/mission#`>` `as` mission
+    `includes` `<`http://com.xyz/methodology/project#`>` `as` project
 `}`
 </pre>
 
@@ -1393,27 +1498,28 @@ For example, the following description bundle has the namespace *http://com.xyz/
 
 This section outlines the kind of import statements that can be added in a description bundle's body.
 
-#### Inclusion #### {#DescriptionBundleInclusion-LR}
+#### Extension #### {#DescriptionBundleExtension-LR}
 
-A [description bundle inclusion](#DescriptionBundleInclusion) is a kind of [import](#Import) statement that can be added to a description bundle to specify that it includes a description. A description bundle inclusion is defined with the keyword `includes` followed by the imported description's NAMESPACE.
+An [description bundle extension](#Extension) is a kind of [import](#Import) statement that can be added to a description bundle to specify that it extends another description bundle. This can be used to organize description bundles into layers that build on each other. Each bundle inherits the descriptions contributed by its extended bundles and optionally adds to them other descriptions. This can, for example, be used to define alternative datasets (e.g., representing alternative system designs) that extend a common dataset. A description bundle extension is defined with the keyword `extends` followed by the extended description bundle's NAMESPACE.
 
 <pre class="highlight highlight-html">
 Annotation*
-`includes` [Description|NAMESPACE]
+`extends` [DescriptionBundle|NAMESPACE]
 </pre>
 
-For example, the *mission1* description bundle *includes* two descriptions: *components* and *masses*.
+For example, the *design1* description bundle *extends* the *mission1* description bundle and includes two additional descriptions: *electrical1* and *mechanical1*, which specify the details of this design variant.
 
 <pre class="highlight highlight-html">
-`description` `bundle` `<`http://com.xyz/missions/mission1#`>` `as` mission1 `{`
-    `includes` `<`http://com.xyz/system/components#`>`
-    `includes` `<`http://com.xyz/system/masses#`>`
+`description` `bundle` `<`http://com.xyz/missions/mission1/design1#`>` `as` design1 `{`
+    `extends` `<`http://com.xyz/missions/mission1#`>`
+    `includes` `<`http://com.xyz/missions/mission1/electrical1#`>`
+    `includes` `<`http://com.xyz/missions/mission1/mechanical#`>`
 `}`
 </pre>
 
 #### Usage #### {#DescriptionBundleUsage-LR}
 
-A [description bundle usage](#DescriptionBundleUsage) is a kind of [import](#Import) statement that can be added to a description bundle to specify that it uses either a vocabulary bundle or a vocabulary. A description bundle should use at least one vocabulary bundle (to import its world-closure statements). In this case, the usage is defined with the keyword `uses` followed by the imported vocabulary bundle's NAMESPACE. The same syntax is used when a description bundle uses a vocabulary, except that the vocabulary's NAMESPACE can optionally be followed by the `as` keyword and a unique prefix ID,  when a member of the used vocabulary (typically an annotation property) is cross-referenced.
+A [description bundle usage](#Usage) is a kind of [import](#Import) statement that can be added to a description bundle to specify that it uses either a vocabulary bundle or a vocabulary. A description bundle should use at least one vocabulary bundle (to import its world-closure statements). In this case, the usage is defined with the keyword `uses` followed by the imported vocabulary bundle's NAMESPACE. The same syntax is used when a description bundle uses a vocabulary, except that the vocabulary's NAMESPACE can optionally be followed by the `as` keyword and a unique prefix ID,  when a member of the used vocabulary (typically an annotation property) is cross-referenced.
 
 <pre class="highlight highlight-html">
 Annotation*
@@ -1432,21 +1538,20 @@ For example, the *mission1* description bundle *uses* the *dc* vocabulary and th
 `}`
 </pre>
 
-#### Extension #### {#DescriptionBundleExtension-LR}
+#### Inclusion #### {#DescriptionBundleInclusion-LR}
 
-An [description bundle extension](#DescriptionBundleExtension) is a kind of [import](#Import) statement that can be added to a description bundle to specify that it extends another description bundle. This can be used to organize description bundles into layers that build on each other. Each bundle inherits the descriptions contributed by its extended bundles and optionally adds to them other descriptions. This can, for example, be used to define alternative datasets (e.g., representing alternative system designs) that extend a common dataset. A description bundle extension is defined with the keyword `extends` followed by the extended description bundle's NAMESPACE.
+A [description bundle inclusion](#Inclusion) is a kind of [import](#Import) statement that can be added to a description bundle to specify that it includes a description. A description bundle inclusion is defined with the keyword `includes` followed by the imported description's NAMESPACE.
 
 <pre class="highlight highlight-html">
 Annotation*
-`extends` [DescriptionBundle|NAMESPACE]
+`includes` [Description|NAMESPACE]
 </pre>
 
-For example, the *design1* description bundle *extends* the *mission1* description bundle and includes two additional descriptions: *electrical1* and *mechanical1*, which specify the details of this design variant.
+For example, the *mission1* description bundle *includes* two descriptions: *components* and *masses*.
 
 <pre class="highlight highlight-html">
-`description` `bundle` `<`http://com.xyz/missions/mission1/design1#`>` `as` design1 `{`
-    `extends` `<`http://com.xyz/missions/mission1#`>`
-    `includes` `<`http://com.xyz/missions/mission1/electrical1#`>`
-    `includes` `<`http://com.xyz/missions/mission1/mechanical#`>`
+`description` `bundle` `<`http://com.xyz/missions/mission1#`>` `as` mission1 `{`
+    `includes` `<`http://com.xyz/system/components#`>`
+    `includes` `<`http://com.xyz/system/masses#`>`
 `}`
 </pre>

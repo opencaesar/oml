@@ -16,38 +16,46 @@
  * limitations under the License.
  * 
  */
-package io.opencaesar.oml.impl;
+package io.opencaesar.oml;
 
-import io.opencaesar.oml.Feature;
-import io.opencaesar.oml.OmlPackage;
-
-import org.eclipse.emf.ecore.EClass;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Feature</b></em>'.
+ * A representation of the model object '<em><b>Unreified Relation</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * UnreifiedRelation is a simple relation from a source to a target entity that is not part of a relation entity.
+ * <!-- end-model-doc -->
+ *
+ *
+ * @see io.opencaesar.oml.OmlPackage#getUnreifiedRelation()
+ * @model annotation="https://tabatkins.github.io/bikeshed heading='Properties'"
  * @generated
  */
-public abstract class FeatureImpl extends TermImpl implements Feature {
+public interface UnreifiedRelation extends Relation, RelationBase {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @model unique="false"
 	 * @generated
 	 */
-	protected FeatureImpl() {
-		super();
-	}
+	Entity deriveDomain();
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @model unique="false"
 	 * @generated
 	 */
-	@Override
-	protected EClass eStaticClass() {
-		return OmlPackage.Literals.FEATURE;
-	}
+	Entity deriveRange();
 
-} //FeatureImpl
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model unique="false"
+	 * @generated
+	 */
+	Relation deriveInverse();
+
+} // UnreifiedRelation
