@@ -2,7 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>io.opencaesar.oml</groupId>
-	<version>1.4.1</version>
+	<version>2.0.0</version>
 	<artifactId>io.opencaesar.oml.parent</artifactId>
 	<packaging>pom</packaging>
 
@@ -22,7 +22,7 @@
     </modules>
 
     <properties>
-	    <tycho-version>3.0.3</tycho-version>
+	    <tycho-version>3.0.0</tycho-version>
 	    <tycho-extras-version>${tycho-version}</tycho-extras-version>
 	    <maven-antrun-plugin.version>1.7</maven-antrun-plugin.version>
         <eclipse-version>2022-09</eclipse-version>
