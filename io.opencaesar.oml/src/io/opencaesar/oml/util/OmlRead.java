@@ -36,7 +36,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
-import io.opencaesar.oml.AnnotatedElement;
 import io.opencaesar.oml.Annotation;
 import io.opencaesar.oml.AnnotationProperty;
 import io.opencaesar.oml.AnnotationPropertyReference;
@@ -61,6 +60,7 @@ import io.opencaesar.oml.EnumeratedScalarReference;
 import io.opencaesar.oml.FacetedScalarReference;
 import io.opencaesar.oml.Feature;
 import io.opencaesar.oml.FeaturePredicate;
+import io.opencaesar.oml.IdentifiedElement;
 import io.opencaesar.oml.Import;
 import io.opencaesar.oml.Instance;
 import io.opencaesar.oml.IntegerLiteral;
@@ -468,7 +468,7 @@ public final class OmlRead {
      * @param annotation the given annotation
      * @return the annotated element of the annotation
      */
-    public static AnnotatedElement getAnnotatedElement(Annotation annotation) {
+    public static IdentifiedElement getAnnotatedElement(Annotation annotation) {
         if (annotation.getOwningReference() != null) {
             return resolve(annotation.getOwningReference());
         } else {
@@ -485,7 +485,7 @@ public final class OmlRead {
      * @param property the given annotation property
      * @return a list of literals representing annotation values
      */
-    public static List<Literal> getAnnotationValues(AnnotatedElement element, AnnotationProperty property) {
+    public static List<Literal> getAnnotationValues(IdentifiedElement element, AnnotationProperty property) {
         return element.getOwnedAnnotations().stream()
             .filter(a -> a.getProperty() == property)
             .map(a -> a.getValue())
@@ -499,7 +499,7 @@ public final class OmlRead {
      * @param property the given annotation property
      * @return a literal representing the first annotation value
      */
-    public static Literal getAnnotationValue(AnnotatedElement element, AnnotationProperty property) {
+    public static Literal getAnnotationValue(IdentifiedElement element, AnnotationProperty property) {
         return element.getOwnedAnnotations().stream()
             .filter(a -> a.getProperty() == property)
             .map(a -> a.getValue())

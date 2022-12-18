@@ -46,7 +46,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public abstract class ImportImpl extends AnnotatedElementImpl implements Import {
+public abstract class ImportImpl extends ElementImpl implements Import {
 	/**
 	 * The default value of the '{@link #getNamespace() <em>Namespace</em>}' attribute.
 	 * <!-- begin-user-doc -->

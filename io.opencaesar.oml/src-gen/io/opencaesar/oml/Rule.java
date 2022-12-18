@@ -44,7 +44,7 @@ import org.eclipse.emf.common.util.EList;
  * @model annotation="https://tabatkins.github.io/bikeshed heading='Rules'"
  * @generated
  */
-public interface Rule extends Member, VocabularyStatement {
+public interface Rule extends VocabularyMember, VocabularyStatement {
 	/**
 	 * Returns the value of the '<em><b>Antecedent</b></em>' containment reference list.
 	 * The list contents are of type {@link io.opencaesar.oml.Predicate}.

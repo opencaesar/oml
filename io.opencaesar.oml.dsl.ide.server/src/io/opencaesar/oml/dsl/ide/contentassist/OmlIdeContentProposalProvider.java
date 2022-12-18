@@ -64,23 +64,23 @@ public class OmlIdeContentProposalProvider extends IdeContentProposalProvider {
 		var ontologyURI = EcoreUtil.getURI(ontology);
 		var keyword = (Keyword) context.getLastCompleteNode().getGrammarElement();
 		Predicate<IEObjectDescription> predicate = null;
-		if (keyword == omlGrammarAccess.getVocabularyExtensionAccess().getExtendsKeyword_1()) {
+		if (keyword == omlGrammarAccess.getVocabularyExtensionAccess().getExtendsKeyword_0()) {
 			predicate = (x -> !x.getEObjectURI().equals(ontologyURI) && OmlPackage.Literals.VOCABULARY.isSuperTypeOf(x.getEClass()));
-		} else if (keyword == omlGrammarAccess.getVocabularyUsageAccess().getUsesKeyword_1()) {
+		} else if (keyword == omlGrammarAccess.getVocabularyUsageAccess().getUsesKeyword_0()) {
 			predicate = (x -> !x.getEObjectURI().equals(ontologyURI) && OmlPackage.Literals.DESCRIPTION_BOX.isSuperTypeOf(x.getEClass()));
-		} else if (keyword == omlGrammarAccess.getVocabularyBundleExtensionAccess().getExtendsKeyword_1()) {
+		} else if (keyword == omlGrammarAccess.getVocabularyBundleExtensionAccess().getExtendsKeyword_0()) {
 			predicate = (x -> !x.getEObjectURI().equals(ontologyURI) && OmlPackage.Literals.VOCABULARY_BUNDLE.isSuperTypeOf(x.getEClass()));
-		} else if (keyword == omlGrammarAccess.getVocabularyBundleInclusionAccess().getIncludesKeyword_1()) {
+		} else if (keyword == omlGrammarAccess.getVocabularyBundleInclusionAccess().getIncludesKeyword_0()) {
 			predicate = (x -> !x.getEObjectURI().equals(ontologyURI) && OmlPackage.Literals.VOCABULARY.isSuperTypeOf(x.getEClass()));
-		} else if (keyword == omlGrammarAccess.getDescriptionExtensionAccess().getExtendsKeyword_1()) {
+		} else if (keyword == omlGrammarAccess.getDescriptionExtensionAccess().getExtendsKeyword_0()) {
 			predicate = (x -> !x.getEObjectURI().equals(ontologyURI) && OmlPackage.Literals.DESCRIPTION.isSuperTypeOf(x.getEClass()));
-		} else if (keyword == omlGrammarAccess.getDescriptionUsageAccess().getUsesKeyword_1()) {
+		} else if (keyword == omlGrammarAccess.getDescriptionUsageAccess().getUsesKeyword_0()) {
 			predicate = (x -> !x.getEObjectURI().equals(ontologyURI) && OmlPackage.Literals.VOCABULARY_BOX.isSuperTypeOf(x.getEClass()));
-		} else if (keyword == omlGrammarAccess.getDescriptionBundleExtensionAccess().getExtendsKeyword_1()) {
+		} else if (keyword == omlGrammarAccess.getDescriptionBundleExtensionAccess().getExtendsKeyword_0()) {
 			predicate = (x -> !x.getEObjectURI().equals(ontologyURI) && OmlPackage.Literals.DESCRIPTION_BUNDLE.isSuperTypeOf(x.getEClass()));
-		} else if (keyword == omlGrammarAccess.getDescriptionBundleInclusionAccess().getIncludesKeyword_1()) {
+		} else if (keyword == omlGrammarAccess.getDescriptionBundleInclusionAccess().getIncludesKeyword_0()) {
 			predicate = (x -> !x.getEObjectURI().equals(ontologyURI) && OmlPackage.Literals.DESCRIPTION.isSuperTypeOf(x.getEClass()));
-		} else if (keyword == omlGrammarAccess.getDescriptionBundleUsageAccess().getUsesKeyword_1()) {
+		} else if (keyword == omlGrammarAccess.getDescriptionBundleUsageAccess().getUsesKeyword_0()) {
 			predicate = (x -> !x.getEObjectURI().equals(ontologyURI) && OmlPackage.Literals.VOCABULARY_BOX.isSuperTypeOf(x.getEClass()));
 		}
 		if (predicate != null) {

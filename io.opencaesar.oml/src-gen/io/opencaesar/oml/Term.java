@@ -34,5 +34,5 @@ package io.opencaesar.oml;
  *        annotation="https://tabatkins.github.io/bikeshed heading='Vocabularies'"
  * @generated
  */
-public interface Term extends Member {
+public interface Term extends VocabularyMember {
 } // Term

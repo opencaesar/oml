@@ -56,7 +56,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *
  * @generated
  */
-public class RuleImpl extends MemberImpl implements Rule {
+public class RuleImpl extends VocabularyMemberImpl implements Rule {
 	/**
 	 * The cached value of the '{@link #getAntecedent() <em>Antecedent</em>}' containment reference list.
 	 * <!-- begin-user-doc -->

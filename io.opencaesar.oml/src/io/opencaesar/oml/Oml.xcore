@@ -40,6 +40,10 @@ import org.eclipse.emf.ecore.EObject
 annotation "https://tabatkins.github.io/bikeshed" as Bikeshed
 annotation "https://tabatkins.github.io/bikeshed/headings" as BikeshedHeadings
 
+////////////////////////////////////////
+//  Root 
+////////////////////////////////////////
+
 /*
  * Element is the most general type in the OML metamodel. All objects in an OML model are elements.
  */
@@ -65,6 +69,10 @@ abstract class Element {
     }
 }
 
+////////////////////////////////////////
+//  Elements 
+////////////////////////////////////////
+
 /*
  * Annotation is an element that specifies additional non-semantic information on an annotated element. It can also be
  * specified on a reference to an ontology member, in which case it is interpreted as if it was specified on the
@@ -88,7 +96,7 @@ class Annotation extends Element {
     /*
      * The annotated element that owns this annotation
      */
-    container AnnotatedElement[?] owningElement opposite ownedAnnotations
+    container IdentifiedElement[?] owningElement opposite ownedAnnotations
     /*
      * The reference that owns this annotation
      */
@@ -96,10 +104,14 @@ class Annotation extends Element {
 }
 
 /*
- * AnnotatedElement is an element that can own a set of Annotations.
+ * IdentifiedElement is an annotated element that is identified by an IRI and can own a set of Annotations.
  */
 @Bikeshed(heading="Elements")
-abstract class AnnotatedElement extends Element {
+abstract class IdentifiedElement extends Element {
+    /*
+     * Gets the IRI of this element 
+     */ 
+    op String getIri()
     /*
      * The set of annotations owned directly by this element
      */
@@ -107,15 +119,115 @@ abstract class AnnotatedElement extends Element {
 }
 
 /*
- * IdentifiedElement is an annotated element that is identified by an IRI.
+ * Import is an element owned by an ontology to specify that it imports another ontology.
+ * The imported ontology is specified by its IRI, and optionally a separator character and local prefix
+ * if members of the imported ontology will also be referenced by the importing ontology
  */
 @Bikeshed(heading="Elements")
-abstract class IdentifiedElement extends AnnotatedElement {
+abstract class Import extends Element {
     /*
-     * Gets the IRI of this element 
-     */ 
-    op String getIri()
+     * The namespace of the imported ontology
+     */
+    Namespace[1] namespace
+    /*
+     * The local prefix of the imported ontology's namespace
+     */
+    ID[?] prefix
+    /*
+     * Get the import's iri
+     */
+    op String getIri() {
+    	if (namespace === null) {
+    		return null
+    	}
+     	var i = namespace.indexOf('#')
+    	if (i === -1) {
+    		i = namespace.lastIndexOf('/')
+    	}
+    	if (i === -1) {
+        	return namespace
+       	} else {
+       		return namespace.substring(0, i)
+       	}
+    }
+    /*
+     * Get the import's separator char
+     */
+    op SeparatorKind getSeparator() {
+     	if (namespace === null) {
+    		return null
+    	}
+    	var i = namespace.indexOf('#')
+    	if (i === -1) {
+    		i = namespace.lastIndexOf('/')
+    	}
+    	if (i === -1) {
+       		return null
+       	} else {
+        	return SeparatorKind.get(namespace.substring(i, i+1))
+       	}
+    }
 }
+
+/*
+ * Instance is an element that represents an instance of a classifier. It can specify a set of values for the
+ * classifier's (direct or inherited) properties.
+ */
+@Bikeshed(heading="Instances")
+abstract class Instance extends Element {
+    /*
+     * The property value assertions specified by this instance
+     */
+    contains PropertyValueAssertion[*] ownedPropertyValues opposite owningInstance
+}
+
+/*
+ * Statement represents an expression of information in an ontology.  
+ */
+@Bikeshed(heading="Elements")
+abstract class Statement extends Element {
+}
+
+/*
+ * Axiom is an annotated element that represents a statement about a term in a vocabulary.
+ */
+@Bikeshed(heading="Axioms")
+abstract class Axiom extends Element {
+}
+
+/*
+ * Assertion is an element that represents a statement about an instance in a description.
+ */
+@Bikeshed(heading="Assertions")
+abstract class Assertion extends Element {
+}
+
+/*
+ * Predicate is an element that represents an ontology statement to match, when used in a rule's antecedent, 
+ * or to infer, when used in a rule's consequent.
+ */
+@Bikeshed(heading="Rules")
+abstract class Predicate extends Element {
+    /*
+     * The rule that specifies this predicate in its antecedent
+     */
+    container Rule[?] antecedentRule opposite antecedent
+    /*
+     * The rule that specifies this predicate in its consequent
+     */
+    container Rule[?] consequentRule opposite consequent
+}
+
+/*
+ * Literal is an element that represents a specific literal value classified by a scalar.
+ */
+@Bikeshed(heading="Literals")
+abstract class Literal extends Element {
+}
+
+////////////////////////////////////////
+//  Identified Elements 
+////////////////////////////////////////
 
 /*
  * Ontology is an identified element that represents a namespace for its members. The namespace is defined
@@ -169,11 +281,52 @@ abstract class Ontology extends IdentifiedElement {
 }
 
 /*
+ * Member is an identified element defined by an ontology. Its IRI is unique and derived by concatenating the globally
+ * unique namespace of its ontology with its locally unique name (i.e., member.iri=ontology.namespace+member.name).
+ */
+@Bikeshed(heading="Elements")
+abstract class Member extends IdentifiedElement {
+    /*
+     * The name of this member, which is unique within its ontology's namespace
+     */
+    id ID[1] name
+    
+    op String getIri() {
+        val ontology = getOntology()
+        val namespace = if (ontology !== null) ontology.getNamespace()
+        return namespace+name
+    }
+    /*
+     * Gets the abbreviated IRI of this element
+     */
+    op String getAbbreviatedIri() {
+        val ontology = getOntology();
+        val prefix = if (ontology !== null) ontology.getPrefix()+':' else ""
+        return prefix + name
+    }
+}
+
+////////////////////////////////////////
+//  Ontologies 
+////////////////////////////////////////
+
+/*
  * VocabularyBox is an ontology whose members are terms and rules.
  */
 @Bikeshed(heading="Vocabularies")
 abstract class VocabularyBox extends Ontology {
 }
+
+/*
+ * DescriptionBox is an ontology whose members are instances (of terms defined in vocabulary boxes)
+ */
+@Bikeshed(heading="Descriptions")
+abstract class DescriptionBox extends Ontology {
+}
+
+////////////////////////////////////////
+//  Vocabulary Boxes 
+////////////////////////////////////////
 
 /*
  * Vocabulary is a vocabulary box that allows making statements about its own terms and rules
@@ -203,12 +356,9 @@ class VocabularyBundle extends VocabularyBox {
     contains VocabularyBundleImport[*] ownedImports opposite owningVocabularyBundle
 }
 
-/*
- * DescriptionBox is an ontology whose members are instances (of terms defined in vocabulary boxes)
- */
-@Bikeshed(heading="Descriptions")
-abstract class DescriptionBox extends Ontology {
-}
+////////////////////////////////////////
+//  Description Boxes 
+////////////////////////////////////////
 
 /*
  * Description is a description box that allows making statements about its own instances or about
@@ -238,38 +388,201 @@ class DescriptionBundle extends DescriptionBox {
     contains DescriptionBundleImport[*] ownedImports opposite owningDescriptionBundle
 }
 
+////////////////////////////////////////
+//  Imports 
+////////////////////////////////////////
+
 /*
- * Member is an identified element defined by an ontology. Its IRI is unique and derived by concatenating the globally
- * unique namespace of its ontology with its locally unique name (i.e., member.iri=ontology.namespace+member.name).
+ * VocabularyImport is an import owned by a vocabulary.
  */
-@Bikeshed(heading="Elements")
-abstract class Member extends IdentifiedElement {
+@Bikeshed(heading="Vocabularies")
+abstract class VocabularyImport extends Import {
     /*
-     * The name of this member, which is unique within its ontology's namespace
+     * The vocabulary that owns this import
      */
-    id ID[1] name
-    
-    op String getIri() {
-        val ontology = getOntology()
-        val namespace = if (ontology !== null) ontology.getNamespace()
-        return namespace+name
-    }
-    /*
-     * Gets the abbreviated IRI of this element
-     */
-    op String getAbbreviatedIri() {
-        val ontology = getOntology();
-        val prefix = if (ontology !== null) ontology.getPrefix()+':' else ""
-        return prefix + name
-    }
+    container Vocabulary[1] owningVocabulary opposite ownedImports
 }
+
+/*
+ * VocabularyBundleImport is an import owned by a vocabulary bundle.
+ */
+@Bikeshed(heading="Vocabularies")
+abstract class VocabularyBundleImport extends Import {
+    /*
+     * The vocabulary bundle that contains this import
+     */
+    container VocabularyBundle[1] owningVocabularyBundle opposite ownedImports
+}
+
+/*
+ * DescriptionImport is an import owned by a description.
+ */
+@Bikeshed(heading="Descriptions")
+abstract class DescriptionImport extends Import {
+    /*
+     * The description that owns this import
+     */
+    container Description[1] owningDescription opposite ownedImports
+}
+
+/*
+ * DescriptionBundleImport is an import owned by  description bundle.
+ */
+@Bikeshed(heading="Descriptions")
+abstract class DescriptionBundleImport extends Import {
+    /*
+     * The description bundle that owns this import
+     */
+    container DescriptionBundle[1] owningDescriptionBundle opposite ownedImports
+}
+
+////////////////////////////////////////
+//  Vocabulary Imports 
+////////////////////////////////////////
+
+/*
+ * VocabularyExtension is an import that allows a vocabulary to extend another vocabulary. 
+ */
+@Bikeshed(heading="Vocabularies")
+class VocabularyExtension extends VocabularyImport {
+}
+
+/*
+ * VocabularyUsage is an import that allows a vocabulary to use a description box.
+ */
+@Bikeshed(heading="Vocabularies")
+class VocabularyUsage extends VocabularyImport {
+}
+
+////////////////////////////////////////
+//  Vocabulary Bundle Imports 
+////////////////////////////////////////
+
+/*
+ * VocabularyBundleExtension is an import that allows a vocabulary bundle to extend another vocabulary bundle.
+ */
+@Bikeshed(heading="Vocabularies")
+class VocabularyBundleExtension extends VocabularyBundleImport {
+}
+
+/*
+ * VocabularyBundleInclusion is an import that allows a vocabulary bundle to include a vocabulary. 
+ */
+@Bikeshed(heading="Vocabularies")
+class VocabularyBundleInclusion extends VocabularyBundleImport {
+}
+
+////////////////////////////////////////
+//  Description Imports 
+////////////////////////////////////////
+
+/*
+ * DescriptionExtension is an import that allows a description to extend another description.
+ */
+@Bikeshed(heading="Descriptions")
+class DescriptionExtension extends DescriptionImport {
+}
+
+/*
+ * DescriptionUsage is an import that allows a description to use a vocabulary box.
+ */
+@Bikeshed(heading="Descriptions")
+class DescriptionUsage extends DescriptionImport {
+}
+
+////////////////////////////////////////
+//  Description Bundle Imports 
+////////////////////////////////////////
+
+/*
+ * DescriptionBundleExtension is an import that allows a description bundle to extend another description bundle.
+ */
+@Bikeshed(heading="Descriptions")
+class DescriptionBundleExtension extends DescriptionBundleImport {
+}
+
+/*
+ * DescriptionBundleInclusion is an import that allows a description bundle to include a description.
+ */
+@Bikeshed(heading="Descriptions")
+class DescriptionBundleInclusion extends DescriptionBundleImport {
+}
+
+/*
+ * DescriptionBundleUsage is an import that allows a description bundle to use a vocabulary box.
+ */
+@Bikeshed(heading="Descriptions")
+class DescriptionBundleUsage extends DescriptionBundleImport {
+}
+
+////////////////////////////////////////
+//  Statements 
+////////////////////////////////////////
+
+/*
+ * VocabularyStatement is a statement owned by a vocabulary.
+ */
+@Bikeshed(heading="Vocabularies")
+abstract class VocabularyStatement extends Statement {
+    /*
+     * The vocabulary that owns this statement
+     */
+    container Vocabulary[1] owningVocabulary opposite ownedStatements
+}
+
+/*
+ * DescriptionStatement is a statement owned by a description.
+ */
+@Bikeshed(heading="Descriptions")
+abstract class DescriptionStatement extends Statement {
+    /*
+     * The description that owns this statement
+     */
+    container Description[1] owningDescription opposite ownedStatements
+}
+
+////////////////////////////////////////
+//  Mmbers 
+////////////////////////////////////////
+
+abstract class VocabularyMember extends Member {
+}
+
+abstract class DescriptionMember extends Member {
+}
+
+////////////////////////////////////////
+//  Vocabulary Members
+////////////////////////////////////////
 
 /*
  * Term is a member of a vocabulary that provides a particular semantic meaning when used in an assertion.
  */
 @Bikeshed(heading="Vocabularies")
-abstract class Term extends Member {
+abstract class Term extends VocabularyMember {
 }
+
+/*
+ * Rule is a member of a vocabulary that adds a new inference rule to the set supported natively by DL. A rule specifies a set
+ * of antecedent predicates that forms a conjunction that infers, when it holds, a single consequent (relation) predicate. Each
+ * predicate in a rule may specify (one or two) variables. Those with the same name refer to the same variable, and hence must
+ * be bound to the same value from the model for the rule to trigger during reasoning.
+ */
+@Bikeshed(heading="Rules")
+class Rule extends VocabularyMember, VocabularyStatement {
+    /*
+     * The set of predicates that form the antecedent of this rule
+     */
+    contains Predicate[+] antecedent opposite antecedentRule
+    /*
+     * The relation predicate that is the consequent of this rule
+     */
+    contains Predicate[+] consequent opposite consequentRule
+}
+
+////////////////////////////////////////
+//  Terms 
+////////////////////////////////////////
 
 /*
  * SpecializableTerm is a term that can specialized in a taxonomy. It can have zero or more specializations.
@@ -283,11 +596,33 @@ abstract class SpecializableTerm extends Term , VocabularyStatement {
 }
 
 /*
+ * Feature is a a term that can be restricted in a given classifier context
+ */
+@Bikeshed(heading="Features")
+abstract class Feature extends Term {
+}
+
+/*
+ * Property is a specializable feature that relates an element to a value. It is the super type of all property types.
+ */
+@Bikeshed(heading="Features")
+abstract class Property extends Feature {
+}
+
+////////////////////////////////////////
+//  Specializable Terms
+////////////////////////////////////////
+
+/*
  * Type is a specializable term that classifies a set of instances or literals.
  */
 @Bikeshed(heading="Types")
 abstract class Type extends SpecializableTerm {
 }
+
+////////////////////////////////////////
+//  Types
+////////////////////////////////////////
 
 /*
  * Classifier is a type that classifies a set of instances and characterizes them with properties
@@ -301,6 +636,17 @@ abstract class Classifier extends Type {
      */
     contains PropertyRestrictionAxiom[*] ownedPropertyRestrictions opposite owningClassifier
 }
+
+/*
+ * Scalar is a primitive type that represents a set of literals. It is the super type of all scalar types.
+ */
+@Bikeshed(heading="Types")
+abstract class Scalar extends Type {
+}
+
+////////////////////////////////////////
+//  Classifiers
+////////////////////////////////////////
 
 /*
  * Entity is a characterizable type whose instances can be interrelated by relations (that have the entity
@@ -317,6 +663,18 @@ abstract class Entity extends Classifier {
      */
     contains KeyAxiom[*] ownedKeys opposite owningEntity
 }
+
+/*
+ * Structure is a characterizable type that represents a structured datatype whose instances are anonymous and assignable as
+ * values to structured properties.
+ */
+@Bikeshed(heading="Types")
+class Structure extends Classifier {
+}
+
+////////////////////////////////////////
+//  Entities
+////////////////////////////////////////
 
 /*
  * Aspect is an entity that represents a concern that cuts across multiple entities. It does not directly 
@@ -394,100 +752,9 @@ class RelationEntity extends Entity {
     boolean transitive
 }
 
-/*
- * Structure is a characterizable type that represents a structured datatype whose instances are anonymous and assignable as
- * values to structured properties.
- */
-@Bikeshed(heading="Types")
-class Structure extends Classifier {
-}
-
-/*
- * Feature is a a term that can be restricted in a given classifier context
- */
-@Bikeshed(heading="Features")
-abstract class Feature extends Term {
-}
-
-/*
- * Property is a specializable feature that relates an element to a value. It is the super type of all property types.
- */
-@Bikeshed(heading="Features")
-abstract class Property extends Feature {
-}
-
-/*
- * AnnotationProperty is a property with no DL semantics that relates an annotated element to a literal value.
- */
-@Bikeshed(heading="Features")
-class AnnotationProperty extends Property, SpecializableTerm {
-}
-
-/*
- * SemanticProperty is a property with DL semantics that relates instances of a classifier acting as its
- * domain to a value typed by either a scalar or a structure representing its range.
- */
-@Bikeshed(heading="Features")
-abstract class SemanticProperty extends Property {
-    /*
-     * Determines if this property is functional (has a max of one value per instance) 
-     */
-    op boolean isFunctional()
-    /*
-     * Gets the domain of this property
-     */
-    op Classifier getDomain()
-    /*
-     * Gets the range of the property
-     */
-    op Type getRange()
-}
-
-/*
- * ScalarProperty is a semantic property whose range is a scalar. It can specialize other scalar properties.
- * It can also be flagged as a key property (among possibly several) that specifies the unique id of its domain.
- */
-@Bikeshed(heading="Features")
-class ScalarProperty extends SemanticProperty, SpecializableTerm {
-    /*
-     * Whether this property is functional (has a max of one value per instance) 
-     */
-    boolean functional
-    /*
-     * The classifier that is the domain of this property
-     */
-    refers Classifier[1] domain
-    /*
-     * The scalar that is the range of this property
-     */
-    refers Scalar[1] range
-}
-
-/*
- * StructuredProperty is a semantic property whose range is a structure. It can specialize other structured properties.
- */
-@Bikeshed(heading="Features")
-class StructuredProperty extends SemanticProperty, SpecializableTerm {
-    /*
-     * Whether this property is functional (has a max of one value per instance) 
-     */
-    boolean functional
-    /*
-     * The classifier that is the domain of this property
-     */
-    refers Classifier[1] domain
-    /*
-     * The structure that is the range of this property
-     */
-    refers Structure[1] range
-}
-
-/*
- * Scalar is a primitive type that represents a set of literals. It is the super type of all scalar types.
- */
-@Bikeshed(heading="Types")
-abstract class Scalar extends Type {
-}
+////////////////////////////////////////
+//  Scalars
+////////////////////////////////////////
 
 /*
  * FacetedScalar is a scalar that represents a (possibly infinite) set of literals and can constrain them with some facets. It
@@ -597,6 +864,80 @@ class EnumeratedScalar extends Scalar {
     contains Literal[*] literals
 }
 
+////////////////////////////////////////
+//  Properties
+////////////////////////////////////////
+
+/*
+ * AnnotationProperty is a property with no DL semantics that relates an annotated element to a literal value.
+ */
+@Bikeshed(heading="Features")
+class AnnotationProperty extends Property, SpecializableTerm {
+}
+
+/*
+ * SemanticProperty is a property with DL semantics that relates instances of a classifier acting as its
+ * domain to a value typed by either a scalar or a structure representing its range.
+ */
+@Bikeshed(heading="Features")
+abstract class SemanticProperty extends Property {
+    /*
+     * Determines if this property is functional (has a max of one value per instance) 
+     */
+    op boolean isFunctional()
+    /*
+     * Gets the domain of this property
+     */
+    op Classifier getDomain()
+    /*
+     * Gets the range of the property
+     */
+    op Type getRange()
+}
+
+////////////////////////////////////////
+//  Semantic Properties
+////////////////////////////////////////
+
+/*
+ * ScalarProperty is a semantic property whose range is a scalar. It can specialize other scalar properties.
+ * It can also be flagged as a key property (among possibly several) that specifies the unique id of its domain.
+ */
+@Bikeshed(heading="Features")
+class ScalarProperty extends SemanticProperty, SpecializableTerm {
+    /*
+     * Whether this property is functional (has a max of one value per instance) 
+     */
+    boolean functional
+    /*
+     * The classifier that is the domain of this property
+     */
+    refers Classifier[1] domain
+    /*
+     * The scalar that is the range of this property
+     */
+    refers Scalar[1] range
+}
+
+/*
+ * StructuredProperty is a semantic property whose range is a structure. It can specialize other structured properties.
+ */
+@Bikeshed(heading="Features")
+class StructuredProperty extends SemanticProperty, SpecializableTerm {
+    /*
+     * Whether this property is functional (has a max of one value per instance) 
+     */
+    boolean functional
+    /*
+     * The classifier that is the domain of this property
+     */
+    refers Classifier[1] domain
+    /*
+     * The structure that is the range of this property
+     */
+    refers Structure[1] range
+}
+
 /*
  * Relation is a feature that represents a relation from its domain entity to its range entity. It is the super type of
  * two concrete relations: [=ForwardRelation=] and [=ReverseRelation] that are specified by a relation entity. When a relation
@@ -631,6 +972,10 @@ abstract class Relation extends Feature {
     op Entity deriveRange()
     op Relation deriveInverse()
 }
+
+////////////////////////////////////////
+//  Relation Properties
+////////////////////////////////////////
 
 /*
  * ForwardRelation is a relation that is defined along side a relation entity, whose domain is the source of the relation
@@ -684,55 +1029,9 @@ class ReverseRelation extends Relation {
     }
 }
 
-/*
- * Rule is a member of a vocabulary that adds a new inference rule to the set supported natively by DL. A rule specifies a set
- * of antecedent predicates that forms a conjunction that infers, when it holds, a single consequent (relation) predicate. Each
- * predicate in a rule may specify (one or two) variables. Those with the same name refer to the same variable, and hence must
- * be bound to the same value from the model for the rule to trigger during reasoning.
- */
-@Bikeshed(heading="Rules")
-class Rule extends Member, VocabularyStatement {
-    /*
-     * The set of predicates that form the antecedent of this rule
-     */
-    contains Predicate[+] antecedent opposite antecedentRule
-    /*
-     * The relation predicate that is the consequent of this rule
-     */
-    contains Predicate[+] consequent opposite consequentRule
-}
-
-/*
- * Instance is an element that represents an instance of a classifier. It can specify a set of values for the
- * classifier's (direct or inherited) properties.
- */
-@Bikeshed(heading="Instances")
-abstract class Instance extends Element {
-    /*
-     * The property value assertions specified by this instance
-     */
-    contains PropertyValueAssertion[*] ownedPropertyValues opposite owningInstance
-}
-
-/*
- * StructureInstance is an instance that can be typed by a structure. It is anonymous and gets assigned as
- * a value for structured properties, either as part of value restrictions on entities, or value assertions on instances.
- */
-@Bikeshed(heading="Instances")
-class StructureInstance extends Instance {
-    /*
-     * The type of this instance
-     */
-    refers Structure[1] ^type
-    /*
-     * The property value restriction axiom that assigns this instance as a restricted value
-     */
-    container StructuredPropertyValueRestrictionAxiom[?] owningAxiom opposite value
-    /*
-     * The property value assertion axiom that assigns this instance as a value
-     */
-    container StructuredPropertyValueAssertion[?] owningAssertion opposite value
-}
+////////////////////////////////////////
+//  Description Members
+////////////////////////////////////////
 
 /*
  * NamedInstance is an instance that is a member of a description. It can specify links to other named instances.
@@ -744,6 +1043,10 @@ abstract class NamedInstance extends Member, Instance, DescriptionStatement {
      */
     contains LinkAssertion[*] ownedLinks opposite owningInstance
 }
+
+////////////////////////////////////////
+//  Named Instances
+////////////////////////////////////////
 
 /*
  * ConceptInstance is a named instance that can be typed by concepts.
@@ -775,6 +1078,597 @@ class RelationInstance extends NamedInstance {
      */
     refers NamedInstance[+] targets
 }
+
+////////////////////////////////////////
+//  Instances
+////////////////////////////////////////
+
+/*
+ * StructureInstance is an instance that can be typed by a structure. It is anonymous and gets assigned as
+ * a value for structured properties, either as part of value restrictions on entities, or value assertions on instances.
+ */
+@Bikeshed(heading="Instances")
+class StructureInstance extends Instance {
+    /*
+     * The type of this instance
+     */
+    refers Structure[1] ^type
+    /*
+     * The property value restriction axiom that assigns this instance as a restricted value
+     */
+    container StructuredPropertyValueRestrictionAxiom[?] owningAxiom opposite value
+    /*
+     * The property value assertion axiom that assigns this instance as a value
+     */
+    container StructuredPropertyValueAssertion[?] owningAssertion opposite value
+}
+
+////////////////////////////////////////
+//  Axioms
+////////////////////////////////////////
+
+/*
+ * KeyAxiom is an axiom that states that a set of features form a unique key for an entity. This means that all 
+ * instances of that entity must have unique values for those keys.
+ */
+@Bikeshed(heading="Axioms")
+class KeyAxiom extends Axiom {
+    /*
+     * The set of features specified by this axiom as a key
+     */
+    refers Feature[+] properties
+    /*
+     * The entity that owns this axiom
+     */
+    container Entity[?] owningEntity opposite ownedKeys
+    /*
+     * The reference to an entity that owns this axiom
+     */
+    container EntityReference[?] owningReference opposite ownedKeys
+}
+
+/*
+ * SpecializationAxiom is an axiom that states that one specializable term specializes another. It can be specified directly on
+ * a specializing term or indirectly on a reference to one.
+ */
+@Bikeshed(heading="Axioms")
+class SpecializationAxiom extends Axiom {
+    /*
+     * The specialized term specified by this axiom 
+     */
+    refers SpecializableTerm[1] specializedTerm
+    /*
+     * The specializing term specified by this axiom 
+     */
+    container SpecializableTerm[?] owningTerm opposite ownedSpecializations
+    /*
+     * The reference to a specializing term specified by this axiom 
+     */
+    container SpecializableTermReference[?] owningReference opposite ownedSpecializations
+}
+
+/*
+ * RestrictionAxiom is an axiom that states that a term restricts another term.
+ */
+@Bikeshed(heading="Axioms")
+abstract class RestrictionAxiom extends Axiom {
+}
+
+////////////////////////////////////////
+//  Restriction Axioms
+////////////////////////////////////////
+
+/*
+ * PropertyRestrictionAxiom is an axiom that places some restriction on the value of a property in the context of
+ * the restricting classifier domain. It can be specified directly on the classifier or indirectly on a reference to it.
+ */
+@Bikeshed(heading="Axioms")
+abstract class PropertyRestrictionAxiom extends RestrictionAxiom {
+    /*
+     * The restricting classifier specified by this axiom
+     */
+    container Classifier[?] owningClassifier opposite ownedPropertyRestrictions
+    /*
+     * The reference to a restricting classifier specified by this axiom
+     */
+    container ClassifierReference[?] owningReference opposite ownedPropertyRestrictions
+}
+
+/*
+ * ScalarPropertyRestrictionAxiom is a property restriction axiom that is specified on a scalar property.
+ */
+@Bikeshed(heading="Axioms")
+abstract class ScalarPropertyRestrictionAxiom extends PropertyRestrictionAxiom {
+    /*
+     * The restricted scalar property specified by this axiom
+     */
+    refers ScalarProperty[1] property
+}
+
+/*
+ * ScalarPropertyRangeRestrictionAxiom is a scalar property restriction axiom that restricts the range of a property to
+ * a scalar that specializes the original range. This restrictions may apply to all or to some values of the property
+ * that have the restricting classifier as a domain.
+ */
+@Bikeshed(heading="Axioms")
+class ScalarPropertyRangeRestrictionAxiom extends ScalarPropertyRestrictionAxiom {
+    /*
+     * The restricted range specified by this axiom
+     */
+    refers Scalar[1] range
+    /*
+     * The range restriction kind specified by this axiom (default is all)
+     */
+    RangeRestrictionKind[1] kind
+}
+
+/*
+ * ScalarPropertyCardinalityRestrictionAxiom is a scalar property restriction axiom that restricts the cardinality of a scalar
+ * property to an exact number, a minimum number or a maximum number. This restrictions can apply to all values of the property 
+ * that have the restricting classifier as a domain, or to those values classified by a specific range subtype.
+ */
+@Bikeshed(heading="Axioms")
+class ScalarPropertyCardinalityRestrictionAxiom extends ScalarPropertyRestrictionAxiom {
+    /*
+     * The value of the cardinality specified by this axiom (default is 1)
+     */
+    UnsignedInt[1] cardinality = "1"
+    /*
+     * The kind of cardinality restriction specified by this axiom (default is exactly)
+     */
+    CardinalityRestrictionKind[1] kind
+    /*
+     * The restricted range specified by this axiom
+     */
+    refers Scalar[?] range
+}
+
+/*
+ * ScalarPropertyValueRestrictionAxiom is a scalar property restriction axiom that restricts the value of the property 
+ * that has the restricting classifier as a domain to a specific literal.
+ */
+@Bikeshed(heading="Axioms")
+class ScalarPropertyValueRestrictionAxiom extends ScalarPropertyRestrictionAxiom {
+    /*
+     * The literal specified as a restricted property value by this axiom 
+     */
+    contains Literal[1] value
+}
+
+/*
+ * StructuredPropertyRestrictionAxiom is a property restriction axiom that is specified on a structured property.
+ */
+@Bikeshed(heading="Axioms")
+abstract class StructuredPropertyRestrictionAxiom extends PropertyRestrictionAxiom {
+    /*
+     * The restricted structured property specified by this axiom
+     */
+    refers StructuredProperty[1] property
+}
+
+/*
+ * StructuredPropertyRangeRestrictionAxiom is a structured property restriction axiom that restricts the range of a property 
+ * to a structure that specializes the original range. This restrictions may apply to all or to some values of the 
+ * property that have the restricting classifier as a domain.
+ */
+@Bikeshed(heading="Axioms")
+class StructuredPropertyRangeRestrictionAxiom extends StructuredPropertyRestrictionAxiom {
+    /*
+     * The restricted range specified by this axiom
+     */
+    refers Structure[1] range
+    /*
+     * The range restriction kind specified by this axiom (default is all)
+     */
+    RangeRestrictionKind[1] kind
+}
+
+/*
+ * StructuredPropertyCardinalityRestrictionAxiom is a structured property restriction axiom that restricts the cardinality of 
+ * a structured property to an exact number, a minimum number or a maximum number. This restrictions can apply to all values 
+ * of the property that have the restricting classifier as a domain, or to those values classified by a specific range subtype.
+ */
+@Bikeshed(heading="Axioms")
+class StructuredPropertyCardinalityRestrictionAxiom extends StructuredPropertyRestrictionAxiom {
+    /*
+     * The value of the cardinality specified by this axiom (default is 1)
+     */
+    UnsignedInt[1] cardinality = "1"
+    /*
+     * The kind of cardinality restriction specified by this axiom (default is exactly)
+     */
+    CardinalityRestrictionKind[1] kind
+    /*
+     * The restricted range specified by this axiom
+     */
+    refers Structure[?] range
+}
+
+/*
+ * StructuredPropertyValueRestrictionAxiom is a structured property restriction axiom that restricts the value of the property
+ * that has the restricting classifier as a domain to a specific structure instance.
+ */
+@Bikeshed(heading="Axioms")
+class StructuredPropertyValueRestrictionAxiom extends StructuredPropertyRestrictionAxiom {
+    /*
+     * The structure instance specified as a restricted property value by this axiom 
+     */
+    contains StructureInstance[1] value opposite owningAxiom
+}
+
+/*
+ * RelationRestrictionAxiom is an axiom that places some restriction on the target of a relation in the context of
+ * the restricting classifier domain. It can be specified directly on the classifier or indirectly on a reference to it.
+ */
+@Bikeshed(heading="Axioms")
+abstract class RelationRestrictionAxiom extends RestrictionAxiom {
+    /*
+     * The restricted relation specified by this axiom
+     */
+    refers Relation[1] relation
+    /*
+     * The restricting entity specified by this axiom
+     */
+    container Entity[?] owningEntity opposite ownedRelationRestrictions
+    /*
+     * The reference to a restricting entity specified by this axiom
+     */
+    container EntityReference[?] owningReference opposite ownedRelationRestrictions
+}
+
+/*
+ * RelationRangeRestrictionAxiom is a relation restriction axiom that restricts the range of a relation to specific subtype. 
+ * This restrictions may apply to all or to some instances of the relation that have an instance of the restricting entity as 
+ * a source.
+ */
+@Bikeshed(heading="Axioms")
+class RelationRangeRestrictionAxiom extends RelationRestrictionAxiom {
+    /*
+     * The restricted range specified by this axiom
+     */
+    refers Entity[1] range
+    /*
+     * The range restriction kind specified by this axiom (default is all)
+     */
+    RangeRestrictionKind[1] kind
+}
+
+/*
+ * RelationCardinalityRestrictionAxiom is a relation restriction axiom that restricts the cardinality of a relation's range
+ * to an exact number, a minimum number or a maximum number. This restrictions may either apply generally to all targets of 
+ * of the relation that have instances of the restricting entity as sources, or to those classified by a specific range subtype.
+ */
+@Bikeshed(heading="Axioms")
+class RelationCardinalityRestrictionAxiom extends RelationRestrictionAxiom {
+    /*
+     * The value of the cardinality specified by this axiom (default is 1)
+     */
+    UnsignedInt[1] cardinality = "1"
+    /*
+     * The kind of cardinality restriction specified by this axiom (default is exactly)
+     */
+    CardinalityRestrictionKind[1] kind
+    /*
+     * The restricted range specified by this axiom
+     */
+    refers Entity[?] range
+}
+
+/*
+ * RelationTargetRestrictionAxiom is a relation restriction axiom that restricts the target of the relation
+ * to a specific named instance.
+ */
+@Bikeshed(heading="Axioms")
+class RelationTargetRestrictionAxiom extends RelationRestrictionAxiom {
+    /*
+     * The named instance specified as a restricted relation target by this axiom 
+     */
+    refers NamedInstance[1] target
+}
+
+////////////////////////////////////////
+//  Assertions
+////////////////////////////////////////
+
+/*
+ * TypeAssertion is an assertion that specifies a type for an instance 
+ */
+@Bikeshed(heading="Assertions")
+abstract class TypeAssertion extends Assertion {
+    /*
+     * Gets the type referenced by this assertion
+     */
+    op Entity getType()
+}
+
+/*
+ * ConceptTypeAssertion is a type assertion specifying a type for a concept instance. It can be specified directly on an
+ * concept instance, or indirectly on a reference to one. 
+ */
+@Bikeshed(heading="Assertions")
+class ConceptTypeAssertion extends TypeAssertion {
+    /*
+     * The concept specified as the type of the instance
+     */
+    refers Concept[1] ^type
+    /*
+     * The instance that this type assertion is about
+     */
+    container ConceptInstance[?] owningInstance opposite ownedTypes
+    /*
+     * The reference to a concept instance that this type assertion is about
+     */
+    container ConceptInstanceReference[?] owningReference opposite ownedTypes
+}
+
+/*
+ * RelationTypeAssertion is a type assertion specifying a relation entity as a type of a relation instance. It can be specified 
+ * directly on a relation instance, or indirectly on a reference to one.
+ */
+@Bikeshed(heading="Assertions")
+class RelationTypeAssertion extends TypeAssertion {
+    /*
+     * The relation entity that is the type of the relation instance
+     */
+    refers RelationEntity[1] ^type
+    /*
+     * The relation instance that this type assertion is about
+     */
+    container RelationInstance[?] owningInstance opposite ownedTypes
+    /*
+     * The reference to a relation instance that this type assertion is about
+     */
+    container RelationInstanceReference[?] owningReference opposite ownedTypes
+}
+
+/*
+ * PropertyValueAssertion is an assertion that specifies a value for a property on an instance.
+ */
+@Bikeshed(heading="Assertions")
+abstract class PropertyValueAssertion extends Assertion {
+    /*
+     * The instance that this property value assertion is about
+     */
+    container Instance[?] owningInstance opposite ownedPropertyValues
+    /*
+     * The reference to an instance that this property value assertion is about
+     */
+    container NamedInstanceReference[?] owningReference opposite ownedPropertyValues
+    /*
+     * Gets the property referenced by this assertion
+     */
+    op SemanticProperty getProperty()
+    /*
+     * Gets the value specified by this assertion
+     */
+    op Element getValue()
+}
+
+/*
+ * ScalarPropertyValueAssertion is a property value assertion for a scalar property, where the specified value is a literal.
+ */
+@Bikeshed(heading="Assertions")
+class ScalarPropertyValueAssertion extends PropertyValueAssertion {
+    /*
+     * The scalar property specified by this assertion
+     */
+    refers ScalarProperty[1] property
+    /*
+     * The literal specified by this assertion as a value
+     */
+    contains Literal[1] value
+}
+
+/*
+ * StructuredPropertyValueAssertion is a property value assertion for a structured property, where the specified value is a
+ * structure instance.
+ */
+@Bikeshed(heading="Assertions")
+class StructuredPropertyValueAssertion extends PropertyValueAssertion {
+    /*
+     * The structured property specified by this assertion
+     */
+    refers StructuredProperty[1] property
+    /*
+     * The structure instance specified by this assertion as a value
+     */
+    contains StructureInstance[1] value opposite owningAssertion
+}
+
+/*
+ * LinkAssertion is an assertion that specifies a link from the asserting named instance as a source to another 
+ * named instance as a target. Unlike a relation instance, which is typed by a relation entity, a link references
+ * a relation that has the type of the source instance as a conforming domain and the type of the target instance 
+ * as a conforming range.
+ */
+@Bikeshed(heading="Assertions")
+class LinkAssertion extends Assertion {
+    /*
+     * The relation referenced by this link
+     */
+    refers Relation[1] relation
+    /*
+     * The named instance that is target of this link
+     */
+    refers NamedInstance[1] target
+    /*
+     * The named instance that is the source of this link
+     */
+    container NamedInstance[?] owningInstance opposite ownedLinks
+    /*
+     * The reference to a named instance that this the source of this link
+     */
+    container NamedInstanceReference[?] owningReference opposite ownedLinks
+}
+
+////////////////////////////////////////
+//  Predicates
+////////////////////////////////////////
+
+/*
+ * UnaryPredicate is a predicate that binds one variable
+ */
+@Bikeshed(heading="Rules")
+abstract class UnaryPredicate extends Predicate {
+    /*
+     * The variable name specified by the predicate
+     */
+    ID[1] variable
+}
+
+/*
+ * BinaryPredicate is a predicate that takes two arguments: the first is a `variable1` to match to some 
+ * instance, and the second is either a `variable2` to match to some instance or a specific `instance2`.
+ */
+@Bikeshed(heading="Rules")
+abstract class BinaryPredicate extends Predicate {
+    /*
+     * The variable1 specified by the predicate
+     */
+    ID[1] variable1
+    /*
+     * The optional variable2 specified by the predicate
+     */
+    ID[?] variable2
+    /*
+     * The optional instance2 specified by the predicate
+     */
+    refers NamedInstance[?] instance2
+}
+
+////////////////////////////////////////
+//  Unary Predicates
+////////////////////////////////////////
+
+/*
+ * TypePredicate is a unary predicate that binds its variable to an instance with a specific type.
+ */
+@Bikeshed(heading="Rules")
+class TypePredicate extends UnaryPredicate {
+    /*
+     * The type of the instance
+     */
+    refers Type[1] ^type
+}
+
+/*
+ * RelationEntityPredicate is a binary predicate that binds its `entityVariable` to a relation instance,
+ * its `variable1` to the source of that relation instance, and either its `variable2` or `instance2` as the target of
+ * that relation instance.
+ */
+@Bikeshed(heading="Rules")
+class RelationEntityPredicate extends BinaryPredicate {
+    /*
+     * The type of the relation instance
+     */
+    refers RelationEntity[1] entity
+    /*
+     * The entity variable specified by the predicate
+     */
+    ID[1] entityVariable
+}
+
+////////////////////////////////////////
+//  Unary Predicates
+////////////////////////////////////////
+
+/*
+ * FeaturePredicate is a binary predicate that binds its `variable1` to an instance (subject), and either its 
+ `variable2`, `instance2`, or `literal2` as the value (object) of a specific feature (predicate). 
+ */
+@Bikeshed(heading="Rules")
+class FeaturePredicate extends BinaryPredicate {
+    /*
+     * The feature of the named instance whose value is bound or matched
+     */
+    refers Feature[1] feature
+    /*
+     * The optional literal2 that is matched as a value of the feature
+     */
+    contains Literal[?] literal2
+}
+
+/*
+ * SameAsPredicate is a binary predicate that checks that its two arguments bind to the same instance
+ */
+@Bikeshed(heading="Rules")
+class SameAsPredicate extends BinaryPredicate {
+}
+
+/*
+ * DifferentFromPredicate is a binary predicate that checks that its two arguments bind to different instances
+ */
+@Bikeshed(heading="Rules")
+class DifferentFromPredicate extends BinaryPredicate {
+}
+
+////////////////////////////////////////
+//  Literals
+////////////////////////////////////////
+
+/*
+ * QuotedLiteral is a literal that specifies its lexical value as a quoted string along with a language tag, a scalar type, or neither.
+ */
+@Bikeshed(heading="Literals")
+class QuotedLiteral extends Literal  {
+    /*
+     * The value of this literal represented as a string
+     */
+    String[1] value
+    /*
+     * The langTag of this literal
+     */
+    String[?] langTag
+    /*
+     * The scalar that is the type of this literal
+     */
+    refers Scalar[?] ^type
+}
+
+/*
+ * IntegerLiteral is a literal that represents a 32-bit integer value
+ */
+@Bikeshed(heading="Literals")
+class IntegerLiteral extends Literal  {
+    /*
+     * The int value of this literal
+     */
+    int value
+}
+
+/*
+ * DecimalLiteral is a literal that represents an arbitrary precision decimal value
+ */
+@Bikeshed(heading="Literals")
+class DecimalLiteral extends Literal  {
+    /*
+     * The decimal value of this literal
+     */
+    Decimal[1] value
+}
+
+/*
+ * DoubleLiteral is a literal that represents a 64-bit double precision floating point value
+ */
+@Bikeshed(heading="Literals")
+class DoubleLiteral extends Literal  {
+    double value
+}
+
+/*
+ * BooleanLiteral is a literal that represents the boolean values true/false
+ */
+@Bikeshed(heading="Literals")
+class BooleanLiteral extends Literal {
+    /*
+     * The boolean value of this literal
+     */
+    boolean value
+}
+
+////////////////////////////////////////
+//  References
+////////////////////////////////////////
 
 /*
  * Reference is an element that references a member of an ontology, in order to add other annotations to it.
@@ -992,764 +1886,9 @@ class RelationInstanceReference extends NamedInstanceReference {
     contains RelationTypeAssertion[*] ownedTypes opposite owningReference
 }
 
-/*
- * Statement represents an expression of information in an ontology.  
- */
-@Bikeshed(heading="Elements")
-abstract class Statement extends Element {
-}
-
-/*
- * VocabularyStatement is a statement owned by a vocabulary.
- */
-@Bikeshed(heading="Vocabularies")
-abstract class VocabularyStatement extends Statement {
-    /*
-     * The vocabulary that owns this statement
-     */
-    container Vocabulary[1] owningVocabulary opposite ownedStatements
-}
-
-/*
- * DescriptionStatement is a statement owned by a description.
- */
-@Bikeshed(heading="Descriptions")
-abstract class DescriptionStatement extends Statement {
-    /*
-     * The description that owns this statement
-     */
-    container Description[1] owningDescription opposite ownedStatements
-}
-
-/*
- * Import is an annotated element owned by an ontology to specify that it imports another ontology.
- * The imported ontology is specified by its IRI, and optionally a separator character and local prefix
- * if members of the imported ontology will also be referenced by the importing ontology
- */
-@Bikeshed(heading="Elements")
-abstract class Import extends AnnotatedElement {
-    /*
-     * The namespace of the imported ontology
-     */
-    Namespace[1] namespace
-    /*
-     * The local prefix of the imported ontology's namespace
-     */
-    ID[?] prefix
-    /*
-     * Get the import's iri
-     */
-    op String getIri() {
-    	if (namespace === null) {
-    		return null
-    	}
-     	var i = namespace.indexOf('#')
-    	if (i === -1) {
-    		i = namespace.lastIndexOf('/')
-    	}
-    	if (i === -1) {
-        	return namespace
-       	} else {
-       		return namespace.substring(0, i)
-       	}
-    }
-    /*
-     * Get the import's separator char
-     */
-    op SeparatorKind getSeparator() {
-     	if (namespace === null) {
-    		return null
-    	}
-    	var i = namespace.indexOf('#')
-    	if (i === -1) {
-    		i = namespace.lastIndexOf('/')
-    	}
-    	if (i === -1) {
-       		return null
-       	} else {
-        	return SeparatorKind.get(namespace.substring(i, i+1))
-       	}
-    }
-}
-
-/*
- * VocabularyImport is an import owned by a vocabulary.
- */
-@Bikeshed(heading="Vocabularies")
-abstract class VocabularyImport extends Import {
-    /*
-     * The vocabulary that owns this import
-     */
-    container Vocabulary[1] owningVocabulary opposite ownedImports
-}
-
-/*
- * VocabularyExtension is an import that allows a vocabulary to extend another vocabulary. 
- */
-@Bikeshed(heading="Vocabularies")
-class VocabularyExtension extends VocabularyImport {
-}
-
-/*
- * VocabularyUsage is an import that allows a vocabulary to use a description box.
- */
-@Bikeshed(heading="Vocabularies")
-class VocabularyUsage extends VocabularyImport {
-}
-
-/*
- * VocabularyBundleImport is an import owned by a vocabulary bundle.
- */
-@Bikeshed(heading="Vocabularies")
-abstract class VocabularyBundleImport extends Import {
-    /*
-     * The vocabulary bundle that contains this import
-     */
-    container VocabularyBundle[1] owningVocabularyBundle opposite ownedImports
-}
-
-/*
- * VocabularyBundleExtension is an import that allows a vocabulary bundle to extend another vocabulary bundle.
- */
-@Bikeshed(heading="Vocabularies")
-class VocabularyBundleExtension extends VocabularyBundleImport {
-}
-
-/*
- * VocabularyBundleInclusion is an import that allows a vocabulary bundle to include a vocabulary. 
- */
-@Bikeshed(heading="Vocabularies")
-class VocabularyBundleInclusion extends VocabularyBundleImport {
-}
-
-/*
- * DescriptionImport is an import owned by a description.
- */
-@Bikeshed(heading="Descriptions")
-abstract class DescriptionImport extends Import {
-    /*
-     * The description that owns this import
-     */
-    container Description[1] owningDescription opposite ownedImports
-}
-
-/*
- * DescriptionExtension is an import that allows a description to extend another description.
- */
-@Bikeshed(heading="Descriptions")
-class DescriptionExtension extends DescriptionImport {
-}
-
-/*
- * DescriptionUsage is an import that allows a description to use a vocabulary box.
- */
-@Bikeshed(heading="Descriptions")
-class DescriptionUsage extends DescriptionImport {
-}
-
-/*
- * DescriptionBundleImport is an import owned by  description bundle.
- */
-@Bikeshed(heading="Descriptions")
-abstract class DescriptionBundleImport extends Import {
-    /*
-     * The description bundle that owns this import
-     */
-    container DescriptionBundle[1] owningDescriptionBundle opposite ownedImports
-}
-
-/*
- * DescriptionBundleExtension is an import that allows a description bundle to extend another description bundle.
- */
-@Bikeshed(heading="Descriptions")
-class DescriptionBundleExtension extends DescriptionBundleImport {
-}
-
-/*
- * DescriptionBundleInclusion is an import that allows a description bundle to include a description.
- */
-@Bikeshed(heading="Descriptions")
-class DescriptionBundleInclusion extends DescriptionBundleImport {
-}
-
-/*
- * DescriptionBundleUsage is an import that allows a description bundle to use a vocabulary box.
- */
-@Bikeshed(heading="Descriptions")
-class DescriptionBundleUsage extends DescriptionBundleImport {
-}
-
-/*
- * Axiom is an annotated element that represents a statement about a term in a vocabulary.
- */
-@Bikeshed(heading="Axioms")
-abstract class Axiom extends Element {
-}
-
-/*
- * SpecializationAxiom is an axiom that states that one specializable term specializes another. It can be specified directly on
- * a specializing term or indirectly on a reference to one.
- */
-@Bikeshed(heading="Axioms")
-class SpecializationAxiom extends Axiom {
-    /*
-     * The specialized term specified by this axiom 
-     */
-    refers SpecializableTerm[1] specializedTerm
-    /*
-     * The specializing term specified by this axiom 
-     */
-    container SpecializableTerm[?] owningTerm opposite ownedSpecializations
-    /*
-     * The reference to a specializing term specified by this axiom 
-     */
-    container SpecializableTermReference[?] owningReference opposite ownedSpecializations
-}
-
-/*
- * RestrictionAxiom is an axiom that states that a term restricts another term.
- */
-@Bikeshed(heading="Axioms")
-abstract class RestrictionAxiom extends Axiom {
-}
-
-/*
- * PropertyRestrictionAxiom is an axiom that places some restriction on the value of a property in the context of
- * the restricting classifier domain. It can be specified directly on the classifier or indirectly on a reference to it.
- */
-@Bikeshed(heading="Axioms")
-abstract class PropertyRestrictionAxiom extends RestrictionAxiom {
-    /*
-     * The restricting classifier specified by this axiom
-     */
-    container Classifier[?] owningClassifier opposite ownedPropertyRestrictions
-    /*
-     * The reference to a restricting classifier specified by this axiom
-     */
-    container ClassifierReference[?] owningReference opposite ownedPropertyRestrictions
-}
-
-/*
- * ScalarPropertyRestrictionAxiom is a property restriction axiom that is specified on a scalar property.
- */
-@Bikeshed(heading="Axioms")
-abstract class ScalarPropertyRestrictionAxiom extends PropertyRestrictionAxiom {
-    /*
-     * The restricted scalar property specified by this axiom
-     */
-    refers ScalarProperty[1] property
-}
-
-/*
- * ScalarPropertyRangeRestrictionAxiom is a scalar property restriction axiom that restricts the range of a property to
- * a scalar that specializes the original range. This restrictions may apply to all or to some values of the property
- * that have the restricting classifier as a domain.
- */
-@Bikeshed(heading="Axioms")
-class ScalarPropertyRangeRestrictionAxiom extends ScalarPropertyRestrictionAxiom {
-    /*
-     * The restricted range specified by this axiom
-     */
-    refers Scalar[1] range
-    /*
-     * The range restriction kind specified by this axiom (default is all)
-     */
-    RangeRestrictionKind[1] kind
-}
-
-/*
- * ScalarPropertyCardinalityRestrictionAxiom is a scalar property restriction axiom that restricts the cardinality of a scalar
- * property to an exact number, a minimum number or a maximum number. This restrictions can apply to all values of the property 
- * that have the restricting classifier as a domain, or to those values classified by a specific range subtype.
- */
-@Bikeshed(heading="Axioms")
-class ScalarPropertyCardinalityRestrictionAxiom extends ScalarPropertyRestrictionAxiom {
-    /*
-     * The value of the cardinality specified by this axiom (default is 1)
-     */
-    UnsignedInt[1] cardinality = "1"
-    /*
-     * The kind of cardinality restriction specified by this axiom (default is exactly)
-     */
-    CardinalityRestrictionKind[1] kind
-    /*
-     * The restricted range specified by this axiom
-     */
-    refers Scalar[?] range
-}
-
-/*
- * ScalarPropertyValueRestrictionAxiom is a scalar property restriction axiom that restricts the value of the property 
- * that has the restricting classifier as a domain to a specific literal.
- */
-@Bikeshed(heading="Axioms")
-class ScalarPropertyValueRestrictionAxiom extends ScalarPropertyRestrictionAxiom {
-    /*
-     * The literal specified as a restricted property value by this axiom 
-     */
-    contains Literal[1] value
-}
-
-/*
- * StructuredPropertyRestrictionAxiom is a property restriction axiom that is specified on a structured property.
- */
-@Bikeshed(heading="Axioms")
-abstract class StructuredPropertyRestrictionAxiom extends PropertyRestrictionAxiom {
-    /*
-     * The restricted structured property specified by this axiom
-     */
-    refers StructuredProperty[1] property
-}
-
-/*
- * StructuredPropertyRangeRestrictionAxiom is a structured property restriction axiom that restricts the range of a property 
- * to a structure that specializes the original range. This restrictions may apply to all or to some values of the 
- * property that have the restricting classifier as a domain.
- */
-@Bikeshed(heading="Axioms")
-class StructuredPropertyRangeRestrictionAxiom extends StructuredPropertyRestrictionAxiom {
-    /*
-     * The restricted range specified by this axiom
-     */
-    refers Structure[1] range
-    /*
-     * The range restriction kind specified by this axiom (default is all)
-     */
-    RangeRestrictionKind[1] kind
-}
-
-/*
- * StructuredPropertyCardinalityRestrictionAxiom is a structured property restriction axiom that restricts the cardinality of 
- * a structured property to an exact number, a minimum number or a maximum number. This restrictions can apply to all values 
- * of the property that have the restricting classifier as a domain, or to those values classified by a specific range subtype.
- */
-@Bikeshed(heading="Axioms")
-class StructuredPropertyCardinalityRestrictionAxiom extends StructuredPropertyRestrictionAxiom {
-    /*
-     * The value of the cardinality specified by this axiom (default is 1)
-     */
-    UnsignedInt[1] cardinality = "1"
-    /*
-     * The kind of cardinality restriction specified by this axiom (default is exactly)
-     */
-    CardinalityRestrictionKind[1] kind
-    /*
-     * The restricted range specified by this axiom
-     */
-    refers Structure[?] range
-}
-
-/*
- * StructuredPropertyValueRestrictionAxiom is a structured property restriction axiom that restricts the value of the property
- * that has the restricting classifier as a domain to a specific structure instance.
- */
-@Bikeshed(heading="Axioms")
-class StructuredPropertyValueRestrictionAxiom extends StructuredPropertyRestrictionAxiom {
-    /*
-     * The structure instance specified as a restricted property value by this axiom 
-     */
-    contains StructureInstance[1] value opposite owningAxiom
-}
-
-/*
- * RelationRestrictionAxiom is an axiom that places some restriction on the target of a relation in the context of
- * the restricting classifier domain. It can be specified directly on the classifier or indirectly on a reference to it.
- */
-@Bikeshed(heading="Axioms")
-abstract class RelationRestrictionAxiom extends RestrictionAxiom {
-    /*
-     * The restricted relation specified by this axiom
-     */
-    refers Relation[1] relation
-    /*
-     * The restricting entity specified by this axiom
-     */
-    container Entity[?] owningEntity opposite ownedRelationRestrictions
-    /*
-     * The reference to a restricting entity specified by this axiom
-     */
-    container EntityReference[?] owningReference opposite ownedRelationRestrictions
-}
-
-/*
- * RelationRangeRestrictionAxiom is a relation restriction axiom that restricts the range of a relation to specific subtype. 
- * This restrictions may apply to all or to some instances of the relation that have an instance of the restricting entity as 
- * a source.
- */
-@Bikeshed(heading="Axioms")
-class RelationRangeRestrictionAxiom extends RelationRestrictionAxiom {
-    /*
-     * The restricted range specified by this axiom
-     */
-    refers Entity[1] range
-    /*
-     * The range restriction kind specified by this axiom (default is all)
-     */
-    RangeRestrictionKind[1] kind
-}
-
-/*
- * RelationCardinalityRestrictionAxiom is a relation restriction axiom that restricts the cardinality of a relation's range
- * to an exact number, a minimum number or a maximum number. This restrictions may either apply generally to all targets of 
- * of the relation that have instances of the restricting entity as sources, or to those classified by a specific range subtype.
- */
-@Bikeshed(heading="Axioms")
-class RelationCardinalityRestrictionAxiom extends RelationRestrictionAxiom {
-    /*
-     * The value of the cardinality specified by this axiom (default is 1)
-     */
-    UnsignedInt[1] cardinality = "1"
-    /*
-     * The kind of cardinality restriction specified by this axiom (default is exactly)
-     */
-    CardinalityRestrictionKind[1] kind
-    /*
-     * The restricted range specified by this axiom
-     */
-    refers Entity[?] range
-}
-
-/*
- * RelationTargetRestrictionAxiom is a relation restriction axiom that restricts the target of the relation
- * to a specific named instance.
- */
-@Bikeshed(heading="Axioms")
-class RelationTargetRestrictionAxiom extends RelationRestrictionAxiom {
-    /*
-     * The named instance specified as a restricted relation target by this axiom 
-     */
-    refers NamedInstance[1] target
-}
-
-/*
- * KeyAxiom is an axiom that states that a set of features form a unique key for an entity. This means that all 
- * instances of that entity must have unique values for those keys.
- */
-@Bikeshed(heading="Axioms")
-class KeyAxiom extends Axiom {
-    /*
-     * The set of features specified by this axiom as a key
-     */
-    refers Feature[+] properties
-    /*
-     * The entity that owns this axiom
-     */
-    container Entity[?] owningEntity opposite ownedKeys
-    /*
-     * The reference to an entity that owns this axiom
-     */
-    container EntityReference[?] owningReference opposite ownedKeys
-}
-
-/*
- * Assertion is an element that represents a statement about an instance in a description.
- */
-@Bikeshed(heading="Assertions")
-abstract class Assertion extends Element {
-}
-
-/*
- * TypeAssertion is an assertion that specifies a type for an instance 
- */
-@Bikeshed(heading="Assertions")
-abstract class TypeAssertion extends Assertion {
-    /*
-     * Gets the type referenced by this assertion
-     */
-    op Entity getType()
-}
-
-/*
- * ConceptTypeAssertion is a type assertion specifying a type for a concept instance. It can be specified directly on an
- * concept instance, or indirectly on a reference to one. 
- */
-@Bikeshed(heading="Assertions")
-class ConceptTypeAssertion extends TypeAssertion {
-    /*
-     * The concept specified as the type of the instance
-     */
-    refers Concept[1] ^type
-    /*
-     * The instance that this type assertion is about
-     */
-    container ConceptInstance[?] owningInstance opposite ownedTypes
-    /*
-     * The reference to a concept instance that this type assertion is about
-     */
-    container ConceptInstanceReference[?] owningReference opposite ownedTypes
-}
-
-/*
- * RelationTypeAssertion is a type assertion specifying a relation entity as a type of a relation instance. It can be specified 
- * directly on a relation instance, or indirectly on a reference to one.
- */
-@Bikeshed(heading="Assertions")
-class RelationTypeAssertion extends TypeAssertion {
-    /*
-     * The relation entity that is the type of the relation instance
-     */
-    refers RelationEntity[1] ^type
-    /*
-     * The relation instance that this type assertion is about
-     */
-    container RelationInstance[?] owningInstance opposite ownedTypes
-    /*
-     * The reference to a relation instance that this type assertion is about
-     */
-    container RelationInstanceReference[?] owningReference opposite ownedTypes
-}
-
-/*
- * PropertyValueAssertion is an assertion that specifies a value for a property on an instance.
- */
-@Bikeshed(heading="Assertions")
-abstract class PropertyValueAssertion extends Assertion {
-    /*
-     * The instance that this property value assertion is about
-     */
-    container Instance[?] owningInstance opposite ownedPropertyValues
-    /*
-     * The reference to an instance that this property value assertion is about
-     */
-    container NamedInstanceReference[?] owningReference opposite ownedPropertyValues
-    /*
-     * Gets the property referenced by this assertion
-     */
-    op SemanticProperty getProperty()
-    /*
-     * Gets the value specified by this assertion
-     */
-    op Element getValue()
-}
-
-/*
- * ScalarPropertyValueAssertion is a property value assertion for a scalar property, where the specified value is a literal.
- */
-@Bikeshed(heading="Assertions")
-class ScalarPropertyValueAssertion extends PropertyValueAssertion {
-    /*
-     * The scalar property specified by this assertion
-     */
-    refers ScalarProperty[1] property
-    /*
-     * The literal specified by this assertion as a value
-     */
-    contains Literal[1] value
-}
-
-/*
- * StructuredPropertyValueAssertion is a property value assertion for a structured property, where the specified value is a
- * structure instance.
- */
-@Bikeshed(heading="Assertions")
-class StructuredPropertyValueAssertion extends PropertyValueAssertion {
-    /*
-     * The structured property specified by this assertion
-     */
-    refers StructuredProperty[1] property
-    /*
-     * The structure instance specified by this assertion as a value
-     */
-    contains StructureInstance[1] value opposite owningAssertion
-}
-
-/*
- * LinkAssertion is an assertion that specifies a link from the asserting named instance as a source to another 
- * named instance as a target. Unlike a relation instance, which is typed by a relation entity, a link references
- * a relation that has the type of the source instance as a conforming domain and the type of the target instance 
- * as a conforming range.
- */
-@Bikeshed(heading="Assertions")
-class LinkAssertion extends Assertion {
-    /*
-     * The relation referenced by this link
-     */
-    refers Relation[1] relation
-    /*
-     * The named instance that is target of this link
-     */
-    refers NamedInstance[1] target
-    /*
-     * The named instance that is the source of this link
-     */
-    container NamedInstance[?] owningInstance opposite ownedLinks
-    /*
-     * The reference to a named instance that this the source of this link
-     */
-    container NamedInstanceReference[?] owningReference opposite ownedLinks
-}
-
-/*
- * Predicate is an element that represents an ontology statement to match, when used in a rule's antecedent, 
- * or to infer, when used in a rule's consequent.
- */
-@Bikeshed(heading="Rules")
-abstract class Predicate extends Element {
-    /*
-     * The rule that specifies this predicate in its antecedent
-     */
-    container Rule[?] antecedentRule opposite antecedent
-    /*
-     * The rule that specifies this predicate in its consequent
-     */
-    container Rule[?] consequentRule opposite consequent
-}
-
-/*
- * UnaryPredicate is a predicate that binds one variable
- */
-@Bikeshed(heading="Rules")
-abstract class UnaryPredicate extends Predicate {
-    /*
-     * The variable name specified by the predicate
-     */
-    ID[1] variable
-}
-
-/*
- * TypePredicate is a unary predicate that binds its variable to an instance with a specific type.
- */
-@Bikeshed(heading="Rules")
-class TypePredicate extends UnaryPredicate {
-    /*
-     * The type of the instance
-     */
-    refers Type[1] ^type
-}
-
-/*
- * BinaryPredicate is a predicate that takes two arguments: the first is a `variable1` to match to some 
- * instance, and the second is either a `variable2` to match to some instance or a specific `instance2`.
- */
-@Bikeshed(heading="Rules")
-abstract class BinaryPredicate extends Predicate {
-    /*
-     * The variable1 specified by the predicate
-     */
-    ID[1] variable1
-    /*
-     * The optional variable2 specified by the predicate
-     */
-    ID[?] variable2
-    /*
-     * The optional instance2 specified by the predicate
-     */
-    refers NamedInstance[?] instance2
-}
-
-/*
- * RelationEntityPredicate is a binary predicate that binds its `entityVariable` to a relation instance,
- * its `variable1` to the source of that relation instance, and either its `variable2` or `instance2` as the target of
- * that relation instance.
- */
-@Bikeshed(heading="Rules")
-class RelationEntityPredicate extends BinaryPredicate {
-    /*
-     * The type of the relation instance
-     */
-    refers RelationEntity[1] entity
-    /*
-     * The entity variable specified by the predicate
-     */
-    ID[1] entityVariable
-}
-
-/*
- * FeaturePredicate is a binary predicate that binds its `variable1` to an instance (subject), and either its 
- `variable2`, `instance2`, or `literal2` as the value (object) of a specific feature (predicate). 
- */
-@Bikeshed(heading="Rules")
-class FeaturePredicate extends BinaryPredicate {
-    /*
-     * The feature of the named instance whose value is bound or matched
-     */
-    refers Feature[1] feature
-    /*
-     * The optional literal2 that is matched as a value of the feature
-     */
-    contains Literal[?] literal2
-}
-
-/*
- * SameAsPredicate is a binary predicate that checks that its two arguments bind to the same instance
- */
-@Bikeshed(heading="Rules")
-class SameAsPredicate extends BinaryPredicate {
-}
-
-/*
- * DifferentFromPredicate is a binary predicate that checks that its two arguments bind to different instances
- */
-@Bikeshed(heading="Rules")
-class DifferentFromPredicate extends BinaryPredicate {
-}
-
-/*
- * Literal is an element that represents a specific literal value classified by a scalar.
- */
-@Bikeshed(heading="Literals")
-abstract class Literal extends Element {
-}
-
-/*
- * QuotedLiteral is a literal that specifies its lexical value as a quoted string along with a language tag, a scalar type, or neither.
- */
-@Bikeshed(heading="Literals")
-class QuotedLiteral extends Literal  {
-    /*
-     * The value of this literal represented as a string
-     */
-    String[1] value
-    /*
-     * The langTag of this literal
-     */
-    String[?] langTag
-    /*
-     * The scalar that is the type of this literal
-     */
-    refers Scalar[?] ^type
-}
-
-/*
- * IntegerLiteral is a literal that represents a 32-bit integer value
- */
-@Bikeshed(heading="Literals")
-class IntegerLiteral extends Literal  {
-    /*
-     * The int value of this literal
-     */
-    int value
-}
-
-/*
- * DecimalLiteral is a literal that represents an arbitrary precision decimal value
- */
-@Bikeshed(heading="Literals")
-class DecimalLiteral extends Literal  {
-    /*
-     * The decimal value of this literal
-     */
-    Decimal[1] value
-}
-
-/*
- * DoubleLiteral is a literal that represents a 64-bit double precision floating point value
- */
-@Bikeshed(heading="Literals")
-class DoubleLiteral extends Literal  {
-    double value
-}
-
-/*
- * BooleanLiteral is a literal that represents the boolean values true/false
- */
-@Bikeshed(heading="Literals")
-class BooleanLiteral extends Literal {
-    /*
-     * The boolean value of this literal
-     */
-    boolean value
-}
+////////////////////////////////////////
+//  Enumerations
+////////////////////////////////////////
 
 /*
  * SeparatorKind is an enumeration that specifies the separator character of an ontology's namespace. It can either
@@ -1794,6 +1933,10 @@ enum CardinalityRestrictionKind {
      */
     max = 2
 }
+
+////////////////////////////////////////
+//  Primitive Types
+////////////////////////////////////////
 
 @ExtendedMetaData(minInclusive="0", maxInclusive="4294967295")
 type UnsignedInt wraps long

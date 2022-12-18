@@ -83,258 +83,6 @@ public interface OmlFactory extends EFactory {
 	DescriptionBundle createDescriptionBundle();
 
 	/**
-	 * Returns a new object of class '<em>Aspect</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Aspect</em>'.
-	 * @generated
-	 */
-	Aspect createAspect();
-
-	/**
-	 * Returns a new object of class '<em>Concept</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Concept</em>'.
-	 * @generated
-	 */
-	Concept createConcept();
-
-	/**
-	 * Returns a new object of class '<em>Relation Entity</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Relation Entity</em>'.
-	 * @generated
-	 */
-	RelationEntity createRelationEntity();
-
-	/**
-	 * Returns a new object of class '<em>Structure</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Structure</em>'.
-	 * @generated
-	 */
-	Structure createStructure();
-
-	/**
-	 * Returns a new object of class '<em>Annotation Property</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Annotation Property</em>'.
-	 * @generated
-	 */
-	AnnotationProperty createAnnotationProperty();
-
-	/**
-	 * Returns a new object of class '<em>Scalar Property</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Scalar Property</em>'.
-	 * @generated
-	 */
-	ScalarProperty createScalarProperty();
-
-	/**
-	 * Returns a new object of class '<em>Structured Property</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Structured Property</em>'.
-	 * @generated
-	 */
-	StructuredProperty createStructuredProperty();
-
-	/**
-	 * Returns a new object of class '<em>Faceted Scalar</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Faceted Scalar</em>'.
-	 * @generated
-	 */
-	FacetedScalar createFacetedScalar();
-
-	/**
-	 * Returns a new object of class '<em>Enumerated Scalar</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Enumerated Scalar</em>'.
-	 * @generated
-	 */
-	EnumeratedScalar createEnumeratedScalar();
-
-	/**
-	 * Returns a new object of class '<em>Forward Relation</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Forward Relation</em>'.
-	 * @generated
-	 */
-	ForwardRelation createForwardRelation();
-
-	/**
-	 * Returns a new object of class '<em>Reverse Relation</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Reverse Relation</em>'.
-	 * @generated
-	 */
-	ReverseRelation createReverseRelation();
-
-	/**
-	 * Returns a new object of class '<em>Rule</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Rule</em>'.
-	 * @generated
-	 */
-	Rule createRule();
-
-	/**
-	 * Returns a new object of class '<em>Structure Instance</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Structure Instance</em>'.
-	 * @generated
-	 */
-	StructureInstance createStructureInstance();
-
-	/**
-	 * Returns a new object of class '<em>Concept Instance</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Concept Instance</em>'.
-	 * @generated
-	 */
-	ConceptInstance createConceptInstance();
-
-	/**
-	 * Returns a new object of class '<em>Relation Instance</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Relation Instance</em>'.
-	 * @generated
-	 */
-	RelationInstance createRelationInstance();
-
-	/**
-	 * Returns a new object of class '<em>Aspect Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Aspect Reference</em>'.
-	 * @generated
-	 */
-	AspectReference createAspectReference();
-
-	/**
-	 * Returns a new object of class '<em>Concept Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Concept Reference</em>'.
-	 * @generated
-	 */
-	ConceptReference createConceptReference();
-
-	/**
-	 * Returns a new object of class '<em>Relation Entity Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Relation Entity Reference</em>'.
-	 * @generated
-	 */
-	RelationEntityReference createRelationEntityReference();
-
-	/**
-	 * Returns a new object of class '<em>Structure Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Structure Reference</em>'.
-	 * @generated
-	 */
-	StructureReference createStructureReference();
-
-	/**
-	 * Returns a new object of class '<em>Annotation Property Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Annotation Property Reference</em>'.
-	 * @generated
-	 */
-	AnnotationPropertyReference createAnnotationPropertyReference();
-
-	/**
-	 * Returns a new object of class '<em>Scalar Property Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Scalar Property Reference</em>'.
-	 * @generated
-	 */
-	ScalarPropertyReference createScalarPropertyReference();
-
-	/**
-	 * Returns a new object of class '<em>Structured Property Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Structured Property Reference</em>'.
-	 * @generated
-	 */
-	StructuredPropertyReference createStructuredPropertyReference();
-
-	/**
-	 * Returns a new object of class '<em>Faceted Scalar Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Faceted Scalar Reference</em>'.
-	 * @generated
-	 */
-	FacetedScalarReference createFacetedScalarReference();
-
-	/**
-	 * Returns a new object of class '<em>Enumerated Scalar Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Enumerated Scalar Reference</em>'.
-	 * @generated
-	 */
-	EnumeratedScalarReference createEnumeratedScalarReference();
-
-	/**
-	 * Returns a new object of class '<em>Relation Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Relation Reference</em>'.
-	 * @generated
-	 */
-	RelationReference createRelationReference();
-
-	/**
-	 * Returns a new object of class '<em>Rule Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Rule Reference</em>'.
-	 * @generated
-	 */
-	RuleReference createRuleReference();
-
-	/**
-	 * Returns a new object of class '<em>Concept Instance Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Concept Instance Reference</em>'.
-	 * @generated
-	 */
-	ConceptInstanceReference createConceptInstanceReference();
-
-	/**
-	 * Returns a new object of class '<em>Relation Instance Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Relation Instance Reference</em>'.
-	 * @generated
-	 */
-	RelationInstanceReference createRelationInstanceReference();
-
-	/**
 	 * Returns a new object of class '<em>Vocabulary Extension</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -414,6 +162,150 @@ public interface OmlFactory extends EFactory {
 	 * @generated
 	 */
 	DescriptionBundleUsage createDescriptionBundleUsage();
+
+	/**
+	 * Returns a new object of class '<em>Rule</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Rule</em>'.
+	 * @generated
+	 */
+	Rule createRule();
+
+	/**
+	 * Returns a new object of class '<em>Structure</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Structure</em>'.
+	 * @generated
+	 */
+	Structure createStructure();
+
+	/**
+	 * Returns a new object of class '<em>Aspect</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Aspect</em>'.
+	 * @generated
+	 */
+	Aspect createAspect();
+
+	/**
+	 * Returns a new object of class '<em>Concept</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Concept</em>'.
+	 * @generated
+	 */
+	Concept createConcept();
+
+	/**
+	 * Returns a new object of class '<em>Relation Entity</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Relation Entity</em>'.
+	 * @generated
+	 */
+	RelationEntity createRelationEntity();
+
+	/**
+	 * Returns a new object of class '<em>Faceted Scalar</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Faceted Scalar</em>'.
+	 * @generated
+	 */
+	FacetedScalar createFacetedScalar();
+
+	/**
+	 * Returns a new object of class '<em>Enumerated Scalar</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Enumerated Scalar</em>'.
+	 * @generated
+	 */
+	EnumeratedScalar createEnumeratedScalar();
+
+	/**
+	 * Returns a new object of class '<em>Annotation Property</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Annotation Property</em>'.
+	 * @generated
+	 */
+	AnnotationProperty createAnnotationProperty();
+
+	/**
+	 * Returns a new object of class '<em>Scalar Property</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Scalar Property</em>'.
+	 * @generated
+	 */
+	ScalarProperty createScalarProperty();
+
+	/**
+	 * Returns a new object of class '<em>Structured Property</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Structured Property</em>'.
+	 * @generated
+	 */
+	StructuredProperty createStructuredProperty();
+
+	/**
+	 * Returns a new object of class '<em>Forward Relation</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Forward Relation</em>'.
+	 * @generated
+	 */
+	ForwardRelation createForwardRelation();
+
+	/**
+	 * Returns a new object of class '<em>Reverse Relation</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Reverse Relation</em>'.
+	 * @generated
+	 */
+	ReverseRelation createReverseRelation();
+
+	/**
+	 * Returns a new object of class '<em>Concept Instance</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Concept Instance</em>'.
+	 * @generated
+	 */
+	ConceptInstance createConceptInstance();
+
+	/**
+	 * Returns a new object of class '<em>Relation Instance</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Relation Instance</em>'.
+	 * @generated
+	 */
+	RelationInstance createRelationInstance();
+
+	/**
+	 * Returns a new object of class '<em>Structure Instance</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Structure Instance</em>'.
+	 * @generated
+	 */
+	StructureInstance createStructureInstance();
+
+	/**
+	 * Returns a new object of class '<em>Key Axiom</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Key Axiom</em>'.
+	 * @generated
+	 */
+	KeyAxiom createKeyAxiom();
 
 	/**
 	 * Returns a new object of class '<em>Specialization Axiom</em>'.
@@ -504,15 +396,6 @@ public interface OmlFactory extends EFactory {
 	 * @generated
 	 */
 	RelationTargetRestrictionAxiom createRelationTargetRestrictionAxiom();
-
-	/**
-	 * Returns a new object of class '<em>Key Axiom</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Key Axiom</em>'.
-	 * @generated
-	 */
-	KeyAxiom createKeyAxiom();
 
 	/**
 	 * Returns a new object of class '<em>Concept Type Assertion</em>'.
@@ -648,6 +531,123 @@ public interface OmlFactory extends EFactory {
 	 * @generated
 	 */
 	BooleanLiteral createBooleanLiteral();
+
+	/**
+	 * Returns a new object of class '<em>Aspect Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Aspect Reference</em>'.
+	 * @generated
+	 */
+	AspectReference createAspectReference();
+
+	/**
+	 * Returns a new object of class '<em>Concept Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Concept Reference</em>'.
+	 * @generated
+	 */
+	ConceptReference createConceptReference();
+
+	/**
+	 * Returns a new object of class '<em>Relation Entity Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Relation Entity Reference</em>'.
+	 * @generated
+	 */
+	RelationEntityReference createRelationEntityReference();
+
+	/**
+	 * Returns a new object of class '<em>Structure Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Structure Reference</em>'.
+	 * @generated
+	 */
+	StructureReference createStructureReference();
+
+	/**
+	 * Returns a new object of class '<em>Annotation Property Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Annotation Property Reference</em>'.
+	 * @generated
+	 */
+	AnnotationPropertyReference createAnnotationPropertyReference();
+
+	/**
+	 * Returns a new object of class '<em>Scalar Property Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Scalar Property Reference</em>'.
+	 * @generated
+	 */
+	ScalarPropertyReference createScalarPropertyReference();
+
+	/**
+	 * Returns a new object of class '<em>Structured Property Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Structured Property Reference</em>'.
+	 * @generated
+	 */
+	StructuredPropertyReference createStructuredPropertyReference();
+
+	/**
+	 * Returns a new object of class '<em>Faceted Scalar Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Faceted Scalar Reference</em>'.
+	 * @generated
+	 */
+	FacetedScalarReference createFacetedScalarReference();
+
+	/**
+	 * Returns a new object of class '<em>Enumerated Scalar Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Enumerated Scalar Reference</em>'.
+	 * @generated
+	 */
+	EnumeratedScalarReference createEnumeratedScalarReference();
+
+	/**
+	 * Returns a new object of class '<em>Relation Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Relation Reference</em>'.
+	 * @generated
+	 */
+	RelationReference createRelationReference();
+
+	/**
+	 * Returns a new object of class '<em>Rule Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Rule Reference</em>'.
+	 * @generated
+	 */
+	RuleReference createRuleReference();
+
+	/**
+	 * Returns a new object of class '<em>Concept Instance Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Concept Instance Reference</em>'.
+	 * @generated
+	 */
+	ConceptInstanceReference createConceptInstanceReference();
+
+	/**
+	 * Returns a new object of class '<em>Relation Instance Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Relation Instance Reference</em>'.
+	 * @generated
+	 */
+	RelationInstanceReference createRelationInstanceReference();
 
 	/**
 	 * Returns the package supported by this factory.

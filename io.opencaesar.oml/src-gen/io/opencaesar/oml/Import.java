@@ -25,7 +25,7 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Import is an annotated element owned by an ontology to specify that it imports another ontology.
+ * Import is an element owned by an ontology to specify that it imports another ontology.
  * The imported ontology is specified by its IRI, and optionally a separator character and local prefix
  * if members of the imported ontology will also be referenced by the importing ontology
  * <!-- end-model-doc -->
@@ -43,7 +43,7 @@ package io.opencaesar.oml;
  *        annotation="https://tabatkins.github.io/bikeshed heading='Elements'"
  * @generated
  */
-public interface Import extends AnnotatedElement {
+public interface Import extends Element {
 	/**
 	 * Returns the value of the '<em><b>Namespace</b></em>' attribute.
 	 * <!-- begin-user-doc -->

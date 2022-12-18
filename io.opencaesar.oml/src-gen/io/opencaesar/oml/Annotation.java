@@ -124,20 +124,20 @@ public interface Annotation extends Element {
 
 	/**
 	 * Returns the value of the '<em><b>Owning Element</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.AnnotatedElement#getOwnedAnnotations <em>Owned Annotations</em>}'.
+	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.IdentifiedElement#getOwnedAnnotations <em>Owned Annotations</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * The annotated element that owns this annotation
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Owning Element</em>' container reference.
-	 * @see #setOwningElement(AnnotatedElement)
+	 * @see #setOwningElement(IdentifiedElement)
 	 * @see io.opencaesar.oml.OmlPackage#getAnnotation_OwningElement()
-	 * @see io.opencaesar.oml.AnnotatedElement#getOwnedAnnotations
+	 * @see io.opencaesar.oml.IdentifiedElement#getOwnedAnnotations
 	 * @model opposite="ownedAnnotations" transient="false"
 	 * @generated
 	 */
-	AnnotatedElement getOwningElement();
+	IdentifiedElement getOwningElement();
 
 	/**
 	 * Sets the value of the '{@link io.opencaesar.oml.Annotation#getOwningElement <em>Owning Element</em>}' container reference.
@@ -147,7 +147,7 @@ public interface Annotation extends Element {
 	 * @see #getOwningElement()
 	 * @generated
 	 */
-	void setOwningElement(AnnotatedElement value);
+	void setOwningElement(IdentifiedElement value);
 
 	/**
 	 * Returns the value of the '<em><b>Owning Reference</b></em>' container reference.

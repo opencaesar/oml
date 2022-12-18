@@ -18,7 +18,6 @@
  */
 package io.opencaesar.oml.impl;
 
-import io.opencaesar.oml.AnnotatedElement;
 import io.opencaesar.oml.Annotation;
 import io.opencaesar.oml.AnnotationProperty;
 import io.opencaesar.oml.AnnotationPropertyReference;
@@ -46,6 +45,7 @@ import io.opencaesar.oml.DescriptionBundleInclusion;
 import io.opencaesar.oml.DescriptionBundleUsage;
 import io.opencaesar.oml.DescriptionExtension;
 import io.opencaesar.oml.DescriptionImport;
+import io.opencaesar.oml.DescriptionMember;
 import io.opencaesar.oml.DescriptionStatement;
 import io.opencaesar.oml.DescriptionUsage;
 import io.opencaesar.oml.DifferentFromPredicate;
@@ -134,6 +134,7 @@ import io.opencaesar.oml.VocabularyBundleImport;
 import io.opencaesar.oml.VocabularyBundleInclusion;
 import io.opencaesar.oml.VocabularyExtension;
 import io.opencaesar.oml.VocabularyImport;
+import io.opencaesar.oml.VocabularyMember;
 import io.opencaesar.oml.VocabularyStatement;
 import io.opencaesar.oml.VocabularyUsage;
 
@@ -180,14 +181,56 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass annotatedElementEClass = null;
+	private EClass identifiedElementEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass identifiedElementEClass = null;
+	private EClass importEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass instanceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass statementEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass axiomEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass assertionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass predicateEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass literalEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -201,7 +244,21 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass memberEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass vocabularyBoxEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass descriptionBoxEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -222,13 +279,6 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass descriptionBoxEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass descriptionEClass = null;
 
 	/**
@@ -243,7 +293,119 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass memberEClass = null;
+	private EClass vocabularyImportEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass vocabularyBundleImportEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass descriptionImportEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass descriptionBundleImportEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass vocabularyExtensionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass vocabularyUsageEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass vocabularyBundleExtensionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass vocabularyBundleInclusionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass descriptionExtensionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass descriptionUsageEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass descriptionBundleExtensionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass descriptionBundleInclusionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass descriptionBundleUsageEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass vocabularyStatementEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass descriptionStatementEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass vocabularyMemberEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass descriptionMemberEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -257,7 +419,28 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass ruleEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass specializableTermEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass featureEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass propertyEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -278,7 +461,21 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass scalarEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass entityEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass structureEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -306,21 +503,14 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass structureEClass = null;
+	private EClass facetedScalarEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass featureEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass propertyEClass = null;
+	private EClass enumeratedScalarEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -355,27 +545,6 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass scalarEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass facetedScalarEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass enumeratedScalarEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass relationEClass = null;
 
 	/**
@@ -397,27 +566,6 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass ruleEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass instanceEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass structureInstanceEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass namedInstanceEClass = null;
 
 	/**
@@ -433,6 +581,258 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	private EClass relationInstanceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass structureInstanceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass keyAxiomEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass specializationAxiomEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass restrictionAxiomEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass propertyRestrictionAxiomEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass scalarPropertyRestrictionAxiomEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass scalarPropertyRangeRestrictionAxiomEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass scalarPropertyCardinalityRestrictionAxiomEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass scalarPropertyValueRestrictionAxiomEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass structuredPropertyRestrictionAxiomEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass structuredPropertyRangeRestrictionAxiomEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass structuredPropertyCardinalityRestrictionAxiomEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass structuredPropertyValueRestrictionAxiomEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass relationRestrictionAxiomEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass relationRangeRestrictionAxiomEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass relationCardinalityRestrictionAxiomEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass relationTargetRestrictionAxiomEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass typeAssertionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass conceptTypeAssertionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass relationTypeAssertionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass propertyValueAssertionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass scalarPropertyValueAssertionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass structuredPropertyValueAssertionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass linkAssertionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass unaryPredicateEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass binaryPredicateEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass typePredicateEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass relationEntityPredicateEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass featurePredicateEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass sameAsPredicateEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass differentFromPredicateEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass quotedLiteralEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass integerLiteralEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass decimalLiteralEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass doubleLiteralEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass booleanLiteralEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -559,398 +959,6 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	private EClass relationInstanceReferenceEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass statementEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass vocabularyStatementEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass descriptionStatementEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass importEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass vocabularyImportEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass vocabularyExtensionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass vocabularyUsageEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass vocabularyBundleImportEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass vocabularyBundleExtensionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass vocabularyBundleInclusionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass descriptionImportEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass descriptionExtensionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass descriptionUsageEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass descriptionBundleImportEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass descriptionBundleExtensionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass descriptionBundleInclusionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass descriptionBundleUsageEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass axiomEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass specializationAxiomEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass restrictionAxiomEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass propertyRestrictionAxiomEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass scalarPropertyRestrictionAxiomEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass scalarPropertyRangeRestrictionAxiomEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass scalarPropertyCardinalityRestrictionAxiomEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass scalarPropertyValueRestrictionAxiomEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass structuredPropertyRestrictionAxiomEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass structuredPropertyRangeRestrictionAxiomEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass structuredPropertyCardinalityRestrictionAxiomEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass structuredPropertyValueRestrictionAxiomEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass relationRestrictionAxiomEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass relationRangeRestrictionAxiomEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass relationCardinalityRestrictionAxiomEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass relationTargetRestrictionAxiomEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass keyAxiomEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass assertionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass typeAssertionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass conceptTypeAssertionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass relationTypeAssertionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass propertyValueAssertionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass scalarPropertyValueAssertionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass structuredPropertyValueAssertionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass linkAssertionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass predicateEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass unaryPredicateEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass typePredicateEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass binaryPredicateEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass relationEntityPredicateEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass featurePredicateEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass sameAsPredicateEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass differentFromPredicateEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass literalEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass quotedLiteralEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass integerLiteralEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass decimalLiteralEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass doubleLiteralEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass booleanLiteralEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1177,26 +1185,6 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EClass getAnnotatedElement() {
-		return annotatedElementEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getAnnotatedElement_OwnedAnnotations() {
-		return (EReference)annotatedElementEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EClass getIdentifiedElement() {
 		return identifiedElementEClass;
 	}
@@ -1207,8 +1195,158 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
+	public EReference getIdentifiedElement_OwnedAnnotations() {
+		return (EReference)identifiedElementEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EOperation getIdentifiedElement__GetIri() {
 		return identifiedElementEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getImport() {
+		return importEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getImport_Namespace() {
+		return (EAttribute)importEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getImport_Prefix() {
+		return (EAttribute)importEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getImport__GetIri() {
+		return importEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getImport__GetSeparator() {
+		return importEClass.getEOperations().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getInstance() {
+		return instanceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getInstance_OwnedPropertyValues() {
+		return (EReference)instanceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getStatement() {
+		return statementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getAxiom() {
+		return axiomEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getAssertion() {
+		return assertionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getPredicate() {
+		return predicateEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getPredicate_AntecedentRule() {
+		return (EReference)predicateEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getPredicate_ConsequentRule() {
+		return (EReference)predicateEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getLiteral() {
+		return literalEClass;
 	}
 
 	/**
@@ -1267,8 +1405,58 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
+	public EClass getMember() {
+		return memberEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getMember_Name() {
+		return (EAttribute)memberEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getMember__GetIri() {
+		return memberEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getMember__GetAbbreviatedIri() {
+		return memberEClass.getEOperations().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getVocabularyBox() {
 		return vocabularyBoxEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getDescriptionBox() {
+		return descriptionBoxEClass;
 	}
 
 	/**
@@ -1327,16 +1515,6 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EClass getDescriptionBox() {
-		return descriptionBoxEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EClass getDescription() {
 		return descriptionEClass;
 	}
@@ -1387,8 +1565,8 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EClass getMember() {
-		return memberEClass;
+	public EClass getVocabularyImport() {
+		return vocabularyImportEClass;
 	}
 
 	/**
@@ -1397,8 +1575,8 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getMember_Name() {
-		return (EAttribute)memberEClass.getEStructuralFeatures().get(0);
+	public EReference getVocabularyImport_OwningVocabulary() {
+		return (EReference)vocabularyImportEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1407,8 +1585,8 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EOperation getMember__GetIri() {
-		return memberEClass.getEOperations().get(0);
+	public EClass getVocabularyBundleImport() {
+		return vocabularyBundleImportEClass;
 	}
 
 	/**
@@ -1417,8 +1595,198 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EOperation getMember__GetAbbreviatedIri() {
-		return memberEClass.getEOperations().get(1);
+	public EReference getVocabularyBundleImport_OwningVocabularyBundle() {
+		return (EReference)vocabularyBundleImportEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getDescriptionImport() {
+		return descriptionImportEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getDescriptionImport_OwningDescription() {
+		return (EReference)descriptionImportEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getDescriptionBundleImport() {
+		return descriptionBundleImportEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getDescriptionBundleImport_OwningDescriptionBundle() {
+		return (EReference)descriptionBundleImportEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getVocabularyExtension() {
+		return vocabularyExtensionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getVocabularyUsage() {
+		return vocabularyUsageEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getVocabularyBundleExtension() {
+		return vocabularyBundleExtensionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getVocabularyBundleInclusion() {
+		return vocabularyBundleInclusionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getDescriptionExtension() {
+		return descriptionExtensionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getDescriptionUsage() {
+		return descriptionUsageEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getDescriptionBundleExtension() {
+		return descriptionBundleExtensionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getDescriptionBundleInclusion() {
+		return descriptionBundleInclusionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getDescriptionBundleUsage() {
+		return descriptionBundleUsageEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getVocabularyStatement() {
+		return vocabularyStatementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getVocabularyStatement_OwningVocabulary() {
+		return (EReference)vocabularyStatementEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getDescriptionStatement() {
+		return descriptionStatementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getDescriptionStatement_OwningDescription() {
+		return (EReference)descriptionStatementEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getVocabularyMember() {
+		return vocabularyMemberEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getDescriptionMember() {
+		return descriptionMemberEClass;
 	}
 
 	/**
@@ -1429,6 +1797,36 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	@Override
 	public EClass getTerm() {
 		return termEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getRule() {
+		return ruleEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getRule_Antecedent() {
+		return (EReference)ruleEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getRule_Consequent() {
+		return (EReference)ruleEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1449,6 +1847,26 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	@Override
 	public EReference getSpecializableTerm_OwnedSpecializations() {
 		return (EReference)specializableTermEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getFeature() {
+		return featureEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getProperty() {
+		return propertyEClass;
 	}
 
 	/**
@@ -1487,6 +1905,16 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
+	public EClass getScalar() {
+		return scalarEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getEntity() {
 		return entityEClass;
 	}
@@ -1509,6 +1937,16 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	@Override
 	public EReference getEntity_OwnedKeys() {
 		return (EReference)entityEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getStructure() {
+		return structureEClass;
 	}
 
 	/**
@@ -1667,8 +2105,8 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EClass getStructure() {
-		return structureEClass;
+	public EClass getFacetedScalar() {
+		return facetedScalarEClass;
 	}
 
 	/**
@@ -1677,8 +2115,8 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EClass getFeature() {
-		return featureEClass;
+	public EAttribute getFacetedScalar_Length() {
+		return (EAttribute)facetedScalarEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1687,8 +2125,98 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EClass getProperty() {
-		return propertyEClass;
+	public EAttribute getFacetedScalar_MinLength() {
+		return (EAttribute)facetedScalarEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getFacetedScalar_MaxLength() {
+		return (EAttribute)facetedScalarEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getFacetedScalar_Pattern() {
+		return (EAttribute)facetedScalarEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getFacetedScalar_Language() {
+		return (EAttribute)facetedScalarEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getFacetedScalar_MinInclusive() {
+		return (EReference)facetedScalarEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getFacetedScalar_MinExclusive() {
+		return (EReference)facetedScalarEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getFacetedScalar_MaxInclusive() {
+		return (EReference)facetedScalarEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getFacetedScalar_MaxExclusive() {
+		return (EReference)facetedScalarEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getEnumeratedScalar() {
+		return enumeratedScalarEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getEnumeratedScalar_Literals() {
+		return (EReference)enumeratedScalarEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1819,136 +2347,6 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	@Override
 	public EReference getStructuredProperty_Range() {
 		return (EReference)structuredPropertyEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getScalar() {
-		return scalarEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getFacetedScalar() {
-		return facetedScalarEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getFacetedScalar_Length() {
-		return (EAttribute)facetedScalarEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getFacetedScalar_MinLength() {
-		return (EAttribute)facetedScalarEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getFacetedScalar_MaxLength() {
-		return (EAttribute)facetedScalarEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getFacetedScalar_Pattern() {
-		return (EAttribute)facetedScalarEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getFacetedScalar_Language() {
-		return (EAttribute)facetedScalarEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getFacetedScalar_MinInclusive() {
-		return (EReference)facetedScalarEClass.getEStructuralFeatures().get(5);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getFacetedScalar_MinExclusive() {
-		return (EReference)facetedScalarEClass.getEStructuralFeatures().get(6);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getFacetedScalar_MaxInclusive() {
-		return (EReference)facetedScalarEClass.getEStructuralFeatures().get(7);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getFacetedScalar_MaxExclusive() {
-		return (EReference)facetedScalarEClass.getEStructuralFeatures().get(8);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getEnumeratedScalar() {
-		return enumeratedScalarEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getEnumeratedScalar_Literals() {
-		return (EReference)enumeratedScalarEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -2137,96 +2535,6 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EClass getRule() {
-		return ruleEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getRule_Antecedent() {
-		return (EReference)ruleEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getRule_Consequent() {
-		return (EReference)ruleEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getInstance() {
-		return instanceEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getInstance_OwnedPropertyValues() {
-		return (EReference)instanceEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getStructureInstance() {
-		return structureInstanceEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getStructureInstance_Type() {
-		return (EReference)structureInstanceEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getStructureInstance_OwningAxiom() {
-		return (EReference)structureInstanceEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getStructureInstance_OwningAssertion() {
-		return (EReference)structureInstanceEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EClass getNamedInstance() {
 		return namedInstanceEClass;
 	}
@@ -2307,8 +2615,8 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EClass getReference() {
-		return referenceEClass;
+	public EClass getStructureInstance() {
+		return structureInstanceEClass;
 	}
 
 	/**
@@ -2317,8 +2625,8 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getReference_OwnedAnnotations() {
-		return (EReference)referenceEClass.getEStructuralFeatures().get(0);
+	public EReference getStructureInstance_Type() {
+		return (EReference)structureInstanceEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -2327,8 +2635,8 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EClass getSpecializableTermReference() {
-		return specializableTermReferenceEClass;
+	public EReference getStructureInstance_OwningAxiom() {
+		return (EReference)structureInstanceEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -2337,8 +2645,8 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getSpecializableTermReference_OwnedSpecializations() {
-		return (EReference)specializableTermReferenceEClass.getEStructuralFeatures().get(0);
+	public EReference getStructureInstance_OwningAssertion() {
+		return (EReference)structureInstanceEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -2347,8 +2655,8 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EClass getClassifierReference() {
-		return classifierReferenceEClass;
+	public EClass getKeyAxiom() {
+		return keyAxiomEClass;
 	}
 
 	/**
@@ -2357,8 +2665,8 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getClassifierReference_OwnedPropertyRestrictions() {
-		return (EReference)classifierReferenceEClass.getEStructuralFeatures().get(0);
+	public EReference getKeyAxiom_Properties() {
+		return (EReference)keyAxiomEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -2367,8 +2675,8 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EClass getEntityReference() {
-		return entityReferenceEClass;
+	public EReference getKeyAxiom_OwningEntity() {
+		return (EReference)keyAxiomEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -2377,608 +2685,8 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getEntityReference_OwnedRelationRestrictions() {
-		return (EReference)entityReferenceEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getEntityReference_OwnedKeys() {
-		return (EReference)entityReferenceEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getAspectReference() {
-		return aspectReferenceEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getAspectReference_Aspect() {
-		return (EReference)aspectReferenceEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getConceptReference() {
-		return conceptReferenceEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getConceptReference_Concept() {
-		return (EReference)conceptReferenceEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getRelationEntityReference() {
-		return relationEntityReferenceEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getRelationEntityReference_Entity() {
-		return (EReference)relationEntityReferenceEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getStructureReference() {
-		return structureReferenceEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getStructureReference_Structure() {
-		return (EReference)structureReferenceEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getAnnotationPropertyReference() {
-		return annotationPropertyReferenceEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getAnnotationPropertyReference_Property() {
-		return (EReference)annotationPropertyReferenceEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getScalarPropertyReference() {
-		return scalarPropertyReferenceEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getScalarPropertyReference_Property() {
-		return (EReference)scalarPropertyReferenceEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getStructuredPropertyReference() {
-		return structuredPropertyReferenceEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getStructuredPropertyReference_Property() {
-		return (EReference)structuredPropertyReferenceEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getFacetedScalarReference() {
-		return facetedScalarReferenceEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getFacetedScalarReference_Scalar() {
-		return (EReference)facetedScalarReferenceEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getEnumeratedScalarReference() {
-		return enumeratedScalarReferenceEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getEnumeratedScalarReference_Scalar() {
-		return (EReference)enumeratedScalarReferenceEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getRelationReference() {
-		return relationReferenceEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getRelationReference_Relation() {
-		return (EReference)relationReferenceEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getRuleReference() {
-		return ruleReferenceEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getRuleReference_Rule() {
-		return (EReference)ruleReferenceEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getNamedInstanceReference() {
-		return namedInstanceReferenceEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getNamedInstanceReference_OwnedPropertyValues() {
-		return (EReference)namedInstanceReferenceEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getNamedInstanceReference_OwnedLinks() {
-		return (EReference)namedInstanceReferenceEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getConceptInstanceReference() {
-		return conceptInstanceReferenceEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getConceptInstanceReference_Instance() {
-		return (EReference)conceptInstanceReferenceEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getConceptInstanceReference_OwnedTypes() {
-		return (EReference)conceptInstanceReferenceEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getRelationInstanceReference() {
-		return relationInstanceReferenceEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getRelationInstanceReference_Instance() {
-		return (EReference)relationInstanceReferenceEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getRelationInstanceReference_OwnedTypes() {
-		return (EReference)relationInstanceReferenceEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getStatement() {
-		return statementEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getVocabularyStatement() {
-		return vocabularyStatementEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getVocabularyStatement_OwningVocabulary() {
-		return (EReference)vocabularyStatementEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getDescriptionStatement() {
-		return descriptionStatementEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getDescriptionStatement_OwningDescription() {
-		return (EReference)descriptionStatementEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getImport() {
-		return importEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getImport_Namespace() {
-		return (EAttribute)importEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getImport_Prefix() {
-		return (EAttribute)importEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EOperation getImport__GetIri() {
-		return importEClass.getEOperations().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EOperation getImport__GetSeparator() {
-		return importEClass.getEOperations().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getVocabularyImport() {
-		return vocabularyImportEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getVocabularyImport_OwningVocabulary() {
-		return (EReference)vocabularyImportEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getVocabularyExtension() {
-		return vocabularyExtensionEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getVocabularyUsage() {
-		return vocabularyUsageEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getVocabularyBundleImport() {
-		return vocabularyBundleImportEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getVocabularyBundleImport_OwningVocabularyBundle() {
-		return (EReference)vocabularyBundleImportEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getVocabularyBundleExtension() {
-		return vocabularyBundleExtensionEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getVocabularyBundleInclusion() {
-		return vocabularyBundleInclusionEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getDescriptionImport() {
-		return descriptionImportEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getDescriptionImport_OwningDescription() {
-		return (EReference)descriptionImportEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getDescriptionExtension() {
-		return descriptionExtensionEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getDescriptionUsage() {
-		return descriptionUsageEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getDescriptionBundleImport() {
-		return descriptionBundleImportEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getDescriptionBundleImport_OwningDescriptionBundle() {
-		return (EReference)descriptionBundleImportEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getDescriptionBundleExtension() {
-		return descriptionBundleExtensionEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getDescriptionBundleInclusion() {
-		return descriptionBundleInclusionEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getDescriptionBundleUsage() {
-		return descriptionBundleUsageEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getAxiom() {
-		return axiomEClass;
+	public EReference getKeyAxiom_OwningReference() {
+		return (EReference)keyAxiomEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -3417,56 +3125,6 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EClass getKeyAxiom() {
-		return keyAxiomEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getKeyAxiom_Properties() {
-		return (EReference)keyAxiomEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getKeyAxiom_OwningEntity() {
-		return (EReference)keyAxiomEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getKeyAxiom_OwningReference() {
-		return (EReference)keyAxiomEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getAssertion() {
-		return assertionEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EClass getTypeAssertion() {
 		return typeAssertionEClass;
 	}
@@ -3727,36 +3385,6 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EClass getPredicate() {
-		return predicateEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getPredicate_AntecedentRule() {
-		return (EReference)predicateEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getPredicate_ConsequentRule() {
-		return (EReference)predicateEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EClass getUnaryPredicate() {
 		return unaryPredicateEClass;
 	}
@@ -3769,26 +3397,6 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	@Override
 	public EAttribute getUnaryPredicate_Variable() {
 		return (EAttribute)unaryPredicateEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getTypePredicate() {
-		return typePredicateEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getTypePredicate_Type() {
-		return (EReference)typePredicateEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -3829,6 +3437,26 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	@Override
 	public EReference getBinaryPredicate_Instance2() {
 		return (EReference)binaryPredicateEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getTypePredicate() {
+		return typePredicateEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getTypePredicate_Type() {
+		return (EReference)typePredicateEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -3909,16 +3537,6 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	@Override
 	public EClass getDifferentFromPredicate() {
 		return differentFromPredicateEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getLiteral() {
-		return literalEClass;
 	}
 
 	/**
@@ -4047,6 +3665,406 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
+	public EClass getReference() {
+		return referenceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getReference_OwnedAnnotations() {
+		return (EReference)referenceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getSpecializableTermReference() {
+		return specializableTermReferenceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getSpecializableTermReference_OwnedSpecializations() {
+		return (EReference)specializableTermReferenceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getClassifierReference() {
+		return classifierReferenceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getClassifierReference_OwnedPropertyRestrictions() {
+		return (EReference)classifierReferenceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getEntityReference() {
+		return entityReferenceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getEntityReference_OwnedRelationRestrictions() {
+		return (EReference)entityReferenceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getEntityReference_OwnedKeys() {
+		return (EReference)entityReferenceEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getAspectReference() {
+		return aspectReferenceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getAspectReference_Aspect() {
+		return (EReference)aspectReferenceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getConceptReference() {
+		return conceptReferenceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getConceptReference_Concept() {
+		return (EReference)conceptReferenceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getRelationEntityReference() {
+		return relationEntityReferenceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getRelationEntityReference_Entity() {
+		return (EReference)relationEntityReferenceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getStructureReference() {
+		return structureReferenceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getStructureReference_Structure() {
+		return (EReference)structureReferenceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getAnnotationPropertyReference() {
+		return annotationPropertyReferenceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getAnnotationPropertyReference_Property() {
+		return (EReference)annotationPropertyReferenceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getScalarPropertyReference() {
+		return scalarPropertyReferenceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getScalarPropertyReference_Property() {
+		return (EReference)scalarPropertyReferenceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getStructuredPropertyReference() {
+		return structuredPropertyReferenceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getStructuredPropertyReference_Property() {
+		return (EReference)structuredPropertyReferenceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getFacetedScalarReference() {
+		return facetedScalarReferenceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getFacetedScalarReference_Scalar() {
+		return (EReference)facetedScalarReferenceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getEnumeratedScalarReference() {
+		return enumeratedScalarReferenceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getEnumeratedScalarReference_Scalar() {
+		return (EReference)enumeratedScalarReferenceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getRelationReference() {
+		return relationReferenceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getRelationReference_Relation() {
+		return (EReference)relationReferenceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getRuleReference() {
+		return ruleReferenceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getRuleReference_Rule() {
+		return (EReference)ruleReferenceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getNamedInstanceReference() {
+		return namedInstanceReferenceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getNamedInstanceReference_OwnedPropertyValues() {
+		return (EReference)namedInstanceReferenceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getNamedInstanceReference_OwnedLinks() {
+		return (EReference)namedInstanceReferenceEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getConceptInstanceReference() {
+		return conceptInstanceReferenceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getConceptInstanceReference_Instance() {
+		return (EReference)conceptInstanceReferenceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getConceptInstanceReference_OwnedTypes() {
+		return (EReference)conceptInstanceReferenceEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getRelationInstanceReference() {
+		return relationInstanceReferenceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getRelationInstanceReference_Instance() {
+		return (EReference)relationInstanceReferenceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getRelationInstanceReference_OwnedTypes() {
+		return (EReference)relationInstanceReferenceEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EEnum getSeparatorKind() {
 		return separatorKindEEnum;
 	}
@@ -4161,11 +4179,30 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		createEReference(annotationEClass, ANNOTATION__OWNING_ELEMENT);
 		createEReference(annotationEClass, ANNOTATION__OWNING_REFERENCE);
 
-		annotatedElementEClass = createEClass(ANNOTATED_ELEMENT);
-		createEReference(annotatedElementEClass, ANNOTATED_ELEMENT__OWNED_ANNOTATIONS);
-
 		identifiedElementEClass = createEClass(IDENTIFIED_ELEMENT);
+		createEReference(identifiedElementEClass, IDENTIFIED_ELEMENT__OWNED_ANNOTATIONS);
 		createEOperation(identifiedElementEClass, IDENTIFIED_ELEMENT___GET_IRI);
+
+		importEClass = createEClass(IMPORT);
+		createEAttribute(importEClass, IMPORT__NAMESPACE);
+		createEAttribute(importEClass, IMPORT__PREFIX);
+		createEOperation(importEClass, IMPORT___GET_IRI);
+		createEOperation(importEClass, IMPORT___GET_SEPARATOR);
+
+		instanceEClass = createEClass(INSTANCE);
+		createEReference(instanceEClass, INSTANCE__OWNED_PROPERTY_VALUES);
+
+		statementEClass = createEClass(STATEMENT);
+
+		axiomEClass = createEClass(AXIOM);
+
+		assertionEClass = createEClass(ASSERTION);
+
+		predicateEClass = createEClass(PREDICATE);
+		createEReference(predicateEClass, PREDICATE__ANTECEDENT_RULE);
+		createEReference(predicateEClass, PREDICATE__CONSEQUENT_RULE);
+
+		literalEClass = createEClass(LITERAL);
 
 		ontologyEClass = createEClass(ONTOLOGY);
 		createEAttribute(ontologyEClass, ONTOLOGY__NAMESPACE);
@@ -4173,7 +4210,14 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		createEOperation(ontologyEClass, ONTOLOGY___GET_IRI);
 		createEOperation(ontologyEClass, ONTOLOGY___GET_SEPARATOR);
 
+		memberEClass = createEClass(MEMBER);
+		createEAttribute(memberEClass, MEMBER__NAME);
+		createEOperation(memberEClass, MEMBER___GET_IRI);
+		createEOperation(memberEClass, MEMBER___GET_ABBREVIATED_IRI);
+
 		vocabularyBoxEClass = createEClass(VOCABULARY_BOX);
+
+		descriptionBoxEClass = createEClass(DESCRIPTION_BOX);
 
 		vocabularyEClass = createEClass(VOCABULARY);
 		createEReference(vocabularyEClass, VOCABULARY__OWNED_IMPORTS);
@@ -4182,8 +4226,6 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		vocabularyBundleEClass = createEClass(VOCABULARY_BUNDLE);
 		createEReference(vocabularyBundleEClass, VOCABULARY_BUNDLE__OWNED_IMPORTS);
 
-		descriptionBoxEClass = createEClass(DESCRIPTION_BOX);
-
 		descriptionEClass = createEClass(DESCRIPTION);
 		createEReference(descriptionEClass, DESCRIPTION__OWNED_IMPORTS);
 		createEReference(descriptionEClass, DESCRIPTION__OWNED_STATEMENTS);
@@ -4191,24 +4233,71 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		descriptionBundleEClass = createEClass(DESCRIPTION_BUNDLE);
 		createEReference(descriptionBundleEClass, DESCRIPTION_BUNDLE__OWNED_IMPORTS);
 
-		memberEClass = createEClass(MEMBER);
-		createEAttribute(memberEClass, MEMBER__NAME);
-		createEOperation(memberEClass, MEMBER___GET_IRI);
-		createEOperation(memberEClass, MEMBER___GET_ABBREVIATED_IRI);
+		vocabularyImportEClass = createEClass(VOCABULARY_IMPORT);
+		createEReference(vocabularyImportEClass, VOCABULARY_IMPORT__OWNING_VOCABULARY);
+
+		vocabularyBundleImportEClass = createEClass(VOCABULARY_BUNDLE_IMPORT);
+		createEReference(vocabularyBundleImportEClass, VOCABULARY_BUNDLE_IMPORT__OWNING_VOCABULARY_BUNDLE);
+
+		descriptionImportEClass = createEClass(DESCRIPTION_IMPORT);
+		createEReference(descriptionImportEClass, DESCRIPTION_IMPORT__OWNING_DESCRIPTION);
+
+		descriptionBundleImportEClass = createEClass(DESCRIPTION_BUNDLE_IMPORT);
+		createEReference(descriptionBundleImportEClass, DESCRIPTION_BUNDLE_IMPORT__OWNING_DESCRIPTION_BUNDLE);
+
+		vocabularyExtensionEClass = createEClass(VOCABULARY_EXTENSION);
+
+		vocabularyUsageEClass = createEClass(VOCABULARY_USAGE);
+
+		vocabularyBundleExtensionEClass = createEClass(VOCABULARY_BUNDLE_EXTENSION);
+
+		vocabularyBundleInclusionEClass = createEClass(VOCABULARY_BUNDLE_INCLUSION);
+
+		descriptionExtensionEClass = createEClass(DESCRIPTION_EXTENSION);
+
+		descriptionUsageEClass = createEClass(DESCRIPTION_USAGE);
+
+		descriptionBundleExtensionEClass = createEClass(DESCRIPTION_BUNDLE_EXTENSION);
+
+		descriptionBundleInclusionEClass = createEClass(DESCRIPTION_BUNDLE_INCLUSION);
+
+		descriptionBundleUsageEClass = createEClass(DESCRIPTION_BUNDLE_USAGE);
+
+		vocabularyStatementEClass = createEClass(VOCABULARY_STATEMENT);
+		createEReference(vocabularyStatementEClass, VOCABULARY_STATEMENT__OWNING_VOCABULARY);
+
+		descriptionStatementEClass = createEClass(DESCRIPTION_STATEMENT);
+		createEReference(descriptionStatementEClass, DESCRIPTION_STATEMENT__OWNING_DESCRIPTION);
+
+		vocabularyMemberEClass = createEClass(VOCABULARY_MEMBER);
+
+		descriptionMemberEClass = createEClass(DESCRIPTION_MEMBER);
 
 		termEClass = createEClass(TERM);
 
+		ruleEClass = createEClass(RULE);
+		createEReference(ruleEClass, RULE__ANTECEDENT);
+		createEReference(ruleEClass, RULE__CONSEQUENT);
+
 		specializableTermEClass = createEClass(SPECIALIZABLE_TERM);
 		createEReference(specializableTermEClass, SPECIALIZABLE_TERM__OWNED_SPECIALIZATIONS);
+
+		featureEClass = createEClass(FEATURE);
+
+		propertyEClass = createEClass(PROPERTY);
 
 		typeEClass = createEClass(TYPE);
 
 		classifierEClass = createEClass(CLASSIFIER);
 		createEReference(classifierEClass, CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS);
 
+		scalarEClass = createEClass(SCALAR);
+
 		entityEClass = createEClass(ENTITY);
 		createEReference(entityEClass, ENTITY__OWNED_RELATION_RESTRICTIONS);
 		createEReference(entityEClass, ENTITY__OWNED_KEYS);
+
+		structureEClass = createEClass(STRUCTURE);
 
 		aspectEClass = createEClass(ASPECT);
 
@@ -4228,11 +4317,19 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		createEAttribute(relationEntityEClass, RELATION_ENTITY__IRREFLEXIVE);
 		createEAttribute(relationEntityEClass, RELATION_ENTITY__TRANSITIVE);
 
-		structureEClass = createEClass(STRUCTURE);
+		facetedScalarEClass = createEClass(FACETED_SCALAR);
+		createEAttribute(facetedScalarEClass, FACETED_SCALAR__LENGTH);
+		createEAttribute(facetedScalarEClass, FACETED_SCALAR__MIN_LENGTH);
+		createEAttribute(facetedScalarEClass, FACETED_SCALAR__MAX_LENGTH);
+		createEAttribute(facetedScalarEClass, FACETED_SCALAR__PATTERN);
+		createEAttribute(facetedScalarEClass, FACETED_SCALAR__LANGUAGE);
+		createEReference(facetedScalarEClass, FACETED_SCALAR__MIN_INCLUSIVE);
+		createEReference(facetedScalarEClass, FACETED_SCALAR__MIN_EXCLUSIVE);
+		createEReference(facetedScalarEClass, FACETED_SCALAR__MAX_INCLUSIVE);
+		createEReference(facetedScalarEClass, FACETED_SCALAR__MAX_EXCLUSIVE);
 
-		featureEClass = createEClass(FEATURE);
-
-		propertyEClass = createEClass(PROPERTY);
+		enumeratedScalarEClass = createEClass(ENUMERATED_SCALAR);
+		createEReference(enumeratedScalarEClass, ENUMERATED_SCALAR__LITERALS);
 
 		annotationPropertyEClass = createEClass(ANNOTATION_PROPERTY);
 
@@ -4250,22 +4347,6 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		createEAttribute(structuredPropertyEClass, STRUCTURED_PROPERTY__FUNCTIONAL);
 		createEReference(structuredPropertyEClass, STRUCTURED_PROPERTY__DOMAIN);
 		createEReference(structuredPropertyEClass, STRUCTURED_PROPERTY__RANGE);
-
-		scalarEClass = createEClass(SCALAR);
-
-		facetedScalarEClass = createEClass(FACETED_SCALAR);
-		createEAttribute(facetedScalarEClass, FACETED_SCALAR__LENGTH);
-		createEAttribute(facetedScalarEClass, FACETED_SCALAR__MIN_LENGTH);
-		createEAttribute(facetedScalarEClass, FACETED_SCALAR__MAX_LENGTH);
-		createEAttribute(facetedScalarEClass, FACETED_SCALAR__PATTERN);
-		createEAttribute(facetedScalarEClass, FACETED_SCALAR__LANGUAGE);
-		createEReference(facetedScalarEClass, FACETED_SCALAR__MIN_INCLUSIVE);
-		createEReference(facetedScalarEClass, FACETED_SCALAR__MIN_EXCLUSIVE);
-		createEReference(facetedScalarEClass, FACETED_SCALAR__MAX_INCLUSIVE);
-		createEReference(facetedScalarEClass, FACETED_SCALAR__MAX_EXCLUSIVE);
-
-		enumeratedScalarEClass = createEClass(ENUMERATED_SCALAR);
-		createEReference(enumeratedScalarEClass, ENUMERATED_SCALAR__LITERALS);
 
 		relationEClass = createEClass(RELATION);
 		createEReference(relationEClass, RELATION__DOMAIN);
@@ -4288,18 +4369,6 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		createEOperation(reverseRelationEClass, REVERSE_RELATION___DERIVE_RANGE);
 		createEOperation(reverseRelationEClass, REVERSE_RELATION___DERIVE_INVERSE);
 
-		ruleEClass = createEClass(RULE);
-		createEReference(ruleEClass, RULE__ANTECEDENT);
-		createEReference(ruleEClass, RULE__CONSEQUENT);
-
-		instanceEClass = createEClass(INSTANCE);
-		createEReference(instanceEClass, INSTANCE__OWNED_PROPERTY_VALUES);
-
-		structureInstanceEClass = createEClass(STRUCTURE_INSTANCE);
-		createEReference(structureInstanceEClass, STRUCTURE_INSTANCE__TYPE);
-		createEReference(structureInstanceEClass, STRUCTURE_INSTANCE__OWNING_AXIOM);
-		createEReference(structureInstanceEClass, STRUCTURE_INSTANCE__OWNING_ASSERTION);
-
 		namedInstanceEClass = createEClass(NAMED_INSTANCE);
 		createEReference(namedInstanceEClass, NAMED_INSTANCE__OWNED_LINKS);
 
@@ -4311,109 +4380,15 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		createEReference(relationInstanceEClass, RELATION_INSTANCE__SOURCES);
 		createEReference(relationInstanceEClass, RELATION_INSTANCE__TARGETS);
 
-		referenceEClass = createEClass(REFERENCE);
-		createEReference(referenceEClass, REFERENCE__OWNED_ANNOTATIONS);
+		structureInstanceEClass = createEClass(STRUCTURE_INSTANCE);
+		createEReference(structureInstanceEClass, STRUCTURE_INSTANCE__TYPE);
+		createEReference(structureInstanceEClass, STRUCTURE_INSTANCE__OWNING_AXIOM);
+		createEReference(structureInstanceEClass, STRUCTURE_INSTANCE__OWNING_ASSERTION);
 
-		specializableTermReferenceEClass = createEClass(SPECIALIZABLE_TERM_REFERENCE);
-		createEReference(specializableTermReferenceEClass, SPECIALIZABLE_TERM_REFERENCE__OWNED_SPECIALIZATIONS);
-
-		classifierReferenceEClass = createEClass(CLASSIFIER_REFERENCE);
-		createEReference(classifierReferenceEClass, CLASSIFIER_REFERENCE__OWNED_PROPERTY_RESTRICTIONS);
-
-		entityReferenceEClass = createEClass(ENTITY_REFERENCE);
-		createEReference(entityReferenceEClass, ENTITY_REFERENCE__OWNED_RELATION_RESTRICTIONS);
-		createEReference(entityReferenceEClass, ENTITY_REFERENCE__OWNED_KEYS);
-
-		aspectReferenceEClass = createEClass(ASPECT_REFERENCE);
-		createEReference(aspectReferenceEClass, ASPECT_REFERENCE__ASPECT);
-
-		conceptReferenceEClass = createEClass(CONCEPT_REFERENCE);
-		createEReference(conceptReferenceEClass, CONCEPT_REFERENCE__CONCEPT);
-
-		relationEntityReferenceEClass = createEClass(RELATION_ENTITY_REFERENCE);
-		createEReference(relationEntityReferenceEClass, RELATION_ENTITY_REFERENCE__ENTITY);
-
-		structureReferenceEClass = createEClass(STRUCTURE_REFERENCE);
-		createEReference(structureReferenceEClass, STRUCTURE_REFERENCE__STRUCTURE);
-
-		annotationPropertyReferenceEClass = createEClass(ANNOTATION_PROPERTY_REFERENCE);
-		createEReference(annotationPropertyReferenceEClass, ANNOTATION_PROPERTY_REFERENCE__PROPERTY);
-
-		scalarPropertyReferenceEClass = createEClass(SCALAR_PROPERTY_REFERENCE);
-		createEReference(scalarPropertyReferenceEClass, SCALAR_PROPERTY_REFERENCE__PROPERTY);
-
-		structuredPropertyReferenceEClass = createEClass(STRUCTURED_PROPERTY_REFERENCE);
-		createEReference(structuredPropertyReferenceEClass, STRUCTURED_PROPERTY_REFERENCE__PROPERTY);
-
-		facetedScalarReferenceEClass = createEClass(FACETED_SCALAR_REFERENCE);
-		createEReference(facetedScalarReferenceEClass, FACETED_SCALAR_REFERENCE__SCALAR);
-
-		enumeratedScalarReferenceEClass = createEClass(ENUMERATED_SCALAR_REFERENCE);
-		createEReference(enumeratedScalarReferenceEClass, ENUMERATED_SCALAR_REFERENCE__SCALAR);
-
-		relationReferenceEClass = createEClass(RELATION_REFERENCE);
-		createEReference(relationReferenceEClass, RELATION_REFERENCE__RELATION);
-
-		ruleReferenceEClass = createEClass(RULE_REFERENCE);
-		createEReference(ruleReferenceEClass, RULE_REFERENCE__RULE);
-
-		namedInstanceReferenceEClass = createEClass(NAMED_INSTANCE_REFERENCE);
-		createEReference(namedInstanceReferenceEClass, NAMED_INSTANCE_REFERENCE__OWNED_PROPERTY_VALUES);
-		createEReference(namedInstanceReferenceEClass, NAMED_INSTANCE_REFERENCE__OWNED_LINKS);
-
-		conceptInstanceReferenceEClass = createEClass(CONCEPT_INSTANCE_REFERENCE);
-		createEReference(conceptInstanceReferenceEClass, CONCEPT_INSTANCE_REFERENCE__INSTANCE);
-		createEReference(conceptInstanceReferenceEClass, CONCEPT_INSTANCE_REFERENCE__OWNED_TYPES);
-
-		relationInstanceReferenceEClass = createEClass(RELATION_INSTANCE_REFERENCE);
-		createEReference(relationInstanceReferenceEClass, RELATION_INSTANCE_REFERENCE__INSTANCE);
-		createEReference(relationInstanceReferenceEClass, RELATION_INSTANCE_REFERENCE__OWNED_TYPES);
-
-		statementEClass = createEClass(STATEMENT);
-
-		vocabularyStatementEClass = createEClass(VOCABULARY_STATEMENT);
-		createEReference(vocabularyStatementEClass, VOCABULARY_STATEMENT__OWNING_VOCABULARY);
-
-		descriptionStatementEClass = createEClass(DESCRIPTION_STATEMENT);
-		createEReference(descriptionStatementEClass, DESCRIPTION_STATEMENT__OWNING_DESCRIPTION);
-
-		importEClass = createEClass(IMPORT);
-		createEAttribute(importEClass, IMPORT__NAMESPACE);
-		createEAttribute(importEClass, IMPORT__PREFIX);
-		createEOperation(importEClass, IMPORT___GET_IRI);
-		createEOperation(importEClass, IMPORT___GET_SEPARATOR);
-
-		vocabularyImportEClass = createEClass(VOCABULARY_IMPORT);
-		createEReference(vocabularyImportEClass, VOCABULARY_IMPORT__OWNING_VOCABULARY);
-
-		vocabularyExtensionEClass = createEClass(VOCABULARY_EXTENSION);
-
-		vocabularyUsageEClass = createEClass(VOCABULARY_USAGE);
-
-		vocabularyBundleImportEClass = createEClass(VOCABULARY_BUNDLE_IMPORT);
-		createEReference(vocabularyBundleImportEClass, VOCABULARY_BUNDLE_IMPORT__OWNING_VOCABULARY_BUNDLE);
-
-		vocabularyBundleExtensionEClass = createEClass(VOCABULARY_BUNDLE_EXTENSION);
-
-		vocabularyBundleInclusionEClass = createEClass(VOCABULARY_BUNDLE_INCLUSION);
-
-		descriptionImportEClass = createEClass(DESCRIPTION_IMPORT);
-		createEReference(descriptionImportEClass, DESCRIPTION_IMPORT__OWNING_DESCRIPTION);
-
-		descriptionExtensionEClass = createEClass(DESCRIPTION_EXTENSION);
-
-		descriptionUsageEClass = createEClass(DESCRIPTION_USAGE);
-
-		descriptionBundleImportEClass = createEClass(DESCRIPTION_BUNDLE_IMPORT);
-		createEReference(descriptionBundleImportEClass, DESCRIPTION_BUNDLE_IMPORT__OWNING_DESCRIPTION_BUNDLE);
-
-		descriptionBundleExtensionEClass = createEClass(DESCRIPTION_BUNDLE_EXTENSION);
-
-		descriptionBundleInclusionEClass = createEClass(DESCRIPTION_BUNDLE_INCLUSION);
-
-		descriptionBundleUsageEClass = createEClass(DESCRIPTION_BUNDLE_USAGE);
-
-		axiomEClass = createEClass(AXIOM);
+		keyAxiomEClass = createEClass(KEY_AXIOM);
+		createEReference(keyAxiomEClass, KEY_AXIOM__PROPERTIES);
+		createEReference(keyAxiomEClass, KEY_AXIOM__OWNING_ENTITY);
+		createEReference(keyAxiomEClass, KEY_AXIOM__OWNING_REFERENCE);
 
 		specializationAxiomEClass = createEClass(SPECIALIZATION_AXIOM);
 		createEReference(specializationAxiomEClass, SPECIALIZATION_AXIOM__SPECIALIZED_TERM);
@@ -4473,13 +4448,6 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		relationTargetRestrictionAxiomEClass = createEClass(RELATION_TARGET_RESTRICTION_AXIOM);
 		createEReference(relationTargetRestrictionAxiomEClass, RELATION_TARGET_RESTRICTION_AXIOM__TARGET);
 
-		keyAxiomEClass = createEClass(KEY_AXIOM);
-		createEReference(keyAxiomEClass, KEY_AXIOM__PROPERTIES);
-		createEReference(keyAxiomEClass, KEY_AXIOM__OWNING_ENTITY);
-		createEReference(keyAxiomEClass, KEY_AXIOM__OWNING_REFERENCE);
-
-		assertionEClass = createEClass(ASSERTION);
-
 		typeAssertionEClass = createEClass(TYPE_ASSERTION);
 		createEOperation(typeAssertionEClass, TYPE_ASSERTION___GET_TYPE);
 
@@ -4513,20 +4481,16 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		createEReference(linkAssertionEClass, LINK_ASSERTION__OWNING_INSTANCE);
 		createEReference(linkAssertionEClass, LINK_ASSERTION__OWNING_REFERENCE);
 
-		predicateEClass = createEClass(PREDICATE);
-		createEReference(predicateEClass, PREDICATE__ANTECEDENT_RULE);
-		createEReference(predicateEClass, PREDICATE__CONSEQUENT_RULE);
-
 		unaryPredicateEClass = createEClass(UNARY_PREDICATE);
 		createEAttribute(unaryPredicateEClass, UNARY_PREDICATE__VARIABLE);
-
-		typePredicateEClass = createEClass(TYPE_PREDICATE);
-		createEReference(typePredicateEClass, TYPE_PREDICATE__TYPE);
 
 		binaryPredicateEClass = createEClass(BINARY_PREDICATE);
 		createEAttribute(binaryPredicateEClass, BINARY_PREDICATE__VARIABLE1);
 		createEAttribute(binaryPredicateEClass, BINARY_PREDICATE__VARIABLE2);
 		createEReference(binaryPredicateEClass, BINARY_PREDICATE__INSTANCE2);
+
+		typePredicateEClass = createEClass(TYPE_PREDICATE);
+		createEReference(typePredicateEClass, TYPE_PREDICATE__TYPE);
 
 		relationEntityPredicateEClass = createEClass(RELATION_ENTITY_PREDICATE);
 		createEReference(relationEntityPredicateEClass, RELATION_ENTITY_PREDICATE__ENTITY);
@@ -4539,8 +4503,6 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		sameAsPredicateEClass = createEClass(SAME_AS_PREDICATE);
 
 		differentFromPredicateEClass = createEClass(DIFFERENT_FROM_PREDICATE);
-
-		literalEClass = createEClass(LITERAL);
 
 		quotedLiteralEClass = createEClass(QUOTED_LITERAL);
 		createEAttribute(quotedLiteralEClass, QUOTED_LITERAL__VALUE);
@@ -4558,6 +4520,64 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 
 		booleanLiteralEClass = createEClass(BOOLEAN_LITERAL);
 		createEAttribute(booleanLiteralEClass, BOOLEAN_LITERAL__VALUE);
+
+		referenceEClass = createEClass(REFERENCE);
+		createEReference(referenceEClass, REFERENCE__OWNED_ANNOTATIONS);
+
+		specializableTermReferenceEClass = createEClass(SPECIALIZABLE_TERM_REFERENCE);
+		createEReference(specializableTermReferenceEClass, SPECIALIZABLE_TERM_REFERENCE__OWNED_SPECIALIZATIONS);
+
+		classifierReferenceEClass = createEClass(CLASSIFIER_REFERENCE);
+		createEReference(classifierReferenceEClass, CLASSIFIER_REFERENCE__OWNED_PROPERTY_RESTRICTIONS);
+
+		entityReferenceEClass = createEClass(ENTITY_REFERENCE);
+		createEReference(entityReferenceEClass, ENTITY_REFERENCE__OWNED_RELATION_RESTRICTIONS);
+		createEReference(entityReferenceEClass, ENTITY_REFERENCE__OWNED_KEYS);
+
+		aspectReferenceEClass = createEClass(ASPECT_REFERENCE);
+		createEReference(aspectReferenceEClass, ASPECT_REFERENCE__ASPECT);
+
+		conceptReferenceEClass = createEClass(CONCEPT_REFERENCE);
+		createEReference(conceptReferenceEClass, CONCEPT_REFERENCE__CONCEPT);
+
+		relationEntityReferenceEClass = createEClass(RELATION_ENTITY_REFERENCE);
+		createEReference(relationEntityReferenceEClass, RELATION_ENTITY_REFERENCE__ENTITY);
+
+		structureReferenceEClass = createEClass(STRUCTURE_REFERENCE);
+		createEReference(structureReferenceEClass, STRUCTURE_REFERENCE__STRUCTURE);
+
+		annotationPropertyReferenceEClass = createEClass(ANNOTATION_PROPERTY_REFERENCE);
+		createEReference(annotationPropertyReferenceEClass, ANNOTATION_PROPERTY_REFERENCE__PROPERTY);
+
+		scalarPropertyReferenceEClass = createEClass(SCALAR_PROPERTY_REFERENCE);
+		createEReference(scalarPropertyReferenceEClass, SCALAR_PROPERTY_REFERENCE__PROPERTY);
+
+		structuredPropertyReferenceEClass = createEClass(STRUCTURED_PROPERTY_REFERENCE);
+		createEReference(structuredPropertyReferenceEClass, STRUCTURED_PROPERTY_REFERENCE__PROPERTY);
+
+		facetedScalarReferenceEClass = createEClass(FACETED_SCALAR_REFERENCE);
+		createEReference(facetedScalarReferenceEClass, FACETED_SCALAR_REFERENCE__SCALAR);
+
+		enumeratedScalarReferenceEClass = createEClass(ENUMERATED_SCALAR_REFERENCE);
+		createEReference(enumeratedScalarReferenceEClass, ENUMERATED_SCALAR_REFERENCE__SCALAR);
+
+		relationReferenceEClass = createEClass(RELATION_REFERENCE);
+		createEReference(relationReferenceEClass, RELATION_REFERENCE__RELATION);
+
+		ruleReferenceEClass = createEClass(RULE_REFERENCE);
+		createEReference(ruleReferenceEClass, RULE_REFERENCE__RULE);
+
+		namedInstanceReferenceEClass = createEClass(NAMED_INSTANCE_REFERENCE);
+		createEReference(namedInstanceReferenceEClass, NAMED_INSTANCE_REFERENCE__OWNED_PROPERTY_VALUES);
+		createEReference(namedInstanceReferenceEClass, NAMED_INSTANCE_REFERENCE__OWNED_LINKS);
+
+		conceptInstanceReferenceEClass = createEClass(CONCEPT_INSTANCE_REFERENCE);
+		createEReference(conceptInstanceReferenceEClass, CONCEPT_INSTANCE_REFERENCE__INSTANCE);
+		createEReference(conceptInstanceReferenceEClass, CONCEPT_INSTANCE_REFERENCE__OWNED_TYPES);
+
+		relationInstanceReferenceEClass = createEClass(RELATION_INSTANCE_REFERENCE);
+		createEReference(relationInstanceReferenceEClass, RELATION_INSTANCE_REFERENCE__INSTANCE);
+		createEReference(relationInstanceReferenceEClass, RELATION_INSTANCE_REFERENCE__OWNED_TYPES);
 
 		// Create enums
 		separatorKindEEnum = createEEnum(SEPARATOR_KIND);
@@ -4604,28 +4624,56 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 
 		// Add supertypes to classes
 		annotationEClass.getESuperTypes().add(this.getElement());
-		annotatedElementEClass.getESuperTypes().add(this.getElement());
-		identifiedElementEClass.getESuperTypes().add(this.getAnnotatedElement());
+		identifiedElementEClass.getESuperTypes().add(this.getElement());
+		importEClass.getESuperTypes().add(this.getElement());
+		instanceEClass.getESuperTypes().add(this.getElement());
+		statementEClass.getESuperTypes().add(this.getElement());
+		axiomEClass.getESuperTypes().add(this.getElement());
+		assertionEClass.getESuperTypes().add(this.getElement());
+		predicateEClass.getESuperTypes().add(this.getElement());
+		literalEClass.getESuperTypes().add(this.getElement());
 		ontologyEClass.getESuperTypes().add(this.getIdentifiedElement());
+		memberEClass.getESuperTypes().add(this.getIdentifiedElement());
 		vocabularyBoxEClass.getESuperTypes().add(this.getOntology());
+		descriptionBoxEClass.getESuperTypes().add(this.getOntology());
 		vocabularyEClass.getESuperTypes().add(this.getVocabularyBox());
 		vocabularyBundleEClass.getESuperTypes().add(this.getVocabularyBox());
-		descriptionBoxEClass.getESuperTypes().add(this.getOntology());
 		descriptionEClass.getESuperTypes().add(this.getDescriptionBox());
 		descriptionBundleEClass.getESuperTypes().add(this.getDescriptionBox());
-		memberEClass.getESuperTypes().add(this.getIdentifiedElement());
-		termEClass.getESuperTypes().add(this.getMember());
+		vocabularyImportEClass.getESuperTypes().add(this.getImport());
+		vocabularyBundleImportEClass.getESuperTypes().add(this.getImport());
+		descriptionImportEClass.getESuperTypes().add(this.getImport());
+		descriptionBundleImportEClass.getESuperTypes().add(this.getImport());
+		vocabularyExtensionEClass.getESuperTypes().add(this.getVocabularyImport());
+		vocabularyUsageEClass.getESuperTypes().add(this.getVocabularyImport());
+		vocabularyBundleExtensionEClass.getESuperTypes().add(this.getVocabularyBundleImport());
+		vocabularyBundleInclusionEClass.getESuperTypes().add(this.getVocabularyBundleImport());
+		descriptionExtensionEClass.getESuperTypes().add(this.getDescriptionImport());
+		descriptionUsageEClass.getESuperTypes().add(this.getDescriptionImport());
+		descriptionBundleExtensionEClass.getESuperTypes().add(this.getDescriptionBundleImport());
+		descriptionBundleInclusionEClass.getESuperTypes().add(this.getDescriptionBundleImport());
+		descriptionBundleUsageEClass.getESuperTypes().add(this.getDescriptionBundleImport());
+		vocabularyStatementEClass.getESuperTypes().add(this.getStatement());
+		descriptionStatementEClass.getESuperTypes().add(this.getStatement());
+		vocabularyMemberEClass.getESuperTypes().add(this.getMember());
+		descriptionMemberEClass.getESuperTypes().add(this.getMember());
+		termEClass.getESuperTypes().add(this.getVocabularyMember());
+		ruleEClass.getESuperTypes().add(this.getVocabularyMember());
+		ruleEClass.getESuperTypes().add(this.getVocabularyStatement());
 		specializableTermEClass.getESuperTypes().add(this.getTerm());
 		specializableTermEClass.getESuperTypes().add(this.getVocabularyStatement());
+		featureEClass.getESuperTypes().add(this.getTerm());
+		propertyEClass.getESuperTypes().add(this.getFeature());
 		typeEClass.getESuperTypes().add(this.getSpecializableTerm());
 		classifierEClass.getESuperTypes().add(this.getType());
+		scalarEClass.getESuperTypes().add(this.getType());
 		entityEClass.getESuperTypes().add(this.getClassifier());
+		structureEClass.getESuperTypes().add(this.getClassifier());
 		aspectEClass.getESuperTypes().add(this.getEntity());
 		conceptEClass.getESuperTypes().add(this.getEntity());
 		relationEntityEClass.getESuperTypes().add(this.getEntity());
-		structureEClass.getESuperTypes().add(this.getClassifier());
-		featureEClass.getESuperTypes().add(this.getTerm());
-		propertyEClass.getESuperTypes().add(this.getFeature());
+		facetedScalarEClass.getESuperTypes().add(this.getScalar());
+		enumeratedScalarEClass.getESuperTypes().add(this.getScalar());
 		annotationPropertyEClass.getESuperTypes().add(this.getProperty());
 		annotationPropertyEClass.getESuperTypes().add(this.getSpecializableTerm());
 		semanticPropertyEClass.getESuperTypes().add(this.getProperty());
@@ -4633,21 +4681,50 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		scalarPropertyEClass.getESuperTypes().add(this.getSpecializableTerm());
 		structuredPropertyEClass.getESuperTypes().add(this.getSemanticProperty());
 		structuredPropertyEClass.getESuperTypes().add(this.getSpecializableTerm());
-		scalarEClass.getESuperTypes().add(this.getType());
-		facetedScalarEClass.getESuperTypes().add(this.getScalar());
-		enumeratedScalarEClass.getESuperTypes().add(this.getScalar());
 		relationEClass.getESuperTypes().add(this.getFeature());
 		forwardRelationEClass.getESuperTypes().add(this.getRelation());
 		reverseRelationEClass.getESuperTypes().add(this.getRelation());
-		ruleEClass.getESuperTypes().add(this.getMember());
-		ruleEClass.getESuperTypes().add(this.getVocabularyStatement());
-		instanceEClass.getESuperTypes().add(this.getElement());
-		structureInstanceEClass.getESuperTypes().add(this.getInstance());
 		namedInstanceEClass.getESuperTypes().add(this.getMember());
 		namedInstanceEClass.getESuperTypes().add(this.getInstance());
 		namedInstanceEClass.getESuperTypes().add(this.getDescriptionStatement());
 		conceptInstanceEClass.getESuperTypes().add(this.getNamedInstance());
 		relationInstanceEClass.getESuperTypes().add(this.getNamedInstance());
+		structureInstanceEClass.getESuperTypes().add(this.getInstance());
+		keyAxiomEClass.getESuperTypes().add(this.getAxiom());
+		specializationAxiomEClass.getESuperTypes().add(this.getAxiom());
+		restrictionAxiomEClass.getESuperTypes().add(this.getAxiom());
+		propertyRestrictionAxiomEClass.getESuperTypes().add(this.getRestrictionAxiom());
+		scalarPropertyRestrictionAxiomEClass.getESuperTypes().add(this.getPropertyRestrictionAxiom());
+		scalarPropertyRangeRestrictionAxiomEClass.getESuperTypes().add(this.getScalarPropertyRestrictionAxiom());
+		scalarPropertyCardinalityRestrictionAxiomEClass.getESuperTypes().add(this.getScalarPropertyRestrictionAxiom());
+		scalarPropertyValueRestrictionAxiomEClass.getESuperTypes().add(this.getScalarPropertyRestrictionAxiom());
+		structuredPropertyRestrictionAxiomEClass.getESuperTypes().add(this.getPropertyRestrictionAxiom());
+		structuredPropertyRangeRestrictionAxiomEClass.getESuperTypes().add(this.getStructuredPropertyRestrictionAxiom());
+		structuredPropertyCardinalityRestrictionAxiomEClass.getESuperTypes().add(this.getStructuredPropertyRestrictionAxiom());
+		structuredPropertyValueRestrictionAxiomEClass.getESuperTypes().add(this.getStructuredPropertyRestrictionAxiom());
+		relationRestrictionAxiomEClass.getESuperTypes().add(this.getRestrictionAxiom());
+		relationRangeRestrictionAxiomEClass.getESuperTypes().add(this.getRelationRestrictionAxiom());
+		relationCardinalityRestrictionAxiomEClass.getESuperTypes().add(this.getRelationRestrictionAxiom());
+		relationTargetRestrictionAxiomEClass.getESuperTypes().add(this.getRelationRestrictionAxiom());
+		typeAssertionEClass.getESuperTypes().add(this.getAssertion());
+		conceptTypeAssertionEClass.getESuperTypes().add(this.getTypeAssertion());
+		relationTypeAssertionEClass.getESuperTypes().add(this.getTypeAssertion());
+		propertyValueAssertionEClass.getESuperTypes().add(this.getAssertion());
+		scalarPropertyValueAssertionEClass.getESuperTypes().add(this.getPropertyValueAssertion());
+		structuredPropertyValueAssertionEClass.getESuperTypes().add(this.getPropertyValueAssertion());
+		linkAssertionEClass.getESuperTypes().add(this.getAssertion());
+		unaryPredicateEClass.getESuperTypes().add(this.getPredicate());
+		binaryPredicateEClass.getESuperTypes().add(this.getPredicate());
+		typePredicateEClass.getESuperTypes().add(this.getUnaryPredicate());
+		relationEntityPredicateEClass.getESuperTypes().add(this.getBinaryPredicate());
+		featurePredicateEClass.getESuperTypes().add(this.getBinaryPredicate());
+		sameAsPredicateEClass.getESuperTypes().add(this.getBinaryPredicate());
+		differentFromPredicateEClass.getESuperTypes().add(this.getBinaryPredicate());
+		quotedLiteralEClass.getESuperTypes().add(this.getLiteral());
+		integerLiteralEClass.getESuperTypes().add(this.getLiteral());
+		decimalLiteralEClass.getESuperTypes().add(this.getLiteral());
+		doubleLiteralEClass.getESuperTypes().add(this.getLiteral());
+		booleanLiteralEClass.getESuperTypes().add(this.getLiteral());
 		referenceEClass.getESuperTypes().add(this.getElement());
 		specializableTermReferenceEClass.getESuperTypes().add(this.getReference());
 		specializableTermReferenceEClass.getESuperTypes().add(this.getVocabularyStatement());
@@ -4670,62 +4747,6 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		namedInstanceReferenceEClass.getESuperTypes().add(this.getDescriptionStatement());
 		conceptInstanceReferenceEClass.getESuperTypes().add(this.getNamedInstanceReference());
 		relationInstanceReferenceEClass.getESuperTypes().add(this.getNamedInstanceReference());
-		statementEClass.getESuperTypes().add(this.getElement());
-		vocabularyStatementEClass.getESuperTypes().add(this.getStatement());
-		descriptionStatementEClass.getESuperTypes().add(this.getStatement());
-		importEClass.getESuperTypes().add(this.getAnnotatedElement());
-		vocabularyImportEClass.getESuperTypes().add(this.getImport());
-		vocabularyExtensionEClass.getESuperTypes().add(this.getVocabularyImport());
-		vocabularyUsageEClass.getESuperTypes().add(this.getVocabularyImport());
-		vocabularyBundleImportEClass.getESuperTypes().add(this.getImport());
-		vocabularyBundleExtensionEClass.getESuperTypes().add(this.getVocabularyBundleImport());
-		vocabularyBundleInclusionEClass.getESuperTypes().add(this.getVocabularyBundleImport());
-		descriptionImportEClass.getESuperTypes().add(this.getImport());
-		descriptionExtensionEClass.getESuperTypes().add(this.getDescriptionImport());
-		descriptionUsageEClass.getESuperTypes().add(this.getDescriptionImport());
-		descriptionBundleImportEClass.getESuperTypes().add(this.getImport());
-		descriptionBundleExtensionEClass.getESuperTypes().add(this.getDescriptionBundleImport());
-		descriptionBundleInclusionEClass.getESuperTypes().add(this.getDescriptionBundleImport());
-		descriptionBundleUsageEClass.getESuperTypes().add(this.getDescriptionBundleImport());
-		axiomEClass.getESuperTypes().add(this.getElement());
-		specializationAxiomEClass.getESuperTypes().add(this.getAxiom());
-		restrictionAxiomEClass.getESuperTypes().add(this.getAxiom());
-		propertyRestrictionAxiomEClass.getESuperTypes().add(this.getRestrictionAxiom());
-		scalarPropertyRestrictionAxiomEClass.getESuperTypes().add(this.getPropertyRestrictionAxiom());
-		scalarPropertyRangeRestrictionAxiomEClass.getESuperTypes().add(this.getScalarPropertyRestrictionAxiom());
-		scalarPropertyCardinalityRestrictionAxiomEClass.getESuperTypes().add(this.getScalarPropertyRestrictionAxiom());
-		scalarPropertyValueRestrictionAxiomEClass.getESuperTypes().add(this.getScalarPropertyRestrictionAxiom());
-		structuredPropertyRestrictionAxiomEClass.getESuperTypes().add(this.getPropertyRestrictionAxiom());
-		structuredPropertyRangeRestrictionAxiomEClass.getESuperTypes().add(this.getStructuredPropertyRestrictionAxiom());
-		structuredPropertyCardinalityRestrictionAxiomEClass.getESuperTypes().add(this.getStructuredPropertyRestrictionAxiom());
-		structuredPropertyValueRestrictionAxiomEClass.getESuperTypes().add(this.getStructuredPropertyRestrictionAxiom());
-		relationRestrictionAxiomEClass.getESuperTypes().add(this.getRestrictionAxiom());
-		relationRangeRestrictionAxiomEClass.getESuperTypes().add(this.getRelationRestrictionAxiom());
-		relationCardinalityRestrictionAxiomEClass.getESuperTypes().add(this.getRelationRestrictionAxiom());
-		relationTargetRestrictionAxiomEClass.getESuperTypes().add(this.getRelationRestrictionAxiom());
-		keyAxiomEClass.getESuperTypes().add(this.getAxiom());
-		assertionEClass.getESuperTypes().add(this.getElement());
-		typeAssertionEClass.getESuperTypes().add(this.getAssertion());
-		conceptTypeAssertionEClass.getESuperTypes().add(this.getTypeAssertion());
-		relationTypeAssertionEClass.getESuperTypes().add(this.getTypeAssertion());
-		propertyValueAssertionEClass.getESuperTypes().add(this.getAssertion());
-		scalarPropertyValueAssertionEClass.getESuperTypes().add(this.getPropertyValueAssertion());
-		structuredPropertyValueAssertionEClass.getESuperTypes().add(this.getPropertyValueAssertion());
-		linkAssertionEClass.getESuperTypes().add(this.getAssertion());
-		predicateEClass.getESuperTypes().add(this.getElement());
-		unaryPredicateEClass.getESuperTypes().add(this.getPredicate());
-		typePredicateEClass.getESuperTypes().add(this.getUnaryPredicate());
-		binaryPredicateEClass.getESuperTypes().add(this.getPredicate());
-		relationEntityPredicateEClass.getESuperTypes().add(this.getBinaryPredicate());
-		featurePredicateEClass.getESuperTypes().add(this.getBinaryPredicate());
-		sameAsPredicateEClass.getESuperTypes().add(this.getBinaryPredicate());
-		differentFromPredicateEClass.getESuperTypes().add(this.getBinaryPredicate());
-		literalEClass.getESuperTypes().add(this.getElement());
-		quotedLiteralEClass.getESuperTypes().add(this.getLiteral());
-		integerLiteralEClass.getESuperTypes().add(this.getLiteral());
-		decimalLiteralEClass.getESuperTypes().add(this.getLiteral());
-		doubleLiteralEClass.getESuperTypes().add(this.getLiteral());
-		booleanLiteralEClass.getESuperTypes().add(this.getLiteral());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(elementEClass, Element.class, "Element", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -4745,15 +4766,36 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		initEReference(getAnnotation_Property(), this.getAnnotationProperty(), null, "property", null, 1, 1, Annotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAnnotation_Value(), this.getLiteral(), null, "value", null, 0, 1, Annotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAnnotation_ReferenceValue(), this.getMember(), null, "referenceValue", null, 0, 1, Annotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAnnotation_OwningElement(), this.getAnnotatedElement(), this.getAnnotatedElement_OwnedAnnotations(), "owningElement", null, 0, 1, Annotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAnnotation_OwningElement(), this.getIdentifiedElement(), this.getIdentifiedElement_OwnedAnnotations(), "owningElement", null, 0, 1, Annotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAnnotation_OwningReference(), this.getReference(), this.getReference_OwnedAnnotations(), "owningReference", null, 0, 1, Annotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(annotatedElementEClass, AnnotatedElement.class, "AnnotatedElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getAnnotatedElement_OwnedAnnotations(), this.getAnnotation(), this.getAnnotation_OwningElement(), "ownedAnnotations", null, 0, -1, AnnotatedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
 		initEClass(identifiedElementEClass, IdentifiedElement.class, "IdentifiedElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getIdentifiedElement_OwnedAnnotations(), this.getAnnotation(), this.getAnnotation_OwningElement(), "ownedAnnotations", null, 0, -1, IdentifiedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEOperation(getIdentifiedElement__GetIri(), theEcorePackage.getEString(), "getIri", 0, 1, !IS_UNIQUE, IS_ORDERED);
+
+		initEClass(importEClass, Import.class, "Import", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getImport_Namespace(), this.getNamespace(), "namespace", null, 1, 1, Import.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getImport_Prefix(), this.getID(), "prefix", null, 0, 1, Import.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEOperation(getImport__GetIri(), theEcorePackage.getEString(), "getIri", 0, 1, !IS_UNIQUE, IS_ORDERED);
+
+		initEOperation(getImport__GetSeparator(), this.getSeparatorKind(), "getSeparator", 0, 1, !IS_UNIQUE, IS_ORDERED);
+
+		initEClass(instanceEClass, Instance.class, "Instance", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getInstance_OwnedPropertyValues(), this.getPropertyValueAssertion(), this.getPropertyValueAssertion_OwningInstance(), "ownedPropertyValues", null, 0, -1, Instance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(statementEClass, Statement.class, "Statement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(axiomEClass, Axiom.class, "Axiom", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(assertionEClass, Assertion.class, "Assertion", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(predicateEClass, Predicate.class, "Predicate", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getPredicate_AntecedentRule(), this.getRule(), this.getRule_Antecedent(), "antecedentRule", null, 0, 1, Predicate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPredicate_ConsequentRule(), this.getRule(), this.getRule_Consequent(), "consequentRule", null, 0, 1, Predicate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(literalEClass, Literal.class, "Literal", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(ontologyEClass, Ontology.class, "Ontology", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getOntology_Namespace(), this.getNamespace(), "namespace", null, 1, 1, Ontology.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -4763,7 +4805,16 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 
 		initEOperation(getOntology__GetSeparator(), this.getSeparatorKind(), "getSeparator", 0, 1, !IS_UNIQUE, IS_ORDERED);
 
+		initEClass(memberEClass, Member.class, "Member", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getMember_Name(), this.getID(), "name", null, 1, 1, Member.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEOperation(getMember__GetIri(), theEcorePackage.getEString(), "getIri", 0, 1, !IS_UNIQUE, IS_ORDERED);
+
+		initEOperation(getMember__GetAbbreviatedIri(), theEcorePackage.getEString(), "getAbbreviatedIri", 0, 1, !IS_UNIQUE, IS_ORDERED);
+
 		initEClass(vocabularyBoxEClass, VocabularyBox.class, "VocabularyBox", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(descriptionBoxEClass, DescriptionBox.class, "DescriptionBox", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(vocabularyEClass, Vocabulary.class, "Vocabulary", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getVocabulary_OwnedImports(), this.getVocabularyImport(), this.getVocabularyImport_OwningVocabulary(), "ownedImports", null, 0, -1, Vocabulary.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -4772,8 +4823,6 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		initEClass(vocabularyBundleEClass, VocabularyBundle.class, "VocabularyBundle", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getVocabularyBundle_OwnedImports(), this.getVocabularyBundleImport(), this.getVocabularyBundleImport_OwningVocabularyBundle(), "ownedImports", null, 0, -1, VocabularyBundle.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(descriptionBoxEClass, DescriptionBox.class, "DescriptionBox", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
 		initEClass(descriptionEClass, Description.class, "Description", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getDescription_OwnedImports(), this.getDescriptionImport(), this.getDescriptionImport_OwningDescription(), "ownedImports", null, 0, -1, Description.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDescription_OwnedStatements(), this.getDescriptionStatement(), this.getDescriptionStatement_OwningDescription(), "ownedStatements", null, 0, -1, Description.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -4781,26 +4830,71 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		initEClass(descriptionBundleEClass, DescriptionBundle.class, "DescriptionBundle", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getDescriptionBundle_OwnedImports(), this.getDescriptionBundleImport(), this.getDescriptionBundleImport_OwningDescriptionBundle(), "ownedImports", null, 0, -1, DescriptionBundle.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(memberEClass, Member.class, "Member", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getMember_Name(), this.getID(), "name", null, 1, 1, Member.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(vocabularyImportEClass, VocabularyImport.class, "VocabularyImport", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getVocabularyImport_OwningVocabulary(), this.getVocabulary(), this.getVocabulary_OwnedImports(), "owningVocabulary", null, 1, 1, VocabularyImport.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEOperation(getMember__GetIri(), theEcorePackage.getEString(), "getIri", 0, 1, !IS_UNIQUE, IS_ORDERED);
+		initEClass(vocabularyBundleImportEClass, VocabularyBundleImport.class, "VocabularyBundleImport", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getVocabularyBundleImport_OwningVocabularyBundle(), this.getVocabularyBundle(), this.getVocabularyBundle_OwnedImports(), "owningVocabularyBundle", null, 1, 1, VocabularyBundleImport.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEOperation(getMember__GetAbbreviatedIri(), theEcorePackage.getEString(), "getAbbreviatedIri", 0, 1, !IS_UNIQUE, IS_ORDERED);
+		initEClass(descriptionImportEClass, DescriptionImport.class, "DescriptionImport", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getDescriptionImport_OwningDescription(), this.getDescription(), this.getDescription_OwnedImports(), "owningDescription", null, 1, 1, DescriptionImport.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(descriptionBundleImportEClass, DescriptionBundleImport.class, "DescriptionBundleImport", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getDescriptionBundleImport_OwningDescriptionBundle(), this.getDescriptionBundle(), this.getDescriptionBundle_OwnedImports(), "owningDescriptionBundle", null, 1, 1, DescriptionBundleImport.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(vocabularyExtensionEClass, VocabularyExtension.class, "VocabularyExtension", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(vocabularyUsageEClass, VocabularyUsage.class, "VocabularyUsage", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(vocabularyBundleExtensionEClass, VocabularyBundleExtension.class, "VocabularyBundleExtension", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(vocabularyBundleInclusionEClass, VocabularyBundleInclusion.class, "VocabularyBundleInclusion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(descriptionExtensionEClass, DescriptionExtension.class, "DescriptionExtension", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(descriptionUsageEClass, DescriptionUsage.class, "DescriptionUsage", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(descriptionBundleExtensionEClass, DescriptionBundleExtension.class, "DescriptionBundleExtension", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(descriptionBundleInclusionEClass, DescriptionBundleInclusion.class, "DescriptionBundleInclusion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(descriptionBundleUsageEClass, DescriptionBundleUsage.class, "DescriptionBundleUsage", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(vocabularyStatementEClass, VocabularyStatement.class, "VocabularyStatement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getVocabularyStatement_OwningVocabulary(), this.getVocabulary(), this.getVocabulary_OwnedStatements(), "owningVocabulary", null, 1, 1, VocabularyStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(descriptionStatementEClass, DescriptionStatement.class, "DescriptionStatement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getDescriptionStatement_OwningDescription(), this.getDescription(), this.getDescription_OwnedStatements(), "owningDescription", null, 1, 1, DescriptionStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(vocabularyMemberEClass, VocabularyMember.class, "VocabularyMember", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(descriptionMemberEClass, DescriptionMember.class, "DescriptionMember", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(termEClass, Term.class, "Term", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
+		initEClass(ruleEClass, Rule.class, "Rule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getRule_Antecedent(), this.getPredicate(), this.getPredicate_AntecedentRule(), "antecedent", null, 1, -1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getRule_Consequent(), this.getPredicate(), this.getPredicate_ConsequentRule(), "consequent", null, 1, -1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(specializableTermEClass, SpecializableTerm.class, "SpecializableTerm", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSpecializableTerm_OwnedSpecializations(), this.getSpecializationAxiom(), this.getSpecializationAxiom_OwningTerm(), "ownedSpecializations", null, 0, -1, SpecializableTerm.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(featureEClass, Feature.class, "Feature", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(propertyEClass, Property.class, "Property", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(typeEClass, Type.class, "Type", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(classifierEClass, Classifier.class, "Classifier", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getClassifier_OwnedPropertyRestrictions(), this.getPropertyRestrictionAxiom(), this.getPropertyRestrictionAxiom_OwningClassifier(), "ownedPropertyRestrictions", null, 0, -1, Classifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(scalarEClass, Scalar.class, "Scalar", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
 		initEClass(entityEClass, Entity.class, "Entity", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getEntity_OwnedRelationRestrictions(), this.getRelationRestrictionAxiom(), this.getRelationRestrictionAxiom_OwningEntity(), "ownedRelationRestrictions", null, 0, -1, Entity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEntity_OwnedKeys(), this.getKeyAxiom(), this.getKeyAxiom_OwningEntity(), "ownedKeys", null, 0, -1, Entity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(structureEClass, Structure.class, "Structure", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(aspectEClass, Aspect.class, "Aspect", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -4820,11 +4914,19 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		initEAttribute(getRelationEntity_Irreflexive(), theEcorePackage.getEBoolean(), "irreflexive", null, 0, 1, RelationEntity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getRelationEntity_Transitive(), theEcorePackage.getEBoolean(), "transitive", null, 0, 1, RelationEntity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(structureEClass, Structure.class, "Structure", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(facetedScalarEClass, FacetedScalar.class, "FacetedScalar", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getFacetedScalar_Length(), this.getUnsignedInteger(), "length", null, 0, 1, FacetedScalar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getFacetedScalar_MinLength(), this.getUnsignedInteger(), "minLength", null, 0, 1, FacetedScalar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getFacetedScalar_MaxLength(), this.getUnsignedInteger(), "maxLength", null, 0, 1, FacetedScalar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getFacetedScalar_Pattern(), theEcorePackage.getEString(), "pattern", null, 0, 1, FacetedScalar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getFacetedScalar_Language(), theEcorePackage.getEString(), "language", null, 0, 1, FacetedScalar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getFacetedScalar_MinInclusive(), this.getLiteral(), null, "minInclusive", null, 0, 1, FacetedScalar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getFacetedScalar_MinExclusive(), this.getLiteral(), null, "minExclusive", null, 0, 1, FacetedScalar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getFacetedScalar_MaxInclusive(), this.getLiteral(), null, "maxInclusive", null, 0, 1, FacetedScalar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getFacetedScalar_MaxExclusive(), this.getLiteral(), null, "maxExclusive", null, 0, 1, FacetedScalar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(featureEClass, Feature.class, "Feature", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(propertyEClass, Property.class, "Property", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(enumeratedScalarEClass, EnumeratedScalar.class, "EnumeratedScalar", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getEnumeratedScalar_Literals(), this.getLiteral(), null, "literals", null, 0, -1, EnumeratedScalar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(annotationPropertyEClass, AnnotationProperty.class, "AnnotationProperty", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -4845,22 +4947,6 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		initEAttribute(getStructuredProperty_Functional(), theEcorePackage.getEBoolean(), "functional", null, 0, 1, StructuredProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getStructuredProperty_Domain(), this.getClassifier(), null, "domain", null, 1, 1, StructuredProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getStructuredProperty_Range(), this.getStructure(), null, "range", null, 1, 1, StructuredProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(scalarEClass, Scalar.class, "Scalar", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(facetedScalarEClass, FacetedScalar.class, "FacetedScalar", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getFacetedScalar_Length(), this.getUnsignedInteger(), "length", null, 0, 1, FacetedScalar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getFacetedScalar_MinLength(), this.getUnsignedInteger(), "minLength", null, 0, 1, FacetedScalar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getFacetedScalar_MaxLength(), this.getUnsignedInteger(), "maxLength", null, 0, 1, FacetedScalar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getFacetedScalar_Pattern(), theEcorePackage.getEString(), "pattern", null, 0, 1, FacetedScalar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getFacetedScalar_Language(), theEcorePackage.getEString(), "language", null, 0, 1, FacetedScalar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getFacetedScalar_MinInclusive(), this.getLiteral(), null, "minInclusive", null, 0, 1, FacetedScalar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getFacetedScalar_MinExclusive(), this.getLiteral(), null, "minExclusive", null, 0, 1, FacetedScalar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getFacetedScalar_MaxInclusive(), this.getLiteral(), null, "maxInclusive", null, 0, 1, FacetedScalar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getFacetedScalar_MaxExclusive(), this.getLiteral(), null, "maxExclusive", null, 0, 1, FacetedScalar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(enumeratedScalarEClass, EnumeratedScalar.class, "EnumeratedScalar", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getEnumeratedScalar_Literals(), this.getLiteral(), null, "literals", null, 0, -1, EnumeratedScalar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(relationEClass, Relation.class, "Relation", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getRelation_Domain(), this.getEntity(), null, "domain", null, 1, 1, Relation.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
@@ -4893,18 +4979,6 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 
 		initEOperation(getReverseRelation__DeriveInverse(), this.getRelation(), "deriveInverse", 0, 1, !IS_UNIQUE, IS_ORDERED);
 
-		initEClass(ruleEClass, Rule.class, "Rule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getRule_Antecedent(), this.getPredicate(), this.getPredicate_AntecedentRule(), "antecedent", null, 1, -1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getRule_Consequent(), this.getPredicate(), this.getPredicate_ConsequentRule(), "consequent", null, 1, -1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(instanceEClass, Instance.class, "Instance", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getInstance_OwnedPropertyValues(), this.getPropertyValueAssertion(), this.getPropertyValueAssertion_OwningInstance(), "ownedPropertyValues", null, 0, -1, Instance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(structureInstanceEClass, StructureInstance.class, "StructureInstance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getStructureInstance_Type(), this.getStructure(), null, "type", null, 1, 1, StructureInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getStructureInstance_OwningAxiom(), this.getStructuredPropertyValueRestrictionAxiom(), this.getStructuredPropertyValueRestrictionAxiom_Value(), "owningAxiom", null, 0, 1, StructureInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getStructureInstance_OwningAssertion(), this.getStructuredPropertyValueAssertion(), this.getStructuredPropertyValueAssertion_Value(), "owningAssertion", null, 0, 1, StructureInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
 		initEClass(namedInstanceEClass, NamedInstance.class, "NamedInstance", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getNamedInstance_OwnedLinks(), this.getLinkAssertion(), this.getLinkAssertion_OwningInstance(), "ownedLinks", null, 0, -1, NamedInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -4916,111 +4990,15 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		initEReference(getRelationInstance_Sources(), this.getNamedInstance(), null, "sources", null, 1, -1, RelationInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRelationInstance_Targets(), this.getNamedInstance(), null, "targets", null, 1, -1, RelationInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(referenceEClass, Reference.class, "Reference", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getReference_OwnedAnnotations(), this.getAnnotation(), this.getAnnotation_OwningReference(), "ownedAnnotations", null, 0, -1, Reference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(structureInstanceEClass, StructureInstance.class, "StructureInstance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getStructureInstance_Type(), this.getStructure(), null, "type", null, 1, 1, StructureInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getStructureInstance_OwningAxiom(), this.getStructuredPropertyValueRestrictionAxiom(), this.getStructuredPropertyValueRestrictionAxiom_Value(), "owningAxiom", null, 0, 1, StructureInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getStructureInstance_OwningAssertion(), this.getStructuredPropertyValueAssertion(), this.getStructuredPropertyValueAssertion_Value(), "owningAssertion", null, 0, 1, StructureInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(specializableTermReferenceEClass, SpecializableTermReference.class, "SpecializableTermReference", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getSpecializableTermReference_OwnedSpecializations(), this.getSpecializationAxiom(), this.getSpecializationAxiom_OwningReference(), "ownedSpecializations", null, 0, -1, SpecializableTermReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(classifierReferenceEClass, ClassifierReference.class, "ClassifierReference", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getClassifierReference_OwnedPropertyRestrictions(), this.getPropertyRestrictionAxiom(), this.getPropertyRestrictionAxiom_OwningReference(), "ownedPropertyRestrictions", null, 0, -1, ClassifierReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(entityReferenceEClass, EntityReference.class, "EntityReference", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getEntityReference_OwnedRelationRestrictions(), this.getRelationRestrictionAxiom(), this.getRelationRestrictionAxiom_OwningReference(), "ownedRelationRestrictions", null, 0, -1, EntityReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getEntityReference_OwnedKeys(), this.getKeyAxiom(), this.getKeyAxiom_OwningReference(), "ownedKeys", null, 0, -1, EntityReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(aspectReferenceEClass, AspectReference.class, "AspectReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getAspectReference_Aspect(), this.getAspect(), null, "aspect", null, 1, 1, AspectReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(conceptReferenceEClass, ConceptReference.class, "ConceptReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getConceptReference_Concept(), this.getConcept(), null, "concept", null, 1, 1, ConceptReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(relationEntityReferenceEClass, RelationEntityReference.class, "RelationEntityReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getRelationEntityReference_Entity(), this.getRelationEntity(), null, "entity", null, 1, 1, RelationEntityReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(structureReferenceEClass, StructureReference.class, "StructureReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getStructureReference_Structure(), this.getStructure(), null, "structure", null, 1, 1, StructureReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(annotationPropertyReferenceEClass, AnnotationPropertyReference.class, "AnnotationPropertyReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getAnnotationPropertyReference_Property(), this.getAnnotationProperty(), null, "property", null, 1, 1, AnnotationPropertyReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(scalarPropertyReferenceEClass, ScalarPropertyReference.class, "ScalarPropertyReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getScalarPropertyReference_Property(), this.getScalarProperty(), null, "property", null, 1, 1, ScalarPropertyReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(structuredPropertyReferenceEClass, StructuredPropertyReference.class, "StructuredPropertyReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getStructuredPropertyReference_Property(), this.getStructuredProperty(), null, "property", null, 1, 1, StructuredPropertyReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(facetedScalarReferenceEClass, FacetedScalarReference.class, "FacetedScalarReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getFacetedScalarReference_Scalar(), this.getFacetedScalar(), null, "scalar", null, 1, 1, FacetedScalarReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(enumeratedScalarReferenceEClass, EnumeratedScalarReference.class, "EnumeratedScalarReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getEnumeratedScalarReference_Scalar(), this.getEnumeratedScalar(), null, "scalar", null, 1, 1, EnumeratedScalarReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(relationReferenceEClass, RelationReference.class, "RelationReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getRelationReference_Relation(), this.getRelation(), null, "relation", null, 1, 1, RelationReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(ruleReferenceEClass, RuleReference.class, "RuleReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getRuleReference_Rule(), this.getRule(), null, "rule", null, 1, 1, RuleReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(namedInstanceReferenceEClass, NamedInstanceReference.class, "NamedInstanceReference", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getNamedInstanceReference_OwnedPropertyValues(), this.getPropertyValueAssertion(), this.getPropertyValueAssertion_OwningReference(), "ownedPropertyValues", null, 0, -1, NamedInstanceReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getNamedInstanceReference_OwnedLinks(), this.getLinkAssertion(), this.getLinkAssertion_OwningReference(), "ownedLinks", null, 0, -1, NamedInstanceReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(conceptInstanceReferenceEClass, ConceptInstanceReference.class, "ConceptInstanceReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getConceptInstanceReference_Instance(), this.getConceptInstance(), null, "instance", null, 1, 1, ConceptInstanceReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getConceptInstanceReference_OwnedTypes(), this.getConceptTypeAssertion(), this.getConceptTypeAssertion_OwningReference(), "ownedTypes", null, 0, -1, ConceptInstanceReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(relationInstanceReferenceEClass, RelationInstanceReference.class, "RelationInstanceReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getRelationInstanceReference_Instance(), this.getRelationInstance(), null, "instance", null, 1, 1, RelationInstanceReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getRelationInstanceReference_OwnedTypes(), this.getRelationTypeAssertion(), this.getRelationTypeAssertion_OwningReference(), "ownedTypes", null, 0, -1, RelationInstanceReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(statementEClass, Statement.class, "Statement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(vocabularyStatementEClass, VocabularyStatement.class, "VocabularyStatement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getVocabularyStatement_OwningVocabulary(), this.getVocabulary(), this.getVocabulary_OwnedStatements(), "owningVocabulary", null, 1, 1, VocabularyStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(descriptionStatementEClass, DescriptionStatement.class, "DescriptionStatement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getDescriptionStatement_OwningDescription(), this.getDescription(), this.getDescription_OwnedStatements(), "owningDescription", null, 1, 1, DescriptionStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(importEClass, Import.class, "Import", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getImport_Namespace(), this.getNamespace(), "namespace", null, 1, 1, Import.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getImport_Prefix(), this.getID(), "prefix", null, 0, 1, Import.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEOperation(getImport__GetIri(), theEcorePackage.getEString(), "getIri", 0, 1, !IS_UNIQUE, IS_ORDERED);
-
-		initEOperation(getImport__GetSeparator(), this.getSeparatorKind(), "getSeparator", 0, 1, !IS_UNIQUE, IS_ORDERED);
-
-		initEClass(vocabularyImportEClass, VocabularyImport.class, "VocabularyImport", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getVocabularyImport_OwningVocabulary(), this.getVocabulary(), this.getVocabulary_OwnedImports(), "owningVocabulary", null, 1, 1, VocabularyImport.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(vocabularyExtensionEClass, VocabularyExtension.class, "VocabularyExtension", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(vocabularyUsageEClass, VocabularyUsage.class, "VocabularyUsage", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(vocabularyBundleImportEClass, VocabularyBundleImport.class, "VocabularyBundleImport", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getVocabularyBundleImport_OwningVocabularyBundle(), this.getVocabularyBundle(), this.getVocabularyBundle_OwnedImports(), "owningVocabularyBundle", null, 1, 1, VocabularyBundleImport.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(vocabularyBundleExtensionEClass, VocabularyBundleExtension.class, "VocabularyBundleExtension", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(vocabularyBundleInclusionEClass, VocabularyBundleInclusion.class, "VocabularyBundleInclusion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(descriptionImportEClass, DescriptionImport.class, "DescriptionImport", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getDescriptionImport_OwningDescription(), this.getDescription(), this.getDescription_OwnedImports(), "owningDescription", null, 1, 1, DescriptionImport.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(descriptionExtensionEClass, DescriptionExtension.class, "DescriptionExtension", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(descriptionUsageEClass, DescriptionUsage.class, "DescriptionUsage", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(descriptionBundleImportEClass, DescriptionBundleImport.class, "DescriptionBundleImport", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getDescriptionBundleImport_OwningDescriptionBundle(), this.getDescriptionBundle(), this.getDescriptionBundle_OwnedImports(), "owningDescriptionBundle", null, 1, 1, DescriptionBundleImport.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(descriptionBundleExtensionEClass, DescriptionBundleExtension.class, "DescriptionBundleExtension", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(descriptionBundleInclusionEClass, DescriptionBundleInclusion.class, "DescriptionBundleInclusion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(descriptionBundleUsageEClass, DescriptionBundleUsage.class, "DescriptionBundleUsage", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(axiomEClass, Axiom.class, "Axiom", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(keyAxiomEClass, KeyAxiom.class, "KeyAxiom", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getKeyAxiom_Properties(), this.getFeature(), null, "properties", null, 1, -1, KeyAxiom.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getKeyAxiom_OwningEntity(), this.getEntity(), this.getEntity_OwnedKeys(), "owningEntity", null, 0, 1, KeyAxiom.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getKeyAxiom_OwningReference(), this.getEntityReference(), this.getEntityReference_OwnedKeys(), "owningReference", null, 0, 1, KeyAxiom.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(specializationAxiomEClass, SpecializationAxiom.class, "SpecializationAxiom", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSpecializationAxiom_SpecializedTerm(), this.getSpecializableTerm(), null, "specializedTerm", null, 1, 1, SpecializationAxiom.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -5080,13 +5058,6 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		initEClass(relationTargetRestrictionAxiomEClass, RelationTargetRestrictionAxiom.class, "RelationTargetRestrictionAxiom", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getRelationTargetRestrictionAxiom_Target(), this.getNamedInstance(), null, "target", null, 1, 1, RelationTargetRestrictionAxiom.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(keyAxiomEClass, KeyAxiom.class, "KeyAxiom", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getKeyAxiom_Properties(), this.getFeature(), null, "properties", null, 1, -1, KeyAxiom.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getKeyAxiom_OwningEntity(), this.getEntity(), this.getEntity_OwnedKeys(), "owningEntity", null, 0, 1, KeyAxiom.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getKeyAxiom_OwningReference(), this.getEntityReference(), this.getEntityReference_OwnedKeys(), "owningReference", null, 0, 1, KeyAxiom.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(assertionEClass, Assertion.class, "Assertion", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
 		initEClass(typeAssertionEClass, TypeAssertion.class, "TypeAssertion", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEOperation(getTypeAssertion__GetType(), this.getEntity(), "getType", 0, 1, !IS_UNIQUE, IS_ORDERED);
@@ -5123,20 +5094,16 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		initEReference(getLinkAssertion_OwningInstance(), this.getNamedInstance(), this.getNamedInstance_OwnedLinks(), "owningInstance", null, 0, 1, LinkAssertion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getLinkAssertion_OwningReference(), this.getNamedInstanceReference(), this.getNamedInstanceReference_OwnedLinks(), "owningReference", null, 0, 1, LinkAssertion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(predicateEClass, Predicate.class, "Predicate", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getPredicate_AntecedentRule(), this.getRule(), this.getRule_Antecedent(), "antecedentRule", null, 0, 1, Predicate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getPredicate_ConsequentRule(), this.getRule(), this.getRule_Consequent(), "consequentRule", null, 0, 1, Predicate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
 		initEClass(unaryPredicateEClass, UnaryPredicate.class, "UnaryPredicate", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getUnaryPredicate_Variable(), this.getID(), "variable", null, 1, 1, UnaryPredicate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(typePredicateEClass, TypePredicate.class, "TypePredicate", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getTypePredicate_Type(), this.getType(), null, "type", null, 1, 1, TypePredicate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(binaryPredicateEClass, BinaryPredicate.class, "BinaryPredicate", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getBinaryPredicate_Variable1(), this.getID(), "variable1", null, 1, 1, BinaryPredicate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBinaryPredicate_Variable2(), this.getID(), "variable2", null, 0, 1, BinaryPredicate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBinaryPredicate_Instance2(), this.getNamedInstance(), null, "instance2", null, 0, 1, BinaryPredicate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(typePredicateEClass, TypePredicate.class, "TypePredicate", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTypePredicate_Type(), this.getType(), null, "type", null, 1, 1, TypePredicate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(relationEntityPredicateEClass, RelationEntityPredicate.class, "RelationEntityPredicate", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getRelationEntityPredicate_Entity(), this.getRelationEntity(), null, "entity", null, 1, 1, RelationEntityPredicate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -5149,8 +5116,6 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		initEClass(sameAsPredicateEClass, SameAsPredicate.class, "SameAsPredicate", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(differentFromPredicateEClass, DifferentFromPredicate.class, "DifferentFromPredicate", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(literalEClass, Literal.class, "Literal", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(quotedLiteralEClass, QuotedLiteral.class, "QuotedLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getQuotedLiteral_Value(), theEcorePackage.getEString(), "value", null, 1, 1, QuotedLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -5168,6 +5133,64 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 
 		initEClass(booleanLiteralEClass, BooleanLiteral.class, "BooleanLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getBooleanLiteral_Value(), theEcorePackage.getEBoolean(), "value", null, 0, 1, BooleanLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(referenceEClass, Reference.class, "Reference", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getReference_OwnedAnnotations(), this.getAnnotation(), this.getAnnotation_OwningReference(), "ownedAnnotations", null, 0, -1, Reference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(specializableTermReferenceEClass, SpecializableTermReference.class, "SpecializableTermReference", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getSpecializableTermReference_OwnedSpecializations(), this.getSpecializationAxiom(), this.getSpecializationAxiom_OwningReference(), "ownedSpecializations", null, 0, -1, SpecializableTermReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(classifierReferenceEClass, ClassifierReference.class, "ClassifierReference", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getClassifierReference_OwnedPropertyRestrictions(), this.getPropertyRestrictionAxiom(), this.getPropertyRestrictionAxiom_OwningReference(), "ownedPropertyRestrictions", null, 0, -1, ClassifierReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(entityReferenceEClass, EntityReference.class, "EntityReference", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getEntityReference_OwnedRelationRestrictions(), this.getRelationRestrictionAxiom(), this.getRelationRestrictionAxiom_OwningReference(), "ownedRelationRestrictions", null, 0, -1, EntityReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEntityReference_OwnedKeys(), this.getKeyAxiom(), this.getKeyAxiom_OwningReference(), "ownedKeys", null, 0, -1, EntityReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(aspectReferenceEClass, AspectReference.class, "AspectReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getAspectReference_Aspect(), this.getAspect(), null, "aspect", null, 1, 1, AspectReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(conceptReferenceEClass, ConceptReference.class, "ConceptReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getConceptReference_Concept(), this.getConcept(), null, "concept", null, 1, 1, ConceptReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(relationEntityReferenceEClass, RelationEntityReference.class, "RelationEntityReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getRelationEntityReference_Entity(), this.getRelationEntity(), null, "entity", null, 1, 1, RelationEntityReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(structureReferenceEClass, StructureReference.class, "StructureReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getStructureReference_Structure(), this.getStructure(), null, "structure", null, 1, 1, StructureReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(annotationPropertyReferenceEClass, AnnotationPropertyReference.class, "AnnotationPropertyReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getAnnotationPropertyReference_Property(), this.getAnnotationProperty(), null, "property", null, 1, 1, AnnotationPropertyReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(scalarPropertyReferenceEClass, ScalarPropertyReference.class, "ScalarPropertyReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getScalarPropertyReference_Property(), this.getScalarProperty(), null, "property", null, 1, 1, ScalarPropertyReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(structuredPropertyReferenceEClass, StructuredPropertyReference.class, "StructuredPropertyReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getStructuredPropertyReference_Property(), this.getStructuredProperty(), null, "property", null, 1, 1, StructuredPropertyReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(facetedScalarReferenceEClass, FacetedScalarReference.class, "FacetedScalarReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getFacetedScalarReference_Scalar(), this.getFacetedScalar(), null, "scalar", null, 1, 1, FacetedScalarReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(enumeratedScalarReferenceEClass, EnumeratedScalarReference.class, "EnumeratedScalarReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getEnumeratedScalarReference_Scalar(), this.getEnumeratedScalar(), null, "scalar", null, 1, 1, EnumeratedScalarReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(relationReferenceEClass, RelationReference.class, "RelationReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getRelationReference_Relation(), this.getRelation(), null, "relation", null, 1, 1, RelationReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(ruleReferenceEClass, RuleReference.class, "RuleReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getRuleReference_Rule(), this.getRule(), null, "rule", null, 1, 1, RuleReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(namedInstanceReferenceEClass, NamedInstanceReference.class, "NamedInstanceReference", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getNamedInstanceReference_OwnedPropertyValues(), this.getPropertyValueAssertion(), this.getPropertyValueAssertion_OwningReference(), "ownedPropertyValues", null, 0, -1, NamedInstanceReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getNamedInstanceReference_OwnedLinks(), this.getLinkAssertion(), this.getLinkAssertion_OwningReference(), "ownedLinks", null, 0, -1, NamedInstanceReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(conceptInstanceReferenceEClass, ConceptInstanceReference.class, "ConceptInstanceReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getConceptInstanceReference_Instance(), this.getConceptInstance(), null, "instance", null, 1, 1, ConceptInstanceReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getConceptInstanceReference_OwnedTypes(), this.getConceptTypeAssertion(), this.getConceptTypeAssertion_OwningReference(), "ownedTypes", null, 0, -1, ConceptInstanceReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(relationInstanceReferenceEClass, RelationInstanceReference.class, "RelationInstanceReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getRelationInstanceReference_Instance(), this.getRelationInstance(), null, "instance", null, 1, 1, RelationInstanceReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getRelationInstanceReference_OwnedTypes(), this.getRelationTypeAssertion(), this.getRelationTypeAssertion_OwningReference(), "ownedTypes", null, 0, -1, RelationInstanceReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(separatorKindEEnum, SeparatorKind.class, "SeparatorKind");
@@ -5258,19 +5281,61 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 			   "heading", "Elements"
 		   });
 		addAnnotation
-		  (annotatedElementEClass,
-		   source,
-		   new String[] {
-			   "heading", "Elements"
-		   });
-		addAnnotation
 		  (identifiedElementEClass,
 		   source,
 		   new String[] {
 			   "heading", "Elements"
 		   });
 		addAnnotation
+		  (importEClass,
+		   source,
+		   new String[] {
+			   "heading", "Elements"
+		   });
+		addAnnotation
+		  (instanceEClass,
+		   source,
+		   new String[] {
+			   "heading", "Instances"
+		   });
+		addAnnotation
+		  (statementEClass,
+		   source,
+		   new String[] {
+			   "heading", "Elements"
+		   });
+		addAnnotation
+		  (axiomEClass,
+		   source,
+		   new String[] {
+			   "heading", "Axioms"
+		   });
+		addAnnotation
+		  (assertionEClass,
+		   source,
+		   new String[] {
+			   "heading", "Assertions"
+		   });
+		addAnnotation
+		  (predicateEClass,
+		   source,
+		   new String[] {
+			   "heading", "Rules"
+		   });
+		addAnnotation
+		  (literalEClass,
+		   source,
+		   new String[] {
+			   "heading", "Literals"
+		   });
+		addAnnotation
 		  (ontologyEClass,
+		   source,
+		   new String[] {
+			   "heading", "Elements"
+		   });
+		addAnnotation
+		  (memberEClass,
 		   source,
 		   new String[] {
 			   "heading", "Elements"
@@ -5280,6 +5345,12 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		   source,
 		   new String[] {
 			   "heading", "Vocabularies"
+		   });
+		addAnnotation
+		  (descriptionBoxEClass,
+		   source,
+		   new String[] {
+			   "heading", "Descriptions"
 		   });
 		addAnnotation
 		  (vocabularyEClass,
@@ -5294,12 +5365,6 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 			   "heading", "Vocabularies"
 		   });
 		addAnnotation
-		  (descriptionBoxEClass,
-		   source,
-		   new String[] {
-			   "heading", "Descriptions"
-		   });
-		addAnnotation
 		  (descriptionEClass,
 		   source,
 		   new String[] {
@@ -5312,10 +5377,94 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 			   "heading", "Descriptions"
 		   });
 		addAnnotation
-		  (memberEClass,
+		  (vocabularyImportEClass,
 		   source,
 		   new String[] {
-			   "heading", "Elements"
+			   "heading", "Vocabularies"
+		   });
+		addAnnotation
+		  (vocabularyBundleImportEClass,
+		   source,
+		   new String[] {
+			   "heading", "Vocabularies"
+		   });
+		addAnnotation
+		  (descriptionImportEClass,
+		   source,
+		   new String[] {
+			   "heading", "Descriptions"
+		   });
+		addAnnotation
+		  (descriptionBundleImportEClass,
+		   source,
+		   new String[] {
+			   "heading", "Descriptions"
+		   });
+		addAnnotation
+		  (vocabularyExtensionEClass,
+		   source,
+		   new String[] {
+			   "heading", "Vocabularies"
+		   });
+		addAnnotation
+		  (vocabularyUsageEClass,
+		   source,
+		   new String[] {
+			   "heading", "Vocabularies"
+		   });
+		addAnnotation
+		  (vocabularyBundleExtensionEClass,
+		   source,
+		   new String[] {
+			   "heading", "Vocabularies"
+		   });
+		addAnnotation
+		  (vocabularyBundleInclusionEClass,
+		   source,
+		   new String[] {
+			   "heading", "Vocabularies"
+		   });
+		addAnnotation
+		  (descriptionExtensionEClass,
+		   source,
+		   new String[] {
+			   "heading", "Descriptions"
+		   });
+		addAnnotation
+		  (descriptionUsageEClass,
+		   source,
+		   new String[] {
+			   "heading", "Descriptions"
+		   });
+		addAnnotation
+		  (descriptionBundleExtensionEClass,
+		   source,
+		   new String[] {
+			   "heading", "Descriptions"
+		   });
+		addAnnotation
+		  (descriptionBundleInclusionEClass,
+		   source,
+		   new String[] {
+			   "heading", "Descriptions"
+		   });
+		addAnnotation
+		  (descriptionBundleUsageEClass,
+		   source,
+		   new String[] {
+			   "heading", "Descriptions"
+		   });
+		addAnnotation
+		  (vocabularyStatementEClass,
+		   source,
+		   new String[] {
+			   "heading", "Vocabularies"
+		   });
+		addAnnotation
+		  (descriptionStatementEClass,
+		   source,
+		   new String[] {
+			   "heading", "Descriptions"
 		   });
 		addAnnotation
 		  (termEClass,
@@ -5324,10 +5473,28 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 			   "heading", "Vocabularies"
 		   });
 		addAnnotation
+		  (ruleEClass,
+		   source,
+		   new String[] {
+			   "heading", "Rules"
+		   });
+		addAnnotation
 		  (specializableTermEClass,
 		   source,
 		   new String[] {
 			   "heading", "Vocabularies"
+		   });
+		addAnnotation
+		  (featureEClass,
+		   source,
+		   new String[] {
+			   "heading", "Features"
+		   });
+		addAnnotation
+		  (propertyEClass,
+		   source,
+		   new String[] {
+			   "heading", "Features"
 		   });
 		addAnnotation
 		  (typeEClass,
@@ -5342,7 +5509,19 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 			   "heading", "Types"
 		   });
 		addAnnotation
+		  (scalarEClass,
+		   source,
+		   new String[] {
+			   "heading", "Types"
+		   });
+		addAnnotation
 		  (entityEClass,
+		   source,
+		   new String[] {
+			   "heading", "Types"
+		   });
+		addAnnotation
+		  (structureEClass,
 		   source,
 		   new String[] {
 			   "heading", "Types"
@@ -5366,22 +5545,16 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 			   "heading", "Types"
 		   });
 		addAnnotation
-		  (structureEClass,
+		  (facetedScalarEClass,
 		   source,
 		   new String[] {
 			   "heading", "Types"
 		   });
 		addAnnotation
-		  (featureEClass,
+		  (enumeratedScalarEClass,
 		   source,
 		   new String[] {
-			   "heading", "Features"
-		   });
-		addAnnotation
-		  (propertyEClass,
-		   source,
-		   new String[] {
-			   "heading", "Features"
+			   "heading", "Types"
 		   });
 		addAnnotation
 		  (annotationPropertyEClass,
@@ -5408,24 +5581,6 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 			   "heading", "Features"
 		   });
 		addAnnotation
-		  (scalarEClass,
-		   source,
-		   new String[] {
-			   "heading", "Types"
-		   });
-		addAnnotation
-		  (facetedScalarEClass,
-		   source,
-		   new String[] {
-			   "heading", "Types"
-		   });
-		addAnnotation
-		  (enumeratedScalarEClass,
-		   source,
-		   new String[] {
-			   "heading", "Types"
-		   });
-		addAnnotation
 		  (relationEClass,
 		   source,
 		   new String[] {
@@ -5444,24 +5599,6 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 			   "heading", "Features"
 		   });
 		addAnnotation
-		  (ruleEClass,
-		   source,
-		   new String[] {
-			   "heading", "Rules"
-		   });
-		addAnnotation
-		  (instanceEClass,
-		   source,
-		   new String[] {
-			   "heading", "Instances"
-		   });
-		addAnnotation
-		  (structureInstanceEClass,
-		   source,
-		   new String[] {
-			   "heading", "Instances"
-		   });
-		addAnnotation
 		  (namedInstanceEClass,
 		   source,
 		   new String[] {
@@ -5478,6 +5615,222 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		   source,
 		   new String[] {
 			   "heading", "Instances"
+		   });
+		addAnnotation
+		  (structureInstanceEClass,
+		   source,
+		   new String[] {
+			   "heading", "Instances"
+		   });
+		addAnnotation
+		  (keyAxiomEClass,
+		   source,
+		   new String[] {
+			   "heading", "Axioms"
+		   });
+		addAnnotation
+		  (specializationAxiomEClass,
+		   source,
+		   new String[] {
+			   "heading", "Axioms"
+		   });
+		addAnnotation
+		  (restrictionAxiomEClass,
+		   source,
+		   new String[] {
+			   "heading", "Axioms"
+		   });
+		addAnnotation
+		  (propertyRestrictionAxiomEClass,
+		   source,
+		   new String[] {
+			   "heading", "Axioms"
+		   });
+		addAnnotation
+		  (scalarPropertyRestrictionAxiomEClass,
+		   source,
+		   new String[] {
+			   "heading", "Axioms"
+		   });
+		addAnnotation
+		  (scalarPropertyRangeRestrictionAxiomEClass,
+		   source,
+		   new String[] {
+			   "heading", "Axioms"
+		   });
+		addAnnotation
+		  (scalarPropertyCardinalityRestrictionAxiomEClass,
+		   source,
+		   new String[] {
+			   "heading", "Axioms"
+		   });
+		addAnnotation
+		  (scalarPropertyValueRestrictionAxiomEClass,
+		   source,
+		   new String[] {
+			   "heading", "Axioms"
+		   });
+		addAnnotation
+		  (structuredPropertyRestrictionAxiomEClass,
+		   source,
+		   new String[] {
+			   "heading", "Axioms"
+		   });
+		addAnnotation
+		  (structuredPropertyRangeRestrictionAxiomEClass,
+		   source,
+		   new String[] {
+			   "heading", "Axioms"
+		   });
+		addAnnotation
+		  (structuredPropertyCardinalityRestrictionAxiomEClass,
+		   source,
+		   new String[] {
+			   "heading", "Axioms"
+		   });
+		addAnnotation
+		  (structuredPropertyValueRestrictionAxiomEClass,
+		   source,
+		   new String[] {
+			   "heading", "Axioms"
+		   });
+		addAnnotation
+		  (relationRestrictionAxiomEClass,
+		   source,
+		   new String[] {
+			   "heading", "Axioms"
+		   });
+		addAnnotation
+		  (relationRangeRestrictionAxiomEClass,
+		   source,
+		   new String[] {
+			   "heading", "Axioms"
+		   });
+		addAnnotation
+		  (relationCardinalityRestrictionAxiomEClass,
+		   source,
+		   new String[] {
+			   "heading", "Axioms"
+		   });
+		addAnnotation
+		  (relationTargetRestrictionAxiomEClass,
+		   source,
+		   new String[] {
+			   "heading", "Axioms"
+		   });
+		addAnnotation
+		  (typeAssertionEClass,
+		   source,
+		   new String[] {
+			   "heading", "Assertions"
+		   });
+		addAnnotation
+		  (conceptTypeAssertionEClass,
+		   source,
+		   new String[] {
+			   "heading", "Assertions"
+		   });
+		addAnnotation
+		  (relationTypeAssertionEClass,
+		   source,
+		   new String[] {
+			   "heading", "Assertions"
+		   });
+		addAnnotation
+		  (propertyValueAssertionEClass,
+		   source,
+		   new String[] {
+			   "heading", "Assertions"
+		   });
+		addAnnotation
+		  (scalarPropertyValueAssertionEClass,
+		   source,
+		   new String[] {
+			   "heading", "Assertions"
+		   });
+		addAnnotation
+		  (structuredPropertyValueAssertionEClass,
+		   source,
+		   new String[] {
+			   "heading", "Assertions"
+		   });
+		addAnnotation
+		  (linkAssertionEClass,
+		   source,
+		   new String[] {
+			   "heading", "Assertions"
+		   });
+		addAnnotation
+		  (unaryPredicateEClass,
+		   source,
+		   new String[] {
+			   "heading", "Rules"
+		   });
+		addAnnotation
+		  (binaryPredicateEClass,
+		   source,
+		   new String[] {
+			   "heading", "Rules"
+		   });
+		addAnnotation
+		  (typePredicateEClass,
+		   source,
+		   new String[] {
+			   "heading", "Rules"
+		   });
+		addAnnotation
+		  (relationEntityPredicateEClass,
+		   source,
+		   new String[] {
+			   "heading", "Rules"
+		   });
+		addAnnotation
+		  (featurePredicateEClass,
+		   source,
+		   new String[] {
+			   "heading", "Rules"
+		   });
+		addAnnotation
+		  (sameAsPredicateEClass,
+		   source,
+		   new String[] {
+			   "heading", "Rules"
+		   });
+		addAnnotation
+		  (differentFromPredicateEClass,
+		   source,
+		   new String[] {
+			   "heading", "Rules"
+		   });
+		addAnnotation
+		  (quotedLiteralEClass,
+		   source,
+		   new String[] {
+			   "heading", "Literals"
+		   });
+		addAnnotation
+		  (integerLiteralEClass,
+		   source,
+		   new String[] {
+			   "heading", "Literals"
+		   });
+		addAnnotation
+		  (decimalLiteralEClass,
+		   source,
+		   new String[] {
+			   "heading", "Literals"
+		   });
+		addAnnotation
+		  (doubleLiteralEClass,
+		   source,
+		   new String[] {
+			   "heading", "Literals"
+		   });
+		addAnnotation
+		  (booleanLiteralEClass,
+		   source,
+		   new String[] {
+			   "heading", "Literals"
 		   });
 		addAnnotation
 		  (referenceEClass,
@@ -5586,342 +5939,6 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		   source,
 		   new String[] {
 			   "heading", "References"
-		   });
-		addAnnotation
-		  (statementEClass,
-		   source,
-		   new String[] {
-			   "heading", "Elements"
-		   });
-		addAnnotation
-		  (vocabularyStatementEClass,
-		   source,
-		   new String[] {
-			   "heading", "Vocabularies"
-		   });
-		addAnnotation
-		  (descriptionStatementEClass,
-		   source,
-		   new String[] {
-			   "heading", "Descriptions"
-		   });
-		addAnnotation
-		  (importEClass,
-		   source,
-		   new String[] {
-			   "heading", "Elements"
-		   });
-		addAnnotation
-		  (vocabularyImportEClass,
-		   source,
-		   new String[] {
-			   "heading", "Vocabularies"
-		   });
-		addAnnotation
-		  (vocabularyExtensionEClass,
-		   source,
-		   new String[] {
-			   "heading", "Vocabularies"
-		   });
-		addAnnotation
-		  (vocabularyUsageEClass,
-		   source,
-		   new String[] {
-			   "heading", "Vocabularies"
-		   });
-		addAnnotation
-		  (vocabularyBundleImportEClass,
-		   source,
-		   new String[] {
-			   "heading", "Vocabularies"
-		   });
-		addAnnotation
-		  (vocabularyBundleExtensionEClass,
-		   source,
-		   new String[] {
-			   "heading", "Vocabularies"
-		   });
-		addAnnotation
-		  (vocabularyBundleInclusionEClass,
-		   source,
-		   new String[] {
-			   "heading", "Vocabularies"
-		   });
-		addAnnotation
-		  (descriptionImportEClass,
-		   source,
-		   new String[] {
-			   "heading", "Descriptions"
-		   });
-		addAnnotation
-		  (descriptionExtensionEClass,
-		   source,
-		   new String[] {
-			   "heading", "Descriptions"
-		   });
-		addAnnotation
-		  (descriptionUsageEClass,
-		   source,
-		   new String[] {
-			   "heading", "Descriptions"
-		   });
-		addAnnotation
-		  (descriptionBundleImportEClass,
-		   source,
-		   new String[] {
-			   "heading", "Descriptions"
-		   });
-		addAnnotation
-		  (descriptionBundleExtensionEClass,
-		   source,
-		   new String[] {
-			   "heading", "Descriptions"
-		   });
-		addAnnotation
-		  (descriptionBundleInclusionEClass,
-		   source,
-		   new String[] {
-			   "heading", "Descriptions"
-		   });
-		addAnnotation
-		  (descriptionBundleUsageEClass,
-		   source,
-		   new String[] {
-			   "heading", "Descriptions"
-		   });
-		addAnnotation
-		  (axiomEClass,
-		   source,
-		   new String[] {
-			   "heading", "Axioms"
-		   });
-		addAnnotation
-		  (specializationAxiomEClass,
-		   source,
-		   new String[] {
-			   "heading", "Axioms"
-		   });
-		addAnnotation
-		  (restrictionAxiomEClass,
-		   source,
-		   new String[] {
-			   "heading", "Axioms"
-		   });
-		addAnnotation
-		  (propertyRestrictionAxiomEClass,
-		   source,
-		   new String[] {
-			   "heading", "Axioms"
-		   });
-		addAnnotation
-		  (scalarPropertyRestrictionAxiomEClass,
-		   source,
-		   new String[] {
-			   "heading", "Axioms"
-		   });
-		addAnnotation
-		  (scalarPropertyRangeRestrictionAxiomEClass,
-		   source,
-		   new String[] {
-			   "heading", "Axioms"
-		   });
-		addAnnotation
-		  (scalarPropertyCardinalityRestrictionAxiomEClass,
-		   source,
-		   new String[] {
-			   "heading", "Axioms"
-		   });
-		addAnnotation
-		  (scalarPropertyValueRestrictionAxiomEClass,
-		   source,
-		   new String[] {
-			   "heading", "Axioms"
-		   });
-		addAnnotation
-		  (structuredPropertyRestrictionAxiomEClass,
-		   source,
-		   new String[] {
-			   "heading", "Axioms"
-		   });
-		addAnnotation
-		  (structuredPropertyRangeRestrictionAxiomEClass,
-		   source,
-		   new String[] {
-			   "heading", "Axioms"
-		   });
-		addAnnotation
-		  (structuredPropertyCardinalityRestrictionAxiomEClass,
-		   source,
-		   new String[] {
-			   "heading", "Axioms"
-		   });
-		addAnnotation
-		  (structuredPropertyValueRestrictionAxiomEClass,
-		   source,
-		   new String[] {
-			   "heading", "Axioms"
-		   });
-		addAnnotation
-		  (relationRestrictionAxiomEClass,
-		   source,
-		   new String[] {
-			   "heading", "Axioms"
-		   });
-		addAnnotation
-		  (relationRangeRestrictionAxiomEClass,
-		   source,
-		   new String[] {
-			   "heading", "Axioms"
-		   });
-		addAnnotation
-		  (relationCardinalityRestrictionAxiomEClass,
-		   source,
-		   new String[] {
-			   "heading", "Axioms"
-		   });
-		addAnnotation
-		  (relationTargetRestrictionAxiomEClass,
-		   source,
-		   new String[] {
-			   "heading", "Axioms"
-		   });
-		addAnnotation
-		  (keyAxiomEClass,
-		   source,
-		   new String[] {
-			   "heading", "Axioms"
-		   });
-		addAnnotation
-		  (assertionEClass,
-		   source,
-		   new String[] {
-			   "heading", "Assertions"
-		   });
-		addAnnotation
-		  (typeAssertionEClass,
-		   source,
-		   new String[] {
-			   "heading", "Assertions"
-		   });
-		addAnnotation
-		  (conceptTypeAssertionEClass,
-		   source,
-		   new String[] {
-			   "heading", "Assertions"
-		   });
-		addAnnotation
-		  (relationTypeAssertionEClass,
-		   source,
-		   new String[] {
-			   "heading", "Assertions"
-		   });
-		addAnnotation
-		  (propertyValueAssertionEClass,
-		   source,
-		   new String[] {
-			   "heading", "Assertions"
-		   });
-		addAnnotation
-		  (scalarPropertyValueAssertionEClass,
-		   source,
-		   new String[] {
-			   "heading", "Assertions"
-		   });
-		addAnnotation
-		  (structuredPropertyValueAssertionEClass,
-		   source,
-		   new String[] {
-			   "heading", "Assertions"
-		   });
-		addAnnotation
-		  (linkAssertionEClass,
-		   source,
-		   new String[] {
-			   "heading", "Assertions"
-		   });
-		addAnnotation
-		  (predicateEClass,
-		   source,
-		   new String[] {
-			   "heading", "Rules"
-		   });
-		addAnnotation
-		  (unaryPredicateEClass,
-		   source,
-		   new String[] {
-			   "heading", "Rules"
-		   });
-		addAnnotation
-		  (typePredicateEClass,
-		   source,
-		   new String[] {
-			   "heading", "Rules"
-		   });
-		addAnnotation
-		  (binaryPredicateEClass,
-		   source,
-		   new String[] {
-			   "heading", "Rules"
-		   });
-		addAnnotation
-		  (relationEntityPredicateEClass,
-		   source,
-		   new String[] {
-			   "heading", "Rules"
-		   });
-		addAnnotation
-		  (featurePredicateEClass,
-		   source,
-		   new String[] {
-			   "heading", "Rules"
-		   });
-		addAnnotation
-		  (sameAsPredicateEClass,
-		   source,
-		   new String[] {
-			   "heading", "Rules"
-		   });
-		addAnnotation
-		  (differentFromPredicateEClass,
-		   source,
-		   new String[] {
-			   "heading", "Rules"
-		   });
-		addAnnotation
-		  (literalEClass,
-		   source,
-		   new String[] {
-			   "heading", "Literals"
-		   });
-		addAnnotation
-		  (quotedLiteralEClass,
-		   source,
-		   new String[] {
-			   "heading", "Literals"
-		   });
-		addAnnotation
-		  (integerLiteralEClass,
-		   source,
-		   new String[] {
-			   "heading", "Literals"
-		   });
-		addAnnotation
-		  (decimalLiteralEClass,
-		   source,
-		   new String[] {
-			   "heading", "Literals"
-		   });
-		addAnnotation
-		  (doubleLiteralEClass,
-		   source,
-		   new String[] {
-			   "heading", "Literals"
-		   });
-		addAnnotation
-		  (booleanLiteralEClass,
-		   source,
-		   new String[] {
-			   "heading", "Literals"
 		   });
 		addAnnotation
 		  (separatorKindEEnum,

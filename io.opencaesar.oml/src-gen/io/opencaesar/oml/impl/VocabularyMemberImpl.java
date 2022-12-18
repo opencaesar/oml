@@ -19,24 +19,24 @@
 package io.opencaesar.oml.impl;
 
 import io.opencaesar.oml.OmlPackage;
-import io.opencaesar.oml.Term;
+import io.opencaesar.oml.VocabularyMember;
 
 import org.eclipse.emf.ecore.EClass;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Term</b></em>'.
+ * An implementation of the model object '<em><b>Vocabulary Member</b></em>'.
  * <!-- end-user-doc -->
  *
  * @generated
  */
-public abstract class TermImpl extends VocabularyMemberImpl implements Term {
+public abstract class VocabularyMemberImpl extends MemberImpl implements VocabularyMember {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected TermImpl() {
+	protected VocabularyMemberImpl() {
 		super();
 	}
 
@@ -47,7 +47,7 @@ public abstract class TermImpl extends VocabularyMemberImpl implements Term {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return OmlPackage.Literals.TERM;
+		return OmlPackage.Literals.VOCABULARY_MEMBER;
 	}
 
-} //TermImpl
+} //VocabularyMemberImpl

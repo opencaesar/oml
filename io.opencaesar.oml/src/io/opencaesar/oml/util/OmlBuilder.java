@@ -36,7 +36,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import com.google.common.collect.HashBasedTable;
 
-import io.opencaesar.oml.AnnotatedElement;
 import io.opencaesar.oml.Annotation;
 import io.opencaesar.oml.AnnotationProperty;
 import io.opencaesar.oml.Aspect;
@@ -345,7 +344,7 @@ public class OmlBuilder {
      * @param value the annotation literal value
      * @return a new annotation on the given annotated element in the context of the given ontology
      */
-    public Annotation addAnnotation(Ontology ontology, AnnotatedElement element, String propertyIri, Literal value) {
+    public Annotation addAnnotation(Ontology ontology, IdentifiedElement element, String propertyIri, Literal value) {
         final Annotation annotation = OmlWrite.addAnnotation(ontology, element, null, value);
         setCrossReference(ontology, annotation, OmlPackage.Literals.ANNOTATION__PROPERTY, propertyIri);
         return annotation;
@@ -363,7 +362,7 @@ public class OmlBuilder {
     public Annotation addAnnotation(Ontology ontology, String memberIri, String propertyIri, Literal value) {
         final Annotation annotation = OmlWrite.addAnnotation(ontology, null, null, value);
         setCrossReference(ontology, annotation, OmlPackage.Literals.ANNOTATION__PROPERTY, propertyIri);
-        setContainmentReference(ontology, memberIri, OmlPackage.Literals.ANNOTATED_ELEMENT__OWNED_ANNOTATIONS, OmlPackage.Literals.REFERENCE__OWNED_ANNOTATIONS, annotation);
+        setContainmentReference(ontology, memberIri, OmlPackage.Literals.IDENTIFIED_ELEMENT__OWNED_ANNOTATIONS, OmlPackage.Literals.REFERENCE__OWNED_ANNOTATIONS, annotation);
         return annotation;
     }
 

@@ -329,11 +329,9 @@ VocabularyImport:
 	VocabularyUsage;
 
 VocabularyExtension:
-	ownedAnnotations+=Annotation*
 	'extends' namespace=NAMESPACE ('as' prefix=ID)?;
     	
 VocabularyUsage:
-	ownedAnnotations+=Annotation*
 	'uses' namespace=NAMESPACE ('as' prefix=ID)?;
     	
 VocabularyBundleImport:
@@ -341,11 +339,9 @@ VocabularyBundleImport:
 	VocabularyBundleInclusion;
 
 VocabularyBundleInclusion:
-	ownedAnnotations+=Annotation*
 	'includes' namespace=NAMESPACE ('as' prefix=ID)?;
 
 VocabularyBundleExtension:
-	ownedAnnotations+=Annotation*
 	'extends' namespace=NAMESPACE ('as' prefix=ID)?;
 
 DescriptionImport:
@@ -353,11 +349,9 @@ DescriptionImport:
 	DescriptionUsage;
 
 DescriptionUsage:
-	ownedAnnotations+=Annotation*
 	'uses' namespace=NAMESPACE ('as' prefix=ID)?;
 
 DescriptionExtension:
-	ownedAnnotations+=Annotation*
 	'extends' namespace=NAMESPACE ('as' prefix=ID)?;
 
 DescriptionBundleImport:
@@ -366,15 +360,12 @@ DescriptionBundleImport:
 	DescriptionBundleUsage;
 
 DescriptionBundleInclusion:
-	ownedAnnotations+=Annotation*
 	'includes' namespace=NAMESPACE ('as' prefix=ID)?;
 
 DescriptionBundleExtension:
-	ownedAnnotations+=Annotation*
 	'extends' namespace=NAMESPACE ('as' prefix=ID)?;
 
 DescriptionBundleUsage:
-	ownedAnnotations+=Annotation*
 	'uses' namespace=NAMESPACE ('as' prefix=ID)?;
 
 SpecializationAxiom:

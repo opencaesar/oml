@@ -83,34 +83,6 @@ public class OmlFactoryImpl extends EFactoryImpl implements OmlFactory {
 			case OmlPackage.VOCABULARY_BUNDLE: return createVocabularyBundle();
 			case OmlPackage.DESCRIPTION: return createDescription();
 			case OmlPackage.DESCRIPTION_BUNDLE: return createDescriptionBundle();
-			case OmlPackage.ASPECT: return createAspect();
-			case OmlPackage.CONCEPT: return createConcept();
-			case OmlPackage.RELATION_ENTITY: return createRelationEntity();
-			case OmlPackage.STRUCTURE: return createStructure();
-			case OmlPackage.ANNOTATION_PROPERTY: return createAnnotationProperty();
-			case OmlPackage.SCALAR_PROPERTY: return createScalarProperty();
-			case OmlPackage.STRUCTURED_PROPERTY: return createStructuredProperty();
-			case OmlPackage.FACETED_SCALAR: return createFacetedScalar();
-			case OmlPackage.ENUMERATED_SCALAR: return createEnumeratedScalar();
-			case OmlPackage.FORWARD_RELATION: return createForwardRelation();
-			case OmlPackage.REVERSE_RELATION: return createReverseRelation();
-			case OmlPackage.RULE: return createRule();
-			case OmlPackage.STRUCTURE_INSTANCE: return createStructureInstance();
-			case OmlPackage.CONCEPT_INSTANCE: return createConceptInstance();
-			case OmlPackage.RELATION_INSTANCE: return createRelationInstance();
-			case OmlPackage.ASPECT_REFERENCE: return createAspectReference();
-			case OmlPackage.CONCEPT_REFERENCE: return createConceptReference();
-			case OmlPackage.RELATION_ENTITY_REFERENCE: return createRelationEntityReference();
-			case OmlPackage.STRUCTURE_REFERENCE: return createStructureReference();
-			case OmlPackage.ANNOTATION_PROPERTY_REFERENCE: return createAnnotationPropertyReference();
-			case OmlPackage.SCALAR_PROPERTY_REFERENCE: return createScalarPropertyReference();
-			case OmlPackage.STRUCTURED_PROPERTY_REFERENCE: return createStructuredPropertyReference();
-			case OmlPackage.FACETED_SCALAR_REFERENCE: return createFacetedScalarReference();
-			case OmlPackage.ENUMERATED_SCALAR_REFERENCE: return createEnumeratedScalarReference();
-			case OmlPackage.RELATION_REFERENCE: return createRelationReference();
-			case OmlPackage.RULE_REFERENCE: return createRuleReference();
-			case OmlPackage.CONCEPT_INSTANCE_REFERENCE: return createConceptInstanceReference();
-			case OmlPackage.RELATION_INSTANCE_REFERENCE: return createRelationInstanceReference();
 			case OmlPackage.VOCABULARY_EXTENSION: return createVocabularyExtension();
 			case OmlPackage.VOCABULARY_USAGE: return createVocabularyUsage();
 			case OmlPackage.VOCABULARY_BUNDLE_EXTENSION: return createVocabularyBundleExtension();
@@ -120,6 +92,22 @@ public class OmlFactoryImpl extends EFactoryImpl implements OmlFactory {
 			case OmlPackage.DESCRIPTION_BUNDLE_EXTENSION: return createDescriptionBundleExtension();
 			case OmlPackage.DESCRIPTION_BUNDLE_INCLUSION: return createDescriptionBundleInclusion();
 			case OmlPackage.DESCRIPTION_BUNDLE_USAGE: return createDescriptionBundleUsage();
+			case OmlPackage.RULE: return createRule();
+			case OmlPackage.STRUCTURE: return createStructure();
+			case OmlPackage.ASPECT: return createAspect();
+			case OmlPackage.CONCEPT: return createConcept();
+			case OmlPackage.RELATION_ENTITY: return createRelationEntity();
+			case OmlPackage.FACETED_SCALAR: return createFacetedScalar();
+			case OmlPackage.ENUMERATED_SCALAR: return createEnumeratedScalar();
+			case OmlPackage.ANNOTATION_PROPERTY: return createAnnotationProperty();
+			case OmlPackage.SCALAR_PROPERTY: return createScalarProperty();
+			case OmlPackage.STRUCTURED_PROPERTY: return createStructuredProperty();
+			case OmlPackage.FORWARD_RELATION: return createForwardRelation();
+			case OmlPackage.REVERSE_RELATION: return createReverseRelation();
+			case OmlPackage.CONCEPT_INSTANCE: return createConceptInstance();
+			case OmlPackage.RELATION_INSTANCE: return createRelationInstance();
+			case OmlPackage.STRUCTURE_INSTANCE: return createStructureInstance();
+			case OmlPackage.KEY_AXIOM: return createKeyAxiom();
 			case OmlPackage.SPECIALIZATION_AXIOM: return createSpecializationAxiom();
 			case OmlPackage.SCALAR_PROPERTY_RANGE_RESTRICTION_AXIOM: return createScalarPropertyRangeRestrictionAxiom();
 			case OmlPackage.SCALAR_PROPERTY_CARDINALITY_RESTRICTION_AXIOM: return createScalarPropertyCardinalityRestrictionAxiom();
@@ -130,7 +118,6 @@ public class OmlFactoryImpl extends EFactoryImpl implements OmlFactory {
 			case OmlPackage.RELATION_RANGE_RESTRICTION_AXIOM: return createRelationRangeRestrictionAxiom();
 			case OmlPackage.RELATION_CARDINALITY_RESTRICTION_AXIOM: return createRelationCardinalityRestrictionAxiom();
 			case OmlPackage.RELATION_TARGET_RESTRICTION_AXIOM: return createRelationTargetRestrictionAxiom();
-			case OmlPackage.KEY_AXIOM: return createKeyAxiom();
 			case OmlPackage.CONCEPT_TYPE_ASSERTION: return createConceptTypeAssertion();
 			case OmlPackage.RELATION_TYPE_ASSERTION: return createRelationTypeAssertion();
 			case OmlPackage.SCALAR_PROPERTY_VALUE_ASSERTION: return createScalarPropertyValueAssertion();
@@ -146,6 +133,19 @@ public class OmlFactoryImpl extends EFactoryImpl implements OmlFactory {
 			case OmlPackage.DECIMAL_LITERAL: return createDecimalLiteral();
 			case OmlPackage.DOUBLE_LITERAL: return createDoubleLiteral();
 			case OmlPackage.BOOLEAN_LITERAL: return createBooleanLiteral();
+			case OmlPackage.ASPECT_REFERENCE: return createAspectReference();
+			case OmlPackage.CONCEPT_REFERENCE: return createConceptReference();
+			case OmlPackage.RELATION_ENTITY_REFERENCE: return createRelationEntityReference();
+			case OmlPackage.STRUCTURE_REFERENCE: return createStructureReference();
+			case OmlPackage.ANNOTATION_PROPERTY_REFERENCE: return createAnnotationPropertyReference();
+			case OmlPackage.SCALAR_PROPERTY_REFERENCE: return createScalarPropertyReference();
+			case OmlPackage.STRUCTURED_PROPERTY_REFERENCE: return createStructuredPropertyReference();
+			case OmlPackage.FACETED_SCALAR_REFERENCE: return createFacetedScalarReference();
+			case OmlPackage.ENUMERATED_SCALAR_REFERENCE: return createEnumeratedScalarReference();
+			case OmlPackage.RELATION_REFERENCE: return createRelationReference();
+			case OmlPackage.RULE_REFERENCE: return createRuleReference();
+			case OmlPackage.CONCEPT_INSTANCE_REFERENCE: return createConceptInstanceReference();
+			case OmlPackage.RELATION_INSTANCE_REFERENCE: return createRelationInstanceReference();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -270,314 +270,6 @@ public class OmlFactoryImpl extends EFactoryImpl implements OmlFactory {
 	 * @generated
 	 */
 	@Override
-	public Aspect createAspect() {
-		AspectImpl aspect = new AspectImpl();
-		return aspect;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Concept createConcept() {
-		ConceptImpl concept = new ConceptImpl();
-		return concept;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public RelationEntity createRelationEntity() {
-		RelationEntityImpl relationEntity = new RelationEntityImpl();
-		return relationEntity;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Structure createStructure() {
-		StructureImpl structure = new StructureImpl();
-		return structure;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public AnnotationProperty createAnnotationProperty() {
-		AnnotationPropertyImpl annotationProperty = new AnnotationPropertyImpl();
-		return annotationProperty;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ScalarProperty createScalarProperty() {
-		ScalarPropertyImpl scalarProperty = new ScalarPropertyImpl();
-		return scalarProperty;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public StructuredProperty createStructuredProperty() {
-		StructuredPropertyImpl structuredProperty = new StructuredPropertyImpl();
-		return structuredProperty;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public FacetedScalar createFacetedScalar() {
-		FacetedScalarImpl facetedScalar = new FacetedScalarImpl();
-		return facetedScalar;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EnumeratedScalar createEnumeratedScalar() {
-		EnumeratedScalarImpl enumeratedScalar = new EnumeratedScalarImpl();
-		return enumeratedScalar;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ForwardRelation createForwardRelation() {
-		ForwardRelationImpl forwardRelation = new ForwardRelationImpl();
-		return forwardRelation;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ReverseRelation createReverseRelation() {
-		ReverseRelationImpl reverseRelation = new ReverseRelationImpl();
-		return reverseRelation;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Rule createRule() {
-		RuleImpl rule = new RuleImpl();
-		return rule;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public StructureInstance createStructureInstance() {
-		StructureInstanceImpl structureInstance = new StructureInstanceImpl();
-		return structureInstance;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ConceptInstance createConceptInstance() {
-		ConceptInstanceImpl conceptInstance = new ConceptInstanceImpl();
-		return conceptInstance;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public RelationInstance createRelationInstance() {
-		RelationInstanceImpl relationInstance = new RelationInstanceImpl();
-		return relationInstance;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public AspectReference createAspectReference() {
-		AspectReferenceImpl aspectReference = new AspectReferenceImpl();
-		return aspectReference;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ConceptReference createConceptReference() {
-		ConceptReferenceImpl conceptReference = new ConceptReferenceImpl();
-		return conceptReference;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public RelationEntityReference createRelationEntityReference() {
-		RelationEntityReferenceImpl relationEntityReference = new RelationEntityReferenceImpl();
-		return relationEntityReference;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public StructureReference createStructureReference() {
-		StructureReferenceImpl structureReference = new StructureReferenceImpl();
-		return structureReference;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public AnnotationPropertyReference createAnnotationPropertyReference() {
-		AnnotationPropertyReferenceImpl annotationPropertyReference = new AnnotationPropertyReferenceImpl();
-		return annotationPropertyReference;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ScalarPropertyReference createScalarPropertyReference() {
-		ScalarPropertyReferenceImpl scalarPropertyReference = new ScalarPropertyReferenceImpl();
-		return scalarPropertyReference;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public StructuredPropertyReference createStructuredPropertyReference() {
-		StructuredPropertyReferenceImpl structuredPropertyReference = new StructuredPropertyReferenceImpl();
-		return structuredPropertyReference;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public FacetedScalarReference createFacetedScalarReference() {
-		FacetedScalarReferenceImpl facetedScalarReference = new FacetedScalarReferenceImpl();
-		return facetedScalarReference;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EnumeratedScalarReference createEnumeratedScalarReference() {
-		EnumeratedScalarReferenceImpl enumeratedScalarReference = new EnumeratedScalarReferenceImpl();
-		return enumeratedScalarReference;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public RelationReference createRelationReference() {
-		RelationReferenceImpl relationReference = new RelationReferenceImpl();
-		return relationReference;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public RuleReference createRuleReference() {
-		RuleReferenceImpl ruleReference = new RuleReferenceImpl();
-		return ruleReference;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ConceptInstanceReference createConceptInstanceReference() {
-		ConceptInstanceReferenceImpl conceptInstanceReference = new ConceptInstanceReferenceImpl();
-		return conceptInstanceReference;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public RelationInstanceReference createRelationInstanceReference() {
-		RelationInstanceReferenceImpl relationInstanceReference = new RelationInstanceReferenceImpl();
-		return relationInstanceReference;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public VocabularyExtension createVocabularyExtension() {
 		VocabularyExtensionImpl vocabularyExtension = new VocabularyExtensionImpl();
 		return vocabularyExtension;
@@ -669,6 +361,182 @@ public class OmlFactoryImpl extends EFactoryImpl implements OmlFactory {
 	public DescriptionBundleUsage createDescriptionBundleUsage() {
 		DescriptionBundleUsageImpl descriptionBundleUsage = new DescriptionBundleUsageImpl();
 		return descriptionBundleUsage;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Rule createRule() {
+		RuleImpl rule = new RuleImpl();
+		return rule;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Structure createStructure() {
+		StructureImpl structure = new StructureImpl();
+		return structure;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Aspect createAspect() {
+		AspectImpl aspect = new AspectImpl();
+		return aspect;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Concept createConcept() {
+		ConceptImpl concept = new ConceptImpl();
+		return concept;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public RelationEntity createRelationEntity() {
+		RelationEntityImpl relationEntity = new RelationEntityImpl();
+		return relationEntity;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public FacetedScalar createFacetedScalar() {
+		FacetedScalarImpl facetedScalar = new FacetedScalarImpl();
+		return facetedScalar;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EnumeratedScalar createEnumeratedScalar() {
+		EnumeratedScalarImpl enumeratedScalar = new EnumeratedScalarImpl();
+		return enumeratedScalar;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public AnnotationProperty createAnnotationProperty() {
+		AnnotationPropertyImpl annotationProperty = new AnnotationPropertyImpl();
+		return annotationProperty;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ScalarProperty createScalarProperty() {
+		ScalarPropertyImpl scalarProperty = new ScalarPropertyImpl();
+		return scalarProperty;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public StructuredProperty createStructuredProperty() {
+		StructuredPropertyImpl structuredProperty = new StructuredPropertyImpl();
+		return structuredProperty;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ForwardRelation createForwardRelation() {
+		ForwardRelationImpl forwardRelation = new ForwardRelationImpl();
+		return forwardRelation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ReverseRelation createReverseRelation() {
+		ReverseRelationImpl reverseRelation = new ReverseRelationImpl();
+		return reverseRelation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ConceptInstance createConceptInstance() {
+		ConceptInstanceImpl conceptInstance = new ConceptInstanceImpl();
+		return conceptInstance;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public RelationInstance createRelationInstance() {
+		RelationInstanceImpl relationInstance = new RelationInstanceImpl();
+		return relationInstance;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public StructureInstance createStructureInstance() {
+		StructureInstanceImpl structureInstance = new StructureInstanceImpl();
+		return structureInstance;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public KeyAxiom createKeyAxiom() {
+		KeyAxiomImpl keyAxiom = new KeyAxiomImpl();
+		return keyAxiom;
 	}
 
 	/**
@@ -779,17 +647,6 @@ public class OmlFactoryImpl extends EFactoryImpl implements OmlFactory {
 	public RelationTargetRestrictionAxiom createRelationTargetRestrictionAxiom() {
 		RelationTargetRestrictionAxiomImpl relationTargetRestrictionAxiom = new RelationTargetRestrictionAxiomImpl();
 		return relationTargetRestrictionAxiom;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public KeyAxiom createKeyAxiom() {
-		KeyAxiomImpl keyAxiom = new KeyAxiomImpl();
-		return keyAxiom;
 	}
 
 	/**
@@ -955,6 +812,149 @@ public class OmlFactoryImpl extends EFactoryImpl implements OmlFactory {
 	public BooleanLiteral createBooleanLiteral() {
 		BooleanLiteralImpl booleanLiteral = new BooleanLiteralImpl();
 		return booleanLiteral;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public AspectReference createAspectReference() {
+		AspectReferenceImpl aspectReference = new AspectReferenceImpl();
+		return aspectReference;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ConceptReference createConceptReference() {
+		ConceptReferenceImpl conceptReference = new ConceptReferenceImpl();
+		return conceptReference;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public RelationEntityReference createRelationEntityReference() {
+		RelationEntityReferenceImpl relationEntityReference = new RelationEntityReferenceImpl();
+		return relationEntityReference;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public StructureReference createStructureReference() {
+		StructureReferenceImpl structureReference = new StructureReferenceImpl();
+		return structureReference;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public AnnotationPropertyReference createAnnotationPropertyReference() {
+		AnnotationPropertyReferenceImpl annotationPropertyReference = new AnnotationPropertyReferenceImpl();
+		return annotationPropertyReference;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ScalarPropertyReference createScalarPropertyReference() {
+		ScalarPropertyReferenceImpl scalarPropertyReference = new ScalarPropertyReferenceImpl();
+		return scalarPropertyReference;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public StructuredPropertyReference createStructuredPropertyReference() {
+		StructuredPropertyReferenceImpl structuredPropertyReference = new StructuredPropertyReferenceImpl();
+		return structuredPropertyReference;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public FacetedScalarReference createFacetedScalarReference() {
+		FacetedScalarReferenceImpl facetedScalarReference = new FacetedScalarReferenceImpl();
+		return facetedScalarReference;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EnumeratedScalarReference createEnumeratedScalarReference() {
+		EnumeratedScalarReferenceImpl enumeratedScalarReference = new EnumeratedScalarReferenceImpl();
+		return enumeratedScalarReference;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public RelationReference createRelationReference() {
+		RelationReferenceImpl relationReference = new RelationReferenceImpl();
+		return relationReference;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public RuleReference createRuleReference() {
+		RuleReferenceImpl ruleReference = new RuleReferenceImpl();
+		return ruleReference;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ConceptInstanceReference createConceptInstanceReference() {
+		ConceptInstanceReferenceImpl conceptInstanceReference = new ConceptInstanceReferenceImpl();
+		return conceptInstanceReference;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public RelationInstanceReference createRelationInstanceReference() {
+		RelationInstanceReferenceImpl relationInstanceReference = new RelationInstanceReferenceImpl();
+		return relationInstanceReference;
 	}
 
 	/**

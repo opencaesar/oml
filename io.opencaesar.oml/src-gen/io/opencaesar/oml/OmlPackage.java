@@ -220,61 +220,6 @@ public interface OmlPackage extends EPackage {
 	int ANNOTATION_OPERATION_COUNT = ELEMENT_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link io.opencaesar.oml.impl.AnnotatedElementImpl <em>Annotated Element</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see io.opencaesar.oml.impl.AnnotatedElementImpl
-	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getAnnotatedElement()
-	 * @generated
-	 */
-	int ANNOTATED_ELEMENT = 2;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ANNOTATED_ELEMENT__OWNED_ANNOTATIONS = ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Annotated Element</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ANNOTATED_ELEMENT_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ANNOTATED_ELEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = ELEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
-	 * The operation id for the '<em>Get Ontology</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ANNOTATED_ELEMENT___GET_ONTOLOGY = ELEMENT___GET_ONTOLOGY;
-
-	/**
-	 * The number of operations of the '<em>Annotated Element</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ANNOTATED_ELEMENT_OPERATION_COUNT = ELEMENT_OPERATION_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.impl.IdentifiedElementImpl <em>Identified Element</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -282,7 +227,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getIdentifiedElement()
 	 * @generated
 	 */
-	int IDENTIFIED_ELEMENT = 3;
+	int IDENTIFIED_ELEMENT = 2;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -291,7 +236,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int IDENTIFIED_ELEMENT__OWNED_ANNOTATIONS = ANNOTATED_ELEMENT__OWNED_ANNOTATIONS;
+	int IDENTIFIED_ELEMENT__OWNED_ANNOTATIONS = ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Identified Element</em>' class.
@@ -300,7 +245,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int IDENTIFIED_ELEMENT_FEATURE_COUNT = ANNOTATED_ELEMENT_FEATURE_COUNT + 0;
+	int IDENTIFIED_ELEMENT_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The operation id for the '<em>Extra Validate</em>' operation.
@@ -309,7 +254,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int IDENTIFIED_ELEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = ANNOTATED_ELEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+	int IDENTIFIED_ELEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = ELEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
@@ -318,7 +263,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int IDENTIFIED_ELEMENT___GET_ONTOLOGY = ANNOTATED_ELEMENT___GET_ONTOLOGY;
+	int IDENTIFIED_ELEMENT___GET_ONTOLOGY = ELEMENT___GET_ONTOLOGY;
 
 	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
@@ -327,7 +272,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int IDENTIFIED_ELEMENT___GET_IRI = ANNOTATED_ELEMENT_OPERATION_COUNT + 0;
+	int IDENTIFIED_ELEMENT___GET_IRI = ELEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The number of operations of the '<em>Identified Element</em>' class.
@@ -336,7 +281,392 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int IDENTIFIED_ELEMENT_OPERATION_COUNT = ANNOTATED_ELEMENT_OPERATION_COUNT + 1;
+	int IDENTIFIED_ELEMENT_OPERATION_COUNT = ELEMENT_OPERATION_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link io.opencaesar.oml.impl.ImportImpl <em>Import</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see io.opencaesar.oml.impl.ImportImpl
+	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getImport()
+	 * @generated
+	 */
+	int IMPORT = 3;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPORT__NAMESPACE = ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPORT__PREFIX = ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Import</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPORT_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPORT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = ELEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Get Ontology</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPORT___GET_ONTOLOGY = ELEMENT___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Get Iri</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPORT___GET_IRI = ELEMENT_OPERATION_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>Get Separator</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPORT___GET_SEPARATOR = ELEMENT_OPERATION_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Import</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPORT_OPERATION_COUNT = ELEMENT_OPERATION_COUNT + 2;
+
+	/**
+	 * The meta object id for the '{@link io.opencaesar.oml.impl.InstanceImpl <em>Instance</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see io.opencaesar.oml.impl.InstanceImpl
+	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getInstance()
+	 * @generated
+	 */
+	int INSTANCE = 4;
+
+	/**
+	 * The feature id for the '<em><b>Owned Property Values</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INSTANCE__OWNED_PROPERTY_VALUES = ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Instance</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INSTANCE_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INSTANCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = ELEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Get Ontology</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INSTANCE___GET_ONTOLOGY = ELEMENT___GET_ONTOLOGY;
+
+	/**
+	 * The number of operations of the '<em>Instance</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INSTANCE_OPERATION_COUNT = ELEMENT_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link io.opencaesar.oml.impl.StatementImpl <em>Statement</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see io.opencaesar.oml.impl.StatementImpl
+	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getStatement()
+	 * @generated
+	 */
+	int STATEMENT = 5;
+
+	/**
+	 * The number of structural features of the '<em>Statement</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATEMENT_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = ELEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Get Ontology</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATEMENT___GET_ONTOLOGY = ELEMENT___GET_ONTOLOGY;
+
+	/**
+	 * The number of operations of the '<em>Statement</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATEMENT_OPERATION_COUNT = ELEMENT_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link io.opencaesar.oml.impl.AxiomImpl <em>Axiom</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see io.opencaesar.oml.impl.AxiomImpl
+	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getAxiom()
+	 * @generated
+	 */
+	int AXIOM = 6;
+
+	/**
+	 * The number of structural features of the '<em>Axiom</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AXIOM_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = ELEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Get Ontology</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AXIOM___GET_ONTOLOGY = ELEMENT___GET_ONTOLOGY;
+
+	/**
+	 * The number of operations of the '<em>Axiom</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AXIOM_OPERATION_COUNT = ELEMENT_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link io.opencaesar.oml.impl.AssertionImpl <em>Assertion</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see io.opencaesar.oml.impl.AssertionImpl
+	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getAssertion()
+	 * @generated
+	 */
+	int ASSERTION = 7;
+
+	/**
+	 * The number of structural features of the '<em>Assertion</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSERTION_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSERTION___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = ELEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Get Ontology</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSERTION___GET_ONTOLOGY = ELEMENT___GET_ONTOLOGY;
+
+	/**
+	 * The number of operations of the '<em>Assertion</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSERTION_OPERATION_COUNT = ELEMENT_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link io.opencaesar.oml.impl.PredicateImpl <em>Predicate</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see io.opencaesar.oml.impl.PredicateImpl
+	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getPredicate()
+	 * @generated
+	 */
+	int PREDICATE = 8;
+
+	/**
+	 * The feature id for the '<em><b>Antecedent Rule</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PREDICATE__ANTECEDENT_RULE = ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Consequent Rule</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PREDICATE__CONSEQUENT_RULE = ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Predicate</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PREDICATE_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PREDICATE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = ELEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Get Ontology</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PREDICATE___GET_ONTOLOGY = ELEMENT___GET_ONTOLOGY;
+
+	/**
+	 * The number of operations of the '<em>Predicate</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PREDICATE_OPERATION_COUNT = ELEMENT_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link io.opencaesar.oml.impl.LiteralImpl <em>Literal</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see io.opencaesar.oml.impl.LiteralImpl
+	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getLiteral()
+	 * @generated
+	 */
+	int LITERAL = 9;
+
+	/**
+	 * The number of structural features of the '<em>Literal</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LITERAL_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LITERAL___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = ELEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Get Ontology</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LITERAL___GET_ONTOLOGY = ELEMENT___GET_ONTOLOGY;
+
+	/**
+	 * The number of operations of the '<em>Literal</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LITERAL_OPERATION_COUNT = ELEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.impl.OntologyImpl <em>Ontology</em>}' class.
@@ -346,7 +676,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getOntology()
 	 * @generated
 	 */
-	int ONTOLOGY = 4;
+	int ONTOLOGY = 10;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -430,6 +760,88 @@ public interface OmlPackage extends EPackage {
 	int ONTOLOGY_OPERATION_COUNT = IDENTIFIED_ELEMENT_OPERATION_COUNT + 2;
 
 	/**
+	 * The meta object id for the '{@link io.opencaesar.oml.impl.MemberImpl <em>Member</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see io.opencaesar.oml.impl.MemberImpl
+	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getMember()
+	 * @generated
+	 */
+	int MEMBER = 11;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEMBER__OWNED_ANNOTATIONS = IDENTIFIED_ELEMENT__OWNED_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEMBER__NAME = IDENTIFIED_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Member</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEMBER_FEATURE_COUNT = IDENTIFIED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEMBER___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = IDENTIFIED_ELEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Get Ontology</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEMBER___GET_ONTOLOGY = IDENTIFIED_ELEMENT___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Get Iri</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEMBER___GET_IRI = IDENTIFIED_ELEMENT_OPERATION_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>Get Abbreviated Iri</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEMBER___GET_ABBREVIATED_IRI = IDENTIFIED_ELEMENT_OPERATION_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Member</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEMBER_OPERATION_COUNT = IDENTIFIED_ELEMENT_OPERATION_COUNT + 2;
+
+	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.impl.VocabularyBoxImpl <em>Vocabulary Box</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -437,7 +849,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getVocabularyBox()
 	 * @generated
 	 */
-	int VOCABULARY_BOX = 5;
+	int VOCABULARY_BOX = 12;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -521,6 +933,97 @@ public interface OmlPackage extends EPackage {
 	int VOCABULARY_BOX_OPERATION_COUNT = ONTOLOGY_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link io.opencaesar.oml.impl.DescriptionBoxImpl <em>Description Box</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see io.opencaesar.oml.impl.DescriptionBoxImpl
+	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDescriptionBox()
+	 * @generated
+	 */
+	int DESCRIPTION_BOX = 13;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_BOX__OWNED_ANNOTATIONS = ONTOLOGY__OWNED_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_BOX__NAMESPACE = ONTOLOGY__NAMESPACE;
+
+	/**
+	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_BOX__PREFIX = ONTOLOGY__PREFIX;
+
+	/**
+	 * The number of structural features of the '<em>Description Box</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_BOX_FEATURE_COUNT = ONTOLOGY_FEATURE_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_BOX___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = ONTOLOGY___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Get Ontology</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_BOX___GET_ONTOLOGY = ONTOLOGY___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Get Iri</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_BOX___GET_IRI = ONTOLOGY___GET_IRI;
+
+	/**
+	 * The operation id for the '<em>Get Separator</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_BOX___GET_SEPARATOR = ONTOLOGY___GET_SEPARATOR;
+
+	/**
+	 * The number of operations of the '<em>Description Box</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_BOX_OPERATION_COUNT = ONTOLOGY_OPERATION_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.impl.VocabularyImpl <em>Vocabulary</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -528,7 +1031,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getVocabulary()
 	 * @generated
 	 */
-	int VOCABULARY = 6;
+	int VOCABULARY = 14;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -637,7 +1140,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getVocabularyBundle()
 	 * @generated
 	 */
-	int VOCABULARY_BUNDLE = 7;
+	int VOCABULARY_BUNDLE = 15;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -730,97 +1233,6 @@ public interface OmlPackage extends EPackage {
 	int VOCABULARY_BUNDLE_OPERATION_COUNT = VOCABULARY_BOX_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link io.opencaesar.oml.impl.DescriptionBoxImpl <em>Description Box</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see io.opencaesar.oml.impl.DescriptionBoxImpl
-	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDescriptionBox()
-	 * @generated
-	 */
-	int DESCRIPTION_BOX = 8;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BOX__OWNED_ANNOTATIONS = ONTOLOGY__OWNED_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Namespace</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BOX__NAMESPACE = ONTOLOGY__NAMESPACE;
-
-	/**
-	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BOX__PREFIX = ONTOLOGY__PREFIX;
-
-	/**
-	 * The number of structural features of the '<em>Description Box</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BOX_FEATURE_COUNT = ONTOLOGY_FEATURE_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BOX___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = ONTOLOGY___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
-	 * The operation id for the '<em>Get Ontology</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BOX___GET_ONTOLOGY = ONTOLOGY___GET_ONTOLOGY;
-
-	/**
-	 * The operation id for the '<em>Get Iri</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BOX___GET_IRI = ONTOLOGY___GET_IRI;
-
-	/**
-	 * The operation id for the '<em>Get Separator</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BOX___GET_SEPARATOR = ONTOLOGY___GET_SEPARATOR;
-
-	/**
-	 * The number of operations of the '<em>Description Box</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BOX_OPERATION_COUNT = ONTOLOGY_OPERATION_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.impl.DescriptionImpl <em>Description</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -828,7 +1240,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDescription()
 	 * @generated
 	 */
-	int DESCRIPTION = 9;
+	int DESCRIPTION = 16;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -937,7 +1349,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDescriptionBundle()
 	 * @generated
 	 */
-	int DESCRIPTION_BUNDLE = 10;
+	int DESCRIPTION_BUNDLE = 17;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -1030,41 +1442,50 @@ public interface OmlPackage extends EPackage {
 	int DESCRIPTION_BUNDLE_OPERATION_COUNT = DESCRIPTION_BOX_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link io.opencaesar.oml.impl.MemberImpl <em>Member</em>}' class.
+	 * The meta object id for the '{@link io.opencaesar.oml.impl.VocabularyImportImpl <em>Vocabulary Import</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see io.opencaesar.oml.impl.MemberImpl
-	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getMember()
+	 * @see io.opencaesar.oml.impl.VocabularyImportImpl
+	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getVocabularyImport()
 	 * @generated
 	 */
-	int MEMBER = 11;
+	int VOCABULARY_IMPORT = 18;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Namespace</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MEMBER__OWNED_ANNOTATIONS = IDENTIFIED_ELEMENT__OWNED_ANNOTATIONS;
+	int VOCABULARY_IMPORT__NAMESPACE = IMPORT__NAMESPACE;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MEMBER__NAME = IDENTIFIED_ELEMENT_FEATURE_COUNT + 0;
+	int VOCABULARY_IMPORT__PREFIX = IMPORT__PREFIX;
 
 	/**
-	 * The number of structural features of the '<em>Member</em>' class.
+	 * The feature id for the '<em><b>Owning Vocabulary</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MEMBER_FEATURE_COUNT = IDENTIFIED_ELEMENT_FEATURE_COUNT + 1;
+	int VOCABULARY_IMPORT__OWNING_VOCABULARY = IMPORT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Vocabulary Import</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOCABULARY_IMPORT_FEATURE_COUNT = IMPORT_FEATURE_COUNT + 1;
 
 	/**
 	 * The operation id for the '<em>Extra Validate</em>' operation.
@@ -1073,7 +1494,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MEMBER___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = IDENTIFIED_ELEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+	int VOCABULARY_IMPORT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = IMPORT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
@@ -1082,7 +1503,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MEMBER___GET_ONTOLOGY = IDENTIFIED_ELEMENT___GET_ONTOLOGY;
+	int VOCABULARY_IMPORT___GET_ONTOLOGY = IMPORT___GET_ONTOLOGY;
 
 	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
@@ -1091,7 +1512,1291 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MEMBER___GET_IRI = IDENTIFIED_ELEMENT_OPERATION_COUNT + 0;
+	int VOCABULARY_IMPORT___GET_IRI = IMPORT___GET_IRI;
+
+	/**
+	 * The operation id for the '<em>Get Separator</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOCABULARY_IMPORT___GET_SEPARATOR = IMPORT___GET_SEPARATOR;
+
+	/**
+	 * The number of operations of the '<em>Vocabulary Import</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOCABULARY_IMPORT_OPERATION_COUNT = IMPORT_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link io.opencaesar.oml.impl.VocabularyBundleImportImpl <em>Vocabulary Bundle Import</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see io.opencaesar.oml.impl.VocabularyBundleImportImpl
+	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getVocabularyBundleImport()
+	 * @generated
+	 */
+	int VOCABULARY_BUNDLE_IMPORT = 19;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOCABULARY_BUNDLE_IMPORT__NAMESPACE = IMPORT__NAMESPACE;
+
+	/**
+	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOCABULARY_BUNDLE_IMPORT__PREFIX = IMPORT__PREFIX;
+
+	/**
+	 * The feature id for the '<em><b>Owning Vocabulary Bundle</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOCABULARY_BUNDLE_IMPORT__OWNING_VOCABULARY_BUNDLE = IMPORT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Vocabulary Bundle Import</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOCABULARY_BUNDLE_IMPORT_FEATURE_COUNT = IMPORT_FEATURE_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOCABULARY_BUNDLE_IMPORT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = IMPORT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Get Ontology</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOCABULARY_BUNDLE_IMPORT___GET_ONTOLOGY = IMPORT___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Get Iri</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOCABULARY_BUNDLE_IMPORT___GET_IRI = IMPORT___GET_IRI;
+
+	/**
+	 * The operation id for the '<em>Get Separator</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOCABULARY_BUNDLE_IMPORT___GET_SEPARATOR = IMPORT___GET_SEPARATOR;
+
+	/**
+	 * The number of operations of the '<em>Vocabulary Bundle Import</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOCABULARY_BUNDLE_IMPORT_OPERATION_COUNT = IMPORT_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link io.opencaesar.oml.impl.DescriptionImportImpl <em>Description Import</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see io.opencaesar.oml.impl.DescriptionImportImpl
+	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDescriptionImport()
+	 * @generated
+	 */
+	int DESCRIPTION_IMPORT = 20;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_IMPORT__NAMESPACE = IMPORT__NAMESPACE;
+
+	/**
+	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_IMPORT__PREFIX = IMPORT__PREFIX;
+
+	/**
+	 * The feature id for the '<em><b>Owning Description</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_IMPORT__OWNING_DESCRIPTION = IMPORT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Description Import</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_IMPORT_FEATURE_COUNT = IMPORT_FEATURE_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_IMPORT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = IMPORT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Get Ontology</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_IMPORT___GET_ONTOLOGY = IMPORT___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Get Iri</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_IMPORT___GET_IRI = IMPORT___GET_IRI;
+
+	/**
+	 * The operation id for the '<em>Get Separator</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_IMPORT___GET_SEPARATOR = IMPORT___GET_SEPARATOR;
+
+	/**
+	 * The number of operations of the '<em>Description Import</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_IMPORT_OPERATION_COUNT = IMPORT_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link io.opencaesar.oml.impl.DescriptionBundleImportImpl <em>Description Bundle Import</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see io.opencaesar.oml.impl.DescriptionBundleImportImpl
+	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDescriptionBundleImport()
+	 * @generated
+	 */
+	int DESCRIPTION_BUNDLE_IMPORT = 21;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_BUNDLE_IMPORT__NAMESPACE = IMPORT__NAMESPACE;
+
+	/**
+	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_BUNDLE_IMPORT__PREFIX = IMPORT__PREFIX;
+
+	/**
+	 * The feature id for the '<em><b>Owning Description Bundle</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_BUNDLE_IMPORT__OWNING_DESCRIPTION_BUNDLE = IMPORT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Description Bundle Import</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_BUNDLE_IMPORT_FEATURE_COUNT = IMPORT_FEATURE_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_BUNDLE_IMPORT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = IMPORT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Get Ontology</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_BUNDLE_IMPORT___GET_ONTOLOGY = IMPORT___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Get Iri</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_BUNDLE_IMPORT___GET_IRI = IMPORT___GET_IRI;
+
+	/**
+	 * The operation id for the '<em>Get Separator</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_BUNDLE_IMPORT___GET_SEPARATOR = IMPORT___GET_SEPARATOR;
+
+	/**
+	 * The number of operations of the '<em>Description Bundle Import</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_BUNDLE_IMPORT_OPERATION_COUNT = IMPORT_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link io.opencaesar.oml.impl.VocabularyExtensionImpl <em>Vocabulary Extension</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see io.opencaesar.oml.impl.VocabularyExtensionImpl
+	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getVocabularyExtension()
+	 * @generated
+	 */
+	int VOCABULARY_EXTENSION = 22;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOCABULARY_EXTENSION__NAMESPACE = VOCABULARY_IMPORT__NAMESPACE;
+
+	/**
+	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOCABULARY_EXTENSION__PREFIX = VOCABULARY_IMPORT__PREFIX;
+
+	/**
+	 * The feature id for the '<em><b>Owning Vocabulary</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOCABULARY_EXTENSION__OWNING_VOCABULARY = VOCABULARY_IMPORT__OWNING_VOCABULARY;
+
+	/**
+	 * The number of structural features of the '<em>Vocabulary Extension</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOCABULARY_EXTENSION_FEATURE_COUNT = VOCABULARY_IMPORT_FEATURE_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOCABULARY_EXTENSION___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = VOCABULARY_IMPORT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Get Ontology</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOCABULARY_EXTENSION___GET_ONTOLOGY = VOCABULARY_IMPORT___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Get Iri</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOCABULARY_EXTENSION___GET_IRI = VOCABULARY_IMPORT___GET_IRI;
+
+	/**
+	 * The operation id for the '<em>Get Separator</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOCABULARY_EXTENSION___GET_SEPARATOR = VOCABULARY_IMPORT___GET_SEPARATOR;
+
+	/**
+	 * The number of operations of the '<em>Vocabulary Extension</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOCABULARY_EXTENSION_OPERATION_COUNT = VOCABULARY_IMPORT_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link io.opencaesar.oml.impl.VocabularyUsageImpl <em>Vocabulary Usage</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see io.opencaesar.oml.impl.VocabularyUsageImpl
+	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getVocabularyUsage()
+	 * @generated
+	 */
+	int VOCABULARY_USAGE = 23;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOCABULARY_USAGE__NAMESPACE = VOCABULARY_IMPORT__NAMESPACE;
+
+	/**
+	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOCABULARY_USAGE__PREFIX = VOCABULARY_IMPORT__PREFIX;
+
+	/**
+	 * The feature id for the '<em><b>Owning Vocabulary</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOCABULARY_USAGE__OWNING_VOCABULARY = VOCABULARY_IMPORT__OWNING_VOCABULARY;
+
+	/**
+	 * The number of structural features of the '<em>Vocabulary Usage</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOCABULARY_USAGE_FEATURE_COUNT = VOCABULARY_IMPORT_FEATURE_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOCABULARY_USAGE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = VOCABULARY_IMPORT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Get Ontology</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOCABULARY_USAGE___GET_ONTOLOGY = VOCABULARY_IMPORT___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Get Iri</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOCABULARY_USAGE___GET_IRI = VOCABULARY_IMPORT___GET_IRI;
+
+	/**
+	 * The operation id for the '<em>Get Separator</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOCABULARY_USAGE___GET_SEPARATOR = VOCABULARY_IMPORT___GET_SEPARATOR;
+
+	/**
+	 * The number of operations of the '<em>Vocabulary Usage</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOCABULARY_USAGE_OPERATION_COUNT = VOCABULARY_IMPORT_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link io.opencaesar.oml.impl.VocabularyBundleExtensionImpl <em>Vocabulary Bundle Extension</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see io.opencaesar.oml.impl.VocabularyBundleExtensionImpl
+	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getVocabularyBundleExtension()
+	 * @generated
+	 */
+	int VOCABULARY_BUNDLE_EXTENSION = 24;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOCABULARY_BUNDLE_EXTENSION__NAMESPACE = VOCABULARY_BUNDLE_IMPORT__NAMESPACE;
+
+	/**
+	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOCABULARY_BUNDLE_EXTENSION__PREFIX = VOCABULARY_BUNDLE_IMPORT__PREFIX;
+
+	/**
+	 * The feature id for the '<em><b>Owning Vocabulary Bundle</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOCABULARY_BUNDLE_EXTENSION__OWNING_VOCABULARY_BUNDLE = VOCABULARY_BUNDLE_IMPORT__OWNING_VOCABULARY_BUNDLE;
+
+	/**
+	 * The number of structural features of the '<em>Vocabulary Bundle Extension</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOCABULARY_BUNDLE_EXTENSION_FEATURE_COUNT = VOCABULARY_BUNDLE_IMPORT_FEATURE_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOCABULARY_BUNDLE_EXTENSION___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = VOCABULARY_BUNDLE_IMPORT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Get Ontology</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOCABULARY_BUNDLE_EXTENSION___GET_ONTOLOGY = VOCABULARY_BUNDLE_IMPORT___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Get Iri</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOCABULARY_BUNDLE_EXTENSION___GET_IRI = VOCABULARY_BUNDLE_IMPORT___GET_IRI;
+
+	/**
+	 * The operation id for the '<em>Get Separator</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOCABULARY_BUNDLE_EXTENSION___GET_SEPARATOR = VOCABULARY_BUNDLE_IMPORT___GET_SEPARATOR;
+
+	/**
+	 * The number of operations of the '<em>Vocabulary Bundle Extension</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOCABULARY_BUNDLE_EXTENSION_OPERATION_COUNT = VOCABULARY_BUNDLE_IMPORT_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link io.opencaesar.oml.impl.VocabularyBundleInclusionImpl <em>Vocabulary Bundle Inclusion</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see io.opencaesar.oml.impl.VocabularyBundleInclusionImpl
+	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getVocabularyBundleInclusion()
+	 * @generated
+	 */
+	int VOCABULARY_BUNDLE_INCLUSION = 25;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOCABULARY_BUNDLE_INCLUSION__NAMESPACE = VOCABULARY_BUNDLE_IMPORT__NAMESPACE;
+
+	/**
+	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOCABULARY_BUNDLE_INCLUSION__PREFIX = VOCABULARY_BUNDLE_IMPORT__PREFIX;
+
+	/**
+	 * The feature id for the '<em><b>Owning Vocabulary Bundle</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOCABULARY_BUNDLE_INCLUSION__OWNING_VOCABULARY_BUNDLE = VOCABULARY_BUNDLE_IMPORT__OWNING_VOCABULARY_BUNDLE;
+
+	/**
+	 * The number of structural features of the '<em>Vocabulary Bundle Inclusion</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOCABULARY_BUNDLE_INCLUSION_FEATURE_COUNT = VOCABULARY_BUNDLE_IMPORT_FEATURE_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOCABULARY_BUNDLE_INCLUSION___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = VOCABULARY_BUNDLE_IMPORT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Get Ontology</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOCABULARY_BUNDLE_INCLUSION___GET_ONTOLOGY = VOCABULARY_BUNDLE_IMPORT___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Get Iri</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOCABULARY_BUNDLE_INCLUSION___GET_IRI = VOCABULARY_BUNDLE_IMPORT___GET_IRI;
+
+	/**
+	 * The operation id for the '<em>Get Separator</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOCABULARY_BUNDLE_INCLUSION___GET_SEPARATOR = VOCABULARY_BUNDLE_IMPORT___GET_SEPARATOR;
+
+	/**
+	 * The number of operations of the '<em>Vocabulary Bundle Inclusion</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOCABULARY_BUNDLE_INCLUSION_OPERATION_COUNT = VOCABULARY_BUNDLE_IMPORT_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link io.opencaesar.oml.impl.DescriptionExtensionImpl <em>Description Extension</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see io.opencaesar.oml.impl.DescriptionExtensionImpl
+	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDescriptionExtension()
+	 * @generated
+	 */
+	int DESCRIPTION_EXTENSION = 26;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_EXTENSION__NAMESPACE = DESCRIPTION_IMPORT__NAMESPACE;
+
+	/**
+	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_EXTENSION__PREFIX = DESCRIPTION_IMPORT__PREFIX;
+
+	/**
+	 * The feature id for the '<em><b>Owning Description</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_EXTENSION__OWNING_DESCRIPTION = DESCRIPTION_IMPORT__OWNING_DESCRIPTION;
+
+	/**
+	 * The number of structural features of the '<em>Description Extension</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_EXTENSION_FEATURE_COUNT = DESCRIPTION_IMPORT_FEATURE_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_EXTENSION___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = DESCRIPTION_IMPORT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Get Ontology</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_EXTENSION___GET_ONTOLOGY = DESCRIPTION_IMPORT___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Get Iri</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_EXTENSION___GET_IRI = DESCRIPTION_IMPORT___GET_IRI;
+
+	/**
+	 * The operation id for the '<em>Get Separator</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_EXTENSION___GET_SEPARATOR = DESCRIPTION_IMPORT___GET_SEPARATOR;
+
+	/**
+	 * The number of operations of the '<em>Description Extension</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_EXTENSION_OPERATION_COUNT = DESCRIPTION_IMPORT_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link io.opencaesar.oml.impl.DescriptionUsageImpl <em>Description Usage</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see io.opencaesar.oml.impl.DescriptionUsageImpl
+	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDescriptionUsage()
+	 * @generated
+	 */
+	int DESCRIPTION_USAGE = 27;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_USAGE__NAMESPACE = DESCRIPTION_IMPORT__NAMESPACE;
+
+	/**
+	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_USAGE__PREFIX = DESCRIPTION_IMPORT__PREFIX;
+
+	/**
+	 * The feature id for the '<em><b>Owning Description</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_USAGE__OWNING_DESCRIPTION = DESCRIPTION_IMPORT__OWNING_DESCRIPTION;
+
+	/**
+	 * The number of structural features of the '<em>Description Usage</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_USAGE_FEATURE_COUNT = DESCRIPTION_IMPORT_FEATURE_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_USAGE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = DESCRIPTION_IMPORT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Get Ontology</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_USAGE___GET_ONTOLOGY = DESCRIPTION_IMPORT___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Get Iri</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_USAGE___GET_IRI = DESCRIPTION_IMPORT___GET_IRI;
+
+	/**
+	 * The operation id for the '<em>Get Separator</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_USAGE___GET_SEPARATOR = DESCRIPTION_IMPORT___GET_SEPARATOR;
+
+	/**
+	 * The number of operations of the '<em>Description Usage</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_USAGE_OPERATION_COUNT = DESCRIPTION_IMPORT_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link io.opencaesar.oml.impl.DescriptionBundleExtensionImpl <em>Description Bundle Extension</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see io.opencaesar.oml.impl.DescriptionBundleExtensionImpl
+	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDescriptionBundleExtension()
+	 * @generated
+	 */
+	int DESCRIPTION_BUNDLE_EXTENSION = 28;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_BUNDLE_EXTENSION__NAMESPACE = DESCRIPTION_BUNDLE_IMPORT__NAMESPACE;
+
+	/**
+	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_BUNDLE_EXTENSION__PREFIX = DESCRIPTION_BUNDLE_IMPORT__PREFIX;
+
+	/**
+	 * The feature id for the '<em><b>Owning Description Bundle</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_BUNDLE_EXTENSION__OWNING_DESCRIPTION_BUNDLE = DESCRIPTION_BUNDLE_IMPORT__OWNING_DESCRIPTION_BUNDLE;
+
+	/**
+	 * The number of structural features of the '<em>Description Bundle Extension</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_BUNDLE_EXTENSION_FEATURE_COUNT = DESCRIPTION_BUNDLE_IMPORT_FEATURE_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_BUNDLE_EXTENSION___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = DESCRIPTION_BUNDLE_IMPORT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Get Ontology</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_BUNDLE_EXTENSION___GET_ONTOLOGY = DESCRIPTION_BUNDLE_IMPORT___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Get Iri</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_BUNDLE_EXTENSION___GET_IRI = DESCRIPTION_BUNDLE_IMPORT___GET_IRI;
+
+	/**
+	 * The operation id for the '<em>Get Separator</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_BUNDLE_EXTENSION___GET_SEPARATOR = DESCRIPTION_BUNDLE_IMPORT___GET_SEPARATOR;
+
+	/**
+	 * The number of operations of the '<em>Description Bundle Extension</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_BUNDLE_EXTENSION_OPERATION_COUNT = DESCRIPTION_BUNDLE_IMPORT_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link io.opencaesar.oml.impl.DescriptionBundleInclusionImpl <em>Description Bundle Inclusion</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see io.opencaesar.oml.impl.DescriptionBundleInclusionImpl
+	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDescriptionBundleInclusion()
+	 * @generated
+	 */
+	int DESCRIPTION_BUNDLE_INCLUSION = 29;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_BUNDLE_INCLUSION__NAMESPACE = DESCRIPTION_BUNDLE_IMPORT__NAMESPACE;
+
+	/**
+	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_BUNDLE_INCLUSION__PREFIX = DESCRIPTION_BUNDLE_IMPORT__PREFIX;
+
+	/**
+	 * The feature id for the '<em><b>Owning Description Bundle</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_BUNDLE_INCLUSION__OWNING_DESCRIPTION_BUNDLE = DESCRIPTION_BUNDLE_IMPORT__OWNING_DESCRIPTION_BUNDLE;
+
+	/**
+	 * The number of structural features of the '<em>Description Bundle Inclusion</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_BUNDLE_INCLUSION_FEATURE_COUNT = DESCRIPTION_BUNDLE_IMPORT_FEATURE_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_BUNDLE_INCLUSION___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = DESCRIPTION_BUNDLE_IMPORT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Get Ontology</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_BUNDLE_INCLUSION___GET_ONTOLOGY = DESCRIPTION_BUNDLE_IMPORT___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Get Iri</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_BUNDLE_INCLUSION___GET_IRI = DESCRIPTION_BUNDLE_IMPORT___GET_IRI;
+
+	/**
+	 * The operation id for the '<em>Get Separator</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_BUNDLE_INCLUSION___GET_SEPARATOR = DESCRIPTION_BUNDLE_IMPORT___GET_SEPARATOR;
+
+	/**
+	 * The number of operations of the '<em>Description Bundle Inclusion</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_BUNDLE_INCLUSION_OPERATION_COUNT = DESCRIPTION_BUNDLE_IMPORT_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link io.opencaesar.oml.impl.DescriptionBundleUsageImpl <em>Description Bundle Usage</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see io.opencaesar.oml.impl.DescriptionBundleUsageImpl
+	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDescriptionBundleUsage()
+	 * @generated
+	 */
+	int DESCRIPTION_BUNDLE_USAGE = 30;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_BUNDLE_USAGE__NAMESPACE = DESCRIPTION_BUNDLE_IMPORT__NAMESPACE;
+
+	/**
+	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_BUNDLE_USAGE__PREFIX = DESCRIPTION_BUNDLE_IMPORT__PREFIX;
+
+	/**
+	 * The feature id for the '<em><b>Owning Description Bundle</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_BUNDLE_USAGE__OWNING_DESCRIPTION_BUNDLE = DESCRIPTION_BUNDLE_IMPORT__OWNING_DESCRIPTION_BUNDLE;
+
+	/**
+	 * The number of structural features of the '<em>Description Bundle Usage</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_BUNDLE_USAGE_FEATURE_COUNT = DESCRIPTION_BUNDLE_IMPORT_FEATURE_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_BUNDLE_USAGE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = DESCRIPTION_BUNDLE_IMPORT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Get Ontology</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_BUNDLE_USAGE___GET_ONTOLOGY = DESCRIPTION_BUNDLE_IMPORT___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Get Iri</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_BUNDLE_USAGE___GET_IRI = DESCRIPTION_BUNDLE_IMPORT___GET_IRI;
+
+	/**
+	 * The operation id for the '<em>Get Separator</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_BUNDLE_USAGE___GET_SEPARATOR = DESCRIPTION_BUNDLE_IMPORT___GET_SEPARATOR;
+
+	/**
+	 * The number of operations of the '<em>Description Bundle Usage</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_BUNDLE_USAGE_OPERATION_COUNT = DESCRIPTION_BUNDLE_IMPORT_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link io.opencaesar.oml.impl.VocabularyStatementImpl <em>Vocabulary Statement</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see io.opencaesar.oml.impl.VocabularyStatementImpl
+	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getVocabularyStatement()
+	 * @generated
+	 */
+	int VOCABULARY_STATEMENT = 31;
+
+	/**
+	 * The feature id for the '<em><b>Owning Vocabulary</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOCABULARY_STATEMENT__OWNING_VOCABULARY = STATEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Vocabulary Statement</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOCABULARY_STATEMENT_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOCABULARY_STATEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = STATEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Get Ontology</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOCABULARY_STATEMENT___GET_ONTOLOGY = STATEMENT___GET_ONTOLOGY;
+
+	/**
+	 * The number of operations of the '<em>Vocabulary Statement</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOCABULARY_STATEMENT_OPERATION_COUNT = STATEMENT_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link io.opencaesar.oml.impl.DescriptionStatementImpl <em>Description Statement</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see io.opencaesar.oml.impl.DescriptionStatementImpl
+	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDescriptionStatement()
+	 * @generated
+	 */
+	int DESCRIPTION_STATEMENT = 32;
+
+	/**
+	 * The feature id for the '<em><b>Owning Description</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_STATEMENT__OWNING_DESCRIPTION = STATEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Description Statement</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_STATEMENT_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_STATEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = STATEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Get Ontology</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_STATEMENT___GET_ONTOLOGY = STATEMENT___GET_ONTOLOGY;
+
+	/**
+	 * The number of operations of the '<em>Description Statement</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_STATEMENT_OPERATION_COUNT = STATEMENT_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link io.opencaesar.oml.impl.VocabularyMemberImpl <em>Vocabulary Member</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see io.opencaesar.oml.impl.VocabularyMemberImpl
+	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getVocabularyMember()
+	 * @generated
+	 */
+	int VOCABULARY_MEMBER = 33;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOCABULARY_MEMBER__OWNED_ANNOTATIONS = MEMBER__OWNED_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOCABULARY_MEMBER__NAME = MEMBER__NAME;
+
+	/**
+	 * The number of structural features of the '<em>Vocabulary Member</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOCABULARY_MEMBER_FEATURE_COUNT = MEMBER_FEATURE_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOCABULARY_MEMBER___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = MEMBER___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Get Ontology</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOCABULARY_MEMBER___GET_ONTOLOGY = MEMBER___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Get Iri</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOCABULARY_MEMBER___GET_IRI = MEMBER___GET_IRI;
 
 	/**
 	 * The operation id for the '<em>Get Abbreviated Iri</em>' operation.
@@ -1100,16 +2805,98 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MEMBER___GET_ABBREVIATED_IRI = IDENTIFIED_ELEMENT_OPERATION_COUNT + 1;
+	int VOCABULARY_MEMBER___GET_ABBREVIATED_IRI = MEMBER___GET_ABBREVIATED_IRI;
 
 	/**
-	 * The number of operations of the '<em>Member</em>' class.
+	 * The number of operations of the '<em>Vocabulary Member</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MEMBER_OPERATION_COUNT = IDENTIFIED_ELEMENT_OPERATION_COUNT + 2;
+	int VOCABULARY_MEMBER_OPERATION_COUNT = MEMBER_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link io.opencaesar.oml.impl.DescriptionMemberImpl <em>Description Member</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see io.opencaesar.oml.impl.DescriptionMemberImpl
+	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDescriptionMember()
+	 * @generated
+	 */
+	int DESCRIPTION_MEMBER = 34;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_MEMBER__OWNED_ANNOTATIONS = MEMBER__OWNED_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_MEMBER__NAME = MEMBER__NAME;
+
+	/**
+	 * The number of structural features of the '<em>Description Member</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_MEMBER_FEATURE_COUNT = MEMBER_FEATURE_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_MEMBER___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = MEMBER___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Get Ontology</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_MEMBER___GET_ONTOLOGY = MEMBER___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Get Iri</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_MEMBER___GET_IRI = MEMBER___GET_IRI;
+
+	/**
+	 * The operation id for the '<em>Get Abbreviated Iri</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_MEMBER___GET_ABBREVIATED_IRI = MEMBER___GET_ABBREVIATED_IRI;
+
+	/**
+	 * The number of operations of the '<em>Description Member</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_MEMBER_OPERATION_COUNT = MEMBER_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.impl.TermImpl <em>Term</em>}' class.
@@ -1119,7 +2906,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getTerm()
 	 * @generated
 	 */
-	int TERM = 12;
+	int TERM = 35;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -1128,7 +2915,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TERM__OWNED_ANNOTATIONS = MEMBER__OWNED_ANNOTATIONS;
+	int TERM__OWNED_ANNOTATIONS = VOCABULARY_MEMBER__OWNED_ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1137,7 +2924,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TERM__NAME = MEMBER__NAME;
+	int TERM__NAME = VOCABULARY_MEMBER__NAME;
 
 	/**
 	 * The number of structural features of the '<em>Term</em>' class.
@@ -1146,7 +2933,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TERM_FEATURE_COUNT = MEMBER_FEATURE_COUNT + 0;
+	int TERM_FEATURE_COUNT = VOCABULARY_MEMBER_FEATURE_COUNT + 0;
 
 	/**
 	 * The operation id for the '<em>Extra Validate</em>' operation.
@@ -1155,7 +2942,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TERM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = MEMBER___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+	int TERM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = VOCABULARY_MEMBER___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
@@ -1164,7 +2951,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TERM___GET_ONTOLOGY = MEMBER___GET_ONTOLOGY;
+	int TERM___GET_ONTOLOGY = VOCABULARY_MEMBER___GET_ONTOLOGY;
 
 	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
@@ -1173,7 +2960,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TERM___GET_IRI = MEMBER___GET_IRI;
+	int TERM___GET_IRI = VOCABULARY_MEMBER___GET_IRI;
 
 	/**
 	 * The operation id for the '<em>Get Abbreviated Iri</em>' operation.
@@ -1182,7 +2969,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TERM___GET_ABBREVIATED_IRI = MEMBER___GET_ABBREVIATED_IRI;
+	int TERM___GET_ABBREVIATED_IRI = VOCABULARY_MEMBER___GET_ABBREVIATED_IRI;
 
 	/**
 	 * The number of operations of the '<em>Term</em>' class.
@@ -1191,7 +2978,116 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TERM_OPERATION_COUNT = MEMBER_OPERATION_COUNT + 0;
+	int TERM_OPERATION_COUNT = VOCABULARY_MEMBER_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link io.opencaesar.oml.impl.RuleImpl <em>Rule</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see io.opencaesar.oml.impl.RuleImpl
+	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRule()
+	 * @generated
+	 */
+	int RULE = 36;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RULE__OWNED_ANNOTATIONS = VOCABULARY_MEMBER__OWNED_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RULE__NAME = VOCABULARY_MEMBER__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Owning Vocabulary</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RULE__OWNING_VOCABULARY = VOCABULARY_MEMBER_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Antecedent</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RULE__ANTECEDENT = VOCABULARY_MEMBER_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Consequent</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RULE__CONSEQUENT = VOCABULARY_MEMBER_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>Rule</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RULE_FEATURE_COUNT = VOCABULARY_MEMBER_FEATURE_COUNT + 3;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RULE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = VOCABULARY_MEMBER___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Get Ontology</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RULE___GET_ONTOLOGY = VOCABULARY_MEMBER___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Get Iri</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RULE___GET_IRI = VOCABULARY_MEMBER___GET_IRI;
+
+	/**
+	 * The operation id for the '<em>Get Abbreviated Iri</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RULE___GET_ABBREVIATED_IRI = VOCABULARY_MEMBER___GET_ABBREVIATED_IRI;
+
+	/**
+	 * The number of operations of the '<em>Rule</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RULE_OPERATION_COUNT = VOCABULARY_MEMBER_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.impl.SpecializableTermImpl <em>Specializable Term</em>}' class.
@@ -1201,7 +3097,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getSpecializableTerm()
 	 * @generated
 	 */
-	int SPECIALIZABLE_TERM = 13;
+	int SPECIALIZABLE_TERM = 37;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -1294,6 +3190,170 @@ public interface OmlPackage extends EPackage {
 	int SPECIALIZABLE_TERM_OPERATION_COUNT = TERM_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link io.opencaesar.oml.impl.FeatureImpl <em>Feature</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see io.opencaesar.oml.impl.FeatureImpl
+	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getFeature()
+	 * @generated
+	 */
+	int FEATURE = 38;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FEATURE__OWNED_ANNOTATIONS = TERM__OWNED_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FEATURE__NAME = TERM__NAME;
+
+	/**
+	 * The number of structural features of the '<em>Feature</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FEATURE_FEATURE_COUNT = TERM_FEATURE_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FEATURE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = TERM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Get Ontology</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FEATURE___GET_ONTOLOGY = TERM___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Get Iri</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FEATURE___GET_IRI = TERM___GET_IRI;
+
+	/**
+	 * The operation id for the '<em>Get Abbreviated Iri</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FEATURE___GET_ABBREVIATED_IRI = TERM___GET_ABBREVIATED_IRI;
+
+	/**
+	 * The number of operations of the '<em>Feature</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FEATURE_OPERATION_COUNT = TERM_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link io.opencaesar.oml.impl.PropertyImpl <em>Property</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see io.opencaesar.oml.impl.PropertyImpl
+	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getProperty()
+	 * @generated
+	 */
+	int PROPERTY = 39;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY__OWNED_ANNOTATIONS = FEATURE__OWNED_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY__NAME = FEATURE__NAME;
+
+	/**
+	 * The number of structural features of the '<em>Property</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_FEATURE_COUNT = FEATURE_FEATURE_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = FEATURE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Get Ontology</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY___GET_ONTOLOGY = FEATURE___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Get Iri</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY___GET_IRI = FEATURE___GET_IRI;
+
+	/**
+	 * The operation id for the '<em>Get Abbreviated Iri</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY___GET_ABBREVIATED_IRI = FEATURE___GET_ABBREVIATED_IRI;
+
+	/**
+	 * The number of operations of the '<em>Property</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_OPERATION_COUNT = FEATURE_OPERATION_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.impl.TypeImpl <em>Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1301,7 +3361,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getType()
 	 * @generated
 	 */
-	int TYPE = 14;
+	int TYPE = 40;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -1401,7 +3461,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getClassifier()
 	 * @generated
 	 */
-	int CLASSIFIER = 15;
+	int CLASSIFIER = 41;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -1503,6 +3563,106 @@ public interface OmlPackage extends EPackage {
 	int CLASSIFIER_OPERATION_COUNT = TYPE_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link io.opencaesar.oml.impl.ScalarImpl <em>Scalar</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see io.opencaesar.oml.impl.ScalarImpl
+	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getScalar()
+	 * @generated
+	 */
+	int SCALAR = 42;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALAR__OWNED_ANNOTATIONS = TYPE__OWNED_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALAR__NAME = TYPE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Owning Vocabulary</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALAR__OWNING_VOCABULARY = TYPE__OWNING_VOCABULARY;
+
+	/**
+	 * The feature id for the '<em><b>Owned Specializations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALAR__OWNED_SPECIALIZATIONS = TYPE__OWNED_SPECIALIZATIONS;
+
+	/**
+	 * The number of structural features of the '<em>Scalar</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALAR_FEATURE_COUNT = TYPE_FEATURE_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALAR___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = TYPE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Get Ontology</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALAR___GET_ONTOLOGY = TYPE___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Get Iri</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALAR___GET_IRI = TYPE___GET_IRI;
+
+	/**
+	 * The operation id for the '<em>Get Abbreviated Iri</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALAR___GET_ABBREVIATED_IRI = TYPE___GET_ABBREVIATED_IRI;
+
+	/**
+	 * The number of operations of the '<em>Scalar</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALAR_OPERATION_COUNT = TYPE_OPERATION_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.impl.EntityImpl <em>Entity</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1510,7 +3670,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getEntity()
 	 * @generated
 	 */
-	int ENTITY = 16;
+	int ENTITY = 43;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -1630,6 +3790,115 @@ public interface OmlPackage extends EPackage {
 	int ENTITY_OPERATION_COUNT = CLASSIFIER_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link io.opencaesar.oml.impl.StructureImpl <em>Structure</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see io.opencaesar.oml.impl.StructureImpl
+	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getStructure()
+	 * @generated
+	 */
+	int STRUCTURE = 44;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURE__OWNED_ANNOTATIONS = CLASSIFIER__OWNED_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURE__NAME = CLASSIFIER__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Owning Vocabulary</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURE__OWNING_VOCABULARY = CLASSIFIER__OWNING_VOCABULARY;
+
+	/**
+	 * The feature id for the '<em><b>Owned Specializations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURE__OWNED_SPECIALIZATIONS = CLASSIFIER__OWNED_SPECIALIZATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Property Restrictions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURE__OWNED_PROPERTY_RESTRICTIONS = CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS;
+
+	/**
+	 * The number of structural features of the '<em>Structure</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURE_FEATURE_COUNT = CLASSIFIER_FEATURE_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = CLASSIFIER___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Get Ontology</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURE___GET_ONTOLOGY = CLASSIFIER___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Get Iri</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURE___GET_IRI = CLASSIFIER___GET_IRI;
+
+	/**
+	 * The operation id for the '<em>Get Abbreviated Iri</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURE___GET_ABBREVIATED_IRI = CLASSIFIER___GET_ABBREVIATED_IRI;
+
+	/**
+	 * The number of operations of the '<em>Structure</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURE_OPERATION_COUNT = CLASSIFIER_OPERATION_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.impl.AspectImpl <em>Aspect</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1637,7 +3906,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getAspect()
 	 * @generated
 	 */
-	int ASPECT = 17;
+	int ASPECT = 45;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -1764,7 +4033,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getConcept()
 	 * @generated
 	 */
-	int CONCEPT = 18;
+	int CONCEPT = 46;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -1900,7 +4169,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRelationEntity()
 	 * @generated
 	 */
-	int RELATION_ENTITY = 19;
+	int RELATION_ENTITY = 47;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -2119,896 +4388,6 @@ public interface OmlPackage extends EPackage {
 	int RELATION_ENTITY_OPERATION_COUNT = ENTITY_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link io.opencaesar.oml.impl.StructureImpl <em>Structure</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see io.opencaesar.oml.impl.StructureImpl
-	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getStructure()
-	 * @generated
-	 */
-	int STRUCTURE = 20;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRUCTURE__OWNED_ANNOTATIONS = CLASSIFIER__OWNED_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRUCTURE__NAME = CLASSIFIER__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owning Vocabulary</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRUCTURE__OWNING_VOCABULARY = CLASSIFIER__OWNING_VOCABULARY;
-
-	/**
-	 * The feature id for the '<em><b>Owned Specializations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRUCTURE__OWNED_SPECIALIZATIONS = CLASSIFIER__OWNED_SPECIALIZATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Owned Property Restrictions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRUCTURE__OWNED_PROPERTY_RESTRICTIONS = CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS;
-
-	/**
-	 * The number of structural features of the '<em>Structure</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRUCTURE_FEATURE_COUNT = CLASSIFIER_FEATURE_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRUCTURE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = CLASSIFIER___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
-	 * The operation id for the '<em>Get Ontology</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRUCTURE___GET_ONTOLOGY = CLASSIFIER___GET_ONTOLOGY;
-
-	/**
-	 * The operation id for the '<em>Get Iri</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRUCTURE___GET_IRI = CLASSIFIER___GET_IRI;
-
-	/**
-	 * The operation id for the '<em>Get Abbreviated Iri</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRUCTURE___GET_ABBREVIATED_IRI = CLASSIFIER___GET_ABBREVIATED_IRI;
-
-	/**
-	 * The number of operations of the '<em>Structure</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRUCTURE_OPERATION_COUNT = CLASSIFIER_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link io.opencaesar.oml.impl.FeatureImpl <em>Feature</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see io.opencaesar.oml.impl.FeatureImpl
-	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getFeature()
-	 * @generated
-	 */
-	int FEATURE = 21;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FEATURE__OWNED_ANNOTATIONS = TERM__OWNED_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FEATURE__NAME = TERM__NAME;
-
-	/**
-	 * The number of structural features of the '<em>Feature</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FEATURE_FEATURE_COUNT = TERM_FEATURE_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FEATURE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = TERM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
-	 * The operation id for the '<em>Get Ontology</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FEATURE___GET_ONTOLOGY = TERM___GET_ONTOLOGY;
-
-	/**
-	 * The operation id for the '<em>Get Iri</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FEATURE___GET_IRI = TERM___GET_IRI;
-
-	/**
-	 * The operation id for the '<em>Get Abbreviated Iri</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FEATURE___GET_ABBREVIATED_IRI = TERM___GET_ABBREVIATED_IRI;
-
-	/**
-	 * The number of operations of the '<em>Feature</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FEATURE_OPERATION_COUNT = TERM_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link io.opencaesar.oml.impl.PropertyImpl <em>Property</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see io.opencaesar.oml.impl.PropertyImpl
-	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getProperty()
-	 * @generated
-	 */
-	int PROPERTY = 22;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY__OWNED_ANNOTATIONS = FEATURE__OWNED_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY__NAME = FEATURE__NAME;
-
-	/**
-	 * The number of structural features of the '<em>Property</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY_FEATURE_COUNT = FEATURE_FEATURE_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = FEATURE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
-	 * The operation id for the '<em>Get Ontology</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY___GET_ONTOLOGY = FEATURE___GET_ONTOLOGY;
-
-	/**
-	 * The operation id for the '<em>Get Iri</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY___GET_IRI = FEATURE___GET_IRI;
-
-	/**
-	 * The operation id for the '<em>Get Abbreviated Iri</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY___GET_ABBREVIATED_IRI = FEATURE___GET_ABBREVIATED_IRI;
-
-	/**
-	 * The number of operations of the '<em>Property</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY_OPERATION_COUNT = FEATURE_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link io.opencaesar.oml.impl.AnnotationPropertyImpl <em>Annotation Property</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see io.opencaesar.oml.impl.AnnotationPropertyImpl
-	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getAnnotationProperty()
-	 * @generated
-	 */
-	int ANNOTATION_PROPERTY = 23;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ANNOTATION_PROPERTY__OWNED_ANNOTATIONS = PROPERTY__OWNED_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ANNOTATION_PROPERTY__NAME = PROPERTY__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owning Vocabulary</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ANNOTATION_PROPERTY__OWNING_VOCABULARY = PROPERTY_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Owned Specializations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ANNOTATION_PROPERTY__OWNED_SPECIALIZATIONS = PROPERTY_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of structural features of the '<em>Annotation Property</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ANNOTATION_PROPERTY_FEATURE_COUNT = PROPERTY_FEATURE_COUNT + 2;
-
-	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ANNOTATION_PROPERTY___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = PROPERTY___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
-	 * The operation id for the '<em>Get Ontology</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ANNOTATION_PROPERTY___GET_ONTOLOGY = PROPERTY___GET_ONTOLOGY;
-
-	/**
-	 * The operation id for the '<em>Get Iri</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ANNOTATION_PROPERTY___GET_IRI = PROPERTY___GET_IRI;
-
-	/**
-	 * The operation id for the '<em>Get Abbreviated Iri</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ANNOTATION_PROPERTY___GET_ABBREVIATED_IRI = PROPERTY___GET_ABBREVIATED_IRI;
-
-	/**
-	 * The number of operations of the '<em>Annotation Property</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ANNOTATION_PROPERTY_OPERATION_COUNT = PROPERTY_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link io.opencaesar.oml.impl.SemanticPropertyImpl <em>Semantic Property</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see io.opencaesar.oml.impl.SemanticPropertyImpl
-	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getSemanticProperty()
-	 * @generated
-	 */
-	int SEMANTIC_PROPERTY = 24;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SEMANTIC_PROPERTY__OWNED_ANNOTATIONS = PROPERTY__OWNED_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SEMANTIC_PROPERTY__NAME = PROPERTY__NAME;
-
-	/**
-	 * The number of structural features of the '<em>Semantic Property</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SEMANTIC_PROPERTY_FEATURE_COUNT = PROPERTY_FEATURE_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SEMANTIC_PROPERTY___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = PROPERTY___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
-	 * The operation id for the '<em>Get Ontology</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SEMANTIC_PROPERTY___GET_ONTOLOGY = PROPERTY___GET_ONTOLOGY;
-
-	/**
-	 * The operation id for the '<em>Get Iri</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SEMANTIC_PROPERTY___GET_IRI = PROPERTY___GET_IRI;
-
-	/**
-	 * The operation id for the '<em>Get Abbreviated Iri</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SEMANTIC_PROPERTY___GET_ABBREVIATED_IRI = PROPERTY___GET_ABBREVIATED_IRI;
-
-	/**
-	 * The operation id for the '<em>Is Functional</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SEMANTIC_PROPERTY___IS_FUNCTIONAL = PROPERTY_OPERATION_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Get Domain</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SEMANTIC_PROPERTY___GET_DOMAIN = PROPERTY_OPERATION_COUNT + 1;
-
-	/**
-	 * The operation id for the '<em>Get Range</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SEMANTIC_PROPERTY___GET_RANGE = PROPERTY_OPERATION_COUNT + 2;
-
-	/**
-	 * The number of operations of the '<em>Semantic Property</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SEMANTIC_PROPERTY_OPERATION_COUNT = PROPERTY_OPERATION_COUNT + 3;
-
-	/**
-	 * The meta object id for the '{@link io.opencaesar.oml.impl.ScalarPropertyImpl <em>Scalar Property</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see io.opencaesar.oml.impl.ScalarPropertyImpl
-	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getScalarProperty()
-	 * @generated
-	 */
-	int SCALAR_PROPERTY = 25;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCALAR_PROPERTY__OWNED_ANNOTATIONS = SEMANTIC_PROPERTY__OWNED_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCALAR_PROPERTY__NAME = SEMANTIC_PROPERTY__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owning Vocabulary</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCALAR_PROPERTY__OWNING_VOCABULARY = SEMANTIC_PROPERTY_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Owned Specializations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCALAR_PROPERTY__OWNED_SPECIALIZATIONS = SEMANTIC_PROPERTY_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Functional</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCALAR_PROPERTY__FUNCTIONAL = SEMANTIC_PROPERTY_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Domain</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCALAR_PROPERTY__DOMAIN = SEMANTIC_PROPERTY_FEATURE_COUNT + 3;
-
-	/**
-	 * The feature id for the '<em><b>Range</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCALAR_PROPERTY__RANGE = SEMANTIC_PROPERTY_FEATURE_COUNT + 4;
-
-	/**
-	 * The number of structural features of the '<em>Scalar Property</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCALAR_PROPERTY_FEATURE_COUNT = SEMANTIC_PROPERTY_FEATURE_COUNT + 5;
-
-	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCALAR_PROPERTY___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = SEMANTIC_PROPERTY___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
-	 * The operation id for the '<em>Get Ontology</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCALAR_PROPERTY___GET_ONTOLOGY = SEMANTIC_PROPERTY___GET_ONTOLOGY;
-
-	/**
-	 * The operation id for the '<em>Get Iri</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCALAR_PROPERTY___GET_IRI = SEMANTIC_PROPERTY___GET_IRI;
-
-	/**
-	 * The operation id for the '<em>Get Abbreviated Iri</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCALAR_PROPERTY___GET_ABBREVIATED_IRI = SEMANTIC_PROPERTY___GET_ABBREVIATED_IRI;
-
-	/**
-	 * The operation id for the '<em>Is Functional</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCALAR_PROPERTY___IS_FUNCTIONAL = SEMANTIC_PROPERTY___IS_FUNCTIONAL;
-
-	/**
-	 * The operation id for the '<em>Get Domain</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCALAR_PROPERTY___GET_DOMAIN = SEMANTIC_PROPERTY___GET_DOMAIN;
-
-	/**
-	 * The operation id for the '<em>Get Range</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCALAR_PROPERTY___GET_RANGE = SEMANTIC_PROPERTY___GET_RANGE;
-
-	/**
-	 * The number of operations of the '<em>Scalar Property</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCALAR_PROPERTY_OPERATION_COUNT = SEMANTIC_PROPERTY_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link io.opencaesar.oml.impl.StructuredPropertyImpl <em>Structured Property</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see io.opencaesar.oml.impl.StructuredPropertyImpl
-	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getStructuredProperty()
-	 * @generated
-	 */
-	int STRUCTURED_PROPERTY = 26;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRUCTURED_PROPERTY__OWNED_ANNOTATIONS = SEMANTIC_PROPERTY__OWNED_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRUCTURED_PROPERTY__NAME = SEMANTIC_PROPERTY__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owning Vocabulary</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRUCTURED_PROPERTY__OWNING_VOCABULARY = SEMANTIC_PROPERTY_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Owned Specializations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRUCTURED_PROPERTY__OWNED_SPECIALIZATIONS = SEMANTIC_PROPERTY_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Functional</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRUCTURED_PROPERTY__FUNCTIONAL = SEMANTIC_PROPERTY_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Domain</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRUCTURED_PROPERTY__DOMAIN = SEMANTIC_PROPERTY_FEATURE_COUNT + 3;
-
-	/**
-	 * The feature id for the '<em><b>Range</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRUCTURED_PROPERTY__RANGE = SEMANTIC_PROPERTY_FEATURE_COUNT + 4;
-
-	/**
-	 * The number of structural features of the '<em>Structured Property</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRUCTURED_PROPERTY_FEATURE_COUNT = SEMANTIC_PROPERTY_FEATURE_COUNT + 5;
-
-	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRUCTURED_PROPERTY___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = SEMANTIC_PROPERTY___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
-	 * The operation id for the '<em>Get Ontology</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRUCTURED_PROPERTY___GET_ONTOLOGY = SEMANTIC_PROPERTY___GET_ONTOLOGY;
-
-	/**
-	 * The operation id for the '<em>Get Iri</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRUCTURED_PROPERTY___GET_IRI = SEMANTIC_PROPERTY___GET_IRI;
-
-	/**
-	 * The operation id for the '<em>Get Abbreviated Iri</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRUCTURED_PROPERTY___GET_ABBREVIATED_IRI = SEMANTIC_PROPERTY___GET_ABBREVIATED_IRI;
-
-	/**
-	 * The operation id for the '<em>Is Functional</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRUCTURED_PROPERTY___IS_FUNCTIONAL = SEMANTIC_PROPERTY___IS_FUNCTIONAL;
-
-	/**
-	 * The operation id for the '<em>Get Domain</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRUCTURED_PROPERTY___GET_DOMAIN = SEMANTIC_PROPERTY___GET_DOMAIN;
-
-	/**
-	 * The operation id for the '<em>Get Range</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRUCTURED_PROPERTY___GET_RANGE = SEMANTIC_PROPERTY___GET_RANGE;
-
-	/**
-	 * The number of operations of the '<em>Structured Property</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRUCTURED_PROPERTY_OPERATION_COUNT = SEMANTIC_PROPERTY_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link io.opencaesar.oml.impl.ScalarImpl <em>Scalar</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see io.opencaesar.oml.impl.ScalarImpl
-	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getScalar()
-	 * @generated
-	 */
-	int SCALAR = 27;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCALAR__OWNED_ANNOTATIONS = TYPE__OWNED_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCALAR__NAME = TYPE__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owning Vocabulary</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCALAR__OWNING_VOCABULARY = TYPE__OWNING_VOCABULARY;
-
-	/**
-	 * The feature id for the '<em><b>Owned Specializations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCALAR__OWNED_SPECIALIZATIONS = TYPE__OWNED_SPECIALIZATIONS;
-
-	/**
-	 * The number of structural features of the '<em>Scalar</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCALAR_FEATURE_COUNT = TYPE_FEATURE_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCALAR___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = TYPE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
-	 * The operation id for the '<em>Get Ontology</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCALAR___GET_ONTOLOGY = TYPE___GET_ONTOLOGY;
-
-	/**
-	 * The operation id for the '<em>Get Iri</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCALAR___GET_IRI = TYPE___GET_IRI;
-
-	/**
-	 * The operation id for the '<em>Get Abbreviated Iri</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCALAR___GET_ABBREVIATED_IRI = TYPE___GET_ABBREVIATED_IRI;
-
-	/**
-	 * The number of operations of the '<em>Scalar</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCALAR_OPERATION_COUNT = TYPE_OPERATION_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.impl.FacetedScalarImpl <em>Faceted Scalar</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3016,7 +4395,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getFacetedScalar()
 	 * @generated
 	 */
-	int FACETED_SCALAR = 28;
+	int FACETED_SCALAR = 48;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -3197,7 +4576,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getEnumeratedScalar()
 	 * @generated
 	 */
-	int ENUMERATED_SCALAR = 29;
+	int ENUMERATED_SCALAR = 49;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -3299,6 +4678,523 @@ public interface OmlPackage extends EPackage {
 	int ENUMERATED_SCALAR_OPERATION_COUNT = SCALAR_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link io.opencaesar.oml.impl.AnnotationPropertyImpl <em>Annotation Property</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see io.opencaesar.oml.impl.AnnotationPropertyImpl
+	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getAnnotationProperty()
+	 * @generated
+	 */
+	int ANNOTATION_PROPERTY = 50;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANNOTATION_PROPERTY__OWNED_ANNOTATIONS = PROPERTY__OWNED_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANNOTATION_PROPERTY__NAME = PROPERTY__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Owning Vocabulary</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANNOTATION_PROPERTY__OWNING_VOCABULARY = PROPERTY_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Owned Specializations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANNOTATION_PROPERTY__OWNED_SPECIALIZATIONS = PROPERTY_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Annotation Property</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANNOTATION_PROPERTY_FEATURE_COUNT = PROPERTY_FEATURE_COUNT + 2;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANNOTATION_PROPERTY___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = PROPERTY___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Get Ontology</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANNOTATION_PROPERTY___GET_ONTOLOGY = PROPERTY___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Get Iri</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANNOTATION_PROPERTY___GET_IRI = PROPERTY___GET_IRI;
+
+	/**
+	 * The operation id for the '<em>Get Abbreviated Iri</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANNOTATION_PROPERTY___GET_ABBREVIATED_IRI = PROPERTY___GET_ABBREVIATED_IRI;
+
+	/**
+	 * The number of operations of the '<em>Annotation Property</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANNOTATION_PROPERTY_OPERATION_COUNT = PROPERTY_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link io.opencaesar.oml.impl.SemanticPropertyImpl <em>Semantic Property</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see io.opencaesar.oml.impl.SemanticPropertyImpl
+	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getSemanticProperty()
+	 * @generated
+	 */
+	int SEMANTIC_PROPERTY = 51;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEMANTIC_PROPERTY__OWNED_ANNOTATIONS = PROPERTY__OWNED_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEMANTIC_PROPERTY__NAME = PROPERTY__NAME;
+
+	/**
+	 * The number of structural features of the '<em>Semantic Property</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEMANTIC_PROPERTY_FEATURE_COUNT = PROPERTY_FEATURE_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEMANTIC_PROPERTY___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = PROPERTY___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Get Ontology</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEMANTIC_PROPERTY___GET_ONTOLOGY = PROPERTY___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Get Iri</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEMANTIC_PROPERTY___GET_IRI = PROPERTY___GET_IRI;
+
+	/**
+	 * The operation id for the '<em>Get Abbreviated Iri</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEMANTIC_PROPERTY___GET_ABBREVIATED_IRI = PROPERTY___GET_ABBREVIATED_IRI;
+
+	/**
+	 * The operation id for the '<em>Is Functional</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEMANTIC_PROPERTY___IS_FUNCTIONAL = PROPERTY_OPERATION_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>Get Domain</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEMANTIC_PROPERTY___GET_DOMAIN = PROPERTY_OPERATION_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Get Range</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEMANTIC_PROPERTY___GET_RANGE = PROPERTY_OPERATION_COUNT + 2;
+
+	/**
+	 * The number of operations of the '<em>Semantic Property</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEMANTIC_PROPERTY_OPERATION_COUNT = PROPERTY_OPERATION_COUNT + 3;
+
+	/**
+	 * The meta object id for the '{@link io.opencaesar.oml.impl.ScalarPropertyImpl <em>Scalar Property</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see io.opencaesar.oml.impl.ScalarPropertyImpl
+	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getScalarProperty()
+	 * @generated
+	 */
+	int SCALAR_PROPERTY = 52;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALAR_PROPERTY__OWNED_ANNOTATIONS = SEMANTIC_PROPERTY__OWNED_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALAR_PROPERTY__NAME = SEMANTIC_PROPERTY__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Owning Vocabulary</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALAR_PROPERTY__OWNING_VOCABULARY = SEMANTIC_PROPERTY_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Owned Specializations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALAR_PROPERTY__OWNED_SPECIALIZATIONS = SEMANTIC_PROPERTY_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Functional</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALAR_PROPERTY__FUNCTIONAL = SEMANTIC_PROPERTY_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Domain</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALAR_PROPERTY__DOMAIN = SEMANTIC_PROPERTY_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Range</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALAR_PROPERTY__RANGE = SEMANTIC_PROPERTY_FEATURE_COUNT + 4;
+
+	/**
+	 * The number of structural features of the '<em>Scalar Property</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALAR_PROPERTY_FEATURE_COUNT = SEMANTIC_PROPERTY_FEATURE_COUNT + 5;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALAR_PROPERTY___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = SEMANTIC_PROPERTY___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Get Ontology</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALAR_PROPERTY___GET_ONTOLOGY = SEMANTIC_PROPERTY___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Get Iri</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALAR_PROPERTY___GET_IRI = SEMANTIC_PROPERTY___GET_IRI;
+
+	/**
+	 * The operation id for the '<em>Get Abbreviated Iri</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALAR_PROPERTY___GET_ABBREVIATED_IRI = SEMANTIC_PROPERTY___GET_ABBREVIATED_IRI;
+
+	/**
+	 * The operation id for the '<em>Is Functional</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALAR_PROPERTY___IS_FUNCTIONAL = SEMANTIC_PROPERTY___IS_FUNCTIONAL;
+
+	/**
+	 * The operation id for the '<em>Get Domain</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALAR_PROPERTY___GET_DOMAIN = SEMANTIC_PROPERTY___GET_DOMAIN;
+
+	/**
+	 * The operation id for the '<em>Get Range</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALAR_PROPERTY___GET_RANGE = SEMANTIC_PROPERTY___GET_RANGE;
+
+	/**
+	 * The number of operations of the '<em>Scalar Property</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALAR_PROPERTY_OPERATION_COUNT = SEMANTIC_PROPERTY_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link io.opencaesar.oml.impl.StructuredPropertyImpl <em>Structured Property</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see io.opencaesar.oml.impl.StructuredPropertyImpl
+	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getStructuredProperty()
+	 * @generated
+	 */
+	int STRUCTURED_PROPERTY = 53;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURED_PROPERTY__OWNED_ANNOTATIONS = SEMANTIC_PROPERTY__OWNED_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURED_PROPERTY__NAME = SEMANTIC_PROPERTY__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Owning Vocabulary</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURED_PROPERTY__OWNING_VOCABULARY = SEMANTIC_PROPERTY_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Owned Specializations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURED_PROPERTY__OWNED_SPECIALIZATIONS = SEMANTIC_PROPERTY_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Functional</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURED_PROPERTY__FUNCTIONAL = SEMANTIC_PROPERTY_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Domain</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURED_PROPERTY__DOMAIN = SEMANTIC_PROPERTY_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Range</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURED_PROPERTY__RANGE = SEMANTIC_PROPERTY_FEATURE_COUNT + 4;
+
+	/**
+	 * The number of structural features of the '<em>Structured Property</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURED_PROPERTY_FEATURE_COUNT = SEMANTIC_PROPERTY_FEATURE_COUNT + 5;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURED_PROPERTY___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = SEMANTIC_PROPERTY___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Get Ontology</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURED_PROPERTY___GET_ONTOLOGY = SEMANTIC_PROPERTY___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Get Iri</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURED_PROPERTY___GET_IRI = SEMANTIC_PROPERTY___GET_IRI;
+
+	/**
+	 * The operation id for the '<em>Get Abbreviated Iri</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURED_PROPERTY___GET_ABBREVIATED_IRI = SEMANTIC_PROPERTY___GET_ABBREVIATED_IRI;
+
+	/**
+	 * The operation id for the '<em>Is Functional</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURED_PROPERTY___IS_FUNCTIONAL = SEMANTIC_PROPERTY___IS_FUNCTIONAL;
+
+	/**
+	 * The operation id for the '<em>Get Domain</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURED_PROPERTY___GET_DOMAIN = SEMANTIC_PROPERTY___GET_DOMAIN;
+
+	/**
+	 * The operation id for the '<em>Get Range</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURED_PROPERTY___GET_RANGE = SEMANTIC_PROPERTY___GET_RANGE;
+
+	/**
+	 * The number of operations of the '<em>Structured Property</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURED_PROPERTY_OPERATION_COUNT = SEMANTIC_PROPERTY_OPERATION_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.impl.RelationImpl <em>Relation</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3306,7 +5202,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRelation()
 	 * @generated
 	 */
-	int RELATION = 30;
+	int RELATION = 54;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -3451,7 +5347,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getForwardRelation()
 	 * @generated
 	 */
-	int FORWARD_RELATION = 31;
+	int FORWARD_RELATION = 55;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -3605,7 +5501,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getReverseRelation()
 	 * @generated
 	 */
-	int REVERSE_RELATION = 32;
+	int REVERSE_RELATION = 56;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -3752,252 +5648,6 @@ public interface OmlPackage extends EPackage {
 	int REVERSE_RELATION_OPERATION_COUNT = RELATION_OPERATION_COUNT + 3;
 
 	/**
-	 * The meta object id for the '{@link io.opencaesar.oml.impl.RuleImpl <em>Rule</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see io.opencaesar.oml.impl.RuleImpl
-	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRule()
-	 * @generated
-	 */
-	int RULE = 33;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RULE__OWNED_ANNOTATIONS = MEMBER__OWNED_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RULE__NAME = MEMBER__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owning Vocabulary</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RULE__OWNING_VOCABULARY = MEMBER_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Antecedent</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RULE__ANTECEDENT = MEMBER_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Consequent</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RULE__CONSEQUENT = MEMBER_FEATURE_COUNT + 2;
-
-	/**
-	 * The number of structural features of the '<em>Rule</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RULE_FEATURE_COUNT = MEMBER_FEATURE_COUNT + 3;
-
-	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RULE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = MEMBER___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
-	 * The operation id for the '<em>Get Ontology</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RULE___GET_ONTOLOGY = MEMBER___GET_ONTOLOGY;
-
-	/**
-	 * The operation id for the '<em>Get Iri</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RULE___GET_IRI = MEMBER___GET_IRI;
-
-	/**
-	 * The operation id for the '<em>Get Abbreviated Iri</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RULE___GET_ABBREVIATED_IRI = MEMBER___GET_ABBREVIATED_IRI;
-
-	/**
-	 * The number of operations of the '<em>Rule</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RULE_OPERATION_COUNT = MEMBER_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link io.opencaesar.oml.impl.InstanceImpl <em>Instance</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see io.opencaesar.oml.impl.InstanceImpl
-	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getInstance()
-	 * @generated
-	 */
-	int INSTANCE = 34;
-
-	/**
-	 * The feature id for the '<em><b>Owned Property Values</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INSTANCE__OWNED_PROPERTY_VALUES = ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Instance</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INSTANCE_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INSTANCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = ELEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
-	 * The operation id for the '<em>Get Ontology</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INSTANCE___GET_ONTOLOGY = ELEMENT___GET_ONTOLOGY;
-
-	/**
-	 * The number of operations of the '<em>Instance</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INSTANCE_OPERATION_COUNT = ELEMENT_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link io.opencaesar.oml.impl.StructureInstanceImpl <em>Structure Instance</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see io.opencaesar.oml.impl.StructureInstanceImpl
-	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getStructureInstance()
-	 * @generated
-	 */
-	int STRUCTURE_INSTANCE = 35;
-
-	/**
-	 * The feature id for the '<em><b>Owned Property Values</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRUCTURE_INSTANCE__OWNED_PROPERTY_VALUES = INSTANCE__OWNED_PROPERTY_VALUES;
-
-	/**
-	 * The feature id for the '<em><b>Type</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRUCTURE_INSTANCE__TYPE = INSTANCE_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Owning Axiom</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRUCTURE_INSTANCE__OWNING_AXIOM = INSTANCE_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Owning Assertion</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRUCTURE_INSTANCE__OWNING_ASSERTION = INSTANCE_FEATURE_COUNT + 2;
-
-	/**
-	 * The number of structural features of the '<em>Structure Instance</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRUCTURE_INSTANCE_FEATURE_COUNT = INSTANCE_FEATURE_COUNT + 3;
-
-	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRUCTURE_INSTANCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = INSTANCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
-	 * The operation id for the '<em>Get Ontology</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRUCTURE_INSTANCE___GET_ONTOLOGY = INSTANCE___GET_ONTOLOGY;
-
-	/**
-	 * The number of operations of the '<em>Structure Instance</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRUCTURE_INSTANCE_OPERATION_COUNT = INSTANCE_OPERATION_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.impl.NamedInstanceImpl <em>Named Instance</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4005,7 +5655,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getNamedInstance()
 	 * @generated
 	 */
-	int NAMED_INSTANCE = 36;
+	int NAMED_INSTANCE = 57;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -4114,7 +5764,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getConceptInstance()
 	 * @generated
 	 */
-	int CONCEPT_INSTANCE = 37;
+	int CONCEPT_INSTANCE = 58;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -4232,7 +5882,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRelationInstance()
 	 * @generated
 	 */
-	int RELATION_INSTANCE = 38;
+	int RELATION_INSTANCE = 59;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -4361,1316 +6011,14 @@ public interface OmlPackage extends EPackage {
 	int RELATION_INSTANCE_OPERATION_COUNT = NAMED_INSTANCE_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link io.opencaesar.oml.impl.ReferenceImpl <em>Reference</em>}' class.
+	 * The meta object id for the '{@link io.opencaesar.oml.impl.StructureInstanceImpl <em>Structure Instance</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see io.opencaesar.oml.impl.ReferenceImpl
-	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getReference()
+	 * @see io.opencaesar.oml.impl.StructureInstanceImpl
+	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getStructureInstance()
 	 * @generated
 	 */
-	int REFERENCE = 39;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REFERENCE__OWNED_ANNOTATIONS = ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Reference</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REFERENCE_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REFERENCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = ELEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
-	 * The operation id for the '<em>Get Ontology</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REFERENCE___GET_ONTOLOGY = ELEMENT___GET_ONTOLOGY;
-
-	/**
-	 * The number of operations of the '<em>Reference</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REFERENCE_OPERATION_COUNT = ELEMENT_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link io.opencaesar.oml.impl.SpecializableTermReferenceImpl <em>Specializable Term Reference</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see io.opencaesar.oml.impl.SpecializableTermReferenceImpl
-	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getSpecializableTermReference()
-	 * @generated
-	 */
-	int SPECIALIZABLE_TERM_REFERENCE = 40;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SPECIALIZABLE_TERM_REFERENCE__OWNED_ANNOTATIONS = REFERENCE__OWNED_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Owning Vocabulary</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SPECIALIZABLE_TERM_REFERENCE__OWNING_VOCABULARY = REFERENCE_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Owned Specializations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SPECIALIZABLE_TERM_REFERENCE__OWNED_SPECIALIZATIONS = REFERENCE_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of structural features of the '<em>Specializable Term Reference</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SPECIALIZABLE_TERM_REFERENCE_FEATURE_COUNT = REFERENCE_FEATURE_COUNT + 2;
-
-	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SPECIALIZABLE_TERM_REFERENCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = REFERENCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
-	 * The operation id for the '<em>Get Ontology</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SPECIALIZABLE_TERM_REFERENCE___GET_ONTOLOGY = REFERENCE___GET_ONTOLOGY;
-
-	/**
-	 * The number of operations of the '<em>Specializable Term Reference</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SPECIALIZABLE_TERM_REFERENCE_OPERATION_COUNT = REFERENCE_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link io.opencaesar.oml.impl.ClassifierReferenceImpl <em>Classifier Reference</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see io.opencaesar.oml.impl.ClassifierReferenceImpl
-	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getClassifierReference()
-	 * @generated
-	 */
-	int CLASSIFIER_REFERENCE = 41;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASSIFIER_REFERENCE__OWNED_ANNOTATIONS = SPECIALIZABLE_TERM_REFERENCE__OWNED_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Owning Vocabulary</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASSIFIER_REFERENCE__OWNING_VOCABULARY = SPECIALIZABLE_TERM_REFERENCE__OWNING_VOCABULARY;
-
-	/**
-	 * The feature id for the '<em><b>Owned Specializations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASSIFIER_REFERENCE__OWNED_SPECIALIZATIONS = SPECIALIZABLE_TERM_REFERENCE__OWNED_SPECIALIZATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Owned Property Restrictions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASSIFIER_REFERENCE__OWNED_PROPERTY_RESTRICTIONS = SPECIALIZABLE_TERM_REFERENCE_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Classifier Reference</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASSIFIER_REFERENCE_FEATURE_COUNT = SPECIALIZABLE_TERM_REFERENCE_FEATURE_COUNT + 1;
-
-	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASSIFIER_REFERENCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = SPECIALIZABLE_TERM_REFERENCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
-	 * The operation id for the '<em>Get Ontology</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASSIFIER_REFERENCE___GET_ONTOLOGY = SPECIALIZABLE_TERM_REFERENCE___GET_ONTOLOGY;
-
-	/**
-	 * The number of operations of the '<em>Classifier Reference</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASSIFIER_REFERENCE_OPERATION_COUNT = SPECIALIZABLE_TERM_REFERENCE_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link io.opencaesar.oml.impl.EntityReferenceImpl <em>Entity Reference</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see io.opencaesar.oml.impl.EntityReferenceImpl
-	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getEntityReference()
-	 * @generated
-	 */
-	int ENTITY_REFERENCE = 42;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENTITY_REFERENCE__OWNED_ANNOTATIONS = CLASSIFIER_REFERENCE__OWNED_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Owning Vocabulary</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENTITY_REFERENCE__OWNING_VOCABULARY = CLASSIFIER_REFERENCE__OWNING_VOCABULARY;
-
-	/**
-	 * The feature id for the '<em><b>Owned Specializations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENTITY_REFERENCE__OWNED_SPECIALIZATIONS = CLASSIFIER_REFERENCE__OWNED_SPECIALIZATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Owned Property Restrictions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENTITY_REFERENCE__OWNED_PROPERTY_RESTRICTIONS = CLASSIFIER_REFERENCE__OWNED_PROPERTY_RESTRICTIONS;
-
-	/**
-	 * The feature id for the '<em><b>Owned Relation Restrictions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENTITY_REFERENCE__OWNED_RELATION_RESTRICTIONS = CLASSIFIER_REFERENCE_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Owned Keys</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENTITY_REFERENCE__OWNED_KEYS = CLASSIFIER_REFERENCE_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of structural features of the '<em>Entity Reference</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENTITY_REFERENCE_FEATURE_COUNT = CLASSIFIER_REFERENCE_FEATURE_COUNT + 2;
-
-	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENTITY_REFERENCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = CLASSIFIER_REFERENCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
-	 * The operation id for the '<em>Get Ontology</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENTITY_REFERENCE___GET_ONTOLOGY = CLASSIFIER_REFERENCE___GET_ONTOLOGY;
-
-	/**
-	 * The number of operations of the '<em>Entity Reference</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENTITY_REFERENCE_OPERATION_COUNT = CLASSIFIER_REFERENCE_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link io.opencaesar.oml.impl.AspectReferenceImpl <em>Aspect Reference</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see io.opencaesar.oml.impl.AspectReferenceImpl
-	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getAspectReference()
-	 * @generated
-	 */
-	int ASPECT_REFERENCE = 43;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASPECT_REFERENCE__OWNED_ANNOTATIONS = ENTITY_REFERENCE__OWNED_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Owning Vocabulary</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASPECT_REFERENCE__OWNING_VOCABULARY = ENTITY_REFERENCE__OWNING_VOCABULARY;
-
-	/**
-	 * The feature id for the '<em><b>Owned Specializations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASPECT_REFERENCE__OWNED_SPECIALIZATIONS = ENTITY_REFERENCE__OWNED_SPECIALIZATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Owned Property Restrictions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASPECT_REFERENCE__OWNED_PROPERTY_RESTRICTIONS = ENTITY_REFERENCE__OWNED_PROPERTY_RESTRICTIONS;
-
-	/**
-	 * The feature id for the '<em><b>Owned Relation Restrictions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASPECT_REFERENCE__OWNED_RELATION_RESTRICTIONS = ENTITY_REFERENCE__OWNED_RELATION_RESTRICTIONS;
-
-	/**
-	 * The feature id for the '<em><b>Owned Keys</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASPECT_REFERENCE__OWNED_KEYS = ENTITY_REFERENCE__OWNED_KEYS;
-
-	/**
-	 * The feature id for the '<em><b>Aspect</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASPECT_REFERENCE__ASPECT = ENTITY_REFERENCE_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Aspect Reference</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASPECT_REFERENCE_FEATURE_COUNT = ENTITY_REFERENCE_FEATURE_COUNT + 1;
-
-	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASPECT_REFERENCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = ENTITY_REFERENCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
-	 * The operation id for the '<em>Get Ontology</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASPECT_REFERENCE___GET_ONTOLOGY = ENTITY_REFERENCE___GET_ONTOLOGY;
-
-	/**
-	 * The number of operations of the '<em>Aspect Reference</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASPECT_REFERENCE_OPERATION_COUNT = ENTITY_REFERENCE_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link io.opencaesar.oml.impl.ConceptReferenceImpl <em>Concept Reference</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see io.opencaesar.oml.impl.ConceptReferenceImpl
-	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getConceptReference()
-	 * @generated
-	 */
-	int CONCEPT_REFERENCE = 44;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONCEPT_REFERENCE__OWNED_ANNOTATIONS = ENTITY_REFERENCE__OWNED_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Owning Vocabulary</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONCEPT_REFERENCE__OWNING_VOCABULARY = ENTITY_REFERENCE__OWNING_VOCABULARY;
-
-	/**
-	 * The feature id for the '<em><b>Owned Specializations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONCEPT_REFERENCE__OWNED_SPECIALIZATIONS = ENTITY_REFERENCE__OWNED_SPECIALIZATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Owned Property Restrictions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONCEPT_REFERENCE__OWNED_PROPERTY_RESTRICTIONS = ENTITY_REFERENCE__OWNED_PROPERTY_RESTRICTIONS;
-
-	/**
-	 * The feature id for the '<em><b>Owned Relation Restrictions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONCEPT_REFERENCE__OWNED_RELATION_RESTRICTIONS = ENTITY_REFERENCE__OWNED_RELATION_RESTRICTIONS;
-
-	/**
-	 * The feature id for the '<em><b>Owned Keys</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONCEPT_REFERENCE__OWNED_KEYS = ENTITY_REFERENCE__OWNED_KEYS;
-
-	/**
-	 * The feature id for the '<em><b>Concept</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONCEPT_REFERENCE__CONCEPT = ENTITY_REFERENCE_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Concept Reference</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONCEPT_REFERENCE_FEATURE_COUNT = ENTITY_REFERENCE_FEATURE_COUNT + 1;
-
-	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONCEPT_REFERENCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = ENTITY_REFERENCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
-	 * The operation id for the '<em>Get Ontology</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONCEPT_REFERENCE___GET_ONTOLOGY = ENTITY_REFERENCE___GET_ONTOLOGY;
-
-	/**
-	 * The number of operations of the '<em>Concept Reference</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONCEPT_REFERENCE_OPERATION_COUNT = ENTITY_REFERENCE_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link io.opencaesar.oml.impl.RelationEntityReferenceImpl <em>Relation Entity Reference</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see io.opencaesar.oml.impl.RelationEntityReferenceImpl
-	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRelationEntityReference()
-	 * @generated
-	 */
-	int RELATION_ENTITY_REFERENCE = 45;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RELATION_ENTITY_REFERENCE__OWNED_ANNOTATIONS = ENTITY_REFERENCE__OWNED_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Owning Vocabulary</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RELATION_ENTITY_REFERENCE__OWNING_VOCABULARY = ENTITY_REFERENCE__OWNING_VOCABULARY;
-
-	/**
-	 * The feature id for the '<em><b>Owned Specializations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RELATION_ENTITY_REFERENCE__OWNED_SPECIALIZATIONS = ENTITY_REFERENCE__OWNED_SPECIALIZATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Owned Property Restrictions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RELATION_ENTITY_REFERENCE__OWNED_PROPERTY_RESTRICTIONS = ENTITY_REFERENCE__OWNED_PROPERTY_RESTRICTIONS;
-
-	/**
-	 * The feature id for the '<em><b>Owned Relation Restrictions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RELATION_ENTITY_REFERENCE__OWNED_RELATION_RESTRICTIONS = ENTITY_REFERENCE__OWNED_RELATION_RESTRICTIONS;
-
-	/**
-	 * The feature id for the '<em><b>Owned Keys</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RELATION_ENTITY_REFERENCE__OWNED_KEYS = ENTITY_REFERENCE__OWNED_KEYS;
-
-	/**
-	 * The feature id for the '<em><b>Entity</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RELATION_ENTITY_REFERENCE__ENTITY = ENTITY_REFERENCE_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Relation Entity Reference</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RELATION_ENTITY_REFERENCE_FEATURE_COUNT = ENTITY_REFERENCE_FEATURE_COUNT + 1;
-
-	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RELATION_ENTITY_REFERENCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = ENTITY_REFERENCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
-	 * The operation id for the '<em>Get Ontology</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RELATION_ENTITY_REFERENCE___GET_ONTOLOGY = ENTITY_REFERENCE___GET_ONTOLOGY;
-
-	/**
-	 * The number of operations of the '<em>Relation Entity Reference</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RELATION_ENTITY_REFERENCE_OPERATION_COUNT = ENTITY_REFERENCE_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link io.opencaesar.oml.impl.StructureReferenceImpl <em>Structure Reference</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see io.opencaesar.oml.impl.StructureReferenceImpl
-	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getStructureReference()
-	 * @generated
-	 */
-	int STRUCTURE_REFERENCE = 46;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRUCTURE_REFERENCE__OWNED_ANNOTATIONS = CLASSIFIER_REFERENCE__OWNED_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Owning Vocabulary</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRUCTURE_REFERENCE__OWNING_VOCABULARY = CLASSIFIER_REFERENCE__OWNING_VOCABULARY;
-
-	/**
-	 * The feature id for the '<em><b>Owned Specializations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRUCTURE_REFERENCE__OWNED_SPECIALIZATIONS = CLASSIFIER_REFERENCE__OWNED_SPECIALIZATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Owned Property Restrictions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRUCTURE_REFERENCE__OWNED_PROPERTY_RESTRICTIONS = CLASSIFIER_REFERENCE__OWNED_PROPERTY_RESTRICTIONS;
-
-	/**
-	 * The feature id for the '<em><b>Structure</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRUCTURE_REFERENCE__STRUCTURE = CLASSIFIER_REFERENCE_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Structure Reference</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRUCTURE_REFERENCE_FEATURE_COUNT = CLASSIFIER_REFERENCE_FEATURE_COUNT + 1;
-
-	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRUCTURE_REFERENCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = CLASSIFIER_REFERENCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
-	 * The operation id for the '<em>Get Ontology</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRUCTURE_REFERENCE___GET_ONTOLOGY = CLASSIFIER_REFERENCE___GET_ONTOLOGY;
-
-	/**
-	 * The number of operations of the '<em>Structure Reference</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRUCTURE_REFERENCE_OPERATION_COUNT = CLASSIFIER_REFERENCE_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link io.opencaesar.oml.impl.AnnotationPropertyReferenceImpl <em>Annotation Property Reference</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see io.opencaesar.oml.impl.AnnotationPropertyReferenceImpl
-	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getAnnotationPropertyReference()
-	 * @generated
-	 */
-	int ANNOTATION_PROPERTY_REFERENCE = 47;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ANNOTATION_PROPERTY_REFERENCE__OWNED_ANNOTATIONS = SPECIALIZABLE_TERM_REFERENCE__OWNED_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Owning Vocabulary</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ANNOTATION_PROPERTY_REFERENCE__OWNING_VOCABULARY = SPECIALIZABLE_TERM_REFERENCE__OWNING_VOCABULARY;
-
-	/**
-	 * The feature id for the '<em><b>Owned Specializations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ANNOTATION_PROPERTY_REFERENCE__OWNED_SPECIALIZATIONS = SPECIALIZABLE_TERM_REFERENCE__OWNED_SPECIALIZATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Property</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ANNOTATION_PROPERTY_REFERENCE__PROPERTY = SPECIALIZABLE_TERM_REFERENCE_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Annotation Property Reference</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ANNOTATION_PROPERTY_REFERENCE_FEATURE_COUNT = SPECIALIZABLE_TERM_REFERENCE_FEATURE_COUNT + 1;
-
-	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ANNOTATION_PROPERTY_REFERENCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = SPECIALIZABLE_TERM_REFERENCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
-	 * The operation id for the '<em>Get Ontology</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ANNOTATION_PROPERTY_REFERENCE___GET_ONTOLOGY = SPECIALIZABLE_TERM_REFERENCE___GET_ONTOLOGY;
-
-	/**
-	 * The number of operations of the '<em>Annotation Property Reference</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ANNOTATION_PROPERTY_REFERENCE_OPERATION_COUNT = SPECIALIZABLE_TERM_REFERENCE_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link io.opencaesar.oml.impl.ScalarPropertyReferenceImpl <em>Scalar Property Reference</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see io.opencaesar.oml.impl.ScalarPropertyReferenceImpl
-	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getScalarPropertyReference()
-	 * @generated
-	 */
-	int SCALAR_PROPERTY_REFERENCE = 48;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCALAR_PROPERTY_REFERENCE__OWNED_ANNOTATIONS = SPECIALIZABLE_TERM_REFERENCE__OWNED_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Owning Vocabulary</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCALAR_PROPERTY_REFERENCE__OWNING_VOCABULARY = SPECIALIZABLE_TERM_REFERENCE__OWNING_VOCABULARY;
-
-	/**
-	 * The feature id for the '<em><b>Owned Specializations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCALAR_PROPERTY_REFERENCE__OWNED_SPECIALIZATIONS = SPECIALIZABLE_TERM_REFERENCE__OWNED_SPECIALIZATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Property</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCALAR_PROPERTY_REFERENCE__PROPERTY = SPECIALIZABLE_TERM_REFERENCE_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Scalar Property Reference</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCALAR_PROPERTY_REFERENCE_FEATURE_COUNT = SPECIALIZABLE_TERM_REFERENCE_FEATURE_COUNT + 1;
-
-	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCALAR_PROPERTY_REFERENCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = SPECIALIZABLE_TERM_REFERENCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
-	 * The operation id for the '<em>Get Ontology</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCALAR_PROPERTY_REFERENCE___GET_ONTOLOGY = SPECIALIZABLE_TERM_REFERENCE___GET_ONTOLOGY;
-
-	/**
-	 * The number of operations of the '<em>Scalar Property Reference</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCALAR_PROPERTY_REFERENCE_OPERATION_COUNT = SPECIALIZABLE_TERM_REFERENCE_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link io.opencaesar.oml.impl.StructuredPropertyReferenceImpl <em>Structured Property Reference</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see io.opencaesar.oml.impl.StructuredPropertyReferenceImpl
-	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getStructuredPropertyReference()
-	 * @generated
-	 */
-	int STRUCTURED_PROPERTY_REFERENCE = 49;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRUCTURED_PROPERTY_REFERENCE__OWNED_ANNOTATIONS = SPECIALIZABLE_TERM_REFERENCE__OWNED_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Owning Vocabulary</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRUCTURED_PROPERTY_REFERENCE__OWNING_VOCABULARY = SPECIALIZABLE_TERM_REFERENCE__OWNING_VOCABULARY;
-
-	/**
-	 * The feature id for the '<em><b>Owned Specializations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRUCTURED_PROPERTY_REFERENCE__OWNED_SPECIALIZATIONS = SPECIALIZABLE_TERM_REFERENCE__OWNED_SPECIALIZATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Property</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRUCTURED_PROPERTY_REFERENCE__PROPERTY = SPECIALIZABLE_TERM_REFERENCE_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Structured Property Reference</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRUCTURED_PROPERTY_REFERENCE_FEATURE_COUNT = SPECIALIZABLE_TERM_REFERENCE_FEATURE_COUNT + 1;
-
-	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRUCTURED_PROPERTY_REFERENCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = SPECIALIZABLE_TERM_REFERENCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
-	 * The operation id for the '<em>Get Ontology</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRUCTURED_PROPERTY_REFERENCE___GET_ONTOLOGY = SPECIALIZABLE_TERM_REFERENCE___GET_ONTOLOGY;
-
-	/**
-	 * The number of operations of the '<em>Structured Property Reference</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRUCTURED_PROPERTY_REFERENCE_OPERATION_COUNT = SPECIALIZABLE_TERM_REFERENCE_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link io.opencaesar.oml.impl.FacetedScalarReferenceImpl <em>Faceted Scalar Reference</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see io.opencaesar.oml.impl.FacetedScalarReferenceImpl
-	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getFacetedScalarReference()
-	 * @generated
-	 */
-	int FACETED_SCALAR_REFERENCE = 50;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FACETED_SCALAR_REFERENCE__OWNED_ANNOTATIONS = SPECIALIZABLE_TERM_REFERENCE__OWNED_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Owning Vocabulary</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FACETED_SCALAR_REFERENCE__OWNING_VOCABULARY = SPECIALIZABLE_TERM_REFERENCE__OWNING_VOCABULARY;
-
-	/**
-	 * The feature id for the '<em><b>Owned Specializations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FACETED_SCALAR_REFERENCE__OWNED_SPECIALIZATIONS = SPECIALIZABLE_TERM_REFERENCE__OWNED_SPECIALIZATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Scalar</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FACETED_SCALAR_REFERENCE__SCALAR = SPECIALIZABLE_TERM_REFERENCE_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Faceted Scalar Reference</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FACETED_SCALAR_REFERENCE_FEATURE_COUNT = SPECIALIZABLE_TERM_REFERENCE_FEATURE_COUNT + 1;
-
-	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FACETED_SCALAR_REFERENCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = SPECIALIZABLE_TERM_REFERENCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
-	 * The operation id for the '<em>Get Ontology</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FACETED_SCALAR_REFERENCE___GET_ONTOLOGY = SPECIALIZABLE_TERM_REFERENCE___GET_ONTOLOGY;
-
-	/**
-	 * The number of operations of the '<em>Faceted Scalar Reference</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FACETED_SCALAR_REFERENCE_OPERATION_COUNT = SPECIALIZABLE_TERM_REFERENCE_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link io.opencaesar.oml.impl.EnumeratedScalarReferenceImpl <em>Enumerated Scalar Reference</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see io.opencaesar.oml.impl.EnumeratedScalarReferenceImpl
-	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getEnumeratedScalarReference()
-	 * @generated
-	 */
-	int ENUMERATED_SCALAR_REFERENCE = 51;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENUMERATED_SCALAR_REFERENCE__OWNED_ANNOTATIONS = SPECIALIZABLE_TERM_REFERENCE__OWNED_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Owning Vocabulary</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENUMERATED_SCALAR_REFERENCE__OWNING_VOCABULARY = SPECIALIZABLE_TERM_REFERENCE__OWNING_VOCABULARY;
-
-	/**
-	 * The feature id for the '<em><b>Owned Specializations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENUMERATED_SCALAR_REFERENCE__OWNED_SPECIALIZATIONS = SPECIALIZABLE_TERM_REFERENCE__OWNED_SPECIALIZATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Scalar</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENUMERATED_SCALAR_REFERENCE__SCALAR = SPECIALIZABLE_TERM_REFERENCE_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Enumerated Scalar Reference</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENUMERATED_SCALAR_REFERENCE_FEATURE_COUNT = SPECIALIZABLE_TERM_REFERENCE_FEATURE_COUNT + 1;
-
-	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENUMERATED_SCALAR_REFERENCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = SPECIALIZABLE_TERM_REFERENCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
-	 * The operation id for the '<em>Get Ontology</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENUMERATED_SCALAR_REFERENCE___GET_ONTOLOGY = SPECIALIZABLE_TERM_REFERENCE___GET_ONTOLOGY;
-
-	/**
-	 * The number of operations of the '<em>Enumerated Scalar Reference</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENUMERATED_SCALAR_REFERENCE_OPERATION_COUNT = SPECIALIZABLE_TERM_REFERENCE_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link io.opencaesar.oml.impl.RelationReferenceImpl <em>Relation Reference</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see io.opencaesar.oml.impl.RelationReferenceImpl
-	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRelationReference()
-	 * @generated
-	 */
-	int RELATION_REFERENCE = 52;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RELATION_REFERENCE__OWNED_ANNOTATIONS = REFERENCE__OWNED_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Owning Vocabulary</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RELATION_REFERENCE__OWNING_VOCABULARY = REFERENCE_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Relation</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RELATION_REFERENCE__RELATION = REFERENCE_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of structural features of the '<em>Relation Reference</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RELATION_REFERENCE_FEATURE_COUNT = REFERENCE_FEATURE_COUNT + 2;
-
-	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RELATION_REFERENCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = REFERENCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
-	 * The operation id for the '<em>Get Ontology</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RELATION_REFERENCE___GET_ONTOLOGY = REFERENCE___GET_ONTOLOGY;
-
-	/**
-	 * The number of operations of the '<em>Relation Reference</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RELATION_REFERENCE_OPERATION_COUNT = REFERENCE_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link io.opencaesar.oml.impl.RuleReferenceImpl <em>Rule Reference</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see io.opencaesar.oml.impl.RuleReferenceImpl
-	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRuleReference()
-	 * @generated
-	 */
-	int RULE_REFERENCE = 53;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RULE_REFERENCE__OWNED_ANNOTATIONS = REFERENCE__OWNED_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Owning Vocabulary</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RULE_REFERENCE__OWNING_VOCABULARY = REFERENCE_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Rule</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RULE_REFERENCE__RULE = REFERENCE_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of structural features of the '<em>Rule Reference</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RULE_REFERENCE_FEATURE_COUNT = REFERENCE_FEATURE_COUNT + 2;
-
-	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RULE_REFERENCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = REFERENCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
-	 * The operation id for the '<em>Get Ontology</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RULE_REFERENCE___GET_ONTOLOGY = REFERENCE___GET_ONTOLOGY;
-
-	/**
-	 * The number of operations of the '<em>Rule Reference</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RULE_REFERENCE_OPERATION_COUNT = REFERENCE_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link io.opencaesar.oml.impl.NamedInstanceReferenceImpl <em>Named Instance Reference</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see io.opencaesar.oml.impl.NamedInstanceReferenceImpl
-	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getNamedInstanceReference()
-	 * @generated
-	 */
-	int NAMED_INSTANCE_REFERENCE = 54;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAMED_INSTANCE_REFERENCE__OWNED_ANNOTATIONS = REFERENCE__OWNED_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Owning Description</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAMED_INSTANCE_REFERENCE__OWNING_DESCRIPTION = REFERENCE_FEATURE_COUNT + 0;
+	int STRUCTURE_INSTANCE = 60;
 
 	/**
 	 * The feature id for the '<em><b>Owned Property Values</b></em>' containment reference list.
@@ -5679,125 +6027,43 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NAMED_INSTANCE_REFERENCE__OWNED_PROPERTY_VALUES = REFERENCE_FEATURE_COUNT + 1;
+	int STRUCTURE_INSTANCE__OWNED_PROPERTY_VALUES = INSTANCE__OWNED_PROPERTY_VALUES;
 
 	/**
-	 * The feature id for the '<em><b>Owned Links</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NAMED_INSTANCE_REFERENCE__OWNED_LINKS = REFERENCE_FEATURE_COUNT + 2;
+	int STRUCTURE_INSTANCE__TYPE = INSTANCE_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the '<em>Named Instance Reference</em>' class.
+	 * The feature id for the '<em><b>Owning Axiom</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NAMED_INSTANCE_REFERENCE_FEATURE_COUNT = REFERENCE_FEATURE_COUNT + 3;
+	int STRUCTURE_INSTANCE__OWNING_AXIOM = INSTANCE_FEATURE_COUNT + 1;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * The feature id for the '<em><b>Owning Assertion</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NAMED_INSTANCE_REFERENCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = REFERENCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+	int STRUCTURE_INSTANCE__OWNING_ASSERTION = INSTANCE_FEATURE_COUNT + 2;
 
 	/**
-	 * The operation id for the '<em>Get Ontology</em>' operation.
+	 * The number of structural features of the '<em>Structure Instance</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NAMED_INSTANCE_REFERENCE___GET_ONTOLOGY = REFERENCE___GET_ONTOLOGY;
-
-	/**
-	 * The number of operations of the '<em>Named Instance Reference</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAMED_INSTANCE_REFERENCE_OPERATION_COUNT = REFERENCE_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link io.opencaesar.oml.impl.ConceptInstanceReferenceImpl <em>Concept Instance Reference</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see io.opencaesar.oml.impl.ConceptInstanceReferenceImpl
-	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getConceptInstanceReference()
-	 * @generated
-	 */
-	int CONCEPT_INSTANCE_REFERENCE = 55;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONCEPT_INSTANCE_REFERENCE__OWNED_ANNOTATIONS = NAMED_INSTANCE_REFERENCE__OWNED_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Owning Description</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONCEPT_INSTANCE_REFERENCE__OWNING_DESCRIPTION = NAMED_INSTANCE_REFERENCE__OWNING_DESCRIPTION;
-
-	/**
-	 * The feature id for the '<em><b>Owned Property Values</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONCEPT_INSTANCE_REFERENCE__OWNED_PROPERTY_VALUES = NAMED_INSTANCE_REFERENCE__OWNED_PROPERTY_VALUES;
-
-	/**
-	 * The feature id for the '<em><b>Owned Links</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONCEPT_INSTANCE_REFERENCE__OWNED_LINKS = NAMED_INSTANCE_REFERENCE__OWNED_LINKS;
-
-	/**
-	 * The feature id for the '<em><b>Instance</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONCEPT_INSTANCE_REFERENCE__INSTANCE = NAMED_INSTANCE_REFERENCE_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Owned Types</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONCEPT_INSTANCE_REFERENCE__OWNED_TYPES = NAMED_INSTANCE_REFERENCE_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of structural features of the '<em>Concept Instance Reference</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONCEPT_INSTANCE_REFERENCE_FEATURE_COUNT = NAMED_INSTANCE_REFERENCE_FEATURE_COUNT + 2;
+	int STRUCTURE_INSTANCE_FEATURE_COUNT = INSTANCE_FEATURE_COUNT + 3;
 
 	/**
 	 * The operation id for the '<em>Extra Validate</em>' operation.
@@ -5806,7 +6072,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONCEPT_INSTANCE_REFERENCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = NAMED_INSTANCE_REFERENCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+	int STRUCTURE_INSTANCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = INSTANCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
@@ -5815,89 +6081,62 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONCEPT_INSTANCE_REFERENCE___GET_ONTOLOGY = NAMED_INSTANCE_REFERENCE___GET_ONTOLOGY;
+	int STRUCTURE_INSTANCE___GET_ONTOLOGY = INSTANCE___GET_ONTOLOGY;
 
 	/**
-	 * The number of operations of the '<em>Concept Instance Reference</em>' class.
+	 * The number of operations of the '<em>Structure Instance</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONCEPT_INSTANCE_REFERENCE_OPERATION_COUNT = NAMED_INSTANCE_REFERENCE_OPERATION_COUNT + 0;
+	int STRUCTURE_INSTANCE_OPERATION_COUNT = INSTANCE_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link io.opencaesar.oml.impl.RelationInstanceReferenceImpl <em>Relation Instance Reference</em>}' class.
+	 * The meta object id for the '{@link io.opencaesar.oml.impl.KeyAxiomImpl <em>Key Axiom</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see io.opencaesar.oml.impl.RelationInstanceReferenceImpl
-	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRelationInstanceReference()
+	 * @see io.opencaesar.oml.impl.KeyAxiomImpl
+	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getKeyAxiom()
 	 * @generated
 	 */
-	int RELATION_INSTANCE_REFERENCE = 56;
+	int KEY_AXIOM = 61;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RELATION_INSTANCE_REFERENCE__OWNED_ANNOTATIONS = NAMED_INSTANCE_REFERENCE__OWNED_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Owning Description</b></em>' container reference.
+	 * The feature id for the '<em><b>Properties</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_INSTANCE_REFERENCE__OWNING_DESCRIPTION = NAMED_INSTANCE_REFERENCE__OWNING_DESCRIPTION;
+	int KEY_AXIOM__PROPERTIES = AXIOM_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Owned Property Values</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owning Entity</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_INSTANCE_REFERENCE__OWNED_PROPERTY_VALUES = NAMED_INSTANCE_REFERENCE__OWNED_PROPERTY_VALUES;
+	int KEY_AXIOM__OWNING_ENTITY = AXIOM_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Owned Links</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owning Reference</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_INSTANCE_REFERENCE__OWNED_LINKS = NAMED_INSTANCE_REFERENCE__OWNED_LINKS;
+	int KEY_AXIOM__OWNING_REFERENCE = AXIOM_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>Instance</b></em>' reference.
+	 * The number of structural features of the '<em>Key Axiom</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_INSTANCE_REFERENCE__INSTANCE = NAMED_INSTANCE_REFERENCE_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Owned Types</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RELATION_INSTANCE_REFERENCE__OWNED_TYPES = NAMED_INSTANCE_REFERENCE_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of structural features of the '<em>Relation Instance Reference</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RELATION_INSTANCE_REFERENCE_FEATURE_COUNT = NAMED_INSTANCE_REFERENCE_FEATURE_COUNT + 2;
+	int KEY_AXIOM_FEATURE_COUNT = AXIOM_FEATURE_COUNT + 3;
 
 	/**
 	 * The operation id for the '<em>Extra Validate</em>' operation.
@@ -5906,7 +6145,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_INSTANCE_REFERENCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = NAMED_INSTANCE_REFERENCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+	int KEY_AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
@@ -5915,1609 +6154,16 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_INSTANCE_REFERENCE___GET_ONTOLOGY = NAMED_INSTANCE_REFERENCE___GET_ONTOLOGY;
+	int KEY_AXIOM___GET_ONTOLOGY = AXIOM___GET_ONTOLOGY;
 
 	/**
-	 * The number of operations of the '<em>Relation Instance Reference</em>' class.
+	 * The number of operations of the '<em>Key Axiom</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_INSTANCE_REFERENCE_OPERATION_COUNT = NAMED_INSTANCE_REFERENCE_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link io.opencaesar.oml.impl.StatementImpl <em>Statement</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see io.opencaesar.oml.impl.StatementImpl
-	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getStatement()
-	 * @generated
-	 */
-	int STATEMENT = 57;
-
-	/**
-	 * The number of structural features of the '<em>Statement</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STATEMENT_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STATEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = ELEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
-	 * The operation id for the '<em>Get Ontology</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STATEMENT___GET_ONTOLOGY = ELEMENT___GET_ONTOLOGY;
-
-	/**
-	 * The number of operations of the '<em>Statement</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STATEMENT_OPERATION_COUNT = ELEMENT_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link io.opencaesar.oml.impl.VocabularyStatementImpl <em>Vocabulary Statement</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see io.opencaesar.oml.impl.VocabularyStatementImpl
-	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getVocabularyStatement()
-	 * @generated
-	 */
-	int VOCABULARY_STATEMENT = 58;
-
-	/**
-	 * The feature id for the '<em><b>Owning Vocabulary</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_STATEMENT__OWNING_VOCABULARY = STATEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Vocabulary Statement</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_STATEMENT_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_STATEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = STATEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
-	 * The operation id for the '<em>Get Ontology</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_STATEMENT___GET_ONTOLOGY = STATEMENT___GET_ONTOLOGY;
-
-	/**
-	 * The number of operations of the '<em>Vocabulary Statement</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_STATEMENT_OPERATION_COUNT = STATEMENT_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link io.opencaesar.oml.impl.DescriptionStatementImpl <em>Description Statement</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see io.opencaesar.oml.impl.DescriptionStatementImpl
-	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDescriptionStatement()
-	 * @generated
-	 */
-	int DESCRIPTION_STATEMENT = 59;
-
-	/**
-	 * The feature id for the '<em><b>Owning Description</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_STATEMENT__OWNING_DESCRIPTION = STATEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Description Statement</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_STATEMENT_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_STATEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = STATEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
-	 * The operation id for the '<em>Get Ontology</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_STATEMENT___GET_ONTOLOGY = STATEMENT___GET_ONTOLOGY;
-
-	/**
-	 * The number of operations of the '<em>Description Statement</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_STATEMENT_OPERATION_COUNT = STATEMENT_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link io.opencaesar.oml.impl.ImportImpl <em>Import</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see io.opencaesar.oml.impl.ImportImpl
-	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getImport()
-	 * @generated
-	 */
-	int IMPORT = 60;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMPORT__OWNED_ANNOTATIONS = ANNOTATED_ELEMENT__OWNED_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Namespace</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMPORT__NAMESPACE = ANNOTATED_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMPORT__PREFIX = ANNOTATED_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of structural features of the '<em>Import</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMPORT_FEATURE_COUNT = ANNOTATED_ELEMENT_FEATURE_COUNT + 2;
-
-	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMPORT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = ANNOTATED_ELEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
-	 * The operation id for the '<em>Get Ontology</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMPORT___GET_ONTOLOGY = ANNOTATED_ELEMENT___GET_ONTOLOGY;
-
-	/**
-	 * The operation id for the '<em>Get Iri</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMPORT___GET_IRI = ANNOTATED_ELEMENT_OPERATION_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Get Separator</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMPORT___GET_SEPARATOR = ANNOTATED_ELEMENT_OPERATION_COUNT + 1;
-
-	/**
-	 * The number of operations of the '<em>Import</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMPORT_OPERATION_COUNT = ANNOTATED_ELEMENT_OPERATION_COUNT + 2;
-
-	/**
-	 * The meta object id for the '{@link io.opencaesar.oml.impl.VocabularyImportImpl <em>Vocabulary Import</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see io.opencaesar.oml.impl.VocabularyImportImpl
-	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getVocabularyImport()
-	 * @generated
-	 */
-	int VOCABULARY_IMPORT = 61;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_IMPORT__OWNED_ANNOTATIONS = IMPORT__OWNED_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Namespace</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_IMPORT__NAMESPACE = IMPORT__NAMESPACE;
-
-	/**
-	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_IMPORT__PREFIX = IMPORT__PREFIX;
-
-	/**
-	 * The feature id for the '<em><b>Owning Vocabulary</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_IMPORT__OWNING_VOCABULARY = IMPORT_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Vocabulary Import</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_IMPORT_FEATURE_COUNT = IMPORT_FEATURE_COUNT + 1;
-
-	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_IMPORT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = IMPORT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
-	 * The operation id for the '<em>Get Ontology</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_IMPORT___GET_ONTOLOGY = IMPORT___GET_ONTOLOGY;
-
-	/**
-	 * The operation id for the '<em>Get Iri</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_IMPORT___GET_IRI = IMPORT___GET_IRI;
-
-	/**
-	 * The operation id for the '<em>Get Separator</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_IMPORT___GET_SEPARATOR = IMPORT___GET_SEPARATOR;
-
-	/**
-	 * The number of operations of the '<em>Vocabulary Import</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_IMPORT_OPERATION_COUNT = IMPORT_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link io.opencaesar.oml.impl.VocabularyExtensionImpl <em>Vocabulary Extension</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see io.opencaesar.oml.impl.VocabularyExtensionImpl
-	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getVocabularyExtension()
-	 * @generated
-	 */
-	int VOCABULARY_EXTENSION = 62;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_EXTENSION__OWNED_ANNOTATIONS = VOCABULARY_IMPORT__OWNED_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Namespace</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_EXTENSION__NAMESPACE = VOCABULARY_IMPORT__NAMESPACE;
-
-	/**
-	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_EXTENSION__PREFIX = VOCABULARY_IMPORT__PREFIX;
-
-	/**
-	 * The feature id for the '<em><b>Owning Vocabulary</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_EXTENSION__OWNING_VOCABULARY = VOCABULARY_IMPORT__OWNING_VOCABULARY;
-
-	/**
-	 * The number of structural features of the '<em>Vocabulary Extension</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_EXTENSION_FEATURE_COUNT = VOCABULARY_IMPORT_FEATURE_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_EXTENSION___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = VOCABULARY_IMPORT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
-	 * The operation id for the '<em>Get Ontology</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_EXTENSION___GET_ONTOLOGY = VOCABULARY_IMPORT___GET_ONTOLOGY;
-
-	/**
-	 * The operation id for the '<em>Get Iri</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_EXTENSION___GET_IRI = VOCABULARY_IMPORT___GET_IRI;
-
-	/**
-	 * The operation id for the '<em>Get Separator</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_EXTENSION___GET_SEPARATOR = VOCABULARY_IMPORT___GET_SEPARATOR;
-
-	/**
-	 * The number of operations of the '<em>Vocabulary Extension</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_EXTENSION_OPERATION_COUNT = VOCABULARY_IMPORT_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link io.opencaesar.oml.impl.VocabularyUsageImpl <em>Vocabulary Usage</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see io.opencaesar.oml.impl.VocabularyUsageImpl
-	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getVocabularyUsage()
-	 * @generated
-	 */
-	int VOCABULARY_USAGE = 63;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_USAGE__OWNED_ANNOTATIONS = VOCABULARY_IMPORT__OWNED_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Namespace</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_USAGE__NAMESPACE = VOCABULARY_IMPORT__NAMESPACE;
-
-	/**
-	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_USAGE__PREFIX = VOCABULARY_IMPORT__PREFIX;
-
-	/**
-	 * The feature id for the '<em><b>Owning Vocabulary</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_USAGE__OWNING_VOCABULARY = VOCABULARY_IMPORT__OWNING_VOCABULARY;
-
-	/**
-	 * The number of structural features of the '<em>Vocabulary Usage</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_USAGE_FEATURE_COUNT = VOCABULARY_IMPORT_FEATURE_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_USAGE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = VOCABULARY_IMPORT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
-	 * The operation id for the '<em>Get Ontology</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_USAGE___GET_ONTOLOGY = VOCABULARY_IMPORT___GET_ONTOLOGY;
-
-	/**
-	 * The operation id for the '<em>Get Iri</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_USAGE___GET_IRI = VOCABULARY_IMPORT___GET_IRI;
-
-	/**
-	 * The operation id for the '<em>Get Separator</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_USAGE___GET_SEPARATOR = VOCABULARY_IMPORT___GET_SEPARATOR;
-
-	/**
-	 * The number of operations of the '<em>Vocabulary Usage</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_USAGE_OPERATION_COUNT = VOCABULARY_IMPORT_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link io.opencaesar.oml.impl.VocabularyBundleImportImpl <em>Vocabulary Bundle Import</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see io.opencaesar.oml.impl.VocabularyBundleImportImpl
-	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getVocabularyBundleImport()
-	 * @generated
-	 */
-	int VOCABULARY_BUNDLE_IMPORT = 64;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_BUNDLE_IMPORT__OWNED_ANNOTATIONS = IMPORT__OWNED_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Namespace</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_BUNDLE_IMPORT__NAMESPACE = IMPORT__NAMESPACE;
-
-	/**
-	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_BUNDLE_IMPORT__PREFIX = IMPORT__PREFIX;
-
-	/**
-	 * The feature id for the '<em><b>Owning Vocabulary Bundle</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_BUNDLE_IMPORT__OWNING_VOCABULARY_BUNDLE = IMPORT_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Vocabulary Bundle Import</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_BUNDLE_IMPORT_FEATURE_COUNT = IMPORT_FEATURE_COUNT + 1;
-
-	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_BUNDLE_IMPORT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = IMPORT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
-	 * The operation id for the '<em>Get Ontology</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_BUNDLE_IMPORT___GET_ONTOLOGY = IMPORT___GET_ONTOLOGY;
-
-	/**
-	 * The operation id for the '<em>Get Iri</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_BUNDLE_IMPORT___GET_IRI = IMPORT___GET_IRI;
-
-	/**
-	 * The operation id for the '<em>Get Separator</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_BUNDLE_IMPORT___GET_SEPARATOR = IMPORT___GET_SEPARATOR;
-
-	/**
-	 * The number of operations of the '<em>Vocabulary Bundle Import</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_BUNDLE_IMPORT_OPERATION_COUNT = IMPORT_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link io.opencaesar.oml.impl.VocabularyBundleExtensionImpl <em>Vocabulary Bundle Extension</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see io.opencaesar.oml.impl.VocabularyBundleExtensionImpl
-	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getVocabularyBundleExtension()
-	 * @generated
-	 */
-	int VOCABULARY_BUNDLE_EXTENSION = 65;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_BUNDLE_EXTENSION__OWNED_ANNOTATIONS = VOCABULARY_BUNDLE_IMPORT__OWNED_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Namespace</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_BUNDLE_EXTENSION__NAMESPACE = VOCABULARY_BUNDLE_IMPORT__NAMESPACE;
-
-	/**
-	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_BUNDLE_EXTENSION__PREFIX = VOCABULARY_BUNDLE_IMPORT__PREFIX;
-
-	/**
-	 * The feature id for the '<em><b>Owning Vocabulary Bundle</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_BUNDLE_EXTENSION__OWNING_VOCABULARY_BUNDLE = VOCABULARY_BUNDLE_IMPORT__OWNING_VOCABULARY_BUNDLE;
-
-	/**
-	 * The number of structural features of the '<em>Vocabulary Bundle Extension</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_BUNDLE_EXTENSION_FEATURE_COUNT = VOCABULARY_BUNDLE_IMPORT_FEATURE_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_BUNDLE_EXTENSION___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = VOCABULARY_BUNDLE_IMPORT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
-	 * The operation id for the '<em>Get Ontology</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_BUNDLE_EXTENSION___GET_ONTOLOGY = VOCABULARY_BUNDLE_IMPORT___GET_ONTOLOGY;
-
-	/**
-	 * The operation id for the '<em>Get Iri</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_BUNDLE_EXTENSION___GET_IRI = VOCABULARY_BUNDLE_IMPORT___GET_IRI;
-
-	/**
-	 * The operation id for the '<em>Get Separator</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_BUNDLE_EXTENSION___GET_SEPARATOR = VOCABULARY_BUNDLE_IMPORT___GET_SEPARATOR;
-
-	/**
-	 * The number of operations of the '<em>Vocabulary Bundle Extension</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_BUNDLE_EXTENSION_OPERATION_COUNT = VOCABULARY_BUNDLE_IMPORT_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link io.opencaesar.oml.impl.VocabularyBundleInclusionImpl <em>Vocabulary Bundle Inclusion</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see io.opencaesar.oml.impl.VocabularyBundleInclusionImpl
-	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getVocabularyBundleInclusion()
-	 * @generated
-	 */
-	int VOCABULARY_BUNDLE_INCLUSION = 66;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_BUNDLE_INCLUSION__OWNED_ANNOTATIONS = VOCABULARY_BUNDLE_IMPORT__OWNED_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Namespace</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_BUNDLE_INCLUSION__NAMESPACE = VOCABULARY_BUNDLE_IMPORT__NAMESPACE;
-
-	/**
-	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_BUNDLE_INCLUSION__PREFIX = VOCABULARY_BUNDLE_IMPORT__PREFIX;
-
-	/**
-	 * The feature id for the '<em><b>Owning Vocabulary Bundle</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_BUNDLE_INCLUSION__OWNING_VOCABULARY_BUNDLE = VOCABULARY_BUNDLE_IMPORT__OWNING_VOCABULARY_BUNDLE;
-
-	/**
-	 * The number of structural features of the '<em>Vocabulary Bundle Inclusion</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_BUNDLE_INCLUSION_FEATURE_COUNT = VOCABULARY_BUNDLE_IMPORT_FEATURE_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_BUNDLE_INCLUSION___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = VOCABULARY_BUNDLE_IMPORT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
-	 * The operation id for the '<em>Get Ontology</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_BUNDLE_INCLUSION___GET_ONTOLOGY = VOCABULARY_BUNDLE_IMPORT___GET_ONTOLOGY;
-
-	/**
-	 * The operation id for the '<em>Get Iri</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_BUNDLE_INCLUSION___GET_IRI = VOCABULARY_BUNDLE_IMPORT___GET_IRI;
-
-	/**
-	 * The operation id for the '<em>Get Separator</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_BUNDLE_INCLUSION___GET_SEPARATOR = VOCABULARY_BUNDLE_IMPORT___GET_SEPARATOR;
-
-	/**
-	 * The number of operations of the '<em>Vocabulary Bundle Inclusion</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_BUNDLE_INCLUSION_OPERATION_COUNT = VOCABULARY_BUNDLE_IMPORT_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link io.opencaesar.oml.impl.DescriptionImportImpl <em>Description Import</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see io.opencaesar.oml.impl.DescriptionImportImpl
-	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDescriptionImport()
-	 * @generated
-	 */
-	int DESCRIPTION_IMPORT = 67;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_IMPORT__OWNED_ANNOTATIONS = IMPORT__OWNED_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Namespace</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_IMPORT__NAMESPACE = IMPORT__NAMESPACE;
-
-	/**
-	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_IMPORT__PREFIX = IMPORT__PREFIX;
-
-	/**
-	 * The feature id for the '<em><b>Owning Description</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_IMPORT__OWNING_DESCRIPTION = IMPORT_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Description Import</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_IMPORT_FEATURE_COUNT = IMPORT_FEATURE_COUNT + 1;
-
-	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_IMPORT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = IMPORT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
-	 * The operation id for the '<em>Get Ontology</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_IMPORT___GET_ONTOLOGY = IMPORT___GET_ONTOLOGY;
-
-	/**
-	 * The operation id for the '<em>Get Iri</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_IMPORT___GET_IRI = IMPORT___GET_IRI;
-
-	/**
-	 * The operation id for the '<em>Get Separator</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_IMPORT___GET_SEPARATOR = IMPORT___GET_SEPARATOR;
-
-	/**
-	 * The number of operations of the '<em>Description Import</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_IMPORT_OPERATION_COUNT = IMPORT_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link io.opencaesar.oml.impl.DescriptionExtensionImpl <em>Description Extension</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see io.opencaesar.oml.impl.DescriptionExtensionImpl
-	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDescriptionExtension()
-	 * @generated
-	 */
-	int DESCRIPTION_EXTENSION = 68;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_EXTENSION__OWNED_ANNOTATIONS = DESCRIPTION_IMPORT__OWNED_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Namespace</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_EXTENSION__NAMESPACE = DESCRIPTION_IMPORT__NAMESPACE;
-
-	/**
-	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_EXTENSION__PREFIX = DESCRIPTION_IMPORT__PREFIX;
-
-	/**
-	 * The feature id for the '<em><b>Owning Description</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_EXTENSION__OWNING_DESCRIPTION = DESCRIPTION_IMPORT__OWNING_DESCRIPTION;
-
-	/**
-	 * The number of structural features of the '<em>Description Extension</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_EXTENSION_FEATURE_COUNT = DESCRIPTION_IMPORT_FEATURE_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_EXTENSION___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = DESCRIPTION_IMPORT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
-	 * The operation id for the '<em>Get Ontology</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_EXTENSION___GET_ONTOLOGY = DESCRIPTION_IMPORT___GET_ONTOLOGY;
-
-	/**
-	 * The operation id for the '<em>Get Iri</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_EXTENSION___GET_IRI = DESCRIPTION_IMPORT___GET_IRI;
-
-	/**
-	 * The operation id for the '<em>Get Separator</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_EXTENSION___GET_SEPARATOR = DESCRIPTION_IMPORT___GET_SEPARATOR;
-
-	/**
-	 * The number of operations of the '<em>Description Extension</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_EXTENSION_OPERATION_COUNT = DESCRIPTION_IMPORT_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link io.opencaesar.oml.impl.DescriptionUsageImpl <em>Description Usage</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see io.opencaesar.oml.impl.DescriptionUsageImpl
-	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDescriptionUsage()
-	 * @generated
-	 */
-	int DESCRIPTION_USAGE = 69;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_USAGE__OWNED_ANNOTATIONS = DESCRIPTION_IMPORT__OWNED_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Namespace</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_USAGE__NAMESPACE = DESCRIPTION_IMPORT__NAMESPACE;
-
-	/**
-	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_USAGE__PREFIX = DESCRIPTION_IMPORT__PREFIX;
-
-	/**
-	 * The feature id for the '<em><b>Owning Description</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_USAGE__OWNING_DESCRIPTION = DESCRIPTION_IMPORT__OWNING_DESCRIPTION;
-
-	/**
-	 * The number of structural features of the '<em>Description Usage</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_USAGE_FEATURE_COUNT = DESCRIPTION_IMPORT_FEATURE_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_USAGE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = DESCRIPTION_IMPORT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
-	 * The operation id for the '<em>Get Ontology</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_USAGE___GET_ONTOLOGY = DESCRIPTION_IMPORT___GET_ONTOLOGY;
-
-	/**
-	 * The operation id for the '<em>Get Iri</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_USAGE___GET_IRI = DESCRIPTION_IMPORT___GET_IRI;
-
-	/**
-	 * The operation id for the '<em>Get Separator</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_USAGE___GET_SEPARATOR = DESCRIPTION_IMPORT___GET_SEPARATOR;
-
-	/**
-	 * The number of operations of the '<em>Description Usage</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_USAGE_OPERATION_COUNT = DESCRIPTION_IMPORT_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link io.opencaesar.oml.impl.DescriptionBundleImportImpl <em>Description Bundle Import</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see io.opencaesar.oml.impl.DescriptionBundleImportImpl
-	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDescriptionBundleImport()
-	 * @generated
-	 */
-	int DESCRIPTION_BUNDLE_IMPORT = 70;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE_IMPORT__OWNED_ANNOTATIONS = IMPORT__OWNED_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Namespace</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE_IMPORT__NAMESPACE = IMPORT__NAMESPACE;
-
-	/**
-	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE_IMPORT__PREFIX = IMPORT__PREFIX;
-
-	/**
-	 * The feature id for the '<em><b>Owning Description Bundle</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE_IMPORT__OWNING_DESCRIPTION_BUNDLE = IMPORT_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Description Bundle Import</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE_IMPORT_FEATURE_COUNT = IMPORT_FEATURE_COUNT + 1;
-
-	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE_IMPORT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = IMPORT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
-	 * The operation id for the '<em>Get Ontology</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE_IMPORT___GET_ONTOLOGY = IMPORT___GET_ONTOLOGY;
-
-	/**
-	 * The operation id for the '<em>Get Iri</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE_IMPORT___GET_IRI = IMPORT___GET_IRI;
-
-	/**
-	 * The operation id for the '<em>Get Separator</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE_IMPORT___GET_SEPARATOR = IMPORT___GET_SEPARATOR;
-
-	/**
-	 * The number of operations of the '<em>Description Bundle Import</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE_IMPORT_OPERATION_COUNT = IMPORT_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link io.opencaesar.oml.impl.DescriptionBundleExtensionImpl <em>Description Bundle Extension</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see io.opencaesar.oml.impl.DescriptionBundleExtensionImpl
-	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDescriptionBundleExtension()
-	 * @generated
-	 */
-	int DESCRIPTION_BUNDLE_EXTENSION = 71;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE_EXTENSION__OWNED_ANNOTATIONS = DESCRIPTION_BUNDLE_IMPORT__OWNED_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Namespace</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE_EXTENSION__NAMESPACE = DESCRIPTION_BUNDLE_IMPORT__NAMESPACE;
-
-	/**
-	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE_EXTENSION__PREFIX = DESCRIPTION_BUNDLE_IMPORT__PREFIX;
-
-	/**
-	 * The feature id for the '<em><b>Owning Description Bundle</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE_EXTENSION__OWNING_DESCRIPTION_BUNDLE = DESCRIPTION_BUNDLE_IMPORT__OWNING_DESCRIPTION_BUNDLE;
-
-	/**
-	 * The number of structural features of the '<em>Description Bundle Extension</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE_EXTENSION_FEATURE_COUNT = DESCRIPTION_BUNDLE_IMPORT_FEATURE_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE_EXTENSION___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = DESCRIPTION_BUNDLE_IMPORT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
-	 * The operation id for the '<em>Get Ontology</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE_EXTENSION___GET_ONTOLOGY = DESCRIPTION_BUNDLE_IMPORT___GET_ONTOLOGY;
-
-	/**
-	 * The operation id for the '<em>Get Iri</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE_EXTENSION___GET_IRI = DESCRIPTION_BUNDLE_IMPORT___GET_IRI;
-
-	/**
-	 * The operation id for the '<em>Get Separator</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE_EXTENSION___GET_SEPARATOR = DESCRIPTION_BUNDLE_IMPORT___GET_SEPARATOR;
-
-	/**
-	 * The number of operations of the '<em>Description Bundle Extension</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE_EXTENSION_OPERATION_COUNT = DESCRIPTION_BUNDLE_IMPORT_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link io.opencaesar.oml.impl.DescriptionBundleInclusionImpl <em>Description Bundle Inclusion</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see io.opencaesar.oml.impl.DescriptionBundleInclusionImpl
-	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDescriptionBundleInclusion()
-	 * @generated
-	 */
-	int DESCRIPTION_BUNDLE_INCLUSION = 72;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE_INCLUSION__OWNED_ANNOTATIONS = DESCRIPTION_BUNDLE_IMPORT__OWNED_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Namespace</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE_INCLUSION__NAMESPACE = DESCRIPTION_BUNDLE_IMPORT__NAMESPACE;
-
-	/**
-	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE_INCLUSION__PREFIX = DESCRIPTION_BUNDLE_IMPORT__PREFIX;
-
-	/**
-	 * The feature id for the '<em><b>Owning Description Bundle</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE_INCLUSION__OWNING_DESCRIPTION_BUNDLE = DESCRIPTION_BUNDLE_IMPORT__OWNING_DESCRIPTION_BUNDLE;
-
-	/**
-	 * The number of structural features of the '<em>Description Bundle Inclusion</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE_INCLUSION_FEATURE_COUNT = DESCRIPTION_BUNDLE_IMPORT_FEATURE_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE_INCLUSION___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = DESCRIPTION_BUNDLE_IMPORT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
-	 * The operation id for the '<em>Get Ontology</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE_INCLUSION___GET_ONTOLOGY = DESCRIPTION_BUNDLE_IMPORT___GET_ONTOLOGY;
-
-	/**
-	 * The operation id for the '<em>Get Iri</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE_INCLUSION___GET_IRI = DESCRIPTION_BUNDLE_IMPORT___GET_IRI;
-
-	/**
-	 * The operation id for the '<em>Get Separator</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE_INCLUSION___GET_SEPARATOR = DESCRIPTION_BUNDLE_IMPORT___GET_SEPARATOR;
-
-	/**
-	 * The number of operations of the '<em>Description Bundle Inclusion</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE_INCLUSION_OPERATION_COUNT = DESCRIPTION_BUNDLE_IMPORT_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link io.opencaesar.oml.impl.DescriptionBundleUsageImpl <em>Description Bundle Usage</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see io.opencaesar.oml.impl.DescriptionBundleUsageImpl
-	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDescriptionBundleUsage()
-	 * @generated
-	 */
-	int DESCRIPTION_BUNDLE_USAGE = 73;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE_USAGE__OWNED_ANNOTATIONS = DESCRIPTION_BUNDLE_IMPORT__OWNED_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Namespace</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE_USAGE__NAMESPACE = DESCRIPTION_BUNDLE_IMPORT__NAMESPACE;
-
-	/**
-	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE_USAGE__PREFIX = DESCRIPTION_BUNDLE_IMPORT__PREFIX;
-
-	/**
-	 * The feature id for the '<em><b>Owning Description Bundle</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE_USAGE__OWNING_DESCRIPTION_BUNDLE = DESCRIPTION_BUNDLE_IMPORT__OWNING_DESCRIPTION_BUNDLE;
-
-	/**
-	 * The number of structural features of the '<em>Description Bundle Usage</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE_USAGE_FEATURE_COUNT = DESCRIPTION_BUNDLE_IMPORT_FEATURE_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE_USAGE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = DESCRIPTION_BUNDLE_IMPORT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
-	 * The operation id for the '<em>Get Ontology</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE_USAGE___GET_ONTOLOGY = DESCRIPTION_BUNDLE_IMPORT___GET_ONTOLOGY;
-
-	/**
-	 * The operation id for the '<em>Get Iri</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE_USAGE___GET_IRI = DESCRIPTION_BUNDLE_IMPORT___GET_IRI;
-
-	/**
-	 * The operation id for the '<em>Get Separator</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE_USAGE___GET_SEPARATOR = DESCRIPTION_BUNDLE_IMPORT___GET_SEPARATOR;
-
-	/**
-	 * The number of operations of the '<em>Description Bundle Usage</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE_USAGE_OPERATION_COUNT = DESCRIPTION_BUNDLE_IMPORT_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link io.opencaesar.oml.impl.AxiomImpl <em>Axiom</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see io.opencaesar.oml.impl.AxiomImpl
-	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getAxiom()
-	 * @generated
-	 */
-	int AXIOM = 74;
-
-	/**
-	 * The number of structural features of the '<em>Axiom</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AXIOM_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = ELEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
-	 * The operation id for the '<em>Get Ontology</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AXIOM___GET_ONTOLOGY = ELEMENT___GET_ONTOLOGY;
-
-	/**
-	 * The number of operations of the '<em>Axiom</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AXIOM_OPERATION_COUNT = ELEMENT_OPERATION_COUNT + 0;
+	int KEY_AXIOM_OPERATION_COUNT = AXIOM_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.impl.SpecializationAxiomImpl <em>Specialization Axiom</em>}' class.
@@ -7527,7 +6173,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getSpecializationAxiom()
 	 * @generated
 	 */
-	int SPECIALIZATION_AXIOM = 75;
+	int SPECIALIZATION_AXIOM = 62;
 
 	/**
 	 * The feature id for the '<em><b>Specialized Term</b></em>' reference.
@@ -7600,7 +6246,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRestrictionAxiom()
 	 * @generated
 	 */
-	int RESTRICTION_AXIOM = 76;
+	int RESTRICTION_AXIOM = 63;
 
 	/**
 	 * The number of structural features of the '<em>Restriction Axiom</em>' class.
@@ -7646,7 +6292,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getPropertyRestrictionAxiom()
 	 * @generated
 	 */
-	int PROPERTY_RESTRICTION_AXIOM = 77;
+	int PROPERTY_RESTRICTION_AXIOM = 64;
 
 	/**
 	 * The feature id for the '<em><b>Owning Classifier</b></em>' container reference.
@@ -7710,7 +6356,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getScalarPropertyRestrictionAxiom()
 	 * @generated
 	 */
-	int SCALAR_PROPERTY_RESTRICTION_AXIOM = 78;
+	int SCALAR_PROPERTY_RESTRICTION_AXIOM = 65;
 
 	/**
 	 * The feature id for the '<em><b>Owning Classifier</b></em>' container reference.
@@ -7783,7 +6429,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getScalarPropertyRangeRestrictionAxiom()
 	 * @generated
 	 */
-	int SCALAR_PROPERTY_RANGE_RESTRICTION_AXIOM = 79;
+	int SCALAR_PROPERTY_RANGE_RESTRICTION_AXIOM = 66;
 
 	/**
 	 * The feature id for the '<em><b>Owning Classifier</b></em>' container reference.
@@ -7874,7 +6520,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getScalarPropertyCardinalityRestrictionAxiom()
 	 * @generated
 	 */
-	int SCALAR_PROPERTY_CARDINALITY_RESTRICTION_AXIOM = 80;
+	int SCALAR_PROPERTY_CARDINALITY_RESTRICTION_AXIOM = 67;
 
 	/**
 	 * The feature id for the '<em><b>Owning Classifier</b></em>' container reference.
@@ -7974,7 +6620,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getScalarPropertyValueRestrictionAxiom()
 	 * @generated
 	 */
-	int SCALAR_PROPERTY_VALUE_RESTRICTION_AXIOM = 81;
+	int SCALAR_PROPERTY_VALUE_RESTRICTION_AXIOM = 68;
 
 	/**
 	 * The feature id for the '<em><b>Owning Classifier</b></em>' container reference.
@@ -8056,7 +6702,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getStructuredPropertyRestrictionAxiom()
 	 * @generated
 	 */
-	int STRUCTURED_PROPERTY_RESTRICTION_AXIOM = 82;
+	int STRUCTURED_PROPERTY_RESTRICTION_AXIOM = 69;
 
 	/**
 	 * The feature id for the '<em><b>Owning Classifier</b></em>' container reference.
@@ -8129,7 +6775,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getStructuredPropertyRangeRestrictionAxiom()
 	 * @generated
 	 */
-	int STRUCTURED_PROPERTY_RANGE_RESTRICTION_AXIOM = 83;
+	int STRUCTURED_PROPERTY_RANGE_RESTRICTION_AXIOM = 70;
 
 	/**
 	 * The feature id for the '<em><b>Owning Classifier</b></em>' container reference.
@@ -8220,7 +6866,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getStructuredPropertyCardinalityRestrictionAxiom()
 	 * @generated
 	 */
-	int STRUCTURED_PROPERTY_CARDINALITY_RESTRICTION_AXIOM = 84;
+	int STRUCTURED_PROPERTY_CARDINALITY_RESTRICTION_AXIOM = 71;
 
 	/**
 	 * The feature id for the '<em><b>Owning Classifier</b></em>' container reference.
@@ -8320,7 +6966,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getStructuredPropertyValueRestrictionAxiom()
 	 * @generated
 	 */
-	int STRUCTURED_PROPERTY_VALUE_RESTRICTION_AXIOM = 85;
+	int STRUCTURED_PROPERTY_VALUE_RESTRICTION_AXIOM = 72;
 
 	/**
 	 * The feature id for the '<em><b>Owning Classifier</b></em>' container reference.
@@ -8402,7 +7048,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRelationRestrictionAxiom()
 	 * @generated
 	 */
-	int RELATION_RESTRICTION_AXIOM = 86;
+	int RELATION_RESTRICTION_AXIOM = 73;
 
 	/**
 	 * The feature id for the '<em><b>Relation</b></em>' reference.
@@ -8475,7 +7121,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRelationRangeRestrictionAxiom()
 	 * @generated
 	 */
-	int RELATION_RANGE_RESTRICTION_AXIOM = 87;
+	int RELATION_RANGE_RESTRICTION_AXIOM = 74;
 
 	/**
 	 * The feature id for the '<em><b>Relation</b></em>' reference.
@@ -8566,7 +7212,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRelationCardinalityRestrictionAxiom()
 	 * @generated
 	 */
-	int RELATION_CARDINALITY_RESTRICTION_AXIOM = 88;
+	int RELATION_CARDINALITY_RESTRICTION_AXIOM = 75;
 
 	/**
 	 * The feature id for the '<em><b>Relation</b></em>' reference.
@@ -8666,7 +7312,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRelationTargetRestrictionAxiom()
 	 * @generated
 	 */
-	int RELATION_TARGET_RESTRICTION_AXIOM = 89;
+	int RELATION_TARGET_RESTRICTION_AXIOM = 76;
 
 	/**
 	 * The feature id for the '<em><b>Relation</b></em>' reference.
@@ -8741,125 +7387,6 @@ public interface OmlPackage extends EPackage {
 	int RELATION_TARGET_RESTRICTION_AXIOM_OPERATION_COUNT = RELATION_RESTRICTION_AXIOM_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link io.opencaesar.oml.impl.KeyAxiomImpl <em>Key Axiom</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see io.opencaesar.oml.impl.KeyAxiomImpl
-	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getKeyAxiom()
-	 * @generated
-	 */
-	int KEY_AXIOM = 90;
-
-	/**
-	 * The feature id for the '<em><b>Properties</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int KEY_AXIOM__PROPERTIES = AXIOM_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Owning Entity</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int KEY_AXIOM__OWNING_ENTITY = AXIOM_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Owning Reference</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int KEY_AXIOM__OWNING_REFERENCE = AXIOM_FEATURE_COUNT + 2;
-
-	/**
-	 * The number of structural features of the '<em>Key Axiom</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int KEY_AXIOM_FEATURE_COUNT = AXIOM_FEATURE_COUNT + 3;
-
-	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int KEY_AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
-	 * The operation id for the '<em>Get Ontology</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int KEY_AXIOM___GET_ONTOLOGY = AXIOM___GET_ONTOLOGY;
-
-	/**
-	 * The number of operations of the '<em>Key Axiom</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int KEY_AXIOM_OPERATION_COUNT = AXIOM_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link io.opencaesar.oml.impl.AssertionImpl <em>Assertion</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see io.opencaesar.oml.impl.AssertionImpl
-	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getAssertion()
-	 * @generated
-	 */
-	int ASSERTION = 91;
-
-	/**
-	 * The number of structural features of the '<em>Assertion</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSERTION_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSERTION___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = ELEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
-	 * The operation id for the '<em>Get Ontology</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSERTION___GET_ONTOLOGY = ELEMENT___GET_ONTOLOGY;
-
-	/**
-	 * The number of operations of the '<em>Assertion</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSERTION_OPERATION_COUNT = ELEMENT_OPERATION_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.impl.TypeAssertionImpl <em>Type Assertion</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8867,7 +7394,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getTypeAssertion()
 	 * @generated
 	 */
-	int TYPE_ASSERTION = 92;
+	int TYPE_ASSERTION = 77;
 
 	/**
 	 * The number of structural features of the '<em>Type Assertion</em>' class.
@@ -8922,7 +7449,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getConceptTypeAssertion()
 	 * @generated
 	 */
-	int CONCEPT_TYPE_ASSERTION = 93;
+	int CONCEPT_TYPE_ASSERTION = 78;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -9004,7 +7531,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRelationTypeAssertion()
 	 * @generated
 	 */
-	int RELATION_TYPE_ASSERTION = 94;
+	int RELATION_TYPE_ASSERTION = 79;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -9086,7 +7613,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getPropertyValueAssertion()
 	 * @generated
 	 */
-	int PROPERTY_VALUE_ASSERTION = 95;
+	int PROPERTY_VALUE_ASSERTION = 80;
 
 	/**
 	 * The feature id for the '<em><b>Owning Instance</b></em>' container reference.
@@ -9168,7 +7695,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getScalarPropertyValueAssertion()
 	 * @generated
 	 */
-	int SCALAR_PROPERTY_VALUE_ASSERTION = 96;
+	int SCALAR_PROPERTY_VALUE_ASSERTION = 81;
 
 	/**
 	 * The feature id for the '<em><b>Owning Instance</b></em>' container reference.
@@ -9268,7 +7795,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getStructuredPropertyValueAssertion()
 	 * @generated
 	 */
-	int STRUCTURED_PROPERTY_VALUE_ASSERTION = 97;
+	int STRUCTURED_PROPERTY_VALUE_ASSERTION = 82;
 
 	/**
 	 * The feature id for the '<em><b>Owning Instance</b></em>' container reference.
@@ -9368,7 +7895,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getLinkAssertion()
 	 * @generated
 	 */
-	int LINK_ASSERTION = 98;
+	int LINK_ASSERTION = 83;
 
 	/**
 	 * The feature id for the '<em><b>Relation</b></em>' reference.
@@ -9443,70 +7970,6 @@ public interface OmlPackage extends EPackage {
 	int LINK_ASSERTION_OPERATION_COUNT = ASSERTION_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link io.opencaesar.oml.impl.PredicateImpl <em>Predicate</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see io.opencaesar.oml.impl.PredicateImpl
-	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getPredicate()
-	 * @generated
-	 */
-	int PREDICATE = 99;
-
-	/**
-	 * The feature id for the '<em><b>Antecedent Rule</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PREDICATE__ANTECEDENT_RULE = ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Consequent Rule</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PREDICATE__CONSEQUENT_RULE = ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of structural features of the '<em>Predicate</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PREDICATE_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 2;
-
-	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PREDICATE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = ELEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
-	 * The operation id for the '<em>Get Ontology</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PREDICATE___GET_ONTOLOGY = ELEMENT___GET_ONTOLOGY;
-
-	/**
-	 * The number of operations of the '<em>Predicate</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PREDICATE_OPERATION_COUNT = ELEMENT_OPERATION_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.impl.UnaryPredicateImpl <em>Unary Predicate</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -9514,7 +7977,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getUnaryPredicate()
 	 * @generated
 	 */
-	int UNARY_PREDICATE = 100;
+	int UNARY_PREDICATE = 84;
 
 	/**
 	 * The feature id for the '<em><b>Antecedent Rule</b></em>' container reference.
@@ -9580,88 +8043,6 @@ public interface OmlPackage extends EPackage {
 	int UNARY_PREDICATE_OPERATION_COUNT = PREDICATE_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link io.opencaesar.oml.impl.TypePredicateImpl <em>Type Predicate</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see io.opencaesar.oml.impl.TypePredicateImpl
-	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getTypePredicate()
-	 * @generated
-	 */
-	int TYPE_PREDICATE = 101;
-
-	/**
-	 * The feature id for the '<em><b>Antecedent Rule</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_PREDICATE__ANTECEDENT_RULE = UNARY_PREDICATE__ANTECEDENT_RULE;
-
-	/**
-	 * The feature id for the '<em><b>Consequent Rule</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_PREDICATE__CONSEQUENT_RULE = UNARY_PREDICATE__CONSEQUENT_RULE;
-
-	/**
-	 * The feature id for the '<em><b>Variable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_PREDICATE__VARIABLE = UNARY_PREDICATE__VARIABLE;
-
-	/**
-	 * The feature id for the '<em><b>Type</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_PREDICATE__TYPE = UNARY_PREDICATE_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Type Predicate</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_PREDICATE_FEATURE_COUNT = UNARY_PREDICATE_FEATURE_COUNT + 1;
-
-	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_PREDICATE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = UNARY_PREDICATE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
-	 * The operation id for the '<em>Get Ontology</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_PREDICATE___GET_ONTOLOGY = UNARY_PREDICATE___GET_ONTOLOGY;
-
-	/**
-	 * The number of operations of the '<em>Type Predicate</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_PREDICATE_OPERATION_COUNT = UNARY_PREDICATE_OPERATION_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.impl.BinaryPredicateImpl <em>Binary Predicate</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -9669,7 +8050,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getBinaryPredicate()
 	 * @generated
 	 */
-	int BINARY_PREDICATE = 102;
+	int BINARY_PREDICATE = 85;
 
 	/**
 	 * The feature id for the '<em><b>Antecedent Rule</b></em>' container reference.
@@ -9753,6 +8134,88 @@ public interface OmlPackage extends EPackage {
 	int BINARY_PREDICATE_OPERATION_COUNT = PREDICATE_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link io.opencaesar.oml.impl.TypePredicateImpl <em>Type Predicate</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see io.opencaesar.oml.impl.TypePredicateImpl
+	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getTypePredicate()
+	 * @generated
+	 */
+	int TYPE_PREDICATE = 86;
+
+	/**
+	 * The feature id for the '<em><b>Antecedent Rule</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_PREDICATE__ANTECEDENT_RULE = UNARY_PREDICATE__ANTECEDENT_RULE;
+
+	/**
+	 * The feature id for the '<em><b>Consequent Rule</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_PREDICATE__CONSEQUENT_RULE = UNARY_PREDICATE__CONSEQUENT_RULE;
+
+	/**
+	 * The feature id for the '<em><b>Variable</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_PREDICATE__VARIABLE = UNARY_PREDICATE__VARIABLE;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_PREDICATE__TYPE = UNARY_PREDICATE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Type Predicate</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_PREDICATE_FEATURE_COUNT = UNARY_PREDICATE_FEATURE_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_PREDICATE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = UNARY_PREDICATE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Get Ontology</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_PREDICATE___GET_ONTOLOGY = UNARY_PREDICATE___GET_ONTOLOGY;
+
+	/**
+	 * The number of operations of the '<em>Type Predicate</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_PREDICATE_OPERATION_COUNT = UNARY_PREDICATE_OPERATION_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.impl.RelationEntityPredicateImpl <em>Relation Entity Predicate</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -9760,7 +8223,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRelationEntityPredicate()
 	 * @generated
 	 */
-	int RELATION_ENTITY_PREDICATE = 103;
+	int RELATION_ENTITY_PREDICATE = 87;
 
 	/**
 	 * The feature id for the '<em><b>Antecedent Rule</b></em>' container reference.
@@ -9869,7 +8332,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getFeaturePredicate()
 	 * @generated
 	 */
-	int FEATURE_PREDICATE = 104;
+	int FEATURE_PREDICATE = 88;
 
 	/**
 	 * The feature id for the '<em><b>Antecedent Rule</b></em>' container reference.
@@ -9978,7 +8441,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getSameAsPredicate()
 	 * @generated
 	 */
-	int SAME_AS_PREDICATE = 105;
+	int SAME_AS_PREDICATE = 89;
 
 	/**
 	 * The feature id for the '<em><b>Antecedent Rule</b></em>' container reference.
@@ -10069,7 +8532,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDifferentFromPredicate()
 	 * @generated
 	 */
-	int DIFFERENT_FROM_PREDICATE = 106;
+	int DIFFERENT_FROM_PREDICATE = 90;
 
 	/**
 	 * The feature id for the '<em><b>Antecedent Rule</b></em>' container reference.
@@ -10153,52 +8616,6 @@ public interface OmlPackage extends EPackage {
 	int DIFFERENT_FROM_PREDICATE_OPERATION_COUNT = BINARY_PREDICATE_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link io.opencaesar.oml.impl.LiteralImpl <em>Literal</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see io.opencaesar.oml.impl.LiteralImpl
-	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getLiteral()
-	 * @generated
-	 */
-	int LITERAL = 107;
-
-	/**
-	 * The number of structural features of the '<em>Literal</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LITERAL_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LITERAL___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = ELEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
-	 * The operation id for the '<em>Get Ontology</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LITERAL___GET_ONTOLOGY = ELEMENT___GET_ONTOLOGY;
-
-	/**
-	 * The number of operations of the '<em>Literal</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LITERAL_OPERATION_COUNT = ELEMENT_OPERATION_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.impl.QuotedLiteralImpl <em>Quoted Literal</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -10206,7 +8623,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getQuotedLiteral()
 	 * @generated
 	 */
-	int QUOTED_LITERAL = 108;
+	int QUOTED_LITERAL = 91;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -10279,7 +8696,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getIntegerLiteral()
 	 * @generated
 	 */
-	int INTEGER_LITERAL = 109;
+	int INTEGER_LITERAL = 92;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -10334,7 +8751,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDecimalLiteral()
 	 * @generated
 	 */
-	int DECIMAL_LITERAL = 110;
+	int DECIMAL_LITERAL = 93;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -10389,7 +8806,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDoubleLiteral()
 	 * @generated
 	 */
-	int DOUBLE_LITERAL = 111;
+	int DOUBLE_LITERAL = 94;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -10444,7 +8861,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getBooleanLiteral()
 	 * @generated
 	 */
-	int BOOLEAN_LITERAL = 112;
+	int BOOLEAN_LITERAL = 95;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -10492,6 +8909,1572 @@ public interface OmlPackage extends EPackage {
 	int BOOLEAN_LITERAL_OPERATION_COUNT = LITERAL_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link io.opencaesar.oml.impl.ReferenceImpl <em>Reference</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see io.opencaesar.oml.impl.ReferenceImpl
+	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getReference()
+	 * @generated
+	 */
+	int REFERENCE = 96;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFERENCE__OWNED_ANNOTATIONS = ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFERENCE_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFERENCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = ELEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Get Ontology</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFERENCE___GET_ONTOLOGY = ELEMENT___GET_ONTOLOGY;
+
+	/**
+	 * The number of operations of the '<em>Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFERENCE_OPERATION_COUNT = ELEMENT_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link io.opencaesar.oml.impl.SpecializableTermReferenceImpl <em>Specializable Term Reference</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see io.opencaesar.oml.impl.SpecializableTermReferenceImpl
+	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getSpecializableTermReference()
+	 * @generated
+	 */
+	int SPECIALIZABLE_TERM_REFERENCE = 97;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SPECIALIZABLE_TERM_REFERENCE__OWNED_ANNOTATIONS = REFERENCE__OWNED_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owning Vocabulary</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SPECIALIZABLE_TERM_REFERENCE__OWNING_VOCABULARY = REFERENCE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Owned Specializations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SPECIALIZABLE_TERM_REFERENCE__OWNED_SPECIALIZATIONS = REFERENCE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Specializable Term Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SPECIALIZABLE_TERM_REFERENCE_FEATURE_COUNT = REFERENCE_FEATURE_COUNT + 2;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SPECIALIZABLE_TERM_REFERENCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = REFERENCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Get Ontology</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SPECIALIZABLE_TERM_REFERENCE___GET_ONTOLOGY = REFERENCE___GET_ONTOLOGY;
+
+	/**
+	 * The number of operations of the '<em>Specializable Term Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SPECIALIZABLE_TERM_REFERENCE_OPERATION_COUNT = REFERENCE_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link io.opencaesar.oml.impl.ClassifierReferenceImpl <em>Classifier Reference</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see io.opencaesar.oml.impl.ClassifierReferenceImpl
+	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getClassifierReference()
+	 * @generated
+	 */
+	int CLASSIFIER_REFERENCE = 98;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASSIFIER_REFERENCE__OWNED_ANNOTATIONS = SPECIALIZABLE_TERM_REFERENCE__OWNED_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owning Vocabulary</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASSIFIER_REFERENCE__OWNING_VOCABULARY = SPECIALIZABLE_TERM_REFERENCE__OWNING_VOCABULARY;
+
+	/**
+	 * The feature id for the '<em><b>Owned Specializations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASSIFIER_REFERENCE__OWNED_SPECIALIZATIONS = SPECIALIZABLE_TERM_REFERENCE__OWNED_SPECIALIZATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Property Restrictions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASSIFIER_REFERENCE__OWNED_PROPERTY_RESTRICTIONS = SPECIALIZABLE_TERM_REFERENCE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Classifier Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASSIFIER_REFERENCE_FEATURE_COUNT = SPECIALIZABLE_TERM_REFERENCE_FEATURE_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASSIFIER_REFERENCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = SPECIALIZABLE_TERM_REFERENCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Get Ontology</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASSIFIER_REFERENCE___GET_ONTOLOGY = SPECIALIZABLE_TERM_REFERENCE___GET_ONTOLOGY;
+
+	/**
+	 * The number of operations of the '<em>Classifier Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASSIFIER_REFERENCE_OPERATION_COUNT = SPECIALIZABLE_TERM_REFERENCE_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link io.opencaesar.oml.impl.EntityReferenceImpl <em>Entity Reference</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see io.opencaesar.oml.impl.EntityReferenceImpl
+	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getEntityReference()
+	 * @generated
+	 */
+	int ENTITY_REFERENCE = 99;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENTITY_REFERENCE__OWNED_ANNOTATIONS = CLASSIFIER_REFERENCE__OWNED_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owning Vocabulary</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENTITY_REFERENCE__OWNING_VOCABULARY = CLASSIFIER_REFERENCE__OWNING_VOCABULARY;
+
+	/**
+	 * The feature id for the '<em><b>Owned Specializations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENTITY_REFERENCE__OWNED_SPECIALIZATIONS = CLASSIFIER_REFERENCE__OWNED_SPECIALIZATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Property Restrictions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENTITY_REFERENCE__OWNED_PROPERTY_RESTRICTIONS = CLASSIFIER_REFERENCE__OWNED_PROPERTY_RESTRICTIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Relation Restrictions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENTITY_REFERENCE__OWNED_RELATION_RESTRICTIONS = CLASSIFIER_REFERENCE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Owned Keys</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENTITY_REFERENCE__OWNED_KEYS = CLASSIFIER_REFERENCE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Entity Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENTITY_REFERENCE_FEATURE_COUNT = CLASSIFIER_REFERENCE_FEATURE_COUNT + 2;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENTITY_REFERENCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = CLASSIFIER_REFERENCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Get Ontology</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENTITY_REFERENCE___GET_ONTOLOGY = CLASSIFIER_REFERENCE___GET_ONTOLOGY;
+
+	/**
+	 * The number of operations of the '<em>Entity Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENTITY_REFERENCE_OPERATION_COUNT = CLASSIFIER_REFERENCE_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link io.opencaesar.oml.impl.AspectReferenceImpl <em>Aspect Reference</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see io.opencaesar.oml.impl.AspectReferenceImpl
+	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getAspectReference()
+	 * @generated
+	 */
+	int ASPECT_REFERENCE = 100;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASPECT_REFERENCE__OWNED_ANNOTATIONS = ENTITY_REFERENCE__OWNED_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owning Vocabulary</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASPECT_REFERENCE__OWNING_VOCABULARY = ENTITY_REFERENCE__OWNING_VOCABULARY;
+
+	/**
+	 * The feature id for the '<em><b>Owned Specializations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASPECT_REFERENCE__OWNED_SPECIALIZATIONS = ENTITY_REFERENCE__OWNED_SPECIALIZATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Property Restrictions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASPECT_REFERENCE__OWNED_PROPERTY_RESTRICTIONS = ENTITY_REFERENCE__OWNED_PROPERTY_RESTRICTIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Relation Restrictions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASPECT_REFERENCE__OWNED_RELATION_RESTRICTIONS = ENTITY_REFERENCE__OWNED_RELATION_RESTRICTIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Keys</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASPECT_REFERENCE__OWNED_KEYS = ENTITY_REFERENCE__OWNED_KEYS;
+
+	/**
+	 * The feature id for the '<em><b>Aspect</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASPECT_REFERENCE__ASPECT = ENTITY_REFERENCE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Aspect Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASPECT_REFERENCE_FEATURE_COUNT = ENTITY_REFERENCE_FEATURE_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASPECT_REFERENCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = ENTITY_REFERENCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Get Ontology</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASPECT_REFERENCE___GET_ONTOLOGY = ENTITY_REFERENCE___GET_ONTOLOGY;
+
+	/**
+	 * The number of operations of the '<em>Aspect Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASPECT_REFERENCE_OPERATION_COUNT = ENTITY_REFERENCE_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link io.opencaesar.oml.impl.ConceptReferenceImpl <em>Concept Reference</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see io.opencaesar.oml.impl.ConceptReferenceImpl
+	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getConceptReference()
+	 * @generated
+	 */
+	int CONCEPT_REFERENCE = 101;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONCEPT_REFERENCE__OWNED_ANNOTATIONS = ENTITY_REFERENCE__OWNED_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owning Vocabulary</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONCEPT_REFERENCE__OWNING_VOCABULARY = ENTITY_REFERENCE__OWNING_VOCABULARY;
+
+	/**
+	 * The feature id for the '<em><b>Owned Specializations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONCEPT_REFERENCE__OWNED_SPECIALIZATIONS = ENTITY_REFERENCE__OWNED_SPECIALIZATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Property Restrictions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONCEPT_REFERENCE__OWNED_PROPERTY_RESTRICTIONS = ENTITY_REFERENCE__OWNED_PROPERTY_RESTRICTIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Relation Restrictions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONCEPT_REFERENCE__OWNED_RELATION_RESTRICTIONS = ENTITY_REFERENCE__OWNED_RELATION_RESTRICTIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Keys</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONCEPT_REFERENCE__OWNED_KEYS = ENTITY_REFERENCE__OWNED_KEYS;
+
+	/**
+	 * The feature id for the '<em><b>Concept</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONCEPT_REFERENCE__CONCEPT = ENTITY_REFERENCE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Concept Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONCEPT_REFERENCE_FEATURE_COUNT = ENTITY_REFERENCE_FEATURE_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONCEPT_REFERENCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = ENTITY_REFERENCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Get Ontology</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONCEPT_REFERENCE___GET_ONTOLOGY = ENTITY_REFERENCE___GET_ONTOLOGY;
+
+	/**
+	 * The number of operations of the '<em>Concept Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONCEPT_REFERENCE_OPERATION_COUNT = ENTITY_REFERENCE_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link io.opencaesar.oml.impl.RelationEntityReferenceImpl <em>Relation Entity Reference</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see io.opencaesar.oml.impl.RelationEntityReferenceImpl
+	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRelationEntityReference()
+	 * @generated
+	 */
+	int RELATION_ENTITY_REFERENCE = 102;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_ENTITY_REFERENCE__OWNED_ANNOTATIONS = ENTITY_REFERENCE__OWNED_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owning Vocabulary</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_ENTITY_REFERENCE__OWNING_VOCABULARY = ENTITY_REFERENCE__OWNING_VOCABULARY;
+
+	/**
+	 * The feature id for the '<em><b>Owned Specializations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_ENTITY_REFERENCE__OWNED_SPECIALIZATIONS = ENTITY_REFERENCE__OWNED_SPECIALIZATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Property Restrictions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_ENTITY_REFERENCE__OWNED_PROPERTY_RESTRICTIONS = ENTITY_REFERENCE__OWNED_PROPERTY_RESTRICTIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Relation Restrictions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_ENTITY_REFERENCE__OWNED_RELATION_RESTRICTIONS = ENTITY_REFERENCE__OWNED_RELATION_RESTRICTIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Keys</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_ENTITY_REFERENCE__OWNED_KEYS = ENTITY_REFERENCE__OWNED_KEYS;
+
+	/**
+	 * The feature id for the '<em><b>Entity</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_ENTITY_REFERENCE__ENTITY = ENTITY_REFERENCE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Relation Entity Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_ENTITY_REFERENCE_FEATURE_COUNT = ENTITY_REFERENCE_FEATURE_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_ENTITY_REFERENCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = ENTITY_REFERENCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Get Ontology</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_ENTITY_REFERENCE___GET_ONTOLOGY = ENTITY_REFERENCE___GET_ONTOLOGY;
+
+	/**
+	 * The number of operations of the '<em>Relation Entity Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_ENTITY_REFERENCE_OPERATION_COUNT = ENTITY_REFERENCE_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link io.opencaesar.oml.impl.StructureReferenceImpl <em>Structure Reference</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see io.opencaesar.oml.impl.StructureReferenceImpl
+	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getStructureReference()
+	 * @generated
+	 */
+	int STRUCTURE_REFERENCE = 103;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURE_REFERENCE__OWNED_ANNOTATIONS = CLASSIFIER_REFERENCE__OWNED_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owning Vocabulary</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURE_REFERENCE__OWNING_VOCABULARY = CLASSIFIER_REFERENCE__OWNING_VOCABULARY;
+
+	/**
+	 * The feature id for the '<em><b>Owned Specializations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURE_REFERENCE__OWNED_SPECIALIZATIONS = CLASSIFIER_REFERENCE__OWNED_SPECIALIZATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Property Restrictions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURE_REFERENCE__OWNED_PROPERTY_RESTRICTIONS = CLASSIFIER_REFERENCE__OWNED_PROPERTY_RESTRICTIONS;
+
+	/**
+	 * The feature id for the '<em><b>Structure</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURE_REFERENCE__STRUCTURE = CLASSIFIER_REFERENCE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Structure Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURE_REFERENCE_FEATURE_COUNT = CLASSIFIER_REFERENCE_FEATURE_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURE_REFERENCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = CLASSIFIER_REFERENCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Get Ontology</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURE_REFERENCE___GET_ONTOLOGY = CLASSIFIER_REFERENCE___GET_ONTOLOGY;
+
+	/**
+	 * The number of operations of the '<em>Structure Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURE_REFERENCE_OPERATION_COUNT = CLASSIFIER_REFERENCE_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link io.opencaesar.oml.impl.AnnotationPropertyReferenceImpl <em>Annotation Property Reference</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see io.opencaesar.oml.impl.AnnotationPropertyReferenceImpl
+	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getAnnotationPropertyReference()
+	 * @generated
+	 */
+	int ANNOTATION_PROPERTY_REFERENCE = 104;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANNOTATION_PROPERTY_REFERENCE__OWNED_ANNOTATIONS = SPECIALIZABLE_TERM_REFERENCE__OWNED_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owning Vocabulary</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANNOTATION_PROPERTY_REFERENCE__OWNING_VOCABULARY = SPECIALIZABLE_TERM_REFERENCE__OWNING_VOCABULARY;
+
+	/**
+	 * The feature id for the '<em><b>Owned Specializations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANNOTATION_PROPERTY_REFERENCE__OWNED_SPECIALIZATIONS = SPECIALIZABLE_TERM_REFERENCE__OWNED_SPECIALIZATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Property</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANNOTATION_PROPERTY_REFERENCE__PROPERTY = SPECIALIZABLE_TERM_REFERENCE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Annotation Property Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANNOTATION_PROPERTY_REFERENCE_FEATURE_COUNT = SPECIALIZABLE_TERM_REFERENCE_FEATURE_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANNOTATION_PROPERTY_REFERENCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = SPECIALIZABLE_TERM_REFERENCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Get Ontology</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANNOTATION_PROPERTY_REFERENCE___GET_ONTOLOGY = SPECIALIZABLE_TERM_REFERENCE___GET_ONTOLOGY;
+
+	/**
+	 * The number of operations of the '<em>Annotation Property Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANNOTATION_PROPERTY_REFERENCE_OPERATION_COUNT = SPECIALIZABLE_TERM_REFERENCE_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link io.opencaesar.oml.impl.ScalarPropertyReferenceImpl <em>Scalar Property Reference</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see io.opencaesar.oml.impl.ScalarPropertyReferenceImpl
+	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getScalarPropertyReference()
+	 * @generated
+	 */
+	int SCALAR_PROPERTY_REFERENCE = 105;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALAR_PROPERTY_REFERENCE__OWNED_ANNOTATIONS = SPECIALIZABLE_TERM_REFERENCE__OWNED_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owning Vocabulary</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALAR_PROPERTY_REFERENCE__OWNING_VOCABULARY = SPECIALIZABLE_TERM_REFERENCE__OWNING_VOCABULARY;
+
+	/**
+	 * The feature id for the '<em><b>Owned Specializations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALAR_PROPERTY_REFERENCE__OWNED_SPECIALIZATIONS = SPECIALIZABLE_TERM_REFERENCE__OWNED_SPECIALIZATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Property</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALAR_PROPERTY_REFERENCE__PROPERTY = SPECIALIZABLE_TERM_REFERENCE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Scalar Property Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALAR_PROPERTY_REFERENCE_FEATURE_COUNT = SPECIALIZABLE_TERM_REFERENCE_FEATURE_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALAR_PROPERTY_REFERENCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = SPECIALIZABLE_TERM_REFERENCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Get Ontology</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALAR_PROPERTY_REFERENCE___GET_ONTOLOGY = SPECIALIZABLE_TERM_REFERENCE___GET_ONTOLOGY;
+
+	/**
+	 * The number of operations of the '<em>Scalar Property Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALAR_PROPERTY_REFERENCE_OPERATION_COUNT = SPECIALIZABLE_TERM_REFERENCE_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link io.opencaesar.oml.impl.StructuredPropertyReferenceImpl <em>Structured Property Reference</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see io.opencaesar.oml.impl.StructuredPropertyReferenceImpl
+	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getStructuredPropertyReference()
+	 * @generated
+	 */
+	int STRUCTURED_PROPERTY_REFERENCE = 106;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURED_PROPERTY_REFERENCE__OWNED_ANNOTATIONS = SPECIALIZABLE_TERM_REFERENCE__OWNED_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owning Vocabulary</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURED_PROPERTY_REFERENCE__OWNING_VOCABULARY = SPECIALIZABLE_TERM_REFERENCE__OWNING_VOCABULARY;
+
+	/**
+	 * The feature id for the '<em><b>Owned Specializations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURED_PROPERTY_REFERENCE__OWNED_SPECIALIZATIONS = SPECIALIZABLE_TERM_REFERENCE__OWNED_SPECIALIZATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Property</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURED_PROPERTY_REFERENCE__PROPERTY = SPECIALIZABLE_TERM_REFERENCE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Structured Property Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURED_PROPERTY_REFERENCE_FEATURE_COUNT = SPECIALIZABLE_TERM_REFERENCE_FEATURE_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURED_PROPERTY_REFERENCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = SPECIALIZABLE_TERM_REFERENCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Get Ontology</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURED_PROPERTY_REFERENCE___GET_ONTOLOGY = SPECIALIZABLE_TERM_REFERENCE___GET_ONTOLOGY;
+
+	/**
+	 * The number of operations of the '<em>Structured Property Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURED_PROPERTY_REFERENCE_OPERATION_COUNT = SPECIALIZABLE_TERM_REFERENCE_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link io.opencaesar.oml.impl.FacetedScalarReferenceImpl <em>Faceted Scalar Reference</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see io.opencaesar.oml.impl.FacetedScalarReferenceImpl
+	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getFacetedScalarReference()
+	 * @generated
+	 */
+	int FACETED_SCALAR_REFERENCE = 107;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FACETED_SCALAR_REFERENCE__OWNED_ANNOTATIONS = SPECIALIZABLE_TERM_REFERENCE__OWNED_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owning Vocabulary</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FACETED_SCALAR_REFERENCE__OWNING_VOCABULARY = SPECIALIZABLE_TERM_REFERENCE__OWNING_VOCABULARY;
+
+	/**
+	 * The feature id for the '<em><b>Owned Specializations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FACETED_SCALAR_REFERENCE__OWNED_SPECIALIZATIONS = SPECIALIZABLE_TERM_REFERENCE__OWNED_SPECIALIZATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Scalar</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FACETED_SCALAR_REFERENCE__SCALAR = SPECIALIZABLE_TERM_REFERENCE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Faceted Scalar Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FACETED_SCALAR_REFERENCE_FEATURE_COUNT = SPECIALIZABLE_TERM_REFERENCE_FEATURE_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FACETED_SCALAR_REFERENCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = SPECIALIZABLE_TERM_REFERENCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Get Ontology</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FACETED_SCALAR_REFERENCE___GET_ONTOLOGY = SPECIALIZABLE_TERM_REFERENCE___GET_ONTOLOGY;
+
+	/**
+	 * The number of operations of the '<em>Faceted Scalar Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FACETED_SCALAR_REFERENCE_OPERATION_COUNT = SPECIALIZABLE_TERM_REFERENCE_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link io.opencaesar.oml.impl.EnumeratedScalarReferenceImpl <em>Enumerated Scalar Reference</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see io.opencaesar.oml.impl.EnumeratedScalarReferenceImpl
+	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getEnumeratedScalarReference()
+	 * @generated
+	 */
+	int ENUMERATED_SCALAR_REFERENCE = 108;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUMERATED_SCALAR_REFERENCE__OWNED_ANNOTATIONS = SPECIALIZABLE_TERM_REFERENCE__OWNED_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owning Vocabulary</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUMERATED_SCALAR_REFERENCE__OWNING_VOCABULARY = SPECIALIZABLE_TERM_REFERENCE__OWNING_VOCABULARY;
+
+	/**
+	 * The feature id for the '<em><b>Owned Specializations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUMERATED_SCALAR_REFERENCE__OWNED_SPECIALIZATIONS = SPECIALIZABLE_TERM_REFERENCE__OWNED_SPECIALIZATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Scalar</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUMERATED_SCALAR_REFERENCE__SCALAR = SPECIALIZABLE_TERM_REFERENCE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Enumerated Scalar Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUMERATED_SCALAR_REFERENCE_FEATURE_COUNT = SPECIALIZABLE_TERM_REFERENCE_FEATURE_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUMERATED_SCALAR_REFERENCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = SPECIALIZABLE_TERM_REFERENCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Get Ontology</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUMERATED_SCALAR_REFERENCE___GET_ONTOLOGY = SPECIALIZABLE_TERM_REFERENCE___GET_ONTOLOGY;
+
+	/**
+	 * The number of operations of the '<em>Enumerated Scalar Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUMERATED_SCALAR_REFERENCE_OPERATION_COUNT = SPECIALIZABLE_TERM_REFERENCE_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link io.opencaesar.oml.impl.RelationReferenceImpl <em>Relation Reference</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see io.opencaesar.oml.impl.RelationReferenceImpl
+	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRelationReference()
+	 * @generated
+	 */
+	int RELATION_REFERENCE = 109;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_REFERENCE__OWNED_ANNOTATIONS = REFERENCE__OWNED_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owning Vocabulary</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_REFERENCE__OWNING_VOCABULARY = REFERENCE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Relation</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_REFERENCE__RELATION = REFERENCE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Relation Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_REFERENCE_FEATURE_COUNT = REFERENCE_FEATURE_COUNT + 2;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_REFERENCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = REFERENCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Get Ontology</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_REFERENCE___GET_ONTOLOGY = REFERENCE___GET_ONTOLOGY;
+
+	/**
+	 * The number of operations of the '<em>Relation Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_REFERENCE_OPERATION_COUNT = REFERENCE_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link io.opencaesar.oml.impl.RuleReferenceImpl <em>Rule Reference</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see io.opencaesar.oml.impl.RuleReferenceImpl
+	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRuleReference()
+	 * @generated
+	 */
+	int RULE_REFERENCE = 110;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RULE_REFERENCE__OWNED_ANNOTATIONS = REFERENCE__OWNED_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owning Vocabulary</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RULE_REFERENCE__OWNING_VOCABULARY = REFERENCE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Rule</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RULE_REFERENCE__RULE = REFERENCE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Rule Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RULE_REFERENCE_FEATURE_COUNT = REFERENCE_FEATURE_COUNT + 2;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RULE_REFERENCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = REFERENCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Get Ontology</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RULE_REFERENCE___GET_ONTOLOGY = REFERENCE___GET_ONTOLOGY;
+
+	/**
+	 * The number of operations of the '<em>Rule Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RULE_REFERENCE_OPERATION_COUNT = REFERENCE_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link io.opencaesar.oml.impl.NamedInstanceReferenceImpl <em>Named Instance Reference</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see io.opencaesar.oml.impl.NamedInstanceReferenceImpl
+	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getNamedInstanceReference()
+	 * @generated
+	 */
+	int NAMED_INSTANCE_REFERENCE = 111;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAMED_INSTANCE_REFERENCE__OWNED_ANNOTATIONS = REFERENCE__OWNED_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owning Description</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAMED_INSTANCE_REFERENCE__OWNING_DESCRIPTION = REFERENCE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Owned Property Values</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAMED_INSTANCE_REFERENCE__OWNED_PROPERTY_VALUES = REFERENCE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Owned Links</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAMED_INSTANCE_REFERENCE__OWNED_LINKS = REFERENCE_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>Named Instance Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAMED_INSTANCE_REFERENCE_FEATURE_COUNT = REFERENCE_FEATURE_COUNT + 3;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAMED_INSTANCE_REFERENCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = REFERENCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Get Ontology</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAMED_INSTANCE_REFERENCE___GET_ONTOLOGY = REFERENCE___GET_ONTOLOGY;
+
+	/**
+	 * The number of operations of the '<em>Named Instance Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAMED_INSTANCE_REFERENCE_OPERATION_COUNT = REFERENCE_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link io.opencaesar.oml.impl.ConceptInstanceReferenceImpl <em>Concept Instance Reference</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see io.opencaesar.oml.impl.ConceptInstanceReferenceImpl
+	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getConceptInstanceReference()
+	 * @generated
+	 */
+	int CONCEPT_INSTANCE_REFERENCE = 112;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONCEPT_INSTANCE_REFERENCE__OWNED_ANNOTATIONS = NAMED_INSTANCE_REFERENCE__OWNED_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owning Description</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONCEPT_INSTANCE_REFERENCE__OWNING_DESCRIPTION = NAMED_INSTANCE_REFERENCE__OWNING_DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Owned Property Values</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONCEPT_INSTANCE_REFERENCE__OWNED_PROPERTY_VALUES = NAMED_INSTANCE_REFERENCE__OWNED_PROPERTY_VALUES;
+
+	/**
+	 * The feature id for the '<em><b>Owned Links</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONCEPT_INSTANCE_REFERENCE__OWNED_LINKS = NAMED_INSTANCE_REFERENCE__OWNED_LINKS;
+
+	/**
+	 * The feature id for the '<em><b>Instance</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONCEPT_INSTANCE_REFERENCE__INSTANCE = NAMED_INSTANCE_REFERENCE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Owned Types</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONCEPT_INSTANCE_REFERENCE__OWNED_TYPES = NAMED_INSTANCE_REFERENCE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Concept Instance Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONCEPT_INSTANCE_REFERENCE_FEATURE_COUNT = NAMED_INSTANCE_REFERENCE_FEATURE_COUNT + 2;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONCEPT_INSTANCE_REFERENCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = NAMED_INSTANCE_REFERENCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Get Ontology</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONCEPT_INSTANCE_REFERENCE___GET_ONTOLOGY = NAMED_INSTANCE_REFERENCE___GET_ONTOLOGY;
+
+	/**
+	 * The number of operations of the '<em>Concept Instance Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONCEPT_INSTANCE_REFERENCE_OPERATION_COUNT = NAMED_INSTANCE_REFERENCE_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link io.opencaesar.oml.impl.RelationInstanceReferenceImpl <em>Relation Instance Reference</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see io.opencaesar.oml.impl.RelationInstanceReferenceImpl
+	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRelationInstanceReference()
+	 * @generated
+	 */
+	int RELATION_INSTANCE_REFERENCE = 113;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_INSTANCE_REFERENCE__OWNED_ANNOTATIONS = NAMED_INSTANCE_REFERENCE__OWNED_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owning Description</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_INSTANCE_REFERENCE__OWNING_DESCRIPTION = NAMED_INSTANCE_REFERENCE__OWNING_DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Owned Property Values</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_INSTANCE_REFERENCE__OWNED_PROPERTY_VALUES = NAMED_INSTANCE_REFERENCE__OWNED_PROPERTY_VALUES;
+
+	/**
+	 * The feature id for the '<em><b>Owned Links</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_INSTANCE_REFERENCE__OWNED_LINKS = NAMED_INSTANCE_REFERENCE__OWNED_LINKS;
+
+	/**
+	 * The feature id for the '<em><b>Instance</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_INSTANCE_REFERENCE__INSTANCE = NAMED_INSTANCE_REFERENCE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Owned Types</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_INSTANCE_REFERENCE__OWNED_TYPES = NAMED_INSTANCE_REFERENCE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Relation Instance Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_INSTANCE_REFERENCE_FEATURE_COUNT = NAMED_INSTANCE_REFERENCE_FEATURE_COUNT + 2;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_INSTANCE_REFERENCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = NAMED_INSTANCE_REFERENCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Get Ontology</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_INSTANCE_REFERENCE___GET_ONTOLOGY = NAMED_INSTANCE_REFERENCE___GET_ONTOLOGY;
+
+	/**
+	 * The number of operations of the '<em>Relation Instance Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_INSTANCE_REFERENCE_OPERATION_COUNT = NAMED_INSTANCE_REFERENCE_OPERATION_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.SeparatorKind <em>Separator Kind</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -10499,7 +10482,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getSeparatorKind()
 	 * @generated
 	 */
-	int SEPARATOR_KIND = 113;
+	int SEPARATOR_KIND = 114;
 
 	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.RangeRestrictionKind <em>Range Restriction Kind</em>}' enum.
@@ -10509,7 +10492,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRangeRestrictionKind()
 	 * @generated
 	 */
-	int RANGE_RESTRICTION_KIND = 114;
+	int RANGE_RESTRICTION_KIND = 115;
 
 	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.CardinalityRestrictionKind <em>Cardinality Restriction Kind</em>}' enum.
@@ -10519,7 +10502,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getCardinalityRestrictionKind()
 	 * @generated
 	 */
-	int CARDINALITY_RESTRICTION_KIND = 115;
+	int CARDINALITY_RESTRICTION_KIND = 116;
 
 	/**
 	 * The meta object id for the '<em>Unsigned Int</em>' data type.
@@ -10528,7 +10511,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getUnsignedInt()
 	 * @generated
 	 */
-	int UNSIGNED_INT = 116;
+	int UNSIGNED_INT = 117;
 
 	/**
 	 * The meta object id for the '<em>Unsigned Integer</em>' data type.
@@ -10538,7 +10521,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getUnsignedInteger()
 	 * @generated
 	 */
-	int UNSIGNED_INTEGER = 117;
+	int UNSIGNED_INTEGER = 118;
 
 	/**
 	 * The meta object id for the '<em>Decimal</em>' data type.
@@ -10548,7 +10531,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDecimal()
 	 * @generated
 	 */
-	int DECIMAL = 118;
+	int DECIMAL = 119;
 
 	/**
 	 * The meta object id for the '<em>ID</em>' data type.
@@ -10558,7 +10541,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getID()
 	 * @generated
 	 */
-	int ID = 119;
+	int ID = 120;
 
 	/**
 	 * The meta object id for the '<em>Namespace</em>' data type.
@@ -10568,7 +10551,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getNamespace()
 	 * @generated
 	 */
-	int NAMESPACE = 120;
+	int NAMESPACE = 121;
 
 
 	/**
@@ -10667,27 +10650,6 @@ public interface OmlPackage extends EPackage {
 	EReference getAnnotation_OwningReference();
 
 	/**
-	 * Returns the meta object for class '{@link io.opencaesar.oml.AnnotatedElement <em>Annotated Element</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Annotated Element</em>'.
-	 * @see io.opencaesar.oml.AnnotatedElement
-	 * @generated
-	 */
-	EClass getAnnotatedElement();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link io.opencaesar.oml.AnnotatedElement#getOwnedAnnotations <em>Owned Annotations</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Owned Annotations</em>'.
-	 * @see io.opencaesar.oml.AnnotatedElement#getOwnedAnnotations()
-	 * @see #getAnnotatedElement()
-	 * @generated
-	 */
-	EReference getAnnotatedElement_OwnedAnnotations();
-
-	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.IdentifiedElement <em>Identified Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -10698,6 +10660,17 @@ public interface OmlPackage extends EPackage {
 	EClass getIdentifiedElement();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link io.opencaesar.oml.IdentifiedElement#getOwnedAnnotations <em>Owned Annotations</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Owned Annotations</em>'.
+	 * @see io.opencaesar.oml.IdentifiedElement#getOwnedAnnotations()
+	 * @see #getIdentifiedElement()
+	 * @generated
+	 */
+	EReference getIdentifiedElement_OwnedAnnotations();
+
+	/**
 	 * Returns the meta object for the '{@link io.opencaesar.oml.IdentifiedElement#getIri() <em>Get Iri</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -10706,6 +10679,151 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 */
 	EOperation getIdentifiedElement__GetIri();
+
+	/**
+	 * Returns the meta object for class '{@link io.opencaesar.oml.Import <em>Import</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Import</em>'.
+	 * @see io.opencaesar.oml.Import
+	 * @generated
+	 */
+	EClass getImport();
+
+	/**
+	 * Returns the meta object for the attribute '{@link io.opencaesar.oml.Import#getNamespace <em>Namespace</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Namespace</em>'.
+	 * @see io.opencaesar.oml.Import#getNamespace()
+	 * @see #getImport()
+	 * @generated
+	 */
+	EAttribute getImport_Namespace();
+
+	/**
+	 * Returns the meta object for the attribute '{@link io.opencaesar.oml.Import#getPrefix <em>Prefix</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Prefix</em>'.
+	 * @see io.opencaesar.oml.Import#getPrefix()
+	 * @see #getImport()
+	 * @generated
+	 */
+	EAttribute getImport_Prefix();
+
+	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.Import#getIri() <em>Get Iri</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Iri</em>' operation.
+	 * @see io.opencaesar.oml.Import#getIri()
+	 * @generated
+	 */
+	EOperation getImport__GetIri();
+
+	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.Import#getSeparator() <em>Get Separator</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Separator</em>' operation.
+	 * @see io.opencaesar.oml.Import#getSeparator()
+	 * @generated
+	 */
+	EOperation getImport__GetSeparator();
+
+	/**
+	 * Returns the meta object for class '{@link io.opencaesar.oml.Instance <em>Instance</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Instance</em>'.
+	 * @see io.opencaesar.oml.Instance
+	 * @generated
+	 */
+	EClass getInstance();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link io.opencaesar.oml.Instance#getOwnedPropertyValues <em>Owned Property Values</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Owned Property Values</em>'.
+	 * @see io.opencaesar.oml.Instance#getOwnedPropertyValues()
+	 * @see #getInstance()
+	 * @generated
+	 */
+	EReference getInstance_OwnedPropertyValues();
+
+	/**
+	 * Returns the meta object for class '{@link io.opencaesar.oml.Statement <em>Statement</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Statement</em>'.
+	 * @see io.opencaesar.oml.Statement
+	 * @generated
+	 */
+	EClass getStatement();
+
+	/**
+	 * Returns the meta object for class '{@link io.opencaesar.oml.Axiom <em>Axiom</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Axiom</em>'.
+	 * @see io.opencaesar.oml.Axiom
+	 * @generated
+	 */
+	EClass getAxiom();
+
+	/**
+	 * Returns the meta object for class '{@link io.opencaesar.oml.Assertion <em>Assertion</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Assertion</em>'.
+	 * @see io.opencaesar.oml.Assertion
+	 * @generated
+	 */
+	EClass getAssertion();
+
+	/**
+	 * Returns the meta object for class '{@link io.opencaesar.oml.Predicate <em>Predicate</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Predicate</em>'.
+	 * @see io.opencaesar.oml.Predicate
+	 * @generated
+	 */
+	EClass getPredicate();
+
+	/**
+	 * Returns the meta object for the container reference '{@link io.opencaesar.oml.Predicate#getAntecedentRule <em>Antecedent Rule</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Antecedent Rule</em>'.
+	 * @see io.opencaesar.oml.Predicate#getAntecedentRule()
+	 * @see #getPredicate()
+	 * @generated
+	 */
+	EReference getPredicate_AntecedentRule();
+
+	/**
+	 * Returns the meta object for the container reference '{@link io.opencaesar.oml.Predicate#getConsequentRule <em>Consequent Rule</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Consequent Rule</em>'.
+	 * @see io.opencaesar.oml.Predicate#getConsequentRule()
+	 * @see #getPredicate()
+	 * @generated
+	 */
+	EReference getPredicate_ConsequentRule();
+
+	/**
+	 * Returns the meta object for class '{@link io.opencaesar.oml.Literal <em>Literal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Literal</em>'.
+	 * @see io.opencaesar.oml.Literal
+	 * @generated
+	 */
+	EClass getLiteral();
 
 	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.Ontology <em>Ontology</em>}'.
@@ -10760,6 +10878,47 @@ public interface OmlPackage extends EPackage {
 	EOperation getOntology__GetSeparator();
 
 	/**
+	 * Returns the meta object for class '{@link io.opencaesar.oml.Member <em>Member</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Member</em>'.
+	 * @see io.opencaesar.oml.Member
+	 * @generated
+	 */
+	EClass getMember();
+
+	/**
+	 * Returns the meta object for the attribute '{@link io.opencaesar.oml.Member#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see io.opencaesar.oml.Member#getName()
+	 * @see #getMember()
+	 * @generated
+	 */
+	EAttribute getMember_Name();
+
+	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.Member#getIri() <em>Get Iri</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Iri</em>' operation.
+	 * @see io.opencaesar.oml.Member#getIri()
+	 * @generated
+	 */
+	EOperation getMember__GetIri();
+
+	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.Member#getAbbreviatedIri() <em>Get Abbreviated Iri</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Abbreviated Iri</em>' operation.
+	 * @see io.opencaesar.oml.Member#getAbbreviatedIri()
+	 * @generated
+	 */
+	EOperation getMember__GetAbbreviatedIri();
+
+	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.VocabularyBox <em>Vocabulary Box</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -10768,6 +10927,16 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getVocabularyBox();
+
+	/**
+	 * Returns the meta object for class '{@link io.opencaesar.oml.DescriptionBox <em>Description Box</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Description Box</em>'.
+	 * @see io.opencaesar.oml.DescriptionBox
+	 * @generated
+	 */
+	EClass getDescriptionBox();
 
 	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.Vocabulary <em>Vocabulary</em>}'.
@@ -10823,16 +10992,6 @@ public interface OmlPackage extends EPackage {
 	EReference getVocabularyBundle_OwnedImports();
 
 	/**
-	 * Returns the meta object for class '{@link io.opencaesar.oml.DescriptionBox <em>Description Box</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Description Box</em>'.
-	 * @see io.opencaesar.oml.DescriptionBox
-	 * @generated
-	 */
-	EClass getDescriptionBox();
-
-	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.Description <em>Description</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -10886,45 +11045,240 @@ public interface OmlPackage extends EPackage {
 	EReference getDescriptionBundle_OwnedImports();
 
 	/**
-	 * Returns the meta object for class '{@link io.opencaesar.oml.Member <em>Member</em>}'.
+	 * Returns the meta object for class '{@link io.opencaesar.oml.VocabularyImport <em>Vocabulary Import</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Member</em>'.
-	 * @see io.opencaesar.oml.Member
+	 * @return the meta object for class '<em>Vocabulary Import</em>'.
+	 * @see io.opencaesar.oml.VocabularyImport
 	 * @generated
 	 */
-	EClass getMember();
+	EClass getVocabularyImport();
 
 	/**
-	 * Returns the meta object for the attribute '{@link io.opencaesar.oml.Member#getName <em>Name</em>}'.
+	 * Returns the meta object for the container reference '{@link io.opencaesar.oml.VocabularyImport#getOwningVocabulary <em>Owning Vocabulary</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see io.opencaesar.oml.Member#getName()
-	 * @see #getMember()
+	 * @return the meta object for the container reference '<em>Owning Vocabulary</em>'.
+	 * @see io.opencaesar.oml.VocabularyImport#getOwningVocabulary()
+	 * @see #getVocabularyImport()
 	 * @generated
 	 */
-	EAttribute getMember_Name();
+	EReference getVocabularyImport_OwningVocabulary();
 
 	/**
-	 * Returns the meta object for the '{@link io.opencaesar.oml.Member#getIri() <em>Get Iri</em>}' operation.
+	 * Returns the meta object for class '{@link io.opencaesar.oml.VocabularyBundleImport <em>Vocabulary Bundle Import</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Get Iri</em>' operation.
-	 * @see io.opencaesar.oml.Member#getIri()
+	 * @return the meta object for class '<em>Vocabulary Bundle Import</em>'.
+	 * @see io.opencaesar.oml.VocabularyBundleImport
 	 * @generated
 	 */
-	EOperation getMember__GetIri();
+	EClass getVocabularyBundleImport();
 
 	/**
-	 * Returns the meta object for the '{@link io.opencaesar.oml.Member#getAbbreviatedIri() <em>Get Abbreviated Iri</em>}' operation.
+	 * Returns the meta object for the container reference '{@link io.opencaesar.oml.VocabularyBundleImport#getOwningVocabularyBundle <em>Owning Vocabulary Bundle</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Get Abbreviated Iri</em>' operation.
-	 * @see io.opencaesar.oml.Member#getAbbreviatedIri()
+	 * @return the meta object for the container reference '<em>Owning Vocabulary Bundle</em>'.
+	 * @see io.opencaesar.oml.VocabularyBundleImport#getOwningVocabularyBundle()
+	 * @see #getVocabularyBundleImport()
 	 * @generated
 	 */
-	EOperation getMember__GetAbbreviatedIri();
+	EReference getVocabularyBundleImport_OwningVocabularyBundle();
+
+	/**
+	 * Returns the meta object for class '{@link io.opencaesar.oml.DescriptionImport <em>Description Import</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Description Import</em>'.
+	 * @see io.opencaesar.oml.DescriptionImport
+	 * @generated
+	 */
+	EClass getDescriptionImport();
+
+	/**
+	 * Returns the meta object for the container reference '{@link io.opencaesar.oml.DescriptionImport#getOwningDescription <em>Owning Description</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Owning Description</em>'.
+	 * @see io.opencaesar.oml.DescriptionImport#getOwningDescription()
+	 * @see #getDescriptionImport()
+	 * @generated
+	 */
+	EReference getDescriptionImport_OwningDescription();
+
+	/**
+	 * Returns the meta object for class '{@link io.opencaesar.oml.DescriptionBundleImport <em>Description Bundle Import</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Description Bundle Import</em>'.
+	 * @see io.opencaesar.oml.DescriptionBundleImport
+	 * @generated
+	 */
+	EClass getDescriptionBundleImport();
+
+	/**
+	 * Returns the meta object for the container reference '{@link io.opencaesar.oml.DescriptionBundleImport#getOwningDescriptionBundle <em>Owning Description Bundle</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Owning Description Bundle</em>'.
+	 * @see io.opencaesar.oml.DescriptionBundleImport#getOwningDescriptionBundle()
+	 * @see #getDescriptionBundleImport()
+	 * @generated
+	 */
+	EReference getDescriptionBundleImport_OwningDescriptionBundle();
+
+	/**
+	 * Returns the meta object for class '{@link io.opencaesar.oml.VocabularyExtension <em>Vocabulary Extension</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Vocabulary Extension</em>'.
+	 * @see io.opencaesar.oml.VocabularyExtension
+	 * @generated
+	 */
+	EClass getVocabularyExtension();
+
+	/**
+	 * Returns the meta object for class '{@link io.opencaesar.oml.VocabularyUsage <em>Vocabulary Usage</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Vocabulary Usage</em>'.
+	 * @see io.opencaesar.oml.VocabularyUsage
+	 * @generated
+	 */
+	EClass getVocabularyUsage();
+
+	/**
+	 * Returns the meta object for class '{@link io.opencaesar.oml.VocabularyBundleExtension <em>Vocabulary Bundle Extension</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Vocabulary Bundle Extension</em>'.
+	 * @see io.opencaesar.oml.VocabularyBundleExtension
+	 * @generated
+	 */
+	EClass getVocabularyBundleExtension();
+
+	/**
+	 * Returns the meta object for class '{@link io.opencaesar.oml.VocabularyBundleInclusion <em>Vocabulary Bundle Inclusion</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Vocabulary Bundle Inclusion</em>'.
+	 * @see io.opencaesar.oml.VocabularyBundleInclusion
+	 * @generated
+	 */
+	EClass getVocabularyBundleInclusion();
+
+	/**
+	 * Returns the meta object for class '{@link io.opencaesar.oml.DescriptionExtension <em>Description Extension</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Description Extension</em>'.
+	 * @see io.opencaesar.oml.DescriptionExtension
+	 * @generated
+	 */
+	EClass getDescriptionExtension();
+
+	/**
+	 * Returns the meta object for class '{@link io.opencaesar.oml.DescriptionUsage <em>Description Usage</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Description Usage</em>'.
+	 * @see io.opencaesar.oml.DescriptionUsage
+	 * @generated
+	 */
+	EClass getDescriptionUsage();
+
+	/**
+	 * Returns the meta object for class '{@link io.opencaesar.oml.DescriptionBundleExtension <em>Description Bundle Extension</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Description Bundle Extension</em>'.
+	 * @see io.opencaesar.oml.DescriptionBundleExtension
+	 * @generated
+	 */
+	EClass getDescriptionBundleExtension();
+
+	/**
+	 * Returns the meta object for class '{@link io.opencaesar.oml.DescriptionBundleInclusion <em>Description Bundle Inclusion</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Description Bundle Inclusion</em>'.
+	 * @see io.opencaesar.oml.DescriptionBundleInclusion
+	 * @generated
+	 */
+	EClass getDescriptionBundleInclusion();
+
+	/**
+	 * Returns the meta object for class '{@link io.opencaesar.oml.DescriptionBundleUsage <em>Description Bundle Usage</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Description Bundle Usage</em>'.
+	 * @see io.opencaesar.oml.DescriptionBundleUsage
+	 * @generated
+	 */
+	EClass getDescriptionBundleUsage();
+
+	/**
+	 * Returns the meta object for class '{@link io.opencaesar.oml.VocabularyStatement <em>Vocabulary Statement</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Vocabulary Statement</em>'.
+	 * @see io.opencaesar.oml.VocabularyStatement
+	 * @generated
+	 */
+	EClass getVocabularyStatement();
+
+	/**
+	 * Returns the meta object for the container reference '{@link io.opencaesar.oml.VocabularyStatement#getOwningVocabulary <em>Owning Vocabulary</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Owning Vocabulary</em>'.
+	 * @see io.opencaesar.oml.VocabularyStatement#getOwningVocabulary()
+	 * @see #getVocabularyStatement()
+	 * @generated
+	 */
+	EReference getVocabularyStatement_OwningVocabulary();
+
+	/**
+	 * Returns the meta object for class '{@link io.opencaesar.oml.DescriptionStatement <em>Description Statement</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Description Statement</em>'.
+	 * @see io.opencaesar.oml.DescriptionStatement
+	 * @generated
+	 */
+	EClass getDescriptionStatement();
+
+	/**
+	 * Returns the meta object for the container reference '{@link io.opencaesar.oml.DescriptionStatement#getOwningDescription <em>Owning Description</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Owning Description</em>'.
+	 * @see io.opencaesar.oml.DescriptionStatement#getOwningDescription()
+	 * @see #getDescriptionStatement()
+	 * @generated
+	 */
+	EReference getDescriptionStatement_OwningDescription();
+
+	/**
+	 * Returns the meta object for class '{@link io.opencaesar.oml.VocabularyMember <em>Vocabulary Member</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Vocabulary Member</em>'.
+	 * @see io.opencaesar.oml.VocabularyMember
+	 * @generated
+	 */
+	EClass getVocabularyMember();
+
+	/**
+	 * Returns the meta object for class '{@link io.opencaesar.oml.DescriptionMember <em>Description Member</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Description Member</em>'.
+	 * @see io.opencaesar.oml.DescriptionMember
+	 * @generated
+	 */
+	EClass getDescriptionMember();
 
 	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.Term <em>Term</em>}'.
@@ -10935,6 +11289,38 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getTerm();
+
+	/**
+	 * Returns the meta object for class '{@link io.opencaesar.oml.Rule <em>Rule</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Rule</em>'.
+	 * @see io.opencaesar.oml.Rule
+	 * @generated
+	 */
+	EClass getRule();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link io.opencaesar.oml.Rule#getAntecedent <em>Antecedent</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Antecedent</em>'.
+	 * @see io.opencaesar.oml.Rule#getAntecedent()
+	 * @see #getRule()
+	 * @generated
+	 */
+	EReference getRule_Antecedent();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link io.opencaesar.oml.Rule#getConsequent <em>Consequent</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Consequent</em>'.
+	 * @see io.opencaesar.oml.Rule#getConsequent()
+	 * @see #getRule()
+	 * @generated
+	 */
+	EReference getRule_Consequent();
 
 	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.SpecializableTerm <em>Specializable Term</em>}'.
@@ -10956,6 +11342,26 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getSpecializableTerm_OwnedSpecializations();
+
+	/**
+	 * Returns the meta object for class '{@link io.opencaesar.oml.Feature <em>Feature</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Feature</em>'.
+	 * @see io.opencaesar.oml.Feature
+	 * @generated
+	 */
+	EClass getFeature();
+
+	/**
+	 * Returns the meta object for class '{@link io.opencaesar.oml.Property <em>Property</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Property</em>'.
+	 * @see io.opencaesar.oml.Property
+	 * @generated
+	 */
+	EClass getProperty();
 
 	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.Type <em>Type</em>}'.
@@ -10989,6 +11395,16 @@ public interface OmlPackage extends EPackage {
 	EReference getClassifier_OwnedPropertyRestrictions();
 
 	/**
+	 * Returns the meta object for class '{@link io.opencaesar.oml.Scalar <em>Scalar</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Scalar</em>'.
+	 * @see io.opencaesar.oml.Scalar
+	 * @generated
+	 */
+	EClass getScalar();
+
+	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.Entity <em>Entity</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -11019,6 +11435,16 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getEntity_OwnedKeys();
+
+	/**
+	 * Returns the meta object for class '{@link io.opencaesar.oml.Structure <em>Structure</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Structure</em>'.
+	 * @see io.opencaesar.oml.Structure
+	 * @generated
+	 */
+	EClass getStructure();
 
 	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.Aspect <em>Aspect</em>}'.
@@ -11183,34 +11609,134 @@ public interface OmlPackage extends EPackage {
 	EAttribute getRelationEntity_Transitive();
 
 	/**
-	 * Returns the meta object for class '{@link io.opencaesar.oml.Structure <em>Structure</em>}'.
+	 * Returns the meta object for class '{@link io.opencaesar.oml.FacetedScalar <em>Faceted Scalar</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Structure</em>'.
-	 * @see io.opencaesar.oml.Structure
+	 * @return the meta object for class '<em>Faceted Scalar</em>'.
+	 * @see io.opencaesar.oml.FacetedScalar
 	 * @generated
 	 */
-	EClass getStructure();
+	EClass getFacetedScalar();
 
 	/**
-	 * Returns the meta object for class '{@link io.opencaesar.oml.Feature <em>Feature</em>}'.
+	 * Returns the meta object for the attribute '{@link io.opencaesar.oml.FacetedScalar#getLength <em>Length</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Feature</em>'.
-	 * @see io.opencaesar.oml.Feature
+	 * @return the meta object for the attribute '<em>Length</em>'.
+	 * @see io.opencaesar.oml.FacetedScalar#getLength()
+	 * @see #getFacetedScalar()
 	 * @generated
 	 */
-	EClass getFeature();
+	EAttribute getFacetedScalar_Length();
 
 	/**
-	 * Returns the meta object for class '{@link io.opencaesar.oml.Property <em>Property</em>}'.
+	 * Returns the meta object for the attribute '{@link io.opencaesar.oml.FacetedScalar#getMinLength <em>Min Length</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Property</em>'.
-	 * @see io.opencaesar.oml.Property
+	 * @return the meta object for the attribute '<em>Min Length</em>'.
+	 * @see io.opencaesar.oml.FacetedScalar#getMinLength()
+	 * @see #getFacetedScalar()
 	 * @generated
 	 */
-	EClass getProperty();
+	EAttribute getFacetedScalar_MinLength();
+
+	/**
+	 * Returns the meta object for the attribute '{@link io.opencaesar.oml.FacetedScalar#getMaxLength <em>Max Length</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Max Length</em>'.
+	 * @see io.opencaesar.oml.FacetedScalar#getMaxLength()
+	 * @see #getFacetedScalar()
+	 * @generated
+	 */
+	EAttribute getFacetedScalar_MaxLength();
+
+	/**
+	 * Returns the meta object for the attribute '{@link io.opencaesar.oml.FacetedScalar#getPattern <em>Pattern</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Pattern</em>'.
+	 * @see io.opencaesar.oml.FacetedScalar#getPattern()
+	 * @see #getFacetedScalar()
+	 * @generated
+	 */
+	EAttribute getFacetedScalar_Pattern();
+
+	/**
+	 * Returns the meta object for the attribute '{@link io.opencaesar.oml.FacetedScalar#getLanguage <em>Language</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Language</em>'.
+	 * @see io.opencaesar.oml.FacetedScalar#getLanguage()
+	 * @see #getFacetedScalar()
+	 * @generated
+	 */
+	EAttribute getFacetedScalar_Language();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link io.opencaesar.oml.FacetedScalar#getMinInclusive <em>Min Inclusive</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Min Inclusive</em>'.
+	 * @see io.opencaesar.oml.FacetedScalar#getMinInclusive()
+	 * @see #getFacetedScalar()
+	 * @generated
+	 */
+	EReference getFacetedScalar_MinInclusive();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link io.opencaesar.oml.FacetedScalar#getMinExclusive <em>Min Exclusive</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Min Exclusive</em>'.
+	 * @see io.opencaesar.oml.FacetedScalar#getMinExclusive()
+	 * @see #getFacetedScalar()
+	 * @generated
+	 */
+	EReference getFacetedScalar_MinExclusive();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link io.opencaesar.oml.FacetedScalar#getMaxInclusive <em>Max Inclusive</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Max Inclusive</em>'.
+	 * @see io.opencaesar.oml.FacetedScalar#getMaxInclusive()
+	 * @see #getFacetedScalar()
+	 * @generated
+	 */
+	EReference getFacetedScalar_MaxInclusive();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link io.opencaesar.oml.FacetedScalar#getMaxExclusive <em>Max Exclusive</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Max Exclusive</em>'.
+	 * @see io.opencaesar.oml.FacetedScalar#getMaxExclusive()
+	 * @see #getFacetedScalar()
+	 * @generated
+	 */
+	EReference getFacetedScalar_MaxExclusive();
+
+	/**
+	 * Returns the meta object for class '{@link io.opencaesar.oml.EnumeratedScalar <em>Enumerated Scalar</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Enumerated Scalar</em>'.
+	 * @see io.opencaesar.oml.EnumeratedScalar
+	 * @generated
+	 */
+	EClass getEnumeratedScalar();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link io.opencaesar.oml.EnumeratedScalar#getLiterals <em>Literals</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Literals</em>'.
+	 * @see io.opencaesar.oml.EnumeratedScalar#getLiterals()
+	 * @see #getEnumeratedScalar()
+	 * @generated
+	 */
+	EReference getEnumeratedScalar_Literals();
 
 	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.AnnotationProperty <em>Annotation Property</em>}'.
@@ -11347,146 +11873,6 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getStructuredProperty_Range();
-
-	/**
-	 * Returns the meta object for class '{@link io.opencaesar.oml.Scalar <em>Scalar</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Scalar</em>'.
-	 * @see io.opencaesar.oml.Scalar
-	 * @generated
-	 */
-	EClass getScalar();
-
-	/**
-	 * Returns the meta object for class '{@link io.opencaesar.oml.FacetedScalar <em>Faceted Scalar</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Faceted Scalar</em>'.
-	 * @see io.opencaesar.oml.FacetedScalar
-	 * @generated
-	 */
-	EClass getFacetedScalar();
-
-	/**
-	 * Returns the meta object for the attribute '{@link io.opencaesar.oml.FacetedScalar#getLength <em>Length</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Length</em>'.
-	 * @see io.opencaesar.oml.FacetedScalar#getLength()
-	 * @see #getFacetedScalar()
-	 * @generated
-	 */
-	EAttribute getFacetedScalar_Length();
-
-	/**
-	 * Returns the meta object for the attribute '{@link io.opencaesar.oml.FacetedScalar#getMinLength <em>Min Length</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Min Length</em>'.
-	 * @see io.opencaesar.oml.FacetedScalar#getMinLength()
-	 * @see #getFacetedScalar()
-	 * @generated
-	 */
-	EAttribute getFacetedScalar_MinLength();
-
-	/**
-	 * Returns the meta object for the attribute '{@link io.opencaesar.oml.FacetedScalar#getMaxLength <em>Max Length</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Max Length</em>'.
-	 * @see io.opencaesar.oml.FacetedScalar#getMaxLength()
-	 * @see #getFacetedScalar()
-	 * @generated
-	 */
-	EAttribute getFacetedScalar_MaxLength();
-
-	/**
-	 * Returns the meta object for the attribute '{@link io.opencaesar.oml.FacetedScalar#getPattern <em>Pattern</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Pattern</em>'.
-	 * @see io.opencaesar.oml.FacetedScalar#getPattern()
-	 * @see #getFacetedScalar()
-	 * @generated
-	 */
-	EAttribute getFacetedScalar_Pattern();
-
-	/**
-	 * Returns the meta object for the attribute '{@link io.opencaesar.oml.FacetedScalar#getLanguage <em>Language</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Language</em>'.
-	 * @see io.opencaesar.oml.FacetedScalar#getLanguage()
-	 * @see #getFacetedScalar()
-	 * @generated
-	 */
-	EAttribute getFacetedScalar_Language();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link io.opencaesar.oml.FacetedScalar#getMinInclusive <em>Min Inclusive</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Min Inclusive</em>'.
-	 * @see io.opencaesar.oml.FacetedScalar#getMinInclusive()
-	 * @see #getFacetedScalar()
-	 * @generated
-	 */
-	EReference getFacetedScalar_MinInclusive();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link io.opencaesar.oml.FacetedScalar#getMinExclusive <em>Min Exclusive</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Min Exclusive</em>'.
-	 * @see io.opencaesar.oml.FacetedScalar#getMinExclusive()
-	 * @see #getFacetedScalar()
-	 * @generated
-	 */
-	EReference getFacetedScalar_MinExclusive();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link io.opencaesar.oml.FacetedScalar#getMaxInclusive <em>Max Inclusive</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Max Inclusive</em>'.
-	 * @see io.opencaesar.oml.FacetedScalar#getMaxInclusive()
-	 * @see #getFacetedScalar()
-	 * @generated
-	 */
-	EReference getFacetedScalar_MaxInclusive();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link io.opencaesar.oml.FacetedScalar#getMaxExclusive <em>Max Exclusive</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Max Exclusive</em>'.
-	 * @see io.opencaesar.oml.FacetedScalar#getMaxExclusive()
-	 * @see #getFacetedScalar()
-	 * @generated
-	 */
-	EReference getFacetedScalar_MaxExclusive();
-
-	/**
-	 * Returns the meta object for class '{@link io.opencaesar.oml.EnumeratedScalar <em>Enumerated Scalar</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Enumerated Scalar</em>'.
-	 * @see io.opencaesar.oml.EnumeratedScalar
-	 * @generated
-	 */
-	EClass getEnumeratedScalar();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link io.opencaesar.oml.EnumeratedScalar#getLiterals <em>Literals</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Literals</em>'.
-	 * @see io.opencaesar.oml.EnumeratedScalar#getLiterals()
-	 * @see #getEnumeratedScalar()
-	 * @generated
-	 */
-	EReference getEnumeratedScalar_Literals();
 
 	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.Relation <em>Relation</em>}'.
@@ -11674,102 +12060,6 @@ public interface OmlPackage extends EPackage {
 	EOperation getReverseRelation__DeriveInverse();
 
 	/**
-	 * Returns the meta object for class '{@link io.opencaesar.oml.Rule <em>Rule</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Rule</em>'.
-	 * @see io.opencaesar.oml.Rule
-	 * @generated
-	 */
-	EClass getRule();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link io.opencaesar.oml.Rule#getAntecedent <em>Antecedent</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Antecedent</em>'.
-	 * @see io.opencaesar.oml.Rule#getAntecedent()
-	 * @see #getRule()
-	 * @generated
-	 */
-	EReference getRule_Antecedent();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link io.opencaesar.oml.Rule#getConsequent <em>Consequent</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Consequent</em>'.
-	 * @see io.opencaesar.oml.Rule#getConsequent()
-	 * @see #getRule()
-	 * @generated
-	 */
-	EReference getRule_Consequent();
-
-	/**
-	 * Returns the meta object for class '{@link io.opencaesar.oml.Instance <em>Instance</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Instance</em>'.
-	 * @see io.opencaesar.oml.Instance
-	 * @generated
-	 */
-	EClass getInstance();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link io.opencaesar.oml.Instance#getOwnedPropertyValues <em>Owned Property Values</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Owned Property Values</em>'.
-	 * @see io.opencaesar.oml.Instance#getOwnedPropertyValues()
-	 * @see #getInstance()
-	 * @generated
-	 */
-	EReference getInstance_OwnedPropertyValues();
-
-	/**
-	 * Returns the meta object for class '{@link io.opencaesar.oml.StructureInstance <em>Structure Instance</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Structure Instance</em>'.
-	 * @see io.opencaesar.oml.StructureInstance
-	 * @generated
-	 */
-	EClass getStructureInstance();
-
-	/**
-	 * Returns the meta object for the reference '{@link io.opencaesar.oml.StructureInstance#getType <em>Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Type</em>'.
-	 * @see io.opencaesar.oml.StructureInstance#getType()
-	 * @see #getStructureInstance()
-	 * @generated
-	 */
-	EReference getStructureInstance_Type();
-
-	/**
-	 * Returns the meta object for the container reference '{@link io.opencaesar.oml.StructureInstance#getOwningAxiom <em>Owning Axiom</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Owning Axiom</em>'.
-	 * @see io.opencaesar.oml.StructureInstance#getOwningAxiom()
-	 * @see #getStructureInstance()
-	 * @generated
-	 */
-	EReference getStructureInstance_OwningAxiom();
-
-	/**
-	 * Returns the meta object for the container reference '{@link io.opencaesar.oml.StructureInstance#getOwningAssertion <em>Owning Assertion</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Owning Assertion</em>'.
-	 * @see io.opencaesar.oml.StructureInstance#getOwningAssertion()
-	 * @see #getStructureInstance()
-	 * @generated
-	 */
-	EReference getStructureInstance_OwningAssertion();
-
-	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.NamedInstance <em>Named Instance</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -11855,714 +12145,90 @@ public interface OmlPackage extends EPackage {
 	EReference getRelationInstance_Targets();
 
 	/**
-	 * Returns the meta object for class '{@link io.opencaesar.oml.Reference <em>Reference</em>}'.
+	 * Returns the meta object for class '{@link io.opencaesar.oml.StructureInstance <em>Structure Instance</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Reference</em>'.
-	 * @see io.opencaesar.oml.Reference
+	 * @return the meta object for class '<em>Structure Instance</em>'.
+	 * @see io.opencaesar.oml.StructureInstance
 	 * @generated
 	 */
-	EClass getReference();
+	EClass getStructureInstance();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link io.opencaesar.oml.Reference#getOwnedAnnotations <em>Owned Annotations</em>}'.
+	 * Returns the meta object for the reference '{@link io.opencaesar.oml.StructureInstance#getType <em>Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Owned Annotations</em>'.
-	 * @see io.opencaesar.oml.Reference#getOwnedAnnotations()
-	 * @see #getReference()
+	 * @return the meta object for the reference '<em>Type</em>'.
+	 * @see io.opencaesar.oml.StructureInstance#getType()
+	 * @see #getStructureInstance()
 	 * @generated
 	 */
-	EReference getReference_OwnedAnnotations();
+	EReference getStructureInstance_Type();
 
 	/**
-	 * Returns the meta object for class '{@link io.opencaesar.oml.SpecializableTermReference <em>Specializable Term Reference</em>}'.
+	 * Returns the meta object for the container reference '{@link io.opencaesar.oml.StructureInstance#getOwningAxiom <em>Owning Axiom</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Specializable Term Reference</em>'.
-	 * @see io.opencaesar.oml.SpecializableTermReference
+	 * @return the meta object for the container reference '<em>Owning Axiom</em>'.
+	 * @see io.opencaesar.oml.StructureInstance#getOwningAxiom()
+	 * @see #getStructureInstance()
 	 * @generated
 	 */
-	EClass getSpecializableTermReference();
+	EReference getStructureInstance_OwningAxiom();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link io.opencaesar.oml.SpecializableTermReference#getOwnedSpecializations <em>Owned Specializations</em>}'.
+	 * Returns the meta object for the container reference '{@link io.opencaesar.oml.StructureInstance#getOwningAssertion <em>Owning Assertion</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Owned Specializations</em>'.
-	 * @see io.opencaesar.oml.SpecializableTermReference#getOwnedSpecializations()
-	 * @see #getSpecializableTermReference()
+	 * @return the meta object for the container reference '<em>Owning Assertion</em>'.
+	 * @see io.opencaesar.oml.StructureInstance#getOwningAssertion()
+	 * @see #getStructureInstance()
 	 * @generated
 	 */
-	EReference getSpecializableTermReference_OwnedSpecializations();
+	EReference getStructureInstance_OwningAssertion();
 
 	/**
-	 * Returns the meta object for class '{@link io.opencaesar.oml.ClassifierReference <em>Classifier Reference</em>}'.
+	 * Returns the meta object for class '{@link io.opencaesar.oml.KeyAxiom <em>Key Axiom</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Classifier Reference</em>'.
-	 * @see io.opencaesar.oml.ClassifierReference
+	 * @return the meta object for class '<em>Key Axiom</em>'.
+	 * @see io.opencaesar.oml.KeyAxiom
 	 * @generated
 	 */
-	EClass getClassifierReference();
+	EClass getKeyAxiom();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link io.opencaesar.oml.ClassifierReference#getOwnedPropertyRestrictions <em>Owned Property Restrictions</em>}'.
+	 * Returns the meta object for the reference list '{@link io.opencaesar.oml.KeyAxiom#getProperties <em>Properties</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Owned Property Restrictions</em>'.
-	 * @see io.opencaesar.oml.ClassifierReference#getOwnedPropertyRestrictions()
-	 * @see #getClassifierReference()
+	 * @return the meta object for the reference list '<em>Properties</em>'.
+	 * @see io.opencaesar.oml.KeyAxiom#getProperties()
+	 * @see #getKeyAxiom()
 	 * @generated
 	 */
-	EReference getClassifierReference_OwnedPropertyRestrictions();
+	EReference getKeyAxiom_Properties();
 
 	/**
-	 * Returns the meta object for class '{@link io.opencaesar.oml.EntityReference <em>Entity Reference</em>}'.
+	 * Returns the meta object for the container reference '{@link io.opencaesar.oml.KeyAxiom#getOwningEntity <em>Owning Entity</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Entity Reference</em>'.
-	 * @see io.opencaesar.oml.EntityReference
+	 * @return the meta object for the container reference '<em>Owning Entity</em>'.
+	 * @see io.opencaesar.oml.KeyAxiom#getOwningEntity()
+	 * @see #getKeyAxiom()
 	 * @generated
 	 */
-	EClass getEntityReference();
+	EReference getKeyAxiom_OwningEntity();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link io.opencaesar.oml.EntityReference#getOwnedRelationRestrictions <em>Owned Relation Restrictions</em>}'.
+	 * Returns the meta object for the container reference '{@link io.opencaesar.oml.KeyAxiom#getOwningReference <em>Owning Reference</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Owned Relation Restrictions</em>'.
-	 * @see io.opencaesar.oml.EntityReference#getOwnedRelationRestrictions()
-	 * @see #getEntityReference()
+	 * @return the meta object for the container reference '<em>Owning Reference</em>'.
+	 * @see io.opencaesar.oml.KeyAxiom#getOwningReference()
+	 * @see #getKeyAxiom()
 	 * @generated
 	 */
-	EReference getEntityReference_OwnedRelationRestrictions();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link io.opencaesar.oml.EntityReference#getOwnedKeys <em>Owned Keys</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Owned Keys</em>'.
-	 * @see io.opencaesar.oml.EntityReference#getOwnedKeys()
-	 * @see #getEntityReference()
-	 * @generated
-	 */
-	EReference getEntityReference_OwnedKeys();
-
-	/**
-	 * Returns the meta object for class '{@link io.opencaesar.oml.AspectReference <em>Aspect Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Aspect Reference</em>'.
-	 * @see io.opencaesar.oml.AspectReference
-	 * @generated
-	 */
-	EClass getAspectReference();
-
-	/**
-	 * Returns the meta object for the reference '{@link io.opencaesar.oml.AspectReference#getAspect <em>Aspect</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Aspect</em>'.
-	 * @see io.opencaesar.oml.AspectReference#getAspect()
-	 * @see #getAspectReference()
-	 * @generated
-	 */
-	EReference getAspectReference_Aspect();
-
-	/**
-	 * Returns the meta object for class '{@link io.opencaesar.oml.ConceptReference <em>Concept Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Concept Reference</em>'.
-	 * @see io.opencaesar.oml.ConceptReference
-	 * @generated
-	 */
-	EClass getConceptReference();
-
-	/**
-	 * Returns the meta object for the reference '{@link io.opencaesar.oml.ConceptReference#getConcept <em>Concept</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Concept</em>'.
-	 * @see io.opencaesar.oml.ConceptReference#getConcept()
-	 * @see #getConceptReference()
-	 * @generated
-	 */
-	EReference getConceptReference_Concept();
-
-	/**
-	 * Returns the meta object for class '{@link io.opencaesar.oml.RelationEntityReference <em>Relation Entity Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Relation Entity Reference</em>'.
-	 * @see io.opencaesar.oml.RelationEntityReference
-	 * @generated
-	 */
-	EClass getRelationEntityReference();
-
-	/**
-	 * Returns the meta object for the reference '{@link io.opencaesar.oml.RelationEntityReference#getEntity <em>Entity</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Entity</em>'.
-	 * @see io.opencaesar.oml.RelationEntityReference#getEntity()
-	 * @see #getRelationEntityReference()
-	 * @generated
-	 */
-	EReference getRelationEntityReference_Entity();
-
-	/**
-	 * Returns the meta object for class '{@link io.opencaesar.oml.StructureReference <em>Structure Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Structure Reference</em>'.
-	 * @see io.opencaesar.oml.StructureReference
-	 * @generated
-	 */
-	EClass getStructureReference();
-
-	/**
-	 * Returns the meta object for the reference '{@link io.opencaesar.oml.StructureReference#getStructure <em>Structure</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Structure</em>'.
-	 * @see io.opencaesar.oml.StructureReference#getStructure()
-	 * @see #getStructureReference()
-	 * @generated
-	 */
-	EReference getStructureReference_Structure();
-
-	/**
-	 * Returns the meta object for class '{@link io.opencaesar.oml.AnnotationPropertyReference <em>Annotation Property Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Annotation Property Reference</em>'.
-	 * @see io.opencaesar.oml.AnnotationPropertyReference
-	 * @generated
-	 */
-	EClass getAnnotationPropertyReference();
-
-	/**
-	 * Returns the meta object for the reference '{@link io.opencaesar.oml.AnnotationPropertyReference#getProperty <em>Property</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Property</em>'.
-	 * @see io.opencaesar.oml.AnnotationPropertyReference#getProperty()
-	 * @see #getAnnotationPropertyReference()
-	 * @generated
-	 */
-	EReference getAnnotationPropertyReference_Property();
-
-	/**
-	 * Returns the meta object for class '{@link io.opencaesar.oml.ScalarPropertyReference <em>Scalar Property Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Scalar Property Reference</em>'.
-	 * @see io.opencaesar.oml.ScalarPropertyReference
-	 * @generated
-	 */
-	EClass getScalarPropertyReference();
-
-	/**
-	 * Returns the meta object for the reference '{@link io.opencaesar.oml.ScalarPropertyReference#getProperty <em>Property</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Property</em>'.
-	 * @see io.opencaesar.oml.ScalarPropertyReference#getProperty()
-	 * @see #getScalarPropertyReference()
-	 * @generated
-	 */
-	EReference getScalarPropertyReference_Property();
-
-	/**
-	 * Returns the meta object for class '{@link io.opencaesar.oml.StructuredPropertyReference <em>Structured Property Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Structured Property Reference</em>'.
-	 * @see io.opencaesar.oml.StructuredPropertyReference
-	 * @generated
-	 */
-	EClass getStructuredPropertyReference();
-
-	/**
-	 * Returns the meta object for the reference '{@link io.opencaesar.oml.StructuredPropertyReference#getProperty <em>Property</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Property</em>'.
-	 * @see io.opencaesar.oml.StructuredPropertyReference#getProperty()
-	 * @see #getStructuredPropertyReference()
-	 * @generated
-	 */
-	EReference getStructuredPropertyReference_Property();
-
-	/**
-	 * Returns the meta object for class '{@link io.opencaesar.oml.FacetedScalarReference <em>Faceted Scalar Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Faceted Scalar Reference</em>'.
-	 * @see io.opencaesar.oml.FacetedScalarReference
-	 * @generated
-	 */
-	EClass getFacetedScalarReference();
-
-	/**
-	 * Returns the meta object for the reference '{@link io.opencaesar.oml.FacetedScalarReference#getScalar <em>Scalar</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Scalar</em>'.
-	 * @see io.opencaesar.oml.FacetedScalarReference#getScalar()
-	 * @see #getFacetedScalarReference()
-	 * @generated
-	 */
-	EReference getFacetedScalarReference_Scalar();
-
-	/**
-	 * Returns the meta object for class '{@link io.opencaesar.oml.EnumeratedScalarReference <em>Enumerated Scalar Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Enumerated Scalar Reference</em>'.
-	 * @see io.opencaesar.oml.EnumeratedScalarReference
-	 * @generated
-	 */
-	EClass getEnumeratedScalarReference();
-
-	/**
-	 * Returns the meta object for the reference '{@link io.opencaesar.oml.EnumeratedScalarReference#getScalar <em>Scalar</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Scalar</em>'.
-	 * @see io.opencaesar.oml.EnumeratedScalarReference#getScalar()
-	 * @see #getEnumeratedScalarReference()
-	 * @generated
-	 */
-	EReference getEnumeratedScalarReference_Scalar();
-
-	/**
-	 * Returns the meta object for class '{@link io.opencaesar.oml.RelationReference <em>Relation Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Relation Reference</em>'.
-	 * @see io.opencaesar.oml.RelationReference
-	 * @generated
-	 */
-	EClass getRelationReference();
-
-	/**
-	 * Returns the meta object for the reference '{@link io.opencaesar.oml.RelationReference#getRelation <em>Relation</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Relation</em>'.
-	 * @see io.opencaesar.oml.RelationReference#getRelation()
-	 * @see #getRelationReference()
-	 * @generated
-	 */
-	EReference getRelationReference_Relation();
-
-	/**
-	 * Returns the meta object for class '{@link io.opencaesar.oml.RuleReference <em>Rule Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Rule Reference</em>'.
-	 * @see io.opencaesar.oml.RuleReference
-	 * @generated
-	 */
-	EClass getRuleReference();
-
-	/**
-	 * Returns the meta object for the reference '{@link io.opencaesar.oml.RuleReference#getRule <em>Rule</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Rule</em>'.
-	 * @see io.opencaesar.oml.RuleReference#getRule()
-	 * @see #getRuleReference()
-	 * @generated
-	 */
-	EReference getRuleReference_Rule();
-
-	/**
-	 * Returns the meta object for class '{@link io.opencaesar.oml.NamedInstanceReference <em>Named Instance Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Named Instance Reference</em>'.
-	 * @see io.opencaesar.oml.NamedInstanceReference
-	 * @generated
-	 */
-	EClass getNamedInstanceReference();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link io.opencaesar.oml.NamedInstanceReference#getOwnedPropertyValues <em>Owned Property Values</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Owned Property Values</em>'.
-	 * @see io.opencaesar.oml.NamedInstanceReference#getOwnedPropertyValues()
-	 * @see #getNamedInstanceReference()
-	 * @generated
-	 */
-	EReference getNamedInstanceReference_OwnedPropertyValues();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link io.opencaesar.oml.NamedInstanceReference#getOwnedLinks <em>Owned Links</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Owned Links</em>'.
-	 * @see io.opencaesar.oml.NamedInstanceReference#getOwnedLinks()
-	 * @see #getNamedInstanceReference()
-	 * @generated
-	 */
-	EReference getNamedInstanceReference_OwnedLinks();
-
-	/**
-	 * Returns the meta object for class '{@link io.opencaesar.oml.ConceptInstanceReference <em>Concept Instance Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Concept Instance Reference</em>'.
-	 * @see io.opencaesar.oml.ConceptInstanceReference
-	 * @generated
-	 */
-	EClass getConceptInstanceReference();
-
-	/**
-	 * Returns the meta object for the reference '{@link io.opencaesar.oml.ConceptInstanceReference#getInstance <em>Instance</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Instance</em>'.
-	 * @see io.opencaesar.oml.ConceptInstanceReference#getInstance()
-	 * @see #getConceptInstanceReference()
-	 * @generated
-	 */
-	EReference getConceptInstanceReference_Instance();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link io.opencaesar.oml.ConceptInstanceReference#getOwnedTypes <em>Owned Types</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Owned Types</em>'.
-	 * @see io.opencaesar.oml.ConceptInstanceReference#getOwnedTypes()
-	 * @see #getConceptInstanceReference()
-	 * @generated
-	 */
-	EReference getConceptInstanceReference_OwnedTypes();
-
-	/**
-	 * Returns the meta object for class '{@link io.opencaesar.oml.RelationInstanceReference <em>Relation Instance Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Relation Instance Reference</em>'.
-	 * @see io.opencaesar.oml.RelationInstanceReference
-	 * @generated
-	 */
-	EClass getRelationInstanceReference();
-
-	/**
-	 * Returns the meta object for the reference '{@link io.opencaesar.oml.RelationInstanceReference#getInstance <em>Instance</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Instance</em>'.
-	 * @see io.opencaesar.oml.RelationInstanceReference#getInstance()
-	 * @see #getRelationInstanceReference()
-	 * @generated
-	 */
-	EReference getRelationInstanceReference_Instance();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link io.opencaesar.oml.RelationInstanceReference#getOwnedTypes <em>Owned Types</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Owned Types</em>'.
-	 * @see io.opencaesar.oml.RelationInstanceReference#getOwnedTypes()
-	 * @see #getRelationInstanceReference()
-	 * @generated
-	 */
-	EReference getRelationInstanceReference_OwnedTypes();
-
-	/**
-	 * Returns the meta object for class '{@link io.opencaesar.oml.Statement <em>Statement</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Statement</em>'.
-	 * @see io.opencaesar.oml.Statement
-	 * @generated
-	 */
-	EClass getStatement();
-
-	/**
-	 * Returns the meta object for class '{@link io.opencaesar.oml.VocabularyStatement <em>Vocabulary Statement</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Vocabulary Statement</em>'.
-	 * @see io.opencaesar.oml.VocabularyStatement
-	 * @generated
-	 */
-	EClass getVocabularyStatement();
-
-	/**
-	 * Returns the meta object for the container reference '{@link io.opencaesar.oml.VocabularyStatement#getOwningVocabulary <em>Owning Vocabulary</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Owning Vocabulary</em>'.
-	 * @see io.opencaesar.oml.VocabularyStatement#getOwningVocabulary()
-	 * @see #getVocabularyStatement()
-	 * @generated
-	 */
-	EReference getVocabularyStatement_OwningVocabulary();
-
-	/**
-	 * Returns the meta object for class '{@link io.opencaesar.oml.DescriptionStatement <em>Description Statement</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Description Statement</em>'.
-	 * @see io.opencaesar.oml.DescriptionStatement
-	 * @generated
-	 */
-	EClass getDescriptionStatement();
-
-	/**
-	 * Returns the meta object for the container reference '{@link io.opencaesar.oml.DescriptionStatement#getOwningDescription <em>Owning Description</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Owning Description</em>'.
-	 * @see io.opencaesar.oml.DescriptionStatement#getOwningDescription()
-	 * @see #getDescriptionStatement()
-	 * @generated
-	 */
-	EReference getDescriptionStatement_OwningDescription();
-
-	/**
-	 * Returns the meta object for class '{@link io.opencaesar.oml.Import <em>Import</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Import</em>'.
-	 * @see io.opencaesar.oml.Import
-	 * @generated
-	 */
-	EClass getImport();
-
-	/**
-	 * Returns the meta object for the attribute '{@link io.opencaesar.oml.Import#getNamespace <em>Namespace</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Namespace</em>'.
-	 * @see io.opencaesar.oml.Import#getNamespace()
-	 * @see #getImport()
-	 * @generated
-	 */
-	EAttribute getImport_Namespace();
-
-	/**
-	 * Returns the meta object for the attribute '{@link io.opencaesar.oml.Import#getPrefix <em>Prefix</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Prefix</em>'.
-	 * @see io.opencaesar.oml.Import#getPrefix()
-	 * @see #getImport()
-	 * @generated
-	 */
-	EAttribute getImport_Prefix();
-
-	/**
-	 * Returns the meta object for the '{@link io.opencaesar.oml.Import#getIri() <em>Get Iri</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Get Iri</em>' operation.
-	 * @see io.opencaesar.oml.Import#getIri()
-	 * @generated
-	 */
-	EOperation getImport__GetIri();
-
-	/**
-	 * Returns the meta object for the '{@link io.opencaesar.oml.Import#getSeparator() <em>Get Separator</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Get Separator</em>' operation.
-	 * @see io.opencaesar.oml.Import#getSeparator()
-	 * @generated
-	 */
-	EOperation getImport__GetSeparator();
-
-	/**
-	 * Returns the meta object for class '{@link io.opencaesar.oml.VocabularyImport <em>Vocabulary Import</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Vocabulary Import</em>'.
-	 * @see io.opencaesar.oml.VocabularyImport
-	 * @generated
-	 */
-	EClass getVocabularyImport();
-
-	/**
-	 * Returns the meta object for the container reference '{@link io.opencaesar.oml.VocabularyImport#getOwningVocabulary <em>Owning Vocabulary</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Owning Vocabulary</em>'.
-	 * @see io.opencaesar.oml.VocabularyImport#getOwningVocabulary()
-	 * @see #getVocabularyImport()
-	 * @generated
-	 */
-	EReference getVocabularyImport_OwningVocabulary();
-
-	/**
-	 * Returns the meta object for class '{@link io.opencaesar.oml.VocabularyExtension <em>Vocabulary Extension</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Vocabulary Extension</em>'.
-	 * @see io.opencaesar.oml.VocabularyExtension
-	 * @generated
-	 */
-	EClass getVocabularyExtension();
-
-	/**
-	 * Returns the meta object for class '{@link io.opencaesar.oml.VocabularyUsage <em>Vocabulary Usage</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Vocabulary Usage</em>'.
-	 * @see io.opencaesar.oml.VocabularyUsage
-	 * @generated
-	 */
-	EClass getVocabularyUsage();
-
-	/**
-	 * Returns the meta object for class '{@link io.opencaesar.oml.VocabularyBundleImport <em>Vocabulary Bundle Import</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Vocabulary Bundle Import</em>'.
-	 * @see io.opencaesar.oml.VocabularyBundleImport
-	 * @generated
-	 */
-	EClass getVocabularyBundleImport();
-
-	/**
-	 * Returns the meta object for the container reference '{@link io.opencaesar.oml.VocabularyBundleImport#getOwningVocabularyBundle <em>Owning Vocabulary Bundle</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Owning Vocabulary Bundle</em>'.
-	 * @see io.opencaesar.oml.VocabularyBundleImport#getOwningVocabularyBundle()
-	 * @see #getVocabularyBundleImport()
-	 * @generated
-	 */
-	EReference getVocabularyBundleImport_OwningVocabularyBundle();
-
-	/**
-	 * Returns the meta object for class '{@link io.opencaesar.oml.VocabularyBundleExtension <em>Vocabulary Bundle Extension</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Vocabulary Bundle Extension</em>'.
-	 * @see io.opencaesar.oml.VocabularyBundleExtension
-	 * @generated
-	 */
-	EClass getVocabularyBundleExtension();
-
-	/**
-	 * Returns the meta object for class '{@link io.opencaesar.oml.VocabularyBundleInclusion <em>Vocabulary Bundle Inclusion</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Vocabulary Bundle Inclusion</em>'.
-	 * @see io.opencaesar.oml.VocabularyBundleInclusion
-	 * @generated
-	 */
-	EClass getVocabularyBundleInclusion();
-
-	/**
-	 * Returns the meta object for class '{@link io.opencaesar.oml.DescriptionImport <em>Description Import</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Description Import</em>'.
-	 * @see io.opencaesar.oml.DescriptionImport
-	 * @generated
-	 */
-	EClass getDescriptionImport();
-
-	/**
-	 * Returns the meta object for the container reference '{@link io.opencaesar.oml.DescriptionImport#getOwningDescription <em>Owning Description</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Owning Description</em>'.
-	 * @see io.opencaesar.oml.DescriptionImport#getOwningDescription()
-	 * @see #getDescriptionImport()
-	 * @generated
-	 */
-	EReference getDescriptionImport_OwningDescription();
-
-	/**
-	 * Returns the meta object for class '{@link io.opencaesar.oml.DescriptionExtension <em>Description Extension</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Description Extension</em>'.
-	 * @see io.opencaesar.oml.DescriptionExtension
-	 * @generated
-	 */
-	EClass getDescriptionExtension();
-
-	/**
-	 * Returns the meta object for class '{@link io.opencaesar.oml.DescriptionUsage <em>Description Usage</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Description Usage</em>'.
-	 * @see io.opencaesar.oml.DescriptionUsage
-	 * @generated
-	 */
-	EClass getDescriptionUsage();
-
-	/**
-	 * Returns the meta object for class '{@link io.opencaesar.oml.DescriptionBundleImport <em>Description Bundle Import</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Description Bundle Import</em>'.
-	 * @see io.opencaesar.oml.DescriptionBundleImport
-	 * @generated
-	 */
-	EClass getDescriptionBundleImport();
-
-	/**
-	 * Returns the meta object for the container reference '{@link io.opencaesar.oml.DescriptionBundleImport#getOwningDescriptionBundle <em>Owning Description Bundle</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Owning Description Bundle</em>'.
-	 * @see io.opencaesar.oml.DescriptionBundleImport#getOwningDescriptionBundle()
-	 * @see #getDescriptionBundleImport()
-	 * @generated
-	 */
-	EReference getDescriptionBundleImport_OwningDescriptionBundle();
-
-	/**
-	 * Returns the meta object for class '{@link io.opencaesar.oml.DescriptionBundleExtension <em>Description Bundle Extension</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Description Bundle Extension</em>'.
-	 * @see io.opencaesar.oml.DescriptionBundleExtension
-	 * @generated
-	 */
-	EClass getDescriptionBundleExtension();
-
-	/**
-	 * Returns the meta object for class '{@link io.opencaesar.oml.DescriptionBundleInclusion <em>Description Bundle Inclusion</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Description Bundle Inclusion</em>'.
-	 * @see io.opencaesar.oml.DescriptionBundleInclusion
-	 * @generated
-	 */
-	EClass getDescriptionBundleInclusion();
-
-	/**
-	 * Returns the meta object for class '{@link io.opencaesar.oml.DescriptionBundleUsage <em>Description Bundle Usage</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Description Bundle Usage</em>'.
-	 * @see io.opencaesar.oml.DescriptionBundleUsage
-	 * @generated
-	 */
-	EClass getDescriptionBundleUsage();
-
-	/**
-	 * Returns the meta object for class '{@link io.opencaesar.oml.Axiom <em>Axiom</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Axiom</em>'.
-	 * @see io.opencaesar.oml.Axiom
-	 * @generated
-	 */
-	EClass getAxiom();
+	EReference getKeyAxiom_OwningReference();
 
 	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.SpecializationAxiom <em>Specialization Axiom</em>}'.
@@ -13023,59 +12689,6 @@ public interface OmlPackage extends EPackage {
 	EReference getRelationTargetRestrictionAxiom_Target();
 
 	/**
-	 * Returns the meta object for class '{@link io.opencaesar.oml.KeyAxiom <em>Key Axiom</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Key Axiom</em>'.
-	 * @see io.opencaesar.oml.KeyAxiom
-	 * @generated
-	 */
-	EClass getKeyAxiom();
-
-	/**
-	 * Returns the meta object for the reference list '{@link io.opencaesar.oml.KeyAxiom#getProperties <em>Properties</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Properties</em>'.
-	 * @see io.opencaesar.oml.KeyAxiom#getProperties()
-	 * @see #getKeyAxiom()
-	 * @generated
-	 */
-	EReference getKeyAxiom_Properties();
-
-	/**
-	 * Returns the meta object for the container reference '{@link io.opencaesar.oml.KeyAxiom#getOwningEntity <em>Owning Entity</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Owning Entity</em>'.
-	 * @see io.opencaesar.oml.KeyAxiom#getOwningEntity()
-	 * @see #getKeyAxiom()
-	 * @generated
-	 */
-	EReference getKeyAxiom_OwningEntity();
-
-	/**
-	 * Returns the meta object for the container reference '{@link io.opencaesar.oml.KeyAxiom#getOwningReference <em>Owning Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Owning Reference</em>'.
-	 * @see io.opencaesar.oml.KeyAxiom#getOwningReference()
-	 * @see #getKeyAxiom()
-	 * @generated
-	 */
-	EReference getKeyAxiom_OwningReference();
-
-	/**
-	 * Returns the meta object for class '{@link io.opencaesar.oml.Assertion <em>Assertion</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Assertion</em>'.
-	 * @see io.opencaesar.oml.Assertion
-	 * @generated
-	 */
-	EClass getAssertion();
-
-	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.TypeAssertion <em>Type Assertion</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -13352,38 +12965,6 @@ public interface OmlPackage extends EPackage {
 	EReference getLinkAssertion_OwningReference();
 
 	/**
-	 * Returns the meta object for class '{@link io.opencaesar.oml.Predicate <em>Predicate</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Predicate</em>'.
-	 * @see io.opencaesar.oml.Predicate
-	 * @generated
-	 */
-	EClass getPredicate();
-
-	/**
-	 * Returns the meta object for the container reference '{@link io.opencaesar.oml.Predicate#getAntecedentRule <em>Antecedent Rule</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Antecedent Rule</em>'.
-	 * @see io.opencaesar.oml.Predicate#getAntecedentRule()
-	 * @see #getPredicate()
-	 * @generated
-	 */
-	EReference getPredicate_AntecedentRule();
-
-	/**
-	 * Returns the meta object for the container reference '{@link io.opencaesar.oml.Predicate#getConsequentRule <em>Consequent Rule</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Consequent Rule</em>'.
-	 * @see io.opencaesar.oml.Predicate#getConsequentRule()
-	 * @see #getPredicate()
-	 * @generated
-	 */
-	EReference getPredicate_ConsequentRule();
-
-	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.UnaryPredicate <em>Unary Predicate</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -13403,27 +12984,6 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getUnaryPredicate_Variable();
-
-	/**
-	 * Returns the meta object for class '{@link io.opencaesar.oml.TypePredicate <em>Type Predicate</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Type Predicate</em>'.
-	 * @see io.opencaesar.oml.TypePredicate
-	 * @generated
-	 */
-	EClass getTypePredicate();
-
-	/**
-	 * Returns the meta object for the reference '{@link io.opencaesar.oml.TypePredicate#getType <em>Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Type</em>'.
-	 * @see io.opencaesar.oml.TypePredicate#getType()
-	 * @see #getTypePredicate()
-	 * @generated
-	 */
-	EReference getTypePredicate_Type();
 
 	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.BinaryPredicate <em>Binary Predicate</em>}'.
@@ -13467,6 +13027,27 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getBinaryPredicate_Instance2();
+
+	/**
+	 * Returns the meta object for class '{@link io.opencaesar.oml.TypePredicate <em>Type Predicate</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Type Predicate</em>'.
+	 * @see io.opencaesar.oml.TypePredicate
+	 * @generated
+	 */
+	EClass getTypePredicate();
+
+	/**
+	 * Returns the meta object for the reference '{@link io.opencaesar.oml.TypePredicate#getType <em>Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Type</em>'.
+	 * @see io.opencaesar.oml.TypePredicate#getType()
+	 * @see #getTypePredicate()
+	 * @generated
+	 */
+	EReference getTypePredicate_Type();
 
 	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.RelationEntityPredicate <em>Relation Entity Predicate</em>}'.
@@ -13551,16 +13132,6 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getDifferentFromPredicate();
-
-	/**
-	 * Returns the meta object for class '{@link io.opencaesar.oml.Literal <em>Literal</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Literal</em>'.
-	 * @see io.opencaesar.oml.Literal
-	 * @generated
-	 */
-	EClass getLiteral();
 
 	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.QuotedLiteral <em>Quoted Literal</em>}'.
@@ -13688,6 +13259,428 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getBooleanLiteral_Value();
+
+	/**
+	 * Returns the meta object for class '{@link io.opencaesar.oml.Reference <em>Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Reference</em>'.
+	 * @see io.opencaesar.oml.Reference
+	 * @generated
+	 */
+	EClass getReference();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link io.opencaesar.oml.Reference#getOwnedAnnotations <em>Owned Annotations</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Owned Annotations</em>'.
+	 * @see io.opencaesar.oml.Reference#getOwnedAnnotations()
+	 * @see #getReference()
+	 * @generated
+	 */
+	EReference getReference_OwnedAnnotations();
+
+	/**
+	 * Returns the meta object for class '{@link io.opencaesar.oml.SpecializableTermReference <em>Specializable Term Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Specializable Term Reference</em>'.
+	 * @see io.opencaesar.oml.SpecializableTermReference
+	 * @generated
+	 */
+	EClass getSpecializableTermReference();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link io.opencaesar.oml.SpecializableTermReference#getOwnedSpecializations <em>Owned Specializations</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Owned Specializations</em>'.
+	 * @see io.opencaesar.oml.SpecializableTermReference#getOwnedSpecializations()
+	 * @see #getSpecializableTermReference()
+	 * @generated
+	 */
+	EReference getSpecializableTermReference_OwnedSpecializations();
+
+	/**
+	 * Returns the meta object for class '{@link io.opencaesar.oml.ClassifierReference <em>Classifier Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Classifier Reference</em>'.
+	 * @see io.opencaesar.oml.ClassifierReference
+	 * @generated
+	 */
+	EClass getClassifierReference();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link io.opencaesar.oml.ClassifierReference#getOwnedPropertyRestrictions <em>Owned Property Restrictions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Owned Property Restrictions</em>'.
+	 * @see io.opencaesar.oml.ClassifierReference#getOwnedPropertyRestrictions()
+	 * @see #getClassifierReference()
+	 * @generated
+	 */
+	EReference getClassifierReference_OwnedPropertyRestrictions();
+
+	/**
+	 * Returns the meta object for class '{@link io.opencaesar.oml.EntityReference <em>Entity Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Entity Reference</em>'.
+	 * @see io.opencaesar.oml.EntityReference
+	 * @generated
+	 */
+	EClass getEntityReference();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link io.opencaesar.oml.EntityReference#getOwnedRelationRestrictions <em>Owned Relation Restrictions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Owned Relation Restrictions</em>'.
+	 * @see io.opencaesar.oml.EntityReference#getOwnedRelationRestrictions()
+	 * @see #getEntityReference()
+	 * @generated
+	 */
+	EReference getEntityReference_OwnedRelationRestrictions();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link io.opencaesar.oml.EntityReference#getOwnedKeys <em>Owned Keys</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Owned Keys</em>'.
+	 * @see io.opencaesar.oml.EntityReference#getOwnedKeys()
+	 * @see #getEntityReference()
+	 * @generated
+	 */
+	EReference getEntityReference_OwnedKeys();
+
+	/**
+	 * Returns the meta object for class '{@link io.opencaesar.oml.AspectReference <em>Aspect Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Aspect Reference</em>'.
+	 * @see io.opencaesar.oml.AspectReference
+	 * @generated
+	 */
+	EClass getAspectReference();
+
+	/**
+	 * Returns the meta object for the reference '{@link io.opencaesar.oml.AspectReference#getAspect <em>Aspect</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Aspect</em>'.
+	 * @see io.opencaesar.oml.AspectReference#getAspect()
+	 * @see #getAspectReference()
+	 * @generated
+	 */
+	EReference getAspectReference_Aspect();
+
+	/**
+	 * Returns the meta object for class '{@link io.opencaesar.oml.ConceptReference <em>Concept Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Concept Reference</em>'.
+	 * @see io.opencaesar.oml.ConceptReference
+	 * @generated
+	 */
+	EClass getConceptReference();
+
+	/**
+	 * Returns the meta object for the reference '{@link io.opencaesar.oml.ConceptReference#getConcept <em>Concept</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Concept</em>'.
+	 * @see io.opencaesar.oml.ConceptReference#getConcept()
+	 * @see #getConceptReference()
+	 * @generated
+	 */
+	EReference getConceptReference_Concept();
+
+	/**
+	 * Returns the meta object for class '{@link io.opencaesar.oml.RelationEntityReference <em>Relation Entity Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Relation Entity Reference</em>'.
+	 * @see io.opencaesar.oml.RelationEntityReference
+	 * @generated
+	 */
+	EClass getRelationEntityReference();
+
+	/**
+	 * Returns the meta object for the reference '{@link io.opencaesar.oml.RelationEntityReference#getEntity <em>Entity</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Entity</em>'.
+	 * @see io.opencaesar.oml.RelationEntityReference#getEntity()
+	 * @see #getRelationEntityReference()
+	 * @generated
+	 */
+	EReference getRelationEntityReference_Entity();
+
+	/**
+	 * Returns the meta object for class '{@link io.opencaesar.oml.StructureReference <em>Structure Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Structure Reference</em>'.
+	 * @see io.opencaesar.oml.StructureReference
+	 * @generated
+	 */
+	EClass getStructureReference();
+
+	/**
+	 * Returns the meta object for the reference '{@link io.opencaesar.oml.StructureReference#getStructure <em>Structure</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Structure</em>'.
+	 * @see io.opencaesar.oml.StructureReference#getStructure()
+	 * @see #getStructureReference()
+	 * @generated
+	 */
+	EReference getStructureReference_Structure();
+
+	/**
+	 * Returns the meta object for class '{@link io.opencaesar.oml.AnnotationPropertyReference <em>Annotation Property Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Annotation Property Reference</em>'.
+	 * @see io.opencaesar.oml.AnnotationPropertyReference
+	 * @generated
+	 */
+	EClass getAnnotationPropertyReference();
+
+	/**
+	 * Returns the meta object for the reference '{@link io.opencaesar.oml.AnnotationPropertyReference#getProperty <em>Property</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Property</em>'.
+	 * @see io.opencaesar.oml.AnnotationPropertyReference#getProperty()
+	 * @see #getAnnotationPropertyReference()
+	 * @generated
+	 */
+	EReference getAnnotationPropertyReference_Property();
+
+	/**
+	 * Returns the meta object for class '{@link io.opencaesar.oml.ScalarPropertyReference <em>Scalar Property Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Scalar Property Reference</em>'.
+	 * @see io.opencaesar.oml.ScalarPropertyReference
+	 * @generated
+	 */
+	EClass getScalarPropertyReference();
+
+	/**
+	 * Returns the meta object for the reference '{@link io.opencaesar.oml.ScalarPropertyReference#getProperty <em>Property</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Property</em>'.
+	 * @see io.opencaesar.oml.ScalarPropertyReference#getProperty()
+	 * @see #getScalarPropertyReference()
+	 * @generated
+	 */
+	EReference getScalarPropertyReference_Property();
+
+	/**
+	 * Returns the meta object for class '{@link io.opencaesar.oml.StructuredPropertyReference <em>Structured Property Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Structured Property Reference</em>'.
+	 * @see io.opencaesar.oml.StructuredPropertyReference
+	 * @generated
+	 */
+	EClass getStructuredPropertyReference();
+
+	/**
+	 * Returns the meta object for the reference '{@link io.opencaesar.oml.StructuredPropertyReference#getProperty <em>Property</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Property</em>'.
+	 * @see io.opencaesar.oml.StructuredPropertyReference#getProperty()
+	 * @see #getStructuredPropertyReference()
+	 * @generated
+	 */
+	EReference getStructuredPropertyReference_Property();
+
+	/**
+	 * Returns the meta object for class '{@link io.opencaesar.oml.FacetedScalarReference <em>Faceted Scalar Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Faceted Scalar Reference</em>'.
+	 * @see io.opencaesar.oml.FacetedScalarReference
+	 * @generated
+	 */
+	EClass getFacetedScalarReference();
+
+	/**
+	 * Returns the meta object for the reference '{@link io.opencaesar.oml.FacetedScalarReference#getScalar <em>Scalar</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Scalar</em>'.
+	 * @see io.opencaesar.oml.FacetedScalarReference#getScalar()
+	 * @see #getFacetedScalarReference()
+	 * @generated
+	 */
+	EReference getFacetedScalarReference_Scalar();
+
+	/**
+	 * Returns the meta object for class '{@link io.opencaesar.oml.EnumeratedScalarReference <em>Enumerated Scalar Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Enumerated Scalar Reference</em>'.
+	 * @see io.opencaesar.oml.EnumeratedScalarReference
+	 * @generated
+	 */
+	EClass getEnumeratedScalarReference();
+
+	/**
+	 * Returns the meta object for the reference '{@link io.opencaesar.oml.EnumeratedScalarReference#getScalar <em>Scalar</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Scalar</em>'.
+	 * @see io.opencaesar.oml.EnumeratedScalarReference#getScalar()
+	 * @see #getEnumeratedScalarReference()
+	 * @generated
+	 */
+	EReference getEnumeratedScalarReference_Scalar();
+
+	/**
+	 * Returns the meta object for class '{@link io.opencaesar.oml.RelationReference <em>Relation Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Relation Reference</em>'.
+	 * @see io.opencaesar.oml.RelationReference
+	 * @generated
+	 */
+	EClass getRelationReference();
+
+	/**
+	 * Returns the meta object for the reference '{@link io.opencaesar.oml.RelationReference#getRelation <em>Relation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Relation</em>'.
+	 * @see io.opencaesar.oml.RelationReference#getRelation()
+	 * @see #getRelationReference()
+	 * @generated
+	 */
+	EReference getRelationReference_Relation();
+
+	/**
+	 * Returns the meta object for class '{@link io.opencaesar.oml.RuleReference <em>Rule Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Rule Reference</em>'.
+	 * @see io.opencaesar.oml.RuleReference
+	 * @generated
+	 */
+	EClass getRuleReference();
+
+	/**
+	 * Returns the meta object for the reference '{@link io.opencaesar.oml.RuleReference#getRule <em>Rule</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Rule</em>'.
+	 * @see io.opencaesar.oml.RuleReference#getRule()
+	 * @see #getRuleReference()
+	 * @generated
+	 */
+	EReference getRuleReference_Rule();
+
+	/**
+	 * Returns the meta object for class '{@link io.opencaesar.oml.NamedInstanceReference <em>Named Instance Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Named Instance Reference</em>'.
+	 * @see io.opencaesar.oml.NamedInstanceReference
+	 * @generated
+	 */
+	EClass getNamedInstanceReference();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link io.opencaesar.oml.NamedInstanceReference#getOwnedPropertyValues <em>Owned Property Values</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Owned Property Values</em>'.
+	 * @see io.opencaesar.oml.NamedInstanceReference#getOwnedPropertyValues()
+	 * @see #getNamedInstanceReference()
+	 * @generated
+	 */
+	EReference getNamedInstanceReference_OwnedPropertyValues();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link io.opencaesar.oml.NamedInstanceReference#getOwnedLinks <em>Owned Links</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Owned Links</em>'.
+	 * @see io.opencaesar.oml.NamedInstanceReference#getOwnedLinks()
+	 * @see #getNamedInstanceReference()
+	 * @generated
+	 */
+	EReference getNamedInstanceReference_OwnedLinks();
+
+	/**
+	 * Returns the meta object for class '{@link io.opencaesar.oml.ConceptInstanceReference <em>Concept Instance Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Concept Instance Reference</em>'.
+	 * @see io.opencaesar.oml.ConceptInstanceReference
+	 * @generated
+	 */
+	EClass getConceptInstanceReference();
+
+	/**
+	 * Returns the meta object for the reference '{@link io.opencaesar.oml.ConceptInstanceReference#getInstance <em>Instance</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Instance</em>'.
+	 * @see io.opencaesar.oml.ConceptInstanceReference#getInstance()
+	 * @see #getConceptInstanceReference()
+	 * @generated
+	 */
+	EReference getConceptInstanceReference_Instance();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link io.opencaesar.oml.ConceptInstanceReference#getOwnedTypes <em>Owned Types</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Owned Types</em>'.
+	 * @see io.opencaesar.oml.ConceptInstanceReference#getOwnedTypes()
+	 * @see #getConceptInstanceReference()
+	 * @generated
+	 */
+	EReference getConceptInstanceReference_OwnedTypes();
+
+	/**
+	 * Returns the meta object for class '{@link io.opencaesar.oml.RelationInstanceReference <em>Relation Instance Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Relation Instance Reference</em>'.
+	 * @see io.opencaesar.oml.RelationInstanceReference
+	 * @generated
+	 */
+	EClass getRelationInstanceReference();
+
+	/**
+	 * Returns the meta object for the reference '{@link io.opencaesar.oml.RelationInstanceReference#getInstance <em>Instance</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Instance</em>'.
+	 * @see io.opencaesar.oml.RelationInstanceReference#getInstance()
+	 * @see #getRelationInstanceReference()
+	 * @generated
+	 */
+	EReference getRelationInstanceReference_Instance();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link io.opencaesar.oml.RelationInstanceReference#getOwnedTypes <em>Owned Types</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Owned Types</em>'.
+	 * @see io.opencaesar.oml.RelationInstanceReference#getOwnedTypes()
+	 * @see #getRelationInstanceReference()
+	 * @generated
+	 */
+	EReference getRelationInstanceReference_OwnedTypes();
 
 	/**
 	 * Returns the meta object for enum '{@link io.opencaesar.oml.SeparatorKind <em>Separator Kind</em>}'.
@@ -13878,24 +13871,6 @@ public interface OmlPackage extends EPackage {
 		EReference ANNOTATION__OWNING_REFERENCE = eINSTANCE.getAnnotation_OwningReference();
 
 		/**
-		 * The meta object literal for the '{@link io.opencaesar.oml.impl.AnnotatedElementImpl <em>Annotated Element</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see io.opencaesar.oml.impl.AnnotatedElementImpl
-		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getAnnotatedElement()
-		 * @generated
-		 */
-		EClass ANNOTATED_ELEMENT = eINSTANCE.getAnnotatedElement();
-
-		/**
-		 * The meta object literal for the '<em><b>Owned Annotations</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ANNOTATED_ELEMENT__OWNED_ANNOTATIONS = eINSTANCE.getAnnotatedElement_OwnedAnnotations();
-
-		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.IdentifiedElementImpl <em>Identified Element</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -13906,12 +13881,146 @@ public interface OmlPackage extends EPackage {
 		EClass IDENTIFIED_ELEMENT = eINSTANCE.getIdentifiedElement();
 
 		/**
+		 * The meta object literal for the '<em><b>Owned Annotations</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference IDENTIFIED_ELEMENT__OWNED_ANNOTATIONS = eINSTANCE.getIdentifiedElement_OwnedAnnotations();
+
+		/**
 		 * The meta object literal for the '<em><b>Get Iri</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EOperation IDENTIFIED_ELEMENT___GET_IRI = eINSTANCE.getIdentifiedElement__GetIri();
+
+		/**
+		 * The meta object literal for the '{@link io.opencaesar.oml.impl.ImportImpl <em>Import</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see io.opencaesar.oml.impl.ImportImpl
+		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getImport()
+		 * @generated
+		 */
+		EClass IMPORT = eINSTANCE.getImport();
+
+		/**
+		 * The meta object literal for the '<em><b>Namespace</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute IMPORT__NAMESPACE = eINSTANCE.getImport_Namespace();
+
+		/**
+		 * The meta object literal for the '<em><b>Prefix</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute IMPORT__PREFIX = eINSTANCE.getImport_Prefix();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Iri</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation IMPORT___GET_IRI = eINSTANCE.getImport__GetIri();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Separator</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation IMPORT___GET_SEPARATOR = eINSTANCE.getImport__GetSeparator();
+
+		/**
+		 * The meta object literal for the '{@link io.opencaesar.oml.impl.InstanceImpl <em>Instance</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see io.opencaesar.oml.impl.InstanceImpl
+		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getInstance()
+		 * @generated
+		 */
+		EClass INSTANCE = eINSTANCE.getInstance();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Property Values</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference INSTANCE__OWNED_PROPERTY_VALUES = eINSTANCE.getInstance_OwnedPropertyValues();
+
+		/**
+		 * The meta object literal for the '{@link io.opencaesar.oml.impl.StatementImpl <em>Statement</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see io.opencaesar.oml.impl.StatementImpl
+		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getStatement()
+		 * @generated
+		 */
+		EClass STATEMENT = eINSTANCE.getStatement();
+
+		/**
+		 * The meta object literal for the '{@link io.opencaesar.oml.impl.AxiomImpl <em>Axiom</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see io.opencaesar.oml.impl.AxiomImpl
+		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getAxiom()
+		 * @generated
+		 */
+		EClass AXIOM = eINSTANCE.getAxiom();
+
+		/**
+		 * The meta object literal for the '{@link io.opencaesar.oml.impl.AssertionImpl <em>Assertion</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see io.opencaesar.oml.impl.AssertionImpl
+		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getAssertion()
+		 * @generated
+		 */
+		EClass ASSERTION = eINSTANCE.getAssertion();
+
+		/**
+		 * The meta object literal for the '{@link io.opencaesar.oml.impl.PredicateImpl <em>Predicate</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see io.opencaesar.oml.impl.PredicateImpl
+		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getPredicate()
+		 * @generated
+		 */
+		EClass PREDICATE = eINSTANCE.getPredicate();
+
+		/**
+		 * The meta object literal for the '<em><b>Antecedent Rule</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PREDICATE__ANTECEDENT_RULE = eINSTANCE.getPredicate_AntecedentRule();
+
+		/**
+		 * The meta object literal for the '<em><b>Consequent Rule</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PREDICATE__CONSEQUENT_RULE = eINSTANCE.getPredicate_ConsequentRule();
+
+		/**
+		 * The meta object literal for the '{@link io.opencaesar.oml.impl.LiteralImpl <em>Literal</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see io.opencaesar.oml.impl.LiteralImpl
+		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getLiteral()
+		 * @generated
+		 */
+		EClass LITERAL = eINSTANCE.getLiteral();
 
 		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.OntologyImpl <em>Ontology</em>}' class.
@@ -13956,6 +14065,40 @@ public interface OmlPackage extends EPackage {
 		EOperation ONTOLOGY___GET_SEPARATOR = eINSTANCE.getOntology__GetSeparator();
 
 		/**
+		 * The meta object literal for the '{@link io.opencaesar.oml.impl.MemberImpl <em>Member</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see io.opencaesar.oml.impl.MemberImpl
+		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getMember()
+		 * @generated
+		 */
+		EClass MEMBER = eINSTANCE.getMember();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MEMBER__NAME = eINSTANCE.getMember_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Iri</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation MEMBER___GET_IRI = eINSTANCE.getMember__GetIri();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Abbreviated Iri</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation MEMBER___GET_ABBREVIATED_IRI = eINSTANCE.getMember__GetAbbreviatedIri();
+
+		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.VocabularyBoxImpl <em>Vocabulary Box</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -13964,6 +14107,16 @@ public interface OmlPackage extends EPackage {
 		 * @generated
 		 */
 		EClass VOCABULARY_BOX = eINSTANCE.getVocabularyBox();
+
+		/**
+		 * The meta object literal for the '{@link io.opencaesar.oml.impl.DescriptionBoxImpl <em>Description Box</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see io.opencaesar.oml.impl.DescriptionBoxImpl
+		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDescriptionBox()
+		 * @generated
+		 */
+		EClass DESCRIPTION_BOX = eINSTANCE.getDescriptionBox();
 
 		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.VocabularyImpl <em>Vocabulary</em>}' class.
@@ -14010,16 +14163,6 @@ public interface OmlPackage extends EPackage {
 		EReference VOCABULARY_BUNDLE__OWNED_IMPORTS = eINSTANCE.getVocabularyBundle_OwnedImports();
 
 		/**
-		 * The meta object literal for the '{@link io.opencaesar.oml.impl.DescriptionBoxImpl <em>Description Box</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see io.opencaesar.oml.impl.DescriptionBoxImpl
-		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDescriptionBox()
-		 * @generated
-		 */
-		EClass DESCRIPTION_BOX = eINSTANCE.getDescriptionBox();
-
-		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.DescriptionImpl <em>Description</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -14064,38 +14207,222 @@ public interface OmlPackage extends EPackage {
 		EReference DESCRIPTION_BUNDLE__OWNED_IMPORTS = eINSTANCE.getDescriptionBundle_OwnedImports();
 
 		/**
-		 * The meta object literal for the '{@link io.opencaesar.oml.impl.MemberImpl <em>Member</em>}' class.
+		 * The meta object literal for the '{@link io.opencaesar.oml.impl.VocabularyImportImpl <em>Vocabulary Import</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see io.opencaesar.oml.impl.MemberImpl
-		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getMember()
+		 * @see io.opencaesar.oml.impl.VocabularyImportImpl
+		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getVocabularyImport()
 		 * @generated
 		 */
-		EClass MEMBER = eINSTANCE.getMember();
+		EClass VOCABULARY_IMPORT = eINSTANCE.getVocabularyImport();
 
 		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Owning Vocabulary</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute MEMBER__NAME = eINSTANCE.getMember_Name();
+		EReference VOCABULARY_IMPORT__OWNING_VOCABULARY = eINSTANCE.getVocabularyImport_OwningVocabulary();
 
 		/**
-		 * The meta object literal for the '<em><b>Get Iri</b></em>' operation.
+		 * The meta object literal for the '{@link io.opencaesar.oml.impl.VocabularyBundleImportImpl <em>Vocabulary Bundle Import</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
+		 * @see io.opencaesar.oml.impl.VocabularyBundleImportImpl
+		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getVocabularyBundleImport()
 		 * @generated
 		 */
-		EOperation MEMBER___GET_IRI = eINSTANCE.getMember__GetIri();
+		EClass VOCABULARY_BUNDLE_IMPORT = eINSTANCE.getVocabularyBundleImport();
 
 		/**
-		 * The meta object literal for the '<em><b>Get Abbreviated Iri</b></em>' operation.
+		 * The meta object literal for the '<em><b>Owning Vocabulary Bundle</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EOperation MEMBER___GET_ABBREVIATED_IRI = eINSTANCE.getMember__GetAbbreviatedIri();
+		EReference VOCABULARY_BUNDLE_IMPORT__OWNING_VOCABULARY_BUNDLE = eINSTANCE.getVocabularyBundleImport_OwningVocabularyBundle();
+
+		/**
+		 * The meta object literal for the '{@link io.opencaesar.oml.impl.DescriptionImportImpl <em>Description Import</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see io.opencaesar.oml.impl.DescriptionImportImpl
+		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDescriptionImport()
+		 * @generated
+		 */
+		EClass DESCRIPTION_IMPORT = eINSTANCE.getDescriptionImport();
+
+		/**
+		 * The meta object literal for the '<em><b>Owning Description</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DESCRIPTION_IMPORT__OWNING_DESCRIPTION = eINSTANCE.getDescriptionImport_OwningDescription();
+
+		/**
+		 * The meta object literal for the '{@link io.opencaesar.oml.impl.DescriptionBundleImportImpl <em>Description Bundle Import</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see io.opencaesar.oml.impl.DescriptionBundleImportImpl
+		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDescriptionBundleImport()
+		 * @generated
+		 */
+		EClass DESCRIPTION_BUNDLE_IMPORT = eINSTANCE.getDescriptionBundleImport();
+
+		/**
+		 * The meta object literal for the '<em><b>Owning Description Bundle</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DESCRIPTION_BUNDLE_IMPORT__OWNING_DESCRIPTION_BUNDLE = eINSTANCE.getDescriptionBundleImport_OwningDescriptionBundle();
+
+		/**
+		 * The meta object literal for the '{@link io.opencaesar.oml.impl.VocabularyExtensionImpl <em>Vocabulary Extension</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see io.opencaesar.oml.impl.VocabularyExtensionImpl
+		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getVocabularyExtension()
+		 * @generated
+		 */
+		EClass VOCABULARY_EXTENSION = eINSTANCE.getVocabularyExtension();
+
+		/**
+		 * The meta object literal for the '{@link io.opencaesar.oml.impl.VocabularyUsageImpl <em>Vocabulary Usage</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see io.opencaesar.oml.impl.VocabularyUsageImpl
+		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getVocabularyUsage()
+		 * @generated
+		 */
+		EClass VOCABULARY_USAGE = eINSTANCE.getVocabularyUsage();
+
+		/**
+		 * The meta object literal for the '{@link io.opencaesar.oml.impl.VocabularyBundleExtensionImpl <em>Vocabulary Bundle Extension</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see io.opencaesar.oml.impl.VocabularyBundleExtensionImpl
+		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getVocabularyBundleExtension()
+		 * @generated
+		 */
+		EClass VOCABULARY_BUNDLE_EXTENSION = eINSTANCE.getVocabularyBundleExtension();
+
+		/**
+		 * The meta object literal for the '{@link io.opencaesar.oml.impl.VocabularyBundleInclusionImpl <em>Vocabulary Bundle Inclusion</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see io.opencaesar.oml.impl.VocabularyBundleInclusionImpl
+		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getVocabularyBundleInclusion()
+		 * @generated
+		 */
+		EClass VOCABULARY_BUNDLE_INCLUSION = eINSTANCE.getVocabularyBundleInclusion();
+
+		/**
+		 * The meta object literal for the '{@link io.opencaesar.oml.impl.DescriptionExtensionImpl <em>Description Extension</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see io.opencaesar.oml.impl.DescriptionExtensionImpl
+		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDescriptionExtension()
+		 * @generated
+		 */
+		EClass DESCRIPTION_EXTENSION = eINSTANCE.getDescriptionExtension();
+
+		/**
+		 * The meta object literal for the '{@link io.opencaesar.oml.impl.DescriptionUsageImpl <em>Description Usage</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see io.opencaesar.oml.impl.DescriptionUsageImpl
+		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDescriptionUsage()
+		 * @generated
+		 */
+		EClass DESCRIPTION_USAGE = eINSTANCE.getDescriptionUsage();
+
+		/**
+		 * The meta object literal for the '{@link io.opencaesar.oml.impl.DescriptionBundleExtensionImpl <em>Description Bundle Extension</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see io.opencaesar.oml.impl.DescriptionBundleExtensionImpl
+		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDescriptionBundleExtension()
+		 * @generated
+		 */
+		EClass DESCRIPTION_BUNDLE_EXTENSION = eINSTANCE.getDescriptionBundleExtension();
+
+		/**
+		 * The meta object literal for the '{@link io.opencaesar.oml.impl.DescriptionBundleInclusionImpl <em>Description Bundle Inclusion</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see io.opencaesar.oml.impl.DescriptionBundleInclusionImpl
+		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDescriptionBundleInclusion()
+		 * @generated
+		 */
+		EClass DESCRIPTION_BUNDLE_INCLUSION = eINSTANCE.getDescriptionBundleInclusion();
+
+		/**
+		 * The meta object literal for the '{@link io.opencaesar.oml.impl.DescriptionBundleUsageImpl <em>Description Bundle Usage</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see io.opencaesar.oml.impl.DescriptionBundleUsageImpl
+		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDescriptionBundleUsage()
+		 * @generated
+		 */
+		EClass DESCRIPTION_BUNDLE_USAGE = eINSTANCE.getDescriptionBundleUsage();
+
+		/**
+		 * The meta object literal for the '{@link io.opencaesar.oml.impl.VocabularyStatementImpl <em>Vocabulary Statement</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see io.opencaesar.oml.impl.VocabularyStatementImpl
+		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getVocabularyStatement()
+		 * @generated
+		 */
+		EClass VOCABULARY_STATEMENT = eINSTANCE.getVocabularyStatement();
+
+		/**
+		 * The meta object literal for the '<em><b>Owning Vocabulary</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference VOCABULARY_STATEMENT__OWNING_VOCABULARY = eINSTANCE.getVocabularyStatement_OwningVocabulary();
+
+		/**
+		 * The meta object literal for the '{@link io.opencaesar.oml.impl.DescriptionStatementImpl <em>Description Statement</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see io.opencaesar.oml.impl.DescriptionStatementImpl
+		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDescriptionStatement()
+		 * @generated
+		 */
+		EClass DESCRIPTION_STATEMENT = eINSTANCE.getDescriptionStatement();
+
+		/**
+		 * The meta object literal for the '<em><b>Owning Description</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DESCRIPTION_STATEMENT__OWNING_DESCRIPTION = eINSTANCE.getDescriptionStatement_OwningDescription();
+
+		/**
+		 * The meta object literal for the '{@link io.opencaesar.oml.impl.VocabularyMemberImpl <em>Vocabulary Member</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see io.opencaesar.oml.impl.VocabularyMemberImpl
+		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getVocabularyMember()
+		 * @generated
+		 */
+		EClass VOCABULARY_MEMBER = eINSTANCE.getVocabularyMember();
+
+		/**
+		 * The meta object literal for the '{@link io.opencaesar.oml.impl.DescriptionMemberImpl <em>Description Member</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see io.opencaesar.oml.impl.DescriptionMemberImpl
+		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDescriptionMember()
+		 * @generated
+		 */
+		EClass DESCRIPTION_MEMBER = eINSTANCE.getDescriptionMember();
 
 		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.TermImpl <em>Term</em>}' class.
@@ -14106,6 +14433,32 @@ public interface OmlPackage extends EPackage {
 		 * @generated
 		 */
 		EClass TERM = eINSTANCE.getTerm();
+
+		/**
+		 * The meta object literal for the '{@link io.opencaesar.oml.impl.RuleImpl <em>Rule</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see io.opencaesar.oml.impl.RuleImpl
+		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRule()
+		 * @generated
+		 */
+		EClass RULE = eINSTANCE.getRule();
+
+		/**
+		 * The meta object literal for the '<em><b>Antecedent</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference RULE__ANTECEDENT = eINSTANCE.getRule_Antecedent();
+
+		/**
+		 * The meta object literal for the '<em><b>Consequent</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference RULE__CONSEQUENT = eINSTANCE.getRule_Consequent();
 
 		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.SpecializableTermImpl <em>Specializable Term</em>}' class.
@@ -14124,6 +14477,26 @@ public interface OmlPackage extends EPackage {
 		 * @generated
 		 */
 		EReference SPECIALIZABLE_TERM__OWNED_SPECIALIZATIONS = eINSTANCE.getSpecializableTerm_OwnedSpecializations();
+
+		/**
+		 * The meta object literal for the '{@link io.opencaesar.oml.impl.FeatureImpl <em>Feature</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see io.opencaesar.oml.impl.FeatureImpl
+		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getFeature()
+		 * @generated
+		 */
+		EClass FEATURE = eINSTANCE.getFeature();
+
+		/**
+		 * The meta object literal for the '{@link io.opencaesar.oml.impl.PropertyImpl <em>Property</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see io.opencaesar.oml.impl.PropertyImpl
+		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getProperty()
+		 * @generated
+		 */
+		EClass PROPERTY = eINSTANCE.getProperty();
 
 		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.TypeImpl <em>Type</em>}' class.
@@ -14154,6 +14527,16 @@ public interface OmlPackage extends EPackage {
 		EReference CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS = eINSTANCE.getClassifier_OwnedPropertyRestrictions();
 
 		/**
+		 * The meta object literal for the '{@link io.opencaesar.oml.impl.ScalarImpl <em>Scalar</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see io.opencaesar.oml.impl.ScalarImpl
+		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getScalar()
+		 * @generated
+		 */
+		EClass SCALAR = eINSTANCE.getScalar();
+
+		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.EntityImpl <em>Entity</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -14178,6 +14561,16 @@ public interface OmlPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ENTITY__OWNED_KEYS = eINSTANCE.getEntity_OwnedKeys();
+
+		/**
+		 * The meta object literal for the '{@link io.opencaesar.oml.impl.StructureImpl <em>Structure</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see io.opencaesar.oml.impl.StructureImpl
+		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getStructure()
+		 * @generated
+		 */
+		EClass STRUCTURE = eINSTANCE.getStructure();
 
 		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.AspectImpl <em>Aspect</em>}' class.
@@ -14306,34 +14699,104 @@ public interface OmlPackage extends EPackage {
 		EAttribute RELATION_ENTITY__TRANSITIVE = eINSTANCE.getRelationEntity_Transitive();
 
 		/**
-		 * The meta object literal for the '{@link io.opencaesar.oml.impl.StructureImpl <em>Structure</em>}' class.
+		 * The meta object literal for the '{@link io.opencaesar.oml.impl.FacetedScalarImpl <em>Faceted Scalar</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see io.opencaesar.oml.impl.StructureImpl
-		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getStructure()
+		 * @see io.opencaesar.oml.impl.FacetedScalarImpl
+		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getFacetedScalar()
 		 * @generated
 		 */
-		EClass STRUCTURE = eINSTANCE.getStructure();
+		EClass FACETED_SCALAR = eINSTANCE.getFacetedScalar();
 
 		/**
-		 * The meta object literal for the '{@link io.opencaesar.oml.impl.FeatureImpl <em>Feature</em>}' class.
+		 * The meta object literal for the '<em><b>Length</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see io.opencaesar.oml.impl.FeatureImpl
-		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getFeature()
 		 * @generated
 		 */
-		EClass FEATURE = eINSTANCE.getFeature();
+		EAttribute FACETED_SCALAR__LENGTH = eINSTANCE.getFacetedScalar_Length();
 
 		/**
-		 * The meta object literal for the '{@link io.opencaesar.oml.impl.PropertyImpl <em>Property</em>}' class.
+		 * The meta object literal for the '<em><b>Min Length</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see io.opencaesar.oml.impl.PropertyImpl
-		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getProperty()
 		 * @generated
 		 */
-		EClass PROPERTY = eINSTANCE.getProperty();
+		EAttribute FACETED_SCALAR__MIN_LENGTH = eINSTANCE.getFacetedScalar_MinLength();
+
+		/**
+		 * The meta object literal for the '<em><b>Max Length</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FACETED_SCALAR__MAX_LENGTH = eINSTANCE.getFacetedScalar_MaxLength();
+
+		/**
+		 * The meta object literal for the '<em><b>Pattern</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FACETED_SCALAR__PATTERN = eINSTANCE.getFacetedScalar_Pattern();
+
+		/**
+		 * The meta object literal for the '<em><b>Language</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FACETED_SCALAR__LANGUAGE = eINSTANCE.getFacetedScalar_Language();
+
+		/**
+		 * The meta object literal for the '<em><b>Min Inclusive</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference FACETED_SCALAR__MIN_INCLUSIVE = eINSTANCE.getFacetedScalar_MinInclusive();
+
+		/**
+		 * The meta object literal for the '<em><b>Min Exclusive</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference FACETED_SCALAR__MIN_EXCLUSIVE = eINSTANCE.getFacetedScalar_MinExclusive();
+
+		/**
+		 * The meta object literal for the '<em><b>Max Inclusive</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference FACETED_SCALAR__MAX_INCLUSIVE = eINSTANCE.getFacetedScalar_MaxInclusive();
+
+		/**
+		 * The meta object literal for the '<em><b>Max Exclusive</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference FACETED_SCALAR__MAX_EXCLUSIVE = eINSTANCE.getFacetedScalar_MaxExclusive();
+
+		/**
+		 * The meta object literal for the '{@link io.opencaesar.oml.impl.EnumeratedScalarImpl <em>Enumerated Scalar</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see io.opencaesar.oml.impl.EnumeratedScalarImpl
+		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getEnumeratedScalar()
+		 * @generated
+		 */
+		EClass ENUMERATED_SCALAR = eINSTANCE.getEnumeratedScalar();
+
+		/**
+		 * The meta object literal for the '<em><b>Literals</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ENUMERATED_SCALAR__LITERALS = eINSTANCE.getEnumeratedScalar_Literals();
 
 		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.AnnotationPropertyImpl <em>Annotation Property</em>}' class.
@@ -14446,116 +14909,6 @@ public interface OmlPackage extends EPackage {
 		 * @generated
 		 */
 		EReference STRUCTURED_PROPERTY__RANGE = eINSTANCE.getStructuredProperty_Range();
-
-		/**
-		 * The meta object literal for the '{@link io.opencaesar.oml.impl.ScalarImpl <em>Scalar</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see io.opencaesar.oml.impl.ScalarImpl
-		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getScalar()
-		 * @generated
-		 */
-		EClass SCALAR = eINSTANCE.getScalar();
-
-		/**
-		 * The meta object literal for the '{@link io.opencaesar.oml.impl.FacetedScalarImpl <em>Faceted Scalar</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see io.opencaesar.oml.impl.FacetedScalarImpl
-		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getFacetedScalar()
-		 * @generated
-		 */
-		EClass FACETED_SCALAR = eINSTANCE.getFacetedScalar();
-
-		/**
-		 * The meta object literal for the '<em><b>Length</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute FACETED_SCALAR__LENGTH = eINSTANCE.getFacetedScalar_Length();
-
-		/**
-		 * The meta object literal for the '<em><b>Min Length</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute FACETED_SCALAR__MIN_LENGTH = eINSTANCE.getFacetedScalar_MinLength();
-
-		/**
-		 * The meta object literal for the '<em><b>Max Length</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute FACETED_SCALAR__MAX_LENGTH = eINSTANCE.getFacetedScalar_MaxLength();
-
-		/**
-		 * The meta object literal for the '<em><b>Pattern</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute FACETED_SCALAR__PATTERN = eINSTANCE.getFacetedScalar_Pattern();
-
-		/**
-		 * The meta object literal for the '<em><b>Language</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute FACETED_SCALAR__LANGUAGE = eINSTANCE.getFacetedScalar_Language();
-
-		/**
-		 * The meta object literal for the '<em><b>Min Inclusive</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference FACETED_SCALAR__MIN_INCLUSIVE = eINSTANCE.getFacetedScalar_MinInclusive();
-
-		/**
-		 * The meta object literal for the '<em><b>Min Exclusive</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference FACETED_SCALAR__MIN_EXCLUSIVE = eINSTANCE.getFacetedScalar_MinExclusive();
-
-		/**
-		 * The meta object literal for the '<em><b>Max Inclusive</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference FACETED_SCALAR__MAX_INCLUSIVE = eINSTANCE.getFacetedScalar_MaxInclusive();
-
-		/**
-		 * The meta object literal for the '<em><b>Max Exclusive</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference FACETED_SCALAR__MAX_EXCLUSIVE = eINSTANCE.getFacetedScalar_MaxExclusive();
-
-		/**
-		 * The meta object literal for the '{@link io.opencaesar.oml.impl.EnumeratedScalarImpl <em>Enumerated Scalar</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see io.opencaesar.oml.impl.EnumeratedScalarImpl
-		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getEnumeratedScalar()
-		 * @generated
-		 */
-		EClass ENUMERATED_SCALAR = eINSTANCE.getEnumeratedScalar();
-
-		/**
-		 * The meta object literal for the '<em><b>Literals</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ENUMERATED_SCALAR__LITERALS = eINSTANCE.getEnumeratedScalar_Literals();
 
 		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.RelationImpl <em>Relation</em>}' class.
@@ -14708,84 +15061,6 @@ public interface OmlPackage extends EPackage {
 		EOperation REVERSE_RELATION___DERIVE_INVERSE = eINSTANCE.getReverseRelation__DeriveInverse();
 
 		/**
-		 * The meta object literal for the '{@link io.opencaesar.oml.impl.RuleImpl <em>Rule</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see io.opencaesar.oml.impl.RuleImpl
-		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRule()
-		 * @generated
-		 */
-		EClass RULE = eINSTANCE.getRule();
-
-		/**
-		 * The meta object literal for the '<em><b>Antecedent</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference RULE__ANTECEDENT = eINSTANCE.getRule_Antecedent();
-
-		/**
-		 * The meta object literal for the '<em><b>Consequent</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference RULE__CONSEQUENT = eINSTANCE.getRule_Consequent();
-
-		/**
-		 * The meta object literal for the '{@link io.opencaesar.oml.impl.InstanceImpl <em>Instance</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see io.opencaesar.oml.impl.InstanceImpl
-		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getInstance()
-		 * @generated
-		 */
-		EClass INSTANCE = eINSTANCE.getInstance();
-
-		/**
-		 * The meta object literal for the '<em><b>Owned Property Values</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference INSTANCE__OWNED_PROPERTY_VALUES = eINSTANCE.getInstance_OwnedPropertyValues();
-
-		/**
-		 * The meta object literal for the '{@link io.opencaesar.oml.impl.StructureInstanceImpl <em>Structure Instance</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see io.opencaesar.oml.impl.StructureInstanceImpl
-		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getStructureInstance()
-		 * @generated
-		 */
-		EClass STRUCTURE_INSTANCE = eINSTANCE.getStructureInstance();
-
-		/**
-		 * The meta object literal for the '<em><b>Type</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference STRUCTURE_INSTANCE__TYPE = eINSTANCE.getStructureInstance_Type();
-
-		/**
-		 * The meta object literal for the '<em><b>Owning Axiom</b></em>' container reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference STRUCTURE_INSTANCE__OWNING_AXIOM = eINSTANCE.getStructureInstance_OwningAxiom();
-
-		/**
-		 * The meta object literal for the '<em><b>Owning Assertion</b></em>' container reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference STRUCTURE_INSTANCE__OWNING_ASSERTION = eINSTANCE.getStructureInstance_OwningAssertion();
-
-		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.NamedInstanceImpl <em>Named Instance</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -14856,620 +15131,72 @@ public interface OmlPackage extends EPackage {
 		EReference RELATION_INSTANCE__TARGETS = eINSTANCE.getRelationInstance_Targets();
 
 		/**
-		 * The meta object literal for the '{@link io.opencaesar.oml.impl.ReferenceImpl <em>Reference</em>}' class.
+		 * The meta object literal for the '{@link io.opencaesar.oml.impl.StructureInstanceImpl <em>Structure Instance</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see io.opencaesar.oml.impl.ReferenceImpl
-		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getReference()
+		 * @see io.opencaesar.oml.impl.StructureInstanceImpl
+		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getStructureInstance()
 		 * @generated
 		 */
-		EClass REFERENCE = eINSTANCE.getReference();
+		EClass STRUCTURE_INSTANCE = eINSTANCE.getStructureInstance();
 
 		/**
-		 * The meta object literal for the '<em><b>Owned Annotations</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Type</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference REFERENCE__OWNED_ANNOTATIONS = eINSTANCE.getReference_OwnedAnnotations();
+		EReference STRUCTURE_INSTANCE__TYPE = eINSTANCE.getStructureInstance_Type();
 
 		/**
-		 * The meta object literal for the '{@link io.opencaesar.oml.impl.SpecializableTermReferenceImpl <em>Specializable Term Reference</em>}' class.
+		 * The meta object literal for the '<em><b>Owning Axiom</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see io.opencaesar.oml.impl.SpecializableTermReferenceImpl
-		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getSpecializableTermReference()
 		 * @generated
 		 */
-		EClass SPECIALIZABLE_TERM_REFERENCE = eINSTANCE.getSpecializableTermReference();
+		EReference STRUCTURE_INSTANCE__OWNING_AXIOM = eINSTANCE.getStructureInstance_OwningAxiom();
 
 		/**
-		 * The meta object literal for the '<em><b>Owned Specializations</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Owning Assertion</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference SPECIALIZABLE_TERM_REFERENCE__OWNED_SPECIALIZATIONS = eINSTANCE.getSpecializableTermReference_OwnedSpecializations();
+		EReference STRUCTURE_INSTANCE__OWNING_ASSERTION = eINSTANCE.getStructureInstance_OwningAssertion();
 
 		/**
-		 * The meta object literal for the '{@link io.opencaesar.oml.impl.ClassifierReferenceImpl <em>Classifier Reference</em>}' class.
+		 * The meta object literal for the '{@link io.opencaesar.oml.impl.KeyAxiomImpl <em>Key Axiom</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see io.opencaesar.oml.impl.ClassifierReferenceImpl
-		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getClassifierReference()
+		 * @see io.opencaesar.oml.impl.KeyAxiomImpl
+		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getKeyAxiom()
 		 * @generated
 		 */
-		EClass CLASSIFIER_REFERENCE = eINSTANCE.getClassifierReference();
+		EClass KEY_AXIOM = eINSTANCE.getKeyAxiom();
 
 		/**
-		 * The meta object literal for the '<em><b>Owned Property Restrictions</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Properties</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CLASSIFIER_REFERENCE__OWNED_PROPERTY_RESTRICTIONS = eINSTANCE.getClassifierReference_OwnedPropertyRestrictions();
+		EReference KEY_AXIOM__PROPERTIES = eINSTANCE.getKeyAxiom_Properties();
 
 		/**
-		 * The meta object literal for the '{@link io.opencaesar.oml.impl.EntityReferenceImpl <em>Entity Reference</em>}' class.
+		 * The meta object literal for the '<em><b>Owning Entity</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see io.opencaesar.oml.impl.EntityReferenceImpl
-		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getEntityReference()
 		 * @generated
 		 */
-		EClass ENTITY_REFERENCE = eINSTANCE.getEntityReference();
+		EReference KEY_AXIOM__OWNING_ENTITY = eINSTANCE.getKeyAxiom_OwningEntity();
 
 		/**
-		 * The meta object literal for the '<em><b>Owned Relation Restrictions</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Owning Reference</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ENTITY_REFERENCE__OWNED_RELATION_RESTRICTIONS = eINSTANCE.getEntityReference_OwnedRelationRestrictions();
-
-		/**
-		 * The meta object literal for the '<em><b>Owned Keys</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ENTITY_REFERENCE__OWNED_KEYS = eINSTANCE.getEntityReference_OwnedKeys();
-
-		/**
-		 * The meta object literal for the '{@link io.opencaesar.oml.impl.AspectReferenceImpl <em>Aspect Reference</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see io.opencaesar.oml.impl.AspectReferenceImpl
-		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getAspectReference()
-		 * @generated
-		 */
-		EClass ASPECT_REFERENCE = eINSTANCE.getAspectReference();
-
-		/**
-		 * The meta object literal for the '<em><b>Aspect</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ASPECT_REFERENCE__ASPECT = eINSTANCE.getAspectReference_Aspect();
-
-		/**
-		 * The meta object literal for the '{@link io.opencaesar.oml.impl.ConceptReferenceImpl <em>Concept Reference</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see io.opencaesar.oml.impl.ConceptReferenceImpl
-		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getConceptReference()
-		 * @generated
-		 */
-		EClass CONCEPT_REFERENCE = eINSTANCE.getConceptReference();
-
-		/**
-		 * The meta object literal for the '<em><b>Concept</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CONCEPT_REFERENCE__CONCEPT = eINSTANCE.getConceptReference_Concept();
-
-		/**
-		 * The meta object literal for the '{@link io.opencaesar.oml.impl.RelationEntityReferenceImpl <em>Relation Entity Reference</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see io.opencaesar.oml.impl.RelationEntityReferenceImpl
-		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRelationEntityReference()
-		 * @generated
-		 */
-		EClass RELATION_ENTITY_REFERENCE = eINSTANCE.getRelationEntityReference();
-
-		/**
-		 * The meta object literal for the '<em><b>Entity</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference RELATION_ENTITY_REFERENCE__ENTITY = eINSTANCE.getRelationEntityReference_Entity();
-
-		/**
-		 * The meta object literal for the '{@link io.opencaesar.oml.impl.StructureReferenceImpl <em>Structure Reference</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see io.opencaesar.oml.impl.StructureReferenceImpl
-		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getStructureReference()
-		 * @generated
-		 */
-		EClass STRUCTURE_REFERENCE = eINSTANCE.getStructureReference();
-
-		/**
-		 * The meta object literal for the '<em><b>Structure</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference STRUCTURE_REFERENCE__STRUCTURE = eINSTANCE.getStructureReference_Structure();
-
-		/**
-		 * The meta object literal for the '{@link io.opencaesar.oml.impl.AnnotationPropertyReferenceImpl <em>Annotation Property Reference</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see io.opencaesar.oml.impl.AnnotationPropertyReferenceImpl
-		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getAnnotationPropertyReference()
-		 * @generated
-		 */
-		EClass ANNOTATION_PROPERTY_REFERENCE = eINSTANCE.getAnnotationPropertyReference();
-
-		/**
-		 * The meta object literal for the '<em><b>Property</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ANNOTATION_PROPERTY_REFERENCE__PROPERTY = eINSTANCE.getAnnotationPropertyReference_Property();
-
-		/**
-		 * The meta object literal for the '{@link io.opencaesar.oml.impl.ScalarPropertyReferenceImpl <em>Scalar Property Reference</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see io.opencaesar.oml.impl.ScalarPropertyReferenceImpl
-		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getScalarPropertyReference()
-		 * @generated
-		 */
-		EClass SCALAR_PROPERTY_REFERENCE = eINSTANCE.getScalarPropertyReference();
-
-		/**
-		 * The meta object literal for the '<em><b>Property</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference SCALAR_PROPERTY_REFERENCE__PROPERTY = eINSTANCE.getScalarPropertyReference_Property();
-
-		/**
-		 * The meta object literal for the '{@link io.opencaesar.oml.impl.StructuredPropertyReferenceImpl <em>Structured Property Reference</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see io.opencaesar.oml.impl.StructuredPropertyReferenceImpl
-		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getStructuredPropertyReference()
-		 * @generated
-		 */
-		EClass STRUCTURED_PROPERTY_REFERENCE = eINSTANCE.getStructuredPropertyReference();
-
-		/**
-		 * The meta object literal for the '<em><b>Property</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference STRUCTURED_PROPERTY_REFERENCE__PROPERTY = eINSTANCE.getStructuredPropertyReference_Property();
-
-		/**
-		 * The meta object literal for the '{@link io.opencaesar.oml.impl.FacetedScalarReferenceImpl <em>Faceted Scalar Reference</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see io.opencaesar.oml.impl.FacetedScalarReferenceImpl
-		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getFacetedScalarReference()
-		 * @generated
-		 */
-		EClass FACETED_SCALAR_REFERENCE = eINSTANCE.getFacetedScalarReference();
-
-		/**
-		 * The meta object literal for the '<em><b>Scalar</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference FACETED_SCALAR_REFERENCE__SCALAR = eINSTANCE.getFacetedScalarReference_Scalar();
-
-		/**
-		 * The meta object literal for the '{@link io.opencaesar.oml.impl.EnumeratedScalarReferenceImpl <em>Enumerated Scalar Reference</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see io.opencaesar.oml.impl.EnumeratedScalarReferenceImpl
-		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getEnumeratedScalarReference()
-		 * @generated
-		 */
-		EClass ENUMERATED_SCALAR_REFERENCE = eINSTANCE.getEnumeratedScalarReference();
-
-		/**
-		 * The meta object literal for the '<em><b>Scalar</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ENUMERATED_SCALAR_REFERENCE__SCALAR = eINSTANCE.getEnumeratedScalarReference_Scalar();
-
-		/**
-		 * The meta object literal for the '{@link io.opencaesar.oml.impl.RelationReferenceImpl <em>Relation Reference</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see io.opencaesar.oml.impl.RelationReferenceImpl
-		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRelationReference()
-		 * @generated
-		 */
-		EClass RELATION_REFERENCE = eINSTANCE.getRelationReference();
-
-		/**
-		 * The meta object literal for the '<em><b>Relation</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference RELATION_REFERENCE__RELATION = eINSTANCE.getRelationReference_Relation();
-
-		/**
-		 * The meta object literal for the '{@link io.opencaesar.oml.impl.RuleReferenceImpl <em>Rule Reference</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see io.opencaesar.oml.impl.RuleReferenceImpl
-		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRuleReference()
-		 * @generated
-		 */
-		EClass RULE_REFERENCE = eINSTANCE.getRuleReference();
-
-		/**
-		 * The meta object literal for the '<em><b>Rule</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference RULE_REFERENCE__RULE = eINSTANCE.getRuleReference_Rule();
-
-		/**
-		 * The meta object literal for the '{@link io.opencaesar.oml.impl.NamedInstanceReferenceImpl <em>Named Instance Reference</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see io.opencaesar.oml.impl.NamedInstanceReferenceImpl
-		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getNamedInstanceReference()
-		 * @generated
-		 */
-		EClass NAMED_INSTANCE_REFERENCE = eINSTANCE.getNamedInstanceReference();
-
-		/**
-		 * The meta object literal for the '<em><b>Owned Property Values</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference NAMED_INSTANCE_REFERENCE__OWNED_PROPERTY_VALUES = eINSTANCE.getNamedInstanceReference_OwnedPropertyValues();
-
-		/**
-		 * The meta object literal for the '<em><b>Owned Links</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference NAMED_INSTANCE_REFERENCE__OWNED_LINKS = eINSTANCE.getNamedInstanceReference_OwnedLinks();
-
-		/**
-		 * The meta object literal for the '{@link io.opencaesar.oml.impl.ConceptInstanceReferenceImpl <em>Concept Instance Reference</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see io.opencaesar.oml.impl.ConceptInstanceReferenceImpl
-		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getConceptInstanceReference()
-		 * @generated
-		 */
-		EClass CONCEPT_INSTANCE_REFERENCE = eINSTANCE.getConceptInstanceReference();
-
-		/**
-		 * The meta object literal for the '<em><b>Instance</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CONCEPT_INSTANCE_REFERENCE__INSTANCE = eINSTANCE.getConceptInstanceReference_Instance();
-
-		/**
-		 * The meta object literal for the '<em><b>Owned Types</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CONCEPT_INSTANCE_REFERENCE__OWNED_TYPES = eINSTANCE.getConceptInstanceReference_OwnedTypes();
-
-		/**
-		 * The meta object literal for the '{@link io.opencaesar.oml.impl.RelationInstanceReferenceImpl <em>Relation Instance Reference</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see io.opencaesar.oml.impl.RelationInstanceReferenceImpl
-		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRelationInstanceReference()
-		 * @generated
-		 */
-		EClass RELATION_INSTANCE_REFERENCE = eINSTANCE.getRelationInstanceReference();
-
-		/**
-		 * The meta object literal for the '<em><b>Instance</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference RELATION_INSTANCE_REFERENCE__INSTANCE = eINSTANCE.getRelationInstanceReference_Instance();
-
-		/**
-		 * The meta object literal for the '<em><b>Owned Types</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference RELATION_INSTANCE_REFERENCE__OWNED_TYPES = eINSTANCE.getRelationInstanceReference_OwnedTypes();
-
-		/**
-		 * The meta object literal for the '{@link io.opencaesar.oml.impl.StatementImpl <em>Statement</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see io.opencaesar.oml.impl.StatementImpl
-		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getStatement()
-		 * @generated
-		 */
-		EClass STATEMENT = eINSTANCE.getStatement();
-
-		/**
-		 * The meta object literal for the '{@link io.opencaesar.oml.impl.VocabularyStatementImpl <em>Vocabulary Statement</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see io.opencaesar.oml.impl.VocabularyStatementImpl
-		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getVocabularyStatement()
-		 * @generated
-		 */
-		EClass VOCABULARY_STATEMENT = eINSTANCE.getVocabularyStatement();
-
-		/**
-		 * The meta object literal for the '<em><b>Owning Vocabulary</b></em>' container reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference VOCABULARY_STATEMENT__OWNING_VOCABULARY = eINSTANCE.getVocabularyStatement_OwningVocabulary();
-
-		/**
-		 * The meta object literal for the '{@link io.opencaesar.oml.impl.DescriptionStatementImpl <em>Description Statement</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see io.opencaesar.oml.impl.DescriptionStatementImpl
-		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDescriptionStatement()
-		 * @generated
-		 */
-		EClass DESCRIPTION_STATEMENT = eINSTANCE.getDescriptionStatement();
-
-		/**
-		 * The meta object literal for the '<em><b>Owning Description</b></em>' container reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference DESCRIPTION_STATEMENT__OWNING_DESCRIPTION = eINSTANCE.getDescriptionStatement_OwningDescription();
-
-		/**
-		 * The meta object literal for the '{@link io.opencaesar.oml.impl.ImportImpl <em>Import</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see io.opencaesar.oml.impl.ImportImpl
-		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getImport()
-		 * @generated
-		 */
-		EClass IMPORT = eINSTANCE.getImport();
-
-		/**
-		 * The meta object literal for the '<em><b>Namespace</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute IMPORT__NAMESPACE = eINSTANCE.getImport_Namespace();
-
-		/**
-		 * The meta object literal for the '<em><b>Prefix</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute IMPORT__PREFIX = eINSTANCE.getImport_Prefix();
-
-		/**
-		 * The meta object literal for the '<em><b>Get Iri</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation IMPORT___GET_IRI = eINSTANCE.getImport__GetIri();
-
-		/**
-		 * The meta object literal for the '<em><b>Get Separator</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation IMPORT___GET_SEPARATOR = eINSTANCE.getImport__GetSeparator();
-
-		/**
-		 * The meta object literal for the '{@link io.opencaesar.oml.impl.VocabularyImportImpl <em>Vocabulary Import</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see io.opencaesar.oml.impl.VocabularyImportImpl
-		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getVocabularyImport()
-		 * @generated
-		 */
-		EClass VOCABULARY_IMPORT = eINSTANCE.getVocabularyImport();
-
-		/**
-		 * The meta object literal for the '<em><b>Owning Vocabulary</b></em>' container reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference VOCABULARY_IMPORT__OWNING_VOCABULARY = eINSTANCE.getVocabularyImport_OwningVocabulary();
-
-		/**
-		 * The meta object literal for the '{@link io.opencaesar.oml.impl.VocabularyExtensionImpl <em>Vocabulary Extension</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see io.opencaesar.oml.impl.VocabularyExtensionImpl
-		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getVocabularyExtension()
-		 * @generated
-		 */
-		EClass VOCABULARY_EXTENSION = eINSTANCE.getVocabularyExtension();
-
-		/**
-		 * The meta object literal for the '{@link io.opencaesar.oml.impl.VocabularyUsageImpl <em>Vocabulary Usage</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see io.opencaesar.oml.impl.VocabularyUsageImpl
-		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getVocabularyUsage()
-		 * @generated
-		 */
-		EClass VOCABULARY_USAGE = eINSTANCE.getVocabularyUsage();
-
-		/**
-		 * The meta object literal for the '{@link io.opencaesar.oml.impl.VocabularyBundleImportImpl <em>Vocabulary Bundle Import</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see io.opencaesar.oml.impl.VocabularyBundleImportImpl
-		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getVocabularyBundleImport()
-		 * @generated
-		 */
-		EClass VOCABULARY_BUNDLE_IMPORT = eINSTANCE.getVocabularyBundleImport();
-
-		/**
-		 * The meta object literal for the '<em><b>Owning Vocabulary Bundle</b></em>' container reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference VOCABULARY_BUNDLE_IMPORT__OWNING_VOCABULARY_BUNDLE = eINSTANCE.getVocabularyBundleImport_OwningVocabularyBundle();
-
-		/**
-		 * The meta object literal for the '{@link io.opencaesar.oml.impl.VocabularyBundleExtensionImpl <em>Vocabulary Bundle Extension</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see io.opencaesar.oml.impl.VocabularyBundleExtensionImpl
-		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getVocabularyBundleExtension()
-		 * @generated
-		 */
-		EClass VOCABULARY_BUNDLE_EXTENSION = eINSTANCE.getVocabularyBundleExtension();
-
-		/**
-		 * The meta object literal for the '{@link io.opencaesar.oml.impl.VocabularyBundleInclusionImpl <em>Vocabulary Bundle Inclusion</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see io.opencaesar.oml.impl.VocabularyBundleInclusionImpl
-		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getVocabularyBundleInclusion()
-		 * @generated
-		 */
-		EClass VOCABULARY_BUNDLE_INCLUSION = eINSTANCE.getVocabularyBundleInclusion();
-
-		/**
-		 * The meta object literal for the '{@link io.opencaesar.oml.impl.DescriptionImportImpl <em>Description Import</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see io.opencaesar.oml.impl.DescriptionImportImpl
-		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDescriptionImport()
-		 * @generated
-		 */
-		EClass DESCRIPTION_IMPORT = eINSTANCE.getDescriptionImport();
-
-		/**
-		 * The meta object literal for the '<em><b>Owning Description</b></em>' container reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference DESCRIPTION_IMPORT__OWNING_DESCRIPTION = eINSTANCE.getDescriptionImport_OwningDescription();
-
-		/**
-		 * The meta object literal for the '{@link io.opencaesar.oml.impl.DescriptionExtensionImpl <em>Description Extension</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see io.opencaesar.oml.impl.DescriptionExtensionImpl
-		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDescriptionExtension()
-		 * @generated
-		 */
-		EClass DESCRIPTION_EXTENSION = eINSTANCE.getDescriptionExtension();
-
-		/**
-		 * The meta object literal for the '{@link io.opencaesar.oml.impl.DescriptionUsageImpl <em>Description Usage</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see io.opencaesar.oml.impl.DescriptionUsageImpl
-		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDescriptionUsage()
-		 * @generated
-		 */
-		EClass DESCRIPTION_USAGE = eINSTANCE.getDescriptionUsage();
-
-		/**
-		 * The meta object literal for the '{@link io.opencaesar.oml.impl.DescriptionBundleImportImpl <em>Description Bundle Import</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see io.opencaesar.oml.impl.DescriptionBundleImportImpl
-		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDescriptionBundleImport()
-		 * @generated
-		 */
-		EClass DESCRIPTION_BUNDLE_IMPORT = eINSTANCE.getDescriptionBundleImport();
-
-		/**
-		 * The meta object literal for the '<em><b>Owning Description Bundle</b></em>' container reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference DESCRIPTION_BUNDLE_IMPORT__OWNING_DESCRIPTION_BUNDLE = eINSTANCE.getDescriptionBundleImport_OwningDescriptionBundle();
-
-		/**
-		 * The meta object literal for the '{@link io.opencaesar.oml.impl.DescriptionBundleExtensionImpl <em>Description Bundle Extension</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see io.opencaesar.oml.impl.DescriptionBundleExtensionImpl
-		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDescriptionBundleExtension()
-		 * @generated
-		 */
-		EClass DESCRIPTION_BUNDLE_EXTENSION = eINSTANCE.getDescriptionBundleExtension();
-
-		/**
-		 * The meta object literal for the '{@link io.opencaesar.oml.impl.DescriptionBundleInclusionImpl <em>Description Bundle Inclusion</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see io.opencaesar.oml.impl.DescriptionBundleInclusionImpl
-		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDescriptionBundleInclusion()
-		 * @generated
-		 */
-		EClass DESCRIPTION_BUNDLE_INCLUSION = eINSTANCE.getDescriptionBundleInclusion();
-
-		/**
-		 * The meta object literal for the '{@link io.opencaesar.oml.impl.DescriptionBundleUsageImpl <em>Description Bundle Usage</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see io.opencaesar.oml.impl.DescriptionBundleUsageImpl
-		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDescriptionBundleUsage()
-		 * @generated
-		 */
-		EClass DESCRIPTION_BUNDLE_USAGE = eINSTANCE.getDescriptionBundleUsage();
-
-		/**
-		 * The meta object literal for the '{@link io.opencaesar.oml.impl.AxiomImpl <em>Axiom</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see io.opencaesar.oml.impl.AxiomImpl
-		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getAxiom()
-		 * @generated
-		 */
-		EClass AXIOM = eINSTANCE.getAxiom();
+		EReference KEY_AXIOM__OWNING_REFERENCE = eINSTANCE.getKeyAxiom_OwningReference();
 
 		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.SpecializationAxiomImpl <em>Specialization Axiom</em>}' class.
@@ -15846,50 +15573,6 @@ public interface OmlPackage extends EPackage {
 		EReference RELATION_TARGET_RESTRICTION_AXIOM__TARGET = eINSTANCE.getRelationTargetRestrictionAxiom_Target();
 
 		/**
-		 * The meta object literal for the '{@link io.opencaesar.oml.impl.KeyAxiomImpl <em>Key Axiom</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see io.opencaesar.oml.impl.KeyAxiomImpl
-		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getKeyAxiom()
-		 * @generated
-		 */
-		EClass KEY_AXIOM = eINSTANCE.getKeyAxiom();
-
-		/**
-		 * The meta object literal for the '<em><b>Properties</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference KEY_AXIOM__PROPERTIES = eINSTANCE.getKeyAxiom_Properties();
-
-		/**
-		 * The meta object literal for the '<em><b>Owning Entity</b></em>' container reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference KEY_AXIOM__OWNING_ENTITY = eINSTANCE.getKeyAxiom_OwningEntity();
-
-		/**
-		 * The meta object literal for the '<em><b>Owning Reference</b></em>' container reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference KEY_AXIOM__OWNING_REFERENCE = eINSTANCE.getKeyAxiom_OwningReference();
-
-		/**
-		 * The meta object literal for the '{@link io.opencaesar.oml.impl.AssertionImpl <em>Assertion</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see io.opencaesar.oml.impl.AssertionImpl
-		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getAssertion()
-		 * @generated
-		 */
-		EClass ASSERTION = eINSTANCE.getAssertion();
-
-		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.TypeAssertionImpl <em>Type Assertion</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -16112,32 +15795,6 @@ public interface OmlPackage extends EPackage {
 		EReference LINK_ASSERTION__OWNING_REFERENCE = eINSTANCE.getLinkAssertion_OwningReference();
 
 		/**
-		 * The meta object literal for the '{@link io.opencaesar.oml.impl.PredicateImpl <em>Predicate</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see io.opencaesar.oml.impl.PredicateImpl
-		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getPredicate()
-		 * @generated
-		 */
-		EClass PREDICATE = eINSTANCE.getPredicate();
-
-		/**
-		 * The meta object literal for the '<em><b>Antecedent Rule</b></em>' container reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference PREDICATE__ANTECEDENT_RULE = eINSTANCE.getPredicate_AntecedentRule();
-
-		/**
-		 * The meta object literal for the '<em><b>Consequent Rule</b></em>' container reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference PREDICATE__CONSEQUENT_RULE = eINSTANCE.getPredicate_ConsequentRule();
-
-		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.UnaryPredicateImpl <em>Unary Predicate</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -16154,24 +15811,6 @@ public interface OmlPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute UNARY_PREDICATE__VARIABLE = eINSTANCE.getUnaryPredicate_Variable();
-
-		/**
-		 * The meta object literal for the '{@link io.opencaesar.oml.impl.TypePredicateImpl <em>Type Predicate</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see io.opencaesar.oml.impl.TypePredicateImpl
-		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getTypePredicate()
-		 * @generated
-		 */
-		EClass TYPE_PREDICATE = eINSTANCE.getTypePredicate();
-
-		/**
-		 * The meta object literal for the '<em><b>Type</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TYPE_PREDICATE__TYPE = eINSTANCE.getTypePredicate_Type();
 
 		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.BinaryPredicateImpl <em>Binary Predicate</em>}' class.
@@ -16206,6 +15845,24 @@ public interface OmlPackage extends EPackage {
 		 * @generated
 		 */
 		EReference BINARY_PREDICATE__INSTANCE2 = eINSTANCE.getBinaryPredicate_Instance2();
+
+		/**
+		 * The meta object literal for the '{@link io.opencaesar.oml.impl.TypePredicateImpl <em>Type Predicate</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see io.opencaesar.oml.impl.TypePredicateImpl
+		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getTypePredicate()
+		 * @generated
+		 */
+		EClass TYPE_PREDICATE = eINSTANCE.getTypePredicate();
+
+		/**
+		 * The meta object literal for the '<em><b>Type</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TYPE_PREDICATE__TYPE = eINSTANCE.getTypePredicate_Type();
 
 		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.RelationEntityPredicateImpl <em>Relation Entity Predicate</em>}' class.
@@ -16278,16 +15935,6 @@ public interface OmlPackage extends EPackage {
 		 * @generated
 		 */
 		EClass DIFFERENT_FROM_PREDICATE = eINSTANCE.getDifferentFromPredicate();
-
-		/**
-		 * The meta object literal for the '{@link io.opencaesar.oml.impl.LiteralImpl <em>Literal</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see io.opencaesar.oml.impl.LiteralImpl
-		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getLiteral()
-		 * @generated
-		 */
-		EClass LITERAL = eINSTANCE.getLiteral();
 
 		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.QuotedLiteralImpl <em>Quoted Literal</em>}' class.
@@ -16394,6 +16041,362 @@ public interface OmlPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute BOOLEAN_LITERAL__VALUE = eINSTANCE.getBooleanLiteral_Value();
+
+		/**
+		 * The meta object literal for the '{@link io.opencaesar.oml.impl.ReferenceImpl <em>Reference</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see io.opencaesar.oml.impl.ReferenceImpl
+		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getReference()
+		 * @generated
+		 */
+		EClass REFERENCE = eINSTANCE.getReference();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Annotations</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference REFERENCE__OWNED_ANNOTATIONS = eINSTANCE.getReference_OwnedAnnotations();
+
+		/**
+		 * The meta object literal for the '{@link io.opencaesar.oml.impl.SpecializableTermReferenceImpl <em>Specializable Term Reference</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see io.opencaesar.oml.impl.SpecializableTermReferenceImpl
+		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getSpecializableTermReference()
+		 * @generated
+		 */
+		EClass SPECIALIZABLE_TERM_REFERENCE = eINSTANCE.getSpecializableTermReference();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Specializations</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SPECIALIZABLE_TERM_REFERENCE__OWNED_SPECIALIZATIONS = eINSTANCE.getSpecializableTermReference_OwnedSpecializations();
+
+		/**
+		 * The meta object literal for the '{@link io.opencaesar.oml.impl.ClassifierReferenceImpl <em>Classifier Reference</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see io.opencaesar.oml.impl.ClassifierReferenceImpl
+		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getClassifierReference()
+		 * @generated
+		 */
+		EClass CLASSIFIER_REFERENCE = eINSTANCE.getClassifierReference();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Property Restrictions</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CLASSIFIER_REFERENCE__OWNED_PROPERTY_RESTRICTIONS = eINSTANCE.getClassifierReference_OwnedPropertyRestrictions();
+
+		/**
+		 * The meta object literal for the '{@link io.opencaesar.oml.impl.EntityReferenceImpl <em>Entity Reference</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see io.opencaesar.oml.impl.EntityReferenceImpl
+		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getEntityReference()
+		 * @generated
+		 */
+		EClass ENTITY_REFERENCE = eINSTANCE.getEntityReference();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Relation Restrictions</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ENTITY_REFERENCE__OWNED_RELATION_RESTRICTIONS = eINSTANCE.getEntityReference_OwnedRelationRestrictions();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Keys</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ENTITY_REFERENCE__OWNED_KEYS = eINSTANCE.getEntityReference_OwnedKeys();
+
+		/**
+		 * The meta object literal for the '{@link io.opencaesar.oml.impl.AspectReferenceImpl <em>Aspect Reference</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see io.opencaesar.oml.impl.AspectReferenceImpl
+		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getAspectReference()
+		 * @generated
+		 */
+		EClass ASPECT_REFERENCE = eINSTANCE.getAspectReference();
+
+		/**
+		 * The meta object literal for the '<em><b>Aspect</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ASPECT_REFERENCE__ASPECT = eINSTANCE.getAspectReference_Aspect();
+
+		/**
+		 * The meta object literal for the '{@link io.opencaesar.oml.impl.ConceptReferenceImpl <em>Concept Reference</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see io.opencaesar.oml.impl.ConceptReferenceImpl
+		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getConceptReference()
+		 * @generated
+		 */
+		EClass CONCEPT_REFERENCE = eINSTANCE.getConceptReference();
+
+		/**
+		 * The meta object literal for the '<em><b>Concept</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONCEPT_REFERENCE__CONCEPT = eINSTANCE.getConceptReference_Concept();
+
+		/**
+		 * The meta object literal for the '{@link io.opencaesar.oml.impl.RelationEntityReferenceImpl <em>Relation Entity Reference</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see io.opencaesar.oml.impl.RelationEntityReferenceImpl
+		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRelationEntityReference()
+		 * @generated
+		 */
+		EClass RELATION_ENTITY_REFERENCE = eINSTANCE.getRelationEntityReference();
+
+		/**
+		 * The meta object literal for the '<em><b>Entity</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference RELATION_ENTITY_REFERENCE__ENTITY = eINSTANCE.getRelationEntityReference_Entity();
+
+		/**
+		 * The meta object literal for the '{@link io.opencaesar.oml.impl.StructureReferenceImpl <em>Structure Reference</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see io.opencaesar.oml.impl.StructureReferenceImpl
+		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getStructureReference()
+		 * @generated
+		 */
+		EClass STRUCTURE_REFERENCE = eINSTANCE.getStructureReference();
+
+		/**
+		 * The meta object literal for the '<em><b>Structure</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference STRUCTURE_REFERENCE__STRUCTURE = eINSTANCE.getStructureReference_Structure();
+
+		/**
+		 * The meta object literal for the '{@link io.opencaesar.oml.impl.AnnotationPropertyReferenceImpl <em>Annotation Property Reference</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see io.opencaesar.oml.impl.AnnotationPropertyReferenceImpl
+		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getAnnotationPropertyReference()
+		 * @generated
+		 */
+		EClass ANNOTATION_PROPERTY_REFERENCE = eINSTANCE.getAnnotationPropertyReference();
+
+		/**
+		 * The meta object literal for the '<em><b>Property</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ANNOTATION_PROPERTY_REFERENCE__PROPERTY = eINSTANCE.getAnnotationPropertyReference_Property();
+
+		/**
+		 * The meta object literal for the '{@link io.opencaesar.oml.impl.ScalarPropertyReferenceImpl <em>Scalar Property Reference</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see io.opencaesar.oml.impl.ScalarPropertyReferenceImpl
+		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getScalarPropertyReference()
+		 * @generated
+		 */
+		EClass SCALAR_PROPERTY_REFERENCE = eINSTANCE.getScalarPropertyReference();
+
+		/**
+		 * The meta object literal for the '<em><b>Property</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SCALAR_PROPERTY_REFERENCE__PROPERTY = eINSTANCE.getScalarPropertyReference_Property();
+
+		/**
+		 * The meta object literal for the '{@link io.opencaesar.oml.impl.StructuredPropertyReferenceImpl <em>Structured Property Reference</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see io.opencaesar.oml.impl.StructuredPropertyReferenceImpl
+		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getStructuredPropertyReference()
+		 * @generated
+		 */
+		EClass STRUCTURED_PROPERTY_REFERENCE = eINSTANCE.getStructuredPropertyReference();
+
+		/**
+		 * The meta object literal for the '<em><b>Property</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference STRUCTURED_PROPERTY_REFERENCE__PROPERTY = eINSTANCE.getStructuredPropertyReference_Property();
+
+		/**
+		 * The meta object literal for the '{@link io.opencaesar.oml.impl.FacetedScalarReferenceImpl <em>Faceted Scalar Reference</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see io.opencaesar.oml.impl.FacetedScalarReferenceImpl
+		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getFacetedScalarReference()
+		 * @generated
+		 */
+		EClass FACETED_SCALAR_REFERENCE = eINSTANCE.getFacetedScalarReference();
+
+		/**
+		 * The meta object literal for the '<em><b>Scalar</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference FACETED_SCALAR_REFERENCE__SCALAR = eINSTANCE.getFacetedScalarReference_Scalar();
+
+		/**
+		 * The meta object literal for the '{@link io.opencaesar.oml.impl.EnumeratedScalarReferenceImpl <em>Enumerated Scalar Reference</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see io.opencaesar.oml.impl.EnumeratedScalarReferenceImpl
+		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getEnumeratedScalarReference()
+		 * @generated
+		 */
+		EClass ENUMERATED_SCALAR_REFERENCE = eINSTANCE.getEnumeratedScalarReference();
+
+		/**
+		 * The meta object literal for the '<em><b>Scalar</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ENUMERATED_SCALAR_REFERENCE__SCALAR = eINSTANCE.getEnumeratedScalarReference_Scalar();
+
+		/**
+		 * The meta object literal for the '{@link io.opencaesar.oml.impl.RelationReferenceImpl <em>Relation Reference</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see io.opencaesar.oml.impl.RelationReferenceImpl
+		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRelationReference()
+		 * @generated
+		 */
+		EClass RELATION_REFERENCE = eINSTANCE.getRelationReference();
+
+		/**
+		 * The meta object literal for the '<em><b>Relation</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference RELATION_REFERENCE__RELATION = eINSTANCE.getRelationReference_Relation();
+
+		/**
+		 * The meta object literal for the '{@link io.opencaesar.oml.impl.RuleReferenceImpl <em>Rule Reference</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see io.opencaesar.oml.impl.RuleReferenceImpl
+		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRuleReference()
+		 * @generated
+		 */
+		EClass RULE_REFERENCE = eINSTANCE.getRuleReference();
+
+		/**
+		 * The meta object literal for the '<em><b>Rule</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference RULE_REFERENCE__RULE = eINSTANCE.getRuleReference_Rule();
+
+		/**
+		 * The meta object literal for the '{@link io.opencaesar.oml.impl.NamedInstanceReferenceImpl <em>Named Instance Reference</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see io.opencaesar.oml.impl.NamedInstanceReferenceImpl
+		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getNamedInstanceReference()
+		 * @generated
+		 */
+		EClass NAMED_INSTANCE_REFERENCE = eINSTANCE.getNamedInstanceReference();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Property Values</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference NAMED_INSTANCE_REFERENCE__OWNED_PROPERTY_VALUES = eINSTANCE.getNamedInstanceReference_OwnedPropertyValues();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Links</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference NAMED_INSTANCE_REFERENCE__OWNED_LINKS = eINSTANCE.getNamedInstanceReference_OwnedLinks();
+
+		/**
+		 * The meta object literal for the '{@link io.opencaesar.oml.impl.ConceptInstanceReferenceImpl <em>Concept Instance Reference</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see io.opencaesar.oml.impl.ConceptInstanceReferenceImpl
+		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getConceptInstanceReference()
+		 * @generated
+		 */
+		EClass CONCEPT_INSTANCE_REFERENCE = eINSTANCE.getConceptInstanceReference();
+
+		/**
+		 * The meta object literal for the '<em><b>Instance</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONCEPT_INSTANCE_REFERENCE__INSTANCE = eINSTANCE.getConceptInstanceReference_Instance();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Types</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONCEPT_INSTANCE_REFERENCE__OWNED_TYPES = eINSTANCE.getConceptInstanceReference_OwnedTypes();
+
+		/**
+		 * The meta object literal for the '{@link io.opencaesar.oml.impl.RelationInstanceReferenceImpl <em>Relation Instance Reference</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see io.opencaesar.oml.impl.RelationInstanceReferenceImpl
+		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRelationInstanceReference()
+		 * @generated
+		 */
+		EClass RELATION_INSTANCE_REFERENCE = eINSTANCE.getRelationInstanceReference();
+
+		/**
+		 * The meta object literal for the '<em><b>Instance</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference RELATION_INSTANCE_REFERENCE__INSTANCE = eINSTANCE.getRelationInstanceReference_Instance();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Types</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference RELATION_INSTANCE_REFERENCE__OWNED_TYPES = eINSTANCE.getRelationInstanceReference_OwnedTypes();
 
 		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.SeparatorKind <em>Separator Kind</em>}' enum.

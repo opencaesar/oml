@@ -97,23 +97,23 @@ public class OmlProposalProvider extends AbstractOmlProposalProvider {
 		final URI ontologyURI = EcoreUtil.getURI(ontology);
 		final Keyword keyword = ((Keyword) context.getLastCompleteNode().getGrammarElement());
 		Predicate<IEObjectDescription> predicate = null;
-		if (keyword == oml.getVocabularyExtensionAccess().getExtendsKeyword_1()) {
+		if (keyword == oml.getVocabularyExtensionAccess().getExtendsKeyword_0()) {
 			predicate = x -> x.getEObjectURI() != ontologyURI && OmlPackage.Literals.VOCABULARY.isSuperTypeOf(x.getEClass());
-		} else if (keyword == oml.getVocabularyUsageAccess().getUsesKeyword_1()) {
+		} else if (keyword == oml.getVocabularyUsageAccess().getUsesKeyword_0()) {
 			predicate = x -> x.getEObjectURI() != ontologyURI && OmlPackage.Literals.DESCRIPTION_BOX.isSuperTypeOf(x.getEClass());
-		} else if (keyword == oml.getVocabularyBundleExtensionAccess().getExtendsKeyword_1()) {
+		} else if (keyword == oml.getVocabularyBundleExtensionAccess().getExtendsKeyword_0()) {
 			predicate = x -> x.getEObjectURI() != ontologyURI && OmlPackage.Literals.VOCABULARY_BUNDLE.isSuperTypeOf(x.getEClass());
-		} else if (keyword == oml.getVocabularyBundleInclusionAccess().getIncludesKeyword_1()) {
+		} else if (keyword == oml.getVocabularyBundleInclusionAccess().getIncludesKeyword_0()) {
 			predicate = x -> x.getEObjectURI() != ontologyURI && OmlPackage.Literals.VOCABULARY.isSuperTypeOf(x.getEClass());
-		} else if (keyword == oml.getDescriptionExtensionAccess().getExtendsKeyword_1()) {
+		} else if (keyword == oml.getDescriptionExtensionAccess().getExtendsKeyword_0()) {
 			predicate = x -> x.getEObjectURI() != ontologyURI && OmlPackage.Literals.DESCRIPTION.isSuperTypeOf(x.getEClass());
-		} else if (keyword == oml.getDescriptionUsageAccess().getUsesKeyword_1()) {
+		} else if (keyword == oml.getDescriptionUsageAccess().getUsesKeyword_0()) {
 			predicate = x -> x.getEObjectURI() != ontologyURI && OmlPackage.Literals.VOCABULARY_BOX.isSuperTypeOf(x.getEClass());
-		} else if (keyword == oml.getDescriptionBundleExtensionAccess().getExtendsKeyword_1()) {
+		} else if (keyword == oml.getDescriptionBundleExtensionAccess().getExtendsKeyword_0()) {
 			predicate = x -> x.getEObjectURI() != ontologyURI && OmlPackage.Literals.DESCRIPTION_BUNDLE.isSuperTypeOf(x.getEClass());
-		} else if (keyword == oml.getDescriptionBundleInclusionAccess().getIncludesKeyword_1()) {
+		} else if (keyword == oml.getDescriptionBundleInclusionAccess().getIncludesKeyword_0()) {
 			predicate = x -> x.getEObjectURI() != ontologyURI && OmlPackage.Literals.DESCRIPTION.isSuperTypeOf(x.getEClass());
-		} else if (keyword == oml.getDescriptionBundleUsageAccess().getUsesKeyword_1()) {
+		} else if (keyword == oml.getDescriptionBundleUsageAccess().getUsesKeyword_0()) {
 			predicate = x -> x.getEObjectURI() != ontologyURI && OmlPackage.Literals.VOCABULARY_BOX.isSuperTypeOf(x.getEClass());
 		}
 		final EReference eReference = EcoreFactory.eINSTANCE.createEReference();

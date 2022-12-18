@@ -18,9 +18,9 @@
  */
 package io.opencaesar.oml.impl;
 
-import io.opencaesar.oml.AnnotatedElement;
 import io.opencaesar.oml.Annotation;
 import io.opencaesar.oml.AnnotationProperty;
+import io.opencaesar.oml.IdentifiedElement;
 import io.opencaesar.oml.Literal;
 import io.opencaesar.oml.Member;
 import io.opencaesar.oml.OmlPackage;
@@ -234,9 +234,9 @@ public class AnnotationImpl extends ElementImpl implements Annotation {
 	 * @generated
 	 */
 	@Override
-	public AnnotatedElement getOwningElement() {
+	public IdentifiedElement getOwningElement() {
 		if (eContainerFeatureID() != OmlPackage.ANNOTATION__OWNING_ELEMENT) return null;
-		return (AnnotatedElement)eContainer();
+		return (IdentifiedElement)eContainer();
 	}
 
 	/**
@@ -244,9 +244,9 @@ public class AnnotationImpl extends ElementImpl implements Annotation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public AnnotatedElement basicGetOwningElement() {
+	public IdentifiedElement basicGetOwningElement() {
 		if (eContainerFeatureID() != OmlPackage.ANNOTATION__OWNING_ELEMENT) return null;
-		return (AnnotatedElement)eInternalContainer();
+		return (IdentifiedElement)eInternalContainer();
 	}
 
 	/**
@@ -254,7 +254,7 @@ public class AnnotationImpl extends ElementImpl implements Annotation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetOwningElement(AnnotatedElement newOwningElement, NotificationChain msgs) {
+	public NotificationChain basicSetOwningElement(IdentifiedElement newOwningElement, NotificationChain msgs) {
 		msgs = eBasicSetContainer((InternalEObject)newOwningElement, OmlPackage.ANNOTATION__OWNING_ELEMENT, msgs);
 		return msgs;
 	}
@@ -265,7 +265,7 @@ public class AnnotationImpl extends ElementImpl implements Annotation {
 	 * @generated
 	 */
 	@Override
-	public void setOwningElement(AnnotatedElement newOwningElement) {
+	public void setOwningElement(IdentifiedElement newOwningElement) {
 		if (newOwningElement != eInternalContainer() || (eContainerFeatureID() != OmlPackage.ANNOTATION__OWNING_ELEMENT && newOwningElement != null)) {
 			if (EcoreUtil.isAncestor(this, newOwningElement))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
@@ -273,7 +273,7 @@ public class AnnotationImpl extends ElementImpl implements Annotation {
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwningElement != null)
-				msgs = ((InternalEObject)newOwningElement).eInverseAdd(this, OmlPackage.ANNOTATED_ELEMENT__OWNED_ANNOTATIONS, AnnotatedElement.class, msgs);
+				msgs = ((InternalEObject)newOwningElement).eInverseAdd(this, OmlPackage.IDENTIFIED_ELEMENT__OWNED_ANNOTATIONS, IdentifiedElement.class, msgs);
 			msgs = basicSetOwningElement(newOwningElement, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
@@ -345,7 +345,7 @@ public class AnnotationImpl extends ElementImpl implements Annotation {
 			case OmlPackage.ANNOTATION__OWNING_ELEMENT:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetOwningElement((AnnotatedElement)otherEnd, msgs);
+				return basicSetOwningElement((IdentifiedElement)otherEnd, msgs);
 			case OmlPackage.ANNOTATION__OWNING_REFERENCE:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
@@ -381,7 +381,7 @@ public class AnnotationImpl extends ElementImpl implements Annotation {
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
 			case OmlPackage.ANNOTATION__OWNING_ELEMENT:
-				return eInternalContainer().eInverseRemove(this, OmlPackage.ANNOTATED_ELEMENT__OWNED_ANNOTATIONS, AnnotatedElement.class, msgs);
+				return eInternalContainer().eInverseRemove(this, OmlPackage.IDENTIFIED_ELEMENT__OWNED_ANNOTATIONS, IdentifiedElement.class, msgs);
 			case OmlPackage.ANNOTATION__OWNING_REFERENCE:
 				return eInternalContainer().eInverseRemove(this, OmlPackage.REFERENCE__OWNED_ANNOTATIONS, Reference.class, msgs);
 		}
@@ -432,7 +432,7 @@ public class AnnotationImpl extends ElementImpl implements Annotation {
 				setReferenceValue((Member)newValue);
 				return;
 			case OmlPackage.ANNOTATION__OWNING_ELEMENT:
-				setOwningElement((AnnotatedElement)newValue);
+				setOwningElement((IdentifiedElement)newValue);
 				return;
 			case OmlPackage.ANNOTATION__OWNING_REFERENCE:
 				setOwningReference((Reference)newValue);
@@ -459,7 +459,7 @@ public class AnnotationImpl extends ElementImpl implements Annotation {
 				setReferenceValue((Member)null);
 				return;
 			case OmlPackage.ANNOTATION__OWNING_ELEMENT:
-				setOwningElement((AnnotatedElement)null);
+				setOwningElement((IdentifiedElement)null);
 				return;
 			case OmlPackage.ANNOTATION__OWNING_REFERENCE:
 				setOwningReference((Reference)null);

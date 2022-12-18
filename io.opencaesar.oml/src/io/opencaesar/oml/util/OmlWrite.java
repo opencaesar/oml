@@ -26,7 +26,6 @@ import java.util.List;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
-import io.opencaesar.oml.AnnotatedElement;
 import io.opencaesar.oml.Annotation;
 import io.opencaesar.oml.AnnotationProperty;
 import io.opencaesar.oml.AnnotationPropertyReference;
@@ -283,11 +282,11 @@ public class OmlWrite {
      * @param value the annotation literal value
      * @return a new annotation on the given member in the context of the given ontology
      */
-    public static Annotation addAnnotation(Ontology ontology, AnnotatedElement element, AnnotationProperty property, Literal value) {
+    public static Annotation addAnnotation(Ontology ontology, IdentifiedElement element, AnnotationProperty property, Literal value) {
         final Annotation annotation = create(Annotation.class);
         annotation.setValue(value);
         setCrossReference(ontology, annotation, OmlPackage.Literals.ANNOTATION__PROPERTY, property);
-        setContainmentReference(ontology, element, OmlPackage.Literals.ANNOTATED_ELEMENT__OWNED_ANNOTATIONS, OmlPackage.Literals.REFERENCE__OWNED_ANNOTATIONS, annotation);
+        setContainmentReference(ontology, element, OmlPackage.Literals.IDENTIFIED_ELEMENT__OWNED_ANNOTATIONS, OmlPackage.Literals.REFERENCE__OWNED_ANNOTATIONS, annotation);
         return annotation;
     }
 
@@ -325,7 +324,7 @@ public class OmlWrite {
      * @param property the given annotation property
      * @param value the annotation literal value
      */
-    public static void setAnnotationPropertyValue(Ontology ontology, AnnotatedElement element, AnnotationProperty property, Literal value) {
+    public static void setAnnotationPropertyValue(Ontology ontology, IdentifiedElement element, AnnotationProperty property, Literal value) {
         Annotation annotation = null;
         if (element != null) {
 	        if (element.getOntology() == ontology) {

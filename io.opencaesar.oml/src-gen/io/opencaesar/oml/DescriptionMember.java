@@ -16,38 +16,18 @@
  * limitations under the License.
  * 
  */
-package io.opencaesar.oml.impl;
+package io.opencaesar.oml;
 
-import io.opencaesar.oml.OmlPackage;
-import io.opencaesar.oml.Term;
-
-import org.eclipse.emf.ecore.EClass;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Term</b></em>'.
+ * A representation of the model object '<em><b>Description Member</b></em>'.
  * <!-- end-user-doc -->
  *
+ *
+ * @see io.opencaesar.oml.OmlPackage#getDescriptionMember()
+ * @model abstract="true"
  * @generated
  */
-public abstract class TermImpl extends VocabularyMemberImpl implements Term {
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected TermImpl() {
-		super();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	protected EClass eStaticClass() {
-		return OmlPackage.Literals.TERM;
-	}
-
-} //TermImpl
+public interface DescriptionMember extends Member {
+} // DescriptionMember

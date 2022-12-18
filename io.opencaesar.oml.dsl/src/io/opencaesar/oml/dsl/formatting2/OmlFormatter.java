@@ -464,57 +464,48 @@ public class OmlFormatter extends AbstractJavaFormatter {
 	}
 
 	protected void _format(VocabularyExtension extension, IFormattableDocument doc) {
-		extension.getOwnedAnnotations().forEach(i -> doc.append(doc.format(i), newLine()));
-		doc.append(keyword(extension, oml.getVocabularyExtensionAccess().getExtendsKeyword_1()), oneSpace());
-		doc.surround(keyword(extension, oml.getVocabularyExtensionAccess().getAsKeyword_3_0()), oneSpace());
+		doc.append(keyword(extension, oml.getVocabularyExtensionAccess().getExtendsKeyword_0()), oneSpace());
+		doc.surround(keyword(extension, oml.getVocabularyExtensionAccess().getAsKeyword_2_0()), oneSpace());
 	}
 
 	protected void _format(VocabularyUsage usage, IFormattableDocument doc) {
-		usage.getOwnedAnnotations().forEach(i -> doc.append(doc.format(i), newLine()));
-		doc.append(keyword(usage, oml.getVocabularyUsageAccess().getUsesKeyword_1()), oneSpace());
-		doc.surround(keyword(usage, oml.getVocabularyUsageAccess().getAsKeyword_3_0()), oneSpace());
+		doc.append(keyword(usage, oml.getVocabularyUsageAccess().getUsesKeyword_0()), oneSpace());
+		doc.surround(keyword(usage, oml.getVocabularyUsageAccess().getAsKeyword_2_0()), oneSpace());
 	}
 
 	protected void _format(VocabularyBundleExtension extension, IFormattableDocument doc) {
-		extension.getOwnedAnnotations().forEach(i -> doc.append(doc.format(i), newLine()));
-		doc.append(keyword(extension, oml.getVocabularyBundleExtensionAccess().getExtendsKeyword_1()), oneSpace());
-		doc.surround(keyword(extension, oml.getVocabularyBundleExtensionAccess().getAsKeyword_3_0()), oneSpace());
+		doc.append(keyword(extension, oml.getVocabularyBundleExtensionAccess().getExtendsKeyword_0()), oneSpace());
+		doc.surround(keyword(extension, oml.getVocabularyBundleExtensionAccess().getAsKeyword_2_0()), oneSpace());
 	}
 
 	protected void _format(VocabularyBundleInclusion inclusion, IFormattableDocument doc) {
-		inclusion.getOwnedAnnotations().forEach(i -> doc.append(doc.format(i), newLine()));
-		doc.append(keyword(inclusion, oml.getVocabularyBundleInclusionAccess().getIncludesKeyword_1()), oneSpace());
-		doc.surround(keyword(inclusion, oml.getVocabularyBundleInclusionAccess().getAsKeyword_3_0()), oneSpace());
+		doc.append(keyword(inclusion, oml.getVocabularyBundleInclusionAccess().getIncludesKeyword_0()), oneSpace());
+		doc.surround(keyword(inclusion, oml.getVocabularyBundleInclusionAccess().getAsKeyword_2_0()), oneSpace());
 	}
 
 	protected void _format(DescriptionExtension extension, IFormattableDocument doc) {
-		extension.getOwnedAnnotations().forEach(i -> doc.append(doc.format(i), newLine()));
-		doc.append(keyword(extension, oml.getDescriptionExtensionAccess().getExtendsKeyword_1()), oneSpace());
-		doc.surround(keyword(extension, oml.getDescriptionExtensionAccess().getAsKeyword_3_0()), oneSpace());
+		doc.append(keyword(extension, oml.getDescriptionExtensionAccess().getExtendsKeyword_0()), oneSpace());
+		doc.surround(keyword(extension, oml.getDescriptionExtensionAccess().getAsKeyword_2_0()), oneSpace());
 	}
 
 	protected void _format(DescriptionUsage usage, IFormattableDocument doc) {
-		usage.getOwnedAnnotations().forEach(i -> doc.append(doc.format(i), newLine()));
-		doc.append(keyword(usage, oml.getDescriptionUsageAccess().getUsesKeyword_1()), oneSpace());
-		doc.surround(keyword(usage, oml.getDescriptionUsageAccess().getAsKeyword_3_0()), oneSpace());
+		doc.append(keyword(usage, oml.getDescriptionUsageAccess().getUsesKeyword_0()), oneSpace());
+		doc.surround(keyword(usage, oml.getDescriptionUsageAccess().getAsKeyword_2_0()), oneSpace());
 	}
 
 	protected void _format(DescriptionBundleExtension extension, IFormattableDocument doc) {
-		extension.getOwnedAnnotations().forEach(i -> doc.append(doc.format(i), newLine()));
-		doc.append(keyword(extension, oml.getDescriptionBundleExtensionAccess().getExtendsKeyword_1()), oneSpace());
-		doc.surround(keyword(extension, oml.getDescriptionBundleExtensionAccess().getAsKeyword_3_0()), oneSpace());
+		doc.append(keyword(extension, oml.getDescriptionBundleExtensionAccess().getExtendsKeyword_0()), oneSpace());
+		doc.surround(keyword(extension, oml.getDescriptionBundleExtensionAccess().getAsKeyword_2_0()), oneSpace());
 	}
 
 	protected void _format(DescriptionBundleInclusion inclusion, IFormattableDocument doc) {
-		inclusion.getOwnedAnnotations().forEach(i -> doc.append(doc.format(i), newLine()));
-		doc.append(keyword(inclusion, oml.getDescriptionBundleInclusionAccess().getIncludesKeyword_1()), oneSpace());
-		doc.surround(keyword(inclusion, oml.getDescriptionBundleInclusionAccess().getAsKeyword_3_0()), oneSpace());
+		doc.append(keyword(inclusion, oml.getDescriptionBundleInclusionAccess().getIncludesKeyword_0()), oneSpace());
+		doc.surround(keyword(inclusion, oml.getDescriptionBundleInclusionAccess().getAsKeyword_2_0()), oneSpace());
 	}
 
 	protected void _format(DescriptionBundleUsage usage, IFormattableDocument doc) {
-		usage.getOwnedAnnotations().forEach(i -> doc.append(doc.format(i), newLine()));
-		doc.append(keyword(usage, oml.getDescriptionBundleUsageAccess().getUsesKeyword_1()), oneSpace());
-		doc.surround(keyword(usage, oml.getDescriptionBundleUsageAccess().getAsKeyword_3_0()), oneSpace());
+		doc.append(keyword(usage, oml.getDescriptionBundleUsageAccess().getUsesKeyword_0()), oneSpace());
+		doc.surround(keyword(usage, oml.getDescriptionBundleUsageAccess().getAsKeyword_2_0()), oneSpace());
 	}
 
 	protected void _format(ScalarPropertyRangeRestrictionAxiom axiom, IFormattableDocument doc) {
