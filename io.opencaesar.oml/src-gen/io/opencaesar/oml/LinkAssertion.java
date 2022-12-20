@@ -25,129 +25,70 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * LinkAssertion is an assertion that specifies a link from the asserting named instance as a source to another
- * named instance as a target. Unlike a relation instance, which is typed by a relation entity, a link references
- * a relation that has the type of the source instance as a conforming domain and the type of the target instance
- * as a conforming range.
+ * LinkAssertion is a property value assertion for a relation, where the specified value is a named instance.
  * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link io.opencaesar.oml.LinkAssertion#getRelation <em>Relation</em>}</li>
- *   <li>{@link io.opencaesar.oml.LinkAssertion#getTarget <em>Target</em>}</li>
- *   <li>{@link io.opencaesar.oml.LinkAssertion#getOwningInstance <em>Owning Instance</em>}</li>
- *   <li>{@link io.opencaesar.oml.LinkAssertion#getOwningReference <em>Owning Reference</em>}</li>
+ *   <li>{@link io.opencaesar.oml.LinkAssertion#getProperty <em>Property</em>}</li>
+ *   <li>{@link io.opencaesar.oml.LinkAssertion#getValue <em>Value</em>}</li>
  * </ul>
  *
  * @see io.opencaesar.oml.OmlPackage#getLinkAssertion()
  * @model annotation="https://tabatkins.github.io/bikeshed heading='Assertions'"
  * @generated
  */
-public interface LinkAssertion extends Assertion {
+public interface LinkAssertion extends PropertyValueAssertion {
 	/**
-	 * Returns the value of the '<em><b>Relation</b></em>' reference.
+	 * Returns the value of the '<em><b>Property</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The relation referenced by this link
+	 * The relation referenced by this assertion
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Relation</em>' reference.
-	 * @see #setRelation(Relation)
-	 * @see io.opencaesar.oml.OmlPackage#getLinkAssertion_Relation()
+	 * @return the value of the '<em>Property</em>' reference.
+	 * @see #setProperty(Relation)
+	 * @see io.opencaesar.oml.OmlPackage#getLinkAssertion_Property()
 	 * @model required="true"
 	 * @generated
 	 */
-	Relation getRelation();
+	Relation getProperty();
 
 	/**
-	 * Sets the value of the '{@link io.opencaesar.oml.LinkAssertion#getRelation <em>Relation</em>}' reference.
+	 * Sets the value of the '{@link io.opencaesar.oml.LinkAssertion#getProperty <em>Property</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Relation</em>' reference.
-	 * @see #getRelation()
+	 * @param value the new value of the '<em>Property</em>' reference.
+	 * @see #getProperty()
 	 * @generated
 	 */
-	void setRelation(Relation value);
+	void setProperty(Relation value);
 
 	/**
-	 * Returns the value of the '<em><b>Target</b></em>' reference.
+	 * Returns the value of the '<em><b>Value</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The named instance that is target of this link
+	 * The named instance specified as a value by this assertion
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Target</em>' reference.
-	 * @see #setTarget(NamedInstance)
-	 * @see io.opencaesar.oml.OmlPackage#getLinkAssertion_Target()
+	 * @return the value of the '<em>Value</em>' reference.
+	 * @see #setValue(NamedInstance)
+	 * @see io.opencaesar.oml.OmlPackage#getLinkAssertion_Value()
 	 * @model required="true"
 	 * @generated
 	 */
-	NamedInstance getTarget();
+	NamedInstance getValue();
 
 	/**
-	 * Sets the value of the '{@link io.opencaesar.oml.LinkAssertion#getTarget <em>Target</em>}' reference.
+	 * Sets the value of the '{@link io.opencaesar.oml.LinkAssertion#getValue <em>Value</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Target</em>' reference.
-	 * @see #getTarget()
+	 * @param value the new value of the '<em>Value</em>' reference.
+	 * @see #getValue()
 	 * @generated
 	 */
-	void setTarget(NamedInstance value);
-
-	/**
-	 * Returns the value of the '<em><b>Owning Instance</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.NamedInstance#getOwnedLinks <em>Owned Links</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * The named instance that is the source of this link
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Owning Instance</em>' container reference.
-	 * @see #setOwningInstance(NamedInstance)
-	 * @see io.opencaesar.oml.OmlPackage#getLinkAssertion_OwningInstance()
-	 * @see io.opencaesar.oml.NamedInstance#getOwnedLinks
-	 * @model opposite="ownedLinks" transient="false"
-	 * @generated
-	 */
-	NamedInstance getOwningInstance();
-
-	/**
-	 * Sets the value of the '{@link io.opencaesar.oml.LinkAssertion#getOwningInstance <em>Owning Instance</em>}' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Owning Instance</em>' container reference.
-	 * @see #getOwningInstance()
-	 * @generated
-	 */
-	void setOwningInstance(NamedInstance value);
-
-	/**
-	 * Returns the value of the '<em><b>Owning Reference</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.NamedInstanceReference#getOwnedLinks <em>Owned Links</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * The reference to a named instance that this the source of this link
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Owning Reference</em>' container reference.
-	 * @see #setOwningReference(NamedInstanceReference)
-	 * @see io.opencaesar.oml.OmlPackage#getLinkAssertion_OwningReference()
-	 * @see io.opencaesar.oml.NamedInstanceReference#getOwnedLinks
-	 * @model opposite="ownedLinks" transient="false"
-	 * @generated
-	 */
-	NamedInstanceReference getOwningReference();
-
-	/**
-	 * Sets the value of the '{@link io.opencaesar.oml.LinkAssertion#getOwningReference <em>Owning Reference</em>}' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Owning Reference</em>' container reference.
-	 * @see #getOwningReference()
-	 * @generated
-	 */
-	void setOwningReference(NamedInstanceReference value);
+	void setValue(NamedInstance value);
 
 } // LinkAssertion

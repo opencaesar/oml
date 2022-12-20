@@ -2952,22 +2952,13 @@ public interface OmlPackage extends EPackage {
 	int ENTITY__OWNED_PROPERTY_RESTRICTIONS = CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Relation Restrictions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENTITY__OWNED_RELATION_RESTRICTIONS = CLASSIFIER_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Owned Keys</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ENTITY__OWNED_KEYS = CLASSIFIER_FEATURE_COUNT + 1;
+	int ENTITY__OWNED_KEYS = CLASSIFIER_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Entity</em>' class.
@@ -2976,7 +2967,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ENTITY_FEATURE_COUNT = CLASSIFIER_FEATURE_COUNT + 2;
+	int ENTITY_FEATURE_COUNT = CLASSIFIER_FEATURE_COUNT + 1;
 
 	/**
 	 * The operation id for the '<em>Extra Validate</em>' operation.
@@ -3188,15 +3179,6 @@ public interface OmlPackage extends EPackage {
 	int ASPECT__OWNED_PROPERTY_RESTRICTIONS = ENTITY__OWNED_PROPERTY_RESTRICTIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Relation Restrictions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASPECT__OWNED_RELATION_RESTRICTIONS = ENTITY__OWNED_RELATION_RESTRICTIONS;
-
-	/**
 	 * The feature id for the '<em><b>Owned Keys</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3313,15 +3295,6 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int CONCEPT__OWNED_PROPERTY_RESTRICTIONS = ENTITY__OWNED_PROPERTY_RESTRICTIONS;
-
-	/**
-	 * The feature id for the '<em><b>Owned Relation Restrictions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONCEPT__OWNED_RELATION_RESTRICTIONS = ENTITY__OWNED_RELATION_RESTRICTIONS;
 
 	/**
 	 * The feature id for the '<em><b>Owned Keys</b></em>' containment reference list.
@@ -3449,15 +3422,6 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int RELATION_ENTITY__OWNED_PROPERTY_RESTRICTIONS = ENTITY__OWNED_PROPERTY_RESTRICTIONS;
-
-	/**
-	 * The feature id for the '<em><b>Owned Relation Restrictions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RELATION_ENTITY__OWNED_RELATION_RESTRICTIONS = ENTITY__OWNED_RELATION_RESTRICTIONS;
 
 	/**
 	 * The feature id for the '<em><b>Owned Keys</b></em>' containment reference list.
@@ -4457,40 +4421,13 @@ public interface OmlPackage extends EPackage {
 	int RELATION__NAME = SEMANTIC_PROPERTY__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Domain</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RELATION__DOMAIN = SEMANTIC_PROPERTY_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Range</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RELATION__RANGE = SEMANTIC_PROPERTY_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Inverse</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RELATION__INVERSE = SEMANTIC_PROPERTY_FEATURE_COUNT + 2;
-
-	/**
 	 * The number of structural features of the '<em>Relation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_FEATURE_COUNT = SEMANTIC_PROPERTY_FEATURE_COUNT + 3;
+	int RELATION_FEATURE_COUNT = SEMANTIC_PROPERTY_FEATURE_COUNT + 0;
 
 	/**
 	 * The operation id for the '<em>Extra Validate</em>' operation.
@@ -4538,13 +4475,67 @@ public interface OmlPackage extends EPackage {
 	int RELATION___IS_FUNCTIONAL = SEMANTIC_PROPERTY___IS_FUNCTIONAL;
 
 	/**
+	 * The operation id for the '<em>Is Inverse Functional</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION___IS_INVERSE_FUNCTIONAL = SEMANTIC_PROPERTY_OPERATION_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>Is Symmetric</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION___IS_SYMMETRIC = SEMANTIC_PROPERTY_OPERATION_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Is Asymmetric</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION___IS_ASYMMETRIC = SEMANTIC_PROPERTY_OPERATION_COUNT + 2;
+
+	/**
+	 * The operation id for the '<em>Is Reflexive</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION___IS_REFLEXIVE = SEMANTIC_PROPERTY_OPERATION_COUNT + 3;
+
+	/**
+	 * The operation id for the '<em>Is Irreflexive</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION___IS_IRREFLEXIVE = SEMANTIC_PROPERTY_OPERATION_COUNT + 4;
+
+	/**
+	 * The operation id for the '<em>Is Transitive</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION___IS_TRANSITIVE = SEMANTIC_PROPERTY_OPERATION_COUNT + 5;
+
+	/**
 	 * The operation id for the '<em>Get Domain</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION___GET_DOMAIN = SEMANTIC_PROPERTY___GET_DOMAIN;
+	int RELATION___GET_DOMAIN = SEMANTIC_PROPERTY_OPERATION_COUNT + 6;
 
 	/**
 	 * The operation id for the '<em>Get Range</em>' operation.
@@ -4553,34 +4544,16 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION___GET_RANGE = SEMANTIC_PROPERTY___GET_RANGE;
+	int RELATION___GET_RANGE = SEMANTIC_PROPERTY_OPERATION_COUNT + 7;
 
 	/**
-	 * The operation id for the '<em>Derive Domain</em>' operation.
+	 * The operation id for the '<em>Get Inverse</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION___DERIVE_DOMAIN = SEMANTIC_PROPERTY_OPERATION_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Derive Range</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RELATION___DERIVE_RANGE = SEMANTIC_PROPERTY_OPERATION_COUNT + 1;
-
-	/**
-	 * The operation id for the '<em>Derive Inverse</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RELATION___DERIVE_INVERSE = SEMANTIC_PROPERTY_OPERATION_COUNT + 2;
+	int RELATION___GET_INVERSE = SEMANTIC_PROPERTY_OPERATION_COUNT + 8;
 
 	/**
 	 * The number of operations of the '<em>Relation</em>' class.
@@ -4589,7 +4562,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_OPERATION_COUNT = SEMANTIC_PROPERTY_OPERATION_COUNT + 3;
+	int RELATION_OPERATION_COUNT = SEMANTIC_PROPERTY_OPERATION_COUNT + 9;
 
 	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.impl.ForwardRelationImpl <em>Forward Relation</em>}' class.
@@ -4620,33 +4593,6 @@ public interface OmlPackage extends EPackage {
 	int FORWARD_RELATION__NAME = RELATION__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Domain</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FORWARD_RELATION__DOMAIN = RELATION__DOMAIN;
-
-	/**
-	 * The feature id for the '<em><b>Range</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FORWARD_RELATION__RANGE = RELATION__RANGE;
-
-	/**
-	 * The feature id for the '<em><b>Inverse</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FORWARD_RELATION__INVERSE = RELATION__INVERSE;
-
-	/**
 	 * The feature id for the '<em><b>Relation Entity</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4656,22 +4602,13 @@ public interface OmlPackage extends EPackage {
 	int FORWARD_RELATION__RELATION_ENTITY = RELATION_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Functional</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FORWARD_RELATION__FUNCTIONAL = RELATION_FEATURE_COUNT + 1;
-
-	/**
 	 * The number of structural features of the '<em>Forward Relation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FORWARD_RELATION_FEATURE_COUNT = RELATION_FEATURE_COUNT + 2;
+	int FORWARD_RELATION_FEATURE_COUNT = RELATION_FEATURE_COUNT + 1;
 
 	/**
 	 * The operation id for the '<em>Extra Validate</em>' operation.
@@ -4716,7 +4653,61 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FORWARD_RELATION___IS_FUNCTIONAL = RELATION___IS_FUNCTIONAL;
+	int FORWARD_RELATION___IS_FUNCTIONAL = RELATION_OPERATION_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>Is Inverse Functional</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORWARD_RELATION___IS_INVERSE_FUNCTIONAL = RELATION_OPERATION_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Is Symmetric</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORWARD_RELATION___IS_SYMMETRIC = RELATION_OPERATION_COUNT + 2;
+
+	/**
+	 * The operation id for the '<em>Is Asymmetric</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORWARD_RELATION___IS_ASYMMETRIC = RELATION_OPERATION_COUNT + 3;
+
+	/**
+	 * The operation id for the '<em>Is Reflexive</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORWARD_RELATION___IS_REFLEXIVE = RELATION_OPERATION_COUNT + 4;
+
+	/**
+	 * The operation id for the '<em>Is Irreflexive</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORWARD_RELATION___IS_IRREFLEXIVE = RELATION_OPERATION_COUNT + 5;
+
+	/**
+	 * The operation id for the '<em>Is Transitive</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORWARD_RELATION___IS_TRANSITIVE = RELATION_OPERATION_COUNT + 6;
 
 	/**
 	 * The operation id for the '<em>Get Domain</em>' operation.
@@ -4725,7 +4716,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FORWARD_RELATION___GET_DOMAIN = RELATION___GET_DOMAIN;
+	int FORWARD_RELATION___GET_DOMAIN = RELATION_OPERATION_COUNT + 7;
 
 	/**
 	 * The operation id for the '<em>Get Range</em>' operation.
@@ -4734,34 +4725,16 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FORWARD_RELATION___GET_RANGE = RELATION___GET_RANGE;
+	int FORWARD_RELATION___GET_RANGE = RELATION_OPERATION_COUNT + 8;
 
 	/**
-	 * The operation id for the '<em>Derive Domain</em>' operation.
+	 * The operation id for the '<em>Get Inverse</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FORWARD_RELATION___DERIVE_DOMAIN = RELATION_OPERATION_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Derive Range</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FORWARD_RELATION___DERIVE_RANGE = RELATION_OPERATION_COUNT + 1;
-
-	/**
-	 * The operation id for the '<em>Derive Inverse</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FORWARD_RELATION___DERIVE_INVERSE = RELATION_OPERATION_COUNT + 2;
+	int FORWARD_RELATION___GET_INVERSE = RELATION_OPERATION_COUNT + 9;
 
 	/**
 	 * The number of operations of the '<em>Forward Relation</em>' class.
@@ -4770,7 +4743,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FORWARD_RELATION_OPERATION_COUNT = RELATION_OPERATION_COUNT + 3;
+	int FORWARD_RELATION_OPERATION_COUNT = RELATION_OPERATION_COUNT + 10;
 
 	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.impl.ReverseRelationImpl <em>Reverse Relation</em>}' class.
@@ -4801,33 +4774,6 @@ public interface OmlPackage extends EPackage {
 	int REVERSE_RELATION__NAME = RELATION__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Domain</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REVERSE_RELATION__DOMAIN = RELATION__DOMAIN;
-
-	/**
-	 * The feature id for the '<em><b>Range</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REVERSE_RELATION__RANGE = RELATION__RANGE;
-
-	/**
-	 * The feature id for the '<em><b>Inverse</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REVERSE_RELATION__INVERSE = RELATION__INVERSE;
-
-	/**
 	 * The feature id for the '<em><b>Relation Base</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4837,22 +4783,13 @@ public interface OmlPackage extends EPackage {
 	int REVERSE_RELATION__RELATION_BASE = RELATION_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Functional</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REVERSE_RELATION__FUNCTIONAL = RELATION_FEATURE_COUNT + 1;
-
-	/**
 	 * The number of structural features of the '<em>Reverse Relation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REVERSE_RELATION_FEATURE_COUNT = RELATION_FEATURE_COUNT + 2;
+	int REVERSE_RELATION_FEATURE_COUNT = RELATION_FEATURE_COUNT + 1;
 
 	/**
 	 * The operation id for the '<em>Extra Validate</em>' operation.
@@ -4897,7 +4834,61 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REVERSE_RELATION___IS_FUNCTIONAL = RELATION___IS_FUNCTIONAL;
+	int REVERSE_RELATION___IS_FUNCTIONAL = RELATION_OPERATION_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>Is Inverse Functional</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REVERSE_RELATION___IS_INVERSE_FUNCTIONAL = RELATION_OPERATION_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Is Symmetric</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REVERSE_RELATION___IS_SYMMETRIC = RELATION_OPERATION_COUNT + 2;
+
+	/**
+	 * The operation id for the '<em>Is Asymmetric</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REVERSE_RELATION___IS_ASYMMETRIC = RELATION_OPERATION_COUNT + 3;
+
+	/**
+	 * The operation id for the '<em>Is Reflexive</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REVERSE_RELATION___IS_REFLEXIVE = RELATION_OPERATION_COUNT + 4;
+
+	/**
+	 * The operation id for the '<em>Is Irreflexive</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REVERSE_RELATION___IS_IRREFLEXIVE = RELATION_OPERATION_COUNT + 5;
+
+	/**
+	 * The operation id for the '<em>Is Transitive</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REVERSE_RELATION___IS_TRANSITIVE = RELATION_OPERATION_COUNT + 6;
 
 	/**
 	 * The operation id for the '<em>Get Domain</em>' operation.
@@ -4906,7 +4897,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REVERSE_RELATION___GET_DOMAIN = RELATION___GET_DOMAIN;
+	int REVERSE_RELATION___GET_DOMAIN = RELATION_OPERATION_COUNT + 7;
 
 	/**
 	 * The operation id for the '<em>Get Range</em>' operation.
@@ -4915,34 +4906,16 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REVERSE_RELATION___GET_RANGE = RELATION___GET_RANGE;
+	int REVERSE_RELATION___GET_RANGE = RELATION_OPERATION_COUNT + 8;
 
 	/**
-	 * The operation id for the '<em>Derive Domain</em>' operation.
+	 * The operation id for the '<em>Get Inverse</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REVERSE_RELATION___DERIVE_DOMAIN = RELATION_OPERATION_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Derive Range</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REVERSE_RELATION___DERIVE_RANGE = RELATION_OPERATION_COUNT + 1;
-
-	/**
-	 * The operation id for the '<em>Derive Inverse</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REVERSE_RELATION___DERIVE_INVERSE = RELATION_OPERATION_COUNT + 2;
+	int REVERSE_RELATION___GET_INVERSE = RELATION_OPERATION_COUNT + 9;
 
 	/**
 	 * The number of operations of the '<em>Reverse Relation</em>' class.
@@ -4951,7 +4924,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REVERSE_RELATION_OPERATION_COUNT = RELATION_OPERATION_COUNT + 3;
+	int REVERSE_RELATION_OPERATION_COUNT = RELATION_OPERATION_COUNT + 10;
 
 	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.impl.UnreifiedRelationImpl <em>Unreified Relation</em>}' class.
@@ -4980,33 +4953,6 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int UNREIFIED_RELATION__NAME = RELATION__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Domain</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UNREIFIED_RELATION__DOMAIN = RELATION__DOMAIN;
-
-	/**
-	 * The feature id for the '<em><b>Range</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UNREIFIED_RELATION__RANGE = RELATION__RANGE;
-
-	/**
-	 * The feature id for the '<em><b>Inverse</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UNREIFIED_RELATION__INVERSE = RELATION__INVERSE;
 
 	/**
 	 * The feature id for the '<em><b>Owning Vocabulary</b></em>' container reference.
@@ -5171,13 +5117,67 @@ public interface OmlPackage extends EPackage {
 	int UNREIFIED_RELATION___IS_FUNCTIONAL = RELATION___IS_FUNCTIONAL;
 
 	/**
+	 * The operation id for the '<em>Is Inverse Functional</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNREIFIED_RELATION___IS_INVERSE_FUNCTIONAL = RELATION___IS_INVERSE_FUNCTIONAL;
+
+	/**
+	 * The operation id for the '<em>Is Symmetric</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNREIFIED_RELATION___IS_SYMMETRIC = RELATION___IS_SYMMETRIC;
+
+	/**
+	 * The operation id for the '<em>Is Asymmetric</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNREIFIED_RELATION___IS_ASYMMETRIC = RELATION___IS_ASYMMETRIC;
+
+	/**
+	 * The operation id for the '<em>Is Reflexive</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNREIFIED_RELATION___IS_REFLEXIVE = RELATION___IS_REFLEXIVE;
+
+	/**
+	 * The operation id for the '<em>Is Irreflexive</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNREIFIED_RELATION___IS_IRREFLEXIVE = RELATION___IS_IRREFLEXIVE;
+
+	/**
+	 * The operation id for the '<em>Is Transitive</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNREIFIED_RELATION___IS_TRANSITIVE = RELATION___IS_TRANSITIVE;
+
+	/**
 	 * The operation id for the '<em>Get Domain</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int UNREIFIED_RELATION___GET_DOMAIN = RELATION___GET_DOMAIN;
+	int UNREIFIED_RELATION___GET_DOMAIN = RELATION_OPERATION_COUNT + 0;
 
 	/**
 	 * The operation id for the '<em>Get Range</em>' operation.
@@ -5186,34 +5186,16 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNREIFIED_RELATION___GET_RANGE = RELATION___GET_RANGE;
+	int UNREIFIED_RELATION___GET_RANGE = RELATION_OPERATION_COUNT + 1;
 
 	/**
-	 * The operation id for the '<em>Derive Domain</em>' operation.
+	 * The operation id for the '<em>Get Inverse</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int UNREIFIED_RELATION___DERIVE_DOMAIN = RELATION_OPERATION_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Derive Range</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UNREIFIED_RELATION___DERIVE_RANGE = RELATION_OPERATION_COUNT + 1;
-
-	/**
-	 * The operation id for the '<em>Derive Inverse</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UNREIFIED_RELATION___DERIVE_INVERSE = RELATION_OPERATION_COUNT + 2;
+	int UNREIFIED_RELATION___GET_INVERSE = RELATION_OPERATION_COUNT + 2;
 
 	/**
 	 * The number of operations of the '<em>Unreified Relation</em>' class.
@@ -5271,22 +5253,13 @@ public interface OmlPackage extends EPackage {
 	int NAMED_INSTANCE__OWNED_PROPERTY_VALUES = DESCRIPTION_MEMBER_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Owned Links</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAMED_INSTANCE__OWNED_LINKS = DESCRIPTION_MEMBER_FEATURE_COUNT + 2;
-
-	/**
 	 * The number of structural features of the '<em>Named Instance</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NAMED_INSTANCE_FEATURE_COUNT = DESCRIPTION_MEMBER_FEATURE_COUNT + 3;
+	int NAMED_INSTANCE_FEATURE_COUNT = DESCRIPTION_MEMBER_FEATURE_COUNT + 2;
 
 	/**
 	 * The operation id for the '<em>Extra Validate</em>' operation.
@@ -5378,15 +5351,6 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int CONCEPT_INSTANCE__OWNED_PROPERTY_VALUES = NAMED_INSTANCE__OWNED_PROPERTY_VALUES;
-
-	/**
-	 * The feature id for the '<em><b>Owned Links</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONCEPT_INSTANCE__OWNED_LINKS = NAMED_INSTANCE__OWNED_LINKS;
 
 	/**
 	 * The feature id for the '<em><b>Owned Types</b></em>' containment reference list.
@@ -5496,15 +5460,6 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int RELATION_INSTANCE__OWNED_PROPERTY_VALUES = NAMED_INSTANCE__OWNED_PROPERTY_VALUES;
-
-	/**
-	 * The feature id for the '<em><b>Owned Links</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RELATION_INSTANCE__OWNED_LINKS = NAMED_INSTANCE__OWNED_LINKS;
 
 	/**
 	 * The feature id for the '<em><b>Owned Types</b></em>' containment reference list.
@@ -5816,52 +5771,6 @@ public interface OmlPackage extends EPackage {
 	int SPECIALIZATION_AXIOM_OPERATION_COUNT = AXIOM_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link io.opencaesar.oml.impl.RestrictionAxiomImpl <em>Restriction Axiom</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see io.opencaesar.oml.impl.RestrictionAxiomImpl
-	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRestrictionAxiom()
-	 * @generated
-	 */
-	int RESTRICTION_AXIOM = 54;
-
-	/**
-	 * The number of structural features of the '<em>Restriction Axiom</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RESTRICTION_AXIOM_FEATURE_COUNT = AXIOM_FEATURE_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RESTRICTION_AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
-	 * The operation id for the '<em>Get Ontology</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RESTRICTION_AXIOM___GET_ONTOLOGY = AXIOM___GET_ONTOLOGY;
-
-	/**
-	 * The number of operations of the '<em>Restriction Axiom</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RESTRICTION_AXIOM_OPERATION_COUNT = AXIOM_OPERATION_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.impl.PropertyRestrictionAxiomImpl <em>Property Restriction Axiom</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5869,7 +5778,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getPropertyRestrictionAxiom()
 	 * @generated
 	 */
-	int PROPERTY_RESTRICTION_AXIOM = 55;
+	int PROPERTY_RESTRICTION_AXIOM = 54;
 
 	/**
 	 * The feature id for the '<em><b>Owning Classifier</b></em>' container reference.
@@ -5878,7 +5787,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_RESTRICTION_AXIOM__OWNING_CLASSIFIER = RESTRICTION_AXIOM_FEATURE_COUNT + 0;
+	int PROPERTY_RESTRICTION_AXIOM__OWNING_CLASSIFIER = AXIOM_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Owning Reference</b></em>' container reference.
@@ -5887,7 +5796,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_RESTRICTION_AXIOM__OWNING_REFERENCE = RESTRICTION_AXIOM_FEATURE_COUNT + 1;
+	int PROPERTY_RESTRICTION_AXIOM__OWNING_REFERENCE = AXIOM_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Property Restriction Axiom</em>' class.
@@ -5896,7 +5805,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_RESTRICTION_AXIOM_FEATURE_COUNT = RESTRICTION_AXIOM_FEATURE_COUNT + 2;
+	int PROPERTY_RESTRICTION_AXIOM_FEATURE_COUNT = AXIOM_FEATURE_COUNT + 2;
 
 	/**
 	 * The operation id for the '<em>Extra Validate</em>' operation.
@@ -5905,7 +5814,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_RESTRICTION_AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = RESTRICTION_AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+	int PROPERTY_RESTRICTION_AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
@@ -5914,7 +5823,16 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_RESTRICTION_AXIOM___GET_ONTOLOGY = RESTRICTION_AXIOM___GET_ONTOLOGY;
+	int PROPERTY_RESTRICTION_AXIOM___GET_ONTOLOGY = AXIOM___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Get Property</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_RESTRICTION_AXIOM___GET_PROPERTY = AXIOM_OPERATION_COUNT + 0;
 
 	/**
 	 * The number of operations of the '<em>Property Restriction Axiom</em>' class.
@@ -5923,7 +5841,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_RESTRICTION_AXIOM_OPERATION_COUNT = RESTRICTION_AXIOM_OPERATION_COUNT + 0;
+	int PROPERTY_RESTRICTION_AXIOM_OPERATION_COUNT = AXIOM_OPERATION_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.impl.ScalarPropertyRestrictionAxiomImpl <em>Scalar Property Restriction Axiom</em>}' class.
@@ -5933,7 +5851,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getScalarPropertyRestrictionAxiom()
 	 * @generated
 	 */
-	int SCALAR_PROPERTY_RESTRICTION_AXIOM = 56;
+	int SCALAR_PROPERTY_RESTRICTION_AXIOM = 55;
 
 	/**
 	 * The feature id for the '<em><b>Owning Classifier</b></em>' container reference.
@@ -5990,6 +5908,15 @@ public interface OmlPackage extends EPackage {
 	int SCALAR_PROPERTY_RESTRICTION_AXIOM___GET_ONTOLOGY = PROPERTY_RESTRICTION_AXIOM___GET_ONTOLOGY;
 
 	/**
+	 * The operation id for the '<em>Get Property</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALAR_PROPERTY_RESTRICTION_AXIOM___GET_PROPERTY = PROPERTY_RESTRICTION_AXIOM___GET_PROPERTY;
+
+	/**
 	 * The number of operations of the '<em>Scalar Property Restriction Axiom</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6006,7 +5933,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getScalarPropertyRangeRestrictionAxiom()
 	 * @generated
 	 */
-	int SCALAR_PROPERTY_RANGE_RESTRICTION_AXIOM = 57;
+	int SCALAR_PROPERTY_RANGE_RESTRICTION_AXIOM = 56;
 
 	/**
 	 * The feature id for the '<em><b>Owning Classifier</b></em>' container reference.
@@ -6081,6 +6008,15 @@ public interface OmlPackage extends EPackage {
 	int SCALAR_PROPERTY_RANGE_RESTRICTION_AXIOM___GET_ONTOLOGY = SCALAR_PROPERTY_RESTRICTION_AXIOM___GET_ONTOLOGY;
 
 	/**
+	 * The operation id for the '<em>Get Property</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALAR_PROPERTY_RANGE_RESTRICTION_AXIOM___GET_PROPERTY = SCALAR_PROPERTY_RESTRICTION_AXIOM___GET_PROPERTY;
+
+	/**
 	 * The number of operations of the '<em>Scalar Property Range Restriction Axiom</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6097,7 +6033,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getScalarPropertyCardinalityRestrictionAxiom()
 	 * @generated
 	 */
-	int SCALAR_PROPERTY_CARDINALITY_RESTRICTION_AXIOM = 58;
+	int SCALAR_PROPERTY_CARDINALITY_RESTRICTION_AXIOM = 57;
 
 	/**
 	 * The feature id for the '<em><b>Owning Classifier</b></em>' container reference.
@@ -6181,6 +6117,15 @@ public interface OmlPackage extends EPackage {
 	int SCALAR_PROPERTY_CARDINALITY_RESTRICTION_AXIOM___GET_ONTOLOGY = SCALAR_PROPERTY_RESTRICTION_AXIOM___GET_ONTOLOGY;
 
 	/**
+	 * The operation id for the '<em>Get Property</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALAR_PROPERTY_CARDINALITY_RESTRICTION_AXIOM___GET_PROPERTY = SCALAR_PROPERTY_RESTRICTION_AXIOM___GET_PROPERTY;
+
+	/**
 	 * The number of operations of the '<em>Scalar Property Cardinality Restriction Axiom</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6197,7 +6142,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getScalarPropertyValueRestrictionAxiom()
 	 * @generated
 	 */
-	int SCALAR_PROPERTY_VALUE_RESTRICTION_AXIOM = 59;
+	int SCALAR_PROPERTY_VALUE_RESTRICTION_AXIOM = 58;
 
 	/**
 	 * The feature id for the '<em><b>Owning Classifier</b></em>' container reference.
@@ -6263,6 +6208,15 @@ public interface OmlPackage extends EPackage {
 	int SCALAR_PROPERTY_VALUE_RESTRICTION_AXIOM___GET_ONTOLOGY = SCALAR_PROPERTY_RESTRICTION_AXIOM___GET_ONTOLOGY;
 
 	/**
+	 * The operation id for the '<em>Get Property</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALAR_PROPERTY_VALUE_RESTRICTION_AXIOM___GET_PROPERTY = SCALAR_PROPERTY_RESTRICTION_AXIOM___GET_PROPERTY;
+
+	/**
 	 * The number of operations of the '<em>Scalar Property Value Restriction Axiom</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6279,7 +6233,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getStructuredPropertyRestrictionAxiom()
 	 * @generated
 	 */
-	int STRUCTURED_PROPERTY_RESTRICTION_AXIOM = 60;
+	int STRUCTURED_PROPERTY_RESTRICTION_AXIOM = 59;
 
 	/**
 	 * The feature id for the '<em><b>Owning Classifier</b></em>' container reference.
@@ -6336,6 +6290,15 @@ public interface OmlPackage extends EPackage {
 	int STRUCTURED_PROPERTY_RESTRICTION_AXIOM___GET_ONTOLOGY = PROPERTY_RESTRICTION_AXIOM___GET_ONTOLOGY;
 
 	/**
+	 * The operation id for the '<em>Get Property</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURED_PROPERTY_RESTRICTION_AXIOM___GET_PROPERTY = PROPERTY_RESTRICTION_AXIOM___GET_PROPERTY;
+
+	/**
 	 * The number of operations of the '<em>Structured Property Restriction Axiom</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6352,7 +6315,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getStructuredPropertyRangeRestrictionAxiom()
 	 * @generated
 	 */
-	int STRUCTURED_PROPERTY_RANGE_RESTRICTION_AXIOM = 61;
+	int STRUCTURED_PROPERTY_RANGE_RESTRICTION_AXIOM = 60;
 
 	/**
 	 * The feature id for the '<em><b>Owning Classifier</b></em>' container reference.
@@ -6427,6 +6390,15 @@ public interface OmlPackage extends EPackage {
 	int STRUCTURED_PROPERTY_RANGE_RESTRICTION_AXIOM___GET_ONTOLOGY = STRUCTURED_PROPERTY_RESTRICTION_AXIOM___GET_ONTOLOGY;
 
 	/**
+	 * The operation id for the '<em>Get Property</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURED_PROPERTY_RANGE_RESTRICTION_AXIOM___GET_PROPERTY = STRUCTURED_PROPERTY_RESTRICTION_AXIOM___GET_PROPERTY;
+
+	/**
 	 * The number of operations of the '<em>Structured Property Range Restriction Axiom</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6443,7 +6415,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getStructuredPropertyCardinalityRestrictionAxiom()
 	 * @generated
 	 */
-	int STRUCTURED_PROPERTY_CARDINALITY_RESTRICTION_AXIOM = 62;
+	int STRUCTURED_PROPERTY_CARDINALITY_RESTRICTION_AXIOM = 61;
 
 	/**
 	 * The feature id for the '<em><b>Owning Classifier</b></em>' container reference.
@@ -6527,6 +6499,15 @@ public interface OmlPackage extends EPackage {
 	int STRUCTURED_PROPERTY_CARDINALITY_RESTRICTION_AXIOM___GET_ONTOLOGY = STRUCTURED_PROPERTY_RESTRICTION_AXIOM___GET_ONTOLOGY;
 
 	/**
+	 * The operation id for the '<em>Get Property</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURED_PROPERTY_CARDINALITY_RESTRICTION_AXIOM___GET_PROPERTY = STRUCTURED_PROPERTY_RESTRICTION_AXIOM___GET_PROPERTY;
+
+	/**
 	 * The number of operations of the '<em>Structured Property Cardinality Restriction Axiom</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6543,7 +6524,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getStructuredPropertyValueRestrictionAxiom()
 	 * @generated
 	 */
-	int STRUCTURED_PROPERTY_VALUE_RESTRICTION_AXIOM = 63;
+	int STRUCTURED_PROPERTY_VALUE_RESTRICTION_AXIOM = 62;
 
 	/**
 	 * The feature id for the '<em><b>Owning Classifier</b></em>' container reference.
@@ -6609,6 +6590,15 @@ public interface OmlPackage extends EPackage {
 	int STRUCTURED_PROPERTY_VALUE_RESTRICTION_AXIOM___GET_ONTOLOGY = STRUCTURED_PROPERTY_RESTRICTION_AXIOM___GET_ONTOLOGY;
 
 	/**
+	 * The operation id for the '<em>Get Property</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURED_PROPERTY_VALUE_RESTRICTION_AXIOM___GET_PROPERTY = STRUCTURED_PROPERTY_RESTRICTION_AXIOM___GET_PROPERTY;
+
+	/**
 	 * The number of operations of the '<em>Structured Property Value Restriction Axiom</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6625,25 +6615,16 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRelationRestrictionAxiom()
 	 * @generated
 	 */
-	int RELATION_RESTRICTION_AXIOM = 64;
+	int RELATION_RESTRICTION_AXIOM = 63;
 
 	/**
-	 * The feature id for the '<em><b>Relation</b></em>' reference.
+	 * The feature id for the '<em><b>Owning Classifier</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_RESTRICTION_AXIOM__RELATION = RESTRICTION_AXIOM_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Owning Entity</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RELATION_RESTRICTION_AXIOM__OWNING_ENTITY = RESTRICTION_AXIOM_FEATURE_COUNT + 1;
+	int RELATION_RESTRICTION_AXIOM__OWNING_CLASSIFIER = PROPERTY_RESTRICTION_AXIOM__OWNING_CLASSIFIER;
 
 	/**
 	 * The feature id for the '<em><b>Owning Reference</b></em>' container reference.
@@ -6652,7 +6633,16 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_RESTRICTION_AXIOM__OWNING_REFERENCE = RESTRICTION_AXIOM_FEATURE_COUNT + 2;
+	int RELATION_RESTRICTION_AXIOM__OWNING_REFERENCE = PROPERTY_RESTRICTION_AXIOM__OWNING_REFERENCE;
+
+	/**
+	 * The feature id for the '<em><b>Property</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_RESTRICTION_AXIOM__PROPERTY = PROPERTY_RESTRICTION_AXIOM_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Relation Restriction Axiom</em>' class.
@@ -6661,7 +6651,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_RESTRICTION_AXIOM_FEATURE_COUNT = RESTRICTION_AXIOM_FEATURE_COUNT + 3;
+	int RELATION_RESTRICTION_AXIOM_FEATURE_COUNT = PROPERTY_RESTRICTION_AXIOM_FEATURE_COUNT + 1;
 
 	/**
 	 * The operation id for the '<em>Extra Validate</em>' operation.
@@ -6670,7 +6660,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_RESTRICTION_AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = RESTRICTION_AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+	int RELATION_RESTRICTION_AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = PROPERTY_RESTRICTION_AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
@@ -6679,7 +6669,16 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_RESTRICTION_AXIOM___GET_ONTOLOGY = RESTRICTION_AXIOM___GET_ONTOLOGY;
+	int RELATION_RESTRICTION_AXIOM___GET_ONTOLOGY = PROPERTY_RESTRICTION_AXIOM___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Get Property</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_RESTRICTION_AXIOM___GET_PROPERTY = PROPERTY_RESTRICTION_AXIOM___GET_PROPERTY;
 
 	/**
 	 * The number of operations of the '<em>Relation Restriction Axiom</em>' class.
@@ -6688,7 +6687,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_RESTRICTION_AXIOM_OPERATION_COUNT = RESTRICTION_AXIOM_OPERATION_COUNT + 0;
+	int RELATION_RESTRICTION_AXIOM_OPERATION_COUNT = PROPERTY_RESTRICTION_AXIOM_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.impl.RelationRangeRestrictionAxiomImpl <em>Relation Range Restriction Axiom</em>}' class.
@@ -6698,25 +6697,16 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRelationRangeRestrictionAxiom()
 	 * @generated
 	 */
-	int RELATION_RANGE_RESTRICTION_AXIOM = 65;
+	int RELATION_RANGE_RESTRICTION_AXIOM = 64;
 
 	/**
-	 * The feature id for the '<em><b>Relation</b></em>' reference.
+	 * The feature id for the '<em><b>Owning Classifier</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_RANGE_RESTRICTION_AXIOM__RELATION = RELATION_RESTRICTION_AXIOM__RELATION;
-
-	/**
-	 * The feature id for the '<em><b>Owning Entity</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RELATION_RANGE_RESTRICTION_AXIOM__OWNING_ENTITY = RELATION_RESTRICTION_AXIOM__OWNING_ENTITY;
+	int RELATION_RANGE_RESTRICTION_AXIOM__OWNING_CLASSIFIER = RELATION_RESTRICTION_AXIOM__OWNING_CLASSIFIER;
 
 	/**
 	 * The feature id for the '<em><b>Owning Reference</b></em>' container reference.
@@ -6726,6 +6716,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int RELATION_RANGE_RESTRICTION_AXIOM__OWNING_REFERENCE = RELATION_RESTRICTION_AXIOM__OWNING_REFERENCE;
+
+	/**
+	 * The feature id for the '<em><b>Property</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_RANGE_RESTRICTION_AXIOM__PROPERTY = RELATION_RESTRICTION_AXIOM__PROPERTY;
 
 	/**
 	 * The feature id for the '<em><b>Range</b></em>' reference.
@@ -6773,6 +6772,15 @@ public interface OmlPackage extends EPackage {
 	int RELATION_RANGE_RESTRICTION_AXIOM___GET_ONTOLOGY = RELATION_RESTRICTION_AXIOM___GET_ONTOLOGY;
 
 	/**
+	 * The operation id for the '<em>Get Property</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_RANGE_RESTRICTION_AXIOM___GET_PROPERTY = RELATION_RESTRICTION_AXIOM___GET_PROPERTY;
+
+	/**
 	 * The number of operations of the '<em>Relation Range Restriction Axiom</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6789,25 +6797,16 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRelationCardinalityRestrictionAxiom()
 	 * @generated
 	 */
-	int RELATION_CARDINALITY_RESTRICTION_AXIOM = 66;
+	int RELATION_CARDINALITY_RESTRICTION_AXIOM = 65;
 
 	/**
-	 * The feature id for the '<em><b>Relation</b></em>' reference.
+	 * The feature id for the '<em><b>Owning Classifier</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_CARDINALITY_RESTRICTION_AXIOM__RELATION = RELATION_RESTRICTION_AXIOM__RELATION;
-
-	/**
-	 * The feature id for the '<em><b>Owning Entity</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RELATION_CARDINALITY_RESTRICTION_AXIOM__OWNING_ENTITY = RELATION_RESTRICTION_AXIOM__OWNING_ENTITY;
+	int RELATION_CARDINALITY_RESTRICTION_AXIOM__OWNING_CLASSIFIER = RELATION_RESTRICTION_AXIOM__OWNING_CLASSIFIER;
 
 	/**
 	 * The feature id for the '<em><b>Owning Reference</b></em>' container reference.
@@ -6817,6 +6816,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int RELATION_CARDINALITY_RESTRICTION_AXIOM__OWNING_REFERENCE = RELATION_RESTRICTION_AXIOM__OWNING_REFERENCE;
+
+	/**
+	 * The feature id for the '<em><b>Property</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_CARDINALITY_RESTRICTION_AXIOM__PROPERTY = RELATION_RESTRICTION_AXIOM__PROPERTY;
 
 	/**
 	 * The feature id for the '<em><b>Cardinality</b></em>' attribute.
@@ -6873,6 +6881,15 @@ public interface OmlPackage extends EPackage {
 	int RELATION_CARDINALITY_RESTRICTION_AXIOM___GET_ONTOLOGY = RELATION_RESTRICTION_AXIOM___GET_ONTOLOGY;
 
 	/**
+	 * The operation id for the '<em>Get Property</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_CARDINALITY_RESTRICTION_AXIOM___GET_PROPERTY = RELATION_RESTRICTION_AXIOM___GET_PROPERTY;
+
+	/**
 	 * The number of operations of the '<em>Relation Cardinality Restriction Axiom</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6882,32 +6899,23 @@ public interface OmlPackage extends EPackage {
 	int RELATION_CARDINALITY_RESTRICTION_AXIOM_OPERATION_COUNT = RELATION_RESTRICTION_AXIOM_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link io.opencaesar.oml.impl.RelationTargetRestrictionAxiomImpl <em>Relation Target Restriction Axiom</em>}' class.
+	 * The meta object id for the '{@link io.opencaesar.oml.impl.RelationValueRestrictionAxiomImpl <em>Relation Value Restriction Axiom</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see io.opencaesar.oml.impl.RelationTargetRestrictionAxiomImpl
-	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRelationTargetRestrictionAxiom()
+	 * @see io.opencaesar.oml.impl.RelationValueRestrictionAxiomImpl
+	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRelationValueRestrictionAxiom()
 	 * @generated
 	 */
-	int RELATION_TARGET_RESTRICTION_AXIOM = 67;
+	int RELATION_VALUE_RESTRICTION_AXIOM = 66;
 
 	/**
-	 * The feature id for the '<em><b>Relation</b></em>' reference.
+	 * The feature id for the '<em><b>Owning Classifier</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_TARGET_RESTRICTION_AXIOM__RELATION = RELATION_RESTRICTION_AXIOM__RELATION;
-
-	/**
-	 * The feature id for the '<em><b>Owning Entity</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RELATION_TARGET_RESTRICTION_AXIOM__OWNING_ENTITY = RELATION_RESTRICTION_AXIOM__OWNING_ENTITY;
+	int RELATION_VALUE_RESTRICTION_AXIOM__OWNING_CLASSIFIER = RELATION_RESTRICTION_AXIOM__OWNING_CLASSIFIER;
 
 	/**
 	 * The feature id for the '<em><b>Owning Reference</b></em>' container reference.
@@ -6916,25 +6924,34 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_TARGET_RESTRICTION_AXIOM__OWNING_REFERENCE = RELATION_RESTRICTION_AXIOM__OWNING_REFERENCE;
+	int RELATION_VALUE_RESTRICTION_AXIOM__OWNING_REFERENCE = RELATION_RESTRICTION_AXIOM__OWNING_REFERENCE;
 
 	/**
-	 * The feature id for the '<em><b>Target</b></em>' reference.
+	 * The feature id for the '<em><b>Property</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_TARGET_RESTRICTION_AXIOM__TARGET = RELATION_RESTRICTION_AXIOM_FEATURE_COUNT + 0;
+	int RELATION_VALUE_RESTRICTION_AXIOM__PROPERTY = RELATION_RESTRICTION_AXIOM__PROPERTY;
 
 	/**
-	 * The number of structural features of the '<em>Relation Target Restriction Axiom</em>' class.
+	 * The feature id for the '<em><b>Value</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_TARGET_RESTRICTION_AXIOM_FEATURE_COUNT = RELATION_RESTRICTION_AXIOM_FEATURE_COUNT + 1;
+	int RELATION_VALUE_RESTRICTION_AXIOM__VALUE = RELATION_RESTRICTION_AXIOM_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Relation Value Restriction Axiom</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_VALUE_RESTRICTION_AXIOM_FEATURE_COUNT = RELATION_RESTRICTION_AXIOM_FEATURE_COUNT + 1;
 
 	/**
 	 * The operation id for the '<em>Extra Validate</em>' operation.
@@ -6943,7 +6960,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_TARGET_RESTRICTION_AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = RELATION_RESTRICTION_AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+	int RELATION_VALUE_RESTRICTION_AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = RELATION_RESTRICTION_AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
@@ -6952,16 +6969,25 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_TARGET_RESTRICTION_AXIOM___GET_ONTOLOGY = RELATION_RESTRICTION_AXIOM___GET_ONTOLOGY;
+	int RELATION_VALUE_RESTRICTION_AXIOM___GET_ONTOLOGY = RELATION_RESTRICTION_AXIOM___GET_ONTOLOGY;
 
 	/**
-	 * The number of operations of the '<em>Relation Target Restriction Axiom</em>' class.
+	 * The operation id for the '<em>Get Property</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_TARGET_RESTRICTION_AXIOM_OPERATION_COUNT = RELATION_RESTRICTION_AXIOM_OPERATION_COUNT + 0;
+	int RELATION_VALUE_RESTRICTION_AXIOM___GET_PROPERTY = RELATION_RESTRICTION_AXIOM___GET_PROPERTY;
+
+	/**
+	 * The number of operations of the '<em>Relation Value Restriction Axiom</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_VALUE_RESTRICTION_AXIOM_OPERATION_COUNT = RELATION_RESTRICTION_AXIOM_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.impl.TypeAssertionImpl <em>Type Assertion</em>}' class.
@@ -6971,7 +6997,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getTypeAssertion()
 	 * @generated
 	 */
-	int TYPE_ASSERTION = 68;
+	int TYPE_ASSERTION = 67;
 
 	/**
 	 * The number of structural features of the '<em>Type Assertion</em>' class.
@@ -7026,7 +7052,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getConceptTypeAssertion()
 	 * @generated
 	 */
-	int CONCEPT_TYPE_ASSERTION = 69;
+	int CONCEPT_TYPE_ASSERTION = 68;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -7108,7 +7134,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRelationTypeAssertion()
 	 * @generated
 	 */
-	int RELATION_TYPE_ASSERTION = 70;
+	int RELATION_TYPE_ASSERTION = 69;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -7190,7 +7216,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getPropertyValueAssertion()
 	 * @generated
 	 */
-	int PROPERTY_VALUE_ASSERTION = 71;
+	int PROPERTY_VALUE_ASSERTION = 70;
 
 	/**
 	 * The feature id for the '<em><b>Owning Instance</b></em>' container reference.
@@ -7272,7 +7298,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getScalarPropertyValueAssertion()
 	 * @generated
 	 */
-	int SCALAR_PROPERTY_VALUE_ASSERTION = 72;
+	int SCALAR_PROPERTY_VALUE_ASSERTION = 71;
 
 	/**
 	 * The feature id for the '<em><b>Owning Instance</b></em>' container reference.
@@ -7372,7 +7398,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getStructuredPropertyValueAssertion()
 	 * @generated
 	 */
-	int STRUCTURED_PROPERTY_VALUE_ASSERTION = 73;
+	int STRUCTURED_PROPERTY_VALUE_ASSERTION = 72;
 
 	/**
 	 * The feature id for the '<em><b>Owning Instance</b></em>' container reference.
@@ -7472,25 +7498,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getLinkAssertion()
 	 * @generated
 	 */
-	int LINK_ASSERTION = 74;
-
-	/**
-	 * The feature id for the '<em><b>Relation</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LINK_ASSERTION__RELATION = ASSERTION_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Target</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LINK_ASSERTION__TARGET = ASSERTION_FEATURE_COUNT + 1;
+	int LINK_ASSERTION = 73;
 
 	/**
 	 * The feature id for the '<em><b>Owning Instance</b></em>' container reference.
@@ -7499,7 +7507,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LINK_ASSERTION__OWNING_INSTANCE = ASSERTION_FEATURE_COUNT + 2;
+	int LINK_ASSERTION__OWNING_INSTANCE = PROPERTY_VALUE_ASSERTION__OWNING_INSTANCE;
 
 	/**
 	 * The feature id for the '<em><b>Owning Reference</b></em>' container reference.
@@ -7508,7 +7516,25 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LINK_ASSERTION__OWNING_REFERENCE = ASSERTION_FEATURE_COUNT + 3;
+	int LINK_ASSERTION__OWNING_REFERENCE = PROPERTY_VALUE_ASSERTION__OWNING_REFERENCE;
+
+	/**
+	 * The feature id for the '<em><b>Property</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LINK_ASSERTION__PROPERTY = PROPERTY_VALUE_ASSERTION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LINK_ASSERTION__VALUE = PROPERTY_VALUE_ASSERTION_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Link Assertion</em>' class.
@@ -7517,7 +7543,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LINK_ASSERTION_FEATURE_COUNT = ASSERTION_FEATURE_COUNT + 4;
+	int LINK_ASSERTION_FEATURE_COUNT = PROPERTY_VALUE_ASSERTION_FEATURE_COUNT + 2;
 
 	/**
 	 * The operation id for the '<em>Extra Validate</em>' operation.
@@ -7526,7 +7552,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LINK_ASSERTION___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = ASSERTION___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+	int LINK_ASSERTION___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = PROPERTY_VALUE_ASSERTION___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
@@ -7535,7 +7561,25 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LINK_ASSERTION___GET_ONTOLOGY = ASSERTION___GET_ONTOLOGY;
+	int LINK_ASSERTION___GET_ONTOLOGY = PROPERTY_VALUE_ASSERTION___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Get Property</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LINK_ASSERTION___GET_PROPERTY = PROPERTY_VALUE_ASSERTION___GET_PROPERTY;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LINK_ASSERTION___GET_VALUE = PROPERTY_VALUE_ASSERTION___GET_VALUE;
 
 	/**
 	 * The number of operations of the '<em>Link Assertion</em>' class.
@@ -7544,7 +7588,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LINK_ASSERTION_OPERATION_COUNT = ASSERTION_OPERATION_COUNT + 0;
+	int LINK_ASSERTION_OPERATION_COUNT = PROPERTY_VALUE_ASSERTION_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.impl.UnaryPredicateImpl <em>Unary Predicate</em>}' class.
@@ -7554,7 +7598,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getUnaryPredicate()
 	 * @generated
 	 */
-	int UNARY_PREDICATE = 75;
+	int UNARY_PREDICATE = 74;
 
 	/**
 	 * The feature id for the '<em><b>Antecedent Rule</b></em>' container reference.
@@ -7627,7 +7671,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getBinaryPredicate()
 	 * @generated
 	 */
-	int BINARY_PREDICATE = 76;
+	int BINARY_PREDICATE = 75;
 
 	/**
 	 * The feature id for the '<em><b>Antecedent Rule</b></em>' container reference.
@@ -7718,7 +7762,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getTypePredicate()
 	 * @generated
 	 */
-	int TYPE_PREDICATE = 77;
+	int TYPE_PREDICATE = 76;
 
 	/**
 	 * The feature id for the '<em><b>Antecedent Rule</b></em>' container reference.
@@ -7800,7 +7844,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRelationEntityPredicate()
 	 * @generated
 	 */
-	int RELATION_ENTITY_PREDICATE = 78;
+	int RELATION_ENTITY_PREDICATE = 77;
 
 	/**
 	 * The feature id for the '<em><b>Antecedent Rule</b></em>' container reference.
@@ -7909,7 +7953,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getPropertyPredicate()
 	 * @generated
 	 */
-	int PROPERTY_PREDICATE = 79;
+	int PROPERTY_PREDICATE = 78;
 
 	/**
 	 * The feature id for the '<em><b>Antecedent Rule</b></em>' container reference.
@@ -8018,7 +8062,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getSameAsPredicate()
 	 * @generated
 	 */
-	int SAME_AS_PREDICATE = 80;
+	int SAME_AS_PREDICATE = 79;
 
 	/**
 	 * The feature id for the '<em><b>Antecedent Rule</b></em>' container reference.
@@ -8109,7 +8153,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDifferentFromPredicate()
 	 * @generated
 	 */
-	int DIFFERENT_FROM_PREDICATE = 81;
+	int DIFFERENT_FROM_PREDICATE = 80;
 
 	/**
 	 * The feature id for the '<em><b>Antecedent Rule</b></em>' container reference.
@@ -8200,7 +8244,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getQuotedLiteral()
 	 * @generated
 	 */
-	int QUOTED_LITERAL = 82;
+	int QUOTED_LITERAL = 81;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -8273,7 +8317,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getIntegerLiteral()
 	 * @generated
 	 */
-	int INTEGER_LITERAL = 83;
+	int INTEGER_LITERAL = 82;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -8328,7 +8372,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDecimalLiteral()
 	 * @generated
 	 */
-	int DECIMAL_LITERAL = 84;
+	int DECIMAL_LITERAL = 83;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -8383,7 +8427,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDoubleLiteral()
 	 * @generated
 	 */
-	int DOUBLE_LITERAL = 85;
+	int DOUBLE_LITERAL = 84;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -8438,7 +8482,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getBooleanLiteral()
 	 * @generated
 	 */
-	int BOOLEAN_LITERAL = 86;
+	int BOOLEAN_LITERAL = 85;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -8493,7 +8537,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getReference()
 	 * @generated
 	 */
-	int REFERENCE = 87;
+	int REFERENCE = 86;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -8548,7 +8592,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getSpecializableTermReference()
 	 * @generated
 	 */
-	int SPECIALIZABLE_TERM_REFERENCE = 88;
+	int SPECIALIZABLE_TERM_REFERENCE = 87;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -8621,7 +8665,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getClassifierReference()
 	 * @generated
 	 */
-	int CLASSIFIER_REFERENCE = 89;
+	int CLASSIFIER_REFERENCE = 88;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -8703,7 +8747,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getEntityReference()
 	 * @generated
 	 */
-	int ENTITY_REFERENCE = 90;
+	int ENTITY_REFERENCE = 89;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -8742,22 +8786,13 @@ public interface OmlPackage extends EPackage {
 	int ENTITY_REFERENCE__OWNED_PROPERTY_RESTRICTIONS = CLASSIFIER_REFERENCE__OWNED_PROPERTY_RESTRICTIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Relation Restrictions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENTITY_REFERENCE__OWNED_RELATION_RESTRICTIONS = CLASSIFIER_REFERENCE_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Owned Keys</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ENTITY_REFERENCE__OWNED_KEYS = CLASSIFIER_REFERENCE_FEATURE_COUNT + 1;
+	int ENTITY_REFERENCE__OWNED_KEYS = CLASSIFIER_REFERENCE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Entity Reference</em>' class.
@@ -8766,7 +8801,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ENTITY_REFERENCE_FEATURE_COUNT = CLASSIFIER_REFERENCE_FEATURE_COUNT + 2;
+	int ENTITY_REFERENCE_FEATURE_COUNT = CLASSIFIER_REFERENCE_FEATURE_COUNT + 1;
 
 	/**
 	 * The operation id for the '<em>Extra Validate</em>' operation.
@@ -8803,7 +8838,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getAspectReference()
 	 * @generated
 	 */
-	int ASPECT_REFERENCE = 91;
+	int ASPECT_REFERENCE = 90;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -8840,15 +8875,6 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int ASPECT_REFERENCE__OWNED_PROPERTY_RESTRICTIONS = ENTITY_REFERENCE__OWNED_PROPERTY_RESTRICTIONS;
-
-	/**
-	 * The feature id for the '<em><b>Owned Relation Restrictions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASPECT_REFERENCE__OWNED_RELATION_RESTRICTIONS = ENTITY_REFERENCE__OWNED_RELATION_RESTRICTIONS;
 
 	/**
 	 * The feature id for the '<em><b>Owned Keys</b></em>' containment reference list.
@@ -8912,7 +8938,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getConceptReference()
 	 * @generated
 	 */
-	int CONCEPT_REFERENCE = 92;
+	int CONCEPT_REFERENCE = 91;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -8949,15 +8975,6 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int CONCEPT_REFERENCE__OWNED_PROPERTY_RESTRICTIONS = ENTITY_REFERENCE__OWNED_PROPERTY_RESTRICTIONS;
-
-	/**
-	 * The feature id for the '<em><b>Owned Relation Restrictions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONCEPT_REFERENCE__OWNED_RELATION_RESTRICTIONS = ENTITY_REFERENCE__OWNED_RELATION_RESTRICTIONS;
 
 	/**
 	 * The feature id for the '<em><b>Owned Keys</b></em>' containment reference list.
@@ -9021,7 +9038,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRelationEntityReference()
 	 * @generated
 	 */
-	int RELATION_ENTITY_REFERENCE = 93;
+	int RELATION_ENTITY_REFERENCE = 92;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -9058,15 +9075,6 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int RELATION_ENTITY_REFERENCE__OWNED_PROPERTY_RESTRICTIONS = ENTITY_REFERENCE__OWNED_PROPERTY_RESTRICTIONS;
-
-	/**
-	 * The feature id for the '<em><b>Owned Relation Restrictions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RELATION_ENTITY_REFERENCE__OWNED_RELATION_RESTRICTIONS = ENTITY_REFERENCE__OWNED_RELATION_RESTRICTIONS;
 
 	/**
 	 * The feature id for the '<em><b>Owned Keys</b></em>' containment reference list.
@@ -9130,7 +9138,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getStructureReference()
 	 * @generated
 	 */
-	int STRUCTURE_REFERENCE = 94;
+	int STRUCTURE_REFERENCE = 93;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -9221,7 +9229,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getAnnotationPropertyReference()
 	 * @generated
 	 */
-	int ANNOTATION_PROPERTY_REFERENCE = 95;
+	int ANNOTATION_PROPERTY_REFERENCE = 94;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -9303,7 +9311,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getScalarPropertyReference()
 	 * @generated
 	 */
-	int SCALAR_PROPERTY_REFERENCE = 96;
+	int SCALAR_PROPERTY_REFERENCE = 95;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -9385,7 +9393,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getStructuredPropertyReference()
 	 * @generated
 	 */
-	int STRUCTURED_PROPERTY_REFERENCE = 97;
+	int STRUCTURED_PROPERTY_REFERENCE = 96;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -9467,7 +9475,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getFacetedScalarReference()
 	 * @generated
 	 */
-	int FACETED_SCALAR_REFERENCE = 98;
+	int FACETED_SCALAR_REFERENCE = 97;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -9549,7 +9557,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getEnumeratedScalarReference()
 	 * @generated
 	 */
-	int ENUMERATED_SCALAR_REFERENCE = 99;
+	int ENUMERATED_SCALAR_REFERENCE = 98;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -9631,7 +9639,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRelationReference()
 	 * @generated
 	 */
-	int RELATION_REFERENCE = 100;
+	int RELATION_REFERENCE = 99;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -9704,7 +9712,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRuleReference()
 	 * @generated
 	 */
-	int RULE_REFERENCE = 101;
+	int RULE_REFERENCE = 100;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -9777,7 +9785,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getNamedInstanceReference()
 	 * @generated
 	 */
-	int NAMED_INSTANCE_REFERENCE = 102;
+	int NAMED_INSTANCE_REFERENCE = 101;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -9807,22 +9815,13 @@ public interface OmlPackage extends EPackage {
 	int NAMED_INSTANCE_REFERENCE__OWNED_PROPERTY_VALUES = REFERENCE_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Owned Links</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAMED_INSTANCE_REFERENCE__OWNED_LINKS = REFERENCE_FEATURE_COUNT + 2;
-
-	/**
 	 * The number of structural features of the '<em>Named Instance Reference</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NAMED_INSTANCE_REFERENCE_FEATURE_COUNT = REFERENCE_FEATURE_COUNT + 3;
+	int NAMED_INSTANCE_REFERENCE_FEATURE_COUNT = REFERENCE_FEATURE_COUNT + 2;
 
 	/**
 	 * The operation id for the '<em>Extra Validate</em>' operation.
@@ -9859,7 +9858,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getConceptInstanceReference()
 	 * @generated
 	 */
-	int CONCEPT_INSTANCE_REFERENCE = 103;
+	int CONCEPT_INSTANCE_REFERENCE = 102;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -9887,15 +9886,6 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int CONCEPT_INSTANCE_REFERENCE__OWNED_PROPERTY_VALUES = NAMED_INSTANCE_REFERENCE__OWNED_PROPERTY_VALUES;
-
-	/**
-	 * The feature id for the '<em><b>Owned Links</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONCEPT_INSTANCE_REFERENCE__OWNED_LINKS = NAMED_INSTANCE_REFERENCE__OWNED_LINKS;
 
 	/**
 	 * The feature id for the '<em><b>Instance</b></em>' reference.
@@ -9959,7 +9949,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRelationInstanceReference()
 	 * @generated
 	 */
-	int RELATION_INSTANCE_REFERENCE = 104;
+	int RELATION_INSTANCE_REFERENCE = 103;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -9987,15 +9977,6 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int RELATION_INSTANCE_REFERENCE__OWNED_PROPERTY_VALUES = NAMED_INSTANCE_REFERENCE__OWNED_PROPERTY_VALUES;
-
-	/**
-	 * The feature id for the '<em><b>Owned Links</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RELATION_INSTANCE_REFERENCE__OWNED_LINKS = NAMED_INSTANCE_REFERENCE__OWNED_LINKS;
 
 	/**
 	 * The feature id for the '<em><b>Instance</b></em>' reference.
@@ -10059,7 +10040,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getSeparatorKind()
 	 * @generated
 	 */
-	int SEPARATOR_KIND = 105;
+	int SEPARATOR_KIND = 104;
 
 	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.RangeRestrictionKind <em>Range Restriction Kind</em>}' enum.
@@ -10069,7 +10050,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRangeRestrictionKind()
 	 * @generated
 	 */
-	int RANGE_RESTRICTION_KIND = 106;
+	int RANGE_RESTRICTION_KIND = 105;
 
 	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.CardinalityRestrictionKind <em>Cardinality Restriction Kind</em>}' enum.
@@ -10079,7 +10060,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getCardinalityRestrictionKind()
 	 * @generated
 	 */
-	int CARDINALITY_RESTRICTION_KIND = 107;
+	int CARDINALITY_RESTRICTION_KIND = 106;
 
 	/**
 	 * The meta object id for the '<em>Unsigned Int</em>' data type.
@@ -10088,7 +10069,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getUnsignedInt()
 	 * @generated
 	 */
-	int UNSIGNED_INT = 108;
+	int UNSIGNED_INT = 107;
 
 	/**
 	 * The meta object id for the '<em>Unsigned Integer</em>' data type.
@@ -10098,7 +10079,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getUnsignedInteger()
 	 * @generated
 	 */
-	int UNSIGNED_INTEGER = 109;
+	int UNSIGNED_INTEGER = 108;
 
 	/**
 	 * The meta object id for the '<em>Decimal</em>' data type.
@@ -10108,7 +10089,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDecimal()
 	 * @generated
 	 */
-	int DECIMAL = 110;
+	int DECIMAL = 109;
 
 	/**
 	 * The meta object id for the '<em>ID</em>' data type.
@@ -10118,7 +10099,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getID()
 	 * @generated
 	 */
-	int ID = 111;
+	int ID = 110;
 
 	/**
 	 * The meta object id for the '<em>Namespace</em>' data type.
@@ -10128,7 +10109,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getNamespace()
 	 * @generated
 	 */
-	int NAMESPACE = 112;
+	int NAMESPACE = 111;
 
 
 	/**
@@ -10936,17 +10917,6 @@ public interface OmlPackage extends EPackage {
 	EClass getEntity();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link io.opencaesar.oml.Entity#getOwnedRelationRestrictions <em>Owned Relation Restrictions</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Owned Relation Restrictions</em>'.
-	 * @see io.opencaesar.oml.Entity#getOwnedRelationRestrictions()
-	 * @see #getEntity()
-	 * @generated
-	 */
-	EReference getEntity_OwnedRelationRestrictions();
-
-	/**
 	 * Returns the meta object for the containment reference list '{@link io.opencaesar.oml.Entity#getOwnedKeys <em>Owned Keys</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -11296,67 +11266,94 @@ public interface OmlPackage extends EPackage {
 	EClass getRelation();
 
 	/**
-	 * Returns the meta object for the reference '{@link io.opencaesar.oml.Relation#getDomain <em>Domain</em>}'.
+	 * Returns the meta object for the '{@link io.opencaesar.oml.Relation#isInverseFunctional() <em>Is Inverse Functional</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Domain</em>'.
+	 * @return the meta object for the '<em>Is Inverse Functional</em>' operation.
+	 * @see io.opencaesar.oml.Relation#isInverseFunctional()
+	 * @generated
+	 */
+	EOperation getRelation__IsInverseFunctional();
+
+	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.Relation#isSymmetric() <em>Is Symmetric</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Is Symmetric</em>' operation.
+	 * @see io.opencaesar.oml.Relation#isSymmetric()
+	 * @generated
+	 */
+	EOperation getRelation__IsSymmetric();
+
+	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.Relation#isAsymmetric() <em>Is Asymmetric</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Is Asymmetric</em>' operation.
+	 * @see io.opencaesar.oml.Relation#isAsymmetric()
+	 * @generated
+	 */
+	EOperation getRelation__IsAsymmetric();
+
+	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.Relation#isReflexive() <em>Is Reflexive</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Is Reflexive</em>' operation.
+	 * @see io.opencaesar.oml.Relation#isReflexive()
+	 * @generated
+	 */
+	EOperation getRelation__IsReflexive();
+
+	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.Relation#isIrreflexive() <em>Is Irreflexive</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Is Irreflexive</em>' operation.
+	 * @see io.opencaesar.oml.Relation#isIrreflexive()
+	 * @generated
+	 */
+	EOperation getRelation__IsIrreflexive();
+
+	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.Relation#isTransitive() <em>Is Transitive</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Is Transitive</em>' operation.
+	 * @see io.opencaesar.oml.Relation#isTransitive()
+	 * @generated
+	 */
+	EOperation getRelation__IsTransitive();
+
+	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.Relation#getDomain() <em>Get Domain</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Domain</em>' operation.
 	 * @see io.opencaesar.oml.Relation#getDomain()
-	 * @see #getRelation()
 	 * @generated
 	 */
-	EReference getRelation_Domain();
+	EOperation getRelation__GetDomain();
 
 	/**
-	 * Returns the meta object for the reference '{@link io.opencaesar.oml.Relation#getRange <em>Range</em>}'.
+	 * Returns the meta object for the '{@link io.opencaesar.oml.Relation#getRange() <em>Get Range</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Range</em>'.
+	 * @return the meta object for the '<em>Get Range</em>' operation.
 	 * @see io.opencaesar.oml.Relation#getRange()
-	 * @see #getRelation()
 	 * @generated
 	 */
-	EReference getRelation_Range();
+	EOperation getRelation__GetRange();
 
 	/**
-	 * Returns the meta object for the reference '{@link io.opencaesar.oml.Relation#getInverse <em>Inverse</em>}'.
+	 * Returns the meta object for the '{@link io.opencaesar.oml.Relation#getInverse() <em>Get Inverse</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Inverse</em>'.
+	 * @return the meta object for the '<em>Get Inverse</em>' operation.
 	 * @see io.opencaesar.oml.Relation#getInverse()
-	 * @see #getRelation()
 	 * @generated
 	 */
-	EReference getRelation_Inverse();
-
-	/**
-	 * Returns the meta object for the '{@link io.opencaesar.oml.Relation#deriveDomain() <em>Derive Domain</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Derive Domain</em>' operation.
-	 * @see io.opencaesar.oml.Relation#deriveDomain()
-	 * @generated
-	 */
-	EOperation getRelation__DeriveDomain();
-
-	/**
-	 * Returns the meta object for the '{@link io.opencaesar.oml.Relation#deriveRange() <em>Derive Range</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Derive Range</em>' operation.
-	 * @see io.opencaesar.oml.Relation#deriveRange()
-	 * @generated
-	 */
-	EOperation getRelation__DeriveRange();
-
-	/**
-	 * Returns the meta object for the '{@link io.opencaesar.oml.Relation#deriveInverse() <em>Derive Inverse</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Derive Inverse</em>' operation.
-	 * @see io.opencaesar.oml.Relation#deriveInverse()
-	 * @generated
-	 */
-	EOperation getRelation__DeriveInverse();
+	EOperation getRelation__GetInverse();
 
 	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.ForwardRelation <em>Forward Relation</em>}'.
@@ -11380,45 +11377,104 @@ public interface OmlPackage extends EPackage {
 	EReference getForwardRelation_RelationEntity();
 
 	/**
-	 * Returns the meta object for the attribute '{@link io.opencaesar.oml.ForwardRelation#isFunctional <em>Functional</em>}'.
+	 * Returns the meta object for the '{@link io.opencaesar.oml.ForwardRelation#isFunctional() <em>Is Functional</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Functional</em>'.
+	 * @return the meta object for the '<em>Is Functional</em>' operation.
 	 * @see io.opencaesar.oml.ForwardRelation#isFunctional()
-	 * @see #getForwardRelation()
 	 * @generated
 	 */
-	EAttribute getForwardRelation_Functional();
+	EOperation getForwardRelation__IsFunctional();
 
 	/**
-	 * Returns the meta object for the '{@link io.opencaesar.oml.ForwardRelation#deriveDomain() <em>Derive Domain</em>}' operation.
+	 * Returns the meta object for the '{@link io.opencaesar.oml.ForwardRelation#isInverseFunctional() <em>Is Inverse Functional</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Derive Domain</em>' operation.
-	 * @see io.opencaesar.oml.ForwardRelation#deriveDomain()
+	 * @return the meta object for the '<em>Is Inverse Functional</em>' operation.
+	 * @see io.opencaesar.oml.ForwardRelation#isInverseFunctional()
 	 * @generated
 	 */
-	EOperation getForwardRelation__DeriveDomain();
+	EOperation getForwardRelation__IsInverseFunctional();
 
 	/**
-	 * Returns the meta object for the '{@link io.opencaesar.oml.ForwardRelation#deriveRange() <em>Derive Range</em>}' operation.
+	 * Returns the meta object for the '{@link io.opencaesar.oml.ForwardRelation#isSymmetric() <em>Is Symmetric</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Derive Range</em>' operation.
-	 * @see io.opencaesar.oml.ForwardRelation#deriveRange()
+	 * @return the meta object for the '<em>Is Symmetric</em>' operation.
+	 * @see io.opencaesar.oml.ForwardRelation#isSymmetric()
 	 * @generated
 	 */
-	EOperation getForwardRelation__DeriveRange();
+	EOperation getForwardRelation__IsSymmetric();
 
 	/**
-	 * Returns the meta object for the '{@link io.opencaesar.oml.ForwardRelation#deriveInverse() <em>Derive Inverse</em>}' operation.
+	 * Returns the meta object for the '{@link io.opencaesar.oml.ForwardRelation#isAsymmetric() <em>Is Asymmetric</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Derive Inverse</em>' operation.
-	 * @see io.opencaesar.oml.ForwardRelation#deriveInverse()
+	 * @return the meta object for the '<em>Is Asymmetric</em>' operation.
+	 * @see io.opencaesar.oml.ForwardRelation#isAsymmetric()
 	 * @generated
 	 */
-	EOperation getForwardRelation__DeriveInverse();
+	EOperation getForwardRelation__IsAsymmetric();
+
+	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.ForwardRelation#isReflexive() <em>Is Reflexive</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Is Reflexive</em>' operation.
+	 * @see io.opencaesar.oml.ForwardRelation#isReflexive()
+	 * @generated
+	 */
+	EOperation getForwardRelation__IsReflexive();
+
+	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.ForwardRelation#isIrreflexive() <em>Is Irreflexive</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Is Irreflexive</em>' operation.
+	 * @see io.opencaesar.oml.ForwardRelation#isIrreflexive()
+	 * @generated
+	 */
+	EOperation getForwardRelation__IsIrreflexive();
+
+	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.ForwardRelation#isTransitive() <em>Is Transitive</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Is Transitive</em>' operation.
+	 * @see io.opencaesar.oml.ForwardRelation#isTransitive()
+	 * @generated
+	 */
+	EOperation getForwardRelation__IsTransitive();
+
+	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.ForwardRelation#getDomain() <em>Get Domain</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Domain</em>' operation.
+	 * @see io.opencaesar.oml.ForwardRelation#getDomain()
+	 * @generated
+	 */
+	EOperation getForwardRelation__GetDomain();
+
+	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.ForwardRelation#getRange() <em>Get Range</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Range</em>' operation.
+	 * @see io.opencaesar.oml.ForwardRelation#getRange()
+	 * @generated
+	 */
+	EOperation getForwardRelation__GetRange();
+
+	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.ForwardRelation#getInverse() <em>Get Inverse</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Inverse</em>' operation.
+	 * @see io.opencaesar.oml.ForwardRelation#getInverse()
+	 * @generated
+	 */
+	EOperation getForwardRelation__GetInverse();
 
 	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.ReverseRelation <em>Reverse Relation</em>}'.
@@ -11442,45 +11498,104 @@ public interface OmlPackage extends EPackage {
 	EReference getReverseRelation_RelationBase();
 
 	/**
-	 * Returns the meta object for the attribute '{@link io.opencaesar.oml.ReverseRelation#isFunctional <em>Functional</em>}'.
+	 * Returns the meta object for the '{@link io.opencaesar.oml.ReverseRelation#isFunctional() <em>Is Functional</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Functional</em>'.
+	 * @return the meta object for the '<em>Is Functional</em>' operation.
 	 * @see io.opencaesar.oml.ReverseRelation#isFunctional()
-	 * @see #getReverseRelation()
 	 * @generated
 	 */
-	EAttribute getReverseRelation_Functional();
+	EOperation getReverseRelation__IsFunctional();
 
 	/**
-	 * Returns the meta object for the '{@link io.opencaesar.oml.ReverseRelation#deriveDomain() <em>Derive Domain</em>}' operation.
+	 * Returns the meta object for the '{@link io.opencaesar.oml.ReverseRelation#isInverseFunctional() <em>Is Inverse Functional</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Derive Domain</em>' operation.
-	 * @see io.opencaesar.oml.ReverseRelation#deriveDomain()
+	 * @return the meta object for the '<em>Is Inverse Functional</em>' operation.
+	 * @see io.opencaesar.oml.ReverseRelation#isInverseFunctional()
 	 * @generated
 	 */
-	EOperation getReverseRelation__DeriveDomain();
+	EOperation getReverseRelation__IsInverseFunctional();
 
 	/**
-	 * Returns the meta object for the '{@link io.opencaesar.oml.ReverseRelation#deriveRange() <em>Derive Range</em>}' operation.
+	 * Returns the meta object for the '{@link io.opencaesar.oml.ReverseRelation#isSymmetric() <em>Is Symmetric</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Derive Range</em>' operation.
-	 * @see io.opencaesar.oml.ReverseRelation#deriveRange()
+	 * @return the meta object for the '<em>Is Symmetric</em>' operation.
+	 * @see io.opencaesar.oml.ReverseRelation#isSymmetric()
 	 * @generated
 	 */
-	EOperation getReverseRelation__DeriveRange();
+	EOperation getReverseRelation__IsSymmetric();
 
 	/**
-	 * Returns the meta object for the '{@link io.opencaesar.oml.ReverseRelation#deriveInverse() <em>Derive Inverse</em>}' operation.
+	 * Returns the meta object for the '{@link io.opencaesar.oml.ReverseRelation#isAsymmetric() <em>Is Asymmetric</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Derive Inverse</em>' operation.
-	 * @see io.opencaesar.oml.ReverseRelation#deriveInverse()
+	 * @return the meta object for the '<em>Is Asymmetric</em>' operation.
+	 * @see io.opencaesar.oml.ReverseRelation#isAsymmetric()
 	 * @generated
 	 */
-	EOperation getReverseRelation__DeriveInverse();
+	EOperation getReverseRelation__IsAsymmetric();
+
+	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.ReverseRelation#isReflexive() <em>Is Reflexive</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Is Reflexive</em>' operation.
+	 * @see io.opencaesar.oml.ReverseRelation#isReflexive()
+	 * @generated
+	 */
+	EOperation getReverseRelation__IsReflexive();
+
+	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.ReverseRelation#isIrreflexive() <em>Is Irreflexive</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Is Irreflexive</em>' operation.
+	 * @see io.opencaesar.oml.ReverseRelation#isIrreflexive()
+	 * @generated
+	 */
+	EOperation getReverseRelation__IsIrreflexive();
+
+	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.ReverseRelation#isTransitive() <em>Is Transitive</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Is Transitive</em>' operation.
+	 * @see io.opencaesar.oml.ReverseRelation#isTransitive()
+	 * @generated
+	 */
+	EOperation getReverseRelation__IsTransitive();
+
+	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.ReverseRelation#getDomain() <em>Get Domain</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Domain</em>' operation.
+	 * @see io.opencaesar.oml.ReverseRelation#getDomain()
+	 * @generated
+	 */
+	EOperation getReverseRelation__GetDomain();
+
+	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.ReverseRelation#getRange() <em>Get Range</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Range</em>' operation.
+	 * @see io.opencaesar.oml.ReverseRelation#getRange()
+	 * @generated
+	 */
+	EOperation getReverseRelation__GetRange();
+
+	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.ReverseRelation#getInverse() <em>Get Inverse</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Inverse</em>' operation.
+	 * @see io.opencaesar.oml.ReverseRelation#getInverse()
+	 * @generated
+	 */
+	EOperation getReverseRelation__GetInverse();
 
 	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.UnreifiedRelation <em>Unreified Relation</em>}'.
@@ -11493,34 +11608,34 @@ public interface OmlPackage extends EPackage {
 	EClass getUnreifiedRelation();
 
 	/**
-	 * Returns the meta object for the '{@link io.opencaesar.oml.UnreifiedRelation#deriveDomain() <em>Derive Domain</em>}' operation.
+	 * Returns the meta object for the '{@link io.opencaesar.oml.UnreifiedRelation#getDomain() <em>Get Domain</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Derive Domain</em>' operation.
-	 * @see io.opencaesar.oml.UnreifiedRelation#deriveDomain()
+	 * @return the meta object for the '<em>Get Domain</em>' operation.
+	 * @see io.opencaesar.oml.UnreifiedRelation#getDomain()
 	 * @generated
 	 */
-	EOperation getUnreifiedRelation__DeriveDomain();
+	EOperation getUnreifiedRelation__GetDomain();
 
 	/**
-	 * Returns the meta object for the '{@link io.opencaesar.oml.UnreifiedRelation#deriveRange() <em>Derive Range</em>}' operation.
+	 * Returns the meta object for the '{@link io.opencaesar.oml.UnreifiedRelation#getRange() <em>Get Range</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Derive Range</em>' operation.
-	 * @see io.opencaesar.oml.UnreifiedRelation#deriveRange()
+	 * @return the meta object for the '<em>Get Range</em>' operation.
+	 * @see io.opencaesar.oml.UnreifiedRelation#getRange()
 	 * @generated
 	 */
-	EOperation getUnreifiedRelation__DeriveRange();
+	EOperation getUnreifiedRelation__GetRange();
 
 	/**
-	 * Returns the meta object for the '{@link io.opencaesar.oml.UnreifiedRelation#deriveInverse() <em>Derive Inverse</em>}' operation.
+	 * Returns the meta object for the '{@link io.opencaesar.oml.UnreifiedRelation#getInverse() <em>Get Inverse</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Derive Inverse</em>' operation.
-	 * @see io.opencaesar.oml.UnreifiedRelation#deriveInverse()
+	 * @return the meta object for the '<em>Get Inverse</em>' operation.
+	 * @see io.opencaesar.oml.UnreifiedRelation#getInverse()
 	 * @generated
 	 */
-	EOperation getUnreifiedRelation__DeriveInverse();
+	EOperation getUnreifiedRelation__GetInverse();
 
 	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.NamedInstance <em>Named Instance</em>}'.
@@ -11531,17 +11646,6 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getNamedInstance();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link io.opencaesar.oml.NamedInstance#getOwnedLinks <em>Owned Links</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Owned Links</em>'.
-	 * @see io.opencaesar.oml.NamedInstance#getOwnedLinks()
-	 * @see #getNamedInstance()
-	 * @generated
-	 */
-	EReference getNamedInstance_OwnedLinks();
 
 	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.ConceptInstance <em>Concept Instance</em>}'.
@@ -11737,16 +11841,6 @@ public interface OmlPackage extends EPackage {
 	EReference getSpecializationAxiom_OwningReference();
 
 	/**
-	 * Returns the meta object for class '{@link io.opencaesar.oml.RestrictionAxiom <em>Restriction Axiom</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Restriction Axiom</em>'.
-	 * @see io.opencaesar.oml.RestrictionAxiom
-	 * @generated
-	 */
-	EClass getRestrictionAxiom();
-
-	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.PropertyRestrictionAxiom <em>Property Restriction Axiom</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -11777,6 +11871,16 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getPropertyRestrictionAxiom_OwningReference();
+
+	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.PropertyRestrictionAxiom#getProperty() <em>Get Property</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Property</em>' operation.
+	 * @see io.opencaesar.oml.PropertyRestrictionAxiom#getProperty()
+	 * @generated
+	 */
+	EOperation getPropertyRestrictionAxiom__GetProperty();
 
 	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.ScalarPropertyRestrictionAxiom <em>Scalar Property Restriction Axiom</em>}'.
@@ -12023,37 +12127,15 @@ public interface OmlPackage extends EPackage {
 	EClass getRelationRestrictionAxiom();
 
 	/**
-	 * Returns the meta object for the reference '{@link io.opencaesar.oml.RelationRestrictionAxiom#getRelation <em>Relation</em>}'.
+	 * Returns the meta object for the reference '{@link io.opencaesar.oml.RelationRestrictionAxiom#getProperty <em>Property</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Relation</em>'.
-	 * @see io.opencaesar.oml.RelationRestrictionAxiom#getRelation()
+	 * @return the meta object for the reference '<em>Property</em>'.
+	 * @see io.opencaesar.oml.RelationRestrictionAxiom#getProperty()
 	 * @see #getRelationRestrictionAxiom()
 	 * @generated
 	 */
-	EReference getRelationRestrictionAxiom_Relation();
-
-	/**
-	 * Returns the meta object for the container reference '{@link io.opencaesar.oml.RelationRestrictionAxiom#getOwningEntity <em>Owning Entity</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Owning Entity</em>'.
-	 * @see io.opencaesar.oml.RelationRestrictionAxiom#getOwningEntity()
-	 * @see #getRelationRestrictionAxiom()
-	 * @generated
-	 */
-	EReference getRelationRestrictionAxiom_OwningEntity();
-
-	/**
-	 * Returns the meta object for the container reference '{@link io.opencaesar.oml.RelationRestrictionAxiom#getOwningReference <em>Owning Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Owning Reference</em>'.
-	 * @see io.opencaesar.oml.RelationRestrictionAxiom#getOwningReference()
-	 * @see #getRelationRestrictionAxiom()
-	 * @generated
-	 */
-	EReference getRelationRestrictionAxiom_OwningReference();
+	EReference getRelationRestrictionAxiom_Property();
 
 	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.RelationRangeRestrictionAxiom <em>Relation Range Restriction Axiom</em>}'.
@@ -12131,25 +12213,25 @@ public interface OmlPackage extends EPackage {
 	EReference getRelationCardinalityRestrictionAxiom_Range();
 
 	/**
-	 * Returns the meta object for class '{@link io.opencaesar.oml.RelationTargetRestrictionAxiom <em>Relation Target Restriction Axiom</em>}'.
+	 * Returns the meta object for class '{@link io.opencaesar.oml.RelationValueRestrictionAxiom <em>Relation Value Restriction Axiom</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Relation Target Restriction Axiom</em>'.
-	 * @see io.opencaesar.oml.RelationTargetRestrictionAxiom
+	 * @return the meta object for class '<em>Relation Value Restriction Axiom</em>'.
+	 * @see io.opencaesar.oml.RelationValueRestrictionAxiom
 	 * @generated
 	 */
-	EClass getRelationTargetRestrictionAxiom();
+	EClass getRelationValueRestrictionAxiom();
 
 	/**
-	 * Returns the meta object for the reference '{@link io.opencaesar.oml.RelationTargetRestrictionAxiom#getTarget <em>Target</em>}'.
+	 * Returns the meta object for the reference '{@link io.opencaesar.oml.RelationValueRestrictionAxiom#getValue <em>Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Target</em>'.
-	 * @see io.opencaesar.oml.RelationTargetRestrictionAxiom#getTarget()
-	 * @see #getRelationTargetRestrictionAxiom()
+	 * @return the meta object for the reference '<em>Value</em>'.
+	 * @see io.opencaesar.oml.RelationValueRestrictionAxiom#getValue()
+	 * @see #getRelationValueRestrictionAxiom()
 	 * @generated
 	 */
-	EReference getRelationTargetRestrictionAxiom_Target();
+	EReference getRelationValueRestrictionAxiom_Value();
 
 	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.TypeAssertion <em>Type Assertion</em>}'.
@@ -12384,48 +12466,26 @@ public interface OmlPackage extends EPackage {
 	EClass getLinkAssertion();
 
 	/**
-	 * Returns the meta object for the reference '{@link io.opencaesar.oml.LinkAssertion#getRelation <em>Relation</em>}'.
+	 * Returns the meta object for the reference '{@link io.opencaesar.oml.LinkAssertion#getProperty <em>Property</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Relation</em>'.
-	 * @see io.opencaesar.oml.LinkAssertion#getRelation()
+	 * @return the meta object for the reference '<em>Property</em>'.
+	 * @see io.opencaesar.oml.LinkAssertion#getProperty()
 	 * @see #getLinkAssertion()
 	 * @generated
 	 */
-	EReference getLinkAssertion_Relation();
+	EReference getLinkAssertion_Property();
 
 	/**
-	 * Returns the meta object for the reference '{@link io.opencaesar.oml.LinkAssertion#getTarget <em>Target</em>}'.
+	 * Returns the meta object for the reference '{@link io.opencaesar.oml.LinkAssertion#getValue <em>Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Target</em>'.
-	 * @see io.opencaesar.oml.LinkAssertion#getTarget()
+	 * @return the meta object for the reference '<em>Value</em>'.
+	 * @see io.opencaesar.oml.LinkAssertion#getValue()
 	 * @see #getLinkAssertion()
 	 * @generated
 	 */
-	EReference getLinkAssertion_Target();
-
-	/**
-	 * Returns the meta object for the container reference '{@link io.opencaesar.oml.LinkAssertion#getOwningInstance <em>Owning Instance</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Owning Instance</em>'.
-	 * @see io.opencaesar.oml.LinkAssertion#getOwningInstance()
-	 * @see #getLinkAssertion()
-	 * @generated
-	 */
-	EReference getLinkAssertion_OwningInstance();
-
-	/**
-	 * Returns the meta object for the container reference '{@link io.opencaesar.oml.LinkAssertion#getOwningReference <em>Owning Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Owning Reference</em>'.
-	 * @see io.opencaesar.oml.LinkAssertion#getOwningReference()
-	 * @see #getLinkAssertion()
-	 * @generated
-	 */
-	EReference getLinkAssertion_OwningReference();
+	EReference getLinkAssertion_Value();
 
 	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.UnaryPredicate <em>Unary Predicate</em>}'.
@@ -12797,17 +12857,6 @@ public interface OmlPackage extends EPackage {
 	EClass getEntityReference();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link io.opencaesar.oml.EntityReference#getOwnedRelationRestrictions <em>Owned Relation Restrictions</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Owned Relation Restrictions</em>'.
-	 * @see io.opencaesar.oml.EntityReference#getOwnedRelationRestrictions()
-	 * @see #getEntityReference()
-	 * @generated
-	 */
-	EReference getEntityReference_OwnedRelationRestrictions();
-
-	/**
 	 * Returns the meta object for the containment reference list '{@link io.opencaesar.oml.EntityReference#getOwnedKeys <em>Owned Keys</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -13069,17 +13118,6 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getNamedInstanceReference_OwnedPropertyValues();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link io.opencaesar.oml.NamedInstanceReference#getOwnedLinks <em>Owned Links</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Owned Links</em>'.
-	 * @see io.opencaesar.oml.NamedInstanceReference#getOwnedLinks()
-	 * @see #getNamedInstanceReference()
-	 * @generated
-	 */
-	EReference getNamedInstanceReference_OwnedLinks();
 
 	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.ConceptInstanceReference <em>Concept Instance Reference</em>}'.
@@ -13942,14 +13980,6 @@ public interface OmlPackage extends EPackage {
 		EClass ENTITY = eINSTANCE.getEntity();
 
 		/**
-		 * The meta object literal for the '<em><b>Owned Relation Restrictions</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ENTITY__OWNED_RELATION_RESTRICTIONS = eINSTANCE.getEntity_OwnedRelationRestrictions();
-
-		/**
 		 * The meta object literal for the '<em><b>Owned Keys</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -14236,52 +14266,76 @@ public interface OmlPackage extends EPackage {
 		EClass RELATION = eINSTANCE.getRelation();
 
 		/**
-		 * The meta object literal for the '<em><b>Domain</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Is Inverse Functional</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference RELATION__DOMAIN = eINSTANCE.getRelation_Domain();
+		EOperation RELATION___IS_INVERSE_FUNCTIONAL = eINSTANCE.getRelation__IsInverseFunctional();
 
 		/**
-		 * The meta object literal for the '<em><b>Range</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Is Symmetric</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference RELATION__RANGE = eINSTANCE.getRelation_Range();
+		EOperation RELATION___IS_SYMMETRIC = eINSTANCE.getRelation__IsSymmetric();
 
 		/**
-		 * The meta object literal for the '<em><b>Inverse</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Is Asymmetric</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference RELATION__INVERSE = eINSTANCE.getRelation_Inverse();
+		EOperation RELATION___IS_ASYMMETRIC = eINSTANCE.getRelation__IsAsymmetric();
 
 		/**
-		 * The meta object literal for the '<em><b>Derive Domain</b></em>' operation.
+		 * The meta object literal for the '<em><b>Is Reflexive</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EOperation RELATION___DERIVE_DOMAIN = eINSTANCE.getRelation__DeriveDomain();
+		EOperation RELATION___IS_REFLEXIVE = eINSTANCE.getRelation__IsReflexive();
 
 		/**
-		 * The meta object literal for the '<em><b>Derive Range</b></em>' operation.
+		 * The meta object literal for the '<em><b>Is Irreflexive</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EOperation RELATION___DERIVE_RANGE = eINSTANCE.getRelation__DeriveRange();
+		EOperation RELATION___IS_IRREFLEXIVE = eINSTANCE.getRelation__IsIrreflexive();
 
 		/**
-		 * The meta object literal for the '<em><b>Derive Inverse</b></em>' operation.
+		 * The meta object literal for the '<em><b>Is Transitive</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EOperation RELATION___DERIVE_INVERSE = eINSTANCE.getRelation__DeriveInverse();
+		EOperation RELATION___IS_TRANSITIVE = eINSTANCE.getRelation__IsTransitive();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Domain</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation RELATION___GET_DOMAIN = eINSTANCE.getRelation__GetDomain();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Range</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation RELATION___GET_RANGE = eINSTANCE.getRelation__GetRange();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Inverse</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation RELATION___GET_INVERSE = eINSTANCE.getRelation__GetInverse();
 
 		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.ForwardRelationImpl <em>Forward Relation</em>}' class.
@@ -14302,36 +14356,84 @@ public interface OmlPackage extends EPackage {
 		EReference FORWARD_RELATION__RELATION_ENTITY = eINSTANCE.getForwardRelation_RelationEntity();
 
 		/**
-		 * The meta object literal for the '<em><b>Functional</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Is Functional</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute FORWARD_RELATION__FUNCTIONAL = eINSTANCE.getForwardRelation_Functional();
+		EOperation FORWARD_RELATION___IS_FUNCTIONAL = eINSTANCE.getForwardRelation__IsFunctional();
 
 		/**
-		 * The meta object literal for the '<em><b>Derive Domain</b></em>' operation.
+		 * The meta object literal for the '<em><b>Is Inverse Functional</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EOperation FORWARD_RELATION___DERIVE_DOMAIN = eINSTANCE.getForwardRelation__DeriveDomain();
+		EOperation FORWARD_RELATION___IS_INVERSE_FUNCTIONAL = eINSTANCE.getForwardRelation__IsInverseFunctional();
 
 		/**
-		 * The meta object literal for the '<em><b>Derive Range</b></em>' operation.
+		 * The meta object literal for the '<em><b>Is Symmetric</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EOperation FORWARD_RELATION___DERIVE_RANGE = eINSTANCE.getForwardRelation__DeriveRange();
+		EOperation FORWARD_RELATION___IS_SYMMETRIC = eINSTANCE.getForwardRelation__IsSymmetric();
 
 		/**
-		 * The meta object literal for the '<em><b>Derive Inverse</b></em>' operation.
+		 * The meta object literal for the '<em><b>Is Asymmetric</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EOperation FORWARD_RELATION___DERIVE_INVERSE = eINSTANCE.getForwardRelation__DeriveInverse();
+		EOperation FORWARD_RELATION___IS_ASYMMETRIC = eINSTANCE.getForwardRelation__IsAsymmetric();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Reflexive</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation FORWARD_RELATION___IS_REFLEXIVE = eINSTANCE.getForwardRelation__IsReflexive();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Irreflexive</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation FORWARD_RELATION___IS_IRREFLEXIVE = eINSTANCE.getForwardRelation__IsIrreflexive();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Transitive</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation FORWARD_RELATION___IS_TRANSITIVE = eINSTANCE.getForwardRelation__IsTransitive();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Domain</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation FORWARD_RELATION___GET_DOMAIN = eINSTANCE.getForwardRelation__GetDomain();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Range</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation FORWARD_RELATION___GET_RANGE = eINSTANCE.getForwardRelation__GetRange();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Inverse</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation FORWARD_RELATION___GET_INVERSE = eINSTANCE.getForwardRelation__GetInverse();
 
 		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.ReverseRelationImpl <em>Reverse Relation</em>}' class.
@@ -14352,36 +14454,84 @@ public interface OmlPackage extends EPackage {
 		EReference REVERSE_RELATION__RELATION_BASE = eINSTANCE.getReverseRelation_RelationBase();
 
 		/**
-		 * The meta object literal for the '<em><b>Functional</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Is Functional</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute REVERSE_RELATION__FUNCTIONAL = eINSTANCE.getReverseRelation_Functional();
+		EOperation REVERSE_RELATION___IS_FUNCTIONAL = eINSTANCE.getReverseRelation__IsFunctional();
 
 		/**
-		 * The meta object literal for the '<em><b>Derive Domain</b></em>' operation.
+		 * The meta object literal for the '<em><b>Is Inverse Functional</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EOperation REVERSE_RELATION___DERIVE_DOMAIN = eINSTANCE.getReverseRelation__DeriveDomain();
+		EOperation REVERSE_RELATION___IS_INVERSE_FUNCTIONAL = eINSTANCE.getReverseRelation__IsInverseFunctional();
 
 		/**
-		 * The meta object literal for the '<em><b>Derive Range</b></em>' operation.
+		 * The meta object literal for the '<em><b>Is Symmetric</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EOperation REVERSE_RELATION___DERIVE_RANGE = eINSTANCE.getReverseRelation__DeriveRange();
+		EOperation REVERSE_RELATION___IS_SYMMETRIC = eINSTANCE.getReverseRelation__IsSymmetric();
 
 		/**
-		 * The meta object literal for the '<em><b>Derive Inverse</b></em>' operation.
+		 * The meta object literal for the '<em><b>Is Asymmetric</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EOperation REVERSE_RELATION___DERIVE_INVERSE = eINSTANCE.getReverseRelation__DeriveInverse();
+		EOperation REVERSE_RELATION___IS_ASYMMETRIC = eINSTANCE.getReverseRelation__IsAsymmetric();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Reflexive</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation REVERSE_RELATION___IS_REFLEXIVE = eINSTANCE.getReverseRelation__IsReflexive();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Irreflexive</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation REVERSE_RELATION___IS_IRREFLEXIVE = eINSTANCE.getReverseRelation__IsIrreflexive();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Transitive</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation REVERSE_RELATION___IS_TRANSITIVE = eINSTANCE.getReverseRelation__IsTransitive();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Domain</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation REVERSE_RELATION___GET_DOMAIN = eINSTANCE.getReverseRelation__GetDomain();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Range</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation REVERSE_RELATION___GET_RANGE = eINSTANCE.getReverseRelation__GetRange();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Inverse</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation REVERSE_RELATION___GET_INVERSE = eINSTANCE.getReverseRelation__GetInverse();
 
 		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.UnreifiedRelationImpl <em>Unreified Relation</em>}' class.
@@ -14394,28 +14544,28 @@ public interface OmlPackage extends EPackage {
 		EClass UNREIFIED_RELATION = eINSTANCE.getUnreifiedRelation();
 
 		/**
-		 * The meta object literal for the '<em><b>Derive Domain</b></em>' operation.
+		 * The meta object literal for the '<em><b>Get Domain</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EOperation UNREIFIED_RELATION___DERIVE_DOMAIN = eINSTANCE.getUnreifiedRelation__DeriveDomain();
+		EOperation UNREIFIED_RELATION___GET_DOMAIN = eINSTANCE.getUnreifiedRelation__GetDomain();
 
 		/**
-		 * The meta object literal for the '<em><b>Derive Range</b></em>' operation.
+		 * The meta object literal for the '<em><b>Get Range</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EOperation UNREIFIED_RELATION___DERIVE_RANGE = eINSTANCE.getUnreifiedRelation__DeriveRange();
+		EOperation UNREIFIED_RELATION___GET_RANGE = eINSTANCE.getUnreifiedRelation__GetRange();
 
 		/**
-		 * The meta object literal for the '<em><b>Derive Inverse</b></em>' operation.
+		 * The meta object literal for the '<em><b>Get Inverse</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EOperation UNREIFIED_RELATION___DERIVE_INVERSE = eINSTANCE.getUnreifiedRelation__DeriveInverse();
+		EOperation UNREIFIED_RELATION___GET_INVERSE = eINSTANCE.getUnreifiedRelation__GetInverse();
 
 		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.NamedInstanceImpl <em>Named Instance</em>}' class.
@@ -14426,14 +14576,6 @@ public interface OmlPackage extends EPackage {
 		 * @generated
 		 */
 		EClass NAMED_INSTANCE = eINSTANCE.getNamedInstance();
-
-		/**
-		 * The meta object literal for the '<em><b>Owned Links</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference NAMED_INSTANCE__OWNED_LINKS = eINSTANCE.getNamedInstance_OwnedLinks();
 
 		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.ConceptInstanceImpl <em>Concept Instance</em>}' class.
@@ -14590,16 +14732,6 @@ public interface OmlPackage extends EPackage {
 		EReference SPECIALIZATION_AXIOM__OWNING_REFERENCE = eINSTANCE.getSpecializationAxiom_OwningReference();
 
 		/**
-		 * The meta object literal for the '{@link io.opencaesar.oml.impl.RestrictionAxiomImpl <em>Restriction Axiom</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see io.opencaesar.oml.impl.RestrictionAxiomImpl
-		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRestrictionAxiom()
-		 * @generated
-		 */
-		EClass RESTRICTION_AXIOM = eINSTANCE.getRestrictionAxiom();
-
-		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.PropertyRestrictionAxiomImpl <em>Property Restriction Axiom</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -14624,6 +14756,14 @@ public interface OmlPackage extends EPackage {
 		 * @generated
 		 */
 		EReference PROPERTY_RESTRICTION_AXIOM__OWNING_REFERENCE = eINSTANCE.getPropertyRestrictionAxiom_OwningReference();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Property</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation PROPERTY_RESTRICTION_AXIOM___GET_PROPERTY = eINSTANCE.getPropertyRestrictionAxiom__GetProperty();
 
 		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.ScalarPropertyRestrictionAxiomImpl <em>Scalar Property Restriction Axiom</em>}' class.
@@ -14828,28 +14968,12 @@ public interface OmlPackage extends EPackage {
 		EClass RELATION_RESTRICTION_AXIOM = eINSTANCE.getRelationRestrictionAxiom();
 
 		/**
-		 * The meta object literal for the '<em><b>Relation</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Property</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference RELATION_RESTRICTION_AXIOM__RELATION = eINSTANCE.getRelationRestrictionAxiom_Relation();
-
-		/**
-		 * The meta object literal for the '<em><b>Owning Entity</b></em>' container reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference RELATION_RESTRICTION_AXIOM__OWNING_ENTITY = eINSTANCE.getRelationRestrictionAxiom_OwningEntity();
-
-		/**
-		 * The meta object literal for the '<em><b>Owning Reference</b></em>' container reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference RELATION_RESTRICTION_AXIOM__OWNING_REFERENCE = eINSTANCE.getRelationRestrictionAxiom_OwningReference();
+		EReference RELATION_RESTRICTION_AXIOM__PROPERTY = eINSTANCE.getRelationRestrictionAxiom_Property();
 
 		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.RelationRangeRestrictionAxiomImpl <em>Relation Range Restriction Axiom</em>}' class.
@@ -14912,22 +15036,22 @@ public interface OmlPackage extends EPackage {
 		EReference RELATION_CARDINALITY_RESTRICTION_AXIOM__RANGE = eINSTANCE.getRelationCardinalityRestrictionAxiom_Range();
 
 		/**
-		 * The meta object literal for the '{@link io.opencaesar.oml.impl.RelationTargetRestrictionAxiomImpl <em>Relation Target Restriction Axiom</em>}' class.
+		 * The meta object literal for the '{@link io.opencaesar.oml.impl.RelationValueRestrictionAxiomImpl <em>Relation Value Restriction Axiom</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see io.opencaesar.oml.impl.RelationTargetRestrictionAxiomImpl
-		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRelationTargetRestrictionAxiom()
+		 * @see io.opencaesar.oml.impl.RelationValueRestrictionAxiomImpl
+		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRelationValueRestrictionAxiom()
 		 * @generated
 		 */
-		EClass RELATION_TARGET_RESTRICTION_AXIOM = eINSTANCE.getRelationTargetRestrictionAxiom();
+		EClass RELATION_VALUE_RESTRICTION_AXIOM = eINSTANCE.getRelationValueRestrictionAxiom();
 
 		/**
-		 * The meta object literal for the '<em><b>Target</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Value</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference RELATION_TARGET_RESTRICTION_AXIOM__TARGET = eINSTANCE.getRelationTargetRestrictionAxiom_Target();
+		EReference RELATION_VALUE_RESTRICTION_AXIOM__VALUE = eINSTANCE.getRelationValueRestrictionAxiom_Value();
 
 		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.TypeAssertionImpl <em>Type Assertion</em>}' class.
@@ -15120,36 +15244,20 @@ public interface OmlPackage extends EPackage {
 		EClass LINK_ASSERTION = eINSTANCE.getLinkAssertion();
 
 		/**
-		 * The meta object literal for the '<em><b>Relation</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Property</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference LINK_ASSERTION__RELATION = eINSTANCE.getLinkAssertion_Relation();
+		EReference LINK_ASSERTION__PROPERTY = eINSTANCE.getLinkAssertion_Property();
 
 		/**
-		 * The meta object literal for the '<em><b>Target</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Value</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference LINK_ASSERTION__TARGET = eINSTANCE.getLinkAssertion_Target();
-
-		/**
-		 * The meta object literal for the '<em><b>Owning Instance</b></em>' container reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference LINK_ASSERTION__OWNING_INSTANCE = eINSTANCE.getLinkAssertion_OwningInstance();
-
-		/**
-		 * The meta object literal for the '<em><b>Owning Reference</b></em>' container reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference LINK_ASSERTION__OWNING_REFERENCE = eINSTANCE.getLinkAssertion_OwningReference();
+		EReference LINK_ASSERTION__VALUE = eINSTANCE.getLinkAssertion_Value();
 
 		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.UnaryPredicateImpl <em>Unary Predicate</em>}' class.
@@ -15464,14 +15572,6 @@ public interface OmlPackage extends EPackage {
 		EClass ENTITY_REFERENCE = eINSTANCE.getEntityReference();
 
 		/**
-		 * The meta object literal for the '<em><b>Owned Relation Restrictions</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ENTITY_REFERENCE__OWNED_RELATION_RESTRICTIONS = eINSTANCE.getEntityReference_OwnedRelationRestrictions();
-
-		/**
 		 * The meta object literal for the '<em><b>Owned Keys</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -15694,14 +15794,6 @@ public interface OmlPackage extends EPackage {
 		 * @generated
 		 */
 		EReference NAMED_INSTANCE_REFERENCE__OWNED_PROPERTY_VALUES = eINSTANCE.getNamedInstanceReference_OwnedPropertyValues();
-
-		/**
-		 * The meta object literal for the '<em><b>Owned Links</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference NAMED_INSTANCE_REFERENCE__OWNED_LINKS = eINSTANCE.getNamedInstanceReference_OwnedLinks();
 
 		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.ConceptInstanceReferenceImpl <em>Concept Instance Reference</em>}' class.

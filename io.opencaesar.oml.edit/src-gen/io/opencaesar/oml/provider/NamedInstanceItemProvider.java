@@ -103,7 +103,6 @@ public class NamedInstanceItemProvider extends DescriptionMemberItemProvider {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(OmlPackage.Literals.INSTANCE__OWNED_PROPERTY_VALUES);
-			childrenFeatures.add(OmlPackage.Literals.NAMED_INSTANCE__OWNED_LINKS);
 		}
 		return childrenFeatures;
 	}
@@ -149,7 +148,6 @@ public class NamedInstanceItemProvider extends DescriptionMemberItemProvider {
 
 		switch (notification.getFeatureID(NamedInstance.class)) {
 			case OmlPackage.NAMED_INSTANCE__OWNED_PROPERTY_VALUES:
-			case OmlPackage.NAMED_INSTANCE__OWNED_LINKS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -179,7 +177,7 @@ public class NamedInstanceItemProvider extends DescriptionMemberItemProvider {
 
 		newChildDescriptors.add
 			(createChildParameter
-				(OmlPackage.Literals.NAMED_INSTANCE__OWNED_LINKS,
+				(OmlPackage.Literals.INSTANCE__OWNED_PROPERTY_VALUES,
 				 OmlFactory.eINSTANCE.createLinkAssertion()));
 	}
 

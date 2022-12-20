@@ -23,7 +23,7 @@ import io.opencaesar.oml.ForwardRelation;
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.Relation;
 import io.opencaesar.oml.RelationEntity;
-import io.opencaesar.oml.ReverseRelation;
+import io.opencaesar.oml.SemanticProperty;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -48,22 +48,11 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  * </p>
  * <ul>
  *   <li>{@link io.opencaesar.oml.impl.ForwardRelationImpl#getRelationEntity <em>Relation Entity</em>}</li>
- *   <li>{@link io.opencaesar.oml.impl.ForwardRelationImpl#isFunctional <em>Functional</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class ForwardRelationImpl extends RelationImpl implements ForwardRelation {
-	/**
-	 * The default value of the '{@link #isFunctional() <em>Functional</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isFunctional()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean FUNCTIONAL_EDEFAULT = false;
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -143,16 +132,7 @@ public class ForwardRelationImpl extends RelationImpl implements ForwardRelation
 	 */
 	@Override
 	public boolean isFunctional() {
-		boolean _xifexpression = false;
-		RelationEntity _relationEntity = this.getRelationEntity();
-		boolean _tripleNotEquals = (_relationEntity != null);
-		if (_tripleNotEquals) {
-			_xifexpression = this.getRelationEntity().isFunctional();
-		}
-		else {
-			_xifexpression = false;
-		}
-		return _xifexpression;
+		return this.getRelationEntity().isFunctional();
 	}
 
 	/**
@@ -161,14 +141,8 @@ public class ForwardRelationImpl extends RelationImpl implements ForwardRelation
 	 * @generated
 	 */
 	@Override
-	public Entity deriveDomain() {
-		Entity _xifexpression = null;
-		RelationEntity _relationEntity = this.getRelationEntity();
-		boolean _tripleNotEquals = (_relationEntity != null);
-		if (_tripleNotEquals) {
-			_xifexpression = this.getRelationEntity().getSource();
-		}
-		return _xifexpression;
+	public boolean isInverseFunctional() {
+		return this.getRelationEntity().isInverseFunctional();
 	}
 
 	/**
@@ -177,14 +151,8 @@ public class ForwardRelationImpl extends RelationImpl implements ForwardRelation
 	 * @generated
 	 */
 	@Override
-	public Entity deriveRange() {
-		Entity _xifexpression = null;
-		RelationEntity _relationEntity = this.getRelationEntity();
-		boolean _tripleNotEquals = (_relationEntity != null);
-		if (_tripleNotEquals) {
-			_xifexpression = this.getRelationEntity().getTarget();
-		}
-		return _xifexpression;
+	public boolean isSymmetric() {
+		return this.getRelationEntity().isSymmetric();
 	}
 
 	/**
@@ -193,14 +161,68 @@ public class ForwardRelationImpl extends RelationImpl implements ForwardRelation
 	 * @generated
 	 */
 	@Override
-	public Relation deriveInverse() {
-		ReverseRelation _xifexpression = null;
-		RelationEntity _relationEntity = this.getRelationEntity();
-		boolean _tripleNotEquals = (_relationEntity != null);
-		if (_tripleNotEquals) {
-			_xifexpression = this.getRelationEntity().getReverseRelation();
-		}
-		return _xifexpression;
+	public boolean isAsymmetric() {
+		return this.getRelationEntity().isAsymmetric();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isReflexive() {
+		return this.getRelationEntity().isReflexive();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isIrreflexive() {
+		return this.getRelationEntity().isIrreflexive();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isTransitive() {
+		return this.getRelationEntity().isTransitive();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Entity getDomain() {
+		return this.getRelationEntity().getSource();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Entity getRange() {
+		return this.getRelationEntity().getTarget();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Relation getInverse() {
+		return this.getRelationEntity().getReverseRelation();
 	}
 
 	/**
@@ -258,8 +280,6 @@ public class ForwardRelationImpl extends RelationImpl implements ForwardRelation
 			case OmlPackage.FORWARD_RELATION__RELATION_ENTITY:
 				if (resolve) return getRelationEntity();
 				return basicGetRelationEntity();
-			case OmlPackage.FORWARD_RELATION__FUNCTIONAL:
-				return isFunctional();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -304,8 +324,6 @@ public class ForwardRelationImpl extends RelationImpl implements ForwardRelation
 		switch (featureID) {
 			case OmlPackage.FORWARD_RELATION__RELATION_ENTITY:
 				return basicGetRelationEntity() != null;
-			case OmlPackage.FORWARD_RELATION__FUNCTIONAL:
-				return isFunctional() != FUNCTIONAL_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -316,14 +334,60 @@ public class ForwardRelationImpl extends RelationImpl implements ForwardRelation
 	 * @generated
 	 */
 	@Override
+	public int eDerivedOperationID(int baseOperationID, Class<?> baseClass) {
+		if (baseClass == SemanticProperty.class) {
+			switch (baseOperationID) {
+				case OmlPackage.SEMANTIC_PROPERTY___IS_FUNCTIONAL: return OmlPackage.FORWARD_RELATION___IS_FUNCTIONAL;
+				case OmlPackage.SEMANTIC_PROPERTY___GET_DOMAIN: return OmlPackage.FORWARD_RELATION___GET_DOMAIN;
+				case OmlPackage.SEMANTIC_PROPERTY___GET_RANGE: return OmlPackage.FORWARD_RELATION___GET_RANGE;
+				default: return super.eDerivedOperationID(baseOperationID, baseClass);
+			}
+		}
+		if (baseClass == Relation.class) {
+			switch (baseOperationID) {
+				case OmlPackage.RELATION___IS_INVERSE_FUNCTIONAL: return OmlPackage.FORWARD_RELATION___IS_INVERSE_FUNCTIONAL;
+				case OmlPackage.RELATION___IS_SYMMETRIC: return OmlPackage.FORWARD_RELATION___IS_SYMMETRIC;
+				case OmlPackage.RELATION___IS_ASYMMETRIC: return OmlPackage.FORWARD_RELATION___IS_ASYMMETRIC;
+				case OmlPackage.RELATION___IS_REFLEXIVE: return OmlPackage.FORWARD_RELATION___IS_REFLEXIVE;
+				case OmlPackage.RELATION___IS_IRREFLEXIVE: return OmlPackage.FORWARD_RELATION___IS_IRREFLEXIVE;
+				case OmlPackage.RELATION___IS_TRANSITIVE: return OmlPackage.FORWARD_RELATION___IS_TRANSITIVE;
+				case OmlPackage.RELATION___GET_DOMAIN: return OmlPackage.FORWARD_RELATION___GET_DOMAIN;
+				case OmlPackage.RELATION___GET_RANGE: return OmlPackage.FORWARD_RELATION___GET_RANGE;
+				case OmlPackage.RELATION___GET_INVERSE: return OmlPackage.FORWARD_RELATION___GET_INVERSE;
+				default: return super.eDerivedOperationID(baseOperationID, baseClass);
+			}
+		}
+		return super.eDerivedOperationID(baseOperationID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
-			case OmlPackage.FORWARD_RELATION___DERIVE_DOMAIN:
-				return deriveDomain();
-			case OmlPackage.FORWARD_RELATION___DERIVE_RANGE:
-				return deriveRange();
-			case OmlPackage.FORWARD_RELATION___DERIVE_INVERSE:
-				return deriveInverse();
+			case OmlPackage.FORWARD_RELATION___IS_FUNCTIONAL:
+				return isFunctional();
+			case OmlPackage.FORWARD_RELATION___IS_INVERSE_FUNCTIONAL:
+				return isInverseFunctional();
+			case OmlPackage.FORWARD_RELATION___IS_SYMMETRIC:
+				return isSymmetric();
+			case OmlPackage.FORWARD_RELATION___IS_ASYMMETRIC:
+				return isAsymmetric();
+			case OmlPackage.FORWARD_RELATION___IS_REFLEXIVE:
+				return isReflexive();
+			case OmlPackage.FORWARD_RELATION___IS_IRREFLEXIVE:
+				return isIrreflexive();
+			case OmlPackage.FORWARD_RELATION___IS_TRANSITIVE:
+				return isTransitive();
+			case OmlPackage.FORWARD_RELATION___GET_DOMAIN:
+				return getDomain();
+			case OmlPackage.FORWARD_RELATION___GET_RANGE:
+				return getRange();
+			case OmlPackage.FORWARD_RELATION___GET_INVERSE:
+				return getInverse();
 		}
 		return super.eInvoke(operationID, arguments);
 	}

@@ -25,9 +25,10 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * RelationBase is a specializable term that represents the supertype of relation from a source to a target entity.
- * It can also optionally name a reverse relation from the target to the source entity. A relation base can be characterized
- * with several boolean flags that represent its DL semantics. Such flags apply conversely to the reverse relation (if specified).
+ * RelationBase is a specializable term that is the superclass of a relation from a source entity to a target entity.
+ * It can optionally name a reverse property whose domain is the target and whose range is the source.
+ * It can also be characterized with several boolean flags that represent its DL semantics.
+ * Such flags apply conversely to the reverse property (if named).
  * <!-- end-model-doc -->
  *
  * <p>
@@ -57,7 +58,7 @@ public interface RelationBase extends SpecializableTerm {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The entity that represents the source of this relation entity
+	 * The entity that represents the source of this relation base
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Source</em>' reference.
 	 * @see #setSource(Entity)
@@ -82,7 +83,7 @@ public interface RelationBase extends SpecializableTerm {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The entity that represents the target of this relation entity
+	 * The entity that represents the target of this relation base
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Target</em>' reference.
 	 * @see #setTarget(Entity)
@@ -108,7 +109,7 @@ public interface RelationBase extends SpecializableTerm {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The optional reverse relation of this relation entity
+	 * The optional reverse relation of this relation base
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Reverse Relation</em>' containment reference.
 	 * @see #setReverseRelation(ReverseRelation)
@@ -134,7 +135,7 @@ public interface RelationBase extends SpecializableTerm {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Whether this relation entity is functional (i.e., {@code A -> B and A->C => B=C})
+	 * Whether this relation base is functional (i.e., {@code A -> B and A->C => B=C})
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Functional</em>' attribute.
 	 * @see #setFunctional(boolean)
@@ -159,7 +160,7 @@ public interface RelationBase extends SpecializableTerm {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Whether this relation entity is inverse functional (i.e., {@code B->A and C->A => B=C})
+	 * Whether this relation base is inverse functional (i.e., {@code B->A and C->A => B=C})
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Inverse Functional</em>' attribute.
 	 * @see #setInverseFunctional(boolean)
@@ -184,7 +185,7 @@ public interface RelationBase extends SpecializableTerm {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Whether this relation entity is symmetric (i.e., {@code A->B => B->A})
+	 * Whether this relation base is symmetric (i.e., {@code A->B => B->A})
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Symmetric</em>' attribute.
 	 * @see #setSymmetric(boolean)
@@ -209,7 +210,7 @@ public interface RelationBase extends SpecializableTerm {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Whether this relation entity is asymmetric (i.e., {@code A->B => !(B->A)})
+	 * Whether this relation base is asymmetric (i.e., {@code A->B => !(B->A)})
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Asymmetric</em>' attribute.
 	 * @see #setAsymmetric(boolean)
@@ -234,7 +235,7 @@ public interface RelationBase extends SpecializableTerm {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Whether this relation entity is reflexive (i.e., {@code A => A->A})
+	 * Whether this relation base is reflexive (i.e., {@code A => A->A})
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Reflexive</em>' attribute.
 	 * @see #setReflexive(boolean)
@@ -259,7 +260,7 @@ public interface RelationBase extends SpecializableTerm {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Whether this relation entity is irreflexive (i.e., {@code A => !(A->A)})
+	 * Whether this relation base is irreflexive (i.e., {@code A => !(A->A)})
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Irreflexive</em>' attribute.
 	 * @see #setIrreflexive(boolean)
@@ -284,7 +285,7 @@ public interface RelationBase extends SpecializableTerm {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Whether this relation entity is irreflexive (i.e., {@code A->B and B->C => A->C})
+	 * Whether this relation base is transitive (i.e., {@code A->B and B->C => A->C})
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Transitive</em>' attribute.
 	 * @see #setTransitive(boolean)

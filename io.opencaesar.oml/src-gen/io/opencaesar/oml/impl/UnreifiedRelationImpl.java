@@ -23,6 +23,7 @@ import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.Relation;
 import io.opencaesar.oml.RelationBase;
 import io.opencaesar.oml.ReverseRelation;
+import io.opencaesar.oml.SemanticProperty;
 import io.opencaesar.oml.SpecializableTerm;
 import io.opencaesar.oml.SpecializationAxiom;
 import io.opencaesar.oml.Statement;
@@ -630,7 +631,7 @@ public class UnreifiedRelationImpl extends RelationImpl implements UnreifiedRela
 	 * @generated
 	 */
 	@Override
-	public Entity deriveDomain() {
+	public Entity getDomain() {
 		return this.getSource();
 	}
 
@@ -640,7 +641,7 @@ public class UnreifiedRelationImpl extends RelationImpl implements UnreifiedRela
 	 * @generated
 	 */
 	@Override
-	public Entity deriveRange() {
+	public Entity getRange() {
 		return this.getTarget();
 	}
 
@@ -650,7 +651,7 @@ public class UnreifiedRelationImpl extends RelationImpl implements UnreifiedRela
 	 * @generated
 	 */
 	@Override
-	public Relation deriveInverse() {
+	public Relation getInverse() {
 		return this.getReverseRelation();
 	}
 
@@ -972,14 +973,59 @@ public class UnreifiedRelationImpl extends RelationImpl implements UnreifiedRela
 	 * @generated
 	 */
 	@Override
+	public int eDerivedOperationID(int baseOperationID, Class<?> baseClass) {
+		if (baseClass == SemanticProperty.class) {
+			switch (baseOperationID) {
+				case OmlPackage.SEMANTIC_PROPERTY___GET_DOMAIN: return OmlPackage.UNREIFIED_RELATION___GET_DOMAIN;
+				case OmlPackage.SEMANTIC_PROPERTY___GET_RANGE: return OmlPackage.UNREIFIED_RELATION___GET_RANGE;
+				default: return super.eDerivedOperationID(baseOperationID, baseClass);
+			}
+		}
+		if (baseClass == Relation.class) {
+			switch (baseOperationID) {
+				case OmlPackage.RELATION___GET_DOMAIN: return OmlPackage.UNREIFIED_RELATION___GET_DOMAIN;
+				case OmlPackage.RELATION___GET_RANGE: return OmlPackage.UNREIFIED_RELATION___GET_RANGE;
+				case OmlPackage.RELATION___GET_INVERSE: return OmlPackage.UNREIFIED_RELATION___GET_INVERSE;
+				default: return super.eDerivedOperationID(baseOperationID, baseClass);
+			}
+		}
+		if (baseClass == Statement.class) {
+			switch (baseOperationID) {
+				default: return -1;
+			}
+		}
+		if (baseClass == VocabularyStatement.class) {
+			switch (baseOperationID) {
+				default: return -1;
+			}
+		}
+		if (baseClass == SpecializableTerm.class) {
+			switch (baseOperationID) {
+				default: return -1;
+			}
+		}
+		if (baseClass == RelationBase.class) {
+			switch (baseOperationID) {
+				default: return -1;
+			}
+		}
+		return super.eDerivedOperationID(baseOperationID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
-			case OmlPackage.UNREIFIED_RELATION___DERIVE_DOMAIN:
-				return deriveDomain();
-			case OmlPackage.UNREIFIED_RELATION___DERIVE_RANGE:
-				return deriveRange();
-			case OmlPackage.UNREIFIED_RELATION___DERIVE_INVERSE:
-				return deriveInverse();
+			case OmlPackage.UNREIFIED_RELATION___GET_DOMAIN:
+				return getDomain();
+			case OmlPackage.UNREIFIED_RELATION___GET_RANGE:
+				return getRange();
+			case OmlPackage.UNREIFIED_RELATION___GET_INVERSE:
+				return getInverse();
 		}
 		return super.eInvoke(operationID, arguments);
 	}

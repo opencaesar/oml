@@ -24,6 +24,7 @@ import io.opencaesar.oml.Relation;
 import io.opencaesar.oml.RelationBase;
 import io.opencaesar.oml.RelationEntity;
 import io.opencaesar.oml.ReverseRelation;
+import io.opencaesar.oml.SemanticProperty;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -48,22 +49,11 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  * </p>
  * <ul>
  *   <li>{@link io.opencaesar.oml.impl.ReverseRelationImpl#getRelationBase <em>Relation Base</em>}</li>
- *   <li>{@link io.opencaesar.oml.impl.ReverseRelationImpl#isFunctional <em>Functional</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class ReverseRelationImpl extends RelationImpl implements ReverseRelation {
-	/**
-	 * The default value of the '{@link #isFunctional() <em>Functional</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isFunctional()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean FUNCTIONAL_EDEFAULT = false;
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -143,16 +133,7 @@ public class ReverseRelationImpl extends RelationImpl implements ReverseRelation
 	 */
 	@Override
 	public boolean isFunctional() {
-		boolean _xifexpression = false;
-		RelationBase _relationBase = this.getRelationBase();
-		boolean _tripleNotEquals = (_relationBase != null);
-		if (_tripleNotEquals) {
-			_xifexpression = this.getRelationBase().isInverseFunctional();
-		}
-		else {
-			_xifexpression = false;
-		}
-		return _xifexpression;
+		return this.getRelationBase().isInverseFunctional();
 	}
 
 	/**
@@ -161,14 +142,8 @@ public class ReverseRelationImpl extends RelationImpl implements ReverseRelation
 	 * @generated
 	 */
 	@Override
-	public Entity deriveDomain() {
-		Entity _xifexpression = null;
-		RelationBase _relationBase = this.getRelationBase();
-		boolean _tripleNotEquals = (_relationBase != null);
-		if (_tripleNotEquals) {
-			_xifexpression = this.getRelationBase().getTarget();
-		}
-		return _xifexpression;
+	public boolean isInverseFunctional() {
+		return this.getRelationBase().isInverseFunctional();
 	}
 
 	/**
@@ -177,14 +152,8 @@ public class ReverseRelationImpl extends RelationImpl implements ReverseRelation
 	 * @generated
 	 */
 	@Override
-	public Entity deriveRange() {
-		Entity _xifexpression = null;
-		RelationBase _relationBase = this.getRelationBase();
-		boolean _tripleNotEquals = (_relationBase != null);
-		if (_tripleNotEquals) {
-			_xifexpression = this.getRelationBase().getSource();
-		}
-		return _xifexpression;
+	public boolean isSymmetric() {
+		return this.getRelationBase().isSymmetric();
 	}
 
 	/**
@@ -193,7 +162,67 @@ public class ReverseRelationImpl extends RelationImpl implements ReverseRelation
 	 * @generated
 	 */
 	@Override
-	public Relation deriveInverse() {
+	public boolean isAsymmetric() {
+		return this.getRelationBase().isAsymmetric();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isReflexive() {
+		return this.getRelationBase().isReflexive();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isIrreflexive() {
+		return this.getRelationBase().isIrreflexive();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isTransitive() {
+		return this.getRelationBase().isTransitive();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Entity getDomain() {
+		return this.getRelationBase().getTarget();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Entity getRange() {
+		return this.getRelationBase().getSource();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Relation getInverse() {
 		Relation _xifexpression = null;
 		RelationBase _relationBase = this.getRelationBase();
 		if ((_relationBase instanceof RelationEntity)) {
@@ -267,8 +296,6 @@ public class ReverseRelationImpl extends RelationImpl implements ReverseRelation
 			case OmlPackage.REVERSE_RELATION__RELATION_BASE:
 				if (resolve) return getRelationBase();
 				return basicGetRelationBase();
-			case OmlPackage.REVERSE_RELATION__FUNCTIONAL:
-				return isFunctional();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -313,8 +340,6 @@ public class ReverseRelationImpl extends RelationImpl implements ReverseRelation
 		switch (featureID) {
 			case OmlPackage.REVERSE_RELATION__RELATION_BASE:
 				return basicGetRelationBase() != null;
-			case OmlPackage.REVERSE_RELATION__FUNCTIONAL:
-				return isFunctional() != FUNCTIONAL_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -325,14 +350,60 @@ public class ReverseRelationImpl extends RelationImpl implements ReverseRelation
 	 * @generated
 	 */
 	@Override
+	public int eDerivedOperationID(int baseOperationID, Class<?> baseClass) {
+		if (baseClass == SemanticProperty.class) {
+			switch (baseOperationID) {
+				case OmlPackage.SEMANTIC_PROPERTY___IS_FUNCTIONAL: return OmlPackage.REVERSE_RELATION___IS_FUNCTIONAL;
+				case OmlPackage.SEMANTIC_PROPERTY___GET_DOMAIN: return OmlPackage.REVERSE_RELATION___GET_DOMAIN;
+				case OmlPackage.SEMANTIC_PROPERTY___GET_RANGE: return OmlPackage.REVERSE_RELATION___GET_RANGE;
+				default: return super.eDerivedOperationID(baseOperationID, baseClass);
+			}
+		}
+		if (baseClass == Relation.class) {
+			switch (baseOperationID) {
+				case OmlPackage.RELATION___IS_INVERSE_FUNCTIONAL: return OmlPackage.REVERSE_RELATION___IS_INVERSE_FUNCTIONAL;
+				case OmlPackage.RELATION___IS_SYMMETRIC: return OmlPackage.REVERSE_RELATION___IS_SYMMETRIC;
+				case OmlPackage.RELATION___IS_ASYMMETRIC: return OmlPackage.REVERSE_RELATION___IS_ASYMMETRIC;
+				case OmlPackage.RELATION___IS_REFLEXIVE: return OmlPackage.REVERSE_RELATION___IS_REFLEXIVE;
+				case OmlPackage.RELATION___IS_IRREFLEXIVE: return OmlPackage.REVERSE_RELATION___IS_IRREFLEXIVE;
+				case OmlPackage.RELATION___IS_TRANSITIVE: return OmlPackage.REVERSE_RELATION___IS_TRANSITIVE;
+				case OmlPackage.RELATION___GET_DOMAIN: return OmlPackage.REVERSE_RELATION___GET_DOMAIN;
+				case OmlPackage.RELATION___GET_RANGE: return OmlPackage.REVERSE_RELATION___GET_RANGE;
+				case OmlPackage.RELATION___GET_INVERSE: return OmlPackage.REVERSE_RELATION___GET_INVERSE;
+				default: return super.eDerivedOperationID(baseOperationID, baseClass);
+			}
+		}
+		return super.eDerivedOperationID(baseOperationID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
-			case OmlPackage.REVERSE_RELATION___DERIVE_DOMAIN:
-				return deriveDomain();
-			case OmlPackage.REVERSE_RELATION___DERIVE_RANGE:
-				return deriveRange();
-			case OmlPackage.REVERSE_RELATION___DERIVE_INVERSE:
-				return deriveInverse();
+			case OmlPackage.REVERSE_RELATION___IS_FUNCTIONAL:
+				return isFunctional();
+			case OmlPackage.REVERSE_RELATION___IS_INVERSE_FUNCTIONAL:
+				return isInverseFunctional();
+			case OmlPackage.REVERSE_RELATION___IS_SYMMETRIC:
+				return isSymmetric();
+			case OmlPackage.REVERSE_RELATION___IS_ASYMMETRIC:
+				return isAsymmetric();
+			case OmlPackage.REVERSE_RELATION___IS_REFLEXIVE:
+				return isReflexive();
+			case OmlPackage.REVERSE_RELATION___IS_IRREFLEXIVE:
+				return isIrreflexive();
+			case OmlPackage.REVERSE_RELATION___IS_TRANSITIVE:
+				return isTransitive();
+			case OmlPackage.REVERSE_RELATION___GET_DOMAIN:
+				return getDomain();
+			case OmlPackage.REVERSE_RELATION___GET_RANGE:
+				return getRange();
+			case OmlPackage.REVERSE_RELATION___GET_INVERSE:
+				return getInverse();
 		}
 		return super.eInvoke(operationID, arguments);
 	}

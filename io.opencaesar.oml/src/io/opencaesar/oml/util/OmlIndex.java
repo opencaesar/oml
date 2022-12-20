@@ -68,8 +68,8 @@ import io.opencaesar.oml.RelationInstanceReference;
 import io.opencaesar.oml.RelationRangeRestrictionAxiom;
 import io.opencaesar.oml.RelationReference;
 import io.opencaesar.oml.RelationRestrictionAxiom;
-import io.opencaesar.oml.RelationTargetRestrictionAxiom;
 import io.opencaesar.oml.RelationTypeAssertion;
+import io.opencaesar.oml.RelationValueRestrictionAxiom;
 import io.opencaesar.oml.Rule;
 import io.opencaesar.oml.RuleReference;
 import io.opencaesar.oml.Scalar;
@@ -192,7 +192,7 @@ public class OmlIndex {
         return findInverseReferencers(instance, Concept.class, OmlPackage.Literals.CONCEPT__ENUMERATED_INSTANCES);
     }
 
-    // RelationEntity
+    // RelationBase
     
     /**
      * Finds relation bases referencing the given entity as source
@@ -400,7 +400,7 @@ public class OmlIndex {
         return findInverseReferencers(scalar, EnumeratedScalarReference.class, OmlPackage.Literals.ENUMERATED_SCALAR_REFERENCE__SCALAR);
     }
     
-    // RelationReferencex
+    // RelationReference
     
     /**
      * Finds relation references referencing the given relation
@@ -540,16 +540,16 @@ public class OmlIndex {
      * @param relation The referenced relation
      * @return A list of referencing relation restriction axioms
      */
-    public static List<RelationRestrictionAxiom> findRelationRestrictionAxiomsWithRelation(Relation relation) {
-        return findInverseReferencers(relation, RelationRestrictionAxiom.class, OmlPackage.Literals.RELATION_RESTRICTION_AXIOM__RELATION);
+    public static List<RelationRestrictionAxiom> findRelationRestrictionAxiomsWithProperty(Relation relation) {
+        return findInverseReferencers(relation, RelationRestrictionAxiom.class, OmlPackage.Literals.RELATION_RESTRICTION_AXIOM__PROPERTY);
     }
     
     // RelationRangeRestrictionAxiom
     
     /**
-     * Finds relation range restriction axioms referencing the given entity as range
+     * Finds relation range restriction axioms referencing the given restricted range
      * 
-     * @param range The referenced entity
+     * @param range The restricted range
      * @return A list of referencing relation range restriction axioms
      */
     public static List<RelationRangeRestrictionAxiom> findRelationRangeRestrictionAxiomsWithRange(Entity range) {
@@ -559,7 +559,7 @@ public class OmlIndex {
     // RelationCardinalityRestrictionAxiom
     
     /**
-     * Finds relation cardinality restriction axioms referencing the given entity as range
+     * Finds relation cardinality restriction axioms referencing the given restricted range
      * 
      * @param range The referenced entity
      * @return A list of referencing relation cardinality restriction axioms
@@ -568,16 +568,16 @@ public class OmlIndex {
         return findInverseReferencers(range, RelationCardinalityRestrictionAxiom.class, OmlPackage.Literals.RELATION_CARDINALITY_RESTRICTION_AXIOM__RANGE);
     }
     
-    // RelationTargetRestrictionAxiom
+    // RelationValueRestrictionAxiom
     
     /**
-     * Finds relation target restriction axioms referencing the given named instance as target
+     * Finds relation value restriction axioms referencing the given named instance as a value
      * 
-     * @param target The referenced named instance
-     * @return A list of referencing relation target restriction axioms
+     * @param value The referenced named instance value
+     * @return A list of referencing relation value restriction axioms
      */
-    public static List<RelationTargetRestrictionAxiom> findRelationTargetRestrictionAxiomsWithTarget(NamedInstance target) {
-        return findInverseReferencers(target, RelationTargetRestrictionAxiom.class, OmlPackage.Literals.RELATION_TARGET_RESTRICTION_AXIOM__TARGET);
+    public static List<RelationValueRestrictionAxiom> findRelationValueRestrictionAxiomsWithValue(NamedInstance value) {
+        return findInverseReferencers(value, RelationValueRestrictionAxiom.class, OmlPackage.Literals.RELATION_VALUE_RESTRICTION_AXIOM__VALUE);
     }
     
     // KeyAxiom
@@ -645,21 +645,21 @@ public class OmlIndex {
     /**
      * Finds link assertions referencing the given relation
      * 
-     * @param relation The referenced relation
+     * @param property The referenced (relation) property
      * @return A list of referencing link assertions
      */
-    public static List<LinkAssertion> findLinkAssertionsWithRelation(Relation relation) {
-        return findInverseReferencers(relation, LinkAssertion.class, OmlPackage.Literals.LINK_ASSERTION__RELATION);
+    public static List<LinkAssertion> findLinkAssertionsWithProperty(Relation property) {
+        return findInverseReferencers(property, LinkAssertion.class, OmlPackage.Literals.LINK_ASSERTION__PROPERTY);
     }
     
     /**
-     * Finds link assertions referencing the given named instance as target
+     * Finds link assertions referencing the given named instance as a value
      * 
-     * @param target The referenced named instance
+     * @param value The referenced named instance value
      * @return A list of referencing link assertions
      */
-    public static List<LinkAssertion> findLinkAssertionsWithTarget(NamedInstance target) {
-        return findInverseReferencers(target, LinkAssertion.class, OmlPackage.Literals.LINK_ASSERTION__TARGET);
+    public static List<LinkAssertion> findLinkAssertionsWithValue(NamedInstance value) {
+        return findInverseReferencers(value, LinkAssertion.class, OmlPackage.Literals.LINK_ASSERTION__VALUE);
     }
     
     // TypePredicate

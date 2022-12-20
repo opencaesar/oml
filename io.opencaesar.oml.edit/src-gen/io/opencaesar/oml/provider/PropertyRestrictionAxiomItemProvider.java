@@ -36,7 +36,7 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
  * <!-- end-user-doc -->
  * @generated
  */
-public class PropertyRestrictionAxiomItemProvider extends RestrictionAxiomItemProvider {
+public class PropertyRestrictionAxiomItemProvider extends AxiomItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->

@@ -25,7 +25,7 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * UnreifiedRelation is a simple relation from a source to a target entity that is not part of a relation entity.
+ * UnreifiedRelation is a simple relation from a source entity to a target entity.
  * <!-- end-model-doc -->
  *
  *
@@ -37,25 +37,25 @@ public interface UnreifiedRelation extends Relation, RelationBase {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model unique="false"
+	 * @model kind="operation" unique="false"
 	 * @generated
 	 */
-	Entity deriveDomain();
+	Entity getDomain();
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model unique="false"
+	 * @model kind="operation" unique="false"
 	 * @generated
 	 */
-	Entity deriveRange();
+	Entity getRange();
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model unique="false"
+	 * @model kind="operation" unique="false"
 	 * @generated
 	 */
-	Relation deriveInverse();
+	Relation getInverse();
 
 } // UnreifiedRelation

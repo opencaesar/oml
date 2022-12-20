@@ -50,8 +50,8 @@ import io.opencaesar.oml.RelationInstance;
 import io.opencaesar.oml.RelationInstanceReference;
 import io.opencaesar.oml.RelationRangeRestrictionAxiom;
 import io.opencaesar.oml.RelationReference;
-import io.opencaesar.oml.RelationTargetRestrictionAxiom;
 import io.opencaesar.oml.RelationTypeAssertion;
+import io.opencaesar.oml.RelationValueRestrictionAxiom;
 import io.opencaesar.oml.ReverseRelation;
 import io.opencaesar.oml.Rule;
 import io.opencaesar.oml.RuleReference;
@@ -653,7 +653,7 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 			@Override
 			public String getText(Object object) {
 				RelationRangeRestrictionAxiom axiom = (RelationRangeRestrictionAxiom)object;
-				return "restricts " + axiom.getKind() + " relation " + getLabel(axiom.getRelation(), axiom)+ " to " + getLabel(axiom.getRange(), axiom);
+				return "restricts " + axiom.getKind() + " relation " + getLabel(axiom.getProperty(), axiom)+ " to " + getLabel(axiom.getRange(), axiom);
 			}
 		};
 		return relationRangeRestrictionAxiomItemProvider;
@@ -665,22 +665,22 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 			@Override
 			public String getText(Object object) {
 				RelationCardinalityRestrictionAxiom axiom = (RelationCardinalityRestrictionAxiom)object;
-				return "restricts relation " + getLabel(axiom.getRelation(), axiom)+ " to " + axiom.getKind() + " " + axiom.getCardinality();
+				return "restricts relation " + getLabel(axiom.getProperty(), axiom)+ " to " + axiom.getKind() + " " + axiom.getCardinality();
 			}
 		};
 		return relationCardinalityRestrictionAxiomItemProvider;
 	}
 
 	@Override
-	public Adapter createRelationTargetRestrictionAxiomAdapter() {
-		if (relationTargetRestrictionAxiomItemProvider == null) relationTargetRestrictionAxiomItemProvider = new RelationTargetRestrictionAxiomItemProvider(this) {
+	public Adapter createRelationValueRestrictionAxiomAdapter() {
+		if (relationValueRestrictionAxiomItemProvider == null) relationValueRestrictionAxiomItemProvider = new RelationValueRestrictionAxiomItemProvider(this) {
 			@Override
 			public String getText(Object object) {
-				RelationTargetRestrictionAxiom axiom = (RelationTargetRestrictionAxiom)object;
-				return "restricts relation " + getLabel(axiom.getRelation(), axiom)+ " to " + getLabel(axiom.getTarget(), axiom);
+				RelationValueRestrictionAxiom axiom = (RelationValueRestrictionAxiom)object;
+				return "restricts relation " + getLabel(axiom.getProperty(), axiom)+ " to " + getLabel(axiom.getValue(), axiom);
 			}
 		};
-		return relationTargetRestrictionAxiomItemProvider;
+		return relationValueRestrictionAxiomItemProvider;
 	}
 
 	// Property values (annotation, scalar, structured, link)
@@ -727,7 +727,7 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 			@Override
 			public String getText(Object object) {
 				LinkAssertion linkAssertion = (LinkAssertion)object;
-				return getLabel(linkAssertion.getRelation(), linkAssertion) + " " + getLabel(linkAssertion.getTarget(), linkAssertion);
+				return getLabel(linkAssertion.getProperty(), linkAssertion) + " " + getLabel(linkAssertion.getValue(), linkAssertion);
 			}
 		};
 		return linkAssertionItemProvider;

@@ -51,7 +51,7 @@ public interface Classifier extends Type {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The set of restriction axioms on properties of this classifier
+	 * The set of property restriction axioms of this classifier
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Owned Property Restrictions</em>' containment reference list.
 	 * @see io.opencaesar.oml.OmlPackage#getClassifier_OwnedPropertyRestrictions()

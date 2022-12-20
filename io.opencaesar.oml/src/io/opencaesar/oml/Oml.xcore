@@ -464,7 +464,7 @@ abstract class Term extends VocabularyMember {
 
 /*
  * Rule is a member of a vocabulary that adds a new inference rule to the set supported natively by DL. A rule specifies a set
- * of antecedent predicates that forms a conjunction that infers, when it holds, a single consequent (relation) predicate. Each
+ * of antecedent predicates that forms a conjunction that infers, when it holds, a single consequent predicate. Each
  * predicate in a rule may specify (one or two) variables. Those with the same name refer to the same variable, and hence must
  * be bound to the same value from the model for the rule to trigger during reasoning.
  */
@@ -475,7 +475,7 @@ class Rule extends VocabularyMember, VocabularyStatement {
      */
     contains Predicate[+] antecedent opposite antecedentRule
     /*
-     * The relation predicate that is the consequent of this rule
+     * The predicate that is the consequent of this rule
      */
     contains Predicate[+] consequent opposite consequentRule
 }
@@ -514,50 +514,51 @@ abstract class Type extends SpecializableTerm {
 }
 
 /*
- * RelationBase is a specializable term that represents the supertype of relation from a source to a target entity.
- * It can also optionally name a reverse relation from the target to the source entity. A relation base can be characterized 
- * with several boolean flags that represent its DL semantics. Such flags apply conversely to the reverse relation (if specified). 
+ * RelationBase is a specializable term that is the superclass of a relation from a source entity to a target entity.
+ * It can optionally name a reverse property whose domain is the target and whose range is the source.
+ * It can also be characterized with several boolean flags that represent its DL semantics. 
+ * Such flags apply conversely to the reverse property (if named). 
  */
 @Bikeshed(heading="Properties")
 abstract class RelationBase extends SpecializableTerm {
     /*
-     * The entity that represents the source of this relation entity
+     * The entity that represents the source of this relation base
      */
     refers Entity[1] source
     /*
-     * The entity that represents the target of this relation entity
+     * The entity that represents the target of this relation base
      */
     refers Entity[1] target
     /*
-     * The optional reverse relation of this relation entity
+     * The optional reverse relation of this relation base
      */
     contains ReverseRelation[?] reverseRelation opposite relationBase
     /*
-     * Whether this relation entity is functional (i.e., {@code A -> B and A->C => B=C})
+     * Whether this relation base is functional (i.e., {@code A -> B and A->C => B=C})
      */
     boolean functional
     /*
-     * Whether this relation entity is inverse functional (i.e., {@code B->A and C->A => B=C})
+     * Whether this relation base is inverse functional (i.e., {@code B->A and C->A => B=C})
      */
     boolean inverseFunctional
     /*
-     * Whether this relation entity is symmetric (i.e., {@code A->B => B->A})
+     * Whether this relation base is symmetric (i.e., {@code A->B => B->A})
      */
     boolean symmetric
     /*
-     * Whether this relation entity is asymmetric (i.e., {@code A->B => !(B->A)})
+     * Whether this relation base is asymmetric (i.e., {@code A->B => !(B->A)})
      */
     boolean asymmetric
     /*
-     * Whether this relation entity is reflexive (i.e., {@code A => A->A})
+     * Whether this relation base is reflexive (i.e., {@code A => A->A})
      */
     boolean reflexive
     /*
-     * Whether this relation entity is irreflexive (i.e., {@code A => !(A->A)})
+     * Whether this relation base is irreflexive (i.e., {@code A => !(A->A)})
      */
     boolean irreflexive
     /*
-     * Whether this relation entity is irreflexive (i.e., {@code A->B and B->C => A->C})
+     * Whether this relation base is transitive (i.e., {@code A->B and B->C => A->C})
      */
     boolean transitive
 }
@@ -574,7 +575,7 @@ abstract class RelationBase extends SpecializableTerm {
 @Bikeshed(heading="Types")
 abstract class Classifier extends Type {
     /*
-     * The set of restriction axioms on properties of this classifier
+     * The set of property restriction axioms of this classifier
      */
     contains PropertyRestrictionAxiom[*] ownedPropertyRestrictions opposite owningClassifier
 }
@@ -591,15 +592,11 @@ abstract class Scalar extends Type {
 ////////////////////////////////////////
 
 /*
- * Entity is a characterizable type whose instances can be interrelated by relations (that have the entity
- * or one of its specialized entities as their domain). It can also specify constraints on relations in its domain.
+ * Entity is a classifier whose instances are named and can be interrelated. It can also additionally specify key axioms
+ * that define how instances of the entity are unique.
  */
 @Bikeshed(heading="Types")
 abstract class Entity extends Classifier {
-    /*
-     * The set of restriction axioms on relations in this entity's domain
-     */
-    contains RelationRestrictionAxiom[*] ownedRelationRestrictions opposite owningEntity
     /*
      * The unique keys of this entity
      */
@@ -640,9 +637,10 @@ class Concept extends Entity {
 }
 
 /*
- * RelationEntity is an entity that represents a reified relation from a source to a target entity. It also optionally specifies 
- * a forward relation between these entities. If specified, such forward relation becomes the opposite of (inherited) reverse relation. 
- * If not, then a default forward relation with the name '[relationEnity]Forward' is assumed.
+ * RelationEntity is an entity that represents a reified relation from a source entity to a target entity. 
+ * It can optionally name a forward property whose domain is the source and whose range is the target.
+ * If both are named, such forward property becomes the inverse of the entity's reverse property. 
+ * If not, then a default forward property with the name 'has<Relation>Forward' is assumed.
  */
 @Bikeshed(heading="Types")
 class RelationEntity extends Entity, RelationBase {
@@ -839,123 +837,156 @@ class StructuredProperty extends SemanticProperty, SpecializableTerm {
 }
 
 /*
- * Relation is a property that represents a relation from its domain entity to its range entity. It is the super type of
- * two concrete relations: [=ForwardRelation=] and [=ReverseRelation] that are specified by a relation entity. When a relation
- * entity specifies both kinds of relations, they become inverse of each other.
+ * Relation is a semantic property whose domain is an entity and whose range is also an entity.
+ * It can be characterized by DL flags and can have an inverse relation.
  */
 @Bikeshed(heading="Properties")
 abstract class Relation extends SemanticProperty {
     /*
-     * The entity that represents the domain of this relation
+     * Gets whether this relation is inverse functional (i.e., {@code B->A and C->A => B=C})
      */
-    refers Entity[1] domain get {
-        deriveDomain()
-    }
+    op boolean isInverseFunctional()
     /*
-     * The entity that represents the range of this relation
+     * Gets whether this relation is symmetric (i.e., {@code A->B => B->A})
      */
-    refers Entity[1] range get {
-        deriveRange()
-    }
+    op boolean isSymmetric()
     /*
-     * The relation (if any) that is the inverse of this relation
+     * Gets whether this relation is asymmetric (i.e., {@code A->B => !(B->A)})
      */
-    refers Relation[?] inverse get {
-        deriveInverse()
-    }
-    op Entity deriveDomain()
-    op Entity deriveRange()
-    op Relation deriveInverse()
+    op boolean isAsymmetric()
+    /*
+     * Gets whether this relation is reflexive (i.e., {@code A => A->A})
+     */
+    op boolean isReflexive()
+    /*
+     * Gets whether this relation is irreflexive (i.e., {@code A => !(A->A)})
+     */
+    op boolean isIrreflexive()
+    /*
+     * Gets whether this relation is transitive (i.e., {@code A->B and B->C => A->C})
+     */
+    op boolean isTransitive()
+    /*
+     * Gets the domain of this relation
+     */
+    op Entity getDomain()
+    /*
+     * Gets the range of the relation
+     */
+    op Entity getRange()
+    /*
+     * Gets the inverse of this relation
+     */
+    op Relation[?] getInverse()
 }
 
 ////////////////////////////////////////
-//  Relations
+//  Relation Properties
 ////////////////////////////////////////
 
 /*
- * ForwardRelation is a relation that is defined along side a relation entity, whose domain is the source of the relation
- * entity, and whose range is the target of the relation entity. A forward relation has DL semantics that are specified 
- * by the boolean flags of its relation entity.
+ * ForwardRelation is a relation that is defined by a relation entity. Its domain is the source of the relation
+ * entity, and its range is the target of the relation entity. The DL semantics of a forward property are the same as those 
+ * of its relation entity.
  */
 @Bikeshed(heading="Properties")
 class ForwardRelation extends Relation {
     /*
-     * The relation entity that owns this relation as forward
+     * The relation entity that owns this forward property
      */
     container RelationEntity[1] relationEntity opposite forwardRelation
     
-    /*
-     * Whether this property is functional (has a max of one value per instance) 
-     */
-    boolean functional get {
-        if (relationEntity !== null)
-        	relationEntity.functional
-        else
-        	false
+    op boolean isFunctional() {
+        relationEntity.functional
 	}
-    op Entity deriveDomain() {
-        if (relationEntity !== null)
-            relationEntity.source
+    op boolean isInverseFunctional() {
+        relationEntity.inverseFunctional
     }
-    op Entity deriveRange() {
-        if (relationEntity !== null)
-            relationEntity.target
+    op boolean isSymmetric() {
+        relationEntity.symmetric
     }
-    op Relation deriveInverse() {
-        if (relationEntity !== null)
-            relationEntity.reverseRelation
+    op boolean isAsymmetric() {
+        relationEntity.asymmetric
+    }
+    op boolean isReflexive() {
+        relationEntity.reflexive
+    }
+    op boolean isIrreflexive() {
+        relationEntity.irreflexive
+    }
+    op boolean isTransitive() {
+        relationEntity.transitive
+    }
+    op Entity getDomain() {
+		relationEntity.source
+    }
+    op Entity getRange() {
+		relationEntity.target
+    }
+    op Relation getInverse() {
+		relationEntity.reverseRelation
     }
 }
 
 /*
- * ReverseRelation is a relation that is defined along side a relation entity, whose domain is the target of 
- * the relation entity, and whose range is the source of the relation entity. A reverse relation has DL semantics that 
- * are the inverse of its entity's forward relation.
+ * ReverseRelation is a relation that is defined by a relation base and represents its inverse relation. Its domain
+ * is the target of the relation base, and its range is the source of the relation base. The DL semantics of a reverse property are 
+ * derived from those of its relation.
  */
 @Bikeshed(heading="Properties")
 class ReverseRelation extends Relation {
     /*
-     * The relation base that owns this reverse relation
+     * The relation that owns this reverse property
      */
     container RelationBase[1] relationBase opposite reverseRelation
     
-    /*
-     * Whether this property is functional (has a max of one value per instance) 
-     */
-    boolean functional get {
-        if (relationBase !== null)
-        	relationBase.inverseFunctional
-        else
-        	false
+    op boolean isFunctional() {
+        relationBase.inverseFunctional
 	}
-    op Entity deriveDomain() {
-        if (relationBase !== null)
-            relationBase.target
+    op boolean isInverseFunctional() {
+        relationBase.inverseFunctional
     }
-    op Entity deriveRange() {
-        if (relationBase !== null)
-            relationBase.source
+    op boolean isSymmetric() {
+        relationBase.symmetric
     }
-    op Relation deriveInverse() {
+    op boolean isAsymmetric() {
+        relationBase.asymmetric
+    }
+    op boolean isReflexive() {
+        relationBase.reflexive
+    }
+    op boolean isIrreflexive() {
+       relationBase.irreflexive
+    }
+    op boolean isTransitive() {
+        relationBase.transitive
+    }
+    op Entity getDomain() {
+        relationBase.target
+    }
+    op Entity getRange() {
+        relationBase.source
+    }
+    op Relation getInverse() {
         if (relationBase instanceof RelationEntity)
             (relationBase as RelationEntity).forwardRelation
         else if (relationBase instanceof Relation)
-        	(relationBase as Relation)
+        	relationBase as Relation
     }
 }
 
 /*
- * UnreifiedRelation is a simple relation from a source to a target entity that is not part of a relation entity. 
+ * UnreifiedRelation is a simple relation from a source entity to a target entity. 
  */
 @Bikeshed(heading="Properties")
 class UnreifiedRelation extends Relation, RelationBase {
-    op Entity deriveDomain() {
+    op Entity getDomain() {
         source
     }
-    op Entity deriveRange() {
+    op Entity getRange() {
     	target
     }
-    op Relation deriveInverse() {
+    op Relation getInverse() {
 		reverseRelation
     }
 }
@@ -965,14 +996,10 @@ class UnreifiedRelation extends Relation, RelationBase {
 ////////////////////////////////////////
 
 /*
- * NamedInstance is an instance that is a member of a description. It can specify links to other named instances.
+ * NamedInstance is an instance that is a member of a description.
  */
 @Bikeshed(heading="Instances")
 abstract class NamedInstance extends DescriptionMember, DescriptionStatement, Instance {
-    /*
-     * The links specified by this named instance to other named instances
-     */
-    contains LinkAssertion[*] ownedLinks opposite owningInstance
 }
 
 ////////////////////////////////////////
@@ -991,8 +1018,8 @@ class ConceptInstance extends NamedInstance {
 }
 
 /*
- * RelationInstance is a named instance that can be typed by relation entities and that goes from one or more 
- * named instances as sources to one or more named instances as target.
+ * RelationInstance is a named instance that can be typed by relation entities and represents a relation from one or 
+ * more named instances (as sources) to one or more named instances (as targets).
  */
 @Bikeshed(heading="Instances")
 class RelationInstance extends NamedInstance {
@@ -1079,22 +1106,11 @@ class SpecializationAxiom extends Axiom {
 }
 
 /*
- * RestrictionAxiom is an axiom that states that a term restricts another term.
- */
-@Bikeshed(heading="Axioms")
-abstract class RestrictionAxiom extends Axiom {
-}
-
-////////////////////////////////////////
-//  Restriction Axioms
-////////////////////////////////////////
-
-/*
  * PropertyRestrictionAxiom is an axiom that places some restriction on the value of a property in the context of
- * the restricting classifier domain. It can be specified directly on the classifier or indirectly on a reference to it.
+ * a restricting classifier domain. It can be specified directly on the classifier or indirectly on a reference to it.
  */
 @Bikeshed(heading="Axioms")
-abstract class PropertyRestrictionAxiom extends RestrictionAxiom {
+abstract class PropertyRestrictionAxiom extends Axiom {
     /*
      * The restricting classifier specified by this axiom
      */
@@ -1103,7 +1119,15 @@ abstract class PropertyRestrictionAxiom extends RestrictionAxiom {
      * The reference to a restricting classifier specified by this axiom
      */
     container ClassifierReference[?] owningReference opposite ownedPropertyRestrictions
+    /*
+     * The restricted property
+     */
+    op Property getProperty()
 }
+
+////////////////////////////////////////
+//  Restriction Axioms
+////////////////////////////////////////
 
 /*
  * ScalarPropertyRestrictionAxiom is a property restriction axiom that is specified on a scalar property.
@@ -1155,7 +1179,7 @@ class ScalarPropertyCardinalityRestrictionAxiom extends ScalarPropertyRestrictio
 }
 
 /*
- * ScalarPropertyValueRestrictionAxiom is a scalar property restriction axiom that restricts the value of the property 
+ * ScalarPropertyValueRestrictionAxiom is a scalar property restriction axiom that restricts the value of a property 
  * that has the restricting classifier as a domain to a specific literal.
  */
 @Bikeshed(heading="Axioms")
@@ -1228,29 +1252,21 @@ class StructuredPropertyValueRestrictionAxiom extends StructuredPropertyRestrict
 }
 
 /*
- * RelationRestrictionAxiom is an axiom that places some restriction on the target of a relation in the context of
- * the restricting classifier domain. It can be specified directly on the classifier or indirectly on a reference to it.
+ * RelationRestrictionAxiom is an axiom that places some restriction on a relation in the context of
+ * a restricting classifier domain. It can be specified directly on the classifier or indirectly on a reference to it.
  */
 @Bikeshed(heading="Axioms")
-abstract class RelationRestrictionAxiom extends RestrictionAxiom {
+abstract class RelationRestrictionAxiom extends PropertyRestrictionAxiom {
     /*
      * The restricted relation specified by this axiom
      */
-    refers Relation[1] relation
-    /*
-     * The restricting entity specified by this axiom
-     */
-    container Entity[?] owningEntity opposite ownedRelationRestrictions
-    /*
-     * The reference to a restricting entity specified by this axiom
-     */
-    container EntityReference[?] owningReference opposite ownedRelationRestrictions
+    refers Relation[1] property
 }
 
 /*
- * RelationRangeRestrictionAxiom is a relation restriction axiom that restricts the range of a relation to specific subtype. 
- * This restrictions may apply to all or to some instances of the relation that have an instance of the restricting entity as 
- * a source.
+ * RelationRangeRestrictionAxiom is a relation restriction axiom that restricts the range of a relation to a specific 
+ * subtype in the context of a given domain. It can specify whether all or only some usage of the property have values that conform
+ * to this restriction.
  */
 @Bikeshed(heading="Axioms")
 class RelationRangeRestrictionAxiom extends RelationRestrictionAxiom {
@@ -1265,9 +1281,9 @@ class RelationRangeRestrictionAxiom extends RelationRestrictionAxiom {
 }
 
 /*
- * RelationCardinalityRestrictionAxiom is a relation restriction axiom that restricts the cardinality of a relation's range
- * to an exact number, a minimum number or a maximum number. This restrictions may either apply generally to all targets of 
- * of the relation that have instances of the restricting entity as sources, or to those classified by a specific range subtype.
+ * RelationCardinalityRestrictionAxiom is an relation restriction axiom that restricts the cardinality of a relation's range
+ * to an exact number, a minimum number or a maximum number. This restrictions may either apply to all values of the relation, 
+ * or to those classified by a specific range subtype.
  */
 @Bikeshed(heading="Axioms")
 class RelationCardinalityRestrictionAxiom extends RelationRestrictionAxiom {
@@ -1286,15 +1302,16 @@ class RelationCardinalityRestrictionAxiom extends RelationRestrictionAxiom {
 }
 
 /*
- * RelationTargetRestrictionAxiom is a relation restriction axiom that restricts the target of the relation
+ * RelationValueRestrictionAxiom is a relation restriction axiom that restricts the value of a relation
  * to a specific named instance.
  */
 @Bikeshed(heading="Axioms")
-class RelationTargetRestrictionAxiom extends RelationRestrictionAxiom {
+class RelationValueRestrictionAxiom extends RelationRestrictionAxiom {
     /*
-     * The named instance specified as a restricted relation target by this axiom 
+     * The named instance specified as a restricted value by this axiom 
      */
-    refers NamedInstance[1] target
+    refers NamedInstance[1] value
+    
 }
 
 ////////////////////////////////////////
@@ -1407,29 +1424,18 @@ class StructuredPropertyValueAssertion extends PropertyValueAssertion {
 }
 
 /*
- * LinkAssertion is an assertion that specifies a link from the asserting named instance as a source to another 
- * named instance as a target. Unlike a relation instance, which is typed by a relation entity, a link references
- * a relation that has the type of the source instance as a conforming domain and the type of the target instance 
- * as a conforming range.
+ * LinkAssertion is a property value assertion for a relation, where the specified value is a named instance.
  */
 @Bikeshed(heading="Assertions")
-class LinkAssertion extends Assertion {
+class LinkAssertion extends PropertyValueAssertion {
     /*
-     * The relation referenced by this link
+     * The relation referenced by this assertion
      */
-    refers Relation[1] relation
+    refers Relation[1] property
     /*
-     * The named instance that is target of this link
+     * The named instance specified as a value by this assertion
      */
-    refers NamedInstance[1] target
-    /*
-     * The named instance that is the source of this link
-     */
-    container NamedInstance[?] owningInstance opposite ownedLinks
-    /*
-     * The reference to a named instance that this the source of this link
-     */
-    container NamedInstanceReference[?] owningReference opposite ownedLinks
+    refers NamedInstance[1] value
 }
 
 ////////////////////////////////////////
@@ -1636,14 +1642,10 @@ abstract class ClassifierReference extends SpecializableTermReference {
 }
 
 /*
- * EntityReference is a reference to an entity that can be used to add other relation restrictions to it.
+ * EntityReference is a reference to an entity that can be used to add other key axioms to it.
  */
 @Bikeshed(heading="References")
 abstract class EntityReference extends ClassifierReference {
-    /*
-     * The set of relation restriction axioms added to the referenced entity by this reference
-     */
-    contains RelationRestrictionAxiom[*] ownedRelationRestrictions opposite owningReference
     /*
      * The keys of the referenced entity specified by this reference
      */
@@ -1750,7 +1752,7 @@ class EnumeratedScalarReference extends SpecializableTermReference {
 }
 
 /*
- * RelationReference is a reference to an relation.
+ * RelationReference is a reference to a relation.
  */
 @Bikeshed(heading="References")
 class RelationReference extends Reference , VocabularyStatement {
@@ -1772,8 +1774,7 @@ class RuleReference extends Reference , VocabularyStatement {
 }
 
 /*
- * NamedInstanceReference is a reference to an named instance that can be used to add other property value and
- * links to it.
+ * NamedInstanceReference is a reference to an named instance that can be used to add other property values.
  */
 @Bikeshed(heading="References")
 abstract class NamedInstanceReference extends Reference , DescriptionStatement {
@@ -1781,10 +1782,6 @@ abstract class NamedInstanceReference extends Reference , DescriptionStatement {
      * The property value assertions added to referenced named instance by this reference
      */
     contains PropertyValueAssertion[*] ownedPropertyValues opposite owningReference
-    /*
-     * The link assertions added to the referenced named instance by this reference
-     */
-    contains LinkAssertion[*] ownedLinks opposite owningReference
 }
 
 /*
@@ -1832,7 +1829,7 @@ enum SeparatorKind {
 }
 
 /*
- * RangeRestrictionKind is an enumeration that specifies the scope of a range restriction on a property or a relation
+ * RangeRestrictionKind is an enumeration that specifies the scope of a range restriction on a property
  */
 @Bikeshed(heading="Axioms")
 enum RangeRestrictionKind {
@@ -1847,7 +1844,7 @@ enum RangeRestrictionKind {
 }
 
 /*
- * CardinalityRestrictionKind is an enumeration that specifies the kind of cardinality restriction on a property or relation
+ * CardinalityRestrictionKind is an enumeration that specifies the kind of cardinality restriction on a property
  */
 @Bikeshed(heading="Axioms")
 enum CardinalityRestrictionKind {

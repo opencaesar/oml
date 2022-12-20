@@ -25,9 +25,9 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * ForwardRelation is a relation that is defined along side a relation entity, whose domain is the source of the relation
- * entity, and whose range is the target of the relation entity. A forward relation has DL semantics that are specified
- * by the boolean flags of its relation entity.
+ * ForwardRelation is a relation that is defined by a relation entity. Its domain is the source of the relation
+ * entity, and its range is the target of the relation entity. The DL semantics of a forward property are the same as those
+ * of its relation entity.
  * <!-- end-model-doc -->
  *
  * <p>
@@ -35,7 +35,6 @@ package io.opencaesar.oml;
  * </p>
  * <ul>
  *   <li>{@link io.opencaesar.oml.ForwardRelation#getRelationEntity <em>Relation Entity</em>}</li>
- *   <li>{@link io.opencaesar.oml.ForwardRelation#isFunctional <em>Functional</em>}</li>
  * </ul>
  *
  * @see io.opencaesar.oml.OmlPackage#getForwardRelation()
@@ -49,7 +48,7 @@ public interface ForwardRelation extends Relation {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The relation entity that owns this relation as forward
+	 * The relation entity that owns this forward property
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Relation Entity</em>' container reference.
 	 * @see #setRelationEntity(RelationEntity)
@@ -71,15 +70,9 @@ public interface ForwardRelation extends Relation {
 	void setRelationEntity(RelationEntity value);
 
 	/**
-	 * Returns the value of the '<em><b>Functional</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * Whether this property is functional (has a max of one value per instance)
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Functional</em>' attribute.
-	 * @see io.opencaesar.oml.OmlPackage#getForwardRelation_Functional()
-	 * @model unique="false" transient="true" changeable="false" volatile="true" derived="true"
+	 * @model kind="operation" unique="false"
 	 * @generated
 	 */
 	boolean isFunctional();
@@ -87,25 +80,73 @@ public interface ForwardRelation extends Relation {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model unique="false"
+	 * @model kind="operation" unique="false"
 	 * @generated
 	 */
-	Entity deriveDomain();
+	boolean isInverseFunctional();
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model unique="false"
+	 * @model kind="operation" unique="false"
 	 * @generated
 	 */
-	Entity deriveRange();
+	boolean isSymmetric();
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model unique="false"
+	 * @model kind="operation" unique="false"
 	 * @generated
 	 */
-	Relation deriveInverse();
+	boolean isAsymmetric();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
+	boolean isReflexive();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
+	boolean isIrreflexive();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
+	boolean isTransitive();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
+	Entity getDomain();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
+	Entity getRange();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
+	Relation getInverse();
 
 } // ForwardRelation

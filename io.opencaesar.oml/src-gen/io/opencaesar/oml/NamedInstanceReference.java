@@ -26,8 +26,7 @@ import org.eclipse.emf.common.util.EList;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * NamedInstanceReference is a reference to an named instance that can be used to add other property value and
- * links to it.
+ * NamedInstanceReference is a reference to an named instance that can be used to add other property values.
  * <!-- end-model-doc -->
  *
  * <p>
@@ -35,7 +34,6 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  * <ul>
  *   <li>{@link io.opencaesar.oml.NamedInstanceReference#getOwnedPropertyValues <em>Owned Property Values</em>}</li>
- *   <li>{@link io.opencaesar.oml.NamedInstanceReference#getOwnedLinks <em>Owned Links</em>}</li>
  * </ul>
  *
  * @see io.opencaesar.oml.OmlPackage#getNamedInstanceReference()
@@ -60,22 +58,5 @@ public interface NamedInstanceReference extends Reference, DescriptionStatement 
 	 * @generated
 	 */
 	EList<PropertyValueAssertion> getOwnedPropertyValues();
-
-	/**
-	 * Returns the value of the '<em><b>Owned Links</b></em>' containment reference list.
-	 * The list contents are of type {@link io.opencaesar.oml.LinkAssertion}.
-	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.LinkAssertion#getOwningReference <em>Owning Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * The link assertions added to the referenced named instance by this reference
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Owned Links</em>' containment reference list.
-	 * @see io.opencaesar.oml.OmlPackage#getNamedInstanceReference_OwnedLinks()
-	 * @see io.opencaesar.oml.LinkAssertion#getOwningReference
-	 * @model opposite="owningReference" containment="true"
-	 * @generated
-	 */
-	EList<LinkAssertion> getOwnedLinks();
 
 } // NamedInstanceReference

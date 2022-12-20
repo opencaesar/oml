@@ -30,7 +30,7 @@ import org.eclipse.emf.common.util.Enumerator;
  * and utility methods for working with them.
  * <!-- end-user-doc -->
  * <!-- begin-model-doc -->
- * CardinalityRestrictionKind is an enumeration that specifies the kind of cardinality restriction on a property or relation
+ * CardinalityRestrictionKind is an enumeration that specifies the kind of cardinality restriction on a property
  * <!-- end-model-doc -->
  * @see io.opencaesar.oml.OmlPackage#getCardinalityRestrictionKind()
  * @model annotation="https://tabatkins.github.io/bikeshed heading='Axioms'"

@@ -36,7 +36,7 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
  * <!-- end-user-doc -->
  * @generated
  */
-public class RelationRestrictionAxiomItemProvider extends RestrictionAxiomItemProvider {
+public class RelationRestrictionAxiomItemProvider extends PropertyRestrictionAxiomItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
@@ -58,71 +58,25 @@ public class RelationRestrictionAxiomItemProvider extends RestrictionAxiomItemPr
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addRelationPropertyDescriptor(object);
-			addOwningEntityPropertyDescriptor(object);
-			addOwningReferencePropertyDescriptor(object);
+			addPropertyPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Relation feature.
+	 * This adds a property descriptor for the Property feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addRelationPropertyDescriptor(Object object) {
+	protected void addPropertyPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_RelationRestrictionAxiom_relation_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_RelationRestrictionAxiom_relation_feature", "_UI_RelationRestrictionAxiom_type"),
-				 OmlPackage.Literals.RELATION_RESTRICTION_AXIOM__RELATION,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Owning Entity feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addOwningEntityPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_RelationRestrictionAxiom_owningEntity_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_RelationRestrictionAxiom_owningEntity_feature", "_UI_RelationRestrictionAxiom_type"),
-				 OmlPackage.Literals.RELATION_RESTRICTION_AXIOM__OWNING_ENTITY,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Owning Reference feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addOwningReferencePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_RelationRestrictionAxiom_owningReference_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_RelationRestrictionAxiom_owningReference_feature", "_UI_RelationRestrictionAxiom_type"),
-				 OmlPackage.Literals.RELATION_RESTRICTION_AXIOM__OWNING_REFERENCE,
+				 getString("_UI_RelationRestrictionAxiom_property_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_RelationRestrictionAxiom_property_feature", "_UI_RelationRestrictionAxiom_type"),
+				 OmlPackage.Literals.RELATION_RESTRICTION_AXIOM__PROPERTY,
 				 true,
 				 false,
 				 true,

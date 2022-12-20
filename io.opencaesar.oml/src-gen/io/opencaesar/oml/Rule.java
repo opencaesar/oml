@@ -27,7 +27,7 @@ import org.eclipse.emf.common.util.EList;
  *
  * <!-- begin-model-doc -->
  * Rule is a member of a vocabulary that adds a new inference rule to the set supported natively by DL. A rule specifies a set
- * of antecedent predicates that forms a conjunction that infers, when it holds, a single consequent (relation) predicate. Each
+ * of antecedent predicates that forms a conjunction that infers, when it holds, a single consequent predicate. Each
  * predicate in a rule may specify (one or two) variables. Those with the same name refer to the same variable, and hence must
  * be bound to the same value from the model for the rule to trigger during reasoning.
  * <!-- end-model-doc -->
@@ -69,7 +69,7 @@ public interface Rule extends VocabularyMember, VocabularyStatement {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The relation predicate that is the consequent of this rule
+	 * The predicate that is the consequent of this rule
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Consequent</em>' containment reference list.
 	 * @see io.opencaesar.oml.OmlPackage#getRule_Consequent()

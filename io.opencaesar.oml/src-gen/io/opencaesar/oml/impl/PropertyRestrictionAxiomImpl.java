@@ -21,10 +21,15 @@ package io.opencaesar.oml.impl;
 import io.opencaesar.oml.Classifier;
 import io.opencaesar.oml.ClassifierReference;
 import io.opencaesar.oml.OmlPackage;
+import io.opencaesar.oml.Property;
 import io.opencaesar.oml.PropertyRestrictionAxiom;
+
+import java.lang.reflect.InvocationTargetException;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -47,7 +52,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  *
  * @generated
  */
-public abstract class PropertyRestrictionAxiomImpl extends RestrictionAxiomImpl implements PropertyRestrictionAxiom {
+public abstract class PropertyRestrictionAxiomImpl extends AxiomImpl implements PropertyRestrictionAxiom {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -179,6 +184,18 @@ public abstract class PropertyRestrictionAxiomImpl extends RestrictionAxiomImpl 
 	 * @generated
 	 */
 	@Override
+	public Property getProperty() {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case OmlPackage.PROPERTY_RESTRICTION_AXIOM__OWNING_CLASSIFIER:
@@ -293,6 +310,20 @@ public abstract class PropertyRestrictionAxiomImpl extends RestrictionAxiomImpl 
 				return basicGetOwningReference() != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case OmlPackage.PROPERTY_RESTRICTION_AXIOM___GET_PROPERTY:
+				return getProperty();
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 } //PropertyRestrictionAxiomImpl

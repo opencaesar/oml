@@ -25,9 +25,9 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * RelationCardinalityRestrictionAxiom is a relation restriction axiom that restricts the cardinality of a relation's range
- * to an exact number, a minimum number or a maximum number. This restrictions may either apply generally to all targets of
- * of the relation that have instances of the restricting entity as sources, or to those classified by a specific range subtype.
+ * RelationCardinalityRestrictionAxiom is an relation restriction axiom that restricts the cardinality of a relation's range
+ * to an exact number, a minimum number or a maximum number. This restrictions may either apply to all values of the relation,
+ * or to those classified by a specific range subtype.
  * <!-- end-model-doc -->
  *
  * <p>

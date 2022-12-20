@@ -26,15 +26,14 @@ import org.eclipse.emf.common.util.EList;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Entity is a characterizable type whose instances can be interrelated by relations (that have the entity
- * or one of its specialized entities as their domain). It can also specify constraints on relations in its domain.
+ * Entity is a classifier whose instances are named and can be interrelated. It can also additionally specify key axioms
+ * that define how instances of the entity are unique.
  * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link io.opencaesar.oml.Entity#getOwnedRelationRestrictions <em>Owned Relation Restrictions</em>}</li>
  *   <li>{@link io.opencaesar.oml.Entity#getOwnedKeys <em>Owned Keys</em>}</li>
  * </ul>
  *
@@ -44,23 +43,6 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface Entity extends Classifier {
-	/**
-	 * Returns the value of the '<em><b>Owned Relation Restrictions</b></em>' containment reference list.
-	 * The list contents are of type {@link io.opencaesar.oml.RelationRestrictionAxiom}.
-	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.RelationRestrictionAxiom#getOwningEntity <em>Owning Entity</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * The set of restriction axioms on relations in this entity's domain
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Owned Relation Restrictions</em>' containment reference list.
-	 * @see io.opencaesar.oml.OmlPackage#getEntity_OwnedRelationRestrictions()
-	 * @see io.opencaesar.oml.RelationRestrictionAxiom#getOwningEntity
-	 * @model opposite="owningEntity" containment="true"
-	 * @generated
-	 */
-	EList<RelationRestrictionAxiom> getOwnedRelationRestrictions();
-
 	/**
 	 * Returns the value of the '<em><b>Owned Keys</b></em>' containment reference list.
 	 * The list contents are of type {@link io.opencaesar.oml.KeyAxiom}.

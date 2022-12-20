@@ -36,7 +36,7 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
  * <!-- end-user-doc -->
  * @generated
  */
-public class LinkAssertionItemProvider extends AssertionItemProvider {
+public class LinkAssertionItemProvider extends PropertyValueAssertionItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
@@ -58,28 +58,26 @@ public class LinkAssertionItemProvider extends AssertionItemProvider {
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addRelationPropertyDescriptor(object);
-			addTargetPropertyDescriptor(object);
-			addOwningInstancePropertyDescriptor(object);
-			addOwningReferencePropertyDescriptor(object);
+			addPropertyPropertyDescriptor(object);
+			addValuePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Relation feature.
+	 * This adds a property descriptor for the Property feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addRelationPropertyDescriptor(Object object) {
+	protected void addPropertyPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_LinkAssertion_relation_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_LinkAssertion_relation_feature", "_UI_LinkAssertion_type"),
-				 OmlPackage.Literals.LINK_ASSERTION__RELATION,
+				 getString("_UI_LinkAssertion_property_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_LinkAssertion_property_feature", "_UI_LinkAssertion_type"),
+				 OmlPackage.Literals.LINK_ASSERTION__PROPERTY,
 				 true,
 				 false,
 				 true,
@@ -89,63 +87,19 @@ public class LinkAssertionItemProvider extends AssertionItemProvider {
 	}
 
 	/**
-	 * This adds a property descriptor for the Target feature.
+	 * This adds a property descriptor for the Value feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addTargetPropertyDescriptor(Object object) {
+	protected void addValuePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_LinkAssertion_target_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_LinkAssertion_target_feature", "_UI_LinkAssertion_type"),
-				 OmlPackage.Literals.LINK_ASSERTION__TARGET,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Owning Instance feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addOwningInstancePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_LinkAssertion_owningInstance_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_LinkAssertion_owningInstance_feature", "_UI_LinkAssertion_type"),
-				 OmlPackage.Literals.LINK_ASSERTION__OWNING_INSTANCE,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Owning Reference feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addOwningReferencePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_LinkAssertion_owningReference_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_LinkAssertion_owningReference_feature", "_UI_LinkAssertion_type"),
-				 OmlPackage.Literals.LINK_ASSERTION__OWNING_REFERENCE,
+				 getString("_UI_LinkAssertion_value_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_LinkAssertion_value_feature", "_UI_LinkAssertion_type"),
+				 OmlPackage.Literals.LINK_ASSERTION__VALUE,
 				 true,
 				 false,
 				 true,

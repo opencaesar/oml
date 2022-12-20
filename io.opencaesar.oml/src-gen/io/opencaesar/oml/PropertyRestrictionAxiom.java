@@ -26,7 +26,7 @@ package io.opencaesar.oml;
  *
  * <!-- begin-model-doc -->
  * PropertyRestrictionAxiom is an axiom that places some restriction on the value of a property in the context of
- * the restricting classifier domain. It can be specified directly on the classifier or indirectly on a reference to it.
+ * a restricting classifier domain. It can be specified directly on the classifier or indirectly on a reference to it.
  * <!-- end-model-doc -->
  *
  * <p>
@@ -42,7 +42,7 @@ package io.opencaesar.oml;
  *        annotation="https://tabatkins.github.io/bikeshed heading='Axioms'"
  * @generated
  */
-public interface PropertyRestrictionAxiom extends RestrictionAxiom {
+public interface PropertyRestrictionAxiom extends Axiom {
 	/**
 	 * Returns the value of the '<em><b>Owning Classifier</b></em>' container reference.
 	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.Classifier#getOwnedPropertyRestrictions <em>Owned Property Restrictions</em>}'.
@@ -96,5 +96,16 @@ public interface PropertyRestrictionAxiom extends RestrictionAxiom {
 	 * @generated
 	 */
 	void setOwningReference(ClassifierReference value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The restricted property
+	 * <!-- end-model-doc -->
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
+	Property getProperty();
 
 } // PropertyRestrictionAxiom

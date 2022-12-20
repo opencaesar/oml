@@ -103,7 +103,6 @@ public class NamedInstanceReferenceItemProvider extends ReferenceItemProvider {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(OmlPackage.Literals.NAMED_INSTANCE_REFERENCE__OWNED_PROPERTY_VALUES);
-			childrenFeatures.add(OmlPackage.Literals.NAMED_INSTANCE_REFERENCE__OWNED_LINKS);
 		}
 		return childrenFeatures;
 	}
@@ -146,7 +145,6 @@ public class NamedInstanceReferenceItemProvider extends ReferenceItemProvider {
 
 		switch (notification.getFeatureID(NamedInstanceReference.class)) {
 			case OmlPackage.NAMED_INSTANCE_REFERENCE__OWNED_PROPERTY_VALUES:
-			case OmlPackage.NAMED_INSTANCE_REFERENCE__OWNED_LINKS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -176,7 +174,7 @@ public class NamedInstanceReferenceItemProvider extends ReferenceItemProvider {
 
 		newChildDescriptors.add
 			(createChildParameter
-				(OmlPackage.Literals.NAMED_INSTANCE_REFERENCE__OWNED_LINKS,
+				(OmlPackage.Literals.NAMED_INSTANCE_REFERENCE__OWNED_PROPERTY_VALUES,
 				 OmlFactory.eINSTANCE.createLinkAssertion()));
 	}
 

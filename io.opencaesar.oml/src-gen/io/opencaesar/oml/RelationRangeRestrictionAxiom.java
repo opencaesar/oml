@@ -25,9 +25,9 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * RelationRangeRestrictionAxiom is a relation restriction axiom that restricts the range of a relation to specific subtype.
- * This restrictions may apply to all or to some instances of the relation that have an instance of the restricting entity as
- * a source.
+ * RelationRangeRestrictionAxiom is a relation restriction axiom that restricts the range of a relation to a specific
+ * subtype in the context of a given domain. It can specify whether all or only some usage of the property have values that conform
+ * to this restriction.
  * <!-- end-model-doc -->
  *
  * <p>

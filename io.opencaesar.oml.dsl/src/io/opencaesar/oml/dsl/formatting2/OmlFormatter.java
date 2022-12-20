@@ -68,7 +68,7 @@ import io.opencaesar.oml.RelationInstance;
 import io.opencaesar.oml.RelationInstanceReference;
 import io.opencaesar.oml.RelationRangeRestrictionAxiom;
 import io.opencaesar.oml.RelationReference;
-import io.opencaesar.oml.RelationTargetRestrictionAxiom;
+import io.opencaesar.oml.RelationValueRestrictionAxiom;
 import io.opencaesar.oml.ReverseRelation;
 import io.opencaesar.oml.Rule;
 import io.opencaesar.oml.RuleReference;
@@ -166,7 +166,6 @@ public class OmlFormatter extends AbstractJavaFormatter {
 		formatBrackets(aspect, doc);
 		aspect.getOwnedKeys().forEach(i -> doc.prepend(doc.format(i), newLine()));
 		aspect.getOwnedPropertyRestrictions().forEach(i -> doc.prepend(doc.format(i), newLine()));
-		aspect.getOwnedRelationRestrictions().forEach(i -> doc.prepend(doc.format(i), newLine()));
 	}
 
 	protected void _format(Concept concept, IFormattableDocument doc) {
@@ -177,7 +176,6 @@ public class OmlFormatter extends AbstractJavaFormatter {
 		formatBrackets(concept, doc);
 		concept.getOwnedKeys().forEach(i -> doc.prepend(doc.format(i), newLine()));
 		concept.getOwnedPropertyRestrictions().forEach(i -> doc.prepend(doc.format(i), newLine()));
-		concept.getOwnedRelationRestrictions().forEach(i -> doc.prepend(doc.format(i), newLine()));
 		ifNotEmpty(concept.getEnumeratedInstances(), i -> {
 			doc.prepend(keyword(concept, oml.getConceptAccess().getEnumeratesKeyword_4_2_0()), newLine());
 			i.forEach(j -> doc.append(doc.prepend(doc.format(j), oneSpace()), noSpace()));
@@ -203,7 +201,6 @@ public class OmlFormatter extends AbstractJavaFormatter {
 		doc.prepend(keyword(entity, oml.getRelationEntityAccess().getTransitiveTransitiveKeyword_11_6_0()), newLine());
 		entity.getOwnedKeys().forEach(i -> doc.prepend(doc.format(i), newLine()));
 		entity.getOwnedPropertyRestrictions().forEach(i -> doc.prepend(doc.format(i), newLine()));
-		entity.getOwnedRelationRestrictions().forEach(i -> doc.prepend(doc.format(i), newLine()));
 	}
 
 	protected void _format(Structure structure, IFormattableDocument doc) {
@@ -317,7 +314,6 @@ public class OmlFormatter extends AbstractJavaFormatter {
 		formatCommas(instance, doc);
 		formatBrackets(instance, doc);
 		instance.getOwnedPropertyValues().forEach(i -> doc.prepend(doc.format(i), newLine()));
-		instance.getOwnedLinks().forEach(i -> doc.prepend(doc.format(i), newLine()));
 	}
 
 	protected void _format(RelationInstance instance, IFormattableDocument doc) {
@@ -331,7 +327,6 @@ public class OmlFormatter extends AbstractJavaFormatter {
 		doc.append(doc.prepend(keyword(instance, oml.getRelationInstanceAccess().getToKeyword_8()), newLine()), oneSpace());
 		instance.getTargets().forEach(i -> doc.prepend(doc.format(i), oneSpace()));
 		instance.getOwnedPropertyValues().forEach(i -> doc.prepend(doc.format(i), newLine()));
-		instance.getOwnedLinks().forEach(i -> doc.prepend(doc.format(i), newLine()));
 	}
 
 	protected void _format(StructureInstance instance, IFormattableDocument doc) {
@@ -347,7 +342,6 @@ public class OmlFormatter extends AbstractJavaFormatter {
 		formatBrackets(reference, doc);
 		reference.getOwnedKeys().forEach(i -> doc.prepend(doc.format(i), newLine()));
 		reference.getOwnedPropertyRestrictions().forEach(i -> doc.prepend(doc.format(i), newLine()));
-		reference.getOwnedRelationRestrictions().forEach(i -> doc.prepend(doc.format(i), newLine()));
 	}
 
 	protected void _format(ConceptReference reference, IFormattableDocument doc) {
@@ -358,7 +352,6 @@ public class OmlFormatter extends AbstractJavaFormatter {
 		formatBrackets(reference, doc);
 		reference.getOwnedKeys().forEach(i -> doc.prepend(doc.format(i), newLine()));
 		reference.getOwnedPropertyRestrictions().forEach(i -> doc.prepend(doc.format(i), newLine()));
-		reference.getOwnedRelationRestrictions().forEach(i -> doc.prepend(doc.format(i), newLine()));
 	}
 
 	protected void _format(RelationEntityReference reference, IFormattableDocument doc) {
@@ -370,7 +363,6 @@ public class OmlFormatter extends AbstractJavaFormatter {
 		formatBrackets(reference, doc);
 		reference.getOwnedKeys().forEach(i -> doc.prepend(doc.format(i), newLine()));
 		reference.getOwnedPropertyRestrictions().forEach(i -> doc.prepend(doc.format(i), newLine()));
-		reference.getOwnedRelationRestrictions().forEach(i -> doc.prepend(doc.format(i), newLine()));
 	}
 
 	protected void _format(StructureReference reference, IFormattableDocument doc) {
@@ -440,7 +432,6 @@ public class OmlFormatter extends AbstractJavaFormatter {
 		formatCommas(reference, doc);
 		formatBrackets(reference, doc);
 		reference.getOwnedPropertyValues().forEach(i -> doc.prepend(doc.format(i), newLine()));
-		reference.getOwnedLinks().forEach(i -> doc.prepend(doc.format(i), newLine()));
 	}
 
 	protected void _format(RelationInstanceReference reference, IFormattableDocument doc) {
@@ -450,7 +441,6 @@ public class OmlFormatter extends AbstractJavaFormatter {
 		formatCommas(reference, doc);
 		formatBrackets(reference, doc);
 		reference.getOwnedPropertyValues().forEach(i -> doc.prepend(doc.format(i), newLine()));
-		reference.getOwnedLinks().forEach(i -> doc.prepend(doc.format(i), newLine()));
 	}
 
 	protected void _format(Extension extension, IFormattableDocument doc) {
@@ -528,11 +518,11 @@ public class OmlFormatter extends AbstractJavaFormatter {
 		ifNotNull(axiom.getRange(), i -> doc.prepend(feature(i, OmlPackage.Literals.RELATION_CARDINALITY_RESTRICTION_AXIOM__RANGE), oneSpace()));
 	}
 
-	protected void _format(RelationTargetRestrictionAxiom axiom, IFormattableDocument doc) {
-		doc.append(keyword(axiom, oml.getRelationTargetRestrictionAxiomAccess().getRestrictsKeyword_0()), oneSpace());
-		doc.surround(keyword(axiom, oml.getRelationTargetRestrictionAxiomAccess().getRelationKeyword_1()), oneSpace());
-		doc.surround(keyword(axiom, oml.getRelationTargetRestrictionAxiomAccess().getToKeyword_3()), oneSpace());
-		doc.surround(feature(axiom, OmlPackage.Literals.RELATION_TARGET_RESTRICTION_AXIOM__TARGET), oneSpace());
+	protected void _format(RelationValueRestrictionAxiom axiom, IFormattableDocument doc) {
+		doc.append(keyword(axiom, oml.getRelationValueRestrictionAxiomAccess().getRestrictsKeyword_0()), oneSpace());
+		doc.surround(keyword(axiom, oml.getRelationValueRestrictionAxiomAccess().getRelationKeyword_1()), oneSpace());
+		doc.surround(keyword(axiom, oml.getRelationValueRestrictionAxiomAccess().getToKeyword_3()), oneSpace());
+		doc.surround(feature(axiom, OmlPackage.Literals.RELATION_VALUE_RESTRICTION_AXIOM__VALUE), oneSpace());
 	}
 
 	protected void _format(KeyAxiom axiom, IFormattableDocument doc) {
@@ -550,7 +540,7 @@ public class OmlFormatter extends AbstractJavaFormatter {
 	}
 
 	protected void _format(LinkAssertion assertion, IFormattableDocument doc) {
-		doc.append(feature(assertion, OmlPackage.Literals.LINK_ASSERTION__RELATION), oneSpace());
+		doc.append(feature(assertion, OmlPackage.Literals.LINK_ASSERTION__PROPERTY), oneSpace());
 	}
 
 	protected void _format(TypePredicate predicate, IFormattableDocument doc) {

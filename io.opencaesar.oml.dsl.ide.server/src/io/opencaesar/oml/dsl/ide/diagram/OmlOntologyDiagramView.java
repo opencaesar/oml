@@ -37,7 +37,7 @@ import io.opencaesar.oml.RelationEntity;
 import io.opencaesar.oml.RelationEntityPredicate;
 import io.opencaesar.oml.RelationInstance;
 import io.opencaesar.oml.RelationRangeRestrictionAxiom;
-import io.opencaesar.oml.RelationTargetRestrictionAxiom;
+import io.opencaesar.oml.RelationValueRestrictionAxiom;
 import io.opencaesar.oml.Rule;
 import io.opencaesar.oml.SameAsPredicate;
 import io.opencaesar.oml.Scalar;
@@ -396,7 +396,7 @@ class OmlOntologyDiagramView {
 	}
 
 	public OmlEdge createEdge(final RelationCardinalityRestrictionAxiom axiom, final SModelElement from, final SModelElement to) {
-		final String id = idCache.uniqueId(axiom, from.getId() + ".restrictsCardinality." + getLocalName(axiom.getRelation()));
+		final String id = idCache.uniqueId(axiom, from.getId() + ".restrictsCardinality." + getLocalName(axiom.getProperty()));
 		final OmlLabel l = newLeafSElement(OmlLabel.class, id + ".label", OmlDiagramModule.SLabel_RestrictsLabelView);
 		final String notation;
 		switch (axiom.getKind()) {
@@ -412,26 +412,26 @@ class OmlOntologyDiagramView {
 		default:
 			throw new IllegalArgumentException("createEdge(RelationCardinalityRestrictionAxiom) -- unrecognized kind: " + axiom.getKind());
 		}
-		l.setText("⎸" + getLocalName(axiom.getRelation()) + "⎹" + notation + axiom.getCardinality());
+		l.setText("⎸" + getLocalName(axiom.getProperty()) + "⎹" + notation + axiom.getCardinality());
 		final OmlEdge e = newEdge(from, to, id, OmlDiagramModule.OmlEdge_RestrictsArrowEdgeView);
 		e.setChildren(CollectionLiterals.newArrayList(l));
 		return e;
 	}
 
 	public OmlEdge createEdge(final RelationRangeRestrictionAxiom axiom, final SModelElement from, final SModelElement to) {
-		final String id = idCache.uniqueId(axiom, from.getId() + ".restrictsRange." + getLocalName(axiom.getRelation()));
+		final String id = idCache.uniqueId(axiom, from.getId() + ".restrictsRange." + getLocalName(axiom.getProperty()));
 		final OmlLabel l = newLeafSElement(OmlLabel.class, id + ".label", OmlDiagramModule.SLabel_RestrictsLabelView);
 		final String notation = (axiom.getKind() == RangeRestrictionKind.ALL) ? "∀" : "∃";
-		l.setText(notation + getLocalName(axiom.getRelation()));
+		l.setText(notation + getLocalName(axiom.getProperty()));
 		final OmlEdge e = newEdge(from, to, id, OmlDiagramModule.OmlEdge_RestrictsArrowEdgeView);
 		e.getChildren().add(l);
 		return e;
 	}
 
-	public OmlEdge createEdge(final RelationTargetRestrictionAxiom axiom, final SModelElement from, final SModelElement to) {
-		final String id = idCache.uniqueId(axiom, from.getId() + ".restrictsTarget." + getLocalName(axiom.getRelation()));
+	public OmlEdge createEdge(final RelationValueRestrictionAxiom axiom, final SModelElement from, final SModelElement to) {
+		final String id = idCache.uniqueId(axiom, from.getId() + ".restrictsTarget." + getLocalName(axiom.getProperty()));
 		final OmlLabel l = newLeafSElement(OmlLabel.class, id + ".label", OmlDiagramModule.SLabel_RestrictsLabelView);
-		l.setText(getLocalName(axiom.getRelation()) + " ⊂ ");
+		l.setText(getLocalName(axiom.getProperty()) + " ⊂ ");
 		final OmlEdge e = newEdge(from, to, id, OmlDiagramModule.OmlEdge_RestrictsArrowEdgeView);
 		e.getChildren().add(l);
 		return e;

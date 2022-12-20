@@ -30,8 +30,6 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
-import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
-import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
  * This is the item provider adapter for a {@link io.opencaesar.oml.ForwardRelation} object.
@@ -62,7 +60,6 @@ public class ForwardRelationItemProvider extends RelationItemProvider {
 			super.getPropertyDescriptors(object);
 
 			addRelationEntityPropertyDescriptor(object);
-			addFunctionalPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -85,28 +82,6 @@ public class ForwardRelationItemProvider extends RelationItemProvider {
 				 false,
 				 true,
 				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Functional feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addFunctionalPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_ForwardRelation_functional_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ForwardRelation_functional_feature", "_UI_ForwardRelation_type"),
-				 OmlPackage.Literals.FORWARD_RELATION__FUNCTIONAL,
-				 false,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -147,12 +122,6 @@ public class ForwardRelationItemProvider extends RelationItemProvider {
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
-
-		switch (notification.getFeatureID(ForwardRelation.class)) {
-			case OmlPackage.FORWARD_RELATION__FUNCTIONAL:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-				return;
-		}
 		super.notifyChanged(notification);
 	}
 

@@ -300,10 +300,6 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 				return createSpecializationAxiomAdapter();
 			}
 			@Override
-			public Adapter caseRestrictionAxiom(RestrictionAxiom object) {
-				return createRestrictionAxiomAdapter();
-			}
-			@Override
 			public Adapter casePropertyRestrictionAxiom(PropertyRestrictionAxiom object) {
 				return createPropertyRestrictionAxiomAdapter();
 			}
@@ -352,8 +348,8 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 				return createRelationCardinalityRestrictionAxiomAdapter();
 			}
 			@Override
-			public Adapter caseRelationTargetRestrictionAxiom(RelationTargetRestrictionAxiom object) {
-				return createRelationTargetRestrictionAxiomAdapter();
+			public Adapter caseRelationValueRestrictionAxiom(RelationValueRestrictionAxiom object) {
+				return createRelationValueRestrictionAxiomAdapter();
 			}
 			@Override
 			public Adapter caseTypeAssertion(TypeAssertion object) {
@@ -1280,20 +1276,6 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.RestrictionAxiom <em>Restriction Axiom</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.RestrictionAxiom
-	 * @generated
-	 */
-	public Adapter createRestrictionAxiomAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.PropertyRestrictionAxiom <em>Property Restriction Axiom</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -1462,16 +1444,16 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.RelationTargetRestrictionAxiom <em>Relation Target Restriction Axiom</em>}'.
+	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.RelationValueRestrictionAxiom <em>Relation Value Restriction Axiom</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see io.opencaesar.oml.RelationTargetRestrictionAxiom
+	 * @see io.opencaesar.oml.RelationValueRestrictionAxiom
 	 * @generated
 	 */
-	public Adapter createRelationTargetRestrictionAxiomAdapter() {
+	public Adapter createRelationValueRestrictionAxiomAdapter() {
 		return null;
 	}
 

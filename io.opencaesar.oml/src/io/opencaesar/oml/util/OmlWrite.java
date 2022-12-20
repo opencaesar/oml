@@ -62,7 +62,6 @@ import io.opencaesar.oml.LinkAssertion;
 import io.opencaesar.oml.Literal;
 import io.opencaesar.oml.Member;
 import io.opencaesar.oml.NamedInstance;
-import io.opencaesar.oml.NamedInstanceReference;
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.Ontology;
 import io.opencaesar.oml.Predicate;
@@ -81,8 +80,8 @@ import io.opencaesar.oml.RelationInstance;
 import io.opencaesar.oml.RelationInstanceReference;
 import io.opencaesar.oml.RelationRangeRestrictionAxiom;
 import io.opencaesar.oml.RelationReference;
-import io.opencaesar.oml.RelationTargetRestrictionAxiom;
 import io.opencaesar.oml.RelationTypeAssertion;
+import io.opencaesar.oml.RelationValueRestrictionAxiom;
 import io.opencaesar.oml.ReverseRelation;
 import io.opencaesar.oml.Rule;
 import io.opencaesar.oml.RuleReference;
@@ -983,19 +982,15 @@ public class OmlWrite {
      * Creates an extension and adds it to the given ontology
      * 
      * @param ontology the extending ontology
-     * @param extendedOntologyIri the IRI of the extended ontology
-     * @param extendedOntologySeparator the separator of the extended ontology (optional)
-     * @param extendedOntologyPrefix the prefix of the extended ontology (optional)
+     * @param extensionIri the IRI of the extended ontology
+     * @param extensionSep the separator of the extended ontology (optional)
+     * @param extensionPrefix the prefix of the extended ontology (optional)
      * @return an extension that is added to the extending ontology
      */
-    public static Extension addExtension(Ontology ontology, String extendedOntologyIri, SeparatorKind extendedOntologySeparator, String extendedOntologyPrefix) {
+    public static Extension addExtension(Ontology ontology, String extensionIri, SeparatorKind extensionSep, String extensionPrefix) {
         final Extension extension = create(Extension.class);
-        if (extendedOntologySeparator != null) {
-        	extension.setNamespace(extendedOntologyIri+extendedOntologySeparator);
-        } else {
-            extension.setNamespace(extendedOntologyIri+SeparatorKind.HASH);
-        }
-        extension.setPrefix(extendedOntologyPrefix);
+        extension.setNamespace(extensionIri + ((extensionSep != null) ? extensionSep : SeparatorKind.HASH));
+        extension.setPrefix(extensionPrefix);
         ontology.getOwnedImports().add(extension);
         return extension;
     }
@@ -1006,19 +1001,15 @@ public class OmlWrite {
      * Creates a usage and adds it to the given ontology
      * 
      * @param ontology the using ontology
-     * @param usedOntologyIri the IRI of the used ontology
-     * @param usedOntologySeparator the separator of the used ontology (optional)
-     * @param usedOntologyPrefix the prefix of the used ontology (optional)
+     * @param usageIri the IRI of the used ontology
+     * @param usageSep the separator of the used ontology (optional)
+     * @param usagePrefix the prefix of the used ontology (optional)
      * @return a usage that is added to the using ontology
      */
-    public static Usage addUsage(Ontology ontology, String usedOntologyIri, SeparatorKind usedOntologySeparator, String usedOntologyPrefix) {
+    public static Usage addUsage(Ontology ontology, String usageIri, SeparatorKind usageSep, String usagePrefix) {
         final Usage usage = create(Usage.class);
-        if (usedOntologySeparator != null) {
-        	usage.setNamespace(usedOntologyIri+usedOntologySeparator);
-        } else {
-            usage.setNamespace(usedOntologyIri+SeparatorKind.HASH);
-        }
-        usage.setPrefix(usedOntologyPrefix);
+       	usage.setNamespace(usageIri + ((usageSep != null) ? usageSep : SeparatorKind.HASH));
+        usage.setPrefix(usagePrefix);
         ontology.getOwnedImports().add(usage);
         return usage;
     }
@@ -1029,21 +1020,17 @@ public class OmlWrite {
      * Creates an inclusion and adds it to the given ontology
      * 
      * @param ontology the including ontology
-     * @param includedOntologyIri the IRI of the included ontology
-     * @param includedOntologySeparator the separator of the included ontology (optional)
-     * @param includedOntologyPrefix the prefix of the included ontology (optional)
+     * @param includeIri the IRI of the included ontology
+     * @param includeSep the separator of the included ontology (optional)
+     * @param includePrefix the prefix of the included ontology (optional)
      * @return an inclusion that is added to the including ontology
      */
-    public static Inclusion addInclusion(Ontology ontology, String includedOntologyIri, SeparatorKind includedOntologySeparator, String includedOntologyPrefix) {
-        final Inclusion inclusion = create(Inclusion.class);
-        if (includedOntologySeparator != null) {
-        	inclusion.setNamespace(includedOntologyIri+includedOntologySeparator);
-        } else {
-            inclusion.setNamespace(includedOntologyIri+SeparatorKind.HASH);
-        }
-       inclusion.setPrefix(includedOntologyPrefix);
-       ontology.getOwnedImports().add(inclusion);
-       return inclusion;
+    public static Inclusion addInclusion(Ontology ontology, String includeIri, SeparatorKind includeSep, String includePrefix) {
+		final Inclusion inclusion = create(Inclusion.class);
+		inclusion.setNamespace(includeIri+((includeSep != null) ? includeSep : SeparatorKind.HASH));
+		inclusion.setPrefix(includePrefix);
+		ontology.getOwnedImports().add(inclusion);
+		return inclusion;
     }
 
     // SpecializationAxiom
@@ -1204,9 +1191,9 @@ public class OmlWrite {
     public static RelationRangeRestrictionAxiom addRelationRangeRestrictionAxiom(Vocabulary vocabulary, Entity domain, Relation relation, Entity range, RangeRestrictionKind restrictionKind) {
         final RelationRangeRestrictionAxiom axiom = create(RelationRangeRestrictionAxiom.class);
         axiom.setKind(restrictionKind);
-        setCrossReference(vocabulary, axiom, OmlPackage.Literals.RELATION_RESTRICTION_AXIOM__RELATION, relation);
+        setCrossReference(vocabulary, axiom, OmlPackage.Literals.RELATION_RESTRICTION_AXIOM__PROPERTY, relation);
         setCrossReference(vocabulary, axiom, OmlPackage.Literals.RELATION_RANGE_RESTRICTION_AXIOM__RANGE, range);
-        setContainmentReference(vocabulary, domain, OmlPackage.Literals.ENTITY__OWNED_RELATION_RESTRICTIONS, OmlPackage.Literals.ENTITY_REFERENCE__OWNED_RELATION_RESTRICTIONS, axiom);
+        setContainmentReference(vocabulary, domain, OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS, OmlPackage.Literals.CLASSIFIER_REFERENCE__OWNED_PROPERTY_RESTRICTIONS, axiom);
         return axiom;
     }
     
@@ -1227,28 +1214,28 @@ public class OmlWrite {
         final RelationCardinalityRestrictionAxiom axiom = create(RelationCardinalityRestrictionAxiom.class);
         axiom.setKind(restrictionKind);
         axiom.setCardinality(cardinality);
-        setCrossReference(vocabulary, axiom, OmlPackage.Literals.RELATION_RESTRICTION_AXIOM__RELATION, relation);
+        setCrossReference(vocabulary, axiom, OmlPackage.Literals.RELATION_RESTRICTION_AXIOM__PROPERTY, relation);
         setCrossReference(vocabulary, axiom, OmlPackage.Literals.RELATION_CARDINALITY_RESTRICTION_AXIOM__RANGE, range);
-        setContainmentReference(vocabulary, domain, OmlPackage.Literals.ENTITY__OWNED_RELATION_RESTRICTIONS, OmlPackage.Literals.ENTITY_REFERENCE__OWNED_RELATION_RESTRICTIONS, axiom);
+        setContainmentReference(vocabulary, domain, OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS, OmlPackage.Literals.CLASSIFIER_REFERENCE__OWNED_PROPERTY_RESTRICTIONS, axiom);
         return axiom;
     }
 
-    // RelationTargetRestrictionAxiom
+    // RelationValueRestrictionAxiom
     
     /**
-     * Creates a relation target restriction axiom and adds it to the given vocabulary
+     * Creates a relation value restriction axiom and adds it to the given vocabulary
      * 
      * @param vocabulary the context vocabulary
      * @param domain the given restricting (entity) domain
      * @param relation the given restricted relation
-     * @param target the given (named instance) target of the restriction
+     * @param value the given (named instance) value of the restriction
      * @return a relation target restriction axiom that is added to the given vocabulary
      */
-    public static RelationTargetRestrictionAxiom addRelationTargetRestrictionAxiom(Vocabulary vocabulary, Entity domain, Relation relation, Entity target) {
-        final RelationTargetRestrictionAxiom axiom = create(RelationTargetRestrictionAxiom.class);
-        setCrossReference(vocabulary, axiom, OmlPackage.Literals.RELATION_RESTRICTION_AXIOM__RELATION, relation);
-        setCrossReference(vocabulary, axiom, OmlPackage.Literals.RELATION_TARGET_RESTRICTION_AXIOM__TARGET, target);
-        setContainmentReference(vocabulary, domain, OmlPackage.Literals.ENTITY__OWNED_RELATION_RESTRICTIONS, OmlPackage.Literals.ENTITY_REFERENCE__OWNED_RELATION_RESTRICTIONS, axiom);
+    public static RelationValueRestrictionAxiom addRelationValueRestrictionAxiom(Vocabulary vocabulary, Entity domain, Relation relation, NamedInstance value) {
+        final RelationValueRestrictionAxiom axiom = create(RelationValueRestrictionAxiom.class);
+        setCrossReference(vocabulary, axiom, OmlPackage.Literals.RELATION_RESTRICTION_AXIOM__PROPERTY, relation);
+        setCrossReference(vocabulary, axiom, OmlPackage.Literals.RELATION_VALUE_RESTRICTION_AXIOM__VALUE, value);
+        setContainmentReference(vocabulary, domain, OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS, OmlPackage.Literals.CLASSIFIER_REFERENCE__OWNED_PROPERTY_RESTRICTIONS, axiom);
         return axiom;
     }
 
@@ -1310,57 +1297,18 @@ public class OmlWrite {
      * 
      * @param ontology the context ontology
      * @param instance the given instance
-     * @param property the given scalar property
+     * @param property the given (scalar) property
      * @param value the asserted (literal) value of the property
-     * @return a scalar property value assertion that is added to the given structure instance
+     * @return a scalar property value assertion that is added to the given ontology
      */
     public static ScalarPropertyValueAssertion addScalarPropertyValueAssertion(Ontology ontology, Instance instance, ScalarProperty property, Literal value) {
         final ScalarPropertyValueAssertion assertion = create(ScalarPropertyValueAssertion.class);
         assertion.setValue(value);
-        if (instance != null) {
-        	instance.getOwnedPropertyValues().add(assertion);
-        }
         setCrossReference(ontology, assertion, OmlPackage.Literals.SCALAR_PROPERTY_VALUE_ASSERTION__PROPERTY, property);
+        setContainmentReference(ontology, instance, OmlPackage.Literals.INSTANCE__OWNED_PROPERTY_VALUES, OmlPackage.Literals.NAMED_INSTANCE_REFERENCE__OWNED_PROPERTY_VALUES, assertion);
         return assertion;
     }
         
-    /**
-     * Sets the value of a given annotation property on a given element in the context of a given ontology
-     * 
-     * This function assumes that the scalar property should have a single value in the given ontology context
-     * 
-     * @param ontology the context ontology
-     * @param instance the given instance
-     * @param property the given scalar property
-     * @param value the asserted (literal) value of the property
-     */
-    public static void setScalarPropertyValue(Ontology ontology, Instance instance, ScalarProperty property, Literal value) {
-        ScalarPropertyValueAssertion assertion = null;
-        if (instance != null) {
-	        if (instance.getOntology() == ontology) {
-	            assertion = instance.getOwnedPropertyValues().stream()
-	                .filter(a -> a.getProperty() == property)
-	                .map(a -> (ScalarPropertyValueAssertion)a)
-	                .findFirst().orElse(null);
-	        } else if (instance instanceof NamedInstance){
-	            var reference = (NamedInstanceReference) getOrAddReference(ontology, (NamedInstance)instance);
-	            assertion = reference.getOwnedPropertyValues().stream()
-	                .filter(a -> a.getProperty() == property)
-	                .map(a -> (ScalarPropertyValueAssertion)a)
-	                .findFirst().orElse(null);
-	        }
-        }
-        if (assertion != null) {
-            if (value != null) {
-                assertion.setValue(value);
-            } else {
-                delete(assertion);
-            }
-        } else if (value != null) {
-            assertion = addScalarPropertyValueAssertion(ontology, instance, property, value);
-        }
-    }
-
     // StructuredPropertyValueAssertion
 
     /**
@@ -1368,9 +1316,9 @@ public class OmlWrite {
      * 
      * @param ontology the context ontology
      * @param instance the given instance
-     * @param property the given structured property
-     * @param value the asserted (structure instance) value of the property
-     * @return a structured property value assertion that is added to the given description
+     * @param property the given (structured) property
+     * @param value the asserted (structure instance) value
+     * @return a structured property value assertion that is added to the given ontology
      */
     public static StructuredPropertyValueAssertion addStructuredPropertyValueAssertion(Ontology ontology, Instance instance, StructuredProperty property, StructureInstance value) {
         final StructuredPropertyValueAssertion assertion = create(StructuredPropertyValueAssertion.class);
@@ -1386,16 +1334,16 @@ public class OmlWrite {
      * Creates a link assertion and adds it to the given description
      * 
      * @param description the context description
-     * @param source the given (source) named instance
-     * @param relation the given relation type of the link
-     * @param target the given (target) named instance
+     * @param instance the given named instance
+     * @param property the given (relation) property
+     * @param value the asserted (named instance) value
      * @return a link assertion that is added to the given description
      */
-    public static LinkAssertion addLinkAssertion(Description description, NamedInstance source, Relation relation, NamedInstance target) {
+    public static LinkAssertion addLinkAssertion(Description description, NamedInstance instance, Relation property, NamedInstance value) {
         final LinkAssertion assertion = create(LinkAssertion.class);
-        setCrossReference(description, assertion, OmlPackage.Literals.LINK_ASSERTION__RELATION, relation);
-        setCrossReference(description, assertion, OmlPackage.Literals.LINK_ASSERTION__TARGET, target);
-        setContainmentReference(description, source, OmlPackage.Literals.NAMED_INSTANCE__OWNED_LINKS, OmlPackage.Literals.NAMED_INSTANCE_REFERENCE__OWNED_LINKS, assertion);
+        setCrossReference(description, assertion, OmlPackage.Literals.LINK_ASSERTION__PROPERTY, property);
+        setCrossReference(description, assertion, OmlPackage.Literals.LINK_ASSERTION__VALUE, value);
+        setContainmentReference(description, instance, OmlPackage.Literals.INSTANCE__OWNED_PROPERTY_VALUES, OmlPackage.Literals.NAMED_INSTANCE_REFERENCE__OWNED_PROPERTY_VALUES, assertion);
         return assertion;
     }
 

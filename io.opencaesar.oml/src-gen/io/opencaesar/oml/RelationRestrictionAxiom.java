@@ -25,17 +25,15 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * RelationRestrictionAxiom is an axiom that places some restriction on the target of a relation in the context of
- * the restricting classifier domain. It can be specified directly on the classifier or indirectly on a reference to it.
+ * RelationRestrictionAxiom is an axiom that places some restriction on a relation in the context of
+ * a restricting classifier domain. It can be specified directly on the classifier or indirectly on a reference to it.
  * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link io.opencaesar.oml.RelationRestrictionAxiom#getRelation <em>Relation</em>}</li>
- *   <li>{@link io.opencaesar.oml.RelationRestrictionAxiom#getOwningEntity <em>Owning Entity</em>}</li>
- *   <li>{@link io.opencaesar.oml.RelationRestrictionAxiom#getOwningReference <em>Owning Reference</em>}</li>
+ *   <li>{@link io.opencaesar.oml.RelationRestrictionAxiom#getProperty <em>Property</em>}</li>
  * </ul>
  *
  * @see io.opencaesar.oml.OmlPackage#getRelationRestrictionAxiom()
@@ -43,84 +41,30 @@ package io.opencaesar.oml;
  *        annotation="https://tabatkins.github.io/bikeshed heading='Axioms'"
  * @generated
  */
-public interface RelationRestrictionAxiom extends RestrictionAxiom {
+public interface RelationRestrictionAxiom extends PropertyRestrictionAxiom {
 	/**
-	 * Returns the value of the '<em><b>Relation</b></em>' reference.
+	 * Returns the value of the '<em><b>Property</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * The restricted relation specified by this axiom
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Relation</em>' reference.
-	 * @see #setRelation(Relation)
-	 * @see io.opencaesar.oml.OmlPackage#getRelationRestrictionAxiom_Relation()
+	 * @return the value of the '<em>Property</em>' reference.
+	 * @see #setProperty(Relation)
+	 * @see io.opencaesar.oml.OmlPackage#getRelationRestrictionAxiom_Property()
 	 * @model required="true"
 	 * @generated
 	 */
-	Relation getRelation();
+	Relation getProperty();
 
 	/**
-	 * Sets the value of the '{@link io.opencaesar.oml.RelationRestrictionAxiom#getRelation <em>Relation</em>}' reference.
+	 * Sets the value of the '{@link io.opencaesar.oml.RelationRestrictionAxiom#getProperty <em>Property</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Relation</em>' reference.
-	 * @see #getRelation()
+	 * @param value the new value of the '<em>Property</em>' reference.
+	 * @see #getProperty()
 	 * @generated
 	 */
-	void setRelation(Relation value);
-
-	/**
-	 * Returns the value of the '<em><b>Owning Entity</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.Entity#getOwnedRelationRestrictions <em>Owned Relation Restrictions</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * The restricting entity specified by this axiom
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Owning Entity</em>' container reference.
-	 * @see #setOwningEntity(Entity)
-	 * @see io.opencaesar.oml.OmlPackage#getRelationRestrictionAxiom_OwningEntity()
-	 * @see io.opencaesar.oml.Entity#getOwnedRelationRestrictions
-	 * @model opposite="ownedRelationRestrictions" transient="false"
-	 * @generated
-	 */
-	Entity getOwningEntity();
-
-	/**
-	 * Sets the value of the '{@link io.opencaesar.oml.RelationRestrictionAxiom#getOwningEntity <em>Owning Entity</em>}' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Owning Entity</em>' container reference.
-	 * @see #getOwningEntity()
-	 * @generated
-	 */
-	void setOwningEntity(Entity value);
-
-	/**
-	 * Returns the value of the '<em><b>Owning Reference</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.EntityReference#getOwnedRelationRestrictions <em>Owned Relation Restrictions</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * The reference to a restricting entity specified by this axiom
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Owning Reference</em>' container reference.
-	 * @see #setOwningReference(EntityReference)
-	 * @see io.opencaesar.oml.OmlPackage#getRelationRestrictionAxiom_OwningReference()
-	 * @see io.opencaesar.oml.EntityReference#getOwnedRelationRestrictions
-	 * @model opposite="ownedRelationRestrictions" transient="false"
-	 * @generated
-	 */
-	EntityReference getOwningReference();
-
-	/**
-	 * Sets the value of the '{@link io.opencaesar.oml.RelationRestrictionAxiom#getOwningReference <em>Owning Reference</em>}' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Owning Reference</em>' container reference.
-	 * @see #getOwningReference()
-	 * @generated
-	 */
-	void setOwningReference(EntityReference value);
+	void setProperty(Relation value);
 
 } // RelationRestrictionAxiom

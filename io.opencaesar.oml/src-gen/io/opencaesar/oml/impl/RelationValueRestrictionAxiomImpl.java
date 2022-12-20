@@ -20,7 +20,7 @@ package io.opencaesar.oml.impl;
 
 import io.opencaesar.oml.NamedInstance;
 import io.opencaesar.oml.OmlPackage;
-import io.opencaesar.oml.RelationTargetRestrictionAxiom;
+import io.opencaesar.oml.RelationValueRestrictionAxiom;
 
 import org.eclipse.emf.common.notify.Notification;
 
@@ -31,34 +31,34 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Relation Target Restriction Axiom</b></em>'.
+ * An implementation of the model object '<em><b>Relation Value Restriction Axiom</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link io.opencaesar.oml.impl.RelationTargetRestrictionAxiomImpl#getTarget <em>Target</em>}</li>
+ *   <li>{@link io.opencaesar.oml.impl.RelationValueRestrictionAxiomImpl#getValue <em>Value</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class RelationTargetRestrictionAxiomImpl extends RelationRestrictionAxiomImpl implements RelationTargetRestrictionAxiom {
+public class RelationValueRestrictionAxiomImpl extends RelationRestrictionAxiomImpl implements RelationValueRestrictionAxiom {
 	/**
-	 * The cached value of the '{@link #getTarget() <em>Target</em>}' reference.
+	 * The cached value of the '{@link #getValue() <em>Value</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getTarget()
+	 * @see #getValue()
 	 * @generated
 	 * @ordered
 	 */
-	protected NamedInstance target;
+	protected NamedInstance value;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected RelationTargetRestrictionAxiomImpl() {
+	protected RelationValueRestrictionAxiomImpl() {
 		super();
 	}
 
@@ -69,7 +69,7 @@ public class RelationTargetRestrictionAxiomImpl extends RelationRestrictionAxiom
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return OmlPackage.Literals.RELATION_TARGET_RESTRICTION_AXIOM;
+		return OmlPackage.Literals.RELATION_VALUE_RESTRICTION_AXIOM;
 	}
 
 	/**
@@ -78,16 +78,16 @@ public class RelationTargetRestrictionAxiomImpl extends RelationRestrictionAxiom
 	 * @generated
 	 */
 	@Override
-	public NamedInstance getTarget() {
-		if (target != null && target.eIsProxy()) {
-			InternalEObject oldTarget = (InternalEObject)target;
-			target = (NamedInstance)eResolveProxy(oldTarget);
-			if (target != oldTarget) {
+	public NamedInstance getValue() {
+		if (value != null && value.eIsProxy()) {
+			InternalEObject oldValue = (InternalEObject)value;
+			value = (NamedInstance)eResolveProxy(oldValue);
+			if (value != oldValue) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, OmlPackage.RELATION_TARGET_RESTRICTION_AXIOM__TARGET, oldTarget, target));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, OmlPackage.RELATION_VALUE_RESTRICTION_AXIOM__VALUE, oldValue, value));
 			}
 		}
-		return target;
+		return value;
 	}
 
 	/**
@@ -95,8 +95,8 @@ public class RelationTargetRestrictionAxiomImpl extends RelationRestrictionAxiom
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NamedInstance basicGetTarget() {
-		return target;
+	public NamedInstance basicGetValue() {
+		return value;
 	}
 
 	/**
@@ -105,11 +105,11 @@ public class RelationTargetRestrictionAxiomImpl extends RelationRestrictionAxiom
 	 * @generated
 	 */
 	@Override
-	public void setTarget(NamedInstance newTarget) {
-		NamedInstance oldTarget = target;
-		target = newTarget;
+	public void setValue(NamedInstance newValue) {
+		NamedInstance oldValue = value;
+		value = newValue;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.RELATION_TARGET_RESTRICTION_AXIOM__TARGET, oldTarget, target));
+			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.RELATION_VALUE_RESTRICTION_AXIOM__VALUE, oldValue, value));
 	}
 
 	/**
@@ -120,9 +120,9 @@ public class RelationTargetRestrictionAxiomImpl extends RelationRestrictionAxiom
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case OmlPackage.RELATION_TARGET_RESTRICTION_AXIOM__TARGET:
-				if (resolve) return getTarget();
-				return basicGetTarget();
+			case OmlPackage.RELATION_VALUE_RESTRICTION_AXIOM__VALUE:
+				if (resolve) return getValue();
+				return basicGetValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -135,8 +135,8 @@ public class RelationTargetRestrictionAxiomImpl extends RelationRestrictionAxiom
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case OmlPackage.RELATION_TARGET_RESTRICTION_AXIOM__TARGET:
-				setTarget((NamedInstance)newValue);
+			case OmlPackage.RELATION_VALUE_RESTRICTION_AXIOM__VALUE:
+				setValue((NamedInstance)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -150,8 +150,8 @@ public class RelationTargetRestrictionAxiomImpl extends RelationRestrictionAxiom
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case OmlPackage.RELATION_TARGET_RESTRICTION_AXIOM__TARGET:
-				setTarget((NamedInstance)null);
+			case OmlPackage.RELATION_VALUE_RESTRICTION_AXIOM__VALUE:
+				setValue((NamedInstance)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -165,10 +165,10 @@ public class RelationTargetRestrictionAxiomImpl extends RelationRestrictionAxiom
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case OmlPackage.RELATION_TARGET_RESTRICTION_AXIOM__TARGET:
-				return target != null;
+			case OmlPackage.RELATION_VALUE_RESTRICTION_AXIOM__VALUE:
+				return value != null;
 		}
 		return super.eIsSet(featureID);
 	}
 
-} //RelationTargetRestrictionAxiomImpl
+} //RelationValueRestrictionAxiomImpl

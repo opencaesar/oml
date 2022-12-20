@@ -85,9 +85,8 @@ import io.opencaesar.oml.RelationInstanceReference;
 import io.opencaesar.oml.RelationRangeRestrictionAxiom;
 import io.opencaesar.oml.RelationReference;
 import io.opencaesar.oml.RelationRestrictionAxiom;
-import io.opencaesar.oml.RelationTargetRestrictionAxiom;
 import io.opencaesar.oml.RelationTypeAssertion;
-import io.opencaesar.oml.RestrictionAxiom;
+import io.opencaesar.oml.RelationValueRestrictionAxiom;
 import io.opencaesar.oml.ReverseRelation;
 import io.opencaesar.oml.Rule;
 import io.opencaesar.oml.RuleReference;
@@ -536,13 +535,6 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass restrictionAxiomEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass propertyRestrictionAxiomEClass = null;
 
 	/**
@@ -627,7 +619,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass relationTargetRestrictionAxiomEClass = null;
+	private EClass relationValueRestrictionAxiomEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1793,18 +1785,8 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getEntity_OwnedRelationRestrictions() {
-		return (EReference)entityEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EReference getEntity_OwnedKeys() {
-		return (EReference)entityEClass.getEStructuralFeatures().get(1);
+		return (EReference)entityEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -2133,37 +2115,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getRelation_Domain() {
-		return (EReference)relationEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getRelation_Range() {
-		return (EReference)relationEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getRelation_Inverse() {
-		return (EReference)relationEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EOperation getRelation__DeriveDomain() {
+	public EOperation getRelation__IsInverseFunctional() {
 		return relationEClass.getEOperations().get(0);
 	}
 
@@ -2173,7 +2125,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EOperation getRelation__DeriveRange() {
+	public EOperation getRelation__IsSymmetric() {
 		return relationEClass.getEOperations().get(1);
 	}
 
@@ -2183,8 +2135,68 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EOperation getRelation__DeriveInverse() {
+	public EOperation getRelation__IsAsymmetric() {
 		return relationEClass.getEOperations().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getRelation__IsReflexive() {
+		return relationEClass.getEOperations().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getRelation__IsIrreflexive() {
+		return relationEClass.getEOperations().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getRelation__IsTransitive() {
+		return relationEClass.getEOperations().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getRelation__GetDomain() {
+		return relationEClass.getEOperations().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getRelation__GetRange() {
+		return relationEClass.getEOperations().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getRelation__GetInverse() {
+		return relationEClass.getEOperations().get(8);
 	}
 
 	/**
@@ -2213,17 +2225,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getForwardRelation_Functional() {
-		return (EAttribute)forwardRelationEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EOperation getForwardRelation__DeriveDomain() {
+	public EOperation getForwardRelation__IsFunctional() {
 		return forwardRelationEClass.getEOperations().get(0);
 	}
 
@@ -2233,7 +2235,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EOperation getForwardRelation__DeriveRange() {
+	public EOperation getForwardRelation__IsInverseFunctional() {
 		return forwardRelationEClass.getEOperations().get(1);
 	}
 
@@ -2243,8 +2245,78 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EOperation getForwardRelation__DeriveInverse() {
+	public EOperation getForwardRelation__IsSymmetric() {
 		return forwardRelationEClass.getEOperations().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getForwardRelation__IsAsymmetric() {
+		return forwardRelationEClass.getEOperations().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getForwardRelation__IsReflexive() {
+		return forwardRelationEClass.getEOperations().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getForwardRelation__IsIrreflexive() {
+		return forwardRelationEClass.getEOperations().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getForwardRelation__IsTransitive() {
+		return forwardRelationEClass.getEOperations().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getForwardRelation__GetDomain() {
+		return forwardRelationEClass.getEOperations().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getForwardRelation__GetRange() {
+		return forwardRelationEClass.getEOperations().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getForwardRelation__GetInverse() {
+		return forwardRelationEClass.getEOperations().get(9);
 	}
 
 	/**
@@ -2273,17 +2345,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getReverseRelation_Functional() {
-		return (EAttribute)reverseRelationEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EOperation getReverseRelation__DeriveDomain() {
+	public EOperation getReverseRelation__IsFunctional() {
 		return reverseRelationEClass.getEOperations().get(0);
 	}
 
@@ -2293,7 +2355,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EOperation getReverseRelation__DeriveRange() {
+	public EOperation getReverseRelation__IsInverseFunctional() {
 		return reverseRelationEClass.getEOperations().get(1);
 	}
 
@@ -2303,8 +2365,78 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EOperation getReverseRelation__DeriveInverse() {
+	public EOperation getReverseRelation__IsSymmetric() {
 		return reverseRelationEClass.getEOperations().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getReverseRelation__IsAsymmetric() {
+		return reverseRelationEClass.getEOperations().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getReverseRelation__IsReflexive() {
+		return reverseRelationEClass.getEOperations().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getReverseRelation__IsIrreflexive() {
+		return reverseRelationEClass.getEOperations().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getReverseRelation__IsTransitive() {
+		return reverseRelationEClass.getEOperations().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getReverseRelation__GetDomain() {
+		return reverseRelationEClass.getEOperations().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getReverseRelation__GetRange() {
+		return reverseRelationEClass.getEOperations().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getReverseRelation__GetInverse() {
+		return reverseRelationEClass.getEOperations().get(9);
 	}
 
 	/**
@@ -2323,7 +2455,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EOperation getUnreifiedRelation__DeriveDomain() {
+	public EOperation getUnreifiedRelation__GetDomain() {
 		return unreifiedRelationEClass.getEOperations().get(0);
 	}
 
@@ -2333,7 +2465,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EOperation getUnreifiedRelation__DeriveRange() {
+	public EOperation getUnreifiedRelation__GetRange() {
 		return unreifiedRelationEClass.getEOperations().get(1);
 	}
 
@@ -2343,7 +2475,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EOperation getUnreifiedRelation__DeriveInverse() {
+	public EOperation getUnreifiedRelation__GetInverse() {
 		return unreifiedRelationEClass.getEOperations().get(2);
 	}
 
@@ -2355,16 +2487,6 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	@Override
 	public EClass getNamedInstance() {
 		return namedInstanceEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getNamedInstance_OwnedLinks() {
-		return (EReference)namedInstanceEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -2553,16 +2675,6 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EClass getRestrictionAxiom() {
-		return restrictionAxiomEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EClass getPropertyRestrictionAxiom() {
 		return propertyRestrictionAxiomEClass;
 	}
@@ -2585,6 +2697,16 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	@Override
 	public EReference getPropertyRestrictionAxiom_OwningReference() {
 		return (EReference)propertyRestrictionAxiomEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getPropertyRestrictionAxiom__GetProperty() {
+		return propertyRestrictionAxiomEClass.getEOperations().get(0);
 	}
 
 	/**
@@ -2823,28 +2945,8 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getRelationRestrictionAxiom_Relation() {
+	public EReference getRelationRestrictionAxiom_Property() {
 		return (EReference)relationRestrictionAxiomEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getRelationRestrictionAxiom_OwningEntity() {
-		return (EReference)relationRestrictionAxiomEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getRelationRestrictionAxiom_OwningReference() {
-		return (EReference)relationRestrictionAxiomEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -2923,8 +3025,8 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EClass getRelationTargetRestrictionAxiom() {
-		return relationTargetRestrictionAxiomEClass;
+	public EClass getRelationValueRestrictionAxiom() {
+		return relationValueRestrictionAxiomEClass;
 	}
 
 	/**
@@ -2933,8 +3035,8 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getRelationTargetRestrictionAxiom_Target() {
-		return (EReference)relationTargetRestrictionAxiomEClass.getEStructuralFeatures().get(0);
+	public EReference getRelationValueRestrictionAxiom_Value() {
+		return (EReference)relationValueRestrictionAxiomEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -3163,7 +3265,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getLinkAssertion_Relation() {
+	public EReference getLinkAssertion_Property() {
 		return (EReference)linkAssertionEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -3173,28 +3275,8 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getLinkAssertion_Target() {
+	public EReference getLinkAssertion_Value() {
 		return (EReference)linkAssertionEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getLinkAssertion_OwningInstance() {
-		return (EReference)linkAssertionEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getLinkAssertion_OwningReference() {
-		return (EReference)linkAssertionEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -3553,18 +3635,8 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getEntityReference_OwnedRelationRestrictions() {
-		return (EReference)entityReferenceEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EReference getEntityReference_OwnedKeys() {
-		return (EReference)entityReferenceEClass.getEStructuralFeatures().get(1);
+		return (EReference)entityReferenceEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -3805,16 +3877,6 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	@Override
 	public EReference getNamedInstanceReference_OwnedPropertyValues() {
 		return (EReference)namedInstanceReferenceEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getNamedInstanceReference_OwnedLinks() {
-		return (EReference)namedInstanceReferenceEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -4096,7 +4158,6 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		scalarEClass = createEClass(SCALAR);
 
 		entityEClass = createEClass(ENTITY);
-		createEReference(entityEClass, ENTITY__OWNED_RELATION_RESTRICTIONS);
 		createEReference(entityEClass, ENTITY__OWNED_KEYS);
 
 		structureEClass = createEClass(STRUCTURE);
@@ -4141,34 +4202,48 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		createEReference(structuredPropertyEClass, STRUCTURED_PROPERTY__RANGE);
 
 		relationEClass = createEClass(RELATION);
-		createEReference(relationEClass, RELATION__DOMAIN);
-		createEReference(relationEClass, RELATION__RANGE);
-		createEReference(relationEClass, RELATION__INVERSE);
-		createEOperation(relationEClass, RELATION___DERIVE_DOMAIN);
-		createEOperation(relationEClass, RELATION___DERIVE_RANGE);
-		createEOperation(relationEClass, RELATION___DERIVE_INVERSE);
+		createEOperation(relationEClass, RELATION___IS_INVERSE_FUNCTIONAL);
+		createEOperation(relationEClass, RELATION___IS_SYMMETRIC);
+		createEOperation(relationEClass, RELATION___IS_ASYMMETRIC);
+		createEOperation(relationEClass, RELATION___IS_REFLEXIVE);
+		createEOperation(relationEClass, RELATION___IS_IRREFLEXIVE);
+		createEOperation(relationEClass, RELATION___IS_TRANSITIVE);
+		createEOperation(relationEClass, RELATION___GET_DOMAIN);
+		createEOperation(relationEClass, RELATION___GET_RANGE);
+		createEOperation(relationEClass, RELATION___GET_INVERSE);
 
 		forwardRelationEClass = createEClass(FORWARD_RELATION);
 		createEReference(forwardRelationEClass, FORWARD_RELATION__RELATION_ENTITY);
-		createEAttribute(forwardRelationEClass, FORWARD_RELATION__FUNCTIONAL);
-		createEOperation(forwardRelationEClass, FORWARD_RELATION___DERIVE_DOMAIN);
-		createEOperation(forwardRelationEClass, FORWARD_RELATION___DERIVE_RANGE);
-		createEOperation(forwardRelationEClass, FORWARD_RELATION___DERIVE_INVERSE);
+		createEOperation(forwardRelationEClass, FORWARD_RELATION___IS_FUNCTIONAL);
+		createEOperation(forwardRelationEClass, FORWARD_RELATION___IS_INVERSE_FUNCTIONAL);
+		createEOperation(forwardRelationEClass, FORWARD_RELATION___IS_SYMMETRIC);
+		createEOperation(forwardRelationEClass, FORWARD_RELATION___IS_ASYMMETRIC);
+		createEOperation(forwardRelationEClass, FORWARD_RELATION___IS_REFLEXIVE);
+		createEOperation(forwardRelationEClass, FORWARD_RELATION___IS_IRREFLEXIVE);
+		createEOperation(forwardRelationEClass, FORWARD_RELATION___IS_TRANSITIVE);
+		createEOperation(forwardRelationEClass, FORWARD_RELATION___GET_DOMAIN);
+		createEOperation(forwardRelationEClass, FORWARD_RELATION___GET_RANGE);
+		createEOperation(forwardRelationEClass, FORWARD_RELATION___GET_INVERSE);
 
 		reverseRelationEClass = createEClass(REVERSE_RELATION);
 		createEReference(reverseRelationEClass, REVERSE_RELATION__RELATION_BASE);
-		createEAttribute(reverseRelationEClass, REVERSE_RELATION__FUNCTIONAL);
-		createEOperation(reverseRelationEClass, REVERSE_RELATION___DERIVE_DOMAIN);
-		createEOperation(reverseRelationEClass, REVERSE_RELATION___DERIVE_RANGE);
-		createEOperation(reverseRelationEClass, REVERSE_RELATION___DERIVE_INVERSE);
+		createEOperation(reverseRelationEClass, REVERSE_RELATION___IS_FUNCTIONAL);
+		createEOperation(reverseRelationEClass, REVERSE_RELATION___IS_INVERSE_FUNCTIONAL);
+		createEOperation(reverseRelationEClass, REVERSE_RELATION___IS_SYMMETRIC);
+		createEOperation(reverseRelationEClass, REVERSE_RELATION___IS_ASYMMETRIC);
+		createEOperation(reverseRelationEClass, REVERSE_RELATION___IS_REFLEXIVE);
+		createEOperation(reverseRelationEClass, REVERSE_RELATION___IS_IRREFLEXIVE);
+		createEOperation(reverseRelationEClass, REVERSE_RELATION___IS_TRANSITIVE);
+		createEOperation(reverseRelationEClass, REVERSE_RELATION___GET_DOMAIN);
+		createEOperation(reverseRelationEClass, REVERSE_RELATION___GET_RANGE);
+		createEOperation(reverseRelationEClass, REVERSE_RELATION___GET_INVERSE);
 
 		unreifiedRelationEClass = createEClass(UNREIFIED_RELATION);
-		createEOperation(unreifiedRelationEClass, UNREIFIED_RELATION___DERIVE_DOMAIN);
-		createEOperation(unreifiedRelationEClass, UNREIFIED_RELATION___DERIVE_RANGE);
-		createEOperation(unreifiedRelationEClass, UNREIFIED_RELATION___DERIVE_INVERSE);
+		createEOperation(unreifiedRelationEClass, UNREIFIED_RELATION___GET_DOMAIN);
+		createEOperation(unreifiedRelationEClass, UNREIFIED_RELATION___GET_RANGE);
+		createEOperation(unreifiedRelationEClass, UNREIFIED_RELATION___GET_INVERSE);
 
 		namedInstanceEClass = createEClass(NAMED_INSTANCE);
-		createEReference(namedInstanceEClass, NAMED_INSTANCE__OWNED_LINKS);
 
 		conceptInstanceEClass = createEClass(CONCEPT_INSTANCE);
 		createEReference(conceptInstanceEClass, CONCEPT_INSTANCE__OWNED_TYPES);
@@ -4193,11 +4268,10 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		createEReference(specializationAxiomEClass, SPECIALIZATION_AXIOM__OWNING_TERM);
 		createEReference(specializationAxiomEClass, SPECIALIZATION_AXIOM__OWNING_REFERENCE);
 
-		restrictionAxiomEClass = createEClass(RESTRICTION_AXIOM);
-
 		propertyRestrictionAxiomEClass = createEClass(PROPERTY_RESTRICTION_AXIOM);
 		createEReference(propertyRestrictionAxiomEClass, PROPERTY_RESTRICTION_AXIOM__OWNING_CLASSIFIER);
 		createEReference(propertyRestrictionAxiomEClass, PROPERTY_RESTRICTION_AXIOM__OWNING_REFERENCE);
+		createEOperation(propertyRestrictionAxiomEClass, PROPERTY_RESTRICTION_AXIOM___GET_PROPERTY);
 
 		scalarPropertyRestrictionAxiomEClass = createEClass(SCALAR_PROPERTY_RESTRICTION_AXIOM);
 		createEReference(scalarPropertyRestrictionAxiomEClass, SCALAR_PROPERTY_RESTRICTION_AXIOM__PROPERTY);
@@ -4230,9 +4304,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		createEReference(structuredPropertyValueRestrictionAxiomEClass, STRUCTURED_PROPERTY_VALUE_RESTRICTION_AXIOM__VALUE);
 
 		relationRestrictionAxiomEClass = createEClass(RELATION_RESTRICTION_AXIOM);
-		createEReference(relationRestrictionAxiomEClass, RELATION_RESTRICTION_AXIOM__RELATION);
-		createEReference(relationRestrictionAxiomEClass, RELATION_RESTRICTION_AXIOM__OWNING_ENTITY);
-		createEReference(relationRestrictionAxiomEClass, RELATION_RESTRICTION_AXIOM__OWNING_REFERENCE);
+		createEReference(relationRestrictionAxiomEClass, RELATION_RESTRICTION_AXIOM__PROPERTY);
 
 		relationRangeRestrictionAxiomEClass = createEClass(RELATION_RANGE_RESTRICTION_AXIOM);
 		createEReference(relationRangeRestrictionAxiomEClass, RELATION_RANGE_RESTRICTION_AXIOM__RANGE);
@@ -4243,8 +4315,8 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		createEAttribute(relationCardinalityRestrictionAxiomEClass, RELATION_CARDINALITY_RESTRICTION_AXIOM__KIND);
 		createEReference(relationCardinalityRestrictionAxiomEClass, RELATION_CARDINALITY_RESTRICTION_AXIOM__RANGE);
 
-		relationTargetRestrictionAxiomEClass = createEClass(RELATION_TARGET_RESTRICTION_AXIOM);
-		createEReference(relationTargetRestrictionAxiomEClass, RELATION_TARGET_RESTRICTION_AXIOM__TARGET);
+		relationValueRestrictionAxiomEClass = createEClass(RELATION_VALUE_RESTRICTION_AXIOM);
+		createEReference(relationValueRestrictionAxiomEClass, RELATION_VALUE_RESTRICTION_AXIOM__VALUE);
 
 		typeAssertionEClass = createEClass(TYPE_ASSERTION);
 		createEOperation(typeAssertionEClass, TYPE_ASSERTION___GET_TYPE);
@@ -4274,10 +4346,8 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		createEReference(structuredPropertyValueAssertionEClass, STRUCTURED_PROPERTY_VALUE_ASSERTION__VALUE);
 
 		linkAssertionEClass = createEClass(LINK_ASSERTION);
-		createEReference(linkAssertionEClass, LINK_ASSERTION__RELATION);
-		createEReference(linkAssertionEClass, LINK_ASSERTION__TARGET);
-		createEReference(linkAssertionEClass, LINK_ASSERTION__OWNING_INSTANCE);
-		createEReference(linkAssertionEClass, LINK_ASSERTION__OWNING_REFERENCE);
+		createEReference(linkAssertionEClass, LINK_ASSERTION__PROPERTY);
+		createEReference(linkAssertionEClass, LINK_ASSERTION__VALUE);
 
 		unaryPredicateEClass = createEClass(UNARY_PREDICATE);
 		createEAttribute(unaryPredicateEClass, UNARY_PREDICATE__VARIABLE);
@@ -4329,7 +4399,6 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		createEReference(classifierReferenceEClass, CLASSIFIER_REFERENCE__OWNED_PROPERTY_RESTRICTIONS);
 
 		entityReferenceEClass = createEClass(ENTITY_REFERENCE);
-		createEReference(entityReferenceEClass, ENTITY_REFERENCE__OWNED_RELATION_RESTRICTIONS);
 		createEReference(entityReferenceEClass, ENTITY_REFERENCE__OWNED_KEYS);
 
 		aspectReferenceEClass = createEClass(ASPECT_REFERENCE);
@@ -4367,7 +4436,6 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 
 		namedInstanceReferenceEClass = createEClass(NAMED_INSTANCE_REFERENCE);
 		createEReference(namedInstanceReferenceEClass, NAMED_INSTANCE_REFERENCE__OWNED_PROPERTY_VALUES);
-		createEReference(namedInstanceReferenceEClass, NAMED_INSTANCE_REFERENCE__OWNED_LINKS);
 
 		conceptInstanceReferenceEClass = createEClass(CONCEPT_INSTANCE_REFERENCE);
 		createEReference(conceptInstanceReferenceEClass, CONCEPT_INSTANCE_REFERENCE__INSTANCE);
@@ -4483,8 +4551,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		structureInstanceEClass.getESuperTypes().add(this.getInstance());
 		keyAxiomEClass.getESuperTypes().add(this.getAxiom());
 		specializationAxiomEClass.getESuperTypes().add(this.getAxiom());
-		restrictionAxiomEClass.getESuperTypes().add(this.getAxiom());
-		propertyRestrictionAxiomEClass.getESuperTypes().add(this.getRestrictionAxiom());
+		propertyRestrictionAxiomEClass.getESuperTypes().add(this.getAxiom());
 		scalarPropertyRestrictionAxiomEClass.getESuperTypes().add(this.getPropertyRestrictionAxiom());
 		scalarPropertyRangeRestrictionAxiomEClass.getESuperTypes().add(this.getScalarPropertyRestrictionAxiom());
 		scalarPropertyCardinalityRestrictionAxiomEClass.getESuperTypes().add(this.getScalarPropertyRestrictionAxiom());
@@ -4493,17 +4560,17 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		structuredPropertyRangeRestrictionAxiomEClass.getESuperTypes().add(this.getStructuredPropertyRestrictionAxiom());
 		structuredPropertyCardinalityRestrictionAxiomEClass.getESuperTypes().add(this.getStructuredPropertyRestrictionAxiom());
 		structuredPropertyValueRestrictionAxiomEClass.getESuperTypes().add(this.getStructuredPropertyRestrictionAxiom());
-		relationRestrictionAxiomEClass.getESuperTypes().add(this.getRestrictionAxiom());
+		relationRestrictionAxiomEClass.getESuperTypes().add(this.getPropertyRestrictionAxiom());
 		relationRangeRestrictionAxiomEClass.getESuperTypes().add(this.getRelationRestrictionAxiom());
 		relationCardinalityRestrictionAxiomEClass.getESuperTypes().add(this.getRelationRestrictionAxiom());
-		relationTargetRestrictionAxiomEClass.getESuperTypes().add(this.getRelationRestrictionAxiom());
+		relationValueRestrictionAxiomEClass.getESuperTypes().add(this.getRelationRestrictionAxiom());
 		typeAssertionEClass.getESuperTypes().add(this.getAssertion());
 		conceptTypeAssertionEClass.getESuperTypes().add(this.getTypeAssertion());
 		relationTypeAssertionEClass.getESuperTypes().add(this.getTypeAssertion());
 		propertyValueAssertionEClass.getESuperTypes().add(this.getAssertion());
 		scalarPropertyValueAssertionEClass.getESuperTypes().add(this.getPropertyValueAssertion());
 		structuredPropertyValueAssertionEClass.getESuperTypes().add(this.getPropertyValueAssertion());
-		linkAssertionEClass.getESuperTypes().add(this.getAssertion());
+		linkAssertionEClass.getESuperTypes().add(this.getPropertyValueAssertion());
 		unaryPredicateEClass.getESuperTypes().add(this.getPredicate());
 		binaryPredicateEClass.getESuperTypes().add(this.getPredicate());
 		typePredicateEClass.getESuperTypes().add(this.getUnaryPredicate());
@@ -4666,7 +4733,6 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		initEClass(scalarEClass, Scalar.class, "Scalar", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(entityEClass, Entity.class, "Entity", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getEntity_OwnedRelationRestrictions(), this.getRelationRestrictionAxiom(), this.getRelationRestrictionAxiom_OwningEntity(), "ownedRelationRestrictions", null, 0, -1, Entity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEntity_OwnedKeys(), this.getKeyAxiom(), this.getKeyAxiom_OwningEntity(), "ownedKeys", null, 0, -1, Entity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(structureEClass, Structure.class, "Structure", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -4714,46 +4780,80 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		initEReference(getStructuredProperty_Range(), this.getStructure(), null, "range", null, 1, 1, StructuredProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(relationEClass, Relation.class, "Relation", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getRelation_Domain(), this.getEntity(), null, "domain", null, 1, 1, Relation.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEReference(getRelation_Range(), this.getEntity(), null, "range", null, 1, 1, Relation.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEReference(getRelation_Inverse(), this.getRelation(), null, "inverse", null, 0, 1, Relation.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
-		initEOperation(getRelation__DeriveDomain(), this.getEntity(), "deriveDomain", 0, 1, !IS_UNIQUE, IS_ORDERED);
+		initEOperation(getRelation__IsInverseFunctional(), theEcorePackage.getEBoolean(), "isInverseFunctional", 0, 1, !IS_UNIQUE, IS_ORDERED);
 
-		initEOperation(getRelation__DeriveRange(), this.getEntity(), "deriveRange", 0, 1, !IS_UNIQUE, IS_ORDERED);
+		initEOperation(getRelation__IsSymmetric(), theEcorePackage.getEBoolean(), "isSymmetric", 0, 1, !IS_UNIQUE, IS_ORDERED);
 
-		initEOperation(getRelation__DeriveInverse(), this.getRelation(), "deriveInverse", 0, 1, !IS_UNIQUE, IS_ORDERED);
+		initEOperation(getRelation__IsAsymmetric(), theEcorePackage.getEBoolean(), "isAsymmetric", 0, 1, !IS_UNIQUE, IS_ORDERED);
+
+		initEOperation(getRelation__IsReflexive(), theEcorePackage.getEBoolean(), "isReflexive", 0, 1, !IS_UNIQUE, IS_ORDERED);
+
+		initEOperation(getRelation__IsIrreflexive(), theEcorePackage.getEBoolean(), "isIrreflexive", 0, 1, !IS_UNIQUE, IS_ORDERED);
+
+		initEOperation(getRelation__IsTransitive(), theEcorePackage.getEBoolean(), "isTransitive", 0, 1, !IS_UNIQUE, IS_ORDERED);
+
+		initEOperation(getRelation__GetDomain(), this.getEntity(), "getDomain", 0, 1, !IS_UNIQUE, IS_ORDERED);
+
+		initEOperation(getRelation__GetRange(), this.getEntity(), "getRange", 0, 1, !IS_UNIQUE, IS_ORDERED);
+
+		initEOperation(getRelation__GetInverse(), this.getRelation(), "getInverse", 0, 1, !IS_UNIQUE, IS_ORDERED);
 
 		initEClass(forwardRelationEClass, ForwardRelation.class, "ForwardRelation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getForwardRelation_RelationEntity(), this.getRelationEntity(), this.getRelationEntity_ForwardRelation(), "relationEntity", null, 1, 1, ForwardRelation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getForwardRelation_Functional(), theEcorePackage.getEBoolean(), "functional", null, 0, 1, ForwardRelation.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
-		initEOperation(getForwardRelation__DeriveDomain(), this.getEntity(), "deriveDomain", 0, 1, !IS_UNIQUE, IS_ORDERED);
+		initEOperation(getForwardRelation__IsFunctional(), theEcorePackage.getEBoolean(), "isFunctional", 0, 1, !IS_UNIQUE, IS_ORDERED);
 
-		initEOperation(getForwardRelation__DeriveRange(), this.getEntity(), "deriveRange", 0, 1, !IS_UNIQUE, IS_ORDERED);
+		initEOperation(getForwardRelation__IsInverseFunctional(), theEcorePackage.getEBoolean(), "isInverseFunctional", 0, 1, !IS_UNIQUE, IS_ORDERED);
 
-		initEOperation(getForwardRelation__DeriveInverse(), this.getRelation(), "deriveInverse", 0, 1, !IS_UNIQUE, IS_ORDERED);
+		initEOperation(getForwardRelation__IsSymmetric(), theEcorePackage.getEBoolean(), "isSymmetric", 0, 1, !IS_UNIQUE, IS_ORDERED);
+
+		initEOperation(getForwardRelation__IsAsymmetric(), theEcorePackage.getEBoolean(), "isAsymmetric", 0, 1, !IS_UNIQUE, IS_ORDERED);
+
+		initEOperation(getForwardRelation__IsReflexive(), theEcorePackage.getEBoolean(), "isReflexive", 0, 1, !IS_UNIQUE, IS_ORDERED);
+
+		initEOperation(getForwardRelation__IsIrreflexive(), theEcorePackage.getEBoolean(), "isIrreflexive", 0, 1, !IS_UNIQUE, IS_ORDERED);
+
+		initEOperation(getForwardRelation__IsTransitive(), theEcorePackage.getEBoolean(), "isTransitive", 0, 1, !IS_UNIQUE, IS_ORDERED);
+
+		initEOperation(getForwardRelation__GetDomain(), this.getEntity(), "getDomain", 0, 1, !IS_UNIQUE, IS_ORDERED);
+
+		initEOperation(getForwardRelation__GetRange(), this.getEntity(), "getRange", 0, 1, !IS_UNIQUE, IS_ORDERED);
+
+		initEOperation(getForwardRelation__GetInverse(), this.getRelation(), "getInverse", 0, 1, !IS_UNIQUE, IS_ORDERED);
 
 		initEClass(reverseRelationEClass, ReverseRelation.class, "ReverseRelation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getReverseRelation_RelationBase(), this.getRelationBase(), this.getRelationBase_ReverseRelation(), "relationBase", null, 1, 1, ReverseRelation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getReverseRelation_Functional(), theEcorePackage.getEBoolean(), "functional", null, 0, 1, ReverseRelation.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
-		initEOperation(getReverseRelation__DeriveDomain(), this.getEntity(), "deriveDomain", 0, 1, !IS_UNIQUE, IS_ORDERED);
+		initEOperation(getReverseRelation__IsFunctional(), theEcorePackage.getEBoolean(), "isFunctional", 0, 1, !IS_UNIQUE, IS_ORDERED);
 
-		initEOperation(getReverseRelation__DeriveRange(), this.getEntity(), "deriveRange", 0, 1, !IS_UNIQUE, IS_ORDERED);
+		initEOperation(getReverseRelation__IsInverseFunctional(), theEcorePackage.getEBoolean(), "isInverseFunctional", 0, 1, !IS_UNIQUE, IS_ORDERED);
 
-		initEOperation(getReverseRelation__DeriveInverse(), this.getRelation(), "deriveInverse", 0, 1, !IS_UNIQUE, IS_ORDERED);
+		initEOperation(getReverseRelation__IsSymmetric(), theEcorePackage.getEBoolean(), "isSymmetric", 0, 1, !IS_UNIQUE, IS_ORDERED);
+
+		initEOperation(getReverseRelation__IsAsymmetric(), theEcorePackage.getEBoolean(), "isAsymmetric", 0, 1, !IS_UNIQUE, IS_ORDERED);
+
+		initEOperation(getReverseRelation__IsReflexive(), theEcorePackage.getEBoolean(), "isReflexive", 0, 1, !IS_UNIQUE, IS_ORDERED);
+
+		initEOperation(getReverseRelation__IsIrreflexive(), theEcorePackage.getEBoolean(), "isIrreflexive", 0, 1, !IS_UNIQUE, IS_ORDERED);
+
+		initEOperation(getReverseRelation__IsTransitive(), theEcorePackage.getEBoolean(), "isTransitive", 0, 1, !IS_UNIQUE, IS_ORDERED);
+
+		initEOperation(getReverseRelation__GetDomain(), this.getEntity(), "getDomain", 0, 1, !IS_UNIQUE, IS_ORDERED);
+
+		initEOperation(getReverseRelation__GetRange(), this.getEntity(), "getRange", 0, 1, !IS_UNIQUE, IS_ORDERED);
+
+		initEOperation(getReverseRelation__GetInverse(), this.getRelation(), "getInverse", 0, 1, !IS_UNIQUE, IS_ORDERED);
 
 		initEClass(unreifiedRelationEClass, UnreifiedRelation.class, "UnreifiedRelation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEOperation(getUnreifiedRelation__DeriveDomain(), this.getEntity(), "deriveDomain", 0, 1, !IS_UNIQUE, IS_ORDERED);
+		initEOperation(getUnreifiedRelation__GetDomain(), this.getEntity(), "getDomain", 0, 1, !IS_UNIQUE, IS_ORDERED);
 
-		initEOperation(getUnreifiedRelation__DeriveRange(), this.getEntity(), "deriveRange", 0, 1, !IS_UNIQUE, IS_ORDERED);
+		initEOperation(getUnreifiedRelation__GetRange(), this.getEntity(), "getRange", 0, 1, !IS_UNIQUE, IS_ORDERED);
 
-		initEOperation(getUnreifiedRelation__DeriveInverse(), this.getRelation(), "deriveInverse", 0, 1, !IS_UNIQUE, IS_ORDERED);
+		initEOperation(getUnreifiedRelation__GetInverse(), this.getRelation(), "getInverse", 0, 1, !IS_UNIQUE, IS_ORDERED);
 
 		initEClass(namedInstanceEClass, NamedInstance.class, "NamedInstance", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getNamedInstance_OwnedLinks(), this.getLinkAssertion(), this.getLinkAssertion_OwningInstance(), "ownedLinks", null, 0, -1, NamedInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(conceptInstanceEClass, ConceptInstance.class, "ConceptInstance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getConceptInstance_OwnedTypes(), this.getConceptTypeAssertion(), this.getConceptTypeAssertion_OwningInstance(), "ownedTypes", null, 0, -1, ConceptInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -4778,11 +4878,11 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		initEReference(getSpecializationAxiom_OwningTerm(), this.getSpecializableTerm(), this.getSpecializableTerm_OwnedSpecializations(), "owningTerm", null, 0, 1, SpecializationAxiom.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSpecializationAxiom_OwningReference(), this.getSpecializableTermReference(), this.getSpecializableTermReference_OwnedSpecializations(), "owningReference", null, 0, 1, SpecializationAxiom.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(restrictionAxiomEClass, RestrictionAxiom.class, "RestrictionAxiom", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
 		initEClass(propertyRestrictionAxiomEClass, PropertyRestrictionAxiom.class, "PropertyRestrictionAxiom", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPropertyRestrictionAxiom_OwningClassifier(), this.getClassifier(), this.getClassifier_OwnedPropertyRestrictions(), "owningClassifier", null, 0, 1, PropertyRestrictionAxiom.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPropertyRestrictionAxiom_OwningReference(), this.getClassifierReference(), this.getClassifierReference_OwnedPropertyRestrictions(), "owningReference", null, 0, 1, PropertyRestrictionAxiom.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEOperation(getPropertyRestrictionAxiom__GetProperty(), this.getProperty(), "getProperty", 0, 1, !IS_UNIQUE, IS_ORDERED);
 
 		initEClass(scalarPropertyRestrictionAxiomEClass, ScalarPropertyRestrictionAxiom.class, "ScalarPropertyRestrictionAxiom", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getScalarPropertyRestrictionAxiom_Property(), this.getScalarProperty(), null, "property", null, 1, 1, ScalarPropertyRestrictionAxiom.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -4815,9 +4915,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		initEReference(getStructuredPropertyValueRestrictionAxiom_Value(), this.getStructureInstance(), this.getStructureInstance_OwningAxiom(), "value", null, 1, 1, StructuredPropertyValueRestrictionAxiom.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(relationRestrictionAxiomEClass, RelationRestrictionAxiom.class, "RelationRestrictionAxiom", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getRelationRestrictionAxiom_Relation(), this.getRelation(), null, "relation", null, 1, 1, RelationRestrictionAxiom.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getRelationRestrictionAxiom_OwningEntity(), this.getEntity(), this.getEntity_OwnedRelationRestrictions(), "owningEntity", null, 0, 1, RelationRestrictionAxiom.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getRelationRestrictionAxiom_OwningReference(), this.getEntityReference(), this.getEntityReference_OwnedRelationRestrictions(), "owningReference", null, 0, 1, RelationRestrictionAxiom.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getRelationRestrictionAxiom_Property(), this.getRelation(), null, "property", null, 1, 1, RelationRestrictionAxiom.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(relationRangeRestrictionAxiomEClass, RelationRangeRestrictionAxiom.class, "RelationRangeRestrictionAxiom", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getRelationRangeRestrictionAxiom_Range(), this.getEntity(), null, "range", null, 1, 1, RelationRangeRestrictionAxiom.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -4828,8 +4926,8 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		initEAttribute(getRelationCardinalityRestrictionAxiom_Kind(), this.getCardinalityRestrictionKind(), "kind", null, 1, 1, RelationCardinalityRestrictionAxiom.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRelationCardinalityRestrictionAxiom_Range(), this.getEntity(), null, "range", null, 0, 1, RelationCardinalityRestrictionAxiom.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(relationTargetRestrictionAxiomEClass, RelationTargetRestrictionAxiom.class, "RelationTargetRestrictionAxiom", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getRelationTargetRestrictionAxiom_Target(), this.getNamedInstance(), null, "target", null, 1, 1, RelationTargetRestrictionAxiom.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(relationValueRestrictionAxiomEClass, RelationValueRestrictionAxiom.class, "RelationValueRestrictionAxiom", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getRelationValueRestrictionAxiom_Value(), this.getNamedInstance(), null, "value", null, 1, 1, RelationValueRestrictionAxiom.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(typeAssertionEClass, TypeAssertion.class, "TypeAssertion", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -4862,10 +4960,8 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		initEReference(getStructuredPropertyValueAssertion_Value(), this.getStructureInstance(), this.getStructureInstance_OwningAssertion(), "value", null, 1, 1, StructuredPropertyValueAssertion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(linkAssertionEClass, LinkAssertion.class, "LinkAssertion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getLinkAssertion_Relation(), this.getRelation(), null, "relation", null, 1, 1, LinkAssertion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getLinkAssertion_Target(), this.getNamedInstance(), null, "target", null, 1, 1, LinkAssertion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getLinkAssertion_OwningInstance(), this.getNamedInstance(), this.getNamedInstance_OwnedLinks(), "owningInstance", null, 0, 1, LinkAssertion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getLinkAssertion_OwningReference(), this.getNamedInstanceReference(), this.getNamedInstanceReference_OwnedLinks(), "owningReference", null, 0, 1, LinkAssertion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getLinkAssertion_Property(), this.getRelation(), null, "property", null, 1, 1, LinkAssertion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getLinkAssertion_Value(), this.getNamedInstance(), null, "value", null, 1, 1, LinkAssertion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(unaryPredicateEClass, UnaryPredicate.class, "UnaryPredicate", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getUnaryPredicate_Variable(), this.getID(), "variable", null, 1, 1, UnaryPredicate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -4917,7 +5013,6 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		initEReference(getClassifierReference_OwnedPropertyRestrictions(), this.getPropertyRestrictionAxiom(), this.getPropertyRestrictionAxiom_OwningReference(), "ownedPropertyRestrictions", null, 0, -1, ClassifierReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(entityReferenceEClass, EntityReference.class, "EntityReference", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getEntityReference_OwnedRelationRestrictions(), this.getRelationRestrictionAxiom(), this.getRelationRestrictionAxiom_OwningReference(), "ownedRelationRestrictions", null, 0, -1, EntityReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEntityReference_OwnedKeys(), this.getKeyAxiom(), this.getKeyAxiom_OwningReference(), "ownedKeys", null, 0, -1, EntityReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(aspectReferenceEClass, AspectReference.class, "AspectReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -4955,7 +5050,6 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 
 		initEClass(namedInstanceReferenceEClass, NamedInstanceReference.class, "NamedInstanceReference", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getNamedInstanceReference_OwnedPropertyValues(), this.getPropertyValueAssertion(), this.getPropertyValueAssertion_OwningReference(), "ownedPropertyValues", null, 0, -1, NamedInstanceReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getNamedInstanceReference_OwnedLinks(), this.getLinkAssertion(), this.getLinkAssertion_OwningReference(), "ownedLinks", null, 0, -1, NamedInstanceReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(conceptInstanceReferenceEClass, ConceptInstanceReference.class, "ConceptInstanceReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getConceptInstanceReference_Instance(), this.getConceptInstance(), null, "instance", null, 1, 1, ConceptInstanceReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -5366,12 +5460,6 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 			   "heading", "Axioms"
 		   });
 		addAnnotation
-		  (restrictionAxiomEClass,
-		   source,
-		   new String[] {
-			   "heading", "Axioms"
-		   });
-		addAnnotation
 		  (propertyRestrictionAxiomEClass,
 		   source,
 		   new String[] {
@@ -5444,7 +5532,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 			   "heading", "Axioms"
 		   });
 		addAnnotation
-		  (relationTargetRestrictionAxiomEClass,
+		  (relationValueRestrictionAxiomEClass,
 		   source,
 		   new String[] {
 			   "heading", "Axioms"

@@ -25,19 +25,10 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Relation is a property that represents a relation from its domain entity to its range entity. It is the super type of
- * two concrete relations: [=ForwardRelation=] and [=ReverseRelation] that are specified by a relation entity. When a relation
- * entity specifies both kinds of relations, they become inverse of each other.
+ * Relation is a semantic property whose domain is an entity and whose range is also an entity.
+ * It can be characterized by DL flags and can have an inverse relation.
  * <!-- end-model-doc -->
  *
- * <p>
- * The following features are supported:
- * </p>
- * <ul>
- *   <li>{@link io.opencaesar.oml.Relation#getDomain <em>Domain</em>}</li>
- *   <li>{@link io.opencaesar.oml.Relation#getRange <em>Range</em>}</li>
- *   <li>{@link io.opencaesar.oml.Relation#getInverse <em>Inverse</em>}</li>
- * </ul>
  *
  * @see io.opencaesar.oml.OmlPackage#getRelation()
  * @model abstract="true"
@@ -46,69 +37,102 @@ package io.opencaesar.oml;
  */
 public interface Relation extends SemanticProperty {
 	/**
-	 * Returns the value of the '<em><b>Domain</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The entity that represents the domain of this relation
+	 * Gets whether this relation is inverse functional (i.e., {@code B->A and C->A => B=C})
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Domain</em>' reference.
-	 * @see io.opencaesar.oml.OmlPackage#getRelation_Domain()
-	 * @model required="true" transient="true" changeable="false" volatile="true" derived="true"
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
+	boolean isInverseFunctional();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Gets whether this relation is symmetric (i.e., {@code A->B => B->A})
+	 * <!-- end-model-doc -->
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
+	boolean isSymmetric();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Gets whether this relation is asymmetric (i.e., {@code A->B => !(B->A)})
+	 * <!-- end-model-doc -->
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
+	boolean isAsymmetric();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Gets whether this relation is reflexive (i.e., {@code A => A->A})
+	 * <!-- end-model-doc -->
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
+	boolean isReflexive();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Gets whether this relation is irreflexive (i.e., {@code A => !(A->A)})
+	 * <!-- end-model-doc -->
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
+	boolean isIrreflexive();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Gets whether this relation is transitive (i.e., {@code A->B and B->C => A->C})
+	 * <!-- end-model-doc -->
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
+	boolean isTransitive();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Gets the domain of this relation
+	 * <!-- end-model-doc -->
+	 * @model kind="operation" unique="false"
 	 * @generated
 	 */
 	Entity getDomain();
 
 	/**
-	 * Returns the value of the '<em><b>Range</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The entity that represents the range of this relation
+	 * Gets the range of the relation
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Range</em>' reference.
-	 * @see io.opencaesar.oml.OmlPackage#getRelation_Range()
-	 * @model required="true" transient="true" changeable="false" volatile="true" derived="true"
+	 * @model kind="operation" unique="false"
 	 * @generated
 	 */
 	Entity getRange();
 
 	/**
-	 * Returns the value of the '<em><b>Inverse</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The relation (if any) that is the inverse of this relation
+	 * Gets the inverse of this relation
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Inverse</em>' reference.
-	 * @see io.opencaesar.oml.OmlPackage#getRelation_Inverse()
-	 * @model transient="true" changeable="false" volatile="true" derived="true"
+	 * @model kind="operation" unique="false"
 	 * @generated
 	 */
 	Relation getInverse();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model unique="false"
-	 * @generated
-	 */
-	Entity deriveDomain();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model unique="false"
-	 * @generated
-	 */
-	Entity deriveRange();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model unique="false"
-	 * @generated
-	 */
-	Relation deriveInverse();
 
 } // Relation

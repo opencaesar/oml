@@ -433,52 +433,6 @@ public class OmlItemProviderAdapterFactory extends OmlAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.FacetedScalar} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected FacetedScalarItemProvider facetedScalarItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.FacetedScalar}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createFacetedScalarAdapter() {
-		if (facetedScalarItemProvider == null) {
-			facetedScalarItemProvider = new FacetedScalarItemProvider(this);
-		}
-
-		return facetedScalarItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.EnumeratedScalar} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected EnumeratedScalarItemProvider enumeratedScalarItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.EnumeratedScalar}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createEnumeratedScalarAdapter() {
-		if (enumeratedScalarItemProvider == null) {
-			enumeratedScalarItemProvider = new EnumeratedScalarItemProvider(this);
-		}
-
-		return enumeratedScalarItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.ForwardRelation} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -545,6 +499,52 @@ public class OmlItemProviderAdapterFactory extends OmlAdapterFactory implements 
 		}
 
 		return unreifiedRelationItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.FacetedScalar} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected FacetedScalarItemProvider facetedScalarItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link io.opencaesar.oml.FacetedScalar}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createFacetedScalarAdapter() {
+		if (facetedScalarItemProvider == null) {
+			facetedScalarItemProvider = new FacetedScalarItemProvider(this);
+		}
+
+		return facetedScalarItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.EnumeratedScalar} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected EnumeratedScalarItemProvider enumeratedScalarItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link io.opencaesar.oml.EnumeratedScalar}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createEnumeratedScalarAdapter() {
+		if (enumeratedScalarItemProvider == null) {
+			enumeratedScalarItemProvider = new EnumeratedScalarItemProvider(this);
+		}
+
+		return enumeratedScalarItemProvider;
 	}
 
 	/**
@@ -1146,26 +1146,26 @@ public class OmlItemProviderAdapterFactory extends OmlAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.RelationTargetRestrictionAxiom} instances.
+	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.RelationValueRestrictionAxiom} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected RelationTargetRestrictionAxiomItemProvider relationTargetRestrictionAxiomItemProvider;
+	protected RelationValueRestrictionAxiomItemProvider relationValueRestrictionAxiomItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.RelationTargetRestrictionAxiom}.
+	 * This creates an adapter for a {@link io.opencaesar.oml.RelationValueRestrictionAxiom}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createRelationTargetRestrictionAxiomAdapter() {
-		if (relationTargetRestrictionAxiomItemProvider == null) {
-			relationTargetRestrictionAxiomItemProvider = new RelationTargetRestrictionAxiomItemProvider(this);
+	public Adapter createRelationValueRestrictionAxiomAdapter() {
+		if (relationValueRestrictionAxiomItemProvider == null) {
+			relationValueRestrictionAxiomItemProvider = new RelationValueRestrictionAxiomItemProvider(this);
 		}
 
-		return relationTargetRestrictionAxiomItemProvider;
+		return relationValueRestrictionAxiomItemProvider;
 	}
 
 	/**
@@ -1675,7 +1675,7 @@ public class OmlItemProviderAdapterFactory extends OmlAdapterFactory implements 
 		if (structuredPropertyValueRestrictionAxiomItemProvider != null) structuredPropertyValueRestrictionAxiomItemProvider.dispose();
 		if (relationRangeRestrictionAxiomItemProvider != null) relationRangeRestrictionAxiomItemProvider.dispose();
 		if (relationCardinalityRestrictionAxiomItemProvider != null) relationCardinalityRestrictionAxiomItemProvider.dispose();
-		if (relationTargetRestrictionAxiomItemProvider != null) relationTargetRestrictionAxiomItemProvider.dispose();
+		if (relationValueRestrictionAxiomItemProvider != null) relationValueRestrictionAxiomItemProvider.dispose();
 		if (conceptTypeAssertionItemProvider != null) conceptTypeAssertionItemProvider.dispose();
 		if (relationTypeAssertionItemProvider != null) relationTypeAssertionItemProvider.dispose();
 		if (scalarPropertyValueAssertionItemProvider != null) scalarPropertyValueAssertionItemProvider.dispose();

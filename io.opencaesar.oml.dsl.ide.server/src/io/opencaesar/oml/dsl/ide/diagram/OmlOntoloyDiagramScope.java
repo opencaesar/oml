@@ -29,7 +29,7 @@ import io.opencaesar.oml.RelationEntityReference;
 import io.opencaesar.oml.RelationInstance;
 import io.opencaesar.oml.RelationInstanceReference;
 import io.opencaesar.oml.RelationRangeRestrictionAxiom;
-import io.opencaesar.oml.RelationTargetRestrictionAxiom;
+import io.opencaesar.oml.RelationValueRestrictionAxiom;
 import io.opencaesar.oml.Scalar;
 import io.opencaesar.oml.ScalarProperty;
 import io.opencaesar.oml.ScalarPropertyRestrictionAxiom;
@@ -242,11 +242,6 @@ class OmlOntoloyDiagramScope {
 				others.add(ax);
 			}
 		});
-		OmlSearch.findRelationRestrictions(e).forEach(ax -> {
-			if (allImportedElements.contains(ax)) {
-				others.add(ax);
-			}
-		});
 	}
 
 	private void phase2FilterEntityAxioms(final Entity e, final Set<Element> others) {
@@ -274,17 +269,17 @@ class OmlOntoloyDiagramScope {
 				}
 			} else if (o instanceof RelationCardinalityRestrictionAxiom) {
 				RelationCardinalityRestrictionAxiom x = (RelationCardinalityRestrictionAxiom) o;
-				if (includes(x.getRelation())) {
+				if (includes(x.getProperty())) {
 					ax.add(x);
 				}
 			} else if (o instanceof RelationRangeRestrictionAxiom) {
 				RelationRangeRestrictionAxiom x = (RelationRangeRestrictionAxiom) o;
-				if (includes(x.getRelation()) && includes(x.getRange())) {
+				if (includes(x.getProperty()) && includes(x.getRange())) {
 					ax.add(x);
 				}
-			} else if (o instanceof RelationTargetRestrictionAxiom) {
-				RelationTargetRestrictionAxiom x = (RelationTargetRestrictionAxiom) o;
-				if (includes(x.getRelation()) && includes(x.getTarget())) {
+			} else if (o instanceof RelationValueRestrictionAxiom) {
+				RelationValueRestrictionAxiom x = (RelationValueRestrictionAxiom) o;
+				if (includes(x.getProperty()) && includes(x.getValue())) {
 					ax.add(x);
 				}
 			}

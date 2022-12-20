@@ -25,7 +25,7 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * RelationReference is a reference to an relation.
+ * RelationReference is a reference to a relation.
  * <!-- end-model-doc -->
  *
  * <p>

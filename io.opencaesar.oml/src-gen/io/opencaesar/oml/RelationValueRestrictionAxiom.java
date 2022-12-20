@@ -21,11 +21,11 @@ package io.opencaesar.oml;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Relation Target Restriction Axiom</b></em>'.
+ * A representation of the model object '<em><b>Relation Value Restriction Axiom</b></em>'.
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * RelationTargetRestrictionAxiom is a relation restriction axiom that restricts the target of the relation
+ * RelationValueRestrictionAxiom is a relation restriction axiom that restricts the value of a relation
  * to a specific named instance.
  * <!-- end-model-doc -->
  *
@@ -33,37 +33,37 @@ package io.opencaesar.oml;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link io.opencaesar.oml.RelationTargetRestrictionAxiom#getTarget <em>Target</em>}</li>
+ *   <li>{@link io.opencaesar.oml.RelationValueRestrictionAxiom#getValue <em>Value</em>}</li>
  * </ul>
  *
- * @see io.opencaesar.oml.OmlPackage#getRelationTargetRestrictionAxiom()
+ * @see io.opencaesar.oml.OmlPackage#getRelationValueRestrictionAxiom()
  * @model annotation="https://tabatkins.github.io/bikeshed heading='Axioms'"
  * @generated
  */
-public interface RelationTargetRestrictionAxiom extends RelationRestrictionAxiom {
+public interface RelationValueRestrictionAxiom extends RelationRestrictionAxiom {
 	/**
-	 * Returns the value of the '<em><b>Target</b></em>' reference.
+	 * Returns the value of the '<em><b>Value</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The named instance specified as a restricted relation target by this axiom
+	 * The named instance specified as a restricted value by this axiom
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Target</em>' reference.
-	 * @see #setTarget(NamedInstance)
-	 * @see io.opencaesar.oml.OmlPackage#getRelationTargetRestrictionAxiom_Target()
+	 * @return the value of the '<em>Value</em>' reference.
+	 * @see #setValue(NamedInstance)
+	 * @see io.opencaesar.oml.OmlPackage#getRelationValueRestrictionAxiom_Value()
 	 * @model required="true"
 	 * @generated
 	 */
-	NamedInstance getTarget();
+	NamedInstance getValue();
 
 	/**
-	 * Sets the value of the '{@link io.opencaesar.oml.RelationTargetRestrictionAxiom#getTarget <em>Target</em>}' reference.
+	 * Sets the value of the '{@link io.opencaesar.oml.RelationValueRestrictionAxiom#getValue <em>Value</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Target</em>' reference.
-	 * @see #getTarget()
+	 * @param value the new value of the '<em>Value</em>' reference.
+	 * @see #getValue()
 	 * @generated
 	 */
-	void setTarget(NamedInstance value);
+	void setValue(NamedInstance value);
 
-} // RelationTargetRestrictionAxiom
+} // RelationValueRestrictionAxiom

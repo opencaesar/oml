@@ -20,19 +20,15 @@ package io.opencaesar.oml.impl;
 
 import io.opencaesar.oml.LinkAssertion;
 import io.opencaesar.oml.NamedInstance;
-import io.opencaesar.oml.NamedInstanceReference;
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.Relation;
 
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
-import org.eclipse.emf.ecore.util.EcoreUtil;
 
 /**
  * <!-- begin-user-doc -->
@@ -42,34 +38,32 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link io.opencaesar.oml.impl.LinkAssertionImpl#getRelation <em>Relation</em>}</li>
- *   <li>{@link io.opencaesar.oml.impl.LinkAssertionImpl#getTarget <em>Target</em>}</li>
- *   <li>{@link io.opencaesar.oml.impl.LinkAssertionImpl#getOwningInstance <em>Owning Instance</em>}</li>
- *   <li>{@link io.opencaesar.oml.impl.LinkAssertionImpl#getOwningReference <em>Owning Reference</em>}</li>
+ *   <li>{@link io.opencaesar.oml.impl.LinkAssertionImpl#getProperty <em>Property</em>}</li>
+ *   <li>{@link io.opencaesar.oml.impl.LinkAssertionImpl#getValue <em>Value</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class LinkAssertionImpl extends AssertionImpl implements LinkAssertion {
+public class LinkAssertionImpl extends PropertyValueAssertionImpl implements LinkAssertion {
 	/**
-	 * The cached value of the '{@link #getRelation() <em>Relation</em>}' reference.
+	 * The cached value of the '{@link #getProperty() <em>Property</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getRelation()
+	 * @see #getProperty()
 	 * @generated
 	 * @ordered
 	 */
-	protected Relation relation;
+	protected Relation property;
 
 	/**
-	 * The cached value of the '{@link #getTarget() <em>Target</em>}' reference.
+	 * The cached value of the '{@link #getValue() <em>Value</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getTarget()
+	 * @see #getValue()
 	 * @generated
 	 * @ordered
 	 */
-	protected NamedInstance target;
+	protected NamedInstance value;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -96,16 +90,16 @@ public class LinkAssertionImpl extends AssertionImpl implements LinkAssertion {
 	 * @generated
 	 */
 	@Override
-	public Relation getRelation() {
-		if (relation != null && relation.eIsProxy()) {
-			InternalEObject oldRelation = (InternalEObject)relation;
-			relation = (Relation)eResolveProxy(oldRelation);
-			if (relation != oldRelation) {
+	public Relation getProperty() {
+		if (property != null && property.eIsProxy()) {
+			InternalEObject oldProperty = (InternalEObject)property;
+			property = (Relation)eResolveProxy(oldProperty);
+			if (property != oldProperty) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, OmlPackage.LINK_ASSERTION__RELATION, oldRelation, relation));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, OmlPackage.LINK_ASSERTION__PROPERTY, oldProperty, property));
 			}
 		}
-		return relation;
+		return property;
 	}
 
 	/**
@@ -113,8 +107,8 @@ public class LinkAssertionImpl extends AssertionImpl implements LinkAssertion {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Relation basicGetRelation() {
-		return relation;
+	public Relation basicGetProperty() {
+		return property;
 	}
 
 	/**
@@ -123,11 +117,11 @@ public class LinkAssertionImpl extends AssertionImpl implements LinkAssertion {
 	 * @generated
 	 */
 	@Override
-	public void setRelation(Relation newRelation) {
-		Relation oldRelation = relation;
-		relation = newRelation;
+	public void setProperty(Relation newProperty) {
+		Relation oldProperty = property;
+		property = newProperty;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.LINK_ASSERTION__RELATION, oldRelation, relation));
+			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.LINK_ASSERTION__PROPERTY, oldProperty, property));
 	}
 
 	/**
@@ -136,16 +130,16 @@ public class LinkAssertionImpl extends AssertionImpl implements LinkAssertion {
 	 * @generated
 	 */
 	@Override
-	public NamedInstance getTarget() {
-		if (target != null && target.eIsProxy()) {
-			InternalEObject oldTarget = (InternalEObject)target;
-			target = (NamedInstance)eResolveProxy(oldTarget);
-			if (target != oldTarget) {
+	public NamedInstance getValue() {
+		if (value != null && value.eIsProxy()) {
+			InternalEObject oldValue = (InternalEObject)value;
+			value = (NamedInstance)eResolveProxy(oldValue);
+			if (value != oldValue) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, OmlPackage.LINK_ASSERTION__TARGET, oldTarget, target));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, OmlPackage.LINK_ASSERTION__VALUE, oldValue, value));
 			}
 		}
-		return target;
+		return value;
 	}
 
 	/**
@@ -153,8 +147,8 @@ public class LinkAssertionImpl extends AssertionImpl implements LinkAssertion {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NamedInstance basicGetTarget() {
-		return target;
+	public NamedInstance basicGetValue() {
+		return value;
 	}
 
 	/**
@@ -163,169 +157,11 @@ public class LinkAssertionImpl extends AssertionImpl implements LinkAssertion {
 	 * @generated
 	 */
 	@Override
-	public void setTarget(NamedInstance newTarget) {
-		NamedInstance oldTarget = target;
-		target = newTarget;
+	public void setValue(NamedInstance newValue) {
+		NamedInstance oldValue = value;
+		value = newValue;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.LINK_ASSERTION__TARGET, oldTarget, target));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NamedInstance getOwningInstance() {
-		if (eContainerFeatureID() != OmlPackage.LINK_ASSERTION__OWNING_INSTANCE) return null;
-		return (NamedInstance)eContainer();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NamedInstance basicGetOwningInstance() {
-		if (eContainerFeatureID() != OmlPackage.LINK_ASSERTION__OWNING_INSTANCE) return null;
-		return (NamedInstance)eInternalContainer();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetOwningInstance(NamedInstance newOwningInstance, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwningInstance, OmlPackage.LINK_ASSERTION__OWNING_INSTANCE, msgs);
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setOwningInstance(NamedInstance newOwningInstance) {
-		if (newOwningInstance != eInternalContainer() || (eContainerFeatureID() != OmlPackage.LINK_ASSERTION__OWNING_INSTANCE && newOwningInstance != null)) {
-			if (EcoreUtil.isAncestor(this, newOwningInstance))
-				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
-			NotificationChain msgs = null;
-			if (eInternalContainer() != null)
-				msgs = eBasicRemoveFromContainer(msgs);
-			if (newOwningInstance != null)
-				msgs = ((InternalEObject)newOwningInstance).eInverseAdd(this, OmlPackage.NAMED_INSTANCE__OWNED_LINKS, NamedInstance.class, msgs);
-			msgs = basicSetOwningInstance(newOwningInstance, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.LINK_ASSERTION__OWNING_INSTANCE, newOwningInstance, newOwningInstance));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NamedInstanceReference getOwningReference() {
-		if (eContainerFeatureID() != OmlPackage.LINK_ASSERTION__OWNING_REFERENCE) return null;
-		return (NamedInstanceReference)eContainer();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NamedInstanceReference basicGetOwningReference() {
-		if (eContainerFeatureID() != OmlPackage.LINK_ASSERTION__OWNING_REFERENCE) return null;
-		return (NamedInstanceReference)eInternalContainer();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetOwningReference(NamedInstanceReference newOwningReference, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwningReference, OmlPackage.LINK_ASSERTION__OWNING_REFERENCE, msgs);
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setOwningReference(NamedInstanceReference newOwningReference) {
-		if (newOwningReference != eInternalContainer() || (eContainerFeatureID() != OmlPackage.LINK_ASSERTION__OWNING_REFERENCE && newOwningReference != null)) {
-			if (EcoreUtil.isAncestor(this, newOwningReference))
-				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
-			NotificationChain msgs = null;
-			if (eInternalContainer() != null)
-				msgs = eBasicRemoveFromContainer(msgs);
-			if (newOwningReference != null)
-				msgs = ((InternalEObject)newOwningReference).eInverseAdd(this, OmlPackage.NAMED_INSTANCE_REFERENCE__OWNED_LINKS, NamedInstanceReference.class, msgs);
-			msgs = basicSetOwningReference(newOwningReference, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.LINK_ASSERTION__OWNING_REFERENCE, newOwningReference, newOwningReference));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case OmlPackage.LINK_ASSERTION__OWNING_INSTANCE:
-				if (eInternalContainer() != null)
-					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetOwningInstance((NamedInstance)otherEnd, msgs);
-			case OmlPackage.LINK_ASSERTION__OWNING_REFERENCE:
-				if (eInternalContainer() != null)
-					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetOwningReference((NamedInstanceReference)otherEnd, msgs);
-		}
-		return super.eInverseAdd(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case OmlPackage.LINK_ASSERTION__OWNING_INSTANCE:
-				return basicSetOwningInstance(null, msgs);
-			case OmlPackage.LINK_ASSERTION__OWNING_REFERENCE:
-				return basicSetOwningReference(null, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID()) {
-			case OmlPackage.LINK_ASSERTION__OWNING_INSTANCE:
-				return eInternalContainer().eInverseRemove(this, OmlPackage.NAMED_INSTANCE__OWNED_LINKS, NamedInstance.class, msgs);
-			case OmlPackage.LINK_ASSERTION__OWNING_REFERENCE:
-				return eInternalContainer().eInverseRemove(this, OmlPackage.NAMED_INSTANCE_REFERENCE__OWNED_LINKS, NamedInstanceReference.class, msgs);
-		}
-		return super.eBasicRemoveFromContainerFeature(msgs);
+			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.LINK_ASSERTION__VALUE, oldValue, value));
 	}
 
 	/**
@@ -336,18 +172,12 @@ public class LinkAssertionImpl extends AssertionImpl implements LinkAssertion {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case OmlPackage.LINK_ASSERTION__RELATION:
-				if (resolve) return getRelation();
-				return basicGetRelation();
-			case OmlPackage.LINK_ASSERTION__TARGET:
-				if (resolve) return getTarget();
-				return basicGetTarget();
-			case OmlPackage.LINK_ASSERTION__OWNING_INSTANCE:
-				if (resolve) return getOwningInstance();
-				return basicGetOwningInstance();
-			case OmlPackage.LINK_ASSERTION__OWNING_REFERENCE:
-				if (resolve) return getOwningReference();
-				return basicGetOwningReference();
+			case OmlPackage.LINK_ASSERTION__PROPERTY:
+				if (resolve) return getProperty();
+				return basicGetProperty();
+			case OmlPackage.LINK_ASSERTION__VALUE:
+				if (resolve) return getValue();
+				return basicGetValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -360,17 +190,11 @@ public class LinkAssertionImpl extends AssertionImpl implements LinkAssertion {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case OmlPackage.LINK_ASSERTION__RELATION:
-				setRelation((Relation)newValue);
+			case OmlPackage.LINK_ASSERTION__PROPERTY:
+				setProperty((Relation)newValue);
 				return;
-			case OmlPackage.LINK_ASSERTION__TARGET:
-				setTarget((NamedInstance)newValue);
-				return;
-			case OmlPackage.LINK_ASSERTION__OWNING_INSTANCE:
-				setOwningInstance((NamedInstance)newValue);
-				return;
-			case OmlPackage.LINK_ASSERTION__OWNING_REFERENCE:
-				setOwningReference((NamedInstanceReference)newValue);
+			case OmlPackage.LINK_ASSERTION__VALUE:
+				setValue((NamedInstance)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -384,17 +208,11 @@ public class LinkAssertionImpl extends AssertionImpl implements LinkAssertion {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case OmlPackage.LINK_ASSERTION__RELATION:
-				setRelation((Relation)null);
+			case OmlPackage.LINK_ASSERTION__PROPERTY:
+				setProperty((Relation)null);
 				return;
-			case OmlPackage.LINK_ASSERTION__TARGET:
-				setTarget((NamedInstance)null);
-				return;
-			case OmlPackage.LINK_ASSERTION__OWNING_INSTANCE:
-				setOwningInstance((NamedInstance)null);
-				return;
-			case OmlPackage.LINK_ASSERTION__OWNING_REFERENCE:
-				setOwningReference((NamedInstanceReference)null);
+			case OmlPackage.LINK_ASSERTION__VALUE:
+				setValue((NamedInstance)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -408,14 +226,10 @@ public class LinkAssertionImpl extends AssertionImpl implements LinkAssertion {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case OmlPackage.LINK_ASSERTION__RELATION:
-				return relation != null;
-			case OmlPackage.LINK_ASSERTION__TARGET:
-				return target != null;
-			case OmlPackage.LINK_ASSERTION__OWNING_INSTANCE:
-				return basicGetOwningInstance() != null;
-			case OmlPackage.LINK_ASSERTION__OWNING_REFERENCE:
-				return basicGetOwningReference() != null;
+			case OmlPackage.LINK_ASSERTION__PROPERTY:
+				return property != null;
+			case OmlPackage.LINK_ASSERTION__VALUE:
+				return value != null;
 		}
 		return super.eIsSet(featureID);
 	}

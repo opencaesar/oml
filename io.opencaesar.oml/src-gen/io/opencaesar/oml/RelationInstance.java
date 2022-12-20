@@ -26,8 +26,8 @@ import org.eclipse.emf.common.util.EList;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * RelationInstance is a named instance that can be typed by relation entities and that goes from one or more
- * named instances as sources to one or more named instances as target.
+ * RelationInstance is a named instance that can be typed by relation entities and represents a relation from one or
+ * more named instances (as sources) to one or more named instances (as targets).
  * <!-- end-model-doc -->
  *
  * <p>

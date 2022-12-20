@@ -25,7 +25,7 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * ScalarPropertyValueRestrictionAxiom is a scalar property restriction axiom that restricts the value of the property
+ * ScalarPropertyValueRestrictionAxiom is a scalar property restriction axiom that restricts the value of a property
  * that has the restricting classifier as a domain to a specific literal.
  * <!-- end-model-doc -->
  *

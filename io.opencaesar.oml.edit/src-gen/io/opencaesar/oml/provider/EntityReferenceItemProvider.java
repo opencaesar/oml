@@ -78,7 +78,6 @@ public class EntityReferenceItemProvider extends ClassifierReferenceItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(OmlPackage.Literals.ENTITY_REFERENCE__OWNED_RELATION_RESTRICTIONS);
 			childrenFeatures.add(OmlPackage.Literals.ENTITY_REFERENCE__OWNED_KEYS);
 		}
 		return childrenFeatures;
@@ -121,7 +120,6 @@ public class EntityReferenceItemProvider extends ClassifierReferenceItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(EntityReference.class)) {
-			case OmlPackage.ENTITY_REFERENCE__OWNED_RELATION_RESTRICTIONS:
 			case OmlPackage.ENTITY_REFERENCE__OWNED_KEYS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
@@ -139,21 +137,6 @@ public class EntityReferenceItemProvider extends ClassifierReferenceItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OmlPackage.Literals.ENTITY_REFERENCE__OWNED_RELATION_RESTRICTIONS,
-				 OmlFactory.eINSTANCE.createRelationRangeRestrictionAxiom()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OmlPackage.Literals.ENTITY_REFERENCE__OWNED_RELATION_RESTRICTIONS,
-				 OmlFactory.eINSTANCE.createRelationCardinalityRestrictionAxiom()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OmlPackage.Literals.ENTITY_REFERENCE__OWNED_RELATION_RESTRICTIONS,
-				 OmlFactory.eINSTANCE.createRelationTargetRestrictionAxiom()));
 
 		newChildDescriptors.add
 			(createChildParameter

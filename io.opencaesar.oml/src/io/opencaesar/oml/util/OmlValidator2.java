@@ -374,14 +374,14 @@ public final class OmlValidator2 {
      */
     protected boolean validateRelationRestrictionAxiomRelation(RelationRestrictionAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
         final Classifier restrictingClassifier = OmlRead.getRestrictingClassifier(object);
-        final Relation relation = object.getRelation();
+        final Relation relation = object.getProperty();
         final Entity domainType = (relation!=null) ? relation.getDomain() : null;
         if (restrictingClassifier != null && domainType != null) {
 	        final Collection<SpecializableTerm> allGeneralTerms = OmlRead.closure(restrictingClassifier, true, t -> OmlSearch.findSuperTerms(t));
 	        if (!allGeneralTerms.stream().filter(t -> t == domainType).findAny().isPresent()) {
 	            return report(Diagnostic.WARNING, diagnostics, object,
-	                "Relation "+object.getRelation().getAbbreviatedIri()+" has a domain "+object.getRelation().getDomain().getAbbreviatedIri()+" that is not the same as or a super type of "+restrictingClassifier.getAbbreviatedIri(), 
-	                OmlPackage.Literals.RELATION_RESTRICTION_AXIOM__RELATION);
+	                "Relation "+object.getProperty().getAbbreviatedIri()+" has a domain "+object.getProperty().getDomain().getAbbreviatedIri()+" that is not the same as or a super type of "+restrictingClassifier.getAbbreviatedIri(), 
+	                OmlPackage.Literals.RELATION_RESTRICTION_AXIOM__PROPERTY);
 	        }
         }
         return true;
@@ -397,7 +397,7 @@ public final class OmlValidator2 {
      */
     protected boolean validateRelationRangeRestrictionAxiomRange(RelationRangeRestrictionAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
         final Entity restrictedRange = object.getRange();
-        final Relation relation = object.getRelation();
+        final Relation relation = object.getProperty();
         final Entity rangeType = (relation!=null) ? relation.getRange() : null;
         if (rangeType != null && restrictedRange != null && !restrictedRange.getAbbreviatedIri().equals(OWL_NOTHING)) {
 	        final Collection<SpecializableTerm> allGeneralEntities = OmlRead.closure(restrictedRange, true, t -> OmlSearch.findSuperTerms(t));
@@ -420,7 +420,7 @@ public final class OmlValidator2 {
      */
     protected boolean validateRelationCardinalityRestrictionAxiomRange(RelationCardinalityRestrictionAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
         final Entity restrictedRange = object.getRange();
-        final Relation relation = object.getRelation();
+        final Relation relation = object.getProperty();
         final Entity rangeType = (relation!=null) ? relation.getRange() : null;
         if (rangeType != null && restrictedRange != null && !restrictedRange.getAbbreviatedIri().equals(OWL_NOTHING)) {
             final Collection<SpecializableTerm> allGeneralEntities = OmlRead.closure(restrictedRange, true, t -> OmlSearch.findSuperTerms(t));
@@ -809,12 +809,12 @@ public final class OmlValidator2 {
         final var instance = OmlRead.getSubject(object);
         final var directInstanceTypes = OmlSearch.findTypes(instance);
         final var allinstanceTypes = directInstanceTypes.stream().flatMap(it -> OmlSearch.findAllSuperTerms(it, true).stream()).collect(Collectors.toList());
-        final Relation relation = object.getRelation();
+        final Relation relation = object.getProperty();
         final Classifier domainType = relation.getDomain();
         if (!allinstanceTypes.contains(domainType)) {
-            final var eRef = OmlPackage.Literals.LINK_ASSERTION__RELATION;
+            final var eRef = OmlPackage.Literals.LINK_ASSERTION__PROPERTY;
         	return report(Diagnostic.WARNING, diagnostics, object,
-                "Relation "+object.getRelation().getAbbreviatedIri()+" has a domain that is not the same as or a super type of the instance's type(s)" , eRef);
+                "Relation "+object.getProperty().getAbbreviatedIri()+" has a domain that is not the same as or a super type of the instance's type(s)" , eRef);
         }
         return true;
     }
@@ -831,12 +831,12 @@ public final class OmlValidator2 {
         final var instance = OmlRead.getTarget(object);
         final var directInstanceTypes = OmlSearch.findTypes(instance);
         final var allinstanceTypes = directInstanceTypes.stream().flatMap(it -> OmlSearch.findAllSuperTerms(it, true).stream()).collect(Collectors.toList());
-        final Relation relation = object.getRelation();
+        final Relation relation = object.getProperty();
         final Classifier rangeype = relation.getRange();
         if (!allinstanceTypes.contains(rangeype)) {
-            final var eRef = OmlPackage.Literals.LINK_ASSERTION__TARGET;
+            final var eRef = OmlPackage.Literals.LINK_ASSERTION__VALUE;
         	return report(Diagnostic.WARNING, diagnostics, object,
-                "Instance "+object.getTarget().getAbbreviatedIri()+" is not typed by the range of property "+object.getRelation().getAbbreviatedIri()+" or its subtypes" , eRef);
+                "Instance "+object.getValue().getAbbreviatedIri()+" is not typed by the range of property "+object.getProperty().getAbbreviatedIri()+" or its subtypes" , eRef);
         }
         return true;
     }

@@ -31,19 +31,19 @@ import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 
 /**
- * This is the item provider adapter for a {@link io.opencaesar.oml.RelationTargetRestrictionAxiom} object.
+ * This is the item provider adapter for a {@link io.opencaesar.oml.RelationValueRestrictionAxiom} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class RelationTargetRestrictionAxiomItemProvider extends RelationRestrictionAxiomItemProvider {
+public class RelationValueRestrictionAxiomItemProvider extends RelationRestrictionAxiomItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public RelationTargetRestrictionAxiomItemProvider(AdapterFactory adapterFactory) {
+	public RelationValueRestrictionAxiomItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -58,25 +58,25 @@ public class RelationTargetRestrictionAxiomItemProvider extends RelationRestrict
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addTargetPropertyDescriptor(object);
+			addValuePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Target feature.
+	 * This adds a property descriptor for the Value feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addTargetPropertyDescriptor(Object object) {
+	protected void addValuePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_RelationTargetRestrictionAxiom_target_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_RelationTargetRestrictionAxiom_target_feature", "_UI_RelationTargetRestrictionAxiom_type"),
-				 OmlPackage.Literals.RELATION_TARGET_RESTRICTION_AXIOM__TARGET,
+				 getString("_UI_RelationValueRestrictionAxiom_value_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_RelationValueRestrictionAxiom_value_feature", "_UI_RelationValueRestrictionAxiom_type"),
+				 OmlPackage.Literals.RELATION_VALUE_RESTRICTION_AXIOM__VALUE,
 				 true,
 				 false,
 				 true,
@@ -86,14 +86,14 @@ public class RelationTargetRestrictionAxiomItemProvider extends RelationRestrict
 	}
 
 	/**
-	 * This returns RelationTargetRestrictionAxiom.gif.
+	 * This returns RelationValueRestrictionAxiom.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/RelationTargetRestrictionAxiom"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/RelationValueRestrictionAxiom"));
 	}
 
 	/**
@@ -104,7 +104,7 @@ public class RelationTargetRestrictionAxiomItemProvider extends RelationRestrict
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_RelationTargetRestrictionAxiom_type");
+		return getString("_UI_RelationValueRestrictionAxiom_type");
 	}
 
 

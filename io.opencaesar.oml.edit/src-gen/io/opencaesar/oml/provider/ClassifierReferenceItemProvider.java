@@ -167,6 +167,21 @@ public class ClassifierReferenceItemProvider extends SpecializableTermReferenceI
 			(createChildParameter
 				(OmlPackage.Literals.CLASSIFIER_REFERENCE__OWNED_PROPERTY_RESTRICTIONS,
 				 OmlFactory.eINSTANCE.createStructuredPropertyValueRestrictionAxiom()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(OmlPackage.Literals.CLASSIFIER_REFERENCE__OWNED_PROPERTY_RESTRICTIONS,
+				 OmlFactory.eINSTANCE.createRelationRangeRestrictionAxiom()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(OmlPackage.Literals.CLASSIFIER_REFERENCE__OWNED_PROPERTY_RESTRICTIONS,
+				 OmlFactory.eINSTANCE.createRelationCardinalityRestrictionAxiom()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(OmlPackage.Literals.CLASSIFIER_REFERENCE__OWNED_PROPERTY_RESTRICTIONS,
+				 OmlFactory.eINSTANCE.createRelationValueRestrictionAxiom()));
 	}
 
 }

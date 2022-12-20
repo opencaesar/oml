@@ -68,7 +68,6 @@ import io.opencaesar.oml.NamedInstance;
 import io.opencaesar.oml.NamedInstanceReference;
 import io.opencaesar.oml.Ontology;
 import io.opencaesar.oml.Predicate;
-import io.opencaesar.oml.Property;
 import io.opencaesar.oml.PropertyPredicate;
 import io.opencaesar.oml.PropertyRestrictionAxiom;
 import io.opencaesar.oml.PropertyValueAssertion;
@@ -81,12 +80,9 @@ import io.opencaesar.oml.RelationEntityReference;
 import io.opencaesar.oml.RelationInstance;
 import io.opencaesar.oml.RelationInstanceReference;
 import io.opencaesar.oml.RelationReference;
-import io.opencaesar.oml.RelationRestrictionAxiom;
 import io.opencaesar.oml.RelationTypeAssertion;
-import io.opencaesar.oml.RestrictionAxiom;
 import io.opencaesar.oml.RuleReference;
 import io.opencaesar.oml.ScalarPropertyReference;
-import io.opencaesar.oml.ScalarPropertyRestrictionAxiom;
 import io.opencaesar.oml.SemanticProperty;
 import io.opencaesar.oml.SpecializableTerm;
 import io.opencaesar.oml.SpecializationAxiom;
@@ -94,7 +90,6 @@ import io.opencaesar.oml.Statement;
 import io.opencaesar.oml.StructureInstance;
 import io.opencaesar.oml.StructureReference;
 import io.opencaesar.oml.StructuredPropertyReference;
-import io.opencaesar.oml.StructuredPropertyRestrictionAxiom;
 import io.opencaesar.oml.Term;
 import io.opencaesar.oml.TypeAssertion;
 import io.opencaesar.oml.TypePredicate;
@@ -971,10 +966,10 @@ public final class OmlRead {
     public static List<Relation> getRelations(RelationEntity entity) {
         var relations = new ArrayList<Relation>();
         if (entity.getForwardRelation() != null) {
-            relations.add(entity.getForwardRelation());
+        	relations.add(entity.getForwardRelation());
         }
         if (entity.getReverseRelation() != null) {
-            relations.add(entity.getReverseRelation());
+        	relations.add(entity.getReverseRelation());
         }
         return relations;
     }
@@ -994,7 +989,6 @@ public final class OmlRead {
             axioms.addAll(((Classifier)term).getOwnedPropertyRestrictions());
         }
         if (term instanceof Entity) {
-            axioms.addAll(((Entity)term).getOwnedRelationRestrictions());            
             axioms.addAll(((Entity)term).getOwnedKeys());            
         }
         return axioms;
@@ -1010,12 +1004,19 @@ public final class OmlRead {
      */
     public static List<Assertion> getAssertions(Instance instance) {
         var assertions = new ArrayList<Assertion>();
-        assertions.addAll(instance.getOwnedPropertyValues());
-        if (instance instanceof NamedInstance) {
-            assertions.addAll(((NamedInstance)instance).getOwnedLinks());
-            assertions.addAll(getTypeAssertions((NamedInstance)instance));
-        }
+        assertions.addAll(getTypeAssertions(instance));
+        assertions.addAll(getPropertyValueAssertions(instance));
         return assertions;
+    }
+
+    /**
+     * Gets all the value assertions owned by the given instance
+     * 
+     * @param instance the given instance
+     * @return a list of assertions owned by the given instance
+     */
+    public static List<PropertyValueAssertion> getPropertyValueAssertions(Instance instance) {
+        return instance.getOwnedPropertyValues();
     }
     
     /**
@@ -1024,7 +1025,7 @@ public final class OmlRead {
      * @param instance the given instance
      * @return a list of type assertions owned by the given instance
      */
-    public static List<TypeAssertion> getTypeAssertions(NamedInstance instance) {
+    public static List<TypeAssertion> getTypeAssertions(Instance instance) {
         var assertions = new ArrayList<TypeAssertion>();
         if (instance instanceof ConceptInstance) {
             assertions.addAll(((ConceptInstance)instance).getOwnedTypes());
@@ -1044,12 +1045,21 @@ public final class OmlRead {
      */
     public static List<Assertion> getAssertions(NamedInstanceReference reference) {
         var assertions = new ArrayList<Assertion>();
-        assertions.addAll(reference.getOwnedPropertyValues());
-        assertions.addAll(reference.getOwnedLinks());
         assertions.addAll(getTypeAssertions(reference));
+        assertions.addAll(getPropertyValueAssertions(reference));
         return assertions;
     }
     
+    /**
+     * Gets all the value assertions owned by the given reference
+     * 
+     * @param reference the given reference
+     * @return a list of value assertions owned by the given reference
+     */
+    public static List<PropertyValueAssertion> getPropertyValueAssertions(NamedInstanceReference reference) {
+        return reference.getOwnedPropertyValues();
+    }
+
     /**
      * Gets all the type assertions owned by the given reference
      * 
@@ -1160,22 +1170,7 @@ public final class OmlRead {
         }
     }
     
-    // RestrictionAxiom
-    
-    /**
-     * Gets the restricting classifier of the given restriction axiom
-     * 
-     * @param axiom the given restriction axiom
-     * @return the restricting classifier of the given restriction axiom
-     */
-    public static Classifier getRestrictingClassifier(RestrictionAxiom axiom) {
-        if (axiom instanceof PropertyRestrictionAxiom) {
-            return getRestrictingClassifier((PropertyRestrictionAxiom) axiom);
-        } else if (axiom instanceof RelationRestrictionAxiom) {
-            return getRestrictingEntity((RelationRestrictionAxiom) axiom);
-        } 
-        return null;
-    }
+    // PropertyRestrictionAxiom
     
     /**
      * Gets the restricting classifier of the given property restriction axiom
@@ -1189,37 +1184,6 @@ public final class OmlRead {
         } else {
             return axiom.getOwningClassifier();
         }
-    }
-    
-    /**
-     * Gets the restricting entity of the given relation restriction axiom
-     * 
-     * @param axiom the given relation restriction axiom
-     * @return the restricting entity of the given relation restriction axiom
-     */
-    public static Entity getRestrictingEntity(RelationRestrictionAxiom axiom) {
-        if (axiom.getOwningReference() != null) {
-            return (Entity) resolve(axiom.getOwningReference());
-        } else {
-            return axiom.getOwningEntity();
-        }
-    }
-    
-    /**
-     * Gets the restricted property of the given restriction axiom
-     * 
-     * @param axiom the given restriction axiom
-     * @return the restricted property of the given restriction axiom
-     */
-    public static Property getRestrictedProprty(RestrictionAxiom axiom) {
-        if (axiom instanceof RelationRestrictionAxiom) {
-            return ((RelationRestrictionAxiom) axiom).getRelation();
-        } else if (axiom instanceof ScalarPropertyRestrictionAxiom) {
-            return ((ScalarPropertyRestrictionAxiom) axiom).getProperty();
-        } else if (axiom instanceof StructuredPropertyRestrictionAxiom) {
-            return ((StructuredPropertyRestrictionAxiom) axiom).getProperty();
-        }
-        return null;
     }
     
     //-------------------------------------------------
@@ -1239,8 +1203,6 @@ public final class OmlRead {
             return getSubject((ConceptTypeAssertion) assertion);
         } else if (assertion instanceof RelationTypeAssertion) {
             return getSubject((RelationTypeAssertion) assertion);
-        } else if (assertion instanceof LinkAssertion) {
-            return getSubject((LinkAssertion) assertion);
         } else if (assertion instanceof PropertyValueAssertion) {
             return getSubject((PropertyValueAssertion) assertion);
         }
@@ -1276,24 +1238,10 @@ public final class OmlRead {
     }
     
     /**
-     * Gets the named instance that is the subject of the given link assertion
+     * Gets the instance that is the subject of the given value assertion
      * 
-     * @param assertion the given link assertion
-     * @return the named instance that is the subject of the link assertion
-     */
-    public static NamedInstance getSubject(LinkAssertion assertion) {
-        if (assertion.getOwningReference() != null) {
-            return (NamedInstance) resolve(assertion.getOwningReference());
-        } else {
-            return assertion.getOwningInstance();
-        }
-    }
-    
-    /**
-     * Gets the instance that is the subject of the given property value assertion
-     * 
-     * @param assertion the given property value assertion
-     * @return the instance that is the subject of the property value assertion
+     * @param assertion the given value assertion
+     * @return the instance that is the subject of the value assertion
      */
     public static Instance getSubject(PropertyValueAssertion assertion) {
         if (assertion.getOwningReference() != null) {
@@ -1309,7 +1257,7 @@ public final class OmlRead {
      * Gets the source instance of the given link assertion 
      * 
      * @param assertion the given link assertion
-     * @return the instance that is the source of the given link assertion
+     * @return the source instance
      */
     public static NamedInstance getSource(LinkAssertion assertion) {
         return (NamedInstance) getSubject(assertion);
@@ -1319,10 +1267,10 @@ public final class OmlRead {
      * Gets the target instance of the given link assertion 
      * 
      * @param assertion the given link assertion
-     * @return the instance that is the target of the given link assertion
+     * @return the target instance
      */
     public static NamedInstance getTarget(LinkAssertion assertion) {
-        return assertion.getTarget();
+        return assertion.getValue();
     }
     
     // Predicate

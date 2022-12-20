@@ -344,13 +344,13 @@ public interface OmlFactory extends EFactory {
 	RelationCardinalityRestrictionAxiom createRelationCardinalityRestrictionAxiom();
 
 	/**
-	 * Returns a new object of class '<em>Relation Target Restriction Axiom</em>'.
+	 * Returns a new object of class '<em>Relation Value Restriction Axiom</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Relation Target Restriction Axiom</em>'.
+	 * @return a new object of class '<em>Relation Value Restriction Axiom</em>'.
 	 * @generated
 	 */
-	RelationTargetRestrictionAxiom createRelationTargetRestrictionAxiom();
+	RelationValueRestrictionAxiom createRelationValueRestrictionAxiom();
 
 	/**
 	 * Returns a new object of class '<em>Concept Type Assertion</em>'.

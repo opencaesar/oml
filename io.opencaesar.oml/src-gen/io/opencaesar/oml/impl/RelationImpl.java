@@ -27,20 +27,11 @@ import java.lang.reflect.InvocationTargetException;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Relation</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * The following features are implemented:
- * </p>
- * <ul>
- *   <li>{@link io.opencaesar.oml.impl.RelationImpl#getDomain <em>Domain</em>}</li>
- *   <li>{@link io.opencaesar.oml.impl.RelationImpl#getRange <em>Range</em>}</li>
- *   <li>{@link io.opencaesar.oml.impl.RelationImpl#getInverse <em>Inverse</em>}</li>
- * </ul>
  *
  * @generated
  */
@@ -70,9 +61,10 @@ public abstract class RelationImpl extends SemanticPropertyImpl implements Relat
 	 * @generated
 	 */
 	@Override
-	public Entity getDomain() {
-		Entity domain = basicGetDomain();
-		return domain != null && domain.eIsProxy() ? (Entity)eResolveProxy((InternalEObject)domain) : domain;
+	public boolean isInverseFunctional() {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -80,8 +72,71 @@ public abstract class RelationImpl extends SemanticPropertyImpl implements Relat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Entity basicGetDomain() {
-		return this.deriveDomain();
+	@Override
+	public boolean isSymmetric() {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isAsymmetric() {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isReflexive() {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isIrreflexive() {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isTransitive() {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Entity getDomain() {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -91,17 +146,9 @@ public abstract class RelationImpl extends SemanticPropertyImpl implements Relat
 	 */
 	@Override
 	public Entity getRange() {
-		Entity range = basicGetRange();
-		return range != null && range.eIsProxy() ? (Entity)eResolveProxy((InternalEObject)range) : range;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Entity basicGetRange() {
-		return this.deriveRange();
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -111,92 +158,9 @@ public abstract class RelationImpl extends SemanticPropertyImpl implements Relat
 	 */
 	@Override
 	public Relation getInverse() {
-		Relation inverse = basicGetInverse();
-		return inverse != null && inverse.eIsProxy() ? (Relation)eResolveProxy((InternalEObject)inverse) : inverse;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Relation basicGetInverse() {
-		return this.deriveInverse();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Entity deriveDomain() {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
 		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Entity deriveRange() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Relation deriveInverse() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case OmlPackage.RELATION__DOMAIN:
-				if (resolve) return getDomain();
-				return basicGetDomain();
-			case OmlPackage.RELATION__RANGE:
-				if (resolve) return getRange();
-				return basicGetRange();
-			case OmlPackage.RELATION__INVERSE:
-				if (resolve) return getInverse();
-				return basicGetInverse();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case OmlPackage.RELATION__DOMAIN:
-				return basicGetDomain() != null;
-			case OmlPackage.RELATION__RANGE:
-				return basicGetRange() != null;
-			case OmlPackage.RELATION__INVERSE:
-				return basicGetInverse() != null;
-		}
-		return super.eIsSet(featureID);
 	}
 
 	/**
@@ -207,12 +171,24 @@ public abstract class RelationImpl extends SemanticPropertyImpl implements Relat
 	@Override
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
-			case OmlPackage.RELATION___DERIVE_DOMAIN:
-				return deriveDomain();
-			case OmlPackage.RELATION___DERIVE_RANGE:
-				return deriveRange();
-			case OmlPackage.RELATION___DERIVE_INVERSE:
-				return deriveInverse();
+			case OmlPackage.RELATION___IS_INVERSE_FUNCTIONAL:
+				return isInverseFunctional();
+			case OmlPackage.RELATION___IS_SYMMETRIC:
+				return isSymmetric();
+			case OmlPackage.RELATION___IS_ASYMMETRIC:
+				return isAsymmetric();
+			case OmlPackage.RELATION___IS_REFLEXIVE:
+				return isReflexive();
+			case OmlPackage.RELATION___IS_IRREFLEXIVE:
+				return isIrreflexive();
+			case OmlPackage.RELATION___IS_TRANSITIVE:
+				return isTransitive();
+			case OmlPackage.RELATION___GET_DOMAIN:
+				return getDomain();
+			case OmlPackage.RELATION___GET_RANGE:
+				return getRange();
+			case OmlPackage.RELATION___GET_INVERSE:
+				return getInverse();
 		}
 		return super.eInvoke(operationID, arguments);
 	}

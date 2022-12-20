@@ -84,16 +84,14 @@ Aspect:
 	ownedAnnotations+=Annotation*
 	'aspect' name=ID (':>' ownedSpecializations+=SpecializationAxiom (',' ownedSpecializations+=SpecializationAxiom)*)? ('['
 		(ownedKeys+=KeyAxiom | 
-		 ownedPropertyRestrictions+=PropertyRestrictionAxiom |
-		 ownedRelationRestrictions+=RelationRestrictionAxiom)*
+		 ownedPropertyRestrictions+=PropertyRestrictionAxiom)*
 	']')?;
 
 Concept:
 	ownedAnnotations+=Annotation*
 	'concept' name=ID (':>' ownedSpecializations+=SpecializationAxiom (',' ownedSpecializations+=SpecializationAxiom)*)? ('['
 		(ownedKeys+=KeyAxiom | 
-		 ownedPropertyRestrictions+=PropertyRestrictionAxiom |
-		 ownedRelationRestrictions+=RelationRestrictionAxiom)*
+		 ownedPropertyRestrictions+=PropertyRestrictionAxiom)*
 		('enumerates' enumeratedInstances+=[ConceptInstance|Ref] (',' enumeratedInstances+=[ConceptInstance|Ref])*)?
 	']')?;
 	
@@ -112,8 +110,7 @@ RelationEntity:
 		 (irreflexive?='irreflexive')? &
 		 (transitive?='transitive')?)
 		(ownedKeys+=KeyAxiom |
-		 ownedPropertyRestrictions+=PropertyRestrictionAxiom |
-		 ownedRelationRestrictions+=RelationRestrictionAxiom)*
+		 ownedPropertyRestrictions+=PropertyRestrictionAxiom)*
 	']';
 	
 Structure:
@@ -221,8 +218,7 @@ NamedInstance:
 ConceptInstance:
 	ownedAnnotations+=Annotation*
 	'ci' name=ID (':' ownedTypes+=ConceptTypeAssertion (',' ownedTypes+=ConceptTypeAssertion)*)? ('['
-		(ownedPropertyValues+=PropertyValueAssertion | 
-		 ownedLinks+=LinkAssertion)*
+		ownedPropertyValues+=PropertyValueAssertion*
 	']')?;
 	
 RelationInstance:
@@ -230,8 +226,7 @@ RelationInstance:
 	'ri' name=ID (':' ownedTypes+=RelationTypeAssertion (',' ownedTypes+=RelationTypeAssertion)*)? '['
 		'from' sources+=[NamedInstance|Ref] (',' sources+=[NamedInstance|Ref])* 
 		'to' targets+=[NamedInstance|Ref] (',' targets+=[NamedInstance|Ref])*
-		(ownedPropertyValues+=PropertyValueAssertion |
-		 ownedLinks+=LinkAssertion)*
+		ownedPropertyValues+=PropertyValueAssertion
 	']';
 	
 SpecializableTermReference:
@@ -255,24 +250,21 @@ AspectReference:
 	ownedAnnotations+=Annotation*
 	'ref' 'aspect' aspect=[Aspect|Ref] (':>' ownedSpecializations+=SpecializationAxiom (',' ownedSpecializations+=SpecializationAxiom)*)? ('['
 		(ownedKeys+=KeyAxiom | 
-		 ownedPropertyRestrictions+=PropertyRestrictionAxiom |
-		 ownedRelationRestrictions+=RelationRestrictionAxiom)*
+		 ownedPropertyRestrictions+=PropertyRestrictionAxiom)*
 	']')?;
 
 ConceptReference:
 	ownedAnnotations+=Annotation*
 	'ref' 'concept' concept=[Concept|Ref] (':>' ownedSpecializations+=SpecializationAxiom (',' ownedSpecializations+=SpecializationAxiom)*)? ('['
 		(ownedKeys+=KeyAxiom | 
-		 ownedPropertyRestrictions+=PropertyRestrictionAxiom |
-		 ownedRelationRestrictions+=RelationRestrictionAxiom)*
+		 ownedPropertyRestrictions+=PropertyRestrictionAxiom)*
 	']')?;
 
 RelationEntityReference:
 	ownedAnnotations+=Annotation*
 	'ref' 'relation' 'entity' entity=[RelationEntity|Ref] (':>' ownedSpecializations+=SpecializationAxiom (',' ownedSpecializations+=SpecializationAxiom)*)? ('['
 		(ownedKeys+=KeyAxiom | 
-		 ownedPropertyRestrictions+=PropertyRestrictionAxiom |
-		 ownedRelationRestrictions+=RelationRestrictionAxiom)*
+		 ownedPropertyRestrictions+=PropertyRestrictionAxiom)*
 	']')?;
 
 StructureReference:
@@ -317,14 +309,12 @@ ConceptInstanceReference:
 	ownedAnnotations+=Annotation*
 	'ref' 'ci' instance=[ConceptInstance|Ref] (':' ownedTypes+=ConceptTypeAssertion (',' ownedTypes+=ConceptTypeAssertion)*)? ('['
 		ownedPropertyValues+=PropertyValueAssertion*
-		ownedLinks+=LinkAssertion*
 	']')?;
 
 RelationInstanceReference:
 	ownedAnnotations+=Annotation*
 	'ref' 'ri' instance=[RelationInstance|Ref] (':' ownedTypes+=RelationTypeAssertion (',' ownedTypes+=RelationTypeAssertion)*)? ('['
 		ownedPropertyValues+=PropertyValueAssertion*
-		ownedLinks+=LinkAssertion*
 	']')?;
 
 VocabularyStatement:
@@ -390,16 +380,16 @@ StructuredPropertyValueRestrictionAxiom:
 RelationRestrictionAxiom:
 	RelationRangeRestrictionAxiom |
 	RelationCardinalityRestrictionAxiom |
-	RelationTargetRestrictionAxiom;
+	RelationValueRestrictionAxiom;
 	
 RelationRangeRestrictionAxiom:
-	'restricts' kind=RangeRestrictionKind 'relation' relation=[Relation|Ref] 'to' range=[Entity|Ref];
+	'restricts' kind=RangeRestrictionKind 'relation' property=[Relation|Ref] 'to' range=[Entity|Ref];
 
 RelationCardinalityRestrictionAxiom:
-	'restricts' 'relation' relation=[Relation|Ref] 'to' kind=CardinalityRestrictionKind cardinality=UnsignedInteger (range=[Entity|Ref])?;
+	'restricts' 'relation' property=[Relation|Ref] 'to' kind=CardinalityRestrictionKind cardinality=UnsignedInteger (range=[Entity|Ref])?;
 
-RelationTargetRestrictionAxiom:
-	'restricts' 'relation' relation=[Relation|Ref] 'to' target=[NamedInstance|Ref];
+RelationValueRestrictionAxiom:
+	'restricts' 'relation' property=[Relation|Ref] 'to' value=[NamedInstance|Ref];
 
 KeyAxiom:
 	'key' properties+=[Property|Ref] (',' properties+=[Property|Ref])*;
@@ -412,7 +402,8 @@ RelationTypeAssertion:
 
 PropertyValueAssertion:
 	ScalarPropertyValueAssertion |
-	StructuredPropertyValueAssertion;
+	StructuredPropertyValueAssertion |
+	LinkAssertion;
 
 ScalarPropertyValueAssertion:
 	property=[ScalarProperty|Ref] value=Literal;
@@ -421,7 +412,7 @@ StructuredPropertyValueAssertion:
 	property=[StructuredProperty|Ref] value=StructureInstance;
 
 LinkAssertion:
-	relation=[Relation|Ref] target=[NamedInstance|Ref];
+	property=[Relation|Ref] value=[NamedInstance|Ref];
 
 Predicate:
 	UnaryPredicate |

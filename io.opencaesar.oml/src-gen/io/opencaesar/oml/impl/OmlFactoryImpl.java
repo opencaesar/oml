@@ -112,7 +112,7 @@ public class OmlFactoryImpl extends EFactoryImpl implements OmlFactory {
 			case OmlPackage.STRUCTURED_PROPERTY_VALUE_RESTRICTION_AXIOM: return createStructuredPropertyValueRestrictionAxiom();
 			case OmlPackage.RELATION_RANGE_RESTRICTION_AXIOM: return createRelationRangeRestrictionAxiom();
 			case OmlPackage.RELATION_CARDINALITY_RESTRICTION_AXIOM: return createRelationCardinalityRestrictionAxiom();
-			case OmlPackage.RELATION_TARGET_RESTRICTION_AXIOM: return createRelationTargetRestrictionAxiom();
+			case OmlPackage.RELATION_VALUE_RESTRICTION_AXIOM: return createRelationValueRestrictionAxiom();
 			case OmlPackage.CONCEPT_TYPE_ASSERTION: return createConceptTypeAssertion();
 			case OmlPackage.RELATION_TYPE_ASSERTION: return createRelationTypeAssertion();
 			case OmlPackage.SCALAR_PROPERTY_VALUE_ASSERTION: return createScalarPropertyValueAssertion();
@@ -584,9 +584,9 @@ public class OmlFactoryImpl extends EFactoryImpl implements OmlFactory {
 	 * @generated
 	 */
 	@Override
-	public RelationTargetRestrictionAxiom createRelationTargetRestrictionAxiom() {
-		RelationTargetRestrictionAxiomImpl relationTargetRestrictionAxiom = new RelationTargetRestrictionAxiomImpl();
-		return relationTargetRestrictionAxiom;
+	public RelationValueRestrictionAxiom createRelationValueRestrictionAxiom() {
+		RelationValueRestrictionAxiomImpl relationValueRestrictionAxiom = new RelationValueRestrictionAxiomImpl();
+		return relationValueRestrictionAxiom;
 	}
 
 	/**

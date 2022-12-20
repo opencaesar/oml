@@ -686,18 +686,9 @@ public class OmlSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case OmlPackage.RESTRICTION_AXIOM: {
-				RestrictionAxiom restrictionAxiom = (RestrictionAxiom)theEObject;
-				T result = caseRestrictionAxiom(restrictionAxiom);
-				if (result == null) result = caseAxiom(restrictionAxiom);
-				if (result == null) result = caseElement(restrictionAxiom);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case OmlPackage.PROPERTY_RESTRICTION_AXIOM: {
 				PropertyRestrictionAxiom propertyRestrictionAxiom = (PropertyRestrictionAxiom)theEObject;
 				T result = casePropertyRestrictionAxiom(propertyRestrictionAxiom);
-				if (result == null) result = caseRestrictionAxiom(propertyRestrictionAxiom);
 				if (result == null) result = caseAxiom(propertyRestrictionAxiom);
 				if (result == null) result = caseElement(propertyRestrictionAxiom);
 				if (result == null) result = defaultCase(theEObject);
@@ -707,7 +698,6 @@ public class OmlSwitch<T> extends Switch<T> {
 				ScalarPropertyRestrictionAxiom scalarPropertyRestrictionAxiom = (ScalarPropertyRestrictionAxiom)theEObject;
 				T result = caseScalarPropertyRestrictionAxiom(scalarPropertyRestrictionAxiom);
 				if (result == null) result = casePropertyRestrictionAxiom(scalarPropertyRestrictionAxiom);
-				if (result == null) result = caseRestrictionAxiom(scalarPropertyRestrictionAxiom);
 				if (result == null) result = caseAxiom(scalarPropertyRestrictionAxiom);
 				if (result == null) result = caseElement(scalarPropertyRestrictionAxiom);
 				if (result == null) result = defaultCase(theEObject);
@@ -718,7 +708,6 @@ public class OmlSwitch<T> extends Switch<T> {
 				T result = caseScalarPropertyRangeRestrictionAxiom(scalarPropertyRangeRestrictionAxiom);
 				if (result == null) result = caseScalarPropertyRestrictionAxiom(scalarPropertyRangeRestrictionAxiom);
 				if (result == null) result = casePropertyRestrictionAxiom(scalarPropertyRangeRestrictionAxiom);
-				if (result == null) result = caseRestrictionAxiom(scalarPropertyRangeRestrictionAxiom);
 				if (result == null) result = caseAxiom(scalarPropertyRangeRestrictionAxiom);
 				if (result == null) result = caseElement(scalarPropertyRangeRestrictionAxiom);
 				if (result == null) result = defaultCase(theEObject);
@@ -729,7 +718,6 @@ public class OmlSwitch<T> extends Switch<T> {
 				T result = caseScalarPropertyCardinalityRestrictionAxiom(scalarPropertyCardinalityRestrictionAxiom);
 				if (result == null) result = caseScalarPropertyRestrictionAxiom(scalarPropertyCardinalityRestrictionAxiom);
 				if (result == null) result = casePropertyRestrictionAxiom(scalarPropertyCardinalityRestrictionAxiom);
-				if (result == null) result = caseRestrictionAxiom(scalarPropertyCardinalityRestrictionAxiom);
 				if (result == null) result = caseAxiom(scalarPropertyCardinalityRestrictionAxiom);
 				if (result == null) result = caseElement(scalarPropertyCardinalityRestrictionAxiom);
 				if (result == null) result = defaultCase(theEObject);
@@ -740,7 +728,6 @@ public class OmlSwitch<T> extends Switch<T> {
 				T result = caseScalarPropertyValueRestrictionAxiom(scalarPropertyValueRestrictionAxiom);
 				if (result == null) result = caseScalarPropertyRestrictionAxiom(scalarPropertyValueRestrictionAxiom);
 				if (result == null) result = casePropertyRestrictionAxiom(scalarPropertyValueRestrictionAxiom);
-				if (result == null) result = caseRestrictionAxiom(scalarPropertyValueRestrictionAxiom);
 				if (result == null) result = caseAxiom(scalarPropertyValueRestrictionAxiom);
 				if (result == null) result = caseElement(scalarPropertyValueRestrictionAxiom);
 				if (result == null) result = defaultCase(theEObject);
@@ -750,7 +737,6 @@ public class OmlSwitch<T> extends Switch<T> {
 				StructuredPropertyRestrictionAxiom structuredPropertyRestrictionAxiom = (StructuredPropertyRestrictionAxiom)theEObject;
 				T result = caseStructuredPropertyRestrictionAxiom(structuredPropertyRestrictionAxiom);
 				if (result == null) result = casePropertyRestrictionAxiom(structuredPropertyRestrictionAxiom);
-				if (result == null) result = caseRestrictionAxiom(structuredPropertyRestrictionAxiom);
 				if (result == null) result = caseAxiom(structuredPropertyRestrictionAxiom);
 				if (result == null) result = caseElement(structuredPropertyRestrictionAxiom);
 				if (result == null) result = defaultCase(theEObject);
@@ -761,7 +747,6 @@ public class OmlSwitch<T> extends Switch<T> {
 				T result = caseStructuredPropertyRangeRestrictionAxiom(structuredPropertyRangeRestrictionAxiom);
 				if (result == null) result = caseStructuredPropertyRestrictionAxiom(structuredPropertyRangeRestrictionAxiom);
 				if (result == null) result = casePropertyRestrictionAxiom(structuredPropertyRangeRestrictionAxiom);
-				if (result == null) result = caseRestrictionAxiom(structuredPropertyRangeRestrictionAxiom);
 				if (result == null) result = caseAxiom(structuredPropertyRangeRestrictionAxiom);
 				if (result == null) result = caseElement(structuredPropertyRangeRestrictionAxiom);
 				if (result == null) result = defaultCase(theEObject);
@@ -772,7 +757,6 @@ public class OmlSwitch<T> extends Switch<T> {
 				T result = caseStructuredPropertyCardinalityRestrictionAxiom(structuredPropertyCardinalityRestrictionAxiom);
 				if (result == null) result = caseStructuredPropertyRestrictionAxiom(structuredPropertyCardinalityRestrictionAxiom);
 				if (result == null) result = casePropertyRestrictionAxiom(structuredPropertyCardinalityRestrictionAxiom);
-				if (result == null) result = caseRestrictionAxiom(structuredPropertyCardinalityRestrictionAxiom);
 				if (result == null) result = caseAxiom(structuredPropertyCardinalityRestrictionAxiom);
 				if (result == null) result = caseElement(structuredPropertyCardinalityRestrictionAxiom);
 				if (result == null) result = defaultCase(theEObject);
@@ -783,7 +767,6 @@ public class OmlSwitch<T> extends Switch<T> {
 				T result = caseStructuredPropertyValueRestrictionAxiom(structuredPropertyValueRestrictionAxiom);
 				if (result == null) result = caseStructuredPropertyRestrictionAxiom(structuredPropertyValueRestrictionAxiom);
 				if (result == null) result = casePropertyRestrictionAxiom(structuredPropertyValueRestrictionAxiom);
-				if (result == null) result = caseRestrictionAxiom(structuredPropertyValueRestrictionAxiom);
 				if (result == null) result = caseAxiom(structuredPropertyValueRestrictionAxiom);
 				if (result == null) result = caseElement(structuredPropertyValueRestrictionAxiom);
 				if (result == null) result = defaultCase(theEObject);
@@ -792,7 +775,7 @@ public class OmlSwitch<T> extends Switch<T> {
 			case OmlPackage.RELATION_RESTRICTION_AXIOM: {
 				RelationRestrictionAxiom relationRestrictionAxiom = (RelationRestrictionAxiom)theEObject;
 				T result = caseRelationRestrictionAxiom(relationRestrictionAxiom);
-				if (result == null) result = caseRestrictionAxiom(relationRestrictionAxiom);
+				if (result == null) result = casePropertyRestrictionAxiom(relationRestrictionAxiom);
 				if (result == null) result = caseAxiom(relationRestrictionAxiom);
 				if (result == null) result = caseElement(relationRestrictionAxiom);
 				if (result == null) result = defaultCase(theEObject);
@@ -802,7 +785,7 @@ public class OmlSwitch<T> extends Switch<T> {
 				RelationRangeRestrictionAxiom relationRangeRestrictionAxiom = (RelationRangeRestrictionAxiom)theEObject;
 				T result = caseRelationRangeRestrictionAxiom(relationRangeRestrictionAxiom);
 				if (result == null) result = caseRelationRestrictionAxiom(relationRangeRestrictionAxiom);
-				if (result == null) result = caseRestrictionAxiom(relationRangeRestrictionAxiom);
+				if (result == null) result = casePropertyRestrictionAxiom(relationRangeRestrictionAxiom);
 				if (result == null) result = caseAxiom(relationRangeRestrictionAxiom);
 				if (result == null) result = caseElement(relationRangeRestrictionAxiom);
 				if (result == null) result = defaultCase(theEObject);
@@ -812,19 +795,19 @@ public class OmlSwitch<T> extends Switch<T> {
 				RelationCardinalityRestrictionAxiom relationCardinalityRestrictionAxiom = (RelationCardinalityRestrictionAxiom)theEObject;
 				T result = caseRelationCardinalityRestrictionAxiom(relationCardinalityRestrictionAxiom);
 				if (result == null) result = caseRelationRestrictionAxiom(relationCardinalityRestrictionAxiom);
-				if (result == null) result = caseRestrictionAxiom(relationCardinalityRestrictionAxiom);
+				if (result == null) result = casePropertyRestrictionAxiom(relationCardinalityRestrictionAxiom);
 				if (result == null) result = caseAxiom(relationCardinalityRestrictionAxiom);
 				if (result == null) result = caseElement(relationCardinalityRestrictionAxiom);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case OmlPackage.RELATION_TARGET_RESTRICTION_AXIOM: {
-				RelationTargetRestrictionAxiom relationTargetRestrictionAxiom = (RelationTargetRestrictionAxiom)theEObject;
-				T result = caseRelationTargetRestrictionAxiom(relationTargetRestrictionAxiom);
-				if (result == null) result = caseRelationRestrictionAxiom(relationTargetRestrictionAxiom);
-				if (result == null) result = caseRestrictionAxiom(relationTargetRestrictionAxiom);
-				if (result == null) result = caseAxiom(relationTargetRestrictionAxiom);
-				if (result == null) result = caseElement(relationTargetRestrictionAxiom);
+			case OmlPackage.RELATION_VALUE_RESTRICTION_AXIOM: {
+				RelationValueRestrictionAxiom relationValueRestrictionAxiom = (RelationValueRestrictionAxiom)theEObject;
+				T result = caseRelationValueRestrictionAxiom(relationValueRestrictionAxiom);
+				if (result == null) result = caseRelationRestrictionAxiom(relationValueRestrictionAxiom);
+				if (result == null) result = casePropertyRestrictionAxiom(relationValueRestrictionAxiom);
+				if (result == null) result = caseAxiom(relationValueRestrictionAxiom);
+				if (result == null) result = caseElement(relationValueRestrictionAxiom);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -883,6 +866,7 @@ public class OmlSwitch<T> extends Switch<T> {
 			case OmlPackage.LINK_ASSERTION: {
 				LinkAssertion linkAssertion = (LinkAssertion)theEObject;
 				T result = caseLinkAssertion(linkAssertion);
+				if (result == null) result = casePropertyValueAssertion(linkAssertion);
 				if (result == null) result = caseAssertion(linkAssertion);
 				if (result == null) result = caseElement(linkAssertion);
 				if (result == null) result = defaultCase(theEObject);
@@ -2002,21 +1986,6 @@ public class OmlSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Restriction Axiom</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Restriction Axiom</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseRestrictionAxiom(RestrictionAxiom object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Property Restriction Axiom</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -2197,17 +2166,17 @@ public class OmlSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Relation Target Restriction Axiom</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Relation Value Restriction Axiom</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Relation Target Restriction Axiom</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Relation Value Restriction Axiom</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseRelationTargetRestrictionAxiom(RelationTargetRestrictionAxiom object) {
+	public T caseRelationValueRestrictionAxiom(RelationValueRestrictionAxiom object) {
 		return null;
 	}
 
