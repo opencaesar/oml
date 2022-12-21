@@ -37,38 +37,36 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 
 import io.opencaesar.oml.BinaryPredicate;
 import io.opencaesar.oml.Classifier;
+import io.opencaesar.oml.Concept;
+import io.opencaesar.oml.ConceptInstance;
 import io.opencaesar.oml.Description;
 import io.opencaesar.oml.DescriptionBundle;
 import io.opencaesar.oml.Element;
-import io.opencaesar.oml.Entity;
 import io.opencaesar.oml.EnumeratedScalar;
 import io.opencaesar.oml.Extension;
 import io.opencaesar.oml.FacetedScalar;
 import io.opencaesar.oml.Inclusion;
-import io.opencaesar.oml.LinkAssertion;
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.Ontology;
+import io.opencaesar.oml.PropertyCardinalityRestrictionAxiom;
 import io.opencaesar.oml.PropertyPredicate;
+import io.opencaesar.oml.PropertyRangeRestrictionAxiom;
+import io.opencaesar.oml.PropertyRestrictionAxiom;
 import io.opencaesar.oml.PropertyValueAssertion;
+import io.opencaesar.oml.PropertyValueRestrictionAxiom;
 import io.opencaesar.oml.QuotedLiteral;
 import io.opencaesar.oml.Relation;
-import io.opencaesar.oml.RelationCardinalityRestrictionAxiom;
-import io.opencaesar.oml.RelationRangeRestrictionAxiom;
-import io.opencaesar.oml.RelationRestrictionAxiom;
+import io.opencaesar.oml.RelationEntity;
+import io.opencaesar.oml.RelationInstance;
 import io.opencaesar.oml.Scalar;
 import io.opencaesar.oml.ScalarProperty;
-import io.opencaesar.oml.ScalarPropertyCardinalityRestrictionAxiom;
-import io.opencaesar.oml.ScalarPropertyRangeRestrictionAxiom;
-import io.opencaesar.oml.ScalarPropertyRestrictionAxiom;
-import io.opencaesar.oml.ScalarPropertyValueAssertion;
 import io.opencaesar.oml.SemanticProperty;
 import io.opencaesar.oml.SpecializableTerm;
 import io.opencaesar.oml.SpecializationAxiom;
 import io.opencaesar.oml.Structure;
 import io.opencaesar.oml.StructuredProperty;
-import io.opencaesar.oml.StructuredPropertyCardinalityRestrictionAxiom;
-import io.opencaesar.oml.StructuredPropertyRangeRestrictionAxiom;
-import io.opencaesar.oml.StructuredPropertyRestrictionAxiom;
+import io.opencaesar.oml.Type;
+import io.opencaesar.oml.TypeAssertion;
 import io.opencaesar.oml.TypePredicate;
 import io.opencaesar.oml.Usage;
 import io.opencaesar.oml.Vocabulary;
@@ -190,7 +188,7 @@ public final class OmlValidator2 {
     		}
     	}
     	var returnValue = true;
-        for (var import_ : OmlRead.getImports(object)) {
+        for (var import_ : object.getOwnedImports()) {
         	if (import_.getPrefix() != null && !referencedNSs.contains(import_.getNamespace())) {
 	            report(Diagnostic.WARNING, diagnostics, import_,
 	                "Import <"+import_.getNamespace()+"> with prefix is not used", null);
@@ -210,7 +208,7 @@ public final class OmlValidator2 {
      */
 	protected boolean validateOntologyHasDuplicateImports(Ontology object, DiagnosticChain diagnostics, Map<Object, Object> context) {
         boolean returnValue = true;
-    	var imports = OmlRead.getImports(object);
+    	var imports = object.getOwnedImports();
     	for (var import_ : imports) {
         	if (imports.stream().anyMatch(i -> i != import_ && i.getNamespace() != null && i.getNamespace().equals(import_.getNamespace()))) {
 	            report(Diagnostic.WARNING, diagnostics, import_,
@@ -231,7 +229,7 @@ public final class OmlValidator2 {
      */
 	protected boolean validateOntologyHasSelfImports(Ontology object, DiagnosticChain diagnostics, Map<Object, Object> context) {
         boolean returnValue = true;
-    	var imports = OmlRead.getImports(object);
+    	var imports = object.getOwnedImports();
     	for (var import_ : imports) {
         	if (imports.stream().anyMatch(i -> i.getNamespace() != null && i.getNamespace().equals(object.getNamespace()))) {
 	            report(Diagnostic.WARNING, diagnostics, import_,
@@ -362,215 +360,111 @@ public final class OmlValidator2 {
     	return true;
     }
     
-    // RelationRestrictionAxiom
+    // PropertyRestrictionAxiom
     
     /**
-     * Checks if the domain of a restricted relation is the same as or a super type of the restricting classifier
+     * Checks if the domain of a restricted property is the same as or a super type of the restricting classifier
      * 
-     * @param object The relation restriction to check
+     * @param object The property restriction to check
      * @param diagnostics The validation diagnostics
      * @param context The object-to-object context map
      * @return True if the rules is satisfied; False otherwise
      */
-    protected boolean validateRelationRestrictionAxiomRelation(RelationRestrictionAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-        final Classifier restrictingClassifier = OmlRead.getRestrictingClassifier(object);
-        final Relation relation = object.getProperty();
-        final Entity domainType = (relation!=null) ? relation.getDomain() : null;
-        if (restrictingClassifier != null && domainType != null) {
-	        final Collection<SpecializableTerm> allGeneralTerms = OmlRead.closure(restrictingClassifier, true, t -> OmlSearch.findSuperTerms(t));
+    protected boolean validatePropertyRestrictionAxiomDomain(PropertyRestrictionAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        final Classifier restrictingDomain = OmlRead.getRestrictingDomain(object);
+        final SemanticProperty property = object.getProperty();
+        final Classifier domainType = (property!=null) ? property.getDomain() : null;
+        if (restrictingDomain != null && domainType != null) {
+	        final Collection<SpecializableTerm> allGeneralTerms = OmlRead.closure(restrictingDomain, true, t -> OmlSearch.findSuperTerms(t));
 	        if (!allGeneralTerms.stream().filter(t -> t == domainType).findAny().isPresent()) {
 	            return report(Diagnostic.WARNING, diagnostics, object,
-	                "Relation "+object.getProperty().getAbbreviatedIri()+" has a domain "+object.getProperty().getDomain().getAbbreviatedIri()+" that is not the same as or a super type of "+restrictingClassifier.getAbbreviatedIri(), 
-	                OmlPackage.Literals.RELATION_RESTRICTION_AXIOM__PROPERTY);
+	                "Property "+object.getProperty().getAbbreviatedIri()+" has a domain "+object.getProperty().getDomain().getAbbreviatedIri()+" that is not the same as or a super type of "+restrictingDomain.getAbbreviatedIri(), 
+	                OmlPackage.Literals.PROPERTY_RESTRICTION_AXIOM__PROPERTY);
 	        }
         }
         return true;
     }
-    
+
+    // PropertyRangeRestrictionAxiom
+
     /**
-     * Checks if the restricted range is the same as or a sub type of the restricted relation's range
+     * Checks if the range of a property range restriction is the same as or a sub type of the restricted property's range
      * 
-     * @param object The relation restriction to check
+     * @param object The property range restriction to check
      * @param diagnostics The validation diagnostics
      * @param context The object-to-object context map
      * @return True if the rules is satisfied; False otherwise
      */
-    protected boolean validateRelationRangeRestrictionAxiomRange(RelationRangeRestrictionAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-        final Entity restrictedRange = object.getRange();
-        final Relation relation = object.getProperty();
-        final Entity rangeType = (relation!=null) ? relation.getRange() : null;
+    protected boolean validatePropertyRangeRestrictionAxiomRange(PropertyRangeRestrictionAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        final Type restrictedRange = object.getRange();
+        final SemanticProperty property = object.getProperty();
+        final Type rangeType = (property!=null) ? property.getRange() : null;
         if (rangeType != null && restrictedRange != null && !restrictedRange.getAbbreviatedIri().equals(OWL_NOTHING)) {
 	        final Collection<SpecializableTerm> allGeneralEntities = OmlRead.closure(restrictedRange, true, t -> OmlSearch.findSuperTerms(t));
 	        if (!allGeneralEntities.stream().filter(t -> t == rangeType).findAny().isPresent()) {
 	            return report(Diagnostic.WARNING, diagnostics, object,
-	                "Entity "+restrictedRange.getAbbreviatedIri()+" is not the same as or a sub type of "+rangeType.getAbbreviatedIri(), 
-	                OmlPackage.Literals.RELATION_RANGE_RESTRICTION_AXIOM__RANGE);
+	                "Type "+restrictedRange.getAbbreviatedIri()+" is not the same as or a sub type of "+rangeType.getAbbreviatedIri(), 
+	                OmlPackage.Literals.PROPERTY_RANGE_RESTRICTION_AXIOM__RANGE);
 	        }
         }
         return true;
     }
 
+    // PropertyCardinalityRestrictionAxiom
+
     /**
-     * Checks if the restricted range is the same as or a sub type of the restricted relation's range
+     * Checks if the range of a property cardinality restriction is the same as or a sub type of the restricted property's range
      * 
-     * @param object The relation restriction to check
+     * @param object The property cardinality restriction to check
      * @param diagnostics The validation diagnostics
      * @param context The object-to-object context map
      * @return True if the rules is satisfied; False otherwise
      */
-    protected boolean validateRelationCardinalityRestrictionAxiomRange(RelationCardinalityRestrictionAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-        final Entity restrictedRange = object.getRange();
-        final Relation relation = object.getProperty();
-        final Entity rangeType = (relation!=null) ? relation.getRange() : null;
+    protected boolean validatePropertyCardinalityRestrictionAxiomRange(PropertyCardinalityRestrictionAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        final Type restrictedRange = object.getRange();
+        final SemanticProperty property = object.getProperty();
+        final Type rangeType = (property!=null) ? property.getRange() : null;
         if (rangeType != null && restrictedRange != null && !restrictedRange.getAbbreviatedIri().equals(OWL_NOTHING)) {
             final Collection<SpecializableTerm> allGeneralEntities = OmlRead.closure(restrictedRange, true, t -> OmlSearch.findSuperTerms(t));
             if (!allGeneralEntities.stream().filter(t -> t == rangeType).findAny().isPresent()) {
                 return report(Diagnostic.WARNING, diagnostics, object,
-                    "Entity "+restrictedRange.getAbbreviatedIri()+" is not the same as or a sub type of "+rangeType.getAbbreviatedIri(), 
-                    OmlPackage.Literals.RELATION_CARDINALITY_RESTRICTION_AXIOM__RANGE);
+                    "Type "+restrictedRange.getAbbreviatedIri()+" is not the same as or a sub type of "+rangeType.getAbbreviatedIri(), 
+                    OmlPackage.Literals.PROPERTY_CARDINALITY_RESTRICTION_AXIOM__RANGE);
             }
         }
         return true;
     }
 
-    // ScalarPropertyRestrictionAxiom
-    
-    /**
-     * Checks if the domain of a restricted scalar property is the same as or a super type of the restricting classifier
-     * 
-     * @param object The scalar property restriction to check
-     * @param diagnostics The validation diagnostics
-     * @param context The object-to-object context map
-     * @return True if the rules is satisfied; False otherwise
-     */
-    protected boolean validateScalarPropertyRestrictionAxiomProperty(ScalarPropertyRestrictionAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-        final Classifier restrictingClassifier = OmlRead.getRestrictingClassifier(object);
-        final ScalarProperty property = object.getProperty();
-        final Classifier domainType = (property!=null) ? property.getDomain() : null;
-        if (restrictingClassifier != null && domainType != null) {
-	        final Collection<SpecializableTerm> allGeneralTerms = OmlRead.closure(restrictingClassifier, true, t -> OmlSearch.findSuperTerms(t));
-	        if (!allGeneralTerms.stream().filter(t -> t == domainType).findAny().isPresent()) {
-	            return report(Diagnostic.WARNING, diagnostics, object,
-	                "Property "+object.getProperty().getAbbreviatedIri()+" has a domain that is not the same as or a super type of "+OmlRead.getRestrictingClassifier(object).getAbbreviatedIri(), 
-	                OmlPackage.Literals.SCALAR_PROPERTY_RESTRICTION_AXIOM__PROPERTY);
-	        }
-        }
-        return true;
-    }
-    
-    /**
-     * Checks if the restricted range is the same as or a sub type of the restricted scalar property's range
-     * 
-     * @param object The scalar property restriction to check
-     * @param diagnostics The validation diagnostics
-     * @param context The object-to-object context map
-     * @return True if the rules is satisfied; False otherwise
-     */
-    protected boolean validateScalarPropertyRangeRestrictionAxiomRange(ScalarPropertyRangeRestrictionAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-        final Scalar restrictedRange = object.getRange();
-        final ScalarProperty property = object.getProperty();
-        final Scalar rangeType = (property!=null) ? property.getRange() : null;
-        if (restrictedRange != null && rangeType != null) {
-	        final Collection<SpecializableTerm> allGeneralEntities = OmlRead.closure(restrictedRange, true, t -> OmlSearch.findSuperTerms(t));
-	        if (!allGeneralEntities.stream().filter(t -> t == rangeType).findAny().isPresent()) {
-	            return report(Diagnostic.WARNING, diagnostics, object,
-	                "Scalar "+restrictedRange.getAbbreviatedIri()+" is not the same as or a sub type of "+rangeType.getAbbreviatedIri(), 
-	                OmlPackage.Literals.SCALAR_PROPERTY_RANGE_RESTRICTION_AXIOM__RANGE);
-	        }
-        }
-        return true;
-    }
+    // PropertyValueRestrictionAxiom
 
     /**
-     * Checks if the restricted range is the same as or a sub type of the restricted scalar property's range
+     * Checks if the value of a property cardinality restriction is appropriate for the restricted property kind
      * 
-     * @param object The scalar property restriction to check
+     * @param object The property value restriction to check
      * @param diagnostics The validation diagnostics
      * @param context The object-to-object context map
      * @return True if the rules is satisfied; False otherwise
      */
-    protected boolean validateScalarPropertyCardinalityRestrictionAxiomRange(ScalarPropertyCardinalityRestrictionAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-        final Scalar restrictedRange = object.getRange();
-        final ScalarProperty property = object.getProperty();
-        final Scalar rangeType = (property!=null) ? property.getRange() : null;
-        if (restrictedRange != null && rangeType != null) {
-            final Collection<SpecializableTerm> allGeneralEntities = OmlRead.closure(restrictedRange, true, t -> OmlSearch.findSuperTerms(t));
-            if (!allGeneralEntities.stream().filter(t -> t == rangeType).findAny().isPresent()) {
-                return report(Diagnostic.WARNING, diagnostics, object,
-                    "Scalar "+restrictedRange.getAbbreviatedIri()+" is not the same as or a sub type of "+rangeType.getAbbreviatedIri(), 
-                    OmlPackage.Literals.SCALAR_PROPERTY_CARDINALITY_RESTRICTION_AXIOM__RANGE);
-            }
-        }
-        return true;
-    }
-
-    // StructuredPropertyRestrictionAxiom
-    
-    /**
-     * Checks if the domain of a restricted structured property is the same as or a super type of the restricting classifier
-     * 
-     * @param object The structured property restriction to check
-     * @param diagnostics The validation diagnostics
-     * @param context The object-to-object context map
-     * @return True if the rules is satisfied; False otherwise
-     */
-    protected boolean validateStructuredPropertyRestrictionAxiomProperty(StructuredPropertyRestrictionAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-        final Classifier restrictingClassifier = OmlRead.getRestrictingClassifier(object);
-        final StructuredProperty property = object.getProperty();
-        final Classifier domainType = (property!=null) ? property.getDomain() : null;
-        if (restrictingClassifier != null && domainType != null) {
-	        final Collection<SpecializableTerm> allGeneralTerms = OmlRead.closure(restrictingClassifier, true, t -> OmlSearch.findSuperTerms(t));
-	        if (!allGeneralTerms.stream().filter(t -> t == domainType).findAny().isPresent()) {
+    protected boolean validatePropertyValueRestrictionAxiomValue(PropertyValueRestrictionAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        final SemanticProperty property = object.getProperty();
+        if (property instanceof ScalarProperty) {
+        	if (object.getLiteralValue() == null) {
 	            return report(Diagnostic.WARNING, diagnostics, object,
-	                "Property "+object.getProperty().getAbbreviatedIri()+" has a domain that is not the same as or a super type of "+OmlRead.getRestrictingClassifier(object).getAbbreviatedIri(), 
-	                OmlPackage.Literals.STRUCTURED_PROPERTY_RESTRICTION_AXIOM__PROPERTY);
-	        }
-        }
-        return true;
-    }
-    
-    /**
-     * Checks if the restricted range is the same as or a sub type of the restricted structured property's range
-     * 
-     * @param object The structured property restriction to check
-     * @param diagnostics The validation diagnostics
-     * @param context The object-to-object context map
-     * @return True if the rules is satisfied; False otherwise
-     */
-    protected boolean validateStructuredPropertyRangeRestrictionAxiomRange(StructuredPropertyRangeRestrictionAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-        final Structure restrictedRange = object.getRange();
-        final StructuredProperty property = object.getProperty();
-        final Structure rangeType = (property!=null) ? property.getRange() : null;
-        if (restrictedRange != null && rangeType != null) {
-	        final Collection<SpecializableTerm> allGeneralEntities = OmlRead.closure(restrictedRange, true, t -> OmlSearch.findSuperTerms(t));
-	        if (!allGeneralEntities.stream().filter(t -> t == rangeType).findAny().isPresent()) {
+	                "A literal is expected as the restricted value of property "+property.getAbbreviatedIri(), 
+	                OmlPackage.Literals.PROPERTY_RESTRICTION_AXIOM__PROPERTY);
+        	}
+        } else if (property instanceof StructuredProperty) {
+        	if (object.getStructureInstanceValue() == null) {
 	            return report(Diagnostic.WARNING, diagnostics, object,
-	                "Structure "+restrictedRange.getAbbreviatedIri()+" is not the same as or a sub type of "+rangeType.getAbbreviatedIri(), 
-	                OmlPackage.Literals.STRUCTURED_PROPERTY_RANGE_RESTRICTION_AXIOM__RANGE);
-	        }
-        }
-        return true;
-    }
-
-    /**
-     * Checks if the restricted range is the same as or a sub type of the restricted structured property's range
-     * 
-     * @param object The structured property restriction to check
-     * @param diagnostics The validation diagnostics
-     * @param context The object-to-object context map
-     * @return True if the rules is satisfied; False otherwise
-     */
-    protected boolean validateStructuredPropertyCardinalityRestrictionAxiomRange(StructuredPropertyCardinalityRestrictionAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-        final Structure restrictedRange = object.getRange();
-        final StructuredProperty property = object.getProperty();
-        final Structure rangeType = (property!=null) ? property.getRange() : null;
-        if (restrictedRange != null && rangeType != null) {
-            final Collection<SpecializableTerm> allGeneralEntities = OmlRead.closure(restrictedRange, true, t -> OmlSearch.findSuperTerms(t));
-            if (!allGeneralEntities.stream().filter(t -> t == rangeType).findAny().isPresent()) {
-                return report(Diagnostic.WARNING, diagnostics, object,
-                    "Structure "+restrictedRange.getAbbreviatedIri()+" is not the same as or a sub type of "+rangeType.getAbbreviatedIri(), 
-                    OmlPackage.Literals.STRUCTURED_PROPERTY_CARDINALITY_RESTRICTION_AXIOM__RANGE);
-            }
+	                "A structure instance is expected as the restricted value of property "+property.getAbbreviatedIri(), 
+	                OmlPackage.Literals.PROPERTY_RESTRICTION_AXIOM__PROPERTY);
+        	}
+        } else if (property instanceof Relation) {
+        	if (object.getNamedInstanceValue() == null) {
+	            return report(Diagnostic.WARNING, diagnostics, object,
+	                "A named instance IRI is expected as the restricted value of relation "+property.getAbbreviatedIri(), 
+	                OmlPackage.Literals.PROPERTY_RESTRICTION_AXIOM__PROPERTY);
+        	}
         }
         return true;
     }
@@ -774,69 +668,63 @@ public final class OmlValidator2 {
     // Assertions
 
     /**
-     * Checks if the property of a property value assertion has a domain that is the same or a super type of the owning instance's type(s)
+     * Checks if the subject of a property value assertion has a type that is the same or a subtype of the property's domain
      * 
      * @param object The property value assertion to check
      * @param diagnostics The validation diagnostics
      * @param context The object-to-object context map
      * @return True if the rules is satisfied; False otherwise
      */
-    protected boolean validatePropertyRestrictionAxiomSubject(PropertyValueAssertion object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-        final var instance = OmlRead.getSubject(object);
-        final var directInstanceTypes = OmlSearch.findTypes(instance);
-        final var allinstanceTypes = directInstanceTypes.stream().flatMap(it -> OmlSearch.findAllSuperTerms(it, true).stream()).collect(Collectors.toList());
+    protected boolean validatePropertyValueRestrictionAxiomSubject(PropertyValueAssertion object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        final var theSubject = OmlRead.getSubject(object);
+        final var allSubjectTypes = OmlSearch.findAllTypes(theSubject);
         final SemanticProperty property = object.getProperty();
         final Classifier domainType = property.getDomain();
-        if (!allinstanceTypes.contains(domainType)) {
-            final var eRef = (object instanceof ScalarPropertyValueAssertion) ?
-            	OmlPackage.Literals.SCALAR_PROPERTY_VALUE_ASSERTION__PROPERTY :
-            	OmlPackage.Literals.STRUCTURED_PROPERTY_VALUE_ASSERTION__PROPERTY;
+        if (!allSubjectTypes.contains(domainType)) {
         	return report(Diagnostic.WARNING, diagnostics, object,
-                "Property "+object.getProperty().getAbbreviatedIri()+" has a domain that is not the same as or a super type of the instance's type(s)" , eRef);
+                "Property "+object.getProperty().getAbbreviatedIri()+" has a domain that is not the same as or a super type of the assertion's subject",
+                OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__PROPERTY);
         }
         return true;
     }
 
     /**
-     * Checks if the relation of a link assertion has a domain that is the same or a super type of the owning instance's type(s)
+     * Checks if the object of a property value assertion has a type that is the same or a subtype of the property's range
      * 
-     * @param object The link assertion to check
+     * @param object The property value assertion to check
      * @param diagnostics The validation diagnostics
      * @param context The object-to-object context map
      * @return True if the rules is satisfied; False otherwise
      */
-    protected boolean validateLinkRestrictionAxiomSubject(LinkAssertion object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-        final var instance = OmlRead.getSubject(object);
-        final var directInstanceTypes = OmlSearch.findTypes(instance);
-        final var allinstanceTypes = directInstanceTypes.stream().flatMap(it -> OmlSearch.findAllSuperTerms(it, true).stream()).collect(Collectors.toList());
-        final Relation relation = object.getProperty();
-        final Classifier domainType = relation.getDomain();
-        if (!allinstanceTypes.contains(domainType)) {
-            final var eRef = OmlPackage.Literals.LINK_ASSERTION__PROPERTY;
+    protected boolean validatePropertyValueRestrictionAxiomObject(PropertyValueAssertion object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        final var theObject = OmlRead.getObject(object);
+        final var allObjectTypes = OmlSearch.findAllTypes(theObject);
+        final SemanticProperty property = object.getProperty();
+        final Type rangeType = property.getRange();
+        if (!allObjectTypes.contains(rangeType)) {
         	return report(Diagnostic.WARNING, diagnostics, object,
-                "Relation "+object.getProperty().getAbbreviatedIri()+" has a domain that is not the same as or a super type of the instance's type(s)" , eRef);
+                "Property "+object.getProperty().getAbbreviatedIri()+" has a range that is not the same as or a super type of the assertion's object",
+                OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__PROPERTY);
         }
         return true;
     }
 
     /**
-     * Checks if the relation of a link assertion has a range that is the same or a super type of the target instance's type(s)
+     * Checks that the type assertion is asserted by the proper kind for the instance
      * 
-     * @param object The link assertion to check
+     * @param object The type assertion to check
      * @param diagnostics The validation diagnostics
      * @param context The object-to-object context map
      * @return True if the rules is satisfied; False otherwise
      */
-    protected boolean validateLinkRestrictionAxiomObject(LinkAssertion object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-        final var instance = OmlRead.getTarget(object);
-        final var directInstanceTypes = OmlSearch.findTypes(instance);
-        final var allinstanceTypes = directInstanceTypes.stream().flatMap(it -> OmlSearch.findAllSuperTerms(it, true).stream()).collect(Collectors.toList());
-        final Relation relation = object.getProperty();
-        final Classifier rangeype = relation.getRange();
-        if (!allinstanceTypes.contains(rangeype)) {
-            final var eRef = OmlPackage.Literals.LINK_ASSERTION__VALUE;
-        	return report(Diagnostic.WARNING, diagnostics, object,
-                "Instance "+object.getValue().getAbbreviatedIri()+" is not typed by the range of property "+object.getProperty().getAbbreviatedIri()+" or its subtypes" , eRef);
+    protected boolean validateTypeRestriction(TypeAssertion object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        final var instance = OmlRead.getAssertingInstance(object);
+        final var type = object.getType();
+        if (((instance instanceof ConceptInstance) && !(type instanceof Concept)) || 
+        	((instance instanceof RelationInstance) && !(type instanceof RelationEntity))) {
+            final var eRef = OmlPackage.Literals.TYPE_ASSERTION__TYPE;
+        	return report(Diagnostic.ERROR, diagnostics, object,
+                "Type "+type.getAbbreviatedIri()+" cannot be a type for instance "+instance.getAbbreviatedIri() , eRef);
         }
         return true;
     }

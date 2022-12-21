@@ -25,8 +25,8 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * StructureInstance is an instance that can be typed by a structure. It is anonymous and gets assigned as
- * a value for structured properties, either as part of value restrictions on entities, or value assertions on instances.
+ * StructureInstance is an instance that can be typed by a structure. It is anonymous and gets assigned as a value of a structured property
+ * either in a property value restriction axiom or a property value assertion
  * <!-- end-model-doc -->
  *
  * <p>
@@ -70,20 +70,20 @@ public interface StructureInstance extends Instance {
 
 	/**
 	 * Returns the value of the '<em><b>Owning Axiom</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.StructuredPropertyValueRestrictionAxiom#getValue <em>Value</em>}'.
+	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.PropertyValueRestrictionAxiom#getStructureInstanceValue <em>Structure Instance Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * The property value restriction axiom that assigns this instance as a restricted value
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Owning Axiom</em>' container reference.
-	 * @see #setOwningAxiom(StructuredPropertyValueRestrictionAxiom)
+	 * @see #setOwningAxiom(PropertyValueRestrictionAxiom)
 	 * @see io.opencaesar.oml.OmlPackage#getStructureInstance_OwningAxiom()
-	 * @see io.opencaesar.oml.StructuredPropertyValueRestrictionAxiom#getValue
-	 * @model opposite="value" transient="false"
+	 * @see io.opencaesar.oml.PropertyValueRestrictionAxiom#getStructureInstanceValue
+	 * @model opposite="structureInstanceValue" transient="false"
 	 * @generated
 	 */
-	StructuredPropertyValueRestrictionAxiom getOwningAxiom();
+	PropertyValueRestrictionAxiom getOwningAxiom();
 
 	/**
 	 * Sets the value of the '{@link io.opencaesar.oml.StructureInstance#getOwningAxiom <em>Owning Axiom</em>}' container reference.
@@ -93,24 +93,24 @@ public interface StructureInstance extends Instance {
 	 * @see #getOwningAxiom()
 	 * @generated
 	 */
-	void setOwningAxiom(StructuredPropertyValueRestrictionAxiom value);
+	void setOwningAxiom(PropertyValueRestrictionAxiom value);
 
 	/**
 	 * Returns the value of the '<em><b>Owning Assertion</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.StructuredPropertyValueAssertion#getValue <em>Value</em>}'.
+	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.PropertyValueAssertion#getStructureInstanceValue <em>Structure Instance Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The property value assertion axiom that assigns this instance as a value
+	 * The property value assertion that assigns this instance as a value
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Owning Assertion</em>' container reference.
-	 * @see #setOwningAssertion(StructuredPropertyValueAssertion)
+	 * @see #setOwningAssertion(PropertyValueAssertion)
 	 * @see io.opencaesar.oml.OmlPackage#getStructureInstance_OwningAssertion()
-	 * @see io.opencaesar.oml.StructuredPropertyValueAssertion#getValue
-	 * @model opposite="value" transient="false"
+	 * @see io.opencaesar.oml.PropertyValueAssertion#getStructureInstanceValue
+	 * @model opposite="structureInstanceValue" transient="false"
 	 * @generated
 	 */
-	StructuredPropertyValueAssertion getOwningAssertion();
+	PropertyValueAssertion getOwningAssertion();
 
 	/**
 	 * Sets the value of the '{@link io.opencaesar.oml.StructureInstance#getOwningAssertion <em>Owning Assertion</em>}' container reference.
@@ -120,6 +120,6 @@ public interface StructureInstance extends Instance {
 	 * @see #getOwningAssertion()
 	 * @generated
 	 */
-	void setOwningAssertion(StructuredPropertyValueAssertion value);
+	void setOwningAssertion(PropertyValueAssertion value);
 
 } // StructureInstance

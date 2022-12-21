@@ -20,10 +20,16 @@ package io.opencaesar.oml.impl;
 
 import io.opencaesar.oml.Element;
 import io.opencaesar.oml.Instance;
+import io.opencaesar.oml.Literal;
+import io.opencaesar.oml.NamedInstance;
 import io.opencaesar.oml.NamedInstanceReference;
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.PropertyValueAssertion;
+import io.opencaesar.oml.Relation;
+import io.opencaesar.oml.ScalarProperty;
 import io.opencaesar.oml.SemanticProperty;
+import io.opencaesar.oml.StructureInstance;
+import io.opencaesar.oml.StructuredProperty;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -49,11 +55,55 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  * <ul>
  *   <li>{@link io.opencaesar.oml.impl.PropertyValueAssertionImpl#getOwningInstance <em>Owning Instance</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.PropertyValueAssertionImpl#getOwningReference <em>Owning Reference</em>}</li>
+ *   <li>{@link io.opencaesar.oml.impl.PropertyValueAssertionImpl#getProperty <em>Property</em>}</li>
+ *   <li>{@link io.opencaesar.oml.impl.PropertyValueAssertionImpl#getLiteralValue <em>Literal Value</em>}</li>
+ *   <li>{@link io.opencaesar.oml.impl.PropertyValueAssertionImpl#getStructureInstanceValue <em>Structure Instance Value</em>}</li>
+ *   <li>{@link io.opencaesar.oml.impl.PropertyValueAssertionImpl#getNamedInstanceValue <em>Named Instance Value</em>}</li>
  * </ul>
  *
  * @generated
  */
-public abstract class PropertyValueAssertionImpl extends AssertionImpl implements PropertyValueAssertion {
+public class PropertyValueAssertionImpl extends AssertionImpl implements PropertyValueAssertion {
+	/**
+	 * The cached value of the '{@link #getProperty() <em>Property</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getProperty()
+	 * @generated
+	 * @ordered
+	 */
+	protected SemanticProperty property;
+
+	/**
+	 * The cached value of the '{@link #getLiteralValue() <em>Literal Value</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLiteralValue()
+	 * @generated
+	 * @ordered
+	 */
+	protected Literal literalValue;
+
+	/**
+	 * The cached value of the '{@link #getStructureInstanceValue() <em>Structure Instance Value</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getStructureInstanceValue()
+	 * @generated
+	 * @ordered
+	 */
+	protected StructureInstance structureInstanceValue;
+
+	/**
+	 * The cached value of the '{@link #getNamedInstanceValue() <em>Named Instance Value</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNamedInstanceValue()
+	 * @generated
+	 * @ordered
+	 */
+	protected NamedInstance namedInstanceValue;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -186,9 +236,167 @@ public abstract class PropertyValueAssertionImpl extends AssertionImpl implement
 	 */
 	@Override
 	public SemanticProperty getProperty() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		if (property != null && property.eIsProxy()) {
+			InternalEObject oldProperty = (InternalEObject)property;
+			property = (SemanticProperty)eResolveProxy(oldProperty);
+			if (property != oldProperty) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, OmlPackage.PROPERTY_VALUE_ASSERTION__PROPERTY, oldProperty, property));
+			}
+		}
+		return property;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public SemanticProperty basicGetProperty() {
+		return property;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setProperty(SemanticProperty newProperty) {
+		SemanticProperty oldProperty = property;
+		property = newProperty;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.PROPERTY_VALUE_ASSERTION__PROPERTY, oldProperty, property));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Literal getLiteralValue() {
+		return literalValue;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetLiteralValue(Literal newLiteralValue, NotificationChain msgs) {
+		Literal oldLiteralValue = literalValue;
+		literalValue = newLiteralValue;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OmlPackage.PROPERTY_VALUE_ASSERTION__LITERAL_VALUE, oldLiteralValue, newLiteralValue);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setLiteralValue(Literal newLiteralValue) {
+		if (newLiteralValue != literalValue) {
+			NotificationChain msgs = null;
+			if (literalValue != null)
+				msgs = ((InternalEObject)literalValue).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OmlPackage.PROPERTY_VALUE_ASSERTION__LITERAL_VALUE, null, msgs);
+			if (newLiteralValue != null)
+				msgs = ((InternalEObject)newLiteralValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - OmlPackage.PROPERTY_VALUE_ASSERTION__LITERAL_VALUE, null, msgs);
+			msgs = basicSetLiteralValue(newLiteralValue, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.PROPERTY_VALUE_ASSERTION__LITERAL_VALUE, newLiteralValue, newLiteralValue));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public StructureInstance getStructureInstanceValue() {
+		return structureInstanceValue;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetStructureInstanceValue(StructureInstance newStructureInstanceValue, NotificationChain msgs) {
+		StructureInstance oldStructureInstanceValue = structureInstanceValue;
+		structureInstanceValue = newStructureInstanceValue;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OmlPackage.PROPERTY_VALUE_ASSERTION__STRUCTURE_INSTANCE_VALUE, oldStructureInstanceValue, newStructureInstanceValue);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setStructureInstanceValue(StructureInstance newStructureInstanceValue) {
+		if (newStructureInstanceValue != structureInstanceValue) {
+			NotificationChain msgs = null;
+			if (structureInstanceValue != null)
+				msgs = ((InternalEObject)structureInstanceValue).eInverseRemove(this, OmlPackage.STRUCTURE_INSTANCE__OWNING_ASSERTION, StructureInstance.class, msgs);
+			if (newStructureInstanceValue != null)
+				msgs = ((InternalEObject)newStructureInstanceValue).eInverseAdd(this, OmlPackage.STRUCTURE_INSTANCE__OWNING_ASSERTION, StructureInstance.class, msgs);
+			msgs = basicSetStructureInstanceValue(newStructureInstanceValue, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.PROPERTY_VALUE_ASSERTION__STRUCTURE_INSTANCE_VALUE, newStructureInstanceValue, newStructureInstanceValue));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NamedInstance getNamedInstanceValue() {
+		if (namedInstanceValue != null && namedInstanceValue.eIsProxy()) {
+			InternalEObject oldNamedInstanceValue = (InternalEObject)namedInstanceValue;
+			namedInstanceValue = (NamedInstance)eResolveProxy(oldNamedInstanceValue);
+			if (namedInstanceValue != oldNamedInstanceValue) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, OmlPackage.PROPERTY_VALUE_ASSERTION__NAMED_INSTANCE_VALUE, oldNamedInstanceValue, namedInstanceValue));
+			}
+		}
+		return namedInstanceValue;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NamedInstance basicGetNamedInstanceValue() {
+		return namedInstanceValue;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setNamedInstanceValue(NamedInstance newNamedInstanceValue) {
+		NamedInstance oldNamedInstanceValue = namedInstanceValue;
+		namedInstanceValue = newNamedInstanceValue;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.PROPERTY_VALUE_ASSERTION__NAMED_INSTANCE_VALUE, oldNamedInstanceValue, namedInstanceValue));
 	}
 
 	/**
@@ -198,9 +406,28 @@ public abstract class PropertyValueAssertionImpl extends AssertionImpl implement
 	 */
 	@Override
 	public Element getValue() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		Element _xifexpression = null;
+		SemanticProperty _property = this.getProperty();
+		if ((_property instanceof ScalarProperty)) {
+			_xifexpression = this.getLiteralValue();
+		}
+		else {
+			Instance _xifexpression_1 = null;
+			SemanticProperty _property_1 = this.getProperty();
+			if ((_property_1 instanceof StructuredProperty)) {
+				_xifexpression_1 = this.getStructureInstanceValue();
+			}
+			else {
+				NamedInstance _xifexpression_2 = null;
+				SemanticProperty _property_2 = this.getProperty();
+				if ((_property_2 instanceof Relation)) {
+					_xifexpression_2 = this.getNamedInstanceValue();
+				}
+				_xifexpression_1 = _xifexpression_2;
+			}
+			_xifexpression = _xifexpression_1;
+		}
+		return _xifexpression;
 	}
 
 	/**
@@ -219,6 +446,10 @@ public abstract class PropertyValueAssertionImpl extends AssertionImpl implement
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwningReference((NamedInstanceReference)otherEnd, msgs);
+			case OmlPackage.PROPERTY_VALUE_ASSERTION__STRUCTURE_INSTANCE_VALUE:
+				if (structureInstanceValue != null)
+					msgs = ((InternalEObject)structureInstanceValue).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OmlPackage.PROPERTY_VALUE_ASSERTION__STRUCTURE_INSTANCE_VALUE, null, msgs);
+				return basicSetStructureInstanceValue((StructureInstance)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -235,6 +466,10 @@ public abstract class PropertyValueAssertionImpl extends AssertionImpl implement
 				return basicSetOwningInstance(null, msgs);
 			case OmlPackage.PROPERTY_VALUE_ASSERTION__OWNING_REFERENCE:
 				return basicSetOwningReference(null, msgs);
+			case OmlPackage.PROPERTY_VALUE_ASSERTION__LITERAL_VALUE:
+				return basicSetLiteralValue(null, msgs);
+			case OmlPackage.PROPERTY_VALUE_ASSERTION__STRUCTURE_INSTANCE_VALUE:
+				return basicSetStructureInstanceValue(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -269,6 +504,16 @@ public abstract class PropertyValueAssertionImpl extends AssertionImpl implement
 			case OmlPackage.PROPERTY_VALUE_ASSERTION__OWNING_REFERENCE:
 				if (resolve) return getOwningReference();
 				return basicGetOwningReference();
+			case OmlPackage.PROPERTY_VALUE_ASSERTION__PROPERTY:
+				if (resolve) return getProperty();
+				return basicGetProperty();
+			case OmlPackage.PROPERTY_VALUE_ASSERTION__LITERAL_VALUE:
+				return getLiteralValue();
+			case OmlPackage.PROPERTY_VALUE_ASSERTION__STRUCTURE_INSTANCE_VALUE:
+				return getStructureInstanceValue();
+			case OmlPackage.PROPERTY_VALUE_ASSERTION__NAMED_INSTANCE_VALUE:
+				if (resolve) return getNamedInstanceValue();
+				return basicGetNamedInstanceValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -286,6 +531,18 @@ public abstract class PropertyValueAssertionImpl extends AssertionImpl implement
 				return;
 			case OmlPackage.PROPERTY_VALUE_ASSERTION__OWNING_REFERENCE:
 				setOwningReference((NamedInstanceReference)newValue);
+				return;
+			case OmlPackage.PROPERTY_VALUE_ASSERTION__PROPERTY:
+				setProperty((SemanticProperty)newValue);
+				return;
+			case OmlPackage.PROPERTY_VALUE_ASSERTION__LITERAL_VALUE:
+				setLiteralValue((Literal)newValue);
+				return;
+			case OmlPackage.PROPERTY_VALUE_ASSERTION__STRUCTURE_INSTANCE_VALUE:
+				setStructureInstanceValue((StructureInstance)newValue);
+				return;
+			case OmlPackage.PROPERTY_VALUE_ASSERTION__NAMED_INSTANCE_VALUE:
+				setNamedInstanceValue((NamedInstance)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -305,6 +562,18 @@ public abstract class PropertyValueAssertionImpl extends AssertionImpl implement
 			case OmlPackage.PROPERTY_VALUE_ASSERTION__OWNING_REFERENCE:
 				setOwningReference((NamedInstanceReference)null);
 				return;
+			case OmlPackage.PROPERTY_VALUE_ASSERTION__PROPERTY:
+				setProperty((SemanticProperty)null);
+				return;
+			case OmlPackage.PROPERTY_VALUE_ASSERTION__LITERAL_VALUE:
+				setLiteralValue((Literal)null);
+				return;
+			case OmlPackage.PROPERTY_VALUE_ASSERTION__STRUCTURE_INSTANCE_VALUE:
+				setStructureInstanceValue((StructureInstance)null);
+				return;
+			case OmlPackage.PROPERTY_VALUE_ASSERTION__NAMED_INSTANCE_VALUE:
+				setNamedInstanceValue((NamedInstance)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -321,6 +590,14 @@ public abstract class PropertyValueAssertionImpl extends AssertionImpl implement
 				return basicGetOwningInstance() != null;
 			case OmlPackage.PROPERTY_VALUE_ASSERTION__OWNING_REFERENCE:
 				return basicGetOwningReference() != null;
+			case OmlPackage.PROPERTY_VALUE_ASSERTION__PROPERTY:
+				return property != null;
+			case OmlPackage.PROPERTY_VALUE_ASSERTION__LITERAL_VALUE:
+				return literalValue != null;
+			case OmlPackage.PROPERTY_VALUE_ASSERTION__STRUCTURE_INSTANCE_VALUE:
+				return structureInstanceValue != null;
+			case OmlPackage.PROPERTY_VALUE_ASSERTION__NAMED_INSTANCE_VALUE:
+				return namedInstanceValue != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -333,8 +610,6 @@ public abstract class PropertyValueAssertionImpl extends AssertionImpl implement
 	@Override
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
-			case OmlPackage.PROPERTY_VALUE_ASSERTION___GET_PROPERTY:
-				return getProperty();
 			case OmlPackage.PROPERTY_VALUE_ASSERTION___GET_VALUE:
 				return getValue();
 		}

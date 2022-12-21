@@ -83,7 +83,7 @@ public class OmlIdeCrossRefProposalProvider extends IdeCrossrefProposalProvider 
 		var offset = 0;
 		var startWithLineBreak = true;
 		var endWithLineBreak = false;
-		var importDirectives = OmlRead.getImports(ontology);
+		var importDirectives = ontology.getOwnedImports();
 		if (importDirectives.isEmpty()) {
 			var statements = OmlRead.getStatements(ontology);
 			if (statements.isEmpty()) {

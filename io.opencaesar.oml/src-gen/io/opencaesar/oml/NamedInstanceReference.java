@@ -26,13 +26,14 @@ import org.eclipse.emf.common.util.EList;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * NamedInstanceReference is a reference to an named instance that can be used to add other property values.
+ * NamedInstanceReference is a reference to a named instance that can be used to add other assertions to the instance.
  * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
+ *   <li>{@link io.opencaesar.oml.NamedInstanceReference#getOwnedTypes <em>Owned Types</em>}</li>
  *   <li>{@link io.opencaesar.oml.NamedInstanceReference#getOwnedPropertyValues <em>Owned Property Values</em>}</li>
  * </ul>
  *
@@ -43,13 +44,30 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface NamedInstanceReference extends Reference, DescriptionStatement {
 	/**
+	 * Returns the value of the '<em><b>Owned Types</b></em>' containment reference list.
+	 * The list contents are of type {@link io.opencaesar.oml.TypeAssertion}.
+	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.TypeAssertion#getOwningReference <em>Owning Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The type assertions added to the referenced named instance
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Owned Types</em>' containment reference list.
+	 * @see io.opencaesar.oml.OmlPackage#getNamedInstanceReference_OwnedTypes()
+	 * @see io.opencaesar.oml.TypeAssertion#getOwningReference
+	 * @model opposite="owningReference" containment="true"
+	 * @generated
+	 */
+	EList<TypeAssertion> getOwnedTypes();
+
+	/**
 	 * Returns the value of the '<em><b>Owned Property Values</b></em>' containment reference list.
 	 * The list contents are of type {@link io.opencaesar.oml.PropertyValueAssertion}.
 	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.PropertyValueAssertion#getOwningReference <em>Owning Reference</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The property value assertions added to referenced named instance by this reference
+	 * The property value assertions added to referenced named instance
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Owned Property Values</em>' containment reference list.
 	 * @see io.opencaesar.oml.OmlPackage#getNamedInstanceReference_OwnedPropertyValues()

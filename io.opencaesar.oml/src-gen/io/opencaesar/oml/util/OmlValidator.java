@@ -233,44 +233,16 @@ public class OmlValidator extends EObjectValidator {
 				return validateSpecializationAxiom((SpecializationAxiom)value, diagnostics, context);
 			case OmlPackage.PROPERTY_RESTRICTION_AXIOM:
 				return validatePropertyRestrictionAxiom((PropertyRestrictionAxiom)value, diagnostics, context);
-			case OmlPackage.SCALAR_PROPERTY_RESTRICTION_AXIOM:
-				return validateScalarPropertyRestrictionAxiom((ScalarPropertyRestrictionAxiom)value, diagnostics, context);
-			case OmlPackage.SCALAR_PROPERTY_RANGE_RESTRICTION_AXIOM:
-				return validateScalarPropertyRangeRestrictionAxiom((ScalarPropertyRangeRestrictionAxiom)value, diagnostics, context);
-			case OmlPackage.SCALAR_PROPERTY_CARDINALITY_RESTRICTION_AXIOM:
-				return validateScalarPropertyCardinalityRestrictionAxiom((ScalarPropertyCardinalityRestrictionAxiom)value, diagnostics, context);
-			case OmlPackage.SCALAR_PROPERTY_VALUE_RESTRICTION_AXIOM:
-				return validateScalarPropertyValueRestrictionAxiom((ScalarPropertyValueRestrictionAxiom)value, diagnostics, context);
-			case OmlPackage.STRUCTURED_PROPERTY_RESTRICTION_AXIOM:
-				return validateStructuredPropertyRestrictionAxiom((StructuredPropertyRestrictionAxiom)value, diagnostics, context);
-			case OmlPackage.STRUCTURED_PROPERTY_RANGE_RESTRICTION_AXIOM:
-				return validateStructuredPropertyRangeRestrictionAxiom((StructuredPropertyRangeRestrictionAxiom)value, diagnostics, context);
-			case OmlPackage.STRUCTURED_PROPERTY_CARDINALITY_RESTRICTION_AXIOM:
-				return validateStructuredPropertyCardinalityRestrictionAxiom((StructuredPropertyCardinalityRestrictionAxiom)value, diagnostics, context);
-			case OmlPackage.STRUCTURED_PROPERTY_VALUE_RESTRICTION_AXIOM:
-				return validateStructuredPropertyValueRestrictionAxiom((StructuredPropertyValueRestrictionAxiom)value, diagnostics, context);
-			case OmlPackage.RELATION_RESTRICTION_AXIOM:
-				return validateRelationRestrictionAxiom((RelationRestrictionAxiom)value, diagnostics, context);
-			case OmlPackage.RELATION_RANGE_RESTRICTION_AXIOM:
-				return validateRelationRangeRestrictionAxiom((RelationRangeRestrictionAxiom)value, diagnostics, context);
-			case OmlPackage.RELATION_CARDINALITY_RESTRICTION_AXIOM:
-				return validateRelationCardinalityRestrictionAxiom((RelationCardinalityRestrictionAxiom)value, diagnostics, context);
-			case OmlPackage.RELATION_VALUE_RESTRICTION_AXIOM:
-				return validateRelationValueRestrictionAxiom((RelationValueRestrictionAxiom)value, diagnostics, context);
+			case OmlPackage.PROPERTY_RANGE_RESTRICTION_AXIOM:
+				return validatePropertyRangeRestrictionAxiom((PropertyRangeRestrictionAxiom)value, diagnostics, context);
+			case OmlPackage.PROPERTY_CARDINALITY_RESTRICTION_AXIOM:
+				return validatePropertyCardinalityRestrictionAxiom((PropertyCardinalityRestrictionAxiom)value, diagnostics, context);
+			case OmlPackage.PROPERTY_VALUE_RESTRICTION_AXIOM:
+				return validatePropertyValueRestrictionAxiom((PropertyValueRestrictionAxiom)value, diagnostics, context);
 			case OmlPackage.TYPE_ASSERTION:
 				return validateTypeAssertion((TypeAssertion)value, diagnostics, context);
-			case OmlPackage.CONCEPT_TYPE_ASSERTION:
-				return validateConceptTypeAssertion((ConceptTypeAssertion)value, diagnostics, context);
-			case OmlPackage.RELATION_TYPE_ASSERTION:
-				return validateRelationTypeAssertion((RelationTypeAssertion)value, diagnostics, context);
 			case OmlPackage.PROPERTY_VALUE_ASSERTION:
 				return validatePropertyValueAssertion((PropertyValueAssertion)value, diagnostics, context);
-			case OmlPackage.SCALAR_PROPERTY_VALUE_ASSERTION:
-				return validateScalarPropertyValueAssertion((ScalarPropertyValueAssertion)value, diagnostics, context);
-			case OmlPackage.STRUCTURED_PROPERTY_VALUE_ASSERTION:
-				return validateStructuredPropertyValueAssertion((StructuredPropertyValueAssertion)value, diagnostics, context);
-			case OmlPackage.LINK_ASSERTION:
-				return validateLinkAssertion((LinkAssertion)value, diagnostics, context);
 			case OmlPackage.UNARY_PREDICATE:
 				return validateUnaryPredicate((UnaryPredicate)value, diagnostics, context);
 			case OmlPackage.BINARY_PREDICATE:
@@ -1412,17 +1384,17 @@ public class OmlValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateScalarPropertyRestrictionAxiom(ScalarPropertyRestrictionAxiom scalarPropertyRestrictionAxiom, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(scalarPropertyRestrictionAxiom, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms(scalarPropertyRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(scalarPropertyRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(scalarPropertyRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(scalarPropertyRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(scalarPropertyRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(scalarPropertyRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(scalarPropertyRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(scalarPropertyRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_extraValidate(scalarPropertyRestrictionAxiom, diagnostics, context);
+	public boolean validatePropertyRangeRestrictionAxiom(PropertyRangeRestrictionAxiom propertyRangeRestrictionAxiom, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		if (!validate_NoCircularContainment(propertyRangeRestrictionAxiom, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms(propertyRangeRestrictionAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(propertyRangeRestrictionAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(propertyRangeRestrictionAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(propertyRangeRestrictionAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(propertyRangeRestrictionAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(propertyRangeRestrictionAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(propertyRangeRestrictionAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(propertyRangeRestrictionAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validateElement_extraValidate(propertyRangeRestrictionAxiom, diagnostics, context);
 		return result;
 	}
 
@@ -1431,17 +1403,17 @@ public class OmlValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateScalarPropertyRangeRestrictionAxiom(ScalarPropertyRangeRestrictionAxiom scalarPropertyRangeRestrictionAxiom, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(scalarPropertyRangeRestrictionAxiom, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms(scalarPropertyRangeRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(scalarPropertyRangeRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(scalarPropertyRangeRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(scalarPropertyRangeRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(scalarPropertyRangeRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(scalarPropertyRangeRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(scalarPropertyRangeRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(scalarPropertyRangeRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_extraValidate(scalarPropertyRangeRestrictionAxiom, diagnostics, context);
+	public boolean validatePropertyCardinalityRestrictionAxiom(PropertyCardinalityRestrictionAxiom propertyCardinalityRestrictionAxiom, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		if (!validate_NoCircularContainment(propertyCardinalityRestrictionAxiom, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms(propertyCardinalityRestrictionAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(propertyCardinalityRestrictionAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(propertyCardinalityRestrictionAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(propertyCardinalityRestrictionAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(propertyCardinalityRestrictionAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(propertyCardinalityRestrictionAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(propertyCardinalityRestrictionAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(propertyCardinalityRestrictionAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validateElement_extraValidate(propertyCardinalityRestrictionAxiom, diagnostics, context);
 		return result;
 	}
 
@@ -1450,188 +1422,17 @@ public class OmlValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateScalarPropertyCardinalityRestrictionAxiom(ScalarPropertyCardinalityRestrictionAxiom scalarPropertyCardinalityRestrictionAxiom, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(scalarPropertyCardinalityRestrictionAxiom, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms(scalarPropertyCardinalityRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(scalarPropertyCardinalityRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(scalarPropertyCardinalityRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(scalarPropertyCardinalityRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(scalarPropertyCardinalityRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(scalarPropertyCardinalityRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(scalarPropertyCardinalityRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(scalarPropertyCardinalityRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_extraValidate(scalarPropertyCardinalityRestrictionAxiom, diagnostics, context);
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateScalarPropertyValueRestrictionAxiom(ScalarPropertyValueRestrictionAxiom scalarPropertyValueRestrictionAxiom, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(scalarPropertyValueRestrictionAxiom, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms(scalarPropertyValueRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(scalarPropertyValueRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(scalarPropertyValueRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(scalarPropertyValueRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(scalarPropertyValueRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(scalarPropertyValueRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(scalarPropertyValueRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(scalarPropertyValueRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_extraValidate(scalarPropertyValueRestrictionAxiom, diagnostics, context);
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateStructuredPropertyRestrictionAxiom(StructuredPropertyRestrictionAxiom structuredPropertyRestrictionAxiom, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(structuredPropertyRestrictionAxiom, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms(structuredPropertyRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(structuredPropertyRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(structuredPropertyRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(structuredPropertyRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(structuredPropertyRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(structuredPropertyRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(structuredPropertyRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(structuredPropertyRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_extraValidate(structuredPropertyRestrictionAxiom, diagnostics, context);
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateStructuredPropertyRangeRestrictionAxiom(StructuredPropertyRangeRestrictionAxiom structuredPropertyRangeRestrictionAxiom, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(structuredPropertyRangeRestrictionAxiom, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms(structuredPropertyRangeRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(structuredPropertyRangeRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(structuredPropertyRangeRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(structuredPropertyRangeRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(structuredPropertyRangeRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(structuredPropertyRangeRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(structuredPropertyRangeRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(structuredPropertyRangeRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_extraValidate(structuredPropertyRangeRestrictionAxiom, diagnostics, context);
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateStructuredPropertyCardinalityRestrictionAxiom(StructuredPropertyCardinalityRestrictionAxiom structuredPropertyCardinalityRestrictionAxiom, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(structuredPropertyCardinalityRestrictionAxiom, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms(structuredPropertyCardinalityRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(structuredPropertyCardinalityRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(structuredPropertyCardinalityRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(structuredPropertyCardinalityRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(structuredPropertyCardinalityRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(structuredPropertyCardinalityRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(structuredPropertyCardinalityRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(structuredPropertyCardinalityRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_extraValidate(structuredPropertyCardinalityRestrictionAxiom, diagnostics, context);
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateStructuredPropertyValueRestrictionAxiom(StructuredPropertyValueRestrictionAxiom structuredPropertyValueRestrictionAxiom, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(structuredPropertyValueRestrictionAxiom, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms(structuredPropertyValueRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(structuredPropertyValueRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(structuredPropertyValueRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(structuredPropertyValueRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(structuredPropertyValueRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(structuredPropertyValueRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(structuredPropertyValueRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(structuredPropertyValueRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_extraValidate(structuredPropertyValueRestrictionAxiom, diagnostics, context);
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateRelationRestrictionAxiom(RelationRestrictionAxiom relationRestrictionAxiom, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(relationRestrictionAxiom, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms(relationRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(relationRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(relationRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(relationRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(relationRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(relationRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(relationRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(relationRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_extraValidate(relationRestrictionAxiom, diagnostics, context);
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateRelationRangeRestrictionAxiom(RelationRangeRestrictionAxiom relationRangeRestrictionAxiom, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(relationRangeRestrictionAxiom, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms(relationRangeRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(relationRangeRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(relationRangeRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(relationRangeRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(relationRangeRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(relationRangeRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(relationRangeRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(relationRangeRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_extraValidate(relationRangeRestrictionAxiom, diagnostics, context);
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateRelationCardinalityRestrictionAxiom(RelationCardinalityRestrictionAxiom relationCardinalityRestrictionAxiom, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(relationCardinalityRestrictionAxiom, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms(relationCardinalityRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(relationCardinalityRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(relationCardinalityRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(relationCardinalityRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(relationCardinalityRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(relationCardinalityRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(relationCardinalityRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(relationCardinalityRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_extraValidate(relationCardinalityRestrictionAxiom, diagnostics, context);
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateRelationValueRestrictionAxiom(RelationValueRestrictionAxiom relationValueRestrictionAxiom, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(relationValueRestrictionAxiom, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms(relationValueRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(relationValueRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(relationValueRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(relationValueRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(relationValueRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(relationValueRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(relationValueRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(relationValueRestrictionAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_extraValidate(relationValueRestrictionAxiom, diagnostics, context);
+	public boolean validatePropertyValueRestrictionAxiom(PropertyValueRestrictionAxiom propertyValueRestrictionAxiom, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		if (!validate_NoCircularContainment(propertyValueRestrictionAxiom, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms(propertyValueRestrictionAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(propertyValueRestrictionAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(propertyValueRestrictionAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(propertyValueRestrictionAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(propertyValueRestrictionAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(propertyValueRestrictionAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(propertyValueRestrictionAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(propertyValueRestrictionAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validateElement_extraValidate(propertyValueRestrictionAxiom, diagnostics, context);
 		return result;
 	}
 
@@ -1659,44 +1460,6 @@ public class OmlValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateConceptTypeAssertion(ConceptTypeAssertion conceptTypeAssertion, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(conceptTypeAssertion, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms(conceptTypeAssertion, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(conceptTypeAssertion, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(conceptTypeAssertion, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(conceptTypeAssertion, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(conceptTypeAssertion, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(conceptTypeAssertion, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(conceptTypeAssertion, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(conceptTypeAssertion, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_extraValidate(conceptTypeAssertion, diagnostics, context);
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateRelationTypeAssertion(RelationTypeAssertion relationTypeAssertion, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(relationTypeAssertion, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms(relationTypeAssertion, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(relationTypeAssertion, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(relationTypeAssertion, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(relationTypeAssertion, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(relationTypeAssertion, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(relationTypeAssertion, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(relationTypeAssertion, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(relationTypeAssertion, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_extraValidate(relationTypeAssertion, diagnostics, context);
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public boolean validatePropertyValueAssertion(PropertyValueAssertion propertyValueAssertion, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		if (!validate_NoCircularContainment(propertyValueAssertion, diagnostics, context)) return false;
 		boolean result = validate_EveryMultiplicityConforms(propertyValueAssertion, diagnostics, context);
@@ -1708,63 +1471,6 @@ public class OmlValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(propertyValueAssertion, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(propertyValueAssertion, diagnostics, context);
 		if (result || diagnostics != null) result &= validateElement_extraValidate(propertyValueAssertion, diagnostics, context);
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateScalarPropertyValueAssertion(ScalarPropertyValueAssertion scalarPropertyValueAssertion, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(scalarPropertyValueAssertion, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms(scalarPropertyValueAssertion, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(scalarPropertyValueAssertion, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(scalarPropertyValueAssertion, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(scalarPropertyValueAssertion, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(scalarPropertyValueAssertion, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(scalarPropertyValueAssertion, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(scalarPropertyValueAssertion, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(scalarPropertyValueAssertion, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_extraValidate(scalarPropertyValueAssertion, diagnostics, context);
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateStructuredPropertyValueAssertion(StructuredPropertyValueAssertion structuredPropertyValueAssertion, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(structuredPropertyValueAssertion, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms(structuredPropertyValueAssertion, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(structuredPropertyValueAssertion, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(structuredPropertyValueAssertion, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(structuredPropertyValueAssertion, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(structuredPropertyValueAssertion, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(structuredPropertyValueAssertion, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(structuredPropertyValueAssertion, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(structuredPropertyValueAssertion, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_extraValidate(structuredPropertyValueAssertion, diagnostics, context);
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateLinkAssertion(LinkAssertion linkAssertion, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(linkAssertion, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms(linkAssertion, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(linkAssertion, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(linkAssertion, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(linkAssertion, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(linkAssertion, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(linkAssertion, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(linkAssertion, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(linkAssertion, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_extraValidate(linkAssertion, diagnostics, context);
 		return result;
 	}
 

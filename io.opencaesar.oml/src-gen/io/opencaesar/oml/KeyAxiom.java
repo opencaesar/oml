@@ -26,7 +26,7 @@ import org.eclipse.emf.common.util.EList;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * KeyAxiom is an axiom that states that a set of properties form a unique key for an entity. This means that all
+ * KeyAxiom is an axiom that specifies that a set of properties form a unique key for an entity. This means that all
  * instances of that entity must have unique values for those keys.
  * <!-- end-model-doc -->
  *

@@ -272,130 +272,49 @@ public interface OmlFactory extends EFactory {
 	SpecializationAxiom createSpecializationAxiom();
 
 	/**
-	 * Returns a new object of class '<em>Scalar Property Range Restriction Axiom</em>'.
+	 * Returns a new object of class '<em>Property Range Restriction Axiom</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Scalar Property Range Restriction Axiom</em>'.
+	 * @return a new object of class '<em>Property Range Restriction Axiom</em>'.
 	 * @generated
 	 */
-	ScalarPropertyRangeRestrictionAxiom createScalarPropertyRangeRestrictionAxiom();
+	PropertyRangeRestrictionAxiom createPropertyRangeRestrictionAxiom();
 
 	/**
-	 * Returns a new object of class '<em>Scalar Property Cardinality Restriction Axiom</em>'.
+	 * Returns a new object of class '<em>Property Cardinality Restriction Axiom</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Scalar Property Cardinality Restriction Axiom</em>'.
+	 * @return a new object of class '<em>Property Cardinality Restriction Axiom</em>'.
 	 * @generated
 	 */
-	ScalarPropertyCardinalityRestrictionAxiom createScalarPropertyCardinalityRestrictionAxiom();
+	PropertyCardinalityRestrictionAxiom createPropertyCardinalityRestrictionAxiom();
 
 	/**
-	 * Returns a new object of class '<em>Scalar Property Value Restriction Axiom</em>'.
+	 * Returns a new object of class '<em>Property Value Restriction Axiom</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Scalar Property Value Restriction Axiom</em>'.
+	 * @return a new object of class '<em>Property Value Restriction Axiom</em>'.
 	 * @generated
 	 */
-	ScalarPropertyValueRestrictionAxiom createScalarPropertyValueRestrictionAxiom();
+	PropertyValueRestrictionAxiom createPropertyValueRestrictionAxiom();
 
 	/**
-	 * Returns a new object of class '<em>Structured Property Range Restriction Axiom</em>'.
+	 * Returns a new object of class '<em>Type Assertion</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Structured Property Range Restriction Axiom</em>'.
+	 * @return a new object of class '<em>Type Assertion</em>'.
 	 * @generated
 	 */
-	StructuredPropertyRangeRestrictionAxiom createStructuredPropertyRangeRestrictionAxiom();
+	TypeAssertion createTypeAssertion();
 
 	/**
-	 * Returns a new object of class '<em>Structured Property Cardinality Restriction Axiom</em>'.
+	 * Returns a new object of class '<em>Property Value Assertion</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Structured Property Cardinality Restriction Axiom</em>'.
+	 * @return a new object of class '<em>Property Value Assertion</em>'.
 	 * @generated
 	 */
-	StructuredPropertyCardinalityRestrictionAxiom createStructuredPropertyCardinalityRestrictionAxiom();
-
-	/**
-	 * Returns a new object of class '<em>Structured Property Value Restriction Axiom</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Structured Property Value Restriction Axiom</em>'.
-	 * @generated
-	 */
-	StructuredPropertyValueRestrictionAxiom createStructuredPropertyValueRestrictionAxiom();
-
-	/**
-	 * Returns a new object of class '<em>Relation Range Restriction Axiom</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Relation Range Restriction Axiom</em>'.
-	 * @generated
-	 */
-	RelationRangeRestrictionAxiom createRelationRangeRestrictionAxiom();
-
-	/**
-	 * Returns a new object of class '<em>Relation Cardinality Restriction Axiom</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Relation Cardinality Restriction Axiom</em>'.
-	 * @generated
-	 */
-	RelationCardinalityRestrictionAxiom createRelationCardinalityRestrictionAxiom();
-
-	/**
-	 * Returns a new object of class '<em>Relation Value Restriction Axiom</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Relation Value Restriction Axiom</em>'.
-	 * @generated
-	 */
-	RelationValueRestrictionAxiom createRelationValueRestrictionAxiom();
-
-	/**
-	 * Returns a new object of class '<em>Concept Type Assertion</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Concept Type Assertion</em>'.
-	 * @generated
-	 */
-	ConceptTypeAssertion createConceptTypeAssertion();
-
-	/**
-	 * Returns a new object of class '<em>Relation Type Assertion</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Relation Type Assertion</em>'.
-	 * @generated
-	 */
-	RelationTypeAssertion createRelationTypeAssertion();
-
-	/**
-	 * Returns a new object of class '<em>Scalar Property Value Assertion</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Scalar Property Value Assertion</em>'.
-	 * @generated
-	 */
-	ScalarPropertyValueAssertion createScalarPropertyValueAssertion();
-
-	/**
-	 * Returns a new object of class '<em>Structured Property Value Assertion</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Structured Property Value Assertion</em>'.
-	 * @generated
-	 */
-	StructuredPropertyValueAssertion createStructuredPropertyValueAssertion();
-
-	/**
-	 * Returns a new object of class '<em>Link Assertion</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Link Assertion</em>'.
-	 * @generated
-	 */
-	LinkAssertion createLinkAssertion();
+	PropertyValueAssertion createPropertyValueAssertion();
 
 	/**
 	 * Returns a new object of class '<em>Type Predicate</em>'.

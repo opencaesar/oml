@@ -23,23 +23,22 @@ import io.opencaesar.oml.Entity;
 import io.opencaesar.oml.KeyAxiom;
 import io.opencaesar.oml.NamedInstance;
 import io.opencaesar.oml.Ontology;
-import io.opencaesar.oml.RelationCardinalityRestrictionAxiom;
+import io.opencaesar.oml.PropertyCardinalityRestrictionAxiom;
+import io.opencaesar.oml.PropertyRangeRestrictionAxiom;
+import io.opencaesar.oml.PropertyValueRestrictionAxiom;
+import io.opencaesar.oml.Relation;
 import io.opencaesar.oml.RelationEntity;
 import io.opencaesar.oml.RelationEntityReference;
 import io.opencaesar.oml.RelationInstance;
 import io.opencaesar.oml.RelationInstanceReference;
-import io.opencaesar.oml.RelationRangeRestrictionAxiom;
-import io.opencaesar.oml.RelationValueRestrictionAxiom;
 import io.opencaesar.oml.Scalar;
 import io.opencaesar.oml.ScalarProperty;
-import io.opencaesar.oml.ScalarPropertyRestrictionAxiom;
 import io.opencaesar.oml.SemanticProperty;
 import io.opencaesar.oml.SpecializationAxiom;
 import io.opencaesar.oml.Structure;
 import io.opencaesar.oml.StructureInstance;
 import io.opencaesar.oml.StructureReference;
 import io.opencaesar.oml.StructuredProperty;
-import io.opencaesar.oml.StructuredPropertyRestrictionAxiom;
 import io.opencaesar.oml.Type;
 import io.opencaesar.oml.util.OmlRead;
 import io.opencaesar.oml.util.OmlSearch;
@@ -257,29 +256,22 @@ class OmlOntoloyDiagramScope {
 				if (includes(x.getSpecializedTerm())) {
 					ax.add(x);
 				}
-			} else if (o instanceof ScalarPropertyRestrictionAxiom) {
-				ScalarPropertyRestrictionAxiom x = (ScalarPropertyRestrictionAxiom) o;
-				if (includes(x.getProperty())) {
+			} else if (o instanceof PropertyRangeRestrictionAxiom) {
+				PropertyRangeRestrictionAxiom x = (PropertyRangeRestrictionAxiom) o;
+				boolean needToCheckRange = x.getProperty() instanceof Relation && x.getRange() != null;
+				if (includes(x.getProperty()) && (!needToCheckRange || includes(x.getRange()))) {
 					ax.add(x);
 				}
-			} else if (o instanceof StructuredPropertyRestrictionAxiom) {
-				StructuredPropertyRestrictionAxiom x = (StructuredPropertyRestrictionAxiom) o;
-				if (includes(x.getProperty())) {
+			} else if (o instanceof PropertyCardinalityRestrictionAxiom) {
+				PropertyCardinalityRestrictionAxiom x = (PropertyCardinalityRestrictionAxiom) o;
+				boolean needToCheckRange = x.getProperty() instanceof Relation && x.getRange() != null;
+				if (includes(x.getProperty()) && (!needToCheckRange || includes(x.getRange()))) {
 					ax.add(x);
 				}
-			} else if (o instanceof RelationCardinalityRestrictionAxiom) {
-				RelationCardinalityRestrictionAxiom x = (RelationCardinalityRestrictionAxiom) o;
-				if (includes(x.getProperty())) {
-					ax.add(x);
-				}
-			} else if (o instanceof RelationRangeRestrictionAxiom) {
-				RelationRangeRestrictionAxiom x = (RelationRangeRestrictionAxiom) o;
-				if (includes(x.getProperty()) && includes(x.getRange())) {
-					ax.add(x);
-				}
-			} else if (o instanceof RelationValueRestrictionAxiom) {
-				RelationValueRestrictionAxiom x = (RelationValueRestrictionAxiom) o;
-				if (includes(x.getProperty()) && includes(x.getValue())) {
+			} else if (o instanceof PropertyValueRestrictionAxiom) {
+				PropertyValueRestrictionAxiom x = (PropertyValueRestrictionAxiom) o;
+				boolean needToCheckRange = x.getProperty() instanceof Relation;
+				if (includes(x.getProperty()) && (!needToCheckRange || includes(x.getValue()))) {
 					ax.add(x);
 				}
 			}
@@ -362,7 +354,7 @@ class OmlOntoloyDiagramScope {
 						incident.add(ax);
 					}
 				});
-				OmlSearch.findRelationRangeRestrictionAxiomsWithRange(e).forEach(ax -> {
+				OmlSearch.findPropertyRangeRestrictionAxiomsWithRange(e).forEach(ax -> {
 					if (allImportedElements.contains(ax)) {
 						incident.add(ax);
 					}
@@ -420,11 +412,6 @@ class OmlOntoloyDiagramScope {
 			OmlSearch.findPropertyValueAssertions(i).forEach(ax -> {
 				if (allImportedElements.contains(ax)) {
 					others.add(ax);
-				}
-			});
-			OmlSearch.findLinkAssertions(i).forEach(l -> {
-				if (allImportedElements.contains(l)) {
-					others.add(l);
 				}
 			});
 			OmlSearch.findRelationInstancesWithSource(i).forEach(ri -> {

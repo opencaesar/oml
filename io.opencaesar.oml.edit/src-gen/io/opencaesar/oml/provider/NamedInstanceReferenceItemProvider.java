@@ -102,6 +102,7 @@ public class NamedInstanceReferenceItemProvider extends ReferenceItemProvider {
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
+			childrenFeatures.add(OmlPackage.Literals.NAMED_INSTANCE_REFERENCE__OWNED_TYPES);
 			childrenFeatures.add(OmlPackage.Literals.NAMED_INSTANCE_REFERENCE__OWNED_PROPERTY_VALUES);
 		}
 		return childrenFeatures;
@@ -144,6 +145,7 @@ public class NamedInstanceReferenceItemProvider extends ReferenceItemProvider {
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(NamedInstanceReference.class)) {
+			case OmlPackage.NAMED_INSTANCE_REFERENCE__OWNED_TYPES:
 			case OmlPackage.NAMED_INSTANCE_REFERENCE__OWNED_PROPERTY_VALUES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
@@ -164,18 +166,13 @@ public class NamedInstanceReferenceItemProvider extends ReferenceItemProvider {
 
 		newChildDescriptors.add
 			(createChildParameter
-				(OmlPackage.Literals.NAMED_INSTANCE_REFERENCE__OWNED_PROPERTY_VALUES,
-				 OmlFactory.eINSTANCE.createScalarPropertyValueAssertion()));
+				(OmlPackage.Literals.NAMED_INSTANCE_REFERENCE__OWNED_TYPES,
+				 OmlFactory.eINSTANCE.createTypeAssertion()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(OmlPackage.Literals.NAMED_INSTANCE_REFERENCE__OWNED_PROPERTY_VALUES,
-				 OmlFactory.eINSTANCE.createStructuredPropertyValueAssertion()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OmlPackage.Literals.NAMED_INSTANCE_REFERENCE__OWNED_PROPERTY_VALUES,
-				 OmlFactory.eINSTANCE.createLinkAssertion()));
+				 OmlFactory.eINSTANCE.createPropertyValueAssertion()));
 	}
 
 }

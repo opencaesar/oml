@@ -117,7 +117,7 @@ public class FQNImporter extends FQNShortener {
 			var startWithLineBreak = true;
 			var endWithLineBreak = false;
 			var ontology = (Ontology) context.getContents().get(0);
-			var importDirectives = OmlRead.getImports(ontology);
+			var importDirectives = ontology.getOwnedImports();
 			if (importDirectives.isEmpty()) {
 				var statements = OmlRead.getStatements(ontology);
 				if (statements.isEmpty()) {

@@ -74,10 +74,10 @@ abstract class Element {
 ////////////////////////////////////////
 
 /*
- * Annotation is an element that specifies additional non-semantic information on an annotated element. It can also be
+ * Annotation is an element that specifies additional non-semantic statements on an annotated element. It can also be
  * specified on a reference to an ontology member, in which case it is interpreted as if it was specified on the
- * member itself. An annotation is specified with an annotation property and an optional literal or reference value. When
- * no value is specified, it is interpreted as a boolean `true` literal.
+ * member itself. An annotation is specified with an annotation property and a (literal or reference) value. When
+ * no value is specified, it is interpreted as the `true` boolean literal.
  */
 @Bikeshed(heading="Elements")
 class Annotation extends Element {
@@ -86,13 +86,13 @@ class Annotation extends Element {
      */
     refers AnnotationProperty[1] property
     /*
-     * The literal value specified by this annotation.
+     * A literal value specified by this annotation.
      */
-    contains Literal[?] value
+    contains Literal[?] literalValue
     /*
-     * The reference value (to a member) specified by this annotation
+     * A reference (to a member) value specified by this annotation
      */
-    refers Member[?] referenceValue 
+    refers Member[?] referenceValue
     /*
      * The annotated element that owns this annotation
      */
@@ -101,6 +101,15 @@ class Annotation extends Element {
      * The reference that owns this annotation
      */
     container Reference[?] owningReference opposite ownedAnnotations
+    /*
+     * Gets the value of the annotation
+     */
+    op Element getValue() {
+    	if (literalValue !== null)
+    		literalValue
+    	else if (referenceValue !== null)
+    		referenceValue
+    }
 }
 
 /*
@@ -109,13 +118,13 @@ class Annotation extends Element {
 @Bikeshed(heading="Elements")
 abstract class IdentifiedElement extends Element {
     /*
-     * Gets the IRI of this element 
-     */ 
-    op String getIri()
-    /*
      * The set of annotations owned directly by this element
      */
     contains Annotation[*] ownedAnnotations opposite owningElement
+    /*
+     * Gets the IRI of this element 
+     */ 
+    op String getIri()
 }
 
 /*
@@ -1000,6 +1009,10 @@ class UnreifiedRelation extends Relation, RelationBase {
  */
 @Bikeshed(heading="Instances")
 abstract class NamedInstance extends DescriptionMember, DescriptionStatement, Instance {
+    /*
+     * The types of this instance
+     */
+    contains TypeAssertion[*] ownedTypes opposite owningInstance
 }
 
 ////////////////////////////////////////
@@ -1011,10 +1024,6 @@ abstract class NamedInstance extends DescriptionMember, DescriptionStatement, In
  */
 @Bikeshed(heading="Instances")
 class ConceptInstance extends NamedInstance {
-    /*
-     * The types of this instance
-     */
-    contains ConceptTypeAssertion[*] ownedTypes opposite owningInstance
 }
 
 /*
@@ -1023,10 +1032,6 @@ class ConceptInstance extends NamedInstance {
  */
 @Bikeshed(heading="Instances")
 class RelationInstance extends NamedInstance {
-    /*
-     * The types of this instance
-     */
-    contains RelationTypeAssertion[*] ownedTypes opposite owningInstance
     /*
      * The named instances that are the sources of this relation instance
      */
@@ -1042,8 +1047,8 @@ class RelationInstance extends NamedInstance {
 ////////////////////////////////////////
 
 /*
- * StructureInstance is an instance that can be typed by a structure. It is anonymous and gets assigned as
- * a value for structured properties, either as part of value restrictions on entities, or value assertions on instances.
+ * StructureInstance is an instance that can be typed by a structure. It is anonymous and gets assigned as a value of a structured property
+ * either in a property value restriction axiom or a property value assertion
  */
 @Bikeshed(heading="Instances")
 class StructureInstance extends Instance {
@@ -1054,11 +1059,11 @@ class StructureInstance extends Instance {
     /*
      * The property value restriction axiom that assigns this instance as a restricted value
      */
-    container StructuredPropertyValueRestrictionAxiom[?] owningAxiom opposite value
+    container PropertyValueRestrictionAxiom[?] owningAxiom opposite structureInstanceValue
     /*
-     * The property value assertion axiom that assigns this instance as a value
+     * The property value assertion that assigns this instance as a value
      */
-    container StructuredPropertyValueAssertion[?] owningAssertion opposite value
+    container PropertyValueAssertion[?] owningAssertion opposite structureInstanceValue
 }
 
 ////////////////////////////////////////
@@ -1066,7 +1071,7 @@ class StructureInstance extends Instance {
 ////////////////////////////////////////
 
 /*
- * KeyAxiom is an axiom that states that a set of properties form a unique key for an entity. This means that all 
+ * KeyAxiom is an axiom that specifies that a set of properties form a unique key for an entity. This means that all 
  * instances of that entity must have unique values for those keys.
  */
 @Bikeshed(heading="Axioms")
@@ -1106,7 +1111,7 @@ class SpecializationAxiom extends Axiom {
 }
 
 /*
- * PropertyRestrictionAxiom is an axiom that places some restriction on the value of a property in the context of
+ * PropertyRestrictionAxiom is an axiom that places some restriction on the value of a semantic property in the context of
  * a restricting classifier domain. It can be specified directly on the classifier or indirectly on a reference to it.
  */
 @Bikeshed(heading="Axioms")
@@ -1122,196 +1127,81 @@ abstract class PropertyRestrictionAxiom extends Axiom {
     /*
      * The restricted property
      */
-    op Property getProperty()
+    refers SemanticProperty[1] property
 }
 
 ////////////////////////////////////////
-//  Restriction Axioms
+//  Property Restriction Axioms
 ////////////////////////////////////////
 
 /*
- * ScalarPropertyRestrictionAxiom is a property restriction axiom that is specified on a scalar property.
- */
-@Bikeshed(heading="Axioms")
-abstract class ScalarPropertyRestrictionAxiom extends PropertyRestrictionAxiom {
-    /*
-     * The restricted scalar property specified by this axiom
-     */
-    refers ScalarProperty[1] property
-}
-
-/*
- * ScalarPropertyRangeRestrictionAxiom is a scalar property restriction axiom that restricts the range of a property to
- * a scalar that specializes the original range. This restrictions may apply to all or to some values of the property
+ * PropertyRangeRestrictionAxiom is a property restriction axiom that restricts the range of a property to
+ * a type that specializes the original range. This restrictions may apply to all or to some values of the property
  * that have the restricting classifier as a domain.
  */
 @Bikeshed(heading="Axioms")
-class ScalarPropertyRangeRestrictionAxiom extends ScalarPropertyRestrictionAxiom {
-    /*
-     * The restricted range specified by this axiom
-     */
-    refers Scalar[1] range
+class PropertyRangeRestrictionAxiom extends PropertyRestrictionAxiom {
     /*
      * The range restriction kind specified by this axiom (default is all)
      */
-    RangeRestrictionKind[1] kind
+    RangeRestrictionKind[1] kind = "all" 
+    /*
+     * The restricted range specified by this axiom
+     */
+    refers Type[1] range
 }
 
 /*
- * ScalarPropertyCardinalityRestrictionAxiom is a scalar property restriction axiom that restricts the cardinality of a scalar
- * property to an exact number, a minimum number or a maximum number. This restrictions can apply to all values of the property 
- * that have the restricting classifier as a domain, or to those values classified by a specific range subtype.
+ * PropertyCardinalityRestrictionAxiom is a property restriction axiom that restricts the cardinality of a property
+ * to an exact value, a minimum value or a maximum value. This restrictions can apply either to all values of the property 
+ * in the restricting classifier, or only to those values classified by a specific subtype of the range.
  */
 @Bikeshed(heading="Axioms")
-class ScalarPropertyCardinalityRestrictionAxiom extends ScalarPropertyRestrictionAxiom {
+class PropertyCardinalityRestrictionAxiom extends PropertyRestrictionAxiom {
+    /*
+     * The kind of cardinality restriction specified by this axiom (default is exactly)
+     */
+    CardinalityRestrictionKind[1] kind = "exactly"
     /*
      * The value of the cardinality specified by this axiom (default is 1)
      */
     UnsignedInt[1] cardinality = "1"
     /*
-     * The kind of cardinality restriction specified by this axiom (default is exactly)
+     * The optional restricted range specified by this axiom
      */
-    CardinalityRestrictionKind[1] kind
-    /*
-     * The restricted range specified by this axiom
-     */
-    refers Scalar[?] range
+    refers Type[?] range
 }
 
 /*
- * ScalarPropertyValueRestrictionAxiom is a scalar property restriction axiom that restricts the value of a property 
- * that has the restricting classifier as a domain to a specific literal.
+ * PropertyValueRestrictionAxiom is a property restriction axiom that restricts a property in a given domain to a specific
+ * value. The value is either a literal value in the case of a scalar property, a contained (structure) instance value in the case of
+ * a structured property, or a referenced (named) instance value in the case of a relation.
  */
 @Bikeshed(heading="Axioms")
-class ScalarPropertyValueRestrictionAxiom extends ScalarPropertyRestrictionAxiom {
+class PropertyValueRestrictionAxiom extends PropertyRestrictionAxiom {
     /*
-     * The literal specified as a restricted property value by this axiom 
+     * A restricted literal value (of a scalar property) 
      */
-    contains Literal[1] value
-}
-
-/*
- * StructuredPropertyRestrictionAxiom is a property restriction axiom that is specified on a structured property.
- */
-@Bikeshed(heading="Axioms")
-abstract class StructuredPropertyRestrictionAxiom extends PropertyRestrictionAxiom {
+    contains Literal[?] literalValue
     /*
-     * The restricted structured property specified by this axiom
+     * A restricted structure instance value (of a structured property) 
      */
-    refers StructuredProperty[1] property
-}
-
-/*
- * StructuredPropertyRangeRestrictionAxiom is a structured property restriction axiom that restricts the range of a property 
- * to a structure that specializes the original range. This restrictions may apply to all or to some values of the 
- * property that have the restricting classifier as a domain.
- */
-@Bikeshed(heading="Axioms")
-class StructuredPropertyRangeRestrictionAxiom extends StructuredPropertyRestrictionAxiom {
+    contains StructureInstance[?] structureInstanceValue opposite owningAxiom
     /*
-     * The restricted range specified by this axiom
+     * A restricted named instance value (of a relation) 
      */
-    refers Structure[1] range
+    refers NamedInstance[?] namedInstanceValue
     /*
-     * The range restriction kind specified by this axiom (default is all)
+     * Gets the restricted value
      */
-    RangeRestrictionKind[1] kind
-}
-
-/*
- * StructuredPropertyCardinalityRestrictionAxiom is a structured property restriction axiom that restricts the cardinality of 
- * a structured property to an exact number, a minimum number or a maximum number. This restrictions can apply to all values 
- * of the property that have the restricting classifier as a domain, or to those values classified by a specific range subtype.
- */
-@Bikeshed(heading="Axioms")
-class StructuredPropertyCardinalityRestrictionAxiom extends StructuredPropertyRestrictionAxiom {
-    /*
-     * The value of the cardinality specified by this axiom (default is 1)
-     */
-    UnsignedInt[1] cardinality = "1"
-    /*
-     * The kind of cardinality restriction specified by this axiom (default is exactly)
-     */
-    CardinalityRestrictionKind[1] kind
-    /*
-     * The restricted range specified by this axiom
-     */
-    refers Structure[?] range
-}
-
-/*
- * StructuredPropertyValueRestrictionAxiom is a structured property restriction axiom that restricts the value of the property
- * that has the restricting classifier as a domain to a specific structure instance.
- */
-@Bikeshed(heading="Axioms")
-class StructuredPropertyValueRestrictionAxiom extends StructuredPropertyRestrictionAxiom {
-    /*
-     * The structure instance specified as a restricted property value by this axiom 
-     */
-    contains StructureInstance[1] value opposite owningAxiom
-}
-
-/*
- * RelationRestrictionAxiom is an axiom that places some restriction on a relation in the context of
- * a restricting classifier domain. It can be specified directly on the classifier or indirectly on a reference to it.
- */
-@Bikeshed(heading="Axioms")
-abstract class RelationRestrictionAxiom extends PropertyRestrictionAxiom {
-    /*
-     * The restricted relation specified by this axiom
-     */
-    refers Relation[1] property
-}
-
-/*
- * RelationRangeRestrictionAxiom is a relation restriction axiom that restricts the range of a relation to a specific 
- * subtype in the context of a given domain. It can specify whether all or only some usage of the property have values that conform
- * to this restriction.
- */
-@Bikeshed(heading="Axioms")
-class RelationRangeRestrictionAxiom extends RelationRestrictionAxiom {
-    /*
-     * The restricted range specified by this axiom
-     */
-    refers Entity[1] range
-    /*
-     * The range restriction kind specified by this axiom (default is all)
-     */
-    RangeRestrictionKind[1] kind
-}
-
-/*
- * RelationCardinalityRestrictionAxiom is an relation restriction axiom that restricts the cardinality of a relation's range
- * to an exact number, a minimum number or a maximum number. This restrictions may either apply to all values of the relation, 
- * or to those classified by a specific range subtype.
- */
-@Bikeshed(heading="Axioms")
-class RelationCardinalityRestrictionAxiom extends RelationRestrictionAxiom {
-    /*
-     * The value of the cardinality specified by this axiom (default is 1)
-     */
-    UnsignedInt[1] cardinality = "1"
-    /*
-     * The kind of cardinality restriction specified by this axiom (default is exactly)
-     */
-    CardinalityRestrictionKind[1] kind
-    /*
-     * The restricted range specified by this axiom
-     */
-    refers Entity[?] range
-}
-
-/*
- * RelationValueRestrictionAxiom is a relation restriction axiom that restricts the value of a relation
- * to a specific named instance.
- */
-@Bikeshed(heading="Axioms")
-class RelationValueRestrictionAxiom extends RelationRestrictionAxiom {
-    /*
-     * The named instance specified as a restricted value by this axiom 
-     */
-    refers NamedInstance[1] value
-    
+    op Element getValue() {
+    	if (property instanceof ScalarProperty)
+    		literalValue
+    	else if (property instanceof StructuredProperty)
+    		structureInstanceValue
+    	else if (property instanceof Relation)
+    		namedInstanceValue
+    }
 }
 
 ////////////////////////////////////////
@@ -1322,58 +1212,28 @@ class RelationValueRestrictionAxiom extends RelationRestrictionAxiom {
  * TypeAssertion is an assertion that specifies a type for an instance 
  */
 @Bikeshed(heading="Assertions")
-abstract class TypeAssertion extends Assertion {
+class TypeAssertion extends Assertion {
     /*
-     * Gets the type referenced by this assertion
+     * The type of the instance owning this assertion
      */
-    op Entity getType()
+    refers Entity[1] ^type
+    /*
+     * The instance that owns this assertion
+     */
+    container NamedInstance[?] owningInstance opposite ownedTypes
+    /*
+     * The reference that owns this assertion
+     */
+    container NamedInstanceReference[?] owningReference opposite ownedTypes
 }
 
 /*
- * ConceptTypeAssertion is a type assertion specifying a type for a concept instance. It can be specified directly on an
- * concept instance, or indirectly on a reference to one. 
+ * PropertyValueAssertion is an assertion that specifies a value for a property on an instance. The value is either a literal value 
+ * in the case of a scalar property, a contained (structure) instance value in the case of a structured property, or a referenced 
+ * (named) instance value in the case of a relation.
  */
 @Bikeshed(heading="Assertions")
-class ConceptTypeAssertion extends TypeAssertion {
-    /*
-     * The concept specified as the type of the instance
-     */
-    refers Concept[1] ^type
-    /*
-     * The instance that this type assertion is about
-     */
-    container ConceptInstance[?] owningInstance opposite ownedTypes
-    /*
-     * The reference to a concept instance that this type assertion is about
-     */
-    container ConceptInstanceReference[?] owningReference opposite ownedTypes
-}
-
-/*
- * RelationTypeAssertion is a type assertion specifying a relation entity as a type of a relation instance. It can be specified 
- * directly on a relation instance, or indirectly on a reference to one.
- */
-@Bikeshed(heading="Assertions")
-class RelationTypeAssertion extends TypeAssertion {
-    /*
-     * The relation entity that is the type of the relation instance
-     */
-    refers RelationEntity[1] ^type
-    /*
-     * The relation instance that this type assertion is about
-     */
-    container RelationInstance[?] owningInstance opposite ownedTypes
-    /*
-     * The reference to a relation instance that this type assertion is about
-     */
-    container RelationInstanceReference[?] owningReference opposite ownedTypes
-}
-
-/*
- * PropertyValueAssertion is an assertion that specifies a value for a property on an instance.
- */
-@Bikeshed(heading="Assertions")
-abstract class PropertyValueAssertion extends Assertion {
+class PropertyValueAssertion extends Assertion {
     /*
      * The instance that this property value assertion is about
      */
@@ -1383,59 +1243,32 @@ abstract class PropertyValueAssertion extends Assertion {
      */
     container NamedInstanceReference[?] owningReference opposite ownedPropertyValues
     /*
-     * Gets the property referenced by this assertion
+     * The property referenced by this assertion
      */
-    op SemanticProperty getProperty()
+    refers SemanticProperty[1] property
     /*
-     * Gets the value specified by this assertion
+     * An asserted literal value of a scalar property 
      */
-    op Element getValue()
-}
-
-/*
- * ScalarPropertyValueAssertion is a property value assertion for a scalar property, where the specified value is a literal.
- */
-@Bikeshed(heading="Assertions")
-class ScalarPropertyValueAssertion extends PropertyValueAssertion {
+    contains Literal[?] literalValue
     /*
-     * The scalar property specified by this assertion
+     * An asserted structure instance value of a structured property 
      */
-    refers ScalarProperty[1] property
+    contains StructureInstance[?] structureInstanceValue opposite owningAssertion
     /*
-     * The literal specified by this assertion as a value
+     * An asserted named instance value of a relation 
      */
-    contains Literal[1] value
-}
-
-/*
- * StructuredPropertyValueAssertion is a property value assertion for a structured property, where the specified value is a
- * structure instance.
- */
-@Bikeshed(heading="Assertions")
-class StructuredPropertyValueAssertion extends PropertyValueAssertion {
+    refers NamedInstance[?] namedInstanceValue
     /*
-     * The structured property specified by this assertion
+     * Gets the asserted value
      */
-    refers StructuredProperty[1] property
-    /*
-     * The structure instance specified by this assertion as a value
-     */
-    contains StructureInstance[1] value opposite owningAssertion
-}
-
-/*
- * LinkAssertion is a property value assertion for a relation, where the specified value is a named instance.
- */
-@Bikeshed(heading="Assertions")
-class LinkAssertion extends PropertyValueAssertion {
-    /*
-     * The relation referenced by this assertion
-     */
-    refers Relation[1] property
-    /*
-     * The named instance specified as a value by this assertion
-     */
-    refers NamedInstance[1] value
+    op Element getValue() {
+    	if (property instanceof ScalarProperty)
+    		literalValue
+    	else if (property instanceof StructuredProperty)
+    		structureInstanceValue
+    	else if (property instanceof Relation)
+    		namedInstanceValue
+    }
 }
 
 ////////////////////////////////////////
@@ -1774,12 +1607,16 @@ class RuleReference extends Reference , VocabularyStatement {
 }
 
 /*
- * NamedInstanceReference is a reference to an named instance that can be used to add other property values.
+ * NamedInstanceReference is a reference to a named instance that can be used to add other assertions to the instance.
  */
 @Bikeshed(heading="References")
 abstract class NamedInstanceReference extends Reference , DescriptionStatement {
     /*
-     * The property value assertions added to referenced named instance by this reference
+     * The type assertions added to the referenced named instance
+     */
+    contains TypeAssertion[*] ownedTypes opposite owningReference
+    /*
+     * The property value assertions added to referenced named instance
      */
     contains PropertyValueAssertion[*] ownedPropertyValues opposite owningReference
 }
@@ -1793,10 +1630,6 @@ class ConceptInstanceReference extends NamedInstanceReference {
      * The referenced concept instance
      */
     refers ConceptInstance[1] instance
-    /*
-     * The set of types added to the referenced concept instance
-     */
-    contains ConceptTypeAssertion[*] ownedTypes opposite owningReference
 }
 
 /*
@@ -1808,10 +1641,6 @@ class RelationInstanceReference extends NamedInstanceReference {
      * The referenced relation instance
      */
     refers RelationInstance[1] instance
-    /*
-     * The set of type assertions added to the referenced relation instance
-     */
-    contains RelationTypeAssertion[*] ownedTypes opposite owningReference
 }
 
 ////////////////////////////////////////

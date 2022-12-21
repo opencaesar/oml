@@ -43,7 +43,6 @@ import io.opencaesar.oml.BooleanLiteral;
 import io.opencaesar.oml.CardinalityRestrictionKind;
 import io.opencaesar.oml.Concept;
 import io.opencaesar.oml.ConceptInstance;
-import io.opencaesar.oml.ConceptTypeAssertion;
 import io.opencaesar.oml.DecimalLiteral;
 import io.opencaesar.oml.Description;
 import io.opencaesar.oml.DescriptionBundle;
@@ -58,42 +57,35 @@ import io.opencaesar.oml.IdentifiedElement;
 import io.opencaesar.oml.Inclusion;
 import io.opencaesar.oml.IntegerLiteral;
 import io.opencaesar.oml.KeyAxiom;
-import io.opencaesar.oml.LinkAssertion;
 import io.opencaesar.oml.Literal;
 import io.opencaesar.oml.Member;
+import io.opencaesar.oml.NamedInstance;
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.Ontology;
 import io.opencaesar.oml.Predicate;
+import io.opencaesar.oml.PropertyCardinalityRestrictionAxiom;
 import io.opencaesar.oml.PropertyPredicate;
+import io.opencaesar.oml.PropertyRangeRestrictionAxiom;
+import io.opencaesar.oml.PropertyValueAssertion;
+import io.opencaesar.oml.PropertyValueRestrictionAxiom;
 import io.opencaesar.oml.QuotedLiteral;
 import io.opencaesar.oml.RangeRestrictionKind;
 import io.opencaesar.oml.Reference;
 import io.opencaesar.oml.Relation;
 import io.opencaesar.oml.RelationBase;
-import io.opencaesar.oml.RelationCardinalityRestrictionAxiom;
 import io.opencaesar.oml.RelationEntity;
 import io.opencaesar.oml.RelationEntityPredicate;
 import io.opencaesar.oml.RelationInstance;
-import io.opencaesar.oml.RelationRangeRestrictionAxiom;
-import io.opencaesar.oml.RelationTypeAssertion;
-import io.opencaesar.oml.RelationValueRestrictionAxiom;
 import io.opencaesar.oml.ReverseRelation;
 import io.opencaesar.oml.Rule;
 import io.opencaesar.oml.SameAsPredicate;
 import io.opencaesar.oml.ScalarProperty;
-import io.opencaesar.oml.ScalarPropertyCardinalityRestrictionAxiom;
-import io.opencaesar.oml.ScalarPropertyRangeRestrictionAxiom;
-import io.opencaesar.oml.ScalarPropertyValueAssertion;
-import io.opencaesar.oml.ScalarPropertyValueRestrictionAxiom;
 import io.opencaesar.oml.SeparatorKind;
 import io.opencaesar.oml.SpecializationAxiom;
 import io.opencaesar.oml.Structure;
 import io.opencaesar.oml.StructureInstance;
 import io.opencaesar.oml.StructuredProperty;
-import io.opencaesar.oml.StructuredPropertyCardinalityRestrictionAxiom;
-import io.opencaesar.oml.StructuredPropertyRangeRestrictionAxiom;
-import io.opencaesar.oml.StructuredPropertyValueAssertion;
-import io.opencaesar.oml.StructuredPropertyValueRestrictionAxiom;
+import io.opencaesar.oml.TypeAssertion;
 import io.opencaesar.oml.TypePredicate;
 import io.opencaesar.oml.UnreifiedRelation;
 import io.opencaesar.oml.Usage;
@@ -316,47 +308,56 @@ public class OmlBuilder {
     // Annotation
 
     /**
-     * Adds a new annotation on a given ontology
+     * Adds a new annotation with a literal or reference value (but not both) on a given ontology
      * 
      * @param ontology the ontology to annotate
      * @param propertyIri the annotation property identified by iri
-     * @param value the annotation literal value
+     * @param literalValue the annotation literal value
+     * @param referenceValueIri the annotation (member) reference value identified by iri
      * @return a new annotation on the given ontology
      */
-    public Annotation addAnnotation(Ontology ontology, String propertyIri, Literal value) {
-        final Annotation annotation = OmlWrite.addAnnotation(ontology, null, value);
+    public Annotation addAnnotation(Ontology ontology, String propertyIri, Literal literalValue, String referenceValueIri) {
+        final Annotation annotation = OmlWrite.addAnnotation(ontology, null, literalValue, null);
+        if (referenceValueIri != null)
+        	setCrossReference(ontology, annotation, OmlPackage.Literals.ANNOTATION__REFERENCE_VALUE, referenceValueIri);
         setCrossReference(ontology, annotation, OmlPackage.Literals.ANNOTATION__PROPERTY, propertyIri);
         return annotation;
     }
 
     /**
-     * Adds a new annotation on a given annotated element in the context of a given ontology
+     * Adds a new annotation with a literal or reference value (but not both) on a given annotated element in the context of a given ontology
      * 
      * Note that if the element is already added to an ontology, it is expected to be the same as the given ontology
      * 
      * @param ontology the context ontology that will have the annotation axiom
      * @param element the annotated element to put the annotation on
      * @param propertyIri the annotation property identified by iri
-     * @param value the annotation literal value
+     * @param literalValue the annotation literal value
+     * @param referenceValueIri the annotation (member) reference value identified by iri
      * @return a new annotation on the given annotated element in the context of the given ontology
      */
-    public Annotation addAnnotation(Ontology ontology, IdentifiedElement element, String propertyIri, Literal value) {
-        final Annotation annotation = OmlWrite.addAnnotation(ontology, element, null, value);
+    public Annotation addAnnotation(Ontology ontology, IdentifiedElement element, String propertyIri, Literal literalValue, String referenceValueIri) {
+        final Annotation annotation = OmlWrite.addAnnotation(ontology, element, null, literalValue, null);
+        if (referenceValueIri != null)
+        	setCrossReference(ontology, annotation, OmlPackage.Literals.ANNOTATION__REFERENCE_VALUE, referenceValueIri);
         setCrossReference(ontology, annotation, OmlPackage.Literals.ANNOTATION__PROPERTY, propertyIri);
         return annotation;
     }
 
     /**
-     * Adds a new annotation on a given member (identified by iri) in the context of a given ontology
+     * Adds a new annotation with a literal or reference value (but not both) on a a given member (identified by iri) in the context of a given ontology
      * 
      * @param ontology the context ontology that will have the annotation axiom
      * @param memberIri the iri of a member to put the annotation on
      * @param propertyIri the annotation property identified by iri
-     * @param value the annotation literal value
+     * @param literalValue the annotation literal value
+     * @param referenceValueIri the annotation (member) reference value identified by iri
      * @return a new annotation on the given member in the context of the given ontology
      */
-    public Annotation addAnnotation(Ontology ontology, String memberIri, String propertyIri, Literal value) {
-        final Annotation annotation = OmlWrite.addAnnotation(ontology, null, null, value);
+    public Annotation addAnnotation(Ontology ontology, String memberIri, String propertyIri, Literal literalValue, String referenceValueIri) {
+        final Annotation annotation = OmlWrite.addAnnotation(ontology, null, null, literalValue, null);
+        if (referenceValueIri != null)
+        	setCrossReference(ontology, annotation, OmlPackage.Literals.ANNOTATION__REFERENCE_VALUE, referenceValueIri);
         setCrossReference(ontology, annotation, OmlPackage.Literals.ANNOTATION__PROPERTY, propertyIri);
         setContainmentReference(ontology, memberIri, OmlPackage.Literals.IDENTIFIED_ELEMENT__OWNED_ANNOTATIONS, OmlPackage.Literals.REFERENCE__OWNED_ANNOTATIONS, annotation);
         return annotation;
@@ -814,180 +815,94 @@ public class OmlBuilder {
         return axiom;
     }
     
-    // ScalarPropertyRangeRestrictionAxiom
+    // PropertyRangeRestrictionAxiom
 
     /**
-     * Creates a scalar property range restriction axiom and adds it to the given vocabulary
+     * Creates a property range restriction axiom and adds it to the given vocabulary
+     * 
+     * @param vocabulary the context vocabulary
+     * @param domainIri the iri of the restricting (classifier) domain
+     * @param propertyIri the iri of the restricted property
+     * @param rangeIri the iri of the restricted range
+     * @param restrictionKind the kind of the restriction
+     * @return a property range restriction axiom that is added to the given vocabulary
+     */
+    public PropertyRangeRestrictionAxiom addPropertyRangeRestrictionAxiom(Vocabulary vocabulary, String domainIri, String propertyIri, String rangeIri, RangeRestrictionKind restrictionKind) {
+        final PropertyRangeRestrictionAxiom axiom = OmlWrite.addPropertyRangeRestrictionAxiom(vocabulary, null, null, null, restrictionKind);
+        setCrossReference(vocabulary, axiom, OmlPackage.Literals.PROPERTY_RESTRICTION_AXIOM__PROPERTY, propertyIri);
+        setCrossReference(vocabulary, axiom, OmlPackage.Literals.PROPERTY_RANGE_RESTRICTION_AXIOM__RANGE, rangeIri);
+        setContainmentReference(vocabulary, domainIri, OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS, OmlPackage.Literals.CLASSIFIER_REFERENCE__OWNED_PROPERTY_RESTRICTIONS, axiom);
+        return axiom;
+    }
+
+    // PropertyCardinalityRestrictionAxiom
+
+    /**
+     * Creates a property cardinality restriction axiom and adds it to the given vocabulary
+     * 
+     * @param vocabulary the context vocabulary
+     * @param domainIri the iri of the restricting (classifier) domain
+     * @param propertyIri the iri of the restricted property
+     * @param cardinality the restricted cardinality
+     * @param rangeIri the iri of the restricted range (optional)
+     * @param restrictionKind the kind of the restriction
+     * @return a property cardinality restriction axiom that is added to the given vocabulary
+     */
+    public PropertyCardinalityRestrictionAxiom addPropertyCardinalityRestrictionAxiom(Vocabulary vocabulary, String domainIri, String propertyIri, CardinalityRestrictionKind restrictionKind, long cardinality, String rangeIri) {
+        final PropertyCardinalityRestrictionAxiom axiom = OmlWrite.addPropertyCardinalityRestrictionAxiom(vocabulary, null, null, restrictionKind, cardinality, null);
+        setCrossReference(vocabulary, axiom, OmlPackage.Literals.PROPERTY_RESTRICTION_AXIOM__PROPERTY, propertyIri);
+        setCrossReference(vocabulary, axiom, OmlPackage.Literals.PROPERTY_CARDINALITY_RESTRICTION_AXIOM__RANGE, rangeIri);
+        setContainmentReference(vocabulary, domainIri, OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS, OmlPackage.Literals.CLASSIFIER_REFERENCE__OWNED_PROPERTY_RESTRICTIONS, axiom);
+        return axiom;
+    }
+
+    // PropertyValueRestrictionAxiom
+
+    /**
+     * Creates a property value restriction axiom for a scalar property and adds it to the given vocabulary
      * 
      * @param vocabulary the context vocabulary
      * @param domainIri the iri of the restricting (classifier) domain
      * @param propertyIri the iri of the restricted scalar property
-     * @param rangeIri the iri of the restricted (scalar) range
-     * @param restrictionKind the kind of the restriction
-     * @return a scalar property range restriction axiom that is added to the given vocabulary
+     * @param literal the (literal) value of the restriction
+     * @return a property value restriction axiom that is added to the given vocabulary
      */
-    public ScalarPropertyRangeRestrictionAxiom addScalarPropertyRangeRestrictionAxiom(Vocabulary vocabulary, String domainIri, String propertyIri, String rangeIri, RangeRestrictionKind restrictionKind) {
-        final ScalarPropertyRangeRestrictionAxiom axiom = OmlWrite.addScalarPropertyRangeRestrictionAxiom(vocabulary, null, null, null, restrictionKind);
-        setCrossReference(vocabulary, axiom, OmlPackage.Literals.SCALAR_PROPERTY_RESTRICTION_AXIOM__PROPERTY, propertyIri);
-        setCrossReference(vocabulary, axiom, OmlPackage.Literals.SCALAR_PROPERTY_RANGE_RESTRICTION_AXIOM__RANGE, rangeIri);
+    public PropertyValueRestrictionAxiom addPropertyValueRestrictionAxiom(Vocabulary vocabulary, String domainIri, String propertyIri, Literal literal) {
+        final PropertyValueRestrictionAxiom axiom = OmlWrite.addPropertyValueRestrictionAxiom(vocabulary, null, null, literal);
+        setCrossReference(vocabulary, axiom, OmlPackage.Literals.PROPERTY_RESTRICTION_AXIOM__PROPERTY, propertyIri);
         setContainmentReference(vocabulary, domainIri, OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS, OmlPackage.Literals.CLASSIFIER_REFERENCE__OWNED_PROPERTY_RESTRICTIONS, axiom);
         return axiom;
     }
 
-    // ScalarPropertyCardinalityRestrictionAxiom
-
     /**
-     * Creates a scalar property cardinality restriction axiom and adds it to the given vocabulary
-     * 
-     * @param vocabulary the context vocabulary
-     * @param domainIri the iri of the restricting (classifier) domain
-     * @param propertyIri the iri of the restricted scalar property
-     * @param cardinality the restricted cardinality
-     * @param rangeIri the iri of the restricted (scalar) range (optional)
-     * @param restrictionKind the kind of the restriction
-     * @return a scalar property cardinality restriction axiom that is added to the given vocabulary
-     */
-    public ScalarPropertyCardinalityRestrictionAxiom addScalarPropertyCardinalityRestrictionAxiom(Vocabulary vocabulary, String domainIri, String propertyIri, CardinalityRestrictionKind restrictionKind, long cardinality, String rangeIri) {
-        final ScalarPropertyCardinalityRestrictionAxiom axiom = OmlWrite.addScalarPropertyCardinalityRestrictionAxiom(vocabulary, null, null, restrictionKind, cardinality, null);
-        setCrossReference(vocabulary, axiom, OmlPackage.Literals.SCALAR_PROPERTY_RESTRICTION_AXIOM__PROPERTY, propertyIri);
-        setCrossReference(vocabulary, axiom, OmlPackage.Literals.SCALAR_PROPERTY_CARDINALITY_RESTRICTION_AXIOM__RANGE, rangeIri);
-        setContainmentReference(vocabulary, domainIri, OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS, OmlPackage.Literals.CLASSIFIER_REFERENCE__OWNED_PROPERTY_RESTRICTIONS, axiom);
-        return axiom;
-    }
-
-    // ScalarPropertyValueRestrictionAxiom
-
-    /**
-     * Creates a scalar property value restriction axiom and adds it to the given vocabulary
-     * 
-     * @param vocabulary the context vocabulary
-     * @param domainIri the iri of the restricting (classifier) domain
-     * @param propertyIri the iri of the restricted scalar property
-     * @param value the (literal) value of the restriction
-     * @return a scalar property value restriction axiom that is added to the given vocabulary
-     */
-    public ScalarPropertyValueRestrictionAxiom addScalarPropertyValueRestrictionAxiom(Vocabulary vocabulary, String domainIri, String propertyIri, Literal value) {
-        final ScalarPropertyValueRestrictionAxiom axiom = OmlWrite.addScalarPropertyValueRestrictionAxiom(vocabulary, null, null, value);
-        setCrossReference(vocabulary, axiom, OmlPackage.Literals.SCALAR_PROPERTY_RESTRICTION_AXIOM__PROPERTY, propertyIri);
-        setContainmentReference(vocabulary, domainIri, OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS, OmlPackage.Literals.CLASSIFIER_REFERENCE__OWNED_PROPERTY_RESTRICTIONS, axiom);
-        return axiom;
-    }
-
-    // StructuredPropertyRangeRestrictionAxiom
-
-    /**
-     * Creates a structured property range restriction axiom and adds it to the given vocabulary
+     * Creates a property value restriction axiom for a structured property and adds it to the given vocabulary
      * 
      * @param vocabulary the context vocabulary
      * @param domainIri the iri of the restricting (classifier) domain
      * @param propertyIri the iri of the restricted structured property
-     * @param rangeIri the iri of the restricted (structure) range
-     * @param restrictionKind the kind of the restriction
-     * @return a structured property range restriction axiom that is added to the given vocabulary
+     * @param structureInstance the (structure instance) value of the restriction
+     * @return a property value restriction axiom that is added to the given vocabulary
      */
-    public StructuredPropertyRangeRestrictionAxiom addStructuredPropertyRangeRestrictionAxiom(Vocabulary vocabulary, String domainIri, String propertyIri, String rangeIri, RangeRestrictionKind restrictionKind) {
-        final StructuredPropertyRangeRestrictionAxiom axiom = OmlWrite.addStructuredPropertyRangeRestrictionAxiom(vocabulary, null, null, null, restrictionKind);
-        setCrossReference(vocabulary, axiom, OmlPackage.Literals.STRUCTURED_PROPERTY_RESTRICTION_AXIOM__PROPERTY, propertyIri);
-        setCrossReference(vocabulary, axiom, OmlPackage.Literals.STRUCTURED_PROPERTY_RANGE_RESTRICTION_AXIOM__RANGE, rangeIri);
+    public PropertyValueRestrictionAxiom addPropertyValueRestrictionAxiom(Vocabulary vocabulary, String domainIri, String propertyIri, StructureInstance structureInstance) {
+        final PropertyValueRestrictionAxiom axiom = OmlWrite.addPropertyValueRestrictionAxiom(vocabulary, null, null, structureInstance);
+        setCrossReference(vocabulary, axiom, OmlPackage.Literals.PROPERTY_RESTRICTION_AXIOM__PROPERTY, propertyIri);
         setContainmentReference(vocabulary, domainIri, OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS, OmlPackage.Literals.CLASSIFIER_REFERENCE__OWNED_PROPERTY_RESTRICTIONS, axiom);
         return axiom;
     }
 
-    // StructuredPropertyCardinalityRestrictionAxiom
-
     /**
-     * Creates a structured property cardinality restriction axiom and adds it to the given vocabulary
+     * Creates a property value restriction axiom for a relation and adds it to the given vocabulary
      * 
      * @param vocabulary the context vocabulary
      * @param domainIri the iri of the restricting (classifier) domain
-     * @param propertyIri the iri of the restricted structured property
-     * @param rangeIri the iri of the restricted (structure) range (optional)
-     * @param cardinality the restricted cardinality
-     * @param restrictionKind the kind of the restriction
-     * @return a structured property cardinality restriction axiom that is added to the given vocabulary
+     * @param propertyIri the iri of the restricted relation
+     * @param namedInstanceIri the Iri of a (named instance) value of the restriction
+     * @return a property value restriction axiom that is added to the given vocabulary
      */
-    public StructuredPropertyCardinalityRestrictionAxiom addStructuredPropertyCardinalityRestrictionAxiom(Vocabulary vocabulary, String domainIri, String propertyIri, CardinalityRestrictionKind restrictionKind, long cardinality, String rangeIri) {
-        final StructuredPropertyCardinalityRestrictionAxiom axiom = OmlWrite.addStructuredPropertyCardinalityRestrictionAxiom(vocabulary, null, null, restrictionKind, cardinality, null);
-        setCrossReference(vocabulary, axiom, OmlPackage.Literals.STRUCTURED_PROPERTY_RESTRICTION_AXIOM__PROPERTY, propertyIri);
-        setCrossReference(vocabulary, axiom, OmlPackage.Literals.STRUCTURED_PROPERTY_CARDINALITY_RESTRICTION_AXIOM__RANGE, rangeIri);
-        setContainmentReference(vocabulary, domainIri, OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS, OmlPackage.Literals.CLASSIFIER_REFERENCE__OWNED_PROPERTY_RESTRICTIONS, axiom);
-        return axiom;
-    }
-
-    // StructuredPropertyValueRestrictionAxiom
-    
-    /**
-     * Creates a structured property value restriction axiom and adds it to the given vocabulary
-     * 
-     * @param vocabulary the context vocabulary
-     * @param domainIri the iri of the restricting (classifier) domain
-     * @param propertyIri the iri of the restricted structured property
-     * @param value the (structure instance) value of the restriction
-     * @return a structured property value restriction axiom that is added to the given vocabulary
-     */
-    public StructuredPropertyValueRestrictionAxiom addStructuredPropertyValueRestrictionAxiom(Vocabulary vocabulary, String domainIri, String propertyIri, StructureInstance value) {
-        final StructuredPropertyValueRestrictionAxiom axiom = OmlWrite.addStructuredPropertyValueRestrictionAxiom(vocabulary, null, null, value);
-        setCrossReference(vocabulary, axiom, OmlPackage.Literals.STRUCTURED_PROPERTY_VALUE_ASSERTION__PROPERTY, propertyIri);
-        setContainmentReference(vocabulary, domainIri, OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS, OmlPackage.Literals.CLASSIFIER_REFERENCE__OWNED_PROPERTY_RESTRICTIONS, axiom);
-        return axiom;
-    }
-
-    // RelationRangeRestrictionAxiom
-
-    /**
-     * Creates a relation range restriction axiom and adds it to the given vocabulary
-     * 
-     * @param vocabulary the context vocabulary
-     * @param domainIri the iri of the restricting (entity) domain
-     * @param relationIri the iri of the restricted relation
-     * @param rangeIri the iri of the restricted (entity) range
-     * @param restrictionKind the kind of the restriction
-     * @return a relation range restriction axiom that is added to the given vocabulary
-     */
-    public RelationRangeRestrictionAxiom addRelationRangeRestrictionAxiom(Vocabulary vocabulary, String domainIri, String relationIri, String rangeIri, RangeRestrictionKind restrictionKind) {
-        final RelationRangeRestrictionAxiom axiom = OmlWrite.addRelationRangeRestrictionAxiom(vocabulary, null, null, null, restrictionKind);
-        setCrossReference(vocabulary, axiom, OmlPackage.Literals.RELATION_RESTRICTION_AXIOM__PROPERTY, relationIri);
-        setCrossReference(vocabulary, axiom, OmlPackage.Literals.RELATION_RANGE_RESTRICTION_AXIOM__RANGE, rangeIri);
-        setContainmentReference(vocabulary, domainIri, OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS, OmlPackage.Literals.CLASSIFIER_REFERENCE__OWNED_PROPERTY_RESTRICTIONS, axiom);
-        return axiom;
-    }
-    
-    // RelationCardinalityRestrictionAxiom
-
-    /**
-     * Creates a relation cardinality restriction axiom and adds it to the given vocabulary
-     * 
-     * @param vocabulary the context vocabulary
-     * @param domainIri the iri of the restricting (entity) domain
-     * @param relationIri the iri of the restricted relation
-     * @param rangeIri the iri of the restricted (entity) range (optional)
-     * @param cardinality the restricted cardinality
-     * @param restrictionKind the kind of the restriction
-     * @return a relation cardinality restriction axiom that is added to the given vocabulary
-     */
-    public RelationCardinalityRestrictionAxiom addRelationCardinalityRestrictionAxiom(Vocabulary vocabulary, String domainIri, String relationIri, CardinalityRestrictionKind restrictionKind, long cardinality, String rangeIri) {
-        final RelationCardinalityRestrictionAxiom axiom = OmlWrite.addRelationCardinalityRestrictionAxiom(vocabulary, null, null, restrictionKind, cardinality, null);
-        setCrossReference(vocabulary, axiom, OmlPackage.Literals.RELATION_RESTRICTION_AXIOM__PROPERTY, relationIri);
-        setCrossReference(vocabulary, axiom, OmlPackage.Literals.RELATION_CARDINALITY_RESTRICTION_AXIOM__RANGE, rangeIri);
-        setContainmentReference(vocabulary, domainIri, OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS, OmlPackage.Literals.CLASSIFIER_REFERENCE__OWNED_PROPERTY_RESTRICTIONS, axiom);
-        return axiom;
-    }
-
-    // RelationTargetRestrictionAxiom
-    
-    /**
-     * Creates a relation value restriction axiom and adds it to the given vocabulary
-     * 
-     * @param vocabulary the context vocabulary
-     * @param domainIri the iri of the restricting (entity) domain
-     * @param relationIri the iri of the restricted relation
-     * @param valueIri the iri of the (named instance) value of the restriction
-     * @return a relation target restriction axiom that is added to the given vocabulary
-     */
-    public RelationValueRestrictionAxiom addRelationValueRestrictionAxiom(Vocabulary vocabulary, String domainIri, String relationIri, String valueIri) {
-        final RelationValueRestrictionAxiom axiom = OmlWrite.addRelationValueRestrictionAxiom(vocabulary, null, null, null);
-        setCrossReference(vocabulary, axiom, OmlPackage.Literals.RELATION_RESTRICTION_AXIOM__PROPERTY, relationIri);
-        setCrossReference(vocabulary, axiom, OmlPackage.Literals.RELATION_VALUE_RESTRICTION_AXIOM__VALUE, valueIri);
+    public PropertyValueRestrictionAxiom addPropertyValueRestrictionAxiom(Vocabulary vocabulary, String domainIri, String propertyIri, String namedInstanceIri) {
+        final PropertyValueRestrictionAxiom axiom = OmlWrite.addPropertyValueRestrictionAxiom(vocabulary, null, null, (NamedInstance) null);
+        setCrossReference(vocabulary, axiom, OmlPackage.Literals.PROPERTY_VALUE_RESTRICTION_AXIOM__NAMED_INSTANCE_VALUE, namedInstanceIri);
+        setCrossReference(vocabulary, axiom, OmlPackage.Literals.PROPERTY_RESTRICTION_AXIOM__PROPERTY, propertyIri);
         setContainmentReference(vocabulary, domainIri, OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS, OmlPackage.Literals.CLASSIFIER_REFERENCE__OWNED_PROPERTY_RESTRICTIONS, axiom);
         return axiom;
     }
@@ -1009,92 +924,71 @@ public class OmlBuilder {
         return axiom;
     }
 
-    // ConceptTypeAssertion
+    // TypeAssertion
     
     /**
-     * Creates a concept type assertion and adds it to the given description
-     * 
-     * @param description the context description
-     * @param instanceIri the iri of the concept instance
-     * @param typeIri the iri of the concept type
-     * @return a concept type assertion that is added to the given description
-     */
-    public ConceptTypeAssertion addConceptTypeAssertion(Description description, String instanceIri, String typeIri) {
-        final ConceptTypeAssertion assertion = OmlWrite.addConceptTypeAssertion(description, null, null);
-        setCrossReference(description, assertion, OmlPackage.Literals.CONCEPT_TYPE_ASSERTION__TYPE, typeIri);
-        setContainmentReference(description, instanceIri, OmlPackage.Literals.CONCEPT_INSTANCE__OWNED_TYPES, OmlPackage.Literals.CONCEPT_INSTANCE_REFERENCE__OWNED_TYPES, assertion);
-        return assertion;
-    }
-
-    // RelationTypeAssertion
-
-    /**
-     * Creates a relation type assertion and adds it to the given description
-     * 
-     * @param description the context description
-     * @param instanceIri the iri of the relation instance
-     * @param typeIri the iri of the relation entity type
-     * @return a relation type assertion that is added to the given description
-     */
-    public RelationTypeAssertion addRelationTypeAssertion(Description description, String instanceIri, String typeIri) {
-        final RelationTypeAssertion assertion = OmlWrite.addRelationTypeAssertion(description, null, null);
-        setCrossReference(description, assertion, OmlPackage.Literals.RELATION_TYPE_ASSERTION__TYPE, typeIri);
-        setContainmentReference(description, instanceIri, OmlPackage.Literals.RELATION_INSTANCE__OWNED_TYPES, OmlPackage.Literals.RELATION_INSTANCE_REFERENCE__OWNED_TYPES, assertion);
-        return assertion;
-    }
-
-    // ScalarPropertyValueAssertion
-
-    /**
-     * Creates a scalar property value assertion and adds it to the given ontology
-     * 
-     * @param ontology the context ontology
-     * @param instanceIri the iri of the instance
-     * @param propertyIri the iri of the (scalar) property
-     * @param value the asserted (literal) value
-     * @return a scalar property value assertion that is added to the given description
-     */
-    public ScalarPropertyValueAssertion addScalarPropertyValueAssertion(Ontology ontology, String instanceIri, String propertyIri, Literal value) {
-        final ScalarPropertyValueAssertion assertion = OmlWrite.addScalarPropertyValueAssertion(ontology, null, null, value);
-        setCrossReference(ontology, assertion, OmlPackage.Literals.SCALAR_PROPERTY_VALUE_ASSERTION__PROPERTY, propertyIri);
-        setContainmentReference(ontology, instanceIri, OmlPackage.Literals.INSTANCE__OWNED_PROPERTY_VALUES, OmlPackage.Literals.NAMED_INSTANCE_REFERENCE__OWNED_PROPERTY_VALUES, assertion);
-        return assertion;
-    }
-
-    // StructuredPropertyValueAssertion
-
-    /**
-     * Creates a structured property value assertion and adds it to the given ontology
-     * 
-     * @param ontology the context ontology
-     * @param instanceIri the iri of the instance
-     * @param propertyIri the iri of the (structured) property
-     * @param value the asserted (structure instance) value
-     * @return a structured property value assertion that is added to the given description
-     */
-    public StructuredPropertyValueAssertion addStructuredPropertyValueAssertion(Ontology ontology, String instanceIri, String propertyIri, StructureInstance value) {
-        final StructuredPropertyValueAssertion assertion = OmlWrite.addStructuredPropertyValueAssertion(ontology, null, null, value);
-        setCrossReference(ontology, assertion, OmlPackage.Literals.STRUCTURED_PROPERTY_VALUE_ASSERTION__PROPERTY, propertyIri);
-        setContainmentReference(ontology, instanceIri, OmlPackage.Literals.INSTANCE__OWNED_PROPERTY_VALUES, OmlPackage.Literals.NAMED_INSTANCE_REFERENCE__OWNED_PROPERTY_VALUES, assertion);
-        return assertion;
-    }
-
-    // LinkAssertion
-        
-    /**
-     * Creates a link assertion and adds it to the given description
+     * Creates a type assertion and adds it to the given description
      * 
      * @param description the context description
      * @param instanceIri the iri of the named instance
-     * @param propertyIri the iri of the (relation) property
-     * @param valueIri the iri of the asserted (named instance) value
-     * @return a link assertion that is added to the given description
+     * @param typeIri the iri of the type
+     * @return a concept type assertion that is added to the given description
      */
-    public LinkAssertion addLinkAssertion(Description description, String instanceIri, String propertyIri, String valueIri) {
-        final LinkAssertion assertion = OmlWrite.addLinkAssertion(description, null, null, null);
-        setCrossReference(description, assertion, OmlPackage.Literals.LINK_ASSERTION__PROPERTY, propertyIri);
-        setCrossReference(description, assertion, OmlPackage.Literals.LINK_ASSERTION__VALUE, valueIri);
-        setContainmentReference(description, instanceIri, OmlPackage.Literals.INSTANCE__OWNED_PROPERTY_VALUES, OmlPackage.Literals.NAMED_INSTANCE_REFERENCE__OWNED_PROPERTY_VALUES, assertion);
+    public TypeAssertion addConceptTypeAssertion(Description description, String instanceIri, String typeIri) {
+        final TypeAssertion assertion = OmlWrite.addTypeAssertion(description, null, null);
+        setCrossReference(description, assertion, OmlPackage.Literals.TYPE_ASSERTION__TYPE, typeIri);
+        setContainmentReference(description, instanceIri, OmlPackage.Literals.NAMED_INSTANCE__OWNED_TYPES, OmlPackage.Literals.NAMED_INSTANCE_REFERENCE__OWNED_TYPES, assertion);
+        return assertion;
+    }
+
+    // PropertyValueAssertion
+
+    /**
+     * Creates a property value assertion for a scalar property and adds it to the given ontology
+     * 
+     * @param ontology the context ontology
+     * @param instanceIri the iri of the instance
+     * @param propertyIri the iri of the scalar property
+     * @param literalValue the asserted (literal) value of the property
+     * @return a property value assertion that is added to the given description
+     */
+    public PropertyValueAssertion addPropertyValueAssertion(Ontology ontology, String instanceIri, String propertyIri, Literal literalValue) {
+        final PropertyValueAssertion assertion = OmlWrite.addPropertyValueAssertion(ontology, null, null, literalValue);
+        setCrossReference(ontology, assertion, OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__PROPERTY, propertyIri);
+        setContainmentReference(ontology, instanceIri, OmlPackage.Literals.INSTANCE__OWNED_PROPERTY_VALUES, OmlPackage.Literals.NAMED_INSTANCE_REFERENCE__OWNED_PROPERTY_VALUES, assertion);
+        return assertion;
+    }
+
+    /**
+     * Creates a property value assertion for a structured property and adds it to the given ontology
+     * 
+     * @param ontology the context ontology
+     * @param instanceIri the iri of the instance
+     * @param propertyIri the iri of the structured property
+     * @param structureInstanceValue the asserted (structure instance) value of the property
+     * @return a property value assertion that is added to the given description
+     */
+    public PropertyValueAssertion addPropertyValueAssertion(Ontology ontology, String instanceIri, String propertyIri, StructureInstance structureInstanceValue) {
+        final PropertyValueAssertion assertion = OmlWrite.addPropertyValueAssertion(ontology, null, null, structureInstanceValue);
+        setCrossReference(ontology, assertion, OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__PROPERTY, propertyIri);
+        setContainmentReference(ontology, instanceIri, OmlPackage.Literals.INSTANCE__OWNED_PROPERTY_VALUES, OmlPackage.Literals.NAMED_INSTANCE_REFERENCE__OWNED_PROPERTY_VALUES, assertion);
+        return assertion;
+    }
+
+    /**
+     * Creates a property value assertion for a relation and adds it to the given ontology
+     * 
+     * @param ontology the context ontology
+     * @param instanceIri the iri of the instance
+     * @param propertyIri the iri of the relation property
+     * @param namedInstanceValueIri the asserted (named instance) value (identified by iri) of the property
+     * @return a property value assertion that is added to the given description
+     */
+    public PropertyValueAssertion addPropertyValueAssertion(Ontology ontology, String instanceIri, String propertyIri, String namedInstanceValueIri) {
+        final PropertyValueAssertion assertion = OmlWrite.addPropertyValueAssertion(ontology, null, null, (NamedInstance) null);
+        setCrossReference(ontology, assertion, OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__NAMED_INSTANCE_VALUE, namedInstanceValueIri);
+        setCrossReference(ontology, assertion, OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__PROPERTY, propertyIri);
+        setContainmentReference(ontology, instanceIri, OmlPackage.Literals.INSTANCE__OWNED_PROPERTY_VALUES, OmlPackage.Literals.NAMED_INSTANCE_REFERENCE__OWNED_PROPERTY_VALUES, assertion);
         return assertion;
     }
 

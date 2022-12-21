@@ -24,7 +24,7 @@ Ontology:
 	DescriptionBox;
 
 Annotation:
-	'@' {Annotation} property=[AnnotationProperty|Ref] (value=Literal | referenceValue=[Member|Ref])?;
+	'@' {Annotation} property=[AnnotationProperty|Ref] (literalValue=Literal | referenceValue=[Member|Ref])?;
 
 VocabularyBox:
 	Vocabulary |
@@ -33,14 +33,14 @@ VocabularyBox:
 Vocabulary:
 	ownedAnnotations+=Annotation*
 	'vocabulary' namespace=NAMESPACE 'as' prefix=ID  '{'
-		ownedImports+=Import*
+		ownedImports+=(Extension|Usage)*
 		ownedStatements+=VocabularyStatement*
 	'}';
 
 VocabularyBundle:
 	ownedAnnotations+=Annotation*
 	'vocabulary' 'bundle' namespace=NAMESPACE 'as' prefix=ID '{'
-		ownedImports+=Import*
+		ownedImports+=(Extension|Inclusion)*
 	'}';
 
 DescriptionBox:
@@ -50,14 +50,14 @@ DescriptionBox:
 Description:
 	ownedAnnotations+=Annotation*
 	'description' namespace=NAMESPACE 'as' prefix=ID '{'
-		ownedImports+=Import*
+		ownedImports+=(Extension|Usage)*
 		ownedStatements+=DescriptionStatement*
 	'}';
 
 DescriptionBundle:
 	ownedAnnotations+=Annotation*
 	'description' 'bundle' namespace=NAMESPACE 'as' prefix=ID '{'
-		ownedImports+=Import*
+		ownedImports+=(Extension|Usage|Inclusion)*
 	'}';
 
 SpecializableTerm:
@@ -346,58 +346,59 @@ SpecializationAxiom:
 	specializedTerm=[SpecializableTerm|Ref];
 	
 PropertyRestrictionAxiom:
-	ScalarPropertyRestrictionAxiom |
-	StructuredPropertyRestrictionAxiom;
+	PropertyRangeRestrictionAxiom |
+	PropertyCardinalityRestrictionAxiom |
+	PropertyValueRestrictionAxiom;
 
-ScalarPropertyRestrictionAxiom:
+PropertyRangeRestrictionAxiom:
 	ScalarPropertyRangeRestrictionAxiom |
-	ScalarPropertyCardinalityRestrictionAxiom |
-	ScalarPropertyValueRestrictionAxiom;
+	StructuredPropertyRangeRestrictionAxiom |
+	RelationRangeRestrictionAxiom;
 
-ScalarPropertyRangeRestrictionAxiom:
+ScalarPropertyRangeRestrictionAxiom returns PropertyRangeRestrictionAxiom:
 	'restricts' kind=RangeRestrictionKind 'scalar' 'property' property=[ScalarProperty|Ref] 'to' range=[Scalar|Ref];
 
-ScalarPropertyCardinalityRestrictionAxiom:
-	'restricts' 'scalar' 'property' property=[ScalarProperty|Ref] 'to' kind=CardinalityRestrictionKind cardinality=UnsignedInteger (range=[Scalar|Ref])?;
-
-ScalarPropertyValueRestrictionAxiom:
-	'restricts' 'scalar' 'property' property=[ScalarProperty|Ref] 'to' value=Literal;
-
-StructuredPropertyRestrictionAxiom:
-	StructuredPropertyRangeRestrictionAxiom |
-	StructuredPropertyCardinalityRestrictionAxiom |
-	StructuredPropertyValueRestrictionAxiom;
-
-StructuredPropertyRangeRestrictionAxiom:
+StructuredPropertyRangeRestrictionAxiom returns PropertyRangeRestrictionAxiom:
 	'restricts' kind=RangeRestrictionKind 'structured' 'property' property=[StructuredProperty|Ref] 'to' range=[Structure|Ref];
 
-StructuredPropertyCardinalityRestrictionAxiom:
-	'restricts' 'structured' 'property' property=[StructuredProperty|Ref] 'to' kind=CardinalityRestrictionKind cardinality=UnsignedInteger (range=[Structure|Ref])?;
-
-StructuredPropertyValueRestrictionAxiom:
-	'restricts' 'structured' 'property' property=[StructuredProperty|Ref] 'to' value=StructureInstance;
-
-RelationRestrictionAxiom:
-	RelationRangeRestrictionAxiom |
-	RelationCardinalityRestrictionAxiom |
-	RelationValueRestrictionAxiom;
-	
-RelationRangeRestrictionAxiom:
+RelationRangeRestrictionAxiom returns PropertyRangeRestrictionAxiom:
 	'restricts' kind=RangeRestrictionKind 'relation' property=[Relation|Ref] 'to' range=[Entity|Ref];
 
-RelationCardinalityRestrictionAxiom:
+PropertyCardinalityRestrictionAxiom:
+	ScalarPropertyCardinalityRestrictionAxiom |
+	StructuredPropertyCardinalityRestrictionAxiom |
+	RelationCardinalityRestrictionAxiom;
+
+ScalarPropertyCardinalityRestrictionAxiom returns PropertyCardinalityRestrictionAxiom:
+	'restricts' 'scalar' 'property' property=[ScalarProperty|Ref] 'to' kind=CardinalityRestrictionKind cardinality=UnsignedInteger (range=[Scalar|Ref])?;
+
+StructuredPropertyCardinalityRestrictionAxiom returns PropertyCardinalityRestrictionAxiom:
+	'restricts' 'structured' 'property' property=[StructuredProperty|Ref] 'to' kind=CardinalityRestrictionKind cardinality=UnsignedInteger (range=[Structure|Ref])?;
+
+RelationCardinalityRestrictionAxiom returns PropertyCardinalityRestrictionAxiom:
 	'restricts' 'relation' property=[Relation|Ref] 'to' kind=CardinalityRestrictionKind cardinality=UnsignedInteger (range=[Entity|Ref])?;
 
-RelationValueRestrictionAxiom:
-	'restricts' 'relation' property=[Relation|Ref] 'to' value=[NamedInstance|Ref];
+PropertyValueRestrictionAxiom:
+	ScalarPropertyValueRestrictionAxiom |
+	StructuredPropertyValueRestrictionAxiom |
+	RelationValueRestrictionAxiom;
+	
+ScalarPropertyValueRestrictionAxiom returns PropertyValueRestrictionAxiom:
+	'restricts' 'scalar' 'property' property=[ScalarProperty|Ref] 'to' literalValue=Literal;
+
+StructuredPropertyValueRestrictionAxiom returns PropertyValueRestrictionAxiom:
+	'restricts' 'structured' 'property' property=[StructuredProperty|Ref] 'to' structureInstanceValue=StructureInstance;
+
+RelationValueRestrictionAxiom returns PropertyValueRestrictionAxiom:
+	'restricts' 'relation' property=[Relation|Ref] 'to' namedInstanceValue=[NamedInstance|Ref];
 
 KeyAxiom:
 	'key' properties+=[Property|Ref] (',' properties+=[Property|Ref])*;
 
-ConceptTypeAssertion:
+ConceptTypeAssertion returns TypeAssertion:
 	type=[Concept|Ref];
 
-RelationTypeAssertion:
+RelationTypeAssertion returns TypeAssertion:
 	type=[RelationEntity|Ref];
 
 PropertyValueAssertion:
@@ -405,14 +406,14 @@ PropertyValueAssertion:
 	StructuredPropertyValueAssertion |
 	LinkAssertion;
 
-ScalarPropertyValueAssertion:
-	property=[ScalarProperty|Ref] value=Literal;
+ScalarPropertyValueAssertion returns PropertyValueAssertion:
+	property=[ScalarProperty|Ref] literalValue=Literal;
 
-StructuredPropertyValueAssertion:
-	property=[StructuredProperty|Ref] value=StructureInstance;
+StructuredPropertyValueAssertion returns PropertyValueAssertion:
+	property=[StructuredProperty|Ref] structureInstanceValue=StructureInstance;
 
-LinkAssertion:
-	property=[Relation|Ref] value=[NamedInstance|Ref];
+LinkAssertion returns PropertyValueAssertion:
+	property=[Relation|Ref] namedInstanceValue=[NamedInstance|Ref];
 
 Predicate:
 	UnaryPredicate |

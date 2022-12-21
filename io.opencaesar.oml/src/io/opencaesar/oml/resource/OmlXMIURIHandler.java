@@ -47,7 +47,7 @@ public class OmlXMIURIHandler extends URIHandlerImpl {
 		String[] qname = uri.toString().split(":");
 		if (!uri.toString().contains("/") && qname.length == 2) {// abbreviated iri
 			var ontology = OmlRead.getOntology(resource);
-			var _import = OmlRead.getImports(ontology).stream()
+			var _import = ontology.getOwnedImports().stream()
 				.filter(i -> qname[0].equals(i.getPrefix()))
 				.findFirst().orElse(null);
 			if (_import != null) {

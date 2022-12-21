@@ -24,6 +24,7 @@ import io.opencaesar.oml.NamedInstanceReference;
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.PropertyValueAssertion;
 import io.opencaesar.oml.Statement;
+import io.opencaesar.oml.TypeAssertion;
 
 import java.util.Collection;
 
@@ -50,12 +51,23 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * </p>
  * <ul>
  *   <li>{@link io.opencaesar.oml.impl.NamedInstanceReferenceImpl#getOwningDescription <em>Owning Description</em>}</li>
+ *   <li>{@link io.opencaesar.oml.impl.NamedInstanceReferenceImpl#getOwnedTypes <em>Owned Types</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.NamedInstanceReferenceImpl#getOwnedPropertyValues <em>Owned Property Values</em>}</li>
  * </ul>
  *
  * @generated
  */
 public abstract class NamedInstanceReferenceImpl extends ReferenceImpl implements NamedInstanceReference {
+	/**
+	 * The cached value of the '{@link #getOwnedTypes() <em>Owned Types</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOwnedTypes()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<TypeAssertion> ownedTypes;
+
 	/**
 	 * The cached value of the '{@link #getOwnedPropertyValues() <em>Owned Property Values</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -144,6 +156,19 @@ public abstract class NamedInstanceReferenceImpl extends ReferenceImpl implement
 	 * @generated
 	 */
 	@Override
+	public EList<TypeAssertion> getOwnedTypes() {
+		if (ownedTypes == null) {
+			ownedTypes = new EObjectContainmentWithInverseEList<TypeAssertion>(TypeAssertion.class, this, OmlPackage.NAMED_INSTANCE_REFERENCE__OWNED_TYPES, OmlPackage.TYPE_ASSERTION__OWNING_REFERENCE);
+		}
+		return ownedTypes;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EList<PropertyValueAssertion> getOwnedPropertyValues() {
 		if (ownedPropertyValues == null) {
 			ownedPropertyValues = new EObjectContainmentWithInverseEList<PropertyValueAssertion>(PropertyValueAssertion.class, this, OmlPackage.NAMED_INSTANCE_REFERENCE__OWNED_PROPERTY_VALUES, OmlPackage.PROPERTY_VALUE_ASSERTION__OWNING_REFERENCE);
@@ -164,6 +189,8 @@ public abstract class NamedInstanceReferenceImpl extends ReferenceImpl implement
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwningDescription((Description)otherEnd, msgs);
+			case OmlPackage.NAMED_INSTANCE_REFERENCE__OWNED_TYPES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedTypes()).basicAdd(otherEnd, msgs);
 			case OmlPackage.NAMED_INSTANCE_REFERENCE__OWNED_PROPERTY_VALUES:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedPropertyValues()).basicAdd(otherEnd, msgs);
 		}
@@ -180,6 +207,8 @@ public abstract class NamedInstanceReferenceImpl extends ReferenceImpl implement
 		switch (featureID) {
 			case OmlPackage.NAMED_INSTANCE_REFERENCE__OWNING_DESCRIPTION:
 				return basicSetOwningDescription(null, msgs);
+			case OmlPackage.NAMED_INSTANCE_REFERENCE__OWNED_TYPES:
+				return ((InternalEList<?>)getOwnedTypes()).basicRemove(otherEnd, msgs);
 			case OmlPackage.NAMED_INSTANCE_REFERENCE__OWNED_PROPERTY_VALUES:
 				return ((InternalEList<?>)getOwnedPropertyValues()).basicRemove(otherEnd, msgs);
 		}
@@ -211,6 +240,8 @@ public abstract class NamedInstanceReferenceImpl extends ReferenceImpl implement
 			case OmlPackage.NAMED_INSTANCE_REFERENCE__OWNING_DESCRIPTION:
 				if (resolve) return getOwningDescription();
 				return basicGetOwningDescription();
+			case OmlPackage.NAMED_INSTANCE_REFERENCE__OWNED_TYPES:
+				return getOwnedTypes();
 			case OmlPackage.NAMED_INSTANCE_REFERENCE__OWNED_PROPERTY_VALUES:
 				return getOwnedPropertyValues();
 		}
@@ -228,6 +259,10 @@ public abstract class NamedInstanceReferenceImpl extends ReferenceImpl implement
 		switch (featureID) {
 			case OmlPackage.NAMED_INSTANCE_REFERENCE__OWNING_DESCRIPTION:
 				setOwningDescription((Description)newValue);
+				return;
+			case OmlPackage.NAMED_INSTANCE_REFERENCE__OWNED_TYPES:
+				getOwnedTypes().clear();
+				getOwnedTypes().addAll((Collection<? extends TypeAssertion>)newValue);
 				return;
 			case OmlPackage.NAMED_INSTANCE_REFERENCE__OWNED_PROPERTY_VALUES:
 				getOwnedPropertyValues().clear();
@@ -248,6 +283,9 @@ public abstract class NamedInstanceReferenceImpl extends ReferenceImpl implement
 			case OmlPackage.NAMED_INSTANCE_REFERENCE__OWNING_DESCRIPTION:
 				setOwningDescription((Description)null);
 				return;
+			case OmlPackage.NAMED_INSTANCE_REFERENCE__OWNED_TYPES:
+				getOwnedTypes().clear();
+				return;
 			case OmlPackage.NAMED_INSTANCE_REFERENCE__OWNED_PROPERTY_VALUES:
 				getOwnedPropertyValues().clear();
 				return;
@@ -265,6 +303,8 @@ public abstract class NamedInstanceReferenceImpl extends ReferenceImpl implement
 		switch (featureID) {
 			case OmlPackage.NAMED_INSTANCE_REFERENCE__OWNING_DESCRIPTION:
 				return basicGetOwningDescription() != null;
+			case OmlPackage.NAMED_INSTANCE_REFERENCE__OWNED_TYPES:
+				return ownedTypes != null && !ownedTypes.isEmpty();
 			case OmlPackage.NAMED_INSTANCE_REFERENCE__OWNED_PROPERTY_VALUES:
 				return ownedPropertyValues != null && !ownedPropertyValues.isEmpty();
 		}

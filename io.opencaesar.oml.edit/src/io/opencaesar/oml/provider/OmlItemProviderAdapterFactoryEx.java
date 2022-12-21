@@ -19,7 +19,6 @@ import io.opencaesar.oml.Concept;
 import io.opencaesar.oml.ConceptInstance;
 import io.opencaesar.oml.ConceptInstanceReference;
 import io.opencaesar.oml.ConceptReference;
-import io.opencaesar.oml.ConceptTypeAssertion;
 import io.opencaesar.oml.DecimalLiteral;
 import io.opencaesar.oml.Description;
 import io.opencaesar.oml.DescriptionBundle;
@@ -35,43 +34,37 @@ import io.opencaesar.oml.ForwardRelation;
 import io.opencaesar.oml.Inclusion;
 import io.opencaesar.oml.IntegerLiteral;
 import io.opencaesar.oml.KeyAxiom;
-import io.opencaesar.oml.LinkAssertion;
 import io.opencaesar.oml.Literal;
 import io.opencaesar.oml.Member;
+import io.opencaesar.oml.NamedInstance;
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.Predicate;
+import io.opencaesar.oml.PropertyCardinalityRestrictionAxiom;
 import io.opencaesar.oml.PropertyPredicate;
+import io.opencaesar.oml.PropertyRangeRestrictionAxiom;
+import io.opencaesar.oml.PropertyValueAssertion;
+import io.opencaesar.oml.PropertyValueRestrictionAxiom;
 import io.opencaesar.oml.QuotedLiteral;
-import io.opencaesar.oml.RelationCardinalityRestrictionAxiom;
+import io.opencaesar.oml.Relation;
 import io.opencaesar.oml.RelationEntity;
 import io.opencaesar.oml.RelationEntityPredicate;
 import io.opencaesar.oml.RelationEntityReference;
 import io.opencaesar.oml.RelationInstance;
 import io.opencaesar.oml.RelationInstanceReference;
-import io.opencaesar.oml.RelationRangeRestrictionAxiom;
 import io.opencaesar.oml.RelationReference;
-import io.opencaesar.oml.RelationTypeAssertion;
-import io.opencaesar.oml.RelationValueRestrictionAxiom;
 import io.opencaesar.oml.ReverseRelation;
 import io.opencaesar.oml.Rule;
 import io.opencaesar.oml.RuleReference;
 import io.opencaesar.oml.SameAsPredicate;
 import io.opencaesar.oml.ScalarProperty;
-import io.opencaesar.oml.ScalarPropertyCardinalityRestrictionAxiom;
-import io.opencaesar.oml.ScalarPropertyRangeRestrictionAxiom;
 import io.opencaesar.oml.ScalarPropertyReference;
-import io.opencaesar.oml.ScalarPropertyValueAssertion;
-import io.opencaesar.oml.ScalarPropertyValueRestrictionAxiom;
 import io.opencaesar.oml.SpecializationAxiom;
 import io.opencaesar.oml.Structure;
 import io.opencaesar.oml.StructureInstance;
 import io.opencaesar.oml.StructureReference;
 import io.opencaesar.oml.StructuredProperty;
-import io.opencaesar.oml.StructuredPropertyCardinalityRestrictionAxiom;
-import io.opencaesar.oml.StructuredPropertyRangeRestrictionAxiom;
 import io.opencaesar.oml.StructuredPropertyReference;
-import io.opencaesar.oml.StructuredPropertyValueAssertion;
-import io.opencaesar.oml.StructuredPropertyValueRestrictionAxiom;
+import io.opencaesar.oml.TypeAssertion;
 import io.opencaesar.oml.TypePredicate;
 import io.opencaesar.oml.Usage;
 import io.opencaesar.oml.Vocabulary;
@@ -571,116 +564,71 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 	}
 	
 	@Override
-	public Adapter createScalarPropertyRangeRestrictionAxiomAdapter() {
-		if (scalarPropertyRangeRestrictionAxiomItemProvider == null) scalarPropertyRangeRestrictionAxiomItemProvider = new ScalarPropertyRangeRestrictionAxiomItemProvider(this) {
+	public Adapter createPropertyRangeRestrictionAxiomAdapter() {
+		if (propertyRangeRestrictionAxiomItemProvider == null) propertyRangeRestrictionAxiomItemProvider = new PropertyRangeRestrictionAxiomItemProvider(this) {
 			@Override
 			public String getText(Object object) {
-				ScalarPropertyRangeRestrictionAxiom axiom = (ScalarPropertyRangeRestrictionAxiom)object;
-				return "restricts " + axiom.getKind() + " scalar property " + getLabel(axiom.getProperty(), axiom)+ " to " + getLabel(axiom.getRange(), axiom);
-			}
-		};
-		return scalarPropertyRangeRestrictionAxiomItemProvider;
-	}
-
-	@Override
-	public Adapter createScalarPropertyCardinalityRestrictionAxiomAdapter() {
-		if (scalarPropertyCardinalityRestrictionAxiomItemProvider == null) scalarPropertyCardinalityRestrictionAxiomItemProvider = new ScalarPropertyCardinalityRestrictionAxiomItemProvider(this) {
-			@Override
-			public String getText(Object object) {
-				ScalarPropertyCardinalityRestrictionAxiom axiom = (ScalarPropertyCardinalityRestrictionAxiom)object;
-				return "restricts scalar property " + getLabel(axiom.getProperty(), axiom)+ " to " + axiom.getKind() + " " + axiom.getCardinality();
-			}
-		};
-		return scalarPropertyCardinalityRestrictionAxiomItemProvider;
-	}
-
-	@Override
-	public Adapter createScalarPropertyValueRestrictionAxiomAdapter() {
-		if (scalarPropertyValueRestrictionAxiomItemProvider == null) scalarPropertyValueRestrictionAxiomItemProvider = new ScalarPropertyValueRestrictionAxiomItemProvider(this) {
-			@Override
-			public String getText(Object object) {
-				ScalarPropertyValueRestrictionAxiom axiom = (ScalarPropertyValueRestrictionAxiom)object;
-				return "restricts scalar property " + getLabel(axiom.getProperty(), axiom)+ " to " + getLiteralLabel(new StringBuilder(), axiom.getValue());
-			}
-		};
-		return scalarPropertyValueRestrictionAxiomItemProvider;
-	}
-
-	@Override
-	public Adapter createStructuredPropertyRangeRestrictionAxiomAdapter() {
-		if (structuredPropertyRangeRestrictionAxiomItemProvider == null) structuredPropertyRangeRestrictionAxiomItemProvider = new StructuredPropertyRangeRestrictionAxiomItemProvider(this) {
-			@Override
-			public String getText(Object object) {
-				StructuredPropertyRangeRestrictionAxiom axiom = (StructuredPropertyRangeRestrictionAxiom)object;
-				return "restricts " + axiom.getKind() + " structured property " + getLabel(axiom.getProperty(), axiom)+ " to " + getLabel(axiom.getRange(), axiom);
-			}
-		};
-		return structuredPropertyRangeRestrictionAxiomItemProvider;
-	}
-
-	@Override
-	public Adapter createStructuredPropertyCardinalityRestrictionAxiomAdapter() {
-		if (structuredPropertyCardinalityRestrictionAxiomItemProvider == null) structuredPropertyCardinalityRestrictionAxiomItemProvider = new StructuredPropertyCardinalityRestrictionAxiomItemProvider(this) {
-			@Override
-			public String getText(Object object) {
-				StructuredPropertyCardinalityRestrictionAxiom axiom = (StructuredPropertyCardinalityRestrictionAxiom)object;
-				return "restricts structured property " + getLabel(axiom.getProperty(), axiom)+ " to " + axiom.getKind() + " " + axiom.getCardinality();
-			}
-		};
-		return structuredPropertyCardinalityRestrictionAxiomItemProvider;
-	}
-
-	@Override
-	public Adapter createStructuredPropertyValueRestrictionAxiomAdapter() {
-		if (structuredPropertyValueRestrictionAxiomItemProvider == null) structuredPropertyValueRestrictionAxiomItemProvider = new StructuredPropertyValueRestrictionAxiomItemProvider(this) {
-			@Override
-			public String getText(Object object) {
-				StructuredPropertyValueRestrictionAxiom axiom = (StructuredPropertyValueRestrictionAxiom)object;
-				StructureInstance instance = axiom.getValue();
-				String value = "<none>";
-				if (instance.getType() != null) {
-					value = getLabel(instance.getType(), instance);
+				PropertyRangeRestrictionAxiom axiom = (PropertyRangeRestrictionAxiom)object;
+				String propertyKind = "";
+				if (axiom.getProperty() instanceof ScalarProperty) {
+					propertyKind = "scalar property";
+				} else if (axiom.getProperty() instanceof StructuredProperty) {
+					propertyKind = "structured property";
+				} else if (axiom.getProperty() instanceof Relation) {
+					propertyKind = "relation";
 				}
-				return "restricts structured property " + getLabel(axiom.getProperty(), axiom)+ " to " + value;
+				return "restricts " + axiom.getKind() + " "+propertyKind+" " + getLabel(axiom.getProperty(), axiom)+ " to " + getLabel(axiom.getRange(), axiom);
 			}
 		};
-		return structuredPropertyValueRestrictionAxiomItemProvider;
+		return propertyRangeRestrictionAxiomItemProvider;
 	}
 
 	@Override
-	public Adapter createRelationRangeRestrictionAxiomAdapter() {
-		if (relationRangeRestrictionAxiomItemProvider == null) relationRangeRestrictionAxiomItemProvider = new RelationRangeRestrictionAxiomItemProvider(this) {
+	public Adapter createPropertyCardinalityRestrictionAxiomAdapter() {
+		if (propertyCardinalityRestrictionAxiomItemProvider == null) propertyCardinalityRestrictionAxiomItemProvider = new PropertyCardinalityRestrictionAxiomItemProvider(this) {
 			@Override
 			public String getText(Object object) {
-				RelationRangeRestrictionAxiom axiom = (RelationRangeRestrictionAxiom)object;
-				return "restricts " + axiom.getKind() + " relation " + getLabel(axiom.getProperty(), axiom)+ " to " + getLabel(axiom.getRange(), axiom);
+				PropertyCardinalityRestrictionAxiom axiom = (PropertyCardinalityRestrictionAxiom)object;
+				String propertyKind = "";
+				if (axiom.getProperty() instanceof ScalarProperty) {
+					propertyKind = "scalar property";
+				} else if (axiom.getProperty() instanceof StructuredProperty) {
+					propertyKind = "structured property";
+				} else if (axiom.getProperty() instanceof Relation) {
+					propertyKind = "relation";
+				}
+				return "restricts "+propertyKind+" " + getLabel(axiom.getProperty(), axiom)+ " to " + axiom.getKind() + " " + axiom.getCardinality();
 			}
 		};
-		return relationRangeRestrictionAxiomItemProvider;
+		return propertyCardinalityRestrictionAxiomItemProvider;
 	}
 
 	@Override
-	public Adapter createRelationCardinalityRestrictionAxiomAdapter() {
-		if (relationCardinalityRestrictionAxiomItemProvider == null) relationCardinalityRestrictionAxiomItemProvider = new RelationCardinalityRestrictionAxiomItemProvider(this) {
+	public Adapter createPropertyValueRestrictionAxiomAdapter() {
+		if (propertyValueRestrictionAxiomItemProvider == null) propertyValueRestrictionAxiomItemProvider = new PropertyValueRestrictionAxiomItemProvider(this) {
 			@Override
 			public String getText(Object object) {
-				RelationCardinalityRestrictionAxiom axiom = (RelationCardinalityRestrictionAxiom)object;
-				return "restricts relation " + getLabel(axiom.getProperty(), axiom)+ " to " + axiom.getKind() + " " + axiom.getCardinality();
+				PropertyValueRestrictionAxiom axiom = (PropertyValueRestrictionAxiom)object;
+				String propertyKind = "";
+				String valueLabel = "";
+				if (axiom.getProperty() instanceof ScalarProperty) {
+					propertyKind = "scalar property";
+					valueLabel = getLiteralLabel(new StringBuilder(), axiom.getLiteralValue()).toString();
+				} else if (axiom.getProperty() instanceof StructuredProperty) {
+					propertyKind = "structured property";
+					StructureInstance instance= axiom.getStructureInstanceValue();
+					valueLabel = "<none>";
+					if (instance != null && instance.getType() != null) {
+						valueLabel = getLabel(instance.getType(), instance);
+					}
+				} else if (axiom.getProperty() instanceof Relation) {
+					propertyKind = "relation";
+					valueLabel = getLabel(axiom.getNamedInstanceValue(), axiom);
+				}
+				return "restricts "+propertyKind+" " + getLabel(axiom.getProperty(), axiom)+ " to " + valueLabel;
 			}
 		};
-		return relationCardinalityRestrictionAxiomItemProvider;
-	}
-
-	@Override
-	public Adapter createRelationValueRestrictionAxiomAdapter() {
-		if (relationValueRestrictionAxiomItemProvider == null) relationValueRestrictionAxiomItemProvider = new RelationValueRestrictionAxiomItemProvider(this) {
-			@Override
-			public String getText(Object object) {
-				RelationValueRestrictionAxiom axiom = (RelationValueRestrictionAxiom)object;
-				return "restricts relation " + getLabel(axiom.getProperty(), axiom)+ " to " + getLabel(axiom.getValue(), axiom);
-			}
-		};
-		return relationValueRestrictionAxiomItemProvider;
+		return propertyValueRestrictionAxiomItemProvider;
 	}
 
 	// Property values (annotation, scalar, structured, link)
@@ -698,41 +646,17 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 	}
 	
 	@Override
-	public Adapter createScalarPropertyValueAssertionAdapter() {
-		if (scalarPropertyValueAssertionItemProvider == null) scalarPropertyValueAssertionItemProvider = new ScalarPropertyValueAssertionItemProvider(this) {
+	public Adapter createPropertyValueAssertionAdapter() {
+		if (propertyValueAssertionItemProvider == null) propertyValueAssertionItemProvider = new PropertyValueAssertionItemProvider(this) {
 			@Override
 			public String getText(Object object) {
-				ScalarPropertyValueAssertion assertion = (ScalarPropertyValueAssertion)object;
+				PropertyValueAssertion assertion = (PropertyValueAssertion)object;
 				return getPropertyLabel(assertion.getProperty(), assertion.getValue(), assertion);
 			}
 		};
-		return scalarPropertyValueAssertionItemProvider;
+		return propertyValueAssertionItemProvider;
 	}
-	
-	@Override
-	public Adapter createStructuredPropertyValueAssertionAdapter() {
-		if (structuredPropertyValueAssertionItemProvider == null) structuredPropertyValueAssertionItemProvider = new StructuredPropertyValueAssertionItemProvider(this) {
-			@Override
-			public String getText(Object object) {
-				StructuredPropertyValueAssertion assertion = (StructuredPropertyValueAssertion)object;
-				return getPropertyLabel(assertion.getProperty(), assertion.getValue(), assertion);
-			}
-		};
-		return structuredPropertyValueAssertionItemProvider;
-	}
-	
-	@Override
-	public Adapter createLinkAssertionAdapter() {
-		if (linkAssertionItemProvider == null) linkAssertionItemProvider = new LinkAssertionItemProvider(this) {
-			@Override
-			public String getText(Object object) {
-				LinkAssertion linkAssertion = (LinkAssertion)object;
-				return getLabel(linkAssertion.getProperty(), linkAssertion) + " " + getLabel(linkAssertion.getValue(), linkAssertion);
-			}
-		};
-		return linkAssertionItemProvider;
-	}
-	
+		
 	// Instances (concept, relation, structure)
 
 	@Override
@@ -803,30 +727,18 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 		return structureInstanceItemProvider;
 	}
 	
-	// Type assertions (concept, relation)
+	// Type assertion
 
 	@Override
-	public Adapter createConceptTypeAssertionAdapter() {
-		if (conceptTypeAssertionItemProvider == null) conceptTypeAssertionItemProvider = new ConceptTypeAssertionItemProvider(this) {
+	public Adapter createTypeAssertionAdapter() {
+		if (typeAssertionItemProvider == null) typeAssertionItemProvider = new TypeAssertionItemProvider(this) {
 			@Override
 			public String getText(Object object) {
-				ConceptTypeAssertion conceptTypeAssertion = (ConceptTypeAssertion)object;
-				return "is-a " + getLabel(conceptTypeAssertion.getType(), conceptTypeAssertion);
+				TypeAssertion typeAssertion = (TypeAssertion)object;
+				return "is-a " + getLabel(typeAssertion.getType(), typeAssertion);
 			}
 		};
-		return conceptTypeAssertionItemProvider;
-	}
-
-	@Override
-	public Adapter createRelationTypeAssertionAdapter() {
-		if (relationTypeAssertionItemProvider == null) relationTypeAssertionItemProvider = new RelationTypeAssertionItemProvider(this) {
-			@Override
-			public String getText(Object object) {
-				RelationTypeAssertion relationTypeAssertion = (RelationTypeAssertion)object;
-				return "is-a " + getLabel(relationTypeAssertion.getType(), relationTypeAssertion);
-			}
-		};
-		return relationTypeAssertionItemProvider;
+		return typeAssertionItemProvider;
 	}
 
 	// References (concept instance, relation instance)
@@ -1066,6 +978,9 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 			if (instance.getType() != null) {
 				label.append(getLabel(instance.getType(), instance));
 			}
+		}
+		if (value instanceof NamedInstance) {
+			label.append(getLabel((NamedInstance)value, element));
 		}
 		return label.toString();
 	}

@@ -30,7 +30,6 @@ import java.util.stream.Collectors;
 
 import org.eclipse.emf.ecore.resource.Resource;
 
-import io.opencaesar.oml.AnnotatedElement;
 import io.opencaesar.oml.Annotation;
 import io.opencaesar.oml.AnnotationProperty;
 import io.opencaesar.oml.Aspect;
@@ -40,18 +39,16 @@ import io.opencaesar.oml.Classifier;
 import io.opencaesar.oml.ClassifierReference;
 import io.opencaesar.oml.Concept;
 import io.opencaesar.oml.ConceptInstance;
-import io.opencaesar.oml.ConceptInstanceReference;
-import io.opencaesar.oml.ConceptTypeAssertion;
 import io.opencaesar.oml.Element;
 import io.opencaesar.oml.Entity;
 import io.opencaesar.oml.EntityReference;
 import io.opencaesar.oml.EnumeratedScalar;
 import io.opencaesar.oml.FacetedScalar;
 import io.opencaesar.oml.ForwardRelation;
+import io.opencaesar.oml.IdentifiedElement;
 import io.opencaesar.oml.Import;
 import io.opencaesar.oml.Instance;
 import io.opencaesar.oml.KeyAxiom;
-import io.opencaesar.oml.LinkAssertion;
 import io.opencaesar.oml.Literal;
 import io.opencaesar.oml.Member;
 import io.opencaesar.oml.NamedInstance;
@@ -64,9 +61,6 @@ import io.opencaesar.oml.Reference;
 import io.opencaesar.oml.Relation;
 import io.opencaesar.oml.RelationEntity;
 import io.opencaesar.oml.RelationInstance;
-import io.opencaesar.oml.RelationInstanceReference;
-import io.opencaesar.oml.RelationRestrictionAxiom;
-import io.opencaesar.oml.RelationTypeAssertion;
 import io.opencaesar.oml.Rule;
 import io.opencaesar.oml.Scalar;
 import io.opencaesar.oml.ScalarProperty;
@@ -78,6 +72,7 @@ import io.opencaesar.oml.Structure;
 import io.opencaesar.oml.StructureInstance;
 import io.opencaesar.oml.StructuredProperty;
 import io.opencaesar.oml.Term;
+import io.opencaesar.oml.Type;
 import io.opencaesar.oml.TypeAssertion;
 import io.opencaesar.oml.UnreifiedRelation;
 
@@ -89,11 +84,39 @@ import io.opencaesar.oml.UnreifiedRelation;
 public final class OmlSearch extends OmlIndex {
 
     //-------------------------------------------------
-    // COMMON
+    // ONTOLOGIES
     //-------------------------------------------------
 
-    // Member
+    /**
+     * Finds the types that are direct types of the given (literal or instance) element
+     * 
+     * @param element the given element
+     * @return a list of classifiers that are direct types of the given element
+     */
+    public static List<Type> findTypes(Element element) {
+    	List<Type> types = new ArrayList<>();
+    	if (element instanceof Literal) {
+    		types.add(OmlRead.getType((Literal)element));
+    	} else if (element instanceof Instance)
+    		types.addAll(findTypes((Instance)element));
+        return types;
+    }
     
+    /**
+     * Finds classifiers that are direct or indirect types of the given element
+     * 
+     * @param element the given element
+     * @return a list of classifiers that are direct or indirect types of the given element
+     */
+    public static List<Type> findAllTypes(Element element) {
+    	List<Type> types = new ArrayList<>();
+    	if (element instanceof Literal) {
+    		types.addAll(findAllTypes((Literal)element));
+    	} else if (element instanceof Instance)
+    		types.addAll(findAllTypes((Instance)element));
+        return types;
+    }
+
     /**
      * Finds references to the given member
      * 
@@ -132,15 +155,13 @@ public final class OmlSearch extends OmlIndex {
         return references;
     }
 
-    // AnnotatedElement
-
     /**
      * Finds annotations of the given element
      * 
      * @param element the given element
      * @return a list of annotations of the given element
      */
-    public static List<Annotation> findAnnotations(AnnotatedElement element) {
+    public static List<Annotation> findAnnotations(IdentifiedElement element) {
         final List<Annotation> annotations = new ArrayList<>(element.getOwnedAnnotations());
         if (element instanceof Member) {
             annotations.addAll(findReferences((Member)element).stream()
@@ -151,13 +172,13 @@ public final class OmlSearch extends OmlIndex {
     }
 
     /**
-     * Finds literals that are values of a given annotation property on the given element
+     * Finds the values of a given annotation property in the given element
      * 
      * @param element the given element with annotations
      * @param property the annotation property
-     * @return a list of literals that are values of a given annotation property on the given element
+     * @return a list of literals representing annotation values
      */
-    public static List<Literal> findAnnotationValues(AnnotatedElement element, AnnotationProperty property) {
+    public static List<Element> findAnnotationValues(IdentifiedElement element, AnnotationProperty property) {
         return findAnnotations(element).stream()
             .filter(a -> a.getProperty() == property)
             .map(a -> a.getValue())
@@ -165,22 +186,18 @@ public final class OmlSearch extends OmlIndex {
     }
     
     /**
-     * Finds a literal that is a value of a given annotation property on the given element
+     * Gets a value of the given annotation property in the given element
      * 
      * @param element the given element with annotations
      * @param property the annotation property
-     * @return a literal that is a value of a given annotation property on the given element
+     * @return a literal representing an annotation value
      */
-    public static Literal findAnnotationValue(AnnotatedElement element, AnnotationProperty property) {
+    public static Element findAnnotationValue(IdentifiedElement element, AnnotationProperty property) {
         return findAnnotations(element).stream()
             .filter(a -> a.getProperty() == property)
             .map(a -> a.getValue())
             .findFirst().orElse(null);
     }
-
-    //-------------------------------------------------
-    // ONTOLOGIES
-    //-------------------------------------------------
 
     /**
      * Finds imports that import the given ontology
@@ -191,7 +208,7 @@ public final class OmlSearch extends OmlIndex {
         final Resource resource = ontology.eResource();
         return (resource == null) ? Collections.emptyList() :
             OmlRead.getOntologies(resource.getResourceSet()).stream()
-                .flatMap(o -> OmlRead.getImports(o).stream())
+                .flatMap(o -> o.getOwnedImports().stream())
                 .filter(i -> OmlRead.getImportedOntology(i) == ontology)
                 .collect(Collectors.toList());
     }
@@ -209,10 +226,8 @@ public final class OmlSearch extends OmlIndex {
     }
 
     //-------------------------------------------------
-    // AXIOMS
+    // VOCABULARIES
     //-------------------------------------------------
-
-    // Term
 
     /**
      * Finds axioms that are defined for the given term
@@ -229,13 +244,10 @@ public final class OmlSearch extends OmlIndex {
             axioms.addAll(findPropertyRestrictions(((Classifier)term)));
         }
         if (term instanceof Entity) {
-            axioms.addAll(findRelationRestrictions(((Entity)term)));
             axioms.addAll(findKeys(((Entity)term)));
         }
         return axioms;
     }
-
-    // SpecializableTerm
 
     /**
      * Finds specialization axioms that have the given term as a sub term
@@ -264,13 +276,11 @@ public final class OmlSearch extends OmlIndex {
         return findSpecializationAxiomsWithSpecializedTerm(term);
     }
 
-    // Classifier
-    
     /**
      * Find property restriction axioms that are defined on the given classifier
      * 
      * @param classifier the given classifier
-     * @return a list of property restriction axioms that are defined on the given classifier
+     * @return a list of restriction axioms that are defined on the given classifier
      */
     public static List<PropertyRestrictionAxiom> findPropertyRestrictions(Classifier classifier) {
         final List<PropertyRestrictionAxiom> restrictions = new ArrayList<>();
@@ -279,25 +289,6 @@ public final class OmlSearch extends OmlIndex {
             .filter(i -> i instanceof ClassifierReference)
             .map(i -> (ClassifierReference)i)
             .flatMap(r -> r.getOwnedPropertyRestrictions().stream())
-            .collect(Collectors.toList()));
-        return restrictions;
-    }
-
-    // Entity
-
-    /**
-     * Find relation restriction axioms that are defined on the given entity
-     * 
-     * @param entity the given entity
-     * @return a list of relation restriction axioms that are defined on the given entity
-     */
-    public static List<RelationRestrictionAxiom> findRelationRestrictions(Entity entity) {
-        final List<RelationRestrictionAxiom> restrictions = new ArrayList<>();
-        restrictions.addAll(entity.getOwnedRelationRestrictions());
-        restrictions.addAll(findReferences(entity).stream()
-            .filter(i -> i instanceof EntityReference)
-            .map(i -> (EntityReference)i)
-            .flatMap(r -> r.getOwnedRelationRestrictions().stream())
             .collect(Collectors.toList()));
         return restrictions;
     }
@@ -318,12 +309,6 @@ public final class OmlSearch extends OmlIndex {
             .collect(Collectors.toList()));
         return keys;
     }
-
-    //-------------------------------------------------
-    // TERMS
-    //-------------------------------------------------
-
-    // SpecializableTerm
 
     /**
      * Finds terms that are the direct super (general) terms of the given term 
@@ -382,8 +367,6 @@ public final class OmlSearch extends OmlIndex {
         return OmlRead.isInClosure(superTerm, term, true, t -> findSuperTerms(t));
     }
 
-    // Entity
-
     /**
      * Finds relations that have the given entity as their source
      * 
@@ -434,8 +417,6 @@ public final class OmlSearch extends OmlIndex {
         return relations;
     }
 
-    // SemanticProperty
-    
     /**
      * Finds semantic properties referencing the given classifier as domain
      * 
@@ -449,8 +430,6 @@ public final class OmlSearch extends OmlIndex {
         return properties;
     }
     
-    // ScalarProperty
-
     /**
      * Find entities that have the following property included in one of their keys
      * 
@@ -464,11 +443,9 @@ public final class OmlSearch extends OmlIndex {
     }
 
     //-------------------------------------------------
-    // ASSERTIONS
+    // DESCRIPTIONS
     //-------------------------------------------------
 
-    // Instance
-    
     /**
      * Finds assertions that are defined on the given instance
      * 
@@ -478,17 +455,11 @@ public final class OmlSearch extends OmlIndex {
     public static List<Assertion> findAssertions(Instance instance) {
         List<Assertion> assertions = new ArrayList<>();
         assertions.addAll(findPropertyValueAssertions(instance));
-        if (instance instanceof ConceptInstance) {
-            assertions.addAll(findTypeAssertions((ConceptInstance)instance));
-            assertions.addAll(findLinkAssertionsWithSource((ConceptInstance)instance));
-        } else if (instance instanceof RelationInstance) {
-            assertions.addAll(findTypeAssertions((RelationInstance)instance));
-            assertions.addAll(findLinkAssertionsWithSource((RelationInstance)instance));
+        if (instance instanceof NamedInstance) {
+            assertions.addAll(findTypeAssertions((NamedInstance)instance));
         }
         return assertions;
     }
-
-    // NamedInstance
 
     /**
      * Finds type assertions that are defined on the given named instance
@@ -497,49 +468,15 @@ public final class OmlSearch extends OmlIndex {
      * @return a list of type assertions that are defined on the given named instance
      */
     public static List<TypeAssertion> findTypeAssertions(NamedInstance instance) {
-        List<TypeAssertion> assertions = new ArrayList<>();
-        if (instance instanceof ConceptInstance) {
-            assertions.addAll(findTypeAssertions((ConceptInstance) instance));
-        } else if (instance instanceof RelationInstance) {
-            assertions.addAll(findTypeAssertions((RelationInstance) instance));
-        }
+        final List<TypeAssertion> assertions = new ArrayList<>(instance.getOwnedTypes());
+        assertions.addAll(findReferences(instance).stream()
+            .filter(i -> i instanceof NamedInstanceReference)
+            .map(i -> (NamedInstanceReference)i)
+            .flatMap(r -> r.getOwnedTypes().stream())
+            .collect(Collectors.toList()));
         return assertions;
     }
     
-    /**
-     * Finds concept type assertions that are defined on the given concept instance
-     * 
-     * @param instance the given concept instance
-     * @return a list of concept type assertions that are defined on the given concept instance
-     */
-    public static List<ConceptTypeAssertion> findTypeAssertions(ConceptInstance instance) {
-        final List<ConceptTypeAssertion> relations = new ArrayList<>(instance.getOwnedTypes());
-        relations.addAll(findReferences(instance).stream()
-            .filter(i -> i instanceof ConceptInstanceReference)
-            .map(i -> (ConceptInstanceReference)i)
-            .flatMap(r -> r.getOwnedTypes().stream())
-            .collect(Collectors.toList()));
-        return relations;
-    }
-
-    /**
-     * Finds relation type assertions that are defined on the given relation instance
-     * 
-     * @param instance the given relation instance
-     * @return a list of relation type assertions that are defined on the given relation instance
-     */
-    public static List<RelationTypeAssertion> findTypeAssertions(RelationInstance instance) {
-        final List<RelationTypeAssertion> relations = new ArrayList<>(instance.getOwnedTypes());
-        relations.addAll(findReferences(instance).stream()
-            .filter(i -> i instanceof RelationInstanceReference)
-            .map(i -> (RelationInstanceReference)i)
-            .flatMap(r -> r.getOwnedTypes().stream())
-            .collect(Collectors.toList()));
-        return relations;
-    }
-
-    // Instance
-
     /**
      * Finds property value assertions that are defined on the given instance
      * 
@@ -556,6 +493,141 @@ public final class OmlSearch extends OmlIndex {
                 .collect(Collectors.toList()));
         }
         return assertions;
+    }
+
+    /**
+     * Finds property value assertions that have the given instance as their source
+     * 
+     * @param source the given source instance
+     * @return a list of relation value assertions that have the given instance as their source
+     */
+    public static List<PropertyValueAssertion> findPropertyValueAssertionsWithSource(NamedInstance source) {
+        return findPropertyValueAssertions(source).stream()
+                .filter(i -> i.getProperty() instanceof Relation)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Finds relation value assertions that have the given instance as their target
+     * 
+     * @param target the given target instance
+     * @return a list of relation value assertions that have the given instance as their target
+     */
+    public static List<PropertyValueAssertion> findPropertyValueAssertionsWithTarget(NamedInstance target) {
+        return findPropertyValueAssertionsWithNamedInstanceValue(target);
+    }
+
+    /**
+     * Finds instances that are asserted as related to the given instance by any relation
+     * 
+     * @param instance the given instance
+     * @return a list of instances related to the given instance by any relation
+     */
+    public static List<NamedInstance> findInstancesRelatedTo(NamedInstance instance) {
+        final List<NamedInstance> related = new ArrayList<>();
+        related.addAll(findInstancesRelatedAsTargetTo(instance));
+        related.addAll(findInstancesRelatedAsSourceTo(instance));
+        return related;
+    }
+
+    /**
+     * Finds instances that are asserted as related to the given instance by a given relation
+     * 
+     * @param instance the given instance
+     * @param relation the given relation
+     * @return a list of instances related to the given instance by a given relation
+     */
+    public static List<NamedInstance> findInstancesRelatedTo(NamedInstance instance, Relation relation) {
+        final List<NamedInstance> related = new ArrayList<>();
+        related.addAll(findInstancesRelatedAsTargetTo(instance, relation));
+        related.addAll(findInstancesRelatedAsSourceTo(instance, relation));
+        return related;
+    }
+
+    /**
+     * Finds target instances that are asserted as related to the given source instance by any relation
+     * 
+     * @param source the given source instance
+     * @return a list of target instances related to the given source instance
+     */
+    public static List<NamedInstance> findInstancesRelatedAsTargetTo(NamedInstance source) {
+        final List<NamedInstance> targets = new ArrayList<>();
+        // check property value assertions
+        targets.addAll(findPropertyValueAssertionsWithSource(source).stream()
+                .map(a -> OmlRead.getTarget(a))
+                .collect(Collectors.toList()));
+        // check relation instances
+        targets.addAll(findRelationInstancesWithSource(source).stream()
+                .flatMap(a -> a.getTargets().stream())
+                .collect(Collectors.toList()));
+        return targets;
+    }
+
+    /**
+     * Finds target instances that are asserted as related to the given source instance by a given relation
+     * 
+     * @param source the given source instance
+     * @param relation the given relation
+     * @return a list of target instances related to the given source instance
+     */
+    public static List<NamedInstance> findInstancesRelatedAsTargetTo(NamedInstance source, Relation relation) {
+    	final List<NamedInstance> targets = new ArrayList<>();
+        // look in property value assertions
+        targets.addAll(findPropertyValueAssertionsWithSource(source).stream()
+                .filter(a -> a.getProperty() == relation)
+                .map(a -> OmlRead.getTarget(a))
+                .collect(Collectors.toList()));
+        // look in relation instances
+        if (relation instanceof ForwardRelation) {
+	        targets.addAll(findRelationInstancesWithSource(source).stream()
+	                .filter(i -> findIsTypeOf(i, ((ForwardRelation)relation).getRelationEntity()))
+	                .flatMap(a -> a.getTargets().stream())
+	                .collect(Collectors.toList()));
+        }
+        return targets;
+    }
+
+    /**
+     * Finds source instances that are related by any relation to the given target instance
+     * 
+     * @param target the given target instance
+     * @return a list of source instances related to the given target instance
+     */
+    public static List<NamedInstance> findInstancesRelatedAsSourceTo(NamedInstance target) {
+        final List<NamedInstance> sources = new ArrayList<>();
+        // look in property value assertions
+       sources.addAll(findPropertyValueAssertionsWithTarget(target).stream()
+                .map(a -> OmlRead.getSource(a))
+                .collect(Collectors.toList()));
+       // look in relation instances
+        sources.addAll(findRelationInstancesWithTarget(target).stream()
+                .flatMap(a -> a.getSources().stream())
+                .collect(Collectors.toList()));
+        return sources;
+    }
+
+    /**
+     * Finds source instances that are related by a given relation to a given target instance
+     * 
+     * @param target the given target instance
+     * @param relation the given relation
+     * @return a list of source instances that are related by a given relation to the given target instance
+     */
+    public static List<NamedInstance> findInstancesRelatedAsSourceTo(NamedInstance target, Relation relation) {
+        final List<NamedInstance> sources = new ArrayList<>();
+        // look in property value assertions
+        sources.addAll(findPropertyValueAssertionsWithTarget(target).stream()
+                .filter(a -> a.getProperty() == relation)
+                .map(a -> OmlRead.getSource(a))
+                .collect(Collectors.toList()));
+        // look in relation instances
+        if (relation instanceof ForwardRelation) {
+	        sources.addAll(findRelationInstancesWithTarget(target).stream()
+	                .filter(i -> findIsTypeOf(i, ((ForwardRelation)relation).getRelationEntity()))
+	                .flatMap(i -> i.getSources().stream())
+	                .collect(Collectors.toList()));
+        }
+        return sources;
     }
 
     /**
@@ -586,40 +658,6 @@ public final class OmlSearch extends OmlIndex {
             .findFirst().orElse(null);
     }
 
-    // NamedInstance
-
-    /**
-     * Finds link assertions that are defined on the given instance
-     * 
-     * @param instance the given instance
-     * @return a list of link assertions that are defined on the given instance
-     */
-    public static List<LinkAssertion> findLinkAssertions(NamedInstance instance) {
-        final List<LinkAssertion> assertions = new ArrayList<>(instance.getOwnedLinks());
-        assertions.addAll(findReferences(instance).stream()
-            .filter(i -> i instanceof NamedInstanceReference)
-            .map(i -> (NamedInstanceReference)i)
-            .flatMap(r -> r.getOwnedLinks().stream())
-            .collect(Collectors.toList()));
-        return assertions;
-    }
-
-    /**
-     * Finds link assertions that have the given instance as their source
-     * 
-     * @param instance the given instance
-     * @return a list of link assertions that have the given instance as their source
-     */
-    public static List<LinkAssertion> findLinkAssertionsWithSource(NamedInstance instance) {
-        return findLinkAssertions(instance);
-    }
-    
-    //-------------------------------------------------
-    // INSTANCES
-    //-------------------------------------------------
-
-    // Instance
-    
     /**
      * Finds classifiers that are direct types of the given instance
      * 
@@ -691,8 +729,6 @@ public final class OmlSearch extends OmlIndex {
         return false;
     }
 
-    // Classifier
-
     /**
      * Finds instances that have the given type as their direct type
      * 
@@ -700,13 +736,9 @@ public final class OmlSearch extends OmlIndex {
      * @return a list of instances that have the given type as their direct type
      */
     public static List<Instance> findInstancesOfType(Classifier type) {
-        if (type instanceof Concept) {
-            return findConceptTypeAssertionsWithType((Concept)type).stream()
-                .map(i -> OmlRead.getSubject(i))
-                .collect(Collectors.toList());
-        } else if (type instanceof RelationEntity) {
-            return findRelationTypeAssertionsWithType((RelationEntity)type).stream()
-                .map(i -> OmlRead.getSubject(i))
+        if (type instanceof Entity) {
+            return findTypeAssertionsWithType((Entity)type).stream()
+                .map(i -> OmlRead.getAssertingInstance(i))
                 .collect(Collectors.toList());
         } else if (type instanceof Structure) {
             return new ArrayList<Instance>(findStructureInstancesWithType((Structure)type));
@@ -727,92 +759,9 @@ public final class OmlSearch extends OmlIndex {
             .collect(Collectors.toList());
     }
 
-    
-    // NamedInstance
-
-    /**
-     * Finds target instances that are related by any relation to the given source instance
-     * 
-     * @param source the given source instance
-     * @return a list of target instances that are related by any relation to the given source instance
-     */
-    public static List<NamedInstance> findInstancesRelatedFrom(NamedInstance source) {
-        final List<NamedInstance> targets = new ArrayList<>();
-        targets.addAll(findLinkAssertions(source).stream()
-                .map(a -> a.getTarget())
-                .collect(Collectors.toList()));
-        targets.addAll(findRelationInstancesWithSource(source).stream()
-                .flatMap(a -> a.getTargets().stream())
-                .collect(Collectors.toList()));
-        return targets;
-    }
-
-    /**
-     * Finds target instances that are related by a given relation to the given source instance
-     * 
-     * @param source the given source instance
-     * @param relation the given relation
-     * @return a list of target instances that are related by a given relation to the given source instance
-     */
-    public static List<NamedInstance> findInstancesRelatedFrom(NamedInstance source, Relation relation) {
-        final List<NamedInstance> targets = new ArrayList<>();
-        targets.addAll(findLinkAssertions(source).stream()
-                .filter(a -> a.getRelation() == relation)
-                .map(a -> a.getTarget())
-                .collect(Collectors.toList()));
-        if (relation instanceof ForwardRelation) {
-	        targets.addAll(findRelationInstancesWithSource(source).stream()
-	                .filter(i -> findTypes(i).stream().anyMatch(t -> ((RelationEntity)t).getForwardRelation() == relation))
-	                .flatMap(a -> a.getTargets().stream())
-	                .collect(Collectors.toList()));
-        }
-        return targets;
-    }
-
-    /**
-     * Finds source instances that are related by any relation to the given target instance
-     * 
-     * @param target the given target instance
-     * @return a list of source instances that are related by any relation to the given target instance
-     */
-    public static List<NamedInstance> findInstancesRelatedTo(NamedInstance target) {
-        final List<NamedInstance> sources = new ArrayList<>();
-        sources.addAll(findLinkAssertionsWithTarget(target).stream()
-                .map(a -> OmlRead.getSource(a))
-                .collect(Collectors.toList()));
-        sources.addAll(findRelationInstancesWithTarget(target).stream()
-                .flatMap(a -> a.getSources().stream())
-                .collect(Collectors.toList()));
-        return sources;
-    }
-
-    /**
-     * Finds source instances that are related by a given relation to a given target instance
-     * 
-     * @param target the given target instance
-     * @param relation the given relation
-     * @return a list of source instances that are related by a given relation to the given target instance
-     */
-    public static List<NamedInstance> findInstancesRelatedTo(NamedInstance target, Relation relation) {
-        final List<NamedInstance> sources = new ArrayList<>();
-        sources.addAll(findLinkAssertionsWithTarget(target).stream()
-                .filter(a -> a.getRelation() == relation)
-                .map(a -> OmlRead.getSource(a))
-                .collect(Collectors.toList()));
-        if (relation instanceof ForwardRelation) {
-	        sources.addAll(findRelationInstancesWithTarget(target).stream()
-	                .filter(i -> findTypes(i).stream().anyMatch(t -> ((RelationEntity)t).getForwardRelation() == relation))
-	                .flatMap(i -> i.getSources().stream())
-	                .collect(Collectors.toList()));
-        }
-        return sources;
-    }
-
     //-------------------------------------------------
     // LITERALS
     //-------------------------------------------------
-
-    // Scalar
 
     /**
      * Finds the Java type that corresponds to the given scalar
@@ -873,6 +822,21 @@ public final class OmlSearch extends OmlIndex {
             return value;
         }
         return OmlRead.getValue(literal);
+    }
+
+    /**
+     * Finds all the scalars that are direct or indirect types of the given literal
+     * 
+     * @param literal the given literal
+     * @return a list of scalars that are direct or indirect types of the given literal
+     */
+    public static List<Scalar> findAllTypes(Literal literal) {
+        List<Scalar> types = OmlSearch.findAllSuperTerms(OmlRead.getType(literal), true).stream()
+        		.filter(t -> t instanceof Scalar)
+        		.map(t -> (Scalar)t)
+        		.distinct()
+        		.collect(Collectors.toList());
+        return types;
     }
 
 }

@@ -144,47 +144,17 @@ public class ClassifierItemProvider extends TypeItemProvider {
 		newChildDescriptors.add
 			(createChildParameter
 				(OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS,
-				 OmlFactory.eINSTANCE.createScalarPropertyRangeRestrictionAxiom()));
+				 OmlFactory.eINSTANCE.createPropertyRangeRestrictionAxiom()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS,
-				 OmlFactory.eINSTANCE.createScalarPropertyCardinalityRestrictionAxiom()));
+				 OmlFactory.eINSTANCE.createPropertyCardinalityRestrictionAxiom()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS,
-				 OmlFactory.eINSTANCE.createScalarPropertyValueRestrictionAxiom()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS,
-				 OmlFactory.eINSTANCE.createStructuredPropertyRangeRestrictionAxiom()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS,
-				 OmlFactory.eINSTANCE.createStructuredPropertyCardinalityRestrictionAxiom()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS,
-				 OmlFactory.eINSTANCE.createStructuredPropertyValueRestrictionAxiom()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS,
-				 OmlFactory.eINSTANCE.createRelationRangeRestrictionAxiom()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS,
-				 OmlFactory.eINSTANCE.createRelationCardinalityRestrictionAxiom()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS,
-				 OmlFactory.eINSTANCE.createRelationValueRestrictionAxiom()));
+				 OmlFactory.eINSTANCE.createPropertyValueRestrictionAxiom()));
 	}
 
 }

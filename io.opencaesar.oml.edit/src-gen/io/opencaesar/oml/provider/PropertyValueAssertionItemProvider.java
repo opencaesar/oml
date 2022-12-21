@@ -19,16 +19,20 @@
 package io.opencaesar.oml.provider;
 
 
+import io.opencaesar.oml.OmlFactory;
 import io.opencaesar.oml.OmlPackage;
 
+import io.opencaesar.oml.PropertyValueAssertion;
 import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
+import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
  * This is the item provider adapter for a {@link io.opencaesar.oml.PropertyValueAssertion} object.
@@ -60,6 +64,8 @@ public class PropertyValueAssertionItemProvider extends AssertionItemProvider {
 
 			addOwningInstancePropertyDescriptor(object);
 			addOwningReferencePropertyDescriptor(object);
+			addPropertyPropertyDescriptor(object);
+			addNamedInstanceValuePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -109,6 +115,92 @@ public class PropertyValueAssertionItemProvider extends AssertionItemProvider {
 	}
 
 	/**
+	 * This adds a property descriptor for the Property feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addPropertyPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_PropertyValueAssertion_property_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_PropertyValueAssertion_property_feature", "_UI_PropertyValueAssertion_type"),
+				 OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__PROPERTY,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Named Instance Value feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addNamedInstanceValuePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_PropertyValueAssertion_namedInstanceValue_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_PropertyValueAssertion_namedInstanceValue_feature", "_UI_PropertyValueAssertion_type"),
+				 OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__NAMED_INSTANCE_VALUE,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
+	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
+	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
+		if (childrenFeatures == null) {
+			super.getChildrenFeatures(object);
+			childrenFeatures.add(OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__LITERAL_VALUE);
+			childrenFeatures.add(OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__STRUCTURE_INSTANCE_VALUE);
+		}
+		return childrenFeatures;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EStructuralFeature getChildFeature(Object object, Object child) {
+		// Check the type of the specified child object and return the proper feature to use for
+		// adding (see {@link AddCommand}) it as a child.
+
+		return super.getChildFeature(object, child);
+	}
+
+	/**
+	 * This returns PropertyValueAssertion.gif.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object getImage(Object object) {
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/PropertyValueAssertion"));
+	}
+
+	/**
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -130,6 +222,13 @@ public class PropertyValueAssertionItemProvider extends AssertionItemProvider {
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
+
+		switch (notification.getFeatureID(PropertyValueAssertion.class)) {
+			case OmlPackage.PROPERTY_VALUE_ASSERTION__LITERAL_VALUE:
+			case OmlPackage.PROPERTY_VALUE_ASSERTION__STRUCTURE_INSTANCE_VALUE:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
+				return;
+		}
 		super.notifyChanged(notification);
 	}
 
@@ -143,6 +242,36 @@ public class PropertyValueAssertionItemProvider extends AssertionItemProvider {
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+
+		newChildDescriptors.add
+			(createChildParameter
+				(OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__LITERAL_VALUE,
+				 OmlFactory.eINSTANCE.createQuotedLiteral()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__LITERAL_VALUE,
+				 OmlFactory.eINSTANCE.createIntegerLiteral()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__LITERAL_VALUE,
+				 OmlFactory.eINSTANCE.createDecimalLiteral()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__LITERAL_VALUE,
+				 OmlFactory.eINSTANCE.createDoubleLiteral()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__LITERAL_VALUE,
+				 OmlFactory.eINSTANCE.createBooleanLiteral()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__STRUCTURE_INSTANCE_VALUE,
+				 OmlFactory.eINSTANCE.createStructureInstance()));
 	}
 
 }

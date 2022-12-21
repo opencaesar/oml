@@ -304,80 +304,24 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 				return createPropertyRestrictionAxiomAdapter();
 			}
 			@Override
-			public Adapter caseScalarPropertyRestrictionAxiom(ScalarPropertyRestrictionAxiom object) {
-				return createScalarPropertyRestrictionAxiomAdapter();
+			public Adapter casePropertyRangeRestrictionAxiom(PropertyRangeRestrictionAxiom object) {
+				return createPropertyRangeRestrictionAxiomAdapter();
 			}
 			@Override
-			public Adapter caseScalarPropertyRangeRestrictionAxiom(ScalarPropertyRangeRestrictionAxiom object) {
-				return createScalarPropertyRangeRestrictionAxiomAdapter();
+			public Adapter casePropertyCardinalityRestrictionAxiom(PropertyCardinalityRestrictionAxiom object) {
+				return createPropertyCardinalityRestrictionAxiomAdapter();
 			}
 			@Override
-			public Adapter caseScalarPropertyCardinalityRestrictionAxiom(ScalarPropertyCardinalityRestrictionAxiom object) {
-				return createScalarPropertyCardinalityRestrictionAxiomAdapter();
-			}
-			@Override
-			public Adapter caseScalarPropertyValueRestrictionAxiom(ScalarPropertyValueRestrictionAxiom object) {
-				return createScalarPropertyValueRestrictionAxiomAdapter();
-			}
-			@Override
-			public Adapter caseStructuredPropertyRestrictionAxiom(StructuredPropertyRestrictionAxiom object) {
-				return createStructuredPropertyRestrictionAxiomAdapter();
-			}
-			@Override
-			public Adapter caseStructuredPropertyRangeRestrictionAxiom(StructuredPropertyRangeRestrictionAxiom object) {
-				return createStructuredPropertyRangeRestrictionAxiomAdapter();
-			}
-			@Override
-			public Adapter caseStructuredPropertyCardinalityRestrictionAxiom(StructuredPropertyCardinalityRestrictionAxiom object) {
-				return createStructuredPropertyCardinalityRestrictionAxiomAdapter();
-			}
-			@Override
-			public Adapter caseStructuredPropertyValueRestrictionAxiom(StructuredPropertyValueRestrictionAxiom object) {
-				return createStructuredPropertyValueRestrictionAxiomAdapter();
-			}
-			@Override
-			public Adapter caseRelationRestrictionAxiom(RelationRestrictionAxiom object) {
-				return createRelationRestrictionAxiomAdapter();
-			}
-			@Override
-			public Adapter caseRelationRangeRestrictionAxiom(RelationRangeRestrictionAxiom object) {
-				return createRelationRangeRestrictionAxiomAdapter();
-			}
-			@Override
-			public Adapter caseRelationCardinalityRestrictionAxiom(RelationCardinalityRestrictionAxiom object) {
-				return createRelationCardinalityRestrictionAxiomAdapter();
-			}
-			@Override
-			public Adapter caseRelationValueRestrictionAxiom(RelationValueRestrictionAxiom object) {
-				return createRelationValueRestrictionAxiomAdapter();
+			public Adapter casePropertyValueRestrictionAxiom(PropertyValueRestrictionAxiom object) {
+				return createPropertyValueRestrictionAxiomAdapter();
 			}
 			@Override
 			public Adapter caseTypeAssertion(TypeAssertion object) {
 				return createTypeAssertionAdapter();
 			}
 			@Override
-			public Adapter caseConceptTypeAssertion(ConceptTypeAssertion object) {
-				return createConceptTypeAssertionAdapter();
-			}
-			@Override
-			public Adapter caseRelationTypeAssertion(RelationTypeAssertion object) {
-				return createRelationTypeAssertionAdapter();
-			}
-			@Override
 			public Adapter casePropertyValueAssertion(PropertyValueAssertion object) {
 				return createPropertyValueAssertionAdapter();
-			}
-			@Override
-			public Adapter caseScalarPropertyValueAssertion(ScalarPropertyValueAssertion object) {
-				return createScalarPropertyValueAssertionAdapter();
-			}
-			@Override
-			public Adapter caseStructuredPropertyValueAssertion(StructuredPropertyValueAssertion object) {
-				return createStructuredPropertyValueAssertionAdapter();
-			}
-			@Override
-			public Adapter caseLinkAssertion(LinkAssertion object) {
-				return createLinkAssertionAdapter();
 			}
 			@Override
 			public Adapter caseUnaryPredicate(UnaryPredicate object) {
@@ -1290,170 +1234,44 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.ScalarPropertyRestrictionAxiom <em>Scalar Property Restriction Axiom</em>}'.
+	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.PropertyRangeRestrictionAxiom <em>Property Range Restriction Axiom</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see io.opencaesar.oml.ScalarPropertyRestrictionAxiom
+	 * @see io.opencaesar.oml.PropertyRangeRestrictionAxiom
 	 * @generated
 	 */
-	public Adapter createScalarPropertyRestrictionAxiomAdapter() {
+	public Adapter createPropertyRangeRestrictionAxiomAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.ScalarPropertyRangeRestrictionAxiom <em>Scalar Property Range Restriction Axiom</em>}'.
+	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.PropertyCardinalityRestrictionAxiom <em>Property Cardinality Restriction Axiom</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see io.opencaesar.oml.ScalarPropertyRangeRestrictionAxiom
+	 * @see io.opencaesar.oml.PropertyCardinalityRestrictionAxiom
 	 * @generated
 	 */
-	public Adapter createScalarPropertyRangeRestrictionAxiomAdapter() {
+	public Adapter createPropertyCardinalityRestrictionAxiomAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.ScalarPropertyCardinalityRestrictionAxiom <em>Scalar Property Cardinality Restriction Axiom</em>}'.
+	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.PropertyValueRestrictionAxiom <em>Property Value Restriction Axiom</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see io.opencaesar.oml.ScalarPropertyCardinalityRestrictionAxiom
+	 * @see io.opencaesar.oml.PropertyValueRestrictionAxiom
 	 * @generated
 	 */
-	public Adapter createScalarPropertyCardinalityRestrictionAxiomAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.ScalarPropertyValueRestrictionAxiom <em>Scalar Property Value Restriction Axiom</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.ScalarPropertyValueRestrictionAxiom
-	 * @generated
-	 */
-	public Adapter createScalarPropertyValueRestrictionAxiomAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.StructuredPropertyRestrictionAxiom <em>Structured Property Restriction Axiom</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.StructuredPropertyRestrictionAxiom
-	 * @generated
-	 */
-	public Adapter createStructuredPropertyRestrictionAxiomAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.StructuredPropertyRangeRestrictionAxiom <em>Structured Property Range Restriction Axiom</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.StructuredPropertyRangeRestrictionAxiom
-	 * @generated
-	 */
-	public Adapter createStructuredPropertyRangeRestrictionAxiomAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.StructuredPropertyCardinalityRestrictionAxiom <em>Structured Property Cardinality Restriction Axiom</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.StructuredPropertyCardinalityRestrictionAxiom
-	 * @generated
-	 */
-	public Adapter createStructuredPropertyCardinalityRestrictionAxiomAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.StructuredPropertyValueRestrictionAxiom <em>Structured Property Value Restriction Axiom</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.StructuredPropertyValueRestrictionAxiom
-	 * @generated
-	 */
-	public Adapter createStructuredPropertyValueRestrictionAxiomAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.RelationRestrictionAxiom <em>Relation Restriction Axiom</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.RelationRestrictionAxiom
-	 * @generated
-	 */
-	public Adapter createRelationRestrictionAxiomAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.RelationRangeRestrictionAxiom <em>Relation Range Restriction Axiom</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.RelationRangeRestrictionAxiom
-	 * @generated
-	 */
-	public Adapter createRelationRangeRestrictionAxiomAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.RelationCardinalityRestrictionAxiom <em>Relation Cardinality Restriction Axiom</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.RelationCardinalityRestrictionAxiom
-	 * @generated
-	 */
-	public Adapter createRelationCardinalityRestrictionAxiomAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.RelationValueRestrictionAxiom <em>Relation Value Restriction Axiom</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.RelationValueRestrictionAxiom
-	 * @generated
-	 */
-	public Adapter createRelationValueRestrictionAxiomAdapter() {
+	public Adapter createPropertyValueRestrictionAxiomAdapter() {
 		return null;
 	}
 
@@ -1472,34 +1290,6 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.ConceptTypeAssertion <em>Concept Type Assertion</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.ConceptTypeAssertion
-	 * @generated
-	 */
-	public Adapter createConceptTypeAssertionAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.RelationTypeAssertion <em>Relation Type Assertion</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.RelationTypeAssertion
-	 * @generated
-	 */
-	public Adapter createRelationTypeAssertionAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.PropertyValueAssertion <em>Property Value Assertion</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -1510,48 +1300,6 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createPropertyValueAssertionAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.ScalarPropertyValueAssertion <em>Scalar Property Value Assertion</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.ScalarPropertyValueAssertion
-	 * @generated
-	 */
-	public Adapter createScalarPropertyValueAssertionAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.StructuredPropertyValueAssertion <em>Structured Property Value Assertion</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.StructuredPropertyValueAssertion
-	 * @generated
-	 */
-	public Adapter createStructuredPropertyValueAssertionAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.LinkAssertion <em>Link Assertion</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.LinkAssertion
-	 * @generated
-	 */
-	public Adapter createLinkAssertionAdapter() {
 		return null;
 	}
 

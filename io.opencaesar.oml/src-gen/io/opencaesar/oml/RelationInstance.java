@@ -34,7 +34,6 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link io.opencaesar.oml.RelationInstance#getOwnedTypes <em>Owned Types</em>}</li>
  *   <li>{@link io.opencaesar.oml.RelationInstance#getSources <em>Sources</em>}</li>
  *   <li>{@link io.opencaesar.oml.RelationInstance#getTargets <em>Targets</em>}</li>
  * </ul>
@@ -44,23 +43,6 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface RelationInstance extends NamedInstance {
-	/**
-	 * Returns the value of the '<em><b>Owned Types</b></em>' containment reference list.
-	 * The list contents are of type {@link io.opencaesar.oml.RelationTypeAssertion}.
-	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.RelationTypeAssertion#getOwningInstance <em>Owning Instance</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * The types of this instance
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Owned Types</em>' containment reference list.
-	 * @see io.opencaesar.oml.OmlPackage#getRelationInstance_OwnedTypes()
-	 * @see io.opencaesar.oml.RelationTypeAssertion#getOwningInstance
-	 * @model opposite="owningInstance" containment="true"
-	 * @generated
-	 */
-	EList<RelationTypeAssertion> getOwnedTypes();
-
 	/**
 	 * Returns the value of the '<em><b>Sources</b></em>' reference list.
 	 * The list contents are of type {@link io.opencaesar.oml.NamedInstance}.

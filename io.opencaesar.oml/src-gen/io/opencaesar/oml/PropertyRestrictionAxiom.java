@@ -25,7 +25,7 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * PropertyRestrictionAxiom is an axiom that places some restriction on the value of a property in the context of
+ * PropertyRestrictionAxiom is an axiom that places some restriction on the value of a semantic property in the context of
  * a restricting classifier domain. It can be specified directly on the classifier or indirectly on a reference to it.
  * <!-- end-model-doc -->
  *
@@ -35,6 +35,7 @@ package io.opencaesar.oml;
  * <ul>
  *   <li>{@link io.opencaesar.oml.PropertyRestrictionAxiom#getOwningClassifier <em>Owning Classifier</em>}</li>
  *   <li>{@link io.opencaesar.oml.PropertyRestrictionAxiom#getOwningReference <em>Owning Reference</em>}</li>
+ *   <li>{@link io.opencaesar.oml.PropertyRestrictionAxiom#getProperty <em>Property</em>}</li>
  * </ul>
  *
  * @see io.opencaesar.oml.OmlPackage#getPropertyRestrictionAxiom()
@@ -98,14 +99,28 @@ public interface PropertyRestrictionAxiom extends Axiom {
 	void setOwningReference(ClassifierReference value);
 
 	/**
+	 * Returns the value of the '<em><b>Property</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * The restricted property
 	 * <!-- end-model-doc -->
-	 * @model kind="operation" unique="false"
+	 * @return the value of the '<em>Property</em>' reference.
+	 * @see #setProperty(SemanticProperty)
+	 * @see io.opencaesar.oml.OmlPackage#getPropertyRestrictionAxiom_Property()
+	 * @model required="true"
 	 * @generated
 	 */
-	Property getProperty();
+	SemanticProperty getProperty();
+
+	/**
+	 * Sets the value of the '{@link io.opencaesar.oml.PropertyRestrictionAxiom#getProperty <em>Property</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Property</em>' reference.
+	 * @see #getProperty()
+	 * @generated
+	 */
+	void setProperty(SemanticProperty value);
 
 } // PropertyRestrictionAxiom

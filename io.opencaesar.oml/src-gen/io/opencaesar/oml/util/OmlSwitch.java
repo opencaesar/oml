@@ -694,120 +694,30 @@ public class OmlSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case OmlPackage.SCALAR_PROPERTY_RESTRICTION_AXIOM: {
-				ScalarPropertyRestrictionAxiom scalarPropertyRestrictionAxiom = (ScalarPropertyRestrictionAxiom)theEObject;
-				T result = caseScalarPropertyRestrictionAxiom(scalarPropertyRestrictionAxiom);
-				if (result == null) result = casePropertyRestrictionAxiom(scalarPropertyRestrictionAxiom);
-				if (result == null) result = caseAxiom(scalarPropertyRestrictionAxiom);
-				if (result == null) result = caseElement(scalarPropertyRestrictionAxiom);
+			case OmlPackage.PROPERTY_RANGE_RESTRICTION_AXIOM: {
+				PropertyRangeRestrictionAxiom propertyRangeRestrictionAxiom = (PropertyRangeRestrictionAxiom)theEObject;
+				T result = casePropertyRangeRestrictionAxiom(propertyRangeRestrictionAxiom);
+				if (result == null) result = casePropertyRestrictionAxiom(propertyRangeRestrictionAxiom);
+				if (result == null) result = caseAxiom(propertyRangeRestrictionAxiom);
+				if (result == null) result = caseElement(propertyRangeRestrictionAxiom);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case OmlPackage.SCALAR_PROPERTY_RANGE_RESTRICTION_AXIOM: {
-				ScalarPropertyRangeRestrictionAxiom scalarPropertyRangeRestrictionAxiom = (ScalarPropertyRangeRestrictionAxiom)theEObject;
-				T result = caseScalarPropertyRangeRestrictionAxiom(scalarPropertyRangeRestrictionAxiom);
-				if (result == null) result = caseScalarPropertyRestrictionAxiom(scalarPropertyRangeRestrictionAxiom);
-				if (result == null) result = casePropertyRestrictionAxiom(scalarPropertyRangeRestrictionAxiom);
-				if (result == null) result = caseAxiom(scalarPropertyRangeRestrictionAxiom);
-				if (result == null) result = caseElement(scalarPropertyRangeRestrictionAxiom);
+			case OmlPackage.PROPERTY_CARDINALITY_RESTRICTION_AXIOM: {
+				PropertyCardinalityRestrictionAxiom propertyCardinalityRestrictionAxiom = (PropertyCardinalityRestrictionAxiom)theEObject;
+				T result = casePropertyCardinalityRestrictionAxiom(propertyCardinalityRestrictionAxiom);
+				if (result == null) result = casePropertyRestrictionAxiom(propertyCardinalityRestrictionAxiom);
+				if (result == null) result = caseAxiom(propertyCardinalityRestrictionAxiom);
+				if (result == null) result = caseElement(propertyCardinalityRestrictionAxiom);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case OmlPackage.SCALAR_PROPERTY_CARDINALITY_RESTRICTION_AXIOM: {
-				ScalarPropertyCardinalityRestrictionAxiom scalarPropertyCardinalityRestrictionAxiom = (ScalarPropertyCardinalityRestrictionAxiom)theEObject;
-				T result = caseScalarPropertyCardinalityRestrictionAxiom(scalarPropertyCardinalityRestrictionAxiom);
-				if (result == null) result = caseScalarPropertyRestrictionAxiom(scalarPropertyCardinalityRestrictionAxiom);
-				if (result == null) result = casePropertyRestrictionAxiom(scalarPropertyCardinalityRestrictionAxiom);
-				if (result == null) result = caseAxiom(scalarPropertyCardinalityRestrictionAxiom);
-				if (result == null) result = caseElement(scalarPropertyCardinalityRestrictionAxiom);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.SCALAR_PROPERTY_VALUE_RESTRICTION_AXIOM: {
-				ScalarPropertyValueRestrictionAxiom scalarPropertyValueRestrictionAxiom = (ScalarPropertyValueRestrictionAxiom)theEObject;
-				T result = caseScalarPropertyValueRestrictionAxiom(scalarPropertyValueRestrictionAxiom);
-				if (result == null) result = caseScalarPropertyRestrictionAxiom(scalarPropertyValueRestrictionAxiom);
-				if (result == null) result = casePropertyRestrictionAxiom(scalarPropertyValueRestrictionAxiom);
-				if (result == null) result = caseAxiom(scalarPropertyValueRestrictionAxiom);
-				if (result == null) result = caseElement(scalarPropertyValueRestrictionAxiom);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.STRUCTURED_PROPERTY_RESTRICTION_AXIOM: {
-				StructuredPropertyRestrictionAxiom structuredPropertyRestrictionAxiom = (StructuredPropertyRestrictionAxiom)theEObject;
-				T result = caseStructuredPropertyRestrictionAxiom(structuredPropertyRestrictionAxiom);
-				if (result == null) result = casePropertyRestrictionAxiom(structuredPropertyRestrictionAxiom);
-				if (result == null) result = caseAxiom(structuredPropertyRestrictionAxiom);
-				if (result == null) result = caseElement(structuredPropertyRestrictionAxiom);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.STRUCTURED_PROPERTY_RANGE_RESTRICTION_AXIOM: {
-				StructuredPropertyRangeRestrictionAxiom structuredPropertyRangeRestrictionAxiom = (StructuredPropertyRangeRestrictionAxiom)theEObject;
-				T result = caseStructuredPropertyRangeRestrictionAxiom(structuredPropertyRangeRestrictionAxiom);
-				if (result == null) result = caseStructuredPropertyRestrictionAxiom(structuredPropertyRangeRestrictionAxiom);
-				if (result == null) result = casePropertyRestrictionAxiom(structuredPropertyRangeRestrictionAxiom);
-				if (result == null) result = caseAxiom(structuredPropertyRangeRestrictionAxiom);
-				if (result == null) result = caseElement(structuredPropertyRangeRestrictionAxiom);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.STRUCTURED_PROPERTY_CARDINALITY_RESTRICTION_AXIOM: {
-				StructuredPropertyCardinalityRestrictionAxiom structuredPropertyCardinalityRestrictionAxiom = (StructuredPropertyCardinalityRestrictionAxiom)theEObject;
-				T result = caseStructuredPropertyCardinalityRestrictionAxiom(structuredPropertyCardinalityRestrictionAxiom);
-				if (result == null) result = caseStructuredPropertyRestrictionAxiom(structuredPropertyCardinalityRestrictionAxiom);
-				if (result == null) result = casePropertyRestrictionAxiom(structuredPropertyCardinalityRestrictionAxiom);
-				if (result == null) result = caseAxiom(structuredPropertyCardinalityRestrictionAxiom);
-				if (result == null) result = caseElement(structuredPropertyCardinalityRestrictionAxiom);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.STRUCTURED_PROPERTY_VALUE_RESTRICTION_AXIOM: {
-				StructuredPropertyValueRestrictionAxiom structuredPropertyValueRestrictionAxiom = (StructuredPropertyValueRestrictionAxiom)theEObject;
-				T result = caseStructuredPropertyValueRestrictionAxiom(structuredPropertyValueRestrictionAxiom);
-				if (result == null) result = caseStructuredPropertyRestrictionAxiom(structuredPropertyValueRestrictionAxiom);
-				if (result == null) result = casePropertyRestrictionAxiom(structuredPropertyValueRestrictionAxiom);
-				if (result == null) result = caseAxiom(structuredPropertyValueRestrictionAxiom);
-				if (result == null) result = caseElement(structuredPropertyValueRestrictionAxiom);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.RELATION_RESTRICTION_AXIOM: {
-				RelationRestrictionAxiom relationRestrictionAxiom = (RelationRestrictionAxiom)theEObject;
-				T result = caseRelationRestrictionAxiom(relationRestrictionAxiom);
-				if (result == null) result = casePropertyRestrictionAxiom(relationRestrictionAxiom);
-				if (result == null) result = caseAxiom(relationRestrictionAxiom);
-				if (result == null) result = caseElement(relationRestrictionAxiom);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.RELATION_RANGE_RESTRICTION_AXIOM: {
-				RelationRangeRestrictionAxiom relationRangeRestrictionAxiom = (RelationRangeRestrictionAxiom)theEObject;
-				T result = caseRelationRangeRestrictionAxiom(relationRangeRestrictionAxiom);
-				if (result == null) result = caseRelationRestrictionAxiom(relationRangeRestrictionAxiom);
-				if (result == null) result = casePropertyRestrictionAxiom(relationRangeRestrictionAxiom);
-				if (result == null) result = caseAxiom(relationRangeRestrictionAxiom);
-				if (result == null) result = caseElement(relationRangeRestrictionAxiom);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.RELATION_CARDINALITY_RESTRICTION_AXIOM: {
-				RelationCardinalityRestrictionAxiom relationCardinalityRestrictionAxiom = (RelationCardinalityRestrictionAxiom)theEObject;
-				T result = caseRelationCardinalityRestrictionAxiom(relationCardinalityRestrictionAxiom);
-				if (result == null) result = caseRelationRestrictionAxiom(relationCardinalityRestrictionAxiom);
-				if (result == null) result = casePropertyRestrictionAxiom(relationCardinalityRestrictionAxiom);
-				if (result == null) result = caseAxiom(relationCardinalityRestrictionAxiom);
-				if (result == null) result = caseElement(relationCardinalityRestrictionAxiom);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.RELATION_VALUE_RESTRICTION_AXIOM: {
-				RelationValueRestrictionAxiom relationValueRestrictionAxiom = (RelationValueRestrictionAxiom)theEObject;
-				T result = caseRelationValueRestrictionAxiom(relationValueRestrictionAxiom);
-				if (result == null) result = caseRelationRestrictionAxiom(relationValueRestrictionAxiom);
-				if (result == null) result = casePropertyRestrictionAxiom(relationValueRestrictionAxiom);
-				if (result == null) result = caseAxiom(relationValueRestrictionAxiom);
-				if (result == null) result = caseElement(relationValueRestrictionAxiom);
+			case OmlPackage.PROPERTY_VALUE_RESTRICTION_AXIOM: {
+				PropertyValueRestrictionAxiom propertyValueRestrictionAxiom = (PropertyValueRestrictionAxiom)theEObject;
+				T result = casePropertyValueRestrictionAxiom(propertyValueRestrictionAxiom);
+				if (result == null) result = casePropertyRestrictionAxiom(propertyValueRestrictionAxiom);
+				if (result == null) result = caseAxiom(propertyValueRestrictionAxiom);
+				if (result == null) result = caseElement(propertyValueRestrictionAxiom);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -819,56 +729,11 @@ public class OmlSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case OmlPackage.CONCEPT_TYPE_ASSERTION: {
-				ConceptTypeAssertion conceptTypeAssertion = (ConceptTypeAssertion)theEObject;
-				T result = caseConceptTypeAssertion(conceptTypeAssertion);
-				if (result == null) result = caseTypeAssertion(conceptTypeAssertion);
-				if (result == null) result = caseAssertion(conceptTypeAssertion);
-				if (result == null) result = caseElement(conceptTypeAssertion);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.RELATION_TYPE_ASSERTION: {
-				RelationTypeAssertion relationTypeAssertion = (RelationTypeAssertion)theEObject;
-				T result = caseRelationTypeAssertion(relationTypeAssertion);
-				if (result == null) result = caseTypeAssertion(relationTypeAssertion);
-				if (result == null) result = caseAssertion(relationTypeAssertion);
-				if (result == null) result = caseElement(relationTypeAssertion);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case OmlPackage.PROPERTY_VALUE_ASSERTION: {
 				PropertyValueAssertion propertyValueAssertion = (PropertyValueAssertion)theEObject;
 				T result = casePropertyValueAssertion(propertyValueAssertion);
 				if (result == null) result = caseAssertion(propertyValueAssertion);
 				if (result == null) result = caseElement(propertyValueAssertion);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.SCALAR_PROPERTY_VALUE_ASSERTION: {
-				ScalarPropertyValueAssertion scalarPropertyValueAssertion = (ScalarPropertyValueAssertion)theEObject;
-				T result = caseScalarPropertyValueAssertion(scalarPropertyValueAssertion);
-				if (result == null) result = casePropertyValueAssertion(scalarPropertyValueAssertion);
-				if (result == null) result = caseAssertion(scalarPropertyValueAssertion);
-				if (result == null) result = caseElement(scalarPropertyValueAssertion);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.STRUCTURED_PROPERTY_VALUE_ASSERTION: {
-				StructuredPropertyValueAssertion structuredPropertyValueAssertion = (StructuredPropertyValueAssertion)theEObject;
-				T result = caseStructuredPropertyValueAssertion(structuredPropertyValueAssertion);
-				if (result == null) result = casePropertyValueAssertion(structuredPropertyValueAssertion);
-				if (result == null) result = caseAssertion(structuredPropertyValueAssertion);
-				if (result == null) result = caseElement(structuredPropertyValueAssertion);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.LINK_ASSERTION: {
-				LinkAssertion linkAssertion = (LinkAssertion)theEObject;
-				T result = caseLinkAssertion(linkAssertion);
-				if (result == null) result = casePropertyValueAssertion(linkAssertion);
-				if (result == null) result = caseAssertion(linkAssertion);
-				if (result == null) result = caseElement(linkAssertion);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -2001,182 +1866,47 @@ public class OmlSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Scalar Property Restriction Axiom</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Property Range Restriction Axiom</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Scalar Property Restriction Axiom</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Property Range Restriction Axiom</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseScalarPropertyRestrictionAxiom(ScalarPropertyRestrictionAxiom object) {
+	public T casePropertyRangeRestrictionAxiom(PropertyRangeRestrictionAxiom object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Scalar Property Range Restriction Axiom</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Property Cardinality Restriction Axiom</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Scalar Property Range Restriction Axiom</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Property Cardinality Restriction Axiom</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseScalarPropertyRangeRestrictionAxiom(ScalarPropertyRangeRestrictionAxiom object) {
+	public T casePropertyCardinalityRestrictionAxiom(PropertyCardinalityRestrictionAxiom object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Scalar Property Cardinality Restriction Axiom</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Property Value Restriction Axiom</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Scalar Property Cardinality Restriction Axiom</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Property Value Restriction Axiom</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseScalarPropertyCardinalityRestrictionAxiom(ScalarPropertyCardinalityRestrictionAxiom object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Scalar Property Value Restriction Axiom</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Scalar Property Value Restriction Axiom</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseScalarPropertyValueRestrictionAxiom(ScalarPropertyValueRestrictionAxiom object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Structured Property Restriction Axiom</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Structured Property Restriction Axiom</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseStructuredPropertyRestrictionAxiom(StructuredPropertyRestrictionAxiom object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Structured Property Range Restriction Axiom</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Structured Property Range Restriction Axiom</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseStructuredPropertyRangeRestrictionAxiom(StructuredPropertyRangeRestrictionAxiom object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Structured Property Cardinality Restriction Axiom</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Structured Property Cardinality Restriction Axiom</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseStructuredPropertyCardinalityRestrictionAxiom(StructuredPropertyCardinalityRestrictionAxiom object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Structured Property Value Restriction Axiom</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Structured Property Value Restriction Axiom</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseStructuredPropertyValueRestrictionAxiom(StructuredPropertyValueRestrictionAxiom object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Relation Restriction Axiom</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Relation Restriction Axiom</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseRelationRestrictionAxiom(RelationRestrictionAxiom object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Relation Range Restriction Axiom</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Relation Range Restriction Axiom</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseRelationRangeRestrictionAxiom(RelationRangeRestrictionAxiom object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Relation Cardinality Restriction Axiom</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Relation Cardinality Restriction Axiom</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseRelationCardinalityRestrictionAxiom(RelationCardinalityRestrictionAxiom object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Relation Value Restriction Axiom</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Relation Value Restriction Axiom</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseRelationValueRestrictionAxiom(RelationValueRestrictionAxiom object) {
+	public T casePropertyValueRestrictionAxiom(PropertyValueRestrictionAxiom object) {
 		return null;
 	}
 
@@ -2196,36 +1926,6 @@ public class OmlSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Concept Type Assertion</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Concept Type Assertion</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseConceptTypeAssertion(ConceptTypeAssertion object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Relation Type Assertion</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Relation Type Assertion</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseRelationTypeAssertion(RelationTypeAssertion object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Property Value Assertion</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -2237,51 +1937,6 @@ public class OmlSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T casePropertyValueAssertion(PropertyValueAssertion object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Scalar Property Value Assertion</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Scalar Property Value Assertion</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseScalarPropertyValueAssertion(ScalarPropertyValueAssertion object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Structured Property Value Assertion</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Structured Property Value Assertion</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseStructuredPropertyValueAssertion(StructuredPropertyValueAssertion object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Link Assertion</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Link Assertion</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseLinkAssertion(LinkAssertion object) {
 		return null;
 	}
 

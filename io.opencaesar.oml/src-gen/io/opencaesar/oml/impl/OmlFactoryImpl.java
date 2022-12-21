@@ -104,20 +104,11 @@ public class OmlFactoryImpl extends EFactoryImpl implements OmlFactory {
 			case OmlPackage.STRUCTURE_INSTANCE: return createStructureInstance();
 			case OmlPackage.KEY_AXIOM: return createKeyAxiom();
 			case OmlPackage.SPECIALIZATION_AXIOM: return createSpecializationAxiom();
-			case OmlPackage.SCALAR_PROPERTY_RANGE_RESTRICTION_AXIOM: return createScalarPropertyRangeRestrictionAxiom();
-			case OmlPackage.SCALAR_PROPERTY_CARDINALITY_RESTRICTION_AXIOM: return createScalarPropertyCardinalityRestrictionAxiom();
-			case OmlPackage.SCALAR_PROPERTY_VALUE_RESTRICTION_AXIOM: return createScalarPropertyValueRestrictionAxiom();
-			case OmlPackage.STRUCTURED_PROPERTY_RANGE_RESTRICTION_AXIOM: return createStructuredPropertyRangeRestrictionAxiom();
-			case OmlPackage.STRUCTURED_PROPERTY_CARDINALITY_RESTRICTION_AXIOM: return createStructuredPropertyCardinalityRestrictionAxiom();
-			case OmlPackage.STRUCTURED_PROPERTY_VALUE_RESTRICTION_AXIOM: return createStructuredPropertyValueRestrictionAxiom();
-			case OmlPackage.RELATION_RANGE_RESTRICTION_AXIOM: return createRelationRangeRestrictionAxiom();
-			case OmlPackage.RELATION_CARDINALITY_RESTRICTION_AXIOM: return createRelationCardinalityRestrictionAxiom();
-			case OmlPackage.RELATION_VALUE_RESTRICTION_AXIOM: return createRelationValueRestrictionAxiom();
-			case OmlPackage.CONCEPT_TYPE_ASSERTION: return createConceptTypeAssertion();
-			case OmlPackage.RELATION_TYPE_ASSERTION: return createRelationTypeAssertion();
-			case OmlPackage.SCALAR_PROPERTY_VALUE_ASSERTION: return createScalarPropertyValueAssertion();
-			case OmlPackage.STRUCTURED_PROPERTY_VALUE_ASSERTION: return createStructuredPropertyValueAssertion();
-			case OmlPackage.LINK_ASSERTION: return createLinkAssertion();
+			case OmlPackage.PROPERTY_RANGE_RESTRICTION_AXIOM: return createPropertyRangeRestrictionAxiom();
+			case OmlPackage.PROPERTY_CARDINALITY_RESTRICTION_AXIOM: return createPropertyCardinalityRestrictionAxiom();
+			case OmlPackage.PROPERTY_VALUE_RESTRICTION_AXIOM: return createPropertyValueRestrictionAxiom();
+			case OmlPackage.TYPE_ASSERTION: return createTypeAssertion();
+			case OmlPackage.PROPERTY_VALUE_ASSERTION: return createPropertyValueAssertion();
 			case OmlPackage.TYPE_PREDICATE: return createTypePredicate();
 			case OmlPackage.RELATION_ENTITY_PREDICATE: return createRelationEntityPredicate();
 			case OmlPackage.PROPERTY_PREDICATE: return createPropertyPredicate();
@@ -496,9 +487,9 @@ public class OmlFactoryImpl extends EFactoryImpl implements OmlFactory {
 	 * @generated
 	 */
 	@Override
-	public ScalarPropertyRangeRestrictionAxiom createScalarPropertyRangeRestrictionAxiom() {
-		ScalarPropertyRangeRestrictionAxiomImpl scalarPropertyRangeRestrictionAxiom = new ScalarPropertyRangeRestrictionAxiomImpl();
-		return scalarPropertyRangeRestrictionAxiom;
+	public PropertyRangeRestrictionAxiom createPropertyRangeRestrictionAxiom() {
+		PropertyRangeRestrictionAxiomImpl propertyRangeRestrictionAxiom = new PropertyRangeRestrictionAxiomImpl();
+		return propertyRangeRestrictionAxiom;
 	}
 
 	/**
@@ -507,9 +498,9 @@ public class OmlFactoryImpl extends EFactoryImpl implements OmlFactory {
 	 * @generated
 	 */
 	@Override
-	public ScalarPropertyCardinalityRestrictionAxiom createScalarPropertyCardinalityRestrictionAxiom() {
-		ScalarPropertyCardinalityRestrictionAxiomImpl scalarPropertyCardinalityRestrictionAxiom = new ScalarPropertyCardinalityRestrictionAxiomImpl();
-		return scalarPropertyCardinalityRestrictionAxiom;
+	public PropertyCardinalityRestrictionAxiom createPropertyCardinalityRestrictionAxiom() {
+		PropertyCardinalityRestrictionAxiomImpl propertyCardinalityRestrictionAxiom = new PropertyCardinalityRestrictionAxiomImpl();
+		return propertyCardinalityRestrictionAxiom;
 	}
 
 	/**
@@ -518,9 +509,9 @@ public class OmlFactoryImpl extends EFactoryImpl implements OmlFactory {
 	 * @generated
 	 */
 	@Override
-	public ScalarPropertyValueRestrictionAxiom createScalarPropertyValueRestrictionAxiom() {
-		ScalarPropertyValueRestrictionAxiomImpl scalarPropertyValueRestrictionAxiom = new ScalarPropertyValueRestrictionAxiomImpl();
-		return scalarPropertyValueRestrictionAxiom;
+	public PropertyValueRestrictionAxiom createPropertyValueRestrictionAxiom() {
+		PropertyValueRestrictionAxiomImpl propertyValueRestrictionAxiom = new PropertyValueRestrictionAxiomImpl();
+		return propertyValueRestrictionAxiom;
 	}
 
 	/**
@@ -529,9 +520,9 @@ public class OmlFactoryImpl extends EFactoryImpl implements OmlFactory {
 	 * @generated
 	 */
 	@Override
-	public StructuredPropertyRangeRestrictionAxiom createStructuredPropertyRangeRestrictionAxiom() {
-		StructuredPropertyRangeRestrictionAxiomImpl structuredPropertyRangeRestrictionAxiom = new StructuredPropertyRangeRestrictionAxiomImpl();
-		return structuredPropertyRangeRestrictionAxiom;
+	public TypeAssertion createTypeAssertion() {
+		TypeAssertionImpl typeAssertion = new TypeAssertionImpl();
+		return typeAssertion;
 	}
 
 	/**
@@ -540,108 +531,9 @@ public class OmlFactoryImpl extends EFactoryImpl implements OmlFactory {
 	 * @generated
 	 */
 	@Override
-	public StructuredPropertyCardinalityRestrictionAxiom createStructuredPropertyCardinalityRestrictionAxiom() {
-		StructuredPropertyCardinalityRestrictionAxiomImpl structuredPropertyCardinalityRestrictionAxiom = new StructuredPropertyCardinalityRestrictionAxiomImpl();
-		return structuredPropertyCardinalityRestrictionAxiom;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public StructuredPropertyValueRestrictionAxiom createStructuredPropertyValueRestrictionAxiom() {
-		StructuredPropertyValueRestrictionAxiomImpl structuredPropertyValueRestrictionAxiom = new StructuredPropertyValueRestrictionAxiomImpl();
-		return structuredPropertyValueRestrictionAxiom;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public RelationRangeRestrictionAxiom createRelationRangeRestrictionAxiom() {
-		RelationRangeRestrictionAxiomImpl relationRangeRestrictionAxiom = new RelationRangeRestrictionAxiomImpl();
-		return relationRangeRestrictionAxiom;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public RelationCardinalityRestrictionAxiom createRelationCardinalityRestrictionAxiom() {
-		RelationCardinalityRestrictionAxiomImpl relationCardinalityRestrictionAxiom = new RelationCardinalityRestrictionAxiomImpl();
-		return relationCardinalityRestrictionAxiom;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public RelationValueRestrictionAxiom createRelationValueRestrictionAxiom() {
-		RelationValueRestrictionAxiomImpl relationValueRestrictionAxiom = new RelationValueRestrictionAxiomImpl();
-		return relationValueRestrictionAxiom;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ConceptTypeAssertion createConceptTypeAssertion() {
-		ConceptTypeAssertionImpl conceptTypeAssertion = new ConceptTypeAssertionImpl();
-		return conceptTypeAssertion;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public RelationTypeAssertion createRelationTypeAssertion() {
-		RelationTypeAssertionImpl relationTypeAssertion = new RelationTypeAssertionImpl();
-		return relationTypeAssertion;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ScalarPropertyValueAssertion createScalarPropertyValueAssertion() {
-		ScalarPropertyValueAssertionImpl scalarPropertyValueAssertion = new ScalarPropertyValueAssertionImpl();
-		return scalarPropertyValueAssertion;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public StructuredPropertyValueAssertion createStructuredPropertyValueAssertion() {
-		StructuredPropertyValueAssertionImpl structuredPropertyValueAssertion = new StructuredPropertyValueAssertionImpl();
-		return structuredPropertyValueAssertion;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public LinkAssertion createLinkAssertion() {
-		LinkAssertionImpl linkAssertion = new LinkAssertionImpl();
-		return linkAssertion;
+	public PropertyValueAssertion createPropertyValueAssertion() {
+		PropertyValueAssertionImpl propertyValueAssertion = new PropertyValueAssertionImpl();
+		return propertyValueAssertion;
 	}
 
 	/**

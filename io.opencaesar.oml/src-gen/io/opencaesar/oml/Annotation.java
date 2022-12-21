@@ -25,10 +25,10 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Annotation is an element that specifies additional non-semantic information on an annotated element. It can also be
+ * Annotation is an element that specifies additional non-semantic statements on an annotated element. It can also be
  * specified on a reference to an ontology member, in which case it is interpreted as if it was specified on the
- * member itself. An annotation is specified with an annotation property and an optional literal or reference value. When
- * no value is specified, it is interpreted as a boolean `true` literal.
+ * member itself. An annotation is specified with an annotation property and a (literal or reference) value. When
+ * no value is specified, it is interpreted as the `true` boolean literal.
  * <!-- end-model-doc -->
  *
  * <p>
@@ -36,7 +36,7 @@ package io.opencaesar.oml;
  * </p>
  * <ul>
  *   <li>{@link io.opencaesar.oml.Annotation#getProperty <em>Property</em>}</li>
- *   <li>{@link io.opencaesar.oml.Annotation#getValue <em>Value</em>}</li>
+ *   <li>{@link io.opencaesar.oml.Annotation#getLiteralValue <em>Literal Value</em>}</li>
  *   <li>{@link io.opencaesar.oml.Annotation#getReferenceValue <em>Reference Value</em>}</li>
  *   <li>{@link io.opencaesar.oml.Annotation#getOwningElement <em>Owning Element</em>}</li>
  *   <li>{@link io.opencaesar.oml.Annotation#getOwningReference <em>Owning Reference</em>}</li>
@@ -73,36 +73,36 @@ public interface Annotation extends Element {
 	void setProperty(AnnotationProperty value);
 
 	/**
-	 * Returns the value of the '<em><b>Value</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Literal Value</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The literal value specified by this annotation.
+	 * A literal value specified by this annotation.
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Value</em>' containment reference.
-	 * @see #setValue(Literal)
-	 * @see io.opencaesar.oml.OmlPackage#getAnnotation_Value()
+	 * @return the value of the '<em>Literal Value</em>' containment reference.
+	 * @see #setLiteralValue(Literal)
+	 * @see io.opencaesar.oml.OmlPackage#getAnnotation_LiteralValue()
 	 * @model containment="true"
 	 * @generated
 	 */
-	Literal getValue();
+	Literal getLiteralValue();
 
 	/**
-	 * Sets the value of the '{@link io.opencaesar.oml.Annotation#getValue <em>Value</em>}' containment reference.
+	 * Sets the value of the '{@link io.opencaesar.oml.Annotation#getLiteralValue <em>Literal Value</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Value</em>' containment reference.
-	 * @see #getValue()
+	 * @param value the new value of the '<em>Literal Value</em>' containment reference.
+	 * @see #getLiteralValue()
 	 * @generated
 	 */
-	void setValue(Literal value);
+	void setLiteralValue(Literal value);
 
 	/**
 	 * Returns the value of the '<em><b>Reference Value</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The reference value (to a member) specified by this annotation
+	 * A reference (to a member) value specified by this annotation
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Reference Value</em>' reference.
 	 * @see #setReferenceValue(Member)
@@ -175,5 +175,16 @@ public interface Annotation extends Element {
 	 * @generated
 	 */
 	void setOwningReference(Reference value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Gets the value of the annotation
+	 * <!-- end-model-doc -->
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
+	Element getValue();
 
 } // Annotation

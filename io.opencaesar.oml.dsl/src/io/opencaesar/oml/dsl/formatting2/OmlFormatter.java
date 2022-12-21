@@ -56,38 +56,31 @@ import io.opencaesar.oml.FacetedScalarReference;
 import io.opencaesar.oml.ForwardRelation;
 import io.opencaesar.oml.Inclusion;
 import io.opencaesar.oml.KeyAxiom;
-import io.opencaesar.oml.LinkAssertion;
 import io.opencaesar.oml.OmlPackage;
+import io.opencaesar.oml.PropertyCardinalityRestrictionAxiom;
 import io.opencaesar.oml.PropertyPredicate;
+import io.opencaesar.oml.PropertyRangeRestrictionAxiom;
+import io.opencaesar.oml.PropertyValueAssertion;
+import io.opencaesar.oml.PropertyValueRestrictionAxiom;
 import io.opencaesar.oml.QuotedLiteral;
-import io.opencaesar.oml.RelationCardinalityRestrictionAxiom;
+import io.opencaesar.oml.Relation;
 import io.opencaesar.oml.RelationEntity;
 import io.opencaesar.oml.RelationEntityPredicate;
 import io.opencaesar.oml.RelationEntityReference;
 import io.opencaesar.oml.RelationInstance;
 import io.opencaesar.oml.RelationInstanceReference;
-import io.opencaesar.oml.RelationRangeRestrictionAxiom;
 import io.opencaesar.oml.RelationReference;
-import io.opencaesar.oml.RelationValueRestrictionAxiom;
 import io.opencaesar.oml.ReverseRelation;
 import io.opencaesar.oml.Rule;
 import io.opencaesar.oml.RuleReference;
 import io.opencaesar.oml.SameAsPredicate;
 import io.opencaesar.oml.ScalarProperty;
-import io.opencaesar.oml.ScalarPropertyCardinalityRestrictionAxiom;
-import io.opencaesar.oml.ScalarPropertyRangeRestrictionAxiom;
 import io.opencaesar.oml.ScalarPropertyReference;
-import io.opencaesar.oml.ScalarPropertyValueAssertion;
-import io.opencaesar.oml.ScalarPropertyValueRestrictionAxiom;
 import io.opencaesar.oml.Structure;
 import io.opencaesar.oml.StructureInstance;
 import io.opencaesar.oml.StructureReference;
 import io.opencaesar.oml.StructuredProperty;
-import io.opencaesar.oml.StructuredPropertyCardinalityRestrictionAxiom;
-import io.opencaesar.oml.StructuredPropertyRangeRestrictionAxiom;
 import io.opencaesar.oml.StructuredPropertyReference;
-import io.opencaesar.oml.StructuredPropertyValueAssertion;
-import io.opencaesar.oml.StructuredPropertyValueRestrictionAxiom;
 import io.opencaesar.oml.TypePredicate;
 import io.opencaesar.oml.UnreifiedRelation;
 import io.opencaesar.oml.Usage;
@@ -458,71 +451,60 @@ public class OmlFormatter extends AbstractJavaFormatter {
 		doc.surround(keyword(inclusion, oml.getInclusionAccess().getAsKeyword_2_0()), oneSpace());
 	}
 
-	protected void _format(ScalarPropertyRangeRestrictionAxiom axiom, IFormattableDocument doc) {
-		doc.append(keyword(axiom, oml.getScalarPropertyRangeRestrictionAxiomAccess().getRestrictsKeyword_0()), oneSpace());
-		doc.surround(keyword(axiom, oml.getScalarPropertyRangeRestrictionAxiomAccess().getScalarKeyword_2()), oneSpace());
-		doc.surround(keyword(axiom, oml.getScalarPropertyRangeRestrictionAxiomAccess().getPropertyKeyword_3()), oneSpace());
-		doc.surround(keyword(axiom, oml.getScalarPropertyRangeRestrictionAxiomAccess().getToKeyword_5()), oneSpace());
+	protected void _format(PropertyRangeRestrictionAxiom axiom, IFormattableDocument doc) {
+		if (axiom.getProperty() instanceof ScalarProperty) {
+			doc.append(keyword(axiom, oml.getScalarPropertyRangeRestrictionAxiomAccess().getRestrictsKeyword_0()), oneSpace());
+			doc.surround(keyword(axiom, oml.getScalarPropertyRangeRestrictionAxiomAccess().getScalarKeyword_2()), oneSpace());
+			doc.surround(keyword(axiom, oml.getScalarPropertyRangeRestrictionAxiomAccess().getPropertyKeyword_3()), oneSpace());
+			doc.surround(keyword(axiom, oml.getScalarPropertyRangeRestrictionAxiomAccess().getToKeyword_5()), oneSpace());
+		} else if (axiom.getProperty() instanceof StructuredProperty) {
+			doc.append(keyword(axiom, oml.getStructuredPropertyRangeRestrictionAxiomAccess().getRestrictsKeyword_0()), oneSpace());
+			doc.surround(keyword(axiom, oml.getStructuredPropertyRangeRestrictionAxiomAccess().getStructuredKeyword_2()), oneSpace());
+			doc.surround(keyword(axiom, oml.getStructuredPropertyRangeRestrictionAxiomAccess().getPropertyKeyword_3()), oneSpace());
+			doc.surround(keyword(axiom, oml.getStructuredPropertyRangeRestrictionAxiomAccess().getToKeyword_5()), oneSpace());
+		} else if (axiom.getProperty() instanceof Relation) {
+			doc.append(keyword(axiom, oml.getRelationRangeRestrictionAxiomAccess().getRestrictsKeyword_0()), oneSpace());
+			doc.surround(keyword(axiom, oml.getRelationRangeRestrictionAxiomAccess().getRelationKeyword_2()), oneSpace());
+			doc.surround(keyword(axiom, oml.getRelationRangeRestrictionAxiomAccess().getToKeyword_4()), oneSpace());
+		}
 	}
 
-	protected void _format(ScalarPropertyCardinalityRestrictionAxiom axiom, IFormattableDocument doc) {
-		doc.append(keyword(axiom, oml.getScalarPropertyCardinalityRestrictionAxiomAccess().getRestrictsKeyword_0()), oneSpace());
-		doc.surround(keyword(axiom, oml.getScalarPropertyCardinalityRestrictionAxiomAccess().getScalarKeyword_1()), oneSpace());
-		doc.surround(keyword(axiom, oml.getScalarPropertyCardinalityRestrictionAxiomAccess().getPropertyKeyword_2()), oneSpace());
-		doc.surround(keyword(axiom, oml.getScalarPropertyCardinalityRestrictionAxiomAccess().getToKeyword_4()), oneSpace());
-		doc.surround(feature(axiom, OmlPackage.Literals.SCALAR_PROPERTY_CARDINALITY_RESTRICTION_AXIOM__KIND), oneSpace());
-		ifNotNull(axiom.getRange(), i -> doc.prepend(feature(i, OmlPackage.Literals.SCALAR_PROPERTY_CARDINALITY_RESTRICTION_AXIOM__RANGE), oneSpace()));
+	protected void _format(PropertyCardinalityRestrictionAxiom axiom, IFormattableDocument doc) {
+		if (axiom.getProperty() instanceof ScalarProperty) {
+			doc.append(keyword(axiom, oml.getScalarPropertyCardinalityRestrictionAxiomAccess().getRestrictsKeyword_0()), oneSpace());
+			doc.surround(keyword(axiom, oml.getScalarPropertyCardinalityRestrictionAxiomAccess().getScalarKeyword_1()), oneSpace());
+			doc.surround(keyword(axiom, oml.getScalarPropertyCardinalityRestrictionAxiomAccess().getPropertyKeyword_2()), oneSpace());
+			doc.surround(keyword(axiom, oml.getScalarPropertyCardinalityRestrictionAxiomAccess().getToKeyword_4()), oneSpace());
+		} else if (axiom.getProperty() instanceof StructuredProperty) {
+			doc.append(keyword(axiom, oml.getStructuredPropertyCardinalityRestrictionAxiomAccess().getRestrictsKeyword_0()), oneSpace());
+			doc.surround(keyword(axiom, oml.getStructuredPropertyCardinalityRestrictionAxiomAccess().getStructuredKeyword_1()), oneSpace());
+			doc.surround(keyword(axiom, oml.getStructuredPropertyCardinalityRestrictionAxiomAccess().getPropertyKeyword_2()), oneSpace());
+			doc.surround(keyword(axiom, oml.getStructuredPropertyCardinalityRestrictionAxiomAccess().getToKeyword_4()), oneSpace());
+		} else if (axiom.getProperty() instanceof Relation) {
+			doc.append(keyword(axiom, oml.getRelationCardinalityRestrictionAxiomAccess().getRestrictsKeyword_0()), oneSpace());
+			doc.surround(keyword(axiom, oml.getRelationCardinalityRestrictionAxiomAccess().getRelationKeyword_1()), oneSpace());
+			doc.surround(keyword(axiom, oml.getRelationCardinalityRestrictionAxiomAccess().getToKeyword_3()), oneSpace());
+		}
+		doc.surround(feature(axiom, OmlPackage.Literals.PROPERTY_CARDINALITY_RESTRICTION_AXIOM__KIND), oneSpace());
+		ifNotNull(axiom.getRange(), i -> doc.prepend(feature(i, OmlPackage.Literals.PROPERTY_CARDINALITY_RESTRICTION_AXIOM__RANGE), oneSpace()));
 	}
 
-	protected void _format(ScalarPropertyValueRestrictionAxiom axiom, IFormattableDocument doc) {
-		doc.append(keyword(axiom, oml.getScalarPropertyValueRestrictionAxiomAccess().getRestrictsKeyword_0()), oneSpace());
-		doc.surround(keyword(axiom, oml.getScalarPropertyValueRestrictionAxiomAccess().getScalarKeyword_1()), oneSpace());
-		doc.surround(keyword(axiom, oml.getScalarPropertyValueRestrictionAxiomAccess().getPropertyKeyword_2()), oneSpace());
-		doc.surround(keyword(axiom, oml.getScalarPropertyValueRestrictionAxiomAccess().getToKeyword_4()), oneSpace());
-	}
-
-	protected void _format(StructuredPropertyRangeRestrictionAxiom axiom, IFormattableDocument doc) {
-		doc.append(keyword(axiom, oml.getStructuredPropertyRangeRestrictionAxiomAccess().getRestrictsKeyword_0()), oneSpace());
-		doc.surround(keyword(axiom, oml.getStructuredPropertyRangeRestrictionAxiomAccess().getStructuredKeyword_2()), oneSpace());
-		doc.surround(keyword(axiom, oml.getStructuredPropertyRangeRestrictionAxiomAccess().getPropertyKeyword_3()), oneSpace());
-		doc.surround(keyword(axiom, oml.getStructuredPropertyRangeRestrictionAxiomAccess().getToKeyword_5()), oneSpace());
-	}
-
-	protected void _format(StructuredPropertyCardinalityRestrictionAxiom axiom, IFormattableDocument doc) {
-		doc.append(keyword(axiom, oml.getStructuredPropertyCardinalityRestrictionAxiomAccess().getRestrictsKeyword_0()), oneSpace());
-		doc.surround(keyword(axiom, oml.getStructuredPropertyCardinalityRestrictionAxiomAccess().getStructuredKeyword_1()), oneSpace());
-		doc.surround(keyword(axiom, oml.getStructuredPropertyCardinalityRestrictionAxiomAccess().getPropertyKeyword_2()), oneSpace());
-		doc.surround(keyword(axiom, oml.getStructuredPropertyCardinalityRestrictionAxiomAccess().getToKeyword_4()), oneSpace());
-		doc.surround(feature(axiom, OmlPackage.Literals.STRUCTURED_PROPERTY_CARDINALITY_RESTRICTION_AXIOM__KIND), oneSpace());
-		ifNotNull(axiom.getRange(), i -> doc.prepend(feature(i, OmlPackage.Literals.STRUCTURED_PROPERTY_CARDINALITY_RESTRICTION_AXIOM__RANGE), oneSpace()));
-	}
-
-	protected void _format(StructuredPropertyValueRestrictionAxiom axiom, IFormattableDocument doc) {
-		doc.append(keyword(axiom, oml.getStructuredPropertyValueRestrictionAxiomAccess().getRestrictsKeyword_0()), oneSpace());
-		doc.surround(keyword(axiom, oml.getStructuredPropertyValueRestrictionAxiomAccess().getStructuredKeyword_1()), oneSpace());
-		doc.surround(keyword(axiom, oml.getStructuredPropertyValueRestrictionAxiomAccess().getPropertyKeyword_2()), oneSpace());
-		doc.surround(keyword(axiom, oml.getStructuredPropertyValueRestrictionAxiomAccess().getToKeyword_4()), oneSpace());
-	}
-
-	protected void _format(RelationRangeRestrictionAxiom axiom, IFormattableDocument doc) {
-		doc.append(keyword(axiom, oml.getRelationRangeRestrictionAxiomAccess().getRestrictsKeyword_0()), oneSpace());
-		doc.surround(keyword(axiom, oml.getRelationRangeRestrictionAxiomAccess().getRelationKeyword_2()), oneSpace());
-		doc.surround(keyword(axiom, oml.getRelationRangeRestrictionAxiomAccess().getToKeyword_4()), oneSpace());
-	}
-
-	protected void _format(RelationCardinalityRestrictionAxiom axiom, IFormattableDocument doc) {
-		doc.append(keyword(axiom, oml.getRelationCardinalityRestrictionAxiomAccess().getRestrictsKeyword_0()), oneSpace());
-		doc.surround(keyword(axiom, oml.getRelationCardinalityRestrictionAxiomAccess().getRelationKeyword_1()), oneSpace());
-		doc.surround(keyword(axiom, oml.getRelationCardinalityRestrictionAxiomAccess().getToKeyword_3()), oneSpace());
-		doc.surround(feature(axiom, OmlPackage.Literals.RELATION_CARDINALITY_RESTRICTION_AXIOM__KIND), oneSpace());
-		ifNotNull(axiom.getRange(), i -> doc.prepend(feature(i, OmlPackage.Literals.RELATION_CARDINALITY_RESTRICTION_AXIOM__RANGE), oneSpace()));
-	}
-
-	protected void _format(RelationValueRestrictionAxiom axiom, IFormattableDocument doc) {
-		doc.append(keyword(axiom, oml.getRelationValueRestrictionAxiomAccess().getRestrictsKeyword_0()), oneSpace());
-		doc.surround(keyword(axiom, oml.getRelationValueRestrictionAxiomAccess().getRelationKeyword_1()), oneSpace());
-		doc.surround(keyword(axiom, oml.getRelationValueRestrictionAxiomAccess().getToKeyword_3()), oneSpace());
-		doc.surround(feature(axiom, OmlPackage.Literals.RELATION_VALUE_RESTRICTION_AXIOM__VALUE), oneSpace());
+	protected void _format(PropertyValueRestrictionAxiom axiom, IFormattableDocument doc) {
+		if (axiom.getProperty() instanceof ScalarProperty) {
+			doc.append(keyword(axiom, oml.getScalarPropertyValueRestrictionAxiomAccess().getRestrictsKeyword_0()), oneSpace());
+			doc.surround(keyword(axiom, oml.getScalarPropertyValueRestrictionAxiomAccess().getScalarKeyword_1()), oneSpace());
+			doc.surround(keyword(axiom, oml.getScalarPropertyValueRestrictionAxiomAccess().getPropertyKeyword_2()), oneSpace());
+			doc.surround(keyword(axiom, oml.getScalarPropertyValueRestrictionAxiomAccess().getToKeyword_4()), oneSpace());
+		} else if (axiom.getProperty() instanceof StructuredProperty) {
+			doc.append(keyword(axiom, oml.getStructuredPropertyValueRestrictionAxiomAccess().getRestrictsKeyword_0()), oneSpace());
+			doc.surround(keyword(axiom, oml.getStructuredPropertyValueRestrictionAxiomAccess().getStructuredKeyword_1()), oneSpace());
+			doc.surround(keyword(axiom, oml.getStructuredPropertyValueRestrictionAxiomAccess().getPropertyKeyword_2()), oneSpace());
+			doc.surround(keyword(axiom, oml.getStructuredPropertyValueRestrictionAxiomAccess().getToKeyword_4()), oneSpace());
+		} else if (axiom.getProperty() instanceof Relation) {
+			doc.append(keyword(axiom, oml.getRelationValueRestrictionAxiomAccess().getRestrictsKeyword_0()), oneSpace());
+			doc.surround(keyword(axiom, oml.getRelationValueRestrictionAxiomAccess().getRelationKeyword_1()), oneSpace());
+			doc.surround(keyword(axiom, oml.getRelationValueRestrictionAxiomAccess().getToKeyword_3()), oneSpace());
+		}
 	}
 
 	protected void _format(KeyAxiom axiom, IFormattableDocument doc) {
@@ -530,17 +512,9 @@ public class OmlFormatter extends AbstractJavaFormatter {
 		formatCommas(axiom, doc);
 	}
 
-	protected void _format(ScalarPropertyValueAssertion assertion, IFormattableDocument doc) {
-		doc.append(feature(assertion, OmlPackage.Literals.SCALAR_PROPERTY_VALUE_ASSERTION__PROPERTY), oneSpace());
+	protected void _format(PropertyValueAssertion assertion, IFormattableDocument doc) {
+		doc.append(feature(assertion, OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__PROPERTY), oneSpace());
 		ifNotNull(assertion.getValue(), i -> doc.prepend(doc.format(i), oneSpace()));
-	}
-
-	protected void _format(StructuredPropertyValueAssertion assertion, IFormattableDocument doc) {
-		doc.append(feature(assertion, OmlPackage.Literals.STRUCTURED_PROPERTY_VALUE_ASSERTION__PROPERTY), oneSpace());
-	}
-
-	protected void _format(LinkAssertion assertion, IFormattableDocument doc) {
-		doc.append(feature(assertion, OmlPackage.Literals.LINK_ASSERTION__PROPERTY), oneSpace());
 	}
 
 	protected void _format(TypePredicate predicate, IFormattableDocument doc) {

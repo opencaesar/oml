@@ -26,33 +26,28 @@ import io.opencaesar.oml.Element;
 import io.opencaesar.oml.Entity;
 import io.opencaesar.oml.Import;
 import io.opencaesar.oml.KeyAxiom;
+import io.opencaesar.oml.Literal;
 import io.opencaesar.oml.Member;
 import io.opencaesar.oml.NamedInstance;
 import io.opencaesar.oml.Ontology;
 import io.opencaesar.oml.Predicate;
+import io.opencaesar.oml.PropertyCardinalityRestrictionAxiom;
+import io.opencaesar.oml.PropertyRangeRestrictionAxiom;
+import io.opencaesar.oml.PropertyValueAssertion;
+import io.opencaesar.oml.PropertyValueRestrictionAxiom;
 import io.opencaesar.oml.RangeRestrictionKind;
 import io.opencaesar.oml.Reference;
-import io.opencaesar.oml.RelationCardinalityRestrictionAxiom;
 import io.opencaesar.oml.RelationEntity;
 import io.opencaesar.oml.RelationEntityPredicate;
 import io.opencaesar.oml.RelationInstance;
-import io.opencaesar.oml.RelationRangeRestrictionAxiom;
-import io.opencaesar.oml.RelationValueRestrictionAxiom;
 import io.opencaesar.oml.Rule;
 import io.opencaesar.oml.SameAsPredicate;
 import io.opencaesar.oml.Scalar;
 import io.opencaesar.oml.ScalarProperty;
-import io.opencaesar.oml.ScalarPropertyCardinalityRestrictionAxiom;
-import io.opencaesar.oml.ScalarPropertyRangeRestrictionAxiom;
-import io.opencaesar.oml.ScalarPropertyValueAssertion;
-import io.opencaesar.oml.ScalarPropertyValueRestrictionAxiom;
 import io.opencaesar.oml.SpecializationAxiom;
 import io.opencaesar.oml.Structure;
 import io.opencaesar.oml.StructureInstance;
 import io.opencaesar.oml.StructuredProperty;
-import io.opencaesar.oml.StructuredPropertyCardinalityRestrictionAxiom;
-import io.opencaesar.oml.StructuredPropertyRangeRestrictionAxiom;
-import io.opencaesar.oml.StructuredPropertyValueRestrictionAxiom;
 import io.opencaesar.oml.UnaryPredicate;
 import io.opencaesar.oml.dsl.ide.diagram.model.OmlButton;
 import io.opencaesar.oml.dsl.ide.diagram.model.OmlCompartment;
@@ -257,14 +252,21 @@ class OmlOntologyDiagramView {
 		return l;
 	}
 
-	public OmlLabel createLabel(final Entity e, final ScalarPropertyRangeRestrictionAxiom ax) {
+	public OmlLabel createScalarRangeLabel(final Entity e, final PropertyRangeRestrictionAxiom ax) {
 		final String id = idCache.uniqueId(ax, getLocalName(e) + ".rangeRestriction." + getLocalName(ax.getProperty()));
 		final OmlLabel l = newLeafSElement(OmlLabel.class, id, OmlDiagramModule.SLabel_SLabelView_text);
 		l.setText(getLocalName(ax.getProperty()) + " ⊂ " + getLocalName(ax.getRange()));
 		return l;
 	}
 
-	public OmlLabel createLabel(final Entity e, final ScalarPropertyCardinalityRestrictionAxiom ax) {
+	public OmlLabel createStructuredRangeLabel(final Entity e, final PropertyRangeRestrictionAxiom ax) {
+		final String id = idCache.uniqueId(ax, getLocalName(e) + ".rangeRestriction." + getLocalName(ax.getProperty()));
+		final OmlLabel l = newLeafSElement(OmlLabel.class, id, OmlDiagramModule.SLabel_SLabelView_text);
+		l.setText(getLocalName(ax.getProperty()) + " ⊂ " + getLocalName(ax.getRange()));
+		return l;
+	}
+
+	public OmlLabel createScalarCardinalityLabel(final Entity e, final PropertyCardinalityRestrictionAxiom ax) {
 		final String id = idCache.uniqueId(ax, getLocalName(e) + ".cardinalityRestriction" + getLocalName(ax.getProperty()));
 		String notation;
 		switch (ax.getKind()) {
@@ -285,21 +287,7 @@ class OmlOntologyDiagramView {
 		return l;
 	}
 
-	public OmlLabel createLabel(final Entity e, final ScalarPropertyValueRestrictionAxiom ax) {
-		final String id = idCache.uniqueId(ax, getLocalName(e) + ".valueRestriction." + getLocalName(ax.getProperty()));
-		final OmlLabel l = newLeafSElement(OmlLabel.class, id, OmlDiagramModule.SLabel_SLabelView_text);
-		l.setText(getLocalName(ax.getProperty()) + " = " + OmlRead.getLexicalValue(ax.getValue()));
-		return l;
-	}
-
-	public OmlLabel createLabel(final Entity e, final StructuredPropertyRangeRestrictionAxiom ax) {
-		final String id = idCache.uniqueId(ax, getLocalName(e) + ".rangeRestriction." + getLocalName(ax.getProperty()));
-		final OmlLabel l = newLeafSElement(OmlLabel.class, id, OmlDiagramModule.SLabel_SLabelView_text);
-		l.setText(getLocalName(ax.getProperty()) + " ⊂ " + getLocalName(ax.getRange()));
-		return l;
-	}
-
-	public OmlLabel createLabel(final Entity e, final StructuredPropertyCardinalityRestrictionAxiom ax) {
+	public OmlLabel createStructuredCardinalityLabel(final Entity e, final PropertyCardinalityRestrictionAxiom ax) {
 		final String id = idCache.uniqueId(ax, getLocalName(e) + ".cardinalityRestriction" + getLocalName(ax.getProperty()));
 		String notation;
 		switch (ax.getKind()) {
@@ -320,10 +308,17 @@ class OmlOntologyDiagramView {
 		return l;
 	}
 
-	public OmlLabel createLabel(final Entity e, final StructuredPropertyValueRestrictionAxiom ax) {
+	public OmlLabel createScalarValueLabel(final Entity e, final PropertyValueRestrictionAxiom ax) {
 		final String id = idCache.uniqueId(ax, getLocalName(e) + ".valueRestriction." + getLocalName(ax.getProperty()));
 		final OmlLabel l = newLeafSElement(OmlLabel.class, id, OmlDiagramModule.SLabel_SLabelView_text);
-		l.setText(getLocalName(ax.getProperty()) + " = " + ((StructureInstance) ax.getValue()).getType().getName());
+		l.setText(getLocalName(ax.getProperty()) + " = " + OmlRead.getLexicalValue(ax.getLiteralValue()));
+		return l;
+	}
+
+	public OmlLabel createStructuredValueLabel(final Entity e, final PropertyValueRestrictionAxiom ax) {
+		final String id = idCache.uniqueId(ax, getLocalName(e) + ".valueRestriction." + getLocalName(ax.getProperty()));
+		final OmlLabel l = newLeafSElement(OmlLabel.class, id, OmlDiagramModule.SLabel_SLabelView_text);
+		l.setText(getLocalName(ax.getProperty()) + " = " + getLabel((StructureInstance) ax.getStructureInstanceValue()));
 		return l;
 	}
 
@@ -363,10 +358,10 @@ class OmlOntologyDiagramView {
 			throw new IllegalArgumentException("Unknown kind of predicate: " + predicate.eClass().getName());
 	}
 
-	public OmlLabel createLabel(final NamedInstance i, final ScalarPropertyValueAssertion ax) {
+	public OmlLabel createLabel(final NamedInstance i, final PropertyValueAssertion ax) {
 		final String id = idCache.uniqueId(ax, getLocalName(i) + ".valueAssertion." + getLocalName(ax.getProperty()));
 		final OmlLabel l = newLeafSElement(OmlLabel.class, id, OmlDiagramModule.SLabel_SLabelView_text);
-		l.setText(getLocalName(ax.getProperty()) + " = " + OmlRead.getLexicalValue(ax.getValue()));
+		l.setText(getLocalName(ax.getProperty()) + " = " + getLabel(ax.getValue()));
 		return l;
 	}
 
@@ -395,7 +390,7 @@ class OmlOntologyDiagramView {
 		return e;
 	}
 
-	public OmlEdge createEdge(final RelationCardinalityRestrictionAxiom axiom, final SModelElement from, final SModelElement to) {
+	public OmlEdge createEdge(final PropertyCardinalityRestrictionAxiom axiom, final SModelElement from, final SModelElement to) {
 		final String id = idCache.uniqueId(axiom, from.getId() + ".restrictsCardinality." + getLocalName(axiom.getProperty()));
 		final OmlLabel l = newLeafSElement(OmlLabel.class, id + ".label", OmlDiagramModule.SLabel_RestrictsLabelView);
 		final String notation;
@@ -418,7 +413,7 @@ class OmlOntologyDiagramView {
 		return e;
 	}
 
-	public OmlEdge createEdge(final RelationRangeRestrictionAxiom axiom, final SModelElement from, final SModelElement to) {
+	public OmlEdge createEdge(final PropertyRangeRestrictionAxiom axiom, final SModelElement from, final SModelElement to) {
 		final String id = idCache.uniqueId(axiom, from.getId() + ".restrictsRange." + getLocalName(axiom.getProperty()));
 		final OmlLabel l = newLeafSElement(OmlLabel.class, id + ".label", OmlDiagramModule.SLabel_RestrictsLabelView);
 		final String notation = (axiom.getKind() == RangeRestrictionKind.ALL) ? "∀" : "∃";
@@ -428,7 +423,7 @@ class OmlOntologyDiagramView {
 		return e;
 	}
 
-	public OmlEdge createEdge(final RelationValueRestrictionAxiom axiom, final SModelElement from, final SModelElement to) {
+	public OmlEdge createEdge(final PropertyValueRestrictionAxiom axiom, final SModelElement from, final SModelElement to) {
 		final String id = idCache.uniqueId(axiom, from.getId() + ".restrictsTarget." + getLocalName(axiom.getProperty()));
 		final OmlLabel l = newLeafSElement(OmlLabel.class, id + ".label", OmlDiagramModule.SLabel_RestrictsLabelView);
 		l.setText(getLocalName(axiom.getProperty()) + " ⊂ ");
@@ -549,6 +544,16 @@ class OmlOntologyDiagramView {
 		return c;
 	}
 
+	private String getLabel(final Element element) {
+		if (element instanceof Literal)
+			return OmlRead.getLexicalValue((Literal)element);
+		else if (element instanceof StructureInstance)
+			return ((StructureInstance) element).getType().getName();
+		else if (element instanceof NamedInstance)
+			return getLocalName((NamedInstance)element);
+		return "";
+	}
+	
 	private String getLocalName(final Element element) {
 		if (element instanceof Ontology) {
 			return OmlRead.getPrefixIn(((Ontology) element), ontology);

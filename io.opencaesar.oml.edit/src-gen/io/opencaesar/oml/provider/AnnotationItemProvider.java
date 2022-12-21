@@ -171,7 +171,7 @@ public class AnnotationItemProvider extends ElementItemProvider {
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(OmlPackage.Literals.ANNOTATION__VALUE);
+			childrenFeatures.add(OmlPackage.Literals.ANNOTATION__LITERAL_VALUE);
 		}
 		return childrenFeatures;
 	}
@@ -224,7 +224,7 @@ public class AnnotationItemProvider extends ElementItemProvider {
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Annotation.class)) {
-			case OmlPackage.ANNOTATION__VALUE:
+			case OmlPackage.ANNOTATION__LITERAL_VALUE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -244,27 +244,27 @@ public class AnnotationItemProvider extends ElementItemProvider {
 
 		newChildDescriptors.add
 			(createChildParameter
-				(OmlPackage.Literals.ANNOTATION__VALUE,
+				(OmlPackage.Literals.ANNOTATION__LITERAL_VALUE,
 				 OmlFactory.eINSTANCE.createQuotedLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(OmlPackage.Literals.ANNOTATION__VALUE,
+				(OmlPackage.Literals.ANNOTATION__LITERAL_VALUE,
 				 OmlFactory.eINSTANCE.createIntegerLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(OmlPackage.Literals.ANNOTATION__VALUE,
+				(OmlPackage.Literals.ANNOTATION__LITERAL_VALUE,
 				 OmlFactory.eINSTANCE.createDecimalLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(OmlPackage.Literals.ANNOTATION__VALUE,
+				(OmlPackage.Literals.ANNOTATION__LITERAL_VALUE,
 				 OmlFactory.eINSTANCE.createDoubleLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(OmlPackage.Literals.ANNOTATION__VALUE,
+				(OmlPackage.Literals.ANNOTATION__LITERAL_VALUE,
 				 OmlFactory.eINSTANCE.createBooleanLiteral()));
 	}
 

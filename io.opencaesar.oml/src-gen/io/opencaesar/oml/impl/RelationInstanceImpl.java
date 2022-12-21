@@ -21,20 +21,14 @@ package io.opencaesar.oml.impl;
 import io.opencaesar.oml.NamedInstance;
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.RelationInstance;
-import io.opencaesar.oml.RelationTypeAssertion;
 
 import java.util.Collection;
-
-import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 
-import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
-import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -44,7 +38,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link io.opencaesar.oml.impl.RelationInstanceImpl#getOwnedTypes <em>Owned Types</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.RelationInstanceImpl#getSources <em>Sources</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.RelationInstanceImpl#getTargets <em>Targets</em>}</li>
  * </ul>
@@ -52,16 +45,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * @generated
  */
 public class RelationInstanceImpl extends NamedInstanceImpl implements RelationInstance {
-	/**
-	 * The cached value of the '{@link #getOwnedTypes() <em>Owned Types</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getOwnedTypes()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<RelationTypeAssertion> ownedTypes;
-
 	/**
 	 * The cached value of the '{@link #getSources() <em>Sources</em>}' reference list.
 	 * <!-- begin-user-doc -->
@@ -107,19 +90,6 @@ public class RelationInstanceImpl extends NamedInstanceImpl implements RelationI
 	 * @generated
 	 */
 	@Override
-	public EList<RelationTypeAssertion> getOwnedTypes() {
-		if (ownedTypes == null) {
-			ownedTypes = new EObjectContainmentWithInverseEList<RelationTypeAssertion>(RelationTypeAssertion.class, this, OmlPackage.RELATION_INSTANCE__OWNED_TYPES, OmlPackage.RELATION_TYPE_ASSERTION__OWNING_INSTANCE);
-		}
-		return ownedTypes;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EList<NamedInstance> getSources() {
 		if (sources == null) {
 			sources = new EObjectResolvingEList<NamedInstance>(NamedInstance.class, this, OmlPackage.RELATION_INSTANCE__SOURCES);
@@ -145,40 +115,9 @@ public class RelationInstanceImpl extends NamedInstanceImpl implements RelationI
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case OmlPackage.RELATION_INSTANCE__OWNED_TYPES:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedTypes()).basicAdd(otherEnd, msgs);
-		}
-		return super.eInverseAdd(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case OmlPackage.RELATION_INSTANCE__OWNED_TYPES:
-				return ((InternalEList<?>)getOwnedTypes()).basicRemove(otherEnd, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case OmlPackage.RELATION_INSTANCE__OWNED_TYPES:
-				return getOwnedTypes();
 			case OmlPackage.RELATION_INSTANCE__SOURCES:
 				return getSources();
 			case OmlPackage.RELATION_INSTANCE__TARGETS:
@@ -196,10 +135,6 @@ public class RelationInstanceImpl extends NamedInstanceImpl implements RelationI
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case OmlPackage.RELATION_INSTANCE__OWNED_TYPES:
-				getOwnedTypes().clear();
-				getOwnedTypes().addAll((Collection<? extends RelationTypeAssertion>)newValue);
-				return;
 			case OmlPackage.RELATION_INSTANCE__SOURCES:
 				getSources().clear();
 				getSources().addAll((Collection<? extends NamedInstance>)newValue);
@@ -220,9 +155,6 @@ public class RelationInstanceImpl extends NamedInstanceImpl implements RelationI
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case OmlPackage.RELATION_INSTANCE__OWNED_TYPES:
-				getOwnedTypes().clear();
-				return;
 			case OmlPackage.RELATION_INSTANCE__SOURCES:
 				getSources().clear();
 				return;
@@ -241,8 +173,6 @@ public class RelationInstanceImpl extends NamedInstanceImpl implements RelationI
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case OmlPackage.RELATION_INSTANCE__OWNED_TYPES:
-				return ownedTypes != null && !ownedTypes.isEmpty();
 			case OmlPackage.RELATION_INSTANCE__SOURCES:
 				return sources != null && !sources.isEmpty();
 			case OmlPackage.RELATION_INSTANCE__TARGETS:

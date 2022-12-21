@@ -28,22 +28,20 @@ import io.opencaesar.oml.Import;
 import io.opencaesar.oml.KeyAxiom;
 import io.opencaesar.oml.NamedInstance;
 import io.opencaesar.oml.Ontology;
-import io.opencaesar.oml.RelationCardinalityRestrictionAxiom;
+import io.opencaesar.oml.PropertyCardinalityRestrictionAxiom;
+import io.opencaesar.oml.PropertyRangeRestrictionAxiom;
+import io.opencaesar.oml.PropertyValueAssertion;
+import io.opencaesar.oml.PropertyValueRestrictionAxiom;
+import io.opencaesar.oml.Relation;
 import io.opencaesar.oml.RelationEntity;
 import io.opencaesar.oml.RelationInstance;
-import io.opencaesar.oml.RelationRangeRestrictionAxiom;
-import io.opencaesar.oml.RelationValueRestrictionAxiom;
 import io.opencaesar.oml.Rule;
 import io.opencaesar.oml.Scalar;
-import io.opencaesar.oml.ScalarPropertyCardinalityRestrictionAxiom;
-import io.opencaesar.oml.ScalarPropertyRangeRestrictionAxiom;
-import io.opencaesar.oml.ScalarPropertyValueAssertion;
-import io.opencaesar.oml.ScalarPropertyValueRestrictionAxiom;
+import io.opencaesar.oml.ScalarProperty;
+import io.opencaesar.oml.SemanticProperty;
 import io.opencaesar.oml.SpecializationAxiom;
 import io.opencaesar.oml.Structure;
-import io.opencaesar.oml.StructuredPropertyCardinalityRestrictionAxiom;
-import io.opencaesar.oml.StructuredPropertyRangeRestrictionAxiom;
-import io.opencaesar.oml.StructuredPropertyValueRestrictionAxiom;
+import io.opencaesar.oml.StructuredProperty;
 import io.opencaesar.oml.dsl.ide.diagram.model.OmlCompartment;
 import io.opencaesar.oml.dsl.ide.diagram.model.OmlEdge;
 import io.opencaesar.oml.dsl.ide.diagram.model.OmlGraph;
@@ -335,24 +333,33 @@ class OmlDiagramViewGenerator extends OmlSwitch<SModelElement> implements IDiagr
 			showAxiomInternal(e, (SpecializationAxiom) ax);
 		} else if (ax instanceof KeyAxiom) {
 			showAxiomInternal(e, (KeyAxiom) ax);
-		} else if (ax instanceof ScalarPropertyRangeRestrictionAxiom) {
-			showAxiomInternal(e, (ScalarPropertyRangeRestrictionAxiom) ax);
-		} else if (ax instanceof ScalarPropertyCardinalityRestrictionAxiom) {
-			showAxiomInternal(e, (ScalarPropertyCardinalityRestrictionAxiom) ax);
-		} else if (ax instanceof ScalarPropertyValueRestrictionAxiom) {
-			showAxiomInternal(e, (ScalarPropertyValueRestrictionAxiom) ax);
-		} else if (ax instanceof StructuredPropertyRangeRestrictionAxiom) {
-			showAxiomInternal(e, (StructuredPropertyRangeRestrictionAxiom) ax);
-		} else if (ax instanceof StructuredPropertyCardinalityRestrictionAxiom) {
-			showAxiomInternal(e, (StructuredPropertyCardinalityRestrictionAxiom) ax);
-		} else if (ax instanceof StructuredPropertyValueRestrictionAxiom) {
-			showAxiomInternal(e, (StructuredPropertyValueRestrictionAxiom) ax);
-		} else if (ax instanceof RelationRangeRestrictionAxiom) {
-			showAxiomInternal(e, (RelationRangeRestrictionAxiom) ax);
-		} else if (ax instanceof RelationCardinalityRestrictionAxiom) {
-			showAxiomInternal(e, (RelationCardinalityRestrictionAxiom) ax);
-		} else if (ax instanceof RelationValueRestrictionAxiom) {
-			showAxiomInternal(e, (RelationValueRestrictionAxiom) ax);
+		} else if (ax instanceof PropertyRangeRestrictionAxiom) {
+			PropertyRangeRestrictionAxiom axiom = (PropertyRangeRestrictionAxiom) ax;
+			SemanticProperty p = axiom.getProperty();
+			if (p instanceof ScalarProperty)
+				showScalarRangeAxiomInternal(e, axiom);
+			else if (p instanceof StructuredProperty)
+				showStructuredRangeAxiomInternal(e, axiom);
+			if (p instanceof Relation)
+				showRelationRangeAxiomInternal(e, axiom);
+		} else if (ax instanceof PropertyCardinalityRestrictionAxiom) {
+			PropertyCardinalityRestrictionAxiom axiom = (PropertyCardinalityRestrictionAxiom) ax;
+			SemanticProperty p = axiom.getProperty();
+			if (p instanceof ScalarProperty)
+				showScalarCardinalityAxiomInternal(e, axiom);
+			if (p instanceof StructuredProperty)
+				showStructuredCardinalityAxiomInternal(e, axiom);
+			if (p instanceof Relation)
+				showRelationCardinalityAxiomInternal(e, axiom);
+		} else if (ax instanceof PropertyValueRestrictionAxiom) {
+			PropertyValueRestrictionAxiom axiom = (PropertyValueRestrictionAxiom) ax;
+			SemanticProperty p = axiom.getProperty();
+			if (p instanceof ScalarProperty)
+				showScalarValueAxiomInternal(e, axiom);
+			if (p instanceof StructuredProperty)
+				showStructuredValueAxiomInternal(e, axiom);
+			if (p instanceof Relation)
+				showRelationValueAxiomInternal(e, axiom);
 		} else {
 			throw new IllegalArgumentException("showAxiom: unhandled case for entity: " + e.eClass().getName() + " and axiom: " + ax.eClass().getName());
 		}
@@ -384,7 +391,7 @@ class OmlDiagramViewGenerator extends OmlSwitch<SModelElement> implements IDiagr
 		traceAndMark(label, ax, context);
 	}
 
-	private void showAxiomInternal(final Entity e, final ScalarPropertyRangeRestrictionAxiom ax) {
+	private void showScalarRangeAxiomInternal(final Entity e, final PropertyRangeRestrictionAxiom ax) {
 		final SModelElement source = semantic2diagram.get(e);
 		if (null == source)
 			throw new IllegalArgumentException("no entity node for showAxiom(ScalarPropertyRangeRestrictionAxiom) " + e.getAbbreviatedIri());
@@ -393,40 +400,12 @@ class OmlDiagramViewGenerator extends OmlSwitch<SModelElement> implements IDiagr
 			compartment = view.createAxiomCompartment(e);
 			source.getChildren().add(compartment);
 		}
-		final OmlLabel label = view.createLabel(e, ax);
+		final OmlLabel label = view.createScalarRangeLabel(e, ax);
 		compartment.getChildren().add(label);
 		traceAndMark(label, ax, context);
 	}
 
-	private void showAxiomInternal(final Entity e, final ScalarPropertyCardinalityRestrictionAxiom ax) {
-		final SModelElement source = semantic2diagram.get(e);
-		if (null == source)
-			throw new IllegalArgumentException("no entity node for showAxiom(ScalarPropertyCardinalityRestrictionAxiom) " + e.getAbbreviatedIri());
-		OmlCompartment compartment = view.getAxiomCompartment(source);
-		if (null == compartment) {
-			compartment = view.createAxiomCompartment(e);
-			source.getChildren().add(compartment);
-		}
-		final OmlLabel label = view.createLabel(e, ax);
-		compartment.getChildren().add(label);
-		traceAndMark(label, ax, context);
-	}
-
-	private void showAxiomInternal(final Entity e, final ScalarPropertyValueRestrictionAxiom ax) {
-		final SModelElement source = semantic2diagram.get(e);
-		if (null == source)
-			throw new IllegalArgumentException("no entity node for showAxiom(ScalarPropertyValueRestrictionAxiom) " + e.getAbbreviatedIri());
-		OmlCompartment compartment = view.getAxiomCompartment(source);
-		if (null == compartment) {
-			compartment = view.createAxiomCompartment(e);
-			source.getChildren().add(compartment);
-		}
-		final OmlLabel label = view.createLabel(e, ax);
-		compartment.getChildren().add(label);
-		traceAndMark(label, ax, context);
-	}
-
-	private void showAxiomInternal(final Entity e, final StructuredPropertyRangeRestrictionAxiom ax) {
+	private void showStructuredRangeAxiomInternal(final Entity e, final PropertyRangeRestrictionAxiom ax) {
 		final SModelElement source = semantic2diagram.get(e);
 		if (null == source)
 			throw new IllegalArgumentException("no entity node for showAxiom(StructuredPropertyRangeRestrictionAxiom) " + e.getAbbreviatedIri());
@@ -435,40 +414,12 @@ class OmlDiagramViewGenerator extends OmlSwitch<SModelElement> implements IDiagr
 			compartment = view.createAxiomCompartment(e);
 			source.getChildren().add(compartment);
 		}
-		final OmlLabel label = view.createLabel(e, ax);
+		final OmlLabel label = view.createStructuredRangeLabel(e, ax);
 		compartment.getChildren().add(label);
 		traceAndMark(label, ax, context);
 	}
 
-	private void showAxiomInternal(final Entity e, final StructuredPropertyCardinalityRestrictionAxiom ax) {
-		final SModelElement source = semantic2diagram.get(e);
-		if (null == source)
-			throw new IllegalArgumentException("no entity node for showAxiom(StructuredPropertyCardinalityRestrictionAxiom) " + e.getAbbreviatedIri());
-		OmlCompartment compartment = view.getAxiomCompartment(source);
-		if (null == compartment) {
-			compartment = view.createAxiomCompartment(e);
-			source.getChildren().add(compartment);
-		}
-		final OmlLabel label = view.createLabel(e, ax);
-		compartment.getChildren().add(label);
-		traceAndMark(label, ax, context);
-	}
-
-	private void showAxiomInternal(final Entity e, final StructuredPropertyValueRestrictionAxiom ax) {
-		final SModelElement source = semantic2diagram.get(e);
-		if (null == source)
-			throw new IllegalArgumentException("no entity node for showAxiom(StructuredPropertyValueRestrictionAxiom) " + e.getAbbreviatedIri());
-		OmlCompartment compartment = view.getAxiomCompartment(source);
-		if (null == compartment) {
-			compartment = view.createAxiomCompartment(e);
-			source.getChildren().add(compartment);
-		}
-		final OmlLabel label = view.createLabel(e, ax);
-		compartment.getChildren().add(label);
-		traceAndMark(label, ax, context);
-	}
-
-	private void showAxiomInternal(final Entity e, final RelationRangeRestrictionAxiom ax) {
+	private void showRelationRangeAxiomInternal(final Entity e, final PropertyRangeRestrictionAxiom ax) {
 		final SModelElement source = semantic2diagram.get(e);
 		if (null == source)
 			throw new IllegalArgumentException("no entity node for showAxiom(RelationRangeRestrictionAxiom): " + e.getAbbreviatedIri());
@@ -480,7 +431,35 @@ class OmlDiagramViewGenerator extends OmlSwitch<SModelElement> implements IDiagr
 		traceAndMark(edge, ax, context);
 	}
 
-	private void showAxiomInternal(final Entity e, final RelationCardinalityRestrictionAxiom ax) {
+	private void showScalarCardinalityAxiomInternal(final Entity e, final PropertyCardinalityRestrictionAxiom ax) {
+		final SModelElement source = semantic2diagram.get(e);
+		if (null == source)
+			throw new IllegalArgumentException("no entity node for showAxiom(ScalarPropertyCardinalityRestrictionAxiom) " + e.getAbbreviatedIri());
+		OmlCompartment compartment = view.getAxiomCompartment(source);
+		if (null == compartment) {
+			compartment = view.createAxiomCompartment(e);
+			source.getChildren().add(compartment);
+		}
+		final OmlLabel label = view.createScalarCardinalityLabel(e, ax);
+		compartment.getChildren().add(label);
+		traceAndMark(label, ax, context);
+	}
+
+	private void showStructuredCardinalityAxiomInternal(final Entity e, final PropertyCardinalityRestrictionAxiom ax) {
+		final SModelElement source = semantic2diagram.get(e);
+		if (null == source)
+			throw new IllegalArgumentException("no entity node for showAxiom(StructuredPropertyCardinalityRestrictionAxiom) " + e.getAbbreviatedIri());
+		OmlCompartment compartment = view.getAxiomCompartment(source);
+		if (null == compartment) {
+			compartment = view.createAxiomCompartment(e);
+			source.getChildren().add(compartment);
+		}
+		final OmlLabel label = view.createStructuredCardinalityLabel(e, ax);
+		compartment.getChildren().add(label);
+		traceAndMark(label, ax, context);
+	}
+
+	private void showRelationCardinalityAxiomInternal(final Entity e, final PropertyCardinalityRestrictionAxiom ax) {
 		final SModelElement source = semantic2diagram.get(e);
 		if (null == source)
 			throw new IllegalArgumentException("no entity node for showAxiom(RelationCardinalityRestrictionAxiom): " + e.getAbbreviatedIri());
@@ -492,13 +471,41 @@ class OmlDiagramViewGenerator extends OmlSwitch<SModelElement> implements IDiagr
 		traceAndMark(edge, ax, context);
 	}
 
-	private void showAxiomInternal(final Entity e, final RelationValueRestrictionAxiom ax) {
+	private void showScalarValueAxiomInternal(final Entity e, final PropertyValueRestrictionAxiom ax) {
+		final SModelElement source = semantic2diagram.get(e);
+		if (null == source)
+			throw new IllegalArgumentException("no entity node for showAxiom(ScalarPropertyValueRestrictionAxiom) " + e.getAbbreviatedIri());
+		OmlCompartment compartment = view.getAxiomCompartment(source);
+		if (null == compartment) {
+			compartment = view.createAxiomCompartment(e);
+			source.getChildren().add(compartment);
+		}
+		final OmlLabel label = view.createScalarValueLabel(e, ax);
+		compartment.getChildren().add(label);
+		traceAndMark(label, ax, context);
+	}
+
+	private void showStructuredValueAxiomInternal(final Entity e, final PropertyValueRestrictionAxiom ax) {
+		final SModelElement source = semantic2diagram.get(e);
+		if (null == source)
+			throw new IllegalArgumentException("no entity node for showAxiom(StructuredPropertyValueRestrictionAxiom) " + e.getAbbreviatedIri());
+		OmlCompartment compartment = view.getAxiomCompartment(source);
+		if (null == compartment) {
+			compartment = view.createAxiomCompartment(e);
+			source.getChildren().add(compartment);
+		}
+		final OmlLabel label = view.createStructuredValueLabel(e, ax);
+		compartment.getChildren().add(label);
+		traceAndMark(label, ax, context);
+	}
+
+	private void showRelationValueAxiomInternal(final Entity e, final PropertyValueRestrictionAxiom ax) {
 		final SModelElement source = semantic2diagram.get(e);
 		if (null == source)
 			throw new IllegalArgumentException("no entity node for showAxiom(RelationTargetRestrictionAxiom): " + e.getAbbreviatedIri());
 		final SModelElement target = semantic2diagram.get(ax.getValue());
 		if (null == target)
-			throw new IllegalArgumentException("no entity node for showAxiom(RelationTargetRestrictionAxiom): " + ax.getValue().getAbbreviatedIri());
+			throw new IllegalArgumentException("no entity node for showAxiom(RelationTargetRestrictionAxiom): " + ax.getNamedInstanceValue().getAbbreviatedIri());
 		final OmlEdge edge = view.createEdge(ax, source, target);
 		frame.getChildren().add(edge);
 		traceAndMark(edge, ax, context);
@@ -537,9 +544,9 @@ class OmlDiagramViewGenerator extends OmlSwitch<SModelElement> implements IDiagr
 
 	private void addInstanceFeatures(final NamedInstance i, final OmlNode node) {
 		scope.instanceAssertions.get(i).forEach(a -> {
-			if (a instanceof ScalarPropertyValueAssertion) {
+			if (a instanceof PropertyValueAssertion) {
 				if (null == semantic2diagram.get(a)) {
-					ScalarPropertyValueAssertion ax = (ScalarPropertyValueAssertion) a;
+					PropertyValueAssertion ax = (PropertyValueAssertion) a;
 					OmlCompartment compartment = view.getPropertyCompartment(node);
 					if (null == compartment) {
 						compartment = view.createPropertyCompartment(i);

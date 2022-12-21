@@ -18,7 +18,6 @@
  */
 package io.opencaesar.oml;
 
-import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -34,7 +33,6 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  * <ul>
  *   <li>{@link io.opencaesar.oml.ConceptInstanceReference#getInstance <em>Instance</em>}</li>
- *   <li>{@link io.opencaesar.oml.ConceptInstanceReference#getOwnedTypes <em>Owned Types</em>}</li>
  * </ul>
  *
  * @see io.opencaesar.oml.OmlPackage#getConceptInstanceReference()
@@ -66,22 +64,5 @@ public interface ConceptInstanceReference extends NamedInstanceReference {
 	 * @generated
 	 */
 	void setInstance(ConceptInstance value);
-
-	/**
-	 * Returns the value of the '<em><b>Owned Types</b></em>' containment reference list.
-	 * The list contents are of type {@link io.opencaesar.oml.ConceptTypeAssertion}.
-	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.ConceptTypeAssertion#getOwningReference <em>Owning Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * The set of types added to the referenced concept instance
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Owned Types</em>' containment reference list.
-	 * @see io.opencaesar.oml.OmlPackage#getConceptInstanceReference_OwnedTypes()
-	 * @see io.opencaesar.oml.ConceptTypeAssertion#getOwningReference
-	 * @model opposite="owningReference" containment="true"
-	 * @generated
-	 */
-	EList<ConceptTypeAssertion> getOwnedTypes();
 
 } // ConceptInstanceReference

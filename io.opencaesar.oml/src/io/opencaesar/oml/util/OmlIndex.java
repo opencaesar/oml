@@ -43,7 +43,6 @@ import io.opencaesar.oml.Concept;
 import io.opencaesar.oml.ConceptInstance;
 import io.opencaesar.oml.ConceptInstanceReference;
 import io.opencaesar.oml.ConceptReference;
-import io.opencaesar.oml.ConceptTypeAssertion;
 import io.opencaesar.oml.Element;
 import io.opencaesar.oml.Entity;
 import io.opencaesar.oml.EnumeratedScalar;
@@ -51,46 +50,39 @@ import io.opencaesar.oml.EnumeratedScalarReference;
 import io.opencaesar.oml.FacetedScalar;
 import io.opencaesar.oml.FacetedScalarReference;
 import io.opencaesar.oml.KeyAxiom;
-import io.opencaesar.oml.LinkAssertion;
 import io.opencaesar.oml.NamedInstance;
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.Property;
+import io.opencaesar.oml.PropertyCardinalityRestrictionAxiom;
 import io.opencaesar.oml.PropertyPredicate;
+import io.opencaesar.oml.PropertyRangeRestrictionAxiom;
+import io.opencaesar.oml.PropertyRestrictionAxiom;
+import io.opencaesar.oml.PropertyValueAssertion;
+import io.opencaesar.oml.PropertyValueRestrictionAxiom;
 import io.opencaesar.oml.QuotedLiteral;
 import io.opencaesar.oml.Relation;
 import io.opencaesar.oml.RelationBase;
-import io.opencaesar.oml.RelationCardinalityRestrictionAxiom;
 import io.opencaesar.oml.RelationEntity;
 import io.opencaesar.oml.RelationEntityPredicate;
 import io.opencaesar.oml.RelationEntityReference;
 import io.opencaesar.oml.RelationInstance;
 import io.opencaesar.oml.RelationInstanceReference;
-import io.opencaesar.oml.RelationRangeRestrictionAxiom;
 import io.opencaesar.oml.RelationReference;
-import io.opencaesar.oml.RelationRestrictionAxiom;
-import io.opencaesar.oml.RelationTypeAssertion;
-import io.opencaesar.oml.RelationValueRestrictionAxiom;
 import io.opencaesar.oml.Rule;
 import io.opencaesar.oml.RuleReference;
 import io.opencaesar.oml.Scalar;
 import io.opencaesar.oml.ScalarProperty;
-import io.opencaesar.oml.ScalarPropertyCardinalityRestrictionAxiom;
-import io.opencaesar.oml.ScalarPropertyRangeRestrictionAxiom;
 import io.opencaesar.oml.ScalarPropertyReference;
-import io.opencaesar.oml.ScalarPropertyRestrictionAxiom;
-import io.opencaesar.oml.ScalarPropertyValueAssertion;
+import io.opencaesar.oml.SemanticProperty;
 import io.opencaesar.oml.SpecializableTerm;
 import io.opencaesar.oml.SpecializationAxiom;
 import io.opencaesar.oml.Structure;
 import io.opencaesar.oml.StructureInstance;
 import io.opencaesar.oml.StructureReference;
 import io.opencaesar.oml.StructuredProperty;
-import io.opencaesar.oml.StructuredPropertyCardinalityRestrictionAxiom;
-import io.opencaesar.oml.StructuredPropertyRangeRestrictionAxiom;
 import io.opencaesar.oml.StructuredPropertyReference;
-import io.opencaesar.oml.StructuredPropertyRestrictionAxiom;
-import io.opencaesar.oml.StructuredPropertyValueAssertion;
 import io.opencaesar.oml.Type;
+import io.opencaesar.oml.TypeAssertion;
 import io.opencaesar.oml.TypePredicate;
 
 /**
@@ -460,124 +452,52 @@ public class OmlIndex {
         return findInverseReferencers(specializedTerm, SpecializationAxiom.class, OmlPackage.Literals.SPECIALIZATION_AXIOM__SPECIALIZED_TERM);
     }
     
-    // ScalarPropertyRestrictionAxiom
+    // PropertyRestrictionAxiom
     
     /**
-     * Finds scalar property restriction axioms referencing the given scalar property
+     * Finds property restriction axioms referencing the given property
      * 
-     * @param property The referenced scalar property
-     * @return A list of referencing scalar property restriction axioms
+     * @param property The referenced property
+     * @return A list of referencing property restriction axioms
      */
-    public static List<ScalarPropertyRestrictionAxiom> findScalarPropertyRestrictionAxiomsWithProperty(ScalarProperty property) {
-        return findInverseReferencers(property, ScalarPropertyRestrictionAxiom.class, OmlPackage.Literals.SCALAR_PROPERTY_RESTRICTION_AXIOM__PROPERTY);
+    public static List<PropertyRestrictionAxiom> findPropertyRestrictionAxiomsWithProperty(Property property) {
+        return findInverseReferencers(property, PropertyRestrictionAxiom.class, OmlPackage.Literals.PROPERTY_RESTRICTION_AXIOM__PROPERTY);
     }
     
-    // ScalarPropertyRangeRestrictionAxiom
+    // PropertyRangeRestrictionAxiom
     
     /**
-     * Finds scalar property range restriction axioms referencing the given scalar as range
+     * Finds property range restriction axioms referencing the given range
      * 
-     * @param range The referenced scalar
-     * @return A list of referencing scalar property range restriction axioms
+     * @param range The given range
+     * @return A list of referencing property range restriction axioms
      */
-    public static List<ScalarPropertyRangeRestrictionAxiom> findScalarPropertyRangeRestrictionAxiomsWithRange(Scalar range) {
-        return findInverseReferencers(range, ScalarPropertyRangeRestrictionAxiom.class, OmlPackage.Literals.SCALAR_PROPERTY_RANGE_RESTRICTION_AXIOM__RANGE);
+    public static List<PropertyRangeRestrictionAxiom> findPropertyRangeRestrictionAxiomsWithRange(Type range) {
+        return findInverseReferencers(range, PropertyRangeRestrictionAxiom.class, OmlPackage.Literals.PROPERTY_RANGE_RESTRICTION_AXIOM__RANGE);
     }
     
-    // ScalarPropertyCardinalityRestrictionAxiom
+    // PropertyCardinalityRestrictionAxiom
     
     /**
-     * Finds scalar property cardinality restriction axioms referencing the given scalar as range
+     * Finds property cardinality restriction axioms referencing the given range
      * 
-     * @param range The referenced scalar
-     * @return A list of referencing scalar property cardinality restriction axioms
+     * @param range The given range
+     * @return A list of referencing property cardinality restriction axioms
      */
-    public static List<ScalarPropertyCardinalityRestrictionAxiom> findScalarPropertyCardinalityRestrictionAxiomsWithRange(Scalar range) {
-        return findInverseReferencers(range, ScalarPropertyCardinalityRestrictionAxiom.class, OmlPackage.Literals.SCALAR_PROPERTY_CARDINALITY_RESTRICTION_AXIOM__RANGE);
+    public static List<PropertyCardinalityRestrictionAxiom> findPropertyCardinalityRestrictionAxiomsWithRange(Type range) {
+        return findInverseReferencers(range, PropertyCardinalityRestrictionAxiom.class, OmlPackage.Literals.PROPERTY_CARDINALITY_RESTRICTION_AXIOM__RANGE);
     }
     
-    // StructuredPropertyRestrictionAxiom
+    // PropertyValueRestrictionAxiom
     
     /**
-     * Finds structured property restriction axioms referencing the given structured property
+     * Finds property value restriction axioms referencing the given named instance as a value
      * 
-     * @param property The referenced structured property
-     * @return A list of referencing structure property restriction axioms
+     * @param value The given named instance value
+     * @return A list of referencing property value restriction axioms
      */
-    public static List<StructuredPropertyRestrictionAxiom> findStructuredPropertyRestrictionAxiomsWithProperty(StructuredProperty property) {
-        return findInverseReferencers(property, StructuredPropertyRestrictionAxiom.class, OmlPackage.Literals.STRUCTURED_PROPERTY_RESTRICTION_AXIOM__PROPERTY);
-    }
-    
-    // StructuredPropertyRangeRestrictionAxiom
-    
-    /**
-     * Finds structured property range restriction axioms referencing the given structure as range
-     * 
-     * @param range The referenced structure
-     * @return A list of referencing structured property range restriction axioms
-     */
-    public static List<StructuredPropertyRangeRestrictionAxiom> findStructuredPropertyRangeRestrictionAxiomsWithRange(Structure range) {
-        return findInverseReferencers(range, StructuredPropertyRangeRestrictionAxiom.class, OmlPackage.Literals.STRUCTURED_PROPERTY_RANGE_RESTRICTION_AXIOM__RANGE);
-    }
-    
-    // StructuredPropertyCardinalityRestrictionAxiom
-    
-    /**
-     * Finds structured property cardinality restriction axioms referencing the given structure as range
-     * 
-     * @param range The referenced structure
-     * @return A list of referencing structured property cardinality restriction axioms
-     */
-    public static List<StructuredPropertyCardinalityRestrictionAxiom> findStructuredPropertyCardinalityRestrictionAxiomsWithRange(Structure range) {
-        return findInverseReferencers(range, StructuredPropertyCardinalityRestrictionAxiom.class, OmlPackage.Literals.STRUCTURED_PROPERTY_CARDINALITY_RESTRICTION_AXIOM__RANGE);
-    }
-    
-    // RelationRestrictionAxiom
-    
-    /**
-     * Finds relation restriction axioms referencing the given relation
-     * 
-     * @param relation The referenced relation
-     * @return A list of referencing relation restriction axioms
-     */
-    public static List<RelationRestrictionAxiom> findRelationRestrictionAxiomsWithProperty(Relation relation) {
-        return findInverseReferencers(relation, RelationRestrictionAxiom.class, OmlPackage.Literals.RELATION_RESTRICTION_AXIOM__PROPERTY);
-    }
-    
-    // RelationRangeRestrictionAxiom
-    
-    /**
-     * Finds relation range restriction axioms referencing the given restricted range
-     * 
-     * @param range The restricted range
-     * @return A list of referencing relation range restriction axioms
-     */
-    public static List<RelationRangeRestrictionAxiom> findRelationRangeRestrictionAxiomsWithRange(Entity range) {
-        return findInverseReferencers(range, RelationRangeRestrictionAxiom.class, OmlPackage.Literals.RELATION_RANGE_RESTRICTION_AXIOM__RANGE);
-    }
-    
-    // RelationCardinalityRestrictionAxiom
-    
-    /**
-     * Finds relation cardinality restriction axioms referencing the given restricted range
-     * 
-     * @param range The referenced entity
-     * @return A list of referencing relation cardinality restriction axioms
-     */
-    public static List<RelationCardinalityRestrictionAxiom> findRelationCardinalityRestrictionAxiomsWithRange(Entity range) {
-        return findInverseReferencers(range, RelationCardinalityRestrictionAxiom.class, OmlPackage.Literals.RELATION_CARDINALITY_RESTRICTION_AXIOM__RANGE);
-    }
-    
-    // RelationValueRestrictionAxiom
-    
-    /**
-     * Finds relation value restriction axioms referencing the given named instance as a value
-     * 
-     * @param value The referenced named instance value
-     * @return A list of referencing relation value restriction axioms
-     */
-    public static List<RelationValueRestrictionAxiom> findRelationValueRestrictionAxiomsWithValue(NamedInstance value) {
-        return findInverseReferencers(value, RelationValueRestrictionAxiom.class, OmlPackage.Literals.RELATION_VALUE_RESTRICTION_AXIOM__VALUE);
+    public static List<PropertyValueRestrictionAxiom> findPropertyValueRestrictionAxiomsWithNamedInstanceValue(NamedInstance value) {
+        return findInverseReferencers(value, PropertyValueRestrictionAxiom.class, OmlPackage.Literals.PROPERTY_VALUE_RESTRICTION_AXIOM__NAMED_INSTANCE_VALUE);
     }
     
     // KeyAxiom
@@ -592,74 +512,38 @@ public class OmlIndex {
         return findInverseReferencers(property, KeyAxiom.class, OmlPackage.Literals.KEY_AXIOM__PROPERTIES);
     }
     
-    // ConceptTypeAssertion
+    // TypeAssertion
     
     /**
-     * Finds concept type assertions referencing the given concept
+     * Finds type assertions referencing the given type
      * 
-     * @param type The referenced concept
-     * @return A list of referencing concept type assertions
+     * @param type The referenced type
+     * @return A list of referencing type assertions
      */
-    public static List<ConceptTypeAssertion> findConceptTypeAssertionsWithType(Concept type) {
-        return findInverseReferencers(type, ConceptTypeAssertion.class, OmlPackage.Literals.CONCEPT_TYPE_ASSERTION__TYPE);
+    public static List<TypeAssertion> findTypeAssertionsWithType(Entity type) {
+        return findInverseReferencers(type, TypeAssertion.class, OmlPackage.Literals.TYPE_ASSERTION__TYPE);
     }
-    
-    // RelationTypeAssertion
-    
-    /**
-     * Finds relation type assertions referencing the given relation
-     * 
-     * @param type The referenced relation
-     * @return A list of referencing relation type assertions
-     */
-    public static List<RelationTypeAssertion> findRelationTypeAssertionsWithType(RelationEntity type) {
-        return findInverseReferencers(type, RelationTypeAssertion.class, OmlPackage.Literals.RELATION_TYPE_ASSERTION__TYPE);
-    }
-    
-    // ScalarPropertyValueAssertion
+        
+    // PropertyValueAssertion
     
     /**
-     * Finds scalar property value assertions referencing the given scalar property
+     * Finds property value assertions referencing the given property
      * 
-     * @param property The referenced scalar property
-     * @return A list of referencing scalar property value assertions
+     * @param property The referenced property
+     * @return A list of referencing property value assertions
      */
-    public static List<ScalarPropertyValueAssertion> findScalarPropertyValueAssertionsWithProperty(ScalarProperty property) {
-        return findInverseReferencers(property, ScalarPropertyValueAssertion.class, OmlPackage.Literals.SCALAR_PROPERTY_VALUE_ASSERTION__PROPERTY);
-    }
-    
-    // StructuredPropertyValueAssertion
-    
-    /**
-     * Finds structured property value assertions referencing the given structured property
-     * 
-     * @param property The referenced structured property
-     * @return A list of referencing structured property value assertions
-     */
-    public static List<StructuredPropertyValueAssertion> findStructuredPropertyValueAssertionsWithProperty(StructuredProperty property) {
-        return findInverseReferencers(property, StructuredPropertyValueAssertion.class, OmlPackage.Literals.STRUCTURED_PROPERTY_VALUE_ASSERTION__PROPERTY);
-    }
-    
-    // LinkAssertion
-    
-    /**
-     * Finds link assertions referencing the given relation
-     * 
-     * @param property The referenced (relation) property
-     * @return A list of referencing link assertions
-     */
-    public static List<LinkAssertion> findLinkAssertionsWithProperty(Relation property) {
-        return findInverseReferencers(property, LinkAssertion.class, OmlPackage.Literals.LINK_ASSERTION__PROPERTY);
+    public static List<PropertyValueAssertion> findPropertyValueAssertionsWithProperty(SemanticProperty property) {
+        return findInverseReferencers(property, PropertyValueAssertion.class, OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__PROPERTY);
     }
     
     /**
-     * Finds link assertions referencing the given named instance as a value
+     * Finds property value assertions referencing the given named instance as a value
      * 
      * @param value The referenced named instance value
-     * @return A list of referencing link assertions
+     * @return A list of referencing property value assertions
      */
-    public static List<LinkAssertion> findLinkAssertionsWithValue(NamedInstance value) {
-        return findInverseReferencers(value, LinkAssertion.class, OmlPackage.Literals.LINK_ASSERTION__VALUE);
+    public static List<PropertyValueAssertion> findPropertyValueAssertionsWithNamedInstanceValue(NamedInstance value) {
+        return findInverseReferencers(value, PropertyValueAssertion.class, OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__NAMED_INSTANCE_VALUE);
     }
     
     // TypePredicate
