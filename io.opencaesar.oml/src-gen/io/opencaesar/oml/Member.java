@@ -47,7 +47,7 @@ public interface Member extends IdentifiedElement {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The name of this member, which is unique within its ontology's namespace
+	 * A unique name for the member within its ontology
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)

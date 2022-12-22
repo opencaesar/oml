@@ -1199,14 +1199,14 @@ public class OmlWrite {
      * @param vocabulary the context vocabulary
      * @param entity the given relation entity
      * @param variable1 the name of a variable bound to a named instance representing the source of a relation entity
-     * @param entityVariable the name of a variable bound to an instance of the relation entity
+     * @param variable the name of a variable bound to an instance of the relation entity
      * @param variable2 the name of a variable bound to a named instance representing the target of a relation entity
      * @return a relation entity predicate
      */
-    public static RelationEntityPredicate createRelationEntityPredicate(Vocabulary vocabulary, RelationEntity entity, String variable1, String entityVariable, String variable2) {
+    public static RelationEntityPredicate createRelationEntityPredicate(Vocabulary vocabulary, RelationEntity entity, String variable1, String variable, String variable2) {
         final RelationEntityPredicate predicate = create(RelationEntityPredicate.class);
         predicate.setVariable1(variable1);
-        predicate.setEntityVariable(entityVariable);
+        predicate.setVariable(variable);
         predicate.setVariable2(variable2);
         setCrossReference(vocabulary, predicate, OmlPackage.Literals.RELATION_ENTITY_PREDICATE__ENTITY, entity);
         return predicate;

@@ -46,6 +46,8 @@ import io.opencaesar.oml.EnumeratedScalar;
 import io.opencaesar.oml.Extension;
 import io.opencaesar.oml.FacetedScalar;
 import io.opencaesar.oml.Inclusion;
+import io.opencaesar.oml.Instance;
+import io.opencaesar.oml.Literal;
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.Ontology;
 import io.opencaesar.oml.PropertyCardinalityRestrictionAxiom;
@@ -677,12 +679,11 @@ public final class OmlValidator2 {
      */
     protected boolean validatePropertyValueRestrictionAxiomSubject(PropertyValueAssertion object, DiagnosticChain diagnostics, Map<Object, Object> context) {
         final var theSubject = OmlRead.getSubject(object);
-        final var allSubjectTypes = OmlSearch.findAllTypes(theSubject);
         final SemanticProperty property = object.getProperty();
         final Classifier domainType = property.getDomain();
-        if (!allSubjectTypes.contains(domainType)) {
+        if (!OmlSearch.findIsKindOf(theSubject, domainType)) {
         	return report(Diagnostic.WARNING, diagnostics, object,
-                "Property "+object.getProperty().getAbbreviatedIri()+" has a domain that is not the same as or a super type of the assertion's subject",
+                "Property "+property.getAbbreviatedIri()+" has a domain that is not the same as or a super type of the assertion's subject",
                 OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__PROPERTY);
         }
         return true;
@@ -698,15 +699,19 @@ public final class OmlValidator2 {
      */
     protected boolean validatePropertyValueRestrictionAxiomObject(PropertyValueAssertion object, DiagnosticChain diagnostics, Map<Object, Object> context) {
         final var theObject = OmlRead.getObject(object);
-        final var allObjectTypes = OmlSearch.findAllTypes(theObject);
         final SemanticProperty property = object.getProperty();
-        final Type rangeType = property.getRange();
-        if (!allObjectTypes.contains(rangeType)) {
-        	return report(Diagnostic.WARNING, diagnostics, object,
-                "Property "+object.getProperty().getAbbreviatedIri()+" has a range that is not the same as or a super type of the assertion's object",
-                OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__PROPERTY);
+        if (property instanceof ScalarProperty) {
+        	if (theObject instanceof Literal && OmlSearch.findIsKindOf((Literal)theObject, (Scalar)property.getRange())) {
+        		return true;
+        	}
+        } else {
+        	if (theObject instanceof Instance && OmlSearch.findIsKindOf((Instance)theObject, (Classifier)property.getRange())) {
+        		return true;
+        	}
         }
-        return true;
+    	return report(Diagnostic.WARNING, diagnostics, object,
+            "Property "+property.getAbbreviatedIri()+" has a range that is not the same as or a super type of the assertion's value",
+            OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__PROPERTY);
     }
 
     /**

@@ -72,7 +72,6 @@ import io.opencaesar.oml.Structure;
 import io.opencaesar.oml.StructureInstance;
 import io.opencaesar.oml.StructuredProperty;
 import io.opencaesar.oml.Term;
-import io.opencaesar.oml.Type;
 import io.opencaesar.oml.TypeAssertion;
 import io.opencaesar.oml.UnreifiedRelation;
 
@@ -86,36 +85,6 @@ public final class OmlSearch extends OmlIndex {
     //-------------------------------------------------
     // ONTOLOGIES
     //-------------------------------------------------
-
-    /**
-     * Finds the types that are direct types of the given (literal or instance) element
-     * 
-     * @param element the given element
-     * @return a list of classifiers that are direct types of the given element
-     */
-    public static List<Type> findTypes(Element element) {
-    	List<Type> types = new ArrayList<>();
-    	if (element instanceof Literal) {
-    		types.add(OmlRead.getType((Literal)element));
-    	} else if (element instanceof Instance)
-    		types.addAll(findTypes((Instance)element));
-        return types;
-    }
-    
-    /**
-     * Finds classifiers that are direct or indirect types of the given element
-     * 
-     * @param element the given element
-     * @return a list of classifiers that are direct or indirect types of the given element
-     */
-    public static List<Type> findAllTypes(Element element) {
-    	List<Type> types = new ArrayList<>();
-    	if (element instanceof Literal) {
-    		types.addAll(findAllTypes((Literal)element));
-    	} else if (element instanceof Instance)
-    		types.addAll(findAllTypes((Instance)element));
-        return types;
-    }
 
     /**
      * Finds references to the given member
@@ -839,4 +808,39 @@ public final class OmlSearch extends OmlIndex {
         return types;
     }
 
+    /**
+     * Finds if the given literal is typed directly by the given type
+     * 
+     * @param literal the given literal
+     * @param type the given type
+     * @return true if the given literal is typed directly by the given type; otherwise false
+     */
+    public static boolean findIsTypeOf(Literal literal, Scalar type) {
+    	if (type instanceof EnumeratedScalar) {
+    		final String lexical = OmlRead.getStringValue(literal);
+    		if ((!((EnumeratedScalar)type).getLiterals().stream().anyMatch(i -> OmlRead.getStringValue(i).equals(lexical)))) {
+    			return false;
+    		}
+    		type = (Scalar) OmlRead.getSuperTerms(type).get(0);// scalars have one supertype
+    	}
+        return type == OmlRead.getType(literal);
+    }
+
+    /**
+     * Finds if the given literal is typed directly or transitively by the given type
+     * 
+     * @param literal the given literal
+     * @param type the given type
+     * @return true if the given literal is typed directly or transitively by the given type; otherwise false
+     */
+    public static boolean findIsKindOf(Literal literal, Scalar type) {
+    	if (type instanceof EnumeratedScalar) {
+    		final String lexical = OmlRead.getStringValue(literal);
+    		if (!(((EnumeratedScalar)type).getLiterals().stream().anyMatch(i -> OmlRead.getStringValue(i).equals(lexical)))) {
+    			return false;
+    		}
+    		type = (Scalar) OmlRead.getSuperTerms(type).get(0);// scalars have one supertype
+    	}
+        return findAllTypes(literal).contains(type);
+    }
 }

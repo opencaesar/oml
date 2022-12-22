@@ -39,7 +39,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * <!-- end-user-doc -->
  * @generated
  */
-public class RelationEntityPredicateItemProvider extends BinaryPredicateItemProvider {
+public class RelationEntityPredicateItemProvider extends UnaryPredicateItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
@@ -61,10 +61,78 @@ public class RelationEntityPredicateItemProvider extends BinaryPredicateItemProv
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addVariable1PropertyDescriptor(object);
+			addVariable2PropertyDescriptor(object);
+			addInstance2PropertyDescriptor(object);
 			addEntityPropertyDescriptor(object);
-			addEntityVariablePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Variable1 feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addVariable1PropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_BinaryPredicate_variable1_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_BinaryPredicate_variable1_feature", "_UI_BinaryPredicate_type"),
+				 OmlPackage.Literals.BINARY_PREDICATE__VARIABLE1,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Variable2 feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addVariable2PropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_BinaryPredicate_variable2_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_BinaryPredicate_variable2_feature", "_UI_BinaryPredicate_type"),
+				 OmlPackage.Literals.BINARY_PREDICATE__VARIABLE2,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Instance2 feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addInstance2PropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_BinaryPredicate_instance2_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_BinaryPredicate_instance2_feature", "_UI_BinaryPredicate_type"),
+				 OmlPackage.Literals.BINARY_PREDICATE__INSTANCE2,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
 	}
 
 	/**
@@ -90,28 +158,6 @@ public class RelationEntityPredicateItemProvider extends BinaryPredicateItemProv
 	}
 
 	/**
-	 * This adds a property descriptor for the Entity Variable feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addEntityVariablePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_RelationEntityPredicate_entityVariable_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_RelationEntityPredicate_entityVariable_feature", "_UI_RelationEntityPredicate_type"),
-				 OmlPackage.Literals.RELATION_ENTITY_PREDICATE__ENTITY_VARIABLE,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
 	 * This returns RelationEntityPredicate.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -130,7 +176,7 @@ public class RelationEntityPredicateItemProvider extends BinaryPredicateItemProv
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((RelationEntityPredicate)object).getVariable1();
+		String label = ((RelationEntityPredicate)object).getVariable();
 		return label == null || label.length() == 0 ?
 			getString("_UI_RelationEntityPredicate_type") :
 			getString("_UI_RelationEntityPredicate_type") + " " + label;
@@ -149,7 +195,8 @@ public class RelationEntityPredicateItemProvider extends BinaryPredicateItemProv
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(RelationEntityPredicate.class)) {
-			case OmlPackage.RELATION_ENTITY_PREDICATE__ENTITY_VARIABLE:
+			case OmlPackage.RELATION_ENTITY_PREDICATE__VARIABLE1:
+			case OmlPackage.RELATION_ENTITY_PREDICATE__VARIABLE2:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

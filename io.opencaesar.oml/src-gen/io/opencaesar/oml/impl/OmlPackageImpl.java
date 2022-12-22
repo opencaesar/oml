@@ -2943,16 +2943,6 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getRelationEntityPredicate_EntityVariable() {
-		return (EAttribute)relationEntityPredicateEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EClass getPropertyPredicate() {
 		return propertyPredicateEClass;
 	}
@@ -3863,7 +3853,6 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 
 		relationEntityPredicateEClass = createEClass(RELATION_ENTITY_PREDICATE);
 		createEReference(relationEntityPredicateEClass, RELATION_ENTITY_PREDICATE__ENTITY);
-		createEAttribute(relationEntityPredicateEClass, RELATION_ENTITY_PREDICATE__ENTITY_VARIABLE);
 
 		propertyPredicateEClass = createEClass(PROPERTY_PREDICATE);
 		createEReference(propertyPredicateEClass, PROPERTY_PREDICATE__PROPERTY);
@@ -4060,6 +4049,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		unaryPredicateEClass.getESuperTypes().add(this.getPredicate());
 		binaryPredicateEClass.getESuperTypes().add(this.getPredicate());
 		typePredicateEClass.getESuperTypes().add(this.getUnaryPredicate());
+		relationEntityPredicateEClass.getESuperTypes().add(this.getUnaryPredicate());
 		relationEntityPredicateEClass.getESuperTypes().add(this.getBinaryPredicate());
 		propertyPredicateEClass.getESuperTypes().add(this.getBinaryPredicate());
 		sameAsPredicateEClass.getESuperTypes().add(this.getBinaryPredicate());
@@ -4414,7 +4404,6 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 
 		initEClass(relationEntityPredicateEClass, RelationEntityPredicate.class, "RelationEntityPredicate", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getRelationEntityPredicate_Entity(), this.getRelationEntity(), null, "entity", null, 1, 1, RelationEntityPredicate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getRelationEntityPredicate_EntityVariable(), this.getID(), "entityVariable", null, 1, 1, RelationEntityPredicate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(propertyPredicateEClass, PropertyPredicate.class, "PropertyPredicate", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPropertyPredicate_Property(), this.getProperty(), null, "property", null, 1, 1, PropertyPredicate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -4545,7 +4534,6 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		   new String[] {
 			   "Elements", "",
 			   "Literals", "",
-			   "Ontologies", "",
 			   "Vocabularies", "",
 			   "Types", "",
 			   "Properties", "",
@@ -4554,7 +4542,8 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 			   "Descriptions", "",
 			   "Instances", "",
 			   "Assertions", "",
-			   "References", ""
+			   "References", "",
+			   "Enumerations", ""
 		   });
 	}
 
@@ -5116,19 +5105,19 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		  (separatorKindEEnum,
 		   source,
 		   new String[] {
-			   "heading", "Elements"
+			   "heading", "Enumerations"
 		   });
 		addAnnotation
 		  (rangeRestrictionKindEEnum,
 		   source,
 		   new String[] {
-			   "heading", "Axioms"
+			   "heading", "Enumerations"
 		   });
 		addAnnotation
 		  (cardinalityRestrictionKindEEnum,
 		   source,
 		   new String[] {
-			   "heading", "Axioms"
+			   "heading", "Enumerations"
 		   });
 	}
 

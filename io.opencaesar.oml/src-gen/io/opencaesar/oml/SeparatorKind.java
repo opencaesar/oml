@@ -34,7 +34,7 @@ import org.eclipse.emf.common.util.Enumerator;
  * be only of two values: a hash '#' or a slash '/'.
  * <!-- end-model-doc -->
  * @see io.opencaesar.oml.OmlPackage#getSeparatorKind()
- * @model annotation="https://tabatkins.github.io/bikeshed heading='Elements'"
+ * @model annotation="https://tabatkins.github.io/bikeshed heading='Enumerations'"
  * @generated
  */
 public enum SeparatorKind implements Enumerator {

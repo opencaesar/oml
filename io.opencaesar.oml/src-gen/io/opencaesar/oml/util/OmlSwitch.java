@@ -765,6 +765,7 @@ public class OmlSwitch<T> extends Switch<T> {
 			case OmlPackage.RELATION_ENTITY_PREDICATE: {
 				RelationEntityPredicate relationEntityPredicate = (RelationEntityPredicate)theEObject;
 				T result = caseRelationEntityPredicate(relationEntityPredicate);
+				if (result == null) result = caseUnaryPredicate(relationEntityPredicate);
 				if (result == null) result = caseBinaryPredicate(relationEntityPredicate);
 				if (result == null) result = casePredicate(relationEntityPredicate);
 				if (result == null) result = caseElement(relationEntityPredicate);

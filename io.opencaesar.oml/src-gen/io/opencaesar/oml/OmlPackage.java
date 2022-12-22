@@ -44,7 +44,7 @@ import org.eclipse.emf.ecore.EReference;
  * <!-- end-model-doc -->
  * @see io.opencaesar.oml.OmlFactory
  * @model kind="package"
- *        annotation="https://tabatkins.github.io/bikeshed/headings Elements='' Literals='' Ontologies='' Vocabularies='' Types='' Properties='' Rules='' Axioms='' Descriptions='' Instances='' Assertions='' References=''"
+ *        annotation="https://tabatkins.github.io/bikeshed/headings Elements='' Literals='' Vocabularies='' Types='' Properties='' Rules='' Axioms='' Descriptions='' Instances='' Assertions='' References='' Enumerations=''"
  *        annotation="https://tabatkins.github.io/bikeshed heading='Abstract-Syntax'"
  *        annotation="http://www.eclipse.org/emf/2011/Xcore Bikeshed='https://tabatkins.github.io/bikeshed' BikeshedHeadings='https://tabatkins.github.io/bikeshed/headings'"
  * @generated
@@ -6606,7 +6606,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_ENTITY_PREDICATE__ANTECEDENT_RULE = BINARY_PREDICATE__ANTECEDENT_RULE;
+	int RELATION_ENTITY_PREDICATE__ANTECEDENT_RULE = UNARY_PREDICATE__ANTECEDENT_RULE;
 
 	/**
 	 * The feature id for the '<em><b>Consequent Rule</b></em>' container reference.
@@ -6615,7 +6615,16 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_ENTITY_PREDICATE__CONSEQUENT_RULE = BINARY_PREDICATE__CONSEQUENT_RULE;
+	int RELATION_ENTITY_PREDICATE__CONSEQUENT_RULE = UNARY_PREDICATE__CONSEQUENT_RULE;
+
+	/**
+	 * The feature id for the '<em><b>Variable</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_ENTITY_PREDICATE__VARIABLE = UNARY_PREDICATE__VARIABLE;
 
 	/**
 	 * The feature id for the '<em><b>Variable1</b></em>' attribute.
@@ -6624,7 +6633,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_ENTITY_PREDICATE__VARIABLE1 = BINARY_PREDICATE__VARIABLE1;
+	int RELATION_ENTITY_PREDICATE__VARIABLE1 = UNARY_PREDICATE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Variable2</b></em>' attribute.
@@ -6633,7 +6642,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_ENTITY_PREDICATE__VARIABLE2 = BINARY_PREDICATE__VARIABLE2;
+	int RELATION_ENTITY_PREDICATE__VARIABLE2 = UNARY_PREDICATE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Instance2</b></em>' reference.
@@ -6642,7 +6651,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_ENTITY_PREDICATE__INSTANCE2 = BINARY_PREDICATE__INSTANCE2;
+	int RELATION_ENTITY_PREDICATE__INSTANCE2 = UNARY_PREDICATE_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Entity</b></em>' reference.
@@ -6651,16 +6660,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_ENTITY_PREDICATE__ENTITY = BINARY_PREDICATE_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Entity Variable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RELATION_ENTITY_PREDICATE__ENTITY_VARIABLE = BINARY_PREDICATE_FEATURE_COUNT + 1;
+	int RELATION_ENTITY_PREDICATE__ENTITY = UNARY_PREDICATE_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Relation Entity Predicate</em>' class.
@@ -6669,7 +6669,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_ENTITY_PREDICATE_FEATURE_COUNT = BINARY_PREDICATE_FEATURE_COUNT + 2;
+	int RELATION_ENTITY_PREDICATE_FEATURE_COUNT = UNARY_PREDICATE_FEATURE_COUNT + 4;
 
 	/**
 	 * The operation id for the '<em>Extra Validate</em>' operation.
@@ -6678,7 +6678,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_ENTITY_PREDICATE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = BINARY_PREDICATE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+	int RELATION_ENTITY_PREDICATE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = UNARY_PREDICATE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
@@ -6687,7 +6687,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_ENTITY_PREDICATE___GET_ONTOLOGY = BINARY_PREDICATE___GET_ONTOLOGY;
+	int RELATION_ENTITY_PREDICATE___GET_ONTOLOGY = UNARY_PREDICATE___GET_ONTOLOGY;
 
 	/**
 	 * The number of operations of the '<em>Relation Entity Predicate</em>' class.
@@ -6696,7 +6696,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_ENTITY_PREDICATE_OPERATION_COUNT = BINARY_PREDICATE_OPERATION_COUNT + 0;
+	int RELATION_ENTITY_PREDICATE_OPERATION_COUNT = UNARY_PREDICATE_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.impl.PropertyPredicateImpl <em>Property Predicate</em>}' class.
@@ -11008,17 +11008,6 @@ public interface OmlPackage extends EPackage {
 	EReference getRelationEntityPredicate_Entity();
 
 	/**
-	 * Returns the meta object for the attribute '{@link io.opencaesar.oml.RelationEntityPredicate#getEntityVariable <em>Entity Variable</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Entity Variable</em>'.
-	 * @see io.opencaesar.oml.RelationEntityPredicate#getEntityVariable()
-	 * @see #getRelationEntityPredicate()
-	 * @generated
-	 */
-	EAttribute getRelationEntityPredicate_EntityVariable();
-
-	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.PropertyPredicate <em>Property Predicate</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -13457,14 +13446,6 @@ public interface OmlPackage extends EPackage {
 		 * @generated
 		 */
 		EReference RELATION_ENTITY_PREDICATE__ENTITY = eINSTANCE.getRelationEntityPredicate_Entity();
-
-		/**
-		 * The meta object literal for the '<em><b>Entity Variable</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute RELATION_ENTITY_PREDICATE__ENTITY_VARIABLE = eINSTANCE.getRelationEntityPredicate_EntityVariable();
 
 		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.PropertyPredicateImpl <em>Property Predicate</em>}' class.

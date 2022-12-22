@@ -1016,12 +1016,12 @@ public class OmlBuilder {
      * @param vocabulary the context vocabulary
      * @param entityIri the iri of the relation entity
      * @param variable1 the name of a variable bound to a named instance representing the source of the relation entity
-     * @param entityVariable the name of a variable bound to an instance of the relation entity
+     * @param variable the name of a variable bound to an instance of the relation entity
      * @param variable2 the name of a variable bound to a named instance representing the target of the relation entity
      * @return a relation entity predicate
      */
-    public RelationEntityPredicate createRelationEntityPredicate(Vocabulary vocabulary, String entityIri, String variable1, String entityVariable, String variable2) {
-        final RelationEntityPredicate predicate = OmlWrite.createRelationEntityPredicate(vocabulary, null, variable1, entityVariable, variable2);
+    public RelationEntityPredicate createRelationEntityPredicate(Vocabulary vocabulary, String entityIri, String variable1, String variable, String variable2) {
+        final RelationEntityPredicate predicate = OmlWrite.createRelationEntityPredicate(vocabulary, null, variable1, variable, variable2);
         setCrossReference(vocabulary, predicate, OmlPackage.Literals.RELATION_ENTITY_PREDICATE__ENTITY, entityIri);
         return predicate;
     }

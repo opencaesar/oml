@@ -2,13 +2,79 @@
 
 <pre class="highlight highlight-html">
 
+<a id="Element-Syntax">Element</a>:
+	Annotation |
+	IdentifiedElement |
+	Import |
+	Instance |
+	Statement |
+	Axiom |
+	Assertion |
+	Predicate |
+	Literal |
+	Reference
+
+<a id="Annotation-Syntax">Annotation</a>:
+	`@` [AnnotationProperty|IRI] (Literal | [Member|IRI])?
+
+<a id="IdentifiedElement-Syntax">IdentifiedElement</a>:
+	Ontology |
+	Member
+
+<a id="Import-Syntax">Import</a>:
+	Extension |
+	Usage |
+	Inclusion
+
+<a id="Instance-Syntax">Instance</a>:
+	NamedInstance |
+	StructureInstance
+
+<a id="Statement-Syntax">Statement</a>:
+	VocabularyStatement |
+	DescriptionStatement
+
+<a id="Axiom-Syntax">Axiom</a>:
+	KeyAxiom |
+	SpecializationAxiom |
+	PropertyRestrictionAxiom
+
+<a id="Assertion-Syntax">Assertion</a>:
+	TypeAssertion |
+	PropertyValueAssertion
+
+<a id="Predicate-Syntax">Predicate</a>:
+	UnaryPredicate |
+	BinaryPredicate
+
+<a id="Literal-Syntax">Literal</a>:
+	BooleanLiteral |
+	DecimalLiteral |
+	DoubleLiteral |
+	IntegerLiteral |
+	QuotedLiteral
+
+<a id="Reference-Syntax">Reference</a>:
+	SpecializableTermReference |
+	RelationReference |
+	RuleReference |
+	NamedInstanceReference
+
 <a id="Ontology-Syntax">Ontology</a>:
 	VocabularyBox |
 	DescriptionBox
 
+<a id="Member-Syntax">Member</a>:
+	VocabularyMember |
+	DescriptionMember
+
 <a id="VocabularyBox-Syntax">VocabularyBox</a>:
 	Vocabulary |
 	VocabularyBundle
+
+<a id="DescriptionBox-Syntax">DescriptionBox</a>:
+	Description |
+	DescriptionBundle
 
 <a id="Vocabulary-Syntax">Vocabulary</a>:
 	Annotation*
@@ -23,10 +89,6 @@
 		Import*
 	`}`
 
-<a id="DescriptionBox-Syntax">DescriptionBox</a>:
-	Description |
-	DescriptionBundle
-
 <a id="Description-Syntax">Description</a>:
 	Annotation*
 	`description` NAMESPACE `as` ID `{`
@@ -40,11 +102,6 @@
 		Import*
 	`}`
 
-<a id="Import-Syntax">Import</a>:
-	Extension |
-	Usage |
-	Inclusion
-
 <a id="Extension-Syntax">Extension</a>:
 	Annotation*
 	`extends` NAMESPACE (`as` ID)?
@@ -52,59 +109,88 @@
 <a id="Usage-Syntax">Usage</a>:
 	Annotation*
 	`uses` NAMESPACE (`as` ID)?
-    	
+
 <a id="Inclusion-Syntax">Inclusion</a>:
 	Annotation*
 	`includes` NAMESPACE (`as` ID)?
 
-<a id="Member-Syntax">Member</a>:
-	SpecializableTerm |
-	Property |
+<a id="VocabularyStatement-Syntax">VocabularyStatement</a>:
+	RelationReference |
 	Rule |
+	RuleReference |
+	SpecializableTerm |
+	SpecializableTermReference
+
+<a id="DescriptionStatement-Syntax">DescriptionStatement</a>:
 	NamedInstance |
+	NamedInstanceReference
+
+<a id="VocabularyMember-Syntax">VocabularyMember</a>:
+	Term |
+	Rule
+
+<a id="DescriptionMember-Syntax">DescriptionMember</a>:
+	NamedInstance
 
 <a id="Term-Syntax">Term</a>:
 	SpecializableTerm |
 	Property
 
-<a id="VocabularyStatement-Syntax">VocabularyStatement</a>:
-	SpecializableTerm |
-	SpecializableTermReference |
-	Rule |
-	RuleReference |
-	RelationReference
+<a id="Rule-Syntax">Rule</a>:
+	Annotation*
+	`rule` ID `[`
+		Predicate (`^` Predicate)* `->` Predicate (`^` Predicate)*
+	`]`
 
 <a id="SpecializableTerm-Syntax">SpecializableTerm</a>:
-	Type |
 	AnnotationProperty |
 	ScalarProperty |
 	StructuredProperty |
-	UnreifiedRelation |
-		
+	Type |
+	RelationBase
+
+<a id="Property-Syntax">Property</a>:
+	AnnotationProperty |
+	SemanticProperty
+
 <a id="Type-Syntax">Type</a>:
 	Classifier |
 	Scalar	
 
+<a id="RelationBase-Syntax">RelationBase</a>:
+	RelationEntity |
+	UnreifiedRelation	
+
 <a id="Classifier-Syntax">Classifier</a>:
 	Entity |
 	Structure
-	
+
+<a id="Scalar-Syntax">Scalar</a>:
+	FacetedScalar |
+	EnumeratedScalar
+
 <a id="Entity-Syntax">Entity</a>:
 	Aspect |
 	Concept |
 	RelationEntity
 
+<a id="Structure-Syntax">Structure</a>:
+	Annotation*
+	`structure` ID (`:>` SpecializationAxiom (`,` SpecializationAxiom)*)? (`[`
+		PropertyRestrictionAxiom*
+	`]`)?
+
 <a id="Aspect-Syntax">Aspect</a>:
 	Annotation*
 	`aspect` ID (`:>` SpecializationAxiom (`,` SpecializationAxiom)*)? (`[`
-		(KeyAxiom | PropertyRestrictionAxiom | RelationRestrictionAxiom)*
+		Axiom*
 	`]`)?
 
 <a id="Concept-Syntax">Concept</a>:
 	Annotation*
 	`concept` ID (`:>` SpecializationAxiom (`,` SpecializationAxiom)*)? (`[`
-		(KeyAxiom | PropertyRestrictionAxiom | RelationRestrictionAxiom)*
-		(`enumerates` ConceptInstance (`,` ConceptInstance)*)?
+		Axiom*
+		(`enumerates` [ConceptInstance|IRI] (`,` [ConceptInstance|IRI])*)?
 	`]`)?
 	
 <a id="RelationEntity-Syntax">RelationEntity</a>:
@@ -121,8 +207,54 @@
 		`reflexive`?
 		`irreflexive`?
 		`transitive`?
-		(KeyAxiom | PropertyRestrictionAxiom | RelationRestrictionAxiom)*
+		Axiom*
 	`]`
+
+<a id="FacetedScalar-Syntax">FacetedScalar</a>:
+	Annotation*
+	`scalar` ID (`:>` SpecializationAxiom (`,` SpecializationAxiom)*)? (`[`
+		 (`length` UnsignedInteger)?
+		 (`minLength` UnsignedInteger)?
+		 (`maxLength` UnsignedInteger)?
+		 (`pattern` STRING)?
+		 (`language` ID)?
+		 (`minInclusive` Literal)?
+		 (`minExclusive` Literal)?
+		 (`maxInclusive` Literal)?
+		 (`maxExclusive` Literal)?
+	`]`)?
+
+<a id="EnumeratedScalar-Syntax">EnumeratedScalar</a>:
+	Annotation*
+	`enumerated` `scalar` ID (`:>` SpecializationAxiom (`,` SpecializationAxiom)*)? (`[`
+		(Literal (`,` Literal)*)?
+	`]`)?
+
+
+<a id="AnnotationProperty-Syntax">AnnotationProperty</a>:
+	Annotation*
+	`annotation` `property` ID (`:>` SpecializationAxiom (`,` SpecializationAxiom)*)?
+
+<a id="SemanticProperty-Syntax">SemanticProperty</a>:
+	Relation |
+	ScalarProperty |
+	StructuredProperty
+
+<a id="ScalarProperty-Syntax">ScalarProperty</a>:
+	Annotation*
+	`scalar` `property` ID (`:>` SpecializationAxiom (`,` SpecializationAxiom)*)? (`[`
+		`domain` [Classifier|IRI]
+		`range` [Scalar|IRI]
+		`functional`?
+	`]`)?
+
+<a id="StructuredProperty-Syntax">StructuredProperty</a>:
+	Annotation*
+	`structured` `property` ID (`:>` SpecializationAxiom (`,` SpecializationAxiom)*)? (`[`
+		`domain` [Classifier|IRI]
+		`range` [Structure|IRI]
+		`functional`?
+	`]`)?
 
 <a id="Relation-Syntax">Relation</a>:
 	ForwardRelation |
@@ -152,87 +284,75 @@
 		`transitive`?
 	`]`
 
-<a id="Structure-Syntax">Structure</a>:
+<a id="NamedInstance-Syntax">NamedInstance</a>:
+	ConceptInstance |
+	RelationInstance
+
+<a id="ConceptInstance-Syntax">ConceptInstance</a>:
 	Annotation*
-	`structure` ID (`:>` SpecializationAxiom (`,` SpecializationAxiom)*)? (`[`
-		PropertyRestrictionAxiom*
+	`ci` ID (`:` ConceptTypeAssertion (`,` ConceptTypeAssertion)*)? (`[`
+		Assertion*
 	`]`)?
-
-<a id="Scalar-Syntax">Scalar</a>:
-	FacetedScalar |
-	EnumeratedScalar
-
-<a id="FacetedScalar-Syntax">FacetedScalar</a>:
+	
+<a id="RelationInstance-Syntax">RelationInstance</a>:
 	Annotation*
-	`scalar` ID (`:>` SpecializationAxiom (`,` SpecializationAxiom)*)? (`[`
-		 (`length` UnsignedInteger)?
-		 (`minLength` UnsignedInteger)?
-		 (`maxLength` UnsignedInteger)?
-		 (`pattern` STRING)?
-		 (`language` ID)?
-		 (`minInclusive` Literal)?
-		 (`minExclusive` Literal)?
-		 (`maxInclusive` Literal)?
-		 (`maxExclusive` Literal)?
-	`]`)?
-
-<a id="EnumeratedScalar-Syntax">EnumeratedScalar</a>:
-	Annotation*
-	`enumerated` `scalar` ID (`:>` SpecializationAxiom (`,` SpecializationAxiom)*)? (`[`
-		(Literal (`,` Literal)*)?
-	`]`)?
-
-<a id="Property-Syntax">Property</a>:
-	AnnotationProperty |
-	SemanticProperty
-
-<a id="AnnotationProperty-Syntax">AnnotationProperty</a>:
-	Annotation*
-	`annotation` `property` ID (`:>` SpecializationAxiom (`,` SpecializationAxiom)*)?
-
-<a id="SemanticProperty-Syntax">SemanticProperty</a>:
-	ScalarProperty |
-	StructuredProperty |
-	Relation
-
-<a id="ScalarProperty-Syntax">ScalarProperty</a>:
-	Annotation*
-	`scalar` `property` ID (`:>` SpecializationAxiom (`,` SpecializationAxiom)*)? `[`
-		`domain` [Classifier|IRI]
-		`range` [Scalar|IRI]
-		`functional`?
+	`ri` ID (`:` RelationTypeAssertion (`,` RelationTypeAssertion)*)? `[`
+		`from` [NamedInstance|IRI] (`,` [NamedInstance|IRI])* 
+		`to` [NamedInstance|IRI] (`,` [NamedInstance|IRI])*
+		Assertion*
 	`]`
 
-<a id="StructuredProperty-Syntax">StructuredProperty</a>:
-	Annotation*
-	`structured` `property` ID (`:>` SpecializationAxiom (`,` SpecializationAxiom)*)? `[`
-		`domain` [Classifier|IRI]
-		`range` [Structure|IRI]
-		`functional`?
+<a id="StructureInstance-Syntax">StructureInstance</a>:
+	[Structure|IRI] `[`
+		PropertyValueAssertion*
 	`]`
 
-<a id="Rule-Syntax">Rule</a>:
-	Annotation*
-	`rule` ID `[`
-		Predicate (`^` Predicate)* `->` Predicate (`^` Predicate)*
-	`]`
+<a id="KeyAxiom-Syntax">KeyAxiom</a>:
+	`key` [Property|IRI] (`,` [Property|IRI])*
 
-<a id="Predicate-Syntax">Predicate</a>:
-	UnaryPredicate |
-	BinaryPredicate
+<a id="SpecializationAxiom-Syntax">SpecializationAxiom</a>:
+	[SpecializableTerm|IRI]
+	
+<a id="PropertyRestrictionAxiom-Syntax">PropertyRestrictionAxiom</a>:
+	PropertyRangeRestrictionAxiom |
+	PropertyCardinalityRestrictionAxiom |
+	PropertyValueRestrictionAxiom
+
+<a id="PropertyRangeRestrictionAxiom-Syntax">PropertyRangeRestrictionAxiom</a>:
+	(`restricts` RangeRestrictionKind `scalar` `property` [ScalarProperty|IRI] `to` [Scalar|IRI]) |
+	(`restricts` RangeRestrictionKind `structured` `property` [StructuredProperty|IRI] `to` [Structure|IRI]) |
+	(`restricts` RangeRestrictionKind `relation`) [Relation|IRI] `to` [Entity|IRI])
+
+<a id="PropertyCardinalityRestrictionAxiom-Syntax">PropertyCardinalityRestrictionAxiom</a>:
+	(`restricts` `scalar` `property` [ScalarProperty|IRI] `to` CardinalityRestrictionKind UnsignedInteger ([Scalar|IRI])?) |
+	(`restricts` `structured` `property` [StructuredProperty|IRI] `to` CardinalityRestrictionKind UnsignedInteger ([Structure|IRI])?) |
+	(`restricts` `relation` [Relation|IRI] `to` CardinalityRestrictionKind UnsignedInteger ([Entity|IRI])?)
+
+<a id="PropertyValueRestrictionAxiom-Syntax">PropertyValueRestrictionAxiom</a>:
+	(`restricts` `scalar` `property` [ScalarProperty|IRI] `to` Literal) |
+	(`restricts` `structured` `property` [StructuredProperty|IRI] `to` StructureInstance]) |
+	(`restricts` `relation` [Relation|IRI] `to` [NamedInstance|IRI])
+	
+<a id="TypeAssertion-Syntax">TypeAssertion</a>:
+	[Concept|IRI] | [RelationEntity|IRI]
+
+<a id="PropertyValueAssertion-Syntax">PropertyValueAssertion</a>:
+	([ScalarProperty|IRI] Literal) |
+	([StructuredProperty|IRI] StructureInstance) |
+	([Relation|IRI] [NamedInstance|IRI])
 
 <a id="UnaryPredicate-Syntax">UnaryPredicate</a>:
-	TypePredicate
-	
-<a id="TypePredicate-Syntax">TypePredicate</a>:
-	[Type|IRI] `(` ID `)`
+	TypePredicate |
+	RelationEntityPredicate
 	
 <a id="BinaryPredicate-Syntax">BinaryPredicate</a>:
-	RelationEntityPredicate |
     PropertyPredicate |
     SameAsPredicate |
     DifferentFromPredicate
 
+<a id="TypePredicate-Syntax">TypePredicate</a>:
+	[Type|IRI] `(` ID `)`
+	
 <a id="RelationEntityPredicate-Syntax">RelationEntityPredicate</a>:
 	[RelationEntity|IRI] `(` ID `,` ID `,` (ID | [NamedInstance|IRI]) `)`
 
@@ -245,39 +365,20 @@
 <a id="DifferentFromPredicate-Syntax">DifferentFromPredicate</a>:
 	`differentFrom` `(` ID `,` (ID | [NamedInstance|IRI] `)`
 
-<a id="DescriptionStatement-Syntax">DescriptionStatement</a>:
-	NamedInstance |
-	NamedInstanceReference
-	
-<a id="NamedInstance-Syntax">NamedInstance</a>:
-	ConceptInstance |
-	RelationInstance
+<a id="IntegerLiteral-Syntax">IntegerLiteral</a>:
+	Integer
 
-<a id="ConceptInstance-Syntax">ConceptInstance</a>:
-	Annotation*
-	`ci` ID (`:` ConceptTypeAssertion (`,` ConceptTypeAssertion)*)? (`[`
-		(PropertyValueAssertion | LinkAssertion)*
-	`]`)?
-	
-<a id="RelationInstance-Syntax">RelationInstance</a>:
-	Annotation*
-	`ri` ID (`:` RelationTypeAssertion (`,` RelationTypeAssertion)*)? `[`
-		`from` [NamedInstance|IRI] (`,` [NamedInstance|IRI])* 
-		`to` [NamedInstance|IRI] (`,` [NamedInstance|IRI])*
-		(PropertyValueAssertion | LinkAssertion)*
-	`]`
+<a id="DecimalLiteral-Syntax">DecimalLiteral</a>:
+	Decimal
 
-<a id="StructureInstance-Syntax">StructureInstance</a>:
-	[Structure|IRI] `[`
-		PropertyValueAssertion*
-	`]`
+<a id="DoubleLiteral-Syntax">DoubleLiteral</a>:
+	Double
 
-<a id="Reference-Syntax">Reference</a>:
-	SpecializableTermReference |
-	RelationReference |
-	RuleReference |
-	NamedInstanceReference
+<a id="BooleanLiteral-Syntax">BooleanLiteral</a>:
+	Boolean
 
+<a id="QuotedLiteral-Syntax">QuotedLiteral</a>:
+	STRING ((`^^` [Scalar|IRI]) | (`$` ID))?
 
 <a id="SpecializableTermReference-Syntax">SpecializableTermReference</a>:
 	ClassifierReference |
@@ -366,105 +467,8 @@
 		LinkAssertion*
 	`]`)?
 
-<a id="SpecializationAxiom-Syntax">SpecializationAxiom</a>:
-	[SpecializableTerm|IRI]
-	
-<a id="RestrictionAxiom-Syntax">RestrictionAxiom</a>:
-	PropertyRestrictionAxiom |
-	RelationRestrictionAxiom
-
-<a id="PropertyRestrictionAxiom-Syntax">PropertyRestrictionAxiom</a>:
-	ScalarPropertyRestrictionAxiom |
-	StructuredPropertyRestrictionAxiom
-
-<a id="ScalarPropertyRestrictionAxiom-Syntax">ScalarPropertyRestrictionAxiom</a>:
-	ScalarPropertyRangeRestrictionAxiom |
-	ScalarPropertyCardinalityRestrictionAxiom |
-	ScalarPropertyValueRestrictionAxiom
-
-<a id="ScalarPropertyRangeRestrictionAxiom-Syntax">ScalarPropertyRangeRestrictionAxiom</a>:
-	`restricts` RangeRestrictionKind `scalar` `property` [ScalarProperty|IRI] `to` [Scalar|IRI]
-
-<a id="ScalarPropertyCardinalityRestrictionAxiom-Syntax">ScalarPropertyCardinalityRestrictionAxiom</a>:
-	`restricts` `scalar` `property` [ScalarProperty|IRI] `to` CardinalityRestrictionKind UnsignedInteger ([Scalar|IRI])?
-
-<a id="ScalarPropertyValueRestrictionAxiom-Syntax">ScalarPropertyValueRestrictionAxiom</a>:
-	`restricts` `scalar` `property` [ScalarProperty|IRI] `to` Literal
-
-<a id="StructuredPropertyRestrictionAxiom-Syntax">StructuredPropertyRestrictionAxiom</a>:
-	StructuredPropertyRangeRestrictionAxiom |
-	StructuredPropertyCardinalityRestrictionAxiom |
-	StructuredPropertyValueRestrictionAxiom
-
-<a id="StructuredPropertyRangeRestrictionAxiom-Syntax">StructuredPropertyRangeRestrictionAxiom</a>:
-	`restricts` RangeRestrictionKind `structured` `property` [StructuredProperty|IRI] `to` [Structure|IRI]
-
-<a id="StructuredPropertyCardinalityRestrictionAxiom-Syntax">StructuredPropertyCardinalityRestrictionAxiom</a>:
-	`restricts` `structured` `property` [StructuredProperty|IRI] `to` CardinalityRestrictionKind UnsignedInteger [Structure|IRI]?
-
-<a id="StructuredPropertyValueRestrictionAxiom-Syntax">StructuredPropertyValueRestrictionAxiom</a>:
-	`restricts` `structured` `property` [StructuredProperty|IRI] `to` StructureInstance
-
-<a id="RelationRestrictionAxiom-Syntax">RelationRestrictionAxiom</a>:
-	RelationRangeRestrictionAxiom |
-	RelationCardinalityRestrictionAxiom |
-	RelationTargetRestrictionAxiom
-	
-<a id="RelationRangeRestrictionAxiom-Syntax">RelationRangeRestrictionAxiom</a>:
-	`restricts` RangeRestrictionKind `relation` [Relation|IRI] `to` [Entity|IRI]
-
-<a id="RelationCardinalityRestrictionAxiom-Syntax">RelationCardinalityRestrictionAxiom</a>:
-	`restricts` `relation` [Relation|IRI] `to` CardinalityRestrictionKind UnsignedInteger [Entity|IRI]?
-
-<a id="RelationTargetRestrictionAxiom-Syntax">RelationTargetRestrictionAxiom</a>:
-	`restricts` `relation` [Relation|IRI] `to` [NamedInstance|IRI]
-
-<a id="KeyAxiom-Syntax">KeyAxiom</a>:
-	`key` [Property|IRI] (`,` [Property|IRI])*
-
-<a id="ConceptTypeAssertion-Syntax">ConceptTypeAssertion</a>:
-	[Concept|IRI]
-
-<a id="RelationTypeAssertion-Syntax">RelationTypeAssertion</a>:
-	[RelationEntity|IRI]
-
-<a id="PropertyValueAssertion-Syntax">PropertyValueAssertion</a>:
-	ScalarPropertyValueAssertion |
-	StructuredPropertyValueAssertion
-
-<a id="ScalarPropertyValueAssertion-Syntax">ScalarPropertyValueAssertion</a>:
-	[ScalarProperty|IRI] Literal
-
-<a id="StructuredPropertyValueAssertion-Syntax">StructuredPropertyValueAssertion</a>:
-	[StructuredProperty|IRI] StructureInstance
-
-<a id="LinkAssertion-Syntax">LinkAssertion</a>:
-	[Relation|IRI] [NamedInstance|IRI]
-
-<a id="Annotation-Syntax">Annotation</a>:
-	`@` [AnnotationProperty|IRI] (Literal | [Member|IRI])?
-
-<a id="Literal-Syntax">Literal</a>:
-	IntegerLiteral |
-	DecimalLiteral |
-	DoubleLiteral |
-	BooleanLiteral |
-	QuotedLiteral
-
-<a id="IntegerLiteral-Syntax">IntegerLiteral</a>:
-	Integer
-
-<a id="DecimalLiteral-Syntax">DecimalLiteral</a>:
-	Decimal
-
-<a id="DoubleLiteral-Syntax">DoubleLiteral</a>:
-	Double
-
-<a id="BooleanLiteral-Syntax">BooleanLiteral</a>:
-	Boolean
-
-<a id="QuotedLiteral-Syntax">QuotedLiteral</a>:
-	STRING ((`^^` [Scalar|IRI]) | (`$` ID))?
+<a id="SeparatorKind-Syntax">SeparatorKind</a>: 
+	`#` | `/`
 
 <a id="RangeRestrictionKind-Syntax">RangeRestrictionKind</a>: 
 	`all` | `some`

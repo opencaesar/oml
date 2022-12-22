@@ -495,7 +495,7 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 			@Override
 			public String getText(Object object) {
 				RelationEntityPredicate predicate = (RelationEntityPredicate)object;
-				return getPredicateDirection(predicate) + getLabel(predicate.getEntity(), predicate) + "("+predicate.getVariable1()+", "+predicate.getEntityVariable()+", "+predicate.getVariable2()+")";
+				return getPredicateDirection(predicate) + getLabel(predicate.getEntity(), predicate) + "("+predicate.getVariable1()+", "+predicate.getVariable()+", "+predicate.getVariable2()+")";
 			}
 		};
 		return relationEntityPredicateItemProvider;

@@ -255,7 +255,7 @@ A [vocabulary](#Vocabulary-Syntax) is an ontology that defines a set of [terms](
 <pre class="highlight highlight-html">
 Annotation*
 `vocabulary` NAMESPACE `as` ID `{`
-	VocabularyImport*
+	Import*
 	VocabularyStatement*
 `}`
 </pre>
@@ -267,13 +267,13 @@ For example, the following vocabulary allows describing a mission. It has the na
 `}`
 </pre>
 
-### Imports ### {#VocabularyImports-LR}
+### Import ### {#VocabularyImport-LR}
 
-This section outlines the kind of import statements that can be added to a vocabulary.
+This section outlines the kind of imports (extension and usage) that can be added to a vocabulary.
 
 #### Extension #### {#VocabularyExtension-LR}
 
-A [vocabulary extension](#Extension) is a kind of [import](#Import) statement that can be added to a vocabulary to specify that it extends another vocabulary. This is typically needed when members of the extended vocabulary are cross-reference by the local members of the extending vocabulary.  A vocabulary extension is defined with the keyword `extends` followed by the extended vocabulary's NAMESPACE, followed by the keyword `as` and a unique prefix ID.
+An [extension](#Extension) is a kind of [import](#Import) statement that can be added to a vocabulary to specify that it extends another vocabulary. This is typically needed when members of the extended vocabulary are cross-reference by the local members of the extending vocabulary.  A vocabulary extension is defined with the keyword `extends` followed by the extended vocabulary's NAMESPACE, followed by the keyword `as` and a unique prefix ID.
 
 <pre class="highlight highlight-html">
 Annotation*
@@ -295,7 +295,7 @@ For example, the *mission* vocabulary *extends* the *xsd* vocabulary (in order t
 
 #### Usage #### {#VocabularyUsage-LR}
 
-A [vocabulary usage](#Usage) is a kind of [import](#Import) statement that can be added to a vocabulary to specify that it uses a [description](#Description-LR). This is typically needed when the vocabulary uses one or more of the description's instances in its restriction axioms. A vocabulary usage is defined with the keyword `uses` followed by the used description's NAMESPACE, followed by the keyword `as` and a unique prefix ID.
+A [usage](#Usage) is a kind of [import](#Import) statement that can be added to a vocabulary to specify that it uses a [description](#Description-LR). This is typically needed when the vocabulary uses one or more of the description's instances in its restriction axioms. A vocabulary usage is defined with the keyword `uses` followed by the used description's NAMESPACE, followed by the keyword `as` and a unique prefix ID.
 
 <pre class="highlight highlight-html">
 Annotation*
@@ -331,7 +331,8 @@ An aspect is declared with the keyword `aspect` followed by the aspect's name ID
 <pre class="highlight highlight-html">
     Annotation*
    `aspect` ID (`:>` [Aspect|IRI] (`,` [Aspect|IRI])*)? (`[`
-        Axiom*
+        (KeyAxiom |	PropertyValueRestrictionAxiom)*	// zero or more axioms of the relation entity
+                  
     `]`)?
 </pre>
 
@@ -362,7 +363,7 @@ A concept is declared with the keyword `concept` followed by the concept's name 
 <pre class="highlight highlight-html">
     Annotation*
     `concept` ID (`:>` [Concept|Aspect|IRI] (`,` [Concept|Aspect|IRI])*)? (`[`
-        Axiom*
+        (KeyAxiom |	PropertyValueRestrictionAxiom)**
         (`enumerates` [ConceptInstance|IRI] (`,` [ConceptInstance|IRI])*)?
     `]`)?
 </pre>
@@ -398,7 +399,8 @@ The following example vocabulary defines two concepts: *Component* and *Function
         `reflexive`?                        // a source must be related to itself
         `irreflexive`?                      // a source cannot be related to itself
         `transitive`?                       // if A is related to B, and B is related to C, then A is related to C
-        Axiom*                            // zero or more axioms of the relation entity
+        (KeyAxiom |							// zero or more axioms of the relation entity
+         PropertyValueRestrictionAxiom)*         
    `]`
 </pre>
 
@@ -415,7 +417,7 @@ The following example vocabulary defines a relation entity named *Performs* from
 `}`
 </pre>
 
-Since a relation entity is a reified relation, it can be asserted as a type of a [relation instance](#RelationInstance-LR) between one or more source instances, and one or more target instances. Such instance can be annotated and characterized with assertions. However, a relation entity can also optionally specify (in its body) one or two companion unreified relations that can be asserted as simple (uncharacterized) [links](#LinkAssertion-LR) between a source and a target instance. One of those unrefied relations is declared with the keyword `forward`  followed by a name ID, while the other is declared with the keyword `reverse` followed by a name ID. The forward relation has the `from` entity as its domain, and the `to` entity as its range, while the reverse relation has the opposite. When both are declared, the forward and reverse relations become inverse of each other, meaning if one is used to link a source instance to a target instance, the other is inferred as a link from the target to the source. Also, when a relation instance is typed by a relation entity, which has one ore more unreifed relations, such relations are inferred as links between the set of related sources and target instances. The following diagram depicts the design pattern implied by a relation entity.
+Since a relation entity is a reified relation, it can be asserted as a type of a [relation instance](#RelationInstance-LR) between one or more source instances, and one or more target instances. Such instance can be annotated and characterized with assertions. However, a relation entity can also optionally specify (in its body) one or two companion unreified relations that can be used in [property value assertions](#PropertyValueAssertion-LR) to relate a source and a target instance. One of those unrefied relations is declared with the keyword `forward`  followed by a name ID, while the other is declared with the keyword `reverse` followed by a name ID. The forward relation has the `from` entity as its domain, and the `to` entity as its range, while the reverse relation has the opposite. When both are declared, the forward and reverse relations become inverse of each other, meaning if one is used to link a source instance to a target instance, the other is inferred as a link from the target to the source. Also, when a relation instance is typed by a relation entity, which has one ore more unreifed relations, such relations are inferred as links between the set of related sources and target instances. The following diagram depicts the design pattern implied by a relation entity.
 
 <pre><img src="images/Relation-Entity-Pattern.svg"/></pre>
 
@@ -496,7 +498,7 @@ A structure is declared with the keyword `structure` followed by the structure's
 <pre class="highlight highlight-html">
     Annotation*
     `structure` ID (`:>` [Structure|IRI] (`,` [Structure|IRI])*)? (`[`
-        Axiom*
+        PropertyValueRestriction*
     `]`)?
 </pre>
 
@@ -810,7 +812,7 @@ The following example vocabulary defines a structured property named *hasLocatio
 
 #### Unreified Relation #### {#UnreifiedRelation-LR}
 
- A [Unreified Relation](#UnreifiedRelation-LR) is a relation defined in a vocabulary between two other entities, a source entity and a target entity. An unreified relation is defined with the keywords `relation` followed by a name ID. It can optionally specialize other relations following its name ID by the `:>` symbol then a comma-separated list of those super relation's IRIs. An unreified relation also has a body, which is a pair of square brackets `[` `]` that specify by IRI the relation's `from` (source) entity and `to` (target) entity, and optionally the name of a reverse relation and semantic flags.
+A [Unreified Relation](#UnreifiedRelation-LR) is a relation defined in a vocabulary between two other entities, a source entity and a target entity. An unreified relation is defined with the keywords `relation` followed by a name ID. It can optionally specialize other relations following its name ID by the `:>` symbol then a comma-separated list of those super relation's IRIs. An unreified relation also has a body, which is a pair of square brackets `[` `]` that specify by IRI the relation's `from` (source) entity and `to` (target) entity, and optionally the name of a reverse relation and semantic flags.
  
 <pre class="highlight highlight-html">
     Annotation*
@@ -829,64 +831,23 @@ The following example vocabulary defines a structured property named *hasLocatio
    `]`
 </pre>
 
-The following example vocabulary defines a relation entity named *Performs* from the concept *Component* to the concept *Function*.
+The following example vocabulary defines an unreified relation named *presents* from the concept *Component* to the concept *Interface*. It also has a reverse relation called *isPresentedBy*.
 
 <pre class="highlight highlight-html">
 `vocabulary` `<`http://com.xyz/methodology/mission#`>` `as` mission `{`
     `concept` Component
     `concept` Function
-    `relation` `entity` Performs `[`
+    `relation` presents `[`
         `from` Component
         `to` Function
+        `reverse` isPresentedBy
     `]`
 `}`
 </pre>
 
-Since a relation entity is a reified relation, it can be asserted as a type of a [relation instance](#RelationInstance-LR) between one or more source instances, and one or more target instances. Such instance can be annotated and characterized with assertions. However, a relation entity can also optionally specify (in its body) one or two companion unreified relations that can be asserted as simple (uncharacterized) [links](#LinkAssertion-LR) between a source and a target instance. One of those unrefied relations is declared with the keyword `forward`  followed by a name ID, while the other is declared with the keyword `reverse` followed by a name ID. The forward relation has the `from` entity as its domain, and the `to` entity as its range, while the reverse relation has the opposite. When both are declared, the forward and reverse relations become inverse of each other, meaning if one is used to link a source instance to a target instance, the other is inferred as a link from the target to the source. Also, when a relation instance is typed by a relation entity, which has one ore more unreifed relations, such relations are inferred as links between the set of related sources and target instances. The following diagram depicts the design pattern implied by a relation entity.
+When a relation has super relations, its source entity becomes a subtype of the super relations' source, and its target entity becomes a subtype of the super relation's target. Also, when named, its reverse relation becomes a sub relation of the super's reverse relation.
 
-<pre><img src="images/Relation-Entity-Pattern.svg"/></pre>
-
-The example vocabulary below refines the *Performs* relation entity with two unreifed relations: *performs* (as forward) and *isPerformedBy* (as reverse).
-
-<pre class="highlight highlight-html">
-`vocabulary` `<`http://com.xyz/methodology/mission#`>` `as` mission `{`
-    `concept` Component
-    `concept` Function
-    `relation` `entity` Performs `[`
-        `from` Component
-        `to` Function
-        `forward` performs
-        `reverse` isPerformedBy
-   `]`
-`}`
-</pre>
-
-When a relation entity has supertypes, its source entity becomes a subtype of the super relations' source, and its target entity becomes a subtype of the super relation's target. Also, when named, its forward and reverse relations become sub relations of the supertype's forward and reverse relations.
-
-The following example vocabulary defines two relation entities, *Performs* and *Provides*, where the latter specializes the former. In this case, what is infererd is that *Assembly* specializes *Component*, *Power* specializes *Function*, *provides* specializes *performs*, and lastly, *isProvidedBy* specializes *isPerformedBy*. Some of these inferred specializations can also be specified explicitly (e.g., Assembly `:>` Component).
-
-<pre class="highlight highlight-html">
-`vocabulary` `<`http://com.xyz/methodology/mission#`>` `as` mission `{`
-    `concept` Component
-    `concept` Function
-    `concept` Assembly
-    `concept` Power
-    `relation` `entity` Performs `[`
-        `from` Component
-        `to` Function
-        `forward` performs
-        `reverse` isPerformedBy
-   `]`
-    `relation` `entity` Provides :> Performs `[`
-        `from` Assembly
-        `to` Power
-        `forward` provides
-        `reverse` isProvidedBy
-   `]`
-`}`
-</pre>
-
-A relation entity can optionally specify one or more semantic flags (within its body) that define its logical semantics:
+A relation can optionally specify one or more semantic flags (within its body) that define its logical semantics:
 
 - The `functional` flag implies that a source instance can be related to a maximum of 1 target instance.
 - The `inverse functional` flag implies that a target instance can be related to a maximum of 1 source instance.
@@ -896,17 +857,16 @@ A relation entity can optionally specify one or more semantic flags (within its 
 - The `irreflexive` flag implies that a source instance cannot be related to itself.
 - The `transitive` flag implies if instance A is related to instance B, and instance B is related to instance C, then A is also related to C.
 
-The example vocabulary below refines the *Performs* relation to add the flag `inverse functional` (to specify that a function can be performed by a maximum of one component), the flag `asymmetric` (to specify that a function cannot perform a component), and the flag `irreflexive` (to specify that a component cannot perform itself).
+The example vocabulary below refines the *presents* relation to add the flag `inverse functional` (to specify that an interface can be presented by a maximum of one component), the flag `asymmetric` (to specify that an interface cannot present a component), and the flag `irreflexive` (to specify that a component cannot present itself).
 
 <pre class="highlight highlight-html">
 `vocabulary` `<`http://com.xyz/methodology/mission#`>` `as` mission `{`
     `concept` Component
     `concept` Function
-    `relation` `entity` Performs `[`
+    `relation` presents `[`
         `from` Component
-        `to` Function
-        `forward` performs
-        `reverse` isPerformedBy
+        `to` Interface
+        `reverse` isPresenteddBy
         `inverse functional`
         `asymmetric`
         `irreflexive`
@@ -914,9 +874,11 @@ The example vocabulary below refines the *Performs* relation to add the flag `in
 `}`
 </pre>
 
+Note: A vocabulary author has the freedom to define a relation as a relation entity or an unreified relation. The downside of choosing the unreified option is the inability of describing relation instances and characterizing them with property values.
+
 ### Axioms ### {#Axioms-LR}
 
-Axioms are statements about terms in a vocabulary that enrich their logical semantics. They appear in the body of a term between its two brackets `[` `]`. This section describes the supported axioms, which include a [key axiom](#KeyAxiom-LR) (specified on entities) and a [restriction axioms](#RestrictionAxioms-LR) (specified on classifiers). 
+Axioms are statements about terms in a vocabulary that enrich their logical semantics. They appear in the body of a term between its two brackets `[` `]`. This section describes the supported axioms, which include a [key axiom](#KeyAxiom-LR) (specified on entities) and a [property value restriction axioms](#PropertyValueRestrictionAxiom-LR) (specified on classifiers).
 
 Note: that a term that has supertypes semantically inherits axioms defined on its supertypes in addition to its own axioms.
 
@@ -956,11 +918,13 @@ An entity can define zero or more keys. When multiple keys are defined, the valu
 `}`
 </pre>
 
-#### Restriction Axioms #### {#RestrictionAxioms-LR}
+#### Property Value Restriction Axiom #### {#PropertyValueRestrictionAxiom-LR}
 
-A [restriction axiom](#RestrictionAxiom-Syntax) is an axiom defined on a classifier ([Aspect](#Aspect-LR), [Concept](#Concept-LR), [Relation Entity](#RelationEntity-LR) and [Structure](#Structure-LR)) that restricts a property in some way in the classifier's context. This property can be ([Scalar Property](#ScalarProperty-LR), [Structured Property](#StructuredProperty-LR), [Forward Relation](#RelationEntity-LR), [Reverse Relation](#RelationEntity-LR), or [Unreified Relation](#UnreifiedRelation-LR)) whose domain is the context type or one of its supertypes. The facets that can be restricted about those properties vary (like their range, cardinality, or value) resulting in different subtypes of restriction axioms.
+A [property value restriction axiom](#PropertyValueRestrictionAxiom-Syntax) is an axiom defined on a classifier ([Aspect](#Aspect-LR), [Concept](#Concept-LR), [Relation Entity](#RelationEntity-LR) and [Structure](#Structure-LR)) that restricts a property in some way in the classifier's context. This property can be ([Scalar Property](#ScalarProperty-LR), [Structured Property](#StructuredProperty-LR), [Forward Relation](#RelationEntity-LR), [Reverse Relation](#RelationEntity-LR), or [Unreified Relation](#UnreifiedRelation-LR)) whose domain is the context type or one of its supertypes. The facets that can be restricted about those properties vary (like their range, cardinality, or value) resulting in different subtypes of restriction axioms.
 
-<u>Range Restriction Axioms</u>
+Note: a structure can specify property value restriction axioms only on scalar and structures properties, but not relations (forward, reverse, or unreified) since a structure cannot be a source (domain) or target (range) of a relation.
+
+<u>Property Range Restriction Axioms</u>
 
 A range restriction axiom restricts the range of a property in the context of some classifier. The axiom specifies a restricted range that is a subtype of the property's original range. The syntax of a range restriction axioms starts with the keyword `restricts` followed by a restriction kind, which can either be `all` (requiring all values to conform to the restricted range) or `some` (requiring at least one value to conform to the restricted range). This is followed by the kind of property (`scalar property`, `structured property`, or `relation`) then a reference to the property by IRI. Finally, the keyword `to` is used followed by a reference to the restricted range (a scalar, a structure, or an entity) by IRI. The following shows the three supported syntaxes:
 
@@ -1007,7 +971,7 @@ The following example shows a vocabulary that defines a concept *Assembly* with 
 `}`
 </pre>
 
-<u>Cardinality Restriction Axioms</u>
+<u>Property Cardinality Restriction Axioms</u>
 
 A cardinality restriction axiom restricts the cardinality of a property in the context of some classifier. The axiom specifies a minimum, a maximum, or an exact number of values, conforming to the original range, or to a specified restricted range, that a property can have in that context. The syntax of a cardinality restriction axioms starts with the keyword `restricts` followed by the kind of property (`scalar property`, `structured property`, or `relation`) then a reference to the property by IRI. Then, the keyword `to` is used followed by a cardinality kind (`min`, `max`, or `exactly`), a cardinality value (positive integer), and finally an optional reference to a restricted range (a scalar, a structure, or an entity) by IRI. The following shows the three supported syntaxes:
 
@@ -1050,7 +1014,7 @@ The following example shows a vocabulary that defines a concept *Assembly* with 
 `}`
 </pre>
 
-<u>Value Restriction Axioms</u>
+<u>Property Value Restriction Axioms</u>
 
 A value restriction axiom restricts the value of a property in the context of some classifier. In the case of a relation, the restricted value represents the relation's target instance. The syntax of a value restriction axioms starts with the keyword `restricts` followed by the kind of property (`scalar property`, `structured property`, or `relation`) then a reference to the property by IRI. Then, the keyword `to` is used followed by a value that is suitable for each case (a [literal](#Literal-Syntax) for a scalar property, a [structure instance](#StructureInstance-Syntax) for a structured property, or a reference to a [named instance](#NamedInstance-Syntax) by IRI for a relation). The following shows the three supported syntaxes:
 
@@ -1195,7 +1159,7 @@ A [description](#Description-Syntax) is an ontology that uses vocabularies to de
 <pre class="highlight highlight-html">
 Annotation*
 `description` NAMESPACE `as` ID `{`
-	DescriptionImport*
+	Import*
 	DescriptionStatement*
 `}`
 </pre>
@@ -1209,7 +1173,7 @@ The following example description is meant to describe the components of a syste
 
 ### Imports ### {#DescriptionImports-LR}
 
-This section outlines the kind of import statements that can be added in a description's body.
+This section outlines the kind of import statements (extension, usage) that can be added in a description's body.
 
 #### Extension #### {#DescriptionExtension-LR}
 
@@ -1309,7 +1273,7 @@ The following example description defines three concept instances: *component1* 
 
 #### Structure Instance #### {#StructureInstance-LR}
 
-A [structure instance](#StructureInstance-Syntax) is an anonymous instance that can be defined as a value of a structured property. Such value can either be specified in a [structured property value assertion](#StructuredPropertyValueAssertion-LR), defined in the context of some instance, or in a [value restriction axiom](#RestrictionAxioms-LR) on some structured property in the context of some classifier. A structure instance is declared with the IRI of a structure followed by a pair of square brackets `[` `]` that holds assertions about the instance.
+A [structure instance](#StructureInstance-Syntax) is an anonymous instance that can be defined as a value of a structured property. Such value can either be specified in a [property value assertion](#PropertyValueAssertion-LR), defined in the context of some instance, or in a [property value restriction axiom](#PropertyValueRestrictionAxiom-LR) on some structured property in the context of some classifier. A structure instance is declared with the IRI of a structure followed by a pair of square brackets `[` `]` that holds assertions about the instance.
 
 <pre class="highlight highlight-html">
 	[Structure|IRI] `[`
@@ -1349,73 +1313,36 @@ The following example shows .
 
 ### Assertions ### {#Assertions-LR}
 
-Assertions are statements about instances that enable characterizing them. They appear in the body of an instance (either named or anonymous) between its two brackets `[` `]`. This section describes the supported assertions, which include a [scalar property value assertion](#ScalarPropertyValueAssertion-LR) (specified on instances), [structured property value assertion](#StructuredPropertyValueAssertion-LR) (specified on instances), and a [link assertion](#LinkAssertion-LR) (specified on named instances).
+Assertions are statements about instances that enable characterizing them. They appear in the body of an instance (either named or anonymous) between its two brackets `[` `]`. This section describes the supported assertions, which include a [property value assertion](#PropertyValueAssertion-LR) that can be specified on (concept, relation, or structure) instances.
 
-#### Scalar Property Value Assertion #### {#ScalarPropertyValueAssertion-LR}
+#### Property Value Assertion #### {#PropertyValueAssertion-LR}
 
-A value for a scalar property can be [asserted](#ScalarPropertyValueAssertion-Syntax) on an instance ([Concept Instance](#ConceptInstance-LR), [Relation Instance](#RelationInstance-LR), or [Structure Instance](#StructureInstance-LR)). Such assertion can be added as one of the assertions between the square  brackets `[` `]` of the instance. Its syntax consists of an IRI to a [scalar property](#ScalarProperty-Syntax) from some vocabulary followed by a literal.
+A value for a (scalar, structure, relation) property can be [asserted](#PropertyValueAssertion-Syntax) on an instance ([Concept Instance](#ConceptInstance-LR), [Relation Instance](#RelationInstance-LR), or [Structure Instance](#StructureInstance-LR)). Such assertion can be added as one of the assertions between the square  brackets `[` `]` of the instance. Its syntax consists of an IRI to a [property](#Property-Syntax) from some vocabulary followed by a value, which could be a literal (in the case of a scalar property), a structure instance (in the case of a structured property), or an IRI of a named instance (in the case of a relation).
 
 <pre class="highlight highlight-html">
 [ScalarProperty|IRI] Literal
-</pre>
-
-The following example description defines two concept instances that each makes a number of scalar property assertions. Specifically, instance *component1* asserts that its *mission:hasId* property has a string value of *C1*, while instance *function1* asserts that its *mission:hasName* property has a string value of *F1* and its *mission:isAbstract* property has a Boolean value of *true*. 
-
-<pre class="highlight highlight-html">
-`description` `<`http://com.xyz/system/components#`>` `as` components `{`
-    `uses` `<`http://com.xyz/methodology/mission#`>` `as` mission
-    `ci` component1 `:` mission:Component `[`
-        mission:hasId 'C1'        // property value assertion
-    `]`
-    `ci` function1 `:` mission:Function `[`
-        mission:hasName 'F1'      // property value assertion
-        mission:isAbstract true   // property value assertion
-    `]`
-`}`
-</pre>
-
-#### Structured Property Value Assertion #### {#StructuredPropertyValueAssertion-LR}
-
-A value for a structured property can be [asserted](#StructuredPropertyValueAssertion-Syntax) on an instance ([Concept Instance](#ConceptInstance-LR), [Relation Instance](#RelationInstance-LR), or [Structure Instance](#StructureInstance-LR)). Such assertion can be added as one of the assertions between the square  brackets `[` `]` of the instance. Its syntax consists of an IRI to a [structured property](#ScalarProperty-Syntax) from some vocabulary followed by a [structure instance](#StructureInstance-LR).
-
-<pre class="highlight highlight-html">
 [StructuredProperty|IRI] StuctureInstance
-</pre>
-
-The following example description defines a concept instance *C1* which asserts a value for structured property *mission:hasPin* to have a structure instance whose *mission:hasNumber* property value is asserted to be 2.
-
-<pre class="highlight highlight-html">
-`description` `<`http://com.xyz/methodology/functions#`>` `as` functions `{`
-    `uses` `<`http://com.xyz/methodology/mission#`>` `as` mission
-    `ci` C1 `:` mission:Component `[`
-        mission:hasPin Pin `[` mission:hasNumber 2 `]`       // structure instance used in value assertion
-    `]`
-`}`
-</pre>
-
-#### Link Assertion #### {#LinkAssertion-LR}
-
-A named instance can be [asserted](#LinkAssertion-Syntax) as a target of a link typed by an unreified relation ([Forward Relation](#RelationEntity-LR) or [Reverse Relation](#RelationEntity-LR)) on a named instance representing the link's source.  A link is a light-weight alternative to a [relation instance](#RelationInstance-LR) in the sense that it relates two named instances but does not define a new instance for the relation itself. Therefore, unlike a relation instance, a link cannot be characterized by assertions. Also, unlike a relation instance, which can relate one or more sources or one or more targets, a link can only relate a single source to a single target. A link assertion can be added between the square brackets `[` `]` of a named instance (the source). Its syntax consists of an IRI to a [relation](#Relation-Syntax) followed by an IRI of a [named instance](#NamedInstance-Syntax) (the target).
-
-<pre class="highlight highlight-html">
 [Relation|IRI] [NamedInstance|IRI]
 </pre>
 
-The following example description defines two concept instances with a link asserted between them. Specifically, instance *component1* asserts a link of type *mission:performs* (the forward relation of relation entity *mission:Performs*) to instance *function1*.
+Note: a structure instance can specify property value assertion only for scalar and structures properties, but not relations (forward, reverse, or unreified) since a structure cannot be a source (domain) or target (range) of a relation.
+
+The following example description defines two concept instances that each makes a number of  property assertions. Specifically, instance *component1* asserts that the *mission:hasId* scalar property has a string value of *C1*, the *mission:hasPin* structured property as a structure instance (whose *mission:hasNumber* property value is asserted to be 2) as a value, and the *mission:performs* relation has the IRI of instance *function1* as a value. Also, instance *function1* asserts that its *mission:hasName* property has a string value of *F1*. 
 
 <pre class="highlight highlight-html">
 `description` `<`http://com.xyz/system/components#`>` `as` components `{`
     `uses` `<`http://com.xyz/methodology/mission#`>` `as` mission
     `ci` component1 `:` mission:Component `[`
-        mission:hasId 'C1'
-        mission:performs function1    // link assertion
+        mission:hasId 'C1'        							// scalar property value assertion
+        mission:hasPin Pin `[` mission:hasNumber 2 `]`      // structure property value assertion
+        mission:performs function1    						// relation value assertion
     `]`
     `ci` function1 `:` mission:Function `[`
-        mission:hasName 'F1'
-        mission:isAbstract true
+        mission:hasName 'F1'      							// scalar property value assertion
     `]`
 `}`
 </pre>
+
 
 ## Vocabulary Bundle ## {#VocabularyBundle-LR}
 

@@ -226,7 +226,7 @@ RelationInstance:
 	'ri' name=ID (':' ownedTypes+=RelationTypeAssertion (',' ownedTypes+=RelationTypeAssertion)*)? '['
 		'from' sources+=[NamedInstance|Ref] (',' sources+=[NamedInstance|Ref])* 
 		'to' targets+=[NamedInstance|Ref] (',' targets+=[NamedInstance|Ref])*
-		ownedPropertyValues+=PropertyValueAssertion
+		ownedPropertyValues+=PropertyValueAssertion*
 	']';
 	
 SpecializableTermReference:
@@ -432,7 +432,7 @@ BinaryPredicate:
     DifferentFromPredicate;
 
 RelationEntityPredicate:
-    entity=[RelationEntity|Ref] '(' variable1=ID ',' entityVariable=ID ',' (variable2=ID | instance2=[NamedInstance|CrossRef]) ')';
+    entity=[RelationEntity|Ref] '(' variable1=ID ',' variable=ID ',' (variable2=ID | instance2=[NamedInstance|CrossRef]) ')';
 
 PropertyPredicate:
 	property=[Property|Ref] '(' variable1=ID ',' (variable2=ID | literal2=Literal | instance2=[NamedInstance|CrossRef]) ')';

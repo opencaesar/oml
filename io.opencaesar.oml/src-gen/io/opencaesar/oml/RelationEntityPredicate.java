@@ -25,7 +25,7 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * RelationEntityPredicate is a binary predicate that binds its `entityVariable` to a relation instance,
+ * RelationEntityPredicate is a binary predicate that binds its `variable` to a relation instance,
  * its `variable1` to the source of that relation instance, and either its `variable2` or `instance2` as the target of
  * that relation instance.
  * <!-- end-model-doc -->
@@ -35,14 +35,13 @@ package io.opencaesar.oml;
  * </p>
  * <ul>
  *   <li>{@link io.opencaesar.oml.RelationEntityPredicate#getEntity <em>Entity</em>}</li>
- *   <li>{@link io.opencaesar.oml.RelationEntityPredicate#getEntityVariable <em>Entity Variable</em>}</li>
  * </ul>
  *
  * @see io.opencaesar.oml.OmlPackage#getRelationEntityPredicate()
  * @model annotation="https://tabatkins.github.io/bikeshed heading='Rules'"
  * @generated
  */
-public interface RelationEntityPredicate extends BinaryPredicate {
+public interface RelationEntityPredicate extends UnaryPredicate, BinaryPredicate {
 	/**
 	 * Returns the value of the '<em><b>Entity</b></em>' reference.
 	 * <!-- begin-user-doc -->
@@ -67,30 +66,5 @@ public interface RelationEntityPredicate extends BinaryPredicate {
 	 * @generated
 	 */
 	void setEntity(RelationEntity value);
-
-	/**
-	 * Returns the value of the '<em><b>Entity Variable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * The entity variable specified by the predicate
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Entity Variable</em>' attribute.
-	 * @see #setEntityVariable(String)
-	 * @see io.opencaesar.oml.OmlPackage#getRelationEntityPredicate_EntityVariable()
-	 * @model unique="false" dataType="io.opencaesar.oml.ID" required="true"
-	 * @generated
-	 */
-	String getEntityVariable();
-
-	/**
-	 * Sets the value of the '{@link io.opencaesar.oml.RelationEntityPredicate#getEntityVariable <em>Entity Variable</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Entity Variable</em>' attribute.
-	 * @see #getEntityVariable()
-	 * @generated
-	 */
-	void setEntityVariable(String value);
 
 } // RelationEntityPredicate

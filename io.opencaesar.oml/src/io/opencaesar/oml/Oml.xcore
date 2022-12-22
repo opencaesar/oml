@@ -17,7 +17,6 @@
 @BikeshedHeadings(
     Elements="",
     Literals="",
-    Ontologies="",
     Vocabularies="",
     Types="",
     Properties="",
@@ -26,7 +25,8 @@
     Descriptions="",
     Instances="",
     Assertions="",
-    References=""
+    References="",
+    Enumerations=""
 )
 @Bikeshed(heading="Abstract-Syntax")
 package io.opencaesar.oml
@@ -304,7 +304,7 @@ abstract class Ontology extends IdentifiedElement {
 @Bikeshed(heading="Elements")
 abstract class Member extends IdentifiedElement {
     /*
-     * The name of this member, which is unique within its ontology's namespace
+     * A unique name for the member within its ontology
      */
     id ID[1] name
     
@@ -1322,24 +1322,20 @@ class TypePredicate extends UnaryPredicate {
 }
 
 /*
- * RelationEntityPredicate is a binary predicate that binds its `entityVariable` to a relation instance,
+ * RelationEntityPredicate is a binary predicate that binds its `variable` to a relation instance,
  * its `variable1` to the source of that relation instance, and either its `variable2` or `instance2` as the target of
  * that relation instance.
  */
 @Bikeshed(heading="Rules")
-class RelationEntityPredicate extends BinaryPredicate {
+class RelationEntityPredicate extends UnaryPredicate, BinaryPredicate {
     /*
      * The type of the relation instance
      */
     refers RelationEntity[1] entity
-    /*
-     * The entity variable specified by the predicate
-     */
-    ID[1] entityVariable
 }
 
 ////////////////////////////////////////
-//  Unary Predicates
+//  Binary Predicates
 ////////////////////////////////////////
 
 /*
@@ -1651,7 +1647,7 @@ class RelationInstanceReference extends NamedInstanceReference {
  * SeparatorKind is an enumeration that specifies the separator character of an ontology's namespace. It can either
  * be only of two values: a hash '#' or a slash '/'.
  */
-@Bikeshed(heading="Elements")
+@Bikeshed(heading="Enumerations")
 enum SeparatorKind {
     hash as '#' = 0
     slash as '/' = 1
@@ -1660,7 +1656,7 @@ enum SeparatorKind {
 /*
  * RangeRestrictionKind is an enumeration that specifies the scope of a range restriction on a property
  */
-@Bikeshed(heading="Axioms")
+@Bikeshed(heading="Enumerations")
 enum RangeRestrictionKind {
     /*
      * All values are restricted to the range
@@ -1675,7 +1671,7 @@ enum RangeRestrictionKind {
 /*
  * CardinalityRestrictionKind is an enumeration that specifies the kind of cardinality restriction on a property
  */
-@Bikeshed(heading="Axioms")
+@Bikeshed(heading="Enumerations")
 enum CardinalityRestrictionKind {
     /*
      * The cardinality must match this

@@ -18,6 +18,8 @@
  */
 package io.opencaesar.oml.impl;
 
+import io.opencaesar.oml.BinaryPredicate;
+import io.opencaesar.oml.NamedInstance;
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.RelationEntity;
 import io.opencaesar.oml.RelationEntityPredicate;
@@ -37,13 +39,65 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link io.opencaesar.oml.impl.RelationEntityPredicateImpl#getVariable1 <em>Variable1</em>}</li>
+ *   <li>{@link io.opencaesar.oml.impl.RelationEntityPredicateImpl#getVariable2 <em>Variable2</em>}</li>
+ *   <li>{@link io.opencaesar.oml.impl.RelationEntityPredicateImpl#getInstance2 <em>Instance2</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.RelationEntityPredicateImpl#getEntity <em>Entity</em>}</li>
- *   <li>{@link io.opencaesar.oml.impl.RelationEntityPredicateImpl#getEntityVariable <em>Entity Variable</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class RelationEntityPredicateImpl extends BinaryPredicateImpl implements RelationEntityPredicate {
+public class RelationEntityPredicateImpl extends UnaryPredicateImpl implements RelationEntityPredicate {
+	/**
+	 * The default value of the '{@link #getVariable1() <em>Variable1</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVariable1()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String VARIABLE1_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getVariable1() <em>Variable1</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVariable1()
+	 * @generated
+	 * @ordered
+	 */
+	protected String variable1 = VARIABLE1_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getVariable2() <em>Variable2</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVariable2()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String VARIABLE2_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getVariable2() <em>Variable2</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVariable2()
+	 * @generated
+	 * @ordered
+	 */
+	protected String variable2 = VARIABLE2_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getInstance2() <em>Instance2</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getInstance2()
+	 * @generated
+	 * @ordered
+	 */
+	protected NamedInstance instance2;
+
 	/**
 	 * The cached value of the '{@link #getEntity() <em>Entity</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -53,26 +107,6 @@ public class RelationEntityPredicateImpl extends BinaryPredicateImpl implements 
 	 * @ordered
 	 */
 	protected RelationEntity entity;
-
-	/**
-	 * The default value of the '{@link #getEntityVariable() <em>Entity Variable</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getEntityVariable()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String ENTITY_VARIABLE_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getEntityVariable() <em>Entity Variable</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getEntityVariable()
-	 * @generated
-	 * @ordered
-	 */
-	protected String entityVariable = ENTITY_VARIABLE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -91,6 +125,92 @@ public class RelationEntityPredicateImpl extends BinaryPredicateImpl implements 
 	@Override
 	protected EClass eStaticClass() {
 		return OmlPackage.Literals.RELATION_ENTITY_PREDICATE;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getVariable1() {
+		return variable1;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setVariable1(String newVariable1) {
+		String oldVariable1 = variable1;
+		variable1 = newVariable1;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.RELATION_ENTITY_PREDICATE__VARIABLE1, oldVariable1, variable1));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getVariable2() {
+		return variable2;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setVariable2(String newVariable2) {
+		String oldVariable2 = variable2;
+		variable2 = newVariable2;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.RELATION_ENTITY_PREDICATE__VARIABLE2, oldVariable2, variable2));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NamedInstance getInstance2() {
+		if (instance2 != null && instance2.eIsProxy()) {
+			InternalEObject oldInstance2 = (InternalEObject)instance2;
+			instance2 = (NamedInstance)eResolveProxy(oldInstance2);
+			if (instance2 != oldInstance2) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, OmlPackage.RELATION_ENTITY_PREDICATE__INSTANCE2, oldInstance2, instance2));
+			}
+		}
+		return instance2;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NamedInstance basicGetInstance2() {
+		return instance2;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setInstance2(NamedInstance newInstance2) {
+		NamedInstance oldInstance2 = instance2;
+		instance2 = newInstance2;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.RELATION_ENTITY_PREDICATE__INSTANCE2, oldInstance2, instance2));
 	}
 
 	/**
@@ -139,36 +259,18 @@ public class RelationEntityPredicateImpl extends BinaryPredicateImpl implements 
 	 * @generated
 	 */
 	@Override
-	public String getEntityVariable() {
-		return entityVariable;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setEntityVariable(String newEntityVariable) {
-		String oldEntityVariable = entityVariable;
-		entityVariable = newEntityVariable;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.RELATION_ENTITY_PREDICATE__ENTITY_VARIABLE, oldEntityVariable, entityVariable));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case OmlPackage.RELATION_ENTITY_PREDICATE__VARIABLE1:
+				return getVariable1();
+			case OmlPackage.RELATION_ENTITY_PREDICATE__VARIABLE2:
+				return getVariable2();
+			case OmlPackage.RELATION_ENTITY_PREDICATE__INSTANCE2:
+				if (resolve) return getInstance2();
+				return basicGetInstance2();
 			case OmlPackage.RELATION_ENTITY_PREDICATE__ENTITY:
 				if (resolve) return getEntity();
 				return basicGetEntity();
-			case OmlPackage.RELATION_ENTITY_PREDICATE__ENTITY_VARIABLE:
-				return getEntityVariable();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -181,11 +283,17 @@ public class RelationEntityPredicateImpl extends BinaryPredicateImpl implements 
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case OmlPackage.RELATION_ENTITY_PREDICATE__VARIABLE1:
+				setVariable1((String)newValue);
+				return;
+			case OmlPackage.RELATION_ENTITY_PREDICATE__VARIABLE2:
+				setVariable2((String)newValue);
+				return;
+			case OmlPackage.RELATION_ENTITY_PREDICATE__INSTANCE2:
+				setInstance2((NamedInstance)newValue);
+				return;
 			case OmlPackage.RELATION_ENTITY_PREDICATE__ENTITY:
 				setEntity((RelationEntity)newValue);
-				return;
-			case OmlPackage.RELATION_ENTITY_PREDICATE__ENTITY_VARIABLE:
-				setEntityVariable((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -199,11 +307,17 @@ public class RelationEntityPredicateImpl extends BinaryPredicateImpl implements 
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case OmlPackage.RELATION_ENTITY_PREDICATE__VARIABLE1:
+				setVariable1(VARIABLE1_EDEFAULT);
+				return;
+			case OmlPackage.RELATION_ENTITY_PREDICATE__VARIABLE2:
+				setVariable2(VARIABLE2_EDEFAULT);
+				return;
+			case OmlPackage.RELATION_ENTITY_PREDICATE__INSTANCE2:
+				setInstance2((NamedInstance)null);
+				return;
 			case OmlPackage.RELATION_ENTITY_PREDICATE__ENTITY:
 				setEntity((RelationEntity)null);
-				return;
-			case OmlPackage.RELATION_ENTITY_PREDICATE__ENTITY_VARIABLE:
-				setEntityVariable(ENTITY_VARIABLE_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -217,12 +331,52 @@ public class RelationEntityPredicateImpl extends BinaryPredicateImpl implements 
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case OmlPackage.RELATION_ENTITY_PREDICATE__VARIABLE1:
+				return VARIABLE1_EDEFAULT == null ? variable1 != null : !VARIABLE1_EDEFAULT.equals(variable1);
+			case OmlPackage.RELATION_ENTITY_PREDICATE__VARIABLE2:
+				return VARIABLE2_EDEFAULT == null ? variable2 != null : !VARIABLE2_EDEFAULT.equals(variable2);
+			case OmlPackage.RELATION_ENTITY_PREDICATE__INSTANCE2:
+				return instance2 != null;
 			case OmlPackage.RELATION_ENTITY_PREDICATE__ENTITY:
 				return entity != null;
-			case OmlPackage.RELATION_ENTITY_PREDICATE__ENTITY_VARIABLE:
-				return ENTITY_VARIABLE_EDEFAULT == null ? entityVariable != null : !ENTITY_VARIABLE_EDEFAULT.equals(entityVariable);
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == BinaryPredicate.class) {
+			switch (derivedFeatureID) {
+				case OmlPackage.RELATION_ENTITY_PREDICATE__VARIABLE1: return OmlPackage.BINARY_PREDICATE__VARIABLE1;
+				case OmlPackage.RELATION_ENTITY_PREDICATE__VARIABLE2: return OmlPackage.BINARY_PREDICATE__VARIABLE2;
+				case OmlPackage.RELATION_ENTITY_PREDICATE__INSTANCE2: return OmlPackage.BINARY_PREDICATE__INSTANCE2;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == BinaryPredicate.class) {
+			switch (baseFeatureID) {
+				case OmlPackage.BINARY_PREDICATE__VARIABLE1: return OmlPackage.RELATION_ENTITY_PREDICATE__VARIABLE1;
+				case OmlPackage.BINARY_PREDICATE__VARIABLE2: return OmlPackage.RELATION_ENTITY_PREDICATE__VARIABLE2;
+				case OmlPackage.BINARY_PREDICATE__INSTANCE2: return OmlPackage.RELATION_ENTITY_PREDICATE__INSTANCE2;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
 	/**
@@ -235,8 +389,10 @@ public class RelationEntityPredicateImpl extends BinaryPredicateImpl implements 
 		if (eIsProxy()) return super.toString();
 
 		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (entityVariable: ");
-		result.append(entityVariable);
+		result.append(" (variable1: ");
+		result.append(variable1);
+		result.append(", variable2: ");
+		result.append(variable2);
 		result.append(')');
 		return result.toString();
 	}

@@ -347,7 +347,7 @@ class OmlOntologyDiagramView {
 			return "DifferentFrom(" + p.getVariable1() + ", " + p.getVariable2() + ")";
 		} else if (predicate instanceof RelationEntityPredicate) {
 			RelationEntityPredicate p = (RelationEntityPredicate) predicate;
-			return p.getEntity().getName() + "(" + p.getVariable1() + "," + p.getEntityVariable() + "," + p.getVariable2() + ")";
+			return p.getEntity().getName() + "(" + p.getVariable1() + "," + p.getVariable() + "," + p.getVariable2() + ")";
 		} else if (predicate instanceof BinaryPredicate) {
 			BinaryPredicate p = (BinaryPredicate) predicate;
 			return OmlRead.getTerm(p).getName() + "(" + p.getVariable1() + "," + p.getVariable2() + ")";
