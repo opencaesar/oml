@@ -156,18 +156,6 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 				return createDescriptionBundleAdapter();
 			}
 			@Override
-			public Adapter caseExtension(Extension object) {
-				return createExtensionAdapter();
-			}
-			@Override
-			public Adapter caseUsage(Usage object) {
-				return createUsageAdapter();
-			}
-			@Override
-			public Adapter caseInclusion(Inclusion object) {
-				return createInclusionAdapter();
-			}
-			@Override
 			public Adapter caseVocabularyStatement(VocabularyStatement object) {
 				return createVocabularyStatementAdapter();
 			}
@@ -712,48 +700,6 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createDescriptionBundleAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.Extension <em>Extension</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.Extension
-	 * @generated
-	 */
-	public Adapter createExtensionAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.Usage <em>Usage</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.Usage
-	 * @generated
-	 */
-	public Adapter createUsageAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.Inclusion <em>Inclusion</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.Inclusion
-	 * @generated
-	 */
-	public Adapter createInclusionAdapter() {
 		return null;
 	}
 

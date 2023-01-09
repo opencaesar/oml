@@ -27,11 +27,10 @@ import io.opencaesar.oml.DoubleLiteral;
 import io.opencaesar.oml.Element;
 import io.opencaesar.oml.EnumeratedScalar;
 import io.opencaesar.oml.EnumeratedScalarReference;
-import io.opencaesar.oml.Extension;
 import io.opencaesar.oml.FacetedScalar;
 import io.opencaesar.oml.FacetedScalarReference;
 import io.opencaesar.oml.ForwardRelation;
-import io.opencaesar.oml.Inclusion;
+import io.opencaesar.oml.Import;
 import io.opencaesar.oml.IntegerLiteral;
 import io.opencaesar.oml.KeyAxiom;
 import io.opencaesar.oml.Literal;
@@ -66,7 +65,6 @@ import io.opencaesar.oml.StructuredProperty;
 import io.opencaesar.oml.StructuredPropertyReference;
 import io.opencaesar.oml.TypeAssertion;
 import io.opencaesar.oml.TypePredicate;
-import io.opencaesar.oml.Usage;
 import io.opencaesar.oml.Vocabulary;
 import io.opencaesar.oml.VocabularyBundle;
 import io.opencaesar.oml.util.OmlRead;
@@ -117,65 +115,25 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 	}
 
 	@Override
-	public Adapter createExtensionAdapter() {
-		if (extensionItemProvider == null) extensionItemProvider = new ExtensionItemProvider(this) {
+	public Adapter createImportAdapter() {
+		if (importItemProvider == null) importItemProvider = new ImportItemProvider(this) {
 			@Override
 			public String getText(Object object) {
-				Extension extension = (Extension)object;
-				StringBuilder label = new StringBuilder("extends <");
-				if (extension.getNamespace() != null) {
-					label.append(extension.getNamespace());
+				Import import_ = (Import)object;
+				StringBuilder label = new StringBuilder(import_.getKind()+" <");
+				if (import_.getNamespace() != null) {
+					label.append(import_.getNamespace());
 				}
 				label.append(">");
-				if (extension.getPrefix() != null) {
-					label.append(" as ").append(extension.getPrefix());
+				if (import_.getPrefix() != null) {
+					label.append(" as ").append(import_.getPrefix());
 				}
 				return label.toString();
 			}
 		};
-		return extensionItemProvider;
+		return importItemProvider;
 	}
 	
-	@Override
-	public Adapter createUsageAdapter() {
-		if (usageItemProvider == null) usageItemProvider = new UsageItemProvider(this) {
-			@Override
-			public String getText(Object object) {
-				Usage usage = (Usage)object;
-				StringBuilder label = new StringBuilder("uses <");
-				if (usage.getNamespace() != null) {
-					label.append(usage.getNamespace());
-				}
-				label.append(">");
-				if (usage.getPrefix() != null) {
-					label.append(" as ").append(usage.getPrefix());
-				}
-				return label.toString();
-			}
-		};
-		return usageItemProvider;
-	}
-	
-	@Override
-	public Adapter createInclusionAdapter() {
-		if (inclusionItemProvider == null) inclusionItemProvider = new InclusionItemProvider(this) {
-			@Override
-			public String getText(Object object) {
-				Inclusion inclusion = (Inclusion)object;
-				StringBuilder label = new StringBuilder("includes <");
-				if (inclusion.getNamespace() != null) {
-					label.append(inclusion.getNamespace());
-				}
-				label.append(">");
-				if (inclusion.getPrefix() != null) {
-					label.append(" as ").append(inclusion.getPrefix());
-				}
-				return label.toString();
-			}
-		};
-		return inclusionItemProvider;
-	}
-
 	// Description, its bundle and their imports
 	
 	@Override

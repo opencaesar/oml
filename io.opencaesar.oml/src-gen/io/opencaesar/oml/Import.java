@@ -34,17 +34,45 @@ package io.opencaesar.oml;
  * The following features are supported:
  * </p>
  * <ul>
+ *   <li>{@link io.opencaesar.oml.Import#getKind <em>Kind</em>}</li>
  *   <li>{@link io.opencaesar.oml.Import#getNamespace <em>Namespace</em>}</li>
  *   <li>{@link io.opencaesar.oml.Import#getPrefix <em>Prefix</em>}</li>
  *   <li>{@link io.opencaesar.oml.Import#getOwningOntology <em>Owning Ontology</em>}</li>
  * </ul>
  *
  * @see io.opencaesar.oml.OmlPackage#getImport()
- * @model abstract="true"
- *        annotation="https://tabatkins.github.io/bikeshed heading='Elements'"
+ * @model annotation="https://tabatkins.github.io/bikeshed heading='Elements'"
  * @generated
  */
 public interface Import extends Element {
+	/**
+	 * Returns the value of the '<em><b>Kind</b></em>' attribute.
+	 * The literals are from the enumeration {@link io.opencaesar.oml.ImportKind}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The kind of this import
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Kind</em>' attribute.
+	 * @see io.opencaesar.oml.ImportKind
+	 * @see #setKind(ImportKind)
+	 * @see io.opencaesar.oml.OmlPackage#getImport_Kind()
+	 * @model unique="false" required="true"
+	 * @generated
+	 */
+	ImportKind getKind();
+
+	/**
+	 * Sets the value of the '{@link io.opencaesar.oml.Import#getKind <em>Kind</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Kind</em>' attribute.
+	 * @see io.opencaesar.oml.ImportKind
+	 * @see #getKind()
+	 * @generated
+	 */
+	void setKind(ImportKind value);
+
 	/**
 	 * Returns the value of the '<em><b>Namespace</b></em>' attribute.
 	 * <!-- begin-user-doc -->

@@ -196,17 +196,7 @@ public class OntologyItemProvider extends IdentifiedElementItemProvider {
 		newChildDescriptors.add
 			(createChildParameter
 				(OmlPackage.Literals.ONTOLOGY__OWNED_IMPORTS,
-				 OmlFactory.eINSTANCE.createExtension()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OmlPackage.Literals.ONTOLOGY__OWNED_IMPORTS,
-				 OmlFactory.eINSTANCE.createUsage()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OmlPackage.Literals.ONTOLOGY__OWNED_IMPORTS,
-				 OmlFactory.eINSTANCE.createInclusion()));
+				 OmlFactory.eINSTANCE.createImport()));
 	}
 
 }

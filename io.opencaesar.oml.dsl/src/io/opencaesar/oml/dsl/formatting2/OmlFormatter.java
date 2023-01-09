@@ -50,11 +50,11 @@ import io.opencaesar.oml.DifferentFromPredicate;
 import io.opencaesar.oml.Element;
 import io.opencaesar.oml.EnumeratedScalar;
 import io.opencaesar.oml.EnumeratedScalarReference;
-import io.opencaesar.oml.Extension;
 import io.opencaesar.oml.FacetedScalar;
 import io.opencaesar.oml.FacetedScalarReference;
 import io.opencaesar.oml.ForwardRelation;
-import io.opencaesar.oml.Inclusion;
+import io.opencaesar.oml.Import;
+import io.opencaesar.oml.ImportKind;
 import io.opencaesar.oml.KeyAxiom;
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.PropertyCardinalityRestrictionAxiom;
@@ -83,7 +83,6 @@ import io.opencaesar.oml.StructuredProperty;
 import io.opencaesar.oml.StructuredPropertyReference;
 import io.opencaesar.oml.TypePredicate;
 import io.opencaesar.oml.UnreifiedRelation;
-import io.opencaesar.oml.Usage;
 import io.opencaesar.oml.Vocabulary;
 import io.opencaesar.oml.VocabularyBundle;
 import io.opencaesar.oml.dsl.services.OmlGrammarAccess;
@@ -436,19 +435,9 @@ public class OmlFormatter extends AbstractJavaFormatter {
 		reference.getOwnedPropertyValues().forEach(i -> doc.prepend(doc.format(i), newLine()));
 	}
 
-	protected void _format(Extension extension, IFormattableDocument doc) {
-		doc.append(keyword(extension, oml.getExtensionAccess().getExtendsKeyword_0()), oneSpace());
-		doc.surround(keyword(extension, oml.getExtensionAccess().getAsKeyword_2_0()), oneSpace());
-	}
-
-	protected void _format(Usage usage, IFormattableDocument doc) {
-		doc.append(keyword(usage, oml.getUsageAccess().getUsesKeyword_0()), oneSpace());
-		doc.surround(keyword(usage, oml.getUsageAccess().getAsKeyword_2_0()), oneSpace());
-	}
-
-	protected void _format(Inclusion inclusion, IFormattableDocument doc) {
-		doc.append(keyword(inclusion, oml.getInclusionAccess().getIncludesKeyword_0()), oneSpace());
-		doc.surround(keyword(inclusion, oml.getInclusionAccess().getAsKeyword_2_0()), oneSpace());
+	protected void _format(Import import_, IFormattableDocument doc) {
+		doc.surround(feature(import_, OmlPackage.Literals.IMPORT__KIND), oneSpace());
+		doc.surround(keyword(import_, oml.getExtensionAccess().getAsKeyword_2_0()), oneSpace());
 	}
 
 	protected void _format(PropertyRangeRestrictionAxiom axiom, IFormattableDocument doc) {

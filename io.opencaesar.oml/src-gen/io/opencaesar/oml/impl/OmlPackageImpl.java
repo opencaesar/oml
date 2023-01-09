@@ -47,13 +47,12 @@ import io.opencaesar.oml.Entity;
 import io.opencaesar.oml.EntityReference;
 import io.opencaesar.oml.EnumeratedScalar;
 import io.opencaesar.oml.EnumeratedScalarReference;
-import io.opencaesar.oml.Extension;
 import io.opencaesar.oml.FacetedScalar;
 import io.opencaesar.oml.FacetedScalarReference;
 import io.opencaesar.oml.ForwardRelation;
 import io.opencaesar.oml.IdentifiedElement;
 import io.opencaesar.oml.Import;
-import io.opencaesar.oml.Inclusion;
+import io.opencaesar.oml.ImportKind;
 import io.opencaesar.oml.Instance;
 import io.opencaesar.oml.IntegerLiteral;
 import io.opencaesar.oml.KeyAxiom;
@@ -107,7 +106,6 @@ import io.opencaesar.oml.TypeAssertion;
 import io.opencaesar.oml.TypePredicate;
 import io.opencaesar.oml.UnaryPredicate;
 import io.opencaesar.oml.UnreifiedRelation;
-import io.opencaesar.oml.Usage;
 import io.opencaesar.oml.Vocabulary;
 import io.opencaesar.oml.VocabularyBox;
 import io.opencaesar.oml.VocabularyBundle;
@@ -263,27 +261,6 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	private EClass descriptionBundleEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass extensionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass usageEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass inclusionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -794,6 +771,13 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EEnum importKindEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EDataType unsignedIntEDataType = null;
 
 	/**
@@ -1043,7 +1027,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getImport_Namespace() {
+	public EAttribute getImport_Kind() {
 		return (EAttribute)importEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -1053,7 +1037,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getImport_Prefix() {
+	public EAttribute getImport_Namespace() {
 		return (EAttribute)importEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -1063,8 +1047,18 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
+	public EAttribute getImport_Prefix() {
+		return (EAttribute)importEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EReference getImport_OwningOntology() {
-		return (EReference)importEClass.getEStructuralFeatures().get(2);
+		return (EReference)importEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -1355,36 +1349,6 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	@Override
 	public EClass getDescriptionBundle() {
 		return descriptionBundleEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getExtension() {
-		return extensionEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getUsage() {
-		return usageEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getInclusion() {
-		return inclusionEClass;
 	}
 
 	/**
@@ -3513,6 +3477,16 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
+	public EEnum getImportKind() {
+		return importKindEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EDataType getUnsignedInt() {
 		return unsignedIntEDataType;
 	}
@@ -3603,6 +3577,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		createEOperation(identifiedElementEClass, IDENTIFIED_ELEMENT___GET_IRI);
 
 		importEClass = createEClass(IMPORT);
+		createEAttribute(importEClass, IMPORT__KIND);
 		createEAttribute(importEClass, IMPORT__NAMESPACE);
 		createEAttribute(importEClass, IMPORT__PREFIX);
 		createEReference(importEClass, IMPORT__OWNING_ONTOLOGY);
@@ -3649,12 +3624,6 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		createEReference(descriptionEClass, DESCRIPTION__OWNED_STATEMENTS);
 
 		descriptionBundleEClass = createEClass(DESCRIPTION_BUNDLE);
-
-		extensionEClass = createEClass(EXTENSION);
-
-		usageEClass = createEClass(USAGE);
-
-		inclusionEClass = createEClass(INCLUSION);
 
 		vocabularyStatementEClass = createEClass(VOCABULARY_STATEMENT);
 		createEReference(vocabularyStatementEClass, VOCABULARY_STATEMENT__OWNING_VOCABULARY);
@@ -3938,6 +3907,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		separatorKindEEnum = createEEnum(SEPARATOR_KIND);
 		rangeRestrictionKindEEnum = createEEnum(RANGE_RESTRICTION_KIND);
 		cardinalityRestrictionKindEEnum = createEEnum(CARDINALITY_RESTRICTION_KIND);
+		importKindEEnum = createEEnum(IMPORT_KIND);
 
 		// Create data types
 		unsignedIntEDataType = createEDataType(UNSIGNED_INT);
@@ -3995,9 +3965,6 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		vocabularyBundleEClass.getESuperTypes().add(this.getVocabularyBox());
 		descriptionEClass.getESuperTypes().add(this.getDescriptionBox());
 		descriptionBundleEClass.getESuperTypes().add(this.getDescriptionBox());
-		extensionEClass.getESuperTypes().add(this.getImport());
-		usageEClass.getESuperTypes().add(this.getImport());
-		inclusionEClass.getESuperTypes().add(this.getImport());
 		vocabularyStatementEClass.getESuperTypes().add(this.getStatement());
 		descriptionStatementEClass.getESuperTypes().add(this.getStatement());
 		vocabularyMemberEClass.getESuperTypes().add(this.getMember());
@@ -4110,7 +4077,8 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 
 		initEOperation(getIdentifiedElement__GetIri(), theEcorePackage.getEString(), "getIri", 0, 1, !IS_UNIQUE, IS_ORDERED);
 
-		initEClass(importEClass, Import.class, "Import", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(importEClass, Import.class, "Import", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getImport_Kind(), this.getImportKind(), "kind", null, 1, 1, Import.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getImport_Namespace(), this.getNamespace(), "namespace", null, 1, 1, Import.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getImport_Prefix(), this.getID(), "prefix", null, 0, 1, Import.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getImport_OwningOntology(), this.getOntology(), this.getOntology_OwnedImports(), "owningOntology", null, 1, 1, Import.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -4163,12 +4131,6 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		initEReference(getDescription_OwnedStatements(), this.getDescriptionStatement(), this.getDescriptionStatement_OwningDescription(), "ownedStatements", null, 0, -1, Description.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(descriptionBundleEClass, DescriptionBundle.class, "DescriptionBundle", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(extensionEClass, Extension.class, "Extension", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(usageEClass, Usage.class, "Usage", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(inclusionEClass, Inclusion.class, "Inclusion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(vocabularyStatementEClass, VocabularyStatement.class, "VocabularyStatement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getVocabularyStatement_OwningVocabulary(), this.getVocabulary(), this.getVocabulary_OwnedStatements(), "owningVocabulary", null, 1, 1, VocabularyStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -4499,6 +4461,11 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		addEEnumLiteral(cardinalityRestrictionKindEEnum, CardinalityRestrictionKind.MIN);
 		addEEnumLiteral(cardinalityRestrictionKindEEnum, CardinalityRestrictionKind.MAX);
 
+		initEEnum(importKindEEnum, ImportKind.class, "ImportKind");
+		addEEnumLiteral(importKindEEnum, ImportKind.EXTENSION);
+		addEEnumLiteral(importKindEEnum, ImportKind.USAGE);
+		addEEnumLiteral(importKindEEnum, ImportKind.INCLUSION);
+
 		// Initialize data types
 		initEDataType(unsignedIntEDataType, long.class, "UnsignedInt", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(unsignedIntegerEDataType, Long.class, "UnsignedInteger", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
@@ -4668,24 +4635,6 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		   source,
 		   new String[] {
 			   "heading", "Descriptions"
-		   });
-		addAnnotation
-		  (extensionEClass,
-		   source,
-		   new String[] {
-			   "heading", "Elements"
-		   });
-		addAnnotation
-		  (usageEClass,
-		   source,
-		   new String[] {
-			   "heading", "Elements"
-		   });
-		addAnnotation
-		  (inclusionEClass,
-		   source,
-		   new String[] {
-			   "heading", "Elements"
 		   });
 		addAnnotation
 		  (vocabularyStatementEClass,
@@ -5115,6 +5064,12 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		   });
 		addAnnotation
 		  (cardinalityRestrictionKindEEnum,
+		   source,
+		   new String[] {
+			   "heading", "Enumerations"
+		   });
+		addAnnotation
+		  (importKindEEnum,
 		   source,
 		   new String[] {
 			   "heading", "Enumerations"

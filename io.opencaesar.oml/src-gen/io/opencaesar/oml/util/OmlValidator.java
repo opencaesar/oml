@@ -159,12 +159,6 @@ public class OmlValidator extends EObjectValidator {
 				return validateDescription((Description)value, diagnostics, context);
 			case OmlPackage.DESCRIPTION_BUNDLE:
 				return validateDescriptionBundle((DescriptionBundle)value, diagnostics, context);
-			case OmlPackage.EXTENSION:
-				return validateExtension((Extension)value, diagnostics, context);
-			case OmlPackage.USAGE:
-				return validateUsage((Usage)value, diagnostics, context);
-			case OmlPackage.INCLUSION:
-				return validateInclusion((Inclusion)value, diagnostics, context);
 			case OmlPackage.VOCABULARY_STATEMENT:
 				return validateVocabularyStatement((VocabularyStatement)value, diagnostics, context);
 			case OmlPackage.DESCRIPTION_STATEMENT:
@@ -309,6 +303,8 @@ public class OmlValidator extends EObjectValidator {
 				return validateRangeRestrictionKind((RangeRestrictionKind)value, diagnostics, context);
 			case OmlPackage.CARDINALITY_RESTRICTION_KIND:
 				return validateCardinalityRestrictionKind((CardinalityRestrictionKind)value, diagnostics, context);
+			case OmlPackage.IMPORT_KIND:
+				return validateImportKind((ImportKind)value, diagnostics, context);
 			case OmlPackage.UNSIGNED_INT:
 				return validateUnsignedInt((Long)value, diagnostics, context);
 			case OmlPackage.UNSIGNED_INTEGER:
@@ -673,63 +669,6 @@ public class OmlValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(descriptionBundle, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(descriptionBundle, diagnostics, context);
 		if (result || diagnostics != null) result &= validateElement_extraValidate(descriptionBundle, diagnostics, context);
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateExtension(Extension extension, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(extension, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms(extension, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(extension, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(extension, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(extension, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(extension, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(extension, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(extension, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(extension, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_extraValidate(extension, diagnostics, context);
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateUsage(Usage usage, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(usage, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms(usage, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(usage, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(usage, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(usage, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(usage, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(usage, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(usage, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(usage, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_extraValidate(usage, diagnostics, context);
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateInclusion(Inclusion inclusion, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(inclusion, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms(inclusion, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(inclusion, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(inclusion, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(inclusion, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(inclusion, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(inclusion, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(inclusion, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(inclusion, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_extraValidate(inclusion, diagnostics, context);
 		return result;
 	}
 
@@ -2068,6 +2007,15 @@ public class OmlValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateCardinalityRestrictionKind(CardinalityRestrictionKind cardinalityRestrictionKind, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return true;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateImportKind(ImportKind importKind, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return true;
 	}
 

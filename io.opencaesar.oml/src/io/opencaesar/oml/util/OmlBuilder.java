@@ -50,11 +50,11 @@ import io.opencaesar.oml.DifferentFromPredicate;
 import io.opencaesar.oml.DoubleLiteral;
 import io.opencaesar.oml.Element;
 import io.opencaesar.oml.EnumeratedScalar;
-import io.opencaesar.oml.Extension;
 import io.opencaesar.oml.FacetedScalar;
 import io.opencaesar.oml.ForwardRelation;
 import io.opencaesar.oml.IdentifiedElement;
-import io.opencaesar.oml.Inclusion;
+import io.opencaesar.oml.Import;
+import io.opencaesar.oml.ImportKind;
 import io.opencaesar.oml.IntegerLiteral;
 import io.opencaesar.oml.KeyAxiom;
 import io.opencaesar.oml.Literal;
@@ -88,7 +88,6 @@ import io.opencaesar.oml.StructuredProperty;
 import io.opencaesar.oml.TypeAssertion;
 import io.opencaesar.oml.TypePredicate;
 import io.opencaesar.oml.UnreifiedRelation;
-import io.opencaesar.oml.Usage;
 import io.opencaesar.oml.Vocabulary;
 import io.opencaesar.oml.VocabularyBundle;
 
@@ -750,52 +749,21 @@ public class OmlBuilder {
         return null;
     }
     
-    // Extension
+    // Import
     
     /**
-     * Creates an extension and adds it to the given ontology
+     * Creates an import and adds it to the given ontology
      * 
-     * @param ontology the extending ontology
-     * @param extendedOntologyIri the IRI of the extended ontology
-     * @param extendedOntologySeparator the separator of the extended ontology (optional)
-     * @param extendedOntologyPrefix the prefix of the extended ontology (optional)
-     * @return an extension that is added to the extending ontology
+     * @param ontology the importing ontology
+     * @param kind the kind of import
+     * @param iri the IRI of the imported ontology
+     * @param sep the separator of the imported ontology iri (optional)
+     * @param prefix the prefix of the imported ontology (optional)
+     * @return an import that is added to the importing ontology
      */
-    public Extension addExtension(Ontology ontology, String extendedOntologyIri, SeparatorKind extendedOntologySeparator, String extendedOntologyPrefix) {
-        final Extension extension = OmlWrite.addExtension(ontology, extendedOntologyIri, extendedOntologySeparator, extendedOntologyPrefix);
-        return extension;
-    }
-
-    // Usage
-    
-    /**
-     * Creates a usage and adds it to the given ontology
-     * 
-     * @param ontology the using ontology
-     * @param usedOntologyIri the IRI of the used ontology
-     * @param usedOntologySeparator the separator of the used ontology (optional)
-     * @param usedOntologyPrefix the prefix of the used ontology (optional)
-     * @return a usage that is added to the using ontology
-     */
-    public Usage addUsage(Ontology ontology, String usedOntologyIri, SeparatorKind usedOntologySeparator, String usedOntologyPrefix) {
-        final Usage usage = OmlWrite.addUsage(ontology, usedOntologyIri, usedOntologySeparator, usedOntologyPrefix);
-        return usage;
-    }
-
-    // Inclusion
-    
-    /**
-     * Creates an inclusion and adds it to the given ontology
-     * 
-     * @param ontology the including ontology
-     * @param includedOntologyIri the IRI of the included ontology
-     * @param includedOntologySeparator the separator of the included ontology (optional)
-     * @param includedOntologyPrefix the prefix of the included ontology (optional)
-     * @return an inclusion that is added to the including ontology
-     */
-    public Inclusion addInclusion(Ontology ontology, String includedOntologyIri, SeparatorKind includedOntologySeparator, String includedOntologyPrefix) {
-        final Inclusion inclusion = OmlWrite.addInclusion(ontology, includedOntologyIri, includedOntologySeparator, includedOntologyPrefix);
-        return inclusion;
+    public static Import addImport(Ontology ontology, ImportKind kind, String iri, SeparatorKind sep, String prefix) {
+        final Import import_ = OmlWrite.addImport(ontology, kind, iri, sep, prefix);
+        return import_;
     }
     
     // SpecializationAxiom

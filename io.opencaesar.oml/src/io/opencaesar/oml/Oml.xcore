@@ -133,7 +133,11 @@ abstract class IdentifiedElement extends Element {
  * if members of the imported ontology will also be referenced by the importing ontology
  */
 @Bikeshed(heading="Elements")
-abstract class Import extends Element {
+class Import extends Element {
+	/*
+	 * The kind of this import
+	 */
+	ImportKind[1] kind
     /*
      * The namespace of the imported ontology
      */
@@ -387,33 +391,6 @@ class Description extends DescriptionBox {
  */
 @Bikeshed(heading="Descriptions")
 class DescriptionBundle extends DescriptionBox {
-}
-
-////////////////////////////////////////
-// Imports 
-////////////////////////////////////////
-
-/*
- * Extension is an import that allows an ontology to extend another of the same kind. 
- */
-@Bikeshed(heading="Elements")
-class Extension extends Import {
-}
-
-/*
- * Usage is an import that allows a vocabulary to use a description, a description to use a vocabulary, or
- * a description bundl to use either a vocabulary or a vocabulary bundle.
- */
-@Bikeshed(heading="Elements")
-class Usage extends Import {
-}
-
-/*
- * Inclusion is an import that allows a vocabulary bundle to include a vocabulary, or
- * a description bundle to include a description. 
- */
-@Bikeshed(heading="Elements")
-class Inclusion extends Import {
 }
 
 ////////////////////////////////////////
@@ -1685,6 +1662,25 @@ enum CardinalityRestrictionKind {
      * The cardinality is at most this
      */
     max = 2
+}
+
+/*
+ * ImportKind is an enumeration that specifies the kind of import
+ */
+@Bikeshed(heading="Enumerations")
+enum ImportKind {
+    /*
+     * Extension is an import that allows an ontology to extend another of the same type. 
+     */
+    ^extension as "extends" = 0
+    /*
+ 	 * Usage is an import that allows an ontology to use another of a different box type.
+ 	 */
+    usage as "uses" = 1
+    /*
+	 * Inclusion is an import that allows a bundle ontology to include a non-bundle ontology of the same box type. 
+     */
+    inclusion as "includes" = 2
 }
 
 ////////////////////////////////////////

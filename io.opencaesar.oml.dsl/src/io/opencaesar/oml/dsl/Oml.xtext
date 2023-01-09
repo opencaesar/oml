@@ -333,14 +333,14 @@ Import:
 	Usage |
 	Inclusion;
 
-Extension:
-	'extends' namespace=NAMESPACE ('as' prefix=ID)?;
+Extension returns Import:
+	kind=Extends namespace=NAMESPACE ('as' prefix=ID)?;
     	
-Usage:
-	'uses' namespace=NAMESPACE ('as' prefix=ID)?;
+Usage returns Import:
+	kind=Uses namespace=NAMESPACE ('as' prefix=ID)?;
     	
-Inclusion:
-	'includes' namespace=NAMESPACE ('as' prefix=ID)?;
+Inclusion returns Import:
+	kind=Includes namespace=NAMESPACE ('as' prefix=ID)?;
 
 SpecializationAxiom:
 	specializedTerm=[SpecializableTerm|Ref];
@@ -473,6 +473,15 @@ enum CardinalityRestrictionKind:
 	exactly |
 	min |
 	max;
+
+enum Extends returns ImportKind:
+	extension = 'extends';
+
+enum Uses returns ImportKind:
+	usage = 'uses';
+
+enum Includes returns ImportKind:
+	inclusion = 'includes';
 
 //--------------
 

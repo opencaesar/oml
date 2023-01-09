@@ -47,6 +47,15 @@ public interface OmlFactory extends EFactory {
 	Annotation createAnnotation();
 
 	/**
+	 * Returns a new object of class '<em>Import</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Import</em>'.
+	 * @generated
+	 */
+	Import createImport();
+
+	/**
 	 * Returns a new object of class '<em>Vocabulary</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -81,33 +90,6 @@ public interface OmlFactory extends EFactory {
 	 * @generated
 	 */
 	DescriptionBundle createDescriptionBundle();
-
-	/**
-	 * Returns a new object of class '<em>Extension</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Extension</em>'.
-	 * @generated
-	 */
-	Extension createExtension();
-
-	/**
-	 * Returns a new object of class '<em>Usage</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Usage</em>'.
-	 * @generated
-	 */
-	Usage createUsage();
-
-	/**
-	 * Returns a new object of class '<em>Inclusion</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Inclusion</em>'.
-	 * @generated
-	 */
-	Inclusion createInclusion();
 
 	/**
 	 * Returns a new object of class '<em>Rule</em>'.

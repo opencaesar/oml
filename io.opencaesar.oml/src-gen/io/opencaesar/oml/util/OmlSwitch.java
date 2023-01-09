@@ -225,30 +225,6 @@ public class OmlSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case OmlPackage.EXTENSION: {
-				Extension extension = (Extension)theEObject;
-				T result = caseExtension(extension);
-				if (result == null) result = caseImport(extension);
-				if (result == null) result = caseElement(extension);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.USAGE: {
-				Usage usage = (Usage)theEObject;
-				T result = caseUsage(usage);
-				if (result == null) result = caseImport(usage);
-				if (result == null) result = caseElement(usage);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.INCLUSION: {
-				Inclusion inclusion = (Inclusion)theEObject;
-				T result = caseInclusion(inclusion);
-				if (result == null) result = caseImport(inclusion);
-				if (result == null) result = caseElement(inclusion);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case OmlPackage.VOCABULARY_STATEMENT: {
 				VocabularyStatement vocabularyStatement = (VocabularyStatement)theEObject;
 				T result = caseVocabularyStatement(vocabularyStatement);
@@ -1308,51 +1284,6 @@ public class OmlSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseDescriptionBundle(DescriptionBundle object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Extension</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Extension</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseExtension(Extension object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Usage</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Usage</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseUsage(Usage object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Inclusion</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Inclusion</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseInclusion(Inclusion object) {
 		return null;
 	}
 

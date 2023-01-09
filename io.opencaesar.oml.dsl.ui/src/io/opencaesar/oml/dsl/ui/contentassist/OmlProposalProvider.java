@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.EnumLiteralDeclaration;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
@@ -92,32 +93,32 @@ public class OmlProposalProvider extends AbstractOmlProposalProvider {
 	public void complete_NAMESPACE(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
 		final Ontology ontology = ((Element) model).getOntology();
 		final URI ontologyURI = EcoreUtil.getURI(ontology);
-		final Keyword keyword = ((Keyword) context.getLastCompleteNode().getGrammarElement());
+		final EnumLiteralDeclaration enumLiteral = ((EnumLiteralDeclaration) context.getLastCompleteNode().getGrammarElement());
 		Predicate<IEObjectDescription> predicate = null;
 		if (ontology instanceof Vocabulary) {
-			if (keyword == oml.getExtensionAccess().getExtendsKeyword_0()) {
+			if (enumLiteral == oml.getExtendsAccess().getExtensionEnumLiteralDeclaration()) {
 				predicate = x -> x.getEObjectURI() != ontologyURI && OmlPackage.Literals.VOCABULARY.isSuperTypeOf(x.getEClass());
-			} else if (keyword == oml.getUsageAccess().getUsesKeyword_0()) {
+			} else if (enumLiteral == oml.getUsesAccess().getUsageEnumLiteralDeclaration()) {
 				predicate = x -> x.getEObjectURI() != ontologyURI && OmlPackage.Literals.DESCRIPTION.isSuperTypeOf(x.getEClass());
 			}
 		} else if (ontology instanceof VocabularyBundle) {
-			if (keyword == oml.getExtensionAccess().getExtendsKeyword_0()) {
+			if (enumLiteral == oml.getExtendsAccess().getExtensionEnumLiteralDeclaration()) {
 				predicate = x -> x.getEObjectURI() != ontologyURI && OmlPackage.Literals.VOCABULARY_BUNDLE.isSuperTypeOf(x.getEClass());
-			} else if (keyword == oml.getInclusionAccess().getIncludesKeyword_0()) {
+			} else if (enumLiteral == oml.getIncludesAccess().getInclusionEnumLiteralDeclaration()) {
 				predicate = x -> x.getEObjectURI() != ontologyURI && OmlPackage.Literals.VOCABULARY.isSuperTypeOf(x.getEClass());
 			}
 		} else if (ontology instanceof Description) {
-			if (keyword == oml.getExtensionAccess().getExtendsKeyword_0()) {
+			if (enumLiteral == oml.getExtendsAccess().getExtensionEnumLiteralDeclaration()) {
 				predicate = x -> x.getEObjectURI() != ontologyURI && OmlPackage.Literals.DESCRIPTION.isSuperTypeOf(x.getEClass());
-			} else if (keyword == oml.getUsageAccess().getUsesKeyword_0()) {
+			} else if (enumLiteral == oml.getUsesAccess().getUsageEnumLiteralDeclaration()) {
 				predicate = x -> x.getEObjectURI() != ontologyURI && OmlPackage.Literals.VOCABULARY.isSuperTypeOf(x.getEClass());
 			}
 		} else if (ontology instanceof DescriptionBundle) {
-			if (keyword == oml.getExtensionAccess().getExtendsKeyword_0()) {
+			if (enumLiteral == oml.getExtendsAccess().getExtensionEnumLiteralDeclaration()) {
 				predicate = x -> x.getEObjectURI() != ontologyURI && OmlPackage.Literals.DESCRIPTION_BUNDLE.isSuperTypeOf(x.getEClass());
-			} else if (keyword == oml.getUsageAccess().getUsesKeyword_0()) {
+			} else if (enumLiteral == oml.getUsesAccess().getUsageEnumLiteralDeclaration()) {
 				predicate = x -> x.getEObjectURI() != ontologyURI && OmlPackage.Literals.VOCABULARY_BOX.isSuperTypeOf(x.getEClass());
-			} else if (keyword == oml.getInclusionAccess().getIncludesKeyword_0()) {
+			} else if (enumLiteral == oml.getIncludesAccess().getInclusionEnumLiteralDeclaration()) {
 				predicate = x -> x.getEObjectURI() != ontologyURI && OmlPackage.Literals.DESCRIPTION.isSuperTypeOf(x.getEClass());
 			}
 		}

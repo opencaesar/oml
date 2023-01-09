@@ -48,12 +48,12 @@ import io.opencaesar.oml.Element;
 import io.opencaesar.oml.Entity;
 import io.opencaesar.oml.EnumeratedScalar;
 import io.opencaesar.oml.EnumeratedScalarReference;
-import io.opencaesar.oml.Extension;
 import io.opencaesar.oml.FacetedScalar;
 import io.opencaesar.oml.FacetedScalarReference;
 import io.opencaesar.oml.ForwardRelation;
 import io.opencaesar.oml.IdentifiedElement;
-import io.opencaesar.oml.Inclusion;
+import io.opencaesar.oml.Import;
+import io.opencaesar.oml.ImportKind;
 import io.opencaesar.oml.Instance;
 import io.opencaesar.oml.IntegerLiteral;
 import io.opencaesar.oml.KeyAxiom;
@@ -100,7 +100,6 @@ import io.opencaesar.oml.Type;
 import io.opencaesar.oml.TypeAssertion;
 import io.opencaesar.oml.TypePredicate;
 import io.opencaesar.oml.UnreifiedRelation;
-import io.opencaesar.oml.Usage;
 import io.opencaesar.oml.Vocabulary;
 import io.opencaesar.oml.VocabularyBundle;
 import io.opencaesar.oml.VocabularyStatement;
@@ -910,61 +909,25 @@ public class OmlWrite {
         return reference;
     }
     
-    // Extension
+    // Import
     
     /**
-     * Creates an extension and adds it to the given ontology
+     * Creates an import and adds it to the given ontology
      * 
-     * @param ontology the extending ontology
-     * @param extensionIri the IRI of the extended ontology
-     * @param extensionSep the separator of the extended ontology (optional)
-     * @param extensionPrefix the prefix of the extended ontology (optional)
-     * @return an extension that is added to the extending ontology
+     * @param ontology the importing ontology
+     * @param kind the kind of import
+     * @param iri the IRI of the imported ontology
+     * @param sep the separator of the imported ontology iri (optional)
+     * @param prefix the prefix of the imported ontology (optional)
+     * @return an import that is added to the importing ontology
      */
-    public static Extension addExtension(Ontology ontology, String extensionIri, SeparatorKind extensionSep, String extensionPrefix) {
-        final Extension extension = create(Extension.class);
-        extension.setNamespace(extensionIri + ((extensionSep != null) ? extensionSep : SeparatorKind.HASH));
-        extension.setPrefix(extensionPrefix);
-        ontology.getOwnedImports().add(extension);
-        return extension;
-    }
-
-    // Usage
-    
-    /**
-     * Creates a usage and adds it to the given ontology
-     * 
-     * @param ontology the using ontology
-     * @param usageIri the IRI of the used ontology
-     * @param usageSep the separator of the used ontology (optional)
-     * @param usagePrefix the prefix of the used ontology (optional)
-     * @return a usage that is added to the using ontology
-     */
-    public static Usage addUsage(Ontology ontology, String usageIri, SeparatorKind usageSep, String usagePrefix) {
-        final Usage usage = create(Usage.class);
-       	usage.setNamespace(usageIri + ((usageSep != null) ? usageSep : SeparatorKind.HASH));
-        usage.setPrefix(usagePrefix);
-        ontology.getOwnedImports().add(usage);
-        return usage;
-    }
-
-    // Inclusion
-    
-    /**
-     * Creates an inclusion and adds it to the given ontology
-     * 
-     * @param ontology the including ontology
-     * @param includeIri the IRI of the included ontology
-     * @param includeSep the separator of the included ontology (optional)
-     * @param includePrefix the prefix of the included ontology (optional)
-     * @return an inclusion that is added to the including ontology
-     */
-    public static Inclusion addInclusion(Ontology ontology, String includeIri, SeparatorKind includeSep, String includePrefix) {
-		final Inclusion inclusion = create(Inclusion.class);
-		inclusion.setNamespace(includeIri+((includeSep != null) ? includeSep : SeparatorKind.HASH));
-		inclusion.setPrefix(includePrefix);
-		ontology.getOwnedImports().add(inclusion);
-		return inclusion;
+    public static Import addImport(Ontology ontology, ImportKind kind, String iri, SeparatorKind sep, String prefix) {
+        final Import import_ = create(Import.class);
+        import_.setKind(kind);
+        import_.setNamespace(iri + ((sep != null) ? sep : SeparatorKind.HASH));
+        import_.setPrefix(prefix);
+        ontology.getOwnedImports().add(import_);
+        return import_;
     }
 
     // SpecializationAxiom

@@ -19,6 +19,7 @@
 package io.opencaesar.oml.impl;
 
 import io.opencaesar.oml.Import;
+import io.opencaesar.oml.ImportKind;
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.Ontology;
 import io.opencaesar.oml.SeparatorKind;
@@ -45,6 +46,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link io.opencaesar.oml.impl.ImportImpl#getKind <em>Kind</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.ImportImpl#getNamespace <em>Namespace</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.ImportImpl#getPrefix <em>Prefix</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.ImportImpl#getOwningOntology <em>Owning Ontology</em>}</li>
@@ -52,7 +54,27 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  *
  * @generated
  */
-public abstract class ImportImpl extends ElementImpl implements Import {
+public class ImportImpl extends ElementImpl implements Import {
+	/**
+	 * The default value of the '{@link #getKind() <em>Kind</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getKind()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final ImportKind KIND_EDEFAULT = ImportKind.EXTENSION;
+
+	/**
+	 * The cached value of the '{@link #getKind() <em>Kind</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getKind()
+	 * @generated
+	 * @ordered
+	 */
+	protected ImportKind kind = KIND_EDEFAULT;
+
 	/**
 	 * The default value of the '{@link #getNamespace() <em>Namespace</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -110,6 +132,29 @@ public abstract class ImportImpl extends ElementImpl implements Import {
 	@Override
 	protected EClass eStaticClass() {
 		return OmlPackage.Literals.IMPORT;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ImportKind getKind() {
+		return kind;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setKind(ImportKind newKind) {
+		ImportKind oldKind = kind;
+		kind = newKind == null ? KIND_EDEFAULT : newKind;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.IMPORT__KIND, oldKind, kind));
 	}
 
 	/**
@@ -311,6 +356,8 @@ public abstract class ImportImpl extends ElementImpl implements Import {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case OmlPackage.IMPORT__KIND:
+				return getKind();
 			case OmlPackage.IMPORT__NAMESPACE:
 				return getNamespace();
 			case OmlPackage.IMPORT__PREFIX:
@@ -330,6 +377,9 @@ public abstract class ImportImpl extends ElementImpl implements Import {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case OmlPackage.IMPORT__KIND:
+				setKind((ImportKind)newValue);
+				return;
 			case OmlPackage.IMPORT__NAMESPACE:
 				setNamespace((String)newValue);
 				return;
@@ -351,6 +401,9 @@ public abstract class ImportImpl extends ElementImpl implements Import {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case OmlPackage.IMPORT__KIND:
+				setKind(KIND_EDEFAULT);
+				return;
 			case OmlPackage.IMPORT__NAMESPACE:
 				setNamespace(NAMESPACE_EDEFAULT);
 				return;
@@ -372,6 +425,8 @@ public abstract class ImportImpl extends ElementImpl implements Import {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case OmlPackage.IMPORT__KIND:
+				return kind != KIND_EDEFAULT;
 			case OmlPackage.IMPORT__NAMESPACE:
 				return NAMESPACE_EDEFAULT == null ? namespace != null : !NAMESPACE_EDEFAULT.equals(namespace);
 			case OmlPackage.IMPORT__PREFIX:
@@ -408,7 +463,9 @@ public abstract class ImportImpl extends ElementImpl implements Import {
 		if (eIsProxy()) return super.toString();
 
 		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (namespace: ");
+		result.append(" (kind: ");
+		result.append(kind);
+		result.append(", namespace: ");
 		result.append(namespace);
 		result.append(", prefix: ");
 		result.append(prefix);

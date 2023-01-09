@@ -79,13 +79,11 @@ public class OmlFactoryImpl extends EFactoryImpl implements OmlFactory {
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case OmlPackage.ANNOTATION: return createAnnotation();
+			case OmlPackage.IMPORT: return createImport();
 			case OmlPackage.VOCABULARY: return createVocabulary();
 			case OmlPackage.VOCABULARY_BUNDLE: return createVocabularyBundle();
 			case OmlPackage.DESCRIPTION: return createDescription();
 			case OmlPackage.DESCRIPTION_BUNDLE: return createDescriptionBundle();
-			case OmlPackage.EXTENSION: return createExtension();
-			case OmlPackage.USAGE: return createUsage();
-			case OmlPackage.INCLUSION: return createInclusion();
 			case OmlPackage.RULE: return createRule();
 			case OmlPackage.STRUCTURE: return createStructure();
 			case OmlPackage.ASPECT: return createAspect();
@@ -151,6 +149,8 @@ public class OmlFactoryImpl extends EFactoryImpl implements OmlFactory {
 				return createRangeRestrictionKindFromString(eDataType, initialValue);
 			case OmlPackage.CARDINALITY_RESTRICTION_KIND:
 				return createCardinalityRestrictionKindFromString(eDataType, initialValue);
+			case OmlPackage.IMPORT_KIND:
+				return createImportKindFromString(eDataType, initialValue);
 			case OmlPackage.UNSIGNED_INT:
 				return createUnsignedIntFromString(eDataType, initialValue);
 			case OmlPackage.UNSIGNED_INTEGER:
@@ -180,6 +180,8 @@ public class OmlFactoryImpl extends EFactoryImpl implements OmlFactory {
 				return convertRangeRestrictionKindToString(eDataType, instanceValue);
 			case OmlPackage.CARDINALITY_RESTRICTION_KIND:
 				return convertCardinalityRestrictionKindToString(eDataType, instanceValue);
+			case OmlPackage.IMPORT_KIND:
+				return convertImportKindToString(eDataType, instanceValue);
 			case OmlPackage.UNSIGNED_INT:
 				return convertUnsignedIntToString(eDataType, instanceValue);
 			case OmlPackage.UNSIGNED_INTEGER:
@@ -204,6 +206,17 @@ public class OmlFactoryImpl extends EFactoryImpl implements OmlFactory {
 	public Annotation createAnnotation() {
 		AnnotationImpl annotation = new AnnotationImpl();
 		return annotation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Import createImport() {
+		ImportImpl import_ = new ImportImpl();
+		return import_;
 	}
 
 	/**
@@ -248,39 +261,6 @@ public class OmlFactoryImpl extends EFactoryImpl implements OmlFactory {
 	public DescriptionBundle createDescriptionBundle() {
 		DescriptionBundleImpl descriptionBundle = new DescriptionBundleImpl();
 		return descriptionBundle;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Extension createExtension() {
-		ExtensionImpl extension = new ExtensionImpl();
-		return extension;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Usage createUsage() {
-		UsageImpl usage = new UsageImpl();
-		return usage;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Inclusion createInclusion() {
-		InclusionImpl inclusion = new InclusionImpl();
-		return inclusion;
 	}
 
 	/**
@@ -846,6 +826,26 @@ public class OmlFactoryImpl extends EFactoryImpl implements OmlFactory {
 	 * @generated
 	 */
 	public String convertCardinalityRestrictionKindToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ImportKind createImportKindFromString(EDataType eDataType, String initialValue) {
+		ImportKind result = ImportKind.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertImportKindToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

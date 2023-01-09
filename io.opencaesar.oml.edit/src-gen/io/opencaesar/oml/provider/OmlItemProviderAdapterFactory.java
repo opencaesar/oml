@@ -111,6 +111,29 @@ public class OmlItemProviderAdapterFactory extends OmlAdapterFactory implements 
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.Import} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ImportItemProvider importItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link io.opencaesar.oml.Import}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createImportAdapter() {
+		if (importItemProvider == null) {
+			importItemProvider = new ImportItemProvider(this);
+		}
+
+		return importItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.Vocabulary} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -200,75 +223,6 @@ public class OmlItemProviderAdapterFactory extends OmlAdapterFactory implements 
 		}
 
 		return descriptionBundleItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.Extension} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected ExtensionItemProvider extensionItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.Extension}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createExtensionAdapter() {
-		if (extensionItemProvider == null) {
-			extensionItemProvider = new ExtensionItemProvider(this);
-		}
-
-		return extensionItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.Usage} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected UsageItemProvider usageItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.Usage}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createUsageAdapter() {
-		if (usageItemProvider == null) {
-			usageItemProvider = new UsageItemProvider(this);
-		}
-
-		return usageItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.Inclusion} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected InclusionItemProvider inclusionItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.Inclusion}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createInclusionAdapter() {
-		if (inclusionItemProvider == null) {
-			inclusionItemProvider = new InclusionItemProvider(this);
-		}
-
-		return inclusionItemProvider;
 	}
 
 	/**
@@ -1435,13 +1389,11 @@ public class OmlItemProviderAdapterFactory extends OmlAdapterFactory implements 
 	@Override
 	public void dispose() {
 		if (annotationItemProvider != null) annotationItemProvider.dispose();
+		if (importItemProvider != null) importItemProvider.dispose();
 		if (vocabularyItemProvider != null) vocabularyItemProvider.dispose();
 		if (vocabularyBundleItemProvider != null) vocabularyBundleItemProvider.dispose();
 		if (descriptionItemProvider != null) descriptionItemProvider.dispose();
 		if (descriptionBundleItemProvider != null) descriptionBundleItemProvider.dispose();
-		if (extensionItemProvider != null) extensionItemProvider.dispose();
-		if (usageItemProvider != null) usageItemProvider.dispose();
-		if (inclusionItemProvider != null) inclusionItemProvider.dispose();
 		if (ruleItemProvider != null) ruleItemProvider.dispose();
 		if (structureItemProvider != null) structureItemProvider.dispose();
 		if (aspectItemProvider != null) aspectItemProvider.dispose();
