@@ -18,18 +18,14 @@
  */
 package io.opencaesar.oml.impl;
 
-import io.opencaesar.oml.Description;
-import io.opencaesar.oml.DescriptionStatement;
 import io.opencaesar.oml.Instance;
 import io.opencaesar.oml.NamedInstance;
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.PropertyValueAssertion;
-import io.opencaesar.oml.Statement;
 import io.opencaesar.oml.TypeAssertion;
 
 import java.util.Collection;
 
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
@@ -37,10 +33,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
@@ -51,14 +44,13 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link io.opencaesar.oml.impl.NamedInstanceImpl#getOwningDescription <em>Owning Description</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.NamedInstanceImpl#getOwnedPropertyValues <em>Owned Property Values</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.NamedInstanceImpl#getOwnedTypes <em>Owned Types</em>}</li>
  * </ul>
  *
  * @generated
  */
-public abstract class NamedInstanceImpl extends DescriptionMemberImpl implements NamedInstance {
+public abstract class NamedInstanceImpl extends DescriptionStatementImpl implements NamedInstance {
 	/**
 	 * The cached value of the '{@link #getOwnedPropertyValues() <em>Owned Property Values</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -104,59 +96,6 @@ public abstract class NamedInstanceImpl extends DescriptionMemberImpl implements
 	 * @generated
 	 */
 	@Override
-	public Description getOwningDescription() {
-		if (eContainerFeatureID() != OmlPackage.NAMED_INSTANCE__OWNING_DESCRIPTION) return null;
-		return (Description)eContainer();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Description basicGetOwningDescription() {
-		if (eContainerFeatureID() != OmlPackage.NAMED_INSTANCE__OWNING_DESCRIPTION) return null;
-		return (Description)eInternalContainer();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetOwningDescription(Description newOwningDescription, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwningDescription, OmlPackage.NAMED_INSTANCE__OWNING_DESCRIPTION, msgs);
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setOwningDescription(Description newOwningDescription) {
-		if (newOwningDescription != eInternalContainer() || (eContainerFeatureID() != OmlPackage.NAMED_INSTANCE__OWNING_DESCRIPTION && newOwningDescription != null)) {
-			if (EcoreUtil.isAncestor(this, newOwningDescription))
-				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
-			NotificationChain msgs = null;
-			if (eInternalContainer() != null)
-				msgs = eBasicRemoveFromContainer(msgs);
-			if (newOwningDescription != null)
-				msgs = ((InternalEObject)newOwningDescription).eInverseAdd(this, OmlPackage.DESCRIPTION__OWNED_STATEMENTS, Description.class, msgs);
-			msgs = basicSetOwningDescription(newOwningDescription, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.NAMED_INSTANCE__OWNING_DESCRIPTION, newOwningDescription, newOwningDescription));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EList<PropertyValueAssertion> getOwnedPropertyValues() {
 		if (ownedPropertyValues == null) {
 			ownedPropertyValues = new EObjectContainmentWithInverseEList<PropertyValueAssertion>(PropertyValueAssertion.class, this, OmlPackage.NAMED_INSTANCE__OWNED_PROPERTY_VALUES, OmlPackage.PROPERTY_VALUE_ASSERTION__OWNING_INSTANCE);
@@ -186,10 +125,6 @@ public abstract class NamedInstanceImpl extends DescriptionMemberImpl implements
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case OmlPackage.NAMED_INSTANCE__OWNING_DESCRIPTION:
-				if (eInternalContainer() != null)
-					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetOwningDescription((Description)otherEnd, msgs);
 			case OmlPackage.NAMED_INSTANCE__OWNED_PROPERTY_VALUES:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedPropertyValues()).basicAdd(otherEnd, msgs);
 			case OmlPackage.NAMED_INSTANCE__OWNED_TYPES:
@@ -206,8 +141,6 @@ public abstract class NamedInstanceImpl extends DescriptionMemberImpl implements
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case OmlPackage.NAMED_INSTANCE__OWNING_DESCRIPTION:
-				return basicSetOwningDescription(null, msgs);
 			case OmlPackage.NAMED_INSTANCE__OWNED_PROPERTY_VALUES:
 				return ((InternalEList<?>)getOwnedPropertyValues()).basicRemove(otherEnd, msgs);
 			case OmlPackage.NAMED_INSTANCE__OWNED_TYPES:
@@ -222,25 +155,8 @@ public abstract class NamedInstanceImpl extends DescriptionMemberImpl implements
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID()) {
-			case OmlPackage.NAMED_INSTANCE__OWNING_DESCRIPTION:
-				return eInternalContainer().eInverseRemove(this, OmlPackage.DESCRIPTION__OWNED_STATEMENTS, Description.class, msgs);
-		}
-		return super.eBasicRemoveFromContainerFeature(msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case OmlPackage.NAMED_INSTANCE__OWNING_DESCRIPTION:
-				if (resolve) return getOwningDescription();
-				return basicGetOwningDescription();
 			case OmlPackage.NAMED_INSTANCE__OWNED_PROPERTY_VALUES:
 				return getOwnedPropertyValues();
 			case OmlPackage.NAMED_INSTANCE__OWNED_TYPES:
@@ -258,9 +174,6 @@ public abstract class NamedInstanceImpl extends DescriptionMemberImpl implements
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case OmlPackage.NAMED_INSTANCE__OWNING_DESCRIPTION:
-				setOwningDescription((Description)newValue);
-				return;
 			case OmlPackage.NAMED_INSTANCE__OWNED_PROPERTY_VALUES:
 				getOwnedPropertyValues().clear();
 				getOwnedPropertyValues().addAll((Collection<? extends PropertyValueAssertion>)newValue);
@@ -281,9 +194,6 @@ public abstract class NamedInstanceImpl extends DescriptionMemberImpl implements
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case OmlPackage.NAMED_INSTANCE__OWNING_DESCRIPTION:
-				setOwningDescription((Description)null);
-				return;
 			case OmlPackage.NAMED_INSTANCE__OWNED_PROPERTY_VALUES:
 				getOwnedPropertyValues().clear();
 				return;
@@ -302,8 +212,6 @@ public abstract class NamedInstanceImpl extends DescriptionMemberImpl implements
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case OmlPackage.NAMED_INSTANCE__OWNING_DESCRIPTION:
-				return basicGetOwningDescription() != null;
 			case OmlPackage.NAMED_INSTANCE__OWNED_PROPERTY_VALUES:
 				return ownedPropertyValues != null && !ownedPropertyValues.isEmpty();
 			case OmlPackage.NAMED_INSTANCE__OWNED_TYPES:
@@ -319,17 +227,6 @@ public abstract class NamedInstanceImpl extends DescriptionMemberImpl implements
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == Statement.class) {
-			switch (derivedFeatureID) {
-				default: return -1;
-			}
-		}
-		if (baseClass == DescriptionStatement.class) {
-			switch (derivedFeatureID) {
-				case OmlPackage.NAMED_INSTANCE__OWNING_DESCRIPTION: return OmlPackage.DESCRIPTION_STATEMENT__OWNING_DESCRIPTION;
-				default: return -1;
-			}
-		}
 		if (baseClass == Instance.class) {
 			switch (derivedFeatureID) {
 				case OmlPackage.NAMED_INSTANCE__OWNED_PROPERTY_VALUES: return OmlPackage.INSTANCE__OWNED_PROPERTY_VALUES;
@@ -346,17 +243,6 @@ public abstract class NamedInstanceImpl extends DescriptionMemberImpl implements
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == Statement.class) {
-			switch (baseFeatureID) {
-				default: return -1;
-			}
-		}
-		if (baseClass == DescriptionStatement.class) {
-			switch (baseFeatureID) {
-				case OmlPackage.DESCRIPTION_STATEMENT__OWNING_DESCRIPTION: return OmlPackage.NAMED_INSTANCE__OWNING_DESCRIPTION;
-				default: return -1;
-			}
-		}
 		if (baseClass == Instance.class) {
 			switch (baseFeatureID) {
 				case OmlPackage.INSTANCE__OWNED_PROPERTY_VALUES: return OmlPackage.NAMED_INSTANCE__OWNED_PROPERTY_VALUES;

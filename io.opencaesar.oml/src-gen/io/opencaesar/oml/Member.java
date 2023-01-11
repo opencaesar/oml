@@ -52,7 +52,7 @@ public interface Member extends IdentifiedElement {
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
 	 * @see io.opencaesar.oml.OmlPackage#getMember_Name()
-	 * @model unique="false" id="true" dataType="io.opencaesar.oml.ID" required="true"
+	 * @model unique="false" id="true" dataType="io.opencaesar.oml.ID"
 	 * @generated
 	 */
 	String getName();
@@ -70,6 +70,20 @@ public interface Member extends IdentifiedElement {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Gets the Ref of this member
+	 * <!-- end-model-doc -->
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
+	Member getRef();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Gets the IRI of this member
+	 * <!-- end-model-doc -->
 	 * @model kind="operation" unique="false"
 	 * @generated
 	 */
@@ -79,7 +93,7 @@ public interface Member extends IdentifiedElement {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Gets the abbreviated IRI of this element
+	 * Gets the abbreviated IRI of this member
 	 * <!-- end-model-doc -->
 	 * @model kind="operation" unique="false"
 	 * @generated

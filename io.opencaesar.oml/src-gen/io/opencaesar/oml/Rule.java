@@ -26,16 +26,18 @@ import org.eclipse.emf.common.util.EList;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Rule is a member of a vocabulary that adds a new inference rule to the set supported natively by DL. A rule specifies a set
- * of antecedent predicates that forms a conjunction that infers, when it holds, a single consequent predicate. Each
+ * Rule is a member of a vocabulary that adds a new inference rule to the set supported natively by DL. A rule must specify a set of one or
+ * more antecedent predicates that forms a conjunction that infers, when it holds, a set of one or more consequent predicates. Each
  * predicate in a rule may specify (one or two) variables. Those with the same name refer to the same variable, and hence must
- * be bound to the same value from the model for the rule to trigger during reasoning.
+ * be bound to the same value from the model for the rule to trigger during reasoning. A rule ref cannot respecify the
+ * antecedent nor consequent of a rule.
  * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
+ *   <li>{@link io.opencaesar.oml.Rule#getRef <em>Ref</em>}</li>
  *   <li>{@link io.opencaesar.oml.Rule#getAntecedent <em>Antecedent</em>}</li>
  *   <li>{@link io.opencaesar.oml.Rule#getConsequent <em>Consequent</em>}</li>
  * </ul>
@@ -44,7 +46,32 @@ import org.eclipse.emf.common.util.EList;
  * @model annotation="https://tabatkins.github.io/bikeshed heading='Rules'"
  * @generated
  */
-public interface Rule extends VocabularyMember, VocabularyStatement {
+public interface Rule extends VocabularyStatement {
+	/**
+	 * Returns the value of the '<em><b>Ref</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * A ref to another rule
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Ref</em>' reference.
+	 * @see #setRef(Rule)
+	 * @see io.opencaesar.oml.OmlPackage#getRule_Ref()
+	 * @model
+	 * @generated
+	 */
+	Rule getRef();
+
+	/**
+	 * Sets the value of the '{@link io.opencaesar.oml.Rule#getRef <em>Ref</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Ref</em>' reference.
+	 * @see #getRef()
+	 * @generated
+	 */
+	void setRef(Rule value);
+
 	/**
 	 * Returns the value of the '<em><b>Antecedent</b></em>' containment reference list.
 	 * The list contents are of type {@link io.opencaesar.oml.Predicate}.
@@ -57,7 +84,7 @@ public interface Rule extends VocabularyMember, VocabularyStatement {
 	 * @return the value of the '<em>Antecedent</em>' containment reference list.
 	 * @see io.opencaesar.oml.OmlPackage#getRule_Antecedent()
 	 * @see io.opencaesar.oml.Predicate#getAntecedentRule
-	 * @model opposite="antecedentRule" containment="true" required="true"
+	 * @model opposite="antecedentRule" containment="true"
 	 * @generated
 	 */
 	EList<Predicate> getAntecedent();
@@ -74,7 +101,7 @@ public interface Rule extends VocabularyMember, VocabularyStatement {
 	 * @return the value of the '<em>Consequent</em>' containment reference list.
 	 * @see io.opencaesar.oml.OmlPackage#getRule_Consequent()
 	 * @see io.opencaesar.oml.Predicate#getConsequentRule
-	 * @model opposite="consequentRule" containment="true" required="true"
+	 * @model opposite="consequentRule" containment="true"
 	 * @generated
 	 */
 	EList<Predicate> getConsequent();

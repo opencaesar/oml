@@ -206,61 +206,6 @@ public class VocabularyItemProvider extends VocabularyBoxItemProvider {
 			(createChildParameter
 				(OmlPackage.Literals.VOCABULARY__OWNED_STATEMENTS,
 				 OmlFactory.eINSTANCE.createUnreifiedRelation()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OmlPackage.Literals.VOCABULARY__OWNED_STATEMENTS,
-				 OmlFactory.eINSTANCE.createAspectReference()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OmlPackage.Literals.VOCABULARY__OWNED_STATEMENTS,
-				 OmlFactory.eINSTANCE.createConceptReference()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OmlPackage.Literals.VOCABULARY__OWNED_STATEMENTS,
-				 OmlFactory.eINSTANCE.createRelationEntityReference()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OmlPackage.Literals.VOCABULARY__OWNED_STATEMENTS,
-				 OmlFactory.eINSTANCE.createStructureReference()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OmlPackage.Literals.VOCABULARY__OWNED_STATEMENTS,
-				 OmlFactory.eINSTANCE.createAnnotationPropertyReference()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OmlPackage.Literals.VOCABULARY__OWNED_STATEMENTS,
-				 OmlFactory.eINSTANCE.createScalarPropertyReference()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OmlPackage.Literals.VOCABULARY__OWNED_STATEMENTS,
-				 OmlFactory.eINSTANCE.createStructuredPropertyReference()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OmlPackage.Literals.VOCABULARY__OWNED_STATEMENTS,
-				 OmlFactory.eINSTANCE.createFacetedScalarReference()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OmlPackage.Literals.VOCABULARY__OWNED_STATEMENTS,
-				 OmlFactory.eINSTANCE.createEnumeratedScalarReference()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OmlPackage.Literals.VOCABULARY__OWNED_STATEMENTS,
-				 OmlFactory.eINSTANCE.createRelationReference()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OmlPackage.Literals.VOCABULARY__OWNED_STATEMENTS,
-				 OmlFactory.eINSTANCE.createRuleReference()));
 	}
 
 }

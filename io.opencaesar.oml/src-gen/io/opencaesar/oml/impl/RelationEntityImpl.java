@@ -51,6 +51,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *   <li>{@link io.opencaesar.oml.impl.RelationEntityImpl#isReflexive <em>Reflexive</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.RelationEntityImpl#isIrreflexive <em>Irreflexive</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.RelationEntityImpl#isTransitive <em>Transitive</em>}</li>
+ *   <li>{@link io.opencaesar.oml.impl.RelationEntityImpl#getRef <em>Ref</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.RelationEntityImpl#getForwardRelation <em>Forward Relation</em>}</li>
  * </ul>
  *
@@ -226,6 +227,16 @@ public class RelationEntityImpl extends EntityImpl implements RelationEntity {
 	 * @ordered
 	 */
 	protected boolean transitive = TRANSITIVE_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getRef() <em>Ref</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRef()
+	 * @generated
+	 * @ordered
+	 */
+	protected RelationEntity ref;
 
 	/**
 	 * The cached value of the '{@link #getForwardRelation() <em>Forward Relation</em>}' containment reference.
@@ -548,6 +559,46 @@ public class RelationEntityImpl extends EntityImpl implements RelationEntity {
 	 * @generated
 	 */
 	@Override
+	public RelationEntity getRef() {
+		if (ref != null && ref.eIsProxy()) {
+			InternalEObject oldRef = (InternalEObject)ref;
+			ref = (RelationEntity)eResolveProxy(oldRef);
+			if (ref != oldRef) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, OmlPackage.RELATION_ENTITY__REF, oldRef, ref));
+			}
+		}
+		return ref;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public RelationEntity basicGetRef() {
+		return ref;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setRef(RelationEntity newRef) {
+		RelationEntity oldRef = ref;
+		ref = newRef;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.RELATION_ENTITY__REF, oldRef, ref));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public ForwardRelation getForwardRelation() {
 		return forwardRelation;
 	}
@@ -653,6 +704,9 @@ public class RelationEntityImpl extends EntityImpl implements RelationEntity {
 				return isIrreflexive();
 			case OmlPackage.RELATION_ENTITY__TRANSITIVE:
 				return isTransitive();
+			case OmlPackage.RELATION_ENTITY__REF:
+				if (resolve) return getRef();
+				return basicGetRef();
 			case OmlPackage.RELATION_ENTITY__FORWARD_RELATION:
 				return getForwardRelation();
 		}
@@ -696,6 +750,9 @@ public class RelationEntityImpl extends EntityImpl implements RelationEntity {
 				return;
 			case OmlPackage.RELATION_ENTITY__TRANSITIVE:
 				setTransitive((Boolean)newValue);
+				return;
+			case OmlPackage.RELATION_ENTITY__REF:
+				setRef((RelationEntity)newValue);
 				return;
 			case OmlPackage.RELATION_ENTITY__FORWARD_RELATION:
 				setForwardRelation((ForwardRelation)newValue);
@@ -742,6 +799,9 @@ public class RelationEntityImpl extends EntityImpl implements RelationEntity {
 			case OmlPackage.RELATION_ENTITY__TRANSITIVE:
 				setTransitive(TRANSITIVE_EDEFAULT);
 				return;
+			case OmlPackage.RELATION_ENTITY__REF:
+				setRef((RelationEntity)null);
+				return;
 			case OmlPackage.RELATION_ENTITY__FORWARD_RELATION:
 				setForwardRelation((ForwardRelation)null);
 				return;
@@ -777,6 +837,8 @@ public class RelationEntityImpl extends EntityImpl implements RelationEntity {
 				return irreflexive != IRREFLEXIVE_EDEFAULT;
 			case OmlPackage.RELATION_ENTITY__TRANSITIVE:
 				return transitive != TRANSITIVE_EDEFAULT;
+			case OmlPackage.RELATION_ENTITY__REF:
+				return ref != null;
 			case OmlPackage.RELATION_ENTITY__FORWARD_RELATION:
 				return forwardRelation != null;
 		}

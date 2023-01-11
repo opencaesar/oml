@@ -19,6 +19,7 @@
 package io.opencaesar.oml.provider;
 
 
+import io.opencaesar.oml.DescriptionStatement;
 import io.opencaesar.oml.OmlPackage;
 
 import java.util.Collection;
@@ -93,7 +94,10 @@ public class DescriptionStatementItemProvider extends StatementItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_DescriptionStatement_type");
+		String label = ((DescriptionStatement)object).getName();
+		return label == null || label.length() == 0 ?
+			getString("_UI_DescriptionStatement_type") :
+			getString("_UI_DescriptionStatement_type") + " " + label;
 	}
 
 

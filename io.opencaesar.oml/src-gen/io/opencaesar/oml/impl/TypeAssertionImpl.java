@@ -20,7 +20,6 @@ package io.opencaesar.oml.impl;
 
 import io.opencaesar.oml.Entity;
 import io.opencaesar.oml.NamedInstance;
-import io.opencaesar.oml.NamedInstanceReference;
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.TypeAssertion;
 
@@ -44,7 +43,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  * <ul>
  *   <li>{@link io.opencaesar.oml.impl.TypeAssertionImpl#getType <em>Type</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.TypeAssertionImpl#getOwningInstance <em>Owning Instance</em>}</li>
- *   <li>{@link io.opencaesar.oml.impl.TypeAssertionImpl#getOwningReference <em>Owning Reference</em>}</li>
  * </ul>
  *
  * @generated
@@ -178,69 +176,12 @@ public class TypeAssertionImpl extends AssertionImpl implements TypeAssertion {
 	 * @generated
 	 */
 	@Override
-	public NamedInstanceReference getOwningReference() {
-		if (eContainerFeatureID() != OmlPackage.TYPE_ASSERTION__OWNING_REFERENCE) return null;
-		return (NamedInstanceReference)eContainer();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NamedInstanceReference basicGetOwningReference() {
-		if (eContainerFeatureID() != OmlPackage.TYPE_ASSERTION__OWNING_REFERENCE) return null;
-		return (NamedInstanceReference)eInternalContainer();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetOwningReference(NamedInstanceReference newOwningReference, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwningReference, OmlPackage.TYPE_ASSERTION__OWNING_REFERENCE, msgs);
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setOwningReference(NamedInstanceReference newOwningReference) {
-		if (newOwningReference != eInternalContainer() || (eContainerFeatureID() != OmlPackage.TYPE_ASSERTION__OWNING_REFERENCE && newOwningReference != null)) {
-			if (EcoreUtil.isAncestor(this, newOwningReference))
-				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
-			NotificationChain msgs = null;
-			if (eInternalContainer() != null)
-				msgs = eBasicRemoveFromContainer(msgs);
-			if (newOwningReference != null)
-				msgs = ((InternalEObject)newOwningReference).eInverseAdd(this, OmlPackage.NAMED_INSTANCE_REFERENCE__OWNED_TYPES, NamedInstanceReference.class, msgs);
-			msgs = basicSetOwningReference(newOwningReference, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.TYPE_ASSERTION__OWNING_REFERENCE, newOwningReference, newOwningReference));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case OmlPackage.TYPE_ASSERTION__OWNING_INSTANCE:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwningInstance((NamedInstance)otherEnd, msgs);
-			case OmlPackage.TYPE_ASSERTION__OWNING_REFERENCE:
-				if (eInternalContainer() != null)
-					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetOwningReference((NamedInstanceReference)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -255,8 +196,6 @@ public class TypeAssertionImpl extends AssertionImpl implements TypeAssertion {
 		switch (featureID) {
 			case OmlPackage.TYPE_ASSERTION__OWNING_INSTANCE:
 				return basicSetOwningInstance(null, msgs);
-			case OmlPackage.TYPE_ASSERTION__OWNING_REFERENCE:
-				return basicSetOwningReference(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -271,8 +210,6 @@ public class TypeAssertionImpl extends AssertionImpl implements TypeAssertion {
 		switch (eContainerFeatureID()) {
 			case OmlPackage.TYPE_ASSERTION__OWNING_INSTANCE:
 				return eInternalContainer().eInverseRemove(this, OmlPackage.NAMED_INSTANCE__OWNED_TYPES, NamedInstance.class, msgs);
-			case OmlPackage.TYPE_ASSERTION__OWNING_REFERENCE:
-				return eInternalContainer().eInverseRemove(this, OmlPackage.NAMED_INSTANCE_REFERENCE__OWNED_TYPES, NamedInstanceReference.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -291,9 +228,6 @@ public class TypeAssertionImpl extends AssertionImpl implements TypeAssertion {
 			case OmlPackage.TYPE_ASSERTION__OWNING_INSTANCE:
 				if (resolve) return getOwningInstance();
 				return basicGetOwningInstance();
-			case OmlPackage.TYPE_ASSERTION__OWNING_REFERENCE:
-				if (resolve) return getOwningReference();
-				return basicGetOwningReference();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -311,9 +245,6 @@ public class TypeAssertionImpl extends AssertionImpl implements TypeAssertion {
 				return;
 			case OmlPackage.TYPE_ASSERTION__OWNING_INSTANCE:
 				setOwningInstance((NamedInstance)newValue);
-				return;
-			case OmlPackage.TYPE_ASSERTION__OWNING_REFERENCE:
-				setOwningReference((NamedInstanceReference)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -333,9 +264,6 @@ public class TypeAssertionImpl extends AssertionImpl implements TypeAssertion {
 			case OmlPackage.TYPE_ASSERTION__OWNING_INSTANCE:
 				setOwningInstance((NamedInstance)null);
 				return;
-			case OmlPackage.TYPE_ASSERTION__OWNING_REFERENCE:
-				setOwningReference((NamedInstanceReference)null);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -352,8 +280,6 @@ public class TypeAssertionImpl extends AssertionImpl implements TypeAssertion {
 				return type != null;
 			case OmlPackage.TYPE_ASSERTION__OWNING_INSTANCE:
 				return basicGetOwningInstance() != null;
-			case OmlPackage.TYPE_ASSERTION__OWNING_REFERENCE:
-				return basicGetOwningReference() != null;
 		}
 		return super.eIsSet(featureID);
 	}

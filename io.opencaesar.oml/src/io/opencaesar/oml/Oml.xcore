@@ -25,7 +25,6 @@
     Descriptions="",
     Instances="",
     Assertions="",
-    References="",
     Enumerations=""
 )
 @Bikeshed(heading="Abstract-Syntax")
@@ -74,9 +73,8 @@ abstract class Element {
 ////////////////////////////////////////
 
 /*
- * Annotation is an element that specifies additional non-semantic statements on an annotated element. It can also be
- * specified on a reference to an ontology member, in which case it is interpreted as if it was specified on the
- * member itself. An annotation is specified with an annotation property and a (literal or reference) value. When
+ * Annotation is an element that specifies additional non-semantic statements on an annotated element. 
+ * An annotation is specified with an annotation property and a (literal or reference) value. When
  * no value is specified, it is interpreted as the `true` boolean literal.
  */
 @Bikeshed(heading="Elements")
@@ -97,10 +95,6 @@ class Annotation extends Element {
      * The annotated element that owns this annotation
      */
     container IdentifiedElement[?] owningElement opposite ownedAnnotations
-    /*
-     * The reference that owns this annotation
-     */
-    container Reference[?] owningReference opposite ownedAnnotations
     /*
      * Gets the value of the annotation
      */
@@ -196,13 +190,6 @@ abstract class Instance extends Element {
      * The property value assertions specified by this instance
      */
     contains PropertyValueAssertion[*] ownedPropertyValues opposite owningInstance
-}
-
-/*
- * Statement represents an expression of information in an ontology.  
- */
-@Bikeshed(heading="Elements")
-abstract class Statement extends Element {
 }
 
 /*
@@ -310,20 +297,29 @@ abstract class Member extends IdentifiedElement {
     /*
      * A unique name for the member within its ontology
      */
-    id ID[1] name
+    id ID[?] name
     
+    /*
+     * Gets the Ref of this member
+     */
+    op Member[?] getRef()
+    /*
+     * Gets the IRI of this member
+     */
     op String getIri() {
-        val ontology = getOntology()
-        val namespace = if (ontology !== null) ontology.getNamespace()
-        return namespace+name
+    	val m = if (getRef() !== null) getRef() else this
+        val ontology = m.getOntology()
+        val namespace = if (ontology !== null) ontology.getNamespace() else SeparatorKind.HASH
+        return namespace+m.getName()
     }
     /*
-     * Gets the abbreviated IRI of this element
+     * Gets the abbreviated IRI of this member
      */
     op String getAbbreviatedIri() {
-        val ontology = getOntology();
-        val prefix = if (ontology !== null) ontology.getPrefix()+':' else ""
-        return prefix + name
+     	val m = if (getRef() !== null) getRef() else this
+        val ontology = m.getOntology();
+        val prefix = if (ontology !== null) ontology.getPrefix()+':' else ':'
+        return prefix + m.getName()
     }
 }
 
@@ -394,34 +390,15 @@ class DescriptionBundle extends DescriptionBox {
 }
 
 ////////////////////////////////////////
-//  Statements 
-////////////////////////////////////////
-
-/*
- * VocabularyStatement is a statement owned by a vocabulary.
- */
-@Bikeshed(heading="Vocabularies")
-abstract class VocabularyStatement extends Statement {
-    /*
-     * The vocabulary that owns this statement
-     */
-    container Vocabulary[1] owningVocabulary opposite ownedStatements
-}
-
-/*
- * DescriptionStatement is a statement owned by a description.
- */
-@Bikeshed(heading="Descriptions")
-abstract class DescriptionStatement extends Statement {
-    /*
-     * The description that owns this statement
-     */
-    container Description[1] owningDescription opposite ownedStatements
-}
-
-////////////////////////////////////////
 //  Members 
 ////////////////////////////////////////
+
+/*
+ * Statement is a member that is owned by an ontology.  
+ */
+@Bikeshed(heading="Elements")
+abstract class Statement extends Member {
+}
 
 /*
  * VocabularyMember is a member of a vocabulary.
@@ -438,6 +415,32 @@ abstract class DescriptionMember extends Member {
 }
 
 ////////////////////////////////////////
+//  Statements 
+////////////////////////////////////////
+
+/*
+ * VocabularyStatement is a statement owned by a vocabulary.
+ */
+@Bikeshed(heading="Vocabularies")
+abstract class VocabularyStatement extends Statement, VocabularyMember {
+    /*
+     * The vocabulary that owns this statement
+     */
+    container Vocabulary[1] owningVocabulary opposite ownedStatements
+}
+
+/*
+ * DescriptionStatement is a statement owned by a description.
+ */
+@Bikeshed(heading="Descriptions")
+abstract class DescriptionStatement extends Statement, DescriptionMember {
+    /*
+     * The description that owns this statement
+     */
+    container Description[1] owningDescription opposite ownedStatements
+}
+
+////////////////////////////////////////
 //  Vocabulary Members
 ////////////////////////////////////////
 
@@ -449,21 +452,26 @@ abstract class Term extends VocabularyMember {
 }
 
 /*
- * Rule is a member of a vocabulary that adds a new inference rule to the set supported natively by DL. A rule specifies a set
- * of antecedent predicates that forms a conjunction that infers, when it holds, a single consequent predicate. Each
+ * Rule is a member of a vocabulary that adds a new inference rule to the set supported natively by DL. A rule must specify a set of one or
+ * more antecedent predicates that forms a conjunction that infers, when it holds, a set of one or more consequent predicates. Each
  * predicate in a rule may specify (one or two) variables. Those with the same name refer to the same variable, and hence must
- * be bound to the same value from the model for the rule to trigger during reasoning.
+ * be bound to the same value from the model for the rule to trigger during reasoning. A rule ref cannot respecify the
+ * antecedent nor consequent of a rule.
  */
 @Bikeshed(heading="Rules")
-class Rule extends VocabularyMember, VocabularyStatement {
+class Rule extends VocabularyStatement {
+	/*
+	 * A ref to another rule
+	 */
+	refers Rule ref
     /*
      * The set of predicates that form the antecedent of this rule
      */
-    contains Predicate[+] antecedent opposite antecedentRule
+    contains Predicate[*] antecedent opposite antecedentRule
     /*
      * The predicate that is the consequent of this rule
      */
-    contains Predicate[+] consequent opposite consequentRule
+    contains Predicate[*] consequent opposite consequentRule
 }
 
 ////////////////////////////////////////
@@ -503,18 +511,19 @@ abstract class Type extends SpecializableTerm {
  * RelationBase is a specializable term that is the superclass of a relation from a source entity to a target entity.
  * It can optionally name a reverse property whose domain is the target and whose range is the source.
  * It can also be characterized with several boolean flags that represent its DL semantics. 
- * Such flags apply conversely to the reverse property (if named). 
+ * Such flags apply conversely to the reverse property (if named). A relation base ref cannot respecify the source,
+ * the target, nor the reverse relation. 
  */
 @Bikeshed(heading="Properties")
 abstract class RelationBase extends SpecializableTerm {
     /*
      * The entity that represents the source of this relation base
      */
-    refers Entity[1] source
+    refers Entity[?] source
     /*
      * The entity that represents the target of this relation base
      */
-    refers Entity[1] target
+    refers Entity[?] target
     /*
      * The optional reverse relation of this relation base
      */
@@ -595,6 +604,10 @@ abstract class Entity extends Classifier {
  */
 @Bikeshed(heading="Types")
 class Structure extends Classifier {
+	/*
+	 * A ref to another structure
+	 */
+	refers Structure ref
 }
 
 ////////////////////////////////////////
@@ -608,14 +621,22 @@ class Structure extends Classifier {
  */
 @Bikeshed(heading="Types")
 class Aspect extends Entity {
+	/*
+	 * A ref to another aspect
+	 */
+	refers Aspect ref
 }
 
 /*
  * Concept is a concrete entity that classifies a (possibly enumerated) set of concept instances. 
- * It can also specialize other concepts and/or aspects.
+ * It can also specialize other concepts and/or aspects. A concept ref cannot respecify the enumerated instances.
  */
 @Bikeshed(heading="Types")
 class Concept extends Entity {
+	/*
+	 * A ref to another concept
+	 */
+	refers Concept ref
 	/*
 	 * The set of enumerated instances of this concept
 	 */
@@ -626,10 +647,15 @@ class Concept extends Entity {
  * RelationEntity is an entity that represents a reified relation from a source entity to a target entity. 
  * It can optionally name a forward property whose domain is the source and whose range is the target.
  * If both are named, such forward property becomes the inverse of the entity's reverse property. 
- * If not, then a default forward property with the name 'has<Relation>Forward' is assumed.
+ * If not, then a default forward property with the name 'has<Relation>Forward' is assumed. A relation entity ref
+ * cannot respecify a forward relation.
  */
 @Bikeshed(heading="Types")
 class RelationEntity extends Entity, RelationBase {
+	/*
+	 * A ref to another relation entity
+	 */
+	refers RelationEntity ref
     /*
      * The optional forward relation of this relation entity
      */
@@ -697,6 +723,10 @@ class RelationEntity extends Entity, RelationBase {
  */
 @Bikeshed(heading="Types")
 class FacetedScalar extends Scalar {
+	/*
+	 * A ref to another faceted scalar
+	 */
+	refers FacetedScalar ref
     /*
      * The exact length of the literals of this scalar
      */
@@ -739,9 +769,14 @@ class FacetedScalar extends Scalar {
 /*
  * EnumeratedScalar is a scalar that represents a finite set of literals. It can specialize another enumerated scalar, but in
  * this case, it cannot define its own literals; rather, it will simply be considered an alias to the specialized scalar.
+ * An enumerated scalar ref cannot respecify the literals.
  */
 @Bikeshed(heading="Types")
 class EnumeratedScalar extends Scalar {
+	/*
+	 * A ref to another enumerated scalar
+	 */
+	refers EnumeratedScalar ref
     /*
      * The set of enumerated literals that are represented by this scalar
      */
@@ -757,11 +792,15 @@ class EnumeratedScalar extends Scalar {
  */
 @Bikeshed(heading="Properties")
 class AnnotationProperty extends Property, SpecializableTerm {
+	/*
+	 * A ref to another annotation property
+	 */
+	refers AnnotationProperty ref
 }
 
 /*
- * SemanticProperty is a property with DL semantics that relates instances of a classifier acting as its
- * domain to a value typed by either a scalar or a structure representing its range.
+ * SemanticProperty is a property with DL semantics that relates a classifier acting as its
+ * domain to a type acting as its range.
  */
 @Bikeshed(heading="Properties")
 abstract class SemanticProperty extends Property {
@@ -786,9 +825,14 @@ abstract class SemanticProperty extends Property {
 /*
  * ScalarProperty is a semantic property whose range is a scalar. It can specialize other scalar properties.
  * It can also be flagged as a key property (among possibly several) that specifies the unique id of its domain.
+ * A scalar property ref cannot respecify the domain nor the range.
  */
 @Bikeshed(heading="Properties")
 class ScalarProperty extends SemanticProperty, SpecializableTerm {
+	/*
+	 * A ref to another scalar property
+	 */
+	refers ScalarProperty ref
     /*
      * Whether this property is functional (has a max of one value per instance) 
      */
@@ -796,18 +840,23 @@ class ScalarProperty extends SemanticProperty, SpecializableTerm {
     /*
      * The classifier that is the domain of this property
      */
-    refers Classifier[1] domain
+    refers Classifier[?] domain
     /*
      * The scalar that is the range of this property
      */
-    refers Scalar[1] range
+    refers Scalar[?] range
 }
 
 /*
  * StructuredProperty is a semantic property whose range is a structure. It can specialize other structured properties.
+ * A structured property ref cannot respecify the domain nor the range.
  */
 @Bikeshed(heading="Properties")
 class StructuredProperty extends SemanticProperty, SpecializableTerm {
+	/*
+	 * A ref to another structured property
+	 */
+	refers StructuredProperty ref
     /*
      * Whether this property is functional (has a max of one value per instance) 
      */
@@ -815,11 +864,11 @@ class StructuredProperty extends SemanticProperty, SpecializableTerm {
     /*
      * The classifier that is the domain of this property
      */
-    refers Classifier[1] domain
+    refers Classifier[?] domain
     /*
      * The structure that is the range of this property
      */
-    refers Structure[1] range
+    refers Structure[?] range
 }
 
 /*
@@ -867,7 +916,7 @@ abstract class Relation extends SemanticProperty {
 }
 
 ////////////////////////////////////////
-//  Relation Properties
+//  Relations
 ////////////////////////////////////////
 
 /*
@@ -882,6 +931,9 @@ class ForwardRelation extends Relation {
      */
     container RelationEntity[1] relationEntity opposite forwardRelation
     
+    op Member getRef() {
+    	null
+    }
     op boolean isFunctional() {
         relationEntity.functional
 	}
@@ -926,6 +978,9 @@ class ReverseRelation extends Relation {
      */
     container RelationBase[1] relationBase opposite reverseRelation
     
+    op Member getRef() {
+    	null
+    }
     op boolean isFunctional() {
         relationBase.inverseFunctional
 	}
@@ -966,6 +1021,11 @@ class ReverseRelation extends Relation {
  */
 @Bikeshed(heading="Properties")
 class UnreifiedRelation extends Relation, RelationBase {
+	/*
+	 * A ref to another relation
+	 */
+	refers Relation ref
+
     op Entity getDomain() {
         source
     }
@@ -985,7 +1045,7 @@ class UnreifiedRelation extends Relation, RelationBase {
  * NamedInstance is an instance that is a member of a description.
  */
 @Bikeshed(heading="Instances")
-abstract class NamedInstance extends DescriptionMember, DescriptionStatement, Instance {
+abstract class NamedInstance extends DescriptionStatement, Instance {
     /*
      * The types of this instance
      */
@@ -1001,6 +1061,10 @@ abstract class NamedInstance extends DescriptionMember, DescriptionStatement, In
  */
 @Bikeshed(heading="Instances")
 class ConceptInstance extends NamedInstance {
+	/*
+	 * A ref to another concept instance
+	 */
+	refers ConceptInstance ref
 }
 
 /*
@@ -1009,14 +1073,18 @@ class ConceptInstance extends NamedInstance {
  */
 @Bikeshed(heading="Instances")
 class RelationInstance extends NamedInstance {
+	/*
+	 * A ref to another relation instance
+	 */
+	refers RelationInstance ref
     /*
      * The named instances that are the sources of this relation instance
      */
-    refers NamedInstance[+] sources
+    refers NamedInstance[*] sources
     /*
      * The named instances that are the targets of this relation instance
      */
-    refers NamedInstance[+] targets
+    refers NamedInstance[*] targets
 }
 
 ////////////////////////////////////////
@@ -1061,15 +1129,10 @@ class KeyAxiom extends Axiom {
      * The entity that owns this axiom
      */
     container Entity[?] owningEntity opposite ownedKeys
-    /*
-     * The reference to an entity that owns this axiom
-     */
-    container EntityReference[?] owningReference opposite ownedKeys
 }
 
 /*
- * SpecializationAxiom is an axiom that states that one specializable term specializes another. It can be specified directly on
- * a specializing term or indirectly on a reference to one.
+ * SpecializationAxiom is an axiom specified on a specializing term that states that one specializable term specializes another.
  */
 @Bikeshed(heading="Axioms")
 class SpecializationAxiom extends Axiom {
@@ -1081,15 +1144,11 @@ class SpecializationAxiom extends Axiom {
      * The specializing term specified by this axiom 
      */
     container SpecializableTerm[?] owningTerm opposite ownedSpecializations
-    /*
-     * The reference to a specializing term specified by this axiom 
-     */
-    container SpecializableTermReference[?] owningReference opposite ownedSpecializations
 }
 
 /*
- * PropertyRestrictionAxiom is an axiom that places some restriction on the value of a semantic property in the context of
- * a restricting classifier domain. It can be specified directly on the classifier or indirectly on a reference to it.
+ * PropertyRestrictionAxiom is an axiom specified on the classifier that places some restriction on the value of a semantic property in the context of
+ * a restricting classifier domain.
  */
 @Bikeshed(heading="Axioms")
 abstract class PropertyRestrictionAxiom extends Axiom {
@@ -1097,10 +1156,6 @@ abstract class PropertyRestrictionAxiom extends Axiom {
      * The restricting classifier specified by this axiom
      */
     container Classifier[?] owningClassifier opposite ownedPropertyRestrictions
-    /*
-     * The reference to a restricting classifier specified by this axiom
-     */
-    container ClassifierReference[?] owningReference opposite ownedPropertyRestrictions
     /*
      * The restricted property
      */
@@ -1198,10 +1253,6 @@ class TypeAssertion extends Assertion {
      * The instance that owns this assertion
      */
     container NamedInstance[?] owningInstance opposite ownedTypes
-    /*
-     * The reference that owns this assertion
-     */
-    container NamedInstanceReference[?] owningReference opposite ownedTypes
 }
 
 /*
@@ -1215,10 +1266,6 @@ class PropertyValueAssertion extends Assertion {
      * The instance that this property value assertion is about
      */
     container Instance[?] owningInstance opposite ownedPropertyValues
-    /*
-     * The reference to an instance that this property value assertion is about
-     */
-    container NamedInstanceReference[?] owningReference opposite ownedPropertyValues
     /*
      * The property referenced by this assertion
      */
@@ -1407,213 +1454,6 @@ class BooleanLiteral extends Literal {
      * The boolean value of this literal
      */
     boolean value
-}
-
-////////////////////////////////////////
-//  References
-////////////////////////////////////////
-
-/*
- * Reference is an element that references a member of an ontology, in order to add other annotations to it.
- */
-@Bikeshed(heading="References")
-abstract class Reference extends Element {
-    /*
-     * A set of annotations added to the referenced member by this reference
-     */
-    contains Annotation[*] ownedAnnotations opposite owningReference
-}
-
-/*
- * SpecializableTermReference is a reference to a specializable term that can be used to add other 
- * specializations to it.
- */
-@Bikeshed(heading="References")
-abstract class SpecializableTermReference extends Reference , VocabularyStatement {
-    /*
-     * The set of specialization axioms added to the referenced term by this reference
-     */
-    contains SpecializationAxiom[*] ownedSpecializations opposite owningReference
-}
-
-/*
- * ClassifierReference is a reference to a classifier that can be used to add other property restrictions to it.
- */
-@Bikeshed(heading="References")
-abstract class ClassifierReference extends SpecializableTermReference {
-    /*
-     * The set of property restriction axioms added to the referenced classifier by this reference
-     */
-    contains PropertyRestrictionAxiom[*] ownedPropertyRestrictions opposite owningReference
-}
-
-/*
- * EntityReference is a reference to an entity that can be used to add other key axioms to it.
- */
-@Bikeshed(heading="References")
-abstract class EntityReference extends ClassifierReference {
-    /*
-     * The keys of the referenced entity specified by this reference
-     */
-    contains KeyAxiom[*] ownedKeys opposite owningReference
-}
-
-/*
- * AspectReference is a reference to an aspect.
- */
-@Bikeshed(heading="References")
-class AspectReference extends EntityReference {
-    /*
-     * The aspect referenced by this reference
-     */
-    refers Aspect[1] aspect
-}
-
-/*
- * ConceptReference is a reference to a concept.
- */
-@Bikeshed(heading="References")
-class ConceptReference extends EntityReference {
-    /*
-     * The concept referenced by this reference
-     */
-    refers Concept[1] concept
-}
-
-/*
- * RelationEntityReference is a reference to a relation entity.
- */
-@Bikeshed(heading="References")
-class RelationEntityReference extends EntityReference {
-    /*
-     * The relation entity referenced by this reference
-     */
-    refers RelationEntity[1] entity
-}
-
-/*
- * StructureReference is a reference to a structure.
- */
-@Bikeshed(heading="References")
-class StructureReference extends ClassifierReference {
-    /*
-     * The structure referenced by this reference
-     */
-    refers Structure[1] structure
-}
-
-/*
- * AnnotationPropertyReference is a reference to an annotation property.
- */
-@Bikeshed(heading="References")
-class AnnotationPropertyReference extends SpecializableTermReference {
-    /*
-     * The annotation property referenced by this reference
-     */
-    refers AnnotationProperty[1] property
-}
-
-/*
- * ScalarPropertyReference is a reference to an scalar property.
- */
-@Bikeshed(heading="References")
-class ScalarPropertyReference extends SpecializableTermReference {
-    /*
-     * The scalar property referenced by this reference
-     */
-    refers ScalarProperty[1] property
-}
-
-/*
- * StructuredPropertyReference is a reference to an structured property.
- */
-@Bikeshed(heading="References")
-class StructuredPropertyReference extends SpecializableTermReference {
-    /*
-     * The structured property referenced by this reference
-     */
-    refers StructuredProperty[1] property
-}
-
-/*
- * FacetedScalarReference is a reference to a faceted scalar.
- */
-@Bikeshed(heading="References")
-class FacetedScalarReference extends SpecializableTermReference {
-    /*
-     * The faceted scalar referenced by this reference
-     */
-    refers FacetedScalar[1] scalar
-}
-
-/*
- * EnumeratedScalarReference is a reference to an enumerated scalar.
- */
-@Bikeshed(heading="References")
-class EnumeratedScalarReference extends SpecializableTermReference {
-    /*
-     * The enumerated scalar referenced by this reference
-     */
-    refers EnumeratedScalar[1] scalar
-}
-
-/*
- * RelationReference is a reference to a relation.
- */
-@Bikeshed(heading="References")
-class RelationReference extends Reference , VocabularyStatement {
-    /*
-     * The relation referenced by this reference
-     */
-    refers Relation[1] relation
-}
-
-/*
- * RuleReference is a reference to a rule.
- */
-@Bikeshed(heading="References")
-class RuleReference extends Reference , VocabularyStatement {
-    /*
-     * The rule referenced by this reference
-     */
-    refers Rule[1] rule
-}
-
-/*
- * NamedInstanceReference is a reference to a named instance that can be used to add other assertions to the instance.
- */
-@Bikeshed(heading="References")
-abstract class NamedInstanceReference extends Reference , DescriptionStatement {
-    /*
-     * The type assertions added to the referenced named instance
-     */
-    contains TypeAssertion[*] ownedTypes opposite owningReference
-    /*
-     * The property value assertions added to referenced named instance
-     */
-    contains PropertyValueAssertion[*] ownedPropertyValues opposite owningReference
-}
-
-/*
- * ConceptInstanceReference is a reference to a concept instance that can be used to add other types to it 
- */
-@Bikeshed(heading="References")
-class ConceptInstanceReference extends NamedInstanceReference {
-    /*
-     * The referenced concept instance
-     */
-    refers ConceptInstance[1] instance
-}
-
-/*
- * RelationInstanceReference is a reference to a relation instance that can be used to add other types to it.
- */
-@Bikeshed(heading="References")
-class RelationInstanceReference extends NamedInstanceReference {
-    /*
-     * The referenced relation instance
-     */
-    refers RelationInstance[1] instance
 }
 
 ////////////////////////////////////////

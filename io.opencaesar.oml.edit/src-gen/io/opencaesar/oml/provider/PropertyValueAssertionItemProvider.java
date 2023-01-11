@@ -64,7 +64,6 @@ public class PropertyValueAssertionItemProvider extends AssertionItemProvider {
 			super.getPropertyDescriptors(object);
 
 			addOwningInstancePropertyDescriptor(object);
-			addOwningReferencePropertyDescriptor(object);
 			addPropertyPropertyDescriptor(object);
 			addNamedInstanceValuePropertyDescriptor(object);
 		}
@@ -85,28 +84,6 @@ public class PropertyValueAssertionItemProvider extends AssertionItemProvider {
 				 getString("_UI_PropertyValueAssertion_owningInstance_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_PropertyValueAssertion_owningInstance_feature", "_UI_PropertyValueAssertion_type"),
 				 OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__OWNING_INSTANCE,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Owning Reference feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addOwningReferencePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_PropertyValueAssertion_owningReference_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_PropertyValueAssertion_owningReference_feature", "_UI_PropertyValueAssertion_type"),
-				 OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__OWNING_REFERENCE,
 				 true,
 				 false,
 				 true,

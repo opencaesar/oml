@@ -75,6 +75,14 @@ public interface ReverseRelation extends Relation {
 	 * @model kind="operation" unique="false"
 	 * @generated
 	 */
+	Member getRef();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
 	boolean isFunctional();
 
 	/**

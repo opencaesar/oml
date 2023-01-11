@@ -25,8 +25,7 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * SpecializationAxiom is an axiom that states that one specializable term specializes another. It can be specified directly on
- * a specializing term or indirectly on a reference to one.
+ * SpecializationAxiom is an axiom specified on a specializing term that states that one specializable term specializes another.
  * <!-- end-model-doc -->
  *
  * <p>
@@ -35,7 +34,6 @@ package io.opencaesar.oml;
  * <ul>
  *   <li>{@link io.opencaesar.oml.SpecializationAxiom#getSpecializedTerm <em>Specialized Term</em>}</li>
  *   <li>{@link io.opencaesar.oml.SpecializationAxiom#getOwningTerm <em>Owning Term</em>}</li>
- *   <li>{@link io.opencaesar.oml.SpecializationAxiom#getOwningReference <em>Owning Reference</em>}</li>
  * </ul>
  *
  * @see io.opencaesar.oml.OmlPackage#getSpecializationAxiom()
@@ -94,32 +92,5 @@ public interface SpecializationAxiom extends Axiom {
 	 * @generated
 	 */
 	void setOwningTerm(SpecializableTerm value);
-
-	/**
-	 * Returns the value of the '<em><b>Owning Reference</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.SpecializableTermReference#getOwnedSpecializations <em>Owned Specializations</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * The reference to a specializing term specified by this axiom
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Owning Reference</em>' container reference.
-	 * @see #setOwningReference(SpecializableTermReference)
-	 * @see io.opencaesar.oml.OmlPackage#getSpecializationAxiom_OwningReference()
-	 * @see io.opencaesar.oml.SpecializableTermReference#getOwnedSpecializations
-	 * @model opposite="ownedSpecializations" transient="false"
-	 * @generated
-	 */
-	SpecializableTermReference getOwningReference();
-
-	/**
-	 * Sets the value of the '{@link io.opencaesar.oml.SpecializationAxiom#getOwningReference <em>Owning Reference</em>}' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Owning Reference</em>' container reference.
-	 * @see #getOwningReference()
-	 * @generated
-	 */
-	void setOwningReference(SpecializableTermReference value);
 
 } // SpecializationAxiom

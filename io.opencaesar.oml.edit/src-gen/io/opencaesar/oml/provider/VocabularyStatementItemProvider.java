@@ -21,6 +21,7 @@ package io.opencaesar.oml.provider;
 
 import io.opencaesar.oml.OmlPackage;
 
+import io.opencaesar.oml.VocabularyStatement;
 import java.util.Collection;
 import java.util.List;
 
@@ -93,7 +94,10 @@ public class VocabularyStatementItemProvider extends StatementItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_VocabularyStatement_type");
+		String label = ((VocabularyStatement)object).getName();
+		return label == null || label.length() == 0 ?
+			getString("_UI_VocabularyStatement_type") :
+			getString("_UI_VocabularyStatement_type") + " " + label;
 	}
 
 

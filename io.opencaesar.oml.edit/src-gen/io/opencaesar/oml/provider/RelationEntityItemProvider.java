@@ -73,6 +73,7 @@ public class RelationEntityItemProvider extends EntityItemProvider {
 			addReflexivePropertyDescriptor(object);
 			addIrreflexivePropertyDescriptor(object);
 			addTransitivePropertyDescriptor(object);
+			addRefPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -271,6 +272,28 @@ public class RelationEntityItemProvider extends EntityItemProvider {
 				 false,
 				 false,
 				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Ref feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addRefPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_RelationEntity_ref_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_RelationEntity_ref_feature", "_UI_RelationEntity_type"),
+				 OmlPackage.Literals.RELATION_ENTITY__REF,
+				 true,
+				 false,
+				 true,
+				 null,
 				 null,
 				 null));
 	}

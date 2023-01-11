@@ -25,9 +25,8 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Annotation is an element that specifies additional non-semantic statements on an annotated element. It can also be
- * specified on a reference to an ontology member, in which case it is interpreted as if it was specified on the
- * member itself. An annotation is specified with an annotation property and a (literal or reference) value. When
+ * Annotation is an element that specifies additional non-semantic statements on an annotated element.
+ * An annotation is specified with an annotation property and a (literal or reference) value. When
  * no value is specified, it is interpreted as the `true` boolean literal.
  * <!-- end-model-doc -->
  *
@@ -39,7 +38,6 @@ package io.opencaesar.oml;
  *   <li>{@link io.opencaesar.oml.Annotation#getLiteralValue <em>Literal Value</em>}</li>
  *   <li>{@link io.opencaesar.oml.Annotation#getReferenceValue <em>Reference Value</em>}</li>
  *   <li>{@link io.opencaesar.oml.Annotation#getOwningElement <em>Owning Element</em>}</li>
- *   <li>{@link io.opencaesar.oml.Annotation#getOwningReference <em>Owning Reference</em>}</li>
  * </ul>
  *
  * @see io.opencaesar.oml.OmlPackage#getAnnotation()
@@ -148,33 +146,6 @@ public interface Annotation extends Element {
 	 * @generated
 	 */
 	void setOwningElement(IdentifiedElement value);
-
-	/**
-	 * Returns the value of the '<em><b>Owning Reference</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.Reference#getOwnedAnnotations <em>Owned Annotations</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * The reference that owns this annotation
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Owning Reference</em>' container reference.
-	 * @see #setOwningReference(Reference)
-	 * @see io.opencaesar.oml.OmlPackage#getAnnotation_OwningReference()
-	 * @see io.opencaesar.oml.Reference#getOwnedAnnotations
-	 * @model opposite="ownedAnnotations" transient="false"
-	 * @generated
-	 */
-	Reference getOwningReference();
-
-	/**
-	 * Sets the value of the '{@link io.opencaesar.oml.Annotation#getOwningReference <em>Owning Reference</em>}' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Owning Reference</em>' container reference.
-	 * @see #getOwningReference()
-	 * @generated
-	 */
-	void setOwningReference(Reference value);
 
 	/**
 	 * <!-- begin-user-doc -->

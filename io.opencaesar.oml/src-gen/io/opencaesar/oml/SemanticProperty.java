@@ -25,8 +25,8 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * SemanticProperty is a property with DL semantics that relates instances of a classifier acting as its
- * domain to a value typed by either a scalar or a structure representing its range.
+ * SemanticProperty is a property with DL semantics that relates a classifier acting as its
+ * domain to a type acting as its range.
  * <!-- end-model-doc -->
  *
  *

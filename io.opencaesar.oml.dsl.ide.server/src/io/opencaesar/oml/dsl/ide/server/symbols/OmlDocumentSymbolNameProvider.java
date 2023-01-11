@@ -19,18 +19,9 @@ package io.opencaesar.oml.dsl.ide.server.symbols;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.ide.server.symbol.DocumentSymbolMapper;
 
-import io.opencaesar.oml.AnnotationPropertyReference;
-import io.opencaesar.oml.AspectReference;
-import io.opencaesar.oml.ConceptReference;
-import io.opencaesar.oml.EnumeratedScalarReference;
-import io.opencaesar.oml.FacetedScalarReference;
 import io.opencaesar.oml.Member;
 import io.opencaesar.oml.Ontology;
-import io.opencaesar.oml.RelationEntityReference;
-import io.opencaesar.oml.RelationReference;
-import io.opencaesar.oml.RuleReference;
-import io.opencaesar.oml.ScalarPropertyReference;
-import io.opencaesar.oml.StructuredPropertyReference;
+import io.opencaesar.oml.util.OmlRead;
 
 @SuppressWarnings("all")
 public class OmlDocumentSymbolNameProvider extends DocumentSymbolMapper.DocumentSymbolNameProvider {
@@ -39,27 +30,7 @@ public class OmlDocumentSymbolNameProvider extends DocumentSymbolMapper.Document
 		if (object instanceof Ontology)
 			return ((Ontology) object).getIri();
 		if (object instanceof Member)
-			return ((Member) object).getName();
-		if (object instanceof RelationReference)
-			return ((RelationReference) object).getRelation().getName();
-		if (object instanceof RuleReference)
-			return ((RuleReference) object).getRule().getName();
-		if (object instanceof AnnotationPropertyReference)
-			return ((AnnotationPropertyReference) object).getProperty().getName();
-		if (object instanceof AspectReference)
-			return ((AspectReference) object).getAspect().getName();
-		if (object instanceof ConceptReference)
-			return ((ConceptReference) object).getConcept().getName();
-		if (object instanceof RelationEntityReference)
-			return ((RelationEntityReference) object).getEntity().getName();
-		if (object instanceof EnumeratedScalarReference)
-			return ((EnumeratedScalarReference) object).getScalar().getName();
-		if (object instanceof FacetedScalarReference)
-			return ((FacetedScalarReference) object).getScalar().getName();
-		if (object instanceof ScalarPropertyReference)
-			return ((ScalarPropertyReference) object).getProperty().getName();
-		if (object instanceof StructuredPropertyReference)
-			return ((StructuredPropertyReference) object).getProperty().getName();
+			return OmlRead.resolve(((Member) object)).getName();
 		return "<unnamed>";
 	}
 

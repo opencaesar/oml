@@ -52,6 +52,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <ul>
  *   <li>{@link io.opencaesar.oml.impl.AnnotationPropertyImpl#getOwningVocabulary <em>Owning Vocabulary</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.AnnotationPropertyImpl#getOwnedSpecializations <em>Owned Specializations</em>}</li>
+ *   <li>{@link io.opencaesar.oml.impl.AnnotationPropertyImpl#getRef <em>Ref</em>}</li>
  * </ul>
  *
  * @generated
@@ -66,6 +67,16 @@ public class AnnotationPropertyImpl extends PropertyImpl implements AnnotationPr
 	 * @ordered
 	 */
 	protected EList<SpecializationAxiom> ownedSpecializations;
+
+	/**
+	 * The cached value of the '{@link #getRef() <em>Ref</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRef()
+	 * @generated
+	 * @ordered
+	 */
+	protected AnnotationProperty ref;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -157,6 +168,46 @@ public class AnnotationPropertyImpl extends PropertyImpl implements AnnotationPr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public AnnotationProperty getRef() {
+		if (ref != null && ref.eIsProxy()) {
+			InternalEObject oldRef = (InternalEObject)ref;
+			ref = (AnnotationProperty)eResolveProxy(oldRef);
+			if (ref != oldRef) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, OmlPackage.ANNOTATION_PROPERTY__REF, oldRef, ref));
+			}
+		}
+		return ref;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public AnnotationProperty basicGetRef() {
+		return ref;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setRef(AnnotationProperty newRef) {
+		AnnotationProperty oldRef = ref;
+		ref = newRef;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.ANNOTATION_PROPERTY__REF, oldRef, ref));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -214,6 +265,9 @@ public class AnnotationPropertyImpl extends PropertyImpl implements AnnotationPr
 				return basicGetOwningVocabulary();
 			case OmlPackage.ANNOTATION_PROPERTY__OWNED_SPECIALIZATIONS:
 				return getOwnedSpecializations();
+			case OmlPackage.ANNOTATION_PROPERTY__REF:
+				if (resolve) return getRef();
+				return basicGetRef();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -234,6 +288,9 @@ public class AnnotationPropertyImpl extends PropertyImpl implements AnnotationPr
 				getOwnedSpecializations().clear();
 				getOwnedSpecializations().addAll((Collection<? extends SpecializationAxiom>)newValue);
 				return;
+			case OmlPackage.ANNOTATION_PROPERTY__REF:
+				setRef((AnnotationProperty)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -252,6 +309,9 @@ public class AnnotationPropertyImpl extends PropertyImpl implements AnnotationPr
 			case OmlPackage.ANNOTATION_PROPERTY__OWNED_SPECIALIZATIONS:
 				getOwnedSpecializations().clear();
 				return;
+			case OmlPackage.ANNOTATION_PROPERTY__REF:
+				setRef((AnnotationProperty)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -268,6 +328,8 @@ public class AnnotationPropertyImpl extends PropertyImpl implements AnnotationPr
 				return basicGetOwningVocabulary() != null;
 			case OmlPackage.ANNOTATION_PROPERTY__OWNED_SPECIALIZATIONS:
 				return ownedSpecializations != null && !ownedSpecializations.isEmpty();
+			case OmlPackage.ANNOTATION_PROPERTY__REF:
+				return ref != null;
 		}
 		return super.eIsSet(featureID);
 	}

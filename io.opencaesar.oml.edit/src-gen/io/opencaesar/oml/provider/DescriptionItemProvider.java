@@ -161,16 +161,6 @@ public class DescriptionItemProvider extends DescriptionBoxItemProvider {
 			(createChildParameter
 				(OmlPackage.Literals.DESCRIPTION__OWNED_STATEMENTS,
 				 OmlFactory.eINSTANCE.createRelationInstance()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OmlPackage.Literals.DESCRIPTION__OWNED_STATEMENTS,
-				 OmlFactory.eINSTANCE.createConceptInstanceReference()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OmlPackage.Literals.DESCRIPTION__OWNED_STATEMENTS,
-				 OmlFactory.eINSTANCE.createRelationInstanceReference()));
 	}
 
 }

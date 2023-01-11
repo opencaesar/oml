@@ -36,12 +36,10 @@ import io.opencaesar.oml.Aspect;
 import io.opencaesar.oml.Assertion;
 import io.opencaesar.oml.Axiom;
 import io.opencaesar.oml.Classifier;
-import io.opencaesar.oml.ClassifierReference;
 import io.opencaesar.oml.Concept;
 import io.opencaesar.oml.ConceptInstance;
 import io.opencaesar.oml.Element;
 import io.opencaesar.oml.Entity;
-import io.opencaesar.oml.EntityReference;
 import io.opencaesar.oml.EnumeratedScalar;
 import io.opencaesar.oml.FacetedScalar;
 import io.opencaesar.oml.ForwardRelation;
@@ -52,12 +50,10 @@ import io.opencaesar.oml.KeyAxiom;
 import io.opencaesar.oml.Literal;
 import io.opencaesar.oml.Member;
 import io.opencaesar.oml.NamedInstance;
-import io.opencaesar.oml.NamedInstanceReference;
 import io.opencaesar.oml.Ontology;
 import io.opencaesar.oml.PropertyRestrictionAxiom;
 import io.opencaesar.oml.PropertyValueAssertion;
 import io.opencaesar.oml.QuotedLiteral;
-import io.opencaesar.oml.Reference;
 import io.opencaesar.oml.Relation;
 import io.opencaesar.oml.RelationEntity;
 import io.opencaesar.oml.RelationInstance;
@@ -66,7 +62,6 @@ import io.opencaesar.oml.Scalar;
 import io.opencaesar.oml.ScalarProperty;
 import io.opencaesar.oml.SemanticProperty;
 import io.opencaesar.oml.SpecializableTerm;
-import io.opencaesar.oml.SpecializableTermReference;
 import io.opencaesar.oml.SpecializationAxiom;
 import io.opencaesar.oml.Structure;
 import io.opencaesar.oml.StructureInstance;
@@ -92,34 +87,34 @@ public final class OmlSearch extends OmlIndex {
      * @param member the given member
      * @return a list of references to the given member
      */
-    public static List<Reference> findReferences(Member member) {
-        List<Reference> references = new ArrayList<>();
+    public static List<Member> findReferences(Member member) {
+        List<Member> references = new ArrayList<>();
         if (member instanceof AnnotationProperty) {
-            references.addAll(findAnnotationPropertyReferencesWithProperty((AnnotationProperty)member));
+            references.addAll(findAnnotationPropertiesWithRef((AnnotationProperty)member));
         } else if (member instanceof Aspect) {
-            references.addAll(findAspectReferencesWithAspect((Aspect)member));
+            references.addAll(findAspectsWithRef((Aspect)member));
         } else if (member instanceof Concept) {
-            references.addAll(findConceptReferencesWithConcept((Concept)member));
+            references.addAll(findConceptsWithRef((Concept)member));
         } else if (member instanceof RelationEntity) {
-            references.addAll(findRelationEntityReferencesWithEntity((RelationEntity)member));
+            references.addAll(findRelationEntitiesWithRef((RelationEntity)member));
         } else if (member instanceof Structure) {
-            references.addAll(findStructureReferencesWithStructure((Structure)member));
+            references.addAll(findStructuresWithRef((Structure)member));
         } else if (member instanceof FacetedScalar) {
-            references.addAll(findFacetedScalarReferencesWithScalar((FacetedScalar)member));
+            references.addAll(findFacetedScalarsWithRef((FacetedScalar)member));
         } else if (member instanceof EnumeratedScalar) {
-            references.addAll(findEnumeratedScalarReferencesWithScalar((EnumeratedScalar)member));
+            references.addAll(findEnumeratedScalarsWithRef((EnumeratedScalar)member));
         } else if (member instanceof Relation) {
-            references.addAll(findRelationReferencesWithRelation((Relation)member));
+            references.addAll(findUnreifiedRelationsWithRef((Relation)member));
         } else if (member instanceof StructuredProperty) {
-            references.addAll(findStructuredPropertyReferencesWithProperty((StructuredProperty)member));
+            references.addAll(findStructuredPropertiesWithRef((StructuredProperty)member));
         } else if (member instanceof ScalarProperty) {
-            references.addAll(findScalarPropertyReferencesWithProperty((ScalarProperty)member));
+            references.addAll(findScalarPropertiesWithRef((ScalarProperty)member));
         } else if (member instanceof Rule) {
-            references.addAll(findRuleReferencesWithRule((Rule)member));
+            references.addAll(findRulesWithRef((Rule)member));
         } else if (member instanceof ConceptInstance) {
-            references.addAll(findConceptInstanceReferencesWithInstance((ConceptInstance)member));
+            references.addAll(findConceptInstancesWithRef((ConceptInstance)member));
         } else if (member instanceof RelationInstance) {
-            references.addAll(findRelationInstanceReferencesWithInstance((RelationInstance)member));
+            references.addAll(findRelationInstancesWithRef((RelationInstance)member));
         }
         return references;
     }
@@ -228,8 +223,8 @@ public final class OmlSearch extends OmlIndex {
         final List<SpecializationAxiom> axioms = new ArrayList<>();
         axioms.addAll(term.getOwnedSpecializations());
         axioms.addAll(findReferences(term).stream()
-            .filter(i -> i instanceof SpecializableTermReference)
-            .map(i -> (SpecializableTermReference)i)
+            .filter(i -> i instanceof SpecializableTerm)
+            .map(i -> (SpecializableTerm)i)
             .flatMap(r -> r.getOwnedSpecializations().stream())
             .collect(Collectors.toList()));
         return axioms;
@@ -255,8 +250,8 @@ public final class OmlSearch extends OmlIndex {
         final List<PropertyRestrictionAxiom> restrictions = new ArrayList<>();
         restrictions.addAll(classifier.getOwnedPropertyRestrictions());
         restrictions.addAll(findReferences(classifier).stream()
-            .filter(i -> i instanceof ClassifierReference)
-            .map(i -> (ClassifierReference)i)
+            .filter(i -> i instanceof Classifier)
+            .map(i -> (Classifier)i)
             .flatMap(r -> r.getOwnedPropertyRestrictions().stream())
             .collect(Collectors.toList()));
         return restrictions;
@@ -272,8 +267,8 @@ public final class OmlSearch extends OmlIndex {
         final List<KeyAxiom> keys = new ArrayList<>();
         keys.addAll(entity.getOwnedKeys());
         keys.addAll(findReferences(entity).stream()
-            .filter(i -> i instanceof EntityReference)
-            .map(i -> (EntityReference)i)
+            .filter(i -> i instanceof Entity)
+            .map(i -> (Entity)i)
             .flatMap(r -> r.getOwnedKeys().stream())
             .collect(Collectors.toList()));
         return keys;
@@ -439,8 +434,8 @@ public final class OmlSearch extends OmlIndex {
     public static List<TypeAssertion> findTypeAssertions(NamedInstance instance) {
         final List<TypeAssertion> assertions = new ArrayList<>(instance.getOwnedTypes());
         assertions.addAll(findReferences(instance).stream()
-            .filter(i -> i instanceof NamedInstanceReference)
-            .map(i -> (NamedInstanceReference)i)
+            .filter(i -> i instanceof NamedInstance)
+            .map(i -> (NamedInstance)i)
             .flatMap(r -> r.getOwnedTypes().stream())
             .collect(Collectors.toList()));
         return assertions;
@@ -456,8 +451,8 @@ public final class OmlSearch extends OmlIndex {
         final List<PropertyValueAssertion> assertions = new ArrayList<>(instance.getOwnedPropertyValues());
         if (instance instanceof NamedInstance) {
             assertions.addAll(findReferences((NamedInstance)instance).stream()
-                .filter(i -> i instanceof NamedInstanceReference)
-                .map(i -> (NamedInstanceReference)i)
+                .filter(i -> i instanceof NamedInstance)
+                .map(i -> (NamedInstance)i)
                 .flatMap(r -> r.getOwnedPropertyValues().stream())
                 .collect(Collectors.toList()));
         }

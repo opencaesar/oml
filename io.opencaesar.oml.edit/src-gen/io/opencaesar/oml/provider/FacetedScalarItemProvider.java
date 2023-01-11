@@ -64,6 +64,7 @@ public class FacetedScalarItemProvider extends ScalarItemProvider {
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addRefPropertyDescriptor(object);
 			addLengthPropertyDescriptor(object);
 			addMinLengthPropertyDescriptor(object);
 			addMaxLengthPropertyDescriptor(object);
@@ -71,6 +72,28 @@ public class FacetedScalarItemProvider extends ScalarItemProvider {
 			addLanguagePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Ref feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addRefPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_FacetedScalar_ref_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_FacetedScalar_ref_feature", "_UI_FacetedScalar_type"),
+				 OmlPackage.Literals.FACETED_SCALAR__REF,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
 	}
 
 	/**

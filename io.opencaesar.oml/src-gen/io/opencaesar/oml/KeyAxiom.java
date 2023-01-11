@@ -36,7 +36,6 @@ import org.eclipse.emf.common.util.EList;
  * <ul>
  *   <li>{@link io.opencaesar.oml.KeyAxiom#getProperties <em>Properties</em>}</li>
  *   <li>{@link io.opencaesar.oml.KeyAxiom#getOwningEntity <em>Owning Entity</em>}</li>
- *   <li>{@link io.opencaesar.oml.KeyAxiom#getOwningReference <em>Owning Reference</em>}</li>
  * </ul>
  *
  * @see io.opencaesar.oml.OmlPackage#getKeyAxiom()
@@ -85,32 +84,5 @@ public interface KeyAxiom extends Axiom {
 	 * @generated
 	 */
 	void setOwningEntity(Entity value);
-
-	/**
-	 * Returns the value of the '<em><b>Owning Reference</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.EntityReference#getOwnedKeys <em>Owned Keys</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * The reference to an entity that owns this axiom
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Owning Reference</em>' container reference.
-	 * @see #setOwningReference(EntityReference)
-	 * @see io.opencaesar.oml.OmlPackage#getKeyAxiom_OwningReference()
-	 * @see io.opencaesar.oml.EntityReference#getOwnedKeys
-	 * @model opposite="ownedKeys" transient="false"
-	 * @generated
-	 */
-	EntityReference getOwningReference();
-
-	/**
-	 * Sets the value of the '{@link io.opencaesar.oml.KeyAxiom#getOwningReference <em>Owning Reference</em>}' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Owning Reference</em>' container reference.
-	 * @see #getOwningReference()
-	 * @generated
-	 */
-	void setOwningReference(EntityReference value);
 
 } // KeyAxiom

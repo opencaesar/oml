@@ -20,6 +20,7 @@ package io.opencaesar.oml.impl;
 
 import io.opencaesar.oml.Entity;
 import io.opencaesar.oml.ForwardRelation;
+import io.opencaesar.oml.Member;
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.Relation;
 import io.opencaesar.oml.RelationEntity;
@@ -123,6 +124,16 @@ public class ForwardRelationImpl extends RelationImpl implements ForwardRelation
 		}
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.FORWARD_RELATION__RELATION_ENTITY, newRelationEntity, newRelationEntity));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Member getRef() {
+		return null;
 	}
 
 	/**
@@ -335,6 +346,12 @@ public class ForwardRelationImpl extends RelationImpl implements ForwardRelation
 	 */
 	@Override
 	public int eDerivedOperationID(int baseOperationID, Class<?> baseClass) {
+		if (baseClass == Member.class) {
+			switch (baseOperationID) {
+				case OmlPackage.MEMBER___GET_REF: return OmlPackage.FORWARD_RELATION___GET_REF;
+				default: return super.eDerivedOperationID(baseOperationID, baseClass);
+			}
+		}
 		if (baseClass == SemanticProperty.class) {
 			switch (baseOperationID) {
 				case OmlPackage.SEMANTIC_PROPERTY___IS_FUNCTIONAL: return OmlPackage.FORWARD_RELATION___IS_FUNCTIONAL;
@@ -368,6 +385,8 @@ public class ForwardRelationImpl extends RelationImpl implements ForwardRelation
 	@Override
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
+			case OmlPackage.FORWARD_RELATION___GET_REF:
+				return getRef();
 			case OmlPackage.FORWARD_RELATION___IS_FUNCTIONAL:
 				return isFunctional();
 			case OmlPackage.FORWARD_RELATION___IS_INVERSE_FUNCTIONAL:

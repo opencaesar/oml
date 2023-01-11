@@ -34,6 +34,7 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * </p>
  * <ul>
+ *   <li>{@link io.opencaesar.oml.RelationInstance#getRef <em>Ref</em>}</li>
  *   <li>{@link io.opencaesar.oml.RelationInstance#getSources <em>Sources</em>}</li>
  *   <li>{@link io.opencaesar.oml.RelationInstance#getTargets <em>Targets</em>}</li>
  * </ul>
@@ -44,6 +45,31 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface RelationInstance extends NamedInstance {
 	/**
+	 * Returns the value of the '<em><b>Ref</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * A ref to another relation instance
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Ref</em>' reference.
+	 * @see #setRef(RelationInstance)
+	 * @see io.opencaesar.oml.OmlPackage#getRelationInstance_Ref()
+	 * @model
+	 * @generated
+	 */
+	RelationInstance getRef();
+
+	/**
+	 * Sets the value of the '{@link io.opencaesar.oml.RelationInstance#getRef <em>Ref</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Ref</em>' reference.
+	 * @see #getRef()
+	 * @generated
+	 */
+	void setRef(RelationInstance value);
+
+	/**
 	 * Returns the value of the '<em><b>Sources</b></em>' reference list.
 	 * The list contents are of type {@link io.opencaesar.oml.NamedInstance}.
 	 * <!-- begin-user-doc -->
@@ -53,7 +79,7 @@ public interface RelationInstance extends NamedInstance {
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Sources</em>' reference list.
 	 * @see io.opencaesar.oml.OmlPackage#getRelationInstance_Sources()
-	 * @model required="true"
+	 * @model
 	 * @generated
 	 */
 	EList<NamedInstance> getSources();
@@ -68,7 +94,7 @@ public interface RelationInstance extends NamedInstance {
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Targets</em>' reference list.
 	 * @see io.opencaesar.oml.OmlPackage#getRelationInstance_Targets()
-	 * @model required="true"
+	 * @model
 	 * @generated
 	 */
 	EList<NamedInstance> getTargets();

@@ -60,7 +60,6 @@ public class TypeAssertionItemProvider extends AssertionItemProvider {
 
 			addTypePropertyDescriptor(object);
 			addOwningInstancePropertyDescriptor(object);
-			addOwningReferencePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -101,28 +100,6 @@ public class TypeAssertionItemProvider extends AssertionItemProvider {
 				 getString("_UI_TypeAssertion_owningInstance_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_TypeAssertion_owningInstance_feature", "_UI_TypeAssertion_type"),
 				 OmlPackage.Literals.TYPE_ASSERTION__OWNING_INSTANCE,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Owning Reference feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addOwningReferencePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_TypeAssertion_owningReference_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_TypeAssertion_owningReference_feature", "_UI_TypeAssertion_type"),
-				 OmlPackage.Literals.TYPE_ASSERTION__OWNING_REFERENCE,
 				 true,
 				 false,
 				 true,

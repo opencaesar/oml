@@ -28,10 +28,41 @@ package io.opencaesar.oml;
  * AnnotationProperty is a property with no DL semantics that relates an annotated element to a literal value.
  * <!-- end-model-doc -->
  *
+ * <p>
+ * The following features are supported:
+ * </p>
+ * <ul>
+ *   <li>{@link io.opencaesar.oml.AnnotationProperty#getRef <em>Ref</em>}</li>
+ * </ul>
  *
  * @see io.opencaesar.oml.OmlPackage#getAnnotationProperty()
  * @model annotation="https://tabatkins.github.io/bikeshed heading='Properties'"
  * @generated
  */
 public interface AnnotationProperty extends Property, SpecializableTerm {
+	/**
+	 * Returns the value of the '<em><b>Ref</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * A ref to another annotation property
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Ref</em>' reference.
+	 * @see #setRef(AnnotationProperty)
+	 * @see io.opencaesar.oml.OmlPackage#getAnnotationProperty_Ref()
+	 * @model
+	 * @generated
+	 */
+	AnnotationProperty getRef();
+
+	/**
+	 * Sets the value of the '{@link io.opencaesar.oml.AnnotationProperty#getRef <em>Ref</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Ref</em>' reference.
+	 * @see #getRef()
+	 * @generated
+	 */
+	void setRef(AnnotationProperty value);
+
 } // AnnotationProperty

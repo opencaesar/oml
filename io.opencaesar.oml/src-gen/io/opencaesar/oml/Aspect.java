@@ -30,10 +30,41 @@ package io.opencaesar.oml;
  * specialize other aspects.
  * <!-- end-model-doc -->
  *
+ * <p>
+ * The following features are supported:
+ * </p>
+ * <ul>
+ *   <li>{@link io.opencaesar.oml.Aspect#getRef <em>Ref</em>}</li>
+ * </ul>
  *
  * @see io.opencaesar.oml.OmlPackage#getAspect()
  * @model annotation="https://tabatkins.github.io/bikeshed heading='Types'"
  * @generated
  */
 public interface Aspect extends Entity {
+	/**
+	 * Returns the value of the '<em><b>Ref</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * A ref to another aspect
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Ref</em>' reference.
+	 * @see #setRef(Aspect)
+	 * @see io.opencaesar.oml.OmlPackage#getAspect_Ref()
+	 * @model
+	 * @generated
+	 */
+	Aspect getRef();
+
+	/**
+	 * Sets the value of the '{@link io.opencaesar.oml.Aspect#getRef <em>Ref</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Ref</em>' reference.
+	 * @see #getRef()
+	 * @generated
+	 */
+	void setRef(Aspect value);
+
 } // Aspect

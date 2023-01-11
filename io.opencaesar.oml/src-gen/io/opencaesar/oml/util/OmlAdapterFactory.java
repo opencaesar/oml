@@ -104,10 +104,6 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 				return createInstanceAdapter();
 			}
 			@Override
-			public Adapter caseStatement(Statement object) {
-				return createStatementAdapter();
-			}
-			@Override
 			public Adapter caseAxiom(Axiom object) {
 				return createAxiomAdapter();
 			}
@@ -156,12 +152,8 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 				return createDescriptionBundleAdapter();
 			}
 			@Override
-			public Adapter caseVocabularyStatement(VocabularyStatement object) {
-				return createVocabularyStatementAdapter();
-			}
-			@Override
-			public Adapter caseDescriptionStatement(DescriptionStatement object) {
-				return createDescriptionStatementAdapter();
+			public Adapter caseStatement(Statement object) {
+				return createStatementAdapter();
 			}
 			@Override
 			public Adapter caseVocabularyMember(VocabularyMember object) {
@@ -170,6 +162,14 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseDescriptionMember(DescriptionMember object) {
 				return createDescriptionMemberAdapter();
+			}
+			@Override
+			public Adapter caseVocabularyStatement(VocabularyStatement object) {
+				return createVocabularyStatementAdapter();
+			}
+			@Override
+			public Adapter caseDescriptionStatement(DescriptionStatement object) {
+				return createDescriptionStatementAdapter();
 			}
 			@Override
 			public Adapter caseTerm(Term object) {
@@ -360,78 +360,6 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 				return createBooleanLiteralAdapter();
 			}
 			@Override
-			public Adapter caseReference(Reference object) {
-				return createReferenceAdapter();
-			}
-			@Override
-			public Adapter caseSpecializableTermReference(SpecializableTermReference object) {
-				return createSpecializableTermReferenceAdapter();
-			}
-			@Override
-			public Adapter caseClassifierReference(ClassifierReference object) {
-				return createClassifierReferenceAdapter();
-			}
-			@Override
-			public Adapter caseEntityReference(EntityReference object) {
-				return createEntityReferenceAdapter();
-			}
-			@Override
-			public Adapter caseAspectReference(AspectReference object) {
-				return createAspectReferenceAdapter();
-			}
-			@Override
-			public Adapter caseConceptReference(ConceptReference object) {
-				return createConceptReferenceAdapter();
-			}
-			@Override
-			public Adapter caseRelationEntityReference(RelationEntityReference object) {
-				return createRelationEntityReferenceAdapter();
-			}
-			@Override
-			public Adapter caseStructureReference(StructureReference object) {
-				return createStructureReferenceAdapter();
-			}
-			@Override
-			public Adapter caseAnnotationPropertyReference(AnnotationPropertyReference object) {
-				return createAnnotationPropertyReferenceAdapter();
-			}
-			@Override
-			public Adapter caseScalarPropertyReference(ScalarPropertyReference object) {
-				return createScalarPropertyReferenceAdapter();
-			}
-			@Override
-			public Adapter caseStructuredPropertyReference(StructuredPropertyReference object) {
-				return createStructuredPropertyReferenceAdapter();
-			}
-			@Override
-			public Adapter caseFacetedScalarReference(FacetedScalarReference object) {
-				return createFacetedScalarReferenceAdapter();
-			}
-			@Override
-			public Adapter caseEnumeratedScalarReference(EnumeratedScalarReference object) {
-				return createEnumeratedScalarReferenceAdapter();
-			}
-			@Override
-			public Adapter caseRelationReference(RelationReference object) {
-				return createRelationReferenceAdapter();
-			}
-			@Override
-			public Adapter caseRuleReference(RuleReference object) {
-				return createRuleReferenceAdapter();
-			}
-			@Override
-			public Adapter caseNamedInstanceReference(NamedInstanceReference object) {
-				return createNamedInstanceReferenceAdapter();
-			}
-			@Override
-			public Adapter caseConceptInstanceReference(ConceptInstanceReference object) {
-				return createConceptInstanceReferenceAdapter();
-			}
-			@Override
-			public Adapter caseRelationInstanceReference(RelationInstanceReference object) {
-				return createRelationInstanceReferenceAdapter();
-			}
-			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -518,20 +446,6 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createInstanceAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.Statement <em>Statement</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.Statement
-	 * @generated
-	 */
-	public Adapter createStatementAdapter() {
 		return null;
 	}
 
@@ -704,30 +618,16 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.VocabularyStatement <em>Vocabulary Statement</em>}'.
+	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.Statement <em>Statement</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see io.opencaesar.oml.VocabularyStatement
+	 * @see io.opencaesar.oml.Statement
 	 * @generated
 	 */
-	public Adapter createVocabularyStatementAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.DescriptionStatement <em>Description Statement</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.DescriptionStatement
-	 * @generated
-	 */
-	public Adapter createDescriptionStatementAdapter() {
+	public Adapter createStatementAdapter() {
 		return null;
 	}
 
@@ -756,6 +656,34 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createDescriptionMemberAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.VocabularyStatement <em>Vocabulary Statement</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see io.opencaesar.oml.VocabularyStatement
+	 * @generated
+	 */
+	public Adapter createVocabularyStatementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.DescriptionStatement <em>Description Statement</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see io.opencaesar.oml.DescriptionStatement
+	 * @generated
+	 */
+	public Adapter createDescriptionStatementAdapter() {
 		return null;
 	}
 
@@ -1414,258 +1342,6 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createBooleanLiteralAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.Reference <em>Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.Reference
-	 * @generated
-	 */
-	public Adapter createReferenceAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.SpecializableTermReference <em>Specializable Term Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.SpecializableTermReference
-	 * @generated
-	 */
-	public Adapter createSpecializableTermReferenceAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.ClassifierReference <em>Classifier Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.ClassifierReference
-	 * @generated
-	 */
-	public Adapter createClassifierReferenceAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.EntityReference <em>Entity Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.EntityReference
-	 * @generated
-	 */
-	public Adapter createEntityReferenceAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.AspectReference <em>Aspect Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.AspectReference
-	 * @generated
-	 */
-	public Adapter createAspectReferenceAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.ConceptReference <em>Concept Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.ConceptReference
-	 * @generated
-	 */
-	public Adapter createConceptReferenceAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.RelationEntityReference <em>Relation Entity Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.RelationEntityReference
-	 * @generated
-	 */
-	public Adapter createRelationEntityReferenceAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.StructureReference <em>Structure Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.StructureReference
-	 * @generated
-	 */
-	public Adapter createStructureReferenceAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.AnnotationPropertyReference <em>Annotation Property Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.AnnotationPropertyReference
-	 * @generated
-	 */
-	public Adapter createAnnotationPropertyReferenceAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.ScalarPropertyReference <em>Scalar Property Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.ScalarPropertyReference
-	 * @generated
-	 */
-	public Adapter createScalarPropertyReferenceAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.StructuredPropertyReference <em>Structured Property Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.StructuredPropertyReference
-	 * @generated
-	 */
-	public Adapter createStructuredPropertyReferenceAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.FacetedScalarReference <em>Faceted Scalar Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.FacetedScalarReference
-	 * @generated
-	 */
-	public Adapter createFacetedScalarReferenceAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.EnumeratedScalarReference <em>Enumerated Scalar Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.EnumeratedScalarReference
-	 * @generated
-	 */
-	public Adapter createEnumeratedScalarReferenceAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.RelationReference <em>Relation Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.RelationReference
-	 * @generated
-	 */
-	public Adapter createRelationReferenceAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.RuleReference <em>Rule Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.RuleReference
-	 * @generated
-	 */
-	public Adapter createRuleReferenceAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.NamedInstanceReference <em>Named Instance Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.NamedInstanceReference
-	 * @generated
-	 */
-	public Adapter createNamedInstanceReferenceAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.ConceptInstanceReference <em>Concept Instance Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.ConceptInstanceReference
-	 * @generated
-	 */
-	public Adapter createConceptInstanceReferenceAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.RelationInstanceReference <em>Relation Instance Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.RelationInstanceReference
-	 * @generated
-	 */
-	public Adapter createRelationInstanceReferenceAdapter() {
 		return null;
 	}
 

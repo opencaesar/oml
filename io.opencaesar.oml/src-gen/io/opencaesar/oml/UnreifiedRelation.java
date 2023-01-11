@@ -28,12 +28,43 @@ package io.opencaesar.oml;
  * UnreifiedRelation is a simple relation from a source entity to a target entity.
  * <!-- end-model-doc -->
  *
+ * <p>
+ * The following features are supported:
+ * </p>
+ * <ul>
+ *   <li>{@link io.opencaesar.oml.UnreifiedRelation#getRef <em>Ref</em>}</li>
+ * </ul>
  *
  * @see io.opencaesar.oml.OmlPackage#getUnreifiedRelation()
  * @model annotation="https://tabatkins.github.io/bikeshed heading='Properties'"
  * @generated
  */
 public interface UnreifiedRelation extends Relation, RelationBase {
+	/**
+	 * Returns the value of the '<em><b>Ref</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * A ref to another relation
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Ref</em>' reference.
+	 * @see #setRef(Relation)
+	 * @see io.opencaesar.oml.OmlPackage#getUnreifiedRelation_Ref()
+	 * @model
+	 * @generated
+	 */
+	Relation getRef();
+
+	/**
+	 * Sets the value of the '{@link io.opencaesar.oml.UnreifiedRelation#getRef <em>Ref</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Ref</em>' reference.
+	 * @see #getRef()
+	 * @generated
+	 */
+	void setRef(Relation value);
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

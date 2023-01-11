@@ -58,7 +58,7 @@ Note: An ontology's import closure is defined as all the ontologies that are imp
 
 Note: An ontology whose members are referenced by another ontology needs to be directly imported by it (it is not enough to be indirectly imported).
 
-OML supports several kinds of concret imports for each one of its ontology kinds:
+OML supports several kinds of imports for each one of its ontology kinds:
 - Vocabulary:[Extension](#VocabularyExtension-LR), [Usage](#VocabularyUsage-LR)
 - Vocabulary Bundle: [Extension](#VocabularyBundleExtension-LR), [Inclusion](#VocabularyBundleInclusion-LR)
 - Description: [Extension](#DescriptionExtension-LR), [Usage](#DescriptionUsage-LR)
@@ -91,7 +91,7 @@ An ontology can have zero or more references, which are constructs that allow ad
 `}`
 </pre>
 
- An example of an extra statement that can be added on any reference is an [annotation](#Annotation-LR). However, other statement kinds may vary based on the kind of the referenced member. In many cases, those statements are the same kinds that can be added to a member definition. In other cases, they are only a subset of them. Sections on the specific member kinds will outline the statements that can or cannot be added to a reference (refer to the [Reference](#Reference-Syntax) syntax for all the details).
+ An example of an extra statement that can be added on any reference is an [annotation](#Annotation-LR). However, other statement kinds may vary based on the kind of the referenced member. In many cases, those statements are the same kinds that can be added to a member definition. In other cases, they are only a subset of them. Sections on the specific member kinds will outline the statements that can or cannot be added to a reference.
 
 ### IRI ### {#IRI-LR}
 
@@ -273,7 +273,7 @@ This section outlines the kind of imports (extension and usage) that can be adde
 
 #### Extension #### {#VocabularyExtension-LR}
 
-An [extension](#Extension) is a kind of [import](#Import) statement that can be added to a vocabulary to specify that it extends another vocabulary. This is typically needed when members of the extended vocabulary are cross-reference by the local members of the extending vocabulary.  A vocabulary extension is defined with the keyword `extends` followed by the extended vocabulary's NAMESPACE, followed by the keyword `as` and a unique prefix ID.
+An [extension](#ImportKind) is a kind of [import](#Import) statement that can be added to a vocabulary to specify that it extends another vocabulary. This is typically needed when members of the extended vocabulary are cross-reference by the local members of the extending vocabulary.  A vocabulary extension is defined with the keyword `extends` followed by the extended vocabulary's NAMESPACE, followed by the keyword `as` and a unique prefix ID.
 
 <pre class="highlight highlight-html">
 Annotation*
@@ -295,7 +295,7 @@ For example, the *mission* vocabulary *extends* the *xsd* vocabulary (in order t
 
 #### Usage #### {#VocabularyUsage-LR}
 
-A [usage](#Usage) is a kind of [import](#Import) statement that can be added to a vocabulary to specify that it uses a [description](#Description-LR). This is typically needed when the vocabulary uses one or more of the description's instances in its restriction axioms. A vocabulary usage is defined with the keyword `uses` followed by the used description's NAMESPACE, followed by the keyword `as` and a unique prefix ID.
+A [usage](#ImportKind) is a kind of [import](#Import) statement that can be added to a vocabulary to specify that it uses a [description](#Description-LR). This is typically needed when the vocabulary uses one or more of the description's instances in its restriction axioms. A vocabulary usage is defined with the keyword `uses` followed by the used description's NAMESPACE, followed by the keyword `as` and a unique prefix ID.
 
 <pre class="highlight highlight-html">
 Annotation*
@@ -1177,7 +1177,7 @@ This section outlines the kind of import statements (extension, usage) that can 
 
 #### Extension #### {#DescriptionExtension-LR}
 
-A [description extension](#Extension) is a kind of [import](#Import) statement that can be added to a description to specify that it extends another description. This can be used to split a system description into fragments that focus on different concerns or are contributed by different authorities. In this case, a description may extend other descriptions that it depends on. A description extension is defined with the keyword `extends` followed by the extended description's NAMESPACE, followed by the keyword `as` and a unique prefix ID.
+An [extension](#ImportKind) is a kind of [import](#Import) statement that can be added to a description to specify that it extends another description. This can be used to split a system description into fragments that focus on different concerns or are contributed by different authorities. In this case, a description may extend other descriptions that it depends on. A description extension is defined with the keyword `extends` followed by the extended description's NAMESPACE, followed by the keyword `as` and a unique prefix ID.
 
 <pre class="highlight highlight-html">
 Annotation*
@@ -1201,7 +1201,7 @@ The following example description *subsystem1* extends two other descriptions, *
 
 #### Usage #### {#DescriptionUsage-LR}
 
-A [description usage](#Usage) is a kind of [import](#Import) statement that can be added to a description to specify a vocabulary that it uses. This is typically needed in order to use the terms (types and properties) of the vocabulary in the description's instance definitions. A description usage is defined with the keyword `uses` followed by the used vocabulary's NAMESPACE, followed by the keyword `as` and a unique prefix ID.
+A [usage](#ImportKind) is a kind of [import](#Import) statement that can be added to a description to specify a vocabulary that it uses. This is typically needed in order to use the terms (types and properties) of the vocabulary in the description's instance definitions. A description usage is defined with the keyword `uses` followed by the used vocabulary's NAMESPACE, followed by the keyword `as` and a unique prefix ID.
 
 <pre class="highlight highlight-html">
 Annotation*
@@ -1366,9 +1366,9 @@ For example, the following vocabulary bundle has the namespace *http://com.xyz/m
 
 This section outlines the kind of import statements that can be added in a vocabulary bundle's body.
 
-#### Extends #### {#VocabularyBundleExtension-LR}
+#### Extension #### {#VocabularyBundleExtension-LR}
 
-An [vocabulary bundle extends](#Extension) is a kind of [import](#Import) statement that can be added to a vocabulary bundle to specify that it extends another vocabulary bundle. This can be used to organize vocabulary bundles in layers that build on each other. Each bundle inherits the vocabularies contributed by its extended bundles and may optionally add to them other included vocabularies. This can, for example, be used to define a family of related vocabulary bundles that build on each other by tackling different incremental concerns. A vocabulary bundle extension is defined with the keyword `extends` followed by the extended vocabulary bundle's NAMESPACE.
+An [extension](#ImportKind) is a kind of [import](#Import) statement that can be added to a vocabulary bundle to specify that it extends another vocabulary bundle. This can be used to organize vocabulary bundles in layers that build on each other. Each bundle inherits the vocabularies contributed by its extended bundles and may optionally add to them other included vocabularies. This can, for example, be used to define a family of related vocabulary bundles that build on each other by tackling different incremental concerns. A vocabulary bundle extension is defined with the keyword `extends` followed by the extended vocabulary bundle's NAMESPACE.
 
 <pre class="highlight highlight-html">
 Annotation*
@@ -1387,7 +1387,7 @@ For example, the *cyber-physical* vocabulary bundle *extends* the *foundation* v
 
 #### Inclusion #### {#VocabularyBundleInclusion-LR}
 
-An [vocabulary bundle inclusion](#Inclusion) is a kind of [import](#Import) statement that can be added to a vocabulary bundle to specify that it includes a vocabulary. A vocabulary bundle inclusion is defined with the keyword `includes` followed by the included vocabulary's NAMESPACE.
+An [inclusion](#ImportKind) is a kind of [import](#Import) statement that can be added to a vocabulary bundle to specify that it includes a vocabulary. A vocabulary bundle inclusion is defined with the keyword `includes` followed by the included vocabulary's NAMESPACE.
 
 <pre class="highlight highlight-html">
 Annotation*
@@ -1427,7 +1427,7 @@ This section outlines the kind of import statements that can be added in a descr
 
 #### Extension #### {#DescriptionBundleExtension-LR}
 
-An [description bundle extension](#Extension) is a kind of [import](#Import) statement that can be added to a description bundle to specify that it extends another description bundle. This can be used to organize description bundles into layers that build on each other. Each bundle inherits the descriptions contributed by its extended bundles and optionally adds to them other descriptions. This can, for example, be used to define alternative datasets (e.g., representing alternative system designs) that extend a common dataset. A description bundle extension is defined with the keyword `extends` followed by the extended description bundle's NAMESPACE.
+An [extension](#ImportKind) is a kind of [import](#Import) statement that can be added to a description bundle to specify that it extends another description bundle. This can be used to organize description bundles into layers that build on each other. Each bundle inherits the descriptions contributed by its extended bundles and optionally adds to them other descriptions. This can, for example, be used to define alternative datasets (e.g., representing alternative system designs) that extend a common dataset. A description bundle extension is defined with the keyword `extends` followed by the extended description bundle's NAMESPACE.
 
 <pre class="highlight highlight-html">
 Annotation*
@@ -1446,7 +1446,7 @@ For example, the *design1* description bundle *extends* the *mission1* descripti
 
 #### Usage #### {#DescriptionBundleUsage-LR}
 
-A [description bundle usage](#Usage) is a kind of [import](#Import) statement that can be added to a description bundle to specify that it uses either a vocabulary bundle or a vocabulary. A description bundle should use at least one vocabulary bundle (to import its world-closure statements). In this case, the usage is defined with the keyword `uses` followed by the imported vocabulary bundle's NAMESPACE. The same syntax is used when a description bundle uses a vocabulary, except that the vocabulary's NAMESPACE can optionally be followed by the `as` keyword and a unique prefix ID,  when a member of the used vocabulary (typically an annotation property) is cross-referenced.
+A [usage](#ImportKind) is a kind of [import](#Import) statement that can be added to a description bundle to specify that it uses either a vocabulary bundle or a vocabulary. A description bundle should use at least one vocabulary bundle (to import its world-closure statements). In this case, the usage is defined with the keyword `uses` followed by the imported vocabulary bundle's NAMESPACE. The same syntax is used when a description bundle uses a vocabulary, except that the vocabulary's NAMESPACE can optionally be followed by the `as` keyword and a unique prefix ID,  when a member of the used vocabulary (typically an annotation property) is cross-referenced.
 
 <pre class="highlight highlight-html">
 Annotation*
@@ -1467,7 +1467,7 @@ For example, the *mission1* description bundle *uses* the *dc* vocabulary and th
 
 #### Inclusion #### {#DescriptionBundleInclusion-LR}
 
-A [description bundle inclusion](#Inclusion) is a kind of [import](#Import) statement that can be added to a description bundle to specify that it includes a description. A description bundle inclusion is defined with the keyword `includes` followed by the imported description's NAMESPACE.
+An [inclusion](#ImportKind) is a kind of [import](#Import) statement that can be added to a description bundle to specify that it includes a description. A description bundle inclusion is defined with the keyword `includes` followed by the imported description's NAMESPACE.
 
 <pre class="highlight highlight-html">
 Annotation*

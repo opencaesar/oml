@@ -60,7 +60,6 @@ public class SpecializationAxiomItemProvider extends AxiomItemProvider {
 
 			addSpecializedTermPropertyDescriptor(object);
 			addOwningTermPropertyDescriptor(object);
-			addOwningReferencePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -101,28 +100,6 @@ public class SpecializationAxiomItemProvider extends AxiomItemProvider {
 				 getString("_UI_SpecializationAxiom_owningTerm_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_SpecializationAxiom_owningTerm_feature", "_UI_SpecializationAxiom_type"),
 				 OmlPackage.Literals.SPECIALIZATION_AXIOM__OWNING_TERM,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Owning Reference feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addOwningReferencePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_SpecializationAxiom_owningReference_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_SpecializationAxiom_owningReference_feature", "_UI_SpecializationAxiom_type"),
-				 OmlPackage.Literals.SPECIALIZATION_AXIOM__OWNING_REFERENCE,
 				 true,
 				 false,
 				 true,

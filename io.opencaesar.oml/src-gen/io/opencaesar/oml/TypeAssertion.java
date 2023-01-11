@@ -34,7 +34,6 @@ package io.opencaesar.oml;
  * <ul>
  *   <li>{@link io.opencaesar.oml.TypeAssertion#getType <em>Type</em>}</li>
  *   <li>{@link io.opencaesar.oml.TypeAssertion#getOwningInstance <em>Owning Instance</em>}</li>
- *   <li>{@link io.opencaesar.oml.TypeAssertion#getOwningReference <em>Owning Reference</em>}</li>
  * </ul>
  *
  * @see io.opencaesar.oml.OmlPackage#getTypeAssertion()
@@ -93,32 +92,5 @@ public interface TypeAssertion extends Assertion {
 	 * @generated
 	 */
 	void setOwningInstance(NamedInstance value);
-
-	/**
-	 * Returns the value of the '<em><b>Owning Reference</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.NamedInstanceReference#getOwnedTypes <em>Owned Types</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * The reference that owns this assertion
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Owning Reference</em>' container reference.
-	 * @see #setOwningReference(NamedInstanceReference)
-	 * @see io.opencaesar.oml.OmlPackage#getTypeAssertion_OwningReference()
-	 * @see io.opencaesar.oml.NamedInstanceReference#getOwnedTypes
-	 * @model opposite="ownedTypes" transient="false"
-	 * @generated
-	 */
-	NamedInstanceReference getOwningReference();
-
-	/**
-	 * Sets the value of the '{@link io.opencaesar.oml.TypeAssertion#getOwningReference <em>Owning Reference</em>}' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Owning Reference</em>' container reference.
-	 * @see #getOwningReference()
-	 * @generated
-	 */
-	void setOwningReference(NamedInstanceReference value);
 
 } // TypeAssertion

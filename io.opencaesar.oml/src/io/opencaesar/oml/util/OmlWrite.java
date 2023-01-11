@@ -28,16 +28,12 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import io.opencaesar.oml.Annotation;
 import io.opencaesar.oml.AnnotationProperty;
-import io.opencaesar.oml.AnnotationPropertyReference;
 import io.opencaesar.oml.Aspect;
-import io.opencaesar.oml.AspectReference;
 import io.opencaesar.oml.BooleanLiteral;
 import io.opencaesar.oml.CardinalityRestrictionKind;
 import io.opencaesar.oml.Classifier;
 import io.opencaesar.oml.Concept;
 import io.opencaesar.oml.ConceptInstance;
-import io.opencaesar.oml.ConceptInstanceReference;
-import io.opencaesar.oml.ConceptReference;
 import io.opencaesar.oml.DecimalLiteral;
 import io.opencaesar.oml.Description;
 import io.opencaesar.oml.DescriptionBundle;
@@ -47,9 +43,7 @@ import io.opencaesar.oml.DoubleLiteral;
 import io.opencaesar.oml.Element;
 import io.opencaesar.oml.Entity;
 import io.opencaesar.oml.EnumeratedScalar;
-import io.opencaesar.oml.EnumeratedScalarReference;
 import io.opencaesar.oml.FacetedScalar;
-import io.opencaesar.oml.FacetedScalarReference;
 import io.opencaesar.oml.ForwardRelation;
 import io.opencaesar.oml.IdentifiedElement;
 import io.opencaesar.oml.Import;
@@ -71,31 +65,23 @@ import io.opencaesar.oml.PropertyValueAssertion;
 import io.opencaesar.oml.PropertyValueRestrictionAxiom;
 import io.opencaesar.oml.QuotedLiteral;
 import io.opencaesar.oml.RangeRestrictionKind;
-import io.opencaesar.oml.Reference;
 import io.opencaesar.oml.Relation;
 import io.opencaesar.oml.RelationBase;
 import io.opencaesar.oml.RelationEntity;
 import io.opencaesar.oml.RelationEntityPredicate;
-import io.opencaesar.oml.RelationEntityReference;
 import io.opencaesar.oml.RelationInstance;
-import io.opencaesar.oml.RelationInstanceReference;
-import io.opencaesar.oml.RelationReference;
 import io.opencaesar.oml.ReverseRelation;
 import io.opencaesar.oml.Rule;
-import io.opencaesar.oml.RuleReference;
 import io.opencaesar.oml.SameAsPredicate;
 import io.opencaesar.oml.Scalar;
 import io.opencaesar.oml.ScalarProperty;
-import io.opencaesar.oml.ScalarPropertyReference;
 import io.opencaesar.oml.SemanticProperty;
 import io.opencaesar.oml.SeparatorKind;
 import io.opencaesar.oml.SpecializableTerm;
 import io.opencaesar.oml.SpecializationAxiom;
 import io.opencaesar.oml.Structure;
 import io.opencaesar.oml.StructureInstance;
-import io.opencaesar.oml.StructureReference;
 import io.opencaesar.oml.StructuredProperty;
-import io.opencaesar.oml.StructuredPropertyReference;
 import io.opencaesar.oml.Type;
 import io.opencaesar.oml.TypeAssertion;
 import io.opencaesar.oml.TypePredicate;
@@ -148,28 +134,22 @@ public class OmlWrite {
     /**
      * Sets the given object to be contained by the given subject in the context of the given ontology
      * 
-     * If the subject is a member of the given ontology; then the given member eRef will be used as the containment eRef
-     * otherwise a reference to the subject is created (or retrieved) first in the ontology, then the given reference eRef will be used 
-     * as the containment eRef. 
-     * 
      * @param ontology the given ontology
      * @param subject the given subject
      * @param elementERef the containment eRef to use on subject if it belongs to the given ontology
-     * @param referenceERef the containment eRef to use on subject if the subject does not belong to the given ontology
      * @param object the given object 
      */
     @SuppressWarnings("unchecked")
-    protected static void setContainmentReference(Ontology ontology, Element subject, EReference elementERef, EReference referenceERef, Element object) {
+    protected static void setContainmentReference(Ontology ontology, Element subject, EReference elementERef, Element object) {
         final Class<? extends Element> objectClass = (Class<? extends Element>) elementERef.getEType().getInstanceClass();
         assert elementERef.isContainment() : elementERef.getName()+" is not a containment reference";
-        assert referenceERef.isContainment() : referenceERef.getName()+" is not a containment reference";
         assert objectClass.isInstance(object) : object+" is not an instance of "+objectClass.getName();
-        assert elementERef.getEType() == referenceERef.getEType() : elementERef.getName()+" does not have the same type as "+referenceERef.getName();
+        assert elementERef.getEType() == elementERef.getEType() : elementERef.getName()+" does not have the same type as "+elementERef.getName();
         if (object != null && subject != null) {
             if (subject.getOntology() == ontology) {
                 ((List<Element>)subject.eGet(elementERef)).add(object);
             } else if (subject instanceof Member){
-                ((List<Element>)getOrAddReference(ontology, (Member)subject).eGet(referenceERef)).add(object);
+                ((List<Element>)getOrAddReference(ontology, (Member)subject).eGet(elementERef)).add(object);
             }
         }
     }
@@ -191,8 +171,8 @@ public class OmlWrite {
      * @param member the given member
      * @return a reference to the given member in the context of the given ontology
      */
-    protected static Reference getOrAddReference(Ontology ontology, Member member) {
-        Reference reference = OmlRead.getReferences(ontology).stream().filter(i -> OmlRead.resolve(i) == member).findFirst().orElse(null);
+    protected static Member getOrAddReference(Ontology ontology, Member member) {
+        Member reference = OmlRead.getReferences(ontology).stream().filter(i -> OmlRead.resolve(i) == member).findFirst().orElse(null);
         if (reference == null) {
             reference = createReference(member);
             if (ontology instanceof Vocabulary) {
@@ -272,7 +252,7 @@ public class OmlWrite {
         else if (referenceValue != null)
         	annotation.setReferenceValue(referenceValue);
         setCrossReference(ontology, annotation, OmlPackage.Literals.ANNOTATION__PROPERTY, property);
-        setContainmentReference(ontology, element, OmlPackage.Literals.IDENTIFIED_ELEMENT__OWNED_ANNOTATIONS, OmlPackage.Literals.REFERENCE__OWNED_ANNOTATIONS, annotation);
+        setContainmentReference(ontology, element, OmlPackage.Literals.IDENTIFIED_ELEMENT__OWNED_ANNOTATIONS, annotation);
         return annotation;
     }
 
@@ -688,7 +668,7 @@ public class OmlWrite {
         return instance;
     }
 
-    // MemerReference
+    // Member
 
     /**
      * Creates a reference for the given member
@@ -696,217 +676,62 @@ public class OmlWrite {
      * @param member the given member
      * @return a reference for the given member
      */
-    protected static Reference createReference(Member member) {
+    @SuppressWarnings("unchecked")
+	protected static <T extends Member> T createReference(T member) {
         if (member instanceof Aspect) {
-            return createReference((Concept) member);
+            final var reference = create(Aspect.class);
+            reference.setRef((Aspect)member);
+            return (T) reference;
         } else if (member instanceof Concept) {
-            return createReference((Concept) member);
+            final var reference = create(Concept.class);
+            reference.setRef((Concept)member);
+            return (T) reference;
         } else if (member instanceof RelationEntity) {
-            return createReference((RelationEntity) member);
+            final var reference = create(RelationEntity.class);
+            reference.setRef((RelationEntity)member);
+            return (T) reference;
         } else if (member instanceof Structure) {
-            return createReference((Structure) member);
+            final var reference = create(Structure.class);
+            reference.setRef((Structure)member);
+            return (T) reference;
         } else if (member instanceof EnumeratedScalar) {
-            return createReference((EnumeratedScalar) member);
+            final var reference = create(EnumeratedScalar.class);
+            reference.setRef((EnumeratedScalar)member);
+            return (T) reference;
         } else if (member instanceof FacetedScalar) {
-            return createReference((FacetedScalar) member);
+            final var reference = create(FacetedScalar.class);
+            reference.setRef((FacetedScalar)member);
+            return (T) reference;
         } else if (member instanceof AnnotationProperty) {
-            return createReference((AnnotationProperty) member);
+            final var reference = create(AnnotationProperty.class);
+            reference.setRef((AnnotationProperty)member);
+            return (T) reference;
         } else if (member instanceof ScalarProperty) {
-            return createReference((ScalarProperty) member);
+            final var reference = create(ScalarProperty.class);
+            reference.setRef((ScalarProperty)member);
+            return (T) reference;
         } else if (member instanceof StructuredProperty) {
-            return createReference((StructuredProperty) member);
+            final var reference = create(StructuredProperty.class);
+            reference.setRef((StructuredProperty)member);
+            return (T) reference;
         } else if (member instanceof Relation) {
-            return createReference((Relation) member);
+            final var reference = create(UnreifiedRelation.class);
+            reference.setRef((Relation)member);
+            return (T) reference;
         } else if (member instanceof Rule) {
-            return createReference((Rule) member);
+            final var reference = create(Rule.class);
+            reference.setRef((Rule)member);
+            return (T) reference;
         } else if (member instanceof ConceptInstance) {
-            return createReference((ConceptInstance) member);
+            final var reference = create(ConceptInstance.class);
+            reference.setRef((ConceptInstance)member);
+            return (T) reference;
         } else if (member instanceof RelationInstance) {
-            return createReference((RelationInstance) member);
+            final var reference = create(RelationInstance.class);
+            reference.setRef((RelationInstance)member);
+            return (T) reference;
         }
         return null;
-    }
-    
-    // AspectReference
-    
-    /**
-     * Creates a reference for the given aspect
-     * 
-     * @param aspect the given aspect
-     * @return a reference for the given aspect
-     */
-    protected static AspectReference createReference(Aspect aspect) {
-        final AspectReference reference = create(AspectReference.class);
-        reference.setAspect(aspect);
-        return reference;
-    }
-
-    // ConceptReference
-
-    /**
-     * Creates a reference for the given concept
-     * 
-     * @param concept the given concept
-     * @return a reference for the given concept
-     */
-    protected static ConceptReference createReference(Concept concept) {
-        final ConceptReference reference = create(ConceptReference.class);
-        reference.setConcept(concept);
-        return reference;
-    }
-    
-    // RelationEntityReference
-
-    /**
-     * Creates a reference for the given relation entity
-     * 
-     * @param entity the given relation entity
-     * @return a reference for the given relation entity
-     */
-    protected static RelationEntityReference createReference(RelationEntity entity) {
-        final RelationEntityReference reference = create(RelationEntityReference.class);
-        reference.setEntity(entity);
-        return reference;
-    }
-    
-    // StructureReference
-
-    /**
-     * Creates a reference for the given structure
-     * 
-     * @param structure the given structure
-     * @return a reference for the given structure
-     */
-    protected static StructureReference createReference(Structure structure) {
-        final StructureReference reference = create(StructureReference.class);
-        reference.setStructure(structure);
-        return reference;
-    }
-    
-    // AnnotationPropertyReference
-
-    /**
-     * Creates a reference for the given annotation property
-     * 
-     * @param property the given annotation property
-     * @return a reference for the given annotation property
-     */
-    protected static AnnotationPropertyReference createReference(AnnotationProperty property) {
-        AnnotationPropertyReference reference = create(AnnotationPropertyReference.class);
-        reference.setProperty(property);
-        return reference;
-    }
-
-    // ScalarPropertyReference
-
-    /**
-     * Creates a reference for the given scalar property
-     * 
-     * @param property the given scalar property
-     * @return a reference for the given scalar property
-     */
-    protected static ScalarPropertyReference createReference(ScalarProperty property) {
-        ScalarPropertyReference reference = create(ScalarPropertyReference.class);
-        reference.setProperty(property);
-        return reference;
-    }
-    
-    // StructuredPropertyReference
-
-    /**
-     * Creates a reference for the given structured property
-     * 
-     * @param property the given structured property
-     * @return a reference for the given structured property
-     */
-    protected static StructuredPropertyReference createReference(StructuredProperty property) {
-        StructuredPropertyReference reference = create(StructuredPropertyReference.class);
-        reference.setProperty(property);
-        return reference;
-    }
-    
-    // FacetedScalarReference
-
-    /**
-     * Creates a reference for the given faceted scalar
-     * 
-     * @param scalar the given faceted scalar
-     * @return a reference for the given faceted scalar
-     */
-    protected static FacetedScalarReference createReference(FacetedScalar scalar) {
-        FacetedScalarReference reference = create(FacetedScalarReference.class);
-        reference.setScalar(scalar);
-        return reference;
-    }
-    
-    // EnumeratedScalarReference
-
-    /**
-     * Creates a reference for the given enumerated scalar
-     * 
-     * @param scalar the given enumerated scalar
-     * @return a reference for the given enumerated scalar
-     */
-    protected static EnumeratedScalarReference createReference(EnumeratedScalar scalar) {
-        EnumeratedScalarReference reference = create(EnumeratedScalarReference.class);
-        reference.setScalar(scalar);
-        return reference;
-    }
-
-    // RelationReference
-
-    /**
-     * Creates a reference for the given relation
-     * 
-     * @param relation the given relation
-     * @return a reference for the given relation
-     */
-    protected static RelationReference createReference(Relation relation) {
-        RelationReference reference = create(RelationReference.class);
-        reference.setRelation(relation);
-        return reference;
-    }
-    
-    // RuleReference
-
-    /**
-     * Creates a reference for the given rule
-     * 
-     * @param rule the given rule
-     * @return a reference for the given rule
-     */
-    protected static RuleReference createReference(Rule rule) {
-        RuleReference reference = create(RuleReference.class);
-        reference.setRule(rule);
-        return reference;
-    }
-    
-    // ConceptInstanceReference
-
-    /**
-     * Creates a reference for the given concept instance
-     * 
-     * @param instance the given concept instance
-     * @return a reference for the given concept instance
-     */
-    protected static ConceptInstanceReference createReference(ConceptInstance instance) {
-        ConceptInstanceReference reference = create(ConceptInstanceReference.class);
-        reference.setInstance(instance);
-        return reference;
-    }
-
-    // RelationInstanceReference
-
-    /**
-     * Creates a reference for the given relation instance
-     * 
-     * @param instance the given relation instance
-     * @return a reference for the given relation instance
-     */
-    protected static RelationInstanceReference createReference(RelationInstance instance) {
-        RelationInstanceReference reference = create(RelationInstanceReference.class);
-        reference.setInstance(instance);
-        return reference;
     }
     
     // Import
@@ -943,7 +768,7 @@ public class OmlWrite {
     public static SpecializationAxiom addSpecializationAxiom(Vocabulary vocabulary, SpecializableTerm subTerm, SpecializableTerm superTerm) {
         final SpecializationAxiom axiom = create(SpecializationAxiom.class);
         setCrossReference(vocabulary, axiom, OmlPackage.Literals.SPECIALIZATION_AXIOM__SPECIALIZED_TERM, superTerm);
-        setContainmentReference(vocabulary, subTerm, OmlPackage.Literals.SPECIALIZABLE_TERM__OWNED_SPECIALIZATIONS, OmlPackage.Literals.SPECIALIZABLE_TERM_REFERENCE__OWNED_SPECIALIZATIONS, axiom);
+        setContainmentReference(vocabulary, subTerm, OmlPackage.Literals.SPECIALIZABLE_TERM__OWNED_SPECIALIZATIONS, axiom);
         return axiom;
     }
     
@@ -964,7 +789,7 @@ public class OmlWrite {
         axiom.setKind(restrictionKind);
         setCrossReference(vocabulary, axiom, OmlPackage.Literals.PROPERTY_RESTRICTION_AXIOM__PROPERTY, property);
         setCrossReference(vocabulary, axiom, OmlPackage.Literals.PROPERTY_RANGE_RESTRICTION_AXIOM__RANGE, range);
-        setContainmentReference(vocabulary, domain, OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS, OmlPackage.Literals.CLASSIFIER_REFERENCE__OWNED_PROPERTY_RESTRICTIONS, axiom);
+        setContainmentReference(vocabulary, domain, OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS, axiom);
         return axiom;
     }
 
@@ -987,7 +812,7 @@ public class OmlWrite {
         axiom.setCardinality(cardinality);
         setCrossReference(vocabulary, axiom, OmlPackage.Literals.PROPERTY_RESTRICTION_AXIOM__PROPERTY, property);
         setCrossReference(vocabulary, axiom, OmlPackage.Literals.PROPERTY_CARDINALITY_RESTRICTION_AXIOM__RANGE, range);
-        setContainmentReference(vocabulary, domain, OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS, OmlPackage.Literals.CLASSIFIER_REFERENCE__OWNED_PROPERTY_RESTRICTIONS, axiom);
+        setContainmentReference(vocabulary, domain, OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS, axiom);
         return axiom;
     }
 
@@ -1006,7 +831,7 @@ public class OmlWrite {
         final PropertyValueRestrictionAxiom axiom = create(PropertyValueRestrictionAxiom.class);
         axiom.setLiteralValue(value);
         setCrossReference(vocabulary, axiom, OmlPackage.Literals.PROPERTY_RESTRICTION_AXIOM__PROPERTY, property);
-        setContainmentReference(vocabulary, domain, OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS, OmlPackage.Literals.CLASSIFIER_REFERENCE__OWNED_PROPERTY_RESTRICTIONS, axiom);
+        setContainmentReference(vocabulary, domain, OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS, axiom);
         return axiom;
     }
 
@@ -1023,7 +848,7 @@ public class OmlWrite {
         final PropertyValueRestrictionAxiom axiom = create(PropertyValueRestrictionAxiom.class);
         axiom.setStructureInstanceValue(value);
         setCrossReference(vocabulary, axiom, OmlPackage.Literals.PROPERTY_RESTRICTION_AXIOM__PROPERTY, property);
-        setContainmentReference(vocabulary, domain, OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS, OmlPackage.Literals.CLASSIFIER_REFERENCE__OWNED_PROPERTY_RESTRICTIONS, axiom);
+        setContainmentReference(vocabulary, domain, OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS, axiom);
         return axiom;
     }
 
@@ -1040,7 +865,7 @@ public class OmlWrite {
         final PropertyValueRestrictionAxiom axiom = create(PropertyValueRestrictionAxiom.class);
         axiom.setNamedInstanceValue(value);
         setCrossReference(vocabulary, axiom, OmlPackage.Literals.PROPERTY_RESTRICTION_AXIOM__PROPERTY, property);
-        setContainmentReference(vocabulary, domain, OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS, OmlPackage.Literals.CLASSIFIER_REFERENCE__OWNED_PROPERTY_RESTRICTIONS, axiom);
+        setContainmentReference(vocabulary, domain, OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS, axiom);
         return axiom;
     }
 
@@ -1057,7 +882,7 @@ public class OmlWrite {
     public static KeyAxiom addKeyAxiom(Vocabulary vocabulary, Entity domain, List<Property> keyProperties) {
         final KeyAxiom axiom = create(KeyAxiom.class);
         setCrossReferences(vocabulary, axiom, OmlPackage.Literals.KEY_AXIOM__PROPERTIES, new ArrayList<Element>(keyProperties));
-        setContainmentReference(vocabulary, domain, OmlPackage.Literals.ENTITY__OWNED_KEYS, OmlPackage.Literals.ENTITY_REFERENCE__OWNED_KEYS, axiom);
+        setContainmentReference(vocabulary, domain, OmlPackage.Literals.ENTITY__OWNED_KEYS, axiom);
         return axiom;
     }
 
@@ -1074,7 +899,7 @@ public class OmlWrite {
     public static TypeAssertion addTypeAssertion(Description description, NamedInstance instance, Entity type) {
         final TypeAssertion assertion = create(TypeAssertion.class);
         setCrossReference(description, assertion, OmlPackage.Literals.TYPE_ASSERTION__TYPE, type);
-        setContainmentReference(description, instance, OmlPackage.Literals.NAMED_INSTANCE__OWNED_TYPES, OmlPackage.Literals.NAMED_INSTANCE_REFERENCE__OWNED_TYPES, assertion);
+        setContainmentReference(description, instance, OmlPackage.Literals.NAMED_INSTANCE__OWNED_TYPES, assertion);
         return assertion;
     }
 
@@ -1093,7 +918,7 @@ public class OmlWrite {
         final PropertyValueAssertion assertion = create(PropertyValueAssertion.class);
        	assertion.setLiteralValue(literalValue);
         setCrossReference(ontology, assertion, OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__PROPERTY, property);
-        setContainmentReference(ontology, instance, OmlPackage.Literals.INSTANCE__OWNED_PROPERTY_VALUES, OmlPackage.Literals.NAMED_INSTANCE_REFERENCE__OWNED_PROPERTY_VALUES, assertion);
+        setContainmentReference(ontology, instance, OmlPackage.Literals.INSTANCE__OWNED_PROPERTY_VALUES, assertion);
         return assertion;
     }
         
@@ -1113,7 +938,7 @@ public class OmlWrite {
         final PropertyValueAssertion assertion = create(PropertyValueAssertion.class);
        	assertion.setStructureInstanceValue(structureInstanceValue);
         setCrossReference(ontology, assertion, OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__PROPERTY, property);
-        setContainmentReference(ontology, instance, OmlPackage.Literals.INSTANCE__OWNED_PROPERTY_VALUES, OmlPackage.Literals.NAMED_INSTANCE_REFERENCE__OWNED_PROPERTY_VALUES, assertion);
+        setContainmentReference(ontology, instance, OmlPackage.Literals.INSTANCE__OWNED_PROPERTY_VALUES, assertion);
         return assertion;
     }
 
@@ -1133,7 +958,7 @@ public class OmlWrite {
         final PropertyValueAssertion assertion = create(PropertyValueAssertion.class);
        	assertion.setNamedInstanceValue(namedInstanceValue);
         setCrossReference(ontology, assertion, OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__PROPERTY, property);
-        setContainmentReference(ontology, instance, OmlPackage.Literals.INSTANCE__OWNED_PROPERTY_VALUES, OmlPackage.Literals.NAMED_INSTANCE_REFERENCE__OWNED_PROPERTY_VALUES, assertion);
+        setContainmentReference(ontology, instance, OmlPackage.Literals.INSTANCE__OWNED_PROPERTY_VALUES, assertion);
         return assertion;
     }
 

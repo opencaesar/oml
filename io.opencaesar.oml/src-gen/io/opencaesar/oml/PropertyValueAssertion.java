@@ -35,7 +35,6 @@ package io.opencaesar.oml;
  * </p>
  * <ul>
  *   <li>{@link io.opencaesar.oml.PropertyValueAssertion#getOwningInstance <em>Owning Instance</em>}</li>
- *   <li>{@link io.opencaesar.oml.PropertyValueAssertion#getOwningReference <em>Owning Reference</em>}</li>
  *   <li>{@link io.opencaesar.oml.PropertyValueAssertion#getProperty <em>Property</em>}</li>
  *   <li>{@link io.opencaesar.oml.PropertyValueAssertion#getLiteralValue <em>Literal Value</em>}</li>
  *   <li>{@link io.opencaesar.oml.PropertyValueAssertion#getStructureInstanceValue <em>Structure Instance Value</em>}</li>
@@ -73,33 +72,6 @@ public interface PropertyValueAssertion extends Assertion {
 	 * @generated
 	 */
 	void setOwningInstance(Instance value);
-
-	/**
-	 * Returns the value of the '<em><b>Owning Reference</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.NamedInstanceReference#getOwnedPropertyValues <em>Owned Property Values</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * The reference to an instance that this property value assertion is about
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Owning Reference</em>' container reference.
-	 * @see #setOwningReference(NamedInstanceReference)
-	 * @see io.opencaesar.oml.OmlPackage#getPropertyValueAssertion_OwningReference()
-	 * @see io.opencaesar.oml.NamedInstanceReference#getOwnedPropertyValues
-	 * @model opposite="ownedPropertyValues" transient="false"
-	 * @generated
-	 */
-	NamedInstanceReference getOwningReference();
-
-	/**
-	 * Sets the value of the '{@link io.opencaesar.oml.PropertyValueAssertion#getOwningReference <em>Owning Reference</em>}' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Owning Reference</em>' container reference.
-	 * @see #getOwningReference()
-	 * @generated
-	 */
-	void setOwningReference(NamedInstanceReference value);
 
 	/**
 	 * Returns the value of the '<em><b>Property</b></em>' reference.

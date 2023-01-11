@@ -22,7 +22,6 @@ import io.opencaesar.oml.Element;
 import io.opencaesar.oml.Instance;
 import io.opencaesar.oml.Literal;
 import io.opencaesar.oml.NamedInstance;
-import io.opencaesar.oml.NamedInstanceReference;
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.PropertyValueAssertion;
 import io.opencaesar.oml.Relation;
@@ -54,7 +53,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  * </p>
  * <ul>
  *   <li>{@link io.opencaesar.oml.impl.PropertyValueAssertionImpl#getOwningInstance <em>Owning Instance</em>}</li>
- *   <li>{@link io.opencaesar.oml.impl.PropertyValueAssertionImpl#getOwningReference <em>Owning Reference</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.PropertyValueAssertionImpl#getProperty <em>Property</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.PropertyValueAssertionImpl#getLiteralValue <em>Literal Value</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.PropertyValueAssertionImpl#getStructureInstanceValue <em>Structure Instance Value</em>}</li>
@@ -174,59 +172,6 @@ public class PropertyValueAssertionImpl extends AssertionImpl implements Propert
 		}
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.PROPERTY_VALUE_ASSERTION__OWNING_INSTANCE, newOwningInstance, newOwningInstance));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NamedInstanceReference getOwningReference() {
-		if (eContainerFeatureID() != OmlPackage.PROPERTY_VALUE_ASSERTION__OWNING_REFERENCE) return null;
-		return (NamedInstanceReference)eContainer();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NamedInstanceReference basicGetOwningReference() {
-		if (eContainerFeatureID() != OmlPackage.PROPERTY_VALUE_ASSERTION__OWNING_REFERENCE) return null;
-		return (NamedInstanceReference)eInternalContainer();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetOwningReference(NamedInstanceReference newOwningReference, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwningReference, OmlPackage.PROPERTY_VALUE_ASSERTION__OWNING_REFERENCE, msgs);
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setOwningReference(NamedInstanceReference newOwningReference) {
-		if (newOwningReference != eInternalContainer() || (eContainerFeatureID() != OmlPackage.PROPERTY_VALUE_ASSERTION__OWNING_REFERENCE && newOwningReference != null)) {
-			if (EcoreUtil.isAncestor(this, newOwningReference))
-				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
-			NotificationChain msgs = null;
-			if (eInternalContainer() != null)
-				msgs = eBasicRemoveFromContainer(msgs);
-			if (newOwningReference != null)
-				msgs = ((InternalEObject)newOwningReference).eInverseAdd(this, OmlPackage.NAMED_INSTANCE_REFERENCE__OWNED_PROPERTY_VALUES, NamedInstanceReference.class, msgs);
-			msgs = basicSetOwningReference(newOwningReference, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.PROPERTY_VALUE_ASSERTION__OWNING_REFERENCE, newOwningReference, newOwningReference));
 	}
 
 	/**
@@ -442,10 +387,6 @@ public class PropertyValueAssertionImpl extends AssertionImpl implements Propert
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwningInstance((Instance)otherEnd, msgs);
-			case OmlPackage.PROPERTY_VALUE_ASSERTION__OWNING_REFERENCE:
-				if (eInternalContainer() != null)
-					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetOwningReference((NamedInstanceReference)otherEnd, msgs);
 			case OmlPackage.PROPERTY_VALUE_ASSERTION__STRUCTURE_INSTANCE_VALUE:
 				if (structureInstanceValue != null)
 					msgs = ((InternalEObject)structureInstanceValue).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OmlPackage.PROPERTY_VALUE_ASSERTION__STRUCTURE_INSTANCE_VALUE, null, msgs);
@@ -464,8 +405,6 @@ public class PropertyValueAssertionImpl extends AssertionImpl implements Propert
 		switch (featureID) {
 			case OmlPackage.PROPERTY_VALUE_ASSERTION__OWNING_INSTANCE:
 				return basicSetOwningInstance(null, msgs);
-			case OmlPackage.PROPERTY_VALUE_ASSERTION__OWNING_REFERENCE:
-				return basicSetOwningReference(null, msgs);
 			case OmlPackage.PROPERTY_VALUE_ASSERTION__LITERAL_VALUE:
 				return basicSetLiteralValue(null, msgs);
 			case OmlPackage.PROPERTY_VALUE_ASSERTION__STRUCTURE_INSTANCE_VALUE:
@@ -484,8 +423,6 @@ public class PropertyValueAssertionImpl extends AssertionImpl implements Propert
 		switch (eContainerFeatureID()) {
 			case OmlPackage.PROPERTY_VALUE_ASSERTION__OWNING_INSTANCE:
 				return eInternalContainer().eInverseRemove(this, OmlPackage.INSTANCE__OWNED_PROPERTY_VALUES, Instance.class, msgs);
-			case OmlPackage.PROPERTY_VALUE_ASSERTION__OWNING_REFERENCE:
-				return eInternalContainer().eInverseRemove(this, OmlPackage.NAMED_INSTANCE_REFERENCE__OWNED_PROPERTY_VALUES, NamedInstanceReference.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -501,9 +438,6 @@ public class PropertyValueAssertionImpl extends AssertionImpl implements Propert
 			case OmlPackage.PROPERTY_VALUE_ASSERTION__OWNING_INSTANCE:
 				if (resolve) return getOwningInstance();
 				return basicGetOwningInstance();
-			case OmlPackage.PROPERTY_VALUE_ASSERTION__OWNING_REFERENCE:
-				if (resolve) return getOwningReference();
-				return basicGetOwningReference();
 			case OmlPackage.PROPERTY_VALUE_ASSERTION__PROPERTY:
 				if (resolve) return getProperty();
 				return basicGetProperty();
@@ -528,9 +462,6 @@ public class PropertyValueAssertionImpl extends AssertionImpl implements Propert
 		switch (featureID) {
 			case OmlPackage.PROPERTY_VALUE_ASSERTION__OWNING_INSTANCE:
 				setOwningInstance((Instance)newValue);
-				return;
-			case OmlPackage.PROPERTY_VALUE_ASSERTION__OWNING_REFERENCE:
-				setOwningReference((NamedInstanceReference)newValue);
 				return;
 			case OmlPackage.PROPERTY_VALUE_ASSERTION__PROPERTY:
 				setProperty((SemanticProperty)newValue);
@@ -559,9 +490,6 @@ public class PropertyValueAssertionImpl extends AssertionImpl implements Propert
 			case OmlPackage.PROPERTY_VALUE_ASSERTION__OWNING_INSTANCE:
 				setOwningInstance((Instance)null);
 				return;
-			case OmlPackage.PROPERTY_VALUE_ASSERTION__OWNING_REFERENCE:
-				setOwningReference((NamedInstanceReference)null);
-				return;
 			case OmlPackage.PROPERTY_VALUE_ASSERTION__PROPERTY:
 				setProperty((SemanticProperty)null);
 				return;
@@ -588,8 +516,6 @@ public class PropertyValueAssertionImpl extends AssertionImpl implements Propert
 		switch (featureID) {
 			case OmlPackage.PROPERTY_VALUE_ASSERTION__OWNING_INSTANCE:
 				return basicGetOwningInstance() != null;
-			case OmlPackage.PROPERTY_VALUE_ASSERTION__OWNING_REFERENCE:
-				return basicGetOwningReference() != null;
 			case OmlPackage.PROPERTY_VALUE_ASSERTION__PROPERTY:
 				return property != null;
 			case OmlPackage.PROPERTY_VALUE_ASSERTION__LITERAL_VALUE:

@@ -11,14 +11,10 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import io.opencaesar.oml.Annotation;
 import io.opencaesar.oml.AnnotationProperty;
-import io.opencaesar.oml.AnnotationPropertyReference;
 import io.opencaesar.oml.Aspect;
-import io.opencaesar.oml.AspectReference;
 import io.opencaesar.oml.BooleanLiteral;
 import io.opencaesar.oml.Concept;
 import io.opencaesar.oml.ConceptInstance;
-import io.opencaesar.oml.ConceptInstanceReference;
-import io.opencaesar.oml.ConceptReference;
 import io.opencaesar.oml.DecimalLiteral;
 import io.opencaesar.oml.Description;
 import io.opencaesar.oml.DescriptionBundle;
@@ -26,9 +22,7 @@ import io.opencaesar.oml.DifferentFromPredicate;
 import io.opencaesar.oml.DoubleLiteral;
 import io.opencaesar.oml.Element;
 import io.opencaesar.oml.EnumeratedScalar;
-import io.opencaesar.oml.EnumeratedScalarReference;
 import io.opencaesar.oml.FacetedScalar;
-import io.opencaesar.oml.FacetedScalarReference;
 import io.opencaesar.oml.ForwardRelation;
 import io.opencaesar.oml.Import;
 import io.opencaesar.oml.IntegerLiteral;
@@ -47,22 +41,15 @@ import io.opencaesar.oml.QuotedLiteral;
 import io.opencaesar.oml.Relation;
 import io.opencaesar.oml.RelationEntity;
 import io.opencaesar.oml.RelationEntityPredicate;
-import io.opencaesar.oml.RelationEntityReference;
 import io.opencaesar.oml.RelationInstance;
-import io.opencaesar.oml.RelationInstanceReference;
-import io.opencaesar.oml.RelationReference;
 import io.opencaesar.oml.ReverseRelation;
 import io.opencaesar.oml.Rule;
-import io.opencaesar.oml.RuleReference;
 import io.opencaesar.oml.SameAsPredicate;
 import io.opencaesar.oml.ScalarProperty;
-import io.opencaesar.oml.ScalarPropertyReference;
 import io.opencaesar.oml.SpecializationAxiom;
 import io.opencaesar.oml.Structure;
 import io.opencaesar.oml.StructureInstance;
-import io.opencaesar.oml.StructureReference;
 import io.opencaesar.oml.StructuredProperty;
-import io.opencaesar.oml.StructuredPropertyReference;
 import io.opencaesar.oml.TypeAssertion;
 import io.opencaesar.oml.TypePredicate;
 import io.opencaesar.oml.Vocabulary;
@@ -189,6 +176,8 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 					} catch (UnsupportedEncodingException e) {
 						throw new AssertionError(e);
 					}
+				} else if (aspect.getRef() != null){
+					return "ref aspect " + getLabel(OmlRead.resolve(aspect), aspect);
 				} else {
 					return "aspect " + getLabel(aspect);
 				}
@@ -210,6 +199,8 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 					} catch (UnsupportedEncodingException e) {
 						throw new AssertionError(e);
 					}
+				} else if (concept.getRef() != null){
+					return "ref concept " + getLabel(OmlRead.resolve(concept), concept);
 				} else {
 					return "concept " + getLabel(concept);
 				}
@@ -231,6 +222,8 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 					} catch (UnsupportedEncodingException e) {
 						throw new AssertionError(e);
 					}
+				} else if (entity.getRef() != null){
+					return "ref relation entity " + getLabel(OmlRead.resolve(entity), entity);
 				} else {
 					return "relation entity " + getLabel(entity);
 				}
@@ -252,6 +245,8 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 					} catch (UnsupportedEncodingException e) {
 						throw new AssertionError(e);
 					}
+				} else if (structure.getRef() != null){
+					return "ref structure " + getLabel(OmlRead.resolve(structure), structure);
 				} else {
 					return "structure " + getLabel(structure);
 				}
@@ -273,6 +268,8 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 					} catch (UnsupportedEncodingException e) {
 						throw new AssertionError(e);
 					}
+				} else if (scalar.getRef() != null){
+					return "ref scalar " + getLabel(OmlRead.resolve(scalar), scalar);
 				} else {
 					return "scalar " + getLabel(scalar);
 				}
@@ -294,6 +291,8 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 					} catch (UnsupportedEncodingException e) {
 						throw new AssertionError(e);
 					}
+				} else if (scalar.getRef() != null){
+					return "ref enumerated scalar " + getLabel(OmlRead.resolve(scalar), scalar);
 				} else {
 					return "enumerated scalar " + getLabel(scalar);
 				}
@@ -317,6 +316,8 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 					} catch (UnsupportedEncodingException e) {
 						throw new AssertionError(e);
 					}
+				} else if (property.getRef() != null){
+					return "ref annotation property " + getLabel(OmlRead.resolve(property), property);
 				} else {
 					return "annotation property " + getLabel(property);
 				}
@@ -338,6 +339,8 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 					} catch (UnsupportedEncodingException e) {
 						throw new AssertionError(e);
 					}
+				} else if (property.getRef() != null){
+					return "ref scalar property " + getLabel(OmlRead.resolve(property), property);
 				} else {
 					return "scalar property " + getLabel(property);
 				}
@@ -359,6 +362,8 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 					} catch (UnsupportedEncodingException e) {
 						throw new AssertionError(e);
 					}
+				} else if (property.getRef() != null){
+					return "ref structured property " + getLabel(OmlRead.resolve(property), property);
 				} else {
 					return "structured property " + getLabel(property);
 				}
@@ -426,6 +431,8 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 					} catch (UnsupportedEncodingException e) {
 						throw new AssertionError(e);
 					}
+				} else if (rule.getRef() != null){
+					return "ref rule " + getLabel(OmlRead.resolve(rule), rule);
 				} else {
 					return "rule " + getLabel(rule);
 				}
@@ -630,6 +637,8 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 					} catch (UnsupportedEncodingException e) {
 						throw new AssertionError(e);
 					}
+				} else if (instance.getRef() != null){
+					return "ref ci " + getLabel(OmlRead.resolve(instance), instance);
 				} else {
 					return "ci " + getLabel(instance);
 				}
@@ -644,16 +653,18 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 			@Override
 			public String getText(Object object) {
 				RelationInstance instance = (RelationInstance)object;
-				StringBuilder label = new StringBuilder("ri ");
+				StringBuilder label = new StringBuilder("");
 				if (instance.eIsProxy()) {
 					try {
 						String fragment = URLDecoder.decode(((InternalEObject)instance).eProxyURI().fragment(), "utf-8");
-						label.append("<" + fragment + ">");
+						label.append("ri <" + fragment + ">");
 					} catch (UnsupportedEncodingException e) {
 						throw new AssertionError(e);
 					}
+				} else if (instance.getRef() != null){
+					label.append("ref ri " + getLabel(OmlRead.resolve(instance), instance));
 				} else {
-					label.append(getLabel(instance));
+					label.append("ri " + getLabel(instance));
 				}
 				if (!instance.getSources().isEmpty()) {
 					List<String> labels = instance.getSources().stream().map(i -> getLabel(i, instance)).collect(Collectors.toList());
@@ -699,164 +710,6 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 		return typeAssertionItemProvider;
 	}
 
-	// References (concept instance, relation instance)
-
-	@Override
-	public Adapter createAspectReferenceAdapter() {
-		if (aspectReferenceItemProvider == null) aspectReferenceItemProvider = new AspectReferenceItemProvider(this) {
-			@Override
-			public String getText(Object object) {
-				AspectReference reference = (AspectReference)object;
-				return "ref aspect " + getLabel(reference.getAspect(), reference);
-			}
-		};
-		return aspectReferenceItemProvider;
-	}
-
-	@Override
-	public Adapter createConceptReferenceAdapter() {
-		if (conceptReferenceItemProvider == null) conceptReferenceItemProvider = new ConceptReferenceItemProvider(this) {
-			@Override
-			public String getText(Object object) {
-				ConceptReference reference = (ConceptReference)object;
-				return "ref concept " + getLabel(reference.getConcept(), reference);
-			}
-		};
-		return conceptReferenceItemProvider;
-	}
-
-	@Override
-	public Adapter createRelationEntityReferenceAdapter() {
-		if (relationEntityReferenceItemProvider == null) relationEntityReferenceItemProvider = new RelationEntityReferenceItemProvider(this) {
-			@Override
-			public String getText(Object object) {
-				RelationEntityReference reference = (RelationEntityReference)object;
-				return "ref relation entity " + getLabel(reference.getEntity(), reference);
-			}
-		};
-		return relationEntityReferenceItemProvider;
-	}
-
-	@Override
-	public Adapter createStructureReferenceAdapter() {
-		if (structureReferenceItemProvider == null) structureReferenceItemProvider = new StructureReferenceItemProvider(this) {
-			@Override
-			public String getText(Object object) {
-				StructureReference reference = (StructureReference)object;
-				return "ref structure " + getLabel(reference.getStructure(), reference);
-			}
-		};
-		return structureReferenceItemProvider;
-	}
-
-	@Override
-	public Adapter createAnnotationPropertyReferenceAdapter() {
-		if (annotationPropertyReferenceItemProvider == null) annotationPropertyReferenceItemProvider = new AnnotationPropertyReferenceItemProvider(this) {
-			@Override
-			public String getText(Object object) {
-				AnnotationPropertyReference reference = (AnnotationPropertyReference)object;
-				return "ref annotation property " + getLabel(reference.getProperty(), reference);
-			}
-		};
-		return annotationPropertyReferenceItemProvider;
-	}
-
-	@Override
-	public Adapter createScalarPropertyReferenceAdapter() {
-		if (scalarPropertyReferenceItemProvider == null) scalarPropertyReferenceItemProvider = new ScalarPropertyReferenceItemProvider(this) {
-			@Override
-			public String getText(Object object) {
-				ScalarPropertyReference reference = (ScalarPropertyReference)object;
-				return "ref scalar property " + getLabel(reference.getProperty(), reference);
-			}
-		};
-		return scalarPropertyReferenceItemProvider;
-	}
-
-	@Override
-	public Adapter createStructuredPropertyReferenceAdapter() {
-		if (structuredPropertyReferenceItemProvider == null) structuredPropertyReferenceItemProvider = new StructuredPropertyReferenceItemProvider(this) {
-			@Override
-			public String getText(Object object) {
-				StructuredPropertyReference reference = (StructuredPropertyReference)object;
-				return "ref structured property " + getLabel(reference.getProperty(), reference);
-			}
-		};
-		return structuredPropertyReferenceItemProvider;
-	}
-
-	@Override
-	public Adapter createFacetedScalarReferenceAdapter() {
-		if (facetedScalarReferenceItemProvider == null) facetedScalarReferenceItemProvider = new FacetedScalarReferenceItemProvider(this) {
-			@Override
-			public String getText(Object object) {
-				FacetedScalarReference reference = (FacetedScalarReference)object;
-				return "ref scalar " + getLabel(reference.getScalar(), reference);
-			}
-		};
-		return facetedScalarReferenceItemProvider;
-	}
-
-	@Override
-	public Adapter createEnumeratedScalarReferenceAdapter() {
-		if (enumeratedScalarReferenceItemProvider == null) enumeratedScalarReferenceItemProvider = new EnumeratedScalarReferenceItemProvider(this) {
-			@Override
-			public String getText(Object object) {
-				EnumeratedScalarReference reference = (EnumeratedScalarReference)object;
-				return "ref enumerated scalar " + getLabel(reference.getScalar(), reference);
-			}
-		};
-		return enumeratedScalarReferenceItemProvider;
-	}
-
-	@Override
-	public Adapter createRelationReferenceAdapter() {
-		if (relationReferenceItemProvider == null) relationReferenceItemProvider = new RelationReferenceItemProvider(this) {
-			@Override
-			public String getText(Object object) {
-				RelationReference reference = (RelationReference)object;
-				return "ref relation " + getLabel(reference.getRelation(), reference);
-			}
-		};
-		return relationReferenceItemProvider;
-	}
-
-	@Override
-	public Adapter createRuleReferenceAdapter() {
-		if (ruleReferenceItemProvider == null) ruleReferenceItemProvider = new RuleReferenceItemProvider(this) {
-			@Override
-			public String getText(Object object) {
-				RuleReference reference = (RuleReference)object;
-				return "ref rule " + getLabel(reference.getRule(), reference);
-			}
-		};
-		return ruleReferenceItemProvider;
-	}
-
-	@Override
-	public Adapter createConceptInstanceReferenceAdapter() {
-		if (conceptInstanceReferenceItemProvider == null) conceptInstanceReferenceItemProvider = new ConceptInstanceReferenceItemProvider(this) {
-			@Override
-			public String getText(Object object) {
-				ConceptInstanceReference reference = (ConceptInstanceReference)object;
-				return "ref ci " + getLabel(reference.getInstance(), reference);
-			}
-		};
-		return conceptInstanceReferenceItemProvider;
-	}
-	
-	@Override
-	public Adapter createRelationInstanceReferenceAdapter() {
-		if (relationInstanceReferenceItemProvider == null) relationInstanceReferenceItemProvider = new RelationInstanceReferenceItemProvider(this) {
-			@Override
-			public String getText(Object object) {
-				RelationInstanceReference reference = (RelationInstanceReference)object;
-				return "ref ri " + getLabel(reference.getInstance(), reference);
-			}
-		};
-		return relationInstanceReferenceItemProvider;
-	}
-	
 	// Literals (quoted, integer, decimal, double, boolean)
 
 	@Override

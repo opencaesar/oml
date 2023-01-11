@@ -38,21 +38,15 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import io.opencaesar.oml.Annotation;
 import io.opencaesar.oml.AnnotationProperty;
-import io.opencaesar.oml.AnnotationPropertyReference;
-import io.opencaesar.oml.AspectReference;
 import io.opencaesar.oml.Assertion;
 import io.opencaesar.oml.Axiom;
 import io.opencaesar.oml.BooleanLiteral;
 import io.opencaesar.oml.Classifier;
-import io.opencaesar.oml.ConceptInstanceReference;
-import io.opencaesar.oml.ConceptReference;
 import io.opencaesar.oml.DecimalLiteral;
 import io.opencaesar.oml.Description;
 import io.opencaesar.oml.DoubleLiteral;
 import io.opencaesar.oml.Element;
 import io.opencaesar.oml.Entity;
-import io.opencaesar.oml.EnumeratedScalarReference;
-import io.opencaesar.oml.FacetedScalarReference;
 import io.opencaesar.oml.ForwardRelation;
 import io.opencaesar.oml.IdentifiedElement;
 import io.opencaesar.oml.Import;
@@ -68,25 +62,17 @@ import io.opencaesar.oml.PropertyPredicate;
 import io.opencaesar.oml.PropertyRestrictionAxiom;
 import io.opencaesar.oml.PropertyValueAssertion;
 import io.opencaesar.oml.QuotedLiteral;
-import io.opencaesar.oml.Reference;
 import io.opencaesar.oml.Relation;
 import io.opencaesar.oml.RelationBase;
 import io.opencaesar.oml.RelationEntity;
 import io.opencaesar.oml.RelationEntityPredicate;
-import io.opencaesar.oml.RelationEntityReference;
-import io.opencaesar.oml.RelationInstanceReference;
-import io.opencaesar.oml.RelationReference;
 import io.opencaesar.oml.ReverseRelation;
-import io.opencaesar.oml.RuleReference;
 import io.opencaesar.oml.Scalar;
-import io.opencaesar.oml.ScalarPropertyReference;
 import io.opencaesar.oml.SemanticProperty;
 import io.opencaesar.oml.SpecializableTerm;
 import io.opencaesar.oml.SpecializationAxiom;
 import io.opencaesar.oml.Statement;
 import io.opencaesar.oml.StructureInstance;
-import io.opencaesar.oml.StructureReference;
-import io.opencaesar.oml.StructuredPropertyReference;
 import io.opencaesar.oml.Term;
 import io.opencaesar.oml.TypeAssertion;
 import io.opencaesar.oml.TypePredicate;
@@ -448,8 +434,8 @@ public final class OmlRead {
      * @return the annotated element of the annotation
      */
     public static IdentifiedElement getAnnotatedElement(Annotation annotation) {
-        if (annotation.getOwningReference() != null) {
-            return resolve(annotation.getOwningReference());
+        if (annotation.getOwningElement() instanceof Member) {
+            return resolve((Member)annotation.getOwningElement());
         } else {
             return annotation.getOwningElement();
         }
@@ -511,15 +497,14 @@ public final class OmlRead {
     }
     
     /**
-     * Gets all references defined in the given ontology
+     * Gets all reference statements defined in a given ontology
      * 
      * @param ontology the given ontology
-     * @return a list of all references defined in the given ontology
+     * @return a list of all reference statements defined in the given ontology
      */
-    public static List<Reference> getReferences(Ontology ontology) {
+    public static List<Statement> getReferences(Ontology ontology) {
         return getStatements(ontology).stream()
-            .filter(s -> s instanceof Reference)
-            .map(s -> (Reference)s)
+            .filter(s -> s.getRef() != null)
             .collect(Collectors.toList());
     }
     
@@ -769,47 +754,14 @@ public final class OmlRead {
      * @param reference the given reference
      * @return the resolved member
      */
-    public static Member resolve(Reference reference) {
-        if (reference instanceof AnnotationPropertyReference) {
-            return ((AnnotationPropertyReference) reference).getProperty();
-        } else if (reference instanceof AspectReference) {
-            return ((AspectReference) reference).getAspect();
-        } else if (reference instanceof ConceptInstanceReference) {
-            return ((ConceptInstanceReference) reference).getInstance();
-        } else if (reference instanceof ConceptReference) {
-            return ((ConceptReference) reference).getConcept();
-        } else if (reference instanceof EnumeratedScalarReference) {
-            return ((EnumeratedScalarReference) reference).getScalar();
-        } else if (reference instanceof FacetedScalarReference) {
-            return ((FacetedScalarReference) reference).getScalar();
-        } else if (reference instanceof RelationEntityReference) {
-            return ((RelationEntityReference) reference).getEntity();
-        } else if (reference instanceof RelationInstanceReference) {
-            return ((RelationInstanceReference) reference).getInstance();
-        } else if (reference instanceof RelationReference) {
-            return ((RelationReference) reference).getRelation();
-        } else if (reference instanceof RuleReference) {
-            return ((RuleReference) reference).getRule();
-        } else if (reference instanceof ScalarPropertyReference) {
-            return ((ScalarPropertyReference) reference).getProperty();
-        } else if (reference instanceof StructuredPropertyReference) {
-            return ((StructuredPropertyReference) reference).getProperty();
-        } else if (reference instanceof StructureReference) {
-            return ((StructureReference) reference).getStructure();
-        }
-        return null;
+    @SuppressWarnings("unchecked")
+	public static <T extends Member> T resolve(T reference) {
+    	if (reference.getRef() != null) {
+    		return (T) reference.getRef();
+    	}
+        return reference;
     }
     
-    /**
-     * Gets the abbreviated iri of the given reference
-     * 
-     * @param reference the given reference
-     * @return the abbreviated IRI of the given reference
-     */
-    public static String getAbbreviatedIri(Reference reference) {
-        return getAbbreviatedIriIn(resolve(reference), reference.getOntology());
-    }
-        
     //-------------------------------------------------
     // VOCABULARIES
     //-------------------------------------------------
@@ -887,11 +839,7 @@ public final class OmlRead {
      * @return the entity that defines the given key axiom
      */
     public static Entity getKeyedEntity(KeyAxiom axiom) {
-        if (axiom.getOwningReference() != null) {
-            return (Entity) resolve(axiom.getOwningReference());
-        } else {
-            return axiom.getOwningEntity();
-        }
+    	return resolve(axiom.getOwningEntity());
     }
     
     /**
@@ -911,11 +859,7 @@ public final class OmlRead {
      * @return the sub term of the given specialization axiom
      */
     public static SpecializableTerm getSubTerm(SpecializationAxiom axiom) {
-        if (axiom.getOwningReference() != null) {
-            return (SpecializableTerm) resolve(axiom.getOwningReference());
-        } else {
-            return axiom.getOwningTerm();
-        }
+    	return resolve(axiom.getOwningTerm());
     }
     
     /**
@@ -925,11 +869,7 @@ public final class OmlRead {
      * @return the restricting domain of the given property restriction axiom
      */
     public static Classifier getRestrictingDomain(PropertyRestrictionAxiom axiom) {
-        if (axiom.getOwningReference() != null) {
-            return (Classifier) resolve(axiom.getOwningReference());
-        } else {
-            return axiom.getOwningClassifier();
-        }
+    	return resolve(axiom.getOwningClassifier());
     }
     
     /**
@@ -1022,11 +962,7 @@ public final class OmlRead {
      * @return the concept instance that is the subject of the concept type assertion
      */
     public static NamedInstance getAssertingInstance(TypeAssertion assertion) {
-        if (assertion.getOwningReference() != null) {
-            return (NamedInstance) resolve(assertion.getOwningReference());
-        } else {
-            return assertion.getOwningInstance();
-        }
+    	return resolve(assertion.getOwningInstance());
     }
     
     /**
@@ -1036,8 +972,8 @@ public final class OmlRead {
      * @return the instance that is the subject of the value assertion
      */
     public static Instance getAssertingInstance(PropertyValueAssertion assertion) {
-        if (assertion.getOwningReference() != null) {
-            return (Instance) resolve(assertion.getOwningReference());
+        if (assertion.getOwningInstance() instanceof NamedInstance) {
+            return resolve((NamedInstance)assertion.getOwningInstance());
         } else {
             return assertion.getOwningInstance();
         }

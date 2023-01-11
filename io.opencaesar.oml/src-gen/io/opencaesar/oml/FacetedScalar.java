@@ -83,6 +83,7 @@ package io.opencaesar.oml;
  * The following features are supported:
  * </p>
  * <ul>
+ *   <li>{@link io.opencaesar.oml.FacetedScalar#getRef <em>Ref</em>}</li>
  *   <li>{@link io.opencaesar.oml.FacetedScalar#getLength <em>Length</em>}</li>
  *   <li>{@link io.opencaesar.oml.FacetedScalar#getMinLength <em>Min Length</em>}</li>
  *   <li>{@link io.opencaesar.oml.FacetedScalar#getMaxLength <em>Max Length</em>}</li>
@@ -99,6 +100,31 @@ package io.opencaesar.oml;
  * @generated
  */
 public interface FacetedScalar extends Scalar {
+	/**
+	 * Returns the value of the '<em><b>Ref</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * A ref to another faceted scalar
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Ref</em>' reference.
+	 * @see #setRef(FacetedScalar)
+	 * @see io.opencaesar.oml.OmlPackage#getFacetedScalar_Ref()
+	 * @model
+	 * @generated
+	 */
+	FacetedScalar getRef();
+
+	/**
+	 * Sets the value of the '{@link io.opencaesar.oml.FacetedScalar#getRef <em>Ref</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Ref</em>' reference.
+	 * @see #getRef()
+	 * @generated
+	 */
+	void setRef(FacetedScalar value);
+
 	/**
 	 * Returns the value of the '<em><b>Length</b></em>' attribute.
 	 * <!-- begin-user-doc -->

@@ -35,20 +35,14 @@ import org.eclipse.emf.ecore.util.EcoreUtil.UsageCrossReferencer;
 
 import io.opencaesar.oml.Annotation;
 import io.opencaesar.oml.AnnotationProperty;
-import io.opencaesar.oml.AnnotationPropertyReference;
 import io.opencaesar.oml.Aspect;
-import io.opencaesar.oml.AspectReference;
 import io.opencaesar.oml.Classifier;
 import io.opencaesar.oml.Concept;
 import io.opencaesar.oml.ConceptInstance;
-import io.opencaesar.oml.ConceptInstanceReference;
-import io.opencaesar.oml.ConceptReference;
 import io.opencaesar.oml.Element;
 import io.opencaesar.oml.Entity;
 import io.opencaesar.oml.EnumeratedScalar;
-import io.opencaesar.oml.EnumeratedScalarReference;
 import io.opencaesar.oml.FacetedScalar;
-import io.opencaesar.oml.FacetedScalarReference;
 import io.opencaesar.oml.KeyAxiom;
 import io.opencaesar.oml.NamedInstance;
 import io.opencaesar.oml.OmlPackage;
@@ -64,26 +58,20 @@ import io.opencaesar.oml.Relation;
 import io.opencaesar.oml.RelationBase;
 import io.opencaesar.oml.RelationEntity;
 import io.opencaesar.oml.RelationEntityPredicate;
-import io.opencaesar.oml.RelationEntityReference;
 import io.opencaesar.oml.RelationInstance;
-import io.opencaesar.oml.RelationInstanceReference;
-import io.opencaesar.oml.RelationReference;
 import io.opencaesar.oml.Rule;
-import io.opencaesar.oml.RuleReference;
 import io.opencaesar.oml.Scalar;
 import io.opencaesar.oml.ScalarProperty;
-import io.opencaesar.oml.ScalarPropertyReference;
 import io.opencaesar.oml.SemanticProperty;
 import io.opencaesar.oml.SpecializableTerm;
 import io.opencaesar.oml.SpecializationAxiom;
 import io.opencaesar.oml.Structure;
 import io.opencaesar.oml.StructureInstance;
-import io.opencaesar.oml.StructureReference;
 import io.opencaesar.oml.StructuredProperty;
-import io.opencaesar.oml.StructuredPropertyReference;
 import io.opencaesar.oml.Type;
 import io.opencaesar.oml.TypeAssertion;
 import io.opencaesar.oml.TypePredicate;
+import io.opencaesar.oml.UnreifiedRelation;
 
 /**
  * The <b>Index</b> API for the model. It allows looking up cross references of OML objects in the resource set by using two lookup mechanisms:
@@ -284,160 +272,160 @@ public class OmlIndex {
         return findInverseReferencers(target, RelationInstance.class, OmlPackage.Literals.RELATION_INSTANCE__TARGETS);
     }
     
-    // AspectReference
+    // Aspect
     
     /**
-     * Finds aspect references referencing the given aspect
+     * Finds aspects referencing the given aspect
      * 
      * @param aspect The referenced aspect
-     * @return A list of referencing aspect references
+     * @return A list of referencing aspects
      */
-    public static List<AspectReference> findAspectReferencesWithAspect(Aspect aspect) {
-        return findInverseReferencers(aspect, AspectReference.class, OmlPackage.Literals.ASPECT_REFERENCE__ASPECT);
+    public static List<Aspect> findAspectsWithRef(Aspect aspect) {
+        return findInverseReferencers(aspect, Aspect.class, OmlPackage.Literals.ASPECT__REF);
     }
     
-    // ConceptReference
+    // Concept
     
     /**
-     * Finds concept references referencing the given concept
+     * Finds concept referencing the given concept
      * 
      * @param concept The referenced concept
-     * @return A list of referencing concept references
+     * @return A list of referencing concepts
      */
-    public static List<ConceptReference> findConceptReferencesWithConcept(Concept concept) {
-        return findInverseReferencers(concept, ConceptReference.class, OmlPackage.Literals.CONCEPT_REFERENCE__CONCEPT);
+    public static List<Concept> findConceptsWithRef(Concept concept) {
+        return findInverseReferencers(concept, Concept.class, OmlPackage.Literals.CONCEPT__REF);
     }
     
-    // RelationEntityReference
+    // RelationEntity
     
     /**
-     * Finds relation entity references referencing the given relation entity
+     * Finds relation entity referencing the given relation entity
      * 
      * @param entity The referenced relation entity
-     * @return A list of referencing relation entity references
+     * @return A list of referencing relation entities
      */
-    public static List<RelationEntityReference> findRelationEntityReferencesWithEntity(RelationEntity entity) {
-        return findInverseReferencers(entity, RelationEntityReference.class, OmlPackage.Literals.RELATION_ENTITY_REFERENCE__ENTITY);
+    public static List<RelationEntity> findRelationEntitiesWithRef(RelationEntity entity) {
+        return findInverseReferencers(entity, RelationEntity.class, OmlPackage.Literals.RELATION_ENTITY__REF);
     }
     
-    // StructureReference
+    // Structure
     
     /**
-     * Finds structure references referencing the given structure
+     * Finds structure referencing the given structure
      * 
      * @param structure The referenced structure
-     * @return A list of referencing structure references
+     * @return A list of referencing structures
      */
-    public static List<StructureReference> findStructureReferencesWithStructure(Structure structure) {
-        return findInverseReferencers(structure, StructureReference.class, OmlPackage.Literals.STRUCTURE_REFERENCE__STRUCTURE);
+    public static List<Structure> findStructuresWithRef(Structure structure) {
+        return findInverseReferencers(structure, Structure.class, OmlPackage.Literals.STRUCTURE__REF);
     }
     
-    // AnnotationPropertyReference
+    // AnnotationProperty
     
     /**
-     * Finds annotation property references referencing the given annotation property
+     * Finds annotation property referencing the given annotation property
      * 
      * @param property The referenced annotation property
-     * @return A list of referencing annotation property references
+     * @return A list of referencing annotation properties
      */
-    public static List<AnnotationPropertyReference> findAnnotationPropertyReferencesWithProperty(AnnotationProperty property) {
-        return findInverseReferencers(property, AnnotationPropertyReference.class, OmlPackage.Literals.ANNOTATION_PROPERTY_REFERENCE__PROPERTY);
+    public static List<AnnotationProperty> findAnnotationPropertiesWithRef(AnnotationProperty property) {
+        return findInverseReferencers(property, AnnotationProperty.class, OmlPackage.Literals.ANNOTATION_PROPERTY__REF);
     }
     
-    // ScalarPropertyReference
+    // ScalarProperty
     
     /**
-     * Finds scalar property references referencing the given scalar property
+     * Finds scalar property referencing the given scalar property
      * 
      * @param property The referenced scalar property
-     * @return A list of referencing scalar property references
+     * @return A list of referencing scalar properties
      */
-    public static List<ScalarPropertyReference> findScalarPropertyReferencesWithProperty(ScalarProperty property) {
-        return findInverseReferencers(property, ScalarPropertyReference.class, OmlPackage.Literals.SCALAR_PROPERTY_REFERENCE__PROPERTY);
+    public static List<ScalarProperty> findScalarPropertiesWithRef(ScalarProperty property) {
+        return findInverseReferencers(property, ScalarProperty.class, OmlPackage.Literals.SCALAR_PROPERTY__REF);
     }
     
-    // StructuredPropertyReference
+    // StructuredProperty
     
     /**
-     * Finds structured property references referencing the given structured property
+     * Finds structured property referencing the given structured property
      * 
      * @param property The referenced structured property
-     * @return A list of referencing structured property references
+     * @return A list of referencing structured properties
      */
-    public static List<StructuredPropertyReference> findStructuredPropertyReferencesWithProperty(StructuredProperty property) {
-        return findInverseReferencers(property, StructuredPropertyReference.class, OmlPackage.Literals.STRUCTURED_PROPERTY_REFERENCE__PROPERTY);
+    public static List<StructuredProperty> findStructuredPropertiesWithRef(StructuredProperty property) {
+        return findInverseReferencers(property, StructuredProperty.class, OmlPackage.Literals.STRUCTURED_PROPERTY__REF);
     }
     
-    // FacetedScalarReference
+    // FacetedScalar
     
     /**
-     * Finds faceted scalar references referencing the given faceted scalar
+     * Finds faceted scalar referencing the given faceted scalar
      * 
      * @param scalar The referenced faceted scalar
-     * @return A list of referencing faceted scalar references
+     * @return A list of referencing faceted scalars
      */
-    public static List<FacetedScalarReference> findFacetedScalarReferencesWithScalar(FacetedScalar scalar) {
-        return findInverseReferencers(scalar, FacetedScalarReference.class, OmlPackage.Literals.FACETED_SCALAR_REFERENCE__SCALAR);
+    public static List<FacetedScalar> findFacetedScalarsWithRef(FacetedScalar scalar) {
+        return findInverseReferencers(scalar, FacetedScalar.class, OmlPackage.Literals.FACETED_SCALAR__REF);
     }
     
-    // EnumeratedScalarReference
+    // EnumeratedScalar
     
     /**
      * Finds enumerated scalar references referencing the given enumerated scalar
      * 
      * @param scalar The referenced enumerated scalar
-     * @return A list of referencing enumerated scalar references
+     * @return A list of referencing enumerated scalars
      */
-    public static List<EnumeratedScalarReference> findEnumeratedScalarReferencesWithScalar(EnumeratedScalar scalar) {
-        return findInverseReferencers(scalar, EnumeratedScalarReference.class, OmlPackage.Literals.ENUMERATED_SCALAR_REFERENCE__SCALAR);
+    public static List<EnumeratedScalar> findEnumeratedScalarsWithRef(EnumeratedScalar scalar) {
+        return findInverseReferencers(scalar, EnumeratedScalar.class, OmlPackage.Literals.ENUMERATED_SCALAR__REF);
     }
     
-    // RelationReference
+    // UnreifiedRelation
     
     /**
-     * Finds relation references referencing the given relation
+     * Finds unreified relations referencing the given relation
      * 
      * @param relation The referenced relation
-     * @return A list of referencing relation references
+     * @return A list of referencing relations
      */
-    public static List<RelationReference> findRelationReferencesWithRelation(Relation relation) {
-        return findInverseReferencers(relation, RelationReference.class, OmlPackage.Literals.RELATION_REFERENCE__RELATION);
+    public static List<UnreifiedRelation> findUnreifiedRelationsWithRef(Relation relation) {
+        return findInverseReferencers(relation, UnreifiedRelation.class, OmlPackage.Literals.UNREIFIED_RELATION__REF);
     }
     
-    // RuleReference
+    // Rule
     
     /**
-     * Finds rule references referencing the given rule
+     * Finds rule referencing the given rule
      * 
-     * @param rule The referenced enumerated scalar
-     * @return A list of referencing enumerated scalar references
+     * @param rule The referenced rule
+     * @return A list of referencing rules
      */
-    public static List<RuleReference> findRuleReferencesWithRule(Rule rule) {
-        return findInverseReferencers(rule, RuleReference.class, OmlPackage.Literals.RULE_REFERENCE__RULE);
+    public static List<Rule> findRulesWithRef(Rule rule) {
+        return findInverseReferencers(rule, Rule.class, OmlPackage.Literals.RULE__REF);
     }
     
-    // ConceptInstanceReference
+    // ConceptInstance
     
     /**
-     * Finds concept instance references referencing the given concept instance
+     * Finds concept instance referencing the given concept instance
      * 
      * @param instance The referenced concept instance
-     * @return A list of referencing concept instance references
+     * @return A list of referencing concept instances
      */
-    public static List<ConceptInstanceReference> findConceptInstanceReferencesWithInstance(ConceptInstance instance) {
-        return findInverseReferencers(instance, ConceptInstanceReference.class, OmlPackage.Literals.CONCEPT_INSTANCE_REFERENCE__INSTANCE);
+    public static List<ConceptInstance> findConceptInstancesWithRef(ConceptInstance instance) {
+        return findInverseReferencers(instance, ConceptInstance.class, OmlPackage.Literals.CONCEPT_INSTANCE__REF);
     }
     
-    // RelationInstanceReference
+    // RelationInstance
     
     /**
-     * Finds relation instance references referencing the given relation instance
+     * Finds relation instance referencing the given relation instance
      * 
      * @param instance The referenced relation instance
-     * @return A list of referencing relation instance references
+     * @return A list of referencing relation instances
      */
-    public static List<RelationInstanceReference> findRelationInstanceReferencesWithInstance(RelationInstance instance) {
-        return findInverseReferencers(instance, RelationInstanceReference.class, OmlPackage.Literals.RELATION_INSTANCE_REFERENCE__INSTANCE); 
+    public static List<RelationInstance> findRelationInstancesWithRef(RelationInstance instance) {
+        return findInverseReferencers(instance, RelationInstance.class, OmlPackage.Literals.RELATION_INSTANCE__REF); 
     }
     
     // SpecializationAxiom

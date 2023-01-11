@@ -40,7 +40,7 @@ package io.opencaesar.oml;
  *        annotation="https://tabatkins.github.io/bikeshed heading='Descriptions'"
  * @generated
  */
-public interface DescriptionStatement extends Statement {
+public interface DescriptionStatement extends Statement, DescriptionMember {
 	/**
 	 * Returns the value of the '<em><b>Owning Description</b></em>' container reference.
 	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.Description#getOwnedStatements <em>Owned Statements</em>}'.

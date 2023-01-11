@@ -54,6 +54,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <ul>
  *   <li>{@link io.opencaesar.oml.impl.ScalarPropertyImpl#getOwningVocabulary <em>Owning Vocabulary</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.ScalarPropertyImpl#getOwnedSpecializations <em>Owned Specializations</em>}</li>
+ *   <li>{@link io.opencaesar.oml.impl.ScalarPropertyImpl#getRef <em>Ref</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.ScalarPropertyImpl#isFunctional <em>Functional</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.ScalarPropertyImpl#getDomain <em>Domain</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.ScalarPropertyImpl#getRange <em>Range</em>}</li>
@@ -71,6 +72,16 @@ public class ScalarPropertyImpl extends SemanticPropertyImpl implements ScalarPr
 	 * @ordered
 	 */
 	protected EList<SpecializationAxiom> ownedSpecializations;
+
+	/**
+	 * The cached value of the '{@link #getRef() <em>Ref</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRef()
+	 * @generated
+	 * @ordered
+	 */
+	protected ScalarProperty ref;
 
 	/**
 	 * The default value of the '{@link #isFunctional() <em>Functional</em>}' attribute.
@@ -195,6 +206,46 @@ public class ScalarPropertyImpl extends SemanticPropertyImpl implements ScalarPr
 			ownedSpecializations = new EObjectContainmentWithInverseEList<SpecializationAxiom>(SpecializationAxiom.class, this, OmlPackage.SCALAR_PROPERTY__OWNED_SPECIALIZATIONS, OmlPackage.SPECIALIZATION_AXIOM__OWNING_TERM);
 		}
 		return ownedSpecializations;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ScalarProperty getRef() {
+		if (ref != null && ref.eIsProxy()) {
+			InternalEObject oldRef = (InternalEObject)ref;
+			ref = (ScalarProperty)eResolveProxy(oldRef);
+			if (ref != oldRef) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, OmlPackage.SCALAR_PROPERTY__REF, oldRef, ref));
+			}
+		}
+		return ref;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ScalarProperty basicGetRef() {
+		return ref;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setRef(ScalarProperty newRef) {
+		ScalarProperty oldRef = ref;
+		ref = newRef;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.SCALAR_PROPERTY__REF, oldRef, ref));
 	}
 
 	/**
@@ -362,6 +413,9 @@ public class ScalarPropertyImpl extends SemanticPropertyImpl implements ScalarPr
 				return basicGetOwningVocabulary();
 			case OmlPackage.SCALAR_PROPERTY__OWNED_SPECIALIZATIONS:
 				return getOwnedSpecializations();
+			case OmlPackage.SCALAR_PROPERTY__REF:
+				if (resolve) return getRef();
+				return basicGetRef();
 			case OmlPackage.SCALAR_PROPERTY__FUNCTIONAL:
 				return isFunctional();
 			case OmlPackage.SCALAR_PROPERTY__DOMAIN:
@@ -390,6 +444,9 @@ public class ScalarPropertyImpl extends SemanticPropertyImpl implements ScalarPr
 				getOwnedSpecializations().clear();
 				getOwnedSpecializations().addAll((Collection<? extends SpecializationAxiom>)newValue);
 				return;
+			case OmlPackage.SCALAR_PROPERTY__REF:
+				setRef((ScalarProperty)newValue);
+				return;
 			case OmlPackage.SCALAR_PROPERTY__FUNCTIONAL:
 				setFunctional((Boolean)newValue);
 				return;
@@ -417,6 +474,9 @@ public class ScalarPropertyImpl extends SemanticPropertyImpl implements ScalarPr
 			case OmlPackage.SCALAR_PROPERTY__OWNED_SPECIALIZATIONS:
 				getOwnedSpecializations().clear();
 				return;
+			case OmlPackage.SCALAR_PROPERTY__REF:
+				setRef((ScalarProperty)null);
+				return;
 			case OmlPackage.SCALAR_PROPERTY__FUNCTIONAL:
 				setFunctional(FUNCTIONAL_EDEFAULT);
 				return;
@@ -442,6 +502,8 @@ public class ScalarPropertyImpl extends SemanticPropertyImpl implements ScalarPr
 				return basicGetOwningVocabulary() != null;
 			case OmlPackage.SCALAR_PROPERTY__OWNED_SPECIALIZATIONS:
 				return ownedSpecializations != null && !ownedSpecializations.isEmpty();
+			case OmlPackage.SCALAR_PROPERTY__REF:
+				return ref != null;
 			case OmlPackage.SCALAR_PROPERTY__FUNCTIONAL:
 				return functional != FUNCTIONAL_EDEFAULT;
 			case OmlPackage.SCALAR_PROPERTY__DOMAIN:

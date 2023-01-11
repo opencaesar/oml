@@ -28,12 +28,14 @@ import org.eclipse.emf.common.util.EList;
  * <!-- begin-model-doc -->
  * EnumeratedScalar is a scalar that represents a finite set of literals. It can specialize another enumerated scalar, but in
  * this case, it cannot define its own literals; rather, it will simply be considered an alias to the specialized scalar.
+ * An enumerated scalar ref cannot respecify the literals.
  * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
+ *   <li>{@link io.opencaesar.oml.EnumeratedScalar#getRef <em>Ref</em>}</li>
  *   <li>{@link io.opencaesar.oml.EnumeratedScalar#getLiterals <em>Literals</em>}</li>
  * </ul>
  *
@@ -42,6 +44,31 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface EnumeratedScalar extends Scalar {
+	/**
+	 * Returns the value of the '<em><b>Ref</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * A ref to another enumerated scalar
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Ref</em>' reference.
+	 * @see #setRef(EnumeratedScalar)
+	 * @see io.opencaesar.oml.OmlPackage#getEnumeratedScalar_Ref()
+	 * @model
+	 * @generated
+	 */
+	EnumeratedScalar getRef();
+
+	/**
+	 * Sets the value of the '{@link io.opencaesar.oml.EnumeratedScalar#getRef <em>Ref</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Ref</em>' reference.
+	 * @see #getRef()
+	 * @generated
+	 */
+	void setRef(EnumeratedScalar value);
+
 	/**
 	 * Returns the value of the '<em><b>Literals</b></em>' containment reference list.
 	 * The list contents are of type {@link io.opencaesar.oml.Literal}.

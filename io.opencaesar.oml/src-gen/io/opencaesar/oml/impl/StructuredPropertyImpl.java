@@ -54,6 +54,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <ul>
  *   <li>{@link io.opencaesar.oml.impl.StructuredPropertyImpl#getOwningVocabulary <em>Owning Vocabulary</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.StructuredPropertyImpl#getOwnedSpecializations <em>Owned Specializations</em>}</li>
+ *   <li>{@link io.opencaesar.oml.impl.StructuredPropertyImpl#getRef <em>Ref</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.StructuredPropertyImpl#isFunctional <em>Functional</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.StructuredPropertyImpl#getDomain <em>Domain</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.StructuredPropertyImpl#getRange <em>Range</em>}</li>
@@ -71,6 +72,16 @@ public class StructuredPropertyImpl extends SemanticPropertyImpl implements Stru
 	 * @ordered
 	 */
 	protected EList<SpecializationAxiom> ownedSpecializations;
+
+	/**
+	 * The cached value of the '{@link #getRef() <em>Ref</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRef()
+	 * @generated
+	 * @ordered
+	 */
+	protected StructuredProperty ref;
 
 	/**
 	 * The default value of the '{@link #isFunctional() <em>Functional</em>}' attribute.
@@ -195,6 +206,46 @@ public class StructuredPropertyImpl extends SemanticPropertyImpl implements Stru
 			ownedSpecializations = new EObjectContainmentWithInverseEList<SpecializationAxiom>(SpecializationAxiom.class, this, OmlPackage.STRUCTURED_PROPERTY__OWNED_SPECIALIZATIONS, OmlPackage.SPECIALIZATION_AXIOM__OWNING_TERM);
 		}
 		return ownedSpecializations;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public StructuredProperty getRef() {
+		if (ref != null && ref.eIsProxy()) {
+			InternalEObject oldRef = (InternalEObject)ref;
+			ref = (StructuredProperty)eResolveProxy(oldRef);
+			if (ref != oldRef) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, OmlPackage.STRUCTURED_PROPERTY__REF, oldRef, ref));
+			}
+		}
+		return ref;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public StructuredProperty basicGetRef() {
+		return ref;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setRef(StructuredProperty newRef) {
+		StructuredProperty oldRef = ref;
+		ref = newRef;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.STRUCTURED_PROPERTY__REF, oldRef, ref));
 	}
 
 	/**
@@ -362,6 +413,9 @@ public class StructuredPropertyImpl extends SemanticPropertyImpl implements Stru
 				return basicGetOwningVocabulary();
 			case OmlPackage.STRUCTURED_PROPERTY__OWNED_SPECIALIZATIONS:
 				return getOwnedSpecializations();
+			case OmlPackage.STRUCTURED_PROPERTY__REF:
+				if (resolve) return getRef();
+				return basicGetRef();
 			case OmlPackage.STRUCTURED_PROPERTY__FUNCTIONAL:
 				return isFunctional();
 			case OmlPackage.STRUCTURED_PROPERTY__DOMAIN:
@@ -390,6 +444,9 @@ public class StructuredPropertyImpl extends SemanticPropertyImpl implements Stru
 				getOwnedSpecializations().clear();
 				getOwnedSpecializations().addAll((Collection<? extends SpecializationAxiom>)newValue);
 				return;
+			case OmlPackage.STRUCTURED_PROPERTY__REF:
+				setRef((StructuredProperty)newValue);
+				return;
 			case OmlPackage.STRUCTURED_PROPERTY__FUNCTIONAL:
 				setFunctional((Boolean)newValue);
 				return;
@@ -417,6 +474,9 @@ public class StructuredPropertyImpl extends SemanticPropertyImpl implements Stru
 			case OmlPackage.STRUCTURED_PROPERTY__OWNED_SPECIALIZATIONS:
 				getOwnedSpecializations().clear();
 				return;
+			case OmlPackage.STRUCTURED_PROPERTY__REF:
+				setRef((StructuredProperty)null);
+				return;
 			case OmlPackage.STRUCTURED_PROPERTY__FUNCTIONAL:
 				setFunctional(FUNCTIONAL_EDEFAULT);
 				return;
@@ -442,6 +502,8 @@ public class StructuredPropertyImpl extends SemanticPropertyImpl implements Stru
 				return basicGetOwningVocabulary() != null;
 			case OmlPackage.STRUCTURED_PROPERTY__OWNED_SPECIALIZATIONS:
 				return ownedSpecializations != null && !ownedSpecializations.isEmpty();
+			case OmlPackage.STRUCTURED_PROPERTY__REF:
+				return ref != null;
 			case OmlPackage.STRUCTURED_PROPERTY__FUNCTIONAL:
 				return functional != FUNCTIONAL_EDEFAULT;
 			case OmlPackage.STRUCTURED_PROPERTY__DOMAIN:

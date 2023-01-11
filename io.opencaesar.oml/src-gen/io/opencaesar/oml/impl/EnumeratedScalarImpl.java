@@ -24,12 +24,15 @@ import io.opencaesar.oml.OmlPackage;
 
 import java.util.Collection;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -42,12 +45,23 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link io.opencaesar.oml.impl.EnumeratedScalarImpl#getRef <em>Ref</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.EnumeratedScalarImpl#getLiterals <em>Literals</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class EnumeratedScalarImpl extends ScalarImpl implements EnumeratedScalar {
+	/**
+	 * The cached value of the '{@link #getRef() <em>Ref</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRef()
+	 * @generated
+	 * @ordered
+	 */
+	protected EnumeratedScalar ref;
+
 	/**
 	 * The cached value of the '{@link #getLiterals() <em>Literals</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -75,6 +89,46 @@ public class EnumeratedScalarImpl extends ScalarImpl implements EnumeratedScalar
 	@Override
 	protected EClass eStaticClass() {
 		return OmlPackage.Literals.ENUMERATED_SCALAR;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EnumeratedScalar getRef() {
+		if (ref != null && ref.eIsProxy()) {
+			InternalEObject oldRef = (InternalEObject)ref;
+			ref = (EnumeratedScalar)eResolveProxy(oldRef);
+			if (ref != oldRef) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, OmlPackage.ENUMERATED_SCALAR__REF, oldRef, ref));
+			}
+		}
+		return ref;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EnumeratedScalar basicGetRef() {
+		return ref;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setRef(EnumeratedScalar newRef) {
+		EnumeratedScalar oldRef = ref;
+		ref = newRef;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.ENUMERATED_SCALAR__REF, oldRef, ref));
 	}
 
 	/**
@@ -112,6 +166,9 @@ public class EnumeratedScalarImpl extends ScalarImpl implements EnumeratedScalar
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case OmlPackage.ENUMERATED_SCALAR__REF:
+				if (resolve) return getRef();
+				return basicGetRef();
 			case OmlPackage.ENUMERATED_SCALAR__LITERALS:
 				return getLiterals();
 		}
@@ -127,6 +184,9 @@ public class EnumeratedScalarImpl extends ScalarImpl implements EnumeratedScalar
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case OmlPackage.ENUMERATED_SCALAR__REF:
+				setRef((EnumeratedScalar)newValue);
+				return;
 			case OmlPackage.ENUMERATED_SCALAR__LITERALS:
 				getLiterals().clear();
 				getLiterals().addAll((Collection<? extends Literal>)newValue);
@@ -143,6 +203,9 @@ public class EnumeratedScalarImpl extends ScalarImpl implements EnumeratedScalar
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case OmlPackage.ENUMERATED_SCALAR__REF:
+				setRef((EnumeratedScalar)null);
+				return;
 			case OmlPackage.ENUMERATED_SCALAR__LITERALS:
 				getLiterals().clear();
 				return;
@@ -158,6 +221,8 @@ public class EnumeratedScalarImpl extends ScalarImpl implements EnumeratedScalar
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case OmlPackage.ENUMERATED_SCALAR__REF:
+				return ref != null;
 			case OmlPackage.ENUMERATED_SCALAR__LITERALS:
 				return literals != null && !literals.isEmpty();
 		}

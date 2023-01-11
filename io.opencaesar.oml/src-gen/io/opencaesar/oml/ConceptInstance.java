@@ -28,10 +28,41 @@ package io.opencaesar.oml;
  * ConceptInstance is a named instance that can be typed by concepts.
  * <!-- end-model-doc -->
  *
+ * <p>
+ * The following features are supported:
+ * </p>
+ * <ul>
+ *   <li>{@link io.opencaesar.oml.ConceptInstance#getRef <em>Ref</em>}</li>
+ * </ul>
  *
  * @see io.opencaesar.oml.OmlPackage#getConceptInstance()
  * @model annotation="https://tabatkins.github.io/bikeshed heading='Instances'"
  * @generated
  */
 public interface ConceptInstance extends NamedInstance {
+	/**
+	 * Returns the value of the '<em><b>Ref</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * A ref to another concept instance
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Ref</em>' reference.
+	 * @see #setRef(ConceptInstance)
+	 * @see io.opencaesar.oml.OmlPackage#getConceptInstance_Ref()
+	 * @model
+	 * @generated
+	 */
+	ConceptInstance getRef();
+
+	/**
+	 * Sets the value of the '{@link io.opencaesar.oml.ConceptInstance#getRef <em>Ref</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Ref</em>' reference.
+	 * @see #getRef()
+	 * @generated
+	 */
+	void setRef(ConceptInstance value);
+
 } // ConceptInstance

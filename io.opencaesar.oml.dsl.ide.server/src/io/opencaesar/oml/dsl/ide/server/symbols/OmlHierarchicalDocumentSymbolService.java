@@ -18,11 +18,6 @@
  */
 package io.opencaesar.oml.dsl.ide.server.symbols;
 
-import io.opencaesar.oml.IdentifiedElement;
-import io.opencaesar.oml.Ontology;
-import io.opencaesar.oml.Reference;
-import io.opencaesar.oml.RelationEntity;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.stream.Collectors;
@@ -30,6 +25,8 @@ import java.util.stream.Collectors;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.ide.server.symbol.HierarchicalDocumentSymbolService;
 
+import io.opencaesar.oml.Ontology;
+import io.opencaesar.oml.RelationEntity;
 import io.opencaesar.oml.util.OmlRead;
 
 public class OmlHierarchicalDocumentSymbolService extends HierarchicalDocumentSymbolService {
@@ -42,7 +39,7 @@ public class OmlHierarchicalDocumentSymbolService extends HierarchicalDocumentSy
 				final RelationEntity rel = (RelationEntity) s;
 				rs.add(rel);
 				rs.addAll(OmlRead.getRelations(rel));
-			} else if (s instanceof IdentifiedElement || s instanceof Reference) {
+			} else {
 				rs.add(s);
 			}
 			return rs.stream();

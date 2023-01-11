@@ -25,8 +25,8 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * PropertyRestrictionAxiom is an axiom that places some restriction on the value of a semantic property in the context of
- * a restricting classifier domain. It can be specified directly on the classifier or indirectly on a reference to it.
+ * PropertyRestrictionAxiom is an axiom specified on the classifier that places some restriction on the value of a semantic property in the context of
+ * a restricting classifier domain.
  * <!-- end-model-doc -->
  *
  * <p>
@@ -34,7 +34,6 @@ package io.opencaesar.oml;
  * </p>
  * <ul>
  *   <li>{@link io.opencaesar.oml.PropertyRestrictionAxiom#getOwningClassifier <em>Owning Classifier</em>}</li>
- *   <li>{@link io.opencaesar.oml.PropertyRestrictionAxiom#getOwningReference <em>Owning Reference</em>}</li>
  *   <li>{@link io.opencaesar.oml.PropertyRestrictionAxiom#getProperty <em>Property</em>}</li>
  * </ul>
  *
@@ -70,33 +69,6 @@ public interface PropertyRestrictionAxiom extends Axiom {
 	 * @generated
 	 */
 	void setOwningClassifier(Classifier value);
-
-	/**
-	 * Returns the value of the '<em><b>Owning Reference</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.ClassifierReference#getOwnedPropertyRestrictions <em>Owned Property Restrictions</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * The reference to a restricting classifier specified by this axiom
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Owning Reference</em>' container reference.
-	 * @see #setOwningReference(ClassifierReference)
-	 * @see io.opencaesar.oml.OmlPackage#getPropertyRestrictionAxiom_OwningReference()
-	 * @see io.opencaesar.oml.ClassifierReference#getOwnedPropertyRestrictions
-	 * @model opposite="ownedPropertyRestrictions" transient="false"
-	 * @generated
-	 */
-	ClassifierReference getOwningReference();
-
-	/**
-	 * Sets the value of the '{@link io.opencaesar.oml.PropertyRestrictionAxiom#getOwningReference <em>Owning Reference</em>}' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Owning Reference</em>' container reference.
-	 * @see #getOwningReference()
-	 * @generated
-	 */
-	void setOwningReference(ClassifierReference value);
 
 	/**
 	 * Returns the value of the '<em><b>Property</b></em>' reference.

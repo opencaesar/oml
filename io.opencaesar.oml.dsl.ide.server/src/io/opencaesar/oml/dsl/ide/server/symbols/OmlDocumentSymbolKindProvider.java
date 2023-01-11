@@ -16,11 +16,32 @@
  */
 package io.opencaesar.oml.dsl.ide.server.symbols;
 
-import io.opencaesar.oml.OmlPackage;
-import static io.opencaesar.oml.OmlPackage.Literals.*;
+import static io.opencaesar.oml.OmlPackage.Literals.ANNOTATION_PROPERTY;
+import static io.opencaesar.oml.OmlPackage.Literals.ASPECT;
+import static io.opencaesar.oml.OmlPackage.Literals.CONCEPT;
+import static io.opencaesar.oml.OmlPackage.Literals.CONCEPT_INSTANCE;
+import static io.opencaesar.oml.OmlPackage.Literals.ENUMERATED_SCALAR;
+import static io.opencaesar.oml.OmlPackage.Literals.FACETED_SCALAR;
+import static io.opencaesar.oml.OmlPackage.Literals.FORWARD_RELATION;
+import static io.opencaesar.oml.OmlPackage.Literals.ONTOLOGY;
+import static io.opencaesar.oml.OmlPackage.Literals.RELATION_ENTITY;
+import static io.opencaesar.oml.OmlPackage.Literals.RELATION_INSTANCE;
+import static io.opencaesar.oml.OmlPackage.Literals.REVERSE_RELATION;
+import static io.opencaesar.oml.OmlPackage.Literals.RULE;
+import static io.opencaesar.oml.OmlPackage.Literals.SCALAR_PROPERTY;
+import static io.opencaesar.oml.OmlPackage.Literals.STRUCTURE;
+import static io.opencaesar.oml.OmlPackage.Literals.STRUCTURED_PROPERTY;
+import static org.eclipse.lsp4j.SymbolKind.Class;
+import static org.eclipse.lsp4j.SymbolKind.Enum;
+import static org.eclipse.lsp4j.SymbolKind.Interface;
+import static org.eclipse.lsp4j.SymbolKind.Object;
+import static org.eclipse.lsp4j.SymbolKind.Package;
+import static org.eclipse.lsp4j.SymbolKind.Property;
+import static org.eclipse.lsp4j.SymbolKind.String;
+import static org.eclipse.lsp4j.SymbolKind.Struct;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.lsp4j.SymbolKind;
-import static org.eclipse.lsp4j.SymbolKind.*;
 import org.eclipse.xtext.ide.server.symbol.DocumentSymbolMapper;
 
 @SuppressWarnings("all")
@@ -32,27 +53,15 @@ public class OmlDocumentSymbolKindProvider extends DocumentSymbolMapper.Document
 			return Package;
 		if (ASPECT.isSuperTypeOf(clazz))
 			return Interface;
-		if (ASPECT_REFERENCE.isSuperTypeOf(clazz))
-			return Interface;
 		if (CONCEPT.isSuperTypeOf(clazz))
-			return Class;
-		if (CONCEPT_REFERENCE.isSuperTypeOf(clazz))
 			return Class;
 		if (STRUCTURE.isSuperTypeOf(clazz))
 			return Struct;
-		if (STRUCTURE_REFERENCE.isSuperTypeOf(clazz))
-			return Struct;
 		if (FACETED_SCALAR.isSuperTypeOf(clazz))
-			return String;
-		if (FACETED_SCALAR_REFERENCE.isSuperTypeOf(clazz))
 			return String;
 		if (ENUMERATED_SCALAR.isSuperTypeOf(clazz))
 			return Enum;
-		if (ENUMERATED_SCALAR_REFERENCE.isSuperTypeOf(clazz))
-			return Enum;
 		if (RELATION_ENTITY.isSuperTypeOf(clazz))
-			return Class;
-		if (RELATION_ENTITY_REFERENCE.isSuperTypeOf(clazz))
 			return Class;
 		if (FORWARD_RELATION.isSuperTypeOf(clazz))
 			return Property;
@@ -60,27 +69,15 @@ public class OmlDocumentSymbolKindProvider extends DocumentSymbolMapper.Document
 			return Property;
 		if (ANNOTATION_PROPERTY.isSuperTypeOf(clazz))
 			return Property;
-		if (ANNOTATION_PROPERTY_REFERENCE.isSuperTypeOf(clazz))
-			return Property;
 		if (SCALAR_PROPERTY.isSuperTypeOf(clazz))
-			return Property;
-		if (SCALAR_PROPERTY_REFERENCE.isSuperTypeOf(clazz))
 			return Property;
 		if (STRUCTURED_PROPERTY.isSuperTypeOf(clazz))
 			return Property;
-		if (STRUCTURED_PROPERTY_REFERENCE.isSuperTypeOf(clazz))
-			return Property;
 		if (CONCEPT_INSTANCE.isSuperTypeOf(clazz))
-			return Object;
-		if (CONCEPT_INSTANCE_REFERENCE.isSuperTypeOf(clazz))
 			return Object;
 		if (RELATION_INSTANCE.isSuperTypeOf(clazz))
 			return Object;
-		if (RELATION_INSTANCE_REFERENCE.isSuperTypeOf(clazz))
-			return Object;
 		if (RULE.isSuperTypeOf(clazz))
-			return Object;
-		if (RULE_REFERENCE.isSuperTypeOf(clazz))
 			return Object;
 		return Property;
 	}

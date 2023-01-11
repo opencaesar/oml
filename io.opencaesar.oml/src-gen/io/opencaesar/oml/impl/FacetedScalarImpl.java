@@ -38,6 +38,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link io.opencaesar.oml.impl.FacetedScalarImpl#getRef <em>Ref</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.FacetedScalarImpl#getLength <em>Length</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.FacetedScalarImpl#getMinLength <em>Min Length</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.FacetedScalarImpl#getMaxLength <em>Max Length</em>}</li>
@@ -52,6 +53,16 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * @generated
  */
 public class FacetedScalarImpl extends ScalarImpl implements FacetedScalar {
+	/**
+	 * The cached value of the '{@link #getRef() <em>Ref</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRef()
+	 * @generated
+	 * @ordered
+	 */
+	protected FacetedScalar ref;
+
 	/**
 	 * The default value of the '{@link #getLength() <em>Length</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -209,6 +220,46 @@ public class FacetedScalarImpl extends ScalarImpl implements FacetedScalar {
 	@Override
 	protected EClass eStaticClass() {
 		return OmlPackage.Literals.FACETED_SCALAR;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public FacetedScalar getRef() {
+		if (ref != null && ref.eIsProxy()) {
+			InternalEObject oldRef = (InternalEObject)ref;
+			ref = (FacetedScalar)eResolveProxy(oldRef);
+			if (ref != oldRef) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, OmlPackage.FACETED_SCALAR__REF, oldRef, ref));
+			}
+		}
+		return ref;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public FacetedScalar basicGetRef() {
+		return ref;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setRef(FacetedScalar newRef) {
+		FacetedScalar oldRef = ref;
+		ref = newRef;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.FACETED_SCALAR__REF, oldRef, ref));
 	}
 
 	/**
@@ -534,6 +585,9 @@ public class FacetedScalarImpl extends ScalarImpl implements FacetedScalar {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case OmlPackage.FACETED_SCALAR__REF:
+				if (resolve) return getRef();
+				return basicGetRef();
 			case OmlPackage.FACETED_SCALAR__LENGTH:
 				return getLength();
 			case OmlPackage.FACETED_SCALAR__MIN_LENGTH:
@@ -564,6 +618,9 @@ public class FacetedScalarImpl extends ScalarImpl implements FacetedScalar {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case OmlPackage.FACETED_SCALAR__REF:
+				setRef((FacetedScalar)newValue);
+				return;
 			case OmlPackage.FACETED_SCALAR__LENGTH:
 				setLength((Long)newValue);
 				return;
@@ -603,6 +660,9 @@ public class FacetedScalarImpl extends ScalarImpl implements FacetedScalar {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case OmlPackage.FACETED_SCALAR__REF:
+				setRef((FacetedScalar)null);
+				return;
 			case OmlPackage.FACETED_SCALAR__LENGTH:
 				setLength(LENGTH_EDEFAULT);
 				return;
@@ -642,6 +702,8 @@ public class FacetedScalarImpl extends ScalarImpl implements FacetedScalar {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case OmlPackage.FACETED_SCALAR__REF:
+				return ref != null;
 			case OmlPackage.FACETED_SCALAR__LENGTH:
 				return LENGTH_EDEFAULT == null ? length != null : !LENGTH_EDEFAULT.equals(length);
 			case OmlPackage.FACETED_SCALAR__MIN_LENGTH:

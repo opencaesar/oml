@@ -10,14 +10,11 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 
 import io.opencaesar.oml.Aspect;
-import io.opencaesar.oml.AspectReference;
 import io.opencaesar.oml.Assertion;
 import io.opencaesar.oml.Axiom;
 import io.opencaesar.oml.Classifier;
 import io.opencaesar.oml.Concept;
 import io.opencaesar.oml.ConceptInstance;
-import io.opencaesar.oml.ConceptInstanceReference;
-import io.opencaesar.oml.ConceptReference;
 import io.opencaesar.oml.Element;
 import io.opencaesar.oml.Entity;
 import io.opencaesar.oml.KeyAxiom;
@@ -28,16 +25,13 @@ import io.opencaesar.oml.PropertyRangeRestrictionAxiom;
 import io.opencaesar.oml.PropertyValueRestrictionAxiom;
 import io.opencaesar.oml.Relation;
 import io.opencaesar.oml.RelationEntity;
-import io.opencaesar.oml.RelationEntityReference;
 import io.opencaesar.oml.RelationInstance;
-import io.opencaesar.oml.RelationInstanceReference;
 import io.opencaesar.oml.Scalar;
 import io.opencaesar.oml.ScalarProperty;
 import io.opencaesar.oml.SemanticProperty;
 import io.opencaesar.oml.SpecializationAxiom;
 import io.opencaesar.oml.Structure;
 import io.opencaesar.oml.StructureInstance;
-import io.opencaesar.oml.StructureReference;
 import io.opencaesar.oml.StructuredProperty;
 import io.opencaesar.oml.Type;
 import io.opencaesar.oml.util.OmlRead;
@@ -296,7 +290,8 @@ class OmlOntoloyDiagramScope {
 			return result;
 		}
 
-		public OmlOntoloyDiagramScope caseAspect(final Aspect a) {
+		public OmlOntoloyDiagramScope caseAspect(Aspect a) {
+			a = OmlRead.resolve(a);
 			switch (mode) {
 			case Phase1:
 				phase1InitializeEntity(a);
@@ -315,7 +310,8 @@ class OmlOntoloyDiagramScope {
 			return OmlOntoloyDiagramScope.this;
 		}
 
-		public OmlOntoloyDiagramScope caseConcept(final Concept c) {
+		public OmlOntoloyDiagramScope caseConcept(Concept c) {
+			c = OmlRead.resolve(c);
 			switch (mode) {
 			case Phase1:
 				phase1InitializeEntity(c);
@@ -334,7 +330,8 @@ class OmlOntoloyDiagramScope {
 			return OmlOntoloyDiagramScope.this;
 		}
 
-		public OmlOntoloyDiagramScope caseRelationEntity(final RelationEntity e) {
+		public OmlOntoloyDiagramScope caseRelationEntity(RelationEntity e) {
+			e = OmlRead.resolve(e);
 			switch (mode) {
 			case Phase1:
 				phase1InitializeEntity(e);
@@ -379,7 +376,8 @@ class OmlOntoloyDiagramScope {
 			return OmlOntoloyDiagramScope.this;
 		}
 
-		public OmlOntoloyDiagramScope caseScalar(final Scalar s) {
+		public OmlOntoloyDiagramScope caseScalar(Scalar s) {
+			s = OmlRead.resolve(s);
 			switch (mode) {
 			case Phase1:
 				if (!scalars.containsKey(s)) {
@@ -392,7 +390,8 @@ class OmlOntoloyDiagramScope {
 			return OmlOntoloyDiagramScope.this;
 		}
 
-		public OmlOntoloyDiagramScope caseStructure(final Structure s) {
+		public OmlOntoloyDiagramScope caseStructure(Structure s) {
+			s = OmlRead.resolve(s);
 			switch (mode) {
 			case Phase1:
 				phase1InitializeClassifierProperties(s);
@@ -421,7 +420,8 @@ class OmlOntoloyDiagramScope {
 			});
 		}
 
-		public OmlOntoloyDiagramScope caseConceptInstance(final ConceptInstance ci) {
+		public OmlOntoloyDiagramScope caseConceptInstance(ConceptInstance ci) {
+			ci = OmlRead.resolve(ci);
 			switch (mode) {
 			case Phase1:
 				if (!instanceAssertions.containsKey(ci)) {
@@ -436,7 +436,8 @@ class OmlOntoloyDiagramScope {
 			return OmlOntoloyDiagramScope.this;
 		}
 
-		public OmlOntoloyDiagramScope caseRelationInstance(final RelationInstance ri) {
+		public OmlOntoloyDiagramScope caseRelationInstance(RelationInstance ri) {
+			ri = OmlRead.resolve(ri);
 			switch (mode) {
 			case Phase1:
 				if (!instanceAssertions.containsKey(ri)) {
@@ -464,28 +465,5 @@ class OmlOntoloyDiagramScope {
 			return OmlOntoloyDiagramScope.this;
 		}
 
-		public OmlOntoloyDiagramScope caseAspectReference(final AspectReference a) {
-			return caseAspect(a.getAspect());
-		}
-
-		public OmlOntoloyDiagramScope caseConceptReference(final ConceptReference c) {
-			return caseConcept(c.getConcept());
-		}
-
-		public OmlOntoloyDiagramScope caseRelationEntityReference(final RelationEntityReference e) {
-			return caseRelationEntity(e.getEntity());
-		}
-
-		public OmlOntoloyDiagramScope caseStructureReference(final StructureReference s) {
-			return caseStructure(s.getStructure());
-		}
-
-		public OmlOntoloyDiagramScope caseConceptInstanceReference(final ConceptInstanceReference ci) {
-			return caseConceptInstance(ci.getInstance());
-		}
-
-		public OmlOntoloyDiagramScope caseRelationInstanceReference(final RelationInstanceReference ri) {
-			return caseRelationInstance(ri.getInstance());
-		}
 	}
 }

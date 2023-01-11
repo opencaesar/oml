@@ -27,13 +27,14 @@ import org.eclipse.emf.common.util.EList;
  *
  * <!-- begin-model-doc -->
  * Concept is a concrete entity that classifies a (possibly enumerated) set of concept instances.
- * It can also specialize other concepts and/or aspects.
+ * It can also specialize other concepts and/or aspects. A concept ref cannot respecify the enumerated instances.
  * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
+ *   <li>{@link io.opencaesar.oml.Concept#getRef <em>Ref</em>}</li>
  *   <li>{@link io.opencaesar.oml.Concept#getEnumeratedInstances <em>Enumerated Instances</em>}</li>
  * </ul>
  *
@@ -42,6 +43,31 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface Concept extends Entity {
+	/**
+	 * Returns the value of the '<em><b>Ref</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * A ref to another concept
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Ref</em>' reference.
+	 * @see #setRef(Concept)
+	 * @see io.opencaesar.oml.OmlPackage#getConcept_Ref()
+	 * @model
+	 * @generated
+	 */
+	Concept getRef();
+
+	/**
+	 * Sets the value of the '{@link io.opencaesar.oml.Concept#getRef <em>Ref</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Ref</em>' reference.
+	 * @see #getRef()
+	 * @generated
+	 */
+	void setRef(Concept value);
+
 	/**
 	 * Returns the value of the '<em><b>Enumerated Instances</b></em>' reference list.
 	 * The list contents are of type {@link io.opencaesar.oml.ConceptInstance}.

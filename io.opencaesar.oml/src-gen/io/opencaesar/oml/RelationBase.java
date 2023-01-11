@@ -28,7 +28,8 @@ package io.opencaesar.oml;
  * RelationBase is a specializable term that is the superclass of a relation from a source entity to a target entity.
  * It can optionally name a reverse property whose domain is the target and whose range is the source.
  * It can also be characterized with several boolean flags that represent its DL semantics.
- * Such flags apply conversely to the reverse property (if named).
+ * Such flags apply conversely to the reverse property (if named). A relation base ref cannot respecify the source,
+ * the target, nor the reverse relation.
  * <!-- end-model-doc -->
  *
  * <p>
@@ -63,7 +64,7 @@ public interface RelationBase extends SpecializableTerm {
 	 * @return the value of the '<em>Source</em>' reference.
 	 * @see #setSource(Entity)
 	 * @see io.opencaesar.oml.OmlPackage#getRelationBase_Source()
-	 * @model required="true"
+	 * @model
 	 * @generated
 	 */
 	Entity getSource();
@@ -88,7 +89,7 @@ public interface RelationBase extends SpecializableTerm {
 	 * @return the value of the '<em>Target</em>' reference.
 	 * @see #setTarget(Entity)
 	 * @see io.opencaesar.oml.OmlPackage#getRelationBase_Target()
-	 * @model required="true"
+	 * @model
 	 * @generated
 	 */
 	Entity getTarget();

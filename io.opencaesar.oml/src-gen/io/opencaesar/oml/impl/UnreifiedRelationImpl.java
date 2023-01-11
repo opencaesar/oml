@@ -69,6 +69,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link io.opencaesar.oml.impl.UnreifiedRelationImpl#isReflexive <em>Reflexive</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.UnreifiedRelationImpl#isIrreflexive <em>Irreflexive</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.UnreifiedRelationImpl#isTransitive <em>Transitive</em>}</li>
+ *   <li>{@link io.opencaesar.oml.impl.UnreifiedRelationImpl#getRef <em>Ref</em>}</li>
  * </ul>
  *
  * @generated
@@ -253,6 +254,16 @@ public class UnreifiedRelationImpl extends RelationImpl implements UnreifiedRela
 	 * @ordered
 	 */
 	protected boolean transitive = TRANSITIVE_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getRef() <em>Ref</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRef()
+	 * @generated
+	 * @ordered
+	 */
+	protected Relation ref;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -631,6 +642,46 @@ public class UnreifiedRelationImpl extends RelationImpl implements UnreifiedRela
 	 * @generated
 	 */
 	@Override
+	public Relation getRef() {
+		if (ref != null && ref.eIsProxy()) {
+			InternalEObject oldRef = (InternalEObject)ref;
+			ref = (Relation)eResolveProxy(oldRef);
+			if (ref != oldRef) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, OmlPackage.UNREIFIED_RELATION__REF, oldRef, ref));
+			}
+		}
+		return ref;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Relation basicGetRef() {
+		return ref;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setRef(Relation newRef) {
+		Relation oldRef = ref;
+		ref = newRef;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.UNREIFIED_RELATION__REF, oldRef, ref));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Entity getDomain() {
 		return this.getSource();
 	}
@@ -745,6 +796,9 @@ public class UnreifiedRelationImpl extends RelationImpl implements UnreifiedRela
 				return isIrreflexive();
 			case OmlPackage.UNREIFIED_RELATION__TRANSITIVE:
 				return isTransitive();
+			case OmlPackage.UNREIFIED_RELATION__REF:
+				if (resolve) return getRef();
+				return basicGetRef();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -795,6 +849,9 @@ public class UnreifiedRelationImpl extends RelationImpl implements UnreifiedRela
 			case OmlPackage.UNREIFIED_RELATION__TRANSITIVE:
 				setTransitive((Boolean)newValue);
 				return;
+			case OmlPackage.UNREIFIED_RELATION__REF:
+				setRef((Relation)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -843,6 +900,9 @@ public class UnreifiedRelationImpl extends RelationImpl implements UnreifiedRela
 			case OmlPackage.UNREIFIED_RELATION__TRANSITIVE:
 				setTransitive(TRANSITIVE_EDEFAULT);
 				return;
+			case OmlPackage.UNREIFIED_RELATION__REF:
+				setRef((Relation)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -879,6 +939,8 @@ public class UnreifiedRelationImpl extends RelationImpl implements UnreifiedRela
 				return irreflexive != IRREFLEXIVE_EDEFAULT;
 			case OmlPackage.UNREIFIED_RELATION__TRANSITIVE:
 				return transitive != TRANSITIVE_EDEFAULT;
+			case OmlPackage.UNREIFIED_RELATION__REF:
+				return ref != null;
 		}
 		return super.eIsSet(featureID);
 	}

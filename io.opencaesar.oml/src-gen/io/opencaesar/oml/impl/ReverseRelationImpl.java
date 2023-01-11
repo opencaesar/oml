@@ -19,6 +19,7 @@
 package io.opencaesar.oml.impl;
 
 import io.opencaesar.oml.Entity;
+import io.opencaesar.oml.Member;
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.Relation;
 import io.opencaesar.oml.RelationBase;
@@ -124,6 +125,16 @@ public class ReverseRelationImpl extends RelationImpl implements ReverseRelation
 		}
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.REVERSE_RELATION__RELATION_BASE, newRelationBase, newRelationBase));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Member getRef() {
+		return null;
 	}
 
 	/**
@@ -351,6 +362,12 @@ public class ReverseRelationImpl extends RelationImpl implements ReverseRelation
 	 */
 	@Override
 	public int eDerivedOperationID(int baseOperationID, Class<?> baseClass) {
+		if (baseClass == Member.class) {
+			switch (baseOperationID) {
+				case OmlPackage.MEMBER___GET_REF: return OmlPackage.REVERSE_RELATION___GET_REF;
+				default: return super.eDerivedOperationID(baseOperationID, baseClass);
+			}
+		}
 		if (baseClass == SemanticProperty.class) {
 			switch (baseOperationID) {
 				case OmlPackage.SEMANTIC_PROPERTY___IS_FUNCTIONAL: return OmlPackage.REVERSE_RELATION___IS_FUNCTIONAL;
@@ -384,6 +401,8 @@ public class ReverseRelationImpl extends RelationImpl implements ReverseRelation
 	@Override
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
+			case OmlPackage.REVERSE_RELATION___GET_REF:
+				return getRef();
 			case OmlPackage.REVERSE_RELATION___IS_FUNCTIONAL:
 				return isFunctional();
 			case OmlPackage.REVERSE_RELATION___IS_INVERSE_FUNCTIONAL:

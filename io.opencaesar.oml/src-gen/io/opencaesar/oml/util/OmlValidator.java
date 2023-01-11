@@ -133,8 +133,6 @@ public class OmlValidator extends EObjectValidator {
 				return validateImport((Import)value, diagnostics, context);
 			case OmlPackage.INSTANCE:
 				return validateInstance((Instance)value, diagnostics, context);
-			case OmlPackage.STATEMENT:
-				return validateStatement((Statement)value, diagnostics, context);
 			case OmlPackage.AXIOM:
 				return validateAxiom((Axiom)value, diagnostics, context);
 			case OmlPackage.ASSERTION:
@@ -159,14 +157,16 @@ public class OmlValidator extends EObjectValidator {
 				return validateDescription((Description)value, diagnostics, context);
 			case OmlPackage.DESCRIPTION_BUNDLE:
 				return validateDescriptionBundle((DescriptionBundle)value, diagnostics, context);
-			case OmlPackage.VOCABULARY_STATEMENT:
-				return validateVocabularyStatement((VocabularyStatement)value, diagnostics, context);
-			case OmlPackage.DESCRIPTION_STATEMENT:
-				return validateDescriptionStatement((DescriptionStatement)value, diagnostics, context);
+			case OmlPackage.STATEMENT:
+				return validateStatement((Statement)value, diagnostics, context);
 			case OmlPackage.VOCABULARY_MEMBER:
 				return validateVocabularyMember((VocabularyMember)value, diagnostics, context);
 			case OmlPackage.DESCRIPTION_MEMBER:
 				return validateDescriptionMember((DescriptionMember)value, diagnostics, context);
+			case OmlPackage.VOCABULARY_STATEMENT:
+				return validateVocabularyStatement((VocabularyStatement)value, diagnostics, context);
+			case OmlPackage.DESCRIPTION_STATEMENT:
+				return validateDescriptionStatement((DescriptionStatement)value, diagnostics, context);
 			case OmlPackage.TERM:
 				return validateTerm((Term)value, diagnostics, context);
 			case OmlPackage.RULE:
@@ -261,42 +261,6 @@ public class OmlValidator extends EObjectValidator {
 				return validateDoubleLiteral((DoubleLiteral)value, diagnostics, context);
 			case OmlPackage.BOOLEAN_LITERAL:
 				return validateBooleanLiteral((BooleanLiteral)value, diagnostics, context);
-			case OmlPackage.REFERENCE:
-				return validateReference((Reference)value, diagnostics, context);
-			case OmlPackage.SPECIALIZABLE_TERM_REFERENCE:
-				return validateSpecializableTermReference((SpecializableTermReference)value, diagnostics, context);
-			case OmlPackage.CLASSIFIER_REFERENCE:
-				return validateClassifierReference((ClassifierReference)value, diagnostics, context);
-			case OmlPackage.ENTITY_REFERENCE:
-				return validateEntityReference((EntityReference)value, diagnostics, context);
-			case OmlPackage.ASPECT_REFERENCE:
-				return validateAspectReference((AspectReference)value, diagnostics, context);
-			case OmlPackage.CONCEPT_REFERENCE:
-				return validateConceptReference((ConceptReference)value, diagnostics, context);
-			case OmlPackage.RELATION_ENTITY_REFERENCE:
-				return validateRelationEntityReference((RelationEntityReference)value, diagnostics, context);
-			case OmlPackage.STRUCTURE_REFERENCE:
-				return validateStructureReference((StructureReference)value, diagnostics, context);
-			case OmlPackage.ANNOTATION_PROPERTY_REFERENCE:
-				return validateAnnotationPropertyReference((AnnotationPropertyReference)value, diagnostics, context);
-			case OmlPackage.SCALAR_PROPERTY_REFERENCE:
-				return validateScalarPropertyReference((ScalarPropertyReference)value, diagnostics, context);
-			case OmlPackage.STRUCTURED_PROPERTY_REFERENCE:
-				return validateStructuredPropertyReference((StructuredPropertyReference)value, diagnostics, context);
-			case OmlPackage.FACETED_SCALAR_REFERENCE:
-				return validateFacetedScalarReference((FacetedScalarReference)value, diagnostics, context);
-			case OmlPackage.ENUMERATED_SCALAR_REFERENCE:
-				return validateEnumeratedScalarReference((EnumeratedScalarReference)value, diagnostics, context);
-			case OmlPackage.RELATION_REFERENCE:
-				return validateRelationReference((RelationReference)value, diagnostics, context);
-			case OmlPackage.RULE_REFERENCE:
-				return validateRuleReference((RuleReference)value, diagnostics, context);
-			case OmlPackage.NAMED_INSTANCE_REFERENCE:
-				return validateNamedInstanceReference((NamedInstanceReference)value, diagnostics, context);
-			case OmlPackage.CONCEPT_INSTANCE_REFERENCE:
-				return validateConceptInstanceReference((ConceptInstanceReference)value, diagnostics, context);
-			case OmlPackage.RELATION_INSTANCE_REFERENCE:
-				return validateRelationInstanceReference((RelationInstanceReference)value, diagnostics, context);
 			case OmlPackage.SEPARATOR_KIND:
 				return validateSeparatorKind((SeparatorKind)value, diagnostics, context);
 			case OmlPackage.RANGE_RESTRICTION_KIND:
@@ -422,25 +386,6 @@ public class OmlValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(instance, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(instance, diagnostics, context);
 		if (result || diagnostics != null) result &= validateElement_extraValidate(instance, diagnostics, context);
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateStatement(Statement statement, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(statement, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms(statement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(statement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(statement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(statement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(statement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(statement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(statement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(statement, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_extraValidate(statement, diagnostics, context);
 		return result;
 	}
 
@@ -677,36 +622,17 @@ public class OmlValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateVocabularyStatement(VocabularyStatement vocabularyStatement, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(vocabularyStatement, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms(vocabularyStatement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(vocabularyStatement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(vocabularyStatement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(vocabularyStatement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(vocabularyStatement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(vocabularyStatement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(vocabularyStatement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(vocabularyStatement, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_extraValidate(vocabularyStatement, diagnostics, context);
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateDescriptionStatement(DescriptionStatement descriptionStatement, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(descriptionStatement, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms(descriptionStatement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(descriptionStatement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(descriptionStatement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(descriptionStatement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(descriptionStatement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(descriptionStatement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(descriptionStatement, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(descriptionStatement, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_extraValidate(descriptionStatement, diagnostics, context);
+	public boolean validateStatement(Statement statement, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		if (!validate_NoCircularContainment(statement, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms(statement, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(statement, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(statement, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(statement, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(statement, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(statement, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(statement, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(statement, diagnostics, context);
+		if (result || diagnostics != null) result &= validateElement_extraValidate(statement, diagnostics, context);
 		return result;
 	}
 
@@ -745,6 +671,44 @@ public class OmlValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(descriptionMember, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(descriptionMember, diagnostics, context);
 		if (result || diagnostics != null) result &= validateElement_extraValidate(descriptionMember, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateVocabularyStatement(VocabularyStatement vocabularyStatement, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		if (!validate_NoCircularContainment(vocabularyStatement, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms(vocabularyStatement, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(vocabularyStatement, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(vocabularyStatement, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(vocabularyStatement, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(vocabularyStatement, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(vocabularyStatement, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(vocabularyStatement, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(vocabularyStatement, diagnostics, context);
+		if (result || diagnostics != null) result &= validateElement_extraValidate(vocabularyStatement, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateDescriptionStatement(DescriptionStatement descriptionStatement, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		if (!validate_NoCircularContainment(descriptionStatement, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms(descriptionStatement, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(descriptionStatement, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(descriptionStatement, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(descriptionStatement, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(descriptionStatement, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(descriptionStatement, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(descriptionStatement, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(descriptionStatement, diagnostics, context);
+		if (result || diagnostics != null) result &= validateElement_extraValidate(descriptionStatement, diagnostics, context);
 		return result;
 	}
 
@@ -1638,348 +1602,6 @@ public class OmlValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(booleanLiteral, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(booleanLiteral, diagnostics, context);
 		if (result || diagnostics != null) result &= validateElement_extraValidate(booleanLiteral, diagnostics, context);
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateReference(Reference reference, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(reference, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms(reference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(reference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(reference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(reference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(reference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(reference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(reference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(reference, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_extraValidate(reference, diagnostics, context);
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateSpecializableTermReference(SpecializableTermReference specializableTermReference, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(specializableTermReference, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms(specializableTermReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(specializableTermReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(specializableTermReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(specializableTermReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(specializableTermReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(specializableTermReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(specializableTermReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(specializableTermReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_extraValidate(specializableTermReference, diagnostics, context);
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateClassifierReference(ClassifierReference classifierReference, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(classifierReference, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms(classifierReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(classifierReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(classifierReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(classifierReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(classifierReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(classifierReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(classifierReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(classifierReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_extraValidate(classifierReference, diagnostics, context);
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateEntityReference(EntityReference entityReference, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(entityReference, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms(entityReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(entityReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(entityReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(entityReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(entityReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(entityReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(entityReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(entityReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_extraValidate(entityReference, diagnostics, context);
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateAspectReference(AspectReference aspectReference, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(aspectReference, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms(aspectReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(aspectReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(aspectReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(aspectReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(aspectReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(aspectReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(aspectReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(aspectReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_extraValidate(aspectReference, diagnostics, context);
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateConceptReference(ConceptReference conceptReference, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(conceptReference, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms(conceptReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(conceptReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(conceptReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(conceptReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(conceptReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(conceptReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(conceptReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(conceptReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_extraValidate(conceptReference, diagnostics, context);
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateRelationEntityReference(RelationEntityReference relationEntityReference, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(relationEntityReference, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms(relationEntityReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(relationEntityReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(relationEntityReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(relationEntityReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(relationEntityReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(relationEntityReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(relationEntityReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(relationEntityReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_extraValidate(relationEntityReference, diagnostics, context);
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateStructureReference(StructureReference structureReference, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(structureReference, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms(structureReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(structureReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(structureReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(structureReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(structureReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(structureReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(structureReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(structureReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_extraValidate(structureReference, diagnostics, context);
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateAnnotationPropertyReference(AnnotationPropertyReference annotationPropertyReference, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(annotationPropertyReference, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms(annotationPropertyReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(annotationPropertyReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(annotationPropertyReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(annotationPropertyReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(annotationPropertyReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(annotationPropertyReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(annotationPropertyReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(annotationPropertyReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_extraValidate(annotationPropertyReference, diagnostics, context);
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateScalarPropertyReference(ScalarPropertyReference scalarPropertyReference, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(scalarPropertyReference, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms(scalarPropertyReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(scalarPropertyReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(scalarPropertyReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(scalarPropertyReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(scalarPropertyReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(scalarPropertyReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(scalarPropertyReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(scalarPropertyReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_extraValidate(scalarPropertyReference, diagnostics, context);
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateStructuredPropertyReference(StructuredPropertyReference structuredPropertyReference, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(structuredPropertyReference, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms(structuredPropertyReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(structuredPropertyReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(structuredPropertyReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(structuredPropertyReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(structuredPropertyReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(structuredPropertyReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(structuredPropertyReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(structuredPropertyReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_extraValidate(structuredPropertyReference, diagnostics, context);
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateFacetedScalarReference(FacetedScalarReference facetedScalarReference, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(facetedScalarReference, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms(facetedScalarReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(facetedScalarReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(facetedScalarReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(facetedScalarReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(facetedScalarReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(facetedScalarReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(facetedScalarReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(facetedScalarReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_extraValidate(facetedScalarReference, diagnostics, context);
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateEnumeratedScalarReference(EnumeratedScalarReference enumeratedScalarReference, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(enumeratedScalarReference, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms(enumeratedScalarReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(enumeratedScalarReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(enumeratedScalarReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(enumeratedScalarReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(enumeratedScalarReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(enumeratedScalarReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(enumeratedScalarReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(enumeratedScalarReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_extraValidate(enumeratedScalarReference, diagnostics, context);
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateRelationReference(RelationReference relationReference, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(relationReference, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms(relationReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(relationReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(relationReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(relationReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(relationReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(relationReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(relationReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(relationReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_extraValidate(relationReference, diagnostics, context);
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateRuleReference(RuleReference ruleReference, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(ruleReference, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms(ruleReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(ruleReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(ruleReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(ruleReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(ruleReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(ruleReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(ruleReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(ruleReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_extraValidate(ruleReference, diagnostics, context);
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateNamedInstanceReference(NamedInstanceReference namedInstanceReference, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(namedInstanceReference, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms(namedInstanceReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(namedInstanceReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(namedInstanceReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(namedInstanceReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(namedInstanceReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(namedInstanceReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(namedInstanceReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(namedInstanceReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_extraValidate(namedInstanceReference, diagnostics, context);
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateConceptInstanceReference(ConceptInstanceReference conceptInstanceReference, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(conceptInstanceReference, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms(conceptInstanceReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(conceptInstanceReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(conceptInstanceReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(conceptInstanceReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(conceptInstanceReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(conceptInstanceReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(conceptInstanceReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(conceptInstanceReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_extraValidate(conceptInstanceReference, diagnostics, context);
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateRelationInstanceReference(RelationInstanceReference relationInstanceReference, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(relationInstanceReference, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms(relationInstanceReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(relationInstanceReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(relationInstanceReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(relationInstanceReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(relationInstanceReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(relationInstanceReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(relationInstanceReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(relationInstanceReference, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_extraValidate(relationInstanceReference, diagnostics, context);
 		return result;
 	}
 

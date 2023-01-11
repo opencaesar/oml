@@ -36,7 +36,6 @@ import io.opencaesar.oml.PropertyRangeRestrictionAxiom;
 import io.opencaesar.oml.PropertyValueAssertion;
 import io.opencaesar.oml.PropertyValueRestrictionAxiom;
 import io.opencaesar.oml.RangeRestrictionKind;
-import io.opencaesar.oml.Reference;
 import io.opencaesar.oml.RelationEntity;
 import io.opencaesar.oml.RelationEntityPredicate;
 import io.opencaesar.oml.RelationInstance;
@@ -559,8 +558,6 @@ class OmlOntologyDiagramView {
 			return OmlRead.getPrefixIn(((Ontology) element), ontology);
 		} else if (element instanceof Member) {
 			return OmlRead.getAbbreviatedIriIn(((Member) element), ontology);
-		} else if (element instanceof Reference) {
-			return OmlRead.getAbbreviatedIri(((Reference) element));
 		} else
 			throw new IllegalArgumentException("No local name for element of kind: " + element.eClass().getName());
 	}

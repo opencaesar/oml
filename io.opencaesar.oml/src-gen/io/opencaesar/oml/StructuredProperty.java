@@ -26,12 +26,14 @@ package io.opencaesar.oml;
  *
  * <!-- begin-model-doc -->
  * StructuredProperty is a semantic property whose range is a structure. It can specialize other structured properties.
+ * A structured property ref cannot respecify the domain nor the range.
  * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
+ *   <li>{@link io.opencaesar.oml.StructuredProperty#getRef <em>Ref</em>}</li>
  *   <li>{@link io.opencaesar.oml.StructuredProperty#isFunctional <em>Functional</em>}</li>
  *   <li>{@link io.opencaesar.oml.StructuredProperty#getDomain <em>Domain</em>}</li>
  *   <li>{@link io.opencaesar.oml.StructuredProperty#getRange <em>Range</em>}</li>
@@ -42,6 +44,31 @@ package io.opencaesar.oml;
  * @generated
  */
 public interface StructuredProperty extends SemanticProperty, SpecializableTerm {
+	/**
+	 * Returns the value of the '<em><b>Ref</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * A ref to another structured property
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Ref</em>' reference.
+	 * @see #setRef(StructuredProperty)
+	 * @see io.opencaesar.oml.OmlPackage#getStructuredProperty_Ref()
+	 * @model
+	 * @generated
+	 */
+	StructuredProperty getRef();
+
+	/**
+	 * Sets the value of the '{@link io.opencaesar.oml.StructuredProperty#getRef <em>Ref</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Ref</em>' reference.
+	 * @see #getRef()
+	 * @generated
+	 */
+	void setRef(StructuredProperty value);
+
 	/**
 	 * Returns the value of the '<em><b>Functional</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -77,7 +104,7 @@ public interface StructuredProperty extends SemanticProperty, SpecializableTerm 
 	 * @return the value of the '<em>Domain</em>' reference.
 	 * @see #setDomain(Classifier)
 	 * @see io.opencaesar.oml.OmlPackage#getStructuredProperty_Domain()
-	 * @model required="true"
+	 * @model
 	 * @generated
 	 */
 	Classifier getDomain();
@@ -102,7 +129,7 @@ public interface StructuredProperty extends SemanticProperty, SpecializableTerm 
 	 * @return the value of the '<em>Range</em>' reference.
 	 * @see #setRange(Structure)
 	 * @see io.opencaesar.oml.OmlPackage#getStructuredProperty_Range()
-	 * @model required="true"
+	 * @model
 	 * @generated
 	 */
 	Structure getRange();

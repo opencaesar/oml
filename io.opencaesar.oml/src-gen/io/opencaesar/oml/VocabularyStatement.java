@@ -40,7 +40,7 @@ package io.opencaesar.oml;
  *        annotation="https://tabatkins.github.io/bikeshed heading='Vocabularies'"
  * @generated
  */
-public interface VocabularyStatement extends Statement {
+public interface VocabularyStatement extends Statement, VocabularyMember {
 	/**
 	 * Returns the value of the '<em><b>Owning Vocabulary</b></em>' container reference.
 	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.Vocabulary#getOwnedStatements <em>Owned Statements</em>}'.

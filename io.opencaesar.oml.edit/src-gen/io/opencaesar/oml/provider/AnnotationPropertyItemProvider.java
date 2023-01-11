@@ -64,6 +64,7 @@ public class AnnotationPropertyItemProvider extends PropertyItemProvider {
 			super.getPropertyDescriptors(object);
 
 			addOwningVocabularyPropertyDescriptor(object);
+			addRefPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -82,6 +83,28 @@ public class AnnotationPropertyItemProvider extends PropertyItemProvider {
 				 getString("_UI_VocabularyStatement_owningVocabulary_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_VocabularyStatement_owningVocabulary_feature", "_UI_VocabularyStatement_type"),
 				 OmlPackage.Literals.VOCABULARY_STATEMENT__OWNING_VOCABULARY,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Ref feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addRefPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_AnnotationProperty_ref_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_AnnotationProperty_ref_feature", "_UI_AnnotationProperty_type"),
+				 OmlPackage.Literals.ANNOTATION_PROPERTY__REF,
 				 true,
 				 false,
 				 true,

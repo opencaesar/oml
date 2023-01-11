@@ -48,6 +48,7 @@ import io.opencaesar.oml.Import;
 import io.opencaesar.oml.ImportKind;
 import io.opencaesar.oml.Instance;
 import io.opencaesar.oml.Literal;
+import io.opencaesar.oml.Member;
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.Ontology;
 import io.opencaesar.oml.PropertyCardinalityRestrictionAxiom;
@@ -58,8 +59,10 @@ import io.opencaesar.oml.PropertyValueAssertion;
 import io.opencaesar.oml.PropertyValueRestrictionAxiom;
 import io.opencaesar.oml.QuotedLiteral;
 import io.opencaesar.oml.Relation;
+import io.opencaesar.oml.RelationBase;
 import io.opencaesar.oml.RelationEntity;
 import io.opencaesar.oml.RelationInstance;
+import io.opencaesar.oml.Rule;
 import io.opencaesar.oml.Scalar;
 import io.opencaesar.oml.ScalarProperty;
 import io.opencaesar.oml.SemanticProperty;
@@ -732,13 +735,277 @@ public final class OmlValidator2 {
         final var type = object.getType();
         if (((instance instanceof ConceptInstance) && !(type instanceof Concept)) || 
         	((instance instanceof RelationInstance) && !(type instanceof RelationEntity))) {
-            final var eRef = OmlPackage.Literals.TYPE_ASSERTION__TYPE;
         	return report(Diagnostic.ERROR, diagnostics, object,
-                "Type "+type.getAbbreviatedIri()+" cannot be a type for instance "+instance.getAbbreviatedIri() , eRef);
+                "Type "+type.getAbbreviatedIri()+" cannot be a type for instance "+instance.getAbbreviatedIri() , 
+                OmlPackage.Literals.TYPE_ASSERTION__TYPE);
         }
         return true;
     }
 
+    /**
+     * Checks that a member has correct feature cardinalities
+     * 
+     * @param object The member to check
+     * @param diagnostics The validation diagnostics
+     * @param context The object-to-object context map
+     * @return True if the rules is satisfied; False otherwise
+     */
+    protected boolean validateMemberCardinalities(Member object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        boolean result = true;
+        if ((object.getName() == null && object.getRef() == null) ||
+        	(object.getName() != null && object.getRef() != null)) {
+        	report(Diagnostic.ERROR, diagnostics, object,
+                "Member needs to either have a name or a ref to another member",
+                OmlPackage.Literals.MEMBER__NAME);
+        	result = false;
+        }
+        return result;
+    }
+
+    /**
+     * Checks that a concept has correct feature cardinalities
+     * 
+     * @param object The concept to check
+     * @param diagnostics The validation diagnostics
+     * @param context The object-to-object context map
+     * @return True if the rules is satisfied; False otherwise
+     */
+    protected boolean validateConceptCardinalities(Concept object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        boolean result = true;
+        if (object.getName() == null) {
+        	if (!object.getEnumeratedInstances().isEmpty()) {
+	        	report(Diagnostic.ERROR, diagnostics, object,
+	                "Concept "+object.getAbbreviatedIri()+" cannot respecify enumerated instances",
+	                OmlPackage.Literals.CONCEPT__ENUMERATED_INSTANCES);
+	        	result = false;
+        	}
+        }
+        return result;
+    }
+
+    /**
+     * Checks that a relation base has correct feature cardinalities
+     * 
+     * @param object The relation base to check
+     * @param diagnostics The validation diagnostics
+     * @param context The object-to-object context map
+     * @return True if the rules is satisfied; False otherwise
+     */
+    protected boolean validateRelationBaseCardinalities(RelationBase object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        boolean result = true;
+    	if (object.getName() != null) {
+        	if (object.getSource() == null) {
+	        	report(Diagnostic.ERROR, diagnostics, object,
+	                "Relation "+object.getAbbreviatedIri()+" needs to specify a source",
+	                OmlPackage.Literals.MEMBER__NAME);
+	        	result = false;
+        	}
+        	if (object.getTarget() == null) {
+	        	report(Diagnostic.ERROR, diagnostics, object,
+	                "Relation "+object.getAbbreviatedIri()+" needs to specify a target",
+	                OmlPackage.Literals.MEMBER__NAME);
+	        	result = false;
+        	}
+        } else {
+        	if (object.getSource() != null) {
+	        	report(Diagnostic.ERROR, diagnostics, object,
+	                "Relation "+object.getAbbreviatedIri()+" cannot respecify a source",
+	                OmlPackage.Literals.RELATION_BASE__SOURCE);
+	        	result = false;
+        	}
+        	if (object.getTarget() != null) {
+	        	report(Diagnostic.ERROR, diagnostics, object,
+	                "Relation "+object.getAbbreviatedIri()+" cannot respecify a target",
+	                OmlPackage.Literals.RELATION_BASE__TARGET);
+	        	result = false;
+        	}
+        	if (object.getReverseRelation() != null) {
+	        	report(Diagnostic.ERROR, diagnostics, object,
+	                "Relation "+object.getAbbreviatedIri()+" cannot respecify a reverse relation",
+	                OmlPackage.Literals.RELATION_BASE__REVERSE_RELATION);
+	        	result = false;
+        	}
+        }
+        return result;
+    }
+
+    /**
+     * Checks that a relation base has correct feature cardinalities
+     * 
+     * @param object The relation base to check
+     * @param diagnostics The validation diagnostics
+     * @param context The object-to-object context map
+     * @return True if the rules is satisfied; False otherwise
+     */
+    protected boolean validateRelationEntityCardinalities(RelationEntity object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        boolean result = true;
+    	if (object.getName() == null) {
+        	if (object.getForwardRelation() != null) {
+	        	report(Diagnostic.ERROR, diagnostics, object,
+	                "Relation "+object.getAbbreviatedIri()+" cannot respecify a forward relation",
+	                OmlPackage.Literals.RELATION_ENTITY__FORWARD_RELATION);
+	        	result = false;
+        	}
+        }
+        return result;
+    }
+    
+    /**
+     * Checks that an enumerated scalar has correct feature cardinalities
+     * 
+     * @param object The scalar to check
+     * @param diagnostics The validation diagnostics
+     * @param context The object-to-object context map
+     * @return True if the rules is satisfied; False otherwise
+     */
+    protected boolean validateEnumeratedScalarCardinalities(EnumeratedScalar object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        boolean result = true;
+    	if (object.getName() == null) {
+        	if (!object.getLiterals().isEmpty()) {
+	        	report(Diagnostic.ERROR, diagnostics, object,
+	                "Scalar "+object.getAbbreviatedIri()+" cannot respecify enumerated literals",
+	                OmlPackage.Literals.ENUMERATED_SCALAR__LITERALS);
+	        	result = false;
+        	}
+        }
+        return result;
+    }
+
+    /**
+     * Checks that a scalar property base the correct feature cardinalities
+     * 
+     * @param object The property to check
+     * @param diagnostics The validation diagnostics
+     * @param context The object-to-object context map
+     * @return True if the rules is satisfied; False otherwise
+     */
+    protected boolean validateScalarPropertyCardinalities(ScalarProperty object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        if (object.getName() != null) {
+        	if (object.getDomain() == null) {
+	        	return report(Diagnostic.ERROR, diagnostics, object,
+	                "Propertys "+object.getAbbreviatedIri()+" needs to specify a domain",
+	                OmlPackage.Literals.MEMBER__NAME);
+        	}
+        	else if (object.getRange() == null) {
+	        	return report(Diagnostic.ERROR, diagnostics, object,
+	                "Property "+object.getAbbreviatedIri()+" needs to specify a range",
+	                OmlPackage.Literals.MEMBER__NAME);
+        	}
+        } else {
+        	if (object.getDomain() != null) {
+	        	return report(Diagnostic.ERROR, diagnostics, object,
+	                "Propertys "+object.getAbbreviatedIri()+" cannot respecify a domain",
+	                OmlPackage.Literals.SCALAR_PROPERTY__DOMAIN);
+        	}
+        	else if (object.getRange() != null) {
+	        	return report(Diagnostic.ERROR, diagnostics, object,
+	                "Property "+object.getAbbreviatedIri()+" cannot respecify a range",
+	                OmlPackage.Literals.SCALAR_PROPERTY__RANGE);
+        	}
+        }
+        return true;
+    }
+
+    /**
+     * Checks that a structured property base the correct feature cardinalities
+     * 
+     * @param object The property to check
+     * @param diagnostics The validation diagnostics
+     * @param context The object-to-object context map
+     * @return True if the rules is satisfied; False otherwise
+     */
+    protected boolean validateStructuredPropertyCardinalities(StructuredProperty object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        if (object.getName() != null) {
+        	if (object.getDomain() == null) {
+	        	return report(Diagnostic.ERROR, diagnostics, object,
+	                "Propertys "+object.getAbbreviatedIri()+" needs to specify a domain",
+	                OmlPackage.Literals.MEMBER__NAME);
+        	}
+        	else if (object.getRange() == null) {
+	        	return report(Diagnostic.ERROR, diagnostics, object,
+	                "Property "+object.getAbbreviatedIri()+" needs to specify a range",
+	                OmlPackage.Literals.MEMBER__NAME);
+        	}
+        } else {
+        	if (object.getDomain() != null) {
+	        	return report(Diagnostic.ERROR, diagnostics, object,
+	                "Propertys "+object.getAbbreviatedIri()+" cannot respecify a domain",
+	                OmlPackage.Literals.STRUCTURED_PROPERTY__DOMAIN);
+        	}
+        	else if (object.getRange() != null) {
+	        	return report(Diagnostic.ERROR, diagnostics, object,
+	                "Property "+object.getAbbreviatedIri()+" cannot respecify a range",
+	                OmlPackage.Literals.STRUCTURED_PROPERTY__RANGE);
+        	}
+        }
+        return true;
+    }
+
+    /**
+     * Checks that a rule has the correct feature cardinalities
+     * 
+     * @param object The rule to check
+     * @param diagnostics The validation diagnostics
+     * @param context The object-to-object context map
+     * @return True if the rules is satisfied; False otherwise
+     */
+    protected boolean validateRuleCardinalities(Rule object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        if (object.getName() != null) {
+        	if (object.getAntecedent().isEmpty()) {
+	        	return report(Diagnostic.ERROR, diagnostics, object,
+	                "Rule "+object.getAbbreviatedIri()+" needs to specify some predicates as antecedent",
+	                OmlPackage.Literals.MEMBER__NAME);
+        	}
+        	else if (object.getConsequent().isEmpty()) {
+	        	return report(Diagnostic.ERROR, diagnostics, object,
+	                "Rule "+object.getAbbreviatedIri()+" needs to specify some predicates as consequent",
+	                OmlPackage.Literals.MEMBER__NAME);
+        	}
+        } else {
+        	boolean result = true;
+        	if (!object.getAntecedent().isEmpty()) {
+	        	report(Diagnostic.ERROR, diagnostics, object,
+	                "Rule "+object.getAbbreviatedIri()+" cannot respecify a predeicate as antecedent",
+	                OmlPackage.Literals.RULE__ANTECEDENT);
+	        	result = false;
+        	}
+        	if (!object.getConsequent().isEmpty()) {
+	        	report(Diagnostic.ERROR, diagnostics, object,
+	                "Rule "+object.getAbbreviatedIri()+" cannot respecify a predicate as consequent",
+	                OmlPackage.Literals.RULE__CONSEQUENT);
+	        	result = false;
+        	}
+        	return result;
+        }
+        return true;
+    }
+
+    /**
+     * Checks that a relation instance has the correct feature cardinalities
+     * 
+     * @param object The relation instance to check
+     * @param diagnostics The validation diagnostics
+     * @param context The object-to-object context map
+     * @return True if the rules is satisfied; False otherwise
+     */
+    protected boolean validateRelationInstanceCardinalities(RelationInstance object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        if (object.getName() != null) {
+        	if (object.getSources().isEmpty()) {
+	        	return report(Diagnostic.ERROR, diagnostics, object,
+	                "Relation instance "+object.getAbbreviatedIri()+" needs to specify at least one source",
+	                OmlPackage.Literals.MEMBER__NAME);
+        	}
+        	else if (object.getTargets().isEmpty()) {
+	        	return report(Diagnostic.ERROR, diagnostics, object,
+	                "Relation instance "+object.getAbbreviatedIri()+" needs to specify at least one target",
+	                OmlPackage.Literals.MEMBER__NAME);
+        	}
+        }
+        return true;
+    }
+
+    //////// Utilities
+    
     /**
      * Checks if col1 intersect with col2
      * 

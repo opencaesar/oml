@@ -25,7 +25,6 @@ import io.opencaesar.oml.IdentifiedElement;
 import io.opencaesar.oml.Literal;
 import io.opencaesar.oml.Member;
 import io.opencaesar.oml.OmlPackage;
-import io.opencaesar.oml.Reference;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -53,7 +52,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  *   <li>{@link io.opencaesar.oml.impl.AnnotationImpl#getLiteralValue <em>Literal Value</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.AnnotationImpl#getReferenceValue <em>Reference Value</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.AnnotationImpl#getOwningElement <em>Owning Element</em>}</li>
- *   <li>{@link io.opencaesar.oml.impl.AnnotationImpl#getOwningReference <em>Owning Reference</em>}</li>
  * </ul>
  *
  * @generated
@@ -292,59 +290,6 @@ public class AnnotationImpl extends ElementImpl implements Annotation {
 	 * @generated
 	 */
 	@Override
-	public Reference getOwningReference() {
-		if (eContainerFeatureID() != OmlPackage.ANNOTATION__OWNING_REFERENCE) return null;
-		return (Reference)eContainer();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Reference basicGetOwningReference() {
-		if (eContainerFeatureID() != OmlPackage.ANNOTATION__OWNING_REFERENCE) return null;
-		return (Reference)eInternalContainer();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetOwningReference(Reference newOwningReference, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwningReference, OmlPackage.ANNOTATION__OWNING_REFERENCE, msgs);
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setOwningReference(Reference newOwningReference) {
-		if (newOwningReference != eInternalContainer() || (eContainerFeatureID() != OmlPackage.ANNOTATION__OWNING_REFERENCE && newOwningReference != null)) {
-			if (EcoreUtil.isAncestor(this, newOwningReference))
-				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
-			NotificationChain msgs = null;
-			if (eInternalContainer() != null)
-				msgs = eBasicRemoveFromContainer(msgs);
-			if (newOwningReference != null)
-				msgs = ((InternalEObject)newOwningReference).eInverseAdd(this, OmlPackage.REFERENCE__OWNED_ANNOTATIONS, Reference.class, msgs);
-			msgs = basicSetOwningReference(newOwningReference, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.ANNOTATION__OWNING_REFERENCE, newOwningReference, newOwningReference));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public Element getValue() {
 		Element _xifexpression = null;
 		Literal _literalValue = this.getLiteralValue();
@@ -376,10 +321,6 @@ public class AnnotationImpl extends ElementImpl implements Annotation {
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwningElement((IdentifiedElement)otherEnd, msgs);
-			case OmlPackage.ANNOTATION__OWNING_REFERENCE:
-				if (eInternalContainer() != null)
-					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetOwningReference((Reference)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -396,8 +337,6 @@ public class AnnotationImpl extends ElementImpl implements Annotation {
 				return basicSetLiteralValue(null, msgs);
 			case OmlPackage.ANNOTATION__OWNING_ELEMENT:
 				return basicSetOwningElement(null, msgs);
-			case OmlPackage.ANNOTATION__OWNING_REFERENCE:
-				return basicSetOwningReference(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -412,8 +351,6 @@ public class AnnotationImpl extends ElementImpl implements Annotation {
 		switch (eContainerFeatureID()) {
 			case OmlPackage.ANNOTATION__OWNING_ELEMENT:
 				return eInternalContainer().eInverseRemove(this, OmlPackage.IDENTIFIED_ELEMENT__OWNED_ANNOTATIONS, IdentifiedElement.class, msgs);
-			case OmlPackage.ANNOTATION__OWNING_REFERENCE:
-				return eInternalContainer().eInverseRemove(this, OmlPackage.REFERENCE__OWNED_ANNOTATIONS, Reference.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -437,9 +374,6 @@ public class AnnotationImpl extends ElementImpl implements Annotation {
 			case OmlPackage.ANNOTATION__OWNING_ELEMENT:
 				if (resolve) return getOwningElement();
 				return basicGetOwningElement();
-			case OmlPackage.ANNOTATION__OWNING_REFERENCE:
-				if (resolve) return getOwningReference();
-				return basicGetOwningReference();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -463,9 +397,6 @@ public class AnnotationImpl extends ElementImpl implements Annotation {
 				return;
 			case OmlPackage.ANNOTATION__OWNING_ELEMENT:
 				setOwningElement((IdentifiedElement)newValue);
-				return;
-			case OmlPackage.ANNOTATION__OWNING_REFERENCE:
-				setOwningReference((Reference)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -491,9 +422,6 @@ public class AnnotationImpl extends ElementImpl implements Annotation {
 			case OmlPackage.ANNOTATION__OWNING_ELEMENT:
 				setOwningElement((IdentifiedElement)null);
 				return;
-			case OmlPackage.ANNOTATION__OWNING_REFERENCE:
-				setOwningReference((Reference)null);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -514,8 +442,6 @@ public class AnnotationImpl extends ElementImpl implements Annotation {
 				return referenceValue != null;
 			case OmlPackage.ANNOTATION__OWNING_ELEMENT:
 				return basicGetOwningElement() != null;
-			case OmlPackage.ANNOTATION__OWNING_REFERENCE:
-				return basicGetOwningReference() != null;
 		}
 		return super.eIsSet(featureID);
 	}

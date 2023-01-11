@@ -24,9 +24,14 @@ import io.opencaesar.oml.RelationInstance;
 
 import java.util.Collection;
 
+import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
@@ -38,6 +43,7 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link io.opencaesar.oml.impl.RelationInstanceImpl#getRef <em>Ref</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.RelationInstanceImpl#getSources <em>Sources</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.RelationInstanceImpl#getTargets <em>Targets</em>}</li>
  * </ul>
@@ -45,6 +51,16 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  * @generated
  */
 public class RelationInstanceImpl extends NamedInstanceImpl implements RelationInstance {
+	/**
+	 * The cached value of the '{@link #getRef() <em>Ref</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRef()
+	 * @generated
+	 * @ordered
+	 */
+	protected RelationInstance ref;
+
 	/**
 	 * The cached value of the '{@link #getSources() <em>Sources</em>}' reference list.
 	 * <!-- begin-user-doc -->
@@ -90,6 +106,46 @@ public class RelationInstanceImpl extends NamedInstanceImpl implements RelationI
 	 * @generated
 	 */
 	@Override
+	public RelationInstance getRef() {
+		if (ref != null && ref.eIsProxy()) {
+			InternalEObject oldRef = (InternalEObject)ref;
+			ref = (RelationInstance)eResolveProxy(oldRef);
+			if (ref != oldRef) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, OmlPackage.RELATION_INSTANCE__REF, oldRef, ref));
+			}
+		}
+		return ref;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public RelationInstance basicGetRef() {
+		return ref;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setRef(RelationInstance newRef) {
+		RelationInstance oldRef = ref;
+		ref = newRef;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.RELATION_INSTANCE__REF, oldRef, ref));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EList<NamedInstance> getSources() {
 		if (sources == null) {
 			sources = new EObjectResolvingEList<NamedInstance>(NamedInstance.class, this, OmlPackage.RELATION_INSTANCE__SOURCES);
@@ -118,6 +174,9 @@ public class RelationInstanceImpl extends NamedInstanceImpl implements RelationI
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case OmlPackage.RELATION_INSTANCE__REF:
+				if (resolve) return getRef();
+				return basicGetRef();
 			case OmlPackage.RELATION_INSTANCE__SOURCES:
 				return getSources();
 			case OmlPackage.RELATION_INSTANCE__TARGETS:
@@ -135,6 +194,9 @@ public class RelationInstanceImpl extends NamedInstanceImpl implements RelationI
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case OmlPackage.RELATION_INSTANCE__REF:
+				setRef((RelationInstance)newValue);
+				return;
 			case OmlPackage.RELATION_INSTANCE__SOURCES:
 				getSources().clear();
 				getSources().addAll((Collection<? extends NamedInstance>)newValue);
@@ -155,6 +217,9 @@ public class RelationInstanceImpl extends NamedInstanceImpl implements RelationI
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case OmlPackage.RELATION_INSTANCE__REF:
+				setRef((RelationInstance)null);
+				return;
 			case OmlPackage.RELATION_INSTANCE__SOURCES:
 				getSources().clear();
 				return;
@@ -173,6 +238,8 @@ public class RelationInstanceImpl extends NamedInstanceImpl implements RelationI
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case OmlPackage.RELATION_INSTANCE__REF:
+				return ref != null;
 			case OmlPackage.RELATION_INSTANCE__SOURCES:
 				return sources != null && !sources.isEmpty();
 			case OmlPackage.RELATION_INSTANCE__TARGETS:

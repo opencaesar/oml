@@ -47,11 +47,11 @@ public class OmlResourceDescriptionStrategy extends DefaultResourceDescriptionSt
 			return true;
 		} else if (eObject instanceof Member) {
 			final var member = (Member) eObject;
-			final QualifiedName qualifiedName = this.getQualifiedNameProvider().getFullyQualifiedName(eObject);
+			final QualifiedName qualifiedName = this.getQualifiedNameProvider().getFullyQualifiedName(member);
 			if ((qualifiedName != null)) {
 				final var map = new HashMap<String, String>();
 				map.put("defaultPrefix", member.getOntology().getPrefix());
-				acceptor.accept(EObjectDescription.create(qualifiedName, eObject, map));
+				acceptor.accept(EObjectDescription.create(qualifiedName, member, map));
 			}
 			return true;
 		}
