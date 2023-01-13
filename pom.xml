@@ -22,7 +22,7 @@
     </modules>
 
     <properties>
-	    <tycho-version>3.0.0</tycho-version>
+	    <tycho-version>3.0.1</tycho-version>
 	    <tycho-extras-version>${tycho-version}</tycho-extras-version>
 	    <maven-antrun-plugin.version>1.7</maven-antrun-plugin.version>
         <eclipse-version>2022-09</eclipse-version>
