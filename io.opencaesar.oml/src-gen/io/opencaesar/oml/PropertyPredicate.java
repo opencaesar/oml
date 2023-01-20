@@ -25,8 +25,8 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * PropertyPredicate is a binary predicate that binds its `variable1` to an instance (subject), and its
- *  `variable2`, `instance2`, or `literal2` as the value of a specific property.
+ * PropertyPredicate is a binary predicate that holds when its argument1 is bound to an instance and its argument2 is bound to a
+ * a value of a given property on that instance.
  * <!-- end-model-doc -->
  *
  * <p>
@@ -34,7 +34,6 @@ package io.opencaesar.oml;
  * </p>
  * <ul>
  *   <li>{@link io.opencaesar.oml.PropertyPredicate#getProperty <em>Property</em>}</li>
- *   <li>{@link io.opencaesar.oml.PropertyPredicate#getLiteral2 <em>Literal2</em>}</li>
  * </ul>
  *
  * @see io.opencaesar.oml.OmlPackage#getPropertyPredicate()
@@ -47,7 +46,7 @@ public interface PropertyPredicate extends BinaryPredicate {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The property of the named instance whose value is bound or matched
+	 * The property of an instance
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Property</em>' reference.
 	 * @see #setProperty(Property)
@@ -66,30 +65,5 @@ public interface PropertyPredicate extends BinaryPredicate {
 	 * @generated
 	 */
 	void setProperty(Property value);
-
-	/**
-	 * Returns the value of the '<em><b>Literal2</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * The optional literal2 that is matched as a value of the property
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Literal2</em>' containment reference.
-	 * @see #setLiteral2(Literal)
-	 * @see io.opencaesar.oml.OmlPackage#getPropertyPredicate_Literal2()
-	 * @model containment="true"
-	 * @generated
-	 */
-	Literal getLiteral2();
-
-	/**
-	 * Sets the value of the '{@link io.opencaesar.oml.PropertyPredicate#getLiteral2 <em>Literal2</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Literal2</em>' containment reference.
-	 * @see #getLiteral2()
-	 * @generated
-	 */
-	void setLiteral2(Literal value);
 
 } // PropertyPredicate

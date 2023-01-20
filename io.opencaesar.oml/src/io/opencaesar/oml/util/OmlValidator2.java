@@ -35,7 +35,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
-import io.opencaesar.oml.BinaryPredicate;
+import io.opencaesar.oml.Argument;
 import io.opencaesar.oml.Classifier;
 import io.opencaesar.oml.Concept;
 import io.opencaesar.oml.ConceptInstance;
@@ -61,6 +61,7 @@ import io.opencaesar.oml.QuotedLiteral;
 import io.opencaesar.oml.Relation;
 import io.opencaesar.oml.RelationBase;
 import io.opencaesar.oml.RelationEntity;
+import io.opencaesar.oml.RelationEntityPredicate;
 import io.opencaesar.oml.RelationInstance;
 import io.opencaesar.oml.Rule;
 import io.opencaesar.oml.Scalar;
@@ -614,25 +615,123 @@ public final class OmlValidator2 {
         return true;
     }
 
-    // Binary Predicate
+    // Type Predicate
 
     /**
-     * Checks if a property predicate has a second argument
+     * Checks if an argument is well formed
      * 
-     * @param object The property predicate to check
+     * @param object The argument to check
      * @param diagnostics The validation diagnostics
      * @param context The object-to-object context map
      * @return True if the rules is satisfied; False otherwise
      */
-    protected boolean validatePropertyPredicateArg2(BinaryPredicate object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-        if (object.getVariable2() == null &&
-        	object.getInstance2() == null &&
-        	(!(object instanceof PropertyPredicate) || ((PropertyPredicate)object).getLiteral2() == null)) {
+    protected boolean validatePropertyPredicateArg2(Argument object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+    	int n1 = object.getVariable() != null ? 1 : 0;
+    	int n2 = object.getLiteral() != null ? 1 : 0;
+    	int n3 = object.getInstance() != null ? 1 : 0;
+        if (n1+n2+n3 != 1) {
             return report(Diagnostic.ERROR, diagnostics, object,
-                "Binary predicate must have a second argument", 
-                OmlPackage.Literals.BINARY_PREDICATE__VARIABLE2);
+                "Argument must be either a variable, a literal or an instance.", OmlPackage.Literals.ARGUMENT__VARIABLE);
         }
         return true;
+    }
+
+    // Type Predicate
+
+    /**
+     * Checks if a type predicate is well formed
+     * 
+     * @param object The predicate to check
+     * @param diagnostics The validation diagnostics
+     * @param context The object-to-object context map
+     * @return True if the rules is satisfied; False otherwise
+     */
+    protected boolean validateTypePredicate(TypePredicate object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        if (object.getType() instanceof Scalar) {
+        	if (object.getArgument().getInstance() != null) {
+	            return report(Diagnostic.ERROR, diagnostics, object,
+	                "Scalar predicate cannot have a named instance as an argument", 
+	                OmlPackage.Literals.TYPE_PREDICATE__TYPE);
+        	}
+        } else {
+        	if (object.getArgument().getLiteral() != null) {
+	            return report(Diagnostic.ERROR, diagnostics, object,
+	                    "Entity predicate cannot have a literal as an argument", 
+	                    OmlPackage.Literals.TYPE_PREDICATE__TYPE);
+        	}
+        }
+        return true;
+    }
+
+    /**
+     * Checks if a property predicate is well formed
+     * 
+     * @param object The predicate to check
+     * @param diagnostics The validation diagnostics
+     * @param context The object-to-object context map
+     * @return True if the rules is satisfied; False otherwise
+     */
+    protected boolean validatePropertyPredicate(PropertyPredicate object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+    	boolean result = true;
+    	if (object.getArgument1().getLiteral() != null) {
+            report(Diagnostic.ERROR, diagnostics, object,
+                "Property predicate cannot have a literal as a first argument", 
+                OmlPackage.Literals.TYPE_PREDICATE__TYPE);
+            result = false;
+    	}
+        if (object.getProperty() instanceof ScalarProperty) {
+        	if (object.getArgument2().getInstance() != null) {
+	            report(Diagnostic.ERROR, diagnostics, object,
+	                "Scala property predicate cannot have a named instance as a second argument", 
+	                OmlPackage.Literals.TYPE_PREDICATE__TYPE);
+	            result = false;
+        	}
+        } else if (object.getProperty() instanceof Relation) {
+        	if (object.getArgument2().getLiteral() != null) {
+	            report(Diagnostic.ERROR, diagnostics, object,
+	                    "Relation predicate cannot have a literal as a second argument", 
+	                    OmlPackage.Literals.TYPE_PREDICATE__TYPE);
+	            result = false;
+        	}
+        }
+        return result;
+    }
+
+    /**
+     * Checks if a relation entity predicate is well formed
+     * 
+     * @param object The predicate to check
+     * @param diagnostics The validation diagnostics
+     * @param context The object-to-object context map
+     * @return True if the rules is satisfied; False otherwise
+     */
+    protected boolean validatePropertyPredicate(RelationEntityPredicate object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+    	boolean result = true;
+    	if (object.getArgument1().getLiteral() != null) {
+            report(Diagnostic.ERROR, diagnostics, object,
+                "Relation entity predicate cannot have a literal as a first argument", 
+                OmlPackage.Literals.TYPE_PREDICATE__TYPE);
+            result = false;
+    	}
+    	if (object.getArgument().getLiteral() != null) {
+            report(Diagnostic.ERROR, diagnostics, object,
+                "Relation entity predicate cannot have a literal as a second argument", 
+                OmlPackage.Literals.TYPE_PREDICATE__TYPE);
+            result = false;
+    	}
+    	if (object.getArgument().getInstance() != null && !(object.getArgument().getInstance() instanceof RelationInstance)) {
+            report(Diagnostic.ERROR, diagnostics, object,
+                "Relation entity predicate cannot have a non-relation instance as a second argument", 
+                OmlPackage.Literals.TYPE_PREDICATE__TYPE);
+            result = false;
+    	}
+    	if (object.getArgument2().getLiteral() != null) {
+            report(Diagnostic.ERROR, diagnostics, object,
+                "Relation entity predicate cannot have a literal as a third argument", 
+                OmlPackage.Literals.TYPE_PREDICATE__TYPE);
+            result = false;
+    	}
+        return result;
     }
 
     // Quoted Literal
@@ -752,8 +851,8 @@ public final class OmlValidator2 {
      */
     protected boolean validateMemberCardinalities(Member object, DiagnosticChain diagnostics, Map<Object, Object> context) {
         boolean result = true;
-        if ((object.getName() == null && object.getRef() == null) ||
-        	(object.getName() != null && object.getRef() != null)) {
+        if ((object.getName() == null && !object.isRef()) ||
+        	(object.getName() != null && object.isRef())) {
         	report(Diagnostic.ERROR, diagnostics, object,
                 "Member needs to either have a name or a ref to another member",
                 OmlPackage.Literals.MEMBER__NAME);

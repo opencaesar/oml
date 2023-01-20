@@ -18,9 +18,13 @@
  */
 package io.opencaesar.oml.dsl.ui.labeling;
 
-import com.google.inject.Inject;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
+
+import com.google.inject.Inject;
+
+import io.opencaesar.oml.Member;
+import io.opencaesar.oml.util.OmlRead;
 
 /**
  * Provides labels for EObjects.
@@ -36,9 +40,10 @@ public class OmlLabelProvider extends DefaultEObjectLabelProvider {
 
 	// Labels and icons can be computed like this:
 	
-//	String text(Greeting ele) {
-//		return "A greeting to " + ele.getName();
-//	}
+	String text(Member member) {
+		return member.isRef() ? "ref "+OmlRead.getAbbreviatedIriIn(OmlRead.resolve(member), member.getOntology()) : member.getName();
+	}
+	
 //
 //	String image(Greeting ele) {
 //		return "Greeting.gif";

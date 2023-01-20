@@ -127,6 +127,17 @@ public abstract class MemberImpl extends IdentifiedElementImpl implements Member
 	 * @generated
 	 */
 	@Override
+	public boolean isRef() {
+		Member _ref = this.getRef();
+		return (_ref != null);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public String getIri() {
 		Member _xifexpression = null;
 		Member _ref = this.getRef();
@@ -250,6 +261,8 @@ public abstract class MemberImpl extends IdentifiedElementImpl implements Member
 		switch (operationID) {
 			case OmlPackage.MEMBER___GET_REF:
 				return getRef();
+			case OmlPackage.MEMBER___IS_REF:
+				return isRef();
 			case OmlPackage.MEMBER___GET_IRI:
 				return getIri();
 			case OmlPackage.MEMBER___GET_ABBREVIATED_IRI:

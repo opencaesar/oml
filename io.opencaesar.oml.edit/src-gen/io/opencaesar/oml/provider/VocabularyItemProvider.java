@@ -160,6 +160,11 @@ public class VocabularyItemProvider extends VocabularyBoxItemProvider {
 		newChildDescriptors.add
 			(createChildParameter
 				(OmlPackage.Literals.VOCABULARY__OWNED_STATEMENTS,
+				 OmlFactory.eINSTANCE.createBuiltIn()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(OmlPackage.Literals.VOCABULARY__OWNED_STATEMENTS,
 				 OmlFactory.eINSTANCE.createStructure()));
 
 		newChildDescriptors.add

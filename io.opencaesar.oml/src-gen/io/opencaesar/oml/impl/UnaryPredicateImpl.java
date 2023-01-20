@@ -18,12 +18,15 @@
  */
 package io.opencaesar.oml.impl;
 
+import io.opencaesar.oml.Argument;
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.UnaryPredicate;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
@@ -35,31 +38,21 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link io.opencaesar.oml.impl.UnaryPredicateImpl#getVariable <em>Variable</em>}</li>
+ *   <li>{@link io.opencaesar.oml.impl.UnaryPredicateImpl#getArgument <em>Argument</em>}</li>
  * </ul>
  *
  * @generated
  */
 public abstract class UnaryPredicateImpl extends PredicateImpl implements UnaryPredicate {
 	/**
-	 * The default value of the '{@link #getVariable() <em>Variable</em>}' attribute.
+	 * The cached value of the '{@link #getArgument() <em>Argument</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getVariable()
+	 * @see #getArgument()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String VARIABLE_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getVariable() <em>Variable</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getVariable()
-	 * @generated
-	 * @ordered
-	 */
-	protected String variable = VARIABLE_EDEFAULT;
+	protected Argument argument;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -86,8 +79,23 @@ public abstract class UnaryPredicateImpl extends PredicateImpl implements UnaryP
 	 * @generated
 	 */
 	@Override
-	public String getVariable() {
-		return variable;
+	public Argument getArgument() {
+		return argument;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetArgument(Argument newArgument, NotificationChain msgs) {
+		Argument oldArgument = argument;
+		argument = newArgument;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OmlPackage.UNARY_PREDICATE__ARGUMENT, oldArgument, newArgument);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
 	}
 
 	/**
@@ -96,11 +104,32 @@ public abstract class UnaryPredicateImpl extends PredicateImpl implements UnaryP
 	 * @generated
 	 */
 	@Override
-	public void setVariable(String newVariable) {
-		String oldVariable = variable;
-		variable = newVariable;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.UNARY_PREDICATE__VARIABLE, oldVariable, variable));
+	public void setArgument(Argument newArgument) {
+		if (newArgument != argument) {
+			NotificationChain msgs = null;
+			if (argument != null)
+				msgs = ((InternalEObject)argument).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OmlPackage.UNARY_PREDICATE__ARGUMENT, null, msgs);
+			if (newArgument != null)
+				msgs = ((InternalEObject)newArgument).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - OmlPackage.UNARY_PREDICATE__ARGUMENT, null, msgs);
+			msgs = basicSetArgument(newArgument, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.UNARY_PREDICATE__ARGUMENT, newArgument, newArgument));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case OmlPackage.UNARY_PREDICATE__ARGUMENT:
+				return basicSetArgument(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -111,8 +140,8 @@ public abstract class UnaryPredicateImpl extends PredicateImpl implements UnaryP
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case OmlPackage.UNARY_PREDICATE__VARIABLE:
-				return getVariable();
+			case OmlPackage.UNARY_PREDICATE__ARGUMENT:
+				return getArgument();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -125,8 +154,8 @@ public abstract class UnaryPredicateImpl extends PredicateImpl implements UnaryP
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case OmlPackage.UNARY_PREDICATE__VARIABLE:
-				setVariable((String)newValue);
+			case OmlPackage.UNARY_PREDICATE__ARGUMENT:
+				setArgument((Argument)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -140,8 +169,8 @@ public abstract class UnaryPredicateImpl extends PredicateImpl implements UnaryP
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case OmlPackage.UNARY_PREDICATE__VARIABLE:
-				setVariable(VARIABLE_EDEFAULT);
+			case OmlPackage.UNARY_PREDICATE__ARGUMENT:
+				setArgument((Argument)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -155,26 +184,10 @@ public abstract class UnaryPredicateImpl extends PredicateImpl implements UnaryP
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case OmlPackage.UNARY_PREDICATE__VARIABLE:
-				return VARIABLE_EDEFAULT == null ? variable != null : !VARIABLE_EDEFAULT.equals(variable);
+			case OmlPackage.UNARY_PREDICATE__ARGUMENT:
+				return argument != null;
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (variable: ");
-		result.append(variable);
-		result.append(')');
-		return result.toString();
 	}
 
 } //UnaryPredicateImpl

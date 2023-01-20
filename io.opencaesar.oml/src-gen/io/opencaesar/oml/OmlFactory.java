@@ -56,6 +56,15 @@ public interface OmlFactory extends EFactory {
 	Import createImport();
 
 	/**
+	 * Returns a new object of class '<em>Argument</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Argument</em>'.
+	 * @generated
+	 */
+	Argument createArgument();
+
+	/**
 	 * Returns a new object of class '<em>Vocabulary</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -99,6 +108,15 @@ public interface OmlFactory extends EFactory {
 	 * @generated
 	 */
 	Rule createRule();
+
+	/**
+	 * Returns a new object of class '<em>Built In</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Built In</em>'.
+	 * @generated
+	 */
+	BuiltIn createBuiltIn();
 
 	/**
 	 * Returns a new object of class '<em>Structure</em>'.
@@ -297,6 +315,15 @@ public interface OmlFactory extends EFactory {
 	 * @generated
 	 */
 	PropertyValueAssertion createPropertyValueAssertion();
+
+	/**
+	 * Returns a new object of class '<em>Built In Predicate</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Built In Predicate</em>'.
+	 * @generated
+	 */
+	BuiltInPredicate createBuiltInPredicate();
 
 	/**
 	 * Returns a new object of class '<em>Type Predicate</em>'.

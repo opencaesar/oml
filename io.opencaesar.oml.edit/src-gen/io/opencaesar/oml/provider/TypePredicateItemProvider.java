@@ -20,14 +20,11 @@ package io.opencaesar.oml.provider;
 
 
 import io.opencaesar.oml.OmlPackage;
-import io.opencaesar.oml.TypePredicate;
-
 import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 
@@ -105,10 +102,7 @@ public class TypePredicateItemProvider extends UnaryPredicateItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((TypePredicate)object).getVariable();
-		return label == null || label.length() == 0 ?
-			getString("_UI_TypePredicate_type") :
-			getString("_UI_TypePredicate_type") + " " + label;
+		return getString("_UI_TypePredicate_type");
 	}
 
 

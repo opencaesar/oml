@@ -139,6 +139,8 @@ public class OmlValidator extends EObjectValidator {
 				return validateAssertion((Assertion)value, diagnostics, context);
 			case OmlPackage.PREDICATE:
 				return validatePredicate((Predicate)value, diagnostics, context);
+			case OmlPackage.ARGUMENT:
+				return validateArgument((Argument)value, diagnostics, context);
 			case OmlPackage.LITERAL:
 				return validateLiteral((Literal)value, diagnostics, context);
 			case OmlPackage.ONTOLOGY:
@@ -171,6 +173,8 @@ public class OmlValidator extends EObjectValidator {
 				return validateTerm((Term)value, diagnostics, context);
 			case OmlPackage.RULE:
 				return validateRule((Rule)value, diagnostics, context);
+			case OmlPackage.BUILT_IN:
+				return validateBuiltIn((BuiltIn)value, diagnostics, context);
 			case OmlPackage.SPECIALIZABLE_TERM:
 				return validateSpecializableTerm((SpecializableTerm)value, diagnostics, context);
 			case OmlPackage.PROPERTY:
@@ -241,6 +245,8 @@ public class OmlValidator extends EObjectValidator {
 				return validateUnaryPredicate((UnaryPredicate)value, diagnostics, context);
 			case OmlPackage.BINARY_PREDICATE:
 				return validateBinaryPredicate((BinaryPredicate)value, diagnostics, context);
+			case OmlPackage.BUILT_IN_PREDICATE:
+				return validateBuiltInPredicate((BuiltInPredicate)value, diagnostics, context);
 			case OmlPackage.TYPE_PREDICATE:
 				return validateTypePredicate((TypePredicate)value, diagnostics, context);
 			case OmlPackage.RELATION_ENTITY_PREDICATE:
@@ -443,6 +449,25 @@ public class OmlValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(predicate, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(predicate, diagnostics, context);
 		if (result || diagnostics != null) result &= validateElement_extraValidate(predicate, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateArgument(Argument argument, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		if (!validate_NoCircularContainment(argument, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms(argument, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(argument, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(argument, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(argument, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(argument, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(argument, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(argument, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(argument, diagnostics, context);
+		if (result || diagnostics != null) result &= validateElement_extraValidate(argument, diagnostics, context);
 		return result;
 	}
 
@@ -747,6 +772,25 @@ public class OmlValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(rule, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(rule, diagnostics, context);
 		if (result || diagnostics != null) result &= validateElement_extraValidate(rule, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateBuiltIn(BuiltIn builtIn, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		if (!validate_NoCircularContainment(builtIn, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms(builtIn, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(builtIn, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(builtIn, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(builtIn, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(builtIn, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(builtIn, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(builtIn, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(builtIn, diagnostics, context);
+		if (result || diagnostics != null) result &= validateElement_extraValidate(builtIn, diagnostics, context);
 		return result;
 	}
 
@@ -1412,6 +1456,25 @@ public class OmlValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(binaryPredicate, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(binaryPredicate, diagnostics, context);
 		if (result || diagnostics != null) result &= validateElement_extraValidate(binaryPredicate, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateBuiltInPredicate(BuiltInPredicate builtInPredicate, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		if (!validate_NoCircularContainment(builtInPredicate, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms(builtInPredicate, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(builtInPredicate, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(builtInPredicate, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(builtInPredicate, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(builtInPredicate, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(builtInPredicate, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(builtInPredicate, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(builtInPredicate, diagnostics, context);
+		if (result || diagnostics != null) result &= validateElement_extraValidate(builtInPredicate, diagnostics, context);
 		return result;
 	}
 

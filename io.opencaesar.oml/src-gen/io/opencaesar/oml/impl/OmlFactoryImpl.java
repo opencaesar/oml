@@ -80,11 +80,13 @@ public class OmlFactoryImpl extends EFactoryImpl implements OmlFactory {
 		switch (eClass.getClassifierID()) {
 			case OmlPackage.ANNOTATION: return createAnnotation();
 			case OmlPackage.IMPORT: return createImport();
+			case OmlPackage.ARGUMENT: return createArgument();
 			case OmlPackage.VOCABULARY: return createVocabulary();
 			case OmlPackage.VOCABULARY_BUNDLE: return createVocabularyBundle();
 			case OmlPackage.DESCRIPTION: return createDescription();
 			case OmlPackage.DESCRIPTION_BUNDLE: return createDescriptionBundle();
 			case OmlPackage.RULE: return createRule();
+			case OmlPackage.BUILT_IN: return createBuiltIn();
 			case OmlPackage.STRUCTURE: return createStructure();
 			case OmlPackage.ASPECT: return createAspect();
 			case OmlPackage.CONCEPT: return createConcept();
@@ -107,6 +109,7 @@ public class OmlFactoryImpl extends EFactoryImpl implements OmlFactory {
 			case OmlPackage.PROPERTY_VALUE_RESTRICTION_AXIOM: return createPropertyValueRestrictionAxiom();
 			case OmlPackage.TYPE_ASSERTION: return createTypeAssertion();
 			case OmlPackage.PROPERTY_VALUE_ASSERTION: return createPropertyValueAssertion();
+			case OmlPackage.BUILT_IN_PREDICATE: return createBuiltInPredicate();
 			case OmlPackage.TYPE_PREDICATE: return createTypePredicate();
 			case OmlPackage.RELATION_ENTITY_PREDICATE: return createRelationEntityPredicate();
 			case OmlPackage.PROPERTY_PREDICATE: return createPropertyPredicate();
@@ -212,6 +215,17 @@ public class OmlFactoryImpl extends EFactoryImpl implements OmlFactory {
 	 * @generated
 	 */
 	@Override
+	public Argument createArgument() {
+		ArgumentImpl argument = new ArgumentImpl();
+		return argument;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Vocabulary createVocabulary() {
 		VocabularyImpl vocabulary = new VocabularyImpl();
 		return vocabulary;
@@ -259,6 +273,17 @@ public class OmlFactoryImpl extends EFactoryImpl implements OmlFactory {
 	public Rule createRule() {
 		RuleImpl rule = new RuleImpl();
 		return rule;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public BuiltIn createBuiltIn() {
+		BuiltInImpl builtIn = new BuiltInImpl();
+		return builtIn;
 	}
 
 	/**
@@ -501,6 +526,17 @@ public class OmlFactoryImpl extends EFactoryImpl implements OmlFactory {
 	public PropertyValueAssertion createPropertyValueAssertion() {
 		PropertyValueAssertionImpl propertyValueAssertion = new PropertyValueAssertionImpl();
 		return propertyValueAssertion;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public BuiltInPredicate createBuiltInPredicate() {
+		BuiltInPredicateImpl builtInPredicate = new BuiltInPredicateImpl();
+		return builtInPredicate;
 	}
 
 	/**

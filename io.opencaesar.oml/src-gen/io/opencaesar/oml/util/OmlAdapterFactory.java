@@ -116,6 +116,10 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 				return createPredicateAdapter();
 			}
 			@Override
+			public Adapter caseArgument(Argument object) {
+				return createArgumentAdapter();
+			}
+			@Override
 			public Adapter caseLiteral(Literal object) {
 				return createLiteralAdapter();
 			}
@@ -178,6 +182,10 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseRule(Rule object) {
 				return createRuleAdapter();
+			}
+			@Override
+			public Adapter caseBuiltIn(BuiltIn object) {
+				return createBuiltInAdapter();
 			}
 			@Override
 			public Adapter caseSpecializableTerm(SpecializableTerm object) {
@@ -318,6 +326,10 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseBinaryPredicate(BinaryPredicate object) {
 				return createBinaryPredicateAdapter();
+			}
+			@Override
+			public Adapter caseBuiltInPredicate(BuiltInPredicate object) {
+				return createBuiltInPredicateAdapter();
 			}
 			@Override
 			public Adapter caseTypePredicate(TypePredicate object) {
@@ -488,6 +500,20 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createPredicateAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.Argument <em>Argument</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see io.opencaesar.oml.Argument
+	 * @generated
+	 */
+	public Adapter createArgumentAdapter() {
 		return null;
 	}
 
@@ -712,6 +738,20 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createRuleAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.BuiltIn <em>Built In</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see io.opencaesar.oml.BuiltIn
+	 * @generated
+	 */
+	public Adapter createBuiltInAdapter() {
 		return null;
 	}
 
@@ -1202,6 +1242,20 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createBinaryPredicateAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.BuiltInPredicate <em>Built In Predicate</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see io.opencaesar.oml.BuiltInPredicate
+	 * @generated
+	 */
+	public Adapter createBuiltInPredicateAdapter() {
 		return null;
 	}
 

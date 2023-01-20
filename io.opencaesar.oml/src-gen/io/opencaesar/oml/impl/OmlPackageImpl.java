@@ -20,11 +20,14 @@ package io.opencaesar.oml.impl;
 
 import io.opencaesar.oml.Annotation;
 import io.opencaesar.oml.AnnotationProperty;
+import io.opencaesar.oml.Argument;
 import io.opencaesar.oml.Aspect;
 import io.opencaesar.oml.Assertion;
 import io.opencaesar.oml.Axiom;
 import io.opencaesar.oml.BinaryPredicate;
 import io.opencaesar.oml.BooleanLiteral;
+import io.opencaesar.oml.BuiltIn;
+import io.opencaesar.oml.BuiltInPredicate;
 import io.opencaesar.oml.CardinalityRestrictionKind;
 import io.opencaesar.oml.Classifier;
 import io.opencaesar.oml.Concept;
@@ -179,6 +182,13 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass argumentEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass literalEClass = null;
 
 	/**
@@ -285,6 +295,13 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	private EClass ruleEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass builtInEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -530,6 +547,13 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	private EClass binaryPredicateEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass builtInPredicateEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1003,6 +1027,46 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
+	public EClass getArgument() {
+		return argumentEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getArgument_Variable() {
+		return (EAttribute)argumentEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getArgument_Literal() {
+		return (EReference)argumentEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getArgument_Instance() {
+		return (EReference)argumentEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getLiteral() {
 		return literalEClass;
 	}
@@ -1103,7 +1167,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EOperation getMember__GetIri() {
+	public EOperation getMember__IsRef() {
 		return memberEClass.getEOperations().get(1);
 	}
 
@@ -1113,8 +1177,18 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EOperation getMember__GetAbbreviatedIri() {
+	public EOperation getMember__GetIri() {
 		return memberEClass.getEOperations().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getMember__GetAbbreviatedIri() {
+		return memberEClass.getEOperations().get(3);
 	}
 
 	/**
@@ -1315,6 +1389,26 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	@Override
 	public EReference getRule_Consequent() {
 		return (EReference)ruleEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getBuiltIn() {
+		return builtInEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getBuiltIn_Ref() {
+		return (EReference)builtInEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -2773,8 +2867,8 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getUnaryPredicate_Variable() {
-		return (EAttribute)unaryPredicateEClass.getEStructuralFeatures().get(0);
+	public EReference getUnaryPredicate_Argument() {
+		return (EReference)unaryPredicateEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -2793,8 +2887,8 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getBinaryPredicate_Variable1() {
-		return (EAttribute)binaryPredicateEClass.getEStructuralFeatures().get(0);
+	public EReference getBinaryPredicate_Argument1() {
+		return (EReference)binaryPredicateEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -2803,8 +2897,8 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EAttribute getBinaryPredicate_Variable2() {
-		return (EAttribute)binaryPredicateEClass.getEStructuralFeatures().get(1);
+	public EReference getBinaryPredicate_Argument2() {
+		return (EReference)binaryPredicateEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -2813,8 +2907,28 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getBinaryPredicate_Instance2() {
-		return (EReference)binaryPredicateEClass.getEStructuralFeatures().get(2);
+	public EClass getBuiltInPredicate() {
+		return builtInPredicateEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getBuiltInPredicate_BuiltIn() {
+		return (EReference)builtInPredicateEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getBuiltInPredicate_Arguments() {
+		return (EReference)builtInPredicateEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -2853,7 +2967,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getRelationEntityPredicate_Entity() {
+	public EReference getRelationEntityPredicate_Type() {
 		return (EReference)relationEntityPredicateEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -2875,16 +2989,6 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	@Override
 	public EReference getPropertyPredicate_Property() {
 		return (EReference)propertyPredicateEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getPropertyPredicate_Literal2() {
-		return (EReference)propertyPredicateEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -3180,6 +3284,11 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		createEReference(predicateEClass, PREDICATE__ANTECEDENT_RULE);
 		createEReference(predicateEClass, PREDICATE__CONSEQUENT_RULE);
 
+		argumentEClass = createEClass(ARGUMENT);
+		createEAttribute(argumentEClass, ARGUMENT__VARIABLE);
+		createEReference(argumentEClass, ARGUMENT__LITERAL);
+		createEReference(argumentEClass, ARGUMENT__INSTANCE);
+
 		literalEClass = createEClass(LITERAL);
 
 		ontologyEClass = createEClass(ONTOLOGY);
@@ -3192,6 +3301,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		memberEClass = createEClass(MEMBER);
 		createEAttribute(memberEClass, MEMBER__NAME);
 		createEOperation(memberEClass, MEMBER___GET_REF);
+		createEOperation(memberEClass, MEMBER___IS_REF);
 		createEOperation(memberEClass, MEMBER___GET_IRI);
 		createEOperation(memberEClass, MEMBER___GET_ABBREVIATED_IRI);
 
@@ -3227,6 +3337,9 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		createEReference(ruleEClass, RULE__REF);
 		createEReference(ruleEClass, RULE__ANTECEDENT);
 		createEReference(ruleEClass, RULE__CONSEQUENT);
+
+		builtInEClass = createEClass(BUILT_IN);
+		createEReference(builtInEClass, BUILT_IN__REF);
 
 		specializableTermEClass = createEClass(SPECIALIZABLE_TERM);
 		createEReference(specializableTermEClass, SPECIALIZABLE_TERM__OWNED_SPECIALIZATIONS);
@@ -3406,22 +3519,24 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		createEOperation(propertyValueAssertionEClass, PROPERTY_VALUE_ASSERTION___GET_VALUE);
 
 		unaryPredicateEClass = createEClass(UNARY_PREDICATE);
-		createEAttribute(unaryPredicateEClass, UNARY_PREDICATE__VARIABLE);
+		createEReference(unaryPredicateEClass, UNARY_PREDICATE__ARGUMENT);
 
 		binaryPredicateEClass = createEClass(BINARY_PREDICATE);
-		createEAttribute(binaryPredicateEClass, BINARY_PREDICATE__VARIABLE1);
-		createEAttribute(binaryPredicateEClass, BINARY_PREDICATE__VARIABLE2);
-		createEReference(binaryPredicateEClass, BINARY_PREDICATE__INSTANCE2);
+		createEReference(binaryPredicateEClass, BINARY_PREDICATE__ARGUMENT1);
+		createEReference(binaryPredicateEClass, BINARY_PREDICATE__ARGUMENT2);
+
+		builtInPredicateEClass = createEClass(BUILT_IN_PREDICATE);
+		createEReference(builtInPredicateEClass, BUILT_IN_PREDICATE__BUILT_IN);
+		createEReference(builtInPredicateEClass, BUILT_IN_PREDICATE__ARGUMENTS);
 
 		typePredicateEClass = createEClass(TYPE_PREDICATE);
 		createEReference(typePredicateEClass, TYPE_PREDICATE__TYPE);
 
 		relationEntityPredicateEClass = createEClass(RELATION_ENTITY_PREDICATE);
-		createEReference(relationEntityPredicateEClass, RELATION_ENTITY_PREDICATE__ENTITY);
+		createEReference(relationEntityPredicateEClass, RELATION_ENTITY_PREDICATE__TYPE);
 
 		propertyPredicateEClass = createEClass(PROPERTY_PREDICATE);
 		createEReference(propertyPredicateEClass, PROPERTY_PREDICATE__PROPERTY);
-		createEReference(propertyPredicateEClass, PROPERTY_PREDICATE__LITERAL2);
 
 		sameAsPredicateEClass = createEClass(SAME_AS_PREDICATE);
 
@@ -3496,6 +3611,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		axiomEClass.getESuperTypes().add(this.getElement());
 		assertionEClass.getESuperTypes().add(this.getElement());
 		predicateEClass.getESuperTypes().add(this.getElement());
+		argumentEClass.getESuperTypes().add(this.getElement());
 		literalEClass.getESuperTypes().add(this.getElement());
 		ontologyEClass.getESuperTypes().add(this.getIdentifiedElement());
 		memberEClass.getESuperTypes().add(this.getIdentifiedElement());
@@ -3514,6 +3630,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		descriptionStatementEClass.getESuperTypes().add(this.getDescriptionMember());
 		termEClass.getESuperTypes().add(this.getVocabularyMember());
 		ruleEClass.getESuperTypes().add(this.getVocabularyStatement());
+		builtInEClass.getESuperTypes().add(this.getVocabularyStatement());
 		specializableTermEClass.getESuperTypes().add(this.getTerm());
 		specializableTermEClass.getESuperTypes().add(this.getVocabularyStatement());
 		propertyEClass.getESuperTypes().add(this.getTerm());
@@ -3556,6 +3673,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		propertyValueAssertionEClass.getESuperTypes().add(this.getAssertion());
 		unaryPredicateEClass.getESuperTypes().add(this.getPredicate());
 		binaryPredicateEClass.getESuperTypes().add(this.getPredicate());
+		builtInPredicateEClass.getESuperTypes().add(this.getPredicate());
 		typePredicateEClass.getESuperTypes().add(this.getUnaryPredicate());
 		relationEntityPredicateEClass.getESuperTypes().add(this.getUnaryPredicate());
 		relationEntityPredicateEClass.getESuperTypes().add(this.getBinaryPredicate());
@@ -3616,6 +3734,11 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		initEReference(getPredicate_AntecedentRule(), this.getRule(), this.getRule_Antecedent(), "antecedentRule", null, 0, 1, Predicate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPredicate_ConsequentRule(), this.getRule(), this.getRule_Consequent(), "consequentRule", null, 0, 1, Predicate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(argumentEClass, Argument.class, "Argument", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getArgument_Variable(), this.getID(), "variable", null, 0, 1, Argument.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getArgument_Literal(), this.getLiteral(), null, "literal", null, 0, 1, Argument.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getArgument_Instance(), this.getNamedInstance(), null, "instance", null, 0, 1, Argument.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(literalEClass, Literal.class, "Literal", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(ontologyEClass, Ontology.class, "Ontology", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -3631,6 +3754,8 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		initEAttribute(getMember_Name(), this.getID(), "name", null, 0, 1, Member.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEOperation(getMember__GetRef(), this.getMember(), "getRef", 0, 1, !IS_UNIQUE, IS_ORDERED);
+
+		initEOperation(getMember__IsRef(), theEcorePackage.getEBoolean(), "isRef", 0, 1, !IS_UNIQUE, IS_ORDERED);
 
 		initEOperation(getMember__GetIri(), theEcorePackage.getEString(), "getIri", 0, 1, !IS_UNIQUE, IS_ORDERED);
 
@@ -3668,6 +3793,9 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		initEReference(getRule_Ref(), this.getRule(), null, "ref", null, 0, 1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRule_Antecedent(), this.getPredicate(), this.getPredicate_AntecedentRule(), "antecedent", null, 0, -1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRule_Consequent(), this.getPredicate(), this.getPredicate_ConsequentRule(), "consequent", null, 0, -1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(builtInEClass, BuiltIn.class, "BuiltIn", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getBuiltIn_Ref(), this.getBuiltIn(), null, "ref", null, 0, 1, BuiltIn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(specializableTermEClass, SpecializableTerm.class, "SpecializableTerm", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSpecializableTerm_OwnedSpecializations(), this.getSpecializationAxiom(), this.getSpecializationAxiom_OwningTerm(), "ownedSpecializations", null, 0, -1, SpecializableTerm.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3886,22 +4014,24 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		initEOperation(getPropertyValueAssertion__GetValue(), this.getElement(), "getValue", 0, 1, !IS_UNIQUE, IS_ORDERED);
 
 		initEClass(unaryPredicateEClass, UnaryPredicate.class, "UnaryPredicate", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getUnaryPredicate_Variable(), this.getID(), "variable", null, 1, 1, UnaryPredicate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getUnaryPredicate_Argument(), this.getArgument(), null, "argument", null, 1, 1, UnaryPredicate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(binaryPredicateEClass, BinaryPredicate.class, "BinaryPredicate", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getBinaryPredicate_Variable1(), this.getID(), "variable1", null, 1, 1, BinaryPredicate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getBinaryPredicate_Variable2(), this.getID(), "variable2", null, 0, 1, BinaryPredicate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getBinaryPredicate_Instance2(), this.getNamedInstance(), null, "instance2", null, 0, 1, BinaryPredicate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getBinaryPredicate_Argument1(), this.getArgument(), null, "argument1", null, 1, 1, BinaryPredicate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getBinaryPredicate_Argument2(), this.getArgument(), null, "argument2", null, 1, 1, BinaryPredicate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(builtInPredicateEClass, BuiltInPredicate.class, "BuiltInPredicate", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getBuiltInPredicate_BuiltIn(), this.getBuiltIn(), null, "builtIn", null, 1, 1, BuiltInPredicate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getBuiltInPredicate_Arguments(), this.getArgument(), null, "arguments", null, 1, -1, BuiltInPredicate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(typePredicateEClass, TypePredicate.class, "TypePredicate", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTypePredicate_Type(), this.getType(), null, "type", null, 1, 1, TypePredicate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(relationEntityPredicateEClass, RelationEntityPredicate.class, "RelationEntityPredicate", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getRelationEntityPredicate_Entity(), this.getRelationEntity(), null, "entity", null, 1, 1, RelationEntityPredicate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getRelationEntityPredicate_Type(), this.getRelationEntity(), null, "type", null, 1, 1, RelationEntityPredicate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(propertyPredicateEClass, PropertyPredicate.class, "PropertyPredicate", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPropertyPredicate_Property(), this.getProperty(), null, "property", null, 1, 1, PropertyPredicate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getPropertyPredicate_Literal2(), this.getLiteral(), null, "literal2", null, 0, 1, PropertyPredicate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(sameAsPredicateEClass, SameAsPredicate.class, "SameAsPredicate", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -4053,6 +4183,12 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 			   "heading", "Rules"
 		   });
 		addAnnotation
+		  (argumentEClass,
+		   source,
+		   new String[] {
+			   "heading", "Rules"
+		   });
+		addAnnotation
 		  (literalEClass,
 		   source,
 		   new String[] {
@@ -4144,6 +4280,12 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		   });
 		addAnnotation
 		  (ruleEClass,
+		   source,
+		   new String[] {
+			   "heading", "Rules"
+		   });
+		addAnnotation
+		  (builtInEClass,
 		   source,
 		   new String[] {
 			   "heading", "Rules"
@@ -4354,6 +4496,12 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		   });
 		addAnnotation
 		  (binaryPredicateEClass,
+		   source,
+		   new String[] {
+			   "heading", "Rules"
+		   });
+		addAnnotation
+		  (builtInPredicateEClass,
 		   source,
 		   new String[] {
 			   "heading", "Rules"

@@ -595,6 +595,79 @@ public interface OmlPackage extends EPackage {
 	int PREDICATE_OPERATION_COUNT = ELEMENT_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link io.opencaesar.oml.impl.ArgumentImpl <em>Argument</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see io.opencaesar.oml.impl.ArgumentImpl
+	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getArgument()
+	 * @generated
+	 */
+	int ARGUMENT = 8;
+
+	/**
+	 * The feature id for the '<em><b>Variable</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARGUMENT__VARIABLE = ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Literal</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARGUMENT__LITERAL = ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Instance</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARGUMENT__INSTANCE = ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>Argument</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARGUMENT_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 3;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARGUMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = ELEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Get Ontology</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARGUMENT___GET_ONTOLOGY = ELEMENT___GET_ONTOLOGY;
+
+	/**
+	 * The number of operations of the '<em>Argument</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARGUMENT_OPERATION_COUNT = ELEMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.impl.LiteralImpl <em>Literal</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -602,7 +675,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getLiteral()
 	 * @generated
 	 */
-	int LITERAL = 8;
+	int LITERAL = 9;
 
 	/**
 	 * The number of structural features of the '<em>Literal</em>' class.
@@ -648,7 +721,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getOntology()
 	 * @generated
 	 */
-	int ONTOLOGY = 9;
+	int ONTOLOGY = 10;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -748,7 +821,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getMember()
 	 * @generated
 	 */
-	int MEMBER = 10;
+	int MEMBER = 11;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -805,13 +878,22 @@ public interface OmlPackage extends EPackage {
 	int MEMBER___GET_REF = IDENTIFIED_ELEMENT_OPERATION_COUNT + 0;
 
 	/**
+	 * The operation id for the '<em>Is Ref</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEMBER___IS_REF = IDENTIFIED_ELEMENT_OPERATION_COUNT + 1;
+
+	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MEMBER___GET_IRI = IDENTIFIED_ELEMENT_OPERATION_COUNT + 1;
+	int MEMBER___GET_IRI = IDENTIFIED_ELEMENT_OPERATION_COUNT + 2;
 
 	/**
 	 * The operation id for the '<em>Get Abbreviated Iri</em>' operation.
@@ -820,7 +902,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MEMBER___GET_ABBREVIATED_IRI = IDENTIFIED_ELEMENT_OPERATION_COUNT + 2;
+	int MEMBER___GET_ABBREVIATED_IRI = IDENTIFIED_ELEMENT_OPERATION_COUNT + 3;
 
 	/**
 	 * The number of operations of the '<em>Member</em>' class.
@@ -829,7 +911,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MEMBER_OPERATION_COUNT = IDENTIFIED_ELEMENT_OPERATION_COUNT + 3;
+	int MEMBER_OPERATION_COUNT = IDENTIFIED_ELEMENT_OPERATION_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.impl.VocabularyBoxImpl <em>Vocabulary Box</em>}' class.
@@ -839,7 +921,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getVocabularyBox()
 	 * @generated
 	 */
-	int VOCABULARY_BOX = 11;
+	int VOCABULARY_BOX = 12;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -939,7 +1021,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDescriptionBox()
 	 * @generated
 	 */
-	int DESCRIPTION_BOX = 12;
+	int DESCRIPTION_BOX = 13;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -1039,7 +1121,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getVocabulary()
 	 * @generated
 	 */
-	int VOCABULARY = 13;
+	int VOCABULARY = 14;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -1148,7 +1230,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getVocabularyBundle()
 	 * @generated
 	 */
-	int VOCABULARY_BUNDLE = 14;
+	int VOCABULARY_BUNDLE = 15;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -1248,7 +1330,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDescription()
 	 * @generated
 	 */
-	int DESCRIPTION = 15;
+	int DESCRIPTION = 16;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -1357,7 +1439,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDescriptionBundle()
 	 * @generated
 	 */
-	int DESCRIPTION_BUNDLE = 16;
+	int DESCRIPTION_BUNDLE = 17;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -1457,7 +1539,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getStatement()
 	 * @generated
 	 */
-	int STATEMENT = 17;
+	int STATEMENT = 18;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -1514,6 +1596,15 @@ public interface OmlPackage extends EPackage {
 	int STATEMENT___GET_REF = MEMBER___GET_REF;
 
 	/**
+	 * The operation id for the '<em>Is Ref</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATEMENT___IS_REF = MEMBER___IS_REF;
+
+	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1548,7 +1639,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getVocabularyMember()
 	 * @generated
 	 */
-	int VOCABULARY_MEMBER = 18;
+	int VOCABULARY_MEMBER = 19;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -1605,6 +1696,15 @@ public interface OmlPackage extends EPackage {
 	int VOCABULARY_MEMBER___GET_REF = MEMBER___GET_REF;
 
 	/**
+	 * The operation id for the '<em>Is Ref</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOCABULARY_MEMBER___IS_REF = MEMBER___IS_REF;
+
+	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1639,7 +1739,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDescriptionMember()
 	 * @generated
 	 */
-	int DESCRIPTION_MEMBER = 19;
+	int DESCRIPTION_MEMBER = 20;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -1696,6 +1796,15 @@ public interface OmlPackage extends EPackage {
 	int DESCRIPTION_MEMBER___GET_REF = MEMBER___GET_REF;
 
 	/**
+	 * The operation id for the '<em>Is Ref</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_MEMBER___IS_REF = MEMBER___IS_REF;
+
+	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1730,7 +1839,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getVocabularyStatement()
 	 * @generated
 	 */
-	int VOCABULARY_STATEMENT = 20;
+	int VOCABULARY_STATEMENT = 21;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -1796,6 +1905,15 @@ public interface OmlPackage extends EPackage {
 	int VOCABULARY_STATEMENT___GET_REF = STATEMENT___GET_REF;
 
 	/**
+	 * The operation id for the '<em>Is Ref</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOCABULARY_STATEMENT___IS_REF = STATEMENT___IS_REF;
+
+	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1830,7 +1948,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDescriptionStatement()
 	 * @generated
 	 */
-	int DESCRIPTION_STATEMENT = 21;
+	int DESCRIPTION_STATEMENT = 22;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -1896,6 +2014,15 @@ public interface OmlPackage extends EPackage {
 	int DESCRIPTION_STATEMENT___GET_REF = STATEMENT___GET_REF;
 
 	/**
+	 * The operation id for the '<em>Is Ref</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_STATEMENT___IS_REF = STATEMENT___IS_REF;
+
+	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1930,7 +2057,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getTerm()
 	 * @generated
 	 */
-	int TERM = 22;
+	int TERM = 23;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -1987,6 +2114,15 @@ public interface OmlPackage extends EPackage {
 	int TERM___GET_REF = VOCABULARY_MEMBER___GET_REF;
 
 	/**
+	 * The operation id for the '<em>Is Ref</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TERM___IS_REF = VOCABULARY_MEMBER___IS_REF;
+
+	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2021,7 +2157,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRule()
 	 * @generated
 	 */
-	int RULE = 23;
+	int RULE = 24;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -2114,6 +2250,15 @@ public interface OmlPackage extends EPackage {
 	int RULE___GET_REF = VOCABULARY_STATEMENT___GET_REF;
 
 	/**
+	 * The operation id for the '<em>Is Ref</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RULE___IS_REF = VOCABULARY_STATEMENT___IS_REF;
+
+	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2141,6 +2286,124 @@ public interface OmlPackage extends EPackage {
 	int RULE_OPERATION_COUNT = VOCABULARY_STATEMENT_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link io.opencaesar.oml.impl.BuiltInImpl <em>Built In</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see io.opencaesar.oml.impl.BuiltInImpl
+	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getBuiltIn()
+	 * @generated
+	 */
+	int BUILT_IN = 25;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUILT_IN__OWNED_ANNOTATIONS = VOCABULARY_STATEMENT__OWNED_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUILT_IN__NAME = VOCABULARY_STATEMENT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Owning Vocabulary</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUILT_IN__OWNING_VOCABULARY = VOCABULARY_STATEMENT__OWNING_VOCABULARY;
+
+	/**
+	 * The feature id for the '<em><b>Ref</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUILT_IN__REF = VOCABULARY_STATEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Built In</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUILT_IN_FEATURE_COUNT = VOCABULARY_STATEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUILT_IN___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = VOCABULARY_STATEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Get Ontology</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUILT_IN___GET_ONTOLOGY = VOCABULARY_STATEMENT___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Get Ref</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUILT_IN___GET_REF = VOCABULARY_STATEMENT___GET_REF;
+
+	/**
+	 * The operation id for the '<em>Is Ref</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUILT_IN___IS_REF = VOCABULARY_STATEMENT___IS_REF;
+
+	/**
+	 * The operation id for the '<em>Get Iri</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUILT_IN___GET_IRI = VOCABULARY_STATEMENT___GET_IRI;
+
+	/**
+	 * The operation id for the '<em>Get Abbreviated Iri</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUILT_IN___GET_ABBREVIATED_IRI = VOCABULARY_STATEMENT___GET_ABBREVIATED_IRI;
+
+	/**
+	 * The number of operations of the '<em>Built In</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUILT_IN_OPERATION_COUNT = VOCABULARY_STATEMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.impl.SpecializableTermImpl <em>Specializable Term</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2148,7 +2411,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getSpecializableTerm()
 	 * @generated
 	 */
-	int SPECIALIZABLE_TERM = 24;
+	int SPECIALIZABLE_TERM = 26;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -2223,6 +2486,15 @@ public interface OmlPackage extends EPackage {
 	int SPECIALIZABLE_TERM___GET_REF = TERM___GET_REF;
 
 	/**
+	 * The operation id for the '<em>Is Ref</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SPECIALIZABLE_TERM___IS_REF = TERM___IS_REF;
+
+	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2257,7 +2529,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getProperty()
 	 * @generated
 	 */
-	int PROPERTY = 25;
+	int PROPERTY = 27;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -2314,6 +2586,15 @@ public interface OmlPackage extends EPackage {
 	int PROPERTY___GET_REF = TERM___GET_REF;
 
 	/**
+	 * The operation id for the '<em>Is Ref</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY___IS_REF = TERM___IS_REF;
+
+	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2348,7 +2629,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getType()
 	 * @generated
 	 */
-	int TYPE = 26;
+	int TYPE = 28;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -2423,6 +2704,15 @@ public interface OmlPackage extends EPackage {
 	int TYPE___GET_REF = SPECIALIZABLE_TERM___GET_REF;
 
 	/**
+	 * The operation id for the '<em>Is Ref</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE___IS_REF = SPECIALIZABLE_TERM___IS_REF;
+
+	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2457,7 +2747,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRelationBase()
 	 * @generated
 	 */
-	int RELATION_BASE = 27;
+	int RELATION_BASE = 29;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -2622,6 +2912,15 @@ public interface OmlPackage extends EPackage {
 	int RELATION_BASE___GET_REF = SPECIALIZABLE_TERM___GET_REF;
 
 	/**
+	 * The operation id for the '<em>Is Ref</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_BASE___IS_REF = SPECIALIZABLE_TERM___IS_REF;
+
+	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2656,7 +2955,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getClassifier()
 	 * @generated
 	 */
-	int CLASSIFIER = 28;
+	int CLASSIFIER = 30;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -2740,6 +3039,15 @@ public interface OmlPackage extends EPackage {
 	int CLASSIFIER___GET_REF = TYPE___GET_REF;
 
 	/**
+	 * The operation id for the '<em>Is Ref</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASSIFIER___IS_REF = TYPE___IS_REF;
+
+	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2774,7 +3082,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getScalar()
 	 * @generated
 	 */
-	int SCALAR = 29;
+	int SCALAR = 31;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -2849,6 +3157,15 @@ public interface OmlPackage extends EPackage {
 	int SCALAR___GET_REF = TYPE___GET_REF;
 
 	/**
+	 * The operation id for the '<em>Is Ref</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALAR___IS_REF = TYPE___IS_REF;
+
+	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2883,7 +3200,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getEntity()
 	 * @generated
 	 */
-	int ENTITY = 30;
+	int ENTITY = 32;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -2976,6 +3293,15 @@ public interface OmlPackage extends EPackage {
 	int ENTITY___GET_REF = CLASSIFIER___GET_REF;
 
 	/**
+	 * The operation id for the '<em>Is Ref</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENTITY___IS_REF = CLASSIFIER___IS_REF;
+
+	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3010,7 +3336,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getStructure()
 	 * @generated
 	 */
-	int STRUCTURE = 31;
+	int STRUCTURE = 33;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -3103,6 +3429,15 @@ public interface OmlPackage extends EPackage {
 	int STRUCTURE___GET_REF = CLASSIFIER___GET_REF;
 
 	/**
+	 * The operation id for the '<em>Is Ref</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURE___IS_REF = CLASSIFIER___IS_REF;
+
+	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3137,7 +3472,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getAspect()
 	 * @generated
 	 */
-	int ASPECT = 32;
+	int ASPECT = 34;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -3239,6 +3574,15 @@ public interface OmlPackage extends EPackage {
 	int ASPECT___GET_REF = ENTITY___GET_REF;
 
 	/**
+	 * The operation id for the '<em>Is Ref</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASPECT___IS_REF = ENTITY___IS_REF;
+
+	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3273,7 +3617,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getConcept()
 	 * @generated
 	 */
-	int CONCEPT = 33;
+	int CONCEPT = 35;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -3384,6 +3728,15 @@ public interface OmlPackage extends EPackage {
 	int CONCEPT___GET_REF = ENTITY___GET_REF;
 
 	/**
+	 * The operation id for the '<em>Is Ref</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONCEPT___IS_REF = ENTITY___IS_REF;
+
+	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3418,7 +3771,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRelationEntity()
 	 * @generated
 	 */
-	int RELATION_ENTITY = 34;
+	int RELATION_ENTITY = 36;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -3619,6 +3972,15 @@ public interface OmlPackage extends EPackage {
 	int RELATION_ENTITY___GET_REF = ENTITY___GET_REF;
 
 	/**
+	 * The operation id for the '<em>Is Ref</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_ENTITY___IS_REF = ENTITY___IS_REF;
+
+	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3653,7 +4015,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getFacetedScalar()
 	 * @generated
 	 */
-	int FACETED_SCALAR = 35;
+	int FACETED_SCALAR = 37;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -3818,6 +4180,15 @@ public interface OmlPackage extends EPackage {
 	int FACETED_SCALAR___GET_REF = SCALAR___GET_REF;
 
 	/**
+	 * The operation id for the '<em>Is Ref</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FACETED_SCALAR___IS_REF = SCALAR___IS_REF;
+
+	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3852,7 +4223,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getEnumeratedScalar()
 	 * @generated
 	 */
-	int ENUMERATED_SCALAR = 36;
+	int ENUMERATED_SCALAR = 38;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -3945,6 +4316,15 @@ public interface OmlPackage extends EPackage {
 	int ENUMERATED_SCALAR___GET_REF = SCALAR___GET_REF;
 
 	/**
+	 * The operation id for the '<em>Is Ref</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUMERATED_SCALAR___IS_REF = SCALAR___IS_REF;
+
+	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3979,7 +4359,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getAnnotationProperty()
 	 * @generated
 	 */
-	int ANNOTATION_PROPERTY = 37;
+	int ANNOTATION_PROPERTY = 39;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -4063,6 +4443,15 @@ public interface OmlPackage extends EPackage {
 	int ANNOTATION_PROPERTY___GET_REF = PROPERTY___GET_REF;
 
 	/**
+	 * The operation id for the '<em>Is Ref</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANNOTATION_PROPERTY___IS_REF = PROPERTY___IS_REF;
+
+	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4097,7 +4486,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getSemanticProperty()
 	 * @generated
 	 */
-	int SEMANTIC_PROPERTY = 38;
+	int SEMANTIC_PROPERTY = 40;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -4152,6 +4541,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int SEMANTIC_PROPERTY___GET_REF = PROPERTY___GET_REF;
+
+	/**
+	 * The operation id for the '<em>Is Ref</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEMANTIC_PROPERTY___IS_REF = PROPERTY___IS_REF;
 
 	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
@@ -4215,7 +4613,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getScalarProperty()
 	 * @generated
 	 */
-	int SCALAR_PROPERTY = 39;
+	int SCALAR_PROPERTY = 41;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -4326,6 +4724,15 @@ public interface OmlPackage extends EPackage {
 	int SCALAR_PROPERTY___GET_REF = SEMANTIC_PROPERTY___GET_REF;
 
 	/**
+	 * The operation id for the '<em>Is Ref</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALAR_PROPERTY___IS_REF = SEMANTIC_PROPERTY___IS_REF;
+
+	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4387,7 +4794,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getStructuredProperty()
 	 * @generated
 	 */
-	int STRUCTURED_PROPERTY = 40;
+	int STRUCTURED_PROPERTY = 42;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -4498,6 +4905,15 @@ public interface OmlPackage extends EPackage {
 	int STRUCTURED_PROPERTY___GET_REF = SEMANTIC_PROPERTY___GET_REF;
 
 	/**
+	 * The operation id for the '<em>Is Ref</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURED_PROPERTY___IS_REF = SEMANTIC_PROPERTY___IS_REF;
+
+	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4559,7 +4975,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRelation()
 	 * @generated
 	 */
-	int RELATION = 41;
+	int RELATION = 43;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -4614,6 +5030,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int RELATION___GET_REF = SEMANTIC_PROPERTY___GET_REF;
+
+	/**
+	 * The operation id for the '<em>Is Ref</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION___IS_REF = SEMANTIC_PROPERTY___IS_REF;
 
 	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
@@ -4740,7 +5165,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getForwardRelation()
 	 * @generated
 	 */
-	int FORWARD_RELATION = 42;
+	int FORWARD_RELATION = 44;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -4795,6 +5220,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int FORWARD_RELATION___GET_ONTOLOGY = RELATION___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Is Ref</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORWARD_RELATION___IS_REF = RELATION___IS_REF;
 
 	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
@@ -4930,7 +5364,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getReverseRelation()
 	 * @generated
 	 */
-	int REVERSE_RELATION = 43;
+	int REVERSE_RELATION = 45;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -4985,6 +5419,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int REVERSE_RELATION___GET_ONTOLOGY = RELATION___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Is Ref</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REVERSE_RELATION___IS_REF = RELATION___IS_REF;
 
 	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
@@ -5120,7 +5563,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getUnreifiedRelation()
 	 * @generated
 	 */
-	int UNREIFIED_RELATION = 44;
+	int UNREIFIED_RELATION = 46;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -5294,6 +5737,15 @@ public interface OmlPackage extends EPackage {
 	int UNREIFIED_RELATION___GET_REF = RELATION___GET_REF;
 
 	/**
+	 * The operation id for the '<em>Is Ref</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNREIFIED_RELATION___IS_REF = RELATION___IS_REF;
+
+	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5418,7 +5870,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getNamedInstance()
 	 * @generated
 	 */
-	int NAMED_INSTANCE = 45;
+	int NAMED_INSTANCE = 47;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -5502,6 +5954,15 @@ public interface OmlPackage extends EPackage {
 	int NAMED_INSTANCE___GET_REF = DESCRIPTION_STATEMENT___GET_REF;
 
 	/**
+	 * The operation id for the '<em>Is Ref</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAMED_INSTANCE___IS_REF = DESCRIPTION_STATEMENT___IS_REF;
+
+	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5536,7 +5997,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getConceptInstance()
 	 * @generated
 	 */
-	int CONCEPT_INSTANCE = 46;
+	int CONCEPT_INSTANCE = 48;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -5629,6 +6090,15 @@ public interface OmlPackage extends EPackage {
 	int CONCEPT_INSTANCE___GET_REF = NAMED_INSTANCE___GET_REF;
 
 	/**
+	 * The operation id for the '<em>Is Ref</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONCEPT_INSTANCE___IS_REF = NAMED_INSTANCE___IS_REF;
+
+	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5663,7 +6133,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRelationInstance()
 	 * @generated
 	 */
-	int RELATION_INSTANCE = 47;
+	int RELATION_INSTANCE = 49;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -5774,6 +6244,15 @@ public interface OmlPackage extends EPackage {
 	int RELATION_INSTANCE___GET_REF = NAMED_INSTANCE___GET_REF;
 
 	/**
+	 * The operation id for the '<em>Is Ref</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_INSTANCE___IS_REF = NAMED_INSTANCE___IS_REF;
+
+	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5808,7 +6287,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getStructureInstance()
 	 * @generated
 	 */
-	int STRUCTURE_INSTANCE = 48;
+	int STRUCTURE_INSTANCE = 50;
 
 	/**
 	 * The feature id for the '<em><b>Owned Property Values</b></em>' containment reference list.
@@ -5890,7 +6369,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getKeyAxiom()
 	 * @generated
 	 */
-	int KEY_AXIOM = 49;
+	int KEY_AXIOM = 51;
 
 	/**
 	 * The feature id for the '<em><b>Properties</b></em>' reference list.
@@ -5954,7 +6433,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getSpecializationAxiom()
 	 * @generated
 	 */
-	int SPECIALIZATION_AXIOM = 50;
+	int SPECIALIZATION_AXIOM = 52;
 
 	/**
 	 * The feature id for the '<em><b>Specialized Term</b></em>' reference.
@@ -6018,7 +6497,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getPropertyRestrictionAxiom()
 	 * @generated
 	 */
-	int PROPERTY_RESTRICTION_AXIOM = 51;
+	int PROPERTY_RESTRICTION_AXIOM = 53;
 
 	/**
 	 * The feature id for the '<em><b>Owning Classifier</b></em>' container reference.
@@ -6082,7 +6561,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getPropertyRangeRestrictionAxiom()
 	 * @generated
 	 */
-	int PROPERTY_RANGE_RESTRICTION_AXIOM = 52;
+	int PROPERTY_RANGE_RESTRICTION_AXIOM = 54;
 
 	/**
 	 * The feature id for the '<em><b>Owning Classifier</b></em>' container reference.
@@ -6164,7 +6643,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getPropertyCardinalityRestrictionAxiom()
 	 * @generated
 	 */
-	int PROPERTY_CARDINALITY_RESTRICTION_AXIOM = 53;
+	int PROPERTY_CARDINALITY_RESTRICTION_AXIOM = 55;
 
 	/**
 	 * The feature id for the '<em><b>Owning Classifier</b></em>' container reference.
@@ -6255,7 +6734,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getPropertyValueRestrictionAxiom()
 	 * @generated
 	 */
-	int PROPERTY_VALUE_RESTRICTION_AXIOM = 54;
+	int PROPERTY_VALUE_RESTRICTION_AXIOM = 56;
 
 	/**
 	 * The feature id for the '<em><b>Owning Classifier</b></em>' container reference.
@@ -6355,7 +6834,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getTypeAssertion()
 	 * @generated
 	 */
-	int TYPE_ASSERTION = 55;
+	int TYPE_ASSERTION = 57;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -6419,7 +6898,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getPropertyValueAssertion()
 	 * @generated
 	 */
-	int PROPERTY_VALUE_ASSERTION = 56;
+	int PROPERTY_VALUE_ASSERTION = 58;
 
 	/**
 	 * The feature id for the '<em><b>Owning Instance</b></em>' container reference.
@@ -6519,7 +6998,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getUnaryPredicate()
 	 * @generated
 	 */
-	int UNARY_PREDICATE = 57;
+	int UNARY_PREDICATE = 59;
 
 	/**
 	 * The feature id for the '<em><b>Antecedent Rule</b></em>' container reference.
@@ -6540,13 +7019,13 @@ public interface OmlPackage extends EPackage {
 	int UNARY_PREDICATE__CONSEQUENT_RULE = PREDICATE__CONSEQUENT_RULE;
 
 	/**
-	 * The feature id for the '<em><b>Variable</b></em>' attribute.
+	 * The feature id for the '<em><b>Argument</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int UNARY_PREDICATE__VARIABLE = PREDICATE_FEATURE_COUNT + 0;
+	int UNARY_PREDICATE__ARGUMENT = PREDICATE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Unary Predicate</em>' class.
@@ -6592,7 +7071,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getBinaryPredicate()
 	 * @generated
 	 */
-	int BINARY_PREDICATE = 58;
+	int BINARY_PREDICATE = 60;
 
 	/**
 	 * The feature id for the '<em><b>Antecedent Rule</b></em>' container reference.
@@ -6613,31 +7092,22 @@ public interface OmlPackage extends EPackage {
 	int BINARY_PREDICATE__CONSEQUENT_RULE = PREDICATE__CONSEQUENT_RULE;
 
 	/**
-	 * The feature id for the '<em><b>Variable1</b></em>' attribute.
+	 * The feature id for the '<em><b>Argument1</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BINARY_PREDICATE__VARIABLE1 = PREDICATE_FEATURE_COUNT + 0;
+	int BINARY_PREDICATE__ARGUMENT1 = PREDICATE_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Variable2</b></em>' attribute.
+	 * The feature id for the '<em><b>Argument2</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BINARY_PREDICATE__VARIABLE2 = PREDICATE_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Instance2</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BINARY_PREDICATE__INSTANCE2 = PREDICATE_FEATURE_COUNT + 2;
+	int BINARY_PREDICATE__ARGUMENT2 = PREDICATE_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Binary Predicate</em>' class.
@@ -6646,7 +7116,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BINARY_PREDICATE_FEATURE_COUNT = PREDICATE_FEATURE_COUNT + 3;
+	int BINARY_PREDICATE_FEATURE_COUNT = PREDICATE_FEATURE_COUNT + 2;
 
 	/**
 	 * The operation id for the '<em>Extra Validate</em>' operation.
@@ -6676,6 +7146,88 @@ public interface OmlPackage extends EPackage {
 	int BINARY_PREDICATE_OPERATION_COUNT = PREDICATE_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link io.opencaesar.oml.impl.BuiltInPredicateImpl <em>Built In Predicate</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see io.opencaesar.oml.impl.BuiltInPredicateImpl
+	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getBuiltInPredicate()
+	 * @generated
+	 */
+	int BUILT_IN_PREDICATE = 61;
+
+	/**
+	 * The feature id for the '<em><b>Antecedent Rule</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUILT_IN_PREDICATE__ANTECEDENT_RULE = PREDICATE__ANTECEDENT_RULE;
+
+	/**
+	 * The feature id for the '<em><b>Consequent Rule</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUILT_IN_PREDICATE__CONSEQUENT_RULE = PREDICATE__CONSEQUENT_RULE;
+
+	/**
+	 * The feature id for the '<em><b>Built In</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUILT_IN_PREDICATE__BUILT_IN = PREDICATE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Arguments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUILT_IN_PREDICATE__ARGUMENTS = PREDICATE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Built In Predicate</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUILT_IN_PREDICATE_FEATURE_COUNT = PREDICATE_FEATURE_COUNT + 2;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUILT_IN_PREDICATE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = PREDICATE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Get Ontology</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUILT_IN_PREDICATE___GET_ONTOLOGY = PREDICATE___GET_ONTOLOGY;
+
+	/**
+	 * The number of operations of the '<em>Built In Predicate</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUILT_IN_PREDICATE_OPERATION_COUNT = PREDICATE_OPERATION_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.impl.TypePredicateImpl <em>Type Predicate</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6683,7 +7235,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getTypePredicate()
 	 * @generated
 	 */
-	int TYPE_PREDICATE = 59;
+	int TYPE_PREDICATE = 62;
 
 	/**
 	 * The feature id for the '<em><b>Antecedent Rule</b></em>' container reference.
@@ -6704,13 +7256,13 @@ public interface OmlPackage extends EPackage {
 	int TYPE_PREDICATE__CONSEQUENT_RULE = UNARY_PREDICATE__CONSEQUENT_RULE;
 
 	/**
-	 * The feature id for the '<em><b>Variable</b></em>' attribute.
+	 * The feature id for the '<em><b>Argument</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_PREDICATE__VARIABLE = UNARY_PREDICATE__VARIABLE;
+	int TYPE_PREDICATE__ARGUMENT = UNARY_PREDICATE__ARGUMENT;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -6765,7 +7317,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRelationEntityPredicate()
 	 * @generated
 	 */
-	int RELATION_ENTITY_PREDICATE = 60;
+	int RELATION_ENTITY_PREDICATE = 63;
 
 	/**
 	 * The feature id for the '<em><b>Antecedent Rule</b></em>' container reference.
@@ -6786,49 +7338,40 @@ public interface OmlPackage extends EPackage {
 	int RELATION_ENTITY_PREDICATE__CONSEQUENT_RULE = UNARY_PREDICATE__CONSEQUENT_RULE;
 
 	/**
-	 * The feature id for the '<em><b>Variable</b></em>' attribute.
+	 * The feature id for the '<em><b>Argument</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_ENTITY_PREDICATE__VARIABLE = UNARY_PREDICATE__VARIABLE;
+	int RELATION_ENTITY_PREDICATE__ARGUMENT = UNARY_PREDICATE__ARGUMENT;
 
 	/**
-	 * The feature id for the '<em><b>Variable1</b></em>' attribute.
+	 * The feature id for the '<em><b>Argument1</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_ENTITY_PREDICATE__VARIABLE1 = UNARY_PREDICATE_FEATURE_COUNT + 0;
+	int RELATION_ENTITY_PREDICATE__ARGUMENT1 = UNARY_PREDICATE_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Variable2</b></em>' attribute.
+	 * The feature id for the '<em><b>Argument2</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_ENTITY_PREDICATE__VARIABLE2 = UNARY_PREDICATE_FEATURE_COUNT + 1;
+	int RELATION_ENTITY_PREDICATE__ARGUMENT2 = UNARY_PREDICATE_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Instance2</b></em>' reference.
+	 * The feature id for the '<em><b>Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_ENTITY_PREDICATE__INSTANCE2 = UNARY_PREDICATE_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Entity</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RELATION_ENTITY_PREDICATE__ENTITY = UNARY_PREDICATE_FEATURE_COUNT + 3;
+	int RELATION_ENTITY_PREDICATE__TYPE = UNARY_PREDICATE_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Relation Entity Predicate</em>' class.
@@ -6837,7 +7380,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_ENTITY_PREDICATE_FEATURE_COUNT = UNARY_PREDICATE_FEATURE_COUNT + 4;
+	int RELATION_ENTITY_PREDICATE_FEATURE_COUNT = UNARY_PREDICATE_FEATURE_COUNT + 3;
 
 	/**
 	 * The operation id for the '<em>Extra Validate</em>' operation.
@@ -6874,7 +7417,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getPropertyPredicate()
 	 * @generated
 	 */
-	int PROPERTY_PREDICATE = 61;
+	int PROPERTY_PREDICATE = 64;
 
 	/**
 	 * The feature id for the '<em><b>Antecedent Rule</b></em>' container reference.
@@ -6895,31 +7438,22 @@ public interface OmlPackage extends EPackage {
 	int PROPERTY_PREDICATE__CONSEQUENT_RULE = BINARY_PREDICATE__CONSEQUENT_RULE;
 
 	/**
-	 * The feature id for the '<em><b>Variable1</b></em>' attribute.
+	 * The feature id for the '<em><b>Argument1</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_PREDICATE__VARIABLE1 = BINARY_PREDICATE__VARIABLE1;
+	int PROPERTY_PREDICATE__ARGUMENT1 = BINARY_PREDICATE__ARGUMENT1;
 
 	/**
-	 * The feature id for the '<em><b>Variable2</b></em>' attribute.
+	 * The feature id for the '<em><b>Argument2</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_PREDICATE__VARIABLE2 = BINARY_PREDICATE__VARIABLE2;
-
-	/**
-	 * The feature id for the '<em><b>Instance2</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY_PREDICATE__INSTANCE2 = BINARY_PREDICATE__INSTANCE2;
+	int PROPERTY_PREDICATE__ARGUMENT2 = BINARY_PREDICATE__ARGUMENT2;
 
 	/**
 	 * The feature id for the '<em><b>Property</b></em>' reference.
@@ -6931,22 +7465,13 @@ public interface OmlPackage extends EPackage {
 	int PROPERTY_PREDICATE__PROPERTY = BINARY_PREDICATE_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Literal2</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY_PREDICATE__LITERAL2 = BINARY_PREDICATE_FEATURE_COUNT + 1;
-
-	/**
 	 * The number of structural features of the '<em>Property Predicate</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_PREDICATE_FEATURE_COUNT = BINARY_PREDICATE_FEATURE_COUNT + 2;
+	int PROPERTY_PREDICATE_FEATURE_COUNT = BINARY_PREDICATE_FEATURE_COUNT + 1;
 
 	/**
 	 * The operation id for the '<em>Extra Validate</em>' operation.
@@ -6983,7 +7508,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getSameAsPredicate()
 	 * @generated
 	 */
-	int SAME_AS_PREDICATE = 62;
+	int SAME_AS_PREDICATE = 65;
 
 	/**
 	 * The feature id for the '<em><b>Antecedent Rule</b></em>' container reference.
@@ -7004,31 +7529,22 @@ public interface OmlPackage extends EPackage {
 	int SAME_AS_PREDICATE__CONSEQUENT_RULE = BINARY_PREDICATE__CONSEQUENT_RULE;
 
 	/**
-	 * The feature id for the '<em><b>Variable1</b></em>' attribute.
+	 * The feature id for the '<em><b>Argument1</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SAME_AS_PREDICATE__VARIABLE1 = BINARY_PREDICATE__VARIABLE1;
+	int SAME_AS_PREDICATE__ARGUMENT1 = BINARY_PREDICATE__ARGUMENT1;
 
 	/**
-	 * The feature id for the '<em><b>Variable2</b></em>' attribute.
+	 * The feature id for the '<em><b>Argument2</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SAME_AS_PREDICATE__VARIABLE2 = BINARY_PREDICATE__VARIABLE2;
-
-	/**
-	 * The feature id for the '<em><b>Instance2</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SAME_AS_PREDICATE__INSTANCE2 = BINARY_PREDICATE__INSTANCE2;
+	int SAME_AS_PREDICATE__ARGUMENT2 = BINARY_PREDICATE__ARGUMENT2;
 
 	/**
 	 * The number of structural features of the '<em>Same As Predicate</em>' class.
@@ -7074,7 +7590,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDifferentFromPredicate()
 	 * @generated
 	 */
-	int DIFFERENT_FROM_PREDICATE = 63;
+	int DIFFERENT_FROM_PREDICATE = 66;
 
 	/**
 	 * The feature id for the '<em><b>Antecedent Rule</b></em>' container reference.
@@ -7095,31 +7611,22 @@ public interface OmlPackage extends EPackage {
 	int DIFFERENT_FROM_PREDICATE__CONSEQUENT_RULE = BINARY_PREDICATE__CONSEQUENT_RULE;
 
 	/**
-	 * The feature id for the '<em><b>Variable1</b></em>' attribute.
+	 * The feature id for the '<em><b>Argument1</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DIFFERENT_FROM_PREDICATE__VARIABLE1 = BINARY_PREDICATE__VARIABLE1;
+	int DIFFERENT_FROM_PREDICATE__ARGUMENT1 = BINARY_PREDICATE__ARGUMENT1;
 
 	/**
-	 * The feature id for the '<em><b>Variable2</b></em>' attribute.
+	 * The feature id for the '<em><b>Argument2</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DIFFERENT_FROM_PREDICATE__VARIABLE2 = BINARY_PREDICATE__VARIABLE2;
-
-	/**
-	 * The feature id for the '<em><b>Instance2</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DIFFERENT_FROM_PREDICATE__INSTANCE2 = BINARY_PREDICATE__INSTANCE2;
+	int DIFFERENT_FROM_PREDICATE__ARGUMENT2 = BINARY_PREDICATE__ARGUMENT2;
 
 	/**
 	 * The number of structural features of the '<em>Different From Predicate</em>' class.
@@ -7165,7 +7672,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getQuotedLiteral()
 	 * @generated
 	 */
-	int QUOTED_LITERAL = 64;
+	int QUOTED_LITERAL = 67;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -7238,7 +7745,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getIntegerLiteral()
 	 * @generated
 	 */
-	int INTEGER_LITERAL = 65;
+	int INTEGER_LITERAL = 68;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -7293,7 +7800,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDecimalLiteral()
 	 * @generated
 	 */
-	int DECIMAL_LITERAL = 66;
+	int DECIMAL_LITERAL = 69;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -7348,7 +7855,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDoubleLiteral()
 	 * @generated
 	 */
-	int DOUBLE_LITERAL = 67;
+	int DOUBLE_LITERAL = 70;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -7403,7 +7910,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getBooleanLiteral()
 	 * @generated
 	 */
-	int BOOLEAN_LITERAL = 68;
+	int BOOLEAN_LITERAL = 71;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -7458,7 +7965,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getSeparatorKind()
 	 * @generated
 	 */
-	int SEPARATOR_KIND = 69;
+	int SEPARATOR_KIND = 72;
 
 	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.RangeRestrictionKind <em>Range Restriction Kind</em>}' enum.
@@ -7468,7 +7975,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRangeRestrictionKind()
 	 * @generated
 	 */
-	int RANGE_RESTRICTION_KIND = 70;
+	int RANGE_RESTRICTION_KIND = 73;
 
 	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.CardinalityRestrictionKind <em>Cardinality Restriction Kind</em>}' enum.
@@ -7478,7 +7985,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getCardinalityRestrictionKind()
 	 * @generated
 	 */
-	int CARDINALITY_RESTRICTION_KIND = 71;
+	int CARDINALITY_RESTRICTION_KIND = 74;
 
 	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.ImportKind <em>Import Kind</em>}' enum.
@@ -7488,7 +7995,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getImportKind()
 	 * @generated
 	 */
-	int IMPORT_KIND = 72;
+	int IMPORT_KIND = 75;
 
 	/**
 	 * The meta object id for the '<em>Unsigned Int</em>' data type.
@@ -7497,7 +8004,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getUnsignedInt()
 	 * @generated
 	 */
-	int UNSIGNED_INT = 73;
+	int UNSIGNED_INT = 76;
 
 	/**
 	 * The meta object id for the '<em>Unsigned Integer</em>' data type.
@@ -7507,7 +8014,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getUnsignedInteger()
 	 * @generated
 	 */
-	int UNSIGNED_INTEGER = 74;
+	int UNSIGNED_INTEGER = 77;
 
 	/**
 	 * The meta object id for the '<em>Decimal</em>' data type.
@@ -7517,7 +8024,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDecimal()
 	 * @generated
 	 */
-	int DECIMAL = 75;
+	int DECIMAL = 78;
 
 	/**
 	 * The meta object id for the '<em>ID</em>' data type.
@@ -7527,7 +8034,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getID()
 	 * @generated
 	 */
-	int ID = 76;
+	int ID = 79;
 
 	/**
 	 * The meta object id for the '<em>Namespace</em>' data type.
@@ -7537,7 +8044,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getNamespace()
 	 * @generated
 	 */
-	int NAMESPACE = 77;
+	int NAMESPACE = 80;
 
 
 	/**
@@ -7813,6 +8320,49 @@ public interface OmlPackage extends EPackage {
 	EReference getPredicate_ConsequentRule();
 
 	/**
+	 * Returns the meta object for class '{@link io.opencaesar.oml.Argument <em>Argument</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Argument</em>'.
+	 * @see io.opencaesar.oml.Argument
+	 * @generated
+	 */
+	EClass getArgument();
+
+	/**
+	 * Returns the meta object for the attribute '{@link io.opencaesar.oml.Argument#getVariable <em>Variable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Variable</em>'.
+	 * @see io.opencaesar.oml.Argument#getVariable()
+	 * @see #getArgument()
+	 * @generated
+	 */
+	EAttribute getArgument_Variable();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link io.opencaesar.oml.Argument#getLiteral <em>Literal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Literal</em>'.
+	 * @see io.opencaesar.oml.Argument#getLiteral()
+	 * @see #getArgument()
+	 * @generated
+	 */
+	EReference getArgument_Literal();
+
+	/**
+	 * Returns the meta object for the reference '{@link io.opencaesar.oml.Argument#getInstance <em>Instance</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Instance</em>'.
+	 * @see io.opencaesar.oml.Argument#getInstance()
+	 * @see #getArgument()
+	 * @generated
+	 */
+	EReference getArgument_Instance();
+
+	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.Literal <em>Literal</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7915,6 +8465,16 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 */
 	EOperation getMember__GetRef();
+
+	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.Member#isRef() <em>Is Ref</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Is Ref</em>' operation.
+	 * @see io.opencaesar.oml.Member#isRef()
+	 * @generated
+	 */
+	EOperation getMember__IsRef();
 
 	/**
 	 * Returns the meta object for the '{@link io.opencaesar.oml.Member#getIri() <em>Get Iri</em>}' operation.
@@ -8142,6 +8702,27 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getRule_Consequent();
+
+	/**
+	 * Returns the meta object for class '{@link io.opencaesar.oml.BuiltIn <em>Built In</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Built In</em>'.
+	 * @see io.opencaesar.oml.BuiltIn
+	 * @generated
+	 */
+	EClass getBuiltIn();
+
+	/**
+	 * Returns the meta object for the reference '{@link io.opencaesar.oml.BuiltIn#getRef <em>Ref</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Ref</em>'.
+	 * @see io.opencaesar.oml.BuiltIn#getRef()
+	 * @see #getBuiltIn()
+	 * @generated
+	 */
+	EReference getBuiltIn_Ref();
 
 	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.SpecializableTerm <em>Specializable Term</em>}'.
@@ -9666,15 +10247,15 @@ public interface OmlPackage extends EPackage {
 	EClass getUnaryPredicate();
 
 	/**
-	 * Returns the meta object for the attribute '{@link io.opencaesar.oml.UnaryPredicate#getVariable <em>Variable</em>}'.
+	 * Returns the meta object for the containment reference '{@link io.opencaesar.oml.UnaryPredicate#getArgument <em>Argument</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Variable</em>'.
-	 * @see io.opencaesar.oml.UnaryPredicate#getVariable()
+	 * @return the meta object for the containment reference '<em>Argument</em>'.
+	 * @see io.opencaesar.oml.UnaryPredicate#getArgument()
 	 * @see #getUnaryPredicate()
 	 * @generated
 	 */
-	EAttribute getUnaryPredicate_Variable();
+	EReference getUnaryPredicate_Argument();
 
 	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.BinaryPredicate <em>Binary Predicate</em>}'.
@@ -9687,37 +10268,58 @@ public interface OmlPackage extends EPackage {
 	EClass getBinaryPredicate();
 
 	/**
-	 * Returns the meta object for the attribute '{@link io.opencaesar.oml.BinaryPredicate#getVariable1 <em>Variable1</em>}'.
+	 * Returns the meta object for the containment reference '{@link io.opencaesar.oml.BinaryPredicate#getArgument1 <em>Argument1</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Variable1</em>'.
-	 * @see io.opencaesar.oml.BinaryPredicate#getVariable1()
+	 * @return the meta object for the containment reference '<em>Argument1</em>'.
+	 * @see io.opencaesar.oml.BinaryPredicate#getArgument1()
 	 * @see #getBinaryPredicate()
 	 * @generated
 	 */
-	EAttribute getBinaryPredicate_Variable1();
+	EReference getBinaryPredicate_Argument1();
 
 	/**
-	 * Returns the meta object for the attribute '{@link io.opencaesar.oml.BinaryPredicate#getVariable2 <em>Variable2</em>}'.
+	 * Returns the meta object for the containment reference '{@link io.opencaesar.oml.BinaryPredicate#getArgument2 <em>Argument2</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Variable2</em>'.
-	 * @see io.opencaesar.oml.BinaryPredicate#getVariable2()
+	 * @return the meta object for the containment reference '<em>Argument2</em>'.
+	 * @see io.opencaesar.oml.BinaryPredicate#getArgument2()
 	 * @see #getBinaryPredicate()
 	 * @generated
 	 */
-	EAttribute getBinaryPredicate_Variable2();
+	EReference getBinaryPredicate_Argument2();
 
 	/**
-	 * Returns the meta object for the reference '{@link io.opencaesar.oml.BinaryPredicate#getInstance2 <em>Instance2</em>}'.
+	 * Returns the meta object for class '{@link io.opencaesar.oml.BuiltInPredicate <em>Built In Predicate</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Instance2</em>'.
-	 * @see io.opencaesar.oml.BinaryPredicate#getInstance2()
-	 * @see #getBinaryPredicate()
+	 * @return the meta object for class '<em>Built In Predicate</em>'.
+	 * @see io.opencaesar.oml.BuiltInPredicate
 	 * @generated
 	 */
-	EReference getBinaryPredicate_Instance2();
+	EClass getBuiltInPredicate();
+
+	/**
+	 * Returns the meta object for the reference '{@link io.opencaesar.oml.BuiltInPredicate#getBuiltIn <em>Built In</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Built In</em>'.
+	 * @see io.opencaesar.oml.BuiltInPredicate#getBuiltIn()
+	 * @see #getBuiltInPredicate()
+	 * @generated
+	 */
+	EReference getBuiltInPredicate_BuiltIn();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link io.opencaesar.oml.BuiltInPredicate#getArguments <em>Arguments</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Arguments</em>'.
+	 * @see io.opencaesar.oml.BuiltInPredicate#getArguments()
+	 * @see #getBuiltInPredicate()
+	 * @generated
+	 */
+	EReference getBuiltInPredicate_Arguments();
 
 	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.TypePredicate <em>Type Predicate</em>}'.
@@ -9751,15 +10353,15 @@ public interface OmlPackage extends EPackage {
 	EClass getRelationEntityPredicate();
 
 	/**
-	 * Returns the meta object for the reference '{@link io.opencaesar.oml.RelationEntityPredicate#getEntity <em>Entity</em>}'.
+	 * Returns the meta object for the reference '{@link io.opencaesar.oml.RelationEntityPredicate#getType <em>Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Entity</em>'.
-	 * @see io.opencaesar.oml.RelationEntityPredicate#getEntity()
+	 * @return the meta object for the reference '<em>Type</em>'.
+	 * @see io.opencaesar.oml.RelationEntityPredicate#getType()
 	 * @see #getRelationEntityPredicate()
 	 * @generated
 	 */
-	EReference getRelationEntityPredicate_Entity();
+	EReference getRelationEntityPredicate_Type();
 
 	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.PropertyPredicate <em>Property Predicate</em>}'.
@@ -9781,17 +10383,6 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getPropertyPredicate_Property();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link io.opencaesar.oml.PropertyPredicate#getLiteral2 <em>Literal2</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Literal2</em>'.
-	 * @see io.opencaesar.oml.PropertyPredicate#getLiteral2()
-	 * @see #getPropertyPredicate()
-	 * @generated
-	 */
-	EReference getPropertyPredicate_Literal2();
 
 	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.SameAsPredicate <em>Same As Predicate</em>}'.
@@ -10287,6 +10878,40 @@ public interface OmlPackage extends EPackage {
 		EReference PREDICATE__CONSEQUENT_RULE = eINSTANCE.getPredicate_ConsequentRule();
 
 		/**
+		 * The meta object literal for the '{@link io.opencaesar.oml.impl.ArgumentImpl <em>Argument</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see io.opencaesar.oml.impl.ArgumentImpl
+		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getArgument()
+		 * @generated
+		 */
+		EClass ARGUMENT = eINSTANCE.getArgument();
+
+		/**
+		 * The meta object literal for the '<em><b>Variable</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ARGUMENT__VARIABLE = eINSTANCE.getArgument_Variable();
+
+		/**
+		 * The meta object literal for the '<em><b>Literal</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ARGUMENT__LITERAL = eINSTANCE.getArgument_Literal();
+
+		/**
+		 * The meta object literal for the '<em><b>Instance</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ARGUMENT__INSTANCE = eINSTANCE.getArgument_Instance();
+
+		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.LiteralImpl <em>Literal</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -10371,6 +10996,14 @@ public interface OmlPackage extends EPackage {
 		 * @generated
 		 */
 		EOperation MEMBER___GET_REF = eINSTANCE.getMember__GetRef();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Ref</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation MEMBER___IS_REF = eINSTANCE.getMember__IsRef();
 
 		/**
 		 * The meta object literal for the '<em><b>Get Iri</b></em>' operation.
@@ -10573,6 +11206,24 @@ public interface OmlPackage extends EPackage {
 		 * @generated
 		 */
 		EReference RULE__CONSEQUENT = eINSTANCE.getRule_Consequent();
+
+		/**
+		 * The meta object literal for the '{@link io.opencaesar.oml.impl.BuiltInImpl <em>Built In</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see io.opencaesar.oml.impl.BuiltInImpl
+		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getBuiltIn()
+		 * @generated
+		 */
+		EClass BUILT_IN = eINSTANCE.getBuiltIn();
+
+		/**
+		 * The meta object literal for the '<em><b>Ref</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BUILT_IN__REF = eINSTANCE.getBuiltIn_Ref();
 
 		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.SpecializableTermImpl <em>Specializable Term</em>}' class.
@@ -11803,12 +12454,12 @@ public interface OmlPackage extends EPackage {
 		EClass UNARY_PREDICATE = eINSTANCE.getUnaryPredicate();
 
 		/**
-		 * The meta object literal for the '<em><b>Variable</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Argument</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute UNARY_PREDICATE__VARIABLE = eINSTANCE.getUnaryPredicate_Variable();
+		EReference UNARY_PREDICATE__ARGUMENT = eINSTANCE.getUnaryPredicate_Argument();
 
 		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.BinaryPredicateImpl <em>Binary Predicate</em>}' class.
@@ -11821,28 +12472,46 @@ public interface OmlPackage extends EPackage {
 		EClass BINARY_PREDICATE = eINSTANCE.getBinaryPredicate();
 
 		/**
-		 * The meta object literal for the '<em><b>Variable1</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Argument1</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute BINARY_PREDICATE__VARIABLE1 = eINSTANCE.getBinaryPredicate_Variable1();
+		EReference BINARY_PREDICATE__ARGUMENT1 = eINSTANCE.getBinaryPredicate_Argument1();
 
 		/**
-		 * The meta object literal for the '<em><b>Variable2</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Argument2</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute BINARY_PREDICATE__VARIABLE2 = eINSTANCE.getBinaryPredicate_Variable2();
+		EReference BINARY_PREDICATE__ARGUMENT2 = eINSTANCE.getBinaryPredicate_Argument2();
 
 		/**
-		 * The meta object literal for the '<em><b>Instance2</b></em>' reference feature.
+		 * The meta object literal for the '{@link io.opencaesar.oml.impl.BuiltInPredicateImpl <em>Built In Predicate</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see io.opencaesar.oml.impl.BuiltInPredicateImpl
+		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getBuiltInPredicate()
+		 * @generated
+		 */
+		EClass BUILT_IN_PREDICATE = eINSTANCE.getBuiltInPredicate();
+
+		/**
+		 * The meta object literal for the '<em><b>Built In</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference BINARY_PREDICATE__INSTANCE2 = eINSTANCE.getBinaryPredicate_Instance2();
+		EReference BUILT_IN_PREDICATE__BUILT_IN = eINSTANCE.getBuiltInPredicate_BuiltIn();
+
+		/**
+		 * The meta object literal for the '<em><b>Arguments</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BUILT_IN_PREDICATE__ARGUMENTS = eINSTANCE.getBuiltInPredicate_Arguments();
 
 		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.TypePredicateImpl <em>Type Predicate</em>}' class.
@@ -11873,12 +12542,12 @@ public interface OmlPackage extends EPackage {
 		EClass RELATION_ENTITY_PREDICATE = eINSTANCE.getRelationEntityPredicate();
 
 		/**
-		 * The meta object literal for the '<em><b>Entity</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Type</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference RELATION_ENTITY_PREDICATE__ENTITY = eINSTANCE.getRelationEntityPredicate_Entity();
+		EReference RELATION_ENTITY_PREDICATE__TYPE = eINSTANCE.getRelationEntityPredicate_Type();
 
 		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.PropertyPredicateImpl <em>Property Predicate</em>}' class.
@@ -11897,14 +12566,6 @@ public interface OmlPackage extends EPackage {
 		 * @generated
 		 */
 		EReference PROPERTY_PREDICATE__PROPERTY = eINSTANCE.getPropertyPredicate_Property();
-
-		/**
-		 * The meta object literal for the '<em><b>Literal2</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference PROPERTY_PREDICATE__LITERAL2 = eINSTANCE.getPropertyPredicate_Literal2();
 
 		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.SameAsPredicateImpl <em>Same As Predicate</em>}' class.

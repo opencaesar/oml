@@ -181,6 +181,11 @@ public class RuleItemProvider extends VocabularyStatementItemProvider {
 		newChildDescriptors.add
 			(createChildParameter
 				(OmlPackage.Literals.RULE__ANTECEDENT,
+				 OmlFactory.eINSTANCE.createBuiltInPredicate()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(OmlPackage.Literals.RULE__ANTECEDENT,
 				 OmlFactory.eINSTANCE.createTypePredicate()));
 
 		newChildDescriptors.add
@@ -202,6 +207,11 @@ public class RuleItemProvider extends VocabularyStatementItemProvider {
 			(createChildParameter
 				(OmlPackage.Literals.RULE__ANTECEDENT,
 				 OmlFactory.eINSTANCE.createDifferentFromPredicate()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(OmlPackage.Literals.RULE__CONSEQUENT,
+				 OmlFactory.eINSTANCE.createBuiltInPredicate()));
 
 		newChildDescriptors.add
 			(createChildParameter

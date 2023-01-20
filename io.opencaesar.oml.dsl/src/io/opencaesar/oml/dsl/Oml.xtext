@@ -205,6 +205,10 @@ Rule:
 		(antecedent+=Predicate ('^' antecedent+=Predicate)* '->' consequent+=Predicate ('^' consequent+=Predicate)*)?
 	']')?;
 
+BuiltIn:
+	ownedAnnotations+=Annotation*
+	('builtin' name=ID | 'ref' 'builtin' ref=[BuiltIn|Ref]);
+
 StructureInstance:
 	
 	type=[Structure|Ref] '['
@@ -231,6 +235,7 @@ RelationInstance:
 	
 VocabularyStatement:
 	Rule |
+	BuiltIn |
 	SpecializableTerm;
 	
 DescriptionStatement:
@@ -325,31 +330,39 @@ LinkAssertion returns PropertyValueAssertion:
 
 Predicate:
 	UnaryPredicate |
-	BinaryPredicate;
+	BinaryPredicate |
+	BuiltInPredicate;
 
 UnaryPredicate:
-	TypePredicate;
-	
-TypePredicate:
-	type=[Type|Ref] => '(' variable=ID ')';
+	TypePredicate |
+	RelationEntityPredicate;
 	
 BinaryPredicate:
-	RelationEntityPredicate |
     PropertyPredicate |
     SameAsPredicate |
     DifferentFromPredicate;
 
+TypePredicate:
+	type=[Type|Ref] '(' argument=Argument ')';
+	
 RelationEntityPredicate:
-    entity=[RelationEntity|Ref] '(' variable1=ID ',' variable=ID ',' (variable2=ID | instance2=[NamedInstance|CrossRef]) ')';
+    type=[RelationEntity|Ref] '(' argument1=Argument ',' argument=Argument ',' argument2=Argument ')';
 
 PropertyPredicate:
-	property=[Property|Ref] '(' variable1=ID ',' (variable2=ID | literal2=Literal | instance2=[NamedInstance|CrossRef]) ')';
+	property=[Property|Ref] '(' argument1=Argument ',' argument2=Argument ')';
 
 SameAsPredicate:
-    'sameAs' '(' variable1=ID ',' (variable2=ID | instance2=[NamedInstance|CrossRef]) ')';
+    'sameAs' '(' argument1=Argument ',' argument2=Argument ')';
 
 DifferentFromPredicate:
-    'differentFrom' '(' variable1=ID ',' (variable2=ID | instance2=[NamedInstance|CrossRef]) ')';
+    'differentFrom' '(' argument1=Argument ',' argument2=Argument ')';
+
+BuiltInPredicate:
+    'builtIn' '(' builtIn=[BuiltIn|Ref] ',' arguments+=Argument (',' arguments+=Argument)* ')';
+
+Argument:
+	variable=ID | literal=Literal | instance=[NamedInstance|CrossRef]
+;
 
 Literal:
 	IntegerLiteral |

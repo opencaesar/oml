@@ -137,6 +137,13 @@ public class OmlSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case OmlPackage.ARGUMENT: {
+				Argument argument = (Argument)theEObject;
+				T result = caseArgument(argument);
+				if (result == null) result = caseElement(argument);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case OmlPackage.LITERAL: {
 				Literal literal = (Literal)theEObject;
 				T result = caseLiteral(literal);
@@ -286,6 +293,18 @@ public class OmlSwitch<T> extends Switch<T> {
 				if (result == null) result = caseMember(rule);
 				if (result == null) result = caseIdentifiedElement(rule);
 				if (result == null) result = caseElement(rule);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case OmlPackage.BUILT_IN: {
+				BuiltIn builtIn = (BuiltIn)theEObject;
+				T result = caseBuiltIn(builtIn);
+				if (result == null) result = caseVocabularyStatement(builtIn);
+				if (result == null) result = caseStatement(builtIn);
+				if (result == null) result = caseVocabularyMember(builtIn);
+				if (result == null) result = caseMember(builtIn);
+				if (result == null) result = caseIdentifiedElement(builtIn);
+				if (result == null) result = caseElement(builtIn);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -737,6 +756,14 @@ public class OmlSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case OmlPackage.BUILT_IN_PREDICATE: {
+				BuiltInPredicate builtInPredicate = (BuiltInPredicate)theEObject;
+				T result = caseBuiltInPredicate(builtInPredicate);
+				if (result == null) result = casePredicate(builtInPredicate);
+				if (result == null) result = caseElement(builtInPredicate);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case OmlPackage.TYPE_PREDICATE: {
 				TypePredicate typePredicate = (TypePredicate)theEObject;
 				T result = caseTypePredicate(typePredicate);
@@ -944,6 +971,21 @@ public class OmlSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T casePredicate(Predicate object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Argument</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Argument</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseArgument(Argument object) {
 		return null;
 	}
 
@@ -1184,6 +1226,21 @@ public class OmlSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseRule(Rule object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Built In</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Built In</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseBuiltIn(BuiltIn object) {
 		return null;
 	}
 
@@ -1709,6 +1766,21 @@ public class OmlSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseBinaryPredicate(BinaryPredicate object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Built In Predicate</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Built In Predicate</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseBuiltInPredicate(BuiltInPredicate object) {
 		return null;
 	}
 

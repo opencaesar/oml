@@ -35,7 +35,10 @@ import org.eclipse.emf.ecore.util.EcoreUtil.UsageCrossReferencer;
 
 import io.opencaesar.oml.Annotation;
 import io.opencaesar.oml.AnnotationProperty;
+import io.opencaesar.oml.Argument;
 import io.opencaesar.oml.Aspect;
+import io.opencaesar.oml.BuiltIn;
+import io.opencaesar.oml.BuiltInPredicate;
 import io.opencaesar.oml.Classifier;
 import io.opencaesar.oml.Concept;
 import io.opencaesar.oml.ConceptInstance;
@@ -404,6 +407,18 @@ public class OmlIndex {
         return findInverseReferencers(rule, Rule.class, OmlPackage.Literals.RULE__REF);
     }
     
+    // BuiltIn
+    
+    /**
+     * Finds builtIn referencing the given builtIn
+     * 
+     * @param builtIn The referenced builtIn
+     * @return A list of referencing builtIn
+     */
+    public static List<BuiltIn> findBuiltInsWithRef(BuiltIn builtIn) {
+        return findInverseReferencers(builtIn, BuiltIn.class, OmlPackage.Literals.BUILT_IN__REF);
+    }
+
     // ConceptInstance
     
     /**
@@ -542,7 +557,7 @@ public class OmlIndex {
      * @param type The referenced type
      * @return A list of referencing type predicates
      */
-    public static List<TypePredicate> findTypePredicatesWithClassifier(Type type) {
+    public static List<TypePredicate> findTypePredicatesWithType(Type type) {
         return findInverseReferencers(type, TypePredicate.class, OmlPackage.Literals.TYPE_PREDICATE__TYPE);
     }
     
@@ -551,11 +566,11 @@ public class OmlIndex {
     /**
      * Finds relation entity predicates referencing the given relation entity
      * 
-     * @param entity The referenced relation entity
+     * @param type The referenced relation entity
      * @return A list of referencing relation entity predicates
      */
-    public static List<RelationEntityPredicate> findRelationEntityPredicatesWithEntity(RelationEntity entity) {
-        return findInverseReferencers(entity, RelationEntityPredicate.class, OmlPackage.Literals.RELATION_ENTITY_PREDICATE__ENTITY);
+    public static List<RelationEntityPredicate> findRelationEntityPredicatesWithType(RelationEntity type) {
+        return findInverseReferencers(type, RelationEntityPredicate.class, OmlPackage.Literals.RELATION_ENTITY_PREDICATE__TYPE);
     }
     
     // PropertyPredicate
@@ -570,6 +585,18 @@ public class OmlIndex {
         return findInverseReferencers(property, PropertyPredicate.class, OmlPackage.Literals.PROPERTY_PREDICATE__PROPERTY);
     }
     
+    // BuiltInPredicate
+    
+    /**
+     * Finds builtIn predicates referencing the given builtIn
+     * 
+     * @param builtIn The referenced builtIn
+     * @return A list of referencing builtIn predicates
+     */
+    public static List<BuiltInPredicate> findBuiltInPredicateWithBuiltIn(BuiltIn builtIn) {
+        return findInverseReferencers(builtIn, BuiltInPredicate.class, OmlPackage.Literals.BUILT_IN_PREDICATE__BUILT_IN);
+    }
+
     // QuotedLiteral
     
     /**
@@ -582,4 +609,16 @@ public class OmlIndex {
         return findInverseReferencers(type, QuotedLiteral.class, OmlPackage.Literals.QUOTED_LITERAL__TYPE);
     }
     
+    // Argument
+    
+    /**
+     * Finds arguments referencing the given named instance
+     * 
+     * @param instance The referenced instance
+     * @return A list of referencing arguments
+     */
+    public static List<Argument> findArgumentsWithInstance(NamedInstance instance) {
+        return findInverseReferencers(instance, Argument.class, OmlPackage.Literals.ARGUMENT__INSTANCE);
+    }
+
 }

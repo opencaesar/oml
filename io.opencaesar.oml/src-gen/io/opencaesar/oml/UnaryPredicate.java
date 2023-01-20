@@ -25,14 +25,14 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * UnaryPredicate is a predicate that binds one variable
+ * UnaryPredicate is a predicate that has one argument
  * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link io.opencaesar.oml.UnaryPredicate#getVariable <em>Variable</em>}</li>
+ *   <li>{@link io.opencaesar.oml.UnaryPredicate#getArgument <em>Argument</em>}</li>
  * </ul>
  *
  * @see io.opencaesar.oml.OmlPackage#getUnaryPredicate()
@@ -42,28 +42,28 @@ package io.opencaesar.oml;
  */
 public interface UnaryPredicate extends Predicate {
 	/**
-	 * Returns the value of the '<em><b>Variable</b></em>' attribute.
+	 * Returns the value of the '<em><b>Argument</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The variable name specified by the predicate
+	 * An argument of the predicate
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Variable</em>' attribute.
-	 * @see #setVariable(String)
-	 * @see io.opencaesar.oml.OmlPackage#getUnaryPredicate_Variable()
-	 * @model unique="false" dataType="io.opencaesar.oml.ID" required="true"
+	 * @return the value of the '<em>Argument</em>' containment reference.
+	 * @see #setArgument(Argument)
+	 * @see io.opencaesar.oml.OmlPackage#getUnaryPredicate_Argument()
+	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	String getVariable();
+	Argument getArgument();
 
 	/**
-	 * Sets the value of the '{@link io.opencaesar.oml.UnaryPredicate#getVariable <em>Variable</em>}' attribute.
+	 * Sets the value of the '{@link io.opencaesar.oml.UnaryPredicate#getArgument <em>Argument</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Variable</em>' attribute.
-	 * @see #getVariable()
+	 * @param value the new value of the '<em>Argument</em>' containment reference.
+	 * @see #getArgument()
 	 * @generated
 	 */
-	void setVariable(String value);
+	void setArgument(Argument value);
 
 } // UnaryPredicate

@@ -28,8 +28,11 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import io.opencaesar.oml.Annotation;
 import io.opencaesar.oml.AnnotationProperty;
+import io.opencaesar.oml.Argument;
 import io.opencaesar.oml.Aspect;
 import io.opencaesar.oml.BooleanLiteral;
+import io.opencaesar.oml.BuiltIn;
+import io.opencaesar.oml.BuiltInPredicate;
 import io.opencaesar.oml.CardinalityRestrictionKind;
 import io.opencaesar.oml.Classifier;
 import io.opencaesar.oml.Concept;
@@ -600,7 +603,7 @@ public class OmlWrite {
     // Rule
 
     /**
-     * Creates a rule and adds it to the given relation entity
+     * Creates a rule and adds it to the given vocabulary
      * 
      * @param vocabulary the context vocabulary
      * @param name the name of the new rule
@@ -615,6 +618,22 @@ public class OmlWrite {
         rule.getAntecedent().addAll(Arrays.asList(antecedent));
         vocabulary.getOwnedStatements().add(rule);
         return rule;
+    }
+
+    // BuiltIn
+
+    /**
+     * Creates a builtIn and adds it to the given vocabulary
+     * 
+     * @param vocabulary the context vocabulary
+     * @param name the name of the new builtIn
+     * @return a builtIn that is added to the given vocabulary
+     */
+    public static BuiltIn addBuiltIn(Vocabulary vocabulary, String name) {
+        final BuiltIn builtIn = create(BuiltIn.class);
+        builtIn.setName(name);
+        vocabulary.getOwnedStatements().add(builtIn);
+        return builtIn;
     }
 
     // StructureInstance
@@ -962,6 +981,25 @@ public class OmlWrite {
         return assertion;
     }
 
+    // Argument
+
+    /**
+     * Creates an argument
+     * 
+     * @param vocabulary the context vocabulary
+     * @param variable a given variable name
+     * @param literal a given literal
+     * @param instance a given named instance
+     * @return an argument
+     */
+    public static Argument createArgument(Vocabulary vocabulary, String variable, Literal literal, NamedInstance instance) {
+        final Argument argument = create(Argument.class);
+        argument.setVariable(variable);
+        argument.setLiteral(literal);
+        setCrossReference(vocabulary, argument, OmlPackage.Literals.ARGUMENT__INSTANCE, instance);
+        return argument;
+    }
+
     // TypePredicate
 
     /**
@@ -969,12 +1007,12 @@ public class OmlWrite {
      * 
      * @param vocabulary the context vocabulary
      * @param type the given type
-     * @param variable the name of a variable bound to an instance of the type
+     * @param argument the argument bound to a value of the type
      * @return a type predicate
      */
-    public static TypePredicate createTypePredicate(Vocabulary vocabulary, Type type, String variable) {
+    public static TypePredicate createTypePredicate(Vocabulary vocabulary, Type type, Argument argument) {
         final TypePredicate predicate = create(TypePredicate.class);
-        predicate.setVariable(variable);
+        predicate.setArgument(argument);
         setCrossReference(vocabulary, predicate, OmlPackage.Literals.TYPE_PREDICATE__TYPE, type);
         return predicate;
     }
@@ -985,18 +1023,18 @@ public class OmlWrite {
      * Creates an relation entity predicate
      * 
      * @param vocabulary the context vocabulary
-     * @param entity the given relation entity
-     * @param variable1 the name of a variable bound to a named instance representing the source of a relation entity
-     * @param variable the name of a variable bound to an instance of the relation entity
-     * @param variable2 the name of a variable bound to a named instance representing the target of a relation entity
+     * @param type the type of a relation instance
+     * @param argument1 the argument bound to a named instance representing the source of a relation instance
+     * @param argument the argument bound to a relation instance
+     * @param argument2 the argument bound to a named instance representing the target of a relation instance
      * @return a relation entity predicate
      */
-    public static RelationEntityPredicate createRelationEntityPredicate(Vocabulary vocabulary, RelationEntity entity, String variable1, String variable, String variable2) {
+    public static RelationEntityPredicate createRelationEntityPredicate(Vocabulary vocabulary, RelationEntity type, Argument argument1, Argument argument, Argument argument2) {
         final RelationEntityPredicate predicate = create(RelationEntityPredicate.class);
-        predicate.setVariable1(variable1);
-        predicate.setVariable(variable);
-        predicate.setVariable2(variable2);
-        setCrossReference(vocabulary, predicate, OmlPackage.Literals.RELATION_ENTITY_PREDICATE__ENTITY, entity);
+        predicate.setArgument1(argument1);
+        predicate.setArgument(argument);
+        predicate.setArgument2(argument2);
+        setCrossReference(vocabulary, predicate, OmlPackage.Literals.RELATION_ENTITY_PREDICATE__TYPE, type);
         return predicate;
     }
 
@@ -1007,14 +1045,14 @@ public class OmlWrite {
      * 
      * @param vocabulary the context vocabulary
      * @param property the given property
-     * @param variable1 the name of a variable bound to an instance
-     * @param variable2 the name of a variable bound to a value of the property in the instance
+     * @param argument1 the argument bound to a instance representing the subject of the given property
+     * @param argument2 the argument bound to a value representing the object of the given property
      * @return a relation predicate
      */
-    public static PropertyPredicate createPropertyPredicate(Vocabulary vocabulary, Property property, String variable1, String variable2) {
+    public static PropertyPredicate createPropertyPredicate(Vocabulary vocabulary, Property property, Argument argument1, Argument argument2) {
         final PropertyPredicate predicate = create(PropertyPredicate.class);
-        predicate.setVariable1(variable1);
-        predicate.setVariable2(variable2);
+        predicate.setArgument1(argument1);
+        predicate.setArgument2(argument2);
         setCrossReference(vocabulary, predicate, OmlPackage.Literals.PROPERTY_PREDICATE__PROPERTY, property);
         return predicate;
     }
@@ -1025,14 +1063,14 @@ public class OmlWrite {
      * Creates a sameAs predicate
      * 
      * @param vocabulary the context vocabulary
-     * @param variable1 the name of a variable bound to one instance
-     * @param variable2 the name of a variable bound to another instance
+     * @param argument1 the argument bound to the first named instance
+     * @param argument2 the argument bound to the second named instance
      * @return a sameAs predicate
      */
-    public static SameAsPredicate createSameAsPredicate(Vocabulary vocabulary, String variable1, String variable2) {
+    public static SameAsPredicate createSameAsPredicate(Vocabulary vocabulary, Argument argument1, Argument argument2) {
         final SameAsPredicate predicate = create(SameAsPredicate.class);
-        predicate.setVariable1(variable1);
-        predicate.setVariable2(variable2);
+        predicate.setArgument1(argument1);
+        predicate.setArgument2(argument2);
         return predicate;
     }
 
@@ -1042,14 +1080,31 @@ public class OmlWrite {
      * Creates a differentFrom predicate
      * 
      * @param vocabulary the context vocabulary
-     * @param variable1 the name of a variable bound to one instance
-     * @param variable2 the name of a variable bound to another instance
+     * @param argument1 the argument bound to the first named instance
+     * @param argument2 the argument bound to the second named instance
      * @return a differentFrom predicate
      */
-    public static DifferentFromPredicate createDifferentFromPredicate(Vocabulary vocabulary, String variable1, String variable2) {
+    public static DifferentFromPredicate createDifferentFromPredicate(Vocabulary vocabulary, Argument argument1, Argument argument2) {
         final DifferentFromPredicate predicate = create(DifferentFromPredicate.class);
-        predicate.setVariable1(variable1);
-        predicate.setVariable2(variable2);
+        predicate.setArgument1(argument1);
+        predicate.setArgument2(argument2);
+        return predicate;
+    }
+
+    // BuiltInPredicate
+
+    /**
+     * Creates a builtIn predicate
+     * 
+     * @param vocabulary the context vocabulary
+     * @param builtIn the given builtIn
+     * @param arguments the arguments of the builtin
+     * @return a builtIn predicate
+     */
+    public static BuiltInPredicate createBuiltInPredicate(Vocabulary vocabulary, BuiltIn builtIn, Argument... arguments ) {
+        final BuiltInPredicate predicate = create(BuiltInPredicate.class);
+        predicate.setBuiltIn(builtIn);
+        predicate.getArguments().addAll(Arrays.asList(arguments));
         return predicate;
     }
 

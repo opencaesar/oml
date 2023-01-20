@@ -38,6 +38,8 @@ import com.google.inject.Inject;
 import io.opencaesar.oml.Annotation;
 import io.opencaesar.oml.AnnotationProperty;
 import io.opencaesar.oml.Aspect;
+import io.opencaesar.oml.BuiltIn;
+import io.opencaesar.oml.BuiltInPredicate;
 import io.opencaesar.oml.Concept;
 import io.opencaesar.oml.ConceptInstance;
 import io.opencaesar.oml.Description;
@@ -140,7 +142,7 @@ public class OmlFormatter extends AbstractJavaFormatter {
 		aspect.getOwnedAnnotations().forEach(i -> doc.append(doc.format(i), newLine()));
 		if (aspect.getName() != null) {
 			doc.append(keyword(aspect, oml.getAspectAccess().getAspectKeyword_1_0_0()), oneSpace());
-		} else if (aspect.getRef() != null) {
+		} else if (aspect.isRef()) {
 			doc.append(keyword(aspect, oml.getAspectAccess().getRefKeyword_1_1_0()), oneSpace());
 			doc.append(keyword(aspect, oml.getAspectAccess().getAspectKeyword_1_1_1()), oneSpace());
 		}
@@ -155,7 +157,7 @@ public class OmlFormatter extends AbstractJavaFormatter {
 		concept.getOwnedAnnotations().forEach(i -> doc.append(doc.format(i), newLine()));
 		if (concept.getName() != null) {	
 			doc.append(keyword(concept, oml.getConceptAccess().getConceptKeyword_1_0_0()), oneSpace());
-		} else if (concept.getRef() != null) {
+		} else if (concept.isRef()) {
 			doc.append(keyword(concept, oml.getConceptAccess().getRefKeyword_1_1_0()), oneSpace());
 			doc.append(keyword(concept, oml.getConceptAccess().getConceptKeyword_1_1_1()), oneSpace());
 		}
@@ -175,7 +177,7 @@ public class OmlFormatter extends AbstractJavaFormatter {
 		if (entity.getName() != null) {
 			doc.append(keyword(entity, oml.getRelationEntityAccess().getRelationKeyword_1_0_0()), oneSpace());
 			doc.append(keyword(entity, oml.getRelationEntityAccess().getEntityKeyword_1_0_1()), oneSpace());
-		} else if (entity.getRef() != null) {
+		} else if (entity.isRef()) {
 			doc.append(keyword(entity, oml.getRelationEntityAccess().getRefKeyword_1_1_0()), oneSpace());
 			doc.append(keyword(entity, oml.getRelationEntityAccess().getRelationKeyword_1_1_1()), oneSpace());
 			doc.append(keyword(entity, oml.getRelationEntityAccess().getEntityKeyword_1_1_2()), oneSpace());
@@ -202,7 +204,7 @@ public class OmlFormatter extends AbstractJavaFormatter {
 		structure.getOwnedAnnotations().forEach(i -> doc.append(doc.format(i), newLine()));
 		if (structure.getName() != null) {
 			doc.append(keyword(structure, oml.getStructureAccess().getStructureKeyword_1_0_0()), oneSpace());
-		} else if (structure.getRef() != null) {
+		} else if (structure.isRef()) {
 			doc.append(keyword(structure, oml.getStructureAccess().getRefKeyword_1_1_0()), oneSpace());
 			doc.append(keyword(structure, oml.getStructureAccess().getStructureKeyword_1_1_1()), oneSpace());
 		}
@@ -217,7 +219,7 @@ public class OmlFormatter extends AbstractJavaFormatter {
 		if (property.getName() != null) {
 			doc.append(keyword(property, oml.getAnnotationPropertyAccess().getAnnotationKeyword_1_0_0()), oneSpace());
 			doc.append(keyword(property, oml.getAnnotationPropertyAccess().getPropertyKeyword_1_0_1()), oneSpace());
-		} else if (property.getRef() != null) {
+		} else if (property.isRef()) {
 			doc.append(keyword(property, oml.getAnnotationPropertyAccess().getRefKeyword_1_1_0()), oneSpace());
 			doc.append(keyword(property, oml.getAnnotationPropertyAccess().getAnnotationKeyword_1_1_1()), oneSpace());
 			doc.append(keyword(property, oml.getAnnotationPropertyAccess().getPropertyKeyword_1_1_2()), oneSpace());
@@ -231,7 +233,7 @@ public class OmlFormatter extends AbstractJavaFormatter {
 		if (property.getName() != null) {
 			doc.append(keyword(property, oml.getScalarPropertyAccess().getScalarKeyword_1_0_0()), oneSpace());
 			doc.append(keyword(property, oml.getScalarPropertyAccess().getPropertyKeyword_1_0_1()), oneSpace());
-		} else if (property.getRef() != null) {
+		} else if (property.isRef()) {
 			doc.append(keyword(property, oml.getScalarPropertyAccess().getRefKeyword_1_1_0()), oneSpace());
 			doc.append(keyword(property, oml.getScalarPropertyAccess().getScalarKeyword_1_1_1()), oneSpace());
 			doc.append(keyword(property, oml.getScalarPropertyAccess().getPropertyKeyword_1_1_2()), oneSpace());
@@ -249,7 +251,7 @@ public class OmlFormatter extends AbstractJavaFormatter {
 		if (property.getName() != null) {
 			doc.append(keyword(property, oml.getStructuredPropertyAccess().getStructuredKeyword_1_0_0()), oneSpace());
 			doc.append(keyword(property, oml.getStructuredPropertyAccess().getPropertyKeyword_1_0_1()), oneSpace());
-		} else if (property.getRef() != null) {
+		} else if (property.isRef()) {
 			doc.append(keyword(property, oml.getStructuredPropertyAccess().getRefKeyword_1_1_0()), oneSpace());
 			doc.append(keyword(property, oml.getStructuredPropertyAccess().getStructuredKeyword_1_1_1()), oneSpace());
 			doc.append(keyword(property, oml.getStructuredPropertyAccess().getPropertyKeyword_1_1_2()), oneSpace());
@@ -266,7 +268,7 @@ public class OmlFormatter extends AbstractJavaFormatter {
 		scalar.getOwnedAnnotations().forEach(i -> doc.append(doc.format(i), newLine()));
 		if (scalar.getName() != null) {
 			doc.append(keyword(scalar, oml.getFacetedScalarAccess().getScalarKeyword_1_0_0()), oneSpace());
-		} else if (scalar.getRef() != null) {
+		} else if (scalar.isRef()) {
 			doc.append(keyword(scalar, oml.getFacetedScalarAccess().getRefKeyword_1_1_0()), oneSpace());
 			doc.append(keyword(scalar, oml.getFacetedScalarAccess().getScalarKeyword_1_1_1()), oneSpace());
 		}
@@ -293,7 +295,7 @@ public class OmlFormatter extends AbstractJavaFormatter {
 		if (scalar.getName() != null) {
 			doc.append(keyword(scalar, oml.getEnumeratedScalarAccess().getEnumeratedKeyword_1_0_0()), oneSpace());
 			doc.append(keyword(scalar, oml.getEnumeratedScalarAccess().getScalarKeyword_1_0_1()), oneSpace());
-		} else if (scalar.getRef() != null) {
+		} else if (scalar.isRef()) {
 			doc.append(keyword(scalar, oml.getEnumeratedScalarAccess().getRefKeyword_1_1_0()), oneSpace());
 			doc.append(keyword(scalar, oml.getEnumeratedScalarAccess().getEnumeratedKeyword_1_1_1()), oneSpace());
 			doc.append(keyword(scalar, oml.getEnumeratedScalarAccess().getScalarKeyword_1_1_2()), oneSpace());
@@ -318,7 +320,7 @@ public class OmlFormatter extends AbstractJavaFormatter {
 		relation.getOwnedAnnotations().forEach(i -> doc.append(doc.format(i), newLine()));
 		if (relation.getName() != null) {
 			doc.append(keyword(relation, oml.getUnreifiedRelationAccess().getRelationKeyword_1_0_0()), oneSpace());
-		} else if (relation.getRef() != null) {
+		} else if (relation.isRef()) {
 			doc.append(keyword(relation, oml.getUnreifiedRelationAccess().getRefKeyword_1_1_0()), oneSpace());
 			doc.append(keyword(relation, oml.getUnreifiedRelationAccess().getRelationKeyword_1_1_1()), oneSpace());
 		}
@@ -341,7 +343,7 @@ public class OmlFormatter extends AbstractJavaFormatter {
 		rule.getOwnedAnnotations().forEach(i -> doc.append(doc.format(i), newLine()));
 		if (rule.getName() != null) {
 			doc.append(keyword(rule, oml.getRuleAccess().getRuleKeyword_1_0_0()), oneSpace());
-		} else if (rule.getRef() != null) {
+		} else if (rule.isRef()) {
 			doc.append(keyword(rule, oml.getRuleAccess().getRefKeyword_1_1_0()), oneSpace());
 			doc.append(keyword(rule, oml.getRuleAccess().getRuleKeyword_1_1_1()), oneSpace());
 		}
@@ -353,11 +355,21 @@ public class OmlFormatter extends AbstractJavaFormatter {
 		rule.getConsequent().forEach(i -> doc.format(i));
 	}
 
+	protected void _format(BuiltIn builtIn, IFormattableDocument doc) {
+		builtIn.getOwnedAnnotations().forEach(i -> doc.append(doc.format(i), newLine()));
+		if (builtIn.getName() != null) {
+			doc.append(keyword(builtIn, oml.getBuiltInAccess().getBuiltinKeyword_1_0_0()), oneSpace());
+		} else if (builtIn.isRef()) {
+			doc.append(keyword(builtIn, oml.getBuiltInAccess().getRefKeyword_1_1_0()), oneSpace());
+			doc.append(keyword(builtIn, oml.getBuiltInAccess().getBuiltinKeyword_1_1_1()), oneSpace());
+		}
+	}
+
 	protected void _format(ConceptInstance instance, IFormattableDocument doc) {
 		instance.getOwnedAnnotations().forEach(i -> doc.append(doc.format(i), newLine()));
 		if (instance.getName() != null) {
 			doc.append(keyword(instance, oml.getConceptInstanceAccess().getCiKeyword_1_0_0()), oneSpace());
-		} else if (instance.getRef() != null) {
+		} else if (instance.isRef()) {
 			doc.append(keyword(instance, oml.getConceptInstanceAccess().getRefKeyword_1_1_0()), oneSpace());
 			doc.append(keyword(instance, oml.getConceptInstanceAccess().getCiKeyword_1_1_1()), oneSpace());
 		}
@@ -371,7 +383,7 @@ public class OmlFormatter extends AbstractJavaFormatter {
 		instance.getOwnedAnnotations().forEach(i -> doc.append(doc.format(i), newLine()));
 		if (instance.getName() != null) {
 			doc.append(keyword(instance, oml.getRelationInstanceAccess().getRiKeyword_1_0_0()), oneSpace());
-		} else if (instance.getRef() != null) {
+		} else if (instance.isRef()) {
 			doc.append(keyword(instance, oml.getRelationInstanceAccess().getRefKeyword_1_1_0()), oneSpace());
 			doc.append(keyword(instance, oml.getRelationInstanceAccess().getRiKeyword_1_1_1()), oneSpace());
 		}
@@ -488,6 +500,12 @@ public class OmlFormatter extends AbstractJavaFormatter {
 		doc.surround(keyword(predicate, oml.getDifferentFromPredicateAccess().getLeftParenthesisKeyword_1()), noSpace());
 		formatCommas(predicate, doc);
 		doc.prepend(keyword(predicate, oml.getDifferentFromPredicateAccess().getRightParenthesisKeyword_5()), noSpace());
+	}
+
+	protected void _format(BuiltInPredicate predicate, IFormattableDocument doc) {
+		doc.surround(keyword(predicate, oml.getBuiltInPredicateAccess().getLeftParenthesisKeyword_1()), noSpace());
+		formatCommas(predicate, doc);
+		doc.prepend(keyword(predicate, oml.getBuiltInPredicateAccess().getRightParenthesisKeyword_6()), noSpace());
 	}
 
 	protected void _format(QuotedLiteral literal, IFormattableDocument doc) {

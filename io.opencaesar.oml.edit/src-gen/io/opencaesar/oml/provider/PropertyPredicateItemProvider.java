@@ -19,21 +19,14 @@
 package io.opencaesar.oml.provider;
 
 
-import io.opencaesar.oml.OmlFactory;
 import io.opencaesar.oml.OmlPackage;
-import io.opencaesar.oml.PropertyPredicate;
-
 import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
-import org.eclipse.emf.ecore.EStructuralFeature;
-
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
-import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
  * This is the item provider adapter for a {@link io.opencaesar.oml.PropertyPredicate} object.
@@ -91,36 +84,6 @@ public class PropertyPredicateItemProvider extends BinaryPredicateItemProvider {
 	}
 
 	/**
-	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
-	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
-	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
-			super.getChildrenFeatures(object);
-			childrenFeatures.add(OmlPackage.Literals.PROPERTY_PREDICATE__LITERAL2);
-		}
-		return childrenFeatures;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	protected EStructuralFeature getChildFeature(Object object, Object child) {
-		// Check the type of the specified child object and return the proper feature to use for
-		// adding (see {@link AddCommand}) it as a child.
-
-		return super.getChildFeature(object, child);
-	}
-
-	/**
 	 * This returns PropertyPredicate.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -139,10 +102,7 @@ public class PropertyPredicateItemProvider extends BinaryPredicateItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((PropertyPredicate)object).getVariable1();
-		return label == null || label.length() == 0 ?
-			getString("_UI_PropertyPredicate_type") :
-			getString("_UI_PropertyPredicate_type") + " " + label;
+		return getString("_UI_PropertyPredicate_type");
 	}
 
 
@@ -156,12 +116,6 @@ public class PropertyPredicateItemProvider extends BinaryPredicateItemProvider {
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
-
-		switch (notification.getFeatureID(PropertyPredicate.class)) {
-			case OmlPackage.PROPERTY_PREDICATE__LITERAL2:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
-				return;
-		}
 		super.notifyChanged(notification);
 	}
 
@@ -175,31 +129,29 @@ public class PropertyPredicateItemProvider extends BinaryPredicateItemProvider {
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+	}
 
-		newChildDescriptors.add
-			(createChildParameter
-				(OmlPackage.Literals.PROPERTY_PREDICATE__LITERAL2,
-				 OmlFactory.eINSTANCE.createQuotedLiteral()));
+	/**
+	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
+		Object childFeature = feature;
+		Object childObject = child;
 
-		newChildDescriptors.add
-			(createChildParameter
-				(OmlPackage.Literals.PROPERTY_PREDICATE__LITERAL2,
-				 OmlFactory.eINSTANCE.createIntegerLiteral()));
+		boolean qualify =
+			childFeature == OmlPackage.Literals.BINARY_PREDICATE__ARGUMENT1 ||
+			childFeature == OmlPackage.Literals.BINARY_PREDICATE__ARGUMENT2;
 
-		newChildDescriptors.add
-			(createChildParameter
-				(OmlPackage.Literals.PROPERTY_PREDICATE__LITERAL2,
-				 OmlFactory.eINSTANCE.createDecimalLiteral()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OmlPackage.Literals.PROPERTY_PREDICATE__LITERAL2,
-				 OmlFactory.eINSTANCE.createDoubleLiteral()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OmlPackage.Literals.PROPERTY_PREDICATE__LITERAL2,
-				 OmlFactory.eINSTANCE.createBooleanLiteral()));
+		if (qualify) {
+			return getString
+				("_UI_CreateChild_text2",
+				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
+		}
+		return super.getCreateChildText(owner, feature, child, selection);
 	}
 
 }

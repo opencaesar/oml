@@ -504,7 +504,7 @@ public final class OmlRead {
      */
     public static List<Statement> getReferences(Ontology ontology) {
         return getStatements(ontology).stream()
-            .filter(s -> s.getRef() != null)
+            .filter(s -> s.isRef())
             .collect(Collectors.toList());
     }
     
@@ -756,7 +756,7 @@ public final class OmlRead {
      */
     @SuppressWarnings("unchecked")
 	public static <T extends Member> T resolve(T reference) {
-    	if (reference.getRef() != null) {
+    	if (reference.isRef()) {
     		return (T) reference.getRef();
     	}
         return reference;
@@ -882,7 +882,7 @@ public final class OmlRead {
     	if (predicate instanceof TypePredicate) {
     		return ((TypePredicate)predicate).getType();
     	} else if (predicate instanceof RelationEntityPredicate) {
-    		return ((RelationEntityPredicate)predicate).getEntity();
+    		return ((RelationEntityPredicate)predicate).getType();
     	} else if (predicate instanceof PropertyPredicate) {
     		return ((PropertyPredicate)predicate).getProperty();
     	}

@@ -11,8 +11,11 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import io.opencaesar.oml.Annotation;
 import io.opencaesar.oml.AnnotationProperty;
+import io.opencaesar.oml.Argument;
 import io.opencaesar.oml.Aspect;
 import io.opencaesar.oml.BooleanLiteral;
+import io.opencaesar.oml.BuiltIn;
+import io.opencaesar.oml.BuiltInPredicate;
 import io.opencaesar.oml.Concept;
 import io.opencaesar.oml.ConceptInstance;
 import io.opencaesar.oml.DecimalLiteral;
@@ -176,7 +179,7 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 					} catch (UnsupportedEncodingException e) {
 						throw new AssertionError(e);
 					}
-				} else if (aspect.getRef() != null){
+				} else if (aspect.isRef()){
 					return "ref aspect " + getLabel(OmlRead.resolve(aspect), aspect);
 				} else {
 					return "aspect " + getLabel(aspect);
@@ -199,7 +202,7 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 					} catch (UnsupportedEncodingException e) {
 						throw new AssertionError(e);
 					}
-				} else if (concept.getRef() != null){
+				} else if (concept.isRef()){
 					return "ref concept " + getLabel(OmlRead.resolve(concept), concept);
 				} else {
 					return "concept " + getLabel(concept);
@@ -222,7 +225,7 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 					} catch (UnsupportedEncodingException e) {
 						throw new AssertionError(e);
 					}
-				} else if (entity.getRef() != null){
+				} else if (entity.isRef()){
 					return "ref relation entity " + getLabel(OmlRead.resolve(entity), entity);
 				} else {
 					return "relation entity " + getLabel(entity);
@@ -245,7 +248,7 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 					} catch (UnsupportedEncodingException e) {
 						throw new AssertionError(e);
 					}
-				} else if (structure.getRef() != null){
+				} else if (structure.isRef()){
 					return "ref structure " + getLabel(OmlRead.resolve(structure), structure);
 				} else {
 					return "structure " + getLabel(structure);
@@ -268,7 +271,7 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 					} catch (UnsupportedEncodingException e) {
 						throw new AssertionError(e);
 					}
-				} else if (scalar.getRef() != null){
+				} else if (scalar.isRef()){
 					return "ref scalar " + getLabel(OmlRead.resolve(scalar), scalar);
 				} else {
 					return "scalar " + getLabel(scalar);
@@ -291,7 +294,7 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 					} catch (UnsupportedEncodingException e) {
 						throw new AssertionError(e);
 					}
-				} else if (scalar.getRef() != null){
+				} else if (scalar.isRef()){
 					return "ref enumerated scalar " + getLabel(OmlRead.resolve(scalar), scalar);
 				} else {
 					return "enumerated scalar " + getLabel(scalar);
@@ -316,7 +319,7 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 					} catch (UnsupportedEncodingException e) {
 						throw new AssertionError(e);
 					}
-				} else if (property.getRef() != null){
+				} else if (property.isRef()){
 					return "ref annotation property " + getLabel(OmlRead.resolve(property), property);
 				} else {
 					return "annotation property " + getLabel(property);
@@ -339,7 +342,7 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 					} catch (UnsupportedEncodingException e) {
 						throw new AssertionError(e);
 					}
-				} else if (property.getRef() != null){
+				} else if (property.isRef()){
 					return "ref scalar property " + getLabel(OmlRead.resolve(property), property);
 				} else {
 					return "scalar property " + getLabel(property);
@@ -362,7 +365,7 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 					} catch (UnsupportedEncodingException e) {
 						throw new AssertionError(e);
 					}
-				} else if (property.getRef() != null){
+				} else if (property.isRef()){
 					return "ref structured property " + getLabel(OmlRead.resolve(property), property);
 				} else {
 					return "structured property " + getLabel(property);
@@ -431,7 +434,7 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 					} catch (UnsupportedEncodingException e) {
 						throw new AssertionError(e);
 					}
-				} else if (rule.getRef() != null){
+				} else if (rule.isRef()){
 					return "ref rule " + getLabel(OmlRead.resolve(rule), rule);
 				} else {
 					return "rule " + getLabel(rule);
@@ -441,13 +444,38 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 		return ruleItemProvider;
 	}
 
+	// Rules and predicates (entity, relation entity, relation, sameAs, differentFrom)
+
+	@Override
+	public Adapter createBuiltInAdapter() {
+		if (builtInItemProvider == null) builtInItemProvider = new BuiltInItemProvider(this) {
+			@Override
+			public String getText(Object object) {
+				BuiltIn builtIn = (BuiltIn)object;
+				if (builtIn.eIsProxy()) {
+					try {
+						String fragment = URLDecoder.decode(((InternalEObject)builtIn).eProxyURI().fragment(), "utf-8");
+						return "builtin <" + fragment + ">";
+					} catch (UnsupportedEncodingException e) {
+						throw new AssertionError(e);
+					}
+				} else if (builtIn.isRef()){
+					return "ref builtin " + getLabel(OmlRead.resolve(builtIn), builtIn);
+				} else {
+					return "builtin " + getLabel(builtIn);
+				}
+			}
+		};
+		return builtInItemProvider;
+	}
+
 	@Override
 	public Adapter createTypePredicateAdapter() {
 		if (typePredicateItemProvider == null) typePredicateItemProvider = new TypePredicateItemProvider(this) {
 			@Override
 			public String getText(Object object) {
 				TypePredicate predicate = (TypePredicate)object;
-				return getPredicateDirection(predicate) + getLabel(predicate.getType(), predicate) + "("+predicate.getVariable()+")";
+				return getPredicateDirection(predicate) + getLabel(predicate.getType(), predicate) + "("+getLabel(predicate.getArgument(), predicate)+")";
 			}
 		};
 		return typePredicateItemProvider;
@@ -460,7 +488,7 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 			@Override
 			public String getText(Object object) {
 				RelationEntityPredicate predicate = (RelationEntityPredicate)object;
-				return getPredicateDirection(predicate) + getLabel(predicate.getEntity(), predicate) + "("+predicate.getVariable1()+", "+predicate.getVariable()+", "+predicate.getVariable2()+")";
+				return getPredicateDirection(predicate) + getLabel(predicate.getType(), predicate) + "("+getLabel(predicate.getArgument1(), predicate)+", "+getLabel(predicate.getArgument(), predicate)+", "+getLabel(predicate.getArgument2(), predicate)+")";
 			}
 		};
 		return relationEntityPredicateItemProvider;
@@ -472,7 +500,7 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 			@Override
 			public String getText(Object object) {
 				PropertyPredicate predicate = (PropertyPredicate)object;
-				return getPredicateDirection(predicate) + getLabel(predicate.getProperty(), predicate) + "("+predicate.getVariable1()+", "+predicate.getVariable2()+")";
+				return getPredicateDirection(predicate) + getLabel(predicate.getProperty(), predicate) + "("+getLabel(predicate.getArgument1(), predicate)+", "+getLabel(predicate.getArgument2(), predicate)+")";
 			}
 		};
 		return propertyPredicateItemProvider;
@@ -484,7 +512,7 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 			@Override
 			public String getText(Object object) {
 				SameAsPredicate predicate = (SameAsPredicate)object;
-				return getPredicateDirection(predicate) + "sameAs("+predicate.getVariable1()+", "+predicate.getVariable2()+")";
+				return getPredicateDirection(predicate) + "sameAs("+getLabel(predicate.getArgument1(), predicate)+", "+getLabel(predicate.getArgument2(), predicate)+")";
 			}
 		};
 		return sameAsPredicateItemProvider;
@@ -496,12 +524,26 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 			@Override
 			public String getText(Object object) {
 				DifferentFromPredicate predicate = (DifferentFromPredicate)object;
-				return getPredicateDirection(predicate) + "differentFrom("+predicate.getVariable1()+", "+predicate.getVariable2()+")";
+				return getPredicateDirection(predicate) + "differentFrom("+getLabel(predicate.getArgument1(), predicate)+", "+getLabel(predicate.getArgument2(), predicate)+")";
 			}
 		};
 		return differentFromPredicateItemProvider;
 	}
 	
+	@Override
+	public Adapter createBuiltInPredicateAdapter() {
+		if (builtInPredicateItemProvider == null) builtInPredicateItemProvider = new BuiltInPredicateItemProvider(this) {
+			@Override
+			public String getText(Object object) {
+				BuiltInPredicate predicate = (BuiltInPredicate)object;
+				StringBuffer arguments = new StringBuffer();
+				predicate.getArguments().forEach(i -> arguments.append(", "+getLabel(i, predicate)));
+				return getPredicateDirection(predicate) + "builtIn("+getLabel(predicate.getBuiltIn(), predicate)+arguments+")";
+			}
+		};
+		return builtInPredicateItemProvider;
+	}
+
 	// Axioms (specialization, key, and restriction)
 	
 	@Override
@@ -637,7 +679,7 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 					} catch (UnsupportedEncodingException e) {
 						throw new AssertionError(e);
 					}
-				} else if (instance.getRef() != null){
+				} else if (instance.isRef()){
 					return "ref ci " + getLabel(OmlRead.resolve(instance), instance);
 				} else {
 					return "ci " + getLabel(instance);
@@ -661,7 +703,7 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 					} catch (UnsupportedEncodingException e) {
 						throw new AssertionError(e);
 					}
-				} else if (instance.getRef() != null){
+				} else if (instance.isRef()){
 					label.append("ref ri " + getLabel(OmlRead.resolve(instance), instance));
 				} else {
 					label.append("ri " + getLabel(instance));
@@ -813,6 +855,28 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 		}
 		return getLabel(member);
 	}
+
+	static String getLabel(Argument argument, Element element) {
+		if (argument == null) {
+			return "<null>";
+		} else if (argument.getVariable() != null) {
+			return argument.getVariable();
+		} else if (argument.getLiteral() != null) {
+			return getLiteralLabel(new StringBuilder(), argument.getLiteral()).toString();
+		} else if (argument.getInstance() != null) {
+			if (argument.getInstance().eIsProxy()) {
+				return "<" + EcoreUtil.getURI(argument.getInstance()) + ">";
+			} else if (element != null) {
+				String label = OmlRead.getAbbreviatedIriIn(argument.getInstance(), element.getOntology());
+				if (label != null) {
+					return label;
+				}
+			}
+			return getLabel(argument.getInstance());
+		}
+		return "<null>";
+	}
+	
 	
 	private static String getLabel(Member member) {
 		String name = member.getName();

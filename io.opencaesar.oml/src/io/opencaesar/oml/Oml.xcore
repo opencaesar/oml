@@ -223,6 +223,25 @@ abstract class Predicate extends Element {
 }
 
 /*
+ * Argument is an element that represents an argument to a predicate specified as a variable, a literal, or an instance
+ */
+@Bikeshed(heading="Rules")
+class Argument extends Element {
+    /*
+     * An optional variable specified by this argument
+     */
+    ID[?] variable
+    /*
+     * An optional literal specified by this argument
+     */
+    contains Literal[?] literal
+    /*
+     * An optional instance specified by this argument
+     */
+    refers NamedInstance[?] instance
+}
+
+/*
  * Literal is an element that represents a specific literal value classified by a scalar.
  */
 @Bikeshed(heading="Literals")
@@ -303,6 +322,12 @@ abstract class Member extends IdentifiedElement {
      * Gets the Ref of this member
      */
     op Member[?] getRef()
+    /*
+     * Determines if the member is a ref to another member
+     */
+    op boolean isRef() {
+    	return getRef() !== null
+    }
     /*
      * Gets the IRI of this member
      */
@@ -472,6 +497,17 @@ class Rule extends VocabularyStatement {
      * The predicate that is the consequent of this rule
      */
     contains Predicate[*] consequent opposite consequentRule
+}
+
+/*
+ * BuiltIn is a member of a vocabulary that represents a builtin function
+ */
+@Bikeshed(heading="Rules")
+class BuiltIn extends VocabularyStatement {
+	/*
+	 * A ref to another builtin
+	 */
+	refers BuiltIn ref
 }
 
 ////////////////////////////////////////
@@ -1300,34 +1336,44 @@ class PropertyValueAssertion extends Assertion {
 ////////////////////////////////////////
 
 /*
- * UnaryPredicate is a predicate that binds one variable
+ * UnaryPredicate is a predicate that has one argument
  */
 @Bikeshed(heading="Rules")
 abstract class UnaryPredicate extends Predicate {
     /*
-     * The variable name specified by the predicate
+     * An argument of the predicate
      */
-    ID[1] variable
+    contains Argument[1] argument
 }
 
 /*
- * BinaryPredicate is a predicate that takes two arguments: the first is a `variable1` to match to some 
- * instance, and the second is either a `variable2` to match to some instance or a specific `instance2`.
+ * BinaryPredicate is a predicate that has two arguments: argument1 and argument2
  */
 @Bikeshed(heading="Rules")
 abstract class BinaryPredicate extends Predicate {
     /*
-     * The variable1 specified by the predicate
+     * An argument of the predicate
      */
-    ID[1] variable1
+    contains Argument[1] argument1
     /*
-     * The optional variable2 specified by the predicate
+     * An argument of the predicate
      */
-    ID[?] variable2
+    contains Argument[1] argument2
+}
+
+/*
+ * BuiltInPredicate is a predicate that has two arguments: argument1 and argument2
+ */
+@Bikeshed(heading="Rules")
+class BuiltInPredicate extends Predicate {
     /*
-     * The optional instance2 specified by the predicate
+     * The called builtin
      */
-    refers NamedInstance[?] instance2
+    refers BuiltIn[1] builtIn
+    /*
+     * An argument of the predicate
+     */
+    contains Argument[+] arguments
 }
 
 ////////////////////////////////////////
@@ -1335,27 +1381,27 @@ abstract class BinaryPredicate extends Predicate {
 ////////////////////////////////////////
 
 /*
- * TypePredicate is a unary predicate that binds its variable to an instance with a specific type.
+ * TypePredicate is a unary predicate whose argument is bound to a value typed by a given type.
  */
 @Bikeshed(heading="Rules")
 class TypePredicate extends UnaryPredicate {
     /*
-     * The type of the instance
+     * The type of a value
      */
     refers Type[1] ^type
 }
 
 /*
- * RelationEntityPredicate is a binary predicate that binds its `variable` to a relation instance,
- * its `variable1` to the source of that relation instance, and either its `variable2` or `instance2` as the target of
- * that relation instance.
+ * RelationEntityPredicate is a unary and binary predicate that holds when its argument is bound to an instance typed by the given relation 
+ * entity, its argument1 is bound to the source of that relation instance and its argument2 is bound to the target of that relation instance
+ * .
  */
 @Bikeshed(heading="Rules")
 class RelationEntityPredicate extends UnaryPredicate, BinaryPredicate {
     /*
-     * The type of the relation instance
+     * The type of a relation instance
      */
-    refers RelationEntity[1] entity
+    refers RelationEntity[1] ^type
 }
 
 ////////////////////////////////////////
@@ -1363,34 +1409,31 @@ class RelationEntityPredicate extends UnaryPredicate, BinaryPredicate {
 ////////////////////////////////////////
 
 /*
- * PropertyPredicate is a binary predicate that binds its `variable1` to an instance (subject), and its 
- `variable2`, `instance2`, or `literal2` as the value of a specific property. 
+ * PropertyPredicate is a binary predicate that holds when its argument1 is bound to an instance and its argument2 is bound to a
+ * a value of a given property on that instance.
  */
 @Bikeshed(heading="Rules")
 class PropertyPredicate extends BinaryPredicate {
     /*
-     * The property of the named instance whose value is bound or matched
+     * The property of an instance 
      */
     refers Property[1] property
-    /*
-     * The optional literal2 that is matched as a value of the property
-     */
-    contains Literal[?] literal2
 }
 
 /*
- * SameAsPredicate is a binary predicate that checks that its two arguments bind to the same instance
+ * SameAsPredicate is a binary predicate that holds when its two arguments are bound to the same instance
  */
 @Bikeshed(heading="Rules")
 class SameAsPredicate extends BinaryPredicate {
 }
 
 /*
- * DifferentFromPredicate is a binary predicate that checks that its two arguments bind to different instances
+ * DifferentFromPredicate is a binary predicate that holds when its two arguments are bound to different instances
  */
 @Bikeshed(heading="Rules")
 class DifferentFromPredicate extends BinaryPredicate {
 }
+
 
 ////////////////////////////////////////
 //  Literals

@@ -134,6 +134,29 @@ public class OmlItemProviderAdapterFactory extends OmlAdapterFactory implements 
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.Argument} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ArgumentItemProvider argumentItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link io.opencaesar.oml.Argument}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createArgumentAdapter() {
+		if (argumentItemProvider == null) {
+			argumentItemProvider = new ArgumentItemProvider(this);
+		}
+
+		return argumentItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.Vocabulary} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -246,6 +269,29 @@ public class OmlItemProviderAdapterFactory extends OmlAdapterFactory implements 
 		}
 
 		return ruleItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.BuiltIn} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected BuiltInItemProvider builtInItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link io.opencaesar.oml.BuiltIn}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createBuiltInAdapter() {
+		if (builtInItemProvider == null) {
+			builtInItemProvider = new BuiltInItemProvider(this);
+		}
+
+		return builtInItemProvider;
 	}
 
 	/**
@@ -755,6 +801,29 @@ public class OmlItemProviderAdapterFactory extends OmlAdapterFactory implements 
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.BuiltInPredicate} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected BuiltInPredicateItemProvider builtInPredicateItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link io.opencaesar.oml.BuiltInPredicate}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createBuiltInPredicateAdapter() {
+		if (builtInPredicateItemProvider == null) {
+			builtInPredicateItemProvider = new BuiltInPredicateItemProvider(this);
+		}
+
+		return builtInPredicateItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.TypePredicate} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1091,11 +1160,13 @@ public class OmlItemProviderAdapterFactory extends OmlAdapterFactory implements 
 	public void dispose() {
 		if (annotationItemProvider != null) annotationItemProvider.dispose();
 		if (importItemProvider != null) importItemProvider.dispose();
+		if (argumentItemProvider != null) argumentItemProvider.dispose();
 		if (vocabularyItemProvider != null) vocabularyItemProvider.dispose();
 		if (vocabularyBundleItemProvider != null) vocabularyBundleItemProvider.dispose();
 		if (descriptionItemProvider != null) descriptionItemProvider.dispose();
 		if (descriptionBundleItemProvider != null) descriptionBundleItemProvider.dispose();
 		if (ruleItemProvider != null) ruleItemProvider.dispose();
+		if (builtInItemProvider != null) builtInItemProvider.dispose();
 		if (structureItemProvider != null) structureItemProvider.dispose();
 		if (aspectItemProvider != null) aspectItemProvider.dispose();
 		if (conceptItemProvider != null) conceptItemProvider.dispose();
@@ -1118,6 +1189,7 @@ public class OmlItemProviderAdapterFactory extends OmlAdapterFactory implements 
 		if (propertyValueRestrictionAxiomItemProvider != null) propertyValueRestrictionAxiomItemProvider.dispose();
 		if (typeAssertionItemProvider != null) typeAssertionItemProvider.dispose();
 		if (propertyValueAssertionItemProvider != null) propertyValueAssertionItemProvider.dispose();
+		if (builtInPredicateItemProvider != null) builtInPredicateItemProvider.dispose();
 		if (typePredicateItemProvider != null) typePredicateItemProvider.dispose();
 		if (relationEntityPredicateItemProvider != null) relationEntityPredicateItemProvider.dispose();
 		if (propertyPredicateItemProvider != null) propertyPredicateItemProvider.dispose();

@@ -16,6 +16,7 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import com.google.common.base.Objects;
 
 import io.opencaesar.oml.Annotation;
+import io.opencaesar.oml.Argument;
 import io.opencaesar.oml.Aspect;
 import io.opencaesar.oml.BinaryPredicate;
 import io.opencaesar.oml.Classifier;
@@ -340,23 +341,34 @@ class OmlOntologyDiagramView {
 	private String toText(final Predicate predicate) {
 		if (predicate instanceof SameAsPredicate) {
 			SameAsPredicate p = (SameAsPredicate) predicate;
-			return "SameAs(" + p.getVariable1() + ", " + p.getVariable2() + ")";
+			return "SameAs(" + toText(p.getArgument1()) + ", " + toText(p.getArgument2()) + ")";
 		} else if (predicate instanceof DifferentFromPredicate) {
 			DifferentFromPredicate p = (DifferentFromPredicate) predicate;
-			return "DifferentFrom(" + p.getVariable1() + ", " + p.getVariable2() + ")";
+			return "DifferentFrom(" + toText(p.getArgument1()) + ", " + toText(p.getArgument2()) + ")";
 		} else if (predicate instanceof RelationEntityPredicate) {
 			RelationEntityPredicate p = (RelationEntityPredicate) predicate;
-			return p.getEntity().getName() + "(" + p.getVariable1() + "," + p.getVariable() + "," + p.getVariable2() + ")";
+			return p.getType().getName() + "(" + toText(p.getArgument1()) + "," + toText(p.getArgument()) + "," + toText(p.getArgument2()) + ")";
 		} else if (predicate instanceof BinaryPredicate) {
 			BinaryPredicate p = (BinaryPredicate) predicate;
-			return OmlRead.getTerm(p).getName() + "(" + p.getVariable1() + "," + p.getVariable2() + ")";
+			return OmlRead.getTerm(p).getName() + "(" + toText(p.getArgument1()) + "," + toText(p.getArgument2()) + ")";
 		} else if (predicate instanceof UnaryPredicate) {
 			UnaryPredicate p = (UnaryPredicate) predicate;
-			return OmlRead.getTerm(p).getName() + "(" + p.getVariable() + ")";
+			return OmlRead.getTerm(p).getName() + "(" + toText(p.getArgument()) + ")";
 		} else
 			throw new IllegalArgumentException("Unknown kind of predicate: " + predicate.eClass().getName());
 	}
 
+	private String toText(final Argument argument) {
+		if (argument.getVariable() != null) {
+			return argument.getVariable();
+		} else if (argument.getLiteral() != null) {
+			return getLabel(argument.getLiteral());
+		} else if (argument.getInstance() != null) {
+			getLabel(argument.getInstance());
+		}
+		return "<null>";
+	}
+	
 	public OmlLabel createLabel(final NamedInstance i, final PropertyValueAssertion ax) {
 		final String id = idCache.uniqueId(ax, getLocalName(i) + ".valueAssertion." + getLocalName(ax.getProperty()));
 		final OmlLabel l = newLeafSElement(OmlLabel.class, id, OmlDiagramModule.SLabel_SLabelView_text);
