@@ -39,6 +39,7 @@ import org.eclipse.emf.ecore.EObject
 
 annotation "https://tabatkins.github.io/bikeshed" as Bikeshed
 annotation "https://tabatkins.github.io/bikeshed/headings" as BikeshedHeadings
+annotation "https://www.eclipse.org/emf/2002/Ecore" as Ecore
 
 /*
  * Element is the most general type in the OML metamodel. All objects in an OML model are elements.
@@ -432,14 +433,17 @@ abstract class SemanticProperty extends Property {
     /*
      * Determines if this property is functional (has a max of one value per instance) 
      */
+    @Ecore(getterOf="functional")
     op boolean isFunctional()
     /*
      * Gets the domain of this property
      */
+    @Ecore(getterOf="domain")
     op Classifier getDomain()
     /*
      * Gets the range of the property
      */
+    @Ecore(getterOf="range")
     op Type getRange()
 }
 
@@ -625,6 +629,7 @@ abstract class Relation extends Feature {
     /* 
      * Gets the relation entity of this relation 
      */
+    @Ecore(getterOf="relationEntity")
     op RelationEntity getRelationEntity()
     
     op Entity deriveDomain()
@@ -1456,6 +1461,7 @@ abstract class TypeAssertion extends Assertion {
     /*
      * Gets the type referenced by this assertion
      */
+    @Ecore(getterOf="type")
     op Entity getType()
 }
 
@@ -1515,10 +1521,12 @@ abstract class PropertyValueAssertion extends Assertion {
     /*
      * Gets the property referenced by this assertion
      */
+    @Ecore(getterOf="property")
     op SemanticProperty getProperty()
     /*
      * Gets the value specified by this assertion
      */
+    @Ecore(getterOf="value")
     op Element getValue()
 }
 
