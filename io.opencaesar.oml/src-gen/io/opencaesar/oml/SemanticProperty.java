@@ -43,6 +43,7 @@ public interface SemanticProperty extends Property {
 	 * Determines if this property is functional (has a max of one value per instance)
 	 * <!-- end-model-doc -->
 	 * @model kind="operation" unique="false"
+	 *        annotation="https://www.eclipse.org/emf/2002/Ecore getterOf='functional'"
 	 * @generated
 	 */
 	boolean isFunctional();
@@ -54,6 +55,7 @@ public interface SemanticProperty extends Property {
 	 * Gets the domain of this property
 	 * <!-- end-model-doc -->
 	 * @model kind="operation" unique="false"
+	 *        annotation="https://www.eclipse.org/emf/2002/Ecore getterOf='domain'"
 	 * @generated
 	 */
 	Classifier getDomain();
@@ -65,6 +67,7 @@ public interface SemanticProperty extends Property {
 	 * Gets the range of the property
 	 * <!-- end-model-doc -->
 	 * @model kind="operation" unique="false"
+	 *        annotation="https://www.eclipse.org/emf/2002/Ecore getterOf='range'"
 	 * @generated
 	 */
 	Type getRange();

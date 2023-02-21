@@ -40,6 +40,7 @@ import org.eclipse.emf.ecore.EObject
 annotation "https://tabatkins.github.io/bikeshed" as Bikeshed
 annotation "https://tabatkins.github.io/bikeshed/headings" as BikeshedHeadings
 annotation "https://www.eclipse.org/emf/2002/Ecore" as Ecore
+annotation "https://opencaesar.io/oml/Ecore" as OmlEcore
 
 /*
  * Element is the most general type in the OML metamodel. All objects in an OML model are elements.
@@ -128,10 +129,12 @@ abstract class Ontology extends IdentifiedElement {
     /*
      * The globally unique namespace of this ontology
      */
+	@OmlEcore(identifier="true")
     Namespace[1] namespace
     /*
      * The prefix of this ontology's namespace
      */
+    @OmlEcore(identifier="true")
     ID[1] prefix
     /*
      * Get the namespace's iri

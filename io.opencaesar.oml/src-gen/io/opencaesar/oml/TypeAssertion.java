@@ -42,6 +42,7 @@ public interface TypeAssertion extends Assertion {
 	 * Gets the type referenced by this assertion
 	 * <!-- end-model-doc -->
 	 * @model kind="operation" unique="false"
+	 *        annotation="https://www.eclipse.org/emf/2002/Ecore getterOf='type'"
 	 * @generated
 	 */
 	Entity getType();
