@@ -254,9 +254,9 @@ public class OmlFormatter extends AbstractJavaFormatter {
 		doc.surround(keyword(property, oml.getScalarPropertyAccess().getPropertyKeyword_2()), oneSpace());
 		formatCommas(property, doc);
 		formatBrackets(property, doc);
-		doc.prepend(keyword(property, oml.getScalarPropertyAccess().getDomainKeyword_5_1()), newLine());
-		doc.prepend(keyword(property, oml.getScalarPropertyAccess().getRangeKeyword_5_3()), newLine());
-		doc.prepend(keyword(property, oml.getScalarPropertyAccess().getFunctionalFunctionalKeyword_5_5_0()), newLine());
+		doc.prepend(keyword(property, oml.getScalarPropertyAccess().getDomainKeyword_6()), newLine());
+		doc.prepend(keyword(property, oml.getScalarPropertyAccess().getRangeKeyword_8()), newLine());
+		doc.prepend(keyword(property, oml.getScalarPropertyAccess().getFunctionalFunctionalKeyword_10_0()), newLine());
 	}
 
 	protected void _format(StructuredProperty property, IFormattableDocument doc) {
@@ -265,9 +265,9 @@ public class OmlFormatter extends AbstractJavaFormatter {
 		doc.surround(keyword(property, oml.getStructuredPropertyAccess().getPropertyKeyword_2()), oneSpace());
 		formatCommas(property, doc);
 		formatBrackets(property, doc);
-		doc.prepend(keyword(property, oml.getStructuredPropertyAccess().getDomainKeyword_5_1()), newLine());
-		doc.prepend(keyword(property, oml.getStructuredPropertyAccess().getRangeKeyword_5_3()), newLine());
-		doc.prepend(keyword(property, oml.getStructuredPropertyAccess().getFunctionalFunctionalKeyword_5_5_0()), newLine());
+		doc.prepend(keyword(property, oml.getStructuredPropertyAccess().getDomainKeyword_6()), newLine());
+		doc.prepend(keyword(property, oml.getStructuredPropertyAccess().getRangeKeyword_8()), newLine());
+		doc.prepend(keyword(property, oml.getStructuredPropertyAccess().getFunctionalFunctionalKeyword_10_0()), newLine());
 	}
 
 	protected void _format(FacetedScalar scalar, IFormattableDocument doc) {

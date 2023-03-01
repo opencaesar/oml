@@ -308,7 +308,7 @@ For example, the *mission* vocabulary *uses* the *organizations* description (in
 `vocabulary` `<`http://com.xyz/methodology/mission1#`>` `as` mission1 `{`
     `extends` `<`http://com.xyz/methodology/mission#`>` `as` mission
     `uses` `<`http://com.xyz/methodology/organizations#`>` `as` organizations
-    `concept` Component1 `:> ` Component [
+    `concept` Spacecraft [
         `restricts` `relation` mission:isResponsibilityOf `to` organization:NASA   // a cross-reference to instance NASA 
     ]
 `}`
@@ -320,7 +320,7 @@ Note: descriptions that are used by a vocabulary typically define notable instan
 
 Types that can be defined in a vocabulary are either *classifiers* (structured types) or *scalars* (primitive types). Some classifiers ([Aspect](#Aspect-LR), [Concept](#Concept-LR) and [Relation Entity]((#RelationEntity-LR))) are *entities*, meaning they can classify named instances (that are unique by reference). Other classifiers ([Structure](#Structure-LR)) can only classify anonymous instances (that are unique by value). Also, some scalars ([Faceted Scalar](#FacetedScalar-LR)) can classify an unlimited set of literals, while other scalars ([Enumerated Scalar](#EnumeratedScalar-LR)) can only classify a limited set of literals.
 
-Classifiers can specialize one or more classifiers (multiple-inheritance), while scalars can only specialize one scalar only (single-inheritance). These specializations are further constrained for each type as discussed below.
+A type can specialize other types of the same kind only. This is done by following the type's name by the `:>` symbol then a list of comma-separated supertype IRIs. While a classifier can specialize one or more classifiers (multiple-inheritance), a scalar can only specialize one scalar (single-inheritance). Specialization semantics are further constrained for each type as discussed below.
 
 #### Aspect #### {#Aspect-LR}
 
@@ -384,7 +384,7 @@ The following example vocabulary defines two concepts: *Component* and *Function
  
 <pre class="highlight highlight-html">
     Annotation*
-    `relation` `entity` ID (`:>` [RelationEntity|Aspect|IRI] (`,` [RelationEntity|Aspect|IRI])*)? (`[`
+    `relation` `entity` ID (`:>` [RelationEntity|Aspect|IRI] (`,` [RelationEntity|Aspect|IRI])*)? `[`
         `from` [Entity|IRI]                 // the relation entity's source
         `to` [Entity|IRI]                   // the relation entity's target
         Annotation*
@@ -529,6 +529,8 @@ A [scalar](#Scalar-Syntax) is a type defined in a vocabulary and represents a pr
 
 OML considers a following set of faceted scalars as *standard*:
 
+Note: for the standard vocabularies below to be used (cross-referenced), they need to exist as OML files that are mapped by the catalog.xml file of the OML project. One way to achieve that is to recreate such files directly under the `src/oml` folder. However, a simpler approach is to add a maven dependency on the `core-vocabularies` library (in Maven Central) in the project's build.gradle and invoking the `OmlMergeTask` on it. This would result in the standard vocabularies getting downloaded to the `oml\build` folder. An example of doing this can be seen in the [oml-template](https://github.com/opencaesar/oml-template/blob/master/build.gradle#L54-L78) project.
+
 <pre class="highlight highlight-html">
 `vocabulary` `<`http://www.w3.org/2000/01/rdf-schema#`>` `as` rdfs `{`
 	// Literals
@@ -652,7 +654,10 @@ The following example vocabulary defines an enumerated scalar *RGB* that enumera
 
 ### Properties ### {#Properties-LR}
 
-Properties that can be defined in a vocabulary include *semantic properties* and *annotation properties*. A semantic property ([Scalar Property](#ScalarProperty-LR) or [Structured Property](#StructuredProperty-LR)) has logical semantics and is specified with a domain and a range. The domain represents a classifier whose instances can be characterized by such property, while the range represents a type that classifies a set of allowed characterization values. An [Annotation Property](#AnnotationProperty-LR), on the other hand, has no logical semantics and enables the annotation of an element (ontology, import, or member) with non-semantic information.
+Properties are characteristics of model elements. Two categories of properties can be defined in a vocabulary: *annotation properties* and *semantic properties*. An [Annotation Property](#AnnotationProperty-LR) has no logical semantics and can characterize an annotated element (ontology, import, or member) with non-semantic information. On the other hand, a semantic property ([Scalar Property](#ScalarProperty-LR) or [Structured Property](#StructuredProperty-LR)) has logical semantics and can characterize classifiers. A semantic property is specified with a domain representing a classifier whose instances can be characterized by such property, and a range representing a type for the values of the property.
+
+A property can specialize other properties of the same kind only. This is done by following the property's name by the `:>` symbol then a list of comma-separated super-property IRIs.
+
 
 #### Scalar Property #### {#ScalarProperty-LR}
 
@@ -660,11 +665,11 @@ A [scalar property](#ScalarProperty-Syntax) is a semantic property defined in a 
 
 <pre class="highlight highlight-html">
 	Annotation*
-	`scalar` `property` ID (`:>` [ScalarProperty|IRI] (`,` [ScalarProperty|IRI])*)? (`[`
+	`scalar` `property` ID (`:>` [ScalarProperty|IRI] (`,` [ScalarProperty|IRI])*)? `[`
 		`domain` [Classifier|IRI]
 		`range` [Scalar|IRI]
 		`functional`?                // each instance can have a maximum of 1 value for this property
-	`]`)?
+	`]`
 </pre>
 
 The following example vocabulary defines three scalar properties named *hasId*, *hasName*, and *isAbstract*. The *hasId* property is functional and has a domain of *Component* and a range of *xsd:string*. The *hasName* property has a domain of *Function* and a range of *xsd:string*. Finally, the *isAbstract* property is functional and has the domain of *Function* and the range of *xsd:boolean*.
@@ -697,11 +702,11 @@ A [structured property](#StructuredProperty-Syntax) is a semantic property defin
 
 <pre class="highlight highlight-html">
 	Annotation*
-	`structure` `property` ID (`:>` [StructuredProperty|IRI] (`,` [StructuredProperty|IRI])*)? (`[`
+	`structure` `property` ID (`:>` [StructuredProperty|IRI] (`,` [StructuredProperty|IRI])*)? `[`
 		`domain` [Classifier|IRI]
 		`range` [Structure|IRI]
 		`functional`?                // each instance can have a maximum of 1 value for this property
-	`]`)?
+	`]`
 </pre>
 
 The following example vocabulary defines a structured property named *hasLocation* whose domain is concept *Shape* and whose range is structure *Point*. The latter is the domain of two scalar properties *hasX* and *hasY* that have a range of *xsd:int*.

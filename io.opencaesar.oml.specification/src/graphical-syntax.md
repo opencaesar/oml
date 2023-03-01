@@ -1,18 +1,8 @@
 # Graphical BNF # {#Graphical-BNF}
 
-**BNF Notation**
+**Convensions**
 
-The textual symbols are colored in orange, whereas the symbols colored in gray are BNF markings. They will not show up in actual rendering of OML diagrams.
-
-**Hyperlink**
-
-Elements with a blue hyperlink can be clicked on to redirect to a detailed description of their abstract syntax.
-
-**Compartment**
-
-Diagram compartments are laid out in free form, and list compartments are laid out vertically.
-
-The following are the graphical BNF rules.
+BNF symbols are colored in orange and will not show up in actual rendering of OML diagrams. Elements with a hyperlink can be clicked on to navigate to a detailed description of their abstract syntax. Shares are laid freely on diagrams. List compartments (within shapes) are always laid out in a vertical stack.
 
 <pre class="highlight highlight-html">
 

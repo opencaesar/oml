@@ -37,8 +37,15 @@ dd > p:first-child, li > p:first-child {
 }
 
 code {
-  color:darkred; 
+  color:red; 
   font-weight: bold;
+}
+
+@media (prefers-color-scheme: dark) {
+	code {
+	  color:yellow; 
+	  font-weight: bold;
+	}
 }
 
 </style>

@@ -138,19 +138,19 @@ SemanticProperty:
 
 ScalarProperty:
 	ownedAnnotations+=Annotation*
-	'scalar' 'property' name=ID (':>' ownedSpecializations+=SpecializationAxiom (',' ownedSpecializations+=SpecializationAxiom)*)? ('['
+	'scalar' 'property' name=ID (':>' ownedSpecializations+=SpecializationAxiom (',' ownedSpecializations+=SpecializationAxiom)*)? '['
 		'domain' domain=[Classifier|Ref]
 		'range' range=[Scalar|Ref]
 		(functional?='functional')?
-	']')?;
+	']';
 
 StructuredProperty:
 	ownedAnnotations+=Annotation*
-	'structured' 'property' name=ID (':>' ownedSpecializations+=SpecializationAxiom (',' ownedSpecializations+=SpecializationAxiom)*)? ('['
+	'structured' 'property' name=ID (':>' ownedSpecializations+=SpecializationAxiom (',' ownedSpecializations+=SpecializationAxiom)*)? '['
 		'domain' domain=[Classifier|Ref]
 		'range' range=[Structure|Ref]
 		(functional?='functional')?
-	']')?;
+	']';
 
 Scalar:
 	FacetedScalar |

@@ -224,19 +224,19 @@
 
 <a id="ScalarProperty-Syntax">ScalarProperty</a>:
 	Annotation*
-	`scalar` `property` ID (`:>` SpecializationAxiom (`,` SpecializationAxiom)*)? (`[`
+	`scalar` `property` ID (`:>` SpecializationAxiom (`,` SpecializationAxiom)*)? `[`
 		`domain` [Classifier|IRI]
 		`range` [Scalar|IRI]
 		`functional`?
-	`]`)?
+	`]`
 
 <a id="StructuredProperty-Syntax">StructuredProperty</a>:
 	Annotation*
-	`structured` `property` ID (`:>` SpecializationAxiom (`,` SpecializationAxiom)*)? (`[`
+	`structured` `property` ID (`:>` SpecializationAxiom (`,` SpecializationAxiom)*)? `[`
 		`domain` [Classifier|IRI]
 		`range` [Structure|IRI]
 		`functional`?
-	`]`)?
+	`]`
 
 <a id="Rule-Syntax">Rule</a>:
 	Annotation*

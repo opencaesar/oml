@@ -15,3 +15,15 @@ The section named [Abstract Syntax](#Abstract-Syntax) is targetted mostly at **t
 The section named [Public API](#Public-API) is targetted at **toolsmiths**. It describes the Java API of OML that can be used to create language tools, including adapters (transformations between OML and other languages and formats), interfaces (to other tools)  and UI tools (viewers/editors). Some of the public API maps directly from the corresponding OML abstract syntax. Other API adds useful functions that make working with OML programmatically easier.
 
 The section named [Mapping to OWL2 and SWRL](#Mapping-to-Owl2-and-Swrl) is targetted at both **methodologists** and **toolsmiths**. It describes the semantics of OML by mapping them to the semantics of OWL2 and SWRL. It accomplishes that by giving the mapping of every OML construct to a pattern defined in a subset of OWL2 and SWRL. This can help a methodologist understand the semantics of OML constructs. It can also help a toolsmith define new tools for OML.
+
+## Document Conventions ## {#Document-Conventions}
+
+## BNF Conventions ## {#BNF-Conventions}
+
+The document uses BNF notation to specify allowed expression syntax in the textual and graphical notation. The following BNF symbols are used:
+
+- expression : the expression is required
+- expression `?` : the expression is optional
+- expression `*` : the expression repeats zero or more times
+- expression `+` : the expression repeats one or more times
+- `(` expression `)` :  the expression is delineated

@@ -47,6 +47,7 @@ import io.opencaesar.oml.Entity;
 import io.opencaesar.oml.EntityReference;
 import io.opencaesar.oml.EnumeratedScalar;
 import io.opencaesar.oml.FacetedScalar;
+import io.opencaesar.oml.ForwardRelation;
 import io.opencaesar.oml.Import;
 import io.opencaesar.oml.Instance;
 import io.opencaesar.oml.KeyAxiom;
@@ -746,10 +747,12 @@ public final class OmlSearch extends OmlIndex {
                 .filter(a -> a.getRelation() == relation)
                 .map(a -> a.getTarget())
                 .collect(Collectors.toList()));
-        targets.addAll(findRelationInstancesWithSource(source).stream()
-                .filter(i -> findTypes(i).stream().filter(t -> ((RelationEntity)t).getForwardRelation() == relation).findFirst().isPresent())
-                .flatMap(a -> a.getTargets().stream())
-                .collect(Collectors.toList()));
+        if (relation instanceof ForwardRelation) {
+	        targets.addAll(findRelationInstancesWithSource(source).stream()
+	                .filter(i -> findTypes(i).stream().anyMatch(t -> ((RelationEntity)t).getForwardRelation() == relation))
+	                .flatMap(a -> a.getTargets().stream())
+	                .collect(Collectors.toList()));
+        }
         return targets;
     }
 
@@ -783,10 +786,12 @@ public final class OmlSearch extends OmlIndex {
                 .filter(a -> a.getRelation() == relation)
                 .map(a -> OmlRead.getSource(a))
                 .collect(Collectors.toList()));
-        sources.addAll(findRelationInstancesWithTarget(target).stream()
-                .filter(i -> findTypes(i).stream().filter(t -> ((RelationEntity)t).getReverseRelation() == relation).findFirst().isPresent())
-                .flatMap(i -> i.getSources().stream())
-                .collect(Collectors.toList()));
+        if (relation instanceof ForwardRelation) {
+	        sources.addAll(findRelationInstancesWithTarget(target).stream()
+	                .filter(i -> findTypes(i).stream().anyMatch(t -> ((RelationEntity)t).getForwardRelation() == relation))
+	                .flatMap(i -> i.getSources().stream())
+	                .collect(Collectors.toList()));
+        }
         return sources;
     }
 

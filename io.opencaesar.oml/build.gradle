@@ -36,8 +36,5 @@ dependencies {
 }
 processResources.dependsOn(generateXtext)*/
 
-sourceSets {
-	main.resources.exclude '**/*.xcore'
-}
 
 assemble.dependsOn javadoc
