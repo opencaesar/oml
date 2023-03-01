@@ -1487,9 +1487,9 @@ Possible extra rowspan handling
 		}
 	}
 </style>
-  <meta content="Bikeshed version 63e66730b, updated Tue Oct 25 12:35:05 2022 -0700" name="generator">
+  <meta content="Bikeshed version 79b02508e, updated Tue Feb 28 10:48:19 2023 -0800" name="generator">
   <link href="https://github.com/opencaesar/oml" rel="canonical">
-  <meta content="9f21835a5c7c92e3264ba723cf6469844f075808" name="document-revision">
+  <meta content="8991505a3974269f0b2422af22d27494a2c7b664" name="document-revision">
 <style>
 body {
   padding: 0;
@@ -1515,13 +1515,19 @@ dd > p:first-child, li > p:first-child {
 }
 
 code {
-  color:darkred; 
+  color:red; 
   font-weight: bold;
+}
+
+@media (prefers-color-scheme: dark) {
+	code {
+	  color:yellow; 
+	  font-weight: bold;
+	}
 }
 
 </style>
 <style>/* style-autolinks */
-
 .css.css, .property.property, .descriptor.descriptor {
     color: var(--a-normal-text);
     font-size: inherit;
@@ -1581,7 +1587,8 @@ pre .property::before, pre .property::after {
 
 [data-link-type=biblio] {
     white-space: pre;
-}</style>
+}
+</style>
 <style>/* style-colors */
 
 /* Any --*-text not paired with a --*-bg is assumed to have a transparent bg */
@@ -1690,9 +1697,9 @@ pre .property::before, pre .property::after {
     --outdated-shadow: red;
 
     --editedrec-bg: darkorange;
-}</style>
+}
+</style>
 <style>/* style-counters */
-
 body {
     counter-reset: example figure issue;
 }
@@ -1719,9 +1726,9 @@ figcaption {
 }
 figcaption:not(.no-marker)::before {
     content: "Figure " counter(figure) " ";
-}</style>
+}
+</style>
 <style>/* style-dfn-panel */
-
 :root {
     --dfnpanel-bg: #ddd;
     --dfnpanel-text: var(--text);
@@ -1729,10 +1736,10 @@ figcaption:not(.no-marker)::before {
 .dfn-panel {
     position: absolute;
     z-index: 35;
-    height: auto;
-    width: -webkit-fit-content;
-    width: fit-content;
+    width: 20em;
+    min-width: min-content;
     max-width: 300px;
+    height: auto;
     max-height: 500px;
     overflow: auto;
     padding: 0.5em 0.75em;
@@ -1740,6 +1747,7 @@ figcaption:not(.no-marker)::before {
     background: var(--dfnpanel-bg);
     color: var(--dfnpanel-text);
     border: outset 0.2em;
+    white-space: normal; /* in case it's moved into a pre */
 }
 .dfn-panel:not(.on) { display: none; }
 .dfn-panel * { margin: 0; padding: 0; text-indent: 0; }
@@ -1762,7 +1770,6 @@ figcaption:not(.no-marker)::before {
 .dfn-paneled { cursor: pointer; }
 </style>
 <style>/* style-issues */
-
 a[href].issue-return {
     float: right;
     float: inline-end;
@@ -1772,7 +1779,6 @@ a[href].issue-return {
 }
 </style>
 <style>/* style-md-lists */
-
 /* This is a weird hack for me not yet following the commonmark spec
    regarding paragraph and lists. */
 [data-md] > :first-child {
@@ -1780,7 +1786,8 @@ a[href].issue-return {
 }
 [data-md] > :last-child {
     margin-bottom: 0;
-}</style>
+}
+</style>
 <style>/* style-selflinks */
 
 :root {
@@ -2013,6 +2020,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
        which is quite common in practice... */
     img { background: white; }
 }
+
 @media (prefers-color-scheme: dark) {
     :root {
         --selflink-text: black;
@@ -2088,7 +2096,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://opencaesar.github.io/oml/"> <img alt="Ontological Modeling Language" height="60" src="images/oml.svg"> </a></p>
    <h1 class="p-name no-ref" id="title">Ontological Modeling Language 1.4</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Living Document, <time class="dt-updated" datetime="2022-11-11">11 November 2022</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Living Document, <time class="dt-updated" datetime="2023-03-01">1 March 2023</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -2112,7 +2120,12 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <nav data-fill-with="table-of-contents" id="toc">
    <h2 class="no-num no-toc no-ref" id="contents">Table of Contents</h2>
    <ol class="toc" role="directory">
-    <li><a href="#Document-Organization"><span class="secno">1</span> <span class="content">Document Organization</span></a>
+    <li>
+     <a href="#Document-Organization"><span class="secno">1</span> <span class="content">Document Organization</span></a>
+     <ol class="toc">
+      <li><a href="#Document-Conventions"><span class="secno">1.1</span> <span class="content">Document Conventions</span></a>
+      <li><a href="#BNF-Conventions"><span class="secno">1.2</span> <span class="content">BNF Conventions</span></a>
+     </ol>
     <li>
      <a href="#Getting-Started"><span class="secno">2</span> <span class="content">Getting Started</span></a>
      <ol class="toc">
@@ -2413,6 +2426,21 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
     <p>The section named <a href="#Abstract-Syntax">Abstract Syntax</a> is targetted mostly at <strong>toolsmiths</strong> but can also be used by <strong>methodologists</strong>. It describes the constructs that make up the language, along with their attibutes, relations and constraints. Each set of related constructs are listed under a sub heading, visualized using a UML class diagram under that sub heading, where they appear in white color (other related constructs appear in grey color), and described in details including their super classes, subclasses, properties and constrainsts. Various hyperlinks are provided to help the reader navigate the constructs.</p>
     <p>The section named <a href="#Public-API">Public API</a> is targetted at <strong>toolsmiths</strong>. It describes the Java API of OML that can be used to create language tools, including adapters (transformations between OML and other languages and formats), interfaces (to other tools)  and UI tools (viewers/editors). Some of the public API maps directly from the corresponding OML abstract syntax. Other API adds useful functions that make working with OML programmatically easier.</p>
     <p>The section named <a href="#Mapping-to-Owl2-and-Swrl">Mapping to OWL2 and SWRL</a> is targetted at both <strong>methodologists</strong> and <strong>toolsmiths</strong>. It describes the semantics of OML by mapping them to the semantics of OWL2 and SWRL. It accomplishes that by giving the mapping of every OML construct to a pattern defined in a subset of OWL2 and SWRL. This can help a methodologist understand the semantics of OML constructs. It can also help a toolsmith define new tools for OML.</p>
+    <h3 class="heading settled" data-level="1.1" id="Document-Conventions"><span class="secno">1.1. </span><span class="content">Document Conventions</span><a class="self-link" href="#Document-Conventions"></a></h3>
+    <h3 class="heading settled" data-level="1.2" id="BNF-Conventions"><span class="secno">1.2. </span><span class="content">BNF Conventions</span><a class="self-link" href="#BNF-Conventions"></a></h3>
+    <p>The document uses BNF notation to specify allowed expression syntax in the textual and graphical notation. The following BNF symbols are used:</p>
+    <ul>
+     <li data-md>
+      <p>expression : the expression is required</p>
+     <li data-md>
+      <p>expression <code>?</code> : the expression is optional</p>
+     <li data-md>
+      <p>expression <code>*</code> : the expression repeats zero or more times</p>
+     <li data-md>
+      <p>expression <code>+</code> : the expression repeats one or more times</p>
+     <li data-md>
+      <p><code>(</code> expression <code>)</code> :  the expression is delineated</p>
+    </ul>
     <h2 class="heading settled" data-level="2" id="Getting-Started"><span class="secno">2. </span><span class="content">Getting Started</span><a class="self-link" href="#Getting-Started"></a></h2>
     <h3 class="heading settled" data-level="2.1" id="OML-Project"><span class="secno">2.1. </span><span class="content">OML Project</span><a class="self-link" href="#OML-Project"></a></h3>
     <p>An OML project is a root folder that typically nests <a href="#OML-File">OML files</a>, a <a href="#Catalog-File">catalog file</a>, and a <a href="#Build-File">build</a> file as follows:</p>
@@ -2451,9 +2479,9 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   &lt;<code>rewriteURI</code> <code>uriStartString</code>="http://" rewritePrefix="build/oml/" />
 &lt;<code>/catalog</code>>
 </pre>
-    <p class="note" role="note"><span>Note:</span> If an IRI is mappable by more than one catalog rule, the most specific rule is used.</p>
-    <p class="note" role="note"><span>Note:</span> Catalog IRI resolution checks the existence of files with OML extensions in this order: <em>oml</em>, <em>omlxmi</em>, then <em>omljson</em>.</p>
-    <p class="note" role="note"><span>Note:</span> To be considered a valid OML file, the file needs to be mappable by some rule in a catalog file.</p>
+    <p class="note" role="note"><span class="marker">Note:</span> If an IRI is mappable by more than one catalog rule, the most specific rule is used.</p>
+    <p class="note" role="note"><span class="marker">Note:</span> Catalog IRI resolution checks the existence of files with OML extensions in this order: <em>oml</em>, <em>omlxmi</em>, then <em>omljson</em>.</p>
+    <p class="note" role="note"><span class="marker">Note:</span> To be considered a valid OML file, the file needs to be mappable by some rule in a catalog file.</p>
     <h3 class="heading settled" data-level="2.4" id="Build-File"><span class="secno">2.4. </span><span class="content">Build File</span><a class="self-link" href="#Build-File"></a></h3>
     <p>The build file is a standard <a href="https://docs.gradle.org/">Gradle</a> file that describes an analysis pipeline for the OML project. In addition to plethora of gradle plugins/tasks that can be used to construct the pipeline, the [openCAESAR] project (the home of OML) provides some addiional ones that are particulary useful for OML analysis. The following is a list of links to those tools for additional information:</p>
     <ul>
@@ -2466,7 +2494,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
     </ul>
     <h2 class="heading settled" data-level="3" id="Language-Reference"><span class="secno">3. </span><span class="content">Language Reference</span><a class="self-link" href="#Language-Reference"></a></h2>
     <p>This section presents the OML language features using its textual syntax as a notation. All the presented features exist in the other syntaxes except when noted otherwise. It is recommended that a reader starts with the common idioms section to gain an understanding of the language’s basics, before reading the other sections.</p>
-    <p class="note" role="note"><span>Note:</span> This document frequently uses BNF grammar to specify OML’s textual syntax. In such grammar, terminals like <code>IRI</code> and <code>NAMESPACE</code>, representing features of OML elements, may be used. To be more precise, we use the syntax <code>[Type|Terminal]</code> to indicate that a terminal represents a feature of a particular type . For example, <code>[Concept|IRI]</code> means the <code>IRI</code> of a <code>Concept</code>, and <code>[Vocabulary|NAMESPACE]</code> means the <code>NAMESAPCE</code> of a <code>Vocabulary</code>.</p>
+    <p class="note" role="note"><span class="marker">Note:</span> This document frequently uses BNF grammar to specify OML’s textual syntax. In such grammar, terminals like <code>IRI</code> and <code>NAMESPACE</code>, representing features of OML elements, may be used. To be more precise, we use the syntax <code>[Type|Terminal]</code> to indicate that a terminal represents a feature of a particular type . For example, <code>[Concept|IRI]</code> means the <code>IRI</code> of a <code>Concept</code>, and <code>[Vocabulary|NAMESPACE]</code> means the <code>NAMESAPCE</code> of a <code>Vocabulary</code>.</p>
     <h3 class="heading settled" data-level="3.1" id="Common-Idioms-LR"><span class="secno">3.1. </span><span class="content">OML Idioms</span><a class="self-link" href="#Common-Idioms-LR"></a></h3>
     <h4 class="heading settled" data-level="3.1.1" id="White-Space-LR"><span class="secno">3.1.1. </span><span class="content">White Space</span><a class="self-link" href="#White-Space-LR"></a></h4>
     <p>Whitespace can be freely placed in the OML textual syntax (only) to delimit tokens, but otherwise has no other significance.</p>
@@ -2478,7 +2506,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
 <c- d>  multi-line</c->
 <c- d>  comment */</c->
 </pre>
-    <p class="note" role="note"><span>Note:</span> A comment is a textual-syntax feature only, hence will not be preserved when a model is converted to OML’s other syntaxes.</p>
+    <p class="note" role="note"><span class="marker">Note:</span> A comment is a textual-syntax feature only, hence will not be preserved when a model is converted to OML’s other syntaxes.</p>
     <h4 class="heading settled" data-level="3.1.3" id="Ontology-LR"><span class="secno">3.1.3. </span><span class="content">Ontology</span><a class="self-link" href="#Ontology-LR"></a></h4>
     <p>An ontology is the root element of an OML model and the unit of organizing ontological statements. It is defined with one of the <code>&lt;ontology></code> keywords (see <a href="#Ontology-Syntax">ontology syntax</a> for details), a globally unique NAMESPACE, a locally unique ID (representing a NAMESPAC prefix), a set of imports (of other ontologies), and a set of statements (members and/or references).</p>
 <pre class="highlight highlight-html"><code>&lt;ontology></code> NAMESPACE <code>as</code> ID <code>{</code>
@@ -2504,9 +2532,9 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
     <code>&lt;import></code> [Ontology|NAMESPACE] (<code>as</code> ID)?
 }
 </pre>
-    <p class="note" role="note"><span>Note:</span> An ID is required in the import syntax only when imported members are cross-referenced using the ABBREVIATED_IRI syntax.</p>
-    <p class="note" role="note"><span>Note:</span> An ontology’s import closure is defined as all the ontologies that are imported directly or indirectly by the ontology</p>
-    <p class="note" role="note"><span>Note:</span> An ontology whose members are referenced by another ontology needs to be directly imported by it (it is not enough to be indirectly imported).</p>
+    <p class="note" role="note"><span class="marker">Note:</span> An ID is required in the import syntax only when imported members are cross-referenced using the ABBREVIATED_IRI syntax.</p>
+    <p class="note" role="note"><span class="marker">Note:</span> An ontology’s import closure is defined as all the ontologies that are imported directly or indirectly by the ontology</p>
+    <p class="note" role="note"><span class="marker">Note:</span> An ontology whose members are referenced by another ontology needs to be directly imported by it (it is not enough to be indirectly imported).</p>
     <p>OML supports several kinds of concret imports for each one of its ontology kinds:</p>
     <ul>
      <li data-md>
@@ -2543,7 +2571,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
     <p>Ontologies and their members have globally unique IRIs within a given context (an ontology and its import closure). The IRI of an ontology is equivalent to its NAMESPACE minus its separator character (<code>#</code> or <code>/</code>). For example, an ontology with NAMESPACE <em>http://imce.jpl.nasa.gov/foundation/base#</em> has IRI <em>http://imce.jpl.nasa.gov/foundation/base</em>. The IRI of an ontology member consists of its ontology’s NAMESPACE concatenated to its ID. For example, a member with ID <code>AggregatedElement</code> in an ontology with a NAMESPACE <em>http://imce.jpl.nasa.gov/foundation/base#</em> has IRI <em>http://imce.jpl.nasa.gov/foundation/base#AggreagedElement</em>. This is called the full IRI of a member. Such IRI can be written in an abbreviated syntax using the ontology’s namespace prefix. It can also be shortened further to the simple ID of the member when used in the context of its defining ontology. The following is an elaboration of the three possible syntaxes for IRIs.</p>
     <p><em>Full IRI</em></p>
     <p>The full <a href="#IRI-Syntax">IRI</a> syntax in OML conforms to a subset of the <a href="https://datatracker.ietf.org/doc/html/rfc3987">standard IRI</a> syntax. However, the OML textual syntax only, it is surrounded by <code>&lt; ></code> (e.g., <code>&lt;</code> http://www.w3.org/2002/07/owl#Thing <code>></code>). Also, the syntax of an ontology’s <a href="#NAMESPACE-Syntax">NAMESPACE</a> is surrounded by <code>&lt; ></code> (e.g., <code>&lt;</code>http://www.w3.org/2002/07/owl#<code>></code>).</p>
-    <p class="note" role="note"><span>Note:</span> the <code>&lt; ></code> are stripped off when the value is parsed from the OML textual syntax.</p>
+    <p class="note" role="note"><span class="marker">Note:</span> the <code>&lt; ></code> are stripped off when the value is parsed from the OML textual syntax.</p>
     <p><em>Abbreviated IRI</em></p>
     <p>OML also supports an <a href="#ABBREVIATED_IRI-Syntax">ABBREVIATED_IRI</a> syntax for ontology members. The syntax consists of the defining ontology’s (prefix) ID and the member’s (name) ID, delimited by the <code>:</code> character. For example, <em>owl:Thing</em> is an ABBREVIATED_IRI for a member with the IRI of <em>http://www.w3.org/2002/07/owl#Thing</em> when the ontology has a prefix ID of <em>owl</em>.</p>
     <p>The ontology’s prefix ID that can be used in a member’s ABBREVIATED_IRI either comes from the ontology definition (if the member is local to the ontology) or an import statement (if the member is imported). For example:</p>
@@ -2594,8 +2622,8 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
     <p><em>Quoted Literal</em></p>
     <p>A quoted literal is a generic way of specifying a literal. It consists of the lexical form followed by a language tag, a scalar IRI, or neither.</p>
     <p>The lexical form consists of a set of characters surrounded by a pair of delimiters, which can be single quotes (<code>'value'</code>), double quotes, (<code>"value"</code>), three single quotes (<code>'''value'''</code>), or three double quotes (<code>"""value"""</code>).</p>
-    <p class="note" role="note"><span>Note:</span> The last two types of delimiters allow line break characters in the lexical form, while the first two do not.</p>
-    <p class="note" role="note"><span>Note:</span> A delimiter can appear within a lexical form that is delimited by a different delimiter (e.g., "It’s my responsibility")</p>
+    <p class="note" role="note"><span class="marker">Note:</span> The last two types of delimiters allow line break characters in the lexical form, while the first two do not.</p>
+    <p class="note" role="note"><span class="marker">Note:</span> A delimiter can appear within a lexical form that is delimited by a different delimiter (e.g., "It’s my responsibility")</p>
     <p>Examples of quoted literals with different delimiters:</p>
 <pre class="highlight highlight-html">"The system should be responsive"
 '''First paragraph
@@ -2620,7 +2648,7 @@ Second Paragraph'''
 123E+45     // xsd:double
 true        // xsd:boolean
 </pre>
-    <p class="note" role="note"><span>Note:</span> if an abbreviated literal belongs to multiple scalars, it gets interpreted as belonging to the least precise scalar.</p>
+    <p class="note" role="note"><span class="marker">Note:</span> if an abbreviated literal belongs to multiple scalars, it gets interpreted as belonging to the least precise scalar.</p>
     <h4 class="heading settled" data-level="3.1.9" id="Annotation-LR"><span class="secno">3.1.9. </span><span class="content">Annotation</span><a class="self-link" href="#Annotation-LR"></a></h4>
     <p>An annotation allows describing information about an ontology, or one of its members, that does not have associated description logic (DL) semantics. Such information can be notational (e.g., how an element is to be displayed), tool-specific (e.g., how to export an element), or for any other purpose (e.g., who authored the ontology).</p>
     <p>An Annotation describes a value for an <a href="#AnnotationProperty-LR">annotation property</a> (defined by a <a href="#Vocabulary-LR">vocabulary</a>) in the context of the annotated element (an <a href="#Ontology-LR">ontology</a>, a <a href="#Member-LR">member</a>, a <a href="#Reference-LR">reference</a>, or an <a href="#Import-LR">import</a>). The general syntax of an annotation consists of a <code>@</code> symbol followed by an IRI to the an annotation property then an optional (literal or member reference) value. If the value is missing, it is interpreted as a boolean <em>true</em> literal.</p>
@@ -2682,15 +2710,15 @@ true        // xsd:boolean
 <pre class="highlight highlight-html"><code>vocabulary</code> <code>&lt;</code>http://com.xyz/methodology/mission1#<code>></code> <code>as</code> mission1 <code>{</code>
     <code>extends</code> <code>&lt;</code>http://com.xyz/methodology/mission#<code>></code> <code>as</code> mission
     <code>uses</code> <code>&lt;</code>http://com.xyz/methodology/organizations#<code>></code> <code>as</code> organizations
-    <code>concept</code> Component1 <code>:></code> Component [
+    <code>concept</code> Spacecraft [
         <code>restricts</code> <code>relation</code> mission:isResponsibilityOf <code>to</code> organization:NASA   // a cross-reference to instance NASA 
     ]
 <code>}</code>
 </pre>
-    <p class="note" role="note"><span>Note:</span> descriptions that are used by a vocabulary typically define notable instances that are cross-referenced by other descriptions using this vocabulary.</p>
+    <p class="note" role="note"><span class="marker">Note:</span> descriptions that are used by a vocabulary typically define notable instances that are cross-referenced by other descriptions using this vocabulary.</p>
     <h4 class="heading settled" data-level="3.2.2" id="Types-LR"><span class="secno">3.2.2. </span><span class="content">Types</span><a class="self-link" href="#Types-LR"></a></h4>
-    <p>Types that can be defined in a vocabulary are either <em>classifiers</em> (structured types) or <em>scalars</em> (primitive types). Some classifiers (<a href="#Aspect-LR">Aspect</a>, <a href="#Concept-LR">Concept</a> and <a href="(#RelationEntity-LR">Relation Entity</a>)) are <em>entities</em>, meaning they can classify named instances (that are unique by reference). Other classifiers (<a href="#Structure-LR">Structure</a>) can only classify anonymous instances (that are unique by value). Also, some scalars (<a href="#FacetedScalar-LR">Faceted Scalar</a>) can classify an unlimited set of literals, while other scalars (<a href="#EnumeratedScalar-LR">Enumerated Scalar</a>) can only classify a limited set of literals.</p>
-    <p>Classifiers can specialize one or more classifiers (multiple-inheritance), while scalars can only specialize one scalar only (single-inheritance). These specializations are further constrained for each type as discussed below.</p>
+    <p>Types that can be defined in a vocabulary are either <em>classifiers</em> (structured types) or <em>scalars</em> (primitive types). Some classifiers (<a href="#Aspect-LR">Aspect</a>, <a href="#Concept-LR">Concept</a> and <a href="(#RelationEntity-LR)">Relation Entity</a>) are <em>entities</em>, meaning they can classify named instances (that are unique by reference). Other classifiers (<a href="#Structure-LR">Structure</a>) can only classify anonymous instances (that are unique by value). Also, some scalars (<a href="#FacetedScalar-LR">Faceted Scalar</a>) can classify an unlimited set of literals, while other scalars (<a href="#EnumeratedScalar-LR">Enumerated Scalar</a>) can only classify a limited set of literals.</p>
+    <p>A type can specialize other types of the same kind only. This is done by following the type’s name by the <code>:></code> symbol then a list of comma-separated supertype IRIs. While a classifier can specialize one or more classifiers (multiple-inheritance), a scalar can only specialize one scalar (single-inheritance). Specialization semantics are further constrained for each type as discussed below.</p>
     <h5 class="heading settled" data-level="3.2.2.1" id="Aspect-LR"><span class="secno">3.2.2.1. </span><span class="content">Aspect</span><a class="self-link" href="#Aspect-LR"></a></h5>
     <p>An <a href="#Concept-Syntax">aspect</a> is an entity defined in a vocabulary and represents a mixin type (or a capability) in a modeled domain. An aspect can only specialize other aspects, but can be specialized by any entity. An Aspect cannot be asserted as a type of instances in a description (there is no aspect instance), but can be inferred (by a DL reasoner) as such, if it is one of the supertypes of an asserted type.</p>
     <p>An aspect is declared with the keyword <code>aspect</code> followed by the aspect’s name ID. It can optionally specialize other aspects by following its name ID by the <code>:></code> symbol then a comma-separated list of those supertypes' IRIs. An aspect can also optionally specify a list of axioms enclosed within a pair of square brackets <code>[</code> <code>]</code>.</p>
@@ -2731,7 +2759,7 @@ true        // xsd:boolean
     <h5 class="heading settled" data-level="3.2.2.3" id="RelationEntity-LR"><span class="secno">3.2.2.3. </span><span class="content">Relation Entity</span><a class="self-link" href="#RelationEntity-LR"></a></h5>
     <p>A <a href="#RelationEntity-LR">Relation Entity</a> is an entity defined in a vocabulary and represents a type of reified relation between two other entities, a source entity and a target entity. A relation entity is defined with the keywords <code>relation</code> <code>entity</code> followed by a name ID. It can optionally specialize other relation entities or aspects by following its name ID by the <code>:></code> symbol then a comma-separated list of those supertypes' IRIs. A relation entity also has a body, which is a pair of square brackets <code>[</code> <code>]</code> that specify by IRI the relation’s <code>from</code> (source) entity and <code>to</code> (target) entity, and optionally the names of unreified relations, semantic flags, and/or axioms.</p>
 <pre class="highlight highlight-html"> Annotation*
- <code>relation</code> <code>entity</code> ID (<code>:></code> [RelationEntity|Aspect|IRI] (<code>,</code> [RelationEntity|Aspect|IRI])*)? (<code>[</code>
+ <code>relation</code> <code>entity</code> ID (<code>:></code> [RelationEntity|Aspect|IRI] (<code>,</code> [RelationEntity|Aspect|IRI])*)? <code>[</code>
      <code>from</code> [Entity|IRI]                 // the relation entity’s source
      <code>to</code> [Entity|IRI]                   // the relation entity’s target
      Annotation*
@@ -2854,6 +2882,7 @@ true        // xsd:boolean
 <code>]</code>)?
 </pre>
     <p>OML considers a following set of faceted scalars as <em>standard</em>:</p>
+    <p class="note" role="note"><span class="marker">Note:</span> for the standard vocabularies below to be used (cross-referenced), they need to exist as OML files that are mapped by the catalog.xml file of the OML project. One way to achieve that is to recreate such files directly under the <code>src/oml</code> folder. However, a simpler approach is to add a maven dependency on the <code>core-vocabularies</code> library (in Maven Central) in the project’s build.gradle and invoking the <code>OmlMergeTask</code> on it. This would result in the standard vocabularies getting downloaded to the <code>oml\build</code> folder. An example of doing this can be seen in the <a href="https://github.com/opencaesar/oml-template/blob/master/build.gradle#L54-L78">oml-template</a> project.</p>
 <pre class="highlight highlight-html"><code>vocabulary</code> <code>&lt;</code>http://www.w3.org/2000/01/rdf-schema#<code>></code> <code>as</code> rdfs <code>{</code>
   // Literals
   <code>scalar</code> Literal
@@ -2923,7 +2952,7 @@ true        // xsd:boolean
   <code>scalar</code> dateTimeStamp <code>:></code> dateTime
 <code>}</code>
 </pre>
-    <p class="note" role="note"><span>Note:</span> the lexical and value spaces for these standard scalars are described in the (<a href="https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/#built-in-datatypes">xsd</a>, and <a href="https://www.w3.org/TR/owl2-syntax/#Datatype_Maps">owl</a>) standards.</p>
+    <p class="note" role="note"><span class="marker">Note:</span> the lexical and value spaces for these standard scalars are described in the (<a href="https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/#built-in-datatypes">xsd</a>, and <a href="https://www.w3.org/TR/owl2-syntax/#Datatype_Maps">owl</a>) standards.</p>
     <p>Furthermore, other faceted scalars can be defined only as specializations of the standard ones (maximum one supertype per scalar is allowed). They can also be optionally restricted with one or more facets. A facet is a restriction on the lexical or value space of a standard scalar. The following facets are supported:</p>
     <ul>
      <li data-md>
@@ -2972,15 +3001,16 @@ true        // xsd:boolean
 <code>]</code>
 </pre>
     <h4 class="heading settled" data-level="3.2.3" id="Properties-LR"><span class="secno">3.2.3. </span><span class="content">Properties</span><a class="self-link" href="#Properties-LR"></a></h4>
-    <p>Properties that can be defined in a vocabulary include <em>semantic properties</em> and <em>annotation properties</em>. A semantic property (<a href="#ScalarProperty-LR">Scalar Property</a> or <a href="#StructuredProperty-LR">Structured Property</a>) has logical semantics and is specified with a domain and a range. The domain represents a classifier whose instances can be characterized by such property, while the range represents a type that classifies a set of allowed characterization values. An <a href="#AnnotationProperty-LR">Annotation Property</a>, on the other hand, has no logical semantics and enables the annotation of an element (ontology, import, or member) with non-semantic information.</p>
+    <p>Properties are characteristics of model elements. Two categories of properties can be defined in a vocabulary: <em>annotation properties</em> and <em>semantic properties</em>. An <a href="#AnnotationProperty-LR">Annotation Property</a> has no logical semantics and can characterize an annotated element (ontology, import, or member) with non-semantic information. On the other hand, a semantic property (<a href="#ScalarProperty-LR">Scalar Property</a> or <a href="#StructuredProperty-LR">Structured Property</a>) has logical semantics and can characterize classifiers. A semantic property is specified with a domain representing a classifier whose instances can be characterized by such property, and a range representing a type for the values of the property.</p>
+    <p>A property can specialize other properties of the same kind only. This is done by following the property’s name by the <code>:></code> symbol then a list of comma-separated super-property IRIs.</p>
     <h5 class="heading settled" data-level="3.2.3.1" id="ScalarProperty-LR"><span class="secno">3.2.3.1. </span><span class="content">Scalar Property</span><a class="self-link" href="#ScalarProperty-LR"></a></h5>
     <p>A <a href="#ScalarProperty-Syntax">scalar property</a> is a semantic property defined in a vocabulary, whose domain is a classifier (<a href="#Aspect-LR">Aspect</a>, <a href="#Concept-LR">Concept</a>, <a href="#RelationEntity-LR">Relation Entity</a>, or <a href="#Structure-LR">Structure</a>) and whose range is a scalar (<a href="#FacetedScalar-LR">Faceted Scalar</a> or <a href="#EnumeratedScalar-LR">Enumerated Scalar</a>). This means the values of a scalar property are literals of that scalar range. A scalar property is defined with the keywords <code>scalar</code> <code>property</code> followed by a name ID. It can also optionally specialize other scalar properties by following its name ID by the <code>:></code> symbol then a comma-separated list of those super properties' IRIs. It also has a pair of square brackets <code>[</code> <code>]</code> that contain the property’s <code>domain</code> (referencing a classifier), <code>range</code> (referencing a scalar), and optionally a semantic flag (<code>functional</code>) that specifies whether instances of the domain can have a single value maximum for this property.</p>
 <pre class="highlight highlight-html">Annotation*
-<code>scalar</code> <code>property</code> ID (<code>:></code> [ScalarProperty|IRI] (<code>,</code> [ScalarProperty|IRI])*)? (<code>[</code>
+<code>scalar</code> <code>property</code> ID (<code>:></code> [ScalarProperty|IRI] (<code>,</code> [ScalarProperty|IRI])*)? <code>[</code>
   <code>domain</code> [Classifier|IRI]
   <code>range</code> [Scalar|IRI]
   <code>functional</code>?                // each instance can have a maximum of 1 value for this property
-<code>]</code>)?
+<code>]</code>
 </pre>
     <p>The following example vocabulary defines three scalar properties named <em>hasId</em>, <em>hasName</em>, and <em>isAbstract</em>. The <em>hasId</em> property is functional and has a domain of <em>Component</em> and a range of <em>xsd:string</em>. The <em>hasName</em> property has a domain of <em>Function</em> and a range of <em>xsd:string</em>. Finally, the <em>isAbstract</em> property is functional and has the domain of <em>Function</em> and the range of <em>xsd:boolean</em>.</p>
 <pre class="highlight highlight-html"><code>vocabulary</code> <code>&lt;</code>http://com.xyz/methodology/mission#<code>></code> <code>as</code> mission <code>{</code>
@@ -3006,11 +3036,11 @@ true        // xsd:boolean
     <h5 class="heading settled" data-level="3.2.3.2" id="StructuredProperty-LR"><span class="secno">3.2.3.2. </span><span class="content">Structured Property</span><a class="self-link" href="#StructuredProperty-LR"></a></h5>
     <p>A <a href="#StructuredProperty-Syntax">structured property</a> is a semantic property defined in a vocabulary, whose domain is a classifier (<a href="#Aspect-LR">Aspect</a>, <a href="#Concept-LR">Concept</a>, <a href="#RelationEntity-LR">Relation Entity</a>, or <a href="#Structure-LR">Structure</a>) and whose range is a <a href="#Structure-LR">Structure</a>. This means the values of a structured property are anonymous <a href="#StructureInstance-LR">Structure Instances</a>. A structured property is defined with the keywords <code>structured</code> <code>property</code> followed by a name ID. It can also optionally specialize other structured properties by following its name ID by the <code>:></code> symbol then a comma-separated list of those super properties' IRIs. It also has a pair of square brackets <code>[</code> <code>]</code> that contain the property’s <code>domain</code> (referencing a classifier), <code>range</code> (referencing a structure), and optionally a semantic flag (<code>functional</code>) that specifies whether instances of the domain can have a single value maximum for this property.</p>
 <pre class="highlight highlight-html">Annotation*
-<code>structure</code> <code>property</code> ID (<code>:></code> [StructuredProperty|IRI] (<code>,</code> [StructuredProperty|IRI])*)? (<code>[</code>
+<code>structure</code> <code>property</code> ID (<code>:></code> [StructuredProperty|IRI] (<code>,</code> [StructuredProperty|IRI])*)? <code>[</code>
   <code>domain</code> [Classifier|IRI]
   <code>range</code> [Structure|IRI]
   <code>functional</code>?                // each instance can have a maximum of 1 value for this property
-<code>]</code>)?
+<code>]</code>
 </pre>
     <p>The following example vocabulary defines a structured property named <em>hasLocation</em> whose domain is concept <em>Shape</em> and whose range is structure <em>Point</em>. The latter is the domain of two scalar properties <em>hasX</em> and <em>hasY</em> that have a range of <em>xsd:int</em>.</p>
 <pre class="highlight highlight-html"><code>vocabulary</code> <code>&lt;</code>http://com.xyz/methodology/graphics#<code>></code> <code>as</code> graphics <code>{</code>
@@ -3094,7 +3124,7 @@ true        // xsd:boolean
 </pre>
     <h4 class="heading settled" data-level="3.2.4" id="Axioms-LR"><span class="secno">3.2.4. </span><span class="content">Axioms</span><a class="self-link" href="#Axioms-LR"></a></h4>
     <p>Axioms are statements about terms in a vocabulary that enrich their logical semantics. They appear in the body of a term between its two brackets <code>[</code> <code>]</code>. This section describes the supported axioms, which include a <a href="#KeyAxiom-LR">key axiom</a> (specified on entities) and a <a href="#RestrictionAxioms-LR">restriction axioms</a> (specified on classifiers).</p>
-    <p class="note" role="note"><span>Note:</span> that a term that has supertypes semantically inherits axioms defined on its supertypes in addition to its own axioms.</p>
+    <p class="note" role="note"><span class="marker">Note:</span> that a term that has supertypes semantically inherits axioms defined on its supertypes in addition to its own axioms.</p>
     <h5 class="heading settled" data-level="3.2.4.1" id="KeyAxiom-LR"><span class="secno">3.2.4.1. </span><span class="content">Key Axiom</span><a class="self-link" href="#KeyAxiom-LR"></a></h5>
     <p>A <a href="#KeyAxiom-Syntax">key axiom</a> is an axiom defined on an entity (<a href="#Aspect-LR">Aspect</a>, <a href="#Concept-LR">Concept</a>, and <a href="#RelationEntity-LR">Relation Entity</a>) that specifies a set of properties that together represent a unique key (id) for the entity. This means if two named instances have the same values of those properties, then they can be inferred to be aliases of the same instance. The syntax of a key axiom starts with the keyword <code>key</code> followed by one or more comma-separated properties specified by their IRIs.</p>
 <pre class="highlight highlight-html"><code>key</code> [Feature|IRI] (<code>,</code> [Feature|IRI])*
@@ -3783,19 +3813,19 @@ instance or literal.</p>
 
 <a data-link-type="dfn" href="#scalarproperty" id="ScalarProperty-Syntax">ScalarProperty</a>:
   Annotation*
-  <code>scalar</code> <code>property</code> ID (<code>:></code> SpecializationAxiom (<code>,</code> SpecializationAxiom)*)? (<code>[</code>
+  <code>scalar</code> <code>property</code> ID (<code>:></code> SpecializationAxiom (<code>,</code> SpecializationAxiom)*)? <code>[</code>
     <code>domain</code> [Classifier|IRI]
     <code>range</code> [Scalar|IRI]
     <code>functional</code>?
-  <code>]</code>)?
+  <code>]</code>
 
 <a data-link-type="dfn" href="#structuredproperty" id="StructuredProperty-Syntax">StructuredProperty</a>:
   Annotation*
-  <code>structured</code> <code>property</code> ID (<code>:></code> SpecializationAxiom (<code>,</code> SpecializationAxiom)*)? (<code>[</code>
+  <code>structured</code> <code>property</code> ID (<code>:></code> SpecializationAxiom (<code>,</code> SpecializationAxiom)*)? <code>[</code>
     <code>domain</code> [Classifier|IRI]
     <code>range</code> [Structure|IRI]
     <code>functional</code>?
-  <code>]</code>)?
+  <code>]</code>
 
 <a data-link-type="dfn" href="#rule" id="Rule-Syntax">Rule</a>:
   Annotation*
@@ -4115,13 +4145,8 @@ instance or literal.</p>
 
 </pre>
     <h2 class="heading settled" data-level="5" id="Graphical-BNF"><span class="secno">5. </span><span class="content">Graphical BNF</span><a class="self-link" href="#Graphical-BNF"></a></h2>
-    <p><strong>BNF Notation</strong></p>
-    <p>The textual symbols are colored in orange, whereas the symbols colored in gray are BNF markings. They will not show up in actual rendering of OML diagrams.</p>
-    <p><strong>Hyperlink</strong></p>
-    <p>Elements with a blue hyperlink can be clicked on to redirect to a detailed description of their abstract syntax.</p>
-    <p><strong>Compartment</strong></p>
-    <p>Diagram compartments are laid out in free form, and list compartments are laid out vertically.</p>
-    <p>The following are the graphical BNF rules.</p>
+    <p><strong>Convensions</strong></p>
+    <p>BNF symbols are colored in orange and will not show up in actual rendering of OML diagrams. Elements with a hyperlink can be clicked on to navigate to a detailed description of their abstract syntax. Shares are laid freely on diagrams. List compartments (within shapes) are always laid out in a vertical stack.</p>
 <pre class="highlight highlight-html"><a data-link-type="dfn" href="#concept" id="Concept-Diagram">Concept</a>:
 
         <img src="images/concept.svg">
@@ -9348,7 +9373,7 @@ this metamodel and can be manipulated using its API.
             However, for readability,
             these words do not appear in all uppercase letters in this specification. </p>
    <p> All of the text of this specification is normative
-            except sections explicitly marked as non-normative, examples, and notes. <a data-link-type="biblio" href="#biblio-rfc2119">[RFC2119]</a> </p>
+            except sections explicitly marked as non-normative, examples, and notes. <a data-link-type="biblio" href="#biblio-rfc2119" title="Key words for use in RFCs to Indicate Requirement Levels">[RFC2119]</a> </p>
    <p> Examples in this specification are introduced with the words “for example”
             or are set apart from the normative text with <code>class="example"</code>, like this: </p>
    <div class="example" id="example-example"><a class="self-link" href="#example-example"></a> This is an example of an informative example. </div>
@@ -9611,8 +9636,8 @@ this metamodel and can be manipulated using its API.
    <dt id="biblio-rfc2119">[RFC2119]
    <dd>S. Bradner. <a href="https://datatracker.ietf.org/doc/html/rfc2119"><cite>Key words for use in RFCs to Indicate Requirement Levels</cite></a>. March 1997. Best Current Practice. URL: <a href="https://datatracker.ietf.org/doc/html/rfc2119">https://datatracker.ietf.org/doc/html/rfc2119</a>
   </dl>
-  <aside class="dfn-panel" data-for="annotatedelement">
-   <b><a href="#annotatedelement">#annotatedelement</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-annotatedelement" class="dfn-panel" data-for="annotatedelement" id="infopanel-for-annotatedelement">
+   <span id="infopaneltitle-for-annotatedelement" style="display:none">Info about the 'AnnotatedElement' definition.</span><b><a href="#annotatedelement">#annotatedelement</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-annotatedelement">6.1.2. Annotation</a>
     <li><a href="#ref-for-annotatedelement①">6.1.3. Element</a>
@@ -9620,8 +9645,8 @@ this metamodel and can be manipulated using its API.
     <li><a href="#ref-for-annotatedelement③">6.1.5. Import</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="annotation">
-   <b><a href="#annotation">#annotation</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-annotation" class="dfn-panel" data-for="annotation" id="infopanel-for-annotation">
+   <span id="infopaneltitle-for-annotation" style="display:none">Info about the 'Annotation' definition.</span><b><a href="#annotation">#annotation</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#Annotation-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-annotation">6.1.1. AnnotatedElement</a>
@@ -9629,8 +9654,8 @@ this metamodel and can be manipulated using its API.
     <li><a href="#ref-for-annotation②">6.11.10. Reference</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="element">
-   <b><a href="#element">#element</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-element" class="dfn-panel" data-for="element" id="infopanel-for-element">
+   <span id="infopaneltitle-for-element" style="display:none">Info about the 'Element' definition.</span><b><a href="#element">#element</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-element">6.1.1. AnnotatedElement</a>
     <li><a href="#ref-for-element①">6.1.2. Annotation</a>
@@ -9643,16 +9668,16 @@ this metamodel and can be manipulated using its API.
     <li><a href="#ref-for-element⑧">6.11.10. Reference</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="identifiedelement">
-   <b><a href="#identifiedelement">#identifiedelement</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-identifiedelement" class="dfn-panel" data-for="identifiedelement" id="infopanel-for-identifiedelement">
+   <span id="infopaneltitle-for-identifiedelement" style="display:none">Info about the 'IdentifiedElement' definition.</span><b><a href="#identifiedelement">#identifiedelement</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-identifiedelement">6.1.1. AnnotatedElement</a>
     <li><a href="#ref-for-identifiedelement①">6.1.6. Member</a>
     <li><a href="#ref-for-identifiedelement②">6.1.7. Ontology</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="import">
-   <b><a href="#import">#import</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-import" class="dfn-panel" data-for="import" id="infopanel-for-import">
+   <span id="infopaneltitle-for-import" style="display:none">Info about the 'Import' definition.</span><b><a href="#import">#import</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#Import-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-import">6.1.1. AnnotatedElement</a>
@@ -9662,8 +9687,8 @@ this metamodel and can be manipulated using its API.
     <li><a href="#ref-for-import④">6.8.9. DescriptionImport</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="member">
-   <b><a href="#member">#member</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-member" class="dfn-panel" data-for="member" id="infopanel-for-member">
+   <span id="infopaneltitle-for-member" style="display:none">Info about the 'Member' definition.</span><b><a href="#member">#member</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#Member-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-member">6.1.2. Annotation</a>
@@ -9673,8 +9698,8 @@ this metamodel and can be manipulated using its API.
     <li><a href="#ref-for-member④">6.9.3. NamedInstance</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="ontology">
-   <b><a href="#ontology">#ontology</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-ontology" class="dfn-panel" data-for="ontology" id="infopanel-for-ontology">
+   <span id="infopaneltitle-for-ontology" style="display:none">Info about the 'Ontology' definition.</span><b><a href="#ontology">#ontology</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#Ontology-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-ontology">6.1.4. IdentifiedElement</a>
@@ -9682,44 +9707,44 @@ this metamodel and can be manipulated using its API.
     <li><a href="#ref-for-ontology②">6.8.2. DescriptionBox</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="statement">
-   <b><a href="#statement">#statement</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-statement" class="dfn-panel" data-for="statement" id="infopanel-for-statement">
+   <span id="infopaneltitle-for-statement" style="display:none">Info about the 'Statement' definition.</span><b><a href="#statement">#statement</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-statement">6.1.3. Element</a>
     <li><a href="#ref-for-statement①">6.3.11. VocabularyStatement</a>
     <li><a href="#ref-for-statement②">6.8.10. DescriptionStatement</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="booleanliteral">
-   <b><a href="#booleanliteral">#booleanliteral</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-booleanliteral" class="dfn-panel" data-for="booleanliteral" id="infopanel-for-booleanliteral">
+   <span id="infopaneltitle-for-booleanliteral" style="display:none">Info about the 'BooleanLiteral' definition.</span><b><a href="#booleanliteral">#booleanliteral</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#BooleanLiteral-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-booleanliteral">6.2.5. Literal</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="decimalliteral">
-   <b><a href="#decimalliteral">#decimalliteral</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-decimalliteral" class="dfn-panel" data-for="decimalliteral" id="infopanel-for-decimalliteral">
+   <span id="infopaneltitle-for-decimalliteral" style="display:none">Info about the 'DecimalLiteral' definition.</span><b><a href="#decimalliteral">#decimalliteral</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#DecimalLiteral-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-decimalliteral">6.2.5. Literal</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="doubleliteral">
-   <b><a href="#doubleliteral">#doubleliteral</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-doubleliteral" class="dfn-panel" data-for="doubleliteral" id="infopanel-for-doubleliteral">
+   <span id="infopaneltitle-for-doubleliteral" style="display:none">Info about the 'DoubleLiteral' definition.</span><b><a href="#doubleliteral">#doubleliteral</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#DoubleLiteral-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-doubleliteral">6.2.5. Literal</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="integerliteral">
-   <b><a href="#integerliteral">#integerliteral</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-integerliteral" class="dfn-panel" data-for="integerliteral" id="infopanel-for-integerliteral">
+   <span id="infopaneltitle-for-integerliteral" style="display:none">Info about the 'IntegerLiteral' definition.</span><b><a href="#integerliteral">#integerliteral</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#IntegerLiteral-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-integerliteral">6.2.5. Literal</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="literal">
-   <b><a href="#literal">#literal</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-literal" class="dfn-panel" data-for="literal" id="infopanel-for-literal">
+   <span id="infopaneltitle-for-literal" style="display:none">Info about the 'Literal' definition.</span><b><a href="#literal">#literal</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#Literal-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-literal">6.1.2. Annotation</a>
@@ -9736,15 +9761,15 @@ this metamodel and can be manipulated using its API.
     <li><a href="#ref-for-literal①④">6.10.6. ScalarPropertyValueAssertion</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="quotedliteral">
-   <b><a href="#quotedliteral">#quotedliteral</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-quotedliteral" class="dfn-panel" data-for="quotedliteral" id="infopanel-for-quotedliteral">
+   <span id="infopaneltitle-for-quotedliteral" style="display:none">Info about the 'QuotedLiteral' definition.</span><b><a href="#quotedliteral">#quotedliteral</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#QuotedLiteral-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-quotedliteral">6.2.5. Literal</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="specializableterm">
-   <b><a href="#specializableterm">#specializableterm</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-specializableterm" class="dfn-panel" data-for="specializableterm" id="infopanel-for-specializableterm">
+   <span id="infopaneltitle-for-specializableterm" style="display:none">Info about the 'SpecializableTerm' definition.</span><b><a href="#specializableterm">#specializableterm</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#SpecializableTerm-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-specializableterm">6.3.2. Term</a>
@@ -9756,8 +9781,8 @@ this metamodel and can be manipulated using its API.
     <li><a href="#ref-for-specializableterm⑥">6.7.15. SpecializationAxiom</a> <a href="#ref-for-specializableterm⑦">(2)</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="term">
-   <b><a href="#term">#term</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-term" class="dfn-panel" data-for="term" id="infopanel-for-term">
+   <span id="infopaneltitle-for-term" style="display:none">Info about the 'Term' definition.</span><b><a href="#term">#term</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#Term-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-term">6.1.6. Member</a>
@@ -9765,8 +9790,8 @@ this metamodel and can be manipulated using its API.
     <li><a href="#ref-for-term②">6.5.2. Feature</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="vocabulary">
-   <b><a href="#vocabulary">#vocabulary</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-vocabulary" class="dfn-panel" data-for="vocabulary" id="infopanel-for-vocabulary">
+   <span id="infopaneltitle-for-vocabulary" style="display:none">Info about the 'Vocabulary' definition.</span><b><a href="#vocabulary">#vocabulary</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#Vocabulary-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-vocabulary">6.3.4. VocabularyBox</a>
@@ -9774,8 +9799,8 @@ this metamodel and can be manipulated using its API.
     <li><a href="#ref-for-vocabulary②">6.3.11. VocabularyStatement</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="vocabularybox">
-   <b><a href="#vocabularybox">#vocabularybox</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-vocabularybox" class="dfn-panel" data-for="vocabularybox" id="infopanel-for-vocabularybox">
+   <span id="infopaneltitle-for-vocabularybox" style="display:none">Info about the 'VocabularyBox' definition.</span><b><a href="#vocabularybox">#vocabularybox</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#VocabularyBox-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-vocabularybox">6.1.7. Ontology</a>
@@ -9783,23 +9808,23 @@ this metamodel and can be manipulated using its API.
     <li><a href="#ref-for-vocabularybox②">6.3.5. VocabularyBundle</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="vocabularybundle">
-   <b><a href="#vocabularybundle">#vocabularybundle</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-vocabularybundle" class="dfn-panel" data-for="vocabularybundle" id="infopanel-for-vocabularybundle">
+   <span id="infopaneltitle-for-vocabularybundle" style="display:none">Info about the 'VocabularyBundle' definition.</span><b><a href="#vocabularybundle">#vocabularybundle</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#VocabularyBundle-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-vocabularybundle">6.3.4. VocabularyBox</a>
     <li><a href="#ref-for-vocabularybundle①">6.3.7. VocabularyBundleImport</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="vocabularybundleextension">
-   <b><a href="#vocabularybundleextension">#vocabularybundleextension</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-vocabularybundleextension" class="dfn-panel" data-for="vocabularybundleextension" id="infopanel-for-vocabularybundleextension">
+   <span id="infopaneltitle-for-vocabularybundleextension" style="display:none">Info about the 'VocabularyBundleExtension' definition.</span><b><a href="#vocabularybundleextension">#vocabularybundleextension</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#VocabularyBundleExtension-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-vocabularybundleextension">6.3.7. VocabularyBundleImport</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="vocabularybundleimport">
-   <b><a href="#vocabularybundleimport">#vocabularybundleimport</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-vocabularybundleimport" class="dfn-panel" data-for="vocabularybundleimport" id="infopanel-for-vocabularybundleimport">
+   <span id="infopaneltitle-for-vocabularybundleimport" style="display:none">Info about the 'VocabularyBundleImport' definition.</span><b><a href="#vocabularybundleimport">#vocabularybundleimport</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#VocabularyBundleImport-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-vocabularybundleimport">6.1.5. Import</a>
@@ -9808,22 +9833,22 @@ this metamodel and can be manipulated using its API.
     <li><a href="#ref-for-vocabularybundleimport③">6.3.8. VocabularyBundleInclusion</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="vocabularybundleinclusion">
-   <b><a href="#vocabularybundleinclusion">#vocabularybundleinclusion</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-vocabularybundleinclusion" class="dfn-panel" data-for="vocabularybundleinclusion" id="infopanel-for-vocabularybundleinclusion">
+   <span id="infopaneltitle-for-vocabularybundleinclusion" style="display:none">Info about the 'VocabularyBundleInclusion' definition.</span><b><a href="#vocabularybundleinclusion">#vocabularybundleinclusion</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#VocabularyBundleInclusion-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-vocabularybundleinclusion">6.3.7. VocabularyBundleImport</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="vocabularyextension">
-   <b><a href="#vocabularyextension">#vocabularyextension</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-vocabularyextension" class="dfn-panel" data-for="vocabularyextension" id="infopanel-for-vocabularyextension">
+   <span id="infopaneltitle-for-vocabularyextension" style="display:none">Info about the 'VocabularyExtension' definition.</span><b><a href="#vocabularyextension">#vocabularyextension</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#VocabularyExtension-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-vocabularyextension">6.3.10. VocabularyImport</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="vocabularyimport">
-   <b><a href="#vocabularyimport">#vocabularyimport</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-vocabularyimport" class="dfn-panel" data-for="vocabularyimport" id="infopanel-for-vocabularyimport">
+   <span id="infopaneltitle-for-vocabularyimport" style="display:none">Info about the 'VocabularyImport' definition.</span><b><a href="#vocabularyimport">#vocabularyimport</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#VocabularyImport-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-vocabularyimport">6.1.5. Import</a>
@@ -9832,8 +9857,8 @@ this metamodel and can be manipulated using its API.
     <li><a href="#ref-for-vocabularyimport③">6.3.12. VocabularyUsage</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="vocabularystatement">
-   <b><a href="#vocabularystatement">#vocabularystatement</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-vocabularystatement" class="dfn-panel" data-for="vocabularystatement" id="infopanel-for-vocabularystatement">
+   <span id="infopaneltitle-for-vocabularystatement" style="display:none">Info about the 'VocabularyStatement' definition.</span><b><a href="#vocabularystatement">#vocabularystatement</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#VocabularyStatement-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-vocabularystatement">6.1.9. Statement</a>
@@ -9845,15 +9870,15 @@ this metamodel and can be manipulated using its API.
     <li><a href="#ref-for-vocabularystatement⑥">6.11.16. SpecializableTermReference</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="vocabularyusage">
-   <b><a href="#vocabularyusage">#vocabularyusage</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-vocabularyusage" class="dfn-panel" data-for="vocabularyusage" id="infopanel-for-vocabularyusage">
+   <span id="infopaneltitle-for-vocabularyusage" style="display:none">Info about the 'VocabularyUsage' definition.</span><b><a href="#vocabularyusage">#vocabularyusage</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#VocabularyUsage-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-vocabularyusage">6.3.10. VocabularyImport</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="aspect">
-   <b><a href="#aspect">#aspect</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-aspect" class="dfn-panel" data-for="aspect" id="infopanel-for-aspect">
+   <span id="infopaneltitle-for-aspect" style="display:none">Info about the 'Aspect' definition.</span><b><a href="#aspect">#aspect</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#Aspect-Syntax">4. Textual BNF</a>
     <li><a href="#Aspect-Diagram">5. Graphical BNF</a>
@@ -9861,8 +9886,8 @@ this metamodel and can be manipulated using its API.
     <li><a href="#ref-for-aspect①">6.11.2. AspectReference</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="classifier">
-   <b><a href="#classifier">#classifier</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-classifier" class="dfn-panel" data-for="classifier" id="infopanel-for-classifier">
+   <span id="infopaneltitle-for-classifier" style="display:none">Info about the 'Classifier' definition.</span><b><a href="#classifier">#classifier</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#Classifier-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-classifier">6.4.4. Entity</a>
@@ -9873,8 +9898,8 @@ this metamodel and can be manipulated using its API.
     <li><a href="#ref-for-classifier⑤">6.7.4. PropertyRestrictionAxiom</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="concept">
-   <b><a href="#concept">#concept</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-concept" class="dfn-panel" data-for="concept" id="infopanel-for-concept">
+   <span id="infopaneltitle-for-concept" style="display:none">Info about the 'Concept' definition.</span><b><a href="#concept">#concept</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#Concept-Syntax">4. Textual BNF</a>
     <li><a href="#Concept-Diagram">5. Graphical BNF</a>
@@ -9883,8 +9908,8 @@ this metamodel and can be manipulated using its API.
     <li><a href="#ref-for-concept②">6.11.5. ConceptReference</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="entity">
-   <b><a href="#entity">#entity</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-entity" class="dfn-panel" data-for="entity" id="infopanel-for-entity">
+   <span id="infopaneltitle-for-entity" style="display:none">Info about the 'Entity' definition.</span><b><a href="#entity">#entity</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#Entity-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-entity">6.4.1. Aspect</a>
@@ -9898,8 +9923,8 @@ this metamodel and can be manipulated using its API.
     <li><a href="#ref-for-entity①①">6.7.8. RelationRestrictionAxiom</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="enumeratedscalar">
-   <b><a href="#enumeratedscalar">#enumeratedscalar</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-enumeratedscalar" class="dfn-panel" data-for="enumeratedscalar" id="infopanel-for-enumeratedscalar">
+   <span id="infopaneltitle-for-enumeratedscalar" style="display:none">Info about the 'EnumeratedScalar' definition.</span><b><a href="#enumeratedscalar">#enumeratedscalar</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#EnumeratedScalar-Syntax">4. Textual BNF</a>
     <li><a href="#EnumeratedScalar-Diagram">5. Graphical BNF</a>
@@ -9907,8 +9932,8 @@ this metamodel and can be manipulated using its API.
     <li><a href="#ref-for-enumeratedscalar①">6.11.7. EnumeratedScalarReference</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="facetedscalar">
-   <b><a href="#facetedscalar">#facetedscalar</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-facetedscalar" class="dfn-panel" data-for="facetedscalar" id="infopanel-for-facetedscalar">
+   <span id="infopaneltitle-for-facetedscalar" style="display:none">Info about the 'FacetedScalar' definition.</span><b><a href="#facetedscalar">#facetedscalar</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#FacetedScalar-Syntax">4. Textual BNF</a>
     <li><a href="#FacetedScalar-Diagram">5. Graphical BNF</a>
@@ -9916,8 +9941,8 @@ this metamodel and can be manipulated using its API.
     <li><a href="#ref-for-facetedscalar①">6.11.8. FacetedScalarReference</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="relationentity">
-   <b><a href="#relationentity">#relationentity</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-relationentity" class="dfn-panel" data-for="relationentity" id="infopanel-for-relationentity">
+   <span id="infopaneltitle-for-relationentity" style="display:none">Info about the 'RelationEntity' definition.</span><b><a href="#relationentity">#relationentity</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#RelationEntity-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-relationentity">6.4.4. Entity</a>
@@ -9928,8 +9953,8 @@ this metamodel and can be manipulated using its API.
     <li><a href="#ref-for-relationentity⑤">6.11.11. RelationEntityReference</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="scalar">
-   <b><a href="#scalar">#scalar</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-scalar" class="dfn-panel" data-for="scalar" id="infopanel-for-scalar">
+   <span id="infopaneltitle-for-scalar" style="display:none">Info about the 'Scalar' definition.</span><b><a href="#scalar">#scalar</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#Scalar-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-scalar">6.2.6. QuotedLiteral</a>
@@ -9941,8 +9966,8 @@ this metamodel and can be manipulated using its API.
     <li><a href="#ref-for-scalar⑥">6.7.12. ScalarPropertyRangeRestrictionAxiom</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="structure">
-   <b><a href="#structure">#structure</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-structure" class="dfn-panel" data-for="structure" id="infopanel-for-structure">
+   <span id="infopaneltitle-for-structure" style="display:none">Info about the 'Structure' definition.</span><b><a href="#structure">#structure</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#Structure-Syntax">4. Textual BNF</a>
     <li><a href="#Structure-Diagram">5. Graphical BNF</a>
@@ -9954,8 +9979,8 @@ this metamodel and can be manipulated using its API.
     <li><a href="#ref-for-structure⑤">6.11.17. StructureReference</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="type">
-   <b><a href="#type">#type</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-type" class="dfn-panel" data-for="type" id="infopanel-for-type">
+   <span id="infopaneltitle-for-type" style="display:none">Info about the 'Type' definition.</span><b><a href="#type">#type</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#Type-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-type">6.3.1. SpecializableTerm</a>
@@ -9964,8 +9989,8 @@ this metamodel and can be manipulated using its API.
     <li><a href="#ref-for-type③">6.6.8. TypePredicate</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="annotationproperty">
-   <b><a href="#annotationproperty">#annotationproperty</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-annotationproperty" class="dfn-panel" data-for="annotationproperty" id="infopanel-for-annotationproperty">
+   <span id="infopaneltitle-for-annotationproperty" style="display:none">Info about the 'AnnotationProperty' definition.</span><b><a href="#annotationproperty">#annotationproperty</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#AnnotationProperty-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-annotationproperty">6.1.2. Annotation</a>
@@ -9974,8 +9999,8 @@ this metamodel and can be manipulated using its API.
     <li><a href="#ref-for-annotationproperty③">6.11.1. AnnotationPropertyReference</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="feature">
-   <b><a href="#feature">#feature</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-feature" class="dfn-panel" data-for="feature" id="infopanel-for-feature">
+   <span id="infopaneltitle-for-feature" style="display:none">Info about the 'Feature' definition.</span><b><a href="#feature">#feature</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#Feature-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-feature">6.3.2. Term</a>
@@ -9985,16 +10010,16 @@ this metamodel and can be manipulated using its API.
     <li><a href="#ref-for-feature④">6.7.3. KeyAxiom</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="forwardrelation">
-   <b><a href="#forwardrelation">#forwardrelation</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-forwardrelation" class="dfn-panel" data-for="forwardrelation" id="infopanel-for-forwardrelation">
+   <span id="infopaneltitle-for-forwardrelation" style="display:none">Info about the 'ForwardRelation' definition.</span><b><a href="#forwardrelation">#forwardrelation</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ForwardRelation-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-forwardrelation">6.4.7. RelationEntity</a>
     <li><a href="#ref-for-forwardrelation①">6.5.5. Relation</a> <a href="#ref-for-forwardrelation②">(2)</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="property">
-   <b><a href="#property">#property</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-property" class="dfn-panel" data-for="property" id="infopanel-for-property">
+   <span id="infopaneltitle-for-property" style="display:none">Info about the 'Property' definition.</span><b><a href="#property">#property</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#Property-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-property">6.5.1. AnnotationProperty</a>
@@ -10002,8 +10027,8 @@ this metamodel and can be manipulated using its API.
     <li><a href="#ref-for-property②">6.5.8. SemanticProperty</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="relation">
-   <b><a href="#relation">#relation</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-relation" class="dfn-panel" data-for="relation" id="infopanel-for-relation">
+   <span id="infopaneltitle-for-relation" style="display:none">Info about the 'Relation' definition.</span><b><a href="#relation">#relation</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#Relation-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-relation">6.5.2. Feature</a>
@@ -10015,16 +10040,16 @@ this metamodel and can be manipulated using its API.
     <li><a href="#ref-for-relation⑥">6.11.13. RelationReference</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="reverserelation">
-   <b><a href="#reverserelation">#reverserelation</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-reverserelation" class="dfn-panel" data-for="reverserelation" id="infopanel-for-reverserelation">
+   <span id="infopaneltitle-for-reverserelation" style="display:none">Info about the 'ReverseRelation' definition.</span><b><a href="#reverserelation">#reverserelation</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ReverseRelation-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-reverserelation">6.4.7. RelationEntity</a>
     <li><a href="#ref-for-reverserelation①">6.5.5. Relation</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="scalarproperty">
-   <b><a href="#scalarproperty">#scalarproperty</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-scalarproperty" class="dfn-panel" data-for="scalarproperty" id="infopanel-for-scalarproperty">
+   <span id="infopaneltitle-for-scalarproperty" style="display:none">Info about the 'ScalarProperty' definition.</span><b><a href="#scalarproperty">#scalarproperty</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ScalarProperty-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-scalarproperty">6.3.1. SpecializableTerm</a>
@@ -10034,8 +10059,8 @@ this metamodel and can be manipulated using its API.
     <li><a href="#ref-for-scalarproperty④">6.11.15. ScalarPropertyReference</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="semanticproperty">
-   <b><a href="#semanticproperty">#semanticproperty</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-semanticproperty" class="dfn-panel" data-for="semanticproperty" id="infopanel-for-semanticproperty">
+   <span id="infopaneltitle-for-semanticproperty" style="display:none">Info about the 'SemanticProperty' definition.</span><b><a href="#semanticproperty">#semanticproperty</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#SemanticProperty-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-semanticproperty">6.5.4. Property</a>
@@ -10043,8 +10068,8 @@ this metamodel and can be manipulated using its API.
     <li><a href="#ref-for-semanticproperty②">6.5.9. StructuredProperty</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="structuredproperty">
-   <b><a href="#structuredproperty">#structuredproperty</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-structuredproperty" class="dfn-panel" data-for="structuredproperty" id="infopanel-for-structuredproperty">
+   <span id="infopaneltitle-for-structuredproperty" style="display:none">Info about the 'StructuredProperty' definition.</span><b><a href="#structuredproperty">#structuredproperty</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#StructuredProperty-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-structuredproperty">6.3.1. SpecializableTerm</a>
@@ -10054,8 +10079,8 @@ this metamodel and can be manipulated using its API.
     <li><a href="#ref-for-structuredproperty④">6.11.18. StructuredPropertyReference</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="binarypredicate">
-   <b><a href="#binarypredicate">#binarypredicate</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-binarypredicate" class="dfn-panel" data-for="binarypredicate" id="infopanel-for-binarypredicate">
+   <span id="infopaneltitle-for-binarypredicate" style="display:none">Info about the 'BinaryPredicate' definition.</span><b><a href="#binarypredicate">#binarypredicate</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#BinaryPredicate-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-binarypredicate">6.6.2. DifferentFromPredicate</a>
@@ -10065,22 +10090,22 @@ this metamodel and can be manipulated using its API.
     <li><a href="#ref-for-binarypredicate④">6.6.7. SameAsPredicate</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="differentfrompredicate">
-   <b><a href="#differentfrompredicate">#differentfrompredicate</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-differentfrompredicate" class="dfn-panel" data-for="differentfrompredicate" id="infopanel-for-differentfrompredicate">
+   <span id="infopaneltitle-for-differentfrompredicate" style="display:none">Info about the 'DifferentFromPredicate' definition.</span><b><a href="#differentfrompredicate">#differentfrompredicate</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#DifferentFromPredicate-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-differentfrompredicate">6.6.1. BinaryPredicate</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="featurepredicate">
-   <b><a href="#featurepredicate">#featurepredicate</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-featurepredicate" class="dfn-panel" data-for="featurepredicate" id="infopanel-for-featurepredicate">
+   <span id="infopaneltitle-for-featurepredicate" style="display:none">Info about the 'FeaturePredicate' definition.</span><b><a href="#featurepredicate">#featurepredicate</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#FeaturePredicate-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-featurepredicate">6.6.1. BinaryPredicate</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="predicate">
-   <b><a href="#predicate">#predicate</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-predicate" class="dfn-panel" data-for="predicate" id="infopanel-for-predicate">
+   <span id="infopaneltitle-for-predicate" style="display:none">Info about the 'Predicate' definition.</span><b><a href="#predicate">#predicate</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#Predicate-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-predicate">6.1.3. Element</a>
@@ -10089,15 +10114,15 @@ this metamodel and can be manipulated using its API.
     <li><a href="#ref-for-predicate④">6.6.9. UnaryPredicate</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="relationentitypredicate">
-   <b><a href="#relationentitypredicate">#relationentitypredicate</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-relationentitypredicate" class="dfn-panel" data-for="relationentitypredicate" id="infopanel-for-relationentitypredicate">
+   <span id="infopaneltitle-for-relationentitypredicate" style="display:none">Info about the 'RelationEntityPredicate' definition.</span><b><a href="#relationentitypredicate">#relationentitypredicate</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#RelationEntityPredicate-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-relationentitypredicate">6.6.1. BinaryPredicate</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="rule">
-   <b><a href="#rule">#rule</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-rule" class="dfn-panel" data-for="rule" id="infopanel-for-rule">
+   <span id="infopaneltitle-for-rule" style="display:none">Info about the 'Rule' definition.</span><b><a href="#rule">#rule</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#Rule-Syntax">4. Textual BNF</a>
     <li><a href="#Rule-Diagram">5. Graphical BNF</a>
@@ -10107,30 +10132,30 @@ this metamodel and can be manipulated using its API.
     <li><a href="#ref-for-rule④">6.11.14. RuleReference</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="sameaspredicate">
-   <b><a href="#sameaspredicate">#sameaspredicate</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-sameaspredicate" class="dfn-panel" data-for="sameaspredicate" id="infopanel-for-sameaspredicate">
+   <span id="infopaneltitle-for-sameaspredicate" style="display:none">Info about the 'SameAsPredicate' definition.</span><b><a href="#sameaspredicate">#sameaspredicate</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#SameAsPredicate-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-sameaspredicate">6.6.1. BinaryPredicate</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="typepredicate">
-   <b><a href="#typepredicate">#typepredicate</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-typepredicate" class="dfn-panel" data-for="typepredicate" id="infopanel-for-typepredicate">
+   <span id="infopaneltitle-for-typepredicate" style="display:none">Info about the 'TypePredicate' definition.</span><b><a href="#typepredicate">#typepredicate</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#TypePredicate-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-typepredicate">6.6.9. UnaryPredicate</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="unarypredicate">
-   <b><a href="#unarypredicate">#unarypredicate</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-unarypredicate" class="dfn-panel" data-for="unarypredicate" id="infopanel-for-unarypredicate">
+   <span id="infopaneltitle-for-unarypredicate" style="display:none">Info about the 'UnaryPredicate' definition.</span><b><a href="#unarypredicate">#unarypredicate</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#UnaryPredicate-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-unarypredicate">6.6.4. Predicate</a>
     <li><a href="#ref-for-unarypredicate①">6.6.8. TypePredicate</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="axiom">
-   <b><a href="#axiom">#axiom</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-axiom" class="dfn-panel" data-for="axiom" id="infopanel-for-axiom">
+   <span id="infopaneltitle-for-axiom" style="display:none">Info about the 'Axiom' definition.</span><b><a href="#axiom">#axiom</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-axiom">6.1.3. Element</a>
     <li><a href="#ref-for-axiom①">6.7.3. KeyAxiom</a>
@@ -10138,8 +10163,8 @@ this metamodel and can be manipulated using its API.
     <li><a href="#ref-for-axiom③">6.7.15. SpecializationAxiom</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="cardinalityrestrictionkind">
-   <b><a href="#cardinalityrestrictionkind">#cardinalityrestrictionkind</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-cardinalityrestrictionkind" class="dfn-panel" data-for="cardinalityrestrictionkind" id="infopanel-for-cardinalityrestrictionkind">
+   <span id="infopaneltitle-for-cardinalityrestrictionkind" style="display:none">Info about the 'CardinalityRestrictionKind' definition.</span><b><a href="#cardinalityrestrictionkind">#cardinalityrestrictionkind</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#CardinalityRestrictionKind-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-cardinalityrestrictionkind">6.7.6. RelationCardinalityRestrictionAxiom</a>
@@ -10147,8 +10172,8 @@ this metamodel and can be manipulated using its API.
     <li><a href="#ref-for-cardinalityrestrictionkind②">6.7.16. StructuredPropertyCardinalityRestrictionAxiom</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="keyaxiom">
-   <b><a href="#keyaxiom">#keyaxiom</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-keyaxiom" class="dfn-panel" data-for="keyaxiom" id="infopanel-for-keyaxiom">
+   <span id="infopaneltitle-for-keyaxiom" style="display:none">Info about the 'KeyAxiom' definition.</span><b><a href="#keyaxiom">#keyaxiom</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#KeyAxiom-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-keyaxiom">6.4.4. Entity</a>
@@ -10156,8 +10181,8 @@ this metamodel and can be manipulated using its API.
     <li><a href="#ref-for-keyaxiom②">6.11.6. EntityReference</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="propertyrestrictionaxiom">
-   <b><a href="#propertyrestrictionaxiom">#propertyrestrictionaxiom</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-propertyrestrictionaxiom" class="dfn-panel" data-for="propertyrestrictionaxiom" id="infopanel-for-propertyrestrictionaxiom">
+   <span id="infopaneltitle-for-propertyrestrictionaxiom" style="display:none">Info about the 'PropertyRestrictionAxiom' definition.</span><b><a href="#propertyrestrictionaxiom">#propertyrestrictionaxiom</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#PropertyRestrictionAxiom-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-propertyrestrictionaxiom">6.4.2. Classifier</a>
@@ -10167,8 +10192,8 @@ this metamodel and can be manipulated using its API.
     <li><a href="#ref-for-propertyrestrictionaxiom④">6.11.3. ClassifierReference</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="rangerestrictionkind">
-   <b><a href="#rangerestrictionkind">#rangerestrictionkind</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-rangerestrictionkind" class="dfn-panel" data-for="rangerestrictionkind" id="infopanel-for-rangerestrictionkind">
+   <span id="infopaneltitle-for-rangerestrictionkind" style="display:none">Info about the 'RangeRestrictionKind' definition.</span><b><a href="#rangerestrictionkind">#rangerestrictionkind</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#RangeRestrictionKind-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-rangerestrictionkind">6.7.7. RelationRangeRestrictionAxiom</a>
@@ -10176,22 +10201,22 @@ this metamodel and can be manipulated using its API.
     <li><a href="#ref-for-rangerestrictionkind②">6.7.17. StructuredPropertyRangeRestrictionAxiom</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="relationcardinalityrestrictionaxiom">
-   <b><a href="#relationcardinalityrestrictionaxiom">#relationcardinalityrestrictionaxiom</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-relationcardinalityrestrictionaxiom" class="dfn-panel" data-for="relationcardinalityrestrictionaxiom" id="infopanel-for-relationcardinalityrestrictionaxiom">
+   <span id="infopaneltitle-for-relationcardinalityrestrictionaxiom" style="display:none">Info about the 'RelationCardinalityRestrictionAxiom' definition.</span><b><a href="#relationcardinalityrestrictionaxiom">#relationcardinalityrestrictionaxiom</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#RelationCardinalityRestrictionAxiom-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-relationcardinalityrestrictionaxiom">6.7.8. RelationRestrictionAxiom</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="relationrangerestrictionaxiom">
-   <b><a href="#relationrangerestrictionaxiom">#relationrangerestrictionaxiom</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-relationrangerestrictionaxiom" class="dfn-panel" data-for="relationrangerestrictionaxiom" id="infopanel-for-relationrangerestrictionaxiom">
+   <span id="infopaneltitle-for-relationrangerestrictionaxiom" style="display:none">Info about the 'RelationRangeRestrictionAxiom' definition.</span><b><a href="#relationrangerestrictionaxiom">#relationrangerestrictionaxiom</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#RelationRangeRestrictionAxiom-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-relationrangerestrictionaxiom">6.7.8. RelationRestrictionAxiom</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="relationrestrictionaxiom">
-   <b><a href="#relationrestrictionaxiom">#relationrestrictionaxiom</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-relationrestrictionaxiom" class="dfn-panel" data-for="relationrestrictionaxiom" id="infopanel-for-relationrestrictionaxiom">
+   <span id="infopaneltitle-for-relationrestrictionaxiom" style="display:none">Info about the 'RelationRestrictionAxiom' definition.</span><b><a href="#relationrestrictionaxiom">#relationrestrictionaxiom</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#RelationRestrictionAxiom-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-relationrestrictionaxiom">6.4.4. Entity</a>
@@ -10202,15 +10227,15 @@ this metamodel and can be manipulated using its API.
     <li><a href="#ref-for-relationrestrictionaxiom⑤">6.11.6. EntityReference</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="relationtargetrestrictionaxiom">
-   <b><a href="#relationtargetrestrictionaxiom">#relationtargetrestrictionaxiom</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-relationtargetrestrictionaxiom" class="dfn-panel" data-for="relationtargetrestrictionaxiom" id="infopanel-for-relationtargetrestrictionaxiom">
+   <span id="infopaneltitle-for-relationtargetrestrictionaxiom" style="display:none">Info about the 'RelationTargetRestrictionAxiom' definition.</span><b><a href="#relationtargetrestrictionaxiom">#relationtargetrestrictionaxiom</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#RelationTargetRestrictionAxiom-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-relationtargetrestrictionaxiom">6.7.8. RelationRestrictionAxiom</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="restrictionaxiom">
-   <b><a href="#restrictionaxiom">#restrictionaxiom</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-restrictionaxiom" class="dfn-panel" data-for="restrictionaxiom" id="infopanel-for-restrictionaxiom">
+   <span id="infopaneltitle-for-restrictionaxiom" style="display:none">Info about the 'RestrictionAxiom' definition.</span><b><a href="#restrictionaxiom">#restrictionaxiom</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#RestrictionAxiom-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-restrictionaxiom">6.7.1. Axiom</a>
@@ -10218,22 +10243,22 @@ this metamodel and can be manipulated using its API.
     <li><a href="#ref-for-restrictionaxiom②">6.7.8. RelationRestrictionAxiom</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="scalarpropertycardinalityrestrictionaxiom">
-   <b><a href="#scalarpropertycardinalityrestrictionaxiom">#scalarpropertycardinalityrestrictionaxiom</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-scalarpropertycardinalityrestrictionaxiom" class="dfn-panel" data-for="scalarpropertycardinalityrestrictionaxiom" id="infopanel-for-scalarpropertycardinalityrestrictionaxiom">
+   <span id="infopaneltitle-for-scalarpropertycardinalityrestrictionaxiom" style="display:none">Info about the 'ScalarPropertyCardinalityRestrictionAxiom' definition.</span><b><a href="#scalarpropertycardinalityrestrictionaxiom">#scalarpropertycardinalityrestrictionaxiom</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ScalarPropertyCardinalityRestrictionAxiom-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-scalarpropertycardinalityrestrictionaxiom">6.7.13. ScalarPropertyRestrictionAxiom</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="scalarpropertyrangerestrictionaxiom">
-   <b><a href="#scalarpropertyrangerestrictionaxiom">#scalarpropertyrangerestrictionaxiom</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-scalarpropertyrangerestrictionaxiom" class="dfn-panel" data-for="scalarpropertyrangerestrictionaxiom" id="infopanel-for-scalarpropertyrangerestrictionaxiom">
+   <span id="infopaneltitle-for-scalarpropertyrangerestrictionaxiom" style="display:none">Info about the 'ScalarPropertyRangeRestrictionAxiom' definition.</span><b><a href="#scalarpropertyrangerestrictionaxiom">#scalarpropertyrangerestrictionaxiom</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ScalarPropertyRangeRestrictionAxiom-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-scalarpropertyrangerestrictionaxiom">6.7.13. ScalarPropertyRestrictionAxiom</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="scalarpropertyrestrictionaxiom">
-   <b><a href="#scalarpropertyrestrictionaxiom">#scalarpropertyrestrictionaxiom</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-scalarpropertyrestrictionaxiom" class="dfn-panel" data-for="scalarpropertyrestrictionaxiom" id="infopanel-for-scalarpropertyrestrictionaxiom">
+   <span id="infopaneltitle-for-scalarpropertyrestrictionaxiom" style="display:none">Info about the 'ScalarPropertyRestrictionAxiom' definition.</span><b><a href="#scalarpropertyrestrictionaxiom">#scalarpropertyrestrictionaxiom</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ScalarPropertyRestrictionAxiom-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-scalarpropertyrestrictionaxiom">6.7.4. PropertyRestrictionAxiom</a>
@@ -10242,15 +10267,15 @@ this metamodel and can be manipulated using its API.
     <li><a href="#ref-for-scalarpropertyrestrictionaxiom③">6.7.14. ScalarPropertyValueRestrictionAxiom</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="scalarpropertyvaluerestrictionaxiom">
-   <b><a href="#scalarpropertyvaluerestrictionaxiom">#scalarpropertyvaluerestrictionaxiom</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-scalarpropertyvaluerestrictionaxiom" class="dfn-panel" data-for="scalarpropertyvaluerestrictionaxiom" id="infopanel-for-scalarpropertyvaluerestrictionaxiom">
+   <span id="infopaneltitle-for-scalarpropertyvaluerestrictionaxiom" style="display:none">Info about the 'ScalarPropertyValueRestrictionAxiom' definition.</span><b><a href="#scalarpropertyvaluerestrictionaxiom">#scalarpropertyvaluerestrictionaxiom</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ScalarPropertyValueRestrictionAxiom-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-scalarpropertyvaluerestrictionaxiom">6.7.13. ScalarPropertyRestrictionAxiom</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="specializationaxiom">
-   <b><a href="#specializationaxiom">#specializationaxiom</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-specializationaxiom" class="dfn-panel" data-for="specializationaxiom" id="infopanel-for-specializationaxiom">
+   <span id="infopaneltitle-for-specializationaxiom" style="display:none">Info about the 'SpecializationAxiom' definition.</span><b><a href="#specializationaxiom">#specializationaxiom</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#SpecializationAxiom-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-specializationaxiom">6.3.1. SpecializableTerm</a>
@@ -10258,22 +10283,22 @@ this metamodel and can be manipulated using its API.
     <li><a href="#ref-for-specializationaxiom②">6.11.16. SpecializableTermReference</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="structuredpropertycardinalityrestrictionaxiom">
-   <b><a href="#structuredpropertycardinalityrestrictionaxiom">#structuredpropertycardinalityrestrictionaxiom</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-structuredpropertycardinalityrestrictionaxiom" class="dfn-panel" data-for="structuredpropertycardinalityrestrictionaxiom" id="infopanel-for-structuredpropertycardinalityrestrictionaxiom">
+   <span id="infopaneltitle-for-structuredpropertycardinalityrestrictionaxiom" style="display:none">Info about the 'StructuredPropertyCardinalityRestrictionAxiom' definition.</span><b><a href="#structuredpropertycardinalityrestrictionaxiom">#structuredpropertycardinalityrestrictionaxiom</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#StructuredPropertyCardinalityRestrictionAxiom-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-structuredpropertycardinalityrestrictionaxiom">6.7.18. StructuredPropertyRestrictionAxiom</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="structuredpropertyrangerestrictionaxiom">
-   <b><a href="#structuredpropertyrangerestrictionaxiom">#structuredpropertyrangerestrictionaxiom</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-structuredpropertyrangerestrictionaxiom" class="dfn-panel" data-for="structuredpropertyrangerestrictionaxiom" id="infopanel-for-structuredpropertyrangerestrictionaxiom">
+   <span id="infopaneltitle-for-structuredpropertyrangerestrictionaxiom" style="display:none">Info about the 'StructuredPropertyRangeRestrictionAxiom' definition.</span><b><a href="#structuredpropertyrangerestrictionaxiom">#structuredpropertyrangerestrictionaxiom</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#StructuredPropertyRangeRestrictionAxiom-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-structuredpropertyrangerestrictionaxiom">6.7.18. StructuredPropertyRestrictionAxiom</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="structuredpropertyrestrictionaxiom">
-   <b><a href="#structuredpropertyrestrictionaxiom">#structuredpropertyrestrictionaxiom</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-structuredpropertyrestrictionaxiom" class="dfn-panel" data-for="structuredpropertyrestrictionaxiom" id="infopanel-for-structuredpropertyrestrictionaxiom">
+   <span id="infopaneltitle-for-structuredpropertyrestrictionaxiom" style="display:none">Info about the 'StructuredPropertyRestrictionAxiom' definition.</span><b><a href="#structuredpropertyrestrictionaxiom">#structuredpropertyrestrictionaxiom</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#StructuredPropertyRestrictionAxiom-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-structuredpropertyrestrictionaxiom">6.7.4. PropertyRestrictionAxiom</a>
@@ -10282,16 +10307,16 @@ this metamodel and can be manipulated using its API.
     <li><a href="#ref-for-structuredpropertyrestrictionaxiom③">6.7.19. StructuredPropertyValueRestrictionAxiom</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="structuredpropertyvaluerestrictionaxiom">
-   <b><a href="#structuredpropertyvaluerestrictionaxiom">#structuredpropertyvaluerestrictionaxiom</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-structuredpropertyvaluerestrictionaxiom" class="dfn-panel" data-for="structuredpropertyvaluerestrictionaxiom" id="infopanel-for-structuredpropertyvaluerestrictionaxiom">
+   <span id="infopaneltitle-for-structuredpropertyvaluerestrictionaxiom" style="display:none">Info about the 'StructuredPropertyValueRestrictionAxiom' definition.</span><b><a href="#structuredpropertyvaluerestrictionaxiom">#structuredpropertyvaluerestrictionaxiom</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#StructuredPropertyValueRestrictionAxiom-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-structuredpropertyvaluerestrictionaxiom">6.7.18. StructuredPropertyRestrictionAxiom</a>
     <li><a href="#ref-for-structuredpropertyvaluerestrictionaxiom①">6.9.5. StructureInstance</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="description">
-   <b><a href="#description">#description</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-description" class="dfn-panel" data-for="description" id="infopanel-for-description">
+   <span id="infopaneltitle-for-description" style="display:none">Info about the 'Description' definition.</span><b><a href="#description">#description</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#Description-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-description">6.8.2. DescriptionBox</a>
@@ -10299,8 +10324,8 @@ this metamodel and can be manipulated using its API.
     <li><a href="#ref-for-description②">6.8.10. DescriptionStatement</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="descriptionbox">
-   <b><a href="#descriptionbox">#descriptionbox</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-descriptionbox" class="dfn-panel" data-for="descriptionbox" id="infopanel-for-descriptionbox">
+   <span id="infopaneltitle-for-descriptionbox" style="display:none">Info about the 'DescriptionBox' definition.</span><b><a href="#descriptionbox">#descriptionbox</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#DescriptionBox-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-descriptionbox">6.1.7. Ontology</a>
@@ -10308,23 +10333,23 @@ this metamodel and can be manipulated using its API.
     <li><a href="#ref-for-descriptionbox②">6.8.3. DescriptionBundle</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="descriptionbundle">
-   <b><a href="#descriptionbundle">#descriptionbundle</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-descriptionbundle" class="dfn-panel" data-for="descriptionbundle" id="infopanel-for-descriptionbundle">
+   <span id="infopaneltitle-for-descriptionbundle" style="display:none">Info about the 'DescriptionBundle' definition.</span><b><a href="#descriptionbundle">#descriptionbundle</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#DescriptionBundle-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-descriptionbundle">6.8.2. DescriptionBox</a>
     <li><a href="#ref-for-descriptionbundle①">6.8.5. DescriptionBundleImport</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="descriptionbundleextension">
-   <b><a href="#descriptionbundleextension">#descriptionbundleextension</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-descriptionbundleextension" class="dfn-panel" data-for="descriptionbundleextension" id="infopanel-for-descriptionbundleextension">
+   <span id="infopaneltitle-for-descriptionbundleextension" style="display:none">Info about the 'DescriptionBundleExtension' definition.</span><b><a href="#descriptionbundleextension">#descriptionbundleextension</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#DescriptionBundleExtension-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-descriptionbundleextension">6.8.5. DescriptionBundleImport</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="descriptionbundleimport">
-   <b><a href="#descriptionbundleimport">#descriptionbundleimport</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-descriptionbundleimport" class="dfn-panel" data-for="descriptionbundleimport" id="infopanel-for-descriptionbundleimport">
+   <span id="infopaneltitle-for-descriptionbundleimport" style="display:none">Info about the 'DescriptionBundleImport' definition.</span><b><a href="#descriptionbundleimport">#descriptionbundleimport</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#DescriptionBundleImport-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-descriptionbundleimport">6.1.5. Import</a>
@@ -10334,29 +10359,29 @@ this metamodel and can be manipulated using its API.
     <li><a href="#ref-for-descriptionbundleimport④">6.8.7. DescriptionBundleUsage</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="descriptionbundleinclusion">
-   <b><a href="#descriptionbundleinclusion">#descriptionbundleinclusion</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-descriptionbundleinclusion" class="dfn-panel" data-for="descriptionbundleinclusion" id="infopanel-for-descriptionbundleinclusion">
+   <span id="infopaneltitle-for-descriptionbundleinclusion" style="display:none">Info about the 'DescriptionBundleInclusion' definition.</span><b><a href="#descriptionbundleinclusion">#descriptionbundleinclusion</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#DescriptionBundleInclusion-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-descriptionbundleinclusion">6.8.5. DescriptionBundleImport</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="descriptionbundleusage">
-   <b><a href="#descriptionbundleusage">#descriptionbundleusage</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-descriptionbundleusage" class="dfn-panel" data-for="descriptionbundleusage" id="infopanel-for-descriptionbundleusage">
+   <span id="infopaneltitle-for-descriptionbundleusage" style="display:none">Info about the 'DescriptionBundleUsage' definition.</span><b><a href="#descriptionbundleusage">#descriptionbundleusage</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#DescriptionBundleUsage-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-descriptionbundleusage">6.8.5. DescriptionBundleImport</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="descriptionextension">
-   <b><a href="#descriptionextension">#descriptionextension</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-descriptionextension" class="dfn-panel" data-for="descriptionextension" id="infopanel-for-descriptionextension">
+   <span id="infopaneltitle-for-descriptionextension" style="display:none">Info about the 'DescriptionExtension' definition.</span><b><a href="#descriptionextension">#descriptionextension</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#DescriptionExtension-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-descriptionextension">6.8.9. DescriptionImport</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="descriptionimport">
-   <b><a href="#descriptionimport">#descriptionimport</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-descriptionimport" class="dfn-panel" data-for="descriptionimport" id="infopanel-for-descriptionimport">
+   <span id="infopaneltitle-for-descriptionimport" style="display:none">Info about the 'DescriptionImport' definition.</span><b><a href="#descriptionimport">#descriptionimport</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#DescriptionImport-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-descriptionimport">6.1.5. Import</a>
@@ -10365,8 +10390,8 @@ this metamodel and can be manipulated using its API.
     <li><a href="#ref-for-descriptionimport③">6.8.11. DescriptionUsage</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="descriptionstatement">
-   <b><a href="#descriptionstatement">#descriptionstatement</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-descriptionstatement" class="dfn-panel" data-for="descriptionstatement" id="infopanel-for-descriptionstatement">
+   <span id="infopaneltitle-for-descriptionstatement" style="display:none">Info about the 'DescriptionStatement' definition.</span><b><a href="#descriptionstatement">#descriptionstatement</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#DescriptionStatement-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-descriptionstatement">6.1.9. Statement</a>
@@ -10375,15 +10400,15 @@ this metamodel and can be manipulated using its API.
     <li><a href="#ref-for-descriptionstatement③">6.11.9. NamedInstanceReference</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="descriptionusage">
-   <b><a href="#descriptionusage">#descriptionusage</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-descriptionusage" class="dfn-panel" data-for="descriptionusage" id="infopanel-for-descriptionusage">
+   <span id="infopaneltitle-for-descriptionusage" style="display:none">Info about the 'DescriptionUsage' definition.</span><b><a href="#descriptionusage">#descriptionusage</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#DescriptionUsage-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-descriptionusage">6.8.9. DescriptionImport</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="conceptinstance">
-   <b><a href="#conceptinstance">#conceptinstance</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-conceptinstance" class="dfn-panel" data-for="conceptinstance" id="infopanel-for-conceptinstance">
+   <span id="infopaneltitle-for-conceptinstance" style="display:none">Info about the 'ConceptInstance' definition.</span><b><a href="#conceptinstance">#conceptinstance</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ConceptInstance-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-conceptinstance">6.4.3. Concept</a>
@@ -10392,8 +10417,8 @@ this metamodel and can be manipulated using its API.
     <li><a href="#ref-for-conceptinstance③">6.11.4. ConceptInstanceReference</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="instance">
-   <b><a href="#instance">#instance</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-instance" class="dfn-panel" data-for="instance" id="infopanel-for-instance">
+   <span id="infopaneltitle-for-instance" style="display:none">Info about the 'Instance' definition.</span><b><a href="#instance">#instance</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-instance">6.1.3. Element</a>
     <li><a href="#ref-for-instance①">6.9.3. NamedInstance</a>
@@ -10401,8 +10426,8 @@ this metamodel and can be manipulated using its API.
     <li><a href="#ref-for-instance③">6.10.4. PropertyValueAssertion</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="namedinstance">
-   <b><a href="#namedinstance">#namedinstance</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-namedinstance" class="dfn-panel" data-for="namedinstance" id="infopanel-for-namedinstance">
+   <span id="infopaneltitle-for-namedinstance" style="display:none">Info about the 'NamedInstance' definition.</span><b><a href="#namedinstance">#namedinstance</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#NamedInstance-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-namedinstance">6.1.6. Member</a>
@@ -10415,8 +10440,8 @@ this metamodel and can be manipulated using its API.
     <li><a href="#ref-for-namedinstance⑨">6.10.3. LinkAssertion</a> <a href="#ref-for-namedinstance①⓪">(2)</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="relationinstance">
-   <b><a href="#relationinstance">#relationinstance</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-relationinstance" class="dfn-panel" data-for="relationinstance" id="infopanel-for-relationinstance">
+   <span id="infopaneltitle-for-relationinstance" style="display:none">Info about the 'RelationInstance' definition.</span><b><a href="#relationinstance">#relationinstance</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#RelationInstance-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-relationinstance">6.9.3. NamedInstance</a>
@@ -10424,8 +10449,8 @@ this metamodel and can be manipulated using its API.
     <li><a href="#ref-for-relationinstance②">6.11.12. RelationInstanceReference</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="structureinstance">
-   <b><a href="#structureinstance">#structureinstance</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-structureinstance" class="dfn-panel" data-for="structureinstance" id="infopanel-for-structureinstance">
+   <span id="infopaneltitle-for-structureinstance" style="display:none">Info about the 'StructureInstance' definition.</span><b><a href="#structureinstance">#structureinstance</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#StructureInstance-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-structureinstance">6.7.19. StructuredPropertyValueRestrictionAxiom</a>
@@ -10433,8 +10458,8 @@ this metamodel and can be manipulated using its API.
     <li><a href="#ref-for-structureinstance②">6.10.7. StructuredPropertyValueAssertion</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="assertion">
-   <b><a href="#assertion">#assertion</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-assertion" class="dfn-panel" data-for="assertion" id="infopanel-for-assertion">
+   <span id="infopaneltitle-for-assertion" style="display:none">Info about the 'Assertion' definition.</span><b><a href="#assertion">#assertion</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-assertion">6.1.3. Element</a>
     <li><a href="#ref-for-assertion①">6.10.3. LinkAssertion</a>
@@ -10442,8 +10467,8 @@ this metamodel and can be manipulated using its API.
     <li><a href="#ref-for-assertion③">6.10.8. TypeAssertion</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="concepttypeassertion">
-   <b><a href="#concepttypeassertion">#concepttypeassertion</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-concepttypeassertion" class="dfn-panel" data-for="concepttypeassertion" id="infopanel-for-concepttypeassertion">
+   <span id="infopaneltitle-for-concepttypeassertion" style="display:none">Info about the 'ConceptTypeAssertion' definition.</span><b><a href="#concepttypeassertion">#concepttypeassertion</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ConceptTypeAssertion-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-concepttypeassertion">6.9.1. ConceptInstance</a>
@@ -10451,8 +10476,8 @@ this metamodel and can be manipulated using its API.
     <li><a href="#ref-for-concepttypeassertion②">6.11.4. ConceptInstanceReference</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="linkassertion">
-   <b><a href="#linkassertion">#linkassertion</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-linkassertion" class="dfn-panel" data-for="linkassertion" id="infopanel-for-linkassertion">
+   <span id="infopaneltitle-for-linkassertion" style="display:none">Info about the 'LinkAssertion' definition.</span><b><a href="#linkassertion">#linkassertion</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#LinkAssertion-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-linkassertion">6.9.3. NamedInstance</a>
@@ -10460,8 +10485,8 @@ this metamodel and can be manipulated using its API.
     <li><a href="#ref-for-linkassertion②">6.11.9. NamedInstanceReference</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="propertyvalueassertion">
-   <b><a href="#propertyvalueassertion">#propertyvalueassertion</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-propertyvalueassertion" class="dfn-panel" data-for="propertyvalueassertion" id="infopanel-for-propertyvalueassertion">
+   <span id="infopaneltitle-for-propertyvalueassertion" style="display:none">Info about the 'PropertyValueAssertion' definition.</span><b><a href="#propertyvalueassertion">#propertyvalueassertion</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#PropertyValueAssertion-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-propertyvalueassertion">6.9.2. Instance</a>
@@ -10471,8 +10496,8 @@ this metamodel and can be manipulated using its API.
     <li><a href="#ref-for-propertyvalueassertion④">6.11.9. NamedInstanceReference</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="relationtypeassertion">
-   <b><a href="#relationtypeassertion">#relationtypeassertion</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-relationtypeassertion" class="dfn-panel" data-for="relationtypeassertion" id="infopanel-for-relationtypeassertion">
+   <span id="infopaneltitle-for-relationtypeassertion" style="display:none">Info about the 'RelationTypeAssertion' definition.</span><b><a href="#relationtypeassertion">#relationtypeassertion</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#RelationTypeAssertion-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-relationtypeassertion">6.9.4. RelationInstance</a>
@@ -10480,45 +10505,45 @@ this metamodel and can be manipulated using its API.
     <li><a href="#ref-for-relationtypeassertion②">6.11.12. RelationInstanceReference</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="scalarpropertyvalueassertion">
-   <b><a href="#scalarpropertyvalueassertion">#scalarpropertyvalueassertion</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-scalarpropertyvalueassertion" class="dfn-panel" data-for="scalarpropertyvalueassertion" id="infopanel-for-scalarpropertyvalueassertion">
+   <span id="infopaneltitle-for-scalarpropertyvalueassertion" style="display:none">Info about the 'ScalarPropertyValueAssertion' definition.</span><b><a href="#scalarpropertyvalueassertion">#scalarpropertyvalueassertion</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ScalarPropertyValueAssertion-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-scalarpropertyvalueassertion">6.10.4. PropertyValueAssertion</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="structuredpropertyvalueassertion">
-   <b><a href="#structuredpropertyvalueassertion">#structuredpropertyvalueassertion</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-structuredpropertyvalueassertion" class="dfn-panel" data-for="structuredpropertyvalueassertion" id="infopanel-for-structuredpropertyvalueassertion">
+   <span id="infopaneltitle-for-structuredpropertyvalueassertion" style="display:none">Info about the 'StructuredPropertyValueAssertion' definition.</span><b><a href="#structuredpropertyvalueassertion">#structuredpropertyvalueassertion</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#StructuredPropertyValueAssertion-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-structuredpropertyvalueassertion">6.9.5. StructureInstance</a>
     <li><a href="#ref-for-structuredpropertyvalueassertion①">6.10.4. PropertyValueAssertion</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="typeassertion">
-   <b><a href="#typeassertion">#typeassertion</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-typeassertion" class="dfn-panel" data-for="typeassertion" id="infopanel-for-typeassertion">
+   <span id="infopaneltitle-for-typeassertion" style="display:none">Info about the 'TypeAssertion' definition.</span><b><a href="#typeassertion">#typeassertion</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-typeassertion">6.10.1. Assertion</a>
     <li><a href="#ref-for-typeassertion①">6.10.2. ConceptTypeAssertion</a>
     <li><a href="#ref-for-typeassertion②">6.10.5. RelationTypeAssertion</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="annotationpropertyreference">
-   <b><a href="#annotationpropertyreference">#annotationpropertyreference</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-annotationpropertyreference" class="dfn-panel" data-for="annotationpropertyreference" id="infopanel-for-annotationpropertyreference">
+   <span id="infopaneltitle-for-annotationpropertyreference" style="display:none">Info about the 'AnnotationPropertyReference' definition.</span><b><a href="#annotationpropertyreference">#annotationpropertyreference</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#AnnotationPropertyReference-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-annotationpropertyreference">6.11.16. SpecializableTermReference</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="aspectreference">
-   <b><a href="#aspectreference">#aspectreference</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-aspectreference" class="dfn-panel" data-for="aspectreference" id="infopanel-for-aspectreference">
+   <span id="infopaneltitle-for-aspectreference" style="display:none">Info about the 'AspectReference' definition.</span><b><a href="#aspectreference">#aspectreference</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#AspectReference-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-aspectreference">6.11.6. EntityReference</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="classifierreference">
-   <b><a href="#classifierreference">#classifierreference</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-classifierreference" class="dfn-panel" data-for="classifierreference" id="infopanel-for-classifierreference">
+   <span id="infopaneltitle-for-classifierreference" style="display:none">Info about the 'ClassifierReference' definition.</span><b><a href="#classifierreference">#classifierreference</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ClassifierReference-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-classifierreference">6.7.4. PropertyRestrictionAxiom</a>
@@ -10527,23 +10552,23 @@ this metamodel and can be manipulated using its API.
     <li><a href="#ref-for-classifierreference③">6.11.17. StructureReference</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="conceptinstancereference">
-   <b><a href="#conceptinstancereference">#conceptinstancereference</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-conceptinstancereference" class="dfn-panel" data-for="conceptinstancereference" id="infopanel-for-conceptinstancereference">
+   <span id="infopaneltitle-for-conceptinstancereference" style="display:none">Info about the 'ConceptInstanceReference' definition.</span><b><a href="#conceptinstancereference">#conceptinstancereference</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ConceptInstanceReference-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-conceptinstancereference">6.10.2. ConceptTypeAssertion</a>
     <li><a href="#ref-for-conceptinstancereference①">6.11.9. NamedInstanceReference</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="conceptreference">
-   <b><a href="#conceptreference">#conceptreference</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-conceptreference" class="dfn-panel" data-for="conceptreference" id="infopanel-for-conceptreference">
+   <span id="infopaneltitle-for-conceptreference" style="display:none">Info about the 'ConceptReference' definition.</span><b><a href="#conceptreference">#conceptreference</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ConceptReference-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-conceptreference">6.11.6. EntityReference</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="entityreference">
-   <b><a href="#entityreference">#entityreference</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-entityreference" class="dfn-panel" data-for="entityreference" id="infopanel-for-entityreference">
+   <span id="infopaneltitle-for-entityreference" style="display:none">Info about the 'EntityReference' definition.</span><b><a href="#entityreference">#entityreference</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#EntityReference-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-entityreference">6.7.3. KeyAxiom</a>
@@ -10554,22 +10579,22 @@ this metamodel and can be manipulated using its API.
     <li><a href="#ref-for-entityreference⑤">6.11.11. RelationEntityReference</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="enumeratedscalarreference">
-   <b><a href="#enumeratedscalarreference">#enumeratedscalarreference</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-enumeratedscalarreference" class="dfn-panel" data-for="enumeratedscalarreference" id="infopanel-for-enumeratedscalarreference">
+   <span id="infopaneltitle-for-enumeratedscalarreference" style="display:none">Info about the 'EnumeratedScalarReference' definition.</span><b><a href="#enumeratedscalarreference">#enumeratedscalarreference</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#EnumeratedScalarReference-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-enumeratedscalarreference">6.11.16. SpecializableTermReference</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="facetedscalarreference">
-   <b><a href="#facetedscalarreference">#facetedscalarreference</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-facetedscalarreference" class="dfn-panel" data-for="facetedscalarreference" id="infopanel-for-facetedscalarreference">
+   <span id="infopaneltitle-for-facetedscalarreference" style="display:none">Info about the 'FacetedScalarReference' definition.</span><b><a href="#facetedscalarreference">#facetedscalarreference</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#FacetedScalarReference-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-facetedscalarreference">6.11.16. SpecializableTermReference</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="namedinstancereference">
-   <b><a href="#namedinstancereference">#namedinstancereference</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-namedinstancereference" class="dfn-panel" data-for="namedinstancereference" id="infopanel-for-namedinstancereference">
+   <span id="infopaneltitle-for-namedinstancereference" style="display:none">Info about the 'NamedInstanceReference' definition.</span><b><a href="#namedinstancereference">#namedinstancereference</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#NamedInstanceReference-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-namedinstancereference">6.8.10. DescriptionStatement</a>
@@ -10580,8 +10605,8 @@ this metamodel and can be manipulated using its API.
     <li><a href="#ref-for-namedinstancereference⑤">6.11.12. RelationInstanceReference</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="reference">
-   <b><a href="#reference">#reference</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-reference" class="dfn-panel" data-for="reference" id="infopanel-for-reference">
+   <span id="infopaneltitle-for-reference" style="display:none">Info about the 'Reference' definition.</span><b><a href="#reference">#reference</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#Reference-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-reference">6.1.2. Annotation</a>
@@ -10592,46 +10617,46 @@ this metamodel and can be manipulated using its API.
     <li><a href="#ref-for-reference⑤">6.11.16. SpecializableTermReference</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="relationentityreference">
-   <b><a href="#relationentityreference">#relationentityreference</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-relationentityreference" class="dfn-panel" data-for="relationentityreference" id="infopanel-for-relationentityreference">
+   <span id="infopaneltitle-for-relationentityreference" style="display:none">Info about the 'RelationEntityReference' definition.</span><b><a href="#relationentityreference">#relationentityreference</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#RelationEntityReference-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-relationentityreference">6.11.6. EntityReference</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="relationinstancereference">
-   <b><a href="#relationinstancereference">#relationinstancereference</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-relationinstancereference" class="dfn-panel" data-for="relationinstancereference" id="infopanel-for-relationinstancereference">
+   <span id="infopaneltitle-for-relationinstancereference" style="display:none">Info about the 'RelationInstanceReference' definition.</span><b><a href="#relationinstancereference">#relationinstancereference</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#RelationInstanceReference-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-relationinstancereference">6.10.5. RelationTypeAssertion</a>
     <li><a href="#ref-for-relationinstancereference①">6.11.9. NamedInstanceReference</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="relationreference">
-   <b><a href="#relationreference">#relationreference</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-relationreference" class="dfn-panel" data-for="relationreference" id="infopanel-for-relationreference">
+   <span id="infopaneltitle-for-relationreference" style="display:none">Info about the 'RelationReference' definition.</span><b><a href="#relationreference">#relationreference</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#RelationReference-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-relationreference">6.3.11. VocabularyStatement</a>
     <li><a href="#ref-for-relationreference①">6.11.10. Reference</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="rulereference">
-   <b><a href="#rulereference">#rulereference</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-rulereference" class="dfn-panel" data-for="rulereference" id="infopanel-for-rulereference">
+   <span id="infopaneltitle-for-rulereference" style="display:none">Info about the 'RuleReference' definition.</span><b><a href="#rulereference">#rulereference</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#RuleReference-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-rulereference">6.3.11. VocabularyStatement</a>
     <li><a href="#ref-for-rulereference①">6.11.10. Reference</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="scalarpropertyreference">
-   <b><a href="#scalarpropertyreference">#scalarpropertyreference</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-scalarpropertyreference" class="dfn-panel" data-for="scalarpropertyreference" id="infopanel-for-scalarpropertyreference">
+   <span id="infopaneltitle-for-scalarpropertyreference" style="display:none">Info about the 'ScalarPropertyReference' definition.</span><b><a href="#scalarpropertyreference">#scalarpropertyreference</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ScalarPropertyReference-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-scalarpropertyreference">6.11.16. SpecializableTermReference</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="specializabletermreference">
-   <b><a href="#specializabletermreference">#specializabletermreference</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-specializabletermreference" class="dfn-panel" data-for="specializabletermreference" id="infopanel-for-specializabletermreference">
+   <span id="infopaneltitle-for-specializabletermreference" style="display:none">Info about the 'SpecializableTermReference' definition.</span><b><a href="#specializabletermreference">#specializabletermreference</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#SpecializableTermReference-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-specializabletermreference">6.3.11. VocabularyStatement</a>
@@ -10645,73 +10670,127 @@ this metamodel and can be manipulated using its API.
     <li><a href="#ref-for-specializabletermreference⑧">6.11.18. StructuredPropertyReference</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="structurereference">
-   <b><a href="#structurereference">#structurereference</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-structurereference" class="dfn-panel" data-for="structurereference" id="infopanel-for-structurereference">
+   <span id="infopaneltitle-for-structurereference" style="display:none">Info about the 'StructureReference' definition.</span><b><a href="#structurereference">#structurereference</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#StructureReference-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-structurereference">6.11.3. ClassifierReference</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="structuredpropertyreference">
-   <b><a href="#structuredpropertyreference">#structuredpropertyreference</a></b><b>Referenced in:</b>
+  <aside aria-labelledby="infopaneltitle-for-structuredpropertyreference" class="dfn-panel" data-for="structuredpropertyreference" id="infopanel-for-structuredpropertyreference">
+   <span id="infopaneltitle-for-structuredpropertyreference" style="display:none">Info about the 'StructuredPropertyReference' definition.</span><b><a href="#structuredpropertyreference">#structuredpropertyreference</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#StructuredPropertyReference-Syntax">4. Textual BNF</a>
     <li><a href="#ref-for-structuredpropertyreference">6.11.16. SpecializableTermReference</a>
    </ul>
   </aside>
 <script>/* script-dfn-panel */
-
-document.body.addEventListener("click", function(e) {
-    var queryAll = function(sel) { return [].slice.call(document.querySelectorAll(sel)); }
-    // Find the dfn element or panel, if any, that was clicked on.
-    var el = e.target;
-    var target;
-    var hitALink = false;
-    while(el.parentElement) {
-        if(el.tagName == "A") {
-            // Clicking on a link in a <dfn> shouldn't summon the panel
-            hitALink = true;
-        }
-        if(el.classList.contains("dfn-paneled")) {
-            target = "dfn";
-            break;
-        }
-        if(el.classList.contains("dfn-panel")) {
-            target = "dfn-panel";
-            break;
-        }
-        el = el.parentElement;
+"use strict";
+{
+    function queryAll(sel) {
+        return [].slice.call(document.querySelectorAll(sel));
     }
-    if(target != "dfn-panel") {
+
+    // Add popup behavior to all dfns to show the corresponding dfn-panel.
+    var dfns = document.querySelectorAll('.dfn-paneled');
+    for (let dfn of dfns) { insertDfnPopupAction(dfn); }
+
+    document.body.addEventListener("click", (e) => {
+        // If not handled already, just hide all dfn panels.
+        hideAllDfnPanels();
+    });
+
+    function hideAllDfnPanels() {
         // Turn off any currently "on" or "activated" panels.
-        queryAll(".dfn-panel.on, .dfn-panel.activated").forEach(function(el){
-            el.classList.remove("on");
-            el.classList.remove("activated");
-        });
-    }
-    if(target == "dfn" && !hitALink) {
-        // open the panel
-        var dfnPanel = document.querySelector(".dfn-panel[data-for='" + el.id + "']");
-        if(dfnPanel) {
-            dfnPanel.classList.add("on");
-            var rect = el.getBoundingClientRect();
-            dfnPanel.style.left = window.scrollX + rect.right + 5 + "px";
-            dfnPanel.style.top = window.scrollY + rect.top + "px";
-            var panelRect = dfnPanel.getBoundingClientRect();
-            var panelWidth = panelRect.right - panelRect.left;
-            if(panelRect.right > document.body.scrollWidth && (rect.left - (panelWidth + 5)) > 0) {
-                // Reposition, because the panel is overflowing
-                dfnPanel.style.left = window.scrollX + rect.left - (panelWidth + 5) + "px";
-            }
-        } else {
-            console.log("Couldn't find .dfn-panel[data-for='" + el.id + "']");
-        }
-    } else if(target == "dfn-panel") {
-        // Switch it to "activated" state, which pins it.
-        el.classList.add("activated");
-        el.style.left = null;
-        el.style.top = null;
+        queryAll(".dfn-panel.on, .dfn-panel.activated").forEach(el=>hideDfnPanel(el));
     }
 
-});
+    function showDfnPanel(dfnPanel, dfn) {
+        hideAllDfnPanels(); // Only display one at this time.
+        dfn.setAttribute("aria-expanded", "true");
+        dfnPanel.classList.add("on");
+        dfnPanel.style.left = "5px";
+        dfnPanel.style.top = "0px";
+        const panelRect = dfnPanel.getBoundingClientRect();
+        const panelWidth = panelRect.right - panelRect.left;
+        if (panelRect.right > document.body.scrollWidth) {
+            // Panel's overflowing the screen.
+            // Just drop it below the dfn and flip it rightward instead.
+            // This still wont' fix things if the screen is *really* wide,
+            // but fixing that's a lot harder without 'anchor()'.
+            dfnPanel.style.top = "1.5em";
+            dfnPanel.style.left = "auto";
+            dfnPanel.style.right = "0px";
+        }
+    }
+
+    function pinDfnPanel(dfnPanel) {
+        // Switch it to "activated" state, which pins it.
+        dfnPanel.classList.add("activated");
+        dfnPanel.style.left = null;
+        dfnPanel.style.top = null;
+    }
+
+    function hideDfnPanel(dfnPanel, dfn) {
+        if(!dfn) {
+            dfn = document.getElementById(dfnPanel.getAttribute("data-for"));
+        }
+        dfn.setAttribute("aria-expanded", "false")
+        dfnPanel.classList.remove("on");
+        dfnPanel.classList.remove("activated");
+    }
+
+    function toggleDfnPanel(dfnPanel, dfn) {
+        if(dfnPanel.classList.contains("on")) {
+            hideDfnPanel(dfnPanel, dfn);
+        } else {
+            showDfnPanel(dfnPanel, dfn);
+        }
+    }
+
+    function insertDfnPopupAction(dfn) {
+        // Find dfn panel
+        const dfnPanel = document.querySelector(`.dfn-panel[data-for='${dfn.id}']`);
+        if (dfnPanel) {
+            const panelWrapper = document.createElement('span');
+            panelWrapper.appendChild(dfnPanel);
+            panelWrapper.style.position = "relative";
+            panelWrapper.style.height = "0px";
+            dfn.insertAdjacentElement("afterend", panelWrapper);
+            dfn.setAttribute('role', 'button');
+            dfn.setAttribute('aria-expanded', 'false')
+            dfn.tabIndex = 0;
+            dfn.classList.add('has-dfn-panel');
+            dfn.addEventListener('click', (event) => {
+                showDfnPanel(dfnPanel, dfn);
+                event.stopPropagation();
+            });
+            dfn.addEventListener('keypress', (event) => {
+                const kc = event.keyCode;
+                // 32->Space, 13->Enter
+                if(kc == 32 || kc == 13) {
+                    toggleDfnPanel(dfnPanel, dfn);
+                    event.stopPropagation();
+                    event.preventDefault();
+                }
+            });
+
+            dfnPanel.addEventListener('click', (event) => {
+                pinDfnPanel(dfnPanel);
+                event.stopPropagation();
+            });
+
+            dfnPanel.addEventListener('keydown', (event) => {
+                if(event.keyCode == 27) { // Escape key
+                    hideDfnPanel(dfnPanel, dfn);
+                    event.stopPropagation();
+                    event.preventDefault();
+                }
+            })
+
+        } else {
+            console.log("Couldn't find .dfn-panel[data-for='" + dfn.id + "']");
+        }
+    }
+}
 </script>
