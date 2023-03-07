@@ -26,11 +26,11 @@ package io.opencaesar.oml;
  *
  * <!-- begin-model-doc -->
  * FacetedScalar is a scalar that represents a (possibly infinite) set of literals and can constrain them with some facets. It
- * can also specialize another faceted scalar. Only a limited set of scalars do not specialize others; those are the standard
- * set defined by the OWL2 standard (https://www.w3.org/TR/owl2-syntax/#Datatype_Maps) and listed below. Other scalars have to
- * specialize directly or transitively from this standard set. The facets that are applicable to specify on a scalar depend on
- * the standard scalar specialized, as specified below. A scalar that specifies no facet is simply considered to be an alias
- * to the specialized scalar.
+ * can also specialize other faceted scalars. OML considers some faceted scalars, those defined by the OWL2 specification
+ * (https://www.w3.org/TR/owl2-syntax/#Datatype_Maps) and listed below, as standard. Other non-standard scalars can specialize directly
+ * or transitively from this standard set and optionally specify facets (restrictions on their lexical or value spaces).
+ * A scalar that specifies facets can only have a single supertype, which must be a standard one. Otherwise, it must have at least one
+ * supertype that is considered to be an alias.
  * 
  * Numeric scalars (facets: minInclusive, maxInclusive, minExclusive, maxExclusive):
  * owl:real

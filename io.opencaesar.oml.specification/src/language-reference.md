@@ -510,7 +510,7 @@ The following example vocabulary defines the structure *Point* whose instances a
 
 #### Faceted Scalar #### {#FacetedScalar-LR}
 
-A [scalar](#Scalar-Syntax) is a type defined in a vocabulary and represents a primitive type that classifies an unlimited set of literals. A faceted scalar is declared with the keyword `scalar` followed by the scalar's name ID. It can optionally specialize another faceted scalar as a supertype by following its name ID by the `:>` symbol then the IRI of the supertype. A scalar can also optionally specify a list of facets enclosed within a pair of square brackets `[` `]`.
+A [scalar](#Scalar-Syntax) is a type defined in a vocabulary and represents a primitive type that classifies an unlimited set of literals. A faceted scalar is declared with the keyword `scalar` followed by the scalar's name ID. It can optionally specialize other faceted scalars as supertypes by following its name ID by the `:>` symbol then the IRIs of the supertypes.
 
 <pre class="highlight highlight-html">
     Annotation*
@@ -527,9 +527,7 @@ A [scalar](#Scalar-Syntax) is a type defined in a vocabulary and represents a pr
 	`]`)?
 </pre>
 
-OML considers a following set of faceted scalars as *standard*:
-
-Note: for the standard vocabularies below to be used (cross-referenced), they need to exist as OML files that are mapped by the catalog.xml file of the OML project. One way to achieve that is to recreate such files directly under the `src/oml` folder. However, a simpler approach is to add a maven dependency on the `core-vocabularies` library (in Maven Central) in the project's build.gradle and invoking the `OmlMergeTask` on it. This would result in the standard vocabularies getting downloaded to the `oml\build` folder. An example of doing this can be seen in the [oml-template](https://github.com/opencaesar/oml-template/blob/master/build.gradle#L54-L78) project.
+OML considers a following set of faceted scalars, from the [owl](https://www.w3.org/TR/owl2-syntax/#Datatype_Maps) spec, as *standard*:
 
 <pre class="highlight highlight-html">
 `vocabulary` `<`http://www.w3.org/2000/01/rdf-schema#`>` `as` rdfs `{`
@@ -604,7 +602,11 @@ Note: for the standard vocabularies below to be used (cross-referenced), they ne
 
 Note: the lexical and value spaces for these standard scalars are described in the ([xsd](https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/#built-in-datatypes), and [owl](https://www.w3.org/TR/owl2-syntax/#Datatype_Maps)) standards.
 
-Furthermore, other faceted scalars can be defined only as specializations of the standard ones (maximum one supertype per scalar is allowed). They can also be optionally restricted with one or more facets. A facet is a restriction on the lexical or value space of a standard scalar. The following facets are supported:
+Note: for the standard vocabularies above to be used (cross-referenced) in a project, they must exist as OML files that are mapped by the project's catalog.xml file. One way to achieve that is to create such files directly under the `src/oml` folder. However, a simpler approach is to specify a direct or transitive Maven dependency on the `core-vocabularies` library (in Maven Central) in the project's build.gradle and invoking the `OmlMergeTask` on it. This would result in the standard vocabularies getting downloaded to the `oml\build` folder. An example of doing this can be seen in the [oml-template](https://github.com/opencaesar/oml-template/blob/master/build.gradle#L54-L78) project.
+
+Furthermore, other non-standard faceted scalars can be defined as specializations of standard ones with optional facets (restrictions on the lexical or value space) enclosed within a pair of square brackets `[` `]`.
+
+The following facets are supported:
 
 - Facet `length` specifies the exact length of the lexical representation (of strings and literals)
 - Facet `minLength` specifies the minimum length of the lexical representation (of strings and literals)
@@ -615,6 +617,8 @@ Furthermore, other faceted scalars can be defined only as specializations of the
 - Facet `minExclusive` specifies the minimum exclusive value (of numbers)
 - Facet `maxInclusive` specifies the maximum inclusive value (of numbers)
 - Facet `maxExclusive` specifies the maximum exclusive value (of numbers)
+
+When a non-standard faceted scalar specifies facets, it must have a single supertype and that supertype must be one of the standard ones. Otherwise, it must have at least one supertype (considered as an alias).
 
 The following example vocabulary defines two faceted scalars: *SSN* (representing strings with the social security number pattern) and *TeenAge* (representing positive integers from 13 and 19 inclusive).
 
@@ -628,6 +632,7 @@ The following example vocabulary defines two faceted scalars: *SSN* (representin
 		`minInclusive` 13
 		`maxInclusive` 19
 	`]`
+	`scalar` SocialSecurityNumber `:>` SSN // alias case
 `}`
 </pre>
 
