@@ -103,6 +103,7 @@ public interface PropertyValueAssertion extends Assertion {
 	 * Gets the property referenced by this assertion
 	 * <!-- end-model-doc -->
 	 * @model kind="operation" unique="false"
+	 *        annotation="https://www.eclipse.org/emf/2002/Ecore getterOf='property'"
 	 * @generated
 	 */
 	SemanticProperty getProperty();
@@ -114,6 +115,7 @@ public interface PropertyValueAssertion extends Assertion {
 	 * Gets the value specified by this assertion
 	 * <!-- end-model-doc -->
 	 * @model kind="operation" unique="false"
+	 *        annotation="https://www.eclipse.org/emf/2002/Ecore getterOf='value'"
 	 * @generated
 	 */
 	Element getValue();

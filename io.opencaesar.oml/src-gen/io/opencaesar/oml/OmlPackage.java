@@ -46,7 +46,7 @@ import org.eclipse.emf.ecore.EReference;
  * @model kind="package"
  *        annotation="https://tabatkins.github.io/bikeshed/headings Elements='' Literals='' Ontologies='' Vocabularies='' Types='' Features='' Rules='' Axioms='' Descriptions='' Instances='' Assertions='' References=''"
  *        annotation="https://tabatkins.github.io/bikeshed heading='Abstract-Syntax'"
- *        annotation="http://www.eclipse.org/emf/2011/Xcore Bikeshed='https://tabatkins.github.io/bikeshed' BikeshedHeadings='https://tabatkins.github.io/bikeshed/headings'"
+ *        annotation="http://www.eclipse.org/emf/2011/Xcore Bikeshed='https://tabatkins.github.io/bikeshed' BikeshedHeadings='https://tabatkins.github.io/bikeshed/headings' Ecore='https://www.eclipse.org/emf/2002/Ecore' OmlEcore='https://opencaesar.io/oml/Ecore'"
  * @generated
  */
 public interface OmlPackage extends EPackage {

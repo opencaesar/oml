@@ -55,6 +55,7 @@ public interface Ontology extends IdentifiedElement {
 	 * @see #setNamespace(String)
 	 * @see io.opencaesar.oml.OmlPackage#getOntology_Namespace()
 	 * @model unique="false" dataType="io.opencaesar.oml.Namespace" required="true"
+	 *        annotation="https://opencaesar.io/oml/Ecore identifier='true'"
 	 * @generated
 	 */
 	String getNamespace();
@@ -80,6 +81,7 @@ public interface Ontology extends IdentifiedElement {
 	 * @see #setPrefix(String)
 	 * @see io.opencaesar.oml.OmlPackage#getOntology_Prefix()
 	 * @model unique="false" dataType="io.opencaesar.oml.ID" required="true"
+	 *        annotation="https://opencaesar.io/oml/Ecore identifier='true'"
 	 * @generated
 	 */
 	String getPrefix();

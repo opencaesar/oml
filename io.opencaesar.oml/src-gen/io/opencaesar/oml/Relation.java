@@ -94,6 +94,7 @@ public interface Relation extends Feature {
 	 * Gets the relation entity of this relation
 	 * <!-- end-model-doc -->
 	 * @model kind="operation" unique="false"
+	 *        annotation="https://www.eclipse.org/emf/2002/Ecore getterOf='relationEntity'"
 	 * @generated
 	 */
 	RelationEntity getRelationEntity();

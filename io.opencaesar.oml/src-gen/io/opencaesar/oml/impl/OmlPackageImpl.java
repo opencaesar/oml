@@ -5200,6 +5200,10 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		createBikeshedAnnotations();
 		// http://www.eclipse.org/emf/2011/Xcore
 		createXcoreAnnotations();
+		// https://opencaesar.io/oml/Ecore
+		createEcoreAnnotations();
+		// https://www.eclipse.org/emf/2002/Ecore
+		createEcore_1Annotations();
 		// http:///org/eclipse/emf/ecore/util/ExtendedMetaData
 		createExtendedMetaDataAnnotations();
 	}
@@ -5956,7 +5960,83 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		   source,
 		   new String[] {
 			   "Bikeshed", "https://tabatkins.github.io/bikeshed",
-			   "BikeshedHeadings", "https://tabatkins.github.io/bikeshed/headings"
+			   "BikeshedHeadings", "https://tabatkins.github.io/bikeshed/headings",
+			   "Ecore", "https://www.eclipse.org/emf/2002/Ecore",
+			   "OmlEcore", "https://opencaesar.io/oml/Ecore"
+		   });
+	}
+
+	/**
+	 * Initializes the annotations for <b>https://opencaesar.io/oml/Ecore</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createEcoreAnnotations() {
+		String source = "https://opencaesar.io/oml/Ecore";
+		addAnnotation
+		  (getOntology_Namespace(),
+		   source,
+		   new String[] {
+			   "identifier", "true"
+		   });
+		addAnnotation
+		  (getOntology_Prefix(),
+		   source,
+		   new String[] {
+			   "identifier", "true"
+		   });
+	}
+
+	/**
+	 * Initializes the annotations for <b>https://www.eclipse.org/emf/2002/Ecore</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createEcore_1Annotations() {
+		String source = "https://www.eclipse.org/emf/2002/Ecore";
+		addAnnotation
+		  (getSemanticProperty__IsFunctional(),
+		   source,
+		   new String[] {
+			   "getterOf", "functional"
+		   });
+		addAnnotation
+		  (getSemanticProperty__GetDomain(),
+		   source,
+		   new String[] {
+			   "getterOf", "domain"
+		   });
+		addAnnotation
+		  (getSemanticProperty__GetRange(),
+		   source,
+		   new String[] {
+			   "getterOf", "range"
+		   });
+		addAnnotation
+		  (getRelation__GetRelationEntity(),
+		   source,
+		   new String[] {
+			   "getterOf", "relationEntity"
+		   });
+		addAnnotation
+		  (getTypeAssertion__GetType(),
+		   source,
+		   new String[] {
+			   "getterOf", "type"
+		   });
+		addAnnotation
+		  (getPropertyValueAssertion__GetProperty(),
+		   source,
+		   new String[] {
+			   "getterOf", "property"
+		   });
+		addAnnotation
+		  (getPropertyValueAssertion__GetValue(),
+		   source,
+		   new String[] {
+			   "getterOf", "value"
 		   });
 	}
 
