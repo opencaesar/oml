@@ -1487,9 +1487,9 @@ Possible extra rowspan handling
 		}
 	}
 </style>
-  <meta content="Bikeshed version 79b02508e, updated Tue Feb 28 10:48:19 2023 -0800" name="generator">
+  <meta content="Bikeshed version 077497365, updated Thu Mar 2 15:15:29 2023 -0800" name="generator">
   <link href="https://github.com/opencaesar/oml" rel="canonical">
-  <meta content="69f0827de5c86d38cdf29dd39be4066b91e7c2f8" name="document-revision">
+  <meta content="24f817eadc6540de8cf46022f397d3ec9eb18b5e" name="document-revision">
 <style>
 body {
   padding: 0;
@@ -2096,7 +2096,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://opencaesar.github.io/oml/"> <img alt="Ontological Modeling Language" height="60" src="images/oml.svg"> </a></p>
    <h1 class="p-name no-ref" id="title">Ontological Modeling Language 1.4</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Living Document, <time class="dt-updated" datetime="2023-03-01">1 March 2023</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Living Document, <time class="dt-updated" datetime="2023-03-07">7 March 2023</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -2867,7 +2867,7 @@ true        // xsd:boolean
 <code>}</code>
 </pre>
     <h5 class="heading settled" data-level="3.2.2.5" id="FacetedScalar-LR"><span class="secno">3.2.2.5. </span><span class="content">Faceted Scalar</span><a class="self-link" href="#FacetedScalar-LR"></a></h5>
-    <p>A <a href="#Scalar-Syntax">scalar</a> is a type defined in a vocabulary and represents a primitive type that classifies an unlimited set of literals. A faceted scalar is declared with the keyword <code>scalar</code> followed by the scalar’s name ID. It can optionally specialize another faceted scalar as a supertype by following its name ID by the <code>:></code> symbol then the IRI of the supertype. A scalar can also optionally specify a list of facets enclosed within a pair of square brackets <code>[</code> <code>]</code>.</p>
+    <p>A <a href="#Scalar-Syntax">scalar</a> is a type defined in a vocabulary and represents a primitive type that classifies an unlimited set of literals. A faceted scalar is declared with the keyword <code>scalar</code> followed by the scalar’s name ID. It can optionally specialize other faceted scalars as supertypes by following its name ID by the <code>:></code> symbol then the IRIs of the supertypes.</p>
 <pre class="highlight highlight-html">  Annotation*
 <code>scalar</code> ID (<code>:></code> [Scalar|IRI] (<code>,</code> [Scalar|IRI])*)? (<code>[</code>
    (<code>length</code> UnsignedInteger)?
@@ -2881,8 +2881,7 @@ true        // xsd:boolean
    (<code>maxExclusive</code> Literal)?
 <code>]</code>)?
 </pre>
-    <p>OML considers a following set of faceted scalars as <em>standard</em>:</p>
-    <p class="note" role="note"><span class="marker">Note:</span> for the standard vocabularies below to be used (cross-referenced), they need to exist as OML files that are mapped by the catalog.xml file of the OML project. One way to achieve that is to recreate such files directly under the <code>src/oml</code> folder. However, a simpler approach is to add a maven dependency on the <code>core-vocabularies</code> library (in Maven Central) in the project’s build.gradle and invoking the <code>OmlMergeTask</code> on it. This would result in the standard vocabularies getting downloaded to the <code>oml\build</code> folder. An example of doing this can be seen in the <a href="https://github.com/opencaesar/oml-template/blob/master/build.gradle#L54-L78">oml-template</a> project.</p>
+    <p>OML considers a following set of faceted scalars, from the <a href="https://www.w3.org/TR/owl2-syntax/#Datatype_Maps">owl</a> spec, as <em>standard</em>:</p>
 <pre class="highlight highlight-html"><code>vocabulary</code> <code>&lt;</code>http://www.w3.org/2000/01/rdf-schema#<code>></code> <code>as</code> rdfs <code>{</code>
   // Literals
   <code>scalar</code> Literal
@@ -2953,7 +2952,9 @@ true        // xsd:boolean
 <code>}</code>
 </pre>
     <p class="note" role="note"><span class="marker">Note:</span> the lexical and value spaces for these standard scalars are described in the (<a href="https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/#built-in-datatypes">xsd</a>, and <a href="https://www.w3.org/TR/owl2-syntax/#Datatype_Maps">owl</a>) standards.</p>
-    <p>Furthermore, other faceted scalars can be defined only as specializations of the standard ones (maximum one supertype per scalar is allowed). They can also be optionally restricted with one or more facets. A facet is a restriction on the lexical or value space of a standard scalar. The following facets are supported:</p>
+    <p class="note" role="note"><span class="marker">Note:</span> for the standard vocabularies above to be used (cross-referenced) in a project, they must exist as OML files that are mapped by the project’s catalog.xml file. One way to achieve that is to create such files directly under the <code>src/oml</code> folder. However, a simpler approach is to specify a direct or transitive Maven dependency on the <code>core-vocabularies</code> library (in Maven Central) in the project’s build.gradle and invoking the <code>OmlMergeTask</code> on it. This would result in the standard vocabularies getting downloaded to the <code>oml\build</code> folder. An example of doing this can be seen in the <a href="https://github.com/opencaesar/oml-template/blob/master/build.gradle#L54-L78">oml-template</a> project.</p>
+    <p>Furthermore, other non-standard faceted scalars can be defined as specializations of standard ones with optional facets (restrictions on the lexical or value space) enclosed within a pair of square brackets <code>[</code> <code>]</code>.</p>
+    <p>The following facets are supported:</p>
     <ul>
      <li data-md>
       <p>Facet <code>length</code> specifies the exact length of the lexical representation (of strings and literals)</p>
@@ -2974,6 +2975,7 @@ true        // xsd:boolean
      <li data-md>
       <p>Facet <code>maxExclusive</code> specifies the maximum exclusive value (of numbers)</p>
     </ul>
+    <p>When a non-standard faceted scalar specifies facets, it must have a single supertype and that supertype must be one of the standard ones. Otherwise, it must have at least one supertype (considered as an alias).</p>
     <p>The following example vocabulary defines two faceted scalars: <em>SSN</em> (representing strings with the social security number pattern) and <em>TeenAge</em> (representing positive integers from 13 and 19 inclusive).</p>
 <pre class="highlight highlight-html"><code>vocabulary</code> <code>&lt;</code>http://example.com/primitive-types#<code>></code> <code>as</code> primitives <code>{</code>
   <code>extends</code> <code>&lt;</code>http://www.w3.org/2001/XMLSchema#<code>></code> <code>as</code> xsd
@@ -2984,6 +2986,7 @@ true        // xsd:boolean
     <code>minInclusive</code> 13
     <code>maxInclusive</code> 19
   <code>]</code>
+  <code>scalar</code> SocialSecurityNumber <code>:></code> SSN // alias case
 <code>}</code>
 </pre>
     <h5 class="heading settled" data-level="3.2.2.6" id="EnumeratedScalar-LR"><span class="secno">3.2.2.6. </span><span class="content">Enumerated Scalar</span><a class="self-link" href="#EnumeratedScalar-LR"></a></h5>
@@ -5690,11 +5693,11 @@ this metamodel and can be manipulated using its API.
     </table>
     <h4 class="heading settled" data-level="6.4.6" id="FacetedScalar"><span class="secno">6.4.6. </span><span class="content"><dfn class="dfn-paneled" data-dfn-type="dfn" data-export id="facetedscalar">FacetedScalar</dfn></span><a class="self-link" href="#FacetedScalar"></a></h4>
      FacetedScalar is a scalar that represents a (possibly infinite) set of literals and can constrain them with some facets. It
-	can also specialize another faceted scalar. Only a limited set of scalars do not specialize others; those are the standard
-	set defined by the OWL2 standard (https://www.w3.org/TR/owl2-syntax/#Datatype_Maps) and listed below. Other scalars have to
-	specialize directly or transitively from this standard set. The facets that are applicable to specify on a scalar depend on
-	the standard scalar specialized, as specified below. A scalar that specifies no facet is simply considered to be an alias
-	to the specialized scalar. 
+	can also specialize other faceted scalars. OML considers some faceted scalars, those defined by the OWL2 specification
+	(https://www.w3.org/TR/owl2-syntax/#Datatype_Maps) and listed below, as standard. Other non-standard scalars can specialize directly
+	or transitively from this standard set and optionally specify facets (restrictions on their lexical or value spaces).
+	A scalar that specifies facets can only have a single supertype, which must be a standard one. Otherwise, it must have at least one
+	supertype that is considered to be an alias. 
     <p>Numeric scalars (facets: minInclusive, maxInclusive, minExclusive, maxExclusive):
 	owl:real
 	owl:rational
