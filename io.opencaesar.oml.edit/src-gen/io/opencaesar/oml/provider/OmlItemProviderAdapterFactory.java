@@ -686,6 +686,29 @@ public class OmlItemProviderAdapterFactory extends OmlAdapterFactory implements 
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.EnumerationAxiom} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected EnumerationAxiomItemProvider enumerationAxiomItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link io.opencaesar.oml.EnumerationAxiom}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createEnumerationAxiomAdapter() {
+		if (enumerationAxiomItemProvider == null) {
+			enumerationAxiomItemProvider = new EnumerationAxiomItemProvider(this);
+		}
+
+		return enumerationAxiomItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.PropertyRangeRestrictionAxiom} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1184,6 +1207,7 @@ public class OmlItemProviderAdapterFactory extends OmlAdapterFactory implements 
 		if (structureInstanceItemProvider != null) structureInstanceItemProvider.dispose();
 		if (keyAxiomItemProvider != null) keyAxiomItemProvider.dispose();
 		if (specializationAxiomItemProvider != null) specializationAxiomItemProvider.dispose();
+		if (enumerationAxiomItemProvider != null) enumerationAxiomItemProvider.dispose();
 		if (propertyRangeRestrictionAxiomItemProvider != null) propertyRangeRestrictionAxiomItemProvider.dispose();
 		if (propertyCardinalityRestrictionAxiomItemProvider != null) propertyCardinalityRestrictionAxiomItemProvider.dispose();
 		if (propertyValueRestrictionAxiomItemProvider != null) propertyValueRestrictionAxiomItemProvider.dispose();

@@ -41,7 +41,7 @@ public class OmlScopeProvider extends AbstractOmlScopeProvider {
 
 	@Override
 	public IScope getScope(final EObject context, final EReference reference) {
-		if (reference == OmlPackage.Literals.SPECIALIZATION_AXIOM__SPECIALIZED_TERM) {
+		if (reference == OmlPackage.Literals.SPECIALIZATION_AXIOM__SUPER_TERM) {
 			return getScopeForSpecializationAxiom_SpecializedTerm(context, reference);
 		}
 		return super.getScope(context, reference);

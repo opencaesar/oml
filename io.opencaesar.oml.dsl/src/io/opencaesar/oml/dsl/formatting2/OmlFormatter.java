@@ -47,6 +47,7 @@ import io.opencaesar.oml.DescriptionBundle;
 import io.opencaesar.oml.DifferentFromPredicate;
 import io.opencaesar.oml.Element;
 import io.opencaesar.oml.EnumeratedScalar;
+import io.opencaesar.oml.EnumerationAxiom;
 import io.opencaesar.oml.FacetedScalar;
 import io.opencaesar.oml.ForwardRelation;
 import io.opencaesar.oml.Import;
@@ -166,9 +167,8 @@ public class OmlFormatter extends AbstractJavaFormatter {
 		formatBrackets(concept, doc);
 		concept.getOwnedKeys().forEach(i -> doc.prepend(doc.format(i), newLine()));
 		concept.getOwnedPropertyRestrictions().forEach(i -> doc.prepend(doc.format(i), newLine()));
-		ifNotEmpty(concept.getEnumeratedInstances(), i -> {
-			doc.prepend(keyword(concept, oml.getConceptAccess().getEnumeratesKeyword_3_2_0()), newLine());
-			i.forEach(j -> doc.append(doc.prepend(doc.format(j), oneSpace()), noSpace()));
+		ifNotNull(concept.getOwnedEnumeration(), i -> {
+			doc.prepend(doc.format(concept.getOwnedEnumeration()), newLine());
 		});
 	}
 
@@ -465,6 +465,11 @@ public class OmlFormatter extends AbstractJavaFormatter {
 
 	protected void _format(KeyAxiom axiom, IFormattableDocument doc) {
 		doc.append(keyword(axiom, oml.getKeyAxiomAccess().getKeyKeyword_0()), oneSpace());
+		formatCommas(axiom, doc);
+	}
+
+	protected void _format(EnumerationAxiom axiom, IFormattableDocument doc) {
+		doc.append(keyword(axiom, oml.getEnumerationAxiomAccess().getEnumeratesKeyword_0()), oneSpace());
 		formatCommas(axiom, doc);
 	}
 

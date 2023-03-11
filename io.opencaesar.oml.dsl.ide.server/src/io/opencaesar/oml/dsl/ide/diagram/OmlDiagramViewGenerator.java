@@ -369,9 +369,9 @@ class OmlDiagramViewGenerator extends OmlSwitch<SModelElement> implements IDiagr
 		final SModelElement specializingNode = semantic2diagram.get(e);
 		if (null == specializingNode)
 			throw new IllegalArgumentException("no entity node for showAxiom(SpecializationAxiom): " + e.getAbbreviatedIri());
-		final SModelElement specializedNode = semantic2diagram.get(ax.getSpecializedTerm());
+		final SModelElement specializedNode = semantic2diagram.get(ax.getSuperTerm());
 		if (null == specializedNode)
-			throw new IllegalArgumentException("no entity node for showAxiom(SpecializationAxiom): " + ax.getSpecializedTerm().getAbbreviatedIri());
+			throw new IllegalArgumentException("no entity node for showAxiom(SpecializationAxiom): " + ax.getSuperTerm().getAbbreviatedIri());
 		final OmlEdge edge = view.createEdge(ax, specializingNode, specializedNode);
 		frame.getChildren().add(edge);
 		traceAndMark(edge, ax, context);

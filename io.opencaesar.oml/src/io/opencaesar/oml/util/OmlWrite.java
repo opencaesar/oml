@@ -786,7 +786,7 @@ public class OmlWrite {
      */
     public static SpecializationAxiom addSpecializationAxiom(Vocabulary vocabulary, SpecializableTerm subTerm, SpecializableTerm superTerm) {
         final SpecializationAxiom axiom = create(SpecializationAxiom.class);
-        setCrossReference(vocabulary, axiom, OmlPackage.Literals.SPECIALIZATION_AXIOM__SPECIALIZED_TERM, superTerm);
+        setCrossReference(vocabulary, axiom, OmlPackage.Literals.SPECIALIZATION_AXIOM__SUPER_TERM, superTerm);
         setContainmentReference(vocabulary, subTerm, OmlPackage.Literals.SPECIALIZABLE_TERM__OWNED_SPECIALIZATIONS, axiom);
         return axiom;
     }

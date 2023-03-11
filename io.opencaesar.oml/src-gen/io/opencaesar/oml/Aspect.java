@@ -25,9 +25,7 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Aspect is an entity that represents a concern that cuts across multiple entities. It does not directly
- * classify instances, but it does so indirectly by being specialized by other entities. However, an aspect can only
- * specialize other aspects.
+ * Aspect is an entity that represents a concern that cuts across multiple entities. An aspect can only specialize other aspects.
  * <!-- end-model-doc -->
  *
  * <p>

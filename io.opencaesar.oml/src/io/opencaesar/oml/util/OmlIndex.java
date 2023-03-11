@@ -45,6 +45,7 @@ import io.opencaesar.oml.ConceptInstance;
 import io.opencaesar.oml.Element;
 import io.opencaesar.oml.Entity;
 import io.opencaesar.oml.EnumeratedScalar;
+import io.opencaesar.oml.EnumerationAxiom;
 import io.opencaesar.oml.FacetedScalar;
 import io.opencaesar.oml.KeyAxiom;
 import io.opencaesar.oml.NamedInstance;
@@ -163,16 +164,16 @@ public class OmlIndex {
         return findInverseReferencers(property, Annotation.class, OmlPackage.Literals.ANNOTATION__PROPERTY);
     }
     
-    // Concept
+    // Enumeration Axiom
 
     /**
-     * Finds concepts that enumerate the given instance
+     * Finds enumeration axioms that enumerates the given instance
      * 
      * @param instance The given instance
-     * @return A list of concepts enumerating the given instance
+     * @return A list of enumeration axioms enumerating the given instance
      */
-    public static List<Concept> findConceptsWithEnumeratedInstance(ConceptInstance instance) {
-        return findInverseReferencers(instance, Concept.class, OmlPackage.Literals.CONCEPT__ENUMERATED_INSTANCES);
+    public static List<EnumerationAxiom> findEnumerationAxiomsWithEnumeratedInstance(ConceptInstance instance) {
+        return findInverseReferencers(instance, EnumerationAxiom.class, OmlPackage.Literals.ENUMERATION_AXIOM__INSTANCES);
     }
 
     // RelationBase
@@ -452,7 +453,7 @@ public class OmlIndex {
      * @return A list of referencing specialization axioms
      */
     public static List<SpecializationAxiom> findSpecializationAxiomsWithSpecializedTerm(SpecializableTerm specializedTerm) {
-        return findInverseReferencers(specializedTerm, SpecializationAxiom.class, OmlPackage.Literals.SPECIALIZATION_AXIOM__SPECIALIZED_TERM);
+        return findInverseReferencers(specializedTerm, SpecializationAxiom.class, OmlPackage.Literals.SPECIALIZATION_AXIOM__SUPER_TERM);
     }
     
     // PropertyRestrictionAxiom

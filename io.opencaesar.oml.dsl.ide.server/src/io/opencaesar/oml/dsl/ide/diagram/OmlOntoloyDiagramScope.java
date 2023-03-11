@@ -113,7 +113,7 @@ class OmlOntoloyDiagramScope {
 			return structureAssertions.containsKey((StructureInstance) e);
 		} else if (e instanceof SpecializationAxiom) {
 			SpecializationAxiom ax = (SpecializationAxiom) e;
-			return includes(ax.getSpecializedTerm()) && includes(ax.getOwningTerm());
+			return includes(ax.getSuperTerm()) && includes(ax.getOwningTerm());
 		} else
 			return false;
 	}
@@ -247,7 +247,7 @@ class OmlOntoloyDiagramScope {
 				}
 			} else if (o instanceof SpecializationAxiom) {
 				SpecializationAxiom x = (SpecializationAxiom) o;
-				if (includes(x.getSpecializedTerm())) {
+				if (includes(x.getSuperTerm())) {
 					ax.add(x);
 				}
 			} else if (o instanceof PropertyRangeRestrictionAxiom) {

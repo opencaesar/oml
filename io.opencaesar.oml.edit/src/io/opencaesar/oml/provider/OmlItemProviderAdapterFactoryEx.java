@@ -552,7 +552,7 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 			@Override
 			public String getText(Object object) {
 				SpecializationAxiom axiom = (SpecializationAxiom)object;
-				return "extends " + getLabel(axiom.getSpecializedTerm(), axiom);
+				return "extends " + getLabel(axiom.getSuperTerm(), axiom);
 			}
 		};
 		return specializationAxiomItemProvider;

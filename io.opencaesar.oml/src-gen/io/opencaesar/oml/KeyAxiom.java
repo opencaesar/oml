@@ -49,7 +49,7 @@ public interface KeyAxiom extends Axiom {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The set of properties specified by this axiom as a key
+	 * The set of key properties specified by this axiom
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Properties</em>' reference list.
 	 * @see io.opencaesar.oml.OmlPackage#getKeyAxiom_Properties()
@@ -64,7 +64,7 @@ public interface KeyAxiom extends Axiom {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The entity that owns this axiom
+	 * The owning entity specified by this axiom
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Owning Entity</em>' container reference.
 	 * @see #setOwningEntity(Entity)

@@ -42,11 +42,13 @@ import io.opencaesar.oml.Assertion;
 import io.opencaesar.oml.Axiom;
 import io.opencaesar.oml.BooleanLiteral;
 import io.opencaesar.oml.Classifier;
+import io.opencaesar.oml.Concept;
 import io.opencaesar.oml.DecimalLiteral;
 import io.opencaesar.oml.Description;
 import io.opencaesar.oml.DoubleLiteral;
 import io.opencaesar.oml.Element;
 import io.opencaesar.oml.Entity;
+import io.opencaesar.oml.EnumerationAxiom;
 import io.opencaesar.oml.ForwardRelation;
 import io.opencaesar.oml.IdentifiedElement;
 import io.opencaesar.oml.Import;
@@ -774,7 +776,7 @@ public final class OmlRead {
      */
     public static List<SpecializableTerm> getSuperTerms(SpecializableTerm term) {
         return term.getOwnedSpecializations().stream()
-            .map(i -> i.getSpecializedTerm())
+            .map(i -> i.getSuperTerm())
             .collect(Collectors.toList());
     }
     
@@ -829,6 +831,9 @@ public final class OmlRead {
         if (term instanceof Entity) {
             axioms.addAll(((Entity)term).getOwnedKeys());            
         }
+        if (term instanceof Concept) {
+            axioms.add(((Concept)term).getOwnedEnumeration());            
+        }
         return axioms;
     }
     
@@ -843,15 +848,15 @@ public final class OmlRead {
     }
     
     /**
-     * Gets the super (general) term of the given specialization axiom
+     * Gets the concept that defines the given enumeration axiom
      * 
-     * @param axiom the given specialization axiom
-     * @return the super term of the given specialization axiom
+     * @param axiom the given enumeration axiom
+     * @return the concept that defines the given enumeration axiom
      */
-    public static SpecializableTerm getSuperTerm(SpecializationAxiom axiom) {
-        return axiom.getSpecializedTerm();
+    public static Concept getEnumeratedConcept(EnumerationAxiom axiom) {
+    	return resolve(axiom.getOwningConcept());
     }
-    
+
     /**
      * Gets the sub (specific) term of the given specialization axiom
      * 

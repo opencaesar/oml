@@ -651,9 +651,7 @@ class Structure extends Classifier {
 ////////////////////////////////////////
 
 /*
- * Aspect is an entity that represents a concern that cuts across multiple entities. It does not directly 
- * classify instances, but it does so indirectly by being specialized by other entities. However, an aspect can only 
- * specialize other aspects.
+ * Aspect is an entity that represents a concern that cuts across multiple entities. An aspect can only specialize other aspects.
  */
 @Bikeshed(heading="Types")
 class Aspect extends Entity {
@@ -664,8 +662,7 @@ class Aspect extends Entity {
 }
 
 /*
- * Concept is a concrete entity that classifies a (possibly enumerated) set of concept instances. 
- * It can also specialize other concepts and/or aspects. A concept ref cannot respecify the enumerated instances.
+ * Concept is a concrete entity that classifies a set of concept instances. It can also specialize other concepts and/or aspects.
  */
 @Bikeshed(heading="Types")
 class Concept extends Entity {
@@ -674,9 +671,9 @@ class Concept extends Entity {
 	 */
 	refers Concept ref
 	/*
-	 * The set of enumerated instances of this concept
+	 * An enumeration of instances of this concept
 	 */
-	refers ConceptInstance[*] enumeratedInstances
+	contains EnumerationAxiom[?] ownedEnumeration opposite owningConcept
 }
 
 /*
@@ -1158,11 +1155,11 @@ class StructureInstance extends Instance {
 @Bikeshed(heading="Axioms")
 class KeyAxiom extends Axiom {
     /*
-     * The set of properties specified by this axiom as a key
+     * The set of key properties specified by this axiom
      */
     refers Property[+] properties
     /*
-     * The entity that owns this axiom
+     * The owning entity specified by this axiom
      */
     container Entity[?] owningEntity opposite ownedKeys
 }
@@ -1173,13 +1170,28 @@ class KeyAxiom extends Axiom {
 @Bikeshed(heading="Axioms")
 class SpecializationAxiom extends Axiom {
     /*
-     * The specialized term specified by this axiom 
+     * The super term specified by this axiom
      */
-    refers SpecializableTerm[1] specializedTerm
+    refers SpecializableTerm[1] superTerm
     /*
-     * The specializing term specified by this axiom 
+     * The owning term specified by this axiom
      */
     container SpecializableTerm[?] owningTerm opposite ownedSpecializations
+}
+
+/*
+ * EnumerationAxiom is an axiom specified on a concept that states that it classifies an enumerated set of instances.
+ */
+@Bikeshed(heading="Axioms")
+class EnumerationAxiom extends Axiom {
+	/*
+	 * The set of enumerated instances specified by this axiom
+	 */
+	refers ConceptInstance[*] instances
+    /*
+     * The owning concept specified by this axiom
+     */
+    container Concept[?] owningConcept opposite ownedEnumeration
 }
 
 /*
@@ -1189,13 +1201,13 @@ class SpecializationAxiom extends Axiom {
 @Bikeshed(heading="Axioms")
 abstract class PropertyRestrictionAxiom extends Axiom {
     /*
-     * The restricting classifier specified by this axiom
-     */
-    container Classifier[?] owningClassifier opposite ownedPropertyRestrictions
-    /*
-     * The restricted property
+     * The restricted property specified by this axiom
      */
     refers SemanticProperty[1] property
+    /*
+     * The owning classifier specified by this axiom
+     */
+    container Classifier[?] owningClassifier opposite ownedPropertyRestrictions
 }
 
 ////////////////////////////////////////
@@ -1299,10 +1311,6 @@ class TypeAssertion extends Assertion {
 @Bikeshed(heading="Assertions")
 class PropertyValueAssertion extends Assertion {
     /*
-     * The instance that this property value assertion is about
-     */
-    container Instance[?] owningInstance opposite ownedPropertyValues
-    /*
      * The property referenced by this assertion
      */
     refers SemanticProperty[1] property
@@ -1318,6 +1326,10 @@ class PropertyValueAssertion extends Assertion {
      * An asserted named instance value of a relation 
      */
     refers NamedInstance[?] namedInstanceValue
+    /*
+     * The instance that this property value assertion is about
+     */
+    container Instance[?] owningInstance opposite ownedPropertyValues
     /*
      * Gets the asserted value
      */

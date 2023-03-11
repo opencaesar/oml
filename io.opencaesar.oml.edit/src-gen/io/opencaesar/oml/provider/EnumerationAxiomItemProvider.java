@@ -31,19 +31,19 @@ import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 
 /**
- * This is the item provider adapter for a {@link io.opencaesar.oml.SpecializationAxiom} object.
+ * This is the item provider adapter for a {@link io.opencaesar.oml.EnumerationAxiom} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class SpecializationAxiomItemProvider extends AxiomItemProvider {
+public class EnumerationAxiomItemProvider extends AxiomItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public SpecializationAxiomItemProvider(AdapterFactory adapterFactory) {
+	public EnumerationAxiomItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -58,26 +58,26 @@ public class SpecializationAxiomItemProvider extends AxiomItemProvider {
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addSuperTermPropertyDescriptor(object);
-			addOwningTermPropertyDescriptor(object);
+			addInstancesPropertyDescriptor(object);
+			addOwningConceptPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Super Term feature.
+	 * This adds a property descriptor for the Instances feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addSuperTermPropertyDescriptor(Object object) {
+	protected void addInstancesPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_SpecializationAxiom_superTerm_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_SpecializationAxiom_superTerm_feature", "_UI_SpecializationAxiom_type"),
-				 OmlPackage.Literals.SPECIALIZATION_AXIOM__SUPER_TERM,
+				 getString("_UI_EnumerationAxiom_instances_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_EnumerationAxiom_instances_feature", "_UI_EnumerationAxiom_type"),
+				 OmlPackage.Literals.ENUMERATION_AXIOM__INSTANCES,
 				 true,
 				 false,
 				 true,
@@ -87,19 +87,19 @@ public class SpecializationAxiomItemProvider extends AxiomItemProvider {
 	}
 
 	/**
-	 * This adds a property descriptor for the Owning Term feature.
+	 * This adds a property descriptor for the Owning Concept feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addOwningTermPropertyDescriptor(Object object) {
+	protected void addOwningConceptPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_SpecializationAxiom_owningTerm_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_SpecializationAxiom_owningTerm_feature", "_UI_SpecializationAxiom_type"),
-				 OmlPackage.Literals.SPECIALIZATION_AXIOM__OWNING_TERM,
+				 getString("_UI_EnumerationAxiom_owningConcept_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_EnumerationAxiom_owningConcept_feature", "_UI_EnumerationAxiom_type"),
+				 OmlPackage.Literals.ENUMERATION_AXIOM__OWNING_CONCEPT,
 				 true,
 				 false,
 				 true,
@@ -109,14 +109,14 @@ public class SpecializationAxiomItemProvider extends AxiomItemProvider {
 	}
 
 	/**
-	 * This returns SpecializationAxiom.gif.
+	 * This returns EnumerationAxiom.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/SpecializationAxiom"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/EnumerationAxiom"));
 	}
 
 	/**
@@ -127,7 +127,7 @@ public class SpecializationAxiomItemProvider extends AxiomItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_SpecializationAxiom_type");
+		return getString("_UI_EnumerationAxiom_type");
 	}
 
 

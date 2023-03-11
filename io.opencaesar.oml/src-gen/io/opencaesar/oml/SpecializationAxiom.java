@@ -32,7 +32,7 @@ package io.opencaesar.oml;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link io.opencaesar.oml.SpecializationAxiom#getSpecializedTerm <em>Specialized Term</em>}</li>
+ *   <li>{@link io.opencaesar.oml.SpecializationAxiom#getSuperTerm <em>Super Term</em>}</li>
  *   <li>{@link io.opencaesar.oml.SpecializationAxiom#getOwningTerm <em>Owning Term</em>}</li>
  * </ul>
  *
@@ -42,29 +42,29 @@ package io.opencaesar.oml;
  */
 public interface SpecializationAxiom extends Axiom {
 	/**
-	 * Returns the value of the '<em><b>Specialized Term</b></em>' reference.
+	 * Returns the value of the '<em><b>Super Term</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The specialized term specified by this axiom
+	 * The super term specified by this axiom
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Specialized Term</em>' reference.
-	 * @see #setSpecializedTerm(SpecializableTerm)
-	 * @see io.opencaesar.oml.OmlPackage#getSpecializationAxiom_SpecializedTerm()
+	 * @return the value of the '<em>Super Term</em>' reference.
+	 * @see #setSuperTerm(SpecializableTerm)
+	 * @see io.opencaesar.oml.OmlPackage#getSpecializationAxiom_SuperTerm()
 	 * @model required="true"
 	 * @generated
 	 */
-	SpecializableTerm getSpecializedTerm();
+	SpecializableTerm getSuperTerm();
 
 	/**
-	 * Sets the value of the '{@link io.opencaesar.oml.SpecializationAxiom#getSpecializedTerm <em>Specialized Term</em>}' reference.
+	 * Sets the value of the '{@link io.opencaesar.oml.SpecializationAxiom#getSuperTerm <em>Super Term</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Specialized Term</em>' reference.
-	 * @see #getSpecializedTerm()
+	 * @param value the new value of the '<em>Super Term</em>' reference.
+	 * @see #getSuperTerm()
 	 * @generated
 	 */
-	void setSpecializedTerm(SpecializableTerm value);
+	void setSuperTerm(SpecializableTerm value);
 
 	/**
 	 * Returns the value of the '<em><b>Owning Term</b></em>' container reference.
@@ -72,7 +72,7 @@ public interface SpecializationAxiom extends Axiom {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The specializing term specified by this axiom
+	 * The owning term specified by this axiom
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Owning Term</em>' container reference.
 	 * @see #setOwningTerm(SpecializableTerm)

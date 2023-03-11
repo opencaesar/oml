@@ -282,7 +282,7 @@ public final class OmlSearch extends OmlIndex {
      */
     public static List<SpecializableTerm> findSuperTerms(SpecializableTerm term) {
         return findSpecializationsWithSubTerm(term).stream()
-            .map(i -> OmlRead.getSuperTerm(i))
+            .map(i -> i.getSuperTerm())
             .collect(Collectors.toList());
     }
 

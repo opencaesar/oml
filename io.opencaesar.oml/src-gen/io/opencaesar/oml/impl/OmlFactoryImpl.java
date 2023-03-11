@@ -104,6 +104,7 @@ public class OmlFactoryImpl extends EFactoryImpl implements OmlFactory {
 			case OmlPackage.STRUCTURE_INSTANCE: return createStructureInstance();
 			case OmlPackage.KEY_AXIOM: return createKeyAxiom();
 			case OmlPackage.SPECIALIZATION_AXIOM: return createSpecializationAxiom();
+			case OmlPackage.ENUMERATION_AXIOM: return createEnumerationAxiom();
 			case OmlPackage.PROPERTY_RANGE_RESTRICTION_AXIOM: return createPropertyRangeRestrictionAxiom();
 			case OmlPackage.PROPERTY_CARDINALITY_RESTRICTION_AXIOM: return createPropertyCardinalityRestrictionAxiom();
 			case OmlPackage.PROPERTY_VALUE_RESTRICTION_AXIOM: return createPropertyValueRestrictionAxiom();
@@ -471,6 +472,17 @@ public class OmlFactoryImpl extends EFactoryImpl implements OmlFactory {
 	public SpecializationAxiom createSpecializationAxiom() {
 		SpecializationAxiomImpl specializationAxiom = new SpecializationAxiomImpl();
 		return specializationAxiom;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EnumerationAxiom createEnumerationAxiom() {
+		EnumerationAxiomImpl enumerationAxiom = new EnumerationAxiomImpl();
+		return enumerationAxiom;
 	}
 
 	/**

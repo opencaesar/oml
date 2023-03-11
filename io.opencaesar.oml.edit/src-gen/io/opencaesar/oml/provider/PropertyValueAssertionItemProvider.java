@@ -63,9 +63,9 @@ public class PropertyValueAssertionItemProvider extends AssertionItemProvider {
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addOwningInstancePropertyDescriptor(object);
 			addPropertyPropertyDescriptor(object);
 			addNamedInstanceValuePropertyDescriptor(object);
+			addOwningInstancePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}

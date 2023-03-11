@@ -272,6 +272,15 @@ public interface OmlFactory extends EFactory {
 	SpecializationAxiom createSpecializationAxiom();
 
 	/**
+	 * Returns a new object of class '<em>Enumeration Axiom</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Enumeration Axiom</em>'.
+	 * @generated
+	 */
+	EnumerationAxiom createEnumerationAxiom();
+
+	/**
 	 * Returns a new object of class '<em>Property Range Restriction Axiom</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

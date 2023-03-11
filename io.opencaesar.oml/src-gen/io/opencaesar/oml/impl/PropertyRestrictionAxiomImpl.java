@@ -41,8 +41,8 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link io.opencaesar.oml.impl.PropertyRestrictionAxiomImpl#getOwningClassifier <em>Owning Classifier</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.PropertyRestrictionAxiomImpl#getProperty <em>Property</em>}</li>
+ *   <li>{@link io.opencaesar.oml.impl.PropertyRestrictionAxiomImpl#getOwningClassifier <em>Owning Classifier</em>}</li>
  * </ul>
  *
  * @generated
@@ -75,6 +75,46 @@ public abstract class PropertyRestrictionAxiomImpl extends AxiomImpl implements 
 	@Override
 	protected EClass eStaticClass() {
 		return OmlPackage.Literals.PROPERTY_RESTRICTION_AXIOM;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public SemanticProperty getProperty() {
+		if (property != null && property.eIsProxy()) {
+			InternalEObject oldProperty = (InternalEObject)property;
+			property = (SemanticProperty)eResolveProxy(oldProperty);
+			if (property != oldProperty) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, OmlPackage.PROPERTY_RESTRICTION_AXIOM__PROPERTY, oldProperty, property));
+			}
+		}
+		return property;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public SemanticProperty basicGetProperty() {
+		return property;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setProperty(SemanticProperty newProperty) {
+		SemanticProperty oldProperty = property;
+		property = newProperty;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.PROPERTY_RESTRICTION_AXIOM__PROPERTY, oldProperty, property));
 	}
 
 	/**
@@ -136,46 +176,6 @@ public abstract class PropertyRestrictionAxiomImpl extends AxiomImpl implements 
 	 * @generated
 	 */
 	@Override
-	public SemanticProperty getProperty() {
-		if (property != null && property.eIsProxy()) {
-			InternalEObject oldProperty = (InternalEObject)property;
-			property = (SemanticProperty)eResolveProxy(oldProperty);
-			if (property != oldProperty) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, OmlPackage.PROPERTY_RESTRICTION_AXIOM__PROPERTY, oldProperty, property));
-			}
-		}
-		return property;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public SemanticProperty basicGetProperty() {
-		return property;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setProperty(SemanticProperty newProperty) {
-		SemanticProperty oldProperty = property;
-		property = newProperty;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.PROPERTY_RESTRICTION_AXIOM__PROPERTY, oldProperty, property));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case OmlPackage.PROPERTY_RESTRICTION_AXIOM__OWNING_CLASSIFIER:
@@ -222,12 +222,12 @@ public abstract class PropertyRestrictionAxiomImpl extends AxiomImpl implements 
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case OmlPackage.PROPERTY_RESTRICTION_AXIOM__OWNING_CLASSIFIER:
-				if (resolve) return getOwningClassifier();
-				return basicGetOwningClassifier();
 			case OmlPackage.PROPERTY_RESTRICTION_AXIOM__PROPERTY:
 				if (resolve) return getProperty();
 				return basicGetProperty();
+			case OmlPackage.PROPERTY_RESTRICTION_AXIOM__OWNING_CLASSIFIER:
+				if (resolve) return getOwningClassifier();
+				return basicGetOwningClassifier();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -240,11 +240,11 @@ public abstract class PropertyRestrictionAxiomImpl extends AxiomImpl implements 
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case OmlPackage.PROPERTY_RESTRICTION_AXIOM__OWNING_CLASSIFIER:
-				setOwningClassifier((Classifier)newValue);
-				return;
 			case OmlPackage.PROPERTY_RESTRICTION_AXIOM__PROPERTY:
 				setProperty((SemanticProperty)newValue);
+				return;
+			case OmlPackage.PROPERTY_RESTRICTION_AXIOM__OWNING_CLASSIFIER:
+				setOwningClassifier((Classifier)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -258,11 +258,11 @@ public abstract class PropertyRestrictionAxiomImpl extends AxiomImpl implements 
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case OmlPackage.PROPERTY_RESTRICTION_AXIOM__OWNING_CLASSIFIER:
-				setOwningClassifier((Classifier)null);
-				return;
 			case OmlPackage.PROPERTY_RESTRICTION_AXIOM__PROPERTY:
 				setProperty((SemanticProperty)null);
+				return;
+			case OmlPackage.PROPERTY_RESTRICTION_AXIOM__OWNING_CLASSIFIER:
+				setOwningClassifier((Classifier)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -276,10 +276,10 @@ public abstract class PropertyRestrictionAxiomImpl extends AxiomImpl implements 
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case OmlPackage.PROPERTY_RESTRICTION_AXIOM__OWNING_CLASSIFIER:
-				return basicGetOwningClassifier() != null;
 			case OmlPackage.PROPERTY_RESTRICTION_AXIOM__PROPERTY:
 				return property != null;
+			case OmlPackage.PROPERTY_RESTRICTION_AXIOM__OWNING_CLASSIFIER:
+				return basicGetOwningClassifier() != null;
 		}
 		return super.eIsSet(featureID);
 	}

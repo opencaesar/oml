@@ -491,12 +491,12 @@ public final class OmlValidator2 {
      * @return True if the rules is satisfied; False otherwise
      */
     protected boolean validateSpecializationAxiomSpecializedTermKind(SpecializationAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-        final SpecializableTerm superTerm = OmlRead.getSuperTerm(object);
+        final SpecializableTerm superTerm = object.getSuperTerm();
         final SpecializableTerm subTerm = OmlRead.getSubTerm(object);
         if (superTerm == subTerm) {
             return report(Diagnostic.WARNING, diagnostics, object,
 	                "SpecializableTerm "+superTerm.getAbbreviatedIri()+" specializes itself", 
-	                OmlPackage.Literals.SPECIALIZATION_AXIOM__SPECIALIZED_TERM);
+	                OmlPackage.Literals.SPECIALIZATION_AXIOM__SUPER_TERM);
         } else if (superTerm != null && !superTerm.eIsProxy()) {
 	        final EClass superEClass = superTerm.eClass();
 	        final EClass subEClass = subTerm.eClass();
@@ -505,7 +505,7 @@ public final class OmlValidator2 {
 	            (superEClass == subEClass))) {
 	            return report(Diagnostic.ERROR, diagnostics, object,
 	                "SpecializableTerm "+superTerm.getAbbreviatedIri()+" cannot be specialized by "+subTerm.getAbbreviatedIri()+"", 
-	                OmlPackage.Literals.SPECIALIZATION_AXIOM__SPECIALIZED_TERM);
+	                OmlPackage.Literals.SPECIALIZATION_AXIOM__SUPER_TERM);
 	        }
         }
         return true;
@@ -533,7 +533,7 @@ public final class OmlValidator2 {
         	var singleStandardGeneral = false;
         	var specializations = object.getOwnedSpecializations();
         	if (specializations.size() == 1) {
-        		var general = (Scalar) specializations.get(0).getSpecializedTerm();
+        		var general = (Scalar) specializations.get(0).getSuperTerm();
             	singleStandardGeneral = isStandardScalar(general);
         	}
         	if (!singleStandardGeneral) {
@@ -857,27 +857,6 @@ public final class OmlValidator2 {
                 "Member needs to either have a name or a ref to another member",
                 OmlPackage.Literals.MEMBER__NAME);
         	result = false;
-        }
-        return result;
-    }
-
-    /**
-     * Checks that a concept has correct feature cardinalities
-     * 
-     * @param object The concept to check
-     * @param diagnostics The validation diagnostics
-     * @param context The object-to-object context map
-     * @return True if the rules is satisfied; False otherwise
-     */
-    protected boolean validateConceptCardinalities(Concept object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-        boolean result = true;
-        if (object.getName() == null) {
-        	if (!object.getEnumeratedInstances().isEmpty()) {
-	        	report(Diagnostic.ERROR, diagnostics, object,
-	                "Concept "+object.getAbbreviatedIri()+" cannot respecify enumerated instances",
-	                OmlPackage.Literals.CONCEPT__ENUMERATED_INSTANCES);
-	        	result = false;
-        	}
         }
         return result;
     }

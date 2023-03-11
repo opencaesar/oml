@@ -58,32 +58,10 @@ public class PropertyRestrictionAxiomItemProvider extends AxiomItemProvider {
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addOwningClassifierPropertyDescriptor(object);
 			addPropertyPropertyDescriptor(object);
+			addOwningClassifierPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the Owning Classifier feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addOwningClassifierPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_PropertyRestrictionAxiom_owningClassifier_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_PropertyRestrictionAxiom_owningClassifier_feature", "_UI_PropertyRestrictionAxiom_type"),
-				 OmlPackage.Literals.PROPERTY_RESTRICTION_AXIOM__OWNING_CLASSIFIER,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
 	}
 
 	/**
@@ -100,6 +78,28 @@ public class PropertyRestrictionAxiomItemProvider extends AxiomItemProvider {
 				 getString("_UI_PropertyRestrictionAxiom_property_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_PropertyRestrictionAxiom_property_feature", "_UI_PropertyRestrictionAxiom_type"),
 				 OmlPackage.Literals.PROPERTY_RESTRICTION_AXIOM__PROPERTY,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Owning Classifier feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addOwningClassifierPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_PropertyRestrictionAxiom_owningClassifier_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_PropertyRestrictionAxiom_owningClassifier_feature", "_UI_PropertyRestrictionAxiom_type"),
+				 OmlPackage.Literals.PROPERTY_RESTRICTION_AXIOM__OWNING_CLASSIFIER,
 				 true,
 				 false,
 				 true,

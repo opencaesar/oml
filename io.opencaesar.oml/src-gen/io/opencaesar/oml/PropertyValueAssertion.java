@@ -34,11 +34,11 @@ package io.opencaesar.oml;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link io.opencaesar.oml.PropertyValueAssertion#getOwningInstance <em>Owning Instance</em>}</li>
  *   <li>{@link io.opencaesar.oml.PropertyValueAssertion#getProperty <em>Property</em>}</li>
  *   <li>{@link io.opencaesar.oml.PropertyValueAssertion#getLiteralValue <em>Literal Value</em>}</li>
  *   <li>{@link io.opencaesar.oml.PropertyValueAssertion#getStructureInstanceValue <em>Structure Instance Value</em>}</li>
  *   <li>{@link io.opencaesar.oml.PropertyValueAssertion#getNamedInstanceValue <em>Named Instance Value</em>}</li>
+ *   <li>{@link io.opencaesar.oml.PropertyValueAssertion#getOwningInstance <em>Owning Instance</em>}</li>
  * </ul>
  *
  * @see io.opencaesar.oml.OmlPackage#getPropertyValueAssertion()
@@ -46,33 +46,6 @@ package io.opencaesar.oml;
  * @generated
  */
 public interface PropertyValueAssertion extends Assertion {
-	/**
-	 * Returns the value of the '<em><b>Owning Instance</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.Instance#getOwnedPropertyValues <em>Owned Property Values</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * The instance that this property value assertion is about
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Owning Instance</em>' container reference.
-	 * @see #setOwningInstance(Instance)
-	 * @see io.opencaesar.oml.OmlPackage#getPropertyValueAssertion_OwningInstance()
-	 * @see io.opencaesar.oml.Instance#getOwnedPropertyValues
-	 * @model opposite="ownedPropertyValues" transient="false"
-	 * @generated
-	 */
-	Instance getOwningInstance();
-
-	/**
-	 * Sets the value of the '{@link io.opencaesar.oml.PropertyValueAssertion#getOwningInstance <em>Owning Instance</em>}' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Owning Instance</em>' container reference.
-	 * @see #getOwningInstance()
-	 * @generated
-	 */
-	void setOwningInstance(Instance value);
-
 	/**
 	 * Returns the value of the '<em><b>Property</b></em>' reference.
 	 * <!-- begin-user-doc -->
@@ -174,6 +147,33 @@ public interface PropertyValueAssertion extends Assertion {
 	 * @generated
 	 */
 	void setNamedInstanceValue(NamedInstance value);
+
+	/**
+	 * Returns the value of the '<em><b>Owning Instance</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.Instance#getOwnedPropertyValues <em>Owned Property Values</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The instance that this property value assertion is about
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Owning Instance</em>' container reference.
+	 * @see #setOwningInstance(Instance)
+	 * @see io.opencaesar.oml.OmlPackage#getPropertyValueAssertion_OwningInstance()
+	 * @see io.opencaesar.oml.Instance#getOwnedPropertyValues
+	 * @model opposite="ownedPropertyValues" transient="false"
+	 * @generated
+	 */
+	Instance getOwningInstance();
+
+	/**
+	 * Sets the value of the '{@link io.opencaesar.oml.PropertyValueAssertion#getOwningInstance <em>Owning Instance</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Owning Instance</em>' container reference.
+	 * @see #getOwningInstance()
+	 * @generated
+	 */
+	void setOwningInstance(Instance value);
 
 	/**
 	 * <!-- begin-user-doc -->

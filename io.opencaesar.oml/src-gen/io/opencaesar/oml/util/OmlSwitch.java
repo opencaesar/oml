@@ -689,6 +689,14 @@ public class OmlSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case OmlPackage.ENUMERATION_AXIOM: {
+				EnumerationAxiom enumerationAxiom = (EnumerationAxiom)theEObject;
+				T result = caseEnumerationAxiom(enumerationAxiom);
+				if (result == null) result = caseAxiom(enumerationAxiom);
+				if (result == null) result = caseElement(enumerationAxiom);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case OmlPackage.PROPERTY_RESTRICTION_AXIOM: {
 				PropertyRestrictionAxiom propertyRestrictionAxiom = (PropertyRestrictionAxiom)theEObject;
 				T result = casePropertyRestrictionAxiom(propertyRestrictionAxiom);
@@ -1646,6 +1654,21 @@ public class OmlSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseSpecializationAxiom(SpecializationAxiom object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Enumeration Axiom</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Enumeration Axiom</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEnumerationAxiom(EnumerationAxiom object) {
 		return null;
 	}
 

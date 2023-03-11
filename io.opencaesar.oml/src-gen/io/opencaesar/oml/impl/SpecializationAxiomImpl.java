@@ -40,7 +40,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link io.opencaesar.oml.impl.SpecializationAxiomImpl#getSpecializedTerm <em>Specialized Term</em>}</li>
+ *   <li>{@link io.opencaesar.oml.impl.SpecializationAxiomImpl#getSuperTerm <em>Super Term</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.SpecializationAxiomImpl#getOwningTerm <em>Owning Term</em>}</li>
  * </ul>
  *
@@ -48,14 +48,14 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  */
 public class SpecializationAxiomImpl extends AxiomImpl implements SpecializationAxiom {
 	/**
-	 * The cached value of the '{@link #getSpecializedTerm() <em>Specialized Term</em>}' reference.
+	 * The cached value of the '{@link #getSuperTerm() <em>Super Term</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getSpecializedTerm()
+	 * @see #getSuperTerm()
 	 * @generated
 	 * @ordered
 	 */
-	protected SpecializableTerm specializedTerm;
+	protected SpecializableTerm superTerm;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -82,16 +82,16 @@ public class SpecializationAxiomImpl extends AxiomImpl implements Specialization
 	 * @generated
 	 */
 	@Override
-	public SpecializableTerm getSpecializedTerm() {
-		if (specializedTerm != null && specializedTerm.eIsProxy()) {
-			InternalEObject oldSpecializedTerm = (InternalEObject)specializedTerm;
-			specializedTerm = (SpecializableTerm)eResolveProxy(oldSpecializedTerm);
-			if (specializedTerm != oldSpecializedTerm) {
+	public SpecializableTerm getSuperTerm() {
+		if (superTerm != null && superTerm.eIsProxy()) {
+			InternalEObject oldSuperTerm = (InternalEObject)superTerm;
+			superTerm = (SpecializableTerm)eResolveProxy(oldSuperTerm);
+			if (superTerm != oldSuperTerm) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, OmlPackage.SPECIALIZATION_AXIOM__SPECIALIZED_TERM, oldSpecializedTerm, specializedTerm));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, OmlPackage.SPECIALIZATION_AXIOM__SUPER_TERM, oldSuperTerm, superTerm));
 			}
 		}
-		return specializedTerm;
+		return superTerm;
 	}
 
 	/**
@@ -99,8 +99,8 @@ public class SpecializationAxiomImpl extends AxiomImpl implements Specialization
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public SpecializableTerm basicGetSpecializedTerm() {
-		return specializedTerm;
+	public SpecializableTerm basicGetSuperTerm() {
+		return superTerm;
 	}
 
 	/**
@@ -109,11 +109,11 @@ public class SpecializationAxiomImpl extends AxiomImpl implements Specialization
 	 * @generated
 	 */
 	@Override
-	public void setSpecializedTerm(SpecializableTerm newSpecializedTerm) {
-		SpecializableTerm oldSpecializedTerm = specializedTerm;
-		specializedTerm = newSpecializedTerm;
+	public void setSuperTerm(SpecializableTerm newSuperTerm) {
+		SpecializableTerm oldSuperTerm = superTerm;
+		superTerm = newSuperTerm;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.SPECIALIZATION_AXIOM__SPECIALIZED_TERM, oldSpecializedTerm, specializedTerm));
+			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.SPECIALIZATION_AXIOM__SUPER_TERM, oldSuperTerm, superTerm));
 	}
 
 	/**
@@ -221,9 +221,9 @@ public class SpecializationAxiomImpl extends AxiomImpl implements Specialization
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case OmlPackage.SPECIALIZATION_AXIOM__SPECIALIZED_TERM:
-				if (resolve) return getSpecializedTerm();
-				return basicGetSpecializedTerm();
+			case OmlPackage.SPECIALIZATION_AXIOM__SUPER_TERM:
+				if (resolve) return getSuperTerm();
+				return basicGetSuperTerm();
 			case OmlPackage.SPECIALIZATION_AXIOM__OWNING_TERM:
 				if (resolve) return getOwningTerm();
 				return basicGetOwningTerm();
@@ -239,8 +239,8 @@ public class SpecializationAxiomImpl extends AxiomImpl implements Specialization
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case OmlPackage.SPECIALIZATION_AXIOM__SPECIALIZED_TERM:
-				setSpecializedTerm((SpecializableTerm)newValue);
+			case OmlPackage.SPECIALIZATION_AXIOM__SUPER_TERM:
+				setSuperTerm((SpecializableTerm)newValue);
 				return;
 			case OmlPackage.SPECIALIZATION_AXIOM__OWNING_TERM:
 				setOwningTerm((SpecializableTerm)newValue);
@@ -257,8 +257,8 @@ public class SpecializationAxiomImpl extends AxiomImpl implements Specialization
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case OmlPackage.SPECIALIZATION_AXIOM__SPECIALIZED_TERM:
-				setSpecializedTerm((SpecializableTerm)null);
+			case OmlPackage.SPECIALIZATION_AXIOM__SUPER_TERM:
+				setSuperTerm((SpecializableTerm)null);
 				return;
 			case OmlPackage.SPECIALIZATION_AXIOM__OWNING_TERM:
 				setOwningTerm((SpecializableTerm)null);
@@ -275,8 +275,8 @@ public class SpecializationAxiomImpl extends AxiomImpl implements Specialization
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case OmlPackage.SPECIALIZATION_AXIOM__SPECIALIZED_TERM:
-				return specializedTerm != null;
+			case OmlPackage.SPECIALIZATION_AXIOM__SUPER_TERM:
+				return superTerm != null;
 			case OmlPackage.SPECIALIZATION_AXIOM__OWNING_TERM:
 				return basicGetOwningTerm() != null;
 		}

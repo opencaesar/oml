@@ -92,7 +92,7 @@ Concept:
 	('concept' name=ID | 'ref' 'concept' ref=[Concept|Ref]) (':>' ownedSpecializations+=SpecializationAxiom (',' ownedSpecializations+=SpecializationAxiom)*)? ('['
 		(ownedKeys+=KeyAxiom | 
 		 ownedPropertyRestrictions+=PropertyRestrictionAxiom)*
-		('enumerates' enumeratedInstances+=[ConceptInstance|Ref] (',' enumeratedInstances+=[ConceptInstance|Ref])*)?
+		(ownedEnumeration=EnumerationAxiom)?
 	']')?;
 	
 RelationEntity:
@@ -256,7 +256,7 @@ Inclusion returns Import:
 	kind=Includes namespace=NAMESPACE ('as' prefix=ID)?;
 
 SpecializationAxiom:
-	specializedTerm=[SpecializableTerm|Ref];
+	superTerm=[SpecializableTerm|Ref];
 	
 PropertyRestrictionAxiom:
 	PropertyRangeRestrictionAxiom |
@@ -307,6 +307,9 @@ RelationValueRestrictionAxiom returns PropertyValueRestrictionAxiom:
 
 KeyAxiom:
 	'key' properties+=[Property|Ref] (',' properties+=[Property|Ref])*;
+
+EnumerationAxiom:
+	'enumerates' instances+=[ConceptInstance|Ref] (',' instances+=[ConceptInstance|Ref])*;
 
 ConceptTypeAssertion returns TypeAssertion:
 	type=[Concept|Ref];

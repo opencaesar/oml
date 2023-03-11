@@ -748,7 +748,7 @@ public class OmlBuilder {
      */
     public SpecializationAxiom addSpecializationAxiom(Vocabulary vocabulary, String subTermIri, String superTermIri) {
         final SpecializationAxiom axiom = OmlWrite.addSpecializationAxiom(vocabulary, null, null);
-        setCrossReference(vocabulary, axiom, OmlPackage.Literals.SPECIALIZATION_AXIOM__SPECIALIZED_TERM, superTermIri);
+        setCrossReference(vocabulary, axiom, OmlPackage.Literals.SPECIALIZATION_AXIOM__SUPER_TERM, superTermIri);
         setContainmentReference(vocabulary, subTermIri, OmlPackage.Literals.SPECIALIZABLE_TERM__OWNED_SPECIALIZATIONS, axiom);
         return axiom;
     }
