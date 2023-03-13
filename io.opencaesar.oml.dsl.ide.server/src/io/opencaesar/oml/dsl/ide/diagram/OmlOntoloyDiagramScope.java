@@ -291,7 +291,7 @@ class OmlOntoloyDiagramScope {
 		}
 
 		public OmlOntoloyDiagramScope caseAspect(Aspect a) {
-			a = OmlRead.resolve(a);
+			a = (Aspect) a.resolve();
 			switch (mode) {
 			case Phase1:
 				phase1InitializeEntity(a);
@@ -311,7 +311,7 @@ class OmlOntoloyDiagramScope {
 		}
 
 		public OmlOntoloyDiagramScope caseConcept(Concept c) {
-			c = OmlRead.resolve(c);
+			c = (Concept) c.resolve();
 			switch (mode) {
 			case Phase1:
 				phase1InitializeEntity(c);
@@ -331,7 +331,7 @@ class OmlOntoloyDiagramScope {
 		}
 
 		public OmlOntoloyDiagramScope caseRelationEntity(RelationEntity e) {
-			e = OmlRead.resolve(e);
+			e = (RelationEntity) e.resolve();
 			switch (mode) {
 			case Phase1:
 				phase1InitializeEntity(e);
@@ -377,7 +377,7 @@ class OmlOntoloyDiagramScope {
 		}
 
 		public OmlOntoloyDiagramScope caseScalar(Scalar s) {
-			s = OmlRead.resolve(s);
+			s = (Scalar) s.resolve();
 			switch (mode) {
 			case Phase1:
 				if (!scalars.containsKey(s)) {
@@ -391,7 +391,7 @@ class OmlOntoloyDiagramScope {
 		}
 
 		public OmlOntoloyDiagramScope caseStructure(Structure s) {
-			s = OmlRead.resolve(s);
+			s = (Structure) s.resolve();
 			switch (mode) {
 			case Phase1:
 				phase1InitializeClassifierProperties(s);
@@ -421,7 +421,7 @@ class OmlOntoloyDiagramScope {
 		}
 
 		public OmlOntoloyDiagramScope caseConceptInstance(ConceptInstance ci) {
-			ci = OmlRead.resolve(ci);
+			ci = (ConceptInstance) ci.resolve();
 			switch (mode) {
 			case Phase1:
 				if (!instanceAssertions.containsKey(ci)) {
@@ -437,7 +437,7 @@ class OmlOntoloyDiagramScope {
 		}
 
 		public OmlOntoloyDiagramScope caseRelationInstance(RelationInstance ri) {
-			ri = OmlRead.resolve(ri);
+			ri = (RelationInstance) ri.resolve();
 			switch (mode) {
 			case Phase1:
 				if (!instanceAssertions.containsKey(ri)) {

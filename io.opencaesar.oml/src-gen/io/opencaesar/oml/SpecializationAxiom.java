@@ -93,4 +93,15 @@ public interface SpecializationAxiom extends Axiom {
 	 */
 	void setOwningTerm(SpecializableTerm value);
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Gets the sub (specific) term of the given specialization axiom
+	 * <!-- end-model-doc -->
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
+	SpecializableTerm getSubTerm();
+
 } // SpecializationAxiom

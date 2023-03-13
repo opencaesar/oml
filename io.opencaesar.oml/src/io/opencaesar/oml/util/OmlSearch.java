@@ -305,7 +305,7 @@ public final class OmlSearch extends OmlIndex {
      */
     public static List<SpecializableTerm> findSubTerms(SpecializableTerm term) {
         return findSpecializationsWithSuperTerm(term).stream()
-            .map(i -> OmlRead.getSubTerm(i))
+            .map(i -> i.getSubTerm())
             .collect(Collectors.toList());
     }
 
@@ -402,7 +402,7 @@ public final class OmlSearch extends OmlIndex {
      */
     public static List<Entity> findEntitiesKeyedWith(SemanticProperty property) {
         return findKeyAxiomWithProperty(property).stream()
-            .map(i -> OmlRead.getKeyedEntity(i))
+            .map(i -> i.getKeyedEntity())
             .collect(Collectors.toList());
     }
 
@@ -702,7 +702,7 @@ public final class OmlSearch extends OmlIndex {
     public static List<Instance> findInstancesOfType(Classifier type) {
         if (type instanceof Entity) {
             return findTypeAssertionsWithType((Entity)type).stream()
-                .map(i -> OmlRead.getAssertingInstance(i))
+                .map(i -> i.getAssertingInstance())
                 .collect(Collectors.toList());
         } else if (type instanceof Structure) {
             return new ArrayList<Instance>(findStructureInstancesWithType((Structure)type));

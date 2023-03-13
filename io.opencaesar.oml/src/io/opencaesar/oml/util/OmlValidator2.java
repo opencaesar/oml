@@ -382,7 +382,7 @@ public final class OmlValidator2 {
      * @return True if the rules is satisfied; False otherwise
      */
     protected boolean validatePropertyRestrictionAxiomDomain(PropertyRestrictionAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-        final Classifier restrictingDomain = OmlRead.getRestrictingDomain(object);
+        final Classifier restrictingDomain = object.getRestrictingDomain();
         final SemanticProperty property = object.getProperty();
         final Classifier domainType = (property!=null) ? property.getDomain() : null;
         if (restrictingDomain != null && domainType != null) {
@@ -492,7 +492,7 @@ public final class OmlValidator2 {
      */
     protected boolean validateSpecializationAxiomSpecializedTermKind(SpecializationAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
         final SpecializableTerm superTerm = object.getSuperTerm();
-        final SpecializableTerm subTerm = OmlRead.getSubTerm(object);
+        final SpecializableTerm subTerm = object.getSubTerm();
         if (superTerm == subTerm) {
             return report(Diagnostic.WARNING, diagnostics, object,
 	                "SpecializableTerm "+superTerm.getAbbreviatedIri()+" specializes itself", 
@@ -785,7 +785,7 @@ public final class OmlValidator2 {
      * @return True if the rules is satisfied; False otherwise
      */
     protected boolean validatePropertyValueRestrictionAxiomSubject(PropertyValueAssertion object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-        final var theSubject = OmlRead.getSubject(object);
+        final var theSubject = object.getAssertingInstance();
         final SemanticProperty property = object.getProperty();
         final Classifier domainType = property.getDomain();
         if (!OmlSearch.findIsKindOf(theSubject, domainType)) {
@@ -830,7 +830,7 @@ public final class OmlValidator2 {
      * @return True if the rules is satisfied; False otherwise
      */
     protected boolean validateTypeRestriction(TypeAssertion object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-        final var instance = OmlRead.getAssertingInstance(object);
+        final var instance = object.getAssertingInstance();
         final var type = object.getType();
         if (((instance instanceof ConceptInstance) && !(type instanceof Concept)) || 
         	((instance instanceof RelationInstance) && !(type instanceof RelationEntity))) {

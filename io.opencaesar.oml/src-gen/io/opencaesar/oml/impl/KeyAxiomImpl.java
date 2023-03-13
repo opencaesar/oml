@@ -20,8 +20,11 @@ package io.opencaesar.oml.impl;
 
 import io.opencaesar.oml.Entity;
 import io.opencaesar.oml.KeyAxiom;
+import io.opencaesar.oml.Member;
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.Property;
+
+import java.lang.reflect.InvocationTargetException;
 
 import java.util.Collection;
 
@@ -154,6 +157,17 @@ public class KeyAxiomImpl extends AxiomImpl implements KeyAxiom {
 	 * @generated
 	 */
 	@Override
+	public Entity getKeyedEntity() {
+		Member _resolve = this.getOwningEntity().resolve();
+		return ((Entity) _resolve);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case OmlPackage.KEY_AXIOM__OWNING_ENTITY:
@@ -261,6 +275,20 @@ public class KeyAxiomImpl extends AxiomImpl implements KeyAxiom {
 				return basicGetOwningEntity() != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case OmlPackage.KEY_AXIOM___GET_KEYED_ENTITY:
+				return getKeyedEntity();
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 } //KeyAxiomImpl

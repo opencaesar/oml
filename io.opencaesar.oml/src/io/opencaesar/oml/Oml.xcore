@@ -60,7 +60,7 @@ abstract class Element {
      * Gets the ontology that defines this element
      */
     op Ontology getOntology() {
-        var EObject current = this;
+        var EObject current = this
         while (current !== null && !(current instanceof Ontology)) {
             current = current.eContainer()
         }
@@ -103,6 +103,16 @@ class Annotation extends Element {
     		literalValue
     	else if (referenceValue !== null)
     		referenceValue
+    }
+    /*
+     * Gets the annotated element of the given annotation
+     */
+    op IdentifiedElement getAnnotatedElement() {
+        if (owningElement instanceof Member) {
+            return (owningElement as Member).resolve()
+        } else {
+            return owningElement
+        }
     }
 }
 
@@ -204,6 +214,10 @@ abstract class Axiom extends Element {
  */
 @Bikeshed(heading="Assertions")
 abstract class Assertion extends Element {
+    /**
+     * Gets the instance that is the subject of this assertion
+     */
+    op Instance getAssertingInstance()
 }
 
 /*
@@ -329,6 +343,15 @@ abstract class Member extends IdentifiedElement {
     	return getRef() !== null
     }
     /*
+     * Determines if the member is a ref to another member
+     */
+    op Member[1] resolve() {
+    	if (isRef()) {
+    		return getRef()
+    	}
+    	return this
+    }
+    /*
      * Gets the IRI of this member
      */
     op String getIri() {
@@ -342,7 +365,7 @@ abstract class Member extends IdentifiedElement {
      */
     op String getAbbreviatedIri() {
      	val m = if (getRef() !== null) getRef() else this
-        val ontology = m.getOntology();
+        val ontology = m.getOntology()
         val prefix = if (ontology !== null) ontology.getPrefix()+':' else ':'
         return prefix + m.getName()
     }
@@ -1162,6 +1185,13 @@ class KeyAxiom extends Axiom {
      * The owning entity specified by this axiom
      */
     container Entity[?] owningEntity opposite ownedKeys
+    /*
+     * Gets the entity that defines the given key axiom
+     */
+    op Entity getKeyedEntity() {
+    	return owningEntity.resolve() as Entity
+    }
+
 }
 
 /*
@@ -1177,6 +1207,12 @@ class SpecializationAxiom extends Axiom {
      * The owning term specified by this axiom
      */
     container SpecializableTerm[?] owningTerm opposite ownedSpecializations
+    /*
+     * Gets the sub (specific) term of the given specialization axiom
+     */
+    op SpecializableTerm getSubTerm() {
+    	return owningTerm.resolve() as SpecializableTerm
+    }
 }
 
 /*
@@ -1192,6 +1228,12 @@ class EnumerationAxiom extends Axiom {
      * The owning concept specified by this axiom
      */
     container Concept[?] owningConcept opposite ownedEnumeration
+    /*
+     * Gets the concept that defines the given enumeration axiom
+     */
+    op Concept getEnumeratedConcept() {
+    	return owningConcept.resolve() as Concept
+    }
 }
 
 /*
@@ -1208,6 +1250,13 @@ abstract class PropertyRestrictionAxiom extends Axiom {
      * The owning classifier specified by this axiom
      */
     container Classifier[?] owningClassifier opposite ownedPropertyRestrictions
+    /*
+     * Gets the restricting domain of the given property restriction axiom
+     */
+    op Classifier getRestrictingDomain() {
+    	return owningClassifier.resolve() as Classifier
+    }
+    
 }
 
 ////////////////////////////////////////
@@ -1301,6 +1350,10 @@ class TypeAssertion extends Assertion {
      * The instance that owns this assertion
      */
     container NamedInstance[?] owningInstance opposite ownedTypes
+
+    op NamedInstance getAssertingInstance() {
+    	return owningInstance.resolve() as NamedInstance
+    }
 }
 
 /*
@@ -1340,6 +1393,14 @@ class PropertyValueAssertion extends Assertion {
     		structureInstanceValue
     	else if (property instanceof Relation)
     		namedInstanceValue
+    }
+
+    op Instance getAssertingInstance() {
+        if (owningInstance instanceof NamedInstance) {
+            return (owningInstance as NamedInstance).resolve() as NamedInstance
+        } else {
+            return owningInstance
+        }
     }
 }
 

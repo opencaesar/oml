@@ -158,4 +158,15 @@ public interface Annotation extends Element {
 	 */
 	Element getValue();
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Gets the annotated element of the given annotation
+	 * <!-- end-model-doc -->
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
+	IdentifiedElement getAnnotatedElement();
+
 } // Annotation

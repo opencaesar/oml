@@ -95,4 +95,15 @@ public interface PropertyRestrictionAxiom extends Axiom {
 	 */
 	void setOwningClassifier(Classifier value);
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Gets the restricting domain of the given property restriction axiom
+	 * <!-- end-model-doc -->
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
+	Classifier getRestrictingDomain();
+
 } // PropertyRestrictionAxiom

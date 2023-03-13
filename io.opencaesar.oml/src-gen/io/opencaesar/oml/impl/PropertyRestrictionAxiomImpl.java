@@ -19,12 +19,17 @@
 package io.opencaesar.oml.impl;
 
 import io.opencaesar.oml.Classifier;
+import io.opencaesar.oml.Member;
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.PropertyRestrictionAxiom;
 import io.opencaesar.oml.SemanticProperty;
 
+import java.lang.reflect.InvocationTargetException;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -176,6 +181,17 @@ public abstract class PropertyRestrictionAxiomImpl extends AxiomImpl implements 
 	 * @generated
 	 */
 	@Override
+	public Classifier getRestrictingDomain() {
+		Member _resolve = this.getOwningClassifier().resolve();
+		return ((Classifier) _resolve);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case OmlPackage.PROPERTY_RESTRICTION_AXIOM__OWNING_CLASSIFIER:
@@ -282,6 +298,20 @@ public abstract class PropertyRestrictionAxiomImpl extends AxiomImpl implements 
 				return basicGetOwningClassifier() != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case OmlPackage.PROPERTY_RESTRICTION_AXIOM___GET_RESTRICTING_DOMAIN:
+				return getRestrictingDomain();
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 } //PropertyRestrictionAxiomImpl

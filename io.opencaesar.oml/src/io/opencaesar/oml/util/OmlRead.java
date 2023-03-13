@@ -48,20 +48,17 @@ import io.opencaesar.oml.Description;
 import io.opencaesar.oml.DoubleLiteral;
 import io.opencaesar.oml.Element;
 import io.opencaesar.oml.Entity;
-import io.opencaesar.oml.EnumerationAxiom;
 import io.opencaesar.oml.ForwardRelation;
 import io.opencaesar.oml.IdentifiedElement;
 import io.opencaesar.oml.Import;
 import io.opencaesar.oml.Instance;
 import io.opencaesar.oml.IntegerLiteral;
-import io.opencaesar.oml.KeyAxiom;
 import io.opencaesar.oml.Literal;
 import io.opencaesar.oml.Member;
 import io.opencaesar.oml.NamedInstance;
 import io.opencaesar.oml.Ontology;
 import io.opencaesar.oml.Predicate;
 import io.opencaesar.oml.PropertyPredicate;
-import io.opencaesar.oml.PropertyRestrictionAxiom;
 import io.opencaesar.oml.PropertyValueAssertion;
 import io.opencaesar.oml.QuotedLiteral;
 import io.opencaesar.oml.Relation;
@@ -72,7 +69,6 @@ import io.opencaesar.oml.ReverseRelation;
 import io.opencaesar.oml.Scalar;
 import io.opencaesar.oml.SemanticProperty;
 import io.opencaesar.oml.SpecializableTerm;
-import io.opencaesar.oml.SpecializationAxiom;
 import io.opencaesar.oml.Statement;
 import io.opencaesar.oml.StructureInstance;
 import io.opencaesar.oml.Term;
@@ -430,20 +426,6 @@ public final class OmlRead {
     }
     
     /**
-     * Gets the annotated element of the given annotation
-     * 
-     * @param annotation the given annotation
-     * @return the annotated element of the annotation
-     */
-    public static IdentifiedElement getAnnotatedElement(Annotation annotation) {
-        if (annotation.getOwningElement() instanceof Member) {
-            return resolve((Member)annotation.getOwningElement());
-        } else {
-            return annotation.getOwningElement();
-        }
-    }
-    
-    /**
      * Gets all annotations that references the given property on the given element
      * 
      * @param element The element that has the annotation
@@ -750,20 +732,6 @@ public final class OmlRead {
         }
     }
 
-    /**
-     * Resolves the given reference to a member
-     * 
-     * @param reference the given reference
-     * @return the resolved member
-     */
-    @SuppressWarnings("unchecked")
-	public static <T extends Member> T resolve(T reference) {
-    	if (reference.isRef()) {
-    		return (T) reference.getRef();
-    	}
-        return reference;
-    }
-    
     //-------------------------------------------------
     // VOCABULARIES
     //-------------------------------------------------
@@ -836,47 +804,7 @@ public final class OmlRead {
         }
         return axioms;
     }
-    
-    /**
-     * Gets the entity that defines the given key axiom
-     * 
-     * @param axiom the given key axiom
-     * @return the entity that defines the given key axiom
-     */
-    public static Entity getKeyedEntity(KeyAxiom axiom) {
-    	return resolve(axiom.getOwningEntity());
-    }
-    
-    /**
-     * Gets the concept that defines the given enumeration axiom
-     * 
-     * @param axiom the given enumeration axiom
-     * @return the concept that defines the given enumeration axiom
-     */
-    public static Concept getEnumeratedConcept(EnumerationAxiom axiom) {
-    	return resolve(axiom.getOwningConcept());
-    }
-
-    /**
-     * Gets the sub (specific) term of the given specialization axiom
-     * 
-     * @param axiom the given specialization axiom
-     * @return the sub term of the given specialization axiom
-     */
-    public static SpecializableTerm getSubTerm(SpecializationAxiom axiom) {
-    	return resolve(axiom.getOwningTerm());
-    }
-    
-    /**
-     * Gets the restricting domain of the given property restriction axiom
-     * 
-     * @param axiom the given property restriction axiom
-     * @return the restricting domain of the given property restriction axiom
-     */
-    public static Classifier getRestrictingDomain(PropertyRestrictionAxiom axiom) {
-    	return resolve(axiom.getOwningClassifier());
-    }
-    
+        
     /**
      * Gets the term that is bound by the given predicate
      * 
@@ -946,55 +874,6 @@ public final class OmlRead {
     }
 
     /**
-     * Gets the instance that asserts the given assertion
-     * 
-     * @param assertion the given assertion
-     * @return the instance that is the subject of this assertion
-     */
-    public static Instance getAssertingInstance(Assertion assertion) {
-        if (assertion instanceof TypeAssertion) {
-            return getAssertingInstance((TypeAssertion) assertion);
-        } else if (assertion instanceof PropertyValueAssertion) {
-            return getAssertingInstance((PropertyValueAssertion) assertion);
-        }
-        return null;
-    }
-    
-    /**
-     * Gets the named instance that is the subject of the given type assertion
-     * 
-     * @param assertion the given type assertion
-     * @return the concept instance that is the subject of the concept type assertion
-     */
-    public static NamedInstance getAssertingInstance(TypeAssertion assertion) {
-    	return resolve(assertion.getOwningInstance());
-    }
-    
-    /**
-     * Gets the instance that is the subject of the given value assertion
-     * 
-     * @param assertion the given value assertion
-     * @return the instance that is the subject of the value assertion
-     */
-    public static Instance getAssertingInstance(PropertyValueAssertion assertion) {
-        if (assertion.getOwningInstance() instanceof NamedInstance) {
-            return resolve((NamedInstance)assertion.getOwningInstance());
-        } else {
-            return assertion.getOwningInstance();
-        }
-    }
-    
-    /**
-     * Gets the subject of the given assertion 
-     * 
-     * @param assertion the given assertion
-     * @return the subject (instance) of the given assertion
-     */
-    public static Instance getSubject(Assertion assertion) {
-        return getAssertingInstance(assertion);
-    }
-    
-    /**
      * Gets the object of the given assertion 
      * 
      * @param assertion the given assertion
@@ -1016,7 +895,7 @@ public final class OmlRead {
      * @return the source instance
      */
     public static NamedInstance getSource(PropertyValueAssertion assertion) {
-        return (NamedInstance) getAssertingInstance(assertion);
+        return (NamedInstance) assertion.getAssertingInstance();
     }
     
     /**

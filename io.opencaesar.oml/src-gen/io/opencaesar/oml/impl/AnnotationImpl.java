@@ -315,6 +315,23 @@ public class AnnotationImpl extends ElementImpl implements Annotation {
 	 * @generated
 	 */
 	@Override
+	public IdentifiedElement getAnnotatedElement() {
+		IdentifiedElement _owningElement = this.getOwningElement();
+		if ((_owningElement instanceof Member)) {
+			IdentifiedElement _owningElement_1 = this.getOwningElement();
+			return ((Member) _owningElement_1).resolve();
+		}
+		else {
+			return this.getOwningElement();
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case OmlPackage.ANNOTATION__OWNING_ELEMENT:
@@ -456,6 +473,8 @@ public class AnnotationImpl extends ElementImpl implements Annotation {
 		switch (operationID) {
 			case OmlPackage.ANNOTATION___GET_VALUE:
 				return getValue();
+			case OmlPackage.ANNOTATION___GET_ANNOTATED_ELEMENT:
+				return getAnnotatedElement();
 		}
 		return super.eInvoke(operationID, arguments);
 	}

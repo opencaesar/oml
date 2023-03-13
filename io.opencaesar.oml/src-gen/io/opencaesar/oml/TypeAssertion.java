@@ -93,4 +93,12 @@ public interface TypeAssertion extends Assertion {
 	 */
 	void setOwningInstance(NamedInstance value);
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
+	NamedInstance getAssertingInstance();
+
 } // TypeAssertion

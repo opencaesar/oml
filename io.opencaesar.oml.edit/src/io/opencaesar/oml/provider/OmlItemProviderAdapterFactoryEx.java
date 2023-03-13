@@ -180,7 +180,7 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 						throw new AssertionError(e);
 					}
 				} else if (aspect.isRef()){
-					return "ref aspect " + getLabel(OmlRead.resolve(aspect), aspect);
+					return "ref aspect " + getLabel(aspect.resolve(), aspect);
 				} else {
 					return "aspect " + getLabel(aspect);
 				}
@@ -203,7 +203,7 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 						throw new AssertionError(e);
 					}
 				} else if (concept.isRef()){
-					return "ref concept " + getLabel(OmlRead.resolve(concept), concept);
+					return "ref concept " + getLabel(concept.resolve(), concept);
 				} else {
 					return "concept " + getLabel(concept);
 				}
@@ -226,7 +226,7 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 						throw new AssertionError(e);
 					}
 				} else if (entity.isRef()){
-					return "ref relation entity " + getLabel(OmlRead.resolve(entity), entity);
+					return "ref relation entity " + getLabel(entity.resolve(), entity);
 				} else {
 					return "relation entity " + getLabel(entity);
 				}
@@ -249,7 +249,7 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 						throw new AssertionError(e);
 					}
 				} else if (structure.isRef()){
-					return "ref structure " + getLabel(OmlRead.resolve(structure), structure);
+					return "ref structure " + getLabel(structure.resolve(), structure);
 				} else {
 					return "structure " + getLabel(structure);
 				}
@@ -272,7 +272,7 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 						throw new AssertionError(e);
 					}
 				} else if (scalar.isRef()){
-					return "ref scalar " + getLabel(OmlRead.resolve(scalar), scalar);
+					return "ref scalar " + getLabel(scalar.resolve(), scalar);
 				} else {
 					return "scalar " + getLabel(scalar);
 				}
@@ -295,7 +295,7 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 						throw new AssertionError(e);
 					}
 				} else if (scalar.isRef()){
-					return "ref enumerated scalar " + getLabel(OmlRead.resolve(scalar), scalar);
+					return "ref enumerated scalar " + getLabel(scalar.resolve(), scalar);
 				} else {
 					return "enumerated scalar " + getLabel(scalar);
 				}
@@ -320,7 +320,7 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 						throw new AssertionError(e);
 					}
 				} else if (property.isRef()){
-					return "ref annotation property " + getLabel(OmlRead.resolve(property), property);
+					return "ref annotation property " + getLabel(property.resolve(), property);
 				} else {
 					return "annotation property " + getLabel(property);
 				}
@@ -343,7 +343,7 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 						throw new AssertionError(e);
 					}
 				} else if (property.isRef()){
-					return "ref scalar property " + getLabel(OmlRead.resolve(property), property);
+					return "ref scalar property " + getLabel(property.resolve(), property);
 				} else {
 					return "scalar property " + getLabel(property);
 				}
@@ -366,7 +366,7 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 						throw new AssertionError(e);
 					}
 				} else if (property.isRef()){
-					return "ref structured property " + getLabel(OmlRead.resolve(property), property);
+					return "ref structured property " + getLabel(property.resolve(), property);
 				} else {
 					return "structured property " + getLabel(property);
 				}
@@ -435,7 +435,7 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 						throw new AssertionError(e);
 					}
 				} else if (rule.isRef()){
-					return "ref rule " + getLabel(OmlRead.resolve(rule), rule);
+					return "ref rule " + getLabel(rule.resolve(), rule);
 				} else {
 					return "rule " + getLabel(rule);
 				}
@@ -460,7 +460,7 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 						throw new AssertionError(e);
 					}
 				} else if (builtIn.isRef()){
-					return "ref builtin " + getLabel(OmlRead.resolve(builtIn), builtIn);
+					return "ref builtin " + getLabel(builtIn.resolve(), builtIn);
 				} else {
 					return "builtin " + getLabel(builtIn);
 				}
@@ -680,7 +680,7 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 						throw new AssertionError(e);
 					}
 				} else if (instance.isRef()){
-					return "ref ci " + getLabel(OmlRead.resolve(instance), instance);
+					return "ref ci " + getLabel(instance.resolve(), instance);
 				} else {
 					return "ci " + getLabel(instance);
 				}
@@ -704,7 +704,7 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 						throw new AssertionError(e);
 					}
 				} else if (instance.isRef()){
-					label.append("ref ri " + getLabel(OmlRead.resolve(instance), instance));
+					label.append("ref ri " + getLabel(instance.resolve(), instance));
 				} else {
 					label.append("ri " + getLabel(instance));
 				}
@@ -847,7 +847,7 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 			return "<null>";
 		} else if (member.eIsProxy()) {
 			return "<" + EcoreUtil.getURI(member) + ">";
-		} else if (element != null) {
+		} else {
 			String label = OmlRead.getAbbreviatedIriIn(member, element.getOntology());
 			if (label != null) {
 				return label;

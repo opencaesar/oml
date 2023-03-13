@@ -85,4 +85,15 @@ public interface KeyAxiom extends Axiom {
 	 */
 	void setOwningEntity(Entity value);
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Gets the entity that defines the given key axiom
+	 * <!-- end-model-doc -->
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
+	Entity getKeyedEntity();
+
 } // KeyAxiom

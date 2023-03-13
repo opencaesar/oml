@@ -175,7 +175,7 @@ public class OmlWrite {
      * @return a reference to the given member in the context of the given ontology
      */
     protected static Member getOrAddReference(Ontology ontology, Member member) {
-        Member reference = OmlRead.getReferences(ontology).stream().filter(i -> OmlRead.resolve(i) == member).findFirst().orElse(null);
+        Member reference = OmlRead.getReferences(ontology).stream().filter(i -> i.getRef() == member).findFirst().orElse(null);
         if (reference == null) {
             reference = createReference(member);
             if (ontology instanceof Vocabulary) {

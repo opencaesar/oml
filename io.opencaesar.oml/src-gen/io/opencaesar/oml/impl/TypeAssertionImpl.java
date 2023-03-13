@@ -19,12 +19,17 @@
 package io.opencaesar.oml.impl;
 
 import io.opencaesar.oml.Entity;
+import io.opencaesar.oml.Member;
 import io.opencaesar.oml.NamedInstance;
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.TypeAssertion;
 
+import java.lang.reflect.InvocationTargetException;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -176,6 +181,17 @@ public class TypeAssertionImpl extends AssertionImpl implements TypeAssertion {
 	 * @generated
 	 */
 	@Override
+	public NamedInstance getAssertingInstance() {
+		Member _resolve = this.getOwningInstance().resolve();
+		return ((NamedInstance) _resolve);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case OmlPackage.TYPE_ASSERTION__OWNING_INSTANCE:
@@ -282,6 +298,20 @@ public class TypeAssertionImpl extends AssertionImpl implements TypeAssertion {
 				return basicGetOwningInstance() != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case OmlPackage.TYPE_ASSERTION___GET_ASSERTING_INSTANCE:
+				return getAssertingInstance();
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 } //TypeAssertionImpl

@@ -35,4 +35,16 @@ package io.opencaesar.oml;
  * @generated
  */
 public interface Assertion extends Element {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * *
+	 * Gets the instance that is the subject of this assertion
+	 * <!-- end-model-doc -->
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
+	Instance getAssertingInstance();
+
 } // Assertion

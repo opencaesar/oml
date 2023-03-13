@@ -21,7 +21,10 @@ package io.opencaesar.oml.impl;
 import io.opencaesar.oml.Concept;
 import io.opencaesar.oml.ConceptInstance;
 import io.opencaesar.oml.EnumerationAxiom;
+import io.opencaesar.oml.Member;
 import io.opencaesar.oml.OmlPackage;
+
+import java.lang.reflect.InvocationTargetException;
 
 import java.util.Collection;
 
@@ -154,6 +157,17 @@ public class EnumerationAxiomImpl extends AxiomImpl implements EnumerationAxiom 
 	 * @generated
 	 */
 	@Override
+	public Concept getEnumeratedConcept() {
+		Member _resolve = this.getOwningConcept().resolve();
+		return ((Concept) _resolve);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case OmlPackage.ENUMERATION_AXIOM__OWNING_CONCEPT:
@@ -261,6 +275,20 @@ public class EnumerationAxiomImpl extends AxiomImpl implements EnumerationAxiom 
 				return basicGetOwningConcept() != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case OmlPackage.ENUMERATION_AXIOM___GET_ENUMERATED_CONCEPT:
+				return getEnumeratedConcept();
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 } //EnumerationAxiomImpl

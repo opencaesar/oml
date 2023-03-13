@@ -84,4 +84,15 @@ public interface EnumerationAxiom extends Axiom {
 	 */
 	void setOwningConcept(Concept value);
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Gets the concept that defines the given enumeration axiom
+	 * <!-- end-model-doc -->
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
+	Concept getEnumeratedConcept();
+
 } // EnumerationAxiom

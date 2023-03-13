@@ -21,6 +21,7 @@ package io.opencaesar.oml.impl;
 import io.opencaesar.oml.Element;
 import io.opencaesar.oml.Instance;
 import io.opencaesar.oml.Literal;
+import io.opencaesar.oml.Member;
 import io.opencaesar.oml.NamedInstance;
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.PropertyValueAssertion;
@@ -381,6 +382,24 @@ public class PropertyValueAssertionImpl extends AssertionImpl implements Propert
 	 * @generated
 	 */
 	@Override
+	public Instance getAssertingInstance() {
+		Instance _owningInstance = this.getOwningInstance();
+		if ((_owningInstance instanceof NamedInstance)) {
+			Instance _owningInstance_1 = this.getOwningInstance();
+			Member _resolve = ((NamedInstance) _owningInstance_1).resolve();
+			return ((NamedInstance) _resolve);
+		}
+		else {
+			return this.getOwningInstance();
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case OmlPackage.PROPERTY_VALUE_ASSERTION__STRUCTURE_INSTANCE_VALUE:
@@ -538,6 +557,8 @@ public class PropertyValueAssertionImpl extends AssertionImpl implements Propert
 		switch (operationID) {
 			case OmlPackage.PROPERTY_VALUE_ASSERTION___GET_VALUE:
 				return getValue();
+			case OmlPackage.PROPERTY_VALUE_ASSERTION___GET_ASSERTING_INSTANCE:
+				return getAssertingInstance();
 		}
 		return super.eInvoke(operationID, arguments);
 	}

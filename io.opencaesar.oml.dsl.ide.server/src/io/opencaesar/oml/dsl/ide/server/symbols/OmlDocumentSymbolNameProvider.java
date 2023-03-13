@@ -30,7 +30,7 @@ public class OmlDocumentSymbolNameProvider extends DocumentSymbolMapper.Document
 		if (object instanceof Ontology)
 			return ((Ontology) object).getIri();
 		if (object instanceof Member)
-			return OmlRead.resolve(((Member) object)).getName();
+			return ((Member) object).resolve().getName();
 		return "<unnamed>";
 	}
 

@@ -41,7 +41,7 @@ public class OmlLabelProvider extends DefaultEObjectLabelProvider {
 	// Labels and icons can be computed like this:
 	
 	String text(Member member) {
-		return member.isRef() ? "ref "+OmlRead.getAbbreviatedIriIn(OmlRead.resolve(member), member.getOntology()) : member.getName();
+		return member.isRef() ? "ref "+OmlRead.getAbbreviatedIriIn(member.getRef(), member.getOntology()) : member.getName();
 	}
 	
 //

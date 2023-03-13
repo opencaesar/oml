@@ -18,12 +18,17 @@
  */
 package io.opencaesar.oml.impl;
 
+import io.opencaesar.oml.Member;
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.SpecializableTerm;
 import io.opencaesar.oml.SpecializationAxiom;
 
+import java.lang.reflect.InvocationTargetException;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -175,6 +180,17 @@ public class SpecializationAxiomImpl extends AxiomImpl implements Specialization
 	 * @generated
 	 */
 	@Override
+	public SpecializableTerm getSubTerm() {
+		Member _resolve = this.getOwningTerm().resolve();
+		return ((SpecializableTerm) _resolve);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case OmlPackage.SPECIALIZATION_AXIOM__OWNING_TERM:
@@ -281,6 +297,20 @@ public class SpecializationAxiomImpl extends AxiomImpl implements Specialization
 				return basicGetOwningTerm() != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case OmlPackage.SPECIALIZATION_AXIOM___GET_SUB_TERM:
+				return getSubTerm();
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 } //SpecializationAxiomImpl

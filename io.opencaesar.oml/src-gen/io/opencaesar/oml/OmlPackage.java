@@ -211,13 +211,22 @@ public interface OmlPackage extends EPackage {
 	int ANNOTATION___GET_VALUE = ELEMENT_OPERATION_COUNT + 0;
 
 	/**
+	 * The operation id for the '<em>Get Annotated Element</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANNOTATION___GET_ANNOTATED_ELEMENT = ELEMENT_OPERATION_COUNT + 1;
+
+	/**
 	 * The number of operations of the '<em>Annotation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ANNOTATION_OPERATION_COUNT = ELEMENT_OPERATION_COUNT + 1;
+	int ANNOTATION_OPERATION_COUNT = ELEMENT_OPERATION_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.impl.IdentifiedElementImpl <em>Identified Element</em>}' class.
@@ -522,13 +531,22 @@ public interface OmlPackage extends EPackage {
 	int ASSERTION___GET_ONTOLOGY = ELEMENT___GET_ONTOLOGY;
 
 	/**
+	 * The operation id for the '<em>Get Asserting Instance</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSERTION___GET_ASSERTING_INSTANCE = ELEMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * The number of operations of the '<em>Assertion</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ASSERTION_OPERATION_COUNT = ELEMENT_OPERATION_COUNT + 0;
+	int ASSERTION_OPERATION_COUNT = ELEMENT_OPERATION_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.impl.PredicateImpl <em>Predicate</em>}' class.
@@ -887,13 +905,22 @@ public interface OmlPackage extends EPackage {
 	int MEMBER___IS_REF = IDENTIFIED_ELEMENT_OPERATION_COUNT + 1;
 
 	/**
+	 * The operation id for the '<em>Resolve</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEMBER___RESOLVE = IDENTIFIED_ELEMENT_OPERATION_COUNT + 2;
+
+	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MEMBER___GET_IRI = IDENTIFIED_ELEMENT_OPERATION_COUNT + 2;
+	int MEMBER___GET_IRI = IDENTIFIED_ELEMENT_OPERATION_COUNT + 3;
 
 	/**
 	 * The operation id for the '<em>Get Abbreviated Iri</em>' operation.
@@ -902,7 +929,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MEMBER___GET_ABBREVIATED_IRI = IDENTIFIED_ELEMENT_OPERATION_COUNT + 3;
+	int MEMBER___GET_ABBREVIATED_IRI = IDENTIFIED_ELEMENT_OPERATION_COUNT + 4;
 
 	/**
 	 * The number of operations of the '<em>Member</em>' class.
@@ -911,7 +938,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MEMBER_OPERATION_COUNT = IDENTIFIED_ELEMENT_OPERATION_COUNT + 4;
+	int MEMBER_OPERATION_COUNT = IDENTIFIED_ELEMENT_OPERATION_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.impl.VocabularyBoxImpl <em>Vocabulary Box</em>}' class.
@@ -1605,6 +1632,15 @@ public interface OmlPackage extends EPackage {
 	int STATEMENT___IS_REF = MEMBER___IS_REF;
 
 	/**
+	 * The operation id for the '<em>Resolve</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATEMENT___RESOLVE = MEMBER___RESOLVE;
+
+	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1705,6 +1741,15 @@ public interface OmlPackage extends EPackage {
 	int VOCABULARY_MEMBER___IS_REF = MEMBER___IS_REF;
 
 	/**
+	 * The operation id for the '<em>Resolve</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOCABULARY_MEMBER___RESOLVE = MEMBER___RESOLVE;
+
+	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1803,6 +1848,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int DESCRIPTION_MEMBER___IS_REF = MEMBER___IS_REF;
+
+	/**
+	 * The operation id for the '<em>Resolve</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_MEMBER___RESOLVE = MEMBER___RESOLVE;
 
 	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
@@ -1914,6 +1968,15 @@ public interface OmlPackage extends EPackage {
 	int VOCABULARY_STATEMENT___IS_REF = STATEMENT___IS_REF;
 
 	/**
+	 * The operation id for the '<em>Resolve</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOCABULARY_STATEMENT___RESOLVE = STATEMENT___RESOLVE;
+
+	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2023,6 +2086,15 @@ public interface OmlPackage extends EPackage {
 	int DESCRIPTION_STATEMENT___IS_REF = STATEMENT___IS_REF;
 
 	/**
+	 * The operation id for the '<em>Resolve</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_STATEMENT___RESOLVE = STATEMENT___RESOLVE;
+
+	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2121,6 +2193,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int TERM___IS_REF = VOCABULARY_MEMBER___IS_REF;
+
+	/**
+	 * The operation id for the '<em>Resolve</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TERM___RESOLVE = VOCABULARY_MEMBER___RESOLVE;
 
 	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
@@ -2259,6 +2340,15 @@ public interface OmlPackage extends EPackage {
 	int RULE___IS_REF = VOCABULARY_STATEMENT___IS_REF;
 
 	/**
+	 * The operation id for the '<em>Resolve</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RULE___RESOLVE = VOCABULARY_STATEMENT___RESOLVE;
+
+	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2375,6 +2465,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int BUILT_IN___IS_REF = VOCABULARY_STATEMENT___IS_REF;
+
+	/**
+	 * The operation id for the '<em>Resolve</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUILT_IN___RESOLVE = VOCABULARY_STATEMENT___RESOLVE;
 
 	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
@@ -2495,6 +2594,15 @@ public interface OmlPackage extends EPackage {
 	int SPECIALIZABLE_TERM___IS_REF = TERM___IS_REF;
 
 	/**
+	 * The operation id for the '<em>Resolve</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SPECIALIZABLE_TERM___RESOLVE = TERM___RESOLVE;
+
+	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2593,6 +2701,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int PROPERTY___IS_REF = TERM___IS_REF;
+
+	/**
+	 * The operation id for the '<em>Resolve</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY___RESOLVE = TERM___RESOLVE;
 
 	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
@@ -2711,6 +2828,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int TYPE___IS_REF = SPECIALIZABLE_TERM___IS_REF;
+
+	/**
+	 * The operation id for the '<em>Resolve</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE___RESOLVE = SPECIALIZABLE_TERM___RESOLVE;
 
 	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
@@ -2921,6 +3047,15 @@ public interface OmlPackage extends EPackage {
 	int RELATION_BASE___IS_REF = SPECIALIZABLE_TERM___IS_REF;
 
 	/**
+	 * The operation id for the '<em>Resolve</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_BASE___RESOLVE = SPECIALIZABLE_TERM___RESOLVE;
+
+	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3048,6 +3183,15 @@ public interface OmlPackage extends EPackage {
 	int CLASSIFIER___IS_REF = TYPE___IS_REF;
 
 	/**
+	 * The operation id for the '<em>Resolve</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASSIFIER___RESOLVE = TYPE___RESOLVE;
+
+	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3164,6 +3308,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int SCALAR___IS_REF = TYPE___IS_REF;
+
+	/**
+	 * The operation id for the '<em>Resolve</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALAR___RESOLVE = TYPE___RESOLVE;
 
 	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
@@ -3302,6 +3455,15 @@ public interface OmlPackage extends EPackage {
 	int ENTITY___IS_REF = CLASSIFIER___IS_REF;
 
 	/**
+	 * The operation id for the '<em>Resolve</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENTITY___RESOLVE = CLASSIFIER___RESOLVE;
+
+	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3436,6 +3598,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int STRUCTURE___IS_REF = CLASSIFIER___IS_REF;
+
+	/**
+	 * The operation id for the '<em>Resolve</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURE___RESOLVE = CLASSIFIER___RESOLVE;
 
 	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
@@ -3581,6 +3752,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int ASPECT___IS_REF = ENTITY___IS_REF;
+
+	/**
+	 * The operation id for the '<em>Resolve</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASPECT___RESOLVE = ENTITY___RESOLVE;
 
 	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
@@ -3735,6 +3915,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int CONCEPT___IS_REF = ENTITY___IS_REF;
+
+	/**
+	 * The operation id for the '<em>Resolve</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONCEPT___RESOLVE = ENTITY___RESOLVE;
 
 	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
@@ -3981,6 +4170,15 @@ public interface OmlPackage extends EPackage {
 	int RELATION_ENTITY___IS_REF = ENTITY___IS_REF;
 
 	/**
+	 * The operation id for the '<em>Resolve</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_ENTITY___RESOLVE = ENTITY___RESOLVE;
+
+	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4189,6 +4387,15 @@ public interface OmlPackage extends EPackage {
 	int FACETED_SCALAR___IS_REF = SCALAR___IS_REF;
 
 	/**
+	 * The operation id for the '<em>Resolve</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FACETED_SCALAR___RESOLVE = SCALAR___RESOLVE;
+
+	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4325,6 +4532,15 @@ public interface OmlPackage extends EPackage {
 	int ENUMERATED_SCALAR___IS_REF = SCALAR___IS_REF;
 
 	/**
+	 * The operation id for the '<em>Resolve</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUMERATED_SCALAR___RESOLVE = SCALAR___RESOLVE;
+
+	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4452,6 +4668,15 @@ public interface OmlPackage extends EPackage {
 	int ANNOTATION_PROPERTY___IS_REF = PROPERTY___IS_REF;
 
 	/**
+	 * The operation id for the '<em>Resolve</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANNOTATION_PROPERTY___RESOLVE = PROPERTY___RESOLVE;
+
+	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4550,6 +4775,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int SEMANTIC_PROPERTY___IS_REF = PROPERTY___IS_REF;
+
+	/**
+	 * The operation id for the '<em>Resolve</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEMANTIC_PROPERTY___RESOLVE = PROPERTY___RESOLVE;
 
 	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
@@ -4733,6 +4967,15 @@ public interface OmlPackage extends EPackage {
 	int SCALAR_PROPERTY___IS_REF = SEMANTIC_PROPERTY___IS_REF;
 
 	/**
+	 * The operation id for the '<em>Resolve</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALAR_PROPERTY___RESOLVE = SEMANTIC_PROPERTY___RESOLVE;
+
+	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4914,6 +5157,15 @@ public interface OmlPackage extends EPackage {
 	int STRUCTURED_PROPERTY___IS_REF = SEMANTIC_PROPERTY___IS_REF;
 
 	/**
+	 * The operation id for the '<em>Resolve</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURED_PROPERTY___RESOLVE = SEMANTIC_PROPERTY___RESOLVE;
+
+	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5039,6 +5291,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int RELATION___IS_REF = SEMANTIC_PROPERTY___IS_REF;
+
+	/**
+	 * The operation id for the '<em>Resolve</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION___RESOLVE = SEMANTIC_PROPERTY___RESOLVE;
 
 	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
@@ -5229,6 +5490,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int FORWARD_RELATION___IS_REF = RELATION___IS_REF;
+
+	/**
+	 * The operation id for the '<em>Resolve</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORWARD_RELATION___RESOLVE = RELATION___RESOLVE;
 
 	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
@@ -5428,6 +5698,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int REVERSE_RELATION___IS_REF = RELATION___IS_REF;
+
+	/**
+	 * The operation id for the '<em>Resolve</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REVERSE_RELATION___RESOLVE = RELATION___RESOLVE;
 
 	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
@@ -5746,6 +6025,15 @@ public interface OmlPackage extends EPackage {
 	int UNREIFIED_RELATION___IS_REF = RELATION___IS_REF;
 
 	/**
+	 * The operation id for the '<em>Resolve</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNREIFIED_RELATION___RESOLVE = RELATION___RESOLVE;
+
+	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5963,6 +6251,15 @@ public interface OmlPackage extends EPackage {
 	int NAMED_INSTANCE___IS_REF = DESCRIPTION_STATEMENT___IS_REF;
 
 	/**
+	 * The operation id for the '<em>Resolve</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAMED_INSTANCE___RESOLVE = DESCRIPTION_STATEMENT___RESOLVE;
+
+	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6097,6 +6394,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int CONCEPT_INSTANCE___IS_REF = NAMED_INSTANCE___IS_REF;
+
+	/**
+	 * The operation id for the '<em>Resolve</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONCEPT_INSTANCE___RESOLVE = NAMED_INSTANCE___RESOLVE;
 
 	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
@@ -6251,6 +6557,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int RELATION_INSTANCE___IS_REF = NAMED_INSTANCE___IS_REF;
+
+	/**
+	 * The operation id for the '<em>Resolve</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_INSTANCE___RESOLVE = NAMED_INSTANCE___RESOLVE;
 
 	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
@@ -6417,13 +6732,22 @@ public interface OmlPackage extends EPackage {
 	int KEY_AXIOM___GET_ONTOLOGY = AXIOM___GET_ONTOLOGY;
 
 	/**
+	 * The operation id for the '<em>Get Keyed Entity</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KEY_AXIOM___GET_KEYED_ENTITY = AXIOM_OPERATION_COUNT + 0;
+
+	/**
 	 * The number of operations of the '<em>Key Axiom</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int KEY_AXIOM_OPERATION_COUNT = AXIOM_OPERATION_COUNT + 0;
+	int KEY_AXIOM_OPERATION_COUNT = AXIOM_OPERATION_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.impl.SpecializationAxiomImpl <em>Specialization Axiom</em>}' class.
@@ -6481,13 +6805,22 @@ public interface OmlPackage extends EPackage {
 	int SPECIALIZATION_AXIOM___GET_ONTOLOGY = AXIOM___GET_ONTOLOGY;
 
 	/**
+	 * The operation id for the '<em>Get Sub Term</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SPECIALIZATION_AXIOM___GET_SUB_TERM = AXIOM_OPERATION_COUNT + 0;
+
+	/**
 	 * The number of operations of the '<em>Specialization Axiom</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SPECIALIZATION_AXIOM_OPERATION_COUNT = AXIOM_OPERATION_COUNT + 0;
+	int SPECIALIZATION_AXIOM_OPERATION_COUNT = AXIOM_OPERATION_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.impl.EnumerationAxiomImpl <em>Enumeration Axiom</em>}' class.
@@ -6545,13 +6878,22 @@ public interface OmlPackage extends EPackage {
 	int ENUMERATION_AXIOM___GET_ONTOLOGY = AXIOM___GET_ONTOLOGY;
 
 	/**
+	 * The operation id for the '<em>Get Enumerated Concept</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUMERATION_AXIOM___GET_ENUMERATED_CONCEPT = AXIOM_OPERATION_COUNT + 0;
+
+	/**
 	 * The number of operations of the '<em>Enumeration Axiom</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ENUMERATION_AXIOM_OPERATION_COUNT = AXIOM_OPERATION_COUNT + 0;
+	int ENUMERATION_AXIOM_OPERATION_COUNT = AXIOM_OPERATION_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.impl.PropertyRestrictionAxiomImpl <em>Property Restriction Axiom</em>}' class.
@@ -6609,13 +6951,22 @@ public interface OmlPackage extends EPackage {
 	int PROPERTY_RESTRICTION_AXIOM___GET_ONTOLOGY = AXIOM___GET_ONTOLOGY;
 
 	/**
+	 * The operation id for the '<em>Get Restricting Domain</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_RESTRICTION_AXIOM___GET_RESTRICTING_DOMAIN = AXIOM_OPERATION_COUNT + 0;
+
+	/**
 	 * The number of operations of the '<em>Property Restriction Axiom</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_RESTRICTION_AXIOM_OPERATION_COUNT = AXIOM_OPERATION_COUNT + 0;
+	int PROPERTY_RESTRICTION_AXIOM_OPERATION_COUNT = AXIOM_OPERATION_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.impl.PropertyRangeRestrictionAxiomImpl <em>Property Range Restriction Axiom</em>}' class.
@@ -6689,6 +7040,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int PROPERTY_RANGE_RESTRICTION_AXIOM___GET_ONTOLOGY = PROPERTY_RESTRICTION_AXIOM___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Get Restricting Domain</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_RANGE_RESTRICTION_AXIOM___GET_RESTRICTING_DOMAIN = PROPERTY_RESTRICTION_AXIOM___GET_RESTRICTING_DOMAIN;
 
 	/**
 	 * The number of operations of the '<em>Property Range Restriction Axiom</em>' class.
@@ -6782,6 +7142,15 @@ public interface OmlPackage extends EPackage {
 	int PROPERTY_CARDINALITY_RESTRICTION_AXIOM___GET_ONTOLOGY = PROPERTY_RESTRICTION_AXIOM___GET_ONTOLOGY;
 
 	/**
+	 * The operation id for the '<em>Get Restricting Domain</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_CARDINALITY_RESTRICTION_AXIOM___GET_RESTRICTING_DOMAIN = PROPERTY_RESTRICTION_AXIOM___GET_RESTRICTING_DOMAIN;
+
+	/**
 	 * The number of operations of the '<em>Property Cardinality Restriction Axiom</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6873,6 +7242,15 @@ public interface OmlPackage extends EPackage {
 	int PROPERTY_VALUE_RESTRICTION_AXIOM___GET_ONTOLOGY = PROPERTY_RESTRICTION_AXIOM___GET_ONTOLOGY;
 
 	/**
+	 * The operation id for the '<em>Get Restricting Domain</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_VALUE_RESTRICTION_AXIOM___GET_RESTRICTING_DOMAIN = PROPERTY_RESTRICTION_AXIOM___GET_RESTRICTING_DOMAIN;
+
+	/**
 	 * The operation id for the '<em>Get Value</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6946,13 +7324,22 @@ public interface OmlPackage extends EPackage {
 	int TYPE_ASSERTION___GET_ONTOLOGY = ASSERTION___GET_ONTOLOGY;
 
 	/**
+	 * The operation id for the '<em>Get Asserting Instance</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_ASSERTION___GET_ASSERTING_INSTANCE = ASSERTION_OPERATION_COUNT + 0;
+
+	/**
 	 * The number of operations of the '<em>Type Assertion</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_ASSERTION_OPERATION_COUNT = ASSERTION_OPERATION_COUNT + 0;
+	int TYPE_ASSERTION_OPERATION_COUNT = ASSERTION_OPERATION_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.impl.PropertyValueAssertionImpl <em>Property Value Assertion</em>}' class.
@@ -7046,13 +7433,22 @@ public interface OmlPackage extends EPackage {
 	int PROPERTY_VALUE_ASSERTION___GET_VALUE = ASSERTION_OPERATION_COUNT + 0;
 
 	/**
+	 * The operation id for the '<em>Get Asserting Instance</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_VALUE_ASSERTION___GET_ASSERTING_INSTANCE = ASSERTION_OPERATION_COUNT + 1;
+
+	/**
 	 * The number of operations of the '<em>Property Value Assertion</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_VALUE_ASSERTION_OPERATION_COUNT = ASSERTION_OPERATION_COUNT + 1;
+	int PROPERTY_VALUE_ASSERTION_OPERATION_COUNT = ASSERTION_OPERATION_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.impl.UnaryPredicateImpl <em>Unary Predicate</em>}' class.
@@ -8206,6 +8602,16 @@ public interface OmlPackage extends EPackage {
 	EOperation getAnnotation__GetValue();
 
 	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.Annotation#getAnnotatedElement() <em>Get Annotated Element</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Annotated Element</em>' operation.
+	 * @see io.opencaesar.oml.Annotation#getAnnotatedElement()
+	 * @generated
+	 */
+	EOperation getAnnotation__GetAnnotatedElement();
+
+	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.IdentifiedElement <em>Identified Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8350,6 +8756,16 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getAssertion();
+
+	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.Assertion#getAssertingInstance() <em>Get Asserting Instance</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Asserting Instance</em>' operation.
+	 * @see io.opencaesar.oml.Assertion#getAssertingInstance()
+	 * @generated
+	 */
+	EOperation getAssertion__GetAssertingInstance();
 
 	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.Predicate <em>Predicate</em>}'.
@@ -8539,6 +8955,16 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 */
 	EOperation getMember__IsRef();
+
+	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.Member#resolve() <em>Resolve</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Resolve</em>' operation.
+	 * @see io.opencaesar.oml.Member#resolve()
+	 * @generated
+	 */
+	EOperation getMember__Resolve();
 
 	/**
 	 * Returns the meta object for the '{@link io.opencaesar.oml.Member#getIri() <em>Get Iri</em>}' operation.
@@ -10002,6 +10428,16 @@ public interface OmlPackage extends EPackage {
 	EReference getKeyAxiom_OwningEntity();
 
 	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.KeyAxiom#getKeyedEntity() <em>Get Keyed Entity</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Keyed Entity</em>' operation.
+	 * @see io.opencaesar.oml.KeyAxiom#getKeyedEntity()
+	 * @generated
+	 */
+	EOperation getKeyAxiom__GetKeyedEntity();
+
+	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.SpecializationAxiom <em>Specialization Axiom</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -10032,6 +10468,16 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getSpecializationAxiom_OwningTerm();
+
+	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.SpecializationAxiom#getSubTerm() <em>Get Sub Term</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Sub Term</em>' operation.
+	 * @see io.opencaesar.oml.SpecializationAxiom#getSubTerm()
+	 * @generated
+	 */
+	EOperation getSpecializationAxiom__GetSubTerm();
 
 	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.EnumerationAxiom <em>Enumeration Axiom</em>}'.
@@ -10066,6 +10512,16 @@ public interface OmlPackage extends EPackage {
 	EReference getEnumerationAxiom_OwningConcept();
 
 	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.EnumerationAxiom#getEnumeratedConcept() <em>Get Enumerated Concept</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Enumerated Concept</em>' operation.
+	 * @see io.opencaesar.oml.EnumerationAxiom#getEnumeratedConcept()
+	 * @generated
+	 */
+	EOperation getEnumerationAxiom__GetEnumeratedConcept();
+
+	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.PropertyRestrictionAxiom <em>Property Restriction Axiom</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -10096,6 +10552,16 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getPropertyRestrictionAxiom_OwningClassifier();
+
+	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.PropertyRestrictionAxiom#getRestrictingDomain() <em>Get Restricting Domain</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Restricting Domain</em>' operation.
+	 * @see io.opencaesar.oml.PropertyRestrictionAxiom#getRestrictingDomain()
+	 * @generated
+	 */
+	EOperation getPropertyRestrictionAxiom__GetRestrictingDomain();
 
 	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.PropertyRangeRestrictionAxiom <em>Property Range Restriction Axiom</em>}'.
@@ -10258,6 +10724,16 @@ public interface OmlPackage extends EPackage {
 	EReference getTypeAssertion_OwningInstance();
 
 	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.TypeAssertion#getAssertingInstance() <em>Get Asserting Instance</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Asserting Instance</em>' operation.
+	 * @see io.opencaesar.oml.TypeAssertion#getAssertingInstance()
+	 * @generated
+	 */
+	EOperation getTypeAssertion__GetAssertingInstance();
+
+	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.PropertyValueAssertion <em>Property Value Assertion</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -10331,6 +10807,16 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 */
 	EOperation getPropertyValueAssertion__GetValue();
+
+	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.PropertyValueAssertion#getAssertingInstance() <em>Get Asserting Instance</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Asserting Instance</em>' operation.
+	 * @see io.opencaesar.oml.PropertyValueAssertion#getAssertingInstance()
+	 * @generated
+	 */
+	EOperation getPropertyValueAssertion__GetAssertingInstance();
 
 	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.UnaryPredicate <em>Unary Predicate</em>}'.
@@ -10826,6 +11312,14 @@ public interface OmlPackage extends EPackage {
 		EOperation ANNOTATION___GET_VALUE = eINSTANCE.getAnnotation__GetValue();
 
 		/**
+		 * The meta object literal for the '<em><b>Get Annotated Element</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation ANNOTATION___GET_ANNOTATED_ELEMENT = eINSTANCE.getAnnotation__GetAnnotatedElement();
+
+		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.IdentifiedElementImpl <em>Identified Element</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -10946,6 +11440,14 @@ public interface OmlPackage extends EPackage {
 		 * @generated
 		 */
 		EClass ASSERTION = eINSTANCE.getAssertion();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Asserting Instance</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation ASSERTION___GET_ASSERTING_INSTANCE = eINSTANCE.getAssertion__GetAssertingInstance();
 
 		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.PredicateImpl <em>Predicate</em>}' class.
@@ -11100,6 +11602,14 @@ public interface OmlPackage extends EPackage {
 		 * @generated
 		 */
 		EOperation MEMBER___IS_REF = eINSTANCE.getMember__IsRef();
+
+		/**
+		 * The meta object literal for the '<em><b>Resolve</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation MEMBER___RESOLVE = eINSTANCE.getMember__Resolve();
 
 		/**
 		 * The meta object literal for the '<em><b>Get Iri</b></em>' operation.
@@ -12302,6 +12812,14 @@ public interface OmlPackage extends EPackage {
 		EReference KEY_AXIOM__OWNING_ENTITY = eINSTANCE.getKeyAxiom_OwningEntity();
 
 		/**
+		 * The meta object literal for the '<em><b>Get Keyed Entity</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation KEY_AXIOM___GET_KEYED_ENTITY = eINSTANCE.getKeyAxiom__GetKeyedEntity();
+
+		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.SpecializationAxiomImpl <em>Specialization Axiom</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -12326,6 +12844,14 @@ public interface OmlPackage extends EPackage {
 		 * @generated
 		 */
 		EReference SPECIALIZATION_AXIOM__OWNING_TERM = eINSTANCE.getSpecializationAxiom_OwningTerm();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Sub Term</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation SPECIALIZATION_AXIOM___GET_SUB_TERM = eINSTANCE.getSpecializationAxiom__GetSubTerm();
 
 		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.EnumerationAxiomImpl <em>Enumeration Axiom</em>}' class.
@@ -12354,6 +12880,14 @@ public interface OmlPackage extends EPackage {
 		EReference ENUMERATION_AXIOM__OWNING_CONCEPT = eINSTANCE.getEnumerationAxiom_OwningConcept();
 
 		/**
+		 * The meta object literal for the '<em><b>Get Enumerated Concept</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation ENUMERATION_AXIOM___GET_ENUMERATED_CONCEPT = eINSTANCE.getEnumerationAxiom__GetEnumeratedConcept();
+
+		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.PropertyRestrictionAxiomImpl <em>Property Restriction Axiom</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -12378,6 +12912,14 @@ public interface OmlPackage extends EPackage {
 		 * @generated
 		 */
 		EReference PROPERTY_RESTRICTION_AXIOM__OWNING_CLASSIFIER = eINSTANCE.getPropertyRestrictionAxiom_OwningClassifier();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Restricting Domain</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation PROPERTY_RESTRICTION_AXIOM___GET_RESTRICTING_DOMAIN = eINSTANCE.getPropertyRestrictionAxiom__GetRestrictingDomain();
 
 		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.PropertyRangeRestrictionAxiomImpl <em>Property Range Restriction Axiom</em>}' class.
@@ -12508,6 +13050,14 @@ public interface OmlPackage extends EPackage {
 		EReference TYPE_ASSERTION__OWNING_INSTANCE = eINSTANCE.getTypeAssertion_OwningInstance();
 
 		/**
+		 * The meta object literal for the '<em><b>Get Asserting Instance</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation TYPE_ASSERTION___GET_ASSERTING_INSTANCE = eINSTANCE.getTypeAssertion__GetAssertingInstance();
+
+		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.PropertyValueAssertionImpl <em>Property Value Assertion</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -12564,6 +13114,14 @@ public interface OmlPackage extends EPackage {
 		 * @generated
 		 */
 		EOperation PROPERTY_VALUE_ASSERTION___GET_VALUE = eINSTANCE.getPropertyValueAssertion__GetValue();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Asserting Instance</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation PROPERTY_VALUE_ASSERTION___GET_ASSERTING_INSTANCE = eINSTANCE.getPropertyValueAssertion__GetAssertingInstance();
 
 		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.UnaryPredicateImpl <em>Unary Predicate</em>}' class.

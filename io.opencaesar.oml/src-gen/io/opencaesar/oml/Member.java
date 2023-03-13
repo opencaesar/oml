@@ -93,6 +93,17 @@ public interface Member extends IdentifiedElement {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
+	 * Determines if the member is a ref to another member
+	 * <!-- end-model-doc -->
+	 * @model unique="false" required="true"
+	 * @generated
+	 */
+	Member resolve();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
 	 * Gets the IRI of this member
 	 * <!-- end-model-doc -->
 	 * @model kind="operation" unique="false"
