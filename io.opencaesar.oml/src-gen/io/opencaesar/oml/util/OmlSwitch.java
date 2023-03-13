@@ -360,6 +360,21 @@ public class OmlSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case OmlPackage.SPECIALIZABLE_PROPERTY: {
+				SpecializableProperty specializableProperty = (SpecializableProperty)theEObject;
+				T result = caseSpecializableProperty(specializableProperty);
+				if (result == null) result = caseSpecializableTerm(specializableProperty);
+				if (result == null) result = caseProperty(specializableProperty);
+				if (result == null) result = caseTerm(specializableProperty);
+				if (result == null) result = caseVocabularyStatement(specializableProperty);
+				if (result == null) result = caseVocabularyMember(specializableProperty);
+				if (result == null) result = caseStatement(specializableProperty);
+				if (result == null) result = caseMember(specializableProperty);
+				if (result == null) result = caseIdentifiedElement(specializableProperty);
+				if (result == null) result = caseElement(specializableProperty);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case OmlPackage.CLASSIFIER: {
 				Classifier classifier = (Classifier)theEObject;
 				T result = caseClassifier(classifier);
@@ -474,43 +489,12 @@ public class OmlSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case OmlPackage.FACETED_SCALAR: {
-				FacetedScalar facetedScalar = (FacetedScalar)theEObject;
-				T result = caseFacetedScalar(facetedScalar);
-				if (result == null) result = caseScalar(facetedScalar);
-				if (result == null) result = caseType(facetedScalar);
-				if (result == null) result = caseSpecializableTerm(facetedScalar);
-				if (result == null) result = caseTerm(facetedScalar);
-				if (result == null) result = caseVocabularyStatement(facetedScalar);
-				if (result == null) result = caseVocabularyMember(facetedScalar);
-				if (result == null) result = caseStatement(facetedScalar);
-				if (result == null) result = caseMember(facetedScalar);
-				if (result == null) result = caseIdentifiedElement(facetedScalar);
-				if (result == null) result = caseElement(facetedScalar);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.ENUMERATED_SCALAR: {
-				EnumeratedScalar enumeratedScalar = (EnumeratedScalar)theEObject;
-				T result = caseEnumeratedScalar(enumeratedScalar);
-				if (result == null) result = caseScalar(enumeratedScalar);
-				if (result == null) result = caseType(enumeratedScalar);
-				if (result == null) result = caseSpecializableTerm(enumeratedScalar);
-				if (result == null) result = caseTerm(enumeratedScalar);
-				if (result == null) result = caseVocabularyStatement(enumeratedScalar);
-				if (result == null) result = caseVocabularyMember(enumeratedScalar);
-				if (result == null) result = caseStatement(enumeratedScalar);
-				if (result == null) result = caseMember(enumeratedScalar);
-				if (result == null) result = caseIdentifiedElement(enumeratedScalar);
-				if (result == null) result = caseElement(enumeratedScalar);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case OmlPackage.ANNOTATION_PROPERTY: {
 				AnnotationProperty annotationProperty = (AnnotationProperty)theEObject;
 				T result = caseAnnotationProperty(annotationProperty);
-				if (result == null) result = caseProperty(annotationProperty);
+				if (result == null) result = caseSpecializableProperty(annotationProperty);
 				if (result == null) result = caseSpecializableTerm(annotationProperty);
+				if (result == null) result = caseProperty(annotationProperty);
 				if (result == null) result = caseTerm(annotationProperty);
 				if (result == null) result = caseVocabularyStatement(annotationProperty);
 				if (result == null) result = caseVocabularyMember(annotationProperty);
@@ -537,12 +521,13 @@ public class OmlSwitch<T> extends Switch<T> {
 				ScalarProperty scalarProperty = (ScalarProperty)theEObject;
 				T result = caseScalarProperty(scalarProperty);
 				if (result == null) result = caseSemanticProperty(scalarProperty);
-				if (result == null) result = caseSpecializableTerm(scalarProperty);
+				if (result == null) result = caseSpecializableProperty(scalarProperty);
 				if (result == null) result = caseProperty(scalarProperty);
-				if (result == null) result = caseVocabularyStatement(scalarProperty);
+				if (result == null) result = caseSpecializableTerm(scalarProperty);
 				if (result == null) result = caseTerm(scalarProperty);
-				if (result == null) result = caseStatement(scalarProperty);
+				if (result == null) result = caseVocabularyStatement(scalarProperty);
 				if (result == null) result = caseVocabularyMember(scalarProperty);
+				if (result == null) result = caseStatement(scalarProperty);
 				if (result == null) result = caseMember(scalarProperty);
 				if (result == null) result = caseIdentifiedElement(scalarProperty);
 				if (result == null) result = caseElement(scalarProperty);
@@ -553,12 +538,13 @@ public class OmlSwitch<T> extends Switch<T> {
 				StructuredProperty structuredProperty = (StructuredProperty)theEObject;
 				T result = caseStructuredProperty(structuredProperty);
 				if (result == null) result = caseSemanticProperty(structuredProperty);
-				if (result == null) result = caseSpecializableTerm(structuredProperty);
+				if (result == null) result = caseSpecializableProperty(structuredProperty);
 				if (result == null) result = caseProperty(structuredProperty);
-				if (result == null) result = caseVocabularyStatement(structuredProperty);
+				if (result == null) result = caseSpecializableTerm(structuredProperty);
 				if (result == null) result = caseTerm(structuredProperty);
-				if (result == null) result = caseStatement(structuredProperty);
+				if (result == null) result = caseVocabularyStatement(structuredProperty);
 				if (result == null) result = caseVocabularyMember(structuredProperty);
+				if (result == null) result = caseStatement(structuredProperty);
 				if (result == null) result = caseMember(structuredProperty);
 				if (result == null) result = caseIdentifiedElement(structuredProperty);
 				if (result == null) result = caseElement(structuredProperty);
@@ -611,6 +597,7 @@ public class OmlSwitch<T> extends Switch<T> {
 				T result = caseUnreifiedRelation(unreifiedRelation);
 				if (result == null) result = caseRelation(unreifiedRelation);
 				if (result == null) result = caseRelationBase(unreifiedRelation);
+				if (result == null) result = caseSpecializableProperty(unreifiedRelation);
 				if (result == null) result = caseSemanticProperty(unreifiedRelation);
 				if (result == null) result = caseSpecializableTerm(unreifiedRelation);
 				if (result == null) result = caseProperty(unreifiedRelation);
@@ -689,11 +676,11 @@ public class OmlSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case OmlPackage.ENUMERATION_AXIOM: {
-				EnumerationAxiom enumerationAxiom = (EnumerationAxiom)theEObject;
-				T result = caseEnumerationAxiom(enumerationAxiom);
-				if (result == null) result = caseAxiom(enumerationAxiom);
-				if (result == null) result = caseElement(enumerationAxiom);
+			case OmlPackage.INSTANCE_ENUMERATION_AXIOM: {
+				InstanceEnumerationAxiom instanceEnumerationAxiom = (InstanceEnumerationAxiom)theEObject;
+				T result = caseInstanceEnumerationAxiom(instanceEnumerationAxiom);
+				if (result == null) result = caseAxiom(instanceEnumerationAxiom);
+				if (result == null) result = caseElement(instanceEnumerationAxiom);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -702,6 +689,14 @@ public class OmlSwitch<T> extends Switch<T> {
 				T result = casePropertyRestrictionAxiom(propertyRestrictionAxiom);
 				if (result == null) result = caseAxiom(propertyRestrictionAxiom);
 				if (result == null) result = caseElement(propertyRestrictionAxiom);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case OmlPackage.LITERAL_ENUMERATION_AXIOM: {
+				LiteralEnumerationAxiom literalEnumerationAxiom = (LiteralEnumerationAxiom)theEObject;
+				T result = caseLiteralEnumerationAxiom(literalEnumerationAxiom);
+				if (result == null) result = caseAxiom(literalEnumerationAxiom);
+				if (result == null) result = caseElement(literalEnumerationAxiom);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -1313,6 +1308,21 @@ public class OmlSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Specializable Property</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Specializable Property</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSpecializableProperty(SpecializableProperty object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Classifier</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -1414,36 +1424,6 @@ public class OmlSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseRelationEntity(RelationEntity object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Faceted Scalar</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Faceted Scalar</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseFacetedScalar(FacetedScalar object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Enumerated Scalar</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Enumerated Scalar</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseEnumeratedScalar(EnumeratedScalar object) {
 		return null;
 	}
 
@@ -1658,17 +1638,17 @@ public class OmlSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Enumeration Axiom</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Instance Enumeration Axiom</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Enumeration Axiom</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Instance Enumeration Axiom</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseEnumerationAxiom(EnumerationAxiom object) {
+	public T caseInstanceEnumerationAxiom(InstanceEnumerationAxiom object) {
 		return null;
 	}
 
@@ -1684,6 +1664,21 @@ public class OmlSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T casePropertyRestrictionAxiom(PropertyRestrictionAxiom object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Literal Enumeration Axiom</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Literal Enumeration Axiom</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseLiteralEnumerationAxiom(LiteralEnumerationAxiom object) {
 		return null;
 	}
 

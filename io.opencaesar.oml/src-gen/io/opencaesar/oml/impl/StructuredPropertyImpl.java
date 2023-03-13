@@ -20,6 +20,7 @@ package io.opencaesar.oml.impl;
 
 import io.opencaesar.oml.Classifier;
 import io.opencaesar.oml.OmlPackage;
+import io.opencaesar.oml.SpecializableProperty;
 import io.opencaesar.oml.SpecializableTerm;
 import io.opencaesar.oml.SpecializationAxiom;
 import io.opencaesar.oml.Statement;
@@ -538,6 +539,11 @@ public class StructuredPropertyImpl extends SemanticPropertyImpl implements Stru
 				default: return -1;
 			}
 		}
+		if (baseClass == SpecializableProperty.class) {
+			switch (derivedFeatureID) {
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -562,6 +568,11 @@ public class StructuredPropertyImpl extends SemanticPropertyImpl implements Stru
 		if (baseClass == SpecializableTerm.class) {
 			switch (baseFeatureID) {
 				case OmlPackage.SPECIALIZABLE_TERM__OWNED_SPECIALIZATIONS: return OmlPackage.STRUCTURED_PROPERTY__OWNED_SPECIALIZATIONS;
+				default: return -1;
+			}
+		}
+		if (baseClass == SpecializableProperty.class) {
+			switch (baseFeatureID) {
 				default: return -1;
 			}
 		}

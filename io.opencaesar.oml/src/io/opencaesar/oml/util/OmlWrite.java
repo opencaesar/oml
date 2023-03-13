@@ -45,16 +45,16 @@ import io.opencaesar.oml.DifferentFromPredicate;
 import io.opencaesar.oml.DoubleLiteral;
 import io.opencaesar.oml.Element;
 import io.opencaesar.oml.Entity;
-import io.opencaesar.oml.EnumeratedScalar;
-import io.opencaesar.oml.FacetedScalar;
 import io.opencaesar.oml.ForwardRelation;
 import io.opencaesar.oml.IdentifiedElement;
 import io.opencaesar.oml.Import;
 import io.opencaesar.oml.ImportKind;
 import io.opencaesar.oml.Instance;
+import io.opencaesar.oml.InstanceEnumerationAxiom;
 import io.opencaesar.oml.IntegerLiteral;
 import io.opencaesar.oml.KeyAxiom;
 import io.opencaesar.oml.Literal;
+import io.opencaesar.oml.LiteralEnumerationAxiom;
 import io.opencaesar.oml.Member;
 import io.opencaesar.oml.NamedInstance;
 import io.opencaesar.oml.OmlPackage;
@@ -479,13 +479,13 @@ public class OmlWrite {
         return property;
     }
     
-    // FacetedScalar
+    // Scalar
 
     /**
-     * Creates a new faceted scalar and adds it to the given vocabulary
+     * Creates a new scalar and adds it to the given vocabulary
      * 
      * @param vocabulary the context vocabulary
-     * @param name the name of the new faceted scalar
+     * @param name the name of the new scalar
      * @param length the length facet
      * @param minLength the min length facet
      * @param maxLength the max length facet
@@ -495,11 +495,11 @@ public class OmlWrite {
      * @param minExclusive the min exclusive facet
      * @param maxInclusive the max inclusive facet
      * @param maxExclusive the max exclusive facet
-     * @return a new faceted scalar that is added to the given vocabulary
+     * @return a new scalar that is added to the given vocabulary
      */
-    public static FacetedScalar addFacetedScalar(Vocabulary vocabulary, String name, Long length, Long minLength, Long maxLength, String pattern, 
+    public static Scalar addScalar(Vocabulary vocabulary, String name, Long length, Long minLength, Long maxLength, String pattern, 
         String language, Literal minInclusive, Literal minExclusive, Literal maxInclusive, Literal maxExclusive) {
-        final FacetedScalar scalar = create(FacetedScalar.class);
+        final Scalar scalar = create(Scalar.class);
         scalar.setName(name);
         scalar.setLength(length);
         scalar.setMinLength(minLength);
@@ -514,24 +514,6 @@ public class OmlWrite {
         return scalar;
     }
         
-    // EnumeratedScalar
-
-    /**
-     * Creates a new enumerated scalar and adds it to the given vocabulary
-     * 
-     * @param vocabulary the context vocabulary
-     * @param name the name of the new enumerated scalar
-     * @param literals the list of literals making up the enumerated scalar value space
-     * @return a new enumerated scalar that is added to the given vocabulary
-     */
-    public static EnumeratedScalar addEnumeratedScalar(Vocabulary vocabulary, String name, Literal...literals) {
-        final EnumeratedScalar scalar = create(EnumeratedScalar.class);
-        scalar.setName(name);
-        scalar.getLiterals().addAll(Arrays.asList(literals));
-        vocabulary.getOwnedStatements().add(scalar);
-        return scalar;
-    }
-    
     // ForwardRelation
 
     /**
@@ -713,13 +695,9 @@ public class OmlWrite {
             final var reference = create(Structure.class);
             reference.setRef((Structure)member);
             return (T) reference;
-        } else if (member instanceof EnumeratedScalar) {
-            final var reference = create(EnumeratedScalar.class);
-            reference.setRef((EnumeratedScalar)member);
-            return (T) reference;
-        } else if (member instanceof FacetedScalar) {
-            final var reference = create(FacetedScalar.class);
-            reference.setRef((FacetedScalar)member);
+        } else if (member instanceof Scalar) {
+            final var reference = create(Scalar.class);
+            reference.setRef((Scalar)member);
             return (T) reference;
         } else if (member instanceof AnnotationProperty) {
             final var reference = create(AnnotationProperty.class);
@@ -902,6 +880,40 @@ public class OmlWrite {
         final KeyAxiom axiom = create(KeyAxiom.class);
         setCrossReferences(vocabulary, axiom, OmlPackage.Literals.KEY_AXIOM__PROPERTIES, new ArrayList<Element>(keyProperties));
         setContainmentReference(vocabulary, domain, OmlPackage.Literals.ENTITY__OWNED_KEYS, axiom);
+        return axiom;
+    }
+
+    // InstanceEnumerationAxiom
+
+    /**
+     * Creates an instance enumeration axiom and adds it to the given vocabulary
+     * 
+     * @param vocabulary the context vocabulary
+     * @param domain the given (concept) domain
+     * @param instances the list of concept instances
+     * @return an instance enumeration axiom that is added to the given vocabulary
+     */
+    public static InstanceEnumerationAxiom addInstanceEnumerationAxiom(Vocabulary vocabulary, Concept domain, List<ConceptInstance> instances) {
+        final InstanceEnumerationAxiom axiom = create(InstanceEnumerationAxiom.class);
+        setCrossReferences(vocabulary, axiom, OmlPackage.Literals.INSTANCE_ENUMERATION_AXIOM__INSTANCES, new ArrayList<Element>(instances));
+        setContainmentReference(vocabulary, domain, OmlPackage.Literals.CONCEPT__OWNED_ENUMERATION, axiom);
+        return axiom;
+    }
+
+    // LiteralEnumerationAxiom
+
+    /**
+     * Creates an literal enumeration axiom and adds it to the given vocabulary
+     * 
+     * @param vocabulary the context vocabulary
+     * @param domain the given (scalar) domain
+     * @param literals the list of enumerated literals
+     * @return a literal enumeration axiom that is added to the given vocabulary
+     */
+    public static LiteralEnumerationAxiom addLiteralEnumerationAxiom(Vocabulary vocabulary, Scalar domain, Literal...literals) {
+        final LiteralEnumerationAxiom axiom = create(LiteralEnumerationAxiom.class);
+        axiom.getLiterals().addAll(Arrays.asList(literals));
+        setContainmentReference(vocabulary, domain, OmlPackage.Literals.SCALAR__OWNED_ENUMERATION, axiom);
         return axiom;
     }
 

@@ -183,6 +183,8 @@ public class OmlValidator extends EObjectValidator {
 				return validateType((Type)value, diagnostics, context);
 			case OmlPackage.RELATION_BASE:
 				return validateRelationBase((RelationBase)value, diagnostics, context);
+			case OmlPackage.SPECIALIZABLE_PROPERTY:
+				return validateSpecializableProperty((SpecializableProperty)value, diagnostics, context);
 			case OmlPackage.CLASSIFIER:
 				return validateClassifier((Classifier)value, diagnostics, context);
 			case OmlPackage.SCALAR:
@@ -197,10 +199,6 @@ public class OmlValidator extends EObjectValidator {
 				return validateConcept((Concept)value, diagnostics, context);
 			case OmlPackage.RELATION_ENTITY:
 				return validateRelationEntity((RelationEntity)value, diagnostics, context);
-			case OmlPackage.FACETED_SCALAR:
-				return validateFacetedScalar((FacetedScalar)value, diagnostics, context);
-			case OmlPackage.ENUMERATED_SCALAR:
-				return validateEnumeratedScalar((EnumeratedScalar)value, diagnostics, context);
 			case OmlPackage.ANNOTATION_PROPERTY:
 				return validateAnnotationProperty((AnnotationProperty)value, diagnostics, context);
 			case OmlPackage.SEMANTIC_PROPERTY:
@@ -229,10 +227,12 @@ public class OmlValidator extends EObjectValidator {
 				return validateKeyAxiom((KeyAxiom)value, diagnostics, context);
 			case OmlPackage.SPECIALIZATION_AXIOM:
 				return validateSpecializationAxiom((SpecializationAxiom)value, diagnostics, context);
-			case OmlPackage.ENUMERATION_AXIOM:
-				return validateEnumerationAxiom((EnumerationAxiom)value, diagnostics, context);
+			case OmlPackage.INSTANCE_ENUMERATION_AXIOM:
+				return validateInstanceEnumerationAxiom((InstanceEnumerationAxiom)value, diagnostics, context);
 			case OmlPackage.PROPERTY_RESTRICTION_AXIOM:
 				return validatePropertyRestrictionAxiom((PropertyRestrictionAxiom)value, diagnostics, context);
+			case OmlPackage.LITERAL_ENUMERATION_AXIOM:
+				return validateLiteralEnumerationAxiom((LiteralEnumerationAxiom)value, diagnostics, context);
 			case OmlPackage.PROPERTY_RANGE_RESTRICTION_AXIOM:
 				return validatePropertyRangeRestrictionAxiom((PropertyRangeRestrictionAxiom)value, diagnostics, context);
 			case OmlPackage.PROPERTY_CARDINALITY_RESTRICTION_AXIOM:
@@ -877,6 +877,25 @@ public class OmlValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean validateSpecializableProperty(SpecializableProperty specializableProperty, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		if (!validate_NoCircularContainment(specializableProperty, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms(specializableProperty, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(specializableProperty, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(specializableProperty, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(specializableProperty, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(specializableProperty, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(specializableProperty, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(specializableProperty, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(specializableProperty, diagnostics, context);
+		if (result || diagnostics != null) result &= validateElement_extraValidate(specializableProperty, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public boolean validateClassifier(Classifier classifier, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		if (!validate_NoCircularContainment(classifier, diagnostics, context)) return false;
 		boolean result = validate_EveryMultiplicityConforms(classifier, diagnostics, context);
@@ -1002,44 +1021,6 @@ public class OmlValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(relationEntity, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(relationEntity, diagnostics, context);
 		if (result || diagnostics != null) result &= validateElement_extraValidate(relationEntity, diagnostics, context);
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateFacetedScalar(FacetedScalar facetedScalar, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(facetedScalar, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms(facetedScalar, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(facetedScalar, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(facetedScalar, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(facetedScalar, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(facetedScalar, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(facetedScalar, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(facetedScalar, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(facetedScalar, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_extraValidate(facetedScalar, diagnostics, context);
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateEnumeratedScalar(EnumeratedScalar enumeratedScalar, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(enumeratedScalar, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms(enumeratedScalar, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(enumeratedScalar, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(enumeratedScalar, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(enumeratedScalar, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(enumeratedScalar, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(enumeratedScalar, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(enumeratedScalar, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(enumeratedScalar, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_extraValidate(enumeratedScalar, diagnostics, context);
 		return result;
 	}
 
@@ -1314,17 +1295,17 @@ public class OmlValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateEnumerationAxiom(EnumerationAxiom enumerationAxiom, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(enumerationAxiom, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms(enumerationAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(enumerationAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(enumerationAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(enumerationAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(enumerationAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(enumerationAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(enumerationAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(enumerationAxiom, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElement_extraValidate(enumerationAxiom, diagnostics, context);
+	public boolean validateInstanceEnumerationAxiom(InstanceEnumerationAxiom instanceEnumerationAxiom, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		if (!validate_NoCircularContainment(instanceEnumerationAxiom, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms(instanceEnumerationAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(instanceEnumerationAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(instanceEnumerationAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(instanceEnumerationAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(instanceEnumerationAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(instanceEnumerationAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(instanceEnumerationAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(instanceEnumerationAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validateElement_extraValidate(instanceEnumerationAxiom, diagnostics, context);
 		return result;
 	}
 
@@ -1344,6 +1325,25 @@ public class OmlValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(propertyRestrictionAxiom, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(propertyRestrictionAxiom, diagnostics, context);
 		if (result || diagnostics != null) result &= validateElement_extraValidate(propertyRestrictionAxiom, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateLiteralEnumerationAxiom(LiteralEnumerationAxiom literalEnumerationAxiom, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		if (!validate_NoCircularContainment(literalEnumerationAxiom, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms(literalEnumerationAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(literalEnumerationAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(literalEnumerationAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(literalEnumerationAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(literalEnumerationAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(literalEnumerationAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(literalEnumerationAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(literalEnumerationAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validateElement_extraValidate(literalEnumerationAxiom, diagnostics, context);
 		return result;
 	}
 

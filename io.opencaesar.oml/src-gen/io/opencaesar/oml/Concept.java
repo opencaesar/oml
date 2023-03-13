@@ -68,20 +68,20 @@ public interface Concept extends Entity {
 
 	/**
 	 * Returns the value of the '<em><b>Owned Enumeration</b></em>' containment reference.
-	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.EnumerationAxiom#getOwningConcept <em>Owning Concept</em>}'.
+	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.InstanceEnumerationAxiom#getOwningConcept <em>Owning Concept</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * An enumeration of instances of this concept
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Owned Enumeration</em>' containment reference.
-	 * @see #setOwnedEnumeration(EnumerationAxiom)
+	 * @see #setOwnedEnumeration(InstanceEnumerationAxiom)
 	 * @see io.opencaesar.oml.OmlPackage#getConcept_OwnedEnumeration()
-	 * @see io.opencaesar.oml.EnumerationAxiom#getOwningConcept
+	 * @see io.opencaesar.oml.InstanceEnumerationAxiom#getOwningConcept
 	 * @model opposite="owningConcept" containment="true"
 	 * @generated
 	 */
-	EnumerationAxiom getOwnedEnumeration();
+	InstanceEnumerationAxiom getOwnedEnumeration();
 
 	/**
 	 * Sets the value of the '{@link io.opencaesar.oml.Concept#getOwnedEnumeration <em>Owned Enumeration</em>}' containment reference.
@@ -91,6 +91,6 @@ public interface Concept extends Entity {
 	 * @see #getOwnedEnumeration()
 	 * @generated
 	 */
-	void setOwnedEnumeration(EnumerationAxiom value);
+	void setOwnedEnumeration(InstanceEnumerationAxiom value);
 
 } // Concept

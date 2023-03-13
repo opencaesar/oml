@@ -295,6 +295,29 @@ public class OmlItemProviderAdapterFactory extends OmlAdapterFactory implements 
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.Scalar} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ScalarItemProvider scalarItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link io.opencaesar.oml.Scalar}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createScalarAdapter() {
+		if (scalarItemProvider == null) {
+			scalarItemProvider = new ScalarItemProvider(this);
+		}
+
+		return scalarItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.Structure} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -384,52 +407,6 @@ public class OmlItemProviderAdapterFactory extends OmlAdapterFactory implements 
 		}
 
 		return relationEntityItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.FacetedScalar} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected FacetedScalarItemProvider facetedScalarItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.FacetedScalar}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createFacetedScalarAdapter() {
-		if (facetedScalarItemProvider == null) {
-			facetedScalarItemProvider = new FacetedScalarItemProvider(this);
-		}
-
-		return facetedScalarItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.EnumeratedScalar} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected EnumeratedScalarItemProvider enumeratedScalarItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.EnumeratedScalar}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createEnumeratedScalarAdapter() {
-		if (enumeratedScalarItemProvider == null) {
-			enumeratedScalarItemProvider = new EnumeratedScalarItemProvider(this);
-		}
-
-		return enumeratedScalarItemProvider;
 	}
 
 	/**
@@ -686,26 +663,49 @@ public class OmlItemProviderAdapterFactory extends OmlAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.EnumerationAxiom} instances.
+	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.InstanceEnumerationAxiom} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected EnumerationAxiomItemProvider enumerationAxiomItemProvider;
+	protected InstanceEnumerationAxiomItemProvider instanceEnumerationAxiomItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.EnumerationAxiom}.
+	 * This creates an adapter for a {@link io.opencaesar.oml.InstanceEnumerationAxiom}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createEnumerationAxiomAdapter() {
-		if (enumerationAxiomItemProvider == null) {
-			enumerationAxiomItemProvider = new EnumerationAxiomItemProvider(this);
+	public Adapter createInstanceEnumerationAxiomAdapter() {
+		if (instanceEnumerationAxiomItemProvider == null) {
+			instanceEnumerationAxiomItemProvider = new InstanceEnumerationAxiomItemProvider(this);
 		}
 
-		return enumerationAxiomItemProvider;
+		return instanceEnumerationAxiomItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.LiteralEnumerationAxiom} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected LiteralEnumerationAxiomItemProvider literalEnumerationAxiomItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link io.opencaesar.oml.LiteralEnumerationAxiom}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createLiteralEnumerationAxiomAdapter() {
+		if (literalEnumerationAxiomItemProvider == null) {
+			literalEnumerationAxiomItemProvider = new LiteralEnumerationAxiomItemProvider(this);
+		}
+
+		return literalEnumerationAxiomItemProvider;
 	}
 
 	/**
@@ -1190,12 +1190,11 @@ public class OmlItemProviderAdapterFactory extends OmlAdapterFactory implements 
 		if (descriptionBundleItemProvider != null) descriptionBundleItemProvider.dispose();
 		if (ruleItemProvider != null) ruleItemProvider.dispose();
 		if (builtInItemProvider != null) builtInItemProvider.dispose();
+		if (scalarItemProvider != null) scalarItemProvider.dispose();
 		if (structureItemProvider != null) structureItemProvider.dispose();
 		if (aspectItemProvider != null) aspectItemProvider.dispose();
 		if (conceptItemProvider != null) conceptItemProvider.dispose();
 		if (relationEntityItemProvider != null) relationEntityItemProvider.dispose();
-		if (facetedScalarItemProvider != null) facetedScalarItemProvider.dispose();
-		if (enumeratedScalarItemProvider != null) enumeratedScalarItemProvider.dispose();
 		if (annotationPropertyItemProvider != null) annotationPropertyItemProvider.dispose();
 		if (scalarPropertyItemProvider != null) scalarPropertyItemProvider.dispose();
 		if (structuredPropertyItemProvider != null) structuredPropertyItemProvider.dispose();
@@ -1207,7 +1206,8 @@ public class OmlItemProviderAdapterFactory extends OmlAdapterFactory implements 
 		if (structureInstanceItemProvider != null) structureInstanceItemProvider.dispose();
 		if (keyAxiomItemProvider != null) keyAxiomItemProvider.dispose();
 		if (specializationAxiomItemProvider != null) specializationAxiomItemProvider.dispose();
-		if (enumerationAxiomItemProvider != null) enumerationAxiomItemProvider.dispose();
+		if (instanceEnumerationAxiomItemProvider != null) instanceEnumerationAxiomItemProvider.dispose();
+		if (literalEnumerationAxiomItemProvider != null) literalEnumerationAxiomItemProvider.dispose();
 		if (propertyRangeRestrictionAxiomItemProvider != null) propertyRangeRestrictionAxiomItemProvider.dispose();
 		if (propertyCardinalityRestrictionAxiomItemProvider != null) propertyCardinalityRestrictionAxiomItemProvider.dispose();
 		if (propertyValueRestrictionAxiomItemProvider != null) propertyValueRestrictionAxiomItemProvider.dispose();

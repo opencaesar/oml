@@ -24,6 +24,7 @@ import io.opencaesar.oml.Relation;
 import io.opencaesar.oml.RelationBase;
 import io.opencaesar.oml.ReverseRelation;
 import io.opencaesar.oml.SemanticProperty;
+import io.opencaesar.oml.SpecializableProperty;
 import io.opencaesar.oml.SpecializableTerm;
 import io.opencaesar.oml.SpecializationAxiom;
 import io.opencaesar.oml.Statement;
@@ -984,6 +985,11 @@ public class UnreifiedRelationImpl extends RelationImpl implements UnreifiedRela
 				default: return -1;
 			}
 		}
+		if (baseClass == SpecializableProperty.class) {
+			switch (derivedFeatureID) {
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -1023,6 +1029,11 @@ public class UnreifiedRelationImpl extends RelationImpl implements UnreifiedRela
 				case OmlPackage.RELATION_BASE__REFLEXIVE: return OmlPackage.UNREIFIED_RELATION__REFLEXIVE;
 				case OmlPackage.RELATION_BASE__IRREFLEXIVE: return OmlPackage.UNREIFIED_RELATION__IRREFLEXIVE;
 				case OmlPackage.RELATION_BASE__TRANSITIVE: return OmlPackage.UNREIFIED_RELATION__TRANSITIVE;
+				default: return -1;
+			}
+		}
+		if (baseClass == SpecializableProperty.class) {
+			switch (baseFeatureID) {
 				default: return -1;
 			}
 		}
@@ -1067,6 +1078,11 @@ public class UnreifiedRelationImpl extends RelationImpl implements UnreifiedRela
 			}
 		}
 		if (baseClass == RelationBase.class) {
+			switch (baseOperationID) {
+				default: return -1;
+			}
+		}
+		if (baseClass == SpecializableProperty.class) {
 			switch (baseOperationID) {
 				default: return -1;
 			}

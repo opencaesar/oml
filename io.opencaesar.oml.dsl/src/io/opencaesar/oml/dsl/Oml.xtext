@@ -92,7 +92,7 @@ Concept:
 	('concept' name=ID | 'ref' 'concept' ref=[Concept|Ref]) (':>' ownedSpecializations+=SpecializationAxiom (',' ownedSpecializations+=SpecializationAxiom)*)? ('['
 		(ownedKeys+=KeyAxiom | 
 		 ownedPropertyRestrictions+=PropertyRestrictionAxiom)*
-		(ownedEnumeration=EnumerationAxiom)?
+		(ownedEnumeration=InstanceEnumerationAxiom)?
 	']')?;
 	
 RelationEntity:
@@ -148,13 +148,9 @@ StructuredProperty:
 	']')?;
 
 Scalar:
-	FacetedScalar |
-	EnumeratedScalar;
-
-FacetedScalar:
 	ownedAnnotations+=Annotation*
-	('scalar' name=ID | 'ref' 'scalar' ref=[FacetedScalar|Ref]) (':>' ownedSpecializations+=SpecializationAxiom (',' ownedSpecializations+=SpecializationAxiom)*)? ('['
-		 (('length' length=UnsignedInteger)? &
+	('scalar' name=ID | 'ref' 'scalar' ref=[Scalar|Ref]) (':>' ownedSpecializations+=SpecializationAxiom (',' ownedSpecializations+=SpecializationAxiom)*)? ('['
+		(('length' length=UnsignedInteger)? &
 		 ('minLength' minLength=UnsignedInteger)? &
 		 ('maxLength' maxLength=UnsignedInteger)? &
 		 ('pattern' pattern=STRING)? &
@@ -162,13 +158,8 @@ FacetedScalar:
 		 ('minInclusive' minInclusive=Literal)? &
 		 ('minExclusive' minExclusive=Literal)? &
 		 ('maxInclusive' maxInclusive=Literal)? &
-		 ('maxExclusive' maxExclusive=Literal)?)
-	']')?;
-
-EnumeratedScalar:
-	ownedAnnotations+=Annotation*
-	('enumerated' 'scalar' name=ID | 'ref' 'enumerated' 'scalar' ref=[EnumeratedScalar|Ref]) (':>' ownedSpecializations+=SpecializationAxiom (',' ownedSpecializations+=SpecializationAxiom)*)? ('['
-		(literals+=Literal (',' literals+=Literal)*)?
+		 ('maxExclusive' maxExclusive=Literal)? &
+		 (ownedEnumeration=LiteralEnumerationAxiom)?)
 	']')?;
 
 Relation:
@@ -308,8 +299,11 @@ RelationValueRestrictionAxiom returns PropertyValueRestrictionAxiom:
 KeyAxiom:
 	'key' properties+=[Property|Ref] (',' properties+=[Property|Ref])*;
 
-EnumerationAxiom:
-	'enumerates' instances+=[ConceptInstance|Ref] (',' instances+=[ConceptInstance|Ref])*;
+InstanceEnumerationAxiom:
+	'oneOf' instances+=[ConceptInstance|Ref] (',' instances+=[ConceptInstance|Ref])*;
+
+LiteralEnumerationAxiom:
+	'oneOf' literals+=Literal (',' literals+=Literal)*;
 
 ConceptTypeAssertion returns TypeAssertion:
 	type=[Concept|Ref];

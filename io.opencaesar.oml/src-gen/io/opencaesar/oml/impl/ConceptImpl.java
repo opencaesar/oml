@@ -19,7 +19,7 @@
 package io.opencaesar.oml.impl;
 
 import io.opencaesar.oml.Concept;
-import io.opencaesar.oml.EnumerationAxiom;
+import io.opencaesar.oml.InstanceEnumerationAxiom;
 import io.opencaesar.oml.OmlPackage;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -63,7 +63,7 @@ public class ConceptImpl extends EntityImpl implements Concept {
 	 * @generated
 	 * @ordered
 	 */
-	protected EnumerationAxiom ownedEnumeration;
+	protected InstanceEnumerationAxiom ownedEnumeration;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -130,7 +130,7 @@ public class ConceptImpl extends EntityImpl implements Concept {
 	 * @generated
 	 */
 	@Override
-	public EnumerationAxiom getOwnedEnumeration() {
+	public InstanceEnumerationAxiom getOwnedEnumeration() {
 		return ownedEnumeration;
 	}
 
@@ -139,8 +139,8 @@ public class ConceptImpl extends EntityImpl implements Concept {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetOwnedEnumeration(EnumerationAxiom newOwnedEnumeration, NotificationChain msgs) {
-		EnumerationAxiom oldOwnedEnumeration = ownedEnumeration;
+	public NotificationChain basicSetOwnedEnumeration(InstanceEnumerationAxiom newOwnedEnumeration, NotificationChain msgs) {
+		InstanceEnumerationAxiom oldOwnedEnumeration = ownedEnumeration;
 		ownedEnumeration = newOwnedEnumeration;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OmlPackage.CONCEPT__OWNED_ENUMERATION, oldOwnedEnumeration, newOwnedEnumeration);
@@ -155,13 +155,13 @@ public class ConceptImpl extends EntityImpl implements Concept {
 	 * @generated
 	 */
 	@Override
-	public void setOwnedEnumeration(EnumerationAxiom newOwnedEnumeration) {
+	public void setOwnedEnumeration(InstanceEnumerationAxiom newOwnedEnumeration) {
 		if (newOwnedEnumeration != ownedEnumeration) {
 			NotificationChain msgs = null;
 			if (ownedEnumeration != null)
-				msgs = ((InternalEObject)ownedEnumeration).eInverseRemove(this, OmlPackage.ENUMERATION_AXIOM__OWNING_CONCEPT, EnumerationAxiom.class, msgs);
+				msgs = ((InternalEObject)ownedEnumeration).eInverseRemove(this, OmlPackage.INSTANCE_ENUMERATION_AXIOM__OWNING_CONCEPT, InstanceEnumerationAxiom.class, msgs);
 			if (newOwnedEnumeration != null)
-				msgs = ((InternalEObject)newOwnedEnumeration).eInverseAdd(this, OmlPackage.ENUMERATION_AXIOM__OWNING_CONCEPT, EnumerationAxiom.class, msgs);
+				msgs = ((InternalEObject)newOwnedEnumeration).eInverseAdd(this, OmlPackage.INSTANCE_ENUMERATION_AXIOM__OWNING_CONCEPT, InstanceEnumerationAxiom.class, msgs);
 			msgs = basicSetOwnedEnumeration(newOwnedEnumeration, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
@@ -180,7 +180,7 @@ public class ConceptImpl extends EntityImpl implements Concept {
 			case OmlPackage.CONCEPT__OWNED_ENUMERATION:
 				if (ownedEnumeration != null)
 					msgs = ((InternalEObject)ownedEnumeration).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OmlPackage.CONCEPT__OWNED_ENUMERATION, null, msgs);
-				return basicSetOwnedEnumeration((EnumerationAxiom)otherEnd, msgs);
+				return basicSetOwnedEnumeration((InstanceEnumerationAxiom)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -228,7 +228,7 @@ public class ConceptImpl extends EntityImpl implements Concept {
 				setRef((Concept)newValue);
 				return;
 			case OmlPackage.CONCEPT__OWNED_ENUMERATION:
-				setOwnedEnumeration((EnumerationAxiom)newValue);
+				setOwnedEnumeration((InstanceEnumerationAxiom)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -246,7 +246,7 @@ public class ConceptImpl extends EntityImpl implements Concept {
 				setRef((Concept)null);
 				return;
 			case OmlPackage.CONCEPT__OWNED_ENUMERATION:
-				setOwnedEnumeration((EnumerationAxiom)null);
+				setOwnedEnumeration((InstanceEnumerationAxiom)null);
 				return;
 		}
 		super.eUnset(featureID);

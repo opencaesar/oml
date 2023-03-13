@@ -44,9 +44,7 @@ import io.opencaesar.oml.Concept;
 import io.opencaesar.oml.ConceptInstance;
 import io.opencaesar.oml.Element;
 import io.opencaesar.oml.Entity;
-import io.opencaesar.oml.EnumeratedScalar;
-import io.opencaesar.oml.EnumerationAxiom;
-import io.opencaesar.oml.FacetedScalar;
+import io.opencaesar.oml.InstanceEnumerationAxiom;
 import io.opencaesar.oml.KeyAxiom;
 import io.opencaesar.oml.NamedInstance;
 import io.opencaesar.oml.OmlPackage;
@@ -167,13 +165,13 @@ public class OmlIndex {
     // Enumeration Axiom
 
     /**
-     * Finds enumeration axioms that enumerates the given instance
+     * Finds instance enumeration axioms that enumerates the given instance
      * 
      * @param instance The given instance
      * @return A list of enumeration axioms enumerating the given instance
      */
-    public static List<EnumerationAxiom> findEnumerationAxiomsWithEnumeratedInstance(ConceptInstance instance) {
-        return findInverseReferencers(instance, EnumerationAxiom.class, OmlPackage.Literals.ENUMERATION_AXIOM__INSTANCES);
+    public static List<InstanceEnumerationAxiom> findEnumerationAxiomsWithEnumeratedInstance(ConceptInstance instance) {
+        return findInverseReferencers(instance, InstanceEnumerationAxiom.class, OmlPackage.Literals.INSTANCE_ENUMERATION_AXIOM__INSTANCES);
     }
 
     // RelationBase
@@ -360,28 +358,16 @@ public class OmlIndex {
         return findInverseReferencers(property, StructuredProperty.class, OmlPackage.Literals.STRUCTURED_PROPERTY__REF);
     }
     
-    // FacetedScalar
+    // Scalar
     
     /**
-     * Finds faceted scalar referencing the given faceted scalar
+     * Finds scalar referencing the given scalar
      * 
-     * @param scalar The referenced faceted scalar
-     * @return A list of referencing faceted scalars
+     * @param scalar The referenced scalar
+     * @return A list of referencing scalars
      */
-    public static List<FacetedScalar> findFacetedScalarsWithRef(FacetedScalar scalar) {
-        return findInverseReferencers(scalar, FacetedScalar.class, OmlPackage.Literals.FACETED_SCALAR__REF);
-    }
-    
-    // EnumeratedScalar
-    
-    /**
-     * Finds enumerated scalar references referencing the given enumerated scalar
-     * 
-     * @param scalar The referenced enumerated scalar
-     * @return A list of referencing enumerated scalars
-     */
-    public static List<EnumeratedScalar> findEnumeratedScalarsWithRef(EnumeratedScalar scalar) {
-        return findInverseReferencers(scalar, EnumeratedScalar.class, OmlPackage.Literals.ENUMERATED_SCALAR__REF);
+    public static List<Scalar> findScalarsWithRef(Scalar scalar) {
+        return findInverseReferencers(scalar, Scalar.class, OmlPackage.Literals.SCALAR__REF);
     }
     
     // UnreifiedRelation

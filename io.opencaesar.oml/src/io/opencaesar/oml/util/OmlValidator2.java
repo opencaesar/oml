@@ -42,8 +42,6 @@ import io.opencaesar.oml.ConceptInstance;
 import io.opencaesar.oml.Description;
 import io.opencaesar.oml.DescriptionBundle;
 import io.opencaesar.oml.Element;
-import io.opencaesar.oml.EnumeratedScalar;
-import io.opencaesar.oml.FacetedScalar;
 import io.opencaesar.oml.Import;
 import io.opencaesar.oml.ImportKind;
 import io.opencaesar.oml.Instance;
@@ -501,7 +499,6 @@ public final class OmlValidator2 {
 	        final EClass superEClass = superTerm.eClass();
 	        final EClass subEClass = subTerm.eClass();
 	        if (!((OmlPackage.Literals.ASPECT == superEClass && OmlPackage.Literals.ENTITY.isSuperTypeOf(subEClass)) ||
-	            (OmlPackage.Literals.FACETED_SCALAR == superEClass && OmlPackage.Literals.ENUMERATED_SCALAR == subEClass) ||
 	            (superEClass == subEClass))) {
 	            return report(Diagnostic.ERROR, diagnostics, object,
 	                "SpecializableTerm "+superTerm.getAbbreviatedIri()+" cannot be specialized by "+subTerm.getAbbreviatedIri()+"", 
@@ -514,59 +511,41 @@ public final class OmlValidator2 {
     // Faceted Scalar
     
     /**
-     * Checks the inheritance rules of faceted scalars
+     * Checks the inheritance rules of scalars
      * 
-     * @param object The faceted scalar to check
+     * @param object The scalar to check
      * @param diagnostics The validation diagnostics
      * @param context The object-to-object context map
      * @return True if the rules is satisfied; False otherwise
      */
-    protected boolean validateFacetedScalarSupertype(FacetedScalar object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-        if (object.getLanguage() != null ||
-        	object.getLength() != null ||
-            object.getMaxLength() != null ||
-        	object.getMinLength() != null ||
-        	object.getMaxExclusive() != null ||
-        	object.getMaxInclusive() != null ||
-        	object.getMinExclusive() != null ||
-        	object.getMinInclusive() != null) {
-        	var singleStandardGeneral = false;
-        	var specializations = object.getOwnedSpecializations();
-        	if (specializations.size() == 1) {
-        		var general = (Scalar) specializations.get(0).getSuperTerm();
-            	singleStandardGeneral = isStandardScalar(general);
-        	}
-        	if (!singleStandardGeneral) {
+    protected boolean validateScalarSupertype(Scalar object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+    	var specializations = object.getOwnedSpecializations();
+    	if (!OmlRead.isStandardScalar(object)) {
+	    	if (object.getLanguage() != null ||
+	        	object.getLength() != null ||
+	            object.getMaxLength() != null ||
+	        	object.getMinLength() != null ||
+	        	object.getMaxExclusive() != null ||
+	        	object.getMaxInclusive() != null ||
+	        	object.getMinExclusive() != null ||
+	        	object.getMinInclusive() != null ||
+	        	object.getOwnedEnumeration() != null) 
+	        {
+	        	var singleStandardGeneral = false;
+	        	if (specializations.size() == 1) {
+	        		var general = (Scalar) specializations.get(0).getSuperTerm();
+	            	singleStandardGeneral = OmlRead.isStandardScalar(general);
+	        	}
+	        	if (!singleStandardGeneral) {
+	                return report(Diagnostic.ERROR, diagnostics, object,
+	                	"Non-standard scalar "+object.getAbbreviatedIri()+" with facets must specify a single standard supertype", 
+	    	            OmlPackage.Literals.MEMBER__NAME);
+	        	}
+	        } else if (specializations.isEmpty()) {
                 return report(Diagnostic.ERROR, diagnostics, object,
-                	"Faceted scalar "+object.getAbbreviatedIri()+" with facets must specify a single standard supertype", 
+                	"Non-standard scalar "+object.getAbbreviatedIri()+" with no facets must specify a supertype", 
     	            OmlPackage.Literals.MEMBER__NAME);
-        	}
-        } else {
-        	var specializations = object.getOwnedSpecializations();
-            if (specializations.isEmpty() && !isStandardScalar(object)) {
-                return report(Diagnostic.ERROR, diagnostics, object,
-                	"Faceted scalar "+object.getAbbreviatedIri()+" is non-standard hence must specify a supertype", 
-    	            OmlPackage.Literals.MEMBER__NAME);
-            }
-        }
-        return true;
-    }
-
-    // Enumerated Scalar
-
-    /**
-     * Checks an enumerated scalar's literals and supertype rules
-     * 
-     * @param object The enumerated scalar to check
-     * @param diagnostics The validation diagnostics
-     * @param context The object-to-object context map
-     * @return True if the rules is satisfied; False otherwise
-     */
-    protected boolean validateEnumeratedScalarLiterals(EnumeratedScalar object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-    	if (object.getLiterals().isEmpty() && object.getOwnedSpecializations().isEmpty()) {
-            return report(Diagnostic.ERROR, diagnostics, object,
-                "Enumerated scalar "+object.getAbbreviatedIri()+" must specify literals or supertypes", 
-                OmlPackage.Literals.MEMBER__NAME);
+	        }
     	}
         return true;
     }
@@ -747,7 +726,7 @@ public final class OmlValidator2 {
     protected boolean validateQuotedLiteral(QuotedLiteral object, DiagnosticChain diagnostics, Map<Object, Object> context) {
     	var scalar = object.getType();
     	if (scalar != null) {
-	    	if (!isStandardScalar(scalar)) {
+	    	if (!OmlRead.isStandardScalar(scalar)) {
 	            return report(Diagnostic.ERROR, diagnostics, object,
 	                "Quoted Literal \""+object.getValue()+"\" is not typed by a standard scalar", 
 	                OmlPackage.Literals.QUOTED_LITERAL__TYPE);
@@ -755,25 +734,7 @@ public final class OmlValidator2 {
     	}
         return true;
     }
-    
-    /*
-     * Returns if the given scalar iis a standard one
-     *  
-     * @param scalar the given scalar
-     * @return whetehr the scalar is standard
-     */
-    private boolean isStandardScalar(Scalar scalar) {
-    	var ontology = scalar.getOntology();
-    	if (ontology != null) {
-	    	var ontologyNs = ontology.getNamespace();
-	    	return ontologyNs.equals(OmlConstants.XSD_NS) ||
-	            	ontologyNs.equals(OmlConstants.RDF_NS) ||
-	            	ontologyNs.equals(OmlConstants.RDFS_NS) ||
-	            	ontologyNs.equals(OmlConstants.OWL_NS);
-    	}
-    	return false;
-    }
-    
+        
     // Assertions
 
     /**
@@ -928,27 +889,6 @@ public final class OmlValidator2 {
         return result;
     }
     
-    /**
-     * Checks that an enumerated scalar has correct feature cardinalities
-     * 
-     * @param object The scalar to check
-     * @param diagnostics The validation diagnostics
-     * @param context The object-to-object context map
-     * @return True if the rules is satisfied; False otherwise
-     */
-    protected boolean validateEnumeratedScalarCardinalities(EnumeratedScalar object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-        boolean result = true;
-    	if (object.getName() == null) {
-        	if (!object.getLiterals().isEmpty()) {
-	        	report(Diagnostic.ERROR, diagnostics, object,
-	                "Scalar "+object.getAbbreviatedIri()+" cannot respecify enumerated literals",
-	                OmlPackage.Literals.ENUMERATED_SCALAR__LITERALS);
-	        	result = false;
-        	}
-        }
-        return result;
-    }
-
     /**
      * Checks that a scalar property base the correct feature cardinalities
      * 

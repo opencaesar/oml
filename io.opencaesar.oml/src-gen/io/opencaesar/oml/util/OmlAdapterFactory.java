@@ -204,6 +204,10 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 				return createRelationBaseAdapter();
 			}
 			@Override
+			public Adapter caseSpecializableProperty(SpecializableProperty object) {
+				return createSpecializablePropertyAdapter();
+			}
+			@Override
 			public Adapter caseClassifier(Classifier object) {
 				return createClassifierAdapter();
 			}
@@ -230,14 +234,6 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseRelationEntity(RelationEntity object) {
 				return createRelationEntityAdapter();
-			}
-			@Override
-			public Adapter caseFacetedScalar(FacetedScalar object) {
-				return createFacetedScalarAdapter();
-			}
-			@Override
-			public Adapter caseEnumeratedScalar(EnumeratedScalar object) {
-				return createEnumeratedScalarAdapter();
 			}
 			@Override
 			public Adapter caseAnnotationProperty(AnnotationProperty object) {
@@ -296,12 +292,16 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 				return createSpecializationAxiomAdapter();
 			}
 			@Override
-			public Adapter caseEnumerationAxiom(EnumerationAxiom object) {
-				return createEnumerationAxiomAdapter();
+			public Adapter caseInstanceEnumerationAxiom(InstanceEnumerationAxiom object) {
+				return createInstanceEnumerationAxiomAdapter();
 			}
 			@Override
 			public Adapter casePropertyRestrictionAxiom(PropertyRestrictionAxiom object) {
 				return createPropertyRestrictionAxiomAdapter();
+			}
+			@Override
+			public Adapter caseLiteralEnumerationAxiom(LiteralEnumerationAxiom object) {
+				return createLiteralEnumerationAxiomAdapter();
 			}
 			@Override
 			public Adapter casePropertyRangeRestrictionAxiom(PropertyRangeRestrictionAxiom object) {
@@ -816,6 +816,20 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.SpecializableProperty <em>Specializable Property</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see io.opencaesar.oml.SpecializableProperty
+	 * @generated
+	 */
+	public Adapter createSpecializablePropertyAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.Classifier <em>Classifier</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -910,34 +924,6 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createRelationEntityAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.FacetedScalar <em>Faceted Scalar</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.FacetedScalar
-	 * @generated
-	 */
-	public Adapter createFacetedScalarAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.EnumeratedScalar <em>Enumerated Scalar</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.EnumeratedScalar
-	 * @generated
-	 */
-	public Adapter createEnumeratedScalarAdapter() {
 		return null;
 	}
 
@@ -1138,16 +1124,16 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.EnumerationAxiom <em>Enumeration Axiom</em>}'.
+	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.InstanceEnumerationAxiom <em>Instance Enumeration Axiom</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see io.opencaesar.oml.EnumerationAxiom
+	 * @see io.opencaesar.oml.InstanceEnumerationAxiom
 	 * @generated
 	 */
-	public Adapter createEnumerationAxiomAdapter() {
+	public Adapter createInstanceEnumerationAxiomAdapter() {
 		return null;
 	}
 
@@ -1162,6 +1148,20 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createPropertyRestrictionAxiomAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.LiteralEnumerationAxiom <em>Literal Enumeration Axiom</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see io.opencaesar.oml.LiteralEnumerationAxiom
+	 * @generated
+	 */
+	public Adapter createLiteralEnumerationAxiomAdapter() {
 		return null;
 	}
 

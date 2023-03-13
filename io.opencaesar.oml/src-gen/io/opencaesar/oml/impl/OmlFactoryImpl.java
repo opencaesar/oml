@@ -87,12 +87,11 @@ public class OmlFactoryImpl extends EFactoryImpl implements OmlFactory {
 			case OmlPackage.DESCRIPTION_BUNDLE: return createDescriptionBundle();
 			case OmlPackage.RULE: return createRule();
 			case OmlPackage.BUILT_IN: return createBuiltIn();
+			case OmlPackage.SCALAR: return createScalar();
 			case OmlPackage.STRUCTURE: return createStructure();
 			case OmlPackage.ASPECT: return createAspect();
 			case OmlPackage.CONCEPT: return createConcept();
 			case OmlPackage.RELATION_ENTITY: return createRelationEntity();
-			case OmlPackage.FACETED_SCALAR: return createFacetedScalar();
-			case OmlPackage.ENUMERATED_SCALAR: return createEnumeratedScalar();
 			case OmlPackage.ANNOTATION_PROPERTY: return createAnnotationProperty();
 			case OmlPackage.SCALAR_PROPERTY: return createScalarProperty();
 			case OmlPackage.STRUCTURED_PROPERTY: return createStructuredProperty();
@@ -104,7 +103,8 @@ public class OmlFactoryImpl extends EFactoryImpl implements OmlFactory {
 			case OmlPackage.STRUCTURE_INSTANCE: return createStructureInstance();
 			case OmlPackage.KEY_AXIOM: return createKeyAxiom();
 			case OmlPackage.SPECIALIZATION_AXIOM: return createSpecializationAxiom();
-			case OmlPackage.ENUMERATION_AXIOM: return createEnumerationAxiom();
+			case OmlPackage.INSTANCE_ENUMERATION_AXIOM: return createInstanceEnumerationAxiom();
+			case OmlPackage.LITERAL_ENUMERATION_AXIOM: return createLiteralEnumerationAxiom();
 			case OmlPackage.PROPERTY_RANGE_RESTRICTION_AXIOM: return createPropertyRangeRestrictionAxiom();
 			case OmlPackage.PROPERTY_CARDINALITY_RESTRICTION_AXIOM: return createPropertyCardinalityRestrictionAxiom();
 			case OmlPackage.PROPERTY_VALUE_RESTRICTION_AXIOM: return createPropertyValueRestrictionAxiom();
@@ -293,6 +293,17 @@ public class OmlFactoryImpl extends EFactoryImpl implements OmlFactory {
 	 * @generated
 	 */
 	@Override
+	public Scalar createScalar() {
+		ScalarImpl scalar = new ScalarImpl();
+		return scalar;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Structure createStructure() {
 		StructureImpl structure = new StructureImpl();
 		return structure;
@@ -329,28 +340,6 @@ public class OmlFactoryImpl extends EFactoryImpl implements OmlFactory {
 	public RelationEntity createRelationEntity() {
 		RelationEntityImpl relationEntity = new RelationEntityImpl();
 		return relationEntity;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public FacetedScalar createFacetedScalar() {
-		FacetedScalarImpl facetedScalar = new FacetedScalarImpl();
-		return facetedScalar;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EnumeratedScalar createEnumeratedScalar() {
-		EnumeratedScalarImpl enumeratedScalar = new EnumeratedScalarImpl();
-		return enumeratedScalar;
 	}
 
 	/**
@@ -480,9 +469,20 @@ public class OmlFactoryImpl extends EFactoryImpl implements OmlFactory {
 	 * @generated
 	 */
 	@Override
-	public EnumerationAxiom createEnumerationAxiom() {
-		EnumerationAxiomImpl enumerationAxiom = new EnumerationAxiomImpl();
-		return enumerationAxiom;
+	public InstanceEnumerationAxiom createInstanceEnumerationAxiom() {
+		InstanceEnumerationAxiomImpl instanceEnumerationAxiom = new InstanceEnumerationAxiomImpl();
+		return instanceEnumerationAxiom;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public LiteralEnumerationAxiom createLiteralEnumerationAxiom() {
+		LiteralEnumerationAxiomImpl literalEnumerationAxiom = new LiteralEnumerationAxiomImpl();
+		return literalEnumerationAxiom;
 	}
 
 	/**

@@ -178,7 +178,7 @@ public class ConceptItemProvider extends EntityItemProvider {
 		newChildDescriptors.add
 			(createChildParameter
 				(OmlPackage.Literals.CONCEPT__OWNED_ENUMERATION,
-				 OmlFactory.eINSTANCE.createEnumerationAxiom()));
+				 OmlFactory.eINSTANCE.createInstanceEnumerationAxiom()));
 	}
 
 }

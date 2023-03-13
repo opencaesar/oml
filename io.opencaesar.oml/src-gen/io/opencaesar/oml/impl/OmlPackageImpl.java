@@ -42,17 +42,16 @@ import io.opencaesar.oml.DifferentFromPredicate;
 import io.opencaesar.oml.DoubleLiteral;
 import io.opencaesar.oml.Element;
 import io.opencaesar.oml.Entity;
-import io.opencaesar.oml.EnumeratedScalar;
-import io.opencaesar.oml.EnumerationAxiom;
-import io.opencaesar.oml.FacetedScalar;
 import io.opencaesar.oml.ForwardRelation;
 import io.opencaesar.oml.IdentifiedElement;
 import io.opencaesar.oml.Import;
 import io.opencaesar.oml.ImportKind;
 import io.opencaesar.oml.Instance;
+import io.opencaesar.oml.InstanceEnumerationAxiom;
 import io.opencaesar.oml.IntegerLiteral;
 import io.opencaesar.oml.KeyAxiom;
 import io.opencaesar.oml.Literal;
+import io.opencaesar.oml.LiteralEnumerationAxiom;
 import io.opencaesar.oml.Member;
 import io.opencaesar.oml.NamedInstance;
 import io.opencaesar.oml.OmlFactory;
@@ -80,6 +79,7 @@ import io.opencaesar.oml.Scalar;
 import io.opencaesar.oml.ScalarProperty;
 import io.opencaesar.oml.SemanticProperty;
 import io.opencaesar.oml.SeparatorKind;
+import io.opencaesar.oml.SpecializableProperty;
 import io.opencaesar.oml.SpecializableTerm;
 import io.opencaesar.oml.SpecializationAxiom;
 import io.opencaesar.oml.Statement;
@@ -337,6 +337,13 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass specializablePropertyEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass classifierEClass = null;
 
 	/**
@@ -380,20 +387,6 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	private EClass relationEntityEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass facetedScalarEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass enumeratedScalarEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -498,7 +491,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass enumerationAxiomEClass = null;
+	private EClass instanceEnumerationAxiomEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -506,6 +499,13 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	private EClass propertyRestrictionAxiomEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass literalEnumerationAxiomEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1605,6 +1605,16 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
+	public EClass getSpecializableProperty() {
+		return specializablePropertyEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getClassifier() {
 		return classifierEClass;
 	}
@@ -1627,6 +1637,116 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	@Override
 	public EClass getScalar() {
 		return scalarEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getScalar_Ref() {
+		return (EReference)scalarEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getScalar_Length() {
+		return (EAttribute)scalarEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getScalar_MinLength() {
+		return (EAttribute)scalarEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getScalar_MaxLength() {
+		return (EAttribute)scalarEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getScalar_Pattern() {
+		return (EAttribute)scalarEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getScalar_Language() {
+		return (EAttribute)scalarEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getScalar_MinInclusive() {
+		return (EReference)scalarEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getScalar_MinExclusive() {
+		return (EReference)scalarEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getScalar_MaxInclusive() {
+		return (EReference)scalarEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getScalar_MaxExclusive() {
+		return (EReference)scalarEClass.getEStructuralFeatures().get(9);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getScalar_OwnedEnumeration() {
+		return (EReference)scalarEClass.getEStructuralFeatures().get(10);
 	}
 
 	/**
@@ -1747,146 +1867,6 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	@Override
 	public EReference getRelationEntity_ForwardRelation() {
 		return (EReference)relationEntityEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getFacetedScalar() {
-		return facetedScalarEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getFacetedScalar_Ref() {
-		return (EReference)facetedScalarEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getFacetedScalar_Length() {
-		return (EAttribute)facetedScalarEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getFacetedScalar_MinLength() {
-		return (EAttribute)facetedScalarEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getFacetedScalar_MaxLength() {
-		return (EAttribute)facetedScalarEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getFacetedScalar_Pattern() {
-		return (EAttribute)facetedScalarEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getFacetedScalar_Language() {
-		return (EAttribute)facetedScalarEClass.getEStructuralFeatures().get(5);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getFacetedScalar_MinInclusive() {
-		return (EReference)facetedScalarEClass.getEStructuralFeatures().get(6);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getFacetedScalar_MinExclusive() {
-		return (EReference)facetedScalarEClass.getEStructuralFeatures().get(7);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getFacetedScalar_MaxInclusive() {
-		return (EReference)facetedScalarEClass.getEStructuralFeatures().get(8);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getFacetedScalar_MaxExclusive() {
-		return (EReference)facetedScalarEClass.getEStructuralFeatures().get(9);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getEnumeratedScalar() {
-		return enumeratedScalarEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getEnumeratedScalar_Ref() {
-		return (EReference)enumeratedScalarEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getEnumeratedScalar_Literals() {
-		return (EReference)enumeratedScalarEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -2665,8 +2645,8 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EClass getEnumerationAxiom() {
-		return enumerationAxiomEClass;
+	public EClass getInstanceEnumerationAxiom() {
+		return instanceEnumerationAxiomEClass;
 	}
 
 	/**
@@ -2675,8 +2655,8 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getEnumerationAxiom_Instances() {
-		return (EReference)enumerationAxiomEClass.getEStructuralFeatures().get(0);
+	public EReference getInstanceEnumerationAxiom_Instances() {
+		return (EReference)instanceEnumerationAxiomEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -2685,8 +2665,8 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getEnumerationAxiom_OwningConcept() {
-		return (EReference)enumerationAxiomEClass.getEStructuralFeatures().get(1);
+	public EReference getInstanceEnumerationAxiom_OwningConcept() {
+		return (EReference)instanceEnumerationAxiomEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -2695,8 +2675,8 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EOperation getEnumerationAxiom__GetEnumeratedConcept() {
-		return enumerationAxiomEClass.getEOperations().get(0);
+	public EOperation getInstanceEnumerationAxiom__GetEnumeratedConcept() {
+		return instanceEnumerationAxiomEClass.getEOperations().get(0);
 	}
 
 	/**
@@ -2737,6 +2717,46 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	@Override
 	public EOperation getPropertyRestrictionAxiom__GetRestrictingDomain() {
 		return propertyRestrictionAxiomEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getLiteralEnumerationAxiom() {
+		return literalEnumerationAxiomEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getLiteralEnumerationAxiom_Literals() {
+		return (EReference)literalEnumerationAxiomEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getLiteralEnumerationAxiom_OwningScalar() {
+		return (EReference)literalEnumerationAxiomEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getLiteralEnumerationAxiom__GetEnumeratedScalar() {
+		return literalEnumerationAxiomEClass.getEOperations().get(0);
 	}
 
 	/**
@@ -3491,10 +3511,23 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		createEAttribute(relationBaseEClass, RELATION_BASE__IRREFLEXIVE);
 		createEAttribute(relationBaseEClass, RELATION_BASE__TRANSITIVE);
 
+		specializablePropertyEClass = createEClass(SPECIALIZABLE_PROPERTY);
+
 		classifierEClass = createEClass(CLASSIFIER);
 		createEReference(classifierEClass, CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS);
 
 		scalarEClass = createEClass(SCALAR);
+		createEReference(scalarEClass, SCALAR__REF);
+		createEAttribute(scalarEClass, SCALAR__LENGTH);
+		createEAttribute(scalarEClass, SCALAR__MIN_LENGTH);
+		createEAttribute(scalarEClass, SCALAR__MAX_LENGTH);
+		createEAttribute(scalarEClass, SCALAR__PATTERN);
+		createEAttribute(scalarEClass, SCALAR__LANGUAGE);
+		createEReference(scalarEClass, SCALAR__MIN_INCLUSIVE);
+		createEReference(scalarEClass, SCALAR__MIN_EXCLUSIVE);
+		createEReference(scalarEClass, SCALAR__MAX_INCLUSIVE);
+		createEReference(scalarEClass, SCALAR__MAX_EXCLUSIVE);
+		createEReference(scalarEClass, SCALAR__OWNED_ENUMERATION);
 
 		entityEClass = createEClass(ENTITY);
 		createEReference(entityEClass, ENTITY__OWNED_KEYS);
@@ -3512,22 +3545,6 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		relationEntityEClass = createEClass(RELATION_ENTITY);
 		createEReference(relationEntityEClass, RELATION_ENTITY__REF);
 		createEReference(relationEntityEClass, RELATION_ENTITY__FORWARD_RELATION);
-
-		facetedScalarEClass = createEClass(FACETED_SCALAR);
-		createEReference(facetedScalarEClass, FACETED_SCALAR__REF);
-		createEAttribute(facetedScalarEClass, FACETED_SCALAR__LENGTH);
-		createEAttribute(facetedScalarEClass, FACETED_SCALAR__MIN_LENGTH);
-		createEAttribute(facetedScalarEClass, FACETED_SCALAR__MAX_LENGTH);
-		createEAttribute(facetedScalarEClass, FACETED_SCALAR__PATTERN);
-		createEAttribute(facetedScalarEClass, FACETED_SCALAR__LANGUAGE);
-		createEReference(facetedScalarEClass, FACETED_SCALAR__MIN_INCLUSIVE);
-		createEReference(facetedScalarEClass, FACETED_SCALAR__MIN_EXCLUSIVE);
-		createEReference(facetedScalarEClass, FACETED_SCALAR__MAX_INCLUSIVE);
-		createEReference(facetedScalarEClass, FACETED_SCALAR__MAX_EXCLUSIVE);
-
-		enumeratedScalarEClass = createEClass(ENUMERATED_SCALAR);
-		createEReference(enumeratedScalarEClass, ENUMERATED_SCALAR__REF);
-		createEReference(enumeratedScalarEClass, ENUMERATED_SCALAR__LITERALS);
 
 		annotationPropertyEClass = createEClass(ANNOTATION_PROPERTY);
 		createEReference(annotationPropertyEClass, ANNOTATION_PROPERTY__REF);
@@ -3620,15 +3637,20 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		createEReference(specializationAxiomEClass, SPECIALIZATION_AXIOM__OWNING_TERM);
 		createEOperation(specializationAxiomEClass, SPECIALIZATION_AXIOM___GET_SUB_TERM);
 
-		enumerationAxiomEClass = createEClass(ENUMERATION_AXIOM);
-		createEReference(enumerationAxiomEClass, ENUMERATION_AXIOM__INSTANCES);
-		createEReference(enumerationAxiomEClass, ENUMERATION_AXIOM__OWNING_CONCEPT);
-		createEOperation(enumerationAxiomEClass, ENUMERATION_AXIOM___GET_ENUMERATED_CONCEPT);
+		instanceEnumerationAxiomEClass = createEClass(INSTANCE_ENUMERATION_AXIOM);
+		createEReference(instanceEnumerationAxiomEClass, INSTANCE_ENUMERATION_AXIOM__INSTANCES);
+		createEReference(instanceEnumerationAxiomEClass, INSTANCE_ENUMERATION_AXIOM__OWNING_CONCEPT);
+		createEOperation(instanceEnumerationAxiomEClass, INSTANCE_ENUMERATION_AXIOM___GET_ENUMERATED_CONCEPT);
 
 		propertyRestrictionAxiomEClass = createEClass(PROPERTY_RESTRICTION_AXIOM);
 		createEReference(propertyRestrictionAxiomEClass, PROPERTY_RESTRICTION_AXIOM__PROPERTY);
 		createEReference(propertyRestrictionAxiomEClass, PROPERTY_RESTRICTION_AXIOM__OWNING_CLASSIFIER);
 		createEOperation(propertyRestrictionAxiomEClass, PROPERTY_RESTRICTION_AXIOM___GET_RESTRICTING_DOMAIN);
+
+		literalEnumerationAxiomEClass = createEClass(LITERAL_ENUMERATION_AXIOM);
+		createEReference(literalEnumerationAxiomEClass, LITERAL_ENUMERATION_AXIOM__LITERALS);
+		createEReference(literalEnumerationAxiomEClass, LITERAL_ENUMERATION_AXIOM__OWNING_SCALAR);
+		createEOperation(literalEnumerationAxiomEClass, LITERAL_ENUMERATION_AXIOM___GET_ENUMERATED_SCALAR);
 
 		propertyRangeRestrictionAxiomEClass = createEClass(PROPERTY_RANGE_RESTRICTION_AXIOM);
 		createEAttribute(propertyRangeRestrictionAxiomEClass, PROPERTY_RANGE_RESTRICTION_AXIOM__KIND);
@@ -3777,6 +3799,8 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		propertyEClass.getESuperTypes().add(this.getTerm());
 		typeEClass.getESuperTypes().add(this.getSpecializableTerm());
 		relationBaseEClass.getESuperTypes().add(this.getSpecializableTerm());
+		specializablePropertyEClass.getESuperTypes().add(this.getSpecializableTerm());
+		specializablePropertyEClass.getESuperTypes().add(this.getProperty());
 		classifierEClass.getESuperTypes().add(this.getType());
 		scalarEClass.getESuperTypes().add(this.getType());
 		entityEClass.getESuperTypes().add(this.getClassifier());
@@ -3785,20 +3809,18 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		conceptEClass.getESuperTypes().add(this.getEntity());
 		relationEntityEClass.getESuperTypes().add(this.getEntity());
 		relationEntityEClass.getESuperTypes().add(this.getRelationBase());
-		facetedScalarEClass.getESuperTypes().add(this.getScalar());
-		enumeratedScalarEClass.getESuperTypes().add(this.getScalar());
-		annotationPropertyEClass.getESuperTypes().add(this.getProperty());
-		annotationPropertyEClass.getESuperTypes().add(this.getSpecializableTerm());
+		annotationPropertyEClass.getESuperTypes().add(this.getSpecializableProperty());
 		semanticPropertyEClass.getESuperTypes().add(this.getProperty());
 		scalarPropertyEClass.getESuperTypes().add(this.getSemanticProperty());
-		scalarPropertyEClass.getESuperTypes().add(this.getSpecializableTerm());
+		scalarPropertyEClass.getESuperTypes().add(this.getSpecializableProperty());
 		structuredPropertyEClass.getESuperTypes().add(this.getSemanticProperty());
-		structuredPropertyEClass.getESuperTypes().add(this.getSpecializableTerm());
+		structuredPropertyEClass.getESuperTypes().add(this.getSpecializableProperty());
 		relationEClass.getESuperTypes().add(this.getSemanticProperty());
 		forwardRelationEClass.getESuperTypes().add(this.getRelation());
 		reverseRelationEClass.getESuperTypes().add(this.getRelation());
 		unreifiedRelationEClass.getESuperTypes().add(this.getRelation());
 		unreifiedRelationEClass.getESuperTypes().add(this.getRelationBase());
+		unreifiedRelationEClass.getESuperTypes().add(this.getSpecializableProperty());
 		namedInstanceEClass.getESuperTypes().add(this.getDescriptionStatement());
 		namedInstanceEClass.getESuperTypes().add(this.getInstance());
 		conceptInstanceEClass.getESuperTypes().add(this.getNamedInstance());
@@ -3806,8 +3828,9 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		structureInstanceEClass.getESuperTypes().add(this.getInstance());
 		keyAxiomEClass.getESuperTypes().add(this.getAxiom());
 		specializationAxiomEClass.getESuperTypes().add(this.getAxiom());
-		enumerationAxiomEClass.getESuperTypes().add(this.getAxiom());
+		instanceEnumerationAxiomEClass.getESuperTypes().add(this.getAxiom());
 		propertyRestrictionAxiomEClass.getESuperTypes().add(this.getAxiom());
+		literalEnumerationAxiomEClass.getESuperTypes().add(this.getAxiom());
 		propertyRangeRestrictionAxiomEClass.getESuperTypes().add(this.getPropertyRestrictionAxiom());
 		propertyCardinalityRestrictionAxiomEClass.getESuperTypes().add(this.getPropertyRestrictionAxiom());
 		propertyValueRestrictionAxiomEClass.getESuperTypes().add(this.getPropertyRestrictionAxiom());
@@ -3964,10 +3987,23 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		initEAttribute(getRelationBase_Irreflexive(), theEcorePackage.getEBoolean(), "irreflexive", null, 0, 1, RelationBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getRelationBase_Transitive(), theEcorePackage.getEBoolean(), "transitive", null, 0, 1, RelationBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(specializablePropertyEClass, SpecializableProperty.class, "SpecializableProperty", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
 		initEClass(classifierEClass, Classifier.class, "Classifier", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getClassifier_OwnedPropertyRestrictions(), this.getPropertyRestrictionAxiom(), this.getPropertyRestrictionAxiom_OwningClassifier(), "ownedPropertyRestrictions", null, 0, -1, Classifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(scalarEClass, Scalar.class, "Scalar", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(scalarEClass, Scalar.class, "Scalar", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getScalar_Ref(), this.getScalar(), null, "ref", null, 0, 1, Scalar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getScalar_Length(), this.getUnsignedInteger(), "length", null, 0, 1, Scalar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getScalar_MinLength(), this.getUnsignedInteger(), "minLength", null, 0, 1, Scalar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getScalar_MaxLength(), this.getUnsignedInteger(), "maxLength", null, 0, 1, Scalar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getScalar_Pattern(), theEcorePackage.getEString(), "pattern", null, 0, 1, Scalar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getScalar_Language(), theEcorePackage.getEString(), "language", null, 0, 1, Scalar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getScalar_MinInclusive(), this.getLiteral(), null, "minInclusive", null, 0, 1, Scalar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getScalar_MinExclusive(), this.getLiteral(), null, "minExclusive", null, 0, 1, Scalar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getScalar_MaxInclusive(), this.getLiteral(), null, "maxInclusive", null, 0, 1, Scalar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getScalar_MaxExclusive(), this.getLiteral(), null, "maxExclusive", null, 0, 1, Scalar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getScalar_OwnedEnumeration(), this.getLiteralEnumerationAxiom(), this.getLiteralEnumerationAxiom_OwningScalar(), "ownedEnumeration", null, 0, 1, Scalar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(entityEClass, Entity.class, "Entity", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getEntity_OwnedKeys(), this.getKeyAxiom(), this.getKeyAxiom_OwningEntity(), "ownedKeys", null, 0, -1, Entity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3980,27 +4016,11 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 
 		initEClass(conceptEClass, Concept.class, "Concept", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getConcept_Ref(), this.getConcept(), null, "ref", null, 0, 1, Concept.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getConcept_OwnedEnumeration(), this.getEnumerationAxiom(), this.getEnumerationAxiom_OwningConcept(), "ownedEnumeration", null, 0, 1, Concept.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getConcept_OwnedEnumeration(), this.getInstanceEnumerationAxiom(), this.getInstanceEnumerationAxiom_OwningConcept(), "ownedEnumeration", null, 0, 1, Concept.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(relationEntityEClass, RelationEntity.class, "RelationEntity", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getRelationEntity_Ref(), this.getRelationEntity(), null, "ref", null, 0, 1, RelationEntity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRelationEntity_ForwardRelation(), this.getForwardRelation(), this.getForwardRelation_RelationEntity(), "forwardRelation", null, 0, 1, RelationEntity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(facetedScalarEClass, FacetedScalar.class, "FacetedScalar", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getFacetedScalar_Ref(), this.getFacetedScalar(), null, "ref", null, 0, 1, FacetedScalar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getFacetedScalar_Length(), this.getUnsignedInteger(), "length", null, 0, 1, FacetedScalar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getFacetedScalar_MinLength(), this.getUnsignedInteger(), "minLength", null, 0, 1, FacetedScalar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getFacetedScalar_MaxLength(), this.getUnsignedInteger(), "maxLength", null, 0, 1, FacetedScalar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getFacetedScalar_Pattern(), theEcorePackage.getEString(), "pattern", null, 0, 1, FacetedScalar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getFacetedScalar_Language(), theEcorePackage.getEString(), "language", null, 0, 1, FacetedScalar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getFacetedScalar_MinInclusive(), this.getLiteral(), null, "minInclusive", null, 0, 1, FacetedScalar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getFacetedScalar_MinExclusive(), this.getLiteral(), null, "minExclusive", null, 0, 1, FacetedScalar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getFacetedScalar_MaxInclusive(), this.getLiteral(), null, "maxInclusive", null, 0, 1, FacetedScalar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getFacetedScalar_MaxExclusive(), this.getLiteral(), null, "maxExclusive", null, 0, 1, FacetedScalar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(enumeratedScalarEClass, EnumeratedScalar.class, "EnumeratedScalar", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getEnumeratedScalar_Ref(), this.getEnumeratedScalar(), null, "ref", null, 0, 1, EnumeratedScalar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getEnumeratedScalar_Literals(), this.getLiteral(), null, "literals", null, 0, -1, EnumeratedScalar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(annotationPropertyEClass, AnnotationProperty.class, "AnnotationProperty", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAnnotationProperty_Ref(), this.getAnnotationProperty(), null, "ref", null, 0, 1, AnnotationProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -4132,17 +4152,23 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 
 		initEOperation(getSpecializationAxiom__GetSubTerm(), this.getSpecializableTerm(), "getSubTerm", 0, 1, !IS_UNIQUE, IS_ORDERED);
 
-		initEClass(enumerationAxiomEClass, EnumerationAxiom.class, "EnumerationAxiom", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getEnumerationAxiom_Instances(), this.getConceptInstance(), null, "instances", null, 0, -1, EnumerationAxiom.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getEnumerationAxiom_OwningConcept(), this.getConcept(), this.getConcept_OwnedEnumeration(), "owningConcept", null, 0, 1, EnumerationAxiom.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(instanceEnumerationAxiomEClass, InstanceEnumerationAxiom.class, "InstanceEnumerationAxiom", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getInstanceEnumerationAxiom_Instances(), this.getConceptInstance(), null, "instances", null, 1, -1, InstanceEnumerationAxiom.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getInstanceEnumerationAxiom_OwningConcept(), this.getConcept(), this.getConcept_OwnedEnumeration(), "owningConcept", null, 0, 1, InstanceEnumerationAxiom.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEOperation(getEnumerationAxiom__GetEnumeratedConcept(), this.getConcept(), "getEnumeratedConcept", 0, 1, !IS_UNIQUE, IS_ORDERED);
+		initEOperation(getInstanceEnumerationAxiom__GetEnumeratedConcept(), this.getConcept(), "getEnumeratedConcept", 0, 1, !IS_UNIQUE, IS_ORDERED);
 
 		initEClass(propertyRestrictionAxiomEClass, PropertyRestrictionAxiom.class, "PropertyRestrictionAxiom", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPropertyRestrictionAxiom_Property(), this.getSemanticProperty(), null, "property", null, 1, 1, PropertyRestrictionAxiom.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPropertyRestrictionAxiom_OwningClassifier(), this.getClassifier(), this.getClassifier_OwnedPropertyRestrictions(), "owningClassifier", null, 0, 1, PropertyRestrictionAxiom.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEOperation(getPropertyRestrictionAxiom__GetRestrictingDomain(), this.getClassifier(), "getRestrictingDomain", 0, 1, !IS_UNIQUE, IS_ORDERED);
+
+		initEClass(literalEnumerationAxiomEClass, LiteralEnumerationAxiom.class, "LiteralEnumerationAxiom", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getLiteralEnumerationAxiom_Literals(), this.getLiteral(), null, "literals", null, 1, -1, LiteralEnumerationAxiom.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getLiteralEnumerationAxiom_OwningScalar(), this.getScalar(), this.getScalar_OwnedEnumeration(), "owningScalar", null, 0, 1, LiteralEnumerationAxiom.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEOperation(getLiteralEnumerationAxiom__GetEnumeratedScalar(), this.getScalar(), "getEnumeratedScalar", 0, 1, !IS_UNIQUE, IS_ORDERED);
 
 		initEClass(propertyRangeRestrictionAxiomEClass, PropertyRangeRestrictionAxiom.class, "PropertyRangeRestrictionAxiom", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPropertyRangeRestrictionAxiom_Kind(), this.getRangeRestrictionKind(), "kind", "all", 1, 1, PropertyRangeRestrictionAxiom.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -4479,6 +4505,12 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 			   "heading", "Properties"
 		   });
 		addAnnotation
+		  (specializablePropertyEClass,
+		   source,
+		   new String[] {
+			   "heading", "Properties"
+		   });
+		addAnnotation
 		  (classifierEClass,
 		   source,
 		   new String[] {
@@ -4516,18 +4548,6 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		   });
 		addAnnotation
 		  (relationEntityEClass,
-		   source,
-		   new String[] {
-			   "heading", "Types"
-		   });
-		addAnnotation
-		  (facetedScalarEClass,
-		   source,
-		   new String[] {
-			   "heading", "Types"
-		   });
-		addAnnotation
-		  (enumeratedScalarEClass,
 		   source,
 		   new String[] {
 			   "heading", "Types"
@@ -4617,13 +4637,19 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 			   "heading", "Axioms"
 		   });
 		addAnnotation
-		  (enumerationAxiomEClass,
+		  (instanceEnumerationAxiomEClass,
 		   source,
 		   new String[] {
 			   "heading", "Axioms"
 		   });
 		addAnnotation
 		  (propertyRestrictionAxiomEClass,
+		   source,
+		   new String[] {
+			   "heading", "Axioms"
+		   });
+		addAnnotation
+		  (literalEnumerationAxiomEClass,
 		   source,
 		   new String[] {
 			   "heading", "Axioms"

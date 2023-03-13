@@ -39,7 +39,7 @@ package io.opencaesar.oml;
  * @model annotation="https://tabatkins.github.io/bikeshed heading='Properties'"
  * @generated
  */
-public interface UnreifiedRelation extends Relation, RelationBase {
+public interface UnreifiedRelation extends Relation, RelationBase, SpecializableProperty {
 	/**
 	 * Returns the value of the '<em><b>Ref</b></em>' reference.
 	 * <!-- begin-user-doc -->

@@ -19,6 +19,8 @@
 package io.opencaesar.oml.provider;
 
 
+import io.opencaesar.oml.OmlFactory;
+import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.Scalar;
 
 import java.util.Collection;
@@ -27,7 +29,11 @@ import java.util.List;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
+import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
  * This is the item provider adapter for a {@link io.opencaesar.oml.Scalar} object.
@@ -57,8 +63,191 @@ public class ScalarItemProvider extends TypeItemProvider {
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addRefPropertyDescriptor(object);
+			addLengthPropertyDescriptor(object);
+			addMinLengthPropertyDescriptor(object);
+			addMaxLengthPropertyDescriptor(object);
+			addPatternPropertyDescriptor(object);
+			addLanguagePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Ref feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addRefPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Scalar_ref_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Scalar_ref_feature", "_UI_Scalar_type"),
+				 OmlPackage.Literals.SCALAR__REF,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Length feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addLengthPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Scalar_length_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Scalar_length_feature", "_UI_Scalar_type"),
+				 OmlPackage.Literals.SCALAR__LENGTH,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Min Length feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addMinLengthPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Scalar_minLength_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Scalar_minLength_feature", "_UI_Scalar_type"),
+				 OmlPackage.Literals.SCALAR__MIN_LENGTH,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Max Length feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addMaxLengthPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Scalar_maxLength_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Scalar_maxLength_feature", "_UI_Scalar_type"),
+				 OmlPackage.Literals.SCALAR__MAX_LENGTH,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Pattern feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addPatternPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Scalar_pattern_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Scalar_pattern_feature", "_UI_Scalar_type"),
+				 OmlPackage.Literals.SCALAR__PATTERN,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Language feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addLanguagePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Scalar_language_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Scalar_language_feature", "_UI_Scalar_type"),
+				 OmlPackage.Literals.SCALAR__LANGUAGE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
+	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
+	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
+		if (childrenFeatures == null) {
+			super.getChildrenFeatures(object);
+			childrenFeatures.add(OmlPackage.Literals.SCALAR__MIN_INCLUSIVE);
+			childrenFeatures.add(OmlPackage.Literals.SCALAR__MIN_EXCLUSIVE);
+			childrenFeatures.add(OmlPackage.Literals.SCALAR__MAX_INCLUSIVE);
+			childrenFeatures.add(OmlPackage.Literals.SCALAR__MAX_EXCLUSIVE);
+			childrenFeatures.add(OmlPackage.Literals.SCALAR__OWNED_ENUMERATION);
+		}
+		return childrenFeatures;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EStructuralFeature getChildFeature(Object object, Object child) {
+		// Check the type of the specified child object and return the proper feature to use for
+		// adding (see {@link AddCommand}) it as a child.
+
+		return super.getChildFeature(object, child);
+	}
+
+	/**
+	 * This returns Scalar.gif.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object getImage(Object object) {
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/Scalar"));
 	}
 
 	/**
@@ -86,6 +275,23 @@ public class ScalarItemProvider extends TypeItemProvider {
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
+
+		switch (notification.getFeatureID(Scalar.class)) {
+			case OmlPackage.SCALAR__LENGTH:
+			case OmlPackage.SCALAR__MIN_LENGTH:
+			case OmlPackage.SCALAR__MAX_LENGTH:
+			case OmlPackage.SCALAR__PATTERN:
+			case OmlPackage.SCALAR__LANGUAGE:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
+			case OmlPackage.SCALAR__MIN_INCLUSIVE:
+			case OmlPackage.SCALAR__MIN_EXCLUSIVE:
+			case OmlPackage.SCALAR__MAX_INCLUSIVE:
+			case OmlPackage.SCALAR__MAX_EXCLUSIVE:
+			case OmlPackage.SCALAR__OWNED_ENUMERATION:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
+				return;
+		}
 		super.notifyChanged(notification);
 	}
 
@@ -99,6 +305,136 @@ public class ScalarItemProvider extends TypeItemProvider {
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+
+		newChildDescriptors.add
+			(createChildParameter
+				(OmlPackage.Literals.SCALAR__MIN_INCLUSIVE,
+				 OmlFactory.eINSTANCE.createQuotedLiteral()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(OmlPackage.Literals.SCALAR__MIN_INCLUSIVE,
+				 OmlFactory.eINSTANCE.createIntegerLiteral()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(OmlPackage.Literals.SCALAR__MIN_INCLUSIVE,
+				 OmlFactory.eINSTANCE.createDecimalLiteral()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(OmlPackage.Literals.SCALAR__MIN_INCLUSIVE,
+				 OmlFactory.eINSTANCE.createDoubleLiteral()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(OmlPackage.Literals.SCALAR__MIN_INCLUSIVE,
+				 OmlFactory.eINSTANCE.createBooleanLiteral()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(OmlPackage.Literals.SCALAR__MIN_EXCLUSIVE,
+				 OmlFactory.eINSTANCE.createQuotedLiteral()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(OmlPackage.Literals.SCALAR__MIN_EXCLUSIVE,
+				 OmlFactory.eINSTANCE.createIntegerLiteral()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(OmlPackage.Literals.SCALAR__MIN_EXCLUSIVE,
+				 OmlFactory.eINSTANCE.createDecimalLiteral()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(OmlPackage.Literals.SCALAR__MIN_EXCLUSIVE,
+				 OmlFactory.eINSTANCE.createDoubleLiteral()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(OmlPackage.Literals.SCALAR__MIN_EXCLUSIVE,
+				 OmlFactory.eINSTANCE.createBooleanLiteral()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(OmlPackage.Literals.SCALAR__MAX_INCLUSIVE,
+				 OmlFactory.eINSTANCE.createQuotedLiteral()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(OmlPackage.Literals.SCALAR__MAX_INCLUSIVE,
+				 OmlFactory.eINSTANCE.createIntegerLiteral()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(OmlPackage.Literals.SCALAR__MAX_INCLUSIVE,
+				 OmlFactory.eINSTANCE.createDecimalLiteral()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(OmlPackage.Literals.SCALAR__MAX_INCLUSIVE,
+				 OmlFactory.eINSTANCE.createDoubleLiteral()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(OmlPackage.Literals.SCALAR__MAX_INCLUSIVE,
+				 OmlFactory.eINSTANCE.createBooleanLiteral()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(OmlPackage.Literals.SCALAR__MAX_EXCLUSIVE,
+				 OmlFactory.eINSTANCE.createQuotedLiteral()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(OmlPackage.Literals.SCALAR__MAX_EXCLUSIVE,
+				 OmlFactory.eINSTANCE.createIntegerLiteral()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(OmlPackage.Literals.SCALAR__MAX_EXCLUSIVE,
+				 OmlFactory.eINSTANCE.createDecimalLiteral()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(OmlPackage.Literals.SCALAR__MAX_EXCLUSIVE,
+				 OmlFactory.eINSTANCE.createDoubleLiteral()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(OmlPackage.Literals.SCALAR__MAX_EXCLUSIVE,
+				 OmlFactory.eINSTANCE.createBooleanLiteral()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(OmlPackage.Literals.SCALAR__OWNED_ENUMERATION,
+				 OmlFactory.eINSTANCE.createLiteralEnumerationAxiom()));
+	}
+
+	/**
+	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
+		Object childFeature = feature;
+		Object childObject = child;
+
+		boolean qualify =
+			childFeature == OmlPackage.Literals.SCALAR__MIN_INCLUSIVE ||
+			childFeature == OmlPackage.Literals.SCALAR__MIN_EXCLUSIVE ||
+			childFeature == OmlPackage.Literals.SCALAR__MAX_INCLUSIVE ||
+			childFeature == OmlPackage.Literals.SCALAR__MAX_EXCLUSIVE;
+
+		if (qualify) {
+			return getString
+				("_UI_CreateChild_text2",
+				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
+		}
+		return super.getCreateChildText(owner, feature, child, selection);
 	}
 
 }

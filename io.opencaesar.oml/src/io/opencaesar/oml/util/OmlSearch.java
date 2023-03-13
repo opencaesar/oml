@@ -40,8 +40,6 @@ import io.opencaesar.oml.Concept;
 import io.opencaesar.oml.ConceptInstance;
 import io.opencaesar.oml.Element;
 import io.opencaesar.oml.Entity;
-import io.opencaesar.oml.EnumeratedScalar;
-import io.opencaesar.oml.FacetedScalar;
 import io.opencaesar.oml.ForwardRelation;
 import io.opencaesar.oml.IdentifiedElement;
 import io.opencaesar.oml.Import;
@@ -99,10 +97,8 @@ public final class OmlSearch extends OmlIndex {
             references.addAll(findRelationEntitiesWithRef((RelationEntity)member));
         } else if (member instanceof Structure) {
             references.addAll(findStructuresWithRef((Structure)member));
-        } else if (member instanceof FacetedScalar) {
-            references.addAll(findFacetedScalarsWithRef((FacetedScalar)member));
-        } else if (member instanceof EnumeratedScalar) {
-            references.addAll(findEnumeratedScalarsWithRef((EnumeratedScalar)member));
+        } else if (member instanceof Scalar) {
+            references.addAll(findScalarsWithRef((Scalar)member));
         } else if (member instanceof Relation) {
             references.addAll(findUnreifiedRelationsWithRef((Relation)member));
         } else if (member instanceof StructuredProperty) {
@@ -811,13 +807,6 @@ public final class OmlSearch extends OmlIndex {
      * @return true if the given literal is typed directly by the given type; otherwise false
      */
     public static boolean findIsTypeOf(Literal literal, Scalar type) {
-    	if (type instanceof EnumeratedScalar) {
-    		final String lexical = OmlRead.getStringValue(literal);
-    		if ((!((EnumeratedScalar)type).getLiterals().stream().anyMatch(i -> OmlRead.getStringValue(i).equals(lexical)))) {
-    			return false;
-    		}
-    		type = (Scalar) OmlRead.getSuperTerms(type).get(0);// scalars have one supertype
-    	}
         return type == OmlRead.getType(literal);
     }
 
@@ -829,13 +818,6 @@ public final class OmlSearch extends OmlIndex {
      * @return true if the given literal is typed directly or transitively by the given type; otherwise false
      */
     public static boolean findIsKindOf(Literal literal, Scalar type) {
-    	if (type instanceof EnumeratedScalar) {
-    		final String lexical = OmlRead.getStringValue(literal);
-    		if (!(((EnumeratedScalar)type).getLiterals().stream().anyMatch(i -> OmlRead.getStringValue(i).equals(lexical)))) {
-    			return false;
-    		}
-    		type = (Scalar) OmlRead.getSuperTerms(type).get(0);// scalars have one supertype
-    	}
         return findAllTypes(literal).contains(type);
     }
 }

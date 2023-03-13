@@ -43,7 +43,7 @@ package io.opencaesar.oml;
  * @model annotation="https://tabatkins.github.io/bikeshed heading='Properties'"
  * @generated
  */
-public interface StructuredProperty extends SemanticProperty, SpecializableTerm {
+public interface StructuredProperty extends SemanticProperty, SpecializableProperty {
 	/**
 	 * Returns the value of the '<em><b>Ref</b></em>' reference.
 	 * <!-- begin-user-doc -->

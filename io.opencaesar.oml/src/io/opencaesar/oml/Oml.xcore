@@ -617,6 +617,13 @@ abstract class RelationBase extends SpecializableTerm {
     boolean transitive
 }
 
+/*
+ * SpecializableProperty is a property that can be specialized.
+ */
+@Bikeshed(heading="Properties")
+abstract class SpecializableProperty extends SpecializableTerm, Property {
+}
+
 ////////////////////////////////////////
 //  Types
 ////////////////////////////////////////
@@ -635,10 +642,110 @@ abstract class Classifier extends Type {
 }
 
 /*
- * Scalar is a primitive type that represents a set of literals. It is the super type of all scalar types.
+ * Scalar is a primitive type that represents a set of literals. Some scalars are considered standard (enumerated below).
+ *  
+ * A non-standard scalar may specialize a standard scalar (in which case it is the only one), and optionally specify facets (restrictions) on it. 
+ * The kind of restrictions allowed depend on the standard super scalar as detailed below.
+ * 
+ * A non-standard scalar may also specialize (one or more) non-standard scalars, in which case no facets should be specified) and the scalar is
+ * considered semantically equivalent to those super scalars. 
+ * 
+ * The standard scalars (along with their supported facets):
+ * 
+ * Numeric scalars (facets: minInclusive, maxInclusive, minExclusive, maxExclusive, literals):
+ * owl:real
+ * owl:rational
+ * xsd:decimal
+ * xsd:integer
+ * xsd:nonNegativeInteger
+ * xsd:nonPositiveInteger
+ * xsd:positiveInteger
+ * xsd:negativeInteger
+ * xsd:long
+ * xsd:int
+ * xsd:short
+ * xsd:byte
+ * xsd:unsignedLong
+ * xsd:unsignedInt
+ * xsd:unsignedShort
+ * xsd:unsignedByte
+ * xsd:double
+ * xsd:float 
+ * 
+ * Time scalars (facets: minInclusive, maxInclusive, minExclusive, maxExclusive, literals):
+ * xsd:dateTime
+ * xsd:dateTimeStamp
+ * 
+ * Plain scalars (facets: length, minLength, maxLength, pattern, language, literals):
+ * rdf:PlainLiteral
+
+ * String scalars (facets: length, minLength, maxLength, pattern, literals)
+ * xsd:string,
+ * xsd:normalizedString,
+ * xsd:token,
+ * xsd:language,
+ * xsd:Name,
+ * xsd:NCName,
+ * xsd:NMTOKEN
+ * xsd:anyURI
+ * 
+ * Boolean scalars (literals):
+ * xsd:boolean
+ * 
+ * Binary scalars (facets: length, minLength, maxLength, literals):
+ * xsd:hexBinary
+ * xsd:base64Binary
+ * 
+ * XML scalars (literals):
+ * rdf:XMLLiteral
  */
 @Bikeshed(heading="Types")
-abstract class Scalar extends Type {
+class Scalar extends Type {
+	/*
+	 * A ref to another faceted scalar
+	 */
+	refers Scalar ref
+    /*
+     * The exact length of the literals of this scalar
+     */
+    UnsignedInteger[?] length
+    /*
+     * The minimum length of the literals of this scalar
+     */
+    UnsignedInteger[?] minLength
+    /*
+     * The maximum length of the literals of this scalar
+     */
+    UnsignedInteger[?] maxLength
+    /*
+     * The pattern that the literals of this scalar conforms to
+     */
+    String[?] pattern
+    /*
+     * The language range that the literals of this scalar belong to 
+     * (based on http://www.rfc-editor.org/rfc/bcp/bcp47.txt)
+     */
+    String[?] language
+    /*
+     * The minimum inclusive value of numeric literals of this scalar
+     */
+    contains Literal[?] minInclusive
+    /*
+     * The minimum exclusive value of numeric literals of this scalar
+     */
+    contains Literal[?] minExclusive
+    /*
+     * The maximum inclusive value of numeric literals of this scalar
+     */
+    contains Literal[?] maxInclusive
+    /*
+     * The maximum exclusive value of numeric literals of this scalar
+     */
+    contains Literal[?] maxExclusive
+	/*
+	 * An enumeration of literals of this scalar
+	 */
+	contains LiteralEnumerationAxiom[?] ownedEnumeration opposite owningScalar
 }
 
 ////////////////////////////////////////
@@ -696,7 +803,7 @@ class Concept extends Entity {
 	/*
 	 * An enumeration of instances of this concept
 	 */
-	contains EnumerationAxiom[?] ownedEnumeration opposite owningConcept
+	contains InstanceEnumerationAxiom[?] ownedEnumeration opposite owningConcept
 }
 
 /*
@@ -719,135 +826,14 @@ class RelationEntity extends Entity, RelationBase {
 }
 
 ////////////////////////////////////////
-//  Scalars
-////////////////////////////////////////
-
-/*
- * FacetedScalar is a scalar that represents a (possibly infinite) set of literals and can constrain them with some facets. It
- * can also specialize other faceted scalars. OML considers some faceted scalars, those defined by the OWL2 specification 
- * (https://www.w3.org/TR/owl2-syntax/#Datatype_Maps) and listed below, as standard. Other non-standard scalars can specialize directly 
- * or transitively from this standard set and optionally specify facets (restrictions on their lexical or value spaces). 
- * A scalar that specifies facets can only have a single supertype, which must be a standard one. Otherwise, it must have at least one
- * supertype that is considered to be an alias.
- * 
- * Numeric scalars (facets: minInclusive, maxInclusive, minExclusive, maxExclusive):
- * owl:real
- * owl:rational
- * xsd:decimal
- * xsd:integer
- * xsd:nonNegativeInteger
- * xsd:nonPositiveInteger
- * xsd:positiveInteger
- * xsd:negativeInteger
- * xsd:long
- * xsd:int
- * xsd:short
- * xsd:byte
- * xsd:unsignedLong
- * xsd:unsignedInt
- * xsd:unsignedShort
- * xsd:unsignedByte
- * xsd:double
- * xsd:float 
- * 
- * Time scalars (facets: minInclusive, maxInclusive, minExclusive, maxExclusive):
- * xsd:dateTime
- * xsd:dateTimeStamp
- * 
- * Plain scalars (facets: length, minLength, maxLength, pattern, language):
- * rdf:PlainLiteral
-
- * String scalars (facets: length, minLength, maxLength, pattern)
- * xsd:string,
- * xsd:normalizedString,
- * xsd:token,
- * xsd:language,
- * xsd:Name,
- * xsd:NCName,
- * xsd:NMTOKEN
- * xsd:anyURI
- * 
- * Boolean scalars (no facets):
- * xsd:boolean
- * 
- * Binary scalars (facets: length, minLength, maxLength):
- * xsd:hexBinary
- * xsd:base64Binary
- * 
- * XML scalars (no facets):
- * rdf:XMLLiteral
- */
-@Bikeshed(heading="Types")
-class FacetedScalar extends Scalar {
-	/*
-	 * A ref to another faceted scalar
-	 */
-	refers FacetedScalar ref
-    /*
-     * The exact length of the literals of this scalar
-     */
-    UnsignedInteger[?] length
-    /*
-     * The minimum length of the literals of this scalar
-     */
-    UnsignedInteger[?] minLength
-    /*
-     * The maximum length of the literals of this scalar
-     */
-    UnsignedInteger[?] maxLength
-    /*
-     * The pattern that the literals of this scalar conforms to
-     */
-    String[?] pattern
-    /*
-     * The language range that the literals of this scalar belong to 
-     * (based on http://www.rfc-editor.org/rfc/bcp/bcp47.txt)
-     */
-    String[?] language
-    /*
-     * The minimum inclusive value of numeric literals of this scalar
-     */
-    contains Literal[?] minInclusive
-    /*
-     * The minimum exclusive value of numeric literals of this scalar
-     */
-    contains Literal[?] minExclusive
-    /*
-     * The maximum inclusive value of numeric literals of this scalar
-     */
-    contains Literal[?] maxInclusive
-    /*
-     * The maximum exclusive value of numeric literals of this scalar
-     */
-    contains Literal[?] maxExclusive
-}
-
-/*
- * EnumeratedScalar is a scalar that represents a finite set of literals. It can specialize another enumerated scalar, but in
- * this case, it cannot define its own literals; rather, it will simply be considered an alias to the specialized scalar.
- * An enumerated scalar ref cannot respecify the literals.
- */
-@Bikeshed(heading="Types")
-class EnumeratedScalar extends Scalar {
-	/*
-	 * A ref to another enumerated scalar
-	 */
-	refers EnumeratedScalar ref
-    /*
-     * The set of enumerated literals that are represented by this scalar
-     */
-    contains Literal[*] literals
-}
-
-////////////////////////////////////////
 //  Properties
 ////////////////////////////////////////
 
 /*
- * AnnotationProperty is a property with no DL semantics that relates an annotated element to a literal value.
+ * AnnotationProperty is a specializable property with no DL semantics that relates an annotated element to a literal value.
  */
 @Bikeshed(heading="Properties")
-class AnnotationProperty extends Property, SpecializableTerm {
+class AnnotationProperty extends SpecializableProperty {
 	/*
 	 * A ref to another annotation property
 	 */
@@ -884,7 +870,7 @@ abstract class SemanticProperty extends Property {
  * A scalar property ref cannot respecify the domain nor the range.
  */
 @Bikeshed(heading="Properties")
-class ScalarProperty extends SemanticProperty, SpecializableTerm {
+class ScalarProperty extends SemanticProperty, SpecializableProperty {
 	/*
 	 * A ref to another scalar property
 	 */
@@ -908,7 +894,7 @@ class ScalarProperty extends SemanticProperty, SpecializableTerm {
  * A structured property ref cannot respecify the domain nor the range.
  */
 @Bikeshed(heading="Properties")
-class StructuredProperty extends SemanticProperty, SpecializableTerm {
+class StructuredProperty extends SemanticProperty, SpecializableProperty {
 	/*
 	 * A ref to another structured property
 	 */
@@ -1076,7 +1062,7 @@ class ReverseRelation extends Relation {
  * UnreifiedRelation is a simple relation from a source entity to a target entity. 
  */
 @Bikeshed(heading="Properties")
-class UnreifiedRelation extends Relation, RelationBase {
+class UnreifiedRelation extends Relation, RelationBase, SpecializableProperty {
 	/*
 	 * A ref to another relation
 	 */
@@ -1216,14 +1202,14 @@ class SpecializationAxiom extends Axiom {
 }
 
 /*
- * EnumerationAxiom is an axiom specified on a concept that states that it classifies an enumerated set of instances.
+ * InstanceEnumerationAxiom is an axiom specified on a concept that states that it classifies an enumerated set of instances.
  */
 @Bikeshed(heading="Axioms")
-class EnumerationAxiom extends Axiom {
+class InstanceEnumerationAxiom extends Axiom {
 	/*
 	 * The set of enumerated instances specified by this axiom
 	 */
-	refers ConceptInstance[*] instances
+	refers ConceptInstance[+] instances
     /*
      * The owning concept specified by this axiom
      */
@@ -1257,6 +1243,27 @@ abstract class PropertyRestrictionAxiom extends Axiom {
     	return owningClassifier.resolve() as Classifier
     }
     
+}
+
+/*
+ * LiteralEnumerationAxiom is an axiom specified on a scalar that states that it classifies an enumerated set of literals.
+ */
+@Bikeshed(heading="Axioms")
+class LiteralEnumerationAxiom extends Axiom {
+	/*
+	 * The set of enumerated literals specified by this axiom
+	 */
+	contains Literal[+] literals
+    /*
+     * The owning scalar specified by this axiom
+     */
+    container Scalar[?] owningScalar opposite ownedEnumeration
+    /*
+     * Gets the scalar that defines the given enumeration axiom
+     */
+    op Scalar getEnumeratedScalar() {
+    	return owningScalar.resolve() as Scalar
+    }
 }
 
 ////////////////////////////////////////

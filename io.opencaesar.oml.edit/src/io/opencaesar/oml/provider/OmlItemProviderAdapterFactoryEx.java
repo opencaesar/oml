@@ -24,8 +24,6 @@ import io.opencaesar.oml.DescriptionBundle;
 import io.opencaesar.oml.DifferentFromPredicate;
 import io.opencaesar.oml.DoubleLiteral;
 import io.opencaesar.oml.Element;
-import io.opencaesar.oml.EnumeratedScalar;
-import io.opencaesar.oml.FacetedScalar;
 import io.opencaesar.oml.ForwardRelation;
 import io.opencaesar.oml.Import;
 import io.opencaesar.oml.IntegerLiteral;
@@ -48,6 +46,7 @@ import io.opencaesar.oml.RelationInstance;
 import io.opencaesar.oml.ReverseRelation;
 import io.opencaesar.oml.Rule;
 import io.opencaesar.oml.SameAsPredicate;
+import io.opencaesar.oml.Scalar;
 import io.opencaesar.oml.ScalarProperty;
 import io.opencaesar.oml.SpecializationAxiom;
 import io.opencaesar.oml.Structure;
@@ -259,11 +258,11 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 	}
 	
 	@Override
-	public Adapter createFacetedScalarAdapter() {
-		if (facetedScalarItemProvider == null) facetedScalarItemProvider = new FacetedScalarItemProvider(this) {
+	public Adapter createScalarAdapter() {
+		if (scalarItemProvider == null) scalarItemProvider = new ScalarItemProvider(this) {
 			@Override
 			public String getText(Object object) {
-				FacetedScalar scalar = (FacetedScalar)object;
+				Scalar scalar = (Scalar)object;
 				if (scalar.eIsProxy()) {
 					try {
 						String fragment = URLDecoder.decode(((InternalEObject)scalar).eProxyURI().fragment(), "utf-8");
@@ -278,30 +277,7 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 				}
 			}
 		};
-		return facetedScalarItemProvider;
-	}
-
-	@Override
-	public Adapter createEnumeratedScalarAdapter() {
-		if (enumeratedScalarItemProvider == null) enumeratedScalarItemProvider = new EnumeratedScalarItemProvider(this) {
-			@Override
-			public String getText(Object object) {
-				EnumeratedScalar scalar = (EnumeratedScalar)object;
-				if (scalar.eIsProxy()) {
-					try {
-						String fragment = URLDecoder.decode(((InternalEObject)scalar).eProxyURI().fragment(), "utf-8");
-						return "enumerated scalar <" + fragment + ">";
-					} catch (UnsupportedEncodingException e) {
-						throw new AssertionError(e);
-					}
-				} else if (scalar.isRef()){
-					return "ref enumerated scalar " + getLabel(scalar.resolve(), scalar);
-				} else {
-					return "enumerated scalar " + getLabel(scalar);
-				}
-			}
-		};
-		return enumeratedScalarItemProvider;
+		return scalarItemProvider;
 	}
 
 	// Properties (annotation, scalar, structured)

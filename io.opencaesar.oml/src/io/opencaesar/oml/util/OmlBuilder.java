@@ -52,15 +52,15 @@ import io.opencaesar.oml.DescriptionBundle;
 import io.opencaesar.oml.DifferentFromPredicate;
 import io.opencaesar.oml.DoubleLiteral;
 import io.opencaesar.oml.Element;
-import io.opencaesar.oml.EnumeratedScalar;
-import io.opencaesar.oml.FacetedScalar;
 import io.opencaesar.oml.ForwardRelation;
 import io.opencaesar.oml.IdentifiedElement;
 import io.opencaesar.oml.Import;
 import io.opencaesar.oml.ImportKind;
+import io.opencaesar.oml.InstanceEnumerationAxiom;
 import io.opencaesar.oml.IntegerLiteral;
 import io.opencaesar.oml.KeyAxiom;
 import io.opencaesar.oml.Literal;
+import io.opencaesar.oml.LiteralEnumerationAxiom;
 import io.opencaesar.oml.Member;
 import io.opencaesar.oml.NamedInstance;
 import io.opencaesar.oml.OmlPackage;
@@ -80,6 +80,7 @@ import io.opencaesar.oml.RelationInstance;
 import io.opencaesar.oml.ReverseRelation;
 import io.opencaesar.oml.Rule;
 import io.opencaesar.oml.SameAsPredicate;
+import io.opencaesar.oml.Scalar;
 import io.opencaesar.oml.ScalarProperty;
 import io.opencaesar.oml.SeparatorKind;
 import io.opencaesar.oml.SpecializationAxiom;
@@ -551,7 +552,7 @@ public class OmlBuilder {
     // FacetedScalar
 
     /**
-     * Creates a new faceted scalar and adds it to the given vocabulary
+     * Creates a new scalar and adds it to the given vocabulary
      * 
      * @param vocabulary the context vocabulary
      * @param name the name of the new faceted scalar
@@ -564,29 +565,14 @@ public class OmlBuilder {
      * @param minExclusive the min exclusive facet
      * @param maxInclusive the max inclusive facet
      * @param maxExclusive the max exclusive facet
-     * @return a new faceted scalar that is added to the given vocabulary
+     * @return a new scalar that is added to the given vocabulary
      */
-    public FacetedScalar addFacetedScalar(Vocabulary vocabulary, String name, Long length, Long minLength, Long maxLength, String pattern, 
+    public Scalar addFacetedScalar(Vocabulary vocabulary, String name, Long length, Long minLength, Long maxLength, String pattern, 
         String language, Literal minInclusive, Literal minExclusive, Literal maxInclusive, Literal maxExclusive) {
-        final FacetedScalar scalar = OmlWrite.addFacetedScalar(vocabulary, name, length, minLength, maxLength, pattern, language, minInclusive, minExclusive, maxInclusive, maxExclusive);
+        final Scalar scalar = OmlWrite.addScalar(vocabulary, name, length, minLength, maxLength, pattern, language, minInclusive, minExclusive, maxInclusive, maxExclusive);
         return scalar;
     }
-        
-    // EnumeratedScalar
-
-    /**
-     * Creates a new enumerated scalar and adds it to the given vocabulary
-     * 
-     * @param vocabulary the context vocabulary
-     * @param name the name of the new enumerated scalar
-     * @param literals the list of literals making up the enumerated scalar value space
-     * @return a new enumerated scalar that is added to the given vocabulary
-     */
-    public EnumeratedScalar addEnumeratedScalar(Vocabulary vocabulary, String name, Literal...literals) {
-        final EnumeratedScalar scalar = OmlWrite.addEnumeratedScalar(vocabulary, name, literals);
-        return scalar;
-    }
-    
+            
     // ForwardRelation
 
     /**
@@ -859,6 +845,39 @@ public class OmlBuilder {
         final KeyAxiom axiom = OmlWrite.addKeyAxiom(vocabulary, null, Collections.emptyList());
         setCrossReferences(vocabulary, axiom, OmlPackage.Literals.KEY_AXIOM__PROPERTIES, keyPropertyIris);
         setContainmentReference(vocabulary, domainIri, OmlPackage.Literals.ENTITY__OWNED_KEYS, axiom);
+        return axiom;
+    }
+
+    // InstanceEnumerationAxiom
+
+    /**
+     * Creates an instance enumeration axiom and adds it to the given vocabulary
+     * 
+     * @param vocabulary the context vocabulary
+     * @param domainIri the iri of the (concept) domain
+     * @param instanceIris the list of iris of the concept instances
+     * @return an instance enumeration axiom that is added to the given vocabulary
+     */
+    public InstanceEnumerationAxiom addInstanceEnumerationAxiom(Vocabulary vocabulary, String domainIri, List<String> instanceIris) {
+        final InstanceEnumerationAxiom axiom = OmlWrite.addInstanceEnumerationAxiom(vocabulary, null, Collections.emptyList());
+        setCrossReferences(vocabulary, axiom, OmlPackage.Literals.INSTANCE_ENUMERATION_AXIOM__INSTANCES, instanceIris);
+        setContainmentReference(vocabulary, domainIri, OmlPackage.Literals.CONCEPT__OWNED_ENUMERATION, axiom);
+        return axiom;
+    }
+
+    // LiteralEnumerationAxiom
+
+    /**
+     * Creates an literal enumeration axiom and adds it to the given vocabulary
+     * 
+     * @param vocabulary the context vocabulary
+     * @param domainIri the iri of the (scalar) domain
+     * @param literals the list of enumerated literals
+     * @return a literal enumeration axiom that is added to the given vocabulary
+     */
+    public LiteralEnumerationAxiom addLiteralEnumerationAxiom(Vocabulary vocabulary, String domainIri, Literal...literals) {
+        final LiteralEnumerationAxiom axiom = OmlWrite.addLiteralEnumerationAxiom(vocabulary, null, literals);
+        setContainmentReference(vocabulary, domainIri, OmlPackage.Literals.SCALAR__OWNED_ENUMERATION, axiom);
         return axiom;
     }
 

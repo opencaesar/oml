@@ -119,6 +119,15 @@ public interface OmlFactory extends EFactory {
 	BuiltIn createBuiltIn();
 
 	/**
+	 * Returns a new object of class '<em>Scalar</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Scalar</em>'.
+	 * @generated
+	 */
+	Scalar createScalar();
+
+	/**
 	 * Returns a new object of class '<em>Structure</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -153,24 +162,6 @@ public interface OmlFactory extends EFactory {
 	 * @generated
 	 */
 	RelationEntity createRelationEntity();
-
-	/**
-	 * Returns a new object of class '<em>Faceted Scalar</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Faceted Scalar</em>'.
-	 * @generated
-	 */
-	FacetedScalar createFacetedScalar();
-
-	/**
-	 * Returns a new object of class '<em>Enumerated Scalar</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Enumerated Scalar</em>'.
-	 * @generated
-	 */
-	EnumeratedScalar createEnumeratedScalar();
 
 	/**
 	 * Returns a new object of class '<em>Annotation Property</em>'.
@@ -272,13 +263,22 @@ public interface OmlFactory extends EFactory {
 	SpecializationAxiom createSpecializationAxiom();
 
 	/**
-	 * Returns a new object of class '<em>Enumeration Axiom</em>'.
+	 * Returns a new object of class '<em>Instance Enumeration Axiom</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Enumeration Axiom</em>'.
+	 * @return a new object of class '<em>Instance Enumeration Axiom</em>'.
 	 * @generated
 	 */
-	EnumerationAxiom createEnumerationAxiom();
+	InstanceEnumerationAxiom createInstanceEnumerationAxiom();
+
+	/**
+	 * Returns a new object of class '<em>Literal Enumeration Axiom</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Literal Enumeration Axiom</em>'.
+	 * @generated
+	 */
+	LiteralEnumerationAxiom createLiteralEnumerationAxiom();
 
 	/**
 	 * Returns a new object of class '<em>Property Range Restriction Axiom</em>'.

@@ -20,8 +20,7 @@ import static io.opencaesar.oml.OmlPackage.Literals.ANNOTATION_PROPERTY;
 import static io.opencaesar.oml.OmlPackage.Literals.ASPECT;
 import static io.opencaesar.oml.OmlPackage.Literals.CONCEPT;
 import static io.opencaesar.oml.OmlPackage.Literals.CONCEPT_INSTANCE;
-import static io.opencaesar.oml.OmlPackage.Literals.ENUMERATED_SCALAR;
-import static io.opencaesar.oml.OmlPackage.Literals.FACETED_SCALAR;
+import static io.opencaesar.oml.OmlPackage.Literals.SCALAR;
 import static io.opencaesar.oml.OmlPackage.Literals.FORWARD_RELATION;
 import static io.opencaesar.oml.OmlPackage.Literals.ONTOLOGY;
 import static io.opencaesar.oml.OmlPackage.Literals.RELATION_ENTITY;
@@ -57,10 +56,8 @@ public class OmlDocumentSymbolKindProvider extends DocumentSymbolMapper.Document
 			return Class;
 		if (STRUCTURE.isSuperTypeOf(clazz))
 			return Struct;
-		if (FACETED_SCALAR.isSuperTypeOf(clazz))
+		if (SCALAR.isSuperTypeOf(clazz))
 			return String;
-		if (ENUMERATED_SCALAR.isSuperTypeOf(clazz))
-			return Enum;
 		if (RELATION_ENTITY.isSuperTypeOf(clazz))
 			return Class;
 		if (FORWARD_RELATION.isSuperTypeOf(clazz))

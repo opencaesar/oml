@@ -995,4 +995,22 @@ public final class OmlRead {
     	String iri = getTypeIri(literal);
     	return (Scalar) getMemberByIri(literal.eResource().getResourceSet(), iri);
     }
+
+    /**
+     * Determines if the given scalar is a standard one
+     *  
+     * @param scalar the given scalar
+     * @return whetehr the scalar is standard
+     */
+    public static boolean isStandardScalar(Scalar scalar) {
+    	var ontology = scalar.getOntology();
+    	if (ontology != null) {
+	    	var ontologyNs = ontology.getNamespace();
+	    	return ontologyNs.equals(OmlConstants.XSD_NS) ||
+	            	ontologyNs.equals(OmlConstants.RDF_NS) ||
+	            	ontologyNs.equals(OmlConstants.RDFS_NS) ||
+	            	ontologyNs.equals(OmlConstants.OWL_NS);
+    	}
+    	return false;
+    }
 }

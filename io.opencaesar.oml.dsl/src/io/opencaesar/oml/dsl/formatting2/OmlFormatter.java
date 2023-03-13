@@ -46,12 +46,11 @@ import io.opencaesar.oml.Description;
 import io.opencaesar.oml.DescriptionBundle;
 import io.opencaesar.oml.DifferentFromPredicate;
 import io.opencaesar.oml.Element;
-import io.opencaesar.oml.EnumeratedScalar;
-import io.opencaesar.oml.EnumerationAxiom;
-import io.opencaesar.oml.FacetedScalar;
 import io.opencaesar.oml.ForwardRelation;
 import io.opencaesar.oml.Import;
+import io.opencaesar.oml.InstanceEnumerationAxiom;
 import io.opencaesar.oml.KeyAxiom;
+import io.opencaesar.oml.LiteralEnumerationAxiom;
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.PropertyCardinalityRestrictionAxiom;
 import io.opencaesar.oml.PropertyPredicate;
@@ -66,6 +65,7 @@ import io.opencaesar.oml.RelationInstance;
 import io.opencaesar.oml.ReverseRelation;
 import io.opencaesar.oml.Rule;
 import io.opencaesar.oml.SameAsPredicate;
+import io.opencaesar.oml.Scalar;
 import io.opencaesar.oml.ScalarProperty;
 import io.opencaesar.oml.Structure;
 import io.opencaesar.oml.StructureInstance;
@@ -167,9 +167,7 @@ public class OmlFormatter extends AbstractJavaFormatter {
 		formatBrackets(concept, doc);
 		concept.getOwnedKeys().forEach(i -> doc.prepend(doc.format(i), newLine()));
 		concept.getOwnedPropertyRestrictions().forEach(i -> doc.prepend(doc.format(i), newLine()));
-		ifNotNull(concept.getOwnedEnumeration(), i -> {
-			doc.prepend(doc.format(concept.getOwnedEnumeration()), newLine());
-		});
+		ifNotNull(concept.getOwnedEnumeration(), i -> doc.prepend(doc.format(concept.getOwnedEnumeration()), newLine()));
 	}
 
 	protected void _format(RelationEntity entity, IFormattableDocument doc) {
@@ -264,46 +262,31 @@ public class OmlFormatter extends AbstractJavaFormatter {
 		doc.prepend(keyword(property, oml.getStructuredPropertyAccess().getFunctionalFunctionalKeyword_10_0()), newLine());
 	}
 
-	protected void _format(FacetedScalar scalar, IFormattableDocument doc) {
+	protected void _format(Scalar scalar, IFormattableDocument doc) {
 		scalar.getOwnedAnnotations().forEach(i -> doc.append(doc.format(i), newLine()));
 		if (scalar.getName() != null) {
-			doc.append(keyword(scalar, oml.getFacetedScalarAccess().getScalarKeyword_1_0_0()), oneSpace());
+			doc.append(keyword(scalar, oml.getScalarAccess().getScalarKeyword_1_0_0()), oneSpace());
 		} else if (scalar.isRef()) {
-			doc.append(keyword(scalar, oml.getFacetedScalarAccess().getRefKeyword_1_1_0()), oneSpace());
-			doc.append(keyword(scalar, oml.getFacetedScalarAccess().getScalarKeyword_1_1_1()), oneSpace());
+			doc.append(keyword(scalar, oml.getScalarAccess().getRefKeyword_1_1_0()), oneSpace());
+			doc.append(keyword(scalar, oml.getScalarAccess().getScalarKeyword_1_1_1()), oneSpace());
 		}
-		doc.surround(keyword(scalar, oml.getFacetedScalarAccess().getColonGreaterThanSignKeyword_2_0()), oneSpace());
+		doc.surround(keyword(scalar, oml.getScalarAccess().getColonGreaterThanSignKeyword_2_0()), oneSpace());
 		formatCommas(scalar, doc);
 		formatBrackets(scalar, doc);
-		doc.prepend(keyword(scalar, oml.getFacetedScalarAccess().getLengthKeyword_3_1_0_0()), newLine());
-		doc.prepend(keyword(scalar, oml.getFacetedScalarAccess().getMinLengthKeyword_3_1_1_0()), newLine());
-		doc.prepend(keyword(scalar, oml.getFacetedScalarAccess().getMaxLengthKeyword_3_1_2_0()), newLine());
-		doc.prepend(keyword(scalar, oml.getFacetedScalarAccess().getPatternKeyword_3_1_3_0()), newLine());
-		doc.prepend(keyword(scalar, oml.getFacetedScalarAccess().getLanguageKeyword_3_1_4_0()), newLine());
-		doc.prepend(keyword(scalar, oml.getFacetedScalarAccess().getMinInclusiveKeyword_3_1_5_0()), newLine());
+		doc.prepend(keyword(scalar, oml.getScalarAccess().getLengthKeyword_3_1_0_0()), newLine());
+		doc.prepend(keyword(scalar, oml.getScalarAccess().getMinLengthKeyword_3_1_1_0()), newLine());
+		doc.prepend(keyword(scalar, oml.getScalarAccess().getMaxLengthKeyword_3_1_2_0()), newLine());
+		doc.prepend(keyword(scalar, oml.getScalarAccess().getPatternKeyword_3_1_3_0()), newLine());
+		doc.prepend(keyword(scalar, oml.getScalarAccess().getLanguageKeyword_3_1_4_0()), newLine());
+		doc.prepend(keyword(scalar, oml.getScalarAccess().getMinInclusiveKeyword_3_1_5_0()), newLine());
 		ifNotNull(scalar.getMinInclusive(), i -> doc.prepend(doc.format(i), oneSpace()));
-		doc.prepend(keyword(scalar, oml.getFacetedScalarAccess().getMaxInclusiveKeyword_3_1_7_0()), newLine());
+		doc.prepend(keyword(scalar, oml.getScalarAccess().getMaxInclusiveKeyword_3_1_7_0()), newLine());
 		ifNotNull(scalar.getMaxInclusive(), i -> doc.prepend(doc.format(i), oneSpace()));
-		doc.prepend(keyword(scalar, oml.getFacetedScalarAccess().getMinExclusiveKeyword_3_1_6_0()), newLine());
+		doc.prepend(keyword(scalar, oml.getScalarAccess().getMinExclusiveKeyword_3_1_6_0()), newLine());
 		ifNotNull(scalar.getMinExclusive(), i -> doc.prepend(doc.format(i), oneSpace()));
-		doc.prepend(keyword(scalar, oml.getFacetedScalarAccess().getMaxExclusiveKeyword_3_1_8_0()), newLine());
+		doc.prepend(keyword(scalar, oml.getScalarAccess().getMaxExclusiveKeyword_3_1_8_0()), newLine());
 		ifNotNull(scalar.getMaxExclusive(), i -> doc.prepend(doc.format(i), oneSpace()));
-	}
-
-	protected void _format(EnumeratedScalar scalar, IFormattableDocument doc) {
-		scalar.getOwnedAnnotations().forEach(i -> doc.append(doc.format(i), newLine()));
-		if (scalar.getName() != null) {
-			doc.append(keyword(scalar, oml.getEnumeratedScalarAccess().getEnumeratedKeyword_1_0_0()), oneSpace());
-			doc.append(keyword(scalar, oml.getEnumeratedScalarAccess().getScalarKeyword_1_0_1()), oneSpace());
-		} else if (scalar.isRef()) {
-			doc.append(keyword(scalar, oml.getEnumeratedScalarAccess().getRefKeyword_1_1_0()), oneSpace());
-			doc.append(keyword(scalar, oml.getEnumeratedScalarAccess().getEnumeratedKeyword_1_1_1()), oneSpace());
-			doc.append(keyword(scalar, oml.getEnumeratedScalarAccess().getScalarKeyword_1_1_2()), oneSpace());
-		}
-		doc.surround(keyword(scalar, oml.getEnumeratedScalarAccess().getColonGreaterThanSignKeyword_2_0()), oneSpace());
-		formatCommas(scalar, doc);
-		formatBrackets(scalar, doc);
-		scalar.getLiterals().forEach(i -> doc.prepend(doc.format(i), newLine()));
+		ifNotNull(scalar.getOwnedEnumeration(), i -> doc.prepend(doc.format(scalar.getOwnedEnumeration()), newLine()));
 	}
 
 	protected void _format(ForwardRelation relation, IFormattableDocument doc) {
@@ -468,8 +451,13 @@ public class OmlFormatter extends AbstractJavaFormatter {
 		formatCommas(axiom, doc);
 	}
 
-	protected void _format(EnumerationAxiom axiom, IFormattableDocument doc) {
-		doc.append(keyword(axiom, oml.getEnumerationAxiomAccess().getEnumeratesKeyword_0()), oneSpace());
+	protected void _format(InstanceEnumerationAxiom axiom, IFormattableDocument doc) {
+		doc.append(keyword(axiom, oml.getInstanceEnumerationAxiomAccess().getOneOfKeyword_0()), oneSpace());
+		formatCommas(axiom, doc);
+	}
+
+	protected void _format(LiteralEnumerationAxiom axiom, IFormattableDocument doc) {
+		doc.append(keyword(axiom, oml.getLiteralEnumerationAxiomAccess().getOneOfKeyword_0()), oneSpace());
 		formatCommas(axiom, doc);
 	}
 
