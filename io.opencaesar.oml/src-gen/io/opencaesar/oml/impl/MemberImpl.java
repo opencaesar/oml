@@ -153,27 +153,27 @@ public abstract class MemberImpl extends IdentifiedElementImpl implements Member
 	 */
 	@Override
 	public String getIri() {
-		Member _xifexpression = null;
-		Member _ref = this.getRef();
-		boolean _tripleNotEquals = (_ref != null);
-		if (_tripleNotEquals) {
-			_xifexpression = this.getRef();
-		}
-		else {
-			_xifexpression = this;
-		}
-		final Member m = _xifexpression;
+		final Member m = this.resolve();
 		final Ontology ontology = m.getOntology();
-		Object _xifexpression_1 = null;
+		Object _xifexpression = null;
 		if ((ontology != null)) {
-			_xifexpression_1 = ontology.getNamespace();
+			_xifexpression = ontology.getNamespace();
 		}
 		else {
-			_xifexpression_1 = SeparatorKind.HASH;
+			_xifexpression = SeparatorKind.HASH;
 		}
-		final Object namespace = ((Object)_xifexpression_1);
+		final Object namespace = ((Object)_xifexpression);
+		String _xifexpression_1 = null;
 		String _name = m.getName();
-		return (namespace + _name);
+		boolean _tripleNotEquals = (_name != null);
+		if (_tripleNotEquals) {
+			String _name_1 = m.getName();
+			_xifexpression_1 = (namespace + _name_1);
+		}
+		else {
+			_xifexpression_1 = "";
+		}
+		return _xifexpression_1;
 	}
 
 	/**
@@ -183,28 +183,28 @@ public abstract class MemberImpl extends IdentifiedElementImpl implements Member
 	 */
 	@Override
 	public String getAbbreviatedIri() {
-		Member _xifexpression = null;
-		Member _ref = this.getRef();
-		boolean _tripleNotEquals = (_ref != null);
-		if (_tripleNotEquals) {
-			_xifexpression = this.getRef();
-		}
-		else {
-			_xifexpression = this;
-		}
-		final Member m = _xifexpression;
+		final Member m = this.resolve();
 		final Ontology ontology = m.getOntology();
-		String _xifexpression_1 = null;
+		String _xifexpression = null;
 		if ((ontology != null)) {
 			String _prefix = ontology.getPrefix();
-			_xifexpression_1 = (_prefix + ":");
+			_xifexpression = (_prefix + ":");
 		}
 		else {
-			_xifexpression_1 = ":";
+			_xifexpression = ":";
 		}
-		final String prefix = _xifexpression_1;
+		final String prefix = _xifexpression;
+		String _xifexpression_1 = null;
 		String _name = m.getName();
-		return (prefix + _name);
+		boolean _tripleNotEquals = (_name != null);
+		if (_tripleNotEquals) {
+			String _name_1 = m.getName();
+			_xifexpression_1 = (prefix + _name_1);
+		}
+		else {
+			_xifexpression_1 = "";
+		}
+		return _xifexpression_1;
 	}
 
 	/**

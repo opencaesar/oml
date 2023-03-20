@@ -58,6 +58,7 @@ import io.opencaesar.oml.Member;
 import io.opencaesar.oml.NamedInstance;
 import io.opencaesar.oml.Ontology;
 import io.opencaesar.oml.Predicate;
+import io.opencaesar.oml.Property;
 import io.opencaesar.oml.PropertyPredicate;
 import io.opencaesar.oml.PropertyValueAssertion;
 import io.opencaesar.oml.QuotedLiteral;
@@ -68,6 +69,7 @@ import io.opencaesar.oml.RelationEntityPredicate;
 import io.opencaesar.oml.ReverseRelation;
 import io.opencaesar.oml.Scalar;
 import io.opencaesar.oml.SemanticProperty;
+import io.opencaesar.oml.SpecializableProperty;
 import io.opencaesar.oml.SpecializableTerm;
 import io.opencaesar.oml.Statement;
 import io.opencaesar.oml.StructureInstance;
@@ -737,17 +739,59 @@ public final class OmlRead {
     //-------------------------------------------------
 
     /**
-     * Gets the super (general) terms of the given term
+     * Gets the super terms of the given term
      * 
      * @param term the give term
-     * @return a list of super terms of the given term
+     * @return a list of specialization super terms of the given term
      */
-    public static List<SpecializableTerm> getSuperTerms(SpecializableTerm term) {
+    public static List<Term> getSuperTerms(SpecializableTerm term) {
+    	List<Term> supers = new ArrayList<>();
+        supers.addAll(getSpecializationSuperTerms(term));
+        if (term instanceof Classifier) {
+            supers.addAll(getEquivalenceSuperClassifiers((Classifier)term));
+        } else if (term instanceof SpecializableProperty) {
+            supers.addAll(getEquivalenceSuperProperties((SpecializableProperty)term));
+        }
+        return supers;
+    }
+
+    /**
+     * Gets the specialization super terms of the given term
+     * 
+     * @param term the give term
+     * @return a list of specialization super terms of the given term
+     */
+    public static List<Term> getSpecializationSuperTerms(SpecializableTerm term) {
         return term.getOwnedSpecializations().stream()
-            .map(i -> i.getSuperTerm())
-            .collect(Collectors.toList());
+	            .filter(i -> i.getSuperTerm() != null)
+	            .map(i -> i.getSuperTerm())
+	            .collect(Collectors.toList());
     }
     
+    /**
+     * Gets the equivalence super classifiers of the given classifier
+     * 
+     * @param classifier the given classifier
+     * @return a list of equivalence super classifiers of the given classifier
+     */
+    public static List<Classifier> getEquivalenceSuperClassifiers(Classifier classifier) {
+        return classifier.getOwnedEquivalences().stream()
+	            .flatMap(i -> i.getSuperClassifiers().stream())
+	            .collect(Collectors.toList());
+    }
+
+    /**
+     * Gets the equivalence super properties of the given property
+     * 
+     * @param property the given property
+     * @return a list of equivalence super properties of the given property
+     */
+    public static List<Property> getEquivalenceSuperProperties(SpecializableProperty property) {
+        return property.getOwnedEquivalences().stream()
+	            .map(i -> i.getSuperProperty())
+	            .collect(Collectors.toList());
+    }
+
     /**
      * Gets all the relations defined by the given relation entity
      * 
@@ -795,6 +839,10 @@ public final class OmlRead {
         axioms.addAll(((SpecializableTerm)term).getOwnedSpecializations());
         if (term instanceof Classifier) {
             axioms.addAll(((Classifier)term).getOwnedPropertyRestrictions());
+            axioms.addAll(((Classifier)term).getOwnedEquivalences());
+        }
+        if (term instanceof SpecializableProperty) {
+            axioms.addAll(((SpecializableProperty)term).getOwnedEquivalences());
         }
         if (term instanceof Entity) {
             axioms.addAll(((Entity)term).getOwnedKeys());            
@@ -820,6 +868,24 @@ public final class OmlRead {
     		return ((PropertyPredicate)predicate).getProperty();
     	}
     	return null;
+    }
+
+    /**
+     * Determines if the given scalar is a standard one
+     *  
+     * @param scalar the given scalar
+     * @return whether the scalar is standard
+     */
+    public static boolean isStandardScalar(Scalar scalar) {
+    	var ontology = scalar.getOntology();
+    	if (ontology != null) {
+	    	var ontologyNs = ontology.getNamespace();
+	    	return ontologyNs.equals(OmlConstants.XSD_NS) ||
+	            	ontologyNs.equals(OmlConstants.RDF_NS) ||
+	            	ontologyNs.equals(OmlConstants.RDFS_NS) ||
+	            	ontologyNs.equals(OmlConstants.OWL_NS);
+    	}
+    	return false;
     }
 
     //-------------------------------------------------
@@ -907,11 +973,11 @@ public final class OmlRead {
     public static NamedInstance getTarget(PropertyValueAssertion assertion) {
         return assertion.getNamedInstanceValue();
     }
-    
+
     //-------------------------------------------------
     // LITERALS
     //-------------------------------------------------
-    
+ 
     /**
      * Gets the lexical value of the given literal
      * 
@@ -996,21 +1062,4 @@ public final class OmlRead {
     	return (Scalar) getMemberByIri(literal.eResource().getResourceSet(), iri);
     }
 
-    /**
-     * Determines if the given scalar is a standard one
-     *  
-     * @param scalar the given scalar
-     * @return whetehr the scalar is standard
-     */
-    public static boolean isStandardScalar(Scalar scalar) {
-    	var ontology = scalar.getOntology();
-    	if (ontology != null) {
-	    	var ontologyNs = ontology.getNamespace();
-	    	return ontologyNs.equals(OmlConstants.XSD_NS) ||
-	            	ontologyNs.equals(OmlConstants.RDF_NS) ||
-	            	ontologyNs.equals(OmlConstants.RDFS_NS) ||
-	            	ontologyNs.equals(OmlConstants.OWL_NS);
-    	}
-    	return false;
-    }
 }

@@ -3129,13 +3129,22 @@ public interface OmlPackage extends EPackage {
 	int SPECIALIZABLE_PROPERTY__OWNED_SPECIALIZATIONS = SPECIALIZABLE_TERM__OWNED_SPECIALIZATIONS;
 
 	/**
+	 * The feature id for the '<em><b>Owned Equivalences</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SPECIALIZABLE_PROPERTY__OWNED_EQUIVALENCES = SPECIALIZABLE_TERM_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Specializable Property</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SPECIALIZABLE_PROPERTY_FEATURE_COUNT = SPECIALIZABLE_TERM_FEATURE_COUNT + 0;
+	int SPECIALIZABLE_PROPERTY_FEATURE_COUNT = SPECIALIZABLE_TERM_FEATURE_COUNT + 1;
 
 	/**
 	 * The operation id for the '<em>Extra Validate</em>' operation.
@@ -3265,13 +3274,22 @@ public interface OmlPackage extends EPackage {
 	int CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS = TYPE_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Owned Equivalences</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASSIFIER__OWNED_EQUIVALENCES = TYPE_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Classifier</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CLASSIFIER_FEATURE_COUNT = TYPE_FEATURE_COUNT + 1;
+	int CLASSIFIER_FEATURE_COUNT = TYPE_FEATURE_COUNT + 2;
 
 	/**
 	 * The operation id for the '<em>Extra Validate</em>' operation.
@@ -3627,6 +3645,15 @@ public interface OmlPackage extends EPackage {
 	int ENTITY__OWNED_PROPERTY_RESTRICTIONS = CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS;
 
 	/**
+	 * The feature id for the '<em><b>Owned Equivalences</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENTITY__OWNED_EQUIVALENCES = CLASSIFIER__OWNED_EQUIVALENCES;
+
+	/**
 	 * The feature id for the '<em><b>Owned Keys</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3772,6 +3799,15 @@ public interface OmlPackage extends EPackage {
 	int STRUCTURE__OWNED_PROPERTY_RESTRICTIONS = CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS;
 
 	/**
+	 * The feature id for the '<em><b>Owned Equivalences</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURE__OWNED_EQUIVALENCES = CLASSIFIER__OWNED_EQUIVALENCES;
+
+	/**
 	 * The feature id for the '<em><b>Ref</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3915,6 +3951,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int ASPECT__OWNED_PROPERTY_RESTRICTIONS = ENTITY__OWNED_PROPERTY_RESTRICTIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Equivalences</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASPECT__OWNED_EQUIVALENCES = ENTITY__OWNED_EQUIVALENCES;
 
 	/**
 	 * The feature id for the '<em><b>Owned Keys</b></em>' containment reference list.
@@ -4069,6 +4114,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int CONCEPT__OWNED_PROPERTY_RESTRICTIONS = ENTITY__OWNED_PROPERTY_RESTRICTIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Equivalences</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONCEPT__OWNED_EQUIVALENCES = ENTITY__OWNED_EQUIVALENCES;
 
 	/**
 	 * The feature id for the '<em><b>Owned Keys</b></em>' containment reference list.
@@ -4232,6 +4286,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int RELATION_ENTITY__OWNED_PROPERTY_RESTRICTIONS = ENTITY__OWNED_PROPERTY_RESTRICTIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Equivalences</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_ENTITY__OWNED_EQUIVALENCES = ENTITY__OWNED_EQUIVALENCES;
 
 	/**
 	 * The feature id for the '<em><b>Owned Keys</b></em>' containment reference list.
@@ -4476,6 +4539,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int ANNOTATION_PROPERTY__OWNED_SPECIALIZATIONS = SPECIALIZABLE_PROPERTY__OWNED_SPECIALIZATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Equivalences</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANNOTATION_PROPERTY__OWNED_EQUIVALENCES = SPECIALIZABLE_PROPERTY__OWNED_EQUIVALENCES;
 
 	/**
 	 * The feature id for the '<em><b>Ref</b></em>' reference.
@@ -4750,13 +4822,22 @@ public interface OmlPackage extends EPackage {
 	int SCALAR_PROPERTY__OWNED_SPECIALIZATIONS = SEMANTIC_PROPERTY_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Owned Equivalences</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALAR_PROPERTY__OWNED_EQUIVALENCES = SEMANTIC_PROPERTY_FEATURE_COUNT + 2;
+
+	/**
 	 * The feature id for the '<em><b>Ref</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SCALAR_PROPERTY__REF = SEMANTIC_PROPERTY_FEATURE_COUNT + 2;
+	int SCALAR_PROPERTY__REF = SEMANTIC_PROPERTY_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Functional</b></em>' attribute.
@@ -4765,7 +4846,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SCALAR_PROPERTY__FUNCTIONAL = SEMANTIC_PROPERTY_FEATURE_COUNT + 3;
+	int SCALAR_PROPERTY__FUNCTIONAL = SEMANTIC_PROPERTY_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Domain</b></em>' reference.
@@ -4774,7 +4855,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SCALAR_PROPERTY__DOMAIN = SEMANTIC_PROPERTY_FEATURE_COUNT + 4;
+	int SCALAR_PROPERTY__DOMAIN = SEMANTIC_PROPERTY_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Range</b></em>' reference.
@@ -4783,7 +4864,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SCALAR_PROPERTY__RANGE = SEMANTIC_PROPERTY_FEATURE_COUNT + 5;
+	int SCALAR_PROPERTY__RANGE = SEMANTIC_PROPERTY_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of structural features of the '<em>Scalar Property</em>' class.
@@ -4792,7 +4873,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SCALAR_PROPERTY_FEATURE_COUNT = SEMANTIC_PROPERTY_FEATURE_COUNT + 6;
+	int SCALAR_PROPERTY_FEATURE_COUNT = SEMANTIC_PROPERTY_FEATURE_COUNT + 7;
 
 	/**
 	 * The operation id for the '<em>Extra Validate</em>' operation.
@@ -4940,13 +5021,22 @@ public interface OmlPackage extends EPackage {
 	int STRUCTURED_PROPERTY__OWNED_SPECIALIZATIONS = SEMANTIC_PROPERTY_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Owned Equivalences</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURED_PROPERTY__OWNED_EQUIVALENCES = SEMANTIC_PROPERTY_FEATURE_COUNT + 2;
+
+	/**
 	 * The feature id for the '<em><b>Ref</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STRUCTURED_PROPERTY__REF = SEMANTIC_PROPERTY_FEATURE_COUNT + 2;
+	int STRUCTURED_PROPERTY__REF = SEMANTIC_PROPERTY_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Functional</b></em>' attribute.
@@ -4955,7 +5045,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STRUCTURED_PROPERTY__FUNCTIONAL = SEMANTIC_PROPERTY_FEATURE_COUNT + 3;
+	int STRUCTURED_PROPERTY__FUNCTIONAL = SEMANTIC_PROPERTY_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Domain</b></em>' reference.
@@ -4964,7 +5054,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STRUCTURED_PROPERTY__DOMAIN = SEMANTIC_PROPERTY_FEATURE_COUNT + 4;
+	int STRUCTURED_PROPERTY__DOMAIN = SEMANTIC_PROPERTY_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Range</b></em>' reference.
@@ -4973,7 +5063,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STRUCTURED_PROPERTY__RANGE = SEMANTIC_PROPERTY_FEATURE_COUNT + 5;
+	int STRUCTURED_PROPERTY__RANGE = SEMANTIC_PROPERTY_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of structural features of the '<em>Structured Property</em>' class.
@@ -4982,7 +5072,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STRUCTURED_PROPERTY_FEATURE_COUNT = SEMANTIC_PROPERTY_FEATURE_COUNT + 6;
+	int STRUCTURED_PROPERTY_FEATURE_COUNT = SEMANTIC_PROPERTY_FEATURE_COUNT + 7;
 
 	/**
 	 * The operation id for the '<em>Extra Validate</em>' operation.
@@ -5835,13 +5925,22 @@ public interface OmlPackage extends EPackage {
 	int UNREIFIED_RELATION__TRANSITIVE = RELATION_FEATURE_COUNT + 11;
 
 	/**
+	 * The feature id for the '<em><b>Owned Equivalences</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNREIFIED_RELATION__OWNED_EQUIVALENCES = RELATION_FEATURE_COUNT + 12;
+
+	/**
 	 * The feature id for the '<em><b>Ref</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int UNREIFIED_RELATION__REF = RELATION_FEATURE_COUNT + 12;
+	int UNREIFIED_RELATION__REF = RELATION_FEATURE_COUNT + 13;
 
 	/**
 	 * The number of structural features of the '<em>Unreified Relation</em>' class.
@@ -5850,7 +5949,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNREIFIED_RELATION_FEATURE_COUNT = RELATION_FEATURE_COUNT + 13;
+	int UNREIFIED_RELATION_FEATURE_COUNT = RELATION_FEATURE_COUNT + 14;
 
 	/**
 	 * The operation id for the '<em>Extra Validate</em>' operation.
@@ -6788,13 +6887,22 @@ public interface OmlPackage extends EPackage {
 	int PROPERTY_RESTRICTION_AXIOM__OWNING_CLASSIFIER = AXIOM_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Owning Axiom</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_RESTRICTION_AXIOM__OWNING_AXIOM = AXIOM_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Property Restriction Axiom</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_RESTRICTION_AXIOM_FEATURE_COUNT = AXIOM_FEATURE_COUNT + 2;
+	int PROPERTY_RESTRICTION_AXIOM_FEATURE_COUNT = AXIOM_FEATURE_COUNT + 3;
 
 	/**
 	 * The operation id for the '<em>Extra Validate</em>' operation.
@@ -6906,6 +7014,161 @@ public interface OmlPackage extends EPackage {
 	int LITERAL_ENUMERATION_AXIOM_OPERATION_COUNT = AXIOM_OPERATION_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link io.opencaesar.oml.impl.ClassifierEquivalenceAxiomImpl <em>Classifier Equivalence Axiom</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see io.opencaesar.oml.impl.ClassifierEquivalenceAxiomImpl
+	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getClassifierEquivalenceAxiom()
+	 * @generated
+	 */
+	int CLASSIFIER_EQUIVALENCE_AXIOM = 55;
+
+	/**
+	 * The feature id for the '<em><b>Super Classifiers</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASSIFIER_EQUIVALENCE_AXIOM__SUPER_CLASSIFIERS = AXIOM_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Owned Property Restrictions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASSIFIER_EQUIVALENCE_AXIOM__OWNED_PROPERTY_RESTRICTIONS = AXIOM_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Owning Classifier</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASSIFIER_EQUIVALENCE_AXIOM__OWNING_CLASSIFIER = AXIOM_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>Classifier Equivalence Axiom</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASSIFIER_EQUIVALENCE_AXIOM_FEATURE_COUNT = AXIOM_FEATURE_COUNT + 3;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASSIFIER_EQUIVALENCE_AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Get Ontology</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASSIFIER_EQUIVALENCE_AXIOM___GET_ONTOLOGY = AXIOM___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Get Sub Classifier</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASSIFIER_EQUIVALENCE_AXIOM___GET_SUB_CLASSIFIER = AXIOM_OPERATION_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>Classifier Equivalence Axiom</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASSIFIER_EQUIVALENCE_AXIOM_OPERATION_COUNT = AXIOM_OPERATION_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link io.opencaesar.oml.impl.PropertyEquivalenceAxiomImpl <em>Property Equivalence Axiom</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see io.opencaesar.oml.impl.PropertyEquivalenceAxiomImpl
+	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getPropertyEquivalenceAxiom()
+	 * @generated
+	 */
+	int PROPERTY_EQUIVALENCE_AXIOM = 56;
+
+	/**
+	 * The feature id for the '<em><b>Super Property</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_EQUIVALENCE_AXIOM__SUPER_PROPERTY = AXIOM_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Owning Property</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_EQUIVALENCE_AXIOM__OWNING_PROPERTY = AXIOM_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Property Equivalence Axiom</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_EQUIVALENCE_AXIOM_FEATURE_COUNT = AXIOM_FEATURE_COUNT + 2;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_EQUIVALENCE_AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Get Ontology</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_EQUIVALENCE_AXIOM___GET_ONTOLOGY = AXIOM___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Get Sub Property</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_EQUIVALENCE_AXIOM___GET_SUB_PROPERTY = AXIOM_OPERATION_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>Property Equivalence Axiom</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_EQUIVALENCE_AXIOM_OPERATION_COUNT = AXIOM_OPERATION_COUNT + 1;
+
+	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.impl.PropertyRangeRestrictionAxiomImpl <em>Property Range Restriction Axiom</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6913,7 +7176,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getPropertyRangeRestrictionAxiom()
 	 * @generated
 	 */
-	int PROPERTY_RANGE_RESTRICTION_AXIOM = 55;
+	int PROPERTY_RANGE_RESTRICTION_AXIOM = 57;
 
 	/**
 	 * The feature id for the '<em><b>Property</b></em>' reference.
@@ -6932,6 +7195,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int PROPERTY_RANGE_RESTRICTION_AXIOM__OWNING_CLASSIFIER = PROPERTY_RESTRICTION_AXIOM__OWNING_CLASSIFIER;
+
+	/**
+	 * The feature id for the '<em><b>Owning Axiom</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_RANGE_RESTRICTION_AXIOM__OWNING_AXIOM = PROPERTY_RESTRICTION_AXIOM__OWNING_AXIOM;
 
 	/**
 	 * The feature id for the '<em><b>Kind</b></em>' attribute.
@@ -7004,7 +7276,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getPropertyCardinalityRestrictionAxiom()
 	 * @generated
 	 */
-	int PROPERTY_CARDINALITY_RESTRICTION_AXIOM = 56;
+	int PROPERTY_CARDINALITY_RESTRICTION_AXIOM = 58;
 
 	/**
 	 * The feature id for the '<em><b>Property</b></em>' reference.
@@ -7023,6 +7295,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int PROPERTY_CARDINALITY_RESTRICTION_AXIOM__OWNING_CLASSIFIER = PROPERTY_RESTRICTION_AXIOM__OWNING_CLASSIFIER;
+
+	/**
+	 * The feature id for the '<em><b>Owning Axiom</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_CARDINALITY_RESTRICTION_AXIOM__OWNING_AXIOM = PROPERTY_RESTRICTION_AXIOM__OWNING_AXIOM;
 
 	/**
 	 * The feature id for the '<em><b>Kind</b></em>' attribute.
@@ -7104,7 +7385,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getPropertyValueRestrictionAxiom()
 	 * @generated
 	 */
-	int PROPERTY_VALUE_RESTRICTION_AXIOM = 57;
+	int PROPERTY_VALUE_RESTRICTION_AXIOM = 59;
 
 	/**
 	 * The feature id for the '<em><b>Property</b></em>' reference.
@@ -7123,6 +7404,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int PROPERTY_VALUE_RESTRICTION_AXIOM__OWNING_CLASSIFIER = PROPERTY_RESTRICTION_AXIOM__OWNING_CLASSIFIER;
+
+	/**
+	 * The feature id for the '<em><b>Owning Axiom</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_VALUE_RESTRICTION_AXIOM__OWNING_AXIOM = PROPERTY_RESTRICTION_AXIOM__OWNING_AXIOM;
 
 	/**
 	 * The feature id for the '<em><b>Literal Value</b></em>' containment reference.
@@ -7213,7 +7503,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getTypeAssertion()
 	 * @generated
 	 */
-	int TYPE_ASSERTION = 58;
+	int TYPE_ASSERTION = 60;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -7286,7 +7576,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getPropertyValueAssertion()
 	 * @generated
 	 */
-	int PROPERTY_VALUE_ASSERTION = 59;
+	int PROPERTY_VALUE_ASSERTION = 61;
 
 	/**
 	 * The feature id for the '<em><b>Property</b></em>' reference.
@@ -7395,7 +7685,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getUnaryPredicate()
 	 * @generated
 	 */
-	int UNARY_PREDICATE = 60;
+	int UNARY_PREDICATE = 62;
 
 	/**
 	 * The feature id for the '<em><b>Antecedent Rule</b></em>' container reference.
@@ -7468,7 +7758,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getBinaryPredicate()
 	 * @generated
 	 */
-	int BINARY_PREDICATE = 61;
+	int BINARY_PREDICATE = 63;
 
 	/**
 	 * The feature id for the '<em><b>Antecedent Rule</b></em>' container reference.
@@ -7550,7 +7840,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getBuiltInPredicate()
 	 * @generated
 	 */
-	int BUILT_IN_PREDICATE = 62;
+	int BUILT_IN_PREDICATE = 64;
 
 	/**
 	 * The feature id for the '<em><b>Antecedent Rule</b></em>' container reference.
@@ -7632,7 +7922,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getTypePredicate()
 	 * @generated
 	 */
-	int TYPE_PREDICATE = 63;
+	int TYPE_PREDICATE = 65;
 
 	/**
 	 * The feature id for the '<em><b>Antecedent Rule</b></em>' container reference.
@@ -7714,7 +8004,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRelationEntityPredicate()
 	 * @generated
 	 */
-	int RELATION_ENTITY_PREDICATE = 64;
+	int RELATION_ENTITY_PREDICATE = 66;
 
 	/**
 	 * The feature id for the '<em><b>Antecedent Rule</b></em>' container reference.
@@ -7814,7 +8104,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getPropertyPredicate()
 	 * @generated
 	 */
-	int PROPERTY_PREDICATE = 65;
+	int PROPERTY_PREDICATE = 67;
 
 	/**
 	 * The feature id for the '<em><b>Antecedent Rule</b></em>' container reference.
@@ -7905,7 +8195,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getSameAsPredicate()
 	 * @generated
 	 */
-	int SAME_AS_PREDICATE = 66;
+	int SAME_AS_PREDICATE = 68;
 
 	/**
 	 * The feature id for the '<em><b>Antecedent Rule</b></em>' container reference.
@@ -7987,7 +8277,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDifferentFromPredicate()
 	 * @generated
 	 */
-	int DIFFERENT_FROM_PREDICATE = 67;
+	int DIFFERENT_FROM_PREDICATE = 69;
 
 	/**
 	 * The feature id for the '<em><b>Antecedent Rule</b></em>' container reference.
@@ -8069,7 +8359,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getQuotedLiteral()
 	 * @generated
 	 */
-	int QUOTED_LITERAL = 68;
+	int QUOTED_LITERAL = 70;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -8142,7 +8432,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getIntegerLiteral()
 	 * @generated
 	 */
-	int INTEGER_LITERAL = 69;
+	int INTEGER_LITERAL = 71;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -8197,7 +8487,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDecimalLiteral()
 	 * @generated
 	 */
-	int DECIMAL_LITERAL = 70;
+	int DECIMAL_LITERAL = 72;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -8252,7 +8542,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDoubleLiteral()
 	 * @generated
 	 */
-	int DOUBLE_LITERAL = 71;
+	int DOUBLE_LITERAL = 73;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -8307,7 +8597,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getBooleanLiteral()
 	 * @generated
 	 */
-	int BOOLEAN_LITERAL = 72;
+	int BOOLEAN_LITERAL = 74;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -8362,7 +8652,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getSeparatorKind()
 	 * @generated
 	 */
-	int SEPARATOR_KIND = 73;
+	int SEPARATOR_KIND = 75;
 
 	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.RangeRestrictionKind <em>Range Restriction Kind</em>}' enum.
@@ -8372,7 +8662,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRangeRestrictionKind()
 	 * @generated
 	 */
-	int RANGE_RESTRICTION_KIND = 74;
+	int RANGE_RESTRICTION_KIND = 76;
 
 	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.CardinalityRestrictionKind <em>Cardinality Restriction Kind</em>}' enum.
@@ -8382,7 +8672,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getCardinalityRestrictionKind()
 	 * @generated
 	 */
-	int CARDINALITY_RESTRICTION_KIND = 75;
+	int CARDINALITY_RESTRICTION_KIND = 77;
 
 	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.ImportKind <em>Import Kind</em>}' enum.
@@ -8392,7 +8682,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getImportKind()
 	 * @generated
 	 */
-	int IMPORT_KIND = 76;
+	int IMPORT_KIND = 78;
 
 	/**
 	 * The meta object id for the '<em>Unsigned Int</em>' data type.
@@ -8401,7 +8691,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getUnsignedInt()
 	 * @generated
 	 */
-	int UNSIGNED_INT = 77;
+	int UNSIGNED_INT = 79;
 
 	/**
 	 * The meta object id for the '<em>Unsigned Integer</em>' data type.
@@ -8411,7 +8701,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getUnsignedInteger()
 	 * @generated
 	 */
-	int UNSIGNED_INTEGER = 78;
+	int UNSIGNED_INTEGER = 80;
 
 	/**
 	 * The meta object id for the '<em>Decimal</em>' data type.
@@ -8421,7 +8711,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDecimal()
 	 * @generated
 	 */
-	int DECIMAL = 79;
+	int DECIMAL = 81;
 
 	/**
 	 * The meta object id for the '<em>ID</em>' data type.
@@ -8431,7 +8721,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getID()
 	 * @generated
 	 */
-	int ID = 80;
+	int ID = 82;
 
 	/**
 	 * The meta object id for the '<em>Namespace</em>' data type.
@@ -8441,7 +8731,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getNamespace()
 	 * @generated
 	 */
-	int NAMESPACE = 81;
+	int NAMESPACE = 83;
 
 
 	/**
@@ -9323,6 +9613,17 @@ public interface OmlPackage extends EPackage {
 	EClass getSpecializableProperty();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link io.opencaesar.oml.SpecializableProperty#getOwnedEquivalences <em>Owned Equivalences</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Owned Equivalences</em>'.
+	 * @see io.opencaesar.oml.SpecializableProperty#getOwnedEquivalences()
+	 * @see #getSpecializableProperty()
+	 * @generated
+	 */
+	EReference getSpecializableProperty_OwnedEquivalences();
+
+	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.Classifier <em>Classifier</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -9342,6 +9643,17 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getClassifier_OwnedPropertyRestrictions();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link io.opencaesar.oml.Classifier#getOwnedEquivalences <em>Owned Equivalences</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Owned Equivalences</em>'.
+	 * @see io.opencaesar.oml.Classifier#getOwnedEquivalences()
+	 * @see #getClassifier()
+	 * @generated
+	 */
+	EReference getClassifier_OwnedEquivalences();
 
 	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.Scalar <em>Scalar</em>}'.
@@ -10470,6 +10782,17 @@ public interface OmlPackage extends EPackage {
 	EReference getPropertyRestrictionAxiom_OwningClassifier();
 
 	/**
+	 * Returns the meta object for the container reference '{@link io.opencaesar.oml.PropertyRestrictionAxiom#getOwningAxiom <em>Owning Axiom</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Owning Axiom</em>'.
+	 * @see io.opencaesar.oml.PropertyRestrictionAxiom#getOwningAxiom()
+	 * @see #getPropertyRestrictionAxiom()
+	 * @generated
+	 */
+	EReference getPropertyRestrictionAxiom_OwningAxiom();
+
+	/**
 	 * Returns the meta object for the '{@link io.opencaesar.oml.PropertyRestrictionAxiom#getRestrictingDomain() <em>Get Restricting Domain</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -10520,6 +10843,101 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 */
 	EOperation getLiteralEnumerationAxiom__GetEnumeratedScalar();
+
+	/**
+	 * Returns the meta object for class '{@link io.opencaesar.oml.ClassifierEquivalenceAxiom <em>Classifier Equivalence Axiom</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Classifier Equivalence Axiom</em>'.
+	 * @see io.opencaesar.oml.ClassifierEquivalenceAxiom
+	 * @generated
+	 */
+	EClass getClassifierEquivalenceAxiom();
+
+	/**
+	 * Returns the meta object for the reference list '{@link io.opencaesar.oml.ClassifierEquivalenceAxiom#getSuperClassifiers <em>Super Classifiers</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Super Classifiers</em>'.
+	 * @see io.opencaesar.oml.ClassifierEquivalenceAxiom#getSuperClassifiers()
+	 * @see #getClassifierEquivalenceAxiom()
+	 * @generated
+	 */
+	EReference getClassifierEquivalenceAxiom_SuperClassifiers();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link io.opencaesar.oml.ClassifierEquivalenceAxiom#getOwnedPropertyRestrictions <em>Owned Property Restrictions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Owned Property Restrictions</em>'.
+	 * @see io.opencaesar.oml.ClassifierEquivalenceAxiom#getOwnedPropertyRestrictions()
+	 * @see #getClassifierEquivalenceAxiom()
+	 * @generated
+	 */
+	EReference getClassifierEquivalenceAxiom_OwnedPropertyRestrictions();
+
+	/**
+	 * Returns the meta object for the container reference '{@link io.opencaesar.oml.ClassifierEquivalenceAxiom#getOwningClassifier <em>Owning Classifier</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Owning Classifier</em>'.
+	 * @see io.opencaesar.oml.ClassifierEquivalenceAxiom#getOwningClassifier()
+	 * @see #getClassifierEquivalenceAxiom()
+	 * @generated
+	 */
+	EReference getClassifierEquivalenceAxiom_OwningClassifier();
+
+	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.ClassifierEquivalenceAxiom#getSubClassifier() <em>Get Sub Classifier</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Sub Classifier</em>' operation.
+	 * @see io.opencaesar.oml.ClassifierEquivalenceAxiom#getSubClassifier()
+	 * @generated
+	 */
+	EOperation getClassifierEquivalenceAxiom__GetSubClassifier();
+
+	/**
+	 * Returns the meta object for class '{@link io.opencaesar.oml.PropertyEquivalenceAxiom <em>Property Equivalence Axiom</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Property Equivalence Axiom</em>'.
+	 * @see io.opencaesar.oml.PropertyEquivalenceAxiom
+	 * @generated
+	 */
+	EClass getPropertyEquivalenceAxiom();
+
+	/**
+	 * Returns the meta object for the reference '{@link io.opencaesar.oml.PropertyEquivalenceAxiom#getSuperProperty <em>Super Property</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Super Property</em>'.
+	 * @see io.opencaesar.oml.PropertyEquivalenceAxiom#getSuperProperty()
+	 * @see #getPropertyEquivalenceAxiom()
+	 * @generated
+	 */
+	EReference getPropertyEquivalenceAxiom_SuperProperty();
+
+	/**
+	 * Returns the meta object for the container reference '{@link io.opencaesar.oml.PropertyEquivalenceAxiom#getOwningProperty <em>Owning Property</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Owning Property</em>'.
+	 * @see io.opencaesar.oml.PropertyEquivalenceAxiom#getOwningProperty()
+	 * @see #getPropertyEquivalenceAxiom()
+	 * @generated
+	 */
+	EReference getPropertyEquivalenceAxiom_OwningProperty();
+
+	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.PropertyEquivalenceAxiom#getSubProperty() <em>Get Sub Property</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Sub Property</em>' operation.
+	 * @see io.opencaesar.oml.PropertyEquivalenceAxiom#getSubProperty()
+	 * @generated
+	 */
+	EOperation getPropertyEquivalenceAxiom__GetSubProperty();
 
 	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.PropertyRangeRestrictionAxiom <em>Property Range Restriction Axiom</em>}'.
@@ -11928,6 +12346,14 @@ public interface OmlPackage extends EPackage {
 		EClass SPECIALIZABLE_PROPERTY = eINSTANCE.getSpecializableProperty();
 
 		/**
+		 * The meta object literal for the '<em><b>Owned Equivalences</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SPECIALIZABLE_PROPERTY__OWNED_EQUIVALENCES = eINSTANCE.getSpecializableProperty_OwnedEquivalences();
+
+		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.ClassifierImpl <em>Classifier</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -11944,6 +12370,14 @@ public interface OmlPackage extends EPackage {
 		 * @generated
 		 */
 		EReference CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS = eINSTANCE.getClassifier_OwnedPropertyRestrictions();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Equivalences</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CLASSIFIER__OWNED_EQUIVALENCES = eINSTANCE.getClassifier_OwnedEquivalences();
 
 		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.ScalarImpl <em>Scalar</em>}' class.
@@ -12854,6 +13288,14 @@ public interface OmlPackage extends EPackage {
 		EReference PROPERTY_RESTRICTION_AXIOM__OWNING_CLASSIFIER = eINSTANCE.getPropertyRestrictionAxiom_OwningClassifier();
 
 		/**
+		 * The meta object literal for the '<em><b>Owning Axiom</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PROPERTY_RESTRICTION_AXIOM__OWNING_AXIOM = eINSTANCE.getPropertyRestrictionAxiom_OwningAxiom();
+
+		/**
 		 * The meta object literal for the '<em><b>Get Restricting Domain</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -12894,6 +13336,82 @@ public interface OmlPackage extends EPackage {
 		 * @generated
 		 */
 		EOperation LITERAL_ENUMERATION_AXIOM___GET_ENUMERATED_SCALAR = eINSTANCE.getLiteralEnumerationAxiom__GetEnumeratedScalar();
+
+		/**
+		 * The meta object literal for the '{@link io.opencaesar.oml.impl.ClassifierEquivalenceAxiomImpl <em>Classifier Equivalence Axiom</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see io.opencaesar.oml.impl.ClassifierEquivalenceAxiomImpl
+		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getClassifierEquivalenceAxiom()
+		 * @generated
+		 */
+		EClass CLASSIFIER_EQUIVALENCE_AXIOM = eINSTANCE.getClassifierEquivalenceAxiom();
+
+		/**
+		 * The meta object literal for the '<em><b>Super Classifiers</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CLASSIFIER_EQUIVALENCE_AXIOM__SUPER_CLASSIFIERS = eINSTANCE.getClassifierEquivalenceAxiom_SuperClassifiers();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Property Restrictions</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CLASSIFIER_EQUIVALENCE_AXIOM__OWNED_PROPERTY_RESTRICTIONS = eINSTANCE.getClassifierEquivalenceAxiom_OwnedPropertyRestrictions();
+
+		/**
+		 * The meta object literal for the '<em><b>Owning Classifier</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CLASSIFIER_EQUIVALENCE_AXIOM__OWNING_CLASSIFIER = eINSTANCE.getClassifierEquivalenceAxiom_OwningClassifier();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Sub Classifier</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation CLASSIFIER_EQUIVALENCE_AXIOM___GET_SUB_CLASSIFIER = eINSTANCE.getClassifierEquivalenceAxiom__GetSubClassifier();
+
+		/**
+		 * The meta object literal for the '{@link io.opencaesar.oml.impl.PropertyEquivalenceAxiomImpl <em>Property Equivalence Axiom</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see io.opencaesar.oml.impl.PropertyEquivalenceAxiomImpl
+		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getPropertyEquivalenceAxiom()
+		 * @generated
+		 */
+		EClass PROPERTY_EQUIVALENCE_AXIOM = eINSTANCE.getPropertyEquivalenceAxiom();
+
+		/**
+		 * The meta object literal for the '<em><b>Super Property</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PROPERTY_EQUIVALENCE_AXIOM__SUPER_PROPERTY = eINSTANCE.getPropertyEquivalenceAxiom_SuperProperty();
+
+		/**
+		 * The meta object literal for the '<em><b>Owning Property</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PROPERTY_EQUIVALENCE_AXIOM__OWNING_PROPERTY = eINSTANCE.getPropertyEquivalenceAxiom_OwningProperty();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Sub Property</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation PROPERTY_EQUIVALENCE_AXIOM___GET_SUB_PROPERTY = eINSTANCE.getPropertyEquivalenceAxiom__GetSubProperty();
 
 		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.PropertyRangeRestrictionAxiomImpl <em>Property Range Restriction Axiom</em>}' class.

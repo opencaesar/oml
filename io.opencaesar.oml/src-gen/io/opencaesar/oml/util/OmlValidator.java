@@ -233,6 +233,10 @@ public class OmlValidator extends EObjectValidator {
 				return validatePropertyRestrictionAxiom((PropertyRestrictionAxiom)value, diagnostics, context);
 			case OmlPackage.LITERAL_ENUMERATION_AXIOM:
 				return validateLiteralEnumerationAxiom((LiteralEnumerationAxiom)value, diagnostics, context);
+			case OmlPackage.CLASSIFIER_EQUIVALENCE_AXIOM:
+				return validateClassifierEquivalenceAxiom((ClassifierEquivalenceAxiom)value, diagnostics, context);
+			case OmlPackage.PROPERTY_EQUIVALENCE_AXIOM:
+				return validatePropertyEquivalenceAxiom((PropertyEquivalenceAxiom)value, diagnostics, context);
 			case OmlPackage.PROPERTY_RANGE_RESTRICTION_AXIOM:
 				return validatePropertyRangeRestrictionAxiom((PropertyRangeRestrictionAxiom)value, diagnostics, context);
 			case OmlPackage.PROPERTY_CARDINALITY_RESTRICTION_AXIOM:
@@ -1344,6 +1348,44 @@ public class OmlValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(literalEnumerationAxiom, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(literalEnumerationAxiom, diagnostics, context);
 		if (result || diagnostics != null) result &= validateElement_extraValidate(literalEnumerationAxiom, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateClassifierEquivalenceAxiom(ClassifierEquivalenceAxiom classifierEquivalenceAxiom, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		if (!validate_NoCircularContainment(classifierEquivalenceAxiom, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms(classifierEquivalenceAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(classifierEquivalenceAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(classifierEquivalenceAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(classifierEquivalenceAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(classifierEquivalenceAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(classifierEquivalenceAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(classifierEquivalenceAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(classifierEquivalenceAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validateElement_extraValidate(classifierEquivalenceAxiom, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validatePropertyEquivalenceAxiom(PropertyEquivalenceAxiom propertyEquivalenceAxiom, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		if (!validate_NoCircularContainment(propertyEquivalenceAxiom, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms(propertyEquivalenceAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(propertyEquivalenceAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(propertyEquivalenceAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(propertyEquivalenceAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(propertyEquivalenceAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(propertyEquivalenceAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(propertyEquivalenceAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(propertyEquivalenceAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validateElement_extraValidate(propertyEquivalenceAxiom, diagnostics, context);
 		return result;
 	}
 

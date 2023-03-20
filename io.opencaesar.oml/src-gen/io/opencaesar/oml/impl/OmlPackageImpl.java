@@ -30,6 +30,7 @@ import io.opencaesar.oml.BuiltIn;
 import io.opencaesar.oml.BuiltInPredicate;
 import io.opencaesar.oml.CardinalityRestrictionKind;
 import io.opencaesar.oml.Classifier;
+import io.opencaesar.oml.ClassifierEquivalenceAxiom;
 import io.opencaesar.oml.Concept;
 import io.opencaesar.oml.ConceptInstance;
 import io.opencaesar.oml.DecimalLiteral;
@@ -60,6 +61,7 @@ import io.opencaesar.oml.Ontology;
 import io.opencaesar.oml.Predicate;
 import io.opencaesar.oml.Property;
 import io.opencaesar.oml.PropertyCardinalityRestrictionAxiom;
+import io.opencaesar.oml.PropertyEquivalenceAxiom;
 import io.opencaesar.oml.PropertyPredicate;
 import io.opencaesar.oml.PropertyRangeRestrictionAxiom;
 import io.opencaesar.oml.PropertyRestrictionAxiom;
@@ -506,6 +508,20 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	private EClass literalEnumerationAxiomEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass classifierEquivalenceAxiomEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass propertyEquivalenceAxiomEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1615,6 +1631,16 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
+	public EReference getSpecializableProperty_OwnedEquivalences() {
+		return (EReference)specializablePropertyEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getClassifier() {
 		return classifierEClass;
 	}
@@ -1627,6 +1653,16 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	@Override
 	public EReference getClassifier_OwnedPropertyRestrictions() {
 		return (EReference)classifierEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getClassifier_OwnedEquivalences() {
+		return (EReference)classifierEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -2715,6 +2751,16 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
+	public EReference getPropertyRestrictionAxiom_OwningAxiom() {
+		return (EReference)propertyRestrictionAxiomEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EOperation getPropertyRestrictionAxiom__GetRestrictingDomain() {
 		return propertyRestrictionAxiomEClass.getEOperations().get(0);
 	}
@@ -2757,6 +2803,96 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	@Override
 	public EOperation getLiteralEnumerationAxiom__GetEnumeratedScalar() {
 		return literalEnumerationAxiomEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getClassifierEquivalenceAxiom() {
+		return classifierEquivalenceAxiomEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getClassifierEquivalenceAxiom_SuperClassifiers() {
+		return (EReference)classifierEquivalenceAxiomEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getClassifierEquivalenceAxiom_OwnedPropertyRestrictions() {
+		return (EReference)classifierEquivalenceAxiomEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getClassifierEquivalenceAxiom_OwningClassifier() {
+		return (EReference)classifierEquivalenceAxiomEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getClassifierEquivalenceAxiom__GetSubClassifier() {
+		return classifierEquivalenceAxiomEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getPropertyEquivalenceAxiom() {
+		return propertyEquivalenceAxiomEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getPropertyEquivalenceAxiom_SuperProperty() {
+		return (EReference)propertyEquivalenceAxiomEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getPropertyEquivalenceAxiom_OwningProperty() {
+		return (EReference)propertyEquivalenceAxiomEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getPropertyEquivalenceAxiom__GetSubProperty() {
+		return propertyEquivalenceAxiomEClass.getEOperations().get(0);
 	}
 
 	/**
@@ -3512,9 +3648,11 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		createEAttribute(relationBaseEClass, RELATION_BASE__TRANSITIVE);
 
 		specializablePropertyEClass = createEClass(SPECIALIZABLE_PROPERTY);
+		createEReference(specializablePropertyEClass, SPECIALIZABLE_PROPERTY__OWNED_EQUIVALENCES);
 
 		classifierEClass = createEClass(CLASSIFIER);
 		createEReference(classifierEClass, CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS);
+		createEReference(classifierEClass, CLASSIFIER__OWNED_EQUIVALENCES);
 
 		scalarEClass = createEClass(SCALAR);
 		createEReference(scalarEClass, SCALAR__REF);
@@ -3645,12 +3783,24 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		propertyRestrictionAxiomEClass = createEClass(PROPERTY_RESTRICTION_AXIOM);
 		createEReference(propertyRestrictionAxiomEClass, PROPERTY_RESTRICTION_AXIOM__PROPERTY);
 		createEReference(propertyRestrictionAxiomEClass, PROPERTY_RESTRICTION_AXIOM__OWNING_CLASSIFIER);
+		createEReference(propertyRestrictionAxiomEClass, PROPERTY_RESTRICTION_AXIOM__OWNING_AXIOM);
 		createEOperation(propertyRestrictionAxiomEClass, PROPERTY_RESTRICTION_AXIOM___GET_RESTRICTING_DOMAIN);
 
 		literalEnumerationAxiomEClass = createEClass(LITERAL_ENUMERATION_AXIOM);
 		createEReference(literalEnumerationAxiomEClass, LITERAL_ENUMERATION_AXIOM__LITERALS);
 		createEReference(literalEnumerationAxiomEClass, LITERAL_ENUMERATION_AXIOM__OWNING_SCALAR);
 		createEOperation(literalEnumerationAxiomEClass, LITERAL_ENUMERATION_AXIOM___GET_ENUMERATED_SCALAR);
+
+		classifierEquivalenceAxiomEClass = createEClass(CLASSIFIER_EQUIVALENCE_AXIOM);
+		createEReference(classifierEquivalenceAxiomEClass, CLASSIFIER_EQUIVALENCE_AXIOM__SUPER_CLASSIFIERS);
+		createEReference(classifierEquivalenceAxiomEClass, CLASSIFIER_EQUIVALENCE_AXIOM__OWNED_PROPERTY_RESTRICTIONS);
+		createEReference(classifierEquivalenceAxiomEClass, CLASSIFIER_EQUIVALENCE_AXIOM__OWNING_CLASSIFIER);
+		createEOperation(classifierEquivalenceAxiomEClass, CLASSIFIER_EQUIVALENCE_AXIOM___GET_SUB_CLASSIFIER);
+
+		propertyEquivalenceAxiomEClass = createEClass(PROPERTY_EQUIVALENCE_AXIOM);
+		createEReference(propertyEquivalenceAxiomEClass, PROPERTY_EQUIVALENCE_AXIOM__SUPER_PROPERTY);
+		createEReference(propertyEquivalenceAxiomEClass, PROPERTY_EQUIVALENCE_AXIOM__OWNING_PROPERTY);
+		createEOperation(propertyEquivalenceAxiomEClass, PROPERTY_EQUIVALENCE_AXIOM___GET_SUB_PROPERTY);
 
 		propertyRangeRestrictionAxiomEClass = createEClass(PROPERTY_RANGE_RESTRICTION_AXIOM);
 		createEAttribute(propertyRangeRestrictionAxiomEClass, PROPERTY_RANGE_RESTRICTION_AXIOM__KIND);
@@ -3831,6 +3981,8 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		instanceEnumerationAxiomEClass.getESuperTypes().add(this.getAxiom());
 		propertyRestrictionAxiomEClass.getESuperTypes().add(this.getAxiom());
 		literalEnumerationAxiomEClass.getESuperTypes().add(this.getAxiom());
+		classifierEquivalenceAxiomEClass.getESuperTypes().add(this.getAxiom());
+		propertyEquivalenceAxiomEClass.getESuperTypes().add(this.getAxiom());
 		propertyRangeRestrictionAxiomEClass.getESuperTypes().add(this.getPropertyRestrictionAxiom());
 		propertyCardinalityRestrictionAxiomEClass.getESuperTypes().add(this.getPropertyRestrictionAxiom());
 		propertyValueRestrictionAxiomEClass.getESuperTypes().add(this.getPropertyRestrictionAxiom());
@@ -3988,9 +4140,11 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		initEAttribute(getRelationBase_Transitive(), theEcorePackage.getEBoolean(), "transitive", null, 0, 1, RelationBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(specializablePropertyEClass, SpecializableProperty.class, "SpecializableProperty", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getSpecializableProperty_OwnedEquivalences(), this.getPropertyEquivalenceAxiom(), this.getPropertyEquivalenceAxiom_OwningProperty(), "ownedEquivalences", null, 0, -1, SpecializableProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(classifierEClass, Classifier.class, "Classifier", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getClassifier_OwnedPropertyRestrictions(), this.getPropertyRestrictionAxiom(), this.getPropertyRestrictionAxiom_OwningClassifier(), "ownedPropertyRestrictions", null, 0, -1, Classifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getClassifier_OwnedEquivalences(), this.getClassifierEquivalenceAxiom(), this.getClassifierEquivalenceAxiom_OwningClassifier(), "ownedEquivalences", null, 0, -1, Classifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(scalarEClass, Scalar.class, "Scalar", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getScalar_Ref(), this.getScalar(), null, "ref", null, 0, 1, Scalar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -4147,10 +4301,10 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		initEOperation(getKeyAxiom__GetKeyedEntity(), this.getEntity(), "getKeyedEntity", 0, 1, !IS_UNIQUE, IS_ORDERED);
 
 		initEClass(specializationAxiomEClass, SpecializationAxiom.class, "SpecializationAxiom", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getSpecializationAxiom_SuperTerm(), this.getSpecializableTerm(), null, "superTerm", null, 1, 1, SpecializationAxiom.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSpecializationAxiom_SuperTerm(), this.getTerm(), null, "superTerm", null, 1, 1, SpecializationAxiom.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSpecializationAxiom_OwningTerm(), this.getSpecializableTerm(), this.getSpecializableTerm_OwnedSpecializations(), "owningTerm", null, 0, 1, SpecializationAxiom.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEOperation(getSpecializationAxiom__GetSubTerm(), this.getSpecializableTerm(), "getSubTerm", 0, 1, !IS_UNIQUE, IS_ORDERED);
+		initEOperation(getSpecializationAxiom__GetSubTerm(), this.getTerm(), "getSubTerm", 0, 1, !IS_UNIQUE, IS_ORDERED);
 
 		initEClass(instanceEnumerationAxiomEClass, InstanceEnumerationAxiom.class, "InstanceEnumerationAxiom", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getInstanceEnumerationAxiom_Instances(), this.getConceptInstance(), null, "instances", null, 1, -1, InstanceEnumerationAxiom.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -4161,6 +4315,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		initEClass(propertyRestrictionAxiomEClass, PropertyRestrictionAxiom.class, "PropertyRestrictionAxiom", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPropertyRestrictionAxiom_Property(), this.getSemanticProperty(), null, "property", null, 1, 1, PropertyRestrictionAxiom.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPropertyRestrictionAxiom_OwningClassifier(), this.getClassifier(), this.getClassifier_OwnedPropertyRestrictions(), "owningClassifier", null, 0, 1, PropertyRestrictionAxiom.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPropertyRestrictionAxiom_OwningAxiom(), this.getClassifierEquivalenceAxiom(), this.getClassifierEquivalenceAxiom_OwnedPropertyRestrictions(), "owningAxiom", null, 0, 1, PropertyRestrictionAxiom.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEOperation(getPropertyRestrictionAxiom__GetRestrictingDomain(), this.getClassifier(), "getRestrictingDomain", 0, 1, !IS_UNIQUE, IS_ORDERED);
 
@@ -4169,6 +4324,19 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		initEReference(getLiteralEnumerationAxiom_OwningScalar(), this.getScalar(), this.getScalar_OwnedEnumeration(), "owningScalar", null, 0, 1, LiteralEnumerationAxiom.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEOperation(getLiteralEnumerationAxiom__GetEnumeratedScalar(), this.getScalar(), "getEnumeratedScalar", 0, 1, !IS_UNIQUE, IS_ORDERED);
+
+		initEClass(classifierEquivalenceAxiomEClass, ClassifierEquivalenceAxiom.class, "ClassifierEquivalenceAxiom", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getClassifierEquivalenceAxiom_SuperClassifiers(), this.getClassifier(), null, "superClassifiers", null, 0, -1, ClassifierEquivalenceAxiom.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getClassifierEquivalenceAxiom_OwnedPropertyRestrictions(), this.getPropertyRestrictionAxiom(), this.getPropertyRestrictionAxiom_OwningAxiom(), "ownedPropertyRestrictions", null, 0, -1, ClassifierEquivalenceAxiom.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getClassifierEquivalenceAxiom_OwningClassifier(), this.getClassifier(), this.getClassifier_OwnedEquivalences(), "owningClassifier", null, 0, 1, ClassifierEquivalenceAxiom.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEOperation(getClassifierEquivalenceAxiom__GetSubClassifier(), this.getClassifier(), "getSubClassifier", 0, 1, !IS_UNIQUE, IS_ORDERED);
+
+		initEClass(propertyEquivalenceAxiomEClass, PropertyEquivalenceAxiom.class, "PropertyEquivalenceAxiom", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getPropertyEquivalenceAxiom_SuperProperty(), this.getProperty(), null, "superProperty", null, 1, 1, PropertyEquivalenceAxiom.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPropertyEquivalenceAxiom_OwningProperty(), this.getSpecializableProperty(), this.getSpecializableProperty_OwnedEquivalences(), "owningProperty", null, 0, 1, PropertyEquivalenceAxiom.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEOperation(getPropertyEquivalenceAxiom__GetSubProperty(), this.getProperty(), "getSubProperty", 0, 1, !IS_UNIQUE, IS_ORDERED);
 
 		initEClass(propertyRangeRestrictionAxiomEClass, PropertyRangeRestrictionAxiom.class, "PropertyRangeRestrictionAxiom", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPropertyRangeRestrictionAxiom_Kind(), this.getRangeRestrictionKind(), "kind", "all", 1, 1, PropertyRangeRestrictionAxiom.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -4650,6 +4818,18 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		   });
 		addAnnotation
 		  (literalEnumerationAxiomEClass,
+		   source,
+		   new String[] {
+			   "heading", "Axioms"
+		   });
+		addAnnotation
+		  (classifierEquivalenceAxiomEClass,
+		   source,
+		   new String[] {
+			   "heading", "Axioms"
+		   });
+		addAnnotation
+		  (propertyEquivalenceAxiomEClass,
 		   source,
 		   new String[] {
 			   "heading", "Axioms"

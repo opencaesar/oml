@@ -110,9 +110,8 @@ class Annotation extends Element {
     op IdentifiedElement getAnnotatedElement() {
         if (owningElement instanceof Member) {
             return (owningElement as Member).resolve()
-        } else {
-            return owningElement
         }
+        return owningElement
     }
 }
 
@@ -355,19 +354,19 @@ abstract class Member extends IdentifiedElement {
      * Gets the IRI of this member
      */
     op String getIri() {
-    	val m = if (getRef() !== null) getRef() else this
-        val ontology = m.getOntology()
-        val namespace = if (ontology !== null) ontology.getNamespace() else SeparatorKind.HASH
-        return namespace+m.getName()
+    	val m = resolve()
+        val ontology = m.ontology
+        val namespace = if (ontology !== null) ontology.namespace else SeparatorKind.HASH
+        return if (m.name !== null) namespace + m.name else ''
     }
     /*
      * Gets the abbreviated IRI of this member
      */
     op String getAbbreviatedIri() {
-     	val m = if (getRef() !== null) getRef() else this
-        val ontology = m.getOntology()
-        val prefix = if (ontology !== null) ontology.getPrefix()+':' else ':'
-        return prefix + m.getName()
+     	val m = resolve()
+        val ontology = m.ontology
+        val prefix = if (ontology !== null) ontology.prefix  + ':' else ':'
+        return if (m.name !== null) prefix + m.name else ''
     }
 }
 
@@ -463,7 +462,7 @@ abstract class DescriptionMember extends Member {
 }
 
 ////////////////////////////////////////
-//  Statements 
+//  Statements
 ////////////////////////////////////////
 
 /*
@@ -622,6 +621,10 @@ abstract class RelationBase extends SpecializableTerm {
  */
 @Bikeshed(heading="Properties")
 abstract class SpecializableProperty extends SpecializableTerm, Property {
+    /*
+     * The set of property equivalence axioms of this property
+     */
+    contains PropertyEquivalenceAxiom[*] ownedEquivalences opposite owningProperty
 }
 
 ////////////////////////////////////////
@@ -639,6 +642,10 @@ abstract class Classifier extends Type {
      * The set of property restriction axioms of this classifier
      */
     contains PropertyRestrictionAxiom[*] ownedPropertyRestrictions opposite owningClassifier
+    /*
+     * The set of classifier equivalence axioms of this classifier
+     */
+    contains ClassifierEquivalenceAxiom[*] ownedEquivalences opposite owningClassifier
 }
 
 /*
@@ -1188,7 +1195,7 @@ class SpecializationAxiom extends Axiom {
     /*
      * The super term specified by this axiom
      */
-    refers SpecializableTerm[1] superTerm
+    refers Term[1] superTerm
     /*
      * The owning term specified by this axiom
      */
@@ -1196,8 +1203,8 @@ class SpecializationAxiom extends Axiom {
     /*
      * Gets the sub (specific) term of the given specialization axiom
      */
-    op SpecializableTerm getSubTerm() {
-    	return owningTerm.resolve() as SpecializableTerm
+    op Term getSubTerm() {
+    	return owningTerm.resolve() as Term
     }
 }
 
@@ -1237,9 +1244,16 @@ abstract class PropertyRestrictionAxiom extends Axiom {
      */
     container Classifier[?] owningClassifier opposite ownedPropertyRestrictions
     /*
+     * The owning classifier equivalence axiom specified by this axiom
+     */
+    container ClassifierEquivalenceAxiom[?] owningAxiom opposite ownedPropertyRestrictions
+    /*
      * Gets the restricting domain of the given property restriction axiom
      */
     op Classifier getRestrictingDomain() {
+    	if (owningAxiom !== null) {
+    		return owningAxiom.subClassifier
+   		}
     	return owningClassifier.resolve() as Classifier
     }
     
@@ -1265,6 +1279,58 @@ class LiteralEnumerationAxiom extends Axiom {
     	return owningScalar.resolve() as Scalar
     }
 }
+
+/*
+ * ClassifierEquivalenceAxiom is an axiom specified on a classifier that states that it is equivalent to the intersection of named classifiers
+ * and property restrictions. This axiom implies that the named classifiers are super types of the subject classifier. It also implies
+ * that when an instance is classified by this intersection, then it follows that it is also classified by the subject classifier. 
+ * Conversely, when an instance is classified by the subject classifier, then it follows that it is also classified by the intersection.
+ * In other words, this axiom enables bi-directional (or two-way) inferencing.
+ */
+@Bikeshed(heading="Axioms")
+class ClassifierEquivalenceAxiom extends Axiom {
+    /*
+     * The super classifiers specified by this axiom
+     */
+    refers Classifier[*] superClassifiers
+    /*
+     * The property restrictions specified by this axiom
+     */
+    contains PropertyRestrictionAxiom[*] ownedPropertyRestrictions opposite owningAxiom
+    /*
+     * The owning classifier specified by this axiom
+     */
+    container Classifier[?] owningClassifier opposite ownedEquivalences
+    /*
+     * Gets the sub classifier of this axiom
+     */
+    op Classifier getSubClassifier() {
+    	return owningClassifier.resolve() as Classifier
+    }
+}
+
+/*
+ * PropertyEquivalenceAxiom is an axiom specified on a proeprty that states that it is equivalent to another property. This axiom implies that
+ * the equivalent properties are super properties of the subject property (and vice versa).
+ */
+@Bikeshed(heading="Axioms")
+class PropertyEquivalenceAxiom extends Axiom {
+    /*
+     * The super property specified by this axiom
+     */
+    refers Property[1] superProperty
+    /*
+     * The owning property specified by this axiom
+     */
+    container SpecializableProperty[?] owningProperty opposite ownedEquivalences
+    /*
+     * Gets the sub property of this axiom
+     */
+    op Property getSubProperty() {
+    	return owningProperty.resolve() as Property
+    }
+}
+
 
 ////////////////////////////////////////
 //  Property Restriction Axioms
@@ -1405,9 +1471,8 @@ class PropertyValueAssertion extends Assertion {
     op Instance getAssertingInstance() {
         if (owningInstance instanceof NamedInstance) {
             return (owningInstance as NamedInstance).resolve() as NamedInstance
-        } else {
-            return owningInstance
         }
+        return owningInstance
     }
 }
 

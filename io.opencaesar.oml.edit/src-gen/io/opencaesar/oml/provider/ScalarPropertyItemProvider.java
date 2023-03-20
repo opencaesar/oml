@@ -196,6 +196,7 @@ public class ScalarPropertyItemProvider extends SemanticPropertyItemProvider {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(OmlPackage.Literals.SPECIALIZABLE_TERM__OWNED_SPECIALIZATIONS);
+			childrenFeatures.add(OmlPackage.Literals.SPECIALIZABLE_PROPERTY__OWNED_EQUIVALENCES);
 		}
 		return childrenFeatures;
 	}
@@ -255,6 +256,7 @@ public class ScalarPropertyItemProvider extends SemanticPropertyItemProvider {
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case OmlPackage.SCALAR_PROPERTY__OWNED_SPECIALIZATIONS:
+			case OmlPackage.SCALAR_PROPERTY__OWNED_EQUIVALENCES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -276,6 +278,11 @@ public class ScalarPropertyItemProvider extends SemanticPropertyItemProvider {
 			(createChildParameter
 				(OmlPackage.Literals.SPECIALIZABLE_TERM__OWNED_SPECIALIZATIONS,
 				 OmlFactory.eINSTANCE.createSpecializationAxiom()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(OmlPackage.Literals.SPECIALIZABLE_PROPERTY__OWNED_EQUIVALENCES,
+				 OmlFactory.eINSTANCE.createPropertyEquivalenceAxiom()));
 	}
 
 }

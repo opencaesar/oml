@@ -321,9 +321,7 @@ public class AnnotationImpl extends ElementImpl implements Annotation {
 			IdentifiedElement _owningElement_1 = this.getOwningElement();
 			return ((Member) _owningElement_1).resolve();
 		}
-		else {
-			return this.getOwningElement();
-		}
+		return this.getOwningElement();
 	}
 
 	/**

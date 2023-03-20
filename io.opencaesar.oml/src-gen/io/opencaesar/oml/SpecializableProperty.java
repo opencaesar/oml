@@ -18,6 +18,7 @@
  */
 package io.opencaesar.oml;
 
+import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -28,6 +29,12 @@ package io.opencaesar.oml;
  * SpecializableProperty is a property that can be specialized.
  * <!-- end-model-doc -->
  *
+ * <p>
+ * The following features are supported:
+ * </p>
+ * <ul>
+ *   <li>{@link io.opencaesar.oml.SpecializableProperty#getOwnedEquivalences <em>Owned Equivalences</em>}</li>
+ * </ul>
  *
  * @see io.opencaesar.oml.OmlPackage#getSpecializableProperty()
  * @model abstract="true"
@@ -35,4 +42,21 @@ package io.opencaesar.oml;
  * @generated
  */
 public interface SpecializableProperty extends SpecializableTerm, Property {
+	/**
+	 * Returns the value of the '<em><b>Owned Equivalences</b></em>' containment reference list.
+	 * The list contents are of type {@link io.opencaesar.oml.PropertyEquivalenceAxiom}.
+	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.PropertyEquivalenceAxiom#getOwningProperty <em>Owning Property</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The set of property equivalence axioms of this property
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Owned Equivalences</em>' containment reference list.
+	 * @see io.opencaesar.oml.OmlPackage#getSpecializableProperty_OwnedEquivalences()
+	 * @see io.opencaesar.oml.PropertyEquivalenceAxiom#getOwningProperty
+	 * @model opposite="owningProperty" containment="true"
+	 * @generated
+	 */
+	EList<PropertyEquivalenceAxiom> getOwnedEquivalences();
+
 } // SpecializableProperty

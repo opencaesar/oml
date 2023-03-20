@@ -35,6 +35,7 @@ import io.opencaesar.oml.BuiltIn;
 import io.opencaesar.oml.BuiltInPredicate;
 import io.opencaesar.oml.CardinalityRestrictionKind;
 import io.opencaesar.oml.Classifier;
+import io.opencaesar.oml.ClassifierEquivalenceAxiom;
 import io.opencaesar.oml.Concept;
 import io.opencaesar.oml.ConceptInstance;
 import io.opencaesar.oml.DecimalLiteral;
@@ -62,6 +63,7 @@ import io.opencaesar.oml.Ontology;
 import io.opencaesar.oml.Predicate;
 import io.opencaesar.oml.Property;
 import io.opencaesar.oml.PropertyCardinalityRestrictionAxiom;
+import io.opencaesar.oml.PropertyEquivalenceAxiom;
 import io.opencaesar.oml.PropertyPredicate;
 import io.opencaesar.oml.PropertyRangeRestrictionAxiom;
 import io.opencaesar.oml.PropertyValueAssertion;
@@ -80,6 +82,7 @@ import io.opencaesar.oml.Scalar;
 import io.opencaesar.oml.ScalarProperty;
 import io.opencaesar.oml.SemanticProperty;
 import io.opencaesar.oml.SeparatorKind;
+import io.opencaesar.oml.SpecializableProperty;
 import io.opencaesar.oml.SpecializableTerm;
 import io.opencaesar.oml.SpecializationAxiom;
 import io.opencaesar.oml.Structure;
@@ -126,7 +129,7 @@ public class OmlWrite {
      * @param objects the given list of objects
      */
     @SuppressWarnings("unchecked")
-    protected static void setCrossReferences(Ontology ontology, Element subject, EReference eRef, List<Element> objects) {
+    protected static void setCrossReferences(Ontology ontology, Element subject, EReference eRef, List<? extends Element> objects) {
         final Class<? extends Element> objectClass = (Class<? extends Element>) eRef.getEType().getInstanceClass();
         assert !eRef.isContainment() : eRef.getName()+" is a containment reference";
         assert eRef.isMany() : eRef.getName()+" is a singular reference";
@@ -769,24 +772,62 @@ public class OmlWrite {
         return axiom;
     }
     
+    // ClassifierEquivalenceAxiom
+
+    /**
+     * Creates a classifier equivalence axiom between the sub classifier and super classifiers and adds it to the given vocabulary
+     *  
+     * @param vocabulary the context vocabulary
+     * @param subClassifier the given sub classifier
+     * @param superClassifiers the given super classifiers
+     * @return a specialization axiom that is added to the vocabulary
+     */
+    public static ClassifierEquivalenceAxiom addClassifierEquivalenceAxiom(Vocabulary vocabulary, Classifier subClassifier, List<Classifier> superClassifiers) {
+        final ClassifierEquivalenceAxiom axiom = create(ClassifierEquivalenceAxiom.class);
+        setCrossReferences(vocabulary, axiom, OmlPackage.Literals.CLASSIFIER_EQUIVALENCE_AXIOM__SUPER_CLASSIFIERS, superClassifiers);
+        setContainmentReference(vocabulary, subClassifier, OmlPackage.Literals.CLASSIFIER__OWNED_EQUIVALENCES, axiom);
+        return axiom;
+    }
+
+    // PropertyEquivalenceAxiom
+
+    /**
+     * Creates a property equivalence axiom between the sub property and super property and adds it to the given vocabulary
+     *  
+     * @param vocabulary the context vocabulary
+     * @param subProperty the given sub property
+     * @param superProperty the given super property
+     * @return a specialization axiom that is added to the vocabulary
+     */
+    public static PropertyEquivalenceAxiom addPropertyEquivalenceAxiom(Vocabulary vocabulary, SpecializableProperty subProperty, Property superProperty) {
+        final PropertyEquivalenceAxiom axiom = create(PropertyEquivalenceAxiom.class);
+        setCrossReference(vocabulary, axiom, OmlPackage.Literals.PROPERTY_EQUIVALENCE_AXIOM__SUPER_PROPERTY, superProperty);
+        setContainmentReference(vocabulary, subProperty, OmlPackage.Literals.SPECIALIZABLE_PROPERTY__OWNED_EQUIVALENCES, axiom);
+        return axiom;
+    }
+
     // PropertyRangeRestrictionAxiom
 
     /**
      * Creates a property range restriction axiom and adds it to the given vocabulary
      * 
      * @param vocabulary the context vocabulary
-     * @param domain the given restricting (classifier) domain
+     * @param owner the given restricting owner (classifier or classifier equivalence axiom)
      * @param property the given restricted property
      * @param range given restricted range
      * @param restrictionKind the kind of the restriction
      * @return a property range restriction axiom that is added to the given vocabulary
      */
-    public static PropertyRangeRestrictionAxiom addPropertyRangeRestrictionAxiom(Vocabulary vocabulary, Classifier domain, SemanticProperty property, Type range, RangeRestrictionKind restrictionKind) {
+    public static PropertyRangeRestrictionAxiom addPropertyRangeRestrictionAxiom(Vocabulary vocabulary, Element owner, SemanticProperty property, Type range, RangeRestrictionKind restrictionKind) {
         final PropertyRangeRestrictionAxiom axiom = create(PropertyRangeRestrictionAxiom.class);
         axiom.setKind(restrictionKind);
         setCrossReference(vocabulary, axiom, OmlPackage.Literals.PROPERTY_RESTRICTION_AXIOM__PROPERTY, property);
         setCrossReference(vocabulary, axiom, OmlPackage.Literals.PROPERTY_RANGE_RESTRICTION_AXIOM__RANGE, range);
-        setContainmentReference(vocabulary, domain, OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS, axiom);
+        if (owner instanceof Classifier) {
+        	setContainmentReference(vocabulary, (Classifier)owner, OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS, axiom);
+        } else if (owner instanceof ClassifierEquivalenceAxiom) {
+            	setContainmentReference(vocabulary, (ClassifierEquivalenceAxiom)owner, OmlPackage.Literals.CLASSIFIER_EQUIVALENCE_AXIOM__OWNED_PROPERTY_RESTRICTIONS, axiom);
+        }
         return axiom;
     }
 
@@ -796,20 +837,24 @@ public class OmlWrite {
      * Creates a property cardinality restriction axiom and adds it to the given vocabulary
      * 
      * @param vocabulary the context vocabulary
-     * @param domain the given restricting (classifier) domain
+     * @param owner the given restricting owner (classifier or classifier equivalence axiom)
      * @param property the given restricted property
      * @param cardinality the restricted cardinality
      * @param range given restricted range
      * @param restrictionKind the kind of the restriction
      * @return a property cardinality restriction axiom that is added to the given vocabulary
      */
-    public static PropertyCardinalityRestrictionAxiom addPropertyCardinalityRestrictionAxiom(Vocabulary vocabulary, Classifier domain, SemanticProperty property, CardinalityRestrictionKind restrictionKind, long cardinality, Type range) {
+    public static PropertyCardinalityRestrictionAxiom addPropertyCardinalityRestrictionAxiom(Vocabulary vocabulary, Element owner, SemanticProperty property, CardinalityRestrictionKind restrictionKind, long cardinality, Type range) {
         final PropertyCardinalityRestrictionAxiom axiom = create(PropertyCardinalityRestrictionAxiom.class);
         axiom.setKind(restrictionKind);
         axiom.setCardinality(cardinality);
         setCrossReference(vocabulary, axiom, OmlPackage.Literals.PROPERTY_RESTRICTION_AXIOM__PROPERTY, property);
         setCrossReference(vocabulary, axiom, OmlPackage.Literals.PROPERTY_CARDINALITY_RESTRICTION_AXIOM__RANGE, range);
-        setContainmentReference(vocabulary, domain, OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS, axiom);
+        if (owner instanceof Classifier) {
+        	setContainmentReference(vocabulary, (Classifier)owner, OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS, axiom);
+        } else if (owner instanceof ClassifierEquivalenceAxiom) {
+            	setContainmentReference(vocabulary, (ClassifierEquivalenceAxiom)owner, OmlPackage.Literals.CLASSIFIER_EQUIVALENCE_AXIOM__OWNED_PROPERTY_RESTRICTIONS, axiom);
+        }
         return axiom;
     }
 
@@ -819,16 +864,20 @@ public class OmlWrite {
      * Creates a property value restriction axiom on a scalar property and adds it to the given vocabulary
      * 
      * @param vocabulary the context vocabulary
-     * @param domain the given restricting (classifier) domain
+     * @param owner the given restricting owner (classifier or classifier equivalence axiom)
      * @param property the given scalar property
      * @param value the restricted literal value
      * @return a property value restriction axiom that is added to the given vocabulary
      */
-    public static PropertyValueRestrictionAxiom addPropertyValueRestrictionAxiom(Vocabulary vocabulary, Classifier domain, ScalarProperty property, Literal value) {
+    public static PropertyValueRestrictionAxiom addPropertyValueRestrictionAxiom(Vocabulary vocabulary, Element owner, ScalarProperty property, Literal value) {
         final PropertyValueRestrictionAxiom axiom = create(PropertyValueRestrictionAxiom.class);
         axiom.setLiteralValue(value);
         setCrossReference(vocabulary, axiom, OmlPackage.Literals.PROPERTY_RESTRICTION_AXIOM__PROPERTY, property);
-        setContainmentReference(vocabulary, domain, OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS, axiom);
+        if (owner instanceof Classifier) {
+        	setContainmentReference(vocabulary, (Classifier)owner, OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS, axiom);
+        } else if (owner instanceof ClassifierEquivalenceAxiom) {
+            	setContainmentReference(vocabulary, (ClassifierEquivalenceAxiom)owner, OmlPackage.Literals.CLASSIFIER_EQUIVALENCE_AXIOM__OWNED_PROPERTY_RESTRICTIONS, axiom);
+        }
         return axiom;
     }
 
@@ -836,16 +885,20 @@ public class OmlWrite {
      * Creates a property value restriction axiom on a structured property and adds it to the given vocabulary
      * 
      * @param vocabulary the context vocabulary
-     * @param domain the given restricting (classifier) domain
+     * @param owner the given restricting owner (classifier or classifier equivalence axiom)
      * @param property the given structured property
      * @param value the restricted structure instance value
      * @return a property value restriction axiom that is added to the given vocabulary
      */
-    public static PropertyValueRestrictionAxiom addPropertyValueRestrictionAxiom(Vocabulary vocabulary, Classifier domain, StructuredProperty property, StructureInstance value) {
+    public static PropertyValueRestrictionAxiom addPropertyValueRestrictionAxiom(Vocabulary vocabulary, Element owner, StructuredProperty property, StructureInstance value) {
         final PropertyValueRestrictionAxiom axiom = create(PropertyValueRestrictionAxiom.class);
         axiom.setStructureInstanceValue(value);
         setCrossReference(vocabulary, axiom, OmlPackage.Literals.PROPERTY_RESTRICTION_AXIOM__PROPERTY, property);
-        setContainmentReference(vocabulary, domain, OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS, axiom);
+        if (owner instanceof Classifier) {
+        	setContainmentReference(vocabulary, (Classifier)owner, OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS, axiom);
+        } else if (owner instanceof ClassifierEquivalenceAxiom) {
+            	setContainmentReference(vocabulary, (ClassifierEquivalenceAxiom)owner, OmlPackage.Literals.CLASSIFIER_EQUIVALENCE_AXIOM__OWNED_PROPERTY_RESTRICTIONS, axiom);
+        }
         return axiom;
     }
 
@@ -853,16 +906,20 @@ public class OmlWrite {
      * Creates a value restriction axiom on a relation and adds it to the given vocabulary
      * 
      * @param vocabulary the context vocabulary
-     * @param domain the given restricting (classifier) domain
+     * @param owner the given restricting owner (classifier or classifier equivalence axiom)
      * @param property the given relation
      * @param value the restricted named instance value
      * @return a property value restriction axiom that is added to the given vocabulary
      */
-    public static PropertyValueRestrictionAxiom addPropertyValueRestrictionAxiom(Vocabulary vocabulary, Classifier domain, Relation property, NamedInstance value) {
+    public static PropertyValueRestrictionAxiom addPropertyValueRestrictionAxiom(Vocabulary vocabulary, Element owner, Relation property, NamedInstance value) {
         final PropertyValueRestrictionAxiom axiom = create(PropertyValueRestrictionAxiom.class);
         axiom.setNamedInstanceValue(value);
         setCrossReference(vocabulary, axiom, OmlPackage.Literals.PROPERTY_RESTRICTION_AXIOM__PROPERTY, property);
-        setContainmentReference(vocabulary, domain, OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS, axiom);
+        if (owner instanceof Classifier) {
+        	setContainmentReference(vocabulary, (Classifier)owner, OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS, axiom);
+        } else if (owner instanceof ClassifierEquivalenceAxiom) {
+            	setContainmentReference(vocabulary, (ClassifierEquivalenceAxiom)owner, OmlPackage.Literals.CLASSIFIER_EQUIVALENCE_AXIOM__OWNED_PROPERTY_RESTRICTIONS, axiom);
+        }
         return axiom;
     }
 

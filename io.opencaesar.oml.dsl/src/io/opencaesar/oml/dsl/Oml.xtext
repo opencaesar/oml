@@ -82,22 +82,20 @@ Entity:
 
 Aspect:
 	ownedAnnotations+=Annotation*
-	('aspect' name=ID | 'ref' 'aspect' ref=[Aspect|Ref]) (':>' ownedSpecializations+=SpecializationAxiom (',' ownedSpecializations+=SpecializationAxiom)*)? ('['
-		(ownedKeys+=KeyAxiom | 
-		 ownedPropertyRestrictions+=PropertyRestrictionAxiom)*
-	']')?;
+	('aspect' name=ID | 'ref' 'aspect' ref=[Aspect|Ref]) ('['
+		(ownedKeys+=KeyAxiom)* 
+	']')? (ClassifierSpecialization)? (ClassifierEquivalence)?;
 
 Concept:
 	ownedAnnotations+=Annotation*
-	('concept' name=ID | 'ref' 'concept' ref=[Concept|Ref]) (':>' ownedSpecializations+=SpecializationAxiom (',' ownedSpecializations+=SpecializationAxiom)*)? ('['
-		(ownedKeys+=KeyAxiom | 
-		 ownedPropertyRestrictions+=PropertyRestrictionAxiom)*
+	('concept' name=ID | 'ref' 'concept' ref=[Concept|Ref]) ('['
 		(ownedEnumeration=InstanceEnumerationAxiom)?
-	']')?;
+		(ownedKeys+=KeyAxiom)* 
+	']')? (ClassifierSpecialization)? (ClassifierEquivalence)?;
 	
 RelationEntity:
 	ownedAnnotations+=Annotation*
-	('relation' 'entity' name=ID | 'ref' 'relation' 'entity' ref=[RelationEntity|Ref]) (':>' ownedSpecializations+=SpecializationAxiom (',' ownedSpecializations+=SpecializationAxiom)*)? ('['
+	('relation' 'entity' name=ID | 'ref' 'relation' 'entity' ref=[RelationEntity|Ref]) ('['
 		('from' source=[Entity|Ref])?
 		('to' target=[Entity|Ref])?
 		((forwardRelation=ForwardRelation)? &
@@ -109,47 +107,35 @@ RelationEntity:
 		 (reflexive?='reflexive')? &
 		 (irreflexive?='irreflexive')? &
 		 (transitive?='transitive')?)
-		(ownedKeys+=KeyAxiom |
-		 ownedPropertyRestrictions+=PropertyRestrictionAxiom)*
-	']')?;
+		(ownedKeys+=KeyAxiom)*
+	']')? (ClassifierSpecialization)? (ClassifierEquivalence)?;
 	
 Structure:
 	ownedAnnotations+=Annotation*
-	('structure' name=ID | 'ref' 'structure' ref=[Structure|Ref]) (':>' ownedSpecializations+=SpecializationAxiom (',' ownedSpecializations+=SpecializationAxiom)*)? ('['
+	('structure' name=ID | 'ref' 'structure' ref=[Structure|Ref])
+		(ClassifierSpecialization)? (ClassifierEquivalence)?;
+
+fragment ClassifierSpecialization returns Classifier:
+	'<' (ownedSpecializations+=SpecializationAxiom (',' ownedSpecializations+=SpecializationAxiom)* 
+		|
+		(ownedSpecializations+=SpecializationAxiom (',' ownedSpecializations+=SpecializationAxiom)*)? '['
+			ownedPropertyRestrictions+=PropertyRestrictionAxiom*
+		']');
+
+fragment ClassifierEquivalence returns Classifier:
+	'=' ownedEquivalences+=ClassifierEquivalenceAxiom (',' ownedEquivalences+=ClassifierEquivalenceAxiom)*;
+
+ClassifierEquivalenceAxiom:
+	superClassifiers+=[Classifier|Ref] ('&' superClassifiers+=[Classifier|Ref])*
+	|
+	{ClassifierEquivalenceAxiom} 
+	(superClassifiers+=[Classifier|Ref] ('&' superClassifiers+=[Classifier|Ref])*)? '['
 		ownedPropertyRestrictions+=PropertyRestrictionAxiom*
-	']')?;
-
-Property:
-	AnnotationProperty |
-	SemanticProperty;
-
-AnnotationProperty:
-	ownedAnnotations+=Annotation*
-	('annotation' 'property' name=ID | 'ref' 'annotation' 'property' ref=[AnnotationProperty|Ref]) (':>' ownedSpecializations+=SpecializationAxiom (',' ownedSpecializations+=SpecializationAxiom)*)?;
-
-SemanticProperty:
-	ScalarProperty |
-	StructuredProperty;
-
-ScalarProperty:
-	ownedAnnotations+=Annotation*
-	('scalar' 'property' name=ID | 'ref' 'scalar' 'property' ref=[ScalarProperty|Ref]) (':>' ownedSpecializations+=SpecializationAxiom (',' ownedSpecializations+=SpecializationAxiom)*)? ('['
-		('domain' domain=[Classifier|Ref])?
-		('range' range=[Scalar|Ref])?
-		(functional?='functional')?
-	']')?;
-
-StructuredProperty:
-	ownedAnnotations+=Annotation*
-	('structured' 'property' name=ID | 'ref' 'structured' 'property' ref=[StructuredProperty|Ref]) (':>' ownedSpecializations+=SpecializationAxiom (',' ownedSpecializations+=SpecializationAxiom)*)? ('['
-		('domain' domain=[Classifier|Ref])?
-		('range' range=[Structure|Ref])?
-		(functional?='functional')?
-	']')?;
+	']';
 
 Scalar:
 	ownedAnnotations+=Annotation*
-	('scalar' name=ID | 'ref' 'scalar' ref=[Scalar|Ref]) (':>' ownedSpecializations+=SpecializationAxiom (',' ownedSpecializations+=SpecializationAxiom)*)? ('['
+	('scalar' name=ID | 'ref' 'scalar' ref=[Scalar|Ref]) ('['
 		(('length' length=UnsignedInteger)? &
 		 ('minLength' minLength=UnsignedInteger)? &
 		 ('maxLength' maxLength=UnsignedInteger)? &
@@ -160,7 +146,40 @@ Scalar:
 		 ('maxInclusive' maxInclusive=Literal)? &
 		 ('maxExclusive' maxExclusive=Literal)? &
 		 (ownedEnumeration=LiteralEnumerationAxiom)?)
-	']')?;
+	']')? (ScalarSpecialization)?;
+
+fragment ScalarSpecialization returns Scalar:
+	'<' ownedSpecializations+=SpecializationAxiom (',' ownedSpecializations+=SpecializationAxiom)*;
+
+Property:
+	AnnotationProperty |
+	SemanticProperty;
+
+AnnotationProperty:
+	ownedAnnotations+=Annotation*
+	('annotation' 'property' name=ID | 'ref' 'annotation' 'property' ref=[AnnotationProperty|Ref])
+		(PropertySpecialization)? (PropertyEquivalence)?;
+
+SemanticProperty:
+	ScalarProperty |
+	StructuredProperty |
+	Relation;
+
+ScalarProperty:
+	ownedAnnotations+=Annotation*
+	('scalar' 'property' name=ID | 'ref' 'scalar' 'property' ref=[ScalarProperty|Ref]) ('['
+		('domain' domain=[Classifier|Ref])?
+		('range' range=[Scalar|Ref])?
+		(functional?='functional')?
+	']')? (PropertySpecialization)? (PropertyEquivalence)?;
+
+StructuredProperty:
+	ownedAnnotations+=Annotation*
+	('structured' 'property' name=ID | 'ref' 'structured' 'property' ref=[StructuredProperty|Ref]) ('['
+		('domain' domain=[Classifier|Ref])?
+		('range' range=[Structure|Ref])?
+		(functional?='functional')?
+	']')? (PropertySpecialization)? (PropertyEquivalence)?;
 
 Relation:
 	ForwardRelation |
@@ -177,7 +196,7 @@ ReverseRelation:
 
 UnreifiedRelation:
 	ownedAnnotations+=Annotation*
-	('relation' name=ID | 'ref' 'relation' ref=[Relation|Ref]) (':>' ownedSpecializations+=SpecializationAxiom (',' ownedSpecializations+=SpecializationAxiom)*)? ('['
+	('relation' name=ID | 'ref' 'relation' ref=[Relation|Ref]) ('['
 		('from' source=[Entity|Ref])?
 		('to' target=[Entity|Ref])?
 		(reverseRelation=ReverseRelation)?
@@ -188,7 +207,13 @@ UnreifiedRelation:
 		 (reflexive?='reflexive')? &
 		 (irreflexive?='irreflexive')? &
 		 (transitive?='transitive')?)
-	']')?;
+	']')? (PropertySpecialization)? (PropertyEquivalence)?;
+
+fragment PropertySpecialization returns SpecializableProperty:
+	'<' ownedSpecializations+=SpecializationAxiom (',' ownedSpecializations+=SpecializationAxiom)*;
+
+fragment PropertyEquivalence returns SpecializableProperty:
+	'=' ownedEquivalences+=PropertyEquivalenceAxiom (',' ownedEquivalences+=PropertyEquivalenceAxiom)*;
 
 Rule:
 	ownedAnnotations+=Annotation*
@@ -212,13 +237,13 @@ NamedInstance:
 
 ConceptInstance:
 	ownedAnnotations+=Annotation*
-	('ci' name=ID | 'ref' 'ci' ref=[ConceptInstance|Ref]) (':' ownedTypes+=ConceptTypeAssertion (',' ownedTypes+=ConceptTypeAssertion)*)? ('['
+	('instance' name=ID | 'ref' 'instance' ref=[ConceptInstance|Ref]) (':' ownedTypes+=ConceptTypeAssertion (',' ownedTypes+=ConceptTypeAssertion)*)? ('['
 		ownedPropertyValues+=PropertyValueAssertion*
 	']')?;
 	
 RelationInstance:
 	ownedAnnotations+=Annotation*
-	('ri' name=ID | 'ref' 'ri' ref=[RelationInstance|Ref]) (':' ownedTypes+=RelationTypeAssertion (',' ownedTypes+=RelationTypeAssertion)*)? ('['
+	('relation' 'instance' name=ID | 'ref' 'relation' 'instance' ref=[RelationInstance|Ref]) (':' ownedTypes+=RelationTypeAssertion (',' ownedTypes+=RelationTypeAssertion)*)? ('['
 		('from' sources+=[NamedInstance|Ref] (',' sources+=[NamedInstance|Ref])*)? 
 		('to' targets+=[NamedInstance|Ref] (',' targets+=[NamedInstance|Ref])*)?
 		ownedPropertyValues+=PropertyValueAssertion*
@@ -248,7 +273,10 @@ Inclusion returns Import:
 
 SpecializationAxiom:
 	superTerm=[SpecializableTerm|Ref];
-	
+
+PropertyEquivalenceAxiom:
+	superProperty=[Property|Ref];
+
 PropertyRestrictionAxiom:
 	PropertyRangeRestrictionAxiom |
 	PropertyCardinalityRestrictionAxiom |

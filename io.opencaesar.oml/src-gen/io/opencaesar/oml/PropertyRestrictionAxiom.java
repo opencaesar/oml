@@ -35,6 +35,7 @@ package io.opencaesar.oml;
  * <ul>
  *   <li>{@link io.opencaesar.oml.PropertyRestrictionAxiom#getProperty <em>Property</em>}</li>
  *   <li>{@link io.opencaesar.oml.PropertyRestrictionAxiom#getOwningClassifier <em>Owning Classifier</em>}</li>
+ *   <li>{@link io.opencaesar.oml.PropertyRestrictionAxiom#getOwningAxiom <em>Owning Axiom</em>}</li>
  * </ul>
  *
  * @see io.opencaesar.oml.OmlPackage#getPropertyRestrictionAxiom()
@@ -94,6 +95,33 @@ public interface PropertyRestrictionAxiom extends Axiom {
 	 * @generated
 	 */
 	void setOwningClassifier(Classifier value);
+
+	/**
+	 * Returns the value of the '<em><b>Owning Axiom</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.ClassifierEquivalenceAxiom#getOwnedPropertyRestrictions <em>Owned Property Restrictions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The owning classifier equivalence axiom specified by this axiom
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Owning Axiom</em>' container reference.
+	 * @see #setOwningAxiom(ClassifierEquivalenceAxiom)
+	 * @see io.opencaesar.oml.OmlPackage#getPropertyRestrictionAxiom_OwningAxiom()
+	 * @see io.opencaesar.oml.ClassifierEquivalenceAxiom#getOwnedPropertyRestrictions
+	 * @model opposite="ownedPropertyRestrictions" transient="false"
+	 * @generated
+	 */
+	ClassifierEquivalenceAxiom getOwningAxiom();
+
+	/**
+	 * Sets the value of the '{@link io.opencaesar.oml.PropertyRestrictionAxiom#getOwningAxiom <em>Owning Axiom</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Owning Axiom</em>' container reference.
+	 * @see #getOwningAxiom()
+	 * @generated
+	 */
+	void setOwningAxiom(ClassifierEquivalenceAxiom value);
 
 	/**
 	 * <!-- begin-user-doc -->

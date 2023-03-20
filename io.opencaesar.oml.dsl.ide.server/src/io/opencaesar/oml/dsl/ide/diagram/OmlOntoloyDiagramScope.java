@@ -220,17 +220,17 @@ class OmlOntoloyDiagramScope {
 	}
 
 	private void phase1ScanEntityAxioms(final Entity e, final Set<Element> others) {
-		OmlSearch.findKeys(e).forEach(ax -> {
+		OmlSearch.findKeyAxioms(e).forEach(ax -> {
 			if (allImportedElements.contains(ax)) {
 				others.add(ax);
 			}
 		});
-		OmlSearch.findSpecializationsWithSubTerm(e).forEach(ax -> {
+		OmlSearch.findSpecializationAxiomsWithSubTerm(e).forEach(ax -> {
 			if (allImportedElements.contains(ax)) {
 				others.add(ax);
 			}
 		});
-		OmlSearch.findPropertyRestrictions(e).forEach(ax -> {
+		OmlSearch.findPropertyRestrictionAxioms(e).forEach(ax -> {
 			if (allImportedElements.contains(ax)) {
 				others.add(ax);
 			}
@@ -346,7 +346,7 @@ class OmlOntoloyDiagramScope {
 				phase1ScanEntityAxioms(e, others);
 				doSwitch(e.getSource());
 				doSwitch(e.getTarget());
-				OmlSearch.findSpecializationsWithSuperTerm(e).forEach(ax -> {
+				OmlSearch.findSpecializationAxiomsWithSuperTerm(e).forEach(ax -> {
 					if (allImportedElements.contains(ax)) {
 						incident.add(ax);
 					}

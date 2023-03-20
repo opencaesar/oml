@@ -36,6 +36,7 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  * <ul>
  *   <li>{@link io.opencaesar.oml.Classifier#getOwnedPropertyRestrictions <em>Owned Property Restrictions</em>}</li>
+ *   <li>{@link io.opencaesar.oml.Classifier#getOwnedEquivalences <em>Owned Equivalences</em>}</li>
  * </ul>
  *
  * @see io.opencaesar.oml.OmlPackage#getClassifier()
@@ -60,5 +61,22 @@ public interface Classifier extends Type {
 	 * @generated
 	 */
 	EList<PropertyRestrictionAxiom> getOwnedPropertyRestrictions();
+
+	/**
+	 * Returns the value of the '<em><b>Owned Equivalences</b></em>' containment reference list.
+	 * The list contents are of type {@link io.opencaesar.oml.ClassifierEquivalenceAxiom}.
+	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.ClassifierEquivalenceAxiom#getOwningClassifier <em>Owning Classifier</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The set of classifier equivalence axioms of this classifier
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Owned Equivalences</em>' containment reference list.
+	 * @see io.opencaesar.oml.OmlPackage#getClassifier_OwnedEquivalences()
+	 * @see io.opencaesar.oml.ClassifierEquivalenceAxiom#getOwningClassifier
+	 * @model opposite="owningClassifier" containment="true"
+	 * @generated
+	 */
+	EList<ClassifierEquivalenceAxiom> getOwnedEquivalences();
 
 } // Classifier

@@ -40,6 +40,7 @@ import io.opencaesar.oml.Aspect;
 import io.opencaesar.oml.BuiltIn;
 import io.opencaesar.oml.BuiltInPredicate;
 import io.opencaesar.oml.Classifier;
+import io.opencaesar.oml.ClassifierEquivalenceAxiom;
 import io.opencaesar.oml.Concept;
 import io.opencaesar.oml.ConceptInstance;
 import io.opencaesar.oml.Element;
@@ -50,6 +51,7 @@ import io.opencaesar.oml.NamedInstance;
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.Property;
 import io.opencaesar.oml.PropertyCardinalityRestrictionAxiom;
+import io.opencaesar.oml.PropertyEquivalenceAxiom;
 import io.opencaesar.oml.PropertyPredicate;
 import io.opencaesar.oml.PropertyRangeRestrictionAxiom;
 import io.opencaesar.oml.PropertyRestrictionAxiom;
@@ -65,11 +67,11 @@ import io.opencaesar.oml.Rule;
 import io.opencaesar.oml.Scalar;
 import io.opencaesar.oml.ScalarProperty;
 import io.opencaesar.oml.SemanticProperty;
-import io.opencaesar.oml.SpecializableTerm;
 import io.opencaesar.oml.SpecializationAxiom;
 import io.opencaesar.oml.Structure;
 import io.opencaesar.oml.StructureInstance;
 import io.opencaesar.oml.StructuredProperty;
+import io.opencaesar.oml.Term;
 import io.opencaesar.oml.Type;
 import io.opencaesar.oml.TypeAssertion;
 import io.opencaesar.oml.TypePredicate;
@@ -168,9 +170,9 @@ public class OmlIndex {
      * Finds instance enumeration axioms that enumerates the given instance
      * 
      * @param instance The given instance
-     * @return A list of enumeration axioms enumerating the given instance
+     * @return A list of instance enumeration axioms enumerating the given instance
      */
-    public static List<InstanceEnumerationAxiom> findEnumerationAxiomsWithEnumeratedInstance(ConceptInstance instance) {
+    public static List<InstanceEnumerationAxiom> findInstanceEnumerationAxiomsWithEnumeratedInstance(ConceptInstance instance) {
         return findInverseReferencers(instance, InstanceEnumerationAxiom.class, OmlPackage.Literals.INSTANCE_ENUMERATION_AXIOM__INSTANCES);
     }
 
@@ -433,15 +435,39 @@ public class OmlIndex {
     // SpecializationAxiom
     
     /**
-     * Finds specialization axioms referencing the given specialized term
+     * Finds specialization axioms referencing the given super term
      * 
-     * @param specializedTerm The referenced specialized term
+     * @param term The referenced super term
      * @return A list of referencing specialization axioms
      */
-    public static List<SpecializationAxiom> findSpecializationAxiomsWithSpecializedTerm(SpecializableTerm specializedTerm) {
-        return findInverseReferencers(specializedTerm, SpecializationAxiom.class, OmlPackage.Literals.SPECIALIZATION_AXIOM__SUPER_TERM);
+    public static List<SpecializationAxiom> findSpecializationAxiomsWithSuperTerm(Term term) {
+        return findInverseReferencers(term, SpecializationAxiom.class, OmlPackage.Literals.SPECIALIZATION_AXIOM__SUPER_TERM);
     }
     
+    // ClassifierEquivalenceAxiom
+    
+    /**
+     * Finds classifier equivalence axioms referencing the given classifier
+     * 
+     * @param classifier The referenced classifier
+     * @return A list of referencing classifier equivalence axioms
+     */
+    public static List<ClassifierEquivalenceAxiom> findClassifierEquivalenceAxiomsWithSuperClassifier(Classifier classifier) {
+        return findInverseReferencers(classifier, ClassifierEquivalenceAxiom.class, OmlPackage.Literals.CLASSIFIER_EQUIVALENCE_AXIOM__SUPER_CLASSIFIERS);
+    }
+
+    // PropertyEquivalenceAxiom
+    
+    /**
+     * Finds property equivalence axioms referencing the given property
+     * 
+     * @param property The referenced property
+     * @return A list of referencing property equivalence axioms
+     */
+    public static List<PropertyEquivalenceAxiom> findPropertyEquivalenceAxiomsWithSuperProperty(Property property) {
+        return findInverseReferencers(property, PropertyEquivalenceAxiom.class, OmlPackage.Literals.PROPERTY_EQUIVALENCE_AXIOM__SUPER_PROPERTY);
+    }
+
     // PropertyRestrictionAxiom
     
     /**

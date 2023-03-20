@@ -79,6 +79,7 @@ public class ClassifierItemProvider extends TypeItemProvider {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS);
+			childrenFeatures.add(OmlPackage.Literals.CLASSIFIER__OWNED_EQUIVALENCES);
 		}
 		return childrenFeatures;
 	}
@@ -124,6 +125,7 @@ public class ClassifierItemProvider extends TypeItemProvider {
 
 		switch (notification.getFeatureID(Classifier.class)) {
 			case OmlPackage.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS:
+			case OmlPackage.CLASSIFIER__OWNED_EQUIVALENCES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -155,6 +157,11 @@ public class ClassifierItemProvider extends TypeItemProvider {
 			(createChildParameter
 				(OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS,
 				 OmlFactory.eINSTANCE.createPropertyValueRestrictionAxiom()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(OmlPackage.Literals.CLASSIFIER__OWNED_EQUIVALENCES,
+				 OmlFactory.eINSTANCE.createClassifierEquivalenceAxiom()));
 	}
 
 }

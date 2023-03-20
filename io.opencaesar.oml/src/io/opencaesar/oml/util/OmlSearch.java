@@ -25,7 +25,9 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.eclipse.emf.ecore.resource.Resource;
@@ -36,6 +38,7 @@ import io.opencaesar.oml.Aspect;
 import io.opencaesar.oml.Assertion;
 import io.opencaesar.oml.Axiom;
 import io.opencaesar.oml.Classifier;
+import io.opencaesar.oml.ClassifierEquivalenceAxiom;
 import io.opencaesar.oml.Concept;
 import io.opencaesar.oml.ConceptInstance;
 import io.opencaesar.oml.Element;
@@ -44,11 +47,14 @@ import io.opencaesar.oml.ForwardRelation;
 import io.opencaesar.oml.IdentifiedElement;
 import io.opencaesar.oml.Import;
 import io.opencaesar.oml.Instance;
+import io.opencaesar.oml.InstanceEnumerationAxiom;
 import io.opencaesar.oml.KeyAxiom;
 import io.opencaesar.oml.Literal;
 import io.opencaesar.oml.Member;
 import io.opencaesar.oml.NamedInstance;
 import io.opencaesar.oml.Ontology;
+import io.opencaesar.oml.Property;
+import io.opencaesar.oml.PropertyEquivalenceAxiom;
 import io.opencaesar.oml.PropertyRestrictionAxiom;
 import io.opencaesar.oml.PropertyValueAssertion;
 import io.opencaesar.oml.QuotedLiteral;
@@ -59,6 +65,7 @@ import io.opencaesar.oml.Rule;
 import io.opencaesar.oml.Scalar;
 import io.opencaesar.oml.ScalarProperty;
 import io.opencaesar.oml.SemanticProperty;
+import io.opencaesar.oml.SpecializableProperty;
 import io.opencaesar.oml.SpecializableTerm;
 import io.opencaesar.oml.SpecializationAxiom;
 import io.opencaesar.oml.Structure;
@@ -198,13 +205,20 @@ public final class OmlSearch extends OmlIndex {
     public static List<Axiom> findAxioms(Term term) {
         List<Axiom> axioms = new ArrayList<>();
         if (term instanceof SpecializableTerm){
-            axioms.addAll(findSpecializationsWithSubTerm(((SpecializableTerm)term)));
+            axioms.addAll(findSpecializationAxiomsWithSubTerm(((SpecializableTerm)term)));
         }
         if (term instanceof Classifier) {
-            axioms.addAll(findPropertyRestrictions(((Classifier)term)));
+            axioms.addAll(findPropertyRestrictionAxioms(((Classifier)term)));
+            axioms.addAll(findClassifierEquivalenceAxiomsWithSubClassifier(((Classifier)term)));
+        }
+        if (term instanceof Property) {
+            axioms.addAll(findPropertyEquivalenceAxiomsWithSubProperty(((Property)term)));
         }
         if (term instanceof Entity) {
-            axioms.addAll(findKeys(((Entity)term)));
+            axioms.addAll(findKeyAxioms(((Entity)term)));
+        }
+        if (term instanceof Concept) {
+            axioms.addAll(findInstanceEnumerationAxioms(((Concept)term)));
         }
         return axioms;
     }
@@ -215,9 +229,11 @@ public final class OmlSearch extends OmlIndex {
      * @param term the given term
      * @return a list of specialization axioms that have the given term as a sub term
      */
-    public static List<SpecializationAxiom> findSpecializationsWithSubTerm(SpecializableTerm term) {
+    public static List<SpecializationAxiom> findSpecializationAxiomsWithSubTerm(Term term) {
         final List<SpecializationAxiom> axioms = new ArrayList<>();
-        axioms.addAll(term.getOwnedSpecializations());
+        if (term instanceof SpecializableTerm) {
+        	axioms.addAll(((SpecializableTerm)term).getOwnedSpecializations());
+        }
         axioms.addAll(findReferences(term).stream()
             .filter(i -> i instanceof SpecializableTerm)
             .map(i -> (SpecializableTerm)i)
@@ -227,13 +243,39 @@ public final class OmlSearch extends OmlIndex {
     }
 
     /**
-     * Finds specialization axioms that have the given term as a super term
+     * Finds classifier equivalence axioms that have the given classifier as a sub
      * 
-     * @param term the given term
-     * @return a list of specialization axioms that have the given term as a super term
+     * @param classifier the given classifier
+     * @return a list of classifier equivalence axioms that have the given classifier as a sub
      */
-    public static List<SpecializationAxiom> findSpecializationsWithSuperTerm(SpecializableTerm term) {
-        return findSpecializationAxiomsWithSpecializedTerm(term);
+    public static List<ClassifierEquivalenceAxiom> findClassifierEquivalenceAxiomsWithSubClassifier(Classifier classifier) {
+        final List<ClassifierEquivalenceAxiom> axioms = new ArrayList<>();
+       	axioms.addAll(classifier.getOwnedEquivalences());
+        axioms.addAll(findReferences(classifier).stream()
+            .filter(i -> i instanceof Classifier)
+            .map(i -> (Classifier)i)
+            .flatMap(r -> r.getOwnedEquivalences().stream())
+            .collect(Collectors.toList()));
+        return axioms;
+    }
+
+    /**
+     * Finds property equivalence axioms that have the given property as a sub
+     * 
+     * @param property the given property
+     * @return a list of property equivalence axioms that have the given property as a sub
+     */
+    public static List<PropertyEquivalenceAxiom> findPropertyEquivalenceAxiomsWithSubProperty(Property property) {
+        final List<PropertyEquivalenceAxiom> axioms = new ArrayList<>();
+        if (property instanceof SpecializableProperty) {
+        	axioms.addAll(((SpecializableProperty)property).getOwnedEquivalences());
+        }
+        axioms.addAll(findReferences(property).stream()
+            .filter(i -> i instanceof SpecializableProperty)
+            .map(i -> (SpecializableProperty)i)
+            .flatMap(r -> r.getOwnedEquivalences().stream())
+            .collect(Collectors.toList()));
+        return axioms;
     }
 
     /**
@@ -242,7 +284,7 @@ public final class OmlSearch extends OmlIndex {
      * @param classifier the given classifier
      * @return a list of restriction axioms that are defined on the given classifier
      */
-    public static List<PropertyRestrictionAxiom> findPropertyRestrictions(Classifier classifier) {
+    public static List<PropertyRestrictionAxiom> findPropertyRestrictionAxioms(Classifier classifier) {
         final List<PropertyRestrictionAxiom> restrictions = new ArrayList<>();
         restrictions.addAll(classifier.getOwnedPropertyRestrictions());
         restrictions.addAll(findReferences(classifier).stream()
@@ -259,7 +301,7 @@ public final class OmlSearch extends OmlIndex {
      * @param entity the given entity
      * @return a list of key axioms that are defined on the given entity
      */
-    public static List<KeyAxiom> findKeys(Entity entity) {
+    public static List<KeyAxiom> findKeyAxioms(Entity entity) {
         final List<KeyAxiom> keys = new ArrayList<>();
         keys.addAll(entity.getOwnedKeys());
         keys.addAll(findReferences(entity).stream()
@@ -271,15 +313,38 @@ public final class OmlSearch extends OmlIndex {
     }
 
     /**
+     * Find instance enumeration axioms that are defined on the given concept
+     * 
+     * @param concept the given concept
+     * @return a list of instance enumeration axioms that are defined on the given concept
+     */
+    public static List<InstanceEnumerationAxiom> findInstanceEnumerationAxioms(Concept concept) {
+        final List<InstanceEnumerationAxiom> keys = new ArrayList<>();
+        keys.add(concept.getOwnedEnumeration());
+        keys.addAll(findReferences(concept).stream()
+            .filter(i -> i instanceof Concept)
+            .map(i -> (Concept)i)
+            .map(r -> r.getOwnedEnumeration())
+            .collect(Collectors.toList()));
+        return keys;
+    }
+
+    /**
      * Finds terms that are the direct super (general) terms of the given term 
      * 
      * @param term the given term
      * @return a list of terms that are the direct super (general) terms of the given term
      */
-    public static List<SpecializableTerm> findSuperTerms(SpecializableTerm term) {
-        return findSpecializationsWithSubTerm(term).stream()
-            .map(i -> i.getSuperTerm())
-            .collect(Collectors.toList());
+    public static List<Term> findSuperTerms(Term term) {
+        final Set<Term> supers = new LinkedHashSet<>();
+        supers.addAll(findSpecializationSuperTerms(term));
+        if (term instanceof Classifier) {
+        	supers.addAll(findEquivalenceSuperClassifiers((Classifier)term));
+        	supers.addAll(findEquivalentClassifiers((Classifier)term));
+        } else if (term instanceof Property) {
+        	supers.addAll(findEquivalentProperties((Property)term));
+        }
+        return new ArrayList<Term>(supers);
     }
 
     /**
@@ -289,7 +354,7 @@ public final class OmlSearch extends OmlIndex {
      * @param inclusive a boolean determining whether to include the given term in the result
      * @return a list of terms that are the direct or transitive super (general) terms of the given term
      */
-    public static List<SpecializableTerm> findAllSuperTerms(SpecializableTerm term, boolean inclusive) {
+    public static List<Term> findAllSuperTerms(Term term, boolean inclusive) {
         return OmlRead.closure(term, inclusive, t -> findSuperTerms(t));
     }
     
@@ -299,10 +364,16 @@ public final class OmlSearch extends OmlIndex {
      * @param term the given term
      * @return a list of terms that are the direct sub (specific) terms of the given term
      */
-    public static List<SpecializableTerm> findSubTerms(SpecializableTerm term) {
-        return findSpecializationsWithSuperTerm(term).stream()
-            .map(i -> i.getSubTerm())
-            .collect(Collectors.toList());
+    public static List<Term> findSubTerms(Term term) {
+        final Set<Term> subs = new LinkedHashSet<>();
+        subs.addAll(findSpecializationSubTerms(term));
+        if (term instanceof Classifier) {
+        	subs.addAll(findEquivalenceSubClassifiers((Classifier)term));
+        	subs.addAll(findEquivalentClassifiers((Classifier)term));
+        } else if (term instanceof Property) {
+        	subs.addAll(findEquivalentProperties((Property)term));
+        }
+        return new ArrayList<Term>(subs);
     }
 
     /**
@@ -312,7 +383,7 @@ public final class OmlSearch extends OmlIndex {
      * @param inclusive a boolean determining whether to include the given term in the result
      * @return a list of terms that are the direct or transitive sub (specific) terms of the given term
      */
-    public static List<SpecializableTerm> findAllSubTerms(SpecializableTerm term, boolean inclusive) {
+    public static List<Term> findAllSubTerms(Term term, boolean inclusive) {
         return OmlRead.closure(term, inclusive, t -> findSubTerms(t));
     }
 
@@ -323,8 +394,116 @@ public final class OmlSearch extends OmlIndex {
      * @param superTerm the given super term
      * @return true if the given term is a sub term of the given super term; otherwise false
      */
-    public static boolean findIsSubTermOf(SpecializableTerm term, SpecializableTerm superTerm) {
+    public static boolean findIsSubTermOf(Term term, Term superTerm) {
         return OmlRead.isInClosure(superTerm, term, true, t -> findSuperTerms(t));
+    }
+
+    /**
+     * Finds terms that are the direct specialization super terms of the given term 
+     * 
+     * @param term the given term
+     * @return a list of terms that are the direct specialization super terms of the given term
+     */
+    public static List<Term> findSpecializationSuperTerms(Term term) {
+        return findSpecializationAxiomsWithSubTerm(term).stream()
+                .map(i -> i.getSuperTerm())
+                .collect(Collectors.toList());
+    }
+    
+    /**
+     * Finds terms that are the direct specialization sub terms of the given term 
+     * 
+     * @param term the given term
+     * @return a list of terms that are the direct specialization sub terms of the given term
+     */
+    public static List<Term> findSpecializationSubTerms(Term term) {
+        return findSpecializationAxiomsWithSuperTerm(term).stream()
+            .map(i -> i.getSubTerm())
+            .collect(Collectors.toList());
+    }
+
+    /**
+     * Finds classifiers that are the direct equivalence super of a given classifier 
+     * 
+     * @param classifier the given classifier
+     * @return a list of classifier that are the direct equivalence super of the given classifier
+     */
+    public static List<Classifier> findEquivalenceSuperClassifiers(Classifier classifier) {
+        return findClassifierEquivalenceAxiomsWithSubClassifier(classifier).stream()
+            .flatMap(i -> i.getSuperClassifiers().stream())
+            .collect(Collectors.toList());
+    }
+    
+    /**
+     * Finds classifiers that are the direct equivalence sub of a given classifier 
+     * 
+     * @param classifier the given classifier
+     * @return a list of classifier that are the direct equivalence sub of the given classifier
+     */
+    public static List<Classifier> findEquivalenceSubClassifiers(Classifier classifier) {
+        return findClassifierEquivalenceAxiomsWithSuperClassifier(classifier).stream()
+            .map(i -> i.getSubClassifier())
+            .collect(Collectors.toList());
+    }
+    
+    /**
+     * Finds classifiers that are the direct equivalent to a given classifier 
+     * 
+     * @param classifier the given classifier
+     * @return a list of classifier that are the direct equivalents of the given classifier
+     */
+    public static List<Classifier> findEquivalentClassifiers(Classifier classifier) {
+        final List<Classifier> equivalents = new ArrayList<>();
+        equivalents.addAll(findClassifierEquivalenceAxiomsWithSubClassifier(classifier).stream()
+            	.filter(i -> i.getSuperClassifiers().size() == 1)
+                .flatMap(i -> i.getSuperClassifiers().stream())
+                .collect(Collectors.toList()));
+        equivalents.addAll(findClassifierEquivalenceAxiomsWithSuperClassifier(classifier).stream()
+        	.filter(i -> i.getSuperClassifiers().size() == 1)
+            .map(i -> i.getSubClassifier())
+            .collect(Collectors.toList()));
+        return equivalents;
+    }
+
+    /**
+     * Finds properties that are the direct equivalence super of a given property 
+     * 
+     * @param property the given property
+     * @return a list of properties that are the direct equivalence super of the given property
+     */
+    public static List<Property> findEquivalenceSuperProperties(Property property) {
+        return findPropertyEquivalenceAxiomsWithSubProperty(property).stream()
+            .map(i -> i.getSuperProperty())
+            .collect(Collectors.toList());
+    }
+    
+    /**
+     * Finds properties that are the direct equivalence sub of a given property 
+     * 
+     * @param property the given property
+     * @return a list of properties that are the direct equivalence sub of the given property
+     */
+    public static List<Property> findEquivalenceSubProperties(Property property) {
+        return findPropertyEquivalenceAxiomsWithSuperProperty(property).stream()
+            .map(i -> i.getSubProperty())
+            .collect(Collectors.toList());
+    }
+
+    /**
+     * Finds properties that are the direct equivalent to a given property 
+     * 
+     * @param property the given property
+     * @return a list of property that are the direct equivalents of the given property
+     */
+    public static List<Property> findEquivalentProperties(Property property) {
+        final List<Property> equivalents = new ArrayList<>();
+        equivalents.addAll(findPropertyEquivalenceAxiomsWithSubProperty(property).stream()
+                .map(i -> i.getSuperProperty())
+                .collect(Collectors.toList()));
+        equivalents.addAll(findPropertyEquivalenceAxiomsWithSuperProperty(property).stream()
+            .map(i -> i.getSubProperty())
+            .collect(Collectors.toList()));
+        return equivalents;
     }
 
     /**
@@ -540,7 +719,7 @@ public final class OmlSearch extends OmlIndex {
         // look in relation instances
         if (relation instanceof ForwardRelation) {
 	        targets.addAll(findRelationInstancesWithSource(source).stream()
-	                .filter(i -> findIsTypeOf(i, ((ForwardRelation)relation).getRelationEntity()))
+	                .filter(i -> findIsOfType(i, ((ForwardRelation)relation).getRelationEntity()))
 	                .flatMap(a -> a.getTargets().stream())
 	                .collect(Collectors.toList()));
         }
@@ -583,7 +762,7 @@ public final class OmlSearch extends OmlIndex {
         // look in relation instances
         if (relation instanceof ForwardRelation) {
 	        sources.addAll(findRelationInstancesWithTarget(target).stream()
-	                .filter(i -> findIsTypeOf(i, ((ForwardRelation)relation).getRelationEntity()))
+	                .filter(i -> findIsOfType(i, ((ForwardRelation)relation).getRelationEntity()))
 	                .flatMap(i -> i.getSources().stream())
 	                .collect(Collectors.toList()));
         }
@@ -659,7 +838,7 @@ public final class OmlSearch extends OmlIndex {
      * @param type the given type
      * @return true if the given instance is typed directly by the given type; otherwise false
      */
-    public static boolean findIsTypeOf(Instance instance, Classifier type) {
+    public static boolean findIsOfType(Instance instance, Classifier type) {
         if (instance instanceof StructureInstance) {
             return ((StructureInstance)instance).getType() == type;
         } else if (instance instanceof NamedInstance) {
@@ -677,7 +856,7 @@ public final class OmlSearch extends OmlIndex {
      * @param type the given type
      * @return true if the given instance is typed directly or transitively by the given type; otherwise false
      */
-    public static boolean findIsKindOf(Instance instance, Classifier type) {
+    public static boolean findIsOfKind(Instance instance, Classifier type) {
         if (instance instanceof StructureInstance) {
             return findIsSubTermOf(((StructureInstance)instance).getType(), type);
         } else if (instance instanceof NamedInstance) {
@@ -785,6 +964,16 @@ public final class OmlSearch extends OmlIndex {
     }
 
     /**
+     * Finds the scalar that is the direct type of the given literal
+     * 
+     * @param literal the given literal
+     * @return a scalar that is the type of the given literal
+     */
+    public static Scalar findType(Literal literal) {
+        return OmlRead.getType(literal);
+    }
+
+    /**
      * Finds all the scalars that are direct or indirect types of the given literal
      * 
      * @param literal the given literal
@@ -800,24 +989,31 @@ public final class OmlSearch extends OmlIndex {
     }
 
     /**
-     * Finds if the given literal is typed directly by the given type
-     * 
-     * @param literal the given literal
-     * @param type the given type
-     * @return true if the given literal is typed directly by the given type; otherwise false
-     */
-    public static boolean findIsTypeOf(Literal literal, Scalar type) {
-        return type == OmlRead.getType(literal);
-    }
-
-    /**
      * Finds if the given literal is typed directly or transitively by the given type
      * 
      * @param literal the given literal
      * @param type the given type
      * @return true if the given literal is typed directly or transitively by the given type; otherwise false
      */
-    public static boolean findIsKindOf(Literal literal, Scalar type) {
-        return findAllTypes(literal).contains(type);
-    }
+    /**
+     * Determines if the given literal is typed directly by the given type
+     * 
+     * @param literal the given literal
+     * @param type the given type
+     * @return true if the given literal is typed directly by the given type; otherwise false
+     */
+    public static boolean findIsOfKind(Literal literal, Scalar type) {
+    	if (type.getOwnedEnumeration() != null) {
+    		return type.getOwnedEnumeration().getLiterals().stream().anyMatch(i -> OmlRead.getLexicalValue(i).equals(OmlRead.getLexicalValue(literal)));
+    	} else if (OmlRead.isStandardScalar(type)) {
+    		return findAllTypes(literal).contains(type);
+    	}
+    	for (Term t : findAllSuperTerms(type, false)) {
+    		Scalar supertype = (Scalar)t;
+    		if (!findIsOfKind(literal, supertype)) {
+    			return false;
+    		}
+    	}
+    	return true;
+	}
 }

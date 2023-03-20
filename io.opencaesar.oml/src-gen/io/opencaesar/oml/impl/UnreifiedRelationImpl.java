@@ -20,6 +20,7 @@ package io.opencaesar.oml.impl;
 
 import io.opencaesar.oml.Entity;
 import io.opencaesar.oml.OmlPackage;
+import io.opencaesar.oml.PropertyEquivalenceAxiom;
 import io.opencaesar.oml.Relation;
 import io.opencaesar.oml.RelationBase;
 import io.opencaesar.oml.ReverseRelation;
@@ -70,6 +71,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link io.opencaesar.oml.impl.UnreifiedRelationImpl#isReflexive <em>Reflexive</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.UnreifiedRelationImpl#isIrreflexive <em>Irreflexive</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.UnreifiedRelationImpl#isTransitive <em>Transitive</em>}</li>
+ *   <li>{@link io.opencaesar.oml.impl.UnreifiedRelationImpl#getOwnedEquivalences <em>Owned Equivalences</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.UnreifiedRelationImpl#getRef <em>Ref</em>}</li>
  * </ul>
  *
@@ -255,6 +257,16 @@ public class UnreifiedRelationImpl extends RelationImpl implements UnreifiedRela
 	 * @ordered
 	 */
 	protected boolean transitive = TRANSITIVE_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getOwnedEquivalences() <em>Owned Equivalences</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOwnedEquivalences()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<PropertyEquivalenceAxiom> ownedEquivalences;
 
 	/**
 	 * The cached value of the '{@link #getRef() <em>Ref</em>}' reference.
@@ -643,6 +655,19 @@ public class UnreifiedRelationImpl extends RelationImpl implements UnreifiedRela
 	 * @generated
 	 */
 	@Override
+	public EList<PropertyEquivalenceAxiom> getOwnedEquivalences() {
+		if (ownedEquivalences == null) {
+			ownedEquivalences = new EObjectContainmentWithInverseEList<PropertyEquivalenceAxiom>(PropertyEquivalenceAxiom.class, this, OmlPackage.UNREIFIED_RELATION__OWNED_EQUIVALENCES, OmlPackage.PROPERTY_EQUIVALENCE_AXIOM__OWNING_PROPERTY);
+		}
+		return ownedEquivalences;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Relation getRef() {
 		if (ref != null && ref.eIsProxy()) {
 			InternalEObject oldRef = (InternalEObject)ref;
@@ -726,6 +751,8 @@ public class UnreifiedRelationImpl extends RelationImpl implements UnreifiedRela
 				if (reverseRelation != null)
 					msgs = ((InternalEObject)reverseRelation).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OmlPackage.UNREIFIED_RELATION__REVERSE_RELATION, null, msgs);
 				return basicSetReverseRelation((ReverseRelation)otherEnd, msgs);
+			case OmlPackage.UNREIFIED_RELATION__OWNED_EQUIVALENCES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedEquivalences()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -744,6 +771,8 @@ public class UnreifiedRelationImpl extends RelationImpl implements UnreifiedRela
 				return ((InternalEList<?>)getOwnedSpecializations()).basicRemove(otherEnd, msgs);
 			case OmlPackage.UNREIFIED_RELATION__REVERSE_RELATION:
 				return basicSetReverseRelation(null, msgs);
+			case OmlPackage.UNREIFIED_RELATION__OWNED_EQUIVALENCES:
+				return ((InternalEList<?>)getOwnedEquivalences()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -797,6 +826,8 @@ public class UnreifiedRelationImpl extends RelationImpl implements UnreifiedRela
 				return isIrreflexive();
 			case OmlPackage.UNREIFIED_RELATION__TRANSITIVE:
 				return isTransitive();
+			case OmlPackage.UNREIFIED_RELATION__OWNED_EQUIVALENCES:
+				return getOwnedEquivalences();
 			case OmlPackage.UNREIFIED_RELATION__REF:
 				if (resolve) return getRef();
 				return basicGetRef();
@@ -850,6 +881,10 @@ public class UnreifiedRelationImpl extends RelationImpl implements UnreifiedRela
 			case OmlPackage.UNREIFIED_RELATION__TRANSITIVE:
 				setTransitive((Boolean)newValue);
 				return;
+			case OmlPackage.UNREIFIED_RELATION__OWNED_EQUIVALENCES:
+				getOwnedEquivalences().clear();
+				getOwnedEquivalences().addAll((Collection<? extends PropertyEquivalenceAxiom>)newValue);
+				return;
 			case OmlPackage.UNREIFIED_RELATION__REF:
 				setRef((Relation)newValue);
 				return;
@@ -901,6 +936,9 @@ public class UnreifiedRelationImpl extends RelationImpl implements UnreifiedRela
 			case OmlPackage.UNREIFIED_RELATION__TRANSITIVE:
 				setTransitive(TRANSITIVE_EDEFAULT);
 				return;
+			case OmlPackage.UNREIFIED_RELATION__OWNED_EQUIVALENCES:
+				getOwnedEquivalences().clear();
+				return;
 			case OmlPackage.UNREIFIED_RELATION__REF:
 				setRef((Relation)null);
 				return;
@@ -940,6 +978,8 @@ public class UnreifiedRelationImpl extends RelationImpl implements UnreifiedRela
 				return irreflexive != IRREFLEXIVE_EDEFAULT;
 			case OmlPackage.UNREIFIED_RELATION__TRANSITIVE:
 				return transitive != TRANSITIVE_EDEFAULT;
+			case OmlPackage.UNREIFIED_RELATION__OWNED_EQUIVALENCES:
+				return ownedEquivalences != null && !ownedEquivalences.isEmpty();
 			case OmlPackage.UNREIFIED_RELATION__REF:
 				return ref != null;
 		}
@@ -987,6 +1027,7 @@ public class UnreifiedRelationImpl extends RelationImpl implements UnreifiedRela
 		}
 		if (baseClass == SpecializableProperty.class) {
 			switch (derivedFeatureID) {
+				case OmlPackage.UNREIFIED_RELATION__OWNED_EQUIVALENCES: return OmlPackage.SPECIALIZABLE_PROPERTY__OWNED_EQUIVALENCES;
 				default: return -1;
 			}
 		}
@@ -1034,6 +1075,7 @@ public class UnreifiedRelationImpl extends RelationImpl implements UnreifiedRela
 		}
 		if (baseClass == SpecializableProperty.class) {
 			switch (baseFeatureID) {
+				case OmlPackage.SPECIALIZABLE_PROPERTY__OWNED_EQUIVALENCES: return OmlPackage.UNREIFIED_RELATION__OWNED_EQUIVALENCES;
 				default: return -1;
 			}
 		}

@@ -20,9 +20,9 @@ package io.opencaesar.oml.impl;
 
 import io.opencaesar.oml.Member;
 import io.opencaesar.oml.OmlPackage;
-import io.opencaesar.oml.SpecializableTerm;
-import io.opencaesar.oml.SpecializationAxiom;
-import io.opencaesar.oml.Term;
+import io.opencaesar.oml.Property;
+import io.opencaesar.oml.PropertyEquivalenceAxiom;
+import io.opencaesar.oml.SpecializableProperty;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -40,35 +40,35 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Specialization Axiom</b></em>'.
+ * An implementation of the model object '<em><b>Property Equivalence Axiom</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link io.opencaesar.oml.impl.SpecializationAxiomImpl#getSuperTerm <em>Super Term</em>}</li>
- *   <li>{@link io.opencaesar.oml.impl.SpecializationAxiomImpl#getOwningTerm <em>Owning Term</em>}</li>
+ *   <li>{@link io.opencaesar.oml.impl.PropertyEquivalenceAxiomImpl#getSuperProperty <em>Super Property</em>}</li>
+ *   <li>{@link io.opencaesar.oml.impl.PropertyEquivalenceAxiomImpl#getOwningProperty <em>Owning Property</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class SpecializationAxiomImpl extends AxiomImpl implements SpecializationAxiom {
+public class PropertyEquivalenceAxiomImpl extends AxiomImpl implements PropertyEquivalenceAxiom {
 	/**
-	 * The cached value of the '{@link #getSuperTerm() <em>Super Term</em>}' reference.
+	 * The cached value of the '{@link #getSuperProperty() <em>Super Property</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getSuperTerm()
+	 * @see #getSuperProperty()
 	 * @generated
 	 * @ordered
 	 */
-	protected Term superTerm;
+	protected Property superProperty;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected SpecializationAxiomImpl() {
+	protected PropertyEquivalenceAxiomImpl() {
 		super();
 	}
 
@@ -79,7 +79,7 @@ public class SpecializationAxiomImpl extends AxiomImpl implements Specialization
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return OmlPackage.Literals.SPECIALIZATION_AXIOM;
+		return OmlPackage.Literals.PROPERTY_EQUIVALENCE_AXIOM;
 	}
 
 	/**
@@ -88,16 +88,16 @@ public class SpecializationAxiomImpl extends AxiomImpl implements Specialization
 	 * @generated
 	 */
 	@Override
-	public Term getSuperTerm() {
-		if (superTerm != null && superTerm.eIsProxy()) {
-			InternalEObject oldSuperTerm = (InternalEObject)superTerm;
-			superTerm = (Term)eResolveProxy(oldSuperTerm);
-			if (superTerm != oldSuperTerm) {
+	public Property getSuperProperty() {
+		if (superProperty != null && superProperty.eIsProxy()) {
+			InternalEObject oldSuperProperty = (InternalEObject)superProperty;
+			superProperty = (Property)eResolveProxy(oldSuperProperty);
+			if (superProperty != oldSuperProperty) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, OmlPackage.SPECIALIZATION_AXIOM__SUPER_TERM, oldSuperTerm, superTerm));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, OmlPackage.PROPERTY_EQUIVALENCE_AXIOM__SUPER_PROPERTY, oldSuperProperty, superProperty));
 			}
 		}
-		return superTerm;
+		return superProperty;
 	}
 
 	/**
@@ -105,8 +105,8 @@ public class SpecializationAxiomImpl extends AxiomImpl implements Specialization
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Term basicGetSuperTerm() {
-		return superTerm;
+	public Property basicGetSuperProperty() {
+		return superProperty;
 	}
 
 	/**
@@ -115,11 +115,11 @@ public class SpecializationAxiomImpl extends AxiomImpl implements Specialization
 	 * @generated
 	 */
 	@Override
-	public void setSuperTerm(Term newSuperTerm) {
-		Term oldSuperTerm = superTerm;
-		superTerm = newSuperTerm;
+	public void setSuperProperty(Property newSuperProperty) {
+		Property oldSuperProperty = superProperty;
+		superProperty = newSuperProperty;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.SPECIALIZATION_AXIOM__SUPER_TERM, oldSuperTerm, superTerm));
+			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.PROPERTY_EQUIVALENCE_AXIOM__SUPER_PROPERTY, oldSuperProperty, superProperty));
 	}
 
 	/**
@@ -128,9 +128,9 @@ public class SpecializationAxiomImpl extends AxiomImpl implements Specialization
 	 * @generated
 	 */
 	@Override
-	public SpecializableTerm getOwningTerm() {
-		if (eContainerFeatureID() != OmlPackage.SPECIALIZATION_AXIOM__OWNING_TERM) return null;
-		return (SpecializableTerm)eContainer();
+	public SpecializableProperty getOwningProperty() {
+		if (eContainerFeatureID() != OmlPackage.PROPERTY_EQUIVALENCE_AXIOM__OWNING_PROPERTY) return null;
+		return (SpecializableProperty)eContainer();
 	}
 
 	/**
@@ -138,9 +138,9 @@ public class SpecializationAxiomImpl extends AxiomImpl implements Specialization
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public SpecializableTerm basicGetOwningTerm() {
-		if (eContainerFeatureID() != OmlPackage.SPECIALIZATION_AXIOM__OWNING_TERM) return null;
-		return (SpecializableTerm)eInternalContainer();
+	public SpecializableProperty basicGetOwningProperty() {
+		if (eContainerFeatureID() != OmlPackage.PROPERTY_EQUIVALENCE_AXIOM__OWNING_PROPERTY) return null;
+		return (SpecializableProperty)eInternalContainer();
 	}
 
 	/**
@@ -148,8 +148,8 @@ public class SpecializationAxiomImpl extends AxiomImpl implements Specialization
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetOwningTerm(SpecializableTerm newOwningTerm, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwningTerm, OmlPackage.SPECIALIZATION_AXIOM__OWNING_TERM, msgs);
+	public NotificationChain basicSetOwningProperty(SpecializableProperty newOwningProperty, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newOwningProperty, OmlPackage.PROPERTY_EQUIVALENCE_AXIOM__OWNING_PROPERTY, msgs);
 		return msgs;
 	}
 
@@ -159,20 +159,20 @@ public class SpecializationAxiomImpl extends AxiomImpl implements Specialization
 	 * @generated
 	 */
 	@Override
-	public void setOwningTerm(SpecializableTerm newOwningTerm) {
-		if (newOwningTerm != eInternalContainer() || (eContainerFeatureID() != OmlPackage.SPECIALIZATION_AXIOM__OWNING_TERM && newOwningTerm != null)) {
-			if (EcoreUtil.isAncestor(this, newOwningTerm))
+	public void setOwningProperty(SpecializableProperty newOwningProperty) {
+		if (newOwningProperty != eInternalContainer() || (eContainerFeatureID() != OmlPackage.PROPERTY_EQUIVALENCE_AXIOM__OWNING_PROPERTY && newOwningProperty != null)) {
+			if (EcoreUtil.isAncestor(this, newOwningProperty))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
-			if (newOwningTerm != null)
-				msgs = ((InternalEObject)newOwningTerm).eInverseAdd(this, OmlPackage.SPECIALIZABLE_TERM__OWNED_SPECIALIZATIONS, SpecializableTerm.class, msgs);
-			msgs = basicSetOwningTerm(newOwningTerm, msgs);
+			if (newOwningProperty != null)
+				msgs = ((InternalEObject)newOwningProperty).eInverseAdd(this, OmlPackage.SPECIALIZABLE_PROPERTY__OWNED_EQUIVALENCES, SpecializableProperty.class, msgs);
+			msgs = basicSetOwningProperty(newOwningProperty, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.SPECIALIZATION_AXIOM__OWNING_TERM, newOwningTerm, newOwningTerm));
+			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.PROPERTY_EQUIVALENCE_AXIOM__OWNING_PROPERTY, newOwningProperty, newOwningProperty));
 	}
 
 	/**
@@ -181,9 +181,9 @@ public class SpecializationAxiomImpl extends AxiomImpl implements Specialization
 	 * @generated
 	 */
 	@Override
-	public Term getSubTerm() {
-		Member _resolve = this.getOwningTerm().resolve();
-		return ((Term) _resolve);
+	public Property getSubProperty() {
+		Member _resolve = this.getOwningProperty().resolve();
+		return ((Property) _resolve);
 	}
 
 	/**
@@ -194,10 +194,10 @@ public class SpecializationAxiomImpl extends AxiomImpl implements Specialization
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case OmlPackage.SPECIALIZATION_AXIOM__OWNING_TERM:
+			case OmlPackage.PROPERTY_EQUIVALENCE_AXIOM__OWNING_PROPERTY:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetOwningTerm((SpecializableTerm)otherEnd, msgs);
+				return basicSetOwningProperty((SpecializableProperty)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -210,8 +210,8 @@ public class SpecializationAxiomImpl extends AxiomImpl implements Specialization
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case OmlPackage.SPECIALIZATION_AXIOM__OWNING_TERM:
-				return basicSetOwningTerm(null, msgs);
+			case OmlPackage.PROPERTY_EQUIVALENCE_AXIOM__OWNING_PROPERTY:
+				return basicSetOwningProperty(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -224,8 +224,8 @@ public class SpecializationAxiomImpl extends AxiomImpl implements Specialization
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case OmlPackage.SPECIALIZATION_AXIOM__OWNING_TERM:
-				return eInternalContainer().eInverseRemove(this, OmlPackage.SPECIALIZABLE_TERM__OWNED_SPECIALIZATIONS, SpecializableTerm.class, msgs);
+			case OmlPackage.PROPERTY_EQUIVALENCE_AXIOM__OWNING_PROPERTY:
+				return eInternalContainer().eInverseRemove(this, OmlPackage.SPECIALIZABLE_PROPERTY__OWNED_EQUIVALENCES, SpecializableProperty.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -238,12 +238,12 @@ public class SpecializationAxiomImpl extends AxiomImpl implements Specialization
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case OmlPackage.SPECIALIZATION_AXIOM__SUPER_TERM:
-				if (resolve) return getSuperTerm();
-				return basicGetSuperTerm();
-			case OmlPackage.SPECIALIZATION_AXIOM__OWNING_TERM:
-				if (resolve) return getOwningTerm();
-				return basicGetOwningTerm();
+			case OmlPackage.PROPERTY_EQUIVALENCE_AXIOM__SUPER_PROPERTY:
+				if (resolve) return getSuperProperty();
+				return basicGetSuperProperty();
+			case OmlPackage.PROPERTY_EQUIVALENCE_AXIOM__OWNING_PROPERTY:
+				if (resolve) return getOwningProperty();
+				return basicGetOwningProperty();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -256,11 +256,11 @@ public class SpecializationAxiomImpl extends AxiomImpl implements Specialization
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case OmlPackage.SPECIALIZATION_AXIOM__SUPER_TERM:
-				setSuperTerm((Term)newValue);
+			case OmlPackage.PROPERTY_EQUIVALENCE_AXIOM__SUPER_PROPERTY:
+				setSuperProperty((Property)newValue);
 				return;
-			case OmlPackage.SPECIALIZATION_AXIOM__OWNING_TERM:
-				setOwningTerm((SpecializableTerm)newValue);
+			case OmlPackage.PROPERTY_EQUIVALENCE_AXIOM__OWNING_PROPERTY:
+				setOwningProperty((SpecializableProperty)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -274,11 +274,11 @@ public class SpecializationAxiomImpl extends AxiomImpl implements Specialization
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case OmlPackage.SPECIALIZATION_AXIOM__SUPER_TERM:
-				setSuperTerm((Term)null);
+			case OmlPackage.PROPERTY_EQUIVALENCE_AXIOM__SUPER_PROPERTY:
+				setSuperProperty((Property)null);
 				return;
-			case OmlPackage.SPECIALIZATION_AXIOM__OWNING_TERM:
-				setOwningTerm((SpecializableTerm)null);
+			case OmlPackage.PROPERTY_EQUIVALENCE_AXIOM__OWNING_PROPERTY:
+				setOwningProperty((SpecializableProperty)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -292,10 +292,10 @@ public class SpecializationAxiomImpl extends AxiomImpl implements Specialization
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case OmlPackage.SPECIALIZATION_AXIOM__SUPER_TERM:
-				return superTerm != null;
-			case OmlPackage.SPECIALIZATION_AXIOM__OWNING_TERM:
-				return basicGetOwningTerm() != null;
+			case OmlPackage.PROPERTY_EQUIVALENCE_AXIOM__SUPER_PROPERTY:
+				return superProperty != null;
+			case OmlPackage.PROPERTY_EQUIVALENCE_AXIOM__OWNING_PROPERTY:
+				return basicGetOwningProperty() != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -308,10 +308,10 @@ public class SpecializationAxiomImpl extends AxiomImpl implements Specialization
 	@Override
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
-			case OmlPackage.SPECIALIZATION_AXIOM___GET_SUB_TERM:
-				return getSubTerm();
+			case OmlPackage.PROPERTY_EQUIVALENCE_AXIOM___GET_SUB_PROPERTY:
+				return getSubProperty();
 		}
 		return super.eInvoke(operationID, arguments);
 	}
 
-} //SpecializationAxiomImpl
+} //PropertyEquivalenceAxiomImpl

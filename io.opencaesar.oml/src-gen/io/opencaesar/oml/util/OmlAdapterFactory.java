@@ -304,6 +304,14 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 				return createLiteralEnumerationAxiomAdapter();
 			}
 			@Override
+			public Adapter caseClassifierEquivalenceAxiom(ClassifierEquivalenceAxiom object) {
+				return createClassifierEquivalenceAxiomAdapter();
+			}
+			@Override
+			public Adapter casePropertyEquivalenceAxiom(PropertyEquivalenceAxiom object) {
+				return createPropertyEquivalenceAxiomAdapter();
+			}
+			@Override
 			public Adapter casePropertyRangeRestrictionAxiom(PropertyRangeRestrictionAxiom object) {
 				return createPropertyRangeRestrictionAxiomAdapter();
 			}
@@ -1162,6 +1170,34 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createLiteralEnumerationAxiomAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.ClassifierEquivalenceAxiom <em>Classifier Equivalence Axiom</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see io.opencaesar.oml.ClassifierEquivalenceAxiom
+	 * @generated
+	 */
+	public Adapter createClassifierEquivalenceAxiomAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.PropertyEquivalenceAxiom <em>Property Equivalence Axiom</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see io.opencaesar.oml.PropertyEquivalenceAxiom
+	 * @generated
+	 */
+	public Adapter createPropertyEquivalenceAxiomAdapter() {
 		return null;
 	}
 

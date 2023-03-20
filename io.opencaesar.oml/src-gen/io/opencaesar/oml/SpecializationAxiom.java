@@ -49,12 +49,12 @@ public interface SpecializationAxiom extends Axiom {
 	 * The super term specified by this axiom
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Super Term</em>' reference.
-	 * @see #setSuperTerm(SpecializableTerm)
+	 * @see #setSuperTerm(Term)
 	 * @see io.opencaesar.oml.OmlPackage#getSpecializationAxiom_SuperTerm()
 	 * @model required="true"
 	 * @generated
 	 */
-	SpecializableTerm getSuperTerm();
+	Term getSuperTerm();
 
 	/**
 	 * Sets the value of the '{@link io.opencaesar.oml.SpecializationAxiom#getSuperTerm <em>Super Term</em>}' reference.
@@ -64,7 +64,7 @@ public interface SpecializationAxiom extends Axiom {
 	 * @see #getSuperTerm()
 	 * @generated
 	 */
-	void setSuperTerm(SpecializableTerm value);
+	void setSuperTerm(Term value);
 
 	/**
 	 * Returns the value of the '<em><b>Owning Term</b></em>' container reference.
@@ -102,6 +102,6 @@ public interface SpecializationAxiom extends Axiom {
 	 * @model kind="operation" unique="false"
 	 * @generated
 	 */
-	SpecializableTerm getSubTerm();
+	Term getSubTerm();
 
 } // SpecializationAxiom

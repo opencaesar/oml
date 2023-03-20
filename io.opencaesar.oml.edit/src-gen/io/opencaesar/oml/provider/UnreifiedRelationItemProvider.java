@@ -335,6 +335,7 @@ public class UnreifiedRelationItemProvider extends RelationItemProvider {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(OmlPackage.Literals.SPECIALIZABLE_TERM__OWNED_SPECIALIZATIONS);
 			childrenFeatures.add(OmlPackage.Literals.RELATION_BASE__REVERSE_RELATION);
+			childrenFeatures.add(OmlPackage.Literals.SPECIALIZABLE_PROPERTY__OWNED_EQUIVALENCES);
 		}
 		return childrenFeatures;
 	}
@@ -401,6 +402,7 @@ public class UnreifiedRelationItemProvider extends RelationItemProvider {
 				return;
 			case OmlPackage.UNREIFIED_RELATION__OWNED_SPECIALIZATIONS:
 			case OmlPackage.UNREIFIED_RELATION__REVERSE_RELATION:
+			case OmlPackage.UNREIFIED_RELATION__OWNED_EQUIVALENCES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -427,6 +429,11 @@ public class UnreifiedRelationItemProvider extends RelationItemProvider {
 			(createChildParameter
 				(OmlPackage.Literals.RELATION_BASE__REVERSE_RELATION,
 				 OmlFactory.eINSTANCE.createReverseRelation()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(OmlPackage.Literals.SPECIALIZABLE_PROPERTY__OWNED_EQUIVALENCES,
+				 OmlFactory.eINSTANCE.createPropertyEquivalenceAxiom()));
 	}
 
 }

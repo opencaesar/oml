@@ -389,9 +389,7 @@ public class PropertyValueAssertionImpl extends AssertionImpl implements Propert
 			Member _resolve = ((NamedInstance) _owningInstance_1).resolve();
 			return ((NamedInstance) _resolve);
 		}
-		else {
-			return this.getOwningInstance();
-		}
+		return this.getOwningInstance();
 	}
 
 	/**

@@ -700,6 +700,22 @@ public class OmlSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case OmlPackage.CLASSIFIER_EQUIVALENCE_AXIOM: {
+				ClassifierEquivalenceAxiom classifierEquivalenceAxiom = (ClassifierEquivalenceAxiom)theEObject;
+				T result = caseClassifierEquivalenceAxiom(classifierEquivalenceAxiom);
+				if (result == null) result = caseAxiom(classifierEquivalenceAxiom);
+				if (result == null) result = caseElement(classifierEquivalenceAxiom);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case OmlPackage.PROPERTY_EQUIVALENCE_AXIOM: {
+				PropertyEquivalenceAxiom propertyEquivalenceAxiom = (PropertyEquivalenceAxiom)theEObject;
+				T result = casePropertyEquivalenceAxiom(propertyEquivalenceAxiom);
+				if (result == null) result = caseAxiom(propertyEquivalenceAxiom);
+				if (result == null) result = caseElement(propertyEquivalenceAxiom);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case OmlPackage.PROPERTY_RANGE_RESTRICTION_AXIOM: {
 				PropertyRangeRestrictionAxiom propertyRangeRestrictionAxiom = (PropertyRangeRestrictionAxiom)theEObject;
 				T result = casePropertyRangeRestrictionAxiom(propertyRangeRestrictionAxiom);
@@ -1679,6 +1695,36 @@ public class OmlSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseLiteralEnumerationAxiom(LiteralEnumerationAxiom object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Classifier Equivalence Axiom</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Classifier Equivalence Axiom</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseClassifierEquivalenceAxiom(ClassifierEquivalenceAxiom object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Property Equivalence Axiom</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Property Equivalence Axiom</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePropertyEquivalenceAxiom(PropertyEquivalenceAxiom object) {
 		return null;
 	}
 

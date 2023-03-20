@@ -36,7 +36,9 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
 import io.opencaesar.oml.Argument;
+import io.opencaesar.oml.Aspect;
 import io.opencaesar.oml.Classifier;
+import io.opencaesar.oml.ClassifierEquivalenceAxiom;
 import io.opencaesar.oml.Concept;
 import io.opencaesar.oml.ConceptInstance;
 import io.opencaesar.oml.Description;
@@ -49,7 +51,9 @@ import io.opencaesar.oml.Literal;
 import io.opencaesar.oml.Member;
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.Ontology;
+import io.opencaesar.oml.Property;
 import io.opencaesar.oml.PropertyCardinalityRestrictionAxiom;
+import io.opencaesar.oml.PropertyEquivalenceAxiom;
 import io.opencaesar.oml.PropertyPredicate;
 import io.opencaesar.oml.PropertyRangeRestrictionAxiom;
 import io.opencaesar.oml.PropertyRestrictionAxiom;
@@ -65,10 +69,10 @@ import io.opencaesar.oml.Rule;
 import io.opencaesar.oml.Scalar;
 import io.opencaesar.oml.ScalarProperty;
 import io.opencaesar.oml.SemanticProperty;
-import io.opencaesar.oml.SpecializableTerm;
 import io.opencaesar.oml.SpecializationAxiom;
 import io.opencaesar.oml.Structure;
 import io.opencaesar.oml.StructuredProperty;
+import io.opencaesar.oml.Term;
 import io.opencaesar.oml.Type;
 import io.opencaesar.oml.TypeAssertion;
 import io.opencaesar.oml.TypePredicate;
@@ -384,7 +388,7 @@ public final class OmlValidator2 {
         final SemanticProperty property = object.getProperty();
         final Classifier domainType = (property!=null) ? property.getDomain() : null;
         if (restrictingDomain != null && domainType != null) {
-	        final Collection<SpecializableTerm> allGeneralTerms = OmlRead.closure(restrictingDomain, true, t -> OmlSearch.findSuperTerms(t));
+	        final Collection<Term> allGeneralTerms = OmlRead.closure(restrictingDomain, true, t -> OmlSearch.findSuperTerms(t));
 	        if (!allGeneralTerms.stream().filter(t -> t == domainType).findAny().isPresent()) {
 	            return report(Diagnostic.WARNING, diagnostics, object,
 	                "Property "+object.getProperty().getAbbreviatedIri()+" has a domain "+object.getProperty().getDomain().getAbbreviatedIri()+" that is not the same as or a super type of "+restrictingDomain.getAbbreviatedIri(), 
@@ -409,7 +413,7 @@ public final class OmlValidator2 {
         final SemanticProperty property = object.getProperty();
         final Type rangeType = (property!=null) ? property.getRange() : null;
         if (rangeType != null && restrictedRange != null && !restrictedRange.getAbbreviatedIri().equals(OWL_NOTHING)) {
-	        final Collection<SpecializableTerm> allGeneralEntities = OmlRead.closure(restrictedRange, true, t -> OmlSearch.findSuperTerms(t));
+	        final Collection<Term> allGeneralEntities = OmlRead.closure(restrictedRange, true, t -> OmlSearch.findSuperTerms(t));
 	        if (!allGeneralEntities.stream().filter(t -> t == rangeType).findAny().isPresent()) {
 	            return report(Diagnostic.WARNING, diagnostics, object,
 	                "Type "+restrictedRange.getAbbreviatedIri()+" is not the same as or a sub type of "+rangeType.getAbbreviatedIri(), 
@@ -434,7 +438,7 @@ public final class OmlValidator2 {
         final SemanticProperty property = object.getProperty();
         final Type rangeType = (property!=null) ? property.getRange() : null;
         if (rangeType != null && restrictedRange != null && !restrictedRange.getAbbreviatedIri().equals(OWL_NOTHING)) {
-            final Collection<SpecializableTerm> allGeneralEntities = OmlRead.closure(restrictedRange, true, t -> OmlSearch.findSuperTerms(t));
+            final Collection<Term> allGeneralEntities = OmlRead.closure(restrictedRange, true, t -> OmlSearch.findSuperTerms(t));
             if (!allGeneralEntities.stream().filter(t -> t == rangeType).findAny().isPresent()) {
                 return report(Diagnostic.WARNING, diagnostics, object,
                     "Type "+restrictedRange.getAbbreviatedIri()+" is not the same as or a sub type of "+rangeType.getAbbreviatedIri(), 
@@ -461,18 +465,30 @@ public final class OmlValidator2 {
 	            return report(Diagnostic.WARNING, diagnostics, object,
 	                "A literal is expected as the restricted value of property "+property.getAbbreviatedIri(), 
 	                OmlPackage.Literals.PROPERTY_RESTRICTION_AXIOM__PROPERTY);
+        	} else if (!OmlSearch.findIsOfKind(object.getLiteralValue(), ((ScalarProperty)property).getRange())) {
+	            return report(Diagnostic.WARNING, diagnostics, object,
+		                "The literal is not in the range of scalar property "+property.getAbbreviatedIri(), 
+		                OmlPackage.Literals.PROPERTY_VALUE_RESTRICTION_AXIOM__LITERAL_VALUE);
         	}
         } else if (property instanceof StructuredProperty) {
         	if (object.getStructureInstanceValue() == null) {
 	            return report(Diagnostic.WARNING, diagnostics, object,
 	                "A structure instance is expected as the restricted value of property "+property.getAbbreviatedIri(), 
 	                OmlPackage.Literals.PROPERTY_RESTRICTION_AXIOM__PROPERTY);
+        	} else if (OmlSearch.findIsOfKind(object.getStructureInstanceValue(), ((StructuredProperty)property).getRange())) {
+	            return report(Diagnostic.WARNING, diagnostics, object,
+		                "The instance is not in the range of structured property "+property.getAbbreviatedIri(), 
+		                OmlPackage.Literals.PROPERTY_VALUE_RESTRICTION_AXIOM__STRUCTURE_INSTANCE_VALUE);
         	}
         } else if (property instanceof Relation) {
         	if (object.getNamedInstanceValue() == null) {
 	            return report(Diagnostic.WARNING, diagnostics, object,
 	                "A named instance IRI is expected as the restricted value of relation "+property.getAbbreviatedIri(), 
 	                OmlPackage.Literals.PROPERTY_RESTRICTION_AXIOM__PROPERTY);
+        	} else if (OmlSearch.findIsOfKind(object.getNamedInstanceValue(), ((Relation)property).getRange())) {
+	            return report(Diagnostic.WARNING, diagnostics, object,
+		                "The instance is not in the range of relation "+property.getAbbreviatedIri(), 
+		                OmlPackage.Literals.PROPERTY_VALUE_RESTRICTION_AXIOM__NAMED_INSTANCE_VALUE);
         	}
         }
         return true;
@@ -489,25 +505,88 @@ public final class OmlValidator2 {
      * @return True if the rules is satisfied; False otherwise
      */
     protected boolean validateSpecializationAxiomSpecializedTermKind(SpecializationAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-        final SpecializableTerm superTerm = object.getSuperTerm();
-        final SpecializableTerm subTerm = object.getSubTerm();
+        final Term superTerm = object.getSuperTerm();
+        final Term subTerm = object.getSubTerm();
         if (superTerm == subTerm) {
             return report(Diagnostic.WARNING, diagnostics, object,
-	                "SpecializableTerm "+superTerm.getAbbreviatedIri()+" specializes itself", 
+	                "Term "+subTerm.getAbbreviatedIri()+" specializes itself", 
 	                OmlPackage.Literals.SPECIALIZATION_AXIOM__SUPER_TERM);
-        } else if (superTerm != null && !superTerm.eIsProxy()) {
+        } 
+        if (superTerm != null && !superTerm.eIsProxy()) {
 	        final EClass superEClass = superTerm.eClass();
 	        final EClass subEClass = subTerm.eClass();
 	        if (!((OmlPackage.Literals.ASPECT == superEClass && OmlPackage.Literals.ENTITY.isSuperTypeOf(subEClass)) ||
 	            (superEClass == subEClass))) {
 	            return report(Diagnostic.ERROR, diagnostics, object,
-	                "SpecializableTerm "+superTerm.getAbbreviatedIri()+" cannot be specialized by "+subTerm.getAbbreviatedIri()+"", 
+	                "Term "+superTerm.getAbbreviatedIri()+" cannot be specialized by "+subTerm.getAbbreviatedIri()+"", 
 	                OmlPackage.Literals.SPECIALIZATION_AXIOM__SUPER_TERM);
 	        }
         }
         return true;
     }
+
+    // ClassifierEquivalenceAxiom
     
+    /**
+     * Checks if a classifier equivalence axiom is not between compatible classifier kinds
+     * 
+     * @param object The classifier equivalence axiom to check
+     * @param diagnostics The validation diagnostics
+     * @param context The object-to-object context map
+     * @return True if the rules is satisfied; False otherwise
+     */
+    protected boolean validateClassifierEquivalenceAxiom(ClassifierEquivalenceAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        final List<Classifier> superClassifiers = object.getSuperClassifiers();
+        final Classifier subClassifier = object.getSubClassifier();
+        if (superClassifiers.contains(subClassifier)) {
+            return report(Diagnostic.WARNING, diagnostics, object,
+	                "Classifier "+subClassifier.getAbbreviatedIri()+" specializes itself", 
+	                OmlPackage.Literals.CLASSIFIER_EQUIVALENCE_AXIOM__SUPER_CLASSIFIERS);
+        } 
+        final EClass subEClass = subClassifier.eClass();
+        for(Classifier superClassifier : superClassifiers) {
+	        if (!superClassifier.eIsProxy()) {
+		        final EClass superEClass = superClassifier.eClass();
+		        if (superEClass != subEClass) {
+		            return report(Diagnostic.ERROR, diagnostics, object,
+		                "Classifier "+superClassifier.getAbbreviatedIri()+" cannot be specialized by "+subClassifier.getAbbreviatedIri()+"", 
+		                OmlPackage.Literals.CLASSIFIER_EQUIVALENCE_AXIOM__SUPER_CLASSIFIERS);
+		        }
+	        }
+        }
+        return true;
+    }
+
+    // PropertyEquivalenceAxiom
+    
+    /**
+     * Checks if a property equivalence axiom is not between compatible property kinds
+     * 
+     * @param object The property equivalence axiom to check
+     * @param diagnostics The validation diagnostics
+     * @param context The object-to-object context map
+     * @return True if the rules is satisfied; False otherwise
+     */
+    protected boolean validatePropertyEquivalenceAxiom(PropertyEquivalenceAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        final Property superProperty = object.getSuperProperty();
+        final Property subProperty = object.getSubProperty();
+        if (superProperty == subProperty) {
+            return report(Diagnostic.WARNING, diagnostics, object,
+	                "Property "+subProperty.getAbbreviatedIri()+" specializes itself", 
+	                OmlPackage.Literals.PROPERTY_EQUIVALENCE_AXIOM__SUPER_PROPERTY);
+        } 
+        if (superProperty != null && !superProperty.eIsProxy()) {
+	        final EClass superEClass = superProperty.eClass();
+	        final EClass subEClass = subProperty.eClass();
+	        if (superEClass != subEClass) {
+	            return report(Diagnostic.ERROR, diagnostics, object,
+	                "Property "+superProperty.getAbbreviatedIri()+" cannot be specialized by "+subProperty.getAbbreviatedIri()+"", 
+	                OmlPackage.Literals.PROPERTY_EQUIVALENCE_AXIOM__SUPER_PROPERTY);
+	        }
+        }
+        return true;
+    }
+
     // Faceted Scalar
     
     /**
@@ -521,30 +600,38 @@ public final class OmlValidator2 {
     protected boolean validateScalarSupertype(Scalar object, DiagnosticChain diagnostics, Map<Object, Object> context) {
     	var specializations = object.getOwnedSpecializations();
     	if (!OmlRead.isStandardScalar(object)) {
-	    	if (object.getLanguage() != null ||
+    		if (specializations.size() == 0) {
+                return report(Diagnostic.ERROR, diagnostics, object,
+                	"Non-standard scalar "+object.getAbbreviatedIri()+" must specify a supertype", 
+    	            OmlPackage.Literals.MEMBER__NAME);
+	        }
+    		if (object.getLanguage() != null ||
 	        	object.getLength() != null ||
 	            object.getMaxLength() != null ||
 	        	object.getMinLength() != null ||
 	        	object.getMaxExclusive() != null ||
 	        	object.getMaxInclusive() != null ||
 	        	object.getMinExclusive() != null ||
-	        	object.getMinInclusive() != null ||
-	        	object.getOwnedEnumeration() != null) 
+	        	object.getMinInclusive() != null) 
 	        {
-	        	var singleStandardGeneral = false;
-	        	if (specializations.size() == 1) {
-	        		var general = (Scalar) specializations.get(0).getSuperTerm();
-	            	singleStandardGeneral = OmlRead.isStandardScalar(general);
-	        	}
-	        	if (!singleStandardGeneral) {
+	        	if (specializations.size() > 1 || !OmlRead.isStandardScalar((Scalar) specializations.get(0).getSuperTerm())) {
 	                return report(Diagnostic.ERROR, diagnostics, object,
 	                	"Non-standard scalar "+object.getAbbreviatedIri()+" with facets must specify a single standard supertype", 
 	    	            OmlPackage.Literals.MEMBER__NAME);
 	        	}
-	        } else if (specializations.isEmpty()) {
-                return report(Diagnostic.ERROR, diagnostics, object,
-                	"Non-standard scalar "+object.getAbbreviatedIri()+" with no facets must specify a supertype", 
-    	            OmlPackage.Literals.MEMBER__NAME);
+	        }
+    		if (object.getOwnedEnumeration() != null) {
+    			for (Term superTerm : OmlRead.getSuperTerms(object)) {
+    				Scalar superScalar = (Scalar) superTerm;
+    				for (Literal literal : object.getOwnedEnumeration().getLiterals()) {
+    		        	if (!OmlSearch.findIsOfKind(literal, superScalar)) {
+    		                return report(Diagnostic.ERROR, diagnostics, object,
+    		                	"Literal "+OmlRead.getLexicalValue(literal)+" is not in the range of literals of scalar "+superScalar.getAbbreviatedIri(), 
+    		    	            OmlPackage.Literals.MEMBER__NAME);
+    		        	}
+    				}
+    			}
+	        	
 	        }
     	}
         return true;
@@ -725,12 +812,10 @@ public final class OmlValidator2 {
      */
     protected boolean validateQuotedLiteral(QuotedLiteral object, DiagnosticChain diagnostics, Map<Object, Object> context) {
     	var scalar = object.getType();
-    	if (scalar != null) {
-	    	if (!OmlRead.isStandardScalar(scalar)) {
-	            return report(Diagnostic.ERROR, diagnostics, object,
-	                "Quoted Literal \""+object.getValue()+"\" is not typed by a standard scalar", 
-	                OmlPackage.Literals.QUOTED_LITERAL__TYPE);
-	        }
+    	if (scalar != null && !OmlRead.isStandardScalar(scalar)) {
+            return report(Diagnostic.ERROR, diagnostics, object,
+                "Quoted Literal \""+object.getValue()+"\" is not typed by a standard scalar", 
+                OmlPackage.Literals.QUOTED_LITERAL__TYPE);
     	}
         return true;
     }
@@ -749,7 +834,7 @@ public final class OmlValidator2 {
         final var theSubject = object.getAssertingInstance();
         final SemanticProperty property = object.getProperty();
         final Classifier domainType = property.getDomain();
-        if (!OmlSearch.findIsKindOf(theSubject, domainType)) {
+        if (!OmlSearch.findIsOfKind(theSubject, domainType)) {
         	return report(Diagnostic.WARNING, diagnostics, object,
                 "Property "+property.getAbbreviatedIri()+" has a domain that is not the same as or a super type of the assertion's subject",
                 OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__PROPERTY);
@@ -769,16 +854,16 @@ public final class OmlValidator2 {
         final var theObject = OmlRead.getObject(object);
         final SemanticProperty property = object.getProperty();
         if (property instanceof ScalarProperty) {
-        	if (theObject instanceof Literal && OmlSearch.findIsKindOf((Literal)theObject, (Scalar)property.getRange())) {
+        	if (theObject instanceof Literal && OmlSearch.findIsOfKind((Literal)theObject, (Scalar)property.getRange())) {
         		return true;
         	}
         } else {
-        	if (theObject instanceof Instance && OmlSearch.findIsKindOf((Instance)theObject, (Classifier)property.getRange())) {
+        	if (theObject instanceof Instance && OmlSearch.findIsOfKind((Instance)theObject, (Classifier)property.getRange())) {
         		return true;
         	}
         }
     	return report(Diagnostic.WARNING, diagnostics, object,
-            "Property "+property.getAbbreviatedIri()+" has a range that is not the same as or a super type of the assertion's value",
+            "Property "+property.getAbbreviatedIri()+" has a range that does not include the asserted value",
             OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__PROPERTY);
     }
 
@@ -793,11 +878,13 @@ public final class OmlValidator2 {
     protected boolean validateTypeRestriction(TypeAssertion object, DiagnosticChain diagnostics, Map<Object, Object> context) {
         final var instance = object.getAssertingInstance();
         final var type = object.getType();
-        if (((instance instanceof ConceptInstance) && !(type instanceof Concept)) || 
-        	((instance instanceof RelationInstance) && !(type instanceof RelationEntity))) {
-        	return report(Diagnostic.ERROR, diagnostics, object,
-                "Type "+type.getAbbreviatedIri()+" cannot be a type for instance "+instance.getAbbreviatedIri() , 
-                OmlPackage.Literals.TYPE_ASSERTION__TYPE);
+        if (type != null) {
+	        if (((instance instanceof ConceptInstance) && !(type instanceof Concept || type instanceof Aspect)) || 
+	        	((instance instanceof RelationInstance) && !(type instanceof RelationEntity || type instanceof Aspect))) {
+	        	return report(Diagnostic.ERROR, diagnostics, object,
+	                "Type "+type.getAbbreviatedIri()+" cannot be a type for instance "+instance.getAbbreviatedIri() , 
+	                OmlPackage.Literals.TYPE_ASSERTION__TYPE);
+	        }
         }
         return true;
     }

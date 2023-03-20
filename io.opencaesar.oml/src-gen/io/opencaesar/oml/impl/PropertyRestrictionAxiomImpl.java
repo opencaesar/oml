@@ -19,6 +19,7 @@
 package io.opencaesar.oml.impl;
 
 import io.opencaesar.oml.Classifier;
+import io.opencaesar.oml.ClassifierEquivalenceAxiom;
 import io.opencaesar.oml.Member;
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.PropertyRestrictionAxiom;
@@ -48,6 +49,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  * <ul>
  *   <li>{@link io.opencaesar.oml.impl.PropertyRestrictionAxiomImpl#getProperty <em>Property</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.PropertyRestrictionAxiomImpl#getOwningClassifier <em>Owning Classifier</em>}</li>
+ *   <li>{@link io.opencaesar.oml.impl.PropertyRestrictionAxiomImpl#getOwningAxiom <em>Owning Axiom</em>}</li>
  * </ul>
  *
  * @generated
@@ -181,7 +183,65 @@ public abstract class PropertyRestrictionAxiomImpl extends AxiomImpl implements 
 	 * @generated
 	 */
 	@Override
+	public ClassifierEquivalenceAxiom getOwningAxiom() {
+		if (eContainerFeatureID() != OmlPackage.PROPERTY_RESTRICTION_AXIOM__OWNING_AXIOM) return null;
+		return (ClassifierEquivalenceAxiom)eContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ClassifierEquivalenceAxiom basicGetOwningAxiom() {
+		if (eContainerFeatureID() != OmlPackage.PROPERTY_RESTRICTION_AXIOM__OWNING_AXIOM) return null;
+		return (ClassifierEquivalenceAxiom)eInternalContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetOwningAxiom(ClassifierEquivalenceAxiom newOwningAxiom, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newOwningAxiom, OmlPackage.PROPERTY_RESTRICTION_AXIOM__OWNING_AXIOM, msgs);
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setOwningAxiom(ClassifierEquivalenceAxiom newOwningAxiom) {
+		if (newOwningAxiom != eInternalContainer() || (eContainerFeatureID() != OmlPackage.PROPERTY_RESTRICTION_AXIOM__OWNING_AXIOM && newOwningAxiom != null)) {
+			if (EcoreUtil.isAncestor(this, newOwningAxiom))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newOwningAxiom != null)
+				msgs = ((InternalEObject)newOwningAxiom).eInverseAdd(this, OmlPackage.CLASSIFIER_EQUIVALENCE_AXIOM__OWNED_PROPERTY_RESTRICTIONS, ClassifierEquivalenceAxiom.class, msgs);
+			msgs = basicSetOwningAxiom(newOwningAxiom, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.PROPERTY_RESTRICTION_AXIOM__OWNING_AXIOM, newOwningAxiom, newOwningAxiom));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Classifier getRestrictingDomain() {
+		ClassifierEquivalenceAxiom _owningAxiom = this.getOwningAxiom();
+		boolean _tripleNotEquals = (_owningAxiom != null);
+		if (_tripleNotEquals) {
+			return this.getOwningAxiom().getSubClassifier();
+		}
 		Member _resolve = this.getOwningClassifier().resolve();
 		return ((Classifier) _resolve);
 	}
@@ -198,6 +258,10 @@ public abstract class PropertyRestrictionAxiomImpl extends AxiomImpl implements 
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwningClassifier((Classifier)otherEnd, msgs);
+			case OmlPackage.PROPERTY_RESTRICTION_AXIOM__OWNING_AXIOM:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetOwningAxiom((ClassifierEquivalenceAxiom)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -212,6 +276,8 @@ public abstract class PropertyRestrictionAxiomImpl extends AxiomImpl implements 
 		switch (featureID) {
 			case OmlPackage.PROPERTY_RESTRICTION_AXIOM__OWNING_CLASSIFIER:
 				return basicSetOwningClassifier(null, msgs);
+			case OmlPackage.PROPERTY_RESTRICTION_AXIOM__OWNING_AXIOM:
+				return basicSetOwningAxiom(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -226,6 +292,8 @@ public abstract class PropertyRestrictionAxiomImpl extends AxiomImpl implements 
 		switch (eContainerFeatureID()) {
 			case OmlPackage.PROPERTY_RESTRICTION_AXIOM__OWNING_CLASSIFIER:
 				return eInternalContainer().eInverseRemove(this, OmlPackage.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS, Classifier.class, msgs);
+			case OmlPackage.PROPERTY_RESTRICTION_AXIOM__OWNING_AXIOM:
+				return eInternalContainer().eInverseRemove(this, OmlPackage.CLASSIFIER_EQUIVALENCE_AXIOM__OWNED_PROPERTY_RESTRICTIONS, ClassifierEquivalenceAxiom.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -244,6 +312,9 @@ public abstract class PropertyRestrictionAxiomImpl extends AxiomImpl implements 
 			case OmlPackage.PROPERTY_RESTRICTION_AXIOM__OWNING_CLASSIFIER:
 				if (resolve) return getOwningClassifier();
 				return basicGetOwningClassifier();
+			case OmlPackage.PROPERTY_RESTRICTION_AXIOM__OWNING_AXIOM:
+				if (resolve) return getOwningAxiom();
+				return basicGetOwningAxiom();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -261,6 +332,9 @@ public abstract class PropertyRestrictionAxiomImpl extends AxiomImpl implements 
 				return;
 			case OmlPackage.PROPERTY_RESTRICTION_AXIOM__OWNING_CLASSIFIER:
 				setOwningClassifier((Classifier)newValue);
+				return;
+			case OmlPackage.PROPERTY_RESTRICTION_AXIOM__OWNING_AXIOM:
+				setOwningAxiom((ClassifierEquivalenceAxiom)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -280,6 +354,9 @@ public abstract class PropertyRestrictionAxiomImpl extends AxiomImpl implements 
 			case OmlPackage.PROPERTY_RESTRICTION_AXIOM__OWNING_CLASSIFIER:
 				setOwningClassifier((Classifier)null);
 				return;
+			case OmlPackage.PROPERTY_RESTRICTION_AXIOM__OWNING_AXIOM:
+				setOwningAxiom((ClassifierEquivalenceAxiom)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -296,6 +373,8 @@ public abstract class PropertyRestrictionAxiomImpl extends AxiomImpl implements 
 				return property != null;
 			case OmlPackage.PROPERTY_RESTRICTION_AXIOM__OWNING_CLASSIFIER:
 				return basicGetOwningClassifier() != null;
+			case OmlPackage.PROPERTY_RESTRICTION_AXIOM__OWNING_AXIOM:
+				return basicGetOwningAxiom() != null;
 		}
 		return super.eIsSet(featureID);
 	}

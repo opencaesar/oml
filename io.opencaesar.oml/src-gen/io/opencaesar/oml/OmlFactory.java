@@ -281,6 +281,24 @@ public interface OmlFactory extends EFactory {
 	LiteralEnumerationAxiom createLiteralEnumerationAxiom();
 
 	/**
+	 * Returns a new object of class '<em>Classifier Equivalence Axiom</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Classifier Equivalence Axiom</em>'.
+	 * @generated
+	 */
+	ClassifierEquivalenceAxiom createClassifierEquivalenceAxiom();
+
+	/**
+	 * Returns a new object of class '<em>Property Equivalence Axiom</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Property Equivalence Axiom</em>'.
+	 * @generated
+	 */
+	PropertyEquivalenceAxiom createPropertyEquivalenceAxiom();
+
+	/**
 	 * Returns a new object of class '<em>Property Range Restriction Axiom</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

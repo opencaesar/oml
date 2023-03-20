@@ -709,6 +709,52 @@ public class OmlItemProviderAdapterFactory extends OmlAdapterFactory implements 
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.ClassifierEquivalenceAxiom} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ClassifierEquivalenceAxiomItemProvider classifierEquivalenceAxiomItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link io.opencaesar.oml.ClassifierEquivalenceAxiom}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createClassifierEquivalenceAxiomAdapter() {
+		if (classifierEquivalenceAxiomItemProvider == null) {
+			classifierEquivalenceAxiomItemProvider = new ClassifierEquivalenceAxiomItemProvider(this);
+		}
+
+		return classifierEquivalenceAxiomItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.PropertyEquivalenceAxiom} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected PropertyEquivalenceAxiomItemProvider propertyEquivalenceAxiomItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link io.opencaesar.oml.PropertyEquivalenceAxiom}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createPropertyEquivalenceAxiomAdapter() {
+		if (propertyEquivalenceAxiomItemProvider == null) {
+			propertyEquivalenceAxiomItemProvider = new PropertyEquivalenceAxiomItemProvider(this);
+		}
+
+		return propertyEquivalenceAxiomItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.PropertyRangeRestrictionAxiom} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1208,6 +1254,8 @@ public class OmlItemProviderAdapterFactory extends OmlAdapterFactory implements 
 		if (specializationAxiomItemProvider != null) specializationAxiomItemProvider.dispose();
 		if (instanceEnumerationAxiomItemProvider != null) instanceEnumerationAxiomItemProvider.dispose();
 		if (literalEnumerationAxiomItemProvider != null) literalEnumerationAxiomItemProvider.dispose();
+		if (classifierEquivalenceAxiomItemProvider != null) classifierEquivalenceAxiomItemProvider.dispose();
+		if (propertyEquivalenceAxiomItemProvider != null) propertyEquivalenceAxiomItemProvider.dispose();
 		if (propertyRangeRestrictionAxiomItemProvider != null) propertyRangeRestrictionAxiomItemProvider.dispose();
 		if (propertyCardinalityRestrictionAxiomItemProvider != null) propertyCardinalityRestrictionAxiomItemProvider.dispose();
 		if (propertyValueRestrictionAxiomItemProvider != null) propertyValueRestrictionAxiomItemProvider.dispose();

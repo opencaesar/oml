@@ -19,6 +19,7 @@
 package io.opencaesar.oml.impl;
 
 import io.opencaesar.oml.Classifier;
+import io.opencaesar.oml.ClassifierEquivalenceAxiom;
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.PropertyRestrictionAxiom;
 
@@ -43,6 +44,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * </p>
  * <ul>
  *   <li>{@link io.opencaesar.oml.impl.ClassifierImpl#getOwnedPropertyRestrictions <em>Owned Property Restrictions</em>}</li>
+ *   <li>{@link io.opencaesar.oml.impl.ClassifierImpl#getOwnedEquivalences <em>Owned Equivalences</em>}</li>
  * </ul>
  *
  * @generated
@@ -57,6 +59,16 @@ public abstract class ClassifierImpl extends TypeImpl implements Classifier {
 	 * @ordered
 	 */
 	protected EList<PropertyRestrictionAxiom> ownedPropertyRestrictions;
+
+	/**
+	 * The cached value of the '{@link #getOwnedEquivalences() <em>Owned Equivalences</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOwnedEquivalences()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ClassifierEquivalenceAxiom> ownedEquivalences;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -95,12 +107,27 @@ public abstract class ClassifierImpl extends TypeImpl implements Classifier {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public EList<ClassifierEquivalenceAxiom> getOwnedEquivalences() {
+		if (ownedEquivalences == null) {
+			ownedEquivalences = new EObjectContainmentWithInverseEList<ClassifierEquivalenceAxiom>(ClassifierEquivalenceAxiom.class, this, OmlPackage.CLASSIFIER__OWNED_EQUIVALENCES, OmlPackage.CLASSIFIER_EQUIVALENCE_AXIOM__OWNING_CLASSIFIER);
+		}
+		return ownedEquivalences;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case OmlPackage.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedPropertyRestrictions()).basicAdd(otherEnd, msgs);
+			case OmlPackage.CLASSIFIER__OWNED_EQUIVALENCES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedEquivalences()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -115,6 +142,8 @@ public abstract class ClassifierImpl extends TypeImpl implements Classifier {
 		switch (featureID) {
 			case OmlPackage.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS:
 				return ((InternalEList<?>)getOwnedPropertyRestrictions()).basicRemove(otherEnd, msgs);
+			case OmlPackage.CLASSIFIER__OWNED_EQUIVALENCES:
+				return ((InternalEList<?>)getOwnedEquivalences()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -129,6 +158,8 @@ public abstract class ClassifierImpl extends TypeImpl implements Classifier {
 		switch (featureID) {
 			case OmlPackage.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS:
 				return getOwnedPropertyRestrictions();
+			case OmlPackage.CLASSIFIER__OWNED_EQUIVALENCES:
+				return getOwnedEquivalences();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -146,6 +177,10 @@ public abstract class ClassifierImpl extends TypeImpl implements Classifier {
 				getOwnedPropertyRestrictions().clear();
 				getOwnedPropertyRestrictions().addAll((Collection<? extends PropertyRestrictionAxiom>)newValue);
 				return;
+			case OmlPackage.CLASSIFIER__OWNED_EQUIVALENCES:
+				getOwnedEquivalences().clear();
+				getOwnedEquivalences().addAll((Collection<? extends ClassifierEquivalenceAxiom>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -161,6 +196,9 @@ public abstract class ClassifierImpl extends TypeImpl implements Classifier {
 			case OmlPackage.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS:
 				getOwnedPropertyRestrictions().clear();
 				return;
+			case OmlPackage.CLASSIFIER__OWNED_EQUIVALENCES:
+				getOwnedEquivalences().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -175,6 +213,8 @@ public abstract class ClassifierImpl extends TypeImpl implements Classifier {
 		switch (featureID) {
 			case OmlPackage.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS:
 				return ownedPropertyRestrictions != null && !ownedPropertyRestrictions.isEmpty();
+			case OmlPackage.CLASSIFIER__OWNED_EQUIVALENCES:
+				return ownedEquivalences != null && !ownedEquivalences.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

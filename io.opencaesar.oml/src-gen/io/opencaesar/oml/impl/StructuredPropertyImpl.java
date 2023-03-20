@@ -20,6 +20,7 @@ package io.opencaesar.oml.impl;
 
 import io.opencaesar.oml.Classifier;
 import io.opencaesar.oml.OmlPackage;
+import io.opencaesar.oml.PropertyEquivalenceAxiom;
 import io.opencaesar.oml.SpecializableProperty;
 import io.opencaesar.oml.SpecializableTerm;
 import io.opencaesar.oml.SpecializationAxiom;
@@ -55,6 +56,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <ul>
  *   <li>{@link io.opencaesar.oml.impl.StructuredPropertyImpl#getOwningVocabulary <em>Owning Vocabulary</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.StructuredPropertyImpl#getOwnedSpecializations <em>Owned Specializations</em>}</li>
+ *   <li>{@link io.opencaesar.oml.impl.StructuredPropertyImpl#getOwnedEquivalences <em>Owned Equivalences</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.StructuredPropertyImpl#getRef <em>Ref</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.StructuredPropertyImpl#isFunctional <em>Functional</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.StructuredPropertyImpl#getDomain <em>Domain</em>}</li>
@@ -73,6 +75,16 @@ public class StructuredPropertyImpl extends SemanticPropertyImpl implements Stru
 	 * @ordered
 	 */
 	protected EList<SpecializationAxiom> ownedSpecializations;
+
+	/**
+	 * The cached value of the '{@link #getOwnedEquivalences() <em>Owned Equivalences</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOwnedEquivalences()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<PropertyEquivalenceAxiom> ownedEquivalences;
 
 	/**
 	 * The cached value of the '{@link #getRef() <em>Ref</em>}' reference.
@@ -207,6 +219,19 @@ public class StructuredPropertyImpl extends SemanticPropertyImpl implements Stru
 			ownedSpecializations = new EObjectContainmentWithInverseEList<SpecializationAxiom>(SpecializationAxiom.class, this, OmlPackage.STRUCTURED_PROPERTY__OWNED_SPECIALIZATIONS, OmlPackage.SPECIALIZATION_AXIOM__OWNING_TERM);
 		}
 		return ownedSpecializations;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EList<PropertyEquivalenceAxiom> getOwnedEquivalences() {
+		if (ownedEquivalences == null) {
+			ownedEquivalences = new EObjectContainmentWithInverseEList<PropertyEquivalenceAxiom>(PropertyEquivalenceAxiom.class, this, OmlPackage.STRUCTURED_PROPERTY__OWNED_EQUIVALENCES, OmlPackage.PROPERTY_EQUIVALENCE_AXIOM__OWNING_PROPERTY);
+		}
+		return ownedEquivalences;
 	}
 
 	/**
@@ -367,6 +392,8 @@ public class StructuredPropertyImpl extends SemanticPropertyImpl implements Stru
 				return basicSetOwningVocabulary((Vocabulary)otherEnd, msgs);
 			case OmlPackage.STRUCTURED_PROPERTY__OWNED_SPECIALIZATIONS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedSpecializations()).basicAdd(otherEnd, msgs);
+			case OmlPackage.STRUCTURED_PROPERTY__OWNED_EQUIVALENCES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedEquivalences()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -383,6 +410,8 @@ public class StructuredPropertyImpl extends SemanticPropertyImpl implements Stru
 				return basicSetOwningVocabulary(null, msgs);
 			case OmlPackage.STRUCTURED_PROPERTY__OWNED_SPECIALIZATIONS:
 				return ((InternalEList<?>)getOwnedSpecializations()).basicRemove(otherEnd, msgs);
+			case OmlPackage.STRUCTURED_PROPERTY__OWNED_EQUIVALENCES:
+				return ((InternalEList<?>)getOwnedEquivalences()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -414,6 +443,8 @@ public class StructuredPropertyImpl extends SemanticPropertyImpl implements Stru
 				return basicGetOwningVocabulary();
 			case OmlPackage.STRUCTURED_PROPERTY__OWNED_SPECIALIZATIONS:
 				return getOwnedSpecializations();
+			case OmlPackage.STRUCTURED_PROPERTY__OWNED_EQUIVALENCES:
+				return getOwnedEquivalences();
 			case OmlPackage.STRUCTURED_PROPERTY__REF:
 				if (resolve) return getRef();
 				return basicGetRef();
@@ -445,6 +476,10 @@ public class StructuredPropertyImpl extends SemanticPropertyImpl implements Stru
 				getOwnedSpecializations().clear();
 				getOwnedSpecializations().addAll((Collection<? extends SpecializationAxiom>)newValue);
 				return;
+			case OmlPackage.STRUCTURED_PROPERTY__OWNED_EQUIVALENCES:
+				getOwnedEquivalences().clear();
+				getOwnedEquivalences().addAll((Collection<? extends PropertyEquivalenceAxiom>)newValue);
+				return;
 			case OmlPackage.STRUCTURED_PROPERTY__REF:
 				setRef((StructuredProperty)newValue);
 				return;
@@ -475,6 +510,9 @@ public class StructuredPropertyImpl extends SemanticPropertyImpl implements Stru
 			case OmlPackage.STRUCTURED_PROPERTY__OWNED_SPECIALIZATIONS:
 				getOwnedSpecializations().clear();
 				return;
+			case OmlPackage.STRUCTURED_PROPERTY__OWNED_EQUIVALENCES:
+				getOwnedEquivalences().clear();
+				return;
 			case OmlPackage.STRUCTURED_PROPERTY__REF:
 				setRef((StructuredProperty)null);
 				return;
@@ -503,6 +541,8 @@ public class StructuredPropertyImpl extends SemanticPropertyImpl implements Stru
 				return basicGetOwningVocabulary() != null;
 			case OmlPackage.STRUCTURED_PROPERTY__OWNED_SPECIALIZATIONS:
 				return ownedSpecializations != null && !ownedSpecializations.isEmpty();
+			case OmlPackage.STRUCTURED_PROPERTY__OWNED_EQUIVALENCES:
+				return ownedEquivalences != null && !ownedEquivalences.isEmpty();
 			case OmlPackage.STRUCTURED_PROPERTY__REF:
 				return ref != null;
 			case OmlPackage.STRUCTURED_PROPERTY__FUNCTIONAL:
@@ -541,6 +581,7 @@ public class StructuredPropertyImpl extends SemanticPropertyImpl implements Stru
 		}
 		if (baseClass == SpecializableProperty.class) {
 			switch (derivedFeatureID) {
+				case OmlPackage.STRUCTURED_PROPERTY__OWNED_EQUIVALENCES: return OmlPackage.SPECIALIZABLE_PROPERTY__OWNED_EQUIVALENCES;
 				default: return -1;
 			}
 		}
@@ -573,6 +614,7 @@ public class StructuredPropertyImpl extends SemanticPropertyImpl implements Stru
 		}
 		if (baseClass == SpecializableProperty.class) {
 			switch (baseFeatureID) {
+				case OmlPackage.SPECIALIZABLE_PROPERTY__OWNED_EQUIVALENCES: return OmlPackage.STRUCTURED_PROPERTY__OWNED_EQUIVALENCES;
 				default: return -1;
 			}
 		}
