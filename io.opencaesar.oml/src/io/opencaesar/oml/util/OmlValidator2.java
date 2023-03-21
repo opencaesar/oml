@@ -475,7 +475,7 @@ public final class OmlValidator2 {
 	            return report(Diagnostic.WARNING, diagnostics, object,
 	                "A structure instance is expected as the restricted value of property "+property.getAbbreviatedIri(), 
 	                OmlPackage.Literals.PROPERTY_RESTRICTION_AXIOM__PROPERTY);
-        	} else if (OmlSearch.findIsOfKind(object.getStructureInstanceValue(), ((StructuredProperty)property).getRange())) {
+        	} else if (!OmlSearch.findIsOfKind(object.getStructureInstanceValue(), ((StructuredProperty)property).getRange())) {
 	            return report(Diagnostic.WARNING, diagnostics, object,
 		                "The instance is not in the range of structured property "+property.getAbbreviatedIri(), 
 		                OmlPackage.Literals.PROPERTY_VALUE_RESTRICTION_AXIOM__STRUCTURE_INSTANCE_VALUE);
@@ -485,7 +485,7 @@ public final class OmlValidator2 {
 	            return report(Diagnostic.WARNING, diagnostics, object,
 	                "A named instance IRI is expected as the restricted value of relation "+property.getAbbreviatedIri(), 
 	                OmlPackage.Literals.PROPERTY_RESTRICTION_AXIOM__PROPERTY);
-        	} else if (OmlSearch.findIsOfKind(object.getNamedInstanceValue(), ((Relation)property).getRange())) {
+        	} else if (!OmlSearch.findIsOfKind(object.getNamedInstanceValue(), ((Relation)property).getRange())) {
 	            return report(Diagnostic.WARNING, diagnostics, object,
 		                "The instance is not in the range of relation "+property.getAbbreviatedIri(), 
 		                OmlPackage.Literals.PROPERTY_VALUE_RESTRICTION_AXIOM__NAMED_INSTANCE_VALUE);
@@ -836,7 +836,7 @@ public final class OmlValidator2 {
         final Classifier domainType = property.getDomain();
         if (!OmlSearch.findIsOfKind(theSubject, domainType)) {
         	return report(Diagnostic.WARNING, diagnostics, object,
-                "Property "+property.getAbbreviatedIri()+" has a domain that is not the same as or a super type of the assertion's subject",
+                "Property "+property.getAbbreviatedIri()+" has a domain that does not include the asserting instance",
                 OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__PROPERTY);
         }
         return true;

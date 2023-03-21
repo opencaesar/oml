@@ -411,9 +411,7 @@ public class OmlFormatter extends AbstractJavaFormatter {
 		formatCommas(instance, doc);
 		formatBrackets(instance, doc);
 		doc.append(doc.prepend(keyword(instance, oml.getRelationInstanceAccess().getFromKeyword_3_1_0()), newLine()), oneSpace());
-		instance.getSources().forEach(i -> doc.prepend(doc.format(i), oneSpace()));
 		doc.append(doc.prepend(keyword(instance, oml.getRelationInstanceAccess().getToKeyword_3_2_0()), newLine()), oneSpace());
-		instance.getTargets().forEach(i -> doc.prepend(doc.format(i), oneSpace()));
 		instance.getOwnedPropertyValues().forEach(i -> doc.prepend(doc.format(i), newLine()));
 	}
 
@@ -500,7 +498,6 @@ public class OmlFormatter extends AbstractJavaFormatter {
 
 	protected void _format(PropertyValueAssertion assertion, IFormattableDocument doc) {
 		doc.append(feature(assertion, OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__PROPERTY), oneSpace());
-		ifNotNull(assertion.getValue(), i -> doc.prepend(doc.format(i), oneSpace()));
 	}
 
 	protected void _format(TypePredicate predicate, IFormattableDocument doc) {
