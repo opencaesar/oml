@@ -465,7 +465,7 @@ public final class OmlValidator2 {
 	            return report(Diagnostic.WARNING, diagnostics, object,
 	                "A literal is expected as the restricted value of property "+property.getAbbreviatedIri(), 
 	                OmlPackage.Literals.PROPERTY_RESTRICTION_AXIOM__PROPERTY);
-        	} else if (!OmlSearch.findIsOfKind(object.getLiteralValue(), ((ScalarProperty)property).getRange())) {
+        	} else if (property.getRange() != null && !OmlSearch.findIsOfKind(object.getLiteralValue(), ((ScalarProperty)property).getRange())) {
 	            return report(Diagnostic.WARNING, diagnostics, object,
 		                "The literal is not in the range of scalar property "+property.getAbbreviatedIri(), 
 		                OmlPackage.Literals.PROPERTY_VALUE_RESTRICTION_AXIOM__LITERAL_VALUE);
@@ -475,7 +475,7 @@ public final class OmlValidator2 {
 	            return report(Diagnostic.WARNING, diagnostics, object,
 	                "A structure instance is expected as the restricted value of property "+property.getAbbreviatedIri(), 
 	                OmlPackage.Literals.PROPERTY_RESTRICTION_AXIOM__PROPERTY);
-        	} else if (!OmlSearch.findIsOfKind(object.getStructureInstanceValue(), ((StructuredProperty)property).getRange())) {
+        	} else if (property.getRange() != null && !OmlSearch.findIsOfKind(object.getStructureInstanceValue(), ((StructuredProperty)property).getRange())) {
 	            return report(Diagnostic.WARNING, diagnostics, object,
 		                "The instance is not in the range of structured property "+property.getAbbreviatedIri(), 
 		                OmlPackage.Literals.PROPERTY_VALUE_RESTRICTION_AXIOM__STRUCTURE_INSTANCE_VALUE);
@@ -485,7 +485,7 @@ public final class OmlValidator2 {
 	            return report(Diagnostic.WARNING, diagnostics, object,
 	                "A named instance IRI is expected as the restricted value of relation "+property.getAbbreviatedIri(), 
 	                OmlPackage.Literals.PROPERTY_RESTRICTION_AXIOM__PROPERTY);
-        	} else if (!OmlSearch.findIsOfKind(object.getNamedInstanceValue(), ((Relation)property).getRange())) {
+        	} else if (property.getRange() != null && !OmlSearch.findIsOfKind(object.getNamedInstanceValue(), ((Relation)property).getRange())) {
 	            return report(Diagnostic.WARNING, diagnostics, object,
 		                "The instance is not in the range of relation "+property.getAbbreviatedIri(), 
 		                OmlPackage.Literals.PROPERTY_VALUE_RESTRICTION_AXIOM__NAMED_INSTANCE_VALUE);
@@ -853,18 +853,18 @@ public final class OmlValidator2 {
     protected boolean validatePropertyValueRestrictionAxiomObject(PropertyValueAssertion object, DiagnosticChain diagnostics, Map<Object, Object> context) {
         final var theObject = OmlRead.getObject(object);
         final SemanticProperty property = object.getProperty();
-        if (property instanceof ScalarProperty) {
-        	if (theObject instanceof Literal && OmlSearch.findIsOfKind((Literal)theObject, (Scalar)property.getRange())) {
-        		return true;
-        	}
-        } else {
-        	if (theObject instanceof Instance && OmlSearch.findIsOfKind((Instance)theObject, (Classifier)property.getRange())) {
-        		return true;
-        	}
+        if (property != null && property.getRange() != null && theObject != null) {
+        	var validLiteral = theObject instanceof Literal && OmlSearch.findIsOfKind((Literal)theObject, (Scalar)property.getRange());
+        	var validInstance = theObject instanceof Instance && OmlSearch.findIsOfKind((Instance)theObject, (Classifier)property.getRange());
+	        if ((property instanceof ScalarProperty && !validLiteral) || 
+	        	(property instanceof StructuredProperty && !validInstance) ||
+	        	(property instanceof Relation && !validInstance)) {
+		    	return report(Diagnostic.WARNING, diagnostics, object,
+			            "Property "+property.getAbbreviatedIri()+" has a range that does not include the asserted value",
+			            OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__PROPERTY);
+	        }
         }
-    	return report(Diagnostic.WARNING, diagnostics, object,
-            "Property "+property.getAbbreviatedIri()+" has a range that does not include the asserted value",
-            OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__PROPERTY);
+        return true;
     }
 
     /**
