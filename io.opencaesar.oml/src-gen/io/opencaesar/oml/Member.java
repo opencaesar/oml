@@ -104,7 +104,7 @@ public interface Member extends IdentifiedElement {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Gets the IRI of this member
+	 * Gets the IRI of this member (empty string if a proxy)
 	 * <!-- end-model-doc -->
 	 * @model kind="operation" unique="false"
 	 * @generated
@@ -115,7 +115,7 @@ public interface Member extends IdentifiedElement {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Gets the abbreviated IRI of this member
+	 * Gets the abbreviated IRI of this member (empty string if a proxy)
 	 * <!-- end-model-doc -->
 	 * @model kind="operation" unique="false"
 	 * @generated

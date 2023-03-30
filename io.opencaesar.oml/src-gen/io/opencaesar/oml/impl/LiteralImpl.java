@@ -21,6 +21,10 @@ package io.opencaesar.oml.impl;
 import io.opencaesar.oml.Literal;
 import io.opencaesar.oml.OmlPackage;
 
+import java.lang.reflect.InvocationTargetException;
+
+import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EClass;
 
 /**
@@ -48,6 +52,79 @@ public abstract class LiteralImpl extends ElementImpl implements Literal {
 	@Override
 	protected EClass eStaticClass() {
 		return OmlPackage.Literals.LITERAL;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object getValue() {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getStringValue() {
+		String _xifexpression = null;
+		Object _value = this.getValue();
+		boolean _tripleNotEquals = (_value != null);
+		if (_tripleNotEquals) {
+			_xifexpression = this.getValue().toString();
+		}
+		else {
+			_xifexpression = "";
+		}
+		return _xifexpression;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getLexicalValue() {
+		return this.getStringValue();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getTypeIri() {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case OmlPackage.LITERAL___GET_VALUE:
+				return getValue();
+			case OmlPackage.LITERAL___GET_STRING_VALUE:
+				return getStringValue();
+			case OmlPackage.LITERAL___GET_LEXICAL_VALUE:
+				return getLexicalValue();
+			case OmlPackage.LITERAL___GET_TYPE_IRI:
+				return getTypeIri();
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 } //LiteralImpl

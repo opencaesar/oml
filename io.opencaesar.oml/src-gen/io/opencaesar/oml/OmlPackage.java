@@ -531,13 +531,22 @@ public interface OmlPackage extends EPackage {
 	int ASSERTION___GET_ONTOLOGY = ELEMENT___GET_ONTOLOGY;
 
 	/**
-	 * The operation id for the '<em>Get Asserting Instance</em>' operation.
+	 * The operation id for the '<em>Get Subject</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ASSERTION___GET_ASSERTING_INSTANCE = ELEMENT_OPERATION_COUNT + 0;
+	int ASSERTION___GET_SUBJECT = ELEMENT_OPERATION_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>Get Object</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSERTION___GET_OBJECT = ELEMENT_OPERATION_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>Assertion</em>' class.
@@ -546,7 +555,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ASSERTION_OPERATION_COUNT = ELEMENT_OPERATION_COUNT + 1;
+	int ASSERTION_OPERATION_COUNT = ELEMENT_OPERATION_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.impl.PredicateImpl <em>Predicate</em>}' class.
@@ -723,13 +732,49 @@ public interface OmlPackage extends EPackage {
 	int LITERAL___GET_ONTOLOGY = ELEMENT___GET_ONTOLOGY;
 
 	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LITERAL___GET_VALUE = ELEMENT_OPERATION_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>Get String Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LITERAL___GET_STRING_VALUE = ELEMENT_OPERATION_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Get Lexical Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LITERAL___GET_LEXICAL_VALUE = ELEMENT_OPERATION_COUNT + 2;
+
+	/**
+	 * The operation id for the '<em>Get Type Iri</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LITERAL___GET_TYPE_IRI = ELEMENT_OPERATION_COUNT + 3;
+
+	/**
 	 * The number of operations of the '<em>Literal</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LITERAL_OPERATION_COUNT = ELEMENT_OPERATION_COUNT + 0;
+	int LITERAL_OPERATION_COUNT = ELEMENT_OPERATION_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.impl.OntologyImpl <em>Ontology</em>}' class.
@@ -7551,13 +7596,22 @@ public interface OmlPackage extends EPackage {
 	int TYPE_ASSERTION___GET_ONTOLOGY = ASSERTION___GET_ONTOLOGY;
 
 	/**
-	 * The operation id for the '<em>Get Asserting Instance</em>' operation.
+	 * The operation id for the '<em>Get Subject</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_ASSERTION___GET_ASSERTING_INSTANCE = ASSERTION_OPERATION_COUNT + 0;
+	int TYPE_ASSERTION___GET_SUBJECT = ASSERTION_OPERATION_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>Get Object</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_ASSERTION___GET_OBJECT = ASSERTION_OPERATION_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>Type Assertion</em>' class.
@@ -7566,7 +7620,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_ASSERTION_OPERATION_COUNT = ASSERTION_OPERATION_COUNT + 1;
+	int TYPE_ASSERTION_OPERATION_COUNT = ASSERTION_OPERATION_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.impl.PropertyValueAssertionImpl <em>Property Value Assertion</em>}' class.
@@ -7660,13 +7714,22 @@ public interface OmlPackage extends EPackage {
 	int PROPERTY_VALUE_ASSERTION___GET_VALUE = ASSERTION_OPERATION_COUNT + 0;
 
 	/**
-	 * The operation id for the '<em>Get Asserting Instance</em>' operation.
+	 * The operation id for the '<em>Get Subject</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_VALUE_ASSERTION___GET_ASSERTING_INSTANCE = ASSERTION_OPERATION_COUNT + 1;
+	int PROPERTY_VALUE_ASSERTION___GET_SUBJECT = ASSERTION_OPERATION_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Get Object</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_VALUE_ASSERTION___GET_OBJECT = ASSERTION_OPERATION_COUNT + 2;
 
 	/**
 	 * The number of operations of the '<em>Property Value Assertion</em>' class.
@@ -7675,7 +7738,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_VALUE_ASSERTION_OPERATION_COUNT = ASSERTION_OPERATION_COUNT + 2;
+	int PROPERTY_VALUE_ASSERTION_OPERATION_COUNT = ASSERTION_OPERATION_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.impl.UnaryPredicateImpl <em>Unary Predicate</em>}' class.
@@ -8416,13 +8479,49 @@ public interface OmlPackage extends EPackage {
 	int QUOTED_LITERAL___GET_ONTOLOGY = LITERAL___GET_ONTOLOGY;
 
 	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int QUOTED_LITERAL___GET_VALUE = LITERAL___GET_VALUE;
+
+	/**
+	 * The operation id for the '<em>Get String Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int QUOTED_LITERAL___GET_STRING_VALUE = LITERAL___GET_STRING_VALUE;
+
+	/**
+	 * The operation id for the '<em>Get Lexical Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int QUOTED_LITERAL___GET_LEXICAL_VALUE = LITERAL_OPERATION_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>Get Type Iri</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int QUOTED_LITERAL___GET_TYPE_IRI = LITERAL_OPERATION_COUNT + 1;
+
+	/**
 	 * The number of operations of the '<em>Quoted Literal</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int QUOTED_LITERAL_OPERATION_COUNT = LITERAL_OPERATION_COUNT + 0;
+	int QUOTED_LITERAL_OPERATION_COUNT = LITERAL_OPERATION_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.impl.IntegerLiteralImpl <em>Integer Literal</em>}' class.
@@ -8471,13 +8570,49 @@ public interface OmlPackage extends EPackage {
 	int INTEGER_LITERAL___GET_ONTOLOGY = LITERAL___GET_ONTOLOGY;
 
 	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTEGER_LITERAL___GET_VALUE = LITERAL___GET_VALUE;
+
+	/**
+	 * The operation id for the '<em>Get String Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTEGER_LITERAL___GET_STRING_VALUE = LITERAL___GET_STRING_VALUE;
+
+	/**
+	 * The operation id for the '<em>Get Lexical Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTEGER_LITERAL___GET_LEXICAL_VALUE = LITERAL___GET_LEXICAL_VALUE;
+
+	/**
+	 * The operation id for the '<em>Get Type Iri</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTEGER_LITERAL___GET_TYPE_IRI = LITERAL_OPERATION_COUNT + 0;
+
+	/**
 	 * The number of operations of the '<em>Integer Literal</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INTEGER_LITERAL_OPERATION_COUNT = LITERAL_OPERATION_COUNT + 0;
+	int INTEGER_LITERAL_OPERATION_COUNT = LITERAL_OPERATION_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.impl.DecimalLiteralImpl <em>Decimal Literal</em>}' class.
@@ -8526,13 +8661,49 @@ public interface OmlPackage extends EPackage {
 	int DECIMAL_LITERAL___GET_ONTOLOGY = LITERAL___GET_ONTOLOGY;
 
 	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECIMAL_LITERAL___GET_VALUE = LITERAL___GET_VALUE;
+
+	/**
+	 * The operation id for the '<em>Get String Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECIMAL_LITERAL___GET_STRING_VALUE = LITERAL___GET_STRING_VALUE;
+
+	/**
+	 * The operation id for the '<em>Get Lexical Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECIMAL_LITERAL___GET_LEXICAL_VALUE = LITERAL___GET_LEXICAL_VALUE;
+
+	/**
+	 * The operation id for the '<em>Get Type Iri</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECIMAL_LITERAL___GET_TYPE_IRI = LITERAL_OPERATION_COUNT + 0;
+
+	/**
 	 * The number of operations of the '<em>Decimal Literal</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DECIMAL_LITERAL_OPERATION_COUNT = LITERAL_OPERATION_COUNT + 0;
+	int DECIMAL_LITERAL_OPERATION_COUNT = LITERAL_OPERATION_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.impl.DoubleLiteralImpl <em>Double Literal</em>}' class.
@@ -8581,13 +8752,49 @@ public interface OmlPackage extends EPackage {
 	int DOUBLE_LITERAL___GET_ONTOLOGY = LITERAL___GET_ONTOLOGY;
 
 	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOUBLE_LITERAL___GET_VALUE = LITERAL___GET_VALUE;
+
+	/**
+	 * The operation id for the '<em>Get String Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOUBLE_LITERAL___GET_STRING_VALUE = LITERAL___GET_STRING_VALUE;
+
+	/**
+	 * The operation id for the '<em>Get Lexical Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOUBLE_LITERAL___GET_LEXICAL_VALUE = LITERAL___GET_LEXICAL_VALUE;
+
+	/**
+	 * The operation id for the '<em>Get Type Iri</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOUBLE_LITERAL___GET_TYPE_IRI = LITERAL_OPERATION_COUNT + 0;
+
+	/**
 	 * The number of operations of the '<em>Double Literal</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOUBLE_LITERAL_OPERATION_COUNT = LITERAL_OPERATION_COUNT + 0;
+	int DOUBLE_LITERAL_OPERATION_COUNT = LITERAL_OPERATION_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.impl.BooleanLiteralImpl <em>Boolean Literal</em>}' class.
@@ -8636,13 +8843,58 @@ public interface OmlPackage extends EPackage {
 	int BOOLEAN_LITERAL___GET_ONTOLOGY = LITERAL___GET_ONTOLOGY;
 
 	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_LITERAL___GET_VALUE = LITERAL___GET_VALUE;
+
+	/**
+	 * The operation id for the '<em>Get String Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_LITERAL___GET_STRING_VALUE = LITERAL___GET_STRING_VALUE;
+
+	/**
+	 * The operation id for the '<em>Get Lexical Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_LITERAL___GET_LEXICAL_VALUE = LITERAL___GET_LEXICAL_VALUE;
+
+	/**
+	 * The operation id for the '<em>Is Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_LITERAL___IS_VALUE = LITERAL_OPERATION_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>Get Type Iri</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_LITERAL___GET_TYPE_IRI = LITERAL_OPERATION_COUNT + 1;
+
+	/**
 	 * The number of operations of the '<em>Boolean Literal</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BOOLEAN_LITERAL_OPERATION_COUNT = LITERAL_OPERATION_COUNT + 0;
+	int BOOLEAN_LITERAL_OPERATION_COUNT = LITERAL_OPERATION_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.SeparatorKind <em>Separator Kind</em>}' enum.
@@ -8985,14 +9237,24 @@ public interface OmlPackage extends EPackage {
 	EClass getAssertion();
 
 	/**
-	 * Returns the meta object for the '{@link io.opencaesar.oml.Assertion#getAssertingInstance() <em>Get Asserting Instance</em>}' operation.
+	 * Returns the meta object for the '{@link io.opencaesar.oml.Assertion#getSubject() <em>Get Subject</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Get Asserting Instance</em>' operation.
-	 * @see io.opencaesar.oml.Assertion#getAssertingInstance()
+	 * @return the meta object for the '<em>Get Subject</em>' operation.
+	 * @see io.opencaesar.oml.Assertion#getSubject()
 	 * @generated
 	 */
-	EOperation getAssertion__GetAssertingInstance();
+	EOperation getAssertion__GetSubject();
+
+	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.Assertion#getObject() <em>Get Object</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Object</em>' operation.
+	 * @see io.opencaesar.oml.Assertion#getObject()
+	 * @generated
+	 */
+	EOperation getAssertion__GetObject();
 
 	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.Predicate <em>Predicate</em>}'.
@@ -9078,6 +9340,46 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getLiteral();
+
+	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.Literal#getValue() <em>Get Value</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Value</em>' operation.
+	 * @see io.opencaesar.oml.Literal#getValue()
+	 * @generated
+	 */
+	EOperation getLiteral__GetValue();
+
+	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.Literal#getStringValue() <em>Get String Value</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get String Value</em>' operation.
+	 * @see io.opencaesar.oml.Literal#getStringValue()
+	 * @generated
+	 */
+	EOperation getLiteral__GetStringValue();
+
+	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.Literal#getLexicalValue() <em>Get Lexical Value</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Lexical Value</em>' operation.
+	 * @see io.opencaesar.oml.Literal#getLexicalValue()
+	 * @generated
+	 */
+	EOperation getLiteral__GetLexicalValue();
+
+	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.Literal#getTypeIri() <em>Get Type Iri</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Type Iri</em>' operation.
+	 * @see io.opencaesar.oml.Literal#getTypeIri()
+	 * @generated
+	 */
+	EOperation getLiteral__GetTypeIri();
 
 	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.Ontology <em>Ontology</em>}'.
@@ -11100,14 +11402,24 @@ public interface OmlPackage extends EPackage {
 	EReference getTypeAssertion_OwningInstance();
 
 	/**
-	 * Returns the meta object for the '{@link io.opencaesar.oml.TypeAssertion#getAssertingInstance() <em>Get Asserting Instance</em>}' operation.
+	 * Returns the meta object for the '{@link io.opencaesar.oml.TypeAssertion#getSubject() <em>Get Subject</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Get Asserting Instance</em>' operation.
-	 * @see io.opencaesar.oml.TypeAssertion#getAssertingInstance()
+	 * @return the meta object for the '<em>Get Subject</em>' operation.
+	 * @see io.opencaesar.oml.TypeAssertion#getSubject()
 	 * @generated
 	 */
-	EOperation getTypeAssertion__GetAssertingInstance();
+	EOperation getTypeAssertion__GetSubject();
+
+	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.TypeAssertion#getObject() <em>Get Object</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Object</em>' operation.
+	 * @see io.opencaesar.oml.TypeAssertion#getObject()
+	 * @generated
+	 */
+	EOperation getTypeAssertion__GetObject();
 
 	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.PropertyValueAssertion <em>Property Value Assertion</em>}'.
@@ -11185,14 +11497,24 @@ public interface OmlPackage extends EPackage {
 	EOperation getPropertyValueAssertion__GetValue();
 
 	/**
-	 * Returns the meta object for the '{@link io.opencaesar.oml.PropertyValueAssertion#getAssertingInstance() <em>Get Asserting Instance</em>}' operation.
+	 * Returns the meta object for the '{@link io.opencaesar.oml.PropertyValueAssertion#getSubject() <em>Get Subject</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Get Asserting Instance</em>' operation.
-	 * @see io.opencaesar.oml.PropertyValueAssertion#getAssertingInstance()
+	 * @return the meta object for the '<em>Get Subject</em>' operation.
+	 * @see io.opencaesar.oml.PropertyValueAssertion#getSubject()
 	 * @generated
 	 */
-	EOperation getPropertyValueAssertion__GetAssertingInstance();
+	EOperation getPropertyValueAssertion__GetSubject();
+
+	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.PropertyValueAssertion#getObject() <em>Get Object</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Object</em>' operation.
+	 * @see io.opencaesar.oml.PropertyValueAssertion#getObject()
+	 * @generated
+	 */
+	EOperation getPropertyValueAssertion__GetObject();
 
 	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.UnaryPredicate <em>Unary Predicate</em>}'.
@@ -11406,6 +11728,26 @@ public interface OmlPackage extends EPackage {
 	EReference getQuotedLiteral_Type();
 
 	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.QuotedLiteral#getLexicalValue() <em>Get Lexical Value</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Lexical Value</em>' operation.
+	 * @see io.opencaesar.oml.QuotedLiteral#getLexicalValue()
+	 * @generated
+	 */
+	EOperation getQuotedLiteral__GetLexicalValue();
+
+	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.QuotedLiteral#getTypeIri() <em>Get Type Iri</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Type Iri</em>' operation.
+	 * @see io.opencaesar.oml.QuotedLiteral#getTypeIri()
+	 * @generated
+	 */
+	EOperation getQuotedLiteral__GetTypeIri();
+
+	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.IntegerLiteral <em>Integer Literal</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -11425,6 +11767,16 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getIntegerLiteral_Value();
+
+	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.IntegerLiteral#getTypeIri() <em>Get Type Iri</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Type Iri</em>' operation.
+	 * @see io.opencaesar.oml.IntegerLiteral#getTypeIri()
+	 * @generated
+	 */
+	EOperation getIntegerLiteral__GetTypeIri();
 
 	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.DecimalLiteral <em>Decimal Literal</em>}'.
@@ -11448,6 +11800,16 @@ public interface OmlPackage extends EPackage {
 	EAttribute getDecimalLiteral_Value();
 
 	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.DecimalLiteral#getTypeIri() <em>Get Type Iri</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Type Iri</em>' operation.
+	 * @see io.opencaesar.oml.DecimalLiteral#getTypeIri()
+	 * @generated
+	 */
+	EOperation getDecimalLiteral__GetTypeIri();
+
+	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.DoubleLiteral <em>Double Literal</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -11469,6 +11831,16 @@ public interface OmlPackage extends EPackage {
 	EAttribute getDoubleLiteral_Value();
 
 	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.DoubleLiteral#getTypeIri() <em>Get Type Iri</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Type Iri</em>' operation.
+	 * @see io.opencaesar.oml.DoubleLiteral#getTypeIri()
+	 * @generated
+	 */
+	EOperation getDoubleLiteral__GetTypeIri();
+
+	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.BooleanLiteral <em>Boolean Literal</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -11479,15 +11851,35 @@ public interface OmlPackage extends EPackage {
 	EClass getBooleanLiteral();
 
 	/**
-	 * Returns the meta object for the attribute '{@link io.opencaesar.oml.BooleanLiteral#isValue <em>Value</em>}'.
+	 * Returns the meta object for the attribute '{@link io.opencaesar.oml.BooleanLiteral#getValue <em>Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Value</em>'.
-	 * @see io.opencaesar.oml.BooleanLiteral#isValue()
+	 * @see io.opencaesar.oml.BooleanLiteral#getValue()
 	 * @see #getBooleanLiteral()
 	 * @generated
 	 */
 	EAttribute getBooleanLiteral_Value();
+
+	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.BooleanLiteral#isValue() <em>Is Value</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Is Value</em>' operation.
+	 * @see io.opencaesar.oml.BooleanLiteral#isValue()
+	 * @generated
+	 */
+	EOperation getBooleanLiteral__IsValue();
+
+	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.BooleanLiteral#getTypeIri() <em>Get Type Iri</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Type Iri</em>' operation.
+	 * @see io.opencaesar.oml.BooleanLiteral#getTypeIri()
+	 * @generated
+	 */
+	EOperation getBooleanLiteral__GetTypeIri();
 
 	/**
 	 * Returns the meta object for enum '{@link io.opencaesar.oml.SeparatorKind <em>Separator Kind</em>}'.
@@ -11818,12 +12210,20 @@ public interface OmlPackage extends EPackage {
 		EClass ASSERTION = eINSTANCE.getAssertion();
 
 		/**
-		 * The meta object literal for the '<em><b>Get Asserting Instance</b></em>' operation.
+		 * The meta object literal for the '<em><b>Get Subject</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EOperation ASSERTION___GET_ASSERTING_INSTANCE = eINSTANCE.getAssertion__GetAssertingInstance();
+		EOperation ASSERTION___GET_SUBJECT = eINSTANCE.getAssertion__GetSubject();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Object</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation ASSERTION___GET_OBJECT = eINSTANCE.getAssertion__GetObject();
 
 		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.PredicateImpl <em>Predicate</em>}' class.
@@ -11894,6 +12294,38 @@ public interface OmlPackage extends EPackage {
 		 * @generated
 		 */
 		EClass LITERAL = eINSTANCE.getLiteral();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Value</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation LITERAL___GET_VALUE = eINSTANCE.getLiteral__GetValue();
+
+		/**
+		 * The meta object literal for the '<em><b>Get String Value</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation LITERAL___GET_STRING_VALUE = eINSTANCE.getLiteral__GetStringValue();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Lexical Value</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation LITERAL___GET_LEXICAL_VALUE = eINSTANCE.getLiteral__GetLexicalValue();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Type Iri</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation LITERAL___GET_TYPE_IRI = eINSTANCE.getLiteral__GetTypeIri();
 
 		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.OntologyImpl <em>Ontology</em>}' class.
@@ -13542,12 +13974,20 @@ public interface OmlPackage extends EPackage {
 		EReference TYPE_ASSERTION__OWNING_INSTANCE = eINSTANCE.getTypeAssertion_OwningInstance();
 
 		/**
-		 * The meta object literal for the '<em><b>Get Asserting Instance</b></em>' operation.
+		 * The meta object literal for the '<em><b>Get Subject</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EOperation TYPE_ASSERTION___GET_ASSERTING_INSTANCE = eINSTANCE.getTypeAssertion__GetAssertingInstance();
+		EOperation TYPE_ASSERTION___GET_SUBJECT = eINSTANCE.getTypeAssertion__GetSubject();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Object</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation TYPE_ASSERTION___GET_OBJECT = eINSTANCE.getTypeAssertion__GetObject();
 
 		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.PropertyValueAssertionImpl <em>Property Value Assertion</em>}' class.
@@ -13608,12 +14048,20 @@ public interface OmlPackage extends EPackage {
 		EOperation PROPERTY_VALUE_ASSERTION___GET_VALUE = eINSTANCE.getPropertyValueAssertion__GetValue();
 
 		/**
-		 * The meta object literal for the '<em><b>Get Asserting Instance</b></em>' operation.
+		 * The meta object literal for the '<em><b>Get Subject</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EOperation PROPERTY_VALUE_ASSERTION___GET_ASSERTING_INSTANCE = eINSTANCE.getPropertyValueAssertion__GetAssertingInstance();
+		EOperation PROPERTY_VALUE_ASSERTION___GET_SUBJECT = eINSTANCE.getPropertyValueAssertion__GetSubject();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Object</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation PROPERTY_VALUE_ASSERTION___GET_OBJECT = eINSTANCE.getPropertyValueAssertion__GetObject();
 
 		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.UnaryPredicateImpl <em>Unary Predicate</em>}' class.
@@ -13794,6 +14242,22 @@ public interface OmlPackage extends EPackage {
 		EReference QUOTED_LITERAL__TYPE = eINSTANCE.getQuotedLiteral_Type();
 
 		/**
+		 * The meta object literal for the '<em><b>Get Lexical Value</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation QUOTED_LITERAL___GET_LEXICAL_VALUE = eINSTANCE.getQuotedLiteral__GetLexicalValue();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Type Iri</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation QUOTED_LITERAL___GET_TYPE_IRI = eINSTANCE.getQuotedLiteral__GetTypeIri();
+
+		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.IntegerLiteralImpl <em>Integer Literal</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -13810,6 +14274,14 @@ public interface OmlPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute INTEGER_LITERAL__VALUE = eINSTANCE.getIntegerLiteral_Value();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Type Iri</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation INTEGER_LITERAL___GET_TYPE_IRI = eINSTANCE.getIntegerLiteral__GetTypeIri();
 
 		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.DecimalLiteralImpl <em>Decimal Literal</em>}' class.
@@ -13830,6 +14302,14 @@ public interface OmlPackage extends EPackage {
 		EAttribute DECIMAL_LITERAL__VALUE = eINSTANCE.getDecimalLiteral_Value();
 
 		/**
+		 * The meta object literal for the '<em><b>Get Type Iri</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation DECIMAL_LITERAL___GET_TYPE_IRI = eINSTANCE.getDecimalLiteral__GetTypeIri();
+
+		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.DoubleLiteralImpl <em>Double Literal</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -13848,6 +14328,14 @@ public interface OmlPackage extends EPackage {
 		EAttribute DOUBLE_LITERAL__VALUE = eINSTANCE.getDoubleLiteral_Value();
 
 		/**
+		 * The meta object literal for the '<em><b>Get Type Iri</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation DOUBLE_LITERAL___GET_TYPE_IRI = eINSTANCE.getDoubleLiteral__GetTypeIri();
+
+		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.BooleanLiteralImpl <em>Boolean Literal</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -13864,6 +14352,22 @@ public interface OmlPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute BOOLEAN_LITERAL__VALUE = eINSTANCE.getBooleanLiteral_Value();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Value</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation BOOLEAN_LITERAL___IS_VALUE = eINSTANCE.getBooleanLiteral__IsValue();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Type Iri</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation BOOLEAN_LITERAL___GET_TYPE_IRI = eINSTANCE.getBooleanLiteral__GetTypeIri();
 
 		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.SeparatorKind <em>Separator Kind</em>}' enum.

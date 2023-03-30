@@ -30,11 +30,13 @@
 @Bikeshed(heading="Abstract-Syntax")
 package io.opencaesar.oml
 
+import io.opencaesar.oml.util.OmlConstants
 import io.opencaesar.oml.util.OmlValidator2
 import java.math.BigDecimal
 import org.eclipse.emf.ecore.EDiagnosticChain
 import org.eclipse.emf.ecore.EMap
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.emf.ecore.InternalEObject
 
 annotation "https://tabatkins.github.io/bikeshed" as Bikeshed
 annotation "https://tabatkins.github.io/bikeshed/headings" as BikeshedHeadings
@@ -216,7 +218,11 @@ abstract class Assertion extends Element {
     /**
      * Gets the instance that is the subject of this assertion
      */
-    op Instance getAssertingInstance()
+    op Instance getSubject()
+    /**
+     * Gets the instance that is the object of this assertion
+     */
+    op Element getObject()
 }
 
 /*
@@ -259,6 +265,26 @@ class Argument extends Element {
  */
 @Bikeshed(heading="Literals")
 abstract class Literal extends Element {
+	/*
+     * Gets the value of the given literal
+	 */
+    op Object getValue()
+    /*
+     * Gets the string value of the given literal
+     */
+    op String getStringValue() {
+        return if (getValue() !== null) getValue().toString() else ""
+    }
+    /*
+     * Gets the lexical value of the given literal
+     */
+    op String getLexicalValue() {
+        return getStringValue()   
+    }
+    /*
+     * Gets the iri of the given literal's type
+     */
+    op String getTypeIri()
 }
 
 ////////////////////////////////////////
@@ -351,22 +377,24 @@ abstract class Member extends IdentifiedElement {
     	return this
     }
     /*
-     * Gets the IRI of this member
+     * Gets the IRI of this member (empty string if a proxy)
      */
     op String getIri() {
     	val m = resolve()
+    	if (m.eIsProxy()) return (m as InternalEObject).eProxyURI().toString()
         val ontology = m.ontology
         val namespace = if (ontology !== null) ontology.namespace else SeparatorKind.HASH
-        return if (m.name !== null) namespace + m.name else ''
+        return namespace + if (m.name !== null) m.name else ''
     }
     /*
-     * Gets the abbreviated IRI of this member
+     * Gets the abbreviated IRI of this member (empty string if a proxy)
      */
     op String getAbbreviatedIri() {
      	val m = resolve()
+    	if (m.eIsProxy()) return (m as InternalEObject).eProxyURI().toString()
         val ontology = m.ontology
         val prefix = if (ontology !== null) ontology.prefix  + ':' else ':'
-        return if (m.name !== null) prefix + m.name else ''
+        return prefix + if (m.name !== null) m.name else ''
     }
 }
 
@@ -1424,8 +1452,11 @@ class TypeAssertion extends Assertion {
      */
     container NamedInstance[?] owningInstance opposite ownedTypes
 
-    op NamedInstance getAssertingInstance() {
+    op NamedInstance getSubject() {
     	return owningInstance.resolve() as NamedInstance
+    }
+    op Element getObject() {
+    	return ^type
     }
 }
 
@@ -1468,11 +1499,14 @@ class PropertyValueAssertion extends Assertion {
     		namedInstanceValue
     }
 
-    op Instance getAssertingInstance() {
+    op Instance getSubject() {
         if (owningInstance instanceof NamedInstance) {
             return (owningInstance as NamedInstance).resolve() as NamedInstance
         }
         return owningInstance
+    }
+    op Element getObject() {
+    	return getValue()
     }
 }
 
@@ -1601,6 +1635,13 @@ class QuotedLiteral extends Literal  {
      * The scalar that is the type of this literal
      */
     refers Scalar[?] ^type
+
+    op String getLexicalValue() {
+        return '"'+value+'"' + if (getLangTag !== null) "$"+getLangTag else if (getType() !== null) "^^"+ getType().getAbbreviatedIri() else ""
+    }
+    op String getTypeIri() {
+    	return if (^type !== null) ^type.getIri() else OmlConstants.XSD_NS+"string" 
+    }
 }
 
 /*
@@ -1611,7 +1652,11 @@ class IntegerLiteral extends Literal  {
     /*
      * The int value of this literal
      */
-    int value
+    Integer value = "0"
+
+    op String getTypeIri() {
+    	return OmlConstants.XSD_NS+"integer" 
+    }
 }
 
 /*
@@ -1622,7 +1667,11 @@ class DecimalLiteral extends Literal  {
     /*
      * The decimal value of this literal
      */
-    Decimal[1] value
+    Decimal[1] value = "0.0"
+
+    op String getTypeIri() {
+    	return OmlConstants.XSD_NS+"decimal" 
+    }
 }
 
 /*
@@ -1630,7 +1679,14 @@ class DecimalLiteral extends Literal  {
  */
 @Bikeshed(heading="Literals")
 class DoubleLiteral extends Literal  {
-    double value
+    /*
+     * The double value of this literal
+     */
+    Double value = "0.0"
+
+    op String getTypeIri() {
+    	return OmlConstants.XSD_NS+"double" 
+    }
 }
 
 /*
@@ -1641,7 +1697,15 @@ class BooleanLiteral extends Literal {
     /*
      * The boolean value of this literal
      */
-    boolean value
+    Boolean value = "false"
+    
+    op boolean isValue() {
+    	return getValue().booleanValue
+    }
+
+    op String getTypeIri() {
+    	return OmlConstants.XSD_NS+"boolean" 
+    }
 }
 
 ////////////////////////////////////////

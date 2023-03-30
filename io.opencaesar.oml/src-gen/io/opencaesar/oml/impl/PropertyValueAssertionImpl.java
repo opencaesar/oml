@@ -382,7 +382,7 @@ public class PropertyValueAssertionImpl extends AssertionImpl implements Propert
 	 * @generated
 	 */
 	@Override
-	public Instance getAssertingInstance() {
+	public Instance getSubject() {
 		Instance _owningInstance = this.getOwningInstance();
 		if ((_owningInstance instanceof NamedInstance)) {
 			Instance _owningInstance_1 = this.getOwningInstance();
@@ -390,6 +390,16 @@ public class PropertyValueAssertionImpl extends AssertionImpl implements Propert
 			return ((NamedInstance) _resolve);
 		}
 		return this.getOwningInstance();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Element getObject() {
+		return this.getValue();
 	}
 
 	/**
@@ -555,8 +565,10 @@ public class PropertyValueAssertionImpl extends AssertionImpl implements Propert
 		switch (operationID) {
 			case OmlPackage.PROPERTY_VALUE_ASSERTION___GET_VALUE:
 				return getValue();
-			case OmlPackage.PROPERTY_VALUE_ASSERTION___GET_ASSERTING_INSTANCE:
-				return getAssertingInstance();
+			case OmlPackage.PROPERTY_VALUE_ASSERTION___GET_SUBJECT:
+				return getSubject();
+			case OmlPackage.PROPERTY_VALUE_ASSERTION___GET_OBJECT:
+				return getObject();
 		}
 		return super.eInvoke(operationID, arguments);
 	}

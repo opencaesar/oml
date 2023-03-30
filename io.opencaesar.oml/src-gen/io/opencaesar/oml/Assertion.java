@@ -45,6 +45,18 @@ public interface Assertion extends Element {
 	 * @model kind="operation" unique="false"
 	 * @generated
 	 */
-	Instance getAssertingInstance();
+	Instance getSubject();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * *
+	 * Gets the instance that is the object of this assertion
+	 * <!-- end-model-doc -->
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
+	Element getObject();
 
 } // Assertion

@@ -42,18 +42,19 @@ package io.opencaesar.oml;
 public interface IntegerLiteral extends Literal {
 	/**
 	 * Returns the value of the '<em><b>Value</b></em>' attribute.
+	 * The default value is <code>"0"</code>.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * The int value of this literal
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Value</em>' attribute.
-	 * @see #setValue(int)
+	 * @see #setValue(Integer)
 	 * @see io.opencaesar.oml.OmlPackage#getIntegerLiteral_Value()
-	 * @model unique="false"
+	 * @model default="0" unique="false"
 	 * @generated
 	 */
-	int getValue();
+	Integer getValue();
 
 	/**
 	 * Sets the value of the '{@link io.opencaesar.oml.IntegerLiteral#getValue <em>Value</em>}' attribute.
@@ -63,6 +64,14 @@ public interface IntegerLiteral extends Literal {
 	 * @see #getValue()
 	 * @generated
 	 */
-	void setValue(int value);
+	void setValue(Integer value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
+	String getTypeIri();
 
 } // IntegerLiteral

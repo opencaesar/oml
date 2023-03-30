@@ -18,6 +18,7 @@
  */
 package io.opencaesar.oml.impl;
 
+import io.opencaesar.oml.Element;
 import io.opencaesar.oml.Entity;
 import io.opencaesar.oml.Member;
 import io.opencaesar.oml.NamedInstance;
@@ -181,9 +182,19 @@ public class TypeAssertionImpl extends AssertionImpl implements TypeAssertion {
 	 * @generated
 	 */
 	@Override
-	public NamedInstance getAssertingInstance() {
+	public NamedInstance getSubject() {
 		Member _resolve = this.getOwningInstance().resolve();
 		return ((NamedInstance) _resolve);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Element getObject() {
+		return this.getType();
 	}
 
 	/**
@@ -308,8 +319,10 @@ public class TypeAssertionImpl extends AssertionImpl implements TypeAssertion {
 	@Override
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
-			case OmlPackage.TYPE_ASSERTION___GET_ASSERTING_INSTANCE:
-				return getAssertingInstance();
+			case OmlPackage.TYPE_ASSERTION___GET_SUBJECT:
+				return getSubject();
+			case OmlPackage.TYPE_ASSERTION___GET_OBJECT:
+				return getObject();
 		}
 		return super.eInvoke(operationID, arguments);
 	}

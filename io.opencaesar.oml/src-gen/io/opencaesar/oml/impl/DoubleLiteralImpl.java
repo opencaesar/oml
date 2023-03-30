@@ -21,7 +21,13 @@ package io.opencaesar.oml.impl;
 import io.opencaesar.oml.DoubleLiteral;
 import io.opencaesar.oml.OmlPackage;
 
+import io.opencaesar.oml.util.OmlConstants;
+
+import java.lang.reflect.InvocationTargetException;
+
 import org.eclipse.emf.common.notify.Notification;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 
@@ -49,7 +55,7 @@ public class DoubleLiteralImpl extends LiteralImpl implements DoubleLiteral {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final double VALUE_EDEFAULT = 0.0;
+	protected static final Double VALUE_EDEFAULT = Double.valueOf(0.0);
 
 	/**
 	 * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
@@ -59,7 +65,7 @@ public class DoubleLiteralImpl extends LiteralImpl implements DoubleLiteral {
 	 * @generated
 	 * @ordered
 	 */
-	protected double value = VALUE_EDEFAULT;
+	protected Double value = VALUE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -86,7 +92,7 @@ public class DoubleLiteralImpl extends LiteralImpl implements DoubleLiteral {
 	 * @generated
 	 */
 	@Override
-	public double getValue() {
+	public Double getValue() {
 		return value;
 	}
 
@@ -96,11 +102,21 @@ public class DoubleLiteralImpl extends LiteralImpl implements DoubleLiteral {
 	 * @generated
 	 */
 	@Override
-	public void setValue(double newValue) {
-		double oldValue = value;
+	public void setValue(Double newValue) {
+		Double oldValue = value;
 		value = newValue;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.DOUBLE_LITERAL__VALUE, oldValue, value));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getTypeIri() {
+		return (OmlConstants.XSD_NS + "double");
 	}
 
 	/**
@@ -156,9 +172,23 @@ public class DoubleLiteralImpl extends LiteralImpl implements DoubleLiteral {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case OmlPackage.DOUBLE_LITERAL__VALUE:
-				return value != VALUE_EDEFAULT;
+				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case OmlPackage.DOUBLE_LITERAL___GET_TYPE_IRI:
+				return getTypeIri();
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 	/**

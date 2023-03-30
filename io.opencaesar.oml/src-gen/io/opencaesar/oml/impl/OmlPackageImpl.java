@@ -1031,8 +1031,18 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EOperation getAssertion__GetAssertingInstance() {
+	public EOperation getAssertion__GetSubject() {
 		return assertionEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getAssertion__GetObject() {
+		return assertionEClass.getEOperations().get(1);
 	}
 
 	/**
@@ -1113,6 +1123,46 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	@Override
 	public EClass getLiteral() {
 		return literalEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getLiteral__GetValue() {
+		return literalEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getLiteral__GetStringValue() {
+		return literalEClass.getEOperations().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getLiteral__GetLexicalValue() {
+		return literalEClass.getEOperations().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getLiteral__GetTypeIri() {
+		return literalEClass.getEOperations().get(3);
 	}
 
 	/**
@@ -3051,8 +3101,18 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EOperation getTypeAssertion__GetAssertingInstance() {
+	public EOperation getTypeAssertion__GetSubject() {
 		return typeAssertionEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getTypeAssertion__GetObject() {
+		return typeAssertionEClass.getEOperations().get(1);
 	}
 
 	/**
@@ -3131,8 +3191,18 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EOperation getPropertyValueAssertion__GetAssertingInstance() {
+	public EOperation getPropertyValueAssertion__GetSubject() {
 		return propertyValueAssertionEClass.getEOperations().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getPropertyValueAssertion__GetObject() {
+		return propertyValueAssertionEClass.getEOperations().get(2);
 	}
 
 	/**
@@ -3341,6 +3411,26 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
+	public EOperation getQuotedLiteral__GetLexicalValue() {
+		return quotedLiteralEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getQuotedLiteral__GetTypeIri() {
+		return quotedLiteralEClass.getEOperations().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getIntegerLiteral() {
 		return integerLiteralEClass;
 	}
@@ -3353,6 +3443,16 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	@Override
 	public EAttribute getIntegerLiteral_Value() {
 		return (EAttribute)integerLiteralEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getIntegerLiteral__GetTypeIri() {
+		return integerLiteralEClass.getEOperations().get(0);
 	}
 
 	/**
@@ -3381,6 +3481,16 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
+	public EOperation getDecimalLiteral__GetTypeIri() {
+		return decimalLiteralEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getDoubleLiteral() {
 		return doubleLiteralEClass;
 	}
@@ -3401,6 +3511,16 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
+	public EOperation getDoubleLiteral__GetTypeIri() {
+		return doubleLiteralEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getBooleanLiteral() {
 		return booleanLiteralEClass;
 	}
@@ -3413,6 +3533,26 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	@Override
 	public EAttribute getBooleanLiteral_Value() {
 		return (EAttribute)booleanLiteralEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getBooleanLiteral__IsValue() {
+		return booleanLiteralEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getBooleanLiteral__GetTypeIri() {
+		return booleanLiteralEClass.getEOperations().get(1);
 	}
 
 	/**
@@ -3564,7 +3704,8 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		axiomEClass = createEClass(AXIOM);
 
 		assertionEClass = createEClass(ASSERTION);
-		createEOperation(assertionEClass, ASSERTION___GET_ASSERTING_INSTANCE);
+		createEOperation(assertionEClass, ASSERTION___GET_SUBJECT);
+		createEOperation(assertionEClass, ASSERTION___GET_OBJECT);
 
 		predicateEClass = createEClass(PREDICATE);
 		createEReference(predicateEClass, PREDICATE__ANTECEDENT_RULE);
@@ -3576,6 +3717,10 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		createEReference(argumentEClass, ARGUMENT__INSTANCE);
 
 		literalEClass = createEClass(LITERAL);
+		createEOperation(literalEClass, LITERAL___GET_VALUE);
+		createEOperation(literalEClass, LITERAL___GET_STRING_VALUE);
+		createEOperation(literalEClass, LITERAL___GET_LEXICAL_VALUE);
+		createEOperation(literalEClass, LITERAL___GET_TYPE_IRI);
 
 		ontologyEClass = createEClass(ONTOLOGY);
 		createEAttribute(ontologyEClass, ONTOLOGY__NAMESPACE);
@@ -3820,7 +3965,8 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		typeAssertionEClass = createEClass(TYPE_ASSERTION);
 		createEReference(typeAssertionEClass, TYPE_ASSERTION__TYPE);
 		createEReference(typeAssertionEClass, TYPE_ASSERTION__OWNING_INSTANCE);
-		createEOperation(typeAssertionEClass, TYPE_ASSERTION___GET_ASSERTING_INSTANCE);
+		createEOperation(typeAssertionEClass, TYPE_ASSERTION___GET_SUBJECT);
+		createEOperation(typeAssertionEClass, TYPE_ASSERTION___GET_OBJECT);
 
 		propertyValueAssertionEClass = createEClass(PROPERTY_VALUE_ASSERTION);
 		createEReference(propertyValueAssertionEClass, PROPERTY_VALUE_ASSERTION__PROPERTY);
@@ -3829,7 +3975,8 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		createEReference(propertyValueAssertionEClass, PROPERTY_VALUE_ASSERTION__NAMED_INSTANCE_VALUE);
 		createEReference(propertyValueAssertionEClass, PROPERTY_VALUE_ASSERTION__OWNING_INSTANCE);
 		createEOperation(propertyValueAssertionEClass, PROPERTY_VALUE_ASSERTION___GET_VALUE);
-		createEOperation(propertyValueAssertionEClass, PROPERTY_VALUE_ASSERTION___GET_ASSERTING_INSTANCE);
+		createEOperation(propertyValueAssertionEClass, PROPERTY_VALUE_ASSERTION___GET_SUBJECT);
+		createEOperation(propertyValueAssertionEClass, PROPERTY_VALUE_ASSERTION___GET_OBJECT);
 
 		unaryPredicateEClass = createEClass(UNARY_PREDICATE);
 		createEReference(unaryPredicateEClass, UNARY_PREDICATE__ARGUMENT);
@@ -3859,18 +4006,25 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		createEAttribute(quotedLiteralEClass, QUOTED_LITERAL__VALUE);
 		createEAttribute(quotedLiteralEClass, QUOTED_LITERAL__LANG_TAG);
 		createEReference(quotedLiteralEClass, QUOTED_LITERAL__TYPE);
+		createEOperation(quotedLiteralEClass, QUOTED_LITERAL___GET_LEXICAL_VALUE);
+		createEOperation(quotedLiteralEClass, QUOTED_LITERAL___GET_TYPE_IRI);
 
 		integerLiteralEClass = createEClass(INTEGER_LITERAL);
 		createEAttribute(integerLiteralEClass, INTEGER_LITERAL__VALUE);
+		createEOperation(integerLiteralEClass, INTEGER_LITERAL___GET_TYPE_IRI);
 
 		decimalLiteralEClass = createEClass(DECIMAL_LITERAL);
 		createEAttribute(decimalLiteralEClass, DECIMAL_LITERAL__VALUE);
+		createEOperation(decimalLiteralEClass, DECIMAL_LITERAL___GET_TYPE_IRI);
 
 		doubleLiteralEClass = createEClass(DOUBLE_LITERAL);
 		createEAttribute(doubleLiteralEClass, DOUBLE_LITERAL__VALUE);
+		createEOperation(doubleLiteralEClass, DOUBLE_LITERAL___GET_TYPE_IRI);
 
 		booleanLiteralEClass = createEClass(BOOLEAN_LITERAL);
 		createEAttribute(booleanLiteralEClass, BOOLEAN_LITERAL__VALUE);
+		createEOperation(booleanLiteralEClass, BOOLEAN_LITERAL___IS_VALUE);
+		createEOperation(booleanLiteralEClass, BOOLEAN_LITERAL___GET_TYPE_IRI);
 
 		// Create enums
 		separatorKindEEnum = createEEnum(SEPARATOR_KIND);
@@ -4049,7 +4203,9 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 
 		initEClass(assertionEClass, Assertion.class, "Assertion", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEOperation(getAssertion__GetAssertingInstance(), this.getInstance(), "getAssertingInstance", 0, 1, !IS_UNIQUE, IS_ORDERED);
+		initEOperation(getAssertion__GetSubject(), this.getInstance(), "getSubject", 0, 1, !IS_UNIQUE, IS_ORDERED);
+
+		initEOperation(getAssertion__GetObject(), this.getElement(), "getObject", 0, 1, !IS_UNIQUE, IS_ORDERED);
 
 		initEClass(predicateEClass, Predicate.class, "Predicate", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPredicate_AntecedentRule(), this.getRule(), this.getRule_Antecedent(), "antecedentRule", null, 0, 1, Predicate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -4061,6 +4217,14 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		initEReference(getArgument_Instance(), this.getNamedInstance(), null, "instance", null, 0, 1, Argument.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(literalEClass, Literal.class, "Literal", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEOperation(getLiteral__GetValue(), theEcorePackage.getEJavaObject(), "getValue", 0, 1, !IS_UNIQUE, IS_ORDERED);
+
+		initEOperation(getLiteral__GetStringValue(), theEcorePackage.getEString(), "getStringValue", 0, 1, !IS_UNIQUE, IS_ORDERED);
+
+		initEOperation(getLiteral__GetLexicalValue(), theEcorePackage.getEString(), "getLexicalValue", 0, 1, !IS_UNIQUE, IS_ORDERED);
+
+		initEOperation(getLiteral__GetTypeIri(), theEcorePackage.getEString(), "getTypeIri", 0, 1, !IS_UNIQUE, IS_ORDERED);
 
 		initEClass(ontologyEClass, Ontology.class, "Ontology", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getOntology_Namespace(), this.getNamespace(), "namespace", null, 1, 1, Ontology.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -4358,7 +4522,9 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		initEReference(getTypeAssertion_Type(), this.getEntity(), null, "type", null, 1, 1, TypeAssertion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTypeAssertion_OwningInstance(), this.getNamedInstance(), this.getNamedInstance_OwnedTypes(), "owningInstance", null, 0, 1, TypeAssertion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEOperation(getTypeAssertion__GetAssertingInstance(), this.getNamedInstance(), "getAssertingInstance", 0, 1, !IS_UNIQUE, IS_ORDERED);
+		initEOperation(getTypeAssertion__GetSubject(), this.getNamedInstance(), "getSubject", 0, 1, !IS_UNIQUE, IS_ORDERED);
+
+		initEOperation(getTypeAssertion__GetObject(), this.getElement(), "getObject", 0, 1, !IS_UNIQUE, IS_ORDERED);
 
 		initEClass(propertyValueAssertionEClass, PropertyValueAssertion.class, "PropertyValueAssertion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPropertyValueAssertion_Property(), this.getSemanticProperty(), null, "property", null, 1, 1, PropertyValueAssertion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -4369,7 +4535,9 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 
 		initEOperation(getPropertyValueAssertion__GetValue(), this.getElement(), "getValue", 0, 1, !IS_UNIQUE, IS_ORDERED);
 
-		initEOperation(getPropertyValueAssertion__GetAssertingInstance(), this.getInstance(), "getAssertingInstance", 0, 1, !IS_UNIQUE, IS_ORDERED);
+		initEOperation(getPropertyValueAssertion__GetSubject(), this.getInstance(), "getSubject", 0, 1, !IS_UNIQUE, IS_ORDERED);
+
+		initEOperation(getPropertyValueAssertion__GetObject(), this.getElement(), "getObject", 0, 1, !IS_UNIQUE, IS_ORDERED);
 
 		initEClass(unaryPredicateEClass, UnaryPredicate.class, "UnaryPredicate", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getUnaryPredicate_Argument(), this.getArgument(), null, "argument", null, 1, 1, UnaryPredicate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -4400,17 +4568,31 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		initEAttribute(getQuotedLiteral_LangTag(), theEcorePackage.getEString(), "langTag", null, 0, 1, QuotedLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getQuotedLiteral_Type(), this.getScalar(), null, "type", null, 0, 1, QuotedLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEOperation(getQuotedLiteral__GetLexicalValue(), theEcorePackage.getEString(), "getLexicalValue", 0, 1, !IS_UNIQUE, IS_ORDERED);
+
+		initEOperation(getQuotedLiteral__GetTypeIri(), theEcorePackage.getEString(), "getTypeIri", 0, 1, !IS_UNIQUE, IS_ORDERED);
+
 		initEClass(integerLiteralEClass, IntegerLiteral.class, "IntegerLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getIntegerLiteral_Value(), theEcorePackage.getEInt(), "value", null, 0, 1, IntegerLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getIntegerLiteral_Value(), theEcorePackage.getEIntegerObject(), "value", "0", 0, 1, IntegerLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEOperation(getIntegerLiteral__GetTypeIri(), theEcorePackage.getEString(), "getTypeIri", 0, 1, !IS_UNIQUE, IS_ORDERED);
 
 		initEClass(decimalLiteralEClass, DecimalLiteral.class, "DecimalLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getDecimalLiteral_Value(), this.getDecimal(), "value", null, 1, 1, DecimalLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDecimalLiteral_Value(), this.getDecimal(), "value", "0.0", 1, 1, DecimalLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEOperation(getDecimalLiteral__GetTypeIri(), theEcorePackage.getEString(), "getTypeIri", 0, 1, !IS_UNIQUE, IS_ORDERED);
 
 		initEClass(doubleLiteralEClass, DoubleLiteral.class, "DoubleLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getDoubleLiteral_Value(), theEcorePackage.getEDouble(), "value", null, 0, 1, DoubleLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDoubleLiteral_Value(), theEcorePackage.getEDoubleObject(), "value", "0.0", 0, 1, DoubleLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEOperation(getDoubleLiteral__GetTypeIri(), theEcorePackage.getEString(), "getTypeIri", 0, 1, !IS_UNIQUE, IS_ORDERED);
 
 		initEClass(booleanLiteralEClass, BooleanLiteral.class, "BooleanLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getBooleanLiteral_Value(), theEcorePackage.getEBoolean(), "value", null, 0, 1, BooleanLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBooleanLiteral_Value(), theEcorePackage.getEBooleanObject(), "value", "false", 0, 1, BooleanLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEOperation(getBooleanLiteral__IsValue(), theEcorePackage.getEBoolean(), "isValue", 0, 1, !IS_UNIQUE, IS_ORDERED);
+
+		initEOperation(getBooleanLiteral__GetTypeIri(), theEcorePackage.getEString(), "getTypeIri", 0, 1, !IS_UNIQUE, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(separatorKindEEnum, SeparatorKind.class, "SeparatorKind");

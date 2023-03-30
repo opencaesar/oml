@@ -59,8 +59,10 @@ import io.opencaesar.oml.PropertyRestrictionAxiom;
 import io.opencaesar.oml.PropertyValueAssertion;
 import io.opencaesar.oml.QuotedLiteral;
 import io.opencaesar.oml.Relation;
+import io.opencaesar.oml.RelationBase;
 import io.opencaesar.oml.RelationEntity;
 import io.opencaesar.oml.RelationInstance;
+import io.opencaesar.oml.ReverseRelation;
 import io.opencaesar.oml.Rule;
 import io.opencaesar.oml.Scalar;
 import io.opencaesar.oml.ScalarProperty;
@@ -405,9 +407,28 @@ public final class OmlSearch extends OmlIndex {
      * @return a list of terms that are the direct specialization super terms of the given term
      */
     public static List<Term> findSpecializationSuperTerms(Term term) {
-        return findSpecializationAxiomsWithSubTerm(term).stream()
+    	var supers = new ArrayList<Term>();
+        supers.addAll(findSpecializationAxiomsWithSubTerm(term).stream()
                 .map(i -> i.getSuperTerm())
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
+        if (term instanceof ForwardRelation) {
+        	var entity = ((ForwardRelation)term).getRelationEntity();
+    		supers.addAll(findSpecializationSuperTerms(entity).stream()
+    	        .filter(i -> i instanceof RelationEntity)
+	            .map(i -> (RelationEntity)i)
+	            .filter( i -> i.getForwardRelation() != null)
+	            .map(i -> i.getForwardRelation())
+	            .collect(Collectors.toList()));
+    	} else if (term instanceof ReverseRelation) {
+        	var base = ((ReverseRelation)term).getRelationBase();
+    		supers.addAll(findSpecializationSuperTerms(base).stream()
+    	        .filter(i -> i instanceof RelationBase)
+	            .map(i -> (RelationBase)i)
+	            .filter( i -> i.getReverseRelation() != null)
+	            .map(i -> i.getReverseRelation())
+	            .collect(Collectors.toList()));
+    	}
+    	return supers;
     }
     
     /**
@@ -417,9 +438,28 @@ public final class OmlSearch extends OmlIndex {
      * @return a list of terms that are the direct specialization sub terms of the given term
      */
     public static List<Term> findSpecializationSubTerms(Term term) {
-        return findSpecializationAxiomsWithSuperTerm(term).stream()
+    	var subs = new ArrayList<Term>();
+        subs.addAll(findSpecializationAxiomsWithSuperTerm(term).stream()
             .map(i -> i.getSubTerm())
-            .collect(Collectors.toList());
+            .collect(Collectors.toList()));
+        if (term instanceof ForwardRelation) {
+        	var entity = ((ForwardRelation)term).getRelationEntity();
+    		subs.addAll(findSpecializationSubTerms(entity).stream()
+    	        .filter(i -> i instanceof RelationEntity)
+	            .map(i -> (RelationEntity)i)
+	            .filter( i -> i.getForwardRelation() != null)
+	            .map(i -> i.getForwardRelation())
+	            .collect(Collectors.toList()));
+    	} else if (term instanceof ReverseRelation) {
+        	var base = ((ReverseRelation)term).getRelationBase();
+        	subs.addAll(findSpecializationSubTerms(base).stream()
+    	        .filter(i -> i instanceof RelationBase)
+	            .map(i -> (RelationBase)i)
+	            .filter( i -> i.getReverseRelation() != null)
+	            .map(i -> i.getReverseRelation())
+	            .collect(Collectors.toList()));
+    	}
+    	return subs;
     }
 
     /**
@@ -472,10 +512,38 @@ public final class OmlSearch extends OmlIndex {
      * @return a list of properties that are the direct equivalence super of the given property
      */
     public static List<Property> findEquivalenceSuperProperties(Property property) {
-        return findPropertyEquivalenceAxiomsWithSubProperty(property).stream()
+    	var supers = new ArrayList<Property>();
+        supers.addAll(findPropertyEquivalenceAxiomsWithSubProperty(property).stream()
             .map(i -> i.getSuperProperty())
-            .collect(Collectors.toList());
-    }
+            .collect(Collectors.toList()));
+        if (property instanceof ForwardRelation) {
+    		var entity = ((ForwardRelation)property).getRelationEntity();
+    		supers.addAll(findEquivalenceSuperClassifiers(entity).stream()
+    	        .filter(i -> i instanceof RelationEntity)
+	            .map(i -> (RelationEntity)i)
+	            .filter( i -> i.getForwardRelation() != null)
+	            .map(i -> i.getForwardRelation())
+	            .collect(Collectors.toList()));
+    	} else if (property instanceof ReverseRelation) {
+    		var base = ((ReverseRelation)property).getRelationBase();
+    		if (base instanceof RelationEntity) {
+        		supers.addAll(findEquivalenceSuperClassifiers((RelationEntity)base).stream()
+            	        .filter(i -> i instanceof RelationEntity)
+        	            .map(i -> (RelationEntity)i)
+    		            .filter( i -> i.getReverseRelation() != null)
+    		            .map(i -> i.getReverseRelation())
+    		            .collect(Collectors.toList()));
+    		} else if (base instanceof UnreifiedRelation) {
+        		supers.addAll(findEquivalenceSuperProperties((UnreifiedRelation)base).stream()
+            	        .filter(i -> i instanceof UnreifiedRelation)
+        	            .map(i -> (UnreifiedRelation)i)
+			            .filter( i -> i.getReverseRelation() != null)
+			            .map(i -> i.getReverseRelation())
+			            .collect(Collectors.toList()));
+    		}
+    	}
+    	return supers;
+   }
     
     /**
      * Finds properties that are the direct equivalence sub of a given property 
@@ -484,10 +552,38 @@ public final class OmlSearch extends OmlIndex {
      * @return a list of properties that are the direct equivalence sub of the given property
      */
     public static List<Property> findEquivalenceSubProperties(Property property) {
-        return findPropertyEquivalenceAxiomsWithSuperProperty(property).stream()
+    	var subs = new ArrayList<Property>();
+    	subs.addAll(findPropertyEquivalenceAxiomsWithSuperProperty(property).stream()
             .map(i -> i.getSubProperty())
-            .collect(Collectors.toList());
-    }
+            .collect(Collectors.toList()));
+        if (property instanceof ForwardRelation) {
+    		var entity = ((ForwardRelation)property).getRelationEntity();
+    		subs.addAll(findEquivalenceSubClassifiers(entity).stream()
+    	        .filter(i -> i instanceof RelationEntity)
+	            .map(i -> (RelationEntity)i)
+	            .filter( i -> i.getForwardRelation() != null)
+	            .map(i -> i.getForwardRelation())
+	            .collect(Collectors.toList()));
+    	} else if (property instanceof ReverseRelation) {
+    		var base = ((ReverseRelation)property).getRelationBase();
+    		if (base instanceof RelationEntity) {
+        		subs.addAll(findEquivalenceSubClassifiers((RelationEntity)base).stream()
+            	        .filter(i -> i instanceof RelationEntity)
+        	            .map(i -> (RelationEntity)i)
+    		            .filter( i -> i.getReverseRelation() != null)
+    		            .map(i -> i.getReverseRelation())
+    		            .collect(Collectors.toList()));
+    		} else if (base instanceof UnreifiedRelation) {
+        		subs.addAll(findEquivalenceSubProperties((UnreifiedRelation)base).stream()
+            	        .filter(i -> i instanceof UnreifiedRelation)
+        	            .map(i -> (UnreifiedRelation)i)
+			            .filter( i -> i.getReverseRelation() != null)
+			            .map(i -> i.getReverseRelation())
+			            .collect(Collectors.toList()));
+    		}
+    	}
+   		return subs;
+   }
 
     /**
      * Finds properties that are the direct equivalent to a given property 
@@ -497,12 +593,8 @@ public final class OmlSearch extends OmlIndex {
      */
     public static List<Property> findEquivalentProperties(Property property) {
         final List<Property> equivalents = new ArrayList<>();
-        equivalents.addAll(findPropertyEquivalenceAxiomsWithSubProperty(property).stream()
-                .map(i -> i.getSuperProperty())
-                .collect(Collectors.toList()));
-        equivalents.addAll(findPropertyEquivalenceAxiomsWithSuperProperty(property).stream()
-            .map(i -> i.getSubProperty())
-            .collect(Collectors.toList()));
+        equivalents.addAll(findEquivalenceSuperProperties(property));
+        equivalents.addAll(findEquivalenceSubProperties(property));
         return equivalents;
     }
 
@@ -593,7 +685,7 @@ public final class OmlSearch extends OmlIndex {
      */
     public static List<Assertion> findAssertions(Instance instance) {
         List<Assertion> assertions = new ArrayList<>();
-        assertions.addAll(findPropertyValueAssertions(instance));
+        assertions.addAll(findPropertyValueAssertionsWithSubject(instance));
         if (instance instanceof NamedInstance) {
             assertions.addAll(findTypeAssertions((NamedInstance)instance));
         }
@@ -617,15 +709,15 @@ public final class OmlSearch extends OmlIndex {
     }
     
     /**
-     * Finds property value assertions that are defined on the given instance
+     * Finds property value assertions that have the given instance as their source
      * 
-     * @param instance the given instance
-     * @return a list of property value assertions that are defined on the given instance
+     * @param subject the given subject instance
+     * @return a list of relation value assertions that have the given instance as their subject
      */
-    public static List<PropertyValueAssertion> findPropertyValueAssertions(Instance instance) {
-        final List<PropertyValueAssertion> assertions = new ArrayList<>(instance.getOwnedPropertyValues());
-        if (instance instanceof NamedInstance) {
-            assertions.addAll(findReferences((NamedInstance)instance).stream()
+    public static List<PropertyValueAssertion> findPropertyValueAssertionsWithSubject(Instance subject) {
+        final List<PropertyValueAssertion> assertions = new ArrayList<>(subject.getOwnedPropertyValues());
+        if (subject instanceof NamedInstance) {
+            assertions.addAll(findReferences((NamedInstance)subject).stream()
                 .filter(i -> i instanceof NamedInstance)
                 .map(i -> (NamedInstance)i)
                 .flatMap(r -> r.getOwnedPropertyValues().stream())
@@ -635,25 +727,13 @@ public final class OmlSearch extends OmlIndex {
     }
 
     /**
-     * Finds property value assertions that have the given instance as their source
+     * Finds relation value assertions that have the given instance as their object
      * 
-     * @param source the given source instance
-     * @return a list of relation value assertions that have the given instance as their source
+     * @param object the given object instance
+     * @return a list of relation value assertions that have the given instance as their object
      */
-    public static List<PropertyValueAssertion> findPropertyValueAssertionsWithSource(NamedInstance source) {
-        return findPropertyValueAssertions(source).stream()
-                .filter(i -> i.getProperty() instanceof Relation)
-                .collect(Collectors.toList());
-    }
-
-    /**
-     * Finds relation value assertions that have the given instance as their target
-     * 
-     * @param target the given target instance
-     * @return a list of relation value assertions that have the given instance as their target
-     */
-    public static List<PropertyValueAssertion> findPropertyValueAssertionsWithTarget(NamedInstance target) {
-        return findPropertyValueAssertionsWithNamedInstanceValue(target);
+    public static List<PropertyValueAssertion> findPropertyValueAssertionsWithObject(NamedInstance object) {
+        return findPropertyValueAssertionsWithNamedInstanceValue(object);
     }
 
     /**
@@ -692,8 +772,9 @@ public final class OmlSearch extends OmlIndex {
     public static List<NamedInstance> findInstancesRelatedAsTargetTo(NamedInstance source) {
         final List<NamedInstance> targets = new ArrayList<>();
         // check property value assertions
-        targets.addAll(findPropertyValueAssertionsWithSource(source).stream()
-                .map(a -> OmlRead.getTarget(a))
+        targets.addAll(findPropertyValueAssertionsWithSubject(source).stream()
+        		.filter(a -> a.getProperty() instanceof Relation)
+                .map(a -> a.getNamedInstanceValue())
                 .collect(Collectors.toList()));
         // check relation instances
         targets.addAll(findRelationInstancesWithSource(source).stream()
@@ -712,9 +793,9 @@ public final class OmlSearch extends OmlIndex {
     public static List<NamedInstance> findInstancesRelatedAsTargetTo(NamedInstance source, Relation relation) {
     	final List<NamedInstance> targets = new ArrayList<>();
         // look in property value assertions
-        targets.addAll(findPropertyValueAssertionsWithSource(source).stream()
+        targets.addAll(findPropertyValueAssertionsWithSubject(source).stream()
                 .filter(a -> a.getProperty() == relation)
-                .map(a -> OmlRead.getTarget(a))
+                .map(a -> a.getNamedInstanceValue())
                 .collect(Collectors.toList()));
         // look in relation instances
         if (relation instanceof ForwardRelation) {
@@ -735,8 +816,8 @@ public final class OmlSearch extends OmlIndex {
     public static List<NamedInstance> findInstancesRelatedAsSourceTo(NamedInstance target) {
         final List<NamedInstance> sources = new ArrayList<>();
         // look in property value assertions
-       sources.addAll(findPropertyValueAssertionsWithTarget(target).stream()
-                .map(a -> OmlRead.getSource(a))
+       sources.addAll(findPropertyValueAssertionsWithObject(target).stream()
+                .map(a -> (NamedInstance) a.getSubject())
                 .collect(Collectors.toList()));
        // look in relation instances
         sources.addAll(findRelationInstancesWithTarget(target).stream()
@@ -755,9 +836,9 @@ public final class OmlSearch extends OmlIndex {
     public static List<NamedInstance> findInstancesRelatedAsSourceTo(NamedInstance target, Relation relation) {
         final List<NamedInstance> sources = new ArrayList<>();
         // look in property value assertions
-        sources.addAll(findPropertyValueAssertionsWithTarget(target).stream()
+        sources.addAll(findPropertyValueAssertionsWithObject(target).stream()
                 .filter(a -> a.getProperty() == relation)
-                .map(a -> OmlRead.getSource(a))
+                .map(a -> (NamedInstance) a.getSubject())
                 .collect(Collectors.toList()));
         // look in relation instances
         if (relation instanceof ForwardRelation) {
@@ -777,7 +858,7 @@ public final class OmlSearch extends OmlIndex {
      * @return a list of elements that represent values of given semantic property defined on the given instance
      */
     public static List<Element> findPropertyValues(Instance instance, SemanticProperty property) {
-        return findPropertyValueAssertions(instance).stream()
+        return findPropertyValueAssertionsWithSubject(instance).stream()
             .filter(a -> a.getProperty() == property)
             .map(a -> a.getValue())
             .collect(Collectors.toList());
@@ -791,7 +872,7 @@ public final class OmlSearch extends OmlIndex {
      * @return an element that represents a value of given semantic property defined on the given instance
      */
     public static Element findPropertyValue(Instance instance, SemanticProperty property) {
-        return findPropertyValueAssertions(instance).stream()
+        return findPropertyValueAssertionsWithSubject(instance).stream()
             .filter(a -> a.getProperty() == property)
             .map(a -> a.getValue())
             .findFirst().orElse(null);
@@ -877,7 +958,7 @@ public final class OmlSearch extends OmlIndex {
     public static List<Instance> findInstancesOfType(Classifier type) {
         if (type instanceof Entity) {
             return findTypeAssertionsWithType((Entity)type).stream()
-                .map(i -> i.getAssertingInstance())
+                .map(i -> i.getSubject())
                 .collect(Collectors.toList());
         } else if (type instanceof Structure) {
             return new ArrayList<Instance>(findStructureInstancesWithType((Structure)type));
@@ -960,7 +1041,7 @@ public final class OmlSearch extends OmlIndex {
                 }
             return value;
         }
-        return OmlRead.getValue(literal);
+        return literal.getValue();
     }
 
     /**
@@ -1004,7 +1085,7 @@ public final class OmlSearch extends OmlIndex {
      */
     public static boolean findIsOfKind(Literal literal, Scalar type) {
     	if (type.getOwnedEnumeration() != null) {
-    		return type.getOwnedEnumeration().getLiterals().stream().anyMatch(i -> OmlRead.getLexicalValue(i).equals(OmlRead.getLexicalValue(literal)));
+    		return type.getOwnedEnumeration().getLiterals().stream().anyMatch(i -> i.getLexicalValue().equals(literal.getLexicalValue()));
     	} else if (OmlRead.isStandardScalar(type)) {
     		return findAllTypes(literal).contains(type);
     	}

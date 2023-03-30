@@ -408,7 +408,7 @@ class OmlOntoloyDiagramScope {
 		}
 
 		public void phase1ScanInstanceAssertions(final NamedInstance i, final Set<Element> others) {
-			OmlSearch.findPropertyValueAssertions(i).forEach(ax -> {
+			OmlSearch.findPropertyValueAssertionsWithSubject(i).forEach(ax -> {
 				if (allImportedElements.contains(ax)) {
 					others.add(ax);
 				}

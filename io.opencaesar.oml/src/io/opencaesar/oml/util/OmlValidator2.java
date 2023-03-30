@@ -626,7 +626,7 @@ public final class OmlValidator2 {
     				for (Literal literal : object.getOwnedEnumeration().getLiterals()) {
     		        	if (!OmlSearch.findIsOfKind(literal, superScalar)) {
     		                return report(Diagnostic.ERROR, diagnostics, object,
-    		                	"Literal "+OmlRead.getLexicalValue(literal)+" is not in the range of literals of scalar "+superScalar.getAbbreviatedIri(), 
+    		                	"Literal "+literal.getLexicalValue()+" is not in the range of literals of scalar "+superScalar.getAbbreviatedIri(), 
     		    	            OmlPackage.Literals.MEMBER__NAME);
     		        	}
     				}
@@ -831,7 +831,7 @@ public final class OmlValidator2 {
      * @return True if the rules is satisfied; False otherwise
      */
     protected boolean validatePropertyValueRestrictionAxiomSubject(PropertyValueAssertion object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-        final var theSubject = object.getAssertingInstance();
+        final var theSubject = object.getSubject();
         final SemanticProperty property = object.getProperty();
         final Classifier domainType = property.getDomain();
         if (!OmlSearch.findIsOfKind(theSubject, domainType)) {
@@ -851,7 +851,7 @@ public final class OmlValidator2 {
      * @return True if the rules is satisfied; False otherwise
      */
     protected boolean validatePropertyValueRestrictionAxiomObject(PropertyValueAssertion object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-        final var theObject = OmlRead.getObject(object);
+        final var theObject = object.getObject();
         final SemanticProperty property = object.getProperty();
         if (property != null && property.getRange() != null && theObject != null) {
         	var validLiteral = theObject instanceof Literal && OmlSearch.findIsOfKind((Literal)theObject, (Scalar)property.getRange());
@@ -876,7 +876,7 @@ public final class OmlValidator2 {
      * @return True if the rules is satisfied; False otherwise
      */
     protected boolean validateTypeRestriction(TypeAssertion object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-        final var instance = object.getAssertingInstance();
+        final var instance = object.getSubject();
         final var type = object.getType();
         if (type != null) {
 	        if (((instance instanceof ConceptInstance) && !(type instanceof Concept || type instanceof Aspect)) || 

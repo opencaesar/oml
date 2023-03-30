@@ -21,7 +21,13 @@ package io.opencaesar.oml.impl;
 import io.opencaesar.oml.BooleanLiteral;
 import io.opencaesar.oml.OmlPackage;
 
+import io.opencaesar.oml.util.OmlConstants;
+
+import java.lang.reflect.InvocationTargetException;
+
 import org.eclipse.emf.common.notify.Notification;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 
@@ -35,31 +41,31 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link io.opencaesar.oml.impl.BooleanLiteralImpl#isValue <em>Value</em>}</li>
+ *   <li>{@link io.opencaesar.oml.impl.BooleanLiteralImpl#getValue <em>Value</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class BooleanLiteralImpl extends LiteralImpl implements BooleanLiteral {
 	/**
-	 * The default value of the '{@link #isValue() <em>Value</em>}' attribute.
+	 * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isValue()
+	 * @see #getValue()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean VALUE_EDEFAULT = false;
+	protected static final Boolean VALUE_EDEFAULT = Boolean.FALSE;
 
 	/**
-	 * The cached value of the '{@link #isValue() <em>Value</em>}' attribute.
+	 * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isValue()
+	 * @see #getValue()
 	 * @generated
 	 * @ordered
 	 */
-	protected boolean value = VALUE_EDEFAULT;
+	protected Boolean value = VALUE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -86,7 +92,7 @@ public class BooleanLiteralImpl extends LiteralImpl implements BooleanLiteral {
 	 * @generated
 	 */
 	@Override
-	public boolean isValue() {
+	public Boolean getValue() {
 		return value;
 	}
 
@@ -96,8 +102,8 @@ public class BooleanLiteralImpl extends LiteralImpl implements BooleanLiteral {
 	 * @generated
 	 */
 	@Override
-	public void setValue(boolean newValue) {
-		boolean oldValue = value;
+	public void setValue(Boolean newValue) {
+		Boolean oldValue = value;
 		value = newValue;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.BOOLEAN_LITERAL__VALUE, oldValue, value));
@@ -109,10 +115,30 @@ public class BooleanLiteralImpl extends LiteralImpl implements BooleanLiteral {
 	 * @generated
 	 */
 	@Override
+	public boolean isValue() {
+		return this.getValue().booleanValue();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getTypeIri() {
+		return (OmlConstants.XSD_NS + "boolean");
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case OmlPackage.BOOLEAN_LITERAL__VALUE:
-				return isValue();
+				return getValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -156,9 +182,25 @@ public class BooleanLiteralImpl extends LiteralImpl implements BooleanLiteral {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case OmlPackage.BOOLEAN_LITERAL__VALUE:
-				return value != VALUE_EDEFAULT;
+				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case OmlPackage.BOOLEAN_LITERAL___IS_VALUE:
+				return isValue();
+			case OmlPackage.BOOLEAN_LITERAL___GET_TYPE_IRI:
+				return getTypeIri();
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 	/**

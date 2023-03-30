@@ -311,7 +311,7 @@ class OmlOntologyDiagramView {
 	public OmlLabel createScalarValueLabel(final Entity e, final PropertyValueRestrictionAxiom ax) {
 		final String id = idCache.uniqueId(ax, getLocalName(e) + ".valueRestriction." + getLocalName(ax.getProperty()));
 		final OmlLabel l = newLeafSElement(OmlLabel.class, id, OmlDiagramModule.SLabel_SLabelView_text);
-		l.setText(getLocalName(ax.getProperty()) + " = " + OmlRead.getLexicalValue(ax.getLiteralValue()));
+		l.setText(getLocalName(ax.getProperty()) + " = " + ax.getLiteralValue().getLexicalValue());
 		return l;
 	}
 
@@ -557,7 +557,7 @@ class OmlOntologyDiagramView {
 
 	private String getLabel(final Element element) {
 		if (element instanceof Literal)
-			return OmlRead.getLexicalValue((Literal)element);
+			return ((Literal)element).getLexicalValue();
 		else if (element instanceof StructureInstance)
 			return ((StructureInstance) element).getType().getName();
 		else if (element instanceof NamedInstance)

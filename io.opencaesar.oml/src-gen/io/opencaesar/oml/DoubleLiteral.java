@@ -42,15 +42,19 @@ package io.opencaesar.oml;
 public interface DoubleLiteral extends Literal {
 	/**
 	 * Returns the value of the '<em><b>Value</b></em>' attribute.
+	 * The default value is <code>"0.0"</code>.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The double value of this literal
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Value</em>' attribute.
-	 * @see #setValue(double)
+	 * @see #setValue(Double)
 	 * @see io.opencaesar.oml.OmlPackage#getDoubleLiteral_Value()
-	 * @model unique="false"
+	 * @model default="0.0" unique="false"
 	 * @generated
 	 */
-	double getValue();
+	Double getValue();
 
 	/**
 	 * Sets the value of the '{@link io.opencaesar.oml.DoubleLiteral#getValue <em>Value</em>}' attribute.
@@ -60,6 +64,14 @@ public interface DoubleLiteral extends Literal {
 	 * @see #getValue()
 	 * @generated
 	 */
-	void setValue(double value);
+	void setValue(Double value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
+	String getTypeIri();
 
 } // DoubleLiteral

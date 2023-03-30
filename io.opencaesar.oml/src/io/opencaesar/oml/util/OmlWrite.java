@@ -214,7 +214,7 @@ public class OmlWrite {
     public static void deleteRecursively(NamedInstance instance) {
     	OmlSearch.findRelationInstancesWithTarget(instance).forEach(ri -> deleteRecursively(ri));
     	OmlSearch.findRelationInstancesWithSource(instance).forEach(ri -> deleteRecursively(ri));
-        OmlSearch.findPropertyValueAssertionsWithTarget(instance).forEach(a -> delete(a));
+        OmlSearch.findPropertyValueAssertionsWithObject(instance).forEach(a -> delete(a));
         OmlSearch.findReferences(instance).forEach(r -> delete(r));
         delete(instance);
     }

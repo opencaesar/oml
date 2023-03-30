@@ -30,6 +30,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
@@ -154,6 +155,10 @@ public abstract class MemberImpl extends IdentifiedElementImpl implements Member
 	@Override
 	public String getIri() {
 		final Member m = this.resolve();
+		boolean _eIsProxy = m.eIsProxy();
+		if (_eIsProxy) {
+			return ((InternalEObject) m).eProxyURI().toString();
+		}
 		final Ontology ontology = m.getOntology();
 		Object _xifexpression = null;
 		if ((ontology != null)) {
@@ -167,13 +172,12 @@ public abstract class MemberImpl extends IdentifiedElementImpl implements Member
 		String _name = m.getName();
 		boolean _tripleNotEquals = (_name != null);
 		if (_tripleNotEquals) {
-			String _name_1 = m.getName();
-			_xifexpression_1 = (namespace + _name_1);
+			_xifexpression_1 = m.getName();
 		}
 		else {
 			_xifexpression_1 = "";
 		}
-		return _xifexpression_1;
+		return (namespace + _xifexpression_1);
 	}
 
 	/**
@@ -184,6 +188,10 @@ public abstract class MemberImpl extends IdentifiedElementImpl implements Member
 	@Override
 	public String getAbbreviatedIri() {
 		final Member m = this.resolve();
+		boolean _eIsProxy = m.eIsProxy();
+		if (_eIsProxy) {
+			return ((InternalEObject) m).eProxyURI().toString();
+		}
 		final Ontology ontology = m.getOntology();
 		String _xifexpression = null;
 		if ((ontology != null)) {
@@ -198,13 +206,12 @@ public abstract class MemberImpl extends IdentifiedElementImpl implements Member
 		String _name = m.getName();
 		boolean _tripleNotEquals = (_name != null);
 		if (_tripleNotEquals) {
-			String _name_1 = m.getName();
-			_xifexpression_1 = (prefix + _name_1);
+			_xifexpression_1 = m.getName();
 		}
 		else {
 			_xifexpression_1 = "";
 		}
-		return _xifexpression_1;
+		return (prefix + _xifexpression_1);
 	}
 
 	/**

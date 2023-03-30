@@ -117,4 +117,20 @@ public interface QuotedLiteral extends Literal {
 	 */
 	void setType(Scalar value);
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
+	String getLexicalValue();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
+	String getTypeIri();
+
 } // QuotedLiteral

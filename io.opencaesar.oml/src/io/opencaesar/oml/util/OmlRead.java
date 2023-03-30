@@ -40,19 +40,15 @@ import io.opencaesar.oml.Annotation;
 import io.opencaesar.oml.AnnotationProperty;
 import io.opencaesar.oml.Assertion;
 import io.opencaesar.oml.Axiom;
-import io.opencaesar.oml.BooleanLiteral;
 import io.opencaesar.oml.Classifier;
 import io.opencaesar.oml.Concept;
-import io.opencaesar.oml.DecimalLiteral;
 import io.opencaesar.oml.Description;
-import io.opencaesar.oml.DoubleLiteral;
 import io.opencaesar.oml.Element;
 import io.opencaesar.oml.Entity;
 import io.opencaesar.oml.ForwardRelation;
 import io.opencaesar.oml.IdentifiedElement;
 import io.opencaesar.oml.Import;
 import io.opencaesar.oml.Instance;
-import io.opencaesar.oml.IntegerLiteral;
 import io.opencaesar.oml.Literal;
 import io.opencaesar.oml.Member;
 import io.opencaesar.oml.NamedInstance;
@@ -60,8 +56,6 @@ import io.opencaesar.oml.Ontology;
 import io.opencaesar.oml.Predicate;
 import io.opencaesar.oml.Property;
 import io.opencaesar.oml.PropertyPredicate;
-import io.opencaesar.oml.PropertyValueAssertion;
-import io.opencaesar.oml.QuotedLiteral;
 import io.opencaesar.oml.Relation;
 import io.opencaesar.oml.RelationBase;
 import io.opencaesar.oml.RelationEntity;
@@ -74,8 +68,8 @@ import io.opencaesar.oml.SpecializableTerm;
 import io.opencaesar.oml.Statement;
 import io.opencaesar.oml.StructureInstance;
 import io.opencaesar.oml.Term;
-import io.opencaesar.oml.TypeAssertion;
 import io.opencaesar.oml.TypePredicate;
+import io.opencaesar.oml.UnreifiedRelation;
 import io.opencaesar.oml.Vocabulary;
 
 /**
@@ -505,8 +499,8 @@ public final class OmlRead {
             return getStatements(ontology).stream()
                 .flatMap(s -> {
                     final ArrayList<Member> ms = new ArrayList<>();
-                    if (s instanceof Member)
-                        ms.add((Member) s);
+                    if (!s.isRef())
+	                    ms.add(s);
                     if (s instanceof RelationEntity)
                         ms.addAll(getRelations((RelationEntity) s));
                     return ms.stream();
@@ -514,9 +508,8 @@ public final class OmlRead {
                 .collect(Collectors.toList());
         } else if (ontology instanceof Description){
             return getStatements(ontology).stream()
-                .filter(s -> s instanceof Member)
-                .map(s -> (Member)s)
-                .collect(Collectors.toList());
+            		.filter(i -> !i.isRef())
+            		.collect(Collectors.toList());
         }
         return Collections.emptyList();
     }
@@ -744,13 +737,13 @@ public final class OmlRead {
      * @param term the give term
      * @return a list of specialization super terms of the given term
      */
-    public static List<Term> getSuperTerms(SpecializableTerm term) {
-    	List<Term> supers = new ArrayList<>();
+    public static List<Term> getSuperTerms(Term term) {
+    	var supers = new ArrayList<Term>();
         supers.addAll(getSpecializationSuperTerms(term));
         if (term instanceof Classifier) {
             supers.addAll(getEquivalenceSuperClassifiers((Classifier)term));
-        } else if (term instanceof SpecializableProperty) {
-            supers.addAll(getEquivalenceSuperProperties((SpecializableProperty)term));
+        } else if (term instanceof Property) {
+            supers.addAll(getEquivalenceSuperProperties((Property)term));
         }
         return supers;
     }
@@ -761,12 +754,32 @@ public final class OmlRead {
      * @param term the give term
      * @return a list of specialization super terms of the given term
      */
-    public static List<Term> getSpecializationSuperTerms(SpecializableTerm term) {
-        return term.getOwnedSpecializations().stream()
-	            .filter(i -> i.getSuperTerm() != null)
-	            .map(i -> i.getSuperTerm())
-	            .collect(Collectors.toList());
-    }
+    public static List<Term> getSpecializationSuperTerms(Term term) {
+    	var supers = new ArrayList<Term>();
+    	if (term instanceof SpecializableTerm) {
+	    	supers.addAll(((SpecializableTerm)term).getOwnedSpecializations().stream()
+		            .filter(i -> i.getSuperTerm() != null)
+		            .map(i -> i.getSuperTerm())
+		            .collect(Collectors.toList()));
+    	} else  if (term instanceof ForwardRelation) {
+        	var entity = ((ForwardRelation)term).getRelationEntity();
+    		supers.addAll(getSpecializationSuperTerms(entity).stream()
+    	        .filter(i -> i instanceof RelationEntity)
+	            .map(i -> (RelationEntity)i)
+	            .filter( i -> i.getForwardRelation() != null)
+	            .map(i -> i.getForwardRelation())
+	            .collect(Collectors.toList()));
+    	} else if (term instanceof ReverseRelation) {
+        	var base = ((ReverseRelation)term).getRelationBase();
+    		supers.addAll(getSpecializationSuperTerms(base).stream()
+    	        .filter(i -> i instanceof RelationBase)
+	            .map(i -> (RelationBase)i)
+	            .filter( i -> i.getReverseRelation() != null)
+	            .map(i -> i.getReverseRelation())
+	            .collect(Collectors.toList()));
+    	}
+    	return supers;
+   }
     
     /**
      * Gets the equivalence super classifiers of the given classifier
@@ -786,11 +799,40 @@ public final class OmlRead {
      * @param property the given property
      * @return a list of equivalence super properties of the given property
      */
-    public static List<Property> getEquivalenceSuperProperties(SpecializableProperty property) {
-        return property.getOwnedEquivalences().stream()
-	            .map(i -> i.getSuperProperty())
-	            .collect(Collectors.toList());
-    }
+    public static List<Property> getEquivalenceSuperProperties(Property property) {
+    	var supers = new ArrayList<Property>();
+    	if (property instanceof SpecializableProperty) {
+	        supers.addAll(((SpecializableProperty)property).getOwnedEquivalences().stream()
+		            .map(i -> i.getSuperProperty())
+		            .collect(Collectors.toList()));
+    	} else if (property instanceof ForwardRelation) {
+    		var entity = ((ForwardRelation)property).getRelationEntity();
+    		supers.addAll(getEquivalenceSuperClassifiers(entity).stream()
+    	        .filter(i -> i instanceof RelationEntity)
+	            .map(i -> (RelationEntity)i)
+	            .filter( i -> i.getForwardRelation() != null)
+	            .map(i -> i.getForwardRelation())
+	            .collect(Collectors.toList()));
+    	} else if (property instanceof ReverseRelation) {
+    		var base = ((ReverseRelation)property).getRelationBase();
+    		if (base instanceof RelationEntity) {
+        		supers.addAll(getEquivalenceSuperClassifiers((RelationEntity)base).stream()
+            	        .filter(i -> i instanceof RelationEntity)
+        	            .map(i -> (RelationEntity)i)
+    		            .filter( i -> i.getReverseRelation() != null)
+    		            .map(i -> i.getReverseRelation())
+    		            .collect(Collectors.toList()));
+    		} else if (base instanceof UnreifiedRelation) {
+        		supers.addAll(getEquivalenceSuperProperties((UnreifiedRelation)base).stream()
+            	        .filter(i -> i instanceof UnreifiedRelation)
+        	            .map(i -> (UnreifiedRelation)i)
+			            .filter( i -> i.getReverseRelation() != null)
+			            .map(i -> i.getReverseRelation())
+			            .collect(Collectors.toList()));
+    		}
+    	}
+    	return supers;
+   }
 
     /**
      * Gets all the relations defined by the given relation entity
@@ -939,118 +981,10 @@ public final class OmlRead {
         return types;
     }
 
-    /**
-     * Gets the object of the given assertion 
-     * 
-     * @param assertion the given assertion
-     * @return the object (value) of the given assertion
-     */
-    public static Element getObject(Assertion assertion) {
-        if (assertion instanceof TypeAssertion) {
-        	return ((TypeAssertion)assertion).getType();
-        } else if (assertion instanceof PropertyValueAssertion) {
-        	return ((PropertyValueAssertion)assertion).getValue();
-        }
-        return null;
-    }
-
-    /**
-     * Gets the source instance of the given relation value (link) assertion 
-     * 
-     * @param assertion the given property value assertion
-     * @return the source instance
-     */
-    public static NamedInstance getSource(PropertyValueAssertion assertion) {
-        return (NamedInstance) assertion.getAssertingInstance();
-    }
-    
-    /**
-     * Gets the target instance of the given relation value (link) assertion 
-     * 
-     * @param assertion the given link assertion
-     * @return the target instance
-     */
-    public static NamedInstance getTarget(PropertyValueAssertion assertion) {
-        return assertion.getNamedInstanceValue();
-    }
-
     //-------------------------------------------------
     // LITERALS
     //-------------------------------------------------
- 
-    /**
-     * Gets the lexical value of the given literal
-     * 
-     * @param literal the given literal
-     * @return the lexical value of the given literal
-     */
-    public static String getLexicalValue(Literal literal) {
-        String value = getStringValue(literal);
-        if (literal instanceof QuotedLiteral) {
-            var qLiteral = (QuotedLiteral) literal;
-            var language = (qLiteral.getLangTag() != null) ? "$"+qLiteral.getLangTag() : "";
-            var type = (qLiteral.getType() != null) ? "^^"+qLiteral.getType().getAbbreviatedIri() : "";
-            value = '"'+value+'"'+language+type;
-        }
-        return value;
-    }
-
-    /**
-     * Gets the string value of the given literal
-     * 
-     * @param literal the given literal
-     * @return the string value of the given literal
-     */
-    public static String getStringValue(Literal literal) {
-        Object value = getValue(literal);
-        return (value != null) ? value.toString() : "";
-    }
-    
-    /**
-     * Gets the value of the given literal
-     * 
-     * @param literal the given literal
-     * @return the value of the given literal
-     */
-    public static Object getValue(Literal literal) {
-        if (literal instanceof QuotedLiteral) {
-            return ((QuotedLiteral)literal).getValue(); 
-        } else if (literal instanceof IntegerLiteral) {
-            return ((IntegerLiteral)literal).getValue(); 
-        } else if (literal instanceof DecimalLiteral) {
-            return ((DecimalLiteral)literal).getValue(); 
-        } else if (literal instanceof DoubleLiteral) {
-            return ((DoubleLiteral)literal).getValue(); 
-        } else if (literal instanceof BooleanLiteral) {
-            return ((BooleanLiteral)literal).isValue(); 
-        }
-        return null;
-    }
-    
-    /**
-     * Gets the iri of the given literal's type
-     * 
-     * @param literal the given literal
-     * @return the iri of the given literal's type
-     */
-    public static String getTypeIri(Literal literal) {
-        if (literal instanceof QuotedLiteral) {
-            QuotedLiteral qLiteral = (QuotedLiteral)literal; 
-            return qLiteral.getType() != null ? 
-                qLiteral.getType().getIri() : 
-                OmlConstants.XSD_NS+"string"; 
-        } else if (literal instanceof IntegerLiteral) {
-            return OmlConstants.XSD_NS+"integer"; 
-        } else if (literal instanceof DecimalLiteral) {
-            return OmlConstants.XSD_NS+"decimal"; 
-        } else if (literal instanceof DoubleLiteral) {
-            return OmlConstants.XSD_NS+"double"; 
-        } else if (literal instanceof BooleanLiteral) {
-            return OmlConstants.XSD_NS+"boolean"; 
-        }
-        return null;
-    }
-    
+     
     /**
      * Gets the type of the given literal
      * 
@@ -1058,7 +992,7 @@ public final class OmlRead {
      * @return the scalar type of the given literal
      */
     public static Scalar getType(Literal literal) {
-    	String iri = getTypeIri(literal);
+    	String iri = literal.getTypeIri();
     	return (Scalar) getMemberByIri(literal.eResource().getResourceSet(), iri);
     }
 

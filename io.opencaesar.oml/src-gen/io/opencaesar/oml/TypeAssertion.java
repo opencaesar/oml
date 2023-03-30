@@ -99,6 +99,14 @@ public interface TypeAssertion extends Assertion {
 	 * @model kind="operation" unique="false"
 	 * @generated
 	 */
-	NamedInstance getAssertingInstance();
+	NamedInstance getSubject();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
+	Element getObject();
 
 } // TypeAssertion

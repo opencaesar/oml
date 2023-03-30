@@ -192,6 +192,14 @@ public interface PropertyValueAssertion extends Assertion {
 	 * @model kind="operation" unique="false"
 	 * @generated
 	 */
-	Instance getAssertingInstance();
+	Instance getSubject();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
+	Element getObject();
 
 } // PropertyValueAssertion

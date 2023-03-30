@@ -43,6 +43,7 @@ import java.math.BigDecimal;
 public interface DecimalLiteral extends Literal {
 	/**
 	 * Returns the value of the '<em><b>Value</b></em>' attribute.
+	 * The default value is <code>"0.0"</code>.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
@@ -51,7 +52,7 @@ public interface DecimalLiteral extends Literal {
 	 * @return the value of the '<em>Value</em>' attribute.
 	 * @see #setValue(BigDecimal)
 	 * @see io.opencaesar.oml.OmlPackage#getDecimalLiteral_Value()
-	 * @model unique="false" dataType="io.opencaesar.oml.Decimal" required="true"
+	 * @model default="0.0" unique="false" dataType="io.opencaesar.oml.Decimal" required="true"
 	 * @generated
 	 */
 	BigDecimal getValue();
@@ -65,5 +66,13 @@ public interface DecimalLiteral extends Literal {
 	 * @generated
 	 */
 	void setValue(BigDecimal value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
+	String getTypeIri();
 
 } // DecimalLiteral
