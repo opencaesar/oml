@@ -74,7 +74,7 @@ public abstract class SemanticPropertyImpl extends PropertyImpl implements Seman
 	 * @generated
 	 */
 	@Override
-	public Classifier getDomain() {
+	public EList<Classifier> getDomainList() {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
 		throw new UnsupportedOperationException();
@@ -86,7 +86,7 @@ public abstract class SemanticPropertyImpl extends PropertyImpl implements Seman
 	 * @generated
 	 */
 	@Override
-	public Type getRange() {
+	public EList<Type> getRangeList() {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
 		throw new UnsupportedOperationException();
@@ -102,10 +102,10 @@ public abstract class SemanticPropertyImpl extends PropertyImpl implements Seman
 		switch (operationID) {
 			case OmlPackage.SEMANTIC_PROPERTY___IS_FUNCTIONAL:
 				return isFunctional();
-			case OmlPackage.SEMANTIC_PROPERTY___GET_DOMAIN:
-				return getDomain();
-			case OmlPackage.SEMANTIC_PROPERTY___GET_RANGE:
-				return getRange();
+			case OmlPackage.SEMANTIC_PROPERTY___GET_DOMAIN_LIST:
+				return getDomainList();
+			case OmlPackage.SEMANTIC_PROPERTY___GET_RANGE_LIST:
+				return getRangeList();
 		}
 		return super.eInvoke(operationID, arguments);
 	}

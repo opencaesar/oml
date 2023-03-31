@@ -241,7 +241,7 @@ class OmlOntologyDiagramView {
 	public OmlLabel createLabel(final Classifier cls, final ScalarProperty property) {
 		final String id = idCache.uniqueId(property, getLocalName(cls) + ".scalar." + getLocalName(property));
 		final OmlLabel l = newLeafSElement(OmlLabel.class, id, OmlDiagramModule.SLabel_SLabelView_text);
-		l.setText(property.getName() + ": " + property.getRange().getName());
+		l.setText(property.getName() + ": " + property.getRanges().get(0).getName());
 		return l;
 	}
 

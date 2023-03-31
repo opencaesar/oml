@@ -96,10 +96,10 @@ Concept:
 RelationEntity:
 	ownedAnnotations+=Annotation*
 	('relation' 'entity' name=ID | 'ref' 'relation' 'entity' ref=[RelationEntity|Ref]) ('['
-		('from' source=[Entity|Ref])?
-		('to' target=[Entity|Ref])?
-		((forwardRelation=ForwardRelation)? &
-		 (reverseRelation=ReverseRelation)?)
+		('from' sources+=[Entity|Ref] (',' sources+=[Entity|Ref])*)?
+		('to' targets+=[Entity|Ref] (',' targets+=[Entity|Ref])*)?
+		(forwardRelation=ForwardRelation)?
+		(reverseRelation=ReverseRelation)?
 		((functional?='functional')? &
 		 (inverseFunctional?='inverse' 'functional')? &
 		 (symmetric?='symmetric')? &
@@ -168,16 +168,16 @@ SemanticProperty:
 ScalarProperty:
 	ownedAnnotations+=Annotation*
 	('scalar' 'property' name=ID | 'ref' 'scalar' 'property' ref=[ScalarProperty|Ref]) ('['
-		('domain' domain=[Classifier|Ref])?
-		('range' range=[Scalar|Ref])?
+		('domain' domains+=[Classifier|Ref] (',' domains+=[Classifier|Ref])*)?
+		('range' ranges+=[Scalar|Ref] (',' ranges+=[Scalar|Ref])*)?
 		(functional?='functional')?
 	']')? (PropertySpecialization)? (PropertyEquivalence)?;
 
 StructuredProperty:
 	ownedAnnotations+=Annotation*
 	('structured' 'property' name=ID | 'ref' 'structured' 'property' ref=[StructuredProperty|Ref]) ('['
-		('domain' domain=[Classifier|Ref])?
-		('range' range=[Structure|Ref])?
+		('domain' domains+=[Classifier|Ref] (',' domains+=[Classifier|Ref])*)?
+		('range' ranges+=[Structure|Ref] (',' ranges+=[Structure|Ref])*)?
 		(functional?='functional')?
 	']')? (PropertySpecialization)? (PropertyEquivalence)?;
 
@@ -197,8 +197,8 @@ ReverseRelation:
 UnreifiedRelation:
 	ownedAnnotations+=Annotation*
 	('relation' name=ID | 'ref' 'relation' ref=[Relation|Ref]) ('['
-		('from' source=[Entity|Ref])?
-		('to' target=[Entity|Ref])?
+		('from' sources+=[Entity|Ref] (',' sources+=[Entity|Ref])*)?
+		('to' targets+=[Entity|Ref] (',' targets+=[Entity|Ref])*)?
 		(reverseRelation=ReverseRelation)?
 		((functional?='functional')? &
 		 (inverseFunctional?='inverse' 'functional')? &

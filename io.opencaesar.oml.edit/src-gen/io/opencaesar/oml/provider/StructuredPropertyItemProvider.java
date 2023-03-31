@@ -67,8 +67,8 @@ public class StructuredPropertyItemProvider extends SemanticPropertyItemProvider
 			addOwningVocabularyPropertyDescriptor(object);
 			addRefPropertyDescriptor(object);
 			addFunctionalPropertyDescriptor(object);
-			addDomainPropertyDescriptor(object);
-			addRangePropertyDescriptor(object);
+			addDomainsPropertyDescriptor(object);
+			addRangesPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -140,19 +140,19 @@ public class StructuredPropertyItemProvider extends SemanticPropertyItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Domain feature.
+	 * This adds a property descriptor for the Domains feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addDomainPropertyDescriptor(Object object) {
+	protected void addDomainsPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_StructuredProperty_domain_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_StructuredProperty_domain_feature", "_UI_StructuredProperty_type"),
-				 OmlPackage.Literals.STRUCTURED_PROPERTY__DOMAIN,
+				 getString("_UI_StructuredProperty_domains_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_StructuredProperty_domains_feature", "_UI_StructuredProperty_type"),
+				 OmlPackage.Literals.STRUCTURED_PROPERTY__DOMAINS,
 				 true,
 				 false,
 				 true,
@@ -162,19 +162,19 @@ public class StructuredPropertyItemProvider extends SemanticPropertyItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Range feature.
+	 * This adds a property descriptor for the Ranges feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addRangePropertyDescriptor(Object object) {
+	protected void addRangesPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_StructuredProperty_range_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_StructuredProperty_range_feature", "_UI_StructuredProperty_type"),
-				 OmlPackage.Literals.STRUCTURED_PROPERTY__RANGE,
+				 getString("_UI_StructuredProperty_ranges_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_StructuredProperty_ranges_feature", "_UI_StructuredProperty_type"),
+				 OmlPackage.Literals.STRUCTURED_PROPERTY__RANGES,
 				 true,
 				 false,
 				 true,

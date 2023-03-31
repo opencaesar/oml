@@ -23,13 +23,19 @@ import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.RelationBase;
 import io.opencaesar.oml.ReverseRelation;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -39,8 +45,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link io.opencaesar.oml.impl.RelationBaseImpl#getSource <em>Source</em>}</li>
- *   <li>{@link io.opencaesar.oml.impl.RelationBaseImpl#getTarget <em>Target</em>}</li>
+ *   <li>{@link io.opencaesar.oml.impl.RelationBaseImpl#getSources <em>Sources</em>}</li>
+ *   <li>{@link io.opencaesar.oml.impl.RelationBaseImpl#getTargets <em>Targets</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.RelationBaseImpl#getReverseRelation <em>Reverse Relation</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.RelationBaseImpl#isFunctional <em>Functional</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.RelationBaseImpl#isInverseFunctional <em>Inverse Functional</em>}</li>
@@ -55,24 +61,24 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  */
 public abstract class RelationBaseImpl extends SpecializableTermImpl implements RelationBase {
 	/**
-	 * The cached value of the '{@link #getSource() <em>Source</em>}' reference.
+	 * The cached value of the '{@link #getSources() <em>Sources</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getSource()
+	 * @see #getSources()
 	 * @generated
 	 * @ordered
 	 */
-	protected Entity source;
+	protected EList<Entity> sources;
 
 	/**
-	 * The cached value of the '{@link #getTarget() <em>Target</em>}' reference.
+	 * The cached value of the '{@link #getTargets() <em>Targets</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getTarget()
+	 * @see #getTargets()
 	 * @generated
 	 * @ordered
 	 */
-	protected Entity target;
+	protected EList<Entity> targets;
 
 	/**
 	 * The cached value of the '{@link #getReverseRelation() <em>Reverse Relation</em>}' containment reference.
@@ -249,25 +255,11 @@ public abstract class RelationBaseImpl extends SpecializableTermImpl implements 
 	 * @generated
 	 */
 	@Override
-	public Entity getSource() {
-		if (source != null && source.eIsProxy()) {
-			InternalEObject oldSource = (InternalEObject)source;
-			source = (Entity)eResolveProxy(oldSource);
-			if (source != oldSource) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, OmlPackage.RELATION_BASE__SOURCE, oldSource, source));
-			}
+	public EList<Entity> getSources() {
+		if (sources == null) {
+			sources = new EObjectResolvingEList<Entity>(Entity.class, this, OmlPackage.RELATION_BASE__SOURCES);
 		}
-		return source;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Entity basicGetSource() {
-		return source;
+		return sources;
 	}
 
 	/**
@@ -276,51 +268,11 @@ public abstract class RelationBaseImpl extends SpecializableTermImpl implements 
 	 * @generated
 	 */
 	@Override
-	public void setSource(Entity newSource) {
-		Entity oldSource = source;
-		source = newSource;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.RELATION_BASE__SOURCE, oldSource, source));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Entity getTarget() {
-		if (target != null && target.eIsProxy()) {
-			InternalEObject oldTarget = (InternalEObject)target;
-			target = (Entity)eResolveProxy(oldTarget);
-			if (target != oldTarget) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, OmlPackage.RELATION_BASE__TARGET, oldTarget, target));
-			}
+	public EList<Entity> getTargets() {
+		if (targets == null) {
+			targets = new EObjectResolvingEList<Entity>(Entity.class, this, OmlPackage.RELATION_BASE__TARGETS);
 		}
-		return target;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Entity basicGetTarget() {
-		return target;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setTarget(Entity newTarget) {
-		Entity oldTarget = target;
-		target = newTarget;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.RELATION_BASE__TARGET, oldTarget, target));
+		return targets;
 	}
 
 	/**
@@ -567,12 +519,10 @@ public abstract class RelationBaseImpl extends SpecializableTermImpl implements 
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case OmlPackage.RELATION_BASE__SOURCE:
-				if (resolve) return getSource();
-				return basicGetSource();
-			case OmlPackage.RELATION_BASE__TARGET:
-				if (resolve) return getTarget();
-				return basicGetTarget();
+			case OmlPackage.RELATION_BASE__SOURCES:
+				return getSources();
+			case OmlPackage.RELATION_BASE__TARGETS:
+				return getTargets();
 			case OmlPackage.RELATION_BASE__REVERSE_RELATION:
 				return getReverseRelation();
 			case OmlPackage.RELATION_BASE__FUNCTIONAL:
@@ -598,14 +548,17 @@ public abstract class RelationBaseImpl extends SpecializableTermImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case OmlPackage.RELATION_BASE__SOURCE:
-				setSource((Entity)newValue);
+			case OmlPackage.RELATION_BASE__SOURCES:
+				getSources().clear();
+				getSources().addAll((Collection<? extends Entity>)newValue);
 				return;
-			case OmlPackage.RELATION_BASE__TARGET:
-				setTarget((Entity)newValue);
+			case OmlPackage.RELATION_BASE__TARGETS:
+				getTargets().clear();
+				getTargets().addAll((Collection<? extends Entity>)newValue);
 				return;
 			case OmlPackage.RELATION_BASE__REVERSE_RELATION:
 				setReverseRelation((ReverseRelation)newValue);
@@ -643,11 +596,11 @@ public abstract class RelationBaseImpl extends SpecializableTermImpl implements 
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case OmlPackage.RELATION_BASE__SOURCE:
-				setSource((Entity)null);
+			case OmlPackage.RELATION_BASE__SOURCES:
+				getSources().clear();
 				return;
-			case OmlPackage.RELATION_BASE__TARGET:
-				setTarget((Entity)null);
+			case OmlPackage.RELATION_BASE__TARGETS:
+				getTargets().clear();
 				return;
 			case OmlPackage.RELATION_BASE__REVERSE_RELATION:
 				setReverseRelation((ReverseRelation)null);
@@ -685,10 +638,10 @@ public abstract class RelationBaseImpl extends SpecializableTermImpl implements 
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case OmlPackage.RELATION_BASE__SOURCE:
-				return source != null;
-			case OmlPackage.RELATION_BASE__TARGET:
-				return target != null;
+			case OmlPackage.RELATION_BASE__SOURCES:
+				return sources != null && !sources.isEmpty();
+			case OmlPackage.RELATION_BASE__TARGETS:
+				return targets != null && !targets.isEmpty();
 			case OmlPackage.RELATION_BASE__REVERSE_RELATION:
 				return reverseRelation != null;
 			case OmlPackage.RELATION_BASE__FUNCTIONAL:

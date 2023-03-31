@@ -25,13 +25,19 @@ import io.opencaesar.oml.RelationBase;
 import io.opencaesar.oml.RelationEntity;
 import io.opencaesar.oml.ReverseRelation;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -41,8 +47,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link io.opencaesar.oml.impl.RelationEntityImpl#getSource <em>Source</em>}</li>
- *   <li>{@link io.opencaesar.oml.impl.RelationEntityImpl#getTarget <em>Target</em>}</li>
+ *   <li>{@link io.opencaesar.oml.impl.RelationEntityImpl#getSources <em>Sources</em>}</li>
+ *   <li>{@link io.opencaesar.oml.impl.RelationEntityImpl#getTargets <em>Targets</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.RelationEntityImpl#getReverseRelation <em>Reverse Relation</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.RelationEntityImpl#isFunctional <em>Functional</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.RelationEntityImpl#isInverseFunctional <em>Inverse Functional</em>}</li>
@@ -59,24 +65,24 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  */
 public class RelationEntityImpl extends EntityImpl implements RelationEntity {
 	/**
-	 * The cached value of the '{@link #getSource() <em>Source</em>}' reference.
+	 * The cached value of the '{@link #getSources() <em>Sources</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getSource()
+	 * @see #getSources()
 	 * @generated
 	 * @ordered
 	 */
-	protected Entity source;
+	protected EList<Entity> sources;
 
 	/**
-	 * The cached value of the '{@link #getTarget() <em>Target</em>}' reference.
+	 * The cached value of the '{@link #getTargets() <em>Targets</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getTarget()
+	 * @see #getTargets()
 	 * @generated
 	 * @ordered
 	 */
-	protected Entity target;
+	protected EList<Entity> targets;
 
 	/**
 	 * The cached value of the '{@link #getReverseRelation() <em>Reverse Relation</em>}' containment reference.
@@ -273,25 +279,11 @@ public class RelationEntityImpl extends EntityImpl implements RelationEntity {
 	 * @generated
 	 */
 	@Override
-	public Entity getSource() {
-		if (source != null && source.eIsProxy()) {
-			InternalEObject oldSource = (InternalEObject)source;
-			source = (Entity)eResolveProxy(oldSource);
-			if (source != oldSource) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, OmlPackage.RELATION_ENTITY__SOURCE, oldSource, source));
-			}
+	public EList<Entity> getSources() {
+		if (sources == null) {
+			sources = new EObjectResolvingEList<Entity>(Entity.class, this, OmlPackage.RELATION_ENTITY__SOURCES);
 		}
-		return source;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Entity basicGetSource() {
-		return source;
+		return sources;
 	}
 
 	/**
@@ -300,51 +292,11 @@ public class RelationEntityImpl extends EntityImpl implements RelationEntity {
 	 * @generated
 	 */
 	@Override
-	public void setSource(Entity newSource) {
-		Entity oldSource = source;
-		source = newSource;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.RELATION_ENTITY__SOURCE, oldSource, source));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Entity getTarget() {
-		if (target != null && target.eIsProxy()) {
-			InternalEObject oldTarget = (InternalEObject)target;
-			target = (Entity)eResolveProxy(oldTarget);
-			if (target != oldTarget) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, OmlPackage.RELATION_ENTITY__TARGET, oldTarget, target));
-			}
+	public EList<Entity> getTargets() {
+		if (targets == null) {
+			targets = new EObjectResolvingEList<Entity>(Entity.class, this, OmlPackage.RELATION_ENTITY__TARGETS);
 		}
-		return target;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Entity basicGetTarget() {
-		return target;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setTarget(Entity newTarget) {
-		Entity oldTarget = target;
-		target = newTarget;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.RELATION_ENTITY__TARGET, oldTarget, target));
+		return targets;
 	}
 
 	/**
@@ -682,12 +634,10 @@ public class RelationEntityImpl extends EntityImpl implements RelationEntity {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case OmlPackage.RELATION_ENTITY__SOURCE:
-				if (resolve) return getSource();
-				return basicGetSource();
-			case OmlPackage.RELATION_ENTITY__TARGET:
-				if (resolve) return getTarget();
-				return basicGetTarget();
+			case OmlPackage.RELATION_ENTITY__SOURCES:
+				return getSources();
+			case OmlPackage.RELATION_ENTITY__TARGETS:
+				return getTargets();
 			case OmlPackage.RELATION_ENTITY__REVERSE_RELATION:
 				return getReverseRelation();
 			case OmlPackage.RELATION_ENTITY__FUNCTIONAL:
@@ -718,14 +668,17 @@ public class RelationEntityImpl extends EntityImpl implements RelationEntity {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case OmlPackage.RELATION_ENTITY__SOURCE:
-				setSource((Entity)newValue);
+			case OmlPackage.RELATION_ENTITY__SOURCES:
+				getSources().clear();
+				getSources().addAll((Collection<? extends Entity>)newValue);
 				return;
-			case OmlPackage.RELATION_ENTITY__TARGET:
-				setTarget((Entity)newValue);
+			case OmlPackage.RELATION_ENTITY__TARGETS:
+				getTargets().clear();
+				getTargets().addAll((Collection<? extends Entity>)newValue);
 				return;
 			case OmlPackage.RELATION_ENTITY__REVERSE_RELATION:
 				setReverseRelation((ReverseRelation)newValue);
@@ -769,11 +722,11 @@ public class RelationEntityImpl extends EntityImpl implements RelationEntity {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case OmlPackage.RELATION_ENTITY__SOURCE:
-				setSource((Entity)null);
+			case OmlPackage.RELATION_ENTITY__SOURCES:
+				getSources().clear();
 				return;
-			case OmlPackage.RELATION_ENTITY__TARGET:
-				setTarget((Entity)null);
+			case OmlPackage.RELATION_ENTITY__TARGETS:
+				getTargets().clear();
 				return;
 			case OmlPackage.RELATION_ENTITY__REVERSE_RELATION:
 				setReverseRelation((ReverseRelation)null);
@@ -817,10 +770,10 @@ public class RelationEntityImpl extends EntityImpl implements RelationEntity {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case OmlPackage.RELATION_ENTITY__SOURCE:
-				return source != null;
-			case OmlPackage.RELATION_ENTITY__TARGET:
-				return target != null;
+			case OmlPackage.RELATION_ENTITY__SOURCES:
+				return sources != null && !sources.isEmpty();
+			case OmlPackage.RELATION_ENTITY__TARGETS:
+				return targets != null && !targets.isEmpty();
 			case OmlPackage.RELATION_ENTITY__REVERSE_RELATION:
 				return reverseRelation != null;
 			case OmlPackage.RELATION_ENTITY__FUNCTIONAL:
@@ -854,8 +807,8 @@ public class RelationEntityImpl extends EntityImpl implements RelationEntity {
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == RelationBase.class) {
 			switch (derivedFeatureID) {
-				case OmlPackage.RELATION_ENTITY__SOURCE: return OmlPackage.RELATION_BASE__SOURCE;
-				case OmlPackage.RELATION_ENTITY__TARGET: return OmlPackage.RELATION_BASE__TARGET;
+				case OmlPackage.RELATION_ENTITY__SOURCES: return OmlPackage.RELATION_BASE__SOURCES;
+				case OmlPackage.RELATION_ENTITY__TARGETS: return OmlPackage.RELATION_BASE__TARGETS;
 				case OmlPackage.RELATION_ENTITY__REVERSE_RELATION: return OmlPackage.RELATION_BASE__REVERSE_RELATION;
 				case OmlPackage.RELATION_ENTITY__FUNCTIONAL: return OmlPackage.RELATION_BASE__FUNCTIONAL;
 				case OmlPackage.RELATION_ENTITY__INVERSE_FUNCTIONAL: return OmlPackage.RELATION_BASE__INVERSE_FUNCTIONAL;
@@ -879,8 +832,8 @@ public class RelationEntityImpl extends EntityImpl implements RelationEntity {
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == RelationBase.class) {
 			switch (baseFeatureID) {
-				case OmlPackage.RELATION_BASE__SOURCE: return OmlPackage.RELATION_ENTITY__SOURCE;
-				case OmlPackage.RELATION_BASE__TARGET: return OmlPackage.RELATION_ENTITY__TARGET;
+				case OmlPackage.RELATION_BASE__SOURCES: return OmlPackage.RELATION_ENTITY__SOURCES;
+				case OmlPackage.RELATION_BASE__TARGETS: return OmlPackage.RELATION_ENTITY__TARGETS;
 				case OmlPackage.RELATION_BASE__REVERSE_RELATION: return OmlPackage.RELATION_ENTITY__REVERSE_RELATION;
 				case OmlPackage.RELATION_BASE__FUNCTIONAL: return OmlPackage.RELATION_ENTITY__FUNCTIONAL;
 				case OmlPackage.RELATION_BASE__INVERSE_FUNCTIONAL: return OmlPackage.RELATION_ENTITY__INVERSE_FUNCTIONAL;

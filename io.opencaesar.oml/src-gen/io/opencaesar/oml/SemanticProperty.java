@@ -18,6 +18,7 @@
  */
 package io.opencaesar.oml;
 
+import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -51,22 +52,22 @@ public interface SemanticProperty extends Property {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Gets the domain of this property
+	 * Gets the domains of this property
 	 * <!-- end-model-doc -->
 	 * @model kind="operation" unique="false"
 	 * @generated
 	 */
-	Classifier getDomain();
+	EList<Classifier> getDomainList();
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Gets the range of the property
+	 * Gets the ranges of this property
 	 * <!-- end-model-doc -->
 	 * @model kind="operation" unique="false"
 	 * @generated
 	 */
-	Type getRange();
+	EList<Type> getRangeList();
 
 } // SemanticProperty

@@ -24,7 +24,6 @@ import io.opencaesar.oml.PropertyEquivalenceAxiom;
 import io.opencaesar.oml.Relation;
 import io.opencaesar.oml.RelationBase;
 import io.opencaesar.oml.ReverseRelation;
-import io.opencaesar.oml.SemanticProperty;
 import io.opencaesar.oml.SpecializableProperty;
 import io.opencaesar.oml.SpecializableTerm;
 import io.opencaesar.oml.SpecializationAxiom;
@@ -48,6 +47,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -61,8 +61,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <ul>
  *   <li>{@link io.opencaesar.oml.impl.UnreifiedRelationImpl#getOwningVocabulary <em>Owning Vocabulary</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.UnreifiedRelationImpl#getOwnedSpecializations <em>Owned Specializations</em>}</li>
- *   <li>{@link io.opencaesar.oml.impl.UnreifiedRelationImpl#getSource <em>Source</em>}</li>
- *   <li>{@link io.opencaesar.oml.impl.UnreifiedRelationImpl#getTarget <em>Target</em>}</li>
+ *   <li>{@link io.opencaesar.oml.impl.UnreifiedRelationImpl#getSources <em>Sources</em>}</li>
+ *   <li>{@link io.opencaesar.oml.impl.UnreifiedRelationImpl#getTargets <em>Targets</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.UnreifiedRelationImpl#getReverseRelation <em>Reverse Relation</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.UnreifiedRelationImpl#isFunctional <em>Functional</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.UnreifiedRelationImpl#isInverseFunctional <em>Inverse Functional</em>}</li>
@@ -89,24 +89,24 @@ public class UnreifiedRelationImpl extends RelationImpl implements UnreifiedRela
 	protected EList<SpecializationAxiom> ownedSpecializations;
 
 	/**
-	 * The cached value of the '{@link #getSource() <em>Source</em>}' reference.
+	 * The cached value of the '{@link #getSources() <em>Sources</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getSource()
+	 * @see #getSources()
 	 * @generated
 	 * @ordered
 	 */
-	protected Entity source;
+	protected EList<Entity> sources;
 
 	/**
-	 * The cached value of the '{@link #getTarget() <em>Target</em>}' reference.
+	 * The cached value of the '{@link #getTargets() <em>Targets</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getTarget()
+	 * @see #getTargets()
 	 * @generated
 	 * @ordered
 	 */
-	protected Entity target;
+	protected EList<Entity> targets;
 
 	/**
 	 * The cached value of the '{@link #getReverseRelation() <em>Reverse Relation</em>}' containment reference.
@@ -369,25 +369,11 @@ public class UnreifiedRelationImpl extends RelationImpl implements UnreifiedRela
 	 * @generated
 	 */
 	@Override
-	public Entity getSource() {
-		if (source != null && source.eIsProxy()) {
-			InternalEObject oldSource = (InternalEObject)source;
-			source = (Entity)eResolveProxy(oldSource);
-			if (source != oldSource) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, OmlPackage.UNREIFIED_RELATION__SOURCE, oldSource, source));
-			}
+	public EList<Entity> getSources() {
+		if (sources == null) {
+			sources = new EObjectResolvingEList<Entity>(Entity.class, this, OmlPackage.UNREIFIED_RELATION__SOURCES);
 		}
-		return source;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Entity basicGetSource() {
-		return source;
+		return sources;
 	}
 
 	/**
@@ -396,51 +382,11 @@ public class UnreifiedRelationImpl extends RelationImpl implements UnreifiedRela
 	 * @generated
 	 */
 	@Override
-	public void setSource(Entity newSource) {
-		Entity oldSource = source;
-		source = newSource;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.UNREIFIED_RELATION__SOURCE, oldSource, source));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Entity getTarget() {
-		if (target != null && target.eIsProxy()) {
-			InternalEObject oldTarget = (InternalEObject)target;
-			target = (Entity)eResolveProxy(oldTarget);
-			if (target != oldTarget) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, OmlPackage.UNREIFIED_RELATION__TARGET, oldTarget, target));
-			}
+	public EList<Entity> getTargets() {
+		if (targets == null) {
+			targets = new EObjectResolvingEList<Entity>(Entity.class, this, OmlPackage.UNREIFIED_RELATION__TARGETS);
 		}
-		return target;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Entity basicGetTarget() {
-		return target;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setTarget(Entity newTarget) {
-		Entity oldTarget = target;
-		target = newTarget;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.UNREIFIED_RELATION__TARGET, oldTarget, target));
+		return targets;
 	}
 
 	/**
@@ -708,8 +654,8 @@ public class UnreifiedRelationImpl extends RelationImpl implements UnreifiedRela
 	 * @generated
 	 */
 	@Override
-	public Entity getDomain() {
-		return this.getSource();
+	public EList<Entity> getDomains() {
+		return this.getSources();
 	}
 
 	/**
@@ -718,8 +664,8 @@ public class UnreifiedRelationImpl extends RelationImpl implements UnreifiedRela
 	 * @generated
 	 */
 	@Override
-	public Entity getRange() {
-		return this.getTarget();
+	public EList<Entity> getRanges() {
+		return this.getTargets();
 	}
 
 	/**
@@ -804,12 +750,10 @@ public class UnreifiedRelationImpl extends RelationImpl implements UnreifiedRela
 				return basicGetOwningVocabulary();
 			case OmlPackage.UNREIFIED_RELATION__OWNED_SPECIALIZATIONS:
 				return getOwnedSpecializations();
-			case OmlPackage.UNREIFIED_RELATION__SOURCE:
-				if (resolve) return getSource();
-				return basicGetSource();
-			case OmlPackage.UNREIFIED_RELATION__TARGET:
-				if (resolve) return getTarget();
-				return basicGetTarget();
+			case OmlPackage.UNREIFIED_RELATION__SOURCES:
+				return getSources();
+			case OmlPackage.UNREIFIED_RELATION__TARGETS:
+				return getTargets();
 			case OmlPackage.UNREIFIED_RELATION__REVERSE_RELATION:
 				return getReverseRelation();
 			case OmlPackage.UNREIFIED_RELATION__FUNCTIONAL:
@@ -851,11 +795,13 @@ public class UnreifiedRelationImpl extends RelationImpl implements UnreifiedRela
 				getOwnedSpecializations().clear();
 				getOwnedSpecializations().addAll((Collection<? extends SpecializationAxiom>)newValue);
 				return;
-			case OmlPackage.UNREIFIED_RELATION__SOURCE:
-				setSource((Entity)newValue);
+			case OmlPackage.UNREIFIED_RELATION__SOURCES:
+				getSources().clear();
+				getSources().addAll((Collection<? extends Entity>)newValue);
 				return;
-			case OmlPackage.UNREIFIED_RELATION__TARGET:
-				setTarget((Entity)newValue);
+			case OmlPackage.UNREIFIED_RELATION__TARGETS:
+				getTargets().clear();
+				getTargets().addAll((Collection<? extends Entity>)newValue);
 				return;
 			case OmlPackage.UNREIFIED_RELATION__REVERSE_RELATION:
 				setReverseRelation((ReverseRelation)newValue);
@@ -906,11 +852,11 @@ public class UnreifiedRelationImpl extends RelationImpl implements UnreifiedRela
 			case OmlPackage.UNREIFIED_RELATION__OWNED_SPECIALIZATIONS:
 				getOwnedSpecializations().clear();
 				return;
-			case OmlPackage.UNREIFIED_RELATION__SOURCE:
-				setSource((Entity)null);
+			case OmlPackage.UNREIFIED_RELATION__SOURCES:
+				getSources().clear();
 				return;
-			case OmlPackage.UNREIFIED_RELATION__TARGET:
-				setTarget((Entity)null);
+			case OmlPackage.UNREIFIED_RELATION__TARGETS:
+				getTargets().clear();
 				return;
 			case OmlPackage.UNREIFIED_RELATION__REVERSE_RELATION:
 				setReverseRelation((ReverseRelation)null);
@@ -958,10 +904,10 @@ public class UnreifiedRelationImpl extends RelationImpl implements UnreifiedRela
 				return basicGetOwningVocabulary() != null;
 			case OmlPackage.UNREIFIED_RELATION__OWNED_SPECIALIZATIONS:
 				return ownedSpecializations != null && !ownedSpecializations.isEmpty();
-			case OmlPackage.UNREIFIED_RELATION__SOURCE:
-				return source != null;
-			case OmlPackage.UNREIFIED_RELATION__TARGET:
-				return target != null;
+			case OmlPackage.UNREIFIED_RELATION__SOURCES:
+				return sources != null && !sources.isEmpty();
+			case OmlPackage.UNREIFIED_RELATION__TARGETS:
+				return targets != null && !targets.isEmpty();
 			case OmlPackage.UNREIFIED_RELATION__REVERSE_RELATION:
 				return reverseRelation != null;
 			case OmlPackage.UNREIFIED_RELATION__FUNCTIONAL:
@@ -1012,8 +958,8 @@ public class UnreifiedRelationImpl extends RelationImpl implements UnreifiedRela
 		}
 		if (baseClass == RelationBase.class) {
 			switch (derivedFeatureID) {
-				case OmlPackage.UNREIFIED_RELATION__SOURCE: return OmlPackage.RELATION_BASE__SOURCE;
-				case OmlPackage.UNREIFIED_RELATION__TARGET: return OmlPackage.RELATION_BASE__TARGET;
+				case OmlPackage.UNREIFIED_RELATION__SOURCES: return OmlPackage.RELATION_BASE__SOURCES;
+				case OmlPackage.UNREIFIED_RELATION__TARGETS: return OmlPackage.RELATION_BASE__TARGETS;
 				case OmlPackage.UNREIFIED_RELATION__REVERSE_RELATION: return OmlPackage.RELATION_BASE__REVERSE_RELATION;
 				case OmlPackage.UNREIFIED_RELATION__FUNCTIONAL: return OmlPackage.RELATION_BASE__FUNCTIONAL;
 				case OmlPackage.UNREIFIED_RELATION__INVERSE_FUNCTIONAL: return OmlPackage.RELATION_BASE__INVERSE_FUNCTIONAL;
@@ -1060,8 +1006,8 @@ public class UnreifiedRelationImpl extends RelationImpl implements UnreifiedRela
 		}
 		if (baseClass == RelationBase.class) {
 			switch (baseFeatureID) {
-				case OmlPackage.RELATION_BASE__SOURCE: return OmlPackage.UNREIFIED_RELATION__SOURCE;
-				case OmlPackage.RELATION_BASE__TARGET: return OmlPackage.UNREIFIED_RELATION__TARGET;
+				case OmlPackage.RELATION_BASE__SOURCES: return OmlPackage.UNREIFIED_RELATION__SOURCES;
+				case OmlPackage.RELATION_BASE__TARGETS: return OmlPackage.UNREIFIED_RELATION__TARGETS;
 				case OmlPackage.RELATION_BASE__REVERSE_RELATION: return OmlPackage.UNREIFIED_RELATION__REVERSE_RELATION;
 				case OmlPackage.RELATION_BASE__FUNCTIONAL: return OmlPackage.UNREIFIED_RELATION__FUNCTIONAL;
 				case OmlPackage.RELATION_BASE__INVERSE_FUNCTIONAL: return OmlPackage.UNREIFIED_RELATION__INVERSE_FUNCTIONAL;
@@ -1088,62 +1034,12 @@ public class UnreifiedRelationImpl extends RelationImpl implements UnreifiedRela
 	 * @generated
 	 */
 	@Override
-	public int eDerivedOperationID(int baseOperationID, Class<?> baseClass) {
-		if (baseClass == SemanticProperty.class) {
-			switch (baseOperationID) {
-				case OmlPackage.SEMANTIC_PROPERTY___GET_DOMAIN: return OmlPackage.UNREIFIED_RELATION___GET_DOMAIN;
-				case OmlPackage.SEMANTIC_PROPERTY___GET_RANGE: return OmlPackage.UNREIFIED_RELATION___GET_RANGE;
-				default: return super.eDerivedOperationID(baseOperationID, baseClass);
-			}
-		}
-		if (baseClass == Relation.class) {
-			switch (baseOperationID) {
-				case OmlPackage.RELATION___GET_DOMAIN: return OmlPackage.UNREIFIED_RELATION___GET_DOMAIN;
-				case OmlPackage.RELATION___GET_RANGE: return OmlPackage.UNREIFIED_RELATION___GET_RANGE;
-				case OmlPackage.RELATION___GET_INVERSE: return OmlPackage.UNREIFIED_RELATION___GET_INVERSE;
-				default: return super.eDerivedOperationID(baseOperationID, baseClass);
-			}
-		}
-		if (baseClass == Statement.class) {
-			switch (baseOperationID) {
-				default: return -1;
-			}
-		}
-		if (baseClass == VocabularyStatement.class) {
-			switch (baseOperationID) {
-				default: return -1;
-			}
-		}
-		if (baseClass == SpecializableTerm.class) {
-			switch (baseOperationID) {
-				default: return -1;
-			}
-		}
-		if (baseClass == RelationBase.class) {
-			switch (baseOperationID) {
-				default: return -1;
-			}
-		}
-		if (baseClass == SpecializableProperty.class) {
-			switch (baseOperationID) {
-				default: return -1;
-			}
-		}
-		return super.eDerivedOperationID(baseOperationID, baseClass);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
-			case OmlPackage.UNREIFIED_RELATION___GET_DOMAIN:
-				return getDomain();
-			case OmlPackage.UNREIFIED_RELATION___GET_RANGE:
-				return getRange();
+			case OmlPackage.UNREIFIED_RELATION___GET_DOMAINS:
+				return getDomains();
+			case OmlPackage.UNREIFIED_RELATION___GET_RANGES:
+				return getRanges();
 			case OmlPackage.UNREIFIED_RELATION___GET_INVERSE:
 				return getInverse();
 		}

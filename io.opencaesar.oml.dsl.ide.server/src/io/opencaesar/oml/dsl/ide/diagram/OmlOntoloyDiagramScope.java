@@ -344,8 +344,8 @@ class OmlOntoloyDiagramScope {
 				Set<Element> others = relationEntities.get(e);
 				Set<Element> incident = relationIncidentElements.get(e);
 				phase1ScanEntityAxioms(e, others);
-				doSwitch(e.getSource());
-				doSwitch(e.getTarget());
+				doSwitch(e.getSources().get(0));
+				doSwitch(e.getTargets().get(0));
 				OmlSearch.findSpecializationAxiomsWithSuperTerm(e).forEach(ax -> {
 					if (allImportedElements.contains(ax)) {
 						incident.add(ax);

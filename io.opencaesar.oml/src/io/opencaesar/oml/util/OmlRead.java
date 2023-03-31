@@ -766,7 +766,7 @@ public final class OmlRead {
     		supers.addAll(getSpecializationSuperTerms(entity).stream()
     	        .filter(i -> i instanceof RelationEntity)
 	            .map(i -> (RelationEntity)i)
-	            .filter( i -> i.getForwardRelation() != null)
+	            .filter(i -> i.getForwardRelation() != null)
 	            .map(i -> i.getForwardRelation())
 	            .collect(Collectors.toList()));
     	} else if (term instanceof ReverseRelation) {
@@ -774,7 +774,7 @@ public final class OmlRead {
     		supers.addAll(getSpecializationSuperTerms(base).stream()
     	        .filter(i -> i instanceof RelationBase)
 	            .map(i -> (RelationBase)i)
-	            .filter( i -> i.getReverseRelation() != null)
+	            .filter(i -> i.getReverseRelation() != null)
 	            .map(i -> i.getReverseRelation())
 	            .collect(Collectors.toList()));
     	}
@@ -810,7 +810,7 @@ public final class OmlRead {
     		supers.addAll(getEquivalenceSuperClassifiers(entity).stream()
     	        .filter(i -> i instanceof RelationEntity)
 	            .map(i -> (RelationEntity)i)
-	            .filter( i -> i.getForwardRelation() != null)
+	            .filter(i -> i.getForwardRelation() != null)
 	            .map(i -> i.getForwardRelation())
 	            .collect(Collectors.toList()));
     	} else if (property instanceof ReverseRelation) {
@@ -819,15 +819,15 @@ public final class OmlRead {
         		supers.addAll(getEquivalenceSuperClassifiers((RelationEntity)base).stream()
             	        .filter(i -> i instanceof RelationEntity)
         	            .map(i -> (RelationEntity)i)
-    		            .filter( i -> i.getReverseRelation() != null)
+        	            .filter(i -> i.getReverseRelation() != null)
     		            .map(i -> i.getReverseRelation())
     		            .collect(Collectors.toList()));
     		} else if (base instanceof UnreifiedRelation) {
         		supers.addAll(getEquivalenceSuperProperties((UnreifiedRelation)base).stream()
             	        .filter(i -> i instanceof UnreifiedRelation)
         	            .map(i -> (UnreifiedRelation)i)
-			            .filter( i -> i.getReverseRelation() != null)
-			            .map(i -> i.getReverseRelation())
+        	            .filter(i -> i.getReverseRelation() != null)
+    		            .map(i -> i.getReverseRelation())
 			            .collect(Collectors.toList()));
     		}
     	}
@@ -845,7 +845,7 @@ public final class OmlRead {
         if (entity.getForwardRelation() != null) {
         	relations.add(entity.getForwardRelation());
         }
-        if (entity.getReverseRelation() != null) {
+        if (entity.getForwardRelation() != null) {
         	relations.add(entity.getReverseRelation());
         }
         return relations;

@@ -18,6 +18,7 @@
  */
 package io.opencaesar.oml;
 
+import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -139,7 +140,7 @@ public interface ForwardRelation extends Relation {
 	 * @model kind="operation" unique="false"
 	 * @generated
 	 */
-	Entity getDomain();
+	EList<Entity> getDomains();
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -147,7 +148,7 @@ public interface ForwardRelation extends Relation {
 	 * @model kind="operation" unique="false"
 	 * @generated
 	 */
-	Entity getRange();
+	EList<Entity> getRanges();
 
 	/**
 	 * <!-- begin-user-doc -->

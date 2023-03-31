@@ -198,18 +198,18 @@ public class OmlFormatter extends AbstractJavaFormatter {
 		}
 		formatBrackets(entity, doc,
 				oml.getRelationEntityAccess().getLeftSquareBracketKeyword_2_0(), 
-				oml.getRelationEntityAccess().getRightSquareBracketKeyword_2_6());
+				oml.getRelationEntityAccess().getRightSquareBracketKeyword_2_7());
 		doc.append(doc.prepend(keyword(entity, oml.getRelationEntityAccess().getFromKeyword_2_1_0()), newLine()), oneSpace());
 		doc.append(doc.prepend(keyword(entity, oml.getRelationEntityAccess().getToKeyword_2_2_0()), newLine()), oneSpace());
 		ifNotNull(entity.getForwardRelation(), i -> doc.prepend(doc.format(i), newLine()));
 		ifNotNull(entity.getReverseRelation(), i -> doc.prepend(doc.format(i), newLine()));
-		doc.prepend(keyword(entity, oml.getRelationEntityAccess().getFunctionalFunctionalKeyword_2_4_0_0()), newLine());
-		doc.prepend(keyword(entity, oml.getRelationEntityAccess().getInverseFunctionalInverseKeyword_2_4_1_0_0()), newLine());
-		doc.prepend(keyword(entity, oml.getRelationEntityAccess().getSymmetricSymmetricKeyword_2_4_2_0()), newLine());
-		doc.prepend(keyword(entity, oml.getRelationEntityAccess().getAsymmetricAsymmetricKeyword_2_4_3_0()), newLine());
-		doc.prepend(keyword(entity, oml.getRelationEntityAccess().getReflexiveReflexiveKeyword_2_4_4_0()), newLine());
-		doc.prepend(keyword(entity, oml.getRelationEntityAccess().getIrreflexiveIrreflexiveKeyword_2_4_5_0()), newLine());
-		doc.prepend(keyword(entity, oml.getRelationEntityAccess().getTransitiveTransitiveKeyword_2_4_6_0()), newLine());
+		doc.prepend(keyword(entity, oml.getRelationEntityAccess().getFunctionalFunctionalKeyword_2_5_0_0()), newLine());
+		doc.prepend(keyword(entity, oml.getRelationEntityAccess().getInverseFunctionalInverseKeyword_2_5_1_0_0()), newLine());
+		doc.prepend(keyword(entity, oml.getRelationEntityAccess().getSymmetricSymmetricKeyword_2_5_2_0()), newLine());
+		doc.prepend(keyword(entity, oml.getRelationEntityAccess().getAsymmetricAsymmetricKeyword_2_5_3_0()), newLine());
+		doc.prepend(keyword(entity, oml.getRelationEntityAccess().getReflexiveReflexiveKeyword_2_5_4_0()), newLine());
+		doc.prepend(keyword(entity, oml.getRelationEntityAccess().getIrreflexiveIrreflexiveKeyword_2_5_5_0()), newLine());
+		doc.prepend(keyword(entity, oml.getRelationEntityAccess().getTransitiveTransitiveKeyword_2_5_6_0()), newLine());
 		entity.getOwnedKeys().forEach(i -> doc.prepend(doc.format(i), newLine()));
 		doc.surround(keyword(entity, oml.getClassifierSpecializationAccess().getLessThanSignKeyword_0()), oneSpace());
 		formatCommas(entity, doc);

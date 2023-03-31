@@ -24,7 +24,6 @@ import io.opencaesar.oml.Member;
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.Relation;
 import io.opencaesar.oml.RelationEntity;
-import io.opencaesar.oml.SemanticProperty;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -212,8 +211,8 @@ public class ForwardRelationImpl extends RelationImpl implements ForwardRelation
 	 * @generated
 	 */
 	@Override
-	public Entity getDomain() {
-		return this.getRelationEntity().getSource();
+	public EList<Entity> getDomains() {
+		return this.getRelationEntity().getSources();
 	}
 
 	/**
@@ -222,8 +221,8 @@ public class ForwardRelationImpl extends RelationImpl implements ForwardRelation
 	 * @generated
 	 */
 	@Override
-	public Entity getRange() {
-		return this.getRelationEntity().getTarget();
+	public EList<Entity> getRanges() {
+		return this.getRelationEntity().getTargets();
 	}
 
 	/**
@@ -345,44 +344,6 @@ public class ForwardRelationImpl extends RelationImpl implements ForwardRelation
 	 * @generated
 	 */
 	@Override
-	public int eDerivedOperationID(int baseOperationID, Class<?> baseClass) {
-		if (baseClass == Member.class) {
-			switch (baseOperationID) {
-				case OmlPackage.MEMBER___GET_REF: return OmlPackage.FORWARD_RELATION___GET_REF;
-				default: return super.eDerivedOperationID(baseOperationID, baseClass);
-			}
-		}
-		if (baseClass == SemanticProperty.class) {
-			switch (baseOperationID) {
-				case OmlPackage.SEMANTIC_PROPERTY___IS_FUNCTIONAL: return OmlPackage.FORWARD_RELATION___IS_FUNCTIONAL;
-				case OmlPackage.SEMANTIC_PROPERTY___GET_DOMAIN: return OmlPackage.FORWARD_RELATION___GET_DOMAIN;
-				case OmlPackage.SEMANTIC_PROPERTY___GET_RANGE: return OmlPackage.FORWARD_RELATION___GET_RANGE;
-				default: return super.eDerivedOperationID(baseOperationID, baseClass);
-			}
-		}
-		if (baseClass == Relation.class) {
-			switch (baseOperationID) {
-				case OmlPackage.RELATION___IS_INVERSE_FUNCTIONAL: return OmlPackage.FORWARD_RELATION___IS_INVERSE_FUNCTIONAL;
-				case OmlPackage.RELATION___IS_SYMMETRIC: return OmlPackage.FORWARD_RELATION___IS_SYMMETRIC;
-				case OmlPackage.RELATION___IS_ASYMMETRIC: return OmlPackage.FORWARD_RELATION___IS_ASYMMETRIC;
-				case OmlPackage.RELATION___IS_REFLEXIVE: return OmlPackage.FORWARD_RELATION___IS_REFLEXIVE;
-				case OmlPackage.RELATION___IS_IRREFLEXIVE: return OmlPackage.FORWARD_RELATION___IS_IRREFLEXIVE;
-				case OmlPackage.RELATION___IS_TRANSITIVE: return OmlPackage.FORWARD_RELATION___IS_TRANSITIVE;
-				case OmlPackage.RELATION___GET_DOMAIN: return OmlPackage.FORWARD_RELATION___GET_DOMAIN;
-				case OmlPackage.RELATION___GET_RANGE: return OmlPackage.FORWARD_RELATION___GET_RANGE;
-				case OmlPackage.RELATION___GET_INVERSE: return OmlPackage.FORWARD_RELATION___GET_INVERSE;
-				default: return super.eDerivedOperationID(baseOperationID, baseClass);
-			}
-		}
-		return super.eDerivedOperationID(baseOperationID, baseClass);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
 			case OmlPackage.FORWARD_RELATION___GET_REF:
@@ -401,10 +362,10 @@ public class ForwardRelationImpl extends RelationImpl implements ForwardRelation
 				return isIrreflexive();
 			case OmlPackage.FORWARD_RELATION___IS_TRANSITIVE:
 				return isTransitive();
-			case OmlPackage.FORWARD_RELATION___GET_DOMAIN:
-				return getDomain();
-			case OmlPackage.FORWARD_RELATION___GET_RANGE:
-				return getRange();
+			case OmlPackage.FORWARD_RELATION___GET_DOMAINS:
+				return getDomains();
+			case OmlPackage.FORWARD_RELATION___GET_RANGES:
+				return getRanges();
 			case OmlPackage.FORWARD_RELATION___GET_INVERSE:
 				return getInverse();
 		}

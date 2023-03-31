@@ -2957,22 +2957,22 @@ public interface OmlPackage extends EPackage {
 	int RELATION_BASE__OWNED_SPECIALIZATIONS = SPECIALIZABLE_TERM__OWNED_SPECIALIZATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Source</b></em>' reference.
+	 * The feature id for the '<em><b>Sources</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_BASE__SOURCE = SPECIALIZABLE_TERM_FEATURE_COUNT + 0;
+	int RELATION_BASE__SOURCES = SPECIALIZABLE_TERM_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Target</b></em>' reference.
+	 * The feature id for the '<em><b>Targets</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_BASE__TARGET = SPECIALIZABLE_TERM_FEATURE_COUNT + 1;
+	int RELATION_BASE__TARGETS = SPECIALIZABLE_TERM_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Reverse Relation</b></em>' containment reference.
@@ -4351,22 +4351,22 @@ public interface OmlPackage extends EPackage {
 	int RELATION_ENTITY__OWNED_KEYS = ENTITY__OWNED_KEYS;
 
 	/**
-	 * The feature id for the '<em><b>Source</b></em>' reference.
+	 * The feature id for the '<em><b>Sources</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_ENTITY__SOURCE = ENTITY_FEATURE_COUNT + 0;
+	int RELATION_ENTITY__SOURCES = ENTITY_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Target</b></em>' reference.
+	 * The feature id for the '<em><b>Targets</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_ENTITY__TARGET = ENTITY_FEATURE_COUNT + 1;
+	int RELATION_ENTITY__TARGETS = ENTITY_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Reverse Relation</b></em>' containment reference.
@@ -4794,22 +4794,22 @@ public interface OmlPackage extends EPackage {
 	int SEMANTIC_PROPERTY___IS_FUNCTIONAL = PROPERTY_OPERATION_COUNT + 0;
 
 	/**
-	 * The operation id for the '<em>Get Domain</em>' operation.
+	 * The operation id for the '<em>Get Domain List</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SEMANTIC_PROPERTY___GET_DOMAIN = PROPERTY_OPERATION_COUNT + 1;
+	int SEMANTIC_PROPERTY___GET_DOMAIN_LIST = PROPERTY_OPERATION_COUNT + 1;
 
 	/**
-	 * The operation id for the '<em>Get Range</em>' operation.
+	 * The operation id for the '<em>Get Range List</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SEMANTIC_PROPERTY___GET_RANGE = PROPERTY_OPERATION_COUNT + 2;
+	int SEMANTIC_PROPERTY___GET_RANGE_LIST = PROPERTY_OPERATION_COUNT + 2;
 
 	/**
 	 * The number of operations of the '<em>Semantic Property</em>' class.
@@ -4894,22 +4894,22 @@ public interface OmlPackage extends EPackage {
 	int SCALAR_PROPERTY__FUNCTIONAL = SEMANTIC_PROPERTY_FEATURE_COUNT + 4;
 
 	/**
-	 * The feature id for the '<em><b>Domain</b></em>' reference.
+	 * The feature id for the '<em><b>Domains</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SCALAR_PROPERTY__DOMAIN = SEMANTIC_PROPERTY_FEATURE_COUNT + 5;
+	int SCALAR_PROPERTY__DOMAINS = SEMANTIC_PROPERTY_FEATURE_COUNT + 5;
 
 	/**
-	 * The feature id for the '<em><b>Range</b></em>' reference.
+	 * The feature id for the '<em><b>Ranges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SCALAR_PROPERTY__RANGE = SEMANTIC_PROPERTY_FEATURE_COUNT + 6;
+	int SCALAR_PROPERTY__RANGES = SEMANTIC_PROPERTY_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of structural features of the '<em>Scalar Property</em>' class.
@@ -4993,22 +4993,22 @@ public interface OmlPackage extends EPackage {
 	int SCALAR_PROPERTY___IS_FUNCTIONAL = SEMANTIC_PROPERTY___IS_FUNCTIONAL;
 
 	/**
-	 * The operation id for the '<em>Get Domain</em>' operation.
+	 * The operation id for the '<em>Get Domain List</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SCALAR_PROPERTY___GET_DOMAIN = SEMANTIC_PROPERTY___GET_DOMAIN;
+	int SCALAR_PROPERTY___GET_DOMAIN_LIST = SEMANTIC_PROPERTY_OPERATION_COUNT + 0;
 
 	/**
-	 * The operation id for the '<em>Get Range</em>' operation.
+	 * The operation id for the '<em>Get Range List</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SCALAR_PROPERTY___GET_RANGE = SEMANTIC_PROPERTY___GET_RANGE;
+	int SCALAR_PROPERTY___GET_RANGE_LIST = SEMANTIC_PROPERTY_OPERATION_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>Scalar Property</em>' class.
@@ -5017,7 +5017,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SCALAR_PROPERTY_OPERATION_COUNT = SEMANTIC_PROPERTY_OPERATION_COUNT + 0;
+	int SCALAR_PROPERTY_OPERATION_COUNT = SEMANTIC_PROPERTY_OPERATION_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.impl.StructuredPropertyImpl <em>Structured Property</em>}' class.
@@ -5093,22 +5093,22 @@ public interface OmlPackage extends EPackage {
 	int STRUCTURED_PROPERTY__FUNCTIONAL = SEMANTIC_PROPERTY_FEATURE_COUNT + 4;
 
 	/**
-	 * The feature id for the '<em><b>Domain</b></em>' reference.
+	 * The feature id for the '<em><b>Domains</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STRUCTURED_PROPERTY__DOMAIN = SEMANTIC_PROPERTY_FEATURE_COUNT + 5;
+	int STRUCTURED_PROPERTY__DOMAINS = SEMANTIC_PROPERTY_FEATURE_COUNT + 5;
 
 	/**
-	 * The feature id for the '<em><b>Range</b></em>' reference.
+	 * The feature id for the '<em><b>Ranges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STRUCTURED_PROPERTY__RANGE = SEMANTIC_PROPERTY_FEATURE_COUNT + 6;
+	int STRUCTURED_PROPERTY__RANGES = SEMANTIC_PROPERTY_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of structural features of the '<em>Structured Property</em>' class.
@@ -5192,22 +5192,22 @@ public interface OmlPackage extends EPackage {
 	int STRUCTURED_PROPERTY___IS_FUNCTIONAL = SEMANTIC_PROPERTY___IS_FUNCTIONAL;
 
 	/**
-	 * The operation id for the '<em>Get Domain</em>' operation.
+	 * The operation id for the '<em>Get Domain List</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STRUCTURED_PROPERTY___GET_DOMAIN = SEMANTIC_PROPERTY___GET_DOMAIN;
+	int STRUCTURED_PROPERTY___GET_DOMAIN_LIST = SEMANTIC_PROPERTY_OPERATION_COUNT + 0;
 
 	/**
-	 * The operation id for the '<em>Get Range</em>' operation.
+	 * The operation id for the '<em>Get Range List</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STRUCTURED_PROPERTY___GET_RANGE = SEMANTIC_PROPERTY___GET_RANGE;
+	int STRUCTURED_PROPERTY___GET_RANGE_LIST = SEMANTIC_PROPERTY_OPERATION_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>Structured Property</em>' class.
@@ -5216,7 +5216,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STRUCTURED_PROPERTY_OPERATION_COUNT = SEMANTIC_PROPERTY_OPERATION_COUNT + 0;
+	int STRUCTURED_PROPERTY_OPERATION_COUNT = SEMANTIC_PROPERTY_OPERATION_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.impl.RelationImpl <em>Relation</em>}' class.
@@ -5382,22 +5382,22 @@ public interface OmlPackage extends EPackage {
 	int RELATION___IS_TRANSITIVE = SEMANTIC_PROPERTY_OPERATION_COUNT + 5;
 
 	/**
-	 * The operation id for the '<em>Get Domain</em>' operation.
+	 * The operation id for the '<em>Get Domains</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION___GET_DOMAIN = SEMANTIC_PROPERTY_OPERATION_COUNT + 6;
+	int RELATION___GET_DOMAINS = SEMANTIC_PROPERTY_OPERATION_COUNT + 6;
 
 	/**
-	 * The operation id for the '<em>Get Range</em>' operation.
+	 * The operation id for the '<em>Get Ranges</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION___GET_RANGE = SEMANTIC_PROPERTY_OPERATION_COUNT + 7;
+	int RELATION___GET_RANGES = SEMANTIC_PROPERTY_OPERATION_COUNT + 7;
 
 	/**
 	 * The operation id for the '<em>Get Inverse</em>' operation.
@@ -5409,13 +5409,31 @@ public interface OmlPackage extends EPackage {
 	int RELATION___GET_INVERSE = SEMANTIC_PROPERTY_OPERATION_COUNT + 8;
 
 	/**
+	 * The operation id for the '<em>Get Domain List</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION___GET_DOMAIN_LIST = SEMANTIC_PROPERTY_OPERATION_COUNT + 9;
+
+	/**
+	 * The operation id for the '<em>Get Range List</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION___GET_RANGE_LIST = SEMANTIC_PROPERTY_OPERATION_COUNT + 10;
+
+	/**
 	 * The number of operations of the '<em>Relation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_OPERATION_COUNT = SEMANTIC_PROPERTY_OPERATION_COUNT + 9;
+	int RELATION_OPERATION_COUNT = SEMANTIC_PROPERTY_OPERATION_COUNT + 11;
 
 	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.impl.ForwardRelationImpl <em>Forward Relation</em>}' class.
@@ -5518,6 +5536,24 @@ public interface OmlPackage extends EPackage {
 	int FORWARD_RELATION___GET_ABBREVIATED_IRI = RELATION___GET_ABBREVIATED_IRI;
 
 	/**
+	 * The operation id for the '<em>Get Domain List</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORWARD_RELATION___GET_DOMAIN_LIST = RELATION___GET_DOMAIN_LIST;
+
+	/**
+	 * The operation id for the '<em>Get Range List</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORWARD_RELATION___GET_RANGE_LIST = RELATION___GET_RANGE_LIST;
+
+	/**
 	 * The operation id for the '<em>Get Ref</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5590,22 +5626,22 @@ public interface OmlPackage extends EPackage {
 	int FORWARD_RELATION___IS_TRANSITIVE = RELATION_OPERATION_COUNT + 7;
 
 	/**
-	 * The operation id for the '<em>Get Domain</em>' operation.
+	 * The operation id for the '<em>Get Domains</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FORWARD_RELATION___GET_DOMAIN = RELATION_OPERATION_COUNT + 8;
+	int FORWARD_RELATION___GET_DOMAINS = RELATION_OPERATION_COUNT + 8;
 
 	/**
-	 * The operation id for the '<em>Get Range</em>' operation.
+	 * The operation id for the '<em>Get Ranges</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FORWARD_RELATION___GET_RANGE = RELATION_OPERATION_COUNT + 9;
+	int FORWARD_RELATION___GET_RANGES = RELATION_OPERATION_COUNT + 9;
 
 	/**
 	 * The operation id for the '<em>Get Inverse</em>' operation.
@@ -5726,6 +5762,24 @@ public interface OmlPackage extends EPackage {
 	int REVERSE_RELATION___GET_ABBREVIATED_IRI = RELATION___GET_ABBREVIATED_IRI;
 
 	/**
+	 * The operation id for the '<em>Get Domain List</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REVERSE_RELATION___GET_DOMAIN_LIST = RELATION___GET_DOMAIN_LIST;
+
+	/**
+	 * The operation id for the '<em>Get Range List</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REVERSE_RELATION___GET_RANGE_LIST = RELATION___GET_RANGE_LIST;
+
+	/**
 	 * The operation id for the '<em>Get Ref</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5798,22 +5852,22 @@ public interface OmlPackage extends EPackage {
 	int REVERSE_RELATION___IS_TRANSITIVE = RELATION_OPERATION_COUNT + 7;
 
 	/**
-	 * The operation id for the '<em>Get Domain</em>' operation.
+	 * The operation id for the '<em>Get Domains</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REVERSE_RELATION___GET_DOMAIN = RELATION_OPERATION_COUNT + 8;
+	int REVERSE_RELATION___GET_DOMAINS = RELATION_OPERATION_COUNT + 8;
 
 	/**
-	 * The operation id for the '<em>Get Range</em>' operation.
+	 * The operation id for the '<em>Get Ranges</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REVERSE_RELATION___GET_RANGE = RELATION_OPERATION_COUNT + 9;
+	int REVERSE_RELATION___GET_RANGES = RELATION_OPERATION_COUNT + 9;
 
 	/**
 	 * The operation id for the '<em>Get Inverse</em>' operation.
@@ -5880,22 +5934,22 @@ public interface OmlPackage extends EPackage {
 	int UNREIFIED_RELATION__OWNED_SPECIALIZATIONS = RELATION_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Source</b></em>' reference.
+	 * The feature id for the '<em><b>Sources</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int UNREIFIED_RELATION__SOURCE = RELATION_FEATURE_COUNT + 2;
+	int UNREIFIED_RELATION__SOURCES = RELATION_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>Target</b></em>' reference.
+	 * The feature id for the '<em><b>Targets</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int UNREIFIED_RELATION__TARGET = RELATION_FEATURE_COUNT + 3;
+	int UNREIFIED_RELATION__TARGETS = RELATION_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Reverse Relation</b></em>' containment reference.
@@ -6123,22 +6177,40 @@ public interface OmlPackage extends EPackage {
 	int UNREIFIED_RELATION___IS_TRANSITIVE = RELATION___IS_TRANSITIVE;
 
 	/**
-	 * The operation id for the '<em>Get Domain</em>' operation.
+	 * The operation id for the '<em>Get Domain List</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int UNREIFIED_RELATION___GET_DOMAIN = RELATION_OPERATION_COUNT + 0;
+	int UNREIFIED_RELATION___GET_DOMAIN_LIST = RELATION___GET_DOMAIN_LIST;
 
 	/**
-	 * The operation id for the '<em>Get Range</em>' operation.
+	 * The operation id for the '<em>Get Range List</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int UNREIFIED_RELATION___GET_RANGE = RELATION_OPERATION_COUNT + 1;
+	int UNREIFIED_RELATION___GET_RANGE_LIST = RELATION___GET_RANGE_LIST;
+
+	/**
+	 * The operation id for the '<em>Get Domains</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNREIFIED_RELATION___GET_DOMAINS = RELATION_OPERATION_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>Get Ranges</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNREIFIED_RELATION___GET_RANGES = RELATION_OPERATION_COUNT + 1;
 
 	/**
 	 * The operation id for the '<em>Get Inverse</em>' operation.
@@ -9795,26 +9867,26 @@ public interface OmlPackage extends EPackage {
 	EClass getRelationBase();
 
 	/**
-	 * Returns the meta object for the reference '{@link io.opencaesar.oml.RelationBase#getSource <em>Source</em>}'.
+	 * Returns the meta object for the reference list '{@link io.opencaesar.oml.RelationBase#getSources <em>Sources</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Source</em>'.
-	 * @see io.opencaesar.oml.RelationBase#getSource()
+	 * @return the meta object for the reference list '<em>Sources</em>'.
+	 * @see io.opencaesar.oml.RelationBase#getSources()
 	 * @see #getRelationBase()
 	 * @generated
 	 */
-	EReference getRelationBase_Source();
+	EReference getRelationBase_Sources();
 
 	/**
-	 * Returns the meta object for the reference '{@link io.opencaesar.oml.RelationBase#getTarget <em>Target</em>}'.
+	 * Returns the meta object for the reference list '{@link io.opencaesar.oml.RelationBase#getTargets <em>Targets</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Target</em>'.
-	 * @see io.opencaesar.oml.RelationBase#getTarget()
+	 * @return the meta object for the reference list '<em>Targets</em>'.
+	 * @see io.opencaesar.oml.RelationBase#getTargets()
 	 * @see #getRelationBase()
 	 * @generated
 	 */
-	EReference getRelationBase_Target();
+	EReference getRelationBase_Targets();
 
 	/**
 	 * Returns the meta object for the containment reference '{@link io.opencaesar.oml.RelationBase#getReverseRelation <em>Reverse Relation</em>}'.
@@ -10257,24 +10329,24 @@ public interface OmlPackage extends EPackage {
 	EOperation getSemanticProperty__IsFunctional();
 
 	/**
-	 * Returns the meta object for the '{@link io.opencaesar.oml.SemanticProperty#getDomain() <em>Get Domain</em>}' operation.
+	 * Returns the meta object for the '{@link io.opencaesar.oml.SemanticProperty#getDomainList() <em>Get Domain List</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Get Domain</em>' operation.
-	 * @see io.opencaesar.oml.SemanticProperty#getDomain()
+	 * @return the meta object for the '<em>Get Domain List</em>' operation.
+	 * @see io.opencaesar.oml.SemanticProperty#getDomainList()
 	 * @generated
 	 */
-	EOperation getSemanticProperty__GetDomain();
+	EOperation getSemanticProperty__GetDomainList();
 
 	/**
-	 * Returns the meta object for the '{@link io.opencaesar.oml.SemanticProperty#getRange() <em>Get Range</em>}' operation.
+	 * Returns the meta object for the '{@link io.opencaesar.oml.SemanticProperty#getRangeList() <em>Get Range List</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Get Range</em>' operation.
-	 * @see io.opencaesar.oml.SemanticProperty#getRange()
+	 * @return the meta object for the '<em>Get Range List</em>' operation.
+	 * @see io.opencaesar.oml.SemanticProperty#getRangeList()
 	 * @generated
 	 */
-	EOperation getSemanticProperty__GetRange();
+	EOperation getSemanticProperty__GetRangeList();
 
 	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.ScalarProperty <em>Scalar Property</em>}'.
@@ -10309,26 +10381,46 @@ public interface OmlPackage extends EPackage {
 	EAttribute getScalarProperty_Functional();
 
 	/**
-	 * Returns the meta object for the reference '{@link io.opencaesar.oml.ScalarProperty#getDomain <em>Domain</em>}'.
+	 * Returns the meta object for the reference list '{@link io.opencaesar.oml.ScalarProperty#getDomains <em>Domains</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Domain</em>'.
-	 * @see io.opencaesar.oml.ScalarProperty#getDomain()
+	 * @return the meta object for the reference list '<em>Domains</em>'.
+	 * @see io.opencaesar.oml.ScalarProperty#getDomains()
 	 * @see #getScalarProperty()
 	 * @generated
 	 */
-	EReference getScalarProperty_Domain();
+	EReference getScalarProperty_Domains();
 
 	/**
-	 * Returns the meta object for the reference '{@link io.opencaesar.oml.ScalarProperty#getRange <em>Range</em>}'.
+	 * Returns the meta object for the reference list '{@link io.opencaesar.oml.ScalarProperty#getRanges <em>Ranges</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Range</em>'.
-	 * @see io.opencaesar.oml.ScalarProperty#getRange()
+	 * @return the meta object for the reference list '<em>Ranges</em>'.
+	 * @see io.opencaesar.oml.ScalarProperty#getRanges()
 	 * @see #getScalarProperty()
 	 * @generated
 	 */
-	EReference getScalarProperty_Range();
+	EReference getScalarProperty_Ranges();
+
+	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.ScalarProperty#getDomainList() <em>Get Domain List</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Domain List</em>' operation.
+	 * @see io.opencaesar.oml.ScalarProperty#getDomainList()
+	 * @generated
+	 */
+	EOperation getScalarProperty__GetDomainList();
+
+	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.ScalarProperty#getRangeList() <em>Get Range List</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Range List</em>' operation.
+	 * @see io.opencaesar.oml.ScalarProperty#getRangeList()
+	 * @generated
+	 */
+	EOperation getScalarProperty__GetRangeList();
 
 	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.StructuredProperty <em>Structured Property</em>}'.
@@ -10363,26 +10455,46 @@ public interface OmlPackage extends EPackage {
 	EAttribute getStructuredProperty_Functional();
 
 	/**
-	 * Returns the meta object for the reference '{@link io.opencaesar.oml.StructuredProperty#getDomain <em>Domain</em>}'.
+	 * Returns the meta object for the reference list '{@link io.opencaesar.oml.StructuredProperty#getDomains <em>Domains</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Domain</em>'.
-	 * @see io.opencaesar.oml.StructuredProperty#getDomain()
+	 * @return the meta object for the reference list '<em>Domains</em>'.
+	 * @see io.opencaesar.oml.StructuredProperty#getDomains()
 	 * @see #getStructuredProperty()
 	 * @generated
 	 */
-	EReference getStructuredProperty_Domain();
+	EReference getStructuredProperty_Domains();
 
 	/**
-	 * Returns the meta object for the reference '{@link io.opencaesar.oml.StructuredProperty#getRange <em>Range</em>}'.
+	 * Returns the meta object for the reference list '{@link io.opencaesar.oml.StructuredProperty#getRanges <em>Ranges</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Range</em>'.
-	 * @see io.opencaesar.oml.StructuredProperty#getRange()
+	 * @return the meta object for the reference list '<em>Ranges</em>'.
+	 * @see io.opencaesar.oml.StructuredProperty#getRanges()
 	 * @see #getStructuredProperty()
 	 * @generated
 	 */
-	EReference getStructuredProperty_Range();
+	EReference getStructuredProperty_Ranges();
+
+	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.StructuredProperty#getDomainList() <em>Get Domain List</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Domain List</em>' operation.
+	 * @see io.opencaesar.oml.StructuredProperty#getDomainList()
+	 * @generated
+	 */
+	EOperation getStructuredProperty__GetDomainList();
+
+	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.StructuredProperty#getRangeList() <em>Get Range List</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Range List</em>' operation.
+	 * @see io.opencaesar.oml.StructuredProperty#getRangeList()
+	 * @generated
+	 */
+	EOperation getStructuredProperty__GetRangeList();
 
 	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.Relation <em>Relation</em>}'.
@@ -10455,24 +10567,24 @@ public interface OmlPackage extends EPackage {
 	EOperation getRelation__IsTransitive();
 
 	/**
-	 * Returns the meta object for the '{@link io.opencaesar.oml.Relation#getDomain() <em>Get Domain</em>}' operation.
+	 * Returns the meta object for the '{@link io.opencaesar.oml.Relation#getDomains() <em>Get Domains</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Get Domain</em>' operation.
-	 * @see io.opencaesar.oml.Relation#getDomain()
+	 * @return the meta object for the '<em>Get Domains</em>' operation.
+	 * @see io.opencaesar.oml.Relation#getDomains()
 	 * @generated
 	 */
-	EOperation getRelation__GetDomain();
+	EOperation getRelation__GetDomains();
 
 	/**
-	 * Returns the meta object for the '{@link io.opencaesar.oml.Relation#getRange() <em>Get Range</em>}' operation.
+	 * Returns the meta object for the '{@link io.opencaesar.oml.Relation#getRanges() <em>Get Ranges</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Get Range</em>' operation.
-	 * @see io.opencaesar.oml.Relation#getRange()
+	 * @return the meta object for the '<em>Get Ranges</em>' operation.
+	 * @see io.opencaesar.oml.Relation#getRanges()
 	 * @generated
 	 */
-	EOperation getRelation__GetRange();
+	EOperation getRelation__GetRanges();
 
 	/**
 	 * Returns the meta object for the '{@link io.opencaesar.oml.Relation#getInverse() <em>Get Inverse</em>}' operation.
@@ -10483,6 +10595,26 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 */
 	EOperation getRelation__GetInverse();
+
+	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.Relation#getDomainList() <em>Get Domain List</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Domain List</em>' operation.
+	 * @see io.opencaesar.oml.Relation#getDomainList()
+	 * @generated
+	 */
+	EOperation getRelation__GetDomainList();
+
+	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.Relation#getRangeList() <em>Get Range List</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Range List</em>' operation.
+	 * @see io.opencaesar.oml.Relation#getRangeList()
+	 * @generated
+	 */
+	EOperation getRelation__GetRangeList();
 
 	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.ForwardRelation <em>Forward Relation</em>}'.
@@ -10586,24 +10718,24 @@ public interface OmlPackage extends EPackage {
 	EOperation getForwardRelation__IsTransitive();
 
 	/**
-	 * Returns the meta object for the '{@link io.opencaesar.oml.ForwardRelation#getDomain() <em>Get Domain</em>}' operation.
+	 * Returns the meta object for the '{@link io.opencaesar.oml.ForwardRelation#getDomains() <em>Get Domains</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Get Domain</em>' operation.
-	 * @see io.opencaesar.oml.ForwardRelation#getDomain()
+	 * @return the meta object for the '<em>Get Domains</em>' operation.
+	 * @see io.opencaesar.oml.ForwardRelation#getDomains()
 	 * @generated
 	 */
-	EOperation getForwardRelation__GetDomain();
+	EOperation getForwardRelation__GetDomains();
 
 	/**
-	 * Returns the meta object for the '{@link io.opencaesar.oml.ForwardRelation#getRange() <em>Get Range</em>}' operation.
+	 * Returns the meta object for the '{@link io.opencaesar.oml.ForwardRelation#getRanges() <em>Get Ranges</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Get Range</em>' operation.
-	 * @see io.opencaesar.oml.ForwardRelation#getRange()
+	 * @return the meta object for the '<em>Get Ranges</em>' operation.
+	 * @see io.opencaesar.oml.ForwardRelation#getRanges()
 	 * @generated
 	 */
-	EOperation getForwardRelation__GetRange();
+	EOperation getForwardRelation__GetRanges();
 
 	/**
 	 * Returns the meta object for the '{@link io.opencaesar.oml.ForwardRelation#getInverse() <em>Get Inverse</em>}' operation.
@@ -10717,24 +10849,24 @@ public interface OmlPackage extends EPackage {
 	EOperation getReverseRelation__IsTransitive();
 
 	/**
-	 * Returns the meta object for the '{@link io.opencaesar.oml.ReverseRelation#getDomain() <em>Get Domain</em>}' operation.
+	 * Returns the meta object for the '{@link io.opencaesar.oml.ReverseRelation#getDomains() <em>Get Domains</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Get Domain</em>' operation.
-	 * @see io.opencaesar.oml.ReverseRelation#getDomain()
+	 * @return the meta object for the '<em>Get Domains</em>' operation.
+	 * @see io.opencaesar.oml.ReverseRelation#getDomains()
 	 * @generated
 	 */
-	EOperation getReverseRelation__GetDomain();
+	EOperation getReverseRelation__GetDomains();
 
 	/**
-	 * Returns the meta object for the '{@link io.opencaesar.oml.ReverseRelation#getRange() <em>Get Range</em>}' operation.
+	 * Returns the meta object for the '{@link io.opencaesar.oml.ReverseRelation#getRanges() <em>Get Ranges</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Get Range</em>' operation.
-	 * @see io.opencaesar.oml.ReverseRelation#getRange()
+	 * @return the meta object for the '<em>Get Ranges</em>' operation.
+	 * @see io.opencaesar.oml.ReverseRelation#getRanges()
 	 * @generated
 	 */
-	EOperation getReverseRelation__GetRange();
+	EOperation getReverseRelation__GetRanges();
 
 	/**
 	 * Returns the meta object for the '{@link io.opencaesar.oml.ReverseRelation#getInverse() <em>Get Inverse</em>}' operation.
@@ -10768,24 +10900,24 @@ public interface OmlPackage extends EPackage {
 	EReference getUnreifiedRelation_Ref();
 
 	/**
-	 * Returns the meta object for the '{@link io.opencaesar.oml.UnreifiedRelation#getDomain() <em>Get Domain</em>}' operation.
+	 * Returns the meta object for the '{@link io.opencaesar.oml.UnreifiedRelation#getDomains() <em>Get Domains</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Get Domain</em>' operation.
-	 * @see io.opencaesar.oml.UnreifiedRelation#getDomain()
+	 * @return the meta object for the '<em>Get Domains</em>' operation.
+	 * @see io.opencaesar.oml.UnreifiedRelation#getDomains()
 	 * @generated
 	 */
-	EOperation getUnreifiedRelation__GetDomain();
+	EOperation getUnreifiedRelation__GetDomains();
 
 	/**
-	 * Returns the meta object for the '{@link io.opencaesar.oml.UnreifiedRelation#getRange() <em>Get Range</em>}' operation.
+	 * Returns the meta object for the '{@link io.opencaesar.oml.UnreifiedRelation#getRanges() <em>Get Ranges</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Get Range</em>' operation.
-	 * @see io.opencaesar.oml.UnreifiedRelation#getRange()
+	 * @return the meta object for the '<em>Get Ranges</em>' operation.
+	 * @see io.opencaesar.oml.UnreifiedRelation#getRanges()
 	 * @generated
 	 */
-	EOperation getUnreifiedRelation__GetRange();
+	EOperation getUnreifiedRelation__GetRanges();
 
 	/**
 	 * Returns the meta object for the '{@link io.opencaesar.oml.UnreifiedRelation#getInverse() <em>Get Inverse</em>}' operation.
@@ -12688,20 +12820,20 @@ public interface OmlPackage extends EPackage {
 		EClass RELATION_BASE = eINSTANCE.getRelationBase();
 
 		/**
-		 * The meta object literal for the '<em><b>Source</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Sources</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference RELATION_BASE__SOURCE = eINSTANCE.getRelationBase_Source();
+		EReference RELATION_BASE__SOURCES = eINSTANCE.getRelationBase_Sources();
 
 		/**
-		 * The meta object literal for the '<em><b>Target</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Targets</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference RELATION_BASE__TARGET = eINSTANCE.getRelationBase_Target();
+		EReference RELATION_BASE__TARGETS = eINSTANCE.getRelationBase_Targets();
 
 		/**
 		 * The meta object literal for the '<em><b>Reverse Relation</b></em>' containment reference feature.
@@ -13052,20 +13184,20 @@ public interface OmlPackage extends EPackage {
 		EOperation SEMANTIC_PROPERTY___IS_FUNCTIONAL = eINSTANCE.getSemanticProperty__IsFunctional();
 
 		/**
-		 * The meta object literal for the '<em><b>Get Domain</b></em>' operation.
+		 * The meta object literal for the '<em><b>Get Domain List</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EOperation SEMANTIC_PROPERTY___GET_DOMAIN = eINSTANCE.getSemanticProperty__GetDomain();
+		EOperation SEMANTIC_PROPERTY___GET_DOMAIN_LIST = eINSTANCE.getSemanticProperty__GetDomainList();
 
 		/**
-		 * The meta object literal for the '<em><b>Get Range</b></em>' operation.
+		 * The meta object literal for the '<em><b>Get Range List</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EOperation SEMANTIC_PROPERTY___GET_RANGE = eINSTANCE.getSemanticProperty__GetRange();
+		EOperation SEMANTIC_PROPERTY___GET_RANGE_LIST = eINSTANCE.getSemanticProperty__GetRangeList();
 
 		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.ScalarPropertyImpl <em>Scalar Property</em>}' class.
@@ -13094,20 +13226,36 @@ public interface OmlPackage extends EPackage {
 		EAttribute SCALAR_PROPERTY__FUNCTIONAL = eINSTANCE.getScalarProperty_Functional();
 
 		/**
-		 * The meta object literal for the '<em><b>Domain</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Domains</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference SCALAR_PROPERTY__DOMAIN = eINSTANCE.getScalarProperty_Domain();
+		EReference SCALAR_PROPERTY__DOMAINS = eINSTANCE.getScalarProperty_Domains();
 
 		/**
-		 * The meta object literal for the '<em><b>Range</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Ranges</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference SCALAR_PROPERTY__RANGE = eINSTANCE.getScalarProperty_Range();
+		EReference SCALAR_PROPERTY__RANGES = eINSTANCE.getScalarProperty_Ranges();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Domain List</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation SCALAR_PROPERTY___GET_DOMAIN_LIST = eINSTANCE.getScalarProperty__GetDomainList();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Range List</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation SCALAR_PROPERTY___GET_RANGE_LIST = eINSTANCE.getScalarProperty__GetRangeList();
 
 		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.StructuredPropertyImpl <em>Structured Property</em>}' class.
@@ -13136,20 +13284,36 @@ public interface OmlPackage extends EPackage {
 		EAttribute STRUCTURED_PROPERTY__FUNCTIONAL = eINSTANCE.getStructuredProperty_Functional();
 
 		/**
-		 * The meta object literal for the '<em><b>Domain</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Domains</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference STRUCTURED_PROPERTY__DOMAIN = eINSTANCE.getStructuredProperty_Domain();
+		EReference STRUCTURED_PROPERTY__DOMAINS = eINSTANCE.getStructuredProperty_Domains();
 
 		/**
-		 * The meta object literal for the '<em><b>Range</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Ranges</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference STRUCTURED_PROPERTY__RANGE = eINSTANCE.getStructuredProperty_Range();
+		EReference STRUCTURED_PROPERTY__RANGES = eINSTANCE.getStructuredProperty_Ranges();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Domain List</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation STRUCTURED_PROPERTY___GET_DOMAIN_LIST = eINSTANCE.getStructuredProperty__GetDomainList();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Range List</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation STRUCTURED_PROPERTY___GET_RANGE_LIST = eINSTANCE.getStructuredProperty__GetRangeList();
 
 		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.RelationImpl <em>Relation</em>}' class.
@@ -13210,20 +13374,20 @@ public interface OmlPackage extends EPackage {
 		EOperation RELATION___IS_TRANSITIVE = eINSTANCE.getRelation__IsTransitive();
 
 		/**
-		 * The meta object literal for the '<em><b>Get Domain</b></em>' operation.
+		 * The meta object literal for the '<em><b>Get Domains</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EOperation RELATION___GET_DOMAIN = eINSTANCE.getRelation__GetDomain();
+		EOperation RELATION___GET_DOMAINS = eINSTANCE.getRelation__GetDomains();
 
 		/**
-		 * The meta object literal for the '<em><b>Get Range</b></em>' operation.
+		 * The meta object literal for the '<em><b>Get Ranges</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EOperation RELATION___GET_RANGE = eINSTANCE.getRelation__GetRange();
+		EOperation RELATION___GET_RANGES = eINSTANCE.getRelation__GetRanges();
 
 		/**
 		 * The meta object literal for the '<em><b>Get Inverse</b></em>' operation.
@@ -13232,6 +13396,22 @@ public interface OmlPackage extends EPackage {
 		 * @generated
 		 */
 		EOperation RELATION___GET_INVERSE = eINSTANCE.getRelation__GetInverse();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Domain List</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation RELATION___GET_DOMAIN_LIST = eINSTANCE.getRelation__GetDomainList();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Range List</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation RELATION___GET_RANGE_LIST = eINSTANCE.getRelation__GetRangeList();
 
 		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.ForwardRelationImpl <em>Forward Relation</em>}' class.
@@ -13316,20 +13496,20 @@ public interface OmlPackage extends EPackage {
 		EOperation FORWARD_RELATION___IS_TRANSITIVE = eINSTANCE.getForwardRelation__IsTransitive();
 
 		/**
-		 * The meta object literal for the '<em><b>Get Domain</b></em>' operation.
+		 * The meta object literal for the '<em><b>Get Domains</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EOperation FORWARD_RELATION___GET_DOMAIN = eINSTANCE.getForwardRelation__GetDomain();
+		EOperation FORWARD_RELATION___GET_DOMAINS = eINSTANCE.getForwardRelation__GetDomains();
 
 		/**
-		 * The meta object literal for the '<em><b>Get Range</b></em>' operation.
+		 * The meta object literal for the '<em><b>Get Ranges</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EOperation FORWARD_RELATION___GET_RANGE = eINSTANCE.getForwardRelation__GetRange();
+		EOperation FORWARD_RELATION___GET_RANGES = eINSTANCE.getForwardRelation__GetRanges();
 
 		/**
 		 * The meta object literal for the '<em><b>Get Inverse</b></em>' operation.
@@ -13422,20 +13602,20 @@ public interface OmlPackage extends EPackage {
 		EOperation REVERSE_RELATION___IS_TRANSITIVE = eINSTANCE.getReverseRelation__IsTransitive();
 
 		/**
-		 * The meta object literal for the '<em><b>Get Domain</b></em>' operation.
+		 * The meta object literal for the '<em><b>Get Domains</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EOperation REVERSE_RELATION___GET_DOMAIN = eINSTANCE.getReverseRelation__GetDomain();
+		EOperation REVERSE_RELATION___GET_DOMAINS = eINSTANCE.getReverseRelation__GetDomains();
 
 		/**
-		 * The meta object literal for the '<em><b>Get Range</b></em>' operation.
+		 * The meta object literal for the '<em><b>Get Ranges</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EOperation REVERSE_RELATION___GET_RANGE = eINSTANCE.getReverseRelation__GetRange();
+		EOperation REVERSE_RELATION___GET_RANGES = eINSTANCE.getReverseRelation__GetRanges();
 
 		/**
 		 * The meta object literal for the '<em><b>Get Inverse</b></em>' operation.
@@ -13464,20 +13644,20 @@ public interface OmlPackage extends EPackage {
 		EReference UNREIFIED_RELATION__REF = eINSTANCE.getUnreifiedRelation_Ref();
 
 		/**
-		 * The meta object literal for the '<em><b>Get Domain</b></em>' operation.
+		 * The meta object literal for the '<em><b>Get Domains</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EOperation UNREIFIED_RELATION___GET_DOMAIN = eINSTANCE.getUnreifiedRelation__GetDomain();
+		EOperation UNREIFIED_RELATION___GET_DOMAINS = eINSTANCE.getUnreifiedRelation__GetDomains();
 
 		/**
-		 * The meta object literal for the '<em><b>Get Range</b></em>' operation.
+		 * The meta object literal for the '<em><b>Get Ranges</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EOperation UNREIFIED_RELATION___GET_RANGE = eINSTANCE.getUnreifiedRelation__GetRange();
+		EOperation UNREIFIED_RELATION___GET_RANGES = eINSTANCE.getUnreifiedRelation__GetRanges();
 
 		/**
 		 * The meta object literal for the '<em><b>Get Inverse</b></em>' operation.

@@ -416,7 +416,7 @@ public final class OmlSearch extends OmlIndex {
     		supers.addAll(findSpecializationSuperTerms(entity).stream()
     	        .filter(i -> i instanceof RelationEntity)
 	            .map(i -> (RelationEntity)i)
-	            .filter( i -> i.getForwardRelation() != null)
+	            .filter(i -> i.getForwardRelation() != null)
 	            .map(i -> i.getForwardRelation())
 	            .collect(Collectors.toList()));
     	} else if (term instanceof ReverseRelation) {
@@ -424,7 +424,7 @@ public final class OmlSearch extends OmlIndex {
     		supers.addAll(findSpecializationSuperTerms(base).stream()
     	        .filter(i -> i instanceof RelationBase)
 	            .map(i -> (RelationBase)i)
-	            .filter( i -> i.getReverseRelation() != null)
+	            .filter(i -> i.getReverseRelation() != null)
 	            .map(i -> i.getReverseRelation())
 	            .collect(Collectors.toList()));
     	}
@@ -447,7 +447,7 @@ public final class OmlSearch extends OmlIndex {
     		subs.addAll(findSpecializationSubTerms(entity).stream()
     	        .filter(i -> i instanceof RelationEntity)
 	            .map(i -> (RelationEntity)i)
-	            .filter( i -> i.getForwardRelation() != null)
+	            .filter(i -> i.getForwardRelation() != null)
 	            .map(i -> i.getForwardRelation())
 	            .collect(Collectors.toList()));
     	} else if (term instanceof ReverseRelation) {
@@ -455,7 +455,7 @@ public final class OmlSearch extends OmlIndex {
         	subs.addAll(findSpecializationSubTerms(base).stream()
     	        .filter(i -> i instanceof RelationBase)
 	            .map(i -> (RelationBase)i)
-	            .filter( i -> i.getReverseRelation() != null)
+	            .filter(i -> i.getReverseRelation() != null)
 	            .map(i -> i.getReverseRelation())
 	            .collect(Collectors.toList()));
     	}
@@ -521,7 +521,7 @@ public final class OmlSearch extends OmlIndex {
     		supers.addAll(findEquivalenceSuperClassifiers(entity).stream()
     	        .filter(i -> i instanceof RelationEntity)
 	            .map(i -> (RelationEntity)i)
-	            .filter( i -> i.getForwardRelation() != null)
+	            .filter(i -> i.getForwardRelation() != null)
 	            .map(i -> i.getForwardRelation())
 	            .collect(Collectors.toList()));
     	} else if (property instanceof ReverseRelation) {
@@ -530,15 +530,15 @@ public final class OmlSearch extends OmlIndex {
         		supers.addAll(findEquivalenceSuperClassifiers((RelationEntity)base).stream()
             	        .filter(i -> i instanceof RelationEntity)
         	            .map(i -> (RelationEntity)i)
-    		            .filter( i -> i.getReverseRelation() != null)
-    		            .map(i -> i.getReverseRelation())
+        	            .filter(i -> i.getReverseRelation() != null)
+        	            .map(i -> i.getReverseRelation())
     		            .collect(Collectors.toList()));
     		} else if (base instanceof UnreifiedRelation) {
         		supers.addAll(findEquivalenceSuperProperties((UnreifiedRelation)base).stream()
             	        .filter(i -> i instanceof UnreifiedRelation)
         	            .map(i -> (UnreifiedRelation)i)
-			            .filter( i -> i.getReverseRelation() != null)
-			            .map(i -> i.getReverseRelation())
+        	            .filter(i -> i.getReverseRelation() != null)
+        	            .map(i -> i.getReverseRelation())
 			            .collect(Collectors.toList()));
     		}
     	}
@@ -561,7 +561,7 @@ public final class OmlSearch extends OmlIndex {
     		subs.addAll(findEquivalenceSubClassifiers(entity).stream()
     	        .filter(i -> i instanceof RelationEntity)
 	            .map(i -> (RelationEntity)i)
-	            .filter( i -> i.getForwardRelation() != null)
+	            .filter(i -> i.getForwardRelation() != null)
 	            .map(i -> i.getForwardRelation())
 	            .collect(Collectors.toList()));
     	} else if (property instanceof ReverseRelation) {
@@ -570,15 +570,15 @@ public final class OmlSearch extends OmlIndex {
         		subs.addAll(findEquivalenceSubClassifiers((RelationEntity)base).stream()
             	        .filter(i -> i instanceof RelationEntity)
         	            .map(i -> (RelationEntity)i)
-    		            .filter( i -> i.getReverseRelation() != null)
-    		            .map(i -> i.getReverseRelation())
+        	            .filter(i -> i.getReverseRelation() != null)
+        	            .map(i -> i.getReverseRelation())
     		            .collect(Collectors.toList()));
     		} else if (base instanceof UnreifiedRelation) {
         		subs.addAll(findEquivalenceSubProperties((UnreifiedRelation)base).stream()
             	        .filter(i -> i instanceof UnreifiedRelation)
         	            .map(i -> (UnreifiedRelation)i)
-			            .filter( i -> i.getReverseRelation() != null)
-			            .map(i -> i.getReverseRelation())
+        	            .filter(i -> i.getReverseRelation() != null)
+        	            .map(i -> i.getReverseRelation())
 			            .collect(Collectors.toList()));
     		}
     	}
@@ -613,12 +613,14 @@ public final class OmlSearch extends OmlIndex {
             .collect(Collectors.toList()));
         relations.addAll(findRelationBasesWithSource(entity).stream()
             	.filter(r -> r instanceof RelationEntity)
-                .map(r -> ((RelationEntity)r).getForwardRelation())
-                .filter(r -> r != null)
+	            .map(i -> (RelationEntity)i)
+	            .filter(i -> i.getForwardRelation() != null)
+	            .map(i -> i.getForwardRelation())
                 .collect(Collectors.toList()));
         relations.addAll(findRelationBasesWithTarget(entity).stream()
-            .map(r -> r.getReverseRelation())
-            .filter(r -> r != null)
+	            .map(i -> (RelationBase)i)
+	            .filter(i -> i.getReverseRelation() != null)
+	            .map(i -> i.getReverseRelation())
             .collect(Collectors.toList()));
         return relations;
     }
@@ -638,12 +640,14 @@ public final class OmlSearch extends OmlIndex {
             .collect(Collectors.toList()));
         relations.addAll(findRelationBasesWithTarget(entity).stream()
             	.filter(r -> r instanceof RelationEntity)
-                .map(r -> ((RelationEntity)r).getForwardRelation())
-                .filter(r -> r != null)
+	            .map(i -> (RelationEntity)i)
+	            .filter(i -> i.getForwardRelation() != null)
+	            .map(i -> i.getForwardRelation())
                 .collect(Collectors.toList()));
         relations.addAll(findRelationBasesWithSource(entity).stream()
-            .map(r -> r.getReverseRelation())
-            .filter(r -> r != null)
+	            .map(i -> (RelationBase)i)
+	            .filter(i -> i.getReverseRelation() != null)
+	            .map(i -> i.getReverseRelation())
             .collect(Collectors.toList()));
         return relations;
     }

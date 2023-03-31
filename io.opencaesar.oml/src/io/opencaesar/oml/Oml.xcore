@@ -37,6 +37,7 @@ import org.eclipse.emf.ecore.EDiagnosticChain
 import org.eclipse.emf.ecore.EMap
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.InternalEObject
+import org.eclipse.emf.common.util.BasicEList
 
 annotation "https://tabatkins.github.io/bikeshed" as Bikeshed
 annotation "https://tabatkins.github.io/bikeshed/headings" as BikeshedHeadings
@@ -603,13 +604,13 @@ abstract class Type extends SpecializableTerm {
 @Bikeshed(heading="Properties")
 abstract class RelationBase extends SpecializableTerm {
     /*
-     * The entity that represents the source of this relation base
+     * The entities that represent the sources of this relation base
      */
-    refers Entity[?] source
+    refers Entity[*] sources
     /*
-     * The entity that represents the target of this relation base
+     * The entities that represent the targets of this relation base
      */
-    refers Entity[?] target
+    refers Entity[*] targets
     /*
      * The optional reverse relation of this relation base
      */
@@ -886,13 +887,13 @@ abstract class SemanticProperty extends Property {
      */
     op boolean isFunctional()
     /*
-     * Gets the domain of this property
+     * Gets the domains of this property
      */
-    op Classifier getDomain()
+    op Classifier[] getDomainList()
     /*
-     * Gets the range of the property
+     * Gets the ranges of this property
      */
-    op Type getRange()
+    op Type[] getRangeList()
 }
 
 ////////////////////////////////////////
@@ -917,11 +918,18 @@ class ScalarProperty extends SemanticProperty, SpecializableProperty {
     /*
      * The classifier that is the domain of this property
      */
-    refers Classifier[?] domain
+    refers Classifier[*] domains
     /*
      * The scalar that is the range of this property
      */
-    refers Scalar[?] range
+    refers Scalar[*] ranges
+
+    op Classifier[] getDomainList() {
+    	domains
+    }
+    op Type[] getRangeList() {
+    	new BasicEList(ranges)
+    }
 }
 
 /*
@@ -939,13 +947,20 @@ class StructuredProperty extends SemanticProperty, SpecializableProperty {
      */
     boolean functional
     /*
-     * The classifier that is the domain of this property
+     * The classifiers that are the domains of this property
      */
-    refers Classifier[?] domain
+    refers Classifier[*] domains
     /*
-     * The structure that is the range of this property
+     * The structures that are the range of this property
      */
-    refers Structure[?] range
+    refers Structure[*] ranges
+
+    op Classifier[] getDomainList() {
+    	domains
+    }
+    op Type[] getRangeList() {
+    	new BasicEList(ranges)
+    }
 }
 
 /*
@@ -981,15 +996,22 @@ abstract class Relation extends SemanticProperty {
     /*
      * Gets the domain of this relation
      */
-    op Entity getDomain()
+    op Entity[*] getDomains()
     /*
      * Gets the range of the relation
      */
-    op Entity getRange()
+    op Entity[*] getRanges()
     /*
      * Gets the inverse of this relation
      */
     op Relation[?] getInverse()
+
+    op Classifier[] getDomainList() {
+    	new BasicEList(getDomains())
+    }
+    op Type[] getRangeList() {
+    	new BasicEList(getRanges())
+    }
 }
 
 ////////////////////////////////////////
@@ -1032,11 +1054,11 @@ class ForwardRelation extends Relation {
     op boolean isTransitive() {
         relationEntity.transitive
     }
-    op Entity getDomain() {
-		relationEntity.source
+    op Entity[*] getDomains() {
+		relationEntity.sources
     }
-    op Entity getRange() {
-		relationEntity.target
+    op Entity[*] getRanges() {
+		relationEntity.targets
     }
     op Relation getInverse() {
 		relationEntity.reverseRelation
@@ -1079,11 +1101,11 @@ class ReverseRelation extends Relation {
     op boolean isTransitive() {
         relationBase.transitive
     }
-    op Entity getDomain() {
-        relationBase.target
+    op Entity[*] getDomains() {
+        relationBase.targets
     }
-    op Entity getRange() {
-        relationBase.source
+    op Entity[*] getRanges() {
+        relationBase.sources
     }
     op Relation getInverse() {
         if (relationBase instanceof RelationEntity)
@@ -1103,11 +1125,11 @@ class UnreifiedRelation extends Relation, RelationBase, SpecializableProperty {
 	 */
 	refers Relation ref
 
-    op Entity getDomain() {
-        source
+    op Entity[*] getDomains() {
+        sources
     }
-    op Entity getRange() {
-    	target
+    op Entity[] getRanges() {
+    	targets
     }
     op Relation getInverse() {
 		reverseRelation

@@ -65,8 +65,8 @@ public class UnreifiedRelationItemProvider extends RelationItemProvider {
 			super.getPropertyDescriptors(object);
 
 			addOwningVocabularyPropertyDescriptor(object);
-			addSourcePropertyDescriptor(object);
-			addTargetPropertyDescriptor(object);
+			addSourcesPropertyDescriptor(object);
+			addTargetsPropertyDescriptor(object);
 			addFunctionalPropertyDescriptor(object);
 			addInverseFunctionalPropertyDescriptor(object);
 			addSymmetricPropertyDescriptor(object);
@@ -102,19 +102,19 @@ public class UnreifiedRelationItemProvider extends RelationItemProvider {
 	}
 
 	/**
-	 * This adds a property descriptor for the Source feature.
+	 * This adds a property descriptor for the Sources feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addSourcePropertyDescriptor(Object object) {
+	protected void addSourcesPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_RelationBase_source_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_RelationBase_source_feature", "_UI_RelationBase_type"),
-				 OmlPackage.Literals.RELATION_BASE__SOURCE,
+				 getString("_UI_RelationBase_sources_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_RelationBase_sources_feature", "_UI_RelationBase_type"),
+				 OmlPackage.Literals.RELATION_BASE__SOURCES,
 				 true,
 				 false,
 				 true,
@@ -124,19 +124,19 @@ public class UnreifiedRelationItemProvider extends RelationItemProvider {
 	}
 
 	/**
-	 * This adds a property descriptor for the Target feature.
+	 * This adds a property descriptor for the Targets feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addTargetPropertyDescriptor(Object object) {
+	protected void addTargetsPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_RelationBase_target_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_RelationBase_target_feature", "_UI_RelationBase_type"),
-				 OmlPackage.Literals.RELATION_BASE__TARGET,
+				 getString("_UI_RelationBase_targets_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_RelationBase_targets_feature", "_UI_RelationBase_type"),
+				 OmlPackage.Literals.RELATION_BASE__TARGETS,
 				 true,
 				 false,
 				 true,

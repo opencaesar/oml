@@ -18,6 +18,7 @@
  */
 package io.opencaesar.oml;
 
+import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -36,8 +37,8 @@ package io.opencaesar.oml;
  * <ul>
  *   <li>{@link io.opencaesar.oml.ScalarProperty#getRef <em>Ref</em>}</li>
  *   <li>{@link io.opencaesar.oml.ScalarProperty#isFunctional <em>Functional</em>}</li>
- *   <li>{@link io.opencaesar.oml.ScalarProperty#getDomain <em>Domain</em>}</li>
- *   <li>{@link io.opencaesar.oml.ScalarProperty#getRange <em>Range</em>}</li>
+ *   <li>{@link io.opencaesar.oml.ScalarProperty#getDomains <em>Domains</em>}</li>
+ *   <li>{@link io.opencaesar.oml.ScalarProperty#getRanges <em>Ranges</em>}</li>
  * </ul>
  *
  * @see io.opencaesar.oml.OmlPackage#getScalarProperty()
@@ -96,53 +97,49 @@ public interface ScalarProperty extends SemanticProperty, SpecializableProperty 
 	void setFunctional(boolean value);
 
 	/**
-	 * Returns the value of the '<em><b>Domain</b></em>' reference.
+	 * Returns the value of the '<em><b>Domains</b></em>' reference list.
+	 * The list contents are of type {@link io.opencaesar.oml.Classifier}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * The classifier that is the domain of this property
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Domain</em>' reference.
-	 * @see #setDomain(Classifier)
-	 * @see io.opencaesar.oml.OmlPackage#getScalarProperty_Domain()
+	 * @return the value of the '<em>Domains</em>' reference list.
+	 * @see io.opencaesar.oml.OmlPackage#getScalarProperty_Domains()
 	 * @model
 	 * @generated
 	 */
-	Classifier getDomain();
+	EList<Classifier> getDomains();
 
 	/**
-	 * Sets the value of the '{@link io.opencaesar.oml.ScalarProperty#getDomain <em>Domain</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Domain</em>' reference.
-	 * @see #getDomain()
-	 * @generated
-	 */
-	void setDomain(Classifier value);
-
-	/**
-	 * Returns the value of the '<em><b>Range</b></em>' reference.
+	 * Returns the value of the '<em><b>Ranges</b></em>' reference list.
+	 * The list contents are of type {@link io.opencaesar.oml.Scalar}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * The scalar that is the range of this property
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Range</em>' reference.
-	 * @see #setRange(Scalar)
-	 * @see io.opencaesar.oml.OmlPackage#getScalarProperty_Range()
+	 * @return the value of the '<em>Ranges</em>' reference list.
+	 * @see io.opencaesar.oml.OmlPackage#getScalarProperty_Ranges()
 	 * @model
 	 * @generated
 	 */
-	Scalar getRange();
+	EList<Scalar> getRanges();
 
 	/**
-	 * Sets the value of the '{@link io.opencaesar.oml.ScalarProperty#getRange <em>Range</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Range</em>' reference.
-	 * @see #getRange()
+	 * @model kind="operation" unique="false"
 	 * @generated
 	 */
-	void setRange(Scalar value);
+	EList<Classifier> getDomainList();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
+	EList<Type> getRangeList();
 
 } // ScalarProperty

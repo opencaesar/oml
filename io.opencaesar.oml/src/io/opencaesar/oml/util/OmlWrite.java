@@ -375,8 +375,8 @@ public class OmlWrite {
      * 
      * @param vocabulary the context vocabulary
      * @param name the name of the new concept
-     * @param source the given source entity
-     * @param target the given target entity
+     * @param sources the given list of source entities
+     * @param targets the given list of target entities
      * @param functional whether the relation entity is functional
      * @param inverseFunctional whether the relation entity is inverse functional
      * @param symmetric whether the relation entity is symmetric
@@ -386,7 +386,7 @@ public class OmlWrite {
      * @param transitive whether the relation entity is transitive
      * @return a new relation entity that is added to the given vocabulary
      */
-    public static RelationEntity addRelationEntity(Vocabulary vocabulary, String name, Entity source, Entity target, 
+    public static RelationEntity addRelationEntity(Vocabulary vocabulary, String name, List<Entity> sources, List<Entity> targets, 
         boolean functional, boolean inverseFunctional, boolean symmetric, 
         boolean asymmetric, boolean reflexive, boolean irreflexive, boolean transitive) {
         final RelationEntity relation = create(RelationEntity.class);
@@ -398,8 +398,8 @@ public class OmlWrite {
         relation.setReflexive(reflexive);
         relation.setIrreflexive(irreflexive);
         relation.setTransitive(transitive);
-        setCrossReference(vocabulary, relation, OmlPackage.Literals.RELATION_BASE__SOURCE, source);
-        setCrossReference(vocabulary, relation, OmlPackage.Literals.RELATION_BASE__TARGET, target);
+        setCrossReferences(vocabulary, relation, OmlPackage.Literals.RELATION_BASE__SOURCES, sources);
+        setCrossReferences(vocabulary, relation, OmlPackage.Literals.RELATION_BASE__TARGETS, targets);
         vocabulary.getOwnedStatements().add(relation);
         return relation;
     }
@@ -443,18 +443,18 @@ public class OmlWrite {
      * 
      * @param vocabulary the context vocabulary
      * @param name the name of the new scalar property
-     * @param domain the given domain classifier
-     * @param range the given range scalar
+     * @param domains the given list of domain classifiers
+     * @param ranges the given list of range scalars
      * @param functional whether the scalar property is functional
      * @return a new scalar property that is added to the given vocabulary
      */
     public static ScalarProperty addScalarProperty(Vocabulary vocabulary, String name,
-        Classifier domain, Scalar range, boolean functional) {
+        List<Classifier> domains, List<Scalar> ranges, boolean functional) {
         final ScalarProperty property = create(ScalarProperty.class);
         property.setName(name);
         property.setFunctional(functional);
-        setCrossReference(vocabulary, property, OmlPackage.Literals.SCALAR_PROPERTY__DOMAIN, domain);
-        setCrossReference(vocabulary, property, OmlPackage.Literals.SCALAR_PROPERTY__RANGE, range);
+        setCrossReferences(vocabulary, property, OmlPackage.Literals.SCALAR_PROPERTY__DOMAINS, domains);
+        setCrossReferences(vocabulary, property, OmlPackage.Literals.SCALAR_PROPERTY__RANGES, ranges);
         vocabulary.getOwnedStatements().add(property);
         return property;
     }
@@ -466,18 +466,18 @@ public class OmlWrite {
      * 
      * @param vocabulary the context vocabulary
      * @param name the name of the new structured property
-     * @param domain the given domain classifier
-     * @param range the given target structure
+     * @param domains the given list of domain classifiers
+     * @param ranges the given list of target structures
      * @param functional whether the structured property is functional
      * @return a new structured property that is added to the given vocabulary
      */
     public static StructuredProperty addStructuredProperty(Vocabulary vocabulary, String name, 
-        Classifier domain, Structure range, boolean functional) {
+        List<Classifier> domains, List<Structure> ranges, boolean functional) {
         final StructuredProperty property = create(StructuredProperty.class);
         property.setName(name);
         property.setFunctional(functional);
-        setCrossReference(vocabulary, property, OmlPackage.Literals.STRUCTURED_PROPERTY__DOMAIN, domain);
-        setCrossReference(vocabulary, property, OmlPackage.Literals.STRUCTURED_PROPERTY__RANGE, range);
+        setCrossReferences(vocabulary, property, OmlPackage.Literals.STRUCTURED_PROPERTY__DOMAINS, domains);
+        setCrossReferences(vocabulary, property, OmlPackage.Literals.STRUCTURED_PROPERTY__RANGES, ranges);
         vocabulary.getOwnedStatements().add(property);
         return property;
     }
@@ -556,8 +556,8 @@ public class OmlWrite {
      * 
      * @param vocabulary the context vocabulary
      * @param name the name of the new concept
-     * @param source the given source entity
-     * @param target the given target entity
+     * @param sources the given list of source entities
+     * @param targets the given list of target entities
      * @param functional whether the relation entity is functional
      * @param inverseFunctional whether the relation entity is inverse functional
      * @param symmetric whether the relation entity is symmetric
@@ -567,7 +567,7 @@ public class OmlWrite {
      * @param transitive whether the relation entity is transitive
      * @return a new unreified relation that is added to the given vocabulary
      */
-    public static UnreifiedRelation addUnreifiedRelation(Vocabulary vocabulary, String name, Entity source, Entity target, 
+    public static UnreifiedRelation addUnreifiedRelation(Vocabulary vocabulary, String name, List<Entity> sources, List<Entity> targets, 
         boolean functional, boolean inverseFunctional, boolean symmetric, 
         boolean asymmetric, boolean reflexive, boolean irreflexive, boolean transitive) {
         final UnreifiedRelation relation = create(UnreifiedRelation.class);
@@ -579,8 +579,8 @@ public class OmlWrite {
         relation.setReflexive(reflexive);
         relation.setIrreflexive(irreflexive);
         relation.setTransitive(transitive);
-        setCrossReference(vocabulary, relation, OmlPackage.Literals.RELATION_BASE__SOURCE, source);
-        setCrossReference(vocabulary, relation, OmlPackage.Literals.RELATION_BASE__TARGET, target);
+        setCrossReferences(vocabulary, relation, OmlPackage.Literals.RELATION_BASE__SOURCES, sources);
+        setCrossReferences(vocabulary, relation, OmlPackage.Literals.RELATION_BASE__TARGETS, targets);
         vocabulary.getOwnedStatements().add(relation);
         return relation;
     }

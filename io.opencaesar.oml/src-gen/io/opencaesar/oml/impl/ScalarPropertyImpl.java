@@ -27,14 +27,18 @@ import io.opencaesar.oml.SpecializableProperty;
 import io.opencaesar.oml.SpecializableTerm;
 import io.opencaesar.oml.SpecializationAxiom;
 import io.opencaesar.oml.Statement;
+import io.opencaesar.oml.Type;
 import io.opencaesar.oml.Vocabulary;
 import io.opencaesar.oml.VocabularyStatement;
+
+import java.lang.reflect.InvocationTargetException;
 
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
@@ -43,6 +47,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -59,8 +64,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link io.opencaesar.oml.impl.ScalarPropertyImpl#getOwnedEquivalences <em>Owned Equivalences</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.ScalarPropertyImpl#getRef <em>Ref</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.ScalarPropertyImpl#isFunctional <em>Functional</em>}</li>
- *   <li>{@link io.opencaesar.oml.impl.ScalarPropertyImpl#getDomain <em>Domain</em>}</li>
- *   <li>{@link io.opencaesar.oml.impl.ScalarPropertyImpl#getRange <em>Range</em>}</li>
+ *   <li>{@link io.opencaesar.oml.impl.ScalarPropertyImpl#getDomains <em>Domains</em>}</li>
+ *   <li>{@link io.opencaesar.oml.impl.ScalarPropertyImpl#getRanges <em>Ranges</em>}</li>
  * </ul>
  *
  * @generated
@@ -117,24 +122,24 @@ public class ScalarPropertyImpl extends SemanticPropertyImpl implements ScalarPr
 	protected boolean functional = FUNCTIONAL_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getDomain() <em>Domain</em>}' reference.
+	 * The cached value of the '{@link #getDomains() <em>Domains</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getDomain()
+	 * @see #getDomains()
 	 * @generated
 	 * @ordered
 	 */
-	protected Classifier domain;
+	protected EList<Classifier> domains;
 
 	/**
-	 * The cached value of the '{@link #getRange() <em>Range</em>}' reference.
+	 * The cached value of the '{@link #getRanges() <em>Ranges</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getRange()
+	 * @see #getRanges()
 	 * @generated
 	 * @ordered
 	 */
-	protected Scalar range;
+	protected EList<Scalar> ranges;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -303,25 +308,11 @@ public class ScalarPropertyImpl extends SemanticPropertyImpl implements ScalarPr
 	 * @generated
 	 */
 	@Override
-	public Classifier getDomain() {
-		if (domain != null && domain.eIsProxy()) {
-			InternalEObject oldDomain = (InternalEObject)domain;
-			domain = (Classifier)eResolveProxy(oldDomain);
-			if (domain != oldDomain) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, OmlPackage.SCALAR_PROPERTY__DOMAIN, oldDomain, domain));
-			}
+	public EList<Classifier> getDomains() {
+		if (domains == null) {
+			domains = new EObjectResolvingEList<Classifier>(Classifier.class, this, OmlPackage.SCALAR_PROPERTY__DOMAINS);
 		}
-		return domain;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Classifier basicGetDomain() {
-		return domain;
+		return domains;
 	}
 
 	/**
@@ -330,38 +321,11 @@ public class ScalarPropertyImpl extends SemanticPropertyImpl implements ScalarPr
 	 * @generated
 	 */
 	@Override
-	public void setDomain(Classifier newDomain) {
-		Classifier oldDomain = domain;
-		domain = newDomain;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.SCALAR_PROPERTY__DOMAIN, oldDomain, domain));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Scalar getRange() {
-		if (range != null && range.eIsProxy()) {
-			InternalEObject oldRange = (InternalEObject)range;
-			range = (Scalar)eResolveProxy(oldRange);
-			if (range != oldRange) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, OmlPackage.SCALAR_PROPERTY__RANGE, oldRange, range));
-			}
+	public EList<Scalar> getRanges() {
+		if (ranges == null) {
+			ranges = new EObjectResolvingEList<Scalar>(Scalar.class, this, OmlPackage.SCALAR_PROPERTY__RANGES);
 		}
-		return range;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Scalar basicGetRange() {
-		return range;
+		return ranges;
 	}
 
 	/**
@@ -370,11 +334,19 @@ public class ScalarPropertyImpl extends SemanticPropertyImpl implements ScalarPr
 	 * @generated
 	 */
 	@Override
-	public void setRange(Scalar newRange) {
-		Scalar oldRange = range;
-		range = newRange;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.SCALAR_PROPERTY__RANGE, oldRange, range));
+	public EList<Classifier> getDomainList() {
+		return this.getDomains();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EList<Type> getRangeList() {
+		EList<Scalar> _ranges = this.getRanges();
+		return new BasicEList<Type>(_ranges);
 	}
 
 	/**
@@ -450,12 +422,10 @@ public class ScalarPropertyImpl extends SemanticPropertyImpl implements ScalarPr
 				return basicGetRef();
 			case OmlPackage.SCALAR_PROPERTY__FUNCTIONAL:
 				return isFunctional();
-			case OmlPackage.SCALAR_PROPERTY__DOMAIN:
-				if (resolve) return getDomain();
-				return basicGetDomain();
-			case OmlPackage.SCALAR_PROPERTY__RANGE:
-				if (resolve) return getRange();
-				return basicGetRange();
+			case OmlPackage.SCALAR_PROPERTY__DOMAINS:
+				return getDomains();
+			case OmlPackage.SCALAR_PROPERTY__RANGES:
+				return getRanges();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -486,11 +456,13 @@ public class ScalarPropertyImpl extends SemanticPropertyImpl implements ScalarPr
 			case OmlPackage.SCALAR_PROPERTY__FUNCTIONAL:
 				setFunctional((Boolean)newValue);
 				return;
-			case OmlPackage.SCALAR_PROPERTY__DOMAIN:
-				setDomain((Classifier)newValue);
+			case OmlPackage.SCALAR_PROPERTY__DOMAINS:
+				getDomains().clear();
+				getDomains().addAll((Collection<? extends Classifier>)newValue);
 				return;
-			case OmlPackage.SCALAR_PROPERTY__RANGE:
-				setRange((Scalar)newValue);
+			case OmlPackage.SCALAR_PROPERTY__RANGES:
+				getRanges().clear();
+				getRanges().addAll((Collection<? extends Scalar>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -519,11 +491,11 @@ public class ScalarPropertyImpl extends SemanticPropertyImpl implements ScalarPr
 			case OmlPackage.SCALAR_PROPERTY__FUNCTIONAL:
 				setFunctional(FUNCTIONAL_EDEFAULT);
 				return;
-			case OmlPackage.SCALAR_PROPERTY__DOMAIN:
-				setDomain((Classifier)null);
+			case OmlPackage.SCALAR_PROPERTY__DOMAINS:
+				getDomains().clear();
 				return;
-			case OmlPackage.SCALAR_PROPERTY__RANGE:
-				setRange((Scalar)null);
+			case OmlPackage.SCALAR_PROPERTY__RANGES:
+				getRanges().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -547,10 +519,10 @@ public class ScalarPropertyImpl extends SemanticPropertyImpl implements ScalarPr
 				return ref != null;
 			case OmlPackage.SCALAR_PROPERTY__FUNCTIONAL:
 				return functional != FUNCTIONAL_EDEFAULT;
-			case OmlPackage.SCALAR_PROPERTY__DOMAIN:
-				return domain != null;
-			case OmlPackage.SCALAR_PROPERTY__RANGE:
-				return range != null;
+			case OmlPackage.SCALAR_PROPERTY__DOMAINS:
+				return domains != null && !domains.isEmpty();
+			case OmlPackage.SCALAR_PROPERTY__RANGES:
+				return ranges != null && !ranges.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -619,6 +591,22 @@ public class ScalarPropertyImpl extends SemanticPropertyImpl implements ScalarPr
 			}
 		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case OmlPackage.SCALAR_PROPERTY___GET_DOMAIN_LIST:
+				return getDomainList();
+			case OmlPackage.SCALAR_PROPERTY___GET_RANGE_LIST:
+				return getRangeList();
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 	/**

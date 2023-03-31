@@ -18,6 +18,7 @@
  */
 package io.opencaesar.oml;
 
+import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -36,8 +37,8 @@ package io.opencaesar.oml;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link io.opencaesar.oml.RelationBase#getSource <em>Source</em>}</li>
- *   <li>{@link io.opencaesar.oml.RelationBase#getTarget <em>Target</em>}</li>
+ *   <li>{@link io.opencaesar.oml.RelationBase#getSources <em>Sources</em>}</li>
+ *   <li>{@link io.opencaesar.oml.RelationBase#getTargets <em>Targets</em>}</li>
  *   <li>{@link io.opencaesar.oml.RelationBase#getReverseRelation <em>Reverse Relation</em>}</li>
  *   <li>{@link io.opencaesar.oml.RelationBase#isFunctional <em>Functional</em>}</li>
  *   <li>{@link io.opencaesar.oml.RelationBase#isInverseFunctional <em>Inverse Functional</em>}</li>
@@ -55,54 +56,34 @@ package io.opencaesar.oml;
  */
 public interface RelationBase extends SpecializableTerm {
 	/**
-	 * Returns the value of the '<em><b>Source</b></em>' reference.
+	 * Returns the value of the '<em><b>Sources</b></em>' reference list.
+	 * The list contents are of type {@link io.opencaesar.oml.Entity}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The entity that represents the source of this relation base
+	 * The entities that represent the sources of this relation base
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Source</em>' reference.
-	 * @see #setSource(Entity)
-	 * @see io.opencaesar.oml.OmlPackage#getRelationBase_Source()
+	 * @return the value of the '<em>Sources</em>' reference list.
+	 * @see io.opencaesar.oml.OmlPackage#getRelationBase_Sources()
 	 * @model
 	 * @generated
 	 */
-	Entity getSource();
+	EList<Entity> getSources();
 
 	/**
-	 * Sets the value of the '{@link io.opencaesar.oml.RelationBase#getSource <em>Source</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Source</em>' reference.
-	 * @see #getSource()
-	 * @generated
-	 */
-	void setSource(Entity value);
-
-	/**
-	 * Returns the value of the '<em><b>Target</b></em>' reference.
+	 * Returns the value of the '<em><b>Targets</b></em>' reference list.
+	 * The list contents are of type {@link io.opencaesar.oml.Entity}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The entity that represents the target of this relation base
+	 * The entities that represent the targets of this relation base
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Target</em>' reference.
-	 * @see #setTarget(Entity)
-	 * @see io.opencaesar.oml.OmlPackage#getRelationBase_Target()
+	 * @return the value of the '<em>Targets</em>' reference list.
+	 * @see io.opencaesar.oml.OmlPackage#getRelationBase_Targets()
 	 * @model
 	 * @generated
 	 */
-	Entity getTarget();
-
-	/**
-	 * Sets the value of the '{@link io.opencaesar.oml.RelationBase#getTarget <em>Target</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Target</em>' reference.
-	 * @see #getTarget()
-	 * @generated
-	 */
-	void setTarget(Entity value);
+	EList<Entity> getTargets();
 
 	/**
 	 * Returns the value of the '<em><b>Reverse Relation</b></em>' containment reference.

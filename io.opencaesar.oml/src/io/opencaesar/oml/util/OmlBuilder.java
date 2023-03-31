@@ -463,8 +463,8 @@ public class OmlBuilder {
      * 
      * @param vocabulary the context vocabulary
      * @param name the name of the new concept
-     * @param sourceIri the iri of the source entity
-     * @param targetIri the iri of the target entity
+     * @param sourceIris the iris of the source entities
+     * @param targetIris the iris of the target entities
      * @param functional whether the relation entity is functional
      * @param inverseFunctional whether the relation entity is inverse functional
      * @param symmetric whether the relation entity is symmetric
@@ -474,12 +474,12 @@ public class OmlBuilder {
      * @param transitive whether the relation entity is transitive
      * @return a new relation entity that is added to the given vocabulary
      */
-    public RelationEntity addRelationEntity(Vocabulary vocabulary, String name, String sourceIri, String targetIri, 
+    public RelationEntity addRelationEntity(Vocabulary vocabulary, String name, List<String> sourceIris, List<String> targetIris, 
         boolean functional, boolean inverseFunctional, boolean symmetric, 
         boolean asymmetric, boolean reflexive, boolean irreflexive, boolean transitive) {
         final RelationEntity relation = OmlWrite.addRelationEntity(vocabulary, name, null, null, functional, inverseFunctional, symmetric, asymmetric, reflexive, irreflexive, transitive);
-        setCrossReference(vocabulary, relation, OmlPackage.Literals.RELATION_BASE__SOURCE, sourceIri);
-        setCrossReference(vocabulary, relation, OmlPackage.Literals.RELATION_BASE__TARGET, targetIri);
+        setCrossReferences(vocabulary, relation, OmlPackage.Literals.RELATION_BASE__SOURCES, sourceIris);
+        setCrossReferences(vocabulary, relation, OmlPackage.Literals.RELATION_BASE__TARGETS, targetIris);
         return relation;
     }
 
@@ -518,16 +518,16 @@ public class OmlBuilder {
      * 
      * @param vocabulary the context vocabulary
      * @param name the name of the new scalar property
-     * @param domainIri the iri of the domain classifier
-     * @param rangeIri the iri of the rqnge scalar
+     * @param domainIris the iris of the domain classifiers
+     * @param rangeIris the iris of the range scalars
      * @param functional whether the scalar property is functional
      * @return a new scalar property that is added to the given vocabulary
      */
     public ScalarProperty addScalarProperty(Vocabulary vocabulary, String name,
-        String domainIri, String rangeIri, boolean functional) {
+        List<String> domainIris, List<String> rangeIris, boolean functional) {
         final ScalarProperty property = OmlWrite.addScalarProperty(vocabulary, name, null, null, functional);
-        setCrossReference(vocabulary, property, OmlPackage.Literals.SCALAR_PROPERTY__DOMAIN, domainIri);
-        setCrossReference(vocabulary, property, OmlPackage.Literals.SCALAR_PROPERTY__RANGE, rangeIri);
+        setCrossReferences(vocabulary, property, OmlPackage.Literals.SCALAR_PROPERTY__DOMAINS, domainIris);
+        setCrossReferences(vocabulary, property, OmlPackage.Literals.SCALAR_PROPERTY__RANGES, rangeIris);
         return property;
     }
     
@@ -538,16 +538,16 @@ public class OmlBuilder {
      * 
      * @param vocabulary the context vocabulary
      * @param name the name of the new structured property
-     * @param domainIri the iri of the domain classifier
-     * @param rangeIri the iri of the range structure
+     * @param domainIris the iris of the domain classifiers
+     * @param rangeIris the iris of the range structures
      * @param functional whether the structured property is functional
      * @return a new structured property that is added to the given vocabulary
      */
     public StructuredProperty addStructuredProperty(Vocabulary vocabulary, String name, 
-        String domainIri, String rangeIri, boolean functional) {
+        List<String> domainIris, List<String> rangeIris, boolean functional) {
         final StructuredProperty property = OmlWrite.addStructuredProperty(vocabulary, name, null, null, functional);
-        setCrossReference(vocabulary, property, OmlPackage.Literals.STRUCTURED_PROPERTY__DOMAIN, domainIri);
-        setCrossReference(vocabulary, property, OmlPackage.Literals.STRUCTURED_PROPERTY__RANGE, rangeIri);
+        setCrossReferences(vocabulary, property, OmlPackage.Literals.STRUCTURED_PROPERTY__DOMAINS, domainIris);
+        setCrossReferences(vocabulary, property, OmlPackage.Literals.STRUCTURED_PROPERTY__RANGES, rangeIris);
         return property;
     }
     
@@ -621,12 +621,12 @@ public class OmlBuilder {
      * @param transitive whether the relation entity is transitive
      * @return a new relation entity that is added to the given vocabulary
      */
-    public UnreifiedRelation addUnreifiedRelation(Vocabulary vocabulary, String name, String sourceIri, String targetIri, 
+    public UnreifiedRelation addUnreifiedRelation(Vocabulary vocabulary, String name, List<String> sourceIris, List<String> targetIris, 
         boolean functional, boolean inverseFunctional, boolean symmetric, 
         boolean asymmetric, boolean reflexive, boolean irreflexive, boolean transitive) {
         final UnreifiedRelation relation = OmlWrite.addUnreifiedRelation(vocabulary, name, null, null, functional, inverseFunctional, symmetric, asymmetric, reflexive, irreflexive, transitive);
-        setCrossReference(vocabulary, relation, OmlPackage.Literals.RELATION_BASE__SOURCE, sourceIri);
-        setCrossReference(vocabulary, relation, OmlPackage.Literals.RELATION_BASE__TARGET, targetIri);
+        setCrossReferences(vocabulary, relation, OmlPackage.Literals.RELATION_BASE__SOURCES, sourceIris);
+        setCrossReferences(vocabulary, relation, OmlPackage.Literals.RELATION_BASE__TARGETS, targetIris);
         return relation;
     }
 

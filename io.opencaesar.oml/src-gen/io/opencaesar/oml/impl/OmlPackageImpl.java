@@ -1571,7 +1571,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getRelationBase_Source() {
+	public EReference getRelationBase_Sources() {
 		return (EReference)relationBaseEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -1581,7 +1581,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getRelationBase_Target() {
+	public EReference getRelationBase_Targets() {
 		return (EReference)relationBaseEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -2001,7 +2001,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EOperation getSemanticProperty__GetDomain() {
+	public EOperation getSemanticProperty__GetDomainList() {
 		return semanticPropertyEClass.getEOperations().get(1);
 	}
 
@@ -2011,7 +2011,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EOperation getSemanticProperty__GetRange() {
+	public EOperation getSemanticProperty__GetRangeList() {
 		return semanticPropertyEClass.getEOperations().get(2);
 	}
 
@@ -2051,7 +2051,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getScalarProperty_Domain() {
+	public EReference getScalarProperty_Domains() {
 		return (EReference)scalarPropertyEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -2061,8 +2061,28 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getScalarProperty_Range() {
+	public EReference getScalarProperty_Ranges() {
 		return (EReference)scalarPropertyEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getScalarProperty__GetDomainList() {
+		return scalarPropertyEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getScalarProperty__GetRangeList() {
+		return scalarPropertyEClass.getEOperations().get(1);
 	}
 
 	/**
@@ -2101,7 +2121,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getStructuredProperty_Domain() {
+	public EReference getStructuredProperty_Domains() {
 		return (EReference)structuredPropertyEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -2111,8 +2131,28 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getStructuredProperty_Range() {
+	public EReference getStructuredProperty_Ranges() {
 		return (EReference)structuredPropertyEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getStructuredProperty__GetDomainList() {
+		return structuredPropertyEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getStructuredProperty__GetRangeList() {
+		return structuredPropertyEClass.getEOperations().get(1);
 	}
 
 	/**
@@ -2191,7 +2231,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EOperation getRelation__GetDomain() {
+	public EOperation getRelation__GetDomains() {
 		return relationEClass.getEOperations().get(6);
 	}
 
@@ -2201,7 +2241,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EOperation getRelation__GetRange() {
+	public EOperation getRelation__GetRanges() {
 		return relationEClass.getEOperations().get(7);
 	}
 
@@ -2213,6 +2253,26 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	@Override
 	public EOperation getRelation__GetInverse() {
 		return relationEClass.getEOperations().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getRelation__GetDomainList() {
+		return relationEClass.getEOperations().get(9);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getRelation__GetRangeList() {
+		return relationEClass.getEOperations().get(10);
 	}
 
 	/**
@@ -2321,7 +2381,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EOperation getForwardRelation__GetDomain() {
+	public EOperation getForwardRelation__GetDomains() {
 		return forwardRelationEClass.getEOperations().get(8);
 	}
 
@@ -2331,7 +2391,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EOperation getForwardRelation__GetRange() {
+	public EOperation getForwardRelation__GetRanges() {
 		return forwardRelationEClass.getEOperations().get(9);
 	}
 
@@ -2451,7 +2511,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EOperation getReverseRelation__GetDomain() {
+	public EOperation getReverseRelation__GetDomains() {
 		return reverseRelationEClass.getEOperations().get(8);
 	}
 
@@ -2461,7 +2521,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EOperation getReverseRelation__GetRange() {
+	public EOperation getReverseRelation__GetRanges() {
 		return reverseRelationEClass.getEOperations().get(9);
 	}
 
@@ -2501,7 +2561,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EOperation getUnreifiedRelation__GetDomain() {
+	public EOperation getUnreifiedRelation__GetDomains() {
 		return unreifiedRelationEClass.getEOperations().get(0);
 	}
 
@@ -2511,7 +2571,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EOperation getUnreifiedRelation__GetRange() {
+	public EOperation getUnreifiedRelation__GetRanges() {
 		return unreifiedRelationEClass.getEOperations().get(1);
 	}
 
@@ -3781,8 +3841,8 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		typeEClass = createEClass(TYPE);
 
 		relationBaseEClass = createEClass(RELATION_BASE);
-		createEReference(relationBaseEClass, RELATION_BASE__SOURCE);
-		createEReference(relationBaseEClass, RELATION_BASE__TARGET);
+		createEReference(relationBaseEClass, RELATION_BASE__SOURCES);
+		createEReference(relationBaseEClass, RELATION_BASE__TARGETS);
 		createEReference(relationBaseEClass, RELATION_BASE__REVERSE_RELATION);
 		createEAttribute(relationBaseEClass, RELATION_BASE__FUNCTIONAL);
 		createEAttribute(relationBaseEClass, RELATION_BASE__INVERSE_FUNCTIONAL);
@@ -3834,20 +3894,24 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 
 		semanticPropertyEClass = createEClass(SEMANTIC_PROPERTY);
 		createEOperation(semanticPropertyEClass, SEMANTIC_PROPERTY___IS_FUNCTIONAL);
-		createEOperation(semanticPropertyEClass, SEMANTIC_PROPERTY___GET_DOMAIN);
-		createEOperation(semanticPropertyEClass, SEMANTIC_PROPERTY___GET_RANGE);
+		createEOperation(semanticPropertyEClass, SEMANTIC_PROPERTY___GET_DOMAIN_LIST);
+		createEOperation(semanticPropertyEClass, SEMANTIC_PROPERTY___GET_RANGE_LIST);
 
 		scalarPropertyEClass = createEClass(SCALAR_PROPERTY);
 		createEReference(scalarPropertyEClass, SCALAR_PROPERTY__REF);
 		createEAttribute(scalarPropertyEClass, SCALAR_PROPERTY__FUNCTIONAL);
-		createEReference(scalarPropertyEClass, SCALAR_PROPERTY__DOMAIN);
-		createEReference(scalarPropertyEClass, SCALAR_PROPERTY__RANGE);
+		createEReference(scalarPropertyEClass, SCALAR_PROPERTY__DOMAINS);
+		createEReference(scalarPropertyEClass, SCALAR_PROPERTY__RANGES);
+		createEOperation(scalarPropertyEClass, SCALAR_PROPERTY___GET_DOMAIN_LIST);
+		createEOperation(scalarPropertyEClass, SCALAR_PROPERTY___GET_RANGE_LIST);
 
 		structuredPropertyEClass = createEClass(STRUCTURED_PROPERTY);
 		createEReference(structuredPropertyEClass, STRUCTURED_PROPERTY__REF);
 		createEAttribute(structuredPropertyEClass, STRUCTURED_PROPERTY__FUNCTIONAL);
-		createEReference(structuredPropertyEClass, STRUCTURED_PROPERTY__DOMAIN);
-		createEReference(structuredPropertyEClass, STRUCTURED_PROPERTY__RANGE);
+		createEReference(structuredPropertyEClass, STRUCTURED_PROPERTY__DOMAINS);
+		createEReference(structuredPropertyEClass, STRUCTURED_PROPERTY__RANGES);
+		createEOperation(structuredPropertyEClass, STRUCTURED_PROPERTY___GET_DOMAIN_LIST);
+		createEOperation(structuredPropertyEClass, STRUCTURED_PROPERTY___GET_RANGE_LIST);
 
 		relationEClass = createEClass(RELATION);
 		createEOperation(relationEClass, RELATION___IS_INVERSE_FUNCTIONAL);
@@ -3856,9 +3920,11 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		createEOperation(relationEClass, RELATION___IS_REFLEXIVE);
 		createEOperation(relationEClass, RELATION___IS_IRREFLEXIVE);
 		createEOperation(relationEClass, RELATION___IS_TRANSITIVE);
-		createEOperation(relationEClass, RELATION___GET_DOMAIN);
-		createEOperation(relationEClass, RELATION___GET_RANGE);
+		createEOperation(relationEClass, RELATION___GET_DOMAINS);
+		createEOperation(relationEClass, RELATION___GET_RANGES);
 		createEOperation(relationEClass, RELATION___GET_INVERSE);
+		createEOperation(relationEClass, RELATION___GET_DOMAIN_LIST);
+		createEOperation(relationEClass, RELATION___GET_RANGE_LIST);
 
 		forwardRelationEClass = createEClass(FORWARD_RELATION);
 		createEReference(forwardRelationEClass, FORWARD_RELATION__RELATION_ENTITY);
@@ -3870,8 +3936,8 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		createEOperation(forwardRelationEClass, FORWARD_RELATION___IS_REFLEXIVE);
 		createEOperation(forwardRelationEClass, FORWARD_RELATION___IS_IRREFLEXIVE);
 		createEOperation(forwardRelationEClass, FORWARD_RELATION___IS_TRANSITIVE);
-		createEOperation(forwardRelationEClass, FORWARD_RELATION___GET_DOMAIN);
-		createEOperation(forwardRelationEClass, FORWARD_RELATION___GET_RANGE);
+		createEOperation(forwardRelationEClass, FORWARD_RELATION___GET_DOMAINS);
+		createEOperation(forwardRelationEClass, FORWARD_RELATION___GET_RANGES);
 		createEOperation(forwardRelationEClass, FORWARD_RELATION___GET_INVERSE);
 
 		reverseRelationEClass = createEClass(REVERSE_RELATION);
@@ -3884,14 +3950,14 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		createEOperation(reverseRelationEClass, REVERSE_RELATION___IS_REFLEXIVE);
 		createEOperation(reverseRelationEClass, REVERSE_RELATION___IS_IRREFLEXIVE);
 		createEOperation(reverseRelationEClass, REVERSE_RELATION___IS_TRANSITIVE);
-		createEOperation(reverseRelationEClass, REVERSE_RELATION___GET_DOMAIN);
-		createEOperation(reverseRelationEClass, REVERSE_RELATION___GET_RANGE);
+		createEOperation(reverseRelationEClass, REVERSE_RELATION___GET_DOMAINS);
+		createEOperation(reverseRelationEClass, REVERSE_RELATION___GET_RANGES);
 		createEOperation(reverseRelationEClass, REVERSE_RELATION___GET_INVERSE);
 
 		unreifiedRelationEClass = createEClass(UNREIFIED_RELATION);
 		createEReference(unreifiedRelationEClass, UNREIFIED_RELATION__REF);
-		createEOperation(unreifiedRelationEClass, UNREIFIED_RELATION___GET_DOMAIN);
-		createEOperation(unreifiedRelationEClass, UNREIFIED_RELATION___GET_RANGE);
+		createEOperation(unreifiedRelationEClass, UNREIFIED_RELATION___GET_DOMAINS);
+		createEOperation(unreifiedRelationEClass, UNREIFIED_RELATION___GET_RANGES);
 		createEOperation(unreifiedRelationEClass, UNREIFIED_RELATION___GET_INVERSE);
 
 		namedInstanceEClass = createEClass(NAMED_INSTANCE);
@@ -4292,8 +4358,8 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		initEClass(typeEClass, Type.class, "Type", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(relationBaseEClass, RelationBase.class, "RelationBase", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getRelationBase_Source(), this.getEntity(), null, "source", null, 0, 1, RelationBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getRelationBase_Target(), this.getEntity(), null, "target", null, 0, 1, RelationBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getRelationBase_Sources(), this.getEntity(), null, "sources", null, 0, -1, RelationBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getRelationBase_Targets(), this.getEntity(), null, "targets", null, 0, -1, RelationBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRelationBase_ReverseRelation(), this.getReverseRelation(), this.getReverseRelation_RelationBase(), "reverseRelation", null, 0, 1, RelationBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getRelationBase_Functional(), theEcorePackage.getEBoolean(), "functional", null, 0, 1, RelationBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getRelationBase_InverseFunctional(), theEcorePackage.getEBoolean(), "inverseFunctional", null, 0, 1, RelationBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -4347,21 +4413,29 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 
 		initEOperation(getSemanticProperty__IsFunctional(), theEcorePackage.getEBoolean(), "isFunctional", 0, 1, !IS_UNIQUE, IS_ORDERED);
 
-		initEOperation(getSemanticProperty__GetDomain(), this.getClassifier(), "getDomain", 0, 1, !IS_UNIQUE, IS_ORDERED);
+		initEOperation(getSemanticProperty__GetDomainList(), this.getClassifier(), "getDomainList", 0, -1, !IS_UNIQUE, IS_ORDERED);
 
-		initEOperation(getSemanticProperty__GetRange(), this.getType(), "getRange", 0, 1, !IS_UNIQUE, IS_ORDERED);
+		initEOperation(getSemanticProperty__GetRangeList(), this.getType(), "getRangeList", 0, -1, !IS_UNIQUE, IS_ORDERED);
 
 		initEClass(scalarPropertyEClass, ScalarProperty.class, "ScalarProperty", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getScalarProperty_Ref(), this.getScalarProperty(), null, "ref", null, 0, 1, ScalarProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getScalarProperty_Functional(), theEcorePackage.getEBoolean(), "functional", null, 0, 1, ScalarProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getScalarProperty_Domain(), this.getClassifier(), null, "domain", null, 0, 1, ScalarProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getScalarProperty_Range(), this.getScalar(), null, "range", null, 0, 1, ScalarProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getScalarProperty_Domains(), this.getClassifier(), null, "domains", null, 0, -1, ScalarProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getScalarProperty_Ranges(), this.getScalar(), null, "ranges", null, 0, -1, ScalarProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEOperation(getScalarProperty__GetDomainList(), this.getClassifier(), "getDomainList", 0, -1, !IS_UNIQUE, IS_ORDERED);
+
+		initEOperation(getScalarProperty__GetRangeList(), this.getType(), "getRangeList", 0, -1, !IS_UNIQUE, IS_ORDERED);
 
 		initEClass(structuredPropertyEClass, StructuredProperty.class, "StructuredProperty", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getStructuredProperty_Ref(), this.getStructuredProperty(), null, "ref", null, 0, 1, StructuredProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getStructuredProperty_Functional(), theEcorePackage.getEBoolean(), "functional", null, 0, 1, StructuredProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getStructuredProperty_Domain(), this.getClassifier(), null, "domain", null, 0, 1, StructuredProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getStructuredProperty_Range(), this.getStructure(), null, "range", null, 0, 1, StructuredProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getStructuredProperty_Domains(), this.getClassifier(), null, "domains", null, 0, -1, StructuredProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getStructuredProperty_Ranges(), this.getStructure(), null, "ranges", null, 0, -1, StructuredProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEOperation(getStructuredProperty__GetDomainList(), this.getClassifier(), "getDomainList", 0, -1, !IS_UNIQUE, IS_ORDERED);
+
+		initEOperation(getStructuredProperty__GetRangeList(), this.getType(), "getRangeList", 0, -1, !IS_UNIQUE, IS_ORDERED);
 
 		initEClass(relationEClass, Relation.class, "Relation", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -4377,11 +4451,15 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 
 		initEOperation(getRelation__IsTransitive(), theEcorePackage.getEBoolean(), "isTransitive", 0, 1, !IS_UNIQUE, IS_ORDERED);
 
-		initEOperation(getRelation__GetDomain(), this.getEntity(), "getDomain", 0, 1, !IS_UNIQUE, IS_ORDERED);
+		initEOperation(getRelation__GetDomains(), this.getEntity(), "getDomains", 0, -1, !IS_UNIQUE, IS_ORDERED);
 
-		initEOperation(getRelation__GetRange(), this.getEntity(), "getRange", 0, 1, !IS_UNIQUE, IS_ORDERED);
+		initEOperation(getRelation__GetRanges(), this.getEntity(), "getRanges", 0, -1, !IS_UNIQUE, IS_ORDERED);
 
 		initEOperation(getRelation__GetInverse(), this.getRelation(), "getInverse", 0, 1, !IS_UNIQUE, IS_ORDERED);
+
+		initEOperation(getRelation__GetDomainList(), this.getClassifier(), "getDomainList", 0, -1, !IS_UNIQUE, IS_ORDERED);
+
+		initEOperation(getRelation__GetRangeList(), this.getType(), "getRangeList", 0, -1, !IS_UNIQUE, IS_ORDERED);
 
 		initEClass(forwardRelationEClass, ForwardRelation.class, "ForwardRelation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getForwardRelation_RelationEntity(), this.getRelationEntity(), this.getRelationEntity_ForwardRelation(), "relationEntity", null, 1, 1, ForwardRelation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -4402,9 +4480,9 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 
 		initEOperation(getForwardRelation__IsTransitive(), theEcorePackage.getEBoolean(), "isTransitive", 0, 1, !IS_UNIQUE, IS_ORDERED);
 
-		initEOperation(getForwardRelation__GetDomain(), this.getEntity(), "getDomain", 0, 1, !IS_UNIQUE, IS_ORDERED);
+		initEOperation(getForwardRelation__GetDomains(), this.getEntity(), "getDomains", 0, -1, !IS_UNIQUE, IS_ORDERED);
 
-		initEOperation(getForwardRelation__GetRange(), this.getEntity(), "getRange", 0, 1, !IS_UNIQUE, IS_ORDERED);
+		initEOperation(getForwardRelation__GetRanges(), this.getEntity(), "getRanges", 0, -1, !IS_UNIQUE, IS_ORDERED);
 
 		initEOperation(getForwardRelation__GetInverse(), this.getRelation(), "getInverse", 0, 1, !IS_UNIQUE, IS_ORDERED);
 
@@ -4427,18 +4505,18 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 
 		initEOperation(getReverseRelation__IsTransitive(), theEcorePackage.getEBoolean(), "isTransitive", 0, 1, !IS_UNIQUE, IS_ORDERED);
 
-		initEOperation(getReverseRelation__GetDomain(), this.getEntity(), "getDomain", 0, 1, !IS_UNIQUE, IS_ORDERED);
+		initEOperation(getReverseRelation__GetDomains(), this.getEntity(), "getDomains", 0, -1, !IS_UNIQUE, IS_ORDERED);
 
-		initEOperation(getReverseRelation__GetRange(), this.getEntity(), "getRange", 0, 1, !IS_UNIQUE, IS_ORDERED);
+		initEOperation(getReverseRelation__GetRanges(), this.getEntity(), "getRanges", 0, -1, !IS_UNIQUE, IS_ORDERED);
 
 		initEOperation(getReverseRelation__GetInverse(), this.getRelation(), "getInverse", 0, 1, !IS_UNIQUE, IS_ORDERED);
 
 		initEClass(unreifiedRelationEClass, UnreifiedRelation.class, "UnreifiedRelation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getUnreifiedRelation_Ref(), this.getRelation(), null, "ref", null, 0, 1, UnreifiedRelation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEOperation(getUnreifiedRelation__GetDomain(), this.getEntity(), "getDomain", 0, 1, !IS_UNIQUE, IS_ORDERED);
+		initEOperation(getUnreifiedRelation__GetDomains(), this.getEntity(), "getDomains", 0, -1, !IS_UNIQUE, IS_ORDERED);
 
-		initEOperation(getUnreifiedRelation__GetRange(), this.getEntity(), "getRange", 0, 1, !IS_UNIQUE, IS_ORDERED);
+		initEOperation(getUnreifiedRelation__GetRanges(), this.getEntity(), "getRanges", 0, -1, !IS_UNIQUE, IS_ORDERED);
 
 		initEOperation(getUnreifiedRelation__GetInverse(), this.getRelation(), "getInverse", 0, 1, !IS_UNIQUE, IS_ORDERED);
 

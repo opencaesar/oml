@@ -185,7 +185,7 @@ public class OmlIndex {
      * @return A list of referencing relation bases
      */
     public static List<RelationBase> findRelationBasesWithSource(Entity source) {
-        return findInverseReferencers(source, RelationBase.class, OmlPackage.Literals.RELATION_BASE__SOURCE);
+        return findInverseReferencers(source, RelationBase.class, OmlPackage.Literals.RELATION_BASE__SOURCES);
     }
     
     /**
@@ -195,7 +195,7 @@ public class OmlIndex {
      * @return A list of referencing relation bases
      */
     public static List<RelationBase> findRelationBasesWithTarget(Entity target) {
-        return findInverseReferencers(target, RelationBase.class, OmlPackage.Literals.RELATION_BASE__TARGET);
+        return findInverseReferencers(target, RelationBase.class, OmlPackage.Literals.RELATION_BASE__TARGETS);
     }
     
     // ScalarProperty
@@ -207,7 +207,7 @@ public class OmlIndex {
      * @return A list of referencing scalar properties
      */
     public static List<ScalarProperty> findScalarPropertiesWithDomain(Classifier domain) {
-        return findInverseReferencers(domain, ScalarProperty.class, OmlPackage.Literals.SCALAR_PROPERTY__DOMAIN);
+        return findInverseReferencers(domain, ScalarProperty.class, OmlPackage.Literals.SCALAR_PROPERTY__DOMAINS);
     }
 
     /**
@@ -217,7 +217,7 @@ public class OmlIndex {
      * @return A list of referencing scalar properties
      */
     public static List<ScalarProperty> findScalarPropertiesWithRange(Scalar range) {
-        return findInverseReferencers(range, ScalarProperty.class, OmlPackage.Literals.SCALAR_PROPERTY__RANGE);
+        return findInverseReferencers(range, ScalarProperty.class, OmlPackage.Literals.SCALAR_PROPERTY__RANGES);
     }
     
     // StructuredProperty
@@ -229,7 +229,7 @@ public class OmlIndex {
      * @return A list of referencing scalar properties
      */
     public static List<StructuredProperty> findStructuredPropertiesWithDomain(Classifier domain) {
-        return findInverseReferencers(domain, StructuredProperty.class, OmlPackage.Literals.STRUCTURED_PROPERTY__DOMAIN);
+        return findInverseReferencers(domain, StructuredProperty.class, OmlPackage.Literals.STRUCTURED_PROPERTY__DOMAINS);
     }
 
     /**
@@ -239,7 +239,7 @@ public class OmlIndex {
      * @return A list of referencing structured properties
      */
     public static List<StructuredProperty> findStructuredPropertiesWithRange(Structure range) {
-        return findInverseReferencers(range, StructuredProperty.class, OmlPackage.Literals.STRUCTURED_PROPERTY__RANGE);
+        return findInverseReferencers(range, StructuredProperty.class, OmlPackage.Literals.STRUCTURED_PROPERTY__RANGES);
     }
     
     // StructureInstance

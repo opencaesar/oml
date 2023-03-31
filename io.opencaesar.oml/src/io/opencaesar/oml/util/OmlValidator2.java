@@ -22,6 +22,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -44,6 +45,7 @@ import io.opencaesar.oml.ConceptInstance;
 import io.opencaesar.oml.Description;
 import io.opencaesar.oml.DescriptionBundle;
 import io.opencaesar.oml.Element;
+import io.opencaesar.oml.Entity;
 import io.opencaesar.oml.Import;
 import io.opencaesar.oml.ImportKind;
 import io.opencaesar.oml.Instance;
@@ -386,12 +388,13 @@ public final class OmlValidator2 {
     protected boolean validatePropertyRestrictionAxiomDomain(PropertyRestrictionAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
         final Classifier restrictingDomain = object.getRestrictingDomain();
         final SemanticProperty property = object.getProperty();
-        final Classifier domainType = (property!=null) ? property.getDomain() : null;
-        if (restrictingDomain != null && domainType != null) {
-	        final Collection<Term> allGeneralTerms = OmlRead.closure(restrictingDomain, true, t -> OmlSearch.findSuperTerms(t));
-	        if (!allGeneralTerms.stream().filter(t -> t == domainType).findAny().isPresent()) {
+        final List<Classifier> domainTypes = (property!=null) ? property.getDomainList() : Collections.emptyList();
+        if (restrictingDomain != null && !domainTypes.isEmpty()) {
+	        final Collection<Term> allSuperTerms = OmlSearch.findAllSuperTerms(restrictingDomain, true);
+	        allSuperTerms.retainAll(domainTypes);
+	        if (allSuperTerms.isEmpty()) {
 	            return report(Diagnostic.WARNING, diagnostics, object,
-	                "Property "+object.getProperty().getAbbreviatedIri()+" has a domain "+object.getProperty().getDomain().getAbbreviatedIri()+" that is not the same as or a super type of "+restrictingDomain.getAbbreviatedIri(), 
+	                "Property "+object.getProperty().getAbbreviatedIri()+" has a domain that is not the same as or a super type of "+restrictingDomain.getAbbreviatedIri(), 
 	                OmlPackage.Literals.PROPERTY_RESTRICTION_AXIOM__PROPERTY);
 	        }
         }
@@ -411,12 +414,13 @@ public final class OmlValidator2 {
     protected boolean validatePropertyRangeRestrictionAxiomRange(PropertyRangeRestrictionAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
         final Type restrictedRange = object.getRange();
         final SemanticProperty property = object.getProperty();
-        final Type rangeType = (property!=null) ? property.getRange() : null;
-        if (rangeType != null && restrictedRange != null && !restrictedRange.getAbbreviatedIri().equals(OWL_NOTHING)) {
-	        final Collection<Term> allGeneralEntities = OmlRead.closure(restrictedRange, true, t -> OmlSearch.findSuperTerms(t));
-	        if (!allGeneralEntities.stream().filter(t -> t == rangeType).findAny().isPresent()) {
+        final List<Type> rangeTypes = (property!=null) ? property.getRangeList() : Collections.emptyList();
+        if (!rangeTypes.isEmpty() && restrictedRange != null && !restrictedRange.getAbbreviatedIri().equals(OWL_NOTHING)) {
+	        final Collection<Term> allSuperTerms = OmlSearch.findAllSuperTerms(restrictedRange, true);
+	        allSuperTerms.retainAll(rangeTypes);
+	        if (allSuperTerms.isEmpty()) {
 	            return report(Diagnostic.WARNING, diagnostics, object,
-	                "Type "+restrictedRange.getAbbreviatedIri()+" is not the same as or a sub type of "+rangeType.getAbbreviatedIri(), 
+	                "Type "+restrictedRange.getAbbreviatedIri()+" is not the same as or a sub type of property "+property.getAbbreviatedIri()+"'s range", 
 	                OmlPackage.Literals.PROPERTY_RANGE_RESTRICTION_AXIOM__RANGE);
 	        }
         }
@@ -436,12 +440,13 @@ public final class OmlValidator2 {
     protected boolean validatePropertyCardinalityRestrictionAxiomRange(PropertyCardinalityRestrictionAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
         final Type restrictedRange = object.getRange();
         final SemanticProperty property = object.getProperty();
-        final Type rangeType = (property!=null) ? property.getRange() : null;
-        if (rangeType != null && restrictedRange != null && !restrictedRange.getAbbreviatedIri().equals(OWL_NOTHING)) {
-            final Collection<Term> allGeneralEntities = OmlRead.closure(restrictedRange, true, t -> OmlSearch.findSuperTerms(t));
-            if (!allGeneralEntities.stream().filter(t -> t == rangeType).findAny().isPresent()) {
+        final List<Type> rangeTypes = (property!=null) ? property.getRangeList() : Collections.emptyList();
+        if (!rangeTypes.isEmpty() && restrictedRange != null && !restrictedRange.getAbbreviatedIri().equals(OWL_NOTHING)) {
+	        final Collection<Term> allSuperTerms = OmlSearch.findAllSuperTerms(restrictedRange, true);
+	        allSuperTerms.retainAll(rangeTypes);
+	        if (allSuperTerms.isEmpty()) {
                 return report(Diagnostic.WARNING, diagnostics, object,
-                    "Type "+restrictedRange.getAbbreviatedIri()+" is not the same as or a sub type of "+rangeType.getAbbreviatedIri(), 
+                    "Type "+restrictedRange.getAbbreviatedIri()+" is not the same as or a sub type of property "+property.getAbbreviatedIri()+"'s range", 
                     OmlPackage.Literals.PROPERTY_CARDINALITY_RESTRICTION_AXIOM__RANGE);
             }
         }
@@ -465,7 +470,7 @@ public final class OmlValidator2 {
 	            return report(Diagnostic.WARNING, diagnostics, object,
 	                "A literal is expected as the restricted value of property "+property.getAbbreviatedIri(), 
 	                OmlPackage.Literals.PROPERTY_RESTRICTION_AXIOM__PROPERTY);
-        	} else if (property.getRange() != null && !OmlSearch.findIsOfKind(object.getLiteralValue(), ((ScalarProperty)property).getRange())) {
+        	} else if (property.getRangeList().stream().noneMatch(t -> OmlSearch.findIsOfKind(object.getLiteralValue(), (Scalar)t))) {
 	            return report(Diagnostic.WARNING, diagnostics, object,
 		                "The literal is not in the range of scalar property "+property.getAbbreviatedIri(), 
 		                OmlPackage.Literals.PROPERTY_VALUE_RESTRICTION_AXIOM__LITERAL_VALUE);
@@ -475,7 +480,7 @@ public final class OmlValidator2 {
 	            return report(Diagnostic.WARNING, diagnostics, object,
 	                "A structure instance is expected as the restricted value of property "+property.getAbbreviatedIri(), 
 	                OmlPackage.Literals.PROPERTY_RESTRICTION_AXIOM__PROPERTY);
-        	} else if (property.getRange() != null && !OmlSearch.findIsOfKind(object.getStructureInstanceValue(), ((StructuredProperty)property).getRange())) {
+        	} else if (property.getRangeList().stream().noneMatch(t -> OmlSearch.findIsOfKind(object.getStructureInstanceValue(), (Structure)t))) {
 	            return report(Diagnostic.WARNING, diagnostics, object,
 		                "The instance is not in the range of structured property "+property.getAbbreviatedIri(), 
 		                OmlPackage.Literals.PROPERTY_VALUE_RESTRICTION_AXIOM__STRUCTURE_INSTANCE_VALUE);
@@ -485,7 +490,7 @@ public final class OmlValidator2 {
 	            return report(Diagnostic.WARNING, diagnostics, object,
 	                "A named instance IRI is expected as the restricted value of relation "+property.getAbbreviatedIri(), 
 	                OmlPackage.Literals.PROPERTY_RESTRICTION_AXIOM__PROPERTY);
-        	} else if (property.getRange() != null && !OmlSearch.findIsOfKind(object.getNamedInstanceValue(), ((Relation)property).getRange())) {
+        	} else if (property.getRangeList().stream().noneMatch(t -> OmlSearch.findIsOfKind(object.getNamedInstanceValue(), (Entity)t))) {
 	            return report(Diagnostic.WARNING, diagnostics, object,
 		                "The instance is not in the range of relation "+property.getAbbreviatedIri(), 
 		                OmlPackage.Literals.PROPERTY_VALUE_RESTRICTION_AXIOM__NAMED_INSTANCE_VALUE);
@@ -833,8 +838,8 @@ public final class OmlValidator2 {
     protected boolean validatePropertyValueRestrictionAxiomSubject(PropertyValueAssertion object, DiagnosticChain diagnostics, Map<Object, Object> context) {
         final var theSubject = object.getSubject();
         final SemanticProperty property = object.getProperty();
-        final Classifier domainType = property.getDomain();
-        if (!OmlSearch.findIsOfKind(theSubject, domainType)) {
+        final List<Classifier> domainTypes = (property != null) ? property.getDomainList() : Collections.emptyList();
+        if (domainTypes.stream().noneMatch(t -> OmlSearch.findIsOfKind(theSubject, t))) {
         	return report(Diagnostic.WARNING, diagnostics, object,
                 "Property "+property.getAbbreviatedIri()+" has a domain that does not include the asserting instance",
                 OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__PROPERTY);
@@ -853,9 +858,10 @@ public final class OmlValidator2 {
     protected boolean validatePropertyValueRestrictionAxiomObject(PropertyValueAssertion object, DiagnosticChain diagnostics, Map<Object, Object> context) {
         final var theObject = object.getObject();
         final SemanticProperty property = object.getProperty();
-        if (property != null && property.getRange() != null && theObject != null) {
-        	var validLiteral = theObject instanceof Literal && OmlSearch.findIsOfKind((Literal)theObject, (Scalar)property.getRange());
-        	var validInstance = theObject instanceof Instance && OmlSearch.findIsOfKind((Instance)theObject, (Classifier)property.getRange());
+        final List<Type> domainTypes = (property != null) ? property.getRangeList() : Collections.emptyList();
+        if (theObject != null) {
+        	var validLiteral = theObject instanceof Literal &&  domainTypes.stream().anyMatch(t -> OmlSearch.findIsOfKind((Literal)theObject, (Scalar)t));
+        	var validInstance = theObject instanceof Instance && domainTypes.stream().anyMatch(t -> OmlSearch.findIsOfKind((Instance)theObject, (Classifier)t));
 	        if ((property instanceof ScalarProperty && !validLiteral) || 
 	        	(property instanceof StructuredProperty && !validInstance) ||
 	        	(property instanceof Relation && !validInstance)) {
@@ -918,41 +924,14 @@ public final class OmlValidator2 {
      * @return True if the rules is satisfied; False otherwise
      */
     protected boolean validateRelationBaseCardinalities(RelationBase object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-        boolean result = true;
-    	if (object.getName() != null) {
-        	if (object.getSource() == null) {
-	        	report(Diagnostic.ERROR, diagnostics, object,
-	                "Relation "+object.getAbbreviatedIri()+" needs to specify a source",
-	                OmlPackage.Literals.MEMBER__NAME);
-	        	result = false;
-        	}
-        	if (object.getTarget() == null) {
-	        	report(Diagnostic.ERROR, diagnostics, object,
-	                "Relation "+object.getAbbreviatedIri()+" needs to specify a target",
-	                OmlPackage.Literals.MEMBER__NAME);
-	        	result = false;
-        	}
-        } else {
-        	if (object.getSource() != null) {
-	        	report(Diagnostic.ERROR, diagnostics, object,
-	                "Relation "+object.getAbbreviatedIri()+" cannot respecify a source",
-	                OmlPackage.Literals.RELATION_BASE__SOURCE);
-	        	result = false;
-        	}
-        	if (object.getTarget() != null) {
-	        	report(Diagnostic.ERROR, diagnostics, object,
-	                "Relation "+object.getAbbreviatedIri()+" cannot respecify a target",
-	                OmlPackage.Literals.RELATION_BASE__TARGET);
-	        	result = false;
-        	}
+    	if (object.getName() == null) {
         	if (object.getReverseRelation() != null) {
-	        	report(Diagnostic.ERROR, diagnostics, object,
-	                "Relation "+object.getAbbreviatedIri()+" cannot respecify a reverse relation",
+	        	return report(Diagnostic.ERROR, diagnostics, object,
+	                "Cannot specify a reverse relation on a ref to "+object.getAbbreviatedIri(),
 	                OmlPackage.Literals.RELATION_BASE__REVERSE_RELATION);
-	        	result = false;
         	}
         }
-        return result;
+        return true;
     }
 
     /**
@@ -964,88 +943,16 @@ public final class OmlValidator2 {
      * @return True if the rules is satisfied; False otherwise
      */
     protected boolean validateRelationEntityCardinalities(RelationEntity object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-        boolean result = true;
     	if (object.getName() == null) {
         	if (object.getForwardRelation() != null) {
-	        	report(Diagnostic.ERROR, diagnostics, object,
-	                "Relation "+object.getAbbreviatedIri()+" cannot respecify a forward relation",
+	        	return report(Diagnostic.ERROR, diagnostics, object,
+		            "Cannot specify a forward relation on a ref to "+object.getAbbreviatedIri(),
 	                OmlPackage.Literals.RELATION_ENTITY__FORWARD_RELATION);
-	        	result = false;
         	}
         }
-        return result;
+        return true;
     }
     
-    /**
-     * Checks that a scalar property base the correct feature cardinalities
-     * 
-     * @param object The property to check
-     * @param diagnostics The validation diagnostics
-     * @param context The object-to-object context map
-     * @return True if the rules is satisfied; False otherwise
-     */
-    protected boolean validateScalarPropertyCardinalities(ScalarProperty object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-        if (object.getName() != null) {
-        	if (object.getDomain() == null) {
-	        	return report(Diagnostic.ERROR, diagnostics, object,
-	                "Propertys "+object.getAbbreviatedIri()+" needs to specify a domain",
-	                OmlPackage.Literals.MEMBER__NAME);
-        	}
-        	else if (object.getRange() == null) {
-	        	return report(Diagnostic.ERROR, diagnostics, object,
-	                "Property "+object.getAbbreviatedIri()+" needs to specify a range",
-	                OmlPackage.Literals.MEMBER__NAME);
-        	}
-        } else {
-        	if (object.getDomain() != null) {
-	        	return report(Diagnostic.ERROR, diagnostics, object,
-	                "Propertys "+object.getAbbreviatedIri()+" cannot respecify a domain",
-	                OmlPackage.Literals.SCALAR_PROPERTY__DOMAIN);
-        	}
-        	else if (object.getRange() != null) {
-	        	return report(Diagnostic.ERROR, diagnostics, object,
-	                "Property "+object.getAbbreviatedIri()+" cannot respecify a range",
-	                OmlPackage.Literals.SCALAR_PROPERTY__RANGE);
-        	}
-        }
-        return true;
-    }
-
-    /**
-     * Checks that a structured property base the correct feature cardinalities
-     * 
-     * @param object The property to check
-     * @param diagnostics The validation diagnostics
-     * @param context The object-to-object context map
-     * @return True if the rules is satisfied; False otherwise
-     */
-    protected boolean validateStructuredPropertyCardinalities(StructuredProperty object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-        if (object.getName() != null) {
-        	if (object.getDomain() == null) {
-	        	return report(Diagnostic.ERROR, diagnostics, object,
-	                "Propertys "+object.getAbbreviatedIri()+" needs to specify a domain",
-	                OmlPackage.Literals.MEMBER__NAME);
-        	}
-        	else if (object.getRange() == null) {
-	        	return report(Diagnostic.ERROR, diagnostics, object,
-	                "Property "+object.getAbbreviatedIri()+" needs to specify a range",
-	                OmlPackage.Literals.MEMBER__NAME);
-        	}
-        } else {
-        	if (object.getDomain() != null) {
-	        	return report(Diagnostic.ERROR, diagnostics, object,
-	                "Propertys "+object.getAbbreviatedIri()+" cannot respecify a domain",
-	                OmlPackage.Literals.STRUCTURED_PROPERTY__DOMAIN);
-        	}
-        	else if (object.getRange() != null) {
-	        	return report(Diagnostic.ERROR, diagnostics, object,
-	                "Property "+object.getAbbreviatedIri()+" cannot respecify a range",
-	                OmlPackage.Literals.STRUCTURED_PROPERTY__RANGE);
-        	}
-        }
-        return true;
-    }
-
     /**
      * Checks that a rule has the correct feature cardinalities
      * 

@@ -18,12 +18,15 @@
  */
 package io.opencaesar.oml.impl;
 
+import io.opencaesar.oml.Classifier;
 import io.opencaesar.oml.Entity;
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.Relation;
+import io.opencaesar.oml.Type;
 
 import java.lang.reflect.InvocationTargetException;
 
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
@@ -133,7 +136,7 @@ public abstract class RelationImpl extends SemanticPropertyImpl implements Relat
 	 * @generated
 	 */
 	@Override
-	public Entity getDomain() {
+	public EList<Entity> getDomains() {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
 		throw new UnsupportedOperationException();
@@ -145,7 +148,7 @@ public abstract class RelationImpl extends SemanticPropertyImpl implements Relat
 	 * @generated
 	 */
 	@Override
-	public Entity getRange() {
+	public EList<Entity> getRanges() {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
 		throw new UnsupportedOperationException();
@@ -169,6 +172,28 @@ public abstract class RelationImpl extends SemanticPropertyImpl implements Relat
 	 * @generated
 	 */
 	@Override
+	public EList<Classifier> getDomainList() {
+		EList<Entity> _domains = this.getDomains();
+		return new BasicEList<Classifier>(_domains);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EList<Type> getRangeList() {
+		EList<Entity> _ranges = this.getRanges();
+		return new BasicEList<Type>(_ranges);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
 			case OmlPackage.RELATION___IS_INVERSE_FUNCTIONAL:
@@ -183,12 +208,16 @@ public abstract class RelationImpl extends SemanticPropertyImpl implements Relat
 				return isIrreflexive();
 			case OmlPackage.RELATION___IS_TRANSITIVE:
 				return isTransitive();
-			case OmlPackage.RELATION___GET_DOMAIN:
-				return getDomain();
-			case OmlPackage.RELATION___GET_RANGE:
-				return getRange();
+			case OmlPackage.RELATION___GET_DOMAINS:
+				return getDomains();
+			case OmlPackage.RELATION___GET_RANGES:
+				return getRanges();
 			case OmlPackage.RELATION___GET_INVERSE:
 				return getInverse();
+			case OmlPackage.RELATION___GET_DOMAIN_LIST:
+				return getDomainList();
+			case OmlPackage.RELATION___GET_RANGE_LIST:
+				return getRangeList();
 		}
 		return super.eInvoke(operationID, arguments);
 	}
