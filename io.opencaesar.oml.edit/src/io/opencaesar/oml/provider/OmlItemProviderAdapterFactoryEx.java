@@ -36,6 +36,7 @@ import io.opencaesar.oml.Predicate;
 import io.opencaesar.oml.PropertyCardinalityRestrictionAxiom;
 import io.opencaesar.oml.PropertyPredicate;
 import io.opencaesar.oml.PropertyRangeRestrictionAxiom;
+import io.opencaesar.oml.PropertySelfRestrictionAxiom;
 import io.opencaesar.oml.PropertyValueAssertion;
 import io.opencaesar.oml.PropertyValueRestrictionAxiom;
 import io.opencaesar.oml.QuotedLiteral;
@@ -614,6 +615,18 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 		return propertyValueRestrictionAxiomItemProvider;
 	}
 
+	@Override
+	public Adapter createPropertySelfRestrictionAxiomAdapter() {
+		if (propertySelfRestrictionAxiomItemProvider == null) propertySelfRestrictionAxiomItemProvider = new PropertySelfRestrictionAxiomItemProvider(this) {
+			@Override
+			public String getText(Object object) {
+				PropertySelfRestrictionAxiom axiom = (PropertySelfRestrictionAxiom)object;
+				return "restricts relation " + getLabel(axiom.getProperty(), axiom)+ " to self";
+			}
+		};
+		return propertySelfRestrictionAxiomItemProvider;
+	}
+	
 	// Property values (annotation, scalar, structured, link)
 
 	@Override
@@ -866,7 +879,7 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 		if (literal instanceof QuotedLiteral) {
 			QuotedLiteral quotedLiteral = (QuotedLiteral)literal;
 			if (quotedLiteral.getValue() != null) {
-				label.append("\"").append(quotedLiteral.getValue()).append("\"");
+				label.append("\"").append(quotedLiteral.getValue().replaceAll("\n", "")).append("\"");
 			} else {
 				label.append("<no value>");
 			}

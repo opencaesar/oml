@@ -65,6 +65,7 @@ import io.opencaesar.oml.PropertyEquivalenceAxiom;
 import io.opencaesar.oml.PropertyPredicate;
 import io.opencaesar.oml.PropertyRangeRestrictionAxiom;
 import io.opencaesar.oml.PropertyRestrictionAxiom;
+import io.opencaesar.oml.PropertySelfRestrictionAxiom;
 import io.opencaesar.oml.PropertyValueAssertion;
 import io.opencaesar.oml.PropertyValueRestrictionAxiom;
 import io.opencaesar.oml.QuotedLiteral;
@@ -543,6 +544,13 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	private EClass propertyValueRestrictionAxiomEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass propertySelfRestrictionAxiomEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -3131,6 +3139,16 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
+	public EClass getPropertySelfRestrictionAxiom() {
+		return propertySelfRestrictionAxiomEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getTypeAssertion() {
 		return typeAssertionEClass;
 	}
@@ -4028,6 +4046,8 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		createEReference(propertyValueRestrictionAxiomEClass, PROPERTY_VALUE_RESTRICTION_AXIOM__NAMED_INSTANCE_VALUE);
 		createEOperation(propertyValueRestrictionAxiomEClass, PROPERTY_VALUE_RESTRICTION_AXIOM___GET_VALUE);
 
+		propertySelfRestrictionAxiomEClass = createEClass(PROPERTY_SELF_RESTRICTION_AXIOM);
+
 		typeAssertionEClass = createEClass(TYPE_ASSERTION);
 		createEReference(typeAssertionEClass, TYPE_ASSERTION__TYPE);
 		createEReference(typeAssertionEClass, TYPE_ASSERTION__OWNING_INSTANCE);
@@ -4206,6 +4226,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		propertyRangeRestrictionAxiomEClass.getESuperTypes().add(this.getPropertyRestrictionAxiom());
 		propertyCardinalityRestrictionAxiomEClass.getESuperTypes().add(this.getPropertyRestrictionAxiom());
 		propertyValueRestrictionAxiomEClass.getESuperTypes().add(this.getPropertyRestrictionAxiom());
+		propertySelfRestrictionAxiomEClass.getESuperTypes().add(this.getPropertyRestrictionAxiom());
 		typeAssertionEClass.getESuperTypes().add(this.getAssertion());
 		propertyValueAssertionEClass.getESuperTypes().add(this.getAssertion());
 		unaryPredicateEClass.getESuperTypes().add(this.getPredicate());
@@ -4595,6 +4616,8 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		initEReference(getPropertyValueRestrictionAxiom_NamedInstanceValue(), this.getNamedInstance(), null, "namedInstanceValue", null, 0, 1, PropertyValueRestrictionAxiom.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEOperation(getPropertyValueRestrictionAxiom__GetValue(), this.getElement(), "getValue", 0, 1, !IS_UNIQUE, IS_ORDERED);
+
+		initEClass(propertySelfRestrictionAxiomEClass, PropertySelfRestrictionAxiom.class, "PropertySelfRestrictionAxiom", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(typeAssertionEClass, TypeAssertion.class, "TypeAssertion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTypeAssertion_Type(), this.getEntity(), null, "type", null, 1, 1, TypeAssertion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -5108,6 +5131,12 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		   });
 		addAnnotation
 		  (propertyValueRestrictionAxiomEClass,
+		   source,
+		   new String[] {
+			   "heading", "Axioms"
+		   });
+		addAnnotation
+		  (propertySelfRestrictionAxiomEClass,
 		   source,
 		   new String[] {
 			   "heading", "Axioms"

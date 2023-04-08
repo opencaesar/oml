@@ -845,7 +845,7 @@ public final class OmlRead {
         if (entity.getForwardRelation() != null) {
         	relations.add(entity.getForwardRelation());
         }
-        if (entity.getForwardRelation() != null) {
+        if (entity.getReverseRelation() != null) {
         	relations.add(entity.getReverseRelation());
         }
         return relations;

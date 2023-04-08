@@ -743,6 +743,15 @@ public class OmlSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case OmlPackage.PROPERTY_SELF_RESTRICTION_AXIOM: {
+				PropertySelfRestrictionAxiom propertySelfRestrictionAxiom = (PropertySelfRestrictionAxiom)theEObject;
+				T result = casePropertySelfRestrictionAxiom(propertySelfRestrictionAxiom);
+				if (result == null) result = casePropertyRestrictionAxiom(propertySelfRestrictionAxiom);
+				if (result == null) result = caseAxiom(propertySelfRestrictionAxiom);
+				if (result == null) result = caseElement(propertySelfRestrictionAxiom);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case OmlPackage.TYPE_ASSERTION: {
 				TypeAssertion typeAssertion = (TypeAssertion)theEObject;
 				T result = caseTypeAssertion(typeAssertion);
@@ -1770,6 +1779,21 @@ public class OmlSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T casePropertyValueRestrictionAxiom(PropertyValueRestrictionAxiom object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Property Self Restriction Axiom</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Property Self Restriction Axiom</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePropertySelfRestrictionAxiom(PropertySelfRestrictionAxiom object) {
 		return null;
 	}
 

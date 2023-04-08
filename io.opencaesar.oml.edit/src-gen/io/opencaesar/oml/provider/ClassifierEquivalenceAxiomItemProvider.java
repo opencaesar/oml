@@ -210,6 +210,11 @@ public class ClassifierEquivalenceAxiomItemProvider extends AxiomItemProvider {
 			(createChildParameter
 				(OmlPackage.Literals.CLASSIFIER_EQUIVALENCE_AXIOM__OWNED_PROPERTY_RESTRICTIONS,
 				 OmlFactory.eINSTANCE.createPropertyValueRestrictionAxiom()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(OmlPackage.Literals.CLASSIFIER_EQUIVALENCE_AXIOM__OWNED_PROPERTY_RESTRICTIONS,
+				 OmlFactory.eINSTANCE.createPropertySelfRestrictionAxiom()));
 	}
 
 }

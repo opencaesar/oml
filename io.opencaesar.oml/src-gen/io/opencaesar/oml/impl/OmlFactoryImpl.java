@@ -110,6 +110,7 @@ public class OmlFactoryImpl extends EFactoryImpl implements OmlFactory {
 			case OmlPackage.PROPERTY_RANGE_RESTRICTION_AXIOM: return createPropertyRangeRestrictionAxiom();
 			case OmlPackage.PROPERTY_CARDINALITY_RESTRICTION_AXIOM: return createPropertyCardinalityRestrictionAxiom();
 			case OmlPackage.PROPERTY_VALUE_RESTRICTION_AXIOM: return createPropertyValueRestrictionAxiom();
+			case OmlPackage.PROPERTY_SELF_RESTRICTION_AXIOM: return createPropertySelfRestrictionAxiom();
 			case OmlPackage.TYPE_ASSERTION: return createTypeAssertion();
 			case OmlPackage.PROPERTY_VALUE_ASSERTION: return createPropertyValueAssertion();
 			case OmlPackage.BUILT_IN_PREDICATE: return createBuiltInPredicate();
@@ -540,6 +541,17 @@ public class OmlFactoryImpl extends EFactoryImpl implements OmlFactory {
 	public PropertyValueRestrictionAxiom createPropertyValueRestrictionAxiom() {
 		PropertyValueRestrictionAxiomImpl propertyValueRestrictionAxiom = new PropertyValueRestrictionAxiomImpl();
 		return propertyValueRestrictionAxiom;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public PropertySelfRestrictionAxiom createPropertySelfRestrictionAxiom() {
+		PropertySelfRestrictionAxiomImpl propertySelfRestrictionAxiom = new PropertySelfRestrictionAxiomImpl();
+		return propertySelfRestrictionAxiom;
 	}
 
 	/**

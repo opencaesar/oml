@@ -57,6 +57,7 @@ import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.PropertyCardinalityRestrictionAxiom;
 import io.opencaesar.oml.PropertyPredicate;
 import io.opencaesar.oml.PropertyRangeRestrictionAxiom;
+import io.opencaesar.oml.PropertySelfRestrictionAxiom;
 import io.opencaesar.oml.PropertyValueAssertion;
 import io.opencaesar.oml.PropertyValueRestrictionAxiom;
 import io.opencaesar.oml.QuotedLiteral;
@@ -479,6 +480,13 @@ public class OmlFormatter extends AbstractJavaFormatter {
 			doc.surround(keyword(axiom, oml.getRelationValueRestrictionAxiomAccess().getRelationKeyword_1()), oneSpace());
 			doc.surround(keyword(axiom, oml.getRelationValueRestrictionAxiomAccess().getToKeyword_3()), oneSpace());
 		}
+	}
+
+	protected void _format(PropertySelfRestrictionAxiom axiom, IFormattableDocument doc) {
+		doc.append(keyword(axiom, oml.getPropertySelfRestrictionAxiomAccess().getRestrictsKeyword_0()), oneSpace());
+		doc.surround(keyword(axiom, oml.getPropertySelfRestrictionAxiomAccess().getRelationKeyword_1()), oneSpace());
+		doc.surround(keyword(axiom, oml.getPropertySelfRestrictionAxiomAccess().getToKeyword_3()), oneSpace());
+		doc.prepend(keyword(axiom, oml.getPropertySelfRestrictionAxiomAccess().getSelfKeyword_4()), oneSpace());
 	}
 
 	protected void _format(KeyAxiom axiom, IFormattableDocument doc) {

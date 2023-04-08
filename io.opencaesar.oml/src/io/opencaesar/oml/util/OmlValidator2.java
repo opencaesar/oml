@@ -59,6 +59,7 @@ import io.opencaesar.oml.PropertyEquivalenceAxiom;
 import io.opencaesar.oml.PropertyPredicate;
 import io.opencaesar.oml.PropertyRangeRestrictionAxiom;
 import io.opencaesar.oml.PropertyRestrictionAxiom;
+import io.opencaesar.oml.PropertySelfRestrictionAxiom;
 import io.opencaesar.oml.PropertyValueAssertion;
 import io.opencaesar.oml.PropertyValueRestrictionAxiom;
 import io.opencaesar.oml.QuotedLiteral;
@@ -499,6 +500,26 @@ public final class OmlValidator2 {
         return true;
     }
 
+    // PropertyCardinalityRestrictionAxiom
+
+    /**
+     * Checks if the property of a property self restriction is a relation
+     * 
+     * @param object The property self restriction to check
+     * @param diagnostics The validation diagnostics
+     * @param context The object-to-object context map
+     * @return True if the rules is satisfied; False otherwise
+     */
+    protected boolean validatePropertySelfRestrictionAxiomProperty(PropertySelfRestrictionAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        final SemanticProperty property = object.getProperty();
+        if (!(property instanceof Relation)) {
+            return report(Diagnostic.WARNING, diagnostics, object,
+                "Property "+property.getAbbreviatedIri()+" cannot be used in a self restriction (only relations are allowed)", 
+                OmlPackage.Literals.PROPERTY_RESTRICTION_AXIOM__PROPERTY);
+        }
+        return true;
+    }
+    
     // SpecializationAxiom
     
     /**

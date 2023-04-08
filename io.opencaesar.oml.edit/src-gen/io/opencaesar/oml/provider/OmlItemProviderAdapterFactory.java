@@ -824,6 +824,29 @@ public class OmlItemProviderAdapterFactory extends OmlAdapterFactory implements 
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.PropertySelfRestrictionAxiom} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected PropertySelfRestrictionAxiomItemProvider propertySelfRestrictionAxiomItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link io.opencaesar.oml.PropertySelfRestrictionAxiom}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createPropertySelfRestrictionAxiomAdapter() {
+		if (propertySelfRestrictionAxiomItemProvider == null) {
+			propertySelfRestrictionAxiomItemProvider = new PropertySelfRestrictionAxiomItemProvider(this);
+		}
+
+		return propertySelfRestrictionAxiomItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.TypeAssertion} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1259,6 +1282,7 @@ public class OmlItemProviderAdapterFactory extends OmlAdapterFactory implements 
 		if (propertyRangeRestrictionAxiomItemProvider != null) propertyRangeRestrictionAxiomItemProvider.dispose();
 		if (propertyCardinalityRestrictionAxiomItemProvider != null) propertyCardinalityRestrictionAxiomItemProvider.dispose();
 		if (propertyValueRestrictionAxiomItemProvider != null) propertyValueRestrictionAxiomItemProvider.dispose();
+		if (propertySelfRestrictionAxiomItemProvider != null) propertySelfRestrictionAxiomItemProvider.dispose();
 		if (typeAssertionItemProvider != null) typeAssertionItemProvider.dispose();
 		if (propertyValueAssertionItemProvider != null) propertyValueAssertionItemProvider.dispose();
 		if (builtInPredicateItemProvider != null) builtInPredicateItemProvider.dispose();

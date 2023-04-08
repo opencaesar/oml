@@ -1128,7 +1128,7 @@ class UnreifiedRelation extends Relation, RelationBase, SpecializableProperty {
     op Entity[*] getDomains() {
         sources
     }
-    op Entity[] getRanges() {
+    op Entity[*] getRanges() {
     	targets
     }
     op Relation getInverse() {
@@ -1454,6 +1454,14 @@ class PropertyValueRestrictionAxiom extends PropertyRestrictionAxiom {
     	else if (property instanceof Relation)
     		namedInstanceValue
     }
+}
+
+/*
+ * PropertySelfRestrictionAxiom is a property restriction axiom that restricts a property in a given domain to be related to
+ * itself only.
+ */
+@Bikeshed(heading="Axioms")
+class PropertySelfRestrictionAxiom extends PropertyRestrictionAxiom {
 }
 
 ////////////////////////////////////////

@@ -324,6 +324,10 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 				return createPropertyValueRestrictionAxiomAdapter();
 			}
 			@Override
+			public Adapter casePropertySelfRestrictionAxiom(PropertySelfRestrictionAxiom object) {
+				return createPropertySelfRestrictionAxiomAdapter();
+			}
+			@Override
 			public Adapter caseTypeAssertion(TypeAssertion object) {
 				return createTypeAssertionAdapter();
 			}
@@ -1240,6 +1244,20 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createPropertyValueRestrictionAxiomAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.PropertySelfRestrictionAxiom <em>Property Self Restriction Axiom</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see io.opencaesar.oml.PropertySelfRestrictionAxiom
+	 * @generated
+	 */
+	public Adapter createPropertySelfRestrictionAxiomAdapter() {
 		return null;
 	}
 

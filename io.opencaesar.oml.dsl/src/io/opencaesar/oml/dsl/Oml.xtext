@@ -278,6 +278,7 @@ PropertyEquivalenceAxiom:
 	superProperty=[Property|Ref];
 
 PropertyRestrictionAxiom:
+	PropertySelfRestrictionAxiom |
 	PropertyRangeRestrictionAxiom |
 	PropertyCardinalityRestrictionAxiom |
 	PropertyValueRestrictionAxiom;
@@ -323,6 +324,9 @@ StructuredPropertyValueRestrictionAxiom returns PropertyValueRestrictionAxiom:
 
 RelationValueRestrictionAxiom returns PropertyValueRestrictionAxiom:
 	'restricts' 'relation' property=[Relation|Ref] 'to' namedInstanceValue=[NamedInstance|Ref];
+
+PropertySelfRestrictionAxiom:
+	'restricts' 'relation' property=[Relation|Ref] 'to' 'self';
 
 KeyAxiom:
 	'key' properties+=[Property|Ref] (',' properties+=[Property|Ref])*;

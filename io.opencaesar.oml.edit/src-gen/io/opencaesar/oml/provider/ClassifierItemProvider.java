@@ -160,6 +160,11 @@ public class ClassifierItemProvider extends TypeItemProvider {
 
 		newChildDescriptors.add
 			(createChildParameter
+				(OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS,
+				 OmlFactory.eINSTANCE.createPropertySelfRestrictionAxiom()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(OmlPackage.Literals.CLASSIFIER__OWNED_EQUIVALENCES,
 				 OmlFactory.eINSTANCE.createClassifierEquivalenceAxiom()));
 	}

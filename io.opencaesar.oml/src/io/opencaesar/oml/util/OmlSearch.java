@@ -74,6 +74,7 @@ import io.opencaesar.oml.Structure;
 import io.opencaesar.oml.StructureInstance;
 import io.opencaesar.oml.StructuredProperty;
 import io.opencaesar.oml.Term;
+import io.opencaesar.oml.Type;
 import io.opencaesar.oml.TypeAssertion;
 import io.opencaesar.oml.UnreifiedRelation;
 
@@ -322,11 +323,14 @@ public final class OmlSearch extends OmlIndex {
      */
     public static List<InstanceEnumerationAxiom> findInstanceEnumerationAxioms(Concept concept) {
         final List<InstanceEnumerationAxiom> keys = new ArrayList<>();
-        keys.add(concept.getOwnedEnumeration());
+        if (concept.getOwnedEnumeration() != null) {
+        	keys.add(concept.getOwnedEnumeration());
+        }
         keys.addAll(findReferences(concept).stream()
             .filter(i -> i instanceof Concept)
             .map(i -> (Concept)i)
-            .map(r -> r.getOwnedEnumeration())
+            .filter(c -> c.getOwnedEnumeration() != null)
+            .map(c -> c.getOwnedEnumeration())
             .collect(Collectors.toList()));
         return keys;
     }
@@ -662,9 +666,62 @@ public final class OmlSearch extends OmlIndex {
     	var properties = new ArrayList<SemanticProperty>();
     	properties.addAll(findScalarPropertiesWithDomain(domain));
     	properties.addAll(findStructuredPropertiesWithDomain(domain));
+    	if (domain instanceof Entity) {
+    		properties.addAll(findSourceRelations((Entity)domain));
+    	}
         return properties;
     }
     
+    /**
+     * Finds semantic properties referencing the given type as range
+     * 
+     * @param range The referenced type
+     * @return A list of referencing semantic properties
+     */
+    public static List<SemanticProperty> findSemanticPropertiesWithRange(Type range) {
+    	var properties = new ArrayList<SemanticProperty>();
+    	if (range instanceof Scalar) {
+    		properties.addAll(findScalarPropertiesWithRange((Scalar)range));
+    	} else if (range instanceof Structure) {
+    		properties.addAll(findStructuredPropertiesWithRange((Structure)range));
+    	} else if (range instanceof Entity) {
+    		properties.addAll(findTargetRelations((Entity)range));
+    	}
+        return properties;
+    }
+
+    /**
+     * Finds the domains of the given semantic property
+     * 
+     * @param property The given property
+     * @return A list of domains for the given semantic property
+     */
+    public static List<Classifier> findDomains(SemanticProperty property) {
+    	var domains = new ArrayList<Classifier>();
+    	domains.addAll(property.getDomainList());
+    	domains.addAll(findReferences(property).stream()
+                .map(i -> (SemanticProperty)i)
+                .flatMap(r -> r.getDomainList().stream())
+                .collect(Collectors.toList()));
+        return domains;
+    }
+
+    /**
+     * Finds the ranges of the given semantic property
+     * 
+     * @param property The given property
+     * @return A list of ranges for the given semantic property
+     */
+    public static List<Type> findRanges(SemanticProperty property) {
+    	var ranges = new ArrayList<Type>();
+    	ranges.addAll(property.getRangeList());
+    	ranges.addAll(findReferences(property).stream()
+                .map(i -> (SemanticProperty)i)
+                .flatMap(r -> r.getRangeList().stream())
+                .collect(Collectors.toList()));
+        return ranges;
+    }
+
     /**
      * Find entities that have the following property included in one of their keys
      * 
@@ -675,6 +732,38 @@ public final class OmlSearch extends OmlIndex {
         return findKeyAxiomWithProperty(property).stream()
             .map(i -> i.getKeyedEntity())
             .collect(Collectors.toList());
+    }
+
+    /**
+     * Finds the sources of the given relation base
+     * 
+     * @param base The given relation base
+     * @return A list of sources for the given relation base
+     */
+    public static List<Entity> findSources(RelationBase base) {
+    	var sources = new ArrayList<Entity>();
+    	sources.addAll(base.getSources());
+    	sources.addAll(findReferences(base).stream()
+                .map(i -> (RelationEntity)i)
+                .flatMap(r -> r.getSources().stream())
+                .collect(Collectors.toList()));
+        return sources;
+    }
+
+    /**
+     * Finds the targets of the given relation base
+     * 
+     * @param base The given relation base
+     * @return A list of targets for the given relation base
+     */
+    public static List<Entity> findTargets(RelationBase base) {
+    	var sources = new ArrayList<Entity>();
+    	sources.addAll(base.getTargets());
+    	sources.addAll(findReferences(base).stream()
+                .map(i -> (RelationEntity)i)
+                .flatMap(r -> r.getTargets().stream())
+                .collect(Collectors.toList()));
+        return sources;
     }
 
     //-------------------------------------------------

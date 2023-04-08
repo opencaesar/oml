@@ -326,6 +326,15 @@ public interface OmlFactory extends EFactory {
 	PropertyValueRestrictionAxiom createPropertyValueRestrictionAxiom();
 
 	/**
+	 * Returns a new object of class '<em>Property Self Restriction Axiom</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Property Self Restriction Axiom</em>'.
+	 * @generated
+	 */
+	PropertySelfRestrictionAxiom createPropertySelfRestrictionAxiom();
+
+	/**
 	 * Returns a new object of class '<em>Type Assertion</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

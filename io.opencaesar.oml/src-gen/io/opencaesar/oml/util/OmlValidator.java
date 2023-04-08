@@ -243,6 +243,8 @@ public class OmlValidator extends EObjectValidator {
 				return validatePropertyCardinalityRestrictionAxiom((PropertyCardinalityRestrictionAxiom)value, diagnostics, context);
 			case OmlPackage.PROPERTY_VALUE_RESTRICTION_AXIOM:
 				return validatePropertyValueRestrictionAxiom((PropertyValueRestrictionAxiom)value, diagnostics, context);
+			case OmlPackage.PROPERTY_SELF_RESTRICTION_AXIOM:
+				return validatePropertySelfRestrictionAxiom((PropertySelfRestrictionAxiom)value, diagnostics, context);
 			case OmlPackage.TYPE_ASSERTION:
 				return validateTypeAssertion((TypeAssertion)value, diagnostics, context);
 			case OmlPackage.PROPERTY_VALUE_ASSERTION:
@@ -1443,6 +1445,25 @@ public class OmlValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(propertyValueRestrictionAxiom, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(propertyValueRestrictionAxiom, diagnostics, context);
 		if (result || diagnostics != null) result &= validateElement_extraValidate(propertyValueRestrictionAxiom, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validatePropertySelfRestrictionAxiom(PropertySelfRestrictionAxiom propertySelfRestrictionAxiom, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		if (!validate_NoCircularContainment(propertySelfRestrictionAxiom, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms(propertySelfRestrictionAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(propertySelfRestrictionAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(propertySelfRestrictionAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(propertySelfRestrictionAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(propertySelfRestrictionAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(propertySelfRestrictionAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(propertySelfRestrictionAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(propertySelfRestrictionAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validateElement_extraValidate(propertySelfRestrictionAxiom, diagnostics, context);
 		return result;
 	}
 
