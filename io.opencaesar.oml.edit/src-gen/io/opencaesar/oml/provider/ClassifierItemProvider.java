@@ -78,8 +78,8 @@ public class ClassifierItemProvider extends TypeItemProvider {
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS);
 			childrenFeatures.add(OmlPackage.Literals.CLASSIFIER__OWNED_EQUIVALENCES);
+			childrenFeatures.add(OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS);
 		}
 		return childrenFeatures;
 	}
@@ -124,8 +124,8 @@ public class ClassifierItemProvider extends TypeItemProvider {
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Classifier.class)) {
-			case OmlPackage.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS:
 			case OmlPackage.CLASSIFIER__OWNED_EQUIVALENCES:
+			case OmlPackage.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -142,6 +142,11 @@ public class ClassifierItemProvider extends TypeItemProvider {
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+
+		newChildDescriptors.add
+			(createChildParameter
+				(OmlPackage.Literals.CLASSIFIER__OWNED_EQUIVALENCES,
+				 OmlFactory.eINSTANCE.createClassifierEquivalenceAxiom()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -162,11 +167,6 @@ public class ClassifierItemProvider extends TypeItemProvider {
 			(createChildParameter
 				(OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS,
 				 OmlFactory.eINSTANCE.createPropertySelfRestrictionAxiom()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OmlPackage.Literals.CLASSIFIER__OWNED_EQUIVALENCES,
-				 OmlFactory.eINSTANCE.createClassifierEquivalenceAxiom()));
 	}
 
 }

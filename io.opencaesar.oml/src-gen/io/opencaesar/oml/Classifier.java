@@ -35,8 +35,8 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link io.opencaesar.oml.Classifier#getOwnedPropertyRestrictions <em>Owned Property Restrictions</em>}</li>
  *   <li>{@link io.opencaesar.oml.Classifier#getOwnedEquivalences <em>Owned Equivalences</em>}</li>
+ *   <li>{@link io.opencaesar.oml.Classifier#getOwnedPropertyRestrictions <em>Owned Property Restrictions</em>}</li>
  * </ul>
  *
  * @see io.opencaesar.oml.OmlPackage#getClassifier()
@@ -45,23 +45,6 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface Classifier extends Type {
-	/**
-	 * Returns the value of the '<em><b>Owned Property Restrictions</b></em>' containment reference list.
-	 * The list contents are of type {@link io.opencaesar.oml.PropertyRestrictionAxiom}.
-	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.PropertyRestrictionAxiom#getOwningClassifier <em>Owning Classifier</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * The set of property restriction axioms of this classifier
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Owned Property Restrictions</em>' containment reference list.
-	 * @see io.opencaesar.oml.OmlPackage#getClassifier_OwnedPropertyRestrictions()
-	 * @see io.opencaesar.oml.PropertyRestrictionAxiom#getOwningClassifier
-	 * @model opposite="owningClassifier" containment="true"
-	 * @generated
-	 */
-	EList<PropertyRestrictionAxiom> getOwnedPropertyRestrictions();
-
 	/**
 	 * Returns the value of the '<em><b>Owned Equivalences</b></em>' containment reference list.
 	 * The list contents are of type {@link io.opencaesar.oml.ClassifierEquivalenceAxiom}.
@@ -78,5 +61,22 @@ public interface Classifier extends Type {
 	 * @generated
 	 */
 	EList<ClassifierEquivalenceAxiom> getOwnedEquivalences();
+
+	/**
+	 * Returns the value of the '<em><b>Owned Property Restrictions</b></em>' containment reference list.
+	 * The list contents are of type {@link io.opencaesar.oml.PropertyRestrictionAxiom}.
+	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.PropertyRestrictionAxiom#getOwningClassifier <em>Owning Classifier</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The set of property restriction axioms of this classifier
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Owned Property Restrictions</em>' containment reference list.
+	 * @see io.opencaesar.oml.OmlPackage#getClassifier_OwnedPropertyRestrictions()
+	 * @see io.opencaesar.oml.PropertyRestrictionAxiom#getOwningClassifier
+	 * @model opposite="owningClassifier" containment="true"
+	 * @generated
+	 */
+	EList<PropertyRestrictionAxiom> getOwnedPropertyRestrictions();
 
 } // Classifier

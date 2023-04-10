@@ -3310,22 +3310,22 @@ public interface OmlPackage extends EPackage {
 	int CLASSIFIER__OWNED_SPECIALIZATIONS = TYPE__OWNED_SPECIALIZATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Property Restrictions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS = TYPE_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Owned Equivalences</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CLASSIFIER__OWNED_EQUIVALENCES = TYPE_FEATURE_COUNT + 1;
+	int CLASSIFIER__OWNED_EQUIVALENCES = TYPE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Owned Property Restrictions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS = TYPE_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Classifier</em>' class.
@@ -3681,15 +3681,6 @@ public interface OmlPackage extends EPackage {
 	int ENTITY__OWNED_SPECIALIZATIONS = CLASSIFIER__OWNED_SPECIALIZATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Property Restrictions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENTITY__OWNED_PROPERTY_RESTRICTIONS = CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS;
-
-	/**
 	 * The feature id for the '<em><b>Owned Equivalences</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3697,6 +3688,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int ENTITY__OWNED_EQUIVALENCES = CLASSIFIER__OWNED_EQUIVALENCES;
+
+	/**
+	 * The feature id for the '<em><b>Owned Property Restrictions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENTITY__OWNED_PROPERTY_RESTRICTIONS = CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS;
 
 	/**
 	 * The feature id for the '<em><b>Owned Keys</b></em>' containment reference list.
@@ -3835,15 +3835,6 @@ public interface OmlPackage extends EPackage {
 	int STRUCTURE__OWNED_SPECIALIZATIONS = CLASSIFIER__OWNED_SPECIALIZATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Property Restrictions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRUCTURE__OWNED_PROPERTY_RESTRICTIONS = CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS;
-
-	/**
 	 * The feature id for the '<em><b>Owned Equivalences</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3851,6 +3842,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int STRUCTURE__OWNED_EQUIVALENCES = CLASSIFIER__OWNED_EQUIVALENCES;
+
+	/**
+	 * The feature id for the '<em><b>Owned Property Restrictions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURE__OWNED_PROPERTY_RESTRICTIONS = CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS;
 
 	/**
 	 * The feature id for the '<em><b>Ref</b></em>' reference.
@@ -3989,15 +3989,6 @@ public interface OmlPackage extends EPackage {
 	int ASPECT__OWNED_SPECIALIZATIONS = ENTITY__OWNED_SPECIALIZATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Property Restrictions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASPECT__OWNED_PROPERTY_RESTRICTIONS = ENTITY__OWNED_PROPERTY_RESTRICTIONS;
-
-	/**
 	 * The feature id for the '<em><b>Owned Equivalences</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4005,6 +3996,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int ASPECT__OWNED_EQUIVALENCES = ENTITY__OWNED_EQUIVALENCES;
+
+	/**
+	 * The feature id for the '<em><b>Owned Property Restrictions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASPECT__OWNED_PROPERTY_RESTRICTIONS = ENTITY__OWNED_PROPERTY_RESTRICTIONS;
 
 	/**
 	 * The feature id for the '<em><b>Owned Keys</b></em>' containment reference list.
@@ -4152,15 +4152,6 @@ public interface OmlPackage extends EPackage {
 	int CONCEPT__OWNED_SPECIALIZATIONS = ENTITY__OWNED_SPECIALIZATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Property Restrictions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONCEPT__OWNED_PROPERTY_RESTRICTIONS = ENTITY__OWNED_PROPERTY_RESTRICTIONS;
-
-	/**
 	 * The feature id for the '<em><b>Owned Equivalences</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4168,6 +4159,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int CONCEPT__OWNED_EQUIVALENCES = ENTITY__OWNED_EQUIVALENCES;
+
+	/**
+	 * The feature id for the '<em><b>Owned Property Restrictions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONCEPT__OWNED_PROPERTY_RESTRICTIONS = ENTITY__OWNED_PROPERTY_RESTRICTIONS;
 
 	/**
 	 * The feature id for the '<em><b>Owned Keys</b></em>' containment reference list.
@@ -4324,15 +4324,6 @@ public interface OmlPackage extends EPackage {
 	int RELATION_ENTITY__OWNED_SPECIALIZATIONS = ENTITY__OWNED_SPECIALIZATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Property Restrictions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RELATION_ENTITY__OWNED_PROPERTY_RESTRICTIONS = ENTITY__OWNED_PROPERTY_RESTRICTIONS;
-
-	/**
 	 * The feature id for the '<em><b>Owned Equivalences</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4340,6 +4331,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int RELATION_ENTITY__OWNED_EQUIVALENCES = ENTITY__OWNED_EQUIVALENCES;
+
+	/**
+	 * The feature id for the '<em><b>Owned Property Restrictions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_ENTITY__OWNED_PROPERTY_RESTRICTIONS = ENTITY__OWNED_PROPERTY_RESTRICTIONS;
 
 	/**
 	 * The feature id for the '<em><b>Owned Keys</b></em>' containment reference list.
@@ -10090,17 +10090,6 @@ public interface OmlPackage extends EPackage {
 	EClass getClassifier();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link io.opencaesar.oml.Classifier#getOwnedPropertyRestrictions <em>Owned Property Restrictions</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Owned Property Restrictions</em>'.
-	 * @see io.opencaesar.oml.Classifier#getOwnedPropertyRestrictions()
-	 * @see #getClassifier()
-	 * @generated
-	 */
-	EReference getClassifier_OwnedPropertyRestrictions();
-
-	/**
 	 * Returns the meta object for the containment reference list '{@link io.opencaesar.oml.Classifier#getOwnedEquivalences <em>Owned Equivalences</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -10110,6 +10099,17 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getClassifier_OwnedEquivalences();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link io.opencaesar.oml.Classifier#getOwnedPropertyRestrictions <em>Owned Property Restrictions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Owned Property Restrictions</em>'.
+	 * @see io.opencaesar.oml.Classifier#getOwnedPropertyRestrictions()
+	 * @see #getClassifier()
+	 * @generated
+	 */
+	EReference getClassifier_OwnedPropertyRestrictions();
 
 	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.Scalar <em>Scalar</em>}'.
@@ -13020,20 +13020,20 @@ public interface OmlPackage extends EPackage {
 		EClass CLASSIFIER = eINSTANCE.getClassifier();
 
 		/**
-		 * The meta object literal for the '<em><b>Owned Property Restrictions</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS = eINSTANCE.getClassifier_OwnedPropertyRestrictions();
-
-		/**
 		 * The meta object literal for the '<em><b>Owned Equivalences</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference CLASSIFIER__OWNED_EQUIVALENCES = eINSTANCE.getClassifier_OwnedEquivalences();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Property Restrictions</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS = eINSTANCE.getClassifier_OwnedPropertyRestrictions();
 
 		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.ScalarImpl <em>Scalar</em>}' class.

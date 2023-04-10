@@ -668,13 +668,13 @@ abstract class SpecializableProperty extends SpecializableTerm, Property {
 @Bikeshed(heading="Types")
 abstract class Classifier extends Type {
     /*
-     * The set of property restriction axioms of this classifier
-     */
-    contains PropertyRestrictionAxiom[*] ownedPropertyRestrictions opposite owningClassifier
-    /*
      * The set of classifier equivalence axioms of this classifier
      */
     contains ClassifierEquivalenceAxiom[*] ownedEquivalences opposite owningClassifier
+    /*
+     * The set of property restriction axioms of this classifier
+     */
+    contains PropertyRestrictionAxiom[*] ownedPropertyRestrictions opposite owningClassifier
 }
 
 /*

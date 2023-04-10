@@ -1709,7 +1709,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getClassifier_OwnedPropertyRestrictions() {
+	public EReference getClassifier_OwnedEquivalences() {
 		return (EReference)classifierEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -1719,7 +1719,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getClassifier_OwnedEquivalences() {
+	public EReference getClassifier_OwnedPropertyRestrictions() {
 		return (EReference)classifierEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -3874,8 +3874,8 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		createEReference(specializablePropertyEClass, SPECIALIZABLE_PROPERTY__OWNED_EQUIVALENCES);
 
 		classifierEClass = createEClass(CLASSIFIER);
-		createEReference(classifierEClass, CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS);
 		createEReference(classifierEClass, CLASSIFIER__OWNED_EQUIVALENCES);
+		createEReference(classifierEClass, CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS);
 
 		scalarEClass = createEClass(SCALAR);
 		createEReference(scalarEClass, SCALAR__REF);
@@ -4394,8 +4394,8 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		initEReference(getSpecializableProperty_OwnedEquivalences(), this.getPropertyEquivalenceAxiom(), this.getPropertyEquivalenceAxiom_OwningProperty(), "ownedEquivalences", null, 0, -1, SpecializableProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(classifierEClass, Classifier.class, "Classifier", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getClassifier_OwnedPropertyRestrictions(), this.getPropertyRestrictionAxiom(), this.getPropertyRestrictionAxiom_OwningClassifier(), "ownedPropertyRestrictions", null, 0, -1, Classifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getClassifier_OwnedEquivalences(), this.getClassifierEquivalenceAxiom(), this.getClassifierEquivalenceAxiom_OwningClassifier(), "ownedEquivalences", null, 0, -1, Classifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getClassifier_OwnedPropertyRestrictions(), this.getPropertyRestrictionAxiom(), this.getPropertyRestrictionAxiom_OwningClassifier(), "ownedPropertyRestrictions", null, 0, -1, Classifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(scalarEClass, Scalar.class, "Scalar", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getScalar_Ref(), this.getScalar(), null, "ref", null, 0, 1, Scalar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

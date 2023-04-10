@@ -542,6 +542,7 @@ public final class OmlValidator2 {
 	        final EClass superEClass = superTerm.eClass();
 	        final EClass subEClass = subTerm.eClass();
 	        if (!((OmlPackage.Literals.ASPECT == superEClass && OmlPackage.Literals.ENTITY.isSuperTypeOf(subEClass)) ||
+	        	(superTerm instanceof Relation && subTerm instanceof Relation) ||	
 	            (superEClass == subEClass))) {
 	            return report(Diagnostic.ERROR, diagnostics, object,
 	                "Term "+superTerm.getAbbreviatedIri()+" cannot be specialized by "+subTerm.getAbbreviatedIri()+"", 
@@ -573,7 +574,7 @@ public final class OmlValidator2 {
         for(Classifier superClassifier : superClassifiers) {
 	        if (!superClassifier.eIsProxy()) {
 		        final EClass superEClass = superClassifier.eClass();
-		        if (superEClass != subEClass) {
+		        if (!(superEClass == subEClass)) {
 		            return report(Diagnostic.ERROR, diagnostics, object,
 		                "Classifier "+superClassifier.getAbbreviatedIri()+" cannot be specialized by "+subClassifier.getAbbreviatedIri()+"", 
 		                OmlPackage.Literals.CLASSIFIER_EQUIVALENCE_AXIOM__SUPER_CLASSIFIERS);
@@ -604,7 +605,7 @@ public final class OmlValidator2 {
         if (superProperty != null && !superProperty.eIsProxy()) {
 	        final EClass superEClass = superProperty.eClass();
 	        final EClass subEClass = subProperty.eClass();
-	        if (superEClass != subEClass) {
+	        if (!((subProperty instanceof Relation && superProperty instanceof Relation) || (superEClass == subEClass))) {
 	            return report(Diagnostic.ERROR, diagnostics, object,
 	                "Property "+superProperty.getAbbreviatedIri()+" cannot be specialized by "+subProperty.getAbbreviatedIri()+"", 
 	                OmlPackage.Literals.PROPERTY_EQUIVALENCE_AXIOM__SUPER_PROPERTY);
