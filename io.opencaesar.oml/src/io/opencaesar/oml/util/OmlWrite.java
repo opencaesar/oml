@@ -24,7 +24,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import io.opencaesar.oml.Annotation;
 import io.opencaesar.oml.AnnotationProperty;
@@ -192,33 +191,6 @@ public class OmlWrite {
     }
 
     // ------------------------------------------------------------------------------------
-    
-    // Element
-    
-    /**
-     * Deletes the given element
-     * 
-     * @param element the given element to delete
-     */
-    public static void delete(Element element) {
-        EcoreUtil.delete(element);
-    }
-    
-    // Named Instance
-
-    /**
-     * Deletes the given instance recursively in the resource set by also deleting its 
-     * referencing links and relation instances
-     * 
-     * @param instance the given instance
-     */
-    public static void deleteRecursively(NamedInstance instance) {
-    	OmlSearch.findRelationInstancesWithTarget(instance).forEach(ri -> deleteRecursively(ri));
-    	OmlSearch.findRelationInstancesWithSource(instance).forEach(ri -> deleteRecursively(ri));
-        OmlSearch.findPropertyValueAssertionsWithObject(instance).forEach(a -> delete(a));
-        OmlSearch.findReferences(instance).forEach(r -> delete(r));
-        delete(instance);
-    }
     
     // Annotation
 
