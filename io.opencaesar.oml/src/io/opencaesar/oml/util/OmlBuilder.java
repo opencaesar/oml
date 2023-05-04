@@ -656,7 +656,7 @@ public class OmlBuilder {
      * @param name the name of the new builtIn
      * @return a builtIn that is added to the given vocabulary
      */
-    public static BuiltIn addBuiltIn(Vocabulary vocabulary, String name) {
+    public BuiltIn addBuiltIn(Vocabulary vocabulary, String name) {
         final BuiltIn builtIn = OmlWrite.addBuiltIn(vocabulary, name);
         return builtIn;
     }
@@ -720,7 +720,7 @@ public class OmlBuilder {
      * @param prefix the prefix of the imported ontology (optional)
      * @return an import that is added to the importing ontology
      */
-    public static Import addImport(Ontology ontology, ImportKind kind, String iri, SeparatorKind sep, String prefix) {
+    public Import addImport(Ontology ontology, ImportKind kind, String iri, SeparatorKind sep, String prefix) {
         final Import import_ = OmlWrite.addImport(ontology, kind, iri, sep, prefix);
         return import_;
     }
