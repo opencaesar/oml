@@ -22,19 +22,7 @@ env:
   - ENCRYPTION_LABEL: "62536e021d06"
   - COMMIT_AUTHOR_EMAIL: "melaasar@gmail.com"
   
-before_deploy:
-  - export JAR_FILE=$(ls */build/libs/oml-server\-*.jar)
-  
 deploy:
-  - provider: releases
-    api_key:
-      secure: "DjURa6yvDFnyFApKse32OVFzRAl+ZVlOQrKc/8J40R2VwMQOuff+iHcNAc9a3WilwnObN3xfX+Q2LKUjPpb0IOCP9q9iFFlOa1XyXAngOCnZcwUL6L3piNayivtMgog2iVgLwUqeDqC6AExarckW6/epLTr6q4WDz6lcNjYc0N7os0akJ5i3fkTSIaosZk33qtMHt+QWU3jrYz6cvw42Sxqf+cXDoaGXfp8AZbS3n6QRrzIkFAOEqd2IiQ5kxg36RtkV9fa07dJTAKgkdxSCkC78UuiYfNhwv9TUPJ2T8i8X7Cfugue7TS0s7HiNIlsG3NFPovMHpEQ/UpTXiG0bWmZJDdsmIf8FwUFr+J+ZhwY6Buhgy3ncTd0lh2F6H3b9E8///RkemwU4gyfZRzho6JQGXBLHFPzHwNBKN1Y1/gHfIoXzvh7ay5P12jESqxYDo7XiVQuv0qNsHAleIF3xpgpBj8ttBg1E2GxWjZ00XW5RlRx15CWoqSIGMaWRsLcEhpg2oM6QfZ7FfrLsiNAyfUb0KyJHzsfSM7rosBda08uLHI0xfQh0u4BjtGBtp8T6k62UCVvTjx/WMQWKlj1NcmnRixD7/2KGfsLog3jzCLb0HzLOxIW+HQf0UFWH0YbSTbqIg5p5fstBkPB/1zbr3rBBnY/oITMkwrhB5QobFd8="
-    file_glob: true
-    file: "${JAR_FILE}"
-    skip_cleanup: true
-    on:
-      tags: true
-      branch: master
   - provider: script
     script: ./gradlew publish
     skip_cleanup: true

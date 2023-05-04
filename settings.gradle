@@ -1,6 +1,5 @@
 include 'io.opencaesar.oml'
 include 'io.opencaesar.oml.dsl'
 include 'io.opencaesar.oml.dsl.ide'
-include 'io.opencaesar.oml.dsl.ide.server'
 include 'io.opencaesar.oml.dsl.tests'
 include 'io.opencaesar.oml.specification'
