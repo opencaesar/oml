@@ -552,7 +552,7 @@ public class OmlBuilder {
         return property;
     }
     
-    // FacetedScalar
+    // Scalar
 
     /**
      * Creates a new scalar and adds it to the given vocabulary
@@ -570,7 +570,7 @@ public class OmlBuilder {
      * @param maxExclusive the max exclusive facet
      * @return a new scalar that is added to the given vocabulary
      */
-    public Scalar addFacetedScalar(Vocabulary vocabulary, String name, Long length, Long minLength, Long maxLength, String pattern, 
+    public Scalar addScalar(Vocabulary vocabulary, String name, Long length, Long minLength, Long maxLength, String pattern, 
         String language, Literal minInclusive, Literal minExclusive, Literal maxInclusive, Literal maxExclusive) {
         final Scalar scalar = OmlWrite.addScalar(vocabulary, name, length, minLength, maxLength, pattern, language, minInclusive, minExclusive, maxInclusive, maxExclusive);
         return scalar;
