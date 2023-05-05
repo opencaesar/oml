@@ -197,7 +197,11 @@ public class OmlBuilder {
         assert !eRef.isMany() : eRef.getName()+" is a List reference";
         assert IdentifiedElement.class.isAssignableFrom(objectClass) : eRef.getName()+" is not typed by an identified element";
         if (objectIri != null) {
-            defer.add(() -> subject.eSet(eRef, resolve(objectClass, ontology, objectIri)));
+        	if (eRef.isMany()) {
+        		defer.add(() -> ((List<Element>)subject.eGet(eRef)).add(resolve(objectClass, ontology, objectIri)));
+        	} else {
+        		defer.add(() -> subject.eSet(eRef, resolve(objectClass, ontology, objectIri)));
+        	}
         }
     }
     
@@ -240,9 +244,17 @@ public class OmlBuilder {
             defer.add(() -> {
                 final Member member = resolve(Member.class, ontology, subjectIri);
                 if (member.getOntology() == ontology) {
-                    ((List<Element>)member.eGet(elementERef)).add(object);
+                	if (elementERef.isMany()) {
+                		((List<Element>)member.eGet(elementERef)).add(object);
+                	} else {
+                		member.eSet(elementERef, object);
+                	}
                 } else {
-                    ((List<Element>)OmlWrite.getOrAddReference(ontology, member).eGet(elementERef)).add(object);
+                	if (elementERef.isMany()) {
+                		((List<Element>)OmlWrite.getOrAddReference(ontology, member).eGet(elementERef)).add(object);
+                	} else {
+                		OmlWrite.getOrAddReference(ontology, member).eSet(elementERef, object);
+                	}
                 }
             });
         }
@@ -478,7 +490,7 @@ public class OmlBuilder {
     public RelationEntity addRelationEntity(Vocabulary vocabulary, String name, List<String> sourceIris, List<String> targetIris, 
         boolean functional, boolean inverseFunctional, boolean symmetric, 
         boolean asymmetric, boolean reflexive, boolean irreflexive, boolean transitive) {
-        final RelationEntity relation = OmlWrite.addRelationEntity(vocabulary, name, null, null, functional, inverseFunctional, symmetric, asymmetric, reflexive, irreflexive, transitive);
+        final RelationEntity relation = OmlWrite.addRelationEntity(vocabulary, name, Collections.emptyList(), Collections.emptyList(), functional, inverseFunctional, symmetric, asymmetric, reflexive, irreflexive, transitive);
         setCrossReferences(vocabulary, relation, OmlPackage.Literals.RELATION_BASE__SOURCES, sourceIris);
         setCrossReferences(vocabulary, relation, OmlPackage.Literals.RELATION_BASE__TARGETS, targetIris);
         return relation;
@@ -526,7 +538,7 @@ public class OmlBuilder {
      */
     public ScalarProperty addScalarProperty(Vocabulary vocabulary, String name,
         List<String> domainIris, List<String> rangeIris, boolean functional) {
-        final ScalarProperty property = OmlWrite.addScalarProperty(vocabulary, name, null, null, functional);
+        final ScalarProperty property = OmlWrite.addScalarProperty(vocabulary, name, Collections.emptyList(), Collections.emptyList(), functional);
         setCrossReferences(vocabulary, property, OmlPackage.Literals.SCALAR_PROPERTY__DOMAINS, domainIris);
         setCrossReferences(vocabulary, property, OmlPackage.Literals.SCALAR_PROPERTY__RANGES, rangeIris);
         return property;
@@ -546,7 +558,7 @@ public class OmlBuilder {
      */
     public StructuredProperty addStructuredProperty(Vocabulary vocabulary, String name, 
         List<String> domainIris, List<String> rangeIris, boolean functional) {
-        final StructuredProperty property = OmlWrite.addStructuredProperty(vocabulary, name, null, null, functional);
+        final StructuredProperty property = OmlWrite.addStructuredProperty(vocabulary, name, Collections.emptyList(), Collections.emptyList(), functional);
         setCrossReferences(vocabulary, property, OmlPackage.Literals.STRUCTURED_PROPERTY__DOMAINS, domainIris);
         setCrossReferences(vocabulary, property, OmlPackage.Literals.STRUCTURED_PROPERTY__RANGES, rangeIris);
         return property;
@@ -625,7 +637,7 @@ public class OmlBuilder {
     public UnreifiedRelation addUnreifiedRelation(Vocabulary vocabulary, String name, List<String> sourceIris, List<String> targetIris, 
         boolean functional, boolean inverseFunctional, boolean symmetric, 
         boolean asymmetric, boolean reflexive, boolean irreflexive, boolean transitive) {
-        final UnreifiedRelation relation = OmlWrite.addUnreifiedRelation(vocabulary, name, null, null, functional, inverseFunctional, symmetric, asymmetric, reflexive, irreflexive, transitive);
+        final UnreifiedRelation relation = OmlWrite.addUnreifiedRelation(vocabulary, name, Collections.emptyList(), Collections.emptyList(), functional, inverseFunctional, symmetric, asymmetric, reflexive, irreflexive, transitive);
         setCrossReferences(vocabulary, relation, OmlPackage.Literals.RELATION_BASE__SOURCES, sourceIris);
         setCrossReferences(vocabulary, relation, OmlPackage.Literals.RELATION_BASE__TARGETS, targetIris);
         return relation;

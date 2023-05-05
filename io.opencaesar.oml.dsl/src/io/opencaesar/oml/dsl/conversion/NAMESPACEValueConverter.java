@@ -27,7 +27,7 @@ public class NAMESPACEValueConverter extends AbstractValueConverter<String> {
 
 	@Override
 	public String toString(final String value) {
-		if (value.startsWith("http://")) {
+		if (value.startsWith("http://") || value.startsWith("https://")) {
 			return '<' + Strings.convertToJavaString(value, false) + '>';
 		} else {
 			return elseToString(value);
