@@ -26,8 +26,7 @@ import org.eclipse.emf.common.util.EList;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * StructuredProperty is a semantic property whose range is a structure. It can specialize other structured properties.
- * A structured property ref cannot respecify the domain nor the range.
+ * StructuredProperty is a [=SemanticProperty=] whose range is a [=Structure=]. It can specialize other [=StructuredProperties=].
  * <!-- end-model-doc -->
  *
  * <p>

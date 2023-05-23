@@ -25,7 +25,7 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * DescriptionBox is an ontology whose members are instances (of terms defined in vocabulary boxes)
+ * DescriptionBox is the supertype of [=Description=] and [=DescriptionBundle=].
  * <!-- end-model-doc -->
  *
  *

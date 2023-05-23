@@ -26,8 +26,8 @@ import org.eclipse.emf.common.util.EList;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * KeyAxiom is an axiom that specifies that a set of properties form a unique key for an entity. This means that all
- * instances of that entity must have unique values for those keys.
+ * KeyAxiom is an [=Axiom=] that specifies that a set of [=properties=] form a unique key for an [=entity=]. This means that all
+ * [=instances=] of that [=entity=] must have unique values for those keys.
  * <!-- end-model-doc -->
  *
  * <p>
@@ -95,5 +95,13 @@ public interface KeyAxiom extends Axiom {
 	 * @generated
 	 */
 	Entity getKeyedEntity();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
+	Entity getCharacterizedTerm();
 
 } // KeyAxiom

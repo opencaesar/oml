@@ -25,7 +25,7 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * DescriptionMember is a member of a description.
+ * DescriptionMember is a [=member=] of a [=description=].
  * <!-- end-model-doc -->
  *
  *

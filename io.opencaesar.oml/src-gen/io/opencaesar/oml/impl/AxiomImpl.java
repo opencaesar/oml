@@ -20,6 +20,11 @@ package io.opencaesar.oml.impl;
 
 import io.opencaesar.oml.Axiom;
 import io.opencaesar.oml.OmlPackage;
+import io.opencaesar.oml.Term;
+
+import java.lang.reflect.InvocationTargetException;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 
@@ -48,6 +53,32 @@ public abstract class AxiomImpl extends ElementImpl implements Axiom {
 	@Override
 	protected EClass eStaticClass() {
 		return OmlPackage.Literals.AXIOM;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Term getCharacterizedTerm() {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case OmlPackage.AXIOM___GET_CHARACTERIZED_TERM:
+				return getCharacterizedTerm();
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 } //AxiomImpl

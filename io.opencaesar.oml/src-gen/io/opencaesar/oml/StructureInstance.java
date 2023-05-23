@@ -25,8 +25,8 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * StructureInstance is an instance that can be typed by a structure. It is anonymous and gets assigned as a value of a structured property
- * either in a property value restriction axiom or a property value assertion
+ * StructureInstance is an [=Instance=] that can be typed by a [=Structure=]. It is anonymous and gets assigned as a value of a [=StructuredProperty=]
+ * either in a [=PropertyValueRestrictionAxiom=] or a [=PropertyValueAssertion=].
  * <!-- end-model-doc -->
  *
  * <p>

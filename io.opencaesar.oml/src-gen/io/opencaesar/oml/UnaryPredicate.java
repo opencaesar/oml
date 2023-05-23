@@ -25,7 +25,7 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * UnaryPredicate is a predicate that has one argument
+ * UnaryPredicate is a [=Predicate=] that has one [=argument=].
  * <!-- end-model-doc -->
  *
  * <p>
@@ -37,7 +37,7 @@ package io.opencaesar.oml;
  *
  * @see io.opencaesar.oml.OmlPackage#getUnaryPredicate()
  * @model abstract="true"
- *        annotation="https://tabatkins.github.io/bikeshed heading='Rules'"
+ *        annotation="https://tabatkins.github.io/bikeshed heading='Predicates'"
  * @generated
  */
 public interface UnaryPredicate extends Predicate {

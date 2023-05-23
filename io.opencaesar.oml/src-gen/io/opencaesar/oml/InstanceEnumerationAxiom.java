@@ -26,7 +26,7 @@ import org.eclipse.emf.common.util.EList;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * InstanceEnumerationAxiom is an axiom specified on a concept that states that it classifies an enumerated set of instances.
+ * InstanceEnumerationAxiom is an [=Axiom=] specified on a [=Concept=] that states that it classifies an enumerated set of [=instances=].
  * <!-- end-model-doc -->
  *
  * <p>
@@ -94,5 +94,13 @@ public interface InstanceEnumerationAxiom extends Axiom {
 	 * @generated
 	 */
 	Concept getEnumeratedConcept();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
+	Concept getCharacterizedTerm();
 
 } // InstanceEnumerationAxiom

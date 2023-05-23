@@ -235,6 +235,8 @@ public class OmlValidator extends EObjectValidator {
 				return validateLiteralEnumerationAxiom((LiteralEnumerationAxiom)value, diagnostics, context);
 			case OmlPackage.CLASSIFIER_EQUIVALENCE_AXIOM:
 				return validateClassifierEquivalenceAxiom((ClassifierEquivalenceAxiom)value, diagnostics, context);
+			case OmlPackage.SCALAR_EQUIVALENCE_AXIOM:
+				return validateScalarEquivalenceAxiom((ScalarEquivalenceAxiom)value, diagnostics, context);
 			case OmlPackage.PROPERTY_EQUIVALENCE_AXIOM:
 				return validatePropertyEquivalenceAxiom((PropertyEquivalenceAxiom)value, diagnostics, context);
 			case OmlPackage.PROPERTY_RANGE_RESTRICTION_AXIOM:
@@ -1369,6 +1371,25 @@ public class OmlValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(classifierEquivalenceAxiom, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(classifierEquivalenceAxiom, diagnostics, context);
 		if (result || diagnostics != null) result &= validateElement_extraValidate(classifierEquivalenceAxiom, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateScalarEquivalenceAxiom(ScalarEquivalenceAxiom scalarEquivalenceAxiom, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		if (!validate_NoCircularContainment(scalarEquivalenceAxiom, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms(scalarEquivalenceAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(scalarEquivalenceAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(scalarEquivalenceAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(scalarEquivalenceAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(scalarEquivalenceAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(scalarEquivalenceAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(scalarEquivalenceAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(scalarEquivalenceAxiom, diagnostics, context);
+		if (result || diagnostics != null) result &= validateElement_extraValidate(scalarEquivalenceAxiom, diagnostics, context);
 		return result;
 	}
 

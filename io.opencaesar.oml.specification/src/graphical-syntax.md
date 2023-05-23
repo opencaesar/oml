@@ -18,13 +18,9 @@ BNF symbols are colored in orange and will not show up in actual rendering of OM
 
     <img src="images/structure.svg"/>
 
-<a id="FacetedScalar-Diagram">FacetedScalar</a>:
+<a id="Scalar-Diagram">Scalar</a>:
 
-    <img src="images/faceted_scalar.svg"/>
-
-<a id="EnumeratedScalar-Diagram">EnumeratedScalar</a>:
-
-    <img src="images/enumerated_scalar.svg"/>
+    <img src="images/scalar.svg"/>
 
 <a id="Rule-Diagram">Rule</a>:
 

@@ -192,6 +192,16 @@ public class PropertyEquivalenceAxiomImpl extends AxiomImpl implements PropertyE
 	 * @generated
 	 */
 	@Override
+	public Property getCharacterizedTerm() {
+		return this.getSubProperty();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case OmlPackage.PROPERTY_EQUIVALENCE_AXIOM__OWNING_PROPERTY:
@@ -310,6 +320,8 @@ public class PropertyEquivalenceAxiomImpl extends AxiomImpl implements PropertyE
 		switch (operationID) {
 			case OmlPackage.PROPERTY_EQUIVALENCE_AXIOM___GET_SUB_PROPERTY:
 				return getSubProperty();
+			case OmlPackage.PROPERTY_EQUIVALENCE_AXIOM___GET_CHARACTERIZED_TERM:
+				return getCharacterizedTerm();
 		}
 		return super.eInvoke(operationID, arguments);
 	}

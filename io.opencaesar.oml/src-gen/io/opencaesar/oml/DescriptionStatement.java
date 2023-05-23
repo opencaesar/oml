@@ -25,7 +25,7 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * DescriptionStatement is a statement owned by a description.
+ * DescriptionStatement is a [=statement=] owned by a [=description=].
  * <!-- end-model-doc -->
  *
  * <p>

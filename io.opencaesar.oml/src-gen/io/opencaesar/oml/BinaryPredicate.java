@@ -25,7 +25,7 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * BinaryPredicate is a predicate that has two arguments: argument1 and argument2
+ * BinaryPredicate is a [=Predicate=] that has two [=arguments=]: argument1 and argument2
  * <!-- end-model-doc -->
  *
  * <p>
@@ -38,7 +38,7 @@ package io.opencaesar.oml;
  *
  * @see io.opencaesar.oml.OmlPackage#getBinaryPredicate()
  * @model abstract="true"
- *        annotation="https://tabatkins.github.io/bikeshed heading='Rules'"
+ *        annotation="https://tabatkins.github.io/bikeshed heading='Predicates'"
  * @generated
  */
 public interface BinaryPredicate extends Predicate {

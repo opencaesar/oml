@@ -25,11 +25,11 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * RelationEntity is an entity that represents a reified relation from a source entity to a target entity.
- * It can optionally name a forward property whose domain is the source and whose range is the target.
- * If both are named, such forward property becomes the inverse of the entity's reverse property.
- * If not, then a default forward property with the name 'has<Relation>Forward' is assumed. A relation entity ref
- * cannot respecify a forward relation.
+ * RelationEntity is an [=entity=] that represents a reified relation from a source entity to a target entity.
+ * It can optionally name a [=ForwardRelation=] whose domain is the source and whose range is the target.
+ * If both are named, such [=ForwardRelation=] becomes the inverse of the entity's [=ReverseRelation=] .
+ * If not, then a default [=ForwardRelation=]  with the name 'has<Relation>Forward' is assumed.
+ * A relation entity ref cannot specify a [=ForwardRelation=].
  * <!-- end-model-doc -->
  *
  * <p>
@@ -41,7 +41,7 @@ package io.opencaesar.oml;
  * </ul>
  *
  * @see io.opencaesar.oml.OmlPackage#getRelationEntity()
- * @model annotation="https://tabatkins.github.io/bikeshed heading='Types'"
+ * @model annotation="https://tabatkins.github.io/bikeshed heading='Relations'"
  * @generated
  */
 public interface RelationEntity extends Entity, RelationBase {

@@ -25,7 +25,7 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Argument is an element that represents an argument to a predicate specified as a variable, a literal, or an instance
+ * Argument is an element that represents a variable name, a [=Literal=], or an [=NamedInstance=] specified in a [=predicate=].
  * <!-- end-model-doc -->
  *
  * <p>
@@ -38,7 +38,7 @@ package io.opencaesar.oml;
  * </ul>
  *
  * @see io.opencaesar.oml.OmlPackage#getArgument()
- * @model annotation="https://tabatkins.github.io/bikeshed heading='Rules'"
+ * @model annotation="https://tabatkins.github.io/bikeshed heading='Predicates'"
  * @generated
  */
 public interface Argument extends Element {

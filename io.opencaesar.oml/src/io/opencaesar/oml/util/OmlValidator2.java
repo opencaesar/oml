@@ -70,6 +70,7 @@ import io.opencaesar.oml.RelationEntityPredicate;
 import io.opencaesar.oml.RelationInstance;
 import io.opencaesar.oml.Rule;
 import io.opencaesar.oml.Scalar;
+import io.opencaesar.oml.ScalarEquivalenceAxiom;
 import io.opencaesar.oml.ScalarProperty;
 import io.opencaesar.oml.SemanticProperty;
 import io.opencaesar.oml.SpecializationAxiom;
@@ -570,14 +571,23 @@ public final class OmlValidator2 {
 	                "Classifier "+subClassifier.getAbbreviatedIri()+" specializes itself", 
 	                OmlPackage.Literals.CLASSIFIER_EQUIVALENCE_AXIOM__SUPER_CLASSIFIERS);
         } 
-        final EClass subEClass = subClassifier.eClass();
-        for(Classifier superClassifier : superClassifiers) {
-	        if (!superClassifier.eIsProxy()) {
-		        final EClass superEClass = superClassifier.eClass();
-		        if (!(superEClass == subEClass)) {
+        if (superClassifiers.size() == 1) {
+	        if (!superClassifiers.get(0).eIsProxy()) {
+		        if (!(superClassifiers.get(0).eClass() == subClassifier.eClass())) {
 		            return report(Diagnostic.ERROR, diagnostics, object,
-		                "Classifier "+superClassifier.getAbbreviatedIri()+" cannot be specialized by "+subClassifier.getAbbreviatedIri()+"", 
+		                "Classifier "+superClassifiers.get(0).getAbbreviatedIri()+" cannot be specialized by "+subClassifier.getAbbreviatedIri()+"", 
 		                OmlPackage.Literals.CLASSIFIER_EQUIVALENCE_AXIOM__SUPER_CLASSIFIERS);
+		        }
+	        }
+        } else {
+	        for(Classifier superClassifier : superClassifiers) {
+		        if (!superClassifier.eIsProxy()) {
+			        if (!(superClassifier.eClass() == subClassifier.eClass() ||
+			        		subClassifier instanceof Entity && superClassifier instanceof Aspect)) {
+			            return report(Diagnostic.ERROR, diagnostics, object,
+			                "Classifier "+superClassifier.getAbbreviatedIri()+" cannot be specialized by "+subClassifier.getAbbreviatedIri()+"", 
+			                OmlPackage.Literals.CLASSIFIER_EQUIVALENCE_AXIOM__SUPER_CLASSIFIERS);
+			        }
 		        }
 	        }
         }
@@ -614,53 +624,78 @@ public final class OmlValidator2 {
         return true;
     }
 
-    // Faceted Scalar
+    // Scalar
     
     /**
-     * Checks the inheritance rules of scalars
+     * Checks scalar supertypes
      * 
      * @param object The scalar to check
      * @param diagnostics The validation diagnostics
      * @param context The object-to-object context map
      * @return True if the rules is satisfied; False otherwise
      */
-    protected boolean validateScalarSupertype(Scalar object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-    	var specializations = object.getOwnedSpecializations();
-    	if (!OmlRead.isStandardScalar(object)) {
-    		if (specializations.size() == 0) {
-                return report(Diagnostic.ERROR, diagnostics, object,
-                	"Non-standard scalar "+object.getAbbreviatedIri()+" must specify a supertype", 
-    	            OmlPackage.Literals.MEMBER__NAME);
-	        }
-    		if (object.getLanguage() != null ||
-	        	object.getLength() != null ||
-	            object.getMaxLength() != null ||
-	        	object.getMinLength() != null ||
-	        	object.getMaxExclusive() != null ||
-	        	object.getMaxInclusive() != null ||
-	        	object.getMinExclusive() != null ||
-	        	object.getMinInclusive() != null) 
-	        {
-	        	if (specializations.size() > 1 || !OmlRead.isStandardScalar((Scalar) specializations.get(0).getSuperTerm())) {
-	                return report(Diagnostic.ERROR, diagnostics, object,
-	                	"Non-standard scalar "+object.getAbbreviatedIri()+" with facets must specify a single standard supertype", 
-	    	            OmlPackage.Literals.MEMBER__NAME);
-	        	}
-	        }
-    		if (object.getOwnedEnumeration() != null) {
-    			for (Term superTerm : OmlRead.getSuperTerms(object)) {
-    				Scalar superScalar = (Scalar) superTerm;
-    				for (Literal literal : object.getOwnedEnumeration().getLiterals()) {
-    		        	if (!OmlSearch.findIsOfKind(literal, superScalar)) {
-    		                return report(Diagnostic.ERROR, diagnostics, object,
-    		                	"Literal "+literal.getLexicalValue()+" is not in the range of literals of scalar "+superScalar.getAbbreviatedIri(), 
-    		    	            OmlPackage.Literals.MEMBER__NAME);
-    		        	}
-    				}
-    			}
-	        	
-	        }
-    	}
+    protected boolean validateScalarSupertypes(Scalar object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+    	boolean isStandardType = OmlRead.isStandardScalar(object);
+    	boolean hasSpecializations = !object.getOwnedSpecializations().isEmpty();
+    	if (!isStandardType && hasSpecializations) {
+            return report(Diagnostic.ERROR, diagnostics, object,
+            	"Non-standard Scalar "+object.getAbbreviatedIri()+" cannot have specializations", 
+	            OmlPackage.Literals.SPECIALIZABLE_TERM__OWNED_SPECIALIZATIONS);
+        }
+    	boolean hasAllStandardSupers = OmlRead.getSpecializationSuperTerms(object).stream()
+			.filter(i -> i instanceof Scalar)
+			.allMatch(i -> OmlRead.isStandardScalar((Scalar)i));
+    	if (!hasAllStandardSupers) {
+            return report(Diagnostic.ERROR, diagnostics, object,
+            	"Standard scalar "+object.getAbbreviatedIri()+" can only specialize standard scalars", 
+	            OmlPackage.Literals.SPECIALIZABLE_TERM__OWNED_SPECIALIZATIONS);
+        }
+        return true;
+    }
+
+    /**
+     * Checks enumerated scalars
+     * 
+     * @param object The scalar to check
+     * @param diagnostics The validation diagnostics
+     * @param context The object-to-object context map
+     * @return True if the rules is satisfied; False otherwise
+     */
+    protected boolean validateScalarEnumeration(Scalar object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		if (object.getOwnedEnumeration() != null) {
+			for (Term superTerm : OmlRead.getSuperTerms(object)) {
+				Scalar superScalar = (Scalar) superTerm;
+				for (Literal literal : object.getOwnedEnumeration().getLiterals()) {
+		        	if (!OmlSearch.findIsOfKind(literal, superScalar)) {
+		                return report(Diagnostic.ERROR, diagnostics, object,
+		                	literal.getLexicalValue()+" is not a literal of scalar "+superScalar.getAbbreviatedIri(), 
+		    	            OmlPackage.Literals.SCALAR__OWNED_ENUMERATION);
+		        	}
+				}
+			}
+        	
+        }
+        return true;
+    }
+
+    // Scalar Equivalence Axiom
+
+    /**
+     * Checks scalar equivalence axioms
+     * 
+     * @param object The scalar to check
+     * @param diagnostics The validation diagnostics
+     * @param context The object-to-object context map
+     * @return True if the rules is satisfied; False otherwise
+     */
+    protected boolean validateScalarEquivalenceAxioms(ScalarEquivalenceAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+    	boolean isStandardSuper = OmlRead.isStandardScalar(object.getSuperScalar());
+		int facets = OmlRead.getNumberOfFacets(object);
+		if (facets > 0 && !isStandardSuper) {
+            return report(Diagnostic.ERROR, diagnostics, object,
+            	"Facets can only restrict standard super scalars", 
+	            OmlPackage.Literals.SCALAR_EQUIVALENCE_AXIOM__SUPER_SCALAR);
+        }
         return true;
     }
 
@@ -708,7 +743,7 @@ public final class OmlValidator2 {
         return true;
     }
 
-    // Type Predicate
+    // Argument
 
     /**
      * Checks if an argument is well formed

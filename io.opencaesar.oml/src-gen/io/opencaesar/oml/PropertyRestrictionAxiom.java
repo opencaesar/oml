@@ -25,8 +25,8 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * PropertyRestrictionAxiom is an axiom specified on the classifier that places some restriction on the value of a semantic property in the context of
- * a restricting classifier domain.
+ * PropertyRestrictionAxiom is an [=Axiom=] specified on a [=Classifier=] that places some restriction on the value of a [=SemanticProperty=]
+ * in the context of the classifier.
  * <!-- end-model-doc -->
  *
  * <p>
@@ -133,5 +133,13 @@ public interface PropertyRestrictionAxiom extends Axiom {
 	 * @generated
 	 */
 	Classifier getRestrictingDomain();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
+	Classifier getCharacterizedTerm();
 
 } // PropertyRestrictionAxiom

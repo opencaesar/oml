@@ -26,9 +26,9 @@ import org.eclipse.emf.common.util.EList;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * ReverseRelation is a relation that is defined by a relation base and represents its inverse relation. Its domain
- * is the target of the relation base, and its range is the source of the relation base. The DL semantics of a reverse property are
- * derived from those of its relation.
+ * ReverseRelation is a [=Relation=] that is defined by a [=RelationBase=] and represents its inverse [=relation=]. Its domain
+ * is the target of the [=RelationBase=], and its range is the source of the [=RelationBase=]. The DL semantics of a reverse property are
+ * derived from those of its [=RelationBase=].
  * <!-- end-model-doc -->
  *
  * <p>
@@ -39,7 +39,7 @@ import org.eclipse.emf.common.util.EList;
  * </ul>
  *
  * @see io.opencaesar.oml.OmlPackage#getReverseRelation()
- * @model annotation="https://tabatkins.github.io/bikeshed heading='Properties'"
+ * @model annotation="https://tabatkins.github.io/bikeshed heading='Relations'"
  * @generated
  */
 public interface ReverseRelation extends Relation {

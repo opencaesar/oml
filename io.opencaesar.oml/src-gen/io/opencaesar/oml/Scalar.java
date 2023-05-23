@@ -18,6 +18,7 @@
  */
 package io.opencaesar.oml;
 
+import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -25,17 +26,15 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Scalar is a primitive type that represents a set of literals. Some scalars are considered standard (enumerated below).
+ * Scalar is a primitive [=type=] that represents a set of [=literals=]. Some scalars are considered standard (see below).
  * 
- * A non-standard scalar may specialize a standard scalar (in which case it is the only one), and optionally specify facets (restrictions) on it.
- * The kind of restrictions allowed depend on the standard super scalar as detailed below.
+ * A standard scalar can have specialization axioms to other standard scalars.
  * 
- * A non-standard scalar may also specialize (one or more) non-standard scalars, in which case no facets should be specified) and the scalar is
- * considered semantically equivalent to those super scalars.
+ * Non-standard scalars cannot have specialization axioms, but can have scalar equivalence axioms.
  * 
- * The standard scalars (along with their supported facets):
+ * The standard scalars are:
  * 
- * Numeric scalars (facets: minInclusive, maxInclusive, minExclusive, maxExclusive, literals):
+ * <i>Numeric scalars</i>:
  * owl:real
  * owl:rational
  * xsd:decimal
@@ -55,13 +54,13 @@ package io.opencaesar.oml;
  * xsd:double
  * xsd:float
  * 
- * Time scalars (facets: minInclusive, maxInclusive, minExclusive, maxExclusive, literals):
+ * <i>Time scalars</i>:
  * xsd:dateTime
  * xsd:dateTimeStamp
  * 
- * Plain scalars (facets: length, minLength, maxLength, pattern, language, literals):
+ * <i>Plain scalars</i>:
  * rdf:PlainLiteral
- * String scalars (facets: length, minLength, maxLength, pattern, literals)
+ * <i>String scalars</i>:
  * xsd:string,
  * xsd:normalizedString,
  * xsd:token,
@@ -71,14 +70,14 @@ package io.opencaesar.oml;
  * xsd:NMTOKEN
  * xsd:anyURI
  * 
- * Boolean scalars (literals):
+ * <i>Boolean scalars</i>:
  * xsd:boolean
  * 
- * Binary scalars (facets: length, minLength, maxLength, literals):
+ * </i>Binary scalars}</i>:
  * xsd:hexBinary
  * xsd:base64Binary
  * 
- * XML scalars (literals):
+ * <i>XML scalars</i>:
  * rdf:XMLLiteral
  * <!-- end-model-doc -->
  *
@@ -87,16 +86,8 @@ package io.opencaesar.oml;
  * </p>
  * <ul>
  *   <li>{@link io.opencaesar.oml.Scalar#getRef <em>Ref</em>}</li>
- *   <li>{@link io.opencaesar.oml.Scalar#getLength <em>Length</em>}</li>
- *   <li>{@link io.opencaesar.oml.Scalar#getMinLength <em>Min Length</em>}</li>
- *   <li>{@link io.opencaesar.oml.Scalar#getMaxLength <em>Max Length</em>}</li>
- *   <li>{@link io.opencaesar.oml.Scalar#getPattern <em>Pattern</em>}</li>
- *   <li>{@link io.opencaesar.oml.Scalar#getLanguage <em>Language</em>}</li>
- *   <li>{@link io.opencaesar.oml.Scalar#getMinInclusive <em>Min Inclusive</em>}</li>
- *   <li>{@link io.opencaesar.oml.Scalar#getMinExclusive <em>Min Exclusive</em>}</li>
- *   <li>{@link io.opencaesar.oml.Scalar#getMaxInclusive <em>Max Inclusive</em>}</li>
- *   <li>{@link io.opencaesar.oml.Scalar#getMaxExclusive <em>Max Exclusive</em>}</li>
  *   <li>{@link io.opencaesar.oml.Scalar#getOwnedEnumeration <em>Owned Enumeration</em>}</li>
+ *   <li>{@link io.opencaesar.oml.Scalar#getOwnedEquivalences <em>Owned Equivalences</em>}</li>
  * </ul>
  *
  * @see io.opencaesar.oml.OmlPackage#getScalar()
@@ -109,7 +100,7 @@ public interface Scalar extends Type {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * A ref to another faceted scalar
+	 * A ref to another scalar
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Ref</em>' reference.
 	 * @see #setRef(Scalar)
@@ -128,232 +119,6 @@ public interface Scalar extends Type {
 	 * @generated
 	 */
 	void setRef(Scalar value);
-
-	/**
-	 * Returns the value of the '<em><b>Length</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * The exact length of the literals of this scalar
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Length</em>' attribute.
-	 * @see #setLength(Long)
-	 * @see io.opencaesar.oml.OmlPackage#getScalar_Length()
-	 * @model unique="false" dataType="io.opencaesar.oml.UnsignedInteger"
-	 * @generated
-	 */
-	Long getLength();
-
-	/**
-	 * Sets the value of the '{@link io.opencaesar.oml.Scalar#getLength <em>Length</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Length</em>' attribute.
-	 * @see #getLength()
-	 * @generated
-	 */
-	void setLength(Long value);
-
-	/**
-	 * Returns the value of the '<em><b>Min Length</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * The minimum length of the literals of this scalar
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Min Length</em>' attribute.
-	 * @see #setMinLength(Long)
-	 * @see io.opencaesar.oml.OmlPackage#getScalar_MinLength()
-	 * @model unique="false" dataType="io.opencaesar.oml.UnsignedInteger"
-	 * @generated
-	 */
-	Long getMinLength();
-
-	/**
-	 * Sets the value of the '{@link io.opencaesar.oml.Scalar#getMinLength <em>Min Length</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Min Length</em>' attribute.
-	 * @see #getMinLength()
-	 * @generated
-	 */
-	void setMinLength(Long value);
-
-	/**
-	 * Returns the value of the '<em><b>Max Length</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * The maximum length of the literals of this scalar
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Max Length</em>' attribute.
-	 * @see #setMaxLength(Long)
-	 * @see io.opencaesar.oml.OmlPackage#getScalar_MaxLength()
-	 * @model unique="false" dataType="io.opencaesar.oml.UnsignedInteger"
-	 * @generated
-	 */
-	Long getMaxLength();
-
-	/**
-	 * Sets the value of the '{@link io.opencaesar.oml.Scalar#getMaxLength <em>Max Length</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Max Length</em>' attribute.
-	 * @see #getMaxLength()
-	 * @generated
-	 */
-	void setMaxLength(Long value);
-
-	/**
-	 * Returns the value of the '<em><b>Pattern</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * The pattern that the literals of this scalar conforms to
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Pattern</em>' attribute.
-	 * @see #setPattern(String)
-	 * @see io.opencaesar.oml.OmlPackage#getScalar_Pattern()
-	 * @model unique="false"
-	 * @generated
-	 */
-	String getPattern();
-
-	/**
-	 * Sets the value of the '{@link io.opencaesar.oml.Scalar#getPattern <em>Pattern</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Pattern</em>' attribute.
-	 * @see #getPattern()
-	 * @generated
-	 */
-	void setPattern(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Language</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * The language range that the literals of this scalar belong to
-	 * (based on http://www.rfc-editor.org/rfc/bcp/bcp47.txt)
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Language</em>' attribute.
-	 * @see #setLanguage(String)
-	 * @see io.opencaesar.oml.OmlPackage#getScalar_Language()
-	 * @model unique="false"
-	 * @generated
-	 */
-	String getLanguage();
-
-	/**
-	 * Sets the value of the '{@link io.opencaesar.oml.Scalar#getLanguage <em>Language</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Language</em>' attribute.
-	 * @see #getLanguage()
-	 * @generated
-	 */
-	void setLanguage(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Min Inclusive</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * The minimum inclusive value of numeric literals of this scalar
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Min Inclusive</em>' containment reference.
-	 * @see #setMinInclusive(Literal)
-	 * @see io.opencaesar.oml.OmlPackage#getScalar_MinInclusive()
-	 * @model containment="true"
-	 * @generated
-	 */
-	Literal getMinInclusive();
-
-	/**
-	 * Sets the value of the '{@link io.opencaesar.oml.Scalar#getMinInclusive <em>Min Inclusive</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Min Inclusive</em>' containment reference.
-	 * @see #getMinInclusive()
-	 * @generated
-	 */
-	void setMinInclusive(Literal value);
-
-	/**
-	 * Returns the value of the '<em><b>Min Exclusive</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * The minimum exclusive value of numeric literals of this scalar
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Min Exclusive</em>' containment reference.
-	 * @see #setMinExclusive(Literal)
-	 * @see io.opencaesar.oml.OmlPackage#getScalar_MinExclusive()
-	 * @model containment="true"
-	 * @generated
-	 */
-	Literal getMinExclusive();
-
-	/**
-	 * Sets the value of the '{@link io.opencaesar.oml.Scalar#getMinExclusive <em>Min Exclusive</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Min Exclusive</em>' containment reference.
-	 * @see #getMinExclusive()
-	 * @generated
-	 */
-	void setMinExclusive(Literal value);
-
-	/**
-	 * Returns the value of the '<em><b>Max Inclusive</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * The maximum inclusive value of numeric literals of this scalar
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Max Inclusive</em>' containment reference.
-	 * @see #setMaxInclusive(Literal)
-	 * @see io.opencaesar.oml.OmlPackage#getScalar_MaxInclusive()
-	 * @model containment="true"
-	 * @generated
-	 */
-	Literal getMaxInclusive();
-
-	/**
-	 * Sets the value of the '{@link io.opencaesar.oml.Scalar#getMaxInclusive <em>Max Inclusive</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Max Inclusive</em>' containment reference.
-	 * @see #getMaxInclusive()
-	 * @generated
-	 */
-	void setMaxInclusive(Literal value);
-
-	/**
-	 * Returns the value of the '<em><b>Max Exclusive</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * The maximum exclusive value of numeric literals of this scalar
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Max Exclusive</em>' containment reference.
-	 * @see #setMaxExclusive(Literal)
-	 * @see io.opencaesar.oml.OmlPackage#getScalar_MaxExclusive()
-	 * @model containment="true"
-	 * @generated
-	 */
-	Literal getMaxExclusive();
-
-	/**
-	 * Sets the value of the '{@link io.opencaesar.oml.Scalar#getMaxExclusive <em>Max Exclusive</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Max Exclusive</em>' containment reference.
-	 * @see #getMaxExclusive()
-	 * @generated
-	 */
-	void setMaxExclusive(Literal value);
 
 	/**
 	 * Returns the value of the '<em><b>Owned Enumeration</b></em>' containment reference.
@@ -381,5 +146,22 @@ public interface Scalar extends Type {
 	 * @generated
 	 */
 	void setOwnedEnumeration(LiteralEnumerationAxiom value);
+
+	/**
+	 * Returns the value of the '<em><b>Owned Equivalences</b></em>' containment reference list.
+	 * The list contents are of type {@link io.opencaesar.oml.ScalarEquivalenceAxiom}.
+	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.ScalarEquivalenceAxiom#getOwningScalar <em>Owning Scalar</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The set of scalar equivalence axioms of this scalar
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Owned Equivalences</em>' containment reference list.
+	 * @see io.opencaesar.oml.OmlPackage#getScalar_OwnedEquivalences()
+	 * @see io.opencaesar.oml.ScalarEquivalenceAxiom#getOwningScalar
+	 * @model opposite="owningScalar" containment="true"
+	 * @generated
+	 */
+	EList<ScalarEquivalenceAxiom> getOwnedEquivalences();
 
 } // Scalar

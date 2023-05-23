@@ -25,7 +25,7 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * VocabularyStatement is a statement owned by a vocabulary.
+ * VocabularyStatement is a [=statement=] owned by a [=vocabulary=].
  * <!-- end-model-doc -->
  *
  * <p>

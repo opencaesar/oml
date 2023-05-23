@@ -21,6 +21,7 @@ package io.opencaesar.oml.util;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -41,10 +42,8 @@ import io.opencaesar.oml.AnnotationProperty;
 import io.opencaesar.oml.Assertion;
 import io.opencaesar.oml.Axiom;
 import io.opencaesar.oml.Classifier;
-import io.opencaesar.oml.Concept;
 import io.opencaesar.oml.Description;
 import io.opencaesar.oml.Element;
-import io.opencaesar.oml.Entity;
 import io.opencaesar.oml.ForwardRelation;
 import io.opencaesar.oml.IdentifiedElement;
 import io.opencaesar.oml.Import;
@@ -62,6 +61,7 @@ import io.opencaesar.oml.RelationEntity;
 import io.opencaesar.oml.RelationEntityPredicate;
 import io.opencaesar.oml.ReverseRelation;
 import io.opencaesar.oml.Scalar;
+import io.opencaesar.oml.ScalarEquivalenceAxiom;
 import io.opencaesar.oml.SemanticProperty;
 import io.opencaesar.oml.SpecializableProperty;
 import io.opencaesar.oml.SpecializableTerm;
@@ -91,12 +91,12 @@ public final class OmlRead {
      * @param recursive the function to recurse with
      * @return the recursive closure of applying the given function on the given root
      */
-    public static <T, V extends T> List<T> closure(V root, boolean includeRoot, Function<T, List<T>> recursive) {
+    public static <T, V extends T> Collection<T> closure(V root, boolean includeRoot, Function<T, Collection<T>> recursive) {
         final Set<T> results = new LinkedHashSet<>();
         if (includeRoot)
             results.add(root);
         closure(root, results, recursive);
-        return new ArrayList<T>(results);
+        return results;
     }
     
     /*
@@ -108,8 +108,8 @@ public final class OmlRead {
      * @param cache the cache of results already collected before the recursion starts
      * @param recursive the function to recurse with
      */
-    private static <T, V extends T> void closure(V root, Set<T> cache, Function<T, List<T>> recursive) {
-        List<T> results = recursive.apply(root);
+    private static <T, V extends T> void closure(V root, Set<T> cache, Function<T, Collection<T>> recursive) {
+    	Collection<T> results = recursive.apply(root);
         if (results == null) {
             results = Collections.emptyList();
         } else {
@@ -131,7 +131,7 @@ public final class OmlRead {
      * @param recursive the function to recurse with
      * @return true if the given item is in the closure; otherwise false
      */
-    public static <T, V extends T> boolean isInClosure(T item, V root, boolean includeRoot, Function<T, List<T>> recursive) {
+    public static <T, V extends T> boolean isInClosure(T item, V root, boolean includeRoot, Function<T, Collection<T>> recursive) {
         final Set<T> results = new LinkedHashSet<>();
         if (includeRoot) {
                results.add(root);
@@ -152,8 +152,8 @@ public final class OmlRead {
      * @param recursive the function to recurse with
      * @return true if the given item is in the closure; otherwise false
      */
-    private static <T, V extends T> boolean isInClosure(T item, V root, Set<T> cache, Function<T, List<T>> recursive) {
-        List<T> results = recursive.apply(root);
+    private static <T, V extends T> boolean isInClosure(T item, V root, Set<T> cache, Function<T, Collection<T>> recursive) {
+    	Collection<T> results = recursive.apply(root);
         if (results == null) {
             results = Collections.emptyList();
         } else {
@@ -562,9 +562,9 @@ public final class OmlRead {
      * Gets the ontologies directly or transitively imported by the given ontology
      * 
      * @param ontology the given ontology
-     * @return a list of ontologies directly imported by the given ontology
+     * @return a collection of ontologies directly imported by the given ontology
      */
-    public static List<Ontology> getAllImportedOntologies(Ontology ontology, boolean inclusive) {
+    public static Collection<Ontology> getAllImportedOntologies(Ontology ontology, boolean inclusive) {
         return closure(ontology, inclusive, i -> i.getOwnedImports().stream()
             .map(j -> getImportedOntology(j))
             .collect(Collectors.toList()));
@@ -742,6 +742,8 @@ public final class OmlRead {
         supers.addAll(getSpecializationSuperTerms(term));
         if (term instanceof Classifier) {
             supers.addAll(getEquivalenceSuperClassifiers((Classifier)term));
+        } else if (term instanceof Scalar) {
+            supers.addAll(getEquivalenceSuperScalars((Scalar)term));
         } else if (term instanceof Property) {
             supers.addAll(getEquivalenceSuperProperties((Property)term));
         }
@@ -790,6 +792,18 @@ public final class OmlRead {
     public static List<Classifier> getEquivalenceSuperClassifiers(Classifier classifier) {
         return classifier.getOwnedEquivalences().stream()
 	            .flatMap(i -> i.getSuperClassifiers().stream())
+	            .collect(Collectors.toList());
+    }
+
+    /**
+     * Gets the equivalence super scalars of the given scalar
+     * 
+     * @param scalar the given scalar
+     * @return a list of equivalence super scalars of the given scalar
+     */
+    public static List<Scalar> getEquivalenceSuperScalars(Scalar scalar) {
+        return scalar.getOwnedEquivalences().stream()
+	            .map(i -> i.getSuperScalar())
 	            .collect(Collectors.toList());
     }
 
@@ -871,30 +885,41 @@ public final class OmlRead {
     }
     
     /**
-     * Gets all the axioms owned by the given term
+     * Gets all the axioms specified on the given term
      * 
      * @param term the given term
-     * @return a list of axioms owned by the given term
+     * @return a list of axioms specified on the given term
      */
     public static List<Axiom> getAxioms(SpecializableTerm term) {
         var axioms = new ArrayList<Axiom>();
-        axioms.addAll(((SpecializableTerm)term).getOwnedSpecializations());
-        if (term instanceof Classifier) {
-            axioms.addAll(((Classifier)term).getOwnedPropertyRestrictions());
-            axioms.addAll(((Classifier)term).getOwnedEquivalences());
-        }
-        if (term instanceof SpecializableProperty) {
-            axioms.addAll(((SpecializableProperty)term).getOwnedEquivalences());
-        }
-        if (term instanceof Entity) {
-            axioms.addAll(((Entity)term).getOwnedKeys());            
-        }
-        if (term instanceof Concept) {
-            axioms.add(((Concept)term).getOwnedEnumeration());            
+        for (EObject object : term.eContents()) {
+        	if (object instanceof Axiom) {
+        		axioms.add((Axiom)object);
+        	}
         }
         return axioms;
     }
         
+    /**
+     * Gets the number of facets defined on the given scalar equivalence axiom
+     * 
+     * @param axiom the given axiom
+     * @return the number of facets defined on the given scalar equivalence axiom
+     */
+    public static int getNumberOfFacets(ScalarEquivalenceAxiom axiom) {
+		int number = 0;
+		if (axiom.getLanguage() != null) number++;
+		if (axiom.getPattern() != null) number++;
+	    if (axiom.getLength() != null) number++;
+	    if (axiom.getMaxLength() != null) number++;
+	    if (axiom.getMinLength() != null) number++;
+	    if (axiom.getMaxExclusive() != null) number++;
+	    if (axiom.getMaxInclusive() != null) number++;
+	    if (axiom.getMinExclusive() != null) number++;
+	    if (axiom.getMinInclusive() != null) number++;
+		return number;
+    }
+
     /**
      * Gets the term that is bound by the given predicate
      * 

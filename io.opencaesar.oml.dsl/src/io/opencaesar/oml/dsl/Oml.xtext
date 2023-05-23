@@ -136,6 +136,17 @@ ClassifierEquivalenceAxiom:
 Scalar:
 	ownedAnnotations+=Annotation*
 	('scalar' name=ID | 'ref' 'scalar' ref=[Scalar|Ref]) ('['
+		 ownedEnumeration=LiteralEnumerationAxiom
+	']')? (ScalarSpecialization)? (ScalarEquivalence)?;
+
+fragment ScalarSpecialization returns Scalar:
+	'<' ownedSpecializations+=SpecializationAxiom (',' ownedSpecializations+=SpecializationAxiom)*;
+
+fragment ScalarEquivalence returns Scalar:
+	'=' ownedEquivalences+=ScalarEquivalenceAxiom (',' ownedEquivalences+=ScalarEquivalenceAxiom)*;
+
+ScalarEquivalenceAxiom:
+	superScalar=[Scalar|Ref] ('['
 		(('length' length=UnsignedInteger)? &
 		 ('minLength' minLength=UnsignedInteger)? &
 		 ('maxLength' maxLength=UnsignedInteger)? &
@@ -144,12 +155,8 @@ Scalar:
 		 ('minInclusive' minInclusive=Literal)? &
 		 ('minExclusive' minExclusive=Literal)? &
 		 ('maxInclusive' maxInclusive=Literal)? &
-		 ('maxExclusive' maxExclusive=Literal)? &
-		 (ownedEnumeration=LiteralEnumerationAxiom)?)
-	']')? (ScalarSpecialization)?;
-
-fragment ScalarSpecialization returns Scalar:
-	'<' ownedSpecializations+=SpecializationAxiom (',' ownedSpecializations+=SpecializationAxiom)*;
+		 ('maxExclusive' maxExclusive=Literal)?)
+	']')?;
 
 Property:
 	AnnotationProperty |
@@ -215,10 +222,13 @@ fragment PropertySpecialization returns SpecializableProperty:
 fragment PropertyEquivalence returns SpecializableProperty:
 	'=' ownedEquivalences+=PropertyEquivalenceAxiom (',' ownedEquivalences+=PropertyEquivalenceAxiom)*;
 
+PropertyEquivalenceAxiom:
+	superProperty=[Property|Ref];
+
 Rule:
 	ownedAnnotations+=Annotation*
 	('rule' name=ID | 'ref' 'rule' ref=[Rule|Ref]) ('['
-		(antecedent+=Predicate ('^' antecedent+=Predicate)* '->' consequent+=Predicate ('^' consequent+=Predicate)*)?
+		(antecedent+=Predicate ('&' antecedent+=Predicate)* '->' consequent+=Predicate ('&' consequent+=Predicate)*)?
 	']')?;
 
 BuiltIn:
@@ -273,9 +283,6 @@ Inclusion returns Import:
 
 SpecializationAxiom:
 	superTerm=[SpecializableTerm|Ref];
-
-PropertyEquivalenceAxiom:
-	superProperty=[Property|Ref];
 
 PropertyRestrictionAxiom:
 	PropertySelfRestrictionAxiom |

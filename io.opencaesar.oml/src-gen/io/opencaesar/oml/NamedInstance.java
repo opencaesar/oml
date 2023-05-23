@@ -26,7 +26,7 @@ import org.eclipse.emf.common.util.EList;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * NamedInstance is an instance that is a member of a description.
+ * NamedInstance is an [=Instance=] that is a member of a [=description=].
  * <!-- end-model-doc -->
  *
  * <p>

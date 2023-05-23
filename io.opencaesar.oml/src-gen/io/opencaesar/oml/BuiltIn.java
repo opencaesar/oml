@@ -25,7 +25,7 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * BuiltIn is a member of a vocabulary that represents a builtin function
+ * BuiltIn is a [=member=] of a [=vocabulary=] that represents a builtin function
  * <!-- end-model-doc -->
  *
  * <p>
@@ -36,7 +36,7 @@ package io.opencaesar.oml;
  * </ul>
  *
  * @see io.opencaesar.oml.OmlPackage#getBuiltIn()
- * @model annotation="https://tabatkins.github.io/bikeshed heading='Rules'"
+ * @model annotation="https://tabatkins.github.io/bikeshed heading='Vocabularies'"
  * @generated
  */
 public interface BuiltIn extends VocabularyStatement {

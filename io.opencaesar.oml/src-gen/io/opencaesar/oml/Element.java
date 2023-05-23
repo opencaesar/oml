@@ -30,7 +30,7 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Element is the most general type in the OML metamodel. All objects in an OML model are elements.
+ * Element is the root supertype in OML. All objects in an OML ontology are elements.
  * <!-- end-model-doc -->
  *
  *
@@ -44,6 +44,17 @@ public interface Element extends EObject {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
+	 * Gets the ontology that defines this element
+	 * <!-- end-model-doc -->
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
+	Ontology getOntology();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
 	 * Validates this element by extra validation rules
 	 * @param diagnostics validation error diagnostics
 	 * @param context object-to-object map used in producing messages
@@ -52,16 +63,5 @@ public interface Element extends EObject {
 	 * @generated
 	 */
 	boolean extraValidate(DiagnosticChain diagnostics, Map<Object, Object> context);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * Gets the ontology that defines this element
-	 * <!-- end-model-doc -->
-	 * @model kind="operation" unique="false"
-	 * @generated
-	 */
-	Ontology getOntology();
 
 } // Element

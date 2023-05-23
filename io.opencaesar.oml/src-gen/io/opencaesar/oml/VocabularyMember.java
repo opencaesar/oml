@@ -25,7 +25,7 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * VocabularyMember is a member of a vocabulary.
+ * VocabularyMember is a [=member=] of a [=vocabulary=].
  * <!-- end-model-doc -->
  *
  *

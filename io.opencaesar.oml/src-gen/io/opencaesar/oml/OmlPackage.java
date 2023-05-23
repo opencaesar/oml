@@ -44,7 +44,7 @@ import org.eclipse.emf.ecore.EReference;
  * <!-- end-model-doc -->
  * @see io.opencaesar.oml.OmlFactory
  * @model kind="package"
- *        annotation="https://tabatkins.github.io/bikeshed/headings Elements='' Literals='' Vocabularies='' Types='' Properties='' Rules='' Axioms='' Descriptions='' Instances='' Assertions='' Enumerations=''"
+ *        annotation="https://tabatkins.github.io/bikeshed/headings Elements='' Literals='' Vocabularies='' Types='' Properties='' Relations='' Predicates='' Axioms='' Descriptions='' Instances='' Assertions='' Enumerations=''"
  *        annotation="https://tabatkins.github.io/bikeshed heading='Abstract-Syntax'"
  *        annotation="http://www.eclipse.org/emf/2011/Xcore Bikeshed='https://tabatkins.github.io/bikeshed' BikeshedHeadings='https://tabatkins.github.io/bikeshed/headings'"
  * @generated
@@ -102,22 +102,22 @@ public interface OmlPackage extends EPackage {
 	int ELEMENT_FEATURE_COUNT = 0;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ELEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = 0;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ELEMENT___GET_ONTOLOGY = 1;
+	int ELEMENT___GET_ONTOLOGY = 0;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ELEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = 1;
 
 	/**
 	 * The number of operations of the '<em>Element</em>' class.
@@ -184,15 +184,6 @@ public interface OmlPackage extends EPackage {
 	int ANNOTATION_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 4;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ANNOTATION___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = ELEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -200,6 +191,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int ANNOTATION___GET_ONTOLOGY = ELEMENT___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANNOTATION___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = ELEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Get Value</em>' operation.
@@ -257,15 +257,6 @@ public interface OmlPackage extends EPackage {
 	int IDENTIFIED_ELEMENT_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IDENTIFIED_ELEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = ELEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -273,6 +264,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int IDENTIFIED_ELEMENT___GET_ONTOLOGY = ELEMENT___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IDENTIFIED_ELEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = ELEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
@@ -348,15 +348,6 @@ public interface OmlPackage extends EPackage {
 	int IMPORT_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 4;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMPORT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = ELEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -364,6 +355,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int IMPORT___GET_ONTOLOGY = ELEMENT___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPORT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = ELEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
@@ -421,15 +421,6 @@ public interface OmlPackage extends EPackage {
 	int INSTANCE_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INSTANCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = ELEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -437,6 +428,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int INSTANCE___GET_ONTOLOGY = ELEMENT___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INSTANCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = ELEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The number of operations of the '<em>Instance</em>' class.
@@ -467,15 +467,6 @@ public interface OmlPackage extends EPackage {
 	int AXIOM_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = ELEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -485,13 +476,31 @@ public interface OmlPackage extends EPackage {
 	int AXIOM___GET_ONTOLOGY = ELEMENT___GET_ONTOLOGY;
 
 	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = ELEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Get Characterized Term</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AXIOM___GET_CHARACTERIZED_TERM = ELEMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * The number of operations of the '<em>Axiom</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int AXIOM_OPERATION_COUNT = ELEMENT_OPERATION_COUNT + 0;
+	int AXIOM_OPERATION_COUNT = ELEMENT_OPERATION_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.impl.AssertionImpl <em>Assertion</em>}' class.
@@ -513,15 +522,6 @@ public interface OmlPackage extends EPackage {
 	int ASSERTION_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSERTION___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = ELEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -529,6 +529,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int ASSERTION___GET_ONTOLOGY = ELEMENT___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSERTION___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = ELEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Get Subject</em>' operation.
@@ -595,15 +604,6 @@ public interface OmlPackage extends EPackage {
 	int PREDICATE_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 2;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PREDICATE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = ELEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -611,6 +611,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int PREDICATE___GET_ONTOLOGY = ELEMENT___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PREDICATE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = ELEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The number of operations of the '<em>Predicate</em>' class.
@@ -668,15 +677,6 @@ public interface OmlPackage extends EPackage {
 	int ARGUMENT_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 3;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ARGUMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = ELEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -684,6 +684,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int ARGUMENT___GET_ONTOLOGY = ELEMENT___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARGUMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = ELEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The number of operations of the '<em>Argument</em>' class.
@@ -714,15 +723,6 @@ public interface OmlPackage extends EPackage {
 	int LITERAL_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LITERAL___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = ELEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -730,6 +730,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int LITERAL___GET_ONTOLOGY = ELEMENT___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LITERAL___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = ELEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Get Value</em>' operation.
@@ -832,15 +841,6 @@ public interface OmlPackage extends EPackage {
 	int ONTOLOGY_FEATURE_COUNT = IDENTIFIED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ONTOLOGY___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = IDENTIFIED_ELEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -848,6 +848,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int ONTOLOGY___GET_ONTOLOGY = IDENTIFIED_ELEMENT___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ONTOLOGY___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = IDENTIFIED_ELEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
@@ -914,15 +923,6 @@ public interface OmlPackage extends EPackage {
 	int MEMBER_FEATURE_COUNT = IDENTIFIED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MEMBER___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = IDENTIFIED_ELEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -930,6 +930,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int MEMBER___GET_ONTOLOGY = IDENTIFIED_ELEMENT___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEMBER___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = IDENTIFIED_ELEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Get Ref</em>' operation.
@@ -1041,15 +1050,6 @@ public interface OmlPackage extends EPackage {
 	int VOCABULARY_BOX_FEATURE_COUNT = ONTOLOGY_FEATURE_COUNT + 0;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_BOX___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = ONTOLOGY___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1057,6 +1057,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int VOCABULARY_BOX___GET_ONTOLOGY = ONTOLOGY___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOCABULARY_BOX___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = ONTOLOGY___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
@@ -1141,15 +1150,6 @@ public interface OmlPackage extends EPackage {
 	int DESCRIPTION_BOX_FEATURE_COUNT = ONTOLOGY_FEATURE_COUNT + 0;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BOX___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = ONTOLOGY___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1157,6 +1157,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int DESCRIPTION_BOX___GET_ONTOLOGY = ONTOLOGY___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_BOX___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = ONTOLOGY___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
@@ -1250,15 +1259,6 @@ public interface OmlPackage extends EPackage {
 	int VOCABULARY_FEATURE_COUNT = VOCABULARY_BOX_FEATURE_COUNT + 1;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = VOCABULARY_BOX___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1266,6 +1266,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int VOCABULARY___GET_ONTOLOGY = VOCABULARY_BOX___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOCABULARY___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = VOCABULARY_BOX___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
@@ -1350,15 +1359,6 @@ public interface OmlPackage extends EPackage {
 	int VOCABULARY_BUNDLE_FEATURE_COUNT = VOCABULARY_BOX_FEATURE_COUNT + 0;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_BUNDLE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = VOCABULARY_BOX___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1366,6 +1366,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int VOCABULARY_BUNDLE___GET_ONTOLOGY = VOCABULARY_BOX___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOCABULARY_BUNDLE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = VOCABULARY_BOX___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
@@ -1459,15 +1468,6 @@ public interface OmlPackage extends EPackage {
 	int DESCRIPTION_FEATURE_COUNT = DESCRIPTION_BOX_FEATURE_COUNT + 1;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = DESCRIPTION_BOX___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1475,6 +1475,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int DESCRIPTION___GET_ONTOLOGY = DESCRIPTION_BOX___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = DESCRIPTION_BOX___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
@@ -1559,15 +1568,6 @@ public interface OmlPackage extends EPackage {
 	int DESCRIPTION_BUNDLE_FEATURE_COUNT = DESCRIPTION_BOX_FEATURE_COUNT + 0;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_BUNDLE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = DESCRIPTION_BOX___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1575,6 +1575,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int DESCRIPTION_BUNDLE___GET_ONTOLOGY = DESCRIPTION_BOX___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_BUNDLE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = DESCRIPTION_BOX___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Get Iri</em>' operation.
@@ -1641,15 +1650,6 @@ public interface OmlPackage extends EPackage {
 	int STATEMENT_FEATURE_COUNT = MEMBER_FEATURE_COUNT + 0;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STATEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = MEMBER___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1657,6 +1657,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int STATEMENT___GET_ONTOLOGY = MEMBER___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = MEMBER___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Get Ref</em>' operation.
@@ -1750,15 +1759,6 @@ public interface OmlPackage extends EPackage {
 	int VOCABULARY_MEMBER_FEATURE_COUNT = MEMBER_FEATURE_COUNT + 0;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_MEMBER___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = MEMBER___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1766,6 +1766,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int VOCABULARY_MEMBER___GET_ONTOLOGY = MEMBER___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOCABULARY_MEMBER___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = MEMBER___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Get Ref</em>' operation.
@@ -1859,15 +1868,6 @@ public interface OmlPackage extends EPackage {
 	int DESCRIPTION_MEMBER_FEATURE_COUNT = MEMBER_FEATURE_COUNT + 0;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_MEMBER___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = MEMBER___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1875,6 +1875,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int DESCRIPTION_MEMBER___GET_ONTOLOGY = MEMBER___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_MEMBER___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = MEMBER___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Get Ref</em>' operation.
@@ -1977,15 +1986,6 @@ public interface OmlPackage extends EPackage {
 	int VOCABULARY_STATEMENT_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VOCABULARY_STATEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = STATEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1993,6 +1993,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int VOCABULARY_STATEMENT___GET_ONTOLOGY = STATEMENT___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOCABULARY_STATEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = STATEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Get Ref</em>' operation.
@@ -2095,15 +2104,6 @@ public interface OmlPackage extends EPackage {
 	int DESCRIPTION_STATEMENT_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIPTION_STATEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = STATEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2111,6 +2111,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int DESCRIPTION_STATEMENT___GET_ONTOLOGY = STATEMENT___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DESCRIPTION_STATEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = STATEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Get Ref</em>' operation.
@@ -2204,15 +2213,6 @@ public interface OmlPackage extends EPackage {
 	int TERM_FEATURE_COUNT = VOCABULARY_MEMBER_FEATURE_COUNT + 0;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TERM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = VOCABULARY_MEMBER___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2220,6 +2220,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int TERM___GET_ONTOLOGY = VOCABULARY_MEMBER___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TERM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = VOCABULARY_MEMBER___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Get Ref</em>' operation.
@@ -2349,15 +2358,6 @@ public interface OmlPackage extends EPackage {
 	int RULE_FEATURE_COUNT = VOCABULARY_STATEMENT_FEATURE_COUNT + 3;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RULE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = VOCABULARY_STATEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2365,6 +2365,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int RULE___GET_ONTOLOGY = VOCABULARY_STATEMENT___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RULE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = VOCABULARY_STATEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Get Ref</em>' operation.
@@ -2476,15 +2485,6 @@ public interface OmlPackage extends EPackage {
 	int BUILT_IN_FEATURE_COUNT = VOCABULARY_STATEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BUILT_IN___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = VOCABULARY_STATEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2492,6 +2492,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int BUILT_IN___GET_ONTOLOGY = VOCABULARY_STATEMENT___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUILT_IN___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = VOCABULARY_STATEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Get Ref</em>' operation.
@@ -2603,15 +2612,6 @@ public interface OmlPackage extends EPackage {
 	int SPECIALIZABLE_TERM_FEATURE_COUNT = TERM_FEATURE_COUNT + 2;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SPECIALIZABLE_TERM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = TERM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2619,6 +2619,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int SPECIALIZABLE_TERM___GET_ONTOLOGY = TERM___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SPECIALIZABLE_TERM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = TERM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Get Ref</em>' operation.
@@ -2712,15 +2721,6 @@ public interface OmlPackage extends EPackage {
 	int PROPERTY_FEATURE_COUNT = TERM_FEATURE_COUNT + 0;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = TERM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2728,6 +2728,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int PROPERTY___GET_ONTOLOGY = TERM___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = TERM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Get Ref</em>' operation.
@@ -2839,15 +2848,6 @@ public interface OmlPackage extends EPackage {
 	int TYPE_FEATURE_COUNT = SPECIALIZABLE_TERM_FEATURE_COUNT + 0;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = SPECIALIZABLE_TERM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2855,6 +2855,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int TYPE___GET_ONTOLOGY = SPECIALIZABLE_TERM___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = SPECIALIZABLE_TERM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Get Ref</em>' operation.
@@ -3056,15 +3065,6 @@ public interface OmlPackage extends EPackage {
 	int RELATION_BASE_FEATURE_COUNT = SPECIALIZABLE_TERM_FEATURE_COUNT + 10;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RELATION_BASE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = SPECIALIZABLE_TERM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3072,6 +3072,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int RELATION_BASE___GET_ONTOLOGY = SPECIALIZABLE_TERM___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_BASE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = SPECIALIZABLE_TERM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Get Ref</em>' operation.
@@ -3192,15 +3201,6 @@ public interface OmlPackage extends EPackage {
 	int SPECIALIZABLE_PROPERTY_FEATURE_COUNT = SPECIALIZABLE_TERM_FEATURE_COUNT + 1;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SPECIALIZABLE_PROPERTY___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = SPECIALIZABLE_TERM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3208,6 +3208,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int SPECIALIZABLE_PROPERTY___GET_ONTOLOGY = SPECIALIZABLE_TERM___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SPECIALIZABLE_PROPERTY___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = SPECIALIZABLE_TERM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Get Ref</em>' operation.
@@ -3337,15 +3346,6 @@ public interface OmlPackage extends EPackage {
 	int CLASSIFIER_FEATURE_COUNT = TYPE_FEATURE_COUNT + 2;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASSIFIER___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = TYPE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3353,6 +3353,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int CLASSIFIER___GET_ONTOLOGY = TYPE___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASSIFIER___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = TYPE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Get Ref</em>' operation.
@@ -3464,94 +3473,22 @@ public interface OmlPackage extends EPackage {
 	int SCALAR__REF = TYPE_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Length</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCALAR__LENGTH = TYPE_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Min Length</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCALAR__MIN_LENGTH = TYPE_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Max Length</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCALAR__MAX_LENGTH = TYPE_FEATURE_COUNT + 3;
-
-	/**
-	 * The feature id for the '<em><b>Pattern</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCALAR__PATTERN = TYPE_FEATURE_COUNT + 4;
-
-	/**
-	 * The feature id for the '<em><b>Language</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCALAR__LANGUAGE = TYPE_FEATURE_COUNT + 5;
-
-	/**
-	 * The feature id for the '<em><b>Min Inclusive</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCALAR__MIN_INCLUSIVE = TYPE_FEATURE_COUNT + 6;
-
-	/**
-	 * The feature id for the '<em><b>Min Exclusive</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCALAR__MIN_EXCLUSIVE = TYPE_FEATURE_COUNT + 7;
-
-	/**
-	 * The feature id for the '<em><b>Max Inclusive</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCALAR__MAX_INCLUSIVE = TYPE_FEATURE_COUNT + 8;
-
-	/**
-	 * The feature id for the '<em><b>Max Exclusive</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCALAR__MAX_EXCLUSIVE = TYPE_FEATURE_COUNT + 9;
-
-	/**
 	 * The feature id for the '<em><b>Owned Enumeration</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SCALAR__OWNED_ENUMERATION = TYPE_FEATURE_COUNT + 10;
+	int SCALAR__OWNED_ENUMERATION = TYPE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Owned Equivalences</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALAR__OWNED_EQUIVALENCES = TYPE_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Scalar</em>' class.
@@ -3560,16 +3497,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SCALAR_FEATURE_COUNT = TYPE_FEATURE_COUNT + 11;
-
-	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCALAR___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = TYPE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+	int SCALAR_FEATURE_COUNT = TYPE_FEATURE_COUNT + 3;
 
 	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
@@ -3579,6 +3507,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int SCALAR___GET_ONTOLOGY = TYPE___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALAR___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = TYPE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Get Ref</em>' operation.
@@ -3717,15 +3654,6 @@ public interface OmlPackage extends EPackage {
 	int ENTITY_FEATURE_COUNT = CLASSIFIER_FEATURE_COUNT + 1;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENTITY___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = CLASSIFIER___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3733,6 +3661,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int ENTITY___GET_ONTOLOGY = CLASSIFIER___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENTITY___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = CLASSIFIER___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Get Ref</em>' operation.
@@ -3871,15 +3808,6 @@ public interface OmlPackage extends EPackage {
 	int STRUCTURE_FEATURE_COUNT = CLASSIFIER_FEATURE_COUNT + 1;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRUCTURE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = CLASSIFIER___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3887,6 +3815,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int STRUCTURE___GET_ONTOLOGY = CLASSIFIER___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = CLASSIFIER___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Get Ref</em>' operation.
@@ -4034,15 +3971,6 @@ public interface OmlPackage extends EPackage {
 	int ASPECT_FEATURE_COUNT = ENTITY_FEATURE_COUNT + 1;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASPECT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = ENTITY___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4050,6 +3978,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int ASPECT___GET_ONTOLOGY = ENTITY___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASPECT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = ENTITY___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Get Ref</em>' operation.
@@ -4206,15 +4143,6 @@ public interface OmlPackage extends EPackage {
 	int CONCEPT_FEATURE_COUNT = ENTITY_FEATURE_COUNT + 2;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONCEPT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = ENTITY___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4222,6 +4150,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int CONCEPT___GET_ONTOLOGY = ENTITY___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONCEPT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = ENTITY___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Get Ref</em>' operation.
@@ -4468,15 +4405,6 @@ public interface OmlPackage extends EPackage {
 	int RELATION_ENTITY_FEATURE_COUNT = ENTITY_FEATURE_COUNT + 12;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RELATION_ENTITY___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = ENTITY___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4484,6 +4412,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int RELATION_ENTITY___GET_ONTOLOGY = ENTITY___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_ENTITY___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = ENTITY___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Get Ref</em>' operation.
@@ -4613,15 +4550,6 @@ public interface OmlPackage extends EPackage {
 	int ANNOTATION_PROPERTY_FEATURE_COUNT = SPECIALIZABLE_PROPERTY_FEATURE_COUNT + 1;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ANNOTATION_PROPERTY___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = SPECIALIZABLE_PROPERTY___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4629,6 +4557,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int ANNOTATION_PROPERTY___GET_ONTOLOGY = SPECIALIZABLE_PROPERTY___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANNOTATION_PROPERTY___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = SPECIALIZABLE_PROPERTY___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Get Ref</em>' operation.
@@ -4722,15 +4659,6 @@ public interface OmlPackage extends EPackage {
 	int SEMANTIC_PROPERTY_FEATURE_COUNT = PROPERTY_FEATURE_COUNT + 0;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SEMANTIC_PROPERTY___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = PROPERTY___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4738,6 +4666,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int SEMANTIC_PROPERTY___GET_ONTOLOGY = PROPERTY___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEMANTIC_PROPERTY___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = PROPERTY___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Get Ref</em>' operation.
@@ -4921,15 +4858,6 @@ public interface OmlPackage extends EPackage {
 	int SCALAR_PROPERTY_FEATURE_COUNT = SEMANTIC_PROPERTY_FEATURE_COUNT + 7;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCALAR_PROPERTY___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = SEMANTIC_PROPERTY___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4937,6 +4865,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int SCALAR_PROPERTY___GET_ONTOLOGY = SEMANTIC_PROPERTY___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALAR_PROPERTY___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = SEMANTIC_PROPERTY___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Get Ref</em>' operation.
@@ -5120,15 +5057,6 @@ public interface OmlPackage extends EPackage {
 	int STRUCTURED_PROPERTY_FEATURE_COUNT = SEMANTIC_PROPERTY_FEATURE_COUNT + 7;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRUCTURED_PROPERTY___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = SEMANTIC_PROPERTY___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5136,6 +5064,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int STRUCTURED_PROPERTY___GET_ONTOLOGY = SEMANTIC_PROPERTY___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURED_PROPERTY___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = SEMANTIC_PROPERTY___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Get Ref</em>' operation.
@@ -5256,15 +5193,6 @@ public interface OmlPackage extends EPackage {
 	int RELATION_FEATURE_COUNT = SEMANTIC_PROPERTY_FEATURE_COUNT + 0;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RELATION___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = SEMANTIC_PROPERTY___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5272,6 +5200,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int RELATION___GET_ONTOLOGY = SEMANTIC_PROPERTY___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = SEMANTIC_PROPERTY___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Get Ref</em>' operation.
@@ -5482,15 +5419,6 @@ public interface OmlPackage extends EPackage {
 	int FORWARD_RELATION_FEATURE_COUNT = RELATION_FEATURE_COUNT + 1;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FORWARD_RELATION___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = RELATION___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5498,6 +5426,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int FORWARD_RELATION___GET_ONTOLOGY = RELATION___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORWARD_RELATION___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = RELATION___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Is Ref</em>' operation.
@@ -5708,15 +5645,6 @@ public interface OmlPackage extends EPackage {
 	int REVERSE_RELATION_FEATURE_COUNT = RELATION_FEATURE_COUNT + 1;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REVERSE_RELATION___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = RELATION___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5724,6 +5652,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int REVERSE_RELATION___GET_ONTOLOGY = RELATION___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REVERSE_RELATION___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = RELATION___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Is Ref</em>' operation.
@@ -6051,15 +5988,6 @@ public interface OmlPackage extends EPackage {
 	int UNREIFIED_RELATION_FEATURE_COUNT = RELATION_FEATURE_COUNT + 14;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UNREIFIED_RELATION___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = RELATION___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6067,6 +5995,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int UNREIFIED_RELATION___GET_ONTOLOGY = RELATION___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNREIFIED_RELATION___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = RELATION___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Get Ref</em>' operation.
@@ -6295,15 +6232,6 @@ public interface OmlPackage extends EPackage {
 	int NAMED_INSTANCE_FEATURE_COUNT = DESCRIPTION_STATEMENT_FEATURE_COUNT + 2;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAMED_INSTANCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = DESCRIPTION_STATEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6311,6 +6239,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int NAMED_INSTANCE___GET_ONTOLOGY = DESCRIPTION_STATEMENT___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAMED_INSTANCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = DESCRIPTION_STATEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Get Ref</em>' operation.
@@ -6440,15 +6377,6 @@ public interface OmlPackage extends EPackage {
 	int CONCEPT_INSTANCE_FEATURE_COUNT = NAMED_INSTANCE_FEATURE_COUNT + 1;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONCEPT_INSTANCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = NAMED_INSTANCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6456,6 +6384,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int CONCEPT_INSTANCE___GET_ONTOLOGY = NAMED_INSTANCE___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONCEPT_INSTANCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = NAMED_INSTANCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Get Ref</em>' operation.
@@ -6603,15 +6540,6 @@ public interface OmlPackage extends EPackage {
 	int RELATION_INSTANCE_FEATURE_COUNT = NAMED_INSTANCE_FEATURE_COUNT + 3;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RELATION_INSTANCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = NAMED_INSTANCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6619,6 +6547,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int RELATION_INSTANCE___GET_ONTOLOGY = NAMED_INSTANCE___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_INSTANCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = NAMED_INSTANCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Get Ref</em>' operation.
@@ -6730,15 +6667,6 @@ public interface OmlPackage extends EPackage {
 	int STRUCTURE_INSTANCE_FEATURE_COUNT = INSTANCE_FEATURE_COUNT + 3;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRUCTURE_INSTANCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = INSTANCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6746,6 +6674,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int STRUCTURE_INSTANCE___GET_ONTOLOGY = INSTANCE___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURE_INSTANCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = INSTANCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The number of operations of the '<em>Structure Instance</em>' class.
@@ -6794,15 +6731,6 @@ public interface OmlPackage extends EPackage {
 	int KEY_AXIOM_FEATURE_COUNT = AXIOM_FEATURE_COUNT + 2;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int KEY_AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6810,6 +6738,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int KEY_AXIOM___GET_ONTOLOGY = AXIOM___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KEY_AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Get Keyed Entity</em>' operation.
@@ -6821,13 +6758,22 @@ public interface OmlPackage extends EPackage {
 	int KEY_AXIOM___GET_KEYED_ENTITY = AXIOM_OPERATION_COUNT + 0;
 
 	/**
+	 * The operation id for the '<em>Get Characterized Term</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KEY_AXIOM___GET_CHARACTERIZED_TERM = AXIOM_OPERATION_COUNT + 1;
+
+	/**
 	 * The number of operations of the '<em>Key Axiom</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int KEY_AXIOM_OPERATION_COUNT = AXIOM_OPERATION_COUNT + 1;
+	int KEY_AXIOM_OPERATION_COUNT = AXIOM_OPERATION_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.impl.SpecializationAxiomImpl <em>Specialization Axiom</em>}' class.
@@ -6867,15 +6813,6 @@ public interface OmlPackage extends EPackage {
 	int SPECIALIZATION_AXIOM_FEATURE_COUNT = AXIOM_FEATURE_COUNT + 2;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SPECIALIZATION_AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6883,6 +6820,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int SPECIALIZATION_AXIOM___GET_ONTOLOGY = AXIOM___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SPECIALIZATION_AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Get Sub Term</em>' operation.
@@ -6894,13 +6840,22 @@ public interface OmlPackage extends EPackage {
 	int SPECIALIZATION_AXIOM___GET_SUB_TERM = AXIOM_OPERATION_COUNT + 0;
 
 	/**
+	 * The operation id for the '<em>Get Characterized Term</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SPECIALIZATION_AXIOM___GET_CHARACTERIZED_TERM = AXIOM_OPERATION_COUNT + 1;
+
+	/**
 	 * The number of operations of the '<em>Specialization Axiom</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SPECIALIZATION_AXIOM_OPERATION_COUNT = AXIOM_OPERATION_COUNT + 1;
+	int SPECIALIZATION_AXIOM_OPERATION_COUNT = AXIOM_OPERATION_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.impl.InstanceEnumerationAxiomImpl <em>Instance Enumeration Axiom</em>}' class.
@@ -6940,15 +6895,6 @@ public interface OmlPackage extends EPackage {
 	int INSTANCE_ENUMERATION_AXIOM_FEATURE_COUNT = AXIOM_FEATURE_COUNT + 2;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INSTANCE_ENUMERATION_AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6956,6 +6902,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int INSTANCE_ENUMERATION_AXIOM___GET_ONTOLOGY = AXIOM___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INSTANCE_ENUMERATION_AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Get Enumerated Concept</em>' operation.
@@ -6967,13 +6922,22 @@ public interface OmlPackage extends EPackage {
 	int INSTANCE_ENUMERATION_AXIOM___GET_ENUMERATED_CONCEPT = AXIOM_OPERATION_COUNT + 0;
 
 	/**
+	 * The operation id for the '<em>Get Characterized Term</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INSTANCE_ENUMERATION_AXIOM___GET_CHARACTERIZED_TERM = AXIOM_OPERATION_COUNT + 1;
+
+	/**
 	 * The number of operations of the '<em>Instance Enumeration Axiom</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INSTANCE_ENUMERATION_AXIOM_OPERATION_COUNT = AXIOM_OPERATION_COUNT + 1;
+	int INSTANCE_ENUMERATION_AXIOM_OPERATION_COUNT = AXIOM_OPERATION_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.impl.PropertyRestrictionAxiomImpl <em>Property Restriction Axiom</em>}' class.
@@ -7022,15 +6986,6 @@ public interface OmlPackage extends EPackage {
 	int PROPERTY_RESTRICTION_AXIOM_FEATURE_COUNT = AXIOM_FEATURE_COUNT + 3;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY_RESTRICTION_AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7038,6 +6993,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int PROPERTY_RESTRICTION_AXIOM___GET_ONTOLOGY = AXIOM___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_RESTRICTION_AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Get Restricting Domain</em>' operation.
@@ -7049,13 +7013,22 @@ public interface OmlPackage extends EPackage {
 	int PROPERTY_RESTRICTION_AXIOM___GET_RESTRICTING_DOMAIN = AXIOM_OPERATION_COUNT + 0;
 
 	/**
+	 * The operation id for the '<em>Get Characterized Term</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_RESTRICTION_AXIOM___GET_CHARACTERIZED_TERM = AXIOM_OPERATION_COUNT + 1;
+
+	/**
 	 * The number of operations of the '<em>Property Restriction Axiom</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_RESTRICTION_AXIOM_OPERATION_COUNT = AXIOM_OPERATION_COUNT + 1;
+	int PROPERTY_RESTRICTION_AXIOM_OPERATION_COUNT = AXIOM_OPERATION_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.impl.LiteralEnumerationAxiomImpl <em>Literal Enumeration Axiom</em>}' class.
@@ -7095,15 +7068,6 @@ public interface OmlPackage extends EPackage {
 	int LITERAL_ENUMERATION_AXIOM_FEATURE_COUNT = AXIOM_FEATURE_COUNT + 2;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LITERAL_ENUMERATION_AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7111,6 +7075,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int LITERAL_ENUMERATION_AXIOM___GET_ONTOLOGY = AXIOM___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LITERAL_ENUMERATION_AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Get Enumerated Scalar</em>' operation.
@@ -7122,13 +7095,22 @@ public interface OmlPackage extends EPackage {
 	int LITERAL_ENUMERATION_AXIOM___GET_ENUMERATED_SCALAR = AXIOM_OPERATION_COUNT + 0;
 
 	/**
+	 * The operation id for the '<em>Get Characterized Term</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LITERAL_ENUMERATION_AXIOM___GET_CHARACTERIZED_TERM = AXIOM_OPERATION_COUNT + 1;
+
+	/**
 	 * The number of operations of the '<em>Literal Enumeration Axiom</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LITERAL_ENUMERATION_AXIOM_OPERATION_COUNT = AXIOM_OPERATION_COUNT + 1;
+	int LITERAL_ENUMERATION_AXIOM_OPERATION_COUNT = AXIOM_OPERATION_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.impl.ClassifierEquivalenceAxiomImpl <em>Classifier Equivalence Axiom</em>}' class.
@@ -7177,15 +7159,6 @@ public interface OmlPackage extends EPackage {
 	int CLASSIFIER_EQUIVALENCE_AXIOM_FEATURE_COUNT = AXIOM_FEATURE_COUNT + 3;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASSIFIER_EQUIVALENCE_AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7193,6 +7166,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int CLASSIFIER_EQUIVALENCE_AXIOM___GET_ONTOLOGY = AXIOM___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASSIFIER_EQUIVALENCE_AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Get Sub Classifier</em>' operation.
@@ -7204,13 +7186,185 @@ public interface OmlPackage extends EPackage {
 	int CLASSIFIER_EQUIVALENCE_AXIOM___GET_SUB_CLASSIFIER = AXIOM_OPERATION_COUNT + 0;
 
 	/**
+	 * The operation id for the '<em>Get Characterized Term</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASSIFIER_EQUIVALENCE_AXIOM___GET_CHARACTERIZED_TERM = AXIOM_OPERATION_COUNT + 1;
+
+	/**
 	 * The number of operations of the '<em>Classifier Equivalence Axiom</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CLASSIFIER_EQUIVALENCE_AXIOM_OPERATION_COUNT = AXIOM_OPERATION_COUNT + 1;
+	int CLASSIFIER_EQUIVALENCE_AXIOM_OPERATION_COUNT = AXIOM_OPERATION_COUNT + 2;
+
+	/**
+	 * The meta object id for the '{@link io.opencaesar.oml.impl.ScalarEquivalenceAxiomImpl <em>Scalar Equivalence Axiom</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see io.opencaesar.oml.impl.ScalarEquivalenceAxiomImpl
+	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getScalarEquivalenceAxiom()
+	 * @generated
+	 */
+	int SCALAR_EQUIVALENCE_AXIOM = 56;
+
+	/**
+	 * The feature id for the '<em><b>Super Scalar</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALAR_EQUIVALENCE_AXIOM__SUPER_SCALAR = AXIOM_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Owning Scalar</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALAR_EQUIVALENCE_AXIOM__OWNING_SCALAR = AXIOM_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Length</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALAR_EQUIVALENCE_AXIOM__LENGTH = AXIOM_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Min Length</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALAR_EQUIVALENCE_AXIOM__MIN_LENGTH = AXIOM_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Max Length</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALAR_EQUIVALENCE_AXIOM__MAX_LENGTH = AXIOM_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Pattern</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALAR_EQUIVALENCE_AXIOM__PATTERN = AXIOM_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Language</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALAR_EQUIVALENCE_AXIOM__LANGUAGE = AXIOM_FEATURE_COUNT + 6;
+
+	/**
+	 * The feature id for the '<em><b>Min Inclusive</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALAR_EQUIVALENCE_AXIOM__MIN_INCLUSIVE = AXIOM_FEATURE_COUNT + 7;
+
+	/**
+	 * The feature id for the '<em><b>Min Exclusive</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALAR_EQUIVALENCE_AXIOM__MIN_EXCLUSIVE = AXIOM_FEATURE_COUNT + 8;
+
+	/**
+	 * The feature id for the '<em><b>Max Inclusive</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALAR_EQUIVALENCE_AXIOM__MAX_INCLUSIVE = AXIOM_FEATURE_COUNT + 9;
+
+	/**
+	 * The feature id for the '<em><b>Max Exclusive</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALAR_EQUIVALENCE_AXIOM__MAX_EXCLUSIVE = AXIOM_FEATURE_COUNT + 10;
+
+	/**
+	 * The number of structural features of the '<em>Scalar Equivalence Axiom</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALAR_EQUIVALENCE_AXIOM_FEATURE_COUNT = AXIOM_FEATURE_COUNT + 11;
+
+	/**
+	 * The operation id for the '<em>Get Ontology</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALAR_EQUIVALENCE_AXIOM___GET_ONTOLOGY = AXIOM___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALAR_EQUIVALENCE_AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Get Sub Scalar</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALAR_EQUIVALENCE_AXIOM___GET_SUB_SCALAR = AXIOM_OPERATION_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>Get Characterized Term</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALAR_EQUIVALENCE_AXIOM___GET_CHARACTERIZED_TERM = AXIOM_OPERATION_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Scalar Equivalence Axiom</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCALAR_EQUIVALENCE_AXIOM_OPERATION_COUNT = AXIOM_OPERATION_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.impl.PropertyEquivalenceAxiomImpl <em>Property Equivalence Axiom</em>}' class.
@@ -7220,7 +7374,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getPropertyEquivalenceAxiom()
 	 * @generated
 	 */
-	int PROPERTY_EQUIVALENCE_AXIOM = 56;
+	int PROPERTY_EQUIVALENCE_AXIOM = 57;
 
 	/**
 	 * The feature id for the '<em><b>Super Property</b></em>' reference.
@@ -7250,15 +7404,6 @@ public interface OmlPackage extends EPackage {
 	int PROPERTY_EQUIVALENCE_AXIOM_FEATURE_COUNT = AXIOM_FEATURE_COUNT + 2;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY_EQUIVALENCE_AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7266,6 +7411,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int PROPERTY_EQUIVALENCE_AXIOM___GET_ONTOLOGY = AXIOM___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_EQUIVALENCE_AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Get Sub Property</em>' operation.
@@ -7277,13 +7431,22 @@ public interface OmlPackage extends EPackage {
 	int PROPERTY_EQUIVALENCE_AXIOM___GET_SUB_PROPERTY = AXIOM_OPERATION_COUNT + 0;
 
 	/**
+	 * The operation id for the '<em>Get Characterized Term</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_EQUIVALENCE_AXIOM___GET_CHARACTERIZED_TERM = AXIOM_OPERATION_COUNT + 1;
+
+	/**
 	 * The number of operations of the '<em>Property Equivalence Axiom</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_EQUIVALENCE_AXIOM_OPERATION_COUNT = AXIOM_OPERATION_COUNT + 1;
+	int PROPERTY_EQUIVALENCE_AXIOM_OPERATION_COUNT = AXIOM_OPERATION_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.impl.PropertyRangeRestrictionAxiomImpl <em>Property Range Restriction Axiom</em>}' class.
@@ -7293,7 +7456,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getPropertyRangeRestrictionAxiom()
 	 * @generated
 	 */
-	int PROPERTY_RANGE_RESTRICTION_AXIOM = 57;
+	int PROPERTY_RANGE_RESTRICTION_AXIOM = 58;
 
 	/**
 	 * The feature id for the '<em><b>Property</b></em>' reference.
@@ -7350,15 +7513,6 @@ public interface OmlPackage extends EPackage {
 	int PROPERTY_RANGE_RESTRICTION_AXIOM_FEATURE_COUNT = PROPERTY_RESTRICTION_AXIOM_FEATURE_COUNT + 2;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY_RANGE_RESTRICTION_AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = PROPERTY_RESTRICTION_AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7368,6 +7522,15 @@ public interface OmlPackage extends EPackage {
 	int PROPERTY_RANGE_RESTRICTION_AXIOM___GET_ONTOLOGY = PROPERTY_RESTRICTION_AXIOM___GET_ONTOLOGY;
 
 	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_RANGE_RESTRICTION_AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = PROPERTY_RESTRICTION_AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+
+	/**
 	 * The operation id for the '<em>Get Restricting Domain</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7375,6 +7538,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int PROPERTY_RANGE_RESTRICTION_AXIOM___GET_RESTRICTING_DOMAIN = PROPERTY_RESTRICTION_AXIOM___GET_RESTRICTING_DOMAIN;
+
+	/**
+	 * The operation id for the '<em>Get Characterized Term</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_RANGE_RESTRICTION_AXIOM___GET_CHARACTERIZED_TERM = PROPERTY_RESTRICTION_AXIOM___GET_CHARACTERIZED_TERM;
 
 	/**
 	 * The number of operations of the '<em>Property Range Restriction Axiom</em>' class.
@@ -7393,7 +7565,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getPropertyCardinalityRestrictionAxiom()
 	 * @generated
 	 */
-	int PROPERTY_CARDINALITY_RESTRICTION_AXIOM = 58;
+	int PROPERTY_CARDINALITY_RESTRICTION_AXIOM = 59;
 
 	/**
 	 * The feature id for the '<em><b>Property</b></em>' reference.
@@ -7459,15 +7631,6 @@ public interface OmlPackage extends EPackage {
 	int PROPERTY_CARDINALITY_RESTRICTION_AXIOM_FEATURE_COUNT = PROPERTY_RESTRICTION_AXIOM_FEATURE_COUNT + 3;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY_CARDINALITY_RESTRICTION_AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = PROPERTY_RESTRICTION_AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7477,6 +7640,15 @@ public interface OmlPackage extends EPackage {
 	int PROPERTY_CARDINALITY_RESTRICTION_AXIOM___GET_ONTOLOGY = PROPERTY_RESTRICTION_AXIOM___GET_ONTOLOGY;
 
 	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_CARDINALITY_RESTRICTION_AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = PROPERTY_RESTRICTION_AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+
+	/**
 	 * The operation id for the '<em>Get Restricting Domain</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7484,6 +7656,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int PROPERTY_CARDINALITY_RESTRICTION_AXIOM___GET_RESTRICTING_DOMAIN = PROPERTY_RESTRICTION_AXIOM___GET_RESTRICTING_DOMAIN;
+
+	/**
+	 * The operation id for the '<em>Get Characterized Term</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_CARDINALITY_RESTRICTION_AXIOM___GET_CHARACTERIZED_TERM = PROPERTY_RESTRICTION_AXIOM___GET_CHARACTERIZED_TERM;
 
 	/**
 	 * The number of operations of the '<em>Property Cardinality Restriction Axiom</em>' class.
@@ -7502,7 +7683,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getPropertyValueRestrictionAxiom()
 	 * @generated
 	 */
-	int PROPERTY_VALUE_RESTRICTION_AXIOM = 59;
+	int PROPERTY_VALUE_RESTRICTION_AXIOM = 60;
 
 	/**
 	 * The feature id for the '<em><b>Property</b></em>' reference.
@@ -7568,15 +7749,6 @@ public interface OmlPackage extends EPackage {
 	int PROPERTY_VALUE_RESTRICTION_AXIOM_FEATURE_COUNT = PROPERTY_RESTRICTION_AXIOM_FEATURE_COUNT + 3;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY_VALUE_RESTRICTION_AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = PROPERTY_RESTRICTION_AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7586,6 +7758,15 @@ public interface OmlPackage extends EPackage {
 	int PROPERTY_VALUE_RESTRICTION_AXIOM___GET_ONTOLOGY = PROPERTY_RESTRICTION_AXIOM___GET_ONTOLOGY;
 
 	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_VALUE_RESTRICTION_AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = PROPERTY_RESTRICTION_AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+
+	/**
 	 * The operation id for the '<em>Get Restricting Domain</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7593,6 +7774,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int PROPERTY_VALUE_RESTRICTION_AXIOM___GET_RESTRICTING_DOMAIN = PROPERTY_RESTRICTION_AXIOM___GET_RESTRICTING_DOMAIN;
+
+	/**
+	 * The operation id for the '<em>Get Characterized Term</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_VALUE_RESTRICTION_AXIOM___GET_CHARACTERIZED_TERM = PROPERTY_RESTRICTION_AXIOM___GET_CHARACTERIZED_TERM;
 
 	/**
 	 * The operation id for the '<em>Get Value</em>' operation.
@@ -7620,7 +7810,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getPropertySelfRestrictionAxiom()
 	 * @generated
 	 */
-	int PROPERTY_SELF_RESTRICTION_AXIOM = 60;
+	int PROPERTY_SELF_RESTRICTION_AXIOM = 61;
 
 	/**
 	 * The feature id for the '<em><b>Property</b></em>' reference.
@@ -7659,15 +7849,6 @@ public interface OmlPackage extends EPackage {
 	int PROPERTY_SELF_RESTRICTION_AXIOM_FEATURE_COUNT = PROPERTY_RESTRICTION_AXIOM_FEATURE_COUNT + 0;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY_SELF_RESTRICTION_AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = PROPERTY_RESTRICTION_AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7677,6 +7858,15 @@ public interface OmlPackage extends EPackage {
 	int PROPERTY_SELF_RESTRICTION_AXIOM___GET_ONTOLOGY = PROPERTY_RESTRICTION_AXIOM___GET_ONTOLOGY;
 
 	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_SELF_RESTRICTION_AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = PROPERTY_RESTRICTION_AXIOM___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+
+	/**
 	 * The operation id for the '<em>Get Restricting Domain</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7684,6 +7874,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int PROPERTY_SELF_RESTRICTION_AXIOM___GET_RESTRICTING_DOMAIN = PROPERTY_RESTRICTION_AXIOM___GET_RESTRICTING_DOMAIN;
+
+	/**
+	 * The operation id for the '<em>Get Characterized Term</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_SELF_RESTRICTION_AXIOM___GET_CHARACTERIZED_TERM = PROPERTY_RESTRICTION_AXIOM___GET_CHARACTERIZED_TERM;
 
 	/**
 	 * The number of operations of the '<em>Property Self Restriction Axiom</em>' class.
@@ -7702,7 +7901,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getTypeAssertion()
 	 * @generated
 	 */
-	int TYPE_ASSERTION = 61;
+	int TYPE_ASSERTION = 62;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -7732,15 +7931,6 @@ public interface OmlPackage extends EPackage {
 	int TYPE_ASSERTION_FEATURE_COUNT = ASSERTION_FEATURE_COUNT + 2;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_ASSERTION___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = ASSERTION___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7748,6 +7938,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int TYPE_ASSERTION___GET_ONTOLOGY = ASSERTION___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_ASSERTION___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = ASSERTION___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Get Subject</em>' operation.
@@ -7784,7 +7983,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getPropertyValueAssertion()
 	 * @generated
 	 */
-	int PROPERTY_VALUE_ASSERTION = 62;
+	int PROPERTY_VALUE_ASSERTION = 63;
 
 	/**
 	 * The feature id for the '<em><b>Property</b></em>' reference.
@@ -7841,15 +8040,6 @@ public interface OmlPackage extends EPackage {
 	int PROPERTY_VALUE_ASSERTION_FEATURE_COUNT = ASSERTION_FEATURE_COUNT + 5;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY_VALUE_ASSERTION___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = ASSERTION___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7857,6 +8047,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int PROPERTY_VALUE_ASSERTION___GET_ONTOLOGY = ASSERTION___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_VALUE_ASSERTION___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = ASSERTION___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Get Value</em>' operation.
@@ -7902,7 +8101,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getUnaryPredicate()
 	 * @generated
 	 */
-	int UNARY_PREDICATE = 63;
+	int UNARY_PREDICATE = 64;
 
 	/**
 	 * The feature id for the '<em><b>Antecedent Rule</b></em>' container reference.
@@ -7941,15 +8140,6 @@ public interface OmlPackage extends EPackage {
 	int UNARY_PREDICATE_FEATURE_COUNT = PREDICATE_FEATURE_COUNT + 1;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UNARY_PREDICATE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = PREDICATE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7957,6 +8147,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int UNARY_PREDICATE___GET_ONTOLOGY = PREDICATE___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNARY_PREDICATE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = PREDICATE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The number of operations of the '<em>Unary Predicate</em>' class.
@@ -7975,7 +8174,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getBinaryPredicate()
 	 * @generated
 	 */
-	int BINARY_PREDICATE = 64;
+	int BINARY_PREDICATE = 65;
 
 	/**
 	 * The feature id for the '<em><b>Antecedent Rule</b></em>' container reference.
@@ -8023,15 +8222,6 @@ public interface OmlPackage extends EPackage {
 	int BINARY_PREDICATE_FEATURE_COUNT = PREDICATE_FEATURE_COUNT + 2;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BINARY_PREDICATE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = PREDICATE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8039,6 +8229,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int BINARY_PREDICATE___GET_ONTOLOGY = PREDICATE___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BINARY_PREDICATE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = PREDICATE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The number of operations of the '<em>Binary Predicate</em>' class.
@@ -8057,7 +8256,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getBuiltInPredicate()
 	 * @generated
 	 */
-	int BUILT_IN_PREDICATE = 65;
+	int BUILT_IN_PREDICATE = 66;
 
 	/**
 	 * The feature id for the '<em><b>Antecedent Rule</b></em>' container reference.
@@ -8105,15 +8304,6 @@ public interface OmlPackage extends EPackage {
 	int BUILT_IN_PREDICATE_FEATURE_COUNT = PREDICATE_FEATURE_COUNT + 2;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BUILT_IN_PREDICATE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = PREDICATE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8121,6 +8311,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int BUILT_IN_PREDICATE___GET_ONTOLOGY = PREDICATE___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUILT_IN_PREDICATE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = PREDICATE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The number of operations of the '<em>Built In Predicate</em>' class.
@@ -8139,7 +8338,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getTypePredicate()
 	 * @generated
 	 */
-	int TYPE_PREDICATE = 66;
+	int TYPE_PREDICATE = 67;
 
 	/**
 	 * The feature id for the '<em><b>Antecedent Rule</b></em>' container reference.
@@ -8187,15 +8386,6 @@ public interface OmlPackage extends EPackage {
 	int TYPE_PREDICATE_FEATURE_COUNT = UNARY_PREDICATE_FEATURE_COUNT + 1;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_PREDICATE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = UNARY_PREDICATE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8203,6 +8393,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int TYPE_PREDICATE___GET_ONTOLOGY = UNARY_PREDICATE___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_PREDICATE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = UNARY_PREDICATE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The number of operations of the '<em>Type Predicate</em>' class.
@@ -8221,7 +8420,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRelationEntityPredicate()
 	 * @generated
 	 */
-	int RELATION_ENTITY_PREDICATE = 67;
+	int RELATION_ENTITY_PREDICATE = 68;
 
 	/**
 	 * The feature id for the '<em><b>Antecedent Rule</b></em>' container reference.
@@ -8287,15 +8486,6 @@ public interface OmlPackage extends EPackage {
 	int RELATION_ENTITY_PREDICATE_FEATURE_COUNT = UNARY_PREDICATE_FEATURE_COUNT + 3;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RELATION_ENTITY_PREDICATE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = UNARY_PREDICATE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8303,6 +8493,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int RELATION_ENTITY_PREDICATE___GET_ONTOLOGY = UNARY_PREDICATE___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_ENTITY_PREDICATE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = UNARY_PREDICATE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The number of operations of the '<em>Relation Entity Predicate</em>' class.
@@ -8321,7 +8520,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getPropertyPredicate()
 	 * @generated
 	 */
-	int PROPERTY_PREDICATE = 68;
+	int PROPERTY_PREDICATE = 69;
 
 	/**
 	 * The feature id for the '<em><b>Antecedent Rule</b></em>' container reference.
@@ -8378,15 +8577,6 @@ public interface OmlPackage extends EPackage {
 	int PROPERTY_PREDICATE_FEATURE_COUNT = BINARY_PREDICATE_FEATURE_COUNT + 1;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY_PREDICATE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = BINARY_PREDICATE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8394,6 +8584,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int PROPERTY_PREDICATE___GET_ONTOLOGY = BINARY_PREDICATE___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_PREDICATE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = BINARY_PREDICATE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The number of operations of the '<em>Property Predicate</em>' class.
@@ -8412,7 +8611,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getSameAsPredicate()
 	 * @generated
 	 */
-	int SAME_AS_PREDICATE = 69;
+	int SAME_AS_PREDICATE = 70;
 
 	/**
 	 * The feature id for the '<em><b>Antecedent Rule</b></em>' container reference.
@@ -8460,15 +8659,6 @@ public interface OmlPackage extends EPackage {
 	int SAME_AS_PREDICATE_FEATURE_COUNT = BINARY_PREDICATE_FEATURE_COUNT + 0;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SAME_AS_PREDICATE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = BINARY_PREDICATE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8476,6 +8666,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int SAME_AS_PREDICATE___GET_ONTOLOGY = BINARY_PREDICATE___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SAME_AS_PREDICATE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = BINARY_PREDICATE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The number of operations of the '<em>Same As Predicate</em>' class.
@@ -8494,7 +8693,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDifferentFromPredicate()
 	 * @generated
 	 */
-	int DIFFERENT_FROM_PREDICATE = 70;
+	int DIFFERENT_FROM_PREDICATE = 71;
 
 	/**
 	 * The feature id for the '<em><b>Antecedent Rule</b></em>' container reference.
@@ -8542,15 +8741,6 @@ public interface OmlPackage extends EPackage {
 	int DIFFERENT_FROM_PREDICATE_FEATURE_COUNT = BINARY_PREDICATE_FEATURE_COUNT + 0;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DIFFERENT_FROM_PREDICATE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = BINARY_PREDICATE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8558,6 +8748,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int DIFFERENT_FROM_PREDICATE___GET_ONTOLOGY = BINARY_PREDICATE___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DIFFERENT_FROM_PREDICATE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = BINARY_PREDICATE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The number of operations of the '<em>Different From Predicate</em>' class.
@@ -8576,7 +8775,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getQuotedLiteral()
 	 * @generated
 	 */
-	int QUOTED_LITERAL = 71;
+	int QUOTED_LITERAL = 72;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -8615,15 +8814,6 @@ public interface OmlPackage extends EPackage {
 	int QUOTED_LITERAL_FEATURE_COUNT = LITERAL_FEATURE_COUNT + 3;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int QUOTED_LITERAL___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = LITERAL___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8631,6 +8821,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int QUOTED_LITERAL___GET_ONTOLOGY = LITERAL___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int QUOTED_LITERAL___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = LITERAL___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Get Value</em>' operation.
@@ -8685,7 +8884,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getIntegerLiteral()
 	 * @generated
 	 */
-	int INTEGER_LITERAL = 72;
+	int INTEGER_LITERAL = 73;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -8706,15 +8905,6 @@ public interface OmlPackage extends EPackage {
 	int INTEGER_LITERAL_FEATURE_COUNT = LITERAL_FEATURE_COUNT + 1;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INTEGER_LITERAL___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = LITERAL___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8722,6 +8912,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int INTEGER_LITERAL___GET_ONTOLOGY = LITERAL___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTEGER_LITERAL___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = LITERAL___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Get Value</em>' operation.
@@ -8776,7 +8975,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDecimalLiteral()
 	 * @generated
 	 */
-	int DECIMAL_LITERAL = 73;
+	int DECIMAL_LITERAL = 74;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -8797,15 +8996,6 @@ public interface OmlPackage extends EPackage {
 	int DECIMAL_LITERAL_FEATURE_COUNT = LITERAL_FEATURE_COUNT + 1;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DECIMAL_LITERAL___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = LITERAL___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8813,6 +9003,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int DECIMAL_LITERAL___GET_ONTOLOGY = LITERAL___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECIMAL_LITERAL___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = LITERAL___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Get Value</em>' operation.
@@ -8867,7 +9066,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDoubleLiteral()
 	 * @generated
 	 */
-	int DOUBLE_LITERAL = 74;
+	int DOUBLE_LITERAL = 75;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -8888,15 +9087,6 @@ public interface OmlPackage extends EPackage {
 	int DOUBLE_LITERAL_FEATURE_COUNT = LITERAL_FEATURE_COUNT + 1;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DOUBLE_LITERAL___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = LITERAL___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8904,6 +9094,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int DOUBLE_LITERAL___GET_ONTOLOGY = LITERAL___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOUBLE_LITERAL___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = LITERAL___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Get Value</em>' operation.
@@ -8958,7 +9157,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getBooleanLiteral()
 	 * @generated
 	 */
-	int BOOLEAN_LITERAL = 75;
+	int BOOLEAN_LITERAL = 76;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -8979,15 +9178,6 @@ public interface OmlPackage extends EPackage {
 	int BOOLEAN_LITERAL_FEATURE_COUNT = LITERAL_FEATURE_COUNT + 1;
 
 	/**
-	 * The operation id for the '<em>Extra Validate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BOOLEAN_LITERAL___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = LITERAL___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8995,6 +9185,15 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int BOOLEAN_LITERAL___GET_ONTOLOGY = LITERAL___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_LITERAL___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = LITERAL___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Get Value</em>' operation.
@@ -9058,7 +9257,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getSeparatorKind()
 	 * @generated
 	 */
-	int SEPARATOR_KIND = 76;
+	int SEPARATOR_KIND = 77;
 
 	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.RangeRestrictionKind <em>Range Restriction Kind</em>}' enum.
@@ -9068,7 +9267,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRangeRestrictionKind()
 	 * @generated
 	 */
-	int RANGE_RESTRICTION_KIND = 77;
+	int RANGE_RESTRICTION_KIND = 78;
 
 	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.CardinalityRestrictionKind <em>Cardinality Restriction Kind</em>}' enum.
@@ -9078,7 +9277,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getCardinalityRestrictionKind()
 	 * @generated
 	 */
-	int CARDINALITY_RESTRICTION_KIND = 78;
+	int CARDINALITY_RESTRICTION_KIND = 79;
 
 	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.ImportKind <em>Import Kind</em>}' enum.
@@ -9088,7 +9287,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getImportKind()
 	 * @generated
 	 */
-	int IMPORT_KIND = 79;
+	int IMPORT_KIND = 80;
 
 	/**
 	 * The meta object id for the '<em>Unsigned Int</em>' data type.
@@ -9097,7 +9296,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getUnsignedInt()
 	 * @generated
 	 */
-	int UNSIGNED_INT = 80;
+	int UNSIGNED_INT = 81;
 
 	/**
 	 * The meta object id for the '<em>Unsigned Integer</em>' data type.
@@ -9107,7 +9306,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getUnsignedInteger()
 	 * @generated
 	 */
-	int UNSIGNED_INTEGER = 81;
+	int UNSIGNED_INTEGER = 82;
 
 	/**
 	 * The meta object id for the '<em>Decimal</em>' data type.
@@ -9117,7 +9316,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDecimal()
 	 * @generated
 	 */
-	int DECIMAL = 82;
+	int DECIMAL = 83;
 
 	/**
 	 * The meta object id for the '<em>ID</em>' data type.
@@ -9127,7 +9326,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getID()
 	 * @generated
 	 */
-	int ID = 83;
+	int ID = 84;
 
 	/**
 	 * The meta object id for the '<em>Namespace</em>' data type.
@@ -9137,7 +9336,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getNamespace()
 	 * @generated
 	 */
-	int NAMESPACE = 84;
+	int NAMESPACE = 85;
 
 
 	/**
@@ -9151,16 +9350,6 @@ public interface OmlPackage extends EPackage {
 	EClass getElement();
 
 	/**
-	 * Returns the meta object for the '{@link io.opencaesar.oml.Element#extraValidate(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Extra Validate</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Extra Validate</em>' operation.
-	 * @see io.opencaesar.oml.Element#extraValidate(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
-	 * @generated
-	 */
-	EOperation getElement__ExtraValidate__DiagnosticChain_Map();
-
-	/**
 	 * Returns the meta object for the '{@link io.opencaesar.oml.Element#getOntology() <em>Get Ontology</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -9169,6 +9358,16 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 */
 	EOperation getElement__GetOntology();
+
+	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.Element#extraValidate(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Extra Validate</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Extra Validate</em>' operation.
+	 * @see io.opencaesar.oml.Element#extraValidate(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getElement__ExtraValidate__DiagnosticChain_Map();
 
 	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.Annotation <em>Annotation</em>}'.
@@ -9379,6 +9578,16 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getAxiom();
+
+	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.Axiom#getCharacterizedTerm() <em>Get Characterized Term</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Characterized Term</em>' operation.
+	 * @see io.opencaesar.oml.Axiom#getCharacterizedTerm()
+	 * @generated
+	 */
+	EOperation getAxiom__GetCharacterizedTerm();
 
 	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.Assertion <em>Assertion</em>}'.
@@ -10133,105 +10342,6 @@ public interface OmlPackage extends EPackage {
 	EReference getScalar_Ref();
 
 	/**
-	 * Returns the meta object for the attribute '{@link io.opencaesar.oml.Scalar#getLength <em>Length</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Length</em>'.
-	 * @see io.opencaesar.oml.Scalar#getLength()
-	 * @see #getScalar()
-	 * @generated
-	 */
-	EAttribute getScalar_Length();
-
-	/**
-	 * Returns the meta object for the attribute '{@link io.opencaesar.oml.Scalar#getMinLength <em>Min Length</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Min Length</em>'.
-	 * @see io.opencaesar.oml.Scalar#getMinLength()
-	 * @see #getScalar()
-	 * @generated
-	 */
-	EAttribute getScalar_MinLength();
-
-	/**
-	 * Returns the meta object for the attribute '{@link io.opencaesar.oml.Scalar#getMaxLength <em>Max Length</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Max Length</em>'.
-	 * @see io.opencaesar.oml.Scalar#getMaxLength()
-	 * @see #getScalar()
-	 * @generated
-	 */
-	EAttribute getScalar_MaxLength();
-
-	/**
-	 * Returns the meta object for the attribute '{@link io.opencaesar.oml.Scalar#getPattern <em>Pattern</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Pattern</em>'.
-	 * @see io.opencaesar.oml.Scalar#getPattern()
-	 * @see #getScalar()
-	 * @generated
-	 */
-	EAttribute getScalar_Pattern();
-
-	/**
-	 * Returns the meta object for the attribute '{@link io.opencaesar.oml.Scalar#getLanguage <em>Language</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Language</em>'.
-	 * @see io.opencaesar.oml.Scalar#getLanguage()
-	 * @see #getScalar()
-	 * @generated
-	 */
-	EAttribute getScalar_Language();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link io.opencaesar.oml.Scalar#getMinInclusive <em>Min Inclusive</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Min Inclusive</em>'.
-	 * @see io.opencaesar.oml.Scalar#getMinInclusive()
-	 * @see #getScalar()
-	 * @generated
-	 */
-	EReference getScalar_MinInclusive();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link io.opencaesar.oml.Scalar#getMinExclusive <em>Min Exclusive</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Min Exclusive</em>'.
-	 * @see io.opencaesar.oml.Scalar#getMinExclusive()
-	 * @see #getScalar()
-	 * @generated
-	 */
-	EReference getScalar_MinExclusive();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link io.opencaesar.oml.Scalar#getMaxInclusive <em>Max Inclusive</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Max Inclusive</em>'.
-	 * @see io.opencaesar.oml.Scalar#getMaxInclusive()
-	 * @see #getScalar()
-	 * @generated
-	 */
-	EReference getScalar_MaxInclusive();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link io.opencaesar.oml.Scalar#getMaxExclusive <em>Max Exclusive</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Max Exclusive</em>'.
-	 * @see io.opencaesar.oml.Scalar#getMaxExclusive()
-	 * @see #getScalar()
-	 * @generated
-	 */
-	EReference getScalar_MaxExclusive();
-
-	/**
 	 * Returns the meta object for the containment reference '{@link io.opencaesar.oml.Scalar#getOwnedEnumeration <em>Owned Enumeration</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -10241,6 +10351,17 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getScalar_OwnedEnumeration();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link io.opencaesar.oml.Scalar#getOwnedEquivalences <em>Owned Equivalences</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Owned Equivalences</em>'.
+	 * @see io.opencaesar.oml.Scalar#getOwnedEquivalences()
+	 * @see #getScalar()
+	 * @generated
+	 */
+	EReference getScalar_OwnedEquivalences();
 
 	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.Entity <em>Entity</em>}'.
@@ -11182,6 +11303,16 @@ public interface OmlPackage extends EPackage {
 	EOperation getKeyAxiom__GetKeyedEntity();
 
 	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.KeyAxiom#getCharacterizedTerm() <em>Get Characterized Term</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Characterized Term</em>' operation.
+	 * @see io.opencaesar.oml.KeyAxiom#getCharacterizedTerm()
+	 * @generated
+	 */
+	EOperation getKeyAxiom__GetCharacterizedTerm();
+
+	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.SpecializationAxiom <em>Specialization Axiom</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -11224,6 +11355,16 @@ public interface OmlPackage extends EPackage {
 	EOperation getSpecializationAxiom__GetSubTerm();
 
 	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.SpecializationAxiom#getCharacterizedTerm() <em>Get Characterized Term</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Characterized Term</em>' operation.
+	 * @see io.opencaesar.oml.SpecializationAxiom#getCharacterizedTerm()
+	 * @generated
+	 */
+	EOperation getSpecializationAxiom__GetCharacterizedTerm();
+
+	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.InstanceEnumerationAxiom <em>Instance Enumeration Axiom</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -11264,6 +11405,16 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 */
 	EOperation getInstanceEnumerationAxiom__GetEnumeratedConcept();
+
+	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.InstanceEnumerationAxiom#getCharacterizedTerm() <em>Get Characterized Term</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Characterized Term</em>' operation.
+	 * @see io.opencaesar.oml.InstanceEnumerationAxiom#getCharacterizedTerm()
+	 * @generated
+	 */
+	EOperation getInstanceEnumerationAxiom__GetCharacterizedTerm();
 
 	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.PropertyRestrictionAxiom <em>Property Restriction Axiom</em>}'.
@@ -11319,6 +11470,16 @@ public interface OmlPackage extends EPackage {
 	EOperation getPropertyRestrictionAxiom__GetRestrictingDomain();
 
 	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.PropertyRestrictionAxiom#getCharacterizedTerm() <em>Get Characterized Term</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Characterized Term</em>' operation.
+	 * @see io.opencaesar.oml.PropertyRestrictionAxiom#getCharacterizedTerm()
+	 * @generated
+	 */
+	EOperation getPropertyRestrictionAxiom__GetCharacterizedTerm();
+
+	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.LiteralEnumerationAxiom <em>Literal Enumeration Axiom</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -11359,6 +11520,16 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 */
 	EOperation getLiteralEnumerationAxiom__GetEnumeratedScalar();
+
+	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.LiteralEnumerationAxiom#getCharacterizedTerm() <em>Get Characterized Term</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Characterized Term</em>' operation.
+	 * @see io.opencaesar.oml.LiteralEnumerationAxiom#getCharacterizedTerm()
+	 * @generated
+	 */
+	EOperation getLiteralEnumerationAxiom__GetCharacterizedTerm();
 
 	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.ClassifierEquivalenceAxiom <em>Classifier Equivalence Axiom</em>}'.
@@ -11414,6 +11585,167 @@ public interface OmlPackage extends EPackage {
 	EOperation getClassifierEquivalenceAxiom__GetSubClassifier();
 
 	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.ClassifierEquivalenceAxiom#getCharacterizedTerm() <em>Get Characterized Term</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Characterized Term</em>' operation.
+	 * @see io.opencaesar.oml.ClassifierEquivalenceAxiom#getCharacterizedTerm()
+	 * @generated
+	 */
+	EOperation getClassifierEquivalenceAxiom__GetCharacterizedTerm();
+
+	/**
+	 * Returns the meta object for class '{@link io.opencaesar.oml.ScalarEquivalenceAxiom <em>Scalar Equivalence Axiom</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Scalar Equivalence Axiom</em>'.
+	 * @see io.opencaesar.oml.ScalarEquivalenceAxiom
+	 * @generated
+	 */
+	EClass getScalarEquivalenceAxiom();
+
+	/**
+	 * Returns the meta object for the reference '{@link io.opencaesar.oml.ScalarEquivalenceAxiom#getSuperScalar <em>Super Scalar</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Super Scalar</em>'.
+	 * @see io.opencaesar.oml.ScalarEquivalenceAxiom#getSuperScalar()
+	 * @see #getScalarEquivalenceAxiom()
+	 * @generated
+	 */
+	EReference getScalarEquivalenceAxiom_SuperScalar();
+
+	/**
+	 * Returns the meta object for the container reference '{@link io.opencaesar.oml.ScalarEquivalenceAxiom#getOwningScalar <em>Owning Scalar</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Owning Scalar</em>'.
+	 * @see io.opencaesar.oml.ScalarEquivalenceAxiom#getOwningScalar()
+	 * @see #getScalarEquivalenceAxiom()
+	 * @generated
+	 */
+	EReference getScalarEquivalenceAxiom_OwningScalar();
+
+	/**
+	 * Returns the meta object for the attribute '{@link io.opencaesar.oml.ScalarEquivalenceAxiom#getLength <em>Length</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Length</em>'.
+	 * @see io.opencaesar.oml.ScalarEquivalenceAxiom#getLength()
+	 * @see #getScalarEquivalenceAxiom()
+	 * @generated
+	 */
+	EAttribute getScalarEquivalenceAxiom_Length();
+
+	/**
+	 * Returns the meta object for the attribute '{@link io.opencaesar.oml.ScalarEquivalenceAxiom#getMinLength <em>Min Length</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Min Length</em>'.
+	 * @see io.opencaesar.oml.ScalarEquivalenceAxiom#getMinLength()
+	 * @see #getScalarEquivalenceAxiom()
+	 * @generated
+	 */
+	EAttribute getScalarEquivalenceAxiom_MinLength();
+
+	/**
+	 * Returns the meta object for the attribute '{@link io.opencaesar.oml.ScalarEquivalenceAxiom#getMaxLength <em>Max Length</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Max Length</em>'.
+	 * @see io.opencaesar.oml.ScalarEquivalenceAxiom#getMaxLength()
+	 * @see #getScalarEquivalenceAxiom()
+	 * @generated
+	 */
+	EAttribute getScalarEquivalenceAxiom_MaxLength();
+
+	/**
+	 * Returns the meta object for the attribute '{@link io.opencaesar.oml.ScalarEquivalenceAxiom#getPattern <em>Pattern</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Pattern</em>'.
+	 * @see io.opencaesar.oml.ScalarEquivalenceAxiom#getPattern()
+	 * @see #getScalarEquivalenceAxiom()
+	 * @generated
+	 */
+	EAttribute getScalarEquivalenceAxiom_Pattern();
+
+	/**
+	 * Returns the meta object for the attribute '{@link io.opencaesar.oml.ScalarEquivalenceAxiom#getLanguage <em>Language</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Language</em>'.
+	 * @see io.opencaesar.oml.ScalarEquivalenceAxiom#getLanguage()
+	 * @see #getScalarEquivalenceAxiom()
+	 * @generated
+	 */
+	EAttribute getScalarEquivalenceAxiom_Language();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link io.opencaesar.oml.ScalarEquivalenceAxiom#getMinInclusive <em>Min Inclusive</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Min Inclusive</em>'.
+	 * @see io.opencaesar.oml.ScalarEquivalenceAxiom#getMinInclusive()
+	 * @see #getScalarEquivalenceAxiom()
+	 * @generated
+	 */
+	EReference getScalarEquivalenceAxiom_MinInclusive();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link io.opencaesar.oml.ScalarEquivalenceAxiom#getMinExclusive <em>Min Exclusive</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Min Exclusive</em>'.
+	 * @see io.opencaesar.oml.ScalarEquivalenceAxiom#getMinExclusive()
+	 * @see #getScalarEquivalenceAxiom()
+	 * @generated
+	 */
+	EReference getScalarEquivalenceAxiom_MinExclusive();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link io.opencaesar.oml.ScalarEquivalenceAxiom#getMaxInclusive <em>Max Inclusive</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Max Inclusive</em>'.
+	 * @see io.opencaesar.oml.ScalarEquivalenceAxiom#getMaxInclusive()
+	 * @see #getScalarEquivalenceAxiom()
+	 * @generated
+	 */
+	EReference getScalarEquivalenceAxiom_MaxInclusive();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link io.opencaesar.oml.ScalarEquivalenceAxiom#getMaxExclusive <em>Max Exclusive</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Max Exclusive</em>'.
+	 * @see io.opencaesar.oml.ScalarEquivalenceAxiom#getMaxExclusive()
+	 * @see #getScalarEquivalenceAxiom()
+	 * @generated
+	 */
+	EReference getScalarEquivalenceAxiom_MaxExclusive();
+
+	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.ScalarEquivalenceAxiom#getSubScalar() <em>Get Sub Scalar</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Sub Scalar</em>' operation.
+	 * @see io.opencaesar.oml.ScalarEquivalenceAxiom#getSubScalar()
+	 * @generated
+	 */
+	EOperation getScalarEquivalenceAxiom__GetSubScalar();
+
+	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.ScalarEquivalenceAxiom#getCharacterizedTerm() <em>Get Characterized Term</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Characterized Term</em>' operation.
+	 * @see io.opencaesar.oml.ScalarEquivalenceAxiom#getCharacterizedTerm()
+	 * @generated
+	 */
+	EOperation getScalarEquivalenceAxiom__GetCharacterizedTerm();
+
+	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.PropertyEquivalenceAxiom <em>Property Equivalence Axiom</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -11454,6 +11786,16 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 */
 	EOperation getPropertyEquivalenceAxiom__GetSubProperty();
+
+	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.PropertyEquivalenceAxiom#getCharacterizedTerm() <em>Get Characterized Term</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Characterized Term</em>' operation.
+	 * @see io.opencaesar.oml.PropertyEquivalenceAxiom#getCharacterizedTerm()
+	 * @generated
+	 */
+	EOperation getPropertyEquivalenceAxiom__GetCharacterizedTerm();
 
 	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.PropertyRangeRestrictionAxiom <em>Property Range Restriction Axiom</em>}'.
@@ -12238,20 +12580,20 @@ public interface OmlPackage extends EPackage {
 		EClass ELEMENT = eINSTANCE.getElement();
 
 		/**
-		 * The meta object literal for the '<em><b>Extra Validate</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation ELEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getElement__ExtraValidate__DiagnosticChain_Map();
-
-		/**
 		 * The meta object literal for the '<em><b>Get Ontology</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EOperation ELEMENT___GET_ONTOLOGY = eINSTANCE.getElement__GetOntology();
+
+		/**
+		 * The meta object literal for the '<em><b>Extra Validate</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation ELEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getElement__ExtraValidate__DiagnosticChain_Map();
 
 		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.AnnotationImpl <em>Annotation</em>}' class.
@@ -12422,6 +12764,14 @@ public interface OmlPackage extends EPackage {
 		 * @generated
 		 */
 		EClass AXIOM = eINSTANCE.getAxiom();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Characterized Term</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation AXIOM___GET_CHARACTERIZED_TERM = eINSTANCE.getAxiom__GetCharacterizedTerm();
 
 		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.AssertionImpl <em>Assertion</em>}' class.
@@ -13054,84 +13404,20 @@ public interface OmlPackage extends EPackage {
 		EReference SCALAR__REF = eINSTANCE.getScalar_Ref();
 
 		/**
-		 * The meta object literal for the '<em><b>Length</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute SCALAR__LENGTH = eINSTANCE.getScalar_Length();
-
-		/**
-		 * The meta object literal for the '<em><b>Min Length</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute SCALAR__MIN_LENGTH = eINSTANCE.getScalar_MinLength();
-
-		/**
-		 * The meta object literal for the '<em><b>Max Length</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute SCALAR__MAX_LENGTH = eINSTANCE.getScalar_MaxLength();
-
-		/**
-		 * The meta object literal for the '<em><b>Pattern</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute SCALAR__PATTERN = eINSTANCE.getScalar_Pattern();
-
-		/**
-		 * The meta object literal for the '<em><b>Language</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute SCALAR__LANGUAGE = eINSTANCE.getScalar_Language();
-
-		/**
-		 * The meta object literal for the '<em><b>Min Inclusive</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference SCALAR__MIN_INCLUSIVE = eINSTANCE.getScalar_MinInclusive();
-
-		/**
-		 * The meta object literal for the '<em><b>Min Exclusive</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference SCALAR__MIN_EXCLUSIVE = eINSTANCE.getScalar_MinExclusive();
-
-		/**
-		 * The meta object literal for the '<em><b>Max Inclusive</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference SCALAR__MAX_INCLUSIVE = eINSTANCE.getScalar_MaxInclusive();
-
-		/**
-		 * The meta object literal for the '<em><b>Max Exclusive</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference SCALAR__MAX_EXCLUSIVE = eINSTANCE.getScalar_MaxExclusive();
-
-		/**
 		 * The meta object literal for the '<em><b>Owned Enumeration</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference SCALAR__OWNED_ENUMERATION = eINSTANCE.getScalar_OwnedEnumeration();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Equivalences</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SCALAR__OWNED_EQUIVALENCES = eINSTANCE.getScalar_OwnedEquivalences();
 
 		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.EntityImpl <em>Entity</em>}' class.
@@ -13898,6 +14184,14 @@ public interface OmlPackage extends EPackage {
 		EOperation KEY_AXIOM___GET_KEYED_ENTITY = eINSTANCE.getKeyAxiom__GetKeyedEntity();
 
 		/**
+		 * The meta object literal for the '<em><b>Get Characterized Term</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation KEY_AXIOM___GET_CHARACTERIZED_TERM = eINSTANCE.getKeyAxiom__GetCharacterizedTerm();
+
+		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.SpecializationAxiomImpl <em>Specialization Axiom</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -13932,6 +14226,14 @@ public interface OmlPackage extends EPackage {
 		EOperation SPECIALIZATION_AXIOM___GET_SUB_TERM = eINSTANCE.getSpecializationAxiom__GetSubTerm();
 
 		/**
+		 * The meta object literal for the '<em><b>Get Characterized Term</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation SPECIALIZATION_AXIOM___GET_CHARACTERIZED_TERM = eINSTANCE.getSpecializationAxiom__GetCharacterizedTerm();
+
+		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.InstanceEnumerationAxiomImpl <em>Instance Enumeration Axiom</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -13964,6 +14266,14 @@ public interface OmlPackage extends EPackage {
 		 * @generated
 		 */
 		EOperation INSTANCE_ENUMERATION_AXIOM___GET_ENUMERATED_CONCEPT = eINSTANCE.getInstanceEnumerationAxiom__GetEnumeratedConcept();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Characterized Term</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation INSTANCE_ENUMERATION_AXIOM___GET_CHARACTERIZED_TERM = eINSTANCE.getInstanceEnumerationAxiom__GetCharacterizedTerm();
 
 		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.PropertyRestrictionAxiomImpl <em>Property Restriction Axiom</em>}' class.
@@ -14008,6 +14318,14 @@ public interface OmlPackage extends EPackage {
 		EOperation PROPERTY_RESTRICTION_AXIOM___GET_RESTRICTING_DOMAIN = eINSTANCE.getPropertyRestrictionAxiom__GetRestrictingDomain();
 
 		/**
+		 * The meta object literal for the '<em><b>Get Characterized Term</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation PROPERTY_RESTRICTION_AXIOM___GET_CHARACTERIZED_TERM = eINSTANCE.getPropertyRestrictionAxiom__GetCharacterizedTerm();
+
+		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.LiteralEnumerationAxiomImpl <em>Literal Enumeration Axiom</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -14040,6 +14358,14 @@ public interface OmlPackage extends EPackage {
 		 * @generated
 		 */
 		EOperation LITERAL_ENUMERATION_AXIOM___GET_ENUMERATED_SCALAR = eINSTANCE.getLiteralEnumerationAxiom__GetEnumeratedScalar();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Characterized Term</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation LITERAL_ENUMERATION_AXIOM___GET_CHARACTERIZED_TERM = eINSTANCE.getLiteralEnumerationAxiom__GetCharacterizedTerm();
 
 		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.ClassifierEquivalenceAxiomImpl <em>Classifier Equivalence Axiom</em>}' class.
@@ -14084,6 +14410,128 @@ public interface OmlPackage extends EPackage {
 		EOperation CLASSIFIER_EQUIVALENCE_AXIOM___GET_SUB_CLASSIFIER = eINSTANCE.getClassifierEquivalenceAxiom__GetSubClassifier();
 
 		/**
+		 * The meta object literal for the '<em><b>Get Characterized Term</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation CLASSIFIER_EQUIVALENCE_AXIOM___GET_CHARACTERIZED_TERM = eINSTANCE.getClassifierEquivalenceAxiom__GetCharacterizedTerm();
+
+		/**
+		 * The meta object literal for the '{@link io.opencaesar.oml.impl.ScalarEquivalenceAxiomImpl <em>Scalar Equivalence Axiom</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see io.opencaesar.oml.impl.ScalarEquivalenceAxiomImpl
+		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getScalarEquivalenceAxiom()
+		 * @generated
+		 */
+		EClass SCALAR_EQUIVALENCE_AXIOM = eINSTANCE.getScalarEquivalenceAxiom();
+
+		/**
+		 * The meta object literal for the '<em><b>Super Scalar</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SCALAR_EQUIVALENCE_AXIOM__SUPER_SCALAR = eINSTANCE.getScalarEquivalenceAxiom_SuperScalar();
+
+		/**
+		 * The meta object literal for the '<em><b>Owning Scalar</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SCALAR_EQUIVALENCE_AXIOM__OWNING_SCALAR = eINSTANCE.getScalarEquivalenceAxiom_OwningScalar();
+
+		/**
+		 * The meta object literal for the '<em><b>Length</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SCALAR_EQUIVALENCE_AXIOM__LENGTH = eINSTANCE.getScalarEquivalenceAxiom_Length();
+
+		/**
+		 * The meta object literal for the '<em><b>Min Length</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SCALAR_EQUIVALENCE_AXIOM__MIN_LENGTH = eINSTANCE.getScalarEquivalenceAxiom_MinLength();
+
+		/**
+		 * The meta object literal for the '<em><b>Max Length</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SCALAR_EQUIVALENCE_AXIOM__MAX_LENGTH = eINSTANCE.getScalarEquivalenceAxiom_MaxLength();
+
+		/**
+		 * The meta object literal for the '<em><b>Pattern</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SCALAR_EQUIVALENCE_AXIOM__PATTERN = eINSTANCE.getScalarEquivalenceAxiom_Pattern();
+
+		/**
+		 * The meta object literal for the '<em><b>Language</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SCALAR_EQUIVALENCE_AXIOM__LANGUAGE = eINSTANCE.getScalarEquivalenceAxiom_Language();
+
+		/**
+		 * The meta object literal for the '<em><b>Min Inclusive</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SCALAR_EQUIVALENCE_AXIOM__MIN_INCLUSIVE = eINSTANCE.getScalarEquivalenceAxiom_MinInclusive();
+
+		/**
+		 * The meta object literal for the '<em><b>Min Exclusive</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SCALAR_EQUIVALENCE_AXIOM__MIN_EXCLUSIVE = eINSTANCE.getScalarEquivalenceAxiom_MinExclusive();
+
+		/**
+		 * The meta object literal for the '<em><b>Max Inclusive</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SCALAR_EQUIVALENCE_AXIOM__MAX_INCLUSIVE = eINSTANCE.getScalarEquivalenceAxiom_MaxInclusive();
+
+		/**
+		 * The meta object literal for the '<em><b>Max Exclusive</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SCALAR_EQUIVALENCE_AXIOM__MAX_EXCLUSIVE = eINSTANCE.getScalarEquivalenceAxiom_MaxExclusive();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Sub Scalar</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation SCALAR_EQUIVALENCE_AXIOM___GET_SUB_SCALAR = eINSTANCE.getScalarEquivalenceAxiom__GetSubScalar();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Characterized Term</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation SCALAR_EQUIVALENCE_AXIOM___GET_CHARACTERIZED_TERM = eINSTANCE.getScalarEquivalenceAxiom__GetCharacterizedTerm();
+
+		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.PropertyEquivalenceAxiomImpl <em>Property Equivalence Axiom</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -14116,6 +14564,14 @@ public interface OmlPackage extends EPackage {
 		 * @generated
 		 */
 		EOperation PROPERTY_EQUIVALENCE_AXIOM___GET_SUB_PROPERTY = eINSTANCE.getPropertyEquivalenceAxiom__GetSubProperty();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Characterized Term</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation PROPERTY_EQUIVALENCE_AXIOM___GET_CHARACTERIZED_TERM = eINSTANCE.getPropertyEquivalenceAxiom__GetCharacterizedTerm();
 
 		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.PropertyRangeRestrictionAxiomImpl <em>Property Range Restriction Axiom</em>}' class.

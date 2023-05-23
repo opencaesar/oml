@@ -308,6 +308,10 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 				return createClassifierEquivalenceAxiomAdapter();
 			}
 			@Override
+			public Adapter caseScalarEquivalenceAxiom(ScalarEquivalenceAxiom object) {
+				return createScalarEquivalenceAxiomAdapter();
+			}
+			@Override
 			public Adapter casePropertyEquivalenceAxiom(PropertyEquivalenceAxiom object) {
 				return createPropertyEquivalenceAxiomAdapter();
 			}
@@ -1188,6 +1192,20 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createClassifierEquivalenceAxiomAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.ScalarEquivalenceAxiom <em>Scalar Equivalence Axiom</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see io.opencaesar.oml.ScalarEquivalenceAxiom
+	 * @generated
+	 */
+	public Adapter createScalarEquivalenceAxiomAdapter() {
 		return null;
 	}
 

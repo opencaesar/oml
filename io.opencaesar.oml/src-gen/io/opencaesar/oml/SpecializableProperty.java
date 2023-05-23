@@ -26,7 +26,7 @@ import org.eclipse.emf.common.util.EList;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * SpecializableProperty is a property that can be specialized.
+ * SpecializableProperty is a [=property=] that can be specialized. It can also specify [=PropertyEquivalenceAxioms=].
  * <!-- end-model-doc -->
  *
  * <p>

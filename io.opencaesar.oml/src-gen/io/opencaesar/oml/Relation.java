@@ -26,8 +26,8 @@ import org.eclipse.emf.common.util.EList;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Relation is a semantic property whose domain is an entity and whose range is also an entity.
- * It can be characterized by DL flags and can have an inverse relation.
+ * Relation is a [=SemanticProperty=] whose domain is an [=Entity=] and whose range is also an [=Entity=].
+ * It can be characterized by DL flags and can have an inverse [=Relation=].
  * <!-- end-model-doc -->
  *
  *

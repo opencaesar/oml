@@ -25,9 +25,14 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Import is an element owned by an ontology to specify that it imports another ontology.
- * The imported ontology is specified by its IRI, and optionally a separator character and local prefix
- * if members of the imported ontology will also be referenced by the importing ontology
+ * Import is an element owned by an [=ontology=] and specifies that it imports another ontology.
+ * The imported ontology is referenced by its namespace and an optional prefix that is locally unique
+ * within the importing ontology. Import can be of several [=ImportKind=] based on the following rules:
+ * 
+ * - Vocabulary (`extends` Vocabulary, `uses` Description)
+ * - Description (`extends` Description, `uses` Vocabulary)
+ * - VocabularyBundle (`extends` VocabularyBundle, `includes` Vocabulary)
+ * - DescriptionBundle (`extends` DescriptionBundle, `includes` Description, `uses` VocabularyBundle, `uses` Vocabulary)
  * <!-- end-model-doc -->
  *
  * <p>
@@ -103,7 +108,7 @@ public interface Import extends Element {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The local prefix of the imported ontology's namespace
+	 * The (locally unique) namespace prefix of the imported ontology
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Prefix</em>' attribute.
 	 * @see #setPrefix(String)
@@ -154,7 +159,7 @@ public interface Import extends Element {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Get the import's iri
+	 * Gets the imported ontology's IRI
 	 * <!-- end-model-doc -->
 	 * @model kind="operation" unique="false"
 	 * @generated
@@ -165,7 +170,7 @@ public interface Import extends Element {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Get the import's separator char
+	 * Gets the imported ontology's namespace's separator character [=SeparatorKinds=]
 	 * <!-- end-model-doc -->
 	 * @model kind="operation" unique="false"
 	 * @generated

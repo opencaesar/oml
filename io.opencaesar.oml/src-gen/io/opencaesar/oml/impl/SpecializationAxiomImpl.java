@@ -192,6 +192,16 @@ public class SpecializationAxiomImpl extends AxiomImpl implements Specialization
 	 * @generated
 	 */
 	@Override
+	public Term getCharacterizedTerm() {
+		return this.getSubTerm();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case OmlPackage.SPECIALIZATION_AXIOM__OWNING_TERM:
@@ -310,6 +320,8 @@ public class SpecializationAxiomImpl extends AxiomImpl implements Specialization
 		switch (operationID) {
 			case OmlPackage.SPECIALIZATION_AXIOM___GET_SUB_TERM:
 				return getSubTerm();
+			case OmlPackage.SPECIALIZATION_AXIOM___GET_CHARACTERIZED_TERM:
+				return getCharacterizedTerm();
 		}
 		return super.eInvoke(operationID, arguments);
 	}

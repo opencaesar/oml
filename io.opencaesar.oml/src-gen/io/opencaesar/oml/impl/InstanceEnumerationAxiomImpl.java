@@ -168,6 +168,16 @@ public class InstanceEnumerationAxiomImpl extends AxiomImpl implements InstanceE
 	 * @generated
 	 */
 	@Override
+	public Concept getCharacterizedTerm() {
+		return this.getEnumeratedConcept();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case OmlPackage.INSTANCE_ENUMERATION_AXIOM__OWNING_CONCEPT:
@@ -287,6 +297,8 @@ public class InstanceEnumerationAxiomImpl extends AxiomImpl implements InstanceE
 		switch (operationID) {
 			case OmlPackage.INSTANCE_ENUMERATION_AXIOM___GET_ENUMERATED_CONCEPT:
 				return getEnumeratedConcept();
+			case OmlPackage.INSTANCE_ENUMERATION_AXIOM___GET_CHARACTERIZED_TERM:
+				return getCharacterizedTerm();
 		}
 		return super.eInvoke(operationID, arguments);
 	}

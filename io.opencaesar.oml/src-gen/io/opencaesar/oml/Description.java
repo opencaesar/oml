@@ -26,8 +26,7 @@ import org.eclipse.emf.common.util.EList;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Description is a description box that allows making statements about its own instances or about
- * others that are imported.
+ * Description is a description box whose statements specify instances in a given system.
  * <!-- end-model-doc -->
  *
  * <p>

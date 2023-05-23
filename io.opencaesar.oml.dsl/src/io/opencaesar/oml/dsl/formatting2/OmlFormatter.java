@@ -30,6 +30,8 @@ import org.eclipse.xtext.formatting2.FormatterPreferenceKeys;
 import org.eclipse.xtext.formatting2.FormatterRequest;
 import org.eclipse.xtext.formatting2.IFormattableDocument;
 import org.eclipse.xtext.formatting2.IHiddenRegionFormatter;
+import org.eclipse.xtext.formatting2.ITextReplacerContext;
+import org.eclipse.xtext.formatting2.internal.AbstractTextReplacer;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
 import org.eclipse.xtext.preferences.MapBasedPreferenceValues;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -69,6 +71,7 @@ import io.opencaesar.oml.ReverseRelation;
 import io.opencaesar.oml.Rule;
 import io.opencaesar.oml.SameAsPredicate;
 import io.opencaesar.oml.Scalar;
+import io.opencaesar.oml.ScalarEquivalenceAxiom;
 import io.opencaesar.oml.ScalarProperty;
 import io.opencaesar.oml.Structure;
 import io.opencaesar.oml.StructureInstance;
@@ -306,22 +309,26 @@ public class OmlFormatter extends AbstractJavaFormatter {
 			doc.append(keyword(scalar, oml.getScalarAccess().getScalarKeyword_1_1_1()), oneSpace());
 		}
 		formatBrackets(scalar, doc);
-		doc.prepend(keyword(scalar, oml.getScalarAccess().getLengthKeyword_2_1_0_0()), newLine());
-		doc.prepend(keyword(scalar, oml.getScalarAccess().getMinLengthKeyword_2_1_1_0()), newLine());
-		doc.prepend(keyword(scalar, oml.getScalarAccess().getMaxLengthKeyword_2_1_2_0()), newLine());
-		doc.prepend(keyword(scalar, oml.getScalarAccess().getPatternKeyword_2_1_3_0()), newLine());
-		doc.prepend(keyword(scalar, oml.getScalarAccess().getLanguageKeyword_2_1_4_0()), newLine());
-		doc.prepend(keyword(scalar, oml.getScalarAccess().getMinInclusiveKeyword_2_1_5_0()), newLine());
-		ifNotNull(scalar.getMinInclusive(), i -> doc.prepend(doc.format(i), oneSpace()));
-		doc.prepend(keyword(scalar, oml.getScalarAccess().getMaxInclusiveKeyword_2_1_7_0()), newLine());
-		ifNotNull(scalar.getMaxInclusive(), i -> doc.prepend(doc.format(i), oneSpace()));
-		doc.prepend(keyword(scalar, oml.getScalarAccess().getMinExclusiveKeyword_2_1_6_0()), newLine());
-		ifNotNull(scalar.getMinExclusive(), i -> doc.prepend(doc.format(i), oneSpace()));
-		doc.prepend(keyword(scalar, oml.getScalarAccess().getMaxExclusiveKeyword_2_1_8_0()), newLine());
-		ifNotNull(scalar.getMaxExclusive(), i -> doc.prepend(doc.format(i), oneSpace()));
 		ifNotNull(scalar.getOwnedEnumeration(), i -> doc.prepend(doc.format(scalar.getOwnedEnumeration()), newLine()));
 		doc.surround(keyword(scalar, oml.getScalarSpecializationAccess().getLessThanSignKeyword_0()), oneSpace());
 		formatCommas(scalar, doc);
+	}
+
+	protected void _format(ScalarEquivalenceAxiom axiom, IFormattableDocument doc) {
+		formatBrackets(axiom, doc);
+		doc.prepend(keyword(axiom, oml.getScalarEquivalenceAxiomAccess().getLengthKeyword_1_1_0_0()), newLine());
+		doc.prepend(keyword(axiom, oml.getScalarEquivalenceAxiomAccess().getMinLengthKeyword_1_1_1_0()), newLine());
+		doc.prepend(keyword(axiom, oml.getScalarEquivalenceAxiomAccess().getMaxLengthKeyword_1_1_2_0()), newLine());
+		doc.prepend(keyword(axiom, oml.getScalarEquivalenceAxiomAccess().getPatternKeyword_1_1_3_0()), newLine());
+		doc.prepend(keyword(axiom, oml.getScalarEquivalenceAxiomAccess().getLanguageKeyword_1_1_4_0()), newLine());
+		doc.prepend(keyword(axiom, oml.getScalarEquivalenceAxiomAccess().getMinInclusiveKeyword_1_1_5_0()), newLine());
+		ifNotNull(axiom.getMinInclusive(), i -> doc.prepend(doc.format(i), oneSpace()));
+		doc.prepend(keyword(axiom, oml.getScalarEquivalenceAxiomAccess().getMaxInclusiveKeyword_1_1_7_0()), newLine());
+		ifNotNull(axiom.getMaxInclusive(), i -> doc.prepend(doc.format(i), oneSpace()));
+		doc.prepend(keyword(axiom, oml.getScalarEquivalenceAxiomAccess().getMinExclusiveKeyword_1_1_6_0()), newLine());
+		ifNotNull(axiom.getMinExclusive(), i -> doc.prepend(doc.format(i), oneSpace()));
+		doc.prepend(keyword(axiom, oml.getScalarEquivalenceAxiomAccess().getMaxExclusiveKeyword_1_1_8_0()), newLine());
+		ifNotNull(axiom.getMaxExclusive(), i -> doc.prepend(doc.format(i), oneSpace()));
 	}
 
 	protected void _format(ForwardRelation relation, IFormattableDocument doc) {
@@ -368,7 +375,7 @@ public class OmlFormatter extends AbstractJavaFormatter {
 		}
 		formatBrackets(rule, doc);
 		ifNotEmpty(rule.getAntecedent(), i -> doc.prepend(doc.format(i.get(0)), newLine()));
-		keywords(rule, "^").forEach(i -> doc.surround(i, oneSpace()));
+		keywords(rule, "&").forEach(i -> doc.surround(i, oneSpace()));
 		rule.getAntecedent().forEach(i -> doc.format(i));
 		doc.surround(keyword(rule, oml.getRuleAccess().getHyphenMinusGreaterThanSignKeyword_2_1_2()), oneSpace());
 		rule.getConsequent().forEach(i -> doc.format(i));
@@ -546,6 +553,41 @@ public class OmlFormatter extends AbstractJavaFormatter {
 	protected void _format(QuotedLiteral literal, IFormattableDocument doc) {
 		doc.surround(keyword(literal, oml.getQuotedLiteralAccess().getCircumflexAccentCircumflexAccentKeyword_1_0_0()), noSpace());
 		doc.surround(keyword(literal, oml.getQuotedLiteralAccess().getDollarSignKeyword_1_1_0()), noSpace());
+	    /*var region  = textRegionExtensions.regionFor(literal).feature(OmlPackage.Literals.QUOTED_LITERAL__VALUE);
+	    if (region != null) {
+	        var r = new AbstractTextReplacer(doc, region) {
+				@Override
+				public ITextReplacerContext createReplacements(ITextReplacerContext context) {
+		            String text = region.getText();
+                    int length = text.length();
+                    int offset = region.getOffset();
+                    
+                    String[] lines = text.split("\n");
+
+					// Find the minimum number of leading whitespace characters
+					int minWhitespaceCount = Integer.MAX_VALUE;
+					for (int i = 1; i < lines.length; i++) {
+						String line = lines[i];
+						int whitespaceCount = line.length() - line.trim().length();
+						minWhitespaceCount = Math.min(minWhitespaceCount, whitespaceCount);
+					}
+
+					// Remove the common number of leading whitespace characters from each line
+					for (int i = 1; i < lines.length; i++) {
+					    lines[i] = "\t" + lines[i].substring(minWhitespaceCount);
+					}
+
+					String newText = String.join("\n", lines);
+					
+					if (!newText.equals(text)) {
+						context.addReplacement(region.getTextRegionAccess().getRewriter().createReplacement(offset, text.length(), newText));
+					}
+					return context;
+				}
+	        	
+	        };
+	        doc.addReplacer(r);
+	    }*/
 	}
 
 	/************** UTILITIES **************/

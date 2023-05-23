@@ -25,9 +25,9 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Annotation is an element that specifies additional non-semantic statements on an annotated element.
- * An annotation is specified with an annotation property and a (literal or reference) value. When
- * no value is specified, it is interpreted as the `true` boolean literal.
+ * Annotation is an element that specifies non-semantic information on an [=IdentifiedElement=].
+ * An annotation is specified with an [=AnnotationProperty=] and an optional ([=Literal=] or [=Member=] reference) value.
+ * When no value is specified, the boolean literal `true` is assumed to be specified.
  * <!-- end-model-doc -->
  *
  * <p>
@@ -75,7 +75,7 @@ public interface Annotation extends Element {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * A literal value specified by this annotation.
+	 * The literal value specified by this annotation
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Literal Value</em>' containment reference.
 	 * @see #setLiteralValue(Literal)
@@ -100,7 +100,7 @@ public interface Annotation extends Element {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * A reference (to a member) value specified by this annotation
+	 * The reference (to a member) value specified by this annotation
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Reference Value</em>' reference.
 	 * @see #setReferenceValue(Member)
@@ -126,7 +126,7 @@ public interface Annotation extends Element {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The annotated element that owns this annotation
+	 * The identified element that owns this annotation
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Owning Element</em>' container reference.
 	 * @see #setOwningElement(IdentifiedElement)
@@ -162,7 +162,7 @@ public interface Annotation extends Element {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Gets the annotated element of the given annotation
+	 * Gets the identified element annotated by this annotation
 	 * <!-- end-model-doc -->
 	 * @model kind="operation" unique="false"
 	 * @generated

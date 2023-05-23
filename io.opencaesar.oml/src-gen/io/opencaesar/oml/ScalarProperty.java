@@ -26,9 +26,7 @@ import org.eclipse.emf.common.util.EList;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * ScalarProperty is a semantic property whose range is a scalar. It can specialize other scalar properties.
- * It can also be flagged as a key property (among possibly several) that specifies the unique id of its domain.
- * A scalar property ref cannot respecify the domain nor the range.
+ * ScalarProperty is a [=SemanticProperty=] whose range is a [=Scalar=]. It can specialize other [=ScalarProperties=].
  * <!-- end-model-doc -->
  *
  * <p>

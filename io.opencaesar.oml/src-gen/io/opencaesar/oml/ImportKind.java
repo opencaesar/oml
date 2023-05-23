@@ -30,10 +30,10 @@ import org.eclipse.emf.common.util.Enumerator;
  * and utility methods for working with them.
  * <!-- end-user-doc -->
  * <!-- begin-model-doc -->
- * ImportKind is an enumeration that specifies the kind of import
+ * ImportKind is an enumeration that specifies the kind of =[import=].
  * <!-- end-model-doc -->
  * @see io.opencaesar.oml.OmlPackage#getImportKind()
- * @model annotation="https://tabatkins.github.io/bikeshed heading='Enumerations'"
+ * @model annotation="https://tabatkins.github.io/bikeshed heading='Elements'"
  * @generated
  */
 public enum ImportKind implements Enumerator {

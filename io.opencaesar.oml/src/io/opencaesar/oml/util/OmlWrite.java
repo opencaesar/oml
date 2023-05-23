@@ -79,9 +79,9 @@ import io.opencaesar.oml.ReverseRelation;
 import io.opencaesar.oml.Rule;
 import io.opencaesar.oml.SameAsPredicate;
 import io.opencaesar.oml.Scalar;
+import io.opencaesar.oml.ScalarEquivalenceAxiom;
 import io.opencaesar.oml.ScalarProperty;
 import io.opencaesar.oml.SemanticProperty;
-import io.opencaesar.oml.SeparatorKind;
 import io.opencaesar.oml.SpecializableProperty;
 import io.opencaesar.oml.SpecializableTerm;
 import io.opencaesar.oml.SpecializationAxiom;
@@ -241,14 +241,13 @@ public class OmlWrite {
      * Creates a new ontology of the given sub type 
      * 
      * @param type the sub type of ontology to create
-     * @param iri the IRI of the new ontology
-     * @param separator the separator kind of the new ontology
+     * @param namespace the namespace of the new ontology
      * @param prefix the prefix of the new ontology
      * @return a newly created ontology added to the contents of a resource with the given URI
      */
-    protected static <T extends Ontology> T createOntology(Class<T> type, String iri, SeparatorKind separator, String prefix) {
+    protected static <T extends Ontology> T createOntology(Class<T> type, String namespace, String prefix) {
         final T ontology = create(type);
-        ontology.setNamespace(iri+separator);
+        ontology.setNamespace(namespace);
         ontology.setPrefix(prefix);
         return ontology;
     }
@@ -258,13 +257,12 @@ public class OmlWrite {
     /**
      * Creates a new vocabulary 
      * 
-     * @param iri the IRI of the new vocabulary
-     * @param separator the separator kind of the new vocabulary
+     * @param namespace the namespace of the new vocabulary
      * @param prefix the prefix of the new vocabulary
      * @return a newly created vocabulary added to the contents of a resource with the given URI
      */
-    public static Vocabulary createVocabulary(String iri, SeparatorKind separator, String prefix) {
-        return createOntology(Vocabulary.class, iri, separator, prefix);
+    public static Vocabulary createVocabulary(String namespace, String prefix) {
+        return createOntology(Vocabulary.class, namespace, prefix);
     }
 
     // VocabularyBundle
@@ -272,13 +270,12 @@ public class OmlWrite {
     /**
      * Creates a new vocabulary bundle 
      * 
-     * @param iri the IRI of the new vocabulary bundle
-     * @param separator the separator kind of the new vocabulary bundle
+     * @param namespace the namespace of the new vocabulary bundle
      * @param prefix the prefix of the new vocabulary bundle
      * @return a newly created vocabulary bunel added to the contents of a resource with the given URI
      */
-    public static VocabularyBundle createVocabularyBundle(String iri, SeparatorKind separator, String prefix) {
-        return createOntology(VocabularyBundle.class, iri, separator, prefix);
+    public static VocabularyBundle createVocabularyBundle(String namespace, String prefix) {
+        return createOntology(VocabularyBundle.class, namespace, prefix);
     }
 
     // Description
@@ -286,27 +283,25 @@ public class OmlWrite {
     /**
      * Creates a new description 
      * 
-     * @param iri the IRI of the new description
-     * @param separator the separator kind of the new description
+     * @param namespace the namespace of the new description
      * @param prefix the prefix of the new description
      * @return a newly created description added to the contents of a resource with the given URI
      */
-    public static Description createDescription(String iri, SeparatorKind separator, String prefix) {
-        return createOntology(Description.class, iri, separator, prefix);
+    public static Description createDescription(String namespace, String prefix) {
+        return createOntology(Description.class, namespace, prefix);
     }
+
+    // DescriptionBundle
 
     /**
      * Creates a new description bundle 
      * 
-     * @param iri the IRI of the new description bundle
-     * @param separator the separator kind of the new description bundle
+     * @param namespace the namespace of the new description bundle
      * @param prefix the prefix of the new description bundle
      * @return a newly created description bundle added to the contents of a resource with the given URI
      */
-    // DescriptionBundle
-    
-    public static DescriptionBundle createDescriptionBundle(String iri, SeparatorKind separator, String prefix) {
-        return createOntology(DescriptionBundle.class, iri, separator, prefix);
+    public static DescriptionBundle createDescriptionBundle(String namespace, String prefix) {
+        return createOntology(DescriptionBundle.class, namespace, prefix);
     }
 
     // Aspect
@@ -462,30 +457,11 @@ public class OmlWrite {
      * 
      * @param vocabulary the context vocabulary
      * @param name the name of the new scalar
-     * @param length the length facet
-     * @param minLength the min length facet
-     * @param maxLength the max length facet
-     * @param pattern the string pattern facet
-     * @param language the language facet
-     * @param minInclusive the min inclusive facet
-     * @param minExclusive the min exclusive facet
-     * @param maxInclusive the max inclusive facet
-     * @param maxExclusive the max exclusive facet
      * @return a new scalar that is added to the given vocabulary
      */
-    public static Scalar addScalar(Vocabulary vocabulary, String name, Long length, Long minLength, Long maxLength, String pattern, 
-        String language, Literal minInclusive, Literal minExclusive, Literal maxInclusive, Literal maxExclusive) {
+    public static Scalar addScalar(Vocabulary vocabulary, String name) {
         final Scalar scalar = create(Scalar.class);
         scalar.setName(name);
-        scalar.setLength(length);
-        scalar.setMinLength(minLength);
-        scalar.setMaxLength(maxLength);
-        scalar.setPattern(pattern);
-        scalar.setLanguage(language);
-        scalar.setMinInclusive(minInclusive);
-        scalar.setMinExclusive(minExclusive);
-        scalar.setMaxInclusive(maxInclusive);
-        scalar.setMaxExclusive(maxExclusive);
         vocabulary.getOwnedStatements().add(scalar);
         return scalar;
     }
@@ -714,15 +690,14 @@ public class OmlWrite {
      * 
      * @param ontology the importing ontology
      * @param kind the kind of import
-     * @param iri the IRI of the imported ontology
-     * @param sep the separator of the imported ontology iri (optional)
+     * @param namespace the namespace of the imported ontology
      * @param prefix the prefix of the imported ontology (optional)
      * @return an import that is added to the importing ontology
      */
-    public static Import addImport(Ontology ontology, ImportKind kind, String iri, SeparatorKind sep, String prefix) {
+    public static Import addImport(Ontology ontology, ImportKind kind, String namespace, String prefix) {
         final Import import_ = create(Import.class);
         import_.setKind(kind);
-        import_.setNamespace(iri + ((sep != null) ? sep : SeparatorKind.HASH));
+        import_.setNamespace(namespace);
         import_.setPrefix(prefix);
         ontology.getOwnedImports().add(import_);
         return import_;
@@ -753,12 +728,48 @@ public class OmlWrite {
      * @param vocabulary the context vocabulary
      * @param subClassifier the given sub classifier
      * @param superClassifiers the given super classifiers
-     * @return a specialization axiom that is added to the vocabulary
+     * @return a classifier equivalence axiom that is added to the vocabulary
      */
     public static ClassifierEquivalenceAxiom addClassifierEquivalenceAxiom(Vocabulary vocabulary, Classifier subClassifier, List<Classifier> superClassifiers) {
         final ClassifierEquivalenceAxiom axiom = create(ClassifierEquivalenceAxiom.class);
         setCrossReferences(vocabulary, axiom, OmlPackage.Literals.CLASSIFIER_EQUIVALENCE_AXIOM__SUPER_CLASSIFIERS, superClassifiers);
         setContainmentReference(vocabulary, subClassifier, OmlPackage.Literals.CLASSIFIER__OWNED_EQUIVALENCES, axiom);
+        return axiom;
+    }
+
+    // ScalarEquivalenceAxiom
+
+    /**
+     * Creates a scalar equivalence axiom between the sub scalar and super scalar and adds it to the given vocabulary
+     *  
+     * @param vocabulary the context vocabulary
+     * @param subScalar the given sub scalar
+     * @param superScalar the given super scalar
+     * @param length the length facet
+     * @param minLength the min length facet
+     * @param maxLength the max length facet
+     * @param pattern the string pattern facet
+     * @param language the language facet
+     * @param minInclusive the min inclusive facet
+     * @param minExclusive the min exclusive facet
+     * @param maxInclusive the max inclusive facet
+     * @param maxExclusive the max exclusive facet
+     * @return a scalar equivalence axiom that is added to the vocabulary
+     */
+    public static ScalarEquivalenceAxiom addScalarEquivalenceAxiom(Vocabulary vocabulary, Scalar subScalar, Scalar superScalar, Long length, Long minLength, Long maxLength, String pattern, 
+        String language, Literal minInclusive, Literal minExclusive, Literal maxInclusive, Literal maxExclusive) {
+        final ScalarEquivalenceAxiom axiom = create(ScalarEquivalenceAxiom.class);
+        axiom.setLength(length);
+        axiom.setMinLength(minLength);
+        axiom.setMaxLength(maxLength);
+        axiom.setPattern(pattern);
+        axiom.setLanguage(language);
+        axiom.setMinInclusive(minInclusive);
+        axiom.setMinExclusive(minExclusive);
+        axiom.setMaxInclusive(maxInclusive);
+        axiom.setMaxExclusive(maxExclusive);
+        setCrossReference(vocabulary, axiom, OmlPackage.Literals.SCALAR_EQUIVALENCE_AXIOM__SUPER_SCALAR, superScalar);
+        setContainmentReference(vocabulary, subScalar, OmlPackage.Literals.SCALAR__OWNED_EQUIVALENCES, axiom);
         return axiom;
     }
 
@@ -770,7 +781,7 @@ public class OmlWrite {
      * @param vocabulary the context vocabulary
      * @param subProperty the given sub property
      * @param superProperty the given super property
-     * @return a specialization axiom that is added to the vocabulary
+     * @return a property equivalence axiom that is added to the vocabulary
      */
     public static PropertyEquivalenceAxiom addPropertyEquivalenceAxiom(Vocabulary vocabulary, SpecializableProperty subProperty, Property superProperty) {
         final PropertyEquivalenceAxiom axiom = create(PropertyEquivalenceAxiom.class);

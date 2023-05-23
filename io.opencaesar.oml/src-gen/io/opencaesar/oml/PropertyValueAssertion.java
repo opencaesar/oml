@@ -25,9 +25,9 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * PropertyValueAssertion is an assertion that specifies a value for a property on an instance. The value is either a literal value
- * in the case of a scalar property, a contained (structure) instance value in the case of a structured property, or a referenced
- * (named) instance value in the case of a relation.
+ * PropertyValueAssertion is an [=Assertion=]  that specifies a value for a [=property=] on an [=instance=]. The value is either a [=literal=] value
+ * in the case of a [=ScalarProperty=], a contained [=StructureInstance=] value in the case of a [=StructuredProperty=], or a reference to a
+ * [=NamedInstance=] value in the case of a [=Relation=].
  * <!-- end-model-doc -->
  *
  * <p>

@@ -25,8 +25,9 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * PropertyEquivalenceAxiom is an axiom specified on a proeprty that states that it is equivalent to another property. This axiom implies that
- * the equivalent properties are super properties of the subject property (and vice versa).
+ * PropertyEquivalenceAxiom is an [=Axiom=] specified on a subject [=Property=] that states that it is equivalent
+ * to another property. This axiom implies that the equivalent properties are super properties of the subject property
+ * (and vice versa).
  * <!-- end-model-doc -->
  *
  * <p>
@@ -104,5 +105,13 @@ public interface PropertyEquivalenceAxiom extends Axiom {
 	 * @generated
 	 */
 	Property getSubProperty();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
+	Property getCharacterizedTerm();
 
 } // PropertyEquivalenceAxiom

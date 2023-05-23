@@ -25,7 +25,7 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Literal is an element that represents a specific literal value classified by a scalar.
+ * Literal is an element that represents a literal value classified by a [=scalar=].
  * <!-- end-model-doc -->
  *
  *

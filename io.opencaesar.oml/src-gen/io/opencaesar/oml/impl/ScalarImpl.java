@@ -18,18 +18,25 @@
  */
 package io.opencaesar.oml.impl;
 
-import io.opencaesar.oml.Literal;
 import io.opencaesar.oml.LiteralEnumerationAxiom;
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.Scalar;
+import io.opencaesar.oml.ScalarEquivalenceAxiom;
+
+import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -40,16 +47,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * </p>
  * <ul>
  *   <li>{@link io.opencaesar.oml.impl.ScalarImpl#getRef <em>Ref</em>}</li>
- *   <li>{@link io.opencaesar.oml.impl.ScalarImpl#getLength <em>Length</em>}</li>
- *   <li>{@link io.opencaesar.oml.impl.ScalarImpl#getMinLength <em>Min Length</em>}</li>
- *   <li>{@link io.opencaesar.oml.impl.ScalarImpl#getMaxLength <em>Max Length</em>}</li>
- *   <li>{@link io.opencaesar.oml.impl.ScalarImpl#getPattern <em>Pattern</em>}</li>
- *   <li>{@link io.opencaesar.oml.impl.ScalarImpl#getLanguage <em>Language</em>}</li>
- *   <li>{@link io.opencaesar.oml.impl.ScalarImpl#getMinInclusive <em>Min Inclusive</em>}</li>
- *   <li>{@link io.opencaesar.oml.impl.ScalarImpl#getMinExclusive <em>Min Exclusive</em>}</li>
- *   <li>{@link io.opencaesar.oml.impl.ScalarImpl#getMaxInclusive <em>Max Inclusive</em>}</li>
- *   <li>{@link io.opencaesar.oml.impl.ScalarImpl#getMaxExclusive <em>Max Exclusive</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.ScalarImpl#getOwnedEnumeration <em>Owned Enumeration</em>}</li>
+ *   <li>{@link io.opencaesar.oml.impl.ScalarImpl#getOwnedEquivalences <em>Owned Equivalences</em>}</li>
  * </ul>
  *
  * @generated
@@ -66,146 +65,6 @@ public class ScalarImpl extends TypeImpl implements Scalar {
 	protected Scalar ref;
 
 	/**
-	 * The default value of the '{@link #getLength() <em>Length</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getLength()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final Long LENGTH_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getLength() <em>Length</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getLength()
-	 * @generated
-	 * @ordered
-	 */
-	protected Long length = LENGTH_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getMinLength() <em>Min Length</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getMinLength()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final Long MIN_LENGTH_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getMinLength() <em>Min Length</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getMinLength()
-	 * @generated
-	 * @ordered
-	 */
-	protected Long minLength = MIN_LENGTH_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getMaxLength() <em>Max Length</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getMaxLength()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final Long MAX_LENGTH_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getMaxLength() <em>Max Length</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getMaxLength()
-	 * @generated
-	 * @ordered
-	 */
-	protected Long maxLength = MAX_LENGTH_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getPattern() <em>Pattern</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getPattern()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String PATTERN_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getPattern() <em>Pattern</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getPattern()
-	 * @generated
-	 * @ordered
-	 */
-	protected String pattern = PATTERN_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getLanguage() <em>Language</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getLanguage()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String LANGUAGE_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getLanguage() <em>Language</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getLanguage()
-	 * @generated
-	 * @ordered
-	 */
-	protected String language = LANGUAGE_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getMinInclusive() <em>Min Inclusive</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getMinInclusive()
-	 * @generated
-	 * @ordered
-	 */
-	protected Literal minInclusive;
-
-	/**
-	 * The cached value of the '{@link #getMinExclusive() <em>Min Exclusive</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getMinExclusive()
-	 * @generated
-	 * @ordered
-	 */
-	protected Literal minExclusive;
-
-	/**
-	 * The cached value of the '{@link #getMaxInclusive() <em>Max Inclusive</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getMaxInclusive()
-	 * @generated
-	 * @ordered
-	 */
-	protected Literal maxInclusive;
-
-	/**
-	 * The cached value of the '{@link #getMaxExclusive() <em>Max Exclusive</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getMaxExclusive()
-	 * @generated
-	 * @ordered
-	 */
-	protected Literal maxExclusive;
-
-	/**
 	 * The cached value of the '{@link #getOwnedEnumeration() <em>Owned Enumeration</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -214,6 +73,16 @@ public class ScalarImpl extends TypeImpl implements Scalar {
 	 * @ordered
 	 */
 	protected LiteralEnumerationAxiom ownedEnumeration;
+
+	/**
+	 * The cached value of the '{@link #getOwnedEquivalences() <em>Owned Equivalences</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOwnedEquivalences()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ScalarEquivalenceAxiom> ownedEquivalences;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -280,301 +149,6 @@ public class ScalarImpl extends TypeImpl implements Scalar {
 	 * @generated
 	 */
 	@Override
-	public Long getLength() {
-		return length;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setLength(Long newLength) {
-		Long oldLength = length;
-		length = newLength;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.SCALAR__LENGTH, oldLength, length));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Long getMinLength() {
-		return minLength;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setMinLength(Long newMinLength) {
-		Long oldMinLength = minLength;
-		minLength = newMinLength;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.SCALAR__MIN_LENGTH, oldMinLength, minLength));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Long getMaxLength() {
-		return maxLength;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setMaxLength(Long newMaxLength) {
-		Long oldMaxLength = maxLength;
-		maxLength = newMaxLength;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.SCALAR__MAX_LENGTH, oldMaxLength, maxLength));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String getPattern() {
-		return pattern;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setPattern(String newPattern) {
-		String oldPattern = pattern;
-		pattern = newPattern;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.SCALAR__PATTERN, oldPattern, pattern));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String getLanguage() {
-		return language;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setLanguage(String newLanguage) {
-		String oldLanguage = language;
-		language = newLanguage;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.SCALAR__LANGUAGE, oldLanguage, language));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Literal getMinInclusive() {
-		return minInclusive;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetMinInclusive(Literal newMinInclusive, NotificationChain msgs) {
-		Literal oldMinInclusive = minInclusive;
-		minInclusive = newMinInclusive;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OmlPackage.SCALAR__MIN_INCLUSIVE, oldMinInclusive, newMinInclusive);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setMinInclusive(Literal newMinInclusive) {
-		if (newMinInclusive != minInclusive) {
-			NotificationChain msgs = null;
-			if (minInclusive != null)
-				msgs = ((InternalEObject)minInclusive).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OmlPackage.SCALAR__MIN_INCLUSIVE, null, msgs);
-			if (newMinInclusive != null)
-				msgs = ((InternalEObject)newMinInclusive).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - OmlPackage.SCALAR__MIN_INCLUSIVE, null, msgs);
-			msgs = basicSetMinInclusive(newMinInclusive, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.SCALAR__MIN_INCLUSIVE, newMinInclusive, newMinInclusive));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Literal getMinExclusive() {
-		return minExclusive;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetMinExclusive(Literal newMinExclusive, NotificationChain msgs) {
-		Literal oldMinExclusive = minExclusive;
-		minExclusive = newMinExclusive;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OmlPackage.SCALAR__MIN_EXCLUSIVE, oldMinExclusive, newMinExclusive);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setMinExclusive(Literal newMinExclusive) {
-		if (newMinExclusive != minExclusive) {
-			NotificationChain msgs = null;
-			if (minExclusive != null)
-				msgs = ((InternalEObject)minExclusive).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OmlPackage.SCALAR__MIN_EXCLUSIVE, null, msgs);
-			if (newMinExclusive != null)
-				msgs = ((InternalEObject)newMinExclusive).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - OmlPackage.SCALAR__MIN_EXCLUSIVE, null, msgs);
-			msgs = basicSetMinExclusive(newMinExclusive, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.SCALAR__MIN_EXCLUSIVE, newMinExclusive, newMinExclusive));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Literal getMaxInclusive() {
-		return maxInclusive;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetMaxInclusive(Literal newMaxInclusive, NotificationChain msgs) {
-		Literal oldMaxInclusive = maxInclusive;
-		maxInclusive = newMaxInclusive;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OmlPackage.SCALAR__MAX_INCLUSIVE, oldMaxInclusive, newMaxInclusive);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setMaxInclusive(Literal newMaxInclusive) {
-		if (newMaxInclusive != maxInclusive) {
-			NotificationChain msgs = null;
-			if (maxInclusive != null)
-				msgs = ((InternalEObject)maxInclusive).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OmlPackage.SCALAR__MAX_INCLUSIVE, null, msgs);
-			if (newMaxInclusive != null)
-				msgs = ((InternalEObject)newMaxInclusive).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - OmlPackage.SCALAR__MAX_INCLUSIVE, null, msgs);
-			msgs = basicSetMaxInclusive(newMaxInclusive, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.SCALAR__MAX_INCLUSIVE, newMaxInclusive, newMaxInclusive));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Literal getMaxExclusive() {
-		return maxExclusive;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetMaxExclusive(Literal newMaxExclusive, NotificationChain msgs) {
-		Literal oldMaxExclusive = maxExclusive;
-		maxExclusive = newMaxExclusive;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OmlPackage.SCALAR__MAX_EXCLUSIVE, oldMaxExclusive, newMaxExclusive);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setMaxExclusive(Literal newMaxExclusive) {
-		if (newMaxExclusive != maxExclusive) {
-			NotificationChain msgs = null;
-			if (maxExclusive != null)
-				msgs = ((InternalEObject)maxExclusive).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OmlPackage.SCALAR__MAX_EXCLUSIVE, null, msgs);
-			if (newMaxExclusive != null)
-				msgs = ((InternalEObject)newMaxExclusive).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - OmlPackage.SCALAR__MAX_EXCLUSIVE, null, msgs);
-			msgs = basicSetMaxExclusive(newMaxExclusive, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.SCALAR__MAX_EXCLUSIVE, newMaxExclusive, newMaxExclusive));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public LiteralEnumerationAxiom getOwnedEnumeration() {
 		return ownedEnumeration;
 	}
@@ -620,12 +194,28 @@ public class ScalarImpl extends TypeImpl implements Scalar {
 	 * @generated
 	 */
 	@Override
+	public EList<ScalarEquivalenceAxiom> getOwnedEquivalences() {
+		if (ownedEquivalences == null) {
+			ownedEquivalences = new EObjectContainmentWithInverseEList<ScalarEquivalenceAxiom>(ScalarEquivalenceAxiom.class, this, OmlPackage.SCALAR__OWNED_EQUIVALENCES, OmlPackage.SCALAR_EQUIVALENCE_AXIOM__OWNING_SCALAR);
+		}
+		return ownedEquivalences;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case OmlPackage.SCALAR__OWNED_ENUMERATION:
 				if (ownedEnumeration != null)
 					msgs = ((InternalEObject)ownedEnumeration).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OmlPackage.SCALAR__OWNED_ENUMERATION, null, msgs);
 				return basicSetOwnedEnumeration((LiteralEnumerationAxiom)otherEnd, msgs);
+			case OmlPackage.SCALAR__OWNED_EQUIVALENCES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedEquivalences()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -638,16 +228,10 @@ public class ScalarImpl extends TypeImpl implements Scalar {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case OmlPackage.SCALAR__MIN_INCLUSIVE:
-				return basicSetMinInclusive(null, msgs);
-			case OmlPackage.SCALAR__MIN_EXCLUSIVE:
-				return basicSetMinExclusive(null, msgs);
-			case OmlPackage.SCALAR__MAX_INCLUSIVE:
-				return basicSetMaxInclusive(null, msgs);
-			case OmlPackage.SCALAR__MAX_EXCLUSIVE:
-				return basicSetMaxExclusive(null, msgs);
 			case OmlPackage.SCALAR__OWNED_ENUMERATION:
 				return basicSetOwnedEnumeration(null, msgs);
+			case OmlPackage.SCALAR__OWNED_EQUIVALENCES:
+				return ((InternalEList<?>)getOwnedEquivalences()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -663,26 +247,10 @@ public class ScalarImpl extends TypeImpl implements Scalar {
 			case OmlPackage.SCALAR__REF:
 				if (resolve) return getRef();
 				return basicGetRef();
-			case OmlPackage.SCALAR__LENGTH:
-				return getLength();
-			case OmlPackage.SCALAR__MIN_LENGTH:
-				return getMinLength();
-			case OmlPackage.SCALAR__MAX_LENGTH:
-				return getMaxLength();
-			case OmlPackage.SCALAR__PATTERN:
-				return getPattern();
-			case OmlPackage.SCALAR__LANGUAGE:
-				return getLanguage();
-			case OmlPackage.SCALAR__MIN_INCLUSIVE:
-				return getMinInclusive();
-			case OmlPackage.SCALAR__MIN_EXCLUSIVE:
-				return getMinExclusive();
-			case OmlPackage.SCALAR__MAX_INCLUSIVE:
-				return getMaxInclusive();
-			case OmlPackage.SCALAR__MAX_EXCLUSIVE:
-				return getMaxExclusive();
 			case OmlPackage.SCALAR__OWNED_ENUMERATION:
 				return getOwnedEnumeration();
+			case OmlPackage.SCALAR__OWNED_EQUIVALENCES:
+				return getOwnedEquivalences();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -692,41 +260,19 @@ public class ScalarImpl extends TypeImpl implements Scalar {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case OmlPackage.SCALAR__REF:
 				setRef((Scalar)newValue);
 				return;
-			case OmlPackage.SCALAR__LENGTH:
-				setLength((Long)newValue);
-				return;
-			case OmlPackage.SCALAR__MIN_LENGTH:
-				setMinLength((Long)newValue);
-				return;
-			case OmlPackage.SCALAR__MAX_LENGTH:
-				setMaxLength((Long)newValue);
-				return;
-			case OmlPackage.SCALAR__PATTERN:
-				setPattern((String)newValue);
-				return;
-			case OmlPackage.SCALAR__LANGUAGE:
-				setLanguage((String)newValue);
-				return;
-			case OmlPackage.SCALAR__MIN_INCLUSIVE:
-				setMinInclusive((Literal)newValue);
-				return;
-			case OmlPackage.SCALAR__MIN_EXCLUSIVE:
-				setMinExclusive((Literal)newValue);
-				return;
-			case OmlPackage.SCALAR__MAX_INCLUSIVE:
-				setMaxInclusive((Literal)newValue);
-				return;
-			case OmlPackage.SCALAR__MAX_EXCLUSIVE:
-				setMaxExclusive((Literal)newValue);
-				return;
 			case OmlPackage.SCALAR__OWNED_ENUMERATION:
 				setOwnedEnumeration((LiteralEnumerationAxiom)newValue);
+				return;
+			case OmlPackage.SCALAR__OWNED_EQUIVALENCES:
+				getOwnedEquivalences().clear();
+				getOwnedEquivalences().addAll((Collection<? extends ScalarEquivalenceAxiom>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -743,35 +289,11 @@ public class ScalarImpl extends TypeImpl implements Scalar {
 			case OmlPackage.SCALAR__REF:
 				setRef((Scalar)null);
 				return;
-			case OmlPackage.SCALAR__LENGTH:
-				setLength(LENGTH_EDEFAULT);
-				return;
-			case OmlPackage.SCALAR__MIN_LENGTH:
-				setMinLength(MIN_LENGTH_EDEFAULT);
-				return;
-			case OmlPackage.SCALAR__MAX_LENGTH:
-				setMaxLength(MAX_LENGTH_EDEFAULT);
-				return;
-			case OmlPackage.SCALAR__PATTERN:
-				setPattern(PATTERN_EDEFAULT);
-				return;
-			case OmlPackage.SCALAR__LANGUAGE:
-				setLanguage(LANGUAGE_EDEFAULT);
-				return;
-			case OmlPackage.SCALAR__MIN_INCLUSIVE:
-				setMinInclusive((Literal)null);
-				return;
-			case OmlPackage.SCALAR__MIN_EXCLUSIVE:
-				setMinExclusive((Literal)null);
-				return;
-			case OmlPackage.SCALAR__MAX_INCLUSIVE:
-				setMaxInclusive((Literal)null);
-				return;
-			case OmlPackage.SCALAR__MAX_EXCLUSIVE:
-				setMaxExclusive((Literal)null);
-				return;
 			case OmlPackage.SCALAR__OWNED_ENUMERATION:
 				setOwnedEnumeration((LiteralEnumerationAxiom)null);
+				return;
+			case OmlPackage.SCALAR__OWNED_EQUIVALENCES:
+				getOwnedEquivalences().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -787,52 +309,12 @@ public class ScalarImpl extends TypeImpl implements Scalar {
 		switch (featureID) {
 			case OmlPackage.SCALAR__REF:
 				return ref != null;
-			case OmlPackage.SCALAR__LENGTH:
-				return LENGTH_EDEFAULT == null ? length != null : !LENGTH_EDEFAULT.equals(length);
-			case OmlPackage.SCALAR__MIN_LENGTH:
-				return MIN_LENGTH_EDEFAULT == null ? minLength != null : !MIN_LENGTH_EDEFAULT.equals(minLength);
-			case OmlPackage.SCALAR__MAX_LENGTH:
-				return MAX_LENGTH_EDEFAULT == null ? maxLength != null : !MAX_LENGTH_EDEFAULT.equals(maxLength);
-			case OmlPackage.SCALAR__PATTERN:
-				return PATTERN_EDEFAULT == null ? pattern != null : !PATTERN_EDEFAULT.equals(pattern);
-			case OmlPackage.SCALAR__LANGUAGE:
-				return LANGUAGE_EDEFAULT == null ? language != null : !LANGUAGE_EDEFAULT.equals(language);
-			case OmlPackage.SCALAR__MIN_INCLUSIVE:
-				return minInclusive != null;
-			case OmlPackage.SCALAR__MIN_EXCLUSIVE:
-				return minExclusive != null;
-			case OmlPackage.SCALAR__MAX_INCLUSIVE:
-				return maxInclusive != null;
-			case OmlPackage.SCALAR__MAX_EXCLUSIVE:
-				return maxExclusive != null;
 			case OmlPackage.SCALAR__OWNED_ENUMERATION:
 				return ownedEnumeration != null;
+			case OmlPackage.SCALAR__OWNED_EQUIVALENCES:
+				return ownedEquivalences != null && !ownedEquivalences.isEmpty();
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (length: ");
-		result.append(length);
-		result.append(", minLength: ");
-		result.append(minLength);
-		result.append(", maxLength: ");
-		result.append(maxLength);
-		result.append(", pattern: ");
-		result.append(pattern);
-		result.append(", language: ");
-		result.append(language);
-		result.append(')');
-		return result.toString();
 	}
 
 } //ScalarImpl

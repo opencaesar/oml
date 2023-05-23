@@ -25,8 +25,8 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * RelationEntityPredicate is a unary and binary predicate that holds when its argument is bound to an instance typed by the given relation
- * entity, its argument1 is bound to the source of that relation instance and its argument2 is bound to the target of that relation instance
+ * RelationEntityPredicate is a [=UnaryPredicate=] and [=BinaryPredicate=] that holds when its [=argument=] is bound to an [=RelationInstance=] typed by the given [=RelationEntity=],
+ * its argument1 is bound to the source of that [=RelationInstance=] and its argument2 is bound to the target of that [=RelationInstance=]
  * .
  * <!-- end-model-doc -->
  *
@@ -38,7 +38,7 @@ package io.opencaesar.oml;
  * </ul>
  *
  * @see io.opencaesar.oml.OmlPackage#getRelationEntityPredicate()
- * @model annotation="https://tabatkins.github.io/bikeshed heading='Rules'"
+ * @model annotation="https://tabatkins.github.io/bikeshed heading='Predicates'"
  * @generated
  */
 public interface RelationEntityPredicate extends UnaryPredicate, BinaryPredicate {

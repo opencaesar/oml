@@ -26,11 +26,10 @@ import org.eclipse.emf.common.util.EList;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * RelationBase is a specializable term that is the superclass of a relation from a source entity to a target entity.
- * It can optionally name a reverse property whose domain is the target and whose range is the source.
- * It can also be characterized with several boolean flags that represent its DL semantics.
- * Such flags apply conversely to the reverse property (if named). A relation base ref cannot respecify the source,
- * the target, nor the reverse relation.
+ * RelationBase is a specializable term that is the abstract superclass of a relation from a source [=entity=] to a target [=entity=].
+ * It can optionally name a [=ReverseRelation=] whose domain is the target and whose range is the source. Such relation can only be
+ * specified on a relation base definition not a ref to an existing one. A relation base can be characterized with several
+ * boolean flags that represent its DL semantics. Such flags apply conversely to the [=ReverseRelation=] (if named).
  * <!-- end-model-doc -->
  *
  * <p>
@@ -51,7 +50,7 @@ import org.eclipse.emf.common.util.EList;
  *
  * @see io.opencaesar.oml.OmlPackage#getRelationBase()
  * @model abstract="true"
- *        annotation="https://tabatkins.github.io/bikeshed heading='Properties'"
+ *        annotation="https://tabatkins.github.io/bikeshed heading='Relations'"
  * @generated
  */
 public interface RelationBase extends SpecializableTerm {

@@ -106,6 +106,7 @@ public class OmlFactoryImpl extends EFactoryImpl implements OmlFactory {
 			case OmlPackage.INSTANCE_ENUMERATION_AXIOM: return createInstanceEnumerationAxiom();
 			case OmlPackage.LITERAL_ENUMERATION_AXIOM: return createLiteralEnumerationAxiom();
 			case OmlPackage.CLASSIFIER_EQUIVALENCE_AXIOM: return createClassifierEquivalenceAxiom();
+			case OmlPackage.SCALAR_EQUIVALENCE_AXIOM: return createScalarEquivalenceAxiom();
 			case OmlPackage.PROPERTY_EQUIVALENCE_AXIOM: return createPropertyEquivalenceAxiom();
 			case OmlPackage.PROPERTY_RANGE_RESTRICTION_AXIOM: return createPropertyRangeRestrictionAxiom();
 			case OmlPackage.PROPERTY_CARDINALITY_RESTRICTION_AXIOM: return createPropertyCardinalityRestrictionAxiom();
@@ -497,6 +498,17 @@ public class OmlFactoryImpl extends EFactoryImpl implements OmlFactory {
 	public ClassifierEquivalenceAxiom createClassifierEquivalenceAxiom() {
 		ClassifierEquivalenceAxiomImpl classifierEquivalenceAxiom = new ClassifierEquivalenceAxiomImpl();
 		return classifierEquivalenceAxiom;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ScalarEquivalenceAxiom createScalarEquivalenceAxiom() {
+		ScalarEquivalenceAxiomImpl scalarEquivalenceAxiom = new ScalarEquivalenceAxiomImpl();
+		return scalarEquivalenceAxiom;
 	}
 
 	/**

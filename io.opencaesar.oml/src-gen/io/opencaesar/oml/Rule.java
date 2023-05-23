@@ -26,11 +26,8 @@ import org.eclipse.emf.common.util.EList;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Rule is a member of a vocabulary that adds a new inference rule to the set supported natively by DL. A rule must specify a set of one or
- * more antecedent predicates that forms a conjunction that infers, when it holds, a set of one or more consequent predicates. Each
- * predicate in a rule may specify (one or two) variables. Those with the same name refer to the same variable, and hence must
- * be bound to the same value from the model for the rule to trigger during reasoning. A rule ref cannot respecify the
- * antecedent nor consequent of a rule.
+ * Rule is a [=member=] of a [=vocabulary=] that adds a new inference rule to the set supported natively by DL. A rule must specify a set of one or
+ * more antecedent [=predicates=] that forms a conjunction that infers, when it holds, a set of one or more consequent [=predicates=].
  * <!-- end-model-doc -->
  *
  * <p>
@@ -43,7 +40,7 @@ import org.eclipse.emf.common.util.EList;
  * </ul>
  *
  * @see io.opencaesar.oml.OmlPackage#getRule()
- * @model annotation="https://tabatkins.github.io/bikeshed heading='Rules'"
+ * @model annotation="https://tabatkins.github.io/bikeshed heading='Vocabularies'"
  * @generated
  */
 public interface Rule extends VocabularyStatement {

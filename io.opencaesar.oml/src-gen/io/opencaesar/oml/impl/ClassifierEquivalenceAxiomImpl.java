@@ -193,6 +193,16 @@ public class ClassifierEquivalenceAxiomImpl extends AxiomImpl implements Classif
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public Classifier getCharacterizedTerm() {
+		return this.getSubClassifier();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -329,6 +339,8 @@ public class ClassifierEquivalenceAxiomImpl extends AxiomImpl implements Classif
 		switch (operationID) {
 			case OmlPackage.CLASSIFIER_EQUIVALENCE_AXIOM___GET_SUB_CLASSIFIER:
 				return getSubClassifier();
+			case OmlPackage.CLASSIFIER_EQUIVALENCE_AXIOM___GET_CHARACTERIZED_TERM:
+				return getCharacterizedTerm();
 		}
 		return super.eInvoke(operationID, arguments);
 	}

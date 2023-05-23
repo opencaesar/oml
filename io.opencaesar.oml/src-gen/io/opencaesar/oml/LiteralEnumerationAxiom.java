@@ -26,7 +26,7 @@ import org.eclipse.emf.common.util.EList;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * LiteralEnumerationAxiom is an axiom specified on a scalar that states that it classifies an enumerated set of literals.
+ * LiteralEnumerationAxiom is an [=Axiom=] specified on a [=Scalar=] that states that it classifies an enumerated set of [=Literals=].
  * <!-- end-model-doc -->
  *
  * <p>
@@ -94,5 +94,13 @@ public interface LiteralEnumerationAxiom extends Axiom {
 	 * @generated
 	 */
 	Scalar getEnumeratedScalar();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
+	Scalar getCharacterizedTerm();
 
 } // LiteralEnumerationAxiom

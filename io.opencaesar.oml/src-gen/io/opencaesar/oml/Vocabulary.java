@@ -26,8 +26,7 @@ import org.eclipse.emf.common.util.EList;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Vocabulary is a vocabulary box that allows making statements about its own terms and rules
- * or about others that are imported.
+ * Vocabulary is a vocabulary box whose statements specify terms and rules in a given domain.
  * <!-- end-model-doc -->
  *
  * <p>

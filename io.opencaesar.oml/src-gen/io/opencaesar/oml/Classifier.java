@@ -26,9 +26,9 @@ import org.eclipse.emf.common.util.EList;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Classifier is a type that classifies a set of instances and characterizes them with properties
- * (i.e., becomes a domain of these properties). It also inherits properties in the domain of its specialized
- * types. In addition, it can specify constraints on (direct or inherited) properties in its domain.
+ * Classifier is a [=type=] that classifies a set of [=instances=] and characterizes them with [=properties=]
+ * (where it becomes a domain of these properties). it can also own a set of [=PropertyRestrictionAxioms=] as well as
+ * set of [=ClassifierEquivalenceAxioms=].
  * <!-- end-model-doc -->
  *
  * <p>

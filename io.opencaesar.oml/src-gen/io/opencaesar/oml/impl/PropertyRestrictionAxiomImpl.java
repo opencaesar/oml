@@ -252,6 +252,16 @@ public abstract class PropertyRestrictionAxiomImpl extends AxiomImpl implements 
 	 * @generated
 	 */
 	@Override
+	public Classifier getCharacterizedTerm() {
+		return this.getRestrictingDomain();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case OmlPackage.PROPERTY_RESTRICTION_AXIOM__OWNING_CLASSIFIER:
@@ -389,6 +399,8 @@ public abstract class PropertyRestrictionAxiomImpl extends AxiomImpl implements 
 		switch (operationID) {
 			case OmlPackage.PROPERTY_RESTRICTION_AXIOM___GET_RESTRICTING_DOMAIN:
 				return getRestrictingDomain();
+			case OmlPackage.PROPERTY_RESTRICTION_AXIOM___GET_CHARACTERIZED_TERM:
+				return getCharacterizedTerm();
 		}
 		return super.eInvoke(operationID, arguments);
 	}

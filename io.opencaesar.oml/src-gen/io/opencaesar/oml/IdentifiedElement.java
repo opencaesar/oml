@@ -26,7 +26,8 @@ import org.eclipse.emf.common.util.EList;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * IdentifiedElement is an annotated element that is identified by an IRI and can own a set of Annotations.
+ * IdentifiedElement is an element that has a unique IRI (Internationalized Resource Identifier).
+ * It can be annotated by a set of [=Annotations=].
  * <!-- end-model-doc -->
  *
  * <p>
@@ -49,7 +50,7 @@ public interface IdentifiedElement extends Element {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The set of annotations owned directly by this element
+	 * The set of annotations directly owned by this element
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Owned Annotations</em>' containment reference list.
 	 * @see io.opencaesar.oml.OmlPackage#getIdentifiedElement_OwnedAnnotations()

@@ -25,7 +25,7 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * ConceptInstance is a named instance that can be typed by concepts.
+ * ConceptInstance is a [=NamedInstance=] that can be typed by [=Concepts=] or [=Aspects=].
  * <!-- end-model-doc -->
  *
  * <p>

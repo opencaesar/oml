@@ -18,10 +18,8 @@
  */
 package io.opencaesar.oml.util;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
@@ -66,6 +64,7 @@ import io.opencaesar.oml.RelationEntityPredicate;
 import io.opencaesar.oml.RelationInstance;
 import io.opencaesar.oml.Rule;
 import io.opencaesar.oml.Scalar;
+import io.opencaesar.oml.ScalarEquivalenceAxiom;
 import io.opencaesar.oml.ScalarProperty;
 import io.opencaesar.oml.SemanticProperty;
 import io.opencaesar.oml.SpecializationAxiom;
@@ -92,7 +91,7 @@ public class OmlIndex {
      * Finds all objects that cross reference a given Oml element using a given EReference 
      * 
      * @param element The element to search for cross refs to
-     * @return A list of settings representing cross references
+     * @return A set of settings representing cross references
      */
     private static Collection<Setting> findInverseReferencers(Element element) {
         final ECrossReferenceAdapter adapter = ECrossReferenceAdapter.getCrossReferenceAdapter(element);
@@ -112,10 +111,10 @@ public class OmlIndex {
      * 
      * @param element The element to search for cross refs to
      * @param eReference The eReference to filter the cross refs by
-     * @return A list of objects that cross reference the given element based on the criteria
+     * @return A set of objects that cross reference the given element based on the criteria
      */
     private static Collection<EObject> findInverseReferencers(Element element, EReference eReference) {
-        final Set<EObject> referencers = new HashSet<>();
+        final Set<EObject> referencers = new LinkedHashSet<>();
         Collection<Setting> settings = findInverseReferencers(element);
         for (Setting setting : settings) {
             if (setting.getEStructuralFeature() == eReference) {
@@ -131,23 +130,23 @@ public class OmlIndex {
      * @param element The element to search for cross refs to
      * @param eReference The eReference to filter the cross refs by
      * @param type The Java type to filter the cross refs by
-     * @return A list of objects that cross reference the given element based on the criteria
+     * @return A set of objects that cross reference the given element based on the criteria
      */
-    private static <T extends EObject> List<T> findInverseReferencers(Element element, EReference eReference, Class<T> type) {
-        final Set<T> referencers = new HashSet<>(); 
+    private static <T extends EObject> Set<T> findInverseReferencers(Element element, EReference eReference, Class<T> type) {
+        final Set<T> referencers = new LinkedHashSet<>(); 
         findInverseReferencers(element, eReference).forEach(referencer -> {
             if (type.isInstance(referencer)) {
                 referencers.add(type.cast(referencer));
             }
         });
-        return new ArrayList<T>(referencers);
+        return referencers;
     }
     
     /*
      * Searches the context (resource set if available or resource) for cross references to a given element
      *  
      * @param element The element to search for cross refs to
-     * @return A list of Setting objects including the cross referencing elements and the features they reference with
+     * @return A set of Setting objects including the cross referencing elements and the features they reference with
      */
     private static Collection<Setting> searchForInverseReferences(EObject element) {
         final Resource resource = element.eResource();
@@ -171,18 +170,18 @@ public class OmlIndex {
      * 
      * @param member the given member
      * @type the type of referencer
-     * @return a list of elements directly referencing the given element
+     * @return a set of elements directly referencing the given element
      */
     @SuppressWarnings("unchecked")
-	public static <T extends Element> List<T> findRreferences(Member member, Class<T> type) {
-        final var referencers = new HashSet<T>();
+	public static <T extends Element> Set<T> findRreferences(Member member, Class<T> type) {
+        final var referencers = new LinkedHashSet<T>();
         Collection<Setting> settings = findInverseReferencers(member);
         for (Setting setting : settings) {
             if (type.isInstance(setting.getEObject())) {
         		referencers.add((T) setting.getEObject());
         	}
         }
-        return new ArrayList<>(referencers);
+        return referencers;
     }
     
     // Annotation
@@ -191,9 +190,9 @@ public class OmlIndex {
      * Finds annotations referencing the given property
      * 
      * @param property The referenced property
-     * @return A list of referencing annotations
+     * @return A set of referencing annotations
      */
-    public static List<Annotation> findAnnotationsWithProperty(AnnotationProperty property) {
+    public static Set<Annotation> findAnnotationsWithProperty(AnnotationProperty property) {
         return findInverseReferencers(property, OmlPackage.Literals.ANNOTATION__PROPERTY, Annotation.class);
     }
     
@@ -203,9 +202,9 @@ public class OmlIndex {
      * Finds instance enumeration axioms that enumerates the given instance
      * 
      * @param instance The given instance
-     * @return A list of instance enumeration axioms enumerating the given instance
+     * @return A set of instance enumeration axioms enumerating the given instance
      */
-    public static List<InstanceEnumerationAxiom> findInstanceEnumerationAxiomsWithEnumeratedInstance(ConceptInstance instance) {
+    public static Set<InstanceEnumerationAxiom> findInstanceEnumerationAxiomsWithEnumeratedInstance(ConceptInstance instance) {
         return findInverseReferencers(instance, OmlPackage.Literals.INSTANCE_ENUMERATION_AXIOM__INSTANCES, InstanceEnumerationAxiom.class);
     }
 
@@ -215,9 +214,9 @@ public class OmlIndex {
      * Finds relation bases referencing the given entity as source
      * 
      * @param source The referenced entity
-     * @return A list of referencing relation bases
+     * @return A set of referencing relation bases
      */
-    public static List<RelationBase> findRelationBasesWithSource(Entity source) {
+    public static Set<RelationBase> findRelationBasesWithSource(Entity source) {
         return findInverseReferencers(source, OmlPackage.Literals.RELATION_BASE__SOURCES, RelationBase.class);
     }
     
@@ -225,9 +224,9 @@ public class OmlIndex {
      * Finds relation bases referencing the given entity as target
      * 
      * @param target The referenced entity
-     * @return A list of referencing relation bases
+     * @return A set of referencing relation bases
      */
-    public static List<RelationBase> findRelationBasesWithTarget(Entity target) {
+    public static Set<RelationBase> findRelationBasesWithTarget(Entity target) {
         return findInverseReferencers(target, OmlPackage.Literals.RELATION_BASE__TARGETS, RelationBase.class);
     }
     
@@ -237,9 +236,9 @@ public class OmlIndex {
      * Finds scalar properties referencing the given classifier as domain
      * 
      * @param domain The referenced classifier
-     * @return A list of referencing scalar properties
+     * @return A set of referencing scalar properties
      */
-    public static List<ScalarProperty> findScalarPropertiesWithDomain(Classifier domain) {
+    public static Set<ScalarProperty> findScalarPropertiesWithDomain(Classifier domain) {
         return findInverseReferencers(domain, OmlPackage.Literals.SCALAR_PROPERTY__DOMAINS, ScalarProperty.class);
     }
 
@@ -247,9 +246,9 @@ public class OmlIndex {
      * Finds scalar properties referencing the given scalar as range
      * 
      * @param range The referenced scalar
-     * @return A list of referencing scalar properties
+     * @return A set of referencing scalar properties
      */
-    public static List<ScalarProperty> findScalarPropertiesWithRange(Scalar range) {
+    public static Set<ScalarProperty> findScalarPropertiesWithRange(Scalar range) {
         return findInverseReferencers(range, OmlPackage.Literals.SCALAR_PROPERTY__RANGES, ScalarProperty.class);
     }
     
@@ -259,9 +258,9 @@ public class OmlIndex {
      * Finds structured properties referencing the given classifier as domain
      * 
      * @param domain The referenced classifier
-     * @return A list of referencing scalar properties
+     * @return A set of referencing scalar properties
      */
-    public static List<StructuredProperty> findStructuredPropertiesWithDomain(Classifier domain) {
+    public static Set<StructuredProperty> findStructuredPropertiesWithDomain(Classifier domain) {
         return findInverseReferencers(domain, OmlPackage.Literals.STRUCTURED_PROPERTY__DOMAINS, StructuredProperty.class);
     }
 
@@ -269,9 +268,9 @@ public class OmlIndex {
      * Finds structured properties referencing the given structure as range
      * 
      * @param range The referenced structure
-     * @return A list of referencing structured properties
+     * @return A set of referencing structured properties
      */
-    public static List<StructuredProperty> findStructuredPropertiesWithRange(Structure range) {
+    public static Set<StructuredProperty> findStructuredPropertiesWithRange(Structure range) {
         return findInverseReferencers(range, OmlPackage.Literals.STRUCTURED_PROPERTY__RANGES, StructuredProperty.class);
     }
     
@@ -281,9 +280,9 @@ public class OmlIndex {
      * Finds structure instances referencing the given structure as type
      * 
      * @param type The referenced structure
-     * @return A list of referencing structure instances
+     * @return A set of referencing structure instances
      */
-    public static List<StructureInstance> findStructureInstancesWithType(Structure type) {
+    public static Set<StructureInstance> findStructureInstancesWithType(Structure type) {
         return findInverseReferencers(type, OmlPackage.Literals.STRUCTURE_INSTANCE__TYPE, StructureInstance.class);
     }
     
@@ -293,9 +292,9 @@ public class OmlIndex {
      * Finds relation instances referencing the given named instance as source
      * 
      * @param source The referenced named instance
-     * @return A list of referencing relation instances
+     * @return A set of referencing relation instances
      */
-    public static List<RelationInstance> findRelationInstancesWithSource(NamedInstance source) {
+    public static Set<RelationInstance> findRelationInstancesWithSource(NamedInstance source) {
         return findInverseReferencers(source, OmlPackage.Literals.RELATION_INSTANCE__SOURCES, RelationInstance.class);
     }
     
@@ -303,9 +302,9 @@ public class OmlIndex {
      * Finds relation instances referencing the given named instance as target
      * 
      * @param target The referenced named instance
-     * @return A list of referencing relation instances
+     * @return A set of referencing relation instances
      */
-    public static List<RelationInstance> findRelationInstancesWithTarget(NamedInstance target) {
+    public static Set<RelationInstance> findRelationInstancesWithTarget(NamedInstance target) {
         return findInverseReferencers(target, OmlPackage.Literals.RELATION_INSTANCE__TARGETS, RelationInstance.class);
     }
     
@@ -315,9 +314,9 @@ public class OmlIndex {
      * Finds aspects referencing the given aspect
      * 
      * @param aspect The referenced aspect
-     * @return A list of referencing aspects
+     * @return A set of referencing aspects
      */
-    public static List<Aspect> findAspectsWithRef(Aspect aspect) {
+    public static Set<Aspect> findAspectsWithRef(Aspect aspect) {
         return findInverseReferencers(aspect, OmlPackage.Literals.ASPECT__REF, Aspect.class);
     }
     
@@ -327,9 +326,9 @@ public class OmlIndex {
      * Finds concept referencing the given concept
      * 
      * @param concept The referenced concept
-     * @return A list of referencing concepts
+     * @return A set of referencing concepts
      */
-    public static List<Concept> findConceptsWithRef(Concept concept) {
+    public static Set<Concept> findConceptsWithRef(Concept concept) {
         return findInverseReferencers(concept, OmlPackage.Literals.CONCEPT__REF, Concept.class);
     }
     
@@ -339,9 +338,9 @@ public class OmlIndex {
      * Finds relation entity referencing the given relation entity
      * 
      * @param entity The referenced relation entity
-     * @return A list of referencing relation entities
+     * @return A set of referencing relation entities
      */
-    public static List<RelationEntity> findRelationEntitiesWithRef(RelationEntity entity) {
+    public static Set<RelationEntity> findRelationEntitiesWithRef(RelationEntity entity) {
         return findInverseReferencers(entity, OmlPackage.Literals.RELATION_ENTITY__REF, RelationEntity.class);
     }
     
@@ -351,9 +350,9 @@ public class OmlIndex {
      * Finds structure referencing the given structure
      * 
      * @param structure The referenced structure
-     * @return A list of referencing structures
+     * @return A set of referencing structures
      */
-    public static List<Structure> findStructuresWithRef(Structure structure) {
+    public static Set<Structure> findStructuresWithRef(Structure structure) {
         return findInverseReferencers(structure, OmlPackage.Literals.STRUCTURE__REF, Structure.class);
     }
     
@@ -363,9 +362,9 @@ public class OmlIndex {
      * Finds annotation property referencing the given annotation property
      * 
      * @param property The referenced annotation property
-     * @return A list of referencing annotation properties
+     * @return A set of referencing annotation properties
      */
-    public static List<AnnotationProperty> findAnnotationPropertiesWithRef(AnnotationProperty property) {
+    public static Set<AnnotationProperty> findAnnotationPropertiesWithRef(AnnotationProperty property) {
         return findInverseReferencers(property, OmlPackage.Literals.ANNOTATION_PROPERTY__REF, AnnotationProperty.class);
     }
     
@@ -375,9 +374,9 @@ public class OmlIndex {
      * Finds scalar property referencing the given scalar property
      * 
      * @param property The referenced scalar property
-     * @return A list of referencing scalar properties
+     * @return A set of referencing scalar properties
      */
-    public static List<ScalarProperty> findScalarPropertiesWithRef(ScalarProperty property) {
+    public static Set<ScalarProperty> findScalarPropertiesWithRef(ScalarProperty property) {
         return findInverseReferencers(property, OmlPackage.Literals.SCALAR_PROPERTY__REF, ScalarProperty.class);
     }
     
@@ -387,9 +386,9 @@ public class OmlIndex {
      * Finds structured property referencing the given structured property
      * 
      * @param property The referenced structured property
-     * @return A list of referencing structured properties
+     * @return A set of referencing structured properties
      */
-    public static List<StructuredProperty> findStructuredPropertiesWithRef(StructuredProperty property) {
+    public static Set<StructuredProperty> findStructuredPropertiesWithRef(StructuredProperty property) {
         return findInverseReferencers(property, OmlPackage.Literals.STRUCTURED_PROPERTY__REF, StructuredProperty.class);
     }
     
@@ -399,9 +398,9 @@ public class OmlIndex {
      * Finds scalar referencing the given scalar
      * 
      * @param scalar The referenced scalar
-     * @return A list of referencing scalars
+     * @return A set of referencing scalars
      */
-    public static List<Scalar> findScalarsWithRef(Scalar scalar) {
+    public static Set<Scalar> findScalarsWithRef(Scalar scalar) {
         return findInverseReferencers(scalar, OmlPackage.Literals.SCALAR__REF, Scalar.class);
     }
     
@@ -411,9 +410,9 @@ public class OmlIndex {
      * Finds unreified relations referencing the given relation
      * 
      * @param relation The referenced relation
-     * @return A list of referencing relations
+     * @return A set of referencing relations
      */
-    public static List<UnreifiedRelation> findUnreifiedRelationsWithRef(Relation relation) {
+    public static Set<UnreifiedRelation> findUnreifiedRelationsWithRef(Relation relation) {
         return findInverseReferencers(relation, OmlPackage.Literals.UNREIFIED_RELATION__REF, UnreifiedRelation.class);
     }
     
@@ -423,9 +422,9 @@ public class OmlIndex {
      * Finds rule referencing the given rule
      * 
      * @param rule The referenced rule
-     * @return A list of referencing rules
+     * @return A set of referencing rules
      */
-    public static List<Rule> findRulesWithRef(Rule rule) {
+    public static Set<Rule> findRulesWithRef(Rule rule) {
         return findInverseReferencers(rule, OmlPackage.Literals.RULE__REF, Rule.class);
     }
     
@@ -435,9 +434,9 @@ public class OmlIndex {
      * Finds builtIn referencing the given builtIn
      * 
      * @param builtIn The referenced builtIn
-     * @return A list of referencing builtIn
+     * @return A set of referencing builtIn
      */
-    public static List<BuiltIn> findBuiltInsWithRef(BuiltIn builtIn) {
+    public static Set<BuiltIn> findBuiltInsWithRef(BuiltIn builtIn) {
         return findInverseReferencers(builtIn, OmlPackage.Literals.BUILT_IN__REF, BuiltIn.class);
     }
 
@@ -447,9 +446,9 @@ public class OmlIndex {
      * Finds concept instance referencing the given concept instance
      * 
      * @param instance The referenced concept instance
-     * @return A list of referencing concept instances
+     * @return A set of referencing concept instances
      */
-    public static List<ConceptInstance> findConceptInstancesWithRef(ConceptInstance instance) {
+    public static Set<ConceptInstance> findConceptInstancesWithRef(ConceptInstance instance) {
         return findInverseReferencers(instance, OmlPackage.Literals.CONCEPT_INSTANCE__REF, ConceptInstance.class);
     }
     
@@ -459,9 +458,9 @@ public class OmlIndex {
      * Finds relation instance referencing the given relation instance
      * 
      * @param instance The referenced relation instance
-     * @return A list of referencing relation instances
+     * @return A set of referencing relation instances
      */
-    public static List<RelationInstance> findRelationInstancesWithRef(RelationInstance instance) {
+    public static Set<RelationInstance> findRelationInstancesWithRef(RelationInstance instance) {
         return findInverseReferencers(instance, OmlPackage.Literals.RELATION_INSTANCE__REF, RelationInstance.class); 
     }
     
@@ -471,9 +470,9 @@ public class OmlIndex {
      * Finds specialization axioms referencing the given super term
      * 
      * @param term The referenced super term
-     * @return A list of referencing specialization axioms
+     * @return A set of referencing specialization axioms
      */
-    public static List<SpecializationAxiom> findSpecializationAxiomsWithSuperTerm(Term term) {
+    public static Set<SpecializationAxiom> findSpecializationAxiomsWithSuperTerm(Term term) {
         return findInverseReferencers(term, OmlPackage.Literals.SPECIALIZATION_AXIOM__SUPER_TERM, SpecializationAxiom.class);
     }
     
@@ -483,10 +482,22 @@ public class OmlIndex {
      * Finds classifier equivalence axioms referencing the given classifier
      * 
      * @param classifier The referenced classifier
-     * @return A list of referencing classifier equivalence axioms
+     * @return A set of referencing classifier equivalence axioms
      */
-    public static List<ClassifierEquivalenceAxiom> findClassifierEquivalenceAxiomsWithSuperClassifier(Classifier classifier) {
+    public static Set<ClassifierEquivalenceAxiom> findClassifierEquivalenceAxiomsWithSuperClassifier(Classifier classifier) {
         return findInverseReferencers(classifier, OmlPackage.Literals.CLASSIFIER_EQUIVALENCE_AXIOM__SUPER_CLASSIFIERS, ClassifierEquivalenceAxiom.class);
+    }
+
+    // ScalarEquivalenceAxiom
+    
+    /**
+     * Finds scalars equivalence axioms referencing the given scalar
+     * 
+     * @param scalar The referenced scalar
+     * @return A set of referencing scalar equivalence axioms
+     */
+    public static Set<ScalarEquivalenceAxiom> findScalarEquivalenceAxiomsWithSuperScalar(Scalar scalar) {
+        return findInverseReferencers(scalar, OmlPackage.Literals.SCALAR_EQUIVALENCE_AXIOM__SUPER_SCALAR, ScalarEquivalenceAxiom.class);
     }
 
     // PropertyEquivalenceAxiom
@@ -495,9 +506,9 @@ public class OmlIndex {
      * Finds property equivalence axioms referencing the given property
      * 
      * @param property The referenced property
-     * @return A list of referencing property equivalence axioms
+     * @return A set of referencing property equivalence axioms
      */
-    public static List<PropertyEquivalenceAxiom> findPropertyEquivalenceAxiomsWithSuperProperty(Property property) {
+    public static Set<PropertyEquivalenceAxiom> findPropertyEquivalenceAxiomsWithSuperProperty(Property property) {
         return findInverseReferencers(property, OmlPackage.Literals.PROPERTY_EQUIVALENCE_AXIOM__SUPER_PROPERTY, PropertyEquivalenceAxiom.class);
     }
 
@@ -507,9 +518,9 @@ public class OmlIndex {
      * Finds property restriction axioms referencing the given property
      * 
      * @param property The referenced property
-     * @return A list of referencing property restriction axioms
+     * @return A set of referencing property restriction axioms
      */
-    public static List<PropertyRestrictionAxiom> findPropertyRestrictionAxiomsWithProperty(Property property) {
+    public static Set<PropertyRestrictionAxiom> findPropertyRestrictionAxiomsWithProperty(Property property) {
         return findInverseReferencers(property, OmlPackage.Literals.PROPERTY_RESTRICTION_AXIOM__PROPERTY, PropertyRestrictionAxiom.class);
     }
     
@@ -519,9 +530,9 @@ public class OmlIndex {
      * Finds property range restriction axioms referencing the given range
      * 
      * @param range The given range
-     * @return A list of referencing property range restriction axioms
+     * @return A set of referencing property range restriction axioms
      */
-    public static List<PropertyRangeRestrictionAxiom> findPropertyRangeRestrictionAxiomsWithRange(Type range) {
+    public static Set<PropertyRangeRestrictionAxiom> findPropertyRangeRestrictionAxiomsWithRange(Type range) {
         return findInverseReferencers(range, OmlPackage.Literals.PROPERTY_RANGE_RESTRICTION_AXIOM__RANGE, PropertyRangeRestrictionAxiom.class);
     }
     
@@ -531,9 +542,9 @@ public class OmlIndex {
      * Finds property cardinality restriction axioms referencing the given range
      * 
      * @param range The given range
-     * @return A list of referencing property cardinality restriction axioms
+     * @return A set of referencing property cardinality restriction axioms
      */
-    public static List<PropertyCardinalityRestrictionAxiom> findPropertyCardinalityRestrictionAxiomsWithRange(Type range) {
+    public static Set<PropertyCardinalityRestrictionAxiom> findPropertyCardinalityRestrictionAxiomsWithRange(Type range) {
         return findInverseReferencers(range, OmlPackage.Literals.PROPERTY_CARDINALITY_RESTRICTION_AXIOM__RANGE, PropertyCardinalityRestrictionAxiom.class);
     }
     
@@ -543,9 +554,9 @@ public class OmlIndex {
      * Finds property value restriction axioms referencing the given named instance as a value
      * 
      * @param value The given named instance value
-     * @return A list of referencing property value restriction axioms
+     * @return A set of referencing property value restriction axioms
      */
-    public static List<PropertyValueRestrictionAxiom> findPropertyValueRestrictionAxiomsWithNamedInstanceValue(NamedInstance value) {
+    public static Set<PropertyValueRestrictionAxiom> findPropertyValueRestrictionAxiomsWithNamedInstanceValue(NamedInstance value) {
         return findInverseReferencers(value, OmlPackage.Literals.PROPERTY_VALUE_RESTRICTION_AXIOM__NAMED_INSTANCE_VALUE, PropertyValueRestrictionAxiom.class);
     }
     
@@ -555,9 +566,9 @@ public class OmlIndex {
      * Finds key axioms referencing the given property
      * 
      * @param property The referenced property
-     * @return A list of referencing key axioms
+     * @return A set of referencing key axioms
      */
-    public static List<KeyAxiom> findKeyAxiomWithProperty(Property property) {
+    public static Set<KeyAxiom> findKeyAxiomWithProperty(Property property) {
         return findInverseReferencers(property, OmlPackage.Literals.KEY_AXIOM__PROPERTIES, KeyAxiom.class);
     }
     
@@ -567,9 +578,9 @@ public class OmlIndex {
      * Finds type assertions referencing the given type
      * 
      * @param type The referenced type
-     * @return A list of referencing type assertions
+     * @return A set of referencing type assertions
      */
-    public static List<TypeAssertion> findTypeAssertionsWithType(Entity type) {
+    public static Set<TypeAssertion> findTypeAssertionsWithType(Entity type) {
         return findInverseReferencers(type, OmlPackage.Literals.TYPE_ASSERTION__TYPE, TypeAssertion.class);
     }
         
@@ -579,9 +590,9 @@ public class OmlIndex {
      * Finds property value assertions referencing the given property
      * 
      * @param property The referenced property
-     * @return A list of referencing property value assertions
+     * @return A set of referencing property value assertions
      */
-    public static List<PropertyValueAssertion> findPropertyValueAssertionsWithProperty(SemanticProperty property) {
+    public static Set<PropertyValueAssertion> findPropertyValueAssertionsWithProperty(SemanticProperty property) {
         return findInverseReferencers(property, OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__PROPERTY, PropertyValueAssertion.class);
     }
     
@@ -589,9 +600,9 @@ public class OmlIndex {
      * Finds property value assertions referencing the given named instance as a value
      * 
      * @param value The referenced named instance value
-     * @return A list of referencing property value assertions
+     * @return A set of referencing property value assertions
      */
-    public static List<PropertyValueAssertion> findPropertyValueAssertionsWithNamedInstanceValue(NamedInstance value) {
+    public static Set<PropertyValueAssertion> findPropertyValueAssertionsWithNamedInstanceValue(NamedInstance value) {
         return findInverseReferencers(value, OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__NAMED_INSTANCE_VALUE, PropertyValueAssertion.class);
     }
     
@@ -601,9 +612,9 @@ public class OmlIndex {
      * Finds type predicates referencing the given type
      * 
      * @param type The referenced type
-     * @return A list of referencing type predicates
+     * @return A set of referencing type predicates
      */
-    public static List<TypePredicate> findTypePredicatesWithType(Type type) {
+    public static Set<TypePredicate> findTypePredicatesWithType(Type type) {
         return findInverseReferencers(type, OmlPackage.Literals.TYPE_PREDICATE__TYPE, TypePredicate.class);
     }
     
@@ -613,9 +624,9 @@ public class OmlIndex {
      * Finds relation entity predicates referencing the given relation entity
      * 
      * @param type The referenced relation entity
-     * @return A list of referencing relation entity predicates
+     * @return A set of referencing relation entity predicates
      */
-    public static List<RelationEntityPredicate> findRelationEntityPredicatesWithType(RelationEntity type) {
+    public static Set<RelationEntityPredicate> findRelationEntityPredicatesWithType(RelationEntity type) {
         return findInverseReferencers(type, OmlPackage.Literals.RELATION_ENTITY_PREDICATE__TYPE, RelationEntityPredicate.class);
     }
     
@@ -625,9 +636,9 @@ public class OmlIndex {
      * Finds property predicates referencing the given property
      * 
      * @param property The referenced property
-     * @return A list of referencing property predicates
+     * @return A set of referencing property predicates
      */
-    public static List<PropertyPredicate> findPropertyPredicatesWithProperty(Property property) {
+    public static Set<PropertyPredicate> findPropertyPredicatesWithProperty(Property property) {
         return findInverseReferencers(property, OmlPackage.Literals.PROPERTY_PREDICATE__PROPERTY, PropertyPredicate.class);
     }
     
@@ -637,9 +648,9 @@ public class OmlIndex {
      * Finds builtIn predicates referencing the given builtIn
      * 
      * @param builtIn The referenced builtIn
-     * @return A list of referencing builtIn predicates
+     * @return A set of referencing builtIn predicates
      */
-    public static List<BuiltInPredicate> findBuiltInPredicateWithBuiltIn(BuiltIn builtIn) {
+    public static Set<BuiltInPredicate> findBuiltInPredicateWithBuiltIn(BuiltIn builtIn) {
         return findInverseReferencers(builtIn, OmlPackage.Literals.BUILT_IN_PREDICATE__BUILT_IN, BuiltInPredicate.class);
     }
 
@@ -649,9 +660,9 @@ public class OmlIndex {
      * Finds quoted literals referencing the given scalar as type
      * 
      * @param type The referenced scalar
-     * @return A list of referencing quoted literals
+     * @return A set of referencing quoted literals
      */
-    public static List<QuotedLiteral> findQuotedLiteralsWithType(Scalar type) {
+    public static Set<QuotedLiteral> findQuotedLiteralsWithType(Scalar type) {
         return findInverseReferencers(type, OmlPackage.Literals.QUOTED_LITERAL__TYPE, QuotedLiteral.class);
     }
     
@@ -661,9 +672,9 @@ public class OmlIndex {
      * Finds arguments referencing the given named instance
      * 
      * @param instance The referenced instance
-     * @return A list of referencing arguments
+     * @return A set of referencing arguments
      */
-    public static List<Argument> findArgumentsWithInstance(NamedInstance instance) {
+    public static Set<Argument> findArgumentsWithInstance(NamedInstance instance) {
         return findInverseReferencers(instance, OmlPackage.Literals.ARGUMENT__INSTANCE, Argument.class);
     }
 

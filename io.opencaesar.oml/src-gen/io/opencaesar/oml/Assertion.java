@@ -25,7 +25,7 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Assertion is an element that represents a statement about an instance in a description.
+ * Assertion is an element that characterizes an [=instance=] by specifying the value of one of its [=properties=].
  * <!-- end-model-doc -->
  *
  *

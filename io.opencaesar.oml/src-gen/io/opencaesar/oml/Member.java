@@ -25,7 +25,7 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Member is an identified element defined by an ontology. Its IRI is unique and derived by concatenating the globally
+ * Member is an identified element defined by an [=ontology=]. Its IRI is unique and derived by concatenating the globally
  * unique namespace of its ontology with its locally unique name (i.e., member.iri=ontology.namespace+member.name).
  * <!-- end-model-doc -->
  *
@@ -104,7 +104,7 @@ public interface Member extends IdentifiedElement {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Gets the IRI of this member (empty string if a proxy)
+	 * Gets the IRI of this member
 	 * <!-- end-model-doc -->
 	 * @model kind="operation" unique="false"
 	 * @generated
@@ -115,7 +115,7 @@ public interface Member extends IdentifiedElement {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Gets the abbreviated IRI of this member (empty string if a proxy)
+	 * Gets the abbreviated IRI of this member
 	 * <!-- end-model-doc -->
 	 * @model kind="operation" unique="false"
 	 * @generated

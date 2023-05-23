@@ -25,7 +25,7 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Term is a member of a vocabulary that provides a particular semantic meaning when used in an assertion.
+ * Term is a [=member=] of a [=vocabulary=] that provides a particular semantic meaning when used in an [=assertion=].
  * <!-- end-model-doc -->
  *
  *

@@ -25,8 +25,7 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Structure is a characterizable type that represents a structured datatype whose instances are anonymous and assignable as
- * values to structured properties.
+ * Structure is a [=classifier=] whose [=instances=] are anonymous and assignable as values to [=StructuredProperties=].
  * <!-- end-model-doc -->
  *
  * <p>

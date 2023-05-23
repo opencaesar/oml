@@ -25,7 +25,7 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Property is a term that relates an element to a value. It is the super type of all property types.
+ * Property is a [=term=] that relates an [=instance=] to a value. It is the super type of all property types.
  * <!-- end-model-doc -->
  *
  *

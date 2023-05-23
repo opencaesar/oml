@@ -26,7 +26,7 @@ import org.eclipse.emf.common.util.EList;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * UnreifiedRelation is a simple relation from a source entity to a target entity.
+ * UnreifiedRelation is a simple [=relation=] from a source [=entity=] to a target [=entity=].
  * <!-- end-model-doc -->
  *
  * <p>
@@ -37,7 +37,7 @@ import org.eclipse.emf.common.util.EList;
  * </ul>
  *
  * @see io.opencaesar.oml.OmlPackage#getUnreifiedRelation()
- * @model annotation="https://tabatkins.github.io/bikeshed heading='Properties'"
+ * @model annotation="https://tabatkins.github.io/bikeshed heading='Relations'"
  * @generated
  */
 public interface UnreifiedRelation extends Relation, RelationBase, SpecializableProperty {

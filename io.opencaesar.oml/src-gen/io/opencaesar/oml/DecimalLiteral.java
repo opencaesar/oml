@@ -26,7 +26,7 @@ import java.math.BigDecimal;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * DecimalLiteral is a literal that represents an arbitrary precision decimal value
+ * DecimalLiteral is a [=literal=] that represents an arbitrary precision decimal value.
  * <!-- end-model-doc -->
  *
  * <p>

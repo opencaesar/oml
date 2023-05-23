@@ -25,7 +25,9 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Aspect is an entity that represents a concern that cuts across multiple entities. An aspect can only specialize other aspects.
+ * Aspect is an =[entity=] that represents a capability that may be specified on multiple [=concepts=].
+ * An aspect can only specialize other aspects. It can also be specified as a type of [=NamedInstances=].
+ * Aspects are not considered disjoint in a vocabulary bundle.
  * <!-- end-model-doc -->
  *
  * <p>

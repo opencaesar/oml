@@ -25,7 +25,7 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * PropertySelfRestrictionAxiom is a property restriction axiom that restricts a property in a given domain to be related to
+ * PropertySelfRestrictionAxiom is a [=PropertyRestrictionAxiom=] that restricts a [=property=] in a given domain to be related to
  * itself only.
  * <!-- end-model-doc -->
  *

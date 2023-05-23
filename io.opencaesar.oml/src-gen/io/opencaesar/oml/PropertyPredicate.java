@@ -25,8 +25,8 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * PropertyPredicate is a binary predicate that holds when its argument1 is bound to an instance and its argument2 is bound to a
- * a value of a given property on that instance.
+ * PropertyPredicate is a [=BinaryPredicate=] that holds when its argument1 is bound to an [=NamedInstance=] and its argument2 is bound to a
+ * a value of a given [=property=] on that instance.
  * <!-- end-model-doc -->
  *
  * <p>
@@ -37,7 +37,7 @@ package io.opencaesar.oml;
  * </ul>
  *
  * @see io.opencaesar.oml.OmlPackage#getPropertyPredicate()
- * @model annotation="https://tabatkins.github.io/bikeshed heading='Rules'"
+ * @model annotation="https://tabatkins.github.io/bikeshed heading='Predicates'"
  * @generated
  */
 public interface PropertyPredicate extends BinaryPredicate {

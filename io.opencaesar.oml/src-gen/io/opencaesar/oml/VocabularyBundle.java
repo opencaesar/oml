@@ -25,8 +25,8 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * VocabularyBundle is a vocabulary box that allows importing other vocabulary boxes and flagging them
- * as disjoint from one another.
+ * VocabularyBundle is a vocabulary box that closes the world on its imported [=vocabularies=] by considering their =terms=]
+ * that do not have common specializations to be disjoint.
  * <!-- end-model-doc -->
  *
  *

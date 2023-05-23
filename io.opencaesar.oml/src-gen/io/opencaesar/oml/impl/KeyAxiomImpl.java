@@ -168,6 +168,16 @@ public class KeyAxiomImpl extends AxiomImpl implements KeyAxiom {
 	 * @generated
 	 */
 	@Override
+	public Entity getCharacterizedTerm() {
+		return this.getKeyedEntity();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case OmlPackage.KEY_AXIOM__OWNING_ENTITY:
@@ -287,6 +297,8 @@ public class KeyAxiomImpl extends AxiomImpl implements KeyAxiom {
 		switch (operationID) {
 			case OmlPackage.KEY_AXIOM___GET_KEYED_ENTITY:
 				return getKeyedEntity();
+			case OmlPackage.KEY_AXIOM___GET_CHARACTERIZED_TERM:
+				return getCharacterizedTerm();
 		}
 		return super.eInvoke(operationID, arguments);
 	}

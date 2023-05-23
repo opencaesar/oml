@@ -290,6 +290,15 @@ public interface OmlFactory extends EFactory {
 	ClassifierEquivalenceAxiom createClassifierEquivalenceAxiom();
 
 	/**
+	 * Returns a new object of class '<em>Scalar Equivalence Axiom</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Scalar Equivalence Axiom</em>'.
+	 * @generated
+	 */
+	ScalarEquivalenceAxiom createScalarEquivalenceAxiom();
+
+	/**
 	 * Returns a new object of class '<em>Property Equivalence Axiom</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

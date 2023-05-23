@@ -732,6 +732,29 @@ public class OmlItemProviderAdapterFactory extends OmlAdapterFactory implements 
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.ScalarEquivalenceAxiom} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ScalarEquivalenceAxiomItemProvider scalarEquivalenceAxiomItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link io.opencaesar.oml.ScalarEquivalenceAxiom}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createScalarEquivalenceAxiomAdapter() {
+		if (scalarEquivalenceAxiomItemProvider == null) {
+			scalarEquivalenceAxiomItemProvider = new ScalarEquivalenceAxiomItemProvider(this);
+		}
+
+		return scalarEquivalenceAxiomItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.PropertyEquivalenceAxiom} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1278,6 +1301,7 @@ public class OmlItemProviderAdapterFactory extends OmlAdapterFactory implements 
 		if (instanceEnumerationAxiomItemProvider != null) instanceEnumerationAxiomItemProvider.dispose();
 		if (literalEnumerationAxiomItemProvider != null) literalEnumerationAxiomItemProvider.dispose();
 		if (classifierEquivalenceAxiomItemProvider != null) classifierEquivalenceAxiomItemProvider.dispose();
+		if (scalarEquivalenceAxiomItemProvider != null) scalarEquivalenceAxiomItemProvider.dispose();
 		if (propertyEquivalenceAxiomItemProvider != null) propertyEquivalenceAxiomItemProvider.dispose();
 		if (propertyRangeRestrictionAxiomItemProvider != null) propertyRangeRestrictionAxiomItemProvider.dispose();
 		if (propertyCardinalityRestrictionAxiomItemProvider != null) propertyCardinalityRestrictionAxiomItemProvider.dispose();

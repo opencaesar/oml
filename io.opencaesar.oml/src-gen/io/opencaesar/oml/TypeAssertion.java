@@ -25,7 +25,7 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * TypeAssertion is an assertion that specifies a type for an instance
+ * TypeAssertion is an [=Assertion=] that specifies a type for a [=NamedInstance=].
  * <!-- end-model-doc -->
  *
  * <p>

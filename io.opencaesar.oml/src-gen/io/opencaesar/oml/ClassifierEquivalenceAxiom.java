@@ -26,11 +26,11 @@ import org.eclipse.emf.common.util.EList;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * ClassifierEquivalenceAxiom is an axiom specified on a classifier that states that it is equivalent to the intersection of named classifiers
- * and property restrictions. This axiom implies that the named classifiers are super types of the subject classifier. It also implies
- * that when an instance is classified by this intersection, then it follows that it is also classified by the subject classifier.
- * Conversely, when an instance is classified by the subject classifier, then it follows that it is also classified by the intersection.
- * In other words, this axiom enables bi-directional (or two-way) inferencing.
+ * ClassifierEquivalenceAxiom is an [=Axiom=] specified on a subject [=Classifier=] that states that it is equivalent to the intersection
+ * of [=Classifiers=] and/or [=PropertyRestrictionAxioms=]. This axiom implies that the [=classifiers=] are super types of the subject classifier.
+ * It also implies that when an instance is classified by this intersection, then it follows that it is also classified by the
+ * subject classifier. Conversely, when an instance is classified by the subject classifier, then it follows that it is also classified
+ * by the intersection. In other words, this axiom enables bi-directional (or two-way) inferencing.
  * <!-- end-model-doc -->
  *
  * <p>
@@ -116,5 +116,13 @@ public interface ClassifierEquivalenceAxiom extends Axiom {
 	 * @generated
 	 */
 	Classifier getSubClassifier();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
+	Classifier getCharacterizedTerm();
 
 } // ClassifierEquivalenceAxiom

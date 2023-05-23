@@ -26,7 +26,7 @@ import org.eclipse.emf.common.util.EList;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * BuiltInPredicate is a predicate that has two arguments: argument1 and argument2
+ * BuiltInPredicate is a [=Predicate=] that has two [=arguments=]: argument1 and argument2
  * <!-- end-model-doc -->
  *
  * <p>
@@ -38,7 +38,7 @@ import org.eclipse.emf.common.util.EList;
  * </ul>
  *
  * @see io.opencaesar.oml.OmlPackage#getBuiltInPredicate()
- * @model annotation="https://tabatkins.github.io/bikeshed heading='Rules'"
+ * @model annotation="https://tabatkins.github.io/bikeshed heading='Predicates'"
  * @generated
  */
 public interface BuiltInPredicate extends Predicate {

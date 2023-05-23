@@ -169,6 +169,16 @@ public class LiteralEnumerationAxiomImpl extends AxiomImpl implements LiteralEnu
 	 * @generated
 	 */
 	@Override
+	public Scalar getCharacterizedTerm() {
+		return this.getEnumeratedScalar();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case OmlPackage.LITERAL_ENUMERATION_AXIOM__OWNING_SCALAR:
@@ -290,6 +300,8 @@ public class LiteralEnumerationAxiomImpl extends AxiomImpl implements LiteralEnu
 		switch (operationID) {
 			case OmlPackage.LITERAL_ENUMERATION_AXIOM___GET_ENUMERATED_SCALAR:
 				return getEnumeratedScalar();
+			case OmlPackage.LITERAL_ENUMERATION_AXIOM___GET_CHARACTERIZED_TERM:
+				return getCharacterizedTerm();
 		}
 		return super.eInvoke(operationID, arguments);
 	}

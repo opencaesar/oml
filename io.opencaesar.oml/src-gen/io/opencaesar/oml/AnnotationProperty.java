@@ -25,7 +25,7 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * AnnotationProperty is a specializable property with no DL semantics that relates an annotated element to a literal value.
+ * AnnotationProperty is a [=SpecializableProperty=] with no DL semantics.
  * <!-- end-model-doc -->
  *
  * <p>

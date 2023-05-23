@@ -25,7 +25,7 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * SpecializationAxiom is an axiom specified on a specializing term that states that one specializable term specializes another.
+ * SpecializationAxiom is an [=Axiom=] specified on a [=SpecializableTerm=] that states that it specializes another [=Term=].
  * <!-- end-model-doc -->
  *
  * <p>
@@ -103,5 +103,13 @@ public interface SpecializationAxiom extends Axiom {
 	 * @generated
 	 */
 	Term getSubTerm();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
+	Term getCharacterizedTerm();
 
 } // SpecializationAxiom

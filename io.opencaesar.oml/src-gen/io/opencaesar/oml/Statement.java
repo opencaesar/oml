@@ -25,7 +25,7 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Statement is a member that is owned by an ontology.
+ * Statement is a [=member=] that is owned by an [=ontology=].
  * <!-- end-model-doc -->
  *
  *

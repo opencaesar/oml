@@ -25,8 +25,8 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * DescriptionBundle is a description box that allows importing other description boxes and flagging them
- * as a set that is analyzed together for consistency and satisfiabilty.
+ * DescriptionBundle is a description box that closes the world on its imported [=descriptions=] by considering their [=instances=]
+ * and their assertions to be the only ones available.
  * <!-- end-model-doc -->
  *
  *

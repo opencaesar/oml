@@ -26,9 +26,9 @@ import org.eclipse.emf.common.util.EList;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Ontology is an identified element that represents a namespace for its members. The namespace is defined
- * by a globally unique namespace (an iri and a namespace separator that can be # or /) and can be abbreviated with a prefix.
- * An ontology can import other ontologies, and can make statements about its own as well as imported members.
+ * Ontology is an identified element that represents a namespace for its [=members=]. It is defined
+ * by a globally unique namespace (an iri followed by either # or /) and an abbreviated prefix.
+ * An ontology can import other ontologies, and can make [=statements=] about its own as well as imported [=members=].
  * <!-- end-model-doc -->
  *
  * <p>

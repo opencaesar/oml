@@ -25,7 +25,7 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * TypePredicate is a unary predicate whose argument is bound to a value typed by a given type.
+ * TypePredicate is a [=UnaryPredicate=] whose [=argument=] is bound to a value typed by a given [=type=].
  * <!-- end-model-doc -->
  *
  * <p>
@@ -36,7 +36,7 @@ package io.opencaesar.oml;
  * </ul>
  *
  * @see io.opencaesar.oml.OmlPackage#getTypePredicate()
- * @model annotation="https://tabatkins.github.io/bikeshed heading='Rules'"
+ * @model annotation="https://tabatkins.github.io/bikeshed heading='Predicates'"
  * @generated
  */
 public interface TypePredicate extends UnaryPredicate {

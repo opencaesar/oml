@@ -25,7 +25,7 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * BooleanLiteral is a literal that represents the boolean values true/false
+ * BooleanLiteral is a [=literal=] that represents the boolean values `true` and `false`.
  * <!-- end-model-doc -->
  *
  * <p>

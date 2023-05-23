@@ -26,8 +26,7 @@ import org.eclipse.emf.common.util.EList;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Entity is a classifier whose instances are named and can be interrelated. It can also additionally specify key axioms
- * that define how instances of the entity are unique.
+ * Entity is a [=classifier=] whose instances are [=NamedInstances=]. It can also specify a set of [=KeyAxioms=].
  * <!-- end-model-doc -->
  *
  * <p>

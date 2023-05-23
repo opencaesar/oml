@@ -25,7 +25,7 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * IntegerLiteral is a literal that represents a 32-bit integer value
+ * IntegerLiteral is a [=literal=] that represents a 32-bit integer value.
  * <!-- end-model-doc -->
  *
  * <p>

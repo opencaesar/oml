@@ -26,9 +26,9 @@ import org.eclipse.emf.common.util.EList;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * ForwardRelation is a relation that is defined by a relation entity. Its domain is the source of the relation
- * entity, and its range is the target of the relation entity. The DL semantics of a forward property are the same as those
- * of its relation entity.
+ * ForwardRelation is a [=Relation=] that is defined by a [=RelationEntity=]. Its domains are the sources of the [=RelationEntity=],
+ * and its ranges are the targets of the [=RelationEntity=]. The DL semantics of a forward property are the same as those
+ * of its [=RelationEntity=].
  * <!-- end-model-doc -->
  *
  * <p>
@@ -39,7 +39,7 @@ import org.eclipse.emf.common.util.EList;
  * </ul>
  *
  * @see io.opencaesar.oml.OmlPackage#getForwardRelation()
- * @model annotation="https://tabatkins.github.io/bikeshed heading='Properties'"
+ * @model annotation="https://tabatkins.github.io/bikeshed heading='Relations'"
  * @generated
  */
 public interface ForwardRelation extends Relation {

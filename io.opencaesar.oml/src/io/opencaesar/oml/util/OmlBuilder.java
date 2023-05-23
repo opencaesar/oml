@@ -84,8 +84,8 @@ import io.opencaesar.oml.ReverseRelation;
 import io.opencaesar.oml.Rule;
 import io.opencaesar.oml.SameAsPredicate;
 import io.opencaesar.oml.Scalar;
+import io.opencaesar.oml.ScalarEquivalenceAxiom;
 import io.opencaesar.oml.ScalarProperty;
-import io.opencaesar.oml.SeparatorKind;
 import io.opencaesar.oml.SpecializationAxiom;
 import io.opencaesar.oml.Structure;
 import io.opencaesar.oml.StructureInstance;
@@ -379,13 +379,12 @@ public class OmlBuilder {
      * Creates a new vocabulary and add it as content of a resource with the given URI 
      * 
      * @param resourceURI the URI of a new resource to add the vocabulary to its contents
-     * @param iri the IRI of the new vocabulary
-     * @param separator the separator kind of the new vocabulary
+     * @param namespace the namespace of the new vocabulary
      * @param prefix the prefix of the new vocabulary
      * @return a newly created vocabulary added to the contents of a resource with the given URI
      */
-    public Vocabulary createVocabulary(URI resourceURI, String iri, SeparatorKind separator, String prefix) {
-        final Vocabulary vocabulary = OmlWrite.createVocabulary(iri, separator, prefix);
+    public Vocabulary createVocabulary(URI resourceURI, String namespace, String prefix) {
+        final Vocabulary vocabulary = OmlWrite.createVocabulary(namespace, prefix);
         addToNewResources(vocabulary, resourceURI);
         return vocabulary;
     }
@@ -396,13 +395,12 @@ public class OmlBuilder {
      * Creates a new vocabulary bundle and add it as content of a resource with the given URI 
      * 
      * @param resourceURI the URI of a new resource to add the vocabulary bundle to its contents
-     * @param iri the IRI of the new vocabulary bundle
-     * @param separator the separator kind of the new vocabulary bundle
+     * @param namespace the namespace of the new vocabulary bundle
      * @param prefix the prefix of the new vocabulary bundle
      * @return a newly created vocabulary bunel added to the contents of a resource with the given URI
      */
-    public VocabularyBundle createVocabularyBundle(URI resourceURI, String iri, SeparatorKind separator, String prefix) {
-        final VocabularyBundle bundle = OmlWrite.createVocabularyBundle(iri, separator, prefix);
+    public VocabularyBundle createVocabularyBundle(URI resourceURI, String namespace, String prefix) {
+        final VocabularyBundle bundle = OmlWrite.createVocabularyBundle(namespace, prefix);
         addToNewResources(bundle, resourceURI);
         return bundle;
     }
@@ -413,30 +411,29 @@ public class OmlBuilder {
      * Creates a new description and add it as content of a resource with the given URI 
      * 
      * @param resourceURI the URI of a new resource to add the description to its contents
-     * @param iri the IRI of the new description
-     * @param separator the separator kind of the new description
+     * @param namespace the namespace of the new description
      * @param prefix the prefix of the new description
      * @return a newly created description added to the contents of a resource with the given URI
      */
-    public Description createDescription(URI resourceURI, String iri, SeparatorKind separator, String prefix) {
-        final Description description = OmlWrite.createDescription(iri, separator, prefix);
+    public Description createDescription(URI resourceURI, String namespace, String prefix) {
+        final Description description = OmlWrite.createDescription(namespace, prefix);
         addToNewResources(description, resourceURI);
         return description;
     }
+
+    // DescriptionBundle
 
     /**
      * Creates a new description bundle and add it as content of a resource with the given URI 
      * 
      * @param resourceURI the URI of a new resource to add the description bundle to its contents
-     * @param iri the IRI of the new description bundle
-     * @param separator the separator kind of the new description bundle
+     * @param namespace the namespace of the new description bundle
      * @param prefix the prefix of the new description bundle
      * @return a newly created description bundle added to the contents of a resource with the given URI
      */
-    // DescriptionBundle
     
-    public DescriptionBundle createDescriptionBundle(URI resourceURI, String iri, SeparatorKind separator, String prefix) {
-        final DescriptionBundle bundle = OmlWrite.createDescriptionBundle(iri, separator, prefix);
+    public DescriptionBundle createDescriptionBundle(URI resourceURI, String namespace, String prefix) {
+        final DescriptionBundle bundle = OmlWrite.createDescriptionBundle(namespace, prefix);
         addToNewResources(bundle, resourceURI);
         return bundle;
     }
@@ -571,20 +568,10 @@ public class OmlBuilder {
      * 
      * @param vocabulary the context vocabulary
      * @param name the name of the new faceted scalar
-     * @param length the length facet
-     * @param minLength the min length facet
-     * @param maxLength the max length facet
-     * @param pattern the string pattern facet
-     * @param language the language facet
-     * @param minInclusive the min inclusive facet
-     * @param minExclusive the min exclusive facet
-     * @param maxInclusive the max inclusive facet
-     * @param maxExclusive the max exclusive facet
      * @return a new scalar that is added to the given vocabulary
      */
-    public Scalar addScalar(Vocabulary vocabulary, String name, Long length, Long minLength, Long maxLength, String pattern, 
-        String language, Literal minInclusive, Literal minExclusive, Literal maxInclusive, Literal maxExclusive) {
-        final Scalar scalar = OmlWrite.addScalar(vocabulary, name, length, minLength, maxLength, pattern, language, minInclusive, minExclusive, maxInclusive, maxExclusive);
+    public Scalar addScalar(Vocabulary vocabulary, String name) {
+        final Scalar scalar = OmlWrite.addScalar(vocabulary, name);
         return scalar;
     }
             
@@ -727,13 +714,12 @@ public class OmlBuilder {
      * 
      * @param ontology the importing ontology
      * @param kind the kind of import
-     * @param iri the IRI of the imported ontology
-     * @param sep the separator of the imported ontology iri (optional)
+     * @param namespace the namespace of the imported ontology
      * @param prefix the prefix of the imported ontology (optional)
      * @return an import that is added to the importing ontology
      */
-    public Import addImport(Ontology ontology, ImportKind kind, String iri, SeparatorKind sep, String prefix) {
-        final Import import_ = OmlWrite.addImport(ontology, kind, iri, sep, prefix);
+    public Import addImport(Ontology ontology, ImportKind kind, String namespace, String prefix) {
+        final Import import_ = OmlWrite.addImport(ontology, kind, namespace, prefix);
         return import_;
     }
     
@@ -762,12 +748,39 @@ public class OmlBuilder {
      * @param vocabulary the context vocabulary
      * @param subClassifierIri the given iri of sub classifier
      * @param superClassifierIris the given iris of super classifiers
-     * @return a specialization axiom that is added to the vocabulary
+     * @return a classifier equivalence axiom that is added to the vocabulary
      */
     public ClassifierEquivalenceAxiom addClassifierEquivalenceAxiom(Vocabulary vocabulary, String subClassifierIri, List<String> superClassifierIris) {
         final ClassifierEquivalenceAxiom axiom = OmlWrite.addClassifierEquivalenceAxiom(vocabulary, null, Collections.emptyList());
         setCrossReferences(vocabulary, axiom, OmlPackage.Literals.CLASSIFIER_EQUIVALENCE_AXIOM__SUPER_CLASSIFIERS, superClassifierIris);
         setContainmentReference(vocabulary, subClassifierIri, OmlPackage.Literals.CLASSIFIER__OWNED_EQUIVALENCES, axiom);
+        return axiom;
+    }
+
+    // ScalarEquivalenceAxiom
+
+    /**
+     * Creates a scalar equivalence axiom between the sub scalar and super scalar and adds it to the given vocabulary
+     * 
+     * @param vocabulary the context vocabulary
+     * @param subScalarIri the given iri of sub scalar
+     * @param superScalarIri the given iri of super scalar
+     * @param length the length facet
+     * @param minLength the min length facet
+     * @param maxLength the max length facet
+     * @param pattern the string pattern facet
+     * @param language the language facet
+     * @param minInclusive the min inclusive facet
+     * @param minExclusive the min exclusive facet
+     * @param maxInclusive the max inclusive facet
+     * @param maxExclusive the max exclusive facet
+     * @return a scalar equivalence axiom that is added to the vocabulary
+     */
+    public ScalarEquivalenceAxiom addScalarEquivalenceAxiom(Vocabulary vocabulary, String subScalarIri, String superScalarIri, Long length, Long minLength, Long maxLength, String pattern, 
+        String language, Literal minInclusive, Literal minExclusive, Literal maxInclusive, Literal maxExclusive) {
+        final ScalarEquivalenceAxiom axiom = OmlWrite.addScalarEquivalenceAxiom(vocabulary, null, null, length, minLength, maxLength, pattern, language, minInclusive, minExclusive, maxInclusive, maxExclusive);
+        setCrossReference(vocabulary, axiom, OmlPackage.Literals.SCALAR_EQUIVALENCE_AXIOM__SUPER_SCALAR, superScalarIri);
+        setContainmentReference(vocabulary, subScalarIri, OmlPackage.Literals.SCALAR__OWNED_EQUIVALENCES, axiom);
         return axiom;
     }
 
@@ -779,7 +792,7 @@ public class OmlBuilder {
      * @param vocabulary the context vocabulary
      * @param subPropertyIri the iri of the given sub property
      * @param superPropertyIri the iri of the given super property
-     * @return a specialization axiom that is added to the vocabulary
+     * @return a property equivalence axiom that is added to the vocabulary
      */
     public PropertyEquivalenceAxiom addPropertyEquivalenceAxiom(Vocabulary vocabulary, String subPropertyIri, String superPropertyIri) {
         final PropertyEquivalenceAxiom axiom = OmlWrite.addPropertyEquivalenceAxiom(vocabulary, null, null);

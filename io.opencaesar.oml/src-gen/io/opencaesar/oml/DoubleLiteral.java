@@ -25,7 +25,7 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * DoubleLiteral is a literal that represents a 64-bit double precision floating point value
+ * DoubleLiteral is a [=literal=] that represents a 64-bit double precision floating point value.
  * <!-- end-model-doc -->
  *
  * <p>

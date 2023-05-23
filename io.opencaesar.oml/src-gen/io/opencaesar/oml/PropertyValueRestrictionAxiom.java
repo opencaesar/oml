@@ -25,9 +25,9 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * PropertyValueRestrictionAxiom is a property restriction axiom that restricts a property in a given domain to a specific
- * value. The value is either a literal value in the case of a scalar property, a contained (structure) instance value in the case of
- * a structured property, or a referenced (named) instance value in the case of a relation.
+ * PropertyValueRestrictionAxiom is a [=PropertyRestrictionAxiom=] that restricts a [=property=] in a given domain to a specific
+ * value. The value is either a [=literal=] value in the case of a [=ScalarProperty=], a contained [=StructureInstance=] value
+ * in the case of a [=StructuredProperty=], or a reference to a ([=NamedInstance=] value in the case of a [=Relation=].
  * <!-- end-model-doc -->
  *
  * <p>

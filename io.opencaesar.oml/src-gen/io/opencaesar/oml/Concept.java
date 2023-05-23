@@ -25,7 +25,9 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Concept is a concrete entity that classifies a set of concept instances. It can also specialize other concepts and/or aspects.
+ * Concept is an [=entity=] that represents a concept in some domain.
+ * It can only specialize other concepts of [=aspects=]. It can also be specified as a type of [=ConceptInstances=].
+ * Concepts with no common subtypes are considered disjoint in a vocabulary bundle.
  * <!-- end-model-doc -->
  *
  * <p>

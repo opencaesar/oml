@@ -134,5 +134,11 @@ public interface OmlConstants {
      * The prefix of the DC vocabulary
      */
     public static final String DC_PREFIX= "dc";
+    
+    /**
+     * A flag that can be set to <code>Boolean.True</code> in a resource set's loading options to enable 
+     * resolving IRIs to URIs using already loaded OML ontologies when they are not resolvable using catalogs.
+     */
+    public static final String RESOLVE_IRI_USING_RESOURCE_SET = "ResolveIRIsUsingLoadedResources";
 
 }
