@@ -225,17 +225,9 @@ public class QuotedLiteralImpl extends LiteralImpl implements QuotedLiteral {
 			_xifexpression = ("$" + _langTag_1);
 		}
 		else {
-			String _xifexpression_1 = null;
-			Scalar _type = this.getType();
-			boolean _tripleNotEquals_1 = (_type != null);
-			if (_tripleNotEquals_1) {
-				String _abbreviatedIri = this.getType().getAbbreviatedIri();
-				_xifexpression_1 = ("^^" + _abbreviatedIri);
-			}
-			else {
-				_xifexpression_1 = "";
-			}
-			_xifexpression = _xifexpression_1;
+			String _typeIri = this.getTypeIri();
+			String _plus_2 = ("^^<" + _typeIri);
+			_xifexpression = (_plus_2 + ">");
 		}
 		return (_plus_1 + _xifexpression);
 	}
