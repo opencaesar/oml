@@ -21,6 +21,7 @@ package io.opencaesar.oml.impl;
 import io.opencaesar.oml.Member;
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.Ontology;
+import io.opencaesar.oml.SeparatorKind;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -29,6 +30,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
@@ -114,15 +116,68 @@ public abstract class MemberImpl extends IdentifiedElementImpl implements Member
 	 * @generated
 	 */
 	@Override
+	public Member getRef() {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isRef() {
+		Member _ref = this.getRef();
+		return (_ref != null);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Member resolve() {
+		boolean _isRef = this.isRef();
+		if (_isRef) {
+			return this.getRef();
+		}
+		return this;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public String getIri() {
-		final Ontology ontology = this.getOntology();
-		String _xifexpression = null;
+		final Member m = this.resolve();
+		boolean _eIsProxy = m.eIsProxy();
+		if (_eIsProxy) {
+			return ((InternalEObject) m).eProxyURI().toString();
+		}
+		final Ontology ontology = m.getOntology();
+		Object _xifexpression = null;
 		if ((ontology != null)) {
 			_xifexpression = ontology.getNamespace();
 		}
-		final String namespace = _xifexpression;
-		String _name = this.getName();
-		return (namespace + _name);
+		else {
+			_xifexpression = SeparatorKind.HASH;
+		}
+		final Object namespace = ((Object)_xifexpression);
+		String _xifexpression_1 = null;
+		String _name = m.getName();
+		boolean _tripleNotEquals = (_name != null);
+		if (_tripleNotEquals) {
+			_xifexpression_1 = m.getName();
+		}
+		else {
+			_xifexpression_1 = "";
+		}
+		return (namespace + _xifexpression_1);
 	}
 
 	/**
@@ -132,18 +187,31 @@ public abstract class MemberImpl extends IdentifiedElementImpl implements Member
 	 */
 	@Override
 	public String getAbbreviatedIri() {
-		final Ontology ontology = this.getOntology();
+		final Member m = this.resolve();
+		boolean _eIsProxy = m.eIsProxy();
+		if (_eIsProxy) {
+			return ((InternalEObject) m).eProxyURI().toString();
+		}
+		final Ontology ontology = m.getOntology();
 		String _xifexpression = null;
 		if ((ontology != null)) {
 			String _prefix = ontology.getPrefix();
 			_xifexpression = (_prefix + ":");
 		}
 		else {
-			_xifexpression = "";
+			_xifexpression = ":";
 		}
 		final String prefix = _xifexpression;
-		String _name = this.getName();
-		return (prefix + _name);
+		String _xifexpression_1 = null;
+		String _name = m.getName();
+		boolean _tripleNotEquals = (_name != null);
+		if (_tripleNotEquals) {
+			_xifexpression_1 = m.getName();
+		}
+		else {
+			_xifexpression_1 = "";
+		}
+		return (prefix + _xifexpression_1);
 	}
 
 	/**
@@ -212,6 +280,12 @@ public abstract class MemberImpl extends IdentifiedElementImpl implements Member
 	@Override
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
+			case OmlPackage.MEMBER___GET_REF:
+				return getRef();
+			case OmlPackage.MEMBER___IS_REF:
+				return isRef();
+			case OmlPackage.MEMBER___RESOLVE:
+				return resolve();
 			case OmlPackage.MEMBER___GET_IRI:
 				return getIri();
 			case OmlPackage.MEMBER___GET_ABBREVIATED_IRI:

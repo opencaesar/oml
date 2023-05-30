@@ -18,7 +18,6 @@
  */
 package io.opencaesar.oml;
 
-import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -26,15 +25,17 @@ import org.eclipse.emf.common.util.EList;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Concept is a concrete entity that classifies a (possibly enumerated) set of concept instances.
- * It can also specialize other concepts and/or aspects.
+ * Concept is an [=entity=] that represents a concept in some domain.
+ * It can only specialize other concepts of [=aspects=]. It can also be specified as a type of [=ConceptInstances=].
+ * Concepts with no common subtypes are considered disjoint in a vocabulary bundle.
  * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link io.opencaesar.oml.Concept#getEnumeratedInstances <em>Enumerated Instances</em>}</li>
+ *   <li>{@link io.opencaesar.oml.Concept#getRef <em>Ref</em>}</li>
+ *   <li>{@link io.opencaesar.oml.Concept#getOwnedEnumeration <em>Owned Enumeration</em>}</li>
  * </ul>
  *
  * @see io.opencaesar.oml.OmlPackage#getConcept()
@@ -43,18 +44,55 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface Concept extends Entity {
 	/**
-	 * Returns the value of the '<em><b>Enumerated Instances</b></em>' reference list.
-	 * The list contents are of type {@link io.opencaesar.oml.ConceptInstance}.
+	 * Returns the value of the '<em><b>Ref</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The set of enumerated instances of this concept
+	 * A ref to another concept
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Enumerated Instances</em>' reference list.
-	 * @see io.opencaesar.oml.OmlPackage#getConcept_EnumeratedInstances()
+	 * @return the value of the '<em>Ref</em>' reference.
+	 * @see #setRef(Concept)
+	 * @see io.opencaesar.oml.OmlPackage#getConcept_Ref()
 	 * @model
 	 * @generated
 	 */
-	EList<ConceptInstance> getEnumeratedInstances();
+	Concept getRef();
+
+	/**
+	 * Sets the value of the '{@link io.opencaesar.oml.Concept#getRef <em>Ref</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Ref</em>' reference.
+	 * @see #getRef()
+	 * @generated
+	 */
+	void setRef(Concept value);
+
+	/**
+	 * Returns the value of the '<em><b>Owned Enumeration</b></em>' containment reference.
+	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.InstanceEnumerationAxiom#getOwningConcept <em>Owning Concept</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * An enumeration of instances of this concept
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Owned Enumeration</em>' containment reference.
+	 * @see #setOwnedEnumeration(InstanceEnumerationAxiom)
+	 * @see io.opencaesar.oml.OmlPackage#getConcept_OwnedEnumeration()
+	 * @see io.opencaesar.oml.InstanceEnumerationAxiom#getOwningConcept
+	 * @model opposite="owningConcept" containment="true"
+	 * @generated
+	 */
+	InstanceEnumerationAxiom getOwnedEnumeration();
+
+	/**
+	 * Sets the value of the '{@link io.opencaesar.oml.Concept#getOwnedEnumeration <em>Owned Enumeration</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Owned Enumeration</em>' containment reference.
+	 * @see #getOwnedEnumeration()
+	 * @generated
+	 */
+	void setOwnedEnumeration(InstanceEnumerationAxiom value);
 
 } // Concept

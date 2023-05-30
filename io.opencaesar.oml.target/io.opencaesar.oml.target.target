@@ -9,25 +9,23 @@
 			<unit id="org.eclipse.draw2d.feature.group" version="0.0.0"/>
 			<unit id="org.eclipse.emf.sdk.feature.group" version="0.0.0"/>
 			<unit id="org.eclipse.emf.ecore.xcore.sdk.feature.group" version="0.0.0"/>
-			<repository location="https://download.eclipse.org/releases/2022-09"/>
-		</location>
-		<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 			<unit id="org.eclipse.xtext.sdk.feature.group" version="0.0.0"/>
-			<repository location="https://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.28.0/"/>
+			<repository location="https://download.eclipse.org/releases/2023-03"/>
 		</location>
 		<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
             <unit id="org.junit" version="0.0.0"/>
             <unit id="org.junit.jupiter.api" version="0.0.0"/>
-			<unit id="org.apache.xml.resolver" version="0.0.0"/>
 			<unit id="com.google.gson" version="0.0.0"/>
-			<repository location="https://download.eclipse.org/tools/orbit/downloads/2022-09"/>
+			<unit id="org.apache.xml.resolver" version="0.0.0"/>
+			<unit id="javax.xml" version="0.0.0"/>
+			<repository location="https://download.eclipse.org/tools/orbit/downloads/2023-03"/>
 		</location>
 		<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 			<unit id="org.eclipse.emfcloud.emfjson-jackson" version="0.0.0"/>
 			<unit id="com.fasterxml.jackson.core.jackson-annotations" version="0.0.0"/>
 			<unit id="com.fasterxml.jackson.core.jackson-core" version="0.0.0"/>
 			<unit id="com.fasterxml.jackson.core.jackson-databind" version="0.0.0"/>
-			<repository location="https://download.eclipse.org/emfcloud/emfjson-jackson/p2/releases/2.1.0/"/>
+			<repository location="https://download.eclipse.org/emfcloud/emfjson-jackson/p2/releases/2.2.0/"/>
 		</location>
 	</locations>
 </target>

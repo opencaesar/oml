@@ -19,18 +19,24 @@
 package io.opencaesar.oml.impl;
 
 import io.opencaesar.oml.Import;
+import io.opencaesar.oml.ImportKind;
 import io.opencaesar.oml.OmlPackage;
+import io.opencaesar.oml.Ontology;
 import io.opencaesar.oml.SeparatorKind;
 
 import java.lang.reflect.InvocationTargetException;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
+import org.eclipse.emf.ecore.util.EcoreUtil;
 
 /**
  * <!-- begin-user-doc -->
@@ -40,13 +46,35 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link io.opencaesar.oml.impl.ImportImpl#getKind <em>Kind</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.ImportImpl#getNamespace <em>Namespace</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.ImportImpl#getPrefix <em>Prefix</em>}</li>
+ *   <li>{@link io.opencaesar.oml.impl.ImportImpl#getOwningOntology <em>Owning Ontology</em>}</li>
  * </ul>
  *
  * @generated
  */
-public abstract class ImportImpl extends AnnotatedElementImpl implements Import {
+public class ImportImpl extends ElementImpl implements Import {
+	/**
+	 * The default value of the '{@link #getKind() <em>Kind</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getKind()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final ImportKind KIND_EDEFAULT = ImportKind.EXTENSION;
+
+	/**
+	 * The cached value of the '{@link #getKind() <em>Kind</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getKind()
+	 * @generated
+	 * @ordered
+	 */
+	protected ImportKind kind = KIND_EDEFAULT;
+
 	/**
 	 * The default value of the '{@link #getNamespace() <em>Namespace</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -112,6 +140,29 @@ public abstract class ImportImpl extends AnnotatedElementImpl implements Import 
 	 * @generated
 	 */
 	@Override
+	public ImportKind getKind() {
+		return kind;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setKind(ImportKind newKind) {
+		ImportKind oldKind = kind;
+		kind = newKind == null ? KIND_EDEFAULT : newKind;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.IMPORT__KIND, oldKind, kind));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public String getNamespace() {
 		return namespace;
 	}
@@ -150,6 +201,59 @@ public abstract class ImportImpl extends AnnotatedElementImpl implements Import 
 		prefix = newPrefix;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.IMPORT__PREFIX, oldPrefix, prefix));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Ontology getOwningOntology() {
+		if (eContainerFeatureID() != OmlPackage.IMPORT__OWNING_ONTOLOGY) return null;
+		return (Ontology)eContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Ontology basicGetOwningOntology() {
+		if (eContainerFeatureID() != OmlPackage.IMPORT__OWNING_ONTOLOGY) return null;
+		return (Ontology)eInternalContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetOwningOntology(Ontology newOwningOntology, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newOwningOntology, OmlPackage.IMPORT__OWNING_ONTOLOGY, msgs);
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setOwningOntology(Ontology newOwningOntology) {
+		if (newOwningOntology != eInternalContainer() || (eContainerFeatureID() != OmlPackage.IMPORT__OWNING_ONTOLOGY && newOwningOntology != null)) {
+			if (EcoreUtil.isAncestor(this, newOwningOntology))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newOwningOntology != null)
+				msgs = ((InternalEObject)newOwningOntology).eInverseAdd(this, OmlPackage.ONTOLOGY__OWNED_IMPORTS, Ontology.class, msgs);
+			msgs = basicSetOwningOntology(newOwningOntology, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.IMPORT__OWNING_ONTOLOGY, newOwningOntology, newOwningOntology));
 	}
 
 	/**
@@ -206,12 +310,61 @@ public abstract class ImportImpl extends AnnotatedElementImpl implements Import 
 	 * @generated
 	 */
 	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case OmlPackage.IMPORT__OWNING_ONTOLOGY:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetOwningOntology((Ontology)otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case OmlPackage.IMPORT__OWNING_ONTOLOGY:
+				return basicSetOwningOntology(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID()) {
+			case OmlPackage.IMPORT__OWNING_ONTOLOGY:
+				return eInternalContainer().eInverseRemove(this, OmlPackage.ONTOLOGY__OWNED_IMPORTS, Ontology.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case OmlPackage.IMPORT__KIND:
+				return getKind();
 			case OmlPackage.IMPORT__NAMESPACE:
 				return getNamespace();
 			case OmlPackage.IMPORT__PREFIX:
 				return getPrefix();
+			case OmlPackage.IMPORT__OWNING_ONTOLOGY:
+				if (resolve) return getOwningOntology();
+				return basicGetOwningOntology();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -224,11 +377,17 @@ public abstract class ImportImpl extends AnnotatedElementImpl implements Import 
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case OmlPackage.IMPORT__KIND:
+				setKind((ImportKind)newValue);
+				return;
 			case OmlPackage.IMPORT__NAMESPACE:
 				setNamespace((String)newValue);
 				return;
 			case OmlPackage.IMPORT__PREFIX:
 				setPrefix((String)newValue);
+				return;
+			case OmlPackage.IMPORT__OWNING_ONTOLOGY:
+				setOwningOntology((Ontology)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -242,11 +401,17 @@ public abstract class ImportImpl extends AnnotatedElementImpl implements Import 
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case OmlPackage.IMPORT__KIND:
+				setKind(KIND_EDEFAULT);
+				return;
 			case OmlPackage.IMPORT__NAMESPACE:
 				setNamespace(NAMESPACE_EDEFAULT);
 				return;
 			case OmlPackage.IMPORT__PREFIX:
 				setPrefix(PREFIX_EDEFAULT);
+				return;
+			case OmlPackage.IMPORT__OWNING_ONTOLOGY:
+				setOwningOntology((Ontology)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -260,10 +425,14 @@ public abstract class ImportImpl extends AnnotatedElementImpl implements Import 
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case OmlPackage.IMPORT__KIND:
+				return kind != KIND_EDEFAULT;
 			case OmlPackage.IMPORT__NAMESPACE:
 				return NAMESPACE_EDEFAULT == null ? namespace != null : !NAMESPACE_EDEFAULT.equals(namespace);
 			case OmlPackage.IMPORT__PREFIX:
 				return PREFIX_EDEFAULT == null ? prefix != null : !PREFIX_EDEFAULT.equals(prefix);
+			case OmlPackage.IMPORT__OWNING_ONTOLOGY:
+				return basicGetOwningOntology() != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -294,7 +463,9 @@ public abstract class ImportImpl extends AnnotatedElementImpl implements Import 
 		if (eIsProxy()) return super.toString();
 
 		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (namespace: ");
+		result.append(" (kind: ");
+		result.append(kind);
+		result.append(", namespace: ");
 		result.append(namespace);
 		result.append(", prefix: ");
 		result.append(prefix);

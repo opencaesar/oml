@@ -18,19 +18,27 @@
  */
 package io.opencaesar.oml.impl;
 
+import io.opencaesar.oml.Import;
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.Ontology;
 import io.opencaesar.oml.SeparatorKind;
 
 import java.lang.reflect.InvocationTargetException;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -42,6 +50,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <ul>
  *   <li>{@link io.opencaesar.oml.impl.OntologyImpl#getNamespace <em>Namespace</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.OntologyImpl#getPrefix <em>Prefix</em>}</li>
+ *   <li>{@link io.opencaesar.oml.impl.OntologyImpl#getOwnedImports <em>Owned Imports</em>}</li>
  * </ul>
  *
  * @generated
@@ -86,6 +95,16 @@ public abstract class OntologyImpl extends IdentifiedElementImpl implements Onto
 	 * @ordered
 	 */
 	protected String prefix = PREFIX_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getOwnedImports() <em>Owned Imports</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOwnedImports()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Import> ownedImports;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -158,6 +177,19 @@ public abstract class OntologyImpl extends IdentifiedElementImpl implements Onto
 	 * @generated
 	 */
 	@Override
+	public EList<Import> getOwnedImports() {
+		if (ownedImports == null) {
+			ownedImports = new EObjectContainmentWithInverseEList<Import>(Import.class, this, OmlPackage.ONTOLOGY__OWNED_IMPORTS, OmlPackage.IMPORT__OWNING_ONTOLOGY);
+		}
+		return ownedImports;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public String getIri() {
 		String _namespace = this.getNamespace();
 		boolean _tripleEquals = (_namespace == null);
@@ -205,6 +237,35 @@ public abstract class OntologyImpl extends IdentifiedElementImpl implements Onto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case OmlPackage.ONTOLOGY__OWNED_IMPORTS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedImports()).basicAdd(otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case OmlPackage.ONTOLOGY__OWNED_IMPORTS:
+				return ((InternalEList<?>)getOwnedImports()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -212,6 +273,8 @@ public abstract class OntologyImpl extends IdentifiedElementImpl implements Onto
 				return getNamespace();
 			case OmlPackage.ONTOLOGY__PREFIX:
 				return getPrefix();
+			case OmlPackage.ONTOLOGY__OWNED_IMPORTS:
+				return getOwnedImports();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -221,6 +284,7 @@ public abstract class OntologyImpl extends IdentifiedElementImpl implements Onto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -229,6 +293,10 @@ public abstract class OntologyImpl extends IdentifiedElementImpl implements Onto
 				return;
 			case OmlPackage.ONTOLOGY__PREFIX:
 				setPrefix((String)newValue);
+				return;
+			case OmlPackage.ONTOLOGY__OWNED_IMPORTS:
+				getOwnedImports().clear();
+				getOwnedImports().addAll((Collection<? extends Import>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -248,6 +316,9 @@ public abstract class OntologyImpl extends IdentifiedElementImpl implements Onto
 			case OmlPackage.ONTOLOGY__PREFIX:
 				setPrefix(PREFIX_EDEFAULT);
 				return;
+			case OmlPackage.ONTOLOGY__OWNED_IMPORTS:
+				getOwnedImports().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -264,6 +335,8 @@ public abstract class OntologyImpl extends IdentifiedElementImpl implements Onto
 				return NAMESPACE_EDEFAULT == null ? namespace != null : !NAMESPACE_EDEFAULT.equals(namespace);
 			case OmlPackage.ONTOLOGY__PREFIX:
 				return PREFIX_EDEFAULT == null ? prefix != null : !PREFIX_EDEFAULT.equals(prefix);
+			case OmlPackage.ONTOLOGY__OWNED_IMPORTS:
+				return ownedImports != null && !ownedImports.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

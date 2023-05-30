@@ -19,10 +19,10 @@
 package io.opencaesar.oml.impl;
 
 import io.opencaesar.oml.OmlPackage;
+import io.opencaesar.oml.PropertyValueAssertion;
+import io.opencaesar.oml.PropertyValueRestrictionAxiom;
 import io.opencaesar.oml.Structure;
 import io.opencaesar.oml.StructureInstance;
-import io.opencaesar.oml.StructuredPropertyValueAssertion;
-import io.opencaesar.oml.StructuredPropertyValueRestrictionAxiom;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -125,9 +125,9 @@ public class StructureInstanceImpl extends InstanceImpl implements StructureInst
 	 * @generated
 	 */
 	@Override
-	public StructuredPropertyValueRestrictionAxiom getOwningAxiom() {
+	public PropertyValueRestrictionAxiom getOwningAxiom() {
 		if (eContainerFeatureID() != OmlPackage.STRUCTURE_INSTANCE__OWNING_AXIOM) return null;
-		return (StructuredPropertyValueRestrictionAxiom)eContainer();
+		return (PropertyValueRestrictionAxiom)eContainer();
 	}
 
 	/**
@@ -135,9 +135,9 @@ public class StructureInstanceImpl extends InstanceImpl implements StructureInst
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public StructuredPropertyValueRestrictionAxiom basicGetOwningAxiom() {
+	public PropertyValueRestrictionAxiom basicGetOwningAxiom() {
 		if (eContainerFeatureID() != OmlPackage.STRUCTURE_INSTANCE__OWNING_AXIOM) return null;
-		return (StructuredPropertyValueRestrictionAxiom)eInternalContainer();
+		return (PropertyValueRestrictionAxiom)eInternalContainer();
 	}
 
 	/**
@@ -145,7 +145,7 @@ public class StructureInstanceImpl extends InstanceImpl implements StructureInst
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetOwningAxiom(StructuredPropertyValueRestrictionAxiom newOwningAxiom, NotificationChain msgs) {
+	public NotificationChain basicSetOwningAxiom(PropertyValueRestrictionAxiom newOwningAxiom, NotificationChain msgs) {
 		msgs = eBasicSetContainer((InternalEObject)newOwningAxiom, OmlPackage.STRUCTURE_INSTANCE__OWNING_AXIOM, msgs);
 		return msgs;
 	}
@@ -156,7 +156,7 @@ public class StructureInstanceImpl extends InstanceImpl implements StructureInst
 	 * @generated
 	 */
 	@Override
-	public void setOwningAxiom(StructuredPropertyValueRestrictionAxiom newOwningAxiom) {
+	public void setOwningAxiom(PropertyValueRestrictionAxiom newOwningAxiom) {
 		if (newOwningAxiom != eInternalContainer() || (eContainerFeatureID() != OmlPackage.STRUCTURE_INSTANCE__OWNING_AXIOM && newOwningAxiom != null)) {
 			if (EcoreUtil.isAncestor(this, newOwningAxiom))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
@@ -164,7 +164,7 @@ public class StructureInstanceImpl extends InstanceImpl implements StructureInst
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwningAxiom != null)
-				msgs = ((InternalEObject)newOwningAxiom).eInverseAdd(this, OmlPackage.STRUCTURED_PROPERTY_VALUE_RESTRICTION_AXIOM__VALUE, StructuredPropertyValueRestrictionAxiom.class, msgs);
+				msgs = ((InternalEObject)newOwningAxiom).eInverseAdd(this, OmlPackage.PROPERTY_VALUE_RESTRICTION_AXIOM__STRUCTURE_INSTANCE_VALUE, PropertyValueRestrictionAxiom.class, msgs);
 			msgs = basicSetOwningAxiom(newOwningAxiom, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
@@ -178,9 +178,9 @@ public class StructureInstanceImpl extends InstanceImpl implements StructureInst
 	 * @generated
 	 */
 	@Override
-	public StructuredPropertyValueAssertion getOwningAssertion() {
+	public PropertyValueAssertion getOwningAssertion() {
 		if (eContainerFeatureID() != OmlPackage.STRUCTURE_INSTANCE__OWNING_ASSERTION) return null;
-		return (StructuredPropertyValueAssertion)eContainer();
+		return (PropertyValueAssertion)eContainer();
 	}
 
 	/**
@@ -188,9 +188,9 @@ public class StructureInstanceImpl extends InstanceImpl implements StructureInst
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public StructuredPropertyValueAssertion basicGetOwningAssertion() {
+	public PropertyValueAssertion basicGetOwningAssertion() {
 		if (eContainerFeatureID() != OmlPackage.STRUCTURE_INSTANCE__OWNING_ASSERTION) return null;
-		return (StructuredPropertyValueAssertion)eInternalContainer();
+		return (PropertyValueAssertion)eInternalContainer();
 	}
 
 	/**
@@ -198,7 +198,7 @@ public class StructureInstanceImpl extends InstanceImpl implements StructureInst
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetOwningAssertion(StructuredPropertyValueAssertion newOwningAssertion, NotificationChain msgs) {
+	public NotificationChain basicSetOwningAssertion(PropertyValueAssertion newOwningAssertion, NotificationChain msgs) {
 		msgs = eBasicSetContainer((InternalEObject)newOwningAssertion, OmlPackage.STRUCTURE_INSTANCE__OWNING_ASSERTION, msgs);
 		return msgs;
 	}
@@ -209,7 +209,7 @@ public class StructureInstanceImpl extends InstanceImpl implements StructureInst
 	 * @generated
 	 */
 	@Override
-	public void setOwningAssertion(StructuredPropertyValueAssertion newOwningAssertion) {
+	public void setOwningAssertion(PropertyValueAssertion newOwningAssertion) {
 		if (newOwningAssertion != eInternalContainer() || (eContainerFeatureID() != OmlPackage.STRUCTURE_INSTANCE__OWNING_ASSERTION && newOwningAssertion != null)) {
 			if (EcoreUtil.isAncestor(this, newOwningAssertion))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
@@ -217,7 +217,7 @@ public class StructureInstanceImpl extends InstanceImpl implements StructureInst
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwningAssertion != null)
-				msgs = ((InternalEObject)newOwningAssertion).eInverseAdd(this, OmlPackage.STRUCTURED_PROPERTY_VALUE_ASSERTION__VALUE, StructuredPropertyValueAssertion.class, msgs);
+				msgs = ((InternalEObject)newOwningAssertion).eInverseAdd(this, OmlPackage.PROPERTY_VALUE_ASSERTION__STRUCTURE_INSTANCE_VALUE, PropertyValueAssertion.class, msgs);
 			msgs = basicSetOwningAssertion(newOwningAssertion, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
@@ -236,11 +236,11 @@ public class StructureInstanceImpl extends InstanceImpl implements StructureInst
 			case OmlPackage.STRUCTURE_INSTANCE__OWNING_AXIOM:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetOwningAxiom((StructuredPropertyValueRestrictionAxiom)otherEnd, msgs);
+				return basicSetOwningAxiom((PropertyValueRestrictionAxiom)otherEnd, msgs);
 			case OmlPackage.STRUCTURE_INSTANCE__OWNING_ASSERTION:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetOwningAssertion((StructuredPropertyValueAssertion)otherEnd, msgs);
+				return basicSetOwningAssertion((PropertyValueAssertion)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -270,9 +270,9 @@ public class StructureInstanceImpl extends InstanceImpl implements StructureInst
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
 			case OmlPackage.STRUCTURE_INSTANCE__OWNING_AXIOM:
-				return eInternalContainer().eInverseRemove(this, OmlPackage.STRUCTURED_PROPERTY_VALUE_RESTRICTION_AXIOM__VALUE, StructuredPropertyValueRestrictionAxiom.class, msgs);
+				return eInternalContainer().eInverseRemove(this, OmlPackage.PROPERTY_VALUE_RESTRICTION_AXIOM__STRUCTURE_INSTANCE_VALUE, PropertyValueRestrictionAxiom.class, msgs);
 			case OmlPackage.STRUCTURE_INSTANCE__OWNING_ASSERTION:
-				return eInternalContainer().eInverseRemove(this, OmlPackage.STRUCTURED_PROPERTY_VALUE_ASSERTION__VALUE, StructuredPropertyValueAssertion.class, msgs);
+				return eInternalContainer().eInverseRemove(this, OmlPackage.PROPERTY_VALUE_ASSERTION__STRUCTURE_INSTANCE_VALUE, PropertyValueAssertion.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -310,10 +310,10 @@ public class StructureInstanceImpl extends InstanceImpl implements StructureInst
 				setType((Structure)newValue);
 				return;
 			case OmlPackage.STRUCTURE_INSTANCE__OWNING_AXIOM:
-				setOwningAxiom((StructuredPropertyValueRestrictionAxiom)newValue);
+				setOwningAxiom((PropertyValueRestrictionAxiom)newValue);
 				return;
 			case OmlPackage.STRUCTURE_INSTANCE__OWNING_ASSERTION:
-				setOwningAssertion((StructuredPropertyValueAssertion)newValue);
+				setOwningAssertion((PropertyValueAssertion)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -331,10 +331,10 @@ public class StructureInstanceImpl extends InstanceImpl implements StructureInst
 				setType((Structure)null);
 				return;
 			case OmlPackage.STRUCTURE_INSTANCE__OWNING_AXIOM:
-				setOwningAxiom((StructuredPropertyValueRestrictionAxiom)null);
+				setOwningAxiom((PropertyValueRestrictionAxiom)null);
 				return;
 			case OmlPackage.STRUCTURE_INSTANCE__OWNING_ASSERTION:
-				setOwningAssertion((StructuredPropertyValueAssertion)null);
+				setOwningAssertion((PropertyValueAssertion)null);
 				return;
 		}
 		super.eUnset(featureID);

@@ -64,8 +64,8 @@ public class RelationEntityItemProvider extends EntityItemProvider {
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addSourcePropertyDescriptor(object);
-			addTargetPropertyDescriptor(object);
+			addSourcesPropertyDescriptor(object);
+			addTargetsPropertyDescriptor(object);
 			addFunctionalPropertyDescriptor(object);
 			addInverseFunctionalPropertyDescriptor(object);
 			addSymmetricPropertyDescriptor(object);
@@ -73,24 +73,25 @@ public class RelationEntityItemProvider extends EntityItemProvider {
 			addReflexivePropertyDescriptor(object);
 			addIrreflexivePropertyDescriptor(object);
 			addTransitivePropertyDescriptor(object);
+			addRefPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Source feature.
+	 * This adds a property descriptor for the Sources feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addSourcePropertyDescriptor(Object object) {
+	protected void addSourcesPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_RelationEntity_source_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_RelationEntity_source_feature", "_UI_RelationEntity_type"),
-				 OmlPackage.Literals.RELATION_ENTITY__SOURCE,
+				 getString("_UI_RelationBase_sources_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_RelationBase_sources_feature", "_UI_RelationBase_type"),
+				 OmlPackage.Literals.RELATION_BASE__SOURCES,
 				 true,
 				 false,
 				 true,
@@ -100,19 +101,19 @@ public class RelationEntityItemProvider extends EntityItemProvider {
 	}
 
 	/**
-	 * This adds a property descriptor for the Target feature.
+	 * This adds a property descriptor for the Targets feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addTargetPropertyDescriptor(Object object) {
+	protected void addTargetsPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_RelationEntity_target_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_RelationEntity_target_feature", "_UI_RelationEntity_type"),
-				 OmlPackage.Literals.RELATION_ENTITY__TARGET,
+				 getString("_UI_RelationBase_targets_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_RelationBase_targets_feature", "_UI_RelationBase_type"),
+				 OmlPackage.Literals.RELATION_BASE__TARGETS,
 				 true,
 				 false,
 				 true,
@@ -132,9 +133,9 @@ public class RelationEntityItemProvider extends EntityItemProvider {
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_RelationEntity_functional_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_RelationEntity_functional_feature", "_UI_RelationEntity_type"),
-				 OmlPackage.Literals.RELATION_ENTITY__FUNCTIONAL,
+				 getString("_UI_RelationBase_functional_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_RelationBase_functional_feature", "_UI_RelationBase_type"),
+				 OmlPackage.Literals.RELATION_BASE__FUNCTIONAL,
 				 true,
 				 false,
 				 false,
@@ -154,9 +155,9 @@ public class RelationEntityItemProvider extends EntityItemProvider {
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_RelationEntity_inverseFunctional_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_RelationEntity_inverseFunctional_feature", "_UI_RelationEntity_type"),
-				 OmlPackage.Literals.RELATION_ENTITY__INVERSE_FUNCTIONAL,
+				 getString("_UI_RelationBase_inverseFunctional_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_RelationBase_inverseFunctional_feature", "_UI_RelationBase_type"),
+				 OmlPackage.Literals.RELATION_BASE__INVERSE_FUNCTIONAL,
 				 true,
 				 false,
 				 false,
@@ -176,9 +177,9 @@ public class RelationEntityItemProvider extends EntityItemProvider {
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_RelationEntity_symmetric_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_RelationEntity_symmetric_feature", "_UI_RelationEntity_type"),
-				 OmlPackage.Literals.RELATION_ENTITY__SYMMETRIC,
+				 getString("_UI_RelationBase_symmetric_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_RelationBase_symmetric_feature", "_UI_RelationBase_type"),
+				 OmlPackage.Literals.RELATION_BASE__SYMMETRIC,
 				 true,
 				 false,
 				 false,
@@ -198,9 +199,9 @@ public class RelationEntityItemProvider extends EntityItemProvider {
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_RelationEntity_asymmetric_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_RelationEntity_asymmetric_feature", "_UI_RelationEntity_type"),
-				 OmlPackage.Literals.RELATION_ENTITY__ASYMMETRIC,
+				 getString("_UI_RelationBase_asymmetric_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_RelationBase_asymmetric_feature", "_UI_RelationBase_type"),
+				 OmlPackage.Literals.RELATION_BASE__ASYMMETRIC,
 				 true,
 				 false,
 				 false,
@@ -220,9 +221,9 @@ public class RelationEntityItemProvider extends EntityItemProvider {
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_RelationEntity_reflexive_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_RelationEntity_reflexive_feature", "_UI_RelationEntity_type"),
-				 OmlPackage.Literals.RELATION_ENTITY__REFLEXIVE,
+				 getString("_UI_RelationBase_reflexive_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_RelationBase_reflexive_feature", "_UI_RelationBase_type"),
+				 OmlPackage.Literals.RELATION_BASE__REFLEXIVE,
 				 true,
 				 false,
 				 false,
@@ -242,9 +243,9 @@ public class RelationEntityItemProvider extends EntityItemProvider {
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_RelationEntity_irreflexive_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_RelationEntity_irreflexive_feature", "_UI_RelationEntity_type"),
-				 OmlPackage.Literals.RELATION_ENTITY__IRREFLEXIVE,
+				 getString("_UI_RelationBase_irreflexive_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_RelationBase_irreflexive_feature", "_UI_RelationBase_type"),
+				 OmlPackage.Literals.RELATION_BASE__IRREFLEXIVE,
 				 true,
 				 false,
 				 false,
@@ -264,13 +265,35 @@ public class RelationEntityItemProvider extends EntityItemProvider {
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_RelationEntity_transitive_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_RelationEntity_transitive_feature", "_UI_RelationEntity_type"),
-				 OmlPackage.Literals.RELATION_ENTITY__TRANSITIVE,
+				 getString("_UI_RelationBase_transitive_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_RelationBase_transitive_feature", "_UI_RelationBase_type"),
+				 OmlPackage.Literals.RELATION_BASE__TRANSITIVE,
 				 true,
 				 false,
 				 false,
 				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Ref feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addRefPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_RelationEntity_ref_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_RelationEntity_ref_feature", "_UI_RelationEntity_type"),
+				 OmlPackage.Literals.RELATION_ENTITY__REF,
+				 true,
+				 false,
+				 true,
+				 null,
 				 null,
 				 null));
 	}
@@ -287,8 +310,8 @@ public class RelationEntityItemProvider extends EntityItemProvider {
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
+			childrenFeatures.add(OmlPackage.Literals.RELATION_BASE__REVERSE_RELATION);
 			childrenFeatures.add(OmlPackage.Literals.RELATION_ENTITY__FORWARD_RELATION);
-			childrenFeatures.add(OmlPackage.Literals.RELATION_ENTITY__REVERSE_RELATION);
 		}
 		return childrenFeatures;
 	}
@@ -353,8 +376,8 @@ public class RelationEntityItemProvider extends EntityItemProvider {
 			case OmlPackage.RELATION_ENTITY__TRANSITIVE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
-			case OmlPackage.RELATION_ENTITY__FORWARD_RELATION:
 			case OmlPackage.RELATION_ENTITY__REVERSE_RELATION:
+			case OmlPackage.RELATION_ENTITY__FORWARD_RELATION:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -374,13 +397,13 @@ public class RelationEntityItemProvider extends EntityItemProvider {
 
 		newChildDescriptors.add
 			(createChildParameter
-				(OmlPackage.Literals.RELATION_ENTITY__FORWARD_RELATION,
-				 OmlFactory.eINSTANCE.createForwardRelation()));
+				(OmlPackage.Literals.RELATION_BASE__REVERSE_RELATION,
+				 OmlFactory.eINSTANCE.createReverseRelation()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(OmlPackage.Literals.RELATION_ENTITY__REVERSE_RELATION,
-				 OmlFactory.eINSTANCE.createReverseRelation()));
+				(OmlPackage.Literals.RELATION_ENTITY__FORWARD_RELATION,
+				 OmlFactory.eINSTANCE.createForwardRelation()));
 	}
 
 }

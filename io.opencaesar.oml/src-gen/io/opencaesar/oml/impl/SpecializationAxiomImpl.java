@@ -18,13 +18,18 @@
  */
 package io.opencaesar.oml.impl;
 
+import io.opencaesar.oml.Member;
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.SpecializableTerm;
-import io.opencaesar.oml.SpecializableTermReference;
 import io.opencaesar.oml.SpecializationAxiom;
+import io.opencaesar.oml.Term;
+
+import java.lang.reflect.InvocationTargetException;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -41,23 +46,22 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link io.opencaesar.oml.impl.SpecializationAxiomImpl#getSpecializedTerm <em>Specialized Term</em>}</li>
+ *   <li>{@link io.opencaesar.oml.impl.SpecializationAxiomImpl#getSuperTerm <em>Super Term</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.SpecializationAxiomImpl#getOwningTerm <em>Owning Term</em>}</li>
- *   <li>{@link io.opencaesar.oml.impl.SpecializationAxiomImpl#getOwningReference <em>Owning Reference</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class SpecializationAxiomImpl extends AxiomImpl implements SpecializationAxiom {
 	/**
-	 * The cached value of the '{@link #getSpecializedTerm() <em>Specialized Term</em>}' reference.
+	 * The cached value of the '{@link #getSuperTerm() <em>Super Term</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getSpecializedTerm()
+	 * @see #getSuperTerm()
 	 * @generated
 	 * @ordered
 	 */
-	protected SpecializableTerm specializedTerm;
+	protected Term superTerm;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -84,16 +88,16 @@ public class SpecializationAxiomImpl extends AxiomImpl implements Specialization
 	 * @generated
 	 */
 	@Override
-	public SpecializableTerm getSpecializedTerm() {
-		if (specializedTerm != null && specializedTerm.eIsProxy()) {
-			InternalEObject oldSpecializedTerm = (InternalEObject)specializedTerm;
-			specializedTerm = (SpecializableTerm)eResolveProxy(oldSpecializedTerm);
-			if (specializedTerm != oldSpecializedTerm) {
+	public Term getSuperTerm() {
+		if (superTerm != null && superTerm.eIsProxy()) {
+			InternalEObject oldSuperTerm = (InternalEObject)superTerm;
+			superTerm = (Term)eResolveProxy(oldSuperTerm);
+			if (superTerm != oldSuperTerm) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, OmlPackage.SPECIALIZATION_AXIOM__SPECIALIZED_TERM, oldSpecializedTerm, specializedTerm));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, OmlPackage.SPECIALIZATION_AXIOM__SUPER_TERM, oldSuperTerm, superTerm));
 			}
 		}
-		return specializedTerm;
+		return superTerm;
 	}
 
 	/**
@@ -101,8 +105,8 @@ public class SpecializationAxiomImpl extends AxiomImpl implements Specialization
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public SpecializableTerm basicGetSpecializedTerm() {
-		return specializedTerm;
+	public Term basicGetSuperTerm() {
+		return superTerm;
 	}
 
 	/**
@@ -111,11 +115,11 @@ public class SpecializationAxiomImpl extends AxiomImpl implements Specialization
 	 * @generated
 	 */
 	@Override
-	public void setSpecializedTerm(SpecializableTerm newSpecializedTerm) {
-		SpecializableTerm oldSpecializedTerm = specializedTerm;
-		specializedTerm = newSpecializedTerm;
+	public void setSuperTerm(Term newSuperTerm) {
+		Term oldSuperTerm = superTerm;
+		superTerm = newSuperTerm;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.SPECIALIZATION_AXIOM__SPECIALIZED_TERM, oldSpecializedTerm, specializedTerm));
+			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.SPECIALIZATION_AXIOM__SUPER_TERM, oldSuperTerm, superTerm));
 	}
 
 	/**
@@ -177,29 +181,9 @@ public class SpecializationAxiomImpl extends AxiomImpl implements Specialization
 	 * @generated
 	 */
 	@Override
-	public SpecializableTermReference getOwningReference() {
-		if (eContainerFeatureID() != OmlPackage.SPECIALIZATION_AXIOM__OWNING_REFERENCE) return null;
-		return (SpecializableTermReference)eContainer();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public SpecializableTermReference basicGetOwningReference() {
-		if (eContainerFeatureID() != OmlPackage.SPECIALIZATION_AXIOM__OWNING_REFERENCE) return null;
-		return (SpecializableTermReference)eInternalContainer();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetOwningReference(SpecializableTermReference newOwningReference, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwningReference, OmlPackage.SPECIALIZATION_AXIOM__OWNING_REFERENCE, msgs);
-		return msgs;
+	public Term getSubTerm() {
+		Member _resolve = this.getOwningTerm().resolve();
+		return ((Term) _resolve);
 	}
 
 	/**
@@ -208,20 +192,8 @@ public class SpecializationAxiomImpl extends AxiomImpl implements Specialization
 	 * @generated
 	 */
 	@Override
-	public void setOwningReference(SpecializableTermReference newOwningReference) {
-		if (newOwningReference != eInternalContainer() || (eContainerFeatureID() != OmlPackage.SPECIALIZATION_AXIOM__OWNING_REFERENCE && newOwningReference != null)) {
-			if (EcoreUtil.isAncestor(this, newOwningReference))
-				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
-			NotificationChain msgs = null;
-			if (eInternalContainer() != null)
-				msgs = eBasicRemoveFromContainer(msgs);
-			if (newOwningReference != null)
-				msgs = ((InternalEObject)newOwningReference).eInverseAdd(this, OmlPackage.SPECIALIZABLE_TERM_REFERENCE__OWNED_SPECIALIZATIONS, SpecializableTermReference.class, msgs);
-			msgs = basicSetOwningReference(newOwningReference, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.SPECIALIZATION_AXIOM__OWNING_REFERENCE, newOwningReference, newOwningReference));
+	public Term getCharacterizedTerm() {
+		return this.getSubTerm();
 	}
 
 	/**
@@ -236,10 +208,6 @@ public class SpecializationAxiomImpl extends AxiomImpl implements Specialization
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwningTerm((SpecializableTerm)otherEnd, msgs);
-			case OmlPackage.SPECIALIZATION_AXIOM__OWNING_REFERENCE:
-				if (eInternalContainer() != null)
-					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetOwningReference((SpecializableTermReference)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -254,8 +222,6 @@ public class SpecializationAxiomImpl extends AxiomImpl implements Specialization
 		switch (featureID) {
 			case OmlPackage.SPECIALIZATION_AXIOM__OWNING_TERM:
 				return basicSetOwningTerm(null, msgs);
-			case OmlPackage.SPECIALIZATION_AXIOM__OWNING_REFERENCE:
-				return basicSetOwningReference(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -270,8 +236,6 @@ public class SpecializationAxiomImpl extends AxiomImpl implements Specialization
 		switch (eContainerFeatureID()) {
 			case OmlPackage.SPECIALIZATION_AXIOM__OWNING_TERM:
 				return eInternalContainer().eInverseRemove(this, OmlPackage.SPECIALIZABLE_TERM__OWNED_SPECIALIZATIONS, SpecializableTerm.class, msgs);
-			case OmlPackage.SPECIALIZATION_AXIOM__OWNING_REFERENCE:
-				return eInternalContainer().eInverseRemove(this, OmlPackage.SPECIALIZABLE_TERM_REFERENCE__OWNED_SPECIALIZATIONS, SpecializableTermReference.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -284,15 +248,12 @@ public class SpecializationAxiomImpl extends AxiomImpl implements Specialization
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case OmlPackage.SPECIALIZATION_AXIOM__SPECIALIZED_TERM:
-				if (resolve) return getSpecializedTerm();
-				return basicGetSpecializedTerm();
+			case OmlPackage.SPECIALIZATION_AXIOM__SUPER_TERM:
+				if (resolve) return getSuperTerm();
+				return basicGetSuperTerm();
 			case OmlPackage.SPECIALIZATION_AXIOM__OWNING_TERM:
 				if (resolve) return getOwningTerm();
 				return basicGetOwningTerm();
-			case OmlPackage.SPECIALIZATION_AXIOM__OWNING_REFERENCE:
-				if (resolve) return getOwningReference();
-				return basicGetOwningReference();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -305,14 +266,11 @@ public class SpecializationAxiomImpl extends AxiomImpl implements Specialization
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case OmlPackage.SPECIALIZATION_AXIOM__SPECIALIZED_TERM:
-				setSpecializedTerm((SpecializableTerm)newValue);
+			case OmlPackage.SPECIALIZATION_AXIOM__SUPER_TERM:
+				setSuperTerm((Term)newValue);
 				return;
 			case OmlPackage.SPECIALIZATION_AXIOM__OWNING_TERM:
 				setOwningTerm((SpecializableTerm)newValue);
-				return;
-			case OmlPackage.SPECIALIZATION_AXIOM__OWNING_REFERENCE:
-				setOwningReference((SpecializableTermReference)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -326,14 +284,11 @@ public class SpecializationAxiomImpl extends AxiomImpl implements Specialization
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case OmlPackage.SPECIALIZATION_AXIOM__SPECIALIZED_TERM:
-				setSpecializedTerm((SpecializableTerm)null);
+			case OmlPackage.SPECIALIZATION_AXIOM__SUPER_TERM:
+				setSuperTerm((Term)null);
 				return;
 			case OmlPackage.SPECIALIZATION_AXIOM__OWNING_TERM:
 				setOwningTerm((SpecializableTerm)null);
-				return;
-			case OmlPackage.SPECIALIZATION_AXIOM__OWNING_REFERENCE:
-				setOwningReference((SpecializableTermReference)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -347,14 +302,28 @@ public class SpecializationAxiomImpl extends AxiomImpl implements Specialization
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case OmlPackage.SPECIALIZATION_AXIOM__SPECIALIZED_TERM:
-				return specializedTerm != null;
+			case OmlPackage.SPECIALIZATION_AXIOM__SUPER_TERM:
+				return superTerm != null;
 			case OmlPackage.SPECIALIZATION_AXIOM__OWNING_TERM:
 				return basicGetOwningTerm() != null;
-			case OmlPackage.SPECIALIZATION_AXIOM__OWNING_REFERENCE:
-				return basicGetOwningReference() != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case OmlPackage.SPECIALIZATION_AXIOM___GET_SUB_TERM:
+				return getSubTerm();
+			case OmlPackage.SPECIALIZATION_AXIOM___GET_CHARACTERIZED_TERM:
+				return getCharacterizedTerm();
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 } //SpecializationAxiomImpl

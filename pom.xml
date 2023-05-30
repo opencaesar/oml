@@ -2,7 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>io.opencaesar.oml</groupId>
-	<version>1.4.1</version>
+	<version>2.0.0</version>
 	<artifactId>io.opencaesar.oml.parent</artifactId>
 	<packaging>pom</packaging>
 
@@ -25,8 +25,8 @@
 	    <tycho-version>3.0.3</tycho-version>
 	    <tycho-extras-version>${tycho-version}</tycho-extras-version>
 	    <maven-antrun-plugin.version>1.7</maven-antrun-plugin.version>
-        <eclipse-version>2022-09</eclipse-version>
-        <xtextVersion>2.28.0</xtextVersion>
+        <eclipse-version>2023-03</eclipse-version>
+        <xtextVersion>2.31.0</xtextVersion>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -136,36 +136,6 @@
 							<arch>x86_64</arch>
 						</environment>
 					</environments>
-					<dependency-resolution>
-						<extraRequirements>
-							<requirement>
-								<type>eclipse-plugin</type>
-								<id>org.eclipse.xtext.logging</id>
-								<versionRange>1.2.19</versionRange>
-							</requirement>
-							<!-- to get the org.eclipse.osgi.compatibility.state plugin if the target
-								platform is Luna or later. (backward compatible with kepler and previous
-								versions) see https://bugs.eclipse.org/bugs/show_bug.cgi?id=492149 -->
-							<requirement>
-								<type>eclipse-feature</type>
-								<id>org.eclipse.rcp</id>
-								<versionRange>0.0.0</versionRange>
-							</requirement>
-							<!-- to force the same version of jdt.compiler.apt and jdt.core
-								(for xtext-maven-plugin)
-								see https://github.com/eclipse/xtext-maven/issues/146 -->
-							<requirement>
-								<type>eclipse-plugin</type>
-								<id>org.eclipse.jdt.compiler.apt</id>
-								<versionRange>0.0.0</versionRange>
-							</requirement>
-							<requirement>
-								<type>eclipse-plugin</type>
-								<id>org.eclipse.jdt.compiler.tool</id>
-								<versionRange>0.0.0</versionRange>
-							</requirement>
-						</extraRequirements>
-					</dependency-resolution>
 				</configuration>
 			</plugin>
 		</plugins>

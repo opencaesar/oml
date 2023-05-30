@@ -69,16 +69,6 @@ public abstract class ElementImpl extends MinimalEObjectImpl.Container implement
 	 * @generated
 	 */
 	@Override
-	public boolean extraValidate(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
-		return OmlValidator2.INSTANCE.run(this, diagnostics, context);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public Ontology getOntology() {
 		EObject current = this;
 		while (((current != null) && (!(current instanceof Ontology)))) {
@@ -93,13 +83,23 @@ public abstract class ElementImpl extends MinimalEObjectImpl.Container implement
 	 * @generated
 	 */
 	@Override
+	public boolean extraValidate(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
+		return OmlValidator2.INSTANCE.run(this, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	@SuppressWarnings("unchecked")
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
-			case OmlPackage.ELEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP:
-				return extraValidate((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 			case OmlPackage.ELEMENT___GET_ONTOLOGY:
 				return getOntology();
+			case OmlPackage.ELEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP:
+				return extraValidate((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 		}
 		return super.eInvoke(operationID, arguments);
 	}

@@ -18,11 +18,12 @@
  */
 package io.opencaesar.oml.impl;
 
+import io.opencaesar.oml.Argument;
 import io.opencaesar.oml.BinaryPredicate;
-import io.opencaesar.oml.NamedInstance;
 import io.opencaesar.oml.OmlPackage;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -37,63 +38,32 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link io.opencaesar.oml.impl.BinaryPredicateImpl#getVariable1 <em>Variable1</em>}</li>
- *   <li>{@link io.opencaesar.oml.impl.BinaryPredicateImpl#getVariable2 <em>Variable2</em>}</li>
- *   <li>{@link io.opencaesar.oml.impl.BinaryPredicateImpl#getInstance2 <em>Instance2</em>}</li>
+ *   <li>{@link io.opencaesar.oml.impl.BinaryPredicateImpl#getArgument1 <em>Argument1</em>}</li>
+ *   <li>{@link io.opencaesar.oml.impl.BinaryPredicateImpl#getArgument2 <em>Argument2</em>}</li>
  * </ul>
  *
  * @generated
  */
 public abstract class BinaryPredicateImpl extends PredicateImpl implements BinaryPredicate {
 	/**
-	 * The default value of the '{@link #getVariable1() <em>Variable1</em>}' attribute.
+	 * The cached value of the '{@link #getArgument1() <em>Argument1</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getVariable1()
+	 * @see #getArgument1()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String VARIABLE1_EDEFAULT = null;
+	protected Argument argument1;
 
 	/**
-	 * The cached value of the '{@link #getVariable1() <em>Variable1</em>}' attribute.
+	 * The cached value of the '{@link #getArgument2() <em>Argument2</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getVariable1()
+	 * @see #getArgument2()
 	 * @generated
 	 * @ordered
 	 */
-	protected String variable1 = VARIABLE1_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getVariable2() <em>Variable2</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getVariable2()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String VARIABLE2_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getVariable2() <em>Variable2</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getVariable2()
-	 * @generated
-	 * @ordered
-	 */
-	protected String variable2 = VARIABLE2_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getInstance2() <em>Instance2</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getInstance2()
-	 * @generated
-	 * @ordered
-	 */
-	protected NamedInstance instance2;
+	protected Argument argument2;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -120,8 +90,8 @@ public abstract class BinaryPredicateImpl extends PredicateImpl implements Binar
 	 * @generated
 	 */
 	@Override
-	public String getVariable1() {
-		return variable1;
+	public Argument getArgument1() {
+		return argument1;
 	}
 
 	/**
@@ -129,62 +99,14 @@ public abstract class BinaryPredicateImpl extends PredicateImpl implements Binar
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public void setVariable1(String newVariable1) {
-		String oldVariable1 = variable1;
-		variable1 = newVariable1;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.BINARY_PREDICATE__VARIABLE1, oldVariable1, variable1));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String getVariable2() {
-		return variable2;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setVariable2(String newVariable2) {
-		String oldVariable2 = variable2;
-		variable2 = newVariable2;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.BINARY_PREDICATE__VARIABLE2, oldVariable2, variable2));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NamedInstance getInstance2() {
-		if (instance2 != null && instance2.eIsProxy()) {
-			InternalEObject oldInstance2 = (InternalEObject)instance2;
-			instance2 = (NamedInstance)eResolveProxy(oldInstance2);
-			if (instance2 != oldInstance2) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, OmlPackage.BINARY_PREDICATE__INSTANCE2, oldInstance2, instance2));
-			}
+	public NotificationChain basicSetArgument1(Argument newArgument1, NotificationChain msgs) {
+		Argument oldArgument1 = argument1;
+		argument1 = newArgument1;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OmlPackage.BINARY_PREDICATE__ARGUMENT1, oldArgument1, newArgument1);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
-		return instance2;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NamedInstance basicGetInstance2() {
-		return instance2;
+		return msgs;
 	}
 
 	/**
@@ -193,11 +115,79 @@ public abstract class BinaryPredicateImpl extends PredicateImpl implements Binar
 	 * @generated
 	 */
 	@Override
-	public void setInstance2(NamedInstance newInstance2) {
-		NamedInstance oldInstance2 = instance2;
-		instance2 = newInstance2;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.BINARY_PREDICATE__INSTANCE2, oldInstance2, instance2));
+	public void setArgument1(Argument newArgument1) {
+		if (newArgument1 != argument1) {
+			NotificationChain msgs = null;
+			if (argument1 != null)
+				msgs = ((InternalEObject)argument1).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OmlPackage.BINARY_PREDICATE__ARGUMENT1, null, msgs);
+			if (newArgument1 != null)
+				msgs = ((InternalEObject)newArgument1).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - OmlPackage.BINARY_PREDICATE__ARGUMENT1, null, msgs);
+			msgs = basicSetArgument1(newArgument1, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.BINARY_PREDICATE__ARGUMENT1, newArgument1, newArgument1));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Argument getArgument2() {
+		return argument2;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetArgument2(Argument newArgument2, NotificationChain msgs) {
+		Argument oldArgument2 = argument2;
+		argument2 = newArgument2;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OmlPackage.BINARY_PREDICATE__ARGUMENT2, oldArgument2, newArgument2);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setArgument2(Argument newArgument2) {
+		if (newArgument2 != argument2) {
+			NotificationChain msgs = null;
+			if (argument2 != null)
+				msgs = ((InternalEObject)argument2).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OmlPackage.BINARY_PREDICATE__ARGUMENT2, null, msgs);
+			if (newArgument2 != null)
+				msgs = ((InternalEObject)newArgument2).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - OmlPackage.BINARY_PREDICATE__ARGUMENT2, null, msgs);
+			msgs = basicSetArgument2(newArgument2, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.BINARY_PREDICATE__ARGUMENT2, newArgument2, newArgument2));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case OmlPackage.BINARY_PREDICATE__ARGUMENT1:
+				return basicSetArgument1(null, msgs);
+			case OmlPackage.BINARY_PREDICATE__ARGUMENT2:
+				return basicSetArgument2(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -208,13 +198,10 @@ public abstract class BinaryPredicateImpl extends PredicateImpl implements Binar
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case OmlPackage.BINARY_PREDICATE__VARIABLE1:
-				return getVariable1();
-			case OmlPackage.BINARY_PREDICATE__VARIABLE2:
-				return getVariable2();
-			case OmlPackage.BINARY_PREDICATE__INSTANCE2:
-				if (resolve) return getInstance2();
-				return basicGetInstance2();
+			case OmlPackage.BINARY_PREDICATE__ARGUMENT1:
+				return getArgument1();
+			case OmlPackage.BINARY_PREDICATE__ARGUMENT2:
+				return getArgument2();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -227,14 +214,11 @@ public abstract class BinaryPredicateImpl extends PredicateImpl implements Binar
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case OmlPackage.BINARY_PREDICATE__VARIABLE1:
-				setVariable1((String)newValue);
+			case OmlPackage.BINARY_PREDICATE__ARGUMENT1:
+				setArgument1((Argument)newValue);
 				return;
-			case OmlPackage.BINARY_PREDICATE__VARIABLE2:
-				setVariable2((String)newValue);
-				return;
-			case OmlPackage.BINARY_PREDICATE__INSTANCE2:
-				setInstance2((NamedInstance)newValue);
+			case OmlPackage.BINARY_PREDICATE__ARGUMENT2:
+				setArgument2((Argument)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -248,14 +232,11 @@ public abstract class BinaryPredicateImpl extends PredicateImpl implements Binar
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case OmlPackage.BINARY_PREDICATE__VARIABLE1:
-				setVariable1(VARIABLE1_EDEFAULT);
+			case OmlPackage.BINARY_PREDICATE__ARGUMENT1:
+				setArgument1((Argument)null);
 				return;
-			case OmlPackage.BINARY_PREDICATE__VARIABLE2:
-				setVariable2(VARIABLE2_EDEFAULT);
-				return;
-			case OmlPackage.BINARY_PREDICATE__INSTANCE2:
-				setInstance2((NamedInstance)null);
+			case OmlPackage.BINARY_PREDICATE__ARGUMENT2:
+				setArgument2((Argument)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -269,32 +250,12 @@ public abstract class BinaryPredicateImpl extends PredicateImpl implements Binar
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case OmlPackage.BINARY_PREDICATE__VARIABLE1:
-				return VARIABLE1_EDEFAULT == null ? variable1 != null : !VARIABLE1_EDEFAULT.equals(variable1);
-			case OmlPackage.BINARY_PREDICATE__VARIABLE2:
-				return VARIABLE2_EDEFAULT == null ? variable2 != null : !VARIABLE2_EDEFAULT.equals(variable2);
-			case OmlPackage.BINARY_PREDICATE__INSTANCE2:
-				return instance2 != null;
+			case OmlPackage.BINARY_PREDICATE__ARGUMENT1:
+				return argument1 != null;
+			case OmlPackage.BINARY_PREDICATE__ARGUMENT2:
+				return argument2 != null;
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (variable1: ");
-		result.append(variable1);
-		result.append(", variable2: ");
-		result.append(variable2);
-		result.append(')');
-		return result.toString();
 	}
 
 } //BinaryPredicateImpl

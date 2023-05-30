@@ -92,20 +92,52 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 				return createAnnotationAdapter();
 			}
 			@Override
-			public Adapter caseAnnotatedElement(AnnotatedElement object) {
-				return createAnnotatedElementAdapter();
-			}
-			@Override
 			public Adapter caseIdentifiedElement(IdentifiedElement object) {
 				return createIdentifiedElementAdapter();
+			}
+			@Override
+			public Adapter caseImport(Import object) {
+				return createImportAdapter();
+			}
+			@Override
+			public Adapter caseInstance(Instance object) {
+				return createInstanceAdapter();
+			}
+			@Override
+			public Adapter caseAxiom(Axiom object) {
+				return createAxiomAdapter();
+			}
+			@Override
+			public Adapter caseAssertion(Assertion object) {
+				return createAssertionAdapter();
+			}
+			@Override
+			public Adapter casePredicate(Predicate object) {
+				return createPredicateAdapter();
+			}
+			@Override
+			public Adapter caseArgument(Argument object) {
+				return createArgumentAdapter();
+			}
+			@Override
+			public Adapter caseLiteral(Literal object) {
+				return createLiteralAdapter();
 			}
 			@Override
 			public Adapter caseOntology(Ontology object) {
 				return createOntologyAdapter();
 			}
 			@Override
+			public Adapter caseMember(Member object) {
+				return createMemberAdapter();
+			}
+			@Override
 			public Adapter caseVocabularyBox(VocabularyBox object) {
 				return createVocabularyBoxAdapter();
+			}
+			@Override
+			public Adapter caseDescriptionBox(DescriptionBox object) {
+				return createDescriptionBoxAdapter();
 			}
 			@Override
 			public Adapter caseVocabulary(Vocabulary object) {
@@ -116,10 +148,6 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 				return createVocabularyBundleAdapter();
 			}
 			@Override
-			public Adapter caseDescriptionBox(DescriptionBox object) {
-				return createDescriptionBoxAdapter();
-			}
-			@Override
 			public Adapter caseDescription(Description object) {
 				return createDescriptionAdapter();
 			}
@@ -128,28 +156,72 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 				return createDescriptionBundleAdapter();
 			}
 			@Override
-			public Adapter caseMember(Member object) {
-				return createMemberAdapter();
+			public Adapter caseStatement(Statement object) {
+				return createStatementAdapter();
+			}
+			@Override
+			public Adapter caseVocabularyMember(VocabularyMember object) {
+				return createVocabularyMemberAdapter();
+			}
+			@Override
+			public Adapter caseDescriptionMember(DescriptionMember object) {
+				return createDescriptionMemberAdapter();
+			}
+			@Override
+			public Adapter caseVocabularyStatement(VocabularyStatement object) {
+				return createVocabularyStatementAdapter();
+			}
+			@Override
+			public Adapter caseDescriptionStatement(DescriptionStatement object) {
+				return createDescriptionStatementAdapter();
 			}
 			@Override
 			public Adapter caseTerm(Term object) {
 				return createTermAdapter();
 			}
 			@Override
+			public Adapter caseRule(Rule object) {
+				return createRuleAdapter();
+			}
+			@Override
+			public Adapter caseBuiltIn(BuiltIn object) {
+				return createBuiltInAdapter();
+			}
+			@Override
 			public Adapter caseSpecializableTerm(SpecializableTerm object) {
 				return createSpecializableTermAdapter();
+			}
+			@Override
+			public Adapter caseProperty(Property object) {
+				return createPropertyAdapter();
 			}
 			@Override
 			public Adapter caseType(Type object) {
 				return createTypeAdapter();
 			}
 			@Override
+			public Adapter caseRelationBase(RelationBase object) {
+				return createRelationBaseAdapter();
+			}
+			@Override
+			public Adapter caseSpecializableProperty(SpecializableProperty object) {
+				return createSpecializablePropertyAdapter();
+			}
+			@Override
 			public Adapter caseClassifier(Classifier object) {
 				return createClassifierAdapter();
 			}
 			@Override
+			public Adapter caseScalar(Scalar object) {
+				return createScalarAdapter();
+			}
+			@Override
 			public Adapter caseEntity(Entity object) {
 				return createEntityAdapter();
+			}
+			@Override
+			public Adapter caseStructure(Structure object) {
+				return createStructureAdapter();
 			}
 			@Override
 			public Adapter caseAspect(Aspect object) {
@@ -162,18 +234,6 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseRelationEntity(RelationEntity object) {
 				return createRelationEntityAdapter();
-			}
-			@Override
-			public Adapter caseStructure(Structure object) {
-				return createStructureAdapter();
-			}
-			@Override
-			public Adapter caseFeature(Feature object) {
-				return createFeatureAdapter();
-			}
-			@Override
-			public Adapter caseProperty(Property object) {
-				return createPropertyAdapter();
 			}
 			@Override
 			public Adapter caseAnnotationProperty(AnnotationProperty object) {
@@ -192,18 +252,6 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 				return createStructuredPropertyAdapter();
 			}
 			@Override
-			public Adapter caseScalar(Scalar object) {
-				return createScalarAdapter();
-			}
-			@Override
-			public Adapter caseFacetedScalar(FacetedScalar object) {
-				return createFacetedScalarAdapter();
-			}
-			@Override
-			public Adapter caseEnumeratedScalar(EnumeratedScalar object) {
-				return createEnumeratedScalarAdapter();
-			}
-			@Override
 			public Adapter caseRelation(Relation object) {
 				return createRelationAdapter();
 			}
@@ -216,16 +264,8 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 				return createReverseRelationAdapter();
 			}
 			@Override
-			public Adapter caseRule(Rule object) {
-				return createRuleAdapter();
-			}
-			@Override
-			public Adapter caseInstance(Instance object) {
-				return createInstanceAdapter();
-			}
-			@Override
-			public Adapter caseStructureInstance(StructureInstance object) {
-				return createStructureInstanceAdapter();
+			public Adapter caseUnreifiedRelation(UnreifiedRelation object) {
+				return createUnreifiedRelationAdapter();
 			}
 			@Override
 			public Adapter caseNamedInstance(NamedInstance object) {
@@ -240,268 +280,88 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 				return createRelationInstanceAdapter();
 			}
 			@Override
-			public Adapter caseReference(Reference object) {
-				return createReferenceAdapter();
-			}
-			@Override
-			public Adapter caseSpecializableTermReference(SpecializableTermReference object) {
-				return createSpecializableTermReferenceAdapter();
-			}
-			@Override
-			public Adapter caseClassifierReference(ClassifierReference object) {
-				return createClassifierReferenceAdapter();
-			}
-			@Override
-			public Adapter caseEntityReference(EntityReference object) {
-				return createEntityReferenceAdapter();
-			}
-			@Override
-			public Adapter caseAspectReference(AspectReference object) {
-				return createAspectReferenceAdapter();
-			}
-			@Override
-			public Adapter caseConceptReference(ConceptReference object) {
-				return createConceptReferenceAdapter();
-			}
-			@Override
-			public Adapter caseRelationEntityReference(RelationEntityReference object) {
-				return createRelationEntityReferenceAdapter();
-			}
-			@Override
-			public Adapter caseStructureReference(StructureReference object) {
-				return createStructureReferenceAdapter();
-			}
-			@Override
-			public Adapter caseAnnotationPropertyReference(AnnotationPropertyReference object) {
-				return createAnnotationPropertyReferenceAdapter();
-			}
-			@Override
-			public Adapter caseScalarPropertyReference(ScalarPropertyReference object) {
-				return createScalarPropertyReferenceAdapter();
-			}
-			@Override
-			public Adapter caseStructuredPropertyReference(StructuredPropertyReference object) {
-				return createStructuredPropertyReferenceAdapter();
-			}
-			@Override
-			public Adapter caseFacetedScalarReference(FacetedScalarReference object) {
-				return createFacetedScalarReferenceAdapter();
-			}
-			@Override
-			public Adapter caseEnumeratedScalarReference(EnumeratedScalarReference object) {
-				return createEnumeratedScalarReferenceAdapter();
-			}
-			@Override
-			public Adapter caseRelationReference(RelationReference object) {
-				return createRelationReferenceAdapter();
-			}
-			@Override
-			public Adapter caseRuleReference(RuleReference object) {
-				return createRuleReferenceAdapter();
-			}
-			@Override
-			public Adapter caseNamedInstanceReference(NamedInstanceReference object) {
-				return createNamedInstanceReferenceAdapter();
-			}
-			@Override
-			public Adapter caseConceptInstanceReference(ConceptInstanceReference object) {
-				return createConceptInstanceReferenceAdapter();
-			}
-			@Override
-			public Adapter caseRelationInstanceReference(RelationInstanceReference object) {
-				return createRelationInstanceReferenceAdapter();
-			}
-			@Override
-			public Adapter caseStatement(Statement object) {
-				return createStatementAdapter();
-			}
-			@Override
-			public Adapter caseVocabularyStatement(VocabularyStatement object) {
-				return createVocabularyStatementAdapter();
-			}
-			@Override
-			public Adapter caseDescriptionStatement(DescriptionStatement object) {
-				return createDescriptionStatementAdapter();
-			}
-			@Override
-			public Adapter caseImport(Import object) {
-				return createImportAdapter();
-			}
-			@Override
-			public Adapter caseVocabularyImport(VocabularyImport object) {
-				return createVocabularyImportAdapter();
-			}
-			@Override
-			public Adapter caseVocabularyExtension(VocabularyExtension object) {
-				return createVocabularyExtensionAdapter();
-			}
-			@Override
-			public Adapter caseVocabularyUsage(VocabularyUsage object) {
-				return createVocabularyUsageAdapter();
-			}
-			@Override
-			public Adapter caseVocabularyBundleImport(VocabularyBundleImport object) {
-				return createVocabularyBundleImportAdapter();
-			}
-			@Override
-			public Adapter caseVocabularyBundleExtension(VocabularyBundleExtension object) {
-				return createVocabularyBundleExtensionAdapter();
-			}
-			@Override
-			public Adapter caseVocabularyBundleInclusion(VocabularyBundleInclusion object) {
-				return createVocabularyBundleInclusionAdapter();
-			}
-			@Override
-			public Adapter caseDescriptionImport(DescriptionImport object) {
-				return createDescriptionImportAdapter();
-			}
-			@Override
-			public Adapter caseDescriptionExtension(DescriptionExtension object) {
-				return createDescriptionExtensionAdapter();
-			}
-			@Override
-			public Adapter caseDescriptionUsage(DescriptionUsage object) {
-				return createDescriptionUsageAdapter();
-			}
-			@Override
-			public Adapter caseDescriptionBundleImport(DescriptionBundleImport object) {
-				return createDescriptionBundleImportAdapter();
-			}
-			@Override
-			public Adapter caseDescriptionBundleExtension(DescriptionBundleExtension object) {
-				return createDescriptionBundleExtensionAdapter();
-			}
-			@Override
-			public Adapter caseDescriptionBundleInclusion(DescriptionBundleInclusion object) {
-				return createDescriptionBundleInclusionAdapter();
-			}
-			@Override
-			public Adapter caseDescriptionBundleUsage(DescriptionBundleUsage object) {
-				return createDescriptionBundleUsageAdapter();
-			}
-			@Override
-			public Adapter caseAxiom(Axiom object) {
-				return createAxiomAdapter();
-			}
-			@Override
-			public Adapter caseSpecializationAxiom(SpecializationAxiom object) {
-				return createSpecializationAxiomAdapter();
-			}
-			@Override
-			public Adapter caseRestrictionAxiom(RestrictionAxiom object) {
-				return createRestrictionAxiomAdapter();
-			}
-			@Override
-			public Adapter casePropertyRestrictionAxiom(PropertyRestrictionAxiom object) {
-				return createPropertyRestrictionAxiomAdapter();
-			}
-			@Override
-			public Adapter caseScalarPropertyRestrictionAxiom(ScalarPropertyRestrictionAxiom object) {
-				return createScalarPropertyRestrictionAxiomAdapter();
-			}
-			@Override
-			public Adapter caseScalarPropertyRangeRestrictionAxiom(ScalarPropertyRangeRestrictionAxiom object) {
-				return createScalarPropertyRangeRestrictionAxiomAdapter();
-			}
-			@Override
-			public Adapter caseScalarPropertyCardinalityRestrictionAxiom(ScalarPropertyCardinalityRestrictionAxiom object) {
-				return createScalarPropertyCardinalityRestrictionAxiomAdapter();
-			}
-			@Override
-			public Adapter caseScalarPropertyValueRestrictionAxiom(ScalarPropertyValueRestrictionAxiom object) {
-				return createScalarPropertyValueRestrictionAxiomAdapter();
-			}
-			@Override
-			public Adapter caseStructuredPropertyRestrictionAxiom(StructuredPropertyRestrictionAxiom object) {
-				return createStructuredPropertyRestrictionAxiomAdapter();
-			}
-			@Override
-			public Adapter caseStructuredPropertyRangeRestrictionAxiom(StructuredPropertyRangeRestrictionAxiom object) {
-				return createStructuredPropertyRangeRestrictionAxiomAdapter();
-			}
-			@Override
-			public Adapter caseStructuredPropertyCardinalityRestrictionAxiom(StructuredPropertyCardinalityRestrictionAxiom object) {
-				return createStructuredPropertyCardinalityRestrictionAxiomAdapter();
-			}
-			@Override
-			public Adapter caseStructuredPropertyValueRestrictionAxiom(StructuredPropertyValueRestrictionAxiom object) {
-				return createStructuredPropertyValueRestrictionAxiomAdapter();
-			}
-			@Override
-			public Adapter caseRelationRestrictionAxiom(RelationRestrictionAxiom object) {
-				return createRelationRestrictionAxiomAdapter();
-			}
-			@Override
-			public Adapter caseRelationRangeRestrictionAxiom(RelationRangeRestrictionAxiom object) {
-				return createRelationRangeRestrictionAxiomAdapter();
-			}
-			@Override
-			public Adapter caseRelationCardinalityRestrictionAxiom(RelationCardinalityRestrictionAxiom object) {
-				return createRelationCardinalityRestrictionAxiomAdapter();
-			}
-			@Override
-			public Adapter caseRelationTargetRestrictionAxiom(RelationTargetRestrictionAxiom object) {
-				return createRelationTargetRestrictionAxiomAdapter();
+			public Adapter caseStructureInstance(StructureInstance object) {
+				return createStructureInstanceAdapter();
 			}
 			@Override
 			public Adapter caseKeyAxiom(KeyAxiom object) {
 				return createKeyAxiomAdapter();
 			}
 			@Override
-			public Adapter caseAssertion(Assertion object) {
-				return createAssertionAdapter();
+			public Adapter caseSpecializationAxiom(SpecializationAxiom object) {
+				return createSpecializationAxiomAdapter();
+			}
+			@Override
+			public Adapter caseInstanceEnumerationAxiom(InstanceEnumerationAxiom object) {
+				return createInstanceEnumerationAxiomAdapter();
+			}
+			@Override
+			public Adapter casePropertyRestrictionAxiom(PropertyRestrictionAxiom object) {
+				return createPropertyRestrictionAxiomAdapter();
+			}
+			@Override
+			public Adapter caseLiteralEnumerationAxiom(LiteralEnumerationAxiom object) {
+				return createLiteralEnumerationAxiomAdapter();
+			}
+			@Override
+			public Adapter caseClassifierEquivalenceAxiom(ClassifierEquivalenceAxiom object) {
+				return createClassifierEquivalenceAxiomAdapter();
+			}
+			@Override
+			public Adapter caseScalarEquivalenceAxiom(ScalarEquivalenceAxiom object) {
+				return createScalarEquivalenceAxiomAdapter();
+			}
+			@Override
+			public Adapter casePropertyEquivalenceAxiom(PropertyEquivalenceAxiom object) {
+				return createPropertyEquivalenceAxiomAdapter();
+			}
+			@Override
+			public Adapter casePropertyRangeRestrictionAxiom(PropertyRangeRestrictionAxiom object) {
+				return createPropertyRangeRestrictionAxiomAdapter();
+			}
+			@Override
+			public Adapter casePropertyCardinalityRestrictionAxiom(PropertyCardinalityRestrictionAxiom object) {
+				return createPropertyCardinalityRestrictionAxiomAdapter();
+			}
+			@Override
+			public Adapter casePropertyValueRestrictionAxiom(PropertyValueRestrictionAxiom object) {
+				return createPropertyValueRestrictionAxiomAdapter();
+			}
+			@Override
+			public Adapter casePropertySelfRestrictionAxiom(PropertySelfRestrictionAxiom object) {
+				return createPropertySelfRestrictionAxiomAdapter();
 			}
 			@Override
 			public Adapter caseTypeAssertion(TypeAssertion object) {
 				return createTypeAssertionAdapter();
 			}
 			@Override
-			public Adapter caseConceptTypeAssertion(ConceptTypeAssertion object) {
-				return createConceptTypeAssertionAdapter();
-			}
-			@Override
-			public Adapter caseRelationTypeAssertion(RelationTypeAssertion object) {
-				return createRelationTypeAssertionAdapter();
-			}
-			@Override
 			public Adapter casePropertyValueAssertion(PropertyValueAssertion object) {
 				return createPropertyValueAssertionAdapter();
-			}
-			@Override
-			public Adapter caseScalarPropertyValueAssertion(ScalarPropertyValueAssertion object) {
-				return createScalarPropertyValueAssertionAdapter();
-			}
-			@Override
-			public Adapter caseStructuredPropertyValueAssertion(StructuredPropertyValueAssertion object) {
-				return createStructuredPropertyValueAssertionAdapter();
-			}
-			@Override
-			public Adapter caseLinkAssertion(LinkAssertion object) {
-				return createLinkAssertionAdapter();
-			}
-			@Override
-			public Adapter casePredicate(Predicate object) {
-				return createPredicateAdapter();
 			}
 			@Override
 			public Adapter caseUnaryPredicate(UnaryPredicate object) {
 				return createUnaryPredicateAdapter();
 			}
 			@Override
-			public Adapter caseTypePredicate(TypePredicate object) {
-				return createTypePredicateAdapter();
-			}
-			@Override
 			public Adapter caseBinaryPredicate(BinaryPredicate object) {
 				return createBinaryPredicateAdapter();
+			}
+			@Override
+			public Adapter caseBuiltInPredicate(BuiltInPredicate object) {
+				return createBuiltInPredicateAdapter();
+			}
+			@Override
+			public Adapter caseTypePredicate(TypePredicate object) {
+				return createTypePredicateAdapter();
 			}
 			@Override
 			public Adapter caseRelationEntityPredicate(RelationEntityPredicate object) {
 				return createRelationEntityPredicateAdapter();
 			}
 			@Override
-			public Adapter caseFeaturePredicate(FeaturePredicate object) {
-				return createFeaturePredicateAdapter();
+			public Adapter casePropertyPredicate(PropertyPredicate object) {
+				return createPropertyPredicateAdapter();
 			}
 			@Override
 			public Adapter caseSameAsPredicate(SameAsPredicate object) {
@@ -510,10 +370,6 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseDifferentFromPredicate(DifferentFromPredicate object) {
 				return createDifferentFromPredicateAdapter();
-			}
-			@Override
-			public Adapter caseLiteral(Literal object) {
-				return createLiteralAdapter();
 			}
 			@Override
 			public Adapter caseQuotedLiteral(QuotedLiteral object) {
@@ -584,20 +440,6 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.AnnotatedElement <em>Annotated Element</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.AnnotatedElement
-	 * @generated
-	 */
-	public Adapter createAnnotatedElementAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.IdentifiedElement <em>Identified Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -608,6 +450,104 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createIdentifiedElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.Import <em>Import</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see io.opencaesar.oml.Import
+	 * @generated
+	 */
+	public Adapter createImportAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.Instance <em>Instance</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see io.opencaesar.oml.Instance
+	 * @generated
+	 */
+	public Adapter createInstanceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.Axiom <em>Axiom</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see io.opencaesar.oml.Axiom
+	 * @generated
+	 */
+	public Adapter createAxiomAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.Assertion <em>Assertion</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see io.opencaesar.oml.Assertion
+	 * @generated
+	 */
+	public Adapter createAssertionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.Predicate <em>Predicate</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see io.opencaesar.oml.Predicate
+	 * @generated
+	 */
+	public Adapter createPredicateAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.Argument <em>Argument</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see io.opencaesar.oml.Argument
+	 * @generated
+	 */
+	public Adapter createArgumentAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.Literal <em>Literal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see io.opencaesar.oml.Literal
+	 * @generated
+	 */
+	public Adapter createLiteralAdapter() {
 		return null;
 	}
 
@@ -626,6 +566,20 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.Member <em>Member</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see io.opencaesar.oml.Member
+	 * @generated
+	 */
+	public Adapter createMemberAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.VocabularyBox <em>Vocabulary Box</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -636,6 +590,20 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createVocabularyBoxAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.DescriptionBox <em>Description Box</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see io.opencaesar.oml.DescriptionBox
+	 * @generated
+	 */
+	public Adapter createDescriptionBoxAdapter() {
 		return null;
 	}
 
@@ -668,20 +636,6 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.DescriptionBox <em>Description Box</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.DescriptionBox
-	 * @generated
-	 */
-	public Adapter createDescriptionBoxAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.Description <em>Description</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -710,16 +664,72 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.Member <em>Member</em>}'.
+	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.Statement <em>Statement</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see io.opencaesar.oml.Member
+	 * @see io.opencaesar.oml.Statement
 	 * @generated
 	 */
-	public Adapter createMemberAdapter() {
+	public Adapter createStatementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.VocabularyMember <em>Vocabulary Member</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see io.opencaesar.oml.VocabularyMember
+	 * @generated
+	 */
+	public Adapter createVocabularyMemberAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.DescriptionMember <em>Description Member</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see io.opencaesar.oml.DescriptionMember
+	 * @generated
+	 */
+	public Adapter createDescriptionMemberAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.VocabularyStatement <em>Vocabulary Statement</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see io.opencaesar.oml.VocabularyStatement
+	 * @generated
+	 */
+	public Adapter createVocabularyStatementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.DescriptionStatement <em>Description Statement</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see io.opencaesar.oml.DescriptionStatement
+	 * @generated
+	 */
+	public Adapter createDescriptionStatementAdapter() {
 		return null;
 	}
 
@@ -738,6 +748,34 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.Rule <em>Rule</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see io.opencaesar.oml.Rule
+	 * @generated
+	 */
+	public Adapter createRuleAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.BuiltIn <em>Built In</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see io.opencaesar.oml.BuiltIn
+	 * @generated
+	 */
+	public Adapter createBuiltInAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.SpecializableTerm <em>Specializable Term</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -748,6 +786,20 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createSpecializableTermAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.Property <em>Property</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see io.opencaesar.oml.Property
+	 * @generated
+	 */
+	public Adapter createPropertyAdapter() {
 		return null;
 	}
 
@@ -766,6 +818,34 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.RelationBase <em>Relation Base</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see io.opencaesar.oml.RelationBase
+	 * @generated
+	 */
+	public Adapter createRelationBaseAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.SpecializableProperty <em>Specializable Property</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see io.opencaesar.oml.SpecializableProperty
+	 * @generated
+	 */
+	public Adapter createSpecializablePropertyAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.Classifier <em>Classifier</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -780,6 +860,20 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.Scalar <em>Scalar</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see io.opencaesar.oml.Scalar
+	 * @generated
+	 */
+	public Adapter createScalarAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.Entity <em>Entity</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -790,6 +884,20 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createEntityAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.Structure <em>Structure</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see io.opencaesar.oml.Structure
+	 * @generated
+	 */
+	public Adapter createStructureAdapter() {
 		return null;
 	}
 
@@ -832,48 +940,6 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createRelationEntityAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.Structure <em>Structure</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.Structure
-	 * @generated
-	 */
-	public Adapter createStructureAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.Feature <em>Feature</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.Feature
-	 * @generated
-	 */
-	public Adapter createFeatureAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.Property <em>Property</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.Property
-	 * @generated
-	 */
-	public Adapter createPropertyAdapter() {
 		return null;
 	}
 
@@ -934,48 +1000,6 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.Scalar <em>Scalar</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.Scalar
-	 * @generated
-	 */
-	public Adapter createScalarAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.FacetedScalar <em>Faceted Scalar</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.FacetedScalar
-	 * @generated
-	 */
-	public Adapter createFacetedScalarAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.EnumeratedScalar <em>Enumerated Scalar</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.EnumeratedScalar
-	 * @generated
-	 */
-	public Adapter createEnumeratedScalarAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.Relation <em>Relation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -1018,44 +1042,16 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.Rule <em>Rule</em>}'.
+	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.UnreifiedRelation <em>Unreified Relation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see io.opencaesar.oml.Rule
+	 * @see io.opencaesar.oml.UnreifiedRelation
 	 * @generated
 	 */
-	public Adapter createRuleAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.Instance <em>Instance</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.Instance
-	 * @generated
-	 */
-	public Adapter createInstanceAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.StructureInstance <em>Structure Instance</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.StructureInstance
-	 * @generated
-	 */
-	public Adapter createStructureInstanceAdapter() {
+	public Adapter createUnreifiedRelationAdapter() {
 		return null;
 	}
 
@@ -1102,716 +1098,16 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.Reference <em>Reference</em>}'.
+	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.StructureInstance <em>Structure Instance</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see io.opencaesar.oml.Reference
+	 * @see io.opencaesar.oml.StructureInstance
 	 * @generated
 	 */
-	public Adapter createReferenceAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.SpecializableTermReference <em>Specializable Term Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.SpecializableTermReference
-	 * @generated
-	 */
-	public Adapter createSpecializableTermReferenceAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.ClassifierReference <em>Classifier Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.ClassifierReference
-	 * @generated
-	 */
-	public Adapter createClassifierReferenceAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.EntityReference <em>Entity Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.EntityReference
-	 * @generated
-	 */
-	public Adapter createEntityReferenceAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.AspectReference <em>Aspect Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.AspectReference
-	 * @generated
-	 */
-	public Adapter createAspectReferenceAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.ConceptReference <em>Concept Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.ConceptReference
-	 * @generated
-	 */
-	public Adapter createConceptReferenceAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.RelationEntityReference <em>Relation Entity Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.RelationEntityReference
-	 * @generated
-	 */
-	public Adapter createRelationEntityReferenceAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.StructureReference <em>Structure Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.StructureReference
-	 * @generated
-	 */
-	public Adapter createStructureReferenceAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.AnnotationPropertyReference <em>Annotation Property Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.AnnotationPropertyReference
-	 * @generated
-	 */
-	public Adapter createAnnotationPropertyReferenceAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.ScalarPropertyReference <em>Scalar Property Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.ScalarPropertyReference
-	 * @generated
-	 */
-	public Adapter createScalarPropertyReferenceAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.StructuredPropertyReference <em>Structured Property Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.StructuredPropertyReference
-	 * @generated
-	 */
-	public Adapter createStructuredPropertyReferenceAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.FacetedScalarReference <em>Faceted Scalar Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.FacetedScalarReference
-	 * @generated
-	 */
-	public Adapter createFacetedScalarReferenceAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.EnumeratedScalarReference <em>Enumerated Scalar Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.EnumeratedScalarReference
-	 * @generated
-	 */
-	public Adapter createEnumeratedScalarReferenceAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.RelationReference <em>Relation Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.RelationReference
-	 * @generated
-	 */
-	public Adapter createRelationReferenceAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.RuleReference <em>Rule Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.RuleReference
-	 * @generated
-	 */
-	public Adapter createRuleReferenceAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.NamedInstanceReference <em>Named Instance Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.NamedInstanceReference
-	 * @generated
-	 */
-	public Adapter createNamedInstanceReferenceAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.ConceptInstanceReference <em>Concept Instance Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.ConceptInstanceReference
-	 * @generated
-	 */
-	public Adapter createConceptInstanceReferenceAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.RelationInstanceReference <em>Relation Instance Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.RelationInstanceReference
-	 * @generated
-	 */
-	public Adapter createRelationInstanceReferenceAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.Statement <em>Statement</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.Statement
-	 * @generated
-	 */
-	public Adapter createStatementAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.VocabularyStatement <em>Vocabulary Statement</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.VocabularyStatement
-	 * @generated
-	 */
-	public Adapter createVocabularyStatementAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.DescriptionStatement <em>Description Statement</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.DescriptionStatement
-	 * @generated
-	 */
-	public Adapter createDescriptionStatementAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.Import <em>Import</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.Import
-	 * @generated
-	 */
-	public Adapter createImportAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.VocabularyImport <em>Vocabulary Import</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.VocabularyImport
-	 * @generated
-	 */
-	public Adapter createVocabularyImportAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.VocabularyExtension <em>Vocabulary Extension</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.VocabularyExtension
-	 * @generated
-	 */
-	public Adapter createVocabularyExtensionAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.VocabularyUsage <em>Vocabulary Usage</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.VocabularyUsage
-	 * @generated
-	 */
-	public Adapter createVocabularyUsageAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.VocabularyBundleImport <em>Vocabulary Bundle Import</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.VocabularyBundleImport
-	 * @generated
-	 */
-	public Adapter createVocabularyBundleImportAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.VocabularyBundleExtension <em>Vocabulary Bundle Extension</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.VocabularyBundleExtension
-	 * @generated
-	 */
-	public Adapter createVocabularyBundleExtensionAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.VocabularyBundleInclusion <em>Vocabulary Bundle Inclusion</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.VocabularyBundleInclusion
-	 * @generated
-	 */
-	public Adapter createVocabularyBundleInclusionAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.DescriptionImport <em>Description Import</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.DescriptionImport
-	 * @generated
-	 */
-	public Adapter createDescriptionImportAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.DescriptionExtension <em>Description Extension</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.DescriptionExtension
-	 * @generated
-	 */
-	public Adapter createDescriptionExtensionAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.DescriptionUsage <em>Description Usage</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.DescriptionUsage
-	 * @generated
-	 */
-	public Adapter createDescriptionUsageAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.DescriptionBundleImport <em>Description Bundle Import</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.DescriptionBundleImport
-	 * @generated
-	 */
-	public Adapter createDescriptionBundleImportAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.DescriptionBundleExtension <em>Description Bundle Extension</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.DescriptionBundleExtension
-	 * @generated
-	 */
-	public Adapter createDescriptionBundleExtensionAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.DescriptionBundleInclusion <em>Description Bundle Inclusion</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.DescriptionBundleInclusion
-	 * @generated
-	 */
-	public Adapter createDescriptionBundleInclusionAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.DescriptionBundleUsage <em>Description Bundle Usage</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.DescriptionBundleUsage
-	 * @generated
-	 */
-	public Adapter createDescriptionBundleUsageAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.Axiom <em>Axiom</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.Axiom
-	 * @generated
-	 */
-	public Adapter createAxiomAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.SpecializationAxiom <em>Specialization Axiom</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.SpecializationAxiom
-	 * @generated
-	 */
-	public Adapter createSpecializationAxiomAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.RestrictionAxiom <em>Restriction Axiom</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.RestrictionAxiom
-	 * @generated
-	 */
-	public Adapter createRestrictionAxiomAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.PropertyRestrictionAxiom <em>Property Restriction Axiom</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.PropertyRestrictionAxiom
-	 * @generated
-	 */
-	public Adapter createPropertyRestrictionAxiomAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.ScalarPropertyRestrictionAxiom <em>Scalar Property Restriction Axiom</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.ScalarPropertyRestrictionAxiom
-	 * @generated
-	 */
-	public Adapter createScalarPropertyRestrictionAxiomAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.ScalarPropertyRangeRestrictionAxiom <em>Scalar Property Range Restriction Axiom</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.ScalarPropertyRangeRestrictionAxiom
-	 * @generated
-	 */
-	public Adapter createScalarPropertyRangeRestrictionAxiomAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.ScalarPropertyCardinalityRestrictionAxiom <em>Scalar Property Cardinality Restriction Axiom</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.ScalarPropertyCardinalityRestrictionAxiom
-	 * @generated
-	 */
-	public Adapter createScalarPropertyCardinalityRestrictionAxiomAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.ScalarPropertyValueRestrictionAxiom <em>Scalar Property Value Restriction Axiom</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.ScalarPropertyValueRestrictionAxiom
-	 * @generated
-	 */
-	public Adapter createScalarPropertyValueRestrictionAxiomAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.StructuredPropertyRestrictionAxiom <em>Structured Property Restriction Axiom</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.StructuredPropertyRestrictionAxiom
-	 * @generated
-	 */
-	public Adapter createStructuredPropertyRestrictionAxiomAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.StructuredPropertyRangeRestrictionAxiom <em>Structured Property Range Restriction Axiom</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.StructuredPropertyRangeRestrictionAxiom
-	 * @generated
-	 */
-	public Adapter createStructuredPropertyRangeRestrictionAxiomAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.StructuredPropertyCardinalityRestrictionAxiom <em>Structured Property Cardinality Restriction Axiom</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.StructuredPropertyCardinalityRestrictionAxiom
-	 * @generated
-	 */
-	public Adapter createStructuredPropertyCardinalityRestrictionAxiomAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.StructuredPropertyValueRestrictionAxiom <em>Structured Property Value Restriction Axiom</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.StructuredPropertyValueRestrictionAxiom
-	 * @generated
-	 */
-	public Adapter createStructuredPropertyValueRestrictionAxiomAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.RelationRestrictionAxiom <em>Relation Restriction Axiom</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.RelationRestrictionAxiom
-	 * @generated
-	 */
-	public Adapter createRelationRestrictionAxiomAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.RelationRangeRestrictionAxiom <em>Relation Range Restriction Axiom</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.RelationRangeRestrictionAxiom
-	 * @generated
-	 */
-	public Adapter createRelationRangeRestrictionAxiomAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.RelationCardinalityRestrictionAxiom <em>Relation Cardinality Restriction Axiom</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.RelationCardinalityRestrictionAxiom
-	 * @generated
-	 */
-	public Adapter createRelationCardinalityRestrictionAxiomAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.RelationTargetRestrictionAxiom <em>Relation Target Restriction Axiom</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.RelationTargetRestrictionAxiom
-	 * @generated
-	 */
-	public Adapter createRelationTargetRestrictionAxiomAdapter() {
+	public Adapter createStructureInstanceAdapter() {
 		return null;
 	}
 
@@ -1830,16 +1126,156 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.Assertion <em>Assertion</em>}'.
+	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.SpecializationAxiom <em>Specialization Axiom</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see io.opencaesar.oml.Assertion
+	 * @see io.opencaesar.oml.SpecializationAxiom
 	 * @generated
 	 */
-	public Adapter createAssertionAdapter() {
+	public Adapter createSpecializationAxiomAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.InstanceEnumerationAxiom <em>Instance Enumeration Axiom</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see io.opencaesar.oml.InstanceEnumerationAxiom
+	 * @generated
+	 */
+	public Adapter createInstanceEnumerationAxiomAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.PropertyRestrictionAxiom <em>Property Restriction Axiom</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see io.opencaesar.oml.PropertyRestrictionAxiom
+	 * @generated
+	 */
+	public Adapter createPropertyRestrictionAxiomAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.LiteralEnumerationAxiom <em>Literal Enumeration Axiom</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see io.opencaesar.oml.LiteralEnumerationAxiom
+	 * @generated
+	 */
+	public Adapter createLiteralEnumerationAxiomAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.ClassifierEquivalenceAxiom <em>Classifier Equivalence Axiom</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see io.opencaesar.oml.ClassifierEquivalenceAxiom
+	 * @generated
+	 */
+	public Adapter createClassifierEquivalenceAxiomAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.ScalarEquivalenceAxiom <em>Scalar Equivalence Axiom</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see io.opencaesar.oml.ScalarEquivalenceAxiom
+	 * @generated
+	 */
+	public Adapter createScalarEquivalenceAxiomAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.PropertyEquivalenceAxiom <em>Property Equivalence Axiom</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see io.opencaesar.oml.PropertyEquivalenceAxiom
+	 * @generated
+	 */
+	public Adapter createPropertyEquivalenceAxiomAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.PropertyRangeRestrictionAxiom <em>Property Range Restriction Axiom</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see io.opencaesar.oml.PropertyRangeRestrictionAxiom
+	 * @generated
+	 */
+	public Adapter createPropertyRangeRestrictionAxiomAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.PropertyCardinalityRestrictionAxiom <em>Property Cardinality Restriction Axiom</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see io.opencaesar.oml.PropertyCardinalityRestrictionAxiom
+	 * @generated
+	 */
+	public Adapter createPropertyCardinalityRestrictionAxiomAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.PropertyValueRestrictionAxiom <em>Property Value Restriction Axiom</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see io.opencaesar.oml.PropertyValueRestrictionAxiom
+	 * @generated
+	 */
+	public Adapter createPropertyValueRestrictionAxiomAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.PropertySelfRestrictionAxiom <em>Property Self Restriction Axiom</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see io.opencaesar.oml.PropertySelfRestrictionAxiom
+	 * @generated
+	 */
+	public Adapter createPropertySelfRestrictionAxiomAdapter() {
 		return null;
 	}
 
@@ -1858,34 +1294,6 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.ConceptTypeAssertion <em>Concept Type Assertion</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.ConceptTypeAssertion
-	 * @generated
-	 */
-	public Adapter createConceptTypeAssertionAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.RelationTypeAssertion <em>Relation Type Assertion</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.RelationTypeAssertion
-	 * @generated
-	 */
-	public Adapter createRelationTypeAssertionAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.PropertyValueAssertion <em>Property Value Assertion</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -1896,62 +1304,6 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createPropertyValueAssertionAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.ScalarPropertyValueAssertion <em>Scalar Property Value Assertion</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.ScalarPropertyValueAssertion
-	 * @generated
-	 */
-	public Adapter createScalarPropertyValueAssertionAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.StructuredPropertyValueAssertion <em>Structured Property Value Assertion</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.StructuredPropertyValueAssertion
-	 * @generated
-	 */
-	public Adapter createStructuredPropertyValueAssertionAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.LinkAssertion <em>Link Assertion</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.LinkAssertion
-	 * @generated
-	 */
-	public Adapter createLinkAssertionAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.Predicate <em>Predicate</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.Predicate
-	 * @generated
-	 */
-	public Adapter createPredicateAdapter() {
 		return null;
 	}
 
@@ -1970,20 +1322,6 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.TypePredicate <em>Type Predicate</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.TypePredicate
-	 * @generated
-	 */
-	public Adapter createTypePredicateAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.BinaryPredicate <em>Binary Predicate</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -1994,6 +1332,34 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createBinaryPredicateAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.BuiltInPredicate <em>Built In Predicate</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see io.opencaesar.oml.BuiltInPredicate
+	 * @generated
+	 */
+	public Adapter createBuiltInPredicateAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.TypePredicate <em>Type Predicate</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see io.opencaesar.oml.TypePredicate
+	 * @generated
+	 */
+	public Adapter createTypePredicateAdapter() {
 		return null;
 	}
 
@@ -2012,16 +1378,16 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.FeaturePredicate <em>Feature Predicate</em>}'.
+	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.PropertyPredicate <em>Property Predicate</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see io.opencaesar.oml.FeaturePredicate
+	 * @see io.opencaesar.oml.PropertyPredicate
 	 * @generated
 	 */
-	public Adapter createFeaturePredicateAdapter() {
+	public Adapter createPropertyPredicateAdapter() {
 		return null;
 	}
 
@@ -2050,20 +1416,6 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createDifferentFromPredicateAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.Literal <em>Literal</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.Literal
-	 * @generated
-	 */
-	public Adapter createLiteralAdapter() {
 		return null;
 	}
 

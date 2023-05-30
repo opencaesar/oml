@@ -20,7 +20,6 @@ package io.opencaesar.oml.impl;
 
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.Vocabulary;
-import io.opencaesar.oml.VocabularyImport;
 import io.opencaesar.oml.VocabularyStatement;
 
 import java.util.Collection;
@@ -43,23 +42,12 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link io.opencaesar.oml.impl.VocabularyImpl#getOwnedImports <em>Owned Imports</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.VocabularyImpl#getOwnedStatements <em>Owned Statements</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class VocabularyImpl extends VocabularyBoxImpl implements Vocabulary {
-	/**
-	 * The cached value of the '{@link #getOwnedImports() <em>Owned Imports</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getOwnedImports()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<VocabularyImport> ownedImports;
-
 	/**
 	 * The cached value of the '{@link #getOwnedStatements() <em>Owned Statements</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -95,19 +83,6 @@ public class VocabularyImpl extends VocabularyBoxImpl implements Vocabulary {
 	 * @generated
 	 */
 	@Override
-	public EList<VocabularyImport> getOwnedImports() {
-		if (ownedImports == null) {
-			ownedImports = new EObjectContainmentWithInverseEList<VocabularyImport>(VocabularyImport.class, this, OmlPackage.VOCABULARY__OWNED_IMPORTS, OmlPackage.VOCABULARY_IMPORT__OWNING_VOCABULARY);
-		}
-		return ownedImports;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EList<VocabularyStatement> getOwnedStatements() {
 		if (ownedStatements == null) {
 			ownedStatements = new EObjectContainmentWithInverseEList<VocabularyStatement>(VocabularyStatement.class, this, OmlPackage.VOCABULARY__OWNED_STATEMENTS, OmlPackage.VOCABULARY_STATEMENT__OWNING_VOCABULARY);
@@ -124,8 +99,6 @@ public class VocabularyImpl extends VocabularyBoxImpl implements Vocabulary {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case OmlPackage.VOCABULARY__OWNED_IMPORTS:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedImports()).basicAdd(otherEnd, msgs);
 			case OmlPackage.VOCABULARY__OWNED_STATEMENTS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedStatements()).basicAdd(otherEnd, msgs);
 		}
@@ -140,8 +113,6 @@ public class VocabularyImpl extends VocabularyBoxImpl implements Vocabulary {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case OmlPackage.VOCABULARY__OWNED_IMPORTS:
-				return ((InternalEList<?>)getOwnedImports()).basicRemove(otherEnd, msgs);
 			case OmlPackage.VOCABULARY__OWNED_STATEMENTS:
 				return ((InternalEList<?>)getOwnedStatements()).basicRemove(otherEnd, msgs);
 		}
@@ -156,8 +127,6 @@ public class VocabularyImpl extends VocabularyBoxImpl implements Vocabulary {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case OmlPackage.VOCABULARY__OWNED_IMPORTS:
-				return getOwnedImports();
 			case OmlPackage.VOCABULARY__OWNED_STATEMENTS:
 				return getOwnedStatements();
 		}
@@ -173,10 +142,6 @@ public class VocabularyImpl extends VocabularyBoxImpl implements Vocabulary {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case OmlPackage.VOCABULARY__OWNED_IMPORTS:
-				getOwnedImports().clear();
-				getOwnedImports().addAll((Collection<? extends VocabularyImport>)newValue);
-				return;
 			case OmlPackage.VOCABULARY__OWNED_STATEMENTS:
 				getOwnedStatements().clear();
 				getOwnedStatements().addAll((Collection<? extends VocabularyStatement>)newValue);
@@ -193,9 +158,6 @@ public class VocabularyImpl extends VocabularyBoxImpl implements Vocabulary {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case OmlPackage.VOCABULARY__OWNED_IMPORTS:
-				getOwnedImports().clear();
-				return;
 			case OmlPackage.VOCABULARY__OWNED_STATEMENTS:
 				getOwnedStatements().clear();
 				return;
@@ -211,8 +173,6 @@ public class VocabularyImpl extends VocabularyBoxImpl implements Vocabulary {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case OmlPackage.VOCABULARY__OWNED_IMPORTS:
-				return ownedImports != null && !ownedImports.isEmpty();
 			case OmlPackage.VOCABULARY__OWNED_STATEMENTS:
 				return ownedStatements != null && !ownedStatements.isEmpty();
 		}

@@ -18,6 +18,7 @@
  */
 package io.opencaesar.oml;
 
+import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -25,72 +26,136 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * ReverseRelation is a relation that is defined along side a relation entity, whose domain is the target of
- * the relation entity, and whose range is the source of the relation entity. A reverse relation has DL semantics that
- * are the inverse of its entity's forward relation.
+ * ReverseRelation is a [=Relation=] that is defined by a [=RelationBase=] and represents its inverse [=relation=]. Its domain
+ * is the target of the [=RelationBase=], and its range is the source of the [=RelationBase=]. The DL semantics of a reverse property are
+ * derived from those of its [=RelationBase=].
  * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link io.opencaesar.oml.ReverseRelation#getRelationEntity <em>Relation Entity</em>}</li>
+ *   <li>{@link io.opencaesar.oml.ReverseRelation#getRelationBase <em>Relation Base</em>}</li>
  * </ul>
  *
  * @see io.opencaesar.oml.OmlPackage#getReverseRelation()
- * @model annotation="https://tabatkins.github.io/bikeshed heading='Features'"
+ * @model annotation="https://tabatkins.github.io/bikeshed heading='Relations'"
  * @generated
  */
 public interface ReverseRelation extends Relation {
 	/**
-	 * Returns the value of the '<em><b>Relation Entity</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.RelationEntity#getReverseRelation <em>Reverse Relation</em>}'.
+	 * Returns the value of the '<em><b>Relation Base</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.RelationBase#getReverseRelation <em>Reverse Relation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The relation entity that owns this reverse relation
+	 * The relation that owns this reverse property
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Relation Entity</em>' container reference.
-	 * @see #setRelationEntity(RelationEntity)
-	 * @see io.opencaesar.oml.OmlPackage#getReverseRelation_RelationEntity()
-	 * @see io.opencaesar.oml.RelationEntity#getReverseRelation
+	 * @return the value of the '<em>Relation Base</em>' container reference.
+	 * @see #setRelationBase(RelationBase)
+	 * @see io.opencaesar.oml.OmlPackage#getReverseRelation_RelationBase()
+	 * @see io.opencaesar.oml.RelationBase#getReverseRelation
 	 * @model opposite="reverseRelation" required="true" transient="false"
 	 * @generated
 	 */
-	RelationEntity getRelationEntity();
+	RelationBase getRelationBase();
 
 	/**
-	 * Sets the value of the '{@link io.opencaesar.oml.ReverseRelation#getRelationEntity <em>Relation Entity</em>}' container reference.
+	 * Sets the value of the '{@link io.opencaesar.oml.ReverseRelation#getRelationBase <em>Relation Base</em>}' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Relation Entity</em>' container reference.
-	 * @see #getRelationEntity()
+	 * @param value the new value of the '<em>Relation Base</em>' container reference.
+	 * @see #getRelationBase()
 	 * @generated
 	 */
-	void setRelationEntity(RelationEntity value);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model unique="false"
-	 * @generated
-	 */
-	Entity deriveDomain();
+	void setRelationBase(RelationBase value);
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model unique="false"
+	 * @model kind="operation" unique="false"
 	 * @generated
 	 */
-	Entity deriveRange();
+	Member getRef();
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model unique="false"
+	 * @model kind="operation" unique="false"
 	 * @generated
 	 */
-	Relation deriveInverse();
+	boolean isFunctional();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
+	boolean isInverseFunctional();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
+	boolean isSymmetric();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
+	boolean isAsymmetric();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
+	boolean isReflexive();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
+	boolean isIrreflexive();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
+	boolean isTransitive();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
+	EList<Entity> getDomains();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
+	EList<Entity> getRanges();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
+	Relation getInverse();
 
 } // ReverseRelation

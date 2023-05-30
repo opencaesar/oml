@@ -18,6 +18,7 @@
  */
 package io.opencaesar.oml;
 
+import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -25,16 +26,40 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * IdentifiedElement is an annotated element that is identified by an IRI.
+ * IdentifiedElement is an element that has a unique IRI (Internationalized Resource Identifier).
+ * It can be annotated by a set of [=Annotations=].
  * <!-- end-model-doc -->
  *
+ * <p>
+ * The following features are supported:
+ * </p>
+ * <ul>
+ *   <li>{@link io.opencaesar.oml.IdentifiedElement#getOwnedAnnotations <em>Owned Annotations</em>}</li>
+ * </ul>
  *
  * @see io.opencaesar.oml.OmlPackage#getIdentifiedElement()
  * @model abstract="true"
  *        annotation="https://tabatkins.github.io/bikeshed heading='Elements'"
  * @generated
  */
-public interface IdentifiedElement extends AnnotatedElement {
+public interface IdentifiedElement extends Element {
+	/**
+	 * Returns the value of the '<em><b>Owned Annotations</b></em>' containment reference list.
+	 * The list contents are of type {@link io.opencaesar.oml.Annotation}.
+	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.Annotation#getOwningElement <em>Owning Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The set of annotations directly owned by this element
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Owned Annotations</em>' containment reference list.
+	 * @see io.opencaesar.oml.OmlPackage#getIdentifiedElement_OwnedAnnotations()
+	 * @see io.opencaesar.oml.Annotation#getOwningElement
+	 * @model opposite="owningElement" containment="true"
+	 * @generated
+	 */
+	EList<Annotation> getOwnedAnnotations();
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

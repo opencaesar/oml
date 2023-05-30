@@ -18,6 +18,7 @@
  */
 package io.opencaesar.oml;
 
+import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -25,14 +26,14 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * SemanticProperty is a property with DL semantics that relates instances of a classifier acting as its
- * domain to a value typed by either a scalar or a structure representing its range.
+ * SemanticProperty is a [=property=] with DL semantics that relates a [=classifier=] acting as its
+ * domain to a [=type=] acting as its range.
  * <!-- end-model-doc -->
  *
  *
  * @see io.opencaesar.oml.OmlPackage#getSemanticProperty()
  * @model abstract="true"
- *        annotation="https://tabatkins.github.io/bikeshed heading='Features'"
+ *        annotation="https://tabatkins.github.io/bikeshed heading='Properties'"
  * @generated
  */
 public interface SemanticProperty extends Property {
@@ -51,22 +52,22 @@ public interface SemanticProperty extends Property {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Gets the domain of this property
+	 * Gets the domains of this property
 	 * <!-- end-model-doc -->
 	 * @model kind="operation" unique="false"
 	 * @generated
 	 */
-	Classifier getDomain();
+	EList<Classifier> getDomainList();
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Gets the range of the property
+	 * Gets the ranges of this property
 	 * <!-- end-model-doc -->
 	 * @model kind="operation" unique="false"
 	 * @generated
 	 */
-	Type getRange();
+	EList<Type> getRangeList();
 
 } // SemanticProperty

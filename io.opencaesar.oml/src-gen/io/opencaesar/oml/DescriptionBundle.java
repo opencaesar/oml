@@ -18,7 +18,6 @@
  */
 package io.opencaesar.oml;
 
-import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -26,37 +25,14 @@ import org.eclipse.emf.common.util.EList;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * DescriptionBundle is a description box that allows importing other description boxes and flagging them
- * as a set that is analyzed together for consistency and satisfiabilty.
+ * DescriptionBundle is a description box that closes the world on its imported [=descriptions=] by considering their [=instances=]
+ * and their assertions to be the only ones available.
  * <!-- end-model-doc -->
  *
- * <p>
- * The following features are supported:
- * </p>
- * <ul>
- *   <li>{@link io.opencaesar.oml.DescriptionBundle#getOwnedImports <em>Owned Imports</em>}</li>
- * </ul>
  *
  * @see io.opencaesar.oml.OmlPackage#getDescriptionBundle()
  * @model annotation="https://tabatkins.github.io/bikeshed heading='Descriptions'"
  * @generated
  */
 public interface DescriptionBundle extends DescriptionBox {
-	/**
-	 * Returns the value of the '<em><b>Owned Imports</b></em>' containment reference list.
-	 * The list contents are of type {@link io.opencaesar.oml.DescriptionBundleImport}.
-	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.DescriptionBundleImport#getOwningDescriptionBundle <em>Owning Description Bundle</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * The set of imports this description bundle has of other descriptions
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Owned Imports</em>' containment reference list.
-	 * @see io.opencaesar.oml.OmlPackage#getDescriptionBundle_OwnedImports()
-	 * @see io.opencaesar.oml.DescriptionBundleImport#getOwningDescriptionBundle
-	 * @model opposite="owningDescriptionBundle" containment="true"
-	 * @generated
-	 */
-	EList<DescriptionBundleImport> getOwnedImports();
-
 } // DescriptionBundle

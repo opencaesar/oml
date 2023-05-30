@@ -78,7 +78,6 @@ public class DescriptionItemProvider extends DescriptionBoxItemProvider {
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(OmlPackage.Literals.DESCRIPTION__OWNED_IMPORTS);
 			childrenFeatures.add(OmlPackage.Literals.DESCRIPTION__OWNED_STATEMENTS);
 		}
 		return childrenFeatures;
@@ -135,7 +134,6 @@ public class DescriptionItemProvider extends DescriptionBoxItemProvider {
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Description.class)) {
-			case OmlPackage.DESCRIPTION__OWNED_IMPORTS:
 			case OmlPackage.DESCRIPTION__OWNED_STATEMENTS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
@@ -156,16 +154,6 @@ public class DescriptionItemProvider extends DescriptionBoxItemProvider {
 
 		newChildDescriptors.add
 			(createChildParameter
-				(OmlPackage.Literals.DESCRIPTION__OWNED_IMPORTS,
-				 OmlFactory.eINSTANCE.createDescriptionExtension()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OmlPackage.Literals.DESCRIPTION__OWNED_IMPORTS,
-				 OmlFactory.eINSTANCE.createDescriptionUsage()));
-
-		newChildDescriptors.add
-			(createChildParameter
 				(OmlPackage.Literals.DESCRIPTION__OWNED_STATEMENTS,
 				 OmlFactory.eINSTANCE.createConceptInstance()));
 
@@ -173,16 +161,6 @@ public class DescriptionItemProvider extends DescriptionBoxItemProvider {
 			(createChildParameter
 				(OmlPackage.Literals.DESCRIPTION__OWNED_STATEMENTS,
 				 OmlFactory.eINSTANCE.createRelationInstance()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OmlPackage.Literals.DESCRIPTION__OWNED_STATEMENTS,
-				 OmlFactory.eINSTANCE.createConceptInstanceReference()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OmlPackage.Literals.DESCRIPTION__OWNED_STATEMENTS,
-				 OmlFactory.eINSTANCE.createRelationInstanceReference()));
 	}
 
 }

@@ -21,7 +21,6 @@ package io.opencaesar.oml.impl;
 import io.opencaesar.oml.Entity;
 import io.opencaesar.oml.KeyAxiom;
 import io.opencaesar.oml.OmlPackage;
-import io.opencaesar.oml.RelationRestrictionAxiom;
 
 import java.util.Collection;
 
@@ -43,23 +42,12 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link io.opencaesar.oml.impl.EntityImpl#getOwnedRelationRestrictions <em>Owned Relation Restrictions</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.EntityImpl#getOwnedKeys <em>Owned Keys</em>}</li>
  * </ul>
  *
  * @generated
  */
 public abstract class EntityImpl extends ClassifierImpl implements Entity {
-	/**
-	 * The cached value of the '{@link #getOwnedRelationRestrictions() <em>Owned Relation Restrictions</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getOwnedRelationRestrictions()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<RelationRestrictionAxiom> ownedRelationRestrictions;
-
 	/**
 	 * The cached value of the '{@link #getOwnedKeys() <em>Owned Keys</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -95,19 +83,6 @@ public abstract class EntityImpl extends ClassifierImpl implements Entity {
 	 * @generated
 	 */
 	@Override
-	public EList<RelationRestrictionAxiom> getOwnedRelationRestrictions() {
-		if (ownedRelationRestrictions == null) {
-			ownedRelationRestrictions = new EObjectContainmentWithInverseEList<RelationRestrictionAxiom>(RelationRestrictionAxiom.class, this, OmlPackage.ENTITY__OWNED_RELATION_RESTRICTIONS, OmlPackage.RELATION_RESTRICTION_AXIOM__OWNING_ENTITY);
-		}
-		return ownedRelationRestrictions;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EList<KeyAxiom> getOwnedKeys() {
 		if (ownedKeys == null) {
 			ownedKeys = new EObjectContainmentWithInverseEList<KeyAxiom>(KeyAxiom.class, this, OmlPackage.ENTITY__OWNED_KEYS, OmlPackage.KEY_AXIOM__OWNING_ENTITY);
@@ -124,8 +99,6 @@ public abstract class EntityImpl extends ClassifierImpl implements Entity {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case OmlPackage.ENTITY__OWNED_RELATION_RESTRICTIONS:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedRelationRestrictions()).basicAdd(otherEnd, msgs);
 			case OmlPackage.ENTITY__OWNED_KEYS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedKeys()).basicAdd(otherEnd, msgs);
 		}
@@ -140,8 +113,6 @@ public abstract class EntityImpl extends ClassifierImpl implements Entity {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case OmlPackage.ENTITY__OWNED_RELATION_RESTRICTIONS:
-				return ((InternalEList<?>)getOwnedRelationRestrictions()).basicRemove(otherEnd, msgs);
 			case OmlPackage.ENTITY__OWNED_KEYS:
 				return ((InternalEList<?>)getOwnedKeys()).basicRemove(otherEnd, msgs);
 		}
@@ -156,8 +127,6 @@ public abstract class EntityImpl extends ClassifierImpl implements Entity {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case OmlPackage.ENTITY__OWNED_RELATION_RESTRICTIONS:
-				return getOwnedRelationRestrictions();
 			case OmlPackage.ENTITY__OWNED_KEYS:
 				return getOwnedKeys();
 		}
@@ -173,10 +142,6 @@ public abstract class EntityImpl extends ClassifierImpl implements Entity {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case OmlPackage.ENTITY__OWNED_RELATION_RESTRICTIONS:
-				getOwnedRelationRestrictions().clear();
-				getOwnedRelationRestrictions().addAll((Collection<? extends RelationRestrictionAxiom>)newValue);
-				return;
 			case OmlPackage.ENTITY__OWNED_KEYS:
 				getOwnedKeys().clear();
 				getOwnedKeys().addAll((Collection<? extends KeyAxiom>)newValue);
@@ -193,9 +158,6 @@ public abstract class EntityImpl extends ClassifierImpl implements Entity {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case OmlPackage.ENTITY__OWNED_RELATION_RESTRICTIONS:
-				getOwnedRelationRestrictions().clear();
-				return;
 			case OmlPackage.ENTITY__OWNED_KEYS:
 				getOwnedKeys().clear();
 				return;
@@ -211,8 +173,6 @@ public abstract class EntityImpl extends ClassifierImpl implements Entity {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case OmlPackage.ENTITY__OWNED_RELATION_RESTRICTIONS:
-				return ownedRelationRestrictions != null && !ownedRelationRestrictions.isEmpty();
 			case OmlPackage.ENTITY__OWNED_KEYS:
 				return ownedKeys != null && !ownedKeys.isEmpty();
 		}

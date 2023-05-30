@@ -78,6 +78,7 @@ public class ClassifierItemProvider extends TypeItemProvider {
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
+			childrenFeatures.add(OmlPackage.Literals.CLASSIFIER__OWNED_EQUIVALENCES);
 			childrenFeatures.add(OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS);
 		}
 		return childrenFeatures;
@@ -123,6 +124,7 @@ public class ClassifierItemProvider extends TypeItemProvider {
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Classifier.class)) {
+			case OmlPackage.CLASSIFIER__OWNED_EQUIVALENCES:
 			case OmlPackage.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
@@ -143,33 +145,28 @@ public class ClassifierItemProvider extends TypeItemProvider {
 
 		newChildDescriptors.add
 			(createChildParameter
-				(OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS,
-				 OmlFactory.eINSTANCE.createScalarPropertyRangeRestrictionAxiom()));
+				(OmlPackage.Literals.CLASSIFIER__OWNED_EQUIVALENCES,
+				 OmlFactory.eINSTANCE.createClassifierEquivalenceAxiom()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS,
-				 OmlFactory.eINSTANCE.createScalarPropertyCardinalityRestrictionAxiom()));
+				 OmlFactory.eINSTANCE.createPropertyRangeRestrictionAxiom()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS,
-				 OmlFactory.eINSTANCE.createScalarPropertyValueRestrictionAxiom()));
+				 OmlFactory.eINSTANCE.createPropertyCardinalityRestrictionAxiom()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS,
-				 OmlFactory.eINSTANCE.createStructuredPropertyRangeRestrictionAxiom()));
+				 OmlFactory.eINSTANCE.createPropertyValueRestrictionAxiom()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS,
-				 OmlFactory.eINSTANCE.createStructuredPropertyCardinalityRestrictionAxiom()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS,
-				 OmlFactory.eINSTANCE.createStructuredPropertyValueRestrictionAxiom()));
+				 OmlFactory.eINSTANCE.createPropertySelfRestrictionAxiom()));
 	}
 
 }

@@ -26,14 +26,14 @@ import org.eclipse.emf.common.util.EList;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * NamedInstance is an instance that is a member of a description. It can specify links to other named instances.
+ * NamedInstance is an [=Instance=] that is a member of a [=description=].
  * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link io.opencaesar.oml.NamedInstance#getOwnedLinks <em>Owned Links</em>}</li>
+ *   <li>{@link io.opencaesar.oml.NamedInstance#getOwnedTypes <em>Owned Types</em>}</li>
  * </ul>
  *
  * @see io.opencaesar.oml.OmlPackage#getNamedInstance()
@@ -41,22 +41,22 @@ import org.eclipse.emf.common.util.EList;
  *        annotation="https://tabatkins.github.io/bikeshed heading='Instances'"
  * @generated
  */
-public interface NamedInstance extends Member, Instance, DescriptionStatement {
+public interface NamedInstance extends DescriptionStatement, Instance {
 	/**
-	 * Returns the value of the '<em><b>Owned Links</b></em>' containment reference list.
-	 * The list contents are of type {@link io.opencaesar.oml.LinkAssertion}.
-	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.LinkAssertion#getOwningInstance <em>Owning Instance</em>}'.
+	 * Returns the value of the '<em><b>Owned Types</b></em>' containment reference list.
+	 * The list contents are of type {@link io.opencaesar.oml.TypeAssertion}.
+	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.TypeAssertion#getOwningInstance <em>Owning Instance</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The links specified by this named instance to other named instances
+	 * The types of this instance
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Owned Links</em>' containment reference list.
-	 * @see io.opencaesar.oml.OmlPackage#getNamedInstance_OwnedLinks()
-	 * @see io.opencaesar.oml.LinkAssertion#getOwningInstance
+	 * @return the value of the '<em>Owned Types</em>' containment reference list.
+	 * @see io.opencaesar.oml.OmlPackage#getNamedInstance_OwnedTypes()
+	 * @see io.opencaesar.oml.TypeAssertion#getOwningInstance
 	 * @model opposite="owningInstance" containment="true"
 	 * @generated
 	 */
-	EList<LinkAssertion> getOwnedLinks();
+	EList<TypeAssertion> getOwnedTypes();
 
 } // NamedInstance

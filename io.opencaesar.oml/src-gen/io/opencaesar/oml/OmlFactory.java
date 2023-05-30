@@ -47,6 +47,24 @@ public interface OmlFactory extends EFactory {
 	Annotation createAnnotation();
 
 	/**
+	 * Returns a new object of class '<em>Import</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Import</em>'.
+	 * @generated
+	 */
+	Import createImport();
+
+	/**
+	 * Returns a new object of class '<em>Argument</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Argument</em>'.
+	 * @generated
+	 */
+	Argument createArgument();
+
+	/**
 	 * Returns a new object of class '<em>Vocabulary</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -83,6 +101,42 @@ public interface OmlFactory extends EFactory {
 	DescriptionBundle createDescriptionBundle();
 
 	/**
+	 * Returns a new object of class '<em>Rule</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Rule</em>'.
+	 * @generated
+	 */
+	Rule createRule();
+
+	/**
+	 * Returns a new object of class '<em>Built In</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Built In</em>'.
+	 * @generated
+	 */
+	BuiltIn createBuiltIn();
+
+	/**
+	 * Returns a new object of class '<em>Scalar</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Scalar</em>'.
+	 * @generated
+	 */
+	Scalar createScalar();
+
+	/**
+	 * Returns a new object of class '<em>Structure</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Structure</em>'.
+	 * @generated
+	 */
+	Structure createStructure();
+
+	/**
 	 * Returns a new object of class '<em>Aspect</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -108,15 +162,6 @@ public interface OmlFactory extends EFactory {
 	 * @generated
 	 */
 	RelationEntity createRelationEntity();
-
-	/**
-	 * Returns a new object of class '<em>Structure</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Structure</em>'.
-	 * @generated
-	 */
-	Structure createStructure();
 
 	/**
 	 * Returns a new object of class '<em>Annotation Property</em>'.
@@ -146,24 +191,6 @@ public interface OmlFactory extends EFactory {
 	StructuredProperty createStructuredProperty();
 
 	/**
-	 * Returns a new object of class '<em>Faceted Scalar</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Faceted Scalar</em>'.
-	 * @generated
-	 */
-	FacetedScalar createFacetedScalar();
-
-	/**
-	 * Returns a new object of class '<em>Enumerated Scalar</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Enumerated Scalar</em>'.
-	 * @generated
-	 */
-	EnumeratedScalar createEnumeratedScalar();
-
-	/**
 	 * Returns a new object of class '<em>Forward Relation</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -182,22 +209,13 @@ public interface OmlFactory extends EFactory {
 	ReverseRelation createReverseRelation();
 
 	/**
-	 * Returns a new object of class '<em>Rule</em>'.
+	 * Returns a new object of class '<em>Unreified Relation</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Rule</em>'.
+	 * @return a new object of class '<em>Unreified Relation</em>'.
 	 * @generated
 	 */
-	Rule createRule();
-
-	/**
-	 * Returns a new object of class '<em>Structure Instance</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Structure Instance</em>'.
-	 * @generated
-	 */
-	StructureInstance createStructureInstance();
+	UnreifiedRelation createUnreifiedRelation();
 
 	/**
 	 * Returns a new object of class '<em>Concept Instance</em>'.
@@ -218,292 +236,13 @@ public interface OmlFactory extends EFactory {
 	RelationInstance createRelationInstance();
 
 	/**
-	 * Returns a new object of class '<em>Aspect Reference</em>'.
+	 * Returns a new object of class '<em>Structure Instance</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Aspect Reference</em>'.
+	 * @return a new object of class '<em>Structure Instance</em>'.
 	 * @generated
 	 */
-	AspectReference createAspectReference();
-
-	/**
-	 * Returns a new object of class '<em>Concept Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Concept Reference</em>'.
-	 * @generated
-	 */
-	ConceptReference createConceptReference();
-
-	/**
-	 * Returns a new object of class '<em>Relation Entity Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Relation Entity Reference</em>'.
-	 * @generated
-	 */
-	RelationEntityReference createRelationEntityReference();
-
-	/**
-	 * Returns a new object of class '<em>Structure Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Structure Reference</em>'.
-	 * @generated
-	 */
-	StructureReference createStructureReference();
-
-	/**
-	 * Returns a new object of class '<em>Annotation Property Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Annotation Property Reference</em>'.
-	 * @generated
-	 */
-	AnnotationPropertyReference createAnnotationPropertyReference();
-
-	/**
-	 * Returns a new object of class '<em>Scalar Property Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Scalar Property Reference</em>'.
-	 * @generated
-	 */
-	ScalarPropertyReference createScalarPropertyReference();
-
-	/**
-	 * Returns a new object of class '<em>Structured Property Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Structured Property Reference</em>'.
-	 * @generated
-	 */
-	StructuredPropertyReference createStructuredPropertyReference();
-
-	/**
-	 * Returns a new object of class '<em>Faceted Scalar Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Faceted Scalar Reference</em>'.
-	 * @generated
-	 */
-	FacetedScalarReference createFacetedScalarReference();
-
-	/**
-	 * Returns a new object of class '<em>Enumerated Scalar Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Enumerated Scalar Reference</em>'.
-	 * @generated
-	 */
-	EnumeratedScalarReference createEnumeratedScalarReference();
-
-	/**
-	 * Returns a new object of class '<em>Relation Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Relation Reference</em>'.
-	 * @generated
-	 */
-	RelationReference createRelationReference();
-
-	/**
-	 * Returns a new object of class '<em>Rule Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Rule Reference</em>'.
-	 * @generated
-	 */
-	RuleReference createRuleReference();
-
-	/**
-	 * Returns a new object of class '<em>Concept Instance Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Concept Instance Reference</em>'.
-	 * @generated
-	 */
-	ConceptInstanceReference createConceptInstanceReference();
-
-	/**
-	 * Returns a new object of class '<em>Relation Instance Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Relation Instance Reference</em>'.
-	 * @generated
-	 */
-	RelationInstanceReference createRelationInstanceReference();
-
-	/**
-	 * Returns a new object of class '<em>Vocabulary Extension</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Vocabulary Extension</em>'.
-	 * @generated
-	 */
-	VocabularyExtension createVocabularyExtension();
-
-	/**
-	 * Returns a new object of class '<em>Vocabulary Usage</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Vocabulary Usage</em>'.
-	 * @generated
-	 */
-	VocabularyUsage createVocabularyUsage();
-
-	/**
-	 * Returns a new object of class '<em>Vocabulary Bundle Extension</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Vocabulary Bundle Extension</em>'.
-	 * @generated
-	 */
-	VocabularyBundleExtension createVocabularyBundleExtension();
-
-	/**
-	 * Returns a new object of class '<em>Vocabulary Bundle Inclusion</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Vocabulary Bundle Inclusion</em>'.
-	 * @generated
-	 */
-	VocabularyBundleInclusion createVocabularyBundleInclusion();
-
-	/**
-	 * Returns a new object of class '<em>Description Extension</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Description Extension</em>'.
-	 * @generated
-	 */
-	DescriptionExtension createDescriptionExtension();
-
-	/**
-	 * Returns a new object of class '<em>Description Usage</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Description Usage</em>'.
-	 * @generated
-	 */
-	DescriptionUsage createDescriptionUsage();
-
-	/**
-	 * Returns a new object of class '<em>Description Bundle Extension</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Description Bundle Extension</em>'.
-	 * @generated
-	 */
-	DescriptionBundleExtension createDescriptionBundleExtension();
-
-	/**
-	 * Returns a new object of class '<em>Description Bundle Inclusion</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Description Bundle Inclusion</em>'.
-	 * @generated
-	 */
-	DescriptionBundleInclusion createDescriptionBundleInclusion();
-
-	/**
-	 * Returns a new object of class '<em>Description Bundle Usage</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Description Bundle Usage</em>'.
-	 * @generated
-	 */
-	DescriptionBundleUsage createDescriptionBundleUsage();
-
-	/**
-	 * Returns a new object of class '<em>Specialization Axiom</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Specialization Axiom</em>'.
-	 * @generated
-	 */
-	SpecializationAxiom createSpecializationAxiom();
-
-	/**
-	 * Returns a new object of class '<em>Scalar Property Range Restriction Axiom</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Scalar Property Range Restriction Axiom</em>'.
-	 * @generated
-	 */
-	ScalarPropertyRangeRestrictionAxiom createScalarPropertyRangeRestrictionAxiom();
-
-	/**
-	 * Returns a new object of class '<em>Scalar Property Cardinality Restriction Axiom</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Scalar Property Cardinality Restriction Axiom</em>'.
-	 * @generated
-	 */
-	ScalarPropertyCardinalityRestrictionAxiom createScalarPropertyCardinalityRestrictionAxiom();
-
-	/**
-	 * Returns a new object of class '<em>Scalar Property Value Restriction Axiom</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Scalar Property Value Restriction Axiom</em>'.
-	 * @generated
-	 */
-	ScalarPropertyValueRestrictionAxiom createScalarPropertyValueRestrictionAxiom();
-
-	/**
-	 * Returns a new object of class '<em>Structured Property Range Restriction Axiom</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Structured Property Range Restriction Axiom</em>'.
-	 * @generated
-	 */
-	StructuredPropertyRangeRestrictionAxiom createStructuredPropertyRangeRestrictionAxiom();
-
-	/**
-	 * Returns a new object of class '<em>Structured Property Cardinality Restriction Axiom</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Structured Property Cardinality Restriction Axiom</em>'.
-	 * @generated
-	 */
-	StructuredPropertyCardinalityRestrictionAxiom createStructuredPropertyCardinalityRestrictionAxiom();
-
-	/**
-	 * Returns a new object of class '<em>Structured Property Value Restriction Axiom</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Structured Property Value Restriction Axiom</em>'.
-	 * @generated
-	 */
-	StructuredPropertyValueRestrictionAxiom createStructuredPropertyValueRestrictionAxiom();
-
-	/**
-	 * Returns a new object of class '<em>Relation Range Restriction Axiom</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Relation Range Restriction Axiom</em>'.
-	 * @generated
-	 */
-	RelationRangeRestrictionAxiom createRelationRangeRestrictionAxiom();
-
-	/**
-	 * Returns a new object of class '<em>Relation Cardinality Restriction Axiom</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Relation Cardinality Restriction Axiom</em>'.
-	 * @generated
-	 */
-	RelationCardinalityRestrictionAxiom createRelationCardinalityRestrictionAxiom();
-
-	/**
-	 * Returns a new object of class '<em>Relation Target Restriction Axiom</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Relation Target Restriction Axiom</em>'.
-	 * @generated
-	 */
-	RelationTargetRestrictionAxiom createRelationTargetRestrictionAxiom();
+	StructureInstance createStructureInstance();
 
 	/**
 	 * Returns a new object of class '<em>Key Axiom</em>'.
@@ -515,49 +254,121 @@ public interface OmlFactory extends EFactory {
 	KeyAxiom createKeyAxiom();
 
 	/**
-	 * Returns a new object of class '<em>Concept Type Assertion</em>'.
+	 * Returns a new object of class '<em>Specialization Axiom</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Concept Type Assertion</em>'.
+	 * @return a new object of class '<em>Specialization Axiom</em>'.
 	 * @generated
 	 */
-	ConceptTypeAssertion createConceptTypeAssertion();
+	SpecializationAxiom createSpecializationAxiom();
 
 	/**
-	 * Returns a new object of class '<em>Relation Type Assertion</em>'.
+	 * Returns a new object of class '<em>Instance Enumeration Axiom</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Relation Type Assertion</em>'.
+	 * @return a new object of class '<em>Instance Enumeration Axiom</em>'.
 	 * @generated
 	 */
-	RelationTypeAssertion createRelationTypeAssertion();
+	InstanceEnumerationAxiom createInstanceEnumerationAxiom();
 
 	/**
-	 * Returns a new object of class '<em>Scalar Property Value Assertion</em>'.
+	 * Returns a new object of class '<em>Literal Enumeration Axiom</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Scalar Property Value Assertion</em>'.
+	 * @return a new object of class '<em>Literal Enumeration Axiom</em>'.
 	 * @generated
 	 */
-	ScalarPropertyValueAssertion createScalarPropertyValueAssertion();
+	LiteralEnumerationAxiom createLiteralEnumerationAxiom();
 
 	/**
-	 * Returns a new object of class '<em>Structured Property Value Assertion</em>'.
+	 * Returns a new object of class '<em>Classifier Equivalence Axiom</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Structured Property Value Assertion</em>'.
+	 * @return a new object of class '<em>Classifier Equivalence Axiom</em>'.
 	 * @generated
 	 */
-	StructuredPropertyValueAssertion createStructuredPropertyValueAssertion();
+	ClassifierEquivalenceAxiom createClassifierEquivalenceAxiom();
 
 	/**
-	 * Returns a new object of class '<em>Link Assertion</em>'.
+	 * Returns a new object of class '<em>Scalar Equivalence Axiom</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Link Assertion</em>'.
+	 * @return a new object of class '<em>Scalar Equivalence Axiom</em>'.
 	 * @generated
 	 */
-	LinkAssertion createLinkAssertion();
+	ScalarEquivalenceAxiom createScalarEquivalenceAxiom();
+
+	/**
+	 * Returns a new object of class '<em>Property Equivalence Axiom</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Property Equivalence Axiom</em>'.
+	 * @generated
+	 */
+	PropertyEquivalenceAxiom createPropertyEquivalenceAxiom();
+
+	/**
+	 * Returns a new object of class '<em>Property Range Restriction Axiom</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Property Range Restriction Axiom</em>'.
+	 * @generated
+	 */
+	PropertyRangeRestrictionAxiom createPropertyRangeRestrictionAxiom();
+
+	/**
+	 * Returns a new object of class '<em>Property Cardinality Restriction Axiom</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Property Cardinality Restriction Axiom</em>'.
+	 * @generated
+	 */
+	PropertyCardinalityRestrictionAxiom createPropertyCardinalityRestrictionAxiom();
+
+	/**
+	 * Returns a new object of class '<em>Property Value Restriction Axiom</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Property Value Restriction Axiom</em>'.
+	 * @generated
+	 */
+	PropertyValueRestrictionAxiom createPropertyValueRestrictionAxiom();
+
+	/**
+	 * Returns a new object of class '<em>Property Self Restriction Axiom</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Property Self Restriction Axiom</em>'.
+	 * @generated
+	 */
+	PropertySelfRestrictionAxiom createPropertySelfRestrictionAxiom();
+
+	/**
+	 * Returns a new object of class '<em>Type Assertion</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Type Assertion</em>'.
+	 * @generated
+	 */
+	TypeAssertion createTypeAssertion();
+
+	/**
+	 * Returns a new object of class '<em>Property Value Assertion</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Property Value Assertion</em>'.
+	 * @generated
+	 */
+	PropertyValueAssertion createPropertyValueAssertion();
+
+	/**
+	 * Returns a new object of class '<em>Built In Predicate</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Built In Predicate</em>'.
+	 * @generated
+	 */
+	BuiltInPredicate createBuiltInPredicate();
 
 	/**
 	 * Returns a new object of class '<em>Type Predicate</em>'.
@@ -578,13 +389,13 @@ public interface OmlFactory extends EFactory {
 	RelationEntityPredicate createRelationEntityPredicate();
 
 	/**
-	 * Returns a new object of class '<em>Feature Predicate</em>'.
+	 * Returns a new object of class '<em>Property Predicate</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Feature Predicate</em>'.
+	 * @return a new object of class '<em>Property Predicate</em>'.
 	 * @generated
 	 */
-	FeaturePredicate createFeaturePredicate();
+	PropertyPredicate createPropertyPredicate();
 
 	/**
 	 * Returns a new object of class '<em>Same As Predicate</em>'.

@@ -26,8 +26,8 @@ import org.eclipse.emf.common.util.EList;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * KeyAxiom is an axiom that states that a set of features form a unique key for an entity. This means that all
- * instances of that entity must have unique values for those keys.
+ * KeyAxiom is an [=Axiom=] that specifies that a set of [=properties=] form a unique key for an [=entity=]. This means that all
+ * [=instances=] of that [=entity=] must have unique values for those keys.
  * <!-- end-model-doc -->
  *
  * <p>
@@ -36,7 +36,6 @@ import org.eclipse.emf.common.util.EList;
  * <ul>
  *   <li>{@link io.opencaesar.oml.KeyAxiom#getProperties <em>Properties</em>}</li>
  *   <li>{@link io.opencaesar.oml.KeyAxiom#getOwningEntity <em>Owning Entity</em>}</li>
- *   <li>{@link io.opencaesar.oml.KeyAxiom#getOwningReference <em>Owning Reference</em>}</li>
  * </ul>
  *
  * @see io.opencaesar.oml.OmlPackage#getKeyAxiom()
@@ -46,18 +45,18 @@ import org.eclipse.emf.common.util.EList;
 public interface KeyAxiom extends Axiom {
 	/**
 	 * Returns the value of the '<em><b>Properties</b></em>' reference list.
-	 * The list contents are of type {@link io.opencaesar.oml.Feature}.
+	 * The list contents are of type {@link io.opencaesar.oml.Property}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The set of features specified by this axiom as a key
+	 * The set of key properties specified by this axiom
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Properties</em>' reference list.
 	 * @see io.opencaesar.oml.OmlPackage#getKeyAxiom_Properties()
 	 * @model required="true"
 	 * @generated
 	 */
-	EList<Feature> getProperties();
+	EList<Property> getProperties();
 
 	/**
 	 * Returns the value of the '<em><b>Owning Entity</b></em>' container reference.
@@ -65,7 +64,7 @@ public interface KeyAxiom extends Axiom {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The entity that owns this axiom
+	 * The owning entity specified by this axiom
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Owning Entity</em>' container reference.
 	 * @see #setOwningEntity(Entity)
@@ -87,30 +86,22 @@ public interface KeyAxiom extends Axiom {
 	void setOwningEntity(Entity value);
 
 	/**
-	 * Returns the value of the '<em><b>Owning Reference</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.EntityReference#getOwnedKeys <em>Owned Keys</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The reference to an entity that owns this axiom
+	 * Gets the entity that defines the given key axiom
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Owning Reference</em>' container reference.
-	 * @see #setOwningReference(EntityReference)
-	 * @see io.opencaesar.oml.OmlPackage#getKeyAxiom_OwningReference()
-	 * @see io.opencaesar.oml.EntityReference#getOwnedKeys
-	 * @model opposite="ownedKeys" transient="false"
+	 * @model kind="operation" unique="false"
 	 * @generated
 	 */
-	EntityReference getOwningReference();
+	Entity getKeyedEntity();
 
 	/**
-	 * Sets the value of the '{@link io.opencaesar.oml.KeyAxiom#getOwningReference <em>Owning Reference</em>}' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Owning Reference</em>' container reference.
-	 * @see #getOwningReference()
+	 * @model kind="operation" unique="false"
 	 * @generated
 	 */
-	void setOwningReference(EntityReference value);
+	Entity getCharacterizedTerm();
 
 } // KeyAxiom

@@ -41,6 +41,8 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 
+import io.opencaesar.oml.Ontology;
+
 /**
  * The <B>Resolver</B> for OML ontology URIs
  * 
@@ -150,12 +152,16 @@ final class OmlUriResolver {
      * @return The resolved physical URI
      */
     public synchronized URI resolve(Resource contextResource, String iri) {
-        URI contextUri = (contextResource != null) ? contextResource.getURI() : null;
-        if (contextUri == null) {
+        if (contextResource == null) {
             return null;
         }
-        
-        URI folderUri = contextUri.trimSegments(1);
+
+        ResourceSet rs = contextResource.getResourceSet();
+    	if (rs == null) {
+    		return null;
+    	}
+    	
+        URI folderUri = contextResource.getURI().trimSegments(1);
         
         Map<String, URI> importMap = importCache.get(folderUri);
         if (importMap == null) {
@@ -166,15 +172,28 @@ final class OmlUriResolver {
             return importMap.get(iri);
         }
         
-        final URI resolvedUri = resolveFromCatalog(contextResource.getResourceSet(), folderUri, iri);
+        URI resolvedUri = resolveFromCatalog(rs, folderUri, iri);
         
         if (resolvedUri != null) {
             importMap.put(iri, resolvedUri);
+        } else if (rs.getLoadOptions().get(OmlConstants.RESOLVE_IRI_USING_RESOURCE_SET) == Boolean.TRUE) {
+        	resolvedUri = resolveFromResourceSet(rs, iri);
         }
-        
+    	
         return resolvedUri;
     }
-    
+
+	private URI resolveFromResourceSet(ResourceSet rs, String iri) {
+		Ontology ontology = rs.getResources().stream()
+			.flatMap(i -> i.getContents().stream())
+			.filter(i -> i instanceof Ontology)
+			.map(i -> (Ontology)i)
+			.filter(i -> i.getIri().equals(iri))
+			.findFirst()
+			.orElse(null);
+		return (ontology != null) ? ontology.eResource().getURI() : null;
+	}
+	
 	private URI resolveFromCatalog(ResourceSet rs, URI folderUri, String iri) {
         OmlCatalog catalog = findCatalog(folderUri);
         if (catalog == null) {
@@ -204,36 +223,32 @@ final class OmlUriResolver {
     }
     
    public synchronized Set<URI> getResolvableUris(Resource contextResource) {
-		final var uris = new LinkedHashSet<URI>();
-		
-		// add the URIs from the current resource set
-		contextResource.getResourceSet().getResources().forEach(r -> uris.add(r.getURI()));
-		uris.removeIf(uri -> !OmlConstants.OML_EXTENSION.equals(uri.fileExtension()));
-		
-		// retain only OML files
-
-		// get the context URI
-        URI contextUri = (contextResource != null) ? contextResource.getURI() : null;
-        if (contextUri == null) {
+        if (contextResource == null) {
             return Collections.emptySet();
         }
 
-        // get the folder URI of the context
-        URI folderUri = contextUri.trimSegments(1);
+		final var uris = new LinkedHashSet<URI>();
+
+		// add the URIs from the current resource set
+		contextResource.getResourceSet().getResources().forEach(r -> uris.add(r.getURI()));
+
+		// retain only OML files
+		uris.removeIf(uri -> !OmlConstants.OML_EXTENSION.equals(uri.fileExtension()));
+		
+		// remove the context URI
+		uris.remove(contextResource.getURI());
+
+		// get the folder URI of the context
+        URI folderUri = contextResource.getURI().trimSegments(1);
 
         // get the catalog being used with the context
         OmlCatalog catalog = findCatalog(folderUri);
-        if (catalog == null) {
-            return Collections.emptySet();
+        if (catalog != null) {
+            // final all file paths specified in the catalog
+            var extensions = Collections.singletonList(OmlConstants.OML_EXTENSION);
+    		uris.addAll(catalog.getFileUris(extensions));
         }
-		
-        // final all file paths specified in the catalog
-        var extensions = Collections.singletonList(OmlConstants.OML_EXTENSION);
-		uris.addAll(catalog.getFileUris(extensions));
-		
-		// remove the context URI
-		uris.remove(contextUri);
-		
+				
 		return uris;
 	}
     

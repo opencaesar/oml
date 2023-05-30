@@ -19,7 +19,13 @@
 package io.opencaesar.oml.impl;
 
 import io.opencaesar.oml.Assertion;
+import io.opencaesar.oml.Element;
+import io.opencaesar.oml.Instance;
 import io.opencaesar.oml.OmlPackage;
+
+import java.lang.reflect.InvocationTargetException;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 
@@ -48,6 +54,46 @@ public abstract class AssertionImpl extends ElementImpl implements Assertion {
 	@Override
 	protected EClass eStaticClass() {
 		return OmlPackage.Literals.ASSERTION;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Instance getSubject() {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Element getObject() {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case OmlPackage.ASSERTION___GET_SUBJECT:
+				return getSubject();
+			case OmlPackage.ASSERTION___GET_OBJECT:
+				return getObject();
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 } //AssertionImpl

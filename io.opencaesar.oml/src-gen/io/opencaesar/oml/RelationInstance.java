@@ -26,15 +26,15 @@ import org.eclipse.emf.common.util.EList;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * RelationInstance is a named instance that can be typed by relation entities and that goes from one or more
- * named instances as sources to one or more named instances as target.
+ * RelationInstance is a [=NamedInstance=] that can be typed by [=RelationEntities=] and represents a link from one or
+ * more [=NamedInstances=] as sources to one or more [=NamedInstances=] as targets.
  * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link io.opencaesar.oml.RelationInstance#getOwnedTypes <em>Owned Types</em>}</li>
+ *   <li>{@link io.opencaesar.oml.RelationInstance#getRef <em>Ref</em>}</li>
  *   <li>{@link io.opencaesar.oml.RelationInstance#getSources <em>Sources</em>}</li>
  *   <li>{@link io.opencaesar.oml.RelationInstance#getTargets <em>Targets</em>}</li>
  * </ul>
@@ -45,21 +45,29 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface RelationInstance extends NamedInstance {
 	/**
-	 * Returns the value of the '<em><b>Owned Types</b></em>' containment reference list.
-	 * The list contents are of type {@link io.opencaesar.oml.RelationTypeAssertion}.
-	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.RelationTypeAssertion#getOwningInstance <em>Owning Instance</em>}'.
+	 * Returns the value of the '<em><b>Ref</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The types of this instance
+	 * A ref to another relation instance
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Owned Types</em>' containment reference list.
-	 * @see io.opencaesar.oml.OmlPackage#getRelationInstance_OwnedTypes()
-	 * @see io.opencaesar.oml.RelationTypeAssertion#getOwningInstance
-	 * @model opposite="owningInstance" containment="true"
+	 * @return the value of the '<em>Ref</em>' reference.
+	 * @see #setRef(RelationInstance)
+	 * @see io.opencaesar.oml.OmlPackage#getRelationInstance_Ref()
+	 * @model
 	 * @generated
 	 */
-	EList<RelationTypeAssertion> getOwnedTypes();
+	RelationInstance getRef();
+
+	/**
+	 * Sets the value of the '{@link io.opencaesar.oml.RelationInstance#getRef <em>Ref</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Ref</em>' reference.
+	 * @see #getRef()
+	 * @generated
+	 */
+	void setRef(RelationInstance value);
 
 	/**
 	 * Returns the value of the '<em><b>Sources</b></em>' reference list.
@@ -71,7 +79,7 @@ public interface RelationInstance extends NamedInstance {
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Sources</em>' reference list.
 	 * @see io.opencaesar.oml.OmlPackage#getRelationInstance_Sources()
-	 * @model required="true"
+	 * @model
 	 * @generated
 	 */
 	EList<NamedInstance> getSources();
@@ -86,7 +94,7 @@ public interface RelationInstance extends NamedInstance {
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Targets</em>' reference list.
 	 * @see io.opencaesar.oml.OmlPackage#getRelationInstance_Targets()
-	 * @model required="true"
+	 * @model
 	 * @generated
 	 */
 	EList<NamedInstance> getTargets();

@@ -25,7 +25,7 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Statement represents an expression of information in an ontology.
+ * Statement is a [=member=] that is owned by an [=ontology=].
  * <!-- end-model-doc -->
  *
  *
@@ -34,5 +34,5 @@ package io.opencaesar.oml;
  *        annotation="https://tabatkins.github.io/bikeshed heading='Elements'"
  * @generated
  */
-public interface Statement extends Element {
+public interface Statement extends Member {
 } // Statement

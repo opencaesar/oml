@@ -25,15 +25,46 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Aspect is an entity that represents a concern that cuts across multiple entities. It does not directly
- * classify instances, but it does so indirectly by being specialized by other entities. However, an aspect can only
- * specialize other aspects.
+ * Aspect is an =[entity=] that represents a capability that may be specified on multiple [=concepts=].
+ * An aspect can only specialize other aspects. It can also be specified as a type of [=NamedInstances=].
+ * Aspects are not considered disjoint in a vocabulary bundle.
  * <!-- end-model-doc -->
  *
+ * <p>
+ * The following features are supported:
+ * </p>
+ * <ul>
+ *   <li>{@link io.opencaesar.oml.Aspect#getRef <em>Ref</em>}</li>
+ * </ul>
  *
  * @see io.opencaesar.oml.OmlPackage#getAspect()
  * @model annotation="https://tabatkins.github.io/bikeshed heading='Types'"
  * @generated
  */
 public interface Aspect extends Entity {
+	/**
+	 * Returns the value of the '<em><b>Ref</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * A ref to another aspect
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Ref</em>' reference.
+	 * @see #setRef(Aspect)
+	 * @see io.opencaesar.oml.OmlPackage#getAspect_Ref()
+	 * @model
+	 * @generated
+	 */
+	Aspect getRef();
+
+	/**
+	 * Sets the value of the '{@link io.opencaesar.oml.Aspect#getRef <em>Ref</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Ref</em>' reference.
+	 * @see #getRef()
+	 * @generated
+	 */
+	void setRef(Aspect value);
+
 } // Aspect

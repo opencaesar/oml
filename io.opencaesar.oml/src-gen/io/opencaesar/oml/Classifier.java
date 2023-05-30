@@ -26,15 +26,16 @@ import org.eclipse.emf.common.util.EList;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Classifier is a type that classifies a set of instances and characterizes them with properties
- * (i.e., becomes a domain of these properties). It also inherits properties in the domain of its specialized
- * types. In addition, it can specify constraints on (direct or inherited) properties in its domain.
+ * Classifier is a [=type=] that classifies a set of [=instances=] and characterizes them with [=properties=]
+ * (where it becomes a domain of these properties). it can also own a set of [=PropertyRestrictionAxioms=] as well as
+ * set of [=ClassifierEquivalenceAxioms=].
  * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
+ *   <li>{@link io.opencaesar.oml.Classifier#getOwnedEquivalences <em>Owned Equivalences</em>}</li>
  *   <li>{@link io.opencaesar.oml.Classifier#getOwnedPropertyRestrictions <em>Owned Property Restrictions</em>}</li>
  * </ul>
  *
@@ -45,13 +46,30 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface Classifier extends Type {
 	/**
+	 * Returns the value of the '<em><b>Owned Equivalences</b></em>' containment reference list.
+	 * The list contents are of type {@link io.opencaesar.oml.ClassifierEquivalenceAxiom}.
+	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.ClassifierEquivalenceAxiom#getOwningClassifier <em>Owning Classifier</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The set of classifier equivalence axioms of this classifier
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Owned Equivalences</em>' containment reference list.
+	 * @see io.opencaesar.oml.OmlPackage#getClassifier_OwnedEquivalences()
+	 * @see io.opencaesar.oml.ClassifierEquivalenceAxiom#getOwningClassifier
+	 * @model opposite="owningClassifier" containment="true"
+	 * @generated
+	 */
+	EList<ClassifierEquivalenceAxiom> getOwnedEquivalences();
+
+	/**
 	 * Returns the value of the '<em><b>Owned Property Restrictions</b></em>' containment reference list.
 	 * The list contents are of type {@link io.opencaesar.oml.PropertyRestrictionAxiom}.
 	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.PropertyRestrictionAxiom#getOwningClassifier <em>Owning Classifier</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The set of restriction axioms on properties of this classifier
+	 * The set of property restriction axioms of this classifier
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Owned Property Restrictions</em>' containment reference list.
 	 * @see io.opencaesar.oml.OmlPackage#getClassifier_OwnedPropertyRestrictions()

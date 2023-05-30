@@ -41,7 +41,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * <!-- end-user-doc -->
  * @generated
  */
-public class RuleItemProvider extends MemberItemProvider {
+public class RuleItemProvider extends VocabularyStatementItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
@@ -63,25 +63,25 @@ public class RuleItemProvider extends MemberItemProvider {
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addOwningVocabularyPropertyDescriptor(object);
+			addRefPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Owning Vocabulary feature.
+	 * This adds a property descriptor for the Ref feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addOwningVocabularyPropertyDescriptor(Object object) {
+	protected void addRefPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_VocabularyStatement_owningVocabulary_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_VocabularyStatement_owningVocabulary_feature", "_UI_VocabularyStatement_type"),
-				 OmlPackage.Literals.VOCABULARY_STATEMENT__OWNING_VOCABULARY,
+				 getString("_UI_Rule_ref_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Rule_ref_feature", "_UI_Rule_type"),
+				 OmlPackage.Literals.RULE__REF,
 				 true,
 				 false,
 				 true,
@@ -181,6 +181,11 @@ public class RuleItemProvider extends MemberItemProvider {
 		newChildDescriptors.add
 			(createChildParameter
 				(OmlPackage.Literals.RULE__ANTECEDENT,
+				 OmlFactory.eINSTANCE.createBuiltInPredicate()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(OmlPackage.Literals.RULE__ANTECEDENT,
 				 OmlFactory.eINSTANCE.createTypePredicate()));
 
 		newChildDescriptors.add
@@ -191,7 +196,7 @@ public class RuleItemProvider extends MemberItemProvider {
 		newChildDescriptors.add
 			(createChildParameter
 				(OmlPackage.Literals.RULE__ANTECEDENT,
-				 OmlFactory.eINSTANCE.createFeaturePredicate()));
+				 OmlFactory.eINSTANCE.createPropertyPredicate()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -206,6 +211,11 @@ public class RuleItemProvider extends MemberItemProvider {
 		newChildDescriptors.add
 			(createChildParameter
 				(OmlPackage.Literals.RULE__CONSEQUENT,
+				 OmlFactory.eINSTANCE.createBuiltInPredicate()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(OmlPackage.Literals.RULE__CONSEQUENT,
 				 OmlFactory.eINSTANCE.createTypePredicate()));
 
 		newChildDescriptors.add
@@ -216,7 +226,7 @@ public class RuleItemProvider extends MemberItemProvider {
 		newChildDescriptors.add
 			(createChildParameter
 				(OmlPackage.Literals.RULE__CONSEQUENT,
-				 OmlFactory.eINSTANCE.createFeaturePredicate()));
+				 OmlFactory.eINSTANCE.createPropertyPredicate()));
 
 		newChildDescriptors.add
 			(createChildParameter

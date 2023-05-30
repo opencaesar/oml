@@ -16,18 +16,15 @@
  */
 package io.opencaesar.oml.dsl.scoping;
 
-import com.google.common.base.Objects;
-import com.google.common.base.Predicate;
-import io.opencaesar.oml.Entity;
-import io.opencaesar.oml.EnumeratedScalar;
-import io.opencaesar.oml.OmlPackage;
-import io.opencaesar.oml.SpecializableTerm;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.FilteringScope;
+
+import io.opencaesar.oml.Entity;
+import io.opencaesar.oml.OmlPackage;
+import io.opencaesar.oml.SpecializableTerm;
 
 /**
  * This class contains custom scoping description.
@@ -41,7 +38,7 @@ public class OmlScopeProvider extends AbstractOmlScopeProvider {
 
 	@Override
 	public IScope getScope(final EObject context, final EReference reference) {
-		if (reference == OmlPackage.Literals.SPECIALIZATION_AXIOM__SPECIALIZED_TERM) {
+		if (reference == OmlPackage.Literals.SPECIALIZATION_AXIOM__SUPER_TERM) {
 			return getScopeForSpecializationAxiom_SpecializedTerm(context, reference);
 		}
 		return super.getScope(context, reference);
@@ -53,11 +50,6 @@ public class OmlScopeProvider extends AbstractOmlScopeProvider {
 			return new FilteringScope(superScope, a -> {
 				return ((!EcoreUtil.getURI(context).equals(a.getEObjectURI())) && 
 						((((Entity) context).eClass() == a.getEClass()) || (OmlPackage.Literals.ASPECT == a.getEClass())));
-			});
-		} else if ((context instanceof EnumeratedScalar)) {
-			return new FilteringScope(superScope, a -> {
-				return ((!EcoreUtil.getURI(context).equals(a.getEObjectURI())) && 
-						((((EnumeratedScalar) context).eClass() == a.getEClass()) || (OmlPackage.Literals.FACETED_SCALAR == a.getEClass())));
 			});
 		} else if ((context instanceof SpecializableTerm)) {
 			return new FilteringScope(superScope, a -> {

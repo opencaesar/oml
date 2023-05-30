@@ -21,9 +21,15 @@ package io.opencaesar.oml.impl;
 import io.opencaesar.oml.DecimalLiteral;
 import io.opencaesar.oml.OmlPackage;
 
+import io.opencaesar.oml.util.OmlConstants;
+
+import java.lang.reflect.InvocationTargetException;
+
 import java.math.BigDecimal;
 
 import org.eclipse.emf.common.notify.Notification;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 
@@ -51,7 +57,7 @@ public class DecimalLiteralImpl extends LiteralImpl implements DecimalLiteral {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final BigDecimal VALUE_EDEFAULT = null;
+	protected static final BigDecimal VALUE_EDEFAULT = new BigDecimal("0.0");
 
 	/**
 	 * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
@@ -111,6 +117,16 @@ public class DecimalLiteralImpl extends LiteralImpl implements DecimalLiteral {
 	 * @generated
 	 */
 	@Override
+	public String getTypeIri() {
+		return (OmlConstants.XSD_NS + "decimal");
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case OmlPackage.DECIMAL_LITERAL__VALUE:
@@ -161,6 +177,20 @@ public class DecimalLiteralImpl extends LiteralImpl implements DecimalLiteral {
 				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case OmlPackage.DECIMAL_LITERAL___GET_TYPE_IRI:
+				return getTypeIri();
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 	/**

@@ -25,10 +25,9 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Annotation is an element that specifies additional non-semantic information on an annotated element. It can also be
- * specified on a reference to an ontology member, in which case it is interpreted as if it was specified on the
- * member itself. An annotation is specified with an annotation property and an optional literal or reference value. When
- * no value is specified, it is interpreted as a boolean `true` literal.
+ * Annotation is an element that specifies non-semantic information on an [=IdentifiedElement=].
+ * An annotation is specified with an [=AnnotationProperty=] and an optional ([=Literal=] or [=Member=] reference) value.
+ * When no value is specified, the boolean literal `true` is assumed to be specified.
  * <!-- end-model-doc -->
  *
  * <p>
@@ -36,10 +35,9 @@ package io.opencaesar.oml;
  * </p>
  * <ul>
  *   <li>{@link io.opencaesar.oml.Annotation#getProperty <em>Property</em>}</li>
- *   <li>{@link io.opencaesar.oml.Annotation#getValue <em>Value</em>}</li>
+ *   <li>{@link io.opencaesar.oml.Annotation#getLiteralValue <em>Literal Value</em>}</li>
  *   <li>{@link io.opencaesar.oml.Annotation#getReferenceValue <em>Reference Value</em>}</li>
  *   <li>{@link io.opencaesar.oml.Annotation#getOwningElement <em>Owning Element</em>}</li>
- *   <li>{@link io.opencaesar.oml.Annotation#getOwningReference <em>Owning Reference</em>}</li>
  * </ul>
  *
  * @see io.opencaesar.oml.OmlPackage#getAnnotation()
@@ -73,36 +71,36 @@ public interface Annotation extends Element {
 	void setProperty(AnnotationProperty value);
 
 	/**
-	 * Returns the value of the '<em><b>Value</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Literal Value</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The literal value specified by this annotation.
+	 * The literal value specified by this annotation
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Value</em>' containment reference.
-	 * @see #setValue(Literal)
-	 * @see io.opencaesar.oml.OmlPackage#getAnnotation_Value()
+	 * @return the value of the '<em>Literal Value</em>' containment reference.
+	 * @see #setLiteralValue(Literal)
+	 * @see io.opencaesar.oml.OmlPackage#getAnnotation_LiteralValue()
 	 * @model containment="true"
 	 * @generated
 	 */
-	Literal getValue();
+	Literal getLiteralValue();
 
 	/**
-	 * Sets the value of the '{@link io.opencaesar.oml.Annotation#getValue <em>Value</em>}' containment reference.
+	 * Sets the value of the '{@link io.opencaesar.oml.Annotation#getLiteralValue <em>Literal Value</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Value</em>' containment reference.
-	 * @see #getValue()
+	 * @param value the new value of the '<em>Literal Value</em>' containment reference.
+	 * @see #getLiteralValue()
 	 * @generated
 	 */
-	void setValue(Literal value);
+	void setLiteralValue(Literal value);
 
 	/**
 	 * Returns the value of the '<em><b>Reference Value</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The reference value (to a member) specified by this annotation
+	 * The reference (to a member) value specified by this annotation
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Reference Value</em>' reference.
 	 * @see #setReferenceValue(Member)
@@ -124,20 +122,20 @@ public interface Annotation extends Element {
 
 	/**
 	 * Returns the value of the '<em><b>Owning Element</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.AnnotatedElement#getOwnedAnnotations <em>Owned Annotations</em>}'.
+	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.IdentifiedElement#getOwnedAnnotations <em>Owned Annotations</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The annotated element that owns this annotation
+	 * The identified element that owns this annotation
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Owning Element</em>' container reference.
-	 * @see #setOwningElement(AnnotatedElement)
+	 * @see #setOwningElement(IdentifiedElement)
 	 * @see io.opencaesar.oml.OmlPackage#getAnnotation_OwningElement()
-	 * @see io.opencaesar.oml.AnnotatedElement#getOwnedAnnotations
+	 * @see io.opencaesar.oml.IdentifiedElement#getOwnedAnnotations
 	 * @model opposite="ownedAnnotations" transient="false"
 	 * @generated
 	 */
-	AnnotatedElement getOwningElement();
+	IdentifiedElement getOwningElement();
 
 	/**
 	 * Sets the value of the '{@link io.opencaesar.oml.Annotation#getOwningElement <em>Owning Element</em>}' container reference.
@@ -147,33 +145,28 @@ public interface Annotation extends Element {
 	 * @see #getOwningElement()
 	 * @generated
 	 */
-	void setOwningElement(AnnotatedElement value);
+	void setOwningElement(IdentifiedElement value);
 
 	/**
-	 * Returns the value of the '<em><b>Owning Reference</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.Reference#getOwnedAnnotations <em>Owned Annotations</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The reference that owns this annotation
+	 * Gets the value of the annotation
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Owning Reference</em>' container reference.
-	 * @see #setOwningReference(Reference)
-	 * @see io.opencaesar.oml.OmlPackage#getAnnotation_OwningReference()
-	 * @see io.opencaesar.oml.Reference#getOwnedAnnotations
-	 * @model opposite="ownedAnnotations" transient="false"
+	 * @model kind="operation" unique="false"
 	 * @generated
 	 */
-	Reference getOwningReference();
+	Element getValue();
 
 	/**
-	 * Sets the value of the '{@link io.opencaesar.oml.Annotation#getOwningReference <em>Owning Reference</em>}' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Owning Reference</em>' container reference.
-	 * @see #getOwningReference()
+	 * <!-- begin-model-doc -->
+	 * Gets the identified element annotated by this annotation
+	 * <!-- end-model-doc -->
+	 * @model kind="operation" unique="false"
 	 * @generated
 	 */
-	void setOwningReference(Reference value);
+	IdentifiedElement getAnnotatedElement();
 
 } // Annotation

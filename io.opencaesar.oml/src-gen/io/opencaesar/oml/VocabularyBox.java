@@ -25,7 +25,7 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * VocabularyBox is an ontology whose members are terms and rules.
+ * VocabularyBox is the supertype of [=Vocabulary=] and [=VocabularyBundle=].
  * <!-- end-model-doc -->
  *
  *

@@ -26,8 +26,8 @@ import org.eclipse.emf.common.util.EList;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Instance is an element that represents an instance of a classifier. It can specify a set of values for the
- * classifier's (direct or inherited) properties.
+ * Instance is an element that represents a instance of one or more [=classifiers=].
+ * It can assert a set of values for those classifiers' [=properties=].
  * <!-- end-model-doc -->
  *
  * <p>
@@ -50,7 +50,7 @@ public interface Instance extends Element {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The property value assertions specified by this instance
+	 * The property value assertions owned by this instance
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Owned Property Values</em>' containment reference list.
 	 * @see io.opencaesar.oml.OmlPackage#getInstance_OwnedPropertyValues()

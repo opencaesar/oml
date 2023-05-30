@@ -25,14 +25,14 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * BooleanLiteral is a literal that represents the boolean values true/false
+ * BooleanLiteral is a [=literal=] that represents the boolean values `true` and `false`.
  * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link io.opencaesar.oml.BooleanLiteral#isValue <em>Value</em>}</li>
+ *   <li>{@link io.opencaesar.oml.BooleanLiteral#getValue <em>Value</em>}</li>
  * </ul>
  *
  * @see io.opencaesar.oml.OmlPackage#getBooleanLiteral()
@@ -42,27 +42,44 @@ package io.opencaesar.oml;
 public interface BooleanLiteral extends Literal {
 	/**
 	 * Returns the value of the '<em><b>Value</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * The boolean value of this literal
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Value</em>' attribute.
-	 * @see #setValue(boolean)
+	 * @see #setValue(Boolean)
 	 * @see io.opencaesar.oml.OmlPackage#getBooleanLiteral_Value()
-	 * @model unique="false"
+	 * @model default="false" unique="false"
+	 * @generated
+	 */
+	Boolean getValue();
+
+	/**
+	 * Sets the value of the '{@link io.opencaesar.oml.BooleanLiteral#getValue <em>Value</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Value</em>' attribute.
+	 * @see #getValue()
+	 * @generated
+	 */
+	void setValue(Boolean value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" unique="false"
 	 * @generated
 	 */
 	boolean isValue();
 
 	/**
-	 * Sets the value of the '{@link io.opencaesar.oml.BooleanLiteral#isValue <em>Value</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Value</em>' attribute.
-	 * @see #isValue()
+	 * @model kind="operation" unique="false"
 	 * @generated
 	 */
-	void setValue(boolean value);
+	String getTypeIri();
 
 } // BooleanLiteral

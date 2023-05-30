@@ -25,14 +25,44 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Structure is a characterizable type that represents a structured datatype whose instances are anonymous and assignable as
- * values to structured properties.
+ * Structure is a [=classifier=] whose [=instances=] are anonymous and assignable as values to [=StructuredProperties=].
  * <!-- end-model-doc -->
  *
+ * <p>
+ * The following features are supported:
+ * </p>
+ * <ul>
+ *   <li>{@link io.opencaesar.oml.Structure#getRef <em>Ref</em>}</li>
+ * </ul>
  *
  * @see io.opencaesar.oml.OmlPackage#getStructure()
  * @model annotation="https://tabatkins.github.io/bikeshed heading='Types'"
  * @generated
  */
 public interface Structure extends Classifier {
+	/**
+	 * Returns the value of the '<em><b>Ref</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * A ref to another structure
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Ref</em>' reference.
+	 * @see #setRef(Structure)
+	 * @see io.opencaesar.oml.OmlPackage#getStructure_Ref()
+	 * @model
+	 * @generated
+	 */
+	Structure getRef();
+
+	/**
+	 * Sets the value of the '{@link io.opencaesar.oml.Structure#getRef <em>Ref</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Ref</em>' reference.
+	 * @see #getRef()
+	 * @generated
+	 */
+	void setRef(Structure value);
+
 } // Structure

@@ -65,9 +65,10 @@ public class StructuredPropertyItemProvider extends SemanticPropertyItemProvider
 			super.getPropertyDescriptors(object);
 
 			addOwningVocabularyPropertyDescriptor(object);
+			addRefPropertyDescriptor(object);
 			addFunctionalPropertyDescriptor(object);
-			addDomainPropertyDescriptor(object);
-			addRangePropertyDescriptor(object);
+			addDomainsPropertyDescriptor(object);
+			addRangesPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -86,6 +87,28 @@ public class StructuredPropertyItemProvider extends SemanticPropertyItemProvider
 				 getString("_UI_VocabularyStatement_owningVocabulary_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_VocabularyStatement_owningVocabulary_feature", "_UI_VocabularyStatement_type"),
 				 OmlPackage.Literals.VOCABULARY_STATEMENT__OWNING_VOCABULARY,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Ref feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addRefPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_StructuredProperty_ref_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_StructuredProperty_ref_feature", "_UI_StructuredProperty_type"),
+				 OmlPackage.Literals.STRUCTURED_PROPERTY__REF,
 				 true,
 				 false,
 				 true,
@@ -117,19 +140,19 @@ public class StructuredPropertyItemProvider extends SemanticPropertyItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Domain feature.
+	 * This adds a property descriptor for the Domains feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addDomainPropertyDescriptor(Object object) {
+	protected void addDomainsPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_StructuredProperty_domain_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_StructuredProperty_domain_feature", "_UI_StructuredProperty_type"),
-				 OmlPackage.Literals.STRUCTURED_PROPERTY__DOMAIN,
+				 getString("_UI_StructuredProperty_domains_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_StructuredProperty_domains_feature", "_UI_StructuredProperty_type"),
+				 OmlPackage.Literals.STRUCTURED_PROPERTY__DOMAINS,
 				 true,
 				 false,
 				 true,
@@ -139,19 +162,19 @@ public class StructuredPropertyItemProvider extends SemanticPropertyItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Range feature.
+	 * This adds a property descriptor for the Ranges feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addRangePropertyDescriptor(Object object) {
+	protected void addRangesPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_StructuredProperty_range_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_StructuredProperty_range_feature", "_UI_StructuredProperty_type"),
-				 OmlPackage.Literals.STRUCTURED_PROPERTY__RANGE,
+				 getString("_UI_StructuredProperty_ranges_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_StructuredProperty_ranges_feature", "_UI_StructuredProperty_type"),
+				 OmlPackage.Literals.STRUCTURED_PROPERTY__RANGES,
 				 true,
 				 false,
 				 true,
@@ -173,6 +196,7 @@ public class StructuredPropertyItemProvider extends SemanticPropertyItemProvider
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(OmlPackage.Literals.SPECIALIZABLE_TERM__OWNED_SPECIALIZATIONS);
+			childrenFeatures.add(OmlPackage.Literals.SPECIALIZABLE_PROPERTY__OWNED_EQUIVALENCES);
 		}
 		return childrenFeatures;
 	}
@@ -232,6 +256,7 @@ public class StructuredPropertyItemProvider extends SemanticPropertyItemProvider
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case OmlPackage.STRUCTURED_PROPERTY__OWNED_SPECIALIZATIONS:
+			case OmlPackage.STRUCTURED_PROPERTY__OWNED_EQUIVALENCES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -253,6 +278,11 @@ public class StructuredPropertyItemProvider extends SemanticPropertyItemProvider
 			(createChildParameter
 				(OmlPackage.Literals.SPECIALIZABLE_TERM__OWNED_SPECIALIZATIONS,
 				 OmlFactory.eINSTANCE.createSpecializationAxiom()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(OmlPackage.Literals.SPECIALIZABLE_PROPERTY__OWNED_EQUIVALENCES,
+				 OmlFactory.eINSTANCE.createPropertyEquivalenceAxiom()));
 	}
 
 }

@@ -14,9 +14,9 @@ subprojects {
 	group = 'io.opencaesar.oml'
 	version = rootProject.file('version.txt').text.trim()
 
-	ext.xtextVersion = '2.28.0'
+	ext.xtextVersion = '2.31.0'
 	ext.xcoreVersion = '1.22.0'
-	ext.xcoreLibVersion = '1.6.0'
+	ext.xcoreLibVersion = '1.7.0'
 	ext.xmlResolverVersion = '1.2'
 	ext.emfJsonVersion = '2.1.0'
 	ext.gsonVersion = '2.9.0'

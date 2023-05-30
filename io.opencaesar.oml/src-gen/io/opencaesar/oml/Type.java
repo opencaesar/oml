@@ -25,7 +25,7 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Type is a specializable term that classifies a set of instances or literals.
+ * Type is a specializable term that classifies a set of [=instances=] or [=literals=].
  * <!-- end-model-doc -->
  *
  *

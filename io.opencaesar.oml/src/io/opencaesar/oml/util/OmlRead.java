@@ -21,6 +21,7 @@ package io.opencaesar.oml.util;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -36,74 +37,40 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
-import io.opencaesar.oml.AnnotatedElement;
 import io.opencaesar.oml.Annotation;
 import io.opencaesar.oml.AnnotationProperty;
-import io.opencaesar.oml.AnnotationPropertyReference;
-import io.opencaesar.oml.AspectReference;
 import io.opencaesar.oml.Assertion;
 import io.opencaesar.oml.Axiom;
-import io.opencaesar.oml.BooleanLiteral;
 import io.opencaesar.oml.Classifier;
-import io.opencaesar.oml.ConceptInstance;
-import io.opencaesar.oml.ConceptInstanceReference;
-import io.opencaesar.oml.ConceptReference;
-import io.opencaesar.oml.ConceptTypeAssertion;
-import io.opencaesar.oml.DecimalLiteral;
 import io.opencaesar.oml.Description;
-import io.opencaesar.oml.DescriptionBundle;
-import io.opencaesar.oml.DescriptionBundleImport;
-import io.opencaesar.oml.DescriptionImport;
-import io.opencaesar.oml.DoubleLiteral;
 import io.opencaesar.oml.Element;
-import io.opencaesar.oml.Entity;
-import io.opencaesar.oml.EnumeratedScalarReference;
-import io.opencaesar.oml.FacetedScalarReference;
-import io.opencaesar.oml.Feature;
-import io.opencaesar.oml.FeaturePredicate;
+import io.opencaesar.oml.ForwardRelation;
+import io.opencaesar.oml.IdentifiedElement;
 import io.opencaesar.oml.Import;
 import io.opencaesar.oml.Instance;
-import io.opencaesar.oml.IntegerLiteral;
-import io.opencaesar.oml.KeyAxiom;
-import io.opencaesar.oml.LinkAssertion;
 import io.opencaesar.oml.Literal;
 import io.opencaesar.oml.Member;
 import io.opencaesar.oml.NamedInstance;
-import io.opencaesar.oml.NamedInstanceReference;
 import io.opencaesar.oml.Ontology;
 import io.opencaesar.oml.Predicate;
-import io.opencaesar.oml.PropertyRestrictionAxiom;
-import io.opencaesar.oml.PropertyValueAssertion;
-import io.opencaesar.oml.QuotedLiteral;
-import io.opencaesar.oml.Reference;
+import io.opencaesar.oml.Property;
+import io.opencaesar.oml.PropertyPredicate;
 import io.opencaesar.oml.Relation;
+import io.opencaesar.oml.RelationBase;
 import io.opencaesar.oml.RelationEntity;
 import io.opencaesar.oml.RelationEntityPredicate;
-import io.opencaesar.oml.RelationEntityReference;
-import io.opencaesar.oml.RelationInstance;
-import io.opencaesar.oml.RelationInstanceReference;
-import io.opencaesar.oml.RelationReference;
-import io.opencaesar.oml.RelationRestrictionAxiom;
-import io.opencaesar.oml.RelationTypeAssertion;
-import io.opencaesar.oml.RestrictionAxiom;
-import io.opencaesar.oml.RuleReference;
-import io.opencaesar.oml.ScalarPropertyReference;
-import io.opencaesar.oml.ScalarPropertyRestrictionAxiom;
+import io.opencaesar.oml.ReverseRelation;
+import io.opencaesar.oml.Scalar;
+import io.opencaesar.oml.ScalarEquivalenceAxiom;
 import io.opencaesar.oml.SemanticProperty;
+import io.opencaesar.oml.SpecializableProperty;
 import io.opencaesar.oml.SpecializableTerm;
-import io.opencaesar.oml.SpecializationAxiom;
 import io.opencaesar.oml.Statement;
 import io.opencaesar.oml.StructureInstance;
-import io.opencaesar.oml.StructureReference;
-import io.opencaesar.oml.StructuredPropertyReference;
-import io.opencaesar.oml.StructuredPropertyRestrictionAxiom;
 import io.opencaesar.oml.Term;
-import io.opencaesar.oml.TypeAssertion;
 import io.opencaesar.oml.TypePredicate;
+import io.opencaesar.oml.UnreifiedRelation;
 import io.opencaesar.oml.Vocabulary;
-import io.opencaesar.oml.VocabularyBundle;
-import io.opencaesar.oml.VocabularyBundleImport;
-import io.opencaesar.oml.VocabularyImport;
 
 /**
  * The <b>Read</b> API for the model. It complements the OML getter API by additional utilities.
@@ -113,8 +80,8 @@ import io.opencaesar.oml.VocabularyImport;
 public final class OmlRead {
     
    //-------------------------------------------------
-    // UTILITIES
-    //-------------------------------------------------
+   // UTILITIES
+   //-------------------------------------------------
     
     /**
      * Gets the closure of the given recursive function starting from a given root
@@ -124,12 +91,12 @@ public final class OmlRead {
      * @param recursive the function to recurse with
      * @return the recursive closure of applying the given function on the given root
      */
-    public static <T, V extends T> List<T> closure(V root, boolean includeRoot, Function<T, List<T>> recursive) {
+    public static <T, V extends T> Collection<T> closure(V root, boolean includeRoot, Function<T, Collection<T>> recursive) {
         final Set<T> results = new LinkedHashSet<>();
         if (includeRoot)
             results.add(root);
         closure(root, results, recursive);
-        return new ArrayList<T>(results);
+        return results;
     }
     
     /*
@@ -141,8 +108,8 @@ public final class OmlRead {
      * @param cache the cache of results already collected before the recursion starts
      * @param recursive the function to recurse with
      */
-    private static <T, V extends T> void closure(V root, Set<T> cache, Function<T, List<T>> recursive) {
-        List<T> results = recursive.apply(root);
+    private static <T, V extends T> void closure(V root, Set<T> cache, Function<T, Collection<T>> recursive) {
+    	Collection<T> results = recursive.apply(root);
         if (results == null) {
             results = Collections.emptyList();
         } else {
@@ -164,7 +131,7 @@ public final class OmlRead {
      * @param recursive the function to recurse with
      * @return true if the given item is in the closure; otherwise false
      */
-    public static <T, V extends T> boolean isInClosure(T item, V root, boolean includeRoot, Function<T, List<T>> recursive) {
+    public static <T, V extends T> boolean isInClosure(T item, V root, boolean includeRoot, Function<T, Collection<T>> recursive) {
         final Set<T> results = new LinkedHashSet<>();
         if (includeRoot) {
                results.add(root);
@@ -185,8 +152,8 @@ public final class OmlRead {
      * @param recursive the function to recurse with
      * @return true if the given item is in the closure; otherwise false
      */
-    private static <T, V extends T> boolean isInClosure(T item, V root, Set<T> cache, Function<T, List<T>> recursive) {
-        List<T> results = recursive.apply(root);
+    private static <T, V extends T> boolean isInClosure(T item, V root, Set<T> cache, Function<T, Collection<T>> recursive) {
+    	Collection<T> results = recursive.apply(root);
         if (results == null) {
             results = Collections.emptyList();
         } else {
@@ -248,8 +215,6 @@ public final class OmlRead {
     //-------------------------------------------------
     // RESOURCES
     //-------------------------------------------------
-    
-    // ResourceSet
     
     /**
      * Gets all ontologies loaded in the given resource set 
@@ -332,8 +297,6 @@ public final class OmlRead {
         }
         return null;
     }
-    
-    // Resource
     
     /**
      * Gets the ontology of the given resource if one exists
@@ -443,10 +406,8 @@ public final class OmlRead {
     }
 
     //-------------------------------------------------
-    // COMMON
+    // ONTOLOGIES
     //-------------------------------------------------
-    
-    // Element
     
     /**
      * Gets the id of the given element
@@ -460,152 +421,31 @@ public final class OmlRead {
         return EcoreUtil.getID(element);
     }
     
-    // Annotation
-    
     /**
-     * Gets the annotated element of the given annotation
+     * Gets all annotations that references the given property on the given element
      * 
-     * @param annotation the given annotation
-     * @return the annotated element of the annotation
+     * @param element The element that has the annotation
+     * @param property the given annotation property
+     * @return a list of annotations referencing the annotation property on the element
      */
-    public static AnnotatedElement getAnnotatedElement(Annotation annotation) {
-        if (annotation.getOwningReference() != null) {
-            return resolve(annotation.getOwningReference());
-        } else {
-            return annotation.getOwningElement();
-        }
+    public static List<Annotation> getAnnotations(IdentifiedElement element, AnnotationProperty property) {
+        return element.getOwnedAnnotations().stream()
+            .filter(a -> a.getProperty() == property)
+            .collect(Collectors.toList());
     }
-    
-    // AnnotatedElement
-    
+
     /**
-     * Gets the values of the given annotation property in the given element
+     * Gets the values of a given annotation property in the given element
      * 
      * @param element The element that has the annotation
      * @param property the given annotation property
      * @return a list of literals representing annotation values
      */
-    public static List<Literal> getAnnotationValues(AnnotatedElement element, AnnotationProperty property) {
+    public static List<Element> getAnnotationValues(IdentifiedElement element, AnnotationProperty property) {
         return element.getOwnedAnnotations().stream()
             .filter(a -> a.getProperty() == property)
             .map(a -> a.getValue())
             .collect(Collectors.toList());
-    }
-    
-    /**
-     * Gets the first value of the given annotation property in the given element
-     * 
-     * @param element The element that has the annotation
-     * @param property the given annotation property
-     * @return a literal representing the first annotation value
-     */
-    public static Literal getAnnotationValue(AnnotatedElement element, AnnotationProperty property) {
-        return element.getOwnedAnnotations().stream()
-            .filter(a -> a.getProperty() == property)
-            .map(a -> a.getValue())
-            .findFirst()
-            .orElse(null);
-    }
-    
-    // Literal
-    
-    /**
-     * Gets the lexical value of the given literal
-     * 
-     * @param literal the given literal
-     * @return the lexical value of the given literal
-     */
-    public static String getLexicalValue(Literal literal) {
-        String value = getStringValue(literal);
-        if (literal instanceof QuotedLiteral) {
-            var qLiteral = (QuotedLiteral) literal;
-            var language = (qLiteral.getLangTag() != null) ? "$"+qLiteral.getLangTag() : "";
-            var type = (qLiteral.getType() != null) ? "^^"+qLiteral.getType().getAbbreviatedIri() : "";
-            value = '"'+value+'"'+language+type;
-        }
-        return value;
-    }
-
-    /**
-     * Gets the string value of the given literal
-     * 
-     * @param literal the given literal
-     * @return the string value of the given literal
-     */
-    public static String getStringValue(Literal literal) {
-        Object value = getValue(literal);
-        return (value != null) ? value.toString() : "";
-    }
-    
-    /**
-     * Gets the value of the given literal
-     * 
-     * @param literal the given literal
-     * @return the value of the given literal
-     */
-    public static Object getValue(Literal literal) {
-        if (literal instanceof QuotedLiteral) {
-            return ((QuotedLiteral)literal).getValue(); 
-        } else if (literal instanceof IntegerLiteral) {
-            return ((IntegerLiteral)literal).getValue(); 
-        } else if (literal instanceof DecimalLiteral) {
-            return ((DecimalLiteral)literal).getValue(); 
-        } else if (literal instanceof DoubleLiteral) {
-            return ((DoubleLiteral)literal).getValue(); 
-        } else if (literal instanceof BooleanLiteral) {
-            return ((BooleanLiteral)literal).isValue(); 
-        }
-        return null;
-    }
-    
-    /**
-     * Gets the iri of the given literal's type
-     * 
-     * @param literal the given literal
-     * @return the iri of the given literal's type
-     */
-    public static String getTypeIri(Literal literal) {
-        if (literal instanceof QuotedLiteral) {
-            QuotedLiteral qLiteral = (QuotedLiteral)literal; 
-            return qLiteral.getType() != null ? 
-                qLiteral.getType().getIri() : 
-                OmlConstants.XSD_NS+"string"; 
-        } else if (literal instanceof IntegerLiteral) {
-            return OmlConstants.XSD_NS+"integer"; 
-        } else if (literal instanceof DecimalLiteral) {
-            return OmlConstants.XSD_NS+"decimal"; 
-        } else if (literal instanceof DoubleLiteral) {
-            return OmlConstants.XSD_NS+"double"; 
-        } else if (literal instanceof BooleanLiteral) {
-            return OmlConstants.XSD_NS+"boolean"; 
-        }
-        return null;
-    }
-    
-    //-------------------------------------------------
-    // ONTOLOGIES
-    //-------------------------------------------------
-    
-    // Ontology
-    
-    /**
-     * Gets the direct imports of the given ontology
-     * 
-     * @param ontology the given ontology
-     * @return a list of direct imports of the ontology
-     */
-    public static List<Import> getImports(Ontology ontology) {
-        List<Import> imports = new ArrayList<>();
-        if (ontology instanceof Vocabulary) {
-            imports.addAll((((Vocabulary)ontology).getOwnedImports()));
-        } else if (ontology instanceof VocabularyBundle) {
-            imports.addAll((((VocabularyBundle)ontology).getOwnedImports()));
-        } else if (ontology instanceof Description) {
-            imports.addAll((((Description)ontology).getOwnedImports()));
-        } else if (ontology instanceof DescriptionBundle) {
-            imports.addAll((((DescriptionBundle)ontology).getOwnedImports()));
-        }
-        return imports;
     }
     
     /**
@@ -615,8 +455,8 @@ public final class OmlRead {
      * @return a list of direct imports of the ontology
      */
     public static List<Import> getAllImports(Ontology ontology) {
-        return getImports(ontology).stream()
-            .flatMap(i -> closure(i, true, j -> getImports(getImportedOntology(j))).stream())
+        return ontology.getOwnedImports().stream()
+            .flatMap(i -> closure(i, true, j -> getImportedOntology(j).getOwnedImports()).stream())
             .collect(Collectors.toList());
     }
     
@@ -637,15 +477,14 @@ public final class OmlRead {
     }
     
     /**
-     * Gets all references defined in the given ontology
+     * Gets all reference statements defined in a given ontology
      * 
      * @param ontology the given ontology
-     * @return a list of all references defined in the given ontology
+     * @return a list of all reference statements defined in the given ontology
      */
-    public static List<Reference> getReferences(Ontology ontology) {
+    public static List<Statement> getReferences(Ontology ontology) {
         return getStatements(ontology).stream()
-            .filter(s -> s instanceof Reference)
-            .map(s -> (Reference)s)
+            .filter(s -> s.isRef())
             .collect(Collectors.toList());
     }
     
@@ -660,8 +499,8 @@ public final class OmlRead {
             return getStatements(ontology).stream()
                 .flatMap(s -> {
                     final ArrayList<Member> ms = new ArrayList<>();
-                    if (s instanceof Member)
-                        ms.add((Member) s);
+                    if (!s.isRef())
+	                    ms.add(s);
                     if (s instanceof RelationEntity)
                         ms.addAll(getRelations((RelationEntity) s));
                     return ms.stream();
@@ -669,9 +508,8 @@ public final class OmlRead {
                 .collect(Collectors.toList());
         } else if (ontology instanceof Description){
             return getStatements(ontology).stream()
-                .filter(s -> s instanceof Member)
-                .map(s -> (Member)s)
-                .collect(Collectors.toList());
+            		.filter(i -> !i.isRef())
+            		.collect(Collectors.toList());
         }
         return Collections.emptyList();
     }
@@ -684,7 +522,7 @@ public final class OmlRead {
      */
     public static Map<String, String> getImportPrefixes(Ontology ontology) {
         final Map<String, String> map = new LinkedHashMap<>();
-        getImports(ontology).stream()
+        ontology.getOwnedImports().stream()
         	.filter(i -> i.getPrefix() != null)
         	.forEach(i -> map.put(i.getNamespace(), i.getPrefix()));
         return map;
@@ -715,7 +553,7 @@ public final class OmlRead {
      * @return a list of ontologies directly imported by the given ontology
      */
     public static List<Ontology> getImportedOntologies(Ontology ontology) {
-        return getImports(ontology).stream()
+        return ontology.getOwnedImports().stream()
             .map(i -> getImportedOntology(i))
             .collect(Collectors.toList());
     }
@@ -724,10 +562,10 @@ public final class OmlRead {
      * Gets the ontologies directly or transitively imported by the given ontology
      * 
      * @param ontology the given ontology
-     * @return a list of ontologies directly imported by the given ontology
+     * @return a collection of ontologies directly imported by the given ontology
      */
-    public static List<Ontology> getAllImportedOntologies(Ontology ontology, boolean inclusive) {
-        return closure(ontology, inclusive, i -> getImports(i).stream()
+    public static Collection<Ontology> getAllImportedOntologies(Ontology ontology, boolean inclusive) {
+        return closure(ontology, inclusive, i -> i.getOwnedImports().stream()
             .map(j -> getImportedOntology(j))
             .collect(Collectors.toList()));
     }
@@ -742,7 +580,7 @@ public final class OmlRead {
      * @return the imported ontology that has the given iri 
      */
     public static Ontology getImportedOntologyByIri(Ontology ontology, String iri) {
-        return getImports(ontology).stream()
+        return ontology.getOwnedImports().stream()
             .filter(i -> iri.equals(i.getIri()))
             .map(i -> getImportedOntology(i))
             .findFirst()
@@ -759,7 +597,7 @@ public final class OmlRead {
      * @return the imported ontology that has the given iri 
      */
     public static Ontology getImportedOntologyByPrefix(Ontology ontology, String prefix) {
-        return getImports(ontology).stream()
+        return ontology.getOwnedImports().stream()
                 .filter(i -> prefix.equals(i.getPrefix()))
                 .map(i -> getImportedOntology(i))
                 .findFirst()
@@ -819,12 +657,6 @@ public final class OmlRead {
         return (baseOntology != null) ? getMemberByName(baseOntology, fragment) : null;
     }
         
-    //-------------------------------------------------
-    // IMPORTS
-    //-------------------------------------------------
-    
-    // Import
-    
     /**
      * Gets the resource URI that is resolved by the given import statement
      * 
@@ -861,16 +693,7 @@ public final class OmlRead {
      * @return the ontology that defines the given import
      */
     public static Ontology getImportingOntology(Import _import) {
-        if (_import instanceof VocabularyImport) {
-            return ((VocabularyImport)_import).getOwningVocabulary();
-        } else if (_import instanceof VocabularyBundleImport) {
-            return ((VocabularyBundleImport)_import).getOwningVocabularyBundle();
-        } if (_import instanceof DescriptionImport) {
-            return ((DescriptionImport)_import).getOwningDescription();
-        } else if (_import instanceof DescriptionBundleImport) {
-            return ((DescriptionBundleImport)_import).getOwningDescriptionBundle();
-        }
-        return null;
+        return _import.getOwningOntology();
     }
     
     /**
@@ -886,61 +709,6 @@ public final class OmlRead {
         final ResourceSet resourceSet = (uri != null) ? _import.eResource().getResourceSet() : null;
         return (resourceSet != null) ? resourceSet.getResource(uri, true) : null;
     }
-    
-    //-------------------------------------------------
-    // MEMBERS
-    //-------------------------------------------------
-
-    // Reference
-    
-    /**
-     * Resolves the given reference to a member
-     * 
-     * @param reference the given reference
-     * @return the resolved member
-     */
-    public static Member resolve(Reference reference) {
-        if (reference instanceof AnnotationPropertyReference) {
-            return ((AnnotationPropertyReference) reference).getProperty();
-        } else if (reference instanceof AspectReference) {
-            return ((AspectReference) reference).getAspect();
-        } else if (reference instanceof ConceptInstanceReference) {
-            return ((ConceptInstanceReference) reference).getInstance();
-        } else if (reference instanceof ConceptReference) {
-            return ((ConceptReference) reference).getConcept();
-        } else if (reference instanceof EnumeratedScalarReference) {
-            return ((EnumeratedScalarReference) reference).getScalar();
-        } else if (reference instanceof FacetedScalarReference) {
-            return ((FacetedScalarReference) reference).getScalar();
-        } else if (reference instanceof RelationEntityReference) {
-            return ((RelationEntityReference) reference).getEntity();
-        } else if (reference instanceof RelationInstanceReference) {
-            return ((RelationInstanceReference) reference).getInstance();
-        } else if (reference instanceof RelationReference) {
-            return ((RelationReference) reference).getRelation();
-        } else if (reference instanceof RuleReference) {
-            return ((RuleReference) reference).getRule();
-        } else if (reference instanceof ScalarPropertyReference) {
-            return ((ScalarPropertyReference) reference).getProperty();
-        } else if (reference instanceof StructuredPropertyReference) {
-            return ((StructuredPropertyReference) reference).getProperty();
-        } else if (reference instanceof StructureReference) {
-            return ((StructureReference) reference).getStructure();
-        }
-        return null;
-    }
-    
-    /**
-     * Gets the abbreviated iri of the given reference
-     * 
-     * @param reference the given reference
-     * @return the abbreviated IRI of the given reference
-     */
-    public static String getAbbreviatedIri(Reference reference) {
-        return getAbbreviatedIriIn(resolve(reference), reference.getOntology());
-    }
-    
-    // Member
     
     /**
      * Gets the abbreviated iri of the given member in the given context ontology
@@ -958,23 +726,128 @@ public final class OmlRead {
             return (prefix != null) ? prefix + ':'+member.getName() : null;
         }
     }
-    
-    // SpecializableTerm
-    
+
+    //-------------------------------------------------
+    // VOCABULARIES
+    //-------------------------------------------------
+
     /**
-     * Gets the super (general) terms of the given term
+     * Gets the super terms of the given term
      * 
      * @param term the give term
-     * @return a list of super terms of the given term
+     * @return a list of specialization super terms of the given term
      */
-    public static List<SpecializableTerm> getSuperTerms(SpecializableTerm term) {
-        return term.getOwnedSpecializations().stream()
-            .map(i -> i.getSpecializedTerm())
-            .collect(Collectors.toList());
+    public static List<Term> getSuperTerms(Term term) {
+    	var supers = new ArrayList<Term>();
+        supers.addAll(getSpecializationSuperTerms(term));
+        if (term instanceof Classifier) {
+            supers.addAll(getEquivalenceSuperClassifiers((Classifier)term));
+        } else if (term instanceof Scalar) {
+            supers.addAll(getEquivalenceSuperScalars((Scalar)term));
+        } else if (term instanceof Property) {
+            supers.addAll(getEquivalenceSuperProperties((Property)term));
+        }
+        return supers;
     }
+
+    /**
+     * Gets the specialization super terms of the given term
+     * 
+     * @param term the give term
+     * @return a list of specialization super terms of the given term
+     */
+    public static List<Term> getSpecializationSuperTerms(Term term) {
+    	var supers = new ArrayList<Term>();
+    	if (term instanceof SpecializableTerm) {
+	    	supers.addAll(((SpecializableTerm)term).getOwnedSpecializations().stream()
+		            .filter(i -> i.getSuperTerm() != null)
+		            .map(i -> i.getSuperTerm())
+		            .collect(Collectors.toList()));
+    	} else  if (term instanceof ForwardRelation) {
+        	var entity = ((ForwardRelation)term).getRelationEntity();
+    		supers.addAll(getSpecializationSuperTerms(entity).stream()
+    	        .filter(i -> i instanceof RelationEntity)
+	            .map(i -> (RelationEntity)i)
+	            .filter(i -> i.getForwardRelation() != null)
+	            .map(i -> i.getForwardRelation())
+	            .collect(Collectors.toList()));
+    	} else if (term instanceof ReverseRelation) {
+        	var base = ((ReverseRelation)term).getRelationBase();
+    		supers.addAll(getSpecializationSuperTerms(base).stream()
+    	        .filter(i -> i instanceof RelationBase)
+	            .map(i -> (RelationBase)i)
+	            .filter(i -> i.getReverseRelation() != null)
+	            .map(i -> i.getReverseRelation())
+	            .collect(Collectors.toList()));
+    	}
+    	return supers;
+   }
     
-    // RelationEntity
-    
+    /**
+     * Gets the equivalence super classifiers of the given classifier
+     * 
+     * @param classifier the given classifier
+     * @return a list of equivalence super classifiers of the given classifier
+     */
+    public static List<Classifier> getEquivalenceSuperClassifiers(Classifier classifier) {
+        return classifier.getOwnedEquivalences().stream()
+	            .flatMap(i -> i.getSuperClassifiers().stream())
+	            .collect(Collectors.toList());
+    }
+
+    /**
+     * Gets the equivalence super scalars of the given scalar
+     * 
+     * @param scalar the given scalar
+     * @return a list of equivalence super scalars of the given scalar
+     */
+    public static List<Scalar> getEquivalenceSuperScalars(Scalar scalar) {
+        return scalar.getOwnedEquivalences().stream()
+	            .map(i -> i.getSuperScalar())
+	            .collect(Collectors.toList());
+    }
+
+    /**
+     * Gets the equivalence super properties of the given property
+     * 
+     * @param property the given property
+     * @return a list of equivalence super properties of the given property
+     */
+    public static List<Property> getEquivalenceSuperProperties(Property property) {
+    	var supers = new ArrayList<Property>();
+    	if (property instanceof SpecializableProperty) {
+	        supers.addAll(((SpecializableProperty)property).getOwnedEquivalences().stream()
+		            .map(i -> i.getSuperProperty())
+		            .collect(Collectors.toList()));
+    	} else if (property instanceof ForwardRelation) {
+    		var entity = ((ForwardRelation)property).getRelationEntity();
+    		supers.addAll(getEquivalenceSuperClassifiers(entity).stream()
+    	        .filter(i -> i instanceof RelationEntity)
+	            .map(i -> (RelationEntity)i)
+	            .filter(i -> i.getForwardRelation() != null)
+	            .map(i -> i.getForwardRelation())
+	            .collect(Collectors.toList()));
+    	} else if (property instanceof ReverseRelation) {
+    		var base = ((ReverseRelation)property).getRelationBase();
+    		if (base instanceof RelationEntity) {
+        		supers.addAll(getEquivalenceSuperClassifiers((RelationEntity)base).stream()
+            	        .filter(i -> i instanceof RelationEntity)
+        	            .map(i -> (RelationEntity)i)
+        	            .filter(i -> i.getReverseRelation() != null)
+    		            .map(i -> i.getReverseRelation())
+    		            .collect(Collectors.toList()));
+    		} else if (base instanceof UnreifiedRelation) {
+        		supers.addAll(getEquivalenceSuperProperties((UnreifiedRelation)base).stream()
+            	        .filter(i -> i instanceof UnreifiedRelation)
+        	            .map(i -> (UnreifiedRelation)i)
+        	            .filter(i -> i.getReverseRelation() != null)
+    		            .map(i -> i.getReverseRelation())
+			            .collect(Collectors.toList()));
+    		}
+    	}
+    	return supers;
+   }
+
     /**
      * Gets all the relations defined by the given relation entity
      * 
@@ -984,36 +857,107 @@ public final class OmlRead {
     public static List<Relation> getRelations(RelationEntity entity) {
         var relations = new ArrayList<Relation>();
         if (entity.getForwardRelation() != null) {
-            relations.add(entity.getForwardRelation());
+        	relations.add(entity.getForwardRelation());
         }
         if (entity.getReverseRelation() != null) {
-            relations.add(entity.getReverseRelation());
+        	relations.add(entity.getReverseRelation());
         }
         return relations;
     }
-    
-    // SpecializableTerm
+
+    /**
+     * Gets the relation entity that defines the given relation
+     * 
+     * @param relation the given relation
+     * @return the relation entity that defines the given relation, or null if none exists
+     */
+    public static RelationEntity getRelationEntity(Relation relation) {
+        RelationEntity entity = null;
+        if (relation instanceof ForwardRelation) {
+        	entity = ((ForwardRelation)relation).getRelationEntity();
+        } else if (relation instanceof ReverseRelation) {
+        	RelationBase base = ((ReverseRelation)relation).getRelationBase();
+        	if (base instanceof RelationEntity) {
+        		entity = (RelationEntity) base;
+        	}
+        }
+        return entity;
+    }
     
     /**
-     * Gets all the axioms owned by the given term
+     * Gets all the axioms specified on the given term
      * 
      * @param term the given term
-     * @return a list of axioms owned by the given term
+     * @return a list of axioms specified on the given term
      */
     public static List<Axiom> getAxioms(SpecializableTerm term) {
         var axioms = new ArrayList<Axiom>();
-        axioms.addAll(((SpecializableTerm)term).getOwnedSpecializations());
-        if (term instanceof Classifier) {
-            axioms.addAll(((Classifier)term).getOwnedPropertyRestrictions());
-        }
-        if (term instanceof Entity) {
-            axioms.addAll(((Entity)term).getOwnedRelationRestrictions());            
-            axioms.addAll(((Entity)term).getOwnedKeys());            
+        for (EObject object : term.eContents()) {
+        	if (object instanceof Axiom) {
+        		axioms.add((Axiom)object);
+        	}
         }
         return axioms;
     }
-    
-    // Instance
+        
+    /**
+     * Gets the number of facets defined on the given scalar equivalence axiom
+     * 
+     * @param axiom the given axiom
+     * @return the number of facets defined on the given scalar equivalence axiom
+     */
+    public static int getNumberOfFacets(ScalarEquivalenceAxiom axiom) {
+		int number = 0;
+		if (axiom.getLanguage() != null) number++;
+		if (axiom.getPattern() != null) number++;
+	    if (axiom.getLength() != null) number++;
+	    if (axiom.getMaxLength() != null) number++;
+	    if (axiom.getMinLength() != null) number++;
+	    if (axiom.getMaxExclusive() != null) number++;
+	    if (axiom.getMaxInclusive() != null) number++;
+	    if (axiom.getMinExclusive() != null) number++;
+	    if (axiom.getMinInclusive() != null) number++;
+		return number;
+    }
+
+    /**
+     * Gets the term that is bound by the given predicate
+     * 
+     * @param predicate the given predicate
+     * @return the term that is bound by the predicate
+     */
+    public static Term getTerm(Predicate predicate) {
+    	if (predicate instanceof TypePredicate) {
+    		return ((TypePredicate)predicate).getType();
+    	} else if (predicate instanceof RelationEntityPredicate) {
+    		return ((RelationEntityPredicate)predicate).getType();
+    	} else if (predicate instanceof PropertyPredicate) {
+    		return ((PropertyPredicate)predicate).getProperty();
+    	}
+    	return null;
+    }
+
+    /**
+     * Determines if the given scalar is a standard one
+     *  
+     * @param scalar the given scalar
+     * @return whether the scalar is standard
+     */
+    public static boolean isStandardScalar(Scalar scalar) {
+    	var ontology = scalar.getOntology();
+    	if (ontology != null) {
+	    	var ontologyNs = ontology.getNamespace();
+	    	return ontologyNs.equals(OmlConstants.XSD_NS) ||
+	            	ontologyNs.equals(OmlConstants.RDF_NS) ||
+	            	ontologyNs.equals(OmlConstants.RDFS_NS) ||
+	            	ontologyNs.equals(OmlConstants.OWL_NS);
+    	}
+    	return false;
+    }
+
+    //-------------------------------------------------
+    // DESCRIPTIONS
+    //-------------------------------------------------
     
     /**
      * Gets all the assertions owned by the given instance
@@ -1023,68 +967,17 @@ public final class OmlRead {
      */
     public static List<Assertion> getAssertions(Instance instance) {
         var assertions = new ArrayList<Assertion>();
-        assertions.addAll(instance.getOwnedPropertyValues());
         if (instance instanceof NamedInstance) {
-            assertions.addAll(((NamedInstance)instance).getOwnedLinks());
-            assertions.addAll(getTypeAssertions((NamedInstance)instance));
+        	assertions.addAll(((NamedInstance)instance).getOwnedTypes());
         }
-        return assertions;
-    }
-    
-    /**
-     * Gets all the type assertions owned by the given instance
-     * 
-     * @param instance the given instance
-     * @return a list of type assertions owned by the given instance
-     */
-    public static List<TypeAssertion> getTypeAssertions(NamedInstance instance) {
-        var assertions = new ArrayList<TypeAssertion>();
-        if (instance instanceof ConceptInstance) {
-            assertions.addAll(((ConceptInstance)instance).getOwnedTypes());
-        } else if (instance instanceof RelationInstance) {
-            assertions.addAll(((RelationInstance)instance).getOwnedTypes());
-        }
+        assertions.addAll(instance.getOwnedPropertyValues());
         return assertions;
     }
 
-    // NamedInstanceReference
-    
-    /**
-     * Gets all the assertions owned by the given reference
-     * 
-     * @param reference the given reference
-     * @return a list of assertions owned by the given reference
-     */
-    public static List<Assertion> getAssertions(NamedInstanceReference reference) {
-        var assertions = new ArrayList<Assertion>();
-        assertions.addAll(reference.getOwnedPropertyValues());
-        assertions.addAll(reference.getOwnedLinks());
-        assertions.addAll(getTypeAssertions(reference));
-        return assertions;
-    }
-    
-    /**
-     * Gets all the type assertions owned by the given reference
-     * 
-     * @param reference the given reference
-     * @return a list of type assertions owned by the given reference
-     */
-    public static List<TypeAssertion> getTypeAssertions(NamedInstanceReference reference) {
-        var assertions = new ArrayList<TypeAssertion>();
-        if (reference instanceof ConceptInstanceReference) {
-            assertions.addAll(((ConceptInstanceReference)reference).getOwnedTypes());
-        } else if (reference instanceof RelationInstanceReference) {
-            assertions.addAll(((RelationInstanceReference)reference).getOwnedTypes());
-        }
-        return assertions;
-    }
-
-    // AnnotatedElement
-    
     /**
      * Gets the values of the given semantic property in the given instance
      * 
-     * @param instance The instance that has the annotation
+     * @param instance The given instance
      * @param property the given semantic property
      * @return a list of elements representing the property values
      */
@@ -1093,20 +986,6 @@ public final class OmlRead {
             .filter(a -> a.getProperty() == property)
             .map(a -> a.getValue())
             .collect(Collectors.toList());
-    }
-    
-    /**
-     * Gets a value of the given semantic property in the given instance
-     * 
-     * @param instance The instance that has the annotation
-     * @param property the given semantic property
-     * @return an element representing a property value
-     */
-    public static Element getPropertyValue(Instance instance, SemanticProperty property) {
-        return instance.getOwnedPropertyValues().stream()
-            .filter(a -> a.getProperty() == property)
-            .map(a -> a.getValue())
-            .findFirst().orElse(null);
     }
     
     /**
@@ -1120,7 +999,7 @@ public final class OmlRead {
         if (instance instanceof StructureInstance) {
             types.add(((StructureInstance) instance).getType());
         } else if (instance instanceof NamedInstance) {
-            types.addAll(getTypeAssertions((NamedInstance)instance).stream().
+            types.addAll(((NamedInstance)instance).getOwnedTypes().stream().
                 map(i -> i.getType()).
                 collect(Collectors.toList()));
         }
@@ -1128,233 +1007,18 @@ public final class OmlRead {
     }
 
     //-------------------------------------------------
-    // AXIOMS
+    // LITERALS
     //-------------------------------------------------
-    
-    // KeyAxiom
-    
+     
     /**
-     * Gets the entity that defines the given key axiom
+     * Gets the type of the given literal
      * 
-     * @param axiom the given key axiom
-     * @return the entity that defines the given key axiom
+     * @param literal the given literal
+     * @return the scalar type of the given literal
      */
-    public static Entity getKeyedEntity(KeyAxiom axiom) {
-        if (axiom.getOwningReference() != null) {
-            return (Entity) resolve(axiom.getOwningReference());
-        } else {
-            return axiom.getOwningEntity();
-        }
-    }
-    
-    // SpecializationAxiom
-    
-    /**
-     * Gets the super (general) term of the given specialization axiom
-     * 
-     * @param axiom the given specialization axiom
-     * @return the super term of the given specialization axiom
-     */
-    public static SpecializableTerm getSuperTerm(SpecializationAxiom axiom) {
-        return axiom.getSpecializedTerm();
-    }
-    
-    /**
-     * Gets the sub (specific) term of the given specialization axiom
-     * 
-     * @param axiom the given specialization axiom
-     * @return the sub term of the given specialization axiom
-     */
-    public static SpecializableTerm getSubTerm(SpecializationAxiom axiom) {
-        if (axiom.getOwningReference() != null) {
-            return (SpecializableTerm) resolve(axiom.getOwningReference());
-        } else {
-            return axiom.getOwningTerm();
-        }
-    }
-    
-    // RestrictionAxiom
-    
-    /**
-     * Gets the restricting classifier of the given restriction axiom
-     * 
-     * @param axiom the given restriction axiom
-     * @return the restricting classifier of the given restriction axiom
-     */
-    public static Classifier getRestrictingClassifier(RestrictionAxiom axiom) {
-        if (axiom instanceof PropertyRestrictionAxiom) {
-            return getRestrictingClassifier((PropertyRestrictionAxiom) axiom);
-        } else if (axiom instanceof RelationRestrictionAxiom) {
-            return getRestrictingEntity((RelationRestrictionAxiom) axiom);
-        } 
-        return null;
-    }
-    
-    /**
-     * Gets the restricting classifier of the given property restriction axiom
-     * 
-     * @param axiom the given property restriction axiom
-     * @return the restricting classifier of the given property restriction axiom
-     */
-    public static Classifier getRestrictingClassifier(PropertyRestrictionAxiom axiom) {
-        if (axiom.getOwningReference() != null) {
-            return (Classifier) resolve(axiom.getOwningReference());
-        } else {
-            return axiom.getOwningClassifier();
-        }
-    }
-    
-    /**
-     * Gets the restricting entity of the given relation restriction axiom
-     * 
-     * @param axiom the given relation restriction axiom
-     * @return the restricting entity of the given relation restriction axiom
-     */
-    public static Entity getRestrictingEntity(RelationRestrictionAxiom axiom) {
-        if (axiom.getOwningReference() != null) {
-            return (Entity) resolve(axiom.getOwningReference());
-        } else {
-            return axiom.getOwningEntity();
-        }
-    }
-    
-    /**
-     * Gets the restricted feature of the given restriction axiom
-     * 
-     * @param axiom the given restriction axiom
-     * @return the restricted feature of the given restriction axiom
-     */
-    public static Feature getRestrictedFeature(RestrictionAxiom axiom) {
-        if (axiom instanceof RelationRestrictionAxiom) {
-            return ((RelationRestrictionAxiom) axiom).getRelation();
-        } else if (axiom instanceof ScalarPropertyRestrictionAxiom) {
-            return ((ScalarPropertyRestrictionAxiom) axiom).getProperty();
-        } else if (axiom instanceof StructuredPropertyRestrictionAxiom) {
-            return ((StructuredPropertyRestrictionAxiom) axiom).getProperty();
-        }
-        return null;
-    }
-    
-    //-------------------------------------------------
-    // ASSERTIONS
-    //-------------------------------------------------
-    
-    // Assertion
-    
-    /**
-     * Gets the instance that is the subject of the given assertion
-     * 
-     * @param assertion the given assertion
-     * @return the instance that is the subject of this assertion
-     */
-    public static Instance getSubject(Assertion assertion) {
-        if (assertion instanceof ConceptTypeAssertion) {
-            return getSubject((ConceptTypeAssertion) assertion);
-        } else if (assertion instanceof RelationTypeAssertion) {
-            return getSubject((RelationTypeAssertion) assertion);
-        } else if (assertion instanceof LinkAssertion) {
-            return getSubject((LinkAssertion) assertion);
-        } else if (assertion instanceof PropertyValueAssertion) {
-            return getSubject((PropertyValueAssertion) assertion);
-        }
-        return null;
-    }
-    
-    /**
-     * Gets the concept instance that is the subject of the given concept type assertion
-     * 
-     * @param assertion the given concept type assertion
-     * @return the concept instance that is the subject of the concept type assertion
-     */
-    public static ConceptInstance getSubject(ConceptTypeAssertion assertion) {
-        if (assertion.getOwningReference() != null) {
-            return (ConceptInstance) resolve(assertion.getOwningReference());
-        } else {
-            return assertion.getOwningInstance();
-        }
-    }
-    
-    /**
-     * Gets the relation instance that is the subject of the given relation type assertion
-     * 
-     * @param assertion the given relation type assertion
-     * @return the relation instance that is the subject of the relation type assertion
-     */
-    public static RelationInstance getSubject(RelationTypeAssertion assertion) {
-        if (assertion.getOwningReference() != null) {
-            return (RelationInstance) resolve(assertion.getOwningReference());
-        } else {
-            return assertion.getOwningInstance();
-        }
-    }
-    
-    /**
-     * Gets the named instance that is the subject of the given link assertion
-     * 
-     * @param assertion the given link assertion
-     * @return the named instance that is the subject of the link assertion
-     */
-    public static NamedInstance getSubject(LinkAssertion assertion) {
-        if (assertion.getOwningReference() != null) {
-            return (NamedInstance) resolve(assertion.getOwningReference());
-        } else {
-            return assertion.getOwningInstance();
-        }
-    }
-    
-    /**
-     * Gets the instance that is the subject of the given property value assertion
-     * 
-     * @param assertion the given property value assertion
-     * @return the instance that is the subject of the property value assertion
-     */
-    public static Instance getSubject(PropertyValueAssertion assertion) {
-        if (assertion.getOwningReference() != null) {
-            return (Instance) resolve(assertion.getOwningReference());
-        } else {
-            return assertion.getOwningInstance();
-        }
-    }
-    
-    // LinkAssertion
-    
-    /**
-     * Gets the source instance of the given link assertion 
-     * 
-     * @param assertion the given link assertion
-     * @return the instance that is the source of the given link assertion
-     */
-    public static NamedInstance getSource(LinkAssertion assertion) {
-        return (NamedInstance) getSubject(assertion);
-    }
-    
-    /**
-     * Gets the target instance of the given link assertion 
-     * 
-     * @param assertion the given link assertion
-     * @return the instance that is the target of the given link assertion
-     */
-    public static NamedInstance getTarget(LinkAssertion assertion) {
-        return assertion.getTarget();
-    }
-    
-    // Predicate
-    
-    /**
-     * Gets the term that is bound by the given predicate
-     * 
-     * @param predicate the given predicate
-     * @return the term that is bound by the predicate
-     */
-    public static Term getTerm(Predicate predicate) {
-    	if (predicate instanceof TypePredicate) {
-    		return ((TypePredicate)predicate).getType();
-    	} else if (predicate instanceof RelationEntityPredicate) {
-    		return ((RelationEntityPredicate)predicate).getEntity();
-    	} else if (predicate instanceof FeaturePredicate) {
-    		return ((FeaturePredicate)predicate).getFeature();
-    	}
-    	return null;
+    public static Scalar getType(Literal literal) {
+    	String iri = literal.getTypeIri();
+    	return (Scalar) getMemberByIri(literal.eResource().getResourceSet(), iri);
     }
 
 }

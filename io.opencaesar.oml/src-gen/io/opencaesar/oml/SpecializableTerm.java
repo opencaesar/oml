@@ -26,7 +26,7 @@ import org.eclipse.emf.common.util.EList;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * SpecializableTerm is a term that can specialized in a taxonomy. It can have zero or more specializations.
+ * SpecializableTerm is a [=term=] that can be specialized by another term. It can have zero or more [=SpecializationAxioms=].
  * <!-- end-model-doc -->
  *
  * <p>

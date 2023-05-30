@@ -95,18 +95,59 @@ public class OmlSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case OmlPackage.ANNOTATED_ELEMENT: {
-				AnnotatedElement annotatedElement = (AnnotatedElement)theEObject;
-				T result = caseAnnotatedElement(annotatedElement);
-				if (result == null) result = caseElement(annotatedElement);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case OmlPackage.IDENTIFIED_ELEMENT: {
 				IdentifiedElement identifiedElement = (IdentifiedElement)theEObject;
 				T result = caseIdentifiedElement(identifiedElement);
-				if (result == null) result = caseAnnotatedElement(identifiedElement);
 				if (result == null) result = caseElement(identifiedElement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case OmlPackage.IMPORT: {
+				Import import_ = (Import)theEObject;
+				T result = caseImport(import_);
+				if (result == null) result = caseElement(import_);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case OmlPackage.INSTANCE: {
+				Instance instance = (Instance)theEObject;
+				T result = caseInstance(instance);
+				if (result == null) result = caseElement(instance);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case OmlPackage.AXIOM: {
+				Axiom axiom = (Axiom)theEObject;
+				T result = caseAxiom(axiom);
+				if (result == null) result = caseElement(axiom);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case OmlPackage.ASSERTION: {
+				Assertion assertion = (Assertion)theEObject;
+				T result = caseAssertion(assertion);
+				if (result == null) result = caseElement(assertion);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case OmlPackage.PREDICATE: {
+				Predicate predicate = (Predicate)theEObject;
+				T result = casePredicate(predicate);
+				if (result == null) result = caseElement(predicate);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case OmlPackage.ARGUMENT: {
+				Argument argument = (Argument)theEObject;
+				T result = caseArgument(argument);
+				if (result == null) result = caseElement(argument);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case OmlPackage.LITERAL: {
+				Literal literal = (Literal)theEObject;
+				T result = caseLiteral(literal);
+				if (result == null) result = caseElement(literal);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -114,8 +155,15 @@ public class OmlSwitch<T> extends Switch<T> {
 				Ontology ontology = (Ontology)theEObject;
 				T result = caseOntology(ontology);
 				if (result == null) result = caseIdentifiedElement(ontology);
-				if (result == null) result = caseAnnotatedElement(ontology);
 				if (result == null) result = caseElement(ontology);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case OmlPackage.MEMBER: {
+				Member member = (Member)theEObject;
+				T result = caseMember(member);
+				if (result == null) result = caseIdentifiedElement(member);
+				if (result == null) result = caseElement(member);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -124,8 +172,16 @@ public class OmlSwitch<T> extends Switch<T> {
 				T result = caseVocabularyBox(vocabularyBox);
 				if (result == null) result = caseOntology(vocabularyBox);
 				if (result == null) result = caseIdentifiedElement(vocabularyBox);
-				if (result == null) result = caseAnnotatedElement(vocabularyBox);
 				if (result == null) result = caseElement(vocabularyBox);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case OmlPackage.DESCRIPTION_BOX: {
+				DescriptionBox descriptionBox = (DescriptionBox)theEObject;
+				T result = caseDescriptionBox(descriptionBox);
+				if (result == null) result = caseOntology(descriptionBox);
+				if (result == null) result = caseIdentifiedElement(descriptionBox);
+				if (result == null) result = caseElement(descriptionBox);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -135,7 +191,6 @@ public class OmlSwitch<T> extends Switch<T> {
 				if (result == null) result = caseVocabularyBox(vocabulary);
 				if (result == null) result = caseOntology(vocabulary);
 				if (result == null) result = caseIdentifiedElement(vocabulary);
-				if (result == null) result = caseAnnotatedElement(vocabulary);
 				if (result == null) result = caseElement(vocabulary);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -146,18 +201,7 @@ public class OmlSwitch<T> extends Switch<T> {
 				if (result == null) result = caseVocabularyBox(vocabularyBundle);
 				if (result == null) result = caseOntology(vocabularyBundle);
 				if (result == null) result = caseIdentifiedElement(vocabularyBundle);
-				if (result == null) result = caseAnnotatedElement(vocabularyBundle);
 				if (result == null) result = caseElement(vocabularyBundle);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.DESCRIPTION_BOX: {
-				DescriptionBox descriptionBox = (DescriptionBox)theEObject;
-				T result = caseDescriptionBox(descriptionBox);
-				if (result == null) result = caseOntology(descriptionBox);
-				if (result == null) result = caseIdentifiedElement(descriptionBox);
-				if (result == null) result = caseAnnotatedElement(descriptionBox);
-				if (result == null) result = caseElement(descriptionBox);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -167,7 +211,6 @@ public class OmlSwitch<T> extends Switch<T> {
 				if (result == null) result = caseDescriptionBox(description);
 				if (result == null) result = caseOntology(description);
 				if (result == null) result = caseIdentifiedElement(description);
-				if (result == null) result = caseAnnotatedElement(description);
 				if (result == null) result = caseElement(description);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -178,27 +221,90 @@ public class OmlSwitch<T> extends Switch<T> {
 				if (result == null) result = caseDescriptionBox(descriptionBundle);
 				if (result == null) result = caseOntology(descriptionBundle);
 				if (result == null) result = caseIdentifiedElement(descriptionBundle);
-				if (result == null) result = caseAnnotatedElement(descriptionBundle);
 				if (result == null) result = caseElement(descriptionBundle);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case OmlPackage.MEMBER: {
-				Member member = (Member)theEObject;
-				T result = caseMember(member);
-				if (result == null) result = caseIdentifiedElement(member);
-				if (result == null) result = caseAnnotatedElement(member);
-				if (result == null) result = caseElement(member);
+			case OmlPackage.STATEMENT: {
+				Statement statement = (Statement)theEObject;
+				T result = caseStatement(statement);
+				if (result == null) result = caseMember(statement);
+				if (result == null) result = caseIdentifiedElement(statement);
+				if (result == null) result = caseElement(statement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case OmlPackage.VOCABULARY_MEMBER: {
+				VocabularyMember vocabularyMember = (VocabularyMember)theEObject;
+				T result = caseVocabularyMember(vocabularyMember);
+				if (result == null) result = caseMember(vocabularyMember);
+				if (result == null) result = caseIdentifiedElement(vocabularyMember);
+				if (result == null) result = caseElement(vocabularyMember);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case OmlPackage.DESCRIPTION_MEMBER: {
+				DescriptionMember descriptionMember = (DescriptionMember)theEObject;
+				T result = caseDescriptionMember(descriptionMember);
+				if (result == null) result = caseMember(descriptionMember);
+				if (result == null) result = caseIdentifiedElement(descriptionMember);
+				if (result == null) result = caseElement(descriptionMember);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case OmlPackage.VOCABULARY_STATEMENT: {
+				VocabularyStatement vocabularyStatement = (VocabularyStatement)theEObject;
+				T result = caseVocabularyStatement(vocabularyStatement);
+				if (result == null) result = caseStatement(vocabularyStatement);
+				if (result == null) result = caseVocabularyMember(vocabularyStatement);
+				if (result == null) result = caseMember(vocabularyStatement);
+				if (result == null) result = caseIdentifiedElement(vocabularyStatement);
+				if (result == null) result = caseElement(vocabularyStatement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case OmlPackage.DESCRIPTION_STATEMENT: {
+				DescriptionStatement descriptionStatement = (DescriptionStatement)theEObject;
+				T result = caseDescriptionStatement(descriptionStatement);
+				if (result == null) result = caseStatement(descriptionStatement);
+				if (result == null) result = caseDescriptionMember(descriptionStatement);
+				if (result == null) result = caseMember(descriptionStatement);
+				if (result == null) result = caseIdentifiedElement(descriptionStatement);
+				if (result == null) result = caseElement(descriptionStatement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case OmlPackage.TERM: {
 				Term term = (Term)theEObject;
 				T result = caseTerm(term);
+				if (result == null) result = caseVocabularyMember(term);
 				if (result == null) result = caseMember(term);
 				if (result == null) result = caseIdentifiedElement(term);
-				if (result == null) result = caseAnnotatedElement(term);
 				if (result == null) result = caseElement(term);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case OmlPackage.RULE: {
+				Rule rule = (Rule)theEObject;
+				T result = caseRule(rule);
+				if (result == null) result = caseVocabularyStatement(rule);
+				if (result == null) result = caseStatement(rule);
+				if (result == null) result = caseVocabularyMember(rule);
+				if (result == null) result = caseMember(rule);
+				if (result == null) result = caseIdentifiedElement(rule);
+				if (result == null) result = caseElement(rule);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case OmlPackage.BUILT_IN: {
+				BuiltIn builtIn = (BuiltIn)theEObject;
+				T result = caseBuiltIn(builtIn);
+				if (result == null) result = caseVocabularyStatement(builtIn);
+				if (result == null) result = caseStatement(builtIn);
+				if (result == null) result = caseVocabularyMember(builtIn);
+				if (result == null) result = caseMember(builtIn);
+				if (result == null) result = caseIdentifiedElement(builtIn);
+				if (result == null) result = caseElement(builtIn);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -207,11 +313,22 @@ public class OmlSwitch<T> extends Switch<T> {
 				T result = caseSpecializableTerm(specializableTerm);
 				if (result == null) result = caseTerm(specializableTerm);
 				if (result == null) result = caseVocabularyStatement(specializableTerm);
-				if (result == null) result = caseMember(specializableTerm);
+				if (result == null) result = caseVocabularyMember(specializableTerm);
 				if (result == null) result = caseStatement(specializableTerm);
+				if (result == null) result = caseMember(specializableTerm);
 				if (result == null) result = caseIdentifiedElement(specializableTerm);
-				if (result == null) result = caseAnnotatedElement(specializableTerm);
 				if (result == null) result = caseElement(specializableTerm);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case OmlPackage.PROPERTY: {
+				Property property = (Property)theEObject;
+				T result = caseProperty(property);
+				if (result == null) result = caseTerm(property);
+				if (result == null) result = caseVocabularyMember(property);
+				if (result == null) result = caseMember(property);
+				if (result == null) result = caseIdentifiedElement(property);
+				if (result == null) result = caseElement(property);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -221,11 +338,40 @@ public class OmlSwitch<T> extends Switch<T> {
 				if (result == null) result = caseSpecializableTerm(type);
 				if (result == null) result = caseTerm(type);
 				if (result == null) result = caseVocabularyStatement(type);
-				if (result == null) result = caseMember(type);
+				if (result == null) result = caseVocabularyMember(type);
 				if (result == null) result = caseStatement(type);
+				if (result == null) result = caseMember(type);
 				if (result == null) result = caseIdentifiedElement(type);
-				if (result == null) result = caseAnnotatedElement(type);
 				if (result == null) result = caseElement(type);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case OmlPackage.RELATION_BASE: {
+				RelationBase relationBase = (RelationBase)theEObject;
+				T result = caseRelationBase(relationBase);
+				if (result == null) result = caseSpecializableTerm(relationBase);
+				if (result == null) result = caseTerm(relationBase);
+				if (result == null) result = caseVocabularyStatement(relationBase);
+				if (result == null) result = caseVocabularyMember(relationBase);
+				if (result == null) result = caseStatement(relationBase);
+				if (result == null) result = caseMember(relationBase);
+				if (result == null) result = caseIdentifiedElement(relationBase);
+				if (result == null) result = caseElement(relationBase);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case OmlPackage.SPECIALIZABLE_PROPERTY: {
+				SpecializableProperty specializableProperty = (SpecializableProperty)theEObject;
+				T result = caseSpecializableProperty(specializableProperty);
+				if (result == null) result = caseSpecializableTerm(specializableProperty);
+				if (result == null) result = caseProperty(specializableProperty);
+				if (result == null) result = caseTerm(specializableProperty);
+				if (result == null) result = caseVocabularyStatement(specializableProperty);
+				if (result == null) result = caseVocabularyMember(specializableProperty);
+				if (result == null) result = caseStatement(specializableProperty);
+				if (result == null) result = caseMember(specializableProperty);
+				if (result == null) result = caseIdentifiedElement(specializableProperty);
+				if (result == null) result = caseElement(specializableProperty);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -236,11 +382,26 @@ public class OmlSwitch<T> extends Switch<T> {
 				if (result == null) result = caseSpecializableTerm(classifier);
 				if (result == null) result = caseTerm(classifier);
 				if (result == null) result = caseVocabularyStatement(classifier);
-				if (result == null) result = caseMember(classifier);
+				if (result == null) result = caseVocabularyMember(classifier);
 				if (result == null) result = caseStatement(classifier);
+				if (result == null) result = caseMember(classifier);
 				if (result == null) result = caseIdentifiedElement(classifier);
-				if (result == null) result = caseAnnotatedElement(classifier);
 				if (result == null) result = caseElement(classifier);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case OmlPackage.SCALAR: {
+				Scalar scalar = (Scalar)theEObject;
+				T result = caseScalar(scalar);
+				if (result == null) result = caseType(scalar);
+				if (result == null) result = caseSpecializableTerm(scalar);
+				if (result == null) result = caseTerm(scalar);
+				if (result == null) result = caseVocabularyStatement(scalar);
+				if (result == null) result = caseVocabularyMember(scalar);
+				if (result == null) result = caseStatement(scalar);
+				if (result == null) result = caseMember(scalar);
+				if (result == null) result = caseIdentifiedElement(scalar);
+				if (result == null) result = caseElement(scalar);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -252,11 +413,27 @@ public class OmlSwitch<T> extends Switch<T> {
 				if (result == null) result = caseSpecializableTerm(entity);
 				if (result == null) result = caseTerm(entity);
 				if (result == null) result = caseVocabularyStatement(entity);
-				if (result == null) result = caseMember(entity);
+				if (result == null) result = caseVocabularyMember(entity);
 				if (result == null) result = caseStatement(entity);
+				if (result == null) result = caseMember(entity);
 				if (result == null) result = caseIdentifiedElement(entity);
-				if (result == null) result = caseAnnotatedElement(entity);
 				if (result == null) result = caseElement(entity);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case OmlPackage.STRUCTURE: {
+				Structure structure = (Structure)theEObject;
+				T result = caseStructure(structure);
+				if (result == null) result = caseClassifier(structure);
+				if (result == null) result = caseType(structure);
+				if (result == null) result = caseSpecializableTerm(structure);
+				if (result == null) result = caseTerm(structure);
+				if (result == null) result = caseVocabularyStatement(structure);
+				if (result == null) result = caseVocabularyMember(structure);
+				if (result == null) result = caseStatement(structure);
+				if (result == null) result = caseMember(structure);
+				if (result == null) result = caseIdentifiedElement(structure);
+				if (result == null) result = caseElement(structure);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -269,10 +446,10 @@ public class OmlSwitch<T> extends Switch<T> {
 				if (result == null) result = caseSpecializableTerm(aspect);
 				if (result == null) result = caseTerm(aspect);
 				if (result == null) result = caseVocabularyStatement(aspect);
-				if (result == null) result = caseMember(aspect);
+				if (result == null) result = caseVocabularyMember(aspect);
 				if (result == null) result = caseStatement(aspect);
+				if (result == null) result = caseMember(aspect);
 				if (result == null) result = caseIdentifiedElement(aspect);
-				if (result == null) result = caseAnnotatedElement(aspect);
 				if (result == null) result = caseElement(aspect);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -286,10 +463,10 @@ public class OmlSwitch<T> extends Switch<T> {
 				if (result == null) result = caseSpecializableTerm(concept);
 				if (result == null) result = caseTerm(concept);
 				if (result == null) result = caseVocabularyStatement(concept);
-				if (result == null) result = caseMember(concept);
+				if (result == null) result = caseVocabularyMember(concept);
 				if (result == null) result = caseStatement(concept);
+				if (result == null) result = caseMember(concept);
 				if (result == null) result = caseIdentifiedElement(concept);
-				if (result == null) result = caseAnnotatedElement(concept);
 				if (result == null) result = caseElement(concept);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -298,70 +475,32 @@ public class OmlSwitch<T> extends Switch<T> {
 				RelationEntity relationEntity = (RelationEntity)theEObject;
 				T result = caseRelationEntity(relationEntity);
 				if (result == null) result = caseEntity(relationEntity);
+				if (result == null) result = caseRelationBase(relationEntity);
 				if (result == null) result = caseClassifier(relationEntity);
 				if (result == null) result = caseType(relationEntity);
 				if (result == null) result = caseSpecializableTerm(relationEntity);
 				if (result == null) result = caseTerm(relationEntity);
 				if (result == null) result = caseVocabularyStatement(relationEntity);
-				if (result == null) result = caseMember(relationEntity);
+				if (result == null) result = caseVocabularyMember(relationEntity);
 				if (result == null) result = caseStatement(relationEntity);
+				if (result == null) result = caseMember(relationEntity);
 				if (result == null) result = caseIdentifiedElement(relationEntity);
-				if (result == null) result = caseAnnotatedElement(relationEntity);
 				if (result == null) result = caseElement(relationEntity);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.STRUCTURE: {
-				Structure structure = (Structure)theEObject;
-				T result = caseStructure(structure);
-				if (result == null) result = caseClassifier(structure);
-				if (result == null) result = caseType(structure);
-				if (result == null) result = caseSpecializableTerm(structure);
-				if (result == null) result = caseTerm(structure);
-				if (result == null) result = caseVocabularyStatement(structure);
-				if (result == null) result = caseMember(structure);
-				if (result == null) result = caseStatement(structure);
-				if (result == null) result = caseIdentifiedElement(structure);
-				if (result == null) result = caseAnnotatedElement(structure);
-				if (result == null) result = caseElement(structure);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.FEATURE: {
-				Feature feature = (Feature)theEObject;
-				T result = caseFeature(feature);
-				if (result == null) result = caseTerm(feature);
-				if (result == null) result = caseMember(feature);
-				if (result == null) result = caseIdentifiedElement(feature);
-				if (result == null) result = caseAnnotatedElement(feature);
-				if (result == null) result = caseElement(feature);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.PROPERTY: {
-				Property property = (Property)theEObject;
-				T result = caseProperty(property);
-				if (result == null) result = caseFeature(property);
-				if (result == null) result = caseTerm(property);
-				if (result == null) result = caseMember(property);
-				if (result == null) result = caseIdentifiedElement(property);
-				if (result == null) result = caseAnnotatedElement(property);
-				if (result == null) result = caseElement(property);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case OmlPackage.ANNOTATION_PROPERTY: {
 				AnnotationProperty annotationProperty = (AnnotationProperty)theEObject;
 				T result = caseAnnotationProperty(annotationProperty);
-				if (result == null) result = caseProperty(annotationProperty);
+				if (result == null) result = caseSpecializableProperty(annotationProperty);
 				if (result == null) result = caseSpecializableTerm(annotationProperty);
-				if (result == null) result = caseFeature(annotationProperty);
-				if (result == null) result = caseVocabularyStatement(annotationProperty);
+				if (result == null) result = caseProperty(annotationProperty);
 				if (result == null) result = caseTerm(annotationProperty);
+				if (result == null) result = caseVocabularyStatement(annotationProperty);
+				if (result == null) result = caseVocabularyMember(annotationProperty);
 				if (result == null) result = caseStatement(annotationProperty);
 				if (result == null) result = caseMember(annotationProperty);
 				if (result == null) result = caseIdentifiedElement(annotationProperty);
-				if (result == null) result = caseAnnotatedElement(annotationProperty);
 				if (result == null) result = caseElement(annotationProperty);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -370,11 +509,10 @@ public class OmlSwitch<T> extends Switch<T> {
 				SemanticProperty semanticProperty = (SemanticProperty)theEObject;
 				T result = caseSemanticProperty(semanticProperty);
 				if (result == null) result = caseProperty(semanticProperty);
-				if (result == null) result = caseFeature(semanticProperty);
 				if (result == null) result = caseTerm(semanticProperty);
+				if (result == null) result = caseVocabularyMember(semanticProperty);
 				if (result == null) result = caseMember(semanticProperty);
 				if (result == null) result = caseIdentifiedElement(semanticProperty);
-				if (result == null) result = caseAnnotatedElement(semanticProperty);
 				if (result == null) result = caseElement(semanticProperty);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -383,15 +521,15 @@ public class OmlSwitch<T> extends Switch<T> {
 				ScalarProperty scalarProperty = (ScalarProperty)theEObject;
 				T result = caseScalarProperty(scalarProperty);
 				if (result == null) result = caseSemanticProperty(scalarProperty);
-				if (result == null) result = caseSpecializableTerm(scalarProperty);
+				if (result == null) result = caseSpecializableProperty(scalarProperty);
 				if (result == null) result = caseProperty(scalarProperty);
-				if (result == null) result = caseVocabularyStatement(scalarProperty);
-				if (result == null) result = caseFeature(scalarProperty);
-				if (result == null) result = caseStatement(scalarProperty);
+				if (result == null) result = caseSpecializableTerm(scalarProperty);
 				if (result == null) result = caseTerm(scalarProperty);
+				if (result == null) result = caseVocabularyStatement(scalarProperty);
+				if (result == null) result = caseVocabularyMember(scalarProperty);
+				if (result == null) result = caseStatement(scalarProperty);
 				if (result == null) result = caseMember(scalarProperty);
 				if (result == null) result = caseIdentifiedElement(scalarProperty);
-				if (result == null) result = caseAnnotatedElement(scalarProperty);
 				if (result == null) result = caseElement(scalarProperty);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -400,74 +538,28 @@ public class OmlSwitch<T> extends Switch<T> {
 				StructuredProperty structuredProperty = (StructuredProperty)theEObject;
 				T result = caseStructuredProperty(structuredProperty);
 				if (result == null) result = caseSemanticProperty(structuredProperty);
-				if (result == null) result = caseSpecializableTerm(structuredProperty);
+				if (result == null) result = caseSpecializableProperty(structuredProperty);
 				if (result == null) result = caseProperty(structuredProperty);
-				if (result == null) result = caseVocabularyStatement(structuredProperty);
-				if (result == null) result = caseFeature(structuredProperty);
-				if (result == null) result = caseStatement(structuredProperty);
+				if (result == null) result = caseSpecializableTerm(structuredProperty);
 				if (result == null) result = caseTerm(structuredProperty);
+				if (result == null) result = caseVocabularyStatement(structuredProperty);
+				if (result == null) result = caseVocabularyMember(structuredProperty);
+				if (result == null) result = caseStatement(structuredProperty);
 				if (result == null) result = caseMember(structuredProperty);
 				if (result == null) result = caseIdentifiedElement(structuredProperty);
-				if (result == null) result = caseAnnotatedElement(structuredProperty);
 				if (result == null) result = caseElement(structuredProperty);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.SCALAR: {
-				Scalar scalar = (Scalar)theEObject;
-				T result = caseScalar(scalar);
-				if (result == null) result = caseType(scalar);
-				if (result == null) result = caseSpecializableTerm(scalar);
-				if (result == null) result = caseTerm(scalar);
-				if (result == null) result = caseVocabularyStatement(scalar);
-				if (result == null) result = caseMember(scalar);
-				if (result == null) result = caseStatement(scalar);
-				if (result == null) result = caseIdentifiedElement(scalar);
-				if (result == null) result = caseAnnotatedElement(scalar);
-				if (result == null) result = caseElement(scalar);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.FACETED_SCALAR: {
-				FacetedScalar facetedScalar = (FacetedScalar)theEObject;
-				T result = caseFacetedScalar(facetedScalar);
-				if (result == null) result = caseScalar(facetedScalar);
-				if (result == null) result = caseType(facetedScalar);
-				if (result == null) result = caseSpecializableTerm(facetedScalar);
-				if (result == null) result = caseTerm(facetedScalar);
-				if (result == null) result = caseVocabularyStatement(facetedScalar);
-				if (result == null) result = caseMember(facetedScalar);
-				if (result == null) result = caseStatement(facetedScalar);
-				if (result == null) result = caseIdentifiedElement(facetedScalar);
-				if (result == null) result = caseAnnotatedElement(facetedScalar);
-				if (result == null) result = caseElement(facetedScalar);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.ENUMERATED_SCALAR: {
-				EnumeratedScalar enumeratedScalar = (EnumeratedScalar)theEObject;
-				T result = caseEnumeratedScalar(enumeratedScalar);
-				if (result == null) result = caseScalar(enumeratedScalar);
-				if (result == null) result = caseType(enumeratedScalar);
-				if (result == null) result = caseSpecializableTerm(enumeratedScalar);
-				if (result == null) result = caseTerm(enumeratedScalar);
-				if (result == null) result = caseVocabularyStatement(enumeratedScalar);
-				if (result == null) result = caseMember(enumeratedScalar);
-				if (result == null) result = caseStatement(enumeratedScalar);
-				if (result == null) result = caseIdentifiedElement(enumeratedScalar);
-				if (result == null) result = caseAnnotatedElement(enumeratedScalar);
-				if (result == null) result = caseElement(enumeratedScalar);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case OmlPackage.RELATION: {
 				Relation relation = (Relation)theEObject;
 				T result = caseRelation(relation);
-				if (result == null) result = caseFeature(relation);
+				if (result == null) result = caseSemanticProperty(relation);
+				if (result == null) result = caseProperty(relation);
 				if (result == null) result = caseTerm(relation);
+				if (result == null) result = caseVocabularyMember(relation);
 				if (result == null) result = caseMember(relation);
 				if (result == null) result = caseIdentifiedElement(relation);
-				if (result == null) result = caseAnnotatedElement(relation);
 				if (result == null) result = caseElement(relation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -476,11 +568,12 @@ public class OmlSwitch<T> extends Switch<T> {
 				ForwardRelation forwardRelation = (ForwardRelation)theEObject;
 				T result = caseForwardRelation(forwardRelation);
 				if (result == null) result = caseRelation(forwardRelation);
-				if (result == null) result = caseFeature(forwardRelation);
+				if (result == null) result = caseSemanticProperty(forwardRelation);
+				if (result == null) result = caseProperty(forwardRelation);
 				if (result == null) result = caseTerm(forwardRelation);
+				if (result == null) result = caseVocabularyMember(forwardRelation);
 				if (result == null) result = caseMember(forwardRelation);
 				if (result == null) result = caseIdentifiedElement(forwardRelation);
-				if (result == null) result = caseAnnotatedElement(forwardRelation);
 				if (result == null) result = caseElement(forwardRelation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -489,31 +582,73 @@ public class OmlSwitch<T> extends Switch<T> {
 				ReverseRelation reverseRelation = (ReverseRelation)theEObject;
 				T result = caseReverseRelation(reverseRelation);
 				if (result == null) result = caseRelation(reverseRelation);
-				if (result == null) result = caseFeature(reverseRelation);
+				if (result == null) result = caseSemanticProperty(reverseRelation);
+				if (result == null) result = caseProperty(reverseRelation);
 				if (result == null) result = caseTerm(reverseRelation);
+				if (result == null) result = caseVocabularyMember(reverseRelation);
 				if (result == null) result = caseMember(reverseRelation);
 				if (result == null) result = caseIdentifiedElement(reverseRelation);
-				if (result == null) result = caseAnnotatedElement(reverseRelation);
 				if (result == null) result = caseElement(reverseRelation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case OmlPackage.RULE: {
-				Rule rule = (Rule)theEObject;
-				T result = caseRule(rule);
-				if (result == null) result = caseMember(rule);
-				if (result == null) result = caseVocabularyStatement(rule);
-				if (result == null) result = caseIdentifiedElement(rule);
-				if (result == null) result = caseStatement(rule);
-				if (result == null) result = caseAnnotatedElement(rule);
-				if (result == null) result = caseElement(rule);
+			case OmlPackage.UNREIFIED_RELATION: {
+				UnreifiedRelation unreifiedRelation = (UnreifiedRelation)theEObject;
+				T result = caseUnreifiedRelation(unreifiedRelation);
+				if (result == null) result = caseRelation(unreifiedRelation);
+				if (result == null) result = caseRelationBase(unreifiedRelation);
+				if (result == null) result = caseSpecializableProperty(unreifiedRelation);
+				if (result == null) result = caseSemanticProperty(unreifiedRelation);
+				if (result == null) result = caseSpecializableTerm(unreifiedRelation);
+				if (result == null) result = caseProperty(unreifiedRelation);
+				if (result == null) result = caseVocabularyStatement(unreifiedRelation);
+				if (result == null) result = caseTerm(unreifiedRelation);
+				if (result == null) result = caseStatement(unreifiedRelation);
+				if (result == null) result = caseVocabularyMember(unreifiedRelation);
+				if (result == null) result = caseMember(unreifiedRelation);
+				if (result == null) result = caseIdentifiedElement(unreifiedRelation);
+				if (result == null) result = caseElement(unreifiedRelation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case OmlPackage.INSTANCE: {
-				Instance instance = (Instance)theEObject;
-				T result = caseInstance(instance);
-				if (result == null) result = caseElement(instance);
+			case OmlPackage.NAMED_INSTANCE: {
+				NamedInstance namedInstance = (NamedInstance)theEObject;
+				T result = caseNamedInstance(namedInstance);
+				if (result == null) result = caseDescriptionStatement(namedInstance);
+				if (result == null) result = caseInstance(namedInstance);
+				if (result == null) result = caseStatement(namedInstance);
+				if (result == null) result = caseDescriptionMember(namedInstance);
+				if (result == null) result = caseMember(namedInstance);
+				if (result == null) result = caseIdentifiedElement(namedInstance);
+				if (result == null) result = caseElement(namedInstance);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case OmlPackage.CONCEPT_INSTANCE: {
+				ConceptInstance conceptInstance = (ConceptInstance)theEObject;
+				T result = caseConceptInstance(conceptInstance);
+				if (result == null) result = caseNamedInstance(conceptInstance);
+				if (result == null) result = caseDescriptionStatement(conceptInstance);
+				if (result == null) result = caseInstance(conceptInstance);
+				if (result == null) result = caseStatement(conceptInstance);
+				if (result == null) result = caseDescriptionMember(conceptInstance);
+				if (result == null) result = caseMember(conceptInstance);
+				if (result == null) result = caseIdentifiedElement(conceptInstance);
+				if (result == null) result = caseElement(conceptInstance);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case OmlPackage.RELATION_INSTANCE: {
+				RelationInstance relationInstance = (RelationInstance)theEObject;
+				T result = caseRelationInstance(relationInstance);
+				if (result == null) result = caseNamedInstance(relationInstance);
+				if (result == null) result = caseDescriptionStatement(relationInstance);
+				if (result == null) result = caseInstance(relationInstance);
+				if (result == null) result = caseStatement(relationInstance);
+				if (result == null) result = caseDescriptionMember(relationInstance);
+				if (result == null) result = caseMember(relationInstance);
+				if (result == null) result = caseIdentifiedElement(relationInstance);
+				if (result == null) result = caseElement(relationInstance);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -525,406 +660,11 @@ public class OmlSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case OmlPackage.NAMED_INSTANCE: {
-				NamedInstance namedInstance = (NamedInstance)theEObject;
-				T result = caseNamedInstance(namedInstance);
-				if (result == null) result = caseMember(namedInstance);
-				if (result == null) result = caseInstance(namedInstance);
-				if (result == null) result = caseDescriptionStatement(namedInstance);
-				if (result == null) result = caseIdentifiedElement(namedInstance);
-				if (result == null) result = caseStatement(namedInstance);
-				if (result == null) result = caseAnnotatedElement(namedInstance);
-				if (result == null) result = caseElement(namedInstance);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.CONCEPT_INSTANCE: {
-				ConceptInstance conceptInstance = (ConceptInstance)theEObject;
-				T result = caseConceptInstance(conceptInstance);
-				if (result == null) result = caseNamedInstance(conceptInstance);
-				if (result == null) result = caseMember(conceptInstance);
-				if (result == null) result = caseInstance(conceptInstance);
-				if (result == null) result = caseDescriptionStatement(conceptInstance);
-				if (result == null) result = caseIdentifiedElement(conceptInstance);
-				if (result == null) result = caseStatement(conceptInstance);
-				if (result == null) result = caseAnnotatedElement(conceptInstance);
-				if (result == null) result = caseElement(conceptInstance);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.RELATION_INSTANCE: {
-				RelationInstance relationInstance = (RelationInstance)theEObject;
-				T result = caseRelationInstance(relationInstance);
-				if (result == null) result = caseNamedInstance(relationInstance);
-				if (result == null) result = caseMember(relationInstance);
-				if (result == null) result = caseInstance(relationInstance);
-				if (result == null) result = caseDescriptionStatement(relationInstance);
-				if (result == null) result = caseIdentifiedElement(relationInstance);
-				if (result == null) result = caseStatement(relationInstance);
-				if (result == null) result = caseAnnotatedElement(relationInstance);
-				if (result == null) result = caseElement(relationInstance);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.REFERENCE: {
-				Reference reference = (Reference)theEObject;
-				T result = caseReference(reference);
-				if (result == null) result = caseElement(reference);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.SPECIALIZABLE_TERM_REFERENCE: {
-				SpecializableTermReference specializableTermReference = (SpecializableTermReference)theEObject;
-				T result = caseSpecializableTermReference(specializableTermReference);
-				if (result == null) result = caseReference(specializableTermReference);
-				if (result == null) result = caseVocabularyStatement(specializableTermReference);
-				if (result == null) result = caseStatement(specializableTermReference);
-				if (result == null) result = caseElement(specializableTermReference);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.CLASSIFIER_REFERENCE: {
-				ClassifierReference classifierReference = (ClassifierReference)theEObject;
-				T result = caseClassifierReference(classifierReference);
-				if (result == null) result = caseSpecializableTermReference(classifierReference);
-				if (result == null) result = caseReference(classifierReference);
-				if (result == null) result = caseVocabularyStatement(classifierReference);
-				if (result == null) result = caseStatement(classifierReference);
-				if (result == null) result = caseElement(classifierReference);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.ENTITY_REFERENCE: {
-				EntityReference entityReference = (EntityReference)theEObject;
-				T result = caseEntityReference(entityReference);
-				if (result == null) result = caseClassifierReference(entityReference);
-				if (result == null) result = caseSpecializableTermReference(entityReference);
-				if (result == null) result = caseReference(entityReference);
-				if (result == null) result = caseVocabularyStatement(entityReference);
-				if (result == null) result = caseStatement(entityReference);
-				if (result == null) result = caseElement(entityReference);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.ASPECT_REFERENCE: {
-				AspectReference aspectReference = (AspectReference)theEObject;
-				T result = caseAspectReference(aspectReference);
-				if (result == null) result = caseEntityReference(aspectReference);
-				if (result == null) result = caseClassifierReference(aspectReference);
-				if (result == null) result = caseSpecializableTermReference(aspectReference);
-				if (result == null) result = caseReference(aspectReference);
-				if (result == null) result = caseVocabularyStatement(aspectReference);
-				if (result == null) result = caseStatement(aspectReference);
-				if (result == null) result = caseElement(aspectReference);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.CONCEPT_REFERENCE: {
-				ConceptReference conceptReference = (ConceptReference)theEObject;
-				T result = caseConceptReference(conceptReference);
-				if (result == null) result = caseEntityReference(conceptReference);
-				if (result == null) result = caseClassifierReference(conceptReference);
-				if (result == null) result = caseSpecializableTermReference(conceptReference);
-				if (result == null) result = caseReference(conceptReference);
-				if (result == null) result = caseVocabularyStatement(conceptReference);
-				if (result == null) result = caseStatement(conceptReference);
-				if (result == null) result = caseElement(conceptReference);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.RELATION_ENTITY_REFERENCE: {
-				RelationEntityReference relationEntityReference = (RelationEntityReference)theEObject;
-				T result = caseRelationEntityReference(relationEntityReference);
-				if (result == null) result = caseEntityReference(relationEntityReference);
-				if (result == null) result = caseClassifierReference(relationEntityReference);
-				if (result == null) result = caseSpecializableTermReference(relationEntityReference);
-				if (result == null) result = caseReference(relationEntityReference);
-				if (result == null) result = caseVocabularyStatement(relationEntityReference);
-				if (result == null) result = caseStatement(relationEntityReference);
-				if (result == null) result = caseElement(relationEntityReference);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.STRUCTURE_REFERENCE: {
-				StructureReference structureReference = (StructureReference)theEObject;
-				T result = caseStructureReference(structureReference);
-				if (result == null) result = caseClassifierReference(structureReference);
-				if (result == null) result = caseSpecializableTermReference(structureReference);
-				if (result == null) result = caseReference(structureReference);
-				if (result == null) result = caseVocabularyStatement(structureReference);
-				if (result == null) result = caseStatement(structureReference);
-				if (result == null) result = caseElement(structureReference);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.ANNOTATION_PROPERTY_REFERENCE: {
-				AnnotationPropertyReference annotationPropertyReference = (AnnotationPropertyReference)theEObject;
-				T result = caseAnnotationPropertyReference(annotationPropertyReference);
-				if (result == null) result = caseSpecializableTermReference(annotationPropertyReference);
-				if (result == null) result = caseReference(annotationPropertyReference);
-				if (result == null) result = caseVocabularyStatement(annotationPropertyReference);
-				if (result == null) result = caseStatement(annotationPropertyReference);
-				if (result == null) result = caseElement(annotationPropertyReference);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.SCALAR_PROPERTY_REFERENCE: {
-				ScalarPropertyReference scalarPropertyReference = (ScalarPropertyReference)theEObject;
-				T result = caseScalarPropertyReference(scalarPropertyReference);
-				if (result == null) result = caseSpecializableTermReference(scalarPropertyReference);
-				if (result == null) result = caseReference(scalarPropertyReference);
-				if (result == null) result = caseVocabularyStatement(scalarPropertyReference);
-				if (result == null) result = caseStatement(scalarPropertyReference);
-				if (result == null) result = caseElement(scalarPropertyReference);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.STRUCTURED_PROPERTY_REFERENCE: {
-				StructuredPropertyReference structuredPropertyReference = (StructuredPropertyReference)theEObject;
-				T result = caseStructuredPropertyReference(structuredPropertyReference);
-				if (result == null) result = caseSpecializableTermReference(structuredPropertyReference);
-				if (result == null) result = caseReference(structuredPropertyReference);
-				if (result == null) result = caseVocabularyStatement(structuredPropertyReference);
-				if (result == null) result = caseStatement(structuredPropertyReference);
-				if (result == null) result = caseElement(structuredPropertyReference);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.FACETED_SCALAR_REFERENCE: {
-				FacetedScalarReference facetedScalarReference = (FacetedScalarReference)theEObject;
-				T result = caseFacetedScalarReference(facetedScalarReference);
-				if (result == null) result = caseSpecializableTermReference(facetedScalarReference);
-				if (result == null) result = caseReference(facetedScalarReference);
-				if (result == null) result = caseVocabularyStatement(facetedScalarReference);
-				if (result == null) result = caseStatement(facetedScalarReference);
-				if (result == null) result = caseElement(facetedScalarReference);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.ENUMERATED_SCALAR_REFERENCE: {
-				EnumeratedScalarReference enumeratedScalarReference = (EnumeratedScalarReference)theEObject;
-				T result = caseEnumeratedScalarReference(enumeratedScalarReference);
-				if (result == null) result = caseSpecializableTermReference(enumeratedScalarReference);
-				if (result == null) result = caseReference(enumeratedScalarReference);
-				if (result == null) result = caseVocabularyStatement(enumeratedScalarReference);
-				if (result == null) result = caseStatement(enumeratedScalarReference);
-				if (result == null) result = caseElement(enumeratedScalarReference);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.RELATION_REFERENCE: {
-				RelationReference relationReference = (RelationReference)theEObject;
-				T result = caseRelationReference(relationReference);
-				if (result == null) result = caseReference(relationReference);
-				if (result == null) result = caseVocabularyStatement(relationReference);
-				if (result == null) result = caseStatement(relationReference);
-				if (result == null) result = caseElement(relationReference);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.RULE_REFERENCE: {
-				RuleReference ruleReference = (RuleReference)theEObject;
-				T result = caseRuleReference(ruleReference);
-				if (result == null) result = caseReference(ruleReference);
-				if (result == null) result = caseVocabularyStatement(ruleReference);
-				if (result == null) result = caseStatement(ruleReference);
-				if (result == null) result = caseElement(ruleReference);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.NAMED_INSTANCE_REFERENCE: {
-				NamedInstanceReference namedInstanceReference = (NamedInstanceReference)theEObject;
-				T result = caseNamedInstanceReference(namedInstanceReference);
-				if (result == null) result = caseReference(namedInstanceReference);
-				if (result == null) result = caseDescriptionStatement(namedInstanceReference);
-				if (result == null) result = caseStatement(namedInstanceReference);
-				if (result == null) result = caseElement(namedInstanceReference);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.CONCEPT_INSTANCE_REFERENCE: {
-				ConceptInstanceReference conceptInstanceReference = (ConceptInstanceReference)theEObject;
-				T result = caseConceptInstanceReference(conceptInstanceReference);
-				if (result == null) result = caseNamedInstanceReference(conceptInstanceReference);
-				if (result == null) result = caseReference(conceptInstanceReference);
-				if (result == null) result = caseDescriptionStatement(conceptInstanceReference);
-				if (result == null) result = caseStatement(conceptInstanceReference);
-				if (result == null) result = caseElement(conceptInstanceReference);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.RELATION_INSTANCE_REFERENCE: {
-				RelationInstanceReference relationInstanceReference = (RelationInstanceReference)theEObject;
-				T result = caseRelationInstanceReference(relationInstanceReference);
-				if (result == null) result = caseNamedInstanceReference(relationInstanceReference);
-				if (result == null) result = caseReference(relationInstanceReference);
-				if (result == null) result = caseDescriptionStatement(relationInstanceReference);
-				if (result == null) result = caseStatement(relationInstanceReference);
-				if (result == null) result = caseElement(relationInstanceReference);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.STATEMENT: {
-				Statement statement = (Statement)theEObject;
-				T result = caseStatement(statement);
-				if (result == null) result = caseElement(statement);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.VOCABULARY_STATEMENT: {
-				VocabularyStatement vocabularyStatement = (VocabularyStatement)theEObject;
-				T result = caseVocabularyStatement(vocabularyStatement);
-				if (result == null) result = caseStatement(vocabularyStatement);
-				if (result == null) result = caseElement(vocabularyStatement);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.DESCRIPTION_STATEMENT: {
-				DescriptionStatement descriptionStatement = (DescriptionStatement)theEObject;
-				T result = caseDescriptionStatement(descriptionStatement);
-				if (result == null) result = caseStatement(descriptionStatement);
-				if (result == null) result = caseElement(descriptionStatement);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.IMPORT: {
-				Import import_ = (Import)theEObject;
-				T result = caseImport(import_);
-				if (result == null) result = caseAnnotatedElement(import_);
-				if (result == null) result = caseElement(import_);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.VOCABULARY_IMPORT: {
-				VocabularyImport vocabularyImport = (VocabularyImport)theEObject;
-				T result = caseVocabularyImport(vocabularyImport);
-				if (result == null) result = caseImport(vocabularyImport);
-				if (result == null) result = caseAnnotatedElement(vocabularyImport);
-				if (result == null) result = caseElement(vocabularyImport);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.VOCABULARY_EXTENSION: {
-				VocabularyExtension vocabularyExtension = (VocabularyExtension)theEObject;
-				T result = caseVocabularyExtension(vocabularyExtension);
-				if (result == null) result = caseVocabularyImport(vocabularyExtension);
-				if (result == null) result = caseImport(vocabularyExtension);
-				if (result == null) result = caseAnnotatedElement(vocabularyExtension);
-				if (result == null) result = caseElement(vocabularyExtension);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.VOCABULARY_USAGE: {
-				VocabularyUsage vocabularyUsage = (VocabularyUsage)theEObject;
-				T result = caseVocabularyUsage(vocabularyUsage);
-				if (result == null) result = caseVocabularyImport(vocabularyUsage);
-				if (result == null) result = caseImport(vocabularyUsage);
-				if (result == null) result = caseAnnotatedElement(vocabularyUsage);
-				if (result == null) result = caseElement(vocabularyUsage);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.VOCABULARY_BUNDLE_IMPORT: {
-				VocabularyBundleImport vocabularyBundleImport = (VocabularyBundleImport)theEObject;
-				T result = caseVocabularyBundleImport(vocabularyBundleImport);
-				if (result == null) result = caseImport(vocabularyBundleImport);
-				if (result == null) result = caseAnnotatedElement(vocabularyBundleImport);
-				if (result == null) result = caseElement(vocabularyBundleImport);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.VOCABULARY_BUNDLE_EXTENSION: {
-				VocabularyBundleExtension vocabularyBundleExtension = (VocabularyBundleExtension)theEObject;
-				T result = caseVocabularyBundleExtension(vocabularyBundleExtension);
-				if (result == null) result = caseVocabularyBundleImport(vocabularyBundleExtension);
-				if (result == null) result = caseImport(vocabularyBundleExtension);
-				if (result == null) result = caseAnnotatedElement(vocabularyBundleExtension);
-				if (result == null) result = caseElement(vocabularyBundleExtension);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.VOCABULARY_BUNDLE_INCLUSION: {
-				VocabularyBundleInclusion vocabularyBundleInclusion = (VocabularyBundleInclusion)theEObject;
-				T result = caseVocabularyBundleInclusion(vocabularyBundleInclusion);
-				if (result == null) result = caseVocabularyBundleImport(vocabularyBundleInclusion);
-				if (result == null) result = caseImport(vocabularyBundleInclusion);
-				if (result == null) result = caseAnnotatedElement(vocabularyBundleInclusion);
-				if (result == null) result = caseElement(vocabularyBundleInclusion);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.DESCRIPTION_IMPORT: {
-				DescriptionImport descriptionImport = (DescriptionImport)theEObject;
-				T result = caseDescriptionImport(descriptionImport);
-				if (result == null) result = caseImport(descriptionImport);
-				if (result == null) result = caseAnnotatedElement(descriptionImport);
-				if (result == null) result = caseElement(descriptionImport);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.DESCRIPTION_EXTENSION: {
-				DescriptionExtension descriptionExtension = (DescriptionExtension)theEObject;
-				T result = caseDescriptionExtension(descriptionExtension);
-				if (result == null) result = caseDescriptionImport(descriptionExtension);
-				if (result == null) result = caseImport(descriptionExtension);
-				if (result == null) result = caseAnnotatedElement(descriptionExtension);
-				if (result == null) result = caseElement(descriptionExtension);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.DESCRIPTION_USAGE: {
-				DescriptionUsage descriptionUsage = (DescriptionUsage)theEObject;
-				T result = caseDescriptionUsage(descriptionUsage);
-				if (result == null) result = caseDescriptionImport(descriptionUsage);
-				if (result == null) result = caseImport(descriptionUsage);
-				if (result == null) result = caseAnnotatedElement(descriptionUsage);
-				if (result == null) result = caseElement(descriptionUsage);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.DESCRIPTION_BUNDLE_IMPORT: {
-				DescriptionBundleImport descriptionBundleImport = (DescriptionBundleImport)theEObject;
-				T result = caseDescriptionBundleImport(descriptionBundleImport);
-				if (result == null) result = caseImport(descriptionBundleImport);
-				if (result == null) result = caseAnnotatedElement(descriptionBundleImport);
-				if (result == null) result = caseElement(descriptionBundleImport);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.DESCRIPTION_BUNDLE_EXTENSION: {
-				DescriptionBundleExtension descriptionBundleExtension = (DescriptionBundleExtension)theEObject;
-				T result = caseDescriptionBundleExtension(descriptionBundleExtension);
-				if (result == null) result = caseDescriptionBundleImport(descriptionBundleExtension);
-				if (result == null) result = caseImport(descriptionBundleExtension);
-				if (result == null) result = caseAnnotatedElement(descriptionBundleExtension);
-				if (result == null) result = caseElement(descriptionBundleExtension);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.DESCRIPTION_BUNDLE_INCLUSION: {
-				DescriptionBundleInclusion descriptionBundleInclusion = (DescriptionBundleInclusion)theEObject;
-				T result = caseDescriptionBundleInclusion(descriptionBundleInclusion);
-				if (result == null) result = caseDescriptionBundleImport(descriptionBundleInclusion);
-				if (result == null) result = caseImport(descriptionBundleInclusion);
-				if (result == null) result = caseAnnotatedElement(descriptionBundleInclusion);
-				if (result == null) result = caseElement(descriptionBundleInclusion);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.DESCRIPTION_BUNDLE_USAGE: {
-				DescriptionBundleUsage descriptionBundleUsage = (DescriptionBundleUsage)theEObject;
-				T result = caseDescriptionBundleUsage(descriptionBundleUsage);
-				if (result == null) result = caseDescriptionBundleImport(descriptionBundleUsage);
-				if (result == null) result = caseImport(descriptionBundleUsage);
-				if (result == null) result = caseAnnotatedElement(descriptionBundleUsage);
-				if (result == null) result = caseElement(descriptionBundleUsage);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.AXIOM: {
-				Axiom axiom = (Axiom)theEObject;
-				T result = caseAxiom(axiom);
-				if (result == null) result = caseElement(axiom);
+			case OmlPackage.KEY_AXIOM: {
+				KeyAxiom keyAxiom = (KeyAxiom)theEObject;
+				T result = caseKeyAxiom(keyAxiom);
+				if (result == null) result = caseAxiom(keyAxiom);
+				if (result == null) result = caseElement(keyAxiom);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -936,160 +676,87 @@ public class OmlSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case OmlPackage.RESTRICTION_AXIOM: {
-				RestrictionAxiom restrictionAxiom = (RestrictionAxiom)theEObject;
-				T result = caseRestrictionAxiom(restrictionAxiom);
-				if (result == null) result = caseAxiom(restrictionAxiom);
-				if (result == null) result = caseElement(restrictionAxiom);
+			case OmlPackage.INSTANCE_ENUMERATION_AXIOM: {
+				InstanceEnumerationAxiom instanceEnumerationAxiom = (InstanceEnumerationAxiom)theEObject;
+				T result = caseInstanceEnumerationAxiom(instanceEnumerationAxiom);
+				if (result == null) result = caseAxiom(instanceEnumerationAxiom);
+				if (result == null) result = caseElement(instanceEnumerationAxiom);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case OmlPackage.PROPERTY_RESTRICTION_AXIOM: {
 				PropertyRestrictionAxiom propertyRestrictionAxiom = (PropertyRestrictionAxiom)theEObject;
 				T result = casePropertyRestrictionAxiom(propertyRestrictionAxiom);
-				if (result == null) result = caseRestrictionAxiom(propertyRestrictionAxiom);
 				if (result == null) result = caseAxiom(propertyRestrictionAxiom);
 				if (result == null) result = caseElement(propertyRestrictionAxiom);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case OmlPackage.SCALAR_PROPERTY_RESTRICTION_AXIOM: {
-				ScalarPropertyRestrictionAxiom scalarPropertyRestrictionAxiom = (ScalarPropertyRestrictionAxiom)theEObject;
-				T result = caseScalarPropertyRestrictionAxiom(scalarPropertyRestrictionAxiom);
-				if (result == null) result = casePropertyRestrictionAxiom(scalarPropertyRestrictionAxiom);
-				if (result == null) result = caseRestrictionAxiom(scalarPropertyRestrictionAxiom);
-				if (result == null) result = caseAxiom(scalarPropertyRestrictionAxiom);
-				if (result == null) result = caseElement(scalarPropertyRestrictionAxiom);
+			case OmlPackage.LITERAL_ENUMERATION_AXIOM: {
+				LiteralEnumerationAxiom literalEnumerationAxiom = (LiteralEnumerationAxiom)theEObject;
+				T result = caseLiteralEnumerationAxiom(literalEnumerationAxiom);
+				if (result == null) result = caseAxiom(literalEnumerationAxiom);
+				if (result == null) result = caseElement(literalEnumerationAxiom);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case OmlPackage.SCALAR_PROPERTY_RANGE_RESTRICTION_AXIOM: {
-				ScalarPropertyRangeRestrictionAxiom scalarPropertyRangeRestrictionAxiom = (ScalarPropertyRangeRestrictionAxiom)theEObject;
-				T result = caseScalarPropertyRangeRestrictionAxiom(scalarPropertyRangeRestrictionAxiom);
-				if (result == null) result = caseScalarPropertyRestrictionAxiom(scalarPropertyRangeRestrictionAxiom);
-				if (result == null) result = casePropertyRestrictionAxiom(scalarPropertyRangeRestrictionAxiom);
-				if (result == null) result = caseRestrictionAxiom(scalarPropertyRangeRestrictionAxiom);
-				if (result == null) result = caseAxiom(scalarPropertyRangeRestrictionAxiom);
-				if (result == null) result = caseElement(scalarPropertyRangeRestrictionAxiom);
+			case OmlPackage.CLASSIFIER_EQUIVALENCE_AXIOM: {
+				ClassifierEquivalenceAxiom classifierEquivalenceAxiom = (ClassifierEquivalenceAxiom)theEObject;
+				T result = caseClassifierEquivalenceAxiom(classifierEquivalenceAxiom);
+				if (result == null) result = caseAxiom(classifierEquivalenceAxiom);
+				if (result == null) result = caseElement(classifierEquivalenceAxiom);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case OmlPackage.SCALAR_PROPERTY_CARDINALITY_RESTRICTION_AXIOM: {
-				ScalarPropertyCardinalityRestrictionAxiom scalarPropertyCardinalityRestrictionAxiom = (ScalarPropertyCardinalityRestrictionAxiom)theEObject;
-				T result = caseScalarPropertyCardinalityRestrictionAxiom(scalarPropertyCardinalityRestrictionAxiom);
-				if (result == null) result = caseScalarPropertyRestrictionAxiom(scalarPropertyCardinalityRestrictionAxiom);
-				if (result == null) result = casePropertyRestrictionAxiom(scalarPropertyCardinalityRestrictionAxiom);
-				if (result == null) result = caseRestrictionAxiom(scalarPropertyCardinalityRestrictionAxiom);
-				if (result == null) result = caseAxiom(scalarPropertyCardinalityRestrictionAxiom);
-				if (result == null) result = caseElement(scalarPropertyCardinalityRestrictionAxiom);
+			case OmlPackage.SCALAR_EQUIVALENCE_AXIOM: {
+				ScalarEquivalenceAxiom scalarEquivalenceAxiom = (ScalarEquivalenceAxiom)theEObject;
+				T result = caseScalarEquivalenceAxiom(scalarEquivalenceAxiom);
+				if (result == null) result = caseAxiom(scalarEquivalenceAxiom);
+				if (result == null) result = caseElement(scalarEquivalenceAxiom);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case OmlPackage.SCALAR_PROPERTY_VALUE_RESTRICTION_AXIOM: {
-				ScalarPropertyValueRestrictionAxiom scalarPropertyValueRestrictionAxiom = (ScalarPropertyValueRestrictionAxiom)theEObject;
-				T result = caseScalarPropertyValueRestrictionAxiom(scalarPropertyValueRestrictionAxiom);
-				if (result == null) result = caseScalarPropertyRestrictionAxiom(scalarPropertyValueRestrictionAxiom);
-				if (result == null) result = casePropertyRestrictionAxiom(scalarPropertyValueRestrictionAxiom);
-				if (result == null) result = caseRestrictionAxiom(scalarPropertyValueRestrictionAxiom);
-				if (result == null) result = caseAxiom(scalarPropertyValueRestrictionAxiom);
-				if (result == null) result = caseElement(scalarPropertyValueRestrictionAxiom);
+			case OmlPackage.PROPERTY_EQUIVALENCE_AXIOM: {
+				PropertyEquivalenceAxiom propertyEquivalenceAxiom = (PropertyEquivalenceAxiom)theEObject;
+				T result = casePropertyEquivalenceAxiom(propertyEquivalenceAxiom);
+				if (result == null) result = caseAxiom(propertyEquivalenceAxiom);
+				if (result == null) result = caseElement(propertyEquivalenceAxiom);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case OmlPackage.STRUCTURED_PROPERTY_RESTRICTION_AXIOM: {
-				StructuredPropertyRestrictionAxiom structuredPropertyRestrictionAxiom = (StructuredPropertyRestrictionAxiom)theEObject;
-				T result = caseStructuredPropertyRestrictionAxiom(structuredPropertyRestrictionAxiom);
-				if (result == null) result = casePropertyRestrictionAxiom(structuredPropertyRestrictionAxiom);
-				if (result == null) result = caseRestrictionAxiom(structuredPropertyRestrictionAxiom);
-				if (result == null) result = caseAxiom(structuredPropertyRestrictionAxiom);
-				if (result == null) result = caseElement(structuredPropertyRestrictionAxiom);
+			case OmlPackage.PROPERTY_RANGE_RESTRICTION_AXIOM: {
+				PropertyRangeRestrictionAxiom propertyRangeRestrictionAxiom = (PropertyRangeRestrictionAxiom)theEObject;
+				T result = casePropertyRangeRestrictionAxiom(propertyRangeRestrictionAxiom);
+				if (result == null) result = casePropertyRestrictionAxiom(propertyRangeRestrictionAxiom);
+				if (result == null) result = caseAxiom(propertyRangeRestrictionAxiom);
+				if (result == null) result = caseElement(propertyRangeRestrictionAxiom);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case OmlPackage.STRUCTURED_PROPERTY_RANGE_RESTRICTION_AXIOM: {
-				StructuredPropertyRangeRestrictionAxiom structuredPropertyRangeRestrictionAxiom = (StructuredPropertyRangeRestrictionAxiom)theEObject;
-				T result = caseStructuredPropertyRangeRestrictionAxiom(structuredPropertyRangeRestrictionAxiom);
-				if (result == null) result = caseStructuredPropertyRestrictionAxiom(structuredPropertyRangeRestrictionAxiom);
-				if (result == null) result = casePropertyRestrictionAxiom(structuredPropertyRangeRestrictionAxiom);
-				if (result == null) result = caseRestrictionAxiom(structuredPropertyRangeRestrictionAxiom);
-				if (result == null) result = caseAxiom(structuredPropertyRangeRestrictionAxiom);
-				if (result == null) result = caseElement(structuredPropertyRangeRestrictionAxiom);
+			case OmlPackage.PROPERTY_CARDINALITY_RESTRICTION_AXIOM: {
+				PropertyCardinalityRestrictionAxiom propertyCardinalityRestrictionAxiom = (PropertyCardinalityRestrictionAxiom)theEObject;
+				T result = casePropertyCardinalityRestrictionAxiom(propertyCardinalityRestrictionAxiom);
+				if (result == null) result = casePropertyRestrictionAxiom(propertyCardinalityRestrictionAxiom);
+				if (result == null) result = caseAxiom(propertyCardinalityRestrictionAxiom);
+				if (result == null) result = caseElement(propertyCardinalityRestrictionAxiom);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case OmlPackage.STRUCTURED_PROPERTY_CARDINALITY_RESTRICTION_AXIOM: {
-				StructuredPropertyCardinalityRestrictionAxiom structuredPropertyCardinalityRestrictionAxiom = (StructuredPropertyCardinalityRestrictionAxiom)theEObject;
-				T result = caseStructuredPropertyCardinalityRestrictionAxiom(structuredPropertyCardinalityRestrictionAxiom);
-				if (result == null) result = caseStructuredPropertyRestrictionAxiom(structuredPropertyCardinalityRestrictionAxiom);
-				if (result == null) result = casePropertyRestrictionAxiom(structuredPropertyCardinalityRestrictionAxiom);
-				if (result == null) result = caseRestrictionAxiom(structuredPropertyCardinalityRestrictionAxiom);
-				if (result == null) result = caseAxiom(structuredPropertyCardinalityRestrictionAxiom);
-				if (result == null) result = caseElement(structuredPropertyCardinalityRestrictionAxiom);
+			case OmlPackage.PROPERTY_VALUE_RESTRICTION_AXIOM: {
+				PropertyValueRestrictionAxiom propertyValueRestrictionAxiom = (PropertyValueRestrictionAxiom)theEObject;
+				T result = casePropertyValueRestrictionAxiom(propertyValueRestrictionAxiom);
+				if (result == null) result = casePropertyRestrictionAxiom(propertyValueRestrictionAxiom);
+				if (result == null) result = caseAxiom(propertyValueRestrictionAxiom);
+				if (result == null) result = caseElement(propertyValueRestrictionAxiom);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case OmlPackage.STRUCTURED_PROPERTY_VALUE_RESTRICTION_AXIOM: {
-				StructuredPropertyValueRestrictionAxiom structuredPropertyValueRestrictionAxiom = (StructuredPropertyValueRestrictionAxiom)theEObject;
-				T result = caseStructuredPropertyValueRestrictionAxiom(structuredPropertyValueRestrictionAxiom);
-				if (result == null) result = caseStructuredPropertyRestrictionAxiom(structuredPropertyValueRestrictionAxiom);
-				if (result == null) result = casePropertyRestrictionAxiom(structuredPropertyValueRestrictionAxiom);
-				if (result == null) result = caseRestrictionAxiom(structuredPropertyValueRestrictionAxiom);
-				if (result == null) result = caseAxiom(structuredPropertyValueRestrictionAxiom);
-				if (result == null) result = caseElement(structuredPropertyValueRestrictionAxiom);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.RELATION_RESTRICTION_AXIOM: {
-				RelationRestrictionAxiom relationRestrictionAxiom = (RelationRestrictionAxiom)theEObject;
-				T result = caseRelationRestrictionAxiom(relationRestrictionAxiom);
-				if (result == null) result = caseRestrictionAxiom(relationRestrictionAxiom);
-				if (result == null) result = caseAxiom(relationRestrictionAxiom);
-				if (result == null) result = caseElement(relationRestrictionAxiom);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.RELATION_RANGE_RESTRICTION_AXIOM: {
-				RelationRangeRestrictionAxiom relationRangeRestrictionAxiom = (RelationRangeRestrictionAxiom)theEObject;
-				T result = caseRelationRangeRestrictionAxiom(relationRangeRestrictionAxiom);
-				if (result == null) result = caseRelationRestrictionAxiom(relationRangeRestrictionAxiom);
-				if (result == null) result = caseRestrictionAxiom(relationRangeRestrictionAxiom);
-				if (result == null) result = caseAxiom(relationRangeRestrictionAxiom);
-				if (result == null) result = caseElement(relationRangeRestrictionAxiom);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.RELATION_CARDINALITY_RESTRICTION_AXIOM: {
-				RelationCardinalityRestrictionAxiom relationCardinalityRestrictionAxiom = (RelationCardinalityRestrictionAxiom)theEObject;
-				T result = caseRelationCardinalityRestrictionAxiom(relationCardinalityRestrictionAxiom);
-				if (result == null) result = caseRelationRestrictionAxiom(relationCardinalityRestrictionAxiom);
-				if (result == null) result = caseRestrictionAxiom(relationCardinalityRestrictionAxiom);
-				if (result == null) result = caseAxiom(relationCardinalityRestrictionAxiom);
-				if (result == null) result = caseElement(relationCardinalityRestrictionAxiom);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.RELATION_TARGET_RESTRICTION_AXIOM: {
-				RelationTargetRestrictionAxiom relationTargetRestrictionAxiom = (RelationTargetRestrictionAxiom)theEObject;
-				T result = caseRelationTargetRestrictionAxiom(relationTargetRestrictionAxiom);
-				if (result == null) result = caseRelationRestrictionAxiom(relationTargetRestrictionAxiom);
-				if (result == null) result = caseRestrictionAxiom(relationTargetRestrictionAxiom);
-				if (result == null) result = caseAxiom(relationTargetRestrictionAxiom);
-				if (result == null) result = caseElement(relationTargetRestrictionAxiom);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.KEY_AXIOM: {
-				KeyAxiom keyAxiom = (KeyAxiom)theEObject;
-				T result = caseKeyAxiom(keyAxiom);
-				if (result == null) result = caseAxiom(keyAxiom);
-				if (result == null) result = caseElement(keyAxiom);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.ASSERTION: {
-				Assertion assertion = (Assertion)theEObject;
-				T result = caseAssertion(assertion);
-				if (result == null) result = caseElement(assertion);
+			case OmlPackage.PROPERTY_SELF_RESTRICTION_AXIOM: {
+				PropertySelfRestrictionAxiom propertySelfRestrictionAxiom = (PropertySelfRestrictionAxiom)theEObject;
+				T result = casePropertySelfRestrictionAxiom(propertySelfRestrictionAxiom);
+				if (result == null) result = casePropertyRestrictionAxiom(propertySelfRestrictionAxiom);
+				if (result == null) result = caseAxiom(propertySelfRestrictionAxiom);
+				if (result == null) result = caseElement(propertySelfRestrictionAxiom);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -1101,24 +768,6 @@ public class OmlSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case OmlPackage.CONCEPT_TYPE_ASSERTION: {
-				ConceptTypeAssertion conceptTypeAssertion = (ConceptTypeAssertion)theEObject;
-				T result = caseConceptTypeAssertion(conceptTypeAssertion);
-				if (result == null) result = caseTypeAssertion(conceptTypeAssertion);
-				if (result == null) result = caseAssertion(conceptTypeAssertion);
-				if (result == null) result = caseElement(conceptTypeAssertion);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.RELATION_TYPE_ASSERTION: {
-				RelationTypeAssertion relationTypeAssertion = (RelationTypeAssertion)theEObject;
-				T result = caseRelationTypeAssertion(relationTypeAssertion);
-				if (result == null) result = caseTypeAssertion(relationTypeAssertion);
-				if (result == null) result = caseAssertion(relationTypeAssertion);
-				if (result == null) result = caseElement(relationTypeAssertion);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case OmlPackage.PROPERTY_VALUE_ASSERTION: {
 				PropertyValueAssertion propertyValueAssertion = (PropertyValueAssertion)theEObject;
 				T result = casePropertyValueAssertion(propertyValueAssertion);
@@ -1127,44 +776,27 @@ public class OmlSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case OmlPackage.SCALAR_PROPERTY_VALUE_ASSERTION: {
-				ScalarPropertyValueAssertion scalarPropertyValueAssertion = (ScalarPropertyValueAssertion)theEObject;
-				T result = caseScalarPropertyValueAssertion(scalarPropertyValueAssertion);
-				if (result == null) result = casePropertyValueAssertion(scalarPropertyValueAssertion);
-				if (result == null) result = caseAssertion(scalarPropertyValueAssertion);
-				if (result == null) result = caseElement(scalarPropertyValueAssertion);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.STRUCTURED_PROPERTY_VALUE_ASSERTION: {
-				StructuredPropertyValueAssertion structuredPropertyValueAssertion = (StructuredPropertyValueAssertion)theEObject;
-				T result = caseStructuredPropertyValueAssertion(structuredPropertyValueAssertion);
-				if (result == null) result = casePropertyValueAssertion(structuredPropertyValueAssertion);
-				if (result == null) result = caseAssertion(structuredPropertyValueAssertion);
-				if (result == null) result = caseElement(structuredPropertyValueAssertion);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.LINK_ASSERTION: {
-				LinkAssertion linkAssertion = (LinkAssertion)theEObject;
-				T result = caseLinkAssertion(linkAssertion);
-				if (result == null) result = caseAssertion(linkAssertion);
-				if (result == null) result = caseElement(linkAssertion);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.PREDICATE: {
-				Predicate predicate = (Predicate)theEObject;
-				T result = casePredicate(predicate);
-				if (result == null) result = caseElement(predicate);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case OmlPackage.UNARY_PREDICATE: {
 				UnaryPredicate unaryPredicate = (UnaryPredicate)theEObject;
 				T result = caseUnaryPredicate(unaryPredicate);
 				if (result == null) result = casePredicate(unaryPredicate);
 				if (result == null) result = caseElement(unaryPredicate);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case OmlPackage.BINARY_PREDICATE: {
+				BinaryPredicate binaryPredicate = (BinaryPredicate)theEObject;
+				T result = caseBinaryPredicate(binaryPredicate);
+				if (result == null) result = casePredicate(binaryPredicate);
+				if (result == null) result = caseElement(binaryPredicate);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case OmlPackage.BUILT_IN_PREDICATE: {
+				BuiltInPredicate builtInPredicate = (BuiltInPredicate)theEObject;
+				T result = caseBuiltInPredicate(builtInPredicate);
+				if (result == null) result = casePredicate(builtInPredicate);
+				if (result == null) result = caseElement(builtInPredicate);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -1177,29 +809,22 @@ public class OmlSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case OmlPackage.BINARY_PREDICATE: {
-				BinaryPredicate binaryPredicate = (BinaryPredicate)theEObject;
-				T result = caseBinaryPredicate(binaryPredicate);
-				if (result == null) result = casePredicate(binaryPredicate);
-				if (result == null) result = caseElement(binaryPredicate);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case OmlPackage.RELATION_ENTITY_PREDICATE: {
 				RelationEntityPredicate relationEntityPredicate = (RelationEntityPredicate)theEObject;
 				T result = caseRelationEntityPredicate(relationEntityPredicate);
+				if (result == null) result = caseUnaryPredicate(relationEntityPredicate);
 				if (result == null) result = caseBinaryPredicate(relationEntityPredicate);
 				if (result == null) result = casePredicate(relationEntityPredicate);
 				if (result == null) result = caseElement(relationEntityPredicate);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case OmlPackage.FEATURE_PREDICATE: {
-				FeaturePredicate featurePredicate = (FeaturePredicate)theEObject;
-				T result = caseFeaturePredicate(featurePredicate);
-				if (result == null) result = caseBinaryPredicate(featurePredicate);
-				if (result == null) result = casePredicate(featurePredicate);
-				if (result == null) result = caseElement(featurePredicate);
+			case OmlPackage.PROPERTY_PREDICATE: {
+				PropertyPredicate propertyPredicate = (PropertyPredicate)theEObject;
+				T result = casePropertyPredicate(propertyPredicate);
+				if (result == null) result = caseBinaryPredicate(propertyPredicate);
+				if (result == null) result = casePredicate(propertyPredicate);
+				if (result == null) result = caseElement(propertyPredicate);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -1218,13 +843,6 @@ public class OmlSwitch<T> extends Switch<T> {
 				if (result == null) result = caseBinaryPredicate(differentFromPredicate);
 				if (result == null) result = casePredicate(differentFromPredicate);
 				if (result == null) result = caseElement(differentFromPredicate);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case OmlPackage.LITERAL: {
-				Literal literal = (Literal)theEObject;
-				T result = caseLiteral(literal);
-				if (result == null) result = caseElement(literal);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -1303,21 +921,6 @@ public class OmlSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Annotated Element</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Annotated Element</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseAnnotatedElement(AnnotatedElement object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Identified Element</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -1329,6 +932,111 @@ public class OmlSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseIdentifiedElement(IdentifiedElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Import</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Import</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseImport(Import object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Instance</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Instance</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseInstance(Instance object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Axiom</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Axiom</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAxiom(Axiom object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Assertion</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Assertion</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAssertion(Assertion object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Predicate</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Predicate</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePredicate(Predicate object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Argument</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Argument</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseArgument(Argument object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Literal</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Literal</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseLiteral(Literal object) {
 		return null;
 	}
 
@@ -1348,6 +1056,21 @@ public class OmlSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Member</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Member</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseMember(Member object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Vocabulary Box</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -1359,6 +1082,21 @@ public class OmlSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseVocabularyBox(VocabularyBox object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Description Box</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Description Box</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDescriptionBox(DescriptionBox object) {
 		return null;
 	}
 
@@ -1393,21 +1131,6 @@ public class OmlSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Description Box</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Description Box</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseDescriptionBox(DescriptionBox object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Description</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -1438,17 +1161,77 @@ public class OmlSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Member</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Statement</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Member</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Statement</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseMember(Member object) {
+	public T caseStatement(Statement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Vocabulary Member</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Vocabulary Member</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseVocabularyMember(VocabularyMember object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Description Member</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Description Member</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDescriptionMember(DescriptionMember object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Vocabulary Statement</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Vocabulary Statement</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseVocabularyStatement(VocabularyStatement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Description Statement</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Description Statement</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDescriptionStatement(DescriptionStatement object) {
 		return null;
 	}
 
@@ -1468,6 +1251,36 @@ public class OmlSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Rule</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Rule</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseRule(Rule object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Built In</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Built In</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseBuiltIn(BuiltIn object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Specializable Term</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -1479,6 +1292,21 @@ public class OmlSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseSpecializableTerm(SpecializableTerm object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Property</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Property</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseProperty(Property object) {
 		return null;
 	}
 
@@ -1498,6 +1326,36 @@ public class OmlSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Relation Base</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Relation Base</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseRelationBase(RelationBase object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Specializable Property</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Specializable Property</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSpecializableProperty(SpecializableProperty object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Classifier</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -1513,6 +1371,21 @@ public class OmlSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Scalar</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Scalar</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseScalar(Scalar object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Entity</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -1524,6 +1397,21 @@ public class OmlSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseEntity(Entity object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Structure</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Structure</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseStructure(Structure object) {
 		return null;
 	}
 
@@ -1569,51 +1457,6 @@ public class OmlSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseRelationEntity(RelationEntity object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Structure</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Structure</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseStructure(Structure object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Feature</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Feature</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseFeature(Feature object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Property</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Property</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseProperty(Property object) {
 		return null;
 	}
 
@@ -1678,51 +1521,6 @@ public class OmlSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Scalar</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Scalar</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseScalar(Scalar object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Faceted Scalar</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Faceted Scalar</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseFacetedScalar(FacetedScalar object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Enumerated Scalar</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Enumerated Scalar</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseEnumeratedScalar(EnumeratedScalar object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Relation</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -1768,47 +1566,17 @@ public class OmlSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Rule</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Unreified Relation</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Rule</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Unreified Relation</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseRule(Rule object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Instance</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Instance</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseInstance(Instance object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Structure Instance</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Structure Instance</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseStructureInstance(StructureInstance object) {
+	public T caseUnreifiedRelation(UnreifiedRelation object) {
 		return null;
 	}
 
@@ -1858,767 +1626,17 @@ public class OmlSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Reference</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Structure Instance</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Reference</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Structure Instance</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseReference(Reference object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Specializable Term Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Specializable Term Reference</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseSpecializableTermReference(SpecializableTermReference object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Classifier Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Classifier Reference</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseClassifierReference(ClassifierReference object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Entity Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Entity Reference</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseEntityReference(EntityReference object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Aspect Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Aspect Reference</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseAspectReference(AspectReference object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Concept Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Concept Reference</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseConceptReference(ConceptReference object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Relation Entity Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Relation Entity Reference</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseRelationEntityReference(RelationEntityReference object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Structure Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Structure Reference</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseStructureReference(StructureReference object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Annotation Property Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Annotation Property Reference</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseAnnotationPropertyReference(AnnotationPropertyReference object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Scalar Property Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Scalar Property Reference</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseScalarPropertyReference(ScalarPropertyReference object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Structured Property Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Structured Property Reference</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseStructuredPropertyReference(StructuredPropertyReference object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Faceted Scalar Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Faceted Scalar Reference</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseFacetedScalarReference(FacetedScalarReference object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Enumerated Scalar Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Enumerated Scalar Reference</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseEnumeratedScalarReference(EnumeratedScalarReference object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Relation Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Relation Reference</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseRelationReference(RelationReference object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Rule Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Rule Reference</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseRuleReference(RuleReference object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Named Instance Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Named Instance Reference</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseNamedInstanceReference(NamedInstanceReference object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Concept Instance Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Concept Instance Reference</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseConceptInstanceReference(ConceptInstanceReference object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Relation Instance Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Relation Instance Reference</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseRelationInstanceReference(RelationInstanceReference object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Statement</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Statement</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseStatement(Statement object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Vocabulary Statement</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Vocabulary Statement</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseVocabularyStatement(VocabularyStatement object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Description Statement</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Description Statement</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseDescriptionStatement(DescriptionStatement object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Import</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Import</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseImport(Import object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Vocabulary Import</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Vocabulary Import</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseVocabularyImport(VocabularyImport object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Vocabulary Extension</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Vocabulary Extension</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseVocabularyExtension(VocabularyExtension object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Vocabulary Usage</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Vocabulary Usage</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseVocabularyUsage(VocabularyUsage object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Vocabulary Bundle Import</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Vocabulary Bundle Import</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseVocabularyBundleImport(VocabularyBundleImport object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Vocabulary Bundle Extension</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Vocabulary Bundle Extension</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseVocabularyBundleExtension(VocabularyBundleExtension object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Vocabulary Bundle Inclusion</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Vocabulary Bundle Inclusion</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseVocabularyBundleInclusion(VocabularyBundleInclusion object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Description Import</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Description Import</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseDescriptionImport(DescriptionImport object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Description Extension</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Description Extension</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseDescriptionExtension(DescriptionExtension object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Description Usage</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Description Usage</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseDescriptionUsage(DescriptionUsage object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Description Bundle Import</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Description Bundle Import</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseDescriptionBundleImport(DescriptionBundleImport object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Description Bundle Extension</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Description Bundle Extension</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseDescriptionBundleExtension(DescriptionBundleExtension object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Description Bundle Inclusion</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Description Bundle Inclusion</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseDescriptionBundleInclusion(DescriptionBundleInclusion object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Description Bundle Usage</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Description Bundle Usage</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseDescriptionBundleUsage(DescriptionBundleUsage object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Axiom</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Axiom</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseAxiom(Axiom object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Specialization Axiom</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Specialization Axiom</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseSpecializationAxiom(SpecializationAxiom object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Restriction Axiom</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Restriction Axiom</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseRestrictionAxiom(RestrictionAxiom object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Property Restriction Axiom</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Property Restriction Axiom</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T casePropertyRestrictionAxiom(PropertyRestrictionAxiom object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Scalar Property Restriction Axiom</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Scalar Property Restriction Axiom</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseScalarPropertyRestrictionAxiom(ScalarPropertyRestrictionAxiom object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Scalar Property Range Restriction Axiom</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Scalar Property Range Restriction Axiom</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseScalarPropertyRangeRestrictionAxiom(ScalarPropertyRangeRestrictionAxiom object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Scalar Property Cardinality Restriction Axiom</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Scalar Property Cardinality Restriction Axiom</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseScalarPropertyCardinalityRestrictionAxiom(ScalarPropertyCardinalityRestrictionAxiom object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Scalar Property Value Restriction Axiom</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Scalar Property Value Restriction Axiom</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseScalarPropertyValueRestrictionAxiom(ScalarPropertyValueRestrictionAxiom object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Structured Property Restriction Axiom</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Structured Property Restriction Axiom</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseStructuredPropertyRestrictionAxiom(StructuredPropertyRestrictionAxiom object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Structured Property Range Restriction Axiom</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Structured Property Range Restriction Axiom</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseStructuredPropertyRangeRestrictionAxiom(StructuredPropertyRangeRestrictionAxiom object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Structured Property Cardinality Restriction Axiom</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Structured Property Cardinality Restriction Axiom</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseStructuredPropertyCardinalityRestrictionAxiom(StructuredPropertyCardinalityRestrictionAxiom object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Structured Property Value Restriction Axiom</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Structured Property Value Restriction Axiom</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseStructuredPropertyValueRestrictionAxiom(StructuredPropertyValueRestrictionAxiom object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Relation Restriction Axiom</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Relation Restriction Axiom</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseRelationRestrictionAxiom(RelationRestrictionAxiom object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Relation Range Restriction Axiom</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Relation Range Restriction Axiom</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseRelationRangeRestrictionAxiom(RelationRangeRestrictionAxiom object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Relation Cardinality Restriction Axiom</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Relation Cardinality Restriction Axiom</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseRelationCardinalityRestrictionAxiom(RelationCardinalityRestrictionAxiom object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Relation Target Restriction Axiom</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Relation Target Restriction Axiom</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseRelationTargetRestrictionAxiom(RelationTargetRestrictionAxiom object) {
+	public T caseStructureInstance(StructureInstance object) {
 		return null;
 	}
 
@@ -2638,17 +1656,167 @@ public class OmlSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Assertion</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Specialization Axiom</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Assertion</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Specialization Axiom</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseAssertion(Assertion object) {
+	public T caseSpecializationAxiom(SpecializationAxiom object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Instance Enumeration Axiom</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Instance Enumeration Axiom</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseInstanceEnumerationAxiom(InstanceEnumerationAxiom object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Property Restriction Axiom</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Property Restriction Axiom</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePropertyRestrictionAxiom(PropertyRestrictionAxiom object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Literal Enumeration Axiom</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Literal Enumeration Axiom</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseLiteralEnumerationAxiom(LiteralEnumerationAxiom object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Classifier Equivalence Axiom</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Classifier Equivalence Axiom</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseClassifierEquivalenceAxiom(ClassifierEquivalenceAxiom object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Scalar Equivalence Axiom</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Scalar Equivalence Axiom</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseScalarEquivalenceAxiom(ScalarEquivalenceAxiom object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Property Equivalence Axiom</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Property Equivalence Axiom</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePropertyEquivalenceAxiom(PropertyEquivalenceAxiom object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Property Range Restriction Axiom</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Property Range Restriction Axiom</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePropertyRangeRestrictionAxiom(PropertyRangeRestrictionAxiom object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Property Cardinality Restriction Axiom</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Property Cardinality Restriction Axiom</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePropertyCardinalityRestrictionAxiom(PropertyCardinalityRestrictionAxiom object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Property Value Restriction Axiom</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Property Value Restriction Axiom</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePropertyValueRestrictionAxiom(PropertyValueRestrictionAxiom object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Property Self Restriction Axiom</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Property Self Restriction Axiom</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePropertySelfRestrictionAxiom(PropertySelfRestrictionAxiom object) {
 		return null;
 	}
 
@@ -2668,36 +1836,6 @@ public class OmlSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Concept Type Assertion</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Concept Type Assertion</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseConceptTypeAssertion(ConceptTypeAssertion object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Relation Type Assertion</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Relation Type Assertion</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseRelationTypeAssertion(RelationTypeAssertion object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Property Value Assertion</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -2709,66 +1847,6 @@ public class OmlSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T casePropertyValueAssertion(PropertyValueAssertion object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Scalar Property Value Assertion</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Scalar Property Value Assertion</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseScalarPropertyValueAssertion(ScalarPropertyValueAssertion object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Structured Property Value Assertion</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Structured Property Value Assertion</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseStructuredPropertyValueAssertion(StructuredPropertyValueAssertion object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Link Assertion</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Link Assertion</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseLinkAssertion(LinkAssertion object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Predicate</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Predicate</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T casePredicate(Predicate object) {
 		return null;
 	}
 
@@ -2788,21 +1866,6 @@ public class OmlSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Type Predicate</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Type Predicate</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseTypePredicate(TypePredicate object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Binary Predicate</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -2814,6 +1877,36 @@ public class OmlSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseBinaryPredicate(BinaryPredicate object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Built In Predicate</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Built In Predicate</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseBuiltInPredicate(BuiltInPredicate object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Type Predicate</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Type Predicate</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTypePredicate(TypePredicate object) {
 		return null;
 	}
 
@@ -2833,17 +1926,17 @@ public class OmlSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Feature Predicate</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Property Predicate</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Feature Predicate</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Property Predicate</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseFeaturePredicate(FeaturePredicate object) {
+	public T casePropertyPredicate(PropertyPredicate object) {
 		return null;
 	}
 
@@ -2874,21 +1967,6 @@ public class OmlSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseDifferentFromPredicate(DifferentFromPredicate object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Literal</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Literal</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseLiteral(Literal object) {
 		return null;
 	}
 

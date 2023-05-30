@@ -25,12 +25,12 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * SameAsPredicate is a binary predicate that checks that its two arguments bind to the same instance
+ * SameAsPredicate is a [=BinaryPredicate=] that holds when its two [=arguments=] are bound to the same [=NamedInstance=].
  * <!-- end-model-doc -->
  *
  *
  * @see io.opencaesar.oml.OmlPackage#getSameAsPredicate()
- * @model annotation="https://tabatkins.github.io/bikeshed heading='Rules'"
+ * @model annotation="https://tabatkins.github.io/bikeshed heading='Predicates'"
  * @generated
  */
 public interface SameAsPredicate extends BinaryPredicate {

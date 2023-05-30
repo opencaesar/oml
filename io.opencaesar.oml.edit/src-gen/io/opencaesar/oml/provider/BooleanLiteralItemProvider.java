@@ -83,7 +83,7 @@ public class BooleanLiteralItemProvider extends LiteralItemProvider {
 				 true,
 				 false,
 				 false,
-				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -107,8 +107,11 @@ public class BooleanLiteralItemProvider extends LiteralItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		BooleanLiteral booleanLiteral = (BooleanLiteral)object;
-		return getString("_UI_BooleanLiteral_type") + " " + booleanLiteral.isValue();
+		Boolean labelValue = ((BooleanLiteral)object).getValue();
+		String label = labelValue == null ? null : labelValue.toString();
+		return label == null || label.length() == 0 ?
+			getString("_UI_BooleanLiteral_type") :
+			getString("_UI_BooleanLiteral_type") + " " + label;
 	}
 
 

@@ -25,7 +25,7 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * QuotedLiteral is a literal that specifies its lexical value as a quoted string along with a language tag, a scalar type, or neither.
+ * QuotedLiteral is a [=literal=] that specifies its lexical value as a quoted string along with a language tag, a [=Scalar=] type, or neither.
  * <!-- end-model-doc -->
  *
  * <p>
@@ -116,5 +116,21 @@ public interface QuotedLiteral extends Literal {
 	 * @generated
 	 */
 	void setType(Scalar value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
+	String getLexicalValue();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
+	String getTypeIri();
 
 } // QuotedLiteral

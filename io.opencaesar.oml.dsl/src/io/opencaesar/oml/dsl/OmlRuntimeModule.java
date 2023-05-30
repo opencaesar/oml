@@ -16,22 +16,11 @@
  */
 package io.opencaesar.oml.dsl;
 
-import com.google.inject.Binder;
-import com.google.inject.name.Names;
-import io.opencaesar.oml.dsl.conversion.OmlQualifiedNameConverter;
-import io.opencaesar.oml.dsl.conversion.OmlValueConverterService;
-import io.opencaesar.oml.dsl.naming.OmlQualifiedNameProvider;
-import io.opencaesar.oml.dsl.resource.OmlResourceDescriptionStrategy;
-import io.opencaesar.oml.dsl.resource.OmlResourceServiceProvider;
-import io.opencaesar.oml.dsl.resource.OmlSynchronizedXtextResourceSet;
-import io.opencaesar.oml.dsl.resource.OmlXtextResourceFactory;
-import io.opencaesar.oml.dsl.scoping.OmlImportUriGlobalScopeProvider;
-import io.opencaesar.oml.dsl.scoping.OmlImportedNamespaceAwareLocalScopeProvider;
-import io.opencaesar.oml.dsl.validation.OmlDiagnostician;
 import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.formatting2.FormatterPreferenceValuesProvider;
 import org.eclipse.xtext.formatting2.FormatterPreferences;
+import org.eclipse.xtext.formatting2.FormatterRequest;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.preferences.IPreferenceValuesProvider;
@@ -43,6 +32,21 @@ import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.impl.ImportUriResolver;
 import org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider;
 import org.eclipse.xtext.service.SingletonBinding;
+
+import com.google.inject.Binder;
+import com.google.inject.name.Names;
+
+import io.opencaesar.oml.dsl.conversion.OmlQualifiedNameConverter;
+import io.opencaesar.oml.dsl.conversion.OmlValueConverterService;
+import io.opencaesar.oml.dsl.formatting2.OmlFormatterRequest;
+import io.opencaesar.oml.dsl.naming.OmlQualifiedNameProvider;
+import io.opencaesar.oml.dsl.resource.OmlResourceDescriptionStrategy;
+import io.opencaesar.oml.dsl.resource.OmlResourceServiceProvider;
+import io.opencaesar.oml.dsl.resource.OmlSynchronizedXtextResourceSet;
+import io.opencaesar.oml.dsl.resource.OmlXtextResourceFactory;
+import io.opencaesar.oml.dsl.scoping.OmlImportUriGlobalScopeProvider;
+import io.opencaesar.oml.dsl.scoping.OmlImportedNamespaceAwareLocalScopeProvider;
+import io.opencaesar.oml.dsl.validation.OmlDiagnostician;
 
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
@@ -102,4 +106,9 @@ public class OmlRuntimeModule extends AbstractOmlRuntimeModule {
   public Class<? extends Diagnostician> bindDiagnostician() {
     return OmlDiagnostician.class;
   }
+
+  public Class<? extends FormatterRequest> bindFormatterRequest() {
+	   return OmlFormatterRequest.class;
+  }
+
 }

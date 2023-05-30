@@ -25,7 +25,7 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Assertion is an element that represents a statement about an instance in a description.
+ * Assertion is an element that characterizes an [=instance=] by specifying the value of one of its [=properties=].
  * <!-- end-model-doc -->
  *
  *
@@ -35,4 +35,28 @@ package io.opencaesar.oml;
  * @generated
  */
 public interface Assertion extends Element {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * *
+	 * Gets the instance that is the subject of this assertion
+	 * <!-- end-model-doc -->
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
+	Instance getSubject();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * *
+	 * Gets the instance that is the object of this assertion
+	 * <!-- end-model-doc -->
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
+	Element getObject();
+
 } // Assertion

@@ -25,7 +25,7 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Axiom is an annotated element that represents a statement about a term in a vocabulary.
+ * Axiom is an element that characterizes a [=term=] in some way.
  * <!-- end-model-doc -->
  *
  *
@@ -35,4 +35,15 @@ package io.opencaesar.oml;
  * @generated
  */
 public interface Axiom extends Element {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Gets the term that is characterized by this axiom
+	 * <!-- end-model-doc -->
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
+	Term getCharacterizedTerm();
+
 } // Axiom

@@ -25,7 +25,7 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Member is an identified element defined by an ontology. Its IRI is unique and derived by concatenating the globally
+ * Member is an identified element defined by an [=ontology=]. Its IRI is unique and derived by concatenating the globally
  * unique namespace of its ontology with its locally unique name (i.e., member.iri=ontology.namespace+member.name).
  * <!-- end-model-doc -->
  *
@@ -47,12 +47,12 @@ public interface Member extends IdentifiedElement {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The name of this member, which is unique within its ontology's namespace
+	 * A unique name for the member within its ontology
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
 	 * @see io.opencaesar.oml.OmlPackage#getMember_Name()
-	 * @model unique="false" id="true" dataType="io.opencaesar.oml.ID" required="true"
+	 * @model unique="false" id="true" dataType="io.opencaesar.oml.ID"
 	 * @generated
 	 */
 	String getName();
@@ -70,6 +70,42 @@ public interface Member extends IdentifiedElement {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Gets the Ref of this member
+	 * <!-- end-model-doc -->
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
+	Member getRef();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Determines if the member is a ref to another member
+	 * <!-- end-model-doc -->
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
+	boolean isRef();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Determines if the member is a ref to another member
+	 * <!-- end-model-doc -->
+	 * @model unique="false" required="true"
+	 * @generated
+	 */
+	Member resolve();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Gets the IRI of this member
+	 * <!-- end-model-doc -->
 	 * @model kind="operation" unique="false"
 	 * @generated
 	 */
@@ -79,7 +115,7 @@ public interface Member extends IdentifiedElement {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Gets the abbreviated IRI of this element
+	 * Gets the abbreviated IRI of this member
 	 * <!-- end-model-doc -->
 	 * @model kind="operation" unique="false"
 	 * @generated

@@ -25,8 +25,8 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Predicate is an element that represents an ontology statement to match, when used in a rule's antecedent,
- * or to infer, when used in a rule's consequent.
+ * Predicate is an element that represents a component of a [=rule=]'s antecedent or  consequent.
+ * It specifies (one or more) [=arguments=] based on the specific subtype of predicate.
  * <!-- end-model-doc -->
  *
  * <p>
@@ -39,7 +39,7 @@ package io.opencaesar.oml;
  *
  * @see io.opencaesar.oml.OmlPackage#getPredicate()
  * @model abstract="true"
- *        annotation="https://tabatkins.github.io/bikeshed heading='Rules'"
+ *        annotation="https://tabatkins.github.io/bikeshed heading='Predicates'"
  * @generated
  */
 public interface Predicate extends Element {
@@ -49,7 +49,7 @@ public interface Predicate extends Element {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The rule that specifies this predicate in its antecedent
+	 * The rule' antecedent that this predicate is owned by
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Antecedent Rule</em>' container reference.
 	 * @see #setAntecedentRule(Rule)
@@ -76,7 +76,7 @@ public interface Predicate extends Element {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The rule that specifies this predicate in its consequent
+	 * The rule' consequent that this predicate is owned by
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Consequent Rule</em>' container reference.
 	 * @see #setConsequentRule(Rule)

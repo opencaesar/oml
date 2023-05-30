@@ -25,25 +25,59 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Import is an annotated element owned by an ontology to specify that it imports another ontology.
- * The imported ontology is specified by its IRI, and optionally a separator character and local prefix
- * if members of the imported ontology will also be referenced by the importing ontology
+ * Import is an element owned by an [=ontology=] and specifies that it imports another ontology.
+ * The imported ontology is referenced by its namespace and an optional prefix that is locally unique
+ * within the importing ontology. Import can be of several [=ImportKind=] based on the following rules:
+ * 
+ * - Vocabulary (`extends` Vocabulary, `uses` Description)
+ * - Description (`extends` Description, `uses` Vocabulary)
+ * - VocabularyBundle (`extends` VocabularyBundle, `includes` Vocabulary)
+ * - DescriptionBundle (`extends` DescriptionBundle, `includes` Description, `uses` VocabularyBundle, `uses` Vocabulary)
  * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
+ *   <li>{@link io.opencaesar.oml.Import#getKind <em>Kind</em>}</li>
  *   <li>{@link io.opencaesar.oml.Import#getNamespace <em>Namespace</em>}</li>
  *   <li>{@link io.opencaesar.oml.Import#getPrefix <em>Prefix</em>}</li>
+ *   <li>{@link io.opencaesar.oml.Import#getOwningOntology <em>Owning Ontology</em>}</li>
  * </ul>
  *
  * @see io.opencaesar.oml.OmlPackage#getImport()
- * @model abstract="true"
- *        annotation="https://tabatkins.github.io/bikeshed heading='Elements'"
+ * @model annotation="https://tabatkins.github.io/bikeshed heading='Elements'"
  * @generated
  */
-public interface Import extends AnnotatedElement {
+public interface Import extends Element {
+	/**
+	 * Returns the value of the '<em><b>Kind</b></em>' attribute.
+	 * The literals are from the enumeration {@link io.opencaesar.oml.ImportKind}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The kind of this import
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Kind</em>' attribute.
+	 * @see io.opencaesar.oml.ImportKind
+	 * @see #setKind(ImportKind)
+	 * @see io.opencaesar.oml.OmlPackage#getImport_Kind()
+	 * @model unique="false" required="true"
+	 * @generated
+	 */
+	ImportKind getKind();
+
+	/**
+	 * Sets the value of the '{@link io.opencaesar.oml.Import#getKind <em>Kind</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Kind</em>' attribute.
+	 * @see io.opencaesar.oml.ImportKind
+	 * @see #getKind()
+	 * @generated
+	 */
+	void setKind(ImportKind value);
+
 	/**
 	 * Returns the value of the '<em><b>Namespace</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -74,7 +108,7 @@ public interface Import extends AnnotatedElement {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The local prefix of the imported ontology's namespace
+	 * The (locally unique) namespace prefix of the imported ontology
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Prefix</em>' attribute.
 	 * @see #setPrefix(String)
@@ -95,10 +129,37 @@ public interface Import extends AnnotatedElement {
 	void setPrefix(String value);
 
 	/**
+	 * Returns the value of the '<em><b>Owning Ontology</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.Ontology#getOwnedImports <em>Owned Imports</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Get the import's iri
+	 * The ontology that owns this import
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Owning Ontology</em>' container reference.
+	 * @see #setOwningOntology(Ontology)
+	 * @see io.opencaesar.oml.OmlPackage#getImport_OwningOntology()
+	 * @see io.opencaesar.oml.Ontology#getOwnedImports
+	 * @model opposite="ownedImports" required="true" transient="false"
+	 * @generated
+	 */
+	Ontology getOwningOntology();
+
+	/**
+	 * Sets the value of the '{@link io.opencaesar.oml.Import#getOwningOntology <em>Owning Ontology</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Owning Ontology</em>' container reference.
+	 * @see #getOwningOntology()
+	 * @generated
+	 */
+	void setOwningOntology(Ontology value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Gets the imported ontology's IRI
 	 * <!-- end-model-doc -->
 	 * @model kind="operation" unique="false"
 	 * @generated
@@ -109,7 +170,7 @@ public interface Import extends AnnotatedElement {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Get the import's separator char
+	 * Gets the imported ontology's namespace's separator character [=SeparatorKinds=]
 	 * <!-- end-model-doc -->
 	 * @model kind="operation" unique="false"
 	 * @generated

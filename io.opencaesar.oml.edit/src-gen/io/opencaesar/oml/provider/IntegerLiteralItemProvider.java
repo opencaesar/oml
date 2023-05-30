@@ -83,7 +83,7 @@ public class IntegerLiteralItemProvider extends LiteralItemProvider {
 				 true,
 				 false,
 				 false,
-				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -107,8 +107,11 @@ public class IntegerLiteralItemProvider extends LiteralItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		IntegerLiteral integerLiteral = (IntegerLiteral)object;
-		return getString("_UI_IntegerLiteral_type") + " " + integerLiteral.getValue();
+		Integer labelValue = ((IntegerLiteral)object).getValue();
+		String label = labelValue == null ? null : labelValue.toString();
+		return label == null || label.length() == 0 ?
+			getString("_UI_IntegerLiteral_type") :
+			getString("_UI_IntegerLiteral_type") + " " + label;
 	}
 
 

@@ -25,17 +25,15 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * SpecializationAxiom is an axiom that states that one specializable term specializes another. It can be specified directly on
- * a specializing term or indirectly on a reference to one.
+ * SpecializationAxiom is an [=Axiom=] specified on a [=SpecializableTerm=] that states that it specializes another [=Term=].
  * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link io.opencaesar.oml.SpecializationAxiom#getSpecializedTerm <em>Specialized Term</em>}</li>
+ *   <li>{@link io.opencaesar.oml.SpecializationAxiom#getSuperTerm <em>Super Term</em>}</li>
  *   <li>{@link io.opencaesar.oml.SpecializationAxiom#getOwningTerm <em>Owning Term</em>}</li>
- *   <li>{@link io.opencaesar.oml.SpecializationAxiom#getOwningReference <em>Owning Reference</em>}</li>
  * </ul>
  *
  * @see io.opencaesar.oml.OmlPackage#getSpecializationAxiom()
@@ -44,29 +42,29 @@ package io.opencaesar.oml;
  */
 public interface SpecializationAxiom extends Axiom {
 	/**
-	 * Returns the value of the '<em><b>Specialized Term</b></em>' reference.
+	 * Returns the value of the '<em><b>Super Term</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The specialized term specified by this axiom
+	 * The super term specified by this axiom
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Specialized Term</em>' reference.
-	 * @see #setSpecializedTerm(SpecializableTerm)
-	 * @see io.opencaesar.oml.OmlPackage#getSpecializationAxiom_SpecializedTerm()
+	 * @return the value of the '<em>Super Term</em>' reference.
+	 * @see #setSuperTerm(Term)
+	 * @see io.opencaesar.oml.OmlPackage#getSpecializationAxiom_SuperTerm()
 	 * @model required="true"
 	 * @generated
 	 */
-	SpecializableTerm getSpecializedTerm();
+	Term getSuperTerm();
 
 	/**
-	 * Sets the value of the '{@link io.opencaesar.oml.SpecializationAxiom#getSpecializedTerm <em>Specialized Term</em>}' reference.
+	 * Sets the value of the '{@link io.opencaesar.oml.SpecializationAxiom#getSuperTerm <em>Super Term</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Specialized Term</em>' reference.
-	 * @see #getSpecializedTerm()
+	 * @param value the new value of the '<em>Super Term</em>' reference.
+	 * @see #getSuperTerm()
 	 * @generated
 	 */
-	void setSpecializedTerm(SpecializableTerm value);
+	void setSuperTerm(Term value);
 
 	/**
 	 * Returns the value of the '<em><b>Owning Term</b></em>' container reference.
@@ -74,7 +72,7 @@ public interface SpecializationAxiom extends Axiom {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The specializing term specified by this axiom
+	 * The owning term specified by this axiom
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Owning Term</em>' container reference.
 	 * @see #setOwningTerm(SpecializableTerm)
@@ -96,30 +94,22 @@ public interface SpecializationAxiom extends Axiom {
 	void setOwningTerm(SpecializableTerm value);
 
 	/**
-	 * Returns the value of the '<em><b>Owning Reference</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.SpecializableTermReference#getOwnedSpecializations <em>Owned Specializations</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The reference to a specializing term specified by this axiom
+	 * Gets the sub (specific) term of the given specialization axiom
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Owning Reference</em>' container reference.
-	 * @see #setOwningReference(SpecializableTermReference)
-	 * @see io.opencaesar.oml.OmlPackage#getSpecializationAxiom_OwningReference()
-	 * @see io.opencaesar.oml.SpecializableTermReference#getOwnedSpecializations
-	 * @model opposite="ownedSpecializations" transient="false"
+	 * @model kind="operation" unique="false"
 	 * @generated
 	 */
-	SpecializableTermReference getOwningReference();
+	Term getSubTerm();
 
 	/**
-	 * Sets the value of the '{@link io.opencaesar.oml.SpecializationAxiom#getOwningReference <em>Owning Reference</em>}' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Owning Reference</em>' container reference.
-	 * @see #getOwningReference()
+	 * @model kind="operation" unique="false"
 	 * @generated
 	 */
-	void setOwningReference(SpecializableTermReference value);
+	Term getCharacterizedTerm();
 
 } // SpecializationAxiom

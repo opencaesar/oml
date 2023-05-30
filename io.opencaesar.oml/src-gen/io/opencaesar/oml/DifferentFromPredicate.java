@@ -25,12 +25,12 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * DifferentFromPredicate is a binary predicate that checks that its two arguments bind to different instances
+ * DifferentFromPredicate is a [=BinaryPredicate=] that holds when its two [=arguments=] are bound to different [=NamedInstances=].
  * <!-- end-model-doc -->
  *
  *
  * @see io.opencaesar.oml.OmlPackage#getDifferentFromPredicate()
- * @model annotation="https://tabatkins.github.io/bikeshed heading='Rules'"
+ * @model annotation="https://tabatkins.github.io/bikeshed heading='Predicates'"
  * @generated
  */
 public interface DifferentFromPredicate extends BinaryPredicate {

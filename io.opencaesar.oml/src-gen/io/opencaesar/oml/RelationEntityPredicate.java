@@ -25,72 +25,46 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * RelationEntityPredicate is a binary predicate that binds its `entityVariable` to a relation instance,
- * its `variable1` to the source of that relation instance, and either its `variable2` or `instance2` as the target of
- * that relation instance.
+ * RelationEntityPredicate is a [=UnaryPredicate=] and [=BinaryPredicate=] that holds when its [=argument=] is bound to an [=RelationInstance=] typed by the given [=RelationEntity=],
+ * its argument1 is bound to the source of that [=RelationInstance=] and its argument2 is bound to the target of that [=RelationInstance=]
+ * .
  * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link io.opencaesar.oml.RelationEntityPredicate#getEntity <em>Entity</em>}</li>
- *   <li>{@link io.opencaesar.oml.RelationEntityPredicate#getEntityVariable <em>Entity Variable</em>}</li>
+ *   <li>{@link io.opencaesar.oml.RelationEntityPredicate#getType <em>Type</em>}</li>
  * </ul>
  *
  * @see io.opencaesar.oml.OmlPackage#getRelationEntityPredicate()
- * @model annotation="https://tabatkins.github.io/bikeshed heading='Rules'"
+ * @model annotation="https://tabatkins.github.io/bikeshed heading='Predicates'"
  * @generated
  */
-public interface RelationEntityPredicate extends BinaryPredicate {
+public interface RelationEntityPredicate extends UnaryPredicate, BinaryPredicate {
 	/**
-	 * Returns the value of the '<em><b>Entity</b></em>' reference.
+	 * Returns the value of the '<em><b>Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The type of the relation instance
+	 * The type of a relation instance
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Entity</em>' reference.
-	 * @see #setEntity(RelationEntity)
-	 * @see io.opencaesar.oml.OmlPackage#getRelationEntityPredicate_Entity()
+	 * @return the value of the '<em>Type</em>' reference.
+	 * @see #setType(RelationEntity)
+	 * @see io.opencaesar.oml.OmlPackage#getRelationEntityPredicate_Type()
 	 * @model required="true"
 	 * @generated
 	 */
-	RelationEntity getEntity();
+	RelationEntity getType();
 
 	/**
-	 * Sets the value of the '{@link io.opencaesar.oml.RelationEntityPredicate#getEntity <em>Entity</em>}' reference.
+	 * Sets the value of the '{@link io.opencaesar.oml.RelationEntityPredicate#getType <em>Type</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Entity</em>' reference.
-	 * @see #getEntity()
+	 * @param value the new value of the '<em>Type</em>' reference.
+	 * @see #getType()
 	 * @generated
 	 */
-	void setEntity(RelationEntity value);
-
-	/**
-	 * Returns the value of the '<em><b>Entity Variable</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * The entity variable specified by the predicate
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Entity Variable</em>' attribute.
-	 * @see #setEntityVariable(String)
-	 * @see io.opencaesar.oml.OmlPackage#getRelationEntityPredicate_EntityVariable()
-	 * @model unique="false" dataType="io.opencaesar.oml.ID" required="true"
-	 * @generated
-	 */
-	String getEntityVariable();
-
-	/**
-	 * Sets the value of the '{@link io.opencaesar.oml.RelationEntityPredicate#getEntityVariable <em>Entity Variable</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Entity Variable</em>' attribute.
-	 * @see #getEntityVariable()
-	 * @generated
-	 */
-	void setEntityVariable(String value);
+	void setType(RelationEntity value);
 
 } // RelationEntityPredicate

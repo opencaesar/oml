@@ -18,11 +18,18 @@
  */
 package io.opencaesar.oml.impl;
 
+import io.opencaesar.oml.Literal;
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.QuotedLiteral;
 import io.opencaesar.oml.Scalar;
 
+import io.opencaesar.oml.util.OmlConstants;
+
+import java.lang.reflect.InvocationTargetException;
+
 import org.eclipse.emf.common.notify.Notification;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -206,6 +213,50 @@ public class QuotedLiteralImpl extends LiteralImpl implements QuotedLiteral {
 	 * @generated
 	 */
 	@Override
+	public String getLexicalValue() {
+		String _value = this.getValue();
+		String _plus = ("\"" + _value);
+		String _plus_1 = (_plus + "\"");
+		String _xifexpression = null;
+		String _langTag = this.getLangTag();
+		boolean _tripleNotEquals = (_langTag != null);
+		if (_tripleNotEquals) {
+			String _langTag_1 = this.getLangTag();
+			_xifexpression = ("$" + _langTag_1);
+		}
+		else {
+			String _typeIri = this.getTypeIri();
+			String _plus_2 = ("^^<" + _typeIri);
+			_xifexpression = (_plus_2 + ">");
+		}
+		return (_plus_1 + _xifexpression);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getTypeIri() {
+		String _xifexpression = null;
+		Scalar _type = this.getType();
+		boolean _tripleNotEquals = (_type != null);
+		if (_tripleNotEquals) {
+			_xifexpression = this.getType().getIri();
+		}
+		else {
+			_xifexpression = (OmlConstants.XSD_NS + "string");
+		}
+		return _xifexpression;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case OmlPackage.QUOTED_LITERAL__VALUE:
@@ -277,6 +328,39 @@ public class QuotedLiteralImpl extends LiteralImpl implements QuotedLiteral {
 				return type != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedOperationID(int baseOperationID, Class<?> baseClass) {
+		if (baseClass == Literal.class) {
+			switch (baseOperationID) {
+				case OmlPackage.LITERAL___GET_LEXICAL_VALUE: return OmlPackage.QUOTED_LITERAL___GET_LEXICAL_VALUE;
+				case OmlPackage.LITERAL___GET_TYPE_IRI: return OmlPackage.QUOTED_LITERAL___GET_TYPE_IRI;
+				default: return super.eDerivedOperationID(baseOperationID, baseClass);
+			}
+		}
+		return super.eDerivedOperationID(baseOperationID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case OmlPackage.QUOTED_LITERAL___GET_LEXICAL_VALUE:
+				return getLexicalValue();
+			case OmlPackage.QUOTED_LITERAL___GET_TYPE_IRI:
+				return getTypeIri();
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 	/**

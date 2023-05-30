@@ -19,20 +19,14 @@
 package io.opencaesar.oml.impl;
 
 import io.opencaesar.oml.ConceptInstance;
-import io.opencaesar.oml.ConceptTypeAssertion;
 import io.opencaesar.oml.OmlPackage;
 
-import java.util.Collection;
-
-import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
-import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
-import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -42,21 +36,21 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link io.opencaesar.oml.impl.ConceptInstanceImpl#getOwnedTypes <em>Owned Types</em>}</li>
+ *   <li>{@link io.opencaesar.oml.impl.ConceptInstanceImpl#getRef <em>Ref</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class ConceptInstanceImpl extends NamedInstanceImpl implements ConceptInstance {
 	/**
-	 * The cached value of the '{@link #getOwnedTypes() <em>Owned Types</em>}' containment reference list.
+	 * The cached value of the '{@link #getRef() <em>Ref</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getOwnedTypes()
+	 * @see #getRef()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ConceptTypeAssertion> ownedTypes;
+	protected ConceptInstance ref;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -83,11 +77,16 @@ public class ConceptInstanceImpl extends NamedInstanceImpl implements ConceptIns
 	 * @generated
 	 */
 	@Override
-	public EList<ConceptTypeAssertion> getOwnedTypes() {
-		if (ownedTypes == null) {
-			ownedTypes = new EObjectContainmentWithInverseEList<ConceptTypeAssertion>(ConceptTypeAssertion.class, this, OmlPackage.CONCEPT_INSTANCE__OWNED_TYPES, OmlPackage.CONCEPT_TYPE_ASSERTION__OWNING_INSTANCE);
+	public ConceptInstance getRef() {
+		if (ref != null && ref.eIsProxy()) {
+			InternalEObject oldRef = (InternalEObject)ref;
+			ref = (ConceptInstance)eResolveProxy(oldRef);
+			if (ref != oldRef) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, OmlPackage.CONCEPT_INSTANCE__REF, oldRef, ref));
+			}
 		}
-		return ownedTypes;
+		return ref;
 	}
 
 	/**
@@ -95,14 +94,8 @@ public class ConceptInstanceImpl extends NamedInstanceImpl implements ConceptIns
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case OmlPackage.CONCEPT_INSTANCE__OWNED_TYPES:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedTypes()).basicAdd(otherEnd, msgs);
-		}
-		return super.eInverseAdd(otherEnd, featureID, msgs);
+	public ConceptInstance basicGetRef() {
+		return ref;
 	}
 
 	/**
@@ -111,12 +104,11 @@ public class ConceptInstanceImpl extends NamedInstanceImpl implements ConceptIns
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case OmlPackage.CONCEPT_INSTANCE__OWNED_TYPES:
-				return ((InternalEList<?>)getOwnedTypes()).basicRemove(otherEnd, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
+	public void setRef(ConceptInstance newRef) {
+		ConceptInstance oldRef = ref;
+		ref = newRef;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.CONCEPT_INSTANCE__REF, oldRef, ref));
 	}
 
 	/**
@@ -127,8 +119,9 @@ public class ConceptInstanceImpl extends NamedInstanceImpl implements ConceptIns
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case OmlPackage.CONCEPT_INSTANCE__OWNED_TYPES:
-				return getOwnedTypes();
+			case OmlPackage.CONCEPT_INSTANCE__REF:
+				if (resolve) return getRef();
+				return basicGetRef();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -138,13 +131,11 @@ public class ConceptInstanceImpl extends NamedInstanceImpl implements ConceptIns
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case OmlPackage.CONCEPT_INSTANCE__OWNED_TYPES:
-				getOwnedTypes().clear();
-				getOwnedTypes().addAll((Collection<? extends ConceptTypeAssertion>)newValue);
+			case OmlPackage.CONCEPT_INSTANCE__REF:
+				setRef((ConceptInstance)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -158,8 +149,8 @@ public class ConceptInstanceImpl extends NamedInstanceImpl implements ConceptIns
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case OmlPackage.CONCEPT_INSTANCE__OWNED_TYPES:
-				getOwnedTypes().clear();
+			case OmlPackage.CONCEPT_INSTANCE__REF:
+				setRef((ConceptInstance)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -173,8 +164,8 @@ public class ConceptInstanceImpl extends NamedInstanceImpl implements ConceptIns
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case OmlPackage.CONCEPT_INSTANCE__OWNED_TYPES:
-				return ownedTypes != null && !ownedTypes.isEmpty();
+			case OmlPackage.CONCEPT_INSTANCE__REF:
+				return ref != null;
 		}
 		return super.eIsSet(featureID);
 	}

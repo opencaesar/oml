@@ -19,10 +19,12 @@
 package io.opencaesar.oml.impl;
 
 import io.opencaesar.oml.Entity;
-import io.opencaesar.oml.EntityReference;
-import io.opencaesar.oml.Feature;
 import io.opencaesar.oml.KeyAxiom;
+import io.opencaesar.oml.Member;
 import io.opencaesar.oml.OmlPackage;
+import io.opencaesar.oml.Property;
+
+import java.lang.reflect.InvocationTargetException;
 
 import java.util.Collection;
 
@@ -49,7 +51,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  * <ul>
  *   <li>{@link io.opencaesar.oml.impl.KeyAxiomImpl#getProperties <em>Properties</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.KeyAxiomImpl#getOwningEntity <em>Owning Entity</em>}</li>
- *   <li>{@link io.opencaesar.oml.impl.KeyAxiomImpl#getOwningReference <em>Owning Reference</em>}</li>
  * </ul>
  *
  * @generated
@@ -63,7 +64,7 @@ public class KeyAxiomImpl extends AxiomImpl implements KeyAxiom {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Feature> properties;
+	protected EList<Property> properties;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -90,9 +91,9 @@ public class KeyAxiomImpl extends AxiomImpl implements KeyAxiom {
 	 * @generated
 	 */
 	@Override
-	public EList<Feature> getProperties() {
+	public EList<Property> getProperties() {
 		if (properties == null) {
-			properties = new EObjectResolvingEList<Feature>(Feature.class, this, OmlPackage.KEY_AXIOM__PROPERTIES);
+			properties = new EObjectResolvingEList<Property>(Property.class, this, OmlPackage.KEY_AXIOM__PROPERTIES);
 		}
 		return properties;
 	}
@@ -156,29 +157,9 @@ public class KeyAxiomImpl extends AxiomImpl implements KeyAxiom {
 	 * @generated
 	 */
 	@Override
-	public EntityReference getOwningReference() {
-		if (eContainerFeatureID() != OmlPackage.KEY_AXIOM__OWNING_REFERENCE) return null;
-		return (EntityReference)eContainer();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EntityReference basicGetOwningReference() {
-		if (eContainerFeatureID() != OmlPackage.KEY_AXIOM__OWNING_REFERENCE) return null;
-		return (EntityReference)eInternalContainer();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetOwningReference(EntityReference newOwningReference, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwningReference, OmlPackage.KEY_AXIOM__OWNING_REFERENCE, msgs);
-		return msgs;
+	public Entity getKeyedEntity() {
+		Member _resolve = this.getOwningEntity().resolve();
+		return ((Entity) _resolve);
 	}
 
 	/**
@@ -187,20 +168,8 @@ public class KeyAxiomImpl extends AxiomImpl implements KeyAxiom {
 	 * @generated
 	 */
 	@Override
-	public void setOwningReference(EntityReference newOwningReference) {
-		if (newOwningReference != eInternalContainer() || (eContainerFeatureID() != OmlPackage.KEY_AXIOM__OWNING_REFERENCE && newOwningReference != null)) {
-			if (EcoreUtil.isAncestor(this, newOwningReference))
-				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
-			NotificationChain msgs = null;
-			if (eInternalContainer() != null)
-				msgs = eBasicRemoveFromContainer(msgs);
-			if (newOwningReference != null)
-				msgs = ((InternalEObject)newOwningReference).eInverseAdd(this, OmlPackage.ENTITY_REFERENCE__OWNED_KEYS, EntityReference.class, msgs);
-			msgs = basicSetOwningReference(newOwningReference, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.KEY_AXIOM__OWNING_REFERENCE, newOwningReference, newOwningReference));
+	public Entity getCharacterizedTerm() {
+		return this.getKeyedEntity();
 	}
 
 	/**
@@ -215,10 +184,6 @@ public class KeyAxiomImpl extends AxiomImpl implements KeyAxiom {
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwningEntity((Entity)otherEnd, msgs);
-			case OmlPackage.KEY_AXIOM__OWNING_REFERENCE:
-				if (eInternalContainer() != null)
-					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetOwningReference((EntityReference)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -233,8 +198,6 @@ public class KeyAxiomImpl extends AxiomImpl implements KeyAxiom {
 		switch (featureID) {
 			case OmlPackage.KEY_AXIOM__OWNING_ENTITY:
 				return basicSetOwningEntity(null, msgs);
-			case OmlPackage.KEY_AXIOM__OWNING_REFERENCE:
-				return basicSetOwningReference(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -249,8 +212,6 @@ public class KeyAxiomImpl extends AxiomImpl implements KeyAxiom {
 		switch (eContainerFeatureID()) {
 			case OmlPackage.KEY_AXIOM__OWNING_ENTITY:
 				return eInternalContainer().eInverseRemove(this, OmlPackage.ENTITY__OWNED_KEYS, Entity.class, msgs);
-			case OmlPackage.KEY_AXIOM__OWNING_REFERENCE:
-				return eInternalContainer().eInverseRemove(this, OmlPackage.ENTITY_REFERENCE__OWNED_KEYS, EntityReference.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -268,9 +229,6 @@ public class KeyAxiomImpl extends AxiomImpl implements KeyAxiom {
 			case OmlPackage.KEY_AXIOM__OWNING_ENTITY:
 				if (resolve) return getOwningEntity();
 				return basicGetOwningEntity();
-			case OmlPackage.KEY_AXIOM__OWNING_REFERENCE:
-				if (resolve) return getOwningReference();
-				return basicGetOwningReference();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -286,13 +244,10 @@ public class KeyAxiomImpl extends AxiomImpl implements KeyAxiom {
 		switch (featureID) {
 			case OmlPackage.KEY_AXIOM__PROPERTIES:
 				getProperties().clear();
-				getProperties().addAll((Collection<? extends Feature>)newValue);
+				getProperties().addAll((Collection<? extends Property>)newValue);
 				return;
 			case OmlPackage.KEY_AXIOM__OWNING_ENTITY:
 				setOwningEntity((Entity)newValue);
-				return;
-			case OmlPackage.KEY_AXIOM__OWNING_REFERENCE:
-				setOwningReference((EntityReference)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -312,9 +267,6 @@ public class KeyAxiomImpl extends AxiomImpl implements KeyAxiom {
 			case OmlPackage.KEY_AXIOM__OWNING_ENTITY:
 				setOwningEntity((Entity)null);
 				return;
-			case OmlPackage.KEY_AXIOM__OWNING_REFERENCE:
-				setOwningReference((EntityReference)null);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -331,10 +283,24 @@ public class KeyAxiomImpl extends AxiomImpl implements KeyAxiom {
 				return properties != null && !properties.isEmpty();
 			case OmlPackage.KEY_AXIOM__OWNING_ENTITY:
 				return basicGetOwningEntity() != null;
-			case OmlPackage.KEY_AXIOM__OWNING_REFERENCE:
-				return basicGetOwningReference() != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case OmlPackage.KEY_AXIOM___GET_KEYED_ENTITY:
+				return getKeyedEntity();
+			case OmlPackage.KEY_AXIOM___GET_CHARACTERIZED_TERM:
+				return getCharacterizedTerm();
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 } //KeyAxiomImpl

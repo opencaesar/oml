@@ -25,98 +25,71 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * BinaryPredicate is a predicate that takes two arguments: the first is a `variable1` to match to some
- * instance, and the second is either a `variable2` to match to some instance or a specific `instance2`.
+ * BinaryPredicate is a [=Predicate=] that has two [=arguments=]: argument1 and argument2
  * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link io.opencaesar.oml.BinaryPredicate#getVariable1 <em>Variable1</em>}</li>
- *   <li>{@link io.opencaesar.oml.BinaryPredicate#getVariable2 <em>Variable2</em>}</li>
- *   <li>{@link io.opencaesar.oml.BinaryPredicate#getInstance2 <em>Instance2</em>}</li>
+ *   <li>{@link io.opencaesar.oml.BinaryPredicate#getArgument1 <em>Argument1</em>}</li>
+ *   <li>{@link io.opencaesar.oml.BinaryPredicate#getArgument2 <em>Argument2</em>}</li>
  * </ul>
  *
  * @see io.opencaesar.oml.OmlPackage#getBinaryPredicate()
  * @model abstract="true"
- *        annotation="https://tabatkins.github.io/bikeshed heading='Rules'"
+ *        annotation="https://tabatkins.github.io/bikeshed heading='Predicates'"
  * @generated
  */
 public interface BinaryPredicate extends Predicate {
 	/**
-	 * Returns the value of the '<em><b>Variable1</b></em>' attribute.
+	 * Returns the value of the '<em><b>Argument1</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The variable1 specified by the predicate
+	 * An argument of the predicate
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Variable1</em>' attribute.
-	 * @see #setVariable1(String)
-	 * @see io.opencaesar.oml.OmlPackage#getBinaryPredicate_Variable1()
-	 * @model unique="false" dataType="io.opencaesar.oml.ID" required="true"
+	 * @return the value of the '<em>Argument1</em>' containment reference.
+	 * @see #setArgument1(Argument)
+	 * @see io.opencaesar.oml.OmlPackage#getBinaryPredicate_Argument1()
+	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	String getVariable1();
+	Argument getArgument1();
 
 	/**
-	 * Sets the value of the '{@link io.opencaesar.oml.BinaryPredicate#getVariable1 <em>Variable1</em>}' attribute.
+	 * Sets the value of the '{@link io.opencaesar.oml.BinaryPredicate#getArgument1 <em>Argument1</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Variable1</em>' attribute.
-	 * @see #getVariable1()
+	 * @param value the new value of the '<em>Argument1</em>' containment reference.
+	 * @see #getArgument1()
 	 * @generated
 	 */
-	void setVariable1(String value);
+	void setArgument1(Argument value);
 
 	/**
-	 * Returns the value of the '<em><b>Variable2</b></em>' attribute.
+	 * Returns the value of the '<em><b>Argument2</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The optional variable2 specified by the predicate
+	 * An argument of the predicate
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Variable2</em>' attribute.
-	 * @see #setVariable2(String)
-	 * @see io.opencaesar.oml.OmlPackage#getBinaryPredicate_Variable2()
-	 * @model unique="false" dataType="io.opencaesar.oml.ID"
+	 * @return the value of the '<em>Argument2</em>' containment reference.
+	 * @see #setArgument2(Argument)
+	 * @see io.opencaesar.oml.OmlPackage#getBinaryPredicate_Argument2()
+	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	String getVariable2();
+	Argument getArgument2();
 
 	/**
-	 * Sets the value of the '{@link io.opencaesar.oml.BinaryPredicate#getVariable2 <em>Variable2</em>}' attribute.
+	 * Sets the value of the '{@link io.opencaesar.oml.BinaryPredicate#getArgument2 <em>Argument2</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Variable2</em>' attribute.
-	 * @see #getVariable2()
+	 * @param value the new value of the '<em>Argument2</em>' containment reference.
+	 * @see #getArgument2()
 	 * @generated
 	 */
-	void setVariable2(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Instance2</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * The optional instance2 specified by the predicate
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Instance2</em>' reference.
-	 * @see #setInstance2(NamedInstance)
-	 * @see io.opencaesar.oml.OmlPackage#getBinaryPredicate_Instance2()
-	 * @model
-	 * @generated
-	 */
-	NamedInstance getInstance2();
-
-	/**
-	 * Sets the value of the '{@link io.opencaesar.oml.BinaryPredicate#getInstance2 <em>Instance2</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Instance2</em>' reference.
-	 * @see #getInstance2()
-	 * @generated
-	 */
-	void setInstance2(NamedInstance value);
+	void setArgument2(Argument value);
 
 } // BinaryPredicate

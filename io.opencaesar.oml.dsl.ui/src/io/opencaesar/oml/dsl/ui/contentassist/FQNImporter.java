@@ -117,7 +117,7 @@ public class FQNImporter extends FQNShortener {
 			var startWithLineBreak = true;
 			var endWithLineBreak = false;
 			var ontology = (Ontology) context.getContents().get(0);
-			var importDirectives = OmlRead.getImports(ontology);
+			var importDirectives = ontology.getOwnedImports();
 			if (importDirectives.isEmpty()) {
 				var statements = OmlRead.getStatements(ontology);
 				if (statements.isEmpty()) {
@@ -147,7 +147,7 @@ public class FQNImporter extends FQNShortener {
 				lineDelimiter = document.getLineDelimiter(lineOfOffset - 1);
 			}
 			var importKeyword = getImportKeyword(ontology.eClass(), description.getEClass());
-			var importNamespace = qualifiedName.getFirstSegment() + qualifiedName.getSegment(1);
+			var importNamespace = qualifiedName.getSegment(0) + qualifiedName.getSegment(1);
 			var importStatement = (startWithLineBreak ? lineDelimiter + lineDelimiter +"\t" : "") + 
 					importKeyword+" " + valueConverter.toString(importNamespace) + " as "+ importPrefix +
 					(endWithLineBreak ? lineDelimiter + lineDelimiter+"\t" : "");

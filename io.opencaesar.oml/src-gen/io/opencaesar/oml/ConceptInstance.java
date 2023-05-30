@@ -18,7 +18,6 @@
  */
 package io.opencaesar.oml;
 
-import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -26,14 +25,14 @@ import org.eclipse.emf.common.util.EList;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * ConceptInstance is a named instance that can be typed by concepts.
+ * ConceptInstance is a [=NamedInstance=] that can be typed by [=Concepts=] or [=Aspects=].
  * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link io.opencaesar.oml.ConceptInstance#getOwnedTypes <em>Owned Types</em>}</li>
+ *   <li>{@link io.opencaesar.oml.ConceptInstance#getRef <em>Ref</em>}</li>
  * </ul>
  *
  * @see io.opencaesar.oml.OmlPackage#getConceptInstance()
@@ -42,20 +41,28 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface ConceptInstance extends NamedInstance {
 	/**
-	 * Returns the value of the '<em><b>Owned Types</b></em>' containment reference list.
-	 * The list contents are of type {@link io.opencaesar.oml.ConceptTypeAssertion}.
-	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.ConceptTypeAssertion#getOwningInstance <em>Owning Instance</em>}'.
+	 * Returns the value of the '<em><b>Ref</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The types of this instance
+	 * A ref to another concept instance
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Owned Types</em>' containment reference list.
-	 * @see io.opencaesar.oml.OmlPackage#getConceptInstance_OwnedTypes()
-	 * @see io.opencaesar.oml.ConceptTypeAssertion#getOwningInstance
-	 * @model opposite="owningInstance" containment="true"
+	 * @return the value of the '<em>Ref</em>' reference.
+	 * @see #setRef(ConceptInstance)
+	 * @see io.opencaesar.oml.OmlPackage#getConceptInstance_Ref()
+	 * @model
 	 * @generated
 	 */
-	EList<ConceptTypeAssertion> getOwnedTypes();
+	ConceptInstance getRef();
+
+	/**
+	 * Sets the value of the '{@link io.opencaesar.oml.ConceptInstance#getRef <em>Ref</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Ref</em>' reference.
+	 * @see #getRef()
+	 * @generated
+	 */
+	void setRef(ConceptInstance value);
 
 } // ConceptInstance

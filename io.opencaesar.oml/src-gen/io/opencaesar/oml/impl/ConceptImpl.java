@@ -19,16 +19,16 @@
 package io.opencaesar.oml.impl;
 
 import io.opencaesar.oml.Concept;
-import io.opencaesar.oml.ConceptInstance;
+import io.opencaesar.oml.InstanceEnumerationAxiom;
 import io.opencaesar.oml.OmlPackage;
 
-import java.util.Collection;
-
-import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -38,21 +38,32 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link io.opencaesar.oml.impl.ConceptImpl#getEnumeratedInstances <em>Enumerated Instances</em>}</li>
+ *   <li>{@link io.opencaesar.oml.impl.ConceptImpl#getRef <em>Ref</em>}</li>
+ *   <li>{@link io.opencaesar.oml.impl.ConceptImpl#getOwnedEnumeration <em>Owned Enumeration</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class ConceptImpl extends EntityImpl implements Concept {
 	/**
-	 * The cached value of the '{@link #getEnumeratedInstances() <em>Enumerated Instances</em>}' reference list.
+	 * The cached value of the '{@link #getRef() <em>Ref</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getEnumeratedInstances()
+	 * @see #getRef()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ConceptInstance> enumeratedInstances;
+	protected Concept ref;
+
+	/**
+	 * The cached value of the '{@link #getOwnedEnumeration() <em>Owned Enumeration</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOwnedEnumeration()
+	 * @generated
+	 * @ordered
+	 */
+	protected InstanceEnumerationAxiom ownedEnumeration;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -79,11 +90,113 @@ public class ConceptImpl extends EntityImpl implements Concept {
 	 * @generated
 	 */
 	@Override
-	public EList<ConceptInstance> getEnumeratedInstances() {
-		if (enumeratedInstances == null) {
-			enumeratedInstances = new EObjectResolvingEList<ConceptInstance>(ConceptInstance.class, this, OmlPackage.CONCEPT__ENUMERATED_INSTANCES);
+	public Concept getRef() {
+		if (ref != null && ref.eIsProxy()) {
+			InternalEObject oldRef = (InternalEObject)ref;
+			ref = (Concept)eResolveProxy(oldRef);
+			if (ref != oldRef) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, OmlPackage.CONCEPT__REF, oldRef, ref));
+			}
 		}
-		return enumeratedInstances;
+		return ref;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Concept basicGetRef() {
+		return ref;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setRef(Concept newRef) {
+		Concept oldRef = ref;
+		ref = newRef;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.CONCEPT__REF, oldRef, ref));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public InstanceEnumerationAxiom getOwnedEnumeration() {
+		return ownedEnumeration;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetOwnedEnumeration(InstanceEnumerationAxiom newOwnedEnumeration, NotificationChain msgs) {
+		InstanceEnumerationAxiom oldOwnedEnumeration = ownedEnumeration;
+		ownedEnumeration = newOwnedEnumeration;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OmlPackage.CONCEPT__OWNED_ENUMERATION, oldOwnedEnumeration, newOwnedEnumeration);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setOwnedEnumeration(InstanceEnumerationAxiom newOwnedEnumeration) {
+		if (newOwnedEnumeration != ownedEnumeration) {
+			NotificationChain msgs = null;
+			if (ownedEnumeration != null)
+				msgs = ((InternalEObject)ownedEnumeration).eInverseRemove(this, OmlPackage.INSTANCE_ENUMERATION_AXIOM__OWNING_CONCEPT, InstanceEnumerationAxiom.class, msgs);
+			if (newOwnedEnumeration != null)
+				msgs = ((InternalEObject)newOwnedEnumeration).eInverseAdd(this, OmlPackage.INSTANCE_ENUMERATION_AXIOM__OWNING_CONCEPT, InstanceEnumerationAxiom.class, msgs);
+			msgs = basicSetOwnedEnumeration(newOwnedEnumeration, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.CONCEPT__OWNED_ENUMERATION, newOwnedEnumeration, newOwnedEnumeration));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case OmlPackage.CONCEPT__OWNED_ENUMERATION:
+				if (ownedEnumeration != null)
+					msgs = ((InternalEObject)ownedEnumeration).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OmlPackage.CONCEPT__OWNED_ENUMERATION, null, msgs);
+				return basicSetOwnedEnumeration((InstanceEnumerationAxiom)otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case OmlPackage.CONCEPT__OWNED_ENUMERATION:
+				return basicSetOwnedEnumeration(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -94,8 +207,11 @@ public class ConceptImpl extends EntityImpl implements Concept {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case OmlPackage.CONCEPT__ENUMERATED_INSTANCES:
-				return getEnumeratedInstances();
+			case OmlPackage.CONCEPT__REF:
+				if (resolve) return getRef();
+				return basicGetRef();
+			case OmlPackage.CONCEPT__OWNED_ENUMERATION:
+				return getOwnedEnumeration();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -105,13 +221,14 @@ public class ConceptImpl extends EntityImpl implements Concept {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case OmlPackage.CONCEPT__ENUMERATED_INSTANCES:
-				getEnumeratedInstances().clear();
-				getEnumeratedInstances().addAll((Collection<? extends ConceptInstance>)newValue);
+			case OmlPackage.CONCEPT__REF:
+				setRef((Concept)newValue);
+				return;
+			case OmlPackage.CONCEPT__OWNED_ENUMERATION:
+				setOwnedEnumeration((InstanceEnumerationAxiom)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -125,8 +242,11 @@ public class ConceptImpl extends EntityImpl implements Concept {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case OmlPackage.CONCEPT__ENUMERATED_INSTANCES:
-				getEnumeratedInstances().clear();
+			case OmlPackage.CONCEPT__REF:
+				setRef((Concept)null);
+				return;
+			case OmlPackage.CONCEPT__OWNED_ENUMERATION:
+				setOwnedEnumeration((InstanceEnumerationAxiom)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -140,8 +260,10 @@ public class ConceptImpl extends EntityImpl implements Concept {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case OmlPackage.CONCEPT__ENUMERATED_INSTANCES:
-				return enumeratedInstances != null && !enumeratedInstances.isEmpty();
+			case OmlPackage.CONCEPT__REF:
+				return ref != null;
+			case OmlPackage.CONCEPT__OWNED_ENUMERATION:
+				return ownedEnumeration != null;
 		}
 		return super.eIsSet(featureID);
 	}

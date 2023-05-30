@@ -20,10 +20,10 @@ package io.opencaesar.oml.impl;
 
 import io.opencaesar.oml.Entity;
 import io.opencaesar.oml.ForwardRelation;
+import io.opencaesar.oml.Member;
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.Relation;
 import io.opencaesar.oml.RelationEntity;
-import io.opencaesar.oml.ReverseRelation;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -131,14 +131,8 @@ public class ForwardRelationImpl extends RelationImpl implements ForwardRelation
 	 * @generated
 	 */
 	@Override
-	public Entity deriveDomain() {
-		Entity _xifexpression = null;
-		RelationEntity _relationEntity = this.getRelationEntity();
-		boolean _tripleNotEquals = (_relationEntity != null);
-		if (_tripleNotEquals) {
-			_xifexpression = this.getRelationEntity().getSource();
-		}
-		return _xifexpression;
+	public Member getRef() {
+		return null;
 	}
 
 	/**
@@ -147,14 +141,8 @@ public class ForwardRelationImpl extends RelationImpl implements ForwardRelation
 	 * @generated
 	 */
 	@Override
-	public Entity deriveRange() {
-		Entity _xifexpression = null;
-		RelationEntity _relationEntity = this.getRelationEntity();
-		boolean _tripleNotEquals = (_relationEntity != null);
-		if (_tripleNotEquals) {
-			_xifexpression = this.getRelationEntity().getTarget();
-		}
-		return _xifexpression;
+	public boolean isFunctional() {
+		return this.getRelationEntity().isFunctional();
 	}
 
 	/**
@@ -163,14 +151,88 @@ public class ForwardRelationImpl extends RelationImpl implements ForwardRelation
 	 * @generated
 	 */
 	@Override
-	public Relation deriveInverse() {
-		ReverseRelation _xifexpression = null;
-		RelationEntity _relationEntity = this.getRelationEntity();
-		boolean _tripleNotEquals = (_relationEntity != null);
-		if (_tripleNotEquals) {
-			_xifexpression = this.getRelationEntity().getReverseRelation();
-		}
-		return _xifexpression;
+	public boolean isInverseFunctional() {
+		return this.getRelationEntity().isInverseFunctional();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isSymmetric() {
+		return this.getRelationEntity().isSymmetric();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isAsymmetric() {
+		return this.getRelationEntity().isAsymmetric();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isReflexive() {
+		return this.getRelationEntity().isReflexive();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isIrreflexive() {
+		return this.getRelationEntity().isIrreflexive();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isTransitive() {
+		return this.getRelationEntity().isTransitive();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EList<Entity> getDomains() {
+		return this.getRelationEntity().getSources();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EList<Entity> getRanges() {
+		return this.getRelationEntity().getTargets();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Relation getInverse() {
+		return this.getRelationEntity().getReverseRelation();
 	}
 
 	/**
@@ -284,12 +346,28 @@ public class ForwardRelationImpl extends RelationImpl implements ForwardRelation
 	@Override
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
-			case OmlPackage.FORWARD_RELATION___DERIVE_DOMAIN:
-				return deriveDomain();
-			case OmlPackage.FORWARD_RELATION___DERIVE_RANGE:
-				return deriveRange();
-			case OmlPackage.FORWARD_RELATION___DERIVE_INVERSE:
-				return deriveInverse();
+			case OmlPackage.FORWARD_RELATION___GET_REF:
+				return getRef();
+			case OmlPackage.FORWARD_RELATION___IS_FUNCTIONAL:
+				return isFunctional();
+			case OmlPackage.FORWARD_RELATION___IS_INVERSE_FUNCTIONAL:
+				return isInverseFunctional();
+			case OmlPackage.FORWARD_RELATION___IS_SYMMETRIC:
+				return isSymmetric();
+			case OmlPackage.FORWARD_RELATION___IS_ASYMMETRIC:
+				return isAsymmetric();
+			case OmlPackage.FORWARD_RELATION___IS_REFLEXIVE:
+				return isReflexive();
+			case OmlPackage.FORWARD_RELATION___IS_IRREFLEXIVE:
+				return isIrreflexive();
+			case OmlPackage.FORWARD_RELATION___IS_TRANSITIVE:
+				return isTransitive();
+			case OmlPackage.FORWARD_RELATION___GET_DOMAINS:
+				return getDomains();
+			case OmlPackage.FORWARD_RELATION___GET_RANGES:
+				return getRanges();
+			case OmlPackage.FORWARD_RELATION___GET_INVERSE:
+				return getInverse();
 		}
 		return super.eInvoke(operationID, arguments);
 	}

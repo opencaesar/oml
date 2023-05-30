@@ -111,6 +111,52 @@ public class OmlItemProviderAdapterFactory extends OmlAdapterFactory implements 
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.Import} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ImportItemProvider importItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link io.opencaesar.oml.Import}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createImportAdapter() {
+		if (importItemProvider == null) {
+			importItemProvider = new ImportItemProvider(this);
+		}
+
+		return importItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.Argument} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ArgumentItemProvider argumentItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link io.opencaesar.oml.Argument}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createArgumentAdapter() {
+		if (argumentItemProvider == null) {
+			argumentItemProvider = new ArgumentItemProvider(this);
+		}
+
+		return argumentItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.Vocabulary} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -203,6 +249,98 @@ public class OmlItemProviderAdapterFactory extends OmlAdapterFactory implements 
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.Rule} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected RuleItemProvider ruleItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link io.opencaesar.oml.Rule}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createRuleAdapter() {
+		if (ruleItemProvider == null) {
+			ruleItemProvider = new RuleItemProvider(this);
+		}
+
+		return ruleItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.BuiltIn} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected BuiltInItemProvider builtInItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link io.opencaesar.oml.BuiltIn}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createBuiltInAdapter() {
+		if (builtInItemProvider == null) {
+			builtInItemProvider = new BuiltInItemProvider(this);
+		}
+
+		return builtInItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.Scalar} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ScalarItemProvider scalarItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link io.opencaesar.oml.Scalar}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createScalarAdapter() {
+		if (scalarItemProvider == null) {
+			scalarItemProvider = new ScalarItemProvider(this);
+		}
+
+		return scalarItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.Structure} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected StructureItemProvider structureItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link io.opencaesar.oml.Structure}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createStructureAdapter() {
+		if (structureItemProvider == null) {
+			structureItemProvider = new StructureItemProvider(this);
+		}
+
+		return structureItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.Aspect} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -269,29 +407,6 @@ public class OmlItemProviderAdapterFactory extends OmlAdapterFactory implements 
 		}
 
 		return relationEntityItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.Structure} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected StructureItemProvider structureItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.Structure}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createStructureAdapter() {
-		if (structureItemProvider == null) {
-			structureItemProvider = new StructureItemProvider(this);
-		}
-
-		return structureItemProvider;
 	}
 
 	/**
@@ -364,52 +479,6 @@ public class OmlItemProviderAdapterFactory extends OmlAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.FacetedScalar} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected FacetedScalarItemProvider facetedScalarItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.FacetedScalar}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createFacetedScalarAdapter() {
-		if (facetedScalarItemProvider == null) {
-			facetedScalarItemProvider = new FacetedScalarItemProvider(this);
-		}
-
-		return facetedScalarItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.EnumeratedScalar} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected EnumeratedScalarItemProvider enumeratedScalarItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.EnumeratedScalar}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createEnumeratedScalarAdapter() {
-		if (enumeratedScalarItemProvider == null) {
-			enumeratedScalarItemProvider = new EnumeratedScalarItemProvider(this);
-		}
-
-		return enumeratedScalarItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.ForwardRelation} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -456,49 +525,26 @@ public class OmlItemProviderAdapterFactory extends OmlAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.Rule} instances.
+	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.UnreifiedRelation} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected RuleItemProvider ruleItemProvider;
+	protected UnreifiedRelationItemProvider unreifiedRelationItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.Rule}.
+	 * This creates an adapter for a {@link io.opencaesar.oml.UnreifiedRelation}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createRuleAdapter() {
-		if (ruleItemProvider == null) {
-			ruleItemProvider = new RuleItemProvider(this);
+	public Adapter createUnreifiedRelationAdapter() {
+		if (unreifiedRelationItemProvider == null) {
+			unreifiedRelationItemProvider = new UnreifiedRelationItemProvider(this);
 		}
 
-		return ruleItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.StructureInstance} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected StructureInstanceItemProvider structureInstanceItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.StructureInstance}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createStructureInstanceAdapter() {
-		if (structureInstanceItemProvider == null) {
-			structureInstanceItemProvider = new StructureInstanceItemProvider(this);
-		}
-
-		return structureInstanceItemProvider;
+		return unreifiedRelationItemProvider;
 	}
 
 	/**
@@ -548,739 +594,26 @@ public class OmlItemProviderAdapterFactory extends OmlAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.AspectReference} instances.
+	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.StructureInstance} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected AspectReferenceItemProvider aspectReferenceItemProvider;
+	protected StructureInstanceItemProvider structureInstanceItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.AspectReference}.
+	 * This creates an adapter for a {@link io.opencaesar.oml.StructureInstance}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createAspectReferenceAdapter() {
-		if (aspectReferenceItemProvider == null) {
-			aspectReferenceItemProvider = new AspectReferenceItemProvider(this);
+	public Adapter createStructureInstanceAdapter() {
+		if (structureInstanceItemProvider == null) {
+			structureInstanceItemProvider = new StructureInstanceItemProvider(this);
 		}
 
-		return aspectReferenceItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.ConceptReference} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected ConceptReferenceItemProvider conceptReferenceItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.ConceptReference}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createConceptReferenceAdapter() {
-		if (conceptReferenceItemProvider == null) {
-			conceptReferenceItemProvider = new ConceptReferenceItemProvider(this);
-		}
-
-		return conceptReferenceItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.RelationEntityReference} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected RelationEntityReferenceItemProvider relationEntityReferenceItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.RelationEntityReference}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createRelationEntityReferenceAdapter() {
-		if (relationEntityReferenceItemProvider == null) {
-			relationEntityReferenceItemProvider = new RelationEntityReferenceItemProvider(this);
-		}
-
-		return relationEntityReferenceItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.StructureReference} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected StructureReferenceItemProvider structureReferenceItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.StructureReference}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createStructureReferenceAdapter() {
-		if (structureReferenceItemProvider == null) {
-			structureReferenceItemProvider = new StructureReferenceItemProvider(this);
-		}
-
-		return structureReferenceItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.AnnotationPropertyReference} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected AnnotationPropertyReferenceItemProvider annotationPropertyReferenceItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.AnnotationPropertyReference}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createAnnotationPropertyReferenceAdapter() {
-		if (annotationPropertyReferenceItemProvider == null) {
-			annotationPropertyReferenceItemProvider = new AnnotationPropertyReferenceItemProvider(this);
-		}
-
-		return annotationPropertyReferenceItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.ScalarPropertyReference} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected ScalarPropertyReferenceItemProvider scalarPropertyReferenceItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.ScalarPropertyReference}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createScalarPropertyReferenceAdapter() {
-		if (scalarPropertyReferenceItemProvider == null) {
-			scalarPropertyReferenceItemProvider = new ScalarPropertyReferenceItemProvider(this);
-		}
-
-		return scalarPropertyReferenceItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.StructuredPropertyReference} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected StructuredPropertyReferenceItemProvider structuredPropertyReferenceItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.StructuredPropertyReference}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createStructuredPropertyReferenceAdapter() {
-		if (structuredPropertyReferenceItemProvider == null) {
-			structuredPropertyReferenceItemProvider = new StructuredPropertyReferenceItemProvider(this);
-		}
-
-		return structuredPropertyReferenceItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.FacetedScalarReference} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected FacetedScalarReferenceItemProvider facetedScalarReferenceItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.FacetedScalarReference}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createFacetedScalarReferenceAdapter() {
-		if (facetedScalarReferenceItemProvider == null) {
-			facetedScalarReferenceItemProvider = new FacetedScalarReferenceItemProvider(this);
-		}
-
-		return facetedScalarReferenceItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.EnumeratedScalarReference} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected EnumeratedScalarReferenceItemProvider enumeratedScalarReferenceItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.EnumeratedScalarReference}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createEnumeratedScalarReferenceAdapter() {
-		if (enumeratedScalarReferenceItemProvider == null) {
-			enumeratedScalarReferenceItemProvider = new EnumeratedScalarReferenceItemProvider(this);
-		}
-
-		return enumeratedScalarReferenceItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.RelationReference} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected RelationReferenceItemProvider relationReferenceItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.RelationReference}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createRelationReferenceAdapter() {
-		if (relationReferenceItemProvider == null) {
-			relationReferenceItemProvider = new RelationReferenceItemProvider(this);
-		}
-
-		return relationReferenceItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.RuleReference} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected RuleReferenceItemProvider ruleReferenceItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.RuleReference}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createRuleReferenceAdapter() {
-		if (ruleReferenceItemProvider == null) {
-			ruleReferenceItemProvider = new RuleReferenceItemProvider(this);
-		}
-
-		return ruleReferenceItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.ConceptInstanceReference} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected ConceptInstanceReferenceItemProvider conceptInstanceReferenceItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.ConceptInstanceReference}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createConceptInstanceReferenceAdapter() {
-		if (conceptInstanceReferenceItemProvider == null) {
-			conceptInstanceReferenceItemProvider = new ConceptInstanceReferenceItemProvider(this);
-		}
-
-		return conceptInstanceReferenceItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.RelationInstanceReference} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected RelationInstanceReferenceItemProvider relationInstanceReferenceItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.RelationInstanceReference}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createRelationInstanceReferenceAdapter() {
-		if (relationInstanceReferenceItemProvider == null) {
-			relationInstanceReferenceItemProvider = new RelationInstanceReferenceItemProvider(this);
-		}
-
-		return relationInstanceReferenceItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.VocabularyExtension} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected VocabularyExtensionItemProvider vocabularyExtensionItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.VocabularyExtension}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createVocabularyExtensionAdapter() {
-		if (vocabularyExtensionItemProvider == null) {
-			vocabularyExtensionItemProvider = new VocabularyExtensionItemProvider(this);
-		}
-
-		return vocabularyExtensionItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.VocabularyUsage} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected VocabularyUsageItemProvider vocabularyUsageItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.VocabularyUsage}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createVocabularyUsageAdapter() {
-		if (vocabularyUsageItemProvider == null) {
-			vocabularyUsageItemProvider = new VocabularyUsageItemProvider(this);
-		}
-
-		return vocabularyUsageItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.VocabularyBundleExtension} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected VocabularyBundleExtensionItemProvider vocabularyBundleExtensionItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.VocabularyBundleExtension}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createVocabularyBundleExtensionAdapter() {
-		if (vocabularyBundleExtensionItemProvider == null) {
-			vocabularyBundleExtensionItemProvider = new VocabularyBundleExtensionItemProvider(this);
-		}
-
-		return vocabularyBundleExtensionItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.VocabularyBundleInclusion} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected VocabularyBundleInclusionItemProvider vocabularyBundleInclusionItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.VocabularyBundleInclusion}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createVocabularyBundleInclusionAdapter() {
-		if (vocabularyBundleInclusionItemProvider == null) {
-			vocabularyBundleInclusionItemProvider = new VocabularyBundleInclusionItemProvider(this);
-		}
-
-		return vocabularyBundleInclusionItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.DescriptionExtension} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected DescriptionExtensionItemProvider descriptionExtensionItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.DescriptionExtension}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createDescriptionExtensionAdapter() {
-		if (descriptionExtensionItemProvider == null) {
-			descriptionExtensionItemProvider = new DescriptionExtensionItemProvider(this);
-		}
-
-		return descriptionExtensionItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.DescriptionUsage} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected DescriptionUsageItemProvider descriptionUsageItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.DescriptionUsage}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createDescriptionUsageAdapter() {
-		if (descriptionUsageItemProvider == null) {
-			descriptionUsageItemProvider = new DescriptionUsageItemProvider(this);
-		}
-
-		return descriptionUsageItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.DescriptionBundleExtension} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected DescriptionBundleExtensionItemProvider descriptionBundleExtensionItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.DescriptionBundleExtension}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createDescriptionBundleExtensionAdapter() {
-		if (descriptionBundleExtensionItemProvider == null) {
-			descriptionBundleExtensionItemProvider = new DescriptionBundleExtensionItemProvider(this);
-		}
-
-		return descriptionBundleExtensionItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.DescriptionBundleInclusion} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected DescriptionBundleInclusionItemProvider descriptionBundleInclusionItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.DescriptionBundleInclusion}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createDescriptionBundleInclusionAdapter() {
-		if (descriptionBundleInclusionItemProvider == null) {
-			descriptionBundleInclusionItemProvider = new DescriptionBundleInclusionItemProvider(this);
-		}
-
-		return descriptionBundleInclusionItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.DescriptionBundleUsage} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected DescriptionBundleUsageItemProvider descriptionBundleUsageItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.DescriptionBundleUsage}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createDescriptionBundleUsageAdapter() {
-		if (descriptionBundleUsageItemProvider == null) {
-			descriptionBundleUsageItemProvider = new DescriptionBundleUsageItemProvider(this);
-		}
-
-		return descriptionBundleUsageItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.SpecializationAxiom} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected SpecializationAxiomItemProvider specializationAxiomItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.SpecializationAxiom}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createSpecializationAxiomAdapter() {
-		if (specializationAxiomItemProvider == null) {
-			specializationAxiomItemProvider = new SpecializationAxiomItemProvider(this);
-		}
-
-		return specializationAxiomItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.ScalarPropertyRangeRestrictionAxiom} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected ScalarPropertyRangeRestrictionAxiomItemProvider scalarPropertyRangeRestrictionAxiomItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.ScalarPropertyRangeRestrictionAxiom}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createScalarPropertyRangeRestrictionAxiomAdapter() {
-		if (scalarPropertyRangeRestrictionAxiomItemProvider == null) {
-			scalarPropertyRangeRestrictionAxiomItemProvider = new ScalarPropertyRangeRestrictionAxiomItemProvider(this);
-		}
-
-		return scalarPropertyRangeRestrictionAxiomItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.ScalarPropertyCardinalityRestrictionAxiom} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected ScalarPropertyCardinalityRestrictionAxiomItemProvider scalarPropertyCardinalityRestrictionAxiomItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.ScalarPropertyCardinalityRestrictionAxiom}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createScalarPropertyCardinalityRestrictionAxiomAdapter() {
-		if (scalarPropertyCardinalityRestrictionAxiomItemProvider == null) {
-			scalarPropertyCardinalityRestrictionAxiomItemProvider = new ScalarPropertyCardinalityRestrictionAxiomItemProvider(this);
-		}
-
-		return scalarPropertyCardinalityRestrictionAxiomItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.ScalarPropertyValueRestrictionAxiom} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected ScalarPropertyValueRestrictionAxiomItemProvider scalarPropertyValueRestrictionAxiomItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.ScalarPropertyValueRestrictionAxiom}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createScalarPropertyValueRestrictionAxiomAdapter() {
-		if (scalarPropertyValueRestrictionAxiomItemProvider == null) {
-			scalarPropertyValueRestrictionAxiomItemProvider = new ScalarPropertyValueRestrictionAxiomItemProvider(this);
-		}
-
-		return scalarPropertyValueRestrictionAxiomItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.StructuredPropertyRangeRestrictionAxiom} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected StructuredPropertyRangeRestrictionAxiomItemProvider structuredPropertyRangeRestrictionAxiomItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.StructuredPropertyRangeRestrictionAxiom}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createStructuredPropertyRangeRestrictionAxiomAdapter() {
-		if (structuredPropertyRangeRestrictionAxiomItemProvider == null) {
-			structuredPropertyRangeRestrictionAxiomItemProvider = new StructuredPropertyRangeRestrictionAxiomItemProvider(this);
-		}
-
-		return structuredPropertyRangeRestrictionAxiomItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.StructuredPropertyCardinalityRestrictionAxiom} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected StructuredPropertyCardinalityRestrictionAxiomItemProvider structuredPropertyCardinalityRestrictionAxiomItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.StructuredPropertyCardinalityRestrictionAxiom}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createStructuredPropertyCardinalityRestrictionAxiomAdapter() {
-		if (structuredPropertyCardinalityRestrictionAxiomItemProvider == null) {
-			structuredPropertyCardinalityRestrictionAxiomItemProvider = new StructuredPropertyCardinalityRestrictionAxiomItemProvider(this);
-		}
-
-		return structuredPropertyCardinalityRestrictionAxiomItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.StructuredPropertyValueRestrictionAxiom} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected StructuredPropertyValueRestrictionAxiomItemProvider structuredPropertyValueRestrictionAxiomItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.StructuredPropertyValueRestrictionAxiom}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createStructuredPropertyValueRestrictionAxiomAdapter() {
-		if (structuredPropertyValueRestrictionAxiomItemProvider == null) {
-			structuredPropertyValueRestrictionAxiomItemProvider = new StructuredPropertyValueRestrictionAxiomItemProvider(this);
-		}
-
-		return structuredPropertyValueRestrictionAxiomItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.RelationRangeRestrictionAxiom} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected RelationRangeRestrictionAxiomItemProvider relationRangeRestrictionAxiomItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.RelationRangeRestrictionAxiom}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createRelationRangeRestrictionAxiomAdapter() {
-		if (relationRangeRestrictionAxiomItemProvider == null) {
-			relationRangeRestrictionAxiomItemProvider = new RelationRangeRestrictionAxiomItemProvider(this);
-		}
-
-		return relationRangeRestrictionAxiomItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.RelationCardinalityRestrictionAxiom} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected RelationCardinalityRestrictionAxiomItemProvider relationCardinalityRestrictionAxiomItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.RelationCardinalityRestrictionAxiom}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createRelationCardinalityRestrictionAxiomAdapter() {
-		if (relationCardinalityRestrictionAxiomItemProvider == null) {
-			relationCardinalityRestrictionAxiomItemProvider = new RelationCardinalityRestrictionAxiomItemProvider(this);
-		}
-
-		return relationCardinalityRestrictionAxiomItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.RelationTargetRestrictionAxiom} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected RelationTargetRestrictionAxiomItemProvider relationTargetRestrictionAxiomItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.RelationTargetRestrictionAxiom}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createRelationTargetRestrictionAxiomAdapter() {
-		if (relationTargetRestrictionAxiomItemProvider == null) {
-			relationTargetRestrictionAxiomItemProvider = new RelationTargetRestrictionAxiomItemProvider(this);
-		}
-
-		return relationTargetRestrictionAxiomItemProvider;
+		return structureInstanceItemProvider;
 	}
 
 	/**
@@ -1307,118 +640,302 @@ public class OmlItemProviderAdapterFactory extends OmlAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.ConceptTypeAssertion} instances.
+	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.SpecializationAxiom} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ConceptTypeAssertionItemProvider conceptTypeAssertionItemProvider;
+	protected SpecializationAxiomItemProvider specializationAxiomItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.ConceptTypeAssertion}.
+	 * This creates an adapter for a {@link io.opencaesar.oml.SpecializationAxiom}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createConceptTypeAssertionAdapter() {
-		if (conceptTypeAssertionItemProvider == null) {
-			conceptTypeAssertionItemProvider = new ConceptTypeAssertionItemProvider(this);
+	public Adapter createSpecializationAxiomAdapter() {
+		if (specializationAxiomItemProvider == null) {
+			specializationAxiomItemProvider = new SpecializationAxiomItemProvider(this);
 		}
 
-		return conceptTypeAssertionItemProvider;
+		return specializationAxiomItemProvider;
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.RelationTypeAssertion} instances.
+	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.InstanceEnumerationAxiom} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected RelationTypeAssertionItemProvider relationTypeAssertionItemProvider;
+	protected InstanceEnumerationAxiomItemProvider instanceEnumerationAxiomItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.RelationTypeAssertion}.
+	 * This creates an adapter for a {@link io.opencaesar.oml.InstanceEnumerationAxiom}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createRelationTypeAssertionAdapter() {
-		if (relationTypeAssertionItemProvider == null) {
-			relationTypeAssertionItemProvider = new RelationTypeAssertionItemProvider(this);
+	public Adapter createInstanceEnumerationAxiomAdapter() {
+		if (instanceEnumerationAxiomItemProvider == null) {
+			instanceEnumerationAxiomItemProvider = new InstanceEnumerationAxiomItemProvider(this);
 		}
 
-		return relationTypeAssertionItemProvider;
+		return instanceEnumerationAxiomItemProvider;
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.ScalarPropertyValueAssertion} instances.
+	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.LiteralEnumerationAxiom} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ScalarPropertyValueAssertionItemProvider scalarPropertyValueAssertionItemProvider;
+	protected LiteralEnumerationAxiomItemProvider literalEnumerationAxiomItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.ScalarPropertyValueAssertion}.
+	 * This creates an adapter for a {@link io.opencaesar.oml.LiteralEnumerationAxiom}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createScalarPropertyValueAssertionAdapter() {
-		if (scalarPropertyValueAssertionItemProvider == null) {
-			scalarPropertyValueAssertionItemProvider = new ScalarPropertyValueAssertionItemProvider(this);
+	public Adapter createLiteralEnumerationAxiomAdapter() {
+		if (literalEnumerationAxiomItemProvider == null) {
+			literalEnumerationAxiomItemProvider = new LiteralEnumerationAxiomItemProvider(this);
 		}
 
-		return scalarPropertyValueAssertionItemProvider;
+		return literalEnumerationAxiomItemProvider;
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.StructuredPropertyValueAssertion} instances.
+	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.ClassifierEquivalenceAxiom} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected StructuredPropertyValueAssertionItemProvider structuredPropertyValueAssertionItemProvider;
+	protected ClassifierEquivalenceAxiomItemProvider classifierEquivalenceAxiomItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.StructuredPropertyValueAssertion}.
+	 * This creates an adapter for a {@link io.opencaesar.oml.ClassifierEquivalenceAxiom}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createStructuredPropertyValueAssertionAdapter() {
-		if (structuredPropertyValueAssertionItemProvider == null) {
-			structuredPropertyValueAssertionItemProvider = new StructuredPropertyValueAssertionItemProvider(this);
+	public Adapter createClassifierEquivalenceAxiomAdapter() {
+		if (classifierEquivalenceAxiomItemProvider == null) {
+			classifierEquivalenceAxiomItemProvider = new ClassifierEquivalenceAxiomItemProvider(this);
 		}
 
-		return structuredPropertyValueAssertionItemProvider;
+		return classifierEquivalenceAxiomItemProvider;
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.LinkAssertion} instances.
+	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.ScalarEquivalenceAxiom} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected LinkAssertionItemProvider linkAssertionItemProvider;
+	protected ScalarEquivalenceAxiomItemProvider scalarEquivalenceAxiomItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.LinkAssertion}.
+	 * This creates an adapter for a {@link io.opencaesar.oml.ScalarEquivalenceAxiom}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createLinkAssertionAdapter() {
-		if (linkAssertionItemProvider == null) {
-			linkAssertionItemProvider = new LinkAssertionItemProvider(this);
+	public Adapter createScalarEquivalenceAxiomAdapter() {
+		if (scalarEquivalenceAxiomItemProvider == null) {
+			scalarEquivalenceAxiomItemProvider = new ScalarEquivalenceAxiomItemProvider(this);
 		}
 
-		return linkAssertionItemProvider;
+		return scalarEquivalenceAxiomItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.PropertyEquivalenceAxiom} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected PropertyEquivalenceAxiomItemProvider propertyEquivalenceAxiomItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link io.opencaesar.oml.PropertyEquivalenceAxiom}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createPropertyEquivalenceAxiomAdapter() {
+		if (propertyEquivalenceAxiomItemProvider == null) {
+			propertyEquivalenceAxiomItemProvider = new PropertyEquivalenceAxiomItemProvider(this);
+		}
+
+		return propertyEquivalenceAxiomItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.PropertyRangeRestrictionAxiom} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected PropertyRangeRestrictionAxiomItemProvider propertyRangeRestrictionAxiomItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link io.opencaesar.oml.PropertyRangeRestrictionAxiom}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createPropertyRangeRestrictionAxiomAdapter() {
+		if (propertyRangeRestrictionAxiomItemProvider == null) {
+			propertyRangeRestrictionAxiomItemProvider = new PropertyRangeRestrictionAxiomItemProvider(this);
+		}
+
+		return propertyRangeRestrictionAxiomItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.PropertyCardinalityRestrictionAxiom} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected PropertyCardinalityRestrictionAxiomItemProvider propertyCardinalityRestrictionAxiomItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link io.opencaesar.oml.PropertyCardinalityRestrictionAxiom}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createPropertyCardinalityRestrictionAxiomAdapter() {
+		if (propertyCardinalityRestrictionAxiomItemProvider == null) {
+			propertyCardinalityRestrictionAxiomItemProvider = new PropertyCardinalityRestrictionAxiomItemProvider(this);
+		}
+
+		return propertyCardinalityRestrictionAxiomItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.PropertyValueRestrictionAxiom} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected PropertyValueRestrictionAxiomItemProvider propertyValueRestrictionAxiomItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link io.opencaesar.oml.PropertyValueRestrictionAxiom}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createPropertyValueRestrictionAxiomAdapter() {
+		if (propertyValueRestrictionAxiomItemProvider == null) {
+			propertyValueRestrictionAxiomItemProvider = new PropertyValueRestrictionAxiomItemProvider(this);
+		}
+
+		return propertyValueRestrictionAxiomItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.PropertySelfRestrictionAxiom} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected PropertySelfRestrictionAxiomItemProvider propertySelfRestrictionAxiomItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link io.opencaesar.oml.PropertySelfRestrictionAxiom}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createPropertySelfRestrictionAxiomAdapter() {
+		if (propertySelfRestrictionAxiomItemProvider == null) {
+			propertySelfRestrictionAxiomItemProvider = new PropertySelfRestrictionAxiomItemProvider(this);
+		}
+
+		return propertySelfRestrictionAxiomItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.TypeAssertion} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected TypeAssertionItemProvider typeAssertionItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link io.opencaesar.oml.TypeAssertion}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createTypeAssertionAdapter() {
+		if (typeAssertionItemProvider == null) {
+			typeAssertionItemProvider = new TypeAssertionItemProvider(this);
+		}
+
+		return typeAssertionItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.PropertyValueAssertion} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected PropertyValueAssertionItemProvider propertyValueAssertionItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link io.opencaesar.oml.PropertyValueAssertion}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createPropertyValueAssertionAdapter() {
+		if (propertyValueAssertionItemProvider == null) {
+			propertyValueAssertionItemProvider = new PropertyValueAssertionItemProvider(this);
+		}
+
+		return propertyValueAssertionItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.BuiltInPredicate} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected BuiltInPredicateItemProvider builtInPredicateItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link io.opencaesar.oml.BuiltInPredicate}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createBuiltInPredicateAdapter() {
+		if (builtInPredicateItemProvider == null) {
+			builtInPredicateItemProvider = new BuiltInPredicateItemProvider(this);
+		}
+
+		return builtInPredicateItemProvider;
 	}
 
 	/**
@@ -1468,26 +985,26 @@ public class OmlItemProviderAdapterFactory extends OmlAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.FeaturePredicate} instances.
+	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.PropertyPredicate} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected FeaturePredicateItemProvider featurePredicateItemProvider;
+	protected PropertyPredicateItemProvider propertyPredicateItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.FeaturePredicate}.
+	 * This creates an adapter for a {@link io.opencaesar.oml.PropertyPredicate}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createFeaturePredicateAdapter() {
-		if (featurePredicateItemProvider == null) {
-			featurePredicateItemProvider = new FeaturePredicateItemProvider(this);
+	public Adapter createPropertyPredicateAdapter() {
+		if (propertyPredicateItemProvider == null) {
+			propertyPredicateItemProvider = new PropertyPredicateItemProvider(this);
 		}
 
-		return featurePredicateItemProvider;
+		return propertyPredicateItemProvider;
 	}
 
 	/**
@@ -1757,66 +1274,45 @@ public class OmlItemProviderAdapterFactory extends OmlAdapterFactory implements 
 	@Override
 	public void dispose() {
 		if (annotationItemProvider != null) annotationItemProvider.dispose();
+		if (importItemProvider != null) importItemProvider.dispose();
+		if (argumentItemProvider != null) argumentItemProvider.dispose();
 		if (vocabularyItemProvider != null) vocabularyItemProvider.dispose();
 		if (vocabularyBundleItemProvider != null) vocabularyBundleItemProvider.dispose();
 		if (descriptionItemProvider != null) descriptionItemProvider.dispose();
 		if (descriptionBundleItemProvider != null) descriptionBundleItemProvider.dispose();
+		if (ruleItemProvider != null) ruleItemProvider.dispose();
+		if (builtInItemProvider != null) builtInItemProvider.dispose();
+		if (scalarItemProvider != null) scalarItemProvider.dispose();
+		if (structureItemProvider != null) structureItemProvider.dispose();
 		if (aspectItemProvider != null) aspectItemProvider.dispose();
 		if (conceptItemProvider != null) conceptItemProvider.dispose();
 		if (relationEntityItemProvider != null) relationEntityItemProvider.dispose();
-		if (structureItemProvider != null) structureItemProvider.dispose();
 		if (annotationPropertyItemProvider != null) annotationPropertyItemProvider.dispose();
 		if (scalarPropertyItemProvider != null) scalarPropertyItemProvider.dispose();
 		if (structuredPropertyItemProvider != null) structuredPropertyItemProvider.dispose();
-		if (facetedScalarItemProvider != null) facetedScalarItemProvider.dispose();
-		if (enumeratedScalarItemProvider != null) enumeratedScalarItemProvider.dispose();
 		if (forwardRelationItemProvider != null) forwardRelationItemProvider.dispose();
 		if (reverseRelationItemProvider != null) reverseRelationItemProvider.dispose();
-		if (ruleItemProvider != null) ruleItemProvider.dispose();
-		if (structureInstanceItemProvider != null) structureInstanceItemProvider.dispose();
+		if (unreifiedRelationItemProvider != null) unreifiedRelationItemProvider.dispose();
 		if (conceptInstanceItemProvider != null) conceptInstanceItemProvider.dispose();
 		if (relationInstanceItemProvider != null) relationInstanceItemProvider.dispose();
-		if (aspectReferenceItemProvider != null) aspectReferenceItemProvider.dispose();
-		if (conceptReferenceItemProvider != null) conceptReferenceItemProvider.dispose();
-		if (relationEntityReferenceItemProvider != null) relationEntityReferenceItemProvider.dispose();
-		if (structureReferenceItemProvider != null) structureReferenceItemProvider.dispose();
-		if (annotationPropertyReferenceItemProvider != null) annotationPropertyReferenceItemProvider.dispose();
-		if (scalarPropertyReferenceItemProvider != null) scalarPropertyReferenceItemProvider.dispose();
-		if (structuredPropertyReferenceItemProvider != null) structuredPropertyReferenceItemProvider.dispose();
-		if (facetedScalarReferenceItemProvider != null) facetedScalarReferenceItemProvider.dispose();
-		if (enumeratedScalarReferenceItemProvider != null) enumeratedScalarReferenceItemProvider.dispose();
-		if (relationReferenceItemProvider != null) relationReferenceItemProvider.dispose();
-		if (ruleReferenceItemProvider != null) ruleReferenceItemProvider.dispose();
-		if (conceptInstanceReferenceItemProvider != null) conceptInstanceReferenceItemProvider.dispose();
-		if (relationInstanceReferenceItemProvider != null) relationInstanceReferenceItemProvider.dispose();
-		if (vocabularyExtensionItemProvider != null) vocabularyExtensionItemProvider.dispose();
-		if (vocabularyUsageItemProvider != null) vocabularyUsageItemProvider.dispose();
-		if (vocabularyBundleExtensionItemProvider != null) vocabularyBundleExtensionItemProvider.dispose();
-		if (vocabularyBundleInclusionItemProvider != null) vocabularyBundleInclusionItemProvider.dispose();
-		if (descriptionExtensionItemProvider != null) descriptionExtensionItemProvider.dispose();
-		if (descriptionUsageItemProvider != null) descriptionUsageItemProvider.dispose();
-		if (descriptionBundleExtensionItemProvider != null) descriptionBundleExtensionItemProvider.dispose();
-		if (descriptionBundleInclusionItemProvider != null) descriptionBundleInclusionItemProvider.dispose();
-		if (descriptionBundleUsageItemProvider != null) descriptionBundleUsageItemProvider.dispose();
-		if (specializationAxiomItemProvider != null) specializationAxiomItemProvider.dispose();
-		if (scalarPropertyRangeRestrictionAxiomItemProvider != null) scalarPropertyRangeRestrictionAxiomItemProvider.dispose();
-		if (scalarPropertyCardinalityRestrictionAxiomItemProvider != null) scalarPropertyCardinalityRestrictionAxiomItemProvider.dispose();
-		if (scalarPropertyValueRestrictionAxiomItemProvider != null) scalarPropertyValueRestrictionAxiomItemProvider.dispose();
-		if (structuredPropertyRangeRestrictionAxiomItemProvider != null) structuredPropertyRangeRestrictionAxiomItemProvider.dispose();
-		if (structuredPropertyCardinalityRestrictionAxiomItemProvider != null) structuredPropertyCardinalityRestrictionAxiomItemProvider.dispose();
-		if (structuredPropertyValueRestrictionAxiomItemProvider != null) structuredPropertyValueRestrictionAxiomItemProvider.dispose();
-		if (relationRangeRestrictionAxiomItemProvider != null) relationRangeRestrictionAxiomItemProvider.dispose();
-		if (relationCardinalityRestrictionAxiomItemProvider != null) relationCardinalityRestrictionAxiomItemProvider.dispose();
-		if (relationTargetRestrictionAxiomItemProvider != null) relationTargetRestrictionAxiomItemProvider.dispose();
+		if (structureInstanceItemProvider != null) structureInstanceItemProvider.dispose();
 		if (keyAxiomItemProvider != null) keyAxiomItemProvider.dispose();
-		if (conceptTypeAssertionItemProvider != null) conceptTypeAssertionItemProvider.dispose();
-		if (relationTypeAssertionItemProvider != null) relationTypeAssertionItemProvider.dispose();
-		if (scalarPropertyValueAssertionItemProvider != null) scalarPropertyValueAssertionItemProvider.dispose();
-		if (structuredPropertyValueAssertionItemProvider != null) structuredPropertyValueAssertionItemProvider.dispose();
-		if (linkAssertionItemProvider != null) linkAssertionItemProvider.dispose();
+		if (specializationAxiomItemProvider != null) specializationAxiomItemProvider.dispose();
+		if (instanceEnumerationAxiomItemProvider != null) instanceEnumerationAxiomItemProvider.dispose();
+		if (literalEnumerationAxiomItemProvider != null) literalEnumerationAxiomItemProvider.dispose();
+		if (classifierEquivalenceAxiomItemProvider != null) classifierEquivalenceAxiomItemProvider.dispose();
+		if (scalarEquivalenceAxiomItemProvider != null) scalarEquivalenceAxiomItemProvider.dispose();
+		if (propertyEquivalenceAxiomItemProvider != null) propertyEquivalenceAxiomItemProvider.dispose();
+		if (propertyRangeRestrictionAxiomItemProvider != null) propertyRangeRestrictionAxiomItemProvider.dispose();
+		if (propertyCardinalityRestrictionAxiomItemProvider != null) propertyCardinalityRestrictionAxiomItemProvider.dispose();
+		if (propertyValueRestrictionAxiomItemProvider != null) propertyValueRestrictionAxiomItemProvider.dispose();
+		if (propertySelfRestrictionAxiomItemProvider != null) propertySelfRestrictionAxiomItemProvider.dispose();
+		if (typeAssertionItemProvider != null) typeAssertionItemProvider.dispose();
+		if (propertyValueAssertionItemProvider != null) propertyValueAssertionItemProvider.dispose();
+		if (builtInPredicateItemProvider != null) builtInPredicateItemProvider.dispose();
 		if (typePredicateItemProvider != null) typePredicateItemProvider.dispose();
 		if (relationEntityPredicateItemProvider != null) relationEntityPredicateItemProvider.dispose();
-		if (featurePredicateItemProvider != null) featurePredicateItemProvider.dispose();
+		if (propertyPredicateItemProvider != null) propertyPredicateItemProvider.dispose();
 		if (sameAsPredicateItemProvider != null) sameAsPredicateItemProvider.dispose();
 		if (differentFromPredicateItemProvider != null) differentFromPredicateItemProvider.dispose();
 		if (quotedLiteralItemProvider != null) quotedLiteralItemProvider.dispose();

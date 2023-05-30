@@ -59,25 +59,25 @@ public class ReverseRelationItemProvider extends RelationItemProvider {
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addRelationEntityPropertyDescriptor(object);
+			addRelationBasePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Relation Entity feature.
+	 * This adds a property descriptor for the Relation Base feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addRelationEntityPropertyDescriptor(Object object) {
+	protected void addRelationBasePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_ReverseRelation_relationEntity_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ReverseRelation_relationEntity_feature", "_UI_ReverseRelation_type"),
-				 OmlPackage.Literals.REVERSE_RELATION__RELATION_ENTITY,
+				 getString("_UI_ReverseRelation_relationBase_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ReverseRelation_relationBase_feature", "_UI_ReverseRelation_type"),
+				 OmlPackage.Literals.REVERSE_RELATION__RELATION_BASE,
 				 true,
 				 false,
 				 true,

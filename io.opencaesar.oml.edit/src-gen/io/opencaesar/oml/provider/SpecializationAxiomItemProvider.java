@@ -58,27 +58,26 @@ public class SpecializationAxiomItemProvider extends AxiomItemProvider {
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addSpecializedTermPropertyDescriptor(object);
+			addSuperTermPropertyDescriptor(object);
 			addOwningTermPropertyDescriptor(object);
-			addOwningReferencePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Specialized Term feature.
+	 * This adds a property descriptor for the Super Term feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addSpecializedTermPropertyDescriptor(Object object) {
+	protected void addSuperTermPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_SpecializationAxiom_specializedTerm_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_SpecializationAxiom_specializedTerm_feature", "_UI_SpecializationAxiom_type"),
-				 OmlPackage.Literals.SPECIALIZATION_AXIOM__SPECIALIZED_TERM,
+				 getString("_UI_SpecializationAxiom_superTerm_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_SpecializationAxiom_superTerm_feature", "_UI_SpecializationAxiom_type"),
+				 OmlPackage.Literals.SPECIALIZATION_AXIOM__SUPER_TERM,
 				 true,
 				 false,
 				 true,
@@ -101,28 +100,6 @@ public class SpecializationAxiomItemProvider extends AxiomItemProvider {
 				 getString("_UI_SpecializationAxiom_owningTerm_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_SpecializationAxiom_owningTerm_feature", "_UI_SpecializationAxiom_type"),
 				 OmlPackage.Literals.SPECIALIZATION_AXIOM__OWNING_TERM,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Owning Reference feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addOwningReferencePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_SpecializationAxiom_owningReference_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_SpecializationAxiom_owningReference_feature", "_UI_SpecializationAxiom_type"),
-				 OmlPackage.Literals.SPECIALIZATION_AXIOM__OWNING_REFERENCE,
 				 true,
 				 false,
 				 true,

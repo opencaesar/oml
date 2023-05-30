@@ -24,100 +24,77 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 
-import io.opencaesar.oml.AnnotatedElement;
 import io.opencaesar.oml.Annotation;
 import io.opencaesar.oml.AnnotationProperty;
-import io.opencaesar.oml.AnnotationPropertyReference;
+import io.opencaesar.oml.Argument;
 import io.opencaesar.oml.Aspect;
-import io.opencaesar.oml.AspectReference;
 import io.opencaesar.oml.BooleanLiteral;
+import io.opencaesar.oml.BuiltIn;
+import io.opencaesar.oml.BuiltInPredicate;
 import io.opencaesar.oml.CardinalityRestrictionKind;
 import io.opencaesar.oml.Classifier;
+import io.opencaesar.oml.ClassifierEquivalenceAxiom;
 import io.opencaesar.oml.Concept;
 import io.opencaesar.oml.ConceptInstance;
-import io.opencaesar.oml.ConceptInstanceReference;
-import io.opencaesar.oml.ConceptReference;
-import io.opencaesar.oml.ConceptTypeAssertion;
 import io.opencaesar.oml.DecimalLiteral;
 import io.opencaesar.oml.Description;
 import io.opencaesar.oml.DescriptionBundle;
-import io.opencaesar.oml.DescriptionBundleExtension;
-import io.opencaesar.oml.DescriptionBundleInclusion;
-import io.opencaesar.oml.DescriptionBundleUsage;
-import io.opencaesar.oml.DescriptionExtension;
 import io.opencaesar.oml.DescriptionStatement;
-import io.opencaesar.oml.DescriptionUsage;
 import io.opencaesar.oml.DifferentFromPredicate;
 import io.opencaesar.oml.DoubleLiteral;
 import io.opencaesar.oml.Element;
 import io.opencaesar.oml.Entity;
-import io.opencaesar.oml.EnumeratedScalar;
-import io.opencaesar.oml.EnumeratedScalarReference;
-import io.opencaesar.oml.FacetedScalar;
-import io.opencaesar.oml.FacetedScalarReference;
-import io.opencaesar.oml.Feature;
-import io.opencaesar.oml.FeaturePredicate;
 import io.opencaesar.oml.ForwardRelation;
 import io.opencaesar.oml.IdentifiedElement;
+import io.opencaesar.oml.Import;
+import io.opencaesar.oml.ImportKind;
 import io.opencaesar.oml.Instance;
+import io.opencaesar.oml.InstanceEnumerationAxiom;
 import io.opencaesar.oml.IntegerLiteral;
 import io.opencaesar.oml.KeyAxiom;
-import io.opencaesar.oml.LinkAssertion;
 import io.opencaesar.oml.Literal;
+import io.opencaesar.oml.LiteralEnumerationAxiom;
 import io.opencaesar.oml.Member;
 import io.opencaesar.oml.NamedInstance;
-import io.opencaesar.oml.NamedInstanceReference;
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.Ontology;
 import io.opencaesar.oml.Predicate;
+import io.opencaesar.oml.Property;
+import io.opencaesar.oml.PropertyCardinalityRestrictionAxiom;
+import io.opencaesar.oml.PropertyEquivalenceAxiom;
+import io.opencaesar.oml.PropertyPredicate;
+import io.opencaesar.oml.PropertyRangeRestrictionAxiom;
+import io.opencaesar.oml.PropertySelfRestrictionAxiom;
+import io.opencaesar.oml.PropertyValueAssertion;
+import io.opencaesar.oml.PropertyValueRestrictionAxiom;
 import io.opencaesar.oml.QuotedLiteral;
 import io.opencaesar.oml.RangeRestrictionKind;
-import io.opencaesar.oml.Reference;
 import io.opencaesar.oml.Relation;
-import io.opencaesar.oml.RelationCardinalityRestrictionAxiom;
+import io.opencaesar.oml.RelationBase;
 import io.opencaesar.oml.RelationEntity;
 import io.opencaesar.oml.RelationEntityPredicate;
-import io.opencaesar.oml.RelationEntityReference;
 import io.opencaesar.oml.RelationInstance;
-import io.opencaesar.oml.RelationInstanceReference;
-import io.opencaesar.oml.RelationRangeRestrictionAxiom;
-import io.opencaesar.oml.RelationReference;
-import io.opencaesar.oml.RelationTargetRestrictionAxiom;
-import io.opencaesar.oml.RelationTypeAssertion;
 import io.opencaesar.oml.ReverseRelation;
 import io.opencaesar.oml.Rule;
-import io.opencaesar.oml.RuleReference;
 import io.opencaesar.oml.SameAsPredicate;
 import io.opencaesar.oml.Scalar;
+import io.opencaesar.oml.ScalarEquivalenceAxiom;
 import io.opencaesar.oml.ScalarProperty;
-import io.opencaesar.oml.ScalarPropertyCardinalityRestrictionAxiom;
-import io.opencaesar.oml.ScalarPropertyRangeRestrictionAxiom;
-import io.opencaesar.oml.ScalarPropertyReference;
-import io.opencaesar.oml.ScalarPropertyValueAssertion;
-import io.opencaesar.oml.ScalarPropertyValueRestrictionAxiom;
-import io.opencaesar.oml.SeparatorKind;
+import io.opencaesar.oml.SemanticProperty;
+import io.opencaesar.oml.SpecializableProperty;
 import io.opencaesar.oml.SpecializableTerm;
 import io.opencaesar.oml.SpecializationAxiom;
 import io.opencaesar.oml.Structure;
 import io.opencaesar.oml.StructureInstance;
-import io.opencaesar.oml.StructureReference;
 import io.opencaesar.oml.StructuredProperty;
-import io.opencaesar.oml.StructuredPropertyCardinalityRestrictionAxiom;
-import io.opencaesar.oml.StructuredPropertyRangeRestrictionAxiom;
-import io.opencaesar.oml.StructuredPropertyReference;
-import io.opencaesar.oml.StructuredPropertyValueAssertion;
-import io.opencaesar.oml.StructuredPropertyValueRestrictionAxiom;
 import io.opencaesar.oml.Type;
+import io.opencaesar.oml.TypeAssertion;
 import io.opencaesar.oml.TypePredicate;
+import io.opencaesar.oml.UnreifiedRelation;
 import io.opencaesar.oml.Vocabulary;
 import io.opencaesar.oml.VocabularyBundle;
-import io.opencaesar.oml.VocabularyBundleExtension;
-import io.opencaesar.oml.VocabularyBundleInclusion;
-import io.opencaesar.oml.VocabularyExtension;
 import io.opencaesar.oml.VocabularyStatement;
-import io.opencaesar.oml.VocabularyUsage;
 
 /**
  * The <b>Write</b> API for the model. It complements the OML setter API by additional utilities.
@@ -152,7 +129,7 @@ public class OmlWrite {
      * @param objects the given list of objects
      */
     @SuppressWarnings("unchecked")
-    protected static void setCrossReferences(Ontology ontology, Element subject, EReference eRef, List<Element> objects) {
+    protected static void setCrossReferences(Ontology ontology, Element subject, EReference eRef, List<? extends Element> objects) {
         final Class<? extends Element> objectClass = (Class<? extends Element>) eRef.getEType().getInstanceClass();
         assert !eRef.isContainment() : eRef.getName()+" is a containment reference";
         assert eRef.isMany() : eRef.getName()+" is a singular reference";
@@ -163,28 +140,22 @@ public class OmlWrite {
     /**
      * Sets the given object to be contained by the given subject in the context of the given ontology
      * 
-     * If the subject is a member of the given ontology; then the given member eRef will be used as the containment eRef
-     * otherwise a reference to the subject is created (or retrieved) first in the ontology, then the given reference eRef will be used 
-     * as the containment eRef. 
-     * 
      * @param ontology the given ontology
      * @param subject the given subject
      * @param elementERef the containment eRef to use on subject if it belongs to the given ontology
-     * @param referenceERef the containment eRef to use on subject if the subject does not belong to the given ontology
      * @param object the given object 
      */
     @SuppressWarnings("unchecked")
-    protected static void setContainmentReference(Ontology ontology, Element subject, EReference elementERef, EReference referenceERef, Element object) {
+    protected static void setContainmentReference(Ontology ontology, Element subject, EReference elementERef, Element object) {
         final Class<? extends Element> objectClass = (Class<? extends Element>) elementERef.getEType().getInstanceClass();
         assert elementERef.isContainment() : elementERef.getName()+" is not a containment reference";
-        assert referenceERef.isContainment() : referenceERef.getName()+" is not a containment reference";
         assert objectClass.isInstance(object) : object+" is not an instance of "+objectClass.getName();
-        assert elementERef.getEType() == referenceERef.getEType() : elementERef.getName()+" does not have the same type as "+referenceERef.getName();
+        assert elementERef.getEType() == elementERef.getEType() : elementERef.getName()+" does not have the same type as "+elementERef.getName();
         if (object != null && subject != null) {
             if (subject.getOntology() == ontology) {
                 ((List<Element>)subject.eGet(elementERef)).add(object);
             } else if (subject instanceof Member){
-                ((List<Element>)getOrAddReference(ontology, (Member)subject).eGet(referenceERef)).add(object);
+                ((List<Element>)getOrAddReference(ontology, (Member)subject).eGet(elementERef)).add(object);
             }
         }
     }
@@ -206,8 +177,8 @@ public class OmlWrite {
      * @param member the given member
      * @return a reference to the given member in the context of the given ontology
      */
-    protected static Reference getOrAddReference(Ontology ontology, Member member) {
-        Reference reference = OmlRead.getReferences(ontology).stream().filter(i -> OmlRead.resolve(i) == member).findFirst().orElse(null);
+    protected static Member getOrAddReference(Ontology ontology, Member member) {
+        Member reference = OmlRead.getReferences(ontology).stream().filter(i -> i.getRef() == member).findFirst().orElse(null);
         if (reference == null) {
             reference = createReference(member);
             if (ontology instanceof Vocabulary) {
@@ -221,132 +192,47 @@ public class OmlWrite {
 
     // ------------------------------------------------------------------------------------
     
-    // Element
-    
-    /**
-     * Deletes the given element
-     * 
-     * @param element the given element to delete
-     */
-    public static void delete(Element element) {
-        EcoreUtil.delete(element);
-    }
-    
-    // Named Instance
-
-    /**
-     * Deletes the given instance recursively in the resource set by also deleting its 
-     * referencing links and relation instances
-     * 
-     * @param instance the given instance
-     */
-    public static void deleteRecursively(NamedInstance instance) {
-        for (RelationInstance ri : OmlSearch.findRelationInstancesWithTarget(instance)) {
-            deleteRecursively(ri);
-        };
-        for (RelationInstance ri : OmlSearch.findRelationInstancesWithSource(instance)) {
-            deleteRecursively(ri);
-        };
-        for (LinkAssertion a : OmlSearch.findLinkAssertionsWithTarget(instance)) {
-            delete(a);
-        };
-        for (Reference r : OmlSearch.findReferences(instance)) {
-            delete(r);
-        };
-        delete(instance);
-    }
-    
     // Annotation
 
     /**
-     * Adds a new annotation on a given ontology
+     * Adds a new annotation with either a literal or reference value (but not both) on a given ontology
      * 
      * @param ontology the ontology to annotate
      * @param property the given annotation property
-     * @param value the annotation literal value
+     * @param literalValue the annotation literal value
+     * @param referenceValue the annotation reference value
      * @return a new annotation on the given ontology
      */
-    public static Annotation addAnnotation(Ontology ontology, AnnotationProperty property, Literal value) {
+    public static Annotation addAnnotation(Ontology ontology, AnnotationProperty property, Literal literalValue, Member referenceValue) {
         final Annotation annotation = create(Annotation.class);
-        annotation.setValue(value);
+        if (literalValue != null)
+        	annotation.setLiteralValue(literalValue);
+        else if (referenceValue != null)
+        	annotation.setReferenceValue(referenceValue);
         setCrossReference(ontology, annotation, OmlPackage.Literals.ANNOTATION__PROPERTY, property);
         ontology.getOwnedAnnotations().add(annotation);
         return annotation;
     }
 
     /**
-     * Adds a new annotation on a given element in the context of a given ontology
+     * Adds a new annotation with either a literal or reference value (but not both) on a given element in the context of a given ontology
      * 
      * @param ontology the context ontology that will have the annotation axiom
      * @param element the annotated element to put the annotation on
      * @param property the given annotation property
-     * @param value the annotation literal value
+     * @param literalValue the annotation literal value
+     * @param referenceValue the annotation reference value
      * @return a new annotation on the given member in the context of the given ontology
      */
-    public static Annotation addAnnotation(Ontology ontology, AnnotatedElement element, AnnotationProperty property, Literal value) {
+    public static Annotation addAnnotation(Ontology ontology, IdentifiedElement element, AnnotationProperty property, Literal literalValue, Member referenceValue) {
         final Annotation annotation = create(Annotation.class);
-        annotation.setValue(value);
+        if (literalValue != null)
+        	annotation.setLiteralValue(literalValue);
+        else if (referenceValue != null)
+        	annotation.setReferenceValue(referenceValue);
         setCrossReference(ontology, annotation, OmlPackage.Literals.ANNOTATION__PROPERTY, property);
-        setContainmentReference(ontology, element, OmlPackage.Literals.ANNOTATED_ELEMENT__OWNED_ANNOTATIONS, OmlPackage.Literals.REFERENCE__OWNED_ANNOTATIONS, annotation);
+        setContainmentReference(ontology, element, OmlPackage.Literals.IDENTIFIED_ELEMENT__OWNED_ANNOTATIONS, annotation);
         return annotation;
-    }
-
-    /**
-     * Sets the value of a given annotation property on a given element in the context of a given ontology
-     * 
-     * This function assumes that the annotation property should have a single value in the given ontology context
-     * 
-     * @param ontology the context ontology that will have the annotation axiom
-     * @param property the given annotation property
-     * @param value the annotation literal value
-     */
-    public static void setAnnotationPropertyValue(Ontology ontology, AnnotationProperty property, Literal value) {
-        Annotation annotation = ontology.getOwnedAnnotations().stream()
-            .filter(a -> a.getProperty() == property)
-            .findFirst().orElse(null);
-        if (annotation != null) {
-            if (value != null) {
-                annotation.setValue(value);
-            } else {
-                delete(annotation);
-            }
-        } else if (value != null) {
-            annotation = addAnnotation(ontology, property, value);
-        }
-    }
-
-    /**
-     * Sets the value of a given annotation property on a given element in the context of a given ontology
-     * 
-     * This function assumes that the annotation property should have a single value in the given ontology context
-     * 
-     * @param ontology the context ontology that will have the annotation axiom
-     * @param element the given annotated element
-     * @param property the given annotation property
-     * @param value the annotation literal value
-     */
-    public static void setAnnotationPropertyValue(Ontology ontology, AnnotatedElement element, AnnotationProperty property, Literal value) {
-        Annotation annotation = null;
-        if (element != null) {
-	        if (element.getOntology() == ontology) {
-	            annotation = element.getOwnedAnnotations().stream()
-	                .filter(a -> a.getProperty() == property)
-	                .findFirst().orElse(null);
-	        } else if (element instanceof Member){
-	            annotation = getOrAddReference(ontology, (Member)element).getOwnedAnnotations().stream()
-	                .filter(a -> a.getProperty() == property)
-	                .findFirst().orElse(null);
-	        }
-        }
-        if (annotation != null) {
-            if (value != null) {
-                annotation.setValue(value);
-            } else {
-                delete(annotation);
-            }
-        } else if (value != null) {
-            annotation = addAnnotation(ontology, element, property, value);
-        }
     }
 
     // Ontology
@@ -355,14 +241,13 @@ public class OmlWrite {
      * Creates a new ontology of the given sub type 
      * 
      * @param type the sub type of ontology to create
-     * @param iri the IRI of the new ontology
-     * @param separator the separator kind of the new ontology
+     * @param namespace the namespace of the new ontology
      * @param prefix the prefix of the new ontology
      * @return a newly created ontology added to the contents of a resource with the given URI
      */
-    protected static <T extends Ontology> T createOntology(Class<T> type, String iri, SeparatorKind separator, String prefix) {
+    protected static <T extends Ontology> T createOntology(Class<T> type, String namespace, String prefix) {
         final T ontology = create(type);
-        ontology.setNamespace(iri+separator);
+        ontology.setNamespace(namespace);
         ontology.setPrefix(prefix);
         return ontology;
     }
@@ -372,13 +257,12 @@ public class OmlWrite {
     /**
      * Creates a new vocabulary 
      * 
-     * @param iri the IRI of the new vocabulary
-     * @param separator the separator kind of the new vocabulary
+     * @param namespace the namespace of the new vocabulary
      * @param prefix the prefix of the new vocabulary
      * @return a newly created vocabulary added to the contents of a resource with the given URI
      */
-    public static Vocabulary createVocabulary(String iri, SeparatorKind separator, String prefix) {
-        return createOntology(Vocabulary.class, iri, separator, prefix);
+    public static Vocabulary createVocabulary(String namespace, String prefix) {
+        return createOntology(Vocabulary.class, namespace, prefix);
     }
 
     // VocabularyBundle
@@ -386,13 +270,12 @@ public class OmlWrite {
     /**
      * Creates a new vocabulary bundle 
      * 
-     * @param iri the IRI of the new vocabulary bundle
-     * @param separator the separator kind of the new vocabulary bundle
+     * @param namespace the namespace of the new vocabulary bundle
      * @param prefix the prefix of the new vocabulary bundle
      * @return a newly created vocabulary bunel added to the contents of a resource with the given URI
      */
-    public static VocabularyBundle createVocabularyBundle(String iri, SeparatorKind separator, String prefix) {
-        return createOntology(VocabularyBundle.class, iri, separator, prefix);
+    public static VocabularyBundle createVocabularyBundle(String namespace, String prefix) {
+        return createOntology(VocabularyBundle.class, namespace, prefix);
     }
 
     // Description
@@ -400,27 +283,25 @@ public class OmlWrite {
     /**
      * Creates a new description 
      * 
-     * @param iri the IRI of the new description
-     * @param separator the separator kind of the new description
+     * @param namespace the namespace of the new description
      * @param prefix the prefix of the new description
      * @return a newly created description added to the contents of a resource with the given URI
      */
-    public static Description createDescription(String iri, SeparatorKind separator, String prefix) {
-        return createOntology(Description.class, iri, separator, prefix);
+    public static Description createDescription(String namespace, String prefix) {
+        return createOntology(Description.class, namespace, prefix);
     }
+
+    // DescriptionBundle
 
     /**
      * Creates a new description bundle 
      * 
-     * @param iri the IRI of the new description bundle
-     * @param separator the separator kind of the new description bundle
+     * @param namespace the namespace of the new description bundle
      * @param prefix the prefix of the new description bundle
      * @return a newly created description bundle added to the contents of a resource with the given URI
      */
-    // DescriptionBundle
-    
-    public static DescriptionBundle createDescriptionBundle(String iri, SeparatorKind separator, String prefix) {
-        return createOntology(DescriptionBundle.class, iri, separator, prefix);
+    public static DescriptionBundle createDescriptionBundle(String namespace, String prefix) {
+        return createOntology(DescriptionBundle.class, namespace, prefix);
     }
 
     // Aspect
@@ -462,8 +343,8 @@ public class OmlWrite {
      * 
      * @param vocabulary the context vocabulary
      * @param name the name of the new concept
-     * @param source the given source entity
-     * @param target the given target entity
+     * @param sources the given list of source entities
+     * @param targets the given list of target entities
      * @param functional whether the relation entity is functional
      * @param inverseFunctional whether the relation entity is inverse functional
      * @param symmetric whether the relation entity is symmetric
@@ -473,7 +354,7 @@ public class OmlWrite {
      * @param transitive whether the relation entity is transitive
      * @return a new relation entity that is added to the given vocabulary
      */
-    public static RelationEntity addRelationEntity(Vocabulary vocabulary, String name, Entity source, Entity target, 
+    public static RelationEntity addRelationEntity(Vocabulary vocabulary, String name, List<Entity> sources, List<Entity> targets, 
         boolean functional, boolean inverseFunctional, boolean symmetric, 
         boolean asymmetric, boolean reflexive, boolean irreflexive, boolean transitive) {
         final RelationEntity relation = create(RelationEntity.class);
@@ -485,8 +366,8 @@ public class OmlWrite {
         relation.setReflexive(reflexive);
         relation.setIrreflexive(irreflexive);
         relation.setTransitive(transitive);
-        setCrossReference(vocabulary, relation, OmlPackage.Literals.RELATION_ENTITY__SOURCE, source);
-        setCrossReference(vocabulary, relation, OmlPackage.Literals.RELATION_ENTITY__TARGET, target);
+        setCrossReferences(vocabulary, relation, OmlPackage.Literals.RELATION_BASE__SOURCES, sources);
+        setCrossReferences(vocabulary, relation, OmlPackage.Literals.RELATION_BASE__TARGETS, targets);
         vocabulary.getOwnedStatements().add(relation);
         return relation;
     }
@@ -530,18 +411,18 @@ public class OmlWrite {
      * 
      * @param vocabulary the context vocabulary
      * @param name the name of the new scalar property
-     * @param domain the given domain classifier
-     * @param range the given range scalar
+     * @param domains the given list of domain classifiers
+     * @param ranges the given list of range scalars
      * @param functional whether the scalar property is functional
      * @return a new scalar property that is added to the given vocabulary
      */
     public static ScalarProperty addScalarProperty(Vocabulary vocabulary, String name,
-        Classifier domain, Scalar range, boolean functional) {
+        List<Classifier> domains, List<Scalar> ranges, boolean functional) {
         final ScalarProperty property = create(ScalarProperty.class);
         property.setName(name);
         property.setFunctional(functional);
-        setCrossReference(vocabulary, property, OmlPackage.Literals.SCALAR_PROPERTY__DOMAIN, domain);
-        setCrossReference(vocabulary, property, OmlPackage.Literals.SCALAR_PROPERTY__RANGE, range);
+        setCrossReferences(vocabulary, property, OmlPackage.Literals.SCALAR_PROPERTY__DOMAINS, domains);
+        setCrossReferences(vocabulary, property, OmlPackage.Literals.SCALAR_PROPERTY__RANGES, ranges);
         vocabulary.getOwnedStatements().add(property);
         return property;
     }
@@ -553,75 +434,38 @@ public class OmlWrite {
      * 
      * @param vocabulary the context vocabulary
      * @param name the name of the new structured property
-     * @param domain the given domain classifier
-     * @param range the given target structure
+     * @param domains the given list of domain classifiers
+     * @param ranges the given list of target structures
      * @param functional whether the structured property is functional
      * @return a new structured property that is added to the given vocabulary
      */
     public static StructuredProperty addStructuredProperty(Vocabulary vocabulary, String name, 
-        Classifier domain, Structure range, boolean functional) {
+        List<Classifier> domains, List<Structure> ranges, boolean functional) {
         final StructuredProperty property = create(StructuredProperty.class);
         property.setName(name);
         property.setFunctional(functional);
-        setCrossReference(vocabulary, property, OmlPackage.Literals.STRUCTURED_PROPERTY__DOMAIN, domain);
-        setCrossReference(vocabulary, property, OmlPackage.Literals.STRUCTURED_PROPERTY__RANGE, range);
+        setCrossReferences(vocabulary, property, OmlPackage.Literals.STRUCTURED_PROPERTY__DOMAINS, domains);
+        setCrossReferences(vocabulary, property, OmlPackage.Literals.STRUCTURED_PROPERTY__RANGES, ranges);
         vocabulary.getOwnedStatements().add(property);
         return property;
     }
     
-    // FacetedScalar
+    // Scalar
 
     /**
-     * Creates a new faceted scalar and adds it to the given vocabulary
+     * Creates a new scalar and adds it to the given vocabulary
      * 
      * @param vocabulary the context vocabulary
-     * @param name the name of the new faceted scalar
-     * @param length the length facet
-     * @param minLength the min length facet
-     * @param maxLength the max length facet
-     * @param pattern the string pattern facet
-     * @param language the language facet
-     * @param minInclusive the min inclusive facet
-     * @param minExclusive the min exclusive facet
-     * @param maxInclusive the max inclusive facet
-     * @param maxExclusive the max exclusive facet
-     * @return a new faceted scalar that is added to the given vocabulary
+     * @param name the name of the new scalar
+     * @return a new scalar that is added to the given vocabulary
      */
-    public static FacetedScalar addFacetedScalar(Vocabulary vocabulary, String name, Long length, Long minLength, Long maxLength, String pattern, 
-        String language, Literal minInclusive, Literal minExclusive, Literal maxInclusive, Literal maxExclusive) {
-        final FacetedScalar scalar = create(FacetedScalar.class);
+    public static Scalar addScalar(Vocabulary vocabulary, String name) {
+        final Scalar scalar = create(Scalar.class);
         scalar.setName(name);
-        scalar.setLength(length);
-        scalar.setMinLength(minLength);
-        scalar.setMaxLength(maxLength);
-        scalar.setPattern(pattern);
-        scalar.setLanguage(language);
-        scalar.setMinInclusive(minInclusive);
-        scalar.setMinExclusive(minExclusive);
-        scalar.setMaxInclusive(maxInclusive);
-        scalar.setMaxExclusive(maxExclusive);
         vocabulary.getOwnedStatements().add(scalar);
         return scalar;
     }
         
-    // EnumeratedScalar
-
-    /**
-     * Creates a new enumerated scalar and adds it to the given vocabulary
-     * 
-     * @param vocabulary the context vocabulary
-     * @param name the name of the new enumerated scalar
-     * @param literals the list of literals making up the enumerated scalar value space
-     * @return a new enumerated scalar that is added to the given vocabulary
-     */
-    public static EnumeratedScalar addEnumeratedScalar(Vocabulary vocabulary, String name, Literal...literals) {
-        final EnumeratedScalar scalar = create(EnumeratedScalar.class);
-        scalar.setName(name);
-        scalar.getLiterals().addAll(Arrays.asList(literals));
-        vocabulary.getOwnedStatements().add(scalar);
-        return scalar;
-    }
-    
     // ForwardRelation
 
     /**
@@ -641,23 +485,59 @@ public class OmlWrite {
     // ReverseRelation
 
     /**
-     * Creates a reverse relation and adds it to the given relation entity
+     * Creates a reverse relation and adds it to the given relation base
      * 
-     * @param entity the context relation entity
+     * @param base the context relation base
      * @param name the name of the new reverse relation
-     * @return a reverse relation that is added to the given relation entity
+     * @return a reverse relation that is added to the given relation base
      */
-    public static ReverseRelation addReverseRelation(RelationEntity entity, String name) {
+    public static ReverseRelation addReverseRelation(RelationBase base, String name) {
         final ReverseRelation reverse = create(ReverseRelation.class);
         reverse.setName(name);
-        entity.setReverseRelation(reverse);
+        base.setReverseRelation(reverse);
         return reverse;
     }
     
+    // UnreifiedRelation
+
+    /**
+     * Creates a new unreified relation and adds it to the given vocabulary
+     * 
+     * @param vocabulary the context vocabulary
+     * @param name the name of the new concept
+     * @param sources the given list of source entities
+     * @param targets the given list of target entities
+     * @param functional whether the relation entity is functional
+     * @param inverseFunctional whether the relation entity is inverse functional
+     * @param symmetric whether the relation entity is symmetric
+     * @param asymmetric whether the relation entity is asymmetric
+     * @param reflexive whether the relation entity is reflexive
+     * @param irreflexive whether the relation entity is irreflexive
+     * @param transitive whether the relation entity is transitive
+     * @return a new unreified relation that is added to the given vocabulary
+     */
+    public static UnreifiedRelation addUnreifiedRelation(Vocabulary vocabulary, String name, List<Entity> sources, List<Entity> targets, 
+        boolean functional, boolean inverseFunctional, boolean symmetric, 
+        boolean asymmetric, boolean reflexive, boolean irreflexive, boolean transitive) {
+        final UnreifiedRelation relation = create(UnreifiedRelation.class);
+        relation.setName(name);
+        relation.setFunctional(functional);
+        relation.setInverseFunctional(inverseFunctional);
+        relation.setSymmetric(symmetric);
+        relation.setAsymmetric(asymmetric);
+        relation.setReflexive(reflexive);
+        relation.setIrreflexive(irreflexive);
+        relation.setTransitive(transitive);
+        setCrossReferences(vocabulary, relation, OmlPackage.Literals.RELATION_BASE__SOURCES, sources);
+        setCrossReferences(vocabulary, relation, OmlPackage.Literals.RELATION_BASE__TARGETS, targets);
+        vocabulary.getOwnedStatements().add(relation);
+        return relation;
+    }
+
     // Rule
 
     /**
-     * Creates a rule and adds it to the given relation entity
+     * Creates a rule and adds it to the given vocabulary
      * 
      * @param vocabulary the context vocabulary
      * @param name the name of the new rule
@@ -672,6 +552,22 @@ public class OmlWrite {
         rule.getAntecedent().addAll(Arrays.asList(antecedent));
         vocabulary.getOwnedStatements().add(rule);
         return rule;
+    }
+
+    // BuiltIn
+
+    /**
+     * Creates a builtIn and adds it to the given vocabulary
+     * 
+     * @param vocabulary the context vocabulary
+     * @param name the name of the new builtIn
+     * @return a builtIn that is added to the given vocabulary
+     */
+    public static BuiltIn addBuiltIn(Vocabulary vocabulary, String name) {
+        final BuiltIn builtIn = create(BuiltIn.class);
+        builtIn.setName(name);
+        vocabulary.getOwnedStatements().add(builtIn);
+        return builtIn;
     }
 
     // StructureInstance
@@ -725,7 +621,7 @@ public class OmlWrite {
         return instance;
     }
 
-    // MemerReference
+    // Member
 
     /**
      * Creates a reference for the given member
@@ -733,426 +629,80 @@ public class OmlWrite {
      * @param member the given member
      * @return a reference for the given member
      */
-    protected static Reference createReference(Member member) {
+    @SuppressWarnings("unchecked")
+	protected static <T extends Member> T createReference(T member) {
         if (member instanceof Aspect) {
-            return createReference((Concept) member);
+            final var reference = create(Aspect.class);
+            reference.setRef((Aspect)member);
+            return (T) reference;
         } else if (member instanceof Concept) {
-            return createReference((Concept) member);
+            final var reference = create(Concept.class);
+            reference.setRef((Concept)member);
+            return (T) reference;
         } else if (member instanceof RelationEntity) {
-            return createReference((RelationEntity) member);
+            final var reference = create(RelationEntity.class);
+            reference.setRef((RelationEntity)member);
+            return (T) reference;
         } else if (member instanceof Structure) {
-            return createReference((Structure) member);
-        } else if (member instanceof EnumeratedScalar) {
-            return createReference((EnumeratedScalar) member);
-        } else if (member instanceof FacetedScalar) {
-            return createReference((FacetedScalar) member);
+            final var reference = create(Structure.class);
+            reference.setRef((Structure)member);
+            return (T) reference;
+        } else if (member instanceof Scalar) {
+            final var reference = create(Scalar.class);
+            reference.setRef((Scalar)member);
+            return (T) reference;
         } else if (member instanceof AnnotationProperty) {
-            return createReference((AnnotationProperty) member);
+            final var reference = create(AnnotationProperty.class);
+            reference.setRef((AnnotationProperty)member);
+            return (T) reference;
         } else if (member instanceof ScalarProperty) {
-            return createReference((ScalarProperty) member);
+            final var reference = create(ScalarProperty.class);
+            reference.setRef((ScalarProperty)member);
+            return (T) reference;
         } else if (member instanceof StructuredProperty) {
-            return createReference((StructuredProperty) member);
+            final var reference = create(StructuredProperty.class);
+            reference.setRef((StructuredProperty)member);
+            return (T) reference;
         } else if (member instanceof Relation) {
-            return createReference((Relation) member);
+            final var reference = create(UnreifiedRelation.class);
+            reference.setRef((Relation)member);
+            return (T) reference;
         } else if (member instanceof Rule) {
-            return createReference((Rule) member);
+            final var reference = create(Rule.class);
+            reference.setRef((Rule)member);
+            return (T) reference;
         } else if (member instanceof ConceptInstance) {
-            return createReference((ConceptInstance) member);
+            final var reference = create(ConceptInstance.class);
+            reference.setRef((ConceptInstance)member);
+            return (T) reference;
         } else if (member instanceof RelationInstance) {
-            return createReference((RelationInstance) member);
+            final var reference = create(RelationInstance.class);
+            reference.setRef((RelationInstance)member);
+            return (T) reference;
         }
         return null;
     }
     
-    // AspectReference
+    // Import
     
     /**
-     * Creates a reference for the given aspect
+     * Creates an import and adds it to the given ontology
      * 
-     * @param aspect the given aspect
-     * @return a reference for the given aspect
+     * @param ontology the importing ontology
+     * @param kind the kind of import
+     * @param namespace the namespace of the imported ontology
+     * @param prefix the prefix of the imported ontology (optional)
+     * @return an import that is added to the importing ontology
      */
-    protected static AspectReference createReference(Aspect aspect) {
-        final AspectReference reference = create(AspectReference.class);
-        reference.setAspect(aspect);
-        return reference;
+    public static Import addImport(Ontology ontology, ImportKind kind, String namespace, String prefix) {
+        final Import import_ = create(Import.class);
+        import_.setKind(kind);
+        import_.setNamespace(namespace);
+        import_.setPrefix(prefix);
+        ontology.getOwnedImports().add(import_);
+        return import_;
     }
 
-    // ConceptReference
-
-    /**
-     * Creates a reference for the given concept
-     * 
-     * @param concept the given concept
-     * @return a reference for the given concept
-     */
-    protected static ConceptReference createReference(Concept concept) {
-        final ConceptReference reference = create(ConceptReference.class);
-        reference.setConcept(concept);
-        return reference;
-    }
-    
-    // RelationEntityReference
-
-    /**
-     * Creates a reference for the given relation entity
-     * 
-     * @param entity the given relation entity
-     * @return a reference for the given relation entity
-     */
-    protected static RelationEntityReference createReference(RelationEntity entity) {
-        final RelationEntityReference reference = create(RelationEntityReference.class);
-        reference.setEntity(entity);
-        return reference;
-    }
-    
-    // StructureReference
-
-    /**
-     * Creates a reference for the given structure
-     * 
-     * @param structure the given structure
-     * @return a reference for the given structure
-     */
-    protected static StructureReference createReference(Structure structure) {
-        final StructureReference reference = create(StructureReference.class);
-        reference.setStructure(structure);
-        return reference;
-    }
-    
-    // AnnotationPropertyReference
-
-    /**
-     * Creates a reference for the given annotation property
-     * 
-     * @param property the given annotation property
-     * @return a reference for the given annotation property
-     */
-    protected static AnnotationPropertyReference createReference(AnnotationProperty property) {
-        AnnotationPropertyReference reference = create(AnnotationPropertyReference.class);
-        reference.setProperty(property);
-        return reference;
-    }
-
-    // ScalarPropertyReference
-
-    /**
-     * Creates a reference for the given scalar property
-     * 
-     * @param property the given scalar property
-     * @return a reference for the given scalar property
-     */
-    protected static ScalarPropertyReference createReference(ScalarProperty property) {
-        ScalarPropertyReference reference = create(ScalarPropertyReference.class);
-        reference.setProperty(property);
-        return reference;
-    }
-    
-    // StructuredPropertyReference
-
-    /**
-     * Creates a reference for the given structured property
-     * 
-     * @param property the given structured property
-     * @return a reference for the given structured property
-     */
-    protected static StructuredPropertyReference createReference(StructuredProperty property) {
-        StructuredPropertyReference reference = create(StructuredPropertyReference.class);
-        reference.setProperty(property);
-        return reference;
-    }
-    
-    // FacetedScalarReference
-
-    /**
-     * Creates a reference for the given faceted scalar
-     * 
-     * @param scalar the given faceted scalar
-     * @return a reference for the given faceted scalar
-     */
-    protected static FacetedScalarReference createReference(FacetedScalar scalar) {
-        FacetedScalarReference reference = create(FacetedScalarReference.class);
-        reference.setScalar(scalar);
-        return reference;
-    }
-    
-    // EnumeratedScalarReference
-
-    /**
-     * Creates a reference for the given enumerated scalar
-     * 
-     * @param scalar the given enumerated scalar
-     * @return a reference for the given enumerated scalar
-     */
-    protected static EnumeratedScalarReference createReference(EnumeratedScalar scalar) {
-        EnumeratedScalarReference reference = create(EnumeratedScalarReference.class);
-        reference.setScalar(scalar);
-        return reference;
-    }
-
-    // RelationReference
-
-    /**
-     * Creates a reference for the given relation
-     * 
-     * @param relation the given relation
-     * @return a reference for the given relation
-     */
-    protected static RelationReference createReference(Relation relation) {
-        RelationReference reference = create(RelationReference.class);
-        reference.setRelation(relation);
-        return reference;
-    }
-    
-    // RuleReference
-
-    /**
-     * Creates a reference for the given rule
-     * 
-     * @param rule the given rule
-     * @return a reference for the given rule
-     */
-    protected static RuleReference createReference(Rule rule) {
-        RuleReference reference = create(RuleReference.class);
-        reference.setRule(rule);
-        return reference;
-    }
-    
-    // ConceptInstanceReference
-
-    /**
-     * Creates a reference for the given concept instance
-     * 
-     * @param instance the given concept instance
-     * @return a reference for the given concept instance
-     */
-    protected static ConceptInstanceReference createReference(ConceptInstance instance) {
-        ConceptInstanceReference reference = create(ConceptInstanceReference.class);
-        reference.setInstance(instance);
-        return reference;
-    }
-
-    // RelationInstanceReference
-
-    /**
-     * Creates a reference for the given relation instance
-     * 
-     * @param instance the given relation instance
-     * @return a reference for the given relation instance
-     */
-    protected static RelationInstanceReference createReference(RelationInstance instance) {
-        RelationInstanceReference reference = create(RelationInstanceReference.class);
-        reference.setInstance(instance);
-        return reference;
-    }
-    
-    // VocabularyExtension
-    
-    /**
-     * Creates a vocabulary extension and adds it to the given vocabulary
-     * 
-     * @param vocabulary the context vocabulary
-     * @param extendedVocabularyIri the IRI of the extended vocabulary
-     * @param extendedVocabularySeparator the separator of the extended vocabulary (optional)
-     * @param extendedVocabularyPrefix the prefix of the extended vocabulary (optional)
-     * @return a vocabulary extension that is added to the given vocabulary
-     */
-    public static VocabularyExtension addVocabularyExtension(Vocabulary vocabulary, String extendedVocabularyIri, SeparatorKind extendedVocabularySeparator, String extendedVocabularyPrefix) {
-        final VocabularyExtension extension = create(VocabularyExtension.class);
-        if (extendedVocabularySeparator != null) {
-        	extension.setNamespace(extendedVocabularyIri+extendedVocabularySeparator);
-        } else {
-            extension.setNamespace(extendedVocabularyIri+SeparatorKind.HASH);
-        }
-        extension.setPrefix(extendedVocabularyPrefix);
-        vocabulary.getOwnedImports().add(extension);
-        return extension;
-    }
-
-    // VocabularyUsage
-    
-    /**
-     * Creates a vocabulary usage and adds it to the given vocabulary
-     * 
-     * @param vocabulary the context vocabulary
-     * @param usedDescriptionBoxIri the IRI of the used description box
-     * @param usedDescriptionBoxSeparator the separator of the used description box (optional)
-     * @param usedDescriptionBoxPrefix the prefix of the used description box (optional)
-     * @return a vocabulary usage that is added to the given vocabulary
-     */
-    public static VocabularyUsage addVocabularyUsage(Vocabulary vocabulary, String usedDescriptionBoxIri, SeparatorKind usedDescriptionBoxSeparator, String usedDescriptionBoxPrefix) {
-        final VocabularyUsage usage = create(VocabularyUsage.class);
-        if (usedDescriptionBoxSeparator != null) {
-        	usage.setNamespace(usedDescriptionBoxIri+usedDescriptionBoxSeparator);
-        } else {
-            usage.setNamespace(usedDescriptionBoxIri+SeparatorKind.HASH);
-        }
-        usage.setPrefix(usedDescriptionBoxPrefix);
-        vocabulary.getOwnedImports().add(usage);
-        return usage;
-    }
-
-    // VocabularyBundleExtension
-    
-    /**
-     * Creates a vocabulary bundle extension and adds it to the given vocabulary bundle
-     * 
-     * @param bundle the context vocabulary bundle
-     * @param extendedVocabularyBundleIri the IRI of the extended vocabulary bundle
-     * @param extendedVocabularyBundleSeparator the separator of the extended vocabulary bundle (optional)
-     * @param extendedVocabularyBundlePrefix the prefix of the extended vocabulary bundle (optional)
-     * @return a vocabulary bundle extension that is added to the given vocabulary bundle
-     */
-    public static VocabularyBundleExtension addVocabularyBundleExtension(VocabularyBundle bundle, String extendedVocabularyBundleIri, SeparatorKind extendedVocabularyBundleSeparator, String extendedVocabularyBundlePrefix) {
-        final VocabularyBundleExtension extension = create(VocabularyBundleExtension.class);
-        if (extendedVocabularyBundleSeparator != null) {
-        	extension.setNamespace(extendedVocabularyBundleIri+extendedVocabularyBundleSeparator);
-        } else {
-            extension.setNamespace(extendedVocabularyBundleIri);
-        }
-        extension.setPrefix(extendedVocabularyBundlePrefix+SeparatorKind.HASH);
-        bundle.getOwnedImports().add(extension);
-        return extension;
-    }
-
-    // VocabularyBundleInclusion
-    
-    /**
-     * Creates a vocabulary bundle inclusion and adds it to the given vocabulary bundle
-     * 
-     * @param bundle the context vocabulary bundle
-     * @param includedVocabularyIri the IRI of the included vocabulary
-     * @param includedVocabularySeparator the separator of the included vocabulary (optional)
-     * @param includedVocabularyPrefix the prefix of the included vocabulary (optional)
-     * @return a vocabulary bundle inclusion that is added to the given vocabulary bundle
-     */
-    public static VocabularyBundleInclusion addVocabularyBundleInclusion(VocabularyBundle bundle, String includedVocabularyIri, SeparatorKind includedVocabularySeparator, String includedVocabularyPrefix) {
-        final VocabularyBundleInclusion inclusion = create(VocabularyBundleInclusion.class);
-        if (includedVocabularySeparator != null) {
-        	inclusion.setNamespace(includedVocabularyIri+includedVocabularySeparator);
-        } else {
-            inclusion.setNamespace(includedVocabularyIri+SeparatorKind.HASH);
-        }
-       inclusion.setPrefix(includedVocabularyPrefix);
-        bundle.getOwnedImports().add(inclusion);
-        return inclusion;
-    }
-
-    // DescriptionExtension
-
-    /**
-     * Creates a description extension and adds it to the given description
-     * 
-     * @param description the context description
-     * @param extendedDescriptionIri the IRI of the extended description
-     * @param extendedDescriptionSeparator the separator of the extended description (optional)
-     * @param extendedDescriptionPrefix the prefix of the extended description (optional)
-     * @return a description extension that is added to the given description
-     */
-    public static DescriptionExtension addDescriptionExtension(Description description, String extendedDescriptionIri, SeparatorKind extendedDescriptionSeparator, String extendedDescriptionPrefix) {
-        final DescriptionExtension extension = create(DescriptionExtension.class);
-        if (extendedDescriptionSeparator != null) {
-        	extension.setNamespace(extendedDescriptionIri+extendedDescriptionSeparator);
-        } else {
-            extension.setNamespace(extendedDescriptionIri+SeparatorKind.HASH);
-        }
-        extension.setPrefix(extendedDescriptionPrefix);
-        description.getOwnedImports().add(extension);
-        return extension;
-    }
-    
-    // DescriptionUsage
-
-    /**
-     * Creates a description usage and adds it to the given description
-     * 
-     * @param description the context description
-     * @param usedVocabularyBoxIri the IRI of the used vocabulary box
-     * @param usedVocabularyBoxSeparator the separator of the used vocabulary box (optional)
-     * @param usedVocabularyBoxPrefix the prefix of the used vocabulary box (optional)
-     * @return a description usage that is added to the given description
-     */
-    public static DescriptionUsage addDescriptionUsage(Description description, String usedVocabularyBoxIri, SeparatorKind usedVocabularyBoxSeparator, String usedVocabularyBoxPrefix) {
-        final DescriptionUsage usage = create(DescriptionUsage.class);
-        if (usedVocabularyBoxSeparator != null) {
-        	usage.setNamespace(usedVocabularyBoxIri+usedVocabularyBoxSeparator);
-        } else {
-            usage.setNamespace(usedVocabularyBoxIri+SeparatorKind.HASH);
-        }
-        usage.setPrefix(usedVocabularyBoxPrefix);
-        description.getOwnedImports().add(usage);
-        return usage;
-    }
-    
-    // DescriptionBundleExtension
-    
-    /**
-     * Creates a description bundle extension and adds it to the given description bundle
-     * 
-     * @param bundle the context description bundle
-     * @param extendedDescriptionBundleIri the IRI of the extended vocabulary bundle
-     * @param extendedDescriptionBundleSeparator the separator of the extended vocabulary bundle (optional)
-     * @param extendedDescriptionBundlePrefix the prefix of the extended vocabulary bundle (optional)
-     * @return a description bundle extension that is added to the given description bundle
-     */
-    public static DescriptionBundleExtension addDescriptionBundleExtension(DescriptionBundle bundle, String extendedDescriptionBundleIri, SeparatorKind extendedDescriptionBundleSeparator, String extendedDescriptionBundlePrefix) {
-        final DescriptionBundleExtension extension = create(DescriptionBundleExtension.class);
-        if (extendedDescriptionBundleSeparator != null) {
-        	extension.setNamespace(extendedDescriptionBundleIri+extendedDescriptionBundleSeparator);
-        } else {
-            extension.setNamespace(extendedDescriptionBundleIri+SeparatorKind.HASH);
-        }
-        extension.setPrefix(extendedDescriptionBundlePrefix);
-        bundle.getOwnedImports().add(extension);
-        return extension;
-    }
-
-    // DescriptionBundleInclusion
-    
-    /**
-     * Creates a description bundle inclusion and adds it to the given description bundle
-     * 
-     * @param bundle the context description bundle
-     * @param includedDescriptionIri the IRI of the extended description
-     * @param includedDescriptionSeparator the separator of the extended description (optional)
-     * @param includedDescriptionPrefix the prefix of the extended description (optional)
-     * @return a description bundle inclusion that is added to the given description bundle
-     */
-    public static DescriptionBundleInclusion addDescriptionBundleInclusion(DescriptionBundle bundle, String includedDescriptionIri, SeparatorKind includedDescriptionSeparator, String includedDescriptionPrefix) {
-        final DescriptionBundleInclusion inclusion = create(DescriptionBundleInclusion.class);
-        if (includedDescriptionSeparator != null) {
-        	inclusion.setNamespace(includedDescriptionIri+includedDescriptionSeparator);
-        } else {
-            inclusion.setNamespace(includedDescriptionIri+SeparatorKind.HASH);
-        }
-        inclusion.setPrefix(includedDescriptionPrefix);
-        bundle.getOwnedImports().add(inclusion);
-        return inclusion;
-    }
-
-    // DescriptionBundleUsage
-
-    /**
-     * Creates a description bundle usage and adds it to the given description bundle
-     * 
-     * @param bundle the context description bundle
-     * @param usedVocabularyBoxIri the IRI of the used vocabulary box
-     * @param usedVocabularyBoxSeparator the separator of the used vocabulary box (optional)
-     * @param usedVocabularyBoxPrefix the prefix of the used vocabulary box (optional)
-     * @return a description bundle usage that is added to the given description bundle
-     */
-    public static DescriptionBundleUsage addDescriptionBundleUsage(DescriptionBundle bundle, String usedVocabularyBoxIri, SeparatorKind usedVocabularyBoxSeparator, String usedVocabularyBoxPrefix) {
-        final DescriptionBundleUsage usage = create(DescriptionBundleUsage.class);
-        if (usedVocabularyBoxSeparator != null) {
-        	usage.setNamespace(usedVocabularyBoxIri+usedVocabularyBoxSeparator);
-        } else {
-            usage.setNamespace(usedVocabularyBoxIri+SeparatorKind.HASH);
-        }
-        usage.setPrefix(usedVocabularyBoxPrefix);
-        bundle.getOwnedImports().add(usage);
-        return usage;
-    }
-    
     // SpecializationAxiom
 
     /**
@@ -1165,197 +715,216 @@ public class OmlWrite {
      */
     public static SpecializationAxiom addSpecializationAxiom(Vocabulary vocabulary, SpecializableTerm subTerm, SpecializableTerm superTerm) {
         final SpecializationAxiom axiom = create(SpecializationAxiom.class);
-        setCrossReference(vocabulary, axiom, OmlPackage.Literals.SPECIALIZATION_AXIOM__SPECIALIZED_TERM, superTerm);
-        setContainmentReference(vocabulary, subTerm, OmlPackage.Literals.SPECIALIZABLE_TERM__OWNED_SPECIALIZATIONS, OmlPackage.Literals.SPECIALIZABLE_TERM_REFERENCE__OWNED_SPECIALIZATIONS, axiom);
+        setCrossReference(vocabulary, axiom, OmlPackage.Literals.SPECIALIZATION_AXIOM__SUPER_TERM, superTerm);
+        setContainmentReference(vocabulary, subTerm, OmlPackage.Literals.SPECIALIZABLE_TERM__OWNED_SPECIALIZATIONS, axiom);
         return axiom;
     }
     
-    // ScalarPropertyRangeRestrictionAxiom
+    // ClassifierEquivalenceAxiom
 
     /**
-     * Creates a scalar property range restriction axiom and adds it to the given vocabulary
-     * 
+     * Creates a classifier equivalence axiom between the sub classifier and super classifiers and adds it to the given vocabulary
+     *  
      * @param vocabulary the context vocabulary
-     * @param domain the given restricting (classifier) domain
-     * @param property the given restricted scalar property
-     * @param range given restricted (scalar) range
-     * @param restrictionKind the kind of the restriction
-     * @return a scalar property range restriction axiom that is added to the given vocabulary
+     * @param subClassifier the given sub classifier
+     * @param superClassifiers the given super classifiers
+     * @return a classifier equivalence axiom that is added to the vocabulary
      */
-    public static ScalarPropertyRangeRestrictionAxiom addScalarPropertyRangeRestrictionAxiom(Vocabulary vocabulary, Classifier domain, ScalarProperty property, Scalar range, RangeRestrictionKind restrictionKind) {
-        final ScalarPropertyRangeRestrictionAxiom axiom = create(ScalarPropertyRangeRestrictionAxiom.class);
-        axiom.setKind(restrictionKind);
-        setCrossReference(vocabulary, axiom, OmlPackage.Literals.SCALAR_PROPERTY_RESTRICTION_AXIOM__PROPERTY, property);
-        setCrossReference(vocabulary, axiom, OmlPackage.Literals.SCALAR_PROPERTY_RANGE_RESTRICTION_AXIOM__RANGE, range);
-        setContainmentReference(vocabulary, domain, OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS, OmlPackage.Literals.CLASSIFIER_REFERENCE__OWNED_PROPERTY_RESTRICTIONS, axiom);
+    public static ClassifierEquivalenceAxiom addClassifierEquivalenceAxiom(Vocabulary vocabulary, Classifier subClassifier, List<Classifier> superClassifiers) {
+        final ClassifierEquivalenceAxiom axiom = create(ClassifierEquivalenceAxiom.class);
+        setCrossReferences(vocabulary, axiom, OmlPackage.Literals.CLASSIFIER_EQUIVALENCE_AXIOM__SUPER_CLASSIFIERS, superClassifiers);
+        setContainmentReference(vocabulary, subClassifier, OmlPackage.Literals.CLASSIFIER__OWNED_EQUIVALENCES, axiom);
         return axiom;
     }
 
-    // ScalarPropertyCardinalityRestrictionAxiom
+    // ScalarEquivalenceAxiom
 
     /**
-     * Creates a scalar property cardinality restriction axiom and adds it to the given vocabulary
+     * Creates a scalar equivalence axiom between the sub scalar and super scalar and adds it to the given vocabulary
+     *  
+     * @param vocabulary the context vocabulary
+     * @param subScalar the given sub scalar
+     * @param superScalar the given super scalar
+     * @param length the length facet
+     * @param minLength the min length facet
+     * @param maxLength the max length facet
+     * @param pattern the string pattern facet
+     * @param language the language facet
+     * @param minInclusive the min inclusive facet
+     * @param minExclusive the min exclusive facet
+     * @param maxInclusive the max inclusive facet
+     * @param maxExclusive the max exclusive facet
+     * @return a scalar equivalence axiom that is added to the vocabulary
+     */
+    public static ScalarEquivalenceAxiom addScalarEquivalenceAxiom(Vocabulary vocabulary, Scalar subScalar, Scalar superScalar, Long length, Long minLength, Long maxLength, String pattern, 
+        String language, Literal minInclusive, Literal minExclusive, Literal maxInclusive, Literal maxExclusive) {
+        final ScalarEquivalenceAxiom axiom = create(ScalarEquivalenceAxiom.class);
+        axiom.setLength(length);
+        axiom.setMinLength(minLength);
+        axiom.setMaxLength(maxLength);
+        axiom.setPattern(pattern);
+        axiom.setLanguage(language);
+        axiom.setMinInclusive(minInclusive);
+        axiom.setMinExclusive(minExclusive);
+        axiom.setMaxInclusive(maxInclusive);
+        axiom.setMaxExclusive(maxExclusive);
+        setCrossReference(vocabulary, axiom, OmlPackage.Literals.SCALAR_EQUIVALENCE_AXIOM__SUPER_SCALAR, superScalar);
+        setContainmentReference(vocabulary, subScalar, OmlPackage.Literals.SCALAR__OWNED_EQUIVALENCES, axiom);
+        return axiom;
+    }
+
+    // PropertyEquivalenceAxiom
+
+    /**
+     * Creates a property equivalence axiom between the sub property and super property and adds it to the given vocabulary
+     *  
+     * @param vocabulary the context vocabulary
+     * @param subProperty the given sub property
+     * @param superProperty the given super property
+     * @return a property equivalence axiom that is added to the vocabulary
+     */
+    public static PropertyEquivalenceAxiom addPropertyEquivalenceAxiom(Vocabulary vocabulary, SpecializableProperty subProperty, Property superProperty) {
+        final PropertyEquivalenceAxiom axiom = create(PropertyEquivalenceAxiom.class);
+        setCrossReference(vocabulary, axiom, OmlPackage.Literals.PROPERTY_EQUIVALENCE_AXIOM__SUPER_PROPERTY, superProperty);
+        setContainmentReference(vocabulary, subProperty, OmlPackage.Literals.SPECIALIZABLE_PROPERTY__OWNED_EQUIVALENCES, axiom);
+        return axiom;
+    }
+
+    // PropertyRangeRestrictionAxiom
+
+    /**
+     * Creates a property range restriction axiom and adds it to the given vocabulary
      * 
      * @param vocabulary the context vocabulary
-     * @param domain the given restricting (classifier) domain
-     * @param property the given restricted scalar property
-     * @param cardinality the restricted cardinality
-     * @param range given restricted (scalar) range
+     * @param owner the given restricting owner (classifier or classifier equivalence axiom)
+     * @param property the given restricted property
+     * @param range given restricted range
      * @param restrictionKind the kind of the restriction
-     * @return a scalar property cardinality restriction axiom that is added to the given vocabulary
+     * @return a property range restriction axiom that is added to the given vocabulary
      */
-    public static ScalarPropertyCardinalityRestrictionAxiom addScalarPropertyCardinalityRestrictionAxiom(Vocabulary vocabulary, Classifier domain, ScalarProperty property, CardinalityRestrictionKind restrictionKind, long cardinality, Scalar range) {
-        final ScalarPropertyCardinalityRestrictionAxiom axiom = create(ScalarPropertyCardinalityRestrictionAxiom.class);
+    public static PropertyRangeRestrictionAxiom addPropertyRangeRestrictionAxiom(Vocabulary vocabulary, Element owner, SemanticProperty property, Type range, RangeRestrictionKind restrictionKind) {
+        final PropertyRangeRestrictionAxiom axiom = create(PropertyRangeRestrictionAxiom.class);
+        axiom.setKind(restrictionKind);
+        setCrossReference(vocabulary, axiom, OmlPackage.Literals.PROPERTY_RESTRICTION_AXIOM__PROPERTY, property);
+        setCrossReference(vocabulary, axiom, OmlPackage.Literals.PROPERTY_RANGE_RESTRICTION_AXIOM__RANGE, range);
+        if (owner instanceof Classifier) {
+        	setContainmentReference(vocabulary, (Classifier)owner, OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS, axiom);
+        } else if (owner instanceof ClassifierEquivalenceAxiom) {
+            	setContainmentReference(vocabulary, (ClassifierEquivalenceAxiom)owner, OmlPackage.Literals.CLASSIFIER_EQUIVALENCE_AXIOM__OWNED_PROPERTY_RESTRICTIONS, axiom);
+        }
+        return axiom;
+    }
+
+    // PropertyCardinalityRestrictionAxiom
+
+    /**
+     * Creates a property cardinality restriction axiom and adds it to the given vocabulary
+     * 
+     * @param vocabulary the context vocabulary
+     * @param owner the given restricting owner (classifier or classifier equivalence axiom)
+     * @param property the given restricted property
+     * @param cardinality the restricted cardinality
+     * @param range given restricted range
+     * @param restrictionKind the kind of the restriction
+     * @return a property cardinality restriction axiom that is added to the given vocabulary
+     */
+    public static PropertyCardinalityRestrictionAxiom addPropertyCardinalityRestrictionAxiom(Vocabulary vocabulary, Element owner, SemanticProperty property, CardinalityRestrictionKind restrictionKind, long cardinality, Type range) {
+        final PropertyCardinalityRestrictionAxiom axiom = create(PropertyCardinalityRestrictionAxiom.class);
         axiom.setKind(restrictionKind);
         axiom.setCardinality(cardinality);
-        setCrossReference(vocabulary, axiom, OmlPackage.Literals.SCALAR_PROPERTY_RESTRICTION_AXIOM__PROPERTY, property);
-        setCrossReference(vocabulary, axiom, OmlPackage.Literals.SCALAR_PROPERTY_CARDINALITY_RESTRICTION_AXIOM__RANGE, range);
-        setContainmentReference(vocabulary, domain, OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS, OmlPackage.Literals.CLASSIFIER_REFERENCE__OWNED_PROPERTY_RESTRICTIONS, axiom);
+        setCrossReference(vocabulary, axiom, OmlPackage.Literals.PROPERTY_RESTRICTION_AXIOM__PROPERTY, property);
+        setCrossReference(vocabulary, axiom, OmlPackage.Literals.PROPERTY_CARDINALITY_RESTRICTION_AXIOM__RANGE, range);
+        if (owner instanceof Classifier) {
+        	setContainmentReference(vocabulary, (Classifier)owner, OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS, axiom);
+        } else if (owner instanceof ClassifierEquivalenceAxiom) {
+            	setContainmentReference(vocabulary, (ClassifierEquivalenceAxiom)owner, OmlPackage.Literals.CLASSIFIER_EQUIVALENCE_AXIOM__OWNED_PROPERTY_RESTRICTIONS, axiom);
+        }
         return axiom;
     }
 
-    // ScalarPropertyValueRestrictionAxiom
+    // PropertyValueRestrictionAxiom
 
     /**
-     * Creates a scalar property value restriction axiom and adds it to the given vocabulary
+     * Creates a property value restriction axiom on a scalar property and adds it to the given vocabulary
      * 
      * @param vocabulary the context vocabulary
-     * @param domain the given restricting (classifier) domain
-     * @param property the given restricted scalar property
-     * @param value the (literal) value of the restriction
-     * @return a scalar property value restriction axiom that is added to the given vocabulary
+     * @param owner the given restricting owner (classifier or classifier equivalence axiom)
+     * @param property the given scalar property
+     * @param value the restricted literal value
+     * @return a property value restriction axiom that is added to the given vocabulary
      */
-    public static ScalarPropertyValueRestrictionAxiom addScalarPropertyValueRestrictionAxiom(Vocabulary vocabulary, Classifier domain, ScalarProperty property, Literal value) {
-        final ScalarPropertyValueRestrictionAxiom axiom = create(ScalarPropertyValueRestrictionAxiom.class);
-        axiom.setValue(value);
-        setCrossReference(vocabulary, axiom, OmlPackage.Literals.SCALAR_PROPERTY_RESTRICTION_AXIOM__PROPERTY, property);
-        setContainmentReference(vocabulary, domain, OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS, OmlPackage.Literals.CLASSIFIER_REFERENCE__OWNED_PROPERTY_RESTRICTIONS, axiom);
+    public static PropertyValueRestrictionAxiom addPropertyValueRestrictionAxiom(Vocabulary vocabulary, Element owner, ScalarProperty property, Literal value) {
+        final PropertyValueRestrictionAxiom axiom = create(PropertyValueRestrictionAxiom.class);
+        axiom.setLiteralValue(value);
+        setCrossReference(vocabulary, axiom, OmlPackage.Literals.PROPERTY_RESTRICTION_AXIOM__PROPERTY, property);
+        if (owner instanceof Classifier) {
+        	setContainmentReference(vocabulary, (Classifier)owner, OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS, axiom);
+        } else if (owner instanceof ClassifierEquivalenceAxiom) {
+            	setContainmentReference(vocabulary, (ClassifierEquivalenceAxiom)owner, OmlPackage.Literals.CLASSIFIER_EQUIVALENCE_AXIOM__OWNED_PROPERTY_RESTRICTIONS, axiom);
+        }
         return axiom;
     }
 
-    // StructuredPropertyRangeRestrictionAxiom
-
     /**
-     * Creates a structured property range restriction axiom and adds it to the given vocabulary
+     * Creates a property value restriction axiom on a structured property and adds it to the given vocabulary
      * 
      * @param vocabulary the context vocabulary
-     * @param domain the given restricting (classifier) domain
-     * @param property the given restricted structured property
-     * @param range the given restricted (structure) range
-     * @param restrictionKind the kind of the restriction
-     * @return a structured property range restriction axiom that is added to the given vocabulary
+     * @param owner the given restricting owner (classifier or classifier equivalence axiom)
+     * @param property the given structured property
+     * @param value the restricted structure instance value
+     * @return a property value restriction axiom that is added to the given vocabulary
      */
-    public static StructuredPropertyRangeRestrictionAxiom addStructuredPropertyRangeRestrictionAxiom(Vocabulary vocabulary, Classifier domain, StructuredProperty property, Structure range, RangeRestrictionKind restrictionKind) {
-        final StructuredPropertyRangeRestrictionAxiom axiom = create(StructuredPropertyRangeRestrictionAxiom.class);
-        axiom.setKind(restrictionKind);
-        setCrossReference(vocabulary, axiom, OmlPackage.Literals.STRUCTURED_PROPERTY_RESTRICTION_AXIOM__PROPERTY, property);
-        setCrossReference(vocabulary, axiom, OmlPackage.Literals.STRUCTURED_PROPERTY_RANGE_RESTRICTION_AXIOM__RANGE, range);
-        setContainmentReference(vocabulary, domain, OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS, OmlPackage.Literals.CLASSIFIER_REFERENCE__OWNED_PROPERTY_RESTRICTIONS, axiom);
+    public static PropertyValueRestrictionAxiom addPropertyValueRestrictionAxiom(Vocabulary vocabulary, Element owner, StructuredProperty property, StructureInstance value) {
+        final PropertyValueRestrictionAxiom axiom = create(PropertyValueRestrictionAxiom.class);
+        axiom.setStructureInstanceValue(value);
+        setCrossReference(vocabulary, axiom, OmlPackage.Literals.PROPERTY_RESTRICTION_AXIOM__PROPERTY, property);
+        if (owner instanceof Classifier) {
+        	setContainmentReference(vocabulary, (Classifier)owner, OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS, axiom);
+        } else if (owner instanceof ClassifierEquivalenceAxiom) {
+            	setContainmentReference(vocabulary, (ClassifierEquivalenceAxiom)owner, OmlPackage.Literals.CLASSIFIER_EQUIVALENCE_AXIOM__OWNED_PROPERTY_RESTRICTIONS, axiom);
+        }
         return axiom;
     }
 
-    // StructuredPropertyCardinalityRestrictionAxiom
-
     /**
-     * Creates a structured property cardinality restriction axiom and adds it to the given vocabulary
+     * Creates a value restriction axiom on a relation and adds it to the given vocabulary
      * 
      * @param vocabulary the context vocabulary
-     * @param domain the given restricting (classifier) domain
-     * @param property the given restricted structured property
-     * @param cardinality the restricted cardinality
-     * @param range the given restricted (structure) range
-     * @param restrictionKind the kind of the restriction
-     * @return a structured property cardinality restriction axiom that is added to the given vocabulary
+     * @param owner the given restricting owner (classifier or classifier equivalence axiom)
+     * @param relation the given relation
+     * @param value the restricted named instance value
+     * @return a property value restriction axiom that is added to the given vocabulary
      */
-    public static StructuredPropertyCardinalityRestrictionAxiom addStructuredPropertyCardinalityRestrictionAxiom(Vocabulary vocabulary, Classifier domain, StructuredProperty property, CardinalityRestrictionKind restrictionKind, long cardinality, Structure range) {
-        final StructuredPropertyCardinalityRestrictionAxiom axiom = create(StructuredPropertyCardinalityRestrictionAxiom.class);
-        axiom.setKind(restrictionKind);
-        axiom.setCardinality(cardinality);
-        setCrossReference(vocabulary, axiom, OmlPackage.Literals.STRUCTURED_PROPERTY_RESTRICTION_AXIOM__PROPERTY, property);
-        setCrossReference(vocabulary, axiom, OmlPackage.Literals.STRUCTURED_PROPERTY_CARDINALITY_RESTRICTION_AXIOM__RANGE, range);
-        setContainmentReference(vocabulary, domain, OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS, OmlPackage.Literals.CLASSIFIER_REFERENCE__OWNED_PROPERTY_RESTRICTIONS, axiom);
+    public static PropertyValueRestrictionAxiom addPropertyValueRestrictionAxiom(Vocabulary vocabulary, Element owner, Relation relation, NamedInstance value) {
+        final PropertyValueRestrictionAxiom axiom = create(PropertyValueRestrictionAxiom.class);
+        axiom.setNamedInstanceValue(value);
+        setCrossReference(vocabulary, axiom, OmlPackage.Literals.PROPERTY_RESTRICTION_AXIOM__PROPERTY, relation);
+        if (owner instanceof Classifier) {
+        	setContainmentReference(vocabulary, (Classifier)owner, OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS, axiom);
+        } else if (owner instanceof ClassifierEquivalenceAxiom) {
+            setContainmentReference(vocabulary, (ClassifierEquivalenceAxiom)owner, OmlPackage.Literals.CLASSIFIER_EQUIVALENCE_AXIOM__OWNED_PROPERTY_RESTRICTIONS, axiom);
+        }
         return axiom;
     }
 
-    // StructuredPropertyValueRestrictionAxiom
-    
-    /**
-     * Creates a structured property value restriction axiom and adds it to the given vocabulary
-     * 
-     * @param vocabulary the context vocabulary
-     * @param domain the given restricting (classifier) domain
-     * @param property the given restricted structured property
-     * @param value the (structure instance) value of the restriction
-     * @return a structured property value restriction axiom that is added to the given vocabulary
-     */
-    public static StructuredPropertyValueRestrictionAxiom addStructuredPropertyValueRestrictionAxiom(Vocabulary vocabulary, Classifier domain, StructuredProperty property, StructureInstance value) {
-        final StructuredPropertyValueRestrictionAxiom axiom = create(StructuredPropertyValueRestrictionAxiom.class);
-        axiom.setValue(value);
-        setCrossReference(vocabulary, axiom, OmlPackage.Literals.STRUCTURED_PROPERTY_VALUE_ASSERTION__PROPERTY, property);
-        setContainmentReference(vocabulary, domain, OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS, OmlPackage.Literals.CLASSIFIER_REFERENCE__OWNED_PROPERTY_RESTRICTIONS, axiom);
-        return axiom;
-    }
-
-    // RelationRangeRestrictionAxiom
+    // PropertySelfRestrictionAxiom
 
     /**
-     * Creates a relation range restriction axiom and adds it to the given vocabulary
+     * Creates a self restriction axiom on a relation and adds it to the given vocabulary
      * 
      * @param vocabulary the context vocabulary
-     * @param domain the given restricting (entity) domain
-     * @param relation the given restricted relation
-     * @param range the given restricted (entity) range
-     * @param restrictionKind the kind of the restriction
-     * @return a relation range restriction axiom that is added to the given vocabulary
+     * @param owner the given restricting owner (classifier or classifier equivalence axiom)
+     * @param relation the given relation
+     * @return a property value restriction axiom that is added to the given vocabulary
      */
-    public static RelationRangeRestrictionAxiom addRelationRangeRestrictionAxiom(Vocabulary vocabulary, Entity domain, Relation relation, Entity range, RangeRestrictionKind restrictionKind) {
-        final RelationRangeRestrictionAxiom axiom = create(RelationRangeRestrictionAxiom.class);
-        axiom.setKind(restrictionKind);
-        setCrossReference(vocabulary, axiom, OmlPackage.Literals.RELATION_RESTRICTION_AXIOM__RELATION, relation);
-        setCrossReference(vocabulary, axiom, OmlPackage.Literals.RELATION_RANGE_RESTRICTION_AXIOM__RANGE, range);
-        setContainmentReference(vocabulary, domain, OmlPackage.Literals.ENTITY__OWNED_RELATION_RESTRICTIONS, OmlPackage.Literals.ENTITY_REFERENCE__OWNED_RELATION_RESTRICTIONS, axiom);
-        return axiom;
-    }
-    
-    // RelationCardinalityRestrictionAxiom
-
-    /**
-     * Creates a relation cardinality restriction axiom and adds it to the given vocabulary
-     * 
-     * @param vocabulary the context vocabulary
-     * @param domain the given restricting (entity) domain
-     * @param relation the given restricted relation
-     * @param cardinality the restricted cardinality
-     * @param range the given restricted (entity) range
-     * @param restrictionKind the kind of the restriction
-     * @return a relation cardinality restriction axiom that is added to the given vocabulary
-     */
-    public static RelationCardinalityRestrictionAxiom addRelationCardinalityRestrictionAxiom(Vocabulary vocabulary, Entity domain, Relation relation, CardinalityRestrictionKind restrictionKind, long cardinality, Entity range) {
-        final RelationCardinalityRestrictionAxiom axiom = create(RelationCardinalityRestrictionAxiom.class);
-        axiom.setKind(restrictionKind);
-        axiom.setCardinality(cardinality);
-        setCrossReference(vocabulary, axiom, OmlPackage.Literals.RELATION_RESTRICTION_AXIOM__RELATION, relation);
-        setCrossReference(vocabulary, axiom, OmlPackage.Literals.RELATION_CARDINALITY_RESTRICTION_AXIOM__RANGE, range);
-        setContainmentReference(vocabulary, domain, OmlPackage.Literals.ENTITY__OWNED_RELATION_RESTRICTIONS, OmlPackage.Literals.ENTITY_REFERENCE__OWNED_RELATION_RESTRICTIONS, axiom);
-        return axiom;
-    }
-
-    // RelationTargetRestrictionAxiom
-    
-    /**
-     * Creates a relation target restriction axiom and adds it to the given vocabulary
-     * 
-     * @param vocabulary the context vocabulary
-     * @param domain the given restricting (entity) domain
-     * @param relation the given restricted relation
-     * @param target the given (named instance) target of the restriction
-     * @return a relation target restriction axiom that is added to the given vocabulary
-     */
-    public static RelationTargetRestrictionAxiom addRelationTargetRestrictionAxiom(Vocabulary vocabulary, Entity domain, Relation relation, Entity target) {
-        final RelationTargetRestrictionAxiom axiom = create(RelationTargetRestrictionAxiom.class);
-        setCrossReference(vocabulary, axiom, OmlPackage.Literals.RELATION_RESTRICTION_AXIOM__RELATION, relation);
-        setCrossReference(vocabulary, axiom, OmlPackage.Literals.RELATION_TARGET_RESTRICTION_AXIOM__TARGET, target);
-        setContainmentReference(vocabulary, domain, OmlPackage.Literals.ENTITY__OWNED_RELATION_RESTRICTIONS, OmlPackage.Literals.ENTITY_REFERENCE__OWNED_RELATION_RESTRICTIONS, axiom);
+    public static PropertySelfRestrictionAxiom addPropertySelfRestrictionAxiom(Vocabulary vocabulary, Element owner, Relation relation) {
+        final PropertySelfRestrictionAxiom axiom = create(PropertySelfRestrictionAxiom.class);
+        setCrossReference(vocabulary, axiom, OmlPackage.Literals.PROPERTY_RESTRICTION_AXIOM__PROPERTY, relation);
+        if (owner instanceof Classifier) {
+        	setContainmentReference(vocabulary, (Classifier)owner, OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS, axiom);
+        } else if (owner instanceof ClassifierEquivalenceAxiom) {
+            setContainmentReference(vocabulary, (ClassifierEquivalenceAxiom)owner, OmlPackage.Literals.CLASSIFIER_EQUIVALENCE_AXIOM__OWNED_PROPERTY_RESTRICTIONS, axiom);
+        }
         return axiom;
     }
 
@@ -1369,141 +938,140 @@ public class OmlWrite {
      * @param keyProperties the list of properties that are part of the key
      * @return a key axiom that is added to the given vocabulary
      */
-    public static KeyAxiom addKeyAxiom(Vocabulary vocabulary, Entity domain, List<Feature> keyProperties) {
+    public static KeyAxiom addKeyAxiom(Vocabulary vocabulary, Entity domain, List<Property> keyProperties) {
         final KeyAxiom axiom = create(KeyAxiom.class);
         setCrossReferences(vocabulary, axiom, OmlPackage.Literals.KEY_AXIOM__PROPERTIES, new ArrayList<Element>(keyProperties));
-        setContainmentReference(vocabulary, domain, OmlPackage.Literals.ENTITY__OWNED_KEYS, OmlPackage.Literals.ENTITY_REFERENCE__OWNED_KEYS, axiom);
+        setContainmentReference(vocabulary, domain, OmlPackage.Literals.ENTITY__OWNED_KEYS, axiom);
         return axiom;
     }
 
-    // ConceptTypeAssertion
+    // InstanceEnumerationAxiom
+
+    /**
+     * Creates an instance enumeration axiom and adds it to the given vocabulary
+     * 
+     * @param vocabulary the context vocabulary
+     * @param domain the given (concept) domain
+     * @param instances the list of concept instances
+     * @return an instance enumeration axiom that is added to the given vocabulary
+     */
+    public static InstanceEnumerationAxiom addInstanceEnumerationAxiom(Vocabulary vocabulary, Concept domain, List<ConceptInstance> instances) {
+        final InstanceEnumerationAxiom axiom = create(InstanceEnumerationAxiom.class);
+        setCrossReferences(vocabulary, axiom, OmlPackage.Literals.INSTANCE_ENUMERATION_AXIOM__INSTANCES, new ArrayList<Element>(instances));
+        setContainmentReference(vocabulary, domain, OmlPackage.Literals.CONCEPT__OWNED_ENUMERATION, axiom);
+        return axiom;
+    }
+
+    // LiteralEnumerationAxiom
+
+    /**
+     * Creates an literal enumeration axiom and adds it to the given vocabulary
+     * 
+     * @param vocabulary the context vocabulary
+     * @param domain the given (scalar) domain
+     * @param literals the list of enumerated literals
+     * @return a literal enumeration axiom that is added to the given vocabulary
+     */
+    public static LiteralEnumerationAxiom addLiteralEnumerationAxiom(Vocabulary vocabulary, Scalar domain, Literal...literals) {
+        final LiteralEnumerationAxiom axiom = create(LiteralEnumerationAxiom.class);
+        axiom.getLiterals().addAll(Arrays.asList(literals));
+        setContainmentReference(vocabulary, domain, OmlPackage.Literals.SCALAR__OWNED_ENUMERATION, axiom);
+        return axiom;
+    }
+
+    // TypeAssertion
     
     /**
-     * Creates a concept type assertion and adds it to the given description
+     * Creates a type assertion and adds it to the given description
      * 
      * @param description the context description
-     * @param instance the given concept instance
-     * @param type the given concept type
-     * @return a concept type assertion that is added to the given description
+     * @param instance the given named instance
+     * @param type the given type
+     * @return a type assertion that is added to the given description
      */
-    public static ConceptTypeAssertion addConceptTypeAssertion(Description description, ConceptInstance instance, Concept type) {
-        final ConceptTypeAssertion assertion = create(ConceptTypeAssertion.class);
-        setCrossReference(description, assertion, OmlPackage.Literals.CONCEPT_TYPE_ASSERTION__TYPE, type);
-        setContainmentReference(description, instance, OmlPackage.Literals.CONCEPT_INSTANCE__OWNED_TYPES, OmlPackage.Literals.CONCEPT_INSTANCE_REFERENCE__OWNED_TYPES, assertion);
+    public static TypeAssertion addTypeAssertion(Description description, NamedInstance instance, Entity type) {
+        final TypeAssertion assertion = create(TypeAssertion.class);
+        setCrossReference(description, assertion, OmlPackage.Literals.TYPE_ASSERTION__TYPE, type);
+        setContainmentReference(description, instance, OmlPackage.Literals.NAMED_INSTANCE__OWNED_TYPES, assertion);
         return assertion;
     }
 
-    // RelationTypeAssertion
+    // PropertyValueAssertion
 
     /**
-     * Creates a relation type assertion and adds it to the given description
-     * 
-     * @param description the context description
-     * @param instance the given relation instance
-     * @param type the given relation entity type
-     * @return a relation type assertion that is added to the given description
-     */
-    public static RelationTypeAssertion addRelationTypeAssertion(Description description, RelationInstance instance, RelationEntity type) {
-        final RelationTypeAssertion assertion = create(RelationTypeAssertion.class);
-        setCrossReference(description, assertion, OmlPackage.Literals.RELATION_TYPE_ASSERTION__TYPE, type);
-        setContainmentReference(description, instance, OmlPackage.Literals.RELATION_INSTANCE__OWNED_TYPES, OmlPackage.Literals.RELATION_INSTANCE_REFERENCE__OWNED_TYPES, assertion);
-        return assertion;
-    }
-
-    // ScalarPropertyValueAssertion
-
-    /**
-     * Creates a scalar property value assertion and adds it to the given ontology
+     * Creates a property value assertion for a scalar property and adds it to the given ontology.
      * 
      * @param ontology the context ontology
      * @param instance the given instance
      * @param property the given scalar property
-     * @param value the asserted (literal) value of the property
-     * @return a scalar property value assertion that is added to the given structure instance
+     * @param literalValue the asserted (literal) value of the property
+     * @return a property value assertion that is added to the given ontology
      */
-    public static ScalarPropertyValueAssertion addScalarPropertyValueAssertion(Ontology ontology, Instance instance, ScalarProperty property, Literal value) {
-        final ScalarPropertyValueAssertion assertion = create(ScalarPropertyValueAssertion.class);
-        assertion.setValue(value);
-        if (instance != null) {
-        	instance.getOwnedPropertyValues().add(assertion);
-        }
-        setCrossReference(ontology, assertion, OmlPackage.Literals.SCALAR_PROPERTY_VALUE_ASSERTION__PROPERTY, property);
+    public static PropertyValueAssertion addPropertyValueAssertion(Ontology ontology, Instance instance, ScalarProperty property, Literal literalValue) {
+        final PropertyValueAssertion assertion = create(PropertyValueAssertion.class);
+       	assertion.setLiteralValue(literalValue);
+        setCrossReference(ontology, assertion, OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__PROPERTY, property);
+        setContainmentReference(ontology, instance, OmlPackage.Literals.INSTANCE__OWNED_PROPERTY_VALUES, assertion);
         return assertion;
     }
         
     /**
-     * Sets the value of a given annotation property on a given element in the context of a given ontology
+     * Creates a property value assertion for a structured property and adds it to the given ontology.
      * 
-     * This function assumes that the scalar property should have a single value in the given ontology context
-     * 
-     * @param ontology the context ontology
-     * @param instance the given instance
-     * @param property the given scalar property
-     * @param value the asserted (literal) value of the property
-     */
-    public static void setScalarPropertyValue(Ontology ontology, Instance instance, ScalarProperty property, Literal value) {
-        ScalarPropertyValueAssertion assertion = null;
-        if (instance != null) {
-	        if (instance.getOntology() == ontology) {
-	            assertion = instance.getOwnedPropertyValues().stream()
-	                .filter(a -> a.getProperty() == property)
-	                .map(a -> (ScalarPropertyValueAssertion)a)
-	                .findFirst().orElse(null);
-	        } else if (instance instanceof NamedInstance){
-	            var reference = (NamedInstanceReference) getOrAddReference(ontology, (NamedInstance)instance);
-	            assertion = reference.getOwnedPropertyValues().stream()
-	                .filter(a -> a.getProperty() == property)
-	                .map(a -> (ScalarPropertyValueAssertion)a)
-	                .findFirst().orElse(null);
-	        }
-        }
-        if (assertion != null) {
-            if (value != null) {
-                assertion.setValue(value);
-            } else {
-                delete(assertion);
-            }
-        } else if (value != null) {
-            assertion = addScalarPropertyValueAssertion(ontology, instance, property, value);
-        }
-    }
-
-    // StructuredPropertyValueAssertion
-
-    /**
-     * Creates a structured property value assertion and adds it to the given ontology
+     * The value could either be a literal value (in the case of a scalar property), a structure instance value (in the case of a 
+     * structured property), or a named instance value (in the case of a relation).
      * 
      * @param ontology the context ontology
      * @param instance the given instance
      * @param property the given structured property
-     * @param value the asserted (structure instance) value of the property
-     * @return a structured property value assertion that is added to the given description
+     * @param structureInstanceValue the asserted (structure instance) value of the property
+     * @return a property value assertion that is added to the given ontology
      */
-    public static StructuredPropertyValueAssertion addStructuredPropertyValueAssertion(Ontology ontology, Instance instance, StructuredProperty property, StructureInstance value) {
-        final StructuredPropertyValueAssertion assertion = create(StructuredPropertyValueAssertion.class);
-        assertion.setValue(value);
-        setCrossReference(ontology, assertion, OmlPackage.Literals.STRUCTURED_PROPERTY_VALUE_ASSERTION__PROPERTY, property);
-        setContainmentReference(ontology, instance, OmlPackage.Literals.INSTANCE__OWNED_PROPERTY_VALUES, OmlPackage.Literals.NAMED_INSTANCE_REFERENCE__OWNED_PROPERTY_VALUES, assertion);
+    public static PropertyValueAssertion addPropertyValueAssertion(Ontology ontology, Instance instance, StructuredProperty property, StructureInstance structureInstanceValue) {
+        final PropertyValueAssertion assertion = create(PropertyValueAssertion.class);
+       	assertion.setStructureInstanceValue(structureInstanceValue);
+        setCrossReference(ontology, assertion, OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__PROPERTY, property);
+        setContainmentReference(ontology, instance, OmlPackage.Literals.INSTANCE__OWNED_PROPERTY_VALUES, assertion);
         return assertion;
     }
-        
-    // LinkAssertion
-        
+
     /**
-     * Creates a link assertion and adds it to the given description
+     * Creates a property value assertion for a relation and adds it to the given ontology.
      * 
-     * @param description the context description
-     * @param source the given (source) named instance
-     * @param relation the given relation type of the link
-     * @param target the given (target) named instance
-     * @return a link assertion that is added to the given description
+     * The value could either be a literal value (in the case of a scalar property), a structure instance value (in the case of a 
+     * structured property), or a named instance value (in the case of a relation).
+     * 
+     * @param ontology the context ontology
+     * @param instance the given instance
+     * @param property the given (relation) property
+     * @param namedInstanceValue the asserted (named instance) value of the property
+     * @return a property value assertion that is added to the given ontology
      */
-    public static LinkAssertion addLinkAssertion(Description description, NamedInstance source, Relation relation, NamedInstance target) {
-        final LinkAssertion assertion = create(LinkAssertion.class);
-        setCrossReference(description, assertion, OmlPackage.Literals.LINK_ASSERTION__RELATION, relation);
-        setCrossReference(description, assertion, OmlPackage.Literals.LINK_ASSERTION__TARGET, target);
-        setContainmentReference(description, source, OmlPackage.Literals.NAMED_INSTANCE__OWNED_LINKS, OmlPackage.Literals.NAMED_INSTANCE_REFERENCE__OWNED_LINKS, assertion);
+    public static PropertyValueAssertion addPropertyValueAssertion(Ontology ontology, Instance instance, ScalarProperty property, NamedInstance namedInstanceValue) {
+        final PropertyValueAssertion assertion = create(PropertyValueAssertion.class);
+       	assertion.setNamedInstanceValue(namedInstanceValue);
+        setCrossReference(ontology, assertion, OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__PROPERTY, property);
+        setContainmentReference(ontology, instance, OmlPackage.Literals.INSTANCE__OWNED_PROPERTY_VALUES, assertion);
         return assertion;
+    }
+
+    // Argument
+
+    /**
+     * Creates an argument
+     * 
+     * @param vocabulary the context vocabulary
+     * @param variable a given variable name
+     * @param literal a given literal
+     * @param instance a given named instance
+     * @return an argument
+     */
+    public static Argument createArgument(Vocabulary vocabulary, String variable, Literal literal, NamedInstance instance) {
+        final Argument argument = create(Argument.class);
+        argument.setVariable(variable);
+        argument.setLiteral(literal);
+        setCrossReference(vocabulary, argument, OmlPackage.Literals.ARGUMENT__INSTANCE, instance);
+        return argument;
     }
 
     // TypePredicate
@@ -1513,12 +1081,12 @@ public class OmlWrite {
      * 
      * @param vocabulary the context vocabulary
      * @param type the given type
-     * @param variable the name of a variable bound to an instance of the type
+     * @param argument the argument bound to a value of the type
      * @return a type predicate
      */
-    public static TypePredicate createTypePredicate(Vocabulary vocabulary, Type type, String variable) {
+    public static TypePredicate createTypePredicate(Vocabulary vocabulary, Type type, Argument argument) {
         final TypePredicate predicate = create(TypePredicate.class);
-        predicate.setVariable(variable);
+        predicate.setArgument(argument);
         setCrossReference(vocabulary, predicate, OmlPackage.Literals.TYPE_PREDICATE__TYPE, type);
         return predicate;
     }
@@ -1529,37 +1097,37 @@ public class OmlWrite {
      * Creates an relation entity predicate
      * 
      * @param vocabulary the context vocabulary
-     * @param entity the given relation entity
-     * @param variable1 the name of a variable bound to a named instance representing the source of a relation entity
-     * @param entityVariable the name of a variable bound to an instance of the relation entity
-     * @param variable2 the name of a variable bound to a named instance representing the target of a relation entity
+     * @param type the type of a relation instance
+     * @param argument1 the argument bound to a named instance representing the source of a relation instance
+     * @param argument the argument bound to a relation instance
+     * @param argument2 the argument bound to a named instance representing the target of a relation instance
      * @return a relation entity predicate
      */
-    public static RelationEntityPredicate createRelationEntityPredicate(Vocabulary vocabulary, RelationEntity entity, String variable1, String entityVariable, String variable2) {
+    public static RelationEntityPredicate createRelationEntityPredicate(Vocabulary vocabulary, RelationEntity type, Argument argument1, Argument argument, Argument argument2) {
         final RelationEntityPredicate predicate = create(RelationEntityPredicate.class);
-        predicate.setVariable1(variable1);
-        predicate.setEntityVariable(entityVariable);
-        predicate.setVariable2(variable2);
-        setCrossReference(vocabulary, predicate, OmlPackage.Literals.RELATION_ENTITY_PREDICATE__ENTITY, entity);
+        predicate.setArgument1(argument1);
+        predicate.setArgument(argument);
+        predicate.setArgument2(argument2);
+        setCrossReference(vocabulary, predicate, OmlPackage.Literals.RELATION_ENTITY_PREDICATE__TYPE, type);
         return predicate;
     }
 
-    // FeaturePredicate
+    // PropertyPredicate
 
     /**
      * Creates an relation predicate
      * 
      * @param vocabulary the context vocabulary
-     * @param feature the given feature
-     * @param variable1 the name of a variable bound to an instance
-     * @param variable2 the name of a variable bound to a value of the feature in the instance
+     * @param property the given property
+     * @param argument1 the argument bound to a instance representing the subject of the given property
+     * @param argument2 the argument bound to a value representing the object of the given property
      * @return a relation predicate
      */
-    public static FeaturePredicate createFeaturePredicate(Vocabulary vocabulary, Feature feature, String variable1, String variable2) {
-        final FeaturePredicate predicate = create(FeaturePredicate.class);
-        predicate.setVariable1(variable1);
-        predicate.setVariable2(variable2);
-        setCrossReference(vocabulary, predicate, OmlPackage.Literals.FEATURE_PREDICATE__FEATURE, feature);
+    public static PropertyPredicate createPropertyPredicate(Vocabulary vocabulary, Property property, Argument argument1, Argument argument2) {
+        final PropertyPredicate predicate = create(PropertyPredicate.class);
+        predicate.setArgument1(argument1);
+        predicate.setArgument2(argument2);
+        setCrossReference(vocabulary, predicate, OmlPackage.Literals.PROPERTY_PREDICATE__PROPERTY, property);
         return predicate;
     }
 
@@ -1569,14 +1137,14 @@ public class OmlWrite {
      * Creates a sameAs predicate
      * 
      * @param vocabulary the context vocabulary
-     * @param variable1 the name of a variable bound to one instance
-     * @param variable2 the name of a variable bound to another instance
+     * @param argument1 the argument bound to the first named instance
+     * @param argument2 the argument bound to the second named instance
      * @return a sameAs predicate
      */
-    public static SameAsPredicate createSameAsPredicate(Vocabulary vocabulary, String variable1, String variable2) {
+    public static SameAsPredicate createSameAsPredicate(Vocabulary vocabulary, Argument argument1, Argument argument2) {
         final SameAsPredicate predicate = create(SameAsPredicate.class);
-        predicate.setVariable1(variable1);
-        predicate.setVariable2(variable2);
+        predicate.setArgument1(argument1);
+        predicate.setArgument2(argument2);
         return predicate;
     }
 
@@ -1586,14 +1154,31 @@ public class OmlWrite {
      * Creates a differentFrom predicate
      * 
      * @param vocabulary the context vocabulary
-     * @param variable1 the name of a variable bound to one instance
-     * @param variable2 the name of a variable bound to another instance
+     * @param argument1 the argument bound to the first named instance
+     * @param argument2 the argument bound to the second named instance
      * @return a differentFrom predicate
      */
-    public static DifferentFromPredicate createDifferentFromPredicate(Vocabulary vocabulary, String variable1, String variable2) {
+    public static DifferentFromPredicate createDifferentFromPredicate(Vocabulary vocabulary, Argument argument1, Argument argument2) {
         final DifferentFromPredicate predicate = create(DifferentFromPredicate.class);
-        predicate.setVariable1(variable1);
-        predicate.setVariable2(variable2);
+        predicate.setArgument1(argument1);
+        predicate.setArgument2(argument2);
+        return predicate;
+    }
+
+    // BuiltInPredicate
+
+    /**
+     * Creates a builtIn predicate
+     * 
+     * @param vocabulary the context vocabulary
+     * @param builtIn the given builtIn
+     * @param arguments the arguments of the builtin
+     * @return a builtIn predicate
+     */
+    public static BuiltInPredicate createBuiltInPredicate(Vocabulary vocabulary, BuiltIn builtIn, Argument... arguments ) {
+        final BuiltInPredicate predicate = create(BuiltInPredicate.class);
+        predicate.setBuiltIn(builtIn);
+        predicate.getArguments().addAll(Arrays.asList(arguments));
         return predicate;
     }
 

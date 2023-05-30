@@ -30,10 +30,10 @@ import org.eclipse.emf.common.util.Enumerator;
  * and utility methods for working with them.
  * <!-- end-user-doc -->
  * <!-- begin-model-doc -->
- * RangeRestrictionKind is an enumeration that specifies the scope of a range restriction on a property or a relation
+ * RangeRestrictionKind is an enumeration that specifies the scope of a [=PropertyRangeRestrictionAxiom=].
  * <!-- end-model-doc -->
  * @see io.opencaesar.oml.OmlPackage#getRangeRestrictionKind()
- * @model annotation="https://tabatkins.github.io/bikeshed heading='Axioms'"
+ * @model annotation="https://tabatkins.github.io/bikeshed heading='Properties'"
  * @generated
  */
 public enum RangeRestrictionKind implements Enumerator {

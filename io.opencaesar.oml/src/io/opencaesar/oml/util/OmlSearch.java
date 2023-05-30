@@ -22,63 +22,61 @@ import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
-import java.util.List;
+import java.util.LinkedHashSet;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.eclipse.emf.ecore.resource.Resource;
 
-import io.opencaesar.oml.AnnotatedElement;
 import io.opencaesar.oml.Annotation;
 import io.opencaesar.oml.AnnotationProperty;
 import io.opencaesar.oml.Aspect;
 import io.opencaesar.oml.Assertion;
 import io.opencaesar.oml.Axiom;
 import io.opencaesar.oml.Classifier;
-import io.opencaesar.oml.ClassifierReference;
+import io.opencaesar.oml.ClassifierEquivalenceAxiom;
 import io.opencaesar.oml.Concept;
 import io.opencaesar.oml.ConceptInstance;
-import io.opencaesar.oml.ConceptInstanceReference;
-import io.opencaesar.oml.ConceptTypeAssertion;
 import io.opencaesar.oml.Element;
 import io.opencaesar.oml.Entity;
-import io.opencaesar.oml.EntityReference;
-import io.opencaesar.oml.EnumeratedScalar;
-import io.opencaesar.oml.FacetedScalar;
 import io.opencaesar.oml.ForwardRelation;
+import io.opencaesar.oml.IdentifiedElement;
 import io.opencaesar.oml.Import;
 import io.opencaesar.oml.Instance;
+import io.opencaesar.oml.InstanceEnumerationAxiom;
 import io.opencaesar.oml.KeyAxiom;
-import io.opencaesar.oml.LinkAssertion;
 import io.opencaesar.oml.Literal;
+import io.opencaesar.oml.LiteralEnumerationAxiom;
 import io.opencaesar.oml.Member;
 import io.opencaesar.oml.NamedInstance;
-import io.opencaesar.oml.NamedInstanceReference;
 import io.opencaesar.oml.Ontology;
+import io.opencaesar.oml.Property;
+import io.opencaesar.oml.PropertyEquivalenceAxiom;
 import io.opencaesar.oml.PropertyRestrictionAxiom;
 import io.opencaesar.oml.PropertyValueAssertion;
 import io.opencaesar.oml.QuotedLiteral;
-import io.opencaesar.oml.Reference;
 import io.opencaesar.oml.Relation;
+import io.opencaesar.oml.RelationBase;
 import io.opencaesar.oml.RelationEntity;
 import io.opencaesar.oml.RelationInstance;
-import io.opencaesar.oml.RelationInstanceReference;
-import io.opencaesar.oml.RelationRestrictionAxiom;
-import io.opencaesar.oml.RelationTypeAssertion;
+import io.opencaesar.oml.ReverseRelation;
 import io.opencaesar.oml.Rule;
 import io.opencaesar.oml.Scalar;
+import io.opencaesar.oml.ScalarEquivalenceAxiom;
 import io.opencaesar.oml.ScalarProperty;
 import io.opencaesar.oml.SemanticProperty;
+import io.opencaesar.oml.SpecializableProperty;
 import io.opencaesar.oml.SpecializableTerm;
-import io.opencaesar.oml.SpecializableTermReference;
 import io.opencaesar.oml.SpecializationAxiom;
 import io.opencaesar.oml.Structure;
 import io.opencaesar.oml.StructureInstance;
 import io.opencaesar.oml.StructuredProperty;
 import io.opencaesar.oml.Term;
+import io.opencaesar.oml.Type;
 import io.opencaesar.oml.TypeAssertion;
+import io.opencaesar.oml.UnreifiedRelation;
 
 /**
  * The <b>Search</b> API for the model. It complements the {@link OmlIndex} API by additional utilities.
@@ -88,252 +86,338 @@ import io.opencaesar.oml.TypeAssertion;
 public final class OmlSearch extends OmlIndex {
 
     //-------------------------------------------------
-    // COMMON
+    // ONTOLOGIES
     //-------------------------------------------------
 
-    // Member
-    
     /**
      * Finds references to the given member
      * 
      * @param member the given member
-     * @return a list of references to the given member
+     * @return a set of references to the given member
      */
-    public static List<Reference> findReferences(Member member) {
-        List<Reference> references = new ArrayList<>();
+    public static Set<Member> findReferences(Member member) {
+        Set<Member> references = new LinkedHashSet<>();
         if (member instanceof AnnotationProperty) {
-            references.addAll(findAnnotationPropertyReferencesWithProperty((AnnotationProperty)member));
+            references.addAll(findAnnotationPropertiesWithRef((AnnotationProperty)member));
         } else if (member instanceof Aspect) {
-            references.addAll(findAspectReferencesWithAspect((Aspect)member));
+            references.addAll(findAspectsWithRef((Aspect)member));
         } else if (member instanceof Concept) {
-            references.addAll(findConceptReferencesWithConcept((Concept)member));
+            references.addAll(findConceptsWithRef((Concept)member));
         } else if (member instanceof RelationEntity) {
-            references.addAll(findRelationEntityReferencesWithEntity((RelationEntity)member));
+            references.addAll(findRelationEntitiesWithRef((RelationEntity)member));
         } else if (member instanceof Structure) {
-            references.addAll(findStructureReferencesWithStructure((Structure)member));
-        } else if (member instanceof FacetedScalar) {
-            references.addAll(findFacetedScalarReferencesWithScalar((FacetedScalar)member));
-        } else if (member instanceof EnumeratedScalar) {
-            references.addAll(findEnumeratedScalarReferencesWithScalar((EnumeratedScalar)member));
+            references.addAll(findStructuresWithRef((Structure)member));
+        } else if (member instanceof Scalar) {
+            references.addAll(findScalarsWithRef((Scalar)member));
         } else if (member instanceof Relation) {
-            references.addAll(findRelationReferencesWithRelation((Relation)member));
+            references.addAll(findUnreifiedRelationsWithRef((Relation)member));
         } else if (member instanceof StructuredProperty) {
-            references.addAll(findStructuredPropertyReferencesWithProperty((StructuredProperty)member));
+            references.addAll(findStructuredPropertiesWithRef((StructuredProperty)member));
         } else if (member instanceof ScalarProperty) {
-            references.addAll(findScalarPropertyReferencesWithProperty((ScalarProperty)member));
+            references.addAll(findScalarPropertiesWithRef((ScalarProperty)member));
         } else if (member instanceof Rule) {
-            references.addAll(findRuleReferencesWithRule((Rule)member));
+            references.addAll(findRulesWithRef((Rule)member));
         } else if (member instanceof ConceptInstance) {
-            references.addAll(findConceptInstanceReferencesWithInstance((ConceptInstance)member));
+            references.addAll(findConceptInstancesWithRef((ConceptInstance)member));
         } else if (member instanceof RelationInstance) {
-            references.addAll(findRelationInstanceReferencesWithInstance((RelationInstance)member));
+            references.addAll(findRelationInstancesWithRef((RelationInstance)member));
         }
         return references;
     }
-
-    // AnnotatedElement
 
     /**
      * Finds annotations of the given element
      * 
      * @param element the given element
-     * @return a list of annotations of the given element
+     * @return a set of annotations of the given element
      */
-    public static List<Annotation> findAnnotations(AnnotatedElement element) {
-        final List<Annotation> annotations = new ArrayList<>(element.getOwnedAnnotations());
+    public static Set<Annotation> findAnnotations(IdentifiedElement element) {
+        final Set<Annotation> annotations = new LinkedHashSet<>(element.getOwnedAnnotations());
         if (element instanceof Member) {
             annotations.addAll(findReferences((Member)element).stream()
                 .flatMap(r -> r.getOwnedAnnotations().stream())
-                .collect(Collectors.toList()));
+                .collect(Collectors.toCollection(LinkedHashSet::new)));
         }
         return annotations;
     }
 
     /**
-     * Finds literals that are values of a given annotation property on the given element
+     * Finds the values of a given annotation property in the given element
      * 
      * @param element the given element with annotations
      * @param property the annotation property
-     * @return a list of literals that are values of a given annotation property on the given element
+     * @return a set of literals representing annotation values
      */
-    public static List<Literal> findAnnotationValues(AnnotatedElement element, AnnotationProperty property) {
+    public static Set<Element> findAnnotationValues(IdentifiedElement element, AnnotationProperty property) {
         return findAnnotations(element).stream()
             .filter(a -> a.getProperty() == property)
             .map(a -> a.getValue())
-            .collect(Collectors.toList());
+            .collect(Collectors.toCollection(LinkedHashSet::new));
     }
     
     /**
-     * Finds a literal that is a value of a given annotation property on the given element
+     * Gets a value of the given annotation property in the given element
      * 
      * @param element the given element with annotations
      * @param property the annotation property
-     * @return a literal that is a value of a given annotation property on the given element
+     * @return a literal representing an annotation value
      */
-    public static Literal findAnnotationValue(AnnotatedElement element, AnnotationProperty property) {
+    public static Element findAnnotationValue(IdentifiedElement element, AnnotationProperty property) {
         return findAnnotations(element).stream()
             .filter(a -> a.getProperty() == property)
             .map(a -> a.getValue())
             .findFirst().orElse(null);
     }
 
-    //-------------------------------------------------
-    // ONTOLOGIES
-    //-------------------------------------------------
-
     /**
      * Finds imports that import the given ontology
      * @param ontology the given ontology
-     * @return a list of imports that import the given ontology
+     * @return a set of imports that import the given ontology
      */
-    public static List<Import> findReferencingImports(Ontology ontology) {
+    public static Set<Import> findReferencingImports(Ontology ontology) {
         final Resource resource = ontology.eResource();
-        return (resource == null) ? Collections.emptyList() :
+        return (resource == null) ? Collections.emptySet() :
             OmlRead.getOntologies(resource.getResourceSet()).stream()
-                .flatMap(o -> OmlRead.getImports(o).stream())
+                .flatMap(o -> o.getOwnedImports().stream())
                 .filter(i -> OmlRead.getImportedOntology(i) == ontology)
-                .collect(Collectors.toList());
+                .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
     /**
      * Finds ontologies that import the given ontology
      * 
      * @param ontology the given ontologies
-     * @return a list of ontologies that import the given ontology
+     * @return a set of ontologies that import the given ontology
      */
-    public static List<Ontology> findImportingOntologies(Ontology ontology) {
+    public static Set<Ontology> findImportingOntologies(Ontology ontology) {
         return findReferencingImports(ontology).stream()
             .map(i -> OmlRead.getImportingOntology(i))
-            .collect(Collectors.toList());
+            .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
     //-------------------------------------------------
-    // AXIOMS
+    // VOCABULARIES
     //-------------------------------------------------
-
-    // Term
 
     /**
      * Finds axioms that are defined for the given term
      * 
      * @param term the given term
-     * @return a list of axioms that are defined for the given term
+     * @return a set of axioms that are defined for the given term
      */
-    public static List<Axiom> findAxioms(Term term) {
-        List<Axiom> axioms = new ArrayList<>();
+    public static Set<Axiom> findAxioms(Term term) {
+        Set<Axiom> axioms = new LinkedHashSet<>();
         if (term instanceof SpecializableTerm){
-            axioms.addAll(findSpecializationsWithSubTerm(((SpecializableTerm)term)));
+            axioms.addAll(findSpecializationAxiomsWithSubTerm(((SpecializableTerm)term)));
         }
         if (term instanceof Classifier) {
-            axioms.addAll(findPropertyRestrictions(((Classifier)term)));
+            axioms.addAll(findClassifierEquivalenceAxiomsWithSubClassifier(((Classifier)term)));
+            axioms.addAll(findPropertyRestrictionAxioms(((Classifier)term)));
         }
         if (term instanceof Entity) {
-            axioms.addAll(findRelationRestrictions(((Entity)term)));
-            axioms.addAll(findKeys(((Entity)term)));
+            axioms.addAll(findKeyAxioms(((Entity)term)));
+        }
+        if (term instanceof Concept) {
+            axioms.addAll(findInstanceEnumerationAxioms(((Concept)term)));
+        }
+        if (term instanceof Scalar) {
+            axioms.addAll(findScalarEquivalenceAxiomsWithSubScalar(((Scalar)term)));
+            axioms.addAll(findLiteralEnumerationAxioms(((Scalar)term)));
+        }
+        if (term instanceof Property) {
+            axioms.addAll(findPropertyEquivalenceAxiomsWithSubProperty(((Property)term)));
         }
         return axioms;
-    }
-
-    // SpecializableTerm
-
-    /**
-     * Finds specialization axioms that have the given term as a sub term
-     * 
-     * @param term the given term
-     * @return a list of specialization axioms that have the given term as a sub term
-     */
-    public static List<SpecializationAxiom> findSpecializationsWithSubTerm(SpecializableTerm term) {
-        final List<SpecializationAxiom> axioms = new ArrayList<>();
-        axioms.addAll(term.getOwnedSpecializations());
-        axioms.addAll(findReferences(term).stream()
-            .filter(i -> i instanceof SpecializableTermReference)
-            .map(i -> (SpecializableTermReference)i)
-            .flatMap(r -> r.getOwnedSpecializations().stream())
-            .collect(Collectors.toList()));
-        return axioms;
-    }
-
-    /**
-     * Finds specialization axioms that have the given term as a super term
-     * 
-     * @param term the given term
-     * @return a list of specialization axioms that have the given term as a super term
-     */
-    public static List<SpecializationAxiom> findSpecializationsWithSuperTerm(SpecializableTerm term) {
-        return findSpecializationAxiomsWithSpecializedTerm(term);
-    }
-
-    // Classifier
-    
-    /**
-     * Find property restriction axioms that are defined on the given classifier
-     * 
-     * @param classifier the given classifier
-     * @return a list of property restriction axioms that are defined on the given classifier
-     */
-    public static List<PropertyRestrictionAxiom> findPropertyRestrictions(Classifier classifier) {
-        final List<PropertyRestrictionAxiom> restrictions = new ArrayList<>();
-        restrictions.addAll(classifier.getOwnedPropertyRestrictions());
-        restrictions.addAll(findReferences(classifier).stream()
-            .filter(i -> i instanceof ClassifierReference)
-            .map(i -> (ClassifierReference)i)
-            .flatMap(r -> r.getOwnedPropertyRestrictions().stream())
-            .collect(Collectors.toList()));
-        return restrictions;
-    }
-
-    // Entity
-
-    /**
-     * Find relation restriction axioms that are defined on the given entity
-     * 
-     * @param entity the given entity
-     * @return a list of relation restriction axioms that are defined on the given entity
-     */
-    public static List<RelationRestrictionAxiom> findRelationRestrictions(Entity entity) {
-        final List<RelationRestrictionAxiom> restrictions = new ArrayList<>();
-        restrictions.addAll(entity.getOwnedRelationRestrictions());
-        restrictions.addAll(findReferences(entity).stream()
-            .filter(i -> i instanceof EntityReference)
-            .map(i -> (EntityReference)i)
-            .flatMap(r -> r.getOwnedRelationRestrictions().stream())
-            .collect(Collectors.toList()));
-        return restrictions;
     }
 
     /**
      * Find key axioms that are defined on the given entity
      * 
      * @param entity the given entity
-     * @return a list of key axioms that are defined on the given entity
+     * @return a set of key axioms that are defined on the given entity
      */
-    public static List<KeyAxiom> findKeys(Entity entity) {
-        final List<KeyAxiom> keys = new ArrayList<>();
-        keys.addAll(entity.getOwnedKeys());
-        keys.addAll(findReferences(entity).stream()
-            .filter(i -> i instanceof EntityReference)
-            .map(i -> (EntityReference)i)
+    public static Set<KeyAxiom> findKeyAxioms(Entity entity) {
+        final Set<KeyAxiom> axioms = new LinkedHashSet<>();
+        axioms.addAll(entity.getOwnedKeys());
+        axioms.addAll(findReferences(entity).stream()
+            .filter(i -> i instanceof Entity)
+            .map(i -> (Entity)i)
             .flatMap(r -> r.getOwnedKeys().stream())
-            .collect(Collectors.toList()));
-        return keys;
+            .collect(Collectors.toCollection(LinkedHashSet::new)));
+        return axioms;
     }
 
-    //-------------------------------------------------
-    // TERMS
-    //-------------------------------------------------
+    /**
+     * Find instance enumeration axioms that are defined on the given concept
+     * 
+     * @param concept the given concept
+     * @return a set of instance enumeration axioms that are defined on the given concept
+     */
+    public static Set<InstanceEnumerationAxiom> findInstanceEnumerationAxioms(Concept concept) {
+        final Set<InstanceEnumerationAxiom> axioms = new LinkedHashSet<>();
+        if (concept.getOwnedEnumeration() != null) {
+        	axioms.add(concept.getOwnedEnumeration());
+        }
+        axioms.addAll(findReferences(concept).stream()
+            .filter(i -> i instanceof Concept)
+            .map(i -> (Concept)i)
+            .filter(i -> i.getOwnedEnumeration() != null)
+            .map(i -> i.getOwnedEnumeration())
+            .collect(Collectors.toCollection(LinkedHashSet::new)));
+        return axioms;
+    }
 
-    // SpecializableTerm
+    /**
+     * Find literal enumeration axioms that are defined on the given scalar
+     * 
+     * @param scalar the given scalar
+     * @return a set of literal enumeration axioms that are defined on the given scalar
+     */
+    public static Set<LiteralEnumerationAxiom> findLiteralEnumerationAxioms(Scalar scalar) {
+        final Set<LiteralEnumerationAxiom> axioms = new LinkedHashSet<>();
+        if (scalar.getOwnedEnumeration() != null) {
+        	axioms.add(scalar.getOwnedEnumeration());
+        }
+        axioms.addAll(findReferences(scalar).stream()
+            .filter(i -> i instanceof Scalar)
+            .map(i -> (Scalar)i)
+            .filter(i -> i.getOwnedEnumeration() != null)
+            .map(i -> i.getOwnedEnumeration())
+            .collect(Collectors.toCollection(LinkedHashSet::new)));
+        return axioms;
+    }
+
+    /**
+     * Find property restriction axioms that are defined on the given classifier
+     * 
+     * @param classifier the given classifier
+     * @return a set of restriction axioms that are defined on the given classifier
+     */
+    public static Set<PropertyRestrictionAxiom> findPropertyRestrictionAxioms(Classifier classifier) {
+        final Set<PropertyRestrictionAxiom> axioms = new LinkedHashSet<>();
+        axioms.addAll(classifier.getOwnedPropertyRestrictions());
+        axioms.addAll(findReferences(classifier).stream()
+            .filter(i -> i instanceof Classifier)
+            .map(i -> (Classifier)i)
+            .flatMap(r -> r.getOwnedPropertyRestrictions().stream())
+            .collect(Collectors.toCollection(LinkedHashSet::new)));
+        return axioms;
+    }
+
+    //-----Beginning-Of-Specialization-and-Equivalence-Axioms-----------------
+    
+    /**
+     * Finds specialization axioms that have the given term as a sub term
+     * 
+     * @param term the given term
+     * @return a set of specialization axioms that have the given term as a sub term
+     */
+    public static Set<SpecializationAxiom> findSpecializationAxiomsWithSubTerm(Term term) {
+        final Set<SpecializationAxiom> axioms = new LinkedHashSet<>();
+        if (term instanceof SpecializableTerm) {
+        	axioms.addAll(((SpecializableTerm)term).getOwnedSpecializations());
+        }
+        axioms.addAll(findReferences(term).stream()
+            .filter(i -> i instanceof SpecializableTerm)
+            .map(i -> (SpecializableTerm)i)
+            .flatMap(r -> r.getOwnedSpecializations().stream())
+            .collect(Collectors.toCollection(LinkedHashSet::new)));
+        return axioms;
+    }
+
+    /**
+     * Finds classifier equivalence axioms that have the given classifier as a sub
+     * 
+     * @param classifier the given classifier
+     * @return a set of classifier equivalence axioms that have the given classifier as a sub
+     */
+    public static Set<ClassifierEquivalenceAxiom> findClassifierEquivalenceAxiomsWithSubClassifier(Classifier classifier) {
+        final Set<ClassifierEquivalenceAxiom> axioms = new LinkedHashSet<>();
+       	axioms.addAll(classifier.getOwnedEquivalences());
+        axioms.addAll(findReferences(classifier).stream()
+            .filter(i -> i instanceof Classifier)
+            .map(i -> (Classifier)i)
+            .flatMap(r -> r.getOwnedEquivalences().stream())
+            .collect(Collectors.toCollection(LinkedHashSet::new)));
+        return axioms;
+    }
+
+    /**
+     * Finds scalar equivalence axioms that have the given scalar as a sub
+     * 
+     * @param scalar the given scalar
+     * @return a set of scalar equivalence axioms that have the given scalar as a sub
+     */
+    public static Set<ScalarEquivalenceAxiom> findScalarEquivalenceAxiomsWithSubScalar(Scalar scalar) {
+        final Set<ScalarEquivalenceAxiom> axioms = new LinkedHashSet<>();
+       	axioms.addAll(scalar.getOwnedEquivalences());
+        axioms.addAll(findReferences(scalar).stream()
+            .filter(i -> i instanceof Scalar)
+            .map(i -> (Scalar)i)
+            .flatMap(r -> r.getOwnedEquivalences().stream())
+            .collect(Collectors.toCollection(LinkedHashSet::new)));
+        return axioms;
+    }
+
+    /**
+     * Finds property equivalence axioms that have the given property as a sub
+     * 
+     * @param property the given property
+     * @return a set of property equivalence axioms that have the given property as a sub
+     */
+    public static Set<PropertyEquivalenceAxiom> findPropertyEquivalenceAxiomsWithSubProperty(Property property) {
+        final Set<PropertyEquivalenceAxiom> axioms = new LinkedHashSet<>();
+        if (property instanceof SpecializableProperty) {
+        	axioms.addAll(((SpecializableProperty)property).getOwnedEquivalences());
+        }
+        axioms.addAll(findReferences(property).stream()
+            .filter(i -> i instanceof SpecializableProperty)
+            .map(i -> (SpecializableProperty)i)
+            .flatMap(r -> r.getOwnedEquivalences().stream())
+            .collect(Collectors.toCollection(LinkedHashSet::new)));
+        return axioms;
+    }
 
     /**
      * Finds terms that are the direct super (general) terms of the given term 
      * 
      * @param term the given term
-     * @return a list of terms that are the direct super (general) terms of the given term
+     * @return a set of terms that are the direct super (general) terms of the given term
      */
-    public static List<SpecializableTerm> findSuperTerms(SpecializableTerm term) {
-        return findSpecializationsWithSubTerm(term).stream()
-            .map(i -> OmlRead.getSuperTerm(i))
-            .collect(Collectors.toList());
+    public static Set<Term> findSuperTerms(Term term) {
+        final Set<Term> supers = new LinkedHashSet<>();
+        supers.addAll(findSpecializationSuperTerms(term));
+        if (term instanceof Classifier) {
+        	supers.addAll(findEquivalenceSuperClassifiers((Classifier)term));
+        	supers.addAll(findEquivalentClassifiers((Classifier)term));
+        } else if (term instanceof Scalar) {
+        	supers.addAll(findEquivalenceSuperScalars((Scalar)term));
+        	supers.addAll(findEquivalentScalars((Scalar)term));
+        } else if (term instanceof Property) {
+        	supers.addAll(findEquivalentProperties((Property)term));
+        }
+        return supers;
+    }
+
+    /**
+     * Finds terms that are the direct sub (specific) terms of the given term 
+     * 
+     * @param term the given term
+     * @return a set of terms that are the direct sub (specific) terms of the given term
+     */
+    public static Set<Term> findSubTerms(Term term) {
+        final Set<Term> subs = new LinkedHashSet<>();
+        subs.addAll(findSpecializationSubTerms(term));
+        if (term instanceof Classifier) {
+        	subs.addAll(findEquivalenceSubClassifiers((Classifier)term));
+        	subs.addAll(findEquivalentClassifiers((Classifier)term));
+        } else if (term instanceof Scalar) {
+        	subs.addAll(findEquivalenceSubScalars((Scalar)term));
+        	subs.addAll(findEquivalentScalars((Scalar)term));
+        } else if (term instanceof Property) {
+        	subs.addAll(findEquivalentProperties((Property)term));
+        }
+        return subs;
     }
 
     /**
@@ -341,33 +425,23 @@ public final class OmlSearch extends OmlIndex {
      * 
      * @param term the given term
      * @param inclusive a boolean determining whether to include the given term in the result
-     * @return a list of terms that are the direct or transitive super (general) terms of the given term
+     * @return a set of terms that are the direct or transitive super (general) terms of the given term
      */
-    public static List<SpecializableTerm> findAllSuperTerms(SpecializableTerm term, boolean inclusive) {
-        return OmlRead.closure(term, inclusive, t -> findSuperTerms(t));
+    public static Set<Term> findAllSuperTerms(Term term, boolean inclusive) {
+        return OmlRead.closure(term, inclusive, t -> findSuperTerms(t)).stream()
+        		.collect(Collectors.toCollection(LinkedHashSet::new));
     }
     
-    /**
-     * Finds terms that are the direct sub (specific) terms of the given term 
-     * 
-     * @param term the given term
-     * @return a list of terms that are the direct sub (specific) terms of the given term
-     */
-    public static List<SpecializableTerm> findSubTerms(SpecializableTerm term) {
-        return findSpecializationsWithSuperTerm(term).stream()
-            .map(i -> OmlRead.getSubTerm(i))
-            .collect(Collectors.toList());
-    }
-
     /**
      * Finds terms that are the direct or transitive sub (specific) terms of the given term 
      * 
      * @param term the given term
      * @param inclusive a boolean determining whether to include the given term in the result
-     * @return a list of terms that are the direct or transitive sub (specific) terms of the given term
+     * @return a set of terms that are the direct or transitive sub (specific) terms of the given term
      */
-    public static List<SpecializableTerm> findAllSubTerms(SpecializableTerm term, boolean inclusive) {
-        return OmlRead.closure(term, inclusive, t -> findSubTerms(t));
+    public static Set<Term> findAllSubTerms(Term term, boolean inclusive) {
+        return OmlRead.closure(term, inclusive, t -> findSubTerms(t)).stream()
+        		.collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
     /**
@@ -377,28 +451,279 @@ public final class OmlSearch extends OmlIndex {
      * @param superTerm the given super term
      * @return true if the given term is a sub term of the given super term; otherwise false
      */
-    public static boolean findIsSubTermOf(SpecializableTerm term, SpecializableTerm superTerm) {
+    public static boolean findIsSubTermOf(Term term, Term superTerm) {
         return OmlRead.isInClosure(superTerm, term, true, t -> findSuperTerms(t));
     }
 
-    // Entity
+    /**
+     * Finds terms that are the direct specialization super terms of the given term 
+     * 
+     * @param term the given term
+     * @return a set of terms that are the direct specialization super terms of the given term
+     */
+    public static Set<Term> findSpecializationSuperTerms(Term term) {
+    	var supers = new LinkedHashSet<Term>();
+        supers.addAll(findSpecializationAxiomsWithSubTerm(term).stream()
+                .map(i -> i.getSuperTerm())
+                .collect(Collectors.toCollection(LinkedHashSet::new)));
+        if (term instanceof ForwardRelation) {
+        	var entity = ((ForwardRelation)term).getRelationEntity();
+    		supers.addAll(findSpecializationSuperTerms(entity).stream()
+    	        .filter(i -> i instanceof RelationEntity)
+	            .map(i -> (RelationEntity)i)
+	            .filter(i -> i.getForwardRelation() != null)
+	            .map(i -> i.getForwardRelation())
+	            .collect(Collectors.toCollection(LinkedHashSet::new)));
+    	} else if (term instanceof ReverseRelation) {
+        	var base = ((ReverseRelation)term).getRelationBase();
+    		supers.addAll(findSpecializationSuperTerms(base).stream()
+    	        .filter(i -> i instanceof RelationBase)
+	            .map(i -> (RelationBase)i)
+	            .filter(i -> i.getReverseRelation() != null)
+	            .map(i -> i.getReverseRelation())
+	            .collect(Collectors.toCollection(LinkedHashSet::new)));
+    	}
+    	return supers;
+    }
+    
+    /**
+     * Finds terms that are the direct specialization sub terms of the given term 
+     * 
+     * @param term the given term
+     * @return a set of terms that are the direct specialization sub terms of the given term
+     */
+    public static Set<Term> findSpecializationSubTerms(Term term) {
+    	var subs = new LinkedHashSet<Term>();
+        subs.addAll(findSpecializationAxiomsWithSuperTerm(term).stream()
+            .map(i -> i.getSubTerm())
+            .collect(Collectors.toCollection(LinkedHashSet::new)));
+        if (term instanceof ForwardRelation) {
+        	var entity = ((ForwardRelation)term).getRelationEntity();
+    		subs.addAll(findSpecializationSubTerms(entity).stream()
+    	        .filter(i -> i instanceof RelationEntity)
+	            .map(i -> (RelationEntity)i)
+	            .filter(i -> i.getForwardRelation() != null)
+	            .map(i -> i.getForwardRelation())
+	            .collect(Collectors.toCollection(LinkedHashSet::new)));
+    	} else if (term instanceof ReverseRelation) {
+        	var base = ((ReverseRelation)term).getRelationBase();
+        	subs.addAll(findSpecializationSubTerms(base).stream()
+    	        .filter(i -> i instanceof RelationBase)
+	            .map(i -> (RelationBase)i)
+	            .filter(i -> i.getReverseRelation() != null)
+	            .map(i -> i.getReverseRelation())
+	            .collect(Collectors.toCollection(LinkedHashSet::new)));
+    	}
+    	return subs;
+    }
+
+    /**
+     * Finds classifiers that are the direct equivalence super of a given classifier 
+     * 
+     * @param classifier the given classifier
+     * @return a set of classifier that are the direct equivalence super of the given classifier
+     */
+    public static Set<Classifier> findEquivalenceSuperClassifiers(Classifier classifier) {
+        return findClassifierEquivalenceAxiomsWithSubClassifier(classifier).stream()
+            .flatMap(i -> i.getSuperClassifiers().stream())
+            .collect(Collectors.toCollection(LinkedHashSet::new));
+    }
+    
+    /**
+     * Finds classifiers that are the direct equivalence sub of a given classifier 
+     * 
+     * @param classifier the given classifier
+     * @return a set of classifier that are the direct equivalence sub of the given classifier
+     */
+    public static Set<Classifier> findEquivalenceSubClassifiers(Classifier classifier) {
+        return findClassifierEquivalenceAxiomsWithSuperClassifier(classifier).stream()
+            .map(i -> i.getSubClassifier())
+            .collect(Collectors.toCollection(LinkedHashSet::new));
+    }
+    
+    /**
+     * Finds scalars that are the direct equivalence super of a given scalar 
+     * 
+     * @param scalar the given scalar
+     * @return a set of classifier that are the direct equivalence super of the given classifier
+     */
+    public static Set<Scalar> findEquivalenceSuperScalars(Scalar scalar) {
+        return findScalarEquivalenceAxiomsWithSubScalar(scalar).stream()
+            .map(i -> i.getSuperScalar())
+            .collect(Collectors.toCollection(LinkedHashSet::new));
+    }
+    
+    /**
+     * Finds scalars that are the direct equivalence sub of a given scalar 
+     * 
+     * @param scalar the given scalar
+     * @return a set of scalars that are the direct equivalence sub of the given scalar
+     */
+    public static Set<Scalar> findEquivalenceSubScalars(Scalar scalar) {
+        return findScalarEquivalenceAxiomsWithSuperScalar(scalar).stream()
+            .map(i -> i.getSubScalar())
+            .collect(Collectors.toCollection(LinkedHashSet::new));
+    }
+
+    /**
+     * Finds properties that are the direct equivalence super of a given property 
+     * 
+     * @param property the given property
+     * @return a set of properties that are the direct equivalence super of the given property
+     */
+    public static Set<Property> findEquivalenceSuperProperties(Property property) {
+    	var supers = new LinkedHashSet<Property>();
+        supers.addAll(findPropertyEquivalenceAxiomsWithSubProperty(property).stream()
+            .map(i -> i.getSuperProperty())
+            .collect(Collectors.toCollection(LinkedHashSet::new)));
+        if (property instanceof ForwardRelation) {
+    		var entity = ((ForwardRelation)property).getRelationEntity();
+    		supers.addAll(findEquivalenceSuperClassifiers(entity).stream()
+    	        .filter(i -> i instanceof RelationEntity)
+	            .map(i -> (RelationEntity)i)
+	            .filter(i -> i.getForwardRelation() != null)
+	            .map(i -> i.getForwardRelation())
+	            .collect(Collectors.toCollection(LinkedHashSet::new)));
+    	} else if (property instanceof ReverseRelation) {
+    		var base = ((ReverseRelation)property).getRelationBase();
+    		if (base instanceof RelationEntity) {
+        		supers.addAll(findEquivalenceSuperClassifiers((RelationEntity)base).stream()
+            	        .filter(i -> i instanceof RelationEntity)
+        	            .map(i -> (RelationEntity)i)
+        	            .filter(i -> i.getReverseRelation() != null)
+        	            .map(i -> i.getReverseRelation())
+    		            .collect(Collectors.toCollection(LinkedHashSet::new)));
+    		} else if (base instanceof UnreifiedRelation) {
+        		supers.addAll(findEquivalenceSuperProperties((UnreifiedRelation)base).stream()
+            	        .filter(i -> i instanceof UnreifiedRelation)
+        	            .map(i -> (UnreifiedRelation)i)
+        	            .filter(i -> i.getReverseRelation() != null)
+        	            .map(i -> i.getReverseRelation())
+			            .collect(Collectors.toCollection(LinkedHashSet::new)));
+    		}
+    	}
+    	return supers;
+   }
+    
+    /**
+     * Finds properties that are the direct equivalence sub of a given property 
+     * 
+     * @param property the given property
+     * @return a set of properties that are the direct equivalence sub of the given property
+     */
+    public static Set<Property> findEquivalenceSubProperties(Property property) {
+    	var subs = new LinkedHashSet<Property>();
+    	subs.addAll(findPropertyEquivalenceAxiomsWithSuperProperty(property).stream()
+            .map(i -> i.getSubProperty())
+            .collect(Collectors.toCollection(LinkedHashSet::new)));
+        if (property instanceof ForwardRelation) {
+    		var entity = ((ForwardRelation)property).getRelationEntity();
+    		subs.addAll(findEquivalenceSubClassifiers(entity).stream()
+    	        .filter(i -> i instanceof RelationEntity)
+	            .map(i -> (RelationEntity)i)
+	            .filter(i -> i.getForwardRelation() != null)
+	            .map(i -> i.getForwardRelation())
+	            .collect(Collectors.toCollection(LinkedHashSet::new)));
+    	} else if (property instanceof ReverseRelation) {
+    		var base = ((ReverseRelation)property).getRelationBase();
+    		if (base instanceof RelationEntity) {
+        		subs.addAll(findEquivalenceSubClassifiers((RelationEntity)base).stream()
+            	        .filter(i -> i instanceof RelationEntity)
+        	            .map(i -> (RelationEntity)i)
+        	            .filter(i -> i.getReverseRelation() != null)
+        	            .map(i -> i.getReverseRelation())
+    		            .collect(Collectors.toCollection(LinkedHashSet::new)));
+    		} else if (base instanceof UnreifiedRelation) {
+        		subs.addAll(findEquivalenceSubProperties((UnreifiedRelation)base).stream()
+            	        .filter(i -> i instanceof UnreifiedRelation)
+        	            .map(i -> (UnreifiedRelation)i)
+        	            .filter(i -> i.getReverseRelation() != null)
+        	            .map(i -> i.getReverseRelation())
+			            .collect(Collectors.toCollection(LinkedHashSet::new)));
+    		}
+    	}
+   		return subs;
+   }
+
+    /**
+     * Finds classifiers that are the direct equivalent to a given classifier 
+     * 
+     * @param classifier the given classifier
+     * @return a set of classifier that are the direct equivalents of the given classifier
+     */
+    public static Set<Classifier> findEquivalentClassifiers(Classifier classifier) {
+        final Set<Classifier> equivalents = new LinkedHashSet<>();
+        equivalents.addAll(findClassifierEquivalenceAxiomsWithSubClassifier(classifier).stream()
+            	.filter(i -> i.getOwnedPropertyRestrictions().size() == 0)
+            	.filter(i -> i.getSuperClassifiers().size() == 1)
+                .map(i -> i.getSuperClassifiers().get(0))
+                .collect(Collectors.toCollection(LinkedHashSet::new)));
+        equivalents.addAll(findClassifierEquivalenceAxiomsWithSuperClassifier(classifier).stream()
+            	.filter(i -> i.getOwnedPropertyRestrictions().size() == 0)
+	        	.filter(i -> i.getSuperClassifiers().size() == 1)
+	            .map(i -> i.getSubClassifier())
+	            .collect(Collectors.toCollection(LinkedHashSet::new)));
+        return equivalents;
+    }
+
+    /**
+     * Finds scalars that are the direct equivalent to a given scalar 
+     * 
+     * @param scalar the given scalar
+     * @return a set of scalars that are the direct equivalents of the given scalar
+     */
+    public static Set<Scalar> findEquivalentScalars(Scalar scalar) {
+        final Set<Scalar> equivalents = new LinkedHashSet<>();
+        equivalents.addAll(findScalarEquivalenceAxiomsWithSubScalar(scalar).stream()
+            	.filter(i -> OmlRead.getNumberOfFacets(i) == 0)
+                .map(i -> i.getSuperScalar())
+                .collect(Collectors.toCollection(LinkedHashSet::new)));
+        equivalents.addAll(findScalarEquivalenceAxiomsWithSuperScalar(scalar).stream()
+            	.filter(i -> OmlRead.getNumberOfFacets(i) == 0)
+	            .map(i -> i.getSubScalar())
+	            .collect(Collectors.toCollection(LinkedHashSet::new)));
+        return equivalents;
+    }
+
+    /**
+     * Finds properties that are the direct equivalent to a given property 
+     * 
+     * @param property the given property
+     * @return a set of property that are the direct equivalents of the given property
+     */
+    public static Set<Property> findEquivalentProperties(Property property) {
+        final Set<Property> equivalents = new LinkedHashSet<>();
+        equivalents.addAll(findEquivalenceSuperProperties(property));
+        equivalents.addAll(findEquivalenceSubProperties(property));
+        return equivalents;
+    }
+
+    //-----End-Of-Specialization-and-Equivalence-Axioms-----------------
 
     /**
      * Finds relations that have the given entity as their source
      * 
      * @param entity the given entity
-     * @return a list of relations that have the given entity as their source
+     * @return a set of relations that have the given entity as their source
      */
-    public static List<Relation> findSourceRelations(Entity entity) {
-        final List<Relation> relations = new ArrayList<>();
-        relations.addAll(findRelationEntitiesWithSource(entity).stream()
-            .map(r -> r.getForwardRelation())
+    public static Set<Relation> findSourceRelations(Entity entity) {
+        final Set<Relation> relations = new LinkedHashSet<>();
+        relations.addAll(findRelationBasesWithSource(entity).stream()
+        	.filter(r -> r instanceof UnreifiedRelation)
+            .map(r -> (UnreifiedRelation)r)
             .filter(r -> r != null)
-            .collect(Collectors.toList()));
-        relations.addAll(findRelationEntitiesWithTarget(entity).stream()
-            .map(r -> r.getReverseRelation())
-            .filter(r -> r != null)
-            .collect(Collectors.toList()));
+            .collect(Collectors.toCollection(LinkedHashSet::new)));
+        relations.addAll(findRelationBasesWithSource(entity).stream()
+            	.filter(r -> r instanceof RelationEntity)
+	            .map(i -> (RelationEntity)i)
+	            .filter(i -> i.getForwardRelation() != null)
+	            .map(i -> i.getForwardRelation())
+                .collect(Collectors.toCollection(LinkedHashSet::new)));
+        relations.addAll(findRelationBasesWithTarget(entity).stream()
+	            .map(i -> (RelationBase)i)
+	            .filter(i -> i.getReverseRelation() != null)
+	            .map(i -> i.getReverseRelation())
+            .collect(Collectors.toCollection(LinkedHashSet::new)));
         return relations;
     }
 
@@ -406,143 +731,314 @@ public final class OmlSearch extends OmlIndex {
      * Finds relations that have the given entity as their target
      * 
      * @param entity the given entity
-     * @return a list of relations that have the given entity as their target
+     * @return a set of relations that have the given entity as their target
      */
-    public static List<Relation> findTargetRelations(Entity entity) {
-        final List<Relation> relations = new ArrayList<>();
-        relations.addAll(findRelationEntitiesWithTarget(entity).stream()
-            .map(r -> r.getForwardRelation())
+    public static Set<Relation> findTargetRelations(Entity entity) {
+        final Set<Relation> relations = new LinkedHashSet<>();
+        relations.addAll(findRelationBasesWithTarget(entity).stream()
+           	.filter(r -> r instanceof UnreifiedRelation)
+            .map(r -> (UnreifiedRelation)r)
             .filter(r -> r != null)
-            .collect(Collectors.toList()));
-        relations.addAll(findRelationEntitiesWithSource(entity).stream()
-            .map(r -> r.getReverseRelation())
-            .filter(r -> r != null)
-            .collect(Collectors.toList()));
+            .collect(Collectors.toCollection(LinkedHashSet::new)));
+        relations.addAll(findRelationBasesWithTarget(entity).stream()
+            	.filter(r -> r instanceof RelationEntity)
+	            .map(i -> (RelationEntity)i)
+	            .filter(i -> i.getForwardRelation() != null)
+	            .map(i -> i.getForwardRelation())
+                .collect(Collectors.toCollection(LinkedHashSet::new)));
+        relations.addAll(findRelationBasesWithSource(entity).stream()
+	            .map(i -> (RelationBase)i)
+	            .filter(i -> i.getReverseRelation() != null)
+	            .map(i -> i.getReverseRelation())
+            .collect(Collectors.toCollection(LinkedHashSet::new)));
         return relations;
     }
 
-    // SemanticProperty
-    
     /**
      * Finds semantic properties referencing the given classifier as domain
      * 
      * @param domain The referenced classifier
-     * @return A list of referencing semantic properties
+     * @return A set of referencing semantic properties
      */
-    public static List<SemanticProperty> findSemanticPropertiesWithDomain(Classifier domain) {
-    	var properties = new ArrayList<SemanticProperty>();
+    public static Set<SemanticProperty> findSemanticPropertiesWithDomain(Classifier domain) {
+    	var properties = new LinkedHashSet<SemanticProperty>();
     	properties.addAll(findScalarPropertiesWithDomain(domain));
     	properties.addAll(findStructuredPropertiesWithDomain(domain));
+    	if (domain instanceof Entity) {
+    		properties.addAll(findSourceRelations((Entity)domain));
+    	}
         return properties;
     }
     
-    // ScalarProperty
+    /**
+     * Finds semantic properties referencing the given type as range
+     * 
+     * @param range The referenced type
+     * @return A set of referencing semantic properties
+     */
+    public static Set<SemanticProperty> findSemanticPropertiesWithRange(Type range) {
+    	var properties = new LinkedHashSet<SemanticProperty>();
+    	if (range instanceof Scalar) {
+    		properties.addAll(findScalarPropertiesWithRange((Scalar)range));
+    	} else if (range instanceof Structure) {
+    		properties.addAll(findStructuredPropertiesWithRange((Structure)range));
+    	} else if (range instanceof Entity) {
+    		properties.addAll(findTargetRelations((Entity)range));
+    	}
+        return properties;
+    }
+
+    /**
+     * Finds the domains of the given semantic property
+     * 
+     * @param property The given property
+     * @return A set of domains for the given semantic property
+     */
+    public static Set<Classifier> findDomains(SemanticProperty property) {
+    	var domains = new LinkedHashSet<Classifier>();
+    	domains.addAll(property.getDomainList());
+    	domains.addAll(findReferences(property).stream()
+                .map(i -> (SemanticProperty)i)
+                .flatMap(r -> r.getDomainList().stream())
+                .collect(Collectors.toCollection(LinkedHashSet::new)));
+        return domains;
+    }
+
+    /**
+     * Finds the ranges of the given semantic property
+     * 
+     * @param property The given property
+     * @return A set of ranges for the given semantic property
+     */
+    public static Set<Type> findRanges(SemanticProperty property) {
+    	var ranges = new LinkedHashSet<Type>();
+    	ranges.addAll(property.getRangeList());
+    	ranges.addAll(findReferences(property).stream()
+                .map(i -> (SemanticProperty)i)
+                .flatMap(r -> r.getRangeList().stream())
+                .collect(Collectors.toCollection(LinkedHashSet::new)));
+        return ranges;
+    }
 
     /**
      * Find entities that have the following property included in one of their keys
      * 
      * @param property the given property
-     * @return a list of entities that have the following property included in one of their keys
+     * @return a set of entities that have the following property included in one of their keys
      */
-    public static List<Entity> findEntitiesKeyedWith(SemanticProperty property) {
+    public static Set<Entity> findEntitiesKeyedWith(SemanticProperty property) {
         return findKeyAxiomWithProperty(property).stream()
-            .map(i -> OmlRead.getKeyedEntity(i))
-            .collect(Collectors.toList());
+            .map(i -> i.getKeyedEntity())
+            .collect(Collectors.toCollection(LinkedHashSet::new));
+    }
+
+    /**
+     * Finds the sources of the given relation base
+     * 
+     * @param base The given relation base
+     * @return A set of sources for the given relation base
+     */
+    public static Set<Entity> findSources(RelationBase base) {
+    	var sources = new LinkedHashSet<Entity>();
+    	sources.addAll(base.getSources());
+    	sources.addAll(findReferences(base).stream()
+                .map(i -> (RelationEntity)i)
+                .flatMap(r -> r.getSources().stream())
+                .collect(Collectors.toCollection(LinkedHashSet::new)));
+        return sources;
+    }
+
+    /**
+     * Finds the targets of the given relation base
+     * 
+     * @param base The given relation base
+     * @return A set of targets for the given relation base
+     */
+    public static Set<Entity> findTargets(RelationBase base) {
+    	var sources = new LinkedHashSet<Entity>();
+    	sources.addAll(base.getTargets());
+    	sources.addAll(findReferences(base).stream()
+                .map(i -> (RelationEntity)i)
+                .flatMap(r -> r.getTargets().stream())
+                .collect(Collectors.toCollection(LinkedHashSet::new)));
+        return sources;
     }
 
     //-------------------------------------------------
-    // ASSERTIONS
+    // DESCRIPTIONS
     //-------------------------------------------------
 
-    // Instance
-    
     /**
      * Finds assertions that are defined on the given instance
      * 
      * @param instance the given instance
-     * @return a list of assertions that are defined on the given instance
+     * @return a set of assertions that are defined on the given instance
      */
-    public static List<Assertion> findAssertions(Instance instance) {
-        List<Assertion> assertions = new ArrayList<>();
-        assertions.addAll(findPropertyValueAssertions(instance));
-        if (instance instanceof ConceptInstance) {
-            assertions.addAll(findTypeAssertions((ConceptInstance)instance));
-            assertions.addAll(findLinkAssertionsWithSource((ConceptInstance)instance));
-        } else if (instance instanceof RelationInstance) {
-            assertions.addAll(findTypeAssertions((RelationInstance)instance));
-            assertions.addAll(findLinkAssertionsWithSource((RelationInstance)instance));
+    public static Set<Assertion> findAssertions(Instance instance) {
+        Set<Assertion> assertions = new LinkedHashSet<>();
+        assertions.addAll(findPropertyValueAssertionsWithSubject(instance));
+        if (instance instanceof NamedInstance) {
+            assertions.addAll(findTypeAssertions((NamedInstance)instance));
         }
         return assertions;
     }
-
-    // NamedInstance
 
     /**
      * Finds type assertions that are defined on the given named instance
      * 
      * @param instance the given named instance
-     * @return a list of type assertions that are defined on the given named instance
+     * @return a set of type assertions that are defined on the given named instance
      */
-    public static List<TypeAssertion> findTypeAssertions(NamedInstance instance) {
-        List<TypeAssertion> assertions = new ArrayList<>();
-        if (instance instanceof ConceptInstance) {
-            assertions.addAll(findTypeAssertions((ConceptInstance) instance));
-        } else if (instance instanceof RelationInstance) {
-            assertions.addAll(findTypeAssertions((RelationInstance) instance));
-        }
+    public static Set<TypeAssertion> findTypeAssertions(NamedInstance instance) {
+        final Set<TypeAssertion> assertions = new LinkedHashSet<>(instance.getOwnedTypes());
+        assertions.addAll(findReferences(instance).stream()
+            .filter(i -> i instanceof NamedInstance)
+            .map(i -> (NamedInstance)i)
+            .flatMap(r -> r.getOwnedTypes().stream())
+            .collect(Collectors.toCollection(LinkedHashSet::new)));
         return assertions;
     }
     
     /**
-     * Finds concept type assertions that are defined on the given concept instance
+     * Finds property value assertions that have the given instance as their source
      * 
-     * @param instance the given concept instance
-     * @return a list of concept type assertions that are defined on the given concept instance
+     * @param subject the given subject instance
+     * @return a set of relation value assertions that have the given instance as their subject
      */
-    public static List<ConceptTypeAssertion> findTypeAssertions(ConceptInstance instance) {
-        final List<ConceptTypeAssertion> relations = new ArrayList<>(instance.getOwnedTypes());
-        relations.addAll(findReferences(instance).stream()
-            .filter(i -> i instanceof ConceptInstanceReference)
-            .map(i -> (ConceptInstanceReference)i)
-            .flatMap(r -> r.getOwnedTypes().stream())
-            .collect(Collectors.toList()));
-        return relations;
-    }
-
-    /**
-     * Finds relation type assertions that are defined on the given relation instance
-     * 
-     * @param instance the given relation instance
-     * @return a list of relation type assertions that are defined on the given relation instance
-     */
-    public static List<RelationTypeAssertion> findTypeAssertions(RelationInstance instance) {
-        final List<RelationTypeAssertion> relations = new ArrayList<>(instance.getOwnedTypes());
-        relations.addAll(findReferences(instance).stream()
-            .filter(i -> i instanceof RelationInstanceReference)
-            .map(i -> (RelationInstanceReference)i)
-            .flatMap(r -> r.getOwnedTypes().stream())
-            .collect(Collectors.toList()));
-        return relations;
-    }
-
-    // Instance
-
-    /**
-     * Finds property value assertions that are defined on the given instance
-     * 
-     * @param instance the given instance
-     * @return a list of property value assertions that are defined on the given instance
-     */
-    public static List<PropertyValueAssertion> findPropertyValueAssertions(Instance instance) {
-        final List<PropertyValueAssertion> assertions = new ArrayList<>(instance.getOwnedPropertyValues());
-        if (instance instanceof NamedInstance) {
-            assertions.addAll(findReferences((NamedInstance)instance).stream()
-                .filter(i -> i instanceof NamedInstanceReference)
-                .map(i -> (NamedInstanceReference)i)
+    public static Set<PropertyValueAssertion> findPropertyValueAssertionsWithSubject(Instance subject) {
+        final Set<PropertyValueAssertion> assertions = new LinkedHashSet<>(subject.getOwnedPropertyValues());
+        if (subject instanceof NamedInstance) {
+            assertions.addAll(findReferences((NamedInstance)subject).stream()
+                .filter(i -> i instanceof NamedInstance)
+                .map(i -> (NamedInstance)i)
                 .flatMap(r -> r.getOwnedPropertyValues().stream())
-                .collect(Collectors.toList()));
+                .collect(Collectors.toCollection(LinkedHashSet::new)));
         }
         return assertions;
+    }
+
+    /**
+     * Finds relation value assertions that have the given instance as their object
+     * 
+     * @param object the given object instance
+     * @return a set of relation value assertions that have the given instance as their object
+     */
+    public static Set<PropertyValueAssertion> findPropertyValueAssertionsWithObject(NamedInstance object) {
+        return findPropertyValueAssertionsWithNamedInstanceValue(object);
+    }
+
+    /**
+     * Finds instances that are asserted as related to the given instance by any relation
+     * 
+     * @param instance the given instance
+     * @return a set of instances related to the given instance by any relation
+     */
+    public static Set<NamedInstance> findInstancesRelatedTo(NamedInstance instance) {
+        final Set<NamedInstance> related = new LinkedHashSet<>();
+        related.addAll(findInstancesRelatedAsTargetTo(instance));
+        related.addAll(findInstancesRelatedAsSourceTo(instance));
+        return related;
+    }
+
+    /**
+     * Finds instances that are asserted as related to the given instance by a given relation
+     * 
+     * @param instance the given instance
+     * @param relation the given relation
+     * @return a set of instances related to the given instance by a given relation
+     */
+    public static Set<NamedInstance> findInstancesRelatedTo(NamedInstance instance, Relation relation) {
+        final Set<NamedInstance> related = new LinkedHashSet<>();
+        related.addAll(findInstancesRelatedAsTargetTo(instance, relation));
+        related.addAll(findInstancesRelatedAsSourceTo(instance, relation));
+        return related;
+    }
+
+    /**
+     * Finds target instances that are asserted as related to the given source instance by any relation
+     * 
+     * @param source the given source instance
+     * @return a set of target instances related to the given source instance
+     */
+    public static Set<NamedInstance> findInstancesRelatedAsTargetTo(NamedInstance source) {
+        final Set<NamedInstance> targets = new LinkedHashSet<>();
+        // check property value assertions
+        targets.addAll(findPropertyValueAssertionsWithSubject(source).stream()
+        		.filter(a -> a.getProperty() instanceof Relation)
+                .map(a -> a.getNamedInstanceValue())
+                .collect(Collectors.toCollection(LinkedHashSet::new)));
+        // check relation instances
+        targets.addAll(findRelationInstancesWithSource(source).stream()
+                .flatMap(a -> a.getTargets().stream())
+                .collect(Collectors.toCollection(LinkedHashSet::new)));
+        return targets;
+    }
+
+    /**
+     * Finds target instances that are asserted as related to the given source instance by a given relation
+     * 
+     * @param source the given source instance
+     * @param relation the given relation
+     * @return a set of target instances related to the given source instance
+     */
+    public static Set<NamedInstance> findInstancesRelatedAsTargetTo(NamedInstance source, Relation relation) {
+    	final Set<NamedInstance> targets = new LinkedHashSet<>();
+        // look in property value assertions
+        targets.addAll(findPropertyValueAssertionsWithSubject(source).stream()
+                .filter(a -> a.getProperty() == relation)
+                .map(a -> a.getNamedInstanceValue())
+                .collect(Collectors.toCollection(LinkedHashSet::new)));
+        // look in relation instances
+        if (relation instanceof ForwardRelation) {
+	        targets.addAll(findRelationInstancesWithSource(source).stream()
+	                .filter(i -> findIsOfType(i, ((ForwardRelation)relation).getRelationEntity()))
+	                .flatMap(a -> a.getTargets().stream())
+	                .collect(Collectors.toCollection(LinkedHashSet::new)));
+        }
+        return targets;
+    }
+
+    /**
+     * Finds source instances that are related by any relation to the given target instance
+     * 
+     * @param target the given target instance
+     * @return a set of source instances related to the given target instance
+     */
+    public static Set<NamedInstance> findInstancesRelatedAsSourceTo(NamedInstance target) {
+        final Set<NamedInstance> sources = new LinkedHashSet<>();
+        // look in property value assertions
+       sources.addAll(findPropertyValueAssertionsWithObject(target).stream()
+                .map(a -> (NamedInstance) a.getSubject())
+                .collect(Collectors.toCollection(LinkedHashSet::new)));
+       // look in relation instances
+        sources.addAll(findRelationInstancesWithTarget(target).stream()
+                .flatMap(a -> a.getSources().stream())
+                .collect(Collectors.toCollection(LinkedHashSet::new)));
+        return sources;
+    }
+
+    /**
+     * Finds source instances that are related by a given relation to a given target instance
+     * 
+     * @param target the given target instance
+     * @param relation the given relation
+     * @return a set of source instances that are related by a given relation to the given target instance
+     */
+    public static Set<NamedInstance> findInstancesRelatedAsSourceTo(NamedInstance target, Relation relation) {
+        final Set<NamedInstance> sources = new LinkedHashSet<>();
+        // look in property value assertions
+        sources.addAll(findPropertyValueAssertionsWithObject(target).stream()
+                .filter(a -> a.getProperty() == relation)
+                .map(a -> (NamedInstance) a.getSubject())
+                .collect(Collectors.toCollection(LinkedHashSet::new)));
+        // look in relation instances
+        if (relation instanceof ForwardRelation) {
+	        sources.addAll(findRelationInstancesWithTarget(target).stream()
+	                .filter(i -> findIsOfType(i, ((ForwardRelation)relation).getRelationEntity()))
+	                .flatMap(i -> i.getSources().stream())
+	                .collect(Collectors.toCollection(LinkedHashSet::new)));
+        }
+        return sources;
     }
 
     /**
@@ -550,13 +1046,13 @@ public final class OmlSearch extends OmlIndex {
      * 
      * @param instance the given instance
      * @param property the given semantic property
-     * @return a list of elements that represent values of given semantic property defined on the given instance
+     * @return a set of elements that represent values of given semantic property defined on the given instance
      */
-    public static List<Element> findPropertyValues(Instance instance, SemanticProperty property) {
-        return findPropertyValueAssertions(instance).stream()
+    public static Set<Element> findPropertyValues(Instance instance, SemanticProperty property) {
+        return findPropertyValueAssertionsWithSubject(instance).stream()
             .filter(a -> a.getProperty() == property)
             .map(a -> a.getValue())
-            .collect(Collectors.toList());
+            .collect(Collectors.toCollection(LinkedHashSet::new));
     }
     
     /**
@@ -567,60 +1063,26 @@ public final class OmlSearch extends OmlIndex {
      * @return an element that represents a value of given semantic property defined on the given instance
      */
     public static Element findPropertyValue(Instance instance, SemanticProperty property) {
-        return findPropertyValueAssertions(instance).stream()
+        return findPropertyValueAssertionsWithSubject(instance).stream()
             .filter(a -> a.getProperty() == property)
             .map(a -> a.getValue())
             .findFirst().orElse(null);
     }
 
-    // NamedInstance
-
-    /**
-     * Finds link assertions that are defined on the given instance
-     * 
-     * @param instance the given instance
-     * @return a list of link assertions that are defined on the given instance
-     */
-    public static List<LinkAssertion> findLinkAssertions(NamedInstance instance) {
-        final List<LinkAssertion> assertions = new ArrayList<>(instance.getOwnedLinks());
-        assertions.addAll(findReferences(instance).stream()
-            .filter(i -> i instanceof NamedInstanceReference)
-            .map(i -> (NamedInstanceReference)i)
-            .flatMap(r -> r.getOwnedLinks().stream())
-            .collect(Collectors.toList()));
-        return assertions;
-    }
-
-    /**
-     * Finds link assertions that have the given instance as their source
-     * 
-     * @param instance the given instance
-     * @return a list of link assertions that have the given instance as their source
-     */
-    public static List<LinkAssertion> findLinkAssertionsWithSource(NamedInstance instance) {
-        return findLinkAssertions(instance);
-    }
-    
-    //-------------------------------------------------
-    // INSTANCES
-    //-------------------------------------------------
-
-    // Instance
-    
     /**
      * Finds classifiers that are direct types of the given instance
      * 
      * @param instance the given instance
-     * @return a list of classifiers that are direcf types of the given instance
+     * @return a set of classifiers that are direcf types of the given instance
      */
-    public static List<Classifier> findTypes(Instance instance) {
-        List<Classifier> types = new ArrayList<>();
+    public static Set<Classifier> findTypes(Instance instance) {
+        Set<Classifier> types = new LinkedHashSet<>();
         if (instance instanceof StructureInstance) {
             types.add(((StructureInstance) instance).getType());
         } else if (instance instanceof NamedInstance) {
             types.addAll(findTypeAssertions((NamedInstance)instance).stream().
                 map(i -> i.getType()).
-                collect(Collectors.toList()));
+                collect(Collectors.toCollection(LinkedHashSet::new)));
         }
         return types;
     }
@@ -629,15 +1091,15 @@ public final class OmlSearch extends OmlIndex {
      * Finds classifiers that are direct or indirect types of the given instance
      * 
      * @param instance the given instance
-     * @return a list of classifiers that are direct or indirect types of the given instance
+     * @return a set of classifiers that are direct or indirect types of the given instance
      */
-    public static List<Classifier> findAllTypes(Instance instance) {
-        List<Classifier> types = findTypes(instance).stream()
+    public static Set<Classifier> findAllTypes(Instance instance) {
+        Set<Classifier> types = findTypes(instance).stream()
         		.flatMap(t -> OmlSearch.findAllSuperTerms(t, true).stream())
         		.filter(t -> t instanceof Classifier)
         		.map(t -> (Classifier)t)
         		.distinct()
-        		.collect(Collectors.toList());
+        		.collect(Collectors.toCollection(LinkedHashSet::new));
         return types;
     }
 
@@ -648,7 +1110,7 @@ public final class OmlSearch extends OmlIndex {
      * @param type the given type
      * @return true if the given instance is typed directly by the given type; otherwise false
      */
-    public static boolean findIsTypeOf(Instance instance, Classifier type) {
+    public static boolean findIsOfType(Instance instance, Classifier type) {
         if (instance instanceof StructureInstance) {
             return ((StructureInstance)instance).getType() == type;
         } else if (instance instanceof NamedInstance) {
@@ -666,7 +1128,7 @@ public final class OmlSearch extends OmlIndex {
      * @param type the given type
      * @return true if the given instance is typed directly or transitively by the given type; otherwise false
      */
-    public static boolean findIsKindOf(Instance instance, Classifier type) {
+    public static boolean findIsOfKind(Instance instance, Classifier type) {
         if (instance instanceof StructureInstance) {
             return findIsSubTermOf(((StructureInstance)instance).getType(), type);
         } else if (instance instanceof NamedInstance) {
@@ -678,128 +1140,39 @@ public final class OmlSearch extends OmlIndex {
         return false;
     }
 
-    // Classifier
-
     /**
      * Finds instances that have the given type as their direct type
      * 
      * @param type the given type
-     * @return a list of instances that have the given type as their direct type
+     * @return a set of instances that have the given type as their direct type
      */
-    public static List<Instance> findInstancesOfType(Classifier type) {
-        if (type instanceof Concept) {
-            return findConceptTypeAssertionsWithType((Concept)type).stream()
-                .map(i -> OmlRead.getSubject(i))
-                .collect(Collectors.toList());
-        } else if (type instanceof RelationEntity) {
-            return findRelationTypeAssertionsWithType((RelationEntity)type).stream()
-                .map(i -> OmlRead.getSubject(i))
-                .collect(Collectors.toList());
+    public static Set<Instance> findInstancesOfType(Classifier type) {
+        if (type instanceof Entity) {
+            return findTypeAssertionsWithType((Entity)type).stream()
+                .map(i -> i.getSubject())
+                .collect(Collectors.toCollection(LinkedHashSet::new));
         } else if (type instanceof Structure) {
-            return new ArrayList<Instance>(findStructureInstancesWithType((Structure)type));
+            return new LinkedHashSet<Instance>(findStructureInstancesWithType((Structure)type));
         }
-        return Collections.emptyList();
+        return Collections.emptySet();
     }
 
     /**
      * Finds instances that have the given type as their direct or transitive type
      * 
      * @param type the given type
-     * @return a list of instances that have the given type as their direct or transitive type
+     * @return a set of instances that have the given type as their direct or transitive type
      */
-    public static List<Instance> findInstancesOfKind(Classifier type) {
+    public static Set<Instance> findInstancesOfKind(Classifier type) {
         return findAllSubTerms(type, true).stream()
             .map(t -> (Classifier)t)
             .flatMap(t -> findInstancesOfType(t).stream())
-            .collect(Collectors.toList());
-    }
-
-    
-    // NamedInstance
-
-    /**
-     * Finds target instances that are related by any relation to the given source instance
-     * 
-     * @param source the given source instance
-     * @return a list of target instances that are related by any relation to the given source instance
-     */
-    public static List<NamedInstance> findInstancesRelatedFrom(NamedInstance source) {
-        final List<NamedInstance> targets = new ArrayList<>();
-        targets.addAll(findLinkAssertions(source).stream()
-                .map(a -> a.getTarget())
-                .collect(Collectors.toList()));
-        targets.addAll(findRelationInstancesWithSource(source).stream()
-                .flatMap(a -> a.getTargets().stream())
-                .collect(Collectors.toList()));
-        return targets;
-    }
-
-    /**
-     * Finds target instances that are related by a given relation to the given source instance
-     * 
-     * @param source the given source instance
-     * @param relation the given relation
-     * @return a list of target instances that are related by a given relation to the given source instance
-     */
-    public static List<NamedInstance> findInstancesRelatedFrom(NamedInstance source, Relation relation) {
-        final List<NamedInstance> targets = new ArrayList<>();
-        targets.addAll(findLinkAssertions(source).stream()
-                .filter(a -> a.getRelation() == relation)
-                .map(a -> a.getTarget())
-                .collect(Collectors.toList()));
-        if (relation instanceof ForwardRelation) {
-	        targets.addAll(findRelationInstancesWithSource(source).stream()
-	                .filter(i -> findTypes(i).stream().anyMatch(t -> ((RelationEntity)t).getForwardRelation() == relation))
-	                .flatMap(a -> a.getTargets().stream())
-	                .collect(Collectors.toList()));
-        }
-        return targets;
-    }
-
-    /**
-     * Finds source instances that are related by any relation to the given target instance
-     * 
-     * @param target the given target instance
-     * @return a list of source instances that are related by any relation to the given target instance
-     */
-    public static List<NamedInstance> findInstancesRelatedTo(NamedInstance target) {
-        final List<NamedInstance> sources = new ArrayList<>();
-        sources.addAll(findLinkAssertionsWithTarget(target).stream()
-                .map(a -> OmlRead.getSource(a))
-                .collect(Collectors.toList()));
-        sources.addAll(findRelationInstancesWithTarget(target).stream()
-                .flatMap(a -> a.getSources().stream())
-                .collect(Collectors.toList()));
-        return sources;
-    }
-
-    /**
-     * Finds source instances that are related by a given relation to a given target instance
-     * 
-     * @param target the given target instance
-     * @param relation the given relation
-     * @return a list of source instances that are related by a given relation to the given target instance
-     */
-    public static List<NamedInstance> findInstancesRelatedTo(NamedInstance target, Relation relation) {
-        final List<NamedInstance> sources = new ArrayList<>();
-        sources.addAll(findLinkAssertionsWithTarget(target).stream()
-                .filter(a -> a.getRelation() == relation)
-                .map(a -> OmlRead.getSource(a))
-                .collect(Collectors.toList()));
-        if (relation instanceof ForwardRelation) {
-	        sources.addAll(findRelationInstancesWithTarget(target).stream()
-	                .filter(i -> findTypes(i).stream().anyMatch(t -> ((RelationEntity)t).getForwardRelation() == relation))
-	                .flatMap(i -> i.getSources().stream())
-	                .collect(Collectors.toList()));
-        }
-        return sources;
+            .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
     //-------------------------------------------------
     // LITERALS
     //-------------------------------------------------
-
-    // Scalar
 
     /**
      * Finds the Java type that corresponds to the given scalar
@@ -859,7 +1232,60 @@ public final class OmlSearch extends OmlIndex {
                 }
             return value;
         }
-        return OmlRead.getValue(literal);
+        return literal.getValue();
     }
 
+    /**
+     * Finds the scalar that is the direct type of the given literal
+     * 
+     * @param literal the given literal
+     * @return a scalar that is the type of the given literal
+     */
+    public static Scalar findType(Literal literal) {
+        return OmlRead.getType(literal);
+    }
+
+    /**
+     * Finds all the scalars that are direct or indirect types of the given literal
+     * 
+     * @param literal the given literal
+     * @return a set of scalars that are direct or indirect types of the given literal
+     */
+    public static Set<Scalar> findAllTypes(Literal literal) {
+        Set<Scalar> types = OmlSearch.findAllSuperTerms(OmlRead.getType(literal), true).stream()
+        		.filter(t -> t instanceof Scalar)
+        		.map(t -> (Scalar)t)
+        		.distinct()
+        		.collect(Collectors.toCollection(LinkedHashSet::new));
+        return types;
+    }
+
+    /**
+     * Finds if the given literal is typed directly or transitively by the given type
+     * 
+     * @param literal the given literal
+     * @param type the given type
+     * @return true if the given literal is typed directly or transitively by the given type; otherwise false
+     */
+    /**
+     * Determines if the given literal is typed directly by the given type
+     * 
+     * @param literal the given literal
+     * @param type the given type
+     * @return true if the given literal is typed directly by the given type; otherwise false
+     */
+    public static boolean findIsOfKind(Literal literal, Scalar type) {
+    	if (type.getOwnedEnumeration() != null) {
+    		return type.getOwnedEnumeration().getLiterals().stream().anyMatch(i -> i.getLexicalValue().equals(literal.getLexicalValue()));
+    	} else if (OmlRead.isStandardScalar(type)) {
+    		return findAllTypes(literal).contains(type);
+    	}
+    	for (Term t : findAllSuperTerms(type, false)) {
+    		Scalar supertype = (Scalar)t;
+    		if (!findIsOfKind(literal, supertype)) {
+    			return false;
+    		}
+    	}
+    	return true;
+	}
 }

@@ -141,12 +141,7 @@ public class InstanceItemProvider extends ElementItemProvider {
 		newChildDescriptors.add
 			(createChildParameter
 				(OmlPackage.Literals.INSTANCE__OWNED_PROPERTY_VALUES,
-				 OmlFactory.eINSTANCE.createScalarPropertyValueAssertion()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OmlPackage.Literals.INSTANCE__OWNED_PROPERTY_VALUES,
-				 OmlFactory.eINSTANCE.createStructuredPropertyValueAssertion()));
+				 OmlFactory.eINSTANCE.createPropertyValueAssertion()));
 	}
 
 }

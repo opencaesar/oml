@@ -30,8 +30,7 @@ import org.eclipse.emf.common.util.Enumerator;
  * and utility methods for working with them.
  * <!-- end-user-doc -->
  * <!-- begin-model-doc -->
- * SeparatorKind is an enumeration that specifies the separator character of an ontology's namespace. It can either
- * be only of two values: a hash '#' or a slash '/'.
+ * SeparatorKind is an enumeration that specifies the separator character of an ontology's namespace. It can be one of two values: # or /.
  * <!-- end-model-doc -->
  * @see io.opencaesar.oml.OmlPackage#getSeparatorKind()
  * @model annotation="https://tabatkins.github.io/bikeshed heading='Elements'"

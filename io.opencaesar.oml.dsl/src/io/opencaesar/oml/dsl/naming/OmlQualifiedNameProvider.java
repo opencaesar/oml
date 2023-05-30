@@ -25,10 +25,10 @@ import org.eclipse.xtext.naming.QualifiedName;
 public class OmlQualifiedNameProvider extends DefaultDeclarativeQualifiedNameProvider {
 
 	public QualifiedName qualifiedName(final Member member) {
-		return this.getConverter().toQualifiedName(member.getIri());
+		return (member.getName() != null) ? getConverter().toQualifiedName(member.getIri()) : null;
 	}
 
 	public QualifiedName qualifiedName(final Ontology ontology) {
-		return this.getConverter().toQualifiedName(ontology.getNamespace());
+		return getConverter().toQualifiedName(ontology.getNamespace());
 	}
 }

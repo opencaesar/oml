@@ -18,11 +18,14 @@
  */
 package io.opencaesar.oml.impl;
 
+import io.opencaesar.oml.Argument;
+import io.opencaesar.oml.BinaryPredicate;
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.RelationEntity;
 import io.opencaesar.oml.RelationEntityPredicate;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -37,42 +40,43 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link io.opencaesar.oml.impl.RelationEntityPredicateImpl#getEntity <em>Entity</em>}</li>
- *   <li>{@link io.opencaesar.oml.impl.RelationEntityPredicateImpl#getEntityVariable <em>Entity Variable</em>}</li>
+ *   <li>{@link io.opencaesar.oml.impl.RelationEntityPredicateImpl#getArgument1 <em>Argument1</em>}</li>
+ *   <li>{@link io.opencaesar.oml.impl.RelationEntityPredicateImpl#getArgument2 <em>Argument2</em>}</li>
+ *   <li>{@link io.opencaesar.oml.impl.RelationEntityPredicateImpl#getType <em>Type</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class RelationEntityPredicateImpl extends BinaryPredicateImpl implements RelationEntityPredicate {
+public class RelationEntityPredicateImpl extends UnaryPredicateImpl implements RelationEntityPredicate {
 	/**
-	 * The cached value of the '{@link #getEntity() <em>Entity</em>}' reference.
+	 * The cached value of the '{@link #getArgument1() <em>Argument1</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getEntity()
+	 * @see #getArgument1()
 	 * @generated
 	 * @ordered
 	 */
-	protected RelationEntity entity;
+	protected Argument argument1;
 
 	/**
-	 * The default value of the '{@link #getEntityVariable() <em>Entity Variable</em>}' attribute.
+	 * The cached value of the '{@link #getArgument2() <em>Argument2</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getEntityVariable()
+	 * @see #getArgument2()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String ENTITY_VARIABLE_EDEFAULT = null;
+	protected Argument argument2;
 
 	/**
-	 * The cached value of the '{@link #getEntityVariable() <em>Entity Variable</em>}' attribute.
+	 * The cached value of the '{@link #getType() <em>Type</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getEntityVariable()
+	 * @see #getType()
 	 * @generated
 	 * @ordered
 	 */
-	protected String entityVariable = ENTITY_VARIABLE_EDEFAULT;
+	protected RelationEntity type;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -99,16 +103,106 @@ public class RelationEntityPredicateImpl extends BinaryPredicateImpl implements 
 	 * @generated
 	 */
 	@Override
-	public RelationEntity getEntity() {
-		if (entity != null && entity.eIsProxy()) {
-			InternalEObject oldEntity = (InternalEObject)entity;
-			entity = (RelationEntity)eResolveProxy(oldEntity);
-			if (entity != oldEntity) {
+	public Argument getArgument1() {
+		return argument1;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetArgument1(Argument newArgument1, NotificationChain msgs) {
+		Argument oldArgument1 = argument1;
+		argument1 = newArgument1;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OmlPackage.RELATION_ENTITY_PREDICATE__ARGUMENT1, oldArgument1, newArgument1);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setArgument1(Argument newArgument1) {
+		if (newArgument1 != argument1) {
+			NotificationChain msgs = null;
+			if (argument1 != null)
+				msgs = ((InternalEObject)argument1).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OmlPackage.RELATION_ENTITY_PREDICATE__ARGUMENT1, null, msgs);
+			if (newArgument1 != null)
+				msgs = ((InternalEObject)newArgument1).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - OmlPackage.RELATION_ENTITY_PREDICATE__ARGUMENT1, null, msgs);
+			msgs = basicSetArgument1(newArgument1, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.RELATION_ENTITY_PREDICATE__ARGUMENT1, newArgument1, newArgument1));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Argument getArgument2() {
+		return argument2;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetArgument2(Argument newArgument2, NotificationChain msgs) {
+		Argument oldArgument2 = argument2;
+		argument2 = newArgument2;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OmlPackage.RELATION_ENTITY_PREDICATE__ARGUMENT2, oldArgument2, newArgument2);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setArgument2(Argument newArgument2) {
+		if (newArgument2 != argument2) {
+			NotificationChain msgs = null;
+			if (argument2 != null)
+				msgs = ((InternalEObject)argument2).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OmlPackage.RELATION_ENTITY_PREDICATE__ARGUMENT2, null, msgs);
+			if (newArgument2 != null)
+				msgs = ((InternalEObject)newArgument2).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - OmlPackage.RELATION_ENTITY_PREDICATE__ARGUMENT2, null, msgs);
+			msgs = basicSetArgument2(newArgument2, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.RELATION_ENTITY_PREDICATE__ARGUMENT2, newArgument2, newArgument2));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public RelationEntity getType() {
+		if (type != null && type.eIsProxy()) {
+			InternalEObject oldType = (InternalEObject)type;
+			type = (RelationEntity)eResolveProxy(oldType);
+			if (type != oldType) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, OmlPackage.RELATION_ENTITY_PREDICATE__ENTITY, oldEntity, entity));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, OmlPackage.RELATION_ENTITY_PREDICATE__TYPE, oldType, type));
 			}
 		}
-		return entity;
+		return type;
 	}
 
 	/**
@@ -116,8 +210,8 @@ public class RelationEntityPredicateImpl extends BinaryPredicateImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public RelationEntity basicGetEntity() {
-		return entity;
+	public RelationEntity basicGetType() {
+		return type;
 	}
 
 	/**
@@ -126,11 +220,11 @@ public class RelationEntityPredicateImpl extends BinaryPredicateImpl implements 
 	 * @generated
 	 */
 	@Override
-	public void setEntity(RelationEntity newEntity) {
-		RelationEntity oldEntity = entity;
-		entity = newEntity;
+	public void setType(RelationEntity newType) {
+		RelationEntity oldType = type;
+		type = newType;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.RELATION_ENTITY_PREDICATE__ENTITY, oldEntity, entity));
+			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.RELATION_ENTITY_PREDICATE__TYPE, oldType, type));
 	}
 
 	/**
@@ -139,21 +233,14 @@ public class RelationEntityPredicateImpl extends BinaryPredicateImpl implements 
 	 * @generated
 	 */
 	@Override
-	public String getEntityVariable() {
-		return entityVariable;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setEntityVariable(String newEntityVariable) {
-		String oldEntityVariable = entityVariable;
-		entityVariable = newEntityVariable;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.RELATION_ENTITY_PREDICATE__ENTITY_VARIABLE, oldEntityVariable, entityVariable));
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case OmlPackage.RELATION_ENTITY_PREDICATE__ARGUMENT1:
+				return basicSetArgument1(null, msgs);
+			case OmlPackage.RELATION_ENTITY_PREDICATE__ARGUMENT2:
+				return basicSetArgument2(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -164,11 +251,13 @@ public class RelationEntityPredicateImpl extends BinaryPredicateImpl implements 
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case OmlPackage.RELATION_ENTITY_PREDICATE__ENTITY:
-				if (resolve) return getEntity();
-				return basicGetEntity();
-			case OmlPackage.RELATION_ENTITY_PREDICATE__ENTITY_VARIABLE:
-				return getEntityVariable();
+			case OmlPackage.RELATION_ENTITY_PREDICATE__ARGUMENT1:
+				return getArgument1();
+			case OmlPackage.RELATION_ENTITY_PREDICATE__ARGUMENT2:
+				return getArgument2();
+			case OmlPackage.RELATION_ENTITY_PREDICATE__TYPE:
+				if (resolve) return getType();
+				return basicGetType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -181,11 +270,14 @@ public class RelationEntityPredicateImpl extends BinaryPredicateImpl implements 
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case OmlPackage.RELATION_ENTITY_PREDICATE__ENTITY:
-				setEntity((RelationEntity)newValue);
+			case OmlPackage.RELATION_ENTITY_PREDICATE__ARGUMENT1:
+				setArgument1((Argument)newValue);
 				return;
-			case OmlPackage.RELATION_ENTITY_PREDICATE__ENTITY_VARIABLE:
-				setEntityVariable((String)newValue);
+			case OmlPackage.RELATION_ENTITY_PREDICATE__ARGUMENT2:
+				setArgument2((Argument)newValue);
+				return;
+			case OmlPackage.RELATION_ENTITY_PREDICATE__TYPE:
+				setType((RelationEntity)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -199,11 +291,14 @@ public class RelationEntityPredicateImpl extends BinaryPredicateImpl implements 
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case OmlPackage.RELATION_ENTITY_PREDICATE__ENTITY:
-				setEntity((RelationEntity)null);
+			case OmlPackage.RELATION_ENTITY_PREDICATE__ARGUMENT1:
+				setArgument1((Argument)null);
 				return;
-			case OmlPackage.RELATION_ENTITY_PREDICATE__ENTITY_VARIABLE:
-				setEntityVariable(ENTITY_VARIABLE_EDEFAULT);
+			case OmlPackage.RELATION_ENTITY_PREDICATE__ARGUMENT2:
+				setArgument2((Argument)null);
+				return;
+			case OmlPackage.RELATION_ENTITY_PREDICATE__TYPE:
+				setType((RelationEntity)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -217,10 +312,12 @@ public class RelationEntityPredicateImpl extends BinaryPredicateImpl implements 
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case OmlPackage.RELATION_ENTITY_PREDICATE__ENTITY:
-				return entity != null;
-			case OmlPackage.RELATION_ENTITY_PREDICATE__ENTITY_VARIABLE:
-				return ENTITY_VARIABLE_EDEFAULT == null ? entityVariable != null : !ENTITY_VARIABLE_EDEFAULT.equals(entityVariable);
+			case OmlPackage.RELATION_ENTITY_PREDICATE__ARGUMENT1:
+				return argument1 != null;
+			case OmlPackage.RELATION_ENTITY_PREDICATE__ARGUMENT2:
+				return argument2 != null;
+			case OmlPackage.RELATION_ENTITY_PREDICATE__TYPE:
+				return type != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -231,14 +328,32 @@ public class RelationEntityPredicateImpl extends BinaryPredicateImpl implements 
 	 * @generated
 	 */
 	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == BinaryPredicate.class) {
+			switch (derivedFeatureID) {
+				case OmlPackage.RELATION_ENTITY_PREDICATE__ARGUMENT1: return OmlPackage.BINARY_PREDICATE__ARGUMENT1;
+				case OmlPackage.RELATION_ENTITY_PREDICATE__ARGUMENT2: return OmlPackage.BINARY_PREDICATE__ARGUMENT2;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
 
-		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (entityVariable: ");
-		result.append(entityVariable);
-		result.append(')');
-		return result.toString();
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == BinaryPredicate.class) {
+			switch (baseFeatureID) {
+				case OmlPackage.BINARY_PREDICATE__ARGUMENT1: return OmlPackage.RELATION_ENTITY_PREDICATE__ARGUMENT1;
+				case OmlPackage.BINARY_PREDICATE__ARGUMENT2: return OmlPackage.RELATION_ENTITY_PREDICATE__ARGUMENT2;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
 } //RelationEntityPredicateImpl

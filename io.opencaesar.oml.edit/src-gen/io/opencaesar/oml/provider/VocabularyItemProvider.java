@@ -78,7 +78,6 @@ public class VocabularyItemProvider extends VocabularyBoxItemProvider {
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(OmlPackage.Literals.VOCABULARY__OWNED_IMPORTS);
 			childrenFeatures.add(OmlPackage.Literals.VOCABULARY__OWNED_STATEMENTS);
 		}
 		return childrenFeatures;
@@ -135,7 +134,6 @@ public class VocabularyItemProvider extends VocabularyBoxItemProvider {
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Vocabulary.class)) {
-			case OmlPackage.VOCABULARY__OWNED_IMPORTS:
 			case OmlPackage.VOCABULARY__OWNED_STATEMENTS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
@@ -156,13 +154,23 @@ public class VocabularyItemProvider extends VocabularyBoxItemProvider {
 
 		newChildDescriptors.add
 			(createChildParameter
-				(OmlPackage.Literals.VOCABULARY__OWNED_IMPORTS,
-				 OmlFactory.eINSTANCE.createVocabularyExtension()));
+				(OmlPackage.Literals.VOCABULARY__OWNED_STATEMENTS,
+				 OmlFactory.eINSTANCE.createRule()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(OmlPackage.Literals.VOCABULARY__OWNED_IMPORTS,
-				 OmlFactory.eINSTANCE.createVocabularyUsage()));
+				(OmlPackage.Literals.VOCABULARY__OWNED_STATEMENTS,
+				 OmlFactory.eINSTANCE.createBuiltIn()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(OmlPackage.Literals.VOCABULARY__OWNED_STATEMENTS,
+				 OmlFactory.eINSTANCE.createScalar()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(OmlPackage.Literals.VOCABULARY__OWNED_STATEMENTS,
+				 OmlFactory.eINSTANCE.createStructure()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -182,11 +190,6 @@ public class VocabularyItemProvider extends VocabularyBoxItemProvider {
 		newChildDescriptors.add
 			(createChildParameter
 				(OmlPackage.Literals.VOCABULARY__OWNED_STATEMENTS,
-				 OmlFactory.eINSTANCE.createStructure()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OmlPackage.Literals.VOCABULARY__OWNED_STATEMENTS,
 				 OmlFactory.eINSTANCE.createAnnotationProperty()));
 
 		newChildDescriptors.add
@@ -202,72 +205,7 @@ public class VocabularyItemProvider extends VocabularyBoxItemProvider {
 		newChildDescriptors.add
 			(createChildParameter
 				(OmlPackage.Literals.VOCABULARY__OWNED_STATEMENTS,
-				 OmlFactory.eINSTANCE.createFacetedScalar()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OmlPackage.Literals.VOCABULARY__OWNED_STATEMENTS,
-				 OmlFactory.eINSTANCE.createEnumeratedScalar()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OmlPackage.Literals.VOCABULARY__OWNED_STATEMENTS,
-				 OmlFactory.eINSTANCE.createRule()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OmlPackage.Literals.VOCABULARY__OWNED_STATEMENTS,
-				 OmlFactory.eINSTANCE.createAspectReference()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OmlPackage.Literals.VOCABULARY__OWNED_STATEMENTS,
-				 OmlFactory.eINSTANCE.createConceptReference()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OmlPackage.Literals.VOCABULARY__OWNED_STATEMENTS,
-				 OmlFactory.eINSTANCE.createRelationEntityReference()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OmlPackage.Literals.VOCABULARY__OWNED_STATEMENTS,
-				 OmlFactory.eINSTANCE.createStructureReference()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OmlPackage.Literals.VOCABULARY__OWNED_STATEMENTS,
-				 OmlFactory.eINSTANCE.createAnnotationPropertyReference()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OmlPackage.Literals.VOCABULARY__OWNED_STATEMENTS,
-				 OmlFactory.eINSTANCE.createScalarPropertyReference()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OmlPackage.Literals.VOCABULARY__OWNED_STATEMENTS,
-				 OmlFactory.eINSTANCE.createStructuredPropertyReference()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OmlPackage.Literals.VOCABULARY__OWNED_STATEMENTS,
-				 OmlFactory.eINSTANCE.createFacetedScalarReference()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OmlPackage.Literals.VOCABULARY__OWNED_STATEMENTS,
-				 OmlFactory.eINSTANCE.createEnumeratedScalarReference()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OmlPackage.Literals.VOCABULARY__OWNED_STATEMENTS,
-				 OmlFactory.eINSTANCE.createRelationReference()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OmlPackage.Literals.VOCABULARY__OWNED_STATEMENTS,
-				 OmlFactory.eINSTANCE.createRuleReference()));
+				 OmlFactory.eINSTANCE.createUnreifiedRelation()));
 	}
 
 }

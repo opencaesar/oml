@@ -20,19 +20,25 @@ package io.opencaesar.oml.impl;
 
 import io.opencaesar.oml.Classifier;
 import io.opencaesar.oml.OmlPackage;
+import io.opencaesar.oml.PropertyEquivalenceAxiom;
+import io.opencaesar.oml.SpecializableProperty;
 import io.opencaesar.oml.SpecializableTerm;
 import io.opencaesar.oml.SpecializationAxiom;
 import io.opencaesar.oml.Statement;
 import io.opencaesar.oml.Structure;
 import io.opencaesar.oml.StructuredProperty;
+import io.opencaesar.oml.Type;
 import io.opencaesar.oml.Vocabulary;
 import io.opencaesar.oml.VocabularyStatement;
+
+import java.lang.reflect.InvocationTargetException;
 
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
@@ -41,6 +47,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -54,9 +61,11 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <ul>
  *   <li>{@link io.opencaesar.oml.impl.StructuredPropertyImpl#getOwningVocabulary <em>Owning Vocabulary</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.StructuredPropertyImpl#getOwnedSpecializations <em>Owned Specializations</em>}</li>
+ *   <li>{@link io.opencaesar.oml.impl.StructuredPropertyImpl#getOwnedEquivalences <em>Owned Equivalences</em>}</li>
+ *   <li>{@link io.opencaesar.oml.impl.StructuredPropertyImpl#getRef <em>Ref</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.StructuredPropertyImpl#isFunctional <em>Functional</em>}</li>
- *   <li>{@link io.opencaesar.oml.impl.StructuredPropertyImpl#getDomain <em>Domain</em>}</li>
- *   <li>{@link io.opencaesar.oml.impl.StructuredPropertyImpl#getRange <em>Range</em>}</li>
+ *   <li>{@link io.opencaesar.oml.impl.StructuredPropertyImpl#getDomains <em>Domains</em>}</li>
+ *   <li>{@link io.opencaesar.oml.impl.StructuredPropertyImpl#getRanges <em>Ranges</em>}</li>
  * </ul>
  *
  * @generated
@@ -71,6 +80,26 @@ public class StructuredPropertyImpl extends SemanticPropertyImpl implements Stru
 	 * @ordered
 	 */
 	protected EList<SpecializationAxiom> ownedSpecializations;
+
+	/**
+	 * The cached value of the '{@link #getOwnedEquivalences() <em>Owned Equivalences</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOwnedEquivalences()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<PropertyEquivalenceAxiom> ownedEquivalences;
+
+	/**
+	 * The cached value of the '{@link #getRef() <em>Ref</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRef()
+	 * @generated
+	 * @ordered
+	 */
+	protected StructuredProperty ref;
 
 	/**
 	 * The default value of the '{@link #isFunctional() <em>Functional</em>}' attribute.
@@ -93,24 +122,24 @@ public class StructuredPropertyImpl extends SemanticPropertyImpl implements Stru
 	protected boolean functional = FUNCTIONAL_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getDomain() <em>Domain</em>}' reference.
+	 * The cached value of the '{@link #getDomains() <em>Domains</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getDomain()
+	 * @see #getDomains()
 	 * @generated
 	 * @ordered
 	 */
-	protected Classifier domain;
+	protected EList<Classifier> domains;
 
 	/**
-	 * The cached value of the '{@link #getRange() <em>Range</em>}' reference.
+	 * The cached value of the '{@link #getRanges() <em>Ranges</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getRange()
+	 * @see #getRanges()
 	 * @generated
 	 * @ordered
 	 */
-	protected Structure range;
+	protected EList<Structure> ranges;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -203,6 +232,59 @@ public class StructuredPropertyImpl extends SemanticPropertyImpl implements Stru
 	 * @generated
 	 */
 	@Override
+	public EList<PropertyEquivalenceAxiom> getOwnedEquivalences() {
+		if (ownedEquivalences == null) {
+			ownedEquivalences = new EObjectContainmentWithInverseEList<PropertyEquivalenceAxiom>(PropertyEquivalenceAxiom.class, this, OmlPackage.STRUCTURED_PROPERTY__OWNED_EQUIVALENCES, OmlPackage.PROPERTY_EQUIVALENCE_AXIOM__OWNING_PROPERTY);
+		}
+		return ownedEquivalences;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public StructuredProperty getRef() {
+		if (ref != null && ref.eIsProxy()) {
+			InternalEObject oldRef = (InternalEObject)ref;
+			ref = (StructuredProperty)eResolveProxy(oldRef);
+			if (ref != oldRef) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, OmlPackage.STRUCTURED_PROPERTY__REF, oldRef, ref));
+			}
+		}
+		return ref;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public StructuredProperty basicGetRef() {
+		return ref;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setRef(StructuredProperty newRef) {
+		StructuredProperty oldRef = ref;
+		ref = newRef;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.STRUCTURED_PROPERTY__REF, oldRef, ref));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public boolean isFunctional() {
 		return functional;
 	}
@@ -226,25 +308,11 @@ public class StructuredPropertyImpl extends SemanticPropertyImpl implements Stru
 	 * @generated
 	 */
 	@Override
-	public Classifier getDomain() {
-		if (domain != null && domain.eIsProxy()) {
-			InternalEObject oldDomain = (InternalEObject)domain;
-			domain = (Classifier)eResolveProxy(oldDomain);
-			if (domain != oldDomain) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, OmlPackage.STRUCTURED_PROPERTY__DOMAIN, oldDomain, domain));
-			}
+	public EList<Classifier> getDomains() {
+		if (domains == null) {
+			domains = new EObjectResolvingEList<Classifier>(Classifier.class, this, OmlPackage.STRUCTURED_PROPERTY__DOMAINS);
 		}
-		return domain;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Classifier basicGetDomain() {
-		return domain;
+		return domains;
 	}
 
 	/**
@@ -253,38 +321,11 @@ public class StructuredPropertyImpl extends SemanticPropertyImpl implements Stru
 	 * @generated
 	 */
 	@Override
-	public void setDomain(Classifier newDomain) {
-		Classifier oldDomain = domain;
-		domain = newDomain;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.STRUCTURED_PROPERTY__DOMAIN, oldDomain, domain));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Structure getRange() {
-		if (range != null && range.eIsProxy()) {
-			InternalEObject oldRange = (InternalEObject)range;
-			range = (Structure)eResolveProxy(oldRange);
-			if (range != oldRange) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, OmlPackage.STRUCTURED_PROPERTY__RANGE, oldRange, range));
-			}
+	public EList<Structure> getRanges() {
+		if (ranges == null) {
+			ranges = new EObjectResolvingEList<Structure>(Structure.class, this, OmlPackage.STRUCTURED_PROPERTY__RANGES);
 		}
-		return range;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Structure basicGetRange() {
-		return range;
+		return ranges;
 	}
 
 	/**
@@ -293,11 +334,19 @@ public class StructuredPropertyImpl extends SemanticPropertyImpl implements Stru
 	 * @generated
 	 */
 	@Override
-	public void setRange(Structure newRange) {
-		Structure oldRange = range;
-		range = newRange;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.STRUCTURED_PROPERTY__RANGE, oldRange, range));
+	public EList<Classifier> getDomainList() {
+		return this.getDomains();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EList<Type> getRangeList() {
+		EList<Structure> _ranges = this.getRanges();
+		return new BasicEList<Type>(_ranges);
 	}
 
 	/**
@@ -315,6 +364,8 @@ public class StructuredPropertyImpl extends SemanticPropertyImpl implements Stru
 				return basicSetOwningVocabulary((Vocabulary)otherEnd, msgs);
 			case OmlPackage.STRUCTURED_PROPERTY__OWNED_SPECIALIZATIONS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedSpecializations()).basicAdd(otherEnd, msgs);
+			case OmlPackage.STRUCTURED_PROPERTY__OWNED_EQUIVALENCES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedEquivalences()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -331,6 +382,8 @@ public class StructuredPropertyImpl extends SemanticPropertyImpl implements Stru
 				return basicSetOwningVocabulary(null, msgs);
 			case OmlPackage.STRUCTURED_PROPERTY__OWNED_SPECIALIZATIONS:
 				return ((InternalEList<?>)getOwnedSpecializations()).basicRemove(otherEnd, msgs);
+			case OmlPackage.STRUCTURED_PROPERTY__OWNED_EQUIVALENCES:
+				return ((InternalEList<?>)getOwnedEquivalences()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -362,14 +415,17 @@ public class StructuredPropertyImpl extends SemanticPropertyImpl implements Stru
 				return basicGetOwningVocabulary();
 			case OmlPackage.STRUCTURED_PROPERTY__OWNED_SPECIALIZATIONS:
 				return getOwnedSpecializations();
+			case OmlPackage.STRUCTURED_PROPERTY__OWNED_EQUIVALENCES:
+				return getOwnedEquivalences();
+			case OmlPackage.STRUCTURED_PROPERTY__REF:
+				if (resolve) return getRef();
+				return basicGetRef();
 			case OmlPackage.STRUCTURED_PROPERTY__FUNCTIONAL:
 				return isFunctional();
-			case OmlPackage.STRUCTURED_PROPERTY__DOMAIN:
-				if (resolve) return getDomain();
-				return basicGetDomain();
-			case OmlPackage.STRUCTURED_PROPERTY__RANGE:
-				if (resolve) return getRange();
-				return basicGetRange();
+			case OmlPackage.STRUCTURED_PROPERTY__DOMAINS:
+				return getDomains();
+			case OmlPackage.STRUCTURED_PROPERTY__RANGES:
+				return getRanges();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -390,14 +446,23 @@ public class StructuredPropertyImpl extends SemanticPropertyImpl implements Stru
 				getOwnedSpecializations().clear();
 				getOwnedSpecializations().addAll((Collection<? extends SpecializationAxiom>)newValue);
 				return;
+			case OmlPackage.STRUCTURED_PROPERTY__OWNED_EQUIVALENCES:
+				getOwnedEquivalences().clear();
+				getOwnedEquivalences().addAll((Collection<? extends PropertyEquivalenceAxiom>)newValue);
+				return;
+			case OmlPackage.STRUCTURED_PROPERTY__REF:
+				setRef((StructuredProperty)newValue);
+				return;
 			case OmlPackage.STRUCTURED_PROPERTY__FUNCTIONAL:
 				setFunctional((Boolean)newValue);
 				return;
-			case OmlPackage.STRUCTURED_PROPERTY__DOMAIN:
-				setDomain((Classifier)newValue);
+			case OmlPackage.STRUCTURED_PROPERTY__DOMAINS:
+				getDomains().clear();
+				getDomains().addAll((Collection<? extends Classifier>)newValue);
 				return;
-			case OmlPackage.STRUCTURED_PROPERTY__RANGE:
-				setRange((Structure)newValue);
+			case OmlPackage.STRUCTURED_PROPERTY__RANGES:
+				getRanges().clear();
+				getRanges().addAll((Collection<? extends Structure>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -417,14 +482,20 @@ public class StructuredPropertyImpl extends SemanticPropertyImpl implements Stru
 			case OmlPackage.STRUCTURED_PROPERTY__OWNED_SPECIALIZATIONS:
 				getOwnedSpecializations().clear();
 				return;
+			case OmlPackage.STRUCTURED_PROPERTY__OWNED_EQUIVALENCES:
+				getOwnedEquivalences().clear();
+				return;
+			case OmlPackage.STRUCTURED_PROPERTY__REF:
+				setRef((StructuredProperty)null);
+				return;
 			case OmlPackage.STRUCTURED_PROPERTY__FUNCTIONAL:
 				setFunctional(FUNCTIONAL_EDEFAULT);
 				return;
-			case OmlPackage.STRUCTURED_PROPERTY__DOMAIN:
-				setDomain((Classifier)null);
+			case OmlPackage.STRUCTURED_PROPERTY__DOMAINS:
+				getDomains().clear();
 				return;
-			case OmlPackage.STRUCTURED_PROPERTY__RANGE:
-				setRange((Structure)null);
+			case OmlPackage.STRUCTURED_PROPERTY__RANGES:
+				getRanges().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -442,12 +513,16 @@ public class StructuredPropertyImpl extends SemanticPropertyImpl implements Stru
 				return basicGetOwningVocabulary() != null;
 			case OmlPackage.STRUCTURED_PROPERTY__OWNED_SPECIALIZATIONS:
 				return ownedSpecializations != null && !ownedSpecializations.isEmpty();
+			case OmlPackage.STRUCTURED_PROPERTY__OWNED_EQUIVALENCES:
+				return ownedEquivalences != null && !ownedEquivalences.isEmpty();
+			case OmlPackage.STRUCTURED_PROPERTY__REF:
+				return ref != null;
 			case OmlPackage.STRUCTURED_PROPERTY__FUNCTIONAL:
 				return functional != FUNCTIONAL_EDEFAULT;
-			case OmlPackage.STRUCTURED_PROPERTY__DOMAIN:
-				return domain != null;
-			case OmlPackage.STRUCTURED_PROPERTY__RANGE:
-				return range != null;
+			case OmlPackage.STRUCTURED_PROPERTY__DOMAINS:
+				return domains != null && !domains.isEmpty();
+			case OmlPackage.STRUCTURED_PROPERTY__RANGES:
+				return ranges != null && !ranges.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -473,6 +548,12 @@ public class StructuredPropertyImpl extends SemanticPropertyImpl implements Stru
 		if (baseClass == SpecializableTerm.class) {
 			switch (derivedFeatureID) {
 				case OmlPackage.STRUCTURED_PROPERTY__OWNED_SPECIALIZATIONS: return OmlPackage.SPECIALIZABLE_TERM__OWNED_SPECIALIZATIONS;
+				default: return -1;
+			}
+		}
+		if (baseClass == SpecializableProperty.class) {
+			switch (derivedFeatureID) {
+				case OmlPackage.STRUCTURED_PROPERTY__OWNED_EQUIVALENCES: return OmlPackage.SPECIALIZABLE_PROPERTY__OWNED_EQUIVALENCES;
 				default: return -1;
 			}
 		}
@@ -503,7 +584,29 @@ public class StructuredPropertyImpl extends SemanticPropertyImpl implements Stru
 				default: return -1;
 			}
 		}
+		if (baseClass == SpecializableProperty.class) {
+			switch (baseFeatureID) {
+				case OmlPackage.SPECIALIZABLE_PROPERTY__OWNED_EQUIVALENCES: return OmlPackage.STRUCTURED_PROPERTY__OWNED_EQUIVALENCES;
+				default: return -1;
+			}
+		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case OmlPackage.STRUCTURED_PROPERTY___GET_DOMAIN_LIST:
+				return getDomainList();
+			case OmlPackage.STRUCTURED_PROPERTY___GET_RANGE_LIST:
+				return getRangeList();
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 	/**

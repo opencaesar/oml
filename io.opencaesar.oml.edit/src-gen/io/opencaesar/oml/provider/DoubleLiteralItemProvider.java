@@ -83,7 +83,7 @@ public class DoubleLiteralItemProvider extends LiteralItemProvider {
 				 true,
 				 false,
 				 false,
-				 ItemPropertyDescriptor.REAL_VALUE_IMAGE,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -107,8 +107,11 @@ public class DoubleLiteralItemProvider extends LiteralItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		DoubleLiteral doubleLiteral = (DoubleLiteral)object;
-		return getString("_UI_DoubleLiteral_type") + " " + doubleLiteral.getValue();
+		Double labelValue = ((DoubleLiteral)object).getValue();
+		String label = labelValue == null ? null : labelValue.toString();
+		return label == null || label.length() == 0 ?
+			getString("_UI_DoubleLiteral_type") :
+			getString("_UI_DoubleLiteral_type") + " " + label;
 	}
 
 
