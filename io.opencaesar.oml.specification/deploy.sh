@@ -25,10 +25,11 @@ cd ..
 # Clean out existing contents
 rm -rf publish/**/* || exit 0
 
-cp ${CURRENT_PATH}/build/bikeshed/index.html ./publish
-mkdir -p ./publish/images
-cp ${CURRENT_PATH}/build/bikeshed/images/* ./publish/images
-cp -R ${CURRENT_PATH}/build/bikeshed/javadoc ./publish
+# Copy new contents
+rm ${CURRENT_PATH}/build/bikeshed/*.bs
+rm ${CURRENT_PATH}/build/bikeshed/*.include
+rm ${CURRENT_PATH}/build/bikeshed/*.md
+cp -R ${CURRENT_PATH}/build/bikeshed/**/* ./publish
 
 # Now let's go have some fun with the cloned repo
 cd publish
