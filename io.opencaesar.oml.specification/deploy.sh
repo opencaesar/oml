@@ -29,7 +29,7 @@ rm -rf publish/**/* || exit 0
 rm ${CURRENT_PATH}/build/bikeshed/*.bs
 rm ${CURRENT_PATH}/build/bikeshed/*.include
 rm ${CURRENT_PATH}/build/bikeshed/*.md
-cp -R ${CURRENT_PATH}/build/bikeshed/**/* ./publish
+cp -R ${CURRENT_PATH}/build/bikeshed/* ./publish
 
 # Now let's go have some fun with the cloned repo
 cd publish
