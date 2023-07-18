@@ -1,4 +1,4 @@
-<img src="io.opencaesar.oml.specification/src/images/oml.svg" alt="OML" width="30%" height="30%"/>
+<img src="io.opencaesar.oml.specification/src/main/images/oml.svg" alt="OML" width="30%" height="30%"/>
 
 # Ontological Modeling Language
 
