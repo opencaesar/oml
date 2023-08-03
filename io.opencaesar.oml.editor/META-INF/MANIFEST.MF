@@ -17,5 +17,6 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore.xmi,
  org.eclipse.emf.edit.ui,
  io.opencaesar.oml,
- io.opencaesar.oml.edit
+ io.opencaesar.oml.edit,
+ org.eclipse.xtext.ui
 Bundle-ActivationPolicy: lazy

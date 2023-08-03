@@ -1864,15 +1864,15 @@ enum ImportKind {
     /*
      * Extension is an import that allows an ontology to extend another of the same type. 
      */
-    ^extension as "extends" = 0
+    ^extension = 0
     /*
  	 * Usage is an import that allows an ontology to use another of a different box type.
  	 */
-    usage as "uses" = 1
+    usage = 1
     /*
 	 * Inclusion is an import that allows a bundle ontology to include a non-bundle ontology of the same box type. 
      */
-    inclusion as "includes" = 2
+    inclusion = 2
 }
 
 ////////////////////////////////////////

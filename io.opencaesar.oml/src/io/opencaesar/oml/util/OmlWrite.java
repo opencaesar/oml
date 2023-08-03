@@ -1018,9 +1018,6 @@ public class OmlWrite {
     /**
      * Creates a property value assertion for a structured property and adds it to the given ontology.
      * 
-     * The value could either be a literal value (in the case of a scalar property), a structure instance value (in the case of a 
-     * structured property), or a named instance value (in the case of a relation).
-     * 
      * @param ontology the context ontology
      * @param instance the given instance
      * @param property the given structured property
@@ -1038,19 +1035,16 @@ public class OmlWrite {
     /**
      * Creates a property value assertion for a relation and adds it to the given ontology.
      * 
-     * The value could either be a literal value (in the case of a scalar property), a structure instance value (in the case of a 
-     * structured property), or a named instance value (in the case of a relation).
-     * 
      * @param ontology the context ontology
      * @param instance the given instance
-     * @param property the given (relation) property
+     * @param relation the given relation
      * @param namedInstanceValue the asserted (named instance) value of the property
      * @return a property value assertion that is added to the given ontology
      */
-    public static PropertyValueAssertion addPropertyValueAssertion(Ontology ontology, Instance instance, ScalarProperty property, NamedInstance namedInstanceValue) {
+    public static PropertyValueAssertion addPropertyValueAssertion(Ontology ontology, Instance instance, Relation relation, NamedInstance namedInstanceValue) {
         final PropertyValueAssertion assertion = create(PropertyValueAssertion.class);
        	assertion.setNamedInstanceValue(namedInstanceValue);
-        setCrossReference(ontology, assertion, OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__PROPERTY, property);
+        setCrossReference(ontology, assertion, OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__PROPERTY, relation);
         setContainmentReference(ontology, instance, OmlPackage.Literals.INSTANCE__OWNED_PROPERTY_VALUES, assertion);
         return assertion;
     }

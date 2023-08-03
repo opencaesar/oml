@@ -133,6 +133,7 @@ import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.ui.views.properties.IPropertySheetPage;
 import org.eclipse.ui.views.properties.PropertySheet;
 import org.eclipse.ui.views.properties.PropertySheetPage;
+import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 
 import io.opencaesar.oml.provider.OmlItemProviderAdapterFactoryEx;
 
@@ -729,6 +730,7 @@ public class OmlEditor
 		// Create the editing domain with a special command stack.
 		//
 		editingDomain = new AdapterFactoryEditingDomain(adapterFactory, commandStack, new HashMap<Resource, Boolean>());
+		editingDomain.getResourceSet().getLoadOptions().put(ResourceDescriptionsProvider.LIVE_SCOPE, Boolean.TRUE);
 	}
 
 	/**

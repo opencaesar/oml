@@ -48,7 +48,7 @@ public enum ImportKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	EXTENSION(0, "extension", "extends"),
+	EXTENSION(0, "extension", "extension"),
 
 	/**
 	 * The '<em><b>Usage</b></em>' literal object.
@@ -61,7 +61,7 @@ public enum ImportKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	USAGE(1, "usage", "uses"),
+	USAGE(1, "usage", "usage"),
 
 	/**
 	 * The '<em><b>Inclusion</b></em>' literal object.
@@ -74,7 +74,7 @@ public enum ImportKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	INCLUSION(2, "inclusion", "includes");
+	INCLUSION(2, "inclusion", "inclusion");
 
 	/**
 	 * The '<em><b>Extension</b></em>' literal value.
@@ -84,7 +84,7 @@ public enum ImportKind implements Enumerator {
 	 * Extension is an import that allows an ontology to extend another of the same type.
 	 * <!-- end-model-doc -->
 	 * @see #EXTENSION
-	 * @model name="extension" literal="extends"
+	 * @model name="extension"
 	 * @generated
 	 * @ordered
 	 */
@@ -98,7 +98,7 @@ public enum ImportKind implements Enumerator {
 	 * Usage is an import that allows an ontology to use another of a different box type.
 	 * <!-- end-model-doc -->
 	 * @see #USAGE
-	 * @model name="usage" literal="uses"
+	 * @model name="usage"
 	 * @generated
 	 * @ordered
 	 */
@@ -112,7 +112,7 @@ public enum ImportKind implements Enumerator {
 	 * Inclusion is an import that allows a bundle ontology to include a non-bundle ontology of the same box type.
 	 * <!-- end-model-doc -->
 	 * @see #INCLUSION
-	 * @model name="inclusion" literal="includes"
+	 * @model name="inclusion"
 	 * @generated
 	 * @ordered
 	 */

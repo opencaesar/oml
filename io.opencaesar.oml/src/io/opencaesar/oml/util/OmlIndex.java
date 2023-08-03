@@ -41,11 +41,9 @@ import io.opencaesar.oml.Classifier;
 import io.opencaesar.oml.ClassifierEquivalenceAxiom;
 import io.opencaesar.oml.Concept;
 import io.opencaesar.oml.ConceptInstance;
-import io.opencaesar.oml.Element;
 import io.opencaesar.oml.Entity;
 import io.opencaesar.oml.InstanceEnumerationAxiom;
 import io.opencaesar.oml.KeyAxiom;
-import io.opencaesar.oml.Member;
 import io.opencaesar.oml.NamedInstance;
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.Property;
@@ -87,99 +85,64 @@ import io.opencaesar.oml.UnreifiedRelation;
  */
 public class OmlIndex {
     
-    /*
-     * Finds all objects that cross reference a given Oml element using a given EReference 
+    /**
+     * Finds all objects that cross reference a given object using a given EReference 
      * 
-     * @param element The element to search for cross refs to
+     * @param object The object to search for cross refs to
      * @return A set of settings representing cross references
      */
-    private static Collection<Setting> findInverseReferencers(Element element) {
-        final ECrossReferenceAdapter adapter = ECrossReferenceAdapter.getCrossReferenceAdapter(element);
+    static Collection<Setting> findInverseReferencers(EObject object) {
+        final ECrossReferenceAdapter adapter = ECrossReferenceAdapter.getCrossReferenceAdapter(object);
         Collection<Setting> settings;
         if (adapter != null) {
             // the fast method
-            settings = adapter.getInverseReferences(element);
+            settings = adapter.getNonNavigableInverseReferences(object);
         } else {
             // the slow method
-            settings = searchForInverseReferences(element);
+            settings = searchForNonNavigableInverseReferences(object);
         };
         return settings;
     }
 
-    /*
-     * Finds all objects that cross reference a given Oml element using a given EReference 
-     * 
-     * @param element The element to search for cross refs to
-     * @param eReference The eReference to filter the cross refs by
-     * @return A set of objects that cross reference the given element based on the criteria
-     */
-    private static Collection<EObject> findInverseReferencers(Element element, EReference eReference) {
-        final Set<EObject> referencers = new LinkedHashSet<>();
-        Collection<Setting> settings = findInverseReferencers(element);
-        for (Setting setting : settings) {
-            if (setting.getEStructuralFeature() == eReference) {
-                referencers.add(setting.getEObject());
-            }
-        }
-        return referencers;
-    }
-    
-    /*
-     * Finds all objects that cross reference a given Oml element conforming to a given Java type and using a given EReference
-     * 
-     * @param element The element to search for cross refs to
-     * @param eReference The eReference to filter the cross refs by
-     * @param type The Java type to filter the cross refs by
-     * @return A set of objects that cross reference the given element based on the criteria
-     */
-    private static <T extends EObject> Set<T> findInverseReferencers(Element element, EReference eReference, Class<T> type) {
-        final Set<T> referencers = new LinkedHashSet<>(); 
-        findInverseReferencers(element, eReference).forEach(referencer -> {
-            if (type.isInstance(referencer)) {
-                referencers.add(type.cast(referencer));
-            }
-        });
-        return referencers;
-    }
-    
-    /*
-     * Searches the context (resource set if available or resource) for cross references to a given element
+    /**
+     * Searches the context (resource set if available or resource) for cross references to a given object
      *  
-     * @param element The element to search for cross refs to
-     * @return A set of Setting objects including the cross referencing elements and the features they reference with
+     * @param object The object to search for cross refs to
+     * @return A set of Setting objects including the cross referencing objects and the features they reference with
      */
-    private static Collection<Setting> searchForInverseReferences(EObject element) {
-        final Resource resource = element.eResource();
+    private static Collection<Setting> searchForNonNavigableInverseReferences(EObject object) {
+        final Resource resource = object.eResource();
         if (resource != null) {
             ResourceSet resourceSet = resource.getResourceSet();
             if (resourceSet != null) {
-                return UsageCrossReferencer.find(element, resourceSet);
+                return UsageCrossReferencer.find(object, resourceSet);
             } else {
-                return UsageCrossReferencer.find(element, resource);
+                return UsageCrossReferencer.find(object, resource);
             }
         } else {
-            final EObject rootEObject = EcoreUtil.getRootContainer(element);
-            return UsageCrossReferencer.find(element, rootEObject);
+            final EObject rootEObject = EcoreUtil.getRootContainer(object);
+            return UsageCrossReferencer.find(object, rootEObject);
         }
     }
     
-    // Member
-
     /**
-     * Finds elements of a given type that directly reference a given member 
+     * Finds all objects that cross reference a given object conforming to a given Java type and using a given EReference
      * 
-     * @param member the given member
-     * @type the type of referencer
-     * @return a set of elements directly referencing the given element
+     * @param object The object to search for cross refs to
+     * @param eReference The eReference to filter the cross refs by
+     * @param type The Java type to filter the cross refs by
+     * @return A set of objects that cross reference the given object based on the criteria
      */
-    @SuppressWarnings("unchecked")
-	public static <T extends Element> Set<T> findRreferences(Member member, Class<T> type) {
-        final var referencers = new LinkedHashSet<T>();
-        Collection<Setting> settings = findInverseReferencers(member);
+    private static <T extends EObject> Set<T> findInverseReferencers(EObject object, EReference eReference, Class<T> type) {
+        final Set<T> referencers = new LinkedHashSet<>();
+        Collection<Setting> settings = findInverseReferencers(object);
         for (Setting setting : settings) {
-            if (type.isInstance(setting.getEObject())) {
-        		referencers.add((T) setting.getEObject());
-        	}
+            if (setting.getEStructuralFeature() == eReference) {
+            	var referencer = setting.getEObject();
+                if (type.isInstance(referencer)) {
+                    referencers.add(type.cast(referencer));
+                }
+            }
         }
         return referencers;
     }
