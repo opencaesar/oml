@@ -827,7 +827,7 @@ public final class OmlSearch extends OmlIndex {
      * @return a set of entities that have the following property included in one of their keys
      */
     public static Set<Entity> findEntitiesKeyedWith(SemanticProperty property) {
-        return findKeyAxiomWithProperty(property).stream()
+        return findKeyAxiomsWithProperty(property).stream()
             .map(i -> i.getKeyedEntity())
             .collect(Collectors.toCollection(LinkedHashSet::new));
     }
@@ -924,7 +924,7 @@ public final class OmlSearch extends OmlIndex {
      * @return a set of relation value assertions that have the given instance as their object
      */
     public static Set<PropertyValueAssertion> findPropertyValueAssertionsWithObject(NamedInstance object) {
-        return findPropertyValueAssertionsWithNamedInstanceValue(object);
+        return findPropertyValueAssertionsWithReferencedValue(object);
     }
 
     /**
@@ -965,7 +965,7 @@ public final class OmlSearch extends OmlIndex {
         // check property value assertions
         targets.addAll(findPropertyValueAssertionsWithSubject(source).stream()
         		.filter(a -> a.getProperty() instanceof Relation)
-                .map(a -> a.getNamedInstanceValue())
+                .map(a -> a.getReferencedValue())
                 .collect(Collectors.toCollection(LinkedHashSet::new)));
         // check relation instances
         targets.addAll(findRelationInstancesWithSource(source).stream()
@@ -986,7 +986,7 @@ public final class OmlSearch extends OmlIndex {
         // look in property value assertions
         targets.addAll(findPropertyValueAssertionsWithSubject(source).stream()
                 .filter(a -> a.getProperty() == relation)
-                .map(a -> a.getNamedInstanceValue())
+                .map(a -> a.getReferencedValue())
                 .collect(Collectors.toCollection(LinkedHashSet::new)));
         // look in relation instances
         if (relation instanceof ForwardRelation) {

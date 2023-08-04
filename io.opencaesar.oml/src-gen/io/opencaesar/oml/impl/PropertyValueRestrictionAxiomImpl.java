@@ -51,8 +51,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * </p>
  * <ul>
  *   <li>{@link io.opencaesar.oml.impl.PropertyValueRestrictionAxiomImpl#getLiteralValue <em>Literal Value</em>}</li>
- *   <li>{@link io.opencaesar.oml.impl.PropertyValueRestrictionAxiomImpl#getStructureInstanceValue <em>Structure Instance Value</em>}</li>
- *   <li>{@link io.opencaesar.oml.impl.PropertyValueRestrictionAxiomImpl#getNamedInstanceValue <em>Named Instance Value</em>}</li>
+ *   <li>{@link io.opencaesar.oml.impl.PropertyValueRestrictionAxiomImpl#getContainedValue <em>Contained Value</em>}</li>
+ *   <li>{@link io.opencaesar.oml.impl.PropertyValueRestrictionAxiomImpl#getReferencedValue <em>Referenced Value</em>}</li>
  * </ul>
  *
  * @generated
@@ -69,24 +69,24 @@ public class PropertyValueRestrictionAxiomImpl extends PropertyRestrictionAxiomI
 	protected Literal literalValue;
 
 	/**
-	 * The cached value of the '{@link #getStructureInstanceValue() <em>Structure Instance Value</em>}' containment reference.
+	 * The cached value of the '{@link #getContainedValue() <em>Contained Value</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getStructureInstanceValue()
+	 * @see #getContainedValue()
 	 * @generated
 	 * @ordered
 	 */
-	protected StructureInstance structureInstanceValue;
+	protected StructureInstance containedValue;
 
 	/**
-	 * The cached value of the '{@link #getNamedInstanceValue() <em>Named Instance Value</em>}' reference.
+	 * The cached value of the '{@link #getReferencedValue() <em>Referenced Value</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getNamedInstanceValue()
+	 * @see #getReferencedValue()
 	 * @generated
 	 * @ordered
 	 */
-	protected NamedInstance namedInstanceValue;
+	protected NamedInstance referencedValue;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -158,8 +158,8 @@ public class PropertyValueRestrictionAxiomImpl extends PropertyRestrictionAxiomI
 	 * @generated
 	 */
 	@Override
-	public StructureInstance getStructureInstanceValue() {
-		return structureInstanceValue;
+	public StructureInstance getContainedValue() {
+		return containedValue;
 	}
 
 	/**
@@ -167,11 +167,11 @@ public class PropertyValueRestrictionAxiomImpl extends PropertyRestrictionAxiomI
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetStructureInstanceValue(StructureInstance newStructureInstanceValue, NotificationChain msgs) {
-		StructureInstance oldStructureInstanceValue = structureInstanceValue;
-		structureInstanceValue = newStructureInstanceValue;
+	public NotificationChain basicSetContainedValue(StructureInstance newContainedValue, NotificationChain msgs) {
+		StructureInstance oldContainedValue = containedValue;
+		containedValue = newContainedValue;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OmlPackage.PROPERTY_VALUE_RESTRICTION_AXIOM__STRUCTURE_INSTANCE_VALUE, oldStructureInstanceValue, newStructureInstanceValue);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OmlPackage.PROPERTY_VALUE_RESTRICTION_AXIOM__CONTAINED_VALUE, oldContainedValue, newContainedValue);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -183,18 +183,18 @@ public class PropertyValueRestrictionAxiomImpl extends PropertyRestrictionAxiomI
 	 * @generated
 	 */
 	@Override
-	public void setStructureInstanceValue(StructureInstance newStructureInstanceValue) {
-		if (newStructureInstanceValue != structureInstanceValue) {
+	public void setContainedValue(StructureInstance newContainedValue) {
+		if (newContainedValue != containedValue) {
 			NotificationChain msgs = null;
-			if (structureInstanceValue != null)
-				msgs = ((InternalEObject)structureInstanceValue).eInverseRemove(this, OmlPackage.STRUCTURE_INSTANCE__OWNING_AXIOM, StructureInstance.class, msgs);
-			if (newStructureInstanceValue != null)
-				msgs = ((InternalEObject)newStructureInstanceValue).eInverseAdd(this, OmlPackage.STRUCTURE_INSTANCE__OWNING_AXIOM, StructureInstance.class, msgs);
-			msgs = basicSetStructureInstanceValue(newStructureInstanceValue, msgs);
+			if (containedValue != null)
+				msgs = ((InternalEObject)containedValue).eInverseRemove(this, OmlPackage.STRUCTURE_INSTANCE__OWNING_AXIOM, StructureInstance.class, msgs);
+			if (newContainedValue != null)
+				msgs = ((InternalEObject)newContainedValue).eInverseAdd(this, OmlPackage.STRUCTURE_INSTANCE__OWNING_AXIOM, StructureInstance.class, msgs);
+			msgs = basicSetContainedValue(newContainedValue, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.PROPERTY_VALUE_RESTRICTION_AXIOM__STRUCTURE_INSTANCE_VALUE, newStructureInstanceValue, newStructureInstanceValue));
+			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.PROPERTY_VALUE_RESTRICTION_AXIOM__CONTAINED_VALUE, newContainedValue, newContainedValue));
 	}
 
 	/**
@@ -203,16 +203,16 @@ public class PropertyValueRestrictionAxiomImpl extends PropertyRestrictionAxiomI
 	 * @generated
 	 */
 	@Override
-	public NamedInstance getNamedInstanceValue() {
-		if (namedInstanceValue != null && namedInstanceValue.eIsProxy()) {
-			InternalEObject oldNamedInstanceValue = (InternalEObject)namedInstanceValue;
-			namedInstanceValue = (NamedInstance)eResolveProxy(oldNamedInstanceValue);
-			if (namedInstanceValue != oldNamedInstanceValue) {
+	public NamedInstance getReferencedValue() {
+		if (referencedValue != null && referencedValue.eIsProxy()) {
+			InternalEObject oldReferencedValue = (InternalEObject)referencedValue;
+			referencedValue = (NamedInstance)eResolveProxy(oldReferencedValue);
+			if (referencedValue != oldReferencedValue) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, OmlPackage.PROPERTY_VALUE_RESTRICTION_AXIOM__NAMED_INSTANCE_VALUE, oldNamedInstanceValue, namedInstanceValue));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, OmlPackage.PROPERTY_VALUE_RESTRICTION_AXIOM__REFERENCED_VALUE, oldReferencedValue, referencedValue));
 			}
 		}
-		return namedInstanceValue;
+		return referencedValue;
 	}
 
 	/**
@@ -220,8 +220,8 @@ public class PropertyValueRestrictionAxiomImpl extends PropertyRestrictionAxiomI
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NamedInstance basicGetNamedInstanceValue() {
-		return namedInstanceValue;
+	public NamedInstance basicGetReferencedValue() {
+		return referencedValue;
 	}
 
 	/**
@@ -230,11 +230,11 @@ public class PropertyValueRestrictionAxiomImpl extends PropertyRestrictionAxiomI
 	 * @generated
 	 */
 	@Override
-	public void setNamedInstanceValue(NamedInstance newNamedInstanceValue) {
-		NamedInstance oldNamedInstanceValue = namedInstanceValue;
-		namedInstanceValue = newNamedInstanceValue;
+	public void setReferencedValue(NamedInstance newReferencedValue) {
+		NamedInstance oldReferencedValue = referencedValue;
+		referencedValue = newReferencedValue;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.PROPERTY_VALUE_RESTRICTION_AXIOM__NAMED_INSTANCE_VALUE, oldNamedInstanceValue, namedInstanceValue));
+			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.PROPERTY_VALUE_RESTRICTION_AXIOM__REFERENCED_VALUE, oldReferencedValue, referencedValue));
 	}
 
 	/**
@@ -253,13 +253,13 @@ public class PropertyValueRestrictionAxiomImpl extends PropertyRestrictionAxiomI
 			Instance _xifexpression_1 = null;
 			SemanticProperty _property_1 = this.getProperty();
 			if ((_property_1 instanceof StructuredProperty)) {
-				_xifexpression_1 = this.getStructureInstanceValue();
+				_xifexpression_1 = this.getContainedValue();
 			}
 			else {
 				NamedInstance _xifexpression_2 = null;
 				SemanticProperty _property_2 = this.getProperty();
 				if ((_property_2 instanceof Relation)) {
-					_xifexpression_2 = this.getNamedInstanceValue();
+					_xifexpression_2 = this.getReferencedValue();
 				}
 				_xifexpression_1 = _xifexpression_2;
 			}
@@ -276,10 +276,10 @@ public class PropertyValueRestrictionAxiomImpl extends PropertyRestrictionAxiomI
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case OmlPackage.PROPERTY_VALUE_RESTRICTION_AXIOM__STRUCTURE_INSTANCE_VALUE:
-				if (structureInstanceValue != null)
-					msgs = ((InternalEObject)structureInstanceValue).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OmlPackage.PROPERTY_VALUE_RESTRICTION_AXIOM__STRUCTURE_INSTANCE_VALUE, null, msgs);
-				return basicSetStructureInstanceValue((StructureInstance)otherEnd, msgs);
+			case OmlPackage.PROPERTY_VALUE_RESTRICTION_AXIOM__CONTAINED_VALUE:
+				if (containedValue != null)
+					msgs = ((InternalEObject)containedValue).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OmlPackage.PROPERTY_VALUE_RESTRICTION_AXIOM__CONTAINED_VALUE, null, msgs);
+				return basicSetContainedValue((StructureInstance)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -294,8 +294,8 @@ public class PropertyValueRestrictionAxiomImpl extends PropertyRestrictionAxiomI
 		switch (featureID) {
 			case OmlPackage.PROPERTY_VALUE_RESTRICTION_AXIOM__LITERAL_VALUE:
 				return basicSetLiteralValue(null, msgs);
-			case OmlPackage.PROPERTY_VALUE_RESTRICTION_AXIOM__STRUCTURE_INSTANCE_VALUE:
-				return basicSetStructureInstanceValue(null, msgs);
+			case OmlPackage.PROPERTY_VALUE_RESTRICTION_AXIOM__CONTAINED_VALUE:
+				return basicSetContainedValue(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -310,11 +310,11 @@ public class PropertyValueRestrictionAxiomImpl extends PropertyRestrictionAxiomI
 		switch (featureID) {
 			case OmlPackage.PROPERTY_VALUE_RESTRICTION_AXIOM__LITERAL_VALUE:
 				return getLiteralValue();
-			case OmlPackage.PROPERTY_VALUE_RESTRICTION_AXIOM__STRUCTURE_INSTANCE_VALUE:
-				return getStructureInstanceValue();
-			case OmlPackage.PROPERTY_VALUE_RESTRICTION_AXIOM__NAMED_INSTANCE_VALUE:
-				if (resolve) return getNamedInstanceValue();
-				return basicGetNamedInstanceValue();
+			case OmlPackage.PROPERTY_VALUE_RESTRICTION_AXIOM__CONTAINED_VALUE:
+				return getContainedValue();
+			case OmlPackage.PROPERTY_VALUE_RESTRICTION_AXIOM__REFERENCED_VALUE:
+				if (resolve) return getReferencedValue();
+				return basicGetReferencedValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -330,11 +330,11 @@ public class PropertyValueRestrictionAxiomImpl extends PropertyRestrictionAxiomI
 			case OmlPackage.PROPERTY_VALUE_RESTRICTION_AXIOM__LITERAL_VALUE:
 				setLiteralValue((Literal)newValue);
 				return;
-			case OmlPackage.PROPERTY_VALUE_RESTRICTION_AXIOM__STRUCTURE_INSTANCE_VALUE:
-				setStructureInstanceValue((StructureInstance)newValue);
+			case OmlPackage.PROPERTY_VALUE_RESTRICTION_AXIOM__CONTAINED_VALUE:
+				setContainedValue((StructureInstance)newValue);
 				return;
-			case OmlPackage.PROPERTY_VALUE_RESTRICTION_AXIOM__NAMED_INSTANCE_VALUE:
-				setNamedInstanceValue((NamedInstance)newValue);
+			case OmlPackage.PROPERTY_VALUE_RESTRICTION_AXIOM__REFERENCED_VALUE:
+				setReferencedValue((NamedInstance)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -351,11 +351,11 @@ public class PropertyValueRestrictionAxiomImpl extends PropertyRestrictionAxiomI
 			case OmlPackage.PROPERTY_VALUE_RESTRICTION_AXIOM__LITERAL_VALUE:
 				setLiteralValue((Literal)null);
 				return;
-			case OmlPackage.PROPERTY_VALUE_RESTRICTION_AXIOM__STRUCTURE_INSTANCE_VALUE:
-				setStructureInstanceValue((StructureInstance)null);
+			case OmlPackage.PROPERTY_VALUE_RESTRICTION_AXIOM__CONTAINED_VALUE:
+				setContainedValue((StructureInstance)null);
 				return;
-			case OmlPackage.PROPERTY_VALUE_RESTRICTION_AXIOM__NAMED_INSTANCE_VALUE:
-				setNamedInstanceValue((NamedInstance)null);
+			case OmlPackage.PROPERTY_VALUE_RESTRICTION_AXIOM__REFERENCED_VALUE:
+				setReferencedValue((NamedInstance)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -371,10 +371,10 @@ public class PropertyValueRestrictionAxiomImpl extends PropertyRestrictionAxiomI
 		switch (featureID) {
 			case OmlPackage.PROPERTY_VALUE_RESTRICTION_AXIOM__LITERAL_VALUE:
 				return literalValue != null;
-			case OmlPackage.PROPERTY_VALUE_RESTRICTION_AXIOM__STRUCTURE_INSTANCE_VALUE:
-				return structureInstanceValue != null;
-			case OmlPackage.PROPERTY_VALUE_RESTRICTION_AXIOM__NAMED_INSTANCE_VALUE:
-				return namedInstanceValue != null;
+			case OmlPackage.PROPERTY_VALUE_RESTRICTION_AXIOM__CONTAINED_VALUE:
+				return containedValue != null;
+			case OmlPackage.PROPERTY_VALUE_RESTRICTION_AXIOM__REFERENCED_VALUE:
+				return referencedValue != null;
 		}
 		return super.eIsSet(featureID);
 	}

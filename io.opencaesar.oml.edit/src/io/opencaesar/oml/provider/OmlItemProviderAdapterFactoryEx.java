@@ -600,14 +600,14 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 					valueLabel = getLiteralLabel(new StringBuilder(), axiom.getLiteralValue()).toString();
 				} else if (axiom.getProperty() instanceof StructuredProperty) {
 					propertyKind = "structured property";
-					StructureInstance instance= axiom.getStructureInstanceValue();
+					StructureInstance instance= axiom.getContainedValue();
 					valueLabel = "<none>";
 					if (instance != null && instance.getType() != null) {
 						valueLabel = getLabel(instance.getType(), instance);
 					}
 				} else if (axiom.getProperty() instanceof Relation) {
 					propertyKind = "relation";
-					valueLabel = getLabel(axiom.getNamedInstanceValue(), axiom);
+					valueLabel = getLabel(axiom.getReferencedValue(), axiom);
 				}
 				return "restricts "+propertyKind+" " + getLabel(axiom.getProperty(), axiom)+ " to " + valueLabel;
 			}

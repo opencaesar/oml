@@ -44,6 +44,7 @@ import io.opencaesar.oml.ConceptInstance;
 import io.opencaesar.oml.Entity;
 import io.opencaesar.oml.InstanceEnumerationAxiom;
 import io.opencaesar.oml.KeyAxiom;
+import io.opencaesar.oml.Member;
 import io.opencaesar.oml.NamedInstance;
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.Property;
@@ -159,15 +160,25 @@ public class OmlIndex {
         return findInverseReferencers(property, OmlPackage.Literals.ANNOTATION__PROPERTY, Annotation.class);
     }
     
+    /**
+     * Finds annotations referencing the given referenced value
+     * 
+     * @param value The referenced value
+     * @return A set of referencing annotations
+     */
+    public static Set<Annotation> findAnnotationsWithReferencedValue(Member value) {
+        return findInverseReferencers(value, OmlPackage.Literals.ANNOTATION__REFERENCED_VALUE, Annotation.class);
+    }
+
     // Enumeration Axiom
 
     /**
-     * Finds instance enumeration axioms that enumerates the given instance
+     * Finds instance enumeration axioms that references the given instance
      * 
      * @param instance The given instance
      * @return A set of instance enumeration axioms enumerating the given instance
      */
-    public static Set<InstanceEnumerationAxiom> findInstanceEnumerationAxiomsWithEnumeratedInstance(ConceptInstance instance) {
+    public static Set<InstanceEnumerationAxiom> findInstanceEnumerationAxiomsWithInstance(ConceptInstance instance) {
         return findInverseReferencers(instance, OmlPackage.Literals.INSTANCE_ENUMERATION_AXIOM__INSTANCES, InstanceEnumerationAxiom.class);
     }
 
@@ -514,13 +525,13 @@ public class OmlIndex {
     // PropertyValueRestrictionAxiom
     
     /**
-     * Finds property value restriction axioms referencing the given named instance as a value
+     * Finds property value restriction axioms referencing the given referenced value
      * 
-     * @param value The given named instance value
+     * @param value The given referenced value
      * @return A set of referencing property value restriction axioms
      */
-    public static Set<PropertyValueRestrictionAxiom> findPropertyValueRestrictionAxiomsWithNamedInstanceValue(NamedInstance value) {
-        return findInverseReferencers(value, OmlPackage.Literals.PROPERTY_VALUE_RESTRICTION_AXIOM__NAMED_INSTANCE_VALUE, PropertyValueRestrictionAxiom.class);
+    public static Set<PropertyValueRestrictionAxiom> findPropertyValueRestrictionAxiomsWithReferencedValue(NamedInstance value) {
+        return findInverseReferencers(value, OmlPackage.Literals.PROPERTY_VALUE_RESTRICTION_AXIOM__REFERENCED_VALUE, PropertyValueRestrictionAxiom.class);
     }
     
     // KeyAxiom
@@ -531,7 +542,7 @@ public class OmlIndex {
      * @param property The referenced property
      * @return A set of referencing key axioms
      */
-    public static Set<KeyAxiom> findKeyAxiomWithProperty(Property property) {
+    public static Set<KeyAxiom> findKeyAxiomsWithProperty(Property property) {
         return findInverseReferencers(property, OmlPackage.Literals.KEY_AXIOM__PROPERTIES, KeyAxiom.class);
     }
     
@@ -560,13 +571,13 @@ public class OmlIndex {
     }
     
     /**
-     * Finds property value assertions referencing the given named instance as a value
+     * Finds property value assertions referencing the given referenced value
      * 
-     * @param value The referenced named instance value
+     * @param value The referenced value
      * @return A set of referencing property value assertions
      */
-    public static Set<PropertyValueAssertion> findPropertyValueAssertionsWithNamedInstanceValue(NamedInstance value) {
-        return findInverseReferencers(value, OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__NAMED_INSTANCE_VALUE, PropertyValueAssertion.class);
+    public static Set<PropertyValueAssertion> findPropertyValueAssertionsWithReferencedValue(NamedInstance value) {
+        return findInverseReferencers(value, OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__REFERENCED_VALUE, PropertyValueAssertion.class);
     }
     
     // TypePredicate
@@ -613,7 +624,7 @@ public class OmlIndex {
      * @param builtIn The referenced builtIn
      * @return A set of referencing builtIn predicates
      */
-    public static Set<BuiltInPredicate> findBuiltInPredicateWithBuiltIn(BuiltIn builtIn) {
+    public static Set<BuiltInPredicate> findBuiltInPredicatesWithBuiltIn(BuiltIn builtIn) {
         return findInverseReferencers(builtIn, OmlPackage.Literals.BUILT_IN_PREDICATE__BUILT_IN, BuiltInPredicate.class);
     }
 

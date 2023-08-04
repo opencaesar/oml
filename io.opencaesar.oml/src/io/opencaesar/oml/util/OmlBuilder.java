@@ -323,13 +323,13 @@ public class OmlBuilder {
      * @param ontology the ontology to annotate
      * @param propertyIri the annotation property identified by iri
      * @param literalValue the annotation literal value
-     * @param referenceValueIri the annotation (member) reference value identified by iri
+     * @param referencedValueIri the annotation (member) referenced value identified by iri
      * @return a new annotation on the given ontology
      */
-    public Annotation addAnnotation(Ontology ontology, String propertyIri, Literal literalValue, String referenceValueIri) {
+    public Annotation addAnnotation(Ontology ontology, String propertyIri, Literal literalValue, String referencedValueIri) {
         final Annotation annotation = OmlWrite.addAnnotation(ontology, null, literalValue, null);
-        if (referenceValueIri != null)
-        	setCrossReference(ontology, annotation, OmlPackage.Literals.ANNOTATION__REFERENCE_VALUE, referenceValueIri);
+        if (referencedValueIri != null)
+        	setCrossReference(ontology, annotation, OmlPackage.Literals.ANNOTATION__REFERENCED_VALUE, referencedValueIri);
         setCrossReference(ontology, annotation, OmlPackage.Literals.ANNOTATION__PROPERTY, propertyIri);
         return annotation;
     }
@@ -343,13 +343,13 @@ public class OmlBuilder {
      * @param element the annotated element to put the annotation on
      * @param propertyIri the annotation property identified by iri
      * @param literalValue the annotation literal value
-     * @param referenceValueIri the annotation (member) reference value identified by iri
+     * @param referencedValueIri the annotation (member) referenced value identified by iri
      * @return a new annotation on the given annotated element in the context of the given ontology
      */
-    public Annotation addAnnotation(Ontology ontology, IdentifiedElement element, String propertyIri, Literal literalValue, String referenceValueIri) {
+    public Annotation addAnnotation(Ontology ontology, IdentifiedElement element, String propertyIri, Literal literalValue, String referencedValueIri) {
         final Annotation annotation = OmlWrite.addAnnotation(ontology, element, null, literalValue, null);
-        if (referenceValueIri != null)
-        	setCrossReference(ontology, annotation, OmlPackage.Literals.ANNOTATION__REFERENCE_VALUE, referenceValueIri);
+        if (referencedValueIri != null)
+        	setCrossReference(ontology, annotation, OmlPackage.Literals.ANNOTATION__REFERENCED_VALUE, referencedValueIri);
         setCrossReference(ontology, annotation, OmlPackage.Literals.ANNOTATION__PROPERTY, propertyIri);
         return annotation;
     }
@@ -361,13 +361,13 @@ public class OmlBuilder {
      * @param memberIri the iri of a member to put the annotation on
      * @param propertyIri the annotation property identified by iri
      * @param literalValue the annotation literal value
-     * @param referenceValueIri the annotation (member) reference value identified by iri
+     * @param referencedValueIri the annotation (member) referenced value identified by iri
      * @return a new annotation on the given member in the context of the given ontology
      */
-    public Annotation addAnnotation(Ontology ontology, String memberIri, String propertyIri, Literal literalValue, String referenceValueIri) {
+    public Annotation addAnnotation(Ontology ontology, String memberIri, String propertyIri, Literal literalValue, String referencedValueIri) {
         final Annotation annotation = OmlWrite.addAnnotation(ontology, null, null, literalValue, null);
-        if (referenceValueIri != null)
-        	setCrossReference(ontology, annotation, OmlPackage.Literals.ANNOTATION__REFERENCE_VALUE, referenceValueIri);
+        if (referencedValueIri != null)
+        	setCrossReference(ontology, annotation, OmlPackage.Literals.ANNOTATION__REFERENCED_VALUE, referencedValueIri);
         setCrossReference(ontology, annotation, OmlPackage.Literals.ANNOTATION__PROPERTY, propertyIri);
         setContainmentReference(ontology, memberIri, OmlPackage.Literals.IDENTIFIED_ELEMENT__OWNED_ANNOTATIONS, annotation);
         return annotation;
@@ -878,11 +878,11 @@ public class OmlBuilder {
      * @param vocabulary the context vocabulary
      * @param owner the owner (either a String representing the iri of the owning classifier, or the owning classifier equivalence axiom object)
      * @param propertyIri the iri of the restricted structured property
-     * @param structureInstance the (structure instance) value of the restriction
+     * @param containedValue the contained value of the restriction
      * @return a property value restriction axiom that is added to the given vocabulary
      */
-    public PropertyValueRestrictionAxiom addPropertyValueRestrictionAxiom(Vocabulary vocabulary, Object owner, String propertyIri, StructureInstance structureInstance) {
-        final PropertyValueRestrictionAxiom axiom = OmlWrite.addPropertyValueRestrictionAxiom(vocabulary, null, null, structureInstance);
+    public PropertyValueRestrictionAxiom addPropertyValueRestrictionAxiom(Vocabulary vocabulary, Object owner, String propertyIri, StructureInstance containedValue) {
+        final PropertyValueRestrictionAxiom axiom = OmlWrite.addPropertyValueRestrictionAxiom(vocabulary, null, null, containedValue);
         setCrossReference(vocabulary, axiom, OmlPackage.Literals.PROPERTY_RESTRICTION_AXIOM__PROPERTY, propertyIri);
         if (owner instanceof String) {
         	setContainmentReference(vocabulary, (String)owner, OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS, axiom);
@@ -898,12 +898,12 @@ public class OmlBuilder {
      * @param vocabulary the context vocabulary
      * @param owner the owner (either a String representing the iri of the owning classifier, or the owning classifier equivalence axiom object)
      * @param relationIri the iri of the restricted relation
-     * @param namedInstanceIri the Iri of a (named instance) value of the restriction
+     * @param referencedValueIri the Iri of a referenced value of the restriction
      * @return a property value restriction axiom that is added to the given vocabulary
      */
-    public PropertyValueRestrictionAxiom addPropertyValueRestrictionAxiom(Vocabulary vocabulary, Object owner, String relationIri, String namedInstanceIri) {
+    public PropertyValueRestrictionAxiom addPropertyValueRestrictionAxiom(Vocabulary vocabulary, Object owner, String relationIri, String referencedValueIri) {
         final PropertyValueRestrictionAxiom axiom = OmlWrite.addPropertyValueRestrictionAxiom(vocabulary, null, null, (NamedInstance) null);
-        setCrossReference(vocabulary, axiom, OmlPackage.Literals.PROPERTY_VALUE_RESTRICTION_AXIOM__NAMED_INSTANCE_VALUE, namedInstanceIri);
+        setCrossReference(vocabulary, axiom, OmlPackage.Literals.PROPERTY_VALUE_RESTRICTION_AXIOM__REFERENCED_VALUE, referencedValueIri);
         setCrossReference(vocabulary, axiom, OmlPackage.Literals.PROPERTY_RESTRICTION_AXIOM__PROPERTY, relationIri);
         if (owner instanceof String) {
         	setContainmentReference(vocabulary, (String)owner, OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS, axiom);
@@ -1025,11 +1025,11 @@ public class OmlBuilder {
      * @param ontology the context ontology
      * @param instanceIri the iri of the instance
      * @param propertyIri the iri of the structured property
-     * @param structureInstanceValue the asserted (structure instance) value of the property
+     * @param containedValue the asserted contained value of the property
      * @return a property value assertion that is added to the given description
      */
-    public PropertyValueAssertion addPropertyValueAssertion(Ontology ontology, String instanceIri, String propertyIri, StructureInstance structureInstanceValue) {
-        final PropertyValueAssertion assertion = OmlWrite.addPropertyValueAssertion(ontology, null, null, structureInstanceValue);
+    public PropertyValueAssertion addPropertyValueAssertion(Ontology ontology, String instanceIri, String propertyIri, StructureInstance containedValue) {
+        final PropertyValueAssertion assertion = OmlWrite.addPropertyValueAssertion(ontology, null, null, containedValue);
         setCrossReference(ontology, assertion, OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__PROPERTY, propertyIri);
         setContainmentReference(ontology, instanceIri, OmlPackage.Literals.INSTANCE__OWNED_PROPERTY_VALUES, assertion);
         return assertion;
@@ -1041,12 +1041,12 @@ public class OmlBuilder {
      * @param ontology the context ontology
      * @param instanceIri the iri of the instance
      * @param propertyIri the iri of the relation property
-     * @param namedInstanceValueIri the asserted (named instance) value (identified by iri) of the property
+     * @param referencedValueIri the asserted referenced value (identified by iri) of the property
      * @return a property value assertion that is added to the given description
      */
-    public PropertyValueAssertion addPropertyValueAssertion(Ontology ontology, String instanceIri, String propertyIri, String namedInstanceValueIri) {
+    public PropertyValueAssertion addPropertyValueAssertion(Ontology ontology, String instanceIri, String propertyIri, String referencedValueIri) {
         final PropertyValueAssertion assertion = OmlWrite.addPropertyValueAssertion(ontology, null, null, (NamedInstance) null);
-        setCrossReference(ontology, assertion, OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__NAMED_INSTANCE_VALUE, namedInstanceValueIri);
+        setCrossReference(ontology, assertion, OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__REFERENCED_VALUE, referencedValueIri);
         setCrossReference(ontology, assertion, OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__PROPERTY, propertyIri);
         setContainmentReference(ontology, instanceIri, OmlPackage.Literals.INSTANCE__OWNED_PROPERTY_VALUES, assertion);
         return assertion;

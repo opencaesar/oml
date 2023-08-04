@@ -70,7 +70,7 @@ public interface StructureInstance extends Instance {
 
 	/**
 	 * Returns the value of the '<em><b>Owning Axiom</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.PropertyValueRestrictionAxiom#getStructureInstanceValue <em>Structure Instance Value</em>}'.
+	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.PropertyValueRestrictionAxiom#getContainedValue <em>Contained Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
@@ -79,8 +79,8 @@ public interface StructureInstance extends Instance {
 	 * @return the value of the '<em>Owning Axiom</em>' container reference.
 	 * @see #setOwningAxiom(PropertyValueRestrictionAxiom)
 	 * @see io.opencaesar.oml.OmlPackage#getStructureInstance_OwningAxiom()
-	 * @see io.opencaesar.oml.PropertyValueRestrictionAxiom#getStructureInstanceValue
-	 * @model opposite="structureInstanceValue" transient="false"
+	 * @see io.opencaesar.oml.PropertyValueRestrictionAxiom#getContainedValue
+	 * @model opposite="containedValue" transient="false"
 	 * @generated
 	 */
 	PropertyValueRestrictionAxiom getOwningAxiom();
@@ -97,7 +97,7 @@ public interface StructureInstance extends Instance {
 
 	/**
 	 * Returns the value of the '<em><b>Owning Assertion</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.PropertyValueAssertion#getStructureInstanceValue <em>Structure Instance Value</em>}'.
+	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.PropertyValueAssertion#getContainedValue <em>Contained Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
@@ -106,8 +106,8 @@ public interface StructureInstance extends Instance {
 	 * @return the value of the '<em>Owning Assertion</em>' container reference.
 	 * @see #setOwningAssertion(PropertyValueAssertion)
 	 * @see io.opencaesar.oml.OmlPackage#getStructureInstance_OwningAssertion()
-	 * @see io.opencaesar.oml.PropertyValueAssertion#getStructureInstanceValue
-	 * @model opposite="structureInstanceValue" transient="false"
+	 * @see io.opencaesar.oml.PropertyValueAssertion#getContainedValue
+	 * @model opposite="containedValue" transient="false"
 	 * @generated
 	 */
 	PropertyValueAssertion getOwningAssertion();

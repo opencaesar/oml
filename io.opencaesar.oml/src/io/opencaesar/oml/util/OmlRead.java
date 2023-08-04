@@ -30,6 +30,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -62,11 +63,13 @@ import io.opencaesar.oml.RelationEntityPredicate;
 import io.opencaesar.oml.ReverseRelation;
 import io.opencaesar.oml.Scalar;
 import io.opencaesar.oml.ScalarEquivalenceAxiom;
+import io.opencaesar.oml.ScalarProperty;
 import io.opencaesar.oml.SemanticProperty;
 import io.opencaesar.oml.SpecializableProperty;
 import io.opencaesar.oml.SpecializableTerm;
 import io.opencaesar.oml.Statement;
 import io.opencaesar.oml.StructureInstance;
+import io.opencaesar.oml.StructuredProperty;
 import io.opencaesar.oml.Term;
 import io.opencaesar.oml.TypePredicate;
 import io.opencaesar.oml.UnreifiedRelation;
@@ -421,17 +424,16 @@ public final class OmlRead {
         return EcoreUtil.getID(element);
     }
     
-    /**
+    /*
      * Gets all annotations that references the given property on the given element
      * 
      * @param element The element that has the annotation
      * @param property the given annotation property
      * @return a list of annotations referencing the annotation property on the element
      */
-    public static List<Annotation> getAnnotations(IdentifiedElement element, AnnotationProperty property) {
+    private static Stream<Annotation> getAnnotations(IdentifiedElement element, AnnotationProperty property) {
         return element.getOwnedAnnotations().stream()
-            .filter(a -> a.getProperty() == property)
-            .collect(Collectors.toList());
+            .filter(a -> a.getProperty() == property);
     }
 
     /**
@@ -439,15 +441,44 @@ public final class OmlRead {
      * 
      * @param element The element that has the annotation
      * @param property the given annotation property
-     * @return a list of literals representing annotation values
+     * @return a list of annotation values
      */
     public static List<Element> getAnnotationValues(IdentifiedElement element, AnnotationProperty property) {
-        return element.getOwnedAnnotations().stream()
-            .filter(a -> a.getProperty() == property)
+        return getAnnotations(element, property)
             .map(a -> a.getValue())
             .collect(Collectors.toList());
     }
     
+    /**
+     * Gets the first literal value of a given annotation property in the given element
+     * 
+     * @param element The element that has the annotation
+     * @param property the given annotation property
+     * @return an annotation literal value
+     */
+    public static Literal getAnnotationLiteralValue(IdentifiedElement element, AnnotationProperty property) {
+        return getAnnotations(element, property)
+            .filter(a -> a.getLiteralValue() != null)
+            .map(a -> a.getLiteralValue())
+            .findFirst()
+            .orElse(null);
+    }
+
+    /**
+     * Gets the first referenced value of a given annotation property in the given element
+     * 
+     * @param element The element that has the annotation
+     * @param property the given annotation property
+     * @return an annotation reference value
+     */
+    public static Member getAnnotationReferencedValue(IdentifiedElement element, AnnotationProperty property) {
+        return getAnnotations(element, property)
+            .filter(a -> a.getReferencedValue() != null)
+            .map(a -> a.getReferencedValue())
+            .findFirst()
+            .orElse(null);
+    }
+
     /**
      * Gets the direct or transitive imports of the given ontology
      * 
@@ -988,6 +1019,51 @@ public final class OmlRead {
             .collect(Collectors.toList());
     }
     
+    /**
+     * Gets the first literal value of the given scalar property in the given instance
+     * 
+     * @param instance The given instance
+     * @param property the given semantic property
+     * @return a literal representing the property literal value
+     */
+    public static Literal getPropertyLiteralValue(Instance instance, ScalarProperty property) {
+        return getPropertyValues(instance, property).stream()
+        	.filter(i -> i instanceof Literal)
+        	.map(i -> (Literal)i)
+            .findFirst()
+            .orElse(null);
+    }
+
+    /**
+     * Gets the first contained value of the given structured property in the given instance
+     * 
+     * @param instance The given instance
+     * @param property the given property
+     * @return a structure instance representing the property contained value
+     */
+    public static StructureInstance getPropertyContainedValue(Instance instance, StructuredProperty property) {
+        return getPropertyValues(instance, property).stream()
+        	.filter(i -> i instanceof StructureInstance)
+        	.map(i -> (StructureInstance)i)
+            .findFirst()
+            .orElse(null);
+    }
+
+    /**
+     * Gets the first referenced value of the given relation in the given instance
+     * 
+     * @param instance The given instance
+     * @param relation the given relation
+     * @return a named instance representing the property referenced value
+     */
+    public static NamedInstance getPropertyReferencedValue(Instance instance, Relation relation) {
+        return getPropertyValues(instance, relation).stream()
+        	.filter(i -> i instanceof NamedInstance)
+        	.map(i -> (NamedInstance)i)
+            .findFirst()
+            .orElse(null);
+    }
+
     /**
      * Gets the types declared on the given instance
      * 

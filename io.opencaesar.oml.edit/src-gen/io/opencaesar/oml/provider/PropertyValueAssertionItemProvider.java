@@ -64,7 +64,7 @@ public class PropertyValueAssertionItemProvider extends AssertionItemProvider {
 			super.getPropertyDescriptors(object);
 
 			addPropertyPropertyDescriptor(object);
-			addNamedInstanceValuePropertyDescriptor(object);
+			addReferencedValuePropertyDescriptor(object);
 			addOwningInstancePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
@@ -115,19 +115,19 @@ public class PropertyValueAssertionItemProvider extends AssertionItemProvider {
 	}
 
 	/**
-	 * This adds a property descriptor for the Named Instance Value feature.
+	 * This adds a property descriptor for the Referenced Value feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addNamedInstanceValuePropertyDescriptor(Object object) {
+	protected void addReferencedValuePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_PropertyValueAssertion_namedInstanceValue_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_PropertyValueAssertion_namedInstanceValue_feature", "_UI_PropertyValueAssertion_type"),
-				 OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__NAMED_INSTANCE_VALUE,
+				 getString("_UI_PropertyValueAssertion_referencedValue_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_PropertyValueAssertion_referencedValue_feature", "_UI_PropertyValueAssertion_type"),
+				 OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__REFERENCED_VALUE,
 				 true,
 				 false,
 				 true,
@@ -149,7 +149,7 @@ public class PropertyValueAssertionItemProvider extends AssertionItemProvider {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__LITERAL_VALUE);
-			childrenFeatures.add(OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__STRUCTURE_INSTANCE_VALUE);
+			childrenFeatures.add(OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__CONTAINED_VALUE);
 		}
 		return childrenFeatures;
 	}
@@ -203,7 +203,7 @@ public class PropertyValueAssertionItemProvider extends AssertionItemProvider {
 
 		switch (notification.getFeatureID(PropertyValueAssertion.class)) {
 			case OmlPackage.PROPERTY_VALUE_ASSERTION__LITERAL_VALUE:
-			case OmlPackage.PROPERTY_VALUE_ASSERTION__STRUCTURE_INSTANCE_VALUE:
+			case OmlPackage.PROPERTY_VALUE_ASSERTION__CONTAINED_VALUE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -248,7 +248,7 @@ public class PropertyValueAssertionItemProvider extends AssertionItemProvider {
 
 		newChildDescriptors.add
 			(createChildParameter
-				(OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__STRUCTURE_INSTANCE_VALUE,
+				(OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__CONTAINED_VALUE,
 				 OmlFactory.eINSTANCE.createStructureInstance()));
 	}
 

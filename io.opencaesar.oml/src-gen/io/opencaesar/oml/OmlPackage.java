@@ -157,13 +157,13 @@ public interface OmlPackage extends EPackage {
 	int ANNOTATION__LITERAL_VALUE = ELEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Reference Value</b></em>' reference.
+	 * The feature id for the '<em><b>Referenced Value</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ANNOTATION__REFERENCE_VALUE = ELEMENT_FEATURE_COUNT + 2;
+	int ANNOTATION__REFERENCED_VALUE = ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Owning Element</b></em>' container reference.
@@ -7722,22 +7722,22 @@ public interface OmlPackage extends EPackage {
 	int PROPERTY_VALUE_RESTRICTION_AXIOM__LITERAL_VALUE = PROPERTY_RESTRICTION_AXIOM_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Structure Instance Value</b></em>' containment reference.
+	 * The feature id for the '<em><b>Contained Value</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_VALUE_RESTRICTION_AXIOM__STRUCTURE_INSTANCE_VALUE = PROPERTY_RESTRICTION_AXIOM_FEATURE_COUNT + 1;
+	int PROPERTY_VALUE_RESTRICTION_AXIOM__CONTAINED_VALUE = PROPERTY_RESTRICTION_AXIOM_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Named Instance Value</b></em>' reference.
+	 * The feature id for the '<em><b>Referenced Value</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_VALUE_RESTRICTION_AXIOM__NAMED_INSTANCE_VALUE = PROPERTY_RESTRICTION_AXIOM_FEATURE_COUNT + 2;
+	int PROPERTY_VALUE_RESTRICTION_AXIOM__REFERENCED_VALUE = PROPERTY_RESTRICTION_AXIOM_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Property Value Restriction Axiom</em>' class.
@@ -8004,22 +8004,22 @@ public interface OmlPackage extends EPackage {
 	int PROPERTY_VALUE_ASSERTION__LITERAL_VALUE = ASSERTION_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Structure Instance Value</b></em>' containment reference.
+	 * The feature id for the '<em><b>Contained Value</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_VALUE_ASSERTION__STRUCTURE_INSTANCE_VALUE = ASSERTION_FEATURE_COUNT + 2;
+	int PROPERTY_VALUE_ASSERTION__CONTAINED_VALUE = ASSERTION_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>Named Instance Value</b></em>' reference.
+	 * The feature id for the '<em><b>Referenced Value</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_VALUE_ASSERTION__NAMED_INSTANCE_VALUE = ASSERTION_FEATURE_COUNT + 3;
+	int PROPERTY_VALUE_ASSERTION__REFERENCED_VALUE = ASSERTION_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Owning Instance</b></em>' container reference.
@@ -9402,15 +9402,15 @@ public interface OmlPackage extends EPackage {
 	EReference getAnnotation_LiteralValue();
 
 	/**
-	 * Returns the meta object for the reference '{@link io.opencaesar.oml.Annotation#getReferenceValue <em>Reference Value</em>}'.
+	 * Returns the meta object for the reference '{@link io.opencaesar.oml.Annotation#getReferencedValue <em>Referenced Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Reference Value</em>'.
-	 * @see io.opencaesar.oml.Annotation#getReferenceValue()
+	 * @return the meta object for the reference '<em>Referenced Value</em>'.
+	 * @see io.opencaesar.oml.Annotation#getReferencedValue()
 	 * @see #getAnnotation()
 	 * @generated
 	 */
-	EReference getAnnotation_ReferenceValue();
+	EReference getAnnotation_ReferencedValue();
 
 	/**
 	 * Returns the meta object for the container reference '{@link io.opencaesar.oml.Annotation#getOwningElement <em>Owning Element</em>}'.
@@ -11894,26 +11894,26 @@ public interface OmlPackage extends EPackage {
 	EReference getPropertyValueRestrictionAxiom_LiteralValue();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link io.opencaesar.oml.PropertyValueRestrictionAxiom#getStructureInstanceValue <em>Structure Instance Value</em>}'.
+	 * Returns the meta object for the containment reference '{@link io.opencaesar.oml.PropertyValueRestrictionAxiom#getContainedValue <em>Contained Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Structure Instance Value</em>'.
-	 * @see io.opencaesar.oml.PropertyValueRestrictionAxiom#getStructureInstanceValue()
+	 * @return the meta object for the containment reference '<em>Contained Value</em>'.
+	 * @see io.opencaesar.oml.PropertyValueRestrictionAxiom#getContainedValue()
 	 * @see #getPropertyValueRestrictionAxiom()
 	 * @generated
 	 */
-	EReference getPropertyValueRestrictionAxiom_StructureInstanceValue();
+	EReference getPropertyValueRestrictionAxiom_ContainedValue();
 
 	/**
-	 * Returns the meta object for the reference '{@link io.opencaesar.oml.PropertyValueRestrictionAxiom#getNamedInstanceValue <em>Named Instance Value</em>}'.
+	 * Returns the meta object for the reference '{@link io.opencaesar.oml.PropertyValueRestrictionAxiom#getReferencedValue <em>Referenced Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Named Instance Value</em>'.
-	 * @see io.opencaesar.oml.PropertyValueRestrictionAxiom#getNamedInstanceValue()
+	 * @return the meta object for the reference '<em>Referenced Value</em>'.
+	 * @see io.opencaesar.oml.PropertyValueRestrictionAxiom#getReferencedValue()
 	 * @see #getPropertyValueRestrictionAxiom()
 	 * @generated
 	 */
-	EReference getPropertyValueRestrictionAxiom_NamedInstanceValue();
+	EReference getPropertyValueRestrictionAxiom_ReferencedValue();
 
 	/**
 	 * Returns the meta object for the '{@link io.opencaesar.oml.PropertyValueRestrictionAxiom#getValue() <em>Get Value</em>}' operation.
@@ -12020,26 +12020,26 @@ public interface OmlPackage extends EPackage {
 	EReference getPropertyValueAssertion_LiteralValue();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link io.opencaesar.oml.PropertyValueAssertion#getStructureInstanceValue <em>Structure Instance Value</em>}'.
+	 * Returns the meta object for the containment reference '{@link io.opencaesar.oml.PropertyValueAssertion#getContainedValue <em>Contained Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Structure Instance Value</em>'.
-	 * @see io.opencaesar.oml.PropertyValueAssertion#getStructureInstanceValue()
+	 * @return the meta object for the containment reference '<em>Contained Value</em>'.
+	 * @see io.opencaesar.oml.PropertyValueAssertion#getContainedValue()
 	 * @see #getPropertyValueAssertion()
 	 * @generated
 	 */
-	EReference getPropertyValueAssertion_StructureInstanceValue();
+	EReference getPropertyValueAssertion_ContainedValue();
 
 	/**
-	 * Returns the meta object for the reference '{@link io.opencaesar.oml.PropertyValueAssertion#getNamedInstanceValue <em>Named Instance Value</em>}'.
+	 * Returns the meta object for the reference '{@link io.opencaesar.oml.PropertyValueAssertion#getReferencedValue <em>Referenced Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Named Instance Value</em>'.
-	 * @see io.opencaesar.oml.PropertyValueAssertion#getNamedInstanceValue()
+	 * @return the meta object for the reference '<em>Referenced Value</em>'.
+	 * @see io.opencaesar.oml.PropertyValueAssertion#getReferencedValue()
 	 * @see #getPropertyValueAssertion()
 	 * @generated
 	 */
-	EReference getPropertyValueAssertion_NamedInstanceValue();
+	EReference getPropertyValueAssertion_ReferencedValue();
 
 	/**
 	 * Returns the meta object for the container reference '{@link io.opencaesar.oml.PropertyValueAssertion#getOwningInstance <em>Owning Instance</em>}'.
@@ -12622,12 +12622,12 @@ public interface OmlPackage extends EPackage {
 		EReference ANNOTATION__LITERAL_VALUE = eINSTANCE.getAnnotation_LiteralValue();
 
 		/**
-		 * The meta object literal for the '<em><b>Reference Value</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Referenced Value</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ANNOTATION__REFERENCE_VALUE = eINSTANCE.getAnnotation_ReferenceValue();
+		EReference ANNOTATION__REFERENCED_VALUE = eINSTANCE.getAnnotation_ReferencedValue();
 
 		/**
 		 * The meta object literal for the '<em><b>Owning Element</b></em>' container reference feature.
@@ -14652,20 +14652,20 @@ public interface OmlPackage extends EPackage {
 		EReference PROPERTY_VALUE_RESTRICTION_AXIOM__LITERAL_VALUE = eINSTANCE.getPropertyValueRestrictionAxiom_LiteralValue();
 
 		/**
-		 * The meta object literal for the '<em><b>Structure Instance Value</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Contained Value</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference PROPERTY_VALUE_RESTRICTION_AXIOM__STRUCTURE_INSTANCE_VALUE = eINSTANCE.getPropertyValueRestrictionAxiom_StructureInstanceValue();
+		EReference PROPERTY_VALUE_RESTRICTION_AXIOM__CONTAINED_VALUE = eINSTANCE.getPropertyValueRestrictionAxiom_ContainedValue();
 
 		/**
-		 * The meta object literal for the '<em><b>Named Instance Value</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Referenced Value</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference PROPERTY_VALUE_RESTRICTION_AXIOM__NAMED_INSTANCE_VALUE = eINSTANCE.getPropertyValueRestrictionAxiom_NamedInstanceValue();
+		EReference PROPERTY_VALUE_RESTRICTION_AXIOM__REFERENCED_VALUE = eINSTANCE.getPropertyValueRestrictionAxiom_ReferencedValue();
 
 		/**
 		 * The meta object literal for the '<em><b>Get Value</b></em>' operation.
@@ -14754,20 +14754,20 @@ public interface OmlPackage extends EPackage {
 		EReference PROPERTY_VALUE_ASSERTION__LITERAL_VALUE = eINSTANCE.getPropertyValueAssertion_LiteralValue();
 
 		/**
-		 * The meta object literal for the '<em><b>Structure Instance Value</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Contained Value</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference PROPERTY_VALUE_ASSERTION__STRUCTURE_INSTANCE_VALUE = eINSTANCE.getPropertyValueAssertion_StructureInstanceValue();
+		EReference PROPERTY_VALUE_ASSERTION__CONTAINED_VALUE = eINSTANCE.getPropertyValueAssertion_ContainedValue();
 
 		/**
-		 * The meta object literal for the '<em><b>Named Instance Value</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Referenced Value</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference PROPERTY_VALUE_ASSERTION__NAMED_INSTANCE_VALUE = eINSTANCE.getPropertyValueAssertion_NamedInstanceValue();
+		EReference PROPERTY_VALUE_ASSERTION__REFERENCED_VALUE = eINSTANCE.getPropertyValueAssertion_ReferencedValue();
 
 		/**
 		 * The meta object literal for the '<em><b>Owning Instance</b></em>' container reference feature.

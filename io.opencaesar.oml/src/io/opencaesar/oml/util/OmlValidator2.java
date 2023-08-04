@@ -478,24 +478,24 @@ public final class OmlValidator2 {
 		                OmlPackage.Literals.PROPERTY_VALUE_RESTRICTION_AXIOM__LITERAL_VALUE);
         	}
         } else if (property instanceof StructuredProperty) {
-        	if (object.getStructureInstanceValue() == null) {
+        	if (object.getContainedValue() == null) {
 	            return report(Diagnostic.WARNING, diagnostics, object,
 	                "A structure instance is expected as the restricted value of property "+property.getAbbreviatedIri(), 
 	                OmlPackage.Literals.PROPERTY_RESTRICTION_AXIOM__PROPERTY);
-        	} else if (property.getRangeList().stream().noneMatch(t -> OmlSearch.findIsOfKind(object.getStructureInstanceValue(), (Structure)t))) {
+        	} else if (property.getRangeList().stream().noneMatch(t -> OmlSearch.findIsOfKind(object.getContainedValue(), (Structure)t))) {
 	            return report(Diagnostic.WARNING, diagnostics, object,
 		                "The instance is not in the range of structured property "+property.getAbbreviatedIri(), 
-		                OmlPackage.Literals.PROPERTY_VALUE_RESTRICTION_AXIOM__STRUCTURE_INSTANCE_VALUE);
+		                OmlPackage.Literals.PROPERTY_VALUE_RESTRICTION_AXIOM__CONTAINED_VALUE);
         	}
         } else if (property instanceof Relation) {
-        	if (object.getNamedInstanceValue() == null) {
+        	if (object.getContainedValue() == null) {
 	            return report(Diagnostic.WARNING, diagnostics, object,
 	                "A named instance IRI is expected as the restricted value of relation "+property.getAbbreviatedIri(), 
 	                OmlPackage.Literals.PROPERTY_RESTRICTION_AXIOM__PROPERTY);
-        	} else if (property.getRangeList().stream().noneMatch(t -> OmlSearch.findIsOfKind(object.getNamedInstanceValue(), (Entity)t))) {
+        	} else if (property.getRangeList().stream().noneMatch(t -> OmlSearch.findIsOfKind(object.getReferencedValue(), (Entity)t))) {
 	            return report(Diagnostic.WARNING, diagnostics, object,
 		                "The instance is not in the range of relation "+property.getAbbreviatedIri(), 
-		                OmlPackage.Literals.PROPERTY_VALUE_RESTRICTION_AXIOM__NAMED_INSTANCE_VALUE);
+		                OmlPackage.Literals.PROPERTY_VALUE_RESTRICTION_AXIOM__REFERENCED_VALUE);
         	}
         }
         return true;
