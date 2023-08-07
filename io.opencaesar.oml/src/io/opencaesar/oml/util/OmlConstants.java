@@ -18,6 +18,9 @@
  */
 package io.opencaesar.oml.util;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * The <b>Constants</b> used frequently by OML code base
  * 
@@ -44,6 +47,11 @@ public interface OmlConstants {
      * The supported OML file extensions
      */
     public static final String[] OML_EXTENSIONS= { OML_EXTENSION, OMLXMI_EXTENSION, OMLJSON_EXTENSION };
+
+    /**
+     * The supported OML file extension list
+     */
+    public static final List<String> OML_EXTENSION_LIST= Arrays.asList(OML_EXTENSIONS);
 
     /**
      * The IRI of the OML vocabulary

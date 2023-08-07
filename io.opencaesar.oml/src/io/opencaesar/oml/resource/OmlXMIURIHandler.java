@@ -51,7 +51,7 @@ public class OmlXMIURIHandler extends URIHandlerImpl {
 				.filter(i -> qname[0].equals(i.getPrefix()))
 				.findFirst().orElse(null);
 			if (_import != null) {
-				URI resolvedUri = OmlRead.getUriByIri(resource, _import.getIri());
+				URI resolvedUri = OmlRead.getResolvedUri(resource, _import.getIri());
 				if (resolvedUri != null) {
 					return URI.createURI(resolvedUri.toString() + SeparatorKind.HASH.toString() + qname[1]);
 				}

@@ -129,19 +129,8 @@ final class OmlUriResolver {
         return (localUri != null && localUri.isFile()) ? new File(localUri.toFileString()) : null;
     }
     
-    private boolean exists(ResourceSet rs, URI uri) {
-        try {
-            if (rs.getResource(uri, false) != null) {
-                return true;
-            }
-            final URIConverter uriConverter = rs.getURIConverter();
-            if (uriConverter != null) {
-                return uriConverter.exists(uri, rs.getLoadOptions());
-            }
-            return false;
-        } catch(Throwable t) {
-            return false;
-        }
+    private boolean exists(URI uri) {
+        return uriConverter.exists(uri, null);
     }
     
     /**
@@ -151,16 +140,7 @@ final class OmlUriResolver {
      * @param iri The logical IRI to resolve
      * @return The resolved physical URI
      */
-    public synchronized URI resolve(Resource contextResource, String iri) {
-        if (contextResource == null) {
-            return null;
-        }
-
-        ResourceSet rs = contextResource.getResourceSet();
-    	if (rs == null) {
-    		return null;
-    	}
-    	
+    public synchronized URI resolveUri(Resource contextResource, String iri) {
         URI folderUri = contextResource.getURI().trimSegments(1);
         
         Map<String, URI> importMap = importCache.get(folderUri);
@@ -172,12 +152,15 @@ final class OmlUriResolver {
             return importMap.get(iri);
         }
         
-        URI resolvedUri = resolveFromCatalog(rs, folderUri, iri);
+        URI resolvedUri = resolveFromCatalog(folderUri, iri);
         
         if (resolvedUri != null) {
             importMap.put(iri, resolvedUri);
-        } else if (rs.getLoadOptions().get(OmlConstants.RESOLVE_IRI_USING_RESOURCE_SET) == Boolean.TRUE) {
-        	resolvedUri = resolveFromResourceSet(rs, iri);
+        } else {
+            ResourceSet rs = contextResource.getResourceSet();
+        	if (rs.getLoadOptions().get(OmlConstants.RESOLVE_IRI_USING_RESOURCE_SET) == Boolean.TRUE) {
+        		resolvedUri = resolveFromResourceSet(rs, iri);
+        	}
         }
     	
         return resolvedUri;
@@ -194,15 +177,15 @@ final class OmlUriResolver {
 		return (ontology != null) ? ontology.eResource().getURI() : null;
 	}
 	
-	private URI resolveFromCatalog(ResourceSet rs, URI folderUri, String iri) {
+	private URI resolveFromCatalog(URI folderUri, String iri) {
         OmlCatalog catalog = findCatalog(folderUri);
         if (catalog == null) {
             return null;
         }
                 
-        final String resolved;
+        final URI resolved;
         try {
-            resolved = catalog.resolveURI(iri);
+            resolved = catalog.resolveUri(URI.createURI(iri));
             if (resolved == null) {
                 return null;
             }
@@ -212,17 +195,16 @@ final class OmlUriResolver {
         }
         
         for (String extension : OmlConstants.OML_EXTENSIONS) {
-        	URI resolvedUri = URI.createURI(resolved+'.'+extension);
-            if (exists(rs, resolvedUri)) {
+        	URI resolvedUri = resolved.appendFileExtension(extension);
+            if (exists(resolvedUri)) {
             	return resolvedUri;
             }
         }
 
-        URI resolvedUri = URI.createURI(resolved);
-        return exists(rs, resolvedUri) ? resolvedUri : null;
+        return exists(resolved) ? resolved : null;
     }
     
-   public synchronized Set<URI> getResolvableUris(Resource contextResource) {
+   public synchronized Set<URI> getResolvedUris(Resource contextResource) {
         if (contextResource == null) {
             return Collections.emptySet();
         }
@@ -244,15 +226,18 @@ final class OmlUriResolver {
         // get the catalog being used with the context
         OmlCatalog catalog = findCatalog(folderUri);
         if (catalog != null) {
-            // final all file paths specified in the catalog
-            var extensions = Collections.singletonList(OmlConstants.OML_EXTENSION);
-    		uris.addAll(catalog.getFileUris(extensions));
+    		try {
+				catalog.getResolvedUris().forEach(u -> uris.add(u));
+			} catch (IOException e) {
+	            System.err.println(e);
+	            return Collections.emptySet();
+			}
         }
 				
 		return uris;
 	}
     
-    public boolean isUriMappedByCatalog(URI uri) {
+    public boolean isResolvedUri(URI uri) {
         // get the folder URI of the context
         URI folderUri = uri.trimSegments(1);
 
@@ -262,16 +247,10 @@ final class OmlUriResolver {
             return false;
         }
         
-        for (URI rewriteURI : catalog.getRewriteUris()) {
-        	if (uri.toString().startsWith(rewriteURI.toString())) {
-        		return true;
-        	}
-        }
-        
-        return false;
+        return catalog.isResolvedUri(uri);
     }
 
-    public OmlCatalog findCatalog(URI folderUri) {
+    private OmlCatalog findCatalog(URI folderUri) {
         OmlCatalog catalog = null;
         final List<URI> folderUris = new ArrayList<>();
         while (catalog == null  && folderUri.segmentCount() > 0) {

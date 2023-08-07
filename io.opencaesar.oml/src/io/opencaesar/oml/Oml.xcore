@@ -78,7 +78,7 @@ abstract class Element {
 
 /*
  * Annotation is an element that specifies non-semantic information on an [=IdentifiedElement=]. 
- * An annotation is specified with an [=AnnotationProperty=] and an optional ([=Literal=] or [=Member=] reference) value. 
+ * An annotation is specified with an [=AnnotationProperty=] and an optional [=Literal=] or [=Member=] (referenced) value. 
  * When no value is specified, the boolean literal `true` is assumed to be specified.
  */
 @Bikeshed(heading="Elements")
@@ -92,9 +92,9 @@ class Annotation extends Element {
      */
     contains Literal[?] literalValue
     /*
-     * The reference (to a member) value specified by this annotation
+     * The referenced value (of a member) specified by this annotation
      */
-    refers Member[?] referenceValue
+    refers Member[?] referencedValue
     /*
      * The identified element that owns this annotation
      */
@@ -105,8 +105,8 @@ class Annotation extends Element {
     op Element getValue() {
     	if (literalValue !== null)
     		literalValue
-    	else if (referenceValue !== null)
-    		referenceValue
+    	else if (referencedValue !== null)
+    		referencedValue
     }
     /*
      * Gets the identified element annotated by this annotation
@@ -816,10 +816,8 @@ class Concept extends Entity {
 
 /*
  * RelationEntity is an [=entity=] that represents a reified relation from a source entity to a target entity. 
- * It can optionally name a [=ForwardRelation=] whose domain is the source and whose range is the target.
- * If both are named, such [=ForwardRelation=] becomes the inverse of the entity's [=ReverseRelation=] . 
- * If not, then a default [=ForwardRelation=]  with the name 'has<Relation>Forward' is assumed. 
- * A relation entity ref cannot specify a [=ForwardRelation=].
+ * It names a [=ForwardRelation=] (only on a relation entity definition not a ref) whose domain is the source 
+ * and whose range is the target.
  */
 @Bikeshed(heading="Relations")
 class RelationEntity extends Entity, RelationBase {
@@ -1172,11 +1170,11 @@ class StructureInstance extends Instance {
     /*
      * The property value restriction axiom that assigns this instance as a restricted value
      */
-    container PropertyValueRestrictionAxiom[?] owningAxiom opposite structureInstanceValue
+    container PropertyValueRestrictionAxiom[?] owningAxiom opposite containedValue
     /*
      * The property value assertion that assigns this instance as a value
      */
-    container PropertyValueAssertion[?] owningAssertion opposite structureInstanceValue
+    container PropertyValueAssertion[?] owningAssertion opposite containedValue
 }
 
 ////////////////////////////////////////
@@ -1498,7 +1496,7 @@ class PropertyCardinalityRestrictionAxiom extends PropertyRestrictionAxiom {
 /*
  * PropertyValueRestrictionAxiom is a [=PropertyRestrictionAxiom=] that restricts a [=property=] in a given domain to a specific
  * value. The value is either a [=literal=] value in the case of a [=ScalarProperty=], a contained [=StructureInstance=] value 
- * in the case of a [=StructuredProperty=], or a reference to a ([=NamedInstance=] value in the case of a [=Relation=].
+ * in the case of a [=StructuredProperty=], or a referenced ([=NamedInstance=] value in the case of a [=Relation=].
  */
 @Bikeshed(heading="Axioms")
 class PropertyValueRestrictionAxiom extends PropertyRestrictionAxiom {
@@ -1507,13 +1505,13 @@ class PropertyValueRestrictionAxiom extends PropertyRestrictionAxiom {
      */
     contains Literal[?] literalValue
     /*
-     * A restricted structure instance value (of a structured property) 
+     * A restricted contained value (of a structured property) 
      */
-    contains StructureInstance[?] structureInstanceValue opposite owningAxiom
+    contains StructureInstance[?] containedValue opposite owningAxiom
     /*
-     * A restricted named instance value (of a relation) 
+     * A restricted referenced value (of a relation) 
      */
-    refers NamedInstance[?] namedInstanceValue
+    refers NamedInstance[?] referencedValue
     /*
      * Gets the restricted value
      */
@@ -1521,9 +1519,9 @@ class PropertyValueRestrictionAxiom extends PropertyRestrictionAxiom {
     	if (property instanceof ScalarProperty)
     		literalValue
     	else if (property instanceof StructuredProperty)
-    		structureInstanceValue
+    		containedValue
     	else if (property instanceof Relation)
-    		namedInstanceValue
+    		referencedValue
     }
 }
 
@@ -1563,7 +1561,7 @@ class TypeAssertion extends Assertion {
 
 /*
  * PropertyValueAssertion is an [=Assertion=]  that specifies a value for a [=property=] on an [=instance=]. The value is either a [=literal=] value 
- * in the case of a [=ScalarProperty=], a contained [=StructureInstance=] value in the case of a [=StructuredProperty=], or a reference to a 
+ * in the case of a [=ScalarProperty=], a contained [=StructureInstance=] value in the case of a [=StructuredProperty=], or a referenced 
  * [=NamedInstance=] value in the case of a [=Relation=].
  */
 @Bikeshed(heading="Assertions")
@@ -1577,13 +1575,13 @@ class PropertyValueAssertion extends Assertion {
      */
     contains Literal[?] literalValue
     /*
-     * An asserted structure instance value of a structured property 
+     * An asserted contained value of a structured property 
      */
-    contains StructureInstance[?] structureInstanceValue opposite owningAssertion
+    contains StructureInstance[?] containedValue opposite owningAssertion
     /*
-     * An asserted named instance value of a relation 
+     * An asserted referenced value of a relation 
      */
-    refers NamedInstance[?] namedInstanceValue
+    refers NamedInstance[?] referencedValue
     /*
      * The instance that this property value assertion is about
      */
@@ -1595,9 +1593,9 @@ class PropertyValueAssertion extends Assertion {
     	if (property instanceof ScalarProperty)
     		literalValue
     	else if (property instanceof StructuredProperty)
-    		structureInstanceValue
+    		containedValue
     	else if (property instanceof Relation)
-    		namedInstanceValue
+    		referencedValue
     }
 
     op Instance getSubject() {
@@ -1738,10 +1736,10 @@ class QuotedLiteral extends Literal  {
     refers Scalar[?] ^type
 
     op String getLexicalValue() {
-        return '"'+value+'"' + if (getLangTag !== null) "$"+getLangTag else "^^<"+ getTypeIri() + ">"
+        return '"'+value+'"' + if (langTag !== null) "$"+langTag else if (^type !== null) "^^"+^type.abbreviatedIri else ""
     }
     op String getTypeIri() {
-    	return if (^type !== null) ^type.getIri() else OmlConstants.XSD_NS+"string" 
+    	return if (^type !== null) ^type.iri else OmlConstants.XSD_NS+"string" 
     }
 }
 
@@ -1864,15 +1862,15 @@ enum ImportKind {
     /*
      * Extension is an import that allows an ontology to extend another of the same type. 
      */
-    ^extension as "extends" = 0
+    ^extension = 0
     /*
  	 * Usage is an import that allows an ontology to use another of a different box type.
  	 */
-    usage as "uses" = 1
+    usage = 1
     /*
 	 * Inclusion is an import that allows a bundle ontology to include a non-bundle ontology of the same box type. 
      */
-    inclusion as "includes" = 2
+    inclusion = 2
 }
 
 ////////////////////////////////////////

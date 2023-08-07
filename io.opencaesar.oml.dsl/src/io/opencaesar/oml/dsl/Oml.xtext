@@ -24,7 +24,7 @@ Ontology:
 	DescriptionBox;
 
 Annotation:
-	'@' {Annotation} property=[AnnotationProperty|Ref] (literalValue=Literal | referenceValue=[Member|Ref])?;
+	'@' {Annotation} property=[AnnotationProperty|Ref] (literalValue=Literal | referencedValue=[Member|Ref])?;
 
 VocabularyBox:
 	Vocabulary |
@@ -327,10 +327,10 @@ ScalarPropertyValueRestrictionAxiom returns PropertyValueRestrictionAxiom:
 	'restricts' 'scalar' 'property' property=[ScalarProperty|Ref] 'to' literalValue=Literal;
 
 StructuredPropertyValueRestrictionAxiom returns PropertyValueRestrictionAxiom:
-	'restricts' 'structured' 'property' property=[StructuredProperty|Ref] 'to' structureInstanceValue=StructureInstance;
+	'restricts' 'structured' 'property' property=[StructuredProperty|Ref] 'to' containedValue=StructureInstance;
 
 RelationValueRestrictionAxiom returns PropertyValueRestrictionAxiom:
-	'restricts' 'relation' property=[Relation|Ref] 'to' namedInstanceValue=[NamedInstance|Ref];
+	'restricts' 'relation' property=[Relation|Ref] 'to' referencedValue=[NamedInstance|Ref];
 
 PropertySelfRestrictionAxiom:
 	'restricts' 'relation' property=[Relation|Ref] 'to' 'self';
@@ -359,10 +359,10 @@ ScalarPropertyValueAssertion returns PropertyValueAssertion:
 	property=[ScalarProperty|Ref] literalValue=Literal;
 
 StructuredPropertyValueAssertion returns PropertyValueAssertion:
-	property=[StructuredProperty|Ref] structureInstanceValue=StructureInstance;
+	property=[StructuredProperty|Ref] containedValue=StructureInstance;
 
 LinkAssertion returns PropertyValueAssertion:
-	property=[Relation|Ref] namedInstanceValue=[NamedInstance|Ref];
+	property=[Relation|Ref] referencedValue=[NamedInstance|Ref];
 
 Predicate:
 	UnaryPredicate |

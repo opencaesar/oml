@@ -164,7 +164,7 @@ public class StructureInstanceImpl extends InstanceImpl implements StructureInst
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwningAxiom != null)
-				msgs = ((InternalEObject)newOwningAxiom).eInverseAdd(this, OmlPackage.PROPERTY_VALUE_RESTRICTION_AXIOM__STRUCTURE_INSTANCE_VALUE, PropertyValueRestrictionAxiom.class, msgs);
+				msgs = ((InternalEObject)newOwningAxiom).eInverseAdd(this, OmlPackage.PROPERTY_VALUE_RESTRICTION_AXIOM__CONTAINED_VALUE, PropertyValueRestrictionAxiom.class, msgs);
 			msgs = basicSetOwningAxiom(newOwningAxiom, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
@@ -217,7 +217,7 @@ public class StructureInstanceImpl extends InstanceImpl implements StructureInst
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwningAssertion != null)
-				msgs = ((InternalEObject)newOwningAssertion).eInverseAdd(this, OmlPackage.PROPERTY_VALUE_ASSERTION__STRUCTURE_INSTANCE_VALUE, PropertyValueAssertion.class, msgs);
+				msgs = ((InternalEObject)newOwningAssertion).eInverseAdd(this, OmlPackage.PROPERTY_VALUE_ASSERTION__CONTAINED_VALUE, PropertyValueAssertion.class, msgs);
 			msgs = basicSetOwningAssertion(newOwningAssertion, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
@@ -270,9 +270,9 @@ public class StructureInstanceImpl extends InstanceImpl implements StructureInst
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
 			case OmlPackage.STRUCTURE_INSTANCE__OWNING_AXIOM:
-				return eInternalContainer().eInverseRemove(this, OmlPackage.PROPERTY_VALUE_RESTRICTION_AXIOM__STRUCTURE_INSTANCE_VALUE, PropertyValueRestrictionAxiom.class, msgs);
+				return eInternalContainer().eInverseRemove(this, OmlPackage.PROPERTY_VALUE_RESTRICTION_AXIOM__CONTAINED_VALUE, PropertyValueRestrictionAxiom.class, msgs);
 			case OmlPackage.STRUCTURE_INSTANCE__OWNING_ASSERTION:
-				return eInternalContainer().eInverseRemove(this, OmlPackage.PROPERTY_VALUE_ASSERTION__STRUCTURE_INSTANCE_VALUE, PropertyValueAssertion.class, msgs);
+				return eInternalContainer().eInverseRemove(this, OmlPackage.PROPERTY_VALUE_ASSERTION__CONTAINED_VALUE, PropertyValueAssertion.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}

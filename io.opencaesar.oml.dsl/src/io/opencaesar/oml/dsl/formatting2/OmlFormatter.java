@@ -54,6 +54,7 @@ import io.opencaesar.oml.ForwardRelation;
 import io.opencaesar.oml.Import;
 import io.opencaesar.oml.InstanceEnumerationAxiom;
 import io.opencaesar.oml.KeyAxiom;
+import io.opencaesar.oml.Literal;
 import io.opencaesar.oml.LiteralEnumerationAxiom;
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.PropertyCardinalityRestrictionAxiom;
@@ -102,7 +103,7 @@ public class OmlFormatter extends AbstractJavaFormatter {
 
 	protected void _format(Annotation annotation, IFormattableDocument doc) {
 		doc.append(keyword(annotation, oml.getAnnotationAccess().getCommercialAtKeyword_0()), noSpace());
-		ifNotNull(annotation.getValue(), i -> doc.prepend(doc.format(i), oneSpace()));
+		IfTrue(annotation.getValue() instanceof Literal, () -> doc.prepend(doc.format(annotation.getValue()), oneSpace()));
 	}
 
 	protected void _format(Vocabulary vocabulary, IFormattableDocument doc) {
@@ -178,7 +179,7 @@ public class OmlFormatter extends AbstractJavaFormatter {
 		formatBrackets(concept, doc,
 				oml.getConceptAccess().getLeftSquareBracketKeyword_2_0(), 
 				oml.getConceptAccess().getRightSquareBracketKeyword_2_3());
-		ifNotNull(concept.getOwnedEnumeration(), i -> doc.prepend(doc.format(concept.getOwnedEnumeration()), newLine()));
+		ifNotNull(concept.getOwnedEnumeration(), i -> doc.prepend(doc.format(i), newLine()));
 		concept.getOwnedKeys().forEach(i -> doc.prepend(doc.format(i), newLine()));
 		doc.surround(keyword(concept, oml.getClassifierSpecializationAccess().getLessThanSignKeyword_0()), oneSpace());
 		formatCommas(concept, doc);
@@ -309,7 +310,7 @@ public class OmlFormatter extends AbstractJavaFormatter {
 			doc.append(keyword(scalar, oml.getScalarAccess().getScalarKeyword_1_1_1()), oneSpace());
 		}
 		formatBrackets(scalar, doc);
-		ifNotNull(scalar.getOwnedEnumeration(), i -> doc.prepend(doc.format(scalar.getOwnedEnumeration()), newLine()));
+		ifNotNull(scalar.getOwnedEnumeration(), i -> doc.prepend(doc.format(i), newLine()));
 		doc.surround(keyword(scalar, oml.getScalarSpecializationAccess().getLessThanSignKeyword_0()), oneSpace());
 		formatCommas(scalar, doc);
 	}
@@ -707,6 +708,12 @@ public class OmlFormatter extends AbstractJavaFormatter {
 
 	protected Procedure1<IHiddenRegionFormatter> noSpace() {
 		return i -> i.noSpace();
+	}
+
+	protected <T> void IfTrue(boolean b, Runnable runnable) {
+		if (b) {
+			runnable.run();
+		}
 	}
 
 	protected <T> void ifNotNull(T obj, Procedure1<T> proc) {

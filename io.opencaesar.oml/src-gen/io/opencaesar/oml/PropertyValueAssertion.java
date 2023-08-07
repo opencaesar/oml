@@ -26,7 +26,7 @@ package io.opencaesar.oml;
  *
  * <!-- begin-model-doc -->
  * PropertyValueAssertion is an [=Assertion=]  that specifies a value for a [=property=] on an [=instance=]. The value is either a [=literal=] value
- * in the case of a [=ScalarProperty=], a contained [=StructureInstance=] value in the case of a [=StructuredProperty=], or a reference to a
+ * in the case of a [=ScalarProperty=], a contained [=StructureInstance=] value in the case of a [=StructuredProperty=], or a referenced
  * [=NamedInstance=] value in the case of a [=Relation=].
  * <!-- end-model-doc -->
  *
@@ -36,8 +36,8 @@ package io.opencaesar.oml;
  * <ul>
  *   <li>{@link io.opencaesar.oml.PropertyValueAssertion#getProperty <em>Property</em>}</li>
  *   <li>{@link io.opencaesar.oml.PropertyValueAssertion#getLiteralValue <em>Literal Value</em>}</li>
- *   <li>{@link io.opencaesar.oml.PropertyValueAssertion#getStructureInstanceValue <em>Structure Instance Value</em>}</li>
- *   <li>{@link io.opencaesar.oml.PropertyValueAssertion#getNamedInstanceValue <em>Named Instance Value</em>}</li>
+ *   <li>{@link io.opencaesar.oml.PropertyValueAssertion#getContainedValue <em>Contained Value</em>}</li>
+ *   <li>{@link io.opencaesar.oml.PropertyValueAssertion#getReferencedValue <em>Referenced Value</em>}</li>
  *   <li>{@link io.opencaesar.oml.PropertyValueAssertion#getOwningInstance <em>Owning Instance</em>}</li>
  * </ul>
  *
@@ -97,56 +97,56 @@ public interface PropertyValueAssertion extends Assertion {
 	void setLiteralValue(Literal value);
 
 	/**
-	 * Returns the value of the '<em><b>Structure Instance Value</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Contained Value</b></em>' containment reference.
 	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.StructureInstance#getOwningAssertion <em>Owning Assertion</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * An asserted structure instance value of a structured property
+	 * An asserted contained value of a structured property
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Structure Instance Value</em>' containment reference.
-	 * @see #setStructureInstanceValue(StructureInstance)
-	 * @see io.opencaesar.oml.OmlPackage#getPropertyValueAssertion_StructureInstanceValue()
+	 * @return the value of the '<em>Contained Value</em>' containment reference.
+	 * @see #setContainedValue(StructureInstance)
+	 * @see io.opencaesar.oml.OmlPackage#getPropertyValueAssertion_ContainedValue()
 	 * @see io.opencaesar.oml.StructureInstance#getOwningAssertion
 	 * @model opposite="owningAssertion" containment="true"
 	 * @generated
 	 */
-	StructureInstance getStructureInstanceValue();
+	StructureInstance getContainedValue();
 
 	/**
-	 * Sets the value of the '{@link io.opencaesar.oml.PropertyValueAssertion#getStructureInstanceValue <em>Structure Instance Value</em>}' containment reference.
+	 * Sets the value of the '{@link io.opencaesar.oml.PropertyValueAssertion#getContainedValue <em>Contained Value</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Structure Instance Value</em>' containment reference.
-	 * @see #getStructureInstanceValue()
+	 * @param value the new value of the '<em>Contained Value</em>' containment reference.
+	 * @see #getContainedValue()
 	 * @generated
 	 */
-	void setStructureInstanceValue(StructureInstance value);
+	void setContainedValue(StructureInstance value);
 
 	/**
-	 * Returns the value of the '<em><b>Named Instance Value</b></em>' reference.
+	 * Returns the value of the '<em><b>Referenced Value</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * An asserted named instance value of a relation
+	 * An asserted referenced value of a relation
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Named Instance Value</em>' reference.
-	 * @see #setNamedInstanceValue(NamedInstance)
-	 * @see io.opencaesar.oml.OmlPackage#getPropertyValueAssertion_NamedInstanceValue()
+	 * @return the value of the '<em>Referenced Value</em>' reference.
+	 * @see #setReferencedValue(NamedInstance)
+	 * @see io.opencaesar.oml.OmlPackage#getPropertyValueAssertion_ReferencedValue()
 	 * @model
 	 * @generated
 	 */
-	NamedInstance getNamedInstanceValue();
+	NamedInstance getReferencedValue();
 
 	/**
-	 * Sets the value of the '{@link io.opencaesar.oml.PropertyValueAssertion#getNamedInstanceValue <em>Named Instance Value</em>}' reference.
+	 * Sets the value of the '{@link io.opencaesar.oml.PropertyValueAssertion#getReferencedValue <em>Referenced Value</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Named Instance Value</em>' reference.
-	 * @see #getNamedInstanceValue()
+	 * @param value the new value of the '<em>Referenced Value</em>' reference.
+	 * @see #getReferencedValue()
 	 * @generated
 	 */
-	void setNamedInstanceValue(NamedInstance value);
+	void setReferencedValue(NamedInstance value);
 
 	/**
 	 * Returns the value of the '<em><b>Owning Instance</b></em>' container reference.

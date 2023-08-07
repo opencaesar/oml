@@ -26,7 +26,7 @@ package io.opencaesar.oml;
  *
  * <!-- begin-model-doc -->
  * Annotation is an element that specifies non-semantic information on an [=IdentifiedElement=].
- * An annotation is specified with an [=AnnotationProperty=] and an optional ([=Literal=] or [=Member=] reference) value.
+ * An annotation is specified with an [=AnnotationProperty=] and an optional [=Literal=] or [=Member=] (referenced) value.
  * When no value is specified, the boolean literal `true` is assumed to be specified.
  * <!-- end-model-doc -->
  *
@@ -36,7 +36,7 @@ package io.opencaesar.oml;
  * <ul>
  *   <li>{@link io.opencaesar.oml.Annotation#getProperty <em>Property</em>}</li>
  *   <li>{@link io.opencaesar.oml.Annotation#getLiteralValue <em>Literal Value</em>}</li>
- *   <li>{@link io.opencaesar.oml.Annotation#getReferenceValue <em>Reference Value</em>}</li>
+ *   <li>{@link io.opencaesar.oml.Annotation#getReferencedValue <em>Referenced Value</em>}</li>
  *   <li>{@link io.opencaesar.oml.Annotation#getOwningElement <em>Owning Element</em>}</li>
  * </ul>
  *
@@ -96,29 +96,29 @@ public interface Annotation extends Element {
 	void setLiteralValue(Literal value);
 
 	/**
-	 * Returns the value of the '<em><b>Reference Value</b></em>' reference.
+	 * Returns the value of the '<em><b>Referenced Value</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The reference (to a member) value specified by this annotation
+	 * The referenced value (of a member) specified by this annotation
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Reference Value</em>' reference.
-	 * @see #setReferenceValue(Member)
-	 * @see io.opencaesar.oml.OmlPackage#getAnnotation_ReferenceValue()
+	 * @return the value of the '<em>Referenced Value</em>' reference.
+	 * @see #setReferencedValue(Member)
+	 * @see io.opencaesar.oml.OmlPackage#getAnnotation_ReferencedValue()
 	 * @model
 	 * @generated
 	 */
-	Member getReferenceValue();
+	Member getReferencedValue();
 
 	/**
-	 * Sets the value of the '{@link io.opencaesar.oml.Annotation#getReferenceValue <em>Reference Value</em>}' reference.
+	 * Sets the value of the '{@link io.opencaesar.oml.Annotation#getReferencedValue <em>Referenced Value</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Reference Value</em>' reference.
-	 * @see #getReferenceValue()
+	 * @param value the new value of the '<em>Referenced Value</em>' reference.
+	 * @see #getReferencedValue()
 	 * @generated
 	 */
-	void setReferenceValue(Member value);
+	void setReferencedValue(Member value);
 
 	/**
 	 * Returns the value of the '<em><b>Owning Element</b></em>' container reference.

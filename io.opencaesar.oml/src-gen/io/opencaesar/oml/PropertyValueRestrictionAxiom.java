@@ -27,7 +27,7 @@ package io.opencaesar.oml;
  * <!-- begin-model-doc -->
  * PropertyValueRestrictionAxiom is a [=PropertyRestrictionAxiom=] that restricts a [=property=] in a given domain to a specific
  * value. The value is either a [=literal=] value in the case of a [=ScalarProperty=], a contained [=StructureInstance=] value
- * in the case of a [=StructuredProperty=], or a reference to a ([=NamedInstance=] value in the case of a [=Relation=].
+ * in the case of a [=StructuredProperty=], or a referenced ([=NamedInstance=] value in the case of a [=Relation=].
  * <!-- end-model-doc -->
  *
  * <p>
@@ -35,8 +35,8 @@ package io.opencaesar.oml;
  * </p>
  * <ul>
  *   <li>{@link io.opencaesar.oml.PropertyValueRestrictionAxiom#getLiteralValue <em>Literal Value</em>}</li>
- *   <li>{@link io.opencaesar.oml.PropertyValueRestrictionAxiom#getStructureInstanceValue <em>Structure Instance Value</em>}</li>
- *   <li>{@link io.opencaesar.oml.PropertyValueRestrictionAxiom#getNamedInstanceValue <em>Named Instance Value</em>}</li>
+ *   <li>{@link io.opencaesar.oml.PropertyValueRestrictionAxiom#getContainedValue <em>Contained Value</em>}</li>
+ *   <li>{@link io.opencaesar.oml.PropertyValueRestrictionAxiom#getReferencedValue <em>Referenced Value</em>}</li>
  * </ul>
  *
  * @see io.opencaesar.oml.OmlPackage#getPropertyValueRestrictionAxiom()
@@ -70,56 +70,56 @@ public interface PropertyValueRestrictionAxiom extends PropertyRestrictionAxiom 
 	void setLiteralValue(Literal value);
 
 	/**
-	 * Returns the value of the '<em><b>Structure Instance Value</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Contained Value</b></em>' containment reference.
 	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.StructureInstance#getOwningAxiom <em>Owning Axiom</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * A restricted structure instance value (of a structured property)
+	 * A restricted contained value (of a structured property)
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Structure Instance Value</em>' containment reference.
-	 * @see #setStructureInstanceValue(StructureInstance)
-	 * @see io.opencaesar.oml.OmlPackage#getPropertyValueRestrictionAxiom_StructureInstanceValue()
+	 * @return the value of the '<em>Contained Value</em>' containment reference.
+	 * @see #setContainedValue(StructureInstance)
+	 * @see io.opencaesar.oml.OmlPackage#getPropertyValueRestrictionAxiom_ContainedValue()
 	 * @see io.opencaesar.oml.StructureInstance#getOwningAxiom
 	 * @model opposite="owningAxiom" containment="true"
 	 * @generated
 	 */
-	StructureInstance getStructureInstanceValue();
+	StructureInstance getContainedValue();
 
 	/**
-	 * Sets the value of the '{@link io.opencaesar.oml.PropertyValueRestrictionAxiom#getStructureInstanceValue <em>Structure Instance Value</em>}' containment reference.
+	 * Sets the value of the '{@link io.opencaesar.oml.PropertyValueRestrictionAxiom#getContainedValue <em>Contained Value</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Structure Instance Value</em>' containment reference.
-	 * @see #getStructureInstanceValue()
+	 * @param value the new value of the '<em>Contained Value</em>' containment reference.
+	 * @see #getContainedValue()
 	 * @generated
 	 */
-	void setStructureInstanceValue(StructureInstance value);
+	void setContainedValue(StructureInstance value);
 
 	/**
-	 * Returns the value of the '<em><b>Named Instance Value</b></em>' reference.
+	 * Returns the value of the '<em><b>Referenced Value</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * A restricted named instance value (of a relation)
+	 * A restricted referenced value (of a relation)
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Named Instance Value</em>' reference.
-	 * @see #setNamedInstanceValue(NamedInstance)
-	 * @see io.opencaesar.oml.OmlPackage#getPropertyValueRestrictionAxiom_NamedInstanceValue()
+	 * @return the value of the '<em>Referenced Value</em>' reference.
+	 * @see #setReferencedValue(NamedInstance)
+	 * @see io.opencaesar.oml.OmlPackage#getPropertyValueRestrictionAxiom_ReferencedValue()
 	 * @model
 	 * @generated
 	 */
-	NamedInstance getNamedInstanceValue();
+	NamedInstance getReferencedValue();
 
 	/**
-	 * Sets the value of the '{@link io.opencaesar.oml.PropertyValueRestrictionAxiom#getNamedInstanceValue <em>Named Instance Value</em>}' reference.
+	 * Sets the value of the '{@link io.opencaesar.oml.PropertyValueRestrictionAxiom#getReferencedValue <em>Referenced Value</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Named Instance Value</em>' reference.
-	 * @see #getNamedInstanceValue()
+	 * @param value the new value of the '<em>Referenced Value</em>' reference.
+	 * @see #getReferencedValue()
 	 * @generated
 	 */
-	void setNamedInstanceValue(NamedInstance value);
+	void setReferencedValue(NamedInstance value);
 
 	/**
 	 * <!-- begin-user-doc -->

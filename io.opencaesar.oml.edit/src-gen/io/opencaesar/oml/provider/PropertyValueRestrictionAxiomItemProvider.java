@@ -63,25 +63,25 @@ public class PropertyValueRestrictionAxiomItemProvider extends PropertyRestricti
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addNamedInstanceValuePropertyDescriptor(object);
+			addReferencedValuePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Named Instance Value feature.
+	 * This adds a property descriptor for the Referenced Value feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addNamedInstanceValuePropertyDescriptor(Object object) {
+	protected void addReferencedValuePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_PropertyValueRestrictionAxiom_namedInstanceValue_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_PropertyValueRestrictionAxiom_namedInstanceValue_feature", "_UI_PropertyValueRestrictionAxiom_type"),
-				 OmlPackage.Literals.PROPERTY_VALUE_RESTRICTION_AXIOM__NAMED_INSTANCE_VALUE,
+				 getString("_UI_PropertyValueRestrictionAxiom_referencedValue_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_PropertyValueRestrictionAxiom_referencedValue_feature", "_UI_PropertyValueRestrictionAxiom_type"),
+				 OmlPackage.Literals.PROPERTY_VALUE_RESTRICTION_AXIOM__REFERENCED_VALUE,
 				 true,
 				 false,
 				 true,
@@ -103,7 +103,7 @@ public class PropertyValueRestrictionAxiomItemProvider extends PropertyRestricti
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(OmlPackage.Literals.PROPERTY_VALUE_RESTRICTION_AXIOM__LITERAL_VALUE);
-			childrenFeatures.add(OmlPackage.Literals.PROPERTY_VALUE_RESTRICTION_AXIOM__STRUCTURE_INSTANCE_VALUE);
+			childrenFeatures.add(OmlPackage.Literals.PROPERTY_VALUE_RESTRICTION_AXIOM__CONTAINED_VALUE);
 		}
 		return childrenFeatures;
 	}
@@ -157,7 +157,7 @@ public class PropertyValueRestrictionAxiomItemProvider extends PropertyRestricti
 
 		switch (notification.getFeatureID(PropertyValueRestrictionAxiom.class)) {
 			case OmlPackage.PROPERTY_VALUE_RESTRICTION_AXIOM__LITERAL_VALUE:
-			case OmlPackage.PROPERTY_VALUE_RESTRICTION_AXIOM__STRUCTURE_INSTANCE_VALUE:
+			case OmlPackage.PROPERTY_VALUE_RESTRICTION_AXIOM__CONTAINED_VALUE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -202,7 +202,7 @@ public class PropertyValueRestrictionAxiomItemProvider extends PropertyRestricti
 
 		newChildDescriptors.add
 			(createChildParameter
-				(OmlPackage.Literals.PROPERTY_VALUE_RESTRICTION_AXIOM__STRUCTURE_INSTANCE_VALUE,
+				(OmlPackage.Literals.PROPERTY_VALUE_RESTRICTION_AXIOM__CONTAINED_VALUE,
 				 OmlFactory.eINSTANCE.createStructureInstance()));
 	}
 

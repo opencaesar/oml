@@ -41,7 +41,6 @@ import io.opencaesar.oml.Classifier;
 import io.opencaesar.oml.ClassifierEquivalenceAxiom;
 import io.opencaesar.oml.Concept;
 import io.opencaesar.oml.ConceptInstance;
-import io.opencaesar.oml.Element;
 import io.opencaesar.oml.Entity;
 import io.opencaesar.oml.InstanceEnumerationAxiom;
 import io.opencaesar.oml.KeyAxiom;
@@ -87,99 +86,64 @@ import io.opencaesar.oml.UnreifiedRelation;
  */
 public class OmlIndex {
     
-    /*
-     * Finds all objects that cross reference a given Oml element using a given EReference 
+    /**
+     * Finds all objects that cross reference a given object using a given EReference 
      * 
-     * @param element The element to search for cross refs to
+     * @param object The object to search for cross refs to
      * @return A set of settings representing cross references
      */
-    private static Collection<Setting> findInverseReferencers(Element element) {
-        final ECrossReferenceAdapter adapter = ECrossReferenceAdapter.getCrossReferenceAdapter(element);
+    static Collection<Setting> findInverseReferencers(EObject object) {
+        final ECrossReferenceAdapter adapter = ECrossReferenceAdapter.getCrossReferenceAdapter(object);
         Collection<Setting> settings;
         if (adapter != null) {
             // the fast method
-            settings = adapter.getInverseReferences(element);
+            settings = adapter.getNonNavigableInverseReferences(object);
         } else {
             // the slow method
-            settings = searchForInverseReferences(element);
+            settings = searchForNonNavigableInverseReferences(object);
         };
         return settings;
     }
 
-    /*
-     * Finds all objects that cross reference a given Oml element using a given EReference 
-     * 
-     * @param element The element to search for cross refs to
-     * @param eReference The eReference to filter the cross refs by
-     * @return A set of objects that cross reference the given element based on the criteria
-     */
-    private static Collection<EObject> findInverseReferencers(Element element, EReference eReference) {
-        final Set<EObject> referencers = new LinkedHashSet<>();
-        Collection<Setting> settings = findInverseReferencers(element);
-        for (Setting setting : settings) {
-            if (setting.getEStructuralFeature() == eReference) {
-                referencers.add(setting.getEObject());
-            }
-        }
-        return referencers;
-    }
-    
-    /*
-     * Finds all objects that cross reference a given Oml element conforming to a given Java type and using a given EReference
-     * 
-     * @param element The element to search for cross refs to
-     * @param eReference The eReference to filter the cross refs by
-     * @param type The Java type to filter the cross refs by
-     * @return A set of objects that cross reference the given element based on the criteria
-     */
-    private static <T extends EObject> Set<T> findInverseReferencers(Element element, EReference eReference, Class<T> type) {
-        final Set<T> referencers = new LinkedHashSet<>(); 
-        findInverseReferencers(element, eReference).forEach(referencer -> {
-            if (type.isInstance(referencer)) {
-                referencers.add(type.cast(referencer));
-            }
-        });
-        return referencers;
-    }
-    
-    /*
-     * Searches the context (resource set if available or resource) for cross references to a given element
+    /**
+     * Searches the context (resource set if available or resource) for cross references to a given object
      *  
-     * @param element The element to search for cross refs to
-     * @return A set of Setting objects including the cross referencing elements and the features they reference with
+     * @param object The object to search for cross refs to
+     * @return A set of Setting objects including the cross referencing objects and the features they reference with
      */
-    private static Collection<Setting> searchForInverseReferences(EObject element) {
-        final Resource resource = element.eResource();
+    private static Collection<Setting> searchForNonNavigableInverseReferences(EObject object) {
+        final Resource resource = object.eResource();
         if (resource != null) {
             ResourceSet resourceSet = resource.getResourceSet();
             if (resourceSet != null) {
-                return UsageCrossReferencer.find(element, resourceSet);
+                return UsageCrossReferencer.find(object, resourceSet);
             } else {
-                return UsageCrossReferencer.find(element, resource);
+                return UsageCrossReferencer.find(object, resource);
             }
         } else {
-            final EObject rootEObject = EcoreUtil.getRootContainer(element);
-            return UsageCrossReferencer.find(element, rootEObject);
+            final EObject rootEObject = EcoreUtil.getRootContainer(object);
+            return UsageCrossReferencer.find(object, rootEObject);
         }
     }
     
-    // Member
-
     /**
-     * Finds elements of a given type that directly reference a given member 
+     * Finds all objects that cross reference a given object conforming to a given Java type and using a given EReference
      * 
-     * @param member the given member
-     * @type the type of referencer
-     * @return a set of elements directly referencing the given element
+     * @param object The object to search for cross refs to
+     * @param eReference The eReference to filter the cross refs by
+     * @param type The Java type to filter the cross refs by
+     * @return A set of objects that cross reference the given object based on the criteria
      */
-    @SuppressWarnings("unchecked")
-	public static <T extends Element> Set<T> findRreferences(Member member, Class<T> type) {
-        final var referencers = new LinkedHashSet<T>();
-        Collection<Setting> settings = findInverseReferencers(member);
+    private static <T extends EObject> Set<T> findInverseReferencers(EObject object, EReference eReference, Class<T> type) {
+        final Set<T> referencers = new LinkedHashSet<>();
+        Collection<Setting> settings = findInverseReferencers(object);
         for (Setting setting : settings) {
-            if (type.isInstance(setting.getEObject())) {
-        		referencers.add((T) setting.getEObject());
-        	}
+            if (setting.getEStructuralFeature() == eReference) {
+            	var referencer = setting.getEObject();
+                if (type.isInstance(referencer)) {
+                    referencers.add(type.cast(referencer));
+                }
+            }
         }
         return referencers;
     }
@@ -196,15 +160,25 @@ public class OmlIndex {
         return findInverseReferencers(property, OmlPackage.Literals.ANNOTATION__PROPERTY, Annotation.class);
     }
     
+    /**
+     * Finds annotations referencing the given referenced value
+     * 
+     * @param value The referenced value
+     * @return A set of referencing annotations
+     */
+    public static Set<Annotation> findAnnotationsWithReferencedValue(Member value) {
+        return findInverseReferencers(value, OmlPackage.Literals.ANNOTATION__REFERENCED_VALUE, Annotation.class);
+    }
+
     // Enumeration Axiom
 
     /**
-     * Finds instance enumeration axioms that enumerates the given instance
+     * Finds instance enumeration axioms that references the given instance
      * 
      * @param instance The given instance
      * @return A set of instance enumeration axioms enumerating the given instance
      */
-    public static Set<InstanceEnumerationAxiom> findInstanceEnumerationAxiomsWithEnumeratedInstance(ConceptInstance instance) {
+    public static Set<InstanceEnumerationAxiom> findInstanceEnumerationAxiomsWithInstance(ConceptInstance instance) {
         return findInverseReferencers(instance, OmlPackage.Literals.INSTANCE_ENUMERATION_AXIOM__INSTANCES, InstanceEnumerationAxiom.class);
     }
 
@@ -551,13 +525,13 @@ public class OmlIndex {
     // PropertyValueRestrictionAxiom
     
     /**
-     * Finds property value restriction axioms referencing the given named instance as a value
+     * Finds property value restriction axioms referencing the given referenced value
      * 
-     * @param value The given named instance value
+     * @param value The given referenced value
      * @return A set of referencing property value restriction axioms
      */
-    public static Set<PropertyValueRestrictionAxiom> findPropertyValueRestrictionAxiomsWithNamedInstanceValue(NamedInstance value) {
-        return findInverseReferencers(value, OmlPackage.Literals.PROPERTY_VALUE_RESTRICTION_AXIOM__NAMED_INSTANCE_VALUE, PropertyValueRestrictionAxiom.class);
+    public static Set<PropertyValueRestrictionAxiom> findPropertyValueRestrictionAxiomsWithReferencedValue(NamedInstance value) {
+        return findInverseReferencers(value, OmlPackage.Literals.PROPERTY_VALUE_RESTRICTION_AXIOM__REFERENCED_VALUE, PropertyValueRestrictionAxiom.class);
     }
     
     // KeyAxiom
@@ -568,7 +542,7 @@ public class OmlIndex {
      * @param property The referenced property
      * @return A set of referencing key axioms
      */
-    public static Set<KeyAxiom> findKeyAxiomWithProperty(Property property) {
+    public static Set<KeyAxiom> findKeyAxiomsWithProperty(Property property) {
         return findInverseReferencers(property, OmlPackage.Literals.KEY_AXIOM__PROPERTIES, KeyAxiom.class);
     }
     
@@ -597,13 +571,13 @@ public class OmlIndex {
     }
     
     /**
-     * Finds property value assertions referencing the given named instance as a value
+     * Finds property value assertions referencing the given referenced value
      * 
-     * @param value The referenced named instance value
+     * @param value The referenced value
      * @return A set of referencing property value assertions
      */
-    public static Set<PropertyValueAssertion> findPropertyValueAssertionsWithNamedInstanceValue(NamedInstance value) {
-        return findInverseReferencers(value, OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__NAMED_INSTANCE_VALUE, PropertyValueAssertion.class);
+    public static Set<PropertyValueAssertion> findPropertyValueAssertionsWithReferencedValue(NamedInstance value) {
+        return findInverseReferencers(value, OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__REFERENCED_VALUE, PropertyValueAssertion.class);
     }
     
     // TypePredicate
@@ -650,7 +624,7 @@ public class OmlIndex {
      * @param builtIn The referenced builtIn
      * @return A set of referencing builtIn predicates
      */
-    public static Set<BuiltInPredicate> findBuiltInPredicateWithBuiltIn(BuiltIn builtIn) {
+    public static Set<BuiltInPredicate> findBuiltInPredicatesWithBuiltIn(BuiltIn builtIn) {
         return findInverseReferencers(builtIn, OmlPackage.Literals.BUILT_IN_PREDICATE__BUILT_IN, BuiltInPredicate.class);
     }
 

@@ -37,7 +37,7 @@ public class OmlImportUriGlobalScopeProvider extends ImportUriGlobalScopeProvide
 		return cache.<LinkedHashSet<URI>>get(OmlImportUriGlobalScopeProvider.class.getSimpleName(), resource, new Provider<LinkedHashSet<URI>>() {
 			@Override
 			public LinkedHashSet<URI> get() {
-				Set<URI> uris = OmlRead.getResolvableUris(resource);
+				Set<URI> uris = OmlRead.getResolvedUris(resource);
 				return new LinkedHashSet<URI>(uris);
 			}
 		});
