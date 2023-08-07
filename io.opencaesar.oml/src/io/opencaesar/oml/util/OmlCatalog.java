@@ -26,7 +26,6 @@ import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.Vector;
 
 import org.apache.xml.resolver.Catalog;
 import org.apache.xml.resolver.CatalogEntry;
@@ -56,12 +55,45 @@ public final class OmlCatalog {
      * The wrapped Apache catalog
      */
     private CatalogEx catalog;
-    
+
+    /*
+     * The supported OML file extensions
+     */
+    private List<String> extensions;
+
+    /*
+     * The wrapped Apache catalog
+     */
+    private List<OmlCatalog> nestedCatalogs;
+
     /*
      * Creates a new OmlCatalog instance
      */
-    private OmlCatalog(CatalogEx catalog) {
+    private OmlCatalog(CatalogEx catalog, List<String> extensions) {
         this.catalog = catalog;
+        this.extensions = extensions;
+        this.nestedCatalogs = new ArrayList<>();
+    }
+
+    /**
+     * Creates a new Oml Catalog given a catalog URI
+     * 
+     * @param catalogUri The URI of a catalog file named 'catalog.xml'
+     * @param extensions The supported OML file extensions
+     * @return A new instance of Oml Catalog
+     * @throws IOException When there are problems parsing the catalog
+     */
+    public static OmlCatalog create(URI catalogUri, List<String> extensions) throws IOException {
+    	CatalogEx catalog = new CatalogEx(catalogUri.toString());
+        catalog.setCatalogManager(manager);
+        catalog.setupReaders();
+        catalog.loadSystemCatalogs();
+        catalog.parseCatalog(new URL(catalogUri.toString()));
+        var omlCatalog = new OmlCatalog(catalog, extensions);
+		for (String path : catalog.getNestedCatalogs()) {
+			omlCatalog.nestedCatalogs.add(OmlCatalog.create(URI.createURI(path)));
+		}
+        return omlCatalog;
     }
 
     /**
@@ -72,12 +104,7 @@ public final class OmlCatalog {
      * @throws IOException When there are problems parsing the catalog
      */
     public static OmlCatalog create(URI catalogUri) throws IOException {
-    	CatalogEx catalog = new CatalogEx(catalogUri);
-        catalog.setCatalogManager(manager);
-        catalog.setupReaders();
-        catalog.loadSystemCatalogs();
-        catalog.parseCatalog(new URL(catalogUri.toString()));
-        return new OmlCatalog(catalog);
+        return create(catalogUri, OmlConstants.OML_EXTENSION_LIST);
     }
 
     /**
@@ -85,91 +112,51 @@ public final class OmlCatalog {
      * 
      * @param uri The URI to resolve
      * @return The resolved file path
-     * @throws IOException if the URI cannot be turned into a valid path
+     * @throws IOException if the URI cannot be resolved to a valid path
      */
-    public String resolveURI(String uri) throws IOException {
-    	String resolved = catalog.resolveURI(uri);
-    	return normalize(resolved);
+    public URI resolveUri(URI uri) throws IOException {
+    	return URI.createURI(catalog.resolveUri(uri.toString()));
     }
 
     /**
-     * Gets the current base of the catalog
+     * Deresolves the given file path to a URI
      * 
-     * @return The current base of the catalog
+     * @param path The file path to deresolve
+     * @return The deresolved URI
+     * @throws IOException if the file path cannot be deresolved into a URI
      */
-    public String getCurrentBase() {
-        return catalog.getCurrentBase();
-    }
-
-    /**
-     * Gets the catalog entries
-     * 
-     * @return The entries of the catalog
-     */
-    public List<CatalogEntry> getEntries() {
-        List<CatalogEntry> entries = new ArrayList<CatalogEntry>();
-        Enumeration<?> en = catalog.getCatalogEntries().elements();
-        while (en.hasMoreElements()) {
-            entries.add((CatalogEntry) en.nextElement());
-        }
-        return entries;
-    }
-
-    /**
-     * Gets the nested catalogs of this catalog
-     * 
-     * @return The nested catalog of this catalog
-     */
-    public List<String> getNestedCatalogs() {
-        List<String> entries = new ArrayList<String>();
-        Enumeration<?> en = catalog.getCatalogs().elements();
-        while (en.hasMoreElements()) {
-            entries.add((String)en.nextElement());
-        }
-        return entries;
-    }
-
-    /**
-     * Gets the URIs that are used for rewrite rules in this catalog
-     * 
-     * @return a list of rewrite URIs
-     */
-    public List<URI> getRewriteUris() {
-		var rewriteUris = new ArrayList<URI>();
-		for (CatalogEntry e : getEntries()) {
-			if (e.getEntryType() == Catalog.REWRITE_URI) { // only type of entry supported so far
-				var uri = URI.createURI(normalize(e.getEntryArg(1)));
-				if (uri.hasTrailingPathSeparator()) {
-					uri = uri.trimSegments(1);
+    public URI deresolveUri(URI path) throws IOException {
+		for (CatalogEntry e : catalog.getCatalogEntries()) {
+			if (e.getEntryType() == Catalog.REWRITE_URI) {
+				String uriStartString = e.getEntryArg(0);
+				String rewriteUri = e.getEntryArg(1);
+				int i =  path.toString().indexOf(rewriteUri);
+				if (i != -1) {
+					var pathWithNoExt = path.trimFileExtension().toString();
+					var deresolved = pathWithNoExt.replace(rewriteUri, uriStartString);
+					return URI.createURI(deresolved);
 				}
-				rewriteUris.add(uri);
 			}
 		}
-    	return rewriteUris;
+    	return null;
     }
-    
-    private String normalize(String path) {
-    	java.net.URI uri = java.net.URI.create(path);
-    	java.net.URI normalized = uri.normalize();
-    	return path.replaceFirst(uri.getRawPath(), normalized.getRawPath());
-    }
-    
+
     /**
-     * Gets the URIs of files that are mapped by this catalog
+     * Gets the URIs of files that can be resolved by this catalog
      * 
      * @return a list of file URIs
      */
-    public List<URI> getFileUris(List<String> fileExtensions) {
+    public List<URI> getResolvedUris() throws IOException {
 		var uris = new ArrayList<URI>();
-		for (final URI rewriteUri : getRewriteUris()) {
-			var path = new File(CommonPlugin.asLocalURI(rewriteUri).toFileString());
+		for (final String rewriteUri : catalog.getRewriteUris()) {
+			var path = new File(CommonPlugin.asLocalURI(URI.createURI(rewriteUri)).toFileString());
 			if (path.isDirectory()) {
-				for (var file : getFiles(path, fileExtensions)) {
+				for (var file : getFiles(path, extensions)) {
 					String relative = path.toURI().relativize(file.toURI()).getPath();
 					uris.add(URI.createURI(rewriteUri+"/"+relative));
 				}
 			} else { // likely a file name with no extension
-				for (String ext : fileExtensions) {
+				for (String ext : extensions) {
 					var file = new File(path.toString()+"."+ext);
 					if (file.exists()) {
 						uris.add(URI.createURI(rewriteUri+"."+ext));
@@ -178,7 +165,19 @@ public final class OmlCatalog {
 				}
 			}
 		}
+		for (final OmlCatalog nestedCatalog : nestedCatalogs) {
+			uris.addAll(nestedCatalog.getResolvedUris());
+		}
 		return uris;
+    }
+
+    public boolean isResolvedUri(URI uri) {
+        for (String rewriteURI : catalog.getRewriteUris()) {
+        	if (uri.toString().startsWith(rewriteURI.toString())) {
+        		return true;
+        	}
+        }
+        return false;
     }
     
     private Set<File> getFiles(File folder, List<String> fileExtensions) {
@@ -197,20 +196,55 @@ public final class OmlCatalog {
 	}
 
     private static class CatalogEx extends Catalog {
-    	private URI baseUri;
-    	public CatalogEx(URI catalogUri) {
-    		this.baseUri = catalogUri.trimSegments(1);
+    	private String baseUri;
+    	public CatalogEx(String catalogUri) {
+    		this.baseUri = new File(catalogUri).getParent();
     	}
-        Vector<?> getCatalogEntries() {
-            return catalogEntries;
+        public String resolveUri(String uri) throws IOException {
+        	String resolved = resolveURI(uri);
+        	return (resolved != null) ? normalize(resolved) : null;
         }
-        Vector<?> getCatalogs() {
-            return catalogs;
+        public List<String> getRewriteUris() {
+    		var rewriteUris = new ArrayList<String>();
+    		for (CatalogEntry e : getCatalogEntries()) {
+    			if (e.getEntryType() == Catalog.REWRITE_URI) {
+    				String uri = normalize(e.getEntryArg(1));
+    				if (uri.endsWith("/")) {
+    					uri = uri.substring(0, uri.length()-1);
+    				}
+    				rewriteUris.add(uri);
+    			}
+    		}
+        	return rewriteUris;
         }
+        public List<CatalogEntry> getCatalogEntries() {
+            List<CatalogEntry> entries = new ArrayList<CatalogEntry>();
+            Enumeration<?> en = catalogEntries.elements();
+            while (en.hasMoreElements()) {
+                entries.add((CatalogEntry) en.nextElement());
+            }
+            return entries;
+        }
+        public List<String> getNestedCatalogs() {
+            List<String> entries = new ArrayList<String>();
+            Enumeration<?> en = catalogs.elements();
+            while (en.hasMoreElements()) {
+                entries.add((String)en.nextElement());
+            }
+            return entries;
+        }        
+
         @Override
         protected String makeAbsolute(String sysid) {
             sysid = fixSlashes(sysid);
             return  baseUri.toString()+'/'+sysid;
         }
+
+        private static String normalize(String path) {
+        	java.net.URI uri = java.net.URI.create(path);
+        	java.net.URI normalized = uri.normalize();
+        	return path.replaceFirst(uri.getRawPath(), normalized.getRawPath());
+        }
+        
     }
 }

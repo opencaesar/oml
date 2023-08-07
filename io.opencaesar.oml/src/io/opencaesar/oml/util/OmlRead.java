@@ -18,7 +18,6 @@
  */
 package io.opencaesar.oml.util;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -27,6 +26,7 @@ import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -36,7 +36,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import io.opencaesar.oml.Annotation;
 import io.opencaesar.oml.AnnotationProperty;
@@ -56,6 +55,7 @@ import io.opencaesar.oml.Ontology;
 import io.opencaesar.oml.Predicate;
 import io.opencaesar.oml.Property;
 import io.opencaesar.oml.PropertyPredicate;
+import io.opencaesar.oml.QuotedLiteral;
 import io.opencaesar.oml.Relation;
 import io.opencaesar.oml.RelationBase;
 import io.opencaesar.oml.RelationEntity;
@@ -216,105 +216,60 @@ public final class OmlRead {
     }
     
     //-------------------------------------------------
-    // RESOURCES
+    // URIs
     //-------------------------------------------------
     
     /**
-     * Gets all ontologies loaded in the given resource set 
+     * Determines whether the given URI can be resolved to an OML resource in the workspace
      * 
-     * @param resourceSet The resource set to look for ontologies in 
-     * @return The list of ontologies in the given resource set
+     * @param uri the given URI
+     * @return True if the given URI can be resolved, otherwise False
      */
-    public static List<Ontology> getOntologies(ResourceSet resourceSet) {
-        return resourceSet.getResources().stream()
-            .map(r -> getOntology(r))
-            .collect(Collectors.toList());
-    }
-    
-    /**
-     * Gets an ontology with the given iri that is loaded in the given resource set
-     *  
-     * @param resourceSet The resource set to look for an ontology in
-     * @param iri The iri of the ontology
-     * @return an ontology with the given iri if found; otherwise null
-     */
-    public static Ontology getOntologyByIri(ResourceSet resourceSet, String iri) {
-        return resourceSet.getResources().stream()
-            .flatMap(r -> r.getContents().stream())
-            .filter(o -> o instanceof Ontology)
-            .map(o -> (Ontology)o)
-            .filter(o -> iri.equals(o.getIri()))
-            .findFirst().orElse(null);
-    }
-    
-    /**
-     * Gets an ontology with the given prefix that is loaded in the given resource set
-     * 
-     * If more than one ontology has the same prefix, one of them is returned randomly
-     *  
-     * @param resourceSet The resource set to look for an ontology in
-     * @param prefix The prefix of the ontology
-     * @return an ontology with the given prefix if found; otherwise null
-     */
-    public static Ontology getOntologyByPrefix(ResourceSet resourceSet, String prefix) {
-        return resourceSet.getResources().stream()
-            .flatMap(r -> r.getContents().stream())
-            .filter(o -> o instanceof Ontology)
-            .map(o -> (Ontology)o)
-            .filter(o -> prefix.equals(o.getPrefix()))
-            .findFirst().orElse(null);
-    }
-    
-    /**
-     * Gets a member with the given iri in the given resource set
-     *  
-     * @param resourceSet The resource set to look for an ontology in
-     * @param iri The iri of the member
-     * @return a member with the given iri if found; otherwise null
-     */
-    public static Member getMemberByIri(ResourceSet resourceSet, String iri) {
-        String[] iriParts = parseIri(iri);
-        String baseIri = iriParts[0];
-        String fragment = iriParts[1];
-        Ontology ontology = getOntologyByIri(resourceSet, baseIri);
-        if (ontology != null) {
-            return getMemberByName(ontology, fragment);
+    public static boolean isResolvedUri(URI uri) {
+        if (Arrays.asList(OmlConstants.OML_EXTENSIONS).contains(uri.fileExtension())) {
+        	return OmlUriResolver.getInstance().isResolvedUri(uri);
         }
-        return null;
+        return false;
     }
-    
+
     /**
-     * Gets a member with the given abbreviated iri in the given resource set
-     *  
-     * @param resourceSet The resource set to look for an ontology in
-     * @param iri The abbreviated iri of the member
-     * @return a member with the given abbreviated iri if found; otherwise null
-     */
-    public static Member getMemberByAbbreviatedIri(ResourceSet resourceSet, String iri) {
-        String[] iriParts = parseAbbreviatedIri(iri);
-        String prefix = iriParts[0];
-        String fragment = iriParts[1];
-        Ontology ontology = getOntologyByPrefix(resourceSet, prefix);
-        if (ontology != null) {
-            return getMemberByName(ontology, fragment);
-        }
-        return null;
-    }
-    
-    /**
-     * Gets the ontology of the given resource if one exists
+     * Gets a URI that is resolved by the given IRI in the context of the given OML resource.
      * 
-     * @param resource The resource to get the ontology from
-     * @return An ontology if one exists in the resource; otherwise null
+     * @param context The OML resource to use as context of URI resolution
+     * @param iri The IRI to resolve
+     * @return The resolved URI
+     */
+    public static URI getResolvedUri(Resource context, String iri) {
+        if (context == null || iri == null || iri.isEmpty()) {
+            return null;
+        }
+        return OmlUriResolver.getInstance().resolveUri(context, iri);
+    }
+    
+    /**
+     * Gets the URIs that can be resolved in the context of the given OML resource
+     * 
+     * @param context the context resource
+     * @return a set of resource URIs that are resolvable from the given resource
+     */
+    public static Set<URI> getResolvedUris(Resource context) {
+        if (context == null) {
+            return Collections.emptySet();
+        }
+        return OmlUriResolver.getInstance().getResolvedUris(context);
+    }
+    
+    //-------------------------------------------------
+    // Ontologies
+    //-------------------------------------------------
+
+    /**
+     * Gets the ontology loaded in the given OML resource (if one exists)
+     * 
+     * @param resource The OML resource to get the ontology of
+     * @return An ontology if one exists in the given resource; otherwise null
      */
     public static Ontology getOntology(Resource resource) {
-		if (!resource.isLoaded()) {
-			try {
-				resource.load(null);
-			} catch (IOException e) {
-				return null;
-			}
-		}
         return resource.getContents().stream()
             .filter(o -> o instanceof Ontology)
             .map(o -> (Ontology)o)
@@ -322,106 +277,405 @@ public final class OmlRead {
             .orElse(null);
     }
     
-    /**
-     * Gets a member by iri in the context of the given resource following the import closure
+    /*
+     * Gets stream of ontologies loaded in the given resource set 
      * 
-     * @param resource The resource to look for the member in
-     * @param iri The iri of the member
-     * @return A member if one exists with the given iri; otherwise null
+     * @param resourceSet The resource set to look for ontologies in 
+     * @return A stream of ontologies in the given resource set
      */
-    public static Member getMemberByIri(Resource resource, String iri) {
+    private static Stream<Ontology> getOntologyStream(ResourceSet resourceSet) {
+        return resourceSet.getResources().stream()
+            .map(r -> getOntology(r))
+            .filter(Objects::nonNull);
+    }
+
+    /**
+     * Gets all ontologies loaded in the given resource set 
+     * 
+     * @param resourceSet The resource set to look for ontologies in 
+     * @return The list of ontologies loaded in the given resource set
+     */
+    public static List<Ontology> getOntologies(ResourceSet resourceSet) {
+        return getOntologyStream(resourceSet)
+            .collect(Collectors.toList());
+    }
+    
+    /**
+     * Gets an ontology with the given IRI loaded in the given resource set
+     *  
+     * @param resourceSet The resource set to look for an ontology in
+     * @param iri The IRI of the ontology
+     * @return an ontology with the given IRI if found; otherwise null
+     */
+    public static Ontology getOntologyByIri(ResourceSet resourceSet, String iri) {
+        return getOntologyStream(resourceSet)
+            .filter(o -> iri.equals(o.getIri()))
+            .findFirst()
+            .orElse(null);
+    }
+    
+    /**
+     * Gets an ontology with the given prefix loaded in the given resource set
+     * 
+     * If more than one ontology has the same prefix, the first found is returned
+     *  
+     * @param resourceSet The resource set to look for an ontology in
+     * @param prefix The prefix of the ontology
+     * @return an ontology with the given prefix if found; otherwise null
+     */
+    public static Ontology getOntologyByPrefix(ResourceSet resourceSet, String prefix) {
+        return getOntologyStream(resourceSet)
+            .filter(o -> prefix.equals(o.getPrefix()))
+            .findFirst()
+            .orElse(null);
+    }
+
+    /**
+     * Gets an ontology with the given IRI that can be resolved in the context of the given resource
+     * 
+     * This will cause the ontology's resource to load if not already loaded
+     * 
+     * @param context The resource to use as context of IRI resolution
+     * @param iri The IRI of the ontology to get
+     * @return an ontology with the given IRI
+     */
+    public static Ontology getOntologyByResolvingIri(Resource context, String iri) {
+    	var uri = getResolvedUri(context, iri);
+    	if (uri == null) {
+    		return null;
+    	}
+    	var resource = context.getResourceSet().getResource(uri, true);
+		return getOntology(resource);
+    }
+
+    /**
+     * Gets the ontologies directly imported by a given ontology
+     * 
+     * This will cause an imported ontology's resource to load if not already loaded
+     * 
+     * @param ontology the given ontology
+     * @return a list of ontologies directly imported by the given ontology
+     */
+    public static List<Ontology> getImportedOntologies(Ontology ontology) {
+        return ontology.getOwnedImports().stream()
+            .map(i -> getImportedOntology(i))
+            .collect(Collectors.toList());
+    }
+    
+    /**
+     * Gets an ontology directly imported by a given ontology using the given IRI
+     * 
+     * This will cause an imported ontology's resource to load if not already loaded
+     * 
+     * @param ontology the context ontology
+     * @param iri the IRI of the imported ontology
+     * @return an ontology that is imported by the given IRI; otherwise null 
+     */
+    public static Ontology getImportedOntologyByIri(Ontology ontology, String iri) {
+        return ontology.getOwnedImports().stream()
+            .filter(i -> iri.equals(i.getIri()))
+            .map(i -> getImportedOntology(i))
+            .findFirst()
+            .orElse(null);
+    }
+    
+    /**
+     * Gets an ontology directly imported by a given ontology using the given prefix
+     * 
+     * This will cause an imported ontology's resource to load if not already loaded
+     * 
+     * @param ontology the context ontology
+     * @param prefix the prefix of the imported ontology
+     * @return an ontology that is imported by the given prefix; otherwise null 
+     */
+    public static Ontology getImportedOntologyByPrefix(Ontology ontology, String prefix) {
+        return ontology.getOwnedImports().stream()
+                .filter(i -> prefix.equals(i.getPrefix()))
+                .map(i -> getImportedOntology(i))
+                .findFirst()
+                .orElse(null);
+    }
+    
+    /**
+     * Gets the ontologies directly or transitively imported by the given ontology
+     * 
+     * This will cause an imported ontology's resource to load if not already loaded
+     * 
+     * @param ontology the given ontology
+     * @param inclusive whether the given ontology should be included in the closure
+     * @return a collection of ontologies directly or transitively imported by the given ontology
+     */
+    public static Collection<Ontology> getImportedOntologyClosure(Ontology ontology, boolean inclusive) {
+        return closure(ontology, inclusive, i -> i.getOwnedImports().stream()
+            .map(j -> getImportedOntology(j))
+            .collect(Collectors.toList()));
+    }
+
+    /**
+     * Gets loaded ontologies that directly import the given ontology
+     * 
+     * @param ontology the given ontologies
+     * @return a collection of ontologies that import the given ontology directly
+     */
+    public static Collection<Ontology> getImportingOntologies(Ontology ontology) {
+        var resourceSet = ontology.eResource().getResourceSet();
+        return OmlRead.getOntologies(resourceSet).stream()
+            	.filter(i -> getImportNamespaceToPrefixMap(i).containsKey(ontology.getIri()))
+            	.collect(Collectors.toSet());
+    }
+
+    /**
+     * Gets the ontology that is imported by the given import
+     * 
+     * This will cause an imported ontology's resource to load if not already loaded
+     * 
+     * @param _import the given import
+     * @return the ontology that is imported by the given import (can be null of the import failed)
+     */
+    public static Ontology getImportedOntology(Import _import) {
+        if (_import.getIri() == null || _import.getIri().isEmpty()) {
+            return null;
+        }
+        var context = _import.eResource();
+    	var uri = getResolvedUri(context, _import.getIri());
+        Resource r = context.getResourceSet().getResource(uri, true);
+        return (r != null) ? getOntology(r) : null;
+    }
+    
+    /**
+     * Gets the ontology that owns the given import
+     * 
+     * @param _import the given import
+     * @return the ontology that defines the given import
+     */
+    public static Ontology getImportingOntology(Import _import) {
+        return _import.getOwningOntology();
+    }
+    
+    /**
+     * Gets a map from import namespaces to import prefixes in the given ontology
+     * 
+     * @param ontology the given ontology
+     * @return a map from import namespaces to import prefixes 
+     */
+    public static Map<String, String> getImportNamespaceToPrefixMap(Ontology ontology) {
+        final Map<String, String> map = new LinkedHashMap<>();
+        ontology.getOwnedImports().stream()
+        	.filter(i -> i.getPrefix() != null)
+        	.forEach(i -> map.put(i.getNamespace(), i.getPrefix()));
+        return map;
+    }
+    
+    /**
+     * Gets a map from import prefixes to import namespaces in the given ontology
+     * 
+     * @param ontology the given ontology
+     * @return a map from import prefixes to import namespaces 
+     */
+    public static Map<String, String> getImportPrefixToNamespaceMap(Ontology ontology) {
+        final Map<String, String> map = new LinkedHashMap<>();
+        ontology.getOwnedImports().stream()
+        	.filter(i -> i.getPrefix() != null)
+        	.forEach(i -> map.put(i.getPrefix(), i.getNamespace()));
+        return map;
+    }
+
+    //-------------------------------------------------
+    // Members
+    //-------------------------------------------------
+
+    /**
+     * Gets all members defined in the given ontology
+     * 
+     * @param ontology the given ontology
+     * @return a list of all members defined in the given ontology
+     */
+    public static List<Member> getMembers(Ontology ontology) {
+    	Function<Member, Stream<Member>> allMembers = (i) -> {
+            var stream = Stream.of(i);
+    		if (i instanceof RelationEntity) {
+    			var entity = (RelationEntity)i;
+    			if (entity.getForwardRelation() != null) {
+    				stream = Stream.concat(stream, Stream.of(entity.getForwardRelation()));
+    			}
+            }
+    		if (i instanceof RelationBase) {
+    			var base = (RelationBase)i;
+    			if (base.getReverseRelation() != null) {
+    				stream = Stream.concat(stream, Stream.of(base.getReverseRelation()));
+    			}
+            }
+    		return stream;
+    	};
+        return getStatements(ontology).stream()
+        		.filter(i -> !i.isRef())
+        		.flatMap(i -> allMembers.apply(i))
+        		.collect(Collectors.toList());
+    }
+
+    /**
+     * Gets a member with the given name defined in the given ontology
+     * 
+     * @param ontology the given ontology
+     * @param name the name of the member
+     * @return a member with the given name if found; otherwise null
+     */
+    public static Member getMemberByName(Ontology ontology, String name) {
+        // this is more efficient than iterating over the members
+        EObject obj = ontology.eResource().getEObject(name);
+        return (obj instanceof Member) ? (Member)obj : null;
+    }
+    
+    /**
+     * Gets a member with the given IRI defined by the given ontology or its imports
+     * 
+     * @param ontology the given ontology
+     * @param iri the IRI of the member
+     * @return a member with the given IRI if found; otherwise null
+     */
+    public static Member getMemberByIri(Ontology ontology, String iri) {
         String[] iriParts = parseIri(iri);
         String baseIri = iriParts[0];
         String fragment = iriParts[1];
-        final Ontology ontology = getOntologyByIri(resource, baseIri);
-        return (ontology != null) ? getMemberByName(ontology, fragment) : null;
+        Ontology baseOntology = ontology.getIri().equals(baseIri)
+            ? ontology
+            : getImportedOntologyByIri(ontology, baseIri);
+        return (baseOntology != null) ? getMemberByName(baseOntology, fragment) : null;
     }
     
     /**
-     * Gets the ontology with the given Iri in the context of the given resource
-     * 
-     * The iri is resolved using the resource's OML catalog
-     * 
-     * @param resource The resource to use as context of iri resolution
-     * @param iri The logical iri of the ontology to get
-     * @return The resolved URI
+     * Gets a member with the given IRI in the given resource set
+     *  
+     * @param resourceSet The resource set to look for an ontology in
+     * @param iri The IRI of the member
+     * @return a member with the given IRI if found; otherwise null
      */
-    public static Ontology getOntologyByIri(Resource resource, String iri) {
-    	Resource resolved = getResourceByIri(resource, iri);
-        return (resolved != null) ? getOntology(resolved) : null;
+    public static Member getMemberByIri(ResourceSet resourceSet, String iri) {
+        String[] iriParts = parseIri(iri);
+        String baseIri = iriParts[0];
+        String fragment = iriParts[1];
+        Ontology baseOntology = getOntologyByIri(resourceSet, baseIri);
+        return (baseOntology != null) ? getMemberByName(baseOntology, fragment) : null;
     }
 
-   /**
-     * Gets a resource that has the given logical Iri in the context of the given resource.
-     * 
-     * The resource may not be loaded when it is returned
-     * 
-     * @param resource The resource to use as context of uri resolution
-     * @param iri The logical iri to resolve
-     * @return The resource that has the given IRI
-     */
-    public static Resource getResourceByIri(Resource resource, String iri) {
-    	URI uri = getUriByIri(resource, iri);
-    	ResourceSet resourceSet = (uri != null) ? resource.getResourceSet() : null;
-    	return (resourceSet != null) ? resourceSet.getResource(uri, false) : null;
-    }
-    
     /**
-     * Gets a physical URI that corresponds to the given logical Iri in the context of the given resource.
+     * Gets a member with the given abbreviated IRI defined by the given ontology or its imports
      * 
-     * @param resource The resource to use as context of uri resolution
-     * @param iri The logical iri to resolve
-     * @return The resolved URI
+     * @param ontology the given ontology
+     * @param iri the abbreviated IRI of the member
+     * @return a member with the given abbreviated IRI if found; otherwise null
      */
-    public static URI getUriByIri(Resource resource, String iri) {
-        if (resource == null || iri == null || iri.isEmpty()) {
-            return null;
-        }
-        return OmlUriResolver.getInstance().resolve(resource, iri);
-    }
-    
-    /**
-     * Gets the resource URIs that are resolvable from the context of the given resource
-     * 
-     * This method looks for resolvable resources in the resource's OML catalog 
-     * 
-     * @param resource the context resource
-     * @return a set of resource URIs that are resolvable from the given resource
-     */
-    public static Set<URI> getResolvableUris(Resource resource) {
-        if (resource == null) {
-            return Collections.emptySet();
-        }
-        return OmlUriResolver.getInstance().getResolvableUris(resource);
-    }
-    
-    /**
-     * Determines whether the resource with the given URI is mapped by an OML catalog 
-     * 
-     * @param uri the given resource URI
-     * @return Whether the given resource URI is of an OML resource mapped by a catalog
-     */
-    public static boolean isUriMappedByCatalog(URI uri) {
-        if (Arrays.asList(OmlConstants.OML_EXTENSIONS).contains(uri.fileExtension())) {
-        	return OmlUriResolver.getInstance().isUriMappedByCatalog(uri);
-        }
-        return false;
+    public static Member getMemberByAbbreviatedIri(Ontology ontology, String iri) {
+        String[] iriParts = parseAbbreviatedIri(iri);
+        String prefix = iriParts[0];
+        String fragment = iriParts[1];
+        Ontology baseOntology =  ontology.getPrefix().equals(prefix)
+            ? ontology
+        	: getImportedOntologyByPrefix(ontology, prefix);
+        return (baseOntology != null) ? getMemberByName(baseOntology, fragment) : null;
     }
 
+    /**
+     * Gets a member with the given abbreviated IRI in the given resource set
+     *  
+     * @param resourceSet The resource set to look for an ontology in
+     * @param iri The abbreviated IRI of the member
+     * @return a member with the given abbreviated IRI if found; otherwise null
+     */
+    public static Member getMemberByAbbreviatedIri(ResourceSet resourceSet, String iri) {
+        String[] iriParts = parseAbbreviatedIri(iri);
+        String prefix = iriParts[0];
+        String fragment = iriParts[1];
+        Ontology baseOntology = getOntologyByPrefix(resourceSet, prefix);
+        return (baseOntology != null) ? getMemberByName(baseOntology, fragment) : null;
+    }
+    
+    /**
+     * Gets a member with the given IRI that can be resolved in the context of the given resource
+     * 
+     * This will cause the member's ontology resource to load if not already loaded
+     * 
+     * @param context The resource to look for the member in
+     * @param iri The IRI of the member
+     * @return A member if one exists with the given IRI; otherwise null
+     */
+    public static Member getMemberByResolvingIri(Resource context, String iri) {
+        String[] iriParts = parseIri(iri);
+        String baseIri = iriParts[0];
+        String fragment = iriParts[1];
+        final Ontology baseOntology = getOntologyByResolvingIri(context, baseIri);
+        return (baseOntology != null) ? getMemberByName(baseOntology, fragment) : null;
+    }
+    
     //-------------------------------------------------
-    // ONTOLOGIES
+    // ONTOLOGY/MEMBERS
     //-------------------------------------------------
     
     /**
-     * Gets the id of the given element
+     * Gets the prefix of a given ontology in a given context ontology
      * 
-     * The id attribute is defined by the metaclass of the element
+     * If both ontologies are the same, the ontology's prefix will be returned; 
+     * otherwise if the ontology is imported, its import prefix will be returned if specified;
+     * otherwise null will be returned.
      * 
-     * @param element the element to get its id
-     * @return the id of the element
+     * @param ontology the given ontology
+     * @param context the context ontology
+     * @return ontology's prefix in context or null
      */
-    public static String getId(Element element) {
-        return EcoreUtil.getID(element);
+    public static String getPrefixIn(Ontology ontology, Ontology context) {
+        if (ontology == context) {
+            return context.getPrefix();
+        } else {
+            return getImportNamespaceToPrefixMap(context).get(ontology.getNamespace());
+        }
+    }
+       
+    /**
+     * Gets the abbreviated IRI of the given member in the given context ontology
+     * 
+     * @param member the given member
+     * @param context the given context ontology
+     * @return the abbreviated IRI of the given reference in the given context ontology
+     */
+    public static String getAbbreviatedIriIn(Member member, Ontology context) {
+        final Ontology ontology = member.getOntology();
+        if (ontology == context) {
+            return member.getName();
+        } else {
+            String prefix = getPrefixIn(ontology, context);
+            return (prefix != null) ? prefix + ':'+member.getName() : null;
+        }
+    }
+
+    /**
+     * Gets all statements of the given ontology
+     * 
+     * @param ontology the given ontology
+     * @return a list of all statements of the given ontology
+     */
+    public static List<Statement> getStatements(Ontology ontology) {
+        if (ontology instanceof Vocabulary) {
+            return ((Vocabulary)ontology).getOwnedStatements().stream()
+            	.map(i -> (Statement)i)
+            	.collect(Collectors.toList());
+        } else if (ontology instanceof Description) {
+            return ((Description)ontology).getOwnedStatements().stream()
+	        	.map(i -> (Statement)i)
+	        	.collect(Collectors.toList());
+        }
+        return Collections.emptyList();
+    }
+    
+    /**
+     * Gets all refs defined in a given ontology
+     * 
+     * @param ontology the given ontology
+     * @return a list of all refs defined in the given ontology
+     */
+    public static List<Member> getRefs(Ontology ontology) {
+        return getStatements(ontology).stream()
+            .filter(s -> s.isRef())
+            .collect(Collectors.toList());
     }
     
     /*
@@ -439,7 +693,7 @@ public final class OmlRead {
     /**
      * Gets the values of a given annotation property in the given element
      * 
-     * @param element The element that has the annotation
+     * @param element The given element
      * @param property the given annotation property
      * @return a list of annotation values
      */
@@ -452,7 +706,7 @@ public final class OmlRead {
     /**
      * Gets the first literal value of a given annotation property in the given element
      * 
-     * @param element The element that has the annotation
+     * @param element The given element
      * @param property the given annotation property
      * @return an annotation literal value
      */
@@ -467,7 +721,7 @@ public final class OmlRead {
     /**
      * Gets the first referenced value of a given annotation property in the given element
      * 
-     * @param element The element that has the annotation
+     * @param element The given element
      * @param property the given annotation property
      * @return an annotation reference value
      */
@@ -479,287 +733,8 @@ public final class OmlRead {
             .orElse(null);
     }
 
-    /**
-     * Gets the direct or transitive imports of the given ontology
-     * 
-     * @param ontology the given ontology
-     * @return a list of direct imports of the ontology
-     */
-    public static List<Import> getAllImports(Ontology ontology) {
-        return ontology.getOwnedImports().stream()
-            .flatMap(i -> closure(i, true, j -> getImportedOntology(j).getOwnedImports()).stream())
-            .collect(Collectors.toList());
-    }
-    
-    /**
-     * Gets all statements of the given ontology
-     * 
-     * @param ontology the given ontology
-     * @return a list of all statements of the given ontology
-     */
-    public static List<Statement> getStatements(Ontology ontology) {
-        List<Statement> statements = new ArrayList<>();
-        if (ontology instanceof Vocabulary) {
-            statements.addAll(((Vocabulary)ontology).getOwnedStatements());
-        } else if (ontology instanceof Description) {
-            statements.addAll(((Description)ontology).getOwnedStatements());
-        }
-        return statements;
-    }
-    
-    /**
-     * Gets all reference statements defined in a given ontology
-     * 
-     * @param ontology the given ontology
-     * @return a list of all reference statements defined in the given ontology
-     */
-    public static List<Statement> getReferences(Ontology ontology) {
-        return getStatements(ontology).stream()
-            .filter(s -> s.isRef())
-            .collect(Collectors.toList());
-    }
-    
-    /**
-     * Gets all members defined in the given ontology
-     * 
-     * @param ontology the given ontology
-     * @return a list of all members defined in the given ontology
-     */
-    public static List<Member> getMembers(Ontology ontology) {
-        if (ontology instanceof Vocabulary) {
-            return getStatements(ontology).stream()
-                .flatMap(s -> {
-                    final ArrayList<Member> ms = new ArrayList<>();
-                    if (!s.isRef())
-	                    ms.add(s);
-                    if (s instanceof RelationEntity)
-                        ms.addAll(getRelations((RelationEntity) s));
-                    return ms.stream();
-                })
-                .collect(Collectors.toList());
-        } else if (ontology instanceof Description){
-            return getStatements(ontology).stream()
-            		.filter(i -> !i.isRef())
-            		.collect(Collectors.toList());
-        }
-        return Collections.emptyList();
-    }
-    
-    /**
-     * Gets a map from import namespaces to import prefixes in the given ontology
-     * 
-     * @param ontology the given ontology
-     * @return a map from import namespaces to import prefixes 
-     */
-    public static Map<String, String> getImportPrefixes(Ontology ontology) {
-        final Map<String, String> map = new LinkedHashMap<>();
-        ontology.getOwnedImports().stream()
-        	.filter(i -> i.getPrefix() != null)
-        	.forEach(i -> map.put(i.getNamespace(), i.getPrefix()));
-        return map;
-    }
-    
-    /**
-     * Gets the prefix of a given ontology imported by a context ontology
-     * 
-     * This could either be the given ontology's regular prefix or an override 
-     * used when importing it in the context ontology
-     * 
-     * @param ontology the imported ontology
-     * @param context the context ontology
-     * @return
-     */
-    public static String getPrefixIn(Ontology ontology, Ontology context) {
-        if (ontology == context) {
-            return ontology.getPrefix();
-        } else {
-            return getImportPrefixes(context).get(ontology.getNamespace());
-        }
-    }
-    
-    /**
-     * Gets the ontologies directly imported by a context ontology
-     * 
-     * @param ontology the given ontology
-     * @return a list of ontologies directly imported by the given ontology
-     */
-    public static List<Ontology> getImportedOntologies(Ontology ontology) {
-        return ontology.getOwnedImports().stream()
-            .map(i -> getImportedOntology(i))
-            .collect(Collectors.toList());
-    }
-    
-    /**
-     * Gets the ontologies directly or transitively imported by the given ontology
-     * 
-     * @param ontology the given ontology
-     * @return a collection of ontologies directly imported by the given ontology
-     */
-    public static Collection<Ontology> getAllImportedOntologies(Ontology ontology, boolean inclusive) {
-        return closure(ontology, inclusive, i -> i.getOwnedImports().stream()
-            .map(j -> getImportedOntology(j))
-            .collect(Collectors.toList()));
-    }
-    
-    /**
-     * Gets an ontology with a given iri that is imported by a given ontology
-     * 
-     * This iri is the ontology's logical IRI even though it may be imported by a physical URI
-     * 
-     * @param ontology the context ontology
-     * @param iri the iri of the imported ontology
-     * @return the imported ontology that has the given iri 
-     */
-    public static Ontology getImportedOntologyByIri(Ontology ontology, String iri) {
-        return ontology.getOwnedImports().stream()
-            .filter(i -> iri.equals(i.getIri()))
-            .map(i -> getImportedOntology(i))
-            .findFirst()
-            .orElse(null);
-    }
-    
-    /**
-     * Gets an ontology with a given prefix that is imported by a given ontology
-     * 
-     * This prefix has to be the ontology's import override prefix if used; otherwise has to be its default prefix
-     * 
-     * @param ontology the context ontology
-     * @param prefix the prefix of the imported ontology
-     * @return the imported ontology that has the given iri 
-     */
-    public static Ontology getImportedOntologyByPrefix(Ontology ontology, String prefix) {
-        return ontology.getOwnedImports().stream()
-                .filter(i -> prefix.equals(i.getPrefix()))
-                .map(i -> getImportedOntology(i))
-                .findFirst()
-                .orElse(null);
-    }
-    
-    /**
-     * Gets a member with the given name defined in the given ontology
-     * 
-     * @param ontology the given ontology
-     * @param name the name of the member
-     * @return a member with the given name if found; otherwise null
-     */
-    public static Member getMemberByName(Ontology ontology, String name) {
-        // this is more efficient than iterating over the members
-        EObject obj = ontology.eResource().getEObject(name);
-        return (obj instanceof Member) ? (Member)obj : null;
-    }
-    
-    /**
-     * Gets a member with the given iri defined by the given ontology or its import closure
-     * 
-     * @param ontology the given ontology
-     * @param iri the iri of the member
-     * @return a member with the given iri if found; otherwise null
-     */
-    public static Member getMemberByIri(Ontology ontology, String iri) {
-        String[] iriParts = parseIri(iri);
-        String baseIri = iriParts[0];
-        String fragment = iriParts[1];
-        Ontology baseOntology;
-        if (ontology.getIri().equals(baseIri)) {
-            baseOntology = ontology;
-        } else {
-            baseOntology = getImportedOntologyByIri(ontology, baseIri);
-        }
-        return (baseOntology != null) ? getMemberByName(baseOntology, fragment) : null;
-    }
-    
-    /**
-     * Gets a member with the given abbreviated iri defined by the given ontology or its import closure
-     * 
-     * @param ontology the given ontology
-     * @param iri the abbreviated iri of the member
-     * @return a member with the given abbreviated iri if found; otherwise null
-     */
-    public static Member getMemberByAbbreviatedIri(Ontology ontology, String iri) {
-        String[] iriParts = parseAbbreviatedIri(iri);
-        String prefix = iriParts[0];
-        String fragment = iriParts[1];
-        Ontology baseOntology;
-        if (ontology.getPrefix().equals(prefix)) {
-            baseOntology = ontology;
-        } else {
-            baseOntology = getImportedOntologyByPrefix(ontology, prefix);
-        }
-        return (baseOntology != null) ? getMemberByName(baseOntology, fragment) : null;
-    }
-        
-    /**
-     * Gets the resource URI that is resolved by the given import statement
-     * 
-     * @param _import the given import
-     * @return the resolved URI of the given import
-     */
-    public static URI getImportedUri(Import _import) {
-        if (_import.getIri() == null || _import.getIri().isEmpty()) {
-            return null;
-        }
-        String iri = _import.getIri();
-        final Resource r = _import.eResource();
-        if (r == null) {
-            return null;
-        }
-        return getUriByIri(r, iri);
-    }
-    
-    /**
-     * Gets the ontology that is imported by the given import
-     * 
-     * @param _import the given import
-     * @return the ontology that is imported by the given import (can be null of the import failed)
-     */
-    public static Ontology getImportedOntology(Import _import) {
-        Resource r = getImportedResource(_import);
-        return (r != null) ? getOntology(r) : null;
-    }
-    
-    /**
-     * Gets the ontology that defines the given import
-     * 
-     * @param _import the given import
-     * @return the ontology that defines the given import
-     */
-    public static Ontology getImportingOntology(Import _import) {
-        return _import.getOwningOntology();
-    }
-    
-    /**
-     * Gets the resource imported by the given import
-     * 
-     * The resource may not be loaded when it is returned
-     * 
-     * @param _import the given import
-     * @return a resource that is imported by the given import
-     */
-    public static Resource getImportedResource(Import _import) {
-        final URI uri = getImportedUri(_import);
-        final ResourceSet resourceSet = (uri != null) ? _import.eResource().getResourceSet() : null;
-        return (resourceSet != null) ? resourceSet.getResource(uri, true) : null;
-    }
-    
-    /**
-     * Gets the abbreviated iri of the given member in the given context ontology
-     * 
-     * @param member the given member
-     * @param context the given context ontology
-     * @return the abbreviated IRI of the given reference in the given context ontology
-     */
-    public static String getAbbreviatedIriIn(Member member, Ontology context) {
-        final Ontology ontology = member.getOntology();
-        if (ontology == context) {
-            return member.getName();
-        } else {
-            String prefix = getPrefixIn(ontology, context);
-            return (prefix != null) ? prefix + ':'+member.getName() : null;
-        }
-    }
-
     //-------------------------------------------------
-    // VOCABULARIES
+    // VOCABULARY MEMBERS
     //-------------------------------------------------
 
     /**
@@ -878,42 +853,6 @@ public final class OmlRead {
     	}
     	return supers;
    }
-
-    /**
-     * Gets all the relations defined by the given relation entity
-     * 
-     * @param entity the given relation entity
-     * @return a list of relations defined by the given relation entity
-     */
-    public static List<Relation> getRelations(RelationEntity entity) {
-        var relations = new ArrayList<Relation>();
-        if (entity.getForwardRelation() != null) {
-        	relations.add(entity.getForwardRelation());
-        }
-        if (entity.getReverseRelation() != null) {
-        	relations.add(entity.getReverseRelation());
-        }
-        return relations;
-    }
-
-    /**
-     * Gets the relation entity that defines the given relation
-     * 
-     * @param relation the given relation
-     * @return the relation entity that defines the given relation, or null if none exists
-     */
-    public static RelationEntity getRelationEntity(Relation relation) {
-        RelationEntity entity = null;
-        if (relation instanceof ForwardRelation) {
-        	entity = ((ForwardRelation)relation).getRelationEntity();
-        } else if (relation instanceof ReverseRelation) {
-        	RelationBase base = ((ReverseRelation)relation).getRelationBase();
-        	if (base instanceof RelationEntity) {
-        		entity = (RelationEntity) base;
-        	}
-        }
-        return entity;
-    }
     
     /**
      * Gets all the axioms specified on the given term
@@ -987,7 +926,7 @@ public final class OmlRead {
     }
 
     //-------------------------------------------------
-    // DESCRIPTIONS
+    // DESCRIPTION MEMBERS
     //-------------------------------------------------
     
     /**
@@ -1024,7 +963,7 @@ public final class OmlRead {
      * 
      * @param instance The given instance
      * @param property the given semantic property
-     * @return a literal representing the property literal value
+     * @return a literal representing the property's literal value
      */
     public static Literal getPropertyLiteralValue(Instance instance, ScalarProperty property) {
         return getPropertyValues(instance, property).stream()
@@ -1039,7 +978,7 @@ public final class OmlRead {
      * 
      * @param instance The given instance
      * @param property the given property
-     * @return a structure instance representing the property contained value
+     * @return a structure instance representing the property's contained value
      */
     public static StructureInstance getPropertyContainedValue(Instance instance, StructuredProperty property) {
         return getPropertyValues(instance, property).stream()
@@ -1054,7 +993,7 @@ public final class OmlRead {
      * 
      * @param instance The given instance
      * @param relation the given relation
-     * @return a named instance representing the property referenced value
+     * @return a named instance representing the relation's referenced value
      */
     public static NamedInstance getPropertyReferencedValue(Instance instance, Relation relation) {
         return getPropertyValues(instance, relation).stream()
@@ -1095,6 +1034,24 @@ public final class OmlRead {
     public static Scalar getType(Literal literal) {
     	String iri = literal.getTypeIri();
     	return (Scalar) getMemberByIri(literal.eResource().getResourceSet(), iri);
+    }
+    
+    /**
+     * Determins if the two given literals are equal
+     * @param literal1 the first given literal
+     * @param literal2 the second given literal
+     * @return true if equivalent; otherwise false
+     */
+    public static boolean isEqual(Literal literal1, Literal literal2) {
+    	if (literal1 == literal2)
+    		return true;
+    	if (literal1 == null || literal2 == null)
+    		return false;
+    	var s1 = literal1.getStringValue()+"_"+literal1.getTypeIri()+"_"+
+    			((literal1 instanceof QuotedLiteral) ? ((QuotedLiteral)literal1).getLangTag() : "");
+    	var s2 = literal2.getStringValue()+"_"+literal2.getTypeIri()+"_"+
+    			((literal2 instanceof QuotedLiteral) ? ((QuotedLiteral)literal2).getLangTag() : "");
+    	return s1.equals(s2);
     }
 
 }

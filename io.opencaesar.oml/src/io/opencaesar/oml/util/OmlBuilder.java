@@ -251,9 +251,9 @@ public class OmlBuilder {
                 	}
                 } else {
                 	if (elementERef.isMany()) {
-                		((List<Element>)OmlWrite.getOrAddReference(ontology, member).eGet(elementERef)).add(object);
+                		((List<Element>)OmlWrite.getOrAddRef(ontology, member).eGet(elementERef)).add(object);
                 	} else {
-                		OmlWrite.getOrAddReference(ontology, member).eSet(elementERef, object);
+                		OmlWrite.getOrAddRef(ontology, member).eSet(elementERef, object);
                 	}
                 }
             });

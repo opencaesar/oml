@@ -46,6 +46,7 @@ import io.opencaesar.oml.Description;
 import io.opencaesar.oml.DescriptionBundle;
 import io.opencaesar.oml.Element;
 import io.opencaesar.oml.Entity;
+import io.opencaesar.oml.ForwardRelation;
 import io.opencaesar.oml.Import;
 import io.opencaesar.oml.ImportKind;
 import io.opencaesar.oml.Instance;
@@ -64,10 +65,10 @@ import io.opencaesar.oml.PropertyValueAssertion;
 import io.opencaesar.oml.PropertyValueRestrictionAxiom;
 import io.opencaesar.oml.QuotedLiteral;
 import io.opencaesar.oml.Relation;
-import io.opencaesar.oml.RelationBase;
 import io.opencaesar.oml.RelationEntity;
 import io.opencaesar.oml.RelationEntityPredicate;
 import io.opencaesar.oml.RelationInstance;
+import io.opencaesar.oml.ReverseRelation;
 import io.opencaesar.oml.Rule;
 import io.opencaesar.oml.Scalar;
 import io.opencaesar.oml.ScalarEquivalenceAxiom;
@@ -263,7 +264,7 @@ public final class OmlValidator2 {
         boolean returnValue = true;
     	var iri = object.getIri();
     	var uri = object.eResource().getURI();
-    	if (OmlRead.isUriMappedByCatalog(uri) && !uri.equals(OmlRead.getUriByIri(object.eResource(), iri))) {
+    	if (OmlRead.isResolvedUri(uri) && !uri.equals(OmlRead.getResolvedUri(object.eResource(), iri))) {
             report(Diagnostic.ERROR, diagnostics, object,
                 object.eClass().getName()+" namespace '"+object.getNamespace()+"' does not resolve to its file using the catalog", 
                 OmlPackage.Literals.ONTOLOGY__NAMESPACE);
@@ -472,7 +473,7 @@ public final class OmlValidator2 {
 	            return report(Diagnostic.WARNING, diagnostics, object,
 	                "A literal is expected as the restricted value of property "+property.getAbbreviatedIri(), 
 	                OmlPackage.Literals.PROPERTY_RESTRICTION_AXIOM__PROPERTY);
-        	} else if (property.getRangeList().stream().noneMatch(t -> OmlSearch.findIsOfKind(object.getLiteralValue(), (Scalar)t))) {
+        	} else if (property.getRangeList().stream().noneMatch(t -> OmlSearch.findIsKindOf(object.getLiteralValue(), (Scalar)t))) {
 	            return report(Diagnostic.WARNING, diagnostics, object,
 		                "The literal is not in the range of scalar property "+property.getAbbreviatedIri(), 
 		                OmlPackage.Literals.PROPERTY_VALUE_RESTRICTION_AXIOM__LITERAL_VALUE);
@@ -482,17 +483,17 @@ public final class OmlValidator2 {
 	            return report(Diagnostic.WARNING, diagnostics, object,
 	                "A structure instance is expected as the restricted value of property "+property.getAbbreviatedIri(), 
 	                OmlPackage.Literals.PROPERTY_RESTRICTION_AXIOM__PROPERTY);
-        	} else if (property.getRangeList().stream().noneMatch(t -> OmlSearch.findIsOfKind(object.getContainedValue(), (Structure)t))) {
+        	} else if (property.getRangeList().stream().noneMatch(t -> OmlSearch.findIsKindOf(object.getContainedValue(), (Structure)t))) {
 	            return report(Diagnostic.WARNING, diagnostics, object,
 		                "The instance is not in the range of structured property "+property.getAbbreviatedIri(), 
 		                OmlPackage.Literals.PROPERTY_VALUE_RESTRICTION_AXIOM__CONTAINED_VALUE);
         	}
         } else if (property instanceof Relation) {
-        	if (object.getContainedValue() == null) {
+        	if (object.getReferencedValue() == null) {
 	            return report(Diagnostic.WARNING, diagnostics, object,
 	                "A named instance IRI is expected as the restricted value of relation "+property.getAbbreviatedIri(), 
 	                OmlPackage.Literals.PROPERTY_RESTRICTION_AXIOM__PROPERTY);
-        	} else if (property.getRangeList().stream().noneMatch(t -> OmlSearch.findIsOfKind(object.getReferencedValue(), (Entity)t))) {
+        	} else if (property.getRangeList().stream().noneMatch(t -> OmlSearch.findIsKindOf(object.getReferencedValue(), (Entity)t))) {
 	            return report(Diagnostic.WARNING, diagnostics, object,
 		                "The instance is not in the range of relation "+property.getAbbreviatedIri(), 
 		                OmlPackage.Literals.PROPERTY_VALUE_RESTRICTION_AXIOM__REFERENCED_VALUE);
@@ -666,7 +667,7 @@ public final class OmlValidator2 {
 			for (Term superTerm : OmlRead.getSuperTerms(object)) {
 				Scalar superScalar = (Scalar) superTerm;
 				for (Literal literal : object.getOwnedEnumeration().getLiterals()) {
-		        	if (!OmlSearch.findIsOfKind(literal, superScalar)) {
+		        	if (!OmlSearch.findIsKindOf(literal, superScalar)) {
 		                return report(Diagnostic.ERROR, diagnostics, object,
 		                	literal.getLexicalValue()+" is not a literal of scalar "+superScalar.getAbbreviatedIri(), 
 		    	            OmlPackage.Literals.SCALAR__OWNED_ENUMERATION);
@@ -896,7 +897,7 @@ public final class OmlValidator2 {
         final var theSubject = object.getSubject();
         final SemanticProperty property = object.getProperty();
         final List<Classifier> domainTypes = (property != null) ? property.getDomainList() : Collections.emptyList();
-        if (domainTypes.stream().noneMatch(t -> OmlSearch.findIsOfKind(theSubject, t))) {
+        if (domainTypes.stream().noneMatch(t -> OmlSearch.findIsKindOf(theSubject, t))) {
         	return report(Diagnostic.WARNING, diagnostics, object,
                 "Property "+property.getAbbreviatedIri()+" has a domain that does not include the asserting instance",
                 OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__PROPERTY);
@@ -917,8 +918,8 @@ public final class OmlValidator2 {
         final SemanticProperty property = object.getProperty();
         final List<Type> domainTypes = (property != null) ? property.getRangeList() : Collections.emptyList();
         if (theObject != null) {
-        	var validLiteral = theObject instanceof Literal &&  domainTypes.stream().anyMatch(t -> OmlSearch.findIsOfKind((Literal)theObject, (Scalar)t));
-        	var validInstance = theObject instanceof Instance && domainTypes.stream().anyMatch(t -> OmlSearch.findIsOfKind((Instance)theObject, (Classifier)t));
+        	var validLiteral = theObject instanceof Literal &&  domainTypes.stream().anyMatch(t -> OmlSearch.findIsKindOf((Literal)theObject, (Scalar)t));
+        	var validInstance = theObject instanceof Instance && domainTypes.stream().anyMatch(t -> OmlSearch.findIsKindOf((Instance)theObject, (Classifier)t));
 	        if ((property instanceof ScalarProperty && !validLiteral) || 
 	        	(property instanceof StructuredProperty && !validInstance) ||
 	        	(property instanceof Relation && !validInstance)) {
@@ -973,20 +974,35 @@ public final class OmlValidator2 {
     }
 
     /**
-     * Checks that a relation base has correct feature cardinalities
+     * Checks that a reverse relation is not specified on a ref to relation base
      * 
-     * @param object The relation base to check
+     * @param object The reverse relation base to check
      * @param diagnostics The validation diagnostics
      * @param context The object-to-object context map
      * @return True if the rules is satisfied; False otherwise
      */
-    protected boolean validateRelationBaseCardinalities(RelationBase object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-    	if (object.getName() == null) {
-        	if (object.getReverseRelation() != null) {
-	        	return report(Diagnostic.ERROR, diagnostics, object,
-	                "Cannot specify a reverse relation on a ref to "+object.getAbbreviatedIri(),
-	                OmlPackage.Literals.RELATION_BASE__REVERSE_RELATION);
-        	}
+    protected boolean validateReverseRelation(ReverseRelation object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+    	if (object.getRelationBase().isRef()) {
+        	return report(Diagnostic.ERROR, diagnostics, object,
+	            "Cannot name a reverse relation on a ref to "+object.getRelationBase().getAbbreviatedIri(),
+                OmlPackage.Literals.MEMBER__NAME);
+        }
+        return true;
+    }
+
+    /**
+     * Checks that a forward relation is not specified on a ref to relation entity
+     * 
+     * @param object The forward relation to check
+     * @param diagnostics The validation diagnostics
+     * @param context The object-to-object context map
+     * @return True if the rules is satisfied; False otherwise
+     */
+    protected boolean validateForwardRelation(ForwardRelation object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+    	if (object.getRelationEntity().isRef()) {
+        	return report(Diagnostic.ERROR, diagnostics, object,
+	            "Cannot name a forward relation on a ref to "+object.getRelationEntity().getAbbreviatedIri(),
+                OmlPackage.Literals.MEMBER__NAME);
         }
         return true;
     }
@@ -1000,12 +1016,10 @@ public final class OmlValidator2 {
      * @return True if the rules is satisfied; False otherwise
      */
     protected boolean validateRelationEntityCardinalities(RelationEntity object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-    	if (object.getName() == null) {
-        	if (object.getForwardRelation() != null) {
-	        	return report(Diagnostic.ERROR, diagnostics, object,
-		            "Cannot specify a forward relation on a ref to "+object.getAbbreviatedIri(),
-	                OmlPackage.Literals.RELATION_ENTITY__FORWARD_RELATION);
-        	}
+        if (!object.isRef() && object.getForwardRelation() == null) {
+        	return report(Diagnostic.ERROR, diagnostics, object,
+	            "Must name a forward relation on "+object.getAbbreviatedIri(),
+                OmlPackage.Literals.RELATION_ENTITY__FORWARD_RELATION);
         }
         return true;
     }

@@ -27,7 +27,7 @@ public class OmlResourceServiceProvider extends DefaultResourceServiceProvider {
 
 	@Override
 	public boolean canHandle(URI uri) {
-		return OmlRead.isUriMappedByCatalog(uri);
+		return OmlRead.isResolvedUri(uri);
 	}
 
 }

@@ -155,7 +155,7 @@ public class OmlWrite {
             if (subject.getOntology() == ontology) {
                 ((List<Element>)subject.eGet(elementERef)).add(object);
             } else if (subject instanceof Member){
-                ((List<Element>)getOrAddReference(ontology, (Member)subject).eGet(elementERef)).add(object);
+                ((List<Element>)getOrAddRef(ontology, (Member)subject).eGet(elementERef)).add(object);
             }
         }
     }
@@ -171,23 +171,23 @@ public class OmlWrite {
     }
 
     /**
-     * Gets an existing or creates a new reference to the given member in the context of the given ontology
+     * Gets an existing or creates a new ref to the given member in the context of the given ontology
      *  
      * @param ontology the context ontology
      * @param member the given member
-     * @return a reference to the given member in the context of the given ontology
+     * @return a ref to the given member in the context of the given ontology
      */
-    protected static Member getOrAddReference(Ontology ontology, Member member) {
-        Member reference = OmlRead.getReferences(ontology).stream().filter(i -> i.getRef() == member).findFirst().orElse(null);
-        if (reference == null) {
-            reference = createReference(member);
+    protected static Member getOrAddRef(Ontology ontology, Member member) {
+        Member ref = OmlRead.getRefs(ontology).stream().filter(i -> i.getRef() == member).findFirst().orElse(null);
+        if (ref == null) {
+            ref = createRef(member);
             if (ontology instanceof Vocabulary) {
-                ((Vocabulary) ontology).getOwnedStatements().add((VocabularyStatement) reference);
+                ((Vocabulary) ontology).getOwnedStatements().add((VocabularyStatement) ref);
             } else if (ontology instanceof Description) {
-                ((Description) ontology).getOwnedStatements().add((DescriptionStatement) reference); 
+                ((Description) ontology).getOwnedStatements().add((DescriptionStatement) ref); 
             }
         }
-        return reference;
+        return ref;
     }
 
     // ------------------------------------------------------------------------------------
@@ -624,61 +624,61 @@ public class OmlWrite {
     // Member
 
     /**
-     * Creates a reference for the given member
+     * Creates a ref to the given member
      * 
      * @param member the given member
-     * @return a reference for the given member
+     * @return a ref for the given member
      */
     @SuppressWarnings("unchecked")
-	protected static <T extends Member> T createReference(T member) {
+	protected static <T extends Member> T createRef(T member) {
         if (member instanceof Aspect) {
-            final var reference = create(Aspect.class);
-            reference.setRef((Aspect)member);
-            return (T) reference;
+            final var ref = create(Aspect.class);
+            ref.setRef((Aspect)member);
+            return (T) ref;
         } else if (member instanceof Concept) {
-            final var reference = create(Concept.class);
-            reference.setRef((Concept)member);
-            return (T) reference;
+            final var ref = create(Concept.class);
+            ref.setRef((Concept)member);
+            return (T) ref;
         } else if (member instanceof RelationEntity) {
-            final var reference = create(RelationEntity.class);
-            reference.setRef((RelationEntity)member);
-            return (T) reference;
+            final var ref = create(RelationEntity.class);
+            ref.setRef((RelationEntity)member);
+            return (T) ref;
         } else if (member instanceof Structure) {
-            final var reference = create(Structure.class);
-            reference.setRef((Structure)member);
-            return (T) reference;
+            final var ref = create(Structure.class);
+            ref.setRef((Structure)member);
+            return (T) ref;
         } else if (member instanceof Scalar) {
-            final var reference = create(Scalar.class);
-            reference.setRef((Scalar)member);
-            return (T) reference;
+            final var ref = create(Scalar.class);
+            ref.setRef((Scalar)member);
+            return (T) ref;
         } else if (member instanceof AnnotationProperty) {
-            final var reference = create(AnnotationProperty.class);
-            reference.setRef((AnnotationProperty)member);
-            return (T) reference;
+            final var ref = create(AnnotationProperty.class);
+            ref.setRef((AnnotationProperty)member);
+            return (T) ref;
         } else if (member instanceof ScalarProperty) {
-            final var reference = create(ScalarProperty.class);
-            reference.setRef((ScalarProperty)member);
-            return (T) reference;
+            final var ref = create(ScalarProperty.class);
+            ref.setRef((ScalarProperty)member);
+            return (T) ref;
         } else if (member instanceof StructuredProperty) {
-            final var reference = create(StructuredProperty.class);
-            reference.setRef((StructuredProperty)member);
-            return (T) reference;
+            final var ref = create(StructuredProperty.class);
+            ref.setRef((StructuredProperty)member);
+            return (T) ref;
         } else if (member instanceof Relation) {
-            final var reference = create(UnreifiedRelation.class);
-            reference.setRef((Relation)member);
-            return (T) reference;
+            final var ref = create(UnreifiedRelation.class);
+            ref.setRef((Relation)member);
+            return (T) ref;
         } else if (member instanceof Rule) {
-            final var reference = create(Rule.class);
-            reference.setRef((Rule)member);
-            return (T) reference;
+            final var ref = create(Rule.class);
+            ref.setRef((Rule)member);
+            return (T) ref;
         } else if (member instanceof ConceptInstance) {
-            final var reference = create(ConceptInstance.class);
-            reference.setRef((ConceptInstance)member);
-            return (T) reference;
+            final var ref = create(ConceptInstance.class);
+            ref.setRef((ConceptInstance)member);
+            return (T) ref;
         } else if (member instanceof RelationInstance) {
-            final var reference = create(RelationInstance.class);
-            reference.setRef((RelationInstance)member);
-            return (T) reference;
+            final var ref = create(RelationInstance.class);
+            ref.setRef((RelationInstance)member);
+            return (T) ref;
         }
         return null;
     }

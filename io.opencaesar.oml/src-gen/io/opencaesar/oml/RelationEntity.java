@@ -26,10 +26,8 @@ package io.opencaesar.oml;
  *
  * <!-- begin-model-doc -->
  * RelationEntity is an [=entity=] that represents a reified relation from a source entity to a target entity.
- * It can optionally name a [=ForwardRelation=] whose domain is the source and whose range is the target.
- * If both are named, such [=ForwardRelation=] becomes the inverse of the entity's [=ReverseRelation=] .
- * If not, then a default [=ForwardRelation=]  with the name 'has<Relation>Forward' is assumed.
- * A relation entity ref cannot specify a [=ForwardRelation=].
+ * It names a [=ForwardRelation=] (only on a relation entity definition not a ref) whose domain is the source
+ * and whose range is the target.
  * <!-- end-model-doc -->
  *
  * <p>

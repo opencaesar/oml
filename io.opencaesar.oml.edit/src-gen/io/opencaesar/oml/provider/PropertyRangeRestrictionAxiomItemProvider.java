@@ -22,7 +22,6 @@ package io.opencaesar.oml.provider;
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.PropertyRangeRestrictionAxiom;
 import io.opencaesar.oml.RangeRestrictionKind;
-
 import java.util.Collection;
 import java.util.List;
 

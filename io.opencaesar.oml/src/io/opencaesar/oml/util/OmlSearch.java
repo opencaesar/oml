@@ -27,8 +27,7 @@ import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
-
-import org.eclipse.emf.ecore.resource.Resource;
+import java.util.stream.Stream;
 
 import io.opencaesar.oml.Annotation;
 import io.opencaesar.oml.AnnotationProperty;
@@ -43,7 +42,6 @@ import io.opencaesar.oml.Element;
 import io.opencaesar.oml.Entity;
 import io.opencaesar.oml.ForwardRelation;
 import io.opencaesar.oml.IdentifiedElement;
-import io.opencaesar.oml.Import;
 import io.opencaesar.oml.Instance;
 import io.opencaesar.oml.InstanceEnumerationAxiom;
 import io.opencaesar.oml.KeyAxiom;
@@ -51,7 +49,6 @@ import io.opencaesar.oml.Literal;
 import io.opencaesar.oml.LiteralEnumerationAxiom;
 import io.opencaesar.oml.Member;
 import io.opencaesar.oml.NamedInstance;
-import io.opencaesar.oml.Ontology;
 import io.opencaesar.oml.Property;
 import io.opencaesar.oml.PropertyEquivalenceAxiom;
 import io.opencaesar.oml.PropertyRestrictionAxiom;
@@ -90,109 +87,100 @@ public final class OmlSearch extends OmlIndex {
     //-------------------------------------------------
 
     /**
-     * Finds references to the given member
+     * Finds refs to the given member
      * 
      * @param member the given member
-     * @return a set of references to the given member
+     * @return a set of refs to the given member
      */
-    public static Set<Member> findReferences(Member member) {
-        Set<Member> references = new LinkedHashSet<>();
+    public static Set<Member> findRefs(Member member) {
+        Set<Member> refs = new LinkedHashSet<>();
         if (member instanceof AnnotationProperty) {
-            references.addAll(findAnnotationPropertiesWithRef((AnnotationProperty)member));
+            refs.addAll(findAnnotationPropertiesWithRef((AnnotationProperty)member));
         } else if (member instanceof Aspect) {
-            references.addAll(findAspectsWithRef((Aspect)member));
+            refs.addAll(findAspectsWithRef((Aspect)member));
         } else if (member instanceof Concept) {
-            references.addAll(findConceptsWithRef((Concept)member));
+            refs.addAll(findConceptsWithRef((Concept)member));
         } else if (member instanceof RelationEntity) {
-            references.addAll(findRelationEntitiesWithRef((RelationEntity)member));
+            refs.addAll(findRelationEntitiesWithRef((RelationEntity)member));
         } else if (member instanceof Structure) {
-            references.addAll(findStructuresWithRef((Structure)member));
+            refs.addAll(findStructuresWithRef((Structure)member));
         } else if (member instanceof Scalar) {
-            references.addAll(findScalarsWithRef((Scalar)member));
+            refs.addAll(findScalarsWithRef((Scalar)member));
         } else if (member instanceof Relation) {
-            references.addAll(findUnreifiedRelationsWithRef((Relation)member));
+            refs.addAll(findUnreifiedRelationsWithRef((Relation)member));
         } else if (member instanceof StructuredProperty) {
-            references.addAll(findStructuredPropertiesWithRef((StructuredProperty)member));
+            refs.addAll(findStructuredPropertiesWithRef((StructuredProperty)member));
         } else if (member instanceof ScalarProperty) {
-            references.addAll(findScalarPropertiesWithRef((ScalarProperty)member));
+            refs.addAll(findScalarPropertiesWithRef((ScalarProperty)member));
         } else if (member instanceof Rule) {
-            references.addAll(findRulesWithRef((Rule)member));
+            refs.addAll(findRulesWithRef((Rule)member));
         } else if (member instanceof ConceptInstance) {
-            references.addAll(findConceptInstancesWithRef((ConceptInstance)member));
+            refs.addAll(findConceptInstancesWithRef((ConceptInstance)member));
         } else if (member instanceof RelationInstance) {
-            references.addAll(findRelationInstancesWithRef((RelationInstance)member));
+            refs.addAll(findRelationInstancesWithRef((RelationInstance)member));
         }
-        return references;
+        return refs;
     }
 
-    /**
-     * Finds annotations of the given element
+    /*
+     * Finds annotations of the given annotation property in the given element
      * 
      * @param element the given element
+     * @param property the annotation property
      * @return a set of annotations of the given element
      */
-    public static Set<Annotation> findAnnotations(IdentifiedElement element) {
+    private static Stream<Annotation> findAnnotations(IdentifiedElement element, AnnotationProperty property) {
         final Set<Annotation> annotations = new LinkedHashSet<>(element.getOwnedAnnotations());
         if (element instanceof Member) {
-            annotations.addAll(findReferences((Member)element).stream()
+        	var member = (Member)element;
+            annotations.addAll(findRefs(member).stream()
                 .flatMap(r -> r.getOwnedAnnotations().stream())
                 .collect(Collectors.toCollection(LinkedHashSet::new)));
         }
-        return annotations;
+        return annotations.stream().filter(a -> a.getProperty() == property);
     }
 
     /**
      * Finds the values of a given annotation property in the given element
      * 
-     * @param element the given element with annotations
+     * @param element The given element
      * @param property the annotation property
      * @return a set of literals representing annotation values
      */
     public static Set<Element> findAnnotationValues(IdentifiedElement element, AnnotationProperty property) {
-        return findAnnotations(element).stream()
-            .filter(a -> a.getProperty() == property)
+        return findAnnotations(element, property)
             .map(a -> a.getValue())
             .collect(Collectors.toCollection(LinkedHashSet::new));
     }
     
     /**
-     * Gets a value of the given annotation property in the given element
+     * Finds the first literal value of the given annotation property in the given element
      * 
-     * @param element the given element with annotations
-     * @param property the annotation property
-     * @return a literal representing an annotation value
+     * @param element The given element
+     * @param property the given annotation property
+     * @return an annotation literal value
      */
-    public static Element findAnnotationValue(IdentifiedElement element, AnnotationProperty property) {
-        return findAnnotations(element).stream()
-            .filter(a -> a.getProperty() == property)
-            .map(a -> a.getValue())
-            .findFirst().orElse(null);
+    public static Literal findAnnotationLiteralValue(IdentifiedElement element, AnnotationProperty property) {
+        return findAnnotations(element, property)
+                .filter(a -> a.getLiteralValue() != null)
+                .map(a -> a.getLiteralValue())
+	            .findFirst()
+	            .orElse(null);
     }
 
     /**
-     * Finds imports that import the given ontology
-     * @param ontology the given ontology
-     * @return a set of imports that import the given ontology
-     */
-    public static Set<Import> findReferencingImports(Ontology ontology) {
-        final Resource resource = ontology.eResource();
-        return (resource == null) ? Collections.emptySet() :
-            OmlRead.getOntologies(resource.getResourceSet()).stream()
-                .flatMap(o -> o.getOwnedImports().stream())
-                .filter(i -> OmlRead.getImportedOntology(i) == ontology)
-                .collect(Collectors.toCollection(LinkedHashSet::new));
-    }
-
-    /**
-     * Finds ontologies that import the given ontology
+     * Finds the first referenced value of a given annotation property in the given element
      * 
-     * @param ontology the given ontologies
-     * @return a set of ontologies that import the given ontology
+     * @param element The given element
+     * @param property the given annotation property
+     * @return an annotation reference value
      */
-    public static Set<Ontology> findImportingOntologies(Ontology ontology) {
-        return findReferencingImports(ontology).stream()
-            .map(i -> OmlRead.getImportingOntology(i))
-            .collect(Collectors.toCollection(LinkedHashSet::new));
+    public static Member findAnnotationReferencedValue(IdentifiedElement element, AnnotationProperty property) {
+        return findAnnotations(element, property)
+            .filter(a -> a.getReferencedValue() != null)
+            .map(a -> a.getReferencedValue())
+            .findFirst()
+            .orElse(null);
     }
 
     //-------------------------------------------------
@@ -239,7 +227,7 @@ public final class OmlSearch extends OmlIndex {
     public static Set<KeyAxiom> findKeyAxioms(Entity entity) {
         final Set<KeyAxiom> axioms = new LinkedHashSet<>();
         axioms.addAll(entity.getOwnedKeys());
-        axioms.addAll(findReferences(entity).stream()
+        axioms.addAll(findRefs(entity).stream()
             .filter(i -> i instanceof Entity)
             .map(i -> (Entity)i)
             .flatMap(r -> r.getOwnedKeys().stream())
@@ -258,7 +246,7 @@ public final class OmlSearch extends OmlIndex {
         if (concept.getOwnedEnumeration() != null) {
         	axioms.add(concept.getOwnedEnumeration());
         }
-        axioms.addAll(findReferences(concept).stream()
+        axioms.addAll(findRefs(concept).stream()
             .filter(i -> i instanceof Concept)
             .map(i -> (Concept)i)
             .filter(i -> i.getOwnedEnumeration() != null)
@@ -278,7 +266,7 @@ public final class OmlSearch extends OmlIndex {
         if (scalar.getOwnedEnumeration() != null) {
         	axioms.add(scalar.getOwnedEnumeration());
         }
-        axioms.addAll(findReferences(scalar).stream()
+        axioms.addAll(findRefs(scalar).stream()
             .filter(i -> i instanceof Scalar)
             .map(i -> (Scalar)i)
             .filter(i -> i.getOwnedEnumeration() != null)
@@ -296,7 +284,7 @@ public final class OmlSearch extends OmlIndex {
     public static Set<PropertyRestrictionAxiom> findPropertyRestrictionAxioms(Classifier classifier) {
         final Set<PropertyRestrictionAxiom> axioms = new LinkedHashSet<>();
         axioms.addAll(classifier.getOwnedPropertyRestrictions());
-        axioms.addAll(findReferences(classifier).stream()
+        axioms.addAll(findRefs(classifier).stream()
             .filter(i -> i instanceof Classifier)
             .map(i -> (Classifier)i)
             .flatMap(r -> r.getOwnedPropertyRestrictions().stream())
@@ -317,7 +305,7 @@ public final class OmlSearch extends OmlIndex {
         if (term instanceof SpecializableTerm) {
         	axioms.addAll(((SpecializableTerm)term).getOwnedSpecializations());
         }
-        axioms.addAll(findReferences(term).stream()
+        axioms.addAll(findRefs(term).stream()
             .filter(i -> i instanceof SpecializableTerm)
             .map(i -> (SpecializableTerm)i)
             .flatMap(r -> r.getOwnedSpecializations().stream())
@@ -334,7 +322,7 @@ public final class OmlSearch extends OmlIndex {
     public static Set<ClassifierEquivalenceAxiom> findClassifierEquivalenceAxiomsWithSubClassifier(Classifier classifier) {
         final Set<ClassifierEquivalenceAxiom> axioms = new LinkedHashSet<>();
        	axioms.addAll(classifier.getOwnedEquivalences());
-        axioms.addAll(findReferences(classifier).stream()
+        axioms.addAll(findRefs(classifier).stream()
             .filter(i -> i instanceof Classifier)
             .map(i -> (Classifier)i)
             .flatMap(r -> r.getOwnedEquivalences().stream())
@@ -351,7 +339,7 @@ public final class OmlSearch extends OmlIndex {
     public static Set<ScalarEquivalenceAxiom> findScalarEquivalenceAxiomsWithSubScalar(Scalar scalar) {
         final Set<ScalarEquivalenceAxiom> axioms = new LinkedHashSet<>();
        	axioms.addAll(scalar.getOwnedEquivalences());
-        axioms.addAll(findReferences(scalar).stream()
+        axioms.addAll(findRefs(scalar).stream()
             .filter(i -> i instanceof Scalar)
             .map(i -> (Scalar)i)
             .flatMap(r -> r.getOwnedEquivalences().stream())
@@ -370,7 +358,7 @@ public final class OmlSearch extends OmlIndex {
         if (property instanceof SpecializableProperty) {
         	axioms.addAll(((SpecializableProperty)property).getOwnedEquivalences());
         }
-        axioms.addAll(findReferences(property).stream()
+        axioms.addAll(findRefs(property).stream()
             .filter(i -> i instanceof SpecializableProperty)
             .map(i -> (SpecializableProperty)i)
             .flatMap(r -> r.getOwnedEquivalences().stream())
@@ -797,7 +785,7 @@ public final class OmlSearch extends OmlIndex {
     public static Set<Classifier> findDomains(SemanticProperty property) {
     	var domains = new LinkedHashSet<Classifier>();
     	domains.addAll(property.getDomainList());
-    	domains.addAll(findReferences(property).stream()
+    	domains.addAll(findRefs(property).stream()
                 .map(i -> (SemanticProperty)i)
                 .flatMap(r -> r.getDomainList().stream())
                 .collect(Collectors.toCollection(LinkedHashSet::new)));
@@ -813,7 +801,7 @@ public final class OmlSearch extends OmlIndex {
     public static Set<Type> findRanges(SemanticProperty property) {
     	var ranges = new LinkedHashSet<Type>();
     	ranges.addAll(property.getRangeList());
-    	ranges.addAll(findReferences(property).stream()
+    	ranges.addAll(findRefs(property).stream()
                 .map(i -> (SemanticProperty)i)
                 .flatMap(r -> r.getRangeList().stream())
                 .collect(Collectors.toCollection(LinkedHashSet::new)));
@@ -841,7 +829,7 @@ public final class OmlSearch extends OmlIndex {
     public static Set<Entity> findSources(RelationBase base) {
     	var sources = new LinkedHashSet<Entity>();
     	sources.addAll(base.getSources());
-    	sources.addAll(findReferences(base).stream()
+    	sources.addAll(findRefs(base).stream()
                 .map(i -> (RelationEntity)i)
                 .flatMap(r -> r.getSources().stream())
                 .collect(Collectors.toCollection(LinkedHashSet::new)));
@@ -857,7 +845,7 @@ public final class OmlSearch extends OmlIndex {
     public static Set<Entity> findTargets(RelationBase base) {
     	var sources = new LinkedHashSet<Entity>();
     	sources.addAll(base.getTargets());
-    	sources.addAll(findReferences(base).stream()
+    	sources.addAll(findRefs(base).stream()
                 .map(i -> (RelationEntity)i)
                 .flatMap(r -> r.getTargets().stream())
                 .collect(Collectors.toCollection(LinkedHashSet::new)));
@@ -891,7 +879,7 @@ public final class OmlSearch extends OmlIndex {
      */
     public static Set<TypeAssertion> findTypeAssertions(NamedInstance instance) {
         final Set<TypeAssertion> assertions = new LinkedHashSet<>(instance.getOwnedTypes());
-        assertions.addAll(findReferences(instance).stream()
+        assertions.addAll(findRefs(instance).stream()
             .filter(i -> i instanceof NamedInstance)
             .map(i -> (NamedInstance)i)
             .flatMap(r -> r.getOwnedTypes().stream())
@@ -908,7 +896,7 @@ public final class OmlSearch extends OmlIndex {
     public static Set<PropertyValueAssertion> findPropertyValueAssertionsWithSubject(Instance subject) {
         final Set<PropertyValueAssertion> assertions = new LinkedHashSet<>(subject.getOwnedPropertyValues());
         if (subject instanceof NamedInstance) {
-            assertions.addAll(findReferences((NamedInstance)subject).stream()
+            assertions.addAll(findRefs((NamedInstance)subject).stream()
                 .filter(i -> i instanceof NamedInstance)
                 .map(i -> (NamedInstance)i)
                 .flatMap(r -> r.getOwnedPropertyValues().stream())
@@ -991,7 +979,7 @@ public final class OmlSearch extends OmlIndex {
         // look in relation instances
         if (relation instanceof ForwardRelation) {
 	        targets.addAll(findRelationInstancesWithSource(source).stream()
-	                .filter(i -> findIsOfType(i, ((ForwardRelation)relation).getRelationEntity()))
+	                .filter(i -> findIsTypeOf(i, ((ForwardRelation)relation).getRelationEntity()))
 	                .flatMap(a -> a.getTargets().stream())
 	                .collect(Collectors.toCollection(LinkedHashSet::new)));
         }
@@ -1034,7 +1022,7 @@ public final class OmlSearch extends OmlIndex {
         // look in relation instances
         if (relation instanceof ForwardRelation) {
 	        sources.addAll(findRelationInstancesWithTarget(target).stream()
-	                .filter(i -> findIsOfType(i, ((ForwardRelation)relation).getRelationEntity()))
+	                .filter(i -> findIsTypeOf(i, ((ForwardRelation)relation).getRelationEntity()))
 	                .flatMap(i -> i.getSources().stream())
 	                .collect(Collectors.toCollection(LinkedHashSet::new)));
         }
@@ -1056,17 +1044,48 @@ public final class OmlSearch extends OmlIndex {
     }
     
     /**
-     * Finds an element that represents a value of given semantic property defined on the given instance
+     * Finds the first literal value of given scalar property defined on the given instance
      * 
      * @param instance the given instance
-     * @param property the given semantic property
-     * @return an element that represents a value of given semantic property defined on the given instance
+     * @param property the given scalar property
+     * @return a literal value of the given scalar property on the given instance
      */
-    public static Element findPropertyValue(Instance instance, SemanticProperty property) {
-        return findPropertyValueAssertionsWithSubject(instance).stream()
-            .filter(a -> a.getProperty() == property)
-            .map(a -> a.getValue())
-            .findFirst().orElse(null);
+    public static Literal findPropertyLiteralValue(Instance instance, ScalarProperty property) {
+        return findPropertyValues(instance, property).stream()
+            	.filter(i -> i instanceof Literal)
+            	.map(i -> (Literal)i)
+                .findFirst()
+                .orElse(null);
+    }
+
+    /**
+     * Finds the first contained value of given structured property defined on the given instance
+     * 
+     * @param instance the given instance
+     * @param property the given structured property
+     * @return a contained value of the given structured property on the given instance
+     */
+    public static StructureInstance findPropertyContainedValue(Instance instance, StructuredProperty property) {
+        return findPropertyValues(instance, property).stream()
+            	.filter(i -> i instanceof StructureInstance)
+            	.map(i -> (StructureInstance)i)
+                .findFirst()
+                .orElse(null);
+    }
+
+    /**
+     * Finds the first referenced value of given structured property defined on the given instance
+     * 
+     * @param instance the given instance
+     * @param relation the given relation
+     * @return a referenced value of the given relation on the given instance
+     */
+    public static NamedInstance findPropertyReferencedValue(Instance instance, Relation relation) {
+        return findPropertyValues(instance, relation).stream()
+            	.filter(i -> i instanceof NamedInstance)
+            	.map(i -> (NamedInstance)i)
+                .findFirst()
+                .orElse(null);
     }
 
     /**
@@ -1104,13 +1123,13 @@ public final class OmlSearch extends OmlIndex {
     }
 
     /**
-     * Finds if the given instance is typed directly by the given type
+     * Finds whether the given instance is typed directly by the given type
      * 
      * @param instance the given instance
      * @param type the given type
      * @return true if the given instance is typed directly by the given type; otherwise false
      */
-    public static boolean findIsOfType(Instance instance, Classifier type) {
+    public static boolean findIsTypeOf(Instance instance, Classifier type) {
         if (instance instanceof StructureInstance) {
             return ((StructureInstance)instance).getType() == type;
         } else if (instance instanceof NamedInstance) {
@@ -1122,13 +1141,13 @@ public final class OmlSearch extends OmlIndex {
     }
 
     /**
-     * Finds if the given instance is typed directly or transitively by the given type
+     * Finds whether the given instance is typed directly or transitively by the given type
      * 
      * @param instance the given instance
      * @param type the given type
      * @return true if the given instance is typed directly or transitively by the given type; otherwise false
      */
-    public static boolean findIsOfKind(Instance instance, Classifier type) {
+    public static boolean findIsKindOf(Instance instance, Classifier type) {
         if (instance instanceof StructureInstance) {
             return findIsSubTermOf(((StructureInstance)instance).getType(), type);
         } else if (instance instanceof NamedInstance) {
@@ -1274,15 +1293,15 @@ public final class OmlSearch extends OmlIndex {
      * @param type the given type
      * @return true if the given literal is typed directly by the given type; otherwise false
      */
-    public static boolean findIsOfKind(Literal literal, Scalar type) {
+    public static boolean findIsKindOf(Literal literal, Scalar type) {
     	if (type.getOwnedEnumeration() != null) {
-    		return type.getOwnedEnumeration().getLiterals().stream().anyMatch(i -> i.getLexicalValue().equals(literal.getLexicalValue()));
+    		return type.getOwnedEnumeration().getLiterals().stream().anyMatch(i -> OmlRead.isEqual(i, literal));
     	} else if (OmlRead.isStandardScalar(type)) {
     		return findAllTypes(literal).contains(type);
     	}
     	for (Term t : findAllSuperTerms(type, false)) {
     		Scalar supertype = (Scalar)t;
-    		if (!findIsOfKind(literal, supertype)) {
+    		if (!findIsKindOf(literal, supertype)) {
     			return false;
     		}
     	}

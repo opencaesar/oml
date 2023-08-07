@@ -58,7 +58,7 @@ public class OmlImportedNamespaceAwareLocalScopeProvider extends ImportedNamespa
 			}
 		
 			// collect all local imports first (so they get priority)
-			OmlRead.getImportPrefixes(ontology).forEach((namespace, prefix) -> {
+			OmlRead.getImportNamespaceToPrefixMap(ontology).forEach((namespace, prefix) -> {
 				if (prefix != null && namespace != null) {
 					importedNamespaceResolvers.add(new OmlNamespaceImportNormalizer(qnc.toQualifiedName(namespace), prefix, ignoreCase));
 				}

@@ -23,6 +23,6 @@ public class LoadImportAction extends BaseSelectionListenerAction {
 	public void run() {
 		IStructuredSelection selection = getStructuredSelection();
 		Import _import = (Import) selection.getFirstElement();
-		OmlRead.getImportedResource(_import);
+		OmlRead.getImportedOntology(_import);
 	}
 };
