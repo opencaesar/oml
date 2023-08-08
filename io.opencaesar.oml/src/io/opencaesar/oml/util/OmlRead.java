@@ -406,9 +406,7 @@ public final class OmlRead {
      * @return a collection of ontologies directly or transitively imported by the given ontology
      */
     public static Collection<Ontology> getImportedOntologyClosure(Ontology ontology, boolean inclusive) {
-        return closure(ontology, inclusive, i -> i.getOwnedImports().stream()
-            .map(j -> getImportedOntology(j))
-            .collect(Collectors.toList()));
+        return closure(ontology, inclusive, i -> getImportedOntologies(i));
     }
 
     /**
