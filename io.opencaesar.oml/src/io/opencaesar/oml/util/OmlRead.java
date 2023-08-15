@@ -428,7 +428,7 @@ public final class OmlRead {
      * This will cause an imported ontology's resource to load if not already loaded
      * 
      * @param _import the given import
-     * @return the ontology that is imported by the given import (can be null of the import failed)
+     * @return the ontology that is imported by the given import (or null if the import resolution failed)
      */
     public static Ontology getImportedOntology(Import _import) {
         if (_import.getIri() == null || _import.getIri().isEmpty()) {
@@ -436,8 +436,21 @@ public final class OmlRead {
         }
         var context = _import.eResource();
     	var uri = getResolvedUri(context, _import.getIri());
-        Resource r = context.getResourceSet().getResource(uri, true);
-        return (r != null) ? getOntology(r) : null;
+    	if (uri != null) {
+    		ResourceSet rs = context.getResourceSet();
+    		Resource r = rs.getResource(uri, false);
+    		if ((r == null || !r.isLoaded()) && rs.getURIConverter().exists(uri, rs.getLoadOptions())) {
+	    		try {
+	    			r = rs.getResource(uri, true);
+	    		} catch (Exception e) {
+	    			System.err.println(e);
+	    		}
+    		}
+	        if (r != null) {
+	        	return getOntology(r);
+	        }
+    	}
+		return null;
     }
     
     /**

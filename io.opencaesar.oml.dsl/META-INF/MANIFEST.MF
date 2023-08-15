@@ -3,7 +3,7 @@ Automatic-Module-Name: io.opencaesar.oml.dsl
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-Vendor: %providerName
-Bundle-Version: 2.1.0
+Bundle-Version: 2.2.0
 Bundle-SymbolicName: io.opencaesar.oml.dsl; singleton:=true
 Bundle-ActivationPolicy: lazy
 Bundle-Localization: plugin

@@ -82,8 +82,15 @@ public final class OmlXMIResource extends XMIResourceImpl {
             getDefaultSaveOptions().put(XMIResource.OPTION_URI_HANDLER, handler);
         }
     }
-    
+
     @Override
+	public void load(Map<?, ?> options) throws IOException {
+        Map<Object, Object> mergedOptions = new HashMap<Object, Object>(options);
+        mergedOptions.put(XMIResource.OPTION_URI_HANDLER, getDefaultLoadOptions().get(XMIResource.OPTION_URI_HANDLER));
+        super.load(mergedOptions);
+	}
+
+	@Override
 	protected Adapter createModificationTrackingAdapter() {
         return new ResourceImpl.ModificationTrackingAdapter() {
         	@Override
@@ -106,6 +113,7 @@ public final class OmlXMIResource extends XMIResourceImpl {
         // this option is set by the Sample Reflective Ecore Model Editor; unset it
         final Map<Object, Object> mergedOptions = new HashMap<>(options);
         mergedOptions.remove(XMIResource.OPTION_LINE_WIDTH);
+        mergedOptions.put(XMIResource.OPTION_URI_HANDLER, getDefaultSaveOptions().get(XMIResource.OPTION_URI_HANDLER));
         super.doSave(outputStream, mergedOptions);
     }
 

@@ -21,13 +21,12 @@ package io.opencaesar.oml.dsl.resource;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.resource.impl.DefaultResourceServiceProvider;
 
-import io.opencaesar.oml.util.OmlRead;
-
 public class OmlResourceServiceProvider extends DefaultResourceServiceProvider {
 
 	@Override
 	public boolean canHandle(URI uri) {
-		return OmlRead.isResolvedUri(uri);
+		//return OmlRead.isResolvedUri(uri);
+		return super.canHandle(uri);
 	}
 
 }

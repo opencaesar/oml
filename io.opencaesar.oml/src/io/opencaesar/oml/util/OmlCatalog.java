@@ -34,7 +34,6 @@ import org.eclipse.emf.common.CommonPlugin;
 import org.eclipse.emf.common.util.URI;
 
 import com.google.common.io.Files;
-
 /**
  * The <b>Catalog</b> that resolves logical IRIs to physical URIs. It is a wrapper around the the Apache XML Resolver Catalog. 
  * 
@@ -84,7 +83,7 @@ public final class OmlCatalog {
      * @throws IOException When there are problems parsing the catalog
      */
     public static OmlCatalog create(URI catalogUri, List<String> extensions) throws IOException {
-    	CatalogEx catalog = new CatalogEx(catalogUri.toString());
+    	CatalogEx catalog = new CatalogEx(catalogUri.trimSegments(1).toString());
         catalog.setCatalogManager(manager);
         catalog.setupReaders();
         catalog.loadSystemCatalogs();
@@ -197,8 +196,8 @@ public final class OmlCatalog {
 
     private static class CatalogEx extends Catalog {
     	private String baseUri;
-    	public CatalogEx(String catalogUri) {
-    		this.baseUri = new File(catalogUri).getParent();
+    	public CatalogEx(String baseUri) {
+    		this.baseUri = baseUri;
     	}
         public String resolveUri(String uri) throws IOException {
         	String resolved = resolveURI(uri);

@@ -215,7 +215,7 @@ final class OmlUriResolver {
 		contextResource.getResourceSet().getResources().forEach(r -> uris.add(r.getURI()));
 
 		// retain only OML files
-		uris.removeIf(uri -> !OmlConstants.OML_EXTENSION.equals(uri.fileExtension()));
+		uris.removeIf(uri -> !OmlConstants.OML_EXTENSION_LIST.contains((uri.fileExtension())));
 		
 		// remove the context URI
 		uris.remove(contextResource.getURI());

@@ -264,9 +264,9 @@ public final class OmlValidator2 {
         boolean returnValue = true;
     	var iri = object.getIri();
     	var uri = object.eResource().getURI();
-    	if (OmlRead.isResolvedUri(uri) && !uri.equals(OmlRead.getResolvedUri(object.eResource(), iri))) {
+    	if (!OmlRead.isResolvedUri(uri) || !uri.equals(OmlRead.getResolvedUri(object.eResource(), iri))) {
             report(Diagnostic.ERROR, diagnostics, object,
-                object.eClass().getName()+" namespace '"+object.getNamespace()+"' does not resolve to its file using the catalog", 
+                object.eClass().getName()+" iri '"+iri+"' does not resolve to '"+uri+"' using the catalog", 
                 OmlPackage.Literals.ONTOLOGY__NAMESPACE);
             returnValue = false;
     	}
@@ -283,7 +283,7 @@ public final class OmlValidator2 {
      * @param context The object-to-object context map
      * @return True if the rules is satisfied; False otherwise
      */
-    protected boolean validateExtensionURI(Import object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+    protected boolean validateImportURI(Import object, DiagnosticChain diagnostics, Map<Object, Object> context) {
     	if (object.getKind() == ImportKind.EXTENSION) {
 	    	if (object.eContainer() instanceof Vocabulary) {
 	    		if (!(OmlRead.getImportedOntology(object) instanceof Vocabulary)) {
@@ -310,22 +310,7 @@ public final class OmlValidator2 {
 		                OmlPackage.Literals.IMPORT__NAMESPACE);
 	        	}
 	    	}
-    	}
-    	return true;
-    }
-    
-    // Usage
-    
-    /**
-     * Checks if a usage import resolves to the ontology of the right kind
-     * 
-     * @param object The import to check
-     * @param diagnostics The validation diagnostics
-     * @param context The object-to-object context map
-     * @return True if the rules is satisfied; False otherwise
-     */
-    protected boolean validateUsageURI(Import object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-    	if (object.getKind() == ImportKind.USAGE) {
+    	} else if (object.getKind() == ImportKind.USAGE) {
 	    	if (object.eContainer() instanceof Vocabulary) {
 	        	if (!(OmlRead.getImportedOntology(object) instanceof Description)) {
 		            return report(Diagnostic.ERROR, diagnostics, object,
@@ -345,22 +330,7 @@ public final class OmlValidator2 {
 	                    OmlPackage.Literals.IMPORT__NAMESPACE);
 	            }
 	    	}
-    	}
-    	return true;
-    }
-    
-    // Inclusion
-    
-    /**
-     * Checks if an inclusion import resolves to an ontology of the right kind
-     * 
-     * @param object The import to check
-     * @param diagnostics The validation diagnostics
-     * @param context The object-to-object context map
-     * @return True if the rules is satisfied; False otherwise
-     */
-    protected boolean validateInclusionURI(Import object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-    	if (object.getKind() == ImportKind.INCLUSION) {
+    	} else if (object.getKind() == ImportKind.INCLUSION) {
 	    	if (object.eContainer() instanceof VocabularyBundle) {
 	    		if (!(OmlRead.getImportedOntology(object) instanceof Vocabulary)) {
 		            return report(Diagnostic.ERROR, diagnostics, object,

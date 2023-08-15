@@ -18,6 +18,8 @@ package io.opencaesar.oml.dsl.scoping;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+
+import io.opencaesar.oml.util.OmlConstants;
 import io.opencaesar.oml.util.OmlRead;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -38,6 +40,8 @@ public class OmlImportUriGlobalScopeProvider extends ImportUriGlobalScopeProvide
 			@Override
 			public LinkedHashSet<URI> get() {
 				Set<URI> uris = OmlRead.getResolvedUris(resource);
+				// only .oml is supported from oml index right now
+				uris.removeIf(uri -> !OmlConstants.OML_EXTENSION.equals((uri.fileExtension())));
 				return new LinkedHashSet<URI>(uris);
 			}
 		});
