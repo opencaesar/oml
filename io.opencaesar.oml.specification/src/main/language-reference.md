@@ -319,7 +319,7 @@ For example, the *mission* vocabulary *uses* the *organizations* description (in
     `extends` `<`http://com.xyz/methodology/mission#`>` `as` mission
     `uses` `<`http://com.xyz/methodology/organizations#`>` `as` organizations
     `concept` Spacecraft [
-        `restricts` `relation` mission:isResponsibilityOf `to` organization:NASA   // a cross-reference to instance NASA 
+        `restricts` mission:isResponsibilityOf `to` organization:NASA   // a cross-reference to instance NASA 
     ]
 `}`
 </pre>
@@ -830,7 +830,7 @@ Examples of using Classifier Specialization Axioms can be seen in the following:
 <pre class="highlight highlight-html">
     `aspect` Component `<` IdentifiableElement
     `concept` MechanicalComponent `<` Component `[`
-        restricts all relation contains to MechanicalComponent
+        `restricts` `all` contains `to` MechanicalComponent
     `]`
 </pre>
 
@@ -886,11 +886,11 @@ Examples of using Classifier Equivalence Axioms can be seen in the following:
 
 <pre class="highlight highlight-html">
     `concept` FunctionalComponent `=` Component `[`
-        `restricts` `some` `relation` hasRequirement `to` FunctionalRequirement
+        `restricts` `some` hasRequirement `to` FunctionalRequirement
     `]`
     `concept` HawaianPizza `=` CheesyPizza `&` SaucyPizza `[`
-        `restricts` `some` `relation` hasTopping `to` Ham
-        `restricts` `some` `relation` hasTopping `to` Pineapple
+        `restricts` `some` hasTopping `to` Ham
+        `restricts` `some` hasTopping `to` Pineapple
     `]`
 </pre>
 
@@ -1009,7 +1009,7 @@ Note: that equivalent properties must be of the same kind (e.g., scalar property
 
 #### Property Value Restriction Axiom #### {#PropertyValueRestrictionAxiom-LR}
 
-A [property value restriction axiom](#PropertyValueRestrictionAxiom-Syntax) is an axiom defined on a classifier ([Aspect](#Aspect-LR), [Concept](#Concept-LR), [Relation Entity](#RelationEntity-LR) and [Structure](#Structure-LR)) that restricts a property in some way in the classifier's context. This property can be ([Scalar Property](#ScalarProperty-LR), [Structured Property](#StructuredProperty-LR), [Forward Relation](#RelationEntity-LR), [Reverse Relation](#RelationEntity-LR), or [Unreified Relation](#UnreifiedRelation-LR)) whose domain is the context type or one of its supertypes. The facets that can be restricted about those properties vary (like their range, cardinality, or value) resulting in different subtypes of restriction axioms.
+A [property value restriction axiom](#PropertyValueRestrictionAxiom-Syntax) is an axiom defined on a classifier ([Aspect](#Aspect-LR), [Concept](#Concept-LR), [Relation Entity](#RelationEntity-LR) and [Structure](#Structure-LR)) that restricts a semantic property in some way in the classifier's context. This property can be ([Scalar Property](#ScalarProperty-LR), [Structured Property](#StructuredProperty-LR), [Forward Relation](#RelationEntity-LR), [Reverse Relation](#RelationEntity-LR), or [Unreified Relation](#UnreifiedRelation-LR)) whose domain is the context type or one of its supertypes. The facets that can be restricted about those properties vary (like their range, cardinality, or value) resulting in different subtypes of restriction axioms.
 
 Note: a structure can specify property value restriction axioms only on scalar and structures properties, but not relations (forward, reverse, or unreified) since a structure cannot be a source (domain) or target (range) of a relation.
 
@@ -1018,9 +1018,9 @@ Note: a structure can specify property value restriction axioms only on scalar a
 A range restriction axiom restricts the range of a property in the context of some classifier. The axiom specifies a restricted range that is a subtype of the property's original range. The syntax of a range restriction axioms starts with the keyword `restricts` followed by a restriction kind, which can either be `all` (requiring all values to conform to the restricted range) or `some` (requiring at least one value to conform to the restricted range). This is followed by the kind of property (`scalar property`, `structured property`, or `relation`) then a reference to the property by IRI. Finally, the keyword `to` is used followed by a reference to the restricted range (a scalar, a structure, or an entity) by IRI. The following shows the three supported syntaxes:
 
 <pre class="highlight highlight-html">
-	`restricts` [ `all` | `some` ] `scalar` `property` [ScalarProperty|IRI] `to` [Scalar|IRI]
-	`restricts` [ `all` | `some` ] `structured` `property` [StructuredProperty|IRI] `to` [Structure|IRI]
-	`restricts` [ `all` | `some` ] `relation` [Relation|IRI] `to` [Entity|IRI]
+	`restricts` [ `all` | `some` ] [ScalarProperty|IRI] `to` [Scalar|IRI]
+	`restricts` [ `all` | `some` ] [StructuredProperty|IRI] `to` [Structure|IRI]
+	`restricts` [ `all` | `some` ] [Relation|IRI] `to` [Entity|IRI]
 </pre>
 
 The following example shows a vocabulary that defines a concept *Assembly* with some range restrictions.
@@ -1031,9 +1031,9 @@ The following example shows a vocabulary that defines a concept *Assembly* with 
     `concept` Component
     `concept` Function
     `concept` Assembly < Component [
-        `restricts` `all` `scalar` `property` hasId `to` ten-chars          // the hasId value must be 10-char strings
-        `restricts` `some` `structured` `property` hasPin `to` InputPin     // there must be at least one input pin
-        `restricts` `all` `relation` performs `to` Power                  // power is the only performed function 
+        `restricts` `all` hasId `to` ten-chars          // the hasId value must be 10-char strings
+        `restricts` `some` hasPin `to` InputPin     // there must be at least one input pin
+        `restricts` `all` performs `to` Power                  // power is the only performed function 
     ]
     `concept` Power < Function
     `scalar` ten-chars < xsd:string `[`
@@ -1065,9 +1065,9 @@ The following example shows a vocabulary that defines a concept *Assembly* with 
 A cardinality restriction axiom restricts the cardinality of a property in the context of some classifier. The axiom specifies a minimum, a maximum, or an exact number of values, conforming to the original range, or to a specified restricted range, that a property can have in that context. The syntax of a cardinality restriction axioms starts with the keyword `restricts` followed by the kind of property (`scalar property`, `structured property`, or `relation`) then a reference to the property by IRI. Then, the keyword `to` is used followed by a cardinality kind (`min`, `max`, or `exactly`), a cardinality value (positive integer), and finally an optional reference to a restricted range (a scalar, a structure, or an entity) by IRI. The following shows the three supported syntaxes:
 
 <pre class="highlight highlight-html">
-	`restricts` `scalar` `property` [ScalarProperty|IRI] `to` [ `max` | `min` | `exactly` ] UnsignedInteger [Scalar|IRI]?
-	`restricts` `structured` `property` [StructuredProperty|IRI] `to` [ `max` | `min` | `exactly` ] UnsignedInteger [Structure|IRI]?
-	`restricts` `relation` [Relation|IRI] `to` [ `max` | `min` | `exactly` ] UnsignedInteger [Entity|IRI]?
+	`restricts` [ScalarProperty|IRI] `to` [ `max` | `min` | `exactly` ] UnsignedInteger [Scalar|IRI]?
+	`restricts` [StructuredProperty|IRI] `to` [ `max` | `min` | `exactly` ] UnsignedInteger [Structure|IRI]?
+	`restricts` [Relation|IRI] `to` [ `max` | `min` | `exactly` ] UnsignedInteger [Entity|IRI]?
 </pre>
 
 The following example shows a vocabulary that defines a concept *Assembly* with some cardinality restrictions.
@@ -1078,9 +1078,9 @@ The following example shows a vocabulary that defines a concept *Assembly* with 
     `concept` Component
     `concept` Function
     `concept` Assembly < Component [
-        `restricts` `scalar` `property` hasId `to` exactly 1              // hasId must have a single value only
-        `restricts` `structured` `property` hasPin `to` max 2 InputPin    // there must be at most two input pins
-        `restricts` `relation` performs `to` min 5                      // a minimum of 5 functions must be performed
+        `restricts` hasId `to` exactly 1              // hasId must have a single value only
+        `restricts` hasPin `to` max 2 InputPin    // there must be at most two input pins
+        `restricts` performs `to` min 5                      // a minimum of 5 functions must be performed
     ]
     `structure` Pin
     `structure` InputPin < Pin
@@ -1105,12 +1105,12 @@ The following example shows a vocabulary that defines a concept *Assembly* with 
 
 <u>Property Value Restriction Axioms</u>
 
-A value restriction axiom restricts the value of a property in the context of some classifier. In the case of a relation, the restricted value represents the relation's target instance. The syntax of a value restriction axioms starts with the keyword `restricts` followed by the kind of property (`scalar property`, `structured property`, or `relation`) then a reference to the property by IRI. Then, the keyword `to` is used followed by a value that is suitable for each case (a [literal](#Literal-Syntax) for a scalar property, a [structure instance](#StructureInstance-Syntax) for a structured property, or a reference to a [named instance](#NamedInstance-Syntax) by IRI for a relation). The following shows the three supported syntaxes:
+A value restriction axiom restricts the value of a property in the context of some classifier. In the case of a relation, the restricted value represents the relation's target instance. The syntax of a value restriction axioms starts with the keyword `restricts` followed by a reference to the property by IRI. Then, the keyword `to` is used followed by a value that is suitable for each case (a [literal](#Literal-Syntax) for a scalar property, a [structure instance](#StructureInstance-Syntax) for a structured property, or a reference to a [named instance](#NamedInstance-Syntax) by IRI for a relation). The following shows the three supported syntaxes:
 
 <pre class="highlight highlight-html">
-	`restricts` `scalar` `property` [ScalarProperty|IRI] `to` Literal
-	`restricts` `structured` `property` [StructuredProperty|IRI] `to` StructureInstance
-	`restricts` `relation` [Relation|IRI] `to` [NamedInstance|IRI]
+	`restricts` [ScalarProperty|IRI] `to` Literal
+	`restricts` [StructuredProperty|IRI] `to` StructureInstance
+	`restricts` [Relation|IRI] `to` [NamedInstance|IRI]
 </pre>
 
 The following example shows a vocabulary that defines a concept *Assembly* with some value restrictions.
@@ -1122,9 +1122,9 @@ The following example shows a vocabulary that defines a concept *Assembly* with 
     `concept` Component
     `concept` Function
     `concept` Assembly < Component [
-        `restricts` `scalar` `property` hasId `to` "ABC"                          // hasId must have a value of "ABC"
-        `restricts` `structured` `property` hasPin `to` Pin `[` hasNumber 1 `]`   // hasPin must have a Pin with hasNumber of 1
-        `restricts` `relation` performs `to` functions:F1                         // the performed function must be functions:F1
+        `restricts` hasId `to` "ABC"                          // hasId must have a value of "ABC"
+        `restricts` hasPin `to` Pin `[` hasNumber 1 `]`   // hasPin must have a Pin with hasNumber of 1
+        `restricts` performs `to` functions:F1                         // the performed function must be functions:F1
     ]
     `structure` Pin
     `relation` `entity` Performs `[`
@@ -1155,6 +1155,24 @@ The following example shows a vocabulary that defines a concept *Assembly* with 
     `ci` F1 `:` mission:Function
 }
 </pre>
+
+<u>Property Self Restriction Axioms</u>
+
+A self restriction axiom restricts the value of a relation in the context of some classifier to the context itself. In other words, it restricts the instance that is the target of a relation to be the same one as the source of the relation. The syntax of a self restriction axioms starts with the keyword `restricts` followed by a reference to the relation by IRI, followed by the keyword `to` then finally the keyword `self`. The following shows the supported syntaxes:
+
+<pre class="highlight highlight-html">
+	`restricts` [Relation|IRI] `to` `self`
+</pre>
+
+The following example shows a vocabulary that defines a concept *Person* with a self restrictions on relation `reliesOn`:
+
+<pre class="highlight highlight-html">
+`vocabulary` `<`http://com.xyz/methodology/people#`>` `as` people `{`
+    `concept` Person [
+        `restricts` reliesOn `to` `self`   // A person only relies on themselves
+    ]
+</pre>
+
 
 ### BuiltIn ### {#BuiltIn-LR}
 
@@ -1413,7 +1431,7 @@ The following example shows .
     `extends` `<`http://www.w3.org/2001/XMLSchema#`>` `as` xsd
     `uses` `<`http://com.xyz/methodology/functions#`>` `as` functions
     `concept` Component [
-        `restricts` `structured` `property` hasPin `to` Pin `[` hasNumber 1 `]`   // structure instance used as restricted value
+        `restricts` hasPin `to` Pin `[` hasNumber 1 `]`   // structure instance used as restricted value
     ]
     `structure` Pin
     `structured` `property` hasPin `[`

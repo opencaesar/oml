@@ -18,13 +18,7 @@ package io.opencaesar.oml.dsl.scoping;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.impl.FilteringScope;
-
-import io.opencaesar.oml.Entity;
-import io.opencaesar.oml.OmlPackage;
-import io.opencaesar.oml.SpecializableTerm;
 
 /**
  * This class contains custom scoping description.
@@ -38,25 +32,7 @@ public class OmlScopeProvider extends AbstractOmlScopeProvider {
 
 	@Override
 	public IScope getScope(final EObject context, final EReference reference) {
-		if (reference == OmlPackage.Literals.SPECIALIZATION_AXIOM__SUPER_TERM) {
-			return getScopeForSpecializationAxiom_SpecializedTerm(context, reference);
-		}
 		return super.getScope(context, reference);
 	}
 
-	private IScope getScopeForSpecializationAxiom_SpecializedTerm(final EObject context, final EReference reference) {
-		IScope superScope = super.getScope(context, reference);
-		if ((context instanceof Entity)) {
-			return new FilteringScope(superScope, a -> {
-				return ((!EcoreUtil.getURI(context).equals(a.getEObjectURI())) && 
-						((((Entity) context).eClass() == a.getEClass()) || (OmlPackage.Literals.ASPECT == a.getEClass())));
-			});
-		} else if ((context instanceof SpecializableTerm)) {
-			return new FilteringScope(superScope, a -> {
-				return ((!EcoreUtil.getURI(context).equals(a.getEObjectURI())) && 
-						(((SpecializableTerm) context).eClass() == a.getEClass()));
-			});
-		}
-		return superScope;
-	}
 }

@@ -290,49 +290,16 @@
 	PropertyValueRestrictionAxiom
 
 &lt;<a id="PropertyRangeRestrictionAxiom-Syntax">PropertyRangeRestrictionAxiom</a>&gt;:
-	ScalarPropertyRangeRestrictionAxiom |
-	StructuredPropertyRangeRestrictionAxiom |
-	RelationRangeRestrictionAxiom
-
-&lt;<span id="ScalarPropertyRangeRestrictionAxiom-Syntax">ScalarPropertyRangeRestrictionAxiom</span>&gt;:
-	`restricts` RangeRestrictionKind `scalar` `property` [ScalarProperty|IRI] `to` [Scalar|IRI]
-
-&lt;<span id="StructuredPropertyRangeRestrictionAxiom-Syntax">StructuredPropertyRangeRestrictionAxiom</span>&gt;:
-	`restricts` RangeRestrictionKind `structured` `property` [StructuredProperty|IRI] `to` [Structure|IRI]
-
-&lt;<span id="RelationRangeRestrictionAxiom-Syntax">RelationRangeRestrictionAxiom</span>&gt;:
-	`restricts` RangeRestrictionKind `relation` [Relation|IRI] `to` [Entity|IRI]
+	`restricts` RangeRestrictionKind [SemanticProperty|IRI] `to` [Type|IRI]
 
 &lt;<a id="PropertyCardinalityRestrictionAxiom-Syntax">PropertyCardinalityRestrictionAxiom</a>&gt;:
-	ScalarPropertyCardinalityRestrictionAxiom |
-	StructuredPropertyCardinalityRestrictionAxiom |
-	RelationCardinalityRestrictionAxiom
-
-&lt;<span id="ScalarPropertyCardinalityRestrictionAxiom-Syntax">ScalarPropertyCardinalityRestrictionAxiom</span>&gt;:
-	`restricts` `scalar` `property` [ScalarProperty|IRI] `to` CardinalityRestrictionKind UnsignedInteger ([Scalar|IRI])?
-
-&lt;<span id="StructuredPropertyCardinalityRestrictionAxiom-Syntax">StructuredPropertyCardinalityRestrictionAxiom</span>&gt;:
-	`restricts` `structured` `property` [StructuredProperty|IRI] `to` CardinalityRestrictionKind UnsignedInteger ([Structure|IRI])?
-
-&lt;<span id="RelationCardinalityRestrictionAxiom-Syntax">RelationCardinalityRestrictionAxiom</span>&gt;:
-	`restricts` `relation` [Relation|IRI] `to` CardinalityRestrictionKind UnsignedInteger ([Entity|IRI])?
+	`restricts` [SemanticProperty|IRI] `to` CardinalityRestrictionKind UnsignedInteger ([Type|IRI])?
 
 &lt;<a id="PropertyValueRestrictionAxiom-Syntax">PropertyValueRestrictionAxiom</a>&gt;:
-	ScalarPropertyValueRestrictionAxiom |
-	StructuredPropertyValueRestrictionAxiom |
-	RelationValueRestrictionAxiom
-	
-&lt;<span id="ScalarPropertyValueRestrictionAxiom-Syntax">ScalarPropertyValueRestrictionAxiom</span>&gt;:
-	`restricts` `scalar` `property` [ScalarProperty|IRI] `to` Literal
-
-&lt;<span id="StructuredPropertyValueRestrictionAxiom-Syntax">StructuredPropertyValueRestrictionAxiom</span>&gt;:
-	`restricts` `structured` `property` [StructuredProperty|IRI] `to` StructureInstance
-
-&lt;<span id="RelationValueRestrictionAxiom-Syntax">RelationValueRestrictionAxiom</span>&gt;:
-	`restricts` `relation` [Relation|IRI] `to` [NamedInstance|IRI]
+	`restricts` [SemanticProperty|IRI] `to` (Literal | StructureInstance | [NamedInstance|IRI])
 
 &lt;<a id="PropertySelfRestrictionAxiom-Syntax">PropertySelfRestrictionAxiom</a>&gt;:
-	`restricts` `relation` [Relation|IRI] `to` `self`
+	`restricts` [SemanticProperty|IRI] `to` `self`
 
 &lt;<a id="KeyAxiom-Syntax">KeyAxiom</a>&gt;:
 	`key` [Property|IRI] (`,` [Property|IRI])*
@@ -350,18 +317,7 @@
 	[RelationEntity|IRI]
 
 &lt;<a id="PropertyValueAssertion-Syntax">PropertyValueAssertion</a>&gt;:
-	ScalarPropertyValueAssertion |
-	StructuredPropertyValueAssertion |
-	LinkAssertion
-
-&lt;<span id="ScalarPropertyValueAssertion-Syntax">ScalarPropertyValueAssertion</span>&gt;:
-	[ScalarProperty|IRI] Literal
-
-&lt;<span id="StructuredPropertyValueAssertion-Syntax">StructuredPropertyValueAssertion</span>&gt;:
-	[StructuredProperty|IRI] StructureInstance
-
-&lt;<span id="LinkAssertion-Syntax">LinkAssertion</span>&gt;:
-	[Relation|IRI] [NamedInstance|IRI]
+	[SemanticProperty|IRI] (Literal | StructureInstance | [NamedInstance|IRI])
 
 &lt;<a id="Predicate-Syntax">Predicate</a>&gt;:
 	UnaryPredicate |

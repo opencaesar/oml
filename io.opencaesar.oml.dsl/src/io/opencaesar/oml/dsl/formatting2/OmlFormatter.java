@@ -30,8 +30,6 @@ import org.eclipse.xtext.formatting2.FormatterPreferenceKeys;
 import org.eclipse.xtext.formatting2.FormatterRequest;
 import org.eclipse.xtext.formatting2.IFormattableDocument;
 import org.eclipse.xtext.formatting2.IHiddenRegionFormatter;
-import org.eclipse.xtext.formatting2.ITextReplacerContext;
-import org.eclipse.xtext.formatting2.internal.AbstractTextReplacer;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
 import org.eclipse.xtext.preferences.MapBasedPreferenceValues;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -64,7 +62,6 @@ import io.opencaesar.oml.PropertySelfRestrictionAxiom;
 import io.opencaesar.oml.PropertyValueAssertion;
 import io.opencaesar.oml.PropertyValueRestrictionAxiom;
 import io.opencaesar.oml.QuotedLiteral;
-import io.opencaesar.oml.Relation;
 import io.opencaesar.oml.RelationEntity;
 import io.opencaesar.oml.RelationEntityPredicate;
 import io.opencaesar.oml.RelationInstance;
@@ -435,66 +432,27 @@ public class OmlFormatter extends AbstractJavaFormatter {
 	}
 
 	protected void _format(PropertyRangeRestrictionAxiom axiom, IFormattableDocument doc) {
-		if (axiom.getProperty() instanceof ScalarProperty) {
-			doc.append(keyword(axiom, oml.getScalarPropertyRangeRestrictionAxiomAccess().getRestrictsKeyword_0()), oneSpace());
-			doc.surround(keyword(axiom, oml.getScalarPropertyRangeRestrictionAxiomAccess().getScalarKeyword_2()), oneSpace());
-			doc.surround(keyword(axiom, oml.getScalarPropertyRangeRestrictionAxiomAccess().getPropertyKeyword_3()), oneSpace());
-			doc.surround(keyword(axiom, oml.getScalarPropertyRangeRestrictionAxiomAccess().getToKeyword_5()), oneSpace());
-		} else if (axiom.getProperty() instanceof StructuredProperty) {
-			doc.append(keyword(axiom, oml.getStructuredPropertyRangeRestrictionAxiomAccess().getRestrictsKeyword_0()), oneSpace());
-			doc.surround(keyword(axiom, oml.getStructuredPropertyRangeRestrictionAxiomAccess().getStructuredKeyword_2()), oneSpace());
-			doc.surround(keyword(axiom, oml.getStructuredPropertyRangeRestrictionAxiomAccess().getPropertyKeyword_3()), oneSpace());
-			doc.surround(keyword(axiom, oml.getStructuredPropertyRangeRestrictionAxiomAccess().getToKeyword_5()), oneSpace());
-		} else if (axiom.getProperty() instanceof Relation) {
-			doc.append(keyword(axiom, oml.getRelationRangeRestrictionAxiomAccess().getRestrictsKeyword_0()), oneSpace());
-			doc.surround(keyword(axiom, oml.getRelationRangeRestrictionAxiomAccess().getRelationKeyword_2()), oneSpace());
-			doc.surround(keyword(axiom, oml.getRelationRangeRestrictionAxiomAccess().getToKeyword_4()), oneSpace());
-		}
+		doc.append(keyword(axiom, oml.getPropertyRangeRestrictionAxiomAccess().getRestrictsKeyword_0()), oneSpace());
+		doc.surround(feature(axiom, OmlPackage.Literals.PROPERTY_RANGE_RESTRICTION_AXIOM__KIND), oneSpace());
+		doc.surround(keyword(axiom, oml.getPropertyRangeRestrictionAxiomAccess().getToKeyword_3()), oneSpace());
 	}
 
 	protected void _format(PropertyCardinalityRestrictionAxiom axiom, IFormattableDocument doc) {
-		if (axiom.getProperty() instanceof ScalarProperty) {
-			doc.append(keyword(axiom, oml.getScalarPropertyCardinalityRestrictionAxiomAccess().getRestrictsKeyword_0()), oneSpace());
-			doc.surround(keyword(axiom, oml.getScalarPropertyCardinalityRestrictionAxiomAccess().getScalarKeyword_1()), oneSpace());
-			doc.surround(keyword(axiom, oml.getScalarPropertyCardinalityRestrictionAxiomAccess().getPropertyKeyword_2()), oneSpace());
-			doc.surround(keyword(axiom, oml.getScalarPropertyCardinalityRestrictionAxiomAccess().getToKeyword_4()), oneSpace());
-		} else if (axiom.getProperty() instanceof StructuredProperty) {
-			doc.append(keyword(axiom, oml.getStructuredPropertyCardinalityRestrictionAxiomAccess().getRestrictsKeyword_0()), oneSpace());
-			doc.surround(keyword(axiom, oml.getStructuredPropertyCardinalityRestrictionAxiomAccess().getStructuredKeyword_1()), oneSpace());
-			doc.surround(keyword(axiom, oml.getStructuredPropertyCardinalityRestrictionAxiomAccess().getPropertyKeyword_2()), oneSpace());
-			doc.surround(keyword(axiom, oml.getStructuredPropertyCardinalityRestrictionAxiomAccess().getToKeyword_4()), oneSpace());
-		} else if (axiom.getProperty() instanceof Relation) {
-			doc.append(keyword(axiom, oml.getRelationCardinalityRestrictionAxiomAccess().getRestrictsKeyword_0()), oneSpace());
-			doc.surround(keyword(axiom, oml.getRelationCardinalityRestrictionAxiomAccess().getRelationKeyword_1()), oneSpace());
-			doc.surround(keyword(axiom, oml.getRelationCardinalityRestrictionAxiomAccess().getToKeyword_3()), oneSpace());
-		}
+		doc.append(keyword(axiom, oml.getPropertyCardinalityRestrictionAxiomAccess().getRestrictsKeyword_0()), oneSpace());
+		doc.surround(keyword(axiom, oml.getPropertyCardinalityRestrictionAxiomAccess().getToKeyword_2()), oneSpace());
 		doc.surround(feature(axiom, OmlPackage.Literals.PROPERTY_CARDINALITY_RESTRICTION_AXIOM__KIND), oneSpace());
 		ifNotNull(axiom.getRange(), i -> doc.prepend(feature(i, OmlPackage.Literals.PROPERTY_CARDINALITY_RESTRICTION_AXIOM__RANGE), oneSpace()));
 	}
 
 	protected void _format(PropertyValueRestrictionAxiom axiom, IFormattableDocument doc) {
-		if (axiom.getProperty() instanceof ScalarProperty) {
-			doc.append(keyword(axiom, oml.getScalarPropertyValueRestrictionAxiomAccess().getRestrictsKeyword_0()), oneSpace());
-			doc.surround(keyword(axiom, oml.getScalarPropertyValueRestrictionAxiomAccess().getScalarKeyword_1()), oneSpace());
-			doc.surround(keyword(axiom, oml.getScalarPropertyValueRestrictionAxiomAccess().getPropertyKeyword_2()), oneSpace());
-			doc.surround(keyword(axiom, oml.getScalarPropertyValueRestrictionAxiomAccess().getToKeyword_4()), oneSpace());
-		} else if (axiom.getProperty() instanceof StructuredProperty) {
-			doc.append(keyword(axiom, oml.getStructuredPropertyValueRestrictionAxiomAccess().getRestrictsKeyword_0()), oneSpace());
-			doc.surround(keyword(axiom, oml.getStructuredPropertyValueRestrictionAxiomAccess().getStructuredKeyword_1()), oneSpace());
-			doc.surround(keyword(axiom, oml.getStructuredPropertyValueRestrictionAxiomAccess().getPropertyKeyword_2()), oneSpace());
-			doc.surround(keyword(axiom, oml.getStructuredPropertyValueRestrictionAxiomAccess().getToKeyword_4()), oneSpace());
-		} else if (axiom.getProperty() instanceof Relation) {
-			doc.append(keyword(axiom, oml.getRelationValueRestrictionAxiomAccess().getRestrictsKeyword_0()), oneSpace());
-			doc.surround(keyword(axiom, oml.getRelationValueRestrictionAxiomAccess().getRelationKeyword_1()), oneSpace());
-			doc.surround(keyword(axiom, oml.getRelationValueRestrictionAxiomAccess().getToKeyword_3()), oneSpace());
-		}
+		doc.append(keyword(axiom, oml.getPropertyValueRestrictionAxiomAccess().getRestrictsKeyword_0()), oneSpace());
+		doc.surround(keyword(axiom, oml.getPropertyValueRestrictionAxiomAccess().getToKeyword_2()), oneSpace());
 	}
 
 	protected void _format(PropertySelfRestrictionAxiom axiom, IFormattableDocument doc) {
 		doc.append(keyword(axiom, oml.getPropertySelfRestrictionAxiomAccess().getRestrictsKeyword_0()), oneSpace());
-		doc.surround(keyword(axiom, oml.getPropertySelfRestrictionAxiomAccess().getRelationKeyword_1()), oneSpace());
-		doc.surround(keyword(axiom, oml.getPropertySelfRestrictionAxiomAccess().getToKeyword_3()), oneSpace());
-		doc.prepend(keyword(axiom, oml.getPropertySelfRestrictionAxiomAccess().getSelfKeyword_4()), oneSpace());
+		doc.surround(keyword(axiom, oml.getPropertySelfRestrictionAxiomAccess().getToKeyword_2()), oneSpace());
+		doc.prepend(keyword(axiom, oml.getPropertySelfRestrictionAxiomAccess().getSelfKeyword_3()), oneSpace());
 	}
 
 	protected void _format(KeyAxiom axiom, IFormattableDocument doc) {
