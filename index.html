@@ -1490,7 +1490,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version d29f71adb, updated Wed Jul 19 11:08:56 2023 -0700" name="generator">
   <link href="https://www.opencaesar.io/oml" rel="canonical">
-  <meta content="369d0a29a850fa688a6c9bc5e7db388a9297aff2" name="document-revision">
+  <meta content="fe33c71fc771446e323649e8b828cc5c99e84449" name="document-revision">
 <style>
 body {
   padding: 0;
@@ -2108,7 +2108,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://opencaesar.github.io/oml/"> <img alt="Ontological Modeling Language" height="60" src="images/oml.svg"> </a></p>
    <h1 class="p-name no-ref" id="title">Ontological Modeling Language 2.0.0</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Living Standard, <time class="dt-updated" datetime="2023-08-15">15 August 2023</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Living Standard, <time class="dt-updated" datetime="2023-08-16">16 August 2023</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -2767,7 +2767,7 @@ true        // xsd:boolean
     `extends` `&lt;`http://com.xyz/methodology/mission#`>` `as` mission
     `uses` `&lt;`http://com.xyz/methodology/organizations#`>` `as` organizations
     `concept` Spacecraft [
-        `restricts` `relation` mission:isResponsibilityOf `to` organization:NASA   // a cross-reference to instance NASA 
+        `restricts` mission:isResponsibilityOf `to` organization:NASA   // a cross-reference to instance NASA 
     ]
 `}`
 </pre>
@@ -3172,7 +3172,7 @@ http://purl.org/dc/elements/1.1/hasVersion
     <p>Examples of using Classifier Specialization Axioms can be seen in the following:</p>
 <pre class="highlight highlight-html">`aspect` Component `&lt;` IdentifiableElement
 `concept` MechanicalComponent `&lt;` Component `[`
-    restricts all relation contains to MechanicalComponent
+    `restricts` `all` contains `to` MechanicalComponent
 `]`
 </pre>
     <p>classifiers can only specialize classifiers of the same kind (e.g., concept speciailzes concept, structure specializes structure, etc.). The only exception to this is <a data-link-type="dfn" href="#aspect" id="ref-for-aspect①">Aspect</a> which can be specialized by any entity (<a data-link-type="dfn" href="#aspect" id="ref-for-aspect②">Aspect</a>, <a data-link-type="dfn" href="#concept" id="ref-for-concept②">Concept</a>, <a data-link-type="dfn" href="#relationentity" id="ref-for-relationentity">RelationEntity</a>).</p>
@@ -3221,11 +3221,11 @@ http://purl.org/dc/elements/1.1/hasVersion
 </pre>
     <p>Examples of using Classifier Equivalence Axioms can be seen in the following:</p>
 <pre class="highlight highlight-html">`concept` FunctionalComponent `=` Component `[`
-    `restricts` `some` `relation` hasRequirement `to` FunctionalRequirement
+    `restricts` `some` hasRequirement `to` FunctionalRequirement
 `]`
 `concept` HawaianPizza `=` CheesyPizza `&amp;` SaucyPizza `[`
-    `restricts` `some` `relation` hasTopping `to` Ham
-    `restricts` `some` `relation` hasTopping `to` Pineapple
+    `restricts` `some` hasTopping `to` Ham
+    `restricts` `some` hasTopping `to` Pineapple
 `]`
 </pre>
     <p>Saying that classifier <em>A</em> is equivalent to <em>B</em> is like saying that <em>A</em> specializes <em>B</em> and <em>B</em> specializes <em>A</em>. Therefore, the semantic of classifier specialization described for [=ClassifierSpecializationAxiom] hold in both directions. This means if an instance is asserted to be typed by <em>A</em>, it will be inferred to be typed by <em>B</em> as well and vice versa (bidirectional inferencing). However, if <em>B</em> is an intersection of multiple <a data-link-type="dfn" href="#classifier" id="ref-for-classifier⑥">Classifiers</a> and/or <a data-link-type="dfn" href="#propertyrestrictionaxiom" id="ref-for-propertyrestrictionaxiom④">PropertyRestrictionAxioms</a> then the inverse specialization is not inferred until an instance of <em>A</em> is an instance of each of the intersecting components. In the example above, if an instance is a <em>Component</em> and has some of its requirements as <em>FunctionalRequirement</em>, then the instance can be inferred to be a <em>FunctionalComponent</em>.</p>
@@ -3316,13 +3316,13 @@ http://purl.org/dc/elements/1.1/hasVersion
     <p>Saying that property <em>a</em> is equivalent to <em>b</em> is like saying that <em>a</em> specializes <em>b</em> and <em>b</em> specializes <em>a</em>. Therefore, the semantic of property specialization described for <a href="#PropertySpecializationAxiom-LR">PropertySpecializationAxiom</a> hold in both directions. This means if an instance is asserted to have a value of property <em>a</em>, it will be inferred to have the same value for property <em>b</em> well and vice versa (bidirectional inferencing).</p>
     <p class="note" role="note"><span class="marker">Note:</span> that equivalent properties must be of the same kind (e.g., scalar property is equivalent to scalar property).</p>
     <h5 class="heading settled" data-level="3.2.4.10" id="PropertyValueRestrictionAxiom-LR"><span class="secno">3.2.4.10. </span><span class="content">Property Value Restriction Axiom</span><a class="self-link" href="#PropertyValueRestrictionAxiom-LR"></a></h5>
-    <p>A <a href="#PropertyValueRestrictionAxiom-Syntax">property value restriction axiom</a> is an axiom defined on a classifier (<a href="#Aspect-LR">Aspect</a>, <a href="#Concept-LR">Concept</a>, <a href="#RelationEntity-LR">Relation Entity</a> and <a href="#Structure-LR">Structure</a>) that restricts a property in some way in the classifier’s context. This property can be (<a href="#ScalarProperty-LR">Scalar Property</a>, <a href="#StructuredProperty-LR">Structured Property</a>, <a href="#RelationEntity-LR">Forward Relation</a>, <a href="#RelationEntity-LR">Reverse Relation</a>, or <a href="#UnreifiedRelation-LR">Unreified Relation</a>) whose domain is the context type or one of its supertypes. The facets that can be restricted about those properties vary (like their range, cardinality, or value) resulting in different subtypes of restriction axioms.</p>
+    <p>A <a href="#PropertyValueRestrictionAxiom-Syntax">property value restriction axiom</a> is an axiom defined on a classifier (<a href="#Aspect-LR">Aspect</a>, <a href="#Concept-LR">Concept</a>, <a href="#RelationEntity-LR">Relation Entity</a> and <a href="#Structure-LR">Structure</a>) that restricts a semantic property in some way in the classifier’s context. This property can be (<a href="#ScalarProperty-LR">Scalar Property</a>, <a href="#StructuredProperty-LR">Structured Property</a>, <a href="#RelationEntity-LR">Forward Relation</a>, <a href="#RelationEntity-LR">Reverse Relation</a>, or <a href="#UnreifiedRelation-LR">Unreified Relation</a>) whose domain is the context type or one of its supertypes. The facets that can be restricted about those properties vary (like their range, cardinality, or value) resulting in different subtypes of restriction axioms.</p>
     <p class="note" role="note"><span class="marker">Note:</span> a structure can specify property value restriction axioms only on scalar and structures properties, but not relations (forward, reverse, or unreified) since a structure cannot be a source (domain) or target (range) of a relation.</p>
     <p><u>Property Range Restriction Axioms</u></p>
     <p>A range restriction axiom restricts the range of a property in the context of some classifier. The axiom specifies a restricted range that is a subtype of the property’s original range. The syntax of a range restriction axioms starts with the keyword `restricts` followed by a restriction kind, which can either be `all` (requiring all values to conform to the restricted range) or `some` (requiring at least one value to conform to the restricted range). This is followed by the kind of property (`scalar property`, `structured property`, or `relation`) then a reference to the property by IRI. Finally, the keyword `to` is used followed by a reference to the restricted range (a scalar, a structure, or an entity) by IRI. The following shows the three supported syntaxes:</p>
-<pre class="highlight highlight-html">`restricts` [ `all` | `some` ] `scalar` `property` [ScalarProperty|IRI] `to` [Scalar|IRI]
-`restricts` [ `all` | `some` ] `structured` `property` [StructuredProperty|IRI] `to` [Structure|IRI]
-`restricts` [ `all` | `some` ] `relation` [Relation|IRI] `to` [Entity|IRI]
+<pre class="highlight highlight-html">`restricts` [ `all` | `some` ] [ScalarProperty|IRI] `to` [Scalar|IRI]
+`restricts` [ `all` | `some` ] [StructuredProperty|IRI] `to` [Structure|IRI]
+`restricts` [ `all` | `some` ] [Relation|IRI] `to` [Entity|IRI]
 </pre>
     <p>The following example shows a vocabulary that defines a concept <em>Assembly</em> with some range restrictions.</p>
 <pre class="highlight highlight-html">`vocabulary` `&lt;`http://com.xyz/methodology/mission#`>` `as` mission `{`
@@ -3330,9 +3330,9 @@ http://purl.org/dc/elements/1.1/hasVersion
     `concept` Component
     `concept` Function
     `concept` Assembly &lt; Component [
-        `restricts` `all` `scalar` `property` hasId `to` ten-chars          // the hasId value must be 10-char strings
-        `restricts` `some` `structured` `property` hasPin `to` InputPin     // there must be at least one input pin
-        `restricts` `all` `relation` performs `to` Power                  // power is the only performed function 
+        `restricts` `all` hasId `to` ten-chars          // the hasId value must be 10-char strings
+        `restricts` `some` hasPin `to` InputPin     // there must be at least one input pin
+        `restricts` `all` performs `to` Power                  // power is the only performed function 
     ]
     `concept` Power &lt; Function
     `scalar` ten-chars &lt; xsd:string `[`
@@ -3360,9 +3360,9 @@ http://purl.org/dc/elements/1.1/hasVersion
 </pre>
     <p><u>Property Cardinality Restriction Axioms</u></p>
     <p>A cardinality restriction axiom restricts the cardinality of a property in the context of some classifier. The axiom specifies a minimum, a maximum, or an exact number of values, conforming to the original range, or to a specified restricted range, that a property can have in that context. The syntax of a cardinality restriction axioms starts with the keyword `restricts` followed by the kind of property (`scalar property`, `structured property`, or `relation`) then a reference to the property by IRI. Then, the keyword `to` is used followed by a cardinality kind (`min`, `max`, or `exactly`), a cardinality value (positive integer), and finally an optional reference to a restricted range (a scalar, a structure, or an entity) by IRI. The following shows the three supported syntaxes:</p>
-<pre class="highlight highlight-html">`restricts` `scalar` `property` [ScalarProperty|IRI] `to` [ `max` | `min` | `exactly` ] UnsignedInteger [Scalar|IRI]?
-`restricts` `structured` `property` [StructuredProperty|IRI] `to` [ `max` | `min` | `exactly` ] UnsignedInteger [Structure|IRI]?
-`restricts` `relation` [Relation|IRI] `to` [ `max` | `min` | `exactly` ] UnsignedInteger [Entity|IRI]?
+<pre class="highlight highlight-html">`restricts` [ScalarProperty|IRI] `to` [ `max` | `min` | `exactly` ] UnsignedInteger [Scalar|IRI]?
+`restricts` [StructuredProperty|IRI] `to` [ `max` | `min` | `exactly` ] UnsignedInteger [Structure|IRI]?
+`restricts` [Relation|IRI] `to` [ `max` | `min` | `exactly` ] UnsignedInteger [Entity|IRI]?
 </pre>
     <p>The following example shows a vocabulary that defines a concept <em>Assembly</em> with some cardinality restrictions.</p>
 <pre class="highlight highlight-html">`vocabulary` `&lt;`http://com.xyz/methodology/mission#`>` `as` mission `{`
@@ -3370,9 +3370,9 @@ http://purl.org/dc/elements/1.1/hasVersion
     `concept` Component
     `concept` Function
     `concept` Assembly &lt; Component [
-        `restricts` `scalar` `property` hasId `to` exactly 1              // hasId must have a single value only
-        `restricts` `structured` `property` hasPin `to` max 2 InputPin    // there must be at most two input pins
-        `restricts` `relation` performs `to` min 5                      // a minimum of 5 functions must be performed
+        `restricts` hasId `to` exactly 1              // hasId must have a single value only
+        `restricts` hasPin `to` max 2 InputPin    // there must be at most two input pins
+        `restricts` performs `to` min 5                      // a minimum of 5 functions must be performed
     ]
     `structure` Pin
     `structure` InputPin &lt; Pin
@@ -3395,10 +3395,10 @@ http://purl.org/dc/elements/1.1/hasVersion
 `}`
 </pre>
     <p><u>Property Value Restriction Axioms</u></p>
-    <p>A value restriction axiom restricts the value of a property in the context of some classifier. In the case of a relation, the restricted value represents the relation’s target instance. The syntax of a value restriction axioms starts with the keyword `restricts` followed by the kind of property (`scalar property`, `structured property`, or `relation`) then a reference to the property by IRI. Then, the keyword `to` is used followed by a value that is suitable for each case (a <a href="#Literal-Syntax">literal</a> for a scalar property, a <a href="#StructureInstance-Syntax">structure instance</a> for a structured property, or a reference to a <a href="#NamedInstance-Syntax">named instance</a> by IRI for a relation). The following shows the three supported syntaxes:</p>
-<pre class="highlight highlight-html">`restricts` `scalar` `property` [ScalarProperty|IRI] `to` Literal
-`restricts` `structured` `property` [StructuredProperty|IRI] `to` StructureInstance
-`restricts` `relation` [Relation|IRI] `to` [NamedInstance|IRI]
+    <p>A value restriction axiom restricts the value of a property in the context of some classifier. In the case of a relation, the restricted value represents the relation’s target instance. The syntax of a value restriction axioms starts with the keyword `restricts` followed by a reference to the property by IRI. Then, the keyword `to` is used followed by a value that is suitable for each case (a <a href="#Literal-Syntax">literal</a> for a scalar property, a <a href="#StructureInstance-Syntax">structure instance</a> for a structured property, or a reference to a <a href="#NamedInstance-Syntax">named instance</a> by IRI for a relation). The following shows the three supported syntaxes:</p>
+<pre class="highlight highlight-html">`restricts` [ScalarProperty|IRI] `to` Literal
+`restricts` [StructuredProperty|IRI] `to` StructureInstance
+`restricts` [Relation|IRI] `to` [NamedInstance|IRI]
 </pre>
     <p>The following example shows a vocabulary that defines a concept <em>Assembly</em> with some value restrictions.</p>
 <pre class="highlight highlight-html">`vocabulary` `&lt;`http://com.xyz/methodology/mission#`>` `as` mission `{`
@@ -3407,9 +3407,9 @@ http://purl.org/dc/elements/1.1/hasVersion
     `concept` Component
     `concept` Function
     `concept` Assembly &lt; Component [
-        `restricts` `scalar` `property` hasId `to` "ABC"                          // hasId must have a value of "ABC"
-        `restricts` `structured` `property` hasPin `to` Pin `[` hasNumber 1 `]`   // hasPin must have a Pin with hasNumber of 1
-        `restricts` `relation` performs `to` functions:F1                         // the performed function must be functions:F1
+        `restricts` hasId `to` "ABC"                          // hasId must have a value of "ABC"
+        `restricts` hasPin `to` Pin `[` hasNumber 1 `]`   // hasPin must have a Pin with hasNumber of 1
+        `restricts` performs `to` functions:F1                         // the performed function must be functions:F1
     ]
     `structure` Pin
     `relation` `entity` Performs `[`
@@ -3439,6 +3439,16 @@ http://purl.org/dc/elements/1.1/hasVersion
     `uses` `&lt;`http://com.xyz/methodology/mission#`>` `as` mission
     `ci` F1 `:` mission:Function
 }
+</pre>
+    <p><u>Property Self Restriction Axioms</u></p>
+    <p>A self restriction axiom restricts the value of a relation in the context of some classifier to the context itself. In other words, it restricts the instance that is the target of a relation to be the same one as the source of the relation. The syntax of a self restriction axioms starts with the keyword `restricts` followed by a reference to the relation by IRI, followed by the keyword `to` then finally the keyword `self`. The following shows the supported syntaxes:</p>
+<pre class="highlight highlight-html">`restricts` [Relation|IRI] `to` `self`
+</pre>
+    <p>The following example shows a vocabulary that defines a concept <em>Person</em> with a self restrictions on relation `reliesOn`:</p>
+<pre class="highlight highlight-html">`vocabulary` `&lt;`http://com.xyz/methodology/people#`>` `as` people `{`
+    `concept` Person [
+        `restricts` reliesOn `to` `self`   // A person only relies on themselves
+    ]
 </pre>
     <h4 class="heading settled" data-level="3.2.5" id="BuiltIn-LR"><span class="secno">3.2.5. </span><span class="content">BuiltIn</span><a class="self-link" href="#BuiltIn-LR"></a></h4>
     <p>A <a href="#BuiltIn-Syntax">builtin</a> is a standard function that can be invoked from a <a data-link-type="dfn" href="#rule" id="ref-for-rule">Rule</a>'s <a data-link-type="dfn" href="#builtinpredicate" id="ref-for-builtinpredicate">BuiltInPredicate</a>. The syntax of a builtin  starts with the keyword `builtin` followed by a name ID. An existing (local or imported) builtin can be referenced by the keywords `ref` `builtin` followed by its `IRI` as follows:</p>
@@ -3624,7 +3634,7 @@ to argument2.</p>
     `extends` `&lt;`http://www.w3.org/2001/XMLSchema#`>` `as` xsd
     `uses` `&lt;`http://com.xyz/methodology/functions#`>` `as` functions
     `concept` Component [
-        `restricts` `structured` `property` hasPin `to` Pin `[` hasNumber 1 `]`   // structure instance used as restricted value
+        `restricts` hasPin `to` Pin `[` hasNumber 1 `]`   // structure instance used as restricted value
     ]
     `structure` Pin
     `structured` `property` hasPin `[`
@@ -4043,49 +4053,16 @@ to argument2.</p>
   PropertyValueRestrictionAxiom
 
 &lt;<a data-link-type="dfn" href="#propertyrangerestrictionaxiom" id="PropertyRangeRestrictionAxiom-Syntax">PropertyRangeRestrictionAxiom</a>>:
-  ScalarPropertyRangeRestrictionAxiom |
-  StructuredPropertyRangeRestrictionAxiom |
-  RelationRangeRestrictionAxiom
-
-&lt;<span id="ScalarPropertyRangeRestrictionAxiom-Syntax">ScalarPropertyRangeRestrictionAxiom</span>>:
-  `restricts` RangeRestrictionKind `scalar` `property` [ScalarProperty|IRI] `to` [Scalar|IRI]
-
-&lt;<span id="StructuredPropertyRangeRestrictionAxiom-Syntax">StructuredPropertyRangeRestrictionAxiom</span>>:
-  `restricts` RangeRestrictionKind `structured` `property` [StructuredProperty|IRI] `to` [Structure|IRI]
-
-&lt;<span id="RelationRangeRestrictionAxiom-Syntax">RelationRangeRestrictionAxiom</span>>:
-  `restricts` RangeRestrictionKind `relation` [Relation|IRI] `to` [Entity|IRI]
+  `restricts` RangeRestrictionKind [SemanticProperty|IRI] `to` [Type|IRI]
 
 &lt;<a data-link-type="dfn" href="#propertycardinalityrestrictionaxiom" id="PropertyCardinalityRestrictionAxiom-Syntax">PropertyCardinalityRestrictionAxiom</a>>:
-  ScalarPropertyCardinalityRestrictionAxiom |
-  StructuredPropertyCardinalityRestrictionAxiom |
-  RelationCardinalityRestrictionAxiom
-
-&lt;<span id="ScalarPropertyCardinalityRestrictionAxiom-Syntax">ScalarPropertyCardinalityRestrictionAxiom</span>>:
-  `restricts` `scalar` `property` [ScalarProperty|IRI] `to` CardinalityRestrictionKind UnsignedInteger ([Scalar|IRI])?
-
-&lt;<span id="StructuredPropertyCardinalityRestrictionAxiom-Syntax">StructuredPropertyCardinalityRestrictionAxiom</span>>:
-  `restricts` `structured` `property` [StructuredProperty|IRI] `to` CardinalityRestrictionKind UnsignedInteger ([Structure|IRI])?
-
-&lt;<span id="RelationCardinalityRestrictionAxiom-Syntax">RelationCardinalityRestrictionAxiom</span>>:
-  `restricts` `relation` [Relation|IRI] `to` CardinalityRestrictionKind UnsignedInteger ([Entity|IRI])?
+  `restricts` [SemanticProperty|IRI] `to` CardinalityRestrictionKind UnsignedInteger ([Type|IRI])?
 
 &lt;<a data-link-type="dfn" href="#propertyvaluerestrictionaxiom" id="PropertyValueRestrictionAxiom-Syntax">PropertyValueRestrictionAxiom</a>>:
-  ScalarPropertyValueRestrictionAxiom |
-  StructuredPropertyValueRestrictionAxiom |
-  RelationValueRestrictionAxiom
-	
-&lt;<span id="ScalarPropertyValueRestrictionAxiom-Syntax">ScalarPropertyValueRestrictionAxiom</span>>:
-  `restricts` `scalar` `property` [ScalarProperty|IRI] `to` Literal
-
-&lt;<span id="StructuredPropertyValueRestrictionAxiom-Syntax">StructuredPropertyValueRestrictionAxiom</span>>:
-  `restricts` `structured` `property` [StructuredProperty|IRI] `to` StructureInstance
-
-&lt;<span id="RelationValueRestrictionAxiom-Syntax">RelationValueRestrictionAxiom</span>>:
-  `restricts` `relation` [Relation|IRI] `to` [NamedInstance|IRI]
+  `restricts` [SemanticProperty|IRI] `to` (Literal | StructureInstance | [NamedInstance|IRI])
 
 &lt;<a data-link-type="dfn" href="#propertyselfrestrictionaxiom" id="PropertySelfRestrictionAxiom-Syntax">PropertySelfRestrictionAxiom</a>>:
-  `restricts` `relation` [Relation|IRI] `to` `self`
+  `restricts` [SemanticProperty|IRI] `to` `self`
 
 &lt;<a data-link-type="dfn" href="#keyaxiom" id="KeyAxiom-Syntax">KeyAxiom</a>>:
   `key` [Property|IRI] (`,` [Property|IRI])*
@@ -4103,18 +4080,7 @@ to argument2.</p>
   [RelationEntity|IRI]
 
 &lt;<a data-link-type="dfn" href="#propertyvalueassertion" id="PropertyValueAssertion-Syntax">PropertyValueAssertion</a>>:
-  ScalarPropertyValueAssertion |
-  StructuredPropertyValueAssertion |
-  LinkAssertion
-
-&lt;<span id="ScalarPropertyValueAssertion-Syntax">ScalarPropertyValueAssertion</span>>:
-  [ScalarProperty|IRI] Literal
-
-&lt;<span id="StructuredPropertyValueAssertion-Syntax">StructuredPropertyValueAssertion</span>>:
-  [StructuredProperty|IRI] StructureInstance
-
-&lt;<span id="LinkAssertion-Syntax">LinkAssertion</span>>:
-  [Relation|IRI] [NamedInstance|IRI]
+  [SemanticProperty|IRI] (Literal | StructureInstance | [NamedInstance|IRI])
 
 &lt;<a data-link-type="dfn" href="#predicate" id="Predicate-Syntax">Predicate</a>>:
   UnaryPredicate |
