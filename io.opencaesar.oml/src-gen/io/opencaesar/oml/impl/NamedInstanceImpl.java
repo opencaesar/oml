@@ -18,11 +18,15 @@
  */
 package io.opencaesar.oml.impl;
 
+import io.opencaesar.oml.Classifier;
+import io.opencaesar.oml.Entity;
 import io.opencaesar.oml.Instance;
 import io.opencaesar.oml.NamedInstance;
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.PropertyValueAssertion;
 import io.opencaesar.oml.TypeAssertion;
+
+import java.lang.reflect.InvocationTargetException;
 
 import java.util.Collection;
 
@@ -35,6 +39,10 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+
+import org.eclipse.emf.ecore.xcore.lib.XcoreEListExtensions;
+
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
 
 /**
  * <!-- begin-user-doc -->
@@ -114,6 +122,36 @@ public abstract class NamedInstanceImpl extends DescriptionStatementImpl impleme
 			ownedTypes = new EObjectContainmentWithInverseEList<TypeAssertion>(TypeAssertion.class, this, OmlPackage.NAMED_INSTANCE__OWNED_TYPES, OmlPackage.TYPE_ASSERTION__OWNING_INSTANCE);
 		}
 		return ownedTypes;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EList<Entity> getEntityTypes() {
+		final Function1<TypeAssertion, Entity> _function = new Function1<TypeAssertion, Entity>() {
+			public Entity apply(final TypeAssertion it) {
+				return it.getType();
+			}
+		};
+		return XcoreEListExtensions.<TypeAssertion, Entity>map(this.getOwnedTypes(), _function);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EList<Classifier> getTypes() {
+		final Function1<TypeAssertion, Classifier> _function = new Function1<TypeAssertion, Classifier>() {
+			public Classifier apply(final TypeAssertion it) {
+				return it.getType();
+			}
+		};
+		return XcoreEListExtensions.<TypeAssertion, Classifier>map(this.getOwnedTypes(), _function);
 	}
 
 	/**
@@ -250,6 +288,38 @@ public abstract class NamedInstanceImpl extends DescriptionStatementImpl impleme
 			}
 		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedOperationID(int baseOperationID, Class<?> baseClass) {
+		if (baseClass == Instance.class) {
+			switch (baseOperationID) {
+				case OmlPackage.INSTANCE___GET_TYPES: return OmlPackage.NAMED_INSTANCE___GET_TYPES;
+				default: return -1;
+			}
+		}
+		return super.eDerivedOperationID(baseOperationID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case OmlPackage.NAMED_INSTANCE___GET_ENTITY_TYPES:
+				return getEntityTypes();
+			case OmlPackage.NAMED_INSTANCE___GET_TYPES:
+				return getTypes();
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 } //NamedInstanceImpl

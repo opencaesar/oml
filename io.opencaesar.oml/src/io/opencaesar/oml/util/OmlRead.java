@@ -730,6 +730,17 @@ public final class OmlRead {
     }
 
     /**
+     * Determines whether the given element is annotated with the given annotation property
+     * 
+     * @param element The given element
+     * @param property the given annotation property
+     * @return true if the element is annotated with the given annotation property; otherwise false
+     */
+    public static boolean isAnnotatedBy(IdentifiedElement element, AnnotationProperty property) {
+        return !getAnnotations(element, property).findAny().isEmpty();
+    }
+
+    /**
      * Gets the first referenced value of a given annotation property in the given element
      * 
      * @param element The given element

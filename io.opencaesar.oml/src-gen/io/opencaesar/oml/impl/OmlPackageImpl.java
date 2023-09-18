@@ -1027,6 +1027,16 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
+	public EOperation getInstance__GetTypes() {
+		return instanceEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getAxiom() {
 		return axiomEClass;
 	}
@@ -2557,6 +2567,26 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
+	public EOperation getNamedInstance__GetEntityTypes() {
+		return namedInstanceEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getNamedInstance__GetTypes() {
+		return namedInstanceEClass.getEOperations().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getConceptInstance() {
 		return conceptInstanceEClass;
 	}
@@ -2649,6 +2679,16 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	@Override
 	public EReference getStructureInstance_OwningAssertion() {
 		return (EReference)structureInstanceEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getStructureInstance__GetTypes() {
+		return structureInstanceEClass.getEOperations().get(0);
 	}
 
 	/**
@@ -3926,6 +3966,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 
 		instanceEClass = createEClass(INSTANCE);
 		createEReference(instanceEClass, INSTANCE__OWNED_PROPERTY_VALUES);
+		createEOperation(instanceEClass, INSTANCE___GET_TYPES);
 
 		axiomEClass = createEClass(AXIOM);
 		createEOperation(axiomEClass, AXIOM___GET_CHARACTERIZED_TERM);
@@ -4121,6 +4162,8 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 
 		namedInstanceEClass = createEClass(NAMED_INSTANCE);
 		createEReference(namedInstanceEClass, NAMED_INSTANCE__OWNED_TYPES);
+		createEOperation(namedInstanceEClass, NAMED_INSTANCE___GET_ENTITY_TYPES);
+		createEOperation(namedInstanceEClass, NAMED_INSTANCE___GET_TYPES);
 
 		conceptInstanceEClass = createEClass(CONCEPT_INSTANCE);
 		createEReference(conceptInstanceEClass, CONCEPT_INSTANCE__REF);
@@ -4134,6 +4177,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		createEReference(structureInstanceEClass, STRUCTURE_INSTANCE__TYPE);
 		createEReference(structureInstanceEClass, STRUCTURE_INSTANCE__OWNING_AXIOM);
 		createEReference(structureInstanceEClass, STRUCTURE_INSTANCE__OWNING_ASSERTION);
+		createEOperation(structureInstanceEClass, STRUCTURE_INSTANCE___GET_TYPES);
 
 		keyAxiomEClass = createEClass(KEY_AXIOM);
 		createEReference(keyAxiomEClass, KEY_AXIOM__PROPERTIES);
@@ -4450,6 +4494,8 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		initEClass(instanceEClass, Instance.class, "Instance", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getInstance_OwnedPropertyValues(), this.getPropertyValueAssertion(), this.getPropertyValueAssertion_OwningInstance(), "ownedPropertyValues", null, 0, -1, Instance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEOperation(getInstance__GetTypes(), this.getClassifier(), "getTypes", 0, -1, !IS_UNIQUE, IS_ORDERED);
+
 		initEClass(axiomEClass, Axiom.class, "Axiom", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEOperation(getAxiom__GetCharacterizedTerm(), this.getTerm(), "getCharacterizedTerm", 0, 1, !IS_UNIQUE, IS_ORDERED);
@@ -4702,6 +4748,10 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		initEClass(namedInstanceEClass, NamedInstance.class, "NamedInstance", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getNamedInstance_OwnedTypes(), this.getTypeAssertion(), this.getTypeAssertion_OwningInstance(), "ownedTypes", null, 0, -1, NamedInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEOperation(getNamedInstance__GetEntityTypes(), this.getEntity(), "getEntityTypes", 0, -1, !IS_UNIQUE, IS_ORDERED);
+
+		initEOperation(getNamedInstance__GetTypes(), this.getClassifier(), "getTypes", 0, -1, !IS_UNIQUE, IS_ORDERED);
+
 		initEClass(conceptInstanceEClass, ConceptInstance.class, "ConceptInstance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getConceptInstance_Ref(), this.getConceptInstance(), null, "ref", null, 0, 1, ConceptInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -4714,6 +4764,8 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		initEReference(getStructureInstance_Type(), this.getStructure(), null, "type", null, 1, 1, StructureInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getStructureInstance_OwningAxiom(), this.getPropertyValueRestrictionAxiom(), this.getPropertyValueRestrictionAxiom_ContainedValue(), "owningAxiom", null, 0, 1, StructureInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getStructureInstance_OwningAssertion(), this.getPropertyValueAssertion(), this.getPropertyValueAssertion_ContainedValue(), "owningAssertion", null, 0, 1, StructureInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEOperation(getStructureInstance__GetTypes(), this.getClassifier(), "getTypes", 0, -1, !IS_UNIQUE, IS_ORDERED);
 
 		initEClass(keyAxiomEClass, KeyAxiom.class, "KeyAxiom", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getKeyAxiom_Properties(), this.getProperty(), null, "properties", null, 1, -1, KeyAxiom.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

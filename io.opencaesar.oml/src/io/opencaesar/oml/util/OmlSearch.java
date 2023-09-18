@@ -25,6 +25,7 @@ import java.time.format.DateTimeParseException;
 import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -181,6 +182,17 @@ public final class OmlSearch extends OmlIndex {
             .map(a -> a.getReferencedValue())
             .findFirst()
             .orElse(null);
+    }
+
+    /**
+     * Finds whether the given element is annotated with the given annotation property
+     * 
+     * @param element The given element
+     * @param property the given annotation property
+     * @return true if the element is annotated with the given annotation property; otherwise false
+     */
+    public static boolean findIsAnnotatedBy(IdentifiedElement element, AnnotationProperty property) {
+        return !findAnnotations(element, property).findAny().isEmpty();
     }
 
     //-------------------------------------------------
@@ -851,6 +863,38 @@ public final class OmlSearch extends OmlIndex {
                 .collect(Collectors.toCollection(LinkedHashSet::new)));
         return sources;
     }
+    
+    /**
+     * Finds whether the given scalar property has as one of its ranges an enumerated scalar
+     * 
+     * @param property The given scalar property
+     * @return true is the scalar is enumerated; false otherwise
+     */
+    public static boolean findIsEnumeratedProperty(ScalarProperty property) {
+    	return property.getRanges().stream().anyMatch(r -> findIsEnumeratedScalar(r));
+    }
+
+    /**
+     * Finds whether the given scalar has enumeration literals
+     * 
+     * @param scalar The given scalar
+     * @return true is the scalar is enumerated; false otherwise
+     */
+    public static boolean findIsEnumeratedScalar(Scalar scalar) {
+    	return findLiteralEnumerationAxioms(scalar).isEmpty();
+    }
+    
+    /**
+     * Finds the list of enumeration liters of the given scalar
+     * 
+     * @param scalar The given scalar
+     * @return a list of enumeration literals
+     */
+    public static List<Literal> findEnumerationLiterals(Scalar scalar) {
+    	return findLiteralEnumerationAxioms(scalar).stream()
+    			.flatMap(a -> a.getLiterals().stream())
+    			.collect(Collectors.toList());
+    }	
 
     //-------------------------------------------------
     // DESCRIPTIONS
@@ -972,14 +1016,17 @@ public final class OmlSearch extends OmlIndex {
     public static Set<NamedInstance> findInstancesRelatedAsTargetTo(NamedInstance source, Relation relation) {
     	final Set<NamedInstance> targets = new LinkedHashSet<>();
         // look in property value assertions
+    	var subRelations = findAllSubTerms(relation, true);
         targets.addAll(findPropertyValueAssertionsWithSubject(source).stream()
-                .filter(a -> a.getProperty() == relation)
+                .filter(a -> a.getProperty() instanceof Relation)
+                .filter(a -> subRelations.contains(a.getProperty()))
                 .map(a -> a.getReferencedValue())
                 .collect(Collectors.toCollection(LinkedHashSet::new)));
         // look in relation instances
         if (relation instanceof ForwardRelation) {
+        	var subEntities = findAllSubTerms(((ForwardRelation)relation).getRelationEntity(), true);
 	        targets.addAll(findRelationInstancesWithSource(source).stream()
-	                .filter(i -> findIsTypeOf(i, ((ForwardRelation)relation).getRelationEntity()))
+	                .filter(i -> findAllTypes(i).retainAll(subEntities))
 	                .flatMap(a -> a.getTargets().stream())
 	                .collect(Collectors.toCollection(LinkedHashSet::new)));
         }
@@ -1015,14 +1062,17 @@ public final class OmlSearch extends OmlIndex {
     public static Set<NamedInstance> findInstancesRelatedAsSourceTo(NamedInstance target, Relation relation) {
         final Set<NamedInstance> sources = new LinkedHashSet<>();
         // look in property value assertions
+    	var subRelations = findAllSubTerms(relation, true);
         sources.addAll(findPropertyValueAssertionsWithObject(target).stream()
-                .filter(a -> a.getProperty() == relation)
+                .filter(a -> a.getProperty() instanceof Relation)
+                .filter(a -> subRelations.contains(a.getProperty()))
                 .map(a -> (NamedInstance) a.getSubject())
                 .collect(Collectors.toCollection(LinkedHashSet::new)));
         // look in relation instances
         if (relation instanceof ForwardRelation) {
+        	var subEntities = findAllSubTerms(((ForwardRelation)relation).getRelationEntity(), true);
 	        sources.addAll(findRelationInstancesWithTarget(target).stream()
-	                .filter(i -> findIsTypeOf(i, ((ForwardRelation)relation).getRelationEntity()))
+	                .filter(i -> findAllTypes(i).retainAll(subEntities))
 	                .flatMap(i -> i.getSources().stream())
 	                .collect(Collectors.toCollection(LinkedHashSet::new)));
         }
