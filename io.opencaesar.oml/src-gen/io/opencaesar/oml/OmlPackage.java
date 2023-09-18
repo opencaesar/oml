@@ -439,13 +439,22 @@ public interface OmlPackage extends EPackage {
 	int INSTANCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = ELEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
+	 * The operation id for the '<em>Get Types</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INSTANCE___GET_TYPES = ELEMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * The number of operations of the '<em>Instance</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INSTANCE_OPERATION_COUNT = ELEMENT_OPERATION_COUNT + 0;
+	int INSTANCE_OPERATION_COUNT = ELEMENT_OPERATION_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.impl.AxiomImpl <em>Axiom</em>}' class.
@@ -6295,13 +6304,31 @@ public interface OmlPackage extends EPackage {
 	int NAMED_INSTANCE___GET_ABBREVIATED_IRI = DESCRIPTION_STATEMENT___GET_ABBREVIATED_IRI;
 
 	/**
+	 * The operation id for the '<em>Get Entity Types</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAMED_INSTANCE___GET_ENTITY_TYPES = DESCRIPTION_STATEMENT_OPERATION_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Get Types</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAMED_INSTANCE___GET_TYPES = DESCRIPTION_STATEMENT_OPERATION_COUNT + 2;
+
+	/**
 	 * The number of operations of the '<em>Named Instance</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NAMED_INSTANCE_OPERATION_COUNT = DESCRIPTION_STATEMENT_OPERATION_COUNT + 0;
+	int NAMED_INSTANCE_OPERATION_COUNT = DESCRIPTION_STATEMENT_OPERATION_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.impl.ConceptInstanceImpl <em>Concept Instance</em>}' class.
@@ -6438,6 +6465,24 @@ public interface OmlPackage extends EPackage {
 	 * @ordered
 	 */
 	int CONCEPT_INSTANCE___GET_ABBREVIATED_IRI = NAMED_INSTANCE___GET_ABBREVIATED_IRI;
+
+	/**
+	 * The operation id for the '<em>Get Entity Types</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONCEPT_INSTANCE___GET_ENTITY_TYPES = NAMED_INSTANCE___GET_ENTITY_TYPES;
+
+	/**
+	 * The operation id for the '<em>Get Types</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONCEPT_INSTANCE___GET_TYPES = NAMED_INSTANCE___GET_TYPES;
 
 	/**
 	 * The number of operations of the '<em>Concept Instance</em>' class.
@@ -6603,6 +6648,24 @@ public interface OmlPackage extends EPackage {
 	int RELATION_INSTANCE___GET_ABBREVIATED_IRI = NAMED_INSTANCE___GET_ABBREVIATED_IRI;
 
 	/**
+	 * The operation id for the '<em>Get Entity Types</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_INSTANCE___GET_ENTITY_TYPES = NAMED_INSTANCE___GET_ENTITY_TYPES;
+
+	/**
+	 * The operation id for the '<em>Get Types</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_INSTANCE___GET_TYPES = NAMED_INSTANCE___GET_TYPES;
+
+	/**
 	 * The number of operations of the '<em>Relation Instance</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6685,13 +6748,22 @@ public interface OmlPackage extends EPackage {
 	int STRUCTURE_INSTANCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = INSTANCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
+	 * The operation id for the '<em>Get Types</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURE_INSTANCE___GET_TYPES = INSTANCE_OPERATION_COUNT + 0;
+
+	/**
 	 * The number of operations of the '<em>Structure Instance</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STRUCTURE_INSTANCE_OPERATION_COUNT = INSTANCE_OPERATION_COUNT + 0;
+	int STRUCTURE_INSTANCE_OPERATION_COUNT = INSTANCE_OPERATION_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.impl.KeyAxiomImpl <em>Key Axiom</em>}' class.
@@ -9570,6 +9642,16 @@ public interface OmlPackage extends EPackage {
 	EReference getInstance_OwnedPropertyValues();
 
 	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.Instance#getTypes() <em>Get Types</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Types</em>' operation.
+	 * @see io.opencaesar.oml.Instance#getTypes()
+	 * @generated
+	 */
+	EOperation getInstance__GetTypes();
+
+	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.Axiom <em>Axiom</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -11154,6 +11236,26 @@ public interface OmlPackage extends EPackage {
 	EReference getNamedInstance_OwnedTypes();
 
 	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.NamedInstance#getEntityTypes() <em>Get Entity Types</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Entity Types</em>' operation.
+	 * @see io.opencaesar.oml.NamedInstance#getEntityTypes()
+	 * @generated
+	 */
+	EOperation getNamedInstance__GetEntityTypes();
+
+	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.NamedInstance#getTypes() <em>Get Types</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Types</em>' operation.
+	 * @see io.opencaesar.oml.NamedInstance#getTypes()
+	 * @generated
+	 */
+	EOperation getNamedInstance__GetTypes();
+
+	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.ConceptInstance <em>Concept Instance</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -11259,6 +11361,16 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getStructureInstance_OwningAssertion();
+
+	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.StructureInstance#getTypes() <em>Get Types</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Types</em>' operation.
+	 * @see io.opencaesar.oml.StructureInstance#getTypes()
+	 * @generated
+	 */
+	EOperation getStructureInstance__GetTypes();
 
 	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.KeyAxiom <em>Key Axiom</em>}'.
@@ -12756,6 +12868,14 @@ public interface OmlPackage extends EPackage {
 		EReference INSTANCE__OWNED_PROPERTY_VALUES = eINSTANCE.getInstance_OwnedPropertyValues();
 
 		/**
+		 * The meta object literal for the '<em><b>Get Types</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation INSTANCE___GET_TYPES = eINSTANCE.getInstance__GetTypes();
+
+		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.AxiomImpl <em>Axiom</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -14064,6 +14184,22 @@ public interface OmlPackage extends EPackage {
 		EReference NAMED_INSTANCE__OWNED_TYPES = eINSTANCE.getNamedInstance_OwnedTypes();
 
 		/**
+		 * The meta object literal for the '<em><b>Get Entity Types</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation NAMED_INSTANCE___GET_ENTITY_TYPES = eINSTANCE.getNamedInstance__GetEntityTypes();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Types</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation NAMED_INSTANCE___GET_TYPES = eINSTANCE.getNamedInstance__GetTypes();
+
+		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.ConceptInstanceImpl <em>Concept Instance</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -14148,6 +14284,14 @@ public interface OmlPackage extends EPackage {
 		 * @generated
 		 */
 		EReference STRUCTURE_INSTANCE__OWNING_ASSERTION = eINSTANCE.getStructureInstance_OwningAssertion();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Types</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation STRUCTURE_INSTANCE___GET_TYPES = eINSTANCE.getStructureInstance__GetTypes();
 
 		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.KeyAxiomImpl <em>Key Axiom</em>}' class.

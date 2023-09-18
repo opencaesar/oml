@@ -60,4 +60,15 @@ public interface Instance extends Element {
 	 */
 	EList<PropertyValueAssertion> getOwnedPropertyValues();
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Gets the instance's types
+	 * <!-- end-model-doc -->
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
+	EList<Classifier> getTypes();
+
 } // Instance

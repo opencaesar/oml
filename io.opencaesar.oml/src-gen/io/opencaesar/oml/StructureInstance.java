@@ -18,6 +18,7 @@
  */
 package io.opencaesar.oml;
 
+import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -121,5 +122,13 @@ public interface StructureInstance extends Instance {
 	 * @generated
 	 */
 	void setOwningAssertion(PropertyValueAssertion value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
+	EList<Classifier> getTypes();
 
 } // StructureInstance

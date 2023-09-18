@@ -88,6 +88,7 @@ import io.opencaesar.oml.SpecializationAxiom;
 import io.opencaesar.oml.Structure;
 import io.opencaesar.oml.StructureInstance;
 import io.opencaesar.oml.StructuredProperty;
+import io.opencaesar.oml.Term;
 import io.opencaesar.oml.Type;
 import io.opencaesar.oml.TypeAssertion;
 import io.opencaesar.oml.TypePredicate;
@@ -111,13 +112,14 @@ public class OmlWrite {
      * @param eRef the given eReference 
      * @param object the given object
      */
-    @SuppressWarnings("unchecked")
-    protected static void setCrossReference(Ontology ontology, Element subject, EReference eRef, IdentifiedElement object) {
-        final Class<? extends IdentifiedElement> objectClass = (Class<? extends IdentifiedElement>) eRef.getEType().getInstanceClass();
+    protected static void setCrossReference(Ontology ontology, Element subject, EReference eRef, Element object) {
+        final Class<?> subjectClass = eRef.getEContainingClass().getInstanceClass();
+        final Class<?> objectClass = eRef.getEType().getInstanceClass();
+        assert subjectClass.isInstance(subject) : subject+" is not an instance of "+subjectClass.getName();
+        assert object == null || objectClass.isInstance(object) : object+" is not an instance of "+objectClass.getName();
         assert !eRef.isContainment() : eRef.getName()+" is a containment reference";
-        assert !eRef.isMany() : eRef.getName()+" is a List reference";
-        assert IdentifiedElement.class.isAssignableFrom(objectClass) : eRef.getName()+" is not typed by an identified element";
-        subject.eSet(eRef, object);
+        assert !eRef.isMany() : eRef.getName()+" is a multi valued reference";
+    	subject.eSet(eRef, object);
     }
     
     /**
@@ -128,12 +130,15 @@ public class OmlWrite {
      * @param eRef the given eReference 
      * @param objects the given list of objects
      */
-    @SuppressWarnings("unchecked")
     protected static void setCrossReferences(Ontology ontology, Element subject, EReference eRef, List<? extends Element> objects) {
-        final Class<? extends Element> objectClass = (Class<? extends Element>) eRef.getEType().getInstanceClass();
+        final Class<?> subjectClass = eRef.getEContainingClass().getInstanceClass();
+        final Class<?> objectClass = eRef.getEType().getInstanceClass();
+        assert subjectClass.isInstance(subject) : subject+" is not an instance of "+subjectClass.getName();
+        for (Element object : objects) {
+        	assert objectClass.isInstance(object) : object+" is not an instance of "+objectClass.getName();
+        }
         assert !eRef.isContainment() : eRef.getName()+" is a containment reference";
         assert eRef.isMany() : eRef.getName()+" is a singular reference";
-        assert Element.class.isAssignableFrom(objectClass) : eRef.getName()+" is not typed by an Oml element";
         subject.eSet(eRef, objects);
     }
     
@@ -142,21 +147,31 @@ public class OmlWrite {
      * 
      * @param ontology the given ontology
      * @param subject the given subject
-     * @param elementERef the containment eRef to use on subject if it belongs to the given ontology
+     * @param eRef the containment eRef to use on subject if it belongs to the given ontology
      * @param object the given object 
      */
     @SuppressWarnings("unchecked")
-    protected static void setContainmentReference(Ontology ontology, Element subject, EReference elementERef, Element object) {
-        final Class<? extends Element> objectClass = (Class<? extends Element>) elementERef.getEType().getInstanceClass();
-        assert elementERef.isContainment() : elementERef.getName()+" is not a containment reference";
+    protected static void setContainmentReference(Ontology ontology, Element subject, EReference eRef, Element object) {
+        final Class<? extends Element> subjectClass = (Class<? extends Element>) eRef.getEContainingClass().getInstanceClass();
+        final Class<? extends Element> objectClass = (Class<? extends Element>) eRef.getEType().getInstanceClass();
+        assert subject == null || subjectClass.isInstance(subject) : subject+" is not an instance of "+subjectClass.getName();
         assert objectClass.isInstance(object) : object+" is not an instance of "+objectClass.getName();
-        assert elementERef.getEType() == elementERef.getEType() : elementERef.getName()+" does not have the same type as "+elementERef.getName();
-        if (object != null && subject != null) {
-            if (subject.getOntology() == ontology) {
-                ((List<Element>)subject.eGet(elementERef)).add(object);
-            } else if (subject instanceof Member){
-                ((List<Element>)getOrAddRef(ontology, (Member)subject).eGet(elementERef)).add(object);
-            }
+        assert eRef.isContainment() : eRef.getName()+" is not a containment reference";
+        if (subject != null) {
+	        if (subject.getOntology() == ontology) {
+	        	if (eRef.isMany()) {
+	        		((List<Element>)subject.eGet(eRef)).add(object);
+	        	} else {
+	        		subject.eSet(eRef, object);
+	        	}
+	        } else if (subject instanceof Member){
+	        	Member ref = getOrAddRef(ontology, (Member)subject);
+	        	if (eRef.isMany()) {
+	        		((List<Element>)ref.eGet(eRef)).add(object);
+	        	} else {
+	        		ref.eSet(eRef, object);
+	        	}
+	        }
         }
     }
 
@@ -703,6 +718,30 @@ public class OmlWrite {
         return import_;
     }
 
+    /**
+     * Creates an import to a given ontology and adds it to a context ontology
+     * 
+     * @param ontology The importing ontology
+     * @param importedOntology The imported ontology
+     */
+    public static void addImport(Ontology ontology, Ontology importedOntology) {
+		ImportKind kind;
+		if (ontology instanceof Vocabulary) {
+			if (importedOntology instanceof Vocabulary) {
+				kind = ImportKind.EXTENSION;
+			} else {
+				kind = ImportKind.USAGE;
+			}
+		} else { // if (ontology instanceof Description)
+			if (importedOntology instanceof Vocabulary) {
+				kind = ImportKind.USAGE;
+			} else {
+				kind = ImportKind.EXTENSION;
+			}
+		}
+		addImport(ontology, kind, importedOntology.getNamespace(), importedOntology.getPrefix());
+    }
+    
     // SpecializationAxiom
 
     /**
@@ -713,7 +752,11 @@ public class OmlWrite {
      * @param superTerm the given super term
      * @return a specialization axiom that is added to the vocabulary
      */
-    public static SpecializationAxiom addSpecializationAxiom(Vocabulary vocabulary, SpecializableTerm subTerm, SpecializableTerm superTerm) {
+    public static SpecializationAxiom addSpecializationAxiom(Vocabulary vocabulary, Term subTerm, Term superTerm) {
+        if (subTerm != null && !(subTerm instanceof SpecializableTerm)) {
+        	// e.g. forward relation or reverse relation as sub terms
+        	subTerm = (SpecializableTerm) getOrAddRef(vocabulary, subTerm);
+        }
         final SpecializationAxiom axiom = create(SpecializationAxiom.class);
         setCrossReference(vocabulary, axiom, OmlPackage.Literals.SPECIALIZATION_AXIOM__SUPER_TERM, superTerm);
         setContainmentReference(vocabulary, subTerm, OmlPackage.Literals.SPECIALIZABLE_TERM__OWNED_SPECIALIZATIONS, axiom);

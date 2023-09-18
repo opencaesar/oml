@@ -59,4 +59,23 @@ public interface NamedInstance extends DescriptionStatement, Instance {
 	 */
 	EList<TypeAssertion> getOwnedTypes();
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Gets the instance's entity types
+	 * <!-- end-model-doc -->
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
+	EList<Entity> getEntityTypes();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
+	EList<Classifier> getTypes();
+
 } // NamedInstance

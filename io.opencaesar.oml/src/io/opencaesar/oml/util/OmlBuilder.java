@@ -25,6 +25,7 @@ import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import org.eclipse.emf.common.util.URI;
@@ -86,6 +87,7 @@ import io.opencaesar.oml.SameAsPredicate;
 import io.opencaesar.oml.Scalar;
 import io.opencaesar.oml.ScalarEquivalenceAxiom;
 import io.opencaesar.oml.ScalarProperty;
+import io.opencaesar.oml.SpecializableTerm;
 import io.opencaesar.oml.SpecializationAxiom;
 import io.opencaesar.oml.Structure;
 import io.opencaesar.oml.StructureInstance;
@@ -108,9 +110,9 @@ import io.opencaesar.oml.VocabularyBundle;
 public class OmlBuilder {
     
     /*
-     * The cache of ontology-to-iri-to-element
+     * The cache of ontology-to-iri-to-member
      */
-    private final HashBasedTable<Ontology, String, Element> cache  = HashBasedTable.create();
+    private final HashBasedTable<Ontology, String, Member> cache  = HashBasedTable.create();
     /*
      * The resource set of the OML models
      */
@@ -192,10 +194,11 @@ public class OmlBuilder {
      */
     @SuppressWarnings("unchecked")
     protected void setCrossReference(Ontology ontology, Element subject, EReference eRef, String objectIri) {
-        final Class<? extends IdentifiedElement> objectClass = (Class<? extends IdentifiedElement>) eRef.getEType().getInstanceClass();
+        final Class<?> subjectClass = eRef.getEContainingClass().getInstanceClass();
+        final Class<? extends Member> objectClass = (Class<? extends Member>) eRef.getEType().getInstanceClass();
+        assert subjectClass.isInstance(subject) : subject+" is not an instance of "+subjectClass.getName();
+        assert Member.class.isAssignableFrom(objectClass) : eRef.getName()+" is not typed by Member or one of its subclasses";
         assert !eRef.isContainment() : eRef.getName()+" is a containment reference";
-        assert !eRef.isMany() : eRef.getName()+" is a List reference";
-        assert IdentifiedElement.class.isAssignableFrom(objectClass) : eRef.getName()+" is not typed by an identified element";
         if (objectIri != null) {
         	if (eRef.isMany()) {
         		defer.add(() -> ((List<Element>)subject.eGet(eRef)).add(resolve(objectClass, ontology, objectIri)));
@@ -217,10 +220,12 @@ public class OmlBuilder {
      */
     @SuppressWarnings("unchecked")
     protected void setCrossReferences(Ontology ontology, Element subject, EReference eRef, List<String> objectIris) {
-        final Class<? extends IdentifiedElement> objectClass = (Class<? extends IdentifiedElement>) eRef.getEType().getInstanceClass();
+        final Class<?> subjectClass = eRef.getEContainingClass().getInstanceClass();
+        final Class<? extends Member> objectClass = (Class<? extends Member>) eRef.getEType().getInstanceClass();
+        assert subjectClass.isInstance(subject) : subject+" is not an instance of "+subjectClass.getName();
+        assert Member.class.isAssignableFrom(objectClass) : eRef.getName()+" is not typed by Member or one of its subclasses";
         assert !eRef.isContainment() : eRef.getName()+" is a containment reference";
         assert eRef.isMany() : eRef.getName()+" is a singular reference";
-        assert IdentifiedElement.class.isAssignableFrom(objectClass) : eRef.getName()+" is not typed by an identified element";
         if (objectIris.iterator().hasNext()) {
             defer.add(() -> subject.eSet(eRef, objectIris.stream().map(objectIri -> resolve(objectClass, ontology, objectIri)).collect(Collectors.toList())));
         }
@@ -234,26 +239,41 @@ public class OmlBuilder {
      * @param elementERef the containment eRef to use on subject if it belongs to the given ontology
      * @param object the given object 
      */
-    @SuppressWarnings("unchecked")
     protected void setContainmentReference(Ontology ontology, String subjectIri, EReference elementERef, Element object) {
+    	setContainmentReference(ontology, subjectIri, elementERef, object, e -> e);
+    }
+    
+    /**
+     * Sets the given object to be contained by the given subject that is resolved by iri in the context of the given ontology
+     * 
+     * @param ontology the given ontology
+     * @param subjectIri the given iri of a member to be resolved as subject
+     * @param elementERef the containment eRef to use on subject if it belongs to the given ontology
+     * @param object the given object 
+     */
+    @SuppressWarnings("unchecked")
+    protected void setContainmentReference(Ontology ontology, String subjectIri, EReference elementERef, Element object, Function<Member, Member> postResolve) {
+        final Class<? extends Element> subjectClass = (Class<? extends Element>) elementERef.getEContainingClass().getInstanceClass();
         final Class<? extends Element> objectClass = (Class<? extends Element>) elementERef.getEType().getInstanceClass();
-        assert elementERef.isContainment() : elementERef.getName()+" is not a containment reference";
         assert objectClass.isInstance(object) : object+" is not an instance of "+objectClass.getName();
-        assert elementERef.getEType() == elementERef.getEType() : elementERef.getName()+" does not have the same type as "+elementERef.getName();
+        assert elementERef.isContainment() : elementERef.getName()+" is not a containment reference";
         if (subjectIri != null) {
             defer.add(() -> {
-                final Member member = resolve(Member.class, ontology, subjectIri);
-                if (member.getOntology() == ontology) {
+                Member subject = resolve(Member.class, ontology, subjectIri);
+                subject = postResolve.apply(subject);
+                assert subjectClass.isInstance(subject) : subject+" is not an instance of "+subjectClass.getName();
+                if (subject.getOntology() == ontology) {
                 	if (elementERef.isMany()) {
-                		((List<Element>)member.eGet(elementERef)).add(object);
+                		((List<Element>)subject.eGet(elementERef)).add(object);
                 	} else {
-                		member.eSet(elementERef, object);
+                		subject.eSet(elementERef, object);
                 	}
                 } else {
+                	Member ref = OmlWrite.getOrAddRef(ontology, subject);
                 	if (elementERef.isMany()) {
-                		((List<Element>)OmlWrite.getOrAddRef(ontology, member).eGet(elementERef)).add(object);
+                		((List<Element>)ref.eGet(elementERef)).add(object);
                 	} else {
-                		OmlWrite.getOrAddRef(ontology, member).eSet(elementERef, object);
+                		ref.eSet(elementERef, object);
                 	}
                 }
             });
@@ -270,9 +290,9 @@ public class OmlBuilder {
      * @param iri the given iri of the element
      * @return an element with the given iri and type that is resolved in the context of the given ontology
      */
-    protected <T extends IdentifiedElement> T resolve(Class<T> type, Ontology context, String iri) {
-        Element element = cache.get(context, iri);
-        if (element == null) {
+    protected <T extends Member> T resolve(Class<T> type, Ontology context, String iri) {
+        Member member = cache.get(context, iri);
+        if (member == null) {
             int i = iri.lastIndexOf('#');
             String baseIri;
             if (i > 0) {
@@ -301,16 +321,16 @@ public class OmlBuilder {
             }
             if (resource != null) {
                 EObject obj = resource.getEObject(fragment);
-                if (obj instanceof Element) {
-                    element = (Element)obj;
+                if (obj instanceof Member) {
+                    member = (Member)obj;
                 }
             }
-            if (element == null) {
+            if (member == null) {
                 throw new RuntimeException("could not resolve "+iri+" in context of "+context.getIri());
             }
-            cache.put(context, iri, element);
+            cache.put(context, iri, member);
         }
-        return type.cast(element);
+        return type.cast(member);
     }
     
     // ------------------------------------------------------------------------------------
@@ -736,7 +756,14 @@ public class OmlBuilder {
     public SpecializationAxiom addSpecializationAxiom(Vocabulary vocabulary, String subTermIri, String superTermIri) {
         final SpecializationAxiom axiom = OmlWrite.addSpecializationAxiom(vocabulary, null, null);
         setCrossReference(vocabulary, axiom, OmlPackage.Literals.SPECIALIZATION_AXIOM__SUPER_TERM, superTermIri);
-        setContainmentReference(vocabulary, subTermIri, OmlPackage.Literals.SPECIALIZABLE_TERM__OWNED_SPECIALIZATIONS, axiom);
+        setContainmentReference(vocabulary, subTermIri, OmlPackage.Literals.SPECIALIZABLE_TERM__OWNED_SPECIALIZATIONS, axiom, subTerm -> {
+        	if (!(subTerm instanceof SpecializableTerm)) {
+        		// e.g., forward relation or reverse relation
+        		return OmlWrite.getOrAddRef(vocabulary, subTerm);
+        	} else {
+        		return subTerm;
+        	}
+        });
         return axiom;
     }
     
@@ -992,9 +1019,9 @@ public class OmlBuilder {
      * @param description the context description
      * @param instanceIri the iri of the named instance
      * @param typeIri the iri of the type
-     * @return a concept type assertion that is added to the given description
+     * @return a type assertion that is added to the given description
      */
-    public TypeAssertion addConceptTypeAssertion(Description description, String instanceIri, String typeIri) {
+    public TypeAssertion addTypeAssertion(Description description, String instanceIri, String typeIri) {
         final TypeAssertion assertion = OmlWrite.addTypeAssertion(description, null, null);
         setCrossReference(description, assertion, OmlPackage.Literals.TYPE_ASSERTION__TYPE, typeIri);
         setContainmentReference(description, instanceIri, OmlPackage.Literals.NAMED_INSTANCE__OWNED_TYPES, assertion);
@@ -1049,6 +1076,55 @@ public class OmlBuilder {
         setCrossReference(ontology, assertion, OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__REFERENCED_VALUE, referencedValueIri);
         setCrossReference(ontology, assertion, OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__PROPERTY, propertyIri);
         setContainmentReference(ontology, instanceIri, OmlPackage.Literals.INSTANCE__OWNED_PROPERTY_VALUES, assertion);
+        return assertion;
+    }
+
+    /**
+     * Creates a property value assertion for a scalar property and adds it to the given ontology
+     * 
+     * @param ontology the context ontology
+     * @param instance the given the instance
+     * @param propertyIri the iri of the scalar property
+     * @param literalValue the asserted (literal) value of the property
+     * @return a property value assertion that is added to the given description
+     */
+    public PropertyValueAssertion addPropertyValueAssertion(Ontology ontology, StructureInstance instance, String propertyIri, Literal literalValue) {
+        final PropertyValueAssertion assertion = OmlWrite.addPropertyValueAssertion(ontology, null, null, literalValue);
+        instance.getOwnedPropertyValues().add(assertion);
+        setCrossReference(ontology, assertion, OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__PROPERTY, propertyIri);
+        return assertion;
+    }
+    
+    /**
+     * Creates a property value assertion for a structured property and adds it to the given ontology
+     * 
+     * @param ontology the context ontology
+     * @param instance the given the instance
+     * @param propertyIri the iri of the structured property
+     * @param containedValue the asserted contained value of the property
+     * @return a property value assertion that is added to the given description
+     */
+    public PropertyValueAssertion addPropertyValueAssertion(Ontology ontology, StructureInstance instance, String propertyIri, StructureInstance containedValue) {
+        final PropertyValueAssertion assertion = OmlWrite.addPropertyValueAssertion(ontology, null, null, containedValue);
+        instance.getOwnedPropertyValues().add(assertion);
+        setCrossReference(ontology, assertion, OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__PROPERTY, propertyIri);
+        return assertion;
+    }
+
+    /**
+     * Creates a property value assertion for a relation and adds it to the given ontology
+     * 
+     * @param ontology the context ontology
+     * @param instance the given the instance
+     * @param propertyIri the iri of the relation property
+     * @param referencedValueIri the asserted referenced value (identified by iri) of the property
+     * @return a property value assertion that is added to the given description
+     */
+    public PropertyValueAssertion addPropertyValueAssertion(Ontology ontology, StructureInstance instance, String propertyIri, String referencedValueIri) {
+        final PropertyValueAssertion assertion = OmlWrite.addPropertyValueAssertion(ontology, null, null, (NamedInstance) null);
+        instance.getOwnedPropertyValues().add(assertion);
+        setCrossReference(ontology, assertion, OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__REFERENCED_VALUE, referencedValueIri);
+        setCrossReference(ontology, assertion, OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__PROPERTY, propertyIri);
         return assertion;
     }
 
@@ -1237,4 +1313,15 @@ public class OmlBuilder {
         return literal;
     }
         
+    /**
+     * Creates a literal
+     * 
+     * @param value the value of the literal
+     * @return a literal
+     */
+    public Literal createLiteral(Object value) {
+        final Literal literal = OmlWrite.createLiteral(value);
+        return literal;
+    }
+
 }

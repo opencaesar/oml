@@ -26,6 +26,7 @@ import io.opencaesar.oml.DoubleLiteral;
 import io.opencaesar.oml.Element;
 import io.opencaesar.oml.ForwardRelation;
 import io.opencaesar.oml.Import;
+import io.opencaesar.oml.ImportKind;
 import io.opencaesar.oml.IntegerLiteral;
 import io.opencaesar.oml.KeyAxiom;
 import io.opencaesar.oml.Literal;
@@ -110,7 +111,11 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 			@Override
 			public String getText(Object object) {
 				Import import_ = (Import)object;
-				StringBuilder label = new StringBuilder(import_.getKind()+" <");
+				String kind = 
+						(import_.getKind() == ImportKind.EXTENSION) ? "extends" :
+						(import_.getKind() == ImportKind.USAGE) ? "uses" :
+						(import_.getKind() == ImportKind.INCLUSION) ? "includes" : "";
+				StringBuilder label = new StringBuilder(kind+" <");
 				if (import_.getNamespace() != null) {
 					label.append(import_.getNamespace());
 				}
@@ -664,14 +669,14 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 				if (instance.eIsProxy()) {
 					try {
 						String fragment = URLDecoder.decode(((InternalEObject)instance).eProxyURI().fragment(), "utf-8");
-						return "ci <" + fragment + ">";
+						return "instance <" + fragment + ">";
 					} catch (UnsupportedEncodingException e) {
 						throw new AssertionError(e);
 					}
 				} else if (instance.isRef()){
-					return "ref ci " + getLabel(instance.resolve(), instance);
+					return "ref instance " + getLabel(instance.resolve(), instance);
 				} else {
-					return "ci " + getLabel(instance);
+					return "instance " + getLabel(instance);
 				}
 			}
 		};
@@ -688,14 +693,14 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 				if (instance.eIsProxy()) {
 					try {
 						String fragment = URLDecoder.decode(((InternalEObject)instance).eProxyURI().fragment(), "utf-8");
-						label.append("ri <" + fragment + ">");
+						label.append("relation instance <" + fragment + ">");
 					} catch (UnsupportedEncodingException e) {
 						throw new AssertionError(e);
 					}
 				} else if (instance.isRef()){
-					label.append("ref ri " + getLabel(instance.resolve(), instance));
+					label.append("ref relation instance " + getLabel(instance.resolve(), instance));
 				} else {
-					label.append("ri " + getLabel(instance));
+					label.append("relation instance" + getLabel(instance));
 				}
 				if (!instance.getSources().isEmpty()) {
 					List<String> labels = instance.getSources().stream().map(i -> getLabel(i, instance)).collect(Collectors.toList());
@@ -822,6 +827,7 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 			}
 		}
 		if (value instanceof NamedInstance) {
+			label.append(" ");
 			label.append(getLabel((NamedInstance)value, element));
 		}
 		return label.toString();

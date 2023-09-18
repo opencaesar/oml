@@ -18,9 +18,12 @@
  */
 package io.opencaesar.oml.impl;
 
+import io.opencaesar.oml.Classifier;
 import io.opencaesar.oml.Instance;
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.PropertyValueAssertion;
+
+import java.lang.reflect.InvocationTargetException;
 
 import java.util.Collection;
 
@@ -88,6 +91,18 @@ public abstract class InstanceImpl extends ElementImpl implements Instance {
 			ownedPropertyValues = new EObjectContainmentWithInverseEList<PropertyValueAssertion>(PropertyValueAssertion.class, this, OmlPackage.INSTANCE__OWNED_PROPERTY_VALUES, OmlPackage.PROPERTY_VALUE_ASSERTION__OWNING_INSTANCE);
 		}
 		return ownedPropertyValues;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EList<Classifier> getTypes() {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -177,6 +192,20 @@ public abstract class InstanceImpl extends ElementImpl implements Instance {
 				return ownedPropertyValues != null && !ownedPropertyValues.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case OmlPackage.INSTANCE___GET_TYPES:
+				return getTypes();
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 } //InstanceImpl

@@ -209,6 +209,10 @@ abstract class Instance extends Element {
      * The property value assertions owned by this instance
      */
     contains PropertyValueAssertion[*] ownedPropertyValues opposite owningInstance
+    /*
+     * Gets the instance's types
+     */
+    op Classifier[] getTypes()
 }
 
 /*
@@ -1116,6 +1120,16 @@ abstract class NamedInstance extends DescriptionStatement, Instance {
      * The types of this instance
      */
     contains TypeAssertion[*] ownedTypes opposite owningInstance
+	/*
+	 * Gets the instance's entity types
+	 */
+    op Entity[] getEntityTypes() {
+    	return ownedTypes.map[^type]
+    }
+    
+    op Classifier[] getTypes() {
+    	return ownedTypes.map[^type]
+    }
 }
 
 ////////////////////////////////////////
@@ -1175,6 +1189,10 @@ class StructureInstance extends Instance {
      * The property value assertion that assigns this instance as a value
      */
     container PropertyValueAssertion[?] owningAssertion opposite containedValue
+
+    op Classifier[] getTypes() {
+    	return ^type.singletonEList()
+    }
 }
 
 ////////////////////////////////////////
