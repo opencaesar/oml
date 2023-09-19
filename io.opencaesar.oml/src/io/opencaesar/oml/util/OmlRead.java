@@ -18,6 +18,9 @@
  */
 package io.opencaesar.oml.util;
 
+import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -1046,7 +1049,46 @@ public final class OmlRead {
     //-------------------------------------------------
     // LITERALS
     //-------------------------------------------------
-     
+    
+    /**
+     * Gets the Java Object value of the given literal
+     * 
+     * @param literal The given literal
+     * @return Object representing value of literal
+     */
+    public static Object getJavaValue(Literal literal) {
+    	if (literal instanceof QuotedLiteral) {
+            var value = ((QuotedLiteral)literal).getValue();
+    		var typeIri = literal.getTypeIri();
+            if (value != null && typeIri != null) {
+                if (typeIri.equals(OmlConstants.XSD_NS+"string")) {
+                    return value;
+                } else if (typeIri.equals(OmlConstants.XSD_NS+"integer")) {
+                    return Integer.valueOf(value);
+                } else if (typeIri.equals(OmlConstants.XSD_NS+"decimal")) {
+                    return new BigDecimal(value);
+                } else if (typeIri.equals(OmlConstants.XSD_NS+"real")) {
+                    return Double.valueOf(value);
+                } else if (typeIri.equals(OmlConstants.XSD_NS+"double")) {
+                    return Double.valueOf(value);
+                } else if (typeIri.equals(OmlConstants.XSD_NS+"float")) {
+                    return Float.valueOf(value);
+                } else if (typeIri.equals(OmlConstants.XSD_NS+"boolean")) {
+                    return Boolean.valueOf(value);
+                } else if (typeIri.equals(OmlConstants.XSD_NS+"dateTime")) {
+                	try {
+                		return new SimpleDateFormat().parse(value);
+                	} catch(Exception e) {
+                        throw new DateTimeParseException("Error parsing xsd:dateTime", value, 0);
+                	}
+                }
+            }
+            return value;
+    	} else {
+    		return literal.getValue();
+    	}
+    }
+
     /**
      * Gets the type of the given literal
      * 

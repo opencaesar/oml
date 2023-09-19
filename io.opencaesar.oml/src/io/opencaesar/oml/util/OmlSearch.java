@@ -18,12 +18,7 @@
  */
 package io.opencaesar.oml.util;
 
-import java.math.BigDecimal;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.format.DateTimeParseException;
 import java.util.Collections;
-import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -54,7 +49,6 @@ import io.opencaesar.oml.Property;
 import io.opencaesar.oml.PropertyEquivalenceAxiom;
 import io.opencaesar.oml.PropertyRestrictionAxiom;
 import io.opencaesar.oml.PropertyValueAssertion;
-import io.opencaesar.oml.QuotedLiteral;
 import io.opencaesar.oml.Relation;
 import io.opencaesar.oml.RelationBase;
 import io.opencaesar.oml.RelationEntity;
@@ -881,7 +875,7 @@ public final class OmlSearch extends OmlIndex {
      * @return true is the scalar is enumerated; false otherwise
      */
     public static boolean findIsEnumeratedScalar(Scalar scalar) {
-    	return findLiteralEnumerationAxioms(scalar).isEmpty();
+    	return !findLiteralEnumerationAxioms(scalar).isEmpty();
     }
     
     /**
@@ -1244,77 +1238,6 @@ public final class OmlSearch extends OmlIndex {
     //-------------------------------------------------
 
     /**
-     * Finds the Java type that corresponds to the given scalar
-     * 
-     * @param scalar the given scalar
-     * @return the Java type that corresponds to the given scalar
-     */
-    public static Class<?> findJavaType(Scalar scalar) {
-        while (scalar != null) {
-            switch (scalar.getIri()) {
-                case OmlConstants.XSD_NS+"integer":
-                    return Integer.class;
-                case OmlConstants.XSD_NS+"decimal":
-                    return BigDecimal.class;
-                case OmlConstants.XSD_NS+"double":
-                    return Double.class;
-                case OmlConstants.XSD_NS+"float":
-                    return Float.class;
-                case OmlConstants.XSD_NS+"boolean":
-                    return Boolean.class;
-                case OmlConstants.XSD_NS+"dateTime":
-                    return Date.class;
-                case OmlConstants.OWL_NS+"real":
-                    return Double.class;
-            }
-            scalar = (Scalar) findSuperTerms(scalar).stream().findFirst().get();
-        }
-        return String.class;
-    }
-
-    /**
-     * Finds the Java value that corresponds to the given literal
-     * 
-     * @param literal the given literal
-     * @return the Java value that corresponds to the given literal
-     */
-    public static Object findJavaValue(Literal literal) {
-        if (literal instanceof QuotedLiteral) {
-            QuotedLiteral qLiteral = (QuotedLiteral)literal;
-            String value =  qLiteral.getValue();
-            Class<?> type = findJavaType(qLiteral.getType());
-            if (type == Integer.class)
-                return Integer.valueOf(value);
-            else if (type == BigDecimal.class)
-                return new BigDecimal(value);
-            else if (type == Double.class)
-                return Double.valueOf(value);
-            else if (type == Float.class)
-                return Float.valueOf(value);
-            else if (type == Boolean.class)
-                return Boolean.valueOf(value);
-            else if (type == Date.class)
-                try {
-                    return new SimpleDateFormat().parse(value);
-                } catch (ParseException e) {
-                    throw new DateTimeParseException("Error parsing xsd:dateTime", value, 0);
-                }
-            return value;
-        }
-        return literal.getValue();
-    }
-
-    /**
-     * Finds the scalar that is the direct type of the given literal
-     * 
-     * @param literal the given literal
-     * @return a scalar that is the type of the given literal
-     */
-    public static Scalar findType(Literal literal) {
-        return OmlRead.getType(literal);
-    }
-
-    /**
      * Finds all the scalars that are direct or indirect types of the given literal
      * 
      * @param literal the given literal
@@ -1344,17 +1267,13 @@ public final class OmlSearch extends OmlIndex {
      * @return true if the given literal is typed directly by the given type; otherwise false
      */
     public static boolean findIsKindOf(Literal literal, Scalar type) {
-    	if (type.getOwnedEnumeration() != null) {
-    		return type.getOwnedEnumeration().getLiterals().stream().anyMatch(i -> OmlRead.isEqual(i, literal));
-    	} else if (OmlRead.isStandardScalar(type)) {
+    	if (OmlRead.isStandardScalar(type)) {
     		return findAllTypes(literal).contains(type);
+    	} else if (findIsEnumeratedScalar(type)) {
+    		return findEnumerationLiterals(type).stream().anyMatch(i -> OmlRead.isEqual(i, literal));
+    	} else  { // facetted scalar
+    		return findEquivalentScalars(type).stream()
+    				.anyMatch(s -> findIsKindOf(literal, s));
     	}
-    	for (Term t : findAllSuperTerms(type, false)) {
-    		Scalar supertype = (Scalar)t;
-    		if (!findIsKindOf(literal, supertype)) {
-    			return false;
-    		}
-    	}
-    	return true;
 	}
 }
