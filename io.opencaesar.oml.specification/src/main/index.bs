@@ -83,6 +83,10 @@ path: public-api.md
 </pre>
 
 <pre class=include>
+path: common-libraries.md
+</pre>
+
+<pre class=include>
 path: mapping-to-owl2-and-swrl.md
 </pre>
 
