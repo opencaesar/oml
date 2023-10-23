@@ -1490,7 +1490,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version 82ce88815, updated Thu Sep 7 16:33:55 2023 -0700" name="generator">
   <link href="https://www.opencaesar.io/oml" rel="canonical">
-  <meta content="d1f3bdb036d5d2d6dd886ec33c5069467ddcda78" name="document-revision">
+  <meta content="d06c34acb3259f9e57f280ab402b68a336245336" name="document-revision">
 <style>
 body {
   padding: 0;
@@ -2108,7 +2108,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://opencaesar.github.io/oml/"> <img alt="Ontological Modeling Language" height="60" src="images/oml.svg"> </a></p>
    <h1 class="p-name no-ref" id="title">Ontological Modeling Language 2.0.0</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Living Standard, <time class="dt-updated" datetime="2023-09-19">19 September 2023</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Living Standard, <time class="dt-updated" datetime="2023-10-23">23 October 2023</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -2383,10 +2383,11 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
        </ol>
      </ol>
     <li><a href="#Public-API"><span class="secno">7</span> <span class="content">Public API</span></a>
+    <li><a href="#Common-Libraries"><span class="secno">8</span> <span class="content">Common Libraries</span></a>
     <li>
-     <a href="#Mapping-to-Owl2-and-Swrl"><span class="secno">8</span> <span class="content">Mapping to OWL2 and SWRL</span></a>
+     <a href="#Mapping-to-Owl2-and-Swrl"><span class="secno">9</span> <span class="content">Mapping to OWL2 and SWRL</span></a>
      <ol class="toc">
-      <li><a href="#Description-Logic-Semantics"><span class="secno">8.1</span> <span class="content">Description Logic Semantics</span></a>
+      <li><a href="#Description-Logic-Semantics"><span class="secno">9.1</span> <span class="content">Description Logic Semantics</span></a>
      </ol>
     <li><a href="#conformance"><span class="secno"></span> <span class="content"> Conformance</span></a>
     <li>
@@ -8048,8 +8049,28 @@ this metamodel and can be manipulated using its API.
     <h2 class="heading settled" data-level="7" id="Public-API"><span class="secno">7. </span><span class="content">Public API</span><a class="self-link" href="#Public-API"></a></h2>
     <p>Click this <a href="javadoc/index.html">link</a> to browse the OML Java API in a separate page.</p>
     <iframe height="500px" src="javadoc/index.html" width="100%"></iframe>
-    <h2 class="heading settled" data-level="8" id="Mapping-to-Owl2-and-Swrl"><span class="secno">8. </span><span class="content">Mapping to OWL2 and SWRL</span><a class="self-link" href="#Mapping-to-Owl2-and-Swrl"></a></h2>
-    <h3 class="heading settled" data-level="8.1" id="Description-Logic-Semantics"><span class="secno">8.1. </span><span class="content">Description Logic Semantics</span><a class="self-link" href="#Description-Logic-Semantics"></a></h3>
+    <h2 class="heading settled" data-level="8" id="Common-Libraries"><span class="secno">8. </span><span class="content">Common Libraries</span><a class="self-link" href="#Common-Libraries"></a></h2>
+    <p>The following are the common libraries expressed in OML 2 and their minimum versions:</p>
+    <table class="def">
+     <tbody>
+      <tr>
+       <th><b>Library</b>
+       <th><b>Min Version</b>
+      <tr>
+       <td>core-vocabularies
+       <td><a href="https://github.com/opencaesar/core-vocabularies/releases/tag/4.0.0">4.0.0</a>
+      <tr>
+       <td>metrologiy-vocabularies
+       <td><a href="https://github.com/opencaesar/metrology-vocabularies/releases/tag/6.0.0">6.0.0</a>
+      <tr>
+       <td>provenance-vocabularies
+       <td><a href="https://github.com/opencaesar/provenance-vocabularies/releases/tag/3.0.0">3.0.0</a>
+      <tr>
+       <td>imce-vocabularies
+       <td><a href="https://github.com/opencaesar/imce-vocabularies/releases/tag/4.0.0">4.0.0</a>
+    </table>
+    <h2 class="heading settled" data-level="9" id="Mapping-to-Owl2-and-Swrl"><span class="secno">9. </span><span class="content">Mapping to OWL2 and SWRL</span><a class="self-link" href="#Mapping-to-Owl2-and-Swrl"></a></h2>
+    <h3 class="heading settled" data-level="9.1" id="Description-Logic-Semantics"><span class="secno">9.1. </span><span class="content">Description Logic Semantics</span><a class="self-link" href="#Description-Logic-Semantics"></a></h3>
     <p>Description Logic (DL) is a class of logic that is sufficiently expressive (between propositional and first-order logic) and decidable (in finite time). Since <a href="#Mapping-to-Owl2-and-Swrl">OML is mappable to OWL2-DL</a>, which is a subset of OWL2 that has DL semantics, OML models can be reasoned on with DL reasoners. Sevral over-the-shelf DL reasoner implementations exist such as <a href="https://github.com/stardog-union/pellet">Pellet</a>. There are two kinds of DL reasoning that can be performed on OML models: <em>satisfiability</em> analysis and <em>consistency</em> analysis.</p>
     <p>Satisfiability analysis can be run on a vocabuly bundle to check that the types defined by that bundle are instantiable, i.e., valid instances can be created for each of them. The concern checked here is whether any type is over constrained (e.g. specializes two disjoint types) such that valid instances of the type cannot be created.</p>
     <p>Consistency analysis can be run on a description bundle to check that the instances defined by that bundle are consistent with the rules of the used vocabularies. The concern checked here is whether any instance is involved in a logical contradition (e.g., two unequal instances assert different values to a functional property).</p>
