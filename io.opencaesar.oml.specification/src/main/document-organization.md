@@ -12,7 +12,7 @@ This document describes the syntax, notation, semantics, and API of the Ontologi
 
 - The section [Public API](#Public-API) describes the OML public API that can be used to create tools that read or write OML models. Some of the public API maps directly from the corresponding OML abstract syntax. Other API adds useful functions that make working with OML easier programmatically.
 
-- The section [Mapping to OWL2 and SWRL](#Mapping-to-Owl2-and-Swrl) describes the semantics of OML by mapping them to the semantics of OWL2 and SWRL. It accomplishes that by giving the mapping of every OML construct to a pattern defined in a subset of OWL2 and SWRL.
+- The section [Mapping to OWL2 and SWRL](#Mapping-to-Owl-and-Swrl) describes the semantics of OML by mapping them to the semantics of OWL2 and SWRL. It accomplishes that by giving the mapping of every OML construct to a pattern defined in a subset of OWL2 and SWRL.
 
 ## Document Conventions ## {#Document-Conventions}
 

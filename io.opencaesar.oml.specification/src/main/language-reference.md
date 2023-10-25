@@ -260,7 +260,7 @@ The following example shows several annotations. The ontology itself has a *dc:t
 
 ## Vocabulary ## {#Vocabulary-LR}
 
-A [vocabulary](#Vocabulary-Syntax) is an ontology that defines a set of [terms](#Term-Syntax) and [rules](#Rule-Syntax) for a given domain and has [open world semantics](#Description-Logic-Semantics). A vocabulary is declared with the keyword `vocabulary` as its ontology kind, followed by its NAMESPACE, the keyword `as`, and its prefix ID. It also has a body consisting of zero or more vocabulary imports and statements between two braces `{` `}`, as follows:
+A [vocabulary](#Vocabulary-Syntax) is an ontology that defines a set of [terms](#Term-Syntax) and [rules](#Rule-Syntax) for a given domain and has [open world semantics](#Mapping-to-Owl-and-Swrl). A vocabulary is declared with the keyword `vocabulary` as its ontology kind, followed by its NAMESPACE, the keyword `as`, and its prefix ID. It also has a body consisting of zero or more vocabulary imports and statements between two braces `{` `}`, as follows:
 
 <pre class="highlight highlight-html">
 Annotation*
@@ -871,12 +871,11 @@ An example of [=RelationEntity=] specialization is given below. In this case, wh
 A Classifier Equivalence Axiom is one that can be specified on a [=Classifier=] to specify that it is equivalent to the intersection of other [=Classifiers=] and/or [=PropertyRestrictionAxioms=]. The syntax starts with `=` then a list of comma-separated [=ClassifierEquivalenceAxiom=], each of which consists of a `&` separated list of classifiers and/or a list of [=PropertyRestrictionAxioms=] between `[` `]` brackets as follows:
 
 <pre class="highlight highlight-html">
-	`=` ClassifierEquivalenceAxiom (`,` ClassifierEquivalenceAxiom)*
+`=` ClassifierEquivalenceAxiom (`,` ClassifierEquivalenceAxiom)*
 
-&lt;<a id="ClassifierEquivalenceAxiom-Syntax">ClassifierEquivalenceAxiom</a>&gt;:
+&lt;ClassifierEquivalenceAxiom&gt;:
 	[Classifier|IRI] (`&` [Classifier|IRI])*
 	|
-	{ClassifierEquivalenceAxiom} 
 	([Classifier|IRI] (`&` [Classifier|IRI])*)? `[`
 		PropertyRestrictionAxiom*
 	`]`
@@ -919,9 +918,9 @@ An example of a Scalar Specialization Axiom is as follows:
 A Scalar Equivalence Axiom is one that can be specified on a [=Scalar=] to specify that it is equivalent to other [=Scalars=] optionally with some facets (value restrictions). The syntax starts with `=` then a list of comma-separated [=ScalarEquivalenceAxiom=], each of which consists of a [=Scalar=] reference and optionally between `[` `]` bracketszero or more value-restricting faceets, as follows:
 
 <pre class="highlight highlight-html">
-	`=` ScalarEquivalenceAxiom (`,` ScalarEquivalenceAxiom)*;
+`=` ScalarEquivalenceAxiom (`,` ScalarEquivalenceAxiom)*;
 
-&lt;<span id="ScalarEquivalenceAxiom-Syntax">ScalarEquivalenceAxiom</span>&gt;:
+&lt;ScalarEquivalenceAxiom&gt;:
 	[Scalar|IRI] (`[`
 		 (`length` UnsignedInteger)? 
 		 (`minLength` UnsignedInteger)?
@@ -986,9 +985,9 @@ Note: a relation is a kind of property.
 A Property Equivalence Axiom is one that can be specified on a [=Property=] to specify that it is equivalent to one or more other [=Properties=]. The syntax starts with `=` then a list of comma-separated [=PropertyEquivalenceAxiom=], each of which has a reference to a Property.
 
 <pre class="highlight highlight-html">
-	`=` PropertyEquivalenceAxiom (`,` PropertyEquivalenceAxiom)*
+`=` PropertyEquivalenceAxiom (`,` PropertyEquivalenceAxiom)*
 
-&lt;<a id="PropertyEquivalenceAxiom-Syntax">PropertyEquivalenceAxiom</a>&gt;:
+&lt;PropertyEquivalenceAxiom&gt;:
 	[Property|IRI]
 </pre>
 
@@ -1164,13 +1163,12 @@ A self restriction axiom restricts the value of a relation in the context of som
 	`restricts` [Relation|IRI] `to` `self`
 </pre>
 
-The following example shows a vocabulary that defines a concept *Person* with a self restrictions on relation `reliesOn`:
+The following example shows a concept *Person* with a self restrictions on relation `reliesOn`:
 
 <pre class="highlight highlight-html">
-`vocabulary` `<`http://com.xyz/methodology/people#`>` `as` people `{`
-    `concept` Person [
-        `restricts` reliesOn `to` `self`   // A person only relies on themselves
-    ]
+`concept` Person [
+    `restricts` reliesOn `to` `self`   // A person only relies on themselves
+]
 </pre>
 
 
@@ -1188,11 +1186,12 @@ Note: OML supports all the stadard builtins from the [swrlb](https://www.w3.org/
 An example of some of those builtins include:
 
 <pre class="highlight highlight-html">
-vocabulary <http://www.w3.org/2003/11/swrlb#> as swrlb {
-    builtin equal
-    builtin notEqual
-    builtin lessThan
-    builtin lessThanOrEqual
+`vocabulary` `<`http://www.w3.org/2003/11/swrlb#`>` `as` swrlb `{`
+    `builtin` equal
+    `builtin` notEqual
+    `builtin` lessThan
+    `builtin` lessThanOrEqual
+`}`
 </pre>
 
 ### Rule ### {#Rule-LR}
@@ -1488,7 +1487,7 @@ The following example description defines two concept instances that each makes 
 
 ## Vocabulary Bundle ## {#VocabularyBundle-LR}
 
-A [vocabulary bundle](#VocabularyBundle-Syntax) is an ontology that bundles a set of vocabularies and allows description logic (DL) reasoning with [closed-world semantics](#Description-Logic-Semantics) using them (in contrast to a vocabulary that has [open-world semantics](#Description-Logic-Semantics)). A vocabulary bundle is declared with the keywords `vocabulary` `bundle` as its ontology kind, followed by its NAMESPACE, the keyword `as`, and its prefix ID. It also has a body consisting of zero or more vocabulary bundle imports between two braces `{` `}`, as follows:
+A [vocabulary bundle](#VocabularyBundle-Syntax) is an ontology that bundles a set of vocabularies and allows description logic (DL) reasoning with [closed-world semantics](#Mapping-to-Owl-and-Swrl) using them (in contrast to a vocabulary that has [open-world semantics](#Mapping-to-Owl-and-Swrl)). A vocabulary bundle is declared with the keywords `vocabulary` `bundle` as its ontology kind, followed by its NAMESPACE, the keyword `as`, and its prefix ID. It also has a body consisting of zero or more vocabulary bundle imports between two braces `{` `}`, as follows:
 
 <pre class="highlight highlight-html">
 Annotation*

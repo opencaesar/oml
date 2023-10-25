@@ -15,9 +15,9 @@ Abstract: This document describes the Ontological Modeling Language (OML). This 
 
 <style>
 body {
-  padding: 0;
-  margin: 0;
-  max-width: unset;
+	padding: 0;
+	margin: 0;
+	max-width: unset;
 }
 
 table.def th {
@@ -34,18 +34,18 @@ table.def dfn code {
 }
 
 dd > p:first-child, li > p:first-child {
-    margin-top: 16px;
+	margin-top: 16px;
 }
 
 code {
-  color:red; 
-  font-weight: bold;
+	color:red; 
+	font-weight: bold;
 }
 
 @media (prefers-color-scheme: dark) {
 	code {
-	  color:yellow; 
-	  font-weight: bold;
+		color:yellow; 
+		ont-weight: bold;
 	}
 }
 
@@ -87,7 +87,11 @@ path: common-libraries.md
 </pre>
 
 <pre class=include>
-path: mapping-to-owl2-and-swrl.md
+path: mapping-to-owl-and-swrl.md
+</pre>
+
+<pre class=include>
+path: version-migration.md
 </pre>
 
 </div>
