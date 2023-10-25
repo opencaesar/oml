@@ -1490,12 +1490,12 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version 82ce88815, updated Thu Sep 7 16:33:55 2023 -0700" name="generator">
   <link href="https://www.opencaesar.io/oml" rel="canonical">
-  <meta content="5e302502b767a353750b67677b2036b4632dbf0d" name="document-revision">
+  <meta content="609cba126fb6f09dd8459510cba0c6865051310d" name="document-revision">
 <style>
 body {
-  padding: 0;
-  margin: 0;
-  max-width: unset;
+	padding: 0;
+	margin: 0;
+	max-width: unset;
 }
 
 table.def th {
@@ -1512,18 +1512,18 @@ table.def dfn code {
 }
 
 dd > p:first-child, li > p:first-child {
-    margin-top: 16px;
+	margin-top: 16px;
 }
 
 code {
-  color:red; 
-  font-weight: bold;
+	color:red; 
+	font-weight: bold;
 }
 
 @media (prefers-color-scheme: dark) {
 	code {
-	  color:yellow; 
-	  font-weight: bold;
+		color:yellow; 
+		ont-weight: bold;
 	}
 }
 
@@ -2384,11 +2384,8 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
      </ol>
     <li><a href="#Public-API"><span class="secno">7</span> <span class="content">Public API</span></a>
     <li><a href="#Common-Libraries"><span class="secno">8</span> <span class="content">Common Libraries</span></a>
-    <li>
-     <a href="#Mapping-to-Owl2-and-Swrl"><span class="secno">9</span> <span class="content">Mapping to OWL2 and SWRL</span></a>
-     <ol class="toc">
-      <li><a href="#Description-Logic-Semantics"><span class="secno">9.1</span> <span class="content">Description Logic Semantics</span></a>
-     </ol>
+    <li><a href="#Mapping-to-Owl-and-Swrl"><span class="secno">9</span> <span class="content">Mapping to OWL and SWRL</span></a>
+    <li><a href="#Version-Migration"><span class="secno">10</span> <span class="content">Version Migration</span></a>
     <li><a href="#conformance"><span class="secno"></span> <span class="content"> Conformance</span></a>
     <li>
      <a href="#index"><span class="secno"></span> <span class="content">Index</span></a>
@@ -2418,7 +2415,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
      <li data-md>
       <p>The section <a href="#Public-API">Public API</a> describes the OML public API that can be used to create tools that read or write OML models. Some of the public API maps directly from the corresponding OML abstract syntax. Other API adds useful functions that make working with OML easier programmatically.</p>
      <li data-md>
-      <p>The section <a href="#Mapping-to-Owl2-and-Swrl">Mapping to OWL2 and SWRL</a> describes the semantics of OML by mapping them to the semantics of OWL2 and SWRL. It accomplishes that by giving the mapping of every OML construct to a pattern defined in a subset of OWL2 and SWRL.</p>
+      <p>The section <a href="#Mapping-to-Owl-and-Swrl">Mapping to OWL2 and SWRL</a> describes the semantics of OML by mapping them to the semantics of OWL2 and SWRL. It accomplishes that by giving the mapping of every OML construct to a pattern defined in a subset of OWL2 and SWRL.</p>
     </ul>
     <h3 class="heading settled" data-level="1.1" id="Document-Conventions"><span class="secno">1.1. </span><span class="content">Document Conventions</span><a class="self-link" href="#Document-Conventions"></a></h3>
     <h3 class="heading settled" data-level="1.2" id="BNF-Conventions"><span class="secno">1.2. </span><span class="content">BNF Conventions</span><a class="self-link" href="#BNF-Conventions"></a></h3>
@@ -2730,7 +2727,7 @@ true        // xsd:boolean
 `}`
 </member></member></import></import></import></import></import></ontology></pre>
     <h3 class="heading settled" data-level="3.2" id="Vocabulary-LR"><span class="secno">3.2. </span><span class="content">Vocabulary</span><a class="self-link" href="#Vocabulary-LR"></a></h3>
-    <p>A <a href="#Vocabulary-Syntax">vocabulary</a> is an ontology that defines a set of <a href="#Term-Syntax">terms</a> and <a href="#Rule-Syntax">rules</a> for a given domain and has <a href="#Description-Logic-Semantics">open world semantics</a>. A vocabulary is declared with the keyword `vocabulary` as its ontology kind, followed by its NAMESPACE, the keyword `as`, and its prefix ID. It also has a body consisting of zero or more vocabulary imports and statements between two braces `{` `}`, as follows:</p>
+    <p>A <a href="#Vocabulary-Syntax">vocabulary</a> is an ontology that defines a set of <a href="#Term-Syntax">terms</a> and <a href="#Rule-Syntax">rules</a> for a given domain and has <a href="#Mapping-to-Owl-and-Swrl">open world semantics</a>. A vocabulary is declared with the keyword `vocabulary` as its ontology kind, followed by its NAMESPACE, the keyword `as`, and its prefix ID. It also has a body consisting of zero or more vocabulary imports and statements between two braces `{` `}`, as follows:</p>
 <pre class="highlight highlight-html">Annotation*
 `vocabulary` NAMESPACE `as` ID `{`
   Import*
@@ -3210,12 +3207,11 @@ http://purl.org/dc/elements/1.1/hasVersion
 </pre>
     <h5 class="heading settled" data-level="3.2.4.5" id="ClassifierEquivalenceAxiom-LR"><span class="secno">3.2.4.5. </span><span class="content">Classifier Equivalence Axiom</span><a class="self-link" href="#ClassifierEquivalenceAxiom-LR"></a></h5>
     <p>A Classifier Equivalence Axiom is one that can be specified on a <a data-link-type="dfn" href="#classifier" id="ref-for-classifier④">Classifier</a> to specify that it is equivalent to the intersection of other <a data-link-type="dfn" href="#classifier" id="ref-for-classifier⑤">Classifiers</a> and/or <a data-link-type="dfn" href="#propertyrestrictionaxiom" id="ref-for-propertyrestrictionaxiom②">PropertyRestrictionAxioms</a>. The syntax starts with `=` then a list of comma-separated <a data-link-type="dfn" href="#classifierequivalenceaxiom" id="ref-for-classifierequivalenceaxiom">ClassifierEquivalenceAxiom</a>, each of which consists of a `&amp;` separated list of classifiers and/or a list of <a data-link-type="dfn" href="#propertyrestrictionaxiom" id="ref-for-propertyrestrictionaxiom③">PropertyRestrictionAxioms</a> between `[` `]` brackets as follows:</p>
-<pre class="highlight highlight-html">  `=` ClassifierEquivalenceAxiom (`,` ClassifierEquivalenceAxiom)*
+<pre class="highlight highlight-html">`=` ClassifierEquivalenceAxiom (`,` ClassifierEquivalenceAxiom)*
 
-&lt;<a data-link-type="dfn" href="#classifierequivalenceaxiom" id="ClassifierEquivalenceAxiom-Syntax">ClassifierEquivalenceAxiom</a>>:
+&lt;ClassifierEquivalenceAxiom>:
   [Classifier|IRI] (`&amp;` [Classifier|IRI])*
   |
-  {ClassifierEquivalenceAxiom} 
   ([Classifier|IRI] (`&amp;` [Classifier|IRI])*)? `[`
     PropertyRestrictionAxiom*
   `]`
@@ -3241,9 +3237,9 @@ http://purl.org/dc/elements/1.1/hasVersion
 </pre>
     <h5 class="heading settled" data-level="3.2.4.7" id="ScalarEquivalenceAxiom-LR"><span class="secno">3.2.4.7. </span><span class="content">Scalar Equivalence Axiom</span><a class="self-link" href="#ScalarEquivalenceAxiom-LR"></a></h5>
     <p>A Scalar Equivalence Axiom is one that can be specified on a <a data-link-type="dfn" href="#scalar" id="ref-for-scalar⑤">Scalar</a> to specify that it is equivalent to other <a data-link-type="dfn" href="#scalar" id="ref-for-scalar⑥">Scalars</a> optionally with some facets (value restrictions). The syntax starts with `=` then a list of comma-separated <a data-link-type="dfn" href="#scalarequivalenceaxiom" id="ref-for-scalarequivalenceaxiom①">ScalarEquivalenceAxiom</a>, each of which consists of a <a data-link-type="dfn" href="#scalar" id="ref-for-scalar⑦">Scalar</a> reference and optionally between `[` `]` bracketszero or more value-restricting faceets, as follows:</p>
-<pre class="highlight highlight-html">  `=` ScalarEquivalenceAxiom (`,` ScalarEquivalenceAxiom)*;
+<pre class="highlight highlight-html">`=` ScalarEquivalenceAxiom (`,` ScalarEquivalenceAxiom)*;
 
-&lt;<span id="ScalarEquivalenceAxiom-Syntax">ScalarEquivalenceAxiom</span>>:
+&lt;ScalarEquivalenceAxiom>:
   [Scalar|IRI] (`[`
      (`length` UnsignedInteger)? 
      (`minLength` UnsignedInteger)?
@@ -3301,9 +3297,9 @@ http://purl.org/dc/elements/1.1/hasVersion
     <p class="note" role="note"><span class="marker">Note:</span> a relation is a kind of property.</p>
     <h5 class="heading settled" data-level="3.2.4.9" id="PropertyEquivalenceAxiom-LR"><span class="secno">3.2.4.9. </span><span class="content">Property Equivalence Axiom</span><a class="self-link" href="#PropertyEquivalenceAxiom-LR"></a></h5>
     <p>A Property Equivalence Axiom is one that can be specified on a <a data-link-type="dfn" href="#property" id="ref-for-property③">Property</a> to specify that it is equivalent to one or more other <a data-link-type="dfn" href="#property" id="ref-for-property④">Properties</a>. The syntax starts with `=` then a list of comma-separated <a data-link-type="dfn" href="#propertyequivalenceaxiom" id="ref-for-propertyequivalenceaxiom">PropertyEquivalenceAxiom</a>, each of which has a reference to a Property.</p>
-<pre class="highlight highlight-html">  `=` PropertyEquivalenceAxiom (`,` PropertyEquivalenceAxiom)*
+<pre class="highlight highlight-html">`=` PropertyEquivalenceAxiom (`,` PropertyEquivalenceAxiom)*
 
-&lt;<a data-link-type="dfn" href="#propertyequivalenceaxiom" id="PropertyEquivalenceAxiom-Syntax">PropertyEquivalenceAxiom</a>>:
+&lt;PropertyEquivalenceAxiom>:
   [Property|IRI]
 </pre>
     <p>Examples of using Property Equivalence Axioms can be seen in the following:</p>
@@ -3445,11 +3441,10 @@ http://purl.org/dc/elements/1.1/hasVersion
     <p>A self restriction axiom restricts the value of a relation in the context of some classifier to the context itself. In other words, it restricts the instance that is the target of a relation to be the same one as the source of the relation. The syntax of a self restriction axioms starts with the keyword `restricts` followed by a reference to the relation by IRI, followed by the keyword `to` then finally the keyword `self`. The following shows the supported syntaxes:</p>
 <pre class="highlight highlight-html">`restricts` [Relation|IRI] `to` `self`
 </pre>
-    <p>The following example shows a vocabulary that defines a concept <em>Person</em> with a self restrictions on relation `reliesOn`:</p>
-<pre class="highlight highlight-html">`vocabulary` `&lt;`http://com.xyz/methodology/people#`>` `as` people `{`
-    `concept` Person [
-        `restricts` reliesOn `to` `self`   // A person only relies on themselves
-    ]
+    <p>The following example shows a concept <em>Person</em> with a self restrictions on relation `reliesOn`:</p>
+<pre class="highlight highlight-html">`concept` Person [
+    `restricts` reliesOn `to` `self`   // A person only relies on themselves
+]
 </pre>
     <h4 class="heading settled" data-level="3.2.5" id="BuiltIn-LR"><span class="secno">3.2.5. </span><span class="content">BuiltIn</span><a class="self-link" href="#BuiltIn-LR"></a></h4>
     <p>A <a href="#BuiltIn-Syntax">builtin</a> is a standard function that can be invoked from a <a data-link-type="dfn" href="#rule" id="ref-for-rule">Rule</a>'s <a data-link-type="dfn" href="#builtinpredicate" id="ref-for-builtinpredicate">BuiltInPredicate</a>. The syntax of a builtin  starts with the keyword `builtin` followed by a name ID. An existing (local or imported) builtin can be referenced by the keywords `ref` `builtin` followed by its `IRI` as follows:</p>
@@ -3458,12 +3453,13 @@ http://purl.org/dc/elements/1.1/hasVersion
 </pre>
     <p class="note" role="note"><span class="marker">Note:</span> OML supports all the stadard builtins from the <a href="https://www.w3.org/Submission/SWRL/#8">swrlb</a> vocabulary. This vocabulary is included in the core-vocabularies library (from Maven Central) which is a project declare a dependency on in its build.gradle file.</p>
     <p>An example of some of those builtins include:</p>
-<pre class="highlight highlight-html">vocabulary <httpU0003A U000311 U00032003 swrlbU00023 www.w3.org> as swrlb {
-    builtin equal
-    builtin notEqual
-    builtin lessThan
-    builtin lessThanOrEqual
-</httpU0003A></pre>
+<pre class="highlight highlight-html">`vocabulary` `&lt;`http://www.w3.org/2003/11/swrlb#`>` `as` swrlb `{`
+    `builtin` equal
+    `builtin` notEqual
+    `builtin` lessThan
+    `builtin` lessThanOrEqual
+`}`
+</pre>
     <h4 class="heading settled" data-level="3.2.6" id="Rule-LR"><span class="secno">3.2.6. </span><span class="content">Rule</span><a class="self-link" href="#Rule-LR"></a></h4>
     <p>A <a href="#Rule-Syntax">rule</a> is a member of a vocabulary and represents an additional inference rule in the domain that can be used by a reasoner to generate entailments. A rule has two sets of predicates (patterns that must hold); the first set is called the rule’s antecedent (predicates to match for the rule to trigger), and the second set is called the rule’s consequent (predicates that are inferred once the antecedent is matched). The syntax of a rule starts with the keyword `rule` followed by a name ID, then a pair of square brackets `[` `]` that holds the rule’s predicates. The antecedent predicates are specified first separated by the `&amp;` symbol (which means a logical AND), followed by an implication arrow `->`, then the consequent predicates separated also by the `&amp;` symbol.</p>
 <pre class="highlight highlight-html">Annotation*
@@ -3680,7 +3676,7 @@ to argument2.</p>
 `}`
 </pre>
     <h3 class="heading settled" data-level="3.4" id="VocabularyBundle-LR"><span class="secno">3.4. </span><span class="content">Vocabulary Bundle</span><a class="self-link" href="#VocabularyBundle-LR"></a></h3>
-    <p>A <a href="#VocabularyBundle-Syntax">vocabulary bundle</a> is an ontology that bundles a set of vocabularies and allows description logic (DL) reasoning with <a href="#Description-Logic-Semantics">closed-world semantics</a> using them (in contrast to a vocabulary that has <a href="#Description-Logic-Semantics">open-world semantics</a>). A vocabulary bundle is declared with the keywords `vocabulary` `bundle` as its ontology kind, followed by its NAMESPACE, the keyword `as`, and its prefix ID. It also has a body consisting of zero or more vocabulary bundle imports between two braces `{` `}`, as follows:</p>
+    <p>A <a href="#VocabularyBundle-Syntax">vocabulary bundle</a> is an ontology that bundles a set of vocabularies and allows description logic (DL) reasoning with <a href="#Mapping-to-Owl-and-Swrl">closed-world semantics</a> using them (in contrast to a vocabulary that has <a href="#Mapping-to-Owl-and-Swrl">open-world semantics</a>). A vocabulary bundle is declared with the keywords `vocabulary` `bundle` as its ontology kind, followed by its NAMESPACE, the keyword `as`, and its prefix ID. It also has a body consisting of zero or more vocabulary bundle imports between two braces `{` `}`, as follows:</p>
 <pre class="highlight highlight-html">Annotation*
 `vocabulary` `bundle` NAMESPACE `as` ID `{`
 `}`
@@ -3872,7 +3868,7 @@ to argument2.</p>
 &lt;<span id="ClassifierEquivalence-Syntax">ClassifierEquivalence</span>>:
   `=` ClassifierEquivalenceAxiom (`,` ClassifierEquivalenceAxiom)*
 
-&lt;<a data-link-type="dfn" href="#classifierequivalenceaxiom" id="ClassifierEquivalenceAxiom-Syntax①">ClassifierEquivalenceAxiom</a>>:
+&lt;<a data-link-type="dfn" href="#classifierequivalenceaxiom" id="ClassifierEquivalenceAxiom-Syntax">ClassifierEquivalenceAxiom</a>>:
   [Classifier|IRI] (`&amp;` [Classifier|IRI])*
   |
   {ClassifierEquivalenceAxiom} 
@@ -3892,7 +3888,7 @@ to argument2.</p>
 &lt;<span id="ScalarEquivalence-Syntax">ScalarEquivalence</span>>:
   `=` ScalarEquivalenceAxiom (`,` ScalarEquivalenceAxiom)*;
 
-&lt;<span id="ScalarEquivalenceAxiom-Syntax①">ScalarEquivalenceAxiom</span>>:
+&lt;<span id="ScalarEquivalenceAxiom-Syntax">ScalarEquivalenceAxiom</span>>:
   [Scalar|IRI] (`[`
      (`length` UnsignedInteger)? 
      (`minLength` UnsignedInteger)?
@@ -3969,7 +3965,7 @@ to argument2.</p>
 &lt;<span id="PropertyEquivalence-Syntax">PropertyEquivalence</span>>:
   `=` PropertyEquivalenceAxiom (`,` PropertyEquivalenceAxiom)*
 
-&lt;<a data-link-type="dfn" href="#propertyequivalenceaxiom" id="PropertyEquivalenceAxiom-Syntax①">PropertyEquivalenceAxiom</a>>:
+&lt;<a data-link-type="dfn" href="#propertyequivalenceaxiom" id="PropertyEquivalenceAxiom-Syntax">PropertyEquivalenceAxiom</a>>:
   [Property|IRI]
 
 &lt;<a data-link-type="dfn" href="#rule" id="Rule-Syntax">Rule</a>>:
@@ -8069,13 +8065,302 @@ this metamodel and can be manipulated using its API.
        <td>imce-vocabularies
        <td><a href="https://github.com/opencaesar/imce-vocabularies/releases/tag/4.0.0">4.0.0</a>
     </table>
-    <h2 class="heading settled" data-level="9" id="Mapping-to-Owl2-and-Swrl"><span class="secno">9. </span><span class="content">Mapping to OWL2 and SWRL</span><a class="self-link" href="#Mapping-to-Owl2-and-Swrl"></a></h2>
-    <h3 class="heading settled" data-level="9.1" id="Description-Logic-Semantics"><span class="secno">9.1. </span><span class="content">Description Logic Semantics</span><a class="self-link" href="#Description-Logic-Semantics"></a></h3>
-    <p>Description Logic (DL) is a class of logic that is sufficiently expressive (between propositional and first-order logic) and decidable (in finite time). Since <a href="#Mapping-to-Owl2-and-Swrl">OML is mappable to OWL2-DL</a>, which is a subset of OWL2 that has DL semantics, OML models can be reasoned on with DL reasoners. Sevral over-the-shelf DL reasoner implementations exist such as <a href="https://github.com/stardog-union/pellet">Pellet</a>. There are two kinds of DL reasoning that can be performed on OML models: <em>satisfiability</em> analysis and <em>consistency</em> analysis.</p>
+    <h2 class="heading settled" data-level="9" id="Mapping-to-Owl-and-Swrl"><span class="secno">9. </span><span class="content">Mapping to OWL and SWRL</span><a class="self-link" href="#Mapping-to-Owl-and-Swrl"></a></h2>
+    <p>Description Logic (DL) is a class of logic that is sufficiently expressive (between propositional and first-order logic) and decidable (in finite time). Since <a href="#Mapping-to-Owl-and-Swrl">OML is mappable to OWL2-DL</a>, which is a subset of OWL2 that has DL semantics, OML models can be reasoned on with DL reasoners. Sevral over-the-shelf DL reasoner implementations exist such as <a href="https://github.com/stardog-union/pellet">Pellet</a>. There are two kinds of DL reasoning that can be performed on OML models: <em>satisfiability</em> analysis and <em>consistency</em> analysis.</p>
     <p>Satisfiability analysis can be run on a vocabuly bundle to check that the types defined by that bundle are instantiable, i.e., valid instances can be created for each of them. The concern checked here is whether any type is over constrained (e.g. specializes two disjoint types) such that valid instances of the type cannot be created.</p>
     <p>Consistency analysis can be run on a description bundle to check that the instances defined by that bundle are consistent with the rules of the used vocabularies. The concern checked here is whether any instance is involved in a logical contradition (e.g., two unequal instances assert different values to a functional property).</p>
-    <p>The reasoning process relies heavily on the inference semantics of the OML elements. These semantics are described by <a href="#Mapping-to-Owl2-and-Swrl">mapping</a> OML elements to corresponding OWL2-DL elements, which have DL semantics described in the <a href="https://www.w3.org/TR/owl2-syntax/">OWL2 standard</a>. The DL semantics allow generating inferred statements (called entailments) from asserted statements (defined in OML models). Such inference process is run repeatedly until all possible entailments are generated or until a contradiction is detected. In the latter case, a proof of the contradiction (a minimum set of statements exemplifying the contradiction) is emitted for the user to inspect.</p>
+    <p>The reasoning process relies heavily on the inference semantics of the OML elements. These semantics are described by <a href="#Mapping-to-Owl-and-Swrl">mapping</a> OML elements to corresponding OWL2-DL elements, which have DL semantics described in the <a href="https://www.w3.org/TR/owl2-syntax/">OWL2 standard</a>. The DL semantics allow generating inferred statements (called entailments) from asserted statements (defined in OML models). Such inference process is run repeatedly until all possible entailments are generated or until a contradiction is detected. In the latter case, a proof of the contradiction (a minimum set of statements exemplifying the contradiction) is emitted for the user to inspect.</p>
     <p>The <a href="https://github.com/opencaesar">openCAESAR</a> project provides tools that enables running DL reasoning on OML models. The first tool, called <a href="https://github.com/opencaesar/owl-adapter">OWL Adapter</a>, maps OML models to correspond OWL2-DL models. The second tool, called <a href="https://github.com/opencaesar/owl-tools">OWL Reason</a>, runs a DL reasoner on the resulting OWL2-DL models and generates a reasoning report that report on reasoning problems if any.</p>
+    <h2 class="heading settled" data-level="10" id="Version-Migration"><span class="secno">10. </span><span class="content">Version Migration</span><a class="self-link" href="#Version-Migration"></a></h2>
+    <p>The OML syntax and APIs have significantly changed from v1 to v2. This section summarizes these changes and provides guidance on migration.</p>
+    <p><strong>Syntax Changes</strong></p>
+    <ol>
+     <li data-md>
+      <p>
+       In v1 ontologies, only a subset of details could be specified on a `ref` to a `
+       <member>`. In v2, (almost) all details can be specified on a `ref`. This widens significantly the ability to split statements about a member in different ontologies, which better supports the ability to federate and extend descriptions. This also means that (most of) the previously required details of members have been relaxed to be optional. For example:</member>
+      </p>
+<pre class="highlight highlight-html">`ref relation entity` R1 [
+  `from` C1 // this adds C1 as another source of R1
+]
+
+`ref scalar property` name [
+  `domain` Pet // this adds Pet as another domain of name
+  `functional` // this adds the fsunctional flag
+]
+</pre>
+     <li data-md>
+      <p>In v2 ontologies, an annotation have now specify a value that is either a literal (as before) or an IRI of a `member` (new capability). For example:</p>
+<pre class="highlight highlight-html">@rdfs:label "Aggregates" // literal
+@rdfs:seeAlso base:Contains // reference to base:Contains
+`relation entity` Aggregtes
+</pre>
+     <li data-md>
+      <p>In v2 vocabularies, the specialization axiom symbol `:>` has changed into `&lt;` to better align with the semantics that a subclass is a subset of its superclass.</p>
+     <li data-md>
+      <p>In v2 vocabularies (since v2.3), the `restricts` statement syntax does not have property kind (`scalar property`, `structured property`, and `relation`) keywords any longer. For example:</p>
+<pre class="highlight highlight-html">`restricts all` performs `to` mission:Function
+</pre>
+     <li data-md>
+      <p>In v2 vocabularies, it has been clarified that the `restricts` statements, which used to be placed with other details about a term between `[]`,  actually belong to the specialization axiom.</p>
+      <p>This has caused the general term syntax to change from:</p>
+<pre class="highlight highlight-html">Term ::= <keyword> NAME (`&lt;` Specializations)? (`[` Details? Restrictions? `]`)?
+Specializations ::= REF (`,` REF)*
+</keyword></pre>
+      <p>to:</p>
+<pre class="highlight highlight-html">Term ::= <keyword> NAME (`[` Details `]`)? (`&lt;` Specializations)?
+Specializations ::= (REF (`,` REF)*)? (`[` Restriction*`]`)?
+</keyword></pre>
+      <p>For example:</p>
+<pre class="highlight highlight-html">`aspect` A1 [
+  `key` id // detail
+] &lt; A2
+
+`concept` C1 [
+  `oneOf` c11, c12, c13 // detail
+] &lt; C2, C3 [
+  `restricts all` p1 `to` "abc"
+]
+
+`concept` C2 &lt; C3, C4, C5 [
+  `restricts all` p1 `to` "abc"
+  `restricts` p2 `to` 2.0
+]
+
+`relation entity` R1 [ 
+  `from` C1    // detail
+  `to` A1     // detail
+  `forward` r1  // detail
+] &lt; R2 [
+  `restricts some` p2 `to` 2.0
+]
+
+`scalar` S1 [
+  `oneOf` "abc", "xyz" // detail
+] &lt; S2
+
+`scalar property` p1 [
+  `domain` D1  // detail
+  `range` R1   // detail
+] &lt; p2
+</pre>
+     <li data-md>
+      <p>In v2 vocabularies, a new equivalence axiom (`=`) has been added to the term syntax in addition to the specialization axiom (`&lt;`). While a specialization axiom says that a term is a sub of another term, an equivalence axiom says that the term is both a sub and a super of another term. The general term’s syntax is now:</p>
+<pre class="highlight highlight-html">Term ::= <keyword> NAME (`[` Details `]`)? (`&lt;` Specializations)? (`=` Equivalences)?
+Specializations ::= (REF (`,` REF)*)? (`[` Restriction*`]`)?
+Equivalences ::= Equivalence (`,` Equivalance)*
+</keyword></pre>
+      <p>In the case of classifiers, a single equivalence has the syntax:</p>
+<pre class="highlight highlight-html">Equivalence ::= (REF (`&amp;` REF)*)? (`[` Restriction*`]`)  // equals the intersection of other named terms and restrictions
+</pre>
+      <p>In the case of scalars and properties, a single equivalence has the syntax:</p>
+<pre class="highlight highlight-html">Equivalence ::= REF // equals another named term
+</pre>
+      <p>For example:</p>
+<pre class="highlight highlight-html">// A pizza that has a spicy topping is classified as a spicy pizza
+`concept` SpicyPizza = Pizza [
+  `restricts some` hasTopping `to` SpicyTopping
+]
+// A woman that is married is classified as a married woman
+`aspect` MarriedWoman = Married &amp; Woman
+// A string that has a particular pattern is an SSN
+`scalar` ssn = xsd:string [
+  `pattern` "[0-9]{3}-[0-9]{2}-[0-9]{4}"
+]
+// Saying food is spicy is the same as saying that it is hot and vice versa
+`scalar property` isSpicy [
+  `domain` Food
+  `range` xsd:boolean
+  `functional`
+] = isHot
+</pre>
+     <li data-md>
+      <p>In v2 vocabularies, a concept or scalar enumeration can now be specified consistently with a `oneOf` statement in the the details between `[]`. This also removes the special type `enumerated scalar` in v1 and retains only the `scalar` type.</p>
+      <p>For enumerated literals, the syntax has changed from:</p>
+<pre class="highlight highlight-html">EnumeratedScalar ::= `enumerated scalar` NAME `[`
+  Literal (`,` Literal)*
+`]`
+</pre>
+      <p>to</p>
+<pre class="highlight highlight-html">Scalar ::= `scalar` NAME `[`
+  (`oneOf` Literal (`,` Literal)*)?
+  // other details ...
+`]`
+</pre>
+      <p>For enumerated concept instances, the syntax has changed from:</p>
+<pre class="highlight highlight-html">Concept ::= `concept` NAME `[`
+  (`enumerates` REF (`,` REF)*)?
+  // other details ...
+`]`
+</pre>
+      <p>to</p>
+<pre class="highlight highlight-html">Concept ::= `concept` NAME `[`
+  (`oneOf` REF (`,` REF)*)?
+  // other details ...
+`]`
+</pre>
+      <p>For example:</p>
+<pre class="highlight highlight-html">`scalar` RGB [
+  `oneOf` "Red", "Green", "Blue" // literals
+]
+
+`concept` RockyPlanet [
+  `oneOf` Mercury, Venus, Earth, Mars // instances
+]
+</pre>
+     <li data-md>
+      <p>In v2 vocabularies, it has been clarified that scalar facets (e.g., length, pattern, etc.) do not belong to the scalar’s details between `[]`, but rather to the new scalar equivalence axiom. This allows such facets to be specified on a per equivalence basis.</p>
+      <p>For example:</p>
+<pre class="highlight highlight-html">`scalar` ssn = xsd:string [
+  `pattern` "[0-9]{3}-[0-9]{2}-[0-9]{4}"
+]
+
+`scalar` positiveReal = xsd:real [
+  `minInclusive` 0
+], xsd:real [
+  `maxInclusive` 9999
+]
+</pre>
+     <li data-md>
+      <p>In v2 vocabularies, a new (unreified) `relation` can now be specified as an alternative to a (refieid) `relation entity`. This supports cases where instances of the relation are not foreseen in descriptions. It also helps avoid synthesizing relation entity names when mapping vocabularies from other formats that do not natively support reified relations. The syntax of an unreified `relation` resembles closely that of a `relation entity` (except for the `forward` statement). The syntax of an unreieifed `relation` is (partially) as follows:</p>
+<pre class="highlight highlight-html">Relation ::= `relation` NAME (`[`
+  `from` REF
+  `to` REF
+  (`reverse` NAME)? // notice there is no forward NAME statement
+  // other details in a relation entity
+`]`)? // specialization and equivalence axioms to other relations
+</pre>
+      <p>For example:</p>
+<pre class="highlight highlight-html">`relation` isHusbandOf [
+  `from` Man
+  `to` Woman
+  `reverse` isWifeOf
+]
+
+`relation entity` IsTeacherOf [
+  `from` Teacher
+  `to` Student
+  `forward` isTeacherOf
+  `reverse` isStudentOf
+]
+</pre>
+     <li data-md>
+      <p>In v2 vocabularies, an unreified relation can now be referenced anywhere other relations (like `forward`, `reverse`) can. This includes restriction statements (`restricts REL_REF`), specialization statements (`&lt; REL_REF`), equivalence statements (`= REL_REF`), rule predicates (`REL_REF(ARG1, ARG2)`), assertion axioms (`REL_REF TARGET_REF`), etc. Also, a relation is a kind of property in v2, whereas a relation entity is a kind of type. Therefore, a relation cannot be a supertype of a relation entity (and vice versa). But, an unreified relation can have any relation (including forward and reverse) as a super relstion.</p>
+     <li data-md>
+      <p>In v2 vocabularies, the `from` and `to` statements (of relations), as well as the `domain` and `range` statements (of properties), can now specify more than one type as a value (both on the original definition or on a `ref` of the member). The semantics of having multiple types is equivalent to the intersection of those types. This makes a value asserted as a subject (or object) of a property (or relation) to be classified by all the types at once.</p>
+      <p>For example:</p>
+<pre class="highlight highlight-html">// In a vocabulary
+`relation` isBoxedIn [
+  `from` Red, Ball
+  `to` Box
+]
+`relation` isPetOf [
+  `from` Cat, Dog
+  `to` Person
+]
+// In a description
+`instance` Ball1 [
+  isBoxedIn Box1 // this will cause Ball1 to be classified by both Red and Ball
+]
+`instance` Tom [
+  isPetOf Jack // this will cause Tom to be classified by both Cat and Dog
+]
+</pre>
+     <li data-md>
+      <p>In v2 vocabularies, the symbol `^` separating rule predicates has changed to `&amp;` to better reflect the AND semantics between predicates.</p>
+     <li data-md>
+      <p>
+       In v2 vocabularies, a new term `builtIn` has been added to define a builtin function that can be referenced by a rule antecedant predicate. A standard set of builtins has been added to the `core-vocabularies` library in the `
+       <httpU0003A U000311 U00032003 swrlbU00023 www.w3.org>` vocabulary. Note that a custom `builtIn` function cannot be specified yet.</httpU0003A>
+      </p>
+<pre class="highlight highlight-html">// in the "http://www.w3.org/2003/11/swrlb#" vocabulary
+	 
+@rdfs:comment "Satisfied iff the first argument is equal to the string ..."
+`builtin` stringConcat
+
+// in a vocabulary
+	 
+`rule` FullName [
+    firstName(?x, ?first) &amp; 
+    lastName(?x, ?last) &amp;
+    swrlb:stringConcat(?full, ?first, " ", ?last) // builtins can only be referenced in antecedent
+    -> fullName(?x, ?full)
+]
+</pre>
+     <li data-md>
+      <p>In v2 descriptions, the symbol `ci` for a concept instance has now changed to the more readable `instance`. Also, such instances can also now be typed by both `Concepts` and `Aspects` (whereas only `Concepts` were the only valid types in v1).</p>
+     <li data-md>
+      <p>In v2 descriptions, the symbol `ri` for a relation instance has now changed to the more readable `relation instance`. Also, such instances can also now be typed by both `Relation Entities` and `Aspects` (whereas only `Relation Entities` were the only valid types in v1).</p>
+    </ol>
+    <p><strong>API Changes</strong></p>
+    <p>The above changes to the OML textual syntax have induced some changes to the OML Java API. Other changes were done done to simplify the API. The following is a list of main changes to the OML API:</p>
+    <ol>
+     <li data-md>
+      <p>Merged (and removed) class `AnnotatedElement` into class `IdentifiedElement` (the impact is that `Import` statements can no longer be annotated).</p>
+     <li data-md>
+      <p>Collapsed the `Import` class  hierarchy into a single `Import` class with an enumeration kind that has literals: `extends`, `uses`, and `includes`.</p>
+     <li data-md>
+      <p>Renamed class `Feature` to `Property`, made the latter the supertype of classes `AnnotatedProperty` and `SemanticProperty`, and made class `Relation` extend from `SemanticProperty`.</p>
+     <li data-md>
+      <p>Collapsed the `Restriction` class hierarchy into 3 subclasses restricting range, cardinality, or value of a property, and made class `Entity` has a single collection for restrictions.</p>
+     <li data-md>
+      <p>Removed class `LinkAssertion` (replaced by `PropertyValueAssertion`) and made class `NamedInstance` has a single collection of property value assertions.</p>
+     <li data-md>
+      <p>Moved the types collection (now of concrete type `TypeAssertion`) from both classes `ConceptInstance` and `RelationInstance` into their superclass `NamedInstance`.</p>
+     <li data-md>
+      <p>Made class `RelationEntityPredicate` a subclass of both `UniaryPredicate` and `BinaryPredicate`.</p>
+     <li data-md>
+      <p>Removed the `Reference` class hierarchy entirely and merged it into the `Member` class hierarchy (a member can have either a name or a ref to another member).</p>
+    </ol>
+    <p><strong>Migration Guide</strong></p>
+    <p>Migrating OML v1 textual syntax to that of v2 can be done in a text editor using the following process:</p>
+    <ol>
+     <li data-md>
+      <p>Replace the symbol `:>` by `&lt;`.</p>
+     <li data-md>
+      <p>Replace the symbol `ci ` by `instance `.</p>
+     <li data-md>
+      <p>Replace the symbol `ri ` by `relation instance `.</p>
+     <li data-md>
+      <p>Replace the syntax `keyword NAME &lt; REFS [Details]` by the syntax `keyword NAME [Details] &lt; REFs`.</p>
+     <li data-md>
+      <p>Replace the syntax `keyword NAME [Restrictions]` by the syntax `keyword NAME &lt; [Restrictions]`.</p>
+     <li data-md>
+      <p>Replace the syntax `keyword NAME &lt; REFS [Details Restrictions]` by the syntax `keyword NAME [Details] &lt; REFS [Restrictions]`.</p>
+     <li data-md>
+      <p>Replace the syntax `concept NAME [ enumerates REFS ]` by the syntax `concept NAME [ oneOf REFS ]`.</p>
+     <li data-md>
+      <p>Replace the syntax `enumerated scalar NAME &lt; REFS [ LITERALS ]` by the syntax `scalar NAME [ oneOf LITERALS ]`.</p>
+     <li data-md>
+      <p>Replace the syntax `scalar NAME &lt; REFS [ FACETS ]` by the syntax `scalar NAME = REFS [ FACETS ]`.</p>
+    </ol>
+    <p>Migrating OML v1 XMI syntax for Descriptions to that of v2 can be done in a text editor using the following process:</p>
+    <ol>
+     <li data-md>
+      <p>Replace `ConceptTypeAssertion` by `TypeAssertion`.</p>
+     <li data-md>
+      <p>Replace `ScalarPropertyValueAssertion` by `PropertyValueAssertion`.</p>
+     <li data-md>
+      <p>Replace `LinkAssertion` by `PropertyValueAssertion`.</p>
+     <li data-md>
+      <p>
+       Replace `
+       <valueU00060 U00060U0003CliteralvalueU00060.U0003C by p></valueU00060>
+      </p>
+     <li data-md>
+      <p>
+       Replace `
+       <ownedlinksU00060 U00060U0003CownedpropertyvaluesU00060.U0003C by p></ownedlinksU00060>
+      </p>
+     <li data-md>
+      <p>
+       Replace `
+       <relationU00060 U00060U0003CpropertyU00060.U0003C by p></relationU00060>
+      </p>
+     <li data-md>
+      <p>Replace `target=` by `referencedValue=`.</p>
+    </ol>
+    <p class="note" role="note"><span class="marker">Note:</span> some of the above steps can be automated by the use of this <a href="https://github.com/opencaesar/oml/tree/master/scripts">script</a>.</p>
    </div>
   </main>
   <div data-fill-with="conformance">
@@ -8525,12 +8810,12 @@ window.dfnpanelData['sameaspredicate'] = {"dfnID": "sameaspredicate", "url": "#s
 window.dfnpanelData['typepredicate'] = {"dfnID": "typepredicate", "url": "#typepredicate", "dfnText": "TypePredicate", "refSections": [{"refs": [{"id": "TypePredicate-Syntax"}], "title": "4. Textual BNF"}, {"refs": [{"id": "ref-for-typepredicate"}], "title": "6.7.10. UnaryPredicate"}], "external": false};
 window.dfnpanelData['unarypredicate'] = {"dfnID": "unarypredicate", "url": "#unarypredicate", "dfnText": "UnaryPredicate", "refSections": [{"refs": [{"id": "UnaryPredicate-Syntax"}], "title": "4. Textual BNF"}, {"refs": [{"id": "ref-for-unarypredicate"}], "title": "6.7.5. Predicate"}, {"refs": [{"id": "ref-for-unarypredicate\u2460"}, {"id": "ref-for-unarypredicate\u2461"}], "title": "6.7.7. RelationEntityPredicate"}, {"refs": [{"id": "ref-for-unarypredicate\u2462"}, {"id": "ref-for-unarypredicate\u2463"}], "title": "6.7.9. TypePredicate"}], "external": false};
 window.dfnpanelData['axiom'] = {"dfnID": "axiom", "url": "#axiom", "dfnText": "Axiom", "refSections": [{"refs": [{"id": "ref-for-axiom"}], "title": "6.1.2. Element"}, {"refs": [{"id": "ref-for-axiom\u2460"}, {"id": "ref-for-axiom\u2461"}], "title": "6.8.2. ClassifierEquivalenceAxiom"}, {"refs": [{"id": "ref-for-axiom\u2462"}, {"id": "ref-for-axiom\u2463"}], "title": "6.8.3. InstanceEnumerationAxiom"}, {"refs": [{"id": "ref-for-axiom\u2464"}, {"id": "ref-for-axiom\u2465"}], "title": "6.8.4. KeyAxiom"}, {"refs": [{"id": "ref-for-axiom\u2466"}, {"id": "ref-for-axiom\u2467"}], "title": "6.8.5. LiteralEnumerationAxiom"}, {"refs": [{"id": "ref-for-axiom\u2468"}, {"id": "ref-for-axiom\u2460\u24ea"}], "title": "6.8.7. PropertyEquivalenceAxiom"}, {"refs": [{"id": "ref-for-axiom\u2460\u2460"}, {"id": "ref-for-axiom\u2460\u2461"}], "title": "6.8.9. PropertyRestrictionAxiom"}, {"refs": [{"id": "ref-for-axiom\u2460\u2462"}, {"id": "ref-for-axiom\u2460\u2463"}], "title": "6.8.12. ScalarEquivalenceAxiom"}, {"refs": [{"id": "ref-for-axiom\u2460\u2464"}, {"id": "ref-for-axiom\u2460\u2465"}], "title": "6.8.13. SpecializationAxiom"}], "external": false};
-window.dfnpanelData['classifierequivalenceaxiom'] = {"dfnID": "classifierequivalenceaxiom", "url": "#classifierequivalenceaxiom", "dfnText": "ClassifierEquivalenceAxiom", "refSections": [{"refs": [{"id": "ref-for-classifierequivalenceaxiom"}, {"id": "ClassifierEquivalenceAxiom-Syntax"}], "title": "3.2.4.5. Classifier Equivalence Axiom"}, {"refs": [{"id": "ClassifierEquivalenceAxiom-Syntax\u2460"}], "title": "4. Textual BNF"}, {"refs": [{"id": "ref-for-classifierequivalenceaxiom\u2460"}, {"id": "ref-for-classifierequivalenceaxiom\u2461"}], "title": "6.4.2. Classifier"}, {"refs": [{"id": "ref-for-classifierequivalenceaxiom\u2462"}], "title": "6.8.1. Axiom"}, {"refs": [{"id": "ref-for-classifierequivalenceaxiom\u2463"}], "title": "6.8.9. PropertyRestrictionAxiom"}], "external": false};
+window.dfnpanelData['classifierequivalenceaxiom'] = {"dfnID": "classifierequivalenceaxiom", "url": "#classifierequivalenceaxiom", "dfnText": "ClassifierEquivalenceAxiom", "refSections": [{"refs": [{"id": "ref-for-classifierequivalenceaxiom"}], "title": "3.2.4.5. Classifier Equivalence Axiom"}, {"refs": [{"id": "ClassifierEquivalenceAxiom-Syntax"}], "title": "4. Textual BNF"}, {"refs": [{"id": "ref-for-classifierequivalenceaxiom\u2460"}, {"id": "ref-for-classifierequivalenceaxiom\u2461"}], "title": "6.4.2. Classifier"}, {"refs": [{"id": "ref-for-classifierequivalenceaxiom\u2462"}], "title": "6.8.1. Axiom"}, {"refs": [{"id": "ref-for-classifierequivalenceaxiom\u2463"}], "title": "6.8.9. PropertyRestrictionAxiom"}], "external": false};
 window.dfnpanelData['instanceenumerationaxiom'] = {"dfnID": "instanceenumerationaxiom", "url": "#instanceenumerationaxiom", "dfnText": "InstanceEnumerationAxiom", "refSections": [{"refs": [{"id": "InstanceEnumerationAxiom-Syntax"}], "title": "4. Textual BNF"}, {"refs": [{"id": "ref-for-instanceenumerationaxiom"}], "title": "6.4.3. Concept"}, {"refs": [{"id": "ref-for-instanceenumerationaxiom\u2460"}], "title": "6.8.1. Axiom"}], "external": false};
 window.dfnpanelData['keyaxiom'] = {"dfnID": "keyaxiom", "url": "#keyaxiom", "dfnText": "KeyAxiom", "refSections": [{"refs": [{"id": "KeyAxiom-Syntax"}], "title": "4. Textual BNF"}, {"refs": [{"id": "ref-for-keyaxiom"}, {"id": "ref-for-keyaxiom\u2460"}], "title": "6.4.4. Entity"}, {"refs": [{"id": "ref-for-keyaxiom\u2461"}], "title": "6.8.1. Axiom"}], "external": false};
 window.dfnpanelData['literalenumerationaxiom'] = {"dfnID": "literalenumerationaxiom", "url": "#literalenumerationaxiom", "dfnText": "LiteralEnumerationAxiom", "refSections": [{"refs": [{"id": "LiteralEnumerationAxiom-Syntax"}], "title": "4. Textual BNF"}, {"refs": [{"id": "ref-for-literalenumerationaxiom"}], "title": "6.4.5. Scalar"}, {"refs": [{"id": "ref-for-literalenumerationaxiom\u2460"}], "title": "6.8.1. Axiom"}], "external": false};
 window.dfnpanelData['propertycardinalityrestrictionaxiom'] = {"dfnID": "propertycardinalityrestrictionaxiom", "url": "#propertycardinalityrestrictionaxiom", "dfnText": "PropertyCardinalityRestrictionAxiom", "refSections": [{"refs": [{"id": "PropertyCardinalityRestrictionAxiom-Syntax"}], "title": "4. Textual BNF"}, {"refs": [{"id": "ref-for-propertycardinalityrestrictionaxiom"}], "title": "6.5.2. CardinalityRestrictionKind"}, {"refs": [{"id": "ref-for-propertycardinalityrestrictionaxiom\u2460"}], "title": "6.8.9. PropertyRestrictionAxiom"}], "external": false};
-window.dfnpanelData['propertyequivalenceaxiom'] = {"dfnID": "propertyequivalenceaxiom", "url": "#propertyequivalenceaxiom", "dfnText": "PropertyEquivalenceAxiom", "refSections": [{"refs": [{"id": "ref-for-propertyequivalenceaxiom"}, {"id": "PropertyEquivalenceAxiom-Syntax"}], "title": "3.2.4.9. Property Equivalence Axiom"}, {"refs": [{"id": "PropertyEquivalenceAxiom-Syntax\u2460"}], "title": "4. Textual BNF"}, {"refs": [{"id": "ref-for-propertyequivalenceaxiom\u2460"}, {"id": "ref-for-propertyequivalenceaxiom\u2461"}], "title": "6.5.8. SpecializableProperty"}, {"refs": [{"id": "ref-for-propertyequivalenceaxiom\u2462"}], "title": "6.8.1. Axiom"}], "external": false};
+window.dfnpanelData['propertyequivalenceaxiom'] = {"dfnID": "propertyequivalenceaxiom", "url": "#propertyequivalenceaxiom", "dfnText": "PropertyEquivalenceAxiom", "refSections": [{"refs": [{"id": "ref-for-propertyequivalenceaxiom"}], "title": "3.2.4.9. Property Equivalence Axiom"}, {"refs": [{"id": "PropertyEquivalenceAxiom-Syntax"}], "title": "4. Textual BNF"}, {"refs": [{"id": "ref-for-propertyequivalenceaxiom\u2460"}, {"id": "ref-for-propertyequivalenceaxiom\u2461"}], "title": "6.5.8. SpecializableProperty"}, {"refs": [{"id": "ref-for-propertyequivalenceaxiom\u2462"}], "title": "6.8.1. Axiom"}], "external": false};
 window.dfnpanelData['propertyrangerestrictionaxiom'] = {"dfnID": "propertyrangerestrictionaxiom", "url": "#propertyrangerestrictionaxiom", "dfnText": "PropertyRangeRestrictionAxiom", "refSections": [{"refs": [{"id": "PropertyRangeRestrictionAxiom-Syntax"}], "title": "4. Textual BNF"}, {"refs": [{"id": "ref-for-propertyrangerestrictionaxiom"}], "title": "6.5.4. RangeRestrictionKind"}, {"refs": [{"id": "ref-for-propertyrangerestrictionaxiom\u2460"}], "title": "6.8.9. PropertyRestrictionAxiom"}], "external": false};
 window.dfnpanelData['propertyrestrictionaxiom'] = {"dfnID": "propertyrestrictionaxiom", "url": "#propertyrestrictionaxiom", "dfnText": "PropertyRestrictionAxiom", "refSections": [{"refs": [{"id": "ref-for-propertyrestrictionaxiom"}, {"id": "ref-for-propertyrestrictionaxiom\u2460"}], "title": "3.2.4.4. Classifier Specialization Axiom"}, {"refs": [{"id": "ref-for-propertyrestrictionaxiom\u2461"}, {"id": "ref-for-propertyrestrictionaxiom\u2462"}, {"id": "ref-for-propertyrestrictionaxiom\u2463"}, {"id": "ref-for-propertyrestrictionaxiom\u2464"}], "title": "3.2.4.5. Classifier Equivalence Axiom"}, {"refs": [{"id": "PropertyRestrictionAxiom-Syntax"}], "title": "4. Textual BNF"}, {"refs": [{"id": "ref-for-propertyrestrictionaxiom\u2465"}, {"id": "ref-for-propertyrestrictionaxiom\u2466"}], "title": "6.4.2. Classifier"}, {"refs": [{"id": "ref-for-propertyrestrictionaxiom\u2467"}], "title": "6.8.1. Axiom"}, {"refs": [{"id": "ref-for-propertyrestrictionaxiom\u2468"}, {"id": "ref-for-propertyrestrictionaxiom\u2460\u24ea"}], "title": "6.8.2. ClassifierEquivalenceAxiom"}, {"refs": [{"id": "ref-for-propertyrestrictionaxiom\u2460\u2460"}, {"id": "ref-for-propertyrestrictionaxiom\u2460\u2461"}], "title": "6.8.6. PropertyCardinalityRestrictionAxiom"}, {"refs": [{"id": "ref-for-propertyrestrictionaxiom\u2460\u2462"}, {"id": "ref-for-propertyrestrictionaxiom\u2460\u2463"}], "title": "6.8.8. PropertyRangeRestrictionAxiom"}, {"refs": [{"id": "ref-for-propertyrestrictionaxiom\u2460\u2464"}, {"id": "ref-for-propertyrestrictionaxiom\u2460\u2465"}], "title": "6.8.10. PropertySelfRestrictionAxiom"}, {"refs": [{"id": "ref-for-propertyrestrictionaxiom\u2460\u2466"}, {"id": "ref-for-propertyrestrictionaxiom\u2460\u2467"}], "title": "6.8.11. PropertyValueRestrictionAxiom"}], "external": false};
 window.dfnpanelData['propertyselfrestrictionaxiom'] = {"dfnID": "propertyselfrestrictionaxiom", "url": "#propertyselfrestrictionaxiom", "dfnText": "PropertySelfRestrictionAxiom", "refSections": [{"refs": [{"id": "PropertySelfRestrictionAxiom-Syntax"}], "title": "4. Textual BNF"}, {"refs": [{"id": "ref-for-propertyselfrestrictionaxiom"}], "title": "6.8.9. PropertyRestrictionAxiom"}], "external": false};
