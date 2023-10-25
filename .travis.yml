@@ -11,7 +11,7 @@ before_install:
   - sudo apt-get install graphviz
 
 install:
-  - pip3 install bikeshed
+  - pip3 install bikeshed==3.13.0
 
 script:
   - ./gradlew build generateDocs

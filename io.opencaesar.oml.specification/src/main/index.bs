@@ -1,14 +1,19 @@
 <pre class='metadata'>
-Title: Ontological Modeling Language 2.0.0
+Title: Ontological Modeling Language v2
 Shortname: oml
-Revision: 2.0.0
+Revision: 2
+Level: 1
 Status: LS
 URL: https://www.opencaesar.io/oml
 Previous Version: https://www.opencaesar.io/oml/v1
 Editor: Maged Elaasar (JPL)
 Editor: Nicolas Rouquette (JPL)
-Local Boilerplate: copyright yes, logo yes
-Markup Shorthands: markdown yes
+Boilerplate: copyright no, conformance no
+Local Boilerplate: logo yes
+Markup Shorthands: markdown yes, css no
+Use Dfn Panels: yes
+Line Numbers: no
+Complain About: mixed-indents no
 Abstract: This document describes the Ontological Modeling Language (OML). This language enables defining systems engineering vocabularies and using them to describe systems. OML is inspired by the [Web Ontology Language 2 (OWL2)](https://www.w3.org/TR/owl2-syntax/) and the [Semantic Web Rule Language (SWRL)](https://www.w3.org/Submission/SWRL/) and can be considered a gentler and more disciplined way of using these standards in the context of Systems Engineering. By mapping the OML constructs to a number of patterns expressed in subsets of OWL2 and SWRL, OML inherits its expressivity, modularity, extensibility, and description logic (DL) semantics, but also provides a concise and user-friendly syntax. Moreover, OML is implementd using the [Eclipse Modeling Framework (EMF)](https://www.eclipse.org/modeling/emf/), which gives it a Java API and integration with a large ecosystem of modeling frameworks that has been used to develop useful tools, many of which are provided by the [openCAESAR](http://www.opencaesar.io/) project.
 
 </pre>
