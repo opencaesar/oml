@@ -167,13 +167,7 @@ final class OmlUriResolver {
     }
 
 	private URI resolveFromResourceSet(ResourceSet rs, String iri) {
-		Ontology ontology = rs.getResources().stream()
-			.flatMap(i -> i.getContents().stream())
-			.filter(i -> i instanceof Ontology)
-			.map(i -> (Ontology)i)
-			.filter(i -> i.getIri().equals(iri))
-			.findFirst()
-			.orElse(null);
+		Ontology ontology = OmlRead.getOntologyByIri(rs, iri);
 		return (ontology != null) ? ontology.eResource().getURI() : null;
 	}
 	

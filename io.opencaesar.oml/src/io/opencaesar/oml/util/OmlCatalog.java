@@ -107,22 +107,22 @@ public final class OmlCatalog {
     }
 
     /**
-     * Resolves the given URI to a file path
+     * Resolves the given logical URI to a physical URI
      * 
-     * @param uri The URI to resolve
-     * @return The resolved file path
-     * @throws IOException if the URI cannot be resolved to a valid path
+     * @param uri The logical URI to resolve
+     * @return The resolved physical URI
+     * @throws IOException if the logical URI cannot be resolved to a physical path
      */
     public URI resolveUri(URI uri) throws IOException {
     	return URI.createURI(catalog.resolveUri(uri.toString()));
     }
 
     /**
-     * Deresolves the given file path to a URI
+     * Deresolves the given physical URI to a logical URI
      * 
-     * @param path The file path to deresolve
-     * @return The deresolved URI
-     * @throws IOException if the file path cannot be deresolved into a URI
+     * @param path The physical URI to deresolve
+     * @return The deresolved logical URI
+     * @throws IOException if the physical URI cannot be deresolved to a logical URI
      */
     public URI deresolveUri(URI path) throws IOException {
 		for (CatalogEntry e : catalog.getCatalogEntries()) {
@@ -141,13 +141,13 @@ public final class OmlCatalog {
     }
 
     /**
-     * Gets the URIs of files that can be resolved by this catalog
+     * Gets the physical URIs that are resolved by this catalog
      * 
-     * @return a list of file URIs
+     * @return a list of physical URIs
      */
     public List<URI> getResolvedUris() throws IOException {
 		var uris = new ArrayList<URI>();
-		for (final String rewriteUri : catalog.getRewriteUris()) {
+		for (final String rewriteUri : getRewriteUris()) {
 			var path = new File(CommonPlugin.asLocalURI(URI.createURI(rewriteUri)).toFileString());
 			if (path.isDirectory()) {
 				for (var file : getFiles(path, extensions)) {
@@ -164,13 +164,29 @@ public final class OmlCatalog {
 				}
 			}
 		}
+		return uris;
+    }
+
+    /**
+     * Gets the rewrite URIs supported by this catalog
+     * 
+     * @return a list of rewrite URIs
+     */
+    public List<String> getRewriteUris() throws IOException {
+		var uris = new ArrayList<>(catalog.getRewriteUris());
 		for (final OmlCatalog nestedCatalog : nestedCatalogs) {
-			uris.addAll(nestedCatalog.getResolvedUris());
+			uris.addAll(nestedCatalog.getRewriteUris());
 		}
 		return uris;
     }
 
-    public boolean isResolvedUri(URI uri) {
+    /**
+     * Checks whether the given physical URI is resolved by this catalog
+     *  
+     * @param uri The given uri
+     * @return true if the uri can be resolved, false otherwise
+     */
+    boolean isResolvedUri(URI uri) {
         for (String rewriteURI : catalog.getRewriteUris()) {
         	if (uri.toString().startsWith(rewriteURI.toString())) {
         		return true;

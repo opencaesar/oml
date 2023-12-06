@@ -8,8 +8,8 @@ URL: https://www.opencaesar.io/oml
 Previous Version: https://www.opencaesar.io/oml/v1
 Editor: Maged Elaasar (JPL)
 Editor: Nicolas Rouquette (JPL)
-Boilerplate: copyright no, conformance no
-Local Boilerplate: logo yes
+Boilerplate: conformance no
+Local Boilerplate: copyright yes, logo yes
 Markup Shorthands: markdown yes, css no
 Use Dfn Panels: yes
 Line Numbers: no

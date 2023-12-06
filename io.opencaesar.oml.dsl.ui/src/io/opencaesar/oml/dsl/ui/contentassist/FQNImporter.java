@@ -41,9 +41,12 @@ public class FQNImporter extends FQNShortener {
 	
 	private final ITextViewer viewer;
 
-	public FQNImporter(Resource context, ITextViewer viewer, IScope scope, IQualifiedNameConverter qualifiedNameConverter, IValueConverter<String> valueConverter) {
+	private IValueConverter<String> idConverter;
+
+	public FQNImporter(Resource context, ITextViewer viewer, IScope scope, IQualifiedNameConverter qualifiedNameConverter, IValueConverter<String> valueConverter, IValueConverter<String> idConverter) {
 		super(context, scope, qualifiedNameConverter, valueConverter);
 		this.viewer = viewer;
+		this.idConverter = idConverter;
 	}
 
 	@Override
@@ -88,6 +91,9 @@ public class FQNImporter extends FQNShortener {
 		}
 		// get the import prefix
 		var importPrefix = description.getUserData("defaultPrefix");
+		if (idConverter != null) {
+			importPrefix = idConverter.toString(importPrefix);
+		}
 	
 		// store the pixel coordinates to prevent the ui from flickering
 		int topPixel = -1;

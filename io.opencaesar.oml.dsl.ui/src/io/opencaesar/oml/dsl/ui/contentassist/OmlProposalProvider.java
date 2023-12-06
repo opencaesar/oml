@@ -45,6 +45,7 @@ import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.Ontology;
 import io.opencaesar.oml.Vocabulary;
 import io.opencaesar.oml.VocabularyBundle;
+import io.opencaesar.oml.dsl.conversion.ABBREV_IRIValueConverter;
 import io.opencaesar.oml.dsl.conversion.NAMESPACEValueConverter;
 import io.opencaesar.oml.dsl.services.OmlGrammarAccess;
 
@@ -68,6 +69,9 @@ public class OmlProposalProvider extends AbstractOmlProposalProvider {
 	@Inject
 	private NAMESPACEValueConverter qualifiedNameValueConverter;
 
+	@Inject
+	private ABBREV_IRIValueConverter abbrev_iriValueConverter;
+
 	@Override
 	protected void lookupCrossReference(final CrossReference crossReference, final EReference reference, final ContentAssistContext contentAssistContext, final ICompletionProposalAcceptor acceptor,
 			final Predicate<IEObjectDescription> filter) {
@@ -76,7 +80,7 @@ public class OmlProposalProvider extends AbstractOmlProposalProvider {
 	}
 
 	private ICompletionProposalAcceptor getImportingProposalAcceptor(final IScope scope, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
-		final var textApplier = new FQNImporter(context.getResource(), context.getViewer(), scope, this.qualifiedNameConverter, this.qualifiedNameValueConverter);
+		final var textApplier = new FQNImporter(context.getResource(), context.getViewer(), scope, this.qualifiedNameConverter, this.qualifiedNameValueConverter, abbrev_iriValueConverter);
 		final var.Delegate scopeAwareAcceptor = new ICompletionProposalAcceptor.Delegate(acceptor) {
 			@Override
 			public void accept(final ICompletionProposal proposal) {
@@ -135,7 +139,7 @@ public class OmlProposalProvider extends AbstractOmlProposalProvider {
 			var eReference = EcoreFactory.eINSTANCE.createEReference();
 			eReference.setEType(OmlPackage.Literals.ONTOLOGY);
 			final IScope scope = omlGlobalScopeProvider.getScope(_import.eResource(), eReference, x -> x.getUserData("namespace").equals(_import.getNamespace()));
-			scope.getAllElements().forEach(o -> acceptor.accept(this.createCompletionProposal(o.getUserData("prefix"), context)));
+			scope.getAllElements().forEach(o -> acceptor.accept(this.createCompletionProposal(this.abbrev_iriValueConverter.toString(o.getUserData("prefix")), context)));
 		}
 	}
 
