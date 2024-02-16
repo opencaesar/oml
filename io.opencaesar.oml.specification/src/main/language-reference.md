@@ -385,7 +385,7 @@ The following example vocabulary defines a concept *Component*, and references a
 
 #### Relation Entity #### {#RelationEntity-LR}
 
- A [relation entity](#RelationEntity-Syntax) is an entity defined in a vocabulary and represents a reified relation between two other entities in a modeled domain. A relation entity is declared with the keyword `relation` `entity` followed by an `ID`. An existing (local or imported) relation entity can be referenced by the keywords `ref` `relation` `entity` followed by its `IRI`. A relation entity specifies between a pair of `[` `]` brackets optional `from` (domain) entities and optional `to` (range) entities that can be inferred as types of instances related by this relation. When either is omitted, no type can be inferred for a related instance in that position. A relation entity can also specify optional names for non-reified `forward` relation (with the same domains and ranges) and `reverse` relation (with the opposite domains and ranges). Moreover, a relation entity can specify various DL flags (`functional`, `inverse functional`, `symmetric`, `assymetric`, `reflective`, `irreflexive`, and `transitive`) and a set of [KeyAxioms](#KeyAxiom-LR). It can also be followed by an optional [ClassifierSpecializationAxiom](#ClassifierSpecializationAxiom-LR) and an optional [ClassifierEquivalenceAxiom](#ClassifierEquivalenceAxiom-LR), using the following syntax.
+ A [relation entity](#RelationEntity-Syntax) is an entity defined in a vocabulary and represents a reified relation between two entities in a modeled domain. A relation entity is declared with the keyword `relation` `entity` followed by an `ID`. An existing (local or imported) relation entity can be referenced by the keywords `ref` `relation` `entity` followed by its `IRI`. A relation entity can specify between `[` `]`  some more details like optional `from` (domain) entities and optional `to` (range) entities that represent types of instances related by this relation, optional names for non-reified `forward` relation (with the same domains and ranges) and non-reified `reverse` relation (with the opposite domains and ranges), various DL flags (`functional`, `inverse functional`, `symmetric`, `assymetric`, `reflective`, `irreflexive`, and `transitive`), as well as a set of [KeyAxioms](#KeyAxiom-LR). A relation entity definition can also be followed by an optional [ClassifierSpecializationAxiom](#ClassifierSpecializationAxiom-LR) and an optional [ClassifierEquivalenceAxiom](#ClassifierEquivalenceAxiom-LR), using the following syntax.
 
 <pre class="highlight highlight-html">
 	Annotation*
@@ -405,7 +405,7 @@ The following example vocabulary defines a concept *Component*, and references a
 	`]`)? (ClassifierSpecialization)? (ClassifierEquivalence)?
 </pre>
 
-The optional [forward relation](#ForwardRelation-Syntax) and [reverse relation](#ReverseRelation-Syntax) are specified by ID as part of the textual syntax a relation entity as shown belpw. When both are specified, the forward and reverse relations become inverse of each other, meaning if one is asserted (from named instance A to B), the other is inferred in the opposite direction (from named instance B to A).
+The optional [forward relation](#ForwardRelation-Syntax) and [reverse relation](#ReverseRelation-Syntax) are specified by `ID` as part of the textual syntax of a relation entity as shown belpw. When both are specified, the `forward` and `reverse` relations become inverse of each other, meaning if one is asserted (from instance A to B), the other is inferred (from instance B to A).
 
 <pre class="highlight highlight-html">
 	Annotation*
@@ -428,7 +428,7 @@ The DL flags that can be specified on a relation entity have the following logic
 - The `transitive` flag implies if instance A is related to instance B, and instance B is related to instance C, then A is also related to C.
 
 
-The following example vocabulary defines a relation entity named *Performs* `from` the concept *Component* (as domain) `to` the concept *Function* (as range). In this case a `forward` relation *performs* as well as a reverse relation *isPerformedBy* are also named. The flag `inverse functional` specifies that a function can be performed by a maximum of one component, the flag `asymmetric` specifies that a function cannot perform a component, and the flag `irreflexive` specifies that a component cannot perform itself.
+The following example vocabulary defines a relation entity named *Performs* `from` concept *Component* `to` concept *Function*. In this case a `forward` relation *performs* as well as a `reverse` relation *isPerformedBy* are also named. The flag `inverse functional` specifies that a function can be performed by a maximum of one component, the flag `asymmetric` specifies that a function cannot perform a component, and the flag `irreflexive` specifies that a component cannot perform itself.
 
 <pre class="highlight highlight-html">
 `vocabulary` `<`http://com.xyz/methodology/mission#`>` `as` mission `{`
