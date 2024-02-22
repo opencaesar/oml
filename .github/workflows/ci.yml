@@ -20,12 +20,13 @@ jobs:
       uses: ts-graphviz/setup-graphviz@v2
 
     - name: Set up Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
-        python-version: '3.x'
+        python-version: '3.11'
+        cache: 'pip'
     
     - name: Install Bikeshed
-      run: pip3 install bikeshed==3.13.0
+      run: pip install bikeshed==3.13.0
     
     - name: Set up JDK 17
       uses: actions/setup-java@v4
