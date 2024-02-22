@@ -26,11 +26,11 @@ jobs:
     - name: Publish package
       run: ./gradlew publish
       env:
-        pgpSigningKey: ${{ secrets.pgpSigningKey }}
-        pgpSigningPassword: ${{ secrets.pgpSigningPassword }}
-        ossrhUsername: ${{ secrets.ossrhUsername }}
-        ossrhPassword: ${{ secrets.ossrhPassword }}
-
+        ORG_GRADLE_PROJECT_ossrhPassword: ${{ secrets.OSSRHPASSWORD }}
+        ORG_GRADLE_PROJECT_ossrhUsername: ${{ secrets.OSSRHUSERNAME }}
+        ORG_GRADLE_PROJECT_pgpSigningKey: ${{ secrets.PGPSIGNINGKEY }}
+        ORG_GRADLE_PROJECT_pgpSigningPassword: ${{ secrets.PGPSIGNINGPASSWORD }}
+        
     - name: Build LSP
       run: mvn verify
 
