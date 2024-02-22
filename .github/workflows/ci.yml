@@ -42,7 +42,26 @@ jobs:
 
     - name: Build with Maven
       run: mvn verify
+
+    - name: Publish Spec
+      uses: actions/upload-pages-artifact@v1
+      with:
+        path: build/bikeshed
+
+  deploy:
+  
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     
+    steps:
+      - name: Deploy Spec
+        uses: actions/deploy-pages@v1
+        
   dependency-submission:
 
     runs-on: ubuntu-latest
