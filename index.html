@@ -1490,7 +1490,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version 516eaf3cf, updated Tue Jun 20 13:48:28 2023 -0700" name="generator">
   <link href="https://www.opencaesar.io/oml" rel="canonical">
-  <meta content="76ae6956f249bd6a5d1f059f36409a03442a4aeb" name="document-revision">
+  <meta content="77b71c681f8a6df1bf80fb5dc55835185f2cd86b" name="document-revision">
 <style>
 body {
 	padding: 0;
@@ -2123,6 +2123,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
     </dl>
    </div>
    <div data-fill-with="warning"></div>
+   <p class="copyright" data-fill-with="copyright">Copyright © 2019-2024 California Institute of Technology. Government sponsorship acknowledged.</p>
    <hr title="Separator for header">
   </div>
   <div class="p-summary" data-fill-with="abstract">
@@ -2777,7 +2778,7 @@ true        // xsd:boolean
 <code>}</code>
 </pre>
     <h5 class="heading settled" data-level="3.2.2.3" id="RelationEntity-LR"><span class="secno">3.2.2.3. </span><span class="content">Relation Entity</span><a class="self-link" href="#RelationEntity-LR"></a></h5>
-    <p>A <a href="#RelationEntity-Syntax">relation entity</a> is an entity defined in a vocabulary and represents a reified relation between two other entities in a modeled domain. A relation entity is declared with the keyword <code>relation</code> <code>entity</code> followed by an <code>ID</code>. An existing (local or imported) relation entity can be referenced by the keywords <code>ref</code> <code>relation</code> <code>entity</code> followed by its <code>IRI</code>. A relation entity specifies between a pair of <code>[</code> <code>]</code> brackets optional <code>from</code> (domain) entities and optional <code>to</code> (range) entities that can be inferred as types of instances related by this relation. When either is omitted, no type can be inferred for a related instance in that position. A relation entity can also specify optional names for non-reified <code>forward</code> relation (with the same domains and ranges) and <code>reverse</code> relation (with the opposite domains and ranges). Moreover, a relation entity can specify various DL flags (<code>functional</code>, <code>inverse functional</code>, <code>symmetric</code>, <code>assymetric</code>, <code>reflective</code>, <code>irreflexive</code>, and <code>transitive</code>) and a set of <a href="#KeyAxiom-LR">KeyAxioms</a>. It can also be followed by an optional <a href="#ClassifierSpecializationAxiom-LR">ClassifierSpecializationAxiom</a> and an optional <a href="#ClassifierEquivalenceAxiom-LR">ClassifierEquivalenceAxiom</a>, using the following syntax.</p>
+    <p>A <a href="#RelationEntity-Syntax">relation entity</a> is an entity defined in a vocabulary and represents a reified relation between two entities in a modeled domain. A relation entity is declared with the keyword <code>relation</code> <code>entity</code> followed by an <code>ID</code>. An existing (local or imported) relation entity can be referenced by the keywords <code>ref</code> <code>relation</code> <code>entity</code> followed by its <code>IRI</code>. A relation entity can specify between <code>[</code> <code>]</code> some more details like optional <code>from</code> (domain) entities and optional <code>to</code> (range) entities that represent types of instances related by this relation, optional names for non-reified <code>forward</code> relation (with the same domains and ranges) and non-reified <code>reverse</code> relation (with the opposite domains and ranges), various DL flags (<code>functional</code>, <code>inverse functional</code>, <code>symmetric</code>, <code>assymetric</code>, <code>reflective</code>, <code>irreflexive</code>, and <code>transitive</code>), as well as a set of <a href="#KeyAxiom-LR">KeyAxioms</a>. A relation entity definition can also be followed by an optional <a href="#ClassifierSpecializationAxiom-LR">ClassifierSpecializationAxiom</a> and an optional <a href="#ClassifierEquivalenceAxiom-LR">ClassifierEquivalenceAxiom</a>, using the following syntax.</p>
 <pre class="highlight highlight-html">Annotation*
 (<code>relation</code> <code>entity</code> ID | <code>ref</code> <code>relation</code> <code>entity</code> [RelationEntity|IRI]) (<code>[</code>
   (<code>from</code> [Entity|IRI] (<code>,</code> [Entity|IRI])*)?
@@ -2794,7 +2795,7 @@ true        // xsd:boolean
   (KeyAxiom)*
 <code>]</code>)? (ClassifierSpecialization)? (ClassifierEquivalence)?
 </pre>
-    <p>The optional <a href="#ForwardRelation-Syntax">forward relation</a> and <a href="#ReverseRelation-Syntax">reverse relation</a> are specified by ID as part of the textual syntax a relation entity as shown belpw. When both are specified, the forward and reverse relations become inverse of each other, meaning if one is asserted (from named instance A to B), the other is inferred in the opposite direction (from named instance B to A).</p>
+    <p>The optional <a href="#ForwardRelation-Syntax">forward relation</a> and <a href="#ReverseRelation-Syntax">reverse relation</a> are specified by <code>ID</code> as part of the textual syntax of a relation entity as shown belpw. When both are specified, the <code>forward</code> and <code>reverse</code> relations become inverse of each other, meaning if one is asserted (from instance A to B), the other is inferred (from instance B to A).</p>
 <pre class="highlight highlight-html">Annotation*
 <code>forward</code> ID
 </pre>
@@ -2818,7 +2819,7 @@ true        // xsd:boolean
      <li data-md>
       <p>The <code>transitive</code> flag implies if instance A is related to instance B, and instance B is related to instance C, then A is also related to C.</p>
     </ul>
-    <p>The following example vocabulary defines a relation entity named <em>Performs</em> <code>from</code> the concept <em>Component</em> (as domain) <code>to</code> the concept <em>Function</em> (as range). In this case a <code>forward</code> relation <em>performs</em> as well as a reverse relation <em>isPerformedBy</em> are also named. The flag <code>inverse functional</code> specifies that a function can be performed by a maximum of one component, the flag <code>asymmetric</code> specifies that a function cannot perform a component, and the flag <code>irreflexive</code> specifies that a component cannot perform itself.</p>
+    <p>The following example vocabulary defines a relation entity named <em>Performs</em> <code>from</code> concept <em>Component</em> <code>to</code> concept <em>Function</em>. In this case a <code>forward</code> relation <em>performs</em> as well as a <code>reverse</code> relation <em>isPerformedBy</em> are also named. The flag <code>inverse functional</code> specifies that a function can be performed by a maximum of one component, the flag <code>asymmetric</code> specifies that a function cannot perform a component, and the flag <code>irreflexive</code> specifies that a component cannot perform itself.</p>
 <pre class="highlight highlight-html"><code>vocabulary</code> <code>&lt;</code>http://com.xyz/methodology/mission#<code>></code> <code>as</code> mission <code>{</code>
     <code>concept</code> Component
     <code>concept</code> Function
