@@ -46,7 +46,7 @@ jobs:
     - name: Publish Spec
       uses: actions/upload-pages-artifact@v1
       with:
-        path: build/bikeshed
+        path: io.opencaesar.oml.specification/build/bikeshed
 
   deploy:
   
