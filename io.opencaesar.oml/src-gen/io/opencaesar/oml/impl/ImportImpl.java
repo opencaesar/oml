@@ -268,7 +268,7 @@ public class ImportImpl extends ElementImpl implements Import {
 		if (_tripleEquals) {
 			return null;
 		}
-		int i = this.getNamespace().indexOf("#");
+		int i = this.getNamespace().lastIndexOf("#");
 		if ((i == (-1))) {
 			i = this.getNamespace().lastIndexOf("/");
 		}
@@ -292,7 +292,7 @@ public class ImportImpl extends ElementImpl implements Import {
 		if (_tripleEquals) {
 			return null;
 		}
-		int i = this.getNamespace().indexOf("#");
+		int i = this.getNamespace().lastIndexOf("#");
 		if ((i == (-1))) {
 			i = this.getNamespace().lastIndexOf("/");
 		}

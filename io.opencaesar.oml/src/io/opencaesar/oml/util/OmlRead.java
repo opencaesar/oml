@@ -426,6 +426,18 @@ public final class OmlRead {
     }
 
     /**
+     * Gets the set of resources that represent the import scope of the given ontology
+     * 
+     * This will cause an imported ontology's resource to load if not already loaded
+     * 
+     * @param ontology the given ontology
+     * @return a collection of resources that represent the import scope of the given ontology
+     */
+    public static Set<Resource> getImportScope(Ontology ontology) {
+        return getImportedOntologyClosure(ontology, true).stream().map(o -> o.eResource()).collect(Collectors.toSet());
+    }
+
+    /**
      * Gets the ontology that is imported by the given import
      * 
      * This will cause an imported ontology's resource to load if not already loaded

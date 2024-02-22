@@ -170,7 +170,7 @@ class Import extends Element {
     	if (namespace === null) {
     		return null
     	}
-     	var i = namespace.indexOf('#')
+     	var i = namespace.lastIndexOf('#')
     	if (i === -1) {
     		i = namespace.lastIndexOf('/')
     	}
@@ -187,7 +187,7 @@ class Import extends Element {
      	if (namespace === null) {
     		return null
     	}
-    	var i = namespace.indexOf('#')
+    	var i = namespace.lastIndexOf('#')
     	if (i === -1) {
     		i = namespace.lastIndexOf('/')
     	}

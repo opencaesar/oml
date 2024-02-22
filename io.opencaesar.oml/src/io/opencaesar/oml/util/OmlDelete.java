@@ -28,7 +28,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import io.opencaesar.oml.Element;
@@ -72,17 +71,14 @@ public class OmlDelete {
      */
 	private static Set<Element> findReferencersToDelete(Element element) {
         final Set<Element> referencers = new LinkedHashSet<>();
-        for (Setting setting : OmlSearch.findInverseReferencers(element)) {
-        	var referencer = setting.getEObject();
-        	if (referencer instanceof Element) {
-	            if (referencer instanceof Member) {
-	            	var member = (Member) referencer;
-	            	if (!member.isRef()) {
-	            		referencers.addAll(findReferencersToDelete(member));
-	            	}
-	            }
-	        	referencers.add((Element)referencer);
-        	}
+        for (Element referencer : OmlSearch.findInverseReferencers(element, null, Element.class, null)) {
+            if (referencer instanceof Member) {
+            	var member = (Member) referencer;
+            	if (!member.isRef()) {
+            		referencers.addAll(findReferencersToDelete(member));
+            	}
+            }
+        	referencers.add((Element)referencer);
         }
         return referencers;
 	}
@@ -116,14 +112,14 @@ public class OmlDelete {
 				}
 				
 				if (rule.direction == CascadeDirection.SOURCE_TO_TARGET) {
-					var targets = OmlSearch.findInstancesRelatedAsTargetTo(result.instance, rule.relation);
+					var targets = OmlSearch.findInstancesRelatedAsTargetTo(result.instance, rule.relation, null);
 					for (var t : targets) {
 						if (rule.cascadesTo(t)) {
 							result.add(deleting, t, rule, queue);
 						}
 					}
 				} else {
-					var sources = OmlSearch.findInstancesRelatedAsSourceTo(result.instance, rule.relation);
+					var sources = OmlSearch.findInstancesRelatedAsSourceTo(result.instance, rule.relation, null);
 					for (var s : sources) {
 						if (rule.cascadesTo(s)) {
 							result.add(deleting, s, rule, queue);
@@ -228,7 +224,7 @@ public class OmlDelete {
 		 */
 		private boolean cascadesFrom(NamedInstance instance) {
 			var type = (direction == CascadeDirection.SOURCE_TO_TARGET) ? sourceType : targetType;
-			return type == null || OmlSearch.findIsKindOf(instance, type);
+			return type == null || OmlSearch.findIsKindOf(instance, type, null);
 		}
 
 		/**
@@ -239,7 +235,7 @@ public class OmlDelete {
 		 */
 		private boolean cascadesTo(NamedInstance instance) {
 			var type = (direction  == CascadeDirection.SOURCE_TO_TARGET) ? targetType : sourceType;
-			return type == null || OmlSearch.findIsKindOf(instance, type);
+			return type == null || OmlSearch.findIsKindOf(instance, type, null);
 		}
 	}
 	
