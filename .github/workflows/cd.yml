@@ -20,6 +20,17 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
+    - name: Build repository
+      run: mvn verify
+
+    - name: Publish repository
+      run: |
+        git config user.name "Maged Elaasar"
+        git config user.email "melaasar@gmail.com"
+        mvn deploy -Prelease-composite -Dgithub-update-repo=https://x-access-token:${ACTIONS_TOKEN}@github.com/opencaesar/oml-p2
+      env:
+        ACTIONS_TOKEN: ${{ secrets.ACTIONS_TOKEN }}
+
     - name: Setup Gradle
       uses: gradle/actions/setup-gradle@417ae3ccd767c252f5661f1ace9f835f9654f2b5 # v3.1.0
 
@@ -30,11 +41,3 @@ jobs:
         ORG_GRADLE_PROJECT_ossrhUsername: ${{ secrets.OSSRHUSERNAME }}
         ORG_GRADLE_PROJECT_pgpSigningKey: ${{ secrets.PGPSIGNINGKEY }}
         ORG_GRADLE_PROJECT_pgpSigningPassword: ${{ secrets.PGPSIGNINGPASSWORD }}
-        
-    - name: Build LSP
-      run: mvn verify
-
-    - name: Publish repository
-      run: mvn deploy -Prelease-composite -Dgithub-update-repo=https://x-access-token:${GITHUB_TOKEN}@github.com/opencaesar/oml-p2
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
