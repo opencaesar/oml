@@ -281,7 +281,7 @@ public class ScalarEquivalenceAxiomItemProvider extends AxiomItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		Long labelValue = ((ScalarEquivalenceAxiom)object).getLength();
+		Integer labelValue = ((ScalarEquivalenceAxiom)object).getLength();
 		String label = labelValue == null ? null : labelValue.toString();
 		return label == null || label.length() == 0 ?
 			getString("_UI_ScalarEquivalenceAxiom_type") :

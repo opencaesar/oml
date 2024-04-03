@@ -21,8 +21,6 @@ package io.opencaesar.oml.impl;
 import io.opencaesar.oml.IntegerLiteral;
 import io.opencaesar.oml.OmlPackage;
 
-import io.opencaesar.oml.util.OmlConstants;
-
 import java.lang.reflect.InvocationTargetException;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -116,7 +114,7 @@ public class IntegerLiteralImpl extends LiteralImpl implements IntegerLiteral {
 	 */
 	@Override
 	public String getTypeIri() {
-		return (OmlConstants.XSD_NS + "integer");
+		return "http://www.w3.org/2001/XMLSchema#integer";
 	}
 
 	/**

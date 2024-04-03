@@ -51,7 +51,7 @@ public interface DoubleLiteral extends Literal {
 	 * @return the value of the '<em>Value</em>' attribute.
 	 * @see #setValue(Double)
 	 * @see io.opencaesar.oml.OmlPackage#getDoubleLiteral_Value()
-	 * @model default="0.0" unique="false"
+	 * @model default="0.0" unique="false" dataType="io.opencaesar.oml.Double"
 	 * @generated
 	 */
 	Double getValue();

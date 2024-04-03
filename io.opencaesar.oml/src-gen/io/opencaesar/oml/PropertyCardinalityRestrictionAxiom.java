@@ -82,12 +82,12 @@ public interface PropertyCardinalityRestrictionAxiom extends PropertyRestriction
 	 * The value of the cardinality specified by this axiom (default is 1)
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Cardinality</em>' attribute.
-	 * @see #setCardinality(long)
+	 * @see #setCardinality(int)
 	 * @see io.opencaesar.oml.OmlPackage#getPropertyCardinalityRestrictionAxiom_Cardinality()
 	 * @model default="1" unique="false" dataType="io.opencaesar.oml.UnsignedInt" required="true"
 	 * @generated
 	 */
-	long getCardinality();
+	int getCardinality();
 
 	/**
 	 * Sets the value of the '{@link io.opencaesar.oml.PropertyCardinalityRestrictionAxiom#getCardinality <em>Cardinality</em>}' attribute.
@@ -97,7 +97,7 @@ public interface PropertyCardinalityRestrictionAxiom extends PropertyRestriction
 	 * @see #getCardinality()
 	 * @generated
 	 */
-	void setCardinality(long value);
+	void setCardinality(int value);
 
 	/**
 	 * Returns the value of the '<em><b>Range</b></em>' reference.

@@ -286,11 +286,13 @@ public class OmlValidator extends EObjectValidator {
 			case OmlPackage.IMPORT_KIND:
 				return validateImportKind((ImportKind)value, diagnostics, context);
 			case OmlPackage.UNSIGNED_INT:
-				return validateUnsignedInt((Long)value, diagnostics, context);
+				return validateUnsignedInt((Integer)value, diagnostics, context);
 			case OmlPackage.UNSIGNED_INTEGER:
-				return validateUnsignedInteger((Long)value, diagnostics, context);
+				return validateUnsignedInteger((Integer)value, diagnostics, context);
 			case OmlPackage.DECIMAL:
 				return validateDecimal((BigDecimal)value, diagnostics, context);
+			case OmlPackage.DOUBLE:
+				return validateDouble((Double)value, diagnostics, context);
 			case OmlPackage.ID:
 				return validateID((String)value, diagnostics, context);
 			case OmlPackage.NAMESPACE:
@@ -1814,7 +1816,7 @@ public class OmlValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateUnsignedInt(long unsignedInt, DiagnosticChain diagnostics, Map<Object, Object> context) {
+	public boolean validateUnsignedInt(int unsignedInt, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		boolean result = validateUnsignedInt_Min(unsignedInt, diagnostics, context);
 		if (result || diagnostics != null) result &= validateUnsignedInt_Max(unsignedInt, diagnostics, context);
 		return result;
@@ -1826,7 +1828,7 @@ public class OmlValidator extends EObjectValidator {
 	 * @generated
 	 * @see #validateUnsignedInt_Min
 	 */
-	public static final long UNSIGNED_INT__MIN__VALUE = 0L;
+	public static final int UNSIGNED_INT__MIN__VALUE = 0;
 
 	/**
 	 * Validates the Min constraint of '<em>Unsigned Int</em>'.
@@ -1834,7 +1836,7 @@ public class OmlValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateUnsignedInt_Min(long unsignedInt, DiagnosticChain diagnostics, Map<Object, Object> context) {
+	public boolean validateUnsignedInt_Min(int unsignedInt, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		boolean result = unsignedInt >= UNSIGNED_INT__MIN__VALUE;
 		if (!result && diagnostics != null)
 			reportMinViolation(OmlPackage.Literals.UNSIGNED_INT, unsignedInt, UNSIGNED_INT__MIN__VALUE, true, diagnostics, context);
@@ -1847,7 +1849,7 @@ public class OmlValidator extends EObjectValidator {
 	 * @generated
 	 * @see #validateUnsignedInt_Max
 	 */
-	public static final long UNSIGNED_INT__MAX__VALUE = 4294967295L;
+	public static final int UNSIGNED_INT__MAX__VALUE = 2147483647;
 
 	/**
 	 * Validates the Max constraint of '<em>Unsigned Int</em>'.
@@ -1855,7 +1857,7 @@ public class OmlValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateUnsignedInt_Max(long unsignedInt, DiagnosticChain diagnostics, Map<Object, Object> context) {
+	public boolean validateUnsignedInt_Max(int unsignedInt, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		boolean result = unsignedInt <= UNSIGNED_INT__MAX__VALUE;
 		if (!result && diagnostics != null)
 			reportMaxViolation(OmlPackage.Literals.UNSIGNED_INT, unsignedInt, UNSIGNED_INT__MAX__VALUE, true, diagnostics, context);
@@ -1867,7 +1869,7 @@ public class OmlValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateUnsignedInteger(Long unsignedInteger, DiagnosticChain diagnostics, Map<Object, Object> context) {
+	public boolean validateUnsignedInteger(Integer unsignedInteger, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		boolean result = validateUnsignedInteger_Min(unsignedInteger, diagnostics, context);
 		if (result || diagnostics != null) result &= validateUnsignedInteger_Max(unsignedInteger, diagnostics, context);
 		return result;
@@ -1879,7 +1881,7 @@ public class OmlValidator extends EObjectValidator {
 	 * @generated
 	 * @see #validateUnsignedInteger_Min
 	 */
-	public static final Long UNSIGNED_INTEGER__MIN__VALUE = Long.valueOf(0L);
+	public static final Integer UNSIGNED_INTEGER__MIN__VALUE = Integer.valueOf(0);
 
 	/**
 	 * Validates the Min constraint of '<em>Unsigned Integer</em>'.
@@ -1887,7 +1889,7 @@ public class OmlValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateUnsignedInteger_Min(Long unsignedInteger, DiagnosticChain diagnostics, Map<Object, Object> context) {
+	public boolean validateUnsignedInteger_Min(Integer unsignedInteger, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		boolean result = unsignedInteger.compareTo(UNSIGNED_INTEGER__MIN__VALUE) >= 0;
 		if (!result && diagnostics != null)
 			reportMinViolation(OmlPackage.Literals.UNSIGNED_INTEGER, unsignedInteger, UNSIGNED_INTEGER__MIN__VALUE, true, diagnostics, context);
@@ -1900,7 +1902,7 @@ public class OmlValidator extends EObjectValidator {
 	 * @generated
 	 * @see #validateUnsignedInteger_Max
 	 */
-	public static final Long UNSIGNED_INTEGER__MAX__VALUE = Long.valueOf(4294967295L);
+	public static final Integer UNSIGNED_INTEGER__MAX__VALUE = Integer.valueOf(2147483647);
 
 	/**
 	 * Validates the Max constraint of '<em>Unsigned Integer</em>'.
@@ -1908,7 +1910,7 @@ public class OmlValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateUnsignedInteger_Max(Long unsignedInteger, DiagnosticChain diagnostics, Map<Object, Object> context) {
+	public boolean validateUnsignedInteger_Max(Integer unsignedInteger, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		boolean result = unsignedInteger.compareTo(UNSIGNED_INTEGER__MAX__VALUE) <= 0;
 		if (!result && diagnostics != null)
 			reportMaxViolation(OmlPackage.Literals.UNSIGNED_INTEGER, unsignedInteger, UNSIGNED_INTEGER__MAX__VALUE, true, diagnostics, context);
@@ -1921,6 +1923,15 @@ public class OmlValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateDecimal(BigDecimal decimal, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return true;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateDouble(Double double_, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return true;
 	}
 

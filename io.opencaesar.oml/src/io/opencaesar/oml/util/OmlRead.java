@@ -84,7 +84,16 @@ import io.opencaesar.oml.Vocabulary;
  * @author elaasar
  */
 public final class OmlRead {
-    
+
+    /**
+     * The standard ontology namespaces
+     */
+    private static final String XSD_NS = "http://www.w3.org/2001/XMLSchema#";
+    private static final String RDF_NS = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";
+    private static final String RDFS_NS = "http://www.w3.org/2000/01/rdf-schema#";
+    private static final String OWL_NS = "http://www.w3.org/2002/07/owl#";
+    private static final String SWRLB_NS = "http://www.w3.org/2003/11/swrlb#";
+
    //-------------------------------------------------
    // UTILITIES
    //-------------------------------------------------
@@ -954,10 +963,11 @@ public final class OmlRead {
     	var ontology = scalar.getOntology();
     	if (ontology != null) {
 	    	var ontologyNs = ontology.getNamespace();
-	    	return ontologyNs.equals(OmlConstants.XSD_NS) ||
-	            	ontologyNs.equals(OmlConstants.RDF_NS) ||
-	            	ontologyNs.equals(OmlConstants.RDFS_NS) ||
-	            	ontologyNs.equals(OmlConstants.OWL_NS);
+	    	return ontologyNs.equals(XSD_NS) ||
+	            	ontologyNs.equals(RDF_NS) ||
+	            	ontologyNs.equals(RDFS_NS) ||
+	            	ontologyNs.equals(OWL_NS) ||
+	            	ontologyNs.equals(SWRLB_NS);
     	}
     	return false;
     }
@@ -1073,21 +1083,21 @@ public final class OmlRead {
             var value = ((QuotedLiteral)literal).getValue();
     		var typeIri = literal.getTypeIri();
             if (value != null && typeIri != null) {
-                if (typeIri.equals(OmlConstants.XSD_NS+"string")) {
+                if (typeIri.equals(XSD_NS+"string")) {
                     return value;
-                } else if (typeIri.equals(OmlConstants.XSD_NS+"integer")) {
+                } else if (typeIri.equals(XSD_NS+"integer")) {
                     return Integer.valueOf(value);
-                } else if (typeIri.equals(OmlConstants.XSD_NS+"decimal")) {
+                } else if (typeIri.equals(XSD_NS+"decimal")) {
                     return new BigDecimal(value);
-                } else if (typeIri.equals(OmlConstants.XSD_NS+"real")) {
+                } else if (typeIri.equals(XSD_NS+"real")) {
                     return Double.valueOf(value);
-                } else if (typeIri.equals(OmlConstants.XSD_NS+"double")) {
+                } else if (typeIri.equals(XSD_NS+"double")) {
                     return Double.valueOf(value);
-                } else if (typeIri.equals(OmlConstants.XSD_NS+"float")) {
+                } else if (typeIri.equals(XSD_NS+"float")) {
                     return Float.valueOf(value);
-                } else if (typeIri.equals(OmlConstants.XSD_NS+"boolean")) {
+                } else if (typeIri.equals(XSD_NS+"boolean")) {
                     return Boolean.valueOf(value);
-                } else if (typeIri.equals(OmlConstants.XSD_NS+"dateTime")) {
+                } else if (typeIri.equals(XSD_NS+"dateTime")) {
                 	try {
                 		return new SimpleDateFormat().parse(value);
                 	} catch(Exception e) {

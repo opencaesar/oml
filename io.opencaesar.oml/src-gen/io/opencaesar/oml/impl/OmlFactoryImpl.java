@@ -152,6 +152,8 @@ public class OmlFactoryImpl extends EFactoryImpl implements OmlFactory {
 				return createUnsignedIntegerFromString(eDataType, initialValue);
 			case OmlPackage.DECIMAL:
 				return createDecimalFromString(eDataType, initialValue);
+			case OmlPackage.DOUBLE:
+				return createDoubleFromString(eDataType, initialValue);
 			case OmlPackage.ID:
 				return createIDFromString(eDataType, initialValue);
 			case OmlPackage.NAMESPACE:
@@ -183,6 +185,8 @@ public class OmlFactoryImpl extends EFactoryImpl implements OmlFactory {
 				return convertUnsignedIntegerToString(eDataType, instanceValue);
 			case OmlPackage.DECIMAL:
 				return convertDecimalToString(eDataType, instanceValue);
+			case OmlPackage.DOUBLE:
+				return convertDoubleToString(eDataType, instanceValue);
 			case OmlPackage.ID:
 				return convertIDToString(eDataType, instanceValue);
 			case OmlPackage.NAMESPACE:
@@ -794,8 +798,8 @@ public class OmlFactoryImpl extends EFactoryImpl implements OmlFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Long createUnsignedIntFromString(EDataType eDataType, String initialValue) {
-		return (Long)super.createFromString(eDataType, initialValue);
+	public Integer createUnsignedIntFromString(EDataType eDataType, String initialValue) {
+		return (Integer)super.createFromString(eDataType, initialValue);
 	}
 
 	/**
@@ -812,8 +816,8 @@ public class OmlFactoryImpl extends EFactoryImpl implements OmlFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Long createUnsignedIntegerFromString(EDataType eDataType, String initialValue) {
-		return (Long)super.createFromString(eDataType, initialValue);
+	public Integer createUnsignedIntegerFromString(EDataType eDataType, String initialValue) {
+		return (Integer)super.createFromString(eDataType, initialValue);
 	}
 
 	/**
@@ -841,6 +845,33 @@ public class OmlFactoryImpl extends EFactoryImpl implements OmlFactory {
 	 */
 	public String convertDecimalToString(EDataType eDataType, Object instanceValue) {
 		return XMLTypeFactory.eINSTANCE.convertToString(XMLTypePackage.Literals.DECIMAL, instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Double createDoubleFromString(EDataType eDataType, String initialValue) {
+		return (Double)super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertDouble(Double it) {
+		return String.format("%.2E", it);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertDoubleToString(EDataType eDataType, Object instanceValue) {
+		return convertDouble((Double)instanceValue);
 	}
 
 	/**

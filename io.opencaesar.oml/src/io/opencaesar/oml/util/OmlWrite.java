@@ -556,15 +556,15 @@ public class OmlWrite {
      * 
      * @param vocabulary the context vocabulary
      * @param name the name of the new rule
-     * @param consequent a list of consequent predicates of the rule
      * @param antecedent a list of antecedent predicates of the rule
+     * @param consequent a list of consequent predicates of the rule
      * @return a rule that is added to the given vocabulary
      */
-    public static Rule addRule(Vocabulary vocabulary, String name, Predicate[] consequent, Predicate[] antecedent) {
+    public static Rule addRule(Vocabulary vocabulary, String name, Predicate[] antecedent, Predicate[] consequent) {
         final Rule rule = create(Rule.class);
         rule.setName(name);
-        rule.getConsequent().addAll(Arrays.asList(consequent));
         rule.getAntecedent().addAll(Arrays.asList(antecedent));
+        rule.getConsequent().addAll(Arrays.asList(consequent));
         vocabulary.getOwnedStatements().add(rule);
         return rule;
     }
@@ -725,24 +725,39 @@ public class OmlWrite {
      * @param importedOntology The imported ontology
      */
     public static void addImport(Ontology ontology, Ontology importedOntology) {
-		ImportKind kind;
+    	var namespace = importedOntology.getNamespace();
+    	var prefix = importedOntology.getPrefix();
+    	
 		if (ontology instanceof Vocabulary) {
 			if (importedOntology instanceof Vocabulary) {
-				kind = ImportKind.EXTENSION;
-			} else {
-				kind = ImportKind.USAGE;
+				addImport(ontology, ImportKind.EXTENSION, namespace, prefix);
+			} else if (importedOntology instanceof Description){
+				addImport(ontology, ImportKind.USAGE, namespace, prefix);
 			}
-		} else { // if (ontology instanceof Description)
-			if (importedOntology instanceof Vocabulary) {
-				kind = ImportKind.USAGE;
-			} else {
-				kind = ImportKind.EXTENSION;
+		} else if (ontology instanceof Description) {
+			if (importedOntology instanceof Description) {
+				addImport(ontology, ImportKind.EXTENSION, namespace, prefix);
+			} else if (importedOntology instanceof Vocabulary){
+				addImport(ontology, ImportKind.USAGE, namespace, prefix);
+			}
+		} else if (ontology instanceof VocabularyBundle) {
+			if (importedOntology instanceof VocabularyBundle) {
+				addImport(ontology, ImportKind.EXTENSION, namespace, prefix);
+			} else if (importedOntology instanceof Vocabulary) {
+				addImport(ontology, ImportKind.INCLUSION, namespace, prefix);
+			}
+		} else if (ontology instanceof DescriptionBundle){
+			if (importedOntology instanceof DescriptionBundle) {
+				addImport(ontology, ImportKind.EXTENSION, namespace, prefix);
+			} else if (ontology instanceof Description) {
+				addImport(ontology, ImportKind.INCLUSION, namespace, prefix);
+			} else if (importedOntology instanceof VocabularyBundle) {
+				addImport(ontology, ImportKind.USAGE, namespace, prefix);
 			}
 		}
-		addImport(ontology, kind, importedOntology.getNamespace(), importedOntology.getPrefix());
     }
     
-    // SpecializationAxiom
+	// SpecializationAxiom
 
     /**
      * Creates a specialization axiom between two terms and adds it to the given vocabulary
@@ -799,7 +814,7 @@ public class OmlWrite {
      * @param maxExclusive the max exclusive facet
      * @return a scalar equivalence axiom that is added to the vocabulary
      */
-    public static ScalarEquivalenceAxiom addScalarEquivalenceAxiom(Vocabulary vocabulary, Scalar subScalar, Scalar superScalar, Long length, Long minLength, Long maxLength, String pattern, 
+    public static ScalarEquivalenceAxiom addScalarEquivalenceAxiom(Vocabulary vocabulary, Scalar subScalar, Scalar superScalar, Integer length, Integer minLength, Integer maxLength, String pattern, 
         String language, Literal minInclusive, Literal minExclusive, Literal maxInclusive, Literal maxExclusive) {
         final ScalarEquivalenceAxiom axiom = create(ScalarEquivalenceAxiom.class);
         axiom.setLength(length);
@@ -871,7 +886,7 @@ public class OmlWrite {
      * @param restrictionKind the kind of the restriction
      * @return a property cardinality restriction axiom that is added to the given vocabulary
      */
-    public static PropertyCardinalityRestrictionAxiom addPropertyCardinalityRestrictionAxiom(Vocabulary vocabulary, Element owner, SemanticProperty property, CardinalityRestrictionKind restrictionKind, long cardinality, Type range) {
+    public static PropertyCardinalityRestrictionAxiom addPropertyCardinalityRestrictionAxiom(Vocabulary vocabulary, Element owner, SemanticProperty property, CardinalityRestrictionKind restrictionKind, int cardinality, Type range) {
         final PropertyCardinalityRestrictionAxiom axiom = create(PropertyCardinalityRestrictionAxiom.class);
         axiom.setKind(restrictionKind);
         axiom.setCardinality(cardinality);

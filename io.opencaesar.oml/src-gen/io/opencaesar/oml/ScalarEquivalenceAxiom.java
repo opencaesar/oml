@@ -123,12 +123,12 @@ public interface ScalarEquivalenceAxiom extends Axiom {
 	 * The exact length of the literals of this scalar
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Length</em>' attribute.
-	 * @see #setLength(Long)
+	 * @see #setLength(Integer)
 	 * @see io.opencaesar.oml.OmlPackage#getScalarEquivalenceAxiom_Length()
 	 * @model unique="false" dataType="io.opencaesar.oml.UnsignedInteger"
 	 * @generated
 	 */
-	Long getLength();
+	Integer getLength();
 
 	/**
 	 * Sets the value of the '{@link io.opencaesar.oml.ScalarEquivalenceAxiom#getLength <em>Length</em>}' attribute.
@@ -138,7 +138,7 @@ public interface ScalarEquivalenceAxiom extends Axiom {
 	 * @see #getLength()
 	 * @generated
 	 */
-	void setLength(Long value);
+	void setLength(Integer value);
 
 	/**
 	 * Returns the value of the '<em><b>Min Length</b></em>' attribute.
@@ -148,12 +148,12 @@ public interface ScalarEquivalenceAxiom extends Axiom {
 	 * The minimum length of the literals of this scalar
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Min Length</em>' attribute.
-	 * @see #setMinLength(Long)
+	 * @see #setMinLength(Integer)
 	 * @see io.opencaesar.oml.OmlPackage#getScalarEquivalenceAxiom_MinLength()
 	 * @model unique="false" dataType="io.opencaesar.oml.UnsignedInteger"
 	 * @generated
 	 */
-	Long getMinLength();
+	Integer getMinLength();
 
 	/**
 	 * Sets the value of the '{@link io.opencaesar.oml.ScalarEquivalenceAxiom#getMinLength <em>Min Length</em>}' attribute.
@@ -163,7 +163,7 @@ public interface ScalarEquivalenceAxiom extends Axiom {
 	 * @see #getMinLength()
 	 * @generated
 	 */
-	void setMinLength(Long value);
+	void setMinLength(Integer value);
 
 	/**
 	 * Returns the value of the '<em><b>Max Length</b></em>' attribute.
@@ -173,12 +173,12 @@ public interface ScalarEquivalenceAxiom extends Axiom {
 	 * The maximum length of the literals of this scalar
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Max Length</em>' attribute.
-	 * @see #setMaxLength(Long)
+	 * @see #setMaxLength(Integer)
 	 * @see io.opencaesar.oml.OmlPackage#getScalarEquivalenceAxiom_MaxLength()
 	 * @model unique="false" dataType="io.opencaesar.oml.UnsignedInteger"
 	 * @generated
 	 */
-	Long getMaxLength();
+	Integer getMaxLength();
 
 	/**
 	 * Sets the value of the '{@link io.opencaesar.oml.ScalarEquivalenceAxiom#getMaxLength <em>Max Length</em>}' attribute.
@@ -188,7 +188,7 @@ public interface ScalarEquivalenceAxiom extends Axiom {
 	 * @see #getMaxLength()
 	 * @generated
 	 */
-	void setMaxLength(Long value);
+	void setMaxLength(Integer value);
 
 	/**
 	 * Returns the value of the '<em><b>Pattern</b></em>' attribute.

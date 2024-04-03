@@ -472,6 +472,9 @@ public class OmlFormatter extends AbstractJavaFormatter {
 
 	protected void _format(PropertyValueAssertion assertion, IFormattableDocument doc) {
 		doc.append(feature(assertion, OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__PROPERTY), oneSpace());
+		if (assertion.getContainedValue() != null) {
+			doc.format(assertion.getContainedValue());
+		}
 	}
 
 	protected void _format(TypePredicate predicate, IFormattableDocument doc) {
