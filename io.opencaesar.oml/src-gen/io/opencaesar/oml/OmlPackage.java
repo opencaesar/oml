@@ -704,13 +704,22 @@ public interface OmlPackage extends EPackage {
 	int ARGUMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = ELEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARGUMENT___GET_VALUE = ELEMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * The number of operations of the '<em>Argument</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ARGUMENT_OPERATION_COUNT = ELEMENT_OPERATION_COUNT + 0;
+	int ARGUMENT_OPERATION_COUNT = ELEMENT_OPERATION_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.impl.LiteralImpl <em>Literal</em>}' class.
@@ -9374,7 +9383,7 @@ public interface OmlPackage extends EPackage {
 	 * The meta object id for the '<em>Unsigned Integer</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see java.lang.Long
+	 * @see java.lang.Integer
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getUnsignedInteger()
 	 * @generated
 	 */
@@ -9391,6 +9400,16 @@ public interface OmlPackage extends EPackage {
 	int DECIMAL = 83;
 
 	/**
+	 * The meta object id for the '<em>Double</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see java.lang.Double
+	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDouble()
+	 * @generated
+	 */
+	int DOUBLE = 84;
+
+	/**
 	 * The meta object id for the '<em>ID</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -9398,7 +9417,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getID()
 	 * @generated
 	 */
-	int ID = 84;
+	int ID = 85;
 
 	/**
 	 * The meta object id for the '<em>Namespace</em>' data type.
@@ -9408,7 +9427,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getNamespace()
 	 * @generated
 	 */
-	int NAMESPACE = 85;
+	int NAMESPACE = 86;
 
 
 	/**
@@ -9775,6 +9794,16 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getArgument_Instance();
+
+	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.Argument#getValue() <em>Get Value</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Value</em>' operation.
+	 * @see io.opencaesar.oml.Argument#getValue()
+	 * @generated
+	 */
+	EOperation getArgument__GetValue();
 
 	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.Literal <em>Literal</em>}'.
@@ -12604,20 +12633,20 @@ public interface OmlPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for data type '<em>Unsigned Int</em>'.
-	 * @model instanceClass="long"
-	 *        extendedMetaData="minInclusive='0' maxInclusive='4294967295'"
+	 * @model instanceClass="int"
+	 *        extendedMetaData="minInclusive='0' maxInclusive='2147483647'"
 	 * @generated
 	 */
 	EDataType getUnsignedInt();
 
 	/**
-	 * Returns the meta object for data type '{@link java.lang.Long <em>Unsigned Integer</em>}'.
+	 * Returns the meta object for data type '{@link java.lang.Integer <em>Unsigned Integer</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for data type '<em>Unsigned Integer</em>'.
-	 * @see java.lang.Long
-	 * @model instanceClass="java.lang.Long"
-	 *        extendedMetaData="minInclusive='0' maxInclusive='4294967295'"
+	 * @see java.lang.Integer
+	 * @model instanceClass="java.lang.Integer"
+	 *        extendedMetaData="minInclusive='0' maxInclusive='2147483647'"
 	 * @generated
 	 */
 	EDataType getUnsignedInteger();
@@ -12633,6 +12662,17 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 */
 	EDataType getDecimal();
+
+	/**
+	 * Returns the meta object for data type '{@link java.lang.Double <em>Double</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Double</em>'.
+	 * @see java.lang.Double
+	 * @model instanceClass="java.lang.Double"
+	 * @generated
+	 */
+	EDataType getDouble();
 
 	/**
 	 * Returns the meta object for data type '{@link java.lang.String <em>ID</em>}'.
@@ -12978,6 +13018,14 @@ public interface OmlPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ARGUMENT__INSTANCE = eINSTANCE.getArgument_Instance();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Value</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation ARGUMENT___GET_VALUE = eINSTANCE.getArgument__GetValue();
 
 		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.LiteralImpl <em>Literal</em>}' class.
@@ -15304,7 +15352,7 @@ public interface OmlPackage extends EPackage {
 		 * The meta object literal for the '<em>Unsigned Integer</em>' data type.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see java.lang.Long
+		 * @see java.lang.Integer
 		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getUnsignedInteger()
 		 * @generated
 		 */
@@ -15319,6 +15367,16 @@ public interface OmlPackage extends EPackage {
 		 * @generated
 		 */
 		EDataType DECIMAL = eINSTANCE.getDecimal();
+
+		/**
+		 * The meta object literal for the '<em>Double</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see java.lang.Double
+		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDouble()
+		 * @generated
+		 */
+		EDataType DOUBLE = eINSTANCE.getDouble();
 
 		/**
 		 * The meta object literal for the '<em>ID</em>' data type.

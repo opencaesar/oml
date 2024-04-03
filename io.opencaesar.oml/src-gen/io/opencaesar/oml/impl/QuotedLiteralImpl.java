@@ -23,8 +23,6 @@ import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.QuotedLiteral;
 import io.opencaesar.oml.Scalar;
 
-import io.opencaesar.oml.util.OmlConstants;
-
 import java.lang.reflect.InvocationTargetException;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -254,7 +252,7 @@ public class QuotedLiteralImpl extends LiteralImpl implements QuotedLiteral {
 			_xifexpression = this.getType().getIri();
 		}
 		else {
-			_xifexpression = (OmlConstants.XSD_NS + "string");
+			_xifexpression = "http://www.w3.org/2001/XMLSchema#string";
 		}
 		return _xifexpression;
 	}

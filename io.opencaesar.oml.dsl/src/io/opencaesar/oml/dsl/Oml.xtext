@@ -409,7 +409,7 @@ Integer returns ecore::EInt: 							UNSIGNED_INTEGER_STR | INTEGER_STR;
 
 Decimal returns Decimal:								DECIMAL_STR;
 
-Double returns ecore::EDouble:							DOUBLE_STR;
+Double returns Double:									DOUBLE_STR;
 
 //----------------------------
 
@@ -421,7 +421,7 @@ terminal INTEGER_STR:									('+'|'-')? DIGIT+;
 
 terminal DECIMAL_STR:									('+'|'-')? (DIGIT+('.'DIGIT*)? | ('.'DIGIT+));
 
-terminal DOUBLE_STR:									('+'|'-')? (DIGIT+('.'DIGIT*)? | ('.'DIGIT+)) (('e'|'E') ('+'|'-')? DIGIT+)?;
+terminal DOUBLE_STR:									('+'|'-')? (DIGIT+('.'DIGIT*)? | ('.'DIGIT+)) ('e'|'E') ('+'|'-')? DIGIT+;
 
 terminal STRING:										('"' (!('"'|'\\') | '\\'.)* '"') | ("'" (!("'"|'\\') | '\\'.)* "'") | ("'''" -> "'''") | '"""' -> '"""';
 

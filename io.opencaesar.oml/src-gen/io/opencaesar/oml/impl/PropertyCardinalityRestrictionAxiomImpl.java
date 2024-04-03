@@ -74,7 +74,7 @@ public class PropertyCardinalityRestrictionAxiomImpl extends PropertyRestriction
 	 * @generated
 	 * @ordered
 	 */
-	protected static final long CARDINALITY_EDEFAULT = 1L;
+	protected static final int CARDINALITY_EDEFAULT = 1;
 
 	/**
 	 * The cached value of the '{@link #getCardinality() <em>Cardinality</em>}' attribute.
@@ -84,7 +84,7 @@ public class PropertyCardinalityRestrictionAxiomImpl extends PropertyRestriction
 	 * @generated
 	 * @ordered
 	 */
-	protected long cardinality = CARDINALITY_EDEFAULT;
+	protected int cardinality = CARDINALITY_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getRange() <em>Range</em>}' reference.
@@ -144,7 +144,7 @@ public class PropertyCardinalityRestrictionAxiomImpl extends PropertyRestriction
 	 * @generated
 	 */
 	@Override
-	public long getCardinality() {
+	public int getCardinality() {
 		return cardinality;
 	}
 
@@ -154,8 +154,8 @@ public class PropertyCardinalityRestrictionAxiomImpl extends PropertyRestriction
 	 * @generated
 	 */
 	@Override
-	public void setCardinality(long newCardinality) {
-		long oldCardinality = cardinality;
+	public void setCardinality(int newCardinality) {
+		int oldCardinality = cardinality;
 		cardinality = newCardinality;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.PROPERTY_CARDINALITY_RESTRICTION_AXIOM__CARDINALITY, oldCardinality, cardinality));
@@ -232,7 +232,7 @@ public class PropertyCardinalityRestrictionAxiomImpl extends PropertyRestriction
 				setKind((CardinalityRestrictionKind)newValue);
 				return;
 			case OmlPackage.PROPERTY_CARDINALITY_RESTRICTION_AXIOM__CARDINALITY:
-				setCardinality((Long)newValue);
+				setCardinality((Integer)newValue);
 				return;
 			case OmlPackage.PROPERTY_CARDINALITY_RESTRICTION_AXIOM__RANGE:
 				setRange((Type)newValue);

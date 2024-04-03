@@ -719,6 +719,13 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EDataType doubleEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EDataType idEDataType = null;
 
 	/**
@@ -1149,6 +1156,16 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	@Override
 	public EReference getArgument_Instance() {
 		return (EReference)argumentEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getArgument__GetValue() {
+		return argumentEClass.getEOperations().get(0);
 	}
 
 	/**
@@ -3897,6 +3914,16 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
+	public EDataType getDouble() {
+		return doubleEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EDataType getID() {
 		return idEDataType;
 	}
@@ -3983,6 +4010,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		createEAttribute(argumentEClass, ARGUMENT__VARIABLE);
 		createEReference(argumentEClass, ARGUMENT__LITERAL);
 		createEReference(argumentEClass, ARGUMENT__INSTANCE);
+		createEOperation(argumentEClass, ARGUMENT___GET_VALUE);
 
 		literalEClass = createEClass(LITERAL);
 		createEOperation(literalEClass, LITERAL___GET_VALUE);
@@ -4329,6 +4357,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		unsignedIntEDataType = createEDataType(UNSIGNED_INT);
 		unsignedIntegerEDataType = createEDataType(UNSIGNED_INTEGER);
 		decimalEDataType = createEDataType(DECIMAL);
+		doubleEDataType = createEDataType(DOUBLE);
 		idEDataType = createEDataType(ID);
 		namespaceEDataType = createEDataType(NAMESPACE);
 	}
@@ -4514,6 +4543,8 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		initEAttribute(getArgument_Variable(), this.getID(), "variable", null, 0, 1, Argument.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getArgument_Literal(), this.getLiteral(), null, "literal", null, 0, 1, Argument.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getArgument_Instance(), this.getNamedInstance(), null, "instance", null, 0, 1, Argument.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEOperation(getArgument__GetValue(), theEcorePackage.getEJavaObject(), "getValue", 0, 1, !IS_UNIQUE, IS_ORDERED);
 
 		initEClass(literalEClass, Literal.class, "Literal", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -4925,7 +4956,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		initEOperation(getDecimalLiteral__GetTypeIri(), theEcorePackage.getEString(), "getTypeIri", 0, 1, !IS_UNIQUE, IS_ORDERED);
 
 		initEClass(doubleLiteralEClass, DoubleLiteral.class, "DoubleLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getDoubleLiteral_Value(), theEcorePackage.getEDoubleObject(), "value", "0.0", 0, 1, DoubleLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDoubleLiteral_Value(), this.getDouble(), "value", "0.0", 0, 1, DoubleLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEOperation(getDoubleLiteral__GetTypeIri(), theEcorePackage.getEString(), "getTypeIri", 0, 1, !IS_UNIQUE, IS_ORDERED);
 
@@ -4956,9 +4987,10 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		addEEnumLiteral(importKindEEnum, ImportKind.INCLUSION);
 
 		// Initialize data types
-		initEDataType(unsignedIntEDataType, long.class, "UnsignedInt", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
-		initEDataType(unsignedIntegerEDataType, Long.class, "UnsignedInteger", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(unsignedIntEDataType, int.class, "UnsignedInt", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(unsignedIntegerEDataType, Integer.class, "UnsignedInteger", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(decimalEDataType, BigDecimal.class, "Decimal", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(doubleEDataType, Double.class, "Double", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(idEDataType, String.class, "ID", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(namespaceEDataType, String.class, "Namespace", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
@@ -5535,14 +5567,14 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		   source,
 		   new String[] {
 			   "minInclusive", "0",
-			   "maxInclusive", "4294967295"
+			   "maxInclusive", "2147483647"
 		   });
 		addAnnotation
 		  (unsignedIntegerEDataType,
 		   source,
 		   new String[] {
 			   "minInclusive", "0",
-			   "maxInclusive", "4294967295"
+			   "maxInclusive", "2147483647"
 		   });
 		addAnnotation
 		  (decimalEDataType,

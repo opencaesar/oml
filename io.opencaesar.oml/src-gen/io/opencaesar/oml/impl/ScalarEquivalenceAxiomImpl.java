@@ -80,7 +80,7 @@ public class ScalarEquivalenceAxiomImpl extends AxiomImpl implements ScalarEquiv
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Long LENGTH_EDEFAULT = null;
+	protected static final Integer LENGTH_EDEFAULT = null;
 
 	/**
 	 * The cached value of the '{@link #getLength() <em>Length</em>}' attribute.
@@ -90,7 +90,7 @@ public class ScalarEquivalenceAxiomImpl extends AxiomImpl implements ScalarEquiv
 	 * @generated
 	 * @ordered
 	 */
-	protected Long length = LENGTH_EDEFAULT;
+	protected Integer length = LENGTH_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getMinLength() <em>Min Length</em>}' attribute.
@@ -100,7 +100,7 @@ public class ScalarEquivalenceAxiomImpl extends AxiomImpl implements ScalarEquiv
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Long MIN_LENGTH_EDEFAULT = null;
+	protected static final Integer MIN_LENGTH_EDEFAULT = null;
 
 	/**
 	 * The cached value of the '{@link #getMinLength() <em>Min Length</em>}' attribute.
@@ -110,7 +110,7 @@ public class ScalarEquivalenceAxiomImpl extends AxiomImpl implements ScalarEquiv
 	 * @generated
 	 * @ordered
 	 */
-	protected Long minLength = MIN_LENGTH_EDEFAULT;
+	protected Integer minLength = MIN_LENGTH_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getMaxLength() <em>Max Length</em>}' attribute.
@@ -120,7 +120,7 @@ public class ScalarEquivalenceAxiomImpl extends AxiomImpl implements ScalarEquiv
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Long MAX_LENGTH_EDEFAULT = null;
+	protected static final Integer MAX_LENGTH_EDEFAULT = null;
 
 	/**
 	 * The cached value of the '{@link #getMaxLength() <em>Max Length</em>}' attribute.
@@ -130,7 +130,7 @@ public class ScalarEquivalenceAxiomImpl extends AxiomImpl implements ScalarEquiv
 	 * @generated
 	 * @ordered
 	 */
-	protected Long maxLength = MAX_LENGTH_EDEFAULT;
+	protected Integer maxLength = MAX_LENGTH_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getPattern() <em>Pattern</em>}' attribute.
@@ -330,7 +330,7 @@ public class ScalarEquivalenceAxiomImpl extends AxiomImpl implements ScalarEquiv
 	 * @generated
 	 */
 	@Override
-	public Long getLength() {
+	public Integer getLength() {
 		return length;
 	}
 
@@ -340,8 +340,8 @@ public class ScalarEquivalenceAxiomImpl extends AxiomImpl implements ScalarEquiv
 	 * @generated
 	 */
 	@Override
-	public void setLength(Long newLength) {
-		Long oldLength = length;
+	public void setLength(Integer newLength) {
+		Integer oldLength = length;
 		length = newLength;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.SCALAR_EQUIVALENCE_AXIOM__LENGTH, oldLength, length));
@@ -353,7 +353,7 @@ public class ScalarEquivalenceAxiomImpl extends AxiomImpl implements ScalarEquiv
 	 * @generated
 	 */
 	@Override
-	public Long getMinLength() {
+	public Integer getMinLength() {
 		return minLength;
 	}
 
@@ -363,8 +363,8 @@ public class ScalarEquivalenceAxiomImpl extends AxiomImpl implements ScalarEquiv
 	 * @generated
 	 */
 	@Override
-	public void setMinLength(Long newMinLength) {
-		Long oldMinLength = minLength;
+	public void setMinLength(Integer newMinLength) {
+		Integer oldMinLength = minLength;
 		minLength = newMinLength;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.SCALAR_EQUIVALENCE_AXIOM__MIN_LENGTH, oldMinLength, minLength));
@@ -376,7 +376,7 @@ public class ScalarEquivalenceAxiomImpl extends AxiomImpl implements ScalarEquiv
 	 * @generated
 	 */
 	@Override
-	public Long getMaxLength() {
+	public Integer getMaxLength() {
 		return maxLength;
 	}
 
@@ -386,8 +386,8 @@ public class ScalarEquivalenceAxiomImpl extends AxiomImpl implements ScalarEquiv
 	 * @generated
 	 */
 	@Override
-	public void setMaxLength(Long newMaxLength) {
-		Long oldMaxLength = maxLength;
+	public void setMaxLength(Integer newMaxLength) {
+		Integer oldMaxLength = maxLength;
 		maxLength = newMaxLength;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.SCALAR_EQUIVALENCE_AXIOM__MAX_LENGTH, oldMaxLength, maxLength));
@@ -743,13 +743,13 @@ public class ScalarEquivalenceAxiomImpl extends AxiomImpl implements ScalarEquiv
 				setOwningScalar((Scalar)newValue);
 				return;
 			case OmlPackage.SCALAR_EQUIVALENCE_AXIOM__LENGTH:
-				setLength((Long)newValue);
+				setLength((Integer)newValue);
 				return;
 			case OmlPackage.SCALAR_EQUIVALENCE_AXIOM__MIN_LENGTH:
-				setMinLength((Long)newValue);
+				setMinLength((Integer)newValue);
 				return;
 			case OmlPackage.SCALAR_EQUIVALENCE_AXIOM__MAX_LENGTH:
-				setMaxLength((Long)newValue);
+				setMaxLength((Integer)newValue);
 				return;
 			case OmlPackage.SCALAR_EQUIVALENCE_AXIOM__PATTERN:
 				setPattern((String)newValue);

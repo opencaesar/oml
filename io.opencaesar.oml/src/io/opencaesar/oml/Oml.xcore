@@ -31,7 +31,6 @@
 @Bikeshed(heading="Abstract-Syntax")
 package io.opencaesar.oml
 
-import io.opencaesar.oml.util.OmlConstants
 import io.opencaesar.oml.util.OmlValidator2
 import java.math.BigDecimal
 import org.eclipse.emf.ecore.EDiagnosticChain
@@ -274,6 +273,17 @@ class Argument extends Element {
      * An optional instance specified by this argument
      */
     refers NamedInstance[?] instance
+    /*
+     * Gets the value of the annotation
+     */
+    op Object getValue() {
+    	if (variable !== null)
+    		variable
+    	else if (literal !== null)
+    		literal
+    	else if (instance !== null)
+    		instance
+    }
 }
 
 /*
@@ -1757,7 +1767,7 @@ class QuotedLiteral extends Literal  {
         return '"'+value+'"' + if (langTag !== null) "$"+langTag else if (^type !== null) "^^"+^type.abbreviatedIri else ""
     }
     op String getTypeIri() {
-    	return if (^type !== null) ^type.iri else OmlConstants.XSD_NS+"string" 
+    	return if (^type !== null) ^type.iri else "http://www.w3.org/2001/XMLSchema#string" 
     }
 }
 
@@ -1772,7 +1782,7 @@ class IntegerLiteral extends Literal  {
     Integer value = "0"
 
     op String getTypeIri() {
-    	return OmlConstants.XSD_NS+"integer" 
+    	return "http://www.w3.org/2001/XMLSchema#integer" 
     }
 }
 
@@ -1787,7 +1797,7 @@ class DecimalLiteral extends Literal  {
     Decimal[1] value = "0.0"
 
     op String getTypeIri() {
-    	return OmlConstants.XSD_NS+"decimal" 
+    	return "http://www.w3.org/2001/XMLSchema#decimal" 
     }
 }
 
@@ -1802,7 +1812,7 @@ class DoubleLiteral extends Literal  {
     Double value = "0.0"
 
     op String getTypeIri() {
-    	return OmlConstants.XSD_NS+"double" 
+    	return "http://www.w3.org/2001/XMLSchema#double" 
     }
 }
 
@@ -1821,7 +1831,7 @@ class BooleanLiteral extends Literal {
     }
 
     op String getTypeIri() {
-    	return OmlConstants.XSD_NS+"boolean" 
+    	return "http://www.w3.org/2001/XMLSchema#boolean" 
     }
 }
 
@@ -1895,14 +1905,19 @@ enum ImportKind {
 //  Primitive Types
 ////////////////////////////////////////
 
-@ExtendedMetaData(minInclusive="0", maxInclusive="4294967295")
-type UnsignedInt wraps long
+@ExtendedMetaData(minInclusive="0", maxInclusive="2147483647")
+type UnsignedInt wraps int
 
-@ExtendedMetaData(minInclusive="0", maxInclusive="4294967295")
-type UnsignedInteger wraps Long
+@ExtendedMetaData(minInclusive="0", maxInclusive="2147483647")
+type UnsignedInteger wraps Integer
 
 @ExtendedMetaData(baseType="http://www.w3.org/2001/XMLSchema#decimal")
 type Decimal wraps BigDecimal
+
+type Double wraps Double
+convert {
+	String.format("%.2E", it)
+}
 
 @ExtendedMetaData(pattern="[a-zA-Z0-9_]([a-zA-Z0-9_\\-.$])*")
 type ID wraps String

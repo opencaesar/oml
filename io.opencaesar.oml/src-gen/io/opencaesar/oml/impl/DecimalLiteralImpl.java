@@ -21,8 +21,6 @@ package io.opencaesar.oml.impl;
 import io.opencaesar.oml.DecimalLiteral;
 import io.opencaesar.oml.OmlPackage;
 
-import io.opencaesar.oml.util.OmlConstants;
-
 import java.lang.reflect.InvocationTargetException;
 
 import java.math.BigDecimal;
@@ -118,7 +116,7 @@ public class DecimalLiteralImpl extends LiteralImpl implements DecimalLiteral {
 	 */
 	@Override
 	public String getTypeIri() {
-		return (OmlConstants.XSD_NS + "decimal");
+		return "http://www.w3.org/2001/XMLSchema#decimal";
 	}
 
 	/**

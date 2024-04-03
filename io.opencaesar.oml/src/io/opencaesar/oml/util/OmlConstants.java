@@ -28,6 +28,8 @@ import java.util.List;
  */
 public interface OmlConstants {
 
+	// Extensions
+	
     /**
      * The extension of OML Text files
      */
@@ -53,6 +55,8 @@ public interface OmlConstants {
      */
     public static final List<String> OML_EXTENSION_LIST= Arrays.asList(OML_EXTENSIONS);
 
+	// IRI, Namespace, and Prefix
+
     /**
      * The IRI of the OML vocabulary
      */
@@ -68,81 +72,147 @@ public interface OmlConstants {
      */
     public static final String OML_PREFIX= "oml";
 
+	// OML Annotations Property IRIs
+	
     /**
-     * The IRI of the XSD vocabulary
+     * The oml:type annotation IRI
      */
-    public static final String XSD_IRI = "http://www.w3.org/2001/XMLSchema";
+    public static final String type = OML_NS + "type";
 
     /**
-     * The namespace of the XSD vocabulary
+     * The oml:namespace annotation IRI
      */
-    public static final String XSD_NS = XSD_IRI+"#";
+    public static final String namespace = OML_NS + "namespace";
 
     /**
-     * The prefix of the XSD vocabulary
+     * The oml:prefix annotation IRI
      */
-    public static final String XSD_PREFIX= "xsd";
+    public static final String prefix = OML_NS + "prefix";
+	
+    /**
+     * The oml:name annotation IRI
+     */
+    public static final String name = OML_NS + "name";
 
     /**
-     * The IRI of the RDF vocabulary
+     * The oml:relationEntity annotation IRI
      */
-    public static final String RDF_IRI = "http://www.w3.org/1999/02/22-rdf-syntax-ns";
+    public static final String relationEntity = OML_NS + "relationEntity";
 
     /**
-     * The namespace of the RDF vocabulary
+     * The oml:relationBase annotation IRI
      */
-    public static final String RDF_NS = RDF_IRI+"#";
+    public static final String relationBase = OML_NS + "relationBase";
 
     /**
-     * The prefix of the RDF vocabulary
+     * The oml:sourceRelation annotation IRI
      */
-    public static final String RDF_PREFIX= "rdf";
+    public static final String sourceRelation = OML_NS + "hasSource";
 
     /**
-     * The IRI of the RDFS vocabulary
+     * The oml:targetRelation annotation IRI
      */
-    public static final String RDFS_IRI = "http://www.w3.org/2000/01/rdf-schema";
+    public static final String targetRelation = OML_NS + "hasTarget";
+
+	// OML Term IRIs 
+	
+    /**
+     * The oml:Vocabulary IRI
+     */
+    public static final String Vocabulary = OML_NS + "Vocabulary";
 
     /**
-     * The namespace of the RDFS vocabulary
+     * The oml:VocabularyBundle IRI
      */
-    public static final String RDFS_NS = RDFS_IRI+"#";
+    public static final String VocabularyBundle = OML_NS + "VocabularyBundle";
 
     /**
-     * The prefix of the RDFS vocabulary
+     * The oml:Description IRI
      */
-    public static final String RDFS_PREFIX= "rdfs";
-
-   /**
-     * The IRI of the OWL vocabulary
-     */
-    public static final String OWL_IRI = "http://www.w3.org/2002/07/owl";
+    public static final String Description = OML_NS + "Description";
 
     /**
-     * The namespace of the OWL vocabulary
+     * The oml:DescriptionBundle IRI
      */
-    public static final String OWL_NS = OWL_IRI+"#";
+    public static final String DescriptionBundle = OML_NS + "DescriptionBundle";
 
     /**
-     * The prefix of the OWL vocabulary
+     * The oml:Aspect IRI
      */
-    public static final String OWL_PREFIX= "owl";
+    public static final String Aspect = OML_NS + "Aspect";
 
     /**
-     * The IRI of the DC vocabulary
+     * The oml:Concept IRI
      */
-    public static final String DC_IRI = "http://purl.org/dc/elements/1.1";
+    public static final String Concept = OML_NS + "Concept";
 
     /**
-     * The namespace of the DC vocabulary
+     * The oml:RelationEntity IRI
      */
-    public static final String DC_NS = DC_IRI+"/";
+    public static final String RelationEntity = OML_NS + "RelationEntity";
 
     /**
-     * The prefix of the DC vocabulary
+     * The oml:Structure IRI
      */
-    public static final String DC_PREFIX= "dc";
-    
+    public static final String Structure = OML_NS + "Structure";
+
+    /**
+     * The oml:Scalar IRI
+     */
+    public static final String Scalar = OML_NS + "Scalar";
+
+    /**
+     * The oml:UnreifiedRelation IRI
+     */
+    public static final String UnreifiedRelation = OML_NS + "UnreifiedRelation";
+
+    /**
+     * The oml:ForwardRelation IRI
+     */
+    public static final String ForwardRelation = OML_NS + "ForwardRelation";
+
+    /**
+     * The oml:ReverseRelation IRI
+     */
+    public static final String ReverseRelation = OML_NS + "ReverseRelation";
+
+    /**
+     * The oml:AnnotationProperty IRI
+     */
+    public static final String AnnotationProperty = OML_NS + "AnnotationProperty";
+
+    /**
+     * The oml:ScalarProperty IRI
+     */
+    public static final String ScalarProperty = OML_NS + "ScalarProperty";
+
+    /**
+     * The oml:StructuredProperty IRI
+     */
+    public static final String StructuredProperty = OML_NS + "StructuredProperty";
+
+    /**
+     * The oml:Rule IRI
+     */
+    public static final String Rule = OML_NS + "Rule";
+
+    /**
+     * The oml:ConceptInstance IRI
+     */
+    public static final String ConceptInstance = OML_NS + "ConceptInstance";
+
+    /**
+     * The oml:RelationInstance IRI
+     */
+    public static final String RelationInstance = OML_NS + "RelationInstance";
+
+    /**
+     * The oml:StructureInstance IRI
+     */
+    public static final String StructureInstance = OML_NS + "StructureInstance";
+ 
+	// Flags
+
     /**
      * A flag that can be set to <code>Boolean.True</code> in a resource set's loading options to enable 
      * resolving IRIs to URIs using already loaded OML ontologies when they are not resolvable using catalogs.

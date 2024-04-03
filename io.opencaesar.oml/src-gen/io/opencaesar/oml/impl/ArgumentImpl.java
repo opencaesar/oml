@@ -19,12 +19,17 @@
 package io.opencaesar.oml.impl;
 
 import io.opencaesar.oml.Argument;
+import io.opencaesar.oml.Element;
 import io.opencaesar.oml.Literal;
 import io.opencaesar.oml.NamedInstance;
 import io.opencaesar.oml.OmlPackage;
 
+import java.lang.reflect.InvocationTargetException;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -220,6 +225,40 @@ public class ArgumentImpl extends ElementImpl implements Argument {
 	 * @generated
 	 */
 	@Override
+	public Object getValue() {
+		Object _xifexpression = null;
+		String _variable = this.getVariable();
+		boolean _tripleNotEquals = (_variable != null);
+		if (_tripleNotEquals) {
+			_xifexpression = this.getVariable();
+		}
+		else {
+			Element _xifexpression_1 = null;
+			Literal _literal = this.getLiteral();
+			boolean _tripleNotEquals_1 = (_literal != null);
+			if (_tripleNotEquals_1) {
+				_xifexpression_1 = this.getLiteral();
+			}
+			else {
+				NamedInstance _xifexpression_2 = null;
+				NamedInstance _instance = this.getInstance();
+				boolean _tripleNotEquals_2 = (_instance != null);
+				if (_tripleNotEquals_2) {
+					_xifexpression_2 = this.getInstance();
+				}
+				_xifexpression_1 = _xifexpression_2;
+			}
+			_xifexpression = _xifexpression_1;
+		}
+		return _xifexpression;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case OmlPackage.ARGUMENT__LITERAL:
@@ -305,6 +344,20 @@ public class ArgumentImpl extends ElementImpl implements Argument {
 				return instance != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case OmlPackage.ARGUMENT___GET_VALUE:
+				return getValue();
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 	/**

@@ -21,8 +21,6 @@ package io.opencaesar.oml.impl;
 import io.opencaesar.oml.BooleanLiteral;
 import io.opencaesar.oml.OmlPackage;
 
-import io.opencaesar.oml.util.OmlConstants;
-
 import java.lang.reflect.InvocationTargetException;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -126,7 +124,7 @@ public class BooleanLiteralImpl extends LiteralImpl implements BooleanLiteral {
 	 */
 	@Override
 	public String getTypeIri() {
-		return (OmlConstants.XSD_NS + "boolean");
+		return "http://www.w3.org/2001/XMLSchema#boolean";
 	}
 
 	/**

@@ -117,4 +117,15 @@ public interface Argument extends Element {
 	 */
 	void setInstance(NamedInstance value);
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Gets the value of the annotation
+	 * <!-- end-model-doc -->
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
+	Object getValue();
+
 } // Argument
