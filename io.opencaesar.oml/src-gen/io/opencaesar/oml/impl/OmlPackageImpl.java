@@ -5586,7 +5586,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		  (idEDataType,
 		   source,
 		   new String[] {
-			   "pattern", "[a-zA-Z0-9_]([a-zA-Z0-9_\\-.$])*"
+			   "pattern", "[a-zA-Z0-9_\\-.%~]([a-zA-Z0-9_\\-.%~$])*"
 		   });
 		addAnnotation
 		  (namespaceEDataType,

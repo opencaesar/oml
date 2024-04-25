@@ -41,10 +41,10 @@ public class STRINGValueConverter extends org.eclipse.xtext.conversion.impl.STRI
 
 	@Override
 	public String toValue(final String string, final INode node) {
-		if (string.contains("\"\"\"")) {
-			return string.replaceAll("\"\"\"", "");
-		} else if (string.contains("'''")) {
-			return string.replaceAll("'''", "");
+		if (string.startsWith("\"\"\"") && string.endsWith("\"\"\"")) {
+			return string.substring(3, string.length()-3);
+		} else if (string.startsWith("'''") && string.endsWith("'''")) {
+			return string.substring(3, string.length()-3);
 		}
 		return string.substring(1, string.length() - 1);
 	}

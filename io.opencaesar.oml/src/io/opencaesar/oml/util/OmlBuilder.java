@@ -319,7 +319,11 @@ public class OmlBuilder {
             }
             cache.put(context, iri, member);
         }
-        return type.cast(member);
+        if (type.isInstance(member)) {
+        	return type.cast(member);
+        } else {
+            throw new RuntimeException("resolved iri "+iri+" in context of "+context.getIri()+" to element of type "+member.getClass().getName()+" instead of expected type "+type.getName());
+        }
     }
     
     // ------------------------------------------------------------------------------------

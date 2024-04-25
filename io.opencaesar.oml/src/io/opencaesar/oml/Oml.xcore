@@ -1919,7 +1919,7 @@ convert {
 	String.format("%.2E", it)
 }
 
-@ExtendedMetaData(pattern="[a-zA-Z0-9_]([a-zA-Z0-9_\\-.$])*")
+@ExtendedMetaData(pattern="[a-zA-Z0-9_\\-.%~]([a-zA-Z0-9_\\-.%~$])*")
 type ID wraps String
 
 @ExtendedMetaData(pattern="([^\\s#])*(#|/)", minLength="2")

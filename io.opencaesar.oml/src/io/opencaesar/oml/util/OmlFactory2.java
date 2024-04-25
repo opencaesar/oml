@@ -50,18 +50,20 @@ public final class OmlFactory2 {
      * @return A new object that is an instance of the given type
      */
     public <T extends Element> T create(final Class<T> type) {
-        Element element = null;
+		Element element = null;
 
-        Optional<EClass> eClass = OmlPackage.eINSTANCE.getEClassifiers().stream().
-        filter(c -> c instanceof EClass).
-        map(c -> (EClass)c).
-        filter(c -> c.getInstanceClass() == type).
-            findFirst();
-        
-        if (eClass.isPresent()) {
-            element = (Element) OmlFactory.eINSTANCE.create(eClass.get());
-        }
-        
-        return type.cast(element);
+		Optional<EClass> possibleEClass = OmlPackage.eINSTANCE.getEClassifiers().stream()
+				.filter(c -> c instanceof EClass)
+				.map(c -> (EClass) c).filter(c -> c.getInstanceClass() == type)
+				.findFirst();
+
+		if (possibleEClass.isPresent()) {
+			EClass eClass = possibleEClass.get();
+			if (!eClass.isAbstract()) {
+				element = (Element) OmlFactory.eINSTANCE.create(eClass);
+			}
+		}
+
+		return type.cast(element);
     }
 }

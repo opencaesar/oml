@@ -415,13 +415,13 @@ Double returns Double:									DOUBLE_STR;
 
 terminal BOOLEAN_STR:									'false'|'true';
 
-terminal UNSIGNED_INTEGER_STR:							DIGIT+;
+terminal UNSIGNED_INTEGER_STR:							NUMERIC+;
 
-terminal INTEGER_STR:									('+'|'-')? DIGIT+;
+terminal INTEGER_STR:									('+'|'-')? NUMERIC+;
 
-terminal DECIMAL_STR:									('+'|'-')? (DIGIT+('.'DIGIT*)? | ('.'DIGIT+));
+terminal DECIMAL_STR:									('+'|'-')? (NUMERIC+('.'NUMERIC*)? | ('.'NUMERIC+));
 
-terminal DOUBLE_STR:									('+'|'-')? (DIGIT+('.'DIGIT*)? | ('.'DIGIT+)) ('e'|'E') ('+'|'-')? DIGIT+;
+terminal DOUBLE_STR:									('+'|'-')? (NUMERIC+('.'NUMERIC*)? | ('.'NUMERIC+)) ('e'|'E') ('+'|'-')? NUMERIC+;
 
 terminal STRING:										('"' (!('"'|'\\') | '\\'.)* '"') | ("'" (!("'"|'\\') | '\\'.)* "'") | ("'''" -> "'''") | '"""' -> '"""';
 
@@ -441,8 +441,10 @@ terminal WS: 											(' '|'\t'|'\r'|'\n')+;
 
 //----------------------------
 
-terminal fragment IDFRAG:								'^'? (ALPHA|DIGIT|'_') (ALPHA|DIGIT|'_'|'-'|'.'|'$')*;
+terminal fragment IDFRAG:								'^'? (ALPHA|NUMERIC|SPECIAL) (ALPHA|NUMERIC|SPECIAL|'$')*;
 
 terminal fragment ALPHA:								'a'..'z'| 'A'..'Z';
 
-terminal fragment DIGIT: 								'0'..'9';
+terminal fragment NUMERIC: 								'0'..'9';
+
+terminal fragment SPECIAL:								'_'|'-'|'.'|'~'|'%';

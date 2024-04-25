@@ -414,16 +414,16 @@
 	`false` | `true`
 
 &lt;<span id="UNSIGNED_INTEGER_STR-Syntax">UNSIGNED_INTEGER_STR</span>&gt;: 
-	DIGIT+
+	NUMERIC+
 
 &lt;<span id="INTEGER_STR-Syntax">INTEGER_STR</span>&gt;: 
-	(`+`|`-`)? DIGIT+
+	(`+`|`-`)? NUMERIC+
 
 &lt;<span id="DECIMAL_STR-Syntax">DECIMAL_STR</span>&gt;: 
-	(`+`|`-`)? (DIGIT+(`.`DIGIT*)? | (`.`DIGIT+))
+	(`+`|`-`)? (NUMERIC+(`.`NUMERIC*)? | (`.`NUMERIC+))
 
 &lt;<span id="DOUBLE_STR-Syntax">DOUBLE_STR</span>&gt;: 
-	(`+`|`-`)? (DIGIT+(`.`DIGIT*)? | (`.`DIGIT+)) ((`e`|`E`) (`+`|`-`)? DIGIT+)?
+	(`+`|`-`)? (NUMERIC+(`.`NUMERIC*)? | (`.`NUMERIC+)) ((`e`|`E`) (`+`|`-`)? NUMERIC+)?
 
 &lt;<span id="STRING-Syntax">STRING</span>&gt;: 
 	(`"` -> `"`) | (`'` -> `'`) | (`'''` -> `'''`) | (`"""` -> `"""`)
@@ -444,12 +444,15 @@
 	ID `:` ID
 
 &lt;<span id="ID-Syntax">ID</span>&gt;: 
-	`^`? (ALPHA|DIGIT|`_`) (ALPHA|DIGIT|`_`|`-`|`.`|`$`)*
+	`^`? (ALPHA|NUMERIC|SPECIAL) (ALPHA|NUMERIC|SPECIAL|`$`)*
 
 &lt;<span id="ALPHA-Syntax">ALPHA</span>&gt;: 
 	`a`..`z` | `A`..`Z`
 
-&lt;<span id="DIGIT-Syntax">DIGIT</span>&gt;: 
+&lt;<span id="NUMERIC-Syntax">NUMERIC</span>&gt;: 
 	`0`..`9`
+
+&lt;<span id="SPECIAL-Syntax">SPECIAL</span>&gt;: 
+	`_`|`-`|`.`|`~`|`%`
 
 </pre>

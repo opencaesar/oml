@@ -30,6 +30,8 @@ import org.eclipse.xtext.formatting2.FormatterPreferenceKeys;
 import org.eclipse.xtext.formatting2.FormatterRequest;
 import org.eclipse.xtext.formatting2.IFormattableDocument;
 import org.eclipse.xtext.formatting2.IHiddenRegionFormatter;
+import org.eclipse.xtext.formatting2.ITextReplacerContext;
+import org.eclipse.xtext.formatting2.internal.AbstractTextReplacer;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
 import org.eclipse.xtext.preferences.MapBasedPreferenceValues;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -515,41 +517,36 @@ public class OmlFormatter extends AbstractJavaFormatter {
 	protected void _format(QuotedLiteral literal, IFormattableDocument doc) {
 		doc.surround(keyword(literal, oml.getQuotedLiteralAccess().getCircumflexAccentCircumflexAccentKeyword_1_0_0()), noSpace());
 		doc.surround(keyword(literal, oml.getQuotedLiteralAccess().getDollarSignKeyword_1_1_0()), noSpace());
-	    /*var region  = textRegionExtensions.regionFor(literal).feature(OmlPackage.Literals.QUOTED_LITERAL__VALUE);
+	    var region  = textRegionExtensions.regionFor(literal).feature(OmlPackage.Literals.QUOTED_LITERAL__VALUE);
 	    if (region != null) {
 	        var r = new AbstractTextReplacer(doc, region) {
 				@Override
 				public ITextReplacerContext createReplacements(ITextReplacerContext context) {
 		            String text = region.getText();
-                    int length = text.length();
-                    int offset = region.getOffset();
+                    int indentation = context.getIndentation();
                     
                     String[] lines = text.split("\n");
 
-					// Find the minimum number of leading whitespace characters
-					int minWhitespaceCount = Integer.MAX_VALUE;
-					for (int i = 1; i < lines.length; i++) {
-						String line = lines[i];
-						int whitespaceCount = line.length() - line.trim().length();
-						minWhitespaceCount = Math.min(minWhitespaceCount, whitespaceCount);
-					}
-
 					// Remove the common number of leading whitespace characters from each line
 					for (int i = 1; i < lines.length; i++) {
-					    lines[i] = "\t" + lines[i].substring(minWhitespaceCount);
+						StringBuffer b = new StringBuffer();
+						for (int j=0; j<indentation; j++) {
+							b.append("\t");
+						}
+					    lines[i] = b.toString()+lines[i].trim();
 					}
 
 					String newText = String.join("\n", lines);
 					
 					if (!newText.equals(text)) {
-						context.addReplacement(region.getTextRegionAccess().getRewriter().createReplacement(offset, text.length(), newText));
+						context.addReplacement(region.getTextRegionAccess().getRewriter().createReplacement(region.getOffset(), text.length(), newText));
 					}
 					return context;
 				}
 	        	
 	        };
 	        doc.addReplacer(r);
-	    }*/
+	    }
 	}
 
 	/************** UTILITIES **************/

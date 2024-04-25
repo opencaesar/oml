@@ -1954,7 +1954,7 @@ public class OmlValidator extends EObjectValidator {
 	public static final  PatternMatcher [][] ID__PATTERN__VALUES =
 		new PatternMatcher [][] {
 			new PatternMatcher [] {
-				XMLTypeUtil.createPatternMatcher("[a-zA-Z0-9_]([a-zA-Z0-9_\\-.$])*")
+				XMLTypeUtil.createPatternMatcher("[a-zA-Z0-9_\\-.%~]([a-zA-Z0-9_\\-.%~$])*")
 			}
 		};
 

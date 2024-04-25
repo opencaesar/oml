@@ -12681,7 +12681,7 @@ public interface OmlPackage extends EPackage {
 	 * @return the meta object for data type '<em>ID</em>'.
 	 * @see java.lang.String
 	 * @model instanceClass="java.lang.String"
-	 *        extendedMetaData="pattern='[a-zA-Z0-9_]([a-zA-Z0-9_\\-.$])*'"
+	 *        extendedMetaData="pattern='[a-zA-Z0-9_\\-.%~]([a-zA-Z0-9_\\-.%~$])*'"
 	 * @generated
 	 */
 	EDataType getID();
