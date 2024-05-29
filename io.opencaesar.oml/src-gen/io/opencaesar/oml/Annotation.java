@@ -27,7 +27,7 @@ package io.opencaesar.oml;
  * <!-- begin-model-doc -->
  * Annotation is an element that specifies non-semantic information on an [=IdentifiedElement=].
  * An annotation is specified with an [=AnnotationProperty=] and an optional [=Literal=] or [=Member=] (referenced) value.
- * When no value is specified, the boolean literal `true` is assumed to be specified.
+ * When no value is specified, the boolean literal `true` is assumed to be specified as a value.
  * <!-- end-model-doc -->
  *
  * <p>

@@ -2,6 +2,7 @@ package io.opencaesar.oml.provider;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -11,6 +12,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import io.opencaesar.oml.Annotation;
 import io.opencaesar.oml.AnnotationProperty;
+import io.opencaesar.oml.AnonymousInstance;
 import io.opencaesar.oml.Argument;
 import io.opencaesar.oml.Aspect;
 import io.opencaesar.oml.BooleanLiteral;
@@ -598,23 +600,19 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 			@Override
 			public String getText(Object object) {
 				PropertyValueRestrictionAxiom axiom = (PropertyValueRestrictionAxiom)object;
-				String propertyKind = "";
 				String valueLabel = "";
 				if (axiom.getProperty() instanceof ScalarProperty) {
-					propertyKind = "scalar property";
-					valueLabel = getLiteralLabel(new StringBuilder(), axiom.getLiteralValue()).toString();
+					valueLabel = getLiteralLabel(axiom.getLiteralValue()).toString();
 				} else if (axiom.getProperty() instanceof StructuredProperty) {
-					propertyKind = "structured property";
-					StructureInstance instance= axiom.getContainedValue();
+					AnonymousInstance instance= axiom.getContainedValue();
 					valueLabel = "<none>";
 					if (instance != null && instance.getType() != null) {
 						valueLabel = getLabel(instance.getType(), instance);
 					}
 				} else if (axiom.getProperty() instanceof Relation) {
-					propertyKind = "relation";
 					valueLabel = getLabel(axiom.getReferencedValue(), axiom);
 				}
-				return "restricts "+propertyKind+" " + getLabel(axiom.getProperty(), axiom)+ " to " + valueLabel;
+				return "restricts " + getLabel(axiom.getProperty(), axiom)+ " to " + valueLabel;
 			}
 		};
 		return propertyValueRestrictionAxiomItemProvider;
@@ -753,7 +751,7 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 		if (quotedLiteralItemProvider == null) quotedLiteralItemProvider = new QuotedLiteralItemProvider(this) {
 			@Override
 			public String getText(Object object) {
-				return getLiteralLabel(new StringBuilder(), (Literal)object).toString();
+				return getLiteralLabel((Literal)object).toString();
 			}
 		};
 		return quotedLiteralItemProvider;
@@ -764,7 +762,7 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 		if (integerLiteralItemProvider == null) integerLiteralItemProvider = new IntegerLiteralItemProvider(this) {
 			@Override
 			public String getText(Object object) {
-				return getLiteralLabel(new StringBuilder(), (Literal)object).toString();
+				return getLiteralLabel((Literal)object).toString();
 			}
 		};
 		return integerLiteralItemProvider;
@@ -775,7 +773,7 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 		if (decimalLiteralItemProvider == null) decimalLiteralItemProvider = new DecimalLiteralItemProvider(this) {
 			@Override
 			public String getText(Object object) {
-				return getLiteralLabel(new StringBuilder(), (Literal)object).toString();
+				return getLiteralLabel((Literal)object).toString();
 			}
 		};
 		return decimalLiteralItemProvider;
@@ -786,7 +784,7 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 		if (doubleLiteralItemProvider == null) doubleLiteralItemProvider = new DoubleLiteralItemProvider(this) {
 			@Override
 			public String getText(Object object) {
-				return getLiteralLabel(new StringBuilder(), (Literal)object).toString();
+				return getLiteralLabel((Literal)object).toString();
 			}
 		};
 		return doubleLiteralItemProvider;
@@ -797,7 +795,7 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 		if (booleanLiteralItemProvider == null) booleanLiteralItemProvider = new BooleanLiteralItemProvider(this) {
 			@Override
 			public String getText(Object object) {
-				return getLiteralLabel(new StringBuilder(), (Literal)object).toString();
+				return getLiteralLabel((Literal)object).toString();
 			}
 		};
 		return booleanLiteralItemProvider;
@@ -808,28 +806,26 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 	/**
 	 * Get the property label appended with the literal label (if present)
 	 */
-	static String getPropertyLabel(Member property, Object value, Element element) {
+	static String getPropertyLabel(Member property, Element value, Element element) {
 		StringBuilder label = new StringBuilder();
 		if (property == null) {
 			label.append("<no property>");
 		} else {
 			label.append(getLabel(property, element));
 		}
+		List<String> valuesLabels = new ArrayList<>();
 		if (value instanceof Literal) {
-			label.append(" ");
-			getLiteralLabel(label, (Literal)value);
-		}
-		if (value instanceof StructureInstance) {
-			label.append(" ");
-			StructureInstance instance = (StructureInstance)value;
+			valuesLabels.add(getLiteralLabel((Literal)value));
+		} else if (value instanceof AnonymousInstance) {
+			AnonymousInstance instance = (AnonymousInstance)value;
 			if (instance.getType() != null) {
-				label.append(getLabel(instance.getType(), instance));
+				valuesLabels.add(getLabel(instance.getType(), element));
 			}
+		} else if (value instanceof NamedInstance) {
+			valuesLabels.add(getLabel((NamedInstance)value, element));
 		}
-		if (value instanceof NamedInstance) {
-			label.append(" ");
-			label.append(getLabel((NamedInstance)value, element));
-		}
+		label.append(" ");
+		label.append(valuesLabels.stream().collect(Collectors.joining(", ")));
 		return label.toString();
 	}
 	
@@ -857,7 +853,7 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 		} else if (argument.getVariable() != null) {
 			return argument.getVariable();
 		} else if (argument.getLiteral() != null) {
-			return getLiteralLabel(new StringBuilder(), argument.getLiteral()).toString();
+			return getLiteralLabel(argument.getLiteral()).toString();
 		} else if (argument.getInstance() != null) {
 			if (argument.getInstance().eIsProxy()) {
 				return "<" + EcoreUtil.getURI(argument.getInstance()) + ">";
@@ -881,7 +877,8 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 	/**
 	 * Get the value (including scalar type and lang tag) of a literal
 	 */
-	private static StringBuilder getLiteralLabel(StringBuilder label, Literal literal) {
+	private static String getLiteralLabel(Literal literal) {
+		StringBuilder label = new StringBuilder();
 		if (literal instanceof QuotedLiteral) {
 			QuotedLiteral quotedLiteral = (QuotedLiteral)literal;
 			if (quotedLiteral.getValue() != null) {
@@ -904,7 +901,7 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 		} else if (literal instanceof BooleanLiteral) {
 			label.append(((BooleanLiteral) literal).isValue());
 		}
-		return label;
+		return label.toString();
 	}
 	
 	private static String getPredicateDirection(Predicate predicate) {

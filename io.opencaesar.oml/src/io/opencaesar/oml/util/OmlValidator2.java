@@ -38,6 +38,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 
+import io.opencaesar.oml.AnonymousInstance;
 import io.opencaesar.oml.Argument;
 import io.opencaesar.oml.Aspect;
 import io.opencaesar.oml.Classifier;
@@ -54,6 +55,7 @@ import io.opencaesar.oml.ImportKind;
 import io.opencaesar.oml.Instance;
 import io.opencaesar.oml.Literal;
 import io.opencaesar.oml.Member;
+import io.opencaesar.oml.NamedInstance;
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.Ontology;
 import io.opencaesar.oml.Property;
@@ -106,15 +108,55 @@ public final class OmlValidator2 {
 	private static final String CACHE = "ValidationCache";
 
 	private class Cache {
-    	public Map<Property, Set<Classifier>> propertyToDomains = new HashMap<>();
-    	public Map<Property, Set<Type>> propertyToRanges = new HashMap<>();
-    	public Map<Set<Classifier>, Set<Classifier>> classifierToSupers = new HashMap<>();
-    	public Map<Scalar, Set<Scalar>> scalarToSupers = new HashMap<>();
-    	public Map<Set<Type>, Set<Literal>> scalarToLiterals = new HashMap<>();
+    	private Map<Property, Set<Classifier>> propertyToDomains = new HashMap<>();
+    	private Map<Property, Set<Type>> propertyToRanges = new HashMap<>();
+    	private Map<Set<Classifier>, Set<Classifier>> classifierToSupers = new HashMap<>();
+    	private Map<Scalar, Set<Scalar>> scalarToSupers = new HashMap<>();
+    	private Map<Set<Type>, Set<Literal>> scalarToLiterals = new HashMap<>();
 
     	public Set<Resource> scope;
     	public Cache(Set<Resource> scope) {
     		this.scope = scope;
+    	}
+    	public Set<Classifier> getDomains(SemanticProperty property) {
+            Set<Classifier> domains = propertyToDomains.get(property);
+            if (domains == null) {
+            	propertyToDomains.put(property, domains =  OmlSearch.findAllDomains(property, scope));
+            }
+            return domains;
+    	}
+    	public Set<Type> getRanges(SemanticProperty property) {
+            Set<Type> ranges = propertyToRanges.get(property);
+            if (ranges == null) {
+            	propertyToRanges.put(property, ranges =  OmlSearch.findAllRanges(property, scope));
+            }
+            return ranges;
+    	}
+    	public Set<Classifier> getAllTypes(Instance instance) {
+            final Set<Classifier> types = OmlSearch.findTypes(instance, scope);
+            Set<Classifier> supers = classifierToSupers.get(types);
+            if (supers == null) {
+            	classifierToSupers.put(types, supers =  OmlSearch.findAllTypes(instance, scope));
+            }
+            return supers;
+    	}
+    	public Set<Scalar> getAllTypes(Literal literal) {
+            final Scalar type = OmlRead.getType(literal);
+            Set<Scalar> supers = scalarToSupers.get(type);
+            if (supers == null) {
+            	scalarToSupers.put(type, supers =  OmlSearch.findAllTypes(literal, scope));
+            }
+            return supers;
+    	}
+    	public Set<Literal> getEnumLiterals(Set<Type> types) {
+        	var enumLiterals = scalarToLiterals.get(types);
+        	if (enumLiterals == null) {
+	        	scalarToLiterals.put(types, enumLiterals = types.stream()
+	        			.map(r -> (Scalar)r)
+	        			.flatMap(s -> OmlSearch.findEnumerationLiterals(s, scope).stream())
+	        			.collect(Collectors.toSet()));
+        	}
+        	return enumLiterals;
     	}
     }
     	
@@ -897,17 +939,9 @@ public final class OmlValidator2 {
         final SemanticProperty property = object.getProperty();
         final Instance theSubject = object.getSubject();
         
-        Set<Classifier> domains = cache.propertyToDomains.get(property);
-        if (domains == null) {
-        	cache.propertyToDomains.put(property, domains =  OmlSearch.findAllDomains(property, cache.scope));
-        }
+        final Set<Classifier> domains = cache.getDomains(property);
         
-        final Set<Classifier> types = OmlSearch.findTypes(theSubject, cache.scope);
-        Set<Classifier> allTypes1 = cache.classifierToSupers.get(types);
-        if (allTypes1 == null) {
-        	cache.classifierToSupers.put(types, allTypes1 =  OmlSearch.findAllTypes(theSubject, cache.scope));
-        }
-        final var allTypes = allTypes1;
+        final Set<Classifier> allTypes = cache.getAllTypes(theSubject);
         
         if (!domains.stream().allMatch(d -> allTypes.contains(d))) {
         	return report(Diagnostic.WARNING, diagnostics, object,
@@ -928,51 +962,48 @@ public final class OmlValidator2 {
     boolean validatePropertyValueRestrictionObject(PropertyValueAssertion object, DiagnosticChain diagnostics, Map<Object, Object> context) {
         final Cache cache = (Cache) context.get(CACHE);
         final SemanticProperty property = object.getProperty();
-        final var theObject = object.getObject();
         
-        Set<Type> ranges = cache.propertyToRanges.get(property);
-        if (ranges == null) {
-        	cache.propertyToRanges.put(property, ranges =  OmlSearch.findAllRanges(property, cache.scope));
-        }
- 
+        final Set<Type> ranges = cache.getRanges(property);
+
+        final Element theObject = object.getObject();
+        
         // if the range has an enumerated scalar, check if the object is one of the literals
         if (property instanceof ScalarProperty) {
-        	var literals = cache.scalarToLiterals.get(ranges);
-        	if (literals == null) {
-	        	cache.scalarToLiterals.put(ranges, literals = ranges.stream()
-	        			.map(r -> (Scalar)r)
-	        			.flatMap(s -> OmlSearch.findEnumerationLiterals(s, cache.scope).stream())
-	        			.collect(Collectors.toSet()));
-        	}
-        	if (!literals.isEmpty() && literals.stream().anyMatch(l -> OmlRead.isEqual(l, (Literal)theObject))) {
-        		return true;
+        	final var enumLiterals = cache.getEnumLiterals(ranges);
+        	if (!enumLiterals.isEmpty()) {
+        		if (enumLiterals.stream().anyMatch(l -> OmlRead.isEqual(l, (Literal)theObject))) {
+        			return true;
+        		}
         	}
         }
 
-        Set<Type> allTypes1 = new HashSet<>();
-        if (theObject instanceof Instance) {
-            final Set<Classifier> types = OmlSearch.findTypes((Instance)theObject, cache.scope);
-            Set<Classifier> allTypes = cache.classifierToSupers.get(types);
-            if (allTypes == null) {
-            	cache.classifierToSupers.put(types, allTypes =  OmlSearch.findAllTypes((Instance)theObject, cache.scope));
+        // check if the object's type is asserted to be in the property's ranges
+        if (theObject instanceof NamedInstance) {
+        	NamedInstance instance = ((NamedInstance)theObject);
+            final Set<Classifier> allTypes = cache.getAllTypes(instance);
+            if (!ranges.stream().allMatch(d -> allTypes.contains(d))) {
+            	return report(Diagnostic.WARNING, diagnostics, object,
+            		instance.getAbbreviatedIri()+" is not asserted to be in the range of "+property.getAbbreviatedIri(),
+                    OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__REFERENCED_VALUE);
             }
-            allTypes1.addAll(allTypes);
+        } else if (theObject instanceof AnonymousInstance) {
+            final Set<Classifier> allTypes = cache.getAllTypes((Instance)theObject);
+            if (!ranges.stream().allMatch(d -> allTypes.contains(d))) {
+            	return report(Diagnostic.WARNING, diagnostics, object,
+    	            "The object of the assertion is not asserted to be in the range of "+property.getAbbreviatedIri(),
+                    OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__CONTAINED_VALUE);
+            }
         } else {
-            final Scalar type = OmlRead.getType((Literal)theObject);
-            Set<Scalar> allTypes = cache.scalarToSupers.get(type);
-            if (allTypes == null) {
-            	cache.scalarToSupers.put(type, allTypes =  OmlSearch.findAllTypes((Literal)theObject, cache.scope));
+        	Literal literal = (Literal) theObject;
+            final Set<Scalar> allTypes = cache.getAllTypes(literal);
+            if (!ranges.stream().allMatch(d -> allTypes.contains(d))) {
+            	return report(Diagnostic.WARNING, diagnostics, object,
+            		literal.getLexicalValue()+" is not asserted to be in the range of "+property.getAbbreviatedIri(),
+                    OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__LITERAL_VALUE);
             }
-            allTypes1.addAll(allTypes);
         }
-        final var allTypes = allTypes1;
-        
-        if (!ranges.stream().allMatch(d -> allTypes.contains(d))) {
-        	return report(Diagnostic.WARNING, diagnostics, object,
-	            "The object of the assertion is not already in the range of "+property.getAbbreviatedIri(),
-                OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__PROPERTY);
-        }
-        return true;
+
+        return false;
     }
 
     /**

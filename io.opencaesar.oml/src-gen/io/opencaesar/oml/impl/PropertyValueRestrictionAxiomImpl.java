@@ -18,17 +18,13 @@
  */
 package io.opencaesar.oml.impl;
 
+import io.opencaesar.oml.AnonymousInstance;
 import io.opencaesar.oml.Element;
 import io.opencaesar.oml.Instance;
 import io.opencaesar.oml.Literal;
 import io.opencaesar.oml.NamedInstance;
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.PropertyValueRestrictionAxiom;
-import io.opencaesar.oml.Relation;
-import io.opencaesar.oml.ScalarProperty;
-import io.opencaesar.oml.SemanticProperty;
-import io.opencaesar.oml.StructureInstance;
-import io.opencaesar.oml.StructuredProperty;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -76,7 +72,7 @@ public class PropertyValueRestrictionAxiomImpl extends PropertyRestrictionAxiomI
 	 * @generated
 	 * @ordered
 	 */
-	protected StructureInstance containedValue;
+	protected AnonymousInstance containedValue;
 
 	/**
 	 * The cached value of the '{@link #getReferencedValue() <em>Referenced Value</em>}' reference.
@@ -158,7 +154,7 @@ public class PropertyValueRestrictionAxiomImpl extends PropertyRestrictionAxiomI
 	 * @generated
 	 */
 	@Override
-	public StructureInstance getContainedValue() {
+	public AnonymousInstance getContainedValue() {
 		return containedValue;
 	}
 
@@ -167,8 +163,8 @@ public class PropertyValueRestrictionAxiomImpl extends PropertyRestrictionAxiomI
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetContainedValue(StructureInstance newContainedValue, NotificationChain msgs) {
-		StructureInstance oldContainedValue = containedValue;
+	public NotificationChain basicSetContainedValue(AnonymousInstance newContainedValue, NotificationChain msgs) {
+		AnonymousInstance oldContainedValue = containedValue;
 		containedValue = newContainedValue;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OmlPackage.PROPERTY_VALUE_RESTRICTION_AXIOM__CONTAINED_VALUE, oldContainedValue, newContainedValue);
@@ -183,13 +179,13 @@ public class PropertyValueRestrictionAxiomImpl extends PropertyRestrictionAxiomI
 	 * @generated
 	 */
 	@Override
-	public void setContainedValue(StructureInstance newContainedValue) {
+	public void setContainedValue(AnonymousInstance newContainedValue) {
 		if (newContainedValue != containedValue) {
 			NotificationChain msgs = null;
 			if (containedValue != null)
-				msgs = ((InternalEObject)containedValue).eInverseRemove(this, OmlPackage.STRUCTURE_INSTANCE__OWNING_AXIOM, StructureInstance.class, msgs);
+				msgs = ((InternalEObject)containedValue).eInverseRemove(this, OmlPackage.ANONYMOUS_INSTANCE__OWNING_AXIOM, AnonymousInstance.class, msgs);
 			if (newContainedValue != null)
-				msgs = ((InternalEObject)newContainedValue).eInverseAdd(this, OmlPackage.STRUCTURE_INSTANCE__OWNING_AXIOM, StructureInstance.class, msgs);
+				msgs = ((InternalEObject)newContainedValue).eInverseAdd(this, OmlPackage.ANONYMOUS_INSTANCE__OWNING_AXIOM, AnonymousInstance.class, msgs);
 			msgs = basicSetContainedValue(newContainedValue, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
@@ -245,20 +241,23 @@ public class PropertyValueRestrictionAxiomImpl extends PropertyRestrictionAxiomI
 	@Override
 	public Element getValue() {
 		Element _xifexpression = null;
-		SemanticProperty _property = this.getProperty();
-		if ((_property instanceof ScalarProperty)) {
+		Literal _literalValue = this.getLiteralValue();
+		boolean _tripleNotEquals = (_literalValue != null);
+		if (_tripleNotEquals) {
 			_xifexpression = this.getLiteralValue();
 		}
 		else {
 			Instance _xifexpression_1 = null;
-			SemanticProperty _property_1 = this.getProperty();
-			if ((_property_1 instanceof StructuredProperty)) {
+			AnonymousInstance _containedValue = this.getContainedValue();
+			boolean _tripleNotEquals_1 = (_containedValue != null);
+			if (_tripleNotEquals_1) {
 				_xifexpression_1 = this.getContainedValue();
 			}
 			else {
 				NamedInstance _xifexpression_2 = null;
-				SemanticProperty _property_2 = this.getProperty();
-				if ((_property_2 instanceof Relation)) {
+				NamedInstance _referencedValue = this.getReferencedValue();
+				boolean _tripleNotEquals_2 = (_referencedValue != null);
+				if (_tripleNotEquals_2) {
 					_xifexpression_2 = this.getReferencedValue();
 				}
 				_xifexpression_1 = _xifexpression_2;
@@ -279,7 +278,7 @@ public class PropertyValueRestrictionAxiomImpl extends PropertyRestrictionAxiomI
 			case OmlPackage.PROPERTY_VALUE_RESTRICTION_AXIOM__CONTAINED_VALUE:
 				if (containedValue != null)
 					msgs = ((InternalEObject)containedValue).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OmlPackage.PROPERTY_VALUE_RESTRICTION_AXIOM__CONTAINED_VALUE, null, msgs);
-				return basicSetContainedValue((StructureInstance)otherEnd, msgs);
+				return basicSetContainedValue((AnonymousInstance)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -331,7 +330,7 @@ public class PropertyValueRestrictionAxiomImpl extends PropertyRestrictionAxiomI
 				setLiteralValue((Literal)newValue);
 				return;
 			case OmlPackage.PROPERTY_VALUE_RESTRICTION_AXIOM__CONTAINED_VALUE:
-				setContainedValue((StructureInstance)newValue);
+				setContainedValue((AnonymousInstance)newValue);
 				return;
 			case OmlPackage.PROPERTY_VALUE_RESTRICTION_AXIOM__REFERENCED_VALUE:
 				setReferencedValue((NamedInstance)newValue);
@@ -352,7 +351,7 @@ public class PropertyValueRestrictionAxiomImpl extends PropertyRestrictionAxiomI
 				setLiteralValue((Literal)null);
 				return;
 			case OmlPackage.PROPERTY_VALUE_RESTRICTION_AXIOM__CONTAINED_VALUE:
-				setContainedValue((StructureInstance)null);
+				setContainedValue((AnonymousInstance)null);
 				return;
 			case OmlPackage.PROPERTY_VALUE_RESTRICTION_AXIOM__REFERENCED_VALUE:
 				setReferencedValue((NamedInstance)null);

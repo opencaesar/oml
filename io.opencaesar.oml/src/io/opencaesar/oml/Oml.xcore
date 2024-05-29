@@ -78,7 +78,7 @@ abstract class Element {
 /*
  * Annotation is an element that specifies non-semantic information on an [=IdentifiedElement=]. 
  * An annotation is specified with an [=AnnotationProperty=] and an optional [=Literal=] or [=Member=] (referenced) value. 
- * When no value is specified, the boolean literal `true` is assumed to be specified.
+ * When no value is specified, the boolean literal `true` is assumed to be specified as a value.
  */
 @Bikeshed(heading="Elements")
 class Annotation extends Element {
@@ -101,7 +101,7 @@ class Annotation extends Element {
     /*
      * Gets the value of the annotation
      */
-    op Element getValue() {
+    op Element[?] getValue() {
     	if (literalValue !== null)
     		literalValue
     	else if (referencedValue !== null)
@@ -235,7 +235,7 @@ abstract class Assertion extends Element {
      */
     op Instance getSubject()
     /**
-     * Gets the instance that is the object of this assertion
+     * Gets the element that is the object of this assertion
      */
     op Element getObject()
 }
@@ -1142,6 +1142,25 @@ abstract class NamedInstance extends DescriptionStatement, Instance {
     }
 }
 
+/*
+ * AnonymousInstance is an [=Instance=] that is anonymous and can be owned by a [=PropertyValueAssertion=] or [=PropertyValueRestrictionAxiom=].
+ */
+@Bikeshed(heading="Instances")
+abstract class AnonymousInstance extends Instance {
+    /*
+     * The property value assertion that owns this instance as a value
+     */
+    container PropertyValueAssertion[?] owningAssertion opposite containedValue
+    /*
+     * The property value restriction axiom that assigns this instance as a restricted value
+     */
+    container PropertyValueRestrictionAxiom[?] owningAxiom opposite containedValue
+	/*
+	 * Get the type of the anonymous instance
+	 */
+    op Classifier getType()
+}
+
 ////////////////////////////////////////
 //  Named Instances
 ////////////////////////////////////////
@@ -1178,27 +1197,18 @@ class RelationInstance extends NamedInstance {
 }
 
 ////////////////////////////////////////
-//  Instances
+//  Anonymous Instances
 ////////////////////////////////////////
 
 /*
- * StructureInstance is an [=Instance=] that can be typed by a [=Structure=]. It is anonymous and gets assigned as a value of a [=StructuredProperty=]
- * either in a [=PropertyValueRestrictionAxiom=] or a [=PropertyValueAssertion=].
+ * StructureInstance is an [=AnonymousInstance=] that can be typed by a [=Structure=].
  */
 @Bikeshed(heading="Instances")
-class StructureInstance extends Instance {
+class StructureInstance extends AnonymousInstance {
     /*
      * The type of this instance
      */
     refers Structure[1] ^type
-    /*
-     * The property value restriction axiom that assigns this instance as a restricted value
-     */
-    container PropertyValueRestrictionAxiom[?] owningAxiom opposite containedValue
-    /*
-     * The property value assertion that assigns this instance as a value
-     */
-    container PropertyValueAssertion[?] owningAssertion opposite containedValue
 
     op Classifier[] getTypes() {
     	return ^type.singletonEList()
@@ -1523,32 +1533,31 @@ class PropertyCardinalityRestrictionAxiom extends PropertyRestrictionAxiom {
 
 /*
  * PropertyValueRestrictionAxiom is a [=PropertyRestrictionAxiom=] that restricts a [=property=] in a given domain to a specific
- * value. The value is either a [=literal=] value in the case of a [=ScalarProperty=], a contained [=StructureInstance=] value 
- * in the case of a [=StructuredProperty=], or a referenced ([=NamedInstance=] value in the case of a [=Relation=].
+ * value. The value is either a [=literal=] value, a contained [=AnonymousInstance=] value, or a referenced ([=NamedInstance=] value.
  */
 @Bikeshed(heading="Axioms")
 class PropertyValueRestrictionAxiom extends PropertyRestrictionAxiom {
     /*
-     * A restricted literal value (of a scalar property) 
+     * A restricted literal value 
      */
     contains Literal[?] literalValue
     /*
-     * A restricted contained value (of a structured property) 
+     * A restricted contained value
      */
-    contains StructureInstance[?] containedValue opposite owningAxiom
+    contains AnonymousInstance[?] containedValue opposite owningAxiom
     /*
-     * A restricted referenced value (of a relation) 
+     * A restricted referenced value
      */
     refers NamedInstance[?] referencedValue
     /*
      * Gets the restricted value
      */
     op Element getValue() {
-    	if (property instanceof ScalarProperty)
+    	if (literalValue !== null)
     		literalValue
-    	else if (property instanceof StructuredProperty)
+    	else if (containedValue !== null)
     		containedValue
-    	else if (property instanceof Relation)
+    	else if (referencedValue !== null)
     		referencedValue
     }
 }
@@ -1588,9 +1597,8 @@ class TypeAssertion extends Assertion {
 }
 
 /*
- * PropertyValueAssertion is an [=Assertion=]  that specifies a value for a [=property=] on an [=instance=]. The value is either a [=literal=] value 
- * in the case of a [=ScalarProperty=], a contained [=StructureInstance=] value in the case of a [=StructuredProperty=], or a referenced 
- * [=NamedInstance=] value in the case of a [=Relation=].
+ * PropertyValueAssertion is an [=Assertion=]  that specifies a value for a [=property=] on an [=instance=]. The value is either a
+ * [=literal=] value, a contained [=AnonymousInstance=] value, or a referenced [=NamedInstance=] values.
  */
 @Bikeshed(heading="Assertions")
 class PropertyValueAssertion extends Assertion {
@@ -1599,41 +1607,44 @@ class PropertyValueAssertion extends Assertion {
      */
     refers SemanticProperty[1] property
     /*
-     * An asserted literal value of a scalar property 
+     * The literal value of this assertion
      */
     contains Literal[?] literalValue
     /*
-     * An asserted contained value of a structured property 
+     * The contained value of this assertion
      */
-    contains StructureInstance[?] containedValue opposite owningAssertion
+    contains AnonymousInstance[?] containedValue opposite owningAssertion
     /*
-     * An asserted referenced value of a relation 
+     * The referenced value of this assertion
      */
     refers NamedInstance[?] referencedValue
     /*
-     * The instance that this property value assertion is about
+     * The instance that owns this assertion
      */
     container Instance[?] owningInstance opposite ownedPropertyValues
     /*
      * Gets the asserted value
      */
     op Element getValue() {
-    	if (property instanceof ScalarProperty)
+    	if (literalValue !== null)
     		literalValue
-    	else if (property instanceof StructuredProperty)
+    	else if (containedValue !== null)
     		containedValue
-    	else if (property instanceof Relation)
+    	else if (referencedValue !== null)
     		referencedValue
+    	else
+    		null
     }
-
+	
     op Instance getSubject() {
         if (owningInstance instanceof NamedInstance) {
-            return (owningInstance as NamedInstance).resolve() as NamedInstance
+            (owningInstance as NamedInstance).resolve() as NamedInstance
+        } else {
+	        owningInstance
         }
-        return owningInstance
     }
     op Element getObject() {
-    	return getValue()
+    	getValue()
     }
 }
 

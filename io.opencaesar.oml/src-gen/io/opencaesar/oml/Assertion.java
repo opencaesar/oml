@@ -52,7 +52,7 @@ public interface Assertion extends Element {
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * *
-	 * Gets the instance that is the object of this assertion
+	 * Gets the element that is the object of this assertion
 	 * <!-- end-model-doc -->
 	 * @model kind="operation" unique="false"
 	 * @generated

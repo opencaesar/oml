@@ -42,6 +42,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 
 import io.opencaesar.oml.Annotation;
 import io.opencaesar.oml.AnnotationProperty;
+import io.opencaesar.oml.AnonymousInstance;
 import io.opencaesar.oml.Assertion;
 import io.opencaesar.oml.Axiom;
 import io.opencaesar.oml.Classifier;
@@ -59,20 +60,16 @@ import io.opencaesar.oml.Predicate;
 import io.opencaesar.oml.Property;
 import io.opencaesar.oml.PropertyPredicate;
 import io.opencaesar.oml.QuotedLiteral;
-import io.opencaesar.oml.Relation;
 import io.opencaesar.oml.RelationBase;
 import io.opencaesar.oml.RelationEntity;
 import io.opencaesar.oml.RelationEntityPredicate;
 import io.opencaesar.oml.ReverseRelation;
 import io.opencaesar.oml.Scalar;
 import io.opencaesar.oml.ScalarEquivalenceAxiom;
-import io.opencaesar.oml.ScalarProperty;
 import io.opencaesar.oml.SemanticProperty;
 import io.opencaesar.oml.SpecializableProperty;
 import io.opencaesar.oml.SpecializableTerm;
 import io.opencaesar.oml.Statement;
-import io.opencaesar.oml.StructureInstance;
-import io.opencaesar.oml.StructuredProperty;
 import io.opencaesar.oml.Term;
 import io.opencaesar.oml.TypePredicate;
 import io.opencaesar.oml.UnreifiedRelation;
@@ -1006,13 +1003,13 @@ public final class OmlRead {
     }
     
     /**
-     * Gets the first literal value of the given scalar property in the given instance
+     * Gets the first literal value of the given semantic property in the given instance
      * 
      * @param instance The given instance
      * @param property the given semantic property
      * @return a literal representing the property's literal value
      */
-    public static Literal getPropertyLiteralValue(Instance instance, ScalarProperty property) {
+    public static Literal getPropertyLiteralValue(Instance instance, SemanticProperty property) {
         return getPropertyValues(instance, property).stream()
         	.filter(i -> i instanceof Literal)
         	.map(i -> (Literal)i)
@@ -1021,29 +1018,29 @@ public final class OmlRead {
     }
 
     /**
-     * Gets the first contained value of the given structured property in the given instance
+     * Gets the first contained value of the given semantic property in the given instance
      * 
      * @param instance The given instance
      * @param property the given property
      * @return a structure instance representing the property's contained value
      */
-    public static StructureInstance getPropertyContainedValue(Instance instance, StructuredProperty property) {
+    public static AnonymousInstance getPropertyContainedValue(Instance instance, SemanticProperty property) {
         return getPropertyValues(instance, property).stream()
-        	.filter(i -> i instanceof StructureInstance)
-        	.map(i -> (StructureInstance)i)
+        	.filter(i -> i instanceof AnonymousInstance)
+        	.map(i -> (AnonymousInstance)i)
             .findFirst()
             .orElse(null);
     }
 
     /**
-     * Gets the first referenced value of the given relation in the given instance
+     * Gets the first referenced value of the given semantic property in the given instance
      * 
      * @param instance The given instance
-     * @param relation the given relation
+     * @param property the given property
      * @return a named instance representing the relation's referenced value
      */
-    public static NamedInstance getPropertyReferencedValue(Instance instance, Relation relation) {
-        return getPropertyValues(instance, relation).stream()
+    public static NamedInstance getPropertyReferencedValue(Instance instance, SemanticProperty property) {
+        return getPropertyValues(instance, property).stream()
         	.filter(i -> i instanceof NamedInstance)
         	.map(i -> (NamedInstance)i)
             .findFirst()
@@ -1058,8 +1055,8 @@ public final class OmlRead {
      */
     public static List<Classifier> getTypes(Instance instance) {
        var types = new ArrayList<Classifier>();
-        if (instance instanceof StructureInstance) {
-            types.add(((StructureInstance) instance).getType());
+        if (instance instanceof AnonymousInstance) {
+            types.add(((AnonymousInstance) instance).getType());
         } else if (instance instanceof NamedInstance) {
             types.addAll(((NamedInstance)instance).getOwnedTypes().stream().
                 map(i -> i.getType()).

@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 
 import io.opencaesar.oml.Annotation;
 import io.opencaesar.oml.AnnotationProperty;
+import io.opencaesar.oml.AnonymousInstance;
 import io.opencaesar.oml.Aspect;
 import io.opencaesar.oml.Assertion;
 import io.opencaesar.oml.Axiom;
@@ -65,7 +66,6 @@ import io.opencaesar.oml.SpecializableProperty;
 import io.opencaesar.oml.SpecializableTerm;
 import io.opencaesar.oml.SpecializationAxiom;
 import io.opencaesar.oml.Structure;
-import io.opencaesar.oml.StructureInstance;
 import io.opencaesar.oml.StructuredProperty;
 import io.opencaesar.oml.Term;
 import io.opencaesar.oml.Type;
@@ -1569,7 +1569,7 @@ public final class OmlSearch extends OmlIndex {
     public static Set<PropertyValueAssertion> findPropertyValueAssertionsWithSubject(Instance subject, Set<Resource> scope) {
         final Set<PropertyValueAssertion> assertions = new LinkedHashSet<>(subject.getOwnedPropertyValues());
         if (subject instanceof NamedInstance) {
-            assertions.addAll(findRefs((NamedInstance)subject).stream()
+            assertions.addAll(findRefs((NamedInstance)subject, scope).stream()
                 .filter(i -> i instanceof NamedInstance)
                 .map(i -> (NamedInstance)i)
                 .flatMap(r -> r.getOwnedPropertyValues().stream())
@@ -1846,11 +1846,11 @@ public final class OmlSearch extends OmlIndex {
      * Finds the first literal value of given scalar property defined on the given instance
      * 
      * @param instance the given instance
-     * @param property the given scalar property
+     * @param property the given semantic property
      * @param scope The scope of the search (can be null)
      * @return a literal value of the given scalar property on the given instance
      */
-    public static Literal findPropertyLiteralValue(Instance instance, ScalarProperty property, Set<Resource> scope) {
+    public static Literal findPropertyLiteralValue(Instance instance, SemanticProperty property, Set<Resource> scope) {
         return findPropertyValues(instance, property, scope).stream()
             	.filter(i -> i instanceof Literal)
             	.map(i -> (Literal)i)
@@ -1859,57 +1859,57 @@ public final class OmlSearch extends OmlIndex {
     }
 
     /**
-     * Finds the first literal value of given scalar property defined on the given instance
+     * Finds the first literal value of given semantic property defined on the given instance
      * 
      * @param instance the given instance
-     * @param property the given scalar property
+     * @param property the given semantic property
      * @return a literal value of the given scalar property on the given instance
      * @deprecated As of 2.5.0. Use {{@link #findPropertyLiteralValue(Instance, ScalarProperty, Set<Resource>)} instead
      */
     @Deprecated
-    public static Literal findPropertyLiteralValue(Instance instance, ScalarProperty property) {
+    public static Literal findPropertyLiteralValue(Instance instance, SemanticProperty property) {
     	return findPropertyLiteralValue(instance, property, null);
     }
     
     /**
-     * Finds the first contained value of given structured property defined on the given instance
+     * Finds the first contained value of given semantic property defined on the given instance
      * 
      * @param instance the given instance
-     * @param property the given structured property
+     * @param property the given semantic property
      * @param scope The scope of the search (can be null)
      * @return a contained value of the given structured property on the given instance
      */
-    public static StructureInstance findPropertyContainedValue(Instance instance, StructuredProperty property, Set<Resource> scope) {
+    public static AnonymousInstance findPropertyContainedValue(Instance instance, SemanticProperty property, Set<Resource> scope) {
         return findPropertyValues(instance, property, scope).stream()
-            	.filter(i -> i instanceof StructureInstance)
-            	.map(i -> (StructureInstance)i)
+            	.filter(i -> i instanceof AnonymousInstance)
+            	.map(i -> (AnonymousInstance)i)
                 .findFirst()
                 .orElse(null);
     }
 
     /**
-     * Finds the first contained value of given structured property defined on the given instance
+     * Finds the first contained value of given semantic property defined on the given instance
      * 
      * @param instance the given instance
-     * @param property the given structured property
+     * @param property the given semantic property
      * @return a contained value of the given structured property on the given instance
      * @deprecated As of 2.5.0. Use {{@link #findPropertyContainedValue(Instance, StructuredProperty, Set<Resource>)} instead
      */
     @Deprecated
-    public static StructureInstance findPropertyContainedValue(Instance instance, StructuredProperty property) {
+    public static AnonymousInstance findPropertyContainedValue(Instance instance, SemanticProperty property) {
     	return findPropertyContainedValue(instance, property, null);
     }
     
     /**
-     * Finds the first referenced value of given structured property defined on the given instance
+     * Finds the first referenced value of given semantic property defined on the given instance
      * 
      * @param instance the given instance
-     * @param relation the given relation
+     * @param property the given semantic property
      * @param scope The scope of the search (can be null)
      * @return a referenced value of the given relation on the given instance
      */
-    public static NamedInstance findPropertyReferencedValue(Instance instance, Relation relation, Set<Resource> scope) {
-        return findPropertyValues(instance, relation, scope).stream()
+    public static NamedInstance findPropertyReferencedValue(Instance instance, SemanticProperty property, Set<Resource> scope) {
+        return findPropertyValues(instance, property, scope).stream()
             	.filter(i -> i instanceof NamedInstance)
             	.map(i -> (NamedInstance)i)
                 .findFirst()
@@ -1917,16 +1917,16 @@ public final class OmlSearch extends OmlIndex {
     }
 
     /**
-     * Finds the first referenced value of given structured property defined on the given instance
+     * Finds the first referenced value of given semantic property defined on the given instance
      * 
      * @param instance the given instance
-     * @param relation the given relation
+     * @param property the given semantic property
      * @return a referenced value of the given relation on the given instance
      * @deprecated As of 2.5.0. Use {{@link #findPropertyReferencedValue(Instance, Relation, Set<Resource>)} instead
      */
     @Deprecated
-    public static NamedInstance findPropertyReferencedValue(Instance instance, Relation relation) {
-    	return findPropertyReferencedValue(instance, relation, null);
+    public static NamedInstance findPropertyReferencedValue(Instance instance, SemanticProperty property) {
+    	return findPropertyReferencedValue(instance, property, null);
     }
     
     /**
@@ -1938,8 +1938,8 @@ public final class OmlSearch extends OmlIndex {
      */
     public static Set<Classifier> findTypes(Instance instance, Set<Resource> scope) {
         Set<Classifier> types = new LinkedHashSet<>();
-        if (instance instanceof StructureInstance) {
-            types.add(((StructureInstance) instance).getType());
+        if (instance instanceof AnonymousInstance) {
+            types.add(((AnonymousInstance) instance).getType());
         } else if (instance instanceof NamedInstance) {
             types.addAll(findTypeAssertions((NamedInstance)instance, scope).stream().
                 map(i -> i.getType()).
@@ -1997,8 +1997,8 @@ public final class OmlSearch extends OmlIndex {
      * @return true if the given instance is typed directly by the given type; otherwise false
      */
     public static boolean findIsTypeOf(Instance instance, Classifier type, Set<Resource> scope) {
-        if (instance instanceof StructureInstance) {
-            return ((StructureInstance)instance).getType() == type;
+        if (instance instanceof AnonymousInstance) {
+            return ((AnonymousInstance)instance).getType() == type;
         } else if (instance instanceof NamedInstance) {
             return findTypeAssertions((NamedInstance)instance, scope).stream()
                 .filter(i -> i.getType() == type)
@@ -2029,8 +2029,8 @@ public final class OmlSearch extends OmlIndex {
      * @return true if the given instance is typed directly or transitively by the given type; otherwise false
      */
     public static boolean findIsKindOf(Instance instance, Classifier type, Set<Resource> scope) {
-        if (instance instanceof StructureInstance) {
-            return findIsSubTermOf(((StructureInstance)instance).getType(), type, scope);
+        if (instance instanceof AnonymousInstance) {
+            return findIsSubTermOf(((AnonymousInstance)instance).getType(), type, scope);
         } else if (instance instanceof NamedInstance) {
             return findTypes((NamedInstance)instance, scope).stream()
                 .filter(t -> findIsSubTermOf(t, type, scope))

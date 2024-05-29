@@ -272,6 +272,10 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 				return createNamedInstanceAdapter();
 			}
 			@Override
+			public Adapter caseAnonymousInstance(AnonymousInstance object) {
+				return createAnonymousInstanceAdapter();
+			}
+			@Override
 			public Adapter caseConceptInstance(ConceptInstance object) {
 				return createConceptInstanceAdapter();
 			}
@@ -1066,6 +1070,20 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createNamedInstanceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.AnonymousInstance <em>Anonymous Instance</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see io.opencaesar.oml.AnonymousInstance
+	 * @generated
+	 */
+	public Adapter createAnonymousInstanceAdapter() {
 		return null;
 	}
 

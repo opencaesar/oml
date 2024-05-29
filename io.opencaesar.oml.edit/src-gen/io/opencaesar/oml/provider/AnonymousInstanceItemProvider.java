@@ -31,19 +31,19 @@ import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 
 /**
- * This is the item provider adapter for a {@link io.opencaesar.oml.StructureInstance} object.
+ * This is the item provider adapter for a {@link io.opencaesar.oml.AnonymousInstance} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class StructureInstanceItemProvider extends AnonymousInstanceItemProvider {
+public class AnonymousInstanceItemProvider extends InstanceItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public StructureInstanceItemProvider(AdapterFactory adapterFactory) {
+	public AnonymousInstanceItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -58,25 +58,26 @@ public class StructureInstanceItemProvider extends AnonymousInstanceItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addTypePropertyDescriptor(object);
+			addOwningAssertionPropertyDescriptor(object);
+			addOwningAxiomPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Type feature.
+	 * This adds a property descriptor for the Owning Assertion feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addTypePropertyDescriptor(Object object) {
+	protected void addOwningAssertionPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_StructureInstance_type_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_StructureInstance_type_feature", "_UI_StructureInstance_type"),
-				 OmlPackage.Literals.STRUCTURE_INSTANCE__TYPE,
+				 getString("_UI_AnonymousInstance_owningAssertion_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_AnonymousInstance_owningAssertion_feature", "_UI_AnonymousInstance_type"),
+				 OmlPackage.Literals.ANONYMOUS_INSTANCE__OWNING_ASSERTION,
 				 true,
 				 false,
 				 true,
@@ -86,14 +87,25 @@ public class StructureInstanceItemProvider extends AnonymousInstanceItemProvider
 	}
 
 	/**
-	 * This returns StructureInstance.gif.
+	 * This adds a property descriptor for the Owning Axiom feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/StructureInstance"));
+	protected void addOwningAxiomPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_AnonymousInstance_owningAxiom_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_AnonymousInstance_owningAxiom_feature", "_UI_AnonymousInstance_type"),
+				 OmlPackage.Literals.ANONYMOUS_INSTANCE__OWNING_AXIOM,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
 	}
 
 	/**
@@ -104,7 +116,7 @@ public class StructureInstanceItemProvider extends AnonymousInstanceItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_StructureInstance_type");
+		return getString("_UI_AnonymousInstance_type");
 	}
 
 

@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.EReference;
 
 import io.opencaesar.oml.Annotation;
 import io.opencaesar.oml.AnnotationProperty;
+import io.opencaesar.oml.AnonymousInstance;
 import io.opencaesar.oml.Argument;
 import io.opencaesar.oml.Aspect;
 import io.opencaesar.oml.BooleanLiteral;
@@ -210,41 +211,66 @@ public class OmlWrite {
     // Annotation
 
     /**
-     * Adds a new annotation with either a literal or reference value (but not both) on a given ontology
+     * Adds a new annotation with a literal value on a given ontology
      * 
      * @param ontology the ontology to annotate
      * @param property the given annotation property
-     * @param literalValue the annotation literal value
-     * @param referencedValue the annotation reference value
+     * @param literalValue the annotation's literal value
      * @return a new annotation on the given ontology
      */
-    public static Annotation addAnnotation(Ontology ontology, AnnotationProperty property, Literal literalValue, Member referencedValue) {
+    public static Annotation addAnnotation(Ontology ontology, AnnotationProperty property, Literal literalValue) {
         final Annotation annotation = create(Annotation.class);
-        if (literalValue != null)
-        	annotation.setLiteralValue(literalValue);
-        else if (referencedValue != null)
-        	annotation.setReferencedValue(referencedValue);
+       	annotation.setLiteralValue(literalValue);
         setCrossReference(ontology, annotation, OmlPackage.Literals.ANNOTATION__PROPERTY, property);
         ontology.getOwnedAnnotations().add(annotation);
         return annotation;
     }
 
     /**
-     * Adds a new annotation with either a literal or reference value (but not both) on a given element in the context of a given ontology
+     * Adds a new annotation with a reference value (iri of a member) on a given ontology
+     * 
+     * @param ontology the ontology to annotate
+     * @param property the given annotation property
+     * @param referencedValue the annotation's reference value (iri of a member)
+     * @return a new annotation on the given ontology
+     */
+    public static Annotation addAnnotation(Ontology ontology, AnnotationProperty property, Member referencedValue) {
+        final Annotation annotation = create(Annotation.class);
+       	annotation.setReferencedValue(referencedValue);
+        setCrossReference(ontology, annotation, OmlPackage.Literals.ANNOTATION__PROPERTY, property);
+        ontology.getOwnedAnnotations().add(annotation);
+        return annotation;
+    }
+
+    /**
+     * Adds a new annotation with a literal value on a given element in the context of a given ontology
      * 
      * @param ontology the context ontology that will have the annotation axiom
      * @param element the annotated element to put the annotation on
      * @param property the given annotation property
-     * @param literalValue the annotation literal value
-     * @param referencedValue the annotation reference value
+     * @param literalValue the annotation's literal values
      * @return a new annotation on the given member in the context of the given ontology
      */
-    public static Annotation addAnnotation(Ontology ontology, IdentifiedElement element, AnnotationProperty property, Literal literalValue, Member referencedValue) {
+    public static Annotation addAnnotation(Ontology ontology, IdentifiedElement element, AnnotationProperty property, Literal literalValue) {
         final Annotation annotation = create(Annotation.class);
-        if (literalValue != null)
-        	annotation.setLiteralValue(literalValue);
-        else if (referencedValue != null)
-        	annotation.setReferencedValue(referencedValue);
+       	annotation.setLiteralValue(literalValue);
+        setCrossReference(ontology, annotation, OmlPackage.Literals.ANNOTATION__PROPERTY, property);
+        setContainmentReference(ontology, element, OmlPackage.Literals.IDENTIFIED_ELEMENT__OWNED_ANNOTATIONS, annotation);
+        return annotation;
+    }
+
+    /**
+     * Adds a new annotation with a reference value (iri of a member) on a given element in the context of a given ontology
+     * 
+     * @param ontology the context ontology that will have the annotation axiom
+     * @param element the annotated element to put the annotation on
+     * @param property the given annotation property
+     * @param referencedValue the annotation's reference value (iri of a member)
+     * @return a new annotation on the given member in the context of the given ontology
+     */
+    public static Annotation addAnnotation(Ontology ontology, IdentifiedElement element, AnnotationProperty property, Member referencedValue) {
+        final Annotation annotation = create(Annotation.class);
+       	annotation.setReferencedValue(referencedValue);
         setCrossReference(ontology, annotation, OmlPackage.Literals.ANNOTATION__PROPERTY, property);
         setContainmentReference(ontology, element, OmlPackage.Literals.IDENTIFIED_ELEMENT__OWNED_ANNOTATIONS, annotation);
         return annotation;
@@ -855,7 +881,7 @@ public class OmlWrite {
      * 
      * @param vocabulary the context vocabulary
      * @param owner the given restricting owner (classifier or classifier equivalence axiom)
-     * @param property the given restricted property
+     * @param property the given semantic property
      * @param range given restricted range
      * @param restrictionKind the kind of the restriction
      * @return a property range restriction axiom that is added to the given vocabulary
@@ -880,7 +906,7 @@ public class OmlWrite {
      * 
      * @param vocabulary the context vocabulary
      * @param owner the given restricting owner (classifier or classifier equivalence axiom)
-     * @param property the given restricted property
+     * @param property the given semantic property
      * @param cardinality the restricted cardinality
      * @param range given restricted range
      * @param restrictionKind the kind of the restriction
@@ -907,11 +933,11 @@ public class OmlWrite {
      * 
      * @param vocabulary the context vocabulary
      * @param owner the given restricting owner (classifier or classifier equivalence axiom)
-     * @param property the given scalar property
+     * @param property the given semantic property
      * @param value the restricted literal value
      * @return a property value restriction axiom that is added to the given vocabulary
      */
-    public static PropertyValueRestrictionAxiom addPropertyValueRestrictionAxiom(Vocabulary vocabulary, Element owner, ScalarProperty property, Literal value) {
+    public static PropertyValueRestrictionAxiom addPropertyValueRestrictionAxiom(Vocabulary vocabulary, Element owner, SemanticProperty property, Literal value) {
         final PropertyValueRestrictionAxiom axiom = create(PropertyValueRestrictionAxiom.class);
         axiom.setLiteralValue(value);
         setCrossReference(vocabulary, axiom, OmlPackage.Literals.PROPERTY_RESTRICTION_AXIOM__PROPERTY, property);
@@ -928,11 +954,11 @@ public class OmlWrite {
      * 
      * @param vocabulary the context vocabulary
      * @param owner the given restricting owner (classifier or classifier equivalence axiom)
-     * @param property the given structured property
+     * @param property the given semantic property
      * @param value the restricted structure instance value
      * @return a property value restriction axiom that is added to the given vocabulary
      */
-    public static PropertyValueRestrictionAxiom addPropertyValueRestrictionAxiom(Vocabulary vocabulary, Element owner, StructuredProperty property, StructureInstance value) {
+    public static PropertyValueRestrictionAxiom addPropertyValueRestrictionAxiom(Vocabulary vocabulary, Element owner, SemanticProperty property, AnonymousInstance value) {
         final PropertyValueRestrictionAxiom axiom = create(PropertyValueRestrictionAxiom.class);
         axiom.setContainedValue(value);
         setCrossReference(vocabulary, axiom, OmlPackage.Literals.PROPERTY_RESTRICTION_AXIOM__PROPERTY, property);
@@ -949,14 +975,14 @@ public class OmlWrite {
      * 
      * @param vocabulary the context vocabulary
      * @param owner the given restricting owner (classifier or classifier equivalence axiom)
-     * @param relation the given relation
+     * @param property the given semantic property
      * @param value the restricted named instance value
      * @return a property value restriction axiom that is added to the given vocabulary
      */
-    public static PropertyValueRestrictionAxiom addPropertyValueRestrictionAxiom(Vocabulary vocabulary, Element owner, Relation relation, NamedInstance value) {
+    public static PropertyValueRestrictionAxiom addPropertyValueRestrictionAxiom(Vocabulary vocabulary, Element owner, SemanticProperty property, NamedInstance value) {
         final PropertyValueRestrictionAxiom axiom = create(PropertyValueRestrictionAxiom.class);
         axiom.setReferencedValue(value);
-        setCrossReference(vocabulary, axiom, OmlPackage.Literals.PROPERTY_RESTRICTION_AXIOM__PROPERTY, relation);
+        setCrossReference(vocabulary, axiom, OmlPackage.Literals.PROPERTY_RESTRICTION_AXIOM__PROPERTY, property);
         if (owner instanceof Classifier) {
         	setContainmentReference(vocabulary, (Classifier)owner, OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS, axiom);
         } else if (owner instanceof ClassifierEquivalenceAxiom) {
@@ -1057,15 +1083,15 @@ public class OmlWrite {
     // PropertyValueAssertion
 
     /**
-     * Creates a property value assertion for a scalar property and adds it to the given ontology.
+     * Creates a property value assertion for a literal and adds it to the given ontology.
      * 
      * @param ontology the context ontology
      * @param instance the given instance
-     * @param property the given scalar property
+     * @param property the given semantic property
      * @param literalValue the asserted (literal) value of the property
      * @return a property value assertion that is added to the given ontology
      */
-    public static PropertyValueAssertion addPropertyValueAssertion(Ontology ontology, Instance instance, ScalarProperty property, Literal literalValue) {
+    public static PropertyValueAssertion addPropertyValueAssertion(Ontology ontology, Instance instance, SemanticProperty property, Literal literalValue) {
         final PropertyValueAssertion assertion = create(PropertyValueAssertion.class);
        	assertion.setLiteralValue(literalValue);
         setCrossReference(ontology, assertion, OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__PROPERTY, property);
@@ -1074,15 +1100,18 @@ public class OmlWrite {
     }
         
     /**
-     * Creates a property value assertion for a structured property and adds it to the given ontology.
+     * Creates a property value assertion for an anonymous instance and adds it to the given ontology.
+     * 
+     * If a structure instance is given, then the property must be a structured property
+     * If an anonymous relation instance is given then the property must be a relation owned by a relation entity
      * 
      * @param ontology the context ontology
      * @param instance the given instance
-     * @param property the given structured property
-     * @param containedeValue the asserted contained value of the property
+     * @param property the given semantic property
+     * @param containedeValue the asserted contained values of the property
      * @return a property value assertion that is added to the given ontology
      */
-    public static PropertyValueAssertion addPropertyValueAssertion(Ontology ontology, Instance instance, StructuredProperty property, StructureInstance containedeValue) {
+    public static PropertyValueAssertion addPropertyValueAssertion(Ontology ontology, Instance instance, SemanticProperty property, AnonymousInstance containedeValue) {
         final PropertyValueAssertion assertion = create(PropertyValueAssertion.class);
        	assertion.setContainedValue(containedeValue);
         setCrossReference(ontology, assertion, OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__PROPERTY, property);
@@ -1091,18 +1120,18 @@ public class OmlWrite {
     }
 
     /**
-     * Creates a property value assertion for a relation and adds it to the given ontology.
+     * Creates a property value assertion for a named instance and adds it to the given ontology.
      * 
      * @param ontology the context ontology
      * @param instance the given instance
-     * @param relation the given relation
+     * @param property the given semantic property
      * @param referencedValue the asserted referenced value of the property
      * @return a property value assertion that is added to the given ontology
      */
-    public static PropertyValueAssertion addPropertyValueAssertion(Ontology ontology, Instance instance, Relation relation, NamedInstance referencedValue) {
+    public static PropertyValueAssertion addPropertyValueAssertion(Ontology ontology, Instance instance, SemanticProperty property, NamedInstance referencedValue) {
         final PropertyValueAssertion assertion = create(PropertyValueAssertion.class);
        	assertion.setReferencedValue(referencedValue);
-        setCrossReference(ontology, assertion, OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__PROPERTY, relation);
+        setCrossReference(ontology, assertion, OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__PROPERTY, property);
         setContainmentReference(ontology, instance, OmlPackage.Literals.INSTANCE__OWNED_PROPERTY_VALUES, assertion);
         return assertion;
     }

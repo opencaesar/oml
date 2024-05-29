@@ -624,6 +624,14 @@ public class OmlSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case OmlPackage.ANONYMOUS_INSTANCE: {
+				AnonymousInstance anonymousInstance = (AnonymousInstance)theEObject;
+				T result = caseAnonymousInstance(anonymousInstance);
+				if (result == null) result = caseInstance(anonymousInstance);
+				if (result == null) result = caseElement(anonymousInstance);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case OmlPackage.CONCEPT_INSTANCE: {
 				ConceptInstance conceptInstance = (ConceptInstance)theEObject;
 				T result = caseConceptInstance(conceptInstance);
@@ -655,6 +663,7 @@ public class OmlSwitch<T> extends Switch<T> {
 			case OmlPackage.STRUCTURE_INSTANCE: {
 				StructureInstance structureInstance = (StructureInstance)theEObject;
 				T result = caseStructureInstance(structureInstance);
+				if (result == null) result = caseAnonymousInstance(structureInstance);
 				if (result == null) result = caseInstance(structureInstance);
 				if (result == null) result = caseElement(structureInstance);
 				if (result == null) result = defaultCase(theEObject);
@@ -1592,6 +1601,21 @@ public class OmlSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseNamedInstance(NamedInstance object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Anonymous Instance</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Anonymous Instance</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAnonymousInstance(AnonymousInstance object) {
 		return null;
 	}
 

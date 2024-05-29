@@ -6340,6 +6340,97 @@ public interface OmlPackage extends EPackage {
 	int NAMED_INSTANCE_OPERATION_COUNT = DESCRIPTION_STATEMENT_OPERATION_COUNT + 3;
 
 	/**
+	 * The meta object id for the '{@link io.opencaesar.oml.impl.AnonymousInstanceImpl <em>Anonymous Instance</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see io.opencaesar.oml.impl.AnonymousInstanceImpl
+	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getAnonymousInstance()
+	 * @generated
+	 */
+	int ANONYMOUS_INSTANCE = 47;
+
+	/**
+	 * The feature id for the '<em><b>Owned Property Values</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANONYMOUS_INSTANCE__OWNED_PROPERTY_VALUES = INSTANCE__OWNED_PROPERTY_VALUES;
+
+	/**
+	 * The feature id for the '<em><b>Owning Assertion</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANONYMOUS_INSTANCE__OWNING_ASSERTION = INSTANCE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Owning Axiom</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANONYMOUS_INSTANCE__OWNING_AXIOM = INSTANCE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Anonymous Instance</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANONYMOUS_INSTANCE_FEATURE_COUNT = INSTANCE_FEATURE_COUNT + 2;
+
+	/**
+	 * The operation id for the '<em>Get Ontology</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANONYMOUS_INSTANCE___GET_ONTOLOGY = INSTANCE___GET_ONTOLOGY;
+
+	/**
+	 * The operation id for the '<em>Extra Validate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANONYMOUS_INSTANCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = INSTANCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Get Types</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANONYMOUS_INSTANCE___GET_TYPES = INSTANCE___GET_TYPES;
+
+	/**
+	 * The operation id for the '<em>Get Type</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANONYMOUS_INSTANCE___GET_TYPE = INSTANCE_OPERATION_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>Anonymous Instance</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANONYMOUS_INSTANCE_OPERATION_COUNT = INSTANCE_OPERATION_COUNT + 1;
+
+	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.impl.ConceptInstanceImpl <em>Concept Instance</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6347,7 +6438,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getConceptInstance()
 	 * @generated
 	 */
-	int CONCEPT_INSTANCE = 47;
+	int CONCEPT_INSTANCE = 48;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -6510,7 +6601,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRelationInstance()
 	 * @generated
 	 */
-	int RELATION_INSTANCE = 48;
+	int RELATION_INSTANCE = 49;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -6691,7 +6782,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getStructureInstance()
 	 * @generated
 	 */
-	int STRUCTURE_INSTANCE = 49;
+	int STRUCTURE_INSTANCE = 50;
 
 	/**
 	 * The feature id for the '<em><b>Owned Property Values</b></em>' containment reference list.
@@ -6700,25 +6791,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STRUCTURE_INSTANCE__OWNED_PROPERTY_VALUES = INSTANCE__OWNED_PROPERTY_VALUES;
-
-	/**
-	 * The feature id for the '<em><b>Type</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRUCTURE_INSTANCE__TYPE = INSTANCE_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Owning Axiom</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRUCTURE_INSTANCE__OWNING_AXIOM = INSTANCE_FEATURE_COUNT + 1;
+	int STRUCTURE_INSTANCE__OWNED_PROPERTY_VALUES = ANONYMOUS_INSTANCE__OWNED_PROPERTY_VALUES;
 
 	/**
 	 * The feature id for the '<em><b>Owning Assertion</b></em>' container reference.
@@ -6727,7 +6800,25 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STRUCTURE_INSTANCE__OWNING_ASSERTION = INSTANCE_FEATURE_COUNT + 2;
+	int STRUCTURE_INSTANCE__OWNING_ASSERTION = ANONYMOUS_INSTANCE__OWNING_ASSERTION;
+
+	/**
+	 * The feature id for the '<em><b>Owning Axiom</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURE_INSTANCE__OWNING_AXIOM = ANONYMOUS_INSTANCE__OWNING_AXIOM;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURE_INSTANCE__TYPE = ANONYMOUS_INSTANCE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Structure Instance</em>' class.
@@ -6736,7 +6827,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STRUCTURE_INSTANCE_FEATURE_COUNT = INSTANCE_FEATURE_COUNT + 3;
+	int STRUCTURE_INSTANCE_FEATURE_COUNT = ANONYMOUS_INSTANCE_FEATURE_COUNT + 1;
 
 	/**
 	 * The operation id for the '<em>Get Ontology</em>' operation.
@@ -6745,7 +6836,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STRUCTURE_INSTANCE___GET_ONTOLOGY = INSTANCE___GET_ONTOLOGY;
+	int STRUCTURE_INSTANCE___GET_ONTOLOGY = ANONYMOUS_INSTANCE___GET_ONTOLOGY;
 
 	/**
 	 * The operation id for the '<em>Extra Validate</em>' operation.
@@ -6754,7 +6845,16 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STRUCTURE_INSTANCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = INSTANCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+	int STRUCTURE_INSTANCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = ANONYMOUS_INSTANCE___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Get Type</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURE_INSTANCE___GET_TYPE = ANONYMOUS_INSTANCE___GET_TYPE;
 
 	/**
 	 * The operation id for the '<em>Get Types</em>' operation.
@@ -6763,7 +6863,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STRUCTURE_INSTANCE___GET_TYPES = INSTANCE_OPERATION_COUNT + 0;
+	int STRUCTURE_INSTANCE___GET_TYPES = ANONYMOUS_INSTANCE_OPERATION_COUNT + 0;
 
 	/**
 	 * The number of operations of the '<em>Structure Instance</em>' class.
@@ -6772,7 +6872,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STRUCTURE_INSTANCE_OPERATION_COUNT = INSTANCE_OPERATION_COUNT + 1;
+	int STRUCTURE_INSTANCE_OPERATION_COUNT = ANONYMOUS_INSTANCE_OPERATION_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.impl.KeyAxiomImpl <em>Key Axiom</em>}' class.
@@ -6782,7 +6882,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getKeyAxiom()
 	 * @generated
 	 */
-	int KEY_AXIOM = 50;
+	int KEY_AXIOM = 51;
 
 	/**
 	 * The feature id for the '<em><b>Properties</b></em>' reference list.
@@ -6864,7 +6964,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getSpecializationAxiom()
 	 * @generated
 	 */
-	int SPECIALIZATION_AXIOM = 51;
+	int SPECIALIZATION_AXIOM = 52;
 
 	/**
 	 * The feature id for the '<em><b>Super Term</b></em>' reference.
@@ -6946,7 +7046,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getInstanceEnumerationAxiom()
 	 * @generated
 	 */
-	int INSTANCE_ENUMERATION_AXIOM = 52;
+	int INSTANCE_ENUMERATION_AXIOM = 53;
 
 	/**
 	 * The feature id for the '<em><b>Instances</b></em>' reference list.
@@ -7028,7 +7128,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getPropertyRestrictionAxiom()
 	 * @generated
 	 */
-	int PROPERTY_RESTRICTION_AXIOM = 53;
+	int PROPERTY_RESTRICTION_AXIOM = 54;
 
 	/**
 	 * The feature id for the '<em><b>Property</b></em>' reference.
@@ -7119,7 +7219,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getLiteralEnumerationAxiom()
 	 * @generated
 	 */
-	int LITERAL_ENUMERATION_AXIOM = 54;
+	int LITERAL_ENUMERATION_AXIOM = 55;
 
 	/**
 	 * The feature id for the '<em><b>Literals</b></em>' containment reference list.
@@ -7201,7 +7301,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getClassifierEquivalenceAxiom()
 	 * @generated
 	 */
-	int CLASSIFIER_EQUIVALENCE_AXIOM = 55;
+	int CLASSIFIER_EQUIVALENCE_AXIOM = 56;
 
 	/**
 	 * The feature id for the '<em><b>Super Classifiers</b></em>' reference list.
@@ -7292,7 +7392,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getScalarEquivalenceAxiom()
 	 * @generated
 	 */
-	int SCALAR_EQUIVALENCE_AXIOM = 56;
+	int SCALAR_EQUIVALENCE_AXIOM = 57;
 
 	/**
 	 * The feature id for the '<em><b>Super Scalar</b></em>' reference.
@@ -7455,7 +7555,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getPropertyEquivalenceAxiom()
 	 * @generated
 	 */
-	int PROPERTY_EQUIVALENCE_AXIOM = 57;
+	int PROPERTY_EQUIVALENCE_AXIOM = 58;
 
 	/**
 	 * The feature id for the '<em><b>Super Property</b></em>' reference.
@@ -7537,7 +7637,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getPropertyRangeRestrictionAxiom()
 	 * @generated
 	 */
-	int PROPERTY_RANGE_RESTRICTION_AXIOM = 58;
+	int PROPERTY_RANGE_RESTRICTION_AXIOM = 59;
 
 	/**
 	 * The feature id for the '<em><b>Property</b></em>' reference.
@@ -7646,7 +7746,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getPropertyCardinalityRestrictionAxiom()
 	 * @generated
 	 */
-	int PROPERTY_CARDINALITY_RESTRICTION_AXIOM = 59;
+	int PROPERTY_CARDINALITY_RESTRICTION_AXIOM = 60;
 
 	/**
 	 * The feature id for the '<em><b>Property</b></em>' reference.
@@ -7764,7 +7864,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getPropertyValueRestrictionAxiom()
 	 * @generated
 	 */
-	int PROPERTY_VALUE_RESTRICTION_AXIOM = 60;
+	int PROPERTY_VALUE_RESTRICTION_AXIOM = 61;
 
 	/**
 	 * The feature id for the '<em><b>Property</b></em>' reference.
@@ -7891,7 +7991,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getPropertySelfRestrictionAxiom()
 	 * @generated
 	 */
-	int PROPERTY_SELF_RESTRICTION_AXIOM = 61;
+	int PROPERTY_SELF_RESTRICTION_AXIOM = 62;
 
 	/**
 	 * The feature id for the '<em><b>Property</b></em>' reference.
@@ -7982,7 +8082,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getTypeAssertion()
 	 * @generated
 	 */
-	int TYPE_ASSERTION = 62;
+	int TYPE_ASSERTION = 63;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -8064,7 +8164,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getPropertyValueAssertion()
 	 * @generated
 	 */
-	int PROPERTY_VALUE_ASSERTION = 63;
+	int PROPERTY_VALUE_ASSERTION = 64;
 
 	/**
 	 * The feature id for the '<em><b>Property</b></em>' reference.
@@ -8182,7 +8282,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getUnaryPredicate()
 	 * @generated
 	 */
-	int UNARY_PREDICATE = 64;
+	int UNARY_PREDICATE = 65;
 
 	/**
 	 * The feature id for the '<em><b>Antecedent Rule</b></em>' container reference.
@@ -8255,7 +8355,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getBinaryPredicate()
 	 * @generated
 	 */
-	int BINARY_PREDICATE = 65;
+	int BINARY_PREDICATE = 66;
 
 	/**
 	 * The feature id for the '<em><b>Antecedent Rule</b></em>' container reference.
@@ -8337,7 +8437,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getBuiltInPredicate()
 	 * @generated
 	 */
-	int BUILT_IN_PREDICATE = 66;
+	int BUILT_IN_PREDICATE = 67;
 
 	/**
 	 * The feature id for the '<em><b>Antecedent Rule</b></em>' container reference.
@@ -8419,7 +8519,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getTypePredicate()
 	 * @generated
 	 */
-	int TYPE_PREDICATE = 67;
+	int TYPE_PREDICATE = 68;
 
 	/**
 	 * The feature id for the '<em><b>Antecedent Rule</b></em>' container reference.
@@ -8501,7 +8601,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRelationEntityPredicate()
 	 * @generated
 	 */
-	int RELATION_ENTITY_PREDICATE = 68;
+	int RELATION_ENTITY_PREDICATE = 69;
 
 	/**
 	 * The feature id for the '<em><b>Antecedent Rule</b></em>' container reference.
@@ -8601,7 +8701,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getPropertyPredicate()
 	 * @generated
 	 */
-	int PROPERTY_PREDICATE = 69;
+	int PROPERTY_PREDICATE = 70;
 
 	/**
 	 * The feature id for the '<em><b>Antecedent Rule</b></em>' container reference.
@@ -8692,7 +8792,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getSameAsPredicate()
 	 * @generated
 	 */
-	int SAME_AS_PREDICATE = 70;
+	int SAME_AS_PREDICATE = 71;
 
 	/**
 	 * The feature id for the '<em><b>Antecedent Rule</b></em>' container reference.
@@ -8774,7 +8874,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDifferentFromPredicate()
 	 * @generated
 	 */
-	int DIFFERENT_FROM_PREDICATE = 71;
+	int DIFFERENT_FROM_PREDICATE = 72;
 
 	/**
 	 * The feature id for the '<em><b>Antecedent Rule</b></em>' container reference.
@@ -8856,7 +8956,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getQuotedLiteral()
 	 * @generated
 	 */
-	int QUOTED_LITERAL = 72;
+	int QUOTED_LITERAL = 73;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -8965,7 +9065,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getIntegerLiteral()
 	 * @generated
 	 */
-	int INTEGER_LITERAL = 73;
+	int INTEGER_LITERAL = 74;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -9056,7 +9156,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDecimalLiteral()
 	 * @generated
 	 */
-	int DECIMAL_LITERAL = 74;
+	int DECIMAL_LITERAL = 75;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -9147,7 +9247,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDoubleLiteral()
 	 * @generated
 	 */
-	int DOUBLE_LITERAL = 75;
+	int DOUBLE_LITERAL = 76;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -9238,7 +9338,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getBooleanLiteral()
 	 * @generated
 	 */
-	int BOOLEAN_LITERAL = 76;
+	int BOOLEAN_LITERAL = 77;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -9338,7 +9438,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getSeparatorKind()
 	 * @generated
 	 */
-	int SEPARATOR_KIND = 77;
+	int SEPARATOR_KIND = 78;
 
 	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.RangeRestrictionKind <em>Range Restriction Kind</em>}' enum.
@@ -9348,7 +9448,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getRangeRestrictionKind()
 	 * @generated
 	 */
-	int RANGE_RESTRICTION_KIND = 78;
+	int RANGE_RESTRICTION_KIND = 79;
 
 	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.CardinalityRestrictionKind <em>Cardinality Restriction Kind</em>}' enum.
@@ -9358,7 +9458,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getCardinalityRestrictionKind()
 	 * @generated
 	 */
-	int CARDINALITY_RESTRICTION_KIND = 79;
+	int CARDINALITY_RESTRICTION_KIND = 80;
 
 	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.ImportKind <em>Import Kind</em>}' enum.
@@ -9368,7 +9468,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getImportKind()
 	 * @generated
 	 */
-	int IMPORT_KIND = 80;
+	int IMPORT_KIND = 81;
 
 	/**
 	 * The meta object id for the '<em>Unsigned Int</em>' data type.
@@ -9377,7 +9477,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getUnsignedInt()
 	 * @generated
 	 */
-	int UNSIGNED_INT = 81;
+	int UNSIGNED_INT = 82;
 
 	/**
 	 * The meta object id for the '<em>Unsigned Integer</em>' data type.
@@ -9387,7 +9487,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getUnsignedInteger()
 	 * @generated
 	 */
-	int UNSIGNED_INTEGER = 82;
+	int UNSIGNED_INTEGER = 83;
 
 	/**
 	 * The meta object id for the '<em>Decimal</em>' data type.
@@ -9397,7 +9497,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDecimal()
 	 * @generated
 	 */
-	int DECIMAL = 83;
+	int DECIMAL = 84;
 
 	/**
 	 * The meta object id for the '<em>Double</em>' data type.
@@ -9407,7 +9507,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getDouble()
 	 * @generated
 	 */
-	int DOUBLE = 84;
+	int DOUBLE = 85;
 
 	/**
 	 * The meta object id for the '<em>ID</em>' data type.
@@ -9417,7 +9517,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getID()
 	 * @generated
 	 */
-	int ID = 85;
+	int ID = 86;
 
 	/**
 	 * The meta object id for the '<em>Namespace</em>' data type.
@@ -9427,7 +9527,7 @@ public interface OmlPackage extends EPackage {
 	 * @see io.opencaesar.oml.impl.OmlPackageImpl#getNamespace()
 	 * @generated
 	 */
-	int NAMESPACE = 86;
+	int NAMESPACE = 87;
 
 
 	/**
@@ -11285,6 +11385,48 @@ public interface OmlPackage extends EPackage {
 	EOperation getNamedInstance__GetTypes();
 
 	/**
+	 * Returns the meta object for class '{@link io.opencaesar.oml.AnonymousInstance <em>Anonymous Instance</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Anonymous Instance</em>'.
+	 * @see io.opencaesar.oml.AnonymousInstance
+	 * @generated
+	 */
+	EClass getAnonymousInstance();
+
+	/**
+	 * Returns the meta object for the container reference '{@link io.opencaesar.oml.AnonymousInstance#getOwningAssertion <em>Owning Assertion</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Owning Assertion</em>'.
+	 * @see io.opencaesar.oml.AnonymousInstance#getOwningAssertion()
+	 * @see #getAnonymousInstance()
+	 * @generated
+	 */
+	EReference getAnonymousInstance_OwningAssertion();
+
+	/**
+	 * Returns the meta object for the container reference '{@link io.opencaesar.oml.AnonymousInstance#getOwningAxiom <em>Owning Axiom</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Owning Axiom</em>'.
+	 * @see io.opencaesar.oml.AnonymousInstance#getOwningAxiom()
+	 * @see #getAnonymousInstance()
+	 * @generated
+	 */
+	EReference getAnonymousInstance_OwningAxiom();
+
+	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.AnonymousInstance#getType() <em>Get Type</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Type</em>' operation.
+	 * @see io.opencaesar.oml.AnonymousInstance#getType()
+	 * @generated
+	 */
+	EOperation getAnonymousInstance__GetType();
+
+	/**
 	 * Returns the meta object for class '{@link io.opencaesar.oml.ConceptInstance <em>Concept Instance</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -11368,28 +11510,6 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getStructureInstance_Type();
-
-	/**
-	 * Returns the meta object for the container reference '{@link io.opencaesar.oml.StructureInstance#getOwningAxiom <em>Owning Axiom</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Owning Axiom</em>'.
-	 * @see io.opencaesar.oml.StructureInstance#getOwningAxiom()
-	 * @see #getStructureInstance()
-	 * @generated
-	 */
-	EReference getStructureInstance_OwningAxiom();
-
-	/**
-	 * Returns the meta object for the container reference '{@link io.opencaesar.oml.StructureInstance#getOwningAssertion <em>Owning Assertion</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Owning Assertion</em>'.
-	 * @see io.opencaesar.oml.StructureInstance#getOwningAssertion()
-	 * @see #getStructureInstance()
-	 * @generated
-	 */
-	EReference getStructureInstance_OwningAssertion();
 
 	/**
 	 * Returns the meta object for the '{@link io.opencaesar.oml.StructureInstance#getTypes() <em>Get Types</em>}' operation.
@@ -14248,6 +14368,40 @@ public interface OmlPackage extends EPackage {
 		EOperation NAMED_INSTANCE___GET_TYPES = eINSTANCE.getNamedInstance__GetTypes();
 
 		/**
+		 * The meta object literal for the '{@link io.opencaesar.oml.impl.AnonymousInstanceImpl <em>Anonymous Instance</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see io.opencaesar.oml.impl.AnonymousInstanceImpl
+		 * @see io.opencaesar.oml.impl.OmlPackageImpl#getAnonymousInstance()
+		 * @generated
+		 */
+		EClass ANONYMOUS_INSTANCE = eINSTANCE.getAnonymousInstance();
+
+		/**
+		 * The meta object literal for the '<em><b>Owning Assertion</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ANONYMOUS_INSTANCE__OWNING_ASSERTION = eINSTANCE.getAnonymousInstance_OwningAssertion();
+
+		/**
+		 * The meta object literal for the '<em><b>Owning Axiom</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ANONYMOUS_INSTANCE__OWNING_AXIOM = eINSTANCE.getAnonymousInstance_OwningAxiom();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Type</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation ANONYMOUS_INSTANCE___GET_TYPE = eINSTANCE.getAnonymousInstance__GetType();
+
+		/**
 		 * The meta object literal for the '{@link io.opencaesar.oml.impl.ConceptInstanceImpl <em>Concept Instance</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -14316,22 +14470,6 @@ public interface OmlPackage extends EPackage {
 		 * @generated
 		 */
 		EReference STRUCTURE_INSTANCE__TYPE = eINSTANCE.getStructureInstance_Type();
-
-		/**
-		 * The meta object literal for the '<em><b>Owning Axiom</b></em>' container reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference STRUCTURE_INSTANCE__OWNING_AXIOM = eINSTANCE.getStructureInstance_OwningAxiom();
-
-		/**
-		 * The meta object literal for the '<em><b>Owning Assertion</b></em>' container reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference STRUCTURE_INSTANCE__OWNING_ASSERTION = eINSTANCE.getStructureInstance_OwningAssertion();
 
 		/**
 		 * The meta object literal for the '<em><b>Get Types</b></em>' operation.

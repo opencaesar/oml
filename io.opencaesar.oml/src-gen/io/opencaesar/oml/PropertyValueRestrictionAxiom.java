@@ -26,8 +26,7 @@ package io.opencaesar.oml;
  *
  * <!-- begin-model-doc -->
  * PropertyValueRestrictionAxiom is a [=PropertyRestrictionAxiom=] that restricts a [=property=] in a given domain to a specific
- * value. The value is either a [=literal=] value in the case of a [=ScalarProperty=], a contained [=StructureInstance=] value
- * in the case of a [=StructuredProperty=], or a referenced ([=NamedInstance=] value in the case of a [=Relation=].
+ * value. The value is either a [=literal=] value, a contained [=AnonymousInstance=] value, or a referenced ([=NamedInstance=] value.
  * <!-- end-model-doc -->
  *
  * <p>
@@ -49,7 +48,7 @@ public interface PropertyValueRestrictionAxiom extends PropertyRestrictionAxiom 
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * A restricted literal value (of a scalar property)
+	 * A restricted literal value
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Literal Value</em>' containment reference.
 	 * @see #setLiteralValue(Literal)
@@ -71,20 +70,20 @@ public interface PropertyValueRestrictionAxiom extends PropertyRestrictionAxiom 
 
 	/**
 	 * Returns the value of the '<em><b>Contained Value</b></em>' containment reference.
-	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.StructureInstance#getOwningAxiom <em>Owning Axiom</em>}'.
+	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.AnonymousInstance#getOwningAxiom <em>Owning Axiom</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * A restricted contained value (of a structured property)
+	 * A restricted contained value
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Contained Value</em>' containment reference.
-	 * @see #setContainedValue(StructureInstance)
+	 * @see #setContainedValue(AnonymousInstance)
 	 * @see io.opencaesar.oml.OmlPackage#getPropertyValueRestrictionAxiom_ContainedValue()
-	 * @see io.opencaesar.oml.StructureInstance#getOwningAxiom
+	 * @see io.opencaesar.oml.AnonymousInstance#getOwningAxiom
 	 * @model opposite="owningAxiom" containment="true"
 	 * @generated
 	 */
-	StructureInstance getContainedValue();
+	AnonymousInstance getContainedValue();
 
 	/**
 	 * Sets the value of the '{@link io.opencaesar.oml.PropertyValueRestrictionAxiom#getContainedValue <em>Contained Value</em>}' containment reference.
@@ -94,14 +93,14 @@ public interface PropertyValueRestrictionAxiom extends PropertyRestrictionAxiom 
 	 * @see #getContainedValue()
 	 * @generated
 	 */
-	void setContainedValue(StructureInstance value);
+	void setContainedValue(AnonymousInstance value);
 
 	/**
 	 * Returns the value of the '<em><b>Referenced Value</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * A restricted referenced value (of a relation)
+	 * A restricted referenced value
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Referenced Value</em>' reference.
 	 * @see #setReferencedValue(NamedInstance)

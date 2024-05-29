@@ -1434,7 +1434,11 @@ public class OmlEditor
 	 * @generated
 	 */
 	protected void doSaveAs(URI uri, IEditorInput editorInput) {
-		(editingDomain.getResourceSet().getResources().get(0)).setURI(uri);
+		Resource oldResource = editingDomain.getResourceSet().getResources().get(0);
+		Resource newResource = editingDomain.getResourceSet().createResource(uri);
+		newResource.getContents().addAll(oldResource.getContents());
+		oldResource.unload();
+		editingDomain.getResourceSet().getResources().remove(oldResource);
 		setInputWithNotify(editorInput);
 		setPartName(editorInput.getName());
 		IProgressMonitor progressMonitor =

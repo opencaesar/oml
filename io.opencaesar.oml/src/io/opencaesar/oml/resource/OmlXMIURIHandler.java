@@ -45,19 +45,24 @@ public class OmlXMIURIHandler extends URIHandlerImpl {
 	@Override
 	public URI resolve(URI uri) {
 		String[] qname = uri.toString().split(":");
-		if (!uri.toString().contains("/") && qname.length == 2) {// abbreviated iri
-			var ontology = OmlRead.getOntology(resource);
-			var _import = ontology.getOwnedImports().stream()
-				.filter(i -> qname[0].equals(i.getPrefix()))
-				.findFirst().orElse(null);
-			if (_import != null) {
-				URI resolvedUri = OmlRead.getResolvedUri(resource, _import.getIri());
-				if (resolvedUri != null) {
-					return URI.createURI(resolvedUri.toString() + SeparatorKind.HASH.toString() + qname[1]);
+		if (!uri.toString().contains("/") && qname.length >= 2) {// abbreviated iri
+			// qname.length == 2 is for backward compatibility with earlier 2.x versions of OML
+			String prefix = (qname.length == 3) ? qname[1] : (qname.length == 2) ? qname[0] : null; 
+			String name = (qname.length == 3) ? qname[2] : (qname.length == 2) ? qname[1] : null;
+			if (prefix != null && name != null) {
+				var ontology = OmlRead.getOntology(resource);
+				var _import = ontology.getOwnedImports().stream()
+					.filter(i -> prefix.equals(i.getPrefix()))
+					.findFirst().orElse(null);
+				if (_import != null) {
+					URI resolvedUri = OmlRead.getResolvedUri(resource, _import.getIri());
+					if (resolvedUri != null) {
+						return URI.createURI(resolvedUri.toString() + SeparatorKind.HASH.toString() + name);
+					}
 				}
+				//COMPARE-MERGE-CASE
+				return URI.createHierarchicalURI(new String[]{prefix}, null, name);
 			}
-			//COMPARE-MERGE-CASE
-			return URI.createHierarchicalURI(new String[]{qname[0]}, null, qname[1]);
 		}
 		return super.resolve(uri);
 	}
@@ -69,7 +74,7 @@ public class OmlXMIURIHandler extends URIHandlerImpl {
 			var ontology = OmlRead.getOntology(resource);
 			var iri = OmlRead.getAbbreviatedIriIn((Member) obj, ontology);
 			if (iri != null) {
-				return URI.createURI(iri);
+				return URI.createURI("oml:"+iri); // "oml:" is set as the URI's (lower case) scheme
 			}
 			throw new RuntimeException("References to <" + uri + "> do not have a corresponding import statement");
 		} else if (uri.fragment() != null) {

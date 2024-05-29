@@ -25,9 +25,8 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * PropertyValueAssertion is an [=Assertion=]  that specifies a value for a [=property=] on an [=instance=]. The value is either a [=literal=] value
- * in the case of a [=ScalarProperty=], a contained [=StructureInstance=] value in the case of a [=StructuredProperty=], or a referenced
- * [=NamedInstance=] value in the case of a [=Relation=].
+ * PropertyValueAssertion is an [=Assertion=]  that specifies a value for a [=property=] on an [=instance=]. The value is either a
+ * [=literal=] value, a contained [=AnonymousInstance=] value, or a referenced [=NamedInstance=] values.
  * <!-- end-model-doc -->
  *
  * <p>
@@ -76,7 +75,7 @@ public interface PropertyValueAssertion extends Assertion {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * An asserted literal value of a scalar property
+	 * The literal value of this assertion
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Literal Value</em>' containment reference.
 	 * @see #setLiteralValue(Literal)
@@ -98,20 +97,20 @@ public interface PropertyValueAssertion extends Assertion {
 
 	/**
 	 * Returns the value of the '<em><b>Contained Value</b></em>' containment reference.
-	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.StructureInstance#getOwningAssertion <em>Owning Assertion</em>}'.
+	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.AnonymousInstance#getOwningAssertion <em>Owning Assertion</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * An asserted contained value of a structured property
+	 * The contained value of this assertion
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Contained Value</em>' containment reference.
-	 * @see #setContainedValue(StructureInstance)
+	 * @see #setContainedValue(AnonymousInstance)
 	 * @see io.opencaesar.oml.OmlPackage#getPropertyValueAssertion_ContainedValue()
-	 * @see io.opencaesar.oml.StructureInstance#getOwningAssertion
+	 * @see io.opencaesar.oml.AnonymousInstance#getOwningAssertion
 	 * @model opposite="owningAssertion" containment="true"
 	 * @generated
 	 */
-	StructureInstance getContainedValue();
+	AnonymousInstance getContainedValue();
 
 	/**
 	 * Sets the value of the '{@link io.opencaesar.oml.PropertyValueAssertion#getContainedValue <em>Contained Value</em>}' containment reference.
@@ -121,14 +120,14 @@ public interface PropertyValueAssertion extends Assertion {
 	 * @see #getContainedValue()
 	 * @generated
 	 */
-	void setContainedValue(StructureInstance value);
+	void setContainedValue(AnonymousInstance value);
 
 	/**
 	 * Returns the value of the '<em><b>Referenced Value</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * An asserted referenced value of a relation
+	 * The referenced value of this assertion
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Referenced Value</em>' reference.
 	 * @see #setReferencedValue(NamedInstance)
@@ -154,7 +153,7 @@ public interface PropertyValueAssertion extends Assertion {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The instance that this property value assertion is about
+	 * The instance that owns this assertion
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Owning Instance</em>' container reference.
 	 * @see #setOwningInstance(Instance)

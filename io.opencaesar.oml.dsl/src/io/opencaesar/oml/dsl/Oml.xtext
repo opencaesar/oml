@@ -24,7 +24,10 @@ Ontology:
 	DescriptionBox;
 
 Annotation:
-	'@' {Annotation} property=[AnnotationProperty|Ref] (literalValue=Literal | referencedValue=[Member|Ref])?;
+	'@' {Annotation} property=[AnnotationProperty|Ref] AnnotationValue?;
+
+fragment AnnotationValue returns Annotation:
+	literalValue=Literal | referencedValue=[Member|Ref];
 
 VocabularyBox:
 	Vocabulary |
@@ -235,8 +238,10 @@ BuiltIn:
 	ownedAnnotations+=Annotation*
 	('builtin' name=ID | 'ref' 'builtin' ref=[BuiltIn|Ref]);
 
+AnonymousInstance:
+	StructureInstance;
+
 StructureInstance:
-	
 	type=[Structure|Ref] '['
 		ownedPropertyValues+=PropertyValueAssertion*
 	']';
@@ -297,7 +302,7 @@ PropertyCardinalityRestrictionAxiom:
 	'restricts' property=[SemanticProperty|Ref] 'to' kind=CardinalityRestrictionKind cardinality=UnsignedInteger (range=[Type|Ref])?;
 
 PropertyValueRestrictionAxiom:
-	'restricts' property=[SemanticProperty|Ref] 'to' (literalValue=Literal | containedValue=StructureInstance | referencedValue=[NamedInstance|Ref]);
+	'restricts' property=[SemanticProperty|Ref] 'to' (literalValue=Literal | containedValue=AnonymousInstance | referencedValue=[NamedInstance|Ref]);
 
 PropertySelfRestrictionAxiom:
 	'restricts' property=[SemanticProperty|Ref] 'to' 'self';
@@ -318,7 +323,10 @@ RelationTypeAssertion returns TypeAssertion:
 	type=[RelationEntity|Ref];
 
 PropertyValueAssertion:
-	property=[SemanticProperty|Ref] (literalValue=Literal | containedValue=StructureInstance | referencedValue=[NamedInstance|Ref]);
+	property=[SemanticProperty|Ref] PropertyValue;
+
+fragment PropertyValue returns PropertyValueAssertion:
+	(literalValue=Literal | containedValue=AnonymousInstance | referencedValue=[NamedInstance|Ref]);
 
 Predicate:
 	UnaryPredicate |

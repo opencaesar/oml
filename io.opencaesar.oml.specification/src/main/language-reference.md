@@ -1104,12 +1104,12 @@ The following example shows a vocabulary that defines a concept *Assembly* with 
 
 <u>Property Value Restriction Axioms</u>
 
-A value restriction axiom restricts the value of a property in the context of some classifier. In the case of a relation, the restricted value represents the relation's target instance. The syntax of a value restriction axioms starts with the keyword `restricts` followed by a reference to the property by IRI. Then, the keyword `to` is used followed by a value that is suitable for each case (a [literal](#Literal-Syntax) for a scalar property, a [structure instance](#StructureInstance-Syntax) for a structured property, or a reference to a [named instance](#NamedInstance-Syntax) by IRI for a relation). The following shows the three supported syntaxes:
+A value restriction axiom restricts the value of a property in the context of some classifier. In the case of a relation, the restricted value represents the relation's target instance. The syntax of a value restriction axioms starts with the keyword `restricts` followed by a reference to the property by IRI. Then, the keyword `to` is used followed by a value that is suitable for each case (a [literal](#Literal-Syntax), an [anonymous instance](#AnonymousInstance-Syntax), or a reference to a [named instance](#NamedInstance-Syntax) by IRI). The following shows the three supported syntaxes:
 
 <pre class="highlight highlight-html">
-	`restricts` [ScalarProperty|IRI] `to` Literal
-	`restricts` [StructuredProperty|IRI] `to` StructureInstance
-	`restricts` [Relation|IRI] `to` [NamedInstance|IRI]
+	`restricts` [SemanticProperty|IRI] `to` Literal
+	`restricts` [SemanticProperty|IRI] `to` Anonymousnstance
+	`restricts` [SemanticProperty|IRI] `to` [NamedInstance|IRI]
 </pre>
 
 The following example shows a vocabulary that defines a concept *Assembly* with some value restrictions.
@@ -1360,7 +1360,7 @@ In the following example description, the *mission* vocabulary is used to descri
 
 ### Instances ### {#Instances-LR}
 
-Instances represent objects or data in a given system. They are described using terms (types and properties) from some vocabulary. Specifically, they can be given types and have assertions on properties in the domain of those types. Instances can either be named ([Concept Instance](#ConceptInstance-LR) and [Relation Instance](#RelationInstance-LR)), in which case they are specified as members of some description, or they can be anonymous ([Structure Instance](#StructureInstance-LR)), in which case they defined as values of properties (e.g., [structured properties](#StructuredProperty-LR)) in the context of other (named or anonymous) instances.
+Instances represent objects or data in a given system. They are described using terms (types and properties) from some vocabulary. Specifically, they can be given types and have assertions on properties in the domain of those types. Instances can either be named ([Concept Instance](#ConceptInstance-LR) and [Relation Instance](#RelationInstance-LR)), in which case they are specified as members of some description, or they can be anonymous ([Structure Instance](#StructureInstance-LR)), in which case they defined as values of [semantic properties](SemanticProperty-LR) in the context of other (named or anonymous) instances.
 
 #### Concept Instance #### {#ConceptInstance-LR}
 
@@ -1459,7 +1459,7 @@ Assertions are statements about instances that enable characterizing them. They 
 
 #### Property Value Assertion #### {#PropertyValueAssertion-LR}
 
-A value for a (scalar, structure, relation) property can be [asserted](#PropertyValueAssertion-Syntax) on an instance ([Concept Instance](#ConceptInstance-LR), [Relation Instance](#RelationInstance-LR), or [Structure Instance](#StructureInstance-LR)). Such assertion can be added as one of the assertions between the square  brackets `[` `]` of the instance. Its syntax consists of an IRI to a [property](#Property-Syntax) from some vocabulary followed by a value, which could be a literal (in the case of a scalar property), a structure instance (in the case of a structured property), or an IRI of a named instance (in the case of a relation).
+A value for a semantic property can be [asserted](#PropertyValueAssertion-Syntax) on an instance ([Concept Instance](#ConceptInstance-LR), [Relation Instance](#RelationInstance-LR), or [Structure Instance](#StructureInstance-LR)). Such assertion can be added as one of the assertions between the square  brackets `[` `]` of the instance. Its syntax consists of an IRI to a [semantic property](#SemanticProperty-Syntax) from some vocabulary followed by a value, which could be a literal, a structure instance, or an IRI of a named instance.
 
 <pre class="highlight highlight-html">
 [ScalarProperty|IRI] Literal
