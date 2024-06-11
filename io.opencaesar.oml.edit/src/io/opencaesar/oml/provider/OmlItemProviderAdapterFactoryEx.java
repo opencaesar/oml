@@ -806,7 +806,7 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 	/**
 	 * Get the property label appended with the literal label (if present)
 	 */
-	static String getPropertyLabel(Member property, Element value, Element element) {
+	static String getPropertyLabel(Member property, List<Element> values, Element element) {
 		StringBuilder label = new StringBuilder();
 		if (property == null) {
 			label.append("<no property>");
@@ -814,15 +814,17 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 			label.append(getLabel(property, element));
 		}
 		List<String> valuesLabels = new ArrayList<>();
-		if (value instanceof Literal) {
-			valuesLabels.add(getLiteralLabel((Literal)value));
-		} else if (value instanceof AnonymousInstance) {
-			AnonymousInstance instance = (AnonymousInstance)value;
-			if (instance.getType() != null) {
-				valuesLabels.add(getLabel(instance.getType(), element));
+		for (Element value : values) {
+			if (value instanceof Literal) {
+				valuesLabels.add(getLiteralLabel((Literal)value));
+			} else if (value instanceof AnonymousInstance) {
+				AnonymousInstance instance = (AnonymousInstance)value;
+				if (instance.getType() != null) {
+					valuesLabels.add(getLabel(instance.getType(), element));
+				}
+			} else if (value instanceof NamedInstance) {
+				valuesLabels.add(getLabel((NamedInstance)value, element));
 			}
-		} else if (value instanceof NamedInstance) {
-			valuesLabels.add(getLabel((NamedInstance)value, element));
 		}
 		label.append(" ");
 		label.append(valuesLabels.stream().collect(Collectors.joining(", ")));

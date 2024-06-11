@@ -211,66 +211,66 @@ public class OmlWrite {
     // Annotation
 
     /**
-     * Adds a new annotation with a literal value on a given ontology
+     * Adds a new annotation with literal values on a given ontology
      * 
      * @param ontology the ontology to annotate
      * @param property the given annotation property
-     * @param literalValue the annotation's literal value
+     * @param literalValues the annotation's literal values
      * @return a new annotation on the given ontology
      */
-    public static Annotation addAnnotation(Ontology ontology, AnnotationProperty property, Literal literalValue) {
+    public static Annotation addAnnotation(Ontology ontology, AnnotationProperty property, Literal...literalValues) {
         final Annotation annotation = create(Annotation.class);
-       	annotation.setLiteralValue(literalValue);
+       	annotation.getLiteralValue().addAll(Arrays.asList(literalValues));
         setCrossReference(ontology, annotation, OmlPackage.Literals.ANNOTATION__PROPERTY, property);
         ontology.getOwnedAnnotations().add(annotation);
         return annotation;
     }
 
     /**
-     * Adds a new annotation with a reference value (iri of a member) on a given ontology
+     * Adds a new annotation with a reference values (iris of members) on a given ontology
      * 
      * @param ontology the ontology to annotate
      * @param property the given annotation property
-     * @param referencedValue the annotation's reference value (iri of a member)
+     * @param referencedValues the annotation's reference values (iris of members)
      * @return a new annotation on the given ontology
      */
-    public static Annotation addAnnotation(Ontology ontology, AnnotationProperty property, Member referencedValue) {
+    public static Annotation addAnnotation(Ontology ontology, AnnotationProperty property, Member...referencedValues) {
         final Annotation annotation = create(Annotation.class);
-       	annotation.setReferencedValue(referencedValue);
+       	annotation.getReferencedValue().addAll(Arrays.asList(referencedValues));
         setCrossReference(ontology, annotation, OmlPackage.Literals.ANNOTATION__PROPERTY, property);
         ontology.getOwnedAnnotations().add(annotation);
         return annotation;
     }
 
     /**
-     * Adds a new annotation with a literal value on a given element in the context of a given ontology
+     * Adds a new annotation with literal values on a given element in the context of a given ontology
      * 
      * @param ontology the context ontology that will have the annotation axiom
      * @param element the annotated element to put the annotation on
      * @param property the given annotation property
-     * @param literalValue the annotation's literal values
+     * @param literalValues the annotation's literal values
      * @return a new annotation on the given member in the context of the given ontology
      */
-    public static Annotation addAnnotation(Ontology ontology, IdentifiedElement element, AnnotationProperty property, Literal literalValue) {
+    public static Annotation addAnnotation(Ontology ontology, IdentifiedElement element, AnnotationProperty property, Literal...literalValues) {
         final Annotation annotation = create(Annotation.class);
-       	annotation.setLiteralValue(literalValue);
+       	annotation.getLiteralValue().addAll(Arrays.asList(literalValues));
         setCrossReference(ontology, annotation, OmlPackage.Literals.ANNOTATION__PROPERTY, property);
         setContainmentReference(ontology, element, OmlPackage.Literals.IDENTIFIED_ELEMENT__OWNED_ANNOTATIONS, annotation);
         return annotation;
     }
 
     /**
-     * Adds a new annotation with a reference value (iri of a member) on a given element in the context of a given ontology
+     * Adds a new annotation with a reference values (iris of members) on a given element in the context of a given ontology
      * 
      * @param ontology the context ontology that will have the annotation axiom
      * @param element the annotated element to put the annotation on
      * @param property the given annotation property
-     * @param referencedValue the annotation's reference value (iri of a member)
+     * @param referencedValues the annotation's reference values (iris of members)
      * @return a new annotation on the given member in the context of the given ontology
      */
-    public static Annotation addAnnotation(Ontology ontology, IdentifiedElement element, AnnotationProperty property, Member referencedValue) {
+    public static Annotation addAnnotation(Ontology ontology, IdentifiedElement element, AnnotationProperty property, Member...referencedValues) {
         final Annotation annotation = create(Annotation.class);
-       	annotation.setReferencedValue(referencedValue);
+       	annotation.getReferencedValue().addAll(Arrays.asList(referencedValues));
         setCrossReference(ontology, annotation, OmlPackage.Literals.ANNOTATION__PROPERTY, property);
         setContainmentReference(ontology, element, OmlPackage.Literals.IDENTIFIED_ELEMENT__OWNED_ANNOTATIONS, annotation);
         return annotation;
@@ -1083,24 +1083,24 @@ public class OmlWrite {
     // PropertyValueAssertion
 
     /**
-     * Creates a property value assertion for a literal and adds it to the given ontology.
+     * Creates a property value assertion for literal values and adds it to the given ontology.
      * 
      * @param ontology the context ontology
      * @param instance the given instance
      * @param property the given semantic property
-     * @param literalValue the asserted (literal) value of the property
+     * @param literalValues the asserted (literal) values of the property
      * @return a property value assertion that is added to the given ontology
      */
-    public static PropertyValueAssertion addPropertyValueAssertion(Ontology ontology, Instance instance, SemanticProperty property, Literal literalValue) {
+    public static PropertyValueAssertion addPropertyValueAssertion(Ontology ontology, Instance instance, SemanticProperty property, Literal...literalValues) {
         final PropertyValueAssertion assertion = create(PropertyValueAssertion.class);
-       	assertion.setLiteralValue(literalValue);
+       	assertion.getLiteralValue().addAll(Arrays.asList(literalValues));
         setCrossReference(ontology, assertion, OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__PROPERTY, property);
         setContainmentReference(ontology, instance, OmlPackage.Literals.INSTANCE__OWNED_PROPERTY_VALUES, assertion);
         return assertion;
     }
         
     /**
-     * Creates a property value assertion for an anonymous instance and adds it to the given ontology.
+     * Creates a property value assertion for anonymous instances and adds it to the given ontology.
      * 
      * If a structure instance is given, then the property must be a structured property
      * If an anonymous relation instance is given then the property must be a relation owned by a relation entity
@@ -1108,29 +1108,29 @@ public class OmlWrite {
      * @param ontology the context ontology
      * @param instance the given instance
      * @param property the given semantic property
-     * @param containedeValue the asserted contained values of the property
+     * @param containedeValues the asserted contained values of the property
      * @return a property value assertion that is added to the given ontology
      */
-    public static PropertyValueAssertion addPropertyValueAssertion(Ontology ontology, Instance instance, SemanticProperty property, AnonymousInstance containedeValue) {
+    public static PropertyValueAssertion addPropertyValueAssertion(Ontology ontology, Instance instance, SemanticProperty property, AnonymousInstance...containedeValues) {
         final PropertyValueAssertion assertion = create(PropertyValueAssertion.class);
-       	assertion.setContainedValue(containedeValue);
+       	assertion.getContainedValue().addAll(Arrays.asList(containedeValues));
         setCrossReference(ontology, assertion, OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__PROPERTY, property);
         setContainmentReference(ontology, instance, OmlPackage.Literals.INSTANCE__OWNED_PROPERTY_VALUES, assertion);
         return assertion;
     }
 
     /**
-     * Creates a property value assertion for a named instance and adds it to the given ontology.
+     * Creates a property value assertion for named instances and adds it to the given ontology.
      * 
      * @param ontology the context ontology
      * @param instance the given instance
      * @param property the given semantic property
-     * @param referencedValue the asserted referenced value of the property
+     * @param referencedValues the asserted referenced values of the property
      * @return a property value assertion that is added to the given ontology
      */
-    public static PropertyValueAssertion addPropertyValueAssertion(Ontology ontology, Instance instance, SemanticProperty property, NamedInstance referencedValue) {
+    public static PropertyValueAssertion addPropertyValueAssertion(Ontology ontology, Instance instance, SemanticProperty property, NamedInstance...referencedValues) {
         final PropertyValueAssertion assertion = create(PropertyValueAssertion.class);
-       	assertion.setReferencedValue(referencedValue);
+       	assertion.getReferencedValue().addAll(Arrays.asList(referencedValues));
         setCrossReference(ontology, assertion, OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__PROPERTY, property);
         setContainmentReference(ontology, instance, OmlPackage.Literals.INSTANCE__OWNED_PROPERTY_VALUES, assertion);
         return assertion;

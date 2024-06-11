@@ -7,7 +7,7 @@
 	DescriptionBox
 
 <a id="Annotation-Syntax">Annotation</a> ::=
-	"@" [AnnotationProperty|IRI] (Literal | [Member|IRI])?
+	"@" [AnnotationProperty|IRI] ((Literal | [Member|IRI]) ("," (Literal | [Member|IRI]))*)?
 
 <a id="VocabularyBox-Syntax">VocabularyBox</a> ::=
 	Vocabulary |
@@ -320,7 +320,7 @@
 	[RelationEntity|IRI]
 
 <a id="PropertyValueAssertion-Syntax">PropertyValueAssertion</a> ::=
-	[SemanticProperty|IRI] (Literal | AnonymousInstance | [NamedInstance|IRI])
+	[SemanticProperty|IRI] (Literal | AnonymousInstance | [NamedInstance|IRI])  ("," (Literal | AnonymousInstance | [NamedInstance|IRI]))*
 
 <a id="Predicate-Syntax">Predicate</a> ::=
 	UnaryPredicate |

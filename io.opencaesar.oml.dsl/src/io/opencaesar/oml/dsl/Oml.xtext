@@ -24,10 +24,10 @@ Ontology:
 	DescriptionBox;
 
 Annotation:
-	'@' {Annotation} property=[AnnotationProperty|Ref] AnnotationValue?;
+	'@' {Annotation} property=[AnnotationProperty|Ref] (AnnotationValue ("," AnnotationValue)*)?;
 
 fragment AnnotationValue returns Annotation:
-	literalValue=Literal | referencedValue=[Member|Ref];
+	literalValue+=Literal | referencedValue+=[Member|Ref];
 
 VocabularyBox:
 	Vocabulary |
@@ -323,10 +323,10 @@ RelationTypeAssertion returns TypeAssertion:
 	type=[RelationEntity|Ref];
 
 PropertyValueAssertion:
-	property=[SemanticProperty|Ref] PropertyValue;
+	property=[SemanticProperty|Ref] PropertyValue ("," PropertyValue)*;
 
 fragment PropertyValue returns PropertyValueAssertion:
-	(literalValue=Literal | containedValue=AnonymousInstance | referencedValue=[NamedInstance|Ref]);
+	(literalValue+=Literal | containedValue+=AnonymousInstance | referencedValue+=[NamedInstance|Ref]);
 
 Predicate:
 	UnaryPredicate |

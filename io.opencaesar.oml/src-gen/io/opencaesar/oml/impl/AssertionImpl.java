@@ -74,7 +74,7 @@ public abstract class AssertionImpl extends ElementImpl implements Assertion {
 	 * @generated
 	 */
 	@Override
-	public Element getObject() {
+	public EList<Element> getObject() {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
 		throw new UnsupportedOperationException();

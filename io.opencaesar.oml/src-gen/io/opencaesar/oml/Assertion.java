@@ -18,6 +18,7 @@
  */
 package io.opencaesar.oml;
 
+import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -25,7 +26,7 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Assertion is an element that characterizes an [=instance=] by specifying the value of one of its [=properties=].
+ * Assertion is an element that characterizes an [=instance=] by specifying values of one of its [=properties=].
  * <!-- end-model-doc -->
  *
  *
@@ -52,11 +53,11 @@ public interface Assertion extends Element {
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * *
-	 * Gets the element that is the object of this assertion
+	 * Gets the elements that are the objects of this assertion
 	 * <!-- end-model-doc -->
 	 * @model kind="operation" unique="false"
 	 * @generated
 	 */
-	Element getObject();
+	EList<Element> getObject();
 
 } // Assertion

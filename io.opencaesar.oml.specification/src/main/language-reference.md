@@ -232,10 +232,11 @@ Note: if an abbreviated literal belongs to multiple scalars, it gets interpreted
 
 An annotation allows describing information about an ontology, or one of its members, that does not have associated description logic (DL) semantics. Such information can be notational (e.g., how an element is to be displayed), tool-specific (e.g., how to export an element), or for any other purpose (e.g., who authored the ontology).
 
-An Annotation describes a value for an [annotation property](#AnnotationProperty-LR) (defined by a [vocabulary](#Vocabulary-LR)) in the context of an identified element (an [ontology](#Ontology-LR) or a [member](#Member-LR),. The general syntax of an annotation consists of a `@` symbol followed by an IRI to the an annotation property then an optional (literal or member reference) value. If the value is missing, it is interpreted as a boolean *true* literal.
+An Annotation describes one or more values for an [annotation property](#AnnotationProperty-LR) (defined by a [vocabulary](#Vocabulary-LR)) in the context of an identified element (an [ontology](#Ontology-LR) or a [member](#Member-LR),. The general syntax of an annotation consists of a `@` symbol followed by an IRI to the an annotation property then zero or more comma-separated (literal or member reference) values. If no value is specified, it is interpreted as a boolean *true* literal value.
 
 <pre class="highlight highlight-html">
-`@`[AnnotationProperty|IRI] (Literal | [Member|IRI])?
+`@`[AnnotationProperty|IRI] (Literal (`,` Literal)*)?
+`@`[AnnotationProperty|IRI] ([Member|IRI] (`,` [Member|IRI])*)?
 </pre>
 
 The following example shows several annotations. The ontology itself has a *dc:title* annotation as well as a *dc:date* annotation (notice how the value is a *xsd:date* literal). The member `Member1` has two annotations, both of them are *rdfs:comment* but one has an English (en) literal while the other has a French (fr) literal. Finally, the imported member `example2:Member2` has an annotation with *viewpoint:show* (notice that there is no literal value, which will be interpreted as a Boolean *true* literal).
@@ -249,9 +250,9 @@ The following example shows several annotations. The ontology itself has a *dc:t
     `<import>` `<`http://www.w3.org/2001/XMLSchema#`>` `as` rdfs
     `<import>` `<`http://io.opencaesar/viewpoint#`>` `as` viewpoint
     `<import>` `<`http://company.com/example2#`>` `as` example2
-    `@`rdfs:comment "This is member1"$en
-    `@`rdfs:comment "C'est member1"$fr
-	`@`rdfs:seeAlso example2:Member2
+    
+    `@`rdfs:comment "This is member1"$en, "C'est member1"$fr
+    `@`rdfs:seeAlso example2:Member2
     `<member>` Member1
     `@`viewpoint:show  // a missing literal is interpreted as Boolean true literal
     `ref` `<member>` example2:Member2
@@ -1459,12 +1460,12 @@ Assertions are statements about instances that enable characterizing them. They 
 
 #### Property Value Assertion #### {#PropertyValueAssertion-LR}
 
-A value for a semantic property can be [asserted](#PropertyValueAssertion-Syntax) on an instance ([Concept Instance](#ConceptInstance-LR), [Relation Instance](#RelationInstance-LR), or [Structure Instance](#StructureInstance-LR)). Such assertion can be added as one of the assertions between the square  brackets `[` `]` of the instance. Its syntax consists of an IRI to a [semantic property](#SemanticProperty-Syntax) from some vocabulary followed by a value, which could be a literal, a structure instance, or an IRI of a named instance.
+A value for a semantic property can be [asserted](#PropertyValueAssertion-Syntax) on an instance ([Concept Instance](#ConceptInstance-LR), [Relation Instance](#RelationInstance-LR), or [Structure Instance](#StructureInstance-LR)). Such assertion can be added as one of the assertions between the square  brackets `[` `]` of the instance. Its syntax consists of an IRI to a [semantic property](#SemanticProperty-Syntax) from some vocabulary followed by one or more values, which could be literals, structure instances, or IRIs of named instances.
 
 <pre class="highlight highlight-html">
-[ScalarProperty|IRI] Literal
-[StructuredProperty|IRI] StuctureInstance
-[Relation|IRI] [NamedInstance|IRI]
+[ScalarProperty|IRI] Literal (`,` Literal)*
+[StructuredProperty|IRI] StuctureInstance (`,` StuctureInstance)* 
+[Relation|IRI] [NamedInstance|IRI] (`,` [NamedInstance|IRI])*
 </pre>
 
 Note: a structure instance can specify property value assertion only for scalar and structures properties, but not relations (forward, reverse, or unreified) since a structure cannot be a source (domain) or target (range) of a relation.

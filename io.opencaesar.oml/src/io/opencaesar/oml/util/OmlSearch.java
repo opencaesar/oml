@@ -161,7 +161,7 @@ public final class OmlSearch extends OmlIndex {
      */
     public static Set<Element> findAnnotationValues(IdentifiedElement element, AnnotationProperty property, Set<Resource> scope) {
         return findAnnotations(element, property, scope)
-            .map(a -> a.getValue())
+            .flatMap(a -> a.getValue().stream())
             .collect(Collectors.toCollection(LinkedHashSet::new));
     }
     
@@ -189,7 +189,7 @@ public final class OmlSearch extends OmlIndex {
     public static Literal findAnnotationLiteralValue(IdentifiedElement element, AnnotationProperty property, Set<Resource> scope) {
         return findAnnotations(element, property, scope)
                 .filter(a -> a.getLiteralValue() != null)
-                .map(a -> a.getLiteralValue())
+                .flatMap(a -> a.getLiteralValue().stream())
 	            .findFirst()
 	            .orElse(null);
     }
@@ -218,7 +218,7 @@ public final class OmlSearch extends OmlIndex {
     public static Member findAnnotationReferencedValue(IdentifiedElement element, AnnotationProperty property, Set<Resource> scope) {
         return findAnnotations(element, property, scope)
             .filter(a -> a.getReferencedValue() != null)
-            .map(a -> a.getReferencedValue())
+            .flatMap(a -> a.getReferencedValue().stream())
             .findFirst()
             .orElse(null);
     }
@@ -1679,7 +1679,7 @@ public final class OmlSearch extends OmlIndex {
         // check property value assertions
         targets.addAll(findPropertyValueAssertionsWithSubject(source, scope).stream()
         		.filter(a -> a.getProperty() instanceof Relation)
-                .map(a -> a.getReferencedValue())
+                .flatMap(a -> a.getReferencedValue().stream())
                 .collect(Collectors.toCollection(LinkedHashSet::new)));
         // check relation instances
         targets.addAll(findRelationInstancesWithSource(source, scope).stream()
@@ -1715,7 +1715,7 @@ public final class OmlSearch extends OmlIndex {
         targets.addAll(findPropertyValueAssertionsWithSubject(source, scope).stream()
                 .filter(a -> a.getProperty() instanceof Relation)
                 .filter(a -> subRelations.contains(a.getProperty()))
-                .map(a -> a.getReferencedValue())
+                .flatMap(a -> a.getReferencedValue().stream())
                 .collect(Collectors.toCollection(LinkedHashSet::new)));
         // look in relation instances
         if (relation instanceof ForwardRelation) {
@@ -1825,7 +1825,7 @@ public final class OmlSearch extends OmlIndex {
     public static Set<Element> findPropertyValues(Instance instance, SemanticProperty property, Set<Resource> scope) {
         return findPropertyValueAssertionsWithSubject(instance, scope).stream()
             .filter(a -> a.getProperty() == property)
-            .map(a -> a.getValue())
+            .flatMap(a -> a.getValue().stream())
             .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 

@@ -30,6 +30,7 @@ import java.lang.reflect.InvocationTargetException;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
+import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
@@ -193,8 +194,8 @@ public class TypeAssertionImpl extends AssertionImpl implements TypeAssertion {
 	 * @generated
 	 */
 	@Override
-	public Element getObject() {
-		return this.getType();
+	public EList<Element> getObjects() {
+		return ECollections.<Element>singletonEList(this.getType());
 	}
 
 	/**
@@ -321,8 +322,8 @@ public class TypeAssertionImpl extends AssertionImpl implements TypeAssertion {
 		switch (operationID) {
 			case OmlPackage.TYPE_ASSERTION___GET_SUBJECT:
 				return getSubject();
-			case OmlPackage.TYPE_ASSERTION___GET_OBJECT:
-				return getObject();
+			case OmlPackage.TYPE_ASSERTION___GET_OBJECTS:
+				return getObjects();
 		}
 		return super.eInvoke(operationID, arguments);
 	}

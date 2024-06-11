@@ -965,44 +965,45 @@ public final class OmlValidator2 {
         
         final Set<Type> ranges = cache.getRanges(property);
 
-        final Element theObject = object.getObject();
+        for (Element theObject : object.getObject()) {
         
-        // if the range has an enumerated scalar, check if the object is one of the literals
-        if (property instanceof ScalarProperty) {
-        	final var enumLiterals = cache.getEnumLiterals(ranges);
-        	if (!enumLiterals.isEmpty()) {
-        		if (enumLiterals.stream().anyMatch(l -> OmlRead.isEqual(l, (Literal)theObject))) {
-        			return true;
-        		}
-        	}
+	        // if the range has an enumerated scalar, check if the object is one of the literals
+	        if (property instanceof ScalarProperty) {
+	        	final var enumLiterals = cache.getEnumLiterals(ranges);
+	        	if (!enumLiterals.isEmpty()) {
+	        		if (enumLiterals.stream().anyMatch(l -> OmlRead.isEqual(l, (Literal)theObject))) {
+	        			return true;
+	        		}
+	        	}
+	        }
+	
+	        // check if the object's type is asserted to be in the property's ranges
+	        if (theObject instanceof NamedInstance) {
+	        	NamedInstance instance = ((NamedInstance)theObject);
+	            final Set<Classifier> allTypes = cache.getAllTypes(instance);
+	            if (!ranges.stream().allMatch(d -> allTypes.contains(d))) {
+	            	return report(Diagnostic.WARNING, diagnostics, object,
+	            		instance.getAbbreviatedIri()+" is not asserted to be in the range of "+property.getAbbreviatedIri(),
+	                    OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__REFERENCED_VALUE);
+	            }
+	        } else if (theObject instanceof AnonymousInstance) {
+	            final Set<Classifier> allTypes = cache.getAllTypes((Instance)theObject);
+	            if (!ranges.stream().allMatch(d -> allTypes.contains(d))) {
+	            	return report(Diagnostic.WARNING, diagnostics, object,
+	    	            "The object of the assertion is not asserted to be in the range of "+property.getAbbreviatedIri(),
+	                    OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__CONTAINED_VALUE);
+	            }
+	        } else {
+	        	Literal literal = (Literal) theObject;
+	            final Set<Scalar> allTypes = cache.getAllTypes(literal);
+	            if (!ranges.stream().allMatch(d -> allTypes.contains(d))) {
+	            	return report(Diagnostic.WARNING, diagnostics, object,
+	            		literal.getLexicalValue()+" is not asserted to be in the range of "+property.getAbbreviatedIri(),
+	                    OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__LITERAL_VALUE);
+	            }
+	        }
         }
-
-        // check if the object's type is asserted to be in the property's ranges
-        if (theObject instanceof NamedInstance) {
-        	NamedInstance instance = ((NamedInstance)theObject);
-            final Set<Classifier> allTypes = cache.getAllTypes(instance);
-            if (!ranges.stream().allMatch(d -> allTypes.contains(d))) {
-            	return report(Diagnostic.WARNING, diagnostics, object,
-            		instance.getAbbreviatedIri()+" is not asserted to be in the range of "+property.getAbbreviatedIri(),
-                    OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__REFERENCED_VALUE);
-            }
-        } else if (theObject instanceof AnonymousInstance) {
-            final Set<Classifier> allTypes = cache.getAllTypes((Instance)theObject);
-            if (!ranges.stream().allMatch(d -> allTypes.contains(d))) {
-            	return report(Diagnostic.WARNING, diagnostics, object,
-    	            "The object of the assertion is not asserted to be in the range of "+property.getAbbreviatedIri(),
-                    OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__CONTAINED_VALUE);
-            }
-        } else {
-        	Literal literal = (Literal) theObject;
-            final Set<Scalar> allTypes = cache.getAllTypes(literal);
-            if (!ranges.stream().allMatch(d -> allTypes.contains(d))) {
-            	return report(Diagnostic.WARNING, diagnostics, object,
-            		literal.getLexicalValue()+" is not asserted to be in the range of "+property.getAbbreviatedIri(),
-                    OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__LITERAL_VALUE);
-            }
-        }
-
+        
         return false;
     }
 

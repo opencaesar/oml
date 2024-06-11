@@ -18,6 +18,7 @@
  */
 package io.opencaesar.oml;
 
+import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -107,6 +108,6 @@ public interface TypeAssertion extends Assertion {
 	 * @model kind="operation" unique="false"
 	 * @generated
 	 */
-	Element getObject();
+	EList<Element> getObjects();
 
 } // TypeAssertion

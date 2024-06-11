@@ -28,9 +28,12 @@ import io.opencaesar.oml.OmlPackage;
 
 import java.lang.reflect.InvocationTargetException;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
+import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
@@ -38,7 +41,10 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -68,24 +74,24 @@ public class AnnotationImpl extends ElementImpl implements Annotation {
 	protected AnnotationProperty property;
 
 	/**
-	 * The cached value of the '{@link #getLiteralValue() <em>Literal Value</em>}' containment reference.
+	 * The cached value of the '{@link #getLiteralValue() <em>Literal Value</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getLiteralValue()
 	 * @generated
 	 * @ordered
 	 */
-	protected Literal literalValue;
+	protected EList<Literal> literalValue;
 
 	/**
-	 * The cached value of the '{@link #getReferencedValue() <em>Referenced Value</em>}' reference.
+	 * The cached value of the '{@link #getReferencedValue() <em>Referenced Value</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getReferencedValue()
 	 * @generated
 	 * @ordered
 	 */
-	protected Member referencedValue;
+	protected EList<Member> referencedValue;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -152,7 +158,10 @@ public class AnnotationImpl extends ElementImpl implements Annotation {
 	 * @generated
 	 */
 	@Override
-	public Literal getLiteralValue() {
+	public EList<Literal> getLiteralValue() {
+		if (literalValue == null) {
+			literalValue = new EObjectContainmentEList<Literal>(Literal.class, this, OmlPackage.ANNOTATION__LITERAL_VALUE);
+		}
 		return literalValue;
 	}
 
@@ -161,74 +170,12 @@ public class AnnotationImpl extends ElementImpl implements Annotation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetLiteralValue(Literal newLiteralValue, NotificationChain msgs) {
-		Literal oldLiteralValue = literalValue;
-		literalValue = newLiteralValue;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OmlPackage.ANNOTATION__LITERAL_VALUE, oldLiteralValue, newLiteralValue);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
-	public void setLiteralValue(Literal newLiteralValue) {
-		if (newLiteralValue != literalValue) {
-			NotificationChain msgs = null;
-			if (literalValue != null)
-				msgs = ((InternalEObject)literalValue).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OmlPackage.ANNOTATION__LITERAL_VALUE, null, msgs);
-			if (newLiteralValue != null)
-				msgs = ((InternalEObject)newLiteralValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - OmlPackage.ANNOTATION__LITERAL_VALUE, null, msgs);
-			msgs = basicSetLiteralValue(newLiteralValue, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.ANNOTATION__LITERAL_VALUE, newLiteralValue, newLiteralValue));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Member getReferencedValue() {
-		if (referencedValue != null && referencedValue.eIsProxy()) {
-			InternalEObject oldReferencedValue = (InternalEObject)referencedValue;
-			referencedValue = (Member)eResolveProxy(oldReferencedValue);
-			if (referencedValue != oldReferencedValue) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, OmlPackage.ANNOTATION__REFERENCED_VALUE, oldReferencedValue, referencedValue));
-			}
+	public EList<Member> getReferencedValue() {
+		if (referencedValue == null) {
+			referencedValue = new EObjectResolvingEList<Member>(Member.class, this, OmlPackage.ANNOTATION__REFERENCED_VALUE);
 		}
 		return referencedValue;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Member basicGetReferencedValue() {
-		return referencedValue;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setReferencedValue(Member newReferencedValue) {
-		Member oldReferencedValue = referencedValue;
-		referencedValue = newReferencedValue;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.ANNOTATION__REFERENCED_VALUE, oldReferencedValue, referencedValue));
 	}
 
 	/**
@@ -290,19 +237,19 @@ public class AnnotationImpl extends ElementImpl implements Annotation {
 	 * @generated
 	 */
 	@Override
-	public Element getValue() {
-		Element _xifexpression = null;
-		Literal _literalValue = this.getLiteralValue();
-		boolean _tripleNotEquals = (_literalValue != null);
-		if (_tripleNotEquals) {
-			_xifexpression = this.getLiteralValue();
+	public EList<Element> getValue() {
+		EList<Element> _xifexpression = null;
+		boolean _isEmpty = this.getLiteralValue().isEmpty();
+		boolean _not = (!_isEmpty);
+		if (_not) {
+			_xifexpression = ECollections.<Element>unmodifiableEList(this.getLiteralValue());
 		}
 		else {
-			Member _xifexpression_1 = null;
-			Member _referencedValue = this.getReferencedValue();
-			boolean _tripleNotEquals_1 = (_referencedValue != null);
-			if (_tripleNotEquals_1) {
-				_xifexpression_1 = this.getReferencedValue();
+			EList<Element> _xifexpression_1 = null;
+			boolean _isEmpty_1 = this.getReferencedValue().isEmpty();
+			boolean _not_1 = (!_isEmpty_1);
+			if (_not_1) {
+				_xifexpression_1 = ECollections.<Element>unmodifiableEList(this.getReferencedValue());
 			}
 			_xifexpression = _xifexpression_1;
 		}
@@ -349,7 +296,7 @@ public class AnnotationImpl extends ElementImpl implements Annotation {
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case OmlPackage.ANNOTATION__LITERAL_VALUE:
-				return basicSetLiteralValue(null, msgs);
+				return ((InternalEList<?>)getLiteralValue()).basicRemove(otherEnd, msgs);
 			case OmlPackage.ANNOTATION__OWNING_ELEMENT:
 				return basicSetOwningElement(null, msgs);
 		}
@@ -384,8 +331,7 @@ public class AnnotationImpl extends ElementImpl implements Annotation {
 			case OmlPackage.ANNOTATION__LITERAL_VALUE:
 				return getLiteralValue();
 			case OmlPackage.ANNOTATION__REFERENCED_VALUE:
-				if (resolve) return getReferencedValue();
-				return basicGetReferencedValue();
+				return getReferencedValue();
 			case OmlPackage.ANNOTATION__OWNING_ELEMENT:
 				if (resolve) return getOwningElement();
 				return basicGetOwningElement();
@@ -398,6 +344,7 @@ public class AnnotationImpl extends ElementImpl implements Annotation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -405,10 +352,12 @@ public class AnnotationImpl extends ElementImpl implements Annotation {
 				setProperty((AnnotationProperty)newValue);
 				return;
 			case OmlPackage.ANNOTATION__LITERAL_VALUE:
-				setLiteralValue((Literal)newValue);
+				getLiteralValue().clear();
+				getLiteralValue().addAll((Collection<? extends Literal>)newValue);
 				return;
 			case OmlPackage.ANNOTATION__REFERENCED_VALUE:
-				setReferencedValue((Member)newValue);
+				getReferencedValue().clear();
+				getReferencedValue().addAll((Collection<? extends Member>)newValue);
 				return;
 			case OmlPackage.ANNOTATION__OWNING_ELEMENT:
 				setOwningElement((IdentifiedElement)newValue);
@@ -429,10 +378,10 @@ public class AnnotationImpl extends ElementImpl implements Annotation {
 				setProperty((AnnotationProperty)null);
 				return;
 			case OmlPackage.ANNOTATION__LITERAL_VALUE:
-				setLiteralValue((Literal)null);
+				getLiteralValue().clear();
 				return;
 			case OmlPackage.ANNOTATION__REFERENCED_VALUE:
-				setReferencedValue((Member)null);
+				getReferencedValue().clear();
 				return;
 			case OmlPackage.ANNOTATION__OWNING_ELEMENT:
 				setOwningElement((IdentifiedElement)null);
@@ -452,9 +401,9 @@ public class AnnotationImpl extends ElementImpl implements Annotation {
 			case OmlPackage.ANNOTATION__PROPERTY:
 				return property != null;
 			case OmlPackage.ANNOTATION__LITERAL_VALUE:
-				return literalValue != null;
+				return literalValue != null && !literalValue.isEmpty();
 			case OmlPackage.ANNOTATION__REFERENCED_VALUE:
-				return referencedValue != null;
+				return referencedValue != null && !referencedValue.isEmpty();
 			case OmlPackage.ANNOTATION__OWNING_ELEMENT:
 				return basicGetOwningElement() != null;
 		}

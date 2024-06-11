@@ -20,6 +20,7 @@ package io.opencaesar.oml.util;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedHashSet;
@@ -361,33 +362,33 @@ public class OmlBuilder {
     }
 
     /**
-     * Adds a new annotation with a literal value on a a given member (identified by iri) in the context of a given ontology
+     * Adds a new annotation with literal values on a a given member (identified by iri) in the context of a given ontology
      * 
      * @param ontology the context ontology that will have the annotation axiom
      * @param memberIri the iri of a member to put the annotation on
      * @param propertyIri the annotation property identified by iri
-     * @param literalValue the annotation's literal value
+     * @param literalValues the annotation's literal values
      * @return a new annotation on the given member in the context of the given ontology
      */
-    public Annotation addAnnotation(Ontology ontology, String memberIri, String propertyIri, Literal literalValue) {
-        final Annotation annotation = OmlWrite.addAnnotation(ontology, null, null, literalValue);
+    public Annotation addAnnotation(Ontology ontology, String memberIri, String propertyIri, Literal...literalValues) {
+        final Annotation annotation = OmlWrite.addAnnotation(ontology, null, null, literalValues);
         setCrossReference(ontology, annotation, OmlPackage.Literals.ANNOTATION__PROPERTY, propertyIri);
         setContainmentReference(ontology, memberIri, OmlPackage.Literals.IDENTIFIED_ELEMENT__OWNED_ANNOTATIONS, annotation);
         return annotation;
     }
 
     /**
-     * Adds a new annotation with a reference value (iri of a member) in the context of a given ontology
+     * Adds a new annotation with a reference values (iris of members) in the context of a given ontology
      * 
      * @param ontology the context ontology that will have the annotation axiom
      * @param memberIri the iri of a member to put the annotation on
      * @param propertyIri the annotation property identified by iri
-     * @param referencedValueIri the annotation's referenced value i(ri of a member)
+     * @param referencedValueIris the annotation's referenced values i(ris of members)
      * @return a new annotation on the given member in the context of the given ontology
      */
-    public Annotation addAnnotation(Ontology ontology, String memberIri, String propertyIri, String referencedValueIri) {
-        final Annotation annotation = OmlWrite.addAnnotation(ontology, null, null, (Member) null);
-       	setCrossReference(ontology, annotation, OmlPackage.Literals.ANNOTATION__REFERENCED_VALUE, referencedValueIri);
+    public Annotation addAnnotation(Ontology ontology, String memberIri, String propertyIri, String...referencedValueIris) {
+        final Annotation annotation = OmlWrite.addAnnotation(ontology, null, null, new Member[0]);
+       	setCrossReferences(ontology, annotation, OmlPackage.Literals.ANNOTATION__REFERENCED_VALUE, Arrays.asList(referencedValueIris));
         setCrossReference(ontology, annotation, OmlPackage.Literals.ANNOTATION__PROPERTY, propertyIri);
         setContainmentReference(ontology, memberIri, OmlPackage.Literals.IDENTIFIED_ELEMENT__OWNED_ANNOTATIONS, annotation);
         return annotation;
@@ -1156,16 +1157,16 @@ public class OmlBuilder {
     // PropertyValueAssertion
 
     /**
-     * Creates a property value assertion with a literal value and adds it to the given ontology
+     * Creates a property value assertion with literal values and adds it to the given ontology
      * 
      * @param ontology the context ontology
      * @param owner either an anonymous instance or the iri of a named instance
      * @param propertyIri the iri of the scalar property
-     * @param literalValue the asserted (literal) value of the property
+     * @param literalValues the asserted (literal) values of the property
      * @return a property value assertion that is added to the given description
      */
-    public PropertyValueAssertion addPropertyValueAssertion(Ontology ontology, Object owner, String propertyIri, Literal literalValue) {
-        final PropertyValueAssertion assertion = OmlWrite.addPropertyValueAssertion(ontology, null, null, literalValue);
+    public PropertyValueAssertion addPropertyValueAssertion(Ontology ontology, Object owner, String propertyIri, Literal...literalValues) {
+        final PropertyValueAssertion assertion = OmlWrite.addPropertyValueAssertion(ontology, null, null, literalValues);
         setCrossReference(ontology, assertion, OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__PROPERTY, propertyIri);
         if (owner instanceof String) {
         	setContainmentReference(ontology, (String)owner, OmlPackage.Literals.INSTANCE__OWNED_PROPERTY_VALUES, assertion);
@@ -1176,16 +1177,16 @@ public class OmlBuilder {
     }
     
     /**
-     * Creates a property value assertion with a contained value and adds it to the given ontology
+     * Creates a property value assertion with contained values and adds it to the given ontology
      * 
      * @param ontology the context ontology
      * @param owner either an anonymous instance or the iri of a named instance
      * @param propertyIri the iri of the structured property
-     * @param containedValue the asserted contained value of the property
+     * @param containedValues the asserted contained values of the property
      * @return a property value assertion that is added to the given description
      */
-    public PropertyValueAssertion addPropertyValueAssertion(Ontology ontology, Object owner, String propertyIri, AnonymousInstance containedValue) {
-        final PropertyValueAssertion assertion = OmlWrite.addPropertyValueAssertion(ontology, null, null, containedValue);
+    public PropertyValueAssertion addPropertyValueAssertion(Ontology ontology, Object owner, String propertyIri, AnonymousInstance...containedValues) {
+        final PropertyValueAssertion assertion = OmlWrite.addPropertyValueAssertion(ontology, null, null, containedValues);
         setCrossReference(ontology, assertion, OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__PROPERTY, propertyIri);
         if (owner instanceof String) {
         	setContainmentReference(ontology, (String)owner, OmlPackage.Literals.INSTANCE__OWNED_PROPERTY_VALUES, assertion);
@@ -1196,17 +1197,17 @@ public class OmlBuilder {
     }
 
     /**
-     * Creates a property value assertion with a referenced value and adds it to the given ontology
+     * Creates a property value assertion with referenced values and adds it to the given ontology
      * 
      * @param ontology the context ontology
      * @param owner either an anonymous instance or the iri of a named instance
      * @param propertyIri the iri of the relation property
-     * @param referencedValueIri the asserted referenced values (identified by iri) of the property
+     * @param referencedValueIris the asserted referenced values (iris of members) of the property
      * @return a property value assertion that is added to the given description
      */
-    public PropertyValueAssertion addPropertyValueAssertion(Ontology ontology, Object owner, String propertyIri, String referencedValueIri) {
+    public PropertyValueAssertion addPropertyValueAssertion(Ontology ontology, Object owner, String propertyIri, String...referencedValueIris) {
         final PropertyValueAssertion assertion = OmlWrite.addPropertyValueAssertion(ontology, null, null, (NamedInstance)null);
-        setCrossReference(ontology, assertion, OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__REFERENCED_VALUE, referencedValueIri);
+        setCrossReferences(ontology, assertion, OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__REFERENCED_VALUE, Arrays.asList(referencedValueIris));
         setCrossReference(ontology, assertion, OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__PROPERTY, propertyIri);
         if (owner instanceof String) {
         	setContainmentReference(ontology, (String)owner, OmlPackage.Literals.INSTANCE__OWNED_PROPERTY_VALUES, assertion);

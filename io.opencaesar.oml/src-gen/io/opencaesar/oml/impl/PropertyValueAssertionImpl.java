@@ -30,9 +30,12 @@ import io.opencaesar.oml.SemanticProperty;
 
 import java.lang.reflect.InvocationTargetException;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
+import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
@@ -40,7 +43,11 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -71,34 +78,34 @@ public class PropertyValueAssertionImpl extends AssertionImpl implements Propert
 	protected SemanticProperty property;
 
 	/**
-	 * The cached value of the '{@link #getLiteralValue() <em>Literal Value</em>}' containment reference.
+	 * The cached value of the '{@link #getLiteralValue() <em>Literal Value</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getLiteralValue()
 	 * @generated
 	 * @ordered
 	 */
-	protected Literal literalValue;
+	protected EList<Literal> literalValue;
 
 	/**
-	 * The cached value of the '{@link #getContainedValue() <em>Contained Value</em>}' containment reference.
+	 * The cached value of the '{@link #getContainedValue() <em>Contained Value</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getContainedValue()
 	 * @generated
 	 * @ordered
 	 */
-	protected AnonymousInstance containedValue;
+	protected EList<AnonymousInstance> containedValue;
 
 	/**
-	 * The cached value of the '{@link #getReferencedValue() <em>Referenced Value</em>}' reference.
+	 * The cached value of the '{@link #getReferencedValue() <em>Referenced Value</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getReferencedValue()
 	 * @generated
 	 * @ordered
 	 */
-	protected NamedInstance referencedValue;
+	protected EList<NamedInstance> referencedValue;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -165,7 +172,10 @@ public class PropertyValueAssertionImpl extends AssertionImpl implements Propert
 	 * @generated
 	 */
 	@Override
-	public Literal getLiteralValue() {
+	public EList<Literal> getLiteralValue() {
+		if (literalValue == null) {
+			literalValue = new EObjectContainmentEList<Literal>(Literal.class, this, OmlPackage.PROPERTY_VALUE_ASSERTION__LITERAL_VALUE);
+		}
 		return literalValue;
 	}
 
@@ -174,43 +184,11 @@ public class PropertyValueAssertionImpl extends AssertionImpl implements Propert
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetLiteralValue(Literal newLiteralValue, NotificationChain msgs) {
-		Literal oldLiteralValue = literalValue;
-		literalValue = newLiteralValue;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OmlPackage.PROPERTY_VALUE_ASSERTION__LITERAL_VALUE, oldLiteralValue, newLiteralValue);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
-	public void setLiteralValue(Literal newLiteralValue) {
-		if (newLiteralValue != literalValue) {
-			NotificationChain msgs = null;
-			if (literalValue != null)
-				msgs = ((InternalEObject)literalValue).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OmlPackage.PROPERTY_VALUE_ASSERTION__LITERAL_VALUE, null, msgs);
-			if (newLiteralValue != null)
-				msgs = ((InternalEObject)newLiteralValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - OmlPackage.PROPERTY_VALUE_ASSERTION__LITERAL_VALUE, null, msgs);
-			msgs = basicSetLiteralValue(newLiteralValue, msgs);
-			if (msgs != null) msgs.dispatch();
+	public EList<AnonymousInstance> getContainedValue() {
+		if (containedValue == null) {
+			containedValue = new EObjectContainmentWithInverseEList<AnonymousInstance>(AnonymousInstance.class, this, OmlPackage.PROPERTY_VALUE_ASSERTION__CONTAINED_VALUE, OmlPackage.ANONYMOUS_INSTANCE__OWNING_ASSERTION);
 		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.PROPERTY_VALUE_ASSERTION__LITERAL_VALUE, newLiteralValue, newLiteralValue));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public AnonymousInstance getContainedValue() {
 		return containedValue;
 	}
 
@@ -219,74 +197,12 @@ public class PropertyValueAssertionImpl extends AssertionImpl implements Propert
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetContainedValue(AnonymousInstance newContainedValue, NotificationChain msgs) {
-		AnonymousInstance oldContainedValue = containedValue;
-		containedValue = newContainedValue;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OmlPackage.PROPERTY_VALUE_ASSERTION__CONTAINED_VALUE, oldContainedValue, newContainedValue);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
-	public void setContainedValue(AnonymousInstance newContainedValue) {
-		if (newContainedValue != containedValue) {
-			NotificationChain msgs = null;
-			if (containedValue != null)
-				msgs = ((InternalEObject)containedValue).eInverseRemove(this, OmlPackage.ANONYMOUS_INSTANCE__OWNING_ASSERTION, AnonymousInstance.class, msgs);
-			if (newContainedValue != null)
-				msgs = ((InternalEObject)newContainedValue).eInverseAdd(this, OmlPackage.ANONYMOUS_INSTANCE__OWNING_ASSERTION, AnonymousInstance.class, msgs);
-			msgs = basicSetContainedValue(newContainedValue, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.PROPERTY_VALUE_ASSERTION__CONTAINED_VALUE, newContainedValue, newContainedValue));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NamedInstance getReferencedValue() {
-		if (referencedValue != null && referencedValue.eIsProxy()) {
-			InternalEObject oldReferencedValue = (InternalEObject)referencedValue;
-			referencedValue = (NamedInstance)eResolveProxy(oldReferencedValue);
-			if (referencedValue != oldReferencedValue) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, OmlPackage.PROPERTY_VALUE_ASSERTION__REFERENCED_VALUE, oldReferencedValue, referencedValue));
-			}
+	public EList<NamedInstance> getReferencedValue() {
+		if (referencedValue == null) {
+			referencedValue = new EObjectResolvingEList<NamedInstance>(NamedInstance.class, this, OmlPackage.PROPERTY_VALUE_ASSERTION__REFERENCED_VALUE);
 		}
 		return referencedValue;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NamedInstance basicGetReferencedValue() {
-		return referencedValue;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setReferencedValue(NamedInstance newReferencedValue) {
-		NamedInstance oldReferencedValue = referencedValue;
-		referencedValue = newReferencedValue;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.PROPERTY_VALUE_ASSERTION__REFERENCED_VALUE, oldReferencedValue, referencedValue));
 	}
 
 	/**
@@ -348,29 +264,29 @@ public class PropertyValueAssertionImpl extends AssertionImpl implements Propert
 	 * @generated
 	 */
 	@Override
-	public Element getValue() {
-		Element _xifexpression = null;
-		Literal _literalValue = this.getLiteralValue();
-		boolean _tripleNotEquals = (_literalValue != null);
-		if (_tripleNotEquals) {
-			_xifexpression = this.getLiteralValue();
+	public EList<Element> getValue() {
+		EList<Element> _xifexpression = null;
+		boolean _isEmpty = this.getLiteralValue().isEmpty();
+		boolean _not = (!_isEmpty);
+		if (_not) {
+			_xifexpression = ECollections.<Element>unmodifiableEList(this.getLiteralValue());
 		}
 		else {
-			Instance _xifexpression_1 = null;
-			AnonymousInstance _containedValue = this.getContainedValue();
-			boolean _tripleNotEquals_1 = (_containedValue != null);
-			if (_tripleNotEquals_1) {
-				_xifexpression_1 = this.getContainedValue();
+			EList<Element> _xifexpression_1 = null;
+			boolean _isEmpty_1 = this.getContainedValue().isEmpty();
+			boolean _not_1 = (!_isEmpty_1);
+			if (_not_1) {
+				_xifexpression_1 = ECollections.<Element>unmodifiableEList(this.getContainedValue());
 			}
 			else {
-				NamedInstance _xifexpression_2 = null;
-				NamedInstance _referencedValue = this.getReferencedValue();
-				boolean _tripleNotEquals_2 = (_referencedValue != null);
-				if (_tripleNotEquals_2) {
-					_xifexpression_2 = this.getReferencedValue();
+				EList<Element> _xifexpression_2 = null;
+				boolean _isEmpty_2 = this.getReferencedValue().isEmpty();
+				boolean _not_2 = (!_isEmpty_2);
+				if (_not_2) {
+					_xifexpression_2 = ECollections.<Element>unmodifiableEList(this.getReferencedValue());
 				}
 				else {
-					_xifexpression_2 = null;
+					_xifexpression_2 = ECollections.<Element>emptyEList();
 				}
 				_xifexpression_1 = _xifexpression_2;
 			}
@@ -405,7 +321,7 @@ public class PropertyValueAssertionImpl extends AssertionImpl implements Propert
 	 * @generated
 	 */
 	@Override
-	public Element getObject() {
+	public EList<Element> getObject() {
 		return this.getValue();
 	}
 
@@ -414,13 +330,12 @@ public class PropertyValueAssertionImpl extends AssertionImpl implements Propert
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case OmlPackage.PROPERTY_VALUE_ASSERTION__CONTAINED_VALUE:
-				if (containedValue != null)
-					msgs = ((InternalEObject)containedValue).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OmlPackage.PROPERTY_VALUE_ASSERTION__CONTAINED_VALUE, null, msgs);
-				return basicSetContainedValue((AnonymousInstance)otherEnd, msgs);
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getContainedValue()).basicAdd(otherEnd, msgs);
 			case OmlPackage.PROPERTY_VALUE_ASSERTION__OWNING_INSTANCE:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
@@ -438,9 +353,9 @@ public class PropertyValueAssertionImpl extends AssertionImpl implements Propert
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case OmlPackage.PROPERTY_VALUE_ASSERTION__LITERAL_VALUE:
-				return basicSetLiteralValue(null, msgs);
+				return ((InternalEList<?>)getLiteralValue()).basicRemove(otherEnd, msgs);
 			case OmlPackage.PROPERTY_VALUE_ASSERTION__CONTAINED_VALUE:
-				return basicSetContainedValue(null, msgs);
+				return ((InternalEList<?>)getContainedValue()).basicRemove(otherEnd, msgs);
 			case OmlPackage.PROPERTY_VALUE_ASSERTION__OWNING_INSTANCE:
 				return basicSetOwningInstance(null, msgs);
 		}
@@ -477,8 +392,7 @@ public class PropertyValueAssertionImpl extends AssertionImpl implements Propert
 			case OmlPackage.PROPERTY_VALUE_ASSERTION__CONTAINED_VALUE:
 				return getContainedValue();
 			case OmlPackage.PROPERTY_VALUE_ASSERTION__REFERENCED_VALUE:
-				if (resolve) return getReferencedValue();
-				return basicGetReferencedValue();
+				return getReferencedValue();
 			case OmlPackage.PROPERTY_VALUE_ASSERTION__OWNING_INSTANCE:
 				if (resolve) return getOwningInstance();
 				return basicGetOwningInstance();
@@ -491,6 +405,7 @@ public class PropertyValueAssertionImpl extends AssertionImpl implements Propert
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -498,13 +413,16 @@ public class PropertyValueAssertionImpl extends AssertionImpl implements Propert
 				setProperty((SemanticProperty)newValue);
 				return;
 			case OmlPackage.PROPERTY_VALUE_ASSERTION__LITERAL_VALUE:
-				setLiteralValue((Literal)newValue);
+				getLiteralValue().clear();
+				getLiteralValue().addAll((Collection<? extends Literal>)newValue);
 				return;
 			case OmlPackage.PROPERTY_VALUE_ASSERTION__CONTAINED_VALUE:
-				setContainedValue((AnonymousInstance)newValue);
+				getContainedValue().clear();
+				getContainedValue().addAll((Collection<? extends AnonymousInstance>)newValue);
 				return;
 			case OmlPackage.PROPERTY_VALUE_ASSERTION__REFERENCED_VALUE:
-				setReferencedValue((NamedInstance)newValue);
+				getReferencedValue().clear();
+				getReferencedValue().addAll((Collection<? extends NamedInstance>)newValue);
 				return;
 			case OmlPackage.PROPERTY_VALUE_ASSERTION__OWNING_INSTANCE:
 				setOwningInstance((Instance)newValue);
@@ -525,13 +443,13 @@ public class PropertyValueAssertionImpl extends AssertionImpl implements Propert
 				setProperty((SemanticProperty)null);
 				return;
 			case OmlPackage.PROPERTY_VALUE_ASSERTION__LITERAL_VALUE:
-				setLiteralValue((Literal)null);
+				getLiteralValue().clear();
 				return;
 			case OmlPackage.PROPERTY_VALUE_ASSERTION__CONTAINED_VALUE:
-				setContainedValue((AnonymousInstance)null);
+				getContainedValue().clear();
 				return;
 			case OmlPackage.PROPERTY_VALUE_ASSERTION__REFERENCED_VALUE:
-				setReferencedValue((NamedInstance)null);
+				getReferencedValue().clear();
 				return;
 			case OmlPackage.PROPERTY_VALUE_ASSERTION__OWNING_INSTANCE:
 				setOwningInstance((Instance)null);
@@ -551,11 +469,11 @@ public class PropertyValueAssertionImpl extends AssertionImpl implements Propert
 			case OmlPackage.PROPERTY_VALUE_ASSERTION__PROPERTY:
 				return property != null;
 			case OmlPackage.PROPERTY_VALUE_ASSERTION__LITERAL_VALUE:
-				return literalValue != null;
+				return literalValue != null && !literalValue.isEmpty();
 			case OmlPackage.PROPERTY_VALUE_ASSERTION__CONTAINED_VALUE:
-				return containedValue != null;
+				return containedValue != null && !containedValue.isEmpty();
 			case OmlPackage.PROPERTY_VALUE_ASSERTION__REFERENCED_VALUE:
-				return referencedValue != null;
+				return referencedValue != null && !referencedValue.isEmpty();
 			case OmlPackage.PROPERTY_VALUE_ASSERTION__OWNING_INSTANCE:
 				return basicGetOwningInstance() != null;
 		}

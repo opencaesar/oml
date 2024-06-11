@@ -18,6 +18,7 @@
  */
 package io.opencaesar.oml;
 
+import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -25,8 +26,8 @@ package io.opencaesar.oml;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * PropertyValueAssertion is an [=Assertion=]  that specifies a value for a [=property=] on an [=instance=]. The value is either a
- * [=literal=] value, a contained [=AnonymousInstance=] value, or a referenced [=NamedInstance=] values.
+ * PropertyValueAssertion is an [=Assertion=]  that specifies values for a [=property=] on an [=instance=]. The values are either
+ * [=literal=] values, contained [=AnonymousInstance=] values, or referenced [=NamedInstance=] values.
  * <!-- end-model-doc -->
  *
  * <p>
@@ -71,81 +72,51 @@ public interface PropertyValueAssertion extends Assertion {
 	void setProperty(SemanticProperty value);
 
 	/**
-	 * Returns the value of the '<em><b>Literal Value</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Literal Value</b></em>' containment reference list.
+	 * The list contents are of type {@link io.opencaesar.oml.Literal}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * The literal value of this assertion
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Literal Value</em>' containment reference.
-	 * @see #setLiteralValue(Literal)
+	 * @return the value of the '<em>Literal Value</em>' containment reference list.
 	 * @see io.opencaesar.oml.OmlPackage#getPropertyValueAssertion_LiteralValue()
 	 * @model containment="true"
 	 * @generated
 	 */
-	Literal getLiteralValue();
+	EList<Literal> getLiteralValue();
 
 	/**
-	 * Sets the value of the '{@link io.opencaesar.oml.PropertyValueAssertion#getLiteralValue <em>Literal Value</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Literal Value</em>' containment reference.
-	 * @see #getLiteralValue()
-	 * @generated
-	 */
-	void setLiteralValue(Literal value);
-
-	/**
-	 * Returns the value of the '<em><b>Contained Value</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Contained Value</b></em>' containment reference list.
+	 * The list contents are of type {@link io.opencaesar.oml.AnonymousInstance}.
 	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.AnonymousInstance#getOwningAssertion <em>Owning Assertion</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * The contained value of this assertion
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Contained Value</em>' containment reference.
-	 * @see #setContainedValue(AnonymousInstance)
+	 * @return the value of the '<em>Contained Value</em>' containment reference list.
 	 * @see io.opencaesar.oml.OmlPackage#getPropertyValueAssertion_ContainedValue()
 	 * @see io.opencaesar.oml.AnonymousInstance#getOwningAssertion
 	 * @model opposite="owningAssertion" containment="true"
 	 * @generated
 	 */
-	AnonymousInstance getContainedValue();
+	EList<AnonymousInstance> getContainedValue();
 
 	/**
-	 * Sets the value of the '{@link io.opencaesar.oml.PropertyValueAssertion#getContainedValue <em>Contained Value</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Contained Value</em>' containment reference.
-	 * @see #getContainedValue()
-	 * @generated
-	 */
-	void setContainedValue(AnonymousInstance value);
-
-	/**
-	 * Returns the value of the '<em><b>Referenced Value</b></em>' reference.
+	 * Returns the value of the '<em><b>Referenced Value</b></em>' reference list.
+	 * The list contents are of type {@link io.opencaesar.oml.NamedInstance}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * The referenced value of this assertion
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Referenced Value</em>' reference.
-	 * @see #setReferencedValue(NamedInstance)
+	 * @return the value of the '<em>Referenced Value</em>' reference list.
 	 * @see io.opencaesar.oml.OmlPackage#getPropertyValueAssertion_ReferencedValue()
 	 * @model
 	 * @generated
 	 */
-	NamedInstance getReferencedValue();
-
-	/**
-	 * Sets the value of the '{@link io.opencaesar.oml.PropertyValueAssertion#getReferencedValue <em>Referenced Value</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Referenced Value</em>' reference.
-	 * @see #getReferencedValue()
-	 * @generated
-	 */
-	void setReferencedValue(NamedInstance value);
+	EList<NamedInstance> getReferencedValue();
 
 	/**
 	 * Returns the value of the '<em><b>Owning Instance</b></em>' container reference.
@@ -183,7 +154,7 @@ public interface PropertyValueAssertion extends Assertion {
 	 * @model kind="operation" unique="false"
 	 * @generated
 	 */
-	Element getValue();
+	EList<Element> getValue();
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -199,6 +170,6 @@ public interface PropertyValueAssertion extends Assertion {
 	 * @model kind="operation" unique="false"
 	 * @generated
 	 */
-	Element getObject();
+	EList<Element> getObject();
 
 } // PropertyValueAssertion

@@ -731,7 +731,7 @@ public final class OmlRead {
      */
     public static List<Element> getAnnotationValues(IdentifiedElement element, AnnotationProperty property) {
         return getAnnotations(element, property)
-            .map(a -> a.getValue())
+            .flatMap(a -> a.getValue().stream())
             .collect(Collectors.toList());
     }
     
@@ -745,7 +745,7 @@ public final class OmlRead {
     public static Literal getAnnotationLiteralValue(IdentifiedElement element, AnnotationProperty property) {
         return getAnnotations(element, property)
             .filter(a -> a.getLiteralValue() != null)
-            .map(a -> a.getLiteralValue())
+            .flatMap(a -> a.getLiteralValue().stream())
             .findFirst()
             .orElse(null);
     }
@@ -771,7 +771,7 @@ public final class OmlRead {
     public static Member getAnnotationReferencedValue(IdentifiedElement element, AnnotationProperty property) {
         return getAnnotations(element, property)
             .filter(a -> a.getReferencedValue() != null)
-            .map(a -> a.getReferencedValue())
+            .flatMap(a -> a.getReferencedValue().stream())
             .findFirst()
             .orElse(null);
     }
@@ -998,7 +998,7 @@ public final class OmlRead {
     public static List<Element> getPropertyValues(Instance instance, SemanticProperty property) {
         return instance.getOwnedPropertyValues().stream()
             .filter(a -> a.getProperty() == property)
-            .map(a -> a.getValue())
+            .flatMap(a -> a.getValue().stream())
             .collect(Collectors.toList());
     }
     

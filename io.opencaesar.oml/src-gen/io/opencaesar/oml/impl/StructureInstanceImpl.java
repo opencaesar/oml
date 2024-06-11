@@ -18,17 +18,11 @@
  */
 package io.opencaesar.oml.impl;
 
-import io.opencaesar.oml.Classifier;
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.Structure;
 import io.opencaesar.oml.StructureInstance;
 
-import java.lang.reflect.InvocationTargetException;
-
 import org.eclipse.emf.common.notify.Notification;
-
-import org.eclipse.emf.common.util.ECollections;
-import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -124,16 +118,6 @@ public class StructureInstanceImpl extends AnonymousInstanceImpl implements Stru
 	 * @generated
 	 */
 	@Override
-	public EList<Classifier> getTypes() {
-		return ECollections.<Classifier>singletonEList(this.getType());
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case OmlPackage.STRUCTURE_INSTANCE__TYPE:
@@ -185,20 +169,6 @@ public class StructureInstanceImpl extends AnonymousInstanceImpl implements Stru
 				return type != null;
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
-		switch (operationID) {
-			case OmlPackage.STRUCTURE_INSTANCE___GET_TYPES:
-				return getTypes();
-		}
-		return super.eInvoke(operationID, arguments);
 	}
 
 } //StructureInstanceImpl

@@ -2652,6 +2652,16 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
+	public EOperation getAnonymousInstance__GetTypes() {
+		return anonymousInstanceEClass.getEOperations().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getConceptInstance() {
 		return conceptInstanceEClass;
 	}
@@ -2724,16 +2734,6 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	@Override
 	public EReference getStructureInstance_Type() {
 		return (EReference)structureInstanceEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EOperation getStructureInstance__GetTypes() {
-		return structureInstanceEClass.getEOperations().get(0);
 	}
 
 	/**
@@ -3422,7 +3422,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EOperation getTypeAssertion__GetObject() {
+	public EOperation getTypeAssertion__GetObjects() {
 		return typeAssertionEClass.getEOperations().get(1);
 	}
 
@@ -4225,6 +4225,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		createEReference(anonymousInstanceEClass, ANONYMOUS_INSTANCE__OWNING_ASSERTION);
 		createEReference(anonymousInstanceEClass, ANONYMOUS_INSTANCE__OWNING_AXIOM);
 		createEOperation(anonymousInstanceEClass, ANONYMOUS_INSTANCE___GET_TYPE);
+		createEOperation(anonymousInstanceEClass, ANONYMOUS_INSTANCE___GET_TYPES);
 
 		conceptInstanceEClass = createEClass(CONCEPT_INSTANCE);
 		createEReference(conceptInstanceEClass, CONCEPT_INSTANCE__REF);
@@ -4236,7 +4237,6 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 
 		structureInstanceEClass = createEClass(STRUCTURE_INSTANCE);
 		createEReference(structureInstanceEClass, STRUCTURE_INSTANCE__TYPE);
-		createEOperation(structureInstanceEClass, STRUCTURE_INSTANCE___GET_TYPES);
 
 		keyAxiomEClass = createEClass(KEY_AXIOM);
 		createEReference(keyAxiomEClass, KEY_AXIOM__PROPERTIES);
@@ -4318,7 +4318,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		createEReference(typeAssertionEClass, TYPE_ASSERTION__TYPE);
 		createEReference(typeAssertionEClass, TYPE_ASSERTION__OWNING_INSTANCE);
 		createEOperation(typeAssertionEClass, TYPE_ASSERTION___GET_SUBJECT);
-		createEOperation(typeAssertionEClass, TYPE_ASSERTION___GET_OBJECT);
+		createEOperation(typeAssertionEClass, TYPE_ASSERTION___GET_OBJECTS);
 
 		propertyValueAssertionEClass = createEClass(PROPERTY_VALUE_ASSERTION);
 		createEReference(propertyValueAssertionEClass, PROPERTY_VALUE_ASSERTION__PROPERTY);
@@ -4529,11 +4529,11 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 
 		initEClass(annotationEClass, Annotation.class, "Annotation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAnnotation_Property(), this.getAnnotationProperty(), null, "property", null, 1, 1, Annotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAnnotation_LiteralValue(), this.getLiteral(), null, "literalValue", null, 0, 1, Annotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAnnotation_ReferencedValue(), this.getMember(), null, "referencedValue", null, 0, 1, Annotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAnnotation_LiteralValue(), this.getLiteral(), null, "literalValue", null, 0, -1, Annotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAnnotation_ReferencedValue(), this.getMember(), null, "referencedValue", null, 0, -1, Annotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAnnotation_OwningElement(), this.getIdentifiedElement(), this.getIdentifiedElement_OwnedAnnotations(), "owningElement", null, 0, 1, Annotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEOperation(getAnnotation__GetValue(), this.getElement(), "getValue", 0, 1, !IS_UNIQUE, IS_ORDERED);
+		initEOperation(getAnnotation__GetValue(), this.getElement(), "getValue", 0, -1, !IS_UNIQUE, IS_ORDERED);
 
 		initEOperation(getAnnotation__GetAnnotatedElement(), this.getIdentifiedElement(), "getAnnotatedElement", 0, 1, !IS_UNIQUE, IS_ORDERED);
 
@@ -4565,7 +4565,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 
 		initEOperation(getAssertion__GetSubject(), this.getInstance(), "getSubject", 0, 1, !IS_UNIQUE, IS_ORDERED);
 
-		initEOperation(getAssertion__GetObject(), this.getElement(), "getObject", 0, 1, !IS_UNIQUE, IS_ORDERED);
+		initEOperation(getAssertion__GetObject(), this.getElement(), "getObject", 0, -1, !IS_UNIQUE, IS_ORDERED);
 
 		initEClass(predicateEClass, Predicate.class, "Predicate", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPredicate_AntecedentRule(), this.getRule(), this.getRule_Antecedent(), "antecedentRule", null, 0, 1, Predicate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -4821,6 +4821,8 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 
 		initEOperation(getAnonymousInstance__GetType(), this.getClassifier(), "getType", 0, 1, !IS_UNIQUE, IS_ORDERED);
 
+		initEOperation(getAnonymousInstance__GetTypes(), this.getClassifier(), "getTypes", 0, -1, !IS_UNIQUE, IS_ORDERED);
+
 		initEClass(conceptInstanceEClass, ConceptInstance.class, "ConceptInstance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getConceptInstance_Ref(), this.getConceptInstance(), null, "ref", null, 0, 1, ConceptInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -4831,8 +4833,6 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 
 		initEClass(structureInstanceEClass, StructureInstance.class, "StructureInstance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getStructureInstance_Type(), this.getStructure(), null, "type", null, 1, 1, StructureInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEOperation(getStructureInstance__GetTypes(), this.getClassifier(), "getTypes", 0, -1, !IS_UNIQUE, IS_ORDERED);
 
 		initEClass(keyAxiomEClass, KeyAxiom.class, "KeyAxiom", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getKeyAxiom_Properties(), this.getProperty(), null, "properties", null, 1, -1, KeyAxiom.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -4933,20 +4933,20 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 
 		initEOperation(getTypeAssertion__GetSubject(), this.getNamedInstance(), "getSubject", 0, 1, !IS_UNIQUE, IS_ORDERED);
 
-		initEOperation(getTypeAssertion__GetObject(), this.getElement(), "getObject", 0, 1, !IS_UNIQUE, IS_ORDERED);
+		initEOperation(getTypeAssertion__GetObjects(), this.getElement(), "getObjects", 0, -1, !IS_UNIQUE, IS_ORDERED);
 
 		initEClass(propertyValueAssertionEClass, PropertyValueAssertion.class, "PropertyValueAssertion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPropertyValueAssertion_Property(), this.getSemanticProperty(), null, "property", null, 1, 1, PropertyValueAssertion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getPropertyValueAssertion_LiteralValue(), this.getLiteral(), null, "literalValue", null, 0, 1, PropertyValueAssertion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getPropertyValueAssertion_ContainedValue(), this.getAnonymousInstance(), this.getAnonymousInstance_OwningAssertion(), "containedValue", null, 0, 1, PropertyValueAssertion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getPropertyValueAssertion_ReferencedValue(), this.getNamedInstance(), null, "referencedValue", null, 0, 1, PropertyValueAssertion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPropertyValueAssertion_LiteralValue(), this.getLiteral(), null, "literalValue", null, 0, -1, PropertyValueAssertion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPropertyValueAssertion_ContainedValue(), this.getAnonymousInstance(), this.getAnonymousInstance_OwningAssertion(), "containedValue", null, 0, -1, PropertyValueAssertion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPropertyValueAssertion_ReferencedValue(), this.getNamedInstance(), null, "referencedValue", null, 0, -1, PropertyValueAssertion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPropertyValueAssertion_OwningInstance(), this.getInstance(), this.getInstance_OwnedPropertyValues(), "owningInstance", null, 0, 1, PropertyValueAssertion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEOperation(getPropertyValueAssertion__GetValue(), this.getElement(), "getValue", 0, 1, !IS_UNIQUE, IS_ORDERED);
+		initEOperation(getPropertyValueAssertion__GetValue(), this.getElement(), "getValue", 0, -1, !IS_UNIQUE, IS_ORDERED);
 
 		initEOperation(getPropertyValueAssertion__GetSubject(), this.getInstance(), "getSubject", 0, 1, !IS_UNIQUE, IS_ORDERED);
 
-		initEOperation(getPropertyValueAssertion__GetObject(), this.getElement(), "getObject", 0, 1, !IS_UNIQUE, IS_ORDERED);
+		initEOperation(getPropertyValueAssertion__GetObject(), this.getElement(), "getObject", 0, -1, !IS_UNIQUE, IS_ORDERED);
 
 		initEClass(unaryPredicateEClass, UnaryPredicate.class, "UnaryPredicate", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getUnaryPredicate_Argument(), this.getArgument(), null, "argument", null, 1, 1, UnaryPredicate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

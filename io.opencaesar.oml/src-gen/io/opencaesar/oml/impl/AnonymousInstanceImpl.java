@@ -29,6 +29,7 @@ import java.lang.reflect.InvocationTargetException;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
+import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
@@ -196,6 +197,16 @@ public abstract class AnonymousInstanceImpl extends InstanceImpl implements Anon
 	 * @generated
 	 */
 	@Override
+	public EList<Classifier> getTypes() {
+		return ECollections.<Classifier>singletonEList(this.getType());
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case OmlPackage.ANONYMOUS_INSTANCE__OWNING_ASSERTION:
@@ -322,6 +333,8 @@ public abstract class AnonymousInstanceImpl extends InstanceImpl implements Anon
 		switch (operationID) {
 			case OmlPackage.ANONYMOUS_INSTANCE___GET_TYPE:
 				return getType();
+			case OmlPackage.ANONYMOUS_INSTANCE___GET_TYPES:
+				return getTypes();
 		}
 		return super.eInvoke(operationID, arguments);
 	}
