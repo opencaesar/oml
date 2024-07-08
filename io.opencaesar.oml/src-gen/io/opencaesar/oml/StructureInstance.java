@@ -18,6 +18,7 @@
  */
 package io.opencaesar.oml;
 
+import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -64,5 +65,13 @@ public interface StructureInstance extends AnonymousInstance {
 	 * @generated
 	 */
 	void setType(Structure value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
+	EList<Classifier> getTypes();
 
 } // StructureInstance

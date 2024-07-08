@@ -129,9 +129,18 @@ public final class OmlCatalog {
 			if (e.getEntryType() == Catalog.REWRITE_URI) {
 				String uriStartString = e.getEntryArg(0);
 				String rewriteUri = e.getEntryArg(1);
+				if (rewriteUri.endsWith("/")) {
+					rewriteUri = rewriteUri.substring(0, rewriteUri.length()-1);
+				}
 				int i =  path.toString().indexOf(rewriteUri);
 				if (i != -1) {
-					var pathWithNoExt = path.trimFileExtension().toString();
+					var pathWithNoExt = path.toString();
+					for (var extension : extensions) {
+						if (pathWithNoExt.endsWith("."+extension)) {
+							pathWithNoExt = path.trimFileExtension().toString();
+							break;
+						}
+					}
 					var deresolved = pathWithNoExt.replace(rewriteUri, uriStartString);
 					return URI.createURI(deresolved);
 				}
@@ -149,18 +158,11 @@ public final class OmlCatalog {
 		var uris = new ArrayList<URI>();
 		for (final String rewriteUri : getRewriteUris()) {
 			var path = new File(CommonPlugin.asLocalURI(URI.createURI(rewriteUri)).toFileString());
-			if (path.isDirectory()) {
-				for (var file : getFiles(path, extensions)) {
-					String relative = path.toURI().relativize(file.toURI()).getPath();
-					uris.add(URI.createURI(rewriteUri+"/"+relative));
-				}
-			} else { // likely a file name with no extension
-				for (String ext : extensions) {
-					var file = new File(path.toString()+"."+ext);
-					if (file.exists()) {
-						uris.add(URI.createURI(rewriteUri+"."+ext));
-						break;
-					}
+			var dirPath = (path.isDirectory())? path : path.getParentFile();
+			for (var file : getFiles(dirPath, extensions)) {
+				if (file.getAbsolutePath().startsWith(path.getAbsolutePath())) {
+					String relative = file.getAbsolutePath().replaceFirst(path.getAbsolutePath(), "");
+					uris.add(URI.createURI(rewriteUri+relative));
 				}
 			}
 		}

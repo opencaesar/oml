@@ -27,9 +27,9 @@ import org.eclipse.emf.common.util.EList;
  *
  * <!-- begin-model-doc -->
  * RelationBase is a specializable term that is the abstract superclass of a relation from a source [=entity=] to a target [=entity=].
- * It can optionally name a [=ReverseRelation=] whose domain is the target and whose range is the source. Such relation can only be
- * specified on a relation base definition not a ref to an existing one. A relation base can be characterized with several
- * boolean flags that represent its DL semantics. Such flags apply conversely to the [=ReverseRelation=] (if named).
+ * It can optionally name a [=ReverseRelation=](on a relation base definition not a ref) whose domain is the target and whose range
+ * is the source. A relation base can be characterized with several boolean flags that represent its DL semantics. Such flags apply conversely
+ * to the [=ReverseRelation=] (if named).
  * <!-- end-model-doc -->
  *
  * <p>

@@ -288,6 +288,10 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 				return createStructureInstanceAdapter();
 			}
 			@Override
+			public Adapter caseAnonymousRelationInstance(AnonymousRelationInstance object) {
+				return createAnonymousRelationInstanceAdapter();
+			}
+			@Override
 			public Adapter caseKeyAxiom(KeyAxiom object) {
 				return createKeyAxiomAdapter();
 			}
@@ -1126,6 +1130,20 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createStructureInstanceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.AnonymousRelationInstance <em>Anonymous Relation Instance</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see io.opencaesar.oml.AnonymousRelationInstance
+	 * @generated
+	 */
+	public Adapter createAnonymousRelationInstanceAdapter() {
 		return null;
 	}
 

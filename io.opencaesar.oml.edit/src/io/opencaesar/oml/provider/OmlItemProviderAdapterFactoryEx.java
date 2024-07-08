@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import io.opencaesar.oml.Annotation;
 import io.opencaesar.oml.AnnotationProperty;
-import io.opencaesar.oml.AnonymousInstance;
+import io.opencaesar.oml.AnonymousRelationInstance;
 import io.opencaesar.oml.Argument;
 import io.opencaesar.oml.Aspect;
 import io.opencaesar.oml.BooleanLiteral;
@@ -601,15 +601,15 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 			public String getText(Object object) {
 				PropertyValueRestrictionAxiom axiom = (PropertyValueRestrictionAxiom)object;
 				String valueLabel = "";
-				if (axiom.getProperty() instanceof ScalarProperty) {
+				if (axiom.getLiteralValue() != null) {
 					valueLabel = getLiteralLabel(axiom.getLiteralValue()).toString();
-				} else if (axiom.getProperty() instanceof StructuredProperty) {
-					AnonymousInstance instance= axiom.getContainedValue();
-					valueLabel = "<none>";
-					if (instance != null && instance.getType() != null) {
-						valueLabel = getLabel(instance.getType(), instance);
-					}
-				} else if (axiom.getProperty() instanceof Relation) {
+				} else if (axiom.getContainedValue() instanceof StructureInstance) {
+					var instance = (StructureInstance) axiom.getContainedValue();
+					valueLabel = getLabel(instance.getType(), instance);
+				} else if (axiom.getContainedValue() instanceof AnonymousRelationInstance) {
+					var instance = (AnonymousRelationInstance) axiom.getContainedValue();
+					valueLabel = getLabel(instance.getTarget(), instance);
+				} else if (axiom.getReferencedValue() != null) {
 					valueLabel = getLabel(axiom.getReferencedValue(), axiom);
 				}
 				return "restricts " + getLabel(axiom.getProperty(), axiom)+ " to " + valueLabel;
@@ -817,11 +817,12 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 		for (Element value : values) {
 			if (value instanceof Literal) {
 				valuesLabels.add(getLiteralLabel((Literal)value));
-			} else if (value instanceof AnonymousInstance) {
-				AnonymousInstance instance = (AnonymousInstance)value;
-				if (instance.getType() != null) {
-					valuesLabels.add(getLabel(instance.getType(), element));
-				}
+			} else if (value instanceof StructureInstance) {
+				var instance = (StructureInstance) value;
+				valuesLabels.add(getLabel(instance.getType(), instance));
+			} else if (value instanceof AnonymousRelationInstance) {
+				var instance = (AnonymousRelationInstance) value;
+				valuesLabels.add(getLabel(instance.getTarget(), instance));
 			} else if (value instanceof NamedInstance) {
 				valuesLabels.add(getLabel((NamedInstance)value, element));
 			}
@@ -914,5 +915,4 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 		}
 		return "";
 	}
-	
 }

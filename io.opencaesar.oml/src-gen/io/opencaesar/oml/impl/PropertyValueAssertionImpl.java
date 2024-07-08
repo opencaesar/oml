@@ -19,6 +19,7 @@
 package io.opencaesar.oml.impl;
 
 import io.opencaesar.oml.AnonymousInstance;
+import io.opencaesar.oml.AnonymousRelationInstance;
 import io.opencaesar.oml.Element;
 import io.opencaesar.oml.Instance;
 import io.opencaesar.oml.Literal;
@@ -48,6 +49,10 @@ import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
+
+import org.eclipse.emf.ecore.xcore.lib.XcoreEListExtensions;
+
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
 
 /**
  * <!-- begin-user-doc -->
@@ -322,7 +327,28 @@ public class PropertyValueAssertionImpl extends AssertionImpl implements Propert
 	 */
 	@Override
 	public EList<Element> getObject() {
-		return this.getValue();
+		EList<Element> _xifexpression = null;
+		boolean _isEmpty = this.getContainedValue().isEmpty();
+		boolean _not = (!_isEmpty);
+		if (_not) {
+			final Function1<AnonymousInstance, Element> _function = new Function1<AnonymousInstance, Element>() {
+				public Element apply(final AnonymousInstance v) {
+					Instance _xifexpression = null;
+					if ((v instanceof AnonymousRelationInstance)) {
+						_xifexpression = ((AnonymousRelationInstance)v).getTarget();
+					}
+					else {
+						_xifexpression = v;
+					}
+					return _xifexpression;
+				}
+			};
+			_xifexpression = XcoreEListExtensions.<AnonymousInstance, Element>map(this.getContainedValue(), _function);
+		}
+		else {
+			_xifexpression = this.getValue();
+		}
+		return _xifexpression;
 	}
 
 	/**

@@ -40,6 +40,7 @@ import com.google.inject.Inject;
 
 import io.opencaesar.oml.Annotation;
 import io.opencaesar.oml.AnnotationProperty;
+import io.opencaesar.oml.AnonymousRelationInstance;
 import io.opencaesar.oml.Aspect;
 import io.opencaesar.oml.BuiltIn;
 import io.opencaesar.oml.BuiltInPredicate;
@@ -180,7 +181,7 @@ public class OmlFormatter extends AbstractJavaFormatter {
 		formatBrackets(concept, doc,
 				oml.getConceptAccess().getLeftSquareBracketKeyword_2_0(), 
 				oml.getConceptAccess().getRightSquareBracketKeyword_2_3());
-		ifNotNull(concept.getOwnedEnumeration(), i -> doc.prepend(doc.format(i), newLine()));
+		ifNotNull(concept.getOwnedEnumeration(), (Procedure1<InstanceEnumerationAxiom>)(i -> doc.prepend(doc.format(i), newLine())));
 		concept.getOwnedKeys().forEach(i -> doc.prepend(doc.format(i), newLine()));
 		doc.surround(keyword(concept, oml.getClassifierSpecializationAccess().getLessThanSignKeyword_0()), oneSpace());
 		formatCommas(concept, doc);
@@ -207,8 +208,8 @@ public class OmlFormatter extends AbstractJavaFormatter {
 				oml.getRelationEntityAccess().getRightSquareBracketKeyword_2_7());
 		doc.append(doc.prepend(keyword(entity, oml.getRelationEntityAccess().getFromKeyword_2_1_0()), newLine()), oneSpace());
 		doc.append(doc.prepend(keyword(entity, oml.getRelationEntityAccess().getToKeyword_2_2_0()), newLine()), oneSpace());
-		ifNotNull(entity.getForwardRelation(), i -> doc.prepend(doc.format(i), newLine()));
-		ifNotNull(entity.getReverseRelation(), i -> doc.prepend(doc.format(i), newLine()));
+		ifNotNull(entity.getForwardRelation(), (Procedure1<ForwardRelation>)(i -> doc.prepend(doc.format(i), newLine())));
+		ifNotNull(entity.getReverseRelation(), (Procedure1<ReverseRelation>)(i -> doc.prepend(doc.format(i), newLine())));
 		doc.prepend(keyword(entity, oml.getRelationEntityAccess().getFunctionalFunctionalKeyword_2_5_0_0()), newLine());
 		doc.prepend(keyword(entity, oml.getRelationEntityAccess().getInverseFunctionalInverseKeyword_2_5_1_0_0()), newLine());
 		doc.prepend(keyword(entity, oml.getRelationEntityAccess().getSymmetricSymmetricKeyword_2_5_2_0()), newLine());
@@ -311,7 +312,7 @@ public class OmlFormatter extends AbstractJavaFormatter {
 			doc.append(keyword(scalar, oml.getScalarAccess().getScalarKeyword_1_1_1()), oneSpace());
 		}
 		formatBrackets(scalar, doc);
-		ifNotNull(scalar.getOwnedEnumeration(), i -> doc.prepend(doc.format(i), newLine()));
+		ifNotNull(scalar.getOwnedEnumeration(), (Procedure1<LiteralEnumerationAxiom>)(i -> doc.prepend(doc.format(i), newLine())));
 		doc.surround(keyword(scalar, oml.getScalarSpecializationAccess().getLessThanSignKeyword_0()), oneSpace());
 		formatCommas(scalar, doc);
 	}
@@ -324,13 +325,13 @@ public class OmlFormatter extends AbstractJavaFormatter {
 		doc.prepend(keyword(axiom, oml.getScalarEquivalenceAxiomAccess().getPatternKeyword_1_1_3_0()), newLine());
 		doc.prepend(keyword(axiom, oml.getScalarEquivalenceAxiomAccess().getLanguageKeyword_1_1_4_0()), newLine());
 		doc.prepend(keyword(axiom, oml.getScalarEquivalenceAxiomAccess().getMinInclusiveKeyword_1_1_5_0()), newLine());
-		ifNotNull(axiom.getMinInclusive(), i -> doc.prepend(doc.format(i), oneSpace()));
+		ifNotNull(axiom.getMinInclusive(), (Procedure1<Literal>)(i -> doc.prepend(doc.format(i), oneSpace())));
 		doc.prepend(keyword(axiom, oml.getScalarEquivalenceAxiomAccess().getMaxInclusiveKeyword_1_1_7_0()), newLine());
-		ifNotNull(axiom.getMaxInclusive(), i -> doc.prepend(doc.format(i), oneSpace()));
+		ifNotNull(axiom.getMaxInclusive(), (Procedure1<Literal>)(i -> doc.prepend(doc.format(i), oneSpace())));
 		doc.prepend(keyword(axiom, oml.getScalarEquivalenceAxiomAccess().getMinExclusiveKeyword_1_1_6_0()), newLine());
-		ifNotNull(axiom.getMinExclusive(), i -> doc.prepend(doc.format(i), oneSpace()));
+		ifNotNull(axiom.getMinExclusive(), (Procedure1<Literal>)(i -> doc.prepend(doc.format(i), oneSpace())));
 		doc.prepend(keyword(axiom, oml.getScalarEquivalenceAxiomAccess().getMaxExclusiveKeyword_1_1_8_0()), newLine());
-		ifNotNull(axiom.getMaxExclusive(), i -> doc.prepend(doc.format(i), oneSpace()));
+		ifNotNull(axiom.getMaxExclusive(), (Procedure1<Literal>)(i -> doc.prepend(doc.format(i), oneSpace())));
 	}
 
 	protected void _format(ForwardRelation relation, IFormattableDocument doc) {
@@ -354,7 +355,7 @@ public class OmlFormatter extends AbstractJavaFormatter {
 		formatBrackets(relation, doc);
 		doc.append(doc.prepend(keyword(relation, oml.getUnreifiedRelationAccess().getFromKeyword_2_1_0()), newLine()), oneSpace());
 		doc.append(doc.prepend(keyword(relation, oml.getUnreifiedRelationAccess().getToKeyword_2_2_0()), newLine()), oneSpace());
-		ifNotNull(relation.getReverseRelation(), i -> doc.prepend(doc.format(i), newLine()));
+		ifNotNull(relation.getReverseRelation(), (Procedure1<ReverseRelation>)(i -> doc.prepend(doc.format(i), newLine())));
 		doc.prepend(keyword(relation, oml.getUnreifiedRelationAccess().getFunctionalFunctionalKeyword_2_4_0_0()), newLine());
 		doc.prepend(keyword(relation, oml.getUnreifiedRelationAccess().getInverseFunctionalInverseKeyword_2_4_1_0_0()), newLine());
 		doc.prepend(keyword(relation, oml.getUnreifiedRelationAccess().getSymmetricSymmetricKeyword_2_4_2_0()), newLine());
@@ -426,6 +427,13 @@ public class OmlFormatter extends AbstractJavaFormatter {
 	}
 
 	protected void _format(StructureInstance instance, IFormattableDocument doc) {
+		doc.append(feature(instance, OmlPackage.Literals.STRUCTURE_INSTANCE__TYPE), oneSpace());
+		formatBrackets(instance, doc);
+		instance.getOwnedPropertyValues().forEach(i -> doc.prepend(doc.format(i), newLine()));
+	}
+
+	protected void _format(AnonymousRelationInstance instance, IFormattableDocument doc) {
+		doc.surround(keyword(instance, oml.getAnonymousRelationInstanceAccess().getWithKeyword_1()), oneSpace());
 		formatBrackets(instance, doc);
 		instance.getOwnedPropertyValues().forEach(i -> doc.prepend(doc.format(i), newLine()));
 	}
@@ -472,14 +480,14 @@ public class OmlFormatter extends AbstractJavaFormatter {
 	protected void _format(LiteralEnumerationAxiom axiom, IFormattableDocument doc) {
 		doc.append(keyword(axiom, oml.getLiteralEnumerationAxiomAccess().getOneOfKeyword_0()), oneSpace());
 		formatCommas(axiom, doc);
+		axiom.getLiterals().forEach(it -> doc.format(it));
 	}
 
 	protected void _format(PropertyValueAssertion assertion, IFormattableDocument doc) {
 		doc.append(feature(assertion, OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__PROPERTY), oneSpace());
 		formatCommas(assertion, doc);
-		assertion.getLiteralValue().forEach(it -> doc.format(doc.format(it)));
-		assertion.getContainedValue().forEach(it -> doc.format(doc.format(it)));
-		assertion.getReferencedValue().forEach(it -> doc.format(doc.format(it)));
+		assertion.getLiteralValue().forEach(it -> doc.format(it));
+		assertion.getContainedValue().forEach(it -> doc.format(it));
 	}
 
 	protected void _format(TypePredicate predicate, IFormattableDocument doc) {

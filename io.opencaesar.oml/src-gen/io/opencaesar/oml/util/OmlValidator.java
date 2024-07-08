@@ -225,6 +225,8 @@ public class OmlValidator extends EObjectValidator {
 				return validateRelationInstance((RelationInstance)value, diagnostics, context);
 			case OmlPackage.STRUCTURE_INSTANCE:
 				return validateStructureInstance((StructureInstance)value, diagnostics, context);
+			case OmlPackage.ANONYMOUS_RELATION_INSTANCE:
+				return validateAnonymousRelationInstance((AnonymousRelationInstance)value, diagnostics, context);
 			case OmlPackage.KEY_AXIOM:
 				return validateKeyAxiom((KeyAxiom)value, diagnostics, context);
 			case OmlPackage.SPECIALIZATION_AXIOM:
@@ -1280,6 +1282,25 @@ public class OmlValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(structureInstance, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(structureInstance, diagnostics, context);
 		if (result || diagnostics != null) result &= validateElement_extraValidate(structureInstance, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateAnonymousRelationInstance(AnonymousRelationInstance anonymousRelationInstance, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		if (!validate_NoCircularContainment(anonymousRelationInstance, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms(anonymousRelationInstance, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(anonymousRelationInstance, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(anonymousRelationInstance, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(anonymousRelationInstance, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(anonymousRelationInstance, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(anonymousRelationInstance, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(anonymousRelationInstance, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(anonymousRelationInstance, diagnostics, context);
+		if (result || diagnostics != null) result &= validateElement_extraValidate(anonymousRelationInstance, diagnostics, context);
 		return result;
 	}
 

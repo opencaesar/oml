@@ -21,6 +21,7 @@ package io.opencaesar.oml.impl;
 import io.opencaesar.oml.Annotation;
 import io.opencaesar.oml.AnnotationProperty;
 import io.opencaesar.oml.AnonymousInstance;
+import io.opencaesar.oml.AnonymousRelationInstance;
 import io.opencaesar.oml.Argument;
 import io.opencaesar.oml.Aspect;
 import io.opencaesar.oml.Assertion;
@@ -483,6 +484,13 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	private EClass structureInstanceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass anonymousRelationInstanceEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -2642,18 +2650,8 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EOperation getAnonymousInstance__GetType() {
+	public EOperation getAnonymousInstance__GetIsValueOfProperty() {
 		return anonymousInstanceEClass.getEOperations().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EOperation getAnonymousInstance__GetTypes() {
-		return anonymousInstanceEClass.getEOperations().get(1);
 	}
 
 	/**
@@ -2734,6 +2732,56 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	@Override
 	public EReference getStructureInstance_Type() {
 		return (EReference)structureInstanceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getStructureInstance__GetTypes() {
+		return structureInstanceEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getAnonymousRelationInstance() {
+		return anonymousRelationInstanceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getAnonymousRelationInstance_Target() {
+		return (EReference)anonymousRelationInstanceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getAnonymousRelationInstance__GetType() {
+		return anonymousRelationInstanceEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getAnonymousRelationInstance__GetTypes() {
+		return anonymousRelationInstanceEClass.getEOperations().get(1);
 	}
 
 	/**
@@ -4224,8 +4272,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		anonymousInstanceEClass = createEClass(ANONYMOUS_INSTANCE);
 		createEReference(anonymousInstanceEClass, ANONYMOUS_INSTANCE__OWNING_ASSERTION);
 		createEReference(anonymousInstanceEClass, ANONYMOUS_INSTANCE__OWNING_AXIOM);
-		createEOperation(anonymousInstanceEClass, ANONYMOUS_INSTANCE___GET_TYPE);
-		createEOperation(anonymousInstanceEClass, ANONYMOUS_INSTANCE___GET_TYPES);
+		createEOperation(anonymousInstanceEClass, ANONYMOUS_INSTANCE___GET_IS_VALUE_OF_PROPERTY);
 
 		conceptInstanceEClass = createEClass(CONCEPT_INSTANCE);
 		createEReference(conceptInstanceEClass, CONCEPT_INSTANCE__REF);
@@ -4237,6 +4284,12 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 
 		structureInstanceEClass = createEClass(STRUCTURE_INSTANCE);
 		createEReference(structureInstanceEClass, STRUCTURE_INSTANCE__TYPE);
+		createEOperation(structureInstanceEClass, STRUCTURE_INSTANCE___GET_TYPES);
+
+		anonymousRelationInstanceEClass = createEClass(ANONYMOUS_RELATION_INSTANCE);
+		createEReference(anonymousRelationInstanceEClass, ANONYMOUS_RELATION_INSTANCE__TARGET);
+		createEOperation(anonymousRelationInstanceEClass, ANONYMOUS_RELATION_INSTANCE___GET_TYPE);
+		createEOperation(anonymousRelationInstanceEClass, ANONYMOUS_RELATION_INSTANCE___GET_TYPES);
 
 		keyAxiomEClass = createEClass(KEY_AXIOM);
 		createEReference(keyAxiomEClass, KEY_AXIOM__PROPERTIES);
@@ -4484,6 +4537,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		conceptInstanceEClass.getESuperTypes().add(this.getNamedInstance());
 		relationInstanceEClass.getESuperTypes().add(this.getNamedInstance());
 		structureInstanceEClass.getESuperTypes().add(this.getAnonymousInstance());
+		anonymousRelationInstanceEClass.getESuperTypes().add(this.getAnonymousInstance());
 		keyAxiomEClass.getESuperTypes().add(this.getAxiom());
 		specializationAxiomEClass.getESuperTypes().add(this.getAxiom());
 		instanceEnumerationAxiomEClass.getESuperTypes().add(this.getAxiom());
@@ -4819,9 +4873,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		initEReference(getAnonymousInstance_OwningAssertion(), this.getPropertyValueAssertion(), this.getPropertyValueAssertion_ContainedValue(), "owningAssertion", null, 0, 1, AnonymousInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAnonymousInstance_OwningAxiom(), this.getPropertyValueRestrictionAxiom(), this.getPropertyValueRestrictionAxiom_ContainedValue(), "owningAxiom", null, 0, 1, AnonymousInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEOperation(getAnonymousInstance__GetType(), this.getClassifier(), "getType", 0, 1, !IS_UNIQUE, IS_ORDERED);
-
-		initEOperation(getAnonymousInstance__GetTypes(), this.getClassifier(), "getTypes", 0, -1, !IS_UNIQUE, IS_ORDERED);
+		initEOperation(getAnonymousInstance__GetIsValueOfProperty(), this.getSemanticProperty(), "getIsValueOfProperty", 0, 1, !IS_UNIQUE, IS_ORDERED);
 
 		initEClass(conceptInstanceEClass, ConceptInstance.class, "ConceptInstance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getConceptInstance_Ref(), this.getConceptInstance(), null, "ref", null, 0, 1, ConceptInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -4833,6 +4885,15 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 
 		initEClass(structureInstanceEClass, StructureInstance.class, "StructureInstance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getStructureInstance_Type(), this.getStructure(), null, "type", null, 1, 1, StructureInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEOperation(getStructureInstance__GetTypes(), this.getClassifier(), "getTypes", 0, -1, !IS_UNIQUE, IS_ORDERED);
+
+		initEClass(anonymousRelationInstanceEClass, AnonymousRelationInstance.class, "AnonymousRelationInstance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getAnonymousRelationInstance_Target(), this.getNamedInstance(), null, "target", null, 1, 1, AnonymousRelationInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEOperation(getAnonymousRelationInstance__GetType(), this.getRelationEntity(), "getType", 0, 1, !IS_UNIQUE, IS_ORDERED);
+
+		initEOperation(getAnonymousRelationInstance__GetTypes(), this.getClassifier(), "getTypes", 0, -1, !IS_UNIQUE, IS_ORDERED);
 
 		initEClass(keyAxiomEClass, KeyAxiom.class, "KeyAxiom", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getKeyAxiom_Properties(), this.getProperty(), null, "properties", null, 1, -1, KeyAxiom.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -5387,6 +5448,12 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		   });
 		addAnnotation
 		  (structureInstanceEClass,
+		   source,
+		   new String[] {
+			   "heading", "Instances"
+		   });
+		addAnnotation
+		  (anonymousRelationInstanceEClass,
 		   source,
 		   new String[] {
 			   "heading", "Instances"

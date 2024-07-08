@@ -32,6 +32,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import io.opencaesar.oml.Element;
 import io.opencaesar.oml.Entity;
+import io.opencaesar.oml.Instance;
 import io.opencaesar.oml.Member;
 import io.opencaesar.oml.NamedInstance;
 import io.opencaesar.oml.Relation;
@@ -97,8 +98,8 @@ public class OmlDelete {
      * @param cascadeRules A list of cascade rules
      * @return A root of a tree of cascade results
      */
-    public static CascadeResult cascadeDelete(NamedInstance instance, List<CascadeRule> cascadeRules) {
-		var deleting = new HashSet<NamedInstance>(Set.of(instance));
+    public static CascadeResult cascadeDelete(Instance instance, List<CascadeRule> cascadeRules) {
+		var deleting = new HashSet<Instance>(Set.of(instance));
 		var rootResult = new CascadeResult(instance);
 		var queue = new ArrayDeque<CascadeResult>(Set.of(rootResult));
 
@@ -118,8 +119,8 @@ public class OmlDelete {
 							result.add(deleting, t, rule, queue);
 						}
 					}
-				} else {
-					var sources = OmlSearch.findInstancesRelatedAsSourceTo(result.instance, rule.relation, null);
+				} else if (result.instance instanceof NamedInstance) {
+					var sources = OmlSearch.findInstancesRelatedAsSourceTo((NamedInstance)result.instance, rule.relation, null);
 					for (var s : sources) {
 						if (rule.cascadesTo(s)) {
 							result.add(deleting, s, rule, queue);
@@ -222,7 +223,7 @@ public class OmlDelete {
 		 * @param instance The given instance
 		 * @return true if the rule can cascade from the instance; otherwise false
 		 */
-		private boolean cascadesFrom(NamedInstance instance) {
+		private boolean cascadesFrom(Instance instance) {
 			var type = (direction == CascadeDirection.SOURCE_TO_TARGET) ? sourceType : targetType;
 			return type == null || OmlSearch.findIsKindOf(instance, type, null);
 		}
@@ -233,7 +234,7 @@ public class OmlDelete {
 		 * @param instance The given instance
 		 * @return true if the rule can cascade to the instance; otherwise false
 		 */
-		private boolean cascadesTo(NamedInstance instance) {
+		private boolean cascadesTo(Instance instance) {
 			var type = (direction  == CascadeDirection.SOURCE_TO_TARGET) ? targetType : sourceType;
 			return type == null || OmlSearch.findIsKindOf(instance, type, null);
 		}
@@ -246,7 +247,7 @@ public class OmlDelete {
 		/**
 		 * The instance to delete
 		 */
-		public NamedInstance instance;
+		public Instance instance;
 		/**
 		 * The nested cascade results
 		 */
@@ -255,7 +256,7 @@ public class OmlDelete {
 		/**
 		 * Creates a new cascade result
 		 */
-		private CascadeResult(NamedInstance instance) {
+		private CascadeResult(Instance instance) {
 			this.instance = instance;
 			this.nestedResults = new LinkedHashMap<>();
 		}
@@ -267,7 +268,7 @@ public class OmlDelete {
 		 * @param rule The rule that caused the delete
 		 * @param queue The queue to results
 		 */
-		private void add(HashSet<NamedInstance> deleting, NamedInstance instance, CascadeRule rule, Deque<CascadeResult> queue) {
+		private void add(HashSet<Instance> deleting, Instance instance, CascadeRule rule, Deque<CascadeResult> queue) {
 			if (instance != null && deleting.add(instance)) {
 				var result = new CascadeResult(instance);
 				var list = nestedResults.computeIfAbsent(rule.description, k -> new ArrayList<CascadeResult>());

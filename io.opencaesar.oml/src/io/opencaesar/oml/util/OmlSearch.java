@@ -18,7 +18,7 @@
  */
 package io.opencaesar.oml.util;
 
-import java.util.Collections;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -30,6 +30,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import io.opencaesar.oml.Annotation;
 import io.opencaesar.oml.AnnotationProperty;
 import io.opencaesar.oml.AnonymousInstance;
+import io.opencaesar.oml.AnonymousRelationInstance;
 import io.opencaesar.oml.Aspect;
 import io.opencaesar.oml.Assertion;
 import io.opencaesar.oml.Axiom;
@@ -1598,7 +1599,12 @@ public final class OmlSearch extends OmlIndex {
      * @return a set of relation value assertions that have the given instance as their object
      */
     public static Set<PropertyValueAssertion> findPropertyValueAssertionsWithObject(NamedInstance object, Set<Resource> scope) {
-        return findPropertyValueAssertionsWithReferencedValue(object, scope);
+    	Set<PropertyValueAssertion> assertions = new HashSet<>();
+    	assertions.addAll(findPropertyValueAssertionsWithReferencedValue(object, scope));
+    	assertions.addAll(findAnonymousRelationInstanceWithTarget(object, scope).stream()
+    			.map(i -> i.getOwningAssertion())
+    			.collect(Collectors.toSet()));
+        return assertions;
     }
 
     /**
@@ -1620,10 +1626,12 @@ public final class OmlSearch extends OmlIndex {
      * @param scope The scope of the search (can be null)
      * @return a set of instances related to the given instance by any relation
      */
-    public static Set<NamedInstance> findInstancesRelatedTo(NamedInstance instance, Set<Resource> scope) {
-        final Set<NamedInstance> related = new LinkedHashSet<>();
+    public static Set<Instance> findInstancesRelatedTo(Instance instance, Set<Resource> scope) {
+        final Set<Instance> related = new LinkedHashSet<>();
         related.addAll(findInstancesRelatedAsTargetTo(instance, scope));
-        related.addAll(findInstancesRelatedAsSourceTo(instance, scope));
+        if (instance instanceof NamedInstance) {
+        	related.addAll(findInstancesRelatedAsSourceTo((NamedInstance) instance, scope));
+        }
         return related;
     }
 
@@ -1635,7 +1643,7 @@ public final class OmlSearch extends OmlIndex {
      * @deprecated As of 2.5.0. Use {{@link #findInstancesRelatedTo(NamedInstance, Set<Resource>)} instead
      */
     @Deprecated
-    public static Set<NamedInstance> findInstancesRelatedTo(NamedInstance instance) {
+    public static Set<Instance> findInstancesRelatedTo(Instance instance) {
     	return findInstancesRelatedTo(instance, (Set<Resource>)null);
     }
     
@@ -1647,10 +1655,12 @@ public final class OmlSearch extends OmlIndex {
      * @param scope The scope of the search (can be null)
      * @return a set of instances related to the given instance by a given relation
      */
-    public static Set<NamedInstance> findInstancesRelatedTo(NamedInstance instance, Relation relation, Set<Resource> scope) {
-        final Set<NamedInstance> related = new LinkedHashSet<>();
+    public static Set<Instance> findInstancesRelatedTo(Instance instance, Relation relation, Set<Resource> scope) {
+        final Set<Instance> related = new LinkedHashSet<>();
         related.addAll(findInstancesRelatedAsTargetTo(instance, relation, scope));
-        related.addAll(findInstancesRelatedAsSourceTo(instance, relation, scope));
+        if (instance instanceof NamedInstance) {
+        	related.addAll(findInstancesRelatedAsSourceTo((NamedInstance)instance, relation, scope));
+        }
         return related;
     }
 
@@ -1663,7 +1673,7 @@ public final class OmlSearch extends OmlIndex {
      * @deprecated As of 2.5.0. Use {{@link #findInstancesRelatedTo(NamedInstance, Relation, Set<Resource>)} instead
      */
     @Deprecated
-    public static Set<NamedInstance> findInstancesRelatedTo(NamedInstance instance, Relation relation) {
+    public static Set<Instance> findInstancesRelatedTo(Instance instance, Relation relation) {
     	return findInstancesRelatedTo(instance, relation, null);
     }
     
@@ -1674,7 +1684,7 @@ public final class OmlSearch extends OmlIndex {
      * @param scope The scope of the search (can be null)
      * @return a set of target instances related to the given source instance
      */
-    public static Set<NamedInstance> findInstancesRelatedAsTargetTo(NamedInstance source, Set<Resource> scope) {
+    public static Set<NamedInstance> findInstancesRelatedAsTargetTo(Instance source, Set<Resource> scope) {
         final Set<NamedInstance> targets = new LinkedHashSet<>();
         // check property value assertions
         targets.addAll(findPropertyValueAssertionsWithSubject(source, scope).stream()
@@ -1682,9 +1692,11 @@ public final class OmlSearch extends OmlIndex {
                 .flatMap(a -> a.getReferencedValue().stream())
                 .collect(Collectors.toCollection(LinkedHashSet::new)));
         // check relation instances
-        targets.addAll(findRelationInstancesWithSource(source, scope).stream()
-                .flatMap(a -> a.getTargets().stream())
-                .collect(Collectors.toCollection(LinkedHashSet::new)));
+        if (source instanceof NamedInstance) {
+	        targets.addAll(findRelationInstancesWithSource((NamedInstance)source, scope).stream()
+	                .flatMap(a -> a.getTargets().stream())
+	                .collect(Collectors.toCollection(LinkedHashSet::new)));
+        }
         return targets;
     }
 
@@ -1696,7 +1708,7 @@ public final class OmlSearch extends OmlIndex {
      * @deprecated As of 2.5.0. Use {{@link #findInstancesRelatedAsTargetTo(NamedInstance, Set<Resource>)} instead
      */
     @Deprecated
-    public static Set<NamedInstance> findInstancesRelatedAsTargetTo(NamedInstance source) {
+    public static Set<NamedInstance> findInstancesRelatedAsTargetTo(Instance source) {
     	return findInstancesRelatedAsTargetTo(source, (Set<Resource>)null);
     }
     
@@ -1708,7 +1720,7 @@ public final class OmlSearch extends OmlIndex {
      * @param scope The scope of the search (can be null)
      * @return a set of target instances related to the given source instance
      */
-    public static Set<NamedInstance> findInstancesRelatedAsTargetTo(NamedInstance source, Relation relation, Set<Resource> scope) {
+    public static Set<NamedInstance> findInstancesRelatedAsTargetTo(Instance source, Relation relation, Set<Resource> scope) {
     	final Set<NamedInstance> targets = new LinkedHashSet<>();
         // look in property value assertions
     	var subRelations = findAllSubTerms(relation, true, scope);
@@ -1720,10 +1732,12 @@ public final class OmlSearch extends OmlIndex {
         // look in relation instances
         if (relation instanceof ForwardRelation) {
         	var subEntities = findAllSubTerms(((ForwardRelation)relation).getRelationEntity(), true, scope);
-	        targets.addAll(findRelationInstancesWithSource(source, scope).stream()
-	                .filter(i -> findAllTypes(i, scope).retainAll(subEntities))
-	                .flatMap(a -> a.getTargets().stream())
-	                .collect(Collectors.toCollection(LinkedHashSet::new)));
+        	if (source instanceof NamedInstance) {
+		        targets.addAll(findRelationInstancesWithSource((NamedInstance)source, scope).stream()
+		                .filter(i -> findAllTypes(i, scope).retainAll(subEntities))
+		                .flatMap(a -> a.getTargets().stream())
+		                .collect(Collectors.toCollection(LinkedHashSet::new)));
+        	}
         }
         return targets;
     }
@@ -1737,7 +1751,7 @@ public final class OmlSearch extends OmlIndex {
      * @deprecated As of 2.5.0. Use {{@link #findInstancesRelatedAsTargetTo(NamedInstance, Relation, Set<Resource>)} instead
      */
     @Deprecated
-    public static Set<NamedInstance> findInstancesRelatedAsTargetTo(NamedInstance source, Relation relation) {
+    public static Set<NamedInstance> findInstancesRelatedAsTargetTo(Instance source, Relation relation) {
     	return findInstancesRelatedAsTargetTo(source, relation, null);
     }
     
@@ -1748,8 +1762,8 @@ public final class OmlSearch extends OmlIndex {
      * @param scope The scope of the search (can be null)
      * @return a set of source instances related to the given target instance
      */
-    public static Set<NamedInstance> findInstancesRelatedAsSourceTo(NamedInstance target, Set<Resource> scope) {
-        final Set<NamedInstance> sources = new LinkedHashSet<>();
+    public static Set<Instance> findInstancesRelatedAsSourceTo(NamedInstance target, Set<Resource> scope) {
+        final Set<Instance> sources = new LinkedHashSet<>();
         // look in property value assertions
        sources.addAll(findPropertyValueAssertionsWithObject(target, scope).stream()
                 .map(a -> (NamedInstance) a.getSubject())
@@ -1769,7 +1783,7 @@ public final class OmlSearch extends OmlIndex {
      * @deprecated As of 2.5.0. Use {{@link #findInstancesRelatedAsSourceTo(NamedInstance, Set<Resource>)} instead
      */
     @Deprecated
-    public static Set<NamedInstance> findInstancesRelatedAsSourceTo(NamedInstance target) {
+    public static Set<Instance> findInstancesRelatedAsSourceTo(NamedInstance target) {
     	return findInstancesRelatedAsSourceTo(target, (Set<Resource>)null);
     }
     
@@ -1781,8 +1795,8 @@ public final class OmlSearch extends OmlIndex {
      * @param scope The scope of the search (can be null)
      * @return a set of source instances that are related by a given relation to the given target instance
      */
-    public static Set<NamedInstance> findInstancesRelatedAsSourceTo(NamedInstance target, Relation relation, Set<Resource> scope) {
-        final Set<NamedInstance> sources = new LinkedHashSet<>();
+    public static Set<Instance> findInstancesRelatedAsSourceTo(NamedInstance target, Relation relation, Set<Resource> scope) {
+        final Set<Instance> sources = new LinkedHashSet<>();
         // look in property value assertions
     	var subRelations = findAllSubTerms(relation, true, scope);
         sources.addAll(findPropertyValueAssertionsWithObject(target, scope).stream()
@@ -1810,7 +1824,7 @@ public final class OmlSearch extends OmlIndex {
      * @deprecated As of 2.5.0. Use {{@link #findInstancesRelatedAsSourceTo(NamedInstance, Relation, Set<Resource>)} instead
      */
     @Deprecated
-    public static Set<NamedInstance> findInstancesRelatedAsSourceTo(NamedInstance target, Relation relation) {
+    public static Set<Instance> findInstancesRelatedAsSourceTo(NamedInstance target, Relation relation) {
     	return findInstancesRelatedAsSourceTo(target, relation, null);
     }
     
@@ -1939,7 +1953,7 @@ public final class OmlSearch extends OmlIndex {
     public static Set<Classifier> findTypes(Instance instance, Set<Resource> scope) {
         Set<Classifier> types = new LinkedHashSet<>();
         if (instance instanceof AnonymousInstance) {
-            types.add(((AnonymousInstance) instance).getType());
+            types.addAll(instance.getTypes());
         } else if (instance instanceof NamedInstance) {
             types.addAll(findTypeAssertions((NamedInstance)instance, scope).stream().
                 map(i -> i.getType()).
@@ -1997,14 +2011,9 @@ public final class OmlSearch extends OmlIndex {
      * @return true if the given instance is typed directly by the given type; otherwise false
      */
     public static boolean findIsTypeOf(Instance instance, Classifier type, Set<Resource> scope) {
-        if (instance instanceof AnonymousInstance) {
-            return ((AnonymousInstance)instance).getType() == type;
-        } else if (instance instanceof NamedInstance) {
-            return findTypeAssertions((NamedInstance)instance, scope).stream()
-                .filter(i -> i.getType() == type)
-                .findFirst().isPresent();
-        }
-        return false;
+        return findTypes(instance, scope).stream()
+            .filter(t -> t == type)
+            .findFirst().isPresent();
     }
 
     /**
@@ -2029,14 +2038,9 @@ public final class OmlSearch extends OmlIndex {
      * @return true if the given instance is typed directly or transitively by the given type; otherwise false
      */
     public static boolean findIsKindOf(Instance instance, Classifier type, Set<Resource> scope) {
-        if (instance instanceof AnonymousInstance) {
-            return findIsSubTermOf(((AnonymousInstance)instance).getType(), type, scope);
-        } else if (instance instanceof NamedInstance) {
-            return findTypes((NamedInstance)instance, scope).stream()
-                .filter(t -> findIsSubTermOf(t, type, scope))
-                .findFirst().isPresent();
-        }
-        return false;
+        return findTypes(instance, scope).stream()
+            .filter(t -> findIsSubTermOf(t, type, scope))
+            .findFirst().isPresent();
     }
 
     /**
@@ -2060,14 +2064,20 @@ public final class OmlSearch extends OmlIndex {
      * @return a set of instances that have the given type as their direct type
      */
     public static Set<Instance> findInstancesOfType(Classifier type, Set<Resource> scope) {
+    	Set<Instance> instances = new HashSet<>();
+
     	if (type instanceof Structure) {
-    		return new LinkedHashSet<Instance>(findStructureInstancesWithType((Structure)type, scope));
+    		instances.addAll(findStructureInstancesWithType((Structure)type, scope));
     	} else if (type instanceof Entity) {
-            return findTypeAssertionsWithType((Entity)type, scope).stream()
+    		instances.addAll(findTypeAssertionsWithType((Entity)type, scope).stream()
                 .map(i -> i.getSubject())
-                .collect(Collectors.toCollection(LinkedHashSet::new));
+                .collect(Collectors.toCollection(LinkedHashSet::new)));
+    		if (type instanceof RelationEntity) {
+    			instances.addAll(findAnonymousRelationInstanceOfType((RelationEntity)type, scope));
+    		}
         }
-        return Collections.emptySet();
+    	
+        return instances;
     }
 
     /**
@@ -2108,6 +2118,45 @@ public final class OmlSearch extends OmlIndex {
     	return findInstancesOfKind(type,  null);
     }
     
+    /**
+     * Finds anonymous relation instances referencing the given entity as a type
+     * 
+     * @param entity The given relation entity
+     * @param scope The scope of the search (can be null)
+     * @return A set of referencing anonymous relation instances
+     */
+    public static Set<AnonymousRelationInstance> findAnonymousRelationInstanceOfType(RelationEntity entity, Set<Resource> scope) {
+    	Set<AnonymousRelationInstance> instances = new HashSet<>();
+    	
+    	instances.addAll(findPropertyValueAssertionsWithProperty(entity.getForwardRelation(), scope).stream()
+        	.flatMap(a -> a.getContainedValue().stream())
+        	.filter(v -> v instanceof AnonymousRelationInstance)
+        	.map(v -> (AnonymousRelationInstance)v)
+        	.collect(Collectors.toSet()));
+        
+    	if (entity.getReverseRelation() != null) {
+        	instances.addAll(findPropertyValueAssertionsWithProperty(entity.getReverseRelation(), scope).stream()
+                	.flatMap(a -> a.getContainedValue().stream())
+                	.filter(v -> v instanceof AnonymousRelationInstance)
+                	.map(v -> (AnonymousRelationInstance)v)
+                	.collect(Collectors.toSet()));
+        }
+    	
+        return instances;
+    }
+
+    /**
+     * Finds anonymous relation instances referencing the given entity as a type
+     * 
+     * @param entity The given relation entity
+     * @return A set of referencing anonymous relation instances
+     * @deprecated As of 2.5.0. Use {{@link #findAnonymousRelationInstanceOfType(RelationEntity, Set<Resource>)} instead
+     */
+    @Deprecated
+    public static Set<AnonymousRelationInstance> findAnonymousRelationInstanceOfType(RelationEntity entity) {
+    	return findAnonymousRelationInstanceOfType(entity, null);
+    }
+
     //-------------------------------------------------
     // LITERALS
     //-------------------------------------------------

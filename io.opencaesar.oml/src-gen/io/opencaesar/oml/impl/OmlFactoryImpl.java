@@ -101,6 +101,7 @@ public class OmlFactoryImpl extends EFactoryImpl implements OmlFactory {
 			case OmlPackage.CONCEPT_INSTANCE: return createConceptInstance();
 			case OmlPackage.RELATION_INSTANCE: return createRelationInstance();
 			case OmlPackage.STRUCTURE_INSTANCE: return createStructureInstance();
+			case OmlPackage.ANONYMOUS_RELATION_INSTANCE: return createAnonymousRelationInstance();
 			case OmlPackage.KEY_AXIOM: return createKeyAxiom();
 			case OmlPackage.SPECIALIZATION_AXIOM: return createSpecializationAxiom();
 			case OmlPackage.INSTANCE_ENUMERATION_AXIOM: return createInstanceEnumerationAxiom();
@@ -447,6 +448,17 @@ public class OmlFactoryImpl extends EFactoryImpl implements OmlFactory {
 	public StructureInstance createStructureInstance() {
 		StructureInstanceImpl structureInstance = new StructureInstanceImpl();
 		return structureInstance;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public AnonymousRelationInstance createAnonymousRelationInstance() {
+		AnonymousRelationInstanceImpl anonymousRelationInstance = new AnonymousRelationInstanceImpl();
+		return anonymousRelationInstance;
 	}
 
 	/**

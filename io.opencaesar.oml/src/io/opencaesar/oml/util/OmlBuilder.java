@@ -40,6 +40,7 @@ import com.google.common.collect.HashBasedTable;
 import io.opencaesar.oml.Annotation;
 import io.opencaesar.oml.AnnotationProperty;
 import io.opencaesar.oml.AnonymousInstance;
+import io.opencaesar.oml.AnonymousRelationInstance;
 import io.opencaesar.oml.Argument;
 import io.opencaesar.oml.Aspect;
 import io.opencaesar.oml.BooleanLiteral;
@@ -355,7 +356,7 @@ public class OmlBuilder {
      * @return a new annotation on the given ontology
      */
     public Annotation addAnnotation(Ontology ontology, String propertyIri, String referencedValueIri) {
-        final Annotation annotation = OmlWrite.addAnnotation(ontology, null, (Member)null);
+        final Annotation annotation = OmlWrite.addAnnotation(ontology, null, new Member[0]);
        	setCrossReference(ontology, annotation, OmlPackage.Literals.ANNOTATION__REFERENCED_VALUE, referencedValueIri);
         setCrossReference(ontology, annotation, OmlPackage.Literals.ANNOTATION__PROPERTY, propertyIri);
         return annotation;
@@ -805,6 +806,21 @@ public class OmlBuilder {
         return instance;
     }
 
+    // AnonymousRelationInstance
+
+    /**
+     * Creates an anonymous relation instance and adds it to the given ontology
+     * 
+     * @param ontology the context ontology
+     * @param targetIri the given iri of the target instance of the anonymous relation instance
+     * @return an anonymous relation instance that is added to the given ontology
+     */
+    public AnonymousRelationInstance createAnonymousRelationInstance(Ontology ontology, String targetIri) {
+        final AnonymousRelationInstance instance = OmlWrite.createAnonymousRelationInstance(ontology, null);
+        setCrossReference(ontology, instance, OmlPackage.Literals.ANONYMOUS_RELATION_INSTANCE__TARGET, targetIri);
+        return instance;
+    }
+
     // ConceptInstance
 
     /**
@@ -1066,6 +1082,46 @@ public class OmlBuilder {
         return axiom;
     }
 
+    /**
+     * Creates a property value restriction axiom for a forward relation and adds it to the given vocabulary
+     * 
+     * @param vocabulary the context vocabulary
+     * @param owner the owner (either a String representing the iri of the owning classifier, or the owning classifier equivalence axiom object)
+     * @param relationEntityIri the iri of the relation entity that owns the restricted forward relation
+     * @param containedValue the contained value of the restriction
+     * @return a property value restriction axiom that is added to the given vocabulary
+     */
+    public PropertyValueRestrictionAxiom addForwardRelationValueRestrictionAxiom(Vocabulary vocabulary, Object owner, String relationEntityIri, AnonymousInstance containedValue) {
+        final PropertyValueRestrictionAxiom axiom = OmlWrite.addPropertyValueRestrictionAxiom(vocabulary, null, null, containedValue);
+    	defer.add(() -> axiom.setProperty(resolve(RelationEntity.class, vocabulary, relationEntityIri).getForwardRelation()));
+        if (owner instanceof String) {
+        	setContainmentReference(vocabulary, (String)owner, OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS, axiom);
+        } else if (owner instanceof ClassifierEquivalenceAxiom) {
+        	((ClassifierEquivalenceAxiom)owner).getOwnedPropertyRestrictions().add(axiom);
+        }
+        return axiom;
+    }
+
+    /**
+     * Creates a property value restriction axiom for a reverse relation and adds it to the given vocabulary
+     * 
+     * @param vocabulary the context vocabulary
+     * @param owner the owner (either a String representing the iri of the owning classifier, or the owning classifier equivalence axiom object)
+     * @param relationBaseri the iri of the relation base that owns the restricted reverse relation
+     * @param containedValue the contained value of the restriction
+     * @return a property value restriction axiom that is added to the given vocabulary
+     */
+    public PropertyValueRestrictionAxiom addReverseRelationValueRestrictionAxiom(Vocabulary vocabulary, Object owner, String relationBaseri, AnonymousInstance containedValue) {
+        final PropertyValueRestrictionAxiom axiom = OmlWrite.addPropertyValueRestrictionAxiom(vocabulary, null, null, containedValue);
+    	defer.add(() -> axiom.setProperty(resolve(RelationBase.class, vocabulary, relationBaseri).getReverseRelation()));
+        if (owner instanceof String) {
+        	setContainmentReference(vocabulary, (String)owner, OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS, axiom);
+        } else if (owner instanceof ClassifierEquivalenceAxiom) {
+        	((ClassifierEquivalenceAxiom)owner).getOwnedPropertyRestrictions().add(axiom);
+        }
+        return axiom;
+    }
+
     // PropertySelfRestrictionAxiom
 
     /**
@@ -1206,9 +1262,49 @@ public class OmlBuilder {
      * @return a property value assertion that is added to the given description
      */
     public PropertyValueAssertion addPropertyValueAssertion(Ontology ontology, Object owner, String propertyIri, String...referencedValueIris) {
-        final PropertyValueAssertion assertion = OmlWrite.addPropertyValueAssertion(ontology, null, null, (NamedInstance)null);
+        final PropertyValueAssertion assertion = OmlWrite.addPropertyValueAssertion(ontology, null, null, new NamedInstance[0]);
         setCrossReferences(ontology, assertion, OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__REFERENCED_VALUE, Arrays.asList(referencedValueIris));
         setCrossReference(ontology, assertion, OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__PROPERTY, propertyIri);
+        if (owner instanceof String) {
+        	setContainmentReference(ontology, (String)owner, OmlPackage.Literals.INSTANCE__OWNED_PROPERTY_VALUES, assertion);
+        } else if (owner instanceof AnonymousInstance) {
+            ((AnonymousInstance)owner).getOwnedPropertyValues().add(assertion);
+        }
+        return assertion;
+    }
+
+    /**
+     * Creates a property value assertion for a forward relation with contained values and adds it to the given ontology
+     * 
+     * @param ontology the context ontology
+     * @param owner either an anonymous instance or the iri of a named instance
+     * @param relationEntityIri the iri of the relation entity that owns the forward relation
+     * @param containedValues the asserted contained values of the property
+     * @return a property value assertion that is added to the given description
+     */
+    public PropertyValueAssertion addForwardRelationValueAssertion(Ontology ontology, Object owner, String relationEntityIri, AnonymousInstance...containedValues) {
+        final PropertyValueAssertion assertion = OmlWrite.addPropertyValueAssertion(ontology, null, null, containedValues);
+    	defer.add(() -> assertion.setProperty(resolve(RelationEntity.class, ontology, relationEntityIri).getForwardRelation()));
+        if (owner instanceof String) {
+        	setContainmentReference(ontology, (String)owner, OmlPackage.Literals.INSTANCE__OWNED_PROPERTY_VALUES, assertion);
+        } else if (owner instanceof AnonymousInstance) {
+            ((AnonymousInstance)owner).getOwnedPropertyValues().add(assertion);
+        }
+        return assertion;
+    }
+
+    /**
+     * Creates a property value assertion for a reverse relation with contained values and adds it to the given ontology
+     * 
+     * @param ontology the context ontology
+     * @param owner either an anonymous instance or the iri of a named instance
+     * @param relationBaseIri the iri of the relation base that owns the reverse relation
+     * @param containedValues the asserted contained values of the property
+     * @return a property value assertion that is added to the given description
+     */
+    public PropertyValueAssertion addReverseRelationValueAssertion(Ontology ontology, Object owner, String relationBaseIri, AnonymousInstance...containedValues) {
+        final PropertyValueAssertion assertion = OmlWrite.addPropertyValueAssertion(ontology, null, null, containedValues);
+    	defer.add(() -> assertion.setProperty(resolve(RelationBase.class, ontology, relationBaseIri).getReverseRelation()));
         if (owner instanceof String) {
         	setContainmentReference(ontology, (String)owner, OmlPackage.Literals.INSTANCE__OWNED_PROPERTY_VALUES, assertion);
         } else if (owner instanceof AnonymousInstance) {

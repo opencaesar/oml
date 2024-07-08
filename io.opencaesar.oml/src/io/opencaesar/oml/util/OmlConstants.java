@@ -105,16 +105,26 @@ public interface OmlConstants {
     public static final String relationBase = OML_NS + "relationBase";
 
     /**
-     * The oml:sourceRelation annotation IRI
+     * The oml:hasSource annotation IRI
      */
-    public static final String sourceRelation = OML_NS + "hasSource";
+    public static final String hasSource = OML_NS + "hasSource";
 
     /**
-     * The oml:targetRelation annotation IRI
+     * The oml:hasTarget annotation IRI
      */
-    public static final String targetRelation = OML_NS + "hasTarget";
+    public static final String hasTarget = OML_NS + "hasTarget";
 
-	// OML Term IRIs 
+    /**
+     * The oml:isSourceOf annotation IRI
+     */
+    public static final String isSourceOf = OML_NS + "isSourceOf";
+
+    /**
+     * The oml:isTargetOf annotation IRI
+     */
+    public static final String isTargetOf = OML_NS + "isTargetOf";
+
+    // OML Term IRIs 
 	
     /**
      * The oml:Vocabulary IRI
@@ -211,7 +221,12 @@ public interface OmlConstants {
      */
     public static final String StructureInstance = OML_NS + "StructureInstance";
  
-	// Flags
+    /**
+     * The oml:AnonymousRelationInstance IRI
+     */
+    public static final String AnonymousRelationInstance = OML_NS + "AnonymousRelationInstance";
+
+    // Flags
 
     /**
      * A flag that can be set to <code>Boolean.True</code> in a resource set's loading options to enable 

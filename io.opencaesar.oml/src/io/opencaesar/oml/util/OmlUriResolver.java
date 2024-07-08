@@ -134,14 +134,15 @@ final class OmlUriResolver {
     }
     
     /**
-     * Resolves the given logical IRI in context of the given resource 
+     * Resolves the given logical IRI in context of the given physical URI 
      * 
-     * @param contextResource The resource that is the context of resolution
+     * @param contextURI The URI that is the context of resolution
      * @param iri The logical IRI to resolve
      * @return The resolved physical URI
      */
-    public synchronized URI resolveUri(Resource contextResource, String iri) {
-        URI folderUri = contextResource.getURI().trimSegments(1);
+    public synchronized URI resolveUri(URI contextFileURI, String iri) {
+    	File file = toFile(contextFileURI);
+    	URI folderUri = (file.isDirectory()) ? contextFileURI : contextFileURI.trimSegments(1);
         
         Map<String, URI> importMap = importCache.get(folderUri);
         if (importMap == null) {
@@ -156,7 +157,22 @@ final class OmlUriResolver {
         
         if (resolvedUri != null) {
             importMap.put(iri, resolvedUri);
-        } else {
+        } 
+        
+        return resolvedUri;
+    }
+
+    /**
+     * Resolves the given logical IRI in context of the given resource 
+     * 
+     * @param contextResource The resource that is the context of resolution
+     * @param iri The logical IRI to resolve
+     * @return The resolved physical URI
+     */
+    public synchronized URI resolveUri(Resource contextResource, String iri) {
+        URI resolvedUri = resolveUri(contextResource.getURI(), iri);
+        
+        if (resolvedUri == null) {
             ResourceSet rs = contextResource.getResourceSet();
         	if (rs.getLoadOptions().get(OmlConstants.RESOLVE_IRI_USING_RESOURCE_SET) == Boolean.TRUE) {
         		resolvedUri = resolveFromResourceSet(rs, iri);
@@ -166,7 +182,7 @@ final class OmlUriResolver {
         return resolvedUri;
     }
 
-	private URI resolveFromResourceSet(ResourceSet rs, String iri) {
+    private URI resolveFromResourceSet(ResourceSet rs, String iri) {
 		Ontology ontology = OmlRead.getOntologyByIri(rs, iri);
 		return (ontology != null) ? ontology.eResource().getURI() : null;
 	}
@@ -195,7 +211,7 @@ final class OmlUriResolver {
             }
         }
 
-        return exists(resolved) ? resolved : null;
+        return resolved;
     }
     
    public synchronized Set<URI> getResolvedUris(Resource contextResource) {
@@ -244,6 +260,29 @@ final class OmlUriResolver {
         return catalog.isResolvedUri(uri);
     }
 
+    /**
+     * Deresolves the given file URI to a logical IRI 
+     * 
+     * @param fileUri The file URI to deresolve
+     * @return The deresolved logical IRI
+     */
+    public synchronized URI deresolveUri(URI fileUri) {
+    	File file = toFile(fileUri);
+    	File folder = (file.isDirectory()) ? file : file.getParentFile();
+    	
+        OmlCatalog catalog = findCatalog(URI.createFileURI(folder.getAbsolutePath()));
+        if (catalog == null) {
+            return null;
+        }
+                
+        try {
+        	return catalog.deresolveUri(URI.createFileURI(file.getAbsolutePath()));
+        } catch (Exception e) {
+            System.err.println(e);
+            return null;
+        }
+    }
+    
     private OmlCatalog findCatalog(URI folderUri) {
         OmlCatalog catalog = null;
         final List<URI> folderUris = new ArrayList<>();

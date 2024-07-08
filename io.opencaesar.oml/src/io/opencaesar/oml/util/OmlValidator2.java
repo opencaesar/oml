@@ -35,10 +35,13 @@ import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 
+import io.opencaesar.oml.AnnotationProperty;
 import io.opencaesar.oml.AnonymousInstance;
+import io.opencaesar.oml.AnonymousRelationInstance;
 import io.opencaesar.oml.Argument;
 import io.opencaesar.oml.Aspect;
 import io.opencaesar.oml.Classifier;
@@ -413,7 +416,7 @@ public final class OmlValidator2 {
     	}
     	return true;
     }
-    
+
     // PropertyRestrictionAxiom
     
     /**
@@ -529,14 +532,23 @@ public final class OmlValidator2 {
 		                OmlPackage.Literals.PROPERTY_VALUE_RESTRICTION_AXIOM__CONTAINED_VALUE);
         	}
         } else if (property instanceof Relation) {
-        	if (object.getReferencedValue() == null) {
+        	if (object.getReferencedValue() != null) {
+        		if (!OmlSearch.findAllRanges(property, cache.scope).stream().allMatch(t -> OmlSearch.findIsKindOf(object.getReferencedValue(), (Entity)t, cache.scope))) {
+		            return report(Diagnostic.WARNING, diagnostics, object,
+			                "The instance is not in the range of relation "+property.getAbbreviatedIri(), 
+			                OmlPackage.Literals.PROPERTY_VALUE_RESTRICTION_AXIOM__REFERENCED_VALUE);
+        		}
+        	} else if (object.getContainedValue() != null) {
+        		var instance = (AnonymousRelationInstance) object.getContainedValue();
+        		if (!OmlSearch.findAllRanges(property, cache.scope).stream().allMatch(t -> OmlSearch.findIsKindOf(instance.getTarget(), (Entity)t, cache.scope))) {
+    	            return report(Diagnostic.WARNING, diagnostics, object,
+    		                "The instance is not in the range of relation "+property.getAbbreviatedIri(), 
+    		                OmlPackage.Literals.PROPERTY_VALUE_RESTRICTION_AXIOM__CONTAINED_VALUE);
+            	}        		
+        	} else {
 	            return report(Diagnostic.WARNING, diagnostics, object,
-	                "A named instance IRI is expected as the restricted value of relation "+property.getAbbreviatedIri(), 
-	                OmlPackage.Literals.PROPERTY_RESTRICTION_AXIOM__PROPERTY);
-        	} else if (!OmlSearch.findAllRanges(property, cache.scope).stream().allMatch(t -> OmlSearch.findIsKindOf(object.getReferencedValue(), (Entity)t, cache.scope))) {
-	            return report(Diagnostic.WARNING, diagnostics, object,
-		                "The instance is not in the range of relation "+property.getAbbreviatedIri(), 
-		                OmlPackage.Literals.PROPERTY_VALUE_RESTRICTION_AXIOM__REFERENCED_VALUE);
+		                "A named instance IRI is expected as the restricted value of relation "+property.getAbbreviatedIri(), 
+		                OmlPackage.Literals.PROPERTY_RESTRICTION_AXIOM__PROPERTY);
         	}
         }
         return true;
@@ -1161,6 +1173,62 @@ public final class OmlValidator2 {
         	}
         }
         return true;
+    }
+
+    /**
+     * Checks that a property value assertion with an anonymous relation instance as a subject has a valid property
+     * 
+     * @param object The property value assertion to check
+     * @param diagnostics The validation diagnostics
+     * @param context The object-to-object context map
+     * @return True if the rules is satisfied; False otherwise
+     */
+    boolean validateAnonymousRelationInstancePredicate(PropertyValueAssertion object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        if (object.getValue() instanceof AnonymousRelationInstance) {
+        	if (!(object.getProperty() instanceof ForwardRelation || object.getProperty() instanceof ReverseRelation)) {
+	        	return report(Diagnostic.ERROR, diagnostics, object,
+	                "Property "+object.getProperty().getAbbreviatedIri()+" is not a forwrd nor a reverse relation",
+	                OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__PROPERTY);
+        	}
+        }
+        return true;
+    }
+
+    // Member
+    
+    /**
+     * Checks if the member is deprecated
+     * @return True if the member is deprecated; False otherwise
+     */
+    boolean validateDeprecatedReference(Element object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+    	var result = true;
+		final var deprecatedProperty = (AnnotationProperty) OmlRead.getMemberByIri(object.eResource().getResourceSet(), "http://www.w3.org/2002/07/owl#deprecated");
+		if (deprecatedProperty != null) {
+	    	final var cache = (Cache) context.get(CACHE);
+			for (var eRef : object.eClass().getEAllReferences()) {
+				if (!eRef.isContainment() && !eRef.isContainer() && OmlPackage.Literals.MEMBER.isSuperTypeOf(eRef.getEReferenceType())) {
+					List<Member> members = getValues(object, eRef);
+					for (var member : members) {
+						if (OmlSearch.findIsAnnotatedBy(member, deprecatedProperty, cache.scope)) {
+							report(Diagnostic.WARNING, diagnostics, object,
+									"Member "+member.getAbbreviatedIri()+" is deprecated", eRef);
+						}
+					}
+				}
+			}
+		}
+		return result;
+    }
+
+    @SuppressWarnings("unchecked")
+	private <T> List<T> getValues(EObject eObj, EReference eRef) {
+    	if (eRef.isMany()) {
+    		return (List<T>) eObj.eGet(eRef);
+    	} else if (eObj.eGet(eRef) != null) {
+    		return Collections.singletonList((T)eObj.eGet(eRef));
+    	} else {
+    		return Collections.emptyList();
+    	}
     }
 
 }

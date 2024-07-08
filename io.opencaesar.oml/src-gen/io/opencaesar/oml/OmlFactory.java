@@ -245,6 +245,15 @@ public interface OmlFactory extends EFactory {
 	StructureInstance createStructureInstance();
 
 	/**
+	 * Returns a new object of class '<em>Anonymous Relation Instance</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Anonymous Relation Instance</em>'.
+	 * @generated
+	 */
+	AnonymousRelationInstance createAnonymousRelationInstance();
+
+	/**
 	 * Returns a new object of class '<em>Key Axiom</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

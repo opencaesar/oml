@@ -669,6 +669,15 @@ public class OmlSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case OmlPackage.ANONYMOUS_RELATION_INSTANCE: {
+				AnonymousRelationInstance anonymousRelationInstance = (AnonymousRelationInstance)theEObject;
+				T result = caseAnonymousRelationInstance(anonymousRelationInstance);
+				if (result == null) result = caseAnonymousInstance(anonymousRelationInstance);
+				if (result == null) result = caseInstance(anonymousRelationInstance);
+				if (result == null) result = caseElement(anonymousRelationInstance);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case OmlPackage.KEY_AXIOM: {
 				KeyAxiom keyAxiom = (KeyAxiom)theEObject;
 				T result = caseKeyAxiom(keyAxiom);
@@ -1661,6 +1670,21 @@ public class OmlSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseStructureInstance(StructureInstance object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Anonymous Relation Instance</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Anonymous Relation Instance</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAnonymousRelationInstance(AnonymousRelationInstance object) {
 		return null;
 	}
 

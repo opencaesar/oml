@@ -18,10 +18,15 @@
  */
 package io.opencaesar.oml.impl;
 
+import io.opencaesar.oml.AnonymousRelationInstance;
 import io.opencaesar.oml.Classifier;
+import io.opencaesar.oml.ForwardRelation;
+import io.opencaesar.oml.NamedInstance;
 import io.opencaesar.oml.OmlPackage;
-import io.opencaesar.oml.Structure;
-import io.opencaesar.oml.StructureInstance;
+import io.opencaesar.oml.RelationBase;
+import io.opencaesar.oml.RelationEntity;
+import io.opencaesar.oml.ReverseRelation;
+import io.opencaesar.oml.SemanticProperty;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -37,34 +42,34 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Structure Instance</b></em>'.
+ * An implementation of the model object '<em><b>Anonymous Relation Instance</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link io.opencaesar.oml.impl.StructureInstanceImpl#getType <em>Type</em>}</li>
+ *   <li>{@link io.opencaesar.oml.impl.AnonymousRelationInstanceImpl#getTarget <em>Target</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class StructureInstanceImpl extends AnonymousInstanceImpl implements StructureInstance {
+public class AnonymousRelationInstanceImpl extends AnonymousInstanceImpl implements AnonymousRelationInstance {
 	/**
-	 * The cached value of the '{@link #getType() <em>Type</em>}' reference.
+	 * The cached value of the '{@link #getTarget() <em>Target</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getType()
+	 * @see #getTarget()
 	 * @generated
 	 * @ordered
 	 */
-	protected Structure type;
+	protected NamedInstance target;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected StructureInstanceImpl() {
+	protected AnonymousRelationInstanceImpl() {
 		super();
 	}
 
@@ -75,7 +80,7 @@ public class StructureInstanceImpl extends AnonymousInstanceImpl implements Stru
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return OmlPackage.Literals.STRUCTURE_INSTANCE;
+		return OmlPackage.Literals.ANONYMOUS_RELATION_INSTANCE;
 	}
 
 	/**
@@ -84,16 +89,16 @@ public class StructureInstanceImpl extends AnonymousInstanceImpl implements Stru
 	 * @generated
 	 */
 	@Override
-	public Structure getType() {
-		if (type != null && type.eIsProxy()) {
-			InternalEObject oldType = (InternalEObject)type;
-			type = (Structure)eResolveProxy(oldType);
-			if (type != oldType) {
+	public NamedInstance getTarget() {
+		if (target != null && target.eIsProxy()) {
+			InternalEObject oldTarget = (InternalEObject)target;
+			target = (NamedInstance)eResolveProxy(oldTarget);
+			if (target != oldTarget) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, OmlPackage.STRUCTURE_INSTANCE__TYPE, oldType, type));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, OmlPackage.ANONYMOUS_RELATION_INSTANCE__TARGET, oldTarget, target));
 			}
 		}
-		return type;
+		return target;
 	}
 
 	/**
@@ -101,8 +106,8 @@ public class StructureInstanceImpl extends AnonymousInstanceImpl implements Stru
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Structure basicGetType() {
-		return type;
+	public NamedInstance basicGetTarget() {
+		return target;
 	}
 
 	/**
@@ -111,11 +116,34 @@ public class StructureInstanceImpl extends AnonymousInstanceImpl implements Stru
 	 * @generated
 	 */
 	@Override
-	public void setType(Structure newType) {
-		Structure oldType = type;
-		type = newType;
+	public void setTarget(NamedInstance newTarget) {
+		NamedInstance oldTarget = target;
+		target = newTarget;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.STRUCTURE_INSTANCE__TYPE, oldType, type));
+			eNotify(new ENotificationImpl(this, Notification.SET, OmlPackage.ANONYMOUS_RELATION_INSTANCE__TARGET, oldTarget, target));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public RelationEntity getType() {
+		final SemanticProperty property = this.getIsValueOfProperty();
+		if ((property instanceof ForwardRelation)) {
+			return ((ForwardRelation)property).getRelationEntity();
+		}
+		else {
+			if ((property instanceof ReverseRelation)) {
+				RelationBase _relationBase = ((ReverseRelation)property).getRelationBase();
+				if ((_relationBase instanceof RelationEntity)) {
+					RelationBase _relationBase_1 = ((ReverseRelation)property).getRelationBase();
+					return ((RelationEntity) _relationBase_1);
+				}
+			}
+		}
+		return null;
 	}
 
 	/**
@@ -125,10 +153,9 @@ public class StructureInstanceImpl extends AnonymousInstanceImpl implements Stru
 	 */
 	@Override
 	public EList<Classifier> getTypes() {
-		Structure _type = this.getType();
-		boolean _tripleNotEquals = (_type != null);
-		if (_tripleNotEquals) {
-			return ECollections.<Classifier>singletonEList(this.getType());
+		RelationEntity type = this.getType();
+		if ((type != null)) {
+			return ECollections.<Classifier>singletonEList(type);
 		}
 		else {
 			return ECollections.<Classifier>emptyEList();
@@ -143,9 +170,9 @@ public class StructureInstanceImpl extends AnonymousInstanceImpl implements Stru
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case OmlPackage.STRUCTURE_INSTANCE__TYPE:
-				if (resolve) return getType();
-				return basicGetType();
+			case OmlPackage.ANONYMOUS_RELATION_INSTANCE__TARGET:
+				if (resolve) return getTarget();
+				return basicGetTarget();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -158,8 +185,8 @@ public class StructureInstanceImpl extends AnonymousInstanceImpl implements Stru
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case OmlPackage.STRUCTURE_INSTANCE__TYPE:
-				setType((Structure)newValue);
+			case OmlPackage.ANONYMOUS_RELATION_INSTANCE__TARGET:
+				setTarget((NamedInstance)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -173,8 +200,8 @@ public class StructureInstanceImpl extends AnonymousInstanceImpl implements Stru
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case OmlPackage.STRUCTURE_INSTANCE__TYPE:
-				setType((Structure)null);
+			case OmlPackage.ANONYMOUS_RELATION_INSTANCE__TARGET:
+				setTarget((NamedInstance)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -188,8 +215,8 @@ public class StructureInstanceImpl extends AnonymousInstanceImpl implements Stru
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case OmlPackage.STRUCTURE_INSTANCE__TYPE:
-				return type != null;
+			case OmlPackage.ANONYMOUS_RELATION_INSTANCE__TARGET:
+				return target != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -202,10 +229,12 @@ public class StructureInstanceImpl extends AnonymousInstanceImpl implements Stru
 	@Override
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
-			case OmlPackage.STRUCTURE_INSTANCE___GET_TYPES:
+			case OmlPackage.ANONYMOUS_RELATION_INSTANCE___GET_TYPE:
+				return getType();
+			case OmlPackage.ANONYMOUS_RELATION_INSTANCE___GET_TYPES:
 				return getTypes();
 		}
 		return super.eInvoke(operationID, arguments);
 	}
 
-} //StructureInstanceImpl
+} //AnonymousRelationInstanceImpl

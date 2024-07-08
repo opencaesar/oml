@@ -103,10 +103,16 @@ public final class OmlRead {
      * @param recursive the function to recurse with
      * @return the recursive closure of applying the given function on the given root
      */
-    public static <T, V extends T> Collection<T> closure(V root, boolean includeRoot, Function<T, Collection<T>> recursive) {
+    @SuppressWarnings("unchecked")
+	public static <V, T extends V> Collection<T> closure(V root, boolean includeRoot, Function<V, Collection<T>> recursive) {
         final Set<T> results = new LinkedHashSet<>();
-        if (includeRoot)
-            results.add(root);
+        if (includeRoot) {
+        	try {
+        		results.add((T)root);
+        	} catch (ClassCastException e) {
+        		// IGNORE
+        	}
+        }
         closure(root, results, recursive);
         return results;
     }
@@ -120,7 +126,7 @@ public final class OmlRead {
      * @param cache the cache of results already collected before the recursion starts
      * @param recursive the function to recurse with
      */
-    private static <T, V extends T> void closure(V root, Set<T> cache, Function<T, Collection<T>> recursive) {
+    private static <V, T extends V> void closure(V root, Set<T> cache, Function<V, Collection<T>> recursive) {
     	Collection<T> results = recursive.apply(root);
         if (results == null) {
             results = Collections.emptyList();
@@ -164,7 +170,7 @@ public final class OmlRead {
      * @param recursive the function to recurse with
      * @return true if the given item is in the closure; otherwise false
      */
-    private static <T, V extends T> boolean isInClosure(T item, V root, Set<T> cache, Function<T, Collection<T>> recursive) {
+    private static <V, T extends V> boolean isInClosure(T item, V root, Set<T> cache, Function<V, Collection<T>> recursive) {
     	Collection<T> results = recursive.apply(root);
         if (results == null) {
             results = Collections.emptyList();
@@ -242,6 +248,20 @@ public final class OmlRead {
     }
 
     /**
+     * Gets a URI that is resolved by the given IRI in the context of the given physical URI.
+     * 
+     * @param context The physical URI to use as context of URI resolution
+     * @param iri The IRI to resolve
+     * @return The resolved URI
+     */
+    public static URI getResolvedUri(URI context, String iri) {
+        if (context == null || iri == null || iri.isEmpty()) {
+            return null;
+        }
+        return OmlUriResolver.getInstance().resolveUri(context, iri);
+    }
+
+    /**
      * Gets a URI that is resolved by the given IRI in the context of the given OML resource.
      * 
      * @param context The OML resource to use as context of URI resolution
@@ -268,6 +288,19 @@ public final class OmlRead {
         return OmlUriResolver.getInstance().getResolvedUris(context);
     }
     
+    /**
+     * Gets a logical IRI that is deresolved from the given file URI.
+     * 
+     * @param fileUri The file URI to deresolve
+     * @return The deresolved logical IRI
+     */
+    public static URI getDeresolvedIri(URI fileUri) {
+        if (fileUri == null) {
+            return null;
+        }
+        return OmlUriResolver.getInstance().deresolveUri(fileUri);
+    }
+
     //-------------------------------------------------
     // Ontologies
     //-------------------------------------------------
@@ -559,7 +592,7 @@ public final class OmlRead {
     }
     
     /**
-     * Gets a member with the given IRI defined by the given ontology or its imports
+     * Gets a member with the given IRI defined by the given ontology or its direct imports
      * 
      * @param ontology the given ontology
      * @param iri the IRI of the member
@@ -591,7 +624,7 @@ public final class OmlRead {
     }
 
     /**
-     * Gets a member with the given abbreviated IRI defined by the given ontology or its imports
+     * Gets a member with the given abbreviated IRI defined by the given ontology or its direct imports
      * 
      * @param ontology the given ontology
      * @param iri the abbreviated IRI of the member
@@ -1056,7 +1089,7 @@ public final class OmlRead {
     public static List<Classifier> getTypes(Instance instance) {
        var types = new ArrayList<Classifier>();
         if (instance instanceof AnonymousInstance) {
-            types.add(((AnonymousInstance) instance).getType());
+            types.addAll(instance.getTypes());
         } else if (instance instanceof NamedInstance) {
             types.addAll(((NamedInstance)instance).getOwnedTypes().stream().
                 map(i -> i.getType()).

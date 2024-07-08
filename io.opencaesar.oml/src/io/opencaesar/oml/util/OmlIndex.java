@@ -34,6 +34,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil.UsageCrossReferencer;
 
 import io.opencaesar.oml.Annotation;
 import io.opencaesar.oml.AnnotationProperty;
+import io.opencaesar.oml.AnonymousRelationInstance;
 import io.opencaesar.oml.Argument;
 import io.opencaesar.oml.Aspect;
 import io.opencaesar.oml.BuiltIn;
@@ -424,6 +425,31 @@ public class OmlIndex {
     @Deprecated
     public static Set<StructureInstance> findStructureInstancesWithType(Structure type) {
         return findStructureInstancesWithType(type, null);
+    }
+
+    // AnonymousRelationInstance
+    
+    /**
+     * Finds anonymous relation instances referencing the given instance as target
+     * 
+     * @param target The referenced target
+     * @param scope The scope of the search (can be null)
+     * @return A set of referencing anonymous relation instances
+     */
+    public static Set<AnonymousRelationInstance> findAnonymousRelationInstanceWithTarget(NamedInstance target, Set<Resource> scope) {
+        return findInverseReferencers(target, OmlPackage.Literals.ANONYMOUS_RELATION_INSTANCE__TARGET, AnonymousRelationInstance.class, scope);
+    }
+    
+    /**
+     * Finds anonymous relation instances referencing the given instance as target
+     * 
+     * @param target The referenced target
+     * @return A set of referencing anonymous relation instances
+     * @deprecated As of 2.5.0. Use {{@link #findAnonymousRelationInstanceWithTarget(NamedInstance, Set<Resource>)} instead
+     */
+    @Deprecated
+    public static Set<AnonymousRelationInstance> findAnonymousRelationInstanceWithTarget(NamedInstance target) {
+        return findAnonymousRelationInstanceWithTarget(target, null);
     }
 
     // RelationInstance

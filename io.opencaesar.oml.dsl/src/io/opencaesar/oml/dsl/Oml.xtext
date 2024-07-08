@@ -239,13 +239,19 @@ BuiltIn:
 	('builtin' name=ID | 'ref' 'builtin' ref=[BuiltIn|Ref]);
 
 AnonymousInstance:
-	StructureInstance;
+	StructureInstance |
+	AnonymousRelationInstance;
 
 StructureInstance:
 	type=[Structure|Ref] '['
 		ownedPropertyValues+=PropertyValueAssertion*
 	']';
 	
+AnonymousRelationInstance:
+	target=[NamedInstance|Ref] 'with' '['
+		ownedPropertyValues+=PropertyValueAssertion*
+	']';
+
 NamedInstance:
 	ConceptInstance |
 	RelationInstance;

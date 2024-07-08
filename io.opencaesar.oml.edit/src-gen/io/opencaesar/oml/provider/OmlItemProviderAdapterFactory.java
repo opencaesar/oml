@@ -617,6 +617,29 @@ public class OmlItemProviderAdapterFactory extends OmlAdapterFactory implements 
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.AnonymousRelationInstance} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected AnonymousRelationInstanceItemProvider anonymousRelationInstanceItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link io.opencaesar.oml.AnonymousRelationInstance}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createAnonymousRelationInstanceAdapter() {
+		if (anonymousRelationInstanceItemProvider == null) {
+			anonymousRelationInstanceItemProvider = new AnonymousRelationInstanceItemProvider(this);
+		}
+
+		return anonymousRelationInstanceItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.KeyAxiom} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1296,6 +1319,7 @@ public class OmlItemProviderAdapterFactory extends OmlAdapterFactory implements 
 		if (conceptInstanceItemProvider != null) conceptInstanceItemProvider.dispose();
 		if (relationInstanceItemProvider != null) relationInstanceItemProvider.dispose();
 		if (structureInstanceItemProvider != null) structureInstanceItemProvider.dispose();
+		if (anonymousRelationInstanceItemProvider != null) anonymousRelationInstanceItemProvider.dispose();
 		if (keyAxiomItemProvider != null) keyAxiomItemProvider.dispose();
 		if (specializationAxiomItemProvider != null) specializationAxiomItemProvider.dispose();
 		if (instanceEnumerationAxiomItemProvider != null) instanceEnumerationAxiomItemProvider.dispose();

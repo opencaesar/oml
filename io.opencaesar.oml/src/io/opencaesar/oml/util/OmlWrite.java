@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.EReference;
 import io.opencaesar.oml.Annotation;
 import io.opencaesar.oml.AnnotationProperty;
 import io.opencaesar.oml.AnonymousInstance;
+import io.opencaesar.oml.AnonymousRelationInstance;
 import io.opencaesar.oml.Argument;
 import io.opencaesar.oml.Aspect;
 import io.opencaesar.oml.BooleanLiteral;
@@ -623,6 +624,21 @@ public class OmlWrite {
     public static StructureInstance createStructureInstance(Ontology ontology, Structure structure) {
         final StructureInstance instance = create(StructureInstance.class);
         setCrossReference(ontology, instance, OmlPackage.Literals.STRUCTURE_INSTANCE__TYPE, structure);
+        return instance;
+    }
+
+    // AnonymousRelationInstance
+
+    /**
+     * Creates an anonymous relation instance and adds it to the given ontology
+     * 
+     * @param ontology the context ontology
+     * @param target the given instance that is the target of the anonymous relation instance
+     * @return an anonymous relation instance that is added to the given ontology
+     */
+    public static AnonymousRelationInstance createAnonymousRelationInstance(Ontology ontology, NamedInstance target) {
+        final AnonymousRelationInstance instance = create(AnonymousRelationInstance.class);
+        setCrossReference(ontology, instance, OmlPackage.Literals.ANONYMOUS_RELATION_INSTANCE__TARGET, target);
         return instance;
     }
 

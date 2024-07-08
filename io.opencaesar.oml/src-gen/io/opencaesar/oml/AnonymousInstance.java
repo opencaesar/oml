@@ -18,7 +18,6 @@
  */
 package io.opencaesar.oml;
 
-import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -101,19 +100,11 @@ public interface AnonymousInstance extends Instance {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Get the type of the anonymous instance
+	 * Gets the property that this instance is specified as a value of
 	 * <!-- end-model-doc -->
 	 * @model kind="operation" unique="false"
 	 * @generated
 	 */
-	Classifier getType();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model kind="operation" unique="false"
-	 * @generated
-	 */
-	EList<Classifier> getTypes();
+	SemanticProperty getIsValueOfProperty();
 
 } // AnonymousInstance

@@ -617,9 +617,9 @@ abstract class Type extends SpecializableTerm {
 
 /*
  * RelationBase is a specializable term that is the abstract superclass of a relation from a source [=entity=] to a target [=entity=].
- * It can optionally name a [=ReverseRelation=] whose domain is the target and whose range is the source. Such relation can only be
- * specified on a relation base definition not a ref to an existing one. A relation base can be characterized with several 
- * boolean flags that represent its DL semantics. Such flags apply conversely to the [=ReverseRelation=] (if named). 
+ * It can optionally name a [=ReverseRelation=](on a relation base definition not a ref) whose domain is the target and whose range 
+ * is the source. A relation base can be characterized with several boolean flags that represent its DL semantics. Such flags apply conversely
+ * to the [=ReverseRelation=] (if named). 
  */
 @Bikeshed(heading="Relations")
 abstract class RelationBase extends SpecializableTerm {
@@ -1157,13 +1157,14 @@ abstract class AnonymousInstance extends Instance {
      */
     container PropertyValueRestrictionAxiom[?] owningAxiom opposite containedValue
 	/*
-	 * Get the type of the anonymous instance
+	 * Gets the property that this instance is specified as a value of
 	 */
-    op Classifier getType()
-
-    op Classifier[] getTypes() {
-    	return getType().singletonEList()
-    }
+    op SemanticProperty getIsValueOfProperty() {
+    	if (owningAssertion !== null) 
+    		owningAssertion.property
+    	else if (owningAxiom !== null)
+    		owningAxiom.property
+	}
 }
 
 ////////////////////////////////////////
@@ -1214,6 +1215,49 @@ class StructureInstance extends AnonymousInstance {
      * The type of this instance
      */
     refers Structure[1] ^type
+
+    op Classifier[] getTypes() {
+    	if (^type !== null)
+    	 	return ^type.singletonEList()
+    	else
+    		return ECollections.emptyEList
+    }
+}
+
+/*
+ * AnonymousRelationInstance is an [=AnonymousInstance=] of a [=RelationEntity=] that reifies
+ * the forward or reverse relation referenced by the owning assertion or axiom. The anonymous
+ * relation instances specifies a target instance. The source is assumed to be either
+ * the instance that owns the owningAssertion, or any instance typed by the owningAxiom's 
+ * restricted entity.
+ */
+@Bikeshed(heading="Instances")
+class AnonymousRelationInstance extends AnonymousInstance {
+    /*
+     * An instance that is the target of this relation instance
+     */
+    refers NamedInstance[1] target
+	/*
+	 * Gets the relation entity that is the type of this instance
+	 */
+    op RelationEntity getType() {
+    	val property = getIsValueOfProperty()
+    	if (property instanceof ForwardRelation) {
+    		return property.relationEntity
+    	} else if (property instanceof ReverseRelation) {
+    		if (property.relationBase instanceof RelationEntity) {
+    			return (property.relationBase as RelationEntity)
+    		}
+    	}
+    }
+
+    op Classifier[] getTypes() {
+    	var ^type = getType()
+    	if (^type !== null)
+    	 	return ^type.singletonEList()
+    	else
+    		return ECollections.emptyEList
+	}
 }
 
 ////////////////////////////////////////
@@ -1645,7 +1689,10 @@ class PropertyValueAssertion extends Assertion {
         }
     }
     op Element[*] getObject() {
-    	getValue()
+    	if (!containedValue.empty)
+    		containedValue.map[v | if (v instanceof AnonymousRelationInstance) v.target else v ]
+    	else
+    		getValue()
     }
 }
 

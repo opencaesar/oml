@@ -148,7 +148,10 @@ public class OmlProposalProvider extends AbstractOmlProposalProvider {
 		var prefix2 = prefix;
 		// match an abbreviated iri proposal if the name simply matches 
 		if (prefix.contains(":") && proposal.startsWith("<") && proposal.endsWith(">")) {
-			prefix2 = prefix.split(":")[1];
+			var parts = prefix.split(":");
+			if (parts.length == 2) {
+				prefix2 = parts[1];
+			}
 		}
 		return super.isValidProposal(proposal, prefix2, context);
 	}

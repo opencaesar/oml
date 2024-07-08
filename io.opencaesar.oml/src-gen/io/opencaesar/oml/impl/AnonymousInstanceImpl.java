@@ -19,17 +19,16 @@
 package io.opencaesar.oml.impl;
 
 import io.opencaesar.oml.AnonymousInstance;
-import io.opencaesar.oml.Classifier;
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.PropertyValueAssertion;
 import io.opencaesar.oml.PropertyValueRestrictionAxiom;
+import io.opencaesar.oml.SemanticProperty;
 
 import java.lang.reflect.InvocationTargetException;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
-import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
@@ -185,20 +184,23 @@ public abstract class AnonymousInstanceImpl extends InstanceImpl implements Anon
 	 * @generated
 	 */
 	@Override
-	public Classifier getType() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EList<Classifier> getTypes() {
-		return ECollections.<Classifier>singletonEList(this.getType());
+	public SemanticProperty getIsValueOfProperty() {
+		SemanticProperty _xifexpression = null;
+		PropertyValueAssertion _owningAssertion = this.getOwningAssertion();
+		boolean _tripleNotEquals = (_owningAssertion != null);
+		if (_tripleNotEquals) {
+			_xifexpression = this.getOwningAssertion().getProperty();
+		}
+		else {
+			SemanticProperty _xifexpression_1 = null;
+			PropertyValueRestrictionAxiom _owningAxiom = this.getOwningAxiom();
+			boolean _tripleNotEquals_1 = (_owningAxiom != null);
+			if (_tripleNotEquals_1) {
+				_xifexpression_1 = this.getOwningAxiom().getProperty();
+			}
+			_xifexpression = _xifexpression_1;
+		}
+		return _xifexpression;
 	}
 
 	/**
@@ -331,10 +333,8 @@ public abstract class AnonymousInstanceImpl extends InstanceImpl implements Anon
 	@Override
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
-			case OmlPackage.ANONYMOUS_INSTANCE___GET_TYPE:
-				return getType();
-			case OmlPackage.ANONYMOUS_INSTANCE___GET_TYPES:
-				return getTypes();
+			case OmlPackage.ANONYMOUS_INSTANCE___GET_IS_VALUE_OF_PROPERTY:
+				return getIsValueOfProperty();
 		}
 		return super.eInvoke(operationID, arguments);
 	}
