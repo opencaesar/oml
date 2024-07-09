@@ -25,10 +25,10 @@ jobs:
         git config --global user.email "melaasar@gmail.com"
         git config --global user.name "Maged Elaasar"
 
-	- name: Set up Maven
-	  uses: stCarolas/setup-maven@v5
-	  with:
-	    maven-version: 3.9.8
+    - name: Set up Maven
+      uses: stCarolas/setup-maven@v5
+      with:
+        maven-version: 3.9.8
 
     - name: Publish repository
       run: mvn deploy -Prelease-composite -Dgithub-update-repo=https://x-access-token:${ACTIONS_TOKEN}@github.com/opencaesar/oml-p2
