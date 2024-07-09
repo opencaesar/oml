@@ -14,16 +14,13 @@ subprojects {
 	group = 'io.opencaesar.oml'
 	version = rootProject.file('version.txt').text.trim()
 
-	ext.xtextVersion = '2.31.0'
+	ext.xtextVersion = '2.35.0'
 	ext.xcoreVersion = '1.22.0'
 	ext.xcoreLibVersion = '1.7.0'
 	ext.xmlResolverVersion = '1.2'
-	ext.emfJsonVersion = '2.1.0'
-	ext.gsonVersion = '2.9.0'
-	ext.guavaVersion = '31.1-jre'
-	ext.lsp4jVersion = '0.17.0'
-	ext.elkVersion = '0.8.1'
-	ext.sprottyVersion = '0.12.0'
+	ext.emfJsonVersion = '2.2.0'
+	ext.gsonVersion = '2.11.0'
+	ext.guavaVersion = '33.2.1-jre'
 
 	repositories {
 		mavenLocal()
@@ -39,10 +36,14 @@ subprojects {
 		api platform("org.eclipse.xtext:xtext-dev-bom:${xtextVersion}")
 	}
 
-	sourceCompatibility = '11'
-	targetCompatibility = '11'
+	sourceCompatibility = '17'
+	targetCompatibility = '17'
 
 	configurations.all {
 		exclude group: 'asm'
+	}
+	
+	tasks.withType(JavaCompile) {
+    	options.deprecation = true
 	}
 }

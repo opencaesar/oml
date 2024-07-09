@@ -33,6 +33,7 @@ import org.eclipse.xtext.util.internal.Log;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
+import com.google.gson.Strictness;
 import com.google.gson.internal.Streams;
 import com.google.gson.stream.JsonReader;
 
@@ -88,7 +89,7 @@ public class JsonFileBasedPreferenceValues extends MapBasedPreferenceValues {
 			clear();
 			final var bytes = Files.readAllBytes(path);
 			final var reader = new JsonReader(new BufferedReader(new InputStreamReader(new ByteArrayInputStream(bytes))));
-			reader.setLenient(true);
+			reader.setStrictness(Strictness.LENIENT);
 			final var object = Streams.parse(reader);
 			if (object instanceof JsonObject) {		
 				internalFillMap(null, (JsonObject)object);
