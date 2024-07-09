@@ -11,7 +11,7 @@ Require-Bundle: org.eclipse.xtext.ide,
  org.eclipse.xtext.xbase.ide,
  org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
  io.opencaesar.oml.dsl
-Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-RequiredExecutionEnvironment: JavaSE-17
 Export-Package: io.opencaesar.oml.dsl.ide,
  io.opencaesar.oml.dsl.ide.contentassist.antlr,
  io.opencaesar.oml.dsl.ide.contentassist.antlr.internal

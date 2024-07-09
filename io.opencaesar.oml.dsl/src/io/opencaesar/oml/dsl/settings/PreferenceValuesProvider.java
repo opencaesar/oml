@@ -23,8 +23,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.inject.Singleton;
-
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -42,7 +40,6 @@ import com.google.common.base.StandardSystemProperty;
 import com.google.inject.Inject;
 
 @Log
-@Singleton
 @SuppressWarnings("all")
 public class PreferenceValuesProvider implements IPreferenceValuesProvider {
 

@@ -8,7 +8,7 @@ Bundle-ClassPath: .
 Bundle-Activator: io.opencaesar.oml.presentation.OmlEditorPlugin$Implementation
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-RequiredExecutionEnvironment: JavaSE-17
 Export-Package: io.opencaesar.oml.presentation
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.core.resources,

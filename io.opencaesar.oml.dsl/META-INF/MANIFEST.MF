@@ -18,7 +18,7 @@ Require-Bundle: org.eclipse.xtext,
  io.opencaesar.oml,
  org.eclipse.emf.ecore.xcore,
  com.google.gson
-Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-RequiredExecutionEnvironment: JavaSE-17
 Export-Package: io.opencaesar.oml.dsl,
  io.opencaesar.oml.dsl.conversion,
  io.opencaesar.oml.dsl.formatting2,

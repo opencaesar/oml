@@ -20,7 +20,7 @@ Require-Bundle: org.eclipse.xtext.ui,
  io.opencaesar.oml.dsl,
  io.opencaesar.oml.dsl.ide 
 Import-Package: org.apache.log4j
-Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-RequiredExecutionEnvironment: JavaSE-17
 Export-Package: io.opencaesar.oml.dsl.ui,
  io.opencaesar.oml.dsl.ui.contentassist,
  io.opencaesar.oml.dsl.ui.hyperlinking,
