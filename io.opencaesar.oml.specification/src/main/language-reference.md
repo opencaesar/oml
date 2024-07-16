@@ -1152,7 +1152,7 @@ The following example shows a vocabulary that defines a concept *Assembly* with 
 
 `description` `<`http://com.xyz/methodology/functions#`>` `as` functions `{`
     `uses` `<`http://com.xyz/methodology/mission#`>` `as` mission
-    `ci` F1 `:` mission:Function
+    `instance` F1 `:` mission:Function
 }
 </pre>
 
@@ -1333,7 +1333,7 @@ The following example description *subsystem1* extends two other descriptions, *
     `extends` `<`http://com.xyz/methodology/system1/subsystem1#`>` `as` subsystem1
     `extends` `<`http://com.xyz/methodology/system1/subsystem2#`>` `as` subsystem2
 
-    `ci` System1 `:` mission:Component `[`
+    `instance` System1 `:` mission:Component `[`
         mission:aggregates subsystem1:Subsystem1    // a cross-reference Subsystem subsystem1
         mission:aggregates subsystem2:Subsystem2    // a cross-reference Subsystem subsystem2
     `]`
@@ -1355,21 +1355,21 @@ In the following example description, the *mission* vocabulary is used to descri
 `description` `<`http://com.xyz/system/components#`>` `as` components `{`
     `uses` `<`http://com.xyz/methodology/mission#`>` `as` mission
 
-    `ci` System1 `:` mission:Component     // a cross-reference to concept Component
+    `instance` System1 `:` mission:Component     // a cross-reference to concept Component
 `}`
 </pre>
 
 ### Instances ### {#Instances-LR}
 
-Instances represent objects or data in a given system. They are described using terms (types and properties) from some vocabulary. Specifically, they can be given types and have assertions on properties in the domain of those types. Instances can either be named ([Concept Instance](#ConceptInstance-LR) and [Relation Instance](#RelationInstance-LR)), in which case they are specified as members of some description, or they can be anonymous ([Structure Instance](#StructureInstance-LR)), in which case they defined as values of [semantic properties](SemanticProperty-LR) in the context of other (named or anonymous) instances.
+Instances represent objects or data in a given system. They are described using terms (types and properties) from some vocabulary. Specifically, they can be given types and have assertions on properties in the domain of those types. Instances can either be named ([Concept Instance](#ConceptInstance-LR) and [Relation Instance](#RelationInstance-LR)), in which case they are specified as members of some description, or they can be anonymous ([Structure Instance](#StructureInstance-LR) and [Anonymous Relation Instance](#AnonymousRelationInstance-LR)), in which case they defined as values of [semantic properties](SemanticProperty-LR) in the context of other (named or anonymous) instances.
 
 #### Concept Instance #### {#ConceptInstance-LR}
 
-A [concept instance](#ConceptInstance-Syntax) is a named instance defined as a member of a description and can be typed by concepts (from some imported vocabulary). The concept instance is declared with the keyword `ci` and a name ID. It can optionally be followed by a `:` and the IRIs of one or more concepts that are considered types of the instance. It can also optionally be followed by a pair of square brackets `[` `]` that holds assertions about the instance.
+A [concept instance](#ConceptInstance-Syntax) is a named instance defined as a member of a description and can be typed by concepts (from some imported vocabulary). The concept instance is declared with the keyword `instance` and a name ID. It can optionally be followed by a `:` and the IRIs of one or more concepts that are considered types of the instance. It can also optionally be followed by a pair of square brackets `[` `]` that holds assertions about the instance.
 
 <pre class="highlight highlight-html">
 	Annotation*
-	`ci` ID (`:` [Concept|IRI] (`,` [Concept|IRI])*)? (`[`
+	`instance` ID (`:` [Concept|IRI] (`,` [Concept|IRI])*)? (`[`
         Assertion*
     `]`)?
 </pre>
@@ -1379,20 +1379,20 @@ The following example description defines two concept instances: one named *comp
 <pre class="highlight highlight-html">
 `description` `<`http://com.xyz/system/components#`>` `as` components `{`
     `uses` `<`http://com.xyz/methodology/mission#`>` `as` mission
-    `ci` component1 `:` mission:Component
-    `ci` function1 `:` mission:Function
+    `instance` component1 `:` mission:Component
+    `instance` function1 `:` mission:Function
 `}`
 </pre>
 
 #### Relation Instance #### {#RelationInstance-LR}
 
-A [relation instance](#RelationInstance-Syntax) is a named instance defined as a member of a description and can be typed by relation entities (from some imported vocabulary). The relation instance is declared with the keyword `ri` and a name ID. It can optionally be followed by a `:` and the IRIs of one or more relation entities that are considered types of the instance. It is also followed by a pair of square brackets `[` `]` that allows specifying the sources and targets of the relation instance and holds assertions about the instance. The sources of the relation instance are specified with the keyword `from` followed by one or more IRIs of named instances. Similarly, the targets of the relation instance are specified with the keyword `to` followed by one or more IRIs of named instances.
+A [relation instance](#RelationInstance-Syntax) is a named instance defined as a member of a description and can be typed by relation entities (from some imported vocabulary). The relation instance is declared with the keyword `relation` `instance` and a name ID. It can optionally be followed by a `:` and the IRIs of one or more relation entities that are considered types of the instance. It is also followed by a pair of square brackets `[` `]` that allows specifying the sources and targets of the relation instance and holds assertions about the instance. The sources of the relation instance are specified with the keyword `from` followed by one or more IRIs of named instances. Similarly, the targets of the relation instance are specified with the keyword `to` followed by one or more IRIs of named instances.
 
 Since a relation entity is a reified relation, it can be asserted as a type of a [relation instance](#RelationInstance-LR) between one or more source instances, and one or more target instances. Such instance can be annotated and characterized with assertions. 
 
 <pre class="highlight highlight-html">
 	Annotation*
-	`ri` ID (`:` [RelationEntity|IRI] (`,` [RelationEntity|IRI])*)? `[`
+	`relation` `instance` ID (`:` [RelationEntity|IRI] (`,` [RelationEntity|IRI])*)? `[`
 		`from` [NamedInstance|IRI] (`,` [NamedInstance|IRI])* 
 		`to` [NamedInstance|IRI] (`,` [NamedInstance|IRI])*
 		Assertion*
@@ -1404,10 +1404,10 @@ The following example description defines three concept instances: *component1* 
 <pre class="highlight highlight-html">
 `description` `<`http://com.xyz/system/components#`>` `as` components `{`
     `uses` `<`http://com.xyz/methodology/mission#`>` `as` mission
-    `ci` component1 `:` mission:Component
-    `ci` function1 `:` mission:Function
-    `ci` function2 `:` mission:Function
-    `ri` perform1 `:` mission:Performs `[`
+    `instance` component1 `:` mission:Component
+    `instance` function1 `:` mission:Function
+    `instance` function2 `:` mission:Function
+    `relation` `instance` perform1 `:` mission:Performs `[`
         `from` component1
         `to` function1, function2
     `]`
@@ -1416,10 +1416,10 @@ The following example description defines three concept instances: *component1* 
 
 #### Structure Instance #### {#StructureInstance-LR}
 
-A [structure instance](#StructureInstance-Syntax) is an anonymous instance that can be defined as a value of a structured property. Such value can either be specified in a [property value assertion](#PropertyValueAssertion-LR), defined in the context of some instance, or in a [property value restriction axiom](#PropertyValueRestrictionAxiom-LR) on some structured property in the context of some classifier. A structure instance is declared with the IRI of a structure followed by a pair of square brackets `[` `]` that holds assertions about the instance.
+A [structure instance](#StructureInstance-Syntax) is an anonymous instance that can be defined as a value of a structured property. Such value can either be specified in a [property value assertion](#PropertyValueAssertion-LR), defined in the context of some instance, or in a [property value restriction axiom](#PropertyValueRestrictionAxiom-LR) on some structured property in the context of some classifier. A structure instance is declared with a colon (`:`) followed by the IRI of a structure followed by a pair of square brackets (`[` `]`) that holds assertions about the instance.
 
 <pre class="highlight highlight-html">
-	[Structure|IRI] `[`
+	`:` [Structure|IRI] `[`
 		Assertion*
 	`]`
 </pre>
@@ -1427,12 +1427,11 @@ A [structure instance](#StructureInstance-Syntax) is an anonymous instance that 
 The following example shows .
 
 <pre class="highlight highlight-html">
-`vocabulary` `<`http://com.xyz/system/components#`>` `as` components `{`
+`vocabulary` `<`http://com.xyz/methodology/mission#`>` `as` mission `{`
     `extends` `<`http://www.w3.org/2001/XMLSchema#`>` `as` xsd
-    `uses` `<`http://com.xyz/methodology/functions#`>` `as` functions
-    `concept` Component [
-        `restricts` hasPin `to` Pin `[` hasNumber 1 `]`   // structure instance used as restricted value
-    ]
+    `concept` Component `[`
+        `restricts` hasPin `to` `:` Pin `[` hasNumber 1 `]`   // structure instance used as restricted value
+    `]`
     `structure` Pin
     `structured` `property` hasPin `[`
         `domain` Component
@@ -1448,8 +1447,50 @@ The following example shows .
 
 `description` `<`http://com.xyz/methodology/functions#`>` `as` functions `{`
     `uses` `<`http://com.xyz/methodology/mission#`>` `as` mission
-    `ci` C1 `:` mission:Component `[`
-        mission:hasPin Pin `[` mission:hasNumber 2 `]`                    // structure instance used in value assertion
+    `instance` C1 `:` mission:Component `[`
+        mission:hasPin `:` Pin `[` mission:hasNumber 2 `]`                    // structure instance used in value assertion
+    `]`
+`}`
+</pre>
+
+#### Anonymous Relation Instance #### {#AnonymousRelationInstance-LR}
+
+An [anonymous relation instance](#AnonymousRelationInstance-Syntax) is an anonymous instance of a relation entity that can be defined as a value of a forward or a reverse relation. Such value can either be specified in a [property value assertion](#PropertyValueAssertion-LR), defined on some forward or reverse relation in the context of a (source) named instance, or in a [property value restriction axiom](#PropertyValueRestrictionAxiom-LR) on some forward or reverse relation in the context of a classifier (representing the type of source of the relation). An anonymous relation instance is declared with the IRI of a (target) named instance followed by a pair of square brackets (`[` `]`) that holds assertions about the relation instance.
+
+<pre class="highlight highlight-html">
+	[NamedInstance|IRI] `[`
+		Assertion*
+	`]`
+</pre>
+
+The following example shows .
+
+<pre class="highlight highlight-html">
+`vocabulary` `<`http://com.xyz/methodology/mission#`>` `as` mission `{`
+    `extends` `<`http://www.w3.org/2001/XMLSchema#`>` `as` xsd
+    `uses` `<`http://com.xyz/system/functions#`>` `as` functions
+    `concept` Component [
+        `restricts` performs `to` function1 `[` hasPriority 3 `]`   // any component performs function1 with a priority of 3
+    ]
+    `concept` Function
+    `relation` `entity` Performs `[`
+        `from` Component
+        `to` Function
+        `forward` performs
+        `inverse` `functional`
+   `]`
+    `scalar` `property` hasPriority `[`
+        `domain` Performs
+        `range` xsd:int
+        `functional`
+   `]`
+`}`
+
+`description` `<`http://com.xyz/system/components#`>` `as` components `{`
+    `extends` `<`http://com.xyz/system/functions#`>` `as` functions
+    `uses` `<`http://com.xyz/methodology/mission#`>` `as` mission
+    `instance` C1 `:` mission:Component `[`
+        mission:performs functions:function2 `[` mission:priority 2 `]`  // C1 performs function2 with a priority of 2
     `]`
 `}`
 </pre>
@@ -1475,12 +1516,12 @@ The following example description defines two concept instances that each makes 
 <pre class="highlight highlight-html">
 `description` `<`http://com.xyz/system/components#`>` `as` components `{`
     `uses` `<`http://com.xyz/methodology/mission#`>` `as` mission
-    `ci` component1 `:` mission:Component `[`
+    `instance` component1 `:` mission:Component `[`
         mission:hasId 'C1'        							// scalar property value assertion
         mission:hasPin Pin `[` mission:hasNumber 2 `]`      // structure property value assertion
         mission:performs function1    						// relation value assertion
     `]`
-    `ci` function1 `:` mission:Function `[`
+    `instance` function1 `:` mission:Function `[`
         mission:hasName 'F1'      							// scalar property value assertion
     `]`
 `}`

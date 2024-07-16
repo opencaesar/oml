@@ -219,13 +219,19 @@
 	("builtin" ID | "ref" "builtin" [BuiltIn|IRI])
 
 <a id="AnonymousInstance-Syntax">AnonymousInstance</a> ::=	
-	StructureInstance
+	StructureInstance |
+	AnonymousRelationInstance
 
 <a id="StructureInstance-Syntax">StructureInstance</a> ::=	
-	[Structure|IRI] "["
+	":" [Structure|IRI] "["
 		PropertyValueAssertion*
 	"]"
 	
+<a id="AnonymousRelationInstance-Syntax">AnonymousRelationInstance</a> ::=	
+	[NamedInstance|IRI] "["
+		PropertyValueAssertion*
+	"]"
+
 <a id="NamedInstance-Syntax">NamedInstance</a> ::=
 	ConceptInstance |
 	RelationInstance

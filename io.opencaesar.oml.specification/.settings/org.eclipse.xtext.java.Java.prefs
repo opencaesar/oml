@@ -6,4 +6,4 @@ eclipse.preferences.version=1
 generateSuppressWarnings=true
 BuilderConfiguration.is_project_specific=true
 ValidatorConfiguration.is_project_specific=true
-targetJavaVersion=Java11
+targetJavaVersion=Java17

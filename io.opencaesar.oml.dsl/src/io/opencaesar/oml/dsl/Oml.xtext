@@ -243,12 +243,12 @@ AnonymousInstance:
 	AnonymousRelationInstance;
 
 StructureInstance:
-	type=[Structure|Ref] '['
+	':' type=[Structure|Ref] '['
 		ownedPropertyValues+=PropertyValueAssertion*
 	']';
 	
 AnonymousRelationInstance:
-	target=[NamedInstance|Ref] 'with' '['
+	target=[NamedInstance|Ref] '['
 		ownedPropertyValues+=PropertyValueAssertion*
 	']';
 

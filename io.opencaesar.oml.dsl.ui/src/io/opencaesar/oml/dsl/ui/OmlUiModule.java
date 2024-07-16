@@ -16,19 +16,28 @@
  */
 package io.opencaesar.oml.dsl.ui;
 
-import io.opencaesar.oml.dsl.resource.OmlSynchronizedXtextResourceSet;
-import io.opencaesar.oml.dsl.ui.hyperlinking.OmlHyperlinkHelper;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.ui.editor.contentassist.FQNPrefixMatcher;
 import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher;
 import org.eclipse.xtext.ui.editor.hyperlinking.HyperlinkHelper;
+import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
+
+import io.opencaesar.oml.dsl.resource.OmlSynchronizedXtextResourceSet;
+import io.opencaesar.oml.dsl.ui.formatting.OmlHighlightingConfiguration;
+import io.opencaesar.oml.dsl.ui.formatting.OmlSemanticHighlightingCalculator;
+import io.opencaesar.oml.dsl.ui.hyperlinking.OmlHyperlinkHelper;
 
 /**
  * Use this class to register components to be used within the Eclipse IDE.
  */
 @SuppressWarnings("all")
 public class OmlUiModule extends AbstractOmlUiModule {
+
+	public OmlUiModule(final AbstractUIPlugin plugin) {
+		super(plugin);
+	}
 
 	public Class<? extends XtextResourceSet> bindXtextResourceSet() {
 		return OmlSynchronizedXtextResourceSet.class;
@@ -43,8 +52,12 @@ public class OmlUiModule extends AbstractOmlUiModule {
 		return OmlHyperlinkHelper.class;
 	}
 
-	public OmlUiModule(final AbstractUIPlugin plugin) {
-		super(plugin);
+	public Class<? extends IHighlightingConfiguration> bindIHighlightingConfiguration() {
+		return OmlHighlightingConfiguration.class;
+	}
+
+	public Class<? extends ISemanticHighlightingCalculator> bindISemanticHighlightingCalculator() {
+		return OmlSemanticHighlightingCalculator.class;
 	}
 
 	public static class FQNPrefixMatcher2 extends FQNPrefixMatcher {

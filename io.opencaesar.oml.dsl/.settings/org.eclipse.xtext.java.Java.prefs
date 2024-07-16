@@ -5,5 +5,5 @@ eclipse.preferences.version=1
 generateGeneratedAnnotation=false
 generateSuppressWarnings=true
 includeDateInGenerated=false
-targetJavaVersion=JAVA11
+targetJavaVersion=JAVA17
 useJavaCompilerCompliance=false

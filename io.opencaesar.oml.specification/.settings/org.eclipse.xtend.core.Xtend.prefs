@@ -11,4 +11,4 @@ outlet.DEFAULT_OUTPUT.hideLocalSyntheticVariables=true
 outlet.DEFAULT_OUTPUT.sourceFolder.src-gen.directory=xtend-gen
 outlet.DEFAULT_OUTPUT.sourceFolder.src.directory=xtend-gen
 ValidatorConfiguration.is_project_specific=true
-targetJavaVersion=Java11
+targetJavaVersion=Java17

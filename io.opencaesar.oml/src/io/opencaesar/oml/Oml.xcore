@@ -12,7 +12,7 @@
     editDirectory="/io.opencaesar.oml.edit/src-gen",
     //editorDirectory="/io.opencaesar.oml.editor/src-gen",
     importerID="org.eclipse.xsd.ecore.importer",
-    complianceLevel="11.0"
+    complianceLevel="17.0"
 )
 @BikeshedHeadings(
     Elements="",

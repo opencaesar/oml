@@ -161,7 +161,7 @@ public final class OmlCatalog {
 			var dirPath = (path.isDirectory())? path : path.getParentFile();
 			for (var file : getFiles(dirPath, extensions)) {
 				if (file.getAbsolutePath().startsWith(path.getAbsolutePath())) {
-					String relative = file.getAbsolutePath().replaceFirst(path.getAbsolutePath(), "");
+					String relative = file.getAbsolutePath().replace(path.getAbsolutePath(), "");
 					uris.add(URI.createURI(rewriteUri+relative));
 				}
 			}

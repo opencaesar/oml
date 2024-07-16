@@ -40,6 +40,7 @@ import com.google.inject.Inject;
 
 import io.opencaesar.oml.Annotation;
 import io.opencaesar.oml.AnnotationProperty;
+import io.opencaesar.oml.AnonymousInstance;
 import io.opencaesar.oml.AnonymousRelationInstance;
 import io.opencaesar.oml.Aspect;
 import io.opencaesar.oml.BuiltIn;
@@ -57,6 +58,7 @@ import io.opencaesar.oml.InstanceEnumerationAxiom;
 import io.opencaesar.oml.KeyAxiom;
 import io.opencaesar.oml.Literal;
 import io.opencaesar.oml.LiteralEnumerationAxiom;
+import io.opencaesar.oml.NamedInstance;
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.PropertyCardinalityRestrictionAxiom;
 import io.opencaesar.oml.PropertyPredicate;
@@ -427,13 +429,14 @@ public class OmlFormatter extends AbstractJavaFormatter {
 	}
 
 	protected void _format(StructureInstance instance, IFormattableDocument doc) {
+		doc.append(keyword(instance, oml.getStructureInstanceAccess().getColonKeyword_0()), oneSpace());
 		doc.append(feature(instance, OmlPackage.Literals.STRUCTURE_INSTANCE__TYPE), oneSpace());
 		formatBrackets(instance, doc);
 		instance.getOwnedPropertyValues().forEach(i -> doc.prepend(doc.format(i), newLine()));
 	}
 
 	protected void _format(AnonymousRelationInstance instance, IFormattableDocument doc) {
-		doc.surround(keyword(instance, oml.getAnonymousRelationInstanceAccess().getWithKeyword_1()), oneSpace());
+		doc.surround(feature(instance, OmlPackage.Literals.ANONYMOUS_RELATION_INSTANCE__TARGET), oneSpace());
 		formatBrackets(instance, doc);
 		instance.getOwnedPropertyValues().forEach(i -> doc.prepend(doc.format(i), newLine()));
 	}
@@ -459,6 +462,9 @@ public class OmlFormatter extends AbstractJavaFormatter {
 	protected void _format(PropertyValueRestrictionAxiom axiom, IFormattableDocument doc) {
 		doc.append(keyword(axiom, oml.getPropertyValueRestrictionAxiomAccess().getRestrictsKeyword_0()), oneSpace());
 		doc.surround(keyword(axiom, oml.getPropertyValueRestrictionAxiomAccess().getToKeyword_2()), oneSpace());
+		if (axiom.getValue() instanceof Literal || axiom.getValue() instanceof AnonymousInstance) {
+			doc.format(axiom.getValue());
+		}
 	}
 
 	protected void _format(PropertySelfRestrictionAxiom axiom, IFormattableDocument doc) {
