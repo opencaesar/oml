@@ -1,17 +1,17 @@
 ext.title = 'Oml Textual Language Test'
 description = 'Test for Oml textual language'
-task copySrc() {
-	copy {
-		from 'src/main'
-		into 'build/bikeshed'
-	}
-	copy {
-		from 'src/v1'
-		into 'build/bikeshed/v1'
-	}
+
+task copyBikeshed(type:Copy) {
+	from 'src/main'
+	into 'build/bikeshed'
 }
 
-task ecoreToBikeshed(type:io.opencaesar.ecore.bikeshed.Ecore2BikeshedTask, dependsOn: copySrc) {
+task copyV1Bikeshed(type:Copy) {
+	from 'src/v1'
+	into 'build/bikeshed/v1'
+}
+
+task ecoreToBikeshed(type:io.opencaesar.ecore.bikeshed.Ecore2BikeshedTask, dependsOn: [copyBikeshed, copyV1Bikeshed]) {
 	inputFolderPath = file('../io.opencaesar.oml/src/io/opencaesar/oml')
 	outputFolderPath = file('build/bikeshed')
 }
