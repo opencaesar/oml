@@ -168,7 +168,7 @@ public final class OmlCatalog {
 					System.out.println("relative = "+relative);
 					var relative2 = path.toURI().relativize(file.toURI());
 					System.out.println("relative2 = "+relative2);
-					var relative3 = relative.toString().replaceAll("\\", "/");
+					var relative3 = relative.toString().replace("\\", "/");
 					System.out.println("relative3 = "+relative3);
 					var uri1 = java.net.URI.create(rewriteUri).resolve(relative3);
 					System.out.println("uri1 = "+uri1);
