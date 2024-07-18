@@ -161,22 +161,9 @@ public final class OmlCatalog {
 			var dirPath = (path.isDirectory())? path : path.getParentFile();
 			for (var file : getFiles(dirPath, extensions)) {
 				if (file.getAbsolutePath().startsWith(path.getAbsolutePath())) {
-					System.out.println("rewriteUri = "+rewriteUri);
-					System.out.println("path = "+path.toPath());
-					System.out.println("file = "+file.toPath());
-					var relative = path.toPath().relativize(file.toPath());
-					System.out.println("relative = "+relative);
-					var relative2 = path.toURI().relativize(file.toURI());
-					System.out.println("relative2 = "+relative2);
-					var relative3 = relative.toString().replace("\\", "/");
-					System.out.println("relative3 = "+relative3);
-					var uri1 = java.net.URI.create(rewriteUri + "/" + relative3);
-					System.out.println("uri1 = "+uri1);
-					var uri2 = uri1.normalize();
-					System.out.println("uri2 = "+uri2);
-					var uri3 = URI.createURI(uri2.toString());
-					System.out.println("uri3 = "+uri3);
-					uris.add(uri3);
+					var relative = path.toPath().relativize(file.toPath()).toString().replace("\\", "/");
+					var uri = java.net.URI.create(rewriteUri + "/" + relative).normalize();
+					uris.add(URI.createURI(uri.toString()));
 				}
 			}
 		}
