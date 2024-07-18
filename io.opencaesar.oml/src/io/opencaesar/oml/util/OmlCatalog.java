@@ -168,12 +168,12 @@ public final class OmlCatalog {
 					System.out.println("relative = "+relative);
 					var relative2 = path.toURI().relativize(file.toURI());
 					System.out.println("relative2 = "+relative2);
-					var uri1 = path.toURI().resolve(relative.toUri());
+					var uri1 = java.net.URI.create(rewriteUri).resolve(relative.toUri());
 					System.out.println("uri1 = "+uri1);
 					var uri2 = uri1.normalize();
 					System.out.println("uri2 = "+uri2);
 					var uri3 = URI.createURI(uri2.toString());
-					System.out.println("uri3"+uri3);
+					System.out.println("uri3 = "+uri3);
 					uris.add(uri3);
 				}
 			}
