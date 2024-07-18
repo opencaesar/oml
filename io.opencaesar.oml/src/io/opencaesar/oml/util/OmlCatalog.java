@@ -21,7 +21,6 @@ package io.opencaesar.oml.util;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashSet;
@@ -167,13 +166,7 @@ public final class OmlCatalog {
 					System.out.println("file = "+file.toPath());
 					var relative = path.toPath().relativize(file.toPath());
 					System.out.println("relative = "+relative);
-					var path2 = Path.of(rewriteUri+"/"+relative);
-					System.out.println("path2 = "+path2);
-					var path3 = path2.normalize();
-					System.out.println("path3 = "+path3);
-					var path4 = path3.toString();
-					System.out.println("path4 = "+path4);
-					var uri = URI.createURI(path4);
+					var uri = URI.createURI(rewriteUri+"/"+relative);
 					System.out.println("uri = "+uri);
 					uris.add(uri);
 				}
