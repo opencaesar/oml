@@ -24,7 +24,7 @@ It also publishes the following artifacts (see the OML specification for using i
 
 ## Build
 
-Dependencies: Gradle 6.x, Maven 3.6.x, Java 11
+Dependencies: Gradle 7.6.+, Maven 3.9.+, Java 17+
 ```
   ./gradlew build
   mvn verify
