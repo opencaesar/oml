@@ -26,7 +26,7 @@ import io.opencaesar.oml.Type;
 
 import java.lang.reflect.InvocationTargetException;
 
-import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
@@ -173,8 +173,7 @@ public abstract class RelationImpl extends SemanticPropertyImpl implements Relat
 	 */
 	@Override
 	public EList<Classifier> getDomainList() {
-		EList<Entity> _domains = this.getDomains();
-		return new BasicEList<Classifier>(_domains);
+		return ECollections.<Classifier>toEList(this.getDomains());
 	}
 
 	/**
@@ -184,8 +183,7 @@ public abstract class RelationImpl extends SemanticPropertyImpl implements Relat
 	 */
 	@Override
 	public EList<Type> getRangeList() {
-		EList<Entity> _ranges = this.getRanges();
-		return new BasicEList<Type>(_ranges);
+		return ECollections.<Type>toEList(this.getRanges());
 	}
 
 	/**

@@ -83,6 +83,7 @@ import io.opencaesar.oml.ScalarProperty;
 import io.opencaesar.oml.SemanticProperty;
 import io.opencaesar.oml.SpecializationAxiom;
 import io.opencaesar.oml.Structure;
+import io.opencaesar.oml.StructureInstance;
 import io.opencaesar.oml.StructuredProperty;
 import io.opencaesar.oml.Term;
 import io.opencaesar.oml.Type;
@@ -1171,6 +1172,19 @@ public final class OmlValidator2 {
 	                "Relation instance "+object.getAbbreviatedIri()+" needs to specify at least one target",
 	                OmlPackage.Literals.MEMBER__NAME);
         	}
+        }
+        return true;
+    }
+
+    /**
+     * Checks if the structure instance has a type
+     * @return True if the member is deprecated; False otherwise
+     */
+    boolean validateStructureInstanceType(StructureInstance object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        if (object.getStructure() == null) {
+        	return report(Diagnostic.ERROR, diagnostics, object,
+                "Structure instance needs to specify a type",
+                OmlPackage.Literals.STRUCTURE_INSTANCE__TYPE);
         }
         return true;
     }

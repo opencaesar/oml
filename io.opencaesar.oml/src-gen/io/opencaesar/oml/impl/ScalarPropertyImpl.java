@@ -38,7 +38,7 @@ import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
-import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
@@ -345,8 +345,7 @@ public class ScalarPropertyImpl extends SemanticPropertyImpl implements ScalarPr
 	 */
 	@Override
 	public EList<Type> getRangeList() {
-		EList<Scalar> _ranges = this.getRanges();
-		return new BasicEList<Type>(_ranges);
+		return ECollections.<Type>toEList(this.getRanges());
 	}
 
 	/**

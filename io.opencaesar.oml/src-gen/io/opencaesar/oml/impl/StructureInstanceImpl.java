@@ -20,8 +20,10 @@ package io.opencaesar.oml.impl;
 
 import io.opencaesar.oml.Classifier;
 import io.opencaesar.oml.OmlPackage;
+import io.opencaesar.oml.SemanticProperty;
 import io.opencaesar.oml.Structure;
 import io.opencaesar.oml.StructureInstance;
+import io.opencaesar.oml.StructuredProperty;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -124,11 +126,47 @@ public class StructureInstanceImpl extends AnonymousInstanceImpl implements Stru
 	 * @generated
 	 */
 	@Override
-	public EList<Classifier> getTypes() {
+	public Structure getStructure() {
+		Structure _xifexpression = null;
 		Structure _type = this.getType();
 		boolean _tripleNotEquals = (_type != null);
 		if (_tripleNotEquals) {
-			return ECollections.<Classifier>singletonEList(this.getType());
+			return this.getType();
+		}
+		else {
+			Structure _xblockexpression = null;
+			{
+				SemanticProperty property = this.getIsValueOfProperty();
+				Structure _xifexpression_1 = null;
+				if ((property instanceof StructuredProperty)) {
+					Structure _xifexpression_2 = null;
+					boolean _isEmpty = ((StructuredProperty)property).getRanges().isEmpty();
+					boolean _not = (!_isEmpty);
+					if (_not) {
+						_xifexpression_2 = ((StructuredProperty)property).getRanges().get(0);
+					}
+					else {
+						_xifexpression_2 = null;
+					}
+					_xifexpression_1 = _xifexpression_2;
+				}
+				_xblockexpression = _xifexpression_1;
+			}
+			_xifexpression = _xblockexpression;
+		}
+		return _xifexpression;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EList<Classifier> getTypes() {
+		Structure structure = this.getStructure();
+		if ((structure != null)) {
+			return ECollections.<Classifier>singletonEList(structure);
 		}
 		else {
 			return ECollections.<Classifier>emptyEList();
@@ -202,6 +240,8 @@ public class StructureInstanceImpl extends AnonymousInstanceImpl implements Stru
 	@Override
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
+			case OmlPackage.STRUCTURE_INSTANCE___GET_STRUCTURE:
+				return getStructure();
 			case OmlPackage.STRUCTURE_INSTANCE___GET_TYPES:
 				return getTypes();
 		}

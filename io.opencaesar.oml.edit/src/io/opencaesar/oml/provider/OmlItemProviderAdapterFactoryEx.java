@@ -605,10 +605,16 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 					valueLabel = getLiteralLabel(axiom.getLiteralValue()).toString();
 				} else if (axiom.getContainedValue() instanceof StructureInstance) {
 					var instance = (StructureInstance) axiom.getContainedValue();
-					valueLabel = getLabel(instance.getType(), instance);
+					var type = instance.getStructure();
+					if (type != null) {
+						valueLabel = getLabel(type, instance);
+					}
 				} else if (axiom.getContainedValue() instanceof AnonymousRelationInstance) {
 					var instance = (AnonymousRelationInstance) axiom.getContainedValue();
-					valueLabel = getLabel(instance.getTarget(), instance);
+					var type = instance.getRelationEntity();
+					if (type != null) {
+						valueLabel = getLabel(type, instance);
+					}
 				} else if (axiom.getReferencedValue() != null) {
 					valueLabel = getLabel(axiom.getReferencedValue(), axiom);
 				}
@@ -698,7 +704,7 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 				} else if (instance.isRef()){
 					label.append("ref relation instance " + getLabel(instance.resolve(), instance));
 				} else {
-					label.append("relation instance" + getLabel(instance));
+					label.append("relation instance " + getLabel(instance));
 				}
 				if (!instance.getSources().isEmpty()) {
 					List<String> labels = instance.getSources().stream().map(i -> getLabel(i, instance)).collect(Collectors.toList());

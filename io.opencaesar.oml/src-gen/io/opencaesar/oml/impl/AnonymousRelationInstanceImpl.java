@@ -129,7 +129,7 @@ public class AnonymousRelationInstanceImpl extends AnonymousInstanceImpl impleme
 	 * @generated
 	 */
 	@Override
-	public RelationEntity getType() {
+	public RelationEntity getRelationEntity() {
 		final SemanticProperty property = this.getIsValueOfProperty();
 		if ((property instanceof ForwardRelation)) {
 			return ((ForwardRelation)property).getRelationEntity();
@@ -153,9 +153,9 @@ public class AnonymousRelationInstanceImpl extends AnonymousInstanceImpl impleme
 	 */
 	@Override
 	public EList<Classifier> getTypes() {
-		RelationEntity type = this.getType();
-		if ((type != null)) {
-			return ECollections.<Classifier>singletonEList(type);
+		RelationEntity entity = this.getRelationEntity();
+		if ((entity != null)) {
+			return ECollections.<Classifier>singletonEList(entity);
 		}
 		else {
 			return ECollections.<Classifier>emptyEList();
@@ -229,8 +229,8 @@ public class AnonymousRelationInstanceImpl extends AnonymousInstanceImpl impleme
 	@Override
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
-			case OmlPackage.ANONYMOUS_RELATION_INSTANCE___GET_TYPE:
-				return getType();
+			case OmlPackage.ANONYMOUS_RELATION_INSTANCE___GET_RELATION_ENTITY:
+				return getRelationEntity();
 			case OmlPackage.ANONYMOUS_RELATION_INSTANCE___GET_TYPES:
 				return getTypes();
 		}

@@ -223,7 +223,7 @@
 	AnonymousRelationInstance
 
 <a id="StructureInstance-Syntax">StructureInstance</a> ::=	
-	":" [Structure|IRI] "["
+	(":" [Structure|IRI])? "["
 		PropertyValueAssertion*
 	"]"
 	

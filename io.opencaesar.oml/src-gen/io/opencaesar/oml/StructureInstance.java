@@ -51,7 +51,7 @@ public interface StructureInstance extends AnonymousInstance {
 	 * @return the value of the '<em>Type</em>' reference.
 	 * @see #setType(Structure)
 	 * @see io.opencaesar.oml.OmlPackage#getStructureInstance_Type()
-	 * @model required="true"
+	 * @model
 	 * @generated
 	 */
 	Structure getType();
@@ -65,6 +65,14 @@ public interface StructureInstance extends AnonymousInstance {
 	 * @generated
 	 */
 	void setType(Structure value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
+	Structure getStructure();
 
 	/**
 	 * <!-- begin-user-doc -->

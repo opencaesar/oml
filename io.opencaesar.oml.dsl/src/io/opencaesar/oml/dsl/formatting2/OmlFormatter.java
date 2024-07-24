@@ -429,7 +429,7 @@ public class OmlFormatter extends AbstractJavaFormatter {
 	}
 
 	protected void _format(StructureInstance instance, IFormattableDocument doc) {
-		doc.append(keyword(instance, oml.getStructureInstanceAccess().getColonKeyword_0()), oneSpace());
+		doc.append(keyword(instance, oml.getStructureInstanceAccess().getColonKeyword_1_0()), oneSpace());
 		doc.append(feature(instance, OmlPackage.Literals.STRUCTURE_INSTANCE__TYPE), oneSpace());
 		formatBrackets(instance, doc);
 		instance.getOwnedPropertyValues().forEach(i -> doc.prepend(doc.format(i), newLine()));

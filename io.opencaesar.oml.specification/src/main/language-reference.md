@@ -1416,10 +1416,10 @@ The following example description defines three concept instances: *component1* 
 
 #### Structure Instance #### {#StructureInstance-LR}
 
-A [structure instance](#StructureInstance-Syntax) is an anonymous instance that can be defined as a value of a structured property. Such value can either be specified in a [property value assertion](#PropertyValueAssertion-LR), defined in the context of some instance, or in a [property value restriction axiom](#PropertyValueRestrictionAxiom-LR) on some structured property in the context of some classifier. A structure instance is declared with a colon (`:`) followed by the IRI of a structure followed by a pair of square brackets (`[` `]`) that holds assertions about the instance.
+A [structure instance](#StructureInstance-Syntax) is an anonymous instance that can be defined as a value of a structured property. Such value can either be specified in a [property value assertion](#PropertyValueAssertion-LR), defined in the context of some instance, or in a [property value restriction axiom](#PropertyValueRestrictionAxiom-LR) on some structured property in the context of some classifier. A structure instance is declared with an optional type, represented by a colon (`:`) followed by a structure IRI , followed by a pair of square brackets (`[` `]`) that holds assertions about the instance. Note that if a type is omitted, it will be inferred to be the range of the structure property that defines the structure instance.
 
 <pre class="highlight highlight-html">
-	`:` [Structure|IRI] `[`
+	(`:` [Structure|IRI])? `[`
 		Assertion*
 	`]`
 </pre>

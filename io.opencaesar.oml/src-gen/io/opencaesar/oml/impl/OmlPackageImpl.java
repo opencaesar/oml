@@ -2740,8 +2740,18 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EOperation getStructureInstance__GetTypes() {
+	public EOperation getStructureInstance__GetStructure() {
 		return structureInstanceEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getStructureInstance__GetTypes() {
+		return structureInstanceEClass.getEOperations().get(1);
 	}
 
 	/**
@@ -2770,7 +2780,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EOperation getAnonymousRelationInstance__GetType() {
+	public EOperation getAnonymousRelationInstance__GetRelationEntity() {
 		return anonymousRelationInstanceEClass.getEOperations().get(0);
 	}
 
@@ -4284,11 +4294,12 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 
 		structureInstanceEClass = createEClass(STRUCTURE_INSTANCE);
 		createEReference(structureInstanceEClass, STRUCTURE_INSTANCE__TYPE);
+		createEOperation(structureInstanceEClass, STRUCTURE_INSTANCE___GET_STRUCTURE);
 		createEOperation(structureInstanceEClass, STRUCTURE_INSTANCE___GET_TYPES);
 
 		anonymousRelationInstanceEClass = createEClass(ANONYMOUS_RELATION_INSTANCE);
 		createEReference(anonymousRelationInstanceEClass, ANONYMOUS_RELATION_INSTANCE__TARGET);
-		createEOperation(anonymousRelationInstanceEClass, ANONYMOUS_RELATION_INSTANCE___GET_TYPE);
+		createEOperation(anonymousRelationInstanceEClass, ANONYMOUS_RELATION_INSTANCE___GET_RELATION_ENTITY);
 		createEOperation(anonymousRelationInstanceEClass, ANONYMOUS_RELATION_INSTANCE___GET_TYPES);
 
 		keyAxiomEClass = createEClass(KEY_AXIOM);
@@ -4884,14 +4895,16 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		initEReference(getRelationInstance_Targets(), this.getNamedInstance(), null, "targets", null, 0, -1, RelationInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(structureInstanceEClass, StructureInstance.class, "StructureInstance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getStructureInstance_Type(), this.getStructure(), null, "type", null, 1, 1, StructureInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getStructureInstance_Type(), this.getStructure(), null, "type", null, 0, 1, StructureInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEOperation(getStructureInstance__GetStructure(), this.getStructure(), "getStructure", 0, 1, !IS_UNIQUE, IS_ORDERED);
 
 		initEOperation(getStructureInstance__GetTypes(), this.getClassifier(), "getTypes", 0, -1, !IS_UNIQUE, IS_ORDERED);
 
 		initEClass(anonymousRelationInstanceEClass, AnonymousRelationInstance.class, "AnonymousRelationInstance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAnonymousRelationInstance_Target(), this.getNamedInstance(), null, "target", null, 1, 1, AnonymousRelationInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEOperation(getAnonymousRelationInstance__GetType(), this.getRelationEntity(), "getType", 0, 1, !IS_UNIQUE, IS_ORDERED);
+		initEOperation(getAnonymousRelationInstance__GetRelationEntity(), this.getRelationEntity(), "getRelationEntity", 0, 1, !IS_UNIQUE, IS_ORDERED);
 
 		initEOperation(getAnonymousRelationInstance__GetTypes(), this.getClassifier(), "getTypes", 0, -1, !IS_UNIQUE, IS_ORDERED);
 

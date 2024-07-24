@@ -6857,13 +6857,22 @@ public interface OmlPackage extends EPackage {
 	int STRUCTURE_INSTANCE___GET_IS_VALUE_OF_PROPERTY = ANONYMOUS_INSTANCE___GET_IS_VALUE_OF_PROPERTY;
 
 	/**
+	 * The operation id for the '<em>Get Structure</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRUCTURE_INSTANCE___GET_STRUCTURE = ANONYMOUS_INSTANCE_OPERATION_COUNT + 0;
+
+	/**
 	 * The operation id for the '<em>Get Types</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STRUCTURE_INSTANCE___GET_TYPES = ANONYMOUS_INSTANCE_OPERATION_COUNT + 0;
+	int STRUCTURE_INSTANCE___GET_TYPES = ANONYMOUS_INSTANCE_OPERATION_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>Structure Instance</em>' class.
@@ -6872,7 +6881,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STRUCTURE_INSTANCE_OPERATION_COUNT = ANONYMOUS_INSTANCE_OPERATION_COUNT + 1;
+	int STRUCTURE_INSTANCE_OPERATION_COUNT = ANONYMOUS_INSTANCE_OPERATION_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.impl.AnonymousRelationInstanceImpl <em>Anonymous Relation Instance</em>}' class.
@@ -6957,13 +6966,13 @@ public interface OmlPackage extends EPackage {
 	int ANONYMOUS_RELATION_INSTANCE___GET_IS_VALUE_OF_PROPERTY = ANONYMOUS_INSTANCE___GET_IS_VALUE_OF_PROPERTY;
 
 	/**
-	 * The operation id for the '<em>Get Type</em>' operation.
+	 * The operation id for the '<em>Get Relation Entity</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ANONYMOUS_RELATION_INSTANCE___GET_TYPE = ANONYMOUS_INSTANCE_OPERATION_COUNT + 0;
+	int ANONYMOUS_RELATION_INSTANCE___GET_RELATION_ENTITY = ANONYMOUS_INSTANCE_OPERATION_COUNT + 0;
 
 	/**
 	 * The operation id for the '<em>Get Types</em>' operation.
@@ -11630,6 +11639,16 @@ public interface OmlPackage extends EPackage {
 	EReference getStructureInstance_Type();
 
 	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.StructureInstance#getStructure() <em>Get Structure</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Structure</em>' operation.
+	 * @see io.opencaesar.oml.StructureInstance#getStructure()
+	 * @generated
+	 */
+	EOperation getStructureInstance__GetStructure();
+
+	/**
 	 * Returns the meta object for the '{@link io.opencaesar.oml.StructureInstance#getTypes() <em>Get Types</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -11661,14 +11680,14 @@ public interface OmlPackage extends EPackage {
 	EReference getAnonymousRelationInstance_Target();
 
 	/**
-	 * Returns the meta object for the '{@link io.opencaesar.oml.AnonymousRelationInstance#getType() <em>Get Type</em>}' operation.
+	 * Returns the meta object for the '{@link io.opencaesar.oml.AnonymousRelationInstance#getRelationEntity() <em>Get Relation Entity</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Get Type</em>' operation.
-	 * @see io.opencaesar.oml.AnonymousRelationInstance#getType()
+	 * @return the meta object for the '<em>Get Relation Entity</em>' operation.
+	 * @see io.opencaesar.oml.AnonymousRelationInstance#getRelationEntity()
 	 * @generated
 	 */
-	EOperation getAnonymousRelationInstance__GetType();
+	EOperation getAnonymousRelationInstance__GetRelationEntity();
 
 	/**
 	 * Returns the meta object for the '{@link io.opencaesar.oml.AnonymousRelationInstance#getTypes() <em>Get Types</em>}' operation.
@@ -14631,6 +14650,14 @@ public interface OmlPackage extends EPackage {
 		EReference STRUCTURE_INSTANCE__TYPE = eINSTANCE.getStructureInstance_Type();
 
 		/**
+		 * The meta object literal for the '<em><b>Get Structure</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation STRUCTURE_INSTANCE___GET_STRUCTURE = eINSTANCE.getStructureInstance__GetStructure();
+
+		/**
 		 * The meta object literal for the '<em><b>Get Types</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -14657,12 +14684,12 @@ public interface OmlPackage extends EPackage {
 		EReference ANONYMOUS_RELATION_INSTANCE__TARGET = eINSTANCE.getAnonymousRelationInstance_Target();
 
 		/**
-		 * The meta object literal for the '<em><b>Get Type</b></em>' operation.
+		 * The meta object literal for the '<em><b>Get Relation Entity</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EOperation ANONYMOUS_RELATION_INSTANCE___GET_TYPE = eINSTANCE.getAnonymousRelationInstance__GetType();
+		EOperation ANONYMOUS_RELATION_INSTANCE___GET_RELATION_ENTITY = eINSTANCE.getAnonymousRelationInstance__GetRelationEntity();
 
 		/**
 		 * The meta object literal for the '<em><b>Get Types</b></em>' operation.

@@ -37,7 +37,6 @@ import org.eclipse.emf.ecore.EDiagnosticChain
 import org.eclipse.emf.ecore.EMap
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.InternalEObject
-import org.eclipse.emf.common.util.BasicEList
 import org.eclipse.emf.common.util.ECollections
 
 annotation "https://tabatkins.github.io/bikeshed" as Bikeshed
@@ -911,7 +910,7 @@ class ScalarProperty extends SemanticProperty, SpecializableProperty {
     	domains
     }
     op Type[] getRangeList() {
-    	new BasicEList(ranges)
+    	ranges.toEList
     }
 }
 
@@ -941,7 +940,7 @@ class StructuredProperty extends SemanticProperty, SpecializableProperty {
     	domains
     }
     op Type[] getRangeList() {
-    	new BasicEList(ranges)
+    	ranges.toEList
     }
 }
 
@@ -989,10 +988,10 @@ abstract class Relation extends SemanticProperty {
     op Relation[?] getInverse()
 
     op Classifier[] getDomainList() {
-    	new BasicEList(getDomains())
+    	getDomains().toEList
     }
     op Type[] getRangeList() {
-    	new BasicEList(getRanges())
+    	getRanges().toEList
     }
 }
 
@@ -1214,11 +1213,26 @@ class StructureInstance extends AnonymousInstance {
     /*
      * The type of this instance
      */
-    refers Structure[1] ^type
+    refers Structure[?] ^type
+
+	op Structure getStructure() {
+    	if (^type !== null)
+    	 	return ^type
+    	else {
+    		var property = getIsValueOfProperty()
+    		if (property instanceof StructuredProperty) {
+	    		if (!property.ranges.isEmpty)
+	    			property.ranges.get(0)
+	    		else
+	    			null
+    		}
+    	}
+	}
 
     op Classifier[] getTypes() {
-    	if (^type !== null)
-    	 	return ^type.singletonEList()
+    	var structure = getStructure()
+    	if (structure !== null)
+    	 	return structure.singletonEList()
     	else
     		return ECollections.emptyEList
     }
@@ -1240,21 +1254,21 @@ class AnonymousRelationInstance extends AnonymousInstance {
 	/*
 	 * Gets the relation entity that is the type of this instance
 	 */
-    op RelationEntity getType() {
+    op RelationEntity getRelationEntity() {
     	val property = getIsValueOfProperty()
     	if (property instanceof ForwardRelation) {
     		return property.relationEntity
     	} else if (property instanceof ReverseRelation) {
     		if (property.relationBase instanceof RelationEntity) {
-    			return (property.relationBase as RelationEntity)
+    			return property.relationBase as RelationEntity
     		}
     	}
     }
 
     op Classifier[] getTypes() {
-    	var ^type = getType()
-    	if (^type !== null)
-    	 	return ^type.singletonEList()
+    	var entity = getRelationEntity()
+    	if (entity !== null)
+    	 	return entity.singletonEList()
     	else
     		return ECollections.emptyEList
 	}

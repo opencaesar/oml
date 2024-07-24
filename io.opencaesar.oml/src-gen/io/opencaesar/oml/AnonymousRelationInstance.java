@@ -79,7 +79,7 @@ public interface AnonymousRelationInstance extends AnonymousInstance {
 	 * @model kind="operation" unique="false"
 	 * @generated
 	 */
-	RelationEntity getType();
+	RelationEntity getRelationEntity();
 
 	/**
 	 * <!-- begin-user-doc -->
