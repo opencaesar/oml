@@ -87,6 +87,6 @@ public interface AnonymousRelationInstance extends AnonymousInstance {
 	 * @model kind="operation" unique="false"
 	 * @generated
 	 */
-	EList<Classifier> getTypes();
+	EList<Entity> getTypes();
 
 } // AnonymousRelationInstance

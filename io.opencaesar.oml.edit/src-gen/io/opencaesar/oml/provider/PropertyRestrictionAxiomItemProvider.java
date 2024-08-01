@@ -59,7 +59,7 @@ public class PropertyRestrictionAxiomItemProvider extends AxiomItemProvider {
 			super.getPropertyDescriptors(object);
 
 			addPropertyPropertyDescriptor(object);
-			addOwningClassifierPropertyDescriptor(object);
+			addOwningEntityPropertyDescriptor(object);
 			addOwningAxiomPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
@@ -88,19 +88,19 @@ public class PropertyRestrictionAxiomItemProvider extends AxiomItemProvider {
 	}
 
 	/**
-	 * This adds a property descriptor for the Owning Classifier feature.
+	 * This adds a property descriptor for the Owning Entity feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addOwningClassifierPropertyDescriptor(Object object) {
+	protected void addOwningEntityPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_PropertyRestrictionAxiom_owningClassifier_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_PropertyRestrictionAxiom_owningClassifier_feature", "_UI_PropertyRestrictionAxiom_type"),
-				 OmlPackage.Literals.PROPERTY_RESTRICTION_AXIOM__OWNING_CLASSIFIER,
+				 getString("_UI_PropertyRestrictionAxiom_owningEntity_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_PropertyRestrictionAxiom_owningEntity_feature", "_UI_PropertyRestrictionAxiom_type"),
+				 OmlPackage.Literals.PROPERTY_RESTRICTION_AXIOM__OWNING_ENTITY,
 				 true,
 				 false,
 				 true,

@@ -88,25 +88,23 @@ public class OmlFactoryImpl extends EFactoryImpl implements OmlFactory {
 			case OmlPackage.RULE: return createRule();
 			case OmlPackage.BUILT_IN: return createBuiltIn();
 			case OmlPackage.SCALAR: return createScalar();
-			case OmlPackage.STRUCTURE: return createStructure();
 			case OmlPackage.ASPECT: return createAspect();
 			case OmlPackage.CONCEPT: return createConcept();
 			case OmlPackage.RELATION_ENTITY: return createRelationEntity();
 			case OmlPackage.ANNOTATION_PROPERTY: return createAnnotationProperty();
 			case OmlPackage.SCALAR_PROPERTY: return createScalarProperty();
-			case OmlPackage.STRUCTURED_PROPERTY: return createStructuredProperty();
 			case OmlPackage.FORWARD_RELATION: return createForwardRelation();
 			case OmlPackage.REVERSE_RELATION: return createReverseRelation();
 			case OmlPackage.UNREIFIED_RELATION: return createUnreifiedRelation();
 			case OmlPackage.CONCEPT_INSTANCE: return createConceptInstance();
 			case OmlPackage.RELATION_INSTANCE: return createRelationInstance();
-			case OmlPackage.STRUCTURE_INSTANCE: return createStructureInstance();
+			case OmlPackage.ANONYMOUS_CONCEPT_INSTANCE: return createAnonymousConceptInstance();
 			case OmlPackage.ANONYMOUS_RELATION_INSTANCE: return createAnonymousRelationInstance();
 			case OmlPackage.KEY_AXIOM: return createKeyAxiom();
 			case OmlPackage.SPECIALIZATION_AXIOM: return createSpecializationAxiom();
 			case OmlPackage.INSTANCE_ENUMERATION_AXIOM: return createInstanceEnumerationAxiom();
 			case OmlPackage.LITERAL_ENUMERATION_AXIOM: return createLiteralEnumerationAxiom();
-			case OmlPackage.CLASSIFIER_EQUIVALENCE_AXIOM: return createClassifierEquivalenceAxiom();
+			case OmlPackage.ENTITY_EQUIVALENCE_AXIOM: return createEntityEquivalenceAxiom();
 			case OmlPackage.SCALAR_EQUIVALENCE_AXIOM: return createScalarEquivalenceAxiom();
 			case OmlPackage.PROPERTY_EQUIVALENCE_AXIOM: return createPropertyEquivalenceAxiom();
 			case OmlPackage.PROPERTY_RANGE_RESTRICTION_AXIOM: return createPropertyRangeRestrictionAxiom();
@@ -313,17 +311,6 @@ public class OmlFactoryImpl extends EFactoryImpl implements OmlFactory {
 	 * @generated
 	 */
 	@Override
-	public Structure createStructure() {
-		StructureImpl structure = new StructureImpl();
-		return structure;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public Aspect createAspect() {
 		AspectImpl aspect = new AspectImpl();
 		return aspect;
@@ -371,17 +358,6 @@ public class OmlFactoryImpl extends EFactoryImpl implements OmlFactory {
 	public ScalarProperty createScalarProperty() {
 		ScalarPropertyImpl scalarProperty = new ScalarPropertyImpl();
 		return scalarProperty;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public StructuredProperty createStructuredProperty() {
-		StructuredPropertyImpl structuredProperty = new StructuredPropertyImpl();
-		return structuredProperty;
 	}
 
 	/**
@@ -445,9 +421,9 @@ public class OmlFactoryImpl extends EFactoryImpl implements OmlFactory {
 	 * @generated
 	 */
 	@Override
-	public StructureInstance createStructureInstance() {
-		StructureInstanceImpl structureInstance = new StructureInstanceImpl();
-		return structureInstance;
+	public AnonymousConceptInstance createAnonymousConceptInstance() {
+		AnonymousConceptInstanceImpl anonymousConceptInstance = new AnonymousConceptInstanceImpl();
+		return anonymousConceptInstance;
 	}
 
 	/**
@@ -511,9 +487,9 @@ public class OmlFactoryImpl extends EFactoryImpl implements OmlFactory {
 	 * @generated
 	 */
 	@Override
-	public ClassifierEquivalenceAxiom createClassifierEquivalenceAxiom() {
-		ClassifierEquivalenceAxiomImpl classifierEquivalenceAxiom = new ClassifierEquivalenceAxiomImpl();
-		return classifierEquivalenceAxiom;
+	public EntityEquivalenceAxiom createEntityEquivalenceAxiom() {
+		EntityEquivalenceAxiomImpl entityEquivalenceAxiom = new EntityEquivalenceAxiomImpl();
+		return entityEquivalenceAxiom;
 	}
 
 	/**

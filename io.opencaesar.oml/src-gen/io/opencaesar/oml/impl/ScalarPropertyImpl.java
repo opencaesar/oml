@@ -18,7 +18,7 @@
  */
 package io.opencaesar.oml.impl;
 
-import io.opencaesar.oml.Classifier;
+import io.opencaesar.oml.Entity;
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.PropertyEquivalenceAxiom;
 import io.opencaesar.oml.Scalar;
@@ -129,7 +129,7 @@ public class ScalarPropertyImpl extends SemanticPropertyImpl implements ScalarPr
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Classifier> domains;
+	protected EList<Entity> domains;
 
 	/**
 	 * The cached value of the '{@link #getRanges() <em>Ranges</em>}' reference list.
@@ -308,9 +308,9 @@ public class ScalarPropertyImpl extends SemanticPropertyImpl implements ScalarPr
 	 * @generated
 	 */
 	@Override
-	public EList<Classifier> getDomains() {
+	public EList<Entity> getDomains() {
 		if (domains == null) {
-			domains = new EObjectResolvingEList<Classifier>(Classifier.class, this, OmlPackage.SCALAR_PROPERTY__DOMAINS);
+			domains = new EObjectResolvingEList<Entity>(Entity.class, this, OmlPackage.SCALAR_PROPERTY__DOMAINS);
 		}
 		return domains;
 	}
@@ -334,7 +334,7 @@ public class ScalarPropertyImpl extends SemanticPropertyImpl implements ScalarPr
 	 * @generated
 	 */
 	@Override
-	public EList<Classifier> getDomainList() {
+	public EList<Entity> getDomainList() {
 		return this.getDomains();
 	}
 
@@ -457,7 +457,7 @@ public class ScalarPropertyImpl extends SemanticPropertyImpl implements ScalarPr
 				return;
 			case OmlPackage.SCALAR_PROPERTY__DOMAINS:
 				getDomains().clear();
-				getDomains().addAll((Collection<? extends Classifier>)newValue);
+				getDomains().addAll((Collection<? extends Entity>)newValue);
 				return;
 			case OmlPackage.SCALAR_PROPERTY__RANGES:
 				getRanges().clear();

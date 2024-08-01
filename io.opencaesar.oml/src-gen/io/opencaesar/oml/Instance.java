@@ -26,8 +26,8 @@ import org.eclipse.emf.common.util.EList;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Instance is an element that represents a instance of one or more [=classifiers=].
- * It can assert a set of values for those classifiers' [=properties=].
+ * Instance is an element that represents a instance of one or more [=Entities=].
+ * It can assert a set of values for those entities' [=properties=].
  * <!-- end-model-doc -->
  *
  * <p>
@@ -69,6 +69,6 @@ public interface Instance extends Element {
 	 * @model kind="operation" unique="false"
 	 * @generated
 	 */
-	EList<Classifier> getTypes();
+	EList<Entity> getTypes();
 
 } // Instance

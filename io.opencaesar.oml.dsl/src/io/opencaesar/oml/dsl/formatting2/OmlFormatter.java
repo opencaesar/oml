@@ -40,25 +40,25 @@ import com.google.inject.Inject;
 
 import io.opencaesar.oml.Annotation;
 import io.opencaesar.oml.AnnotationProperty;
+import io.opencaesar.oml.AnonymousConceptInstance;
 import io.opencaesar.oml.AnonymousInstance;
 import io.opencaesar.oml.AnonymousRelationInstance;
 import io.opencaesar.oml.Aspect;
 import io.opencaesar.oml.BuiltIn;
 import io.opencaesar.oml.BuiltInPredicate;
-import io.opencaesar.oml.ClassifierEquivalenceAxiom;
 import io.opencaesar.oml.Concept;
 import io.opencaesar.oml.ConceptInstance;
 import io.opencaesar.oml.Description;
 import io.opencaesar.oml.DescriptionBundle;
 import io.opencaesar.oml.DifferentFromPredicate;
 import io.opencaesar.oml.Element;
+import io.opencaesar.oml.EntityEquivalenceAxiom;
 import io.opencaesar.oml.ForwardRelation;
 import io.opencaesar.oml.Import;
 import io.opencaesar.oml.InstanceEnumerationAxiom;
 import io.opencaesar.oml.KeyAxiom;
 import io.opencaesar.oml.Literal;
 import io.opencaesar.oml.LiteralEnumerationAxiom;
-import io.opencaesar.oml.NamedInstance;
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.PropertyCardinalityRestrictionAxiom;
 import io.opencaesar.oml.PropertyPredicate;
@@ -76,9 +76,6 @@ import io.opencaesar.oml.SameAsPredicate;
 import io.opencaesar.oml.Scalar;
 import io.opencaesar.oml.ScalarEquivalenceAxiom;
 import io.opencaesar.oml.ScalarProperty;
-import io.opencaesar.oml.Structure;
-import io.opencaesar.oml.StructureInstance;
-import io.opencaesar.oml.StructuredProperty;
 import io.opencaesar.oml.TypePredicate;
 import io.opencaesar.oml.UnreifiedRelation;
 import io.opencaesar.oml.Vocabulary;
@@ -162,13 +159,13 @@ public class OmlFormatter extends AbstractJavaFormatter {
 				oml.getAspectAccess().getLeftSquareBracketKeyword_2_0(), 
 				oml.getAspectAccess().getRightSquareBracketKeyword_2_2());
 		aspect.getOwnedKeys().forEach(i -> doc.prepend(doc.format(i), newLine()));
-		doc.surround(keyword(aspect, oml.getClassifierSpecializationAccess().getLessThanSignKeyword_0()), oneSpace());
+		doc.surround(keyword(aspect, oml.getEntitySpecializationAccess().getLessThanSignKeyword_0()), oneSpace());
 		formatCommas(aspect, doc);
 		formatBrackets(aspect, doc,
-				oml.getClassifierSpecializationAccess().getLeftSquareBracketKeyword_1_1_1(), 
-				oml.getClassifierSpecializationAccess().getRightSquareBracketKeyword_1_1_3());
+				oml.getEntitySpecializationAccess().getLeftSquareBracketKeyword_1_1_1(), 
+				oml.getEntitySpecializationAccess().getRightSquareBracketKeyword_1_1_3());
 		aspect.getOwnedPropertyRestrictions().forEach(i -> doc.prepend(doc.format(i), newLine()));
-		doc.surround(keyword(aspect, oml.getClassifierEquivalenceAccess().getEqualsSignKeyword_0()), oneSpace());
+		doc.surround(keyword(aspect, oml.getEntityEquivalenceAccess().getEqualsSignKeyword_0()), oneSpace());
 		aspect.getOwnedEquivalences().forEach(i -> doc.prepend(doc.format(i), oneSpace()));
 	}
 
@@ -185,13 +182,13 @@ public class OmlFormatter extends AbstractJavaFormatter {
 				oml.getConceptAccess().getRightSquareBracketKeyword_2_3());
 		ifNotNull(concept.getOwnedEnumeration(), (Procedure1<InstanceEnumerationAxiom>)(i -> doc.prepend(doc.format(i), newLine())));
 		concept.getOwnedKeys().forEach(i -> doc.prepend(doc.format(i), newLine()));
-		doc.surround(keyword(concept, oml.getClassifierSpecializationAccess().getLessThanSignKeyword_0()), oneSpace());
+		doc.surround(keyword(concept, oml.getEntitySpecializationAccess().getLessThanSignKeyword_0()), oneSpace());
 		formatCommas(concept, doc);
 		formatBrackets(concept, doc,
-				oml.getClassifierSpecializationAccess().getLeftSquareBracketKeyword_1_1_1(), 
-				oml.getClassifierSpecializationAccess().getRightSquareBracketKeyword_1_1_3());
+				oml.getEntitySpecializationAccess().getLeftSquareBracketKeyword_1_1_1(), 
+				oml.getEntitySpecializationAccess().getRightSquareBracketKeyword_1_1_3());
 		concept.getOwnedPropertyRestrictions().forEach(i -> doc.prepend(doc.format(i), newLine()));
-		doc.surround(keyword(concept, oml.getClassifierEquivalenceAccess().getEqualsSignKeyword_0()), oneSpace());
+		doc.surround(keyword(concept, oml.getEntityEquivalenceAccess().getEqualsSignKeyword_0()), oneSpace());
 		concept.getOwnedEquivalences().forEach(i -> doc.prepend(doc.format(i), oneSpace()));
 	}
 
@@ -220,33 +217,17 @@ public class OmlFormatter extends AbstractJavaFormatter {
 		doc.prepend(keyword(entity, oml.getRelationEntityAccess().getIrreflexiveIrreflexiveKeyword_2_5_5_0()), newLine());
 		doc.prepend(keyword(entity, oml.getRelationEntityAccess().getTransitiveTransitiveKeyword_2_5_6_0()), newLine());
 		entity.getOwnedKeys().forEach(i -> doc.prepend(doc.format(i), newLine()));
-		doc.surround(keyword(entity, oml.getClassifierSpecializationAccess().getLessThanSignKeyword_0()), oneSpace());
+		doc.surround(keyword(entity, oml.getEntitySpecializationAccess().getLessThanSignKeyword_0()), oneSpace());
 		formatCommas(entity, doc);
 		formatBrackets(entity, doc,
-				oml.getClassifierSpecializationAccess().getLeftSquareBracketKeyword_1_1_1(), 
-				oml.getClassifierSpecializationAccess().getRightSquareBracketKeyword_1_1_3());
+				oml.getEntitySpecializationAccess().getLeftSquareBracketKeyword_1_1_1(), 
+				oml.getEntitySpecializationAccess().getRightSquareBracketKeyword_1_1_3());
 		entity.getOwnedPropertyRestrictions().forEach(i -> doc.prepend(doc.format(i), newLine()));
-		doc.surround(keyword(entity, oml.getClassifierEquivalenceAccess().getEqualsSignKeyword_0()), oneSpace());
+		doc.surround(keyword(entity, oml.getEntityEquivalenceAccess().getEqualsSignKeyword_0()), oneSpace());
 		entity.getOwnedEquivalences().forEach(i -> doc.prepend(doc.format(i), oneSpace()));
 	}
 
-	protected void _format(Structure structure, IFormattableDocument doc) {
-		structure.getOwnedAnnotations().forEach(i -> doc.append(doc.format(i), newLine()));
-		if (structure.getName() != null) {
-			doc.append(keyword(structure, oml.getStructureAccess().getStructureKeyword_1_0_0()), oneSpace());
-		} else if (structure.isRef()) {
-			doc.append(keyword(structure, oml.getStructureAccess().getRefKeyword_1_1_0()), oneSpace());
-			doc.append(keyword(structure, oml.getStructureAccess().getStructureKeyword_1_1_1()), oneSpace());
-		}
-		doc.surround(keyword(structure, oml.getClassifierSpecializationAccess().getLessThanSignKeyword_0()), oneSpace());
-		formatCommas(structure, doc);
-		formatBrackets(structure, doc);
-		structure.getOwnedPropertyRestrictions().forEach(i -> doc.prepend(doc.format(i), newLine()));
-		doc.surround(keyword(structure, oml.getClassifierEquivalenceAccess().getEqualsSignKeyword_0()), oneSpace());
-		structure.getOwnedEquivalences().forEach(i -> doc.prepend(doc.format(i), oneSpace()));
-	}
-
-	protected void _format(ClassifierEquivalenceAxiom axiom, IFormattableDocument doc) {
+	protected void _format(EntityEquivalenceAxiom axiom, IFormattableDocument doc) {
 		formatAmpersands(axiom, doc);
 		formatBrackets(axiom, doc);
 		axiom.getOwnedPropertyRestrictions().forEach(i -> doc.prepend(doc.format(i), newLine()));
@@ -281,25 +262,6 @@ public class OmlFormatter extends AbstractJavaFormatter {
 		doc.prepend(keyword(property, oml.getScalarPropertyAccess().getDomainKeyword_2_1_0()), newLine());
 		doc.prepend(keyword(property, oml.getScalarPropertyAccess().getRangeKeyword_2_2_0()), newLine());
 		doc.prepend(keyword(property, oml.getScalarPropertyAccess().getFunctionalFunctionalKeyword_2_3_0()), newLine());
-		doc.surround(keyword(property, oml.getPropertySpecializationAccess().getLessThanSignKeyword_0()), oneSpace());
-		doc.surround(keyword(property, oml.getPropertyEquivalenceAccess().getEqualsSignKeyword_0()), oneSpace());
-		formatCommas(property, doc);
-	}
-
-	protected void _format(StructuredProperty property, IFormattableDocument doc) {
-		property.getOwnedAnnotations().forEach(i -> doc.append(doc.format(i), newLine()));
-		if (property.getName() != null) {
-			doc.append(keyword(property, oml.getStructuredPropertyAccess().getStructuredKeyword_1_0_0()), oneSpace());
-			doc.append(keyword(property, oml.getStructuredPropertyAccess().getPropertyKeyword_1_0_1()), oneSpace());
-		} else if (property.isRef()) {
-			doc.append(keyword(property, oml.getStructuredPropertyAccess().getRefKeyword_1_1_0()), oneSpace());
-			doc.append(keyword(property, oml.getStructuredPropertyAccess().getStructuredKeyword_1_1_1()), oneSpace());
-			doc.append(keyword(property, oml.getStructuredPropertyAccess().getPropertyKeyword_1_1_2()), oneSpace());
-		}
-		formatBrackets(property, doc);
-		doc.prepend(keyword(property, oml.getStructuredPropertyAccess().getDomainKeyword_2_1_0()), newLine());
-		doc.prepend(keyword(property, oml.getStructuredPropertyAccess().getRangeKeyword_2_2_0()), newLine());
-		doc.prepend(keyword(property, oml.getStructuredPropertyAccess().getFunctionalFunctionalKeyword_2_3_0()), newLine());
 		doc.surround(keyword(property, oml.getPropertySpecializationAccess().getLessThanSignKeyword_0()), oneSpace());
 		doc.surround(keyword(property, oml.getPropertyEquivalenceAccess().getEqualsSignKeyword_0()), oneSpace());
 		formatCommas(property, doc);
@@ -428,9 +390,9 @@ public class OmlFormatter extends AbstractJavaFormatter {
 		instance.getOwnedPropertyValues().forEach(i -> doc.prepend(doc.format(i), newLine()));
 	}
 
-	protected void _format(StructureInstance instance, IFormattableDocument doc) {
-		doc.append(keyword(instance, oml.getStructureInstanceAccess().getColonKeyword_1_0()), oneSpace());
-		doc.append(feature(instance, OmlPackage.Literals.STRUCTURE_INSTANCE__TYPE), oneSpace());
+	protected void _format(AnonymousConceptInstance instance, IFormattableDocument doc) {
+		doc.append(keyword(instance, oml.getAnonymousConceptInstanceAccess().getColonKeyword_1_0()), oneSpace());
+		doc.append(feature(instance, OmlPackage.Literals.ANONYMOUS_CONCEPT_INSTANCE__TYPE), oneSpace());
 		formatBrackets(instance, doc);
 		instance.getOwnedPropertyValues().forEach(i -> doc.prepend(doc.format(i), newLine()));
 	}

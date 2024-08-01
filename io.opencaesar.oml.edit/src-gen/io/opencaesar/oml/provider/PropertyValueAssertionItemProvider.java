@@ -249,7 +249,7 @@ public class PropertyValueAssertionItemProvider extends AssertionItemProvider {
 		newChildDescriptors.add
 			(createChildParameter
 				(OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__CONTAINED_VALUE,
-				 OmlFactory.eINSTANCE.createStructureInstance()));
+				 OmlFactory.eINSTANCE.createAnonymousConceptInstance()));
 
 		newChildDescriptors.add
 			(createChildParameter

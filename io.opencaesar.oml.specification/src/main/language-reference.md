@@ -80,11 +80,9 @@ OML supports several kinds of concrete members for each of its ontology kinds:
     - [Aspect](#Aspect-LR)
     - [Concept](#Concept-LR)
     - [Relation Entity](#RelationEntity-LR)
-    - [Structure](#Structure-LR)
     - [Scalar](#Scalar-LR)
     - [Annotation Property](#AnnotationProperty-LR)
     - [Scalar Property](#ScalarProperty-LR)
-    - [Structured Property](#StructuredProperty-LR)
     - [Unreified Relation](#UnreifiedRelation-LR)
     - [BuiltIn](#BuiltIn-LR) 
     - [Rule](#Rule-LR)
@@ -329,18 +327,18 @@ Note: descriptions that are used by a vocabulary typically define notable instan
 
 ### Types ### {#Types-LR}
 
-Types that can be defined in a vocabulary are either *classifiers* (structured types) or *scalars* (primitive types). Some classifiers ([Aspect](#Aspect-LR), [Concept](#Concept-LR) and [Relation Entity]((#RelationEntity-LR))) are *entities*, meaning they can classify named instances (that are unique by reference). Other classifiers ([Structure](#Structure-LR)) can only classify anonymous instances (that are unique by value). Also, scalars ([Scalar](#Scalar-LR)) can classify literals.
+Types that can be defined in a vocabulary are either *entities* (structured types) or *scalars* (primitive types). Entities ([Aspect](#Aspect-LR), [Concept](#Concept-LR) and [Relation Entity]((#RelationEntity-LR))) classify instances (named or anonymous). Scalars ([Scalar](#Scalar-LR)) classify literals.
 
 
 #### Aspect #### {#Aspect-LR}
 
-An [=aspect=] is an entity defined in a vocabulary and represents a mixin type (or a capability) in a modeled domain. An aspect is declared with the keyword `aspect` followed by an `ID`. An existing (local or imported) aspect can be referenced by the keywords `ref` `aspect` followed by its `IRI`. Moreover, an spect can specify between a pair of `[` `]` brackets a set of [KeyAxioms](#KeyAxiom-LR). It can also be followed by an optional [ClassifierSpecializationAxiom](#ClassifierSpecializationAxiom-LR), and an optional [ClassifierEquivalenceAxiom](#ClassifierEquivalenceAxiom-LR), using the following syntax:
-
+An [=aspect=] is an entity defined in a vocabulary and represents a mixin type (or a capability) in a modeled domain. An aspect is declared with the keyword `aspect` followed by an `ID`. An existing (local or imported) aspect can be referenced by the keywords `ref` `aspect` followed by its `IRI`. Moreover, an spect can specify between a pair of `[` `]` brackets a set of [KeyAxioms](#KeyAxiom-LR). It can also be followed by an optional [EntitySpecializationAxiom](#EntitySpecializationAxiom-LR), and an optional [EntityEquivalenceAxiom](#EntityEquivalenceAxiom-LR), using the following syntax:
+	
 <pre class="highlight highlight-html">
     Annotation*
 	(`aspect` ID | `ref` `aspect` [Aspect|Ref]) (`[`
 		(KeyAxiom)* 
-	`]`)? (ClassifierSpecializationAxiom)? (ClassifierEquivalenceAxiom)?
+	`]`)? (EntitySpecializationAxiom)? (EntityEquivalenceAxiom)?
 </pre>
 
 The following example vocabulary defines an aspect: *IdentifiedElement*, and references an imported aspect *base:Container* to add some axioms to it.
@@ -364,14 +362,14 @@ Two special aspects defined by the owl vocabulary are: *owl:Thing* and *owl:Noth
 
 #### Concept #### {#Concept-LR}
 
-A [=concept=] is an entity defined in a vocabulary and represents a concrete type in a modeled domain. A concept is declared with the keyword `concept` followed by an `ID`. An existing (local or imported) concept can be referenced by the keywords `ref` `concept` followed by an existing `IRI`. Moreover, a concept can specify between a pair of `[` `]` bracketsa a set of [KeyAxioms](#KeyAxiom-RL] and an optional [InstanceEnumerationAxiom](#InstanceEnumerationAxiom-LR). It can also be followed by an optional [ClassifierSpecializationAxiom](#ClassifierSpecializationAxiom-LR) and an optional [ClassifierEquivalenceAxiom](#ClassifierEquivalenceAxiom-LR), using the following syntax.
+A [=concept=] is an entity defined in a vocabulary and represents a concrete type in a modeled domain. A concept is declared with the keyword `concept` followed by an `ID`. An existing (local or imported) concept can be referenced by the keywords `ref` `concept` followed by an existing `IRI`. Moreover, a concept can specify between a pair of `[` `]` bracketsa a set of [KeyAxioms](#KeyAxiom-RL] and an optional [InstanceEnumerationAxiom](#InstanceEnumerationAxiom-LR). It can also be followed by an optional [EntitySpecializationAxiom](#EntitySpecializationAxiom-LR) and an optional [EntityEquivalenceAxiom](#EntityEquivalenceAxiom-LR), using the following syntax.
 
 <pre class="highlight highlight-html">
     Annotation*
 	(`concept` ID | `ref` `concept` [Concept|IRI]) (`[`
 		(KeyAxiom)* 
 		(InstanceEnumerationAxiom)?
-	`]`)? (ClassifierSpecialization)? (ClassifierEquivalence)?
+	`]`)? (EntitySpecialization)? (EntityEquivalence)?
 </pre>
 
 The following example vocabulary defines a concept *Component*, and references an imported concept *base:Package* to add some axioms to it.
@@ -386,7 +384,7 @@ The following example vocabulary defines a concept *Component*, and references a
 
 #### Relation Entity #### {#RelationEntity-LR}
 
- A [relation entity](#RelationEntity-Syntax) is an entity defined in a vocabulary and represents a reified relation between two entities in a modeled domain. A relation entity is declared with the keyword `relation` `entity` followed by an `ID`. An existing (local or imported) relation entity can be referenced by the keywords `ref` `relation` `entity` followed by its `IRI`. A relation entity can specify between `[` `]`  some more details like optional `from` (domain) entities and optional `to` (range) entities that represent types of instances related by this relation, optional names for non-reified `forward` relation (with the same domains and ranges) and non-reified `reverse` relation (with the opposite domains and ranges), various DL flags (`functional`, `inverse functional`, `symmetric`, `assymetric`, `reflective`, `irreflexive`, and `transitive`), as well as a set of [KeyAxioms](#KeyAxiom-LR). A relation entity definition can also be followed by an optional [ClassifierSpecializationAxiom](#ClassifierSpecializationAxiom-LR) and an optional [ClassifierEquivalenceAxiom](#ClassifierEquivalenceAxiom-LR), using the following syntax.
+ A [relation entity](#RelationEntity-Syntax) is an entity defined in a vocabulary and represents a reified relation between two entities in a modeled domain. A relation entity is declared with the keyword `relation` `entity` followed by an `ID`. An existing (local or imported) relation entity can be referenced by the keywords `ref` `relation` `entity` followed by its `IRI`. A relation entity can specify between `[` `]`  some more details like optional `from` (domain) entities and optional `to` (range) entities that represent types of instances related by this relation, optional names for non-reified `forward` relation (with the same domains and ranges) and non-reified `reverse` relation (with the opposite domains and ranges), various DL flags (`functional`, `inverse functional`, `symmetric`, `assymetric`, `reflective`, `irreflexive`, and `transitive`), as well as a set of [KeyAxioms](#KeyAxiom-LR). A relation entity definition can also be followed by an optional [EntitySpecializationAxiom](#EntitySpecializationAxiom-LR) and an optional [EntityEquivalenceAxiom](#EntityEquivalenceAxiom-LR), using the following syntax.
 
 <pre class="highlight highlight-html">
 	Annotation*
@@ -403,7 +401,7 @@ The following example vocabulary defines a concept *Component*, and references a
 		(`irreflexive`)?
 		(`transitive`)?
 		(KeyAxiom)*
-	`]`)? (ClassifierSpecialization)? (ClassifierEquivalence)?
+	`]`)? (EntitySpecialization)? (EntityEquivalence)?
 </pre>
 
 The optional [forward relation](#ForwardRelation-Syntax) and [reverse relation](#ReverseRelation-Syntax) are specified by `ID` as part of the textual syntax of a relation entity as shown belpw. When both are specified, the `forward` and `reverse` relations become inverse of each other, meaning if one is asserted (from instance A to B), the other is inferred (from instance B to A).
@@ -444,24 +442,6 @@ The following example vocabulary defines a relation entity named *Performs* `fro
         `asymmetric`
         `irreflexive`
     `]`
-`}`
-</pre>
-
-#### Structure #### {#Structure-LR}
-
-A [=structure=] is a classifier defined in a vocabulary and represents a structured datatype with anonymous instances in a modeled domain. A structure is declared with the keyword `structure` followed by an `ID`. An existing (local or imported) structure can be referenced by the keywords `ref` `structure` followed by its `IRI`. Moreover, a structure can be followed by an optional [ClassifierSpecializationAxiom](#ClassifierSpecializationAxiom-LR) and an optional [ClassifierEquivalenceAxiom](#ClassifierEquivalenceAxiom-LR), using the following syntax.
-
-<pre class="highlight highlight-html">
-Annotation*
-(`structure` ID | `ref` `structure` [Structure|IRI])
-(ClassifierSpecialization)? (ClassifierEquivalence)?
-</pre>
-
-The following example vocabulary defines the structure *Point* whose instances are anonymous points on a grid.
-
-<pre class="highlight highlight-html">
-`vocabulary` `<`http://com.xyz/methodology/mission#`>` `as` mission `{`
-     `structure` Point
 `}`
 </pre>
 
@@ -543,7 +523,7 @@ Note: for the standard scalars above to be used (cross-referenced) in a project,
 
 ### Properties ### {#Properties-LR}
 
-Properties are characteristics of model elements. Two categories of properties can be defined in a vocabulary: *annotation properties* and *semantic properties*. An [Annotation Property](#AnnotationProperty-LR) has no logical semantics and can characterize any identified element (ontology or member). On the other hand, a semantic property ([Scalar Property](#ScalarProperty-LR), [Structured Property](#StructuredProperty-LR)) or [UnreifiedRelation](#UnreifiedRelation-LR)) has logical semantics and is specified with one or more *domains* representing classifiers (or entities in the case of a relation) whose instances can be characterized by such property, and one or more *ranges* representing types of values for the property.
+Properties are characteristics of model elements. Two categories of properties can be defined in a vocabulary: *annotation properties* and *semantic properties*. An [Annotation Property](#AnnotationProperty-LR) has no logical semantics and can characterize any identified element (ontology or member). On the other hand, a semantic property ([Scalar Property](#ScalarProperty-LR) or [UnreifiedRelation](#UnreifiedRelation-LR)) has logical semantics and is specified with one or more *domains* representing entities whose instances can be characterized by such property, and one or more *ranges* representing types of values for the property.
 
 #### Annotation Property #### {#AnnotationProperty-LR}
 
@@ -612,12 +592,12 @@ http://purl.org/dc/elements/1.1/hasVersion
 
 #### Scalar Property #### {#ScalarProperty-LR}
 
-A [scalar property](#ScalarProperty-Syntax) is a semantic property defined in a vocabulary, whose domains can be classifiers ([Aspects](#Aspect-LR), [Concepts](#Concept-LR), [Relation Entities](#RelationEntity-LR), or [Structures](#Structure-LR)) and whose ranges can be ([Scalars](#Scalar-LR). This means the values of a scalar property are literals of those scalar ranges. A scalar property is defined with the keywords `scalar` `property` followed by a name ID. An existing (local or imported) scalar property can be referenced by the keywords `ref` `scalar` `property` followed by its `IRI`. It can also specify between a pair of `[` `]` brackets optional `domain` classifiers and optional `range` scalars that can be inferred as types of values related by this property. When either is omitted, no type can be inferred for the value in that position. It can slso specify an optional DL flag `functional`that specifies that this property can relate an instance of its domains to a maximum of one literal of its ranges. The property can also be followed an optional [PropertySpecializationAxiom](#PropertySpecializationAxiom-LR) and an optional [PropertyEquivalenceAxiom](#PropertyEquivalenceAxiom-LR), using the following syntax:
+A [scalar property](#ScalarProperty-Syntax) is a semantic property defined in a vocabulary, whose domains can be entities ([Aspects](#Aspect-LR), [Concepts](#Concept-LR), or [Relation Entities](#RelationEntity-LR)) and whose ranges can be ([Scalars](#Scalar-LR). This means the values of a scalar property are literals of those scalar ranges. A scalar property is defined with the keywords `scalar` `property` followed by a name ID. An existing (local or imported) scalar property can be referenced by the keywords `ref` `scalar` `property` followed by its `IRI`. It can also specify between a pair of `[` `]` brackets optional `domain` entities and optional `range` scalars that can be inferred as types of values related by this property. When either is omitted, no type can be inferred for the value in that position. It can slso specify an optional DL flag `functional`that specifies that this property can relate an instance of its domains to a maximum of one literal of its ranges. The property can also be followed an optional [PropertySpecializationAxiom](#PropertySpecializationAxiom-LR) and an optional [PropertyEquivalenceAxiom](#PropertyEquivalenceAxiom-LR), using the following syntax:
 
 <pre class="highlight highlight-html">
 	Annotation*
 	(`scalar` `property` ID | `ref` `scalar` `property` [ScalarProperty|IRI]) (`[`
-		(`domain` [Classifier|IRI] (`,` [Classifier|IRI])*)?
+		(`domain` [Entity|IRI] (`,` [Entity|IRI])*)?
 		(`range` [Scalar|IRI] (`,` [Scalar|IRI])*)?
 		(`functional`)?
 	`]`)? (PropertySpecialization)? (PropertyEquivalence)?
@@ -642,44 +622,6 @@ The following example vocabulary defines three scalar properties named *hasId*, 
     `scalar` `property` isAbstract `[`
         `domain` Function
         `range` xsd:boolean
-        `functional`
-    `]`
-`}`
-</pre>
-
-#### Structured Property #### {#StructuredProperty-LR}
-
-A [structured property](#StructuredProperty-Syntax) is a semantic property defined in a vocabulary, whose domains can be classifiers ([Aspects](#Aspect-LR), [Concepts](#Concept-LR), [Relation Entities](#RelationEntity-LR), or [Structures](#Structure-LR)) and whose ranges can be ([Structures](#Structure-LR). This means the values of a structured property are instances of those structures. A stuctured property is defined with the keywords `structured` `property` followed by a name ID. An existing (local or imported) structured property can be referenced by the keywords `ref` `structured` `property` followed by its `IRI`. It can also specify between a pair of `[` `]` brackets optional `domain` classifiers and optional `range` structures that can be inferred as types of values related by this property. When either is omitted, no type can be inferred for the value in that position. It can slso specify an optional DL flag `functional`that specifies that this property can relate an instance of its domains to a maximum of one instance of its ranges. The property can also be followed an optional [PropertySpecializationAxiom](#PropertySpecializationAxiom-LR) and an optional [PropertyEquivalenceAxiom](#PropertyEquivalenceAxiom-LR), using the following syntax:
-
-<pre class="highlight highlight-html">
-	Annotation*
-	(`structured` `property` ID | `ref` `structured` `property` [StructuredProperty|IRI]) (`[`
-		(`domain` [Classifier|IRI] (`,` [Classifier|IRI])*)?
-		(`range` [Structure|IRI] (`,` [Structure|IRI])*)?
-		(`functional`)?
-	`]`)? (PropertySpecialization)? (PropertyEquivalence)?
-</pre>
-
-The following example vocabulary defines a structured property named *hasLocation* whose domain is concept *Shape* and whose range is structure *Point*. The latter is the domain of two scalar properties *hasX* and *hasY* that have a range of *xsd:int*.
-
-<pre class="highlight highlight-html">
-`vocabulary` `<`http://com.xyz/methodology/graphics#`>` `as` graphics `{`
-    `extends` `<`http://www.w3.org/2001/XMLSchema#`>` `as` xsd
-    `concept` Shape
-    `structure` Point
-    `structured` `property` hasLocation `[`
-        `domain` Shape
-        `range` Point
-        `functional`
-    `]`
-    `scalar` `property` hasX `[`
-        `domain` Point
-        `range` xsd:int
-        `functional`
-    `]`
-    `scalar` `property` hasY `[`
-        `domain` Point
-        `range` xsd:int
         `functional`
     `]`
 `}`
@@ -814,19 +756,19 @@ The following example vocabulary defines a scalar *RGB* with *Red*, *Green*, and
 `}`
 </pre>
 
-#### Classifier Specialization Axiom #### {#ClassifierSpecializationAxiom-LR}
+#### Entity Specialization Axiom #### {#EntitySpecializationAxiom-LR}
 
 
-A Classifier Specialization Axiom is one that can be specified on a [=Classifier=] to specify that it specializes other [=Classifiers=] and/or has [=PropertyRestrictionAxioms=]. Its syntax starts with `<` then a list of comma-separated [=Classifier=] and/or a list of [=PropertyRestrictionAxioms=] as follows:
+An Entity Specialization Axiom is one that can be specified on an [=Entity=] to specify that it specializes other [=Entities=] and/or has [=PropertyRestrictionAxioms=]. Its syntax starts with `<` then a list of comma-separated [=Entities=] and/or a list of [=PropertyRestrictionAxioms=] as follows:
 <pre class="highlight highlight-html">
-	`<` ([Classifier|IRI] (`,` [Classifier|IRI])* 
+	`<` ([Entity|IRI] (`,` [Entity|IRI])* 
 		|
-		([Classifier|IRI] (`,` [Classifier|IRI])*)? `[`
+		([Entity|IRI] (`,` [Entity|IRI])*)? `[`
 			PropertyRestrictionAxiom*
 		`]`)
 </pre>
 
-Examples of using Classifier Specialization Axioms can be seen in the following:
+Examples of using Entity Specialization Axioms can be seen in the following:
 
 <pre class="highlight highlight-html">
     `aspect` Component `<` IdentifiableElement
@@ -835,9 +777,9 @@ Examples of using Classifier Specialization Axioms can be seen in the following:
     `]`
 </pre>
 
-classifiers can only specialize classifiers of the same kind (e.g., concept speciailzes concept, structure specializes structure, etc.). The only exception to this is [=Aspect=] which can be specialized by any entity ([=Aspect=], [=Concept=], [=RelationEntity=]).
+Entities can only specialize entities of the same kind (e.g., concept specializes concept, scalar specializes scalar, etc.). The only exception to this is [=Aspect=] which can be specialized by any entity ([=Aspect=], [=Concept=], [=RelationEntity=]).
 
-A [=RelationEntity=], being a kind of [=Classifier=], can also specialize another [-RelationEntity=]. This case has the following extra semantics:
+A [=RelationEntity=], being a kind of [=Entity=], can also specialize another [-RelationEntity=]. This case has the following extra semantics:
 
 - The intersection of the `from` entities of a sub relation entity specializes the intersection of the `from` entities of the super relation entity.
 - The intersection of the `to` entities of a sub relation entity specializes the intersection of the `to` entities of the super relation entity.
@@ -867,22 +809,22 @@ An example of [=RelationEntity=] specialization is given below. In this case, wh
 `}`
 </pre>
 
-#### Classifier Equivalence Axiom #### {#ClassifierEquivalenceAxiom-LR}
+#### Entity Equivalence Axiom #### {#EntityEquivalenceAxiom-LR}
 
-A Classifier Equivalence Axiom is one that can be specified on a [=Classifier=] to specify that it is equivalent to the intersection of other [=Classifiers=] and/or [=PropertyRestrictionAxioms=]. The syntax starts with `=` then a list of comma-separated [=ClassifierEquivalenceAxiom=], each of which consists of a `&` separated list of classifiers and/or a list of [=PropertyRestrictionAxioms=] between `[` `]` brackets as follows:
+An Entity Equivalence Axiom is one that can be specified on an [=Entity=] to specify that it is equivalent to the intersection of other [=Entities=] and/or [=PropertyRestrictionAxioms=]. The syntax starts with `=` then a list of comma-separated [=EntityEquivalenceAxiom=], each of which consists of a `&` separated list of entities and/or a list of [=PropertyRestrictionAxioms=] between `[` `]` brackets as follows:
 
 <pre class="highlight highlight-html">
-`=` ClassifierEquivalenceAxiom (`,` ClassifierEquivalenceAxiom)*
+`=` EntityEquivalenceAxiom (`,` EntityEquivalenceAxiom)*
 
-&lt;ClassifierEquivalenceAxiom&gt;:
-	[Classifier|IRI] (`&` [Classifier|IRI])*
+&lt;EntityEquivalenceAxiom&gt;:
+	[Entity|IRI] (`&` [Entity|IRI])*
 	|
-	([Classifier|IRI] (`&` [Classifier|IRI])*)? `[`
+	([Entity|IRI] (`&` [Entity|IRI])*)? `[`
 		PropertyRestrictionAxiom*
 	`]`
 </pre>
 
-Examples of using Classifier Equivalence Axioms can be seen in the following:
+Examples of using Entity Equivalence Axioms can be seen in the following:
 
 <pre class="highlight highlight-html">
     `concept` FunctionalComponent `=` Component `[`
@@ -894,9 +836,9 @@ Examples of using Classifier Equivalence Axioms can be seen in the following:
     `]`
 </pre>
 
-Saying that classifier *A* is equivalent to *B* is like saying that *A* specializes *B* and *B* specializes *A*. Therefore, the semantic of classifier specialization described for [=ClassifierSpecializationAxiom] hold in both directions. This means if an instance is asserted to be typed by *A*, it will be inferred to be typed by *B* as well and vice versa (bidirectional inferencing). However, if *B* is an intersection of multiple [=Classifiers=] and/or [=PropertyRestrictionAxioms=] then the inverse specialization is not inferred until an instance of *A* is an instance of each of the intersecting components. In the example above, if an instance is a *Component* and has some of its requirements as *FunctionalRequirement*, then the instance can be inferred to be a *FunctionalComponent*.
+Saying that entity *A* is equivalent to *B* is like saying that *A* specializes *B* and *B* specializes *A*. Therefore, the semantic of entity specialization described for [=EntitySpecializationAxiom] hold in both directions. This means if an instance is asserted to be typed by *A*, it will be inferred to be typed by *B* as well and vice versa (bidirectional inferencing). However, if *B* is an intersection of multiple [=Entities=] and/or [=PropertyRestrictionAxioms=] then the inverse specialization is not inferred until an instance of *A* is an instance of each of the intersecting components. In the example above, if an instance is a *Component* and has some of its requirements as *FunctionalRequirement*, then the instance can be inferred to be a *FunctionalComponent*.
 
-Note: that equivalent classes must be of the same kind (e.g., concept is equivalent to concepts). The only exception is when an entity *A* is equivalent to an intersection of [=Classifiers=] and/or [=PropertyRestrictionAxioms=], in which case some of the equivalent classifiers could be [=Aspects=].
+Note: that equivalent classes must be of the same kind (e.g., concept is equivalent to concepts). The only exception is when an entity *A* is equivalent to an intersection of [=Entities=] and/or [=PropertyRestrictionAxioms=], in which case some of the equivalent entities could be [=Aspects=].
 
 #### Scalar Specialization Axiom #### {#ScalarSpecializationAxiom-LR}
 
@@ -1009,17 +951,14 @@ Note: that equivalent properties must be of the same kind (e.g., scalar property
 
 #### Property Value Restriction Axiom #### {#PropertyValueRestrictionAxiom-LR}
 
-A [property value restriction axiom](#PropertyValueRestrictionAxiom-Syntax) is an axiom defined on a classifier ([Aspect](#Aspect-LR), [Concept](#Concept-LR), [Relation Entity](#RelationEntity-LR) and [Structure](#Structure-LR)) that restricts a semantic property in some way in the classifier's context. This property can be ([Scalar Property](#ScalarProperty-LR), [Structured Property](#StructuredProperty-LR), [Forward Relation](#RelationEntity-LR), [Reverse Relation](#RelationEntity-LR), or [Unreified Relation](#UnreifiedRelation-LR)) whose domain is the context type or one of its supertypes. The facets that can be restricted about those properties vary (like their range, cardinality, or value) resulting in different subtypes of restriction axioms.
-
-Note: a structure can specify property value restriction axioms only on scalar and structures properties, but not relations (forward, reverse, or unreified) since a structure cannot be a source (domain) or target (range) of a relation.
+A [property value restriction axiom](#PropertyValueRestrictionAxiom-Syntax) is an axiom defined on an entity ([Aspect](#Aspect-LR), [Concept](#Concept-LR), or [Relation Entity](#RelationEntity-LR)) that restricts a semantic property in some way in the entity's context. This property can be ([Scalar Property](#ScalarProperty-LR), [Forward Relation](#RelationEntity-LR), [Reverse Relation](#RelationEntity-LR), or [Unreified Relation](#UnreifiedRelation-LR)) whose domain is the context type or one of its supertypes. The facets that can be restricted about those properties vary (like their range, cardinality, or value) resulting in different subtypes of restriction axioms.
 
 <u>Property Range Restriction Axioms</u>
 
-A range restriction axiom restricts the range of a property in the context of some classifier. The axiom specifies a restricted range that is a subtype of the property's original range. The syntax of a range restriction axioms starts with the keyword `restricts` followed by a restriction kind, which can either be `all` (requiring all values to conform to the restricted range) or `some` (requiring at least one value to conform to the restricted range). This is followed by the kind of property (`scalar property`, `structured property`, or `relation`) then a reference to the property by IRI. Finally, the keyword `to` is used followed by a reference to the restricted range (a scalar, a structure, or an entity) by IRI. The following shows the three supported syntaxes:
+A range restriction axiom restricts the range of a property in the context of some entity. The axiom specifies a restricted range that is a subtype of the property's original range. The syntax of a range restriction axioms starts with the keyword `restricts` followed by a restriction kind, which can either be `all` (requiring all values to conform to the restricted range) or `some` (requiring at least one value to conform to the restricted range). This is followed by the kind of property (`scalar property`, or `relation`) then a reference to the property by IRI. Finally, the keyword `to` is used followed by a reference to the restricted range (a scalar or an entity) by IRI. The following shows the three supported syntaxes:
 
 <pre class="highlight highlight-html">
 	`restricts` [ `all` | `some` ] [ScalarProperty|IRI] `to` [Scalar|IRI]
-	`restricts` [ `all` | `some` ] [StructuredProperty|IRI] `to` [Structure|IRI]
 	`restricts` [ `all` | `some` ] [Relation|IRI] `to` [Entity|IRI]
 </pre>
 
@@ -1039,8 +978,8 @@ The following example shows a vocabulary that defines a concept *Assembly* with 
     `scalar` ten-chars < xsd:string `[`
         `length` 10
     `]`
-    `structure` Pin
-    `structure` InputPin < Pin
+    `concept` Pin
+    `concept` InputPin < Pin
     `relation` `entity` Performs `[`
         `from` Component
         `to` Function
@@ -1052,9 +991,9 @@ The following example shows a vocabulary that defines a concept *Assembly* with 
         `range` xsd:string
         `functional`
    `]`
-    `structured` `property` hasPin `[`
-        `domain` Component
-        `range` Pin
+    `relation` hasPin `[`
+        `from` Component
+        `to` Pin
         `functional`
    `]`
 `}`
@@ -1062,11 +1001,10 @@ The following example shows a vocabulary that defines a concept *Assembly* with 
 
 <u>Property Cardinality Restriction Axioms</u>
 
-A cardinality restriction axiom restricts the cardinality of a property in the context of some classifier. The axiom specifies a minimum, a maximum, or an exact number of values, conforming to the original range, or to a specified restricted range, that a property can have in that context. The syntax of a cardinality restriction axioms starts with the keyword `restricts` followed by the kind of property (`scalar property`, `structured property`, or `relation`) then a reference to the property by IRI. Then, the keyword `to` is used followed by a cardinality kind (`min`, `max`, or `exactly`), a cardinality value (positive integer), and finally an optional reference to a restricted range (a scalar, a structure, or an entity) by IRI. The following shows the three supported syntaxes:
+A cardinality restriction axiom restricts the cardinality of a property in the context of some entity. The axiom specifies a minimum, a maximum, or an exact number of values, conforming to the original range, or to a specified restricted range, that a property can have in that context. The syntax of a cardinality restriction axioms starts with the keyword `restricts` followed by the kind of property (`scalar property` or `relation`) then a reference to the property by IRI. Then, the keyword `to` is used followed by a cardinality kind (`min`, `max`, or `exactly`), a cardinality value (positive integer), and finally an optional reference to a restricted range (a scalar or an entity) by IRI. The following shows the three supported syntaxes:
 
 <pre class="highlight highlight-html">
 	`restricts` [ScalarProperty|IRI] `to` [ `max` | `min` | `exactly` ] UnsignedInteger [Scalar|IRI]?
-	`restricts` [StructuredProperty|IRI] `to` [ `max` | `min` | `exactly` ] UnsignedInteger [Structure|IRI]?
 	`restricts` [Relation|IRI] `to` [ `max` | `min` | `exactly` ] UnsignedInteger [Entity|IRI]?
 </pre>
 
@@ -1082,8 +1020,8 @@ The following example shows a vocabulary that defines a concept *Assembly* with 
         `restricts` hasPin `to` max 2 InputPin    // there must be at most two input pins
         `restricts` performs `to` min 5                      // a minimum of 5 functions must be performed
     ]
-    `structure` Pin
-    `structure` InputPin < Pin
+    `concept` Pin
+    `concept` InputPin < Pin
     `relation` `entity` Performs `[`
         `from` Component
         `to` Function
@@ -1095,9 +1033,9 @@ The following example shows a vocabulary that defines a concept *Assembly* with 
         `range` xsd:string
         `functional`
    `]`
-    `structured` `property` hasPin `[`
-        `domain` Component
-        `range` Pin
+    `relation` hasPin `[`
+        `from` Component
+        `to` Pin
         `functional`
    `]`
 `}`
@@ -1105,7 +1043,7 @@ The following example shows a vocabulary that defines a concept *Assembly* with 
 
 <u>Property Value Restriction Axioms</u>
 
-A value restriction axiom restricts the value of a property in the context of some classifier. In the case of a relation, the restricted value represents the relation's target instance. The syntax of a value restriction axioms starts with the keyword `restricts` followed by a reference to the property by IRI. Then, the keyword `to` is used followed by a value that is suitable for each case (a [literal](#Literal-Syntax), an [anonymous instance](#AnonymousInstance-Syntax), or a reference to a [named instance](#NamedInstance-Syntax) by IRI). The following shows the three supported syntaxes:
+A value restriction axiom restricts the value of a property in the context of some entity. In the case of a relation, the restricted value represents the relation's target instance. The syntax of a value restriction axioms starts with the keyword `restricts` followed by a reference to the property by IRI. Then, the keyword `to` is used followed by a value that is suitable for each case (a [literal](#Literal-Syntax), an [anonymous instance](#AnonymousInstance-Syntax), or a reference to a [named instance](#NamedInstance-Syntax) by IRI). The following shows the three supported syntaxes:
 
 <pre class="highlight highlight-html">
 	`restricts` [SemanticProperty|IRI] `to` Literal
@@ -1126,7 +1064,7 @@ The following example shows a vocabulary that defines a concept *Assembly* with 
         `restricts` hasPin `to` Pin `[` hasNumber 1 `]`   // hasPin must have a Pin with hasNumber of 1
         `restricts` performs `to` functions:F1                         // the performed function must be functions:F1
     ]
-    `structure` Pin
+    `concept` Pin
     `relation` `entity` Performs `[`
         `from` Component
         `to` Function
@@ -1138,9 +1076,9 @@ The following example shows a vocabulary that defines a concept *Assembly* with 
         `range` xsd:string
         `functional`
    `]`
-    `structured` `property` hasPin `[`
-        `domain` Component
-        `range` Pin
+    `relation` hasPin `[`
+        `from` Component
+        `to` Pin
         `functional`
    `]`
     `scalar` `property` hasNumber `[`
@@ -1158,7 +1096,7 @@ The following example shows a vocabulary that defines a concept *Assembly* with 
 
 <u>Property Self Restriction Axioms</u>
 
-A self restriction axiom restricts the value of a relation in the context of some classifier to the context itself. In other words, it restricts the instance that is the target of a relation to be the same one as the source of the relation. The syntax of a self restriction axioms starts with the keyword `restricts` followed by a reference to the relation by IRI, followed by the keyword `to` then finally the keyword `self`. The following shows the supported syntaxes:
+A self restriction axiom restricts the value of a relation in the context of some entity to the context itself. In other words, it restricts the instance that is the target of a relation to be the same one as the source of the relation. The syntax of a self restriction axioms starts with the keyword `restricts` followed by a reference to the relation by IRI, followed by the keyword `to` then finally the keyword `self`. The following shows the supported syntaxes:
 
 <pre class="highlight highlight-html">
 	`restricts` [Relation|IRI] `to` `self`
@@ -1361,11 +1299,11 @@ In the following example description, the *mission* vocabulary is used to descri
 
 ### Instances ### {#Instances-LR}
 
-Instances represent objects or data in a given system. They are described using terms (types and properties) from some vocabulary. Specifically, they can be given types and have assertions on properties in the domain of those types. Instances can either be named ([Concept Instance](#ConceptInstance-LR) and [Relation Instance](#RelationInstance-LR)), in which case they are specified as members of some description, or they can be anonymous ([Structure Instance](#StructureInstance-LR) and [Anonymous Relation Instance](#AnonymousRelationInstance-LR)), in which case they defined as values of [semantic properties](SemanticProperty-LR) in the context of other (named or anonymous) instances.
+Instances represent objects or data in a given system. They are described using terms (types and properties) from some vocabulary. Specifically, they can be given types and have assertions on properties in the domain of those types. Instances can either be named ([Concept Instance](#ConceptInstance-LR) and [Relation Instance](#RelationInstance-LR)), in which case they are specified as members of some description, or they can be anonymous ([Anonymous Concept Instance](#AnonymousConceptInstance-LR) and [Anonymous Relation Instance](#AnonymousRelationInstance-LR)), in which case they defined as values of [semantic properties](SemanticProperty-LR) in the context of other (named or anonymous) instances.
 
 #### Concept Instance #### {#ConceptInstance-LR}
 
-A [concept instance](#ConceptInstance-Syntax) is a named instance defined as a member of a description and can be typed by concepts (from some imported vocabulary). The concept instance is declared with the keyword `instance` and a name ID. It can optionally be followed by a `:` and the IRIs of one or more concepts that are considered types of the instance. It can also optionally be followed by a pair of square brackets `[` `]` that holds assertions about the instance.
+A [concept instance](#ConceptInstance-Syntax) is a named instance defined as a member of a description and can be typed by concepts (from some imported vocabulary). The concept instance is declared with the keyword `instance` and a name ID. It can optionally be followed by a `:` and the IRIs of one or more concepts (or aspects) that are considered types of the instance. It can also optionally be followed by a pair of square brackets `[` `]` that holds assertions about the instance.
 
 <pre class="highlight highlight-html">
 	Annotation*
@@ -1414,12 +1352,12 @@ The following example description defines three concept instances: *component1* 
 `}`
 </pre>
 
-#### Structure Instance #### {#StructureInstance-LR}
+#### Anonymous Concept Instance #### {#AnonymousConceptInstance-LR}
 
-A [structure instance](#StructureInstance-Syntax) is an anonymous instance that can be defined as a value of a structured property. Such value can either be specified in a [property value assertion](#PropertyValueAssertion-LR), defined in the context of some instance, or in a [property value restriction axiom](#PropertyValueRestrictionAxiom-LR) on some structured property in the context of some classifier. A structure instance is declared with an optional type, represented by a colon (`:`) followed by a structure IRI , followed by a pair of square brackets (`[` `]`) that holds assertions about the instance. Note that if a type is omitted, it will be inferred to be the range of the structure property that defines the structure instance.
+An [anonymous concept instance](#AnonymousConceptInstance-Syntax) is an anonymous instance that can be defined as a value of a relation. Such value can either be specified in a [property value assertion](#PropertyValueAssertion-LR), defined in the context of some instance, or in a [property value restriction axiom](#PropertyValueRestrictionAxiom-LR) on some relation in the context of some entity. An anonymous concept instance is declared with an optional type, represented by a colon (`:`) followed by a concept (or aspect) IRI , followed by a pair of square brackets (`[` `]`) that holds assertions about the instance. Note that if a type is omitted, it will be inferred to be the target of the relation that defines the anonymous concept instance.
 
 <pre class="highlight highlight-html">
-	(`:` [Structure|IRI])? `[`
+	(`:` [Entity|IRI])? `[`
 		Assertion*
 	`]`
 </pre>
@@ -1430,12 +1368,12 @@ The following example shows .
 `vocabulary` `<`http://com.xyz/methodology/mission#`>` `as` mission `{`
     `extends` `<`http://www.w3.org/2001/XMLSchema#`>` `as` xsd
     `concept` Component `[`
-        `restricts` hasPin `to` `:` Pin `[` hasNumber 1 `]`   // structure instance used as restricted value
+        `restricts` hasPin `to` `:` Pin `[` hasNumber 1 `]`   // anonymous concept instance used as restricted value
     `]`
-    `structure` Pin
-    `structured` `property` hasPin `[`
-        `domain` Component
-        `range` Pin
+    `concept` Pin
+    `relation` hasPin `[`
+        `from` Component
+        `to` Pin
         `functional`
    `]`
     `scalar` `property` hasNumber `[`
@@ -1448,14 +1386,14 @@ The following example shows .
 `description` `<`http://com.xyz/methodology/functions#`>` `as` functions `{`
     `uses` `<`http://com.xyz/methodology/mission#`>` `as` mission
     `instance` C1 `:` mission:Component `[`
-        mission:hasPin `:` Pin `[` mission:hasNumber 2 `]`                    // structure instance used in value assertion
+        mission:hasPin `:` Pin `[` mission:hasNumber 2 `]`                    // anonymous concept instance used in value assertion
     `]`
 `}`
 </pre>
 
 #### Anonymous Relation Instance #### {#AnonymousRelationInstance-LR}
 
-An [anonymous relation instance](#AnonymousRelationInstance-Syntax) is an anonymous instance of a relation entity that can be defined as a value of a forward or a reverse relation. Such value can either be specified in a [property value assertion](#PropertyValueAssertion-LR), defined on some forward or reverse relation in the context of a (source) named instance, or in a [property value restriction axiom](#PropertyValueRestrictionAxiom-LR) on some forward or reverse relation in the context of a classifier (representing the type of source of the relation). An anonymous relation instance is declared with the IRI of a (target) named instance followed by a pair of square brackets (`[` `]`) that holds assertions about the relation instance.
+An [anonymous relation instance](#AnonymousRelationInstance-Syntax) is an anonymous instance of a relation entity that can be defined as a value of a forward or a reverse relation. Such value can either be specified in a [property value assertion](#PropertyValueAssertion-LR), defined on some forward or reverse relation in the context of a (source) named instance, or in a [property value restriction axiom](#PropertyValueRestrictionAxiom-LR) on some forward or reverse relation in the context of an entity (representing the type of source of the relation). An anonymous relation instance is declared with the IRI of a (target) named instance followed by a pair of square brackets (`[` `]`) that holds assertions about the relation instance.
 
 <pre class="highlight highlight-html">
 	[NamedInstance|IRI] `[`
@@ -1497,28 +1435,25 @@ The following example shows .
 
 ### Assertions ### {#Assertions-LR}
 
-Assertions are statements about instances that enable characterizing them. They appear in the body of an instance (either named or anonymous) between its two brackets `[` `]`. This section describes the supported assertions, which include a [property value assertion](#PropertyValueAssertion-LR) that can be specified on (concept, relation, or structure) instances.
+Assertions are statements about instances that enable characterizing them. They appear in the body of an instance (either named or anonymous) between its two brackets `[` `]`. This section describes the supported assertions, which include a [property value assertion](#PropertyValueAssertion-LR) that can be specified on named or anonymous (concept or relation) instances.
 
 #### Property Value Assertion #### {#PropertyValueAssertion-LR}
 
-A value for a semantic property can be [asserted](#PropertyValueAssertion-Syntax) on an instance ([Concept Instance](#ConceptInstance-LR), [Relation Instance](#RelationInstance-LR), or [Structure Instance](#StructureInstance-LR)). Such assertion can be added as one of the assertions between the square  brackets `[` `]` of the instance. Its syntax consists of an IRI to a [semantic property](#SemanticProperty-Syntax) from some vocabulary followed by one or more values, which could be literals, structure instances, or IRIs of named instances.
+A value for a semantic property can be [asserted](#PropertyValueAssertion-Syntax) on an instance ([Concept Instance](#ConceptInstance-LR), [Relation Instance](#RelationInstance-LR), [Anonymous Concept Instance](#AnonymousConceptInstance-LR) or [Anonymous Relation Instance](#AnonymousRelationInstance-LR)). Such assertion can be added as one of the assertions between the square  brackets `[` `]` of the instance. Its syntax consists of an IRI to a [semantic property](#SemanticProperty-Syntax) from some vocabulary followed by one or more values, which could be literals, anonymous instances, or IRIs of named instances.
 
 <pre class="highlight highlight-html">
 [ScalarProperty|IRI] Literal (`,` Literal)*
-[StructuredProperty|IRI] StuctureInstance (`,` StuctureInstance)* 
 [Relation|IRI] [NamedInstance|IRI] (`,` [NamedInstance|IRI])*
 </pre>
 
-Note: a structure instance can specify property value assertion only for scalar and structures properties, but not relations (forward, reverse, or unreified) since a structure cannot be a source (domain) or target (range) of a relation.
-
-The following example description defines two concept instances that each makes a number of  property assertions. Specifically, instance *component1* asserts that the *mission:hasId* scalar property has a string value of *C1*, the *mission:hasPin* structured property as a structure instance (whose *mission:hasNumber* property value is asserted to be 2) as a value, and the *mission:performs* relation has the IRI of instance *function1* as a value. Also, instance *function1* asserts that its *mission:hasName* property has a string value of *F1*. 
+The following example description defines two concept instances that each makes a number of  property assertions. Specifically, instance *component1* asserts that the *mission:hasId* scalar property has a string value of *C1*, the *mission:hasPin* relation as an anonymous concept instance (whose *mission:hasNumber* property value is asserted to be 2) as a value, and the *mission:performs* relation has the IRI of instance *function1* as a value. Also, instance *function1* asserts that its *mission:hasName* property has a string value of *F1*. 
 
 <pre class="highlight highlight-html">
 `description` `<`http://com.xyz/system/components#`>` `as` components `{`
     `uses` `<`http://com.xyz/methodology/mission#`>` `as` mission
     `instance` component1 `:` mission:Component `[`
         mission:hasId 'C1'        							// scalar property value assertion
-        mission:hasPin Pin `[` mission:hasNumber 2 `]`      // structure property value assertion
+        mission:hasPin Pin `[` mission:hasNumber 2 `]`      // anonymous concept property value assertion
         mission:performs function1    						// relation value assertion
     `]`
     `instance` function1 `:` mission:Function `[`

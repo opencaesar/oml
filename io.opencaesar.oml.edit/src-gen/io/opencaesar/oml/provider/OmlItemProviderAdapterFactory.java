@@ -318,29 +318,6 @@ public class OmlItemProviderAdapterFactory extends OmlAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.Structure} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected StructureItemProvider structureItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.Structure}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createStructureAdapter() {
-		if (structureItemProvider == null) {
-			structureItemProvider = new StructureItemProvider(this);
-		}
-
-		return structureItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.Aspect} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -453,29 +430,6 @@ public class OmlItemProviderAdapterFactory extends OmlAdapterFactory implements 
 		}
 
 		return scalarPropertyItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.StructuredProperty} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected StructuredPropertyItemProvider structuredPropertyItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.StructuredProperty}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createStructuredPropertyAdapter() {
-		if (structuredPropertyItemProvider == null) {
-			structuredPropertyItemProvider = new StructuredPropertyItemProvider(this);
-		}
-
-		return structuredPropertyItemProvider;
 	}
 
 	/**
@@ -594,26 +548,26 @@ public class OmlItemProviderAdapterFactory extends OmlAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.StructureInstance} instances.
+	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.AnonymousConceptInstance} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected StructureInstanceItemProvider structureInstanceItemProvider;
+	protected AnonymousConceptInstanceItemProvider anonymousConceptInstanceItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.StructureInstance}.
+	 * This creates an adapter for a {@link io.opencaesar.oml.AnonymousConceptInstance}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createStructureInstanceAdapter() {
-		if (structureInstanceItemProvider == null) {
-			structureInstanceItemProvider = new StructureInstanceItemProvider(this);
+	public Adapter createAnonymousConceptInstanceAdapter() {
+		if (anonymousConceptInstanceItemProvider == null) {
+			anonymousConceptInstanceItemProvider = new AnonymousConceptInstanceItemProvider(this);
 		}
 
-		return structureInstanceItemProvider;
+		return anonymousConceptInstanceItemProvider;
 	}
 
 	/**
@@ -732,26 +686,26 @@ public class OmlItemProviderAdapterFactory extends OmlAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.ClassifierEquivalenceAxiom} instances.
+	 * This keeps track of the one adapter used for all {@link io.opencaesar.oml.EntityEquivalenceAxiom} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ClassifierEquivalenceAxiomItemProvider classifierEquivalenceAxiomItemProvider;
+	protected EntityEquivalenceAxiomItemProvider entityEquivalenceAxiomItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link io.opencaesar.oml.ClassifierEquivalenceAxiom}.
+	 * This creates an adapter for a {@link io.opencaesar.oml.EntityEquivalenceAxiom}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createClassifierEquivalenceAxiomAdapter() {
-		if (classifierEquivalenceAxiomItemProvider == null) {
-			classifierEquivalenceAxiomItemProvider = new ClassifierEquivalenceAxiomItemProvider(this);
+	public Adapter createEntityEquivalenceAxiomAdapter() {
+		if (entityEquivalenceAxiomItemProvider == null) {
+			entityEquivalenceAxiomItemProvider = new EntityEquivalenceAxiomItemProvider(this);
 		}
 
-		return classifierEquivalenceAxiomItemProvider;
+		return entityEquivalenceAxiomItemProvider;
 	}
 
 	/**
@@ -1306,25 +1260,23 @@ public class OmlItemProviderAdapterFactory extends OmlAdapterFactory implements 
 		if (ruleItemProvider != null) ruleItemProvider.dispose();
 		if (builtInItemProvider != null) builtInItemProvider.dispose();
 		if (scalarItemProvider != null) scalarItemProvider.dispose();
-		if (structureItemProvider != null) structureItemProvider.dispose();
 		if (aspectItemProvider != null) aspectItemProvider.dispose();
 		if (conceptItemProvider != null) conceptItemProvider.dispose();
 		if (relationEntityItemProvider != null) relationEntityItemProvider.dispose();
 		if (annotationPropertyItemProvider != null) annotationPropertyItemProvider.dispose();
 		if (scalarPropertyItemProvider != null) scalarPropertyItemProvider.dispose();
-		if (structuredPropertyItemProvider != null) structuredPropertyItemProvider.dispose();
 		if (forwardRelationItemProvider != null) forwardRelationItemProvider.dispose();
 		if (reverseRelationItemProvider != null) reverseRelationItemProvider.dispose();
 		if (unreifiedRelationItemProvider != null) unreifiedRelationItemProvider.dispose();
 		if (conceptInstanceItemProvider != null) conceptInstanceItemProvider.dispose();
 		if (relationInstanceItemProvider != null) relationInstanceItemProvider.dispose();
-		if (structureInstanceItemProvider != null) structureInstanceItemProvider.dispose();
+		if (anonymousConceptInstanceItemProvider != null) anonymousConceptInstanceItemProvider.dispose();
 		if (anonymousRelationInstanceItemProvider != null) anonymousRelationInstanceItemProvider.dispose();
 		if (keyAxiomItemProvider != null) keyAxiomItemProvider.dispose();
 		if (specializationAxiomItemProvider != null) specializationAxiomItemProvider.dispose();
 		if (instanceEnumerationAxiomItemProvider != null) instanceEnumerationAxiomItemProvider.dispose();
 		if (literalEnumerationAxiomItemProvider != null) literalEnumerationAxiomItemProvider.dispose();
-		if (classifierEquivalenceAxiomItemProvider != null) classifierEquivalenceAxiomItemProvider.dispose();
+		if (entityEquivalenceAxiomItemProvider != null) entityEquivalenceAxiomItemProvider.dispose();
 		if (scalarEquivalenceAxiomItemProvider != null) scalarEquivalenceAxiomItemProvider.dispose();
 		if (propertyEquivalenceAxiomItemProvider != null) propertyEquivalenceAxiomItemProvider.dispose();
 		if (propertyRangeRestrictionAxiomItemProvider != null) propertyRangeRestrictionAxiomItemProvider.dispose();

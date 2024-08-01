@@ -203,7 +203,7 @@ public class PropertyValueRestrictionAxiomItemProvider extends PropertyRestricti
 		newChildDescriptors.add
 			(createChildParameter
 				(OmlPackage.Literals.PROPERTY_VALUE_RESTRICTION_AXIOM__CONTAINED_VALUE,
-				 OmlFactory.eINSTANCE.createStructureInstance()));
+				 OmlFactory.eINSTANCE.createAnonymousConceptInstance()));
 
 		newChildDescriptors.add
 			(createChildParameter

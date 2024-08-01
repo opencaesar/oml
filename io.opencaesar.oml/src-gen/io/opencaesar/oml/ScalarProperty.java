@@ -96,18 +96,18 @@ public interface ScalarProperty extends SemanticProperty, SpecializableProperty 
 
 	/**
 	 * Returns the value of the '<em><b>Domains</b></em>' reference list.
-	 * The list contents are of type {@link io.opencaesar.oml.Classifier}.
+	 * The list contents are of type {@link io.opencaesar.oml.Entity}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The classifier that is the domain of this property
+	 * The entity that is the domain of this property
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Domains</em>' reference list.
 	 * @see io.opencaesar.oml.OmlPackage#getScalarProperty_Domains()
 	 * @model
 	 * @generated
 	 */
-	EList<Classifier> getDomains();
+	EList<Entity> getDomains();
 
 	/**
 	 * Returns the value of the '<em><b>Ranges</b></em>' reference list.
@@ -130,7 +130,7 @@ public interface ScalarProperty extends SemanticProperty, SpecializableProperty 
 	 * @model kind="operation" unique="false"
 	 * @generated
 	 */
-	EList<Classifier> getDomainList();
+	EList<Entity> getDomainList();
 
 	/**
 	 * <!-- begin-user-doc -->

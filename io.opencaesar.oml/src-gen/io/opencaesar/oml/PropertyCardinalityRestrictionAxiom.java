@@ -27,7 +27,7 @@ package io.opencaesar.oml;
  * <!-- begin-model-doc -->
  * PropertyCardinalityRestrictionAxiom is a [=PropertyRestrictionAxiom=] that restricts the cardinality of a [=property=]
  * to an exact value, a minimum value or a maximum value. This restrictions can apply either to all values of the property
- * in the restricting [=classifier=], or only to those values classified by a specific subtype of the range.
+ * in the restricting [=Entity=], or only to those values classified by a specific subtype of the range.
  * <!-- end-model-doc -->
  *
  * <p>

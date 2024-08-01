@@ -199,8 +199,8 @@ class Import extends Element {
 }
 
 /*
- * Instance is an element that represents a instance of one or more [=classifiers=]. 
- * It can assert a set of values for those classifiers' [=properties=].
+ * Instance is an element that represents a instance of one or more [=Entities=]. 
+ * It can assert a set of values for those entities' [=properties=].
  */
 @Bikeshed(heading="Instances")
 abstract class Instance extends Element {
@@ -211,7 +211,7 @@ abstract class Instance extends Element {
     /*
      * Gets the instance's types
      */
-    op Classifier[] getTypes()
+    op Entity[] getTypes()
 }
 
 /*
@@ -680,23 +680,6 @@ abstract class SpecializableProperty extends SpecializableTerm, Property {
 ////////////////////////////////////////
 
 /*
- * Classifier is a [=type=] that classifies a set of [=instances=] and characterizes them with [=properties=]
- * (where it becomes a domain of these properties). it can also own a set of [=PropertyRestrictionAxioms=] as well as
- * set of [=ClassifierEquivalenceAxioms=].
- */
-@Bikeshed(heading="Types")
-abstract class Classifier extends Type {
-    /*
-     * The set of classifier equivalence axioms of this classifier
-     */
-    contains ClassifierEquivalenceAxiom[*] ownedEquivalences opposite owningClassifier
-    /*
-     * The set of property restriction axioms of this classifier
-     */
-    contains PropertyRestrictionAxiom[*] ownedPropertyRestrictions opposite owningClassifier
-}
-
-/*
  * Scalar is a primitive [=type=] that represents a set of [=literals=]. Some scalars are considered standard (see below).
  *  
  * A standard scalar can have specialization axioms to other standard scalars.
@@ -768,30 +751,24 @@ class Scalar extends Type {
 	contains ScalarEquivalenceAxiom[*] ownedEquivalences opposite owningScalar
 }
 
-////////////////////////////////////////
-//  Classifiers
-////////////////////////////////////////
-
 /*
- * Entity is a [=classifier=] whose instances are [=NamedInstances=]. It can also specify a set of [=KeyAxioms=]. 
+ * Entity is a structured [=type=] that represent a set of [=Instances=]. it can specify a set of [=PropertyRestrictionAxioms=],
+ * set of [=EntityEquivalenceAxioms=], and a set of [=KeyAxioms=].
  */
 @Bikeshed(heading="Types")
-abstract class Entity extends Classifier {
+abstract class Entity extends Type {
+    /*
+     * The set of entity equivalence axioms of this entity
+     */
+    contains EntityEquivalenceAxiom[*] ownedEquivalences opposite owningEntity
+    /*
+     * The set of property restriction axioms of this entity
+     */
+    contains PropertyRestrictionAxiom[*] ownedPropertyRestrictions opposite owningEntity
     /*
      * The unique keys of this entity
      */
     contains KeyAxiom[*] ownedKeys opposite owningEntity
-}
-
-/*
- * Structure is a [=classifier=] whose [=instances=] are anonymous and assignable as values to [=StructuredProperties=].
- */
-@Bikeshed(heading="Types")
-class Structure extends Classifier {
-	/*
-	 * A ref to another structure
-	 */
-	refers Structure ref
 }
 
 ////////////////////////////////////////
@@ -861,7 +838,7 @@ class AnnotationProperty extends SpecializableProperty {
 }
 
 /*
- * SemanticProperty is a [=property=] with DL semantics that relates a [=classifier=] acting as its
+ * SemanticProperty is a [=property=] with DL semantics that relates a [=entity=] acting as its
  * domain to a [=type=] acting as its range.
  */
 @Bikeshed(heading="Properties")
@@ -873,7 +850,7 @@ abstract class SemanticProperty extends Property {
     /*
      * Gets the domains of this property
      */
-    op Classifier[] getDomainList()
+    op Entity[] getDomainList()
     /*
      * Gets the ranges of this property
      */
@@ -898,45 +875,15 @@ class ScalarProperty extends SemanticProperty, SpecializableProperty {
      */
     boolean functional
     /*
-     * The classifier that is the domain of this property
+     * The entity that is the domain of this property
      */
-    refers Classifier[*] domains
+    refers Entity[*] domains
     /*
      * The scalar that is the range of this property
      */
     refers Scalar[*] ranges
 
-    op Classifier[] getDomainList() {
-    	domains
-    }
-    op Type[] getRangeList() {
-    	ranges.toEList
-    }
-}
-
-/*
- * StructuredProperty is a [=SemanticProperty=] whose range is a [=Structure=]. It can specialize other [=StructuredProperties=].
- */
-@Bikeshed(heading="Properties")
-class StructuredProperty extends SemanticProperty, SpecializableProperty {
-	/*
-	 * A ref to another structured property
-	 */
-	refers StructuredProperty ref
-    /*
-     * Whether this property is functional (has a max of one value per instance) 
-     */
-    boolean functional
-    /*
-     * The classifiers that are the domains of this property
-     */
-    refers Classifier[*] domains
-    /*
-     * The structures that are the range of this property
-     */
-    refers Structure[*] ranges
-
-    op Classifier[] getDomainList() {
+    op Entity[] getDomainList() {
     	domains
     }
     op Type[] getRangeList() {
@@ -987,7 +934,7 @@ abstract class Relation extends SemanticProperty {
      */
     op Relation[?] getInverse()
 
-    op Classifier[] getDomainList() {
+    op Entity[] getDomainList() {
     	getDomains().toEList
     }
     op Type[] getRangeList() {
@@ -1137,7 +1084,7 @@ abstract class NamedInstance extends DescriptionStatement, Instance {
     	return ownedTypes.map[^type]
     }
     
-    op Classifier[] getTypes() {
+    op Entity[] getTypes() {
     	return ownedTypes.map[^type]
     }
 }
@@ -1206,33 +1153,30 @@ class RelationInstance extends NamedInstance {
 ////////////////////////////////////////
 
 /*
- * StructureInstance is an [=AnonymousInstance=] that can be typed by a [=Structure=].
+ * AnonymousConceptInstance is an [=AnonymousInstance=] that is typed by a [=Concept=] or an [=Aspect=].
  */
 @Bikeshed(heading="Instances")
-class StructureInstance extends AnonymousInstance {
+class AnonymousConceptInstance extends AnonymousInstance {
     /*
      * The type of this instance
      */
-    refers Structure[?] ^type
+    refers Entity[?] ^type
 
-	op Structure getStructure() {
+	op Entity getEntity() {
     	if (^type !== null)
     	 	return ^type
     	else {
     		var property = getIsValueOfProperty()
-    		if (property instanceof StructuredProperty) {
-	    		if (!property.ranges.isEmpty)
-	    			property.ranges.get(0)
-	    		else
-	    			null
+    		if (property instanceof Relation) {
+	    		property.ranges.head
     		}
     	}
 	}
 
-    op Classifier[] getTypes() {
-    	var structure = getStructure()
-    	if (structure !== null)
-    	 	return structure.singletonEList()
+    op Entity[] getTypes() {
+    	var entity = getEntity()
+    	if (entity !== null)
+    	 	return entity.singletonEList()
     	else
     		return ECollections.emptyEList
     }
@@ -1265,7 +1209,7 @@ class AnonymousRelationInstance extends AnonymousInstance {
     	}
     }
 
-    op Classifier[] getTypes() {
+    op Entity[] getTypes() {
     	var entity = getRelationEntity()
     	if (entity !== null)
     	 	return entity.singletonEList()
@@ -1355,8 +1299,8 @@ class InstanceEnumerationAxiom extends Axiom {
 }
 
 /*
- * PropertyRestrictionAxiom is an [=Axiom=] specified on a [=Classifier=] that places some restriction on the value of a [=SemanticProperty=] 
- * in the context of the classifier.
+ * PropertyRestrictionAxiom is an [=Axiom=] specified on a [=Entity=] that places some restriction on the value of a [=SemanticProperty=] 
+ * in the context of the entity.
  */
 @Bikeshed(heading="Axioms")
 abstract class PropertyRestrictionAxiom extends Axiom {
@@ -1365,24 +1309,24 @@ abstract class PropertyRestrictionAxiom extends Axiom {
      */
     refers SemanticProperty[1] property
     /*
-     * The owning classifier specified by this axiom
+     * The owning entity specified by this axiom
      */
-    container Classifier[?] owningClassifier opposite ownedPropertyRestrictions
+    container Entity[?] owningEntity opposite ownedPropertyRestrictions
     /*
-     * The owning classifier equivalence axiom specified by this axiom
+     * The owning entity equivalence axiom specified by this axiom
      */
-    container ClassifierEquivalenceAxiom[?] owningAxiom opposite ownedPropertyRestrictions
+    container EntityEquivalenceAxiom[?] owningAxiom opposite ownedPropertyRestrictions
     /*
      * Gets the restricting domain of the given property restriction axiom
      */
-    op Classifier getRestrictingDomain() {
+    op Entity getRestrictingDomain() {
     	if (owningAxiom !== null) {
-    		return owningAxiom.subClassifier
+    		return owningAxiom.subEntity
    		}
-    	return owningClassifier.resolve() as Classifier
+    	return owningEntity.resolve() as Entity
     }
     
-	op Classifier getCharacterizedTerm() {
+	op Entity getCharacterizedTerm() {
 		getRestrictingDomain()
 	}
 }
@@ -1413,35 +1357,35 @@ class LiteralEnumerationAxiom extends Axiom {
 }
 
 /*
- * ClassifierEquivalenceAxiom is an [=Axiom=] specified on a subject [=Classifier=] that states that it is equivalent to the intersection
- * of [=Classifiers=] and/or [=PropertyRestrictionAxioms=]. This axiom implies that the [=classifiers=] are super types of the subject classifier. 
+ * EntityEquivalenceAxiom is an [=Axiom=] specified on a subject [=Entity=] that states that it is equivalent to the intersection
+ * of [=Entities=] and/or [=PropertyRestrictionAxioms=]. This axiom implies that the [=entities=] are super types of the subject entity. 
  * It also implies that when an instance is classified by this intersection, then it follows that it is also classified by the 
- * subject classifier. Conversely, when an instance is classified by the subject classifier, then it follows that it is also classified 
+ * subject entity. Conversely, when an instance is classified by the subject entity, then it follows that it is also classified 
  * by the intersection. In other words, this axiom enables bi-directional (or two-way) inferencing.
  */
 @Bikeshed(heading="Axioms")
-class ClassifierEquivalenceAxiom extends Axiom {
+class EntityEquivalenceAxiom extends Axiom {
     /*
-     * The super classifiers specified by this axiom
+     * The super entity specified by this axiom
      */
-    refers Classifier[*] superClassifiers
+    refers Entity[*] superEntities
     /*
      * The property restrictions specified by this axiom
      */
     contains PropertyRestrictionAxiom[*] ownedPropertyRestrictions opposite owningAxiom
     /*
-     * The owning classifier specified by this axiom
+     * The owning entity specified by this axiom
      */
-    container Classifier[?] owningClassifier opposite ownedEquivalences
+    container Entity[?] owningEntity opposite ownedEquivalences
     /*
-     * Gets the sub classifier of this axiom
+     * Gets the sub entity of this axiom
      */
-    op Classifier getSubClassifier() {
-    	return owningClassifier.resolve() as Classifier
+    op Entity getSubEntity() {
+    	return owningEntity.resolve() as Entity
     }
 
-	op Classifier getCharacterizedTerm() {
-		getSubClassifier()
+	op Entity getCharacterizedTerm() {
+		getSubEntity()
 	}
 }
 
@@ -1555,7 +1499,7 @@ class PropertyEquivalenceAxiom extends Axiom {
 /*
  * PropertyRangeRestrictionAxiom is a [=PropertyRestrictionAxiom=] that restricts the range of a [=property=] to
  * a [=type=] that specializes the original range. This restrictions may apply to `all` or to `some` values of the property
- * that have the restricting [=classifier=] as a domain.
+ * that have the restricting [=Entity=] as a domain.
  */
 @Bikeshed(heading="Axioms")
 class PropertyRangeRestrictionAxiom extends PropertyRestrictionAxiom {
@@ -1572,7 +1516,7 @@ class PropertyRangeRestrictionAxiom extends PropertyRestrictionAxiom {
 /*
  * PropertyCardinalityRestrictionAxiom is a [=PropertyRestrictionAxiom=] that restricts the cardinality of a [=property=]
  * to an exact value, a minimum value or a maximum value. This restrictions can apply either to all values of the property 
- * in the restricting [=classifier=], or only to those values classified by a specific subtype of the range.
+ * in the restricting [=Entity=], or only to those values classified by a specific subtype of the range.
  */
 @Bikeshed(heading="Axioms")
 class PropertyCardinalityRestrictionAxiom extends PropertyRestrictionAxiom {

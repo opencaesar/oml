@@ -208,20 +208,12 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 				return createSpecializablePropertyAdapter();
 			}
 			@Override
-			public Adapter caseClassifier(Classifier object) {
-				return createClassifierAdapter();
-			}
-			@Override
 			public Adapter caseScalar(Scalar object) {
 				return createScalarAdapter();
 			}
 			@Override
 			public Adapter caseEntity(Entity object) {
 				return createEntityAdapter();
-			}
-			@Override
-			public Adapter caseStructure(Structure object) {
-				return createStructureAdapter();
 			}
 			@Override
 			public Adapter caseAspect(Aspect object) {
@@ -246,10 +238,6 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseScalarProperty(ScalarProperty object) {
 				return createScalarPropertyAdapter();
-			}
-			@Override
-			public Adapter caseStructuredProperty(StructuredProperty object) {
-				return createStructuredPropertyAdapter();
 			}
 			@Override
 			public Adapter caseRelation(Relation object) {
@@ -284,8 +272,8 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 				return createRelationInstanceAdapter();
 			}
 			@Override
-			public Adapter caseStructureInstance(StructureInstance object) {
-				return createStructureInstanceAdapter();
+			public Adapter caseAnonymousConceptInstance(AnonymousConceptInstance object) {
+				return createAnonymousConceptInstanceAdapter();
 			}
 			@Override
 			public Adapter caseAnonymousRelationInstance(AnonymousRelationInstance object) {
@@ -312,8 +300,8 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 				return createLiteralEnumerationAxiomAdapter();
 			}
 			@Override
-			public Adapter caseClassifierEquivalenceAxiom(ClassifierEquivalenceAxiom object) {
-				return createClassifierEquivalenceAxiomAdapter();
+			public Adapter caseEntityEquivalenceAxiom(EntityEquivalenceAxiom object) {
+				return createEntityEquivalenceAxiomAdapter();
 			}
 			@Override
 			public Adapter caseScalarEquivalenceAxiom(ScalarEquivalenceAxiom object) {
@@ -854,20 +842,6 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.Classifier <em>Classifier</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.Classifier
-	 * @generated
-	 */
-	public Adapter createClassifierAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.Scalar <em>Scalar</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -892,20 +866,6 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createEntityAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.Structure <em>Structure</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.Structure
-	 * @generated
-	 */
-	public Adapter createStructureAdapter() {
 		return null;
 	}
 
@@ -990,20 +950,6 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createScalarPropertyAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.StructuredProperty <em>Structured Property</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see io.opencaesar.oml.StructuredProperty
-	 * @generated
-	 */
-	public Adapter createStructuredPropertyAdapter() {
 		return null;
 	}
 
@@ -1120,16 +1066,16 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.StructureInstance <em>Structure Instance</em>}'.
+	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.AnonymousConceptInstance <em>Anonymous Concept Instance</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see io.opencaesar.oml.StructureInstance
+	 * @see io.opencaesar.oml.AnonymousConceptInstance
 	 * @generated
 	 */
-	public Adapter createStructureInstanceAdapter() {
+	public Adapter createAnonymousConceptInstanceAdapter() {
 		return null;
 	}
 
@@ -1218,16 +1164,16 @@ public class OmlAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.ClassifierEquivalenceAxiom <em>Classifier Equivalence Axiom</em>}'.
+	 * Creates a new adapter for an object of class '{@link io.opencaesar.oml.EntityEquivalenceAxiom <em>Entity Equivalence Axiom</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see io.opencaesar.oml.ClassifierEquivalenceAxiom
+	 * @see io.opencaesar.oml.EntityEquivalenceAxiom
 	 * @generated
 	 */
-	public Adapter createClassifierEquivalenceAxiomAdapter() {
+	public Adapter createEntityEquivalenceAxiomAdapter() {
 		return null;
 	}
 

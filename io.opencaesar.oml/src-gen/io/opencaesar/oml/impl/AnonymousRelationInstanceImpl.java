@@ -19,7 +19,7 @@
 package io.opencaesar.oml.impl;
 
 import io.opencaesar.oml.AnonymousRelationInstance;
-import io.opencaesar.oml.Classifier;
+import io.opencaesar.oml.Entity;
 import io.opencaesar.oml.ForwardRelation;
 import io.opencaesar.oml.NamedInstance;
 import io.opencaesar.oml.OmlPackage;
@@ -152,13 +152,13 @@ public class AnonymousRelationInstanceImpl extends AnonymousInstanceImpl impleme
 	 * @generated
 	 */
 	@Override
-	public EList<Classifier> getTypes() {
+	public EList<Entity> getTypes() {
 		RelationEntity entity = this.getRelationEntity();
 		if ((entity != null)) {
-			return ECollections.<Classifier>singletonEList(entity);
+			return ECollections.<Entity>singletonEList(entity);
 		}
 		else {
-			return ECollections.<Classifier>emptyEList();
+			return ECollections.<Entity>emptyEList();
 		}
 	}
 

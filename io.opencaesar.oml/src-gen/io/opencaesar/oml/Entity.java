@@ -26,13 +26,16 @@ import org.eclipse.emf.common.util.EList;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Entity is a [=classifier=] whose instances are [=NamedInstances=]. It can also specify a set of [=KeyAxioms=].
+ * Entity is a structured [=type=] that represent a set of [=Instances=]. it can specify a set of [=PropertyRestrictionAxioms=],
+ * set of [=EntityEquivalenceAxioms=], and a set of [=KeyAxioms=].
  * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
+ *   <li>{@link io.opencaesar.oml.Entity#getOwnedEquivalences <em>Owned Equivalences</em>}</li>
+ *   <li>{@link io.opencaesar.oml.Entity#getOwnedPropertyRestrictions <em>Owned Property Restrictions</em>}</li>
  *   <li>{@link io.opencaesar.oml.Entity#getOwnedKeys <em>Owned Keys</em>}</li>
  * </ul>
  *
@@ -41,7 +44,41 @@ import org.eclipse.emf.common.util.EList;
  *        annotation="https://tabatkins.github.io/bikeshed heading='Types'"
  * @generated
  */
-public interface Entity extends Classifier {
+public interface Entity extends Type {
+	/**
+	 * Returns the value of the '<em><b>Owned Equivalences</b></em>' containment reference list.
+	 * The list contents are of type {@link io.opencaesar.oml.EntityEquivalenceAxiom}.
+	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.EntityEquivalenceAxiom#getOwningEntity <em>Owning Entity</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The set of entity equivalence axioms of this entity
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Owned Equivalences</em>' containment reference list.
+	 * @see io.opencaesar.oml.OmlPackage#getEntity_OwnedEquivalences()
+	 * @see io.opencaesar.oml.EntityEquivalenceAxiom#getOwningEntity
+	 * @model opposite="owningEntity" containment="true"
+	 * @generated
+	 */
+	EList<EntityEquivalenceAxiom> getOwnedEquivalences();
+
+	/**
+	 * Returns the value of the '<em><b>Owned Property Restrictions</b></em>' containment reference list.
+	 * The list contents are of type {@link io.opencaesar.oml.PropertyRestrictionAxiom}.
+	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.PropertyRestrictionAxiom#getOwningEntity <em>Owning Entity</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The set of property restriction axioms of this entity
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Owned Property Restrictions</em>' containment reference list.
+	 * @see io.opencaesar.oml.OmlPackage#getEntity_OwnedPropertyRestrictions()
+	 * @see io.opencaesar.oml.PropertyRestrictionAxiom#getOwningEntity
+	 * @model opposite="owningEntity" containment="true"
+	 * @generated
+	 */
+	EList<PropertyRestrictionAxiom> getOwnedPropertyRestrictions();
+
 	/**
 	 * Returns the value of the '<em><b>Owned Keys</b></em>' containment reference list.
 	 * The list contents are of type {@link io.opencaesar.oml.KeyAxiom}.

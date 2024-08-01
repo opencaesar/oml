@@ -128,15 +128,6 @@ public interface OmlFactory extends EFactory {
 	Scalar createScalar();
 
 	/**
-	 * Returns a new object of class '<em>Structure</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Structure</em>'.
-	 * @generated
-	 */
-	Structure createStructure();
-
-	/**
 	 * Returns a new object of class '<em>Aspect</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -180,15 +171,6 @@ public interface OmlFactory extends EFactory {
 	 * @generated
 	 */
 	ScalarProperty createScalarProperty();
-
-	/**
-	 * Returns a new object of class '<em>Structured Property</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Structured Property</em>'.
-	 * @generated
-	 */
-	StructuredProperty createStructuredProperty();
 
 	/**
 	 * Returns a new object of class '<em>Forward Relation</em>'.
@@ -236,13 +218,13 @@ public interface OmlFactory extends EFactory {
 	RelationInstance createRelationInstance();
 
 	/**
-	 * Returns a new object of class '<em>Structure Instance</em>'.
+	 * Returns a new object of class '<em>Anonymous Concept Instance</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Structure Instance</em>'.
+	 * @return a new object of class '<em>Anonymous Concept Instance</em>'.
 	 * @generated
 	 */
-	StructureInstance createStructureInstance();
+	AnonymousConceptInstance createAnonymousConceptInstance();
 
 	/**
 	 * Returns a new object of class '<em>Anonymous Relation Instance</em>'.
@@ -290,13 +272,13 @@ public interface OmlFactory extends EFactory {
 	LiteralEnumerationAxiom createLiteralEnumerationAxiom();
 
 	/**
-	 * Returns a new object of class '<em>Classifier Equivalence Axiom</em>'.
+	 * Returns a new object of class '<em>Entity Equivalence Axiom</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Classifier Equivalence Axiom</em>'.
+	 * @return a new object of class '<em>Entity Equivalence Axiom</em>'.
 	 * @generated
 	 */
-	ClassifierEquivalenceAxiom createClassifierEquivalenceAxiom();
+	EntityEquivalenceAxiom createEntityEquivalenceAxiom();
 
 	/**
 	 * Returns a new object of class '<em>Scalar Equivalence Axiom</em>'.

@@ -34,12 +34,11 @@ import io.opencaesar.oml.AnonymousRelationInstance;
 import io.opencaesar.oml.Aspect;
 import io.opencaesar.oml.Assertion;
 import io.opencaesar.oml.Axiom;
-import io.opencaesar.oml.Classifier;
-import io.opencaesar.oml.ClassifierEquivalenceAxiom;
 import io.opencaesar.oml.Concept;
 import io.opencaesar.oml.ConceptInstance;
 import io.opencaesar.oml.Element;
 import io.opencaesar.oml.Entity;
+import io.opencaesar.oml.EntityEquivalenceAxiom;
 import io.opencaesar.oml.ForwardRelation;
 import io.opencaesar.oml.IdentifiedElement;
 import io.opencaesar.oml.Instance;
@@ -66,8 +65,6 @@ import io.opencaesar.oml.SemanticProperty;
 import io.opencaesar.oml.SpecializableProperty;
 import io.opencaesar.oml.SpecializableTerm;
 import io.opencaesar.oml.SpecializationAxiom;
-import io.opencaesar.oml.Structure;
-import io.opencaesar.oml.StructuredProperty;
 import io.opencaesar.oml.Term;
 import io.opencaesar.oml.Type;
 import io.opencaesar.oml.TypeAssertion;
@@ -101,14 +98,10 @@ public final class OmlSearch extends OmlIndex {
             refs.addAll(findConceptsWithRef((Concept)member, scope));
         } else if (member instanceof RelationEntity) {
             refs.addAll(findRelationEntitiesWithRef((RelationEntity)member, scope));
-        } else if (member instanceof Structure) {
-            refs.addAll(findStructuresWithRef((Structure)member, scope));
         } else if (member instanceof Scalar) {
             refs.addAll(findScalarsWithRef((Scalar)member, scope));
         } else if (member instanceof Relation) {
             refs.addAll(findUnreifiedRelationsWithRef((Relation)member, scope));
-        } else if (member instanceof StructuredProperty) {
-            refs.addAll(findStructuredPropertiesWithRef((StructuredProperty)member, scope));
         } else if (member instanceof ScalarProperty) {
             refs.addAll(findScalarPropertiesWithRef((ScalarProperty)member, scope));
         } else if (member instanceof Rule) {
@@ -278,11 +271,9 @@ public final class OmlSearch extends OmlIndex {
         if (term instanceof SpecializableTerm){
             axioms.addAll(findSpecializationAxiomsWithSubTerm(((SpecializableTerm)term), scope));
         }
-        if (term instanceof Classifier) {
-            axioms.addAll(findClassifierEquivalenceAxiomsWithSubClassifier(((Classifier)term), scope));
-            axioms.addAll(findPropertyRestrictionAxioms(((Classifier)term), scope));
-        }
         if (term instanceof Entity) {
+            axioms.addAll(findEntityEquivalenceAxiomsWithSubEntity(((Entity)term), scope));
+            axioms.addAll(findPropertyRestrictionAxioms(((Entity)term), scope));
             axioms.addAll(findKeyAxioms(((Entity)term), scope));
         }
         if (term instanceof Concept) {
@@ -407,33 +398,33 @@ public final class OmlSearch extends OmlIndex {
     }
     
     /**
-     * Find property restriction axioms that are defined on the given classifier
+     * Find property restriction axioms that are defined on the given entity
      * 
-     * @param classifier the given classifier
+     * @param entity the given entity
      * @param scope The scope of the search (can be null)
-     * @return a set of restriction axioms that are defined on the given classifier
+     * @return a set of restriction axioms that are defined on the given entity
      */
-    public static Set<PropertyRestrictionAxiom> findPropertyRestrictionAxioms(Classifier classifier, Set<Resource> scope) {
+    public static Set<PropertyRestrictionAxiom> findPropertyRestrictionAxioms(Entity entity, Set<Resource> scope) {
         final Set<PropertyRestrictionAxiom> axioms = new LinkedHashSet<>();
-        axioms.addAll(classifier.getOwnedPropertyRestrictions());
-        axioms.addAll(findRefs(classifier, scope).stream()
-            .filter(i -> i instanceof Classifier)
-            .map(i -> (Classifier)i)
+        axioms.addAll(entity.getOwnedPropertyRestrictions());
+        axioms.addAll(findRefs(entity, scope).stream()
+            .filter(i -> i instanceof Entity)
+            .map(i -> (Entity)i)
             .flatMap(r -> r.getOwnedPropertyRestrictions().stream())
             .collect(Collectors.toCollection(LinkedHashSet::new)));
         return axioms;
     }
 
     /**
-     * Find property restriction axioms that are defined on the given classifier
+     * Find property restriction axioms that are defined on the given entity
      * 
-     * @param classifier the given classifier
-     * @return a set of restriction axioms that are defined on the given classifier
-     * @deprecated As of 2.5.0. Use {{@link #findPropertyRestrictionAxioms(Classifier, Set<Resource>)} instead
+     * @param entity the given entity
+     * @return a set of restriction axioms that are defined on the given entity
+     * @deprecated As of 2.5.0. Use {{@link #findPropertyRestrictionAxioms(Entity, Set<Resource>)} instead
      */
     @Deprecated
-    public static Set<PropertyRestrictionAxiom> findPropertyRestrictionAxioms(Classifier classifier) {
-    	return findPropertyRestrictionAxioms(classifier, null);
+    public static Set<PropertyRestrictionAxiom> findPropertyRestrictionAxioms(Entity entity) {
+    	return findPropertyRestrictionAxioms(entity, null);
     }
     
     //-----Beginning-Of-Specialization-and-Equivalence-Axioms-----------------
@@ -471,33 +462,33 @@ public final class OmlSearch extends OmlIndex {
     }
     
     /**
-     * Finds classifier equivalence axioms that have the given classifier as a sub
+     * Finds entity equivalence axioms that have the given entity as a sub
      * 
-     * @param classifier the given classifier
+     * @param entity the given entity
      * @param scope The scope of the search (can be null)
-     * @return a set of classifier equivalence axioms that have the given classifier as a sub
+     * @return a set of entity equivalence axioms that have the given entity as a sub
      */
-    public static Set<ClassifierEquivalenceAxiom> findClassifierEquivalenceAxiomsWithSubClassifier(Classifier classifier, Set<Resource> scope) {
-        final Set<ClassifierEquivalenceAxiom> axioms = new LinkedHashSet<>();
-       	axioms.addAll(classifier.getOwnedEquivalences());
-        axioms.addAll(findRefs(classifier, scope).stream()
-            .filter(i -> i instanceof Classifier)
-            .map(i -> (Classifier)i)
+    public static Set<EntityEquivalenceAxiom> findEntityEquivalenceAxiomsWithSubEntity(Entity entity, Set<Resource> scope) {
+        final Set<EntityEquivalenceAxiom> axioms = new LinkedHashSet<>();
+       	axioms.addAll(entity.getOwnedEquivalences());
+        axioms.addAll(findRefs(entity, scope).stream()
+            .filter(i -> i instanceof Entity)
+            .map(i -> (Entity)i)
             .flatMap(r -> r.getOwnedEquivalences().stream())
             .collect(Collectors.toCollection(LinkedHashSet::new)));
         return axioms;
     }
 
     /**
-     * Finds classifier equivalence axioms that have the given classifier as a sub
+     * Finds entity equivalence axioms that have the given entity as a sub
      * 
-     * @param classifier the given classifier
-     * @return a set of classifier equivalence axioms that have the given classifier as a sub
-     * @deprecated As of 2.5.0. Use {{@link #findClassifierEquivalenceAxiomsWithSubClassifier(Classifier, Set<Resource>)} instead
+     * @param entity the given entity
+     * @return a set of entity equivalence axioms that have the given entity as a sub
+     * @deprecated As of 2.5.0. Use {{@link #findEntityEquivalenceAxiomsWithSubEntity(Entity, Set<Resource>)} instead
      */
     @Deprecated
-    public static Set<ClassifierEquivalenceAxiom> findClassifierEquivalenceAxiomsWithSubClassifier(Classifier classifier) {
-    	return findClassifierEquivalenceAxiomsWithSubClassifier(classifier, null);
+    public static Set<EntityEquivalenceAxiom> findEntityEquivalenceAxiomsWithSubEntity(Entity entity) {
+    	return findEntityEquivalenceAxiomsWithSubEntity(entity, null);
     }
     
     /**
@@ -572,9 +563,9 @@ public final class OmlSearch extends OmlIndex {
     public static Set<Term> findSuperTerms(Term term, Set<Resource> scope) {
         final Set<Term> supers = new LinkedHashSet<>();
         supers.addAll(findSpecializationSuperTerms(term, scope));
-        if (term instanceof Classifier) {
-        	supers.addAll(findEquivalenceSuperClassifiers((Classifier)term, scope));
-        	supers.addAll(findEquivalentClassifiers((Classifier)term, scope));
+        if (term instanceof Entity) {
+        	supers.addAll(findEquivalenceSuperEntitys((Entity)term, scope));
+        	supers.addAll(findEquivalentEntitys((Entity)term, scope));
         } else if (term instanceof Scalar) {
         	supers.addAll(findEquivalenceSuperScalars((Scalar)term, scope));
         	supers.addAll(findEquivalentScalars((Scalar)term, scope));
@@ -606,9 +597,9 @@ public final class OmlSearch extends OmlIndex {
     public static Set<Term> findSubTerms(Term term, Set<Resource> scope) {
         final Set<Term> subs = new LinkedHashSet<>();
         subs.addAll(findSpecializationSubTerms(term, scope));
-        if (term instanceof Classifier) {
-        	subs.addAll(findEquivalenceSubClassifiers((Classifier)term, scope));
-        	subs.addAll(findEquivalentClassifiers((Classifier)term, scope));
+        if (term instanceof Entity) {
+        	subs.addAll(findEquivalenceSubEntitys((Entity)term, scope));
+        	subs.addAll(findEquivalentEntitys((Entity)term, scope));
         } else if (term instanceof Scalar) {
         	subs.addAll(findEquivalenceSubScalars((Scalar)term, scope));
         	subs.addAll(findEquivalentScalars((Scalar)term, scope));
@@ -796,53 +787,53 @@ public final class OmlSearch extends OmlIndex {
     }
     
     /**
-     * Finds classifiers that are the direct equivalence super of a given classifier 
+     * Finds entities that are the direct equivalence super of a given entity 
      * 
-     * @param classifier the given classifier
+     * @param entity the given entity
      * @param scope The scope of the search (can be null)
-     * @return a set of classifier that are the direct equivalence super of the given classifier
+     * @return a set of entity that are the direct equivalence super of the given entity
      */
-    public static Set<Classifier> findEquivalenceSuperClassifiers(Classifier classifier, Set<Resource> scope) {
-        return findClassifierEquivalenceAxiomsWithSubClassifier(classifier, scope).stream()
-            .flatMap(i -> i.getSuperClassifiers().stream())
+    public static Set<Entity> findEquivalenceSuperEntitys(Entity entity, Set<Resource> scope) {
+        return findEntityEquivalenceAxiomsWithSubEntity(entity, scope).stream()
+            .flatMap(i -> i.getSuperEntities().stream())
             .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
     /**
-     * Finds classifiers that are the direct equivalence super of a given classifier 
+     * Finds entities that are the direct equivalence super of a given entity 
      * 
-     * @param classifier the given classifier
-     * @return a set of classifier that are the direct equivalence super of the given classifier
-     * @deprecated As of 2.5.0. Use {{@link #findEquivalenceSuperClassifiers(Classifier, Set<Resource>)} instead
+     * @param entity the given entity
+     * @return a set of entity that are the direct equivalence super of the given entity
+     * @deprecated As of 2.5.0. Use {{@link #findEquivalenceSuperEntitys(Entity, Set<Resource>)} instead
      */
     @Deprecated
-    public static Set<Classifier> findEquivalenceSuperClassifiers(Classifier classifier) {
-    	return findEquivalenceSuperClassifiers(classifier, null);
+    public static Set<Entity> findEquivalenceSuperEntitys(Entity entity) {
+    	return findEquivalenceSuperEntitys(entity, null);
     }
     
     /**
-     * Finds classifiers that are the direct equivalence sub of a given classifier 
+     * Finds entities that are the direct equivalence sub of a given entity 
      * 
-     * @param classifier the given classifier
+     * @param entity the given entity
      * @param scope The scope of the search (can be null)
-     * @return a set of classifier that are the direct equivalence sub of the given classifier
+     * @return a set of entity that are the direct equivalence sub of the given entity
      */
-    public static Set<Classifier> findEquivalenceSubClassifiers(Classifier classifier, Set<Resource> scope) {
-        return findClassifierEquivalenceAxiomsWithSuperClassifier(classifier, scope).stream()
-            .map(i -> i.getSubClassifier())
+    public static Set<Entity> findEquivalenceSubEntitys(Entity entity, Set<Resource> scope) {
+        return findEntityEquivalenceAxiomsWithSuperEntity(entity, scope).stream()
+            .map(i -> i.getSubEntity())
             .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
     /**
-     * Finds classifiers that are the direct equivalence sub of a given classifier 
+     * Finds entities that are the direct equivalence sub of a given entity 
      * 
-     * @param classifier the given classifier
-     * @return a set of classifier that are the direct equivalence sub of the given classifier
-     * @deprecated As of 2.5.0. Use {{@link #findEquivalenceSubClassifiers(Classifier, Set<Resource>)} instead
+     * @param entity the given entity
+     * @return a set of entity that are the direct equivalence sub of the given entity
+     * @deprecated As of 2.5.0. Use {{@link #findEquivalenceSubEntitys(Entity, Set<Resource>)} instead
      */
     @Deprecated
-    public static Set<Classifier> findEquivalenceSubClassifiers(Classifier classifier) {
-    	return findEquivalenceSubClassifiers(classifier, null);
+    public static Set<Entity> findEquivalenceSubEntitys(Entity entity) {
+    	return findEquivalenceSubEntitys(entity, null);
     }
     
     /**
@@ -850,7 +841,7 @@ public final class OmlSearch extends OmlIndex {
      * 
      * @param scalar the given scalar
      * @param scope The scope of the search (can be null)
-     * @return a set of classifier that are the direct equivalence super of the given classifier
+     * @return a set of entity that are the direct equivalence super of the given entity
      */
     public static Set<Scalar> findEquivalenceSuperScalars(Scalar scalar, Set<Resource> scope) {
         return findScalarEquivalenceAxiomsWithSubScalar(scalar, scope).stream()
@@ -862,7 +853,7 @@ public final class OmlSearch extends OmlIndex {
      * Finds scalars that are the direct equivalence super of a given scalar 
      * 
      * @param scalar the given scalar
-     * @return a set of classifier that are the direct equivalence super of the given classifier
+     * @return a set of entity that are the direct equivalence super of the given entity
      * @deprecated As of 2.5.0. Use {{@link #findEquivalenceSuperScalars(Scalar, Set<Resource>)} instead
      */
     @Deprecated
@@ -909,7 +900,7 @@ public final class OmlSearch extends OmlIndex {
             .collect(Collectors.toCollection(LinkedHashSet::new)));
         if (property instanceof ForwardRelation) {
     		var entity = ((ForwardRelation)property).getRelationEntity();
-    		supers.addAll(findEquivalenceSuperClassifiers(entity, scope).stream()
+    		supers.addAll(findEquivalenceSuperEntitys(entity, scope).stream()
     	        .filter(i -> i instanceof RelationEntity)
 	            .map(i -> (RelationEntity)i)
 	            .filter(i -> i.getForwardRelation() != null)
@@ -918,7 +909,7 @@ public final class OmlSearch extends OmlIndex {
     	} else if (property instanceof ReverseRelation) {
     		var base = ((ReverseRelation)property).getRelationBase();
     		if (base instanceof RelationEntity) {
-        		supers.addAll(findEquivalenceSuperClassifiers((RelationEntity)base, scope).stream()
+        		supers.addAll(findEquivalenceSuperEntitys((RelationEntity)base, scope).stream()
             	        .filter(i -> i instanceof RelationEntity)
         	            .map(i -> (RelationEntity)i)
         	            .filter(i -> i.getReverseRelation() != null)
@@ -962,7 +953,7 @@ public final class OmlSearch extends OmlIndex {
             .collect(Collectors.toCollection(LinkedHashSet::new)));
         if (property instanceof ForwardRelation) {
     		var entity = ((ForwardRelation)property).getRelationEntity();
-    		subs.addAll(findEquivalenceSubClassifiers(entity, scope).stream()
+    		subs.addAll(findEquivalenceSubEntitys(entity, scope).stream()
     	        .filter(i -> i instanceof RelationEntity)
 	            .map(i -> (RelationEntity)i)
 	            .filter(i -> i.getForwardRelation() != null)
@@ -971,7 +962,7 @@ public final class OmlSearch extends OmlIndex {
     	} else if (property instanceof ReverseRelation) {
     		var base = ((ReverseRelation)property).getRelationBase();
     		if (base instanceof RelationEntity) {
-        		subs.addAll(findEquivalenceSubClassifiers((RelationEntity)base, scope).stream()
+        		subs.addAll(findEquivalenceSubEntitys((RelationEntity)base, scope).stream()
             	        .filter(i -> i instanceof RelationEntity)
         	            .map(i -> (RelationEntity)i)
         	            .filter(i -> i.getReverseRelation() != null)
@@ -1002,37 +993,37 @@ public final class OmlSearch extends OmlIndex {
     }
     
     /**
-     * Finds classifiers that are the direct equivalent to a given classifier 
+     * Finds entities that are the direct equivalent to a given entity 
      * 
-     * @param classifier the given classifier
+     * @param entity the given entity
      * @param scope The scope of the search (can be null)
-     * @return a set of classifier that are the direct equivalents of the given classifier
+     * @return a set of entity that are the direct equivalents of the given entity
      */
-    public static Set<Classifier> findEquivalentClassifiers(Classifier classifier, Set<Resource> scope) {
-        final Set<Classifier> equivalents = new LinkedHashSet<>();
-        equivalents.addAll(findClassifierEquivalenceAxiomsWithSubClassifier(classifier, scope).stream()
+    public static Set<Entity> findEquivalentEntitys(Entity entity, Set<Resource> scope) {
+        final Set<Entity> equivalents = new LinkedHashSet<>();
+        equivalents.addAll(findEntityEquivalenceAxiomsWithSubEntity(entity, scope).stream()
             	.filter(i -> i.getOwnedPropertyRestrictions().size() == 0)
-            	.filter(i -> i.getSuperClassifiers().size() == 1)
-                .map(i -> i.getSuperClassifiers().get(0))
+            	.filter(i -> i.getSuperEntities().size() == 1)
+                .map(i -> i.getSuperEntities().get(0))
                 .collect(Collectors.toCollection(LinkedHashSet::new)));
-        equivalents.addAll(findClassifierEquivalenceAxiomsWithSuperClassifier(classifier, scope).stream()
+        equivalents.addAll(findEntityEquivalenceAxiomsWithSuperEntity(entity, scope).stream()
             	.filter(i -> i.getOwnedPropertyRestrictions().size() == 0)
-	        	.filter(i -> i.getSuperClassifiers().size() == 1)
-	            .map(i -> i.getSubClassifier())
+	        	.filter(i -> i.getSuperEntities().size() == 1)
+	            .map(i -> i.getSubEntity())
 	            .collect(Collectors.toCollection(LinkedHashSet::new)));
         return equivalents;
     }
 
     /**
-     * Finds classifiers that are the direct equivalent to a given classifier 
+     * Finds entities that are the direct equivalent to a given entity 
      * 
-     * @param classifier the given classifier
-     * @return a set of classifier that are the direct equivalents of the given classifier
-     * @deprecated As of 2.5.0. Use {{@link #findEquivalentClassifiers(Classifier, Set<Resource>)} instead
+     * @param entity the given entity
+     * @return a set of entity that are the direct equivalents of the given entity
+     * @deprecated As of 2.5.0. Use {{@link #findEquivalentEntitys(Entity, Set<Resource>)} instead
      */
     @Deprecated
-    public static Set<Classifier> findEquivalentClassifiers(Classifier classifier) {
-    	return findEquivalentClassifiers(classifier, null); 
+    public static Set<Entity> findEquivalentEntitys(Entity entity) {
+    	return findEquivalentEntitys(entity, null); 
     }
     
     /**
@@ -1176,31 +1167,28 @@ public final class OmlSearch extends OmlIndex {
     }
     
     /**
-     * Finds semantic properties referencing the given classifier as domain
+     * Finds semantic properties referencing the given entity as domain
      * 
-     * @param domain The referenced classifier
+     * @param domain The referenced entity
      * @param scope The scope of the search (can be null)
      * @return A set of referencing semantic properties
      */
-    public static Set<SemanticProperty> findSemanticPropertiesWithDomain(Classifier domain, Set<Resource> scope) {
+    public static Set<SemanticProperty> findSemanticPropertiesWithDomain(Entity domain, Set<Resource> scope) {
     	var properties = new LinkedHashSet<SemanticProperty>();
     	properties.addAll(findScalarPropertiesWithDomain(domain, scope));
-    	properties.addAll(findStructuredPropertiesWithDomain(domain, scope));
-    	if (domain instanceof Entity) {
-    		properties.addAll(findSourceRelations((Entity)domain, scope));
-    	}
+   		properties.addAll(findSourceRelations((Entity)domain, scope));
         return properties;
     }
  
     /**
-     * Finds semantic properties referencing the given classifier as domain
+     * Finds semantic properties referencing the given entity as domain
      * 
-     * @param domain The referenced classifier
+     * @param domain The referenced entity
      * @return A set of referencing semantic properties
-     * @deprecated As of 2.5.0. Use {{@link #findSemanticPropertiesWithDomain(Classifier, Set<Resource>)} instead
+     * @deprecated As of 2.5.0. Use {{@link #findSemanticPropertiesWithDomain(Entity, Set<Resource>)} instead
      */
     @Deprecated
-    public static Set<SemanticProperty> findSemanticPropertiesWithDomain(Classifier domain) {
+    public static Set<SemanticProperty> findSemanticPropertiesWithDomain(Entity domain) {
     	return findSemanticPropertiesWithDomain(domain, null);
     }
     
@@ -1215,8 +1203,6 @@ public final class OmlSearch extends OmlIndex {
     	var properties = new LinkedHashSet<SemanticProperty>();
     	if (range instanceof Scalar) {
     		properties.addAll(findScalarPropertiesWithRange((Scalar)range, scope));
-    	} else if (range instanceof Structure) {
-    		properties.addAll(findStructuredPropertiesWithRange((Structure)range, scope));
     	} else if (range instanceof Entity) {
     		properties.addAll(findTargetRelations((Entity)range, scope));
     	}
@@ -1242,8 +1228,8 @@ public final class OmlSearch extends OmlIndex {
      * @param scope The scope of the search (can be null)
      * @return A set of domains for the given semantic property
      */
-    public static Set<Classifier> findDomains(SemanticProperty property, Set<Resource> scope) {
-    	var domains = new LinkedHashSet<Classifier>();
+    public static Set<Entity> findDomains(SemanticProperty property, Set<Resource> scope) {
+    	var domains = new LinkedHashSet<Entity>();
     	domains.addAll(property.getDomainList());
     	domains.addAll(findRefs(property, scope).stream()
                 .map(i -> (SemanticProperty)i)
@@ -1260,7 +1246,7 @@ public final class OmlSearch extends OmlIndex {
      * @deprecated As of 2.5.0. Use {{@link #findDomains(SemanticProperty, Set<Resource>)} instead
      */
     @Deprecated
-    public static Set<Classifier> findDomains(SemanticProperty property) {
+    public static Set<Entity> findDomains(SemanticProperty property) {
     	return findDomains(property, null);
     }
     
@@ -1271,7 +1257,7 @@ public final class OmlSearch extends OmlIndex {
      * @param scope The scope of the search (can be null)
      * @return A set of domains for the given semantic property
      */
-    public static Set<Classifier> findAllDomains(SemanticProperty property, Set<Resource> scope) {
+    public static Set<Entity> findAllDomains(SemanticProperty property, Set<Resource> scope) {
     	return findAllSuperTerms(property, true, scope).stream()
     			.map(i -> (SemanticProperty)i)
     			.flatMap(i -> findDomains(i, scope).stream())
@@ -1286,7 +1272,7 @@ public final class OmlSearch extends OmlIndex {
      * @deprecated As of 2.5.0. Use {{@link #findAllDomains(SemanticProperty, Set<Resource>)} instead
      */
     @Deprecated
-    public static Set<Classifier> findAllDomains(SemanticProperty property) {
+    public static Set<Entity> findAllDomains(SemanticProperty property) {
     	return findAllDomains(property, null);
     }
     
@@ -1891,7 +1877,7 @@ public final class OmlSearch extends OmlIndex {
      * @param instance the given instance
      * @param property the given semantic property
      * @param scope The scope of the search (can be null)
-     * @return a contained value of the given structured property on the given instance
+     * @return a contained value of the given semantic property on the given instance
      */
     public static AnonymousInstance findPropertyContainedValue(Instance instance, SemanticProperty property, Set<Resource> scope) {
         return findPropertyValues(instance, property, scope).stream()
@@ -1906,8 +1892,8 @@ public final class OmlSearch extends OmlIndex {
      * 
      * @param instance the given instance
      * @param property the given semantic property
-     * @return a contained value of the given structured property on the given instance
-     * @deprecated As of 2.5.0. Use {{@link #findPropertyContainedValue(Instance, StructuredProperty, Set<Resource>)} instead
+     * @return a contained value of the given semantic property on the given instance
+     * @deprecated As of 2.5.0. Use {{@link #findPropertyContainedValue(Instance, SemanticProperty, Set<Resource>)} instead
      */
     @Deprecated
     public static AnonymousInstance findPropertyContainedValue(Instance instance, SemanticProperty property) {
@@ -1944,14 +1930,14 @@ public final class OmlSearch extends OmlIndex {
     }
     
     /**
-     * Finds classifiers that are direct types of the given instance
+     * Finds entities that are direct types of the given instance
      * 
      * @param instance the given instance
      * @param scope The scope of the search (can be null)
-     * @return a set of classifiers that are direcf types of the given instance
+     * @return a set of entities that are direcf types of the given instance
      */
-    public static Set<Classifier> findTypes(Instance instance, Set<Resource> scope) {
-        Set<Classifier> types = new LinkedHashSet<>();
+    public static Set<Entity> findTypes(Instance instance, Set<Resource> scope) {
+        Set<Entity> types = new LinkedHashSet<>();
         if (instance instanceof AnonymousInstance) {
             types.addAll(instance.getTypes());
         } else if (instance instanceof NamedInstance) {
@@ -1963,42 +1949,42 @@ public final class OmlSearch extends OmlIndex {
     }
  
     /**
-     * Finds classifiers that are direct types of the given instance
+     * Finds entities that are direct types of the given instance
      * 
      * @param instance the given instance
-     * @return a set of classifiers that are direcf types of the given instance
+     * @return a set of entities that are direcf types of the given instance
      * @deprecated As of 2.5.0. Use {{@link #findTypes(Instance, Set<Resource>)} instead
      */
     @Deprecated
-    public static Set<Classifier> findTypes(Instance instance) {
+    public static Set<Entity> findTypes(Instance instance) {
     	return findTypes(instance, null);
     }
     
     /**
-     * Finds classifiers that are direct or indirect types of the given instance
+     * Finds entities that are direct or indirect types of the given instance
      * 
      * @param instance the given instance
      * @param scope The scope of the search (can be null)
-     * @return a set of classifiers that are direct or indirect types of the given instance
+     * @return a set of entities that are direct or indirect types of the given instance
      */
-    public static Set<Classifier> findAllTypes(Instance instance, Set<Resource> scope) {
+    public static Set<Entity> findAllTypes(Instance instance, Set<Resource> scope) {
         return findTypes(instance, scope).stream()
         		.flatMap(t -> findAllSuperTerms(t, true, scope).stream())
-        		.filter(t -> t instanceof Classifier)
-        		.map(t -> (Classifier)t)
+        		.filter(t -> t instanceof Entity)
+        		.map(t -> (Entity)t)
         		.distinct()
         		.collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
     /**
-     * Finds classifiers that are direct or indirect types of the given instance
+     * Finds entities that are direct or indirect types of the given instance
      * 
      * @param instance the given instance
-     * @return a set of classifiers that are direct or indirect types of the given instance
+     * @return a set of entities that are direct or indirect types of the given instance
      * @deprecated As of 2.5.0. Use {{@link #findAllTypes(Instance, Set<Resource>)} instead
      */
     @Deprecated
-    public static Set<Classifier> findAllTypes(Instance instance) {
+    public static Set<Entity> findAllTypes(Instance instance) {
     	return findAllTypes(instance, null);
     }
     
@@ -2010,7 +1996,7 @@ public final class OmlSearch extends OmlIndex {
      * @param scope The scope of the search (can be null)
      * @return true if the given instance is typed directly by the given type; otherwise false
      */
-    public static boolean findIsTypeOf(Instance instance, Classifier type, Set<Resource> scope) {
+    public static boolean findIsTypeOf(Instance instance, Entity type, Set<Resource> scope) {
         return findTypes(instance, scope).stream()
             .filter(t -> t == type)
             .findFirst().isPresent();
@@ -2022,10 +2008,10 @@ public final class OmlSearch extends OmlIndex {
      * @param instance the given instance
      * @param type the given type
      * @return true if the given instance is typed directly by the given type; otherwise false
-     * @deprecated As of 2.5.0. Use {{@link #findIsTypeOf(Instance, Classifier, Set<Resource>)} instead
+     * @deprecated As of 2.5.0. Use {{@link #findIsTypeOf(Instance, Entity, Set<Resource>)} instead
      */
     @Deprecated
-    public static boolean findIsTypeOf(Instance instance, Classifier type) {
+    public static boolean findIsTypeOf(Instance instance, Entity type) {
     	return findIsTypeOf(instance, type, null);
     }
     
@@ -2037,7 +2023,7 @@ public final class OmlSearch extends OmlIndex {
      * @param scope The scope of the search (can be null)
      * @return true if the given instance is typed directly or transitively by the given type; otherwise false
      */
-    public static boolean findIsKindOf(Instance instance, Classifier type, Set<Resource> scope) {
+    public static boolean findIsKindOf(Instance instance, Entity type, Set<Resource> scope) {
         return findTypes(instance, scope).stream()
             .filter(t -> findIsSubTermOf(t, type, scope))
             .findFirst().isPresent();
@@ -2049,10 +2035,10 @@ public final class OmlSearch extends OmlIndex {
      * @param instance the given instance
      * @param type the given type
      * @return true if the given instance is typed directly or transitively by the given type; otherwise false
-     * @deprecated As of 2.5.0. Use {{@link #findIsKindOf(Instance, Classifier, Set<Resource>)} instead
+     * @deprecated As of 2.5.0. Use {{@link #findIsKindOf(Instance, Entity, Set<Resource>)} instead
      */
     @Deprecated
-    public static boolean findIsKindOf(Instance instance, Classifier type) {
+    public static boolean findIsKindOf(Instance instance, Entity type) {
     	return findIsKindOf(instance, type, null);
     }
     
@@ -2063,20 +2049,16 @@ public final class OmlSearch extends OmlIndex {
      * @param scope The scope of the search (can be null)
      * @return a set of instances that have the given type as their direct type
      */
-    public static Set<Instance> findInstancesOfType(Classifier type, Set<Resource> scope) {
+    public static Set<Instance> findInstancesOfType(Entity type, Set<Resource> scope) {
     	Set<Instance> instances = new HashSet<>();
 
-    	if (type instanceof Structure) {
-    		instances.addAll(findStructureInstancesWithType((Structure)type, scope));
-    	} else if (type instanceof Entity) {
-    		instances.addAll(findTypeAssertionsWithType((Entity)type, scope).stream()
-                .map(i -> i.getSubject())
-                .collect(Collectors.toCollection(LinkedHashSet::new)));
-    		if (type instanceof RelationEntity) {
-    			instances.addAll(findAnonymousRelationInstanceOfType((RelationEntity)type, scope));
-    		}
-        }
-    	
+		instances.addAll(findTypeAssertionsWithType((Entity)type, scope).stream()
+            .map(i -> i.getSubject())
+            .collect(Collectors.toCollection(LinkedHashSet::new)));
+		if (type instanceof RelationEntity) {
+			instances.addAll(findAnonymousRelationInstanceOfType((RelationEntity)type, scope));
+		}
+		
         return instances;
     }
 
@@ -2085,10 +2067,10 @@ public final class OmlSearch extends OmlIndex {
      * 
      * @param type the given type
      * @return a set of instances that have the given type as their direct type
-     * @deprecated As of 2.5.0. Use {{@link #findInstancesOfType(Classifier, Set<Resource>)} instead
+     * @deprecated As of 2.5.0. Use {{@link #findInstancesOfType(Entity, Set<Resource>)} instead
      */
     @Deprecated
-    public static Set<Instance> findInstancesOfType(Classifier type) {
+    public static Set<Instance> findInstancesOfType(Entity type) {
     	return findInstancesOfType(type, null);
     }
     
@@ -2099,9 +2081,9 @@ public final class OmlSearch extends OmlIndex {
      * @param scope The scope of the search (can be null)
      * @return a set of instances that have the given type as their direct or transitive type
      */
-    public static Set<Instance> findInstancesOfKind(Classifier type, Set<Resource> scope) {
+    public static Set<Instance> findInstancesOfKind(Entity type, Set<Resource> scope) {
         return findAllSubTerms(type, true, scope).stream()
-            .map(t -> (Classifier)t)
+            .map(t -> (Entity)t)
             .flatMap(t -> findInstancesOfType(t, scope).stream())
             .collect(Collectors.toCollection(LinkedHashSet::new));
     }
@@ -2111,10 +2093,10 @@ public final class OmlSearch extends OmlIndex {
      * 
      * @param type the given type
      * @return a set of instances that have the given type as their direct or transitive type
-     * @deprecated As of 2.5.0. Use {{@link #findInstancesOfKind(Classifier, Set<Resource>)} instead
+     * @deprecated As of 2.5.0. Use {{@link #findInstancesOfKind(Entity, Set<Resource>)} instead
      */
     @Deprecated
-    public static Set<Instance> findInstancesOfKind(Classifier type) {
+    public static Set<Instance> findInstancesOfKind(Entity type) {
     	return findInstancesOfKind(type,  null);
     }
     

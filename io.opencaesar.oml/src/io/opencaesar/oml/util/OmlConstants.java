@@ -162,11 +162,6 @@ public interface OmlConstants {
     public static final String RelationEntity = OML_NS + "RelationEntity";
 
     /**
-     * The oml:Structure IRI
-     */
-    public static final String Structure = OML_NS + "Structure";
-
-    /**
      * The oml:Scalar IRI
      */
     public static final String Scalar = OML_NS + "Scalar";
@@ -197,11 +192,6 @@ public interface OmlConstants {
     public static final String ScalarProperty = OML_NS + "ScalarProperty";
 
     /**
-     * The oml:StructuredProperty IRI
-     */
-    public static final String StructuredProperty = OML_NS + "StructuredProperty";
-
-    /**
      * The oml:Rule IRI
      */
     public static final String Rule = OML_NS + "Rule";
@@ -217,9 +207,9 @@ public interface OmlConstants {
     public static final String RelationInstance = OML_NS + "RelationInstance";
 
     /**
-     * The oml:StructureInstance IRI
+     * The oml:AnonymousConceptInstance IRI
      */
-    public static final String StructureInstance = OML_NS + "StructureInstance";
+    public static final String AnonymousConceptInstance = OML_NS + "AnonymousConceptInstance";
  
     /**
      * The oml:AnonymousRelationInstance IRI

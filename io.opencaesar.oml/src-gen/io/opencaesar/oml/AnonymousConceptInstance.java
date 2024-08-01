@@ -22,25 +22,25 @@ import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Structure Instance</b></em>'.
+ * A representation of the model object '<em><b>Anonymous Concept Instance</b></em>'.
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * StructureInstance is an [=AnonymousInstance=] that can be typed by a [=Structure=].
+ * AnonymousConceptInstance is an [=AnonymousInstance=] that is typed by a [=Concept=] or an [=Aspect=].
  * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link io.opencaesar.oml.StructureInstance#getType <em>Type</em>}</li>
+ *   <li>{@link io.opencaesar.oml.AnonymousConceptInstance#getType <em>Type</em>}</li>
  * </ul>
  *
- * @see io.opencaesar.oml.OmlPackage#getStructureInstance()
+ * @see io.opencaesar.oml.OmlPackage#getAnonymousConceptInstance()
  * @model annotation="https://tabatkins.github.io/bikeshed heading='Instances'"
  * @generated
  */
-public interface StructureInstance extends AnonymousInstance {
+public interface AnonymousConceptInstance extends AnonymousInstance {
 	/**
 	 * Returns the value of the '<em><b>Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
@@ -49,22 +49,22 @@ public interface StructureInstance extends AnonymousInstance {
 	 * The type of this instance
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Type</em>' reference.
-	 * @see #setType(Structure)
-	 * @see io.opencaesar.oml.OmlPackage#getStructureInstance_Type()
+	 * @see #setType(Entity)
+	 * @see io.opencaesar.oml.OmlPackage#getAnonymousConceptInstance_Type()
 	 * @model
 	 * @generated
 	 */
-	Structure getType();
+	Entity getType();
 
 	/**
-	 * Sets the value of the '{@link io.opencaesar.oml.StructureInstance#getType <em>Type</em>}' reference.
+	 * Sets the value of the '{@link io.opencaesar.oml.AnonymousConceptInstance#getType <em>Type</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Type</em>' reference.
 	 * @see #getType()
 	 * @generated
 	 */
-	void setType(Structure value);
+	void setType(Entity value);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -72,7 +72,7 @@ public interface StructureInstance extends AnonymousInstance {
 	 * @model kind="operation" unique="false"
 	 * @generated
 	 */
-	Structure getStructure();
+	Entity getEntity();
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -80,6 +80,6 @@ public interface StructureInstance extends AnonymousInstance {
 	 * @model kind="operation" unique="false"
 	 * @generated
 	 */
-	EList<Classifier> getTypes();
+	EList<Entity> getTypes();
 
-} // StructureInstance
+} // AnonymousConceptInstance

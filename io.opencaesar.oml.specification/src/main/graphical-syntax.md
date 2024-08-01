@@ -14,10 +14,6 @@ BNF symbols are colored in orange and will not show up in actual rendering of OM
 
     <img src="images/aspect.svg"/>
 
-<a id="Structure-Diagram">Structure</a>:
-
-    <img src="images/structure.svg"/>
-
 <a id="Scalar-Diagram">Scalar</a>:
 
     <img src="images/scalar.svg"/>

@@ -40,7 +40,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * <!-- end-user-doc -->
  * @generated
  */
-public class EntityItemProvider extends ClassifierItemProvider {
+public class EntityItemProvider extends TypeItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
@@ -78,6 +78,8 @@ public class EntityItemProvider extends ClassifierItemProvider {
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
+			childrenFeatures.add(OmlPackage.Literals.ENTITY__OWNED_EQUIVALENCES);
+			childrenFeatures.add(OmlPackage.Literals.ENTITY__OWNED_PROPERTY_RESTRICTIONS);
 			childrenFeatures.add(OmlPackage.Literals.ENTITY__OWNED_KEYS);
 		}
 		return childrenFeatures;
@@ -123,6 +125,8 @@ public class EntityItemProvider extends ClassifierItemProvider {
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Entity.class)) {
+			case OmlPackage.ENTITY__OWNED_EQUIVALENCES:
+			case OmlPackage.ENTITY__OWNED_PROPERTY_RESTRICTIONS:
 			case OmlPackage.ENTITY__OWNED_KEYS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
@@ -140,6 +144,31 @@ public class EntityItemProvider extends ClassifierItemProvider {
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+
+		newChildDescriptors.add
+			(createChildParameter
+				(OmlPackage.Literals.ENTITY__OWNED_EQUIVALENCES,
+				 OmlFactory.eINSTANCE.createEntityEquivalenceAxiom()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(OmlPackage.Literals.ENTITY__OWNED_PROPERTY_RESTRICTIONS,
+				 OmlFactory.eINSTANCE.createPropertyRangeRestrictionAxiom()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(OmlPackage.Literals.ENTITY__OWNED_PROPERTY_RESTRICTIONS,
+				 OmlFactory.eINSTANCE.createPropertyCardinalityRestrictionAxiom()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(OmlPackage.Literals.ENTITY__OWNED_PROPERTY_RESTRICTIONS,
+				 OmlFactory.eINSTANCE.createPropertyValueRestrictionAxiom()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(OmlPackage.Literals.ENTITY__OWNED_PROPERTY_RESTRICTIONS,
+				 OmlFactory.eINSTANCE.createPropertySelfRestrictionAxiom()));
 
 		newChildDescriptors.add
 			(createChildParameter

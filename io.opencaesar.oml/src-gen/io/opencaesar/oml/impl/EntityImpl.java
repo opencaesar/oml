@@ -19,8 +19,10 @@
 package io.opencaesar.oml.impl;
 
 import io.opencaesar.oml.Entity;
+import io.opencaesar.oml.EntityEquivalenceAxiom;
 import io.opencaesar.oml.KeyAxiom;
 import io.opencaesar.oml.OmlPackage;
+import io.opencaesar.oml.PropertyRestrictionAxiom;
 
 import java.util.Collection;
 
@@ -42,12 +44,34 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link io.opencaesar.oml.impl.EntityImpl#getOwnedEquivalences <em>Owned Equivalences</em>}</li>
+ *   <li>{@link io.opencaesar.oml.impl.EntityImpl#getOwnedPropertyRestrictions <em>Owned Property Restrictions</em>}</li>
  *   <li>{@link io.opencaesar.oml.impl.EntityImpl#getOwnedKeys <em>Owned Keys</em>}</li>
  * </ul>
  *
  * @generated
  */
-public abstract class EntityImpl extends ClassifierImpl implements Entity {
+public abstract class EntityImpl extends TypeImpl implements Entity {
+	/**
+	 * The cached value of the '{@link #getOwnedEquivalences() <em>Owned Equivalences</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOwnedEquivalences()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<EntityEquivalenceAxiom> ownedEquivalences;
+
+	/**
+	 * The cached value of the '{@link #getOwnedPropertyRestrictions() <em>Owned Property Restrictions</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOwnedPropertyRestrictions()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<PropertyRestrictionAxiom> ownedPropertyRestrictions;
+
 	/**
 	 * The cached value of the '{@link #getOwnedKeys() <em>Owned Keys</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -83,6 +107,32 @@ public abstract class EntityImpl extends ClassifierImpl implements Entity {
 	 * @generated
 	 */
 	@Override
+	public EList<EntityEquivalenceAxiom> getOwnedEquivalences() {
+		if (ownedEquivalences == null) {
+			ownedEquivalences = new EObjectContainmentWithInverseEList<EntityEquivalenceAxiom>(EntityEquivalenceAxiom.class, this, OmlPackage.ENTITY__OWNED_EQUIVALENCES, OmlPackage.ENTITY_EQUIVALENCE_AXIOM__OWNING_ENTITY);
+		}
+		return ownedEquivalences;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EList<PropertyRestrictionAxiom> getOwnedPropertyRestrictions() {
+		if (ownedPropertyRestrictions == null) {
+			ownedPropertyRestrictions = new EObjectContainmentWithInverseEList<PropertyRestrictionAxiom>(PropertyRestrictionAxiom.class, this, OmlPackage.ENTITY__OWNED_PROPERTY_RESTRICTIONS, OmlPackage.PROPERTY_RESTRICTION_AXIOM__OWNING_ENTITY);
+		}
+		return ownedPropertyRestrictions;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EList<KeyAxiom> getOwnedKeys() {
 		if (ownedKeys == null) {
 			ownedKeys = new EObjectContainmentWithInverseEList<KeyAxiom>(KeyAxiom.class, this, OmlPackage.ENTITY__OWNED_KEYS, OmlPackage.KEY_AXIOM__OWNING_ENTITY);
@@ -99,6 +149,10 @@ public abstract class EntityImpl extends ClassifierImpl implements Entity {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case OmlPackage.ENTITY__OWNED_EQUIVALENCES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedEquivalences()).basicAdd(otherEnd, msgs);
+			case OmlPackage.ENTITY__OWNED_PROPERTY_RESTRICTIONS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedPropertyRestrictions()).basicAdd(otherEnd, msgs);
 			case OmlPackage.ENTITY__OWNED_KEYS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedKeys()).basicAdd(otherEnd, msgs);
 		}
@@ -113,6 +167,10 @@ public abstract class EntityImpl extends ClassifierImpl implements Entity {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case OmlPackage.ENTITY__OWNED_EQUIVALENCES:
+				return ((InternalEList<?>)getOwnedEquivalences()).basicRemove(otherEnd, msgs);
+			case OmlPackage.ENTITY__OWNED_PROPERTY_RESTRICTIONS:
+				return ((InternalEList<?>)getOwnedPropertyRestrictions()).basicRemove(otherEnd, msgs);
 			case OmlPackage.ENTITY__OWNED_KEYS:
 				return ((InternalEList<?>)getOwnedKeys()).basicRemove(otherEnd, msgs);
 		}
@@ -127,6 +185,10 @@ public abstract class EntityImpl extends ClassifierImpl implements Entity {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case OmlPackage.ENTITY__OWNED_EQUIVALENCES:
+				return getOwnedEquivalences();
+			case OmlPackage.ENTITY__OWNED_PROPERTY_RESTRICTIONS:
+				return getOwnedPropertyRestrictions();
 			case OmlPackage.ENTITY__OWNED_KEYS:
 				return getOwnedKeys();
 		}
@@ -142,6 +204,14 @@ public abstract class EntityImpl extends ClassifierImpl implements Entity {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case OmlPackage.ENTITY__OWNED_EQUIVALENCES:
+				getOwnedEquivalences().clear();
+				getOwnedEquivalences().addAll((Collection<? extends EntityEquivalenceAxiom>)newValue);
+				return;
+			case OmlPackage.ENTITY__OWNED_PROPERTY_RESTRICTIONS:
+				getOwnedPropertyRestrictions().clear();
+				getOwnedPropertyRestrictions().addAll((Collection<? extends PropertyRestrictionAxiom>)newValue);
+				return;
 			case OmlPackage.ENTITY__OWNED_KEYS:
 				getOwnedKeys().clear();
 				getOwnedKeys().addAll((Collection<? extends KeyAxiom>)newValue);
@@ -158,6 +228,12 @@ public abstract class EntityImpl extends ClassifierImpl implements Entity {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case OmlPackage.ENTITY__OWNED_EQUIVALENCES:
+				getOwnedEquivalences().clear();
+				return;
+			case OmlPackage.ENTITY__OWNED_PROPERTY_RESTRICTIONS:
+				getOwnedPropertyRestrictions().clear();
+				return;
 			case OmlPackage.ENTITY__OWNED_KEYS:
 				getOwnedKeys().clear();
 				return;
@@ -173,6 +249,10 @@ public abstract class EntityImpl extends ClassifierImpl implements Entity {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case OmlPackage.ENTITY__OWNED_EQUIVALENCES:
+				return ownedEquivalences != null && !ownedEquivalences.isEmpty();
+			case OmlPackage.ENTITY__OWNED_PROPERTY_RESTRICTIONS:
+				return ownedPropertyRestrictions != null && !ownedPropertyRestrictions.isEmpty();
 			case OmlPackage.ENTITY__OWNED_KEYS:
 				return ownedKeys != null && !ownedKeys.isEmpty();
 		}

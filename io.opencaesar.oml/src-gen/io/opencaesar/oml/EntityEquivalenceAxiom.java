@@ -22,14 +22,14 @@ import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Classifier Equivalence Axiom</b></em>'.
+ * A representation of the model object '<em><b>Entity Equivalence Axiom</b></em>'.
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * ClassifierEquivalenceAxiom is an [=Axiom=] specified on a subject [=Classifier=] that states that it is equivalent to the intersection
- * of [=Classifiers=] and/or [=PropertyRestrictionAxioms=]. This axiom implies that the [=classifiers=] are super types of the subject classifier.
+ * EntityEquivalenceAxiom is an [=Axiom=] specified on a subject [=Entity=] that states that it is equivalent to the intersection
+ * of [=Entities=] and/or [=PropertyRestrictionAxioms=]. This axiom implies that the [=entities=] are super types of the subject entity.
  * It also implies that when an instance is classified by this intersection, then it follows that it is also classified by the
- * subject classifier. Conversely, when an instance is classified by the subject classifier, then it follows that it is also classified
+ * subject entity. Conversely, when an instance is classified by the subject entity, then it follows that it is also classified
  * by the intersection. In other words, this axiom enables bi-directional (or two-way) inferencing.
  * <!-- end-model-doc -->
  *
@@ -37,30 +37,30 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link io.opencaesar.oml.ClassifierEquivalenceAxiom#getSuperClassifiers <em>Super Classifiers</em>}</li>
- *   <li>{@link io.opencaesar.oml.ClassifierEquivalenceAxiom#getOwnedPropertyRestrictions <em>Owned Property Restrictions</em>}</li>
- *   <li>{@link io.opencaesar.oml.ClassifierEquivalenceAxiom#getOwningClassifier <em>Owning Classifier</em>}</li>
+ *   <li>{@link io.opencaesar.oml.EntityEquivalenceAxiom#getSuperEntities <em>Super Entities</em>}</li>
+ *   <li>{@link io.opencaesar.oml.EntityEquivalenceAxiom#getOwnedPropertyRestrictions <em>Owned Property Restrictions</em>}</li>
+ *   <li>{@link io.opencaesar.oml.EntityEquivalenceAxiom#getOwningEntity <em>Owning Entity</em>}</li>
  * </ul>
  *
- * @see io.opencaesar.oml.OmlPackage#getClassifierEquivalenceAxiom()
+ * @see io.opencaesar.oml.OmlPackage#getEntityEquivalenceAxiom()
  * @model annotation="https://tabatkins.github.io/bikeshed heading='Axioms'"
  * @generated
  */
-public interface ClassifierEquivalenceAxiom extends Axiom {
+public interface EntityEquivalenceAxiom extends Axiom {
 	/**
-	 * Returns the value of the '<em><b>Super Classifiers</b></em>' reference list.
-	 * The list contents are of type {@link io.opencaesar.oml.Classifier}.
+	 * Returns the value of the '<em><b>Super Entities</b></em>' reference list.
+	 * The list contents are of type {@link io.opencaesar.oml.Entity}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The super classifiers specified by this axiom
+	 * The super entity specified by this axiom
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Super Classifiers</em>' reference list.
-	 * @see io.opencaesar.oml.OmlPackage#getClassifierEquivalenceAxiom_SuperClassifiers()
+	 * @return the value of the '<em>Super Entities</em>' reference list.
+	 * @see io.opencaesar.oml.OmlPackage#getEntityEquivalenceAxiom_SuperEntities()
 	 * @model
 	 * @generated
 	 */
-	EList<Classifier> getSuperClassifiers();
+	EList<Entity> getSuperEntities();
 
 	/**
 	 * Returns the value of the '<em><b>Owned Property Restrictions</b></em>' containment reference list.
@@ -72,7 +72,7 @@ public interface ClassifierEquivalenceAxiom extends Axiom {
 	 * The property restrictions specified by this axiom
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Owned Property Restrictions</em>' containment reference list.
-	 * @see io.opencaesar.oml.OmlPackage#getClassifierEquivalenceAxiom_OwnedPropertyRestrictions()
+	 * @see io.opencaesar.oml.OmlPackage#getEntityEquivalenceAxiom_OwnedPropertyRestrictions()
 	 * @see io.opencaesar.oml.PropertyRestrictionAxiom#getOwningAxiom
 	 * @model opposite="owningAxiom" containment="true"
 	 * @generated
@@ -80,42 +80,42 @@ public interface ClassifierEquivalenceAxiom extends Axiom {
 	EList<PropertyRestrictionAxiom> getOwnedPropertyRestrictions();
 
 	/**
-	 * Returns the value of the '<em><b>Owning Classifier</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.Classifier#getOwnedEquivalences <em>Owned Equivalences</em>}'.
+	 * Returns the value of the '<em><b>Owning Entity</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.Entity#getOwnedEquivalences <em>Owned Equivalences</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The owning classifier specified by this axiom
+	 * The owning entity specified by this axiom
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Owning Classifier</em>' container reference.
-	 * @see #setOwningClassifier(Classifier)
-	 * @see io.opencaesar.oml.OmlPackage#getClassifierEquivalenceAxiom_OwningClassifier()
-	 * @see io.opencaesar.oml.Classifier#getOwnedEquivalences
+	 * @return the value of the '<em>Owning Entity</em>' container reference.
+	 * @see #setOwningEntity(Entity)
+	 * @see io.opencaesar.oml.OmlPackage#getEntityEquivalenceAxiom_OwningEntity()
+	 * @see io.opencaesar.oml.Entity#getOwnedEquivalences
 	 * @model opposite="ownedEquivalences" transient="false"
 	 * @generated
 	 */
-	Classifier getOwningClassifier();
+	Entity getOwningEntity();
 
 	/**
-	 * Sets the value of the '{@link io.opencaesar.oml.ClassifierEquivalenceAxiom#getOwningClassifier <em>Owning Classifier</em>}' container reference.
+	 * Sets the value of the '{@link io.opencaesar.oml.EntityEquivalenceAxiom#getOwningEntity <em>Owning Entity</em>}' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Owning Classifier</em>' container reference.
-	 * @see #getOwningClassifier()
+	 * @param value the new value of the '<em>Owning Entity</em>' container reference.
+	 * @see #getOwningEntity()
 	 * @generated
 	 */
-	void setOwningClassifier(Classifier value);
+	void setOwningEntity(Entity value);
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Gets the sub classifier of this axiom
+	 * Gets the sub entity of this axiom
 	 * <!-- end-model-doc -->
 	 * @model kind="operation" unique="false"
 	 * @generated
 	 */
-	Classifier getSubClassifier();
+	Entity getSubEntity();
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -123,6 +123,6 @@ public interface ClassifierEquivalenceAxiom extends Axiom {
 	 * @model kind="operation" unique="false"
 	 * @generated
 	 */
-	Classifier getCharacterizedTerm();
+	Entity getCharacterizedTerm();
 
-} // ClassifierEquivalenceAxiom
+} // EntityEquivalenceAxiom

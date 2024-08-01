@@ -18,7 +18,7 @@
  */
 package io.opencaesar.oml.impl;
 
-import io.opencaesar.oml.Classifier;
+import io.opencaesar.oml.Entity;
 import io.opencaesar.oml.Instance;
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.PropertyValueAssertion;
@@ -99,7 +99,7 @@ public abstract class InstanceImpl extends ElementImpl implements Instance {
 	 * @generated
 	 */
 	@Override
-	public EList<Classifier> getTypes() {
+	public EList<Entity> getTypes() {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
 		throw new UnsupportedOperationException();

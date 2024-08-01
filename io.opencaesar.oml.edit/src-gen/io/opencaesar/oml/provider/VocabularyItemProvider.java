@@ -170,11 +170,6 @@ public class VocabularyItemProvider extends VocabularyBoxItemProvider {
 		newChildDescriptors.add
 			(createChildParameter
 				(OmlPackage.Literals.VOCABULARY__OWNED_STATEMENTS,
-				 OmlFactory.eINSTANCE.createStructure()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OmlPackage.Literals.VOCABULARY__OWNED_STATEMENTS,
 				 OmlFactory.eINSTANCE.createAspect()));
 
 		newChildDescriptors.add
@@ -196,11 +191,6 @@ public class VocabularyItemProvider extends VocabularyBoxItemProvider {
 			(createChildParameter
 				(OmlPackage.Literals.VOCABULARY__OWNED_STATEMENTS,
 				 OmlFactory.eINSTANCE.createScalarProperty()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OmlPackage.Literals.VOCABULARY__OWNED_STATEMENTS,
-				 OmlFactory.eINSTANCE.createStructuredProperty()));
 
 		newChildDescriptors.add
 			(createChildParameter

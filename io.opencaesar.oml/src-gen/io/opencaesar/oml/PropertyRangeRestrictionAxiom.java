@@ -27,7 +27,7 @@ package io.opencaesar.oml;
  * <!-- begin-model-doc -->
  * PropertyRangeRestrictionAxiom is a [=PropertyRestrictionAxiom=] that restricts the range of a [=property=] to
  * a [=type=] that specializes the original range. This restrictions may apply to `all` or to `some` values of the property
- * that have the restricting [=classifier=] as a domain.
+ * that have the restricting [=Entity=] as a domain.
  * <!-- end-model-doc -->
  *
  * <p>

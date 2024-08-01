@@ -26,7 +26,7 @@ import org.eclipse.emf.common.util.EList;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * SemanticProperty is a [=property=] with DL semantics that relates a [=classifier=] acting as its
+ * SemanticProperty is a [=property=] with DL semantics that relates a [=entity=] acting as its
  * domain to a [=type=] acting as its range.
  * <!-- end-model-doc -->
  *
@@ -57,7 +57,7 @@ public interface SemanticProperty extends Property {
 	 * @model kind="operation" unique="false"
 	 * @generated
 	 */
-	EList<Classifier> getDomainList();
+	EList<Entity> getDomainList();
 
 	/**
 	 * <!-- begin-user-doc -->

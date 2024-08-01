@@ -76,6 +76,6 @@ public interface NamedInstance extends DescriptionStatement, Instance {
 	 * @model kind="operation" unique="false"
 	 * @generated
 	 */
-	EList<Classifier> getTypes();
+	EList<Entity> getTypes();
 
 } // NamedInstance

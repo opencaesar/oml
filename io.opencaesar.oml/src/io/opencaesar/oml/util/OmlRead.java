@@ -45,9 +45,9 @@ import io.opencaesar.oml.AnnotationProperty;
 import io.opencaesar.oml.AnonymousInstance;
 import io.opencaesar.oml.Assertion;
 import io.opencaesar.oml.Axiom;
-import io.opencaesar.oml.Classifier;
 import io.opencaesar.oml.Description;
 import io.opencaesar.oml.Element;
+import io.opencaesar.oml.Entity;
 import io.opencaesar.oml.ForwardRelation;
 import io.opencaesar.oml.IdentifiedElement;
 import io.opencaesar.oml.Import;
@@ -822,8 +822,8 @@ public final class OmlRead {
     public static List<Term> getSuperTerms(Term term) {
     	var supers = new ArrayList<Term>();
         supers.addAll(getSpecializationSuperTerms(term));
-        if (term instanceof Classifier) {
-            supers.addAll(getEquivalenceSuperClassifiers((Classifier)term));
+        if (term instanceof Entity) {
+            supers.addAll(getEquivalenceSuperEntities((Entity)term));
         } else if (term instanceof Scalar) {
             supers.addAll(getEquivalenceSuperScalars((Scalar)term));
         } else if (term instanceof Property) {
@@ -866,14 +866,14 @@ public final class OmlRead {
    }
     
     /**
-     * Gets the equivalence super classifiers of the given classifier
+     * Gets the equivalence super entities of the given entity
      * 
-     * @param classifier the given classifier
-     * @return a list of equivalence super classifiers of the given classifier
+     * @param entity the given entity
+     * @return a list of equivalence super entities of the given entity
      */
-    public static List<Classifier> getEquivalenceSuperClassifiers(Classifier classifier) {
-        return classifier.getOwnedEquivalences().stream()
-	            .flatMap(i -> i.getSuperClassifiers().stream())
+    public static List<Entity> getEquivalenceSuperEntities(Entity entity) {
+        return entity.getOwnedEquivalences().stream()
+	            .flatMap(i -> i.getSuperEntities().stream())
 	            .collect(Collectors.toList());
     }
 
@@ -903,7 +903,7 @@ public final class OmlRead {
 		            .collect(Collectors.toList()));
     	} else if (property instanceof ForwardRelation) {
     		var entity = ((ForwardRelation)property).getRelationEntity();
-    		supers.addAll(getEquivalenceSuperClassifiers(entity).stream()
+    		supers.addAll(getEquivalenceSuperEntities(entity).stream()
     	        .filter(i -> i instanceof RelationEntity)
 	            .map(i -> (RelationEntity)i)
 	            .filter(i -> i.getForwardRelation() != null)
@@ -912,7 +912,7 @@ public final class OmlRead {
     	} else if (property instanceof ReverseRelation) {
     		var base = ((ReverseRelation)property).getRelationBase();
     		if (base instanceof RelationEntity) {
-        		supers.addAll(getEquivalenceSuperClassifiers((RelationEntity)base).stream()
+        		supers.addAll(getEquivalenceSuperEntities((RelationEntity)base).stream()
             	        .filter(i -> i instanceof RelationEntity)
         	            .map(i -> (RelationEntity)i)
         	            .filter(i -> i.getReverseRelation() != null)
@@ -1055,7 +1055,7 @@ public final class OmlRead {
      * 
      * @param instance The given instance
      * @param property the given property
-     * @return a structure instance representing the property's contained value
+     * @return an anonymous instance representing the property's contained value
      */
     public static AnonymousInstance getPropertyContainedValue(Instance instance, SemanticProperty property) {
         return getPropertyValues(instance, property).stream()
@@ -1086,8 +1086,8 @@ public final class OmlRead {
      * @param instance the given instance
      * @return a list of types of the given element
      */
-    public static List<Classifier> getTypes(Instance instance) {
-       var types = new ArrayList<Classifier>();
+    public static List<Entity> getTypes(Instance instance) {
+       var types = new ArrayList<Entity>();
         if (instance instanceof AnonymousInstance) {
             types.addAll(instance.getTypes());
         } else if (instance instanceof NamedInstance) {

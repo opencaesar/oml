@@ -19,7 +19,7 @@
 package io.opencaesar.oml.provider;
 
 
-import io.opencaesar.oml.Classifier;
+import io.opencaesar.oml.EntityEquivalenceAxiom;
 import io.opencaesar.oml.OmlFactory;
 import io.opencaesar.oml.OmlPackage;
 
@@ -31,23 +31,24 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 
+import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
- * This is the item provider adapter for a {@link io.opencaesar.oml.Classifier} object.
+ * This is the item provider adapter for a {@link io.opencaesar.oml.EntityEquivalenceAxiom} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class ClassifierItemProvider extends TypeItemProvider {
+public class EntityEquivalenceAxiomItemProvider extends AxiomItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ClassifierItemProvider(AdapterFactory adapterFactory) {
+	public EntityEquivalenceAxiomItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -62,8 +63,54 @@ public class ClassifierItemProvider extends TypeItemProvider {
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addSuperEntitiesPropertyDescriptor(object);
+			addOwningEntityPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Super Entities feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addSuperEntitiesPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_EntityEquivalenceAxiom_superEntities_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_EntityEquivalenceAxiom_superEntities_feature", "_UI_EntityEquivalenceAxiom_type"),
+				 OmlPackage.Literals.ENTITY_EQUIVALENCE_AXIOM__SUPER_ENTITIES,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Owning Entity feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addOwningEntityPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_EntityEquivalenceAxiom_owningEntity_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_EntityEquivalenceAxiom_owningEntity_feature", "_UI_EntityEquivalenceAxiom_type"),
+				 OmlPackage.Literals.ENTITY_EQUIVALENCE_AXIOM__OWNING_ENTITY,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
 	}
 
 	/**
@@ -78,8 +125,7 @@ public class ClassifierItemProvider extends TypeItemProvider {
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(OmlPackage.Literals.CLASSIFIER__OWNED_EQUIVALENCES);
-			childrenFeatures.add(OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS);
+			childrenFeatures.add(OmlPackage.Literals.ENTITY_EQUIVALENCE_AXIOM__OWNED_PROPERTY_RESTRICTIONS);
 		}
 		return childrenFeatures;
 	}
@@ -98,6 +144,17 @@ public class ClassifierItemProvider extends TypeItemProvider {
 	}
 
 	/**
+	 * This returns EntityEquivalenceAxiom.gif.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object getImage(Object object) {
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/EntityEquivalenceAxiom"));
+	}
+
+	/**
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -105,10 +162,7 @@ public class ClassifierItemProvider extends TypeItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Classifier)object).getName();
-		return label == null || label.length() == 0 ?
-			getString("_UI_Classifier_type") :
-			getString("_UI_Classifier_type") + " " + label;
+		return getString("_UI_EntityEquivalenceAxiom_type");
 	}
 
 
@@ -123,9 +177,8 @@ public class ClassifierItemProvider extends TypeItemProvider {
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(Classifier.class)) {
-			case OmlPackage.CLASSIFIER__OWNED_EQUIVALENCES:
-			case OmlPackage.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS:
+		switch (notification.getFeatureID(EntityEquivalenceAxiom.class)) {
+			case OmlPackage.ENTITY_EQUIVALENCE_AXIOM__OWNED_PROPERTY_RESTRICTIONS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -145,27 +198,22 @@ public class ClassifierItemProvider extends TypeItemProvider {
 
 		newChildDescriptors.add
 			(createChildParameter
-				(OmlPackage.Literals.CLASSIFIER__OWNED_EQUIVALENCES,
-				 OmlFactory.eINSTANCE.createClassifierEquivalenceAxiom()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS,
+				(OmlPackage.Literals.ENTITY_EQUIVALENCE_AXIOM__OWNED_PROPERTY_RESTRICTIONS,
 				 OmlFactory.eINSTANCE.createPropertyRangeRestrictionAxiom()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS,
+				(OmlPackage.Literals.ENTITY_EQUIVALENCE_AXIOM__OWNED_PROPERTY_RESTRICTIONS,
 				 OmlFactory.eINSTANCE.createPropertyCardinalityRestrictionAxiom()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS,
+				(OmlPackage.Literals.ENTITY_EQUIVALENCE_AXIOM__OWNED_PROPERTY_RESTRICTIONS,
 				 OmlFactory.eINSTANCE.createPropertyValueRestrictionAxiom()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS,
+				(OmlPackage.Literals.ENTITY_EQUIVALENCE_AXIOM__OWNED_PROPERTY_RESTRICTIONS,
 				 OmlFactory.eINSTANCE.createPropertySelfRestrictionAxiom()));
 	}
 

@@ -18,7 +18,6 @@
  */
 package io.opencaesar.oml.impl;
 
-import io.opencaesar.oml.Classifier;
 import io.opencaesar.oml.Entity;
 import io.opencaesar.oml.Instance;
 import io.opencaesar.oml.NamedInstance;
@@ -145,13 +144,13 @@ public abstract class NamedInstanceImpl extends DescriptionStatementImpl impleme
 	 * @generated
 	 */
 	@Override
-	public EList<Classifier> getTypes() {
-		final Function1<TypeAssertion, Classifier> _function = new Function1<TypeAssertion, Classifier>() {
-			public Classifier apply(final TypeAssertion it) {
+	public EList<Entity> getTypes() {
+		final Function1<TypeAssertion, Entity> _function = new Function1<TypeAssertion, Entity>() {
+			public Entity apply(final TypeAssertion it) {
 				return it.getType();
 			}
 		};
-		return XcoreEListExtensions.<TypeAssertion, Classifier>map(this.getOwnedTypes(), _function);
+		return XcoreEListExtensions.<TypeAssertion, Entity>map(this.getOwnedTypes(), _function);
 	}
 
 	/**

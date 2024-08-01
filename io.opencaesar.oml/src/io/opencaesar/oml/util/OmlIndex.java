@@ -34,16 +34,16 @@ import org.eclipse.emf.ecore.util.EcoreUtil.UsageCrossReferencer;
 
 import io.opencaesar.oml.Annotation;
 import io.opencaesar.oml.AnnotationProperty;
+import io.opencaesar.oml.AnonymousConceptInstance;
 import io.opencaesar.oml.AnonymousRelationInstance;
 import io.opencaesar.oml.Argument;
 import io.opencaesar.oml.Aspect;
 import io.opencaesar.oml.BuiltIn;
 import io.opencaesar.oml.BuiltInPredicate;
-import io.opencaesar.oml.Classifier;
-import io.opencaesar.oml.ClassifierEquivalenceAxiom;
 import io.opencaesar.oml.Concept;
 import io.opencaesar.oml.ConceptInstance;
 import io.opencaesar.oml.Entity;
+import io.opencaesar.oml.EntityEquivalenceAxiom;
 import io.opencaesar.oml.InstanceEnumerationAxiom;
 import io.opencaesar.oml.KeyAxiom;
 import io.opencaesar.oml.Member;
@@ -69,9 +69,6 @@ import io.opencaesar.oml.ScalarEquivalenceAxiom;
 import io.opencaesar.oml.ScalarProperty;
 import io.opencaesar.oml.SemanticProperty;
 import io.opencaesar.oml.SpecializationAxiom;
-import io.opencaesar.oml.Structure;
-import io.opencaesar.oml.StructureInstance;
-import io.opencaesar.oml.StructuredProperty;
 import io.opencaesar.oml.Term;
 import io.opencaesar.oml.Type;
 import io.opencaesar.oml.TypeAssertion;
@@ -309,25 +306,25 @@ public class OmlIndex {
     // ScalarProperty
     
     /**
-     * Finds scalar properties referencing the given classifier as domain
+     * Finds scalar properties referencing the given entity as domain
      * 
-     * @param domain The referenced classifier
+     * @param domain The referenced entity
      * @param scope The scope of the search (can be null)
      * @return A set of referencing scalar properties
      */
-    public static Set<ScalarProperty> findScalarPropertiesWithDomain(Classifier domain, Set<Resource> scope) {
+    public static Set<ScalarProperty> findScalarPropertiesWithDomain(Entity domain, Set<Resource> scope) {
         return findInverseReferencers(domain, OmlPackage.Literals.SCALAR_PROPERTY__DOMAINS, ScalarProperty.class, scope);
     }
 
     /**
-     * Finds scalar properties referencing the given classifier as domain
+     * Finds scalar properties referencing the given entity as domain
      * 
-     * @param domain The referenced classifier
+     * @param domain The referenced entity
      * @return A set of referencing scalar properties
-     * @deprecated As of 2.5.0. Use {{@link #findScalarPropertiesWithDomain(Classifier, Set<Resource>)} instead
+     * @deprecated As of 2.5.0. Use {{@link #findScalarPropertiesWithDomain(Entity, Set<Resource>)} instead
      */
     @Deprecated
-    public static Set<ScalarProperty> findScalarPropertiesWithDomain(Classifier domain) {
+    public static Set<ScalarProperty> findScalarPropertiesWithDomain(Entity domain) {
         return findScalarPropertiesWithDomain(domain, null);
     }
 
@@ -354,77 +351,29 @@ public class OmlIndex {
         return findScalarPropertiesWithRange(range, null);
     }
 
-    // StructuredProperty
+    // AnonymousConceptInstance
     
     /**
-     * Finds structured properties referencing the given classifier as domain
+     * Finds anonymous concept instances referencing the given entity as type
      * 
-     * @param domain The referenced classifier
+     * @param type The referenced entity
      * @param scope The scope of the search (can be null)
-     * @return A set of referencing scalar properties
+     * @return A set of referencing anonymous concept instances
      */
-    public static Set<StructuredProperty> findStructuredPropertiesWithDomain(Classifier domain, Set<Resource> scope) {
-        return findInverseReferencers(domain, OmlPackage.Literals.STRUCTURED_PROPERTY__DOMAINS, StructuredProperty.class, scope);
+    public static Set<AnonymousConceptInstance> findAnonymousConceptInstancesWithType(Entity type, Set<Resource> scope) {
+        return findInverseReferencers(type, OmlPackage.Literals.ANONYMOUS_CONCEPT_INSTANCE__TYPE, AnonymousConceptInstance.class, scope);
     }
-
+    
     /**
-     * Finds structured properties referencing the given classifier as domain
+     * Finds anonymous concept instances referencing the given entity as type
      * 
-     * @param domain The referenced classifier
-     * @return A set of referencing scalar properties
-     * @deprecated As of 2.5.0. Use {{@link #findStructuredPropertiesWithDomain(Classifier, Set<Resource>)} instead
+     * @param type The referenced entity
+     * @return A set of referencing anonymous concept instances
+     * @deprecated As of 2.5.0. Use {{@link #findAnonymousConceptInstancesWithType(Entity, Set<Resource>)} instead
      */
     @Deprecated
-    public static Set<StructuredProperty> findStructuredPropertiesWithDomain(Classifier domain) {
-        return findStructuredPropertiesWithDomain(domain, null);
-    }
-
-    /**
-     * Finds structured properties referencing the given structure as range
-     * 
-     * @param range The referenced structure
-     * @param scope The scope of the search (can be null)
-     * @return A set of referencing structured properties
-     */
-    public static Set<StructuredProperty> findStructuredPropertiesWithRange(Structure range, Set<Resource> scope) {
-        return findInverseReferencers(range, OmlPackage.Literals.STRUCTURED_PROPERTY__RANGES, StructuredProperty.class, scope);
-    }
-    
-    /**
-     * Finds structured properties referencing the given structure as range
-     * 
-     * @param range The referenced structure
-     * @return A set of referencing structured properties
-     * @deprecated As of 2.5.0. Use {{@link #findStructuredPropertiesWithRange(Structure, Set<Resource>)} instead
-     */
-    @Deprecated
-    public static Set<StructuredProperty> findStructuredPropertiesWithRange(Structure range) {
-        return findStructuredPropertiesWithRange(range, null);
-    }
-
-    // StructureInstance
-    
-    /**
-     * Finds structure instances referencing the given structure as type
-     * 
-     * @param type The referenced structure
-     * @param scope The scope of the search (can be null)
-     * @return A set of referencing structure instances
-     */
-    public static Set<StructureInstance> findStructureInstancesWithType(Structure type, Set<Resource> scope) {
-        return findInverseReferencers(type, OmlPackage.Literals.STRUCTURE_INSTANCE__TYPE, StructureInstance.class, scope);
-    }
-    
-    /**
-     * Finds structure instances referencing the given structure as type
-     * 
-     * @param type The referenced structure
-     * @return A set of referencing structure instances
-     * @deprecated As of 2.5.0. Use {{@link #findStructureInstancesWithType(Structure, Set<Resource>)} instead
-     */
-    @Deprecated
-    public static Set<StructureInstance> findStructureInstancesWithType(Structure type) {
-        return findStructureInstancesWithType(type, null);
+    public static Set<AnonymousConceptInstance> findAnonymousConceptInstancesWithType(Entity type) {
+        return findAnonymousConceptInstancesWithType(type, null);
     }
 
     // AnonymousRelationInstance
@@ -575,31 +524,6 @@ public class OmlIndex {
         return findRelationEntitiesWithRef(entity, null);
     }
 
-    // Structure
-    
-    /**
-     * Finds structure referencing the given structure
-     * 
-     * @param structure The referenced structure
-     * @param scope The scope of the search (can be null)
-     * @return A set of referencing structures
-     */
-    public static Set<Structure> findStructuresWithRef(Structure structure, Set<Resource> scope) {
-        return findInverseReferencers(structure, OmlPackage.Literals.STRUCTURE__REF, Structure.class, scope);
-    }
-    
-    /**
-     * Finds structure referencing the given structure
-     * 
-     * @param structure The referenced structure
-     * @return A set of referencing structures
-     * @deprecated As of 2.5.0. Use {{@link #findStructuresWithRef(Structure, Set<Resource>)} instead
-     */
-    @Deprecated
-    public static Set<Structure> findStructuresWithRef(Structure structure) {
-        return findStructuresWithRef(structure, null);
-    }
-
     // AnnotationProperty
     
     /**
@@ -648,31 +572,6 @@ public class OmlIndex {
     @Deprecated
     public static Set<ScalarProperty> findScalarPropertiesWithRef(ScalarProperty property) {
         return findScalarPropertiesWithRef(property, null);
-    }
-
-    // StructuredProperty
-    
-    /**
-     * Finds structured property referencing the given structured property
-     * 
-     * @param property The referenced structured property
-     * @param scope The scope of the search (can be null)
-     * @return A set of referencing structured properties
-     */
-    public static Set<StructuredProperty> findStructuredPropertiesWithRef(StructuredProperty property, Set<Resource> scope) {
-        return findInverseReferencers(property, OmlPackage.Literals.STRUCTURED_PROPERTY__REF, StructuredProperty.class, scope);
-    }
-    
-    /**
-     * Finds structured property referencing the given structured property
-     * 
-     * @param property The referenced structured property
-     * @return A set of referencing structured properties
-     * @deprecated As of 2.5.0. Use {{@link #findStructuredPropertiesWithRef(StructuredProperty, Set<Resource>)} instead
-     */
-    @Deprecated
-    public static Set<StructuredProperty> findStructuredPropertiesWithRef(StructuredProperty property) {
-        return findStructuredPropertiesWithRef(property, null);
     }
 
     // Scalar
@@ -850,29 +749,29 @@ public class OmlIndex {
         return findSpecializationAxiomsWithSuperTerm(term, null);
     }
 
-    // ClassifierEquivalenceAxiom
+    // EntityEquivalenceAxiom
     
     /**
-     * Finds classifier equivalence axioms referencing the given classifier
+     * Finds entity equivalence axioms referencing the given entity
      * 
-     * @param classifier The referenced classifier
+     * @param entity The referenced entity
      * @param scope The scope of the search (can be null)
-     * @return A set of referencing classifier equivalence axioms
+     * @return A set of referencing entity equivalence axioms
      */
-    public static Set<ClassifierEquivalenceAxiom> findClassifierEquivalenceAxiomsWithSuperClassifier(Classifier classifier, Set<Resource> scope) {
-        return findInverseReferencers(classifier, OmlPackage.Literals.CLASSIFIER_EQUIVALENCE_AXIOM__SUPER_CLASSIFIERS, ClassifierEquivalenceAxiom.class, scope);
+    public static Set<EntityEquivalenceAxiom> findEntityEquivalenceAxiomsWithSuperEntity(Entity entity, Set<Resource> scope) {
+        return findInverseReferencers(entity, OmlPackage.Literals.ENTITY_EQUIVALENCE_AXIOM__SUPER_ENTITIES, EntityEquivalenceAxiom.class, scope);
     }
 
     /**
-     * Finds classifier equivalence axioms referencing the given classifier
+     * Finds entity equivalence axioms referencing the given entity
      * 
-     * @param classifier The referenced classifier
-     * @return A set of referencing classifier equivalence axioms
-     * @deprecated As of 2.5.0. Use {{@link #findClassifierEquivalenceAxiomsWithSuperClassifier(Classifier, Set<Resource>)} instead
+     * @param entity The referenced entity
+     * @return A set of referencing entity equivalence axioms
+     * @deprecated As of 2.5.0. Use {{@link #findEntityEquivalenceAxiomsWithSuperEntity(Entity, Set<Resource>)} instead
      */
     @Deprecated
-    public static Set<ClassifierEquivalenceAxiom> findClassifierEquivalenceAxiomsWithSuperClassifier(Classifier classifier) {
-        return findClassifierEquivalenceAxiomsWithSuperClassifier(classifier, null);
+    public static Set<EntityEquivalenceAxiom> findEntityEquivalenceAxiomsWithSuperEntity(Entity entity) {
+        return findEntityEquivalenceAxiomsWithSuperEntity(entity, null);
     }
 
     // ScalarEquivalenceAxiom

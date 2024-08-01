@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import io.opencaesar.oml.Annotation;
 import io.opencaesar.oml.AnnotationProperty;
+import io.opencaesar.oml.AnonymousConceptInstance;
 import io.opencaesar.oml.AnonymousRelationInstance;
 import io.opencaesar.oml.Argument;
 import io.opencaesar.oml.Aspect;
@@ -53,9 +54,6 @@ import io.opencaesar.oml.SameAsPredicate;
 import io.opencaesar.oml.Scalar;
 import io.opencaesar.oml.ScalarProperty;
 import io.opencaesar.oml.SpecializationAxiom;
-import io.opencaesar.oml.Structure;
-import io.opencaesar.oml.StructureInstance;
-import io.opencaesar.oml.StructuredProperty;
 import io.opencaesar.oml.TypeAssertion;
 import io.opencaesar.oml.TypePredicate;
 import io.opencaesar.oml.Vocabulary;
@@ -171,7 +169,7 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 		return descriptionBundleItemProvider;
 	}
 
-	// Types (aspect, concept, relation entity, structure)
+	// Types (aspect, concept, relation entity)
 	
 	@Override
 	public Adapter createAspectAdapter() {
@@ -243,29 +241,6 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 	}
 
 	@Override
-	public Adapter createStructureAdapter() {
-		if (structureItemProvider == null) structureItemProvider = new StructureItemProvider(this) {
-			@Override
-			public String getText(Object object) {
-				Structure structure = (Structure)object;
-				if (structure.eIsProxy()) {
-					try {
-						String fragment = URLDecoder.decode(((InternalEObject)structure).eProxyURI().fragment(), "utf-8");
-						return "structure <" + fragment + ">";
-					} catch (UnsupportedEncodingException e) {
-						throw new AssertionError(e);
-					}
-				} else if (structure.isRef()){
-					return "ref structure " + getLabel(structure.resolve(), structure);
-				} else {
-					return "structure " + getLabel(structure);
-				}
-			}
-		};
-		return structureItemProvider;
-	}
-	
-	@Override
 	public Adapter createScalarAdapter() {
 		if (scalarItemProvider == null) scalarItemProvider = new ScalarItemProvider(this) {
 			@Override
@@ -288,7 +263,7 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 		return scalarItemProvider;
 	}
 
-	// Properties (annotation, scalar, structured)
+	// Properties (annotation, scalar, relation)
 
 	@Override
 	public Adapter createAnnotationPropertyAdapter() {
@@ -334,29 +309,6 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 			}
 		};
 		return scalarPropertyItemProvider;
-	}
-
-	@Override
-	public Adapter createStructuredPropertyAdapter() {
-		if (structuredPropertyItemProvider == null) structuredPropertyItemProvider = new StructuredPropertyItemProvider(this) {
-			@Override
-			public String getText(Object object) {
-				StructuredProperty property = (StructuredProperty)object;
-				if (property.eIsProxy()) {
-					try {
-						String fragment = URLDecoder.decode(((InternalEObject)property).eProxyURI().fragment(), "utf-8");
-						return "structured property <" + fragment + ">";
-					} catch (UnsupportedEncodingException e) {
-						throw new AssertionError(e);
-					}
-				} else if (property.isRef()){
-					return "ref structured property " + getLabel(property.resolve(), property);
-				} else {
-					return "structured property " + getLabel(property);
-				}
-			}
-		};
-		return structuredPropertyItemProvider;
 	}
 
 	// Relations (forward, reverse, source, target, inverse source, inverse target)
@@ -563,8 +515,6 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 				String propertyKind = "";
 				if (axiom.getProperty() instanceof ScalarProperty) {
 					propertyKind = "scalar property";
-				} else if (axiom.getProperty() instanceof StructuredProperty) {
-					propertyKind = "structured property";
 				} else if (axiom.getProperty() instanceof Relation) {
 					propertyKind = "relation";
 				}
@@ -583,8 +533,6 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 				String propertyKind = "";
 				if (axiom.getProperty() instanceof ScalarProperty) {
 					propertyKind = "scalar property";
-				} else if (axiom.getProperty() instanceof StructuredProperty) {
-					propertyKind = "structured property";
 				} else if (axiom.getProperty() instanceof Relation) {
 					propertyKind = "relation";
 				}
@@ -603,9 +551,9 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 				String valueLabel = "";
 				if (axiom.getLiteralValue() != null) {
 					valueLabel = getLiteralLabel(axiom.getLiteralValue()).toString();
-				} else if (axiom.getContainedValue() instanceof StructureInstance) {
-					var instance = (StructureInstance) axiom.getContainedValue();
-					var type = instance.getStructure();
+				} else if (axiom.getContainedValue() instanceof AnonymousConceptInstance) {
+					var instance = (AnonymousConceptInstance) axiom.getContainedValue();
+					var type = instance.getEntity();
 					if (type != null) {
 						valueLabel = getLabel(type, instance);
 					}
@@ -636,7 +584,7 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 		return propertySelfRestrictionAxiomItemProvider;
 	}
 	
-	// Property values (annotation, scalar, structured, link)
+	// Property values (annotation, scalar, relation)
 
 	@Override
 	public Adapter createAnnotationAdapter() {
@@ -662,7 +610,7 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 		return propertyValueAssertionItemProvider;
 	}
 		
-	// Instances (concept, relation, structure)
+	// Instances (concept, relation)
 
 	@Override
 	public Adapter createConceptInstanceAdapter() {
@@ -721,21 +669,37 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 	}
 
 	@Override
-	public Adapter createStructureInstanceAdapter() {
-		if (structureInstanceItemProvider == null) structureInstanceItemProvider = new StructureInstanceItemProvider(this) {
+	public Adapter createAnonymousConceptInstanceAdapter() {
+		if (anonymousConceptInstanceItemProvider == null) anonymousConceptInstanceItemProvider = new AnonymousConceptInstanceItemProvider(this) {
 			@Override
 			public String getText(Object object) {
-				StructureInstance instance = (StructureInstance) object;
-				if (instance.getType() != null) {
-					return getLabel(instance.getType(), instance);
+				AnonymousConceptInstance instance = (AnonymousConceptInstance) object;
+				if (instance.getEntity() != null) {
+					return getLabel(instance.getEntity(), instance);
 				} else {
-					return "<no structure type>";
+					return "<no instance type>";
 				}
 			}
 		};
-		return structureInstanceItemProvider;
+		return anonymousConceptInstanceItemProvider;
 	}
 	
+	@Override
+	public Adapter createAnonymousRelationInstanceAdapter() {
+		if (anonymousRelationInstanceItemProvider == null) anonymousRelationInstanceItemProvider = new AnonymousRelationInstanceItemProvider(this) {
+			@Override
+			public String getText(Object object) {
+				AnonymousRelationInstance instance = (AnonymousRelationInstance) object;
+				if (instance.getRelationEntity() != null) {
+					return getLabel(instance.getRelationEntity(), instance);
+				} else {
+					return "<no instance type>";
+				}
+			}
+		};
+		return anonymousRelationInstanceItemProvider;
+	}
+
 	// Type assertion
 
 	@Override
@@ -823,8 +787,8 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 		for (Element value : values) {
 			if (value instanceof Literal) {
 				valuesLabels.add(getLiteralLabel((Literal)value));
-			} else if (value instanceof StructureInstance) {
-				var instance = (StructureInstance) value;
+			} else if (value instanceof AnonymousConceptInstance) {
+				var instance = (AnonymousConceptInstance) value;
 				valuesLabels.add(getLabel(instance.getType(), instance));
 			} else if (value instanceof AnonymousRelationInstance) {
 				var instance = (AnonymousRelationInstance) value;

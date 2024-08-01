@@ -20,7 +20,6 @@ package io.opencaesar.oml.provider;
 
 
 import io.opencaesar.oml.OmlPackage;
-import io.opencaesar.oml.Structure;
 
 import java.util.Collection;
 import java.util.List;
@@ -32,19 +31,19 @@ import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 
 /**
- * This is the item provider adapter for a {@link io.opencaesar.oml.Structure} object.
+ * This is the item provider adapter for a {@link io.opencaesar.oml.AnonymousConceptInstance} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class StructureItemProvider extends ClassifierItemProvider {
+public class AnonymousConceptInstanceItemProvider extends AnonymousInstanceItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public StructureItemProvider(AdapterFactory adapterFactory) {
+	public AnonymousConceptInstanceItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -59,25 +58,25 @@ public class StructureItemProvider extends ClassifierItemProvider {
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addRefPropertyDescriptor(object);
+			addTypePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Ref feature.
+	 * This adds a property descriptor for the Type feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addRefPropertyDescriptor(Object object) {
+	protected void addTypePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Structure_ref_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Structure_ref_feature", "_UI_Structure_type"),
-				 OmlPackage.Literals.STRUCTURE__REF,
+				 getString("_UI_AnonymousConceptInstance_type_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_AnonymousConceptInstance_type_feature", "_UI_AnonymousConceptInstance_type"),
+				 OmlPackage.Literals.ANONYMOUS_CONCEPT_INSTANCE__TYPE,
 				 true,
 				 false,
 				 true,
@@ -87,14 +86,14 @@ public class StructureItemProvider extends ClassifierItemProvider {
 	}
 
 	/**
-	 * This returns Structure.gif.
+	 * This returns AnonymousConceptInstance.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/Structure"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/AnonymousConceptInstance"));
 	}
 
 	/**
@@ -105,10 +104,7 @@ public class StructureItemProvider extends ClassifierItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Structure)object).getName();
-		return label == null || label.length() == 0 ?
-			getString("_UI_Structure_type") :
-			getString("_UI_Structure_type") + " " + label;
+		return getString("_UI_AnonymousConceptInstance_type");
 	}
 
 

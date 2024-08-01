@@ -39,6 +39,7 @@ import com.google.common.collect.HashBasedTable;
 
 import io.opencaesar.oml.Annotation;
 import io.opencaesar.oml.AnnotationProperty;
+import io.opencaesar.oml.AnonymousConceptInstance;
 import io.opencaesar.oml.AnonymousInstance;
 import io.opencaesar.oml.AnonymousRelationInstance;
 import io.opencaesar.oml.Argument;
@@ -47,8 +48,6 @@ import io.opencaesar.oml.BooleanLiteral;
 import io.opencaesar.oml.BuiltIn;
 import io.opencaesar.oml.BuiltInPredicate;
 import io.opencaesar.oml.CardinalityRestrictionKind;
-import io.opencaesar.oml.Classifier;
-import io.opencaesar.oml.ClassifierEquivalenceAxiom;
 import io.opencaesar.oml.Concept;
 import io.opencaesar.oml.ConceptInstance;
 import io.opencaesar.oml.DecimalLiteral;
@@ -58,6 +57,7 @@ import io.opencaesar.oml.DifferentFromPredicate;
 import io.opencaesar.oml.DoubleLiteral;
 import io.opencaesar.oml.Element;
 import io.opencaesar.oml.Entity;
+import io.opencaesar.oml.EntityEquivalenceAxiom;
 import io.opencaesar.oml.ForwardRelation;
 import io.opencaesar.oml.IdentifiedElement;
 import io.opencaesar.oml.Import;
@@ -92,9 +92,6 @@ import io.opencaesar.oml.Scalar;
 import io.opencaesar.oml.ScalarEquivalenceAxiom;
 import io.opencaesar.oml.ScalarProperty;
 import io.opencaesar.oml.SpecializationAxiom;
-import io.opencaesar.oml.Structure;
-import io.opencaesar.oml.StructureInstance;
-import io.opencaesar.oml.StructuredProperty;
 import io.opencaesar.oml.TypeAssertion;
 import io.opencaesar.oml.TypePredicate;
 import io.opencaesar.oml.UnreifiedRelation;
@@ -515,20 +512,6 @@ public class OmlBuilder {
         return relationEntity;
     }
 
-    // Structure
-
-    /**
-     * Creates a new structure and adds it to the given vocabulary
-     * 
-     * @param vocabulary the context vocabulary
-     * @param name the name of the new structure
-     * @return a new structure that is added to the given vocabulary
-     */
-    public Structure addStructure(Vocabulary vocabulary, String name) {
-        final Structure structure = OmlWrite.addStructure(vocabulary, name);
-        return structure;
-    }
-    
     // AnnotationProperty
 
     /**
@@ -550,7 +533,7 @@ public class OmlBuilder {
      * 
      * @param vocabulary the context vocabulary
      * @param name the name of the new scalar property
-     * @param domainIris the iris of the domain classifiers
+     * @param domainIris the iris of the domain entities
      * @param rangeIris the iris of the range scalars
      * @param functional whether the scalar property is functional
      * @return a new scalar property that is added to the given vocabulary
@@ -568,7 +551,7 @@ public class OmlBuilder {
      * 
      * @param vocabulary the context vocabulary
      * @param propertyIri the iri of the scalar property
-     * @param domainIri the iri of a domain classifier
+     * @param domainIri the iri of a domain entity
      * @param rangeIri the iri of a range scalar
      * @param functional whether the scalar property is functional (can be null)
      */
@@ -580,58 +563,10 @@ public class OmlBuilder {
         		property = (ScalarProperty) OmlWrite.getOrAddRef(vocabulary, property);
         	}
             if (domainIri != null) {
-            	property.getDomains().add(resolve(Classifier.class, vocabulary, domainIri));
+            	property.getDomains().add(resolve(Entity.class, vocabulary, domainIri));
             }
             if (rangeIri != null) {
             	property.getRanges().add(resolve(Scalar.class, vocabulary, rangeIri));
-            }
-            if (functional != null) {
-            	property.setFunctional(functional);
-            }
-        });
-    }
-
-    // StructuredProperty
-
-    /**
-     * Creates a new structured property and adds it to the given vocabulary
-     * 
-     * @param vocabulary the context vocabulary
-     * @param name the name of the new structured property
-     * @param domainIris the iris of the domain classifiers
-     * @param rangeIris the iris of the range structures
-     * @param functional whether the structured property is functional
-     * @return a new structured property that is added to the given vocabulary
-     */
-    public StructuredProperty addStructuredProperty(Vocabulary vocabulary, String name, 
-        List<String> domainIris, List<String> rangeIris, boolean functional) {
-        final StructuredProperty property = OmlWrite.addStructuredProperty(vocabulary, name, Collections.emptyList(), Collections.emptyList(), functional);
-        setCrossReferences(vocabulary, property, OmlPackage.Literals.STRUCTURED_PROPERTY__DOMAINS, domainIris);
-        setCrossReferences(vocabulary, property, OmlPackage.Literals.STRUCTURED_PROPERTY__RANGES, rangeIris);
-        return property;
-    }
-    
-    /**
-     * Sets structured property details in the given vocabulary
-     * 
-     * @param vocabulary the context vocabulary
-     * @param propertyIri the iri of the structured property
-     * @param domainIri the iri of a domain classifiers
-     * @param rangeIri the iri of a range structures
-     * @param functional whether the structured property is functional
-     */
-    public void setStructuredProperty(Vocabulary vocabulary, String propertyIri, 
-        String domainIri, String rangeIri, Boolean functional) {
-        defer.add(() -> {
-        	StructuredProperty property = resolve(StructuredProperty.class, vocabulary, propertyIri);
-        	if (property.getOntology() != vocabulary) {
-        		property = (StructuredProperty) OmlWrite.getOrAddRef(vocabulary, property);
-        	}
-            if (domainIri != null) {
-            	property.getDomains().add(resolve(Classifier.class, vocabulary, domainIri));
-            }
-            if (rangeIri != null) {
-            	property.getRanges().add(resolve(Structure.class, vocabulary, rangeIri));
             }
             if (functional != null) {
             	property.setFunctional(functional);
@@ -791,18 +726,18 @@ public class OmlBuilder {
         return builtIn;
     }
 
-    // StructureInstance
+    // AnonymousConceptInstance
 
     /**
-     * Creates a structure instance and adds it to the given ontology
+     * Creates a entity instance and adds it to the given ontology
      * 
      * @param ontology the context ontology
-     * @param structureIri the iri of a structure that is the type of the structure instance
-     * @return a structure instance that is added to the given ontology
+     * @param entityIri the iri of a entity that is the type of the entity instance
+     * @return a entity instance that is added to the given ontology
      */
-    public StructureInstance createStructureInstance(Ontology ontology, String structureIri) {
-        final StructureInstance instance = OmlWrite.createStructureInstance(ontology, null);
-        setCrossReference(ontology, instance, OmlPackage.Literals.STRUCTURE_INSTANCE__TYPE, structureIri);
+    public AnonymousConceptInstance createAnonymousConceptInstance(Ontology ontology, String entityIri) {
+        final AnonymousConceptInstance instance = OmlWrite.createAnonymousConceptInstance(ontology, null);
+        setCrossReference(ontology, instance, OmlPackage.Literals.ANONYMOUS_CONCEPT_INSTANCE__TYPE, entityIri);
         return instance;
     }
 
@@ -909,20 +844,20 @@ public class OmlBuilder {
         return axiom;
     }
     
-    // ClassifierEquivalenceAxiom
+    // EntityEquivalenceAxiom
 
     /**
-     * Creates a classifier equivalence axiom between the sub classifier and super classifiers and adds it to the given vocabulary
+     * Creates a entity equivalence axiom between the sub entity and super entities and adds it to the given vocabulary
      *  
      * @param vocabulary the context vocabulary
-     * @param subClassifierIri the given iri of sub classifier
-     * @param superClassifierIris the given iris of super classifiers
-     * @return a classifier equivalence axiom that is added to the vocabulary
+     * @param subEntityIri the given iri of sub entity
+     * @param superEntityIris the given iris of super entities
+     * @return a entity equivalence axiom that is added to the vocabulary
      */
-    public ClassifierEquivalenceAxiom addClassifierEquivalenceAxiom(Vocabulary vocabulary, String subClassifierIri, List<String> superClassifierIris) {
-        final ClassifierEquivalenceAxiom axiom = OmlWrite.addClassifierEquivalenceAxiom(vocabulary, null, Collections.emptyList());
-        setCrossReferences(vocabulary, axiom, OmlPackage.Literals.CLASSIFIER_EQUIVALENCE_AXIOM__SUPER_CLASSIFIERS, superClassifierIris);
-        setContainmentReference(vocabulary, subClassifierIri, OmlPackage.Literals.CLASSIFIER__OWNED_EQUIVALENCES, axiom);
+    public EntityEquivalenceAxiom addEntityEquivalenceAxiom(Vocabulary vocabulary, String subEntityIri, List<String> superEntityIris) {
+        final EntityEquivalenceAxiom axiom = OmlWrite.addEntityEquivalenceAxiom(vocabulary, null, Collections.emptyList());
+        setCrossReferences(vocabulary, axiom, OmlPackage.Literals.ENTITY_EQUIVALENCE_AXIOM__SUPER_ENTITIES, superEntityIris);
+        setContainmentReference(vocabulary, subEntityIri, OmlPackage.Literals.ENTITY__OWNED_EQUIVALENCES, axiom);
         return axiom;
     }
 
@@ -976,7 +911,7 @@ public class OmlBuilder {
      * Creates a property range restriction axiom and adds it to the given vocabulary
      * 
      * @param vocabulary the context vocabulary
-     * @param owner the owner (either a String representing the iri of the owning classifier, or the owning classifier equivalence axiom object)
+     * @param owner the owner (either a String representing the iri of the owning entity, or the owning entity equivalence axiom object)
      * @param propertyIri the iri of the restricted property
      * @param rangeIri the iri of the restricted range
      * @param restrictionKind the kind of the restriction
@@ -987,9 +922,9 @@ public class OmlBuilder {
         setCrossReference(vocabulary, axiom, OmlPackage.Literals.PROPERTY_RESTRICTION_AXIOM__PROPERTY, propertyIri);
         setCrossReference(vocabulary, axiom, OmlPackage.Literals.PROPERTY_RANGE_RESTRICTION_AXIOM__RANGE, rangeIri);
         if (owner instanceof String) {
-        	setContainmentReference(vocabulary, (String)owner, OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS, axiom);
-        } else if (owner instanceof ClassifierEquivalenceAxiom) {
-        	((ClassifierEquivalenceAxiom)owner).getOwnedPropertyRestrictions().add(axiom);
+        	setContainmentReference(vocabulary, (String)owner, OmlPackage.Literals.ENTITY__OWNED_PROPERTY_RESTRICTIONS, axiom);
+        } else if (owner instanceof EntityEquivalenceAxiom) {
+        	((EntityEquivalenceAxiom)owner).getOwnedPropertyRestrictions().add(axiom);
         }
         return axiom;
     }
@@ -1000,7 +935,7 @@ public class OmlBuilder {
      * Creates a property cardinality restriction axiom and adds it to the given vocabulary
      * 
      * @param vocabulary the context vocabulary
-     * @param owner the owner (either a String representing the iri of the owning classifier, or the owning classifier equivalence axiom object)
+     * @param owner the owner (either a String representing the iri of the owning entity, or the owning entity equivalence axiom object)
      * @param propertyIri the iri of the restricted property
      * @param cardinality the restricted cardinality
      * @param rangeIri the iri of the restricted range (optional)
@@ -1012,9 +947,9 @@ public class OmlBuilder {
         setCrossReference(vocabulary, axiom, OmlPackage.Literals.PROPERTY_RESTRICTION_AXIOM__PROPERTY, propertyIri);
         setCrossReference(vocabulary, axiom, OmlPackage.Literals.PROPERTY_CARDINALITY_RESTRICTION_AXIOM__RANGE, rangeIri);
         if (owner instanceof String) {
-        	setContainmentReference(vocabulary, (String)owner, OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS, axiom);
-        } else if (owner instanceof ClassifierEquivalenceAxiom) {
-        	((ClassifierEquivalenceAxiom)owner).getOwnedPropertyRestrictions().add(axiom);
+        	setContainmentReference(vocabulary, (String)owner, OmlPackage.Literals.ENTITY__OWNED_PROPERTY_RESTRICTIONS, axiom);
+        } else if (owner instanceof EntityEquivalenceAxiom) {
+        	((EntityEquivalenceAxiom)owner).getOwnedPropertyRestrictions().add(axiom);
         }
         return axiom;
     }
@@ -1025,7 +960,7 @@ public class OmlBuilder {
      * Creates a property value restriction axiom for a scalar property and adds it to the given vocabulary
      * 
      * @param vocabulary the context vocabulary
-     * @param owner the owner (either a String representing the iri of the owning classifier, or the owning classifier equivalence axiom object)
+     * @param owner the owner (either a String representing the iri of the owning entity, or the owning entity equivalence axiom object)
      * @param propertyIri the iri of the restricted scalar property
      * @param literal the (literal) value of the restriction
      * @return a property value restriction axiom that is added to the given vocabulary
@@ -1034,19 +969,19 @@ public class OmlBuilder {
         final PropertyValueRestrictionAxiom axiom = OmlWrite.addPropertyValueRestrictionAxiom(vocabulary, null, null, literal);
         setCrossReference(vocabulary, axiom, OmlPackage.Literals.PROPERTY_RESTRICTION_AXIOM__PROPERTY, propertyIri);
         if (owner instanceof String) {
-        	setContainmentReference(vocabulary, (String)owner, OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS, axiom);
-        } else if (owner instanceof ClassifierEquivalenceAxiom) {
-        	((ClassifierEquivalenceAxiom)owner).getOwnedPropertyRestrictions().add(axiom);
+        	setContainmentReference(vocabulary, (String)owner, OmlPackage.Literals.ENTITY__OWNED_PROPERTY_RESTRICTIONS, axiom);
+        } else if (owner instanceof EntityEquivalenceAxiom) {
+        	((EntityEquivalenceAxiom)owner).getOwnedPropertyRestrictions().add(axiom);
         }
         return axiom;
     }
 
     /**
-     * Creates a property value restriction axiom for a structured property and adds it to the given vocabulary
+     * Creates a property value restriction axiom for a property and adds it to the given vocabulary
      * 
      * @param vocabulary the context vocabulary
-     * @param owner the owner (either a String representing the iri of the owning classifier, or the owning classifier equivalence axiom object)
-     * @param propertyIri the iri of the restricted structured property
+     * @param owner the owner (either a String representing the iri of the owning entity, or the owning entity equivalence axiom object)
+     * @param propertyIri the iri of the restricted property
      * @param containedValue the contained value of the restriction
      * @return a property value restriction axiom that is added to the given vocabulary
      */
@@ -1054,9 +989,9 @@ public class OmlBuilder {
         final PropertyValueRestrictionAxiom axiom = OmlWrite.addPropertyValueRestrictionAxiom(vocabulary, null, null, containedValue);
         setCrossReference(vocabulary, axiom, OmlPackage.Literals.PROPERTY_RESTRICTION_AXIOM__PROPERTY, propertyIri);
         if (owner instanceof String) {
-        	setContainmentReference(vocabulary, (String)owner, OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS, axiom);
-        } else if (owner instanceof ClassifierEquivalenceAxiom) {
-        	((ClassifierEquivalenceAxiom)owner).getOwnedPropertyRestrictions().add(axiom);
+        	setContainmentReference(vocabulary, (String)owner, OmlPackage.Literals.ENTITY__OWNED_PROPERTY_RESTRICTIONS, axiom);
+        } else if (owner instanceof EntityEquivalenceAxiom) {
+        	((EntityEquivalenceAxiom)owner).getOwnedPropertyRestrictions().add(axiom);
         }
         return axiom;
     }
@@ -1065,7 +1000,7 @@ public class OmlBuilder {
      * Creates a property value restriction axiom for a relation and adds it to the given vocabulary
      * 
      * @param vocabulary the context vocabulary
-     * @param owner the owner (either a String representing the iri of the owning classifier, or the owning classifier equivalence axiom object)
+     * @param owner the owner (either a String representing the iri of the owning entity, or the owning entity equivalence axiom object)
      * @param relationIri the iri of the restricted relation
      * @param referencedValueIri the Iri of a referenced value of the restriction
      * @return a property value restriction axiom that is added to the given vocabulary
@@ -1075,9 +1010,9 @@ public class OmlBuilder {
         setCrossReference(vocabulary, axiom, OmlPackage.Literals.PROPERTY_VALUE_RESTRICTION_AXIOM__REFERENCED_VALUE, referencedValueIri);
         setCrossReference(vocabulary, axiom, OmlPackage.Literals.PROPERTY_RESTRICTION_AXIOM__PROPERTY, relationIri);
         if (owner instanceof String) {
-        	setContainmentReference(vocabulary, (String)owner, OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS, axiom);
-        } else if (owner instanceof ClassifierEquivalenceAxiom) {
-        	((ClassifierEquivalenceAxiom)owner).getOwnedPropertyRestrictions().add(axiom);
+        	setContainmentReference(vocabulary, (String)owner, OmlPackage.Literals.ENTITY__OWNED_PROPERTY_RESTRICTIONS, axiom);
+        } else if (owner instanceof EntityEquivalenceAxiom) {
+        	((EntityEquivalenceAxiom)owner).getOwnedPropertyRestrictions().add(axiom);
         }
         return axiom;
     }
@@ -1086,7 +1021,7 @@ public class OmlBuilder {
      * Creates a property value restriction axiom for a forward relation and adds it to the given vocabulary
      * 
      * @param vocabulary the context vocabulary
-     * @param owner the owner (either a String representing the iri of the owning classifier, or the owning classifier equivalence axiom object)
+     * @param owner the owner (either a String representing the iri of the owning entity, or the owning entity equivalence axiom object)
      * @param relationEntityIri the iri of the relation entity that owns the restricted forward relation
      * @param containedValue the contained value of the restriction
      * @return a property value restriction axiom that is added to the given vocabulary
@@ -1095,9 +1030,9 @@ public class OmlBuilder {
         final PropertyValueRestrictionAxiom axiom = OmlWrite.addPropertyValueRestrictionAxiom(vocabulary, null, null, containedValue);
     	defer.add(() -> axiom.setProperty(resolve(RelationEntity.class, vocabulary, relationEntityIri).getForwardRelation()));
         if (owner instanceof String) {
-        	setContainmentReference(vocabulary, (String)owner, OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS, axiom);
-        } else if (owner instanceof ClassifierEquivalenceAxiom) {
-        	((ClassifierEquivalenceAxiom)owner).getOwnedPropertyRestrictions().add(axiom);
+        	setContainmentReference(vocabulary, (String)owner, OmlPackage.Literals.ENTITY__OWNED_PROPERTY_RESTRICTIONS, axiom);
+        } else if (owner instanceof EntityEquivalenceAxiom) {
+        	((EntityEquivalenceAxiom)owner).getOwnedPropertyRestrictions().add(axiom);
         }
         return axiom;
     }
@@ -1106,7 +1041,7 @@ public class OmlBuilder {
      * Creates a property value restriction axiom for a reverse relation and adds it to the given vocabulary
      * 
      * @param vocabulary the context vocabulary
-     * @param owner the owner (either a String representing the iri of the owning classifier, or the owning classifier equivalence axiom object)
+     * @param owner the owner (either a String representing the iri of the owning entity, or the owning entity equivalence axiom object)
      * @param relationBaseri the iri of the relation base that owns the restricted reverse relation
      * @param containedValue the contained value of the restriction
      * @return a property value restriction axiom that is added to the given vocabulary
@@ -1115,9 +1050,9 @@ public class OmlBuilder {
         final PropertyValueRestrictionAxiom axiom = OmlWrite.addPropertyValueRestrictionAxiom(vocabulary, null, null, containedValue);
     	defer.add(() -> axiom.setProperty(resolve(RelationBase.class, vocabulary, relationBaseri).getReverseRelation()));
         if (owner instanceof String) {
-        	setContainmentReference(vocabulary, (String)owner, OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS, axiom);
-        } else if (owner instanceof ClassifierEquivalenceAxiom) {
-        	((ClassifierEquivalenceAxiom)owner).getOwnedPropertyRestrictions().add(axiom);
+        	setContainmentReference(vocabulary, (String)owner, OmlPackage.Literals.ENTITY__OWNED_PROPERTY_RESTRICTIONS, axiom);
+        } else if (owner instanceof EntityEquivalenceAxiom) {
+        	((EntityEquivalenceAxiom)owner).getOwnedPropertyRestrictions().add(axiom);
         }
         return axiom;
     }
@@ -1128,7 +1063,7 @@ public class OmlBuilder {
      * Creates a self restriction axiom on a relation and adds it to the given vocabulary
      * 
      * @param vocabulary the context vocabulary
-     * @param owner the given restricting owner (classifier or classifier equivalence axiom)
+     * @param owner the given restricting owner (entity or entity equivalence axiom)
      * @param relationIri the iri of the restricted relation
      * @return a property value restriction axiom that is added to the given vocabulary
      */
@@ -1136,9 +1071,9 @@ public class OmlBuilder {
         final PropertySelfRestrictionAxiom axiom = OmlWrite.addPropertySelfRestrictionAxiom(vocabulary, null, null);
         setCrossReference(vocabulary, axiom, OmlPackage.Literals.PROPERTY_RESTRICTION_AXIOM__PROPERTY, relationIri);
         if (owner instanceof String) {
-        	setContainmentReference(vocabulary, (String)owner, OmlPackage.Literals.CLASSIFIER__OWNED_PROPERTY_RESTRICTIONS, axiom);
-        } else if (owner instanceof ClassifierEquivalenceAxiom) {
-        	((ClassifierEquivalenceAxiom)owner).getOwnedPropertyRestrictions().add(axiom);
+        	setContainmentReference(vocabulary, (String)owner, OmlPackage.Literals.ENTITY__OWNED_PROPERTY_RESTRICTIONS, axiom);
+        } else if (owner instanceof EntityEquivalenceAxiom) {
+        	((EntityEquivalenceAxiom)owner).getOwnedPropertyRestrictions().add(axiom);
         }
         return axiom;
     }
@@ -1237,7 +1172,7 @@ public class OmlBuilder {
      * 
      * @param ontology the context ontology
      * @param owner either an anonymous instance or the iri of a named instance
-     * @param propertyIri the iri of the structured property
+     * @param propertyIri the iri of the property
      * @param containedValues the asserted contained values of the property
      * @return a property value assertion that is added to the given description
      */

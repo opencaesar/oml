@@ -18,7 +18,6 @@
  */
 package io.opencaesar.oml.impl;
 
-import io.opencaesar.oml.Classifier;
 import io.opencaesar.oml.Entity;
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.Relation;
@@ -172,8 +171,8 @@ public abstract class RelationImpl extends SemanticPropertyImpl implements Relat
 	 * @generated
 	 */
 	@Override
-	public EList<Classifier> getDomainList() {
-		return ECollections.<Classifier>toEList(this.getDomains());
+	public EList<Entity> getDomainList() {
+		return ECollections.<Entity>toEList(this.getDomains());
 	}
 
 	/**

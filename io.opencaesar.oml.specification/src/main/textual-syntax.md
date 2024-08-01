@@ -47,16 +47,11 @@
 	Type |
 	AnnotationProperty |
 	ScalarProperty |
-	StructuredProperty |
 	UnreifiedRelation
 
 <a id="Type-Syntax">Type</a> ::=
-	Classifier |
-	Scalar	
-
-<a id="Classifier-Syntax">Classifier</a> ::=
 	Entity |
-	Structure
+	Scalar	
 	
 <a id="Entity-Syntax">Entity</a> ::=
 	Aspect |
@@ -67,14 +62,14 @@
 	Annotation*
 	("aspect" ID | "ref" "aspect" [Aspect|IRI]) ("["
 		(KeyAxiom)* 
-	"]")? (ClassifierSpecialization)? (ClassifierEquivalence)?
+	"]")? (EntitySpecialization)? (EntityEquivalence)?
 
 <a id="Concept-Syntax">Concept</a> ::=
 	Annotation*
 	("concept" ID | "ref" "concept" [Concept|IRI]) ("["
 		(InstanceEnumerationAxiom)?
 		(KeyAxiom)* 
-	"]")? (ClassifierSpecialization)? (ClassifierEquivalence)?
+	"]")? (EntitySpecialization)? (EntityEquivalence)?
 	
 <a id="RelationEntity-Syntax">RelationEntity</a> ::=
 	Annotation*
@@ -91,28 +86,23 @@
 		("irreflexive")?
 		("transitive")?
 		(KeyAxiom)*
-	"]")? (ClassifierSpecialization)? (ClassifierEquivalence)?
+	"]")? (EntitySpecialization)? (EntityEquivalence)?
 	
-<a id="Structure-Syntax">Structure</a> ::=
-	Annotation*
-	("structure" ID | "ref" "structure" [Structure|IRI])
-		(ClassifierSpecialization)? (ClassifierEquivalence)?
-
-<span id="ClassifierSpecialization-Syntax">ClassifierSpecialization</span> ::=
-	"<" (Classifier ("," Classifier)* 
+<span id="EntitySpecialization-Syntax">EntitySpecialization</span> ::=
+	"<" (Entity ("," Entity)* 
 		|
-		(Classifier ("," Classifier)*)? "["
+		(Entity ("," Entity)*)? "["
 			PropertyRestrictionAxiom*
 		"]")
 
-<span id="ClassifierEquivalence-Syntax">ClassifierEquivalence</span> ::=
-	"=" ClassifierEquivalenceAxiom ("," ClassifierEquivalenceAxiom)*
+<span id="EntityEquivalence-Syntax">EntityEquivalence</span> ::=
+	"=" EntityEquivalenceAxiom ("," EntityEquivalenceAxiom)*
 
-<a id="ClassifierEquivalenceAxiom-Syntax">ClassifierEquivalenceAxiom</a> ::=
-	[Classifier|IRI] ("&" [Classifier|IRI])*
+<a id="EntityEquivalenceAxiom-Syntax">EntityEquivalenceAxiom</a> ::=
+	[Entity|IRI] ("&" [Entity|IRI])*
 	|
-	{ClassifierEquivalenceAxiom} 
-	([Classifier|IRI] ("&" [Classifier|IRI])*)? "["
+	{EntityEquivalenceAxiom} 
+	([Entity|IRI] ("&" [Entity|IRI])*)? "["
 		PropertyRestrictionAxiom*
 	"]"
 
@@ -152,22 +142,13 @@
 
 <a id="SemanticProperty-Syntax">SemanticProperty</a> ::=
 	ScalarProperty |
-	StructuredProperty |
 	Relation
 
 <a id="ScalarProperty-Syntax">ScalarProperty</a> ::=
 	Annotation*
 	("scalar" "property" ID | "ref" "scalar" "property" [ScalarProperty|IRI]) ("["
-		("domain" [Classifier|IRI] ("," [Classifier|IRI])*)?
+		("domain" [Entity|IRI] ("," [Entity|IRI])*)?
 		("range" [Scalar|IRI] ("," [Scalar|IRI])*)?
-		("functional")?
-	"]")? (PropertySpecialization)? (PropertyEquivalence)?
-
-<a id="StructuredProperty-Syntax">StructuredProperty</a> ::=
-	Annotation*
-	("structured" "property" ID | "ref" "structured" "property" [StructuredProperty|IRI]) ("["
-		("domain" [Classifier|IRI] ("," [Classifier|IRI])*)?
-		("range" [Structure|IRI] ("," [Structure|IRI])*)?
 		("functional")?
 	"]")? (PropertySpecialization)? (PropertyEquivalence)?
 
@@ -219,11 +200,11 @@
 	("builtin" ID | "ref" "builtin" [BuiltIn|IRI])
 
 <a id="AnonymousInstance-Syntax">AnonymousInstance</a> ::=	
-	StructureInstance |
+	AnonymousConceptInstance |
 	AnonymousRelationInstance
 
-<a id="StructureInstance-Syntax">StructureInstance</a> ::=	
-	(":" [Structure|IRI])? "["
+<a id="AnonymousConceptInstance-Syntax">AnonymousConceptInstance</a> ::=	
+	(":" [Entity|IRI])? "["
 		PropertyValueAssertion*
 	"]"
 	

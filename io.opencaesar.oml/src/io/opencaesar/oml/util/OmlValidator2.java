@@ -40,18 +40,18 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 
 import io.opencaesar.oml.AnnotationProperty;
+import io.opencaesar.oml.AnonymousConceptInstance;
 import io.opencaesar.oml.AnonymousInstance;
 import io.opencaesar.oml.AnonymousRelationInstance;
 import io.opencaesar.oml.Argument;
 import io.opencaesar.oml.Aspect;
-import io.opencaesar.oml.Classifier;
-import io.opencaesar.oml.ClassifierEquivalenceAxiom;
 import io.opencaesar.oml.Concept;
 import io.opencaesar.oml.ConceptInstance;
 import io.opencaesar.oml.Description;
 import io.opencaesar.oml.DescriptionBundle;
 import io.opencaesar.oml.Element;
 import io.opencaesar.oml.Entity;
+import io.opencaesar.oml.EntityEquivalenceAxiom;
 import io.opencaesar.oml.ForwardRelation;
 import io.opencaesar.oml.Import;
 import io.opencaesar.oml.ImportKind;
@@ -82,9 +82,6 @@ import io.opencaesar.oml.ScalarEquivalenceAxiom;
 import io.opencaesar.oml.ScalarProperty;
 import io.opencaesar.oml.SemanticProperty;
 import io.opencaesar.oml.SpecializationAxiom;
-import io.opencaesar.oml.Structure;
-import io.opencaesar.oml.StructureInstance;
-import io.opencaesar.oml.StructuredProperty;
 import io.opencaesar.oml.Term;
 import io.opencaesar.oml.Type;
 import io.opencaesar.oml.TypeAssertion;
@@ -112,9 +109,9 @@ public final class OmlValidator2 {
 	private static final String CACHE = "ValidationCache";
 
 	private class Cache {
-    	private Map<Property, Set<Classifier>> propertyToDomains = new HashMap<>();
+    	private Map<Property, Set<Entity>> propertyToDomains = new HashMap<>();
     	private Map<Property, Set<Type>> propertyToRanges = new HashMap<>();
-    	private Map<Set<Classifier>, Set<Classifier>> classifierToSupers = new HashMap<>();
+    	private Map<Set<Entity>, Set<Entity>> entityToSupers = new HashMap<>();
     	private Map<Scalar, Set<Scalar>> scalarToSupers = new HashMap<>();
     	private Map<Set<Type>, Set<Literal>> scalarToLiterals = new HashMap<>();
 
@@ -122,8 +119,8 @@ public final class OmlValidator2 {
     	public Cache(Set<Resource> scope) {
     		this.scope = scope;
     	}
-    	public Set<Classifier> getDomains(SemanticProperty property) {
-            Set<Classifier> domains = propertyToDomains.get(property);
+    	public Set<Entity> getDomains(SemanticProperty property) {
+            Set<Entity> domains = propertyToDomains.get(property);
             if (domains == null) {
             	propertyToDomains.put(property, domains =  OmlSearch.findAllDomains(property, scope));
             }
@@ -136,11 +133,11 @@ public final class OmlValidator2 {
             }
             return ranges;
     	}
-    	public Set<Classifier> getAllTypes(Instance instance) {
-            final Set<Classifier> types = OmlSearch.findTypes(instance, scope);
-            Set<Classifier> supers = classifierToSupers.get(types);
+    	public Set<Entity> getAllTypes(Instance instance) {
+            final Set<Entity> types = OmlSearch.findTypes(instance, scope);
+            Set<Entity> supers = entityToSupers.get(types);
             if (supers == null) {
-            	classifierToSupers.put(types, supers =  OmlSearch.findAllTypes(instance, scope));
+            	entityToSupers.put(types, supers =  OmlSearch.findAllTypes(instance, scope));
             }
             return supers;
     	}
@@ -421,7 +418,7 @@ public final class OmlValidator2 {
     // PropertyRestrictionAxiom
     
     /**
-     * Checks if the domain of a restricted property is the same as or a super type of the restricting classifier
+     * Checks if the domain of a restricted property is the same as or a super type of the restricting entity
      * 
      * @param object The property restriction to check
      * @param diagnostics The validation diagnostics
@@ -430,9 +427,9 @@ public final class OmlValidator2 {
      */
     boolean validatePropertyRestrictionAxiomDomain(PropertyRestrictionAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
         final Cache cache = (Cache) context.get(CACHE);
-    	final Classifier restrictingDomain = object.getRestrictingDomain();
+    	final Entity restrictingDomain = object.getRestrictingDomain();
         final SemanticProperty property = object.getProperty();
-        final Set<Classifier> domainTypes = (property!=null) ? OmlSearch.findAllDomains(property, cache.scope) : Collections.emptySet();
+        final Set<Entity> domainTypes = (property!=null) ? OmlSearch.findAllDomains(property, cache.scope) : Collections.emptySet();
         if (restrictingDomain != null && !domainTypes.isEmpty()) {
 	        final Collection<Term> allSuperTerms = OmlSearch.findAllSuperTerms(restrictingDomain, true, cache.scope);
 	        allSuperTerms.retainAll(domainTypes);
@@ -522,16 +519,6 @@ public final class OmlValidator2 {
 		                "The literal is not in the range of scalar property "+property.getAbbreviatedIri(), 
 		                OmlPackage.Literals.PROPERTY_VALUE_RESTRICTION_AXIOM__LITERAL_VALUE);
         	}
-        } else if (property instanceof StructuredProperty) {
-        	if (object.getContainedValue() == null) {
-	            return report(Diagnostic.WARNING, diagnostics, object,
-	                "A structure instance is expected as the restricted value of property "+property.getAbbreviatedIri(), 
-	                OmlPackage.Literals.PROPERTY_RESTRICTION_AXIOM__PROPERTY);
-        	} else if (!OmlSearch.findAllRanges(property, cache.scope).stream().allMatch(t -> OmlSearch.findIsKindOf(object.getContainedValue(), (Structure)t, cache.scope))) {
-	            return report(Diagnostic.WARNING, diagnostics, object,
-		                "The instance is not in the range of structured property "+property.getAbbreviatedIri(), 
-		                OmlPackage.Literals.PROPERTY_VALUE_RESTRICTION_AXIOM__CONTAINED_VALUE);
-        	}
         } else if (property instanceof Relation) {
         	if (object.getReferencedValue() != null) {
         		if (!OmlSearch.findAllRanges(property, cache.scope).stream().allMatch(t -> OmlSearch.findIsKindOf(object.getReferencedValue(), (Entity)t, cache.scope))) {
@@ -607,40 +594,40 @@ public final class OmlValidator2 {
         return true;
     }
 
-    // ClassifierEquivalenceAxiom
+    // EntityEquivalenceAxiom
     
     /**
-     * Checks if a classifier equivalence axiom is not between compatible classifier kinds
+     * Checks if a entity equivalence axiom is not between compatible entity kinds
      * 
-     * @param object The classifier equivalence axiom to check
+     * @param object The entity equivalence axiom to check
      * @param diagnostics The validation diagnostics
      * @param context The object-to-object context map
      * @return True if the rules is satisfied; False otherwise
      */
-    boolean validateClassifierEquivalenceAxiom(ClassifierEquivalenceAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-        final List<Classifier> superClassifiers = object.getSuperClassifiers();
-        final Classifier subClassifier = object.getSubClassifier();
-        if (superClassifiers.contains(subClassifier)) {
+    boolean validateEntityEquivalenceAxiom(EntityEquivalenceAxiom object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        final List<Entity> superEntities = object.getSuperEntities();
+        final Entity subEntity = object.getSubEntity();
+        if (superEntities.contains(subEntity)) {
             return report(Diagnostic.WARNING, diagnostics, object,
-	                "Classifier "+subClassifier.getAbbreviatedIri()+" specializes itself", 
-	                OmlPackage.Literals.CLASSIFIER_EQUIVALENCE_AXIOM__SUPER_CLASSIFIERS);
+	                "Entity "+subEntity.getAbbreviatedIri()+" specializes itself", 
+	                OmlPackage.Literals.ENTITY_EQUIVALENCE_AXIOM__SUPER_ENTITIES);
         } 
-        if (superClassifiers.size() == 1) {
-	        if (!superClassifiers.get(0).eIsProxy()) {
-		        if (!(superClassifiers.get(0).eClass() == subClassifier.eClass())) {
+        if (superEntities.size() == 1) {
+	        if (!superEntities.get(0).eIsProxy()) {
+		        if (!(superEntities.get(0).eClass() == subEntity.eClass())) {
 		            return report(Diagnostic.ERROR, diagnostics, object,
-		                "Classifier "+superClassifiers.get(0).getAbbreviatedIri()+" cannot be specialized by "+subClassifier.getAbbreviatedIri()+"", 
-		                OmlPackage.Literals.CLASSIFIER_EQUIVALENCE_AXIOM__SUPER_CLASSIFIERS);
+		                "Entity "+superEntities.get(0).getAbbreviatedIri()+" cannot be specialized by "+subEntity.getAbbreviatedIri()+"", 
+		                OmlPackage.Literals.ENTITY_EQUIVALENCE_AXIOM__SUPER_ENTITIES);
 		        }
 	        }
         } else {
-	        for(Classifier superClassifier : superClassifiers) {
-		        if (!superClassifier.eIsProxy()) {
-			        if (!(superClassifier.eClass() == subClassifier.eClass() ||
-			        		subClassifier instanceof Entity && superClassifier instanceof Aspect)) {
+	        for(Entity superEntity : superEntities) {
+		        if (!superEntity.eIsProxy()) {
+			        if (!(superEntity.eClass() == subEntity.eClass() ||
+			        		subEntity instanceof Entity && superEntity instanceof Aspect)) {
 			            return report(Diagnostic.ERROR, diagnostics, object,
-			                "Classifier "+superClassifier.getAbbreviatedIri()+" cannot be specialized by "+subClassifier.getAbbreviatedIri()+"", 
-			                OmlPackage.Literals.CLASSIFIER_EQUIVALENCE_AXIOM__SUPER_CLASSIFIERS);
+			                "Entity "+superEntity.getAbbreviatedIri()+" cannot be specialized by "+subEntity.getAbbreviatedIri()+"", 
+			                OmlPackage.Literals.ENTITY_EQUIVALENCE_AXIOM__SUPER_ENTITIES);
 			        }
 		        }
 	        }
@@ -754,7 +741,7 @@ public final class OmlValidator2 {
         return true;
     }
 
-    // Classifier Predicate
+    // Entity Predicate
 
     /**
      * Checks if a type predicate references an invalid type in a rule's consequent
@@ -766,34 +753,15 @@ public final class OmlValidator2 {
      */
     boolean validateTypePredicateAsConsequent(TypePredicate object, DiagnosticChain diagnostics, Map<Object, Object> context) {
         if (object.getConsequentRule() != null) {
-	       if (object.getType() instanceof Structure) {
+	       if (object.getType() instanceof Entity) {
 	            return report(Diagnostic.ERROR, diagnostics, object,
-	                "Structure "+object.getType().getAbbreviatedIri()+" cannot be used as a consequent predicate", 
+	                "Entity "+object.getType().getAbbreviatedIri()+" cannot be used as a consequent predicate", 
 	                OmlPackage.Literals.TYPE_PREDICATE__TYPE);
 	        } else if (object.getType() instanceof Scalar) {
 	            return report(Diagnostic.ERROR, diagnostics, object,
 	                    "Scalar "+object.getType().getAbbreviatedIri()+" cannot be used as a consequent predicate", 
 	                    OmlPackage.Literals.TYPE_PREDICATE__TYPE);
 	        }
-        }
-        return true;
-    }
-
-    // Property Predicate
-
-    /**
-     * Checks if a property predicate references invalid properties is in a rule's consequent
-     * 
-     * @param object The property predicate to check
-     * @param diagnostics The validation diagnostics
-     * @param context The object-to-object context map
-     * @return True if the rules is satisfied; False otherwise
-     */
-    boolean validatePropertyPredicateAsConsequent(PropertyPredicate object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-        if (object.getConsequentRule() != null && object.getProperty() instanceof StructuredProperty) {
-            return report(Diagnostic.ERROR, diagnostics, object,
-                "Structured property "+object.getProperty().getAbbreviatedIri()+" cannot be used as a consequent predicate", 
-                OmlPackage.Literals.PROPERTY_PREDICATE__PROPERTY);
         }
         return true;
     }
@@ -952,9 +920,9 @@ public final class OmlValidator2 {
         final SemanticProperty property = object.getProperty();
         final Instance theSubject = object.getSubject();
         
-        final Set<Classifier> domains = cache.getDomains(property);
+        final Set<Entity> domains = cache.getDomains(property);
         
-        final Set<Classifier> allTypes = cache.getAllTypes(theSubject);
+        final Set<Entity> allTypes = cache.getAllTypes(theSubject);
         
         if (!domains.stream().allMatch(d -> allTypes.contains(d))) {
         	return report(Diagnostic.WARNING, diagnostics, object,
@@ -993,14 +961,14 @@ public final class OmlValidator2 {
 	        // check if the object's type is asserted to be in the property's ranges
 	        if (theObject instanceof NamedInstance) {
 	        	NamedInstance instance = ((NamedInstance)theObject);
-	            final Set<Classifier> allTypes = cache.getAllTypes(instance);
+	            final Set<Entity> allTypes = cache.getAllTypes(instance);
 	            if (!ranges.stream().allMatch(d -> allTypes.contains(d))) {
 	            	return report(Diagnostic.WARNING, diagnostics, object,
 	            		instance.getAbbreviatedIri()+" is not asserted to be in the range of "+property.getAbbreviatedIri(),
 	                    OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__REFERENCED_VALUE);
 	            }
 	        } else if (theObject instanceof AnonymousInstance) {
-	            final Set<Classifier> allTypes = cache.getAllTypes((Instance)theObject);
+	            final Set<Entity> allTypes = cache.getAllTypes((Instance)theObject);
 	            if (!ranges.stream().allMatch(d -> allTypes.contains(d))) {
 	            	return report(Diagnostic.WARNING, diagnostics, object,
 	    	            "The object of the assertion is not asserted to be in the range of "+property.getAbbreviatedIri(),
@@ -1177,14 +1145,14 @@ public final class OmlValidator2 {
     }
 
     /**
-     * Checks if the structure instance has a type
+     * Checks if the anonymous concept instance has a type
      * @return True if the member is deprecated; False otherwise
      */
-    boolean validateStructureInstanceType(StructureInstance object, DiagnosticChain diagnostics, Map<Object, Object> context) {
-        if (object.getStructure() == null) {
+    boolean validateAnonymousConceptInstanceType(AnonymousConceptInstance object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+        if (object.getEntity() == null) {
         	return report(Diagnostic.ERROR, diagnostics, object,
-                "Structure instance needs to specify a type",
-                OmlPackage.Literals.STRUCTURE_INSTANCE__TYPE);
+                "Anonymous concept instance needs to specify a type",
+                OmlPackage.Literals.ANONYMOUS_CONCEPT_INSTANCE__TYPE);
         }
         return true;
     }

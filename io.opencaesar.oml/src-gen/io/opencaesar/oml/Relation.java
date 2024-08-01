@@ -142,7 +142,7 @@ public interface Relation extends SemanticProperty {
 	 * @model kind="operation" unique="false"
 	 * @generated
 	 */
-	EList<Classifier> getDomainList();
+	EList<Entity> getDomainList();
 
 	/**
 	 * <!-- begin-user-doc -->

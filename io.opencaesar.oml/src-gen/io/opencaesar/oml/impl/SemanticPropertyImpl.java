@@ -18,7 +18,7 @@
  */
 package io.opencaesar.oml.impl;
 
-import io.opencaesar.oml.Classifier;
+import io.opencaesar.oml.Entity;
 import io.opencaesar.oml.OmlPackage;
 import io.opencaesar.oml.SemanticProperty;
 import io.opencaesar.oml.Type;
@@ -74,7 +74,7 @@ public abstract class SemanticPropertyImpl extends PropertyImpl implements Seman
 	 * @generated
 	 */
 	@Override
-	public EList<Classifier> getDomainList() {
+	public EList<Entity> getDomainList() {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
 		throw new UnsupportedOperationException();
