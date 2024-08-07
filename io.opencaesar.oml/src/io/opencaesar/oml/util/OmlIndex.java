@@ -215,7 +215,7 @@ public class OmlIndex {
      * @return A set of referencing annotations
      */
     public static Set<Annotation> findAnnotationsWithReferencedValue(Member value, Set<Resource> scope) {
-        return findInverseReferencers(value, OmlPackage.Literals.ANNOTATION__REFERENCED_VALUE, Annotation.class, scope);
+        return findInverseReferencers(value, OmlPackage.Literals.ANNOTATION__REFERENCED_VALUES, Annotation.class, scope);
     }
 
     /**
@@ -1007,7 +1007,7 @@ public class OmlIndex {
      * @return A set of referencing property value assertions
      */
     public static Set<PropertyValueAssertion> findPropertyValueAssertionsWithReferencedValue(NamedInstance value, Set<Resource> scope) {
-        return findInverseReferencers(value, OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__REFERENCED_VALUE, PropertyValueAssertion.class, scope);
+        return findInverseReferencers(value, OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__REFERENCED_VALUES, PropertyValueAssertion.class, scope);
     }
     
     /**

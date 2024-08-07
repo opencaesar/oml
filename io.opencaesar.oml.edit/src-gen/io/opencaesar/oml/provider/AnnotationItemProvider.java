@@ -64,7 +64,7 @@ public class AnnotationItemProvider extends ElementItemProvider {
 			super.getPropertyDescriptors(object);
 
 			addPropertyPropertyDescriptor(object);
-			addReferencedValuePropertyDescriptor(object);
+			addReferencedValuesPropertyDescriptor(object);
 			addOwningElementPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
@@ -93,19 +93,19 @@ public class AnnotationItemProvider extends ElementItemProvider {
 	}
 
 	/**
-	 * This adds a property descriptor for the Referenced Value feature.
+	 * This adds a property descriptor for the Referenced Values feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addReferencedValuePropertyDescriptor(Object object) {
+	protected void addReferencedValuesPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Annotation_referencedValue_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Annotation_referencedValue_feature", "_UI_Annotation_type"),
-				 OmlPackage.Literals.ANNOTATION__REFERENCED_VALUE,
+				 getString("_UI_Annotation_referencedValues_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Annotation_referencedValues_feature", "_UI_Annotation_type"),
+				 OmlPackage.Literals.ANNOTATION__REFERENCED_VALUES,
 				 true,
 				 false,
 				 true,
@@ -148,7 +148,7 @@ public class AnnotationItemProvider extends ElementItemProvider {
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(OmlPackage.Literals.ANNOTATION__LITERAL_VALUE);
+			childrenFeatures.add(OmlPackage.Literals.ANNOTATION__LITERAL_VALUES);
 		}
 		return childrenFeatures;
 	}
@@ -201,7 +201,7 @@ public class AnnotationItemProvider extends ElementItemProvider {
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Annotation.class)) {
-			case OmlPackage.ANNOTATION__LITERAL_VALUE:
+			case OmlPackage.ANNOTATION__LITERAL_VALUES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -221,27 +221,27 @@ public class AnnotationItemProvider extends ElementItemProvider {
 
 		newChildDescriptors.add
 			(createChildParameter
-				(OmlPackage.Literals.ANNOTATION__LITERAL_VALUE,
+				(OmlPackage.Literals.ANNOTATION__LITERAL_VALUES,
 				 OmlFactory.eINSTANCE.createQuotedLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(OmlPackage.Literals.ANNOTATION__LITERAL_VALUE,
+				(OmlPackage.Literals.ANNOTATION__LITERAL_VALUES,
 				 OmlFactory.eINSTANCE.createIntegerLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(OmlPackage.Literals.ANNOTATION__LITERAL_VALUE,
+				(OmlPackage.Literals.ANNOTATION__LITERAL_VALUES,
 				 OmlFactory.eINSTANCE.createDecimalLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(OmlPackage.Literals.ANNOTATION__LITERAL_VALUE,
+				(OmlPackage.Literals.ANNOTATION__LITERAL_VALUES,
 				 OmlFactory.eINSTANCE.createDoubleLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(OmlPackage.Literals.ANNOTATION__LITERAL_VALUE,
+				(OmlPackage.Literals.ANNOTATION__LITERAL_VALUES,
 				 OmlFactory.eINSTANCE.createBooleanLiteral()));
 	}
 

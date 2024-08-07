@@ -35,9 +35,9 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  * <ul>
  *   <li>{@link io.opencaesar.oml.PropertyValueAssertion#getProperty <em>Property</em>}</li>
- *   <li>{@link io.opencaesar.oml.PropertyValueAssertion#getLiteralValue <em>Literal Value</em>}</li>
- *   <li>{@link io.opencaesar.oml.PropertyValueAssertion#getContainedValue <em>Contained Value</em>}</li>
- *   <li>{@link io.opencaesar.oml.PropertyValueAssertion#getReferencedValue <em>Referenced Value</em>}</li>
+ *   <li>{@link io.opencaesar.oml.PropertyValueAssertion#getLiteralValues <em>Literal Values</em>}</li>
+ *   <li>{@link io.opencaesar.oml.PropertyValueAssertion#getContainedValues <em>Contained Values</em>}</li>
+ *   <li>{@link io.opencaesar.oml.PropertyValueAssertion#getReferencedValues <em>Referenced Values</em>}</li>
  *   <li>{@link io.opencaesar.oml.PropertyValueAssertion#getOwningInstance <em>Owning Instance</em>}</li>
  * </ul>
  *
@@ -72,51 +72,51 @@ public interface PropertyValueAssertion extends Assertion {
 	void setProperty(SemanticProperty value);
 
 	/**
-	 * Returns the value of the '<em><b>Literal Value</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Literal Values</b></em>' containment reference list.
 	 * The list contents are of type {@link io.opencaesar.oml.Literal}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The literal value of this assertion
+	 * The literal values of this assertion
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Literal Value</em>' containment reference list.
-	 * @see io.opencaesar.oml.OmlPackage#getPropertyValueAssertion_LiteralValue()
+	 * @return the value of the '<em>Literal Values</em>' containment reference list.
+	 * @see io.opencaesar.oml.OmlPackage#getPropertyValueAssertion_LiteralValues()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<Literal> getLiteralValue();
+	EList<Literal> getLiteralValues();
 
 	/**
-	 * Returns the value of the '<em><b>Contained Value</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Contained Values</b></em>' containment reference list.
 	 * The list contents are of type {@link io.opencaesar.oml.AnonymousInstance}.
 	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.AnonymousInstance#getOwningAssertion <em>Owning Assertion</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The contained value of this assertion
+	 * The contained values of this assertion
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Contained Value</em>' containment reference list.
-	 * @see io.opencaesar.oml.OmlPackage#getPropertyValueAssertion_ContainedValue()
+	 * @return the value of the '<em>Contained Values</em>' containment reference list.
+	 * @see io.opencaesar.oml.OmlPackage#getPropertyValueAssertion_ContainedValues()
 	 * @see io.opencaesar.oml.AnonymousInstance#getOwningAssertion
 	 * @model opposite="owningAssertion" containment="true"
 	 * @generated
 	 */
-	EList<AnonymousInstance> getContainedValue();
+	EList<AnonymousInstance> getContainedValues();
 
 	/**
-	 * Returns the value of the '<em><b>Referenced Value</b></em>' reference list.
+	 * Returns the value of the '<em><b>Referenced Values</b></em>' reference list.
 	 * The list contents are of type {@link io.opencaesar.oml.NamedInstance}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The referenced value of this assertion
+	 * The referenced values of this assertion
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Referenced Value</em>' reference list.
-	 * @see io.opencaesar.oml.OmlPackage#getPropertyValueAssertion_ReferencedValue()
+	 * @return the value of the '<em>Referenced Values</em>' reference list.
+	 * @see io.opencaesar.oml.OmlPackage#getPropertyValueAssertion_ReferencedValues()
 	 * @model
 	 * @generated
 	 */
-	EList<NamedInstance> getReferencedValue();
+	EList<NamedInstance> getReferencedValues();
 
 	/**
 	 * Returns the value of the '<em><b>Owning Instance</b></em>' container reference.
@@ -149,12 +149,89 @@ public interface PropertyValueAssertion extends Assertion {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Gets the asserted value
+	 * Gets the asserted values
 	 * <!-- end-model-doc -->
 	 * @model kind="operation" unique="false"
 	 * @generated
 	 */
-	EList<Element> getValue();
+	EList<Element> getValues();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Gets the first asserted value of the annotation
+	 * <!-- end-model-doc -->
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
+	Element getValue();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Gets the first literal value
+	 * <!-- end-model-doc -->
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
+	Literal getLiteralValue();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Sets the first literal value
+	 * <!-- end-model-doc -->
+	 * @model valueUnique="false"
+	 * @generated
+	 */
+	void setLiteralValue(Literal value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Gets the first contained value
+	 * <!-- end-model-doc -->
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
+	AnonymousInstance getContainedValue();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Sets the first contained value
+	 * <!-- end-model-doc -->
+	 * @model valueUnique="false"
+	 * @generated
+	 */
+	void setContainedValue(AnonymousInstance value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Gets the first reference value
+	 * <!-- end-model-doc -->
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
+	NamedInstance getReferencedValue();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Sets the first reference value
+	 * <!-- end-model-doc -->
+	 * @model valueUnique="false"
+	 * @generated
+	 */
+	void setReferencedValue(NamedInstance value);
 
 	/**
 	 * <!-- begin-user-doc -->

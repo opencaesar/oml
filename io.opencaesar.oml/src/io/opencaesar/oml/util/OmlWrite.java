@@ -218,7 +218,7 @@ public class OmlWrite {
      */
     public static Annotation addAnnotation(Ontology ontology, AnnotationProperty property, Literal...literalValues) {
         final Annotation annotation = create(Annotation.class);
-       	annotation.getLiteralValue().addAll(Arrays.asList(literalValues));
+       	annotation.getLiteralValues().addAll(Arrays.asList(literalValues));
         setCrossReference(ontology, annotation, OmlPackage.Literals.ANNOTATION__PROPERTY, property);
         ontology.getOwnedAnnotations().add(annotation);
         return annotation;
@@ -234,7 +234,7 @@ public class OmlWrite {
      */
     public static Annotation addAnnotation(Ontology ontology, AnnotationProperty property, Member...referencedValues) {
         final Annotation annotation = create(Annotation.class);
-       	annotation.getReferencedValue().addAll(Arrays.asList(referencedValues));
+       	annotation.getReferencedValues().addAll(Arrays.asList(referencedValues));
         setCrossReference(ontology, annotation, OmlPackage.Literals.ANNOTATION__PROPERTY, property);
         ontology.getOwnedAnnotations().add(annotation);
         return annotation;
@@ -251,7 +251,7 @@ public class OmlWrite {
      */
     public static Annotation addAnnotation(Ontology ontology, IdentifiedElement element, AnnotationProperty property, Literal...literalValues) {
         final Annotation annotation = create(Annotation.class);
-       	annotation.getLiteralValue().addAll(Arrays.asList(literalValues));
+       	annotation.getLiteralValues().addAll(Arrays.asList(literalValues));
         setCrossReference(ontology, annotation, OmlPackage.Literals.ANNOTATION__PROPERTY, property);
         setContainmentReference(ontology, element, OmlPackage.Literals.IDENTIFIED_ELEMENT__OWNED_ANNOTATIONS, annotation);
         return annotation;
@@ -268,7 +268,7 @@ public class OmlWrite {
      */
     public static Annotation addAnnotation(Ontology ontology, IdentifiedElement element, AnnotationProperty property, Member...referencedValues) {
         final Annotation annotation = create(Annotation.class);
-       	annotation.getReferencedValue().addAll(Arrays.asList(referencedValues));
+       	annotation.getReferencedValues().addAll(Arrays.asList(referencedValues));
         setCrossReference(ontology, annotation, OmlPackage.Literals.ANNOTATION__PROPERTY, property);
         setContainmentReference(ontology, element, OmlPackage.Literals.IDENTIFIED_ELEMENT__OWNED_ANNOTATIONS, annotation);
         return annotation;
@@ -1059,7 +1059,7 @@ public class OmlWrite {
      */
     public static PropertyValueAssertion addPropertyValueAssertion(Ontology ontology, Instance instance, SemanticProperty property, Literal...literalValues) {
         final PropertyValueAssertion assertion = create(PropertyValueAssertion.class);
-       	assertion.getLiteralValue().addAll(Arrays.asList(literalValues));
+       	assertion.getLiteralValues().addAll(Arrays.asList(literalValues));
         setCrossReference(ontology, assertion, OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__PROPERTY, property);
         setContainmentReference(ontology, instance, OmlPackage.Literals.INSTANCE__OWNED_PROPERTY_VALUES, assertion);
         return assertion;
@@ -1078,7 +1078,7 @@ public class OmlWrite {
      */
     public static PropertyValueAssertion addPropertyValueAssertion(Ontology ontology, Instance instance, SemanticProperty property, AnonymousInstance...containedeValues) {
         final PropertyValueAssertion assertion = create(PropertyValueAssertion.class);
-       	assertion.getContainedValue().addAll(Arrays.asList(containedeValues));
+       	assertion.getContainedValues().addAll(Arrays.asList(containedeValues));
         setCrossReference(ontology, assertion, OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__PROPERTY, property);
         setContainmentReference(ontology, instance, OmlPackage.Literals.INSTANCE__OWNED_PROPERTY_VALUES, assertion);
         return assertion;
@@ -1095,7 +1095,7 @@ public class OmlWrite {
      */
     public static PropertyValueAssertion addPropertyValueAssertion(Ontology ontology, Instance instance, SemanticProperty property, NamedInstance...referencedValues) {
         final PropertyValueAssertion assertion = create(PropertyValueAssertion.class);
-       	assertion.getReferencedValue().addAll(Arrays.asList(referencedValues));
+       	assertion.getReferencedValues().addAll(Arrays.asList(referencedValues));
         setCrossReference(ontology, assertion, OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__PROPERTY, property);
         setContainmentReference(ontology, instance, OmlPackage.Literals.INSTANCE__OWNED_PROPERTY_VALUES, assertion);
         return assertion;

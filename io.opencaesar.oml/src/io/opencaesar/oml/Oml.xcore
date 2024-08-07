@@ -77,8 +77,8 @@ abstract class Element {
 
 /*
  * Annotation is an element that specifies non-semantic information on an [=IdentifiedElement=]. 
- * An annotation is specified with an [=AnnotationProperty=] and [=Literal=] values or [=Member=] (referenced) values. 
- * When no value is specified, the boolean literal `true` is assumed to be specified as a value.
+ * An annotation is specified with an [=AnnotationProperty=] and either [=Literal=] values or [=Member=] (referenced) values. 
+ * When no value is specified, the boolean literal `true` is assumed to be the value.
  */
 @Bikeshed(heading="Elements")
 class Annotation extends Element {
@@ -89,11 +89,11 @@ class Annotation extends Element {
     /*
      * The literal values specified by this annotation
      */
-    contains Literal[*] literalValue
+    contains Literal[*] literalValues
     /*
      * The referenced values (iris of members) specified by this annotation
      */
-    refers Member[*] referencedValue
+    refers Member[*] referencedValues
     /*
      * The identified element that owns this annotation
      */
@@ -101,11 +101,46 @@ class Annotation extends Element {
     /*
      * Gets the values of the annotation
      */
-    op Element[*] getValue() {
-    	if (!literalValue.empty)
-    		literalValue.unmodifiableEList
-    	else if (!referencedValue.empty)
-    		referencedValue.unmodifiableEList
+    op Element[*] getValues() {
+    	if (!literalValues.empty)
+    		literalValues.unmodifiableEList
+    	else if (!referencedValues.empty)
+    		referencedValues.unmodifiableEList
+    }
+    /*
+     * Gets the first value of the annotation
+     */
+    op Element getValue() {
+    	if (!literalValues.empty)
+    		getLiteralValue()
+    	else if (!referencedValues.empty)
+    		getReferencedValue()
+    }
+    /*
+     * Gets the first literal value
+     */
+    op Literal getLiteralValue() {
+    	return if (!literalValues.empty) literalValues.get(0)
+    }
+    /*
+     * Sets the first literal value
+     */
+    op void setLiteralValue(Literal value) {
+		literalValues.clear()
+		literalValues.add(value)
+    }
+    /*
+     * Gets the first referenced value
+     */
+    op Member getReferencedValue() {
+    	return if (!referencedValues.empty) referencedValues.get(0)
+    }
+    /*
+     * Sets the first eferenced value
+     */
+    op void setReferencedValue(Member value) {
+		referencedValues.clear()
+		referencedValues.add(value)
     }
     /*
      * Gets the identified element annotated by this annotation
@@ -1097,7 +1132,7 @@ abstract class AnonymousInstance extends Instance {
     /*
      * The property value assertion that owns this instance as a value
      */
-    container PropertyValueAssertion[?] owningAssertion opposite containedValue
+    container PropertyValueAssertion[?] owningAssertion opposite containedValues
     /*
      * The property value restriction axiom that assigns this instance as a restricted value
      */
@@ -1610,33 +1645,83 @@ class PropertyValueAssertion extends Assertion {
      */
     refers SemanticProperty[1] property
     /*
-     * The literal value of this assertion
+     * The literal values of this assertion
      */
-    contains Literal[*] literalValue
+    contains Literal[*] literalValues
     /*
-     * The contained value of this assertion
+     * The contained values of this assertion
      */
-    contains AnonymousInstance[*] containedValue opposite owningAssertion
+    contains AnonymousInstance[*] containedValues opposite owningAssertion
     /*
-     * The referenced value of this assertion
+     * The referenced values of this assertion
      */
-    refers NamedInstance[*] referencedValue
+    refers NamedInstance[*] referencedValues
     /*
      * The instance that owns this assertion
      */
     container Instance[?] owningInstance opposite ownedPropertyValues
     /*
-     * Gets the asserted value
+     * Gets the asserted values
      */
-    op Element[*] getValue() {
-    	if (!literalValue.empty)
-    		literalValue.unmodifiableEList
-    	else if (!containedValue.empty)
-    		containedValue.unmodifiableEList
-    	else if (!referencedValue.empty)
-    		referencedValue.unmodifiableEList
+    op Element[*] getValues() {
+    	if (!literalValues.empty)
+    		literalValues.unmodifiableEList
+    	else if (!containedValues.empty)
+    		containedValues.unmodifiableEList
+    	else if (!referencedValues.empty)
+    		referencedValues.unmodifiableEList
     	else
     		ECollections.emptyEList
+    }
+    /*
+     * Gets the first asserted value of the annotation
+     */
+    op Element getValue() {
+    	if (!literalValues.empty)
+    		getLiteralValue()
+    	else if (!containedValues.empty)
+    		getContainedValue()
+    	else if (!referencedValues.empty)
+    		getReferencedValue()
+    }
+    /*
+     * Gets the first literal value
+     */
+    op Literal getLiteralValue() {
+    	return if (!literalValues.empty) literalValues.get(0)
+    }
+    /*
+     * Sets the first literal value
+     */
+    op void setLiteralValue(Literal value) {
+		literalValues.clear()
+		literalValues.add(value)
+    }
+    /*
+     * Gets the first contained value
+     */
+    op AnonymousInstance getContainedValue() {
+    	return if (!containedValues.empty) containedValues.get(0)
+    }
+    /*
+     * Sets the first contained value
+     */
+    op void setContainedValue(AnonymousInstance value) {
+		containedValues.clear()
+		containedValues.add(value)
+    }
+    /*
+     * Gets the first reference value
+     */
+    op NamedInstance getReferencedValue() {
+    	return if (!referencedValues.empty) referencedValues.get(0)
+    }
+    /*
+     * Sets the first reference value
+     */
+    op void setReferencedValue(NamedInstance value) {
+		referencedValues.clear()
+		referencedValues.add(value)
     }
 	
     op Instance getSubject() {
@@ -1647,10 +1732,10 @@ class PropertyValueAssertion extends Assertion {
         }
     }
     op Element[*] getObject() {
-    	if (!containedValue.empty)
-    		containedValue.map[v | if (v instanceof AnonymousRelationInstance) v.target else v ]
+    	if (!containedValues.empty)
+    		containedValues.map[v | if (v instanceof AnonymousRelationInstance) v.target else v ]
     	else
-    		getValue()
+    		getValues()
     }
 }
 

@@ -592,7 +592,7 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 			@Override
 			public String getText(Object object) {
 				Annotation annotation = (Annotation)object;
-				return "@" + getPropertyLabel(annotation.getProperty(), annotation.getValue(), annotation);
+				return "@" + getPropertyLabel(annotation.getProperty(), annotation.getValues(), annotation);
 			}
 		};
 		return annotationItemProvider;
@@ -604,7 +604,7 @@ public class OmlItemProviderAdapterFactoryEx extends OmlItemProviderAdapterFacto
 			@Override
 			public String getText(Object object) {
 				PropertyValueAssertion assertion = (PropertyValueAssertion)object;
-				return getPropertyLabel(assertion.getProperty(), assertion.getValue(), assertion);
+				return getPropertyLabel(assertion.getProperty(), assertion.getValues(), assertion);
 			}
 		};
 		return propertyValueAssertionItemProvider;

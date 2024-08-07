@@ -64,7 +64,7 @@ public class PropertyValueAssertionItemProvider extends AssertionItemProvider {
 			super.getPropertyDescriptors(object);
 
 			addPropertyPropertyDescriptor(object);
-			addReferencedValuePropertyDescriptor(object);
+			addReferencedValuesPropertyDescriptor(object);
 			addOwningInstancePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
@@ -115,19 +115,19 @@ public class PropertyValueAssertionItemProvider extends AssertionItemProvider {
 	}
 
 	/**
-	 * This adds a property descriptor for the Referenced Value feature.
+	 * This adds a property descriptor for the Referenced Values feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addReferencedValuePropertyDescriptor(Object object) {
+	protected void addReferencedValuesPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_PropertyValueAssertion_referencedValue_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_PropertyValueAssertion_referencedValue_feature", "_UI_PropertyValueAssertion_type"),
-				 OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__REFERENCED_VALUE,
+				 getString("_UI_PropertyValueAssertion_referencedValues_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_PropertyValueAssertion_referencedValues_feature", "_UI_PropertyValueAssertion_type"),
+				 OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__REFERENCED_VALUES,
 				 true,
 				 false,
 				 true,
@@ -148,8 +148,8 @@ public class PropertyValueAssertionItemProvider extends AssertionItemProvider {
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__LITERAL_VALUE);
-			childrenFeatures.add(OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__CONTAINED_VALUE);
+			childrenFeatures.add(OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__LITERAL_VALUES);
+			childrenFeatures.add(OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__CONTAINED_VALUES);
 		}
 		return childrenFeatures;
 	}
@@ -202,8 +202,8 @@ public class PropertyValueAssertionItemProvider extends AssertionItemProvider {
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(PropertyValueAssertion.class)) {
-			case OmlPackage.PROPERTY_VALUE_ASSERTION__LITERAL_VALUE:
-			case OmlPackage.PROPERTY_VALUE_ASSERTION__CONTAINED_VALUE:
+			case OmlPackage.PROPERTY_VALUE_ASSERTION__LITERAL_VALUES:
+			case OmlPackage.PROPERTY_VALUE_ASSERTION__CONTAINED_VALUES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -223,37 +223,37 @@ public class PropertyValueAssertionItemProvider extends AssertionItemProvider {
 
 		newChildDescriptors.add
 			(createChildParameter
-				(OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__LITERAL_VALUE,
+				(OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__LITERAL_VALUES,
 				 OmlFactory.eINSTANCE.createQuotedLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__LITERAL_VALUE,
+				(OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__LITERAL_VALUES,
 				 OmlFactory.eINSTANCE.createIntegerLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__LITERAL_VALUE,
+				(OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__LITERAL_VALUES,
 				 OmlFactory.eINSTANCE.createDecimalLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__LITERAL_VALUE,
+				(OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__LITERAL_VALUES,
 				 OmlFactory.eINSTANCE.createDoubleLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__LITERAL_VALUE,
+				(OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__LITERAL_VALUES,
 				 OmlFactory.eINSTANCE.createBooleanLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__CONTAINED_VALUE,
+				(OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__CONTAINED_VALUES,
 				 OmlFactory.eINSTANCE.createAnonymousConceptInstance()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__CONTAINED_VALUE,
+				(OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__CONTAINED_VALUES,
 				 OmlFactory.eINSTANCE.createAnonymousRelationInstance()));
 	}
 

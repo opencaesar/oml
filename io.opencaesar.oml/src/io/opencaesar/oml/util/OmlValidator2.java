@@ -965,14 +965,14 @@ public final class OmlValidator2 {
 	            if (!ranges.stream().allMatch(d -> allTypes.contains(d))) {
 	            	return report(Diagnostic.WARNING, diagnostics, object,
 	            		instance.getAbbreviatedIri()+" is not asserted to be in the range of "+property.getAbbreviatedIri(),
-	                    OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__REFERENCED_VALUE);
+	                    OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__REFERENCED_VALUES);
 	            }
 	        } else if (theObject instanceof AnonymousInstance) {
 	            final Set<Entity> allTypes = cache.getAllTypes((Instance)theObject);
 	            if (!ranges.stream().allMatch(d -> allTypes.contains(d))) {
 	            	return report(Diagnostic.WARNING, diagnostics, object,
 	    	            "The object of the assertion is not asserted to be in the range of "+property.getAbbreviatedIri(),
-	                    OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__CONTAINED_VALUE);
+	                    OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__CONTAINED_VALUES);
 	            }
 	        } else {
 	        	Literal literal = (Literal) theObject;
@@ -980,7 +980,7 @@ public final class OmlValidator2 {
 	            if (!ranges.stream().allMatch(d -> allTypes.contains(d))) {
 	            	return report(Diagnostic.WARNING, diagnostics, object,
 	            		literal.getLexicalValue()+" is not asserted to be in the range of "+property.getAbbreviatedIri(),
-	                    OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__LITERAL_VALUE);
+	                    OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__LITERAL_VALUES);
 	            }
 	        }
         }

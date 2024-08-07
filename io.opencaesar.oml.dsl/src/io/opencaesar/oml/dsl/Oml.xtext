@@ -27,7 +27,7 @@ Annotation:
 	'@' {Annotation} property=[AnnotationProperty|Ref] (AnnotationValue ("," AnnotationValue)*)?;
 
 fragment AnnotationValue returns Annotation:
-	literalValue+=Literal | referencedValue+=[Member|Ref];
+	literalValues+=Literal | referencedValues+=[Member|Ref];
 
 VocabularyBox:
 	Vocabulary |
@@ -313,7 +313,7 @@ PropertyValueAssertion:
 	property=[SemanticProperty|Ref] PropertyValue ("," PropertyValue)*;
 
 fragment PropertyValue returns PropertyValueAssertion:
-	(literalValue+=Literal | containedValue+=AnonymousInstance | referencedValue+=[NamedInstance|Ref]);
+	(literalValues+=Literal | containedValues+=AnonymousInstance | referencedValues+=[NamedInstance|Ref]);
 
 Predicate:
 	UnaryPredicate |

@@ -354,7 +354,7 @@ public class OmlBuilder {
      */
     public Annotation addAnnotation(Ontology ontology, String propertyIri, String referencedValueIri) {
         final Annotation annotation = OmlWrite.addAnnotation(ontology, null, new Member[0]);
-       	setCrossReference(ontology, annotation, OmlPackage.Literals.ANNOTATION__REFERENCED_VALUE, referencedValueIri);
+       	setCrossReference(ontology, annotation, OmlPackage.Literals.ANNOTATION__REFERENCED_VALUES, referencedValueIri);
         setCrossReference(ontology, annotation, OmlPackage.Literals.ANNOTATION__PROPERTY, propertyIri);
         return annotation;
     }
@@ -386,7 +386,7 @@ public class OmlBuilder {
      */
     public Annotation addAnnotation(Ontology ontology, String memberIri, String propertyIri, String...referencedValueIris) {
         final Annotation annotation = OmlWrite.addAnnotation(ontology, null, null, new Member[0]);
-       	setCrossReferences(ontology, annotation, OmlPackage.Literals.ANNOTATION__REFERENCED_VALUE, Arrays.asList(referencedValueIris));
+       	setCrossReferences(ontology, annotation, OmlPackage.Literals.ANNOTATION__REFERENCED_VALUES, Arrays.asList(referencedValueIris));
         setCrossReference(ontology, annotation, OmlPackage.Literals.ANNOTATION__PROPERTY, propertyIri);
         setContainmentReference(ontology, memberIri, OmlPackage.Literals.IDENTIFIED_ELEMENT__OWNED_ANNOTATIONS, annotation);
         return annotation;
@@ -1198,7 +1198,7 @@ public class OmlBuilder {
      */
     public PropertyValueAssertion addPropertyValueAssertion(Ontology ontology, Object owner, String propertyIri, String...referencedValueIris) {
         final PropertyValueAssertion assertion = OmlWrite.addPropertyValueAssertion(ontology, null, null, new NamedInstance[0]);
-        setCrossReferences(ontology, assertion, OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__REFERENCED_VALUE, Arrays.asList(referencedValueIris));
+        setCrossReferences(ontology, assertion, OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__REFERENCED_VALUES, Arrays.asList(referencedValueIris));
         setCrossReference(ontology, assertion, OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__PROPERTY, propertyIri);
         if (owner instanceof String) {
         	setContainmentReference(ontology, (String)owner, OmlPackage.Literals.INSTANCE__OWNED_PROPERTY_VALUES, assertion);

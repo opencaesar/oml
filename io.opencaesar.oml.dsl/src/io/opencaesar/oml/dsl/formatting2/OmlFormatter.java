@@ -103,8 +103,8 @@ public class OmlFormatter extends AbstractJavaFormatter {
 	protected void _format(Annotation annotation, IFormattableDocument doc) {
 		doc.append(keyword(annotation, oml.getAnnotationAccess().getCommercialAtKeyword_0()), noSpace());
 		formatCommas(annotation, doc);
-		annotation.getLiteralValue().forEach(it -> doc.prepend(doc.format(it), oneSpace()));
-		annotation.getReferencedValue().forEach(it -> doc.prepend(doc.format(it), oneSpace()));
+		annotation.getLiteralValues().forEach(it -> doc.prepend(doc.format(it), oneSpace()));
+		annotation.getReferencedValues().forEach(it -> doc.prepend(doc.format(it), oneSpace()));
 	}
 
 	protected void _format(Vocabulary vocabulary, IFormattableDocument doc) {
@@ -454,8 +454,8 @@ public class OmlFormatter extends AbstractJavaFormatter {
 	protected void _format(PropertyValueAssertion assertion, IFormattableDocument doc) {
 		doc.append(feature(assertion, OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__PROPERTY), oneSpace());
 		formatCommas(assertion, doc);
-		assertion.getLiteralValue().forEach(it -> doc.format(it));
-		assertion.getContainedValue().forEach(it -> doc.format(it));
+		assertion.getLiteralValues().forEach(it -> doc.format(it));
+		assertion.getContainedValues().forEach(it -> doc.format(it));
 	}
 
 	protected void _format(TypePredicate predicate, IFormattableDocument doc) {

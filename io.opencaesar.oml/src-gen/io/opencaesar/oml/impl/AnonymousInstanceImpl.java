@@ -117,7 +117,7 @@ public abstract class AnonymousInstanceImpl extends InstanceImpl implements Anon
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwningAssertion != null)
-				msgs = ((InternalEObject)newOwningAssertion).eInverseAdd(this, OmlPackage.PROPERTY_VALUE_ASSERTION__CONTAINED_VALUE, PropertyValueAssertion.class, msgs);
+				msgs = ((InternalEObject)newOwningAssertion).eInverseAdd(this, OmlPackage.PROPERTY_VALUE_ASSERTION__CONTAINED_VALUES, PropertyValueAssertion.class, msgs);
 			msgs = basicSetOwningAssertion(newOwningAssertion, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
@@ -248,7 +248,7 @@ public abstract class AnonymousInstanceImpl extends InstanceImpl implements Anon
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
 			case OmlPackage.ANONYMOUS_INSTANCE__OWNING_ASSERTION:
-				return eInternalContainer().eInverseRemove(this, OmlPackage.PROPERTY_VALUE_ASSERTION__CONTAINED_VALUE, PropertyValueAssertion.class, msgs);
+				return eInternalContainer().eInverseRemove(this, OmlPackage.PROPERTY_VALUE_ASSERTION__CONTAINED_VALUES, PropertyValueAssertion.class, msgs);
 			case OmlPackage.ANONYMOUS_INSTANCE__OWNING_AXIOM:
 				return eInternalContainer().eInverseRemove(this, OmlPackage.PROPERTY_VALUE_RESTRICTION_AXIOM__CONTAINED_VALUE, PropertyValueRestrictionAxiom.class, msgs);
 		}

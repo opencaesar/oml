@@ -856,7 +856,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getAnnotation_LiteralValue() {
+	public EReference getAnnotation_LiteralValues() {
 		return (EReference)annotationEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -866,7 +866,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getAnnotation_ReferencedValue() {
+	public EReference getAnnotation_ReferencedValues() {
 		return (EReference)annotationEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -886,7 +886,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EOperation getAnnotation__GetValue() {
+	public EOperation getAnnotation__GetValues() {
 		return annotationEClass.getEOperations().get(0);
 	}
 
@@ -896,8 +896,58 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EOperation getAnnotation__GetAnnotatedElement() {
+	public EOperation getAnnotation__GetValue() {
 		return annotationEClass.getEOperations().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getAnnotation__GetLiteralValue() {
+		return annotationEClass.getEOperations().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getAnnotation__SetLiteralValue__Literal() {
+		return annotationEClass.getEOperations().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getAnnotation__GetReferencedValue() {
+		return annotationEClass.getEOperations().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getAnnotation__SetReferencedValue__Member() {
+		return annotationEClass.getEOperations().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getAnnotation__GetAnnotatedElement() {
+		return annotationEClass.getEOperations().get(6);
 	}
 
 	/**
@@ -3386,7 +3436,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getPropertyValueAssertion_LiteralValue() {
+	public EReference getPropertyValueAssertion_LiteralValues() {
 		return (EReference)propertyValueAssertionEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -3396,7 +3446,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getPropertyValueAssertion_ContainedValue() {
+	public EReference getPropertyValueAssertion_ContainedValues() {
 		return (EReference)propertyValueAssertionEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -3406,7 +3456,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getPropertyValueAssertion_ReferencedValue() {
+	public EReference getPropertyValueAssertion_ReferencedValues() {
 		return (EReference)propertyValueAssertionEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -3426,7 +3476,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EOperation getPropertyValueAssertion__GetValue() {
+	public EOperation getPropertyValueAssertion__GetValues() {
 		return propertyValueAssertionEClass.getEOperations().get(0);
 	}
 
@@ -3436,7 +3486,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EOperation getPropertyValueAssertion__GetSubject() {
+	public EOperation getPropertyValueAssertion__GetValue() {
 		return propertyValueAssertionEClass.getEOperations().get(1);
 	}
 
@@ -3446,8 +3496,78 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 	 * @generated
 	 */
 	@Override
-	public EOperation getPropertyValueAssertion__GetObject() {
+	public EOperation getPropertyValueAssertion__GetLiteralValue() {
 		return propertyValueAssertionEClass.getEOperations().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getPropertyValueAssertion__SetLiteralValue__Literal() {
+		return propertyValueAssertionEClass.getEOperations().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getPropertyValueAssertion__GetContainedValue() {
+		return propertyValueAssertionEClass.getEOperations().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getPropertyValueAssertion__SetContainedValue__AnonymousInstance() {
+		return propertyValueAssertionEClass.getEOperations().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getPropertyValueAssertion__GetReferencedValue() {
+		return propertyValueAssertionEClass.getEOperations().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getPropertyValueAssertion__SetReferencedValue__NamedInstance() {
+		return propertyValueAssertionEClass.getEOperations().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getPropertyValueAssertion__GetSubject() {
+		return propertyValueAssertionEClass.getEOperations().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getPropertyValueAssertion__GetObject() {
+		return propertyValueAssertionEClass.getEOperations().get(9);
 	}
 
 	/**
@@ -3935,10 +4055,15 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 
 		annotationEClass = createEClass(ANNOTATION);
 		createEReference(annotationEClass, ANNOTATION__PROPERTY);
-		createEReference(annotationEClass, ANNOTATION__LITERAL_VALUE);
-		createEReference(annotationEClass, ANNOTATION__REFERENCED_VALUE);
+		createEReference(annotationEClass, ANNOTATION__LITERAL_VALUES);
+		createEReference(annotationEClass, ANNOTATION__REFERENCED_VALUES);
 		createEReference(annotationEClass, ANNOTATION__OWNING_ELEMENT);
+		createEOperation(annotationEClass, ANNOTATION___GET_VALUES);
 		createEOperation(annotationEClass, ANNOTATION___GET_VALUE);
+		createEOperation(annotationEClass, ANNOTATION___GET_LITERAL_VALUE);
+		createEOperation(annotationEClass, ANNOTATION___SET_LITERAL_VALUE__LITERAL);
+		createEOperation(annotationEClass, ANNOTATION___GET_REFERENCED_VALUE);
+		createEOperation(annotationEClass, ANNOTATION___SET_REFERENCED_VALUE__MEMBER);
 		createEOperation(annotationEClass, ANNOTATION___GET_ANNOTATED_ELEMENT);
 
 		identifiedElementEClass = createEClass(IDENTIFIED_ELEMENT);
@@ -4249,11 +4374,18 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 
 		propertyValueAssertionEClass = createEClass(PROPERTY_VALUE_ASSERTION);
 		createEReference(propertyValueAssertionEClass, PROPERTY_VALUE_ASSERTION__PROPERTY);
-		createEReference(propertyValueAssertionEClass, PROPERTY_VALUE_ASSERTION__LITERAL_VALUE);
-		createEReference(propertyValueAssertionEClass, PROPERTY_VALUE_ASSERTION__CONTAINED_VALUE);
-		createEReference(propertyValueAssertionEClass, PROPERTY_VALUE_ASSERTION__REFERENCED_VALUE);
+		createEReference(propertyValueAssertionEClass, PROPERTY_VALUE_ASSERTION__LITERAL_VALUES);
+		createEReference(propertyValueAssertionEClass, PROPERTY_VALUE_ASSERTION__CONTAINED_VALUES);
+		createEReference(propertyValueAssertionEClass, PROPERTY_VALUE_ASSERTION__REFERENCED_VALUES);
 		createEReference(propertyValueAssertionEClass, PROPERTY_VALUE_ASSERTION__OWNING_INSTANCE);
+		createEOperation(propertyValueAssertionEClass, PROPERTY_VALUE_ASSERTION___GET_VALUES);
 		createEOperation(propertyValueAssertionEClass, PROPERTY_VALUE_ASSERTION___GET_VALUE);
+		createEOperation(propertyValueAssertionEClass, PROPERTY_VALUE_ASSERTION___GET_LITERAL_VALUE);
+		createEOperation(propertyValueAssertionEClass, PROPERTY_VALUE_ASSERTION___SET_LITERAL_VALUE__LITERAL);
+		createEOperation(propertyValueAssertionEClass, PROPERTY_VALUE_ASSERTION___GET_CONTAINED_VALUE);
+		createEOperation(propertyValueAssertionEClass, PROPERTY_VALUE_ASSERTION___SET_CONTAINED_VALUE__ANONYMOUSINSTANCE);
+		createEOperation(propertyValueAssertionEClass, PROPERTY_VALUE_ASSERTION___GET_REFERENCED_VALUE);
+		createEOperation(propertyValueAssertionEClass, PROPERTY_VALUE_ASSERTION___SET_REFERENCED_VALUE__NAMEDINSTANCE);
 		createEOperation(propertyValueAssertionEClass, PROPERTY_VALUE_ASSERTION___GET_SUBJECT);
 		createEOperation(propertyValueAssertionEClass, PROPERTY_VALUE_ASSERTION___GET_OBJECT);
 
@@ -4453,11 +4585,23 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 
 		initEClass(annotationEClass, Annotation.class, "Annotation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAnnotation_Property(), this.getAnnotationProperty(), null, "property", null, 1, 1, Annotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAnnotation_LiteralValue(), this.getLiteral(), null, "literalValue", null, 0, -1, Annotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAnnotation_ReferencedValue(), this.getMember(), null, "referencedValue", null, 0, -1, Annotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAnnotation_LiteralValues(), this.getLiteral(), null, "literalValues", null, 0, -1, Annotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAnnotation_ReferencedValues(), this.getMember(), null, "referencedValues", null, 0, -1, Annotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAnnotation_OwningElement(), this.getIdentifiedElement(), this.getIdentifiedElement_OwnedAnnotations(), "owningElement", null, 0, 1, Annotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEOperation(getAnnotation__GetValue(), this.getElement(), "getValue", 0, -1, !IS_UNIQUE, IS_ORDERED);
+		initEOperation(getAnnotation__GetValues(), this.getElement(), "getValues", 0, -1, !IS_UNIQUE, IS_ORDERED);
+
+		initEOperation(getAnnotation__GetValue(), this.getElement(), "getValue", 0, 1, !IS_UNIQUE, IS_ORDERED);
+
+		initEOperation(getAnnotation__GetLiteralValue(), this.getLiteral(), "getLiteralValue", 0, 1, !IS_UNIQUE, IS_ORDERED);
+
+		op = initEOperation(getAnnotation__SetLiteralValue__Literal(), null, "setLiteralValue", 0, 1, !IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getLiteral(), "value", 0, 1, !IS_UNIQUE, IS_ORDERED);
+
+		initEOperation(getAnnotation__GetReferencedValue(), this.getMember(), "getReferencedValue", 0, 1, !IS_UNIQUE, IS_ORDERED);
+
+		op = initEOperation(getAnnotation__SetReferencedValue__Member(), null, "setReferencedValue", 0, 1, !IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getMember(), "value", 0, 1, !IS_UNIQUE, IS_ORDERED);
 
 		initEOperation(getAnnotation__GetAnnotatedElement(), this.getIdentifiedElement(), "getAnnotatedElement", 0, 1, !IS_UNIQUE, IS_ORDERED);
 
@@ -4725,7 +4869,7 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 		initEOperation(getNamedInstance__GetTypes(), this.getEntity(), "getTypes", 0, -1, !IS_UNIQUE, IS_ORDERED);
 
 		initEClass(anonymousInstanceEClass, AnonymousInstance.class, "AnonymousInstance", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getAnonymousInstance_OwningAssertion(), this.getPropertyValueAssertion(), this.getPropertyValueAssertion_ContainedValue(), "owningAssertion", null, 0, 1, AnonymousInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAnonymousInstance_OwningAssertion(), this.getPropertyValueAssertion(), this.getPropertyValueAssertion_ContainedValues(), "owningAssertion", null, 0, 1, AnonymousInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAnonymousInstance_OwningAxiom(), this.getPropertyValueRestrictionAxiom(), this.getPropertyValueRestrictionAxiom_ContainedValue(), "owningAxiom", null, 0, 1, AnonymousInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEOperation(getAnonymousInstance__GetIsValueOfProperty(), this.getSemanticProperty(), "getIsValueOfProperty", 0, 1, !IS_UNIQUE, IS_ORDERED);
@@ -4855,12 +4999,29 @@ public class OmlPackageImpl extends EPackageImpl implements OmlPackage {
 
 		initEClass(propertyValueAssertionEClass, PropertyValueAssertion.class, "PropertyValueAssertion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPropertyValueAssertion_Property(), this.getSemanticProperty(), null, "property", null, 1, 1, PropertyValueAssertion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getPropertyValueAssertion_LiteralValue(), this.getLiteral(), null, "literalValue", null, 0, -1, PropertyValueAssertion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getPropertyValueAssertion_ContainedValue(), this.getAnonymousInstance(), this.getAnonymousInstance_OwningAssertion(), "containedValue", null, 0, -1, PropertyValueAssertion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getPropertyValueAssertion_ReferencedValue(), this.getNamedInstance(), null, "referencedValue", null, 0, -1, PropertyValueAssertion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPropertyValueAssertion_LiteralValues(), this.getLiteral(), null, "literalValues", null, 0, -1, PropertyValueAssertion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPropertyValueAssertion_ContainedValues(), this.getAnonymousInstance(), this.getAnonymousInstance_OwningAssertion(), "containedValues", null, 0, -1, PropertyValueAssertion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPropertyValueAssertion_ReferencedValues(), this.getNamedInstance(), null, "referencedValues", null, 0, -1, PropertyValueAssertion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPropertyValueAssertion_OwningInstance(), this.getInstance(), this.getInstance_OwnedPropertyValues(), "owningInstance", null, 0, 1, PropertyValueAssertion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEOperation(getPropertyValueAssertion__GetValue(), this.getElement(), "getValue", 0, -1, !IS_UNIQUE, IS_ORDERED);
+		initEOperation(getPropertyValueAssertion__GetValues(), this.getElement(), "getValues", 0, -1, !IS_UNIQUE, IS_ORDERED);
+
+		initEOperation(getPropertyValueAssertion__GetValue(), this.getElement(), "getValue", 0, 1, !IS_UNIQUE, IS_ORDERED);
+
+		initEOperation(getPropertyValueAssertion__GetLiteralValue(), this.getLiteral(), "getLiteralValue", 0, 1, !IS_UNIQUE, IS_ORDERED);
+
+		op = initEOperation(getPropertyValueAssertion__SetLiteralValue__Literal(), null, "setLiteralValue", 0, 1, !IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getLiteral(), "value", 0, 1, !IS_UNIQUE, IS_ORDERED);
+
+		initEOperation(getPropertyValueAssertion__GetContainedValue(), this.getAnonymousInstance(), "getContainedValue", 0, 1, !IS_UNIQUE, IS_ORDERED);
+
+		op = initEOperation(getPropertyValueAssertion__SetContainedValue__AnonymousInstance(), null, "setContainedValue", 0, 1, !IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getAnonymousInstance(), "value", 0, 1, !IS_UNIQUE, IS_ORDERED);
+
+		initEOperation(getPropertyValueAssertion__GetReferencedValue(), this.getNamedInstance(), "getReferencedValue", 0, 1, !IS_UNIQUE, IS_ORDERED);
+
+		op = initEOperation(getPropertyValueAssertion__SetReferencedValue__NamedInstance(), null, "setReferencedValue", 0, 1, !IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getNamedInstance(), "value", 0, 1, !IS_UNIQUE, IS_ORDERED);
 
 		initEOperation(getPropertyValueAssertion__GetSubject(), this.getInstance(), "getSubject", 0, 1, !IS_UNIQUE, IS_ORDERED);
 

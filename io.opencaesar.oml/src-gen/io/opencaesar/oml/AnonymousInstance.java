@@ -44,7 +44,7 @@ package io.opencaesar.oml;
 public interface AnonymousInstance extends Instance {
 	/**
 	 * Returns the value of the '<em><b>Owning Assertion</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.PropertyValueAssertion#getContainedValue <em>Contained Value</em>}'.
+	 * It is bidirectional and its opposite is '{@link io.opencaesar.oml.PropertyValueAssertion#getContainedValues <em>Contained Values</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
@@ -53,8 +53,8 @@ public interface AnonymousInstance extends Instance {
 	 * @return the value of the '<em>Owning Assertion</em>' container reference.
 	 * @see #setOwningAssertion(PropertyValueAssertion)
 	 * @see io.opencaesar.oml.OmlPackage#getAnonymousInstance_OwningAssertion()
-	 * @see io.opencaesar.oml.PropertyValueAssertion#getContainedValue
-	 * @model opposite="containedValue" transient="false"
+	 * @see io.opencaesar.oml.PropertyValueAssertion#getContainedValues
+	 * @model opposite="containedValues" transient="false"
 	 * @generated
 	 */
 	PropertyValueAssertion getOwningAssertion();

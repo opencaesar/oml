@@ -148,22 +148,22 @@ public interface OmlPackage extends EPackage {
 	int ANNOTATION__PROPERTY = ELEMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Literal Value</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Literal Values</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ANNOTATION__LITERAL_VALUE = ELEMENT_FEATURE_COUNT + 1;
+	int ANNOTATION__LITERAL_VALUES = ELEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Referenced Value</b></em>' reference list.
+	 * The feature id for the '<em><b>Referenced Values</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ANNOTATION__REFERENCED_VALUE = ELEMENT_FEATURE_COUNT + 2;
+	int ANNOTATION__REFERENCED_VALUES = ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Owning Element</b></em>' container reference.
@@ -202,13 +202,58 @@ public interface OmlPackage extends EPackage {
 	int ANNOTATION___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = ELEMENT___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
+	 * The operation id for the '<em>Get Values</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANNOTATION___GET_VALUES = ELEMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * The operation id for the '<em>Get Value</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ANNOTATION___GET_VALUE = ELEMENT_OPERATION_COUNT + 0;
+	int ANNOTATION___GET_VALUE = ELEMENT_OPERATION_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Get Literal Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANNOTATION___GET_LITERAL_VALUE = ELEMENT_OPERATION_COUNT + 2;
+
+	/**
+	 * The operation id for the '<em>Set Literal Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANNOTATION___SET_LITERAL_VALUE__LITERAL = ELEMENT_OPERATION_COUNT + 3;
+
+	/**
+	 * The operation id for the '<em>Get Referenced Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANNOTATION___GET_REFERENCED_VALUE = ELEMENT_OPERATION_COUNT + 4;
+
+	/**
+	 * The operation id for the '<em>Set Referenced Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANNOTATION___SET_REFERENCED_VALUE__MEMBER = ELEMENT_OPERATION_COUNT + 5;
 
 	/**
 	 * The operation id for the '<em>Get Annotated Element</em>' operation.
@@ -217,7 +262,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ANNOTATION___GET_ANNOTATED_ELEMENT = ELEMENT_OPERATION_COUNT + 1;
+	int ANNOTATION___GET_ANNOTATED_ELEMENT = ELEMENT_OPERATION_COUNT + 6;
 
 	/**
 	 * The number of operations of the '<em>Annotation</em>' class.
@@ -226,7 +271,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ANNOTATION_OPERATION_COUNT = ELEMENT_OPERATION_COUNT + 2;
+	int ANNOTATION_OPERATION_COUNT = ELEMENT_OPERATION_COUNT + 7;
 
 	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.impl.IdentifiedElementImpl <em>Identified Element</em>}' class.
@@ -7805,31 +7850,31 @@ public interface OmlPackage extends EPackage {
 	int PROPERTY_VALUE_ASSERTION__PROPERTY = ASSERTION_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Literal Value</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Literal Values</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_VALUE_ASSERTION__LITERAL_VALUE = ASSERTION_FEATURE_COUNT + 1;
+	int PROPERTY_VALUE_ASSERTION__LITERAL_VALUES = ASSERTION_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Contained Value</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Contained Values</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_VALUE_ASSERTION__CONTAINED_VALUE = ASSERTION_FEATURE_COUNT + 2;
+	int PROPERTY_VALUE_ASSERTION__CONTAINED_VALUES = ASSERTION_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>Referenced Value</b></em>' reference list.
+	 * The feature id for the '<em><b>Referenced Values</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_VALUE_ASSERTION__REFERENCED_VALUE = ASSERTION_FEATURE_COUNT + 3;
+	int PROPERTY_VALUE_ASSERTION__REFERENCED_VALUES = ASSERTION_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Owning Instance</b></em>' container reference.
@@ -7868,13 +7913,76 @@ public interface OmlPackage extends EPackage {
 	int PROPERTY_VALUE_ASSERTION___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP = ASSERTION___EXTRA_VALIDATE__DIAGNOSTICCHAIN_MAP;
 
 	/**
+	 * The operation id for the '<em>Get Values</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_VALUE_ASSERTION___GET_VALUES = ASSERTION_OPERATION_COUNT + 0;
+
+	/**
 	 * The operation id for the '<em>Get Value</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_VALUE_ASSERTION___GET_VALUE = ASSERTION_OPERATION_COUNT + 0;
+	int PROPERTY_VALUE_ASSERTION___GET_VALUE = ASSERTION_OPERATION_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Get Literal Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_VALUE_ASSERTION___GET_LITERAL_VALUE = ASSERTION_OPERATION_COUNT + 2;
+
+	/**
+	 * The operation id for the '<em>Set Literal Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_VALUE_ASSERTION___SET_LITERAL_VALUE__LITERAL = ASSERTION_OPERATION_COUNT + 3;
+
+	/**
+	 * The operation id for the '<em>Get Contained Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_VALUE_ASSERTION___GET_CONTAINED_VALUE = ASSERTION_OPERATION_COUNT + 4;
+
+	/**
+	 * The operation id for the '<em>Set Contained Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_VALUE_ASSERTION___SET_CONTAINED_VALUE__ANONYMOUSINSTANCE = ASSERTION_OPERATION_COUNT + 5;
+
+	/**
+	 * The operation id for the '<em>Get Referenced Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_VALUE_ASSERTION___GET_REFERENCED_VALUE = ASSERTION_OPERATION_COUNT + 6;
+
+	/**
+	 * The operation id for the '<em>Set Referenced Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_VALUE_ASSERTION___SET_REFERENCED_VALUE__NAMEDINSTANCE = ASSERTION_OPERATION_COUNT + 7;
 
 	/**
 	 * The operation id for the '<em>Get Subject</em>' operation.
@@ -7883,7 +7991,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_VALUE_ASSERTION___GET_SUBJECT = ASSERTION_OPERATION_COUNT + 1;
+	int PROPERTY_VALUE_ASSERTION___GET_SUBJECT = ASSERTION_OPERATION_COUNT + 8;
 
 	/**
 	 * The operation id for the '<em>Get Object</em>' operation.
@@ -7892,7 +8000,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_VALUE_ASSERTION___GET_OBJECT = ASSERTION_OPERATION_COUNT + 2;
+	int PROPERTY_VALUE_ASSERTION___GET_OBJECT = ASSERTION_OPERATION_COUNT + 9;
 
 	/**
 	 * The number of operations of the '<em>Property Value Assertion</em>' class.
@@ -7901,7 +8009,7 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_VALUE_ASSERTION_OPERATION_COUNT = ASSERTION_OPERATION_COUNT + 3;
+	int PROPERTY_VALUE_ASSERTION_OPERATION_COUNT = ASSERTION_OPERATION_COUNT + 10;
 
 	/**
 	 * The meta object id for the '{@link io.opencaesar.oml.impl.UnaryPredicateImpl <em>Unary Predicate</em>}' class.
@@ -9211,26 +9319,26 @@ public interface OmlPackage extends EPackage {
 	EReference getAnnotation_Property();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link io.opencaesar.oml.Annotation#getLiteralValue <em>Literal Value</em>}'.
+	 * Returns the meta object for the containment reference list '{@link io.opencaesar.oml.Annotation#getLiteralValues <em>Literal Values</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Literal Value</em>'.
-	 * @see io.opencaesar.oml.Annotation#getLiteralValue()
+	 * @return the meta object for the containment reference list '<em>Literal Values</em>'.
+	 * @see io.opencaesar.oml.Annotation#getLiteralValues()
 	 * @see #getAnnotation()
 	 * @generated
 	 */
-	EReference getAnnotation_LiteralValue();
+	EReference getAnnotation_LiteralValues();
 
 	/**
-	 * Returns the meta object for the reference list '{@link io.opencaesar.oml.Annotation#getReferencedValue <em>Referenced Value</em>}'.
+	 * Returns the meta object for the reference list '{@link io.opencaesar.oml.Annotation#getReferencedValues <em>Referenced Values</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Referenced Value</em>'.
-	 * @see io.opencaesar.oml.Annotation#getReferencedValue()
+	 * @return the meta object for the reference list '<em>Referenced Values</em>'.
+	 * @see io.opencaesar.oml.Annotation#getReferencedValues()
 	 * @see #getAnnotation()
 	 * @generated
 	 */
-	EReference getAnnotation_ReferencedValue();
+	EReference getAnnotation_ReferencedValues();
 
 	/**
 	 * Returns the meta object for the container reference '{@link io.opencaesar.oml.Annotation#getOwningElement <em>Owning Element</em>}'.
@@ -9244,6 +9352,16 @@ public interface OmlPackage extends EPackage {
 	EReference getAnnotation_OwningElement();
 
 	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.Annotation#getValues() <em>Get Values</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Values</em>' operation.
+	 * @see io.opencaesar.oml.Annotation#getValues()
+	 * @generated
+	 */
+	EOperation getAnnotation__GetValues();
+
+	/**
 	 * Returns the meta object for the '{@link io.opencaesar.oml.Annotation#getValue() <em>Get Value</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -9252,6 +9370,46 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 */
 	EOperation getAnnotation__GetValue();
+
+	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.Annotation#getLiteralValue() <em>Get Literal Value</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Literal Value</em>' operation.
+	 * @see io.opencaesar.oml.Annotation#getLiteralValue()
+	 * @generated
+	 */
+	EOperation getAnnotation__GetLiteralValue();
+
+	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.Annotation#setLiteralValue(io.opencaesar.oml.Literal) <em>Set Literal Value</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Set Literal Value</em>' operation.
+	 * @see io.opencaesar.oml.Annotation#setLiteralValue(io.opencaesar.oml.Literal)
+	 * @generated
+	 */
+	EOperation getAnnotation__SetLiteralValue__Literal();
+
+	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.Annotation#getReferencedValue() <em>Get Referenced Value</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Referenced Value</em>' operation.
+	 * @see io.opencaesar.oml.Annotation#getReferencedValue()
+	 * @generated
+	 */
+	EOperation getAnnotation__GetReferencedValue();
+
+	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.Annotation#setReferencedValue(io.opencaesar.oml.Member) <em>Set Referenced Value</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Set Referenced Value</em>' operation.
+	 * @see io.opencaesar.oml.Annotation#setReferencedValue(io.opencaesar.oml.Member)
+	 * @generated
+	 */
+	EOperation getAnnotation__SetReferencedValue__Member();
 
 	/**
 	 * Returns the meta object for the '{@link io.opencaesar.oml.Annotation#getAnnotatedElement() <em>Get Annotated Element</em>}' operation.
@@ -11845,37 +12003,37 @@ public interface OmlPackage extends EPackage {
 	EReference getPropertyValueAssertion_Property();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link io.opencaesar.oml.PropertyValueAssertion#getLiteralValue <em>Literal Value</em>}'.
+	 * Returns the meta object for the containment reference list '{@link io.opencaesar.oml.PropertyValueAssertion#getLiteralValues <em>Literal Values</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Literal Value</em>'.
-	 * @see io.opencaesar.oml.PropertyValueAssertion#getLiteralValue()
+	 * @return the meta object for the containment reference list '<em>Literal Values</em>'.
+	 * @see io.opencaesar.oml.PropertyValueAssertion#getLiteralValues()
 	 * @see #getPropertyValueAssertion()
 	 * @generated
 	 */
-	EReference getPropertyValueAssertion_LiteralValue();
+	EReference getPropertyValueAssertion_LiteralValues();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link io.opencaesar.oml.PropertyValueAssertion#getContainedValue <em>Contained Value</em>}'.
+	 * Returns the meta object for the containment reference list '{@link io.opencaesar.oml.PropertyValueAssertion#getContainedValues <em>Contained Values</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Contained Value</em>'.
-	 * @see io.opencaesar.oml.PropertyValueAssertion#getContainedValue()
+	 * @return the meta object for the containment reference list '<em>Contained Values</em>'.
+	 * @see io.opencaesar.oml.PropertyValueAssertion#getContainedValues()
 	 * @see #getPropertyValueAssertion()
 	 * @generated
 	 */
-	EReference getPropertyValueAssertion_ContainedValue();
+	EReference getPropertyValueAssertion_ContainedValues();
 
 	/**
-	 * Returns the meta object for the reference list '{@link io.opencaesar.oml.PropertyValueAssertion#getReferencedValue <em>Referenced Value</em>}'.
+	 * Returns the meta object for the reference list '{@link io.opencaesar.oml.PropertyValueAssertion#getReferencedValues <em>Referenced Values</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Referenced Value</em>'.
-	 * @see io.opencaesar.oml.PropertyValueAssertion#getReferencedValue()
+	 * @return the meta object for the reference list '<em>Referenced Values</em>'.
+	 * @see io.opencaesar.oml.PropertyValueAssertion#getReferencedValues()
 	 * @see #getPropertyValueAssertion()
 	 * @generated
 	 */
-	EReference getPropertyValueAssertion_ReferencedValue();
+	EReference getPropertyValueAssertion_ReferencedValues();
 
 	/**
 	 * Returns the meta object for the container reference '{@link io.opencaesar.oml.PropertyValueAssertion#getOwningInstance <em>Owning Instance</em>}'.
@@ -11889,6 +12047,16 @@ public interface OmlPackage extends EPackage {
 	EReference getPropertyValueAssertion_OwningInstance();
 
 	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.PropertyValueAssertion#getValues() <em>Get Values</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Values</em>' operation.
+	 * @see io.opencaesar.oml.PropertyValueAssertion#getValues()
+	 * @generated
+	 */
+	EOperation getPropertyValueAssertion__GetValues();
+
+	/**
 	 * Returns the meta object for the '{@link io.opencaesar.oml.PropertyValueAssertion#getValue() <em>Get Value</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -11897,6 +12065,66 @@ public interface OmlPackage extends EPackage {
 	 * @generated
 	 */
 	EOperation getPropertyValueAssertion__GetValue();
+
+	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.PropertyValueAssertion#getLiteralValue() <em>Get Literal Value</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Literal Value</em>' operation.
+	 * @see io.opencaesar.oml.PropertyValueAssertion#getLiteralValue()
+	 * @generated
+	 */
+	EOperation getPropertyValueAssertion__GetLiteralValue();
+
+	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.PropertyValueAssertion#setLiteralValue(io.opencaesar.oml.Literal) <em>Set Literal Value</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Set Literal Value</em>' operation.
+	 * @see io.opencaesar.oml.PropertyValueAssertion#setLiteralValue(io.opencaesar.oml.Literal)
+	 * @generated
+	 */
+	EOperation getPropertyValueAssertion__SetLiteralValue__Literal();
+
+	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.PropertyValueAssertion#getContainedValue() <em>Get Contained Value</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Contained Value</em>' operation.
+	 * @see io.opencaesar.oml.PropertyValueAssertion#getContainedValue()
+	 * @generated
+	 */
+	EOperation getPropertyValueAssertion__GetContainedValue();
+
+	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.PropertyValueAssertion#setContainedValue(io.opencaesar.oml.AnonymousInstance) <em>Set Contained Value</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Set Contained Value</em>' operation.
+	 * @see io.opencaesar.oml.PropertyValueAssertion#setContainedValue(io.opencaesar.oml.AnonymousInstance)
+	 * @generated
+	 */
+	EOperation getPropertyValueAssertion__SetContainedValue__AnonymousInstance();
+
+	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.PropertyValueAssertion#getReferencedValue() <em>Get Referenced Value</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Referenced Value</em>' operation.
+	 * @see io.opencaesar.oml.PropertyValueAssertion#getReferencedValue()
+	 * @generated
+	 */
+	EOperation getPropertyValueAssertion__GetReferencedValue();
+
+	/**
+	 * Returns the meta object for the '{@link io.opencaesar.oml.PropertyValueAssertion#setReferencedValue(io.opencaesar.oml.NamedInstance) <em>Set Referenced Value</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Set Referenced Value</em>' operation.
+	 * @see io.opencaesar.oml.PropertyValueAssertion#setReferencedValue(io.opencaesar.oml.NamedInstance)
+	 * @generated
+	 */
+	EOperation getPropertyValueAssertion__SetReferencedValue__NamedInstance();
 
 	/**
 	 * Returns the meta object for the '{@link io.opencaesar.oml.PropertyValueAssertion#getSubject() <em>Get Subject</em>}' operation.
@@ -12461,20 +12689,20 @@ public interface OmlPackage extends EPackage {
 		EReference ANNOTATION__PROPERTY = eINSTANCE.getAnnotation_Property();
 
 		/**
-		 * The meta object literal for the '<em><b>Literal Value</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Literal Values</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ANNOTATION__LITERAL_VALUE = eINSTANCE.getAnnotation_LiteralValue();
+		EReference ANNOTATION__LITERAL_VALUES = eINSTANCE.getAnnotation_LiteralValues();
 
 		/**
-		 * The meta object literal for the '<em><b>Referenced Value</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Referenced Values</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ANNOTATION__REFERENCED_VALUE = eINSTANCE.getAnnotation_ReferencedValue();
+		EReference ANNOTATION__REFERENCED_VALUES = eINSTANCE.getAnnotation_ReferencedValues();
 
 		/**
 		 * The meta object literal for the '<em><b>Owning Element</b></em>' container reference feature.
@@ -12485,12 +12713,52 @@ public interface OmlPackage extends EPackage {
 		EReference ANNOTATION__OWNING_ELEMENT = eINSTANCE.getAnnotation_OwningElement();
 
 		/**
+		 * The meta object literal for the '<em><b>Get Values</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation ANNOTATION___GET_VALUES = eINSTANCE.getAnnotation__GetValues();
+
+		/**
 		 * The meta object literal for the '<em><b>Get Value</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EOperation ANNOTATION___GET_VALUE = eINSTANCE.getAnnotation__GetValue();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Literal Value</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation ANNOTATION___GET_LITERAL_VALUE = eINSTANCE.getAnnotation__GetLiteralValue();
+
+		/**
+		 * The meta object literal for the '<em><b>Set Literal Value</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation ANNOTATION___SET_LITERAL_VALUE__LITERAL = eINSTANCE.getAnnotation__SetLiteralValue__Literal();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Referenced Value</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation ANNOTATION___GET_REFERENCED_VALUE = eINSTANCE.getAnnotation__GetReferencedValue();
+
+		/**
+		 * The meta object literal for the '<em><b>Set Referenced Value</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation ANNOTATION___SET_REFERENCED_VALUE__MEMBER = eINSTANCE.getAnnotation__SetReferencedValue__Member();
 
 		/**
 		 * The meta object literal for the '<em><b>Get Annotated Element</b></em>' operation.
@@ -14607,28 +14875,28 @@ public interface OmlPackage extends EPackage {
 		EReference PROPERTY_VALUE_ASSERTION__PROPERTY = eINSTANCE.getPropertyValueAssertion_Property();
 
 		/**
-		 * The meta object literal for the '<em><b>Literal Value</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Literal Values</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference PROPERTY_VALUE_ASSERTION__LITERAL_VALUE = eINSTANCE.getPropertyValueAssertion_LiteralValue();
+		EReference PROPERTY_VALUE_ASSERTION__LITERAL_VALUES = eINSTANCE.getPropertyValueAssertion_LiteralValues();
 
 		/**
-		 * The meta object literal for the '<em><b>Contained Value</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Contained Values</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference PROPERTY_VALUE_ASSERTION__CONTAINED_VALUE = eINSTANCE.getPropertyValueAssertion_ContainedValue();
+		EReference PROPERTY_VALUE_ASSERTION__CONTAINED_VALUES = eINSTANCE.getPropertyValueAssertion_ContainedValues();
 
 		/**
-		 * The meta object literal for the '<em><b>Referenced Value</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Referenced Values</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference PROPERTY_VALUE_ASSERTION__REFERENCED_VALUE = eINSTANCE.getPropertyValueAssertion_ReferencedValue();
+		EReference PROPERTY_VALUE_ASSERTION__REFERENCED_VALUES = eINSTANCE.getPropertyValueAssertion_ReferencedValues();
 
 		/**
 		 * The meta object literal for the '<em><b>Owning Instance</b></em>' container reference feature.
@@ -14639,12 +14907,68 @@ public interface OmlPackage extends EPackage {
 		EReference PROPERTY_VALUE_ASSERTION__OWNING_INSTANCE = eINSTANCE.getPropertyValueAssertion_OwningInstance();
 
 		/**
+		 * The meta object literal for the '<em><b>Get Values</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation PROPERTY_VALUE_ASSERTION___GET_VALUES = eINSTANCE.getPropertyValueAssertion__GetValues();
+
+		/**
 		 * The meta object literal for the '<em><b>Get Value</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EOperation PROPERTY_VALUE_ASSERTION___GET_VALUE = eINSTANCE.getPropertyValueAssertion__GetValue();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Literal Value</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation PROPERTY_VALUE_ASSERTION___GET_LITERAL_VALUE = eINSTANCE.getPropertyValueAssertion__GetLiteralValue();
+
+		/**
+		 * The meta object literal for the '<em><b>Set Literal Value</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation PROPERTY_VALUE_ASSERTION___SET_LITERAL_VALUE__LITERAL = eINSTANCE.getPropertyValueAssertion__SetLiteralValue__Literal();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Contained Value</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation PROPERTY_VALUE_ASSERTION___GET_CONTAINED_VALUE = eINSTANCE.getPropertyValueAssertion__GetContainedValue();
+
+		/**
+		 * The meta object literal for the '<em><b>Set Contained Value</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation PROPERTY_VALUE_ASSERTION___SET_CONTAINED_VALUE__ANONYMOUSINSTANCE = eINSTANCE.getPropertyValueAssertion__SetContainedValue__AnonymousInstance();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Referenced Value</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation PROPERTY_VALUE_ASSERTION___GET_REFERENCED_VALUE = eINSTANCE.getPropertyValueAssertion__GetReferencedValue();
+
+		/**
+		 * The meta object literal for the '<em><b>Set Referenced Value</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation PROPERTY_VALUE_ASSERTION___SET_REFERENCED_VALUE__NAMEDINSTANCE = eINSTANCE.getPropertyValueAssertion__SetReferencedValue__NamedInstance();
 
 		/**
 		 * The meta object literal for the '<em><b>Get Subject</b></em>' operation.

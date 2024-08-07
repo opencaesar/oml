@@ -27,8 +27,8 @@ import org.eclipse.emf.common.util.EList;
  *
  * <!-- begin-model-doc -->
  * Annotation is an element that specifies non-semantic information on an [=IdentifiedElement=].
- * An annotation is specified with an [=AnnotationProperty=] and [=Literal=] values or [=Member=] (referenced) values.
- * When no value is specified, the boolean literal `true` is assumed to be specified as a value.
+ * An annotation is specified with an [=AnnotationProperty=] and either [=Literal=] values or [=Member=] (referenced) values.
+ * When no value is specified, the boolean literal `true` is assumed to be the value.
  * <!-- end-model-doc -->
  *
  * <p>
@@ -36,8 +36,8 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  * <ul>
  *   <li>{@link io.opencaesar.oml.Annotation#getProperty <em>Property</em>}</li>
- *   <li>{@link io.opencaesar.oml.Annotation#getLiteralValue <em>Literal Value</em>}</li>
- *   <li>{@link io.opencaesar.oml.Annotation#getReferencedValue <em>Referenced Value</em>}</li>
+ *   <li>{@link io.opencaesar.oml.Annotation#getLiteralValues <em>Literal Values</em>}</li>
+ *   <li>{@link io.opencaesar.oml.Annotation#getReferencedValues <em>Referenced Values</em>}</li>
  *   <li>{@link io.opencaesar.oml.Annotation#getOwningElement <em>Owning Element</em>}</li>
  * </ul>
  *
@@ -72,34 +72,34 @@ public interface Annotation extends Element {
 	void setProperty(AnnotationProperty value);
 
 	/**
-	 * Returns the value of the '<em><b>Literal Value</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Literal Values</b></em>' containment reference list.
 	 * The list contents are of type {@link io.opencaesar.oml.Literal}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * The literal values specified by this annotation
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Literal Value</em>' containment reference list.
-	 * @see io.opencaesar.oml.OmlPackage#getAnnotation_LiteralValue()
+	 * @return the value of the '<em>Literal Values</em>' containment reference list.
+	 * @see io.opencaesar.oml.OmlPackage#getAnnotation_LiteralValues()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<Literal> getLiteralValue();
+	EList<Literal> getLiteralValues();
 
 	/**
-	 * Returns the value of the '<em><b>Referenced Value</b></em>' reference list.
+	 * Returns the value of the '<em><b>Referenced Values</b></em>' reference list.
 	 * The list contents are of type {@link io.opencaesar.oml.Member}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * The referenced values (iris of members) specified by this annotation
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Referenced Value</em>' reference list.
-	 * @see io.opencaesar.oml.OmlPackage#getAnnotation_ReferencedValue()
+	 * @return the value of the '<em>Referenced Values</em>' reference list.
+	 * @see io.opencaesar.oml.OmlPackage#getAnnotation_ReferencedValues()
 	 * @model
 	 * @generated
 	 */
-	EList<Member> getReferencedValue();
+	EList<Member> getReferencedValues();
 
 	/**
 	 * Returns the value of the '<em><b>Owning Element</b></em>' container reference.
@@ -137,7 +137,62 @@ public interface Annotation extends Element {
 	 * @model kind="operation" unique="false"
 	 * @generated
 	 */
-	EList<Element> getValue();
+	EList<Element> getValues();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Gets the first value of the annotation
+	 * <!-- end-model-doc -->
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
+	Element getValue();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Gets the first literal value
+	 * <!-- end-model-doc -->
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
+	Literal getLiteralValue();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Sets the first literal value
+	 * <!-- end-model-doc -->
+	 * @model valueUnique="false"
+	 * @generated
+	 */
+	void setLiteralValue(Literal value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Gets the first referenced value
+	 * <!-- end-model-doc -->
+	 * @model kind="operation" unique="false"
+	 * @generated
+	 */
+	Member getReferencedValue();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Sets the first eferenced value
+	 * <!-- end-model-doc -->
+	 * @model valueUnique="false"
+	 * @generated
+	 */
+	void setReferencedValue(Member value);
 
 	/**
 	 * <!-- begin-user-doc -->

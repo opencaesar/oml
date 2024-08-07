@@ -155,7 +155,7 @@ public final class OmlSearch extends OmlIndex {
      */
     public static Set<Element> findAnnotationValues(IdentifiedElement element, AnnotationProperty property, Set<Resource> scope) {
         return findAnnotations(element, property, scope)
-            .flatMap(a -> a.getValue().stream())
+            .flatMap(a -> a.getValues().stream())
             .collect(Collectors.toCollection(LinkedHashSet::new));
     }
     
@@ -182,8 +182,8 @@ public final class OmlSearch extends OmlIndex {
      */
     public static Literal findAnnotationLiteralValue(IdentifiedElement element, AnnotationProperty property, Set<Resource> scope) {
         return findAnnotations(element, property, scope)
-                .filter(a -> a.getLiteralValue() != null)
-                .flatMap(a -> a.getLiteralValue().stream())
+                .filter(a -> !a.getLiteralValues().isEmpty())
+                .flatMap(a -> a.getLiteralValues().stream())
 	            .findFirst()
 	            .orElse(null);
     }
@@ -211,8 +211,8 @@ public final class OmlSearch extends OmlIndex {
      */
     public static Member findAnnotationReferencedValue(IdentifiedElement element, AnnotationProperty property, Set<Resource> scope) {
         return findAnnotations(element, property, scope)
-            .filter(a -> a.getReferencedValue() != null)
-            .flatMap(a -> a.getReferencedValue().stream())
+            .filter(a -> !a.getReferencedValues().isEmpty())
+            .flatMap(a -> a.getReferencedValues().stream())
             .findFirst()
             .orElse(null);
     }
@@ -1675,7 +1675,7 @@ public final class OmlSearch extends OmlIndex {
         // check property value assertions
         targets.addAll(findPropertyValueAssertionsWithSubject(source, scope).stream()
         		.filter(a -> a.getProperty() instanceof Relation)
-                .flatMap(a -> a.getReferencedValue().stream())
+                .flatMap(a -> a.getReferencedValues().stream())
                 .collect(Collectors.toCollection(LinkedHashSet::new)));
         // check relation instances
         if (source instanceof NamedInstance) {
@@ -1713,7 +1713,7 @@ public final class OmlSearch extends OmlIndex {
         targets.addAll(findPropertyValueAssertionsWithSubject(source, scope).stream()
                 .filter(a -> a.getProperty() instanceof Relation)
                 .filter(a -> subRelations.contains(a.getProperty()))
-                .flatMap(a -> a.getReferencedValue().stream())
+                .flatMap(a -> a.getReferencedValues().stream())
                 .collect(Collectors.toCollection(LinkedHashSet::new)));
         // look in relation instances
         if (relation instanceof ForwardRelation) {
@@ -1825,7 +1825,7 @@ public final class OmlSearch extends OmlIndex {
     public static Set<Element> findPropertyValues(Instance instance, SemanticProperty property, Set<Resource> scope) {
         return findPropertyValueAssertionsWithSubject(instance, scope).stream()
             .filter(a -> a.getProperty() == property)
-            .flatMap(a -> a.getValue().stream())
+            .flatMap(a -> a.getValues().stream())
             .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
@@ -2111,14 +2111,14 @@ public final class OmlSearch extends OmlIndex {
     	Set<AnonymousRelationInstance> instances = new HashSet<>();
     	
     	instances.addAll(findPropertyValueAssertionsWithProperty(entity.getForwardRelation(), scope).stream()
-        	.flatMap(a -> a.getContainedValue().stream())
+        	.flatMap(a -> a.getContainedValues().stream())
         	.filter(v -> v instanceof AnonymousRelationInstance)
         	.map(v -> (AnonymousRelationInstance)v)
         	.collect(Collectors.toSet()));
         
     	if (entity.getReverseRelation() != null) {
         	instances.addAll(findPropertyValueAssertionsWithProperty(entity.getReverseRelation(), scope).stream()
-                	.flatMap(a -> a.getContainedValue().stream())
+                	.flatMap(a -> a.getContainedValues().stream())
                 	.filter(v -> v instanceof AnonymousRelationInstance)
                 	.map(v -> (AnonymousRelationInstance)v)
                 	.collect(Collectors.toSet()));
