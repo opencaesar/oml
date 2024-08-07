@@ -753,11 +753,7 @@ public final class OmlValidator2 {
      */
     boolean validateTypePredicateAsConsequent(TypePredicate object, DiagnosticChain diagnostics, Map<Object, Object> context) {
         if (object.getConsequentRule() != null) {
-	       if (object.getType() instanceof Entity) {
-	            return report(Diagnostic.ERROR, diagnostics, object,
-	                "Entity "+object.getType().getAbbreviatedIri()+" cannot be used as a consequent predicate", 
-	                OmlPackage.Literals.TYPE_PREDICATE__TYPE);
-	        } else if (object.getType() instanceof Scalar) {
+	       if (object.getType() instanceof Scalar) {
 	            return report(Diagnostic.ERROR, diagnostics, object,
 	                    "Scalar "+object.getType().getAbbreviatedIri()+" cannot be used as a consequent predicate", 
 	                    OmlPackage.Literals.TYPE_PREDICATE__TYPE);
