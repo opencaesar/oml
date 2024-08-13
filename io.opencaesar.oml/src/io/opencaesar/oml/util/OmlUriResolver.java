@@ -134,6 +134,23 @@ final class OmlUriResolver {
 	}
 	
 	/**
+	 * Resolves the given logical IRI in context of the given resource 
+	 * 
+	 * @param contextResource The resource that is the context of resolution
+	 * @param iri The logical IRI to resolve
+	 * @return The resolved physical URI
+	 */
+	public synchronized URI resolveUri(Resource contextResource, String iri) {
+		URI resolvedUri = resolveUri(contextResource.getURI(), iri);
+		
+		if (resolvedUri == null) {
+			resolvedUri = resolveFromResourceSet(contextResource.getResourceSet(), iri);
+		}
+		
+		return resolvedUri;
+	}
+
+	/**
 	 * Resolves the given logical IRI in context of the given physical URI 
 	 * 
 	 * @param contextURI The URI that is the context of resolution
@@ -162,31 +179,6 @@ final class OmlUriResolver {
 		return resolvedUri;
 	}
 
-	/**
-	 * Resolves the given logical IRI in context of the given resource 
-	 * 
-	 * @param contextResource The resource that is the context of resolution
-	 * @param iri The logical IRI to resolve
-	 * @return The resolved physical URI
-	 */
-	public synchronized URI resolveUri(Resource contextResource, String iri) {
-		URI resolvedUri = resolveUri(contextResource.getURI(), iri);
-		
-		if (resolvedUri == null) {
-			ResourceSet rs = contextResource.getResourceSet();
-			if (rs.getLoadOptions().get(OmlConstants.RESOLVE_IRI_USING_RESOURCE_SET) == Boolean.TRUE) {
-				resolvedUri = resolveFromResourceSet(rs, iri);
-			}
-		}
-		
-		return resolvedUri;
-	}
-
-	private URI resolveFromResourceSet(ResourceSet rs, String iri) {
-		Ontology ontology = OmlRead.getOntologyByIri(rs, iri);
-		return (ontology != null) ? ontology.eResource().getURI() : null;
-	}
-	
 	private URI resolveFromCatalog(URI folderUri, String iri) {
 		OmlCatalog catalog = findCatalog(folderUri);
 		if (catalog == null) {
@@ -214,7 +206,17 @@ final class OmlUriResolver {
 		return exists(resolved) ? resolved : null;
 	}
 	
-   public synchronized Set<URI> getResolvedUris(Resource contextResource) {
+	private URI resolveFromResourceSet(ResourceSet rs, String iri) {
+		if (rs.getLoadOptions().get(OmlConstants.RESOLVE_IRI_USING_RESOURCE_SET) == Boolean.TRUE) {
+			Ontology ontology = OmlRead.getOntologyByIri(rs, iri);
+			if (ontology != null) {
+				return ontology.eResource().getURI();
+			}
+		}
+		return null;
+	}
+	
+	public synchronized Set<URI> getResolvedUris(Resource contextResource) {
 		if (contextResource == null) {
 			return Collections.emptySet();
 		}

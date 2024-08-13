@@ -922,7 +922,7 @@ public final class OmlValidator2 {
 		
 		if (!domains.stream().allMatch(d -> allTypes.contains(d))) {
 			return report(Diagnostic.WARNING, diagnostics, object,
-				"The subject of the assertion is not already in the domain of "+property.getAbbreviatedIri(),
+				"The subject of the assertion is not assereted to be in the domain(s) of "+property.getAbbreviatedIri(),
 				OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__PROPERTY);
 		}
 		return true;
@@ -960,14 +960,14 @@ public final class OmlValidator2 {
 				final Set<Entity> allTypes = cache.getAllTypes(instance);
 				if (!ranges.stream().allMatch(d -> allTypes.contains(d))) {
 					return report(Diagnostic.WARNING, diagnostics, object,
-						instance.getAbbreviatedIri()+" is not asserted to be in the range of "+property.getAbbreviatedIri(),
+						instance.getAbbreviatedIri()+" is not asserted to be in the range(s) of "+property.getAbbreviatedIri(),
 						OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__REFERENCED_VALUES);
 				}
 			} else if (theObject instanceof AnonymousInstance) {
 				final Set<Entity> allTypes = cache.getAllTypes((Instance)theObject);
 				if (!ranges.stream().allMatch(d -> allTypes.contains(d))) {
 					return report(Diagnostic.WARNING, diagnostics, object,
-						"The object of the assertion is not asserted to be in the range of "+property.getAbbreviatedIri(),
+						"The object of the assertion is not asserted to be in the range(s) of "+property.getAbbreviatedIri(),
 						OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__CONTAINED_VALUES);
 				}
 			} else {
@@ -975,7 +975,7 @@ public final class OmlValidator2 {
 				final Set<Scalar> allTypes = cache.getAllTypes(literal);
 				if (!ranges.stream().allMatch(d -> allTypes.contains(d))) {
 					return report(Diagnostic.WARNING, diagnostics, object,
-						literal.getLexicalValue()+" is not asserted to be in the range of "+property.getAbbreviatedIri(),
+						literal.getLexicalValue()+" is not asserted to be in the range(s) of "+property.getAbbreviatedIri(),
 						OmlPackage.Literals.PROPERTY_VALUE_ASSERTION__LITERAL_VALUES);
 				}
 			}

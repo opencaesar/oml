@@ -251,6 +251,9 @@ public class AnnotationImpl extends ElementImpl implements Annotation {
 			if (_not_1) {
 				_xifexpression_1 = ECollections.<Element>unmodifiableEList(this.getReferencedValues());
 			}
+			else {
+				return ECollections.<Element>emptyEList();
+			}
 			_xifexpression = _xifexpression_1;
 		}
 		return _xifexpression;
