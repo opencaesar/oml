@@ -7,7 +7,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  * 
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *	  http://www.apache.org/licenses/LICENSE-2.0
  * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -35,21 +35,21 @@ import io.opencaesar.oml.OmlPackage;
  */
 public final class OmlFactory2 {
 
-    /**
-     * The singleton factory instance
-     */
-    public static OmlFactory2 INSTANCE = new OmlFactory2();
+	/**
+	 * The singleton factory instance
+	 */
+	public static OmlFactory2 INSTANCE = new OmlFactory2();
 
-    private OmlFactory2() {
-    }
+	private OmlFactory2() {
+	}
 
-    /**
-     * Creates a new Oml object given a Java type
-     * 
-     * @param type The Java type of the Oml object
-     * @return A new object that is an instance of the given type
-     */
-    public <T extends Element> T create(final Class<T> type) {
+	/**
+	 * Creates a new Oml object given a Java type
+	 * 
+	 * @param type The Java type of the Oml object
+	 * @return A new object that is an instance of the given type
+	 */
+	public <T extends Element> T create(final Class<T> type) {
 		Element element = null;
 
 		Optional<EClass> possibleEClass = OmlPackage.eINSTANCE.getEClassifiers().stream()
@@ -65,5 +65,5 @@ public final class OmlFactory2 {
 		}
 
 		return type.cast(element);
-    }
+	}
 }

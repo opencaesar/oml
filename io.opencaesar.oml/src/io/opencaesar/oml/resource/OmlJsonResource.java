@@ -7,7 +7,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  * 
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *	  http://www.apache.org/licenses/LICENSE-2.0
  * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -43,7 +43,7 @@ import io.opencaesar.oml.OmlPackage;
  */
 public class OmlJsonResource extends JsonResource {
 
-    /**
+	/**
 	 * @param uri the URI of the resource
 	 */
 	public OmlJsonResource(URI uri) {
@@ -52,39 +52,39 @@ public class OmlJsonResource extends JsonResource {
 
 	/**
 	 * @param uri the URI of the resource
-     * @param useCatalog whether to use the catalog to (de)resolve cross references
+	 * @param useCatalog whether to use the catalog to (de)resolve cross references
 	 */
 	public OmlJsonResource(URI uri, boolean useCatalog) {
 		super(uri);
-        
+		
 		// keep the id cache in sync
-    	setTrackingModification(true);
+		setTrackingModification(true);
 
-    	setObjectMapper(setupDefaultMapper(useCatalog));
+		setObjectMapper(setupDefaultMapper(useCatalog));
 	}
 
 	@Override
 	protected void attachedHelper(final EObject eObject) {
-        setID(eObject, EcoreUtil.getID(eObject));
+		setID(eObject, EcoreUtil.getID(eObject));
 		super.attachedHelper(eObject);
 	}
 	   
-    @Override
+	@Override
 	protected Adapter createModificationTrackingAdapter() {
-        return new ResourceImpl.ModificationTrackingAdapter() {
-        	@Override
-        	public void notifyChanged(Notification notification) {
-        		super.notifyChanged(notification);
-        		if (notification.getFeature() == OmlPackage.Literals.MEMBER__NAME) {
-        			if (notification.getOldValue() != null) {
-        				getIDToEObjectMap().remove(notification.getOldValue());
-        			}
+		return new ResourceImpl.ModificationTrackingAdapter() {
+			@Override
+			public void notifyChanged(Notification notification) {
+				super.notifyChanged(notification);
+				if (notification.getFeature() == OmlPackage.Literals.MEMBER__NAME) {
+					if (notification.getOldValue() != null) {
+						getIDToEObjectMap().remove(notification.getOldValue());
+					}
 					if (notification.getNewValue() != null) {
 						getIDToEObjectMap().put((String)notification.getNewValue(), (EObject)notification.getNotifier());
-                    }
-                }
-            }
-        };
+					}
+				}
+			}
+		};
 	}
 
 	private ObjectMapper setupDefaultMapper(boolean useCatalog) {

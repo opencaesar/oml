@@ -7,7 +7,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  * 
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *	  http://www.apache.org/licenses/LICENSE-2.0
  * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -42,63 +42,63 @@ import io.opencaesar.oml.Relation;
  */
 public class OmlDelete {
 	
-    /**
-     * Deletes the given element only
-     * 
-     * @param element the given element to delete
-     */
-    public static void delete(Element element) {
-        EcoreUtil.remove(element);
-    }
-
-    /**
-     * Deletes the given element and recursively all its referencing elements
-     * 
-     * @param element the given element to delete
-     */
-    public static void recursiveDelete(Element element) {
-        var referencers = findReferencersToDelete(element);
-        for (var referencer : referencers) {
-        	delete(referencer);
-        }
-        delete(element);
-    }
-
-    /*
-     * Returns a set of referencing elements that should be deleted if the given element is deleted
-     * 
-     * @param element the element to be deleted
-     * @return the set of elements that also should be deleted if the given element is to be deleted
-     */
-	private static Set<Element> findReferencersToDelete(Element element) {
-        final Set<Element> referencers = new LinkedHashSet<>();
-        for (Element referencer : OmlSearch.findInverseReferencers(element, null, Element.class, null)) {
-            if (referencer instanceof Member) {
-            	var member = (Member) referencer;
-            	if (!member.isRef()) {
-            		referencers.addAll(findReferencersToDelete(member));
-            	}
-            }
-        	referencers.add((Element)referencer);
-        }
-        return referencers;
+	/**
+	 * Deletes the given element only
+	 * 
+	 * @param element the given element to delete
+	 */
+	public static void delete(Element element) {
+		EcoreUtil.remove(element);
 	}
 
-    /**
-     * Determines all the elements that need to be deleted given an instance and a list of cascade rules
-     * 
-     * The elements are returned in a tree of cascade results specifying which elements are to be 
-     * deleted based on which of the cascade rules. This can be used in the UI to show the user
-     * the impact of deleting the element.
-     * 
-     * This function does not actually delete the elements. To do that, subsequently call 
-     * {@link OmlDelete#recursiveDelete(CascadeResult)} passing it the returned cascade result.
-     * 
-     * @param instance The given instance to delete
-     * @param cascadeRules A list of cascade rules
-     * @return A root of a tree of cascade results
-     */
-    public static CascadeResult cascadeDelete(Instance instance, List<CascadeRule> cascadeRules) {
+	/**
+	 * Deletes the given element and recursively all its referencing elements
+	 * 
+	 * @param element the given element to delete
+	 */
+	public static void recursiveDelete(Element element) {
+		var referencers = findReferencersToDelete(element);
+		for (var referencer : referencers) {
+			delete(referencer);
+		}
+		delete(element);
+	}
+
+	/*
+	 * Returns a set of referencing elements that should be deleted if the given element is deleted
+	 * 
+	 * @param element the element to be deleted
+	 * @return the set of elements that also should be deleted if the given element is to be deleted
+	 */
+	private static Set<Element> findReferencersToDelete(Element element) {
+		final Set<Element> referencers = new LinkedHashSet<>();
+		for (Element referencer : OmlSearch.findInverseReferencers(element, null, Element.class, null)) {
+			if (referencer instanceof Member) {
+				var member = (Member) referencer;
+				if (!member.isRef()) {
+					referencers.addAll(findReferencersToDelete(member));
+				}
+			}
+			referencers.add((Element)referencer);
+		}
+		return referencers;
+	}
+
+	/**
+	 * Determines all the elements that need to be deleted given an instance and a list of cascade rules
+	 * 
+	 * The elements are returned in a tree of cascade results specifying which elements are to be 
+	 * deleted based on which of the cascade rules. This can be used in the UI to show the user
+	 * the impact of deleting the element.
+	 * 
+	 * This function does not actually delete the elements. To do that, subsequently call 
+	 * {@link OmlDelete#recursiveDelete(CascadeResult)} passing it the returned cascade result.
+	 * 
+	 * @param instance The given instance to delete
+	 * @param cascadeRules A list of cascade rules
+	 * @return A root of a tree of cascade results
+	 */
+	public static CascadeResult cascadeDelete(Instance instance, List<CascadeRule> cascadeRules) {
 		var deleting = new HashSet<Instance>(Set.of(instance));
 		var rootResult = new CascadeResult(instance);
 		var queue = new ArrayDeque<CascadeResult>(Set.of(rootResult));
@@ -133,12 +133,12 @@ public class OmlDelete {
 		return rootResult;
 	}
 
-    /**
-     * Deletes the given cascade result recursively
-     * 
-     * @param rootResult the given cascade rule to delete
-     */
-    public static void recursiveDelete(CascadeResult rootResult) {
+	/**
+	 * Deletes the given cascade result recursively
+	 * 
+	 * @param rootResult the given cascade rule to delete
+	 */
+	public static void recursiveDelete(CascadeResult rootResult) {
 		var queue = new ArrayDeque<CascadeResult>(Set.of(rootResult));
 		while (!queue.isEmpty()) {
 			var result = queue.poll();
@@ -147,8 +147,8 @@ public class OmlDelete {
 				queue.addAll(nested);
 			}
 		}
-    }
-    
+	}
+	
 	/**
 	 * The enumeration of Cascade direction 
 	 */
@@ -166,17 +166,17 @@ public class OmlDelete {
 	/**
 	 * A cascade delete rule
 	 * 
-     * a) If direction is <code>SOURCE_TO_TARGET</code>, and
-     * 	the instance to be deleted matches the given source type, 
-     *  the instance to be deleted is related to a target instance with the given relation, 
-     *  the target instance matches the given target type,
-     *  delete the target instance;
-     *      
-     * a) If direction is <code>TARGET_TO_SOURCE</code>, and
-     * 	the instance to be deleted matches the given target type, 
-     *  the instance to be deleted is related to a source instance with the given relation, 
-     *  the source instance matches the given source type,
-     *  delete the source instance;
+	 * a) If direction is <code>SOURCE_TO_TARGET</code>, and
+	 * 	the instance to be deleted matches the given source type, 
+	 *  the instance to be deleted is related to a target instance with the given relation, 
+	 *  the target instance matches the given target type,
+	 *  delete the target instance;
+	 *	  
+	 * a) If direction is <code>TARGET_TO_SOURCE</code>, and
+	 * 	the instance to be deleted matches the given target type, 
+	 *  the instance to be deleted is related to a source instance with the given relation, 
+	 *  the source instance matches the given source type,
+	 *  delete the source instance;
 	 */
 	public static class CascadeRule {
 		/**

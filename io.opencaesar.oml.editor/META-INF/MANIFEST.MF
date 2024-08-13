@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: io.opencaesar.oml.editor;singleton:=true
 Automatic-Module-Name: io.opencaesar.oml.editor
-Bundle-Version: 2.9.0
+Bundle-Version: 2.10.0
 Bundle-ClassPath: .
 Bundle-Activator: io.opencaesar.oml.presentation.OmlEditorPlugin$Implementation
 Bundle-Vendor: %providerName

@@ -1,32 +1,32 @@
 /*
  * This Ecore package specifies the syntax (metamodel) of the Ontological Modeling Language. OML models are instances of 
- * this metamodel and can be manipulated using its API.     
+ * this metamodel and can be manipulated using its API.	 
  */
 @Ecore(
-    nsPrefix="oml",
-    nsURI="http://opencaesar.io/oml"
+	nsPrefix="oml",
+	nsURI="http://opencaesar.io/oml"
 )
 @GenModel(
-    copyrightText="\nCopyright 2019-2022 California Institute of Technology (\"Caltech\").\nU.S. Government sponsorship acknowledged.\n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\n     http://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.\n",
-    modelDirectory="/io.opencaesar.oml/src-gen",
-    editDirectory="/io.opencaesar.oml.edit/src-gen",
-    //editorDirectory="/io.opencaesar.oml.editor/src-gen",
-    importerID="org.eclipse.xsd.ecore.importer",
-    complianceLevel="17.0"
+	copyrightText="\nCopyright 2019-2022 California Institute of Technology (\"Caltech\").\nU.S. Government sponsorship acknowledged.\n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\n	 http://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.\n",
+	modelDirectory="/io.opencaesar.oml/src-gen",
+	editDirectory="/io.opencaesar.oml.edit/src-gen",
+	//editorDirectory="/io.opencaesar.oml.editor/src-gen",
+	importerID="org.eclipse.xsd.ecore.importer",
+	complianceLevel="17.0"
 )
 @BikeshedHeadings(
-    Elements="",
-    Literals="",
-    Vocabularies="",
-    Types="",
-    Properties="",
-    Relations="",
-    Predicates="",
-    Axioms="",
-    Descriptions="",
-    Instances="",
-    Assertions="",
-    Enumerations=""
+	Elements="",
+	Literals="",
+	Vocabularies="",
+	Types="",
+	Properties="",
+	Relations="",
+	Predicates="",
+	Axioms="",
+	Descriptions="",
+	Instances="",
+	Assertions="",
+	Enumerations=""
 )
 @Bikeshed(heading="Abstract-Syntax")
 package io.opencaesar.oml
@@ -51,24 +51,24 @@ annotation "https://tabatkins.github.io/bikeshed/headings" as BikeshedHeadings
  */
 @Bikeshed(heading="Elements")
 abstract class Element {
-    /*
-     * Gets the ontology that defines this element
-     */
-    op Ontology getOntology() {
-        var EObject current = this
-        while (current !== null && !(current instanceof Ontology)) {
-            current = current.eContainer()
-        }
-        return current as Ontology
-    }
-    /*
-     * Validates this element by extra validation rules
-     * @param diagnostics validation error diagnostics
-     * @param context object-to-object map used in producing messages 
-     */
-    op boolean extraValidate(EDiagnosticChain diagnostics, EMap<Object, Object>context) {
-        return OmlValidator2.INSTANCE.run(this, diagnostics, context)
-    }
+	/*
+	 * Gets the ontology that defines this element
+	 */
+	op Ontology getOntology() {
+		var EObject current = this
+		while (current !== null && !(current instanceof Ontology)) {
+			current = current.eContainer()
+		}
+		return current as Ontology
+	}
+	/*
+	 * Validates this element by extra validation rules
+	 * @param diagnostics validation error diagnostics
+	 * @param context object-to-object map used in producing messages 
+	 */
+	op boolean extraValidate(EDiagnosticChain diagnostics, EMap<Object, Object>context) {
+		return OmlValidator2.INSTANCE.run(this, diagnostics, context)
+	}
 }
 
 ////////////////////////////////////////
@@ -82,75 +82,75 @@ abstract class Element {
  */
 @Bikeshed(heading="Elements")
 class Annotation extends Element {
-    /*
-     * The annotation property specified by this annotation
-     */
-    refers AnnotationProperty[1] property
-    /*
-     * The literal values specified by this annotation
-     */
-    contains Literal[*] literalValues
-    /*
-     * The referenced values (iris of members) specified by this annotation
-     */
-    refers Member[*] referencedValues
-    /*
-     * The identified element that owns this annotation
-     */
-    container IdentifiedElement[?] owningElement opposite ownedAnnotations
-    /*
-     * Gets the values of the annotation
-     */
-    op Element[*] getValues() {
-    	if (!literalValues.empty)
-    		literalValues.unmodifiableEList
-    	else if (!referencedValues.empty)
-    		referencedValues.unmodifiableEList
-    }
-    /*
-     * Gets the first value of the annotation
-     */
-    op Element getValue() {
-    	if (!literalValues.empty)
-    		getLiteralValue()
-    	else if (!referencedValues.empty)
-    		getReferencedValue()
-    }
-    /*
-     * Gets the first literal value
-     */
-    op Literal getLiteralValue() {
-    	return if (!literalValues.empty) literalValues.get(0)
-    }
-    /*
-     * Sets the first literal value
-     */
-    op void setLiteralValue(Literal value) {
+	/*
+	 * The annotation property specified by this annotation
+	 */
+	refers AnnotationProperty[1] property
+	/*
+	 * The literal values specified by this annotation
+	 */
+	contains Literal[*] literalValues
+	/*
+	 * The referenced values (iris of members) specified by this annotation
+	 */
+	refers Member[*] referencedValues
+	/*
+	 * The identified element that owns this annotation
+	 */
+	container IdentifiedElement[?] owningElement opposite ownedAnnotations
+	/*
+	 * Gets the values of the annotation
+	 */
+	op Element[*] getValues() {
+		if (!literalValues.empty)
+			literalValues.unmodifiableEList
+		else if (!referencedValues.empty)
+			referencedValues.unmodifiableEList
+	}
+	/*
+	 * Gets the first value of the annotation
+	 */
+	op Element getValue() {
+		if (!literalValues.empty)
+			getLiteralValue()
+		else if (!referencedValues.empty)
+			getReferencedValue()
+	}
+	/*
+	 * Gets the first literal value
+	 */
+	op Literal getLiteralValue() {
+		return if (!literalValues.empty) literalValues.get(0)
+	}
+	/*
+	 * Sets the first literal value
+	 */
+	op void setLiteralValue(Literal value) {
 		literalValues.clear()
 		literalValues.add(value)
-    }
-    /*
-     * Gets the first referenced value
-     */
-    op Member getReferencedValue() {
-    	return if (!referencedValues.empty) referencedValues.get(0)
-    }
-    /*
-     * Sets the first eferenced value
-     */
-    op void setReferencedValue(Member value) {
+	}
+	/*
+	 * Gets the first referenced value
+	 */
+	op Member getReferencedValue() {
+		return if (!referencedValues.empty) referencedValues.get(0)
+	}
+	/*
+	 * Sets the first eferenced value
+	 */
+	op void setReferencedValue(Member value) {
 		referencedValues.clear()
 		referencedValues.add(value)
-    }
-    /*
-     * Gets the identified element annotated by this annotation
-     */
-    op IdentifiedElement getAnnotatedElement() {
-        if (owningElement instanceof Member) {
-            return (owningElement as Member).resolve()
-        }
-        return owningElement
-    }
+	}
+	/*
+	 * Gets the identified element annotated by this annotation
+	 */
+	op IdentifiedElement getAnnotatedElement() {
+		if (owningElement instanceof Member) {
+			return (owningElement as Member).resolve()
+		}
+		return owningElement
+	}
 }
 
 /*
@@ -159,14 +159,14 @@ class Annotation extends Element {
  */
 @Bikeshed(heading="Elements")
 abstract class IdentifiedElement extends Element {
-    /*
-     * The set of annotations directly owned by this element
-     */
-    contains Annotation[*] ownedAnnotations opposite owningElement
-    /*
-     * Gets the IRI of this element 
-     */ 
-    op String getIri()
+	/*
+	 * The set of annotations directly owned by this element
+	 */
+	contains Annotation[*] ownedAnnotations opposite owningElement
+	/*
+	 * Gets the IRI of this element 
+	 */ 
+	op String getIri()
 }
 
 /*
@@ -185,52 +185,52 @@ class Import extends Element {
 	 * The kind of this import
 	 */
 	ImportKind[1] kind
-    /*
-     * The namespace of the imported ontology
-     */
-    Namespace[1] namespace
-    /*
-     * The (locally unique) namespace prefix of the imported ontology
-     */
-    ID[?] prefix
-    /*
-     * The ontology that owns this import
-     */
-    container Ontology[1] owningOntology opposite ownedImports
-    /*
-     * Gets the imported ontology's IRI
-     */
-    op String getIri() {
-    	if (namespace === null) {
-    		return null
-    	}
-     	var i = namespace.lastIndexOf('#')
-    	if (i === -1) {
-    		i = namespace.lastIndexOf('/')
-    	}
-    	if (i === -1) {
-        	return namespace
-       	} else {
-       		return namespace.substring(0, i)
-       	}
-    }
-    /*
-     * Gets the imported ontology's namespace's separator character [=SeparatorKinds=]
-     */
-    op SeparatorKind getSeparator() {
-     	if (namespace === null) {
-    		return null
-    	}
-    	var i = namespace.lastIndexOf('#')
-    	if (i === -1) {
-    		i = namespace.lastIndexOf('/')
-    	}
-    	if (i === -1) {
-       		return null
-       	} else {
-        	return SeparatorKind.get(namespace.substring(i, i+1))
-       	}
-    }
+	/*
+	 * The namespace of the imported ontology
+	 */
+	Namespace[1] namespace
+	/*
+	 * The (locally unique) namespace prefix of the imported ontology
+	 */
+	ID[?] prefix
+	/*
+	 * The ontology that owns this import
+	 */
+	container Ontology[1] owningOntology opposite ownedImports
+	/*
+	 * Gets the imported ontology's IRI
+	 */
+	op String getIri() {
+		if (namespace === null) {
+			return null
+		}
+	 	var i = namespace.lastIndexOf('#')
+		if (i === -1) {
+			i = namespace.lastIndexOf('/')
+		}
+		if (i === -1) {
+			return namespace
+	   	} else {
+	   		return namespace.substring(0, i)
+	   	}
+	}
+	/*
+	 * Gets the imported ontology's namespace's separator character [=SeparatorKinds=]
+	 */
+	op SeparatorKind getSeparator() {
+	 	if (namespace === null) {
+			return null
+		}
+		var i = namespace.lastIndexOf('#')
+		if (i === -1) {
+			i = namespace.lastIndexOf('/')
+		}
+		if (i === -1) {
+	   		return null
+	   	} else {
+			return SeparatorKind.get(namespace.substring(i, i+1))
+	   	}
+	}
 }
 
 /*
@@ -239,14 +239,14 @@ class Import extends Element {
  */
 @Bikeshed(heading="Instances")
 abstract class Instance extends Element {
-    /*
-     * The property value assertions owned by this instance
-     */
-    contains PropertyValueAssertion[*] ownedPropertyValues opposite owningInstance
-    /*
-     * Gets the instance's types
-     */
-    op Entity[] getTypes()
+	/*
+	 * The property value assertions owned by this instance
+	 */
+	contains PropertyValueAssertion[*] ownedPropertyValues opposite owningInstance
+	/*
+	 * Gets the instance's types
+	 */
+	op Entity[] getTypes()
 }
 
 /*
@@ -265,14 +265,14 @@ abstract class Axiom extends Element {
  */
 @Bikeshed(heading="Assertions")
 abstract class Assertion extends Element {
-    /**
-     * Gets the instance that is the subject of this assertion
-     */
-    op Instance getSubject()
-    /**
-     * Gets the elements that are the objects of this assertion
-     */
-    op Element[*] getObject()
+	/**
+	 * Gets the instance that is the subject of this assertion
+	 */
+	op Instance getSubject()
+	/**
+	 * Gets the elements that are the objects of this assertion
+	 */
+	op Element[*] getObject()
 }
 
 /*
@@ -281,14 +281,14 @@ abstract class Assertion extends Element {
  */
 @Bikeshed(heading="Predicates")
 abstract class Predicate extends Element {
-    /*
-     * The rule' antecedent that this predicate is owned by
-     */
-    container Rule[?] antecedentRule opposite antecedent
-    /*
-     * The rule' consequent that this predicate is owned by
-     */
-    container Rule[?] consequentRule opposite consequent
+	/*
+	 * The rule' antecedent that this predicate is owned by
+	 */
+	container Rule[?] antecedentRule opposite antecedent
+	/*
+	 * The rule' consequent that this predicate is owned by
+	 */
+	container Rule[?] consequentRule opposite consequent
 }
 
 /*
@@ -296,29 +296,29 @@ abstract class Predicate extends Element {
  */
 @Bikeshed(heading="Predicates")
 class Argument extends Element {
-    /*
-     * An optional variable specified by this argument
-     */
-    ID[?] variable
-    /*
-     * An optional literal specified by this argument
-     */
-    contains Literal[?] literal
-    /*
-     * An optional instance specified by this argument
-     */
-    refers NamedInstance[?] instance
-    /*
-     * Gets the value of the annotation
-     */
-    op Object getValue() {
-    	if (variable !== null)
-    		variable
-    	else if (literal !== null)
-    		literal
-    	else if (instance !== null)
-    		instance
-    }
+	/*
+	 * An optional variable specified by this argument
+	 */
+	ID[?] variable
+	/*
+	 * An optional literal specified by this argument
+	 */
+	contains Literal[?] literal
+	/*
+	 * An optional instance specified by this argument
+	 */
+	refers NamedInstance[?] instance
+	/*
+	 * Gets the value of the annotation
+	 */
+	op Object getValue() {
+		if (variable !== null)
+			variable
+		else if (literal !== null)
+			literal
+		else if (instance !== null)
+			instance
+	}
 }
 
 /*
@@ -327,25 +327,25 @@ class Argument extends Element {
 @Bikeshed(heading="Literals")
 abstract class Literal extends Element {
 	/*
-     * Gets the value of the given literal
+	 * Gets the value of the given literal
 	 */
-    op Object getValue()
-    /*
-     * Gets the string value of the given literal
-     */
-    op String getStringValue() {
-        return if (getValue() !== null) getValue().toString() else ""
-    }
-    /*
-     * Gets the lexical value of the given literal
-     */
-    op String getLexicalValue() {
-        return getStringValue()   
-    }
-    /*
-     * Gets the iri of the given literal's type
-     */
-    op String getTypeIri()
+	op Object getValue()
+	/*
+	 * Gets the string value of the given literal
+	 */
+	op String getStringValue() {
+		return if (getValue() !== null) getValue().toString() else ""
+	}
+	/*
+	 * Gets the lexical value of the given literal
+	 */
+	op String getLexicalValue() {
+		return getStringValue()   
+	}
+	/*
+	 * Gets the iri of the given literal's type
+	 */
+	op String getTypeIri()
 }
 
 ////////////////////////////////////////
@@ -359,52 +359,52 @@ abstract class Literal extends Element {
  */
 @Bikeshed(heading="Elements")
 abstract class Ontology extends IdentifiedElement {
-    /*
-     * The globally unique namespace of this ontology
-     */
-    Namespace[1] namespace
-    /*
-     * The prefix of this ontology's namespace
-     */
-    ID[1] prefix
-    /*
-     * The set of imports this ontology has to other ontologies
-     */
-    contains Import[*] ownedImports opposite owningOntology
-    /*
-     * Get the namespace's iri
-     */
-    op String getIri() {
-    	if (namespace === null) {
-    		return null
-    	}
-     	var i = namespace.indexOf('#')
-    	if (i === -1) {
-    		i = namespace.lastIndexOf('/')
-    	}
-    	if (i === -1) {
-        	return namespace
-       	} else {
-       		return namespace.substring(0, i)
-       	}
-    }
-    /*
-     * Get the namespace's separator char
-     */
-    op SeparatorKind getSeparator() {
-     	if (namespace === null) {
-    		return null
-    	}
-    	var i = namespace.indexOf('#')
-    	if (i === -1) {
-    		i = namespace.lastIndexOf('/')
-    	}
-    	if (i === -1) {
-       		return null
-       	} else {
-        	return SeparatorKind.get(namespace.substring(i, i+1))
-       	}
-    }
+	/*
+	 * The globally unique namespace of this ontology
+	 */
+	Namespace[1] namespace
+	/*
+	 * The prefix of this ontology's namespace
+	 */
+	ID[1] prefix
+	/*
+	 * The set of imports this ontology has to other ontologies
+	 */
+	contains Import[*] ownedImports opposite owningOntology
+	/*
+	 * Get the namespace's iri
+	 */
+	op String getIri() {
+		if (namespace === null) {
+			return null
+		}
+	 	var i = namespace.indexOf('#')
+		if (i === -1) {
+			i = namespace.lastIndexOf('/')
+		}
+		if (i === -1) {
+			return namespace
+	   	} else {
+	   		return namespace.substring(0, i)
+	   	}
+	}
+	/*
+	 * Get the namespace's separator char
+	 */
+	op SeparatorKind getSeparator() {
+	 	if (namespace === null) {
+			return null
+		}
+		var i = namespace.indexOf('#')
+		if (i === -1) {
+			i = namespace.lastIndexOf('/')
+		}
+		if (i === -1) {
+	   		return null
+	   	} else {
+			return SeparatorKind.get(namespace.substring(i, i+1))
+	   	}
+	}
 }
 
 /*
@@ -413,50 +413,50 @@ abstract class Ontology extends IdentifiedElement {
  */
 @Bikeshed(heading="Elements")
 abstract class Member extends IdentifiedElement {
-    /*
-     * A unique name for the member within its ontology
-     */
-    id ID[?] name
-    
-    /*
-     * Gets the Ref of this member
-     */
-    op Member[?] getRef()
-    /*
-     * Determines if the member is a ref to another member
-     */
-    op boolean isRef() {
-    	return getRef() !== null
-    }
-    /*
-     * Determines if the member is a ref to another member
-     */
-    op Member[1] resolve() {
-    	if (isRef()) {
-    		return getRef()
-    	}
-    	return this
-    }
-    /*
-     * Gets the IRI of this member
-     */
-    op String getIri() {
-    	val m = resolve()
-    	if (m.eIsProxy()) return (m as InternalEObject).eProxyURI().toString()
-        val ontology = m.ontology
-        val namespace = if (ontology !== null) ontology.namespace else SeparatorKind.HASH
-        return namespace + if (m.name !== null) m.name else ''
-    }
-    /*
-     * Gets the abbreviated IRI of this member
-     */
-    op String getAbbreviatedIri() {
-     	val m = resolve()
-    	if (m.eIsProxy()) return (m as InternalEObject).eProxyURI().toString()
-        val ontology = m.ontology
-        val prefix = if (ontology !== null) ontology.prefix  + ':' else ':'
-        return prefix + if (m.name !== null) m.name else ''
-    }
+	/*
+	 * A unique name for the member within its ontology
+	 */
+	id ID[?] name
+	
+	/*
+	 * Gets the Ref of this member
+	 */
+	op Member[?] getRef()
+	/*
+	 * Determines if the member is a ref to another member
+	 */
+	op boolean isRef() {
+		return getRef() !== null
+	}
+	/*
+	 * Determines if the member is a ref to another member
+	 */
+	op Member[1] resolve() {
+		if (isRef()) {
+			return getRef()
+		}
+		return this
+	}
+	/*
+	 * Gets the IRI of this member
+	 */
+	op String getIri() {
+		val m = resolve()
+		if (m.eIsProxy()) return (m as InternalEObject).eProxyURI().toString()
+		val ontology = m.ontology
+		val namespace = if (ontology !== null) ontology.namespace else SeparatorKind.HASH
+		return namespace + if (m.name !== null) m.name else ''
+	}
+	/*
+	 * Gets the abbreviated IRI of this member
+	 */
+	op String getAbbreviatedIri() {
+	 	val m = resolve()
+		if (m.eIsProxy()) return (m as InternalEObject).eProxyURI().toString()
+		val ontology = m.ontology
+		val prefix = if (ontology !== null) ontology.prefix  + ':' else ':'
+		return prefix + if (m.name !== null) m.name else ''
+	}
 }
 
 ////////////////////////////////////////
@@ -486,10 +486,10 @@ abstract class DescriptionBox extends Ontology {
  */
 @Bikeshed(heading="Vocabularies")
 class Vocabulary extends VocabularyBox {
-    /*
-     * The set of statements contained by this vocabulary
-     */
-    contains VocabularyStatement[*] ownedStatements opposite owningVocabulary
+	/*
+	 * The set of statements contained by this vocabulary
+	 */
+	contains VocabularyStatement[*] ownedStatements opposite owningVocabulary
 }
 
 /*
@@ -509,10 +509,10 @@ class VocabularyBundle extends VocabularyBox {
  */
 @Bikeshed(heading="Descriptions")
 class Description extends DescriptionBox {
-    /*
-     * The set of statements contained by this description
-     */
-    contains DescriptionStatement[*] ownedStatements opposite owningDescription
+	/*
+	 * The set of statements contained by this description
+	 */
+	contains DescriptionStatement[*] ownedStatements opposite owningDescription
 }
 
 /*
@@ -557,10 +557,10 @@ abstract class DescriptionMember extends Member {
  */
 @Bikeshed(heading="Vocabularies")
 abstract class VocabularyStatement extends Statement, VocabularyMember {
-    /*
-     * The vocabulary that owns this statement
-     */
-    container Vocabulary[1] owningVocabulary opposite ownedStatements
+	/*
+	 * The vocabulary that owns this statement
+	 */
+	container Vocabulary[1] owningVocabulary opposite ownedStatements
 }
 
 /*
@@ -568,10 +568,10 @@ abstract class VocabularyStatement extends Statement, VocabularyMember {
  */
 @Bikeshed(heading="Descriptions")
 abstract class DescriptionStatement extends Statement, DescriptionMember {
-    /*
-     * The description that owns this statement
-     */
-    container Description[1] owningDescription opposite ownedStatements
+	/*
+	 * The description that owns this statement
+	 */
+	container Description[1] owningDescription opposite ownedStatements
 }
 
 ////////////////////////////////////////
@@ -595,14 +595,14 @@ class Rule extends VocabularyStatement {
 	 * A ref to another rule
 	 */
 	refers Rule ref
-    /*
-     * The set of predicates that form the antecedent of this rule
-     */
-    contains Predicate[*] antecedent opposite antecedentRule
-    /*
-     * The predicate that is the consequent of this rule
-     */
-    contains Predicate[*] consequent opposite consequentRule
+	/*
+	 * The set of predicates that form the antecedent of this rule
+	 */
+	contains Predicate[*] antecedent opposite antecedentRule
+	/*
+	 * The predicate that is the consequent of this rule
+	 */
+	contains Predicate[*] consequent opposite consequentRule
 }
 
 /*
@@ -625,10 +625,10 @@ class BuiltIn extends VocabularyStatement {
  */
 @Bikeshed(heading="Vocabularies")
 abstract class SpecializableTerm extends Term, VocabularyStatement {
-    /*
-     * The specialization axioms owned by this term
-     */
-    contains SpecializationAxiom[*] ownedSpecializations opposite owningTerm
+	/*
+	 * The specialization axioms owned by this term
+	 */
+	contains SpecializationAxiom[*] ownedSpecializations opposite owningTerm
 }
 
 /*
@@ -657,46 +657,46 @@ abstract class Type extends SpecializableTerm {
  */
 @Bikeshed(heading="Relations")
 abstract class RelationBase extends SpecializableTerm {
-    /*
-     * The entities that represent the sources of this relation base
-     */
-    refers Entity[*] sources
-    /*
-     * The entities that represent the targets of this relation base
-     */
-    refers Entity[*] targets
-    /*
-     * The optional reverse relation of this relation base
-     */
-    contains ReverseRelation[?] reverseRelation opposite relationBase
-    /*
-     * Whether this relation base is functional (i.e., {@code A -> B and A->C => B=C})
-     */
-    boolean functional
-    /*
-     * Whether this relation base is inverse functional (i.e., {@code B->A and C->A => B=C})
-     */
-    boolean inverseFunctional
-    /*
-     * Whether this relation base is symmetric (i.e., {@code A->B => B->A})
-     */
-    boolean symmetric
-    /*
-     * Whether this relation base is asymmetric (i.e., {@code A->B => !(B->A)})
-     */
-    boolean asymmetric
-    /*
-     * Whether this relation base is reflexive (i.e., {@code A => A->A})
-     */
-    boolean reflexive
-    /*
-     * Whether this relation base is irreflexive (i.e., {@code A => !(A->A)})
-     */
-    boolean irreflexive
-    /*
-     * Whether this relation base is transitive (i.e., {@code A->B and B->C => A->C})
-     */
-    boolean transitive
+	/*
+	 * The entities that represent the sources of this relation base
+	 */
+	refers Entity[*] sources
+	/*
+	 * The entities that represent the targets of this relation base
+	 */
+	refers Entity[*] targets
+	/*
+	 * The optional reverse relation of this relation base
+	 */
+	contains ReverseRelation[?] reverseRelation opposite relationBase
+	/*
+	 * Whether this relation base is functional (i.e., {@code A -> B and A->C => B=C})
+	 */
+	boolean functional
+	/*
+	 * Whether this relation base is inverse functional (i.e., {@code B->A and C->A => B=C})
+	 */
+	boolean inverseFunctional
+	/*
+	 * Whether this relation base is symmetric (i.e., {@code A->B => B->A})
+	 */
+	boolean symmetric
+	/*
+	 * Whether this relation base is asymmetric (i.e., {@code A->B => !(B->A)})
+	 */
+	boolean asymmetric
+	/*
+	 * Whether this relation base is reflexive (i.e., {@code A => A->A})
+	 */
+	boolean reflexive
+	/*
+	 * Whether this relation base is irreflexive (i.e., {@code A => !(A->A)})
+	 */
+	boolean irreflexive
+	/*
+	 * Whether this relation base is transitive (i.e., {@code A->B and B->C => A->C})
+	 */
+	boolean transitive
 }
 
 /*
@@ -704,10 +704,10 @@ abstract class RelationBase extends SpecializableTerm {
  */
 @Bikeshed(heading="Properties")
 abstract class SpecializableProperty extends SpecializableTerm, Property {
-    /*
-     * The set of property equivalence axioms of this property
-     */
-    contains PropertyEquivalenceAxiom[*] ownedEquivalences opposite owningProperty
+	/*
+	 * The set of property equivalence axioms of this property
+	 */
+	contains PropertyEquivalenceAxiom[*] ownedEquivalences opposite owningProperty
 }
 
 ////////////////////////////////////////
@@ -781,7 +781,7 @@ class Scalar extends Type {
 	 */
 	contains LiteralEnumerationAxiom[?] ownedEnumeration opposite owningScalar
 	/*
-     * The set of scalar equivalence axioms of this scalar
+	 * The set of scalar equivalence axioms of this scalar
 	 */
 	contains ScalarEquivalenceAxiom[*] ownedEquivalences opposite owningScalar
 }
@@ -792,18 +792,18 @@ class Scalar extends Type {
  */
 @Bikeshed(heading="Types")
 abstract class Entity extends Type {
-    /*
-     * The set of entity equivalence axioms of this entity
-     */
-    contains EntityEquivalenceAxiom[*] ownedEquivalences opposite owningEntity
-    /*
-     * The set of property restriction axioms of this entity
-     */
-    contains PropertyRestrictionAxiom[*] ownedPropertyRestrictions opposite owningEntity
-    /*
-     * The unique keys of this entity
-     */
-    contains KeyAxiom[*] ownedKeys opposite owningEntity
+	/*
+	 * The set of entity equivalence axioms of this entity
+	 */
+	contains EntityEquivalenceAxiom[*] ownedEquivalences opposite owningEntity
+	/*
+	 * The set of property restriction axioms of this entity
+	 */
+	contains PropertyRestrictionAxiom[*] ownedPropertyRestrictions opposite owningEntity
+	/*
+	 * The unique keys of this entity
+	 */
+	contains KeyAxiom[*] ownedKeys opposite owningEntity
 }
 
 ////////////////////////////////////////
@@ -851,10 +851,10 @@ class RelationEntity extends Entity, RelationBase {
 	 * A ref to another relation entity
 	 */
 	refers RelationEntity ref
-    /*
-     * The optional forward relation of this relation entity
-     */
-    contains ForwardRelation[?] forwardRelation opposite relationEntity
+	/*
+	 * The optional forward relation of this relation entity
+	 */
+	contains ForwardRelation[?] forwardRelation opposite relationEntity
 }
 
 ////////////////////////////////////////
@@ -878,18 +878,18 @@ class AnnotationProperty extends SpecializableProperty {
  */
 @Bikeshed(heading="Properties")
 abstract class SemanticProperty extends Property {
-    /*
-     * Determines if this property is functional (has a max of one value per instance) 
-     */
-    op boolean isFunctional()
-    /*
-     * Gets the domains of this property
-     */
-    op Entity[] getDomainList()
-    /*
-     * Gets the ranges of this property
-     */
-    op Type[] getRangeList()
+	/*
+	 * Determines if this property is functional (has a max of one value per instance) 
+	 */
+	op boolean isFunctional()
+	/*
+	 * Gets the domains of this property
+	 */
+	op Entity[] getDomainList()
+	/*
+	 * Gets the ranges of this property
+	 */
+	op Type[] getRangeList()
 }
 
 ////////////////////////////////////////
@@ -905,25 +905,25 @@ class ScalarProperty extends SemanticProperty, SpecializableProperty {
 	 * A ref to another scalar property
 	 */
 	refers ScalarProperty ref
-    /*
-     * Whether this property is functional (has a max of one value per instance) 
-     */
-    boolean functional
-    /*
-     * The entity that is the domain of this property
-     */
-    refers Entity[*] domains
-    /*
-     * The scalar that is the range of this property
-     */
-    refers Scalar[*] ranges
+	/*
+	 * Whether this property is functional (has a max of one value per instance) 
+	 */
+	boolean functional
+	/*
+	 * The entity that is the domain of this property
+	 */
+	refers Entity[*] domains
+	/*
+	 * The scalar that is the range of this property
+	 */
+	refers Scalar[*] ranges
 
-    op Entity[] getDomainList() {
-    	domains
-    }
-    op Type[] getRangeList() {
-    	ranges.toEList
-    }
+	op Entity[] getDomainList() {
+		domains
+	}
+	op Type[] getRangeList() {
+		ranges.toEList
+	}
 }
 
 /*
@@ -932,49 +932,49 @@ class ScalarProperty extends SemanticProperty, SpecializableProperty {
  */
 @Bikeshed(heading="Properties")
 abstract class Relation extends SemanticProperty {
-    /*
-     * Gets whether this relation is inverse functional (i.e., {@code B->A and C->A => B=C})
-     */
-    op boolean isInverseFunctional()
-    /*
-     * Gets whether this relation is symmetric (i.e., {@code A->B => B->A})
-     */
-    op boolean isSymmetric()
-    /*
-     * Gets whether this relation is asymmetric (i.e., {@code A->B => !(B->A)})
-     */
-    op boolean isAsymmetric()
-    /*
-     * Gets whether this relation is reflexive (i.e., {@code A => A->A})
-     */
-    op boolean isReflexive()
-    /*
-     * Gets whether this relation is irreflexive (i.e., {@code A => !(A->A)})
-     */
-    op boolean isIrreflexive()
-    /*
-     * Gets whether this relation is transitive (i.e., {@code A->B and B->C => A->C})
-     */
-    op boolean isTransitive()
-    /*
-     * Gets the domain of this relation
-     */
-    op Entity[*] getDomains()
-    /*
-     * Gets the range of the relation
-     */
-    op Entity[*] getRanges()
-    /*
-     * Gets the inverse of this relation
-     */
-    op Relation[?] getInverse()
+	/*
+	 * Gets whether this relation is inverse functional (i.e., {@code B->A and C->A => B=C})
+	 */
+	op boolean isInverseFunctional()
+	/*
+	 * Gets whether this relation is symmetric (i.e., {@code A->B => B->A})
+	 */
+	op boolean isSymmetric()
+	/*
+	 * Gets whether this relation is asymmetric (i.e., {@code A->B => !(B->A)})
+	 */
+	op boolean isAsymmetric()
+	/*
+	 * Gets whether this relation is reflexive (i.e., {@code A => A->A})
+	 */
+	op boolean isReflexive()
+	/*
+	 * Gets whether this relation is irreflexive (i.e., {@code A => !(A->A)})
+	 */
+	op boolean isIrreflexive()
+	/*
+	 * Gets whether this relation is transitive (i.e., {@code A->B and B->C => A->C})
+	 */
+	op boolean isTransitive()
+	/*
+	 * Gets the domain of this relation
+	 */
+	op Entity[*] getDomains()
+	/*
+	 * Gets the range of the relation
+	 */
+	op Entity[*] getRanges()
+	/*
+	 * Gets the inverse of this relation
+	 */
+	op Relation[?] getInverse()
 
-    op Entity[] getDomainList() {
-    	getDomains().toEList
-    }
-    op Type[] getRangeList() {
-    	getRanges().toEList
-    }
+	op Entity[] getDomainList() {
+		getDomains().toEList
+	}
+	op Type[] getRangeList() {
+		getRanges().toEList
+	}
 }
 
 ////////////////////////////////////////
@@ -988,44 +988,44 @@ abstract class Relation extends SemanticProperty {
  */
 @Bikeshed(heading="Relations")
 class ForwardRelation extends Relation {
-    /*
-     * The relation entity that owns this forward property
-     */
-    container RelationEntity[1] relationEntity opposite forwardRelation
-    
-    op Member getRef() {
-    	null
-    }
-    op boolean isFunctional() {
-        relationEntity.functional
+	/*
+	 * The relation entity that owns this forward property
+	 */
+	container RelationEntity[1] relationEntity opposite forwardRelation
+	
+	op Member getRef() {
+		null
 	}
-    op boolean isInverseFunctional() {
-        relationEntity.inverseFunctional
-    }
-    op boolean isSymmetric() {
-        relationEntity.symmetric
-    }
-    op boolean isAsymmetric() {
-        relationEntity.asymmetric
-    }
-    op boolean isReflexive() {
-        relationEntity.reflexive
-    }
-    op boolean isIrreflexive() {
-        relationEntity.irreflexive
-    }
-    op boolean isTransitive() {
-        relationEntity.transitive
-    }
-    op Entity[*] getDomains() {
+	op boolean isFunctional() {
+		relationEntity.functional
+	}
+	op boolean isInverseFunctional() {
+		relationEntity.inverseFunctional
+	}
+	op boolean isSymmetric() {
+		relationEntity.symmetric
+	}
+	op boolean isAsymmetric() {
+		relationEntity.asymmetric
+	}
+	op boolean isReflexive() {
+		relationEntity.reflexive
+	}
+	op boolean isIrreflexive() {
+		relationEntity.irreflexive
+	}
+	op boolean isTransitive() {
+		relationEntity.transitive
+	}
+	op Entity[*] getDomains() {
 		relationEntity.sources
-    }
-    op Entity[*] getRanges() {
+	}
+	op Entity[*] getRanges() {
 		relationEntity.targets
-    }
-    op Relation getInverse() {
+	}
+	op Relation getInverse() {
 		relationEntity.reverseRelation
-    }
+	}
 }
 
 /*
@@ -1035,47 +1035,47 @@ class ForwardRelation extends Relation {
  */
 @Bikeshed(heading="Relations")
 class ReverseRelation extends Relation {
-    /*
-     * The relation that owns this reverse property
-     */
-    container RelationBase[1] relationBase opposite reverseRelation
-    
-    op Member getRef() {
-    	null
-    }
-    op boolean isFunctional() {
-        relationBase.inverseFunctional
+	/*
+	 * The relation that owns this reverse property
+	 */
+	container RelationBase[1] relationBase opposite reverseRelation
+	
+	op Member getRef() {
+		null
 	}
-    op boolean isInverseFunctional() {
-        relationBase.inverseFunctional
-    }
-    op boolean isSymmetric() {
-        relationBase.symmetric
-    }
-    op boolean isAsymmetric() {
-        relationBase.asymmetric
-    }
-    op boolean isReflexive() {
-        relationBase.reflexive
-    }
-    op boolean isIrreflexive() {
-       relationBase.irreflexive
-    }
-    op boolean isTransitive() {
-        relationBase.transitive
-    }
-    op Entity[*] getDomains() {
-        relationBase.targets
-    }
-    op Entity[*] getRanges() {
-        relationBase.sources
-    }
-    op Relation getInverse() {
-        if (relationBase instanceof RelationEntity)
-            (relationBase as RelationEntity).forwardRelation
-        else if (relationBase instanceof Relation)
-        	relationBase as Relation
-    }
+	op boolean isFunctional() {
+		relationBase.inverseFunctional
+	}
+	op boolean isInverseFunctional() {
+		relationBase.inverseFunctional
+	}
+	op boolean isSymmetric() {
+		relationBase.symmetric
+	}
+	op boolean isAsymmetric() {
+		relationBase.asymmetric
+	}
+	op boolean isReflexive() {
+		relationBase.reflexive
+	}
+	op boolean isIrreflexive() {
+	   relationBase.irreflexive
+	}
+	op boolean isTransitive() {
+		relationBase.transitive
+	}
+	op Entity[*] getDomains() {
+		relationBase.targets
+	}
+	op Entity[*] getRanges() {
+		relationBase.sources
+	}
+	op Relation getInverse() {
+		if (relationBase instanceof RelationEntity)
+			(relationBase as RelationEntity).forwardRelation
+		else if (relationBase instanceof Relation)
+			relationBase as Relation
+	}
 }
 
 /*
@@ -1088,15 +1088,15 @@ class UnreifiedRelation extends Relation, RelationBase, SpecializableProperty {
 	 */
 	refers Relation ref
 
-    op Entity[*] getDomains() {
-        sources
-    }
-    op Entity[*] getRanges() {
-    	targets
-    }
-    op Relation getInverse() {
+	op Entity[*] getDomains() {
+		sources
+	}
+	op Entity[*] getRanges() {
+		targets
+	}
+	op Relation getInverse() {
 		reverseRelation
-    }
+	}
 }
 
 ////////////////////////////////////////
@@ -1108,20 +1108,20 @@ class UnreifiedRelation extends Relation, RelationBase, SpecializableProperty {
  */
 @Bikeshed(heading="Instances")
 abstract class NamedInstance extends DescriptionStatement, Instance {
-    /*
-     * The types of this instance
-     */
-    contains TypeAssertion[*] ownedTypes opposite owningInstance
+	/*
+	 * The types of this instance
+	 */
+	contains TypeAssertion[*] ownedTypes opposite owningInstance
 	/*
 	 * Gets the instance's entity types
 	 */
-    op Entity[] getEntityTypes() {
-    	return ownedTypes.map[^type]
-    }
-    
-    op Entity[] getTypes() {
-    	return ownedTypes.map[^type]
-    }
+	op Entity[] getEntityTypes() {
+		return ownedTypes.map[^type]
+	}
+	
+	op Entity[] getTypes() {
+		return ownedTypes.map[^type]
+	}
 }
 
 /*
@@ -1129,22 +1129,22 @@ abstract class NamedInstance extends DescriptionStatement, Instance {
  */
 @Bikeshed(heading="Instances")
 abstract class AnonymousInstance extends Instance {
-    /*
-     * The property value assertion that owns this instance as a value
-     */
-    container PropertyValueAssertion[?] owningAssertion opposite containedValues
-    /*
-     * The property value restriction axiom that assigns this instance as a restricted value
-     */
-    container PropertyValueRestrictionAxiom[?] owningAxiom opposite containedValue
+	/*
+	 * The property value assertion that owns this instance as a value
+	 */
+	container PropertyValueAssertion[?] owningAssertion opposite containedValues
+	/*
+	 * The property value restriction axiom that assigns this instance as a restricted value
+	 */
+	container PropertyValueRestrictionAxiom[?] owningAxiom opposite containedValue
 	/*
 	 * Gets the property that this instance is specified as a value of
 	 */
-    op SemanticProperty getIsValueOfProperty() {
-    	if (owningAssertion !== null) 
-    		owningAssertion.property
-    	else if (owningAxiom !== null)
-    		owningAxiom.property
+	op SemanticProperty getIsValueOfProperty() {
+		if (owningAssertion !== null) 
+			owningAssertion.property
+		else if (owningAxiom !== null)
+			owningAxiom.property
 	}
 }
 
@@ -1173,14 +1173,14 @@ class RelationInstance extends NamedInstance {
 	 * A ref to another relation instance
 	 */
 	refers RelationInstance ref
-    /*
-     * The named instances that are the sources of this relation instance
-     */
-    refers NamedInstance[*] sources
-    /*
-     * The named instances that are the targets of this relation instance
-     */
-    refers NamedInstance[*] targets
+	/*
+	 * The named instances that are the sources of this relation instance
+	 */
+	refers NamedInstance[*] sources
+	/*
+	 * The named instances that are the targets of this relation instance
+	 */
+	refers NamedInstance[*] targets
 }
 
 ////////////////////////////////////////
@@ -1192,29 +1192,29 @@ class RelationInstance extends NamedInstance {
  */
 @Bikeshed(heading="Instances")
 class AnonymousConceptInstance extends AnonymousInstance {
-    /*
-     * The type of this instance
-     */
-    refers Entity[?] ^type
+	/*
+	 * The type of this instance
+	 */
+	refers Entity[?] ^type
 
 	op Entity getEntity() {
-    	if (^type !== null)
-    	 	return ^type
-    	else {
-    		var property = getIsValueOfProperty()
-    		if (property instanceof Relation) {
-	    		property.ranges.head
-    		}
-    	}
+		if (^type !== null)
+		 	return ^type
+		else {
+			var property = getIsValueOfProperty()
+			if (property instanceof Relation) {
+				property.ranges.head
+			}
+		}
 	}
 
-    op Entity[] getTypes() {
-    	var entity = getEntity()
-    	if (entity !== null)
-    	 	return entity.singletonEList()
-    	else
-    		return ECollections.emptyEList
-    }
+	op Entity[] getTypes() {
+		var entity = getEntity()
+		if (entity !== null)
+		 	return entity.singletonEList()
+		else
+			return ECollections.emptyEList
+	}
 }
 
 /*
@@ -1226,30 +1226,30 @@ class AnonymousConceptInstance extends AnonymousInstance {
  */
 @Bikeshed(heading="Instances")
 class AnonymousRelationInstance extends AnonymousInstance {
-    /*
-     * An instance that is the target of this relation instance
-     */
-    refers NamedInstance[1] target
+	/*
+	 * An instance that is the target of this relation instance
+	 */
+	refers NamedInstance[1] target
 	/*
 	 * Gets the relation entity that is the type of this instance
 	 */
-    op RelationEntity getRelationEntity() {
-    	val property = getIsValueOfProperty()
-    	if (property instanceof ForwardRelation) {
-    		return property.relationEntity
-    	} else if (property instanceof ReverseRelation) {
-    		if (property.relationBase instanceof RelationEntity) {
-    			return property.relationBase as RelationEntity
-    		}
-    	}
-    }
+	op RelationEntity getRelationEntity() {
+		val property = getIsValueOfProperty()
+		if (property instanceof ForwardRelation) {
+			return property.relationEntity
+		} else if (property instanceof ReverseRelation) {
+			if (property.relationBase instanceof RelationEntity) {
+				return property.relationBase as RelationEntity
+			}
+		}
+	}
 
-    op Entity[] getTypes() {
-    	var entity = getRelationEntity()
-    	if (entity !== null)
-    	 	return entity.singletonEList()
-    	else
-    		return ECollections.emptyEList
+	op Entity[] getTypes() {
+		var entity = getRelationEntity()
+		if (entity !== null)
+		 	return entity.singletonEList()
+		else
+			return ECollections.emptyEList
 	}
 }
 
@@ -1263,21 +1263,21 @@ class AnonymousRelationInstance extends AnonymousInstance {
  */
 @Bikeshed(heading="Axioms")
 class KeyAxiom extends Axiom {
-    /*
-     * The set of key properties specified by this axiom
-     */
-    refers Property[+] properties
-    /*
-     * The owning entity specified by this axiom
-     */
-    container Entity[?] owningEntity opposite ownedKeys
-    /*
-     * Gets the entity that defines the given key axiom
-     */
-    op Entity getKeyedEntity() {
-    	return owningEntity.resolve() as Entity
-    }
-    
+	/*
+	 * The set of key properties specified by this axiom
+	 */
+	refers Property[+] properties
+	/*
+	 * The owning entity specified by this axiom
+	 */
+	container Entity[?] owningEntity opposite ownedKeys
+	/*
+	 * Gets the entity that defines the given key axiom
+	 */
+	op Entity getKeyedEntity() {
+		return owningEntity.resolve() as Entity
+	}
+	
 	op Entity getCharacterizedTerm() {
 		getKeyedEntity()
 	}
@@ -1288,20 +1288,20 @@ class KeyAxiom extends Axiom {
  */
 @Bikeshed(heading="Axioms")
 class SpecializationAxiom extends Axiom {
-    /*
-     * The super term specified by this axiom
-     */
-    refers Term[1] superTerm
-    /*
-     * The owning term specified by this axiom
-     */
-    container SpecializableTerm[?] owningTerm opposite ownedSpecializations
-    /*
-     * Gets the sub (specific) term of the given specialization axiom
-     */
-    op Term getSubTerm() {
-    	return owningTerm.resolve() as Term
-    }
+	/*
+	 * The super term specified by this axiom
+	 */
+	refers Term[1] superTerm
+	/*
+	 * The owning term specified by this axiom
+	 */
+	container SpecializableTerm[?] owningTerm opposite ownedSpecializations
+	/*
+	 * Gets the sub (specific) term of the given specialization axiom
+	 */
+	op Term getSubTerm() {
+		return owningTerm.resolve() as Term
+	}
 
 	op Term getCharacterizedTerm() {
 		getSubTerm()
@@ -1317,16 +1317,16 @@ class InstanceEnumerationAxiom extends Axiom {
 	 * The set of enumerated instances specified by this axiom
 	 */
 	refers ConceptInstance[+] instances
-    /*
-     * The owning concept specified by this axiom
-     */
-    container Concept[?] owningConcept opposite ownedEnumeration
-    /*
-     * Gets the concept that defines the given enumeration axiom
-     */
-    op Concept getEnumeratedConcept() {
-    	return owningConcept.resolve() as Concept
-    }
+	/*
+	 * The owning concept specified by this axiom
+	 */
+	container Concept[?] owningConcept opposite ownedEnumeration
+	/*
+	 * Gets the concept that defines the given enumeration axiom
+	 */
+	op Concept getEnumeratedConcept() {
+		return owningConcept.resolve() as Concept
+	}
 
 	op Concept getCharacterizedTerm() {
 		getEnumeratedConcept()
@@ -1339,28 +1339,28 @@ class InstanceEnumerationAxiom extends Axiom {
  */
 @Bikeshed(heading="Axioms")
 abstract class PropertyRestrictionAxiom extends Axiom {
-    /*
-     * The restricted property specified by this axiom
-     */
-    refers SemanticProperty[1] property
-    /*
-     * The owning entity specified by this axiom
-     */
-    container Entity[?] owningEntity opposite ownedPropertyRestrictions
-    /*
-     * The owning entity equivalence axiom specified by this axiom
-     */
-    container EntityEquivalenceAxiom[?] owningAxiom opposite ownedPropertyRestrictions
-    /*
-     * Gets the restricting domain of the given property restriction axiom
-     */
-    op Entity getRestrictingDomain() {
-    	if (owningAxiom !== null) {
-    		return owningAxiom.subEntity
+	/*
+	 * The restricted property specified by this axiom
+	 */
+	refers SemanticProperty[1] property
+	/*
+	 * The owning entity specified by this axiom
+	 */
+	container Entity[?] owningEntity opposite ownedPropertyRestrictions
+	/*
+	 * The owning entity equivalence axiom specified by this axiom
+	 */
+	container EntityEquivalenceAxiom[?] owningAxiom opposite ownedPropertyRestrictions
+	/*
+	 * Gets the restricting domain of the given property restriction axiom
+	 */
+	op Entity getRestrictingDomain() {
+		if (owningAxiom !== null) {
+			return owningAxiom.subEntity
    		}
-    	return owningEntity.resolve() as Entity
-    }
-    
+		return owningEntity.resolve() as Entity
+	}
+	
 	op Entity getCharacterizedTerm() {
 		getRestrictingDomain()
 	}
@@ -1375,16 +1375,16 @@ class LiteralEnumerationAxiom extends Axiom {
 	 * The set of enumerated literals specified by this axiom
 	 */
 	contains Literal[+] literals
-    /*
-     * The owning scalar specified by this axiom
-     */
-    container Scalar[?] owningScalar opposite ownedEnumeration
-    /*
-     * Gets the scalar that defines the given enumeration axiom
-     */
-    op Scalar getEnumeratedScalar() {
-    	return owningScalar.resolve() as Scalar
-    }
+	/*
+	 * The owning scalar specified by this axiom
+	 */
+	container Scalar[?] owningScalar opposite ownedEnumeration
+	/*
+	 * Gets the scalar that defines the given enumeration axiom
+	 */
+	op Scalar getEnumeratedScalar() {
+		return owningScalar.resolve() as Scalar
+	}
 
 	op Scalar getCharacterizedTerm() {
 		getEnumeratedScalar()
@@ -1400,24 +1400,24 @@ class LiteralEnumerationAxiom extends Axiom {
  */
 @Bikeshed(heading="Axioms")
 class EntityEquivalenceAxiom extends Axiom {
-    /*
-     * The super entity specified by this axiom
-     */
-    refers Entity[*] superEntities
-    /*
-     * The property restrictions specified by this axiom
-     */
-    contains PropertyRestrictionAxiom[*] ownedPropertyRestrictions opposite owningAxiom
-    /*
-     * The owning entity specified by this axiom
-     */
-    container Entity[?] owningEntity opposite ownedEquivalences
-    /*
-     * Gets the sub entity of this axiom
-     */
-    op Entity getSubEntity() {
-    	return owningEntity.resolve() as Entity
-    }
+	/*
+	 * The super entity specified by this axiom
+	 */
+	refers Entity[*] superEntities
+	/*
+	 * The property restrictions specified by this axiom
+	 */
+	contains PropertyRestrictionAxiom[*] ownedPropertyRestrictions opposite owningAxiom
+	/*
+	 * The owning entity specified by this axiom
+	 */
+	container Entity[?] owningEntity opposite ownedEquivalences
+	/*
+	 * Gets the sub entity of this axiom
+	 */
+	op Entity getSubEntity() {
+		return owningEntity.resolve() as Entity
+	}
 
 	op Entity getCharacterizedTerm() {
 		getSubEntity()
@@ -1442,57 +1442,57 @@ class EntityEquivalenceAxiom extends Axiom {
  */
 @Bikeshed(heading="Axioms")
 class ScalarEquivalenceAxiom extends Axiom {
-    /*
-     * The super scalar specified by this axiom
-     */
-    refers Scalar[1] superScalar
-    /*
-     * The owning scalar specified by this axiom
-     */
-    container Scalar[1] owningScalar opposite ownedEquivalences
-    /*
-     * The exact length of the literals of this scalar
-     */
-    UnsignedInteger[?] length
-    /*
-     * The minimum length of the literals of this scalar
-     */
-    UnsignedInteger[?] minLength
-    /*
-     * The maximum length of the literals of this scalar
-     */
-    UnsignedInteger[?] maxLength
-    /*
-     * The pattern that the literals of this scalar conforms to
-     */
-    String[?] pattern
-    /*
-     * The language range that the literals of this scalar belong to 
-     * (based on http://www.rfc-editor.org/rfc/bcp/bcp47.txt)
-     */
-    String[?] language
-    /*
-     * The minimum inclusive value of numeric literals of this scalar
-     */
-    contains Literal[?] minInclusive
-    /*
-     * The minimum exclusive value of numeric literals of this scalar
-     */
-    contains Literal[?] minExclusive
-    /*
-     * The maximum inclusive value of numeric literals of this scalar
-     */
-    contains Literal[?] maxInclusive
-    /*
-     * The maximum exclusive value of numeric literals of this scalar
-     */
-    contains Literal[?] maxExclusive
-    /*
-     * Gets the sub scalar of this axiom
-     */
-    op Scalar getSubScalar() {
-    	return owningScalar.resolve() as Scalar
-    }
+	/*
+	 * The super scalar specified by this axiom
+	 */
+	refers Scalar[1] superScalar
+	/*
+	 * The owning scalar specified by this axiom
+	 */
+	container Scalar[1] owningScalar opposite ownedEquivalences
+	/*
+	 * The exact length of the literals of this scalar
+	 */
+	UnsignedInteger[?] length
+	/*
+	 * The minimum length of the literals of this scalar
+	 */
+	UnsignedInteger[?] minLength
+	/*
+	 * The maximum length of the literals of this scalar
+	 */
+	UnsignedInteger[?] maxLength
+	/*
+	 * The pattern that the literals of this scalar conforms to
+	 */
+	String[?] pattern
+	/*
+	 * The language range that the literals of this scalar belong to 
+	 * (based on http://www.rfc-editor.org/rfc/bcp/bcp47.txt)
+	 */
+	String[?] language
+	/*
+	 * The minimum inclusive value of numeric literals of this scalar
+	 */
+	contains Literal[?] minInclusive
+	/*
+	 * The minimum exclusive value of numeric literals of this scalar
+	 */
+	contains Literal[?] minExclusive
+	/*
+	 * The maximum inclusive value of numeric literals of this scalar
+	 */
+	contains Literal[?] maxInclusive
+	/*
+	 * The maximum exclusive value of numeric literals of this scalar
+	 */
+	contains Literal[?] maxExclusive
+	/*
+	 * Gets the sub scalar of this axiom
+	 */
+	op Scalar getSubScalar() {
+		return owningScalar.resolve() as Scalar
+	}
 
 	op Scalar getCharacterizedTerm() {
 		getSubScalar()
@@ -1506,20 +1506,20 @@ class ScalarEquivalenceAxiom extends Axiom {
  */
 @Bikeshed(heading="Axioms")
 class PropertyEquivalenceAxiom extends Axiom {
-    /*
-     * The super property specified by this axiom
-     */
-    refers Property[1] superProperty
-    /*
-     * The owning property specified by this axiom
-     */
-    container SpecializableProperty[?] owningProperty opposite ownedEquivalences
-    /*
-     * Gets the sub property of this axiom
-     */
-    op Property getSubProperty() {
-    	return owningProperty.resolve() as Property
-    }
+	/*
+	 * The super property specified by this axiom
+	 */
+	refers Property[1] superProperty
+	/*
+	 * The owning property specified by this axiom
+	 */
+	container SpecializableProperty[?] owningProperty opposite ownedEquivalences
+	/*
+	 * Gets the sub property of this axiom
+	 */
+	op Property getSubProperty() {
+		return owningProperty.resolve() as Property
+	}
 
 	op Property getCharacterizedTerm() {
 		getSubProperty()
@@ -1538,14 +1538,14 @@ class PropertyEquivalenceAxiom extends Axiom {
  */
 @Bikeshed(heading="Axioms")
 class PropertyRangeRestrictionAxiom extends PropertyRestrictionAxiom {
-    /*
-     * The range restriction kind specified by this axiom (default is all)
-     */
-    RangeRestrictionKind[1] kind = "all" 
-    /*
-     * The restricted range specified by this axiom
-     */
-    refers Type[1] range
+	/*
+	 * The range restriction kind specified by this axiom (default is all)
+	 */
+	RangeRestrictionKind[1] kind = "all" 
+	/*
+	 * The restricted range specified by this axiom
+	 */
+	refers Type[1] range
 }
 
 /*
@@ -1555,18 +1555,18 @@ class PropertyRangeRestrictionAxiom extends PropertyRestrictionAxiom {
  */
 @Bikeshed(heading="Axioms")
 class PropertyCardinalityRestrictionAxiom extends PropertyRestrictionAxiom {
-    /*
-     * The kind of cardinality restriction specified by this axiom (default is exactly)
-     */
-    CardinalityRestrictionKind[1] kind = "exactly"
-    /*
-     * The value of the cardinality specified by this axiom (default is 1)
-     */
-    UnsignedInt[1] cardinality = "1"
-    /*
-     * The optional restricted range specified by this axiom
-     */
-    refers Type[?] range
+	/*
+	 * The kind of cardinality restriction specified by this axiom (default is exactly)
+	 */
+	CardinalityRestrictionKind[1] kind = "exactly"
+	/*
+	 * The value of the cardinality specified by this axiom (default is 1)
+	 */
+	UnsignedInt[1] cardinality = "1"
+	/*
+	 * The optional restricted range specified by this axiom
+	 */
+	refers Type[?] range
 }
 
 /*
@@ -1575,29 +1575,29 @@ class PropertyCardinalityRestrictionAxiom extends PropertyRestrictionAxiom {
  */
 @Bikeshed(heading="Axioms")
 class PropertyValueRestrictionAxiom extends PropertyRestrictionAxiom {
-    /*
-     * A restricted literal value 
-     */
-    contains Literal[?] literalValue
-    /*
-     * A restricted contained value
-     */
-    contains AnonymousInstance[?] containedValue opposite owningAxiom
-    /*
-     * A restricted referenced value
-     */
-    refers NamedInstance[?] referencedValue
-    /*
-     * Gets the restricted value
-     */
-    op Element getValue() {
-    	if (literalValue !== null)
-    		literalValue
-    	else if (containedValue !== null)
-    		containedValue
-    	else if (referencedValue !== null)
-    		referencedValue
-    }
+	/*
+	 * A restricted literal value 
+	 */
+	contains Literal[?] literalValue
+	/*
+	 * A restricted contained value
+	 */
+	contains AnonymousInstance[?] containedValue opposite owningAxiom
+	/*
+	 * A restricted referenced value
+	 */
+	refers NamedInstance[?] referencedValue
+	/*
+	 * Gets the restricted value
+	 */
+	op Element getValue() {
+		if (literalValue !== null)
+			literalValue
+		else if (containedValue !== null)
+			containedValue
+		else if (referencedValue !== null)
+			referencedValue
+	}
 }
 
 /*
@@ -1617,21 +1617,21 @@ class PropertySelfRestrictionAxiom extends PropertyRestrictionAxiom {
  */
 @Bikeshed(heading="Assertions")
 class TypeAssertion extends Assertion {
-    /*
-     * The type of the instance owning this assertion
-     */
-    refers Entity[1] ^type
-    /*
-     * The instance that owns this assertion
-     */
-    container NamedInstance[?] owningInstance opposite ownedTypes
+	/*
+	 * The type of the instance owning this assertion
+	 */
+	refers Entity[1] ^type
+	/*
+	 * The instance that owns this assertion
+	 */
+	container NamedInstance[?] owningInstance opposite ownedTypes
 
-    op NamedInstance getSubject() {
-    	return owningInstance.resolve() as NamedInstance
-    }
-    op Element[*] getObjects() {
-    	return ^type.singletonEList
-    }
+	op NamedInstance getSubject() {
+		return owningInstance.resolve() as NamedInstance
+	}
+	op Element[*] getObjects() {
+		return ^type.singletonEList
+	}
 }
 
 /*
@@ -1640,103 +1640,103 @@ class TypeAssertion extends Assertion {
  */
 @Bikeshed(heading="Assertions")
 class PropertyValueAssertion extends Assertion {
-    /*
-     * The property referenced by this assertion
-     */
-    refers SemanticProperty[1] property
-    /*
-     * The literal values of this assertion
-     */
-    contains Literal[*] literalValues
-    /*
-     * The contained values of this assertion
-     */
-    contains AnonymousInstance[*] containedValues opposite owningAssertion
-    /*
-     * The referenced values of this assertion
-     */
-    refers NamedInstance[*] referencedValues
-    /*
-     * The instance that owns this assertion
-     */
-    container Instance[?] owningInstance opposite ownedPropertyValues
-    /*
-     * Gets the asserted values
-     */
-    op Element[*] getValues() {
-    	if (!literalValues.empty)
-    		literalValues.unmodifiableEList
-    	else if (!containedValues.empty)
-    		containedValues.unmodifiableEList
-    	else if (!referencedValues.empty)
-    		referencedValues.unmodifiableEList
-    	else
-    		ECollections.emptyEList
-    }
-    /*
-     * Gets the first asserted value of the annotation
-     */
-    op Element getValue() {
-    	if (!literalValues.empty)
-    		getLiteralValue()
-    	else if (!containedValues.empty)
-    		getContainedValue()
-    	else if (!referencedValues.empty)
-    		getReferencedValue()
-    }
-    /*
-     * Gets the first literal value
-     */
-    op Literal getLiteralValue() {
-    	return if (!literalValues.empty) literalValues.get(0)
-    }
-    /*
-     * Sets the first literal value
-     */
-    op void setLiteralValue(Literal value) {
+	/*
+	 * The property referenced by this assertion
+	 */
+	refers SemanticProperty[1] property
+	/*
+	 * The literal values of this assertion
+	 */
+	contains Literal[*] literalValues
+	/*
+	 * The contained values of this assertion
+	 */
+	contains AnonymousInstance[*] containedValues opposite owningAssertion
+	/*
+	 * The referenced values of this assertion
+	 */
+	refers NamedInstance[*] referencedValues
+	/*
+	 * The instance that owns this assertion
+	 */
+	container Instance[?] owningInstance opposite ownedPropertyValues
+	/*
+	 * Gets the asserted values
+	 */
+	op Element[*] getValues() {
+		if (!literalValues.empty)
+			literalValues.unmodifiableEList
+		else if (!containedValues.empty)
+			containedValues.unmodifiableEList
+		else if (!referencedValues.empty)
+			referencedValues.unmodifiableEList
+		else
+			ECollections.emptyEList
+	}
+	/*
+	 * Gets the first asserted value of the annotation
+	 */
+	op Element getValue() {
+		if (!literalValues.empty)
+			getLiteralValue()
+		else if (!containedValues.empty)
+			getContainedValue()
+		else if (!referencedValues.empty)
+			getReferencedValue()
+	}
+	/*
+	 * Gets the first literal value
+	 */
+	op Literal getLiteralValue() {
+		return if (!literalValues.empty) literalValues.get(0)
+	}
+	/*
+	 * Sets the first literal value
+	 */
+	op void setLiteralValue(Literal value) {
 		literalValues.clear()
 		literalValues.add(value)
-    }
-    /*
-     * Gets the first contained value
-     */
-    op AnonymousInstance getContainedValue() {
-    	return if (!containedValues.empty) containedValues.get(0)
-    }
-    /*
-     * Sets the first contained value
-     */
-    op void setContainedValue(AnonymousInstance value) {
+	}
+	/*
+	 * Gets the first contained value
+	 */
+	op AnonymousInstance getContainedValue() {
+		return if (!containedValues.empty) containedValues.get(0)
+	}
+	/*
+	 * Sets the first contained value
+	 */
+	op void setContainedValue(AnonymousInstance value) {
 		containedValues.clear()
 		containedValues.add(value)
-    }
-    /*
-     * Gets the first reference value
-     */
-    op NamedInstance getReferencedValue() {
-    	return if (!referencedValues.empty) referencedValues.get(0)
-    }
-    /*
-     * Sets the first reference value
-     */
-    op void setReferencedValue(NamedInstance value) {
+	}
+	/*
+	 * Gets the first reference value
+	 */
+	op NamedInstance getReferencedValue() {
+		return if (!referencedValues.empty) referencedValues.get(0)
+	}
+	/*
+	 * Sets the first reference value
+	 */
+	op void setReferencedValue(NamedInstance value) {
 		referencedValues.clear()
 		referencedValues.add(value)
-    }
+	}
 	
-    op Instance getSubject() {
-        if (owningInstance instanceof NamedInstance) {
-            (owningInstance as NamedInstance).resolve() as NamedInstance
-        } else {
-	        owningInstance
-        }
-    }
-    op Element[*] getObject() {
-    	if (!containedValues.empty)
-    		containedValues.map[v | if (v instanceof AnonymousRelationInstance) v.target else v ]
-    	else
-    		getValues()
-    }
+	op Instance getSubject() {
+		if (owningInstance instanceof NamedInstance) {
+			(owningInstance as NamedInstance).resolve() as NamedInstance
+		} else {
+			owningInstance
+		}
+	}
+	op Element[*] getObject() {
+		if (!containedValues.empty)
+			containedValues.map[v | if (v instanceof AnonymousRelationInstance) v.target else v ]
+		else
+			getValues()
+	}
 }
 
 ////////////////////////////////////////
@@ -1748,10 +1748,10 @@ class PropertyValueAssertion extends Assertion {
  */
 @Bikeshed(heading="Predicates")
 abstract class UnaryPredicate extends Predicate {
-    /*
-     * An argument of the predicate
-     */
-    contains Argument[1] argument
+	/*
+	 * An argument of the predicate
+	 */
+	contains Argument[1] argument
 }
 
 /*
@@ -1759,14 +1759,14 @@ abstract class UnaryPredicate extends Predicate {
  */
 @Bikeshed(heading="Predicates")
 abstract class BinaryPredicate extends Predicate {
-    /*
-     * An argument of the predicate
-     */
-    contains Argument[1] argument1
-    /*
-     * An argument of the predicate
-     */
-    contains Argument[1] argument2
+	/*
+	 * An argument of the predicate
+	 */
+	contains Argument[1] argument1
+	/*
+	 * An argument of the predicate
+	 */
+	contains Argument[1] argument2
 }
 
 /*
@@ -1774,14 +1774,14 @@ abstract class BinaryPredicate extends Predicate {
  */
 @Bikeshed(heading="Predicates")
 class BuiltInPredicate extends Predicate {
-    /*
-     * The called builtin
-     */
-    refers BuiltIn[1] builtIn
-    /*
-     * An argument of the predicate
-     */
-    contains Argument[+] arguments
+	/*
+	 * The called builtin
+	 */
+	refers BuiltIn[1] builtIn
+	/*
+	 * An argument of the predicate
+	 */
+	contains Argument[+] arguments
 }
 
 ////////////////////////////////////////
@@ -1793,10 +1793,10 @@ class BuiltInPredicate extends Predicate {
  */
 @Bikeshed(heading="Predicates")
 class TypePredicate extends UnaryPredicate {
-    /*
-     * The type of a value
-     */
-    refers Type[1] ^type
+	/*
+	 * The type of a value
+	 */
+	refers Type[1] ^type
 }
 
 /*
@@ -1806,10 +1806,10 @@ class TypePredicate extends UnaryPredicate {
  */
 @Bikeshed(heading="Predicates")
 class RelationEntityPredicate extends UnaryPredicate, BinaryPredicate {
-    /*
-     * The type of a relation instance
-     */
-    refers RelationEntity[1] ^type
+	/*
+	 * The type of a relation instance
+	 */
+	refers RelationEntity[1] ^type
 }
 
 ////////////////////////////////////////
@@ -1822,10 +1822,10 @@ class RelationEntityPredicate extends UnaryPredicate, BinaryPredicate {
  */
 @Bikeshed(heading="Predicates")
 class PropertyPredicate extends BinaryPredicate {
-    /*
-     * The property of an instance 
-     */
-    refers Property[1] property
+	/*
+	 * The property of an instance 
+	 */
+	refers Property[1] property
 }
 
 /*
@@ -1852,25 +1852,25 @@ class DifferentFromPredicate extends BinaryPredicate {
  */
 @Bikeshed(heading="Literals")
 class QuotedLiteral extends Literal  {
-    /*
-     * The value of this literal represented as a string
-     */
-    String[1] value
-    /*
-     * The langTag of this literal
-     */
-    String[?] langTag
-    /*
-     * The scalar that is the type of this literal
-     */
-    refers Scalar[?] ^type
+	/*
+	 * The value of this literal represented as a string
+	 */
+	String[1] value
+	/*
+	 * The langTag of this literal
+	 */
+	String[?] langTag
+	/*
+	 * The scalar that is the type of this literal
+	 */
+	refers Scalar[?] ^type
 
-    op String getLexicalValue() {
-        return '"'+value+'"' + if (langTag !== null) "$"+langTag else if (^type !== null) "^^"+^type.abbreviatedIri else ""
-    }
-    op String getTypeIri() {
-    	return if (^type !== null) ^type.iri else "http://www.w3.org/2001/XMLSchema#string" 
-    }
+	op String getLexicalValue() {
+		return '"'+value+'"' + if (langTag !== null) "$"+langTag else if (^type !== null) "^^"+^type.abbreviatedIri else ""
+	}
+	op String getTypeIri() {
+		return if (^type !== null) ^type.iri else "http://www.w3.org/2001/XMLSchema#string" 
+	}
 }
 
 /*
@@ -1878,14 +1878,14 @@ class QuotedLiteral extends Literal  {
  */
 @Bikeshed(heading="Literals")
 class IntegerLiteral extends Literal  {
-    /*
-     * The int value of this literal
-     */
-    Integer value = "0"
+	/*
+	 * The int value of this literal
+	 */
+	Integer value = "0"
 
-    op String getTypeIri() {
-    	return "http://www.w3.org/2001/XMLSchema#integer" 
-    }
+	op String getTypeIri() {
+		return "http://www.w3.org/2001/XMLSchema#integer" 
+	}
 }
 
 /*
@@ -1893,14 +1893,14 @@ class IntegerLiteral extends Literal  {
  */
 @Bikeshed(heading="Literals")
 class DecimalLiteral extends Literal  {
-    /*
-     * The decimal value of this literal
-     */
-    Decimal[1] value = "0.0"
+	/*
+	 * The decimal value of this literal
+	 */
+	Decimal[1] value = "0.0"
 
-    op String getTypeIri() {
-    	return "http://www.w3.org/2001/XMLSchema#decimal" 
-    }
+	op String getTypeIri() {
+		return "http://www.w3.org/2001/XMLSchema#decimal" 
+	}
 }
 
 /*
@@ -1908,14 +1908,14 @@ class DecimalLiteral extends Literal  {
  */
 @Bikeshed(heading="Literals")
 class DoubleLiteral extends Literal  {
-    /*
-     * The double value of this literal
-     */
-    Double value = "0.0"
+	/*
+	 * The double value of this literal
+	 */
+	Double value = "0.0"
 
-    op String getTypeIri() {
-    	return "http://www.w3.org/2001/XMLSchema#double" 
-    }
+	op String getTypeIri() {
+		return "http://www.w3.org/2001/XMLSchema#double" 
+	}
 }
 
 /*
@@ -1923,18 +1923,18 @@ class DoubleLiteral extends Literal  {
  */
 @Bikeshed(heading="Literals")
 class BooleanLiteral extends Literal {
-    /*
-     * The boolean value of this literal
-     */
-    Boolean value = "false"
-    
-    op boolean isValue() {
-    	return getValue().booleanValue
-    }
+	/*
+	 * The boolean value of this literal
+	 */
+	Boolean value = "false"
+	
+	op boolean isValue() {
+		return getValue().booleanValue
+	}
 
-    op String getTypeIri() {
-    	return "http://www.w3.org/2001/XMLSchema#boolean" 
-    }
+	op String getTypeIri() {
+		return "http://www.w3.org/2001/XMLSchema#boolean" 
+	}
 }
 
 ////////////////////////////////////////
@@ -1946,8 +1946,8 @@ class BooleanLiteral extends Literal {
  */
 @Bikeshed(heading="Elements")
 enum SeparatorKind {
-    hash as '#' = 0
-    slash as '/' = 1
+	hash as '#' = 0
+	slash as '/' = 1
 }
 
 /*
@@ -1955,14 +1955,14 @@ enum SeparatorKind {
  */
 @Bikeshed(heading="Properties")
 enum RangeRestrictionKind {
-    /*
-     * All values are restricted to the range
-     */
-    all = 0
-    /*
-     * Some values are restricted to the range
-     */
-    some = 1
+	/*
+	 * All values are restricted to the range
+	 */
+	all = 0
+	/*
+	 * Some values are restricted to the range
+	 */
+	some = 1
 }
 
 /*
@@ -1970,18 +1970,18 @@ enum RangeRestrictionKind {
  */
 @Bikeshed(heading="Properties")
 enum CardinalityRestrictionKind {
-    /*
-     * The cardinality must match this
-     */
-    exactly = 0
-    /*
-     * The cardinality is at least this
-     */
-    min = 1
-    /*
-     * The cardinality is at most this
-     */
-    max = 2
+	/*
+	 * The cardinality must match this
+	 */
+	exactly = 0
+	/*
+	 * The cardinality is at least this
+	 */
+	min = 1
+	/*
+	 * The cardinality is at most this
+	 */
+	max = 2
 }
 
 /*
@@ -1989,18 +1989,18 @@ enum CardinalityRestrictionKind {
  */
 @Bikeshed(heading="Elements")
 enum ImportKind {
-    /*
-     * Extension is an import that allows an ontology to extend another of the same type. 
-     */
-    ^extension = 0
-    /*
+	/*
+	 * Extension is an import that allows an ontology to extend another of the same type. 
+	 */
+	^extension = 0
+	/*
  	 * Usage is an import that allows an ontology to use another of a different box type.
  	 */
-    usage = 1
-    /*
+	usage = 1
+	/*
 	 * Inclusion is an import that allows a bundle ontology to include a non-bundle ontology of the same box type. 
-     */
-    inclusion = 2
+	 */
+	inclusion = 2
 }
 
 ////////////////////////////////////////
