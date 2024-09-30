@@ -90,7 +90,7 @@ The [openCAESAR](https://github.com/opencaesar) project provides tools that enab
 	</tr>
 	<tr>
 		<td>
-			<a href="#Rule-LR">Rule</a>,
+			<a href="#Rule-LR">Rule</a>
 		</td>
 		<td>
 			Rule
