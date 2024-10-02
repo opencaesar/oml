@@ -27,7 +27,7 @@ import io.opencaesar.oml.OmlFactory;
 import io.opencaesar.oml.OmlPackage;
 
 /**
- * The <b>Factory2</b> for the model. It allows creating OML objects reflectively using their Java type.
+ * The <b>Factory2</b> for Oml models. It allows creating Oml objects reflectively using their Java type.
  * 
  * This is an alternative to {@link OmlFactory} which has individual create methods for each object type
  * 

@@ -32,10 +32,13 @@ public class STRINGValueConverter extends org.eclipse.xtext.conversion.impl.STRI
 				return '"' + value + '"';
 			}
 		}
-		if (value.contains("'''")) {
-			return "\"\"\"" + value + "\"\"\"";
-		} else {
+		if (!value.contains("'''") && !value.endsWith("'")) {
 			return "'''" + value + "'''";
+		}
+		if (!value.contains("\"\"\"") && !value.endsWith("\"")) {
+			return "\"\"\"" + value + "\"\"\"";
+		} else { //  last resort
+			return "\"\"\"" + value.replace('"', '\'') + "\"\"\"";
 		}
 	}
 

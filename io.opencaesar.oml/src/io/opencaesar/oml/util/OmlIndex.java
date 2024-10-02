@@ -76,7 +76,7 @@ import io.opencaesar.oml.TypePredicate;
 import io.opencaesar.oml.UnreifiedRelation;
 
 /**
- * The <b>Index</b> API for the model. It allows looking up cross references of OML objects in the resource set by using two lookup mechanisms:
+ * The <b>Index</b> API for Oml models. It allows looking up cross references of Oml objects in the resource set by using two lookup mechanisms:
  * 
  * 1) Fast: looking up cross references in a cache if a {@link ECrossReferenceAdapter} is installed in the resource set
  * 2) Slow: iterating over the content of a resource set to look for cross referencers 

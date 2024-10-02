@@ -99,7 +99,7 @@ import io.opencaesar.oml.Vocabulary;
 import io.opencaesar.oml.VocabularyBundle;
 
 /**
- * The <b>Builder</b> for the model. This builder uses the {@link OmlWrite} API and provides additional features.
+ * The <b>Builder</b> API for Oml models. It leverages the {@link OmlWrite} API and provides additional services.
  *  
  * It allows clients to specify cross references by IRI and defers their resolution and setting until the build process is finished. 
  * This allows clients to have a single-phase build process as opposed to the typical two-phase builds (where objects are created 

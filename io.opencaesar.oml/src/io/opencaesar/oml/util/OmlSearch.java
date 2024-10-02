@@ -71,7 +71,7 @@ import io.opencaesar.oml.TypeAssertion;
 import io.opencaesar.oml.UnreifiedRelation;
 
 /**
- * The <b>Search</b> API for the model. It complements the {@link OmlIndex} API by additional utilities.
+ * The <b>Search</b> API for Oml models. It complements the {@link OmlIndex} API by additional ones.
  *  
  * @author elaasar
  */

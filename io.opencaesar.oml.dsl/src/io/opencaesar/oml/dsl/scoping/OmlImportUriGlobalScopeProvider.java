@@ -16,17 +16,19 @@
  */
 package io.opencaesar.oml.dsl.scoping;
 
-import com.google.inject.Inject;
-import com.google.inject.Provider;
-
-import io.opencaesar.oml.util.OmlConstants;
-import io.opencaesar.oml.util.OmlRead;
 import java.util.LinkedHashSet;
 import java.util.Set;
+
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.scoping.impl.ImportUriGlobalScopeProvider;
 import org.eclipse.xtext.util.IResourceScopeCache;
+
+import com.google.inject.Inject;
+import com.google.inject.Provider;
+
+import io.opencaesar.oml.util.OmlConstants;
+import io.opencaesar.oml.util.OmlResolve;
 
 @SuppressWarnings("all")
 public class OmlImportUriGlobalScopeProvider extends ImportUriGlobalScopeProvider {
@@ -39,8 +41,10 @@ public class OmlImportUriGlobalScopeProvider extends ImportUriGlobalScopeProvide
 		return cache.<LinkedHashSet<URI>>get(OmlImportUriGlobalScopeProvider.class.getSimpleName(), resource, new Provider<LinkedHashSet<URI>>() {
 			@Override
 			public LinkedHashSet<URI> get() {
-				Set<URI> uris = OmlRead.getResolvedUris(resource);
-				// only .oml is supported from oml index right now
+				Set<URI> uris = OmlResolve.resolveOmlFileUris(resource);
+				// remove this resource itself
+				uris.removeIf(uri -> uri.equals(resource.getURI()));
+				// remove any resource that does not have .oml extension (temporary limitation)
 				uris.removeIf(uri -> !OmlConstants.OML_EXTENSION.equals((uri.fileExtension())));
 				return new LinkedHashSet<URI>(uris);
 			}

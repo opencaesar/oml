@@ -25,6 +25,7 @@ import org.eclipse.emfcloud.jackson.handlers.BaseURIHandler;
 import io.opencaesar.oml.Member;
 import io.opencaesar.oml.SeparatorKind;
 import io.opencaesar.oml.util.OmlRead;
+import io.opencaesar.oml.util.OmlResolve;
 
 /**
  * The <b>Json URI Handler</b> implementation for the model.
@@ -51,7 +52,7 @@ public class OmlJsonURIHandler extends BaseURIHandler {
 				.filter(i -> qname[0].equals(i.getPrefix()))
 				.findFirst().orElse(null);
 			if (_import != null) {
-				URI resolvedUri = OmlRead.getResolvedUri(resource, _import.getIri());
+				URI resolvedUri = OmlResolve.resolveOmlFileUri(resource, _import.getIri());
 				if (resolvedUri != null) {
 					return URI.createURI(resolvedUri.toString() + SeparatorKind.HASH.toString() + qname[1]);
 				}

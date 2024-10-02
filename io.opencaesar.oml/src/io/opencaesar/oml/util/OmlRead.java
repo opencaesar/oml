@@ -22,7 +22,6 @@ import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedHashMap;
@@ -35,7 +34,6 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -76,7 +74,7 @@ import io.opencaesar.oml.UnreifiedRelation;
 import io.opencaesar.oml.Vocabulary;
 
 /**
- * The <b>Read</b> API for the model. It complements the OML getter API by additional utilities.
+ * The <b>Read</b> API Oml models. It complements the Oml getter APIs by additional ones.
  *  
  * @author elaasar
  */
@@ -231,77 +229,6 @@ public final class OmlRead {
 	}
 	
 	//-------------------------------------------------
-	// URIs
-	//-------------------------------------------------
-	
-	/**
-	 * Determines whether the given URI can be resolved to an OML resource in the workspace
-	 * 
-	 * @param uri the given URI
-	 * @return True if the given URI can be resolved, otherwise False
-	 */
-	public static boolean isResolvedUri(URI uri) {
-		if (Arrays.asList(OmlConstants.OML_EXTENSIONS).contains(uri.fileExtension())) {
-			return OmlUriResolver.getInstance().isResolvedUri(uri);
-		}
-		return false;
-	}
-
-	/**
-	 * Gets a URI that is resolved by the given IRI in the context of the given physical URI.
-	 * 
-	 * @param context The physical URI to use as context of URI resolution
-	 * @param iri The IRI to resolve
-	 * @return The resolved URI
-	 */
-	public static URI getResolvedUri(URI context, String iri) {
-		if (context == null || iri == null || iri.isEmpty()) {
-			return null;
-		}
-		return OmlUriResolver.getInstance().resolveUri(context, iri);
-	}
-
-	/**
-	 * Gets a URI that is resolved by the given IRI in the context of the given OML resource.
-	 * 
-	 * @param context The OML resource to use as context of URI resolution
-	 * @param iri The IRI to resolve
-	 * @return The resolved URI
-	 */
-	public static URI getResolvedUri(Resource context, String iri) {
-		if (context == null || iri == null || iri.isEmpty()) {
-			return null;
-		}
-		return OmlUriResolver.getInstance().resolveUri(context, iri);
-	}
-	
-	/**
-	 * Gets the URIs that can be resolved in the context of the given OML resource
-	 * 
-	 * @param context the context resource
-	 * @return a set of resource URIs that are resolvable from the given resource
-	 */
-	public static Set<URI> getResolvedUris(Resource context) {
-		if (context == null) {
-			return Collections.emptySet();
-		}
-		return OmlUriResolver.getInstance().getResolvedUris(context);
-	}
-	
-	/**
-	 * Gets a logical IRI that is deresolved from the given file URI.
-	 * 
-	 * @param fileUri The file URI to deresolve
-	 * @return The deresolved logical IRI
-	 */
-	public static URI getDeresolvedIri(URI fileUri) {
-		if (fileUri == null) {
-			return null;
-		}
-		return OmlUriResolver.getInstance().deresolveUri(fileUri);
-	}
-
-	//-------------------------------------------------
 	// Ontologies
 	//-------------------------------------------------
 
@@ -382,7 +309,7 @@ public final class OmlRead {
 	 * @return an ontology with the given IRI
 	 */
 	public static Ontology getOntologyByResolvingIri(Resource context, String iri) {
-		var uri = getResolvedUri(context, iri);
+		var uri = OmlResolve.resolveOmlFileUri(context, iri);
 		if (uri == null) {
 			return null;
 		}
@@ -492,7 +419,7 @@ public final class OmlRead {
 			return null;
 		}
 		var context = _import.eResource();
-		var uri = getResolvedUri(context, _import.getIri());
+		var uri = OmlResolve.resolveOmlFileUri(context, _import.getIri());
 		if (uri != null) {
 			ResourceSet rs = context.getResourceSet();
 			Resource r = rs.getResource(uri, false);

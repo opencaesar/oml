@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.xmi.impl.URIHandlerImpl;
 import io.opencaesar.oml.Member;
 import io.opencaesar.oml.SeparatorKind;
 import io.opencaesar.oml.util.OmlRead;
+import io.opencaesar.oml.util.OmlResolve;
 
 /**
  * The <b>XMI URI Handler</b> implementation for the model.
@@ -55,7 +56,7 @@ public class OmlXMIURIHandler extends URIHandlerImpl {
 					.filter(i -> prefix.equals(i.getPrefix()))
 					.findFirst().orElse(null);
 				if (_import != null) {
-					URI resolvedUri = OmlRead.getResolvedUri(resource, _import.getIri());
+					URI resolvedUri = OmlResolve.resolveOmlFileUri(resource, _import.getIri());
 					if (resolvedUri != null) {
 						return URI.createURI(resolvedUri.toString() + SeparatorKind.HASH.toString() + name);
 					}

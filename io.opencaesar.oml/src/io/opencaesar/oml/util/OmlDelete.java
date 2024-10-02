@@ -38,7 +38,7 @@ import io.opencaesar.oml.NamedInstance;
 import io.opencaesar.oml.Relation;
 
 /**
- * Utilities to help delete Oml elements 
+ * The <b>Delete</b> API for Oml models.
  */
 public class OmlDelete {
 	

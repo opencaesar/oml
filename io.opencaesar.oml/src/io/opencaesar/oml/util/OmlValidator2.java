@@ -33,10 +33,11 @@ import java.util.stream.Collectors;
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.impl.EClassImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 
 import io.opencaesar.oml.AnnotationProperty;
@@ -53,6 +54,7 @@ import io.opencaesar.oml.Element;
 import io.opencaesar.oml.Entity;
 import io.opencaesar.oml.EntityEquivalenceAxiom;
 import io.opencaesar.oml.ForwardRelation;
+import io.opencaesar.oml.IdentifiedElement;
 import io.opencaesar.oml.Import;
 import io.opencaesar.oml.ImportKind;
 import io.opencaesar.oml.Instance;
@@ -91,7 +93,7 @@ import io.opencaesar.oml.VocabularyBox;
 import io.opencaesar.oml.VocabularyBundle;
 
 /**
- * The <b>Validator2</b> for the model. It adds additional semantic rules that go beyond the EMF syntax rules. 
+ * The <b>Validator2</b> for Oml models. It adds additional semantic rules that go beyond the EMF syntax rules. 
  * 
  * @author elaasar
  */
@@ -331,9 +333,9 @@ public final class OmlValidator2 {
 		boolean returnValue = true;
 		var iri = object.getIri();
 		var uri = object.eResource().getURI();
-		if (!OmlRead.isResolvedUri(uri) || !uri.equals(OmlRead.getResolvedUri(object.eResource(), iri))) {
+		if (!uri.equals(OmlResolve.resolveOmlFileUri(object.eResource().getURI(), iri))) {
 			report(Diagnostic.ERROR, diagnostics, object,
-				object.eClass().getName()+" iri '"+iri+"' does not resolve to '"+uri+"' using the catalog", 
+				object.eClass().getName()+" iri '"+iri+"' does not resolve to '"+uri+"'", 
 				OmlPackage.Literals.ONTOLOGY__NAMESPACE);
 			returnValue = false;
 		}
@@ -1175,38 +1177,48 @@ public final class OmlValidator2 {
 	// Member
 	
 	/**
-	 * Checks if the member is deprecated
+	 * Checks if an ontology references deprecated members
 	 * @return True if the member is deprecated; False otherwise
 	 */
-	boolean validateDeprecatedReference(Element object, DiagnosticChain diagnostics, Map<Object, Object> context) {
+	boolean validateDeprecatedReferences(Ontology object, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		var result = true;
 		final var deprecatedProperty = (AnnotationProperty) OmlRead.getMemberByIri(object.eResource().getResourceSet(), "http://www.w3.org/2002/07/owl#deprecated");
 		if (deprecatedProperty != null) {
-			final var cache = (Cache) context.get(CACHE);
-			for (var eRef : object.eClass().getEAllReferences()) {
-				if (!eRef.isContainment() && !eRef.isContainer() && OmlPackage.Literals.MEMBER.isSuperTypeOf(eRef.getEReferenceType())) {
-					List<Member> members = getValues(object, eRef);
-					for (var member : members) {
-						if (OmlSearch.findIsAnnotatedBy(member, deprecatedProperty, cache.scope)) {
-							report(Diagnostic.WARNING, diagnostics, object,
-									"Member "+member.getAbbreviatedIri()+" is deprecated", eRef);
+			final Cache cache = (Cache) context.get(CACHE);
+			var localCache = new HashMap<IdentifiedElement, Boolean>();
+			var i = object.eAllContents();
+			while (i.hasNext()) {
+				var obj = i.next();
+				for (var ref : obj.eCrossReferences()) {
+					if (ref instanceof Member && !ref.eIsProxy()) {
+						var member = ((Member) ref);
+						var ontology = member.getOntology();
+						var deprecated = localCache.get(ontology);
+						if (deprecated == null) {
+							localCache.put(ontology, deprecated = OmlRead.isAnnotatedBy(ontology, deprecatedProperty));
+						}
+						if (deprecated == false) {
+							deprecated = localCache.get(member);
+							if (deprecated == null) {
+								localCache.put(member, deprecated = OmlSearch.findIsAnnotatedBy(member, deprecatedProperty, cache.scope));
+							}
+						}
+						if (deprecated == true) {
+						    EStructuralFeature [] eStructuralFeatures = 
+						    	      ((EClassImpl.FeatureSubsetSupplier)obj.eClass().getEAllStructuralFeatures()).crossReferences();
+							for (var eRef : eStructuralFeatures) {
+								var value = obj.eGet(eRef);
+								if (value !=  null && value.equals(member) || (value instanceof EList<?>) && ((EList<?>)value).contains(member)) {
+									report(Diagnostic.WARNING, diagnostics, obj,
+											"Member "+member.getAbbreviatedIri()+" is deprecated", eRef);
+								}
+							}
 						}
 					}
 				}
+				
 			}
 		}
 		return result;
 	}
-
-	@SuppressWarnings("unchecked")
-	private <T> List<T> getValues(EObject eObj, EReference eRef) {
-		if (eRef.isMany()) {
-			return (List<T>) eObj.eGet(eRef);
-		} else if (eObj.eGet(eRef) != null) {
-			return Collections.singletonList((T)eObj.eGet(eRef));
-		} else {
-			return Collections.emptyList();
-		}
-	}
-
 }
