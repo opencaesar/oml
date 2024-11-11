@@ -1,3 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="762px" height="21px" viewBox="-0.5 -0.5 760 21" style="background-color: rgb(255, 255, 255);"><defs/><g><rect x="0" y="0" width="760" height="20" fill="none" stroke="#b0b0b0" stroke-dasharray="3 3" pointer-events="all"/><g fill="#000000" font-family="Helvetica" font-size="15px"><text x="1.5" y="16">(Aspect_IRI | Concept_IRI | RelationEntity_IRI | Structure_IRI | FacetedScalar_IRI | EnumeratedScalar_IRI) (VAR)</text></g></g></svg>

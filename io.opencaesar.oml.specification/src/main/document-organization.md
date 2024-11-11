@@ -6,8 +6,6 @@ This document describes the syntax, notation, semantics, and API of the Ontologi
 
 - The section [Textual BNF](#Textual-BNF) describes the BNF grammar of OML. This can help readers understand textual OML models and create them using an OML text editor. 
 
-- The section [Grahical BNF](#Graphical-BNF) describes the graphical BNF grammar of OML. This can help readers understand standard OML diagrams.
-
 - The section [Abstract Syntax](#Abstract-Syntax) describes the concepts that make up the OML syntax, along with their attibutes and relations. Hyperlinks are provided to help the reader navigate the concepts.
 
 - The section [Public API](#Public-API) describes the OML public API that can be used to create tools that read or write OML models. Some of the public API maps directly from the corresponding OML abstract syntax. Other API adds useful functions that make working with OML easier programmatically.

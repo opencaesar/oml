@@ -76,10 +76,6 @@ path: textual-syntax.md
 </pre>
 
 <pre class=include>
-path: graphical-syntax.md
-</pre>
-
-<pre class=include>
 path: Oml.md
 </pre>
 
