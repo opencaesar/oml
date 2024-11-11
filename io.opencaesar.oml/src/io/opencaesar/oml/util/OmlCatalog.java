@@ -149,8 +149,8 @@ final class OmlCatalog {
 			var prefix = new File(CommonPlugin.asLocalURI(URI.createURI(rewriteUri)).toFileString());
 			for (var file : getFilesFromPrefix(prefix)) {
 				var relative = prefix.toPath().relativize(file.toPath()).toString().replace("\\", "/");
-				var uri = java.net.URI.create(rewriteUri + "/" + relative).normalize();
-				uris.add(URI.createURI(uri.toString()));
+				var uri = normalize(rewriteUri + "/" + relative);
+				uris.add(URI.createURI(uri));
 			}
 		}
 		return uris;
@@ -191,6 +191,12 @@ final class OmlCatalog {
 			}
 		}
 		return files;
+	}
+
+	private static String normalize(String path) {
+		java.net.URI uri = java.net.URI.create(path);
+		java.net.URI normalized = uri.normalize();
+		return path.replaceFirst(uri.getRawPath(), normalized.getRawPath());
 	}
 
 	/*
@@ -247,12 +253,6 @@ final class OmlCatalog {
 		protected String makeAbsolute(String sysid) {
 			sysid = fixSlashes(sysid);
 			return  baseUri.toString()+'/'+sysid;
-		}
-
-		private static String normalize(String path) {
-			java.net.URI uri = java.net.URI.create(path);
-			java.net.URI normalized = uri.normalize();
-			return path.replaceFirst(uri.getRawPath(), normalized.getRawPath());
 		}
 		
 	}

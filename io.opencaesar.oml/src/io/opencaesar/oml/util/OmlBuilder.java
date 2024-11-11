@@ -183,6 +183,33 @@ public class OmlBuilder {
 	}
 	
 	/**
+	 * Add an import statement (if needed) for the given member iri in the context of the given ontology
+	 * 
+	 * @param ontology the given ontology
+	 * @param memberIri the given member Iri
+	 * @return memberIri
+	 */
+	protected String addImportIfNeeded(Ontology ontology, String memberIri) {
+		int i = memberIri.indexOf('#');
+		if (i == -1) {
+			i = memberIri.lastIndexOf('/');
+		}
+		if (i != -1) {
+			final String importIri = memberIri.substring(0, i);
+			if (!ontology.getIri().equals(importIri)) {
+				Ontology importedOntology = OmlRead.getImportedOntologyByIri(ontology, importIri);
+				if (importedOntology == null) {
+					importedOntology = OmlRead.getOntologyByResolvingIri(ontology.eResource(), importIri);
+					if (importedOntology != null) {
+						OmlWrite.addImport(ontology, importedOntology);
+					}
+				}
+			}
+		}
+		return memberIri;
+	}
+	
+	/**
 	 * Sets the given eRef on the given subject to an object that is resolved by iri in the context of the given ontology
 	 * 
 	 * Object iri resolution and  setting of the cross reference is deferred until the building is finished
@@ -204,9 +231,9 @@ public class OmlBuilder {
 				
 		if (objectIri != null) {
 			if (eRef.isMany()) {
-				defer.add(() -> ((List<Element>)subject.eGet(eRef)).add(resolve(objectClass, ontology, objectIri)));
+				defer.add(() -> ((List<Element>)subject.eGet(eRef)).add(resolve(objectClass, ontology, addImportIfNeeded(ontology, objectIri))));
 			} else {
-				defer.add(() -> subject.eSet(eRef, resolve(objectClass, ontology, objectIri)));
+				defer.add(() -> subject.eSet(eRef, resolve(objectClass, ontology, addImportIfNeeded(ontology, objectIri))));
 			}
 		}
 	}
@@ -233,7 +260,7 @@ public class OmlBuilder {
 		assert subjectClass.isInstance(subject) : subject+" is not an instance of "+subjectClass.getName();
 				
 		if (objectIris.iterator().hasNext()) {
-			defer.add(() -> subject.eSet(eRef, objectIris.stream().map(objectIri -> resolve(objectClass, ontology, objectIri)).collect(Collectors.toList())));
+			defer.add(() -> subject.eSet(eRef, objectIris.stream().map(objectIri -> resolve(objectClass, ontology, addImportIfNeeded(ontology, objectIri))).collect(Collectors.toList())));
 		}
 	}
 
@@ -305,7 +332,7 @@ public class OmlBuilder {
 				if (ontology != null) {
 					resource = ontology.eResource();
 				} else {
-					throw new RuntimeException("could not resolve "+baseIri+" in context of "+context.getIri());
+					throw new RuntimeException("could not resolve "+iri+" in context of "+context.getIri());
 				}
 			}
 			if (resource != null) {
