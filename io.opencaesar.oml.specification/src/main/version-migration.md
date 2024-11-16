@@ -191,7 +191,29 @@ The OML syntax and APIs have significantly changed from v1 to v2. This section s
 	]
 	</pre>
 
-1. In v2 vocabularies, a new (unreified) `relation` can now be specified as an alternative to a (refieid) `relation entity`. This supports cases where instances of the relation are not foreseen in descriptions. It also helps avoid synthesizing relation entity names when mapping vocabularies from other formats that do not natively support reified relations. The syntax of an unreified `relation` resembles closely that of a `relation entity` (except for the `forward` statement). The syntax of an unreieifed `relation` is (partially) as follows:
+2. In v2 vocabularies, the `structure` type (which was used in v1 as a type for anonymous instances) has been removed and replaced by a simple `concept` in (which can have either named or anonymous instances).
+
+	For example:
+	
+	In a vocabulary:
+
+	<pre class="highlight highlight-html">
+	`concept` Point // used to be a structure
+	`scalar` `property` x [ `domain` Point `range` xsd:int ]
+	`scalar` `property` y [ `domain` Point `range` xsd:int ]
+	</pre>
+
+	In a description:
+
+	<pre class="highlight highlight-html">
+	`instance` p1 : Point [ x 10 y 20] // named instance
+	`instance` s1 : Shape [
+		top-right : Point [ x 30 y 40 ] // anonymous instance
+		bottom-left [ x 90 y 100 ] // anonymous instance
+	]
+	</pre>
+
+3. In v2 vocabularies, a new (unreified) `relation` can now be specified as an alternative to a (refieid) `relation entity`. This supports cases where instances of the relation are not foreseen in descriptions. It also helps avoid synthesizing relation entity names when mapping vocabularies from other formats that do not natively support reified relations. The syntax of an unreified `relation` resembles closely that of a `relation entity` (except for the `forward` statement). The syntax of an unreieifed `relation` is (partially) as follows:
 
 	<pre class="highlight highlight-html">
 	Relation ::= `relation` NAME (`[`
@@ -219,9 +241,9 @@ The OML syntax and APIs have significantly changed from v1 to v2. This section s
 	]
 	</pre>
 
-1. In v2 vocabularies, an unreified relation can now be referenced anywhere other relations (like `forward`, `reverse`) can. This includes restriction statements (`restricts REL_REF`), specialization statements (`< REL_REF`), equivalence statements (`= REL_REF`), rule predicates (`REL_REF(ARG1, ARG2)`), assertion axioms (`REL_REF TARGET_REF`), etc. Also, a relation is a kind of property in v2, whereas a relation entity is a kind of type. Therefore, a relation cannot be a supertype of a relation entity (and vice versa). But, an unreified relation can have any relation (including forward and reverse) as a super relstion.
+4. In v2 vocabularies, an unreified relation can now be referenced anywhere other relations (like `forward`, `reverse`) can. This includes restriction statements (`restricts REL_REF`), specialization statements (`< REL_REF`), equivalence statements (`= REL_REF`), rule predicates (`REL_REF(ARG1, ARG2)`), assertion axioms (`REL_REF TARGET_REF`), etc. Also, a relation is a kind of property in v2, whereas a relation entity is a kind of type. Therefore, a relation cannot be a supertype of a relation entity (and vice versa). But, an unreified relation can have any relation (including forward and reverse) as a super relstion.
 
-1. In v2 vocabularies, the `from` and `to` statements (of relations), as well as the `domain` and `range` statements (of properties), can now specify more than one type as a value (both on the original definition or on a `ref` of the member). The semantics of having multiple types is equivalent to the intersection of those types. This makes a value asserted as a subject (or object) of a property (or relation) to be classified by all the types at once.
+5. In v2 vocabularies, the `from` and `to` statements (of relations), as well as the `domain` and `range` statements (of properties), can now specify more than one type as a value (both on the original definition or on a `ref` of the member). The semantics of having multiple types is equivalent to the intersection of those types. This makes a value asserted as a subject (or object) of a property (or relation) to be classified by all the types at once.
 
 	For example:
 	
@@ -244,9 +266,9 @@ The OML syntax and APIs have significantly changed from v1 to v2. This section s
 	]
 	</pre>
 
-1. In v2 vocabularies, the symbol `^` separating rule predicates has changed to `&` to better reflect the AND semantics between predicates.
+6. In v2 vocabularies, the symbol `^` separating rule predicates has changed to `&` to better reflect the AND semantics between predicates.
 
-1. In v2 vocabularies, a new term `builtIn` has been added to define a builtin function that can be referenced by a rule antecedant predicate. A standard set of builtins has been added to the `core-vocabularies` library in the `<http://www.w3.org/2003/11/swrlb#>` vocabulary. Note that a custom `builtIn` function cannot be specified yet.
+7. In v2 vocabularies, a new term `builtIn` has been added to define a builtin function that can be referenced by a rule antecedant predicate. A standard set of builtins has been added to the `core-vocabularies` library in the `<http://www.w3.org/2003/11/swrlb#>` vocabulary. Note that a custom `builtIn` function cannot be specified yet.
 
 	<pre class="highlight highlight-html">
 	 // in the "http://www.w3.org/2003/11/swrlb#" vocabulary
@@ -264,9 +286,9 @@ The OML syntax and APIs have significantly changed from v1 to v2. This section s
 	 ]
 	</pre>
 
-1. In v2 descriptions, the symbol `ci` for a concept instance has now changed to the more readable `instance`. Also, such instances can also now be typed by both `Concepts` and `Aspects` (whereas only `Concepts` were the only valid types in v1).
+8. In v2 descriptions, the symbol `ci` for a concept instance has now changed to the more readable `instance`. Also, such instances can also now be typed by both `Concepts` and `Aspects` (whereas only `Concepts` were the only valid types in v1).
 
-1. In v2 descriptions, the symbol `ri` for a relation instance has now changed to the more readable `relation instance`. Also, such instances can also now be typed by both `Relation Entities` and `Aspects` (whereas only `Relation Entities` were the only valid types in v1).
+9.  In v2 descriptions, the symbol `ri` for a relation instance has now changed to the more readable `relation instance`. Also, such instances can also now be typed by both `Relation Entities` and `Aspects` (whereas only `Relation Entities` were the only valid types in v1).
 
 **API Changes**
 
