@@ -36,9 +36,11 @@ subprojects {
 		api platform("org.eclipse.xtext:xtext-dev-bom:${xtextVersion}")
 	}
 
-	sourceCompatibility = '17'
-	targetCompatibility = '17'
-
+	java {
+		sourceCompatibility = '17'
+		targetCompatibility = '17'
+	}
+	
 	configurations.all {
 		exclude group: 'asm'
 	}
