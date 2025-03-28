@@ -28,6 +28,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 import org.apache.xml.resolver.Catalog;
 import org.apache.xml.resolver.CatalogEntry;
@@ -196,7 +197,7 @@ final class OmlCatalog {
 	private static String normalize(String path) {
 		java.net.URI uri = java.net.URI.create(path);
 		java.net.URI normalized = uri.normalize();
-		return path.replaceFirst(uri.getRawPath(), normalized.getRawPath());
+		return path.replaceFirst(Pattern.quote(uri.getRawPath()), normalized.getRawPath());
 	}
 
 	/*

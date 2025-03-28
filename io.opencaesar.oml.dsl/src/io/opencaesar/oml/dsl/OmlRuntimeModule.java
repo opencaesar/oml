@@ -23,6 +23,7 @@ import org.eclipse.xtext.formatting2.FormatterPreferences;
 import org.eclipse.xtext.formatting2.FormatterRequest;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
+import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.preferences.IPreferenceValuesProvider;
 import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.resource.IResourceFactory;
@@ -40,6 +41,7 @@ import io.opencaesar.oml.dsl.conversion.OmlQualifiedNameConverter;
 import io.opencaesar.oml.dsl.conversion.OmlValueConverterService;
 import io.opencaesar.oml.dsl.formatting2.OmlFormatterRequest;
 import io.opencaesar.oml.dsl.naming.OmlQualifiedNameProvider;
+import io.opencaesar.oml.dsl.resource.OmlEncodingProvider;
 import io.opencaesar.oml.dsl.resource.OmlResourceDescriptionStrategy;
 import io.opencaesar.oml.dsl.resource.OmlResourceServiceProvider;
 import io.opencaesar.oml.dsl.resource.OmlSynchronizedXtextResourceSet;
@@ -109,6 +111,11 @@ public class OmlRuntimeModule extends AbstractOmlRuntimeModule {
 
   public Class<? extends FormatterRequest> bindFormatterRequest() {
 	   return OmlFormatterRequest.class;
+  }
+  
+  @Override
+  public Class<? extends IEncodingProvider.Runtime> bindRuntimeEncodingProvider() {
+		return OmlEncodingProvider.class;
   }
 
 }

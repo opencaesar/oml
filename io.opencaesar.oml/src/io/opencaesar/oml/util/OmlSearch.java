@@ -2056,7 +2056,7 @@ public final class OmlSearch extends OmlIndex {
 			.map(i -> i.getSubject())
 			.collect(Collectors.toCollection(LinkedHashSet::new)));
 		if (type instanceof RelationEntity) {
-			instances.addAll(findAnonymousRelationInstanceOfType((RelationEntity)type, scope));
+			instances.addAll(findAnonymousRelationInstancesOfType((RelationEntity)type, scope));
 		}
 		
 		return instances;
@@ -2107,7 +2107,7 @@ public final class OmlSearch extends OmlIndex {
 	 * @param scope The scope of the search (can be null)
 	 * @return A set of referencing anonymous relation instances
 	 */
-	public static Set<AnonymousRelationInstance> findAnonymousRelationInstanceOfType(RelationEntity entity, Set<Resource> scope) {
+	public static Set<AnonymousRelationInstance> findAnonymousRelationInstancesOfType(RelationEntity entity, Set<Resource> scope) {
 		Set<AnonymousRelationInstance> instances = new HashSet<>();
 		
 		instances.addAll(findPropertyValueAssertionsWithProperty(entity.getForwardRelation(), scope).stream()
@@ -2132,11 +2132,11 @@ public final class OmlSearch extends OmlIndex {
 	 * 
 	 * @param entity The given relation entity
 	 * @return A set of referencing anonymous relation instances
-	 * @deprecated As of 2.5.0. Use {{@link #findAnonymousRelationInstanceOfType(RelationEntity, Set<Resource>)} instead
+	 * @deprecated As of 2.5.0. Use {{@link #findAnonymousRelationInstancesOfType(RelationEntity, Set<Resource>)} instead
 	 */
 	@Deprecated
-	public static Set<AnonymousRelationInstance> findAnonymousRelationInstanceOfType(RelationEntity entity) {
-		return findAnonymousRelationInstanceOfType(entity, null);
+	public static Set<AnonymousRelationInstance> findAnonymousRelationInstancesOfType(RelationEntity entity) {
+		return findAnonymousRelationInstancesOfType(entity, null);
 	}
 
 	//-------------------------------------------------
