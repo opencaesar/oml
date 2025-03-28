@@ -55,7 +55,7 @@ jobs:
       run: mvn verify
 
     - name: Publish Spec
-      uses: actions/upload-pages-artifact@v1
+      uses: actions/upload-pages-artifact@v3
       with:
         path: io.opencaesar.oml.specification/build/bikeshed
 
@@ -73,7 +73,7 @@ jobs:
     steps:
       - name: Deploy Spec
         id: deployment
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v4
 
   dependency-submission:
 
