@@ -2,7 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>io.opencaesar.oml</groupId>
-	<version>2.11.0</version>
+	<version>2.12.0</version>
 	<artifactId>io.opencaesar.oml.parent</artifactId>
 	<packaging>pom</packaging>
 
@@ -23,7 +23,7 @@
 
     <properties>
         <xtextVersion>2.35.0</xtextVersion>
-	<mwe2Version>2.18.0</mwe2Version>
+        <mwe2Version>2.18.0</mwe2Version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
