@@ -5,7 +5,7 @@ buildscript {
 		gradlePluginPortal()
 	}
 	dependencies {
-		classpath 'org.xtext:xtext-gradle-plugin:3.0.2'
+		classpath 'org.xtext:xtext-gradle-plugin:4.0.0'
 		classpath 'io.opencaesar.ecore:ecore-bikeshed-gradle:+'
 	}
 }
@@ -34,6 +34,7 @@ subprojects {
 	
 	dependencies {
 		api platform("org.eclipse.xtext:xtext-dev-bom:${xtextVersion}")
+		implementation 'org.slf4j:slf4j-simple:+'
 	}
 
 	java {
