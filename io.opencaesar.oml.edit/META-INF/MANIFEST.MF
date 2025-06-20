@@ -3,12 +3,12 @@ Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: io.opencaesar.oml.edit;singleton:=true
 Automatic-Module-Name: io.opencaesar.oml.edit
-Bundle-Version: 2.12.0
+Bundle-Version: 2.13.0
 Bundle-ClassPath: .
 Bundle-Activator: io.opencaesar.oml.provider.OmlEditPlugin$Implementation
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Bundle-RequiredExecutionEnvironment: JavaSE-17
+Bundle-RequiredExecutionEnvironment: JavaSE-21
 Export-Package: io.opencaesar.oml.provider
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.edit;visibility:=reexport,

@@ -3,7 +3,7 @@ Automatic-Module-Name: io.opencaesar.oml.dsl.ui
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-Vendor: %providerName
-Bundle-Version: 2.12.0
+Bundle-Version: 2.13.0
 Bundle-SymbolicName: io.opencaesar.oml.dsl.ui; singleton:=true
 Bundle-ActivationPolicy: lazy
 Bundle-Localization: plugin
@@ -20,7 +20,7 @@ Require-Bundle: org.eclipse.xtext.ui,
  io.opencaesar.oml.dsl,
  io.opencaesar.oml.dsl.ide 
 Import-Package: org.apache.log4j
-Bundle-RequiredExecutionEnvironment: JavaSE-17
+Bundle-RequiredExecutionEnvironment: JavaSE-21
 Export-Package: io.opencaesar.oml.dsl.ui,
  io.opencaesar.oml.dsl.ui.contentassist,
  io.opencaesar.oml.dsl.ui.hyperlinking,

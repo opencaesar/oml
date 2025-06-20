@@ -15,12 +15,12 @@ subprojects {
 	version = rootProject.file('version.txt').text.trim()
 
 	ext.xtextVersion = '2.35.0'
-	ext.xcoreVersion = '1.22.0'
-	ext.xcoreLibVersion = '1.7.0'
+	ext.xcoreVersion = '1.33.0'
+	ext.xcoreLibVersion = '1.7.1'
 	ext.xmlResolverVersion = '1.2'
 	ext.emfJsonVersion = '2.2.0'
-	ext.gsonVersion = '2.11.0'
-	ext.guavaVersion = '33.2.1-jre'
+	ext.gsonVersion = '2.13.1'
+	ext.guavaVersion = '33.4.8-jre'
 
 	repositories {
 		mavenLocal()
@@ -37,8 +37,8 @@ subprojects {
 	}
 
 	java {
-		sourceCompatibility = '17'
-		targetCompatibility = '17'
+		sourceCompatibility = '21'
+		targetCompatibility = '21'
 	}
 	
 	configurations.all {

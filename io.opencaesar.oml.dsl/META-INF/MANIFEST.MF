@@ -3,7 +3,7 @@ Automatic-Module-Name: io.opencaesar.oml.dsl
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-Vendor: %providerName
-Bundle-Version: 2.12.0
+Bundle-Version: 2.13.0
 Bundle-SymbolicName: io.opencaesar.oml.dsl; singleton:=true
 Bundle-ActivationPolicy: lazy
 Bundle-Localization: plugin
@@ -18,7 +18,7 @@ Require-Bundle: org.eclipse.xtext,
  io.opencaesar.oml,
  org.eclipse.emf.ecore.xcore,
  com.google.gson
-Bundle-RequiredExecutionEnvironment: JavaSE-17
+Bundle-RequiredExecutionEnvironment: JavaSE-21
 Export-Package: io.opencaesar.oml.dsl,
  io.opencaesar.oml.dsl.conversion,
  io.opencaesar.oml.dsl.formatting2,

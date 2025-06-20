@@ -1,9 +1,8 @@
-#Fri Nov 04 17:55:46 PDT 2022
 BuilderConfiguration.is_project_specific=true
 ValidatorConfiguration.is_project_specific=true
 eclipse.preferences.version=1
 generateGeneratedAnnotation=false
 generateSuppressWarnings=true
 includeDateInGenerated=false
-targetJavaVersion=JAVA17
+targetJavaVersion=JAVA21
 useJavaCompilerCompliance=false

@@ -3,11 +3,11 @@ Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: io.opencaesar.oml;singleton:=true
 Automatic-Module-Name: io.opencaesar.oml
-Bundle-Version: 2.12.0
+Bundle-Version: 2.13.0
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Bundle-RequiredExecutionEnvironment: JavaSE-17
+Bundle-RequiredExecutionEnvironment: JavaSE-21
 Export-Package: io.opencaesar.oml,
  io.opencaesar.oml.impl,
  io.opencaesar.oml.resource,

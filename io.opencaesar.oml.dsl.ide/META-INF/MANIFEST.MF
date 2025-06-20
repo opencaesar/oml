@@ -3,7 +3,7 @@ Automatic-Module-Name: io.opencaesar.oml.dsl.ide
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-Vendor: %providerName
-Bundle-Version: 2.12.0
+Bundle-Version: 2.13.0
 Bundle-SymbolicName: io.opencaesar.oml.dsl.ide; singleton:=true
 Bundle-ActivationPolicy: lazy
 Bundle-Localization: plugin
@@ -11,7 +11,7 @@ Require-Bundle: org.eclipse.xtext.ide,
  org.eclipse.xtext.xbase.ide,
  org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
  io.opencaesar.oml.dsl
-Bundle-RequiredExecutionEnvironment: JavaSE-17
+Bundle-RequiredExecutionEnvironment: JavaSE-21
 Export-Package: io.opencaesar.oml.dsl.ide,
  io.opencaesar.oml.dsl.ide.contentassist.antlr,
  io.opencaesar.oml.dsl.ide.contentassist.antlr.internal
