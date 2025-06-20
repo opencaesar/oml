@@ -8,8 +8,12 @@ dependencies {
 	testImplementation "org.eclipse.xtext:org.eclipse.xtext.testing:${xtextVersion}"
 	testImplementation "org.eclipse.xtext:org.eclipse.xtext.xbase.testing:${xtextVersion}"
 }
-test {
-	useJUnitPlatform()
+testing {
+	suites {
+		test {
+			useJUnitJupiter()
+		}
+	}
 }
 //this is an eclipse plugin project
 eclipseClasspath.enabled=false
