@@ -209,10 +209,6 @@
                       <artifactId>org.eclipse.equinox.p2.extras.feature</artifactId>
                       <type>eclipse-feature</type>
                     </dependency>
-                    <dependency>
-                      <artifactId>org.eclipse.equinox.ds</artifactId>
-                      <type>eclipse-plugin</type>
-                    </dependency>
                   </dependencies>
                 </configuration>
                 <executions>
